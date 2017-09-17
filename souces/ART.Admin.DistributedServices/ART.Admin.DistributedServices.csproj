@@ -7,12 +7,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{69BC6280-CF91-409C-81BF-28B95417ACBF}</ProjectGuid>
+    <ProjectGuid>{9BB2D368-CC76-4368-A89F-64741B921846}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.Domotica.DistributedServices</RootNamespace>
-    <AssemblyName>ART.Domotica.DistributedServices</AssemblyName>
+    <RootNamespace>ART.Admin.DistributedServices</RootNamespace>
+    <AssemblyName>ART.Admin.DistributedServices</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -134,7 +134,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>47039</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/ART.Domotica.DistributedServices</IISUrl>
+          <IISUrl>http://localhost/ART.Admin.DistributedServices</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
