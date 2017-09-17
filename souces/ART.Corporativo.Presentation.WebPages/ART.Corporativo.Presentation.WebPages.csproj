@@ -77,7 +77,6 @@
     <Content Include="app\views\empresa.html" />
     <Content Include="app\views\home.html" />
     <Content Include="app\views\produtos.html" />
-    <Content Include="authComplete.html" />
     <Content Include="content\css\font-awesome.min.css" />
     <Content Include="content\css\loading-bar.css" />
     <Content Include="content\css\loading-bar.min.css" />

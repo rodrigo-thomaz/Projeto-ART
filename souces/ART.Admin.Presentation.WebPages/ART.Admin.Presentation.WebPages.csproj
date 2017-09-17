@@ -81,7 +81,6 @@
     <Content Include="app\views\refresh.html" />
     <Content Include="app\views\signup.html" />
     <Content Include="app\views\tokens.html" />
-    <Content Include="authComplete.html" />
     <Content Include="content\css\font-awesome.min.css" />
     <Content Include="content\css\loading-bar.css" />
     <Content Include="content\css\loading-bar.min.css" />
