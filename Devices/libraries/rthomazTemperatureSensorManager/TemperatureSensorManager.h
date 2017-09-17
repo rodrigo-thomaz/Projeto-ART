@@ -12,8 +12,9 @@
 class TemperatureSensorManager
 {
   public:
-    TemperatureSensorManager(int pin);
-    TemperatureSensor *getSensors();
+    TemperatureSensorManager(void);
+	void begin();
+    TemperatureSensor *getSensors();	
 };
 
 #endif

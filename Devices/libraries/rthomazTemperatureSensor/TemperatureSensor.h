@@ -8,17 +8,20 @@
 
 #include "Arduino.h"
 
-#include <OneWire.h>
-#include <DallasTemperature.h>
-
 class TemperatureSensor
 {
   public:
     TemperatureSensor();	
-	uint8_t *deviceAddress;
+	byte deviceAddress[8];
+	bool validFamily;
+	String family;
+	bool isConnected;	
 	int resolution;
 	float tempCelsius;
 	float tempFahrenheit;
+	bool hasAlarm;	
+	char lowAlarmTemp;
+	char highAlarmTemp;
 };
 
 #endif
