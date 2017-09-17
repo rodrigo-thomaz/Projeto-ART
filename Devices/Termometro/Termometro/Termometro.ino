@@ -52,9 +52,7 @@ IPAddress subnet(255,255,255,0);
 
 ESP8266WebServer server(80);
 
-TemperatureSensorManager temperatureSensorManager(
-      2
-  );  
+TemperatureSensorManager temperatureSensorManager;  
 
 static const char PROGMEM INDEX_HTML[] = R"rawliteral(
 <!DOCTYPE html>
@@ -181,6 +179,8 @@ void setup(void) {
   
   Serial.begin(9600);
 
+  temperatureSensorManager.begin();  
+
   // Display
   // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
@@ -269,6 +269,52 @@ void setup(void) {
   }
 }
 
+// function to print a device address
+void printAddressSerial(byte deviceAddress[8])
+{
+  for (uint8_t i = 0; i < 8; i++)
+  {
+    // zero pad the address if necessary
+    if (deviceAddress[i] < 16) Serial.print("0");
+    Serial.print(deviceAddress[i], HEX);
+  }
+}
+
+void printAddressDisplay(byte deviceAddress[8])
+{
+  for (uint8_t i = 0; i < 8; i++)
+  {
+    // zero pad the address if necessary
+    if (deviceAddress[i] < 16) display.print("0");
+    display.print(deviceAddress[i], HEX);
+  }
+}
+
+void printDataSerial(TemperatureSensor temperatureSensor)
+{
+  Serial.print("Address: "); 
+  printAddressSerial(temperatureSensor.deviceAddress); 
+  Serial.print(" ValidFamily: "); 
+  Serial.print(temperatureSensor.validFamily); 
+  Serial.print(" Family: "); 
+  Serial.print(temperatureSensor.family); 
+  Serial.print(" Connected: "); 
+  Serial.print(temperatureSensor.isConnected); 
+  Serial.print(" Resolution: "); 
+  Serial.print(temperatureSensor.resolution); 
+  Serial.print(" Temp C: ");
+  Serial.print(temperatureSensor.tempCelsius);
+  Serial.print(" Temp F: ");
+  Serial.print(temperatureSensor.tempFahrenheit);
+  Serial.print(" HasAlarm: ");
+  Serial.print(temperatureSensor.hasAlarm);
+  Serial.print(" LowAlarmTemp: ");
+  Serial.print(temperatureSensor.lowAlarmTemp);
+  Serial.print(" HighAlarmTemp: ");
+  Serial.print(temperatureSensor.highAlarmTemp);
+  Serial.println();
+}
+
 void loop(void){    
 
    // text display tests
@@ -282,29 +328,20 @@ void loop(void){
   display.print("Mode=");
   display.println(digitalRead(16));
   
-  TemperatureSensor *arrSensors = temperatureSensorManager.getSensors();
+  TemperatureSensor *arr = temperatureSensorManager.getSensors();  
+  for(int i = 0; i < sizeof(arr)/sizeof(int); ++i){
+    printDataSerial(arr[i]);
 
-  for(int i = 0; i < sizeof(arrSensors)/sizeof(int); ++i){
-
-    display.print("address=");
-    for (uint8_t j = 0; j < 8; j++)
-    {
-      // zero pad the address if necessary
-      if (arrSensors[i].deviceAddress[j] < 16) display.print("0");
-      display.print(arrSensors[i].deviceAddress[j], HEX);
-    }
+    display.print("Address=");
+    printAddressDisplay(arr[i].deviceAddress);
     display.println();
 
-    display.print("resolution=");
-    display.println(arrSensors[i].resolution);
-    
-    display.print(arrSensors[i].tempCelsius);
-    display.print("C");
-    display.print(" ");
-    display.print(arrSensors[i].tempFahrenheit);
-    display.println("F");
-    
-  }
+    display.setTextSize(2);
+    display.print(arr[i].tempCelsius);    
+    display.println(" C ");
+    display.print(arr[i].tempFahrenheit);    
+    display.println(" F");
+  }  
   
   display.display();  
 } 
