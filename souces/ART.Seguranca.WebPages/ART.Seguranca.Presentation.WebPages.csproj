@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.Seguranca.WebPages</RootNamespace>
-    <AssemblyName>ART.Seguranca.WebPages</AssemblyName>
+    <RootNamespace>ART.Seguranca.Presentation.WebPages</RootNamespace>
+    <AssemblyName>ART.Seguranca.Presentation.WebPages</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -132,7 +132,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>32176</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/ART.Seguranca.WebPages</IISUrl>
+          <IISUrl>http://localhost/ART.Seguranca.Presentation.WebPages</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

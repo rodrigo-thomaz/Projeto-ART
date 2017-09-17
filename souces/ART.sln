@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Seguranca.DistributedSe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Domotica.DistributedServices", "ART.Domotica.DistributedServices\ART.Domotica.DistributedServices.csproj", "{69BC6280-CF91-409C-81BF-28B95417ACBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Domotica.WebPages", "ART.Domotica.WebPages\ART.Domotica.WebPages.csproj", "{5C53BE32-38EB-4706-A1A4-EF04F2BA528B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Domotica.Presentation.WebPages", "ART.Domotica.WebPages\ART.Domotica.Presentation.WebPages.csproj", "{5C53BE32-38EB-4706-A1A4-EF04F2BA528B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domotica", "Domotica", "{3B4488EC-9D6D-42CE-81E4-601B8CC29012}"
 EndProject
@@ -21,11 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Admin.DistributedServic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Corporativo.DistributedServices", "ART.Corporativo.DistributedServices\ART.Corporativo.DistributedServices.csproj", "{61114C5B-F906-4186-B81F-848CF84485EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Admin.WebPages", "ART.Admin.WebPages\ART.Admin.WebPages.csproj", "{C02DA442-FBCD-492B-BDD3-C7E53AD292BF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Admin.Presentation.WebPages", "ART.Admin.WebPages\ART.Admin.Presentation.WebPages.csproj", "{C02DA442-FBCD-492B-BDD3-C7E53AD292BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Seguranca.WebPages", "ART.Seguranca.WebPages\ART.Seguranca.WebPages.csproj", "{CDDFD569-D675-4D23-9091-FCC961E9A1DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Seguranca.Presentation.WebPages", "ART.Seguranca.WebPages\ART.Seguranca.Presentation.WebPages.csproj", "{CDDFD569-D675-4D23-9091-FCC961E9A1DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Corporativo.WebPages", "ART.Corporativo.WebPages\ART.Corporativo.WebPages.csproj", "{E4156422-2684-4222-95C2-4B9AE4CBA7E3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Corporativo.Presentation.WebPages", "ART.Corporativo.WebPages\ART.Corporativo.Presentation.WebPages.csproj", "{E4156422-2684-4222-95C2-4B9AE4CBA7E3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
