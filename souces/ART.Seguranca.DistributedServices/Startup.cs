@@ -5,10 +5,7 @@ using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
 
 [assembly: OwinStartup(typeof(ART.Seguranca.DistributedServices.Startup))]

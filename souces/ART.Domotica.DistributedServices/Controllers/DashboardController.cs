@@ -6,8 +6,8 @@ using System.Web.Http;
 namespace ART.Domotica.DistributedServices.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/protected")]
-    public class ProtectedController : ApiController
+    [RoutePrefix("api/dashboard")]
+    public class DashboardController : ApiController
     {
         [Route("")]
         public IEnumerable<object> Get()

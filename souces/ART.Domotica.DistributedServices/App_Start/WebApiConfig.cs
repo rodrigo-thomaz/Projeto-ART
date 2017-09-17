@@ -1,10 +1,6 @@
-﻿using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json.Serialization;
 using System.Linq;
 using System.Net.Http.Formatting;
-using System.Web;
 using System.Web.Http;
 
 namespace ART.Domotica.DistributedServices.App_Start

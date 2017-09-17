@@ -38,14 +38,21 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/associate.html"
     });
 
+    $routeProvider.when("/dashboard", {
+        controller: "dashboardController",
+        templateUrl: "app/views/dashboard.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
 
-var serviceBase = 'http://localhost/ART.Seguranca.DistributedServices/';
+var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
+var domoticaDistributedServicesUri = 'http://localhost/ART.Domotica.DistributedServices/';
 
 app.constant('ngAuthSettings', {
-    apiServiceBaseUri: serviceBase,
+    segurancaDistributedServicesUri: segurancaDistributedServicesUri,
+    domoticaDistributedServicesUri: domoticaDistributedServicesUri,
     clientId: 'ngAuthApp'
 });
 

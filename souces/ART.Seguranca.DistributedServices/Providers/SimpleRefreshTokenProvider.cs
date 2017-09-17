@@ -1,12 +1,7 @@
 ﻿using ART.Seguranca.DistributedServices.Entities;
-using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace ART.Seguranca.DistributedServices.Providers
 {

@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.factory('tokensManagerService', ['$http','ngAuthSettings', function ($http,ngAuthSettings) {
 
-    var serviceBase = ngAuthSettings.apiServiceBaseUri;
+    var serviceBase = ngAuthSettings.segurancaDistributedServicesUri;
     
     var tokenManagerServiceFactory = {};
 
