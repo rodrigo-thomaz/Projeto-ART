@@ -1,0 +1,123 @@
+﻿@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    ViewBag.ApplicationUrl = ConfigurationManager.AppSettings["applicationUrl"].ToString();
+    ViewBag.TemplateUrl = ConfigurationManager.AppSettings["templateUrl"].ToString();
+}
+
+@section styles {
+
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css" />
+
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Conta/ContaIndexStyle.css" rel="stylesheet" type="text/css" />
+}
+
+@section scripts {
+
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/datatables/all.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/select2/select2.min.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Conta/ContaIndexScript.js" type="text/javascript"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            ContaIndexScript.init();
+        });
+    </script>
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box grey">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-globe"></i>Listagem
+                </div>
+                <div class="actions">
+                    <div class="btn-group">
+                        <a class="btn btn-circle bg-blue-steel btn-sm" href="#" data-toggle="dropdown">
+                            <i class="fa fa-plus"></i> Novo <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="/Conta/ContaEspecieDetail/0">
+                                    <i class="fa fa-plus"></i> Conta espécie
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Conta/ContaCorrenteDetail/0">
+                                    <i class="fa fa-plus"></i> Conta corrente
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Conta/ContaPoupancaDetail/0">
+                                    <i class="fa fa-plus"></i> Conta poupança
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/Conta/ContaCartaoCreditoDetail/0">
+                                    <i class="fa fa-plus"></i> Cartão de crédito
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <a id="btnRefresh" href="#" class="btn btn-circle bg-blue-steel btn-sm">
+                        <i class="fa fa-refresh"></i>
+                    </a>
+                    <div class="btn-group">
+                        <a class="btn btn-circle bg-blue-steel btn-sm" href="#" data-toggle="dropdown">
+                            <i class="fa fa-columns"></i> <i class="fa fa-angle-down"></i>
+                        </a>
+                        <div id="conta_column_toggler" class="dropdown-menu hold-on-click dropdown-checkboxes pull-right">
+                            <label><input type="checkbox" checked data-column="0">Informacao</label>
+                            <label><input type="checkbox" checked data-column="1">Tipo de conta</label>
+                            <label><input type="checkbox" checked data-column="2">Ativo</label>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">                    
+                    <div class="form-group">
+                        <label class="control-label col-md-2">Tipo de conta</label>
+                        <div class="col-md-9">
+                            <select id="cmbTipoConta" name="cmbTipoConta" class="form-control select2me" data-placeholder="Selecione...">
+                                <option value=""></option>
+                                <option value="0">Conta espécie</option>
+                                <option value="1">Conta corrente</option>
+                                <option value="2">Conta poupança</option>
+                                <option value="3">Cartão de crédito</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <label class="col-md-3 control-label">Ativo</label>
+                        <div class="col-md-9">
+                            <select id="cmbAtivo" name="cmbAtivo" class="form-control">
+                                <option value="0">Todos</option>
+                                <option value="1">Sim</option>
+                                <option value="2">Não</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover table-full-width" id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Informacao</th>
+                            <th>Tipo de conta</th>
+                            <th class="checkbox-column">Ativo</th>
+                            <th class="actionColumn"></th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.ExceptionHandling\bin\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.ExceptionHandling\bin\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.ExceptionHandling\obj\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.csprojResolveAssemblyReference.cache
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.ExceptionHandling\obj\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.ExceptionHandling\obj\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.ExceptionHandling\bin\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.ExceptionHandling\bin\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.ExceptionHandling\obj\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.ExceptionHandling\obj\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.csproj.CoreCompileInputs.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.ExceptionHandling\obj\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.ExceptionHandling\obj\Debug\RThomaz.Infra.CrossCutting.ExceptionHandling.pdb

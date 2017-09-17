@@ -1,0 +1,310 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4DDA2ADF-1972-4AE7-B1EB-CF1A184C050E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RThomaz.Application.Financeiro</RootNamespace>
+    <AssemblyName>RThomaz.Application.Financeiro</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppServices\AppServiceBase.cs" />
+    <Compile Include="AppServices\BancoAppService.cs" />
+    <Compile Include="AppServices\BandeiraCartaoAppService.cs" />
+    <Compile Include="AppServices\CBOOcupacaoAppService.cs" />
+    <Compile Include="AppServices\CentroCustoAppService.cs" />
+    <Compile Include="AppServices\ConciliacaoAppService.cs" />
+    <Compile Include="AppServices\ContaAppService.cs" />
+    <Compile Include="AppServices\LancamentoPagarReceberAppService.cs" />
+    <Compile Include="AppServices\LancamentoPagoRecebidoAppService.cs" />
+    <Compile Include="AppServices\LancamentoProgramadoAppService.cs" />
+    <Compile Include="AppServices\LocalidadeAppService.cs" />
+    <Compile Include="AppServices\MovimentoAppService.cs" />
+    <Compile Include="AppServices\MovimentoImportacaoAppService.cs" />
+    <Compile Include="AppServices\MovimentoImportacaoOFXAppService.cs" />
+    <Compile Include="AppServices\PerfilAppService.cs" />
+    <Compile Include="AppServices\PessoaAppService.cs" />
+    <Compile Include="AppServices\PlanoContaAppService.cs" />
+    <Compile Include="AppServices\AccountAppService.cs" />
+    <Compile Include="AppServices\TipoEnderecoAppService.cs" />
+    <Compile Include="AppServices\TipoHomePageAppService.cs" />
+    <Compile Include="AppServices\TipoTelefoneAppService.cs" />
+    <Compile Include="AppServices\TransferenciaAppService.cs" />
+    <Compile Include="AppServices\TransferenciaProgramadaAppService.cs" />
+    <Compile Include="AppServices\UsuarioAppService.cs" />
+    <Compile Include="AutoMapper\AccountProfile.cs" />
+    <Compile Include="AutoMapper\BancoProfile.cs" />
+    <Compile Include="AutoMapper\BandeiraCartaoProfile.cs" />
+    <Compile Include="AutoMapper\CBOOcupacaoProfile.cs" />
+    <Compile Include="AutoMapper\CentroCustoProfile.cs" />
+    <Compile Include="AutoMapper\ConciliacaoProfile.cs" />
+    <Compile Include="AutoMapper\ContaProfile.cs" />
+    <Compile Include="AutoMapper\LancamentoPagoRecebidoProfile.cs" />
+    <Compile Include="AutoMapper\LancamentoProgramadoProfile.cs" />
+    <Compile Include="AutoMapper\LocalidadeProfile.cs" />
+    <Compile Include="AutoMapper\MesAnoProfile.cs" />
+    <Compile Include="AutoMapper\MovimentoImportacaoProfile.cs" />
+    <Compile Include="AutoMapper\MovimentoProfile.cs" />
+    <Compile Include="AutoMapper\PerfilProfile.cs" />
+    <Compile Include="AutoMapper\PessoaProfile.cs" />
+    <Compile Include="AutoMapper\PlanoContaProfile.cs" />
+    <Compile Include="AutoMapper\RateioProfile.cs" />
+    <Compile Include="AutoMapper\SelectListProfile.cs" />
+    <Compile Include="AutoMapper\StorageUploadProfile.cs" />
+    <Compile Include="AutoMapper\TipoEmailProfile.cs" />
+    <Compile Include="AutoMapper\TipoEnderecoProfile.cs" />
+    <Compile Include="AutoMapper\TipoHomePageProfile.cs" />
+    <Compile Include="AutoMapper\TipoTelefoneProfile.cs" />
+    <Compile Include="AutoMapper\TransferenciaProfile.cs" />
+    <Compile Include="AutoMapper\TransferenciaProgramadaProfile.cs" />
+    <Compile Include="AutoMapper\UsuarioProfile.cs" />
+    <Compile Include="Helpers\CountModel.cs" />
+    <Compile Include="Helpers\SelectListModel\SelectListRequestModel.cs" />
+    <Compile Include="Helpers\SelectListModel\SelectListResponseModel.cs" />
+    <Compile Include="Interfaces\IAppServiceBase.cs" />
+    <Compile Include="Interfaces\IBancoAppService.cs" />
+    <Compile Include="Interfaces\IBandeiraCartaoAppService.cs" />
+    <Compile Include="Interfaces\ICBOOcupacaoAppService.cs" />
+    <Compile Include="Interfaces\ICentroCustoAppService.cs" />
+    <Compile Include="Interfaces\IConciliacaoAppService.cs" />
+    <Compile Include="Interfaces\IContaAppService.cs" />
+    <Compile Include="Interfaces\ILancamentoPagarReceberAppService.cs" />
+    <Compile Include="Interfaces\ILancamentoPagoRecebidoAppService.cs" />
+    <Compile Include="Interfaces\ILancamentoProgramadoAppService.cs" />
+    <Compile Include="Interfaces\ILocalidadeAppService.cs" />
+    <Compile Include="Interfaces\IMovimentoImportacaoOFXAppService.cs" />
+    <Compile Include="Interfaces\IMovimentoImportacaoAppService.cs" />
+    <Compile Include="Interfaces\IMovimentoAppService.cs" />
+    <Compile Include="Interfaces\IPerfilAppService.cs" />
+    <Compile Include="Interfaces\IPessoaAppService.cs" />
+    <Compile Include="Interfaces\IPlanoContaAppService.cs" />
+    <Compile Include="Interfaces\IAccountAppService.cs" />
+    <Compile Include="Interfaces\ITipoEmailAppService.cs" />
+    <Compile Include="AppServices\TipoEmailAppService.cs" />
+    <Compile Include="Helpers\jQueryDataTable\jQueryDataTableColumn.cs" />
+    <Compile Include="Helpers\jQueryDataTable\jQueryDataTableHelper.cs" />
+    <Compile Include="Helpers\jQueryDataTable\jQueryDataTableOrder.cs" />
+    <Compile Include="Helpers\jQueryDataTable\jQueryDataTableParameter.cs" />
+    <Compile Include="Helpers\jQueryDataTable\jQueryDataTableResult.cs" />
+    <Compile Include="Helpers\jQueryDataTable\jQueryDataTableSearch.cs" />
+    <Compile Include="Helpers\JsTree\JsTreeAAttribute.cs" />
+    <Compile Include="Helpers\JsTree\JsTreeLiAttribute.cs" />
+    <Compile Include="Helpers\JsTree\JsTreeNode.cs" />
+    <Compile Include="Helpers\JsTree\state.cs" />
+    <Compile Include="Helpers\Storage\StorageUploadModel.cs" />
+    <Compile Include="Interfaces\ITipoEnderecoAppService.cs" />
+    <Compile Include="Interfaces\ITipoHomePageAppService.cs" />
+    <Compile Include="Interfaces\ITipoTelefoneAppService.cs" />
+    <Compile Include="Interfaces\ITransferenciaProgramadaAppService.cs" />
+    <Compile Include="Interfaces\ITransferenciaAppService.cs" />
+    <Compile Include="Interfaces\IUsuarioAppService.cs" />
+    <Compile Include="Models\AccountDetailViewModel.cs" />
+    <Compile Include="Models\BairroSelectViewModel.cs" />
+    <Compile Include="Models\BancoDetailEditModel.cs" />
+    <Compile Include="Models\BancoDetailInsertModel.cs" />
+    <Compile Include="Models\BancoDetailViewModel.cs" />
+    <Compile Include="Models\BancoMascarasDetailViewModel.cs" />
+    <Compile Include="Models\BancoMasterModel.cs" />
+    <Compile Include="Models\MovimentoImportacaoSelectViewModel.cs" />
+    <Compile Include="Models\BancoSelectViewModel.cs" />
+    <Compile Include="Models\BandeiraCartaoDetailEditModel.cs" />
+    <Compile Include="Models\BandeiraCartaoDetailInsertModel.cs" />
+    <Compile Include="Models\BandeiraCartaoDetailViewModel.cs" />
+    <Compile Include="Models\BandeiraCartaoMasterModel.cs" />
+    <Compile Include="Models\BandeiraCartaoSelectViewModel.cs" />
+    <Compile Include="Models\CBOOcupacaoSelectViewModel.cs" />
+    <Compile Include="Models\CBOSinonimoSelectViewModel.cs" />
+    <Compile Include="Models\CentroCustoDetailEditModel.cs" />
+    <Compile Include="Models\CentroCustoDetailInsertModel.cs" />
+    <Compile Include="Models\CentroCustoDetailViewModel.cs" />
+    <Compile Include="Models\CentroCustoMasterMoveModel.cs" />
+    <Compile Include="Models\CentroCustoSelectViewModel.cs" />
+    <Compile Include="Models\CidadeSelectViewModel.cs" />
+    <Compile Include="Models\ConciliacaoDetailUpdateModel.cs" />
+    <Compile Include="Models\ConciliacaoDetailViewModel.cs" />
+    <Compile Include="Models\ConciliacaoLancamentoMasterViewModel.cs" />
+    <Compile Include="Models\ConciliacaoMovimentoMasterViewModel.cs" />
+    <Compile Include="Models\ContaCartaoCreditoDetailEditModel.cs" />
+    <Compile Include="Models\ContaCartaoCreditoDetailInsertModel.cs" />
+    <Compile Include="Models\ContaCartaoCreditoDetailViewModel.cs" />
+    <Compile Include="Models\ContaCartaoCreditoSelectViewModel.cs" />
+    <Compile Include="Models\ContaCorrenteDetailEditModel.cs" />
+    <Compile Include="Models\ContaCorrenteDetailInsertModel.cs" />
+    <Compile Include="Models\ContaCorrenteDetailViewModel.cs" />
+    <Compile Include="Models\ContaCorrenteSelectViewModel.cs" />
+    <Compile Include="Models\ContaEspecieDetailEditModel.cs" />
+    <Compile Include="Models\ContaEspecieDetailInsertModel.cs" />
+    <Compile Include="Models\ContaEspecieDetailViewModel.cs" />
+    <Compile Include="Models\ContaEspecieSelectViewModel.cs" />
+    <Compile Include="Models\ContaMasterModel.cs" />
+    <Compile Include="Models\ContaPoupancaDetailEditModel.cs" />
+    <Compile Include="Models\ContaPoupancaDetailInsertModel.cs" />
+    <Compile Include="Models\ContaPoupancaDetailViewModel.cs" />
+    <Compile Include="Models\ContaPoupancaSelectViewModel.cs" />
+    <Compile Include="Models\ContaSelectViewModel.cs" />
+    <Compile Include="Models\ContaSummaryViewModel.cs" />
+    <Compile Include="Models\DadoBancarioModel.cs" />
+    <Compile Include="Models\EstadoSelectViewModel.cs" />
+    <Compile Include="Models\LancamentoMasterModel.cs" />
+    <Compile Include="Models\LancamentoPagarReceberDetailEditModel.cs" />
+    <Compile Include="Models\LancamentoPagarReceberDetailInsertModel.cs" />
+    <Compile Include="Models\LancamentoPagarReceberDetailViewModel.cs" />
+    <Compile Include="Models\LancamentoPagoRecebidoDetailEditModel.cs" />
+    <Compile Include="Models\LancamentoPagoRecebidoDetailViewModel.cs" />
+    <Compile Include="Models\LancamentoProgramadoDetailUpdateModel.cs" />
+    <Compile Include="Models\LancamentoProgramadoDetailViewModel.cs" />
+    <Compile Include="Models\LancamentoProgramadoMasterModel.cs" />
+    <Compile Include="Models\LocalidadeDetailUpdateModel.cs" />
+    <Compile Include="Models\MovimentoManualEditModel.cs" />
+    <Compile Include="Models\MovimentoImportadoEditModel.cs" />
+    <Compile Include="Models\MovimentoConciliadoEditModel.cs" />
+    <Compile Include="Models\MovimentoDetailInsertModel.cs" />
+    <Compile Include="Models\MovimentoDetailViewModel.cs" />
+    <Compile Include="Models\MovimentoImportacaoDetailViewModel.cs" />
+    <Compile Include="Models\MovimentoImportacaoMasterModel.cs" />
+    <Compile Include="Models\MovimentoImportacaoOFXItemModel.cs" />
+    <Compile Include="Models\MovimentoImportacaoOFXModel.cs" />
+    <Compile Include="Models\MovimentoMasterModel.cs" />
+    <Compile Include="Models\MovimentoSelectViewModel.cs" />
+    <Compile Include="Models\PaisSelectViewModel.cs" />
+    <Compile Include="Models\PerfilAvatarEditModel.cs" />
+    <Compile Include="Models\PerfilPersonalInfoEditModel.cs" />
+    <Compile Include="Models\PerfilPersonalInfoViewModel.cs" />
+    <Compile Include="Models\MesAnoModel.cs" />
+    <Compile Include="Models\PessoaDetailModel.cs" />
+    <Compile Include="Models\PessoaEmailDetailModel.cs" />
+    <Compile Include="Models\PessoaEnderecoDetailModel.cs" />
+    <Compile Include="Models\PessoaFisicaDetailEditModel.cs" />
+    <Compile Include="Models\PessoaFisicaDetailInsertModel.cs" />
+    <Compile Include="Models\PessoaFisicaDetailViewModel.cs" />
+    <Compile Include="Models\PessoaHomePageDetailModel.cs" />
+    <Compile Include="Models\PessoaJuridicaDetailEditModel.cs" />
+    <Compile Include="Models\PessoaJuridicaDetailInsertModel.cs" />
+    <Compile Include="Models\PessoaJuridicaDetailViewModel.cs" />
+    <Compile Include="Models\PessoaMasterModel.cs" />
+    <Compile Include="Models\PessoaSelectViewModel.cs" />
+    <Compile Include="Models\PessoaTelefoneDetailModel.cs" />
+    <Compile Include="Models\PlanoContaDetailEditModel.cs" />
+    <Compile Include="Models\PlanoContaDetailInsertModel.cs" />
+    <Compile Include="Models\PlanoContaDetailViewModel.cs" />
+    <Compile Include="Models\PlanoContaMasterMoveModel.cs" />
+    <Compile Include="Models\PlanoContaSelectViewModel.cs" />
+    <Compile Include="Models\ProgramacaoDetailUpdateBaseModel.cs" />
+    <Compile Include="Models\ProgramacaoDetailViewBaseModel.cs" />
+    <Compile Include="Models\RateioDetailUpdateModel.cs" />
+    <Compile Include="Models\RateioDetailViewModel.cs" />
+    <Compile Include="Models\SaldoInicialModel.cs" />
+    <Compile Include="Models\TipoEmailDetailEditModel.cs" />
+    <Compile Include="Models\TipoEmailDetailInsertModel.cs" />
+    <Compile Include="Models\TipoEmailDetailViewModel.cs" />
+    <Compile Include="Models\TipoEmailMasterModel.cs" />
+    <Compile Include="Models\TipoEmailSelectViewModel.cs" />
+    <Compile Include="Models\TipoEnderecoDetailEditModel.cs" />
+    <Compile Include="Models\TipoEnderecoDetailInsertModel.cs" />
+    <Compile Include="Models\TipoEnderecoDetailViewModel.cs" />
+    <Compile Include="Models\TipoEnderecoMasterModel.cs" />
+    <Compile Include="Models\TipoEnderecoSelectViewModel.cs" />
+    <Compile Include="Models\TipoHomePageDetailEditModel.cs" />
+    <Compile Include="Models\TipoHomePageDetailInsertModel.cs" />
+    <Compile Include="Models\TipoHomePageDetailViewModel.cs" />
+    <Compile Include="Models\TipoHomePageMasterModel.cs" />
+    <Compile Include="Models\TipoHomePageSelectViewModel.cs" />
+    <Compile Include="Models\TipoTelefoneDetailEditModel.cs" />
+    <Compile Include="Models\TipoTelefoneDetailInsertModel.cs" />
+    <Compile Include="Models\TipoTelefoneDetailViewModel.cs" />
+    <Compile Include="Models\TipoTelefoneMasterModel.cs" />
+    <Compile Include="Models\TipoTelefoneSelectViewModel.cs" />
+    <Compile Include="Models\TransferenciaDetailEditModel.cs" />
+    <Compile Include="Models\TransferenciaDetailInsertModel.cs" />
+    <Compile Include="Models\TransferenciaDetailViewModel.cs" />
+    <Compile Include="Models\TransferenciaProgramadaDetailEditModel.cs" />
+    <Compile Include="Models\TransferenciaProgramadaDetailInsertModel.cs" />
+    <Compile Include="Models\TransferenciaProgramadaDetailViewModel.cs" />
+    <Compile Include="Models\UsuarioDetailEditModel.cs" />
+    <Compile Include="Models\UsuarioDetailInsertModel.cs" />
+    <Compile Include="Models\UsuarioDetailViewModel.cs" />
+    <Compile Include="Models\UsuarioMasterModel.cs" />
+    <Compile Include="Models\UsuarioSelectViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RThomaz.Domain.Core\RThomaz.Domain.Core.csproj">
+      <Project>{e708a336-51d1-4792-9f06-9bdd3789f20a}</Project>
+      <Name>RThomaz.Domain.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RThomaz.Domain.Financeiro.Enums\RThomaz.Domain.Financeiro.Enums.csproj">
+      <Project>{9f2c3582-4e74-4f46-85fe-4aaf56b145df}</Project>
+      <Name>RThomaz.Domain.Financeiro.Enums</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RThomaz.Domain.Financeiro.Interfaces.Services\RThomaz.Domain.Financeiro.Interfaces.Services.csproj">
+      <Project>{a672fb8a-7a08-4e7c-818f-ba2b2c3e17f6}</Project>
+      <Name>RThomaz.Domain.Financeiro.Interfaces.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RThomaz.Domain.Financeiro.Services.DTOs\RThomaz.Domain.Financeiro.Services.DTOs.csproj">
+      <Project>{5ecf6095-7d82-483a-940f-92a1d3a8a598}</Project>
+      <Name>RThomaz.Domain.Financeiro.Services.DTOs</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RThomaz.Domain.Financeiro.Services\RThomaz.Domain.Financeiro.Services.csproj">
+      <Project>{82f595f7-9393-4928-9809-2e329d9e5a33}</Project>
+      <Name>RThomaz.Domain.Financeiro.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RThomaz.Infra.CrossCutting.Storage\RThomaz.Infra.CrossCutting.Storage.csproj">
+      <Project>{22554aa5-f3a5-4672-9be3-4930ad3d627b}</Project>
+      <Name>RThomaz.Infra.CrossCutting.Storage</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

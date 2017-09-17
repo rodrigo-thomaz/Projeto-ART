@@ -1,0 +1,141 @@
+﻿@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    ViewBag.ApplicationUrl = ConfigurationManager.AppSettings["applicationUrl"].ToString();
+    ViewBag.TemplateUrl = ConfigurationManager.AppSettings["templateUrl"].ToString();
+}
+
+@section styles {
+
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />    
+
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Usuario/UsuarioDetailStyle.css" rel="stylesheet" type="text/css" />    
+
+}
+
+@section scripts {
+
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/localization/messages_pt_BR.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/global/js/validation.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Usuario/UsuarioDetailScript.js" type="text/javascript"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            UsuarioDetailScript.init();
+        });
+    </script>
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="divForm" class="portlet box grey">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-reorder"></i> Usuários
+                </div>
+                <div class="tools">
+                    <a href="#portlet-config" data-toggle="modal" class="config">
+                    </a>
+                    <a href="" class="reload">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="formDetail" class="form-horizontal" role="form" autocomplete="off" action="#">
+                    <div class="form-body">
+                        <div id="custom-validate-error" class="alert alert-danger display-hide col-md-9 col-md-offset-3">
+                            <button class="close" data-close="alert"></button>
+                            <span>
+                            </span>
+                        </div>
+                        <div id="divAvatar" class="form-group" style="display:none;">
+                            <label class="control-label col-md-3">Avatar</label>
+                            <div class="col-md-9">
+                                <div class="thumbnail" style="width: 200px; height: 186px;">
+                                    <img id="imgAvatar" src="@ViewBag.ApplicationUrl/assets/admin/img/avatar1.png" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Email</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-envelope"></i>
+                                    </span>
+                                    <input id="txtEmail" name="txtEmail" type="text" class="form-control" placeholder="nome@exemplo.com.br">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Nome de exibição</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-user"></i>
+                                    </span>
+                                    <input id="txtNomeExibicao" name="txtNomeExibicao" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group senha-group">
+                            <label class="col-md-3 control-label">Senha</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                    <input id="txtSenha" name="txtSenha" type="password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group senha-group">
+                            <label class="col-md-3 control-label">Confirme</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-lock"></i>
+                                    </span>
+                                    <input id="txtConfirmaSenha" name="txtConfirmaSenha" type="password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Ativo</label>
+                            <div class="col-md-9">
+                                <div class="radio-list">
+                                    <label>
+                                        <input id="chkAtivoTrue" name="chkAtivo" type="radio" value="true" checked> Sim
+                                    </label>
+                                    <label>
+                                        <input id="chkAtivoFalse" name="chkAtivo" type="radio" value="false" checked> Não
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Descrição</label>
+                            <div class="col-md-9">
+                                <textarea id="txtDescricao" name="txtDescricao" class="form-control minieditor"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions fluid">
+                        <div class="col-md-offset-3 col-md-9">
+                            <input type="submit" value="Salvar" class="btn blue">
+                            <input id="btnCancelar" type="button" value="Cancelar" class="btn default">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

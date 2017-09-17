@@ -1,0 +1,4 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Interfaces.Services\bin\Debug\RThomaz.Domain.Identity.Interfaces.Services.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Interfaces.Services\bin\Debug\RThomaz.Domain.Identity.Interfaces.Services.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Interfaces.Services\obj\Debug\RThomaz.Domain.Identity.Interfaces.Services.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Interfaces.Services\obj\Debug\RThomaz.Domain.Identity.Interfaces.Services.pdb

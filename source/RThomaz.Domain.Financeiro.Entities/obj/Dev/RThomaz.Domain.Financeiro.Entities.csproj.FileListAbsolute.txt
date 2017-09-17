@@ -1,0 +1,15 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Entities\bin\Dev\RThomaz.Domain.Financeiro.Entities.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Entities\bin\Dev\RThomaz.Domain.Financeiro.Entities.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Entities\bin\Dev\RThomaz.Domain.Financeiro.Enums.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Entities\bin\Dev\RThomaz.Domain.Financeiro.Enums.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Entities\obj\Dev\RThomaz.Domain.Financeiro.Entities.csprojResolveAssemblyReference.cache
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Entities\obj\Dev\RThomaz.Domain.Financeiro.Entities.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Entities\obj\Dev\RThomaz.Domain.Financeiro.Entities.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Entities\bin\Dev\RThomaz.Domain.Financeiro.Entities.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Entities\bin\Dev\RThomaz.Domain.Financeiro.Entities.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Entities\bin\Dev\RThomaz.Domain.Financeiro.Enums.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Entities\bin\Dev\RThomaz.Domain.Financeiro.Enums.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Entities\obj\Dev\RThomaz.Domain.Financeiro.Entities.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Entities\obj\Dev\RThomaz.Domain.Financeiro.Entities.csproj.CoreCompileInputs.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Entities\obj\Dev\RThomaz.Domain.Financeiro.Entities.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Entities\obj\Dev\RThomaz.Domain.Financeiro.Entities.pdb

@@ -1,0 +1,4 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Application.Core\bin\Debug\RThomaz.Application.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Application.Core\bin\Debug\RThomaz.Application.Core.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Application.Core\obj\Debug\RThomaz.Application.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Application.Core\obj\Debug\RThomaz.Application.Core.pdb

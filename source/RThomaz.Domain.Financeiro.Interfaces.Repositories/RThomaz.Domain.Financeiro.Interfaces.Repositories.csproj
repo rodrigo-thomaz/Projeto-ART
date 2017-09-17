@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D0102DA6-0289-43BA-AE01-69F5D645BED0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RThomaz.Domain.Financeiro.Interfaces.Repositories</RootNamespace>
+    <AssemblyName>RThomaz.Domain.Financeiro.Interfaces.Repositories</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IBancoRepository.cs" />
+    <Compile Include="IBandeiraCartaoRepository.cs" />
+    <Compile Include="ICBOOcupacaoRepository.cs" />
+    <Compile Include="ICentroCustoRepository.cs" />
+    <Compile Include="IConciliacaoRepository.cs" />
+    <Compile Include="IContaRepository.cs" />
+    <Compile Include="ILancamentoRepository.cs" />
+    <Compile Include="ILancamentoProgramadoRepository.cs" />
+    <Compile Include="IMovimentoImportacaoRepository.cs" />
+    <Compile Include="IMovimentoRepository.cs" />
+    <Compile Include="IPerfilRepository.cs" />
+    <Compile Include="IPessoaRepository.cs" />
+    <Compile Include="IPlanoContaRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ITipoEmailRepository.cs" />
+    <Compile Include="ITipoEnderecoRepository.cs" />
+    <Compile Include="ITipoHomeRepository.cs" />
+    <Compile Include="ITipoTelefoneRepository.cs" />
+    <Compile Include="ITransferenciaProgramadaRepository.cs" />
+    <Compile Include="ITransferenciaRepository.cs" />
+    <Compile Include="IUsuarioRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RThomaz.Domain.Financeiro.Entities\RThomaz.Domain.Financeiro.Entities.csproj">
+      <Project>{3b0af08d-2dd0-4fd5-97a8-2b7f9db14f61}</Project>
+      <Name>RThomaz.Domain.Financeiro.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RThomaz.Infra.Data.Core\RThomaz.Infra.Data.Core.csproj">
+      <Project>{927C9E1B-05F7-4BF9-A8E8-12F99BF4D3DD}</Project>
+      <Name>RThomaz.Infra.Data.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

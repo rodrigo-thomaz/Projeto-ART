@@ -1,0 +1,2256 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RThomaz.DistributedServices.Financeiro</name>
+    </assembly>
+    <members>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de bancos
+            </summary>        
+            <remarks>
+            Retorna uma lista de bancos 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.Get(System.Int64)">
+            <summary>
+            Retornar um banco
+            </summary>        
+            <remarks>
+            Retorna um único banco existente por id
+            </remarks>
+            <param name="id">id do banco</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.GetLogo(System.String)">
+            <summary>
+            Retornar o logo de um banco
+            </summary>        
+            <remarks>
+            Retorna o logo de um único banco existente por id
+            </remarks>
+            <param name="id">id do logo</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.GetMascaras(System.Int64)">
+            <summary>
+            Retornar as máscaras bancária de um banco
+            </summary>        
+            <remarks>
+            Retornar as máscaras bancária de um único banco existente por id
+            </remarks>
+            <param name="id">id do banco</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.GetSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel)">
+            <summary>
+            Retornar uma lista de bancos
+            </summary>        
+            <remarks>
+            Retornar uma lista de bancos para ser usado em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.UniqueNome(System.Int64,System.String)">
+            <summary>
+            Verifica se o nome do banco é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do banco é único.
+            
+            Para cadastro de um novo banco, informe id = 0
+            
+            </remarks>        
+            <param name="id">id do banco</param>
+            <param name="nome">nome do banco para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.UniqueNomeAbreviado(System.Int64,System.String)">
+            <summary>
+            Verifica se o nome abreviado do banco é único
+            </summary>        
+            <remarks>
+            Verifica se o nome abreviado do banco é único.
+            
+            Para cadastro de um novo banco, informe id = 0
+            
+            </remarks>        
+            <param name="id">id do banco</param>
+            <param name="nomeAbreviado">Nome abreviado do banco para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.UniqueNumero(System.Int64,System.String)">
+            <summary>
+            Verifica se o número do banco é único
+            </summary>        
+            <remarks>
+            Verifica se o número do banco é único.
+            
+            Para cadastro de um novo banco, informe id = 0
+            
+            </remarks>        
+            <param name="id">id do banco</param>
+            <param name="numero">Número do banco para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.Post(RThomaz.Application.Financeiro.Models.BancoDetailInsertModel)">
+            <summary>
+            Inserir um banco
+            </summary>
+            <remarks>
+            Inseri um novo banco
+            
+            - O campo 'nome' deve ser único;
+            - O campo 'nomeAbreviado' deve ser único;
+            - O campo 'numero' deve ser único;
+            
+            </remarks>
+            <param name="model">model do banco</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.Put(RThomaz.Application.Financeiro.Models.BancoDetailEditModel)">
+            <summary>
+            Atualizar um banco
+            </summary>
+            <remarks>
+            Atualiza um único banco existente por id
+            
+            - O campo 'nome' deve ser único;
+            - O campo 'nomeAbreviado' deve ser único;
+            - O campo 'numero' deve ser único;
+            
+            </remarks>
+            <param name="model">model do banco</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BancoController.Delete(System.Int64)">
+            <summary>
+            Remover um banco
+            </summary>        
+            <remarks>
+            Tenta remover um único banco existente por id 
+            Se o banco já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do banco</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BandeiraCartaoController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de bandeiras de cartão de crédito
+            </summary>        
+            <remarks>
+            Retorna uma lista de bandeiras de cartão de crédito 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BandeiraCartaoController.Get(System.Int64)">
+            <summary>
+            Retornar uma bandeira de cartão de crédito
+            </summary>        
+            <remarks>
+            Retorna uma única bandeira de cartão de crédito existente por id
+            </remarks>
+            <param name="id">id da bandeira de cartão de crédito</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BandeiraCartaoController.GetLogo(System.String)">
+            <summary>
+            Retornar o logo de uma bandeira de cartão de crédito
+            </summary>        
+            <remarks>
+            Retorna o logo de uma única bandeira de cartão de crédito existente por id
+            </remarks>
+            <param name="id">id do logo</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BandeiraCartaoController.GetSelectViewList">
+            <summary>
+            Retornar uma lista de bandeiras de cartão de crédito
+            </summary>        
+            <remarks>
+            Retornar uma lista de bandeiras de cartão de crédito para ser usada em listas de seleção
+            </remarks>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BandeiraCartaoController.UniqueNome(System.Int64,System.String)">
+            <summary>
+            Verifica se o nome da bandeira do cartão de crédito é única
+            </summary>        
+            <remarks>
+            Verifica se o nome da bandeira do cartão de crédito é única.
+            
+            Para cadastro de uma nova bandeira do cartão de crédito, informe id = 0
+            
+            </remarks>        
+            <param name="id">id da bandeira do cartão de crédito</param>
+            <param name="nome">nome da bandeira do cartão de crédito para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BandeiraCartaoController.Post(RThomaz.Application.Financeiro.Models.BandeiraCartaoDetailInsertModel)">
+            <summary>
+            Inserir uma bandeira de cartão de crédito
+            </summary>
+            <remarks>
+            Inseri uma nova bandeira de cartão de crédito
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model da bandeira de cartão de crédito</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BandeiraCartaoController.Put(RThomaz.Application.Financeiro.Models.BandeiraCartaoDetailEditModel)">
+            <summary>
+            Atualizar uma bandeira de cartão de crédito
+            </summary>
+            <remarks>
+            Atualiza uma única bandeira de cartão de crédito existente por id
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model da bandeira de cartão de crédito</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.BandeiraCartaoController.Delete(System.Int64)">
+            <summary>
+            Remover uma bandeira de cartão de crédito
+            </summary>        
+            <remarks>
+            Tenta remover uma única bandeira de cartão de crédito existente por id 
+            Se a bandeira de cartão de crédito já estiver sendo utilizada pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id da bandeira de cartão de crédito</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CBOOcupacaoController.GetOcupacaoSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel)">
+            <summary>
+            Retornar uma lista de CBOOcupacao (Cadastro brasileiro de ocupações)
+            </summary>        
+            <remarks>
+            Retornar uma lista de CBOOcupacao para ser usado em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CBOOcupacaoController.GetSinonimoSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel,System.Int32)">
+            <summary>
+            Retornar uma lista de CBOSinonimo (Cadastro brasileiro de ocupações)
+            </summary>        
+            <remarks>
+            Retornar uma lista de CBOSinonimo para ser usado em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="cboOcupacaoId">cboOcupacaoId para parâmetro de busca</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.GetMasterViewList(System.String,System.Boolean)">
+            <summary>
+            Retornar uma lista de centros de custo
+            </summary>        
+            <remarks>
+            Retorna uma lista de centros de custo 
+            </remarks>
+            <param name="search">filtro para pesquisa</param>
+            <param name="mostrarInativos">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.Get(System.Int64)">
+            <summary>
+            Retornar um centro de custo
+            </summary>        
+            <remarks>
+            Retorna um único centro de custo existente por id
+            </remarks>
+            <param name="id">id do centro de custo</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.GetSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel)">
+            <summary>
+            Retornar uma lista de centros de custo
+            </summary>        
+            <remarks>
+            Retornar uma lista de centros de custo para ser usado em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.Move(RThomaz.Application.Financeiro.Models.CentroCustoMasterMoveModel)">
+            <summary>
+            Mover uma lista de centros de custo
+            </summary>
+            <remarks>
+            Mover uma lista de centros de custo existentes por id
+            
+            </remarks>
+            <param name="model">model do centro de custo</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.Rename(System.Int64,System.String)">
+            <summary>
+            Renomear um centro de custo
+            </summary>
+            <remarks>
+            Renomear um centro de custo existente por id
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="centroCustoId">id do centro de custo</param>        
+            <param name="nome">nome do centro de custo</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.UniqueNome(System.Int64,System.String)">
+            <summary>
+            Verifica se o nome do centro de custo é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do centro de custo é único.
+            
+            Para cadastro de um novo centro de custo, informe id = 0
+            
+            </remarks>        
+            <param name="id">id do centro de custo</param>
+            <param name="nome">nome do centro de custo para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.Post(RThomaz.Application.Financeiro.Models.CentroCustoDetailInsertModel)">
+            <summary>
+            Inserir um centro de custo
+            </summary>
+            <remarks>
+            Inseri um novo centro de custo        
+            
+            </remarks>
+            <param name="model">model do centro de custo</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.Put(RThomaz.Application.Financeiro.Models.CentroCustoDetailEditModel)">
+            <summary>
+            Atualizar um centro de custo
+            </summary>
+            <remarks>
+            Atualiza um único centro de custo existente por id
+            
+            </remarks>
+            <param name="model">model do centro de custo</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.CentroCustoController.Delete(System.Int64)">
+            <summary>
+            Remover um centro de custo
+            </summary>        
+            <remarks>
+            Tenta remover um único centro de custo existente por id 
+            Se o centro de custo já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do centro de custo</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ConciliacaoController.GetLancamentosConciliados(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoTransacao)">
+            <summary>
+            Retornar uma lista de lançamentos conciliados
+            </summary>        
+            <remarks>
+            Retornar uma lista de lançamentos conciliados por um movimentoId existente
+            </remarks>
+            <param name="movimentoId">movimentoId do movimento</param>
+            <param name="tipoTransacao">tipoTransacao do movimento</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ConciliacaoController.GetMovimentosConciliados(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoTransacao)">
+            <summary>
+            Retornar uma lista de movimentos conciliados
+            </summary>        
+            <remarks>
+            Retornar uma lista de movimentos conciliados por um lancamentoId existente
+            </remarks>
+            <param name="lancamentoId">lancamentoId do lançamento</param>
+            <param name="tipoTransacao">tipoTransacao do lançamento</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,System.Nullable{RThomaz.Domain.Financeiro.Enums.TipoConta},System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de contas
+            </summary>        
+            <remarks>
+            Retorna uma lista de contas 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="tipoConta">tipo de conta</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.GetContaEspecieDetail(System.Int64)">
+            <summary>
+            Retornar uma conta espécie
+            </summary>        
+            <remarks>
+            Retorna uma única conta espécie existente por id
+            </remarks>
+            <param name="id">id da conta espécie</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.GetContaCorrenteDetail(System.Int64)">
+            <summary>
+            Retornar uma conta corrente
+            </summary>        
+            <remarks>
+            Retorna uma única conta corrente existente por id
+            </remarks>
+            <param name="id">id da conta corrente</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.GetContaPoupancaDetail(System.Int64)">
+            <summary>
+            Retornar uma conta poupança
+            </summary>        
+            <remarks>
+            Retorna uma única conta poupança existente por id
+            </remarks>
+            <param name="id">id da conta poupança</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.GetContaCartaoCreditoDetail(System.Int64)">
+            <summary>
+            Retornar uma conta cartão de crédito
+            </summary>        
+            <remarks>
+            Retorna uma única conta cartão de crédito existente por id
+            </remarks>
+            <param name="id">id da conta cartão de crédito</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.GetSelectViewList(System.Nullable{RThomaz.Domain.Financeiro.Enums.TipoConta})">
+            <summary>
+            Retornar uma lista de contas
+            </summary>        
+            <remarks>
+            Retornar uma lista de contas para ser usada em listas de seleção
+            </remarks>
+            <param name="tipoConta">filtra o resultado por tipo de conta</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.GetWithProgramacaoSelectViewList">
+            <summary>
+            Retornar uma lista de contas com lançamentos programados existentes
+            </summary>        
+            <remarks>
+            Retornar uma lista de contas com lançamentos programados existentes para ser usada em listas de seleção
+            </remarks>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.GetSummaryViewList">
+            <summary>
+            Retornar o sumário das contas
+            </summary>        
+            <remarks>
+            Retornar o sumário das contas para ser usado como painel de saldo
+            </remarks>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.PostContaEspecie(RThomaz.Application.Financeiro.Models.ContaEspecieDetailInsertModel)">
+            <summary>
+            Inserir uma conta espécie
+            </summary>
+            <remarks>
+            Inseri uma nova conta espécie
+            
+            </remarks>
+            <param name="model">model da conta espécie</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.PostContaCorrente(RThomaz.Application.Financeiro.Models.ContaCorrenteDetailInsertModel)">
+            <summary>
+            Inserir uma conta corrente
+            </summary>
+            <remarks>
+            Inseri uma nova conta corrente
+            
+            </remarks>
+            <param name="model">model da conta corrente</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.PostContaPoupanca(RThomaz.Application.Financeiro.Models.ContaPoupancaDetailInsertModel)">
+            <summary>
+            Inserir uma conta poupança
+            </summary>
+            <remarks>
+            Inseri uma nova conta poupança
+            
+            </remarks>
+            <param name="model">model da conta poupança</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.PostContaCartaoCredito(RThomaz.Application.Financeiro.Models.ContaCartaoCreditoDetailInsertModel)">
+            <summary>
+            Inserir uma conta cartão de crédito
+            </summary>
+            <remarks>
+            Inseri uma nova conta cartão de crédito
+            
+            </remarks>
+            <param name="model">model da conta cartão de crédito</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.PutContaEspecie(RThomaz.Application.Financeiro.Models.ContaEspecieDetailEditModel)">
+            <summary>
+            Atualizar uma conta espécie
+            </summary>
+            <remarks>
+            Atualiza uma única conta espécie existente por id        
+            </remarks>
+            <param name="model">model da conta espécie</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.PutContaCorrente(RThomaz.Application.Financeiro.Models.ContaCorrenteDetailEditModel)">
+            <summary>
+            Atualizar uma conta corrente
+            </summary>
+            <remarks>
+            Atualiza uma única conta corrente existente por id        
+            </remarks>
+            <param name="model">model da conta corrente</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.PutContaPoupanca(RThomaz.Application.Financeiro.Models.ContaPoupancaDetailEditModel)">
+            <summary>
+            Atualizar uma conta poupança
+            </summary>
+            <remarks>
+            Atualiza uma única conta poupança existente por id        
+            </remarks>
+            <param name="model">model da conta poupança</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.PutContaCartaoCredito(RThomaz.Application.Financeiro.Models.ContaCartaoCreditoDetailEditModel)">
+            <summary>
+            Atualizar uma conta cartão de crédito
+            </summary>
+            <remarks>
+            Atualiza uma única conta cartão de crédito existente por id        
+            </remarks>
+            <param name="model">model da conta cartão de crédito</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.ContaController.Delete(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoConta)">
+            <summary>
+            Remover uma conta
+            </summary>        
+            <remarks>
+            Tenta remover uma única conta existente por id 
+            Se a conta já estiver sendo utilizada pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id da conta</param>
+            <param name="tipoConta">Tipo de conta: ContaEspecie = 0 | ContaCorrente = 1 | ContaPoupanca = 2 | ContaCartaoCredito = 3</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.InitialDataController.ConsisteStorage">
+            <summary>
+            Cria Storage do Sistema
+            </summary>
+            <remarks>Cria Storage do Sistema</remarks>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.InitialDataController.SeedLocalidade">
+            <summary>
+            Localidade Seed
+            </summary>
+            <remarks>Localidade Seed</remarks>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.InitialDataController.SeedCBO">
+            <summary>
+            CBO Seed
+            </summary>
+            <remarks>CBO Seed</remarks>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagarReceberController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,RThomaz.Application.Financeiro.Models.MesAnoModel,System.Int64,RThomaz.Domain.Financeiro.Enums.TipoConta)">
+            <summary>
+            Retornar uma lista de lançamentos a pagar e a receber
+            </summary>        
+            <remarks>
+            Retorna uma lista de lançamentos a pagar e a receber 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="periodo">filtro por periodo</param>
+            <param name="contaId">filtro por conta</param>
+            <param name="tipoConta">filtro por tipo de conta</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagarReceberController.GetPeriodos(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoConta)">
+            <summary>
+            Retornar uma lista de períodos
+            </summary>        
+            <remarks>
+            Retornar uma lista de períodos para ser usado em listas de seleção
+            </remarks>
+            <param name="contaId">contaId para filtro</param>
+            <param name="tipoConta">tipo de conta para filtro</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagarReceberController.Get(System.Int64)">
+            <summary>
+            Retornar um lançamento do contas a pagar/receber
+            </summary>        
+            <remarks>
+            Retorna um único lançamento do contas a pagar/receber existente por id
+            </remarks>
+            <param name="id">id do lançamento do contas a pagar/receber</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagarReceberController.Post(RThomaz.Application.Financeiro.Models.LancamentoPagarReceberDetailInsertModel)">
+            <summary>
+            Inserir um lancamento pagar/receber
+            </summary>
+            <remarks>
+            Inseri um novo lancamento pagar/receber
+            </remarks>
+            <param name="model">model do lancamento pagar/receber</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagarReceberController.Put(RThomaz.Application.Financeiro.Models.LancamentoPagarReceberDetailEditModel)">
+            <summary>
+            Atualizar um lancamento pagar/receber
+            </summary>
+            <remarks>
+            Atualiza um único lancamento pagar/receber existente por id
+            </remarks>
+            <param name="model">model do lancamento pagar/receber</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagarReceberController.Delete(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoTransacao)">
+            <summary>
+            Remover um lançamento pagar/receber
+            </summary>        
+            <remarks>
+            Tenta remover um único lançamento pagar/receber existente por id 
+            Se o lançamento pagar/receber já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do lançamento pagar/receber</param>
+            <param name="tipoTransacao">tipo de transação: Credito = 0 | Debito = 1</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagoRecebidoController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,RThomaz.Application.Financeiro.Models.MesAnoModel,System.Int64,RThomaz.Domain.Financeiro.Enums.TipoConta)">
+            <summary>
+            Retornar uma lista de lançamentos pagos e recebidos
+            </summary>        
+            <remarks>
+            Retorna uma lista de lançamentos pagos e recebidos 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="periodo">filtro por periodo</param>
+            <param name="contaId">filtro por conta</param>
+            <param name="tipoConta">filtro por tipo de conta</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagoRecebidoController.GetPeriodos(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoConta)">
+            <summary>
+            Retornar uma lista de períodos
+            </summary>        
+            <remarks>
+            Retornar uma lista de períodos para ser usado em listas de seleção
+            </remarks>
+            <param name="contaId">contaId para filtro</param>
+            <param name="tipoConta">tipo de conta para filtro</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagoRecebidoController.Get(System.Int64)">
+            <summary>
+            Retornar um lançamento pago/recebido do contas a pagar/receber
+            </summary>        
+            <remarks>
+            Retorna um único lançamento pago/recebido do contas a pagar/receber existente por id
+            </remarks>
+            <param name="id">id do lançamento pago/recebido do contas a pagar/receber</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagoRecebidoController.Put(RThomaz.Application.Financeiro.Models.LancamentoPagoRecebidoDetailEditModel)">
+            <summary>
+            Atualizar um lançamento pago/recebido
+            </summary>
+            <remarks>
+            Atualiza um único lançamento pago/recebido existente por id
+            </remarks>
+            <param name="model">model do lançamento pago/recebido</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoPagoRecebidoController.Delete(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoTransacao)">
+            <summary>
+            Remover um lancamento pago/recebido
+            </summary>        
+            <remarks>
+            Tenta remover um único lancamento pago/recebido existente por id 
+            Se o lancamento pago/recebido já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do lancamento pago/recebido</param>
+            <param name="tipoTransacao">tipo de transação: Credito = 0 | Debito = 1</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoProgramadoController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,System.Nullable{System.Int64},System.Nullable{RThomaz.Domain.Financeiro.Enums.TipoConta})">
+            <summary>
+            Retornar uma lista de lançamentos programados
+            </summary>        
+            <remarks>
+            Retorna uma lista de lançamentos programados 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="contaId">filtro por conta</param>
+            <param name="tipoConta">filtro por tipo de conta</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoProgramadoController.Get(System.Int64)">
+            <summary>
+            Retornar um lançamento programado
+            </summary>        
+            <remarks>
+            Retorna um único lançamento programado existente por id
+            </remarks>
+            <param name="id">id do lançamento programado</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoProgramadoController.Post(RThomaz.Application.Financeiro.Models.LancamentoProgramadoDetailUpdateModel)">
+            <summary>
+            Inserir um lançamento programado
+            </summary>
+            <remarks>
+            Inseri um novo lançamento programado
+            
+            </remarks>
+            <param name="model">model do lançamento programado</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoProgramadoController.Put(RThomaz.Application.Financeiro.Models.LancamentoProgramadoDetailUpdateModel)">
+            <summary>
+            Atualizar um lançamento programado
+            </summary>
+            <remarks>
+            Atualiza um único lançamento programado existente por id
+            
+            </remarks>
+            <param name="model">model do lançamento programado</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LancamentoProgramadoController.Delete(System.Int64)">
+            <summary>
+            Remover um lançamento programado
+            </summary>        
+            <remarks>
+            Tenta remover um único lançamento programado existente por id 
+            Se o lançamento programado já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do lançamento programado</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LocalidadeController.GetPaisBandeira(System.String)">
+            <summary>
+            Retornar a bandeira de um pais
+            </summary>        
+            <remarks>
+            Retorna a bandeira de um único pais existente por id
+            </remarks>
+            <param name="id">id da bandeira</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LocalidadeController.GetPaisSelectViewList">
+            <summary>
+            Retornar uma lista de paises
+            </summary>        
+            <remarks>
+            Retornar uma lista de paises para ser usada em listas de seleção
+            </remarks>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LocalidadeController.GetEstadoSelectViewList(System.Int64)">
+            <summary>
+            Retornar uma lista de estados
+            </summary>        
+            <remarks>
+            Retornar uma lista de estados para ser usada em listas de seleção
+            </remarks>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LocalidadeController.GetCidadeSelectViewList(System.Int64)">
+            <summary>
+            Retornar uma lista de cidades
+            </summary>        
+            <remarks>
+            Retornar uma lista de cidades para ser usada em listas de seleção
+            </remarks>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LocalidadeController.GetBairroSelectViewList(System.Int64)">
+            <summary>
+            Retornar uma lista de bairros
+            </summary>        
+            <remarks>
+            Retornar uma lista de bairros para ser usada em listas de seleção
+            </remarks>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.LocalidadeController.Put(RThomaz.Application.Financeiro.Models.LocalidadeDetailUpdateModel)">
+            <summary>
+            Atualizar uma pessoa física
+            </summary>
+            <remarks>
+            Atualiza uma única pessoa física existente por id        
+            </remarks>
+            <param name="model">model da pessoa física</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,RThomaz.Application.Financeiro.Models.MesAnoModel,System.Int64,RThomaz.Domain.Financeiro.Enums.TipoConta,System.Nullable{RThomaz.Domain.Financeiro.Enums.TipoTransacao},System.Nullable{RThomaz.Domain.Financeiro.Services.DTOs.Enums.ConciliacaoStatus},System.Nullable{RThomaz.Domain.Financeiro.Services.DTOs.Enums.ConciliacaoOrigem})">
+            <summary>
+            Retornar uma lista de movimentos bancários
+            </summary>        
+            <remarks>
+            Retorna uma lista de movimentos bancários
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="periodo">filtro por periodo</param>
+            <param name="contaId">filtro por conta</param>
+            <param name="tipoConta">filtro por tipo de conta</param>
+            <param name="tipoTransacao">filtro por tipo de transação</param>
+            <param name="conciliacaoStatus">filtro por status da conciliação</param>
+            <param name="conciliacaoOrigem">filtro por origem da conciliação</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.GetSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel,RThomaz.Domain.Financeiro.Enums.TipoTransacao)">
+            <summary>
+            Retornar uma lista de movimentos
+            </summary>        
+            <remarks>
+            Retornar uma lista de movimentos para ser usada em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="tipoTransacao">filtro por tipo de transação</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.GetPeriodos(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoConta)">
+            <summary>
+            Retornar uma lista de períodos
+            </summary>        
+            <remarks>
+            Retornar uma lista de períodos para ser usado em listas de seleção
+            </remarks>
+            <param name="contaId">contaId para filtro</param>
+            <param name="tipoConta">tipo de conta para filtro</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.Get(System.Int64)">
+            <summary>
+            Retornar um movimento
+            </summary>        
+            <remarks>
+            Retorna um único movimento existente por id
+            </remarks>
+            <param name="id">id do movimento</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.Post(RThomaz.Application.Financeiro.Models.MovimentoDetailInsertModel)">
+            <summary>
+            Inserir um movimento
+            </summary>
+            <remarks>
+            Inseri um novo movimento
+            
+            </remarks>
+            <param name="model">model do movimento</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.PutManual(RThomaz.Application.Financeiro.Models.MovimentoManualEditModel)">
+            <summary>
+            Atualizar um movimento manual
+            </summary>
+            <remarks>
+            Atualiza um único movimento manual existente por id
+            
+            </remarks>
+            <param name="model">model do movimento manual</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.PutImportado(RThomaz.Application.Financeiro.Models.MovimentoImportadoEditModel)">
+            <summary>
+            Atualizar um movimento importado
+            </summary>
+            <remarks>
+            Atualiza um único movimento importado existente por id
+            
+            </remarks>
+            <param name="model">model do movimento importado</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.PutConciliado(RThomaz.Application.Financeiro.Models.MovimentoConciliadoEditModel)">
+            <summary>
+            Atualizar um movimento conciliado
+            </summary>
+            <remarks>
+            Atualiza um único movimento conciliado existente por id
+            
+            </remarks>
+            <param name="model">model do movimento conciliado</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoController.Delete(System.Int64)">
+            <summary>
+            Remover um movimento
+            </summary>        
+            <remarks>
+            Tenta remover um único movimento existente por id 
+            Se o movimento já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do movimento</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoImportacaoController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,System.Int64,System.Nullable{RThomaz.Domain.Financeiro.Enums.TipoTransacao})">
+            <summary>
+            Retornar uma lista de importações dos movimentos
+            </summary>        
+            <remarks>
+            Retorna uma lista de importações dos movimentos 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="movimentoImportacaoId">filtro por movimentoImportacaoId</param>
+            <param name="tipoTransacao">filtro por tipo de transação</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoImportacaoController.GetSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel)">
+            <summary>
+            Retornar uma lista de importações de movimentos
+            </summary>        
+            <remarks>
+            Retornar uma lista de importações de movimentos para ser usado em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoImportacaoController.Delete(System.Int64)">
+            <summary>
+            Remover um movimento importação
+            </summary>        
+            <remarks>
+            Tenta remover um único movimento importação existente por id 
+            Se o movimento importação já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do movimento importação</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoImportacaoOFXController.Preview(RThomaz.Application.Financeiro.Helpers.Storage.StorageUploadModel)">
+            <summary>
+            Retorna um preview da importação
+            </summary>
+            <remarks>
+            Transforma o buffer do arquivo em preview da importação
+            
+            </remarks>
+            <param name="buffer">string buffer Base64 do arquivo ofx</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.MovimentoImportacaoOFXController.Import(RThomaz.Application.Financeiro.Models.MovimentoImportacaoOFXModel)">
+            <summary>
+            Importa um arquivo OFX
+            </summary>
+            <remarks>
+            Importa um arquivo OFX
+            
+            </remarks>
+            <param name="model">model para importar</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de pessoas
+            </summary>        
+            <remarks>
+            Retorna uma lista de pessoas 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.GetPessoaFisicaDetail(System.Int64)">
+            <summary>
+            Retornar uma pessoa física
+            </summary>        
+            <remarks>
+            Retorna uma única pessoa física existente por id
+            </remarks>
+            <param name="id">id da pessoa física</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.GetPessoaJuridicaDetail(System.Int64)">
+            <summary>
+            Retornar uma pessoa jurídica
+            </summary>        
+            <remarks>
+            Retorna uma única pessoa jurídica existente por id
+            </remarks>
+            <param name="id">id da pessoa jurídica</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.GetSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel)">
+            <summary>
+            Retornar uma lista de pessoas
+            </summary>        
+            <remarks>
+            Retornar uma lista de pessoas para ser usada em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.PostPessoaFisica(RThomaz.Application.Financeiro.Models.PessoaFisicaDetailInsertModel)">
+            <summary>
+            Inserir uma pessoa física
+            </summary>
+            <remarks>
+            Inseri uma nova pessoa física
+            
+            </remarks>
+            <param name="model">model da pessoa física</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.PostPessoaJuridica(RThomaz.Application.Financeiro.Models.PessoaJuridicaDetailInsertModel)">
+            <summary>
+            Inserir uma pessoa jurídica
+            </summary>
+            <remarks>
+            Inseri uma nova pessoa jurídica
+            
+            </remarks>
+            <param name="model">model da pessoa jurídica</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.PutPessoaFisica(RThomaz.Application.Financeiro.Models.PessoaFisicaDetailEditModel)">
+            <summary>
+            Atualizar uma pessoa física
+            </summary>
+            <remarks>
+            Atualiza uma única pessoa física existente por id        
+            </remarks>
+            <param name="model">model da pessoa física</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.PutPessoaJuridica(RThomaz.Application.Financeiro.Models.PessoaJuridicaDetailEditModel)">
+            <summary>
+            Atualizar uma pessoa jurídica
+            </summary>
+            <remarks>
+            Atualiza uma única pessoa jurídica existente por id        
+            </remarks>
+            <param name="model">model da pessoa jurídica</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PessoaController.Delete(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Remover uma pessoa
+            </summary>        
+            <remarks>
+            Tenta remover uma única pessoa existente por id 
+            Se a pessoa já estiver sendo utilizada pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id da pessoa</param>
+            <param name="tipoPessoa">Tipo de pessoa: PessoaFisica = 0 | PessoaJuridica = 1</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.GetMasterViewList(RThomaz.Domain.Financeiro.Enums.TipoTransacao,System.String,System.Boolean)">
+            <summary>
+            Retornar uma lista de planos de conta
+            </summary>        
+            <remarks>
+            Retorna uma lista de planos de conta 
+            </remarks>
+            <param name="tipoTransacao">filtro por tipo de transação</param>
+            <param name="search">filtro para pesquisa</param>
+            <param name="mostrarInativos">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.Get(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoTransacao)">
+            <summary>
+            Retornar um plano de conta
+            </summary>        
+            <remarks>
+            Retorna um único plano de conta existente por id
+            </remarks>
+            <param name="id">id do plano de conta</param>
+            <param name="tipoTransacao">tipo de transação do plano de conta</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.GetSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel,RThomaz.Domain.Financeiro.Enums.TipoTransacao)">
+            <summary>
+            Retornar uma lista de planos de conta
+            </summary>        
+            <remarks>
+            Retornar uma lista de planos de conta para ser usado em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="tipoTransacao">tipo de transação dos planos de conta</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.Move(RThomaz.Application.Financeiro.Models.PlanoContaMasterMoveModel)">
+            <summary>
+            Mover uma lista de planos de conta
+            </summary>
+            <remarks>
+            Mover uma lista de planos de conta existentes por id
+            
+            </remarks>
+            <param name="model">model do plano de conta</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.Rename(System.Int64,System.String)">
+            <summary>
+            Renomear um plano de conta
+            </summary>
+            <remarks>
+            Renomear um plano de conta existente por id
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="planoContaId">id do plano de conta</param>        
+            <param name="nome">nome do plano de conta</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.UniqueNome(RThomaz.Domain.Financeiro.Enums.TipoTransacao,System.String)">
+            <summary>
+            Verifica se o nome do plano de conta é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do plano de conta é único.
+            
+            </remarks>        
+            <param name="tipoTransacao">tipo da transação do plano de conta</param>
+            <param name="nome">nome do plano de conta para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.Post(RThomaz.Application.Financeiro.Models.PlanoContaDetailInsertModel)">
+            <summary>
+            Inserir um plano de conta
+            </summary>
+            <remarks>
+            Inseri um novo plano de conta
+            
+            </remarks>
+            <param name="model">model do plano de conta</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.Put(RThomaz.Application.Financeiro.Models.PlanoContaDetailEditModel)">
+            <summary>
+            Atualizar um plano de conta
+            </summary>
+            <remarks>
+            Atualiza um único plano de conta existente por id        
+            
+            </remarks>
+            <param name="model">model do plano de conta</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.PlanoContaController.Delete(System.Int64,RThomaz.Domain.Financeiro.Enums.TipoTransacao)">
+            <summary>
+            Remover um plano de conta
+            </summary>        
+            <remarks>
+            Tenta remover um único plano de conta existente por id 
+            Se o plano de conta já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do plano de conta</param>
+            <param name="tipoTransacao">tipo de transação: Credito = 0 | Debito = 1</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEmailController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de tipos de email
+            </summary>        
+            <remarks>
+            Retorna uma lista de tipos de email 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="tipoPessoa">filtra por tipo de pessoa</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEmailController.Get(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Retornar um tipo de email
+            </summary>        
+            <remarks>
+            Retorna um único tipo de email existente por id
+            </remarks>
+            <param name="id">id do tipo de email</param>
+            <param name="tipoPessoa">Tipo de pessoa do tipo de email</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEmailController.GetSelectViewList(RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Retornar uma lista de tipo de email
+            </summary>        
+            <remarks>
+            Retornar uma lista de tipo de email para ser usada em listas de seleção
+            </remarks>
+            <param name="tipoPessoa">filtra o resultado por tipo de pessoa</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEmailController.UniqueNome(RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.String)">
+            <summary>
+            Verifica se o nome do tipo de email é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do tipo de email é único.
+            
+            </remarks>        
+            <param name="tipoPessoa">tipo pessoa do tipo de email</param>
+            <param name="nome">nome do tipo de email para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEmailController.UniqueNome(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.String)">
+            <summary>
+            Verifica se o nome do tipo de email é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do tipo de email é único.
+            
+            </remarks>        
+            <param name="id">id do tipo de email</param>
+            <param name="tipoPessoa">tipo pessoa do tipo de email</param>
+            <param name="nome">nome do tipo de email para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEmailController.Post(RThomaz.Application.Financeiro.Models.TipoEmailDetailInsertModel)">
+            <summary>
+            Inserir um tipo de email
+            </summary>
+            <remarks>
+            Inseri um novo tipo de email
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model do tipo de email</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEmailController.Put(RThomaz.Application.Financeiro.Models.TipoEmailDetailEditModel)">
+            <summary>
+            Atualizar um tipo de email
+            </summary>
+            <remarks>
+            Atualiza um único tipo de email existente por id
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model do tipo de email</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEmailController.Delete(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Remover um tipo de email
+            </summary>        
+            <remarks>
+            Tenta remover um único tipo de email existente por id 
+            Se o tipo de email já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do tipo de email</param>
+            <param name="tipoPessoa">Tipo de pessoa: PessoaFisica = 0 | PessoaJuridica = 1</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEnderecoController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de tipos de endereço
+            </summary>        
+            <remarks>
+            Retorna uma lista de tipos de endereço 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="tipoPessoa">filtra por tipo de pessoa</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEnderecoController.Get(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Retornar um tipo de endereço
+            </summary>        
+            <remarks>
+            Retorna um único tipo de endereço existente por id
+            </remarks>
+            <param name="id">id do tipo de endereço</param>
+            <param name="tipoPessoa">Tipo de pessoa do tipo de endereço</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEnderecoController.GetSelectViewList(RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Retornar uma lista de tipo de endereço
+            </summary>        
+            <remarks>
+            Retornar uma lista de tipo de endereço para ser usada em listas de seleção
+            </remarks>
+            <param name="tipoPessoa">filtra o resultado por tipo de pessoa</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEnderecoController.UniqueNome(RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.String)">
+            <summary>
+            Verifica se o nome do tipo de endereço é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do tipo de endereço é único.
+            
+            </remarks>        
+            <param name="tipoPessoa">tipo pessoa do tipo de endereço</param>
+            <param name="nome">nome do tipo de endereço para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEnderecoController.UniqueNome(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.String)">
+            <summary>
+            Verifica se o nome do tipo de endereço é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do tipo de endereço é único.
+            
+            </remarks>        
+            <param name="id">id do tipo de endereço</param>
+            <param name="tipoPessoa">tipo pessoa do tipo de endereço</param>
+            <param name="nome">nome do tipo de endereço para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEnderecoController.Post(RThomaz.Application.Financeiro.Models.TipoEnderecoDetailInsertModel)">
+            <summary>
+            Inserir um tipo de endereço
+            </summary>
+            <remarks>
+            Inseri um novo tipo de endereço
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model do tipo de endereço</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEnderecoController.Put(RThomaz.Application.Financeiro.Models.TipoEnderecoDetailEditModel)">
+            <summary>
+            Atualizar um tipo de endereço
+            </summary>
+            <remarks>
+            Atualiza um único tipo de endereço existente por id
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model do tipo de endereço</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoEnderecoController.Delete(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Remover um tipo de endereço
+            </summary>        
+            <remarks>
+            Tenta remover um único tipo de endereço existente por id 
+            Se o tipo de endereço já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do tipo de endereço</param>
+            <param name="tipoPessoa">Tipo de pessoa: PessoaFisica = 0 | PessoaJuridica = 1</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoHomePageController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de tipos de home page
+            </summary>        
+            <remarks>
+            Retorna uma lista de tipos de home page 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="tipoPessoa">filtra por tipo de pessoa</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoHomePageController.Get(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Retornar um tipo de home page
+            </summary>        
+            <remarks>
+            Retorna um único tipo de home page existente por id
+            </remarks>
+            <param name="id">id do tipo de home page</param>
+            <param name="tipoPessoa">Tipo de pessoa do tipo de home page</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoHomePageController.GetSelectViewList(RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Retornar uma lista de tipo de home page
+            </summary>        
+            <remarks>
+            Retornar uma lista de tipo de home page para ser usada em listas de seleção
+            </remarks>
+            <param name="tipoPessoa">filtra o resultado por tipo de pessoa</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoHomePageController.UniqueNome(RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.String)">
+            <summary>
+            Verifica se o nome do tipo de home page é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do tipo de home page é único.
+            
+            </remarks>        
+            <param name="tipoPessoa">tipo pessoa do tipo de home page</param>
+            <param name="nome">nome do tipo de home page para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoHomePageController.UniqueNome(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.String)">
+            <summary>
+            Verifica se o nome do tipo de home page é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do tipo de home page é único.
+            
+            </remarks>        
+            <param name="id">id do tipo de home page</param>
+            <param name="tipoPessoa">tipo pessoa do tipo de home page</param>
+            <param name="nome">nome do tipo de home page para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoHomePageController.Post(RThomaz.Application.Financeiro.Models.TipoHomePageDetailInsertModel)">
+            <summary>
+            Inserir um tipo de home page
+            </summary>
+            <remarks>
+            Inseri um novo tipo de home page
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model do tipo de home page</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoHomePageController.Put(RThomaz.Application.Financeiro.Models.TipoHomePageDetailEditModel)">
+            <summary>
+            Atualizar um tipo de home page
+            </summary>
+            <remarks>
+            Atualiza um único tipo de home page existente por id
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model do tipo de home page</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoHomePageController.Delete(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Remover um tipo de home page
+            </summary>        
+            <remarks>
+            Tenta remover um único tipo de home page existente por id 
+            Se o tipo de home page já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do tipo de home page</param>
+            <param name="tipoPessoa">Tipo de pessoa: PessoaFisica = 0 | PessoaJuridica = 1</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoTelefoneController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de tipos de telefone
+            </summary>        
+            <remarks>
+            Retorna uma lista de tipos de telefone 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="tipoPessoa">filtra por tipo de pessoa</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoTelefoneController.Get(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Retornar um tipo de telefone
+            </summary>        
+            <remarks>
+            Retorna um único tipo de telefone existente por id
+            </remarks>
+            <param name="id">id do tipo de telefone</param>
+            <param name="tipoPessoa">Tipo de pessoa do tipo de telefone</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoTelefoneController.GetSelectViewList(RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Retornar uma lista de tipo de telefone
+            </summary>        
+            <remarks>
+            Retornar uma lista de tipo de telefone para ser usada em listas de seleção
+            </remarks>
+            <param name="tipoPessoa">filtra o resultado por tipo de pessoa</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoTelefoneController.UniqueNome(RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.String)">
+            <summary>
+            Verifica se o nome do tipo de telefone é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do tipo de telefone é único.
+            
+            </remarks>        
+            <param name="tipoPessoa">tipo pessoa do tipo de telefone</param>
+            <param name="nome">nome do tipo de telefone para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoTelefoneController.UniqueNome(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa,System.String)">
+            <summary>
+            Verifica se o nome do tipo de telefone é único
+            </summary>        
+            <remarks>
+            Verifica se o nome do tipo de telefone é único.
+            
+            </remarks>        
+            <param name="id">id do tipo de telefone</param>
+            <param name="tipoPessoa">tipo pessoa do tipo de telefone</param>
+            <param name="nome">nome do tipo de telefone para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoTelefoneController.Post(RThomaz.Application.Financeiro.Models.TipoTelefoneDetailInsertModel)">
+            <summary>
+            Inserir um tipo de telefone
+            </summary>
+            <remarks>
+            Inseri um novo tipo de telefone
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model do tipo de telefone</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoTelefoneController.Put(RThomaz.Application.Financeiro.Models.TipoTelefoneDetailEditModel)">
+            <summary>
+            Atualizar um tipo de telefone
+            </summary>
+            <remarks>
+            Atualiza um único tipo de telefone existente por id
+            
+            - O campo 'nome' deve ser único;
+            
+            </remarks>
+            <param name="model">model do tipo de telefone</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TipoTelefoneController.Delete(System.Guid,RThomaz.Domain.Financeiro.Enums.TipoPessoa)">
+            <summary>
+            Remover um tipo de telefone
+            </summary>        
+            <remarks>
+            Tenta remover um único tipo de telefone existente por id 
+            Se o tipo de telefone já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do tipo de telefone</param>
+            <param name="tipoPessoa">Tipo de pessoa: PessoaFisica = 0 | PessoaJuridica = 1</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TransferenciaController.Get(System.Int64)">
+            <summary>
+            Retornar uma transferência 
+            </summary>        
+            <remarks>
+            Retorna uma única transferência existente por id
+            </remarks>
+            <param name="id">id da transferência</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TransferenciaController.Post(RThomaz.Application.Financeiro.Models.TransferenciaDetailInsertModel)">
+            <summary>
+            Inserir uma transferência
+            </summary>
+            <remarks>
+            Inseri uma nova transferência
+            
+            </remarks>
+            <param name="model">model da transferência</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TransferenciaController.Put(RThomaz.Application.Financeiro.Models.TransferenciaDetailEditModel)">
+            <summary>
+            Atualizar uma transferência
+            </summary>
+            <remarks>
+            Atualiza uma única transferência existente por id
+            
+            </remarks>
+            <param name="model">model da transferência</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TransferenciaController.Delete(System.Int64)">
+            <summary>
+            Remover uma tranferência
+            </summary>        
+            <remarks>
+            Tenta remover uma única tranferência existente por id 
+            Se a tranferência já estiver sendo utilizada pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id da tranferência</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TransferenciaProgramadaController.Get(System.Int64)">
+            <summary>
+            Retornar uma transferência programada
+            </summary>        
+            <remarks>
+            Retorna uma única transferência programada existente por id
+            </remarks>
+            <param name="id">id da transferência programada</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TransferenciaProgramadaController.Post(RThomaz.Application.Financeiro.Models.TransferenciaProgramadaDetailInsertModel)">
+            <summary>
+            Inserir uma transferência programada
+            </summary>
+            <remarks>
+            Inseri uma transferência programada
+            </remarks>
+            <param name="model">model da transferência programada</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TransferenciaProgramadaController.Put(RThomaz.Application.Financeiro.Models.TransferenciaProgramadaDetailEditModel)">
+            <summary>
+            Atualizar uma transferência programada
+            </summary>
+            <remarks>
+            Atualiza uma única transferência programada existente por id
+            </remarks>
+            <param name="model">model da transferência programada</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.TransferenciaProgramadaController.Delete(System.Int64)">
+            <summary>
+            Remover uma transferência programada
+            </summary>        
+            <remarks>
+            Tenta remover uma única transferência programada existente por id 
+            Se a transferência programada já estiver sendo utilizada pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id da transferência programada</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.UsuarioController.GetMasterViewList(RThomaz.Application.Financeiro.Helpers.jQueryDataTable.jQueryDataTableParameter,System.Nullable{System.Boolean})">
+            <summary>
+            Retornar uma lista de usuários
+            </summary>        
+            <remarks>
+            Retorna uma lista de usuários 
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <param name="ativo">filtro de atividade</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.UsuarioController.Get(System.Int64)">
+            <summary>
+            Retornar um usuário
+            </summary>        
+            <remarks>
+            Retorna um único usuário existente por id
+            </remarks>
+            <param name="id">id do usuário</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.UsuarioController.GetSelectViewList(RThomaz.Application.Financeiro.Helpers.SelectListModel.SelectListRequestModel)">
+            <summary>
+            Retornar uma lista de usuários
+            </summary>        
+            <remarks>
+            Retornar uma lista de usuários para ser usado em listas de seleção
+            </remarks>
+            <param name="param">model de parâmetros de busca</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.UsuarioController.UniqueEmail(System.String)">
+            <summary>
+            Verifica se o email do usuário é único
+            </summary>        
+            <remarks>
+            Verifica se o email do usuário é único.        
+            
+            </remarks>        
+            <param name="email">email do usuário para pesquisar</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.UsuarioController.Post(RThomaz.Application.Financeiro.Models.UsuarioDetailInsertModel)">
+            <summary>
+            Inserir um usuário
+            </summary>
+            <remarks>
+            Inseri um novo usuário
+            
+            - O campo 'email' deve ser único;
+            
+            </remarks>
+            <param name="model">model do usuário</param>
+            <response code="201">Created</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.UsuarioController.Put(RThomaz.Application.Financeiro.Models.UsuarioDetailEditModel)">
+            <summary>
+            Atualizar um usuário
+            </summary>
+            <remarks>
+            Atualiza um único usuário existente por id
+            
+            </remarks>
+            <param name="model">model do usuário</param>        
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+        <member name="M:RThomaz.DistributedServices.Financeiro.Controllers.UsuarioController.Delete(System.Int64)">
+            <summary>
+            Remover um usuário
+            </summary>        
+            <remarks>
+            Tenta remover um único usuário existente por id 
+            Se o usuário já estiver sendo utilizado pelo sistema, não remove e retorna false, caso contrário remove e retorna true
+            
+            </remarks>
+            <param name="id">id do usuário</param>
+            <response code="200">OK</response>
+            <response code="400">Bad Request</response>
+            <response code="403">Forbidden</response>
+            <response code="404">Not Found</response>
+            <response code="500">Internal Server Error</response>
+        </member>
+    </members>
+</doc>

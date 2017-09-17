@@ -1,0 +1,4 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Application.Identity\bin\Debug\RThomaz.Application.Identity.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Application.Identity\bin\Debug\RThomaz.Application.Identity.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Application.Identity\obj\Debug\RThomaz.Application.Identity.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Application.Identity\obj\Debug\RThomaz.Application.Identity.pdb

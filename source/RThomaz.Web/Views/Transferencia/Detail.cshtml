@@ -1,0 +1,133 @@
+﻿@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    ViewBag.ApplicationUrl = ConfigurationManager.AppSettings["applicationUrl"].ToString();
+    ViewBag.TemplateUrl = ConfigurationManager.AppSettings["templateUrl"].ToString();
+}
+
+@section styles {
+
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" />
+
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Conta/ContaSharedStyle.css" rel="stylesheet" type="text/css" />
+
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Transferencia/TransferenciaDetailStyle.css" rel="stylesheet" type="text/css" />
+
+}
+
+@section scripts {
+
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/localization/messages_pt_BR.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/select2/select2.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/global/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.min.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/global/js/validation.js" type="text/javascript"></script>
+    <script src="@ViewBag.ApplicationUrl/assets/global/js/NumberFormat154.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Conta/ContaSharedScript.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Transferencia/TransferenciaDetailScript.js" type="text/javascript"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            TransferenciaDetailScript.init();
+        });
+    </script>
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="divForm" class="portlet box grey">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-reorder"></i> Detalhes da Transferência
+                </div>
+                <div class="tools">
+                    <a href="#portlet-config" data-toggle="modal" class="config">
+                    </a>
+                    <a href="" class="reload">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="formDetail" class="form-horizontal" role="form" action="#">
+                    <div class="form-body">
+                        <div id="custom-validate-error" class="alert alert-danger display-hide col-md-9 col-md-offset-3">
+                            <button class="close" data-close="alert"></button>
+                            <span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Conta origem</label>
+                            <div class="divConta col-md-9">
+                                <input id="cmbContaOrigem" name="cmbContaOrigem" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Conta destino</label>
+                            <div class="divConta col-md-9">
+                                <input id="cmbContaDestino" name="cmbContaDestino" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Historico</label>
+                            <div class="col-md-9">
+                                <input id="txtHistorico" name="txtHistorico" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Número</label>
+                            <div class="col-md-9">
+                                <input id="txtNumero" name="txtNumero" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Data vencimento</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input id="txtDataVencimento" name="txtDataVencimento" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Valor vencimento</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-usd"></i>
+                                    </span>
+                                    <input id="txtValorVencimento" name="txtValorVencimento" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Observação</label>
+                            <div class="col-md-9">
+                                <textarea id="txtObservacao" name="txtObservacao" class="form-control minieditor"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions fluid">
+                        <div class="col-md-offset-3 col-md-9">
+                            <input type="submit" value="Salvar" class="btn blue">
+                            <input id="btnCancelar" type="button" value="Cancelar" class="btn default">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+.actionColumn {
+    width: 135px !important;
+}
+
+table.dataTable tbody tr.selected {
+    background-color: #b0bed9;
+}
+
+.table-export-buttons{
+    top: -48px;
+}

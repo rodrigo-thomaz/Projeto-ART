@@ -1,0 +1,233 @@
+﻿@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutPerfil.cshtml";
+    ViewBag.ApplicationUrl = ConfigurationManager.AppSettings["applicationUrl"].ToString();
+    ViewBag.TemplateUrl = ConfigurationManager.AppSettings["templateUrl"].ToString();
+}
+
+@section styles {
+    
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Perfil/PerfilAccountStyle.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Perfil/Account/PersonalInfoStyle.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Perfil/Account/ChangeAvatarStyle.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Perfil/Account/ChangePasswordStyle.css" rel="stylesheet" type="text/css" />
+    
+}
+
+@section scripts {
+    
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Perfil/PerfilAccountScript.js" type="text/javascript"></script>    
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Perfil/Account/PersonalInfoScript.js" type="text/javascript"></script>    
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Perfil/Account/ChangeAvatarScript.js" type="text/javascript"></script>    
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Perfil/Account/ChangePasswordScript.js" type="text/javascript"></script>    
+
+    <script>
+    
+        jQuery(document).ready(function () {
+        
+            PerfilAccountScript.init();
+            PersonalInfoScript.init();
+            ChangePasswordScript.init();
+
+            var avatarStorageObject = null;
+            @if (ViewBag.AvatarStorageObject != null)
+            {
+                @Html.Raw("avatarStorageObject = '" + ViewBag.AvatarStorageObject + "';")
+            }
+            ChangeAvatarScript.init(@ViewBag.Id, avatarStorageObject);
+
+        });
+        
+</script>
+
+}
+
+<input id="txtUsuarioId" type="hidden" value="@ViewBag.Id" />
+
+ <!-- BEGIN PROFILE CONTENT -->
+<div class="profile-content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light">
+                <div class="portlet-title tabbable-line">
+                    <div class="caption caption-md">
+                        <i class="icon-globe theme-font hide"></i>
+                        <span id="spanTitle" class="caption-subject font-blue-madison bold uppercase"></span>
+                    </div>
+                    <ul class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#tab_1_1" data-toggle="tab">Informações pessoais</a>
+                        </li>
+                        <li>
+                            <a href="#tab_1_2" data-toggle="tab">Alterar imagem</a>
+                        </li>
+                        <li>
+                            <a href="#tab_1_3" data-toggle="tab">Alterar senha</a>
+                        </li>
+                        <li>
+                            <a href="#tab_1_4" data-toggle="tab">Configurações de privacidade</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="portlet-body">
+                    <div class="tab-content">
+                        <!-- PERSONAL INFO TAB -->
+                        <div class="tab-pane active" id="tab_1_1">
+                            <form id="formPersonalInfo" role="form" action="#">        
+                                <div id="formPersonalInfo_custom-validate-error" class="alert alert-danger display-hide">
+                                    <button class="close" data-close="alert"></button>
+                                    <span>
+                                    </span>
+                                </div>                        
+                                <div class="form-group">
+                                    <label class="control-label">Email</label>
+                                    <input id="txtEmail" name="txtEmail" readonly="readonly" type="text" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Nome de exibição</label>
+                                    <input id="txtNomeExibicao" name="txtNomeExibicao" type="text" class="form-control" />
+                                </div>
+                                <div class="margiv-top-10">
+                                    <input type="submit" class="btn green-haze" value="Salvar">
+                                    <input type="button" class="btn default cancelAccount" value="Cancelar">                                    
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END PERSONAL INFO TAB -->
+                        <!-- CHANGE AVATAR TAB -->
+                        <div class="tab-pane" id="tab_1_2">
+                            <p>
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
+                            </p>
+                            <form id="formChangeAvatar" action="#" role="form">                                
+                                <div class="form-group">
+                                    <div class="fileinput fileinput-new" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                            <img id="imgAvatar" src="@ViewBag.ApplicationUrl/assets/admin/img/avatar1.png" alt="" />
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
+                                        </div>
+                                        <div>
+                                            <span class="btn default btn-file">
+                                                <span class="fileinput-new">
+                                                    Selecione uma imagem
+                                                </span>
+                                                <span class="fileinput-exists">
+                                                    Alterar
+                                                </span>
+                                                <input type="file" id="fileAvatar" name="fileAvatar">
+                                            </span>
+                                            <a id="btnRemoverImagem" href="#" class="btn default fileinput-exists" data-dismiss="fileinput">
+                                                Remover
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix margin-top-10">
+                                        <span class="label label-danger">Atenção! </span>
+                                        <span>Você deve selecionar imagens do tamanho 200X150. </span>
+                                    </div>
+                                </div>
+                                <div class="margin-top-10">
+                                    <input id="btnChangeAvatar" type="submit" class="btn green-haze" value="Salvar" disabled>
+                                    <input type="button" class="btn default cancelAccount" value="Cancelar">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END CHANGE AVATAR TAB -->
+                        <!-- CHANGE PASSWORD TAB -->
+                        <div class="tab-pane" id="tab_1_3">
+                            <form id="formChangePassword" action="#">
+                                <div id="formChangePassword_custom-validate-success" class="alert alert-success display-hide">
+                                    <button class="close" data-close="alert"></button>
+                                    Senha alterada com sucesso!
+                                </div>
+                                <div id="formChangePassword_custom-validate-error" class="alert alert-danger display-hide">
+                                    <button class="close" data-close="alert"></button>
+                                    <span>
+                                    </span>
+                                </div>                        
+                                <div class="form-group">
+                                    <label class="control-label">Senha atual</label>
+                                    <input id="txtSenhaAntiga" name="txtSenhaAntiga" type="password" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Nova senha</label>
+                                    <input id="txtNovaSenha" name="txtNovaSenha" type="password" class="form-control" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Confirme a senha</label>
+                                    <input id="txtConfirmaSenha" name="txtConfirmaSenha" type="password" class="form-control" />
+                                </div>
+                                <div class="margin-top-10">
+                                    <input type="submit" class="btn green-haze" value="Alterar senha">
+                                    <input type="button" class="btn default cancelAccount" value="Cancelar">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END CHANGE PASSWORD TAB -->
+                        <!-- PRIVACY SETTINGS TAB -->
+                        <div class="tab-pane" id="tab_1_4">
+                            <form action="#">
+                                <table class="table table-light table-hover">
+                                    <tr>
+                                        <td>
+                                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus..
+                                        </td>
+                                        <td>
+                                            <label class="uniform-inline">
+                                                <input type="radio" name="optionsRadios1" value="option1" />
+                                                Yes
+                                            </label>
+                                            <label class="uniform-inline">
+                                                <input type="radio" name="optionsRadios1" value="option2" checked />
+                                                No
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Enim eiusmod high life accusamus terry richardson ad squid wolf moon
+                                        </td>
+                                        <td>
+                                            <label class="uniform-inline">
+                                                <input type="checkbox" value="" /> Yes
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Enim eiusmod high life accusamus terry richardson ad squid wolf moon
+                                        </td>
+                                        <td>
+                                            <label class="uniform-inline">
+                                                <input type="checkbox" value="" /> Yes
+                                            </label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Enim eiusmod high life accusamus terry richardson ad squid wolf moon
+                                        </td>
+                                        <td>
+                                            <label class="uniform-inline">
+                                                <input type="checkbox" value="" /> Yes
+                                            </label>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <!--end profile-settings-->
+                                <div class="margin-top-10">
+                                    <input type="submit" class="btn green-haze" value="Salvar">
+                                    <input type="button" class="btn default cancelAccount" value="Cancelar">
+                                </div>
+                            </form>
+                        </div>
+                        <!-- END PRIVACY SETTINGS TAB -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END PROFILE CONTENT -->

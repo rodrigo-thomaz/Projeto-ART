@@ -1,0 +1,83 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RThomaz.Infra.CrossCutting.Identity.dll.config
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RThomaz.Infra.CrossCutting.Identity.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RThomaz.Infra.CrossCutting.Identity.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\AutoMapper.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\EntityFramework.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\EntityFramework.SqlServer.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Newtonsoft.Json.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RestSharp.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\System.Web.Mvc.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Twilio.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\AutoMapper.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\EntityFramework.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\EntityFramework.SqlServer.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Newtonsoft.Json.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RestSharp.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\System.Web.Mvc.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Twilio.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\pt-br\Microsoft.AspNet.Identity.Core.resources.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\obj\Debug\RThomaz.Infra.CrossCutting.Identity.csprojResolveAssemblyReference.cache
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\obj\Debug\RThomaz.Infra.CrossCutting.Identity.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Identity\obj\Debug\RThomaz.Infra.CrossCutting.Identity.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RThomaz.Infra.CrossCutting.Identity.dll.config
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RThomaz.Infra.CrossCutting.Identity.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RThomaz.Infra.CrossCutting.Identity.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\AutoMapper.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\EntityFramework.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.IdentityModel.Logging.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.IdentityModel.Tokens.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.Cookies.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.OAuth.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RestSharp.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\System.Web.Mvc.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Twilio.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\AutoMapper.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\EntityFramework.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.IdentityModel.Logging.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.IdentityModel.Tokens.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.Cookies.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Microsoft.Owin.Security.OAuth.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\RestSharp.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\System.Web.Mvc.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\Twilio.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\bin\Debug\pt-br\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\obj\Debug\RThomaz.Infra.CrossCutting.Identity.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\obj\Debug\RThomaz.Infra.CrossCutting.Identity.csproj.CoreCompileInputs.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\obj\Debug\RThomaz.Infra.CrossCutting.Identity.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Identity\obj\Debug\RThomaz.Infra.CrossCutting.Identity.pdb

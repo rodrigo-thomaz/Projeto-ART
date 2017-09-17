@@ -1,0 +1,28 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Entities.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Infra.Data.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Enums.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\EntityFramework.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Entities.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Infra.Data.Core.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Enums.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\EntityFramework.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.csprojResolveAssemblyReference.cache
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Entities.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Infra.Data.Core.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Enums.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\EntityFramework.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Entities.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Infra.Data.Core.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Infra.Data.Core.dll.config
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Financeiro.Enums.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\bin\Debug\EntityFramework.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.csproj.CoreCompileInputs.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Financeiro.Interfaces.Repositories.pdb

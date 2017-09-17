@@ -1,0 +1,11 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\bin\Debug\RThomaz.DistributedServices.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\bin\Debug\RThomaz.DistributedServices.Core.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\bin\Debug\Newtonsoft.Json.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\bin\Debug\System.Net.Http.Formatting.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\bin\Debug\System.Web.Http.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\bin\Debug\Newtonsoft.Json.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\bin\Debug\System.Net.Http.Formatting.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\bin\Debug\System.Web.Http.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\obj\Debug\RThomaz.DistributedServices.Core.csprojResolveAssemblyReference.cache
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\obj\Debug\RThomaz.DistributedServices.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.DistributedServices.Core\obj\Debug\RThomaz.DistributedServices.Core.pdb

@@ -1,0 +1,228 @@
+﻿<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+    <li class="sidebar-toggler-wrapper">
+        <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <div class="sidebar-toggler">
+        </div>
+        <!-- END SIDEBAR TOGGLER BUTTON -->
+    </li>
+    <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+    <li class="sidebar-search-wrapper">
+        <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+        <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+        <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+        <form class="sidebar-search " action="#" method="POST">
+            <a href="javascript:;" class="remove">
+                <i class="icon-close"></i>
+            </a>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search...">
+                <span class="input-group-btn">
+                    <a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+                </span>
+            </div>
+        </form>
+        <!-- END RESPONSIVE QUICK SEARCH FORM -->
+    </li>
+    <li id="menuDashboard">
+        <a href="/" title="Dashboard">
+            <i class="icon-home"></i>        <span class="title">
+                Dashboard
+            </span>
+        </a>
+    </li>
+    <li id="menuMovimento">
+        <a href="/Movimento" title="Movimentações">
+            <i class="icon-home"></i>        <span class="title">
+                Movimentações
+            </span>
+        </a>
+    </li>
+    <li id="menuLancamento">
+        <a href="/Lancamento/Index/menuLancamento?class=fa%20fa-dollar" title="Lançamentos">
+            <i class="fa fa-dollar"></i>        <span class="title">
+                Lançamentos
+            </span>
+        </a>
+        <ul class="sub-menu">
+            <li id="menuLancamentoPagarReceber">
+                <a href="/LancamentoPagarReceber" title="Contas pagar/receber">
+                    <span class="title">
+                        Contas pagar/receber
+                    </span>
+                </a>
+            </li>
+            <li id="menuLancamentoPagoRecebido">
+                <a href="/LancamentoPagoRecebido" title="Contas pagas/recebidas">
+                    <span class="title">
+                        Contas pagas/recebidas
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li id="menuLancamentoProgramado">
+        <a href="/LancamentoProgramado" title="Programação">
+            <i class="icon-calendar"></i>        <span class="title">
+                Programação
+            </span>
+        </a>
+    </li>
+    <li id="menuCentroCustos">
+        <a href="/CentroCusto" title="Centro de custos">
+            <i class="fa fa-sitemap"></i>        <span class="title">
+                Centro de custos
+            </span>
+        </a>
+    </li>
+    <li id="menuPlanoContas">
+        <a href="/#" title="Plano de contas">
+            <i class="fa fa-calculator"></i>        <span class="title">
+                Plano de contas
+            </span>
+        </a>
+        <ul class="sub-menu">
+            <li id="menuPlanoContaContaPagar">
+                <a href="/PlanoConta/?tipotransacao=1" title="Contas a pagar">
+                    <span class="title">
+                        Contas a pagar
+                    </span>
+                </a>
+            </li>
+            <li id="menuPlanoContaContaReceber">
+                <a href="/PlanoConta/?tipotransacao=0" title="Contas a receber">
+                    <span class="title">
+                        Contas a receber
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li id="menuBanco">
+        <a href="/Banco" title="Bancos">
+            <i class="fa fa-bank"></i>        <span class="title">
+                Bancos
+            </span>
+        </a>
+    </li>
+    <li id="menuBandeiraCartao">
+        <a href="/BandeiraCartao" title="Bandeiras de cartão">
+            <i class="fa fa-bank"></i>        <span class="title">
+                Bandeiras de cartão
+            </span>
+        </a>
+    </li>
+    <li id="menuConta">
+        <a href="/Conta" title="Contas">
+            <i class="icon-credit-card"></i>        <span class="title">
+                Contas
+            </span>
+        </a>
+    </li>    
+    <li id="menuPessoa">
+        <a href="/Pessoa" title="Contatos">
+            <i class="icon-users"></i>        <span class="title">
+                Contatos
+            </span>
+        </a>
+    </li>
+    <li id="menuUsuario">
+        <a href="/Usuario" title="Usuários">
+            <i class="icon-user"></i>        <span class="title">
+                Usuários
+            </span>
+        </a>
+    </li>
+    <li id="menuTipoEmail">
+        <a href="/TipoEmail" title="Tipos de email">
+            <i class="icon-user"></i>        <span class="title">
+                Tipos de email
+            </span>
+        </a>
+        <ul class="sub-menu">
+            <li id="menuTipoEmailPessoaFisica">
+                <a href="/TipoEmail/?tipoPessoa=0" title="Pessoa física">
+                    <span class="title">
+                        Pessoa física
+                    </span>
+                </a>
+            </li>
+            <li id="menuTipoEmailPessoaJuridica">
+                <a href="/TipoEmail/?tipoPessoa=1" title="Pessoa jurídica">
+                    <span class="title">
+                        Pessoa jurídica
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li id="menuTipoEndereco">
+        <a href="/TipoEndereco" title="Tipos de endereço">
+            <i class="icon-user"></i>        <span class="title">
+                Tipos de endereço
+            </span>
+        </a>
+        <ul class="sub-menu">
+            <li id="menuTipoEnderecoPessoaFisica">
+                <a href="/TipoEndereco/?tipoPessoa=0" title="Pessoa física">
+                    <span class="title">
+                        Pessoa física
+                    </span>
+                </a>
+            </li>
+            <li id="menuTipoEnderecoPessoaJuridica">
+                <a href="/TipoEndereco/?tipoPessoa=1" title="Pessoa jurídica">
+                    <span class="title">
+                        Pessoa jurídica
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li id="menuTipoHomePage">
+        <a href="/TipoHomePage" title="Tipos de home page">
+            <i class="icon-user"></i>        <span class="title">
+                Tipos de home page
+            </span>
+        </a>
+        <ul class="sub-menu">
+            <li id="menuTipoHomePagePessoaFisica">
+                <a href="/TipoHomePage/?tipoPessoa=0" title="Pessoa física">
+                    <span class="title">
+                        Pessoa física
+                    </span>
+                </a>
+            </li>
+            <li id="menuTipoHomePagePessoaJuridica">
+                <a href="/TipoHomePage/?tipoPessoa=1" title="Pessoa jurídica">
+                    <span class="title">
+                        Pessoa jurídica
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li id="menuTipoTelefone">
+        <a href="/TipoTelefone" title="Tipos de telefone">
+            <i class="icon-user"></i>        <span class="title">
+                Tipos de telefone
+            </span>
+        </a>
+        <ul class="sub-menu">
+            <li id="menuTipoTelefonePessoaFisica">
+                <a href="/TipoTelefone/?tipoPessoa=0" title="Pessoa física">
+                    <span class="title">
+                        Pessoa física
+                    </span>
+                </a>
+            </li>
+            <li id="menuTipoTelefonePessoaJuridica">
+                <a href="/TipoTelefone/?tipoPessoa=1" title="Pessoa jurídica">
+                    <span class="title">
+                        Pessoa jurídica
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </li>    
+</ul>

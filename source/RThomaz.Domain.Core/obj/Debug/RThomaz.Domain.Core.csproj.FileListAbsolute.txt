@@ -1,0 +1,11 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Core\bin\Debug\RThomaz.Domain.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Core\bin\Debug\RThomaz.Domain.Core.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Core\obj\Debug\RThomaz.Domain.Core.csprojResolveAssemblyReference.cache
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Core\obj\Debug\RThomaz.Domain.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Core\obj\Debug\RThomaz.Domain.Core.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Core\bin\Debug\RThomaz.Domain.Core.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Core\bin\Debug\RThomaz.Domain.Core.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Core\obj\Debug\RThomaz.Domain.Core.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Core\obj\Debug\RThomaz.Domain.Core.csproj.CoreCompileInputs.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Core\obj\Debug\RThomaz.Domain.Core.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Core\obj\Debug\RThomaz.Domain.Core.pdb

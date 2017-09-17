@@ -1,0 +1,21 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\bin\Debug\RThomaz.Infra.CrossCutting.Email.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\bin\Debug\RThomaz.Infra.CrossCutting.Email.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\bin\Debug\Newtonsoft.Json.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\bin\Debug\SendGrid.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\bin\Debug\Newtonsoft.Json.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\bin\Debug\SendGrid.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\bin\Debug\SendGrid.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\obj\Debug\RThomaz.Infra.CrossCutting.Email.csprojResolveAssemblyReference.cache
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\obj\Debug\RThomaz.Infra.CrossCutting.Email.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.CrossCutting.Email\obj\Debug\RThomaz.Infra.CrossCutting.Email.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\bin\Debug\RThomaz.Infra.CrossCutting.Email.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\bin\Debug\RThomaz.Infra.CrossCutting.Email.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\bin\Debug\SendGrid.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\bin\Debug\SendGrid.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\bin\Debug\SendGrid.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\obj\Debug\RThomaz.Infra.CrossCutting.Email.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\obj\Debug\RThomaz.Infra.CrossCutting.Email.csproj.CoreCompileInputs.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\obj\Debug\RThomaz.Infra.CrossCutting.Email.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Infra.CrossCutting.Email\obj\Debug\RThomaz.Infra.CrossCutting.Email.pdb

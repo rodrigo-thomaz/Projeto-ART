@@ -1,0 +1,4 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Enums\bin\Debug\RThomaz.Domain.Identity.Enums.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Enums\bin\Debug\RThomaz.Domain.Identity.Enums.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Enums\obj\Debug\RThomaz.Domain.Identity.Enums.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Enums\obj\Debug\RThomaz.Domain.Identity.Enums.pdb

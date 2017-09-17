@@ -1,0 +1,208 @@
+﻿@using System.Configuration
+
+@{
+    Layout = "~/Views/Shared/_LayoutAuthenticated.cshtml";
+    ViewBag.ApplicationUrl = ConfigurationManager.AppSettings["applicationUrl"].ToString();
+    ViewBag.TemplateUrl = ConfigurationManager.AppSettings["templateUrl"].ToString();
+}
+
+@section styles {
+
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/datatables/extensions/Scroller/css/dataTables.scroller.min.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/datatables/extensions/ColReorder/css/dataTables.colReorder.min.css" rel="stylesheet" type="text/css" />
+    <link href="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" type="text/css" />
+
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/Conta/ContaSharedStyle.css" rel="stylesheet" type="text/css" />
+
+    <link href="@ViewBag.ApplicationUrl/assets/admin/css/views/LancamentoProgramado/LancamentoProgramadoDetailStyle.css" rel="stylesheet" type="text/css" />
+
+}
+
+@section scripts {
+
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/jquery-validation/js/localization/messages_pt_BR.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-summernote/summernote.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/select2/select2.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/datatables/all.min.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="@ViewBag.TemplateUrl/theme/assets/global/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.pt-BR.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/global/plugins/jquery-maskmoney-master/dist/jquery.maskMoney.min.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/global/js/validation.js" type="text/javascript"></script>
+    <script src="@ViewBag.ApplicationUrl/assets/global/js/NumberFormat154.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/PlanoConta/PlanoContaSharedScript.js" type="text/javascript"></script>
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/CentroCusto/CentroCustoSharedScript.js" type="text/javascript"></script>
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Conta/ContaSharedScript.js" type="text/javascript"></script>
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Pessoa/PessoaSharedScript.js" type="text/javascript"></script>
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/Rateio/RateioSharedScript.js" type="text/javascript"></script>
+
+    <script src="@ViewBag.ApplicationUrl/assets/admin/js/views/LancamentoProgramado/LancamentoProgramadoDetailScript.js" type="text/javascript"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            RateioSharedScript.init();
+            LancamentoProgramadoDetailScript.init();
+        });
+    </script>
+    
+}
+
+<input id="txtLancamentoProgramadoId" type="hidden" />
+<input id="txtTipoTransacao" type="hidden" />
+
+<div class="row">
+    <div class="col-md-12">
+        <div id="divForm" class="portlet box grey">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-reorder"></i> Programação
+                </div>
+                <div class="tools">
+                    <a href="#portlet-config" data-toggle="modal" class="config">
+                    </a>
+                    <a href="" class="reload">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <form id="formDetail" class="form-horizontal" role="form" action="#">
+                    <div class="form-body">
+                        <div id="custom-validate-error" class="alert alert-danger display-hide col-md-9 col-md-offset-3">
+                            <button class="close" data-close="alert"></button>
+                            <span>
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label id="lblPessoaTitle" class="col-md-3 control-label"></label>
+                            <div class="col-md-9">
+                                <input id="cmbPessoa" name="cmbPessoa" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Conta</label>
+                            <div class="divConta col-md-9">
+                                <input id="cmbConta" name="cmbConta" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Historico</label>
+                            <div class="col-md-9">
+                                <input id="txtHistorico" name="txtHistorico" type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Valor vencimento</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-usd"></i>
+                                    </span>
+                                    <input id="txtValorVencimento" name="txtValorVencimento" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Data inicial</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input id="txtDataInicial" name="txtDataInicial" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Data final</label>
+                            <div class="col-md-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                    <input id="txtDataFinal" name="txtDataFinal" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-9">
+                                <button id="btnAddRateio" class="btn blue">
+                                    Novo rateio <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Rateio</label>
+                            <div class="col-md-9">
+                                <div class="portlet-body">
+                                    <div class="table-scrollable">
+                                        <table class="table table-bordered table-hover" id="dataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Plano de contas</th>
+                                                    <th>Centro de custos</th>
+                                                    <th>Observação</th>
+                                                    <th style="text-align: right;">ValorVencimento</th>
+                                                    <th></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Frequência</label>
+                            <div class="col-md-9">
+                                <select id="cmbFrequencia" name="cmbFrequencia" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                        <div id="divDia" class="form-group">
+                            <label class="col-md-3 control-label">Dia</label>
+                            <div class="col-md-9">
+                                <select id="cmbDia" name="cmbDia" class="form-control">
+                                </select>
+                            </div>
+                        </div>
+                        <div id="divDiaDaSemana" class="form-group">
+                            <label class="col-md-3 control-label">Dias da semana</label>
+                            <div class="col-md-9">
+                                <div class="checkbox-list">
+                                    <label class="checkbox-inline"><input id="chkHasDomingo" name="chkDiaDaSemana" type="checkbox"> Dom</label>
+                                    <label class="checkbox-inline"><input id="chkHasSegunda" name="chkDiaDaSemana" type="checkbox"> Seg</label>
+                                    <label class="checkbox-inline"><input id="chkHasTerca" name="chkDiaDaSemana" type="checkbox"> Ter</label>
+                                    <label class="checkbox-inline"><input id="chkHasQuarta" name="chkDiaDaSemana" type="checkbox"> Qua</label>
+                                    <label class="checkbox-inline"><input id="chkHasQuinta" name="chkDiaDaSemana" type="checkbox"> Qui</label>
+                                    <label class="checkbox-inline"><input id="chkHasSexta" name="chkDiaDaSemana" type="checkbox"> Sex</label>
+                                    <label class="checkbox-inline"><input id="chkHasSabado" name="chkDiaDaSemana" type="checkbox"> Sab</label>
+                                </div>
+                                <input type="hidden" id="DiaDaSemanaField" name="DiaDaSemanaField" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Observação</label>
+                            <div class="col-md-9">
+                                <textarea id="txtObservacao" name="txtObservacao" class="form-control minieditor"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions fluid">
+                        <div class="col-md-offset-3 col-md-9">
+                            <input type="submit" value="Salvar" class="btn blue">
+                            <input id="btnCancelar" type="button" value="Cancelar" class="btn default">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

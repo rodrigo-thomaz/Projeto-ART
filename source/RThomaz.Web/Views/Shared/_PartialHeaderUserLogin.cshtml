@@ -1,0 +1,61 @@
+﻿@using System.Configuration
+@using RThomaz.Web.Helpers
+
+@{
+    ViewBag.ApplicationUrl = ConfigurationManager.AppSettings["applicationUrl"].ToString();
+    ViewBag.TemplateUrl = ConfigurationManager.AppSettings["templateUrl"].ToString();
+    ViewBag.AppWebApiUrl = ConfigurationManager.AppSettings["appWebApiUrl"].ToString();
+}
+
+<li class="dropdown dropdown-user">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+        <img id="headerImageAvatar" alt="" class="img-circle" src="@ViewBag.ApplicationUrl/assets/admin/img/avatar.png" />
+        <span id="headerNomeExibicao" class="username username-hide-on-mobile">
+            @*Olá, Fulano*@
+        </span>
+        <i class="fa fa-angle-down"></i>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-default">
+        <li>
+            <a href="/Perfil">
+                <i class="icon-user"></i> Perfil
+            </a>
+        </li>        
+        <li>
+            <a href="/Calendario">
+                <i class="icon-calendar"></i> Calendário
+            </a>
+        </li>
+        <li>
+            <a href="/Mensagem">
+                <i class="icon-envelope-open"></i> Mensagens <span class="badge badge-danger">
+                    3
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="/Tarefa">
+                <i class="icon-check"></i> Tarefas <span class="badge badge-success">
+                    7
+                </span>
+            </a>
+        </li>
+        <li class="divider">
+        </li>
+        <li>
+            <a href="/Seguranca/LockScreen">
+                <i class="icon-settings"></i> Configurações
+            </a>
+        </li>
+        <li>
+            <a href="@ViewBag.AppWebApiUrl/swagger" target="_blank">
+                <i class="icon-settings"></i> API
+            </a>
+        </li>
+        <li>
+            <a id="btnLogout" href="#">
+                <i class="icon-key"></i> Sair
+            </a>
+        </li>
+    </ul>
+</li>

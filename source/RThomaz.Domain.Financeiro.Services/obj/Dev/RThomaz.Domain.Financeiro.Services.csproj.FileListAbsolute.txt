@@ -1,0 +1,680 @@
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - Familia.txt
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - Grande Grupo.txt
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - Ocupacao.txt
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - Sinonimo.txt
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - SubGrupo Principal.txt
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - SubGrupo.txt
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ad.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ae.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\af.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ag.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ai.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\al.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\am.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\an.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ao.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ar.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\as.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\at.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\au.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\aw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ax.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\az.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ba.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bb.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bd.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\be.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bf.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bh.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bi.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bj.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bo.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\br.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bs.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bt.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bv.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\by.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ca.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\catalonia.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cc.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cd.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cf.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ch.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ci.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ck.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cl.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\co.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cs.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cu.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cv.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cx.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cy.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\de.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\dj.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\dk.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\dm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\do.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\dz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ec.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ee.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\eg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\eh.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\england.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\er.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\es.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\et.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\europeanunion.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fam.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fi.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fj.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fk.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fo.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ga.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gb.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gd.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ge.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gf.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gh.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gi.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gl.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gp.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gq.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gs.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gt.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gu.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gy.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hk.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ht.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hu.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\id.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ie.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\il.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\in.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\io.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\iq.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ir.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\is.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\it.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\jm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\jo.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\jp.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ke.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kh.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ki.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\km.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kp.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ky.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\la.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lb.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lc.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\li.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lk.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ls.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lt.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lu.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lv.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ly.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ma.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mc.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\md.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\me.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mh.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mk.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ml.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mo.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mp.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mq.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ms.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mt.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mu.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mv.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mx.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\my.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\na.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nc.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ne.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nf.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ng.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ni.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nl.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\no.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\np.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nu.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\om.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pa.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pe.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pf.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ph.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pk.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pl.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ps.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pt.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\py.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\qa.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\re.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\readme.txt
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ro.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\rs.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ru.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\rw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sa.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sb.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sc.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\scotland.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sd.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\se.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sh.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\si.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sj.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sk.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sl.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\so.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\st.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sv.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sy.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tc.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\td.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tf.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\th.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tj.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tk.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tl.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\to.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tr.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tt.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tv.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ua.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ug.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\um.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\us.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\uy.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\uz.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\va.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vc.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ve.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vg.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vi.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vn.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vu.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\wales.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\wf.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ws.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ye.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\yt.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\za.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\zm.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\zw.png
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.dll.config
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\AutoMapper.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\BouncyCastle.Crypto.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\EntityFramework.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\EntityFramework.SqlServer.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.PlatformServices.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.PlatformServices.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Storage.v1.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\log4net.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.Owin.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.Cookies.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.OAuth.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Newtonsoft.Json.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Owin.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Core.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Entities.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Enums.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Interfaces.Services.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.DTOs.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Email.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.ExceptionHandling.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Storage.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.Data.Persistence.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.CSharp.HTTP.Client.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Net.Http.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Net.Http.Formatting.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Security.Cryptography.Algorithms.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Security.Cryptography.Encoding.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Security.Cryptography.Primitives.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Security.Cryptography.X509Certificates.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Zlib.Portable.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Core.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Enums.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Interfaces.Services.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.DTOs.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Email.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.ExceptionHandling.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Entities.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Storage.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.Data.Persistence.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\AutoMapper.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\EntityFramework.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\EntityFramework.SqlServer.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.PlatformServices.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.PlatformServices.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Core.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Core.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.PlatformServices.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.PlatformServices.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Storage.v1.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Storage.v1.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\log4net.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.Core.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.Owin.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.Cookies.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.OAuth.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Newtonsoft.Json.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.CSharp.HTTP.Client.pdb
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Net.Http.Formatting.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\Zlib.Portable.xml
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\bin\Dev\pt-br\Microsoft.AspNet.Identity.Core.resources.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\obj\Dev\RThomaz.Domain.Financeiro.Services.csprojResolveAssemblyReference.cache
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\obj\Dev\RThomaz.Domain.Financeiro.Services.dll
+C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Financeiro.Services\obj\Dev\RThomaz.Domain.Financeiro.Services.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - Familia.txt
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - Grande Grupo.txt
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - Ocupacao.txt
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - Sinonimo.txt
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - SubGrupo Principal.txt
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\CBO\CBO2002 - SubGrupo.txt
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ad.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ae.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\af.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ag.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ai.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\al.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\am.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\an.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ao.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ar.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\as.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\at.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\au.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\aw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ax.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\az.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ba.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bb.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bd.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\be.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bf.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bh.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bi.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bj.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bo.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\br.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bs.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bt.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bv.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\by.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\bz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ca.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\catalonia.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cc.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cd.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cf.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ch.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ci.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ck.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cl.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\co.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cs.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cu.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cv.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cx.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cy.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\cz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\de.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\dj.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\dk.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\dm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\do.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\dz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ec.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ee.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\eg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\eh.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\england.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\er.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\es.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\et.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\europeanunion.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fam.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fi.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fj.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fk.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fo.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\fr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ga.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gb.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gd.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ge.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gf.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gh.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gi.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gl.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gp.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gq.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gs.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gt.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gu.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\gy.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hk.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ht.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\hu.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\id.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ie.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\il.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\in.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\io.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\iq.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ir.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\is.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\it.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\jm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\jo.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\jp.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ke.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kh.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ki.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\km.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kp.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ky.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\kz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\la.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lb.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lc.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\li.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lk.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ls.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lt.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lu.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\lv.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ly.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ma.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mc.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\md.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\me.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mh.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mk.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ml.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mo.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mp.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mq.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ms.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mt.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mu.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mv.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mx.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\my.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\mz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\na.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nc.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ne.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nf.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ng.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ni.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nl.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\no.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\np.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nu.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\nz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\om.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pa.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pe.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pf.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ph.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pk.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pl.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ps.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pt.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\pw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\py.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\qa.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\re.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\readme.txt
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ro.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\rs.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ru.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\rw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sa.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sb.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sc.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\scotland.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sd.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\se.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sh.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\si.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sj.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sk.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sl.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\so.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\st.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sv.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sy.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\sz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tc.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\td.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tf.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\th.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tj.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tk.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tl.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\to.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tr.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tt.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tv.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\tz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ua.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ug.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\um.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\us.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\uy.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\uz.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\va.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vc.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ve.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vg.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vi.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vn.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\vu.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\wales.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\wf.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ws.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\ye.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\yt.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\za.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\zm.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\InitialData\Files\Pais\zw.png
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.dll.config
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\AutoMapper.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\BouncyCastle.Crypto.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\EntityFramework.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\EntityFramework.SqlServer.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.PlatformServices.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Core.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.PlatformServices.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Storage.v1.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\log4net.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.Core.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.Cookies.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.OAuth.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Newtonsoft.Json.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Owin.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Core.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Entities.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Enums.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Interfaces.Services.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.DTOs.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Email.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.ExceptionHandling.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Storage.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.Data.Persistence.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.CSharp.HTTP.Client.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Net.Http.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Net.Http.Formatting.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Security.Cryptography.Algorithms.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Security.Cryptography.Encoding.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Security.Cryptography.Primitives.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Security.Cryptography.X509Certificates.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Zlib.Portable.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Core.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Enums.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Interfaces.Services.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Interfaces.Services.dll.config
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.DTOs.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Services.DTOs.dll.config
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Email.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.ExceptionHandling.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Domain.Financeiro.Entities.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Storage.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.CrossCutting.Storage.dll.config
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.Data.Persistence.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\RThomaz.Infra.Data.Persistence.dll.config
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\AutoMapper.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\EntityFramework.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\EntityFramework.SqlServer.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.PlatformServices.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Auth.PlatformServices.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Core.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Core.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.PlatformServices.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.PlatformServices.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Storage.v1.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Google.Apis.Storage.v1.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\log4net.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.Core.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.Cookies.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Microsoft.Owin.Security.OAuth.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Newtonsoft.Json.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.CSharp.HTTP.Client.pdb
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\SendGrid.CSharp.HTTP.Client.dll.config
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\System.Net.Http.Formatting.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\Zlib.Portable.xml
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\bin\Dev\pt-br\Microsoft.AspNet.Identity.Core.resources.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\obj\Dev\RThomaz.Domain.Financeiro.Services.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\obj\Dev\RThomaz.Domain.Financeiro.Services.csproj.CoreCompileInputs.cache
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\obj\Dev\RThomaz.Domain.Financeiro.Services.dll
+C:\Users\rodrigo.RTHOMAZ.001\Documents\GitHub\Projeto-ART\source\RThomaz.Domain.Financeiro.Services\obj\Dev\RThomaz.Domain.Financeiro.Services.pdb
