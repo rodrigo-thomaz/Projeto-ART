@@ -1,6 +1,0 @@
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Presentation.WebPages\bin\RThomaz.Presentation.WebPages.dll.config
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Presentation.WebPages\bin\RThomaz.Presentation.WebPages.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Presentation.WebPages\bin\RThomaz.Presentation.WebPages.pdb
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Presentation.WebPages\obj\Debug\RThomaz.Presentation.WebPages.csprojResolveAssemblyReference.cache
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Presentation.WebPages\obj\Debug\RThomaz.Presentation.WebPages.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Presentation.WebPages\obj\Debug\RThomaz.Presentation.WebPages.pdb

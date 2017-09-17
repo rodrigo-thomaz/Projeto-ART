@@ -1,4 +1,0 @@
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.Data.Identity.Repositories\bin\Debug\RThomaz.Infra.Data.Identity.Repositories.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.Data.Identity.Repositories\bin\Debug\RThomaz.Infra.Data.Identity.Repositories.pdb
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.Data.Identity.Repositories\obj\Debug\RThomaz.Infra.Data.Identity.Repositories.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Infra.Data.Identity.Repositories\obj\Debug\RThomaz.Infra.Data.Identity.Repositories.pdb

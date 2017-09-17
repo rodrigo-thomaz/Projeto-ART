@@ -1,4 +1,0 @@
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Entities\bin\Debug\RThomaz.Domain.Identity.Entities.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Entities\bin\Debug\RThomaz.Domain.Identity.Entities.pdb
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Entities\obj\Debug\RThomaz.Domain.Identity.Entities.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Entities\obj\Debug\RThomaz.Domain.Identity.Entities.pdb

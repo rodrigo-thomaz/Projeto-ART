@@ -1,4 +1,0 @@
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Identity.Interfaces.Repositories.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Interfaces.Repositories\bin\Debug\RThomaz.Domain.Identity.Interfaces.Repositories.pdb
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Identity.Interfaces.Repositories.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Interfaces.Repositories\obj\Debug\RThomaz.Domain.Identity.Interfaces.Repositories.pdb

@@ -280,16 +280,6 @@ void printAddressSerial(byte deviceAddress[8])
   }
 }
 
-void printAddressDisplay(byte deviceAddress[8])
-{
-  for (uint8_t i = 0; i < 8; i++)
-  {
-    // zero pad the address if necessary
-    if (deviceAddress[i] < 16) display.print("0");
-    display.print(deviceAddress[i], HEX);
-  }
-}
-
 void printDataSerial(TemperatureSensor temperatureSensor)
 {
   Serial.print("Address: "); 
@@ -315,6 +305,28 @@ void printDataSerial(TemperatureSensor temperatureSensor)
   Serial.println();
 }
 
+void printAddressDisplay(byte deviceAddress[8])
+{
+  for (uint8_t i = 0; i < 8; i++)
+  {
+    // zero pad the address if necessary
+    if (deviceAddress[i] < 16) display.print("0");
+    display.print(deviceAddress[i], HEX);
+  }
+}
+
+void printDataDisplay(TemperatureSensor temperatureSensor)
+{
+  Serial.print("Address="); 
+  printAddressDisplay(temperatureSensor.deviceAddress); 
+  display.println();
+  display.setTextSize(2);
+  display.print(temperatureSensor.tempCelsius);    
+  display.println(" C ");
+  display.print(temperatureSensor.tempFahrenheit);    
+  display.println(" F");
+}
+
 void loop(void){    
 
    // text display tests
@@ -331,16 +343,7 @@ void loop(void){
   TemperatureSensor *arr = temperatureSensorManager.getSensors();  
   for(int i = 0; i < sizeof(arr)/sizeof(int); ++i){
     printDataSerial(arr[i]);
-
-    display.print("Address=");
-    printAddressDisplay(arr[i].deviceAddress);
-    display.println();
-
-    display.setTextSize(2);
-    display.print(arr[i].tempCelsius);    
-    display.println(" C ");
-    display.print(arr[i].tempFahrenheit);    
-    display.println(" F");
+    printDataDisplay(arr[i]);
   }  
   
   display.display();  

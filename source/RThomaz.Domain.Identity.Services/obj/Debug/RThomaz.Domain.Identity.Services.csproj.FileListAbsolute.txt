@@ -1,4 +1,0 @@
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Services\bin\Debug\RThomaz.Domain.Identity.Services.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Services\bin\Debug\RThomaz.Domain.Identity.Services.pdb
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Services\obj\Debug\RThomaz.Domain.Identity.Services.dll
-C:\RThomaz\Releases\Release 9\Source\RThomaz.Domain.Identity.Services\obj\Debug\RThomaz.Domain.Identity.Services.pdb
