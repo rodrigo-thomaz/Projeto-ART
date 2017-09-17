@@ -103,6 +103,7 @@
     <Content Include="app\app.js" />
     <Content Include="content\css\bootstrap.min.css" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="content\images\empresa.jpg" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-local-storage.min.js" />
     <Content Include="scripts\authComplete.js" />
