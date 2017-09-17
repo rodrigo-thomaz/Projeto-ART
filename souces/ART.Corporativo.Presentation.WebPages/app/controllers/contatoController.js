@@ -1,9 +1,9 @@
 ﻿'use strict';
-app.controller('homeController', ['$scope', 'homeService', function ($scope, homeService) {
+app.controller('contatoController', ['$scope', 'contatoService', function ($scope, contatoService) {
 
     $scope.lista = [];
 
-    homeService.get().then(function (results) {
+    contatoService.get().then(function (results) {
 
         $scope.lista = results.data;
 
