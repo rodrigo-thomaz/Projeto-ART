@@ -22,12 +22,12 @@ app.factory('authInterceptorService', ['$q', '$injector','$location', 'localStor
 
             if (authData) {
                 if (authData.useRefreshTokens) {
-                    $location.path('/refresh');
+                    authService.refreshToken();
                     return $q.reject(rejection);
                 }
             }
             authService.logOut();
-            $location.path('/login');
+            authService.logIn();
         }
         return $q.reject(rejection);
     }

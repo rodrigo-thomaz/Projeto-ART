@@ -3,8 +3,9 @@ using System.Web.Http;
 
 namespace ART.Corporativo.DistributedServices.Controllers
 {
-    [RoutePrefix("api/empresa")]
-    public class EmpresaController : ApiController
+    [Authorize]
+    [RoutePrefix("api/minhaConta")]
+    public class MinhaContaController : ApiController
     {
         [Route("")]
         public IEnumerable<object> Get()

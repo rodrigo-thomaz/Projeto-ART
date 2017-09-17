@@ -9,6 +9,6 @@ app.controller('empresaController', ['$scope', 'empresaService', function ($scop
 
     }, function (error) {
         alert(error.data.message);
-    });
+    });  
 
 }]);

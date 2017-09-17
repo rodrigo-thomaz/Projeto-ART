@@ -29,9 +29,10 @@
                     <li><a href="#/empresa">Empresa</a></li>
                     <li><a href="#/produtos">Produtos</a></li>
                     <li><a href="#/contato">Contato</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="#/minhaConta">Minha conta</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
-                    <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
-                    <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="" data-ng-click="logIn()">Login</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="" data-ng-click="signUp()">Sign Up</a></li>
                 </ul>
             </div>
         </div>
@@ -82,14 +83,14 @@
     <script src="app/services/empresaService.js?v=2"></script>
     <script src="app/services/produtosService.js?v=2"></script>
     <script src="app/services/contatoService.js?v=2"></script>
+    <script src="app/services/minhaContaService.js?v=2"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexController.js?v=2"></script>
     <script src="app/controllers/homeController.js?v=2"></script>
-    <script src="app/controllers/loginController.js?v=2"></script>
-    <script src="app/controllers/signupController.js?v=2"></script>
     <script src="app/controllers/empresaController.js?v=2"></script>
     <script src="app/controllers/produtosController.js?v=2"></script>
     <script src="app/controllers/contatoController.js?v=2"></script>
+    <script src="app/controllers/minhaContaController.js?v=2"></script>
     <!-- Load custom filters -->
     <!-- Load custom directives -->
 

@@ -9,6 +9,6 @@ app.controller('contatoController', ['$scope', 'contatoService', function ($scop
 
     }, function (error) {
         alert(error.data.message);
-    });
+    }); 
 
 }]);

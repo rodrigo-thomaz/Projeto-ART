@@ -9,6 +9,6 @@ app.controller('homeController', ['$scope', 'homeService', function ($scope, hom
 
     }, function (error) {
         alert(error.data.message);
-    });
+    }); 
 
 }]);

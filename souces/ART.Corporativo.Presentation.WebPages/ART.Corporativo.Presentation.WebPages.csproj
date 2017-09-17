@@ -59,19 +59,20 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\minhaContaController.js" />
     <Content Include="app\controllers\indexController.js" />
-    <Content Include="app\controllers\loginController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\empresaController.js" />
     <Content Include="app\controllers\contatoController.js" />
-    <Content Include="app\controllers\signupController.js" />
     <Content Include="app\controllers\produtosController.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
+    <Content Include="app\services\minhaContaService.js" />
     <Content Include="app\services\homeService.js" />
     <Content Include="app\services\empresaService.js" />
     <Content Include="app\services\produtosService.js" />
     <Content Include="app\services\contatoService.js" />
+    <Content Include="app\views\minhaConta.html" />
     <Content Include="app\views\contato.html" />
     <Content Include="app\views\empresa.html" />
     <Content Include="app\views\home.html" />

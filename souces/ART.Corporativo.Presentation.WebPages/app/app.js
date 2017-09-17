@@ -8,16 +8,6 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/home.html"
     });
 
-    $routeProvider.when("/login", {
-        controller: "loginController",
-        templateUrl: "app/views/login.html"
-    });
-
-    $routeProvider.when("/signup", {
-        controller: "signupController",
-        templateUrl: "app/views/signup.html"
-    });
-
     $routeProvider.when("/empresa", {
         controller: "empresaController",
         templateUrl: "app/views/empresa.html"
@@ -33,14 +23,21 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/contato.html"
     });
 
+    $routeProvider.when("/minhaConta", {
+        controller: "minhaContaController",
+        templateUrl: "app/views/minhaConta.html"
+    });
+
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
 
+var segurancaPresentationWebPagesUri = 'http://localhost/ART.Seguranca.Presentation.WebPages/index.html';
 var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
 var corporativoDistributedServicesUri = 'http://localhost/ART.Corporativo.DistributedServices/';
 
 app.constant('ngAuthSettings', {
+    segurancaPresentationWebPagesUri: segurancaPresentationWebPagesUri,
     segurancaDistributedServicesUri: segurancaDistributedServicesUri,
     corporativoDistributedServicesUri: corporativoDistributedServicesUri,
     clientId: 'ngAuthApp'
