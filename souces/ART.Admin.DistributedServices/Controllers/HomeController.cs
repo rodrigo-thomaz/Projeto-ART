@@ -3,11 +3,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web.Http;
 
-namespace ART.Corporativo.DistributedServices.Controllers
+namespace ART.Admin.DistributedServices.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/minhaConta")]
-    public class MinhaContaController : ApiController
+    [RoutePrefix("api/home")]
+    public class HomeController : ApiController
     {
         [Route("")]
         public IEnumerable<object> Get()
@@ -16,7 +16,7 @@ namespace ART.Corporativo.DistributedServices.Controllers
             //Microsoft.Owin.Security.AuthenticationTicket ticket = Startup.OAuthBearerOptions.AccessTokenFormat.Unprotect(token);
 
             var identity = User.Identity as ClaimsIdentity;
-
+           
             return identity.Claims.Select(c => new
             {
                 Type = c.Type,

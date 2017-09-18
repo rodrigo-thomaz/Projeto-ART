@@ -59,15 +59,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\controllers\associateController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexController.js" />
-    <Content Include="app\controllers\loginController.js" />
-    <Content Include="app\controllers\dashboardController.js" />
-    <Content Include="app\controllers\ordersController.js" />
-    <Content Include="app\controllers\refreshController.js" />
-    <Content Include="app\controllers\signupController.js" />
-    <Content Include="app\controllers\tokensManagerController.js" />
+    <Content Include="app\controllers\testController.js" />
     <Content Include="app\services\authInterceptorService.js" />
     <Content Include="app\services\authService.js" />
     <Content Include="app\services\dashboardService.js" />
@@ -108,7 +102,6 @@
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-local-storage.min.js" />
-    <Content Include="scripts\authComplete.js" />
     <Content Include="scripts\loading-bar.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>

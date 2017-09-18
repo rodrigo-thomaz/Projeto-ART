@@ -6,8 +6,8 @@ using System.Web.Http;
 namespace ART.Admin.DistributedServices.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/dashboard")]
-    public class DashboardController : ApiController
+    [RoutePrefix("api/test")]
+    public class TestController : ApiController
     {
         [Route("")]
         public IEnumerable<object> Get()

@@ -105,7 +105,6 @@
     <Content Include="content\images\empresa.jpg" />
     <Content Include="index.html" />
     <Content Include="scripts\angular-local-storage.min.js" />
-    <Content Include="scripts\authComplete.js" />
     <Content Include="scripts\loading-bar.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
