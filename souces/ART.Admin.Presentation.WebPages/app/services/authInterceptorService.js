@@ -1,12 +1,12 @@
 ﻿'use strict';
-app.factory('authInterceptorService', ['$q', '$injector','$location', 'localStorageService', function ($q, $injector,$location, localStorageService) {
+app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
 
     var authInterceptorServiceFactory = {};
 
     var _request = function (config) {
 
         config.headers = config.headers || {};
-       
+
         var authData = localStorageService.get('authorizationData');
         if (authData) {
             config.headers.Authorization = 'Bearer ' + authData.token;
@@ -22,12 +22,12 @@ app.factory('authInterceptorService', ['$q', '$injector','$location', 'localStor
 
             if (authData) {
                 if (authData.useRefreshTokens) {
-                    $location.path('/refresh');
+                    authService.refreshToken();
                     return $q.reject(rejection);
                 }
             }
             authService.logOut();
-            $location.path('/login');
+            authService.logIn();
         }
         return $q.reject(rejection);
     }

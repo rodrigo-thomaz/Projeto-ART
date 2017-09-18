@@ -1,11 +1,11 @@
 ﻿'use strict';
-app.controller('dashboardController', ['$scope', 'dashboardService', function ($scope, dashboardService) {
+app.controller('testController', ['$scope', 'testService', function ($scope, testService) {
 
-    $scope.orders = [];
+    $scope.lista = [];
 
-    dashboardService.getDashboards().then(function (results) {
+    testService.get().then(function (results) {
 
-        $scope.dashboards = results.data;
+        $scope.lista = results.data;
 
     }, function (error) {
         alert(error.data.message);
