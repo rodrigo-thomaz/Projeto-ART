@@ -22,6 +22,7 @@ class TemperatureSensor
 	bool hasAlarm;	
 	char lowAlarmTemp;
 	char highAlarmTemp;
+	long epochTime;
 };
 
 #endif

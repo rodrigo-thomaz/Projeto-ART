@@ -1,0 +1,13 @@
+{
+  "name": "art.domotica.devices.distributed-services",
+  "version": "0.0.0",
+  "description": "ART.Domotica.Devices.DistributedServices",
+  "main": "server.js",
+  "author": {
+    "name": "rodrigo"
+  },
+  "dependencies": {
+    "express": "^4.15.4",
+    "socket.io": "^2.0.3"
+  }
+}

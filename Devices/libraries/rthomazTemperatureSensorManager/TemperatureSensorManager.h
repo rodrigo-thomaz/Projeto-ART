@@ -8,13 +8,16 @@
 
 #include "Arduino.h"
 #include "TemperatureSensor.h"
+#include <NTPClient.h>
 
 class TemperatureSensorManager
 {
   public:
-    TemperatureSensorManager(void);
+    TemperatureSensorManager(NTPClient& timeClient);
 	void begin();
     TemperatureSensor *getSensors();	
+  private:
+    NTPClient*          _timeClient;
 };
 
 #endif

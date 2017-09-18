@@ -13,6 +13,8 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+#include <NTPClient.h>
+
 // Data wire is plugged into port 2 on the Arduino
 #define ONE_WIRE_BUS 2
 #define TEMPERATURE_PRECISION 11
@@ -25,9 +27,9 @@ DallasTemperature sensors(&oneWire);
 
 TemperatureSensor *arr;
 
-TemperatureSensorManager::TemperatureSensorManager(void)
+TemperatureSensorManager::TemperatureSensorManager(NTPClient& timeClient)
 { 
-
+	this->_timeClient = &timeClient;
 }
 
 String getFamily(byte deviceAddress[8]){
@@ -96,6 +98,8 @@ TemperatureSensor *TemperatureSensorManager::getSensors()
 {	
 	sensors.requestTemperatures();
 
+	long epochTime = this->_timeClient->getEpochTime();
+	 
 	for(int i = 0; i < sizeof(arr)/sizeof(int); ++i){
 		arr[i].isConnected = sensors.isConnected(arr[i].deviceAddress);
 		arr[i].resolution = sensors.getResolution(arr[i].deviceAddress);    
@@ -104,6 +108,7 @@ TemperatureSensor *TemperatureSensorManager::getSensors()
 		arr[i].hasAlarm = sensors.hasAlarm(arr[i].deviceAddress);
 		arr[i].lowAlarmTemp = sensors.getLowAlarmTemp(arr[i].deviceAddress);
 		arr[i].highAlarmTemp = sensors.getHighAlarmTemp(arr[i].deviceAddress);
+		arr[i].epochTime = epochTime;
 	}
 	
     return arr;
