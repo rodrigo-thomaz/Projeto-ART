@@ -29,6 +29,7 @@ namespace ART.Seguranca.DistributedServices
             app.UseWebApi(config);
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, ART.Seguranca.DistributedServices.Migrations.Configuration>());
 
+            app.MapSignalR();
         }
 
         public void ConfigureOAuth(IAppBuilder app)
