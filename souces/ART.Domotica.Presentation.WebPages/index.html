@@ -5,7 +5,7 @@
     <meta name="keywords" content="angularjs,SPA,Single Page Application,refresh tokens,authentication,bearer token authentication,OWIN,bootstrap,bootstrap ui,tutorial,JS framework,ASP.NET WEB API 2,Taiseer Joudeh" />
     <meta name="description" content="SPA built using angularjs,authentication is done using bearer token,back end built using Asp.net web api 2 and OWIN Framework,creatd by Taiseer Joudeh" />
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
-    <title>AngularJS Authentication</title>
+    <title>Projeto ART - Domótica</title>
     <link href="content/css/bootstrap.min.css" rel="stylesheet" />
     <link href="content/css/site.css" rel="stylesheet" />
     <link href="content/css/loading-bar.css" rel="stylesheet" />
@@ -26,12 +26,10 @@
             <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
                 <ul class="nav navbar-nav navbar-right">
                     <li data-ng-hide="!authentication.isAuth"><a href="#">Bem-vindo {{authentication.userName}}</a></li>
-                    <li data-ng-hide="!authentication.isAuth"><a href="#/dashboard">Dashboard</a></li>
-                    <li data-ng-hide="!authentication.isAuth"><a href="#/orders">My Orders</a></li>
-                    <li data-ng-hide="!authentication.isAuth"><a href="#/refresh">Refresh Token</a></li>
+                    <li data-ng-hide="!authentication.isAuth"><a href="#/test">Test</a></li>
                     <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logout</a></li>
-                    <li data-ng-hide="authentication.isAuth"> <a href="#/login">Login</a></li>
-                    <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Sign Up</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="" data-ng-click="logIn()">Login</a></li>
+                    <li data-ng-hide="authentication.isAuth"> <a href="" data-ng-click="signUp()">Sign Up</a></li>
                 </ul>
             </div>
         </div>
@@ -41,7 +39,7 @@
             <div class="page-header text-center">
                 <h1>Projeto ART</h1>
             </div>
-            <p>Soluções entre pai e filho.</p>
+            <p>Site Domótica</p>
         </div>
     </div>
 
@@ -78,19 +76,12 @@
     <!-- Load services -->
     <script src="app/services/authInterceptorService.js?v=2"></script>
     <script src="app/services/authService.js?v=2"></script>
-    <script src="app/services/dashboardService.js?v=2"></script>
-    <script src="app/services/ordersService.js?v=2"></script>
-    <script src="app/services/tokensManagerService.js?v=2"></script>
+    <script src="app/services/homeService.js?v=2"></script>
+    <script src="app/services/testService.js?v=2"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexController.js?v=2"></script>
     <script src="app/controllers/homeController.js?v=2"></script>
-    <script src="app/controllers/loginController.js?v=2"></script>
-    <script src="app/controllers/signupController.js?v=2"></script>
-    <script src="app/controllers/dashboardController.js?v=2"></script>
-    <script src="app/controllers/ordersController.js?v=2"></script>
-    <script src="app/controllers/refreshController.js?v=2"></script>
-    <script src="app/controllers/tokensManagerController.js?v=2"></script>
-    <script src="app/controllers/associateController.js?v=2"></script>
+    <script src="app/controllers/testController.js?v=2"></script>
     <!-- Load custom filters -->
     <!-- Load custom directives -->
 

@@ -8,49 +8,21 @@ app.config(function ($routeProvider) {
         templateUrl: "app/views/home.html"
     });
 
-    $routeProvider.when("/login", {
-        controller: "loginController",
-        templateUrl: "app/views/login.html"
-    });
-
-    $routeProvider.when("/signup", {
-        controller: "signupController",
-        templateUrl: "app/views/signup.html"
-    });
-
-    $routeProvider.when("/orders", {
-        controller: "ordersController",
-        templateUrl: "app/views/orders.html"
-    });
-
-    $routeProvider.when("/refresh", {
-        controller: "refreshController",
-        templateUrl: "app/views/refresh.html"
-    });
-
-    $routeProvider.when("/tokens", {
-        controller: "tokensManagerController",
-        templateUrl: "app/views/tokens.html"
-    });
-
-    $routeProvider.when("/associate", {
-        controller: "associateController",
-        templateUrl: "app/views/associate.html"
-    });
-
-    $routeProvider.when("/dashboard", {
-        controller: "dashboardController",
-        templateUrl: "app/views/dashboard.html"
+    $routeProvider.when("/test", {
+        controller: "testController",
+        templateUrl: "app/views/test.html"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });
 
 });
 
+var segurancaPresentationWebPagesUri = 'http://localhost/ART.Seguranca.Presentation.WebPages/index.html';
 var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
 var domoticaDistributedServicesUri = 'http://localhost/ART.Domotica.DistributedServices/';
 
 app.constant('ngAuthSettings', {
+    segurancaPresentationWebPagesUri: segurancaPresentationWebPagesUri,
     segurancaDistributedServicesUri: segurancaDistributedServicesUri,
     domoticaDistributedServicesUri: domoticaDistributedServicesUri,
     clientId: 'ngAuthApp'
