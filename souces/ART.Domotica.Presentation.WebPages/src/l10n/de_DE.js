@@ -15,6 +15,8 @@
 },
 "aside" : {
   "nav" : {
+    "DOMOTICA" : "Hausautomation",
+    "DISPOSITIVO" : "Gerät",
     "HEADER" : "Navigation",
     "DASHBOARD" : "Armaturenbrett",
     "CALENDAR" : "Kalender",

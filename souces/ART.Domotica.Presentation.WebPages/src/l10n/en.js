@@ -15,6 +15,8 @@
 },
 "aside" : {
   "nav" : {
+    "DOMOTICA" : "Home automation",
+    "DISPOSITIVO" : "Device",
     "HEADER" : "Navigation",
     "DASHBOARD" : "Dashboard",
     "CALENDAR" : "Calendar",

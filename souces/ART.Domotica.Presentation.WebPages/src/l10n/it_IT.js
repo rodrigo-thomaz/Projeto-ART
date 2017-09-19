@@ -15,6 +15,8 @@
 },
 "aside" : {
   "nav" : {
+    "DOMOTICA" : "Automazione domestica",
+    "DISPOSITIVO" : "Dispositivo",
     "HEADER" : "Navigazione",
     "DASHBOARD" : "Cruscotto",
     "CALENDAR" : "Calendario",

@@ -31,6 +31,11 @@ angular.module('app')
                   url: '/app',
                   templateUrl: layout
               })
+              .state('app.termometro', {
+                  url: '/termometro',
+                  templateUrl: 'views/termometro.html',
+                  resolve: load(['js/controllers/termometroController.js'])
+              })
               .state('app.dashboard-v1', {
                   url: '/dashboard-v1',
                   templateUrl: 'tpl/app_dashboard_v1.html',
