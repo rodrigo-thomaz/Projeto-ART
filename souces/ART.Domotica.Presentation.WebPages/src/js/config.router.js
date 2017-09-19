@@ -19,7 +19,7 @@ angular.module('app')
           var layout = "tpl/app.html";
 
           $urlRouterProvider
-              .otherwise('/app/dashboard-v1');
+              .otherwise('/app/dashboard');
           
           $stateProvider
               .state('app', {
@@ -32,10 +32,10 @@ angular.module('app')
                   templateUrl: 'views/termometro.html',
                   resolve: load(['js/controllers/termometroController.js'])
               })
-              .state('app.dashboard-v1', {
-                  url: '/dashboard-v1',
-                  templateUrl: 'tpl/app_dashboard_v1.html',
-                  resolve: load(['js/controllers/chart.js'])
+              .state('app.dashboard', {
+                  url: '/dashboard',
+                  templateUrl: 'views/dashboard.html',
+                  resolve: load(['js/controllers/dashboardController.js'])
               })        
               // pages
               .state('app.page', {

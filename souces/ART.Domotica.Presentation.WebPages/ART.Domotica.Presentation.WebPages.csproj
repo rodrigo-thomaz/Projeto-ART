@@ -149,7 +149,7 @@
     <Content Include="src\js\app\contact\contacts.json" />
     <Content Include="src\js\app\mail\mails.json" />
     <Content Include="src\js\app\note\notes.json" />
-    <Content Include="src\js\controllers\chart.js" />
+    <Content Include="src\js\controllers\dashboardController.js" />
     <Content Include="src\js\controllers\tab.js" />
     <Content Include="src\js\controllers\termometroController.js" />
     <Content Include="src\js\controllers\vectormap.js" />
@@ -394,7 +394,7 @@
     <Content Include="src\l10n\it_IT.js" />
     <Content Include="src\psd\ui.png" />
     <Content Include="src\tpl\app.html" />
-    <Content Include="src\tpl\app_dashboard_v1.html" />
+    <Content Include="src\views\dashboard.html" />
     <Content Include="src\tpl\blocks\aside.html" />
     <Content Include="src\tpl\blocks\aside.music.html" />
     <Content Include="src\tpl\blocks\aside.right.html" />

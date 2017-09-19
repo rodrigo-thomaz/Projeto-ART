@@ -6,8 +6,8 @@ using System.Web.Http;
 namespace ART.Domotica.DistributedServices.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/home")]
-    public class HomeController : ApiController
+    [RoutePrefix("api/termometro")]
+    public class TermometroController : ApiController
     {
         [Route("")]
         public IEnumerable<object> Get()
