@@ -12,9 +12,13 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
     $scope.login = function () {
 
         authService.login($scope.loginData).then(function (response) {
-
-            $location.path('/orders');
-
+            var returnurl = $location.search().returnurl;
+            if (returnurl) {
+                window.location = returnurl;
+            }
+            else {
+                $location.path('/orders');
+            }
         },
          function (err) {
              $scope.message = err.error_description;
