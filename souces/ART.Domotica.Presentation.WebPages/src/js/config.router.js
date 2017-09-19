@@ -36,12 +36,7 @@ angular.module('app')
                   url: '/dashboard-v1',
                   templateUrl: 'tpl/app_dashboard_v1.html',
                   resolve: load(['js/controllers/chart.js'])
-              })
-              .state('app.dashboard-v2', {
-                  url: '/dashboard-v2',
-                  templateUrl: 'tpl/app_dashboard_v2.html',
-                  resolve: load(['js/controllers/chart.js'])
-              })              
+              })        
               // pages
               .state('app.page', {
                   url: '/page',

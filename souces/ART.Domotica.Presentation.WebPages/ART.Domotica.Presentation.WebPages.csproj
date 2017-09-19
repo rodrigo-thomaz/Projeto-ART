@@ -395,7 +395,6 @@
     <Content Include="src\psd\ui.png" />
     <Content Include="src\tpl\app.html" />
     <Content Include="src\tpl\app_dashboard_v1.html" />
-    <Content Include="src\tpl\app_dashboard_v2.html" />
     <Content Include="src\tpl\blocks\aside.html" />
     <Content Include="src\tpl\blocks\aside.music.html" />
     <Content Include="src\tpl\blocks\aside.right.html" />
