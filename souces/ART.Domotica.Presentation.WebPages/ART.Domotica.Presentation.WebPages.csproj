@@ -153,6 +153,8 @@
     <Content Include="src\js\controllers\tab.js" />
     <Content Include="src\js\controllers\termometroController.js" />
     <Content Include="src\js\controllers\vectormap.js" />
+    <Content Include="src\js\services\termometroService.js" />
+    <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\psd\ui.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

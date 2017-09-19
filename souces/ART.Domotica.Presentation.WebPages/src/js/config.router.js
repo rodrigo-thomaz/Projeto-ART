@@ -30,12 +30,18 @@ angular.module('app')
               .state('app.dashboard', {
                   url: '/dashboard',
                   templateUrl: 'views/dashboard.html',
-                  resolve: load(['js/controllers/dashboardController.js'])
+                  resolve: load([
+                      'js/services/dashboardService.js',
+                      'js/controllers/dashboardController.js',
+                  ])
               })
               .state('app.termometro', {
                   url: '/termometro',
                   templateUrl: 'views/termometro.html',
-                  resolve: load(['js/controllers/termometroController.js'])
+                  resolve: load([
+                      'js/services/termometroService.js',
+                      'js/controllers/termometroController.js',
+                  ])
               })
               // pages
               .state('app.page', {

@@ -14,31 +14,14 @@
     <li class="line dk"></li>
 
     <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-        <span translate="aside.nav.DOMOTICA">Domótica</span>
+        <span translate="aside.nav.DISPOSITIVO">Dispositivos</span>
     </li>
-
-    <li>
-        <a href class="auto">
-            <span class="pull-right text-muted">
-                <i class="fa fa-fw fa-angle-right text"></i>
-                <i class="fa fa-fw fa-angle-down text-active"></i>
-            </span>
-            <i class="glyphicon glyphicon-stats icon text-primary-dker"></i>
-            <span class="font-bold" translate="aside.nav.DISPOSITIVO">Dispositivos</span>
+    <li ui-sref-active="active">
+        <a ui-sref="app.termometro">
+            <i class="glyphicon glyphicon-fire icon text-danger-dker"></i>
+            <span>Thermometer</span>
         </a>
-        <ul class="nav nav-sub dk">
-            <li class="nav-sub-header">
-                <a href>
-                    <span translate="aside.nav.DISPOSITIVO">Dispositivos</span>
-                </a>
-            </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.termometro">
-                    <span>Thermometer</span>
-                </a>
-            </li>
-        </ul>
-    </li>    
+    </li>
 
 </ul>
 <!-- / list -->
