@@ -379,8 +379,6 @@
     <Content Include="src\js\config.js" />
     <Content Include="src\js\config.lazyload.js" />
     <Content Include="src\js\config.router.js" />
-    <Content Include="src\js\controllers\signin.js" />
-    <Content Include="src\js\controllers\signup.js" />
     <Content Include="src\js\directives\setnganimate.js" />
     <Content Include="src\js\directives\ui-butterbar.js" />
     <Content Include="src\js\directives\ui-focus.js" />
@@ -401,7 +399,6 @@
     <Content Include="src\tpl\app.html" />
     <Content Include="src\views\dashboard.html" />
     <Content Include="src\tpl\blocks\aside.html" />
-    <Content Include="src\tpl\blocks\aside.music.html" />
     <Content Include="src\tpl\blocks\aside.right.html" />
     <Content Include="src\tpl\blocks\header.html" />
     <Content Include="src\tpl\blocks\nav.html" />
@@ -414,11 +411,7 @@
     <Content Include="src\tpl\layout_footer_mobile.html" />
     <Content Include="src\tpl\layout_fullwidth.html" />
     <Content Include="src\tpl\layout_mobile.html" />
-    <Content Include="src\tpl\page_404.html" />
-    <Content Include="src\tpl\page_forgotpwd.html" />
     <Content Include="src\tpl\page_profile.html" />
-    <Content Include="src\tpl\page_signin.html" />
-    <Content Include="src\tpl\page_signup.html" />
     <Content Include="src\views\termometro.html" />
     <Content Include="Web.config" />
   </ItemGroup>
