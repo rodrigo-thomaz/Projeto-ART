@@ -2,6 +2,38 @@
 
 app.controller('termometroController', ['$scope', 'termometroService', function ($scope, termometroService) {
 
+    $scope.options = {
+        chart: {
+            type: 'discreteBarChart',
+            height: 240,
+            margin: {
+                top: 20,
+                right: 20,
+                bottom: 60,
+                left: 55
+            },
+            x: function (d) { return d.label; },
+            y: function (d) { return d.value; },
+            showValues: true,
+            valueFormat: function (d) {
+                return d3.format(',.4f')(d);
+            },
+            transitionDuration: 500,
+            xAxis: {
+                axisLabel: 'X Axis'
+            },
+            yAxis: {
+                axisLabel: 'Y Axis',
+                axisLabelDistance: 30
+            }
+        }
+    };
+
+    $scope.data = [{
+        key: "Temperatura",
+        values: []
+    }]
+
     function serviceSample() {
 
         $scope.lista = [];
@@ -15,65 +47,7 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
                 alert(error.data.message);
             }
         });
-    }
-
-    function templateSample() {
-
-        $scope.d = [[1, 6.5], [2, 6.5], [3, 7], [4, 8], [5, 7.5], [6, 7], [7, 6.8], [8, 7], [9, 7.2], [10, 7], [11, 6.8], [12, 7]];
-
-        $scope.d0_1 = [[0, 7], [1, 6.5], [2, 12.5], [3, 7], [4, 9], [5, 6], [6, 11], [7, 6.5], [8, 8], [9, 7]];
-
-        $scope.d0_2 = [[0, 4], [1, 4.5], [2, 7], [3, 4.5], [4, 3], [5, 3.5], [6, 6], [7, 3], [8, 4], [9, 3]];
-
-        $scope.d1_1 = [[10, 120], [20, 70], [30, 70], [40, 60]];
-
-        $scope.d1_2 = [[10, 50], [20, 60], [30, 90], [40, 35]];
-
-        $scope.d1_3 = [[10, 80], [20, 40], [30, 30], [40, 20]];
-
-        $scope.d2 = [];
-
-        for (var i = 0; i < 20; ++i) {
-            $scope.d2.push([i, Math.round(Math.sin(i) * 100) / 100]);
-        }
-
-        $scope.d3 = [
-            { label: "iPhone5S", data: 40 },
-            { label: "iPad Mini", data: 10 },
-            { label: "iPad Mini Retina", data: 20 },
-            { label: "iPhone4S", data: 12 },
-            { label: "iPad Air", data: 18 }
-        ];
-
-        $scope.refreshData = function () {
-            $scope.d0_1 = $scope.d0_2;
-        };
-
-        $scope.getRandomData = function () {
-            var data = [],
-                totalPoints = 150;
-            if (data.length > 0)
-                data = data.slice(1);
-            while (data.length < totalPoints) {
-                var prev = data.length > 0 ? data[data.length - 1] : 50,
-                    y = prev + Math.random() * 10 - 5;
-                if (y < 0) {
-                    y = 0;
-                } else if (y > 100) {
-                    y = 100;
-                }
-                data.push(Math.round(y * 100) / 100);
-            }
-            // Zip the generated y values with the x values
-            var res = [];
-            for (var i = 0; i < data.length; ++i) {
-                res.push([i, data[i]])
-            }
-            return res;
-        }
-
-        $scope.d4 = $scope.getRandomData();
-    }
+    }    
 
     function signalRSample() {
 
@@ -145,73 +119,18 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
                     time.getMinutes() + '</time></div></li>');
             }
         });
-
-        $scope.medicoesTemp = [];
-
-        //$scope.dataTemp = [[1, 16.5], [2, 16.5], [3, 7], [4, 12], [5, 3.5], [6, 11], [7, 16.8], [8, 19], [9, 17.2], [10, 24], [11, 6.8], [12, 7]];
-        //$scope.ticksTemp = [[1, 'Jan'], [2, 'Fev'], [3, 'Mar'], [4, 'Abr'], [5, 'Mai'], [6, 'Jun'], [7, 'Jul'], [8, 'Ago'], [9, 'Set'], [10, 'Out'], [11, 'Nov'], [12, 'Dez']];
-
-        $scope.dataTemp = [];
-        $scope.ticksTemp = [];
-                
+                        
         socket.on("temp", function (client, data) {
-                        
-            //$scope.$apply(function () {
-            //    $scope.dataTemp.push([Number(data.epochTime), data.tempCelsius]);
-            //    $scope.ticksTemp.push([Number(data.epochTime), new Date(data.epochTime * 1000).toLocaleTimeString()]);
-            //});
-                        
-            $scope.medicoesTemp.push(data);
+
+            $scope.data[0].values.push({ "label": new Date(data.epochTime * 1000).toLocaleTimeString(), "value": data.tempCelsius });
+            
             $scope.$apply();
 
             console.log(data);
-        });
-
-        $scope.options = {
-            chart: {
-                type: 'discreteBarChart',
-                height: 240,
-                margin: {
-                    top: 20,
-                    right: 20,
-                    bottom: 60,
-                    left: 55
-                },
-                x: function (d) { return d.label; },
-                y: function (d) { return d.value; },
-                showValues: true,
-                valueFormat: function (d) {
-                    return d3.format(',.4f')(d);
-                },
-                transitionDuration: 500,
-                xAxis: {
-                    axisLabel: 'X Axis'
-                },
-                yAxis: {
-                    axisLabel: 'Y Axis',
-                    axisLabelDistance: 30
-                }
-            }
-        };
-
-        $scope.data = [{
-            key: "Cumulative Return",
-            values: [
-                { "label": "A", "value": -29.765957771107 },
-                { "label": "B", "value": 0 },
-                { "label": "C", "value": 32.807804682612 },
-                { "label": "D", "value": 196.45946739256 },
-                { "label": "E", "value": 0.19434030906893 },
-                { "label": "F", "value": -98.079782601442 },
-                { "label": "G", "value": -13.925743130903 },
-                { "label": "H", "value": -5.1387322875705 }
-            ]
-        }]
+        });        
     }
 
     serviceSample();
-
-    templateSample();
 
     signalRSample();
 
