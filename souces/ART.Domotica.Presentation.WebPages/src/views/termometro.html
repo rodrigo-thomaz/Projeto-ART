@@ -24,6 +24,48 @@
                 <div class="panel panel-default">
                     <div class="panel-heading font-bold">Spline</div>
                     <div class="panel-body">
+                        <div ui-jq="plot" ui-refresh="dataTemp" ui-options="
+                            [{ 
+                                data: {{dataTemp}}, 
+                                points: { show: true, radius: 6}, 
+                                splines: { show: true, tension: 0.45, lineWidth: 5, fill: 0 } 
+                            }],
+                            {
+                            colors: ['{{app.color.info}}'],
+                            series: { shadowSize: 3 },
+                            xaxis:{
+                                font: { color: '#ccc' },
+                                position: 'bottom',
+                                ticks: {{ticksTemp}}
+                            },
+                            yaxis:{ font: { color: '#ccc' } },
+                            grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
+                            tooltip: true,
+                            tooltipOpts: { content: '%x.1 is %y.4',  defaultTheme: false, shifts: { x: 0, y: 20 } }
+                            }
+                        " style="height:240px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Multiple</div>
+                    <div class="panel-body">
+                        <div style="height:240px">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Spline</div>
+                    <div class="panel-body">
                         <div ui-jq="plot" ui-options="
               [
                 { data: {{d}}, points: { show: true, radius: 6}, splines: { show: true, tension: 0.45, lineWidth: 5, fill: 0 } }
