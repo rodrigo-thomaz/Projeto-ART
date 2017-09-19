@@ -33,9 +33,9 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
 
         $scope.d2 = [];
 
-        for (var i = 0; i < 20; ++i) {
-            $scope.d2.push([i, Math.round(Math.sin(i) * 100) / 100]);
-        }
+        //for (var i = 0; i < 20; ++i) {
+        //    $scope.d2.push([i, Math.round(Math.sin(i) * 100) / 100]);
+        //}
 
         $scope.d3 = [
             { label: "iPhone5S", data: 40 },
@@ -146,7 +146,7 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
             }
         });
 
-        $scope.medicoesTemp = [];
+        //$scope.medicoesTemp = [];
 
         //$scope.dataTemp = [[1, 16.5], [2, 16.5], [3, 7], [4, 12], [5, 3.5], [6, 11], [7, 16.8], [8, 19], [9, 17.2], [10, 24], [11, 6.8], [12, 7]];
         //$scope.ticksTemp = [[1, 'Jan'], [2, 'Fev'], [3, 'Mar'], [4, 'Abr'], [5, 'Mai'], [6, 'Jun'], [7, 'Jul'], [8, 'Ago'], [9, 'Set'], [10, 'Out'], [11, 'Nov'], [12, 'Dez']];
@@ -154,12 +154,19 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
         $scope.dataTemp = [];
         $scope.ticksTemp = [];
 
-        socket.on("temp", function (client, data) {
+        var counter = 1;
 
-            $scope.dataTemp.push([Number(data.epochTime), data.tempCelsius]);
-            $scope.ticksTemp.push([Number(data.epochTime), new Date(data.epochTime * 1000).toLocaleTimeString()]);
-            
-            $scope.medicoesTemp.push(data);
+        socket.on("temp", function (client, data) {
+                        
+            $scope.$apply(function () {
+                $scope.dataTemp.push([Number(data.epochTime), data.tempCelsius]);
+                $scope.ticksTemp.push([Number(data.epochTime), new Date(data.epochTime * 1000).toLocaleTimeString()]);
+            });
+
+            $scope.d2.push([counter, data.tempCelsius]);
+            counter++;
+            $scope.$apply();
+            //$scope.medicoesTemp.push(data);
 
             console.log(data);
         });

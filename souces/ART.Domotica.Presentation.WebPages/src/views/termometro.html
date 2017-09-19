@@ -141,14 +141,14 @@
                 <div class="panel panel-default">
                     <div class="panel-heading font-bold">Bar</div>
                     <div class="panel-body">
-                        <div ui-jq="plot" ui-options="
+                        <div ui-jq="plot" ui-refresh="d2" ui-options="
               [
                 { data: {{d2}}, label: 'Pressure', color: '{{app.color.info}}' }
               ],
               {
                 bars: { show: true, barWidth: 0.6, fillColor: { colors: [{ opacity: 0.5 }, { opacity: 0.9}] }  },
                 xaxis: { font: { color: '#ccc' } },
-                yaxis: { font: { color: '#ccc' }, min: -2, max: 2 },
+                yaxis: { font: { color: '#ccc' }, min: 10, max: 40 },
                 grid: { hoverable: true, clickable: true, borderWidth: 0, color: '#ccc' },
                 series: { shadowSize: 1 },
                 tooltip: true
