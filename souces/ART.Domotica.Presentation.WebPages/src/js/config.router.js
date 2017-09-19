@@ -26,17 +26,17 @@ angular.module('app')
                   abstract: true,
                   url: '/app',
                   templateUrl: layout
+              })              
+              .state('app.dashboard', {
+                  url: '/dashboard',
+                  templateUrl: 'views/dashboard.html',
+                  resolve: load(['js/controllers/dashboardController.js'])
               })
               .state('app.termometro', {
                   url: '/termometro',
                   templateUrl: 'views/termometro.html',
                   resolve: load(['js/controllers/termometroController.js'])
               })
-              .state('app.dashboard', {
-                  url: '/dashboard',
-                  templateUrl: 'views/dashboard.html',
-                  resolve: load(['js/controllers/dashboardController.js'])
-              })        
               // pages
               .state('app.page', {
                   url: '/page',
