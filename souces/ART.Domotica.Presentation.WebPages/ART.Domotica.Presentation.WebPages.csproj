@@ -103,11 +103,6 @@
     <Content Include="libs\jquery\jquery.easy-pie-chart\.DS_Store" />
     <Content Include="libs\jquery\jquery.sparkline\.DS_Store" />
     <None Include="Properties\PublishProfiles\ngauthenticationweb.pubxml" />
-    <Content Include="src\api\datatable.json" />
-    <Content Include="src\api\groups" />
-    <Content Include="src\api\login" />
-    <Content Include="src\api\saveUser" />
-    <Content Include="src\api\signup" />
     <Content Include="src\css\less\app.arrow.less" />
     <Content Include="src\css\less\app.butterbar.less" />
     <Content Include="src\css\less\app.buttons.less" />
@@ -154,8 +149,10 @@
     <Content Include="src\js\app\contact\contacts.json" />
     <Content Include="src\js\app\mail\mails.json" />
     <Content Include="src\js\app\note\notes.json" />
-    <Content Include="src\js\controllers\largeLoad.json" />
+    <Content Include="src\js\controllers\chart.js" />
+    <Content Include="src\js\controllers\tab.js" />
     <Content Include="src\js\controllers\termometroController.js" />
+    <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\psd\ui.zip" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -359,7 +356,6 @@
     <Content Include="src\img\p0.jpg" />
     <Content Include="src\index.html" />
     <Content Include="src\js\app.js" />
-    <Content Include="src\js\app.material.js" />
     <Content Include="src\js\app\calendar\calendar.js" />
     <Content Include="src\js\app\contact\contact.js" />
     <Content Include="src\js\app\mail\mail-service.js" />
@@ -378,27 +374,8 @@
     <Content Include="src\js\config.js" />
     <Content Include="src\js\config.lazyload.js" />
     <Content Include="src\js\config.router.js" />
-    <Content Include="src\js\controllers\bootstrap.js" />
-    <Content Include="src\js\controllers\chart.js" />
-    <Content Include="src\js\controllers\editor.js" />
-    <Content Include="src\js\controllers\file-upload.js" />
-    <Content Include="src\js\controllers\form.js" />
-    <Content Include="src\js\controllers\grid.js" />
-    <Content Include="src\js\controllers\imgcrop.js" />
-    <Content Include="src\js\controllers\material.js" />
-    <Content Include="src\js\controllers\scroll.js" />
-    <Content Include="src\js\controllers\select.js" />
     <Content Include="src\js\controllers\signin.js" />
     <Content Include="src\js\controllers\signup.js" />
-    <Content Include="src\js\controllers\slider.js" />
-    <Content Include="src\js\controllers\tab.js" />
-    <Content Include="src\js\controllers\table.js" />
-    <Content Include="src\js\controllers\toaster.js" />
-    <Content Include="src\js\controllers\tree.js" />
-    <Content Include="src\js\controllers\uigrid.js" />
-    <Content Include="src\js\controllers\upload.php" />
-    <Content Include="src\js\controllers\vectormap.js" />
-    <Content Include="src\js\controllers\xeditable.js" />
     <Content Include="src\js\directives\setnganimate.js" />
     <Content Include="src\js\directives\ui-butterbar.js" />
     <Content Include="src\js\directives\ui-focus.js" />
@@ -423,24 +400,17 @@
     <Content Include="src\tpl\blocks\aside.music.html" />
     <Content Include="src\tpl\blocks\aside.right.html" />
     <Content Include="src\tpl\blocks\header.html" />
-    <Content Include="src\tpl\blocks\header.music.html" />
-    <Content Include="src\tpl\blocks\material.aside.html" />
-    <Content Include="src\tpl\blocks\material.header.html" />
-    <Content Include="src\tpl\blocks\material.layout.html" />
-    <Content Include="src\tpl\blocks\material.nav.html" />
     <Content Include="src\tpl\blocks\nav.html" />
     <Content Include="src\tpl\blocks\page_footer.html" />
     <Content Include="src\tpl\blocks\settings.html" />
     <Content Include="src\tpl\docs.html" />
-    <Content Include="src\tpl\material\button.html" />
-    <Content Include="src\tpl\material\card.html" />
-    <Content Include="src\tpl\material\color.html" />
-    <Content Include="src\tpl\material\dialog.tmpl.html" />
-    <Content Include="src\tpl\material\form.html" />
-    <Content Include="src\tpl\material\icon.html" />
-    <Content Include="src\tpl\material\list.html" />
-    <Content Include="src\tpl\material\ngmaterial.html" />
-    <Content Include="src\tpl\material\toast.tmpl.html" />
+    <Content Include="src\tpl\layout.html" />
+    <Content Include="src\tpl\layout_app.html" />
+    <Content Include="src\tpl\layout_footer_fullwidth.html" />
+    <Content Include="src\tpl\layout_footer_mobile.html" />
+    <Content Include="src\tpl\layout_fullwidth.html" />
+    <Content Include="src\tpl\layout_mobile.html" />
+    <Content Include="src\tpl\page_404.html" />
     <Content Include="src\tpl\page_forgotpwd.html" />
     <Content Include="src\tpl\page_profile.html" />
     <Content Include="src\tpl\page_signin.html" />
@@ -451,9 +421,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\js\controllers\uploads\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
