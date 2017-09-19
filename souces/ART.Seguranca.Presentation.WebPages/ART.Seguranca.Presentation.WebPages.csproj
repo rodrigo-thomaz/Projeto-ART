@@ -108,11 +108,11 @@
     <Content Include="content\css\bootstrap.min.css" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="index.html" />
-    <Content Include="scripts\angular-local-storage.min.js" />
     <Content Include="scripts\authComplete.js" />
     <Content Include="scripts\jquery-1.6.4.min.js" />
     <Content Include="scripts\jquery.signalR-2.2.2.min.js" />
     <Content Include="scripts\loading-bar.min.js" />
+    <Content Include="scripts\ngStorage.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

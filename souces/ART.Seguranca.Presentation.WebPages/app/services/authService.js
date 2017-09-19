@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', function ($http, $q, localStorageService, ngAuthSettings) {
+app.factory('authService', ['$http', '$q', '$localStorage', 'ngAuthSettings', function ($http, $q, $localStorage, ngAuthSettings) {
 
     var serviceBase = ngAuthSettings.segurancaDistributedServicesUri;
     var authServiceFactory = {};
@@ -39,10 +39,10 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
         $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
             if (loginData.useRefreshTokens) {
-                localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+                $localStorage.authorizationData = { token: response.access_token, userName: loginData.userName, refreshToken: response.refresh_token, useRefreshTokens: true };
             }
             else {
-                localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false });
+                $localStorage.authorizationData = { token: response.access_token, userName: loginData.userName, refreshToken: "", useRefreshTokens: false };
             }
             _authentication.isAuth = true;
             _authentication.userName = loginData.userName;
@@ -61,7 +61,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _logOut = function () {
 
-        localStorageService.remove('authorizationData');
+        delete $localStorage.authorizationData;
 
         _authentication.isAuth = false;
         _authentication.userName = "";
@@ -71,7 +71,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _fillAuthData = function () {
 
-        var authData = localStorageService.get('authorizationData');
+        var authData = $localStorage.authorizationData;
         if (authData) {
             _authentication.isAuth = true;
             _authentication.userName = authData.userName;
@@ -83,7 +83,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     var _refreshToken = function () {
         var deferred = $q.defer();
 
-        var authData = localStorageService.get('authorizationData');
+        var authData = $localStorage.authorizationData;
 
         if (authData) {
 
@@ -91,11 +91,11 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
                 var data = "grant_type=refresh_token&refresh_token=" + authData.refreshToken + "&client_id=" + ngAuthSettings.clientId;
 
-                localStorageService.remove('authorizationData');
+                delete $localStorage.authorizationData;
 
                 $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
-                    localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true });
+                    $localStorage.authorizationData = { token: response.access_token, userName: response.userName, refreshToken: response.refresh_token, useRefreshTokens: true };
 
                     deferred.resolve(response);
 
@@ -115,7 +115,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         $http.get(serviceBase + 'api/account/ObtainLocalAccessToken', { params: { provider: externalData.provider, externalAccessToken: externalData.externalAccessToken } }).success(function (response) {
 
-            localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
+            $localStorage.authorizationData = { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false };
 
             _authentication.isAuth = true;
             _authentication.userName = response.userName;
@@ -138,7 +138,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
         $http.post(serviceBase + 'api/account/registerexternal', registerExternalData).success(function (response) {
 
-            localStorageService.set('authorizationData', { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false });
+            $localStorage.authorizationData = { token: response.access_token, userName: response.userName, refreshToken: "", useRefreshTokens: false };
 
             _authentication.isAuth = true;
             _authentication.userName = response.userName;

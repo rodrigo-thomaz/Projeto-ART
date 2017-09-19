@@ -305,7 +305,6 @@
     <Content Include="libs\jquery\plugins\integration\bootstrap\images\sort_desc_disabled.png" />
     <Content Include="libs\jquery\screenfull\dist\screenfull.min.js" />
     <Content Include="libs\jquery\slimscroll\jquery.slimscroll.min.js" />
-    <Content Include="scripts\angular-local-storage.min.js" />
     <Content Include="libs\jquery\jquery.signalR\jquery.signalR-2.2.2.min.js" />
     <Content Include="scripts\loading-bar.min.js" />
     <Content Include="src\css\app.css" />
