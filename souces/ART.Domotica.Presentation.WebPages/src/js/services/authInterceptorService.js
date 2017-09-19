@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localStorageService', function ($q, $injector, $location, localStorageService) {
+app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localStorage', function ($q, $injector, $location, $localStorage) {
 
     var authInterceptorServiceFactory = {};
 
@@ -7,7 +7,7 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
 
         config.headers = config.headers || {};
 
-        var authData = localStorageService.get('authorizationData');
+        var authData = $localStorage.authorizationData;
         if (authData) {
             config.headers.Authorization = 'Bearer ' + authData.token;
         }
@@ -18,7 +18,7 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', 'localSto
     var _responseError = function (rejection) {
         if (rejection.status === 401) {
             var authService = $injector.get('authService');
-            var authData = localStorageService.get('authorizationData');
+            var authData = $localStorage.authorizationData;
 
             if (authData) {
                 if (authData.useRefreshTokens) {
