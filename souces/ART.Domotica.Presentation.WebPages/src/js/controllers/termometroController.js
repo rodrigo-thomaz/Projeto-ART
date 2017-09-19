@@ -74,9 +74,37 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
 
         $scope.d4 = $scope.getRandomData();
     }    
-        
+
+    function signalRSample() {
+
+        (function () {
+
+            var deviceHub = $.connection.deviceHub;
+
+            $.connection.hub.logging = true;
+            $.connection.hub.start()
+                .done(function () {
+                    deviceHub.server.sendMessage('vai!!!');
+                })
+                .fail(function () {
+                    alert('erro no start');
+                });
+
+            deviceHub.client.hello = function () {
+                alert();
+            }
+
+            deviceHub.client.registerMessage = function (message) {
+                alert(message);
+            };
+
+        }());
+    }
+
     serviceSample();
 
     templateSample();
+
+    signalRSample();
 
  }]);
