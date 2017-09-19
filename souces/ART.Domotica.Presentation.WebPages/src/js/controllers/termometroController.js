@@ -1,13 +1,9 @@
 ﻿'use strict';
 
-/* Controllers */
+app.controller('termometroController', ['$scope', 'termometroService', function ($scope, termometroService) {
 
-app
-    // Flot Chart controller 
-    .controller('termometroController', ['$scope', 'termometroService', function ($scope, termometroService) {
+    function serviceSample() {
 
-
-        // Test
         $scope.lista = [];
 
         termometroService.get().then(function (results) {
@@ -17,10 +13,11 @@ app
         }, function (error) {
             if (error.status !== 401) {
                 alert(error.data.message);
-            }        
+            }
         });
-        // Test
+    }
 
+    function templateSample() {
 
         $scope.d = [[1, 6.5], [2, 6.5], [3, 7], [4, 8], [5, 7.5], [6, 7], [7, 6.8], [8, 7], [9, 7.2], [10, 7], [11, 6.8], [12, 7]];
 
@@ -76,4 +73,10 @@ app
         }
 
         $scope.d4 = $scope.getRandomData();
-    }]);
+    }    
+        
+    serviceSample();
+
+    templateSample();
+
+ }]);
