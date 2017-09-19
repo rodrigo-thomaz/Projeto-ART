@@ -12,14 +12,6 @@ app.factory('authService', ['$http', '$q', '$localStorage', 'ngAuthSettings', fu
         useRefreshTokens: false
     };
 
-    var _logIn = function () {
-        window.location = segurancaPresentationWebPagesUri + '#/login' + '?returnurl=' + window.location.href;
-    };
-
-    var _signUp = function () {
-        window.location = segurancaPresentationWebPagesUri + '#/signUp' + '?returnurl=' + window.location.href;
-    };
-
     var _logOut = function () {
 
         delete $localStorage.authorizationData;
@@ -27,6 +19,8 @@ app.factory('authService', ['$http', '$q', '$localStorage', 'ngAuthSettings', fu
         _authentication.isAuth = false;
         _authentication.userName = "";
         _authentication.useRefreshTokens = false;
+
+        window.location = segurancaPresentationWebPagesUri + '#/login' + '?returnurl=' + window.location.href;
     };
 
     var _fillAuthData = function () {
@@ -43,9 +37,7 @@ app.factory('authService', ['$http', '$q', '$localStorage', 'ngAuthSettings', fu
     var _refreshToken = function () {
         window.location = segurancaPresentationWebPagesUri + '#/refresh' + '?returnurl=' + window.location.href;
     };
-
-    authServiceFactory.logIn = _logIn;
-    authServiceFactory.signUp = _signUp;
+    
     authServiceFactory.logOut = _logOut;
     authServiceFactory.fillAuthData = _fillAuthData;
     authServiceFactory.authentication = _authentication;

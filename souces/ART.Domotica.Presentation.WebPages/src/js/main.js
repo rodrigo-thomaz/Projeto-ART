@@ -77,8 +77,7 @@ angular.module('app')
             // Authentication
 
             $scope.logOut = function () {
-                authService.logOut();
-                $location.path('/dashboard');
+                authService.logOut();                
             }
 
             $scope.authentication = authService.authentication;
