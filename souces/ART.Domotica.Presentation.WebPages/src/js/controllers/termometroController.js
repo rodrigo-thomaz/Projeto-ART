@@ -15,7 +15,9 @@ app
             $scope.lista = results.data;
 
         }, function (error) {
-            alert(error.data.message);
+            if (error.status !== 401) {
+                alert(error.data.message);
+            }        
         });
         // Test
 

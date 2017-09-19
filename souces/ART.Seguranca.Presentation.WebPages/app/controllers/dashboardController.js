@@ -8,7 +8,9 @@ app.controller('dashboardController', ['$scope', 'dashboardService', function ($
         $scope.dashboards = results.data;
 
     }, function (error) {
-        alert(error.data.message);
+        if (error.status !== 401) {
+            alert(error.data.message);
+        }        
     });
 
 }]);

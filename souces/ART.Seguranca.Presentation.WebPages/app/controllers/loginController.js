@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuthSettings', function ($scope, $location, authService, ngAuthSettings) {
+app.controller('loginController', ['$scope', '$location', '$timeout', 'authService', 'ngAuthSettings', function ($scope, $location, $timeout, authService, ngAuthSettings) {
 
     $scope.loginData = {
         userName: "",
@@ -14,7 +14,11 @@ app.controller('loginController', ['$scope', '$location', 'authService', 'ngAuth
         authService.login($scope.loginData).then(function (response) {
             var returnurl = $location.search().returnurl;
             if (returnurl) {
-                window.location = returnurl;
+                // Workarround de 2s para esperar a autenticação replicar 
+                // nas applicações do IIS
+                $timeout(function () {
+                    window.location = returnurl;
+                }, 2000);                
             }
             else {
                 $location.path('/orders');
