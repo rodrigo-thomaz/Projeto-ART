@@ -51,7 +51,7 @@ angular.module('app')
                       
     }
   )
-  .constant('MODULE_CONFIG', [
+  .constant('MODULE_CONFIG', [      
       {
           name: 'ngGrid',
           files: [

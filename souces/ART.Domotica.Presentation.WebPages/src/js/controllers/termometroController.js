@@ -33,9 +33,9 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
 
         $scope.d2 = [];
 
-        //for (var i = 0; i < 20; ++i) {
-        //    $scope.d2.push([i, Math.round(Math.sin(i) * 100) / 100]);
-        //}
+        for (var i = 0; i < 20; ++i) {
+            $scope.d2.push([i, Math.round(Math.sin(i) * 100) / 100]);
+        }
 
         $scope.d3 = [
             { label: "iPhone5S", data: 40 },
@@ -146,31 +146,67 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
             }
         });
 
-        //$scope.medicoesTemp = [];
+        $scope.medicoesTemp = [];
 
         //$scope.dataTemp = [[1, 16.5], [2, 16.5], [3, 7], [4, 12], [5, 3.5], [6, 11], [7, 16.8], [8, 19], [9, 17.2], [10, 24], [11, 6.8], [12, 7]];
         //$scope.ticksTemp = [[1, 'Jan'], [2, 'Fev'], [3, 'Mar'], [4, 'Abr'], [5, 'Mai'], [6, 'Jun'], [7, 'Jul'], [8, 'Ago'], [9, 'Set'], [10, 'Out'], [11, 'Nov'], [12, 'Dez']];
 
         $scope.dataTemp = [];
         $scope.ticksTemp = [];
-
-        var counter = 1;
-
+                
         socket.on("temp", function (client, data) {
                         
-            $scope.$apply(function () {
-                $scope.dataTemp.push([Number(data.epochTime), data.tempCelsius]);
-                $scope.ticksTemp.push([Number(data.epochTime), new Date(data.epochTime * 1000).toLocaleTimeString()]);
-            });
-
-            $scope.d2.push([counter, data.tempCelsius]);
-            counter++;
+            //$scope.$apply(function () {
+            //    $scope.dataTemp.push([Number(data.epochTime), data.tempCelsius]);
+            //    $scope.ticksTemp.push([Number(data.epochTime), new Date(data.epochTime * 1000).toLocaleTimeString()]);
+            //});
+                        
+            $scope.medicoesTemp.push(data);
             $scope.$apply();
-            //$scope.medicoesTemp.push(data);
 
             console.log(data);
         });
 
+        $scope.options = {
+            chart: {
+                type: 'discreteBarChart',
+                height: 240,
+                margin: {
+                    top: 20,
+                    right: 20,
+                    bottom: 60,
+                    left: 55
+                },
+                x: function (d) { return d.label; },
+                y: function (d) { return d.value; },
+                showValues: true,
+                valueFormat: function (d) {
+                    return d3.format(',.4f')(d);
+                },
+                transitionDuration: 500,
+                xAxis: {
+                    axisLabel: 'X Axis'
+                },
+                yAxis: {
+                    axisLabel: 'Y Axis',
+                    axisLabelDistance: 30
+                }
+            }
+        };
+
+        $scope.data = [{
+            key: "Cumulative Return",
+            values: [
+                { "label": "A", "value": -29.765957771107 },
+                { "label": "B", "value": 0 },
+                { "label": "C", "value": 32.807804682612 },
+                { "label": "D", "value": 196.45946739256 },
+                { "label": "E", "value": 0.19434030906893 },
+                { "label": "F", "value": -98.079782601442 },
+                { "label": "G", "value": -13.925743130903 },
+                { "label": "H", "value": -5.1387322875705 }
+            ]
+        }]
     }
 
     serviceSample();

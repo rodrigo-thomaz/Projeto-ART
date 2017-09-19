@@ -59,6 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libs\angular\angular-nvd3\nv.d3.min.css" />
     <Content Include="libs\angular\angular-ui-grid\ui-grid.eot" />
     <Content Include="libs\angular\angular-ui-grid\ui-grid.ttf" />
     <Content Include="libs\angular\angular-ui-grid\ui-grid.woff" />
@@ -82,6 +83,9 @@
     <Content Include="libs\jquery\jquery.sparkline\.DS_Store" />
     <None Include="Properties\PublishProfiles\ngauthenticationweb.pubxml" />
     <Content Include="libs\socket.io.js" />
+    <Content Include="libs\angular\angular-nvd3\angular-nvd3.min.js" />
+    <Content Include="libs\angular\angular-nvd3\d3.min.js" />
+    <Content Include="libs\angular\angular-nvd3\nv.d3.min.js" />
     <Content Include="src\css\less\app.arrow.less" />
     <Content Include="src\css\less\app.butterbar.less" />
     <Content Include="src\css\less\app.buttons.less" />
