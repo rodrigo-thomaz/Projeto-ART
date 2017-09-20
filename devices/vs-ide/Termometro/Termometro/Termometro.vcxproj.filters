@@ -21,19 +21,5 @@
     <ClInclude Include="__vm\.Termometro.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TemperatureSensor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TemperatureSensorManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="TemperatureSensor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TemperatureSensorManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>

@@ -47,6 +47,22 @@ NTPClient timeClient(ntpUDP, "a.st1.ntp.br", utc * 3600, ntpUpdateInterval);
 
 //NTP fim
 
+// Display start
+
+#include <SPI.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define OLED_RESET 0
+Adafruit_SSD1306 display(OLED_RESET);
+
+#if (SSD1306_LCDHEIGHT != 64)
+#error("Height incorrect, please fix Adafruit_SSD1306.h!");
+#endif
+
+// Display end
+
 TemperatureSensorManager temperatureSensorManager(timeClient);
 
 void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {

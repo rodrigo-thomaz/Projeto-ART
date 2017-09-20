@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.26730.15
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Termometro", "Termometro\Termometro.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-TemperatureSensor", "..\..\arduino-ide\libraries\art-TemperatureSensor\art-TemperatureSensor.vcxitems", "{940BDED6-BD67-4683-9614-F8E472E3B405}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-TemperatureSensorManager", "..\..\arduino-ide\libraries\art-TemperatureSensorManager\art-TemperatureSensorManager.vcxitems", "{D7813CDE-E0DC-4DFB-AA8F-80B2B1B32ED4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86

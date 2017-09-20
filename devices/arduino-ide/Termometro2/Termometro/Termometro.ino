@@ -19,8 +19,6 @@
 
 #include <OneWire.h>
 
-#include <Settings.h>
-
 #include <TemperatureSensorManager.h>
 
 #define MEM_ALOC_SIZE 4
