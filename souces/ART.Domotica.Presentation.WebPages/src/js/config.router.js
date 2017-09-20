@@ -39,6 +39,8 @@ angular.module('app')
                   url: '/termometro',
                   templateUrl: 'views/termometro.html',
                   resolve: load([
+                      'vr.directives.slider',
+                      'ui.select',
                       'js/services/termometroService.js',
                       'js/controllers/termometroController.js',
                   ])

@@ -1,28 +1,13 @@
 ﻿<div class="bg-light lter b-b wrapper-md">
-    <h1 class="m-n font-thin h3">Beauty Your Data</h1>
+    <h1 class="m-n font-thin h3">Thermometers</h1>
 </div>
 <div class="wrapper-md">
-    <div ng-controller="termometroController">
-
-        <div class="row">
-            <div class="nickname_container" id="nick">
-                <span>Type your nickname:</span>
-                <form id="submit"><input type="text" id="nickname" /></form>
-            </div>
-            <div id="chat" hidden>
-                <div class="menu" =>
-                    <div class="name" id="name">Alex</div>
-                    <div class="last" id="time">18:09</div>
-                </div>
-                <ol class="chat"></ol>
-                <input class="textarea" type="text" placeholder="Type here!" id="textarea" />
-            </div>
-        </div>
+    <div ng-controller="termometroController">        
 
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading font-bold">Spline</div>
+                    <div class="panel-heading font-bold">Gráfico</div>
                     <div class="panel-body">
                         <div style="height:240px">
                             <nvd3 options="options" data="data"></nvd3>
@@ -30,17 +15,83 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading font-bold">Multiple</div>
+                    <div class="panel-heading font-bold">Configurações</div>
                     <div class="panel-body">
-                        <div style="height:240px">
-
-
-                        </div>
+                        <form class="bs-example form-horizontal" style="height:240px">
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Endereço</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" readonly ng-model="current.deviceAddress">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Família</label>
+                                <div class="col-lg-10">
+                                    <input type="text" class="form-control" readonly ng-model="current.family">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Resolução</label>
+                                <div class="col-lg-10">
+                                    <ui-select ng-model="current.resolution" theme="bootstrap">
+                                        <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.mode}}</ui-select-match>
+                                        <ui-select-choices repeat="item.value as item in resolutions | filter: $select.search">
+                                            <div ng-bind-html="item.mode | highlight: $select.search"></div>
+                                            resolução <small ng-bind-html="item.resolution | highlight: $select.search"></small>
+                                            - tempo de conversão <small ng-bind-html="item.conversionTime | highlight: $select.search"></small>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <!--<input type="text" class="form-control" readonly ng-model="current.resolution">-->
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-2 control-label">Alarme</label>
+                                <div class="col-lg-10">
+                                    <div class="checkbox">
+                                        <label class="i-checks">
+                                            <input type="checkbox" checked><i></i>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>   
+                            <div class="form-group">
+                                <div class="col-lg-offset-2 col-lg-10">
+                                    <slider ng-model="range.min" ng-model-range="range.max" floor="1" ceiling="100"></slider>                                    
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
+
+
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading font-bold">Test Chat</div>
+                    <div class="panel-body">
+                        <div class="nickname_container" id="nick">
+                            <span>Type your nickname:</span>
+                            <form id="submit"><input type="text" id="nickname" /></form>
+                        </div>
+                        <div id="chat" hidden>
+                            <div class="menu" =>
+                                <div class="name" id="name">Alex</div>
+                                <div class="last" id="time">18:09</div>
+                            </div>
+                            <ol class="chat"></ol>
+                            <input class="textarea" type="text" placeholder="Type here!" id="textarea" />
+                        </div>     
+                    </div>
+                </div>
+            </div>            
+        </div>
+
     </div>
 </div>

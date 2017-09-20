@@ -2,30 +2,48 @@
 
 app.controller('termometroController', ['$scope', 'termometroService', function ($scope, termometroService) {
 
+    $scope.current = null;
+
+    $scope.resolution = {};
+
+    $scope.resolutions = [
+        { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
+        { mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 },
+        { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 },
+        { mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 },        
+    ];
+
     $scope.options = {
         chart: {
-            type: 'discreteBarChart',
+            type: 'lineChart',
             height: 240,
             margin: {
                 top: 20,
-                right: 20,
-                bottom: 60,
-                left: 55
+                right: 30,
+                bottom: 35,
+                left: 40
             },
-            x: function (d) { return d.label; },
-            y: function (d) { return d.value; },
-            showValues: true,
-            valueFormat: function (d) {
-                return d3.format(',.4f')(d);
-            },
-            transitionDuration: 500,
+            x: function (d) { return d.epochTime; },
+            y: function (d) { return d.tempCelsius; },
+            useInteractiveGuideline: true,
+            duration: 500,
             xAxis: {
-                axisLabel: 'X Axis'
+                //axisLabel: 'Tempo',
+                tickFormat: function (d) {
+                    return new Date(d * 1000).toLocaleTimeString();
+                },
+                tickPadding: 18,
+                axisLabelDistance: 0,
             },
             yAxis: {
-                axisLabel: 'Y Axis',
-                axisLabelDistance: 30
-            }
+                //axisLabel: 'Temperatura',
+                tickFormat: function (d) {
+                    return d3.format('.02f')(d);
+                },
+                tickPadding: 5,
+                axisLabelDistance: 0,
+            },  
+            forceY: [15, 35],
         }
     };
 
@@ -33,6 +51,15 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
         key: "Temperatura",
         values: []
     }]
+
+    $scope.cost = 40;
+    $scope.range = {
+        min: 30,
+        max: 60
+    };
+    $scope.currencyFormatting = function (value) {
+        return "$" + value.toString();
+    }
 
     function serviceSample() {
 
@@ -121,11 +148,9 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
         });
                         
         socket.on("temp", function (client, data) {
-
-            $scope.data[0].values.push({ "label": new Date(data.epochTime * 1000).toLocaleTimeString(), "value": data.tempCelsius });
-            
+            $scope.current = data;
+            $scope.data[0].values.push(data);            
             $scope.$apply();
-
             console.log(data);
         });        
     }
