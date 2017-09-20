@@ -25,8 +25,6 @@ Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "ART.Domotica.Devices.Distri
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Devices", "Devices", "{E689DF68-FB5E-4286-9F62-480D2C6E9ABA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Termometro", "devices\Termometro\Termometro.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,12 +89,6 @@ Global
 		{FD9E0D34-095E-4F3A-B401-EE60757B0404}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FD9E0D34-095E-4F3A-B401-EE60757B0404}.Release|x86.ActiveCfg = Release|Any CPU
 		{FD9E0D34-095E-4F3A-B401-EE60757B0404}.Release|x86.Build.0 = Release|Any CPU
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|Any CPU.ActiveCfg = Debug|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.ActiveCfg = Debug|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|Any CPU.ActiveCfg = Release|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -110,7 +102,6 @@ Global
 		{CDDFD569-D675-4D23-9091-FCC961E9A1DB} = {8E88B799-436B-45D7-8FF6-BEAD7BDC1DF7}
 		{FD9E0D34-095E-4F3A-B401-EE60757B0404} = {3B4488EC-9D6D-42CE-81E4-601B8CC29012}
 		{E689DF68-FB5E-4286-9F62-480D2C6E9ABA} = {3B4488EC-9D6D-42CE-81E4-601B8CC29012}
-		{C5F80730-F44F-4478-BDAE-6634EFC2CA88} = {E689DF68-FB5E-4286-9F62-480D2C6E9ABA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7BF3A15-A6FC-4D4A-A446-4CF58FF70F7C}
