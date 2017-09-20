@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading font-bold">Gráfico</div>
+                    <div class="panel-heading font-bold">Gráfico do sensor</div>
                     <div class="panel-body">
                         <div style="height:240px">
                             <nvd3 options="options" data="data"></nvd3>
@@ -18,7 +18,7 @@
 
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading font-bold">Configurações</div>
+                    <div class="panel-heading font-bold">Configurações do sensor</div>
                     <div class="panel-body">
                         <form class="bs-example form-horizontal" style="height:240px">
                             <div class="form-group">
@@ -30,6 +30,12 @@
                                         </span>
                                         <input type="text" class="form-control" readonly value="{{current.isConnected ? 'On-line' : 'Off-line'}}">                                        
                                     </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Temperatura</label>
+                                <div class="col-lg-8">
+                                    <input type="text" class="form-control" readonly value="{{current.tempCelsius == null ? '' : current.tempCelsius | number : 2}} °C">
                                 </div>
                             </div>
                             <div class="form-group">

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libs\angular\angular-locales\angular-locale_pt-br.js" />
     <Content Include="libs\angular\angular-nvd3\nv.d3.min.css" />
     <Content Include="libs\angular\angular-ui-grid\ui-grid.eot" />
     <Content Include="libs\angular\angular-ui-grid\ui-grid.ttf" />

@@ -147,12 +147,12 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
             }
         });
                         
-        socket.on("temp", function (client, data) {
+        socket.on("temp", function (client, data) {            
             $scope.current = data;
-            $scope.data[0].values.push(data);            
-            $scope.$apply();
+            $scope.data[0].values.push(data);
             console.log(data);
-        });        
+            $scope.$apply();
+        }, { passive: true });        
     }
 
     serviceSample();
