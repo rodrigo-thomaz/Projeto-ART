@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', 'termometroService', function ($scope, termometroService) {
+app.controller('termometroController', ['$scope', 'termometroService', function ($scope, termometroService) {    
 
     $scope.current = null;
 
@@ -52,14 +52,19 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
         values: []
     }]
 
-    $scope.cost = 40;
     $scope.range = {
         min: 30,
         max: 60
     };
-    $scope.currencyFormatting = function (value) {
-        return "$" + value.toString();
-    }
+
+    var socket = io.connect("http://localhost:3000");
+
+    socket.on("temp", function (client, data) {
+        $scope.current = data;
+        $scope.data[0].values.push(data);
+        console.log(data);
+        $scope.$apply();
+    }, { passive: true });        
 
     function serviceSample() {
 
@@ -102,9 +107,8 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
         }());
     }
 
-    function socketioSample() {
-
-        var socket = io.connect("http://localhost:3000");
+    function socketioChatSample() {
+        
         var ready = false;
         
         $("#submit").submit(function (e) {
@@ -146,19 +150,12 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
                     time.getMinutes() + '</time></div></li>');
             }
         });
-                        
-        socket.on("temp", function (client, data) {            
-            $scope.current = data;
-            $scope.data[0].values.push(data);
-            console.log(data);
-            $scope.$apply();
-        }, { passive: true });        
     }
 
     serviceSample();
 
     signalRSample();
 
-    socketioSample();
+    socketioChatSample();
 
 }]);

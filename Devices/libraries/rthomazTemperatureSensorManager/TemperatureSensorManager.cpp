@@ -94,13 +94,47 @@ void TemperatureSensorManager::begin()
 	}
 }
 
+String convertToJSON(TemperatureSensor temperatureSensor)
+{
+	String json = "{";
+
+	String deviceAddress = "";
+
+	for (uint8_t i = 0; i < 8; i++)
+	{
+		// zero pad the address if necessary
+		if (temperatureSensor.deviceAddress[i] < 16) deviceAddress += "0";
+		deviceAddress += String(temperatureSensor.deviceAddress[i], HEX);
+	}
+
+	String validFamily = temperatureSensor.validFamily ? "true" : "false";
+	String isConnected = temperatureSensor.isConnected ? "true" : "false";
+	String hasAlarm = temperatureSensor.hasAlarm ? "true" : "false";
+
+	json += "\"epochTime\":\"" + String(temperatureSensor.epochTime) + "\",";
+	json += "\"deviceAddress\":\"" + deviceAddress + "\",";
+	json += "\"validFamily\":" + validFamily + ",";
+	json += "\"family\":\"" + temperatureSensor.family + "\",";
+	json += "\"isConnected\":" + isConnected + ",";
+	json += "\"resolution\":" + String(temperatureSensor.resolution) + ",";
+	json += "\"tempCelsius\":" + String(temperatureSensor.tempCelsius) + ",";
+	json += "\"tempFahrenheit\":" + String(temperatureSensor.tempFahrenheit) + ",";
+	json += "\"hasAlarm\":" + hasAlarm + ",";              
+	json += "\"lowAlarmTemp\":\"" + String(temperatureSensor.lowAlarmTemp) + "\",";
+	json += "\"HighAlarmTemp\":\"" + String(temperatureSensor.highAlarmTemp) + "\"";
+
+	json += "}";
+	
+	return json;
+}
+
 TemperatureSensor *TemperatureSensorManager::getSensors()
 {	
 	sensors.requestTemperatures();
 
 	long epochTime = this->_timeClient->getEpochTime();
 	 
-	for(int i = 0; i < sizeof(arr)/sizeof(int); ++i){
+	for(int i = 0; i < sizeof(arr)/sizeof(int); ++i){		
 		arr[i].isConnected = sensors.isConnected(arr[i].deviceAddress);
 		arr[i].resolution = sensors.getResolution(arr[i].deviceAddress);    
 		arr[i].tempCelsius = sensors.getTempC(arr[i].deviceAddress);
@@ -109,6 +143,7 @@ TemperatureSensor *TemperatureSensorManager::getSensors()
 		arr[i].lowAlarmTemp = sensors.getLowAlarmTemp(arr[i].deviceAddress);
 		arr[i].highAlarmTemp = sensors.getHighAlarmTemp(arr[i].deviceAddress);
 		arr[i].epochTime = epochTime;
+		arr[i].json = convertToJSON(arr[i]);
 	}
 	
     return arr;

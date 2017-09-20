@@ -129,40 +129,10 @@ void loop() {
 
             TemperatureSensor *arr = temperatureSensorManager.getSensors();  
 
-            String json = "";            
-            
+            String json = "";                       
             for(int i = 0; i < sizeof(arr)/sizeof(int); ++i){              
-
-              json += "{";
-
-              String deviceAddress = "";
-
-              for (uint8_t j = 0; j < 8; j++)
-              {
-                // zero pad the address if necessary
-                if (arr[i].deviceAddress[j] < 16) deviceAddress += "0";
-                deviceAddress += String(arr[i].deviceAddress[j], HEX);
-              }
-   
-              String validFamily = arr[i].validFamily ? "true" : "false";
-              String isConnected = arr[i].isConnected ? "true" : "false";
-              String hasAlarm = arr[i].hasAlarm ? "true" : "false";
-
-              json += "\"epochTime\":\"" + String(arr[i].epochTime) + "\",";
-              json += "\"deviceAddress\":\"" + deviceAddress + "\",";
-              json += "\"validFamily\":" + validFamily + ",";
-              json += "\"family\":\"" + arr[i].family + "\",";
-              json += "\"isConnected\":" + isConnected + ",";
-              json += "\"resolution\":" + String(arr[i].resolution) + ",";
-              json += "\"tempCelsius\":" + String(arr[i].tempCelsius) + ",";
-              json += "\"tempFahrenheit\":" + String(arr[i].tempFahrenheit) + ",";
-              json += "\"hasAlarm\":" + hasAlarm + ",";              
-              json += "\"lowAlarmTemp\":\"" + String(arr[i].lowAlarmTemp) + "\",";
-              json += "\"HighAlarmTemp\":\"" + String(arr[i].highAlarmTemp) + "\"";
-
-              json += "}";
+              json += arr[i].json;
             }  
-
             json += "";
   
             String data = "42[\"sendTemp\"," + json + "]";
