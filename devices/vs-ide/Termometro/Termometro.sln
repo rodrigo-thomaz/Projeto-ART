@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-TemperatureSensor", "..
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-TemperatureSensorManager", "..\..\arduino-ide\libraries\art-TemperatureSensorManager\art-TemperatureSensorManager.vcxitems", "{D7813CDE-E0DC-4DFB-AA8F-80B2B1B32ED4}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-DisplayManager", "..\..\arduino-ide\libraries\art-DisplayManager\art-DisplayManager.vcxitems", "{26768A7B-568C-4382-9F1E-DAE20FB23DC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
