@@ -17,7 +17,7 @@ class TemperatureSensorManager
 	void begin();
     TemperatureSensor *getSensors();	
   private:
-	  NTPManager*          _ntpManager;
+	NTPManager*          _ntpManager;
 };
 
 #endif

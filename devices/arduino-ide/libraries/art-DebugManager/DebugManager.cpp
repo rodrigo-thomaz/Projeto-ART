@@ -17,7 +17,7 @@ void DebugManager::update()
 	bool value = digitalRead(_pin);
 	if (_isDebug != value) {
 		_isDebug = value;
-		Serial.print("Debug Mode ");
+		Serial.print("[Debug Manager] Debug Mode ");
 		Serial.println(_isDebug ? "On" : "Off");
 	}	
 }
