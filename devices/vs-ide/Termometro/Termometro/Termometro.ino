@@ -9,7 +9,7 @@
 #include <DisplayManager.h>
 #include <WifiManager.h>
 
-DebugManager debugManager(16, Serial);
+DebugManager debugManager(16);
 NTPManager ntpManager;
 DisplayManager displayManager;
 WifiManager wifiManager;
