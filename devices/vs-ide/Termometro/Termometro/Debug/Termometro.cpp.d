@@ -32,6 +32,8 @@ C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\Temp\VMBuilds\Termometro\esp8266_node
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/debug.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu/pins_arduino.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu/../generic/common.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\art-WifiManager/WifiManager.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\art-WifiManager/WifiManager.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/ESP8266WiFi.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/include/wl_definitions.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/IPAddress.h \

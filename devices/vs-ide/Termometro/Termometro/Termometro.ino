@@ -5,6 +5,7 @@
 *
 */
 
+#include <WifiManager.h>
 #include <Arduino.h>
 
 #include <ESP8266WiFi.h>
@@ -50,6 +51,10 @@ NTPClient timeClient(ntpUDP, "a.st1.ntp.br", utc * 3600, ntpUpdateInterval);
 #include <DisplayManager.h>
 
 DisplayManager displayManager;
+
+#include <WifiManager.h>
+
+WifiManager wifiManager;
 
 TemperatureSensorManager temperatureSensorManager(timeClient);
 

@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-TemperatureSensorManage
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-DisplayManager", "..\..\arduino-ide\libraries\art-DisplayManager\art-DisplayManager.vcxitems", "{26768A7B-568C-4382-9F1E-DAE20FB23DC7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-WifiManager", "..\..\arduino-ide\libraries\art-WifiManager\art-WifiManager.vcxitems", "{9ED70B54-B621-4148-A7C4-0B28EDF9D7F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
