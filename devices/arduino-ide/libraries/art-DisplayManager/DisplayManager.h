@@ -5,8 +5,9 @@
 class DisplayManager
 {
 public:
-	DisplayManager(Adafruit_SSD1306& display);
+	DisplayManager();
 	void begin();
+	Adafruit_SSD1306 display;
 private:
-	Adafruit_SSD1306*          _display;
+
 };

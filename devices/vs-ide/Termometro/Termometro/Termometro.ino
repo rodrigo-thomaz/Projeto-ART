@@ -11,21 +11,7 @@
 
 DebugManager debugManager(16);
 NTPManager ntpManager;
-
-//Display
-#include <SPI.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
-#define OLED_RESET 0
-Adafruit_SSD1306 display(OLED_RESET);
-DisplayManager displayManager(display);
-
-#if (SSD1306_LCDHEIGHT != 64)
-#error("Height incorrect, please fix Adafruit_SSD1306.h!");
-#endif
-
-//display
+DisplayManager displayManager;
 
 WifiManager wifiManager;
 TemperatureSensorManager temperatureSensorManager(ntpManager);
@@ -81,40 +67,27 @@ void setup() {
 
 	debugManager.update();
 
-	//display
 	displayManager.begin();
-	display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
-														// init done
-
-														// Show image buffer on the display hardware.
-														// Since the buffer is intialized with an Adafruit splashscreen
-														// internally, this will display the splashscreen.
-	display.display();
-	delay(2000);
-
-	// Clear the buffer.
-	display.clearDisplay();
-	//display
 
 	temperatureSensorManager.begin();
 
 	if (debugManager.isDebug()) Serial.println("Iniciando...");
 
 	// text display tests
-	display.clearDisplay();
-	display.setTextSize(1);
-	display.setTextColor(WHITE);
-	display.setCursor(0, 0);
+	displayManager.display.clearDisplay();
+	displayManager.display.setTextSize(1);
+	displayManager.display.setTextColor(WHITE);
+	displayManager.display.setCursor(0, 0);
 
-	display.println("Conectando Wifi...");
-	display.display();
+	displayManager.display.println("Conectando Wifi...");
+	displayManager.display.display();
 
 	if (wifiManager.connect()) {
 
 		if (debugManager.isDebug()) Serial.println("conectou wifi!");
 
-		display.println("Wifi conectado !!!");
-		display.display();
+		displayManager.display.println("Wifi conectado !!!");
+		displayManager.display.display();
 		delay(2000);
 
 		webSocket.beginSocketIO("192.168.1.12", 3000);
@@ -124,8 +97,8 @@ void setup() {
 		ntpManager.begin();
 	}
 	else {
-		display.println("Conexão com a rede WiFi falou!");
-		display.display();
+		displayManager.display.println("Conexão com a rede WiFi falou!");
+		displayManager.display.display();
 		delay(2000);
  }
 }
@@ -170,21 +143,21 @@ void printAddressDisplay(byte deviceAddress[8])
 	for (uint8_t i = 0; i < 8; i++)
 	{
 		// zero pad the address if necessary
-		if (deviceAddress[i] < 16) display.print("0");
-		display.print(deviceAddress[i], HEX);
+		if (deviceAddress[i] < 16) displayManager.display.print("0");
+		displayManager.display.print(deviceAddress[i], HEX);
 	}
 }
 
 void printDataDisplay(TemperatureSensor temperatureSensor)
 {
-	display.print("Address=");
+	displayManager.display.print("Address=");
 	printAddressDisplay(temperatureSensor.deviceAddress);
-	display.println();
-	display.setTextSize(2);
-	display.print(temperatureSensor.tempCelsius);
-	display.println(" C ");
-	display.print(temperatureSensor.tempFahrenheit);
-	display.println(" F");
+	displayManager.display.println();
+	displayManager.display.setTextSize(2);
+	displayManager.display.print(temperatureSensor.tempCelsius);
+	displayManager.display.println(" C ");
+	displayManager.display.print(temperatureSensor.tempFahrenheit);
+	displayManager.display.println(" F");
 }
 
 void loop() {	
@@ -200,10 +173,10 @@ void loop() {
 		if (now - messageTimestamp > MESSAGE_INTERVAL) {
 
 			// text display tests
-			display.clearDisplay();
-			display.setTextSize(1);
-			display.setTextColor(WHITE);
-			display.setCursor(0, 0);
+			displayManager.display.clearDisplay();
+			displayManager.display.setTextSize(1);
+			displayManager.display.setTextColor(WHITE);
+			displayManager.display.setCursor(0, 0);
 
 			messageTimestamp = now;
 
@@ -220,7 +193,7 @@ void loop() {
 			String data = "42[\"sendTemp\"," + json + "]";
 			webSocket.sendTXT(data);
 
-			display.display();
+			displayManager.display.display();
 		}
 		if ((now - heartbeatTimestamp) > HEARTBEAT_INTERVAL) {
 			heartbeatTimestamp = now;

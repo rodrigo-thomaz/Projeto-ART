@@ -65,5 +65,4 @@ C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\Temp\VMBuilds\Termometro\esp8266_node
  C:\Projeto-ART\devices\arduino-ide\libraries\Adafruit-GFX-Library/gfxfont.h \
  C:\Projeto-ART\devices\arduino-ide\libraries\art-WifiManager/WifiManager.h \
  C:\Projeto-ART\devices\arduino-ide\libraries\art-WifiManager/WifiManager.h \
- C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Enterprise\Common7\IDE\Extensions\53ggn0bh.0i3\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h \
- C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\Wire/Wire.h
+ C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Enterprise\Common7\IDE\Extensions\53ggn0bh.0i3\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h
