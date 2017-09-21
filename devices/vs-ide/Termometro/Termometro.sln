@@ -15,6 +15,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-WifiManager", "..\..\ar
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-NTPManager", "..\..\arduino-ide\libraries\art-NTPManager\art-NTPManager.vcxitems", "{E7D00F1C-5611-40B4-AB40-FE55EA9834EF}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-DebugManager", "..\..\arduino-ide\libraries\art-DebugManager\art-DebugManager.vcxitems", "{BF90ED5B-1779-498D-9655-F37DB7158CC4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86

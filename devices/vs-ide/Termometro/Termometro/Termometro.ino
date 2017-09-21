@@ -1,3 +1,4 @@
+#include <DebugManager.h>
 #include <Arduino.h>
 
 #include <WebSocketsClient.h>
