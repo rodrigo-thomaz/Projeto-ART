@@ -8,7 +8,7 @@ class WifiManager
 {
 public:
 	WifiManager();
-	void begin();
+	bool connect();
 };
 
 #endif

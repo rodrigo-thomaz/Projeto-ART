@@ -1,29 +1,17 @@
-/*
-* WebSocketClient.ino
-*
-*  Created on: 24.05.2015
-*
-*/
-
-#include <WifiManager.h>
 #include <Arduino.h>
 
-#include <ESP8266WiFi.h>
-#include <WiFiClient.h>
-
 #include <WebSocketsClient.h>
-
 #include <Hash.h>
 
 #include <TemperatureSensorManager.h>
+#include <NTPManager.h>
+#include <DisplayManager.h>
+#include <WifiManager.h>
 
-const char* host = "Termometro";
-const char* ssid = "RThomaz";
-const char* password = "2919517400";
-
-IPAddress ip(192, 168, 1, 177);
-IPAddress gateway(192, 168, 1, 1);
-IPAddress subnet(255, 255, 255, 0);
+NTPManager ntpManager;
+DisplayManager displayManager;
+WifiManager wifiManager;
+TemperatureSensorManager temperatureSensorManager(ntpManager);
 
 WebSocketsClient webSocket;
 
@@ -33,30 +21,6 @@ WebSocketsClient webSocket;
 uint64_t messageTimestamp = 0;
 uint64_t heartbeatTimestamp = 0;
 bool isConnected = false;
-
-//NTP inicio
-
-#include <NTPClient.h>
-#include <WiFiUdp.h>
-
-WiFiUDP ntpUDP;
-
-int ntpUpdateInterval = 60000;
-int16_t utc = 0; //UTC
-
-NTPClient timeClient(ntpUDP, "a.st1.ntp.br", utc * 3600, ntpUpdateInterval);
-
-//NTP fim
-
-#include <DisplayManager.h>
-
-DisplayManager displayManager;
-
-#include <WifiManager.h>
-
-WifiManager wifiManager;
-
-TemperatureSensorManager temperatureSensorManager(timeClient);
 
 void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 
@@ -97,12 +61,7 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 void setup() {
 
 	Serial.begin(9600);
-
-	WiFi.config(ip, gateway, subnet);
-
-	WiFi.mode(WIFI_AP_STA);
-	WiFi.begin(ssid, password);
-
+		
 	displayManager.begin();
 	temperatureSensorManager.begin();
 
@@ -117,7 +76,7 @@ void setup() {
 	displayManager.display.println("Conectando Wifi...");
 	displayManager.display.display();
 
-	if (WiFi.waitForConnectResult() == WL_CONNECTED) {
+	if (wifiManager.connect()) {
 
 		Serial.println("conectou wifi!");
 
@@ -129,9 +88,7 @@ void setup() {
 		//webSocket.setAuthorization("user", "Password"); // HTTP Basic Authorization
 		webSocket.onEvent(webSocketEvent);
 
-		//NTP Clint
-		timeClient.begin();
-		timeClient.update();
+		ntpManager.begin();
 	}
 	else {
 		displayManager.display.println("Conexão com a rede WiFi falou!");
