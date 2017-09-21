@@ -10,11 +10,10 @@
 #include <WifiManager.h>
 
 DebugManager debugManager(16);
-NTPManager ntpManager;
-DisplayManager displayManager;
-
-WifiManager wifiManager;
-TemperatureSensorManager temperatureSensorManager(ntpManager);
+NTPManager ntpManager(debugManager);
+DisplayManager displayManager(debugManager);
+WifiManager wifiManager(debugManager);
+TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
 WebSocketsClient webSocket;
 

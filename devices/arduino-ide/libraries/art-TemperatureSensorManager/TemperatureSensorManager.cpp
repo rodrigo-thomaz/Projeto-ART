@@ -1,19 +1,9 @@
-/*
-  TemperatureSensorManager.cpp - Library for Led Light code.
-  Created by Rodrigo Thomaz, June 4, 2017.
-  Released into the public domain.
-*/
-
-#include "Arduino.h"
-
 #include "TemperatureSensorManager.h"
+#include "Arduino.h"
 #include "TemperatureSensor.h"
-
-// Include the libraries we need
-#include <OneWire.h>
-#include <DallasTemperature.h>
-
-#include <NTPManager.h>
+#include "OneWire.h"
+#include "DallasTemperature.h"
+#include "NTPManager.h"
 
 // Data wire is plugged into port 2 on the Arduino
 #define ONE_WIRE_BUS 2
@@ -27,8 +17,9 @@ DallasTemperature sensors(&oneWire);
 
 TemperatureSensor *arr;
 
-TemperatureSensorManager::TemperatureSensorManager(NTPManager& ntpManager)
+TemperatureSensorManager::TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager)
 { 
+	this->_debugManager = &debugManager;
 	this->_ntpManager = &ntpManager;
 }
 

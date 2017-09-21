@@ -1,7 +1,8 @@
-#include <NTPManager.h>
-
-#include <NTPClient.h>
-#include <WiFiUdp.h>
+#include "NTPManager.h"
+#include "Arduino.h"
+#include "DebugManager.h"
+#include "NTPClient.h"
+#include "WiFiUdp.h"
 
 WiFiUDP ntpUDP;
 
@@ -10,8 +11,9 @@ int16_t utc = 0; //UTC
 
 NTPClient timeClient(ntpUDP, "a.st1.ntp.br", utc * 3600, ntpUpdateInterval);
 
-NTPManager::NTPManager()
+NTPManager::NTPManager(DebugManager& debugManager)
 {
+	this->_debugManager = &debugManager;
 }
 
 NTPManager::~NTPManager()

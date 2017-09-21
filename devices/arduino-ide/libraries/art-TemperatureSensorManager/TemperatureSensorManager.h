@@ -1,22 +1,19 @@
-/*
-  TemperatureSensorManager.h - Library for Led Light code.
-  Created by Rodrigo Thomaz, June 4, 2017.
-  Released into the public domain.
-*/
 #ifndef TemperatureSensorManager_h
 #define TemperatureSensorManager_h
 
 #include "Arduino.h"
+#include "DebugManager.h"
 #include "TemperatureSensor.h"
-#include <NTPManager.h>
+#include "NTPManager.h"
 
 class TemperatureSensorManager
 {
   public:
-    TemperatureSensorManager(NTPManager& ntpManager);
+    TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager);
 	void begin();
     TemperatureSensor *getSensors();	
   private:
+	DebugManager*          _debugManager;
 	NTPManager*          _ntpManager;
 };
 

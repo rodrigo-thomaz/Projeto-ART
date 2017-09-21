@@ -1,10 +1,9 @@
-#include "Arduino.h"
 #include "DisplayManager.h"
-
-#include <SPI.h>
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include "Arduino.h"
+#include "SPI.h"
+#include "Wire.h"
+#include "Adafruit_GFX.h"
+#include "Adafruit_SSD1306.h"
 
 #define OLED_RESET 0
 Adafruit_SSD1306 display(OLED_RESET);
@@ -13,9 +12,9 @@ Adafruit_SSD1306 display(OLED_RESET);
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
 #endif
 
-DisplayManager::DisplayManager()
+DisplayManager::DisplayManager(DebugManager& debugManager)
 {
-	
+	this->_debugManager = &debugManager;
 }
 
 void DisplayManager::begin()

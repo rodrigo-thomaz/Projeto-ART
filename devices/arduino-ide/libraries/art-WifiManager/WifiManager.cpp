@@ -1,9 +1,7 @@
-#include "Arduino.h"
-
 #include "WifiManager.h"
-
-#include <ESP8266WiFi.h>
-#include <WiFiClient.h>
+#include "Arduino.h"
+#include "ESP8266WiFi.h"
+#include "WiFiClient.h"
 
 const char* host = "Termometro";
 const char* ssid = "RThomaz";
@@ -13,9 +11,9 @@ IPAddress ip(192, 168, 1, 177);
 IPAddress gateway(192, 168, 1, 1);
 IPAddress subnet(255, 255, 255, 0);
 
-WifiManager::WifiManager()
+WifiManager::WifiManager(DebugManager& debugManager)
 {
-	
+	this->_debugManager = &debugManager;
 }
 
 bool WifiManager::connect()

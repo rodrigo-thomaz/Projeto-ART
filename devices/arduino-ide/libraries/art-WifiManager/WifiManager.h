@@ -2,13 +2,15 @@
 #define WifiManager_h
 
 #include "Arduino.h"
-#include "WifiManager.h"
+#include "DebugManager.h"
 
 class WifiManager
 {
 public:
-	WifiManager();
+	WifiManager(DebugManager& debugManager);
 	bool connect();
+private:
+	DebugManager*          _debugManager;
 };
 
 #endif
