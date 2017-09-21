@@ -32,6 +32,17 @@ C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\Temp\VMBuilds\Termometro\esp8266_node
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/debug.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu/pins_arduino.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\variants\nodemcu/../generic/common.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\art-DebugManager/DebugManager.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\art-TemperatureSensorManager/TemperatureSensorManager.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\art-TemperatureSensor/TemperatureSensor.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\art-NTPManager/NTPManager.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\art-DisplayManager/DisplayManager.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\Adafruit_SSD1306/Adafruit_SSD1306.h \
+ C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\SPI/SPI.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\Adafruit-GFX-Library/Adafruit_GFX.h \
+ C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Print.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\Adafruit-GFX-Library/gfxfont.h \
+ C:\Projeto-ART\devices\arduino-ide\libraries\art-WifiManager/WifiManager.h \
  C:\Projeto-ART\devices\arduino-ide\libraries\arduinoWebSockets-master\src/WebSocketsClient.h \
  C:\Projeto-ART\devices\arduino-ide\libraries\arduinoWebSockets-master\src/WebSockets.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/ESP8266WiFi.h \
@@ -45,7 +56,6 @@ C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\Temp\VMBuilds\Termometro\esp8266_node
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/ESP8266WiFiAP.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/ESP8266WiFiScan.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/WiFiClient.h \
- C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Print.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/Client.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\cores\esp8266/IPAddress.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/include/slist.h \
@@ -54,14 +64,4 @@ C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\Temp\VMBuilds\Termometro\esp8266_node
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/WiFiClientSecure.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\ESP8266WiFi\src/include/ssl.h \
  C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\Hash\src/Hash.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\art-DebugManager/DebugManager.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\art-TemperatureSensorManager/TemperatureSensorManager.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\art-TemperatureSensor/TemperatureSensor.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\art-NTPManager/NTPManager.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\art-DisplayManager/DisplayManager.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\Adafruit_SSD1306/Adafruit_SSD1306.h \
- C:\Users\rodrigo.RTHOMAZ.001\AppData\Local\arduino15\packages\esp8266\hardware\esp8266\2.3.0\libraries\SPI/SPI.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\Adafruit-GFX-Library/Adafruit_GFX.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\Adafruit-GFX-Library/gfxfont.h \
- C:\Projeto-ART\devices\arduino-ide\libraries\art-WifiManager/WifiManager.h \
  C:\Program\ Files\ (x86)\Microsoft\ Visual\ Studio\2017\Enterprise\Common7\IDE\Extensions\53ggn0bh.0i3\Micro\ Platforms\default\debuggers\VM_DBG/VM_DBG.h

@@ -1,13 +1,12 @@
-#include <Arduino.h>
+#include "Arduino.h"
+#include "DebugManager.h"
+#include "TemperatureSensorManager.h"
+#include "NTPManager.h"
+#include "DisplayManager.h"
+#include "WifiManager.h"
 
-#include <WebSocketsClient.h>
-#include <Hash.h>
-
-#include <DebugManager.h>
-#include <TemperatureSensorManager.h>
-#include <NTPManager.h>
-#include <DisplayManager.h>
-#include <WifiManager.h>
+#include "WebSocketsClient.h"
+#include "Hash.h"
 
 DebugManager debugManager(16);
 NTPManager ntpManager(debugManager);
