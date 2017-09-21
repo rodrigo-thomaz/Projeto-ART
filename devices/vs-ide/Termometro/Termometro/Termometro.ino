@@ -1,14 +1,15 @@
-#include <DebugManager.h>
 #include <Arduino.h>
 
 #include <WebSocketsClient.h>
 #include <Hash.h>
 
+#include <DebugManager.h>
 #include <TemperatureSensorManager.h>
 #include <NTPManager.h>
 #include <DisplayManager.h>
 #include <WifiManager.h>
 
+DebugManager debugManager(16, Serial);
 NTPManager ntpManager;
 DisplayManager displayManager;
 WifiManager wifiManager;
@@ -60,9 +61,11 @@ void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
 }
 
 void setup() {
-
-	Serial.begin(9600);
 		
+	Serial.begin(9600);
+
+	debugManager.update();
+
 	displayManager.begin();
 	temperatureSensorManager.begin();
 
@@ -156,6 +159,8 @@ void printDataDisplay(TemperatureSensor temperatureSensor)
 }
 
 void loop() {	
+
+	debugManager.update();
 
 	webSocket.loop();
 

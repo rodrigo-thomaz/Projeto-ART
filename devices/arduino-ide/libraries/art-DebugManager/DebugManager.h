@@ -6,11 +6,12 @@
 class DebugManager
 {
 public:
-	DebugManager();
+	DebugManager(int pin);
 	~DebugManager();
 	void update();
 	bool isDebug();
-private:
+private:	
+	int _pin;
 	bool _isDebug;
 };
 

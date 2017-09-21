@@ -18,6 +18,20 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "art-DebugManager", "..\..\arduino-ide\libraries\art-DebugManager\art-DebugManager.vcxitems", "{BF90ED5B-1779-498D-9655-F37DB7158CC4}"
 EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\..\arduino-ide\libraries\art-DisplayManager\art-DisplayManager.vcxitems*{26768a7b-568c-4382-9f1e-dae20fb23dc7}*SharedItemsImports = 9
+		..\..\arduino-ide\libraries\art-TemperatureSensor\art-TemperatureSensor.vcxitems*{940bded6-bd67-4683-9614-f8e472e3b405}*SharedItemsImports = 9
+		..\..\arduino-ide\libraries\art-WifiManager\art-WifiManager.vcxitems*{9ed70b54-b621-4148-a7c4-0b28edf9d7f0}*SharedItemsImports = 9
+		..\..\arduino-ide\libraries\art-DebugManager\art-DebugManager.vcxitems*{bf90ed5b-1779-498d-9655-f37db7158cc4}*SharedItemsImports = 9
+		..\..\arduino-ide\libraries\art-DebugManager\art-DebugManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		..\..\arduino-ide\libraries\art-DisplayManager\art-DisplayManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		..\..\arduino-ide\libraries\art-NTPManager\art-NTPManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		..\..\arduino-ide\libraries\art-TemperatureSensorManager\art-TemperatureSensorManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		..\..\arduino-ide\libraries\art-TemperatureSensor\art-TemperatureSensor.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		..\..\arduino-ide\libraries\art-WifiManager\art-WifiManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		..\..\arduino-ide\libraries\art-TemperatureSensorManager\art-TemperatureSensorManager.vcxitems*{d7813cde-e0dc-4dfb-aa8f-80b2b1b32ed4}*SharedItemsImports = 9
+		..\..\arduino-ide\libraries\art-NTPManager\art-NTPManager.vcxitems*{e7d00f1c-5611-40b4-ab40-fe55ea9834ef}*SharedItemsImports = 9
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86
