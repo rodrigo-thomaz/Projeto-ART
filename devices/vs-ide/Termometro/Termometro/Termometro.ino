@@ -8,13 +8,28 @@
 #include "WebSocketsClient.h"
 #include "Hash.h"
 
-DebugManager debugManager(16);
+//defines - mapeamento de pinos do NodeMCU
+#define D0    16
+#define D1    5
+#define D2    4
+#define D3    0
+#define D4    2
+#define D5    14
+#define D6    12
+#define D7    13
+#define D8    15
+#define D9    3
+#define D10   1
+
+DebugManager debugManager(D0);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
 WifiManager wifiManager(debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
 WebSocketsClient webSocket;
+
+const String ART_DEVICE_ID = "C24F71CB-E705-4188-9A94-73EB05AD4F0B";
 
 #define MESSAGE_INTERVAL 3000
 #define HEARTBEAT_INTERVAL 25000
@@ -82,6 +97,8 @@ void setup() {
 
 	if (wifiManager.connect()) {
 
+		ntpManager.begin();
+
 		if (debugManager.isDebug()) Serial.println("conectou wifi!");
 
 		displayManager.display.println("Wifi conectado !!!");
@@ -91,8 +108,8 @@ void setup() {
 		webSocket.beginSocketIO("192.168.1.12", 3000);
 		//webSocket.setAuthorization("user", "Password"); // HTTP Basic Authorization
 		webSocket.onEvent(webSocketEvent);
-
-		ntpManager.begin();
+		
+		join();
 	}
 	else {
 		displayManager.display.println("Conexão com a rede WiFi falou!");
@@ -199,4 +216,13 @@ void loop() {
 			webSocket.sendTXT("2");
 		}		
 	}
+}
+
+void join() {
+	if (debugManager.isDebug()) {
+		Serial.print("[Websocket client] send join: ");
+		Serial.println(ART_DEVICE_ID);
+	}
+	String data = "42[\"join\"," + ART_DEVICE_ID + "]";
+	webSocket.sendTXT(data);
 }

@@ -18,11 +18,11 @@ http.listen(3000, function () {
 io.on("connection", function (client) {
     console.log('user connected');
 
-    client.on("join", function (name) {
-        console.log("Joined: " + name);
-        clients[client.id] = name;
+    client.on("join", function (deviceId) {
+        console.log("Joined: " + deviceId);
+        clients[client.id] = deviceId;
         client.emit("update", "You have connected to the server.");
-        client.broadcast.emit("update", name + " has joined the server.")
+        client.broadcast.emit("update", deviceId + " has joined the server.")
     });
 
     client.on("sendTemp", function (json) {
