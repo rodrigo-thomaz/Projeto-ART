@@ -12,6 +12,7 @@ class TemperatureSensorManager
     TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager);
 	void begin();
     TemperatureSensor *getSensors();	
+	char *getSensorsJson();
   private:
 	DebugManager*          _debugManager;
 	NTPManager*          _ntpManager;

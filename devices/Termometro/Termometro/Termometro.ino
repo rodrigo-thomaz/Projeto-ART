@@ -141,20 +141,16 @@ void printDataDisplay(TemperatureSensor temperatureSensor)
 }
 
 void sendTemp(){
-
+  
   TemperatureSensor *arr = temperatureSensorManager.getSensors();     
   
-  for (int i = 0; i < sizeof(arr) / sizeof(int); ++i) {    
-    
-    if (debugManager.isDebug()) {
-      Serial.print("[TemperatureSensor] => ");
-      Serial.println(arr[i].json);
-    }
-    
+  for (int i = 0; i < sizeof(arr) / sizeof(int) + 1; ++i) {    
     printDataDisplay(arr[i]);       
-    
-    MQTT.publish(TOPICO_PUBLISH, arr[i].json);
   }
+
+  char *sensorsJson = temperatureSensorManager.getSensorsJson();
+  MQTT.publish(TOPICO_PUBLISH, sensorsJson);
+  
 }
 
 void loop() {	

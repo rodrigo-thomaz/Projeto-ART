@@ -69,7 +69,9 @@ void TemperatureSensorManager::begin()
 		  for (uint8_t j = 0; j < 8; j++)
 		  {
 			arr[i].deviceAddress[j] = deviceAddress[j];
+			Serial.print(arr[i].deviceAddress[j], HEX);
 		  }
+		  Serial.println();
 
 		  //validFamily
 		  arr[i].validFamily = sensors.validFamily(arr[i].deviceAddress);
@@ -78,7 +80,7 @@ void TemperatureSensorManager::begin()
 		  arr[i].family = getFamily(arr[i].deviceAddress);     
 
 		  // set the resolution per device
-		  sensors.setResolution(arr[i].deviceAddress, TEMPERATURE_PRECISION);     
+		  sensors.setResolution(arr[i].deviceAddress, TEMPERATURE_PRECISION);    		  
 		}
 		else{
 		  Serial.print("Não foi possível encontrar um endereço para o Device "); 
@@ -87,18 +89,17 @@ void TemperatureSensorManager::begin()
 	}
 }
 
-char *convertToJSON(TemperatureSensor temperatureSensor)
-{
-	StaticJsonBuffer<3000> JSONbuffer;
-	JsonObject& JSONencoder = JSONbuffer.createObject();
-
+void generateSensorJSONencoder(TemperatureSensor temperatureSensor, JsonArray& root)
+{	
 	String deviceAddress = "";
 	for (uint8_t i = 0; i < 8; i++)
 	{
 		// zero pad the address if necessary
 		if (temperatureSensor.deviceAddress[i] < 16) deviceAddress += "0";
 		deviceAddress += String(temperatureSensor.deviceAddress[i], HEX);
-	}
+	}	
+
+	JsonObject& JSONencoder = root.createNestedObject();
 
 	JSONencoder["deviceAddress"] = deviceAddress;	
 	JSONencoder["epochTime"] = temperatureSensor.epochTime;
@@ -111,31 +112,21 @@ char *convertToJSON(TemperatureSensor temperatureSensor)
 	JSONencoder["hasAlarm"] = temperatureSensor.hasAlarm;
 	JSONencoder["lowAlarmTemp"] = temperatureSensor.lowAlarmTemp;
 	JSONencoder["HighAlarmTemp"] = temperatureSensor.highAlarmTemp;
-
-	//JsonArray& values = JSONencoder.createNestedArray("values");
-
-	//values.add(20);
-	//values.add(21);
-	//values.add(23);
-
-	String buffer = "";
-	
-	JSONencoder.printTo(buffer);
-
-	char jsonChar[buffer.length()];
-
-	strcpy(jsonChar, buffer.c_str());
-
-	return jsonChar;
 }
+
+char *_sensorsJson = "";
 
 TemperatureSensor *TemperatureSensorManager::getSensors()
 {	
+	StaticJsonBuffer<500> JSONbuffer;
+
+	JsonArray& device = JSONbuffer.createArray();
+
 	sensors.requestTemperatures();
 
 	long epochTime = this->_ntpManager->getEpochTime();
-	 
-	for(int i = 0; i < sizeof(arr)/sizeof(int); ++i){		
+
+	for(int i = 0; i < sizeof(arr)/sizeof(int) + 1; ++i){	
 		arr[i].isConnected = sensors.isConnected(arr[i].deviceAddress);
 		arr[i].resolution = sensors.getResolution(arr[i].deviceAddress);    
 		arr[i].tempCelsius = sensors.getTempC(arr[i].deviceAddress);
@@ -144,8 +135,29 @@ TemperatureSensor *TemperatureSensorManager::getSensors()
 		arr[i].lowAlarmTemp = sensors.getLowAlarmTemp(arr[i].deviceAddress);
 		arr[i].highAlarmTemp = sensors.getHighAlarmTemp(arr[i].deviceAddress);
 		arr[i].epochTime = epochTime;
-		arr[i].json = convertToJSON(arr[i]);
+		generateSensorJSONencoder(arr[i], device);
 	}
 	
+	int len = device.measureLength();
+
+	char result[len];
+
+	device.printTo(result, sizeof(result));
+
+	if (this->_debugManager->isDebug()) {
+		Serial.print("tamanho device ==>");
+		Serial.println(len);
+		Serial.print("result device ==>");
+		device.printTo(Serial);
+		Serial.println();
+	}
+
+	_sensorsJson = result;
+
     return arr;
+}
+
+char *TemperatureSensorManager::getSensorsJson()
+{
+	return _sensorsJson;
 }
