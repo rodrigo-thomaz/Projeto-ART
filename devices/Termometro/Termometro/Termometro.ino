@@ -118,24 +118,12 @@ void VerificaConexoesWiFIEMQTT(void)
      wifiManager.connect(); //se não há conexão com o WiFI, a conexão é refeita
 }
 
-void printAddressDisplay(byte deviceAddress[8])
-{
-  for (uint8_t i = 0; i < 8; i++)
-  {
-    // zero pad the address if necessary
-    if (deviceAddress[i] < 16) displayManager.display.print("0");
-    displayManager.display.print(deviceAddress[i], HEX);
-  }
-}
-
 void printDataDisplay(TemperatureSensor temperatureSensor)
 {
   displayManager.display.print("Address=");
-  printAddressDisplay(temperatureSensor.deviceAddress);
-  displayManager.display.println();
-  displayManager.display.setTextSize(2);
+  displayManager.display.println(temperatureSensor.deviceAddressStr);
   displayManager.display.print(temperatureSensor.tempCelsius);
-  displayManager.display.println(" C ");
+  displayManager.display.print(" C | ");
   displayManager.display.print(temperatureSensor.tempFahrenheit);
   displayManager.display.println(" F");
 }
@@ -155,16 +143,16 @@ void sendTemp(){
 
 void loop() {	
 
-	debugManager.update();
-
-  //garante funcionamento das conexões WiFi e ao broker MQTT
-  VerificaConexoesWiFIEMQTT();
-
- // text display tests
+// text display tests
   displayManager.display.clearDisplay();
   displayManager.display.setTextSize(1);
   displayManager.display.setTextColor(WHITE);
   displayManager.display.setCursor(0, 0);  
+  
+	debugManager.update();
+
+  //garante funcionamento das conexões WiFi e ao broker MQTT
+  VerificaConexoesWiFIEMQTT(); 
 
   sendTemp();
 

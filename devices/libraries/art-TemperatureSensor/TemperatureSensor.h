@@ -8,6 +8,7 @@ class TemperatureSensor
   public:
     TemperatureSensor();	
 	byte deviceAddress[8];
+	String deviceAddressStr;
 	bool validFamily;
 	String family;
 	bool isConnected;	

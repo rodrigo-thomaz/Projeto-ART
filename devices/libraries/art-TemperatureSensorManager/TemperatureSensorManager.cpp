@@ -49,8 +49,11 @@ void TemperatureSensorManager::begin()
 
 	// Localizando devices
 	uint8_t deviceCount;
+	
 	deviceCount = sensors.getDeviceCount();
+	
 	arr = new TemperatureSensor[deviceCount]; 
+	
 	Serial.print("Localizando devices...");
 	Serial.print("Encontrado(s) ");
 	Serial.print(deviceCount, DEC);
@@ -68,10 +71,11 @@ void TemperatureSensorManager::begin()
 		  // address
 		  for (uint8_t j = 0; j < 8; j++)
 		  {
-			arr[i].deviceAddress[j] = deviceAddress[j];
-			Serial.print(arr[i].deviceAddress[j], HEX);
+			arr[i].deviceAddress[j] = deviceAddress[j];			
+			arr[i].deviceAddressStr += String(arr[i].deviceAddress[j], HEX);	
 		  }
-		  Serial.println();
+		  
+		  Serial.println(arr[i].deviceAddressStr);
 
 		  //validFamily
 		  arr[i].validFamily = sensors.validFamily(arr[i].deviceAddress);
@@ -89,19 +93,11 @@ void TemperatureSensorManager::begin()
 	}
 }
 
-void generateSensorJSONencoder(TemperatureSensor temperatureSensor, JsonArray& root)
+void generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
 {	
-	String deviceAddress = "";
-	for (uint8_t i = 0; i < 8; i++)
-	{
-		// zero pad the address if necessary
-		if (temperatureSensor.deviceAddress[i] < 16) deviceAddress += "0";
-		deviceAddress += String(temperatureSensor.deviceAddress[i], HEX);
-	}	
-
 	JsonObject& JSONencoder = root.createNestedObject();
 
-	JSONencoder["deviceAddress"] = deviceAddress;	
+	JSONencoder["deviceAddress"] = temperatureSensor.deviceAddressStr;
 	JSONencoder["epochTime"] = temperatureSensor.epochTime;
 	JSONencoder["validFamily"] = temperatureSensor.validFamily;
 	JSONencoder["family"] = temperatureSensor.family;
@@ -135,7 +131,7 @@ TemperatureSensor *TemperatureSensorManager::getSensors()
 		arr[i].lowAlarmTemp = sensors.getLowAlarmTemp(arr[i].deviceAddress);
 		arr[i].highAlarmTemp = sensors.getHighAlarmTemp(arr[i].deviceAddress);
 		arr[i].epochTime = epochTime;
-		generateSensorJSONencoder(arr[i], device);
+		generateNestedSensor(arr[i], device);
 	}
 	
 	int len = device.measureLength();
