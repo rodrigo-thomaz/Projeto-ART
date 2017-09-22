@@ -1,1 +1,0 @@
-﻿C:\Projeto-ART\devices\Termometro\Termometro\Termometro.vcxproj(39,5): error MSB4019: O projeto "C:\Projeto-ART\devices\libraries\art-NTPManager\art-NTPManager.vcxitems" importado não foi encontrado. Confirme se o caminho na declaração <Import> está correto e se o arquivo existe no disco.
