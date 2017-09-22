@@ -68,6 +68,8 @@
     <Content Include="libs\assets\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="libs\assets\font-awesome\fonts\fontawesome-webfont.woff" />
     <Content Include="libs\assets\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="libs\assets\mosquitto\mosquitto.js" />
+    <Content Include="libs\assets\mosquitto\mqttws31.js" />
     <Content Include="libs\assets\simple-line-icons\fonts\Simple-Line-Icons.eot" />
     <Content Include="libs\assets\simple-line-icons\fonts\Simple-Line-Icons.ttf" />
     <Content Include="libs\assets\simple-line-icons\fonts\Simple-Line-Icons.woff" />
@@ -83,7 +85,6 @@
     <Content Include="libs\jquery\jquery.easy-pie-chart\.DS_Store" />
     <Content Include="libs\jquery\jquery.sparkline\.DS_Store" />
     <None Include="Properties\PublishProfiles\ngauthenticationweb.pubxml" />
-    <Content Include="libs\socket.io.js" />
     <Content Include="libs\angular\angular-nvd3\angular-nvd3.min.js" />
     <Content Include="libs\angular\angular-nvd3\d3.min.js" />
     <Content Include="libs\angular\angular-nvd3\nv.d3.min.js" />

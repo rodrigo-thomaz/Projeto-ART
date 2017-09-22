@@ -144,7 +144,7 @@ char *TemperatureSensorManager::getSensorsJson()
 	
 	int len = device.measureLength();
 
-	char result[len];
+	char result[len + 1];
 
 	device.printTo(result, sizeof(result));
 

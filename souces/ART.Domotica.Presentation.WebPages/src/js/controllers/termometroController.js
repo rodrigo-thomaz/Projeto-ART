@@ -57,14 +57,35 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
         max: 60
     };
 
-    var socket = io.connect("http://localhost:3000");
+    var mosq = new Mosquitto();
 
-    socket.on("temp", function (client, data) {
-        $scope.current = data;
-        $scope.data[0].values.push(data);
-        console.log(data);
-        $scope.$apply();
-    }, { passive: true });        
+    var url = "ws://file-server:8083/ws";
+
+    mosq.connect(url);
+
+    mosq.onconnect = function (rc) {
+        console.log("Conectado ao Broker!");
+        var topic = 'ARTPUBTEMP';        
+        mosq.subscribe(topic, 0);
+    };
+    mosq.ondisconnect = function (rc) {
+        console.log("A conexão com o broker foi perdida");
+        mosq.connect(url);
+    };
+    mosq.onmessage = function (topic, payload, qos) {
+        switch (topic) {
+            case "ARTPUBTEMP":
+                var sensors = JSON.parse(payload);
+
+                $scope.current = sensors[0];
+                $scope.data[0].values.push(sensors[0]);
+                console.log(sensors[0]);
+                $scope.$apply();
+
+                break;
+            default:
+        }
+    };
 
     function serviceSample() {
 
@@ -105,57 +126,10 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
             };
 
         }());
-    }
-
-    function socketioChatSample() {
-        
-        var ready = false;
-        
-        $("#submit").submit(function (e) {
-            e.preventDefault();
-            $("#nick").fadeOut();
-            $("#chat").fadeIn();
-            var name = $("#nickname").val();
-            var time = new Date();
-            $("#name").html(name);
-            $("#time").html('First login: ' + time.getHours() + ':' + time.getMinutes());
-
-            ready = true;
-            socket.emit("join", name);
-        });
-
-        socket.on("update", function (msg) {
-            if (ready) {
-                $('.chat').append('<li class="info">' + msg + '</li>')
-            }
-        });
-
-        $("#textarea").keypress(function (e) {
-            if (e.which == 13) {
-                var text = $("#textarea").val();
-                $("#textarea").val('');
-                var time = new Date();
-                $(".chat").append('<li class="self"><div class="msg"><span>'
-                    + $("#nickname").val() + ':</span>    <p>' + text + '</p><time>' +
-                    time.getHours() + ':' + time.getMinutes() + '</time></div></li>');
-                socket.emit("send", text);
-            }
-        });
-
-        socket.on("chat", function (client, msg) {
-            if (ready) {
-                var time = new Date();
-                $(".chat").append('<li class="other"><div class="msg"><span>' +
-                    client + ':</span><p>' + msg + '</p><time>' + time.getHours() + ':' +
-                    time.getMinutes() + '</time></div></li>');
-            }
-        });
-    }
+    }   
 
     serviceSample();
 
     signalRSample();
-
-    socketioChatSample();
 
 }]);
