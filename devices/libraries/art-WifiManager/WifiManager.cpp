@@ -16,10 +16,12 @@ void WifiManager::begin()
 {
 	delay(10);
 
-	if (this->_debugManager->isDebug()) Serial.println("------Conexao WI-FI------");
-	if (this->_debugManager->isDebug()) Serial.print("Conectando-se na rede: ");
-	if (this->_debugManager->isDebug()) Serial.println(ssid);
-	if (this->_debugManager->isDebug()) Serial.println("Aguarde");
+	if (this->_debugManager->isDebug()) {
+		Serial.println("------Conexao WI-FI------");
+		Serial.print("Conectando-se na rede: ");
+		Serial.println(ssid);
+		Serial.println("Aguarde");
+	}
 
 	connect();
 }
@@ -40,9 +42,13 @@ void WifiManager::connect()
 		Serial.print(".");
 	}
 
-	if (this->_debugManager->isDebug()) Serial.println();
-	if (this->_debugManager->isDebug()) Serial.print("Conectado com sucesso na rede ");
-	if (this->_debugManager->isDebug()) Serial.print(ssid);
-	if (this->_debugManager->isDebug()) Serial.println("IP obtido: ");
-	if (this->_debugManager->isDebug()) Serial.println(WiFi.localIP());
+	if (this->_debugManager->isDebug()) {
+		Serial.println();
+		Serial.print("Conectado com sucesso na rede ");
+		Serial.println(ssid);
+		Serial.print("IP obtido: ");
+		Serial.println(WiFi.localIP());
+		Serial.print("Mac Address: ");
+		Serial.println(WiFi.macAddress());
+	}	
 }
