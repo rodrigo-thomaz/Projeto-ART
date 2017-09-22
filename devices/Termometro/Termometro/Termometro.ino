@@ -95,7 +95,7 @@ void setup() {
 	displayManager.display.println("Conectando Wifi...");
 	displayManager.display.display();
 
-	if (wifiManager.connect()) {
+	//if (wifiManager.connect()) {
 
 		ntpManager.begin();
 
@@ -110,12 +110,12 @@ void setup() {
 		webSocket.onEvent(webSocketEvent);
 		
 		join();
-	}
-	else {
+	//}
+	//else {
 		displayManager.display.println("Conex�o com a rede WiFi falou!");
 		displayManager.display.display();
 		delay(2000);
- }
+ //}
 }
 
 void printAddressSerial(byte deviceAddress[8])

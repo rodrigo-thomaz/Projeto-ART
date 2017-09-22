@@ -8,21 +8,42 @@ const char* host = "Termometro";
 const char* ssid = "RThomaz";
 const char* password = "2919517400";
 
-IPAddress ip(192, 168, 1, 177);
-IPAddress gateway(192, 168, 1, 1);
-IPAddress subnet(255, 255, 255, 0);
-
 WifiManager::WifiManager(DebugManager& debugManager)
 {
 	this->_debugManager = &debugManager;
 }
 
-bool WifiManager::connect()
+void WifiManager::begin()
 {
-	WiFi.config(ip, gateway, subnet);
+	delay(10);
+
+	if (this->_debugManager->isDebug()) Serial.println("------Conexao WI-FI------");
+	if (this->_debugManager->isDebug()) Serial.print("Conectando-se na rede: ");
+	if (this->_debugManager->isDebug()) Serial.println(ssid);
+	if (this->_debugManager->isDebug()) Serial.println("Aguarde");
+
+	connect();
+}
+
+void WifiManager::connect()
+{
+	//se já está conectado a rede WI-FI, nada é feito. 
+	//Caso contrário, são efetuadas tentativas de conexão
+	if (WiFi.status() == WL_CONNECTED)
+		return;
 
 	WiFi.mode(WIFI_AP_STA);
-	WiFi.begin(ssid, password);
+	WiFi.begin(ssid, password);  // Conecta na rede WI-FI
 
-	return WiFi.waitForConnectResult() == WL_CONNECTED;
+	while (WiFi.status() != WL_CONNECTED)
+	{
+		delay(100);
+		Serial.print(".");
+	}
+
+	if (this->_debugManager->isDebug()) Serial.println();
+	if (this->_debugManager->isDebug()) Serial.print("Conectado com sucesso na rede ");
+	if (this->_debugManager->isDebug()) Serial.print(ssid);
+	if (this->_debugManager->isDebug()) Serial.println("IP obtido: ");
+	if (this->_debugManager->isDebug()) Serial.println(WiFi.localIP());
 }

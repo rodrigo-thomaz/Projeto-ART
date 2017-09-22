@@ -8,7 +8,8 @@ class WifiManager
 {
 public:
 	WifiManager(DebugManager& debugManager);
-	bool connect();
+	void begin();
+	void connect();
 private:
 	DebugManager*          _debugManager;
 };
