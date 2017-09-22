@@ -18,7 +18,7 @@ class TemperatureSensor
 	char lowAlarmTemp;
 	char highAlarmTemp;
 	long epochTime;
-	String json;
+	char *json;
 };
 
 #endif

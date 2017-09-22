@@ -5,6 +5,7 @@
 #include "DallasTemperature.h"
 #include "NTPManager.h"
 #include "DebugManager.h"
+#include "ArduinoJson.h"
 
 // Data wire is plugged into port 2 on the Arduino
 #define ONE_WIRE_BUS 2
@@ -86,12 +87,12 @@ void TemperatureSensorManager::begin()
 	}
 }
 
-String convertToJSON(TemperatureSensor temperatureSensor)
+char *convertToJSON(TemperatureSensor temperatureSensor)
 {
-	String json = "{";
+	StaticJsonBuffer<3000> JSONbuffer;
+	JsonObject& JSONencoder = JSONbuffer.createObject();
 
 	String deviceAddress = "";
-
 	for (uint8_t i = 0; i < 8; i++)
 	{
 		// zero pad the address if necessary
@@ -99,25 +100,33 @@ String convertToJSON(TemperatureSensor temperatureSensor)
 		deviceAddress += String(temperatureSensor.deviceAddress[i], HEX);
 	}
 
-	String validFamily = temperatureSensor.validFamily ? "true" : "false";
-	String isConnected = temperatureSensor.isConnected ? "true" : "false";
-	String hasAlarm = temperatureSensor.hasAlarm ? "true" : "false";
+	JSONencoder["deviceAddress"] = deviceAddress;	
+	JSONencoder["epochTime"] = temperatureSensor.epochTime;
+	JSONencoder["validFamily"] = temperatureSensor.validFamily;
+	JSONencoder["family"] = temperatureSensor.family;
+	JSONencoder["isConnected"] = temperatureSensor.isConnected;
+	JSONencoder["resolution"] = temperatureSensor.resolution;
+	JSONencoder["tempCelsius"] = temperatureSensor.tempCelsius;
+	JSONencoder["tempFahrenheit"] = temperatureSensor.tempFahrenheit;
+	JSONencoder["hasAlarm"] = temperatureSensor.hasAlarm;
+	JSONencoder["lowAlarmTemp"] = temperatureSensor.lowAlarmTemp;
+	JSONencoder["HighAlarmTemp"] = temperatureSensor.highAlarmTemp;
 
-	json += "\"epochTime\":\"" + String(temperatureSensor.epochTime) + "\",";
-	json += "\"deviceAddress\":\"" + deviceAddress + "\",";
-	json += "\"validFamily\":" + validFamily + ",";
-	json += "\"family\":\"" + temperatureSensor.family + "\",";
-	json += "\"isConnected\":" + isConnected + ",";
-	json += "\"resolution\":" + String(temperatureSensor.resolution) + ",";
-	json += "\"tempCelsius\":" + String(temperatureSensor.tempCelsius) + ",";
-	json += "\"tempFahrenheit\":" + String(temperatureSensor.tempFahrenheit) + ",";
-	json += "\"hasAlarm\":" + hasAlarm + ",";              
-	json += "\"lowAlarmTemp\":\"" + String(temperatureSensor.lowAlarmTemp) + "\",";
-	json += "\"HighAlarmTemp\":\"" + String(temperatureSensor.highAlarmTemp) + "\"";
+	//JsonArray& values = JSONencoder.createNestedArray("values");
 
-	json += "}";
+	//values.add(20);
+	//values.add(21);
+	//values.add(23);
+
+	String buffer = "";
 	
-	return json;
+	JSONencoder.printTo(buffer);
+
+	char jsonChar[buffer.length()];
+
+	strcpy(jsonChar, buffer.c_str());
+
+	return jsonChar;
 }
 
 TemperatureSensor *TemperatureSensorManager::getSensors()
