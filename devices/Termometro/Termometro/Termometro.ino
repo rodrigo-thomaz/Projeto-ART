@@ -4,9 +4,9 @@
 #include "NTPManager.h"
 #include "DisplayManager.h"
 #include "WifiManager.h"
-
-#include "WebSocketsClient.h"
-#include "Hash.h"
+#include "PubSubClient.h"
+#include "WiFiClient.h"
+//#include <ArduinoJson.h>
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -14,12 +14,17 @@
 #define D2    4
 #define D3    0
 #define D4    2
-#define D5    14
+#define D5    141
 #define D6    12
 #define D7    13
 #define D8    15
 #define D9    3
 #define D10   1
+
+#define ID_MQTT  "HomeAut"
+
+#define TOPICO_SUBSCRIBE "ARTSUBSCRIBE"     //tópico MQTT de escuta
+#define TOPICO_PUBLISH   "ARTPUBLISH"    //tópico MQTT de envio de informações para Broker
 
 DebugManager debugManager(D0);
 NTPManager ntpManager(debugManager);
@@ -27,52 +32,11 @@ DisplayManager displayManager(debugManager);
 WifiManager wifiManager(debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
-WebSocketsClient webSocket;
+const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
+int BROKER_PORT = 1883; // Porta do Broker MQTT
 
-const String ART_DEVICE_ID = "C24F71CB-E705-4188-9A94-73EB05AD4F0B";
-
-#define MESSAGE_INTERVAL 3000
-#define HEARTBEAT_INTERVAL 25000
-
-uint64_t messageTimestamp = 0;
-uint64_t heartbeatTimestamp = 0;
-bool isConnected = false;
-
-void webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
-
-	if(debugManager.isDebug()) Serial.printf("[WebSocket event]");
-
-	switch (type) {
-	case WStype_DISCONNECTED:
-		if (debugManager.isDebug()) Serial.printf("[Websocket client] Disconnected!\n");
-		isConnected = false;
-		break;
-	case WStype_CONNECTED:
-	{
-		if (debugManager.isDebug()) Serial.printf("[Websocket client] Connected to url: %s\n", payload);
-		isConnected = true;
-
-		// send message to server when Connected
-		// socket.io upgrade confirmation message (required)
-		webSocket.sendTXT("5");
-	}
-	break;
-	case WStype_TEXT:
-		if (debugManager.isDebug()) Serial.printf("[Websocket client] get text: %s\n", payload);
-
-		// send message to server
-		// webSocket.sendTXT("message here");
-		break;
-	case WStype_BIN:
-		if (debugManager.isDebug()) Serial.printf("[Websocket client] get binary length: %u\n", length);
-		hexdump(payload, length);
-
-		// send data to server
-		// webSocket.sendBIN(payload, length);
-		break;
-	}
-
-}
+WiFiClient espClient;
+PubSubClient MQTT(espClient);
 
 void setup() {
 		
@@ -95,27 +59,14 @@ void setup() {
 	displayManager.display.println("Conectando Wifi...");
 	displayManager.display.display();
 
-	//if (wifiManager.connect()) {
+	wifiManager.connect();
+  initMQTT();
 
-		ntpManager.begin();
+	ntpManager.begin();
 
-		if (debugManager.isDebug()) Serial.println("conectou wifi!");
-
-		displayManager.display.println("Wifi conectado !!!");
-		displayManager.display.display();
-		delay(2000);
-
-		webSocket.beginSocketIO("192.168.1.12", 3000);
-		//webSocket.setAuthorization("user", "Password"); // HTTP Basic Authorization
-		webSocket.onEvent(webSocketEvent);
-		
-		join();
-	//}
-	//else {
-		displayManager.display.println("Conex�o com a rede WiFi falou!");
-		displayManager.display.display();
-		delay(2000);
- //}
+	displayManager.display.println("Wifi conectado !!!");
+	displayManager.display.display();
+	delay(2000);
 }
 
 void printAddressSerial(byte deviceAddress[8])
@@ -175,54 +126,97 @@ void printDataDisplay(TemperatureSensor temperatureSensor)
 	displayManager.display.println(" F");
 }
 
+void initMQTT() 
+{
+    MQTT.setServer(BROKER_MQTT, BROKER_PORT);   //informa qual broker e porta deve ser conectado
+    MQTT.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega)
+}
+ 
+void mqtt_callback(char* topic, byte* payload, unsigned int length) 
+{
+    String msg;
+
+    //obtem a string do payload recebido
+    for(int i = 0; i < length; i++) 
+    {
+       char c = (char)payload[i];
+       msg += c;
+    }
+  
+    Serial.print("RECEBIDO ");
+    Serial.println(msg);
+}
+ 
+void reconnectMQTT() 
+{
+    while (!MQTT.connected()) 
+    {
+        Serial.print("* Tentando se conectar ao Broker MQTT: ");
+        Serial.println(BROKER_MQTT);
+        if (MQTT.connect(ID_MQTT)) 
+        {
+            Serial.println("Conectado com sucesso ao broker MQTT!");
+            MQTT.subscribe(TOPICO_SUBSCRIBE); 
+        } 
+        else 
+        {
+            Serial.println("Falha ao reconectar no broker.");
+            Serial.println("Havera nova tentatica de conexao em 2s");
+            delay(2000);
+        }
+    }
+}
+
+void VerificaConexoesWiFIEMQTT(void)
+{
+    if (!MQTT.connected()) 
+        reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
+    
+     wifiManager.connect(); //se não há conexão com o WiFI, a conexão é refeita
+}
+
+void sendTemp(){
+
+  TemperatureSensor *arr = temperatureSensorManager.getSensors();     
+
+  String json = "";
+  
+  for (int i = 0; i < sizeof(arr) / sizeof(int); ++i) {
+    json += arr[i].json;
+    if (debugManager.isDebug()) printDataSerial(arr[i]);
+    printDataDisplay(arr[i]);
+  }
+  
+  json += "";
+
+  Serial.println("oi1");
+
+  char jsonChar[1024];
+  strcpy(jsonChar, json.c_str());
+  
+  Serial.println(jsonChar);
+  MQTT.publish(TOPICO_PUBLISH, "jsonChar");  
+
+  //StaticJsonBuffer<300> JSONbuffer;
+}
+
 void loop() {	
 
 	debugManager.update();
 
-	webSocket.loop();
+  //garante funcionamento das conexões WiFi e ao broker MQTT
+  VerificaConexoesWiFIEMQTT();
 
-	if (isConnected) {		
+ // text display tests
+  displayManager.display.clearDisplay();
+  displayManager.display.setTextSize(1);
+  displayManager.display.setTextColor(WHITE);
+  displayManager.display.setCursor(0, 0);  
 
-		uint64_t now = millis();
+  sendTemp();
 
-		if (now - messageTimestamp > MESSAGE_INTERVAL) {
+  displayManager.display.display();
 
-			// text display tests
-			displayManager.display.clearDisplay();
-			displayManager.display.setTextSize(1);
-			displayManager.display.setTextColor(WHITE);
-			displayManager.display.setCursor(0, 0);
-
-			messageTimestamp = now;
-
-			TemperatureSensor *arr = temperatureSensorManager.getSensors();			
-
-			String json = "";
-			for (int i = 0; i < sizeof(arr) / sizeof(int); ++i) {
-				json += arr[i].json;
-				if (debugManager.isDebug()) printDataSerial(arr[i]);
-				printDataDisplay(arr[i]);
-			}
-			json += "";
-
-			String data = "42[\"sendTemp\"," + json + "]";
-			webSocket.sendTXT(data);
-
-			displayManager.display.display();
-		}
-		if ((now - heartbeatTimestamp) > HEARTBEAT_INTERVAL) {
-			heartbeatTimestamp = now;
-			// socket.io heartbeat message
-			webSocket.sendTXT("2");
-		}		
-	}
-}
-
-void join() {
-	if (debugManager.isDebug()) {
-		Serial.print("[Websocket client] send join: ");
-		Serial.println(ART_DEVICE_ID);
-	}
-	String data = "42[\"join\",{" + ART_DEVICE_ID + "}]";
-	webSocket.sendTXT(data);
+  //keep-alive da comunicação com broker MQTT
+  MQTT.loop();
 }
