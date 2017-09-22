@@ -47,6 +47,7 @@ void setup() {
 	displayManager.begin();
 
 	temperatureSensorManager.begin();
+  temperatureSensorManager.setCallback(sensorCallback);
 
 	if (debugManager.isDebug()) Serial.println("Iniciando...");
 
@@ -128,17 +129,14 @@ void printDataDisplay(TemperatureSensor temperatureSensor)
   displayManager.display.println(" F");
 }
 
-void sendTemp(){
-  
-  TemperatureSensor *arr = temperatureSensorManager.getSensors();     
-  
-  for (int i = 0; i < sizeof(arr) / sizeof(int) + 1; ++i) {    
-    printDataDisplay(arr[i]);       
-  }
+void sensorCallback(TemperatureSensor sensor)
+{
+  printDataDisplay(sensor);       
+}
 
+void sendTemp(){
   char *sensorsJson = temperatureSensorManager.getSensorsJson();
-  MQTT.publish(TOPICO_PUBLISH, sensorsJson);
-  
+  MQTT.publish(TOPICO_PUBLISH, sensorsJson);  
 }
 
 void loop() {	

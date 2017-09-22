@@ -54,16 +54,18 @@ void TemperatureSensorManager::begin()
 	
 	arr = new TemperatureSensor[deviceCount]; 
 	
-	Serial.print("Localizando devices...");
-	Serial.print("Encontrado(s) ");
-	Serial.print(deviceCount, DEC);
-	Serial.println(" device(s).");
+	if (this->_debugManager->isDebug()) {
+		Serial.print("Localizando devices...");
+		Serial.print("Encontrado(s) ");
+		Serial.print(deviceCount, DEC);
+		Serial.println(" device(s).");
 
-	// report parasite power requirements
-	Serial.print("Parasite power is: "); 
-	if (sensors.isParasitePowerMode()) Serial.println("ON");
-	else Serial.println("OFF");
-
+		// report parasite power requirements
+		Serial.print("Parasite power is: ");
+		if (sensors.isParasitePowerMode()) Serial.println("ON");
+		else Serial.println("OFF");
+	}	
+	
 	for(int i = 0; i < deviceCount; ++i){
 		DeviceAddress deviceAddress;
 		if (sensors.getAddress(deviceAddress, i))
@@ -75,7 +77,7 @@ void TemperatureSensorManager::begin()
 			arr[i].deviceAddressStr += String(arr[i].deviceAddress[j], HEX);	
 		  }
 		  
-		  Serial.println(arr[i].deviceAddressStr);
+		  if (this->_debugManager->isDebug()) Serial.println(arr[i].deviceAddressStr);
 
 		  //validFamily
 		  arr[i].validFamily = sensors.validFamily(arr[i].deviceAddress);
@@ -87,10 +89,17 @@ void TemperatureSensorManager::begin()
 		  sensors.setResolution(arr[i].deviceAddress, TEMPERATURE_PRECISION);    		  
 		}
 		else{
-		  Serial.print("Não foi possível encontrar um endereço para o Device "); 
-		  Serial.println(i); 
+		  if (this->_debugManager->isDebug()) {
+			  Serial.print("Não foi possível encontrar um endereço para o Device ");
+			  Serial.println(i);
+		  }		  
 		}
 	}
+}
+
+void TemperatureSensorManager::setCallback(void(*sensorInCallback)(TemperatureSensor))
+{
+	_sensorInCallback = sensorInCallback;
 }
 
 void generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
@@ -110,9 +119,7 @@ void generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
 	JSONencoder["HighAlarmTemp"] = temperatureSensor.highAlarmTemp;
 }
 
-char *_sensorsJson = "";
-
-TemperatureSensor *TemperatureSensorManager::getSensors()
+char *TemperatureSensorManager::getSensorsJson()
 {	
 	StaticJsonBuffer<500> JSONbuffer;
 
@@ -132,6 +139,7 @@ TemperatureSensor *TemperatureSensorManager::getSensors()
 		arr[i].highAlarmTemp = sensors.getHighAlarmTemp(arr[i].deviceAddress);
 		arr[i].epochTime = epochTime;
 		generateNestedSensor(arr[i], device);
+		_sensorInCallback(arr[i]);
 	}
 	
 	int len = device.measureLength();
@@ -148,12 +156,5 @@ TemperatureSensor *TemperatureSensorManager::getSensors()
 		Serial.println();
 	}
 
-	_sensorsJson = result;
-
-    return arr;
-}
-
-char *TemperatureSensorManager::getSensorsJson()
-{
-	return _sensorsJson;
+    return result;
 }

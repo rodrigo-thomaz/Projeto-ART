@@ -11,11 +11,12 @@ class TemperatureSensorManager
   public:
     TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager);
 	void begin();
-    TemperatureSensor *getSensors();	
 	char *getSensorsJson();
+	void setCallback(void(*sensorInCallback)(TemperatureSensor));
   private:
 	DebugManager*          _debugManager;
 	NTPManager*          _ntpManager;
+	void(*_sensorInCallback)(TemperatureSensor);
 };
 
 #endif
