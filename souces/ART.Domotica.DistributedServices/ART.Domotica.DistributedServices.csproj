@@ -41,6 +41,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
     </Reference>
@@ -117,13 +123,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="ARTDbContext.cs" />
+    <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
+    <Compile Include="Configurations\DSFamilyTempSensorConfiguration.cs" />
+    <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
+    <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
+    <Compile Include="Configurations\SensorBaseConfiguration.cs" />
+    <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
     <Compile Include="Controllers\TermometroController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Entities\DeviceBase.cs" />
+    <Compile Include="Entities\ESPDeviceBase.cs" />
+    <Compile Include="Entities\DSFamilyTempSensor.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\RaspberryDeviceBase.cs" />
+    <Compile Include="Entities\SensorBase.cs" />
+    <Compile Include="Entities\ThermometerDevice.cs" />
     <Compile Include="Hubs\DeviceHub.cs" />
+    <Compile Include="Migrations\201709230053533_InitialCreate.cs" />
+    <Compile Include="Migrations\201709230053533_InitialCreate.Designer.cs">
+      <DependentUpon>201709230053533_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709230053533_InitialCreate.resx">
+      <DependentUpon>201709230053533_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
