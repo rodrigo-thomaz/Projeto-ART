@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ART.Domotica.DistributedServices.Entities
 {
-    public abstract class SensorBase : IEntity
+    public class User : IEntity
     {
         #region Primitive Properties
 
@@ -13,8 +13,8 @@ namespace ART.Domotica.DistributedServices.Entities
 
         #region Navigation Properties
 
-        public ICollection<SensorInSpace> SensorInSpace { get; set; }
+        public ICollection<UserInSpace> UsersInSpace { get; set; }
 
-        #endregion        
+        #endregion
     }
 }

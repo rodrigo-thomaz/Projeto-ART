@@ -124,11 +124,15 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ARTDbContext.cs" />
+    <Compile Include="Configurations\SpaceConfiguration.cs" />
+    <Compile Include="Configurations\UserConfiguration.cs" />
+    <Compile Include="Configurations\UserInSpaceConfiguration.cs" />
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\DSFamilyTempSensorConfiguration.cs" />
     <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorBaseConfiguration.cs" />
+    <Compile Include="Configurations\SensorInSpaceConfiguration.cs" />
     <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
     <Compile Include="Controllers\TermometroController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -136,13 +140,17 @@
     <Compile Include="Entities\ESPDeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
     <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\Space.cs" />
     <Compile Include="Entities\RaspberryDeviceBase.cs" />
     <Compile Include="Entities\SensorBase.cs" />
+    <Compile Include="Entities\SensorInSpace.cs" />
     <Compile Include="Entities\ThermometerDevice.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserInSpace.cs" />
     <Compile Include="Hubs\DeviceHub.cs" />
-    <Compile Include="Migrations\201709230053533_InitialCreate.cs" />
-    <Compile Include="Migrations\201709230053533_InitialCreate.Designer.cs">
-      <DependentUpon>201709230053533_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201709231315320_InitialCreate.cs" />
+    <Compile Include="Migrations\201709231315320_InitialCreate.Designer.cs">
+      <DependentUpon>201709231315320_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -152,8 +160,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709230053533_InitialCreate.resx">
-      <DependentUpon>201709230053533_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709231315320_InitialCreate.resx">
+      <DependentUpon>201709231315320_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
