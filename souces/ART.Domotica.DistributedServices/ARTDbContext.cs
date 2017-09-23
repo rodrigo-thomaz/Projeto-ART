@@ -29,9 +29,10 @@ namespace ART.Domotica.DistributedServices
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());            
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());
             modelBuilder.Configurations.Add(new ESPDeviceBaseConfiguration());
+            modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
-            modelBuilder.Configurations.Add(new SensorInSpaceConfiguration());
+            modelBuilder.Configurations.Add(new HardwareInSpaceConfiguration());
             modelBuilder.Configurations.Add(new SpaceConfiguration());
             modelBuilder.Configurations.Add(new ThermometerDeviceConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
@@ -41,7 +42,7 @@ namespace ART.Domotica.DistributedServices
         }
                 
         public DbSet<DSFamilyTempSensor> DSFamilyTempSensor { get; set; }
-        public DbSet<SensorInSpace> SensorInSpace { get; set; }
+        public DbSet<HardwareInSpace> SensorInSpace { get; set; }
         public DbSet<Space> Space { get; set; }
         public DbSet<ThermometerDevice> ThermometerDevice { get; set; }
         public DbSet<User> User { get; set; }

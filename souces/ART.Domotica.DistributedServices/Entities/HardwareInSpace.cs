@@ -2,18 +2,18 @@
 
 namespace ART.Domotica.DistributedServices.Entities
 {
-    public class SensorInSpace
+    public class HardwareInSpace
     {
         #region Primitive Properties
 
-        public Guid SensorId { get; set; }
+        public Guid HardwareBaseId { get; set; }
         public Guid SpaceId { get; set; }
 
         #endregion
 
         #region Navigation Properties
 
-        public SensorBase SensorBase { get; set; }
+        public HardwareBase HardwareBase { get; set; }
         public Space Space { get; set; }
 
         #endregion

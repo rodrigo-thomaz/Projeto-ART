@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ART.Domotica.DistributedServices.Entities
 {
-    public abstract class SensorBase : IEntity
+    public abstract class SensorBase : HardwareBase
     {
         #region Primitive Properties
 
-        public Guid Id { get; set; }
+        
 
         #endregion
 
         #region Navigation Properties
 
-        public ICollection<SensorInSpace> SensorInSpace { get; set; }
+        
 
         #endregion        
     }

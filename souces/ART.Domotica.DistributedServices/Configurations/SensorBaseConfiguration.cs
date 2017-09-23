@@ -8,12 +8,13 @@ namespace ART.Domotica.DistributedServices.Configurations
     {
         public SensorBaseConfiguration()
         {
+            ToTable("SensorBase");
+
             //Primary Keys
             HasKey(x => x.Id);
 
             //Id
             Property(x => x.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
         }
     }

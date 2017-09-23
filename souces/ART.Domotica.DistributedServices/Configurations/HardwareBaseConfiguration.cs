@@ -4,17 +4,16 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Domotica.DistributedServices.Configurations
 {
-    public class DeviceBaseConfiguration : EntityTypeConfiguration<DeviceBase>
+    public class HardwareBaseConfiguration : EntityTypeConfiguration<HardwareBase>
     {
-        public DeviceBaseConfiguration()
+        public HardwareBaseConfiguration()
         {
-            ToTable("DeviceBase");
-
             //Primary Keys
             HasKey(x => x.Id);
 
             //Id
             Property(x => x.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
         }
     }

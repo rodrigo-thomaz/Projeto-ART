@@ -3,26 +3,26 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Domotica.DistributedServices.Configurations
 {
-    public class SensorInSpaceConfiguration : EntityTypeConfiguration<SensorInSpace>
+    public class HardwareInSpaceConfiguration : EntityTypeConfiguration<HardwareInSpace>
     {
-        public SensorInSpaceConfiguration()
+        public HardwareInSpaceConfiguration()
         {
             //Primary Keys
             HasKey(x => new
             {
-                x.SensorId,
+                x.HardwareBaseId,
                 x.SpaceId,
             });
 
-            //SensorBase
-            HasRequired(x => x.SensorBase)
-                .WithMany(x => x.SensorInSpace)
-                .HasForeignKey(x => x.SensorId)
+            //HardwareBase
+            HasRequired(x => x.HardwareBase)
+                .WithMany(x => x.HardwaresInSpace)
+                .HasForeignKey(x => x.HardwareBaseId)
                 .WillCascadeOnDelete(false);
 
             //Space
             HasRequired(x => x.Space)
-                .WithMany(x => x.SensorsInSpace)
+                .WithMany(x => x.HardwaresInSpace)
                 .HasForeignKey(x => x.SpaceId)
                 .WillCascadeOnDelete(false);
         }

@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace ART.Domotica.DistributedServices.Entities
+﻿namespace ART.Domotica.DistributedServices.Entities
 {
-    public abstract class DeviceBase : IEntity
+    public abstract class DeviceBase : HardwareBase
     {
         #region Primitive Properties
 
-        public Guid Id { get; set; }
+        
 
         #endregion
 
