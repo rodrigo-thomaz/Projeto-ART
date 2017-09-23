@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ART.Domotica.DistributedServices.Entities
+﻿namespace ART.Domotica.DistributedServices.Entities
 {
     public abstract class SensorBase : HardwareBase
     {

@@ -7,8 +7,10 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Configuration;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
@@ -51,8 +53,8 @@ namespace ART.Seguranca.DistributedServices.Controllers
              }
 
              return Ok();
-        }
-
+        }        
+    
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]

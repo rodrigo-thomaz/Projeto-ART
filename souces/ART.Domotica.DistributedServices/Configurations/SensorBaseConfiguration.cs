@@ -1,5 +1,4 @@
 ﻿using ART.Domotica.DistributedServices.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Domotica.DistributedServices.Configurations

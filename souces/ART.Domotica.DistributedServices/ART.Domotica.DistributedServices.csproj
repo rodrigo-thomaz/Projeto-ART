@@ -137,6 +137,7 @@
     <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
     <Compile Include="Controllers\TermometroController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
     <Compile Include="Entities\ESPDeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
@@ -159,11 +160,16 @@
       <DependentUpon>201709231446111_InitialCreateBug1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <ProjectReference Include="..\ART.Infra.CrossCutting.WebApi\ART.Infra.CrossCutting.WebApi.csproj">
+      <Project>{0dbc73ae-9f5c-4a58-bb8a-3864bf4a5832}</Project>
+      <Name>ART.Infra.CrossCutting.WebApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709231438338_InitialCreate.resx">

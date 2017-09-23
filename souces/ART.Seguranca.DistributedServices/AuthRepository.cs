@@ -4,7 +4,11 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ART.Seguranca.DistributedServices
@@ -31,7 +35,30 @@ namespace ART.Seguranca.DistributedServices
 
             var result = await _userManager.CreateAsync(user, userModel.Password);
 
+            await InsertUserInDomotica(user);
+
             return result;
+        }
+
+        private async Task InsertUserInDomotica(IdentityUser user)
+        {
+            var domoticaServiceUri = ConfigurationManager.AppSettings["ART.Domotica.DistributedServices.Uri"];
+
+            var client = new HttpClient();
+
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            var json = "{id:'" + user.Id + "'}";
+            var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await client.PostAsync(string.Format("{0}/api/user/insert", domoticaServiceUri), content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception("O usuário foi criado em Segurança mas ocorreu um erro criando em Domótica.");
+            }
+
+            client.Dispose();
         }
 
         public async Task<IdentityUser> FindUser(string userName, string password)
