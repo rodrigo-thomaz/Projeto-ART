@@ -57,25 +57,18 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
         max: 60
     };
 
-    var mosq = new Mosquitto();
+    var wsbroker = "file-server";  // mqtt websocket enabled broker
 
-    var url = "ws://file-server:8083/ws";
-
-    mosq.connect(url);
-
-    mosq.onconnect = function (rc) {
-        console.log("Conectado ao Broker!");
-        var topic = 'ARTPUBTEMP';        
-        mosq.subscribe(topic, 0);
+    var wsport = 15675; // port for above
+    var client = new Paho.MQTT.Client(wsbroker, wsport, "/ws",
+        "myclientid_" + parseInt(Math.random() * 100, 10));
+    client.onConnectionLost = function (responseObject) {
+        console.log("CONNECTION LOST - " + responseObject.errorMessage);
     };
-    mosq.ondisconnect = function (rc) {
-        console.log("A conexão com o broker foi perdida");
-        mosq.connect(url);
-    };
-    mosq.onmessage = function (topic, payload, qos) {
-        switch (topic) {
+    client.onMessageArrived = function (message) {
+        switch (message.destinationName) {
             case "ARTPUBTEMP":
-                var sensors = JSON.parse(payload);
+                var sensors = JSON.parse(message.payloadString);
 
                 $scope.current = sensors[0];
                 $scope.data[0].values.push(sensors[0]);
@@ -86,6 +79,26 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
             default:
         }
     };
+    client.onMessageDelivered = function(message) {
+        console.log(message);
+    };
+    var options = {
+        userName: 'test',
+        password: 'test',
+        timeout: 3,
+        onSuccess: function () {
+            console.log("CONNECTION SUCCESS");
+            client.subscribe('ARTPUBTEMP', { qos: 1 });
+        },
+        onFailure: function (message) {
+            console.log("CONNECTION FAILURE - " + message.errorMessage);
+        },
+        mqttVersion: 3
+    };
+    
+    console.log("CONNECT TO " + wsbroker + ":" + wsport);
+    client.connect(options);
+
 
     function serviceSample() {
 
