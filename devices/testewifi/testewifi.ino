@@ -18,10 +18,12 @@
 #define D9    3
 #define D10   1
 
-void configModeCallback (String ssid, String ip) {
+void configModeCallback (String ssid, String pwd, String ip) {
   Serial.println();
   Serial.print("Modo de configuração: { SSID: ");
   Serial.print(ssid);  
+  Serial.print(", PWD: ");
+  Serial.print(pwd);    
   Serial.print(", IP: ");
   Serial.print(ip);    
   Serial.println(" }");
@@ -47,7 +49,7 @@ void setup() {
     wifiManager.setSaveConfigCallback(configSaveCallback);
     wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
 
-    wifiManager.autoConnect("ART Wifi");
+    wifiManager.autoConnect("ART");
 }
 
 void loop() {
