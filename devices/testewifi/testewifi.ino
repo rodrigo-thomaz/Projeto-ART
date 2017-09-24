@@ -29,14 +29,18 @@ void configModeCallback (String ssid, String pwd, String ip) {
   Serial.println(" }");
 }
 
-void configSaveCallback () {
-  Serial.println();
-  Serial.println("Configurações alteradas");
+void configSuccessToConnectCallback (String ssid) {  
+  Serial.print("Conectado na rede Wifi ");
+  Serial.println(ssid);
 }
 
-void configFailedToConnectCallback () {
-  Serial.println();
-  Serial.println("Não foi possível conectar na rede Wifi");
+void configFailedToConnectCallback (String ssid, int connectionResult, String message) {  
+  Serial.print("Não foi possível conectar na rede Wifi ");
+  Serial.println(ssid);
+  Serial.print("Code: ");
+  Serial.print(connectionResult);
+  Serial.print(" Mensagem: ");
+  Serial.println(message);
 }
 
 void setup() {
@@ -46,10 +50,10 @@ void setup() {
     WiFiManager wifiManager(D5);   
 
     wifiManager.setAPCallback(configModeCallback);
-    wifiManager.setSaveConfigCallback(configSaveCallback);
+    wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
     wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
 
-    wifiManager.autoConnect("ART");
+    wifiManager.autoConnect();
 }
 
 void loop() {
