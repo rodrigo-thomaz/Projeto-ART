@@ -29,9 +29,11 @@ void configModeCallback (String ssid, String pwd, String ip) {
   Serial.println(" }");
 }
 
-void configSuccessToConnectCallback (String ssid) {  
-  Serial.print("Conectado na rede Wifi ");
-  Serial.println(ssid);
+void configSuccessToConnectCallback (String ssid, int quality) {  
+  Serial.print("Conectado na rede Wifi: ");
+  Serial.print(ssid);
+  Serial.print(" qualidade: ");    
+  Serial.println(quality);
 }
 
 void configFailedToConnectCallback (String ssid, int connectionResult, String message) {  
