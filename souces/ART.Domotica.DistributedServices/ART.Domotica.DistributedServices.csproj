@@ -159,6 +159,10 @@
     <Compile Include="Migrations\201709251916269_InitialCreate.Designer.cs">
       <DependentUpon>201709251916269_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709251930469_CreateIndexes.cs" />
+    <Compile Include="Migrations\201709251930469_CreateIndexes.Designer.cs">
+      <DependentUpon>201709251930469_CreateIndexes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Models\UserCreateModel.cs" />
@@ -175,6 +179,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709251916269_InitialCreate.resx">
       <DependentUpon>201709251916269_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251930469_CreateIndexes.resx">
+      <DependentUpon>201709251930469_CreateIndexes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,6 @@
 ﻿using ART.Domotica.DistributedServices.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Domotica.DistributedServices.Configurations
@@ -15,6 +17,22 @@ namespace ART.Domotica.DistributedServices.Configurations
             //Id
             Property(x => x.Id)
                 .IsRequired();
+
+            //LanMacAddress
+            Property(x => x.LanMacAddress)
+                .HasMaxLength(17)
+                .IsFixedLength()
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+
+            //WLanMacAddress
+            Property(x => x.WLanMacAddress)
+                .HasMaxLength(17)
+                .IsFixedLength()
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
         }
     }
 }
