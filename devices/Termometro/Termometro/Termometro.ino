@@ -3,7 +3,7 @@
 #include "TemperatureSensorManager.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
-#include "WifiManager.h"
+#include "WiFiManager.h"
 #include "PubSubClient.h"
 #include "WiFiClient.h"
 
@@ -13,7 +13,7 @@
 #define D2    4
 #define D3    0
 #define D4    2
-#define D5    141
+#define D5    14
 #define D6    12
 #define D7    13
 #define D8    15
@@ -28,7 +28,7 @@
 DebugManager debugManager(D0);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
-WifiManager wifiManager(debugManager);
+WiFiManager wifiManager(D5, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
@@ -60,7 +60,11 @@ void setup() {
 	displayManager.display.println("Conectando Wifi...");
 	displayManager.display.display();
 
-	wifiManager.connect();
+	wifiManager.setAPCallback(configModeCallback);
+  wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
+  wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
+  wifiManager.autoConnect();
+  
   initMQTT();
 
 	ntpManager.begin();
@@ -93,7 +97,7 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
  
 void reconnectMQTT() 
 {
-    while (!MQTT.connected()) 
+    if (!MQTT.connected()) 
     {
         Serial.print("* Tentando se conectar ao Broker MQTT: ");
         Serial.println(BROKER_MQTT);
@@ -112,11 +116,9 @@ void reconnectMQTT()
 }
 
 void VerificaConexoesWiFIEMQTT(void)
-{
-    if (!MQTT.connected()) 
-        reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
-    
-     wifiManager.connect(); //se não há conexão com o WiFI, a conexão é refeita
+{    
+     reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
+     wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
 }
 
 void printDataDisplay(TemperatureSensor temperatureSensor)
@@ -137,6 +139,33 @@ void sensorCallback(TemperatureSensor sensor)
 void sendTemp(){
   char *sensorsJson = temperatureSensorManager.getSensorsJson();
   MQTT.publish(TOPICO_PUBLISH, sensorsJson);  
+}
+
+void configModeCallback (String ssid, String pwd, String ip) {
+  Serial.println();
+  Serial.print("Modo de configuração: { SSID: ");
+  Serial.print(ssid);  
+  Serial.print(", PWD: ");
+  Serial.print(pwd);    
+  Serial.print(", IP: ");
+  Serial.print(ip);    
+  Serial.println(" }");
+}
+
+void configSuccessToConnectCallback (String ssid, int quality) {  
+  Serial.print("Conectado na rede Wifi: ");
+  Serial.print(ssid);
+  Serial.print(" qualidade: ");    
+  Serial.println(quality);
+}
+
+void configFailedToConnectCallback (String ssid, int connectionResult, String message) {  
+  Serial.print("Não foi possível conectar na rede Wifi ");
+  Serial.println(ssid);
+  Serial.print("Code: ");
+  Serial.print(connectionResult);
+  Serial.print(" Mensagem: ");
+  Serial.println(message);
 }
 
 void loop() {	

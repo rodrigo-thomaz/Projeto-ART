@@ -1,9 +1,10 @@
-#include <ESP8266WiFi.h>    
-
-//needed for library
-#include <DNSServer.h>
-#include <ESP8266WebServer.h>
 #include <WiFiManager.h>        
+
+#include "DebugManager.h"
+
+DebugManager debugManager(D0);
+
+WiFiManager wifiManager(D5, debugManager);
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -45,11 +46,14 @@ void configFailedToConnectCallback (String ssid, int connectionResult, String me
   Serial.println(message);
 }
 
+void VerificaConexoesWiFIEMQTT(void)
+{    
+     wifiManager.autoConnect();
+}
+
 void setup() {
 
-    Serial.begin(115200);
-
-    WiFiManager wifiManager(D5);   
+    Serial.begin(115200);       
 
     wifiManager.setAPCallback(configModeCallback);
     wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
@@ -59,5 +63,5 @@ void setup() {
 }
 
 void loop() {
-  
+  VerificaConexoesWiFIEMQTT(); 
 }
