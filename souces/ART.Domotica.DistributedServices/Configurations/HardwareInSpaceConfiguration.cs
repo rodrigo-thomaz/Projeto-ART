@@ -1,4 +1,6 @@
 ﻿using ART.Domotica.DistributedServices.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Infrastructure.Annotations;
 using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Domotica.DistributedServices.Configurations
@@ -13,6 +15,16 @@ namespace ART.Domotica.DistributedServices.Configurations
                 x.HardwareBaseId,
                 x.SpaceId,
             });
+
+            //HardwareBaseId
+            Property(x => x.HardwareBaseId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //SpaceId
+            Property(x => x.SpaceId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
 
             //HardwareBase
             HasRequired(x => x.HardwareBase)

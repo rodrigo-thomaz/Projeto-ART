@@ -155,17 +155,9 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInSpace.cs" />
     <Compile Include="Hubs\DeviceHub.cs" />
-    <Compile Include="Migrations\201709251743409_InitialCreate.cs" />
-    <Compile Include="Migrations\201709251743409_InitialCreate.Designer.cs">
-      <DependentUpon>201709251743409_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709251757548_InitialCreate1.cs" />
-    <Compile Include="Migrations\201709251757548_InitialCreate1.Designer.cs">
-      <DependentUpon>201709251757548_InitialCreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709251815204_InitialCreate2.cs" />
-    <Compile Include="Migrations\201709251815204_InitialCreate2.Designer.cs">
-      <DependentUpon>201709251815204_InitialCreate2.cs</DependentUpon>
+    <Compile Include="Migrations\201709251916269_InitialCreate.cs" />
+    <Compile Include="Migrations\201709251916269_InitialCreate.Designer.cs">
+      <DependentUpon>201709251916269_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -181,14 +173,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709251743409_InitialCreate.resx">
-      <DependentUpon>201709251743409_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709251757548_InitialCreate1.resx">
-      <DependentUpon>201709251757548_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709251815204_InitialCreate2.resx">
-      <DependentUpon>201709251815204_InitialCreate2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709251916269_InitialCreate.resx">
+      <DependentUpon>201709251916269_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

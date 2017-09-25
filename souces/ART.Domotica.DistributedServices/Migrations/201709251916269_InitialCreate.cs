@@ -1,8 +1,6 @@
 namespace ART.Domotica.DistributedServices.Migrations
 {
     using System;
-    using System.Collections.Generic;
-    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
     
     public partial class InitialCreate : DbMigration
@@ -38,7 +36,8 @@ namespace ART.Domotica.DistributedServices.Migrations
                         Name = c.String(nullable: false, maxLength: 255),
                         Description = c.String(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
             
             CreateTable(
                 "dbo.UserInSpace",
@@ -69,7 +68,8 @@ namespace ART.Domotica.DistributedServices.Migrations
                         Name = c.String(nullable: false, maxLength: 255),
                         Description = c.String(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
             
             CreateTable(
                 "dbo.DSFamilyTempSensorResolution",
@@ -82,7 +82,9 @@ namespace ART.Domotica.DistributedServices.Migrations
                         Bits = c.Byte(nullable: false),
                         Description = c.String(),
                     })
-                .PrimaryKey(t => t.Id);
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.Bits, unique: true);
             
             CreateTable(
                 "dbo.SensorBase",
@@ -99,14 +101,7 @@ namespace ART.Domotica.DistributedServices.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceAddress = c.String(nullable: false, maxLength: 15,
-                            annotations: new Dictionary<string, AnnotationValues>
-                            {
-                                { 
-                                    "IX_Unique_DeviceAddress",
-                                    new AnnotationValues(oldValue: null, newValue: "IndexAnnotation: { IsUnique: True }")
-                                },
-                            }),
+                        DeviceAddress = c.String(nullable: false, maxLength: 15),
                         Family = c.String(nullable: false, maxLength: 10),
                         TemperatureScaleId = c.Guid(nullable: false),
                     })
@@ -114,6 +109,7 @@ namespace ART.Domotica.DistributedServices.Migrations
                 .ForeignKey("dbo.SensorBase", t => t.Id)
                 .ForeignKey("dbo.TemperatureScale", t => t.TemperatureScaleId)
                 .Index(t => t.Id)
+                .Index(t => t.DeviceAddress, unique: true)
                 .Index(t => t.TemperatureScaleId);
             
             CreateTable(
@@ -179,27 +175,22 @@ namespace ART.Domotica.DistributedServices.Migrations
             DropIndex("dbo.ESPDeviceBase", new[] { "Id" });
             DropIndex("dbo.DeviceBase", new[] { "Id" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "TemperatureScaleId" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
             DropIndex("dbo.SensorBase", new[] { "Id" });
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
+            DropIndex("dbo.TemperatureScale", new[] { "Name" });
             DropIndex("dbo.UserInSpace", new[] { "SpaceId" });
             DropIndex("dbo.UserInSpace", new[] { "UserId" });
+            DropIndex("dbo.Space", new[] { "Name" });
             DropIndex("dbo.HardwareInSpace", new[] { "SpaceId" });
             DropIndex("dbo.HardwareInSpace", new[] { "HardwareBaseId" });
             DropTable("dbo.RaspberryDeviceBase");
             DropTable("dbo.ThermometerDevice");
             DropTable("dbo.ESPDeviceBase");
             DropTable("dbo.DeviceBase");
-            DropTable("dbo.DSFamilyTempSensor",
-                removedColumnAnnotations: new Dictionary<string, IDictionary<string, object>>
-                {
-                    {
-                        "DeviceAddress",
-                        new Dictionary<string, object>
-                        {
-                            { "IX_Unique_DeviceAddress", "IndexAnnotation: { IsUnique: True }" },
-                        }
-                    },
-                });
+            DropTable("dbo.DSFamilyTempSensor");
             DropTable("dbo.SensorBase");
             DropTable("dbo.DSFamilyTempSensorResolution");
             DropTable("dbo.TemperatureScale");

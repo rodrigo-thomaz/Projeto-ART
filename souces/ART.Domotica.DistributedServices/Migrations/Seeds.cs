@@ -63,6 +63,10 @@ namespace ART.Domotica.DistributedServices.Migrations
                 };
                 context.DSFamilyTempSensor.Add(sensor1);
             }
+            else
+            {
+                sensor1.Family = "DS18B20";
+            }
             
             if (sensor2 == null)
             {
@@ -74,7 +78,11 @@ namespace ART.Domotica.DistributedServices.Migrations
                     TemperatureScale = fahrenheitTemperatureScale,
                 };
                 context.DSFamilyTempSensor.Add(sensor2);
-            }                
+            }   
+            else
+            {
+                sensor2.Family = "DS18B20";
+            }
 
             #endregion
 
@@ -82,21 +90,19 @@ namespace ART.Domotica.DistributedServices.Migrations
 
             var space1 = new Space
             {
-                Id = Guid.Parse("51C174A1-266E-4245-BA8C-F6F2AA4B2652"),
                 Name = "Aquário Sala",
                 Description = "Aquário Quarto",
             };
 
             var space2 = new Space
             {
-                Id = Guid.Parse("66A84A85-9D2C-4EBC-91D4-F891C3BD8A22"),
                 Name = "Fonte com carpas",
                 Description = "Pequena fonte com carpas no quintal",
             };
 
-            context.Space.AddOrUpdate(space1);
+            context.Space.AddOrUpdate(x => x.Name, space1);
 
-            context.Space.AddOrUpdate(space2);
+            context.Space.AddOrUpdate(x => x.Name, space2);
 
             #endregion
 
@@ -128,7 +134,6 @@ namespace ART.Domotica.DistributedServices.Migrations
 
             var dsFamilyTempSensorResolution1 = new DSFamilyTempSensorResolution
             {
-                Id = Guid.Parse("00F67477-EE29-4679-882A-6BEB6907381C"),
                 Name = "9 bits",
                 Bits = 9,
                 Resolution = 0.5M,
@@ -138,7 +143,6 @@ namespace ART.Domotica.DistributedServices.Migrations
 
             var dsFamilyTempSensorResolution2 = new DSFamilyTempSensorResolution
             {
-                Id = Guid.Parse("89835D9C-A817-4A8A-BDC2-B41DBD5FF281"),
                 Name = "10 bits",
                 Bits = 10,
                 Resolution = 0.25M,
@@ -148,7 +152,6 @@ namespace ART.Domotica.DistributedServices.Migrations
 
             var dsFamilyTempSensorResolution3 = new DSFamilyTempSensorResolution
             {
-                Id = Guid.Parse("E89644D5-6B95-4411-BB57-0F4E039E814B"),
                 Name = "11 bits",
                 Bits = 11,
                 Resolution = 0.125M,
@@ -158,7 +161,6 @@ namespace ART.Domotica.DistributedServices.Migrations
 
             var dsFamilyTempSensorResolution4 = new DSFamilyTempSensorResolution
             {
-                Id = Guid.Parse("EFA51275-6A7D-4CDC-99A3-9C943B99D2C8"),
                 Name = "12 bits",
                 Bits = 12,
                 Resolution = 0.0625M,
@@ -166,10 +168,10 @@ namespace ART.Domotica.DistributedServices.Migrations
                 Description = "Resolução de 12 bits",
             };
 
-            context.DSFamilyTempSensorResolution.AddOrUpdate(dsFamilyTempSensorResolution1);
-            context.DSFamilyTempSensorResolution.AddOrUpdate(dsFamilyTempSensorResolution2);
-            context.DSFamilyTempSensorResolution.AddOrUpdate(dsFamilyTempSensorResolution3);
-            context.DSFamilyTempSensorResolution.AddOrUpdate(dsFamilyTempSensorResolution4);
+            context.DSFamilyTempSensorResolution.AddOrUpdate(x => x.Bits, dsFamilyTempSensorResolution1);
+            context.DSFamilyTempSensorResolution.AddOrUpdate(x => x.Bits, dsFamilyTempSensorResolution2);
+            context.DSFamilyTempSensorResolution.AddOrUpdate(x => x.Bits, dsFamilyTempSensorResolution3);
+            context.DSFamilyTempSensorResolution.AddOrUpdate(x => x.Bits, dsFamilyTempSensorResolution4);
 
             #endregion
         }

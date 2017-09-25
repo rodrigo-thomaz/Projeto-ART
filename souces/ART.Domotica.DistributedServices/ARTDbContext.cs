@@ -8,7 +8,7 @@ namespace ART.Domotica.DistributedServices
     public class ARTDbContext : DbContext
     {
         public ARTDbContext()
-             : base(@"Data Source=.\SQLEXPRESS;Initial Catalog=ART.Domotica4;Integrated Security=false;User ID=sa;Password=b3b3xu!@#;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False")
+             : base(@"Data Source=.\SQLEXPRESS;Initial Catalog=ART.Domotica;Integrated Security=false;User ID=sa;Password=b3b3xu!@#;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False")
         {
             Initialize();
         }

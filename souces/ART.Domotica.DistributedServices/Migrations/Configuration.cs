@@ -14,6 +14,8 @@ namespace ART.Domotica.DistributedServices.Migrations
         protected override void Seed(ARTDbContext context)
         {
             Seeds.Execute(context);
+
+            base.Seed(context);
         }
     }
 }
