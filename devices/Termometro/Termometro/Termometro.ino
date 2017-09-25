@@ -170,13 +170,13 @@ void configFailedToConnectCallback (String ssid, int connectionResult, String me
 
 void loop() {	
 
-// text display tests
+  debugManager.update();
+  
+  // text display tests
   displayManager.display.clearDisplay();
   displayManager.display.setTextSize(1);
   displayManager.display.setTextColor(WHITE);
-  displayManager.display.setCursor(0, 0);  
-  
-	debugManager.update();
+  displayManager.display.setCursor(0, 0);  	
 
   //garante funcionamento das conexões WiFi e ao broker MQTT
   VerificaConexoesWiFIEMQTT(); 

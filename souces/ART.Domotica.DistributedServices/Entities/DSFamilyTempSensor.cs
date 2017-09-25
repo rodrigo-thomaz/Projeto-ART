@@ -6,7 +6,6 @@
 
         public string DeviceAddress { get; set; }
         public string Family { get; set; }
-        public byte Resolution { get; set; }
 
         #endregion
 

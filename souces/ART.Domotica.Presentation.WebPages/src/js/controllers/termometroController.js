@@ -71,7 +71,11 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
                 var sensors = JSON.parse(message.payloadString);
 
                 $scope.current = sensors[0];
+
                 $scope.data[0].values.push(sensors[0]);
+                if ($scope.data[0].values.length > 60)
+                    $scope.data[0].values.shift();
+
                 console.log(sensors[0]);
                 $scope.$apply();
 

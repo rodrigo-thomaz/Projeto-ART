@@ -124,6 +124,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="ARTDbContext.cs" />
+    <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
     <Compile Include="Configurations\SpaceConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
+    <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
     <Compile Include="Entities\ESPDeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
     <Compile Include="Entities\HardwareBase.cs" />
@@ -159,6 +161,26 @@
     <Compile Include="Migrations\201709231446111_InitialCreateBug1.Designer.cs">
       <DependentUpon>201709231446111_InitialCreateBug1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709251208398_InitialCreateBug2.cs" />
+    <Compile Include="Migrations\201709251208398_InitialCreateBug2.Designer.cs">
+      <DependentUpon>201709251208398_InitialCreateBug2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251308133_AddTableResolution.cs" />
+    <Compile Include="Migrations\201709251308133_AddTableResolution.Designer.cs">
+      <DependentUpon>201709251308133_AddTableResolution.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251408217_AddTableResolution1.cs" />
+    <Compile Include="Migrations\201709251408217_AddTableResolution1.Designer.cs">
+      <DependentUpon>201709251408217_AddTableResolution1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251413577_AddTableResolution2.cs" />
+    <Compile Include="Migrations\201709251413577_AddTableResolution2.Designer.cs">
+      <DependentUpon>201709251413577_AddTableResolution2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251426592_AddTableResolution3.cs" />
+    <Compile Include="Migrations\201709251426592_AddTableResolution3.Designer.cs">
+      <DependentUpon>201709251426592_AddTableResolution3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -177,6 +199,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709231446111_InitialCreateBug1.resx">
       <DependentUpon>201709231446111_InitialCreateBug1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251208398_InitialCreateBug2.resx">
+      <DependentUpon>201709251208398_InitialCreateBug2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251308133_AddTableResolution.resx">
+      <DependentUpon>201709251308133_AddTableResolution.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251408217_AddTableResolution1.resx">
+      <DependentUpon>201709251408217_AddTableResolution1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251413577_AddTableResolution2.resx">
+      <DependentUpon>201709251413577_AddTableResolution2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251426592_AddTableResolution3.resx">
+      <DependentUpon>201709251426592_AddTableResolution3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

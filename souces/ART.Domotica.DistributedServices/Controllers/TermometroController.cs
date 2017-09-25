@@ -11,7 +11,7 @@ namespace ART.Domotica.DistributedServices.Controllers
     {
         [Route("")]
         public IEnumerable<object> Get()
-        {
+        {           
             //string token = "";
             //Microsoft.Owin.Security.AuthenticationTicket ticket = Startup.OAuthBearerOptions.AccessTokenFormat.Unprotect(token);
 
