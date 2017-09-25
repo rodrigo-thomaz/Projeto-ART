@@ -155,13 +155,9 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInSpace.cs" />
     <Compile Include="Hubs\DeviceHub.cs" />
-    <Compile Include="Migrations\201709251916269_InitialCreate.cs" />
-    <Compile Include="Migrations\201709251916269_InitialCreate.Designer.cs">
-      <DependentUpon>201709251916269_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709251930469_CreateIndexes.cs" />
-    <Compile Include="Migrations\201709251930469_CreateIndexes.Designer.cs">
-      <DependentUpon>201709251930469_CreateIndexes.cs</DependentUpon>
+    <Compile Include="Migrations\201709252016535_InitialCreate.cs" />
+    <Compile Include="Migrations\201709252016535_InitialCreate.Designer.cs">
+      <DependentUpon>201709252016535_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -177,11 +173,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709251916269_InitialCreate.resx">
-      <DependentUpon>201709251916269_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709251930469_CreateIndexes.resx">
-      <DependentUpon>201709251930469_CreateIndexes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709252016535_InitialCreate.resx">
+      <DependentUpon>201709252016535_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

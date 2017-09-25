@@ -8,13 +8,15 @@ namespace ART.Domotica.DistributedServices.Entities
 
         public string DeviceAddress { get; set; }
         public string Family { get; set; }
-        public Guid TemperatureScaleId { get; set; }
+        public byte TemperatureScaleId { get; set; }
+        public byte DSFamilyTempSensorResolutionId { get; set; }
 
         #endregion
 
         #region Navigation Properties
 
         public TemperatureScale TemperatureScale { get; set; }
+        public DSFamilyTempSensorResolution DSFamilyTempSensorResolution { get; set; }
 
         #endregion        
     }

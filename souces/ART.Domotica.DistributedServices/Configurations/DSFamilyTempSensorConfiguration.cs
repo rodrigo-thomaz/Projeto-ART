@@ -32,6 +32,11 @@ namespace ART.Domotica.DistributedServices.Configurations
                 .HasForeignKey(x => x.TemperatureScaleId)
                 .WillCascadeOnDelete(false);
 
+            //DSFamilyTempSensorResolution           
+            HasRequired(x => x.DSFamilyTempSensorResolution)
+                .WithMany(x => x.DSFamilyTempSensors)
+                .HasForeignKey(x => x.DSFamilyTempSensorResolutionId)
+                .WillCascadeOnDelete(false);
         }
     }
 }

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ART.Domotica.DistributedServices.Entities
 {
-    public class TemperatureScale : IEntity        
+    public class TemperatureScale
     {
         #region Primitive Properties
 
-        public Guid Id { get; set; }
+        public byte Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
 

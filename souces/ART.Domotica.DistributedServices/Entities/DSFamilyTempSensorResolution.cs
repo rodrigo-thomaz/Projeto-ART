@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ART.Domotica.DistributedServices.Entities
 {
-    public class DSFamilyTempSensorResolution : IEntity
+    public class DSFamilyTempSensorResolution
     {
         #region Ignore Properties       
 
@@ -18,7 +19,7 @@ namespace ART.Domotica.DistributedServices.Entities
 
         #region Primitive Properties
 
-        public Guid Id { get; set; }
+        public byte Id { get; set; }
         public string Name { get; set; }
         public decimal Resolution { get; set; }
         public decimal ConversionTime { get; set; }
@@ -29,7 +30,7 @@ namespace ART.Domotica.DistributedServices.Entities
 
         #region Navigation Properties
 
-
+        public ICollection<DSFamilyTempSensor> DSFamilyTempSensors { get; set; }
 
         #endregion
     }

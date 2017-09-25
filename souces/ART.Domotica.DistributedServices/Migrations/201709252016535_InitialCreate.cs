@@ -16,6 +16,21 @@ namespace ART.Domotica.DistributedServices.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.DSFamilyTempSensorResolution",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
+                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
+                        Bits = c.Byte(nullable: false),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.Bits, unique: true);
+            
+            CreateTable(
                 "dbo.HardwareInSpace",
                 c => new
                     {
@@ -64,27 +79,12 @@ namespace ART.Domotica.DistributedServices.Migrations
                 "dbo.TemperatureScale",
                 c => new
                     {
-                        Id = c.Guid(nullable: false, identity: true),
+                        Id = c.Byte(nullable: false),
                         Name = c.String(nullable: false, maxLength: 255),
                         Description = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
-            
-            CreateTable(
-                "dbo.DSFamilyTempSensorResolution",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
-                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
-                        Bits = c.Byte(nullable: false),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.Bits, unique: true);
             
             CreateTable(
                 "dbo.SensorBase",
@@ -103,14 +103,17 @@ namespace ART.Domotica.DistributedServices.Migrations
                         Id = c.Guid(nullable: false),
                         DeviceAddress = c.String(nullable: false, maxLength: 15),
                         Family = c.String(nullable: false, maxLength: 10),
-                        TemperatureScaleId = c.Guid(nullable: false),
+                        TemperatureScaleId = c.Byte(nullable: false),
+                        DSFamilyTempSensorResolutionId = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SensorBase", t => t.Id)
                 .ForeignKey("dbo.TemperatureScale", t => t.TemperatureScaleId)
+                .ForeignKey("dbo.DSFamilyTempSensorResolution", t => t.DSFamilyTempSensorResolutionId)
                 .Index(t => t.Id)
                 .Index(t => t.DeviceAddress, unique: true)
-                .Index(t => t.TemperatureScaleId);
+                .Index(t => t.TemperatureScaleId)
+                .Index(t => t.DSFamilyTempSensorResolutionId);
             
             CreateTable(
                 "dbo.DeviceBase",
@@ -127,11 +130,12 @@ namespace ART.Domotica.DistributedServices.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        MacAddress = c.String(),
+                        MacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .Index(t => t.Id);
+                .Index(t => t.Id)
+                .Index(t => t.MacAddress, unique: true);
             
             CreateTable(
                 "dbo.ThermometerDevice",
@@ -148,12 +152,14 @@ namespace ART.Domotica.DistributedServices.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        LanMacAddress = c.String(),
-                        WLanMacAddress = c.String(),
+                        LanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                        WLanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .Index(t => t.Id);
+                .Index(t => t.Id)
+                .Index(t => t.LanMacAddress, unique: true)
+                .Index(t => t.WLanMacAddress, unique: true);
             
         }
         
@@ -163,6 +169,7 @@ namespace ART.Domotica.DistributedServices.Migrations
             DropForeignKey("dbo.ThermometerDevice", "Id", "dbo.ESPDeviceBase");
             DropForeignKey("dbo.ESPDeviceBase", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
+            DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
             DropForeignKey("dbo.DSFamilyTempSensor", "TemperatureScaleId", "dbo.TemperatureScale");
             DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.SensorBase");
             DropForeignKey("dbo.SensorBase", "Id", "dbo.HardwareBase");
@@ -170,34 +177,38 @@ namespace ART.Domotica.DistributedServices.Migrations
             DropForeignKey("dbo.UserInSpace", "UserId", "dbo.User");
             DropForeignKey("dbo.UserInSpace", "SpaceId", "dbo.Space");
             DropForeignKey("dbo.HardwareInSpace", "HardwareBaseId", "dbo.HardwareBase");
+            DropIndex("dbo.RaspberryDeviceBase", new[] { "WLanMacAddress" });
+            DropIndex("dbo.RaspberryDeviceBase", new[] { "LanMacAddress" });
             DropIndex("dbo.RaspberryDeviceBase", new[] { "Id" });
             DropIndex("dbo.ThermometerDevice", new[] { "Id" });
+            DropIndex("dbo.ESPDeviceBase", new[] { "MacAddress" });
             DropIndex("dbo.ESPDeviceBase", new[] { "Id" });
             DropIndex("dbo.DeviceBase", new[] { "Id" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "DSFamilyTempSensorResolutionId" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "TemperatureScaleId" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
             DropIndex("dbo.SensorBase", new[] { "Id" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
             DropIndex("dbo.TemperatureScale", new[] { "Name" });
             DropIndex("dbo.UserInSpace", new[] { "SpaceId" });
             DropIndex("dbo.UserInSpace", new[] { "UserId" });
             DropIndex("dbo.Space", new[] { "Name" });
             DropIndex("dbo.HardwareInSpace", new[] { "SpaceId" });
             DropIndex("dbo.HardwareInSpace", new[] { "HardwareBaseId" });
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
             DropTable("dbo.RaspberryDeviceBase");
             DropTable("dbo.ThermometerDevice");
             DropTable("dbo.ESPDeviceBase");
             DropTable("dbo.DeviceBase");
             DropTable("dbo.DSFamilyTempSensor");
             DropTable("dbo.SensorBase");
-            DropTable("dbo.DSFamilyTempSensorResolution");
             DropTable("dbo.TemperatureScale");
             DropTable("dbo.User");
             DropTable("dbo.UserInSpace");
             DropTable("dbo.Space");
             DropTable("dbo.HardwareInSpace");
+            DropTable("dbo.DSFamilyTempSensorResolution");
             DropTable("dbo.HardwareBase");
         }
     }
