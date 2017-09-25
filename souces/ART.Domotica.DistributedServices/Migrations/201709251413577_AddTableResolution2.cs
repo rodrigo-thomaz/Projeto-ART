@@ -1,8 +1,7 @@
 namespace ART.Domotica.DistributedServices.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddTableResolution2 : DbMigration
     {
         public override void Up()

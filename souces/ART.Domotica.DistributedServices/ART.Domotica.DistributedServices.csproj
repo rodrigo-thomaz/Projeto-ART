@@ -182,6 +182,7 @@
       <DependentUpon>201709251426592_AddTableResolution3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
