@@ -26,6 +26,7 @@ namespace ART.Domotica.DistributedServices.Migrations
             }
 
             celsiusTemperatureScale.Name = "Celsius";
+            celsiusTemperatureScale.Symbol = "°C";
             celsiusTemperatureScale.Description = celsiusDescription.ToString();
 
             var fahrenheitDescription = new StringBuilder();
@@ -46,6 +47,7 @@ namespace ART.Domotica.DistributedServices.Migrations
             }
 
             fahrenheitTemperatureScale.Name = "Fahrenheit";
+            fahrenheitTemperatureScale.Symbol = "°F";
             fahrenheitTemperatureScale.Description = fahrenheitDescription.ToString();            
 
             context.SaveChanges();

@@ -159,6 +159,14 @@
     <Compile Include="Migrations\201709252016535_InitialCreate.Designer.cs">
       <DependentUpon>201709252016535_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709252117524_AddColumnSymbol.cs" />
+    <Compile Include="Migrations\201709252117524_AddColumnSymbol.Designer.cs">
+      <DependentUpon>201709252117524_AddColumnSymbol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709252118483_AddColumnSymbol2.cs" />
+    <Compile Include="Migrations\201709252118483_AddColumnSymbol2.Designer.cs">
+      <DependentUpon>201709252118483_AddColumnSymbol2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Models\UserCreateModel.cs" />
@@ -175,6 +183,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709252016535_InitialCreate.resx">
       <DependentUpon>201709252016535_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709252117524_AddColumnSymbol.resx">
+      <DependentUpon>201709252117524_AddColumnSymbol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709252118483_AddColumnSymbol2.resx">
+      <DependentUpon>201709252118483_AddColumnSymbol2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

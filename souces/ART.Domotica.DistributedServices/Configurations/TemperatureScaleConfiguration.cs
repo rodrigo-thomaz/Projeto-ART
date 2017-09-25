@@ -24,6 +24,14 @@ namespace ART.Domotica.DistributedServices.Configurations
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
 
+            //Symbol
+            Property(x => x.Symbol)
+                .HasMaxLength(2)
+                .IsFixedLength()
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+
             //Description
             Property(x => x.Description)
                 .HasMaxLength(5000)
