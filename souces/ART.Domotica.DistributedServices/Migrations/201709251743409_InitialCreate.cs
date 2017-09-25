@@ -1,7 +1,10 @@
 namespace ART.Domotica.DistributedServices.Migrations
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.Migrations;
-
+    
     public partial class InitialCreate : DbMigration
     {
         public override void Up()
@@ -20,15 +23,12 @@ namespace ART.Domotica.DistributedServices.Migrations
                     {
                         HardwareBaseId = c.Guid(nullable: false),
                         SpaceId = c.Guid(nullable: false),
-                        SensorBase_Id = c.Guid(),
                     })
                 .PrimaryKey(t => new { t.HardwareBaseId, t.SpaceId })
-                .ForeignKey("dbo.SensorBase", t => t.SensorBase_Id)
                 .ForeignKey("dbo.HardwareBase", t => t.HardwareBaseId)
                 .ForeignKey("dbo.Space", t => t.SpaceId)
                 .Index(t => t.HardwareBaseId)
-                .Index(t => t.SpaceId)
-                .Index(t => t.SensorBase_Id);
+                .Index(t => t.SpaceId);
             
             CreateTable(
                 "dbo.Space",
@@ -62,6 +62,29 @@ namespace ART.Domotica.DistributedServices.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
+                "dbo.TemperatureScale",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.DSFamilyTempSensorResolution",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
+                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
+                        Bits = c.Byte(nullable: false),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.SensorBase",
                 c => new
                     {
@@ -76,13 +99,22 @@ namespace ART.Domotica.DistributedServices.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceAddress = c.String(),
-                        Family = c.String(),
-                        Resolution = c.Byte(nullable: false),
+                        DeviceAddress = c.String(nullable: false, maxLength: 15,
+                            annotations: new Dictionary<string, AnnotationValues>
+                            {
+                                { 
+                                    "IX_Unique_DeviceAddress",
+                                    new AnnotationValues(oldValue: null, newValue: "IndexAnnotation: { IsUnique: True }")
+                                },
+                            }),
+                        Family = c.String(nullable: false, maxLength: 10),
+                        TemperatureScaleId = c.Guid(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SensorBase", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.TemperatureScale", t => t.TemperatureScaleId)
+                .Index(t => t.Id)
+                .Index(t => t.TemperatureScaleId);
             
             CreateTable(
                 "dbo.DeviceBase",
@@ -135,30 +167,42 @@ namespace ART.Domotica.DistributedServices.Migrations
             DropForeignKey("dbo.ThermometerDevice", "Id", "dbo.ESPDeviceBase");
             DropForeignKey("dbo.ESPDeviceBase", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
+            DropForeignKey("dbo.DSFamilyTempSensor", "TemperatureScaleId", "dbo.TemperatureScale");
             DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.SensorBase");
             DropForeignKey("dbo.SensorBase", "Id", "dbo.HardwareBase");
             DropForeignKey("dbo.HardwareInSpace", "SpaceId", "dbo.Space");
             DropForeignKey("dbo.UserInSpace", "UserId", "dbo.User");
             DropForeignKey("dbo.UserInSpace", "SpaceId", "dbo.Space");
             DropForeignKey("dbo.HardwareInSpace", "HardwareBaseId", "dbo.HardwareBase");
-            DropForeignKey("dbo.HardwareInSpace", "SensorBase_Id", "dbo.SensorBase");
             DropIndex("dbo.RaspberryDeviceBase", new[] { "Id" });
             DropIndex("dbo.ThermometerDevice", new[] { "Id" });
             DropIndex("dbo.ESPDeviceBase", new[] { "Id" });
             DropIndex("dbo.DeviceBase", new[] { "Id" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "TemperatureScaleId" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
             DropIndex("dbo.SensorBase", new[] { "Id" });
             DropIndex("dbo.UserInSpace", new[] { "SpaceId" });
             DropIndex("dbo.UserInSpace", new[] { "UserId" });
-            DropIndex("dbo.HardwareInSpace", new[] { "SensorBase_Id" });
             DropIndex("dbo.HardwareInSpace", new[] { "SpaceId" });
             DropIndex("dbo.HardwareInSpace", new[] { "HardwareBaseId" });
             DropTable("dbo.RaspberryDeviceBase");
             DropTable("dbo.ThermometerDevice");
             DropTable("dbo.ESPDeviceBase");
             DropTable("dbo.DeviceBase");
-            DropTable("dbo.DSFamilyTempSensor");
+            DropTable("dbo.DSFamilyTempSensor",
+                removedColumnAnnotations: new Dictionary<string, IDictionary<string, object>>
+                {
+                    {
+                        "DeviceAddress",
+                        new Dictionary<string, object>
+                        {
+                            { "IX_Unique_DeviceAddress", "IndexAnnotation: { IsUnique: True }" },
+                        }
+                    },
+                });
             DropTable("dbo.SensorBase");
+            DropTable("dbo.DSFamilyTempSensorResolution");
+            DropTable("dbo.TemperatureScale");
             DropTable("dbo.User");
             DropTable("dbo.UserInSpace");
             DropTable("dbo.Space");

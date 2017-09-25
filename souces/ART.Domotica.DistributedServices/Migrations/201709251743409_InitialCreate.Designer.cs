@@ -7,13 +7,13 @@ namespace ART.Domotica.DistributedServices.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddTableTemperatureScale : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddTableTemperatureScale));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201709251452434_AddTableTemperatureScale"; }
+            get { return "201709251743409_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

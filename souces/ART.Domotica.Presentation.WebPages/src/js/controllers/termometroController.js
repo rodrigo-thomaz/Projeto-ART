@@ -60,14 +60,19 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
     var wsbroker = "file-server";  // mqtt websocket enabled broker
 
     var wsport = 15675; // port for above
+
     var client = new Paho.MQTT.Client(wsbroker, wsport, "/ws",
         "myclientid_" + parseInt(Math.random() * 100, 10));
+
     client.onConnectionLost = function (responseObject) {
         console.log("CONNECTION LOST - " + responseObject.errorMessage);
     };
+
     client.onMessageArrived = function (message) {
         switch (message.destinationName) {
+
             case "ARTPUBTEMP":
+
                 var sensors = JSON.parse(message.payloadString);
 
                 $scope.current = sensors[0];
@@ -76,10 +81,12 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
                 if ($scope.data[0].values.length > 60)
                     $scope.data[0].values.shift();
 
-                console.log(sensors[0]);
+                //console.log(sensors[0]);
+
                 $scope.$apply();
 
                 break;
+
             default:
         }
     };

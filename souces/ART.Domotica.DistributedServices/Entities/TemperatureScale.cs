@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ART.Domotica.DistributedServices.Entities
 {
@@ -14,7 +15,7 @@ namespace ART.Domotica.DistributedServices.Entities
 
         #region Navigation Properties
 
-
+        public ICollection<DSFamilyTempSensor> DSFamilyTempSensors { get; set; }
 
         #endregion
     }

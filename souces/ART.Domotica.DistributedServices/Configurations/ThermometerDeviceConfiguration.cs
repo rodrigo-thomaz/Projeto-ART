@@ -1,4 +1,5 @@
 ﻿using ART.Domotica.DistributedServices.Entities;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Domotica.DistributedServices.Configurations
@@ -14,6 +15,11 @@ namespace ART.Domotica.DistributedServices.Configurations
 
             //Id
             Property(x => x.Id)
+                .IsRequired();
+
+            //Id
+            Property(x => x.Id)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
         }
     }
