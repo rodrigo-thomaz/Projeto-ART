@@ -127,6 +127,7 @@
     <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
     <Compile Include="Configurations\SpaceConfiguration.cs" />
+    <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Configurations\UserInSpaceConfiguration.cs" />
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
@@ -149,6 +150,7 @@
     <Compile Include="Entities\RaspberryDeviceBase.cs" />
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\HardwareInSpace.cs" />
+    <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ThermometerDevice.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\UserInSpace.cs" />
@@ -180,6 +182,10 @@
     <Compile Include="Migrations\201709251426592_AddTableResolution3.cs" />
     <Compile Include="Migrations\201709251426592_AddTableResolution3.Designer.cs">
       <DependentUpon>201709251426592_AddTableResolution3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709251452434_AddTableTemperatureScale.cs" />
+    <Compile Include="Migrations\201709251452434_AddTableTemperatureScale.Designer.cs">
+      <DependentUpon>201709251452434_AddTableTemperatureScale.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -215,6 +221,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709251426592_AddTableResolution3.resx">
       <DependentUpon>201709251426592_AddTableResolution3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709251452434_AddTableTemperatureScale.resx">
+      <DependentUpon>201709251452434_AddTableTemperatureScale.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

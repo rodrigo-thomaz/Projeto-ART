@@ -35,6 +35,7 @@ namespace ART.Domotica.DistributedServices
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new HardwareInSpaceConfiguration());
             modelBuilder.Configurations.Add(new SpaceConfiguration());
+            modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
             modelBuilder.Configurations.Add(new ThermometerDeviceConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new UserInSpaceConfiguration());
@@ -46,6 +47,7 @@ namespace ART.Domotica.DistributedServices
         public DbSet<DSFamilyTempSensorResolution> DSFamilyTempSensorResolution { get; set; }
         public DbSet<HardwareInSpace> HardwareInSpace { get; set; }
         public DbSet<Space> Space { get; set; }
+        public DbSet<TemperatureScale> TemperatureScale { get; set; }
         public DbSet<ThermometerDevice> ThermometerDevice { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<UserInSpace> UserInSpace { get; set; }
