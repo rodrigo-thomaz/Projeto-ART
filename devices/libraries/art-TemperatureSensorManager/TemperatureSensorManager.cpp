@@ -116,7 +116,7 @@ void generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
 	JSONencoder["tempFahrenheit"] = temperatureSensor.tempFahrenheit;
 	JSONencoder["hasAlarm"] = temperatureSensor.hasAlarm;
 	JSONencoder["lowAlarmTemp"] = temperatureSensor.lowAlarmTemp;
-	JSONencoder["HighAlarmTemp"] = temperatureSensor.highAlarmTemp;
+	JSONencoder["highAlarmTemp"] = temperatureSensor.highAlarmTemp;
 }
 
 char *TemperatureSensorManager::getSensorsJson()
