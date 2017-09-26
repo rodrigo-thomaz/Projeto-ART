@@ -1,10 +1,12 @@
 ﻿'use strict';
 
 app.controller('termometroController', ['$scope', 'termometroService', function ($scope, termometroService) {    
-
-    $scope.current = null;
-
+    
     $scope.resolution = {};
+
+    $scope.$watch('resolution', function () {
+        //alert('hey, myVar has changed!');
+    });
 
     $scope.resolutions = [
         { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
@@ -23,8 +25,14 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
                 bottom: 35,
                 left: 40
             },
-            x: function (d) { return d.epochTime; },
-            y: function (d) { return d.tempCelsius; },
+            x: function (d) {
+                if (d == null) return null;                
+                    return d.epochTime;
+            },
+            y: function (d) {
+                if (d == null) return null;    
+                    return d.temperature;
+            },
             useInteractiveGuideline: true,
             duration: 500,
             xAxis: {
@@ -47,15 +55,76 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
         }
     };
 
-    $scope.data = [{
-        key: "Temperatura",
-        values: []
-    }]
-
     $scope.range = {
         min: 30,
         max: 60
     };
+
+    // inicio prototipo
+
+    var chartLine = function (key) {
+        this.key = key;
+        this.values = [];
+    }
+
+    var dsFamilyTempSensor = function (deviceAddress, family, resolution, scale) {
+
+        this.deviceAddress = deviceAddress;
+        this.family = family;
+
+        this.isConnected = false;
+        this.resolution = resolution;
+        this.scale = scale;
+        this.temperature = null;
+        this.epochTime = null;
+
+        this.chart = [];
+
+        this.chart.push(new chartLine("Máximo"));
+        this.chart.push(new chartLine("Temperatura"));
+        this.chart.push(new chartLine("Mínimo"));        
+
+        this.addLog = function (value) {
+
+            this.isConnected = value.isConnected;
+            this.resolution = value.resolution;
+            //this.scale = value.scale;
+            this.temperature = value.tempCelsius;
+            this.chart[1].key = 'Temperatura ' + value.tempCelsius + ' °C';
+            this.epochTime = value.epochTime;
+
+            this.chart[0].values.push({
+                epochTime: value.epochTime,
+                temperature: value.HighAlarmTemp,
+            });
+            this.chart[1].values.push({
+                epochTime: value.epochTime,
+                temperature: value.tempCelsius,
+            });
+            this.chart[2].values.push({
+                epochTime: value.epochTime,
+                temperature: value.lowAlarmTemp,
+            });
+            
+
+            if (this.chart[0].values.length > 60)
+                this.chart[0].values.shift();
+
+            if (this.chart[1].values.length > 60)
+                this.chart[1].values.shift();
+
+            if (this.chart[2].values.length > 60)
+                this.chart[2].values.shift();
+        }
+    }
+
+    $scope.sensors = [];
+
+    //gambi
+    $scope.sensors.push(new dsFamilyTempSensor('28fffe6593164b6', 'DS18B20', 9, 1));
+    $scope.sensors.push(new dsFamilyTempSensor('28ffe76da2163d3', 'DS18B20', 11, 1));
+
+    // fim prototipo
 
     var wsbroker = "file-server";  // mqtt websocket enabled broker
 
@@ -73,13 +142,11 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
 
             case "ARTPUBTEMP":
 
-                var sensors = JSON.parse(message.payloadString);
+                var sensors = JSON.parse(message.payloadString);               
 
-                $scope.current = sensors[0];
-
-                $scope.data[0].values.push(sensors[0]);
-                if ($scope.data[0].values.length > 60)
-                    $scope.data[0].values.shift();
+                for (var i = 0; i < sensors.length; i++) {
+                    $scope.sensors[i].addLog(sensors[i]);
+                }
 
                 //console.log(sensors[0]);
 

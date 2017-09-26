@@ -2,23 +2,33 @@
     <h1 class="m-n font-thin h3">Thermometers</h1>
 </div>
 <div class="wrapper-md">
-    <div ng-controller="termometroController">        
+    <div ng-controller="termometroController">                
 
-        <div class="row">
+        <div class="row" ng-repeat="(key, sensor) in sensors">
             <div class="col-md-6">
+
                 <div class="panel panel-default">
-                    <div class="panel-heading font-bold">Gráfico do sensor</div>
+                    <div class="panel-heading">
+                        <ul class="nav nav-pills pull-right">
+                            <li><a href="">{{sensor.isConnected ? 'On-line' : 'Off-line'}}<i class="glyphicon"></i></a></li>     
+                            <li><a href="">{{sensor.epochTime == null ? '' : sensor.epochTime * 1000 | date:'dd/MM/yyyy HH:mm:ss Z'}}<i class="glyphicon"></i></a></li>     
+                            <li><a href=""><i class="glyphicon glyphicon-cog"></i></a></li>
+                        </ul>
+                        <i ng-class="sensor.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
+                        <span class="font-bold">&nbsp;&nbsp;Sensor {{key + 1}}</span>
+                    </div>
                     <div class="panel-body">
                         <div style="height:240px">
-                            <nvd3 options="options" data="data"></nvd3>
+                            <nvd3 options="options" data="sensor.chart"></nvd3>
                         </div>
                     </div>
                 </div>
+
             </div>
 
             <div class="col-md-6">
                 <div class="panel panel-default">
-                    <div class="panel-heading font-bold">Configurações do sensor</div>
+                    <div class="panel-heading font-bold">Configurações do sensor {{key + 1}}</div>
                     <div class="panel-body">
                         <form class="bs-example form-horizontal" style="height:240px">
                             <div class="form-group">
@@ -26,40 +36,46 @@
                                 <div class="col-lg-8">
                                     <div class="input-group">
                                         <span class="input-group-addon">
-                                            <i ng-class="current.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
+                                            <i ng-class="sensor.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
                                         </span>
-                                        <input type="text" class="form-control" readonly value="{{current.isConnected ? 'On-line' : 'Off-line'}}">                                        
+                                        <input type="text" class="form-control" readonly value="{{sensor.isConnected ? 'On-line' : 'Off-line'}}">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Temperatura</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" readonly value="{{current.tempCelsius == null ? '' : current.tempCelsius | number : 2}} °C">
+                                    <input type="text" class="form-control" readonly value="{{sensor.temperature == null ? '' : sensor.temperature | number : 2}} °C">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Última atualização</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" readonly value="{{current.epochTime == null ? '' : current.epochTime * 1000 | date:'dd/MM/yyyy HH:mm:ss Z'}}">
+                                    <input type="text" class="form-control" readonly value="{{sensor.epochTime == null ? '' : sensor.epochTime * 1000 | date:'dd/MM/yyyy HH:mm:ss Z'}}">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Endereço</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" readonly uppercased ng-model="current.deviceAddress">
+                                    <input type="text" class="form-control" readonly uppercased ng-model="sensor.deviceAddress">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Família</label>
                                 <div class="col-lg-8">
-                                    <input type="text" class="form-control" readonly ng-model="current.family">
+                                    <input type="text" class="form-control" readonly ng-model="sensor.family">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Resolução</label>
                                 <div class="col-lg-8">
-                                    <ui-select ng-model="current.resolution" theme="bootstrap">
+                                    <input type="text" class="form-control" readonly ng-model="sensor.resolution">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label">Resolução</label>
+                                <div class="col-lg-8">
+                                    <ui-select ng-model="sensor.resolution" theme="bootstrap">
                                         <ui-select-match placeholder="Select or search a person in the list...">{{$select.selected.mode}}</ui-select-match>
                                         <ui-select-choices repeat="item.value as item in resolutions | filter: $select.search">
                                             <div ng-bind-html="item.mode | highlight: $select.search"></div>
@@ -78,38 +94,16 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>   
+                            </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-4 col-lg-8">
-                                    <slider ng-model="range.min" ng-model-range="range.max" floor="1" ceiling="100"></slider>                                    
+                                    <slider ng-model="range.min" ng-model-range="range.max" floor="1" ceiling="100"></slider>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-heading font-bold">Test Chat</div>
-                    <div class="panel-body">
-                        <div class="nickname_container" id="nick">
-                            <span>Type your nickname:</span>
-                            <form id="submit"><input type="text" id="nickname" /></form>
-                        </div>
-                        <div id="chat" hidden>
-                            <div class="menu" =>
-                                <div class="name" id="name">Alex</div>
-                                <div class="last" id="time">18:09</div>
-                            </div>
-                            <ol class="chat"></ol>
-                            <input class="textarea" type="text" placeholder="Type here!" id="textarea" />
-                        </div>     
-                    </div>
-                </div>
-            </div>            
         </div>
 
     </div>
