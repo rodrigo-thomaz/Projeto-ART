@@ -18,7 +18,7 @@ class TemperatureSensorManager
 	DebugManager*          _debugManager;
 	NTPManager*          _ntpManager;
 	void(*_sensorInCallback)(TemperatureSensor);
-	const uint8_t *convertStringToDeviceAddress(String deviceAddress);
+	const uint8_t *getDeviceAddress(String deviceAddress);
 };
 
 #endif

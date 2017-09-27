@@ -169,17 +169,13 @@ void TemperatureSensorManager::setResolution(String json)
 	String deviceAddressStr = root["deviceAddress"];
 	int value = root["value"];
 
-	const uint8_t *deviceAddress = convertStringToDeviceAddress(deviceAddressStr);
-	sensors.setResolution(deviceAddress, value);
+	sensors.setResolution(getDeviceAddress(deviceAddressStr), value);
 
-	Serial.print("deviceAddress=");
-	Serial.println(deviceAddressStr);
-
-	Serial.print("value=");
-	Serial.println(value);
+	Serial.print("setResolution=");
+	Serial.println(json);
 }
 
-const uint8_t *TemperatureSensorManager::convertStringToDeviceAddress(String deviceAddressStr) {	
+const uint8_t *TemperatureSensorManager::getDeviceAddress(String deviceAddressStr) {	
 	for (int i = 0; i < sizeof(arr) / sizeof(int) + 1; ++i) {
 		if (arr[i].deviceAddressStr == deviceAddressStr) {
 			return arr[i].deviceAddress;
