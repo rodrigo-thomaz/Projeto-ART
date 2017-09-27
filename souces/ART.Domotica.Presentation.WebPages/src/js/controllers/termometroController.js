@@ -9,18 +9,26 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
         max: 60
     };
 
-    $scope.selectedResolution = {};
+    $scope.selectedResolution = 10;
 
-    //$scope.$watch('range.min', function () {
-    //    alert('hey, myVar has changed!');
-    //});
+    
 
-    $scope.resolutions = [
-        { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
-        { mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 },
-        { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 },
-        { mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 },        
-    ];
+    //$scope.resolutions = [
+    //    { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
+    //    { mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 },
+    //    { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 },
+    //    { mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 },        
+    //];
+
+    $scope.resolution = {
+        availableOptions: [
+            { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
+            { mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 },
+            { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 },
+            { mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 },  
+        ],
+        selectedOption: { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 } //This sets the default value of the select in the ui
+    };
 
     $scope.options = {
         chart: {
@@ -78,6 +86,12 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
         this.temperature = null;
         this.epochTime = null;
 
+        this.selectedResolution = {};
+        
+        this.setResolution = function () {
+            termometroMQTTService.setResolution(this.deviceAddress, this.selectedResolution.value);
+        }
+
         this.chart = [];
 
         this.chart.push(new chartLine("Máximo"));
@@ -125,10 +139,6 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
     //gambi
     $scope.sensors.push(new dsFamilyTempSensor('28fffe6593164b6', 'DS18B20', 9, 1));
     $scope.sensors.push(new dsFamilyTempSensor('28ffe76da2163d3', 'DS18B20', 11, 1));
-
-    $scope.save = function () {
-        termometroMQTTService.setResolution('28fffe6593164b6', 11);
-    }    
 
     function temperatureReceivedCallback(sensors) {
         for (var i = 0; i < sensors.length; i++) {
