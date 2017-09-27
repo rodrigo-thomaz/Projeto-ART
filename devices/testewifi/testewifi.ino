@@ -58,7 +58,6 @@ void setup() {
     wifiManager.setAPCallback(configModeCallback);
     wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
     wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
-
     wifiManager.autoConnect();
 }
 

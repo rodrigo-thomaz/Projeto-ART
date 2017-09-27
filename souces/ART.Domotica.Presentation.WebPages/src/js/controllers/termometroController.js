@@ -109,7 +109,7 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
 
             this.chart[0].values.push({
                 epochTime: value.epochTime,
-                temperature: value.highAlarmTemp,
+                temperature: value.highAlarm,
             });
 
             this.chart[1].values.push({
@@ -119,7 +119,7 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
 
             this.chart[2].values.push({
                 epochTime: value.epochTime,
-                temperature: value.lowAlarmTemp,
+                temperature: value.lowAlarm,
             });
             
 

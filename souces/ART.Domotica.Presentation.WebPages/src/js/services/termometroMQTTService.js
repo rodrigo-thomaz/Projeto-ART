@@ -18,6 +18,8 @@ app.factory('termometroMQTTService', ['$http', 'mqttService', function ($http, m
         
     serviceFactory.onTemperatureReceived = onTemperatureReceived;
     serviceFactory.setResolution = setResolution;
+    serviceFactory.setLowAlarm = setLowAlarm;
+    serviceFactory.setHighAlarm = setHighAlarm;
 
     return serviceFactory;
 
@@ -66,6 +68,26 @@ app.factory('termometroMQTTService', ['$http', 'mqttService', function ($http, m
         };        
         var message = new Paho.MQTT.Message(JSON.stringify(json));
         message.destinationName = "ART_SET_RESOLUTION";
+        mqttService.send(message);
+    }
+
+    function setLowAlarm(deviceAddress, value) {
+        var json = {
+            deviceAddress: deviceAddress,
+            value: value,
+        };
+        var message = new Paho.MQTT.Message(JSON.stringify(json));
+        message.destinationName = "ART_SET_LOW_ALARM";
+        mqttService.send(message);
+    }
+
+    function setHighAlarm(deviceAddress, value) {
+        var json = {
+            deviceAddress: deviceAddress,
+            value: value,
+        };
+        var message = new Paho.MQTT.Message(JSON.stringify(json));
+        message.destinationName = "ART_SET_HIGH_ALARM";
         mqttService.send(message);
     }
 }]);

@@ -16,8 +16,8 @@ class TemperatureSensor
 	float tempCelsius;
 	float tempFahrenheit;
 	bool hasAlarm;	
-	char lowAlarmTemp;
-	char highAlarmTemp;
+	char lowAlarm;
+	char highAlarm;
 	long epochTime;
 };
 

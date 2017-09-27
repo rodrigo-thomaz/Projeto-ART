@@ -111,8 +111,8 @@ void generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
 	JSONencoder["tempCelsius"] = temperatureSensor.tempCelsius;
 	JSONencoder["tempFahrenheit"] = temperatureSensor.tempFahrenheit;
 	JSONencoder["hasAlarm"] = temperatureSensor.hasAlarm;
-	JSONencoder["lowAlarmTemp"] = temperatureSensor.lowAlarmTemp;
-	JSONencoder["highAlarmTemp"] = temperatureSensor.highAlarmTemp;
+	JSONencoder["lowAlarm"] = temperatureSensor.lowAlarm;
+	JSONencoder["highAlarm"] = temperatureSensor.highAlarm;
 }
 
 char *TemperatureSensorManager::getSensorsJson()
@@ -131,8 +131,8 @@ char *TemperatureSensorManager::getSensorsJson()
 		arr[i].tempCelsius = sensors.getTempC(arr[i].deviceAddress);
 		arr[i].tempFahrenheit = sensors.getTempF(arr[i].deviceAddress);
 		arr[i].hasAlarm = sensors.hasAlarm(arr[i].deviceAddress);
-		arr[i].lowAlarmTemp = sensors.getLowAlarmTemp(arr[i].deviceAddress);
-		arr[i].highAlarmTemp = sensors.getHighAlarmTemp(arr[i].deviceAddress);
+		arr[i].lowAlarm = sensors.getLowAlarmTemp(arr[i].deviceAddress);
+		arr[i].highAlarm = sensors.getHighAlarmTemp(arr[i].deviceAddress);
 		arr[i].epochTime = epochTime;
 		generateNestedSensor(arr[i], device);
 		_sensorInCallback(arr[i]);
@@ -155,6 +155,14 @@ char *TemperatureSensorManager::getSensorsJson()
     return result;
 }
 
+const uint8_t *TemperatureSensorManager::getDeviceAddress(String deviceAddressStr) {	
+	for (int i = 0; i < sizeof(arr) / sizeof(int) + 1; ++i) {
+		if (arr[i].deviceAddressStr == deviceAddressStr) {
+			return arr[i].deviceAddress;
+		}
+	}
+}
+
 void TemperatureSensorManager::setResolution(String json)
 {
 	StaticJsonBuffer<200> jsonBuffer;
@@ -175,10 +183,42 @@ void TemperatureSensorManager::setResolution(String json)
 	Serial.println(json);
 }
 
-const uint8_t *TemperatureSensorManager::getDeviceAddress(String deviceAddressStr) {	
-	for (int i = 0; i < sizeof(arr) / sizeof(int) + 1; ++i) {
-		if (arr[i].deviceAddressStr == deviceAddressStr) {
-			return arr[i].deviceAddress;
-		}
+void TemperatureSensorManager::setLowAlarm(String json)
+{
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+
+	if (!root.success()) {
+		Serial.println("parse setLowAlarm failed");
+		return;
 	}
+
+	String deviceAddressStr = root["deviceAddress"];
+	int value = root["value"];
+
+	sensors.setLowAlarmTemp(getDeviceAddress(deviceAddressStr), value);
+
+	Serial.print("setLowAlarm=");
+	Serial.println(json);
+}
+
+void TemperatureSensorManager::setHighAlarm(String json)
+{
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+
+	if (!root.success()) {
+		Serial.println("parse sethighAlarm failed");
+		return;
+	}
+
+	String deviceAddressStr = root["deviceAddress"];
+	int value = root["value"];
+
+	sensors.setHighAlarmTemp(getDeviceAddress(deviceAddressStr), value);
+
+	Serial.print("sethighAlarm=");
+	Serial.println(json);
 }

@@ -22,7 +22,10 @@
 
 #define ID_MQTT  "HomeAut"
 
-#define TOPICO_SET_RESOLUTION "ART_SET_RESOLUTION"     //tópico MQTT de escuta
+#define TOPIC_SUB_SET_RESOLUTION "ART_SET_RESOLUTION"
+#define TOPIC_SUB_SET_HIGH_ALARM "ART_SET_HIGH_ALARM"
+#define TOPIC_SUB_SET_LOW_ALARM "ART_SET_LOW_ALARM"
+
 #define TOPICO_PUBLISH   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
 DebugManager debugManager(D0);
@@ -93,8 +96,14 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
 
     String topicStr = String(topic);
 
-    if(topicStr == String(TOPICO_SET_RESOLUTION)){
+    if(topicStr == String(TOPIC_SUB_SET_RESOLUTION)){
       temperatureSensorManager.setResolution(json);
+    }
+    if(topicStr == String(TOPIC_SUB_SET_HIGH_ALARM)){
+      temperatureSensorManager.setHighAlarm(json);
+    }
+    if(topicStr == String(TOPIC_SUB_SET_LOW_ALARM)){
+      temperatureSensorManager.setLowAlarm(json);
     }
 }
  
@@ -107,7 +116,9 @@ void reconnectMQTT()
         if (MQTT.connect(ID_MQTT, "test", "test")) 
         {
             Serial.println("Conectado com sucesso ao broker MQTT!");
-            MQTT.subscribe(TOPICO_SET_RESOLUTION); 
+            MQTT.subscribe(TOPIC_SUB_SET_RESOLUTION); 
+            MQTT.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
+            MQTT.subscribe(TOPIC_SUB_SET_LOW_ALARM); 
         } 
         else 
         {
