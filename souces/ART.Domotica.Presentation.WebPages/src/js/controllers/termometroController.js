@@ -1,12 +1,19 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', 'termometroService', function ($scope, termometroService) {    
-    
-    $scope.resolution = {};
+app.controller('termometroController', ['$scope', 'termometroService', 'termometroMQTTService', function ($scope, termometroService, termometroMQTTService) {    
 
-    $scope.$watch('resolution', function () {
-        //alert('hey, myVar has changed!');
-    });
+    termometroMQTTService.onTemperatureReceived = temperatureReceivedCallback;
+
+    $scope.range = {
+        min: 30,
+        max: 60
+    };
+
+    $scope.selectedResolution = {};
+
+    //$scope.$watch('range.min', function () {
+    //    alert('hey, myVar has changed!');
+    //});
 
     $scope.resolutions = [
         { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
@@ -53,14 +60,7 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
             },  
             forceY: [15, 35],
         }
-    };
-
-    $scope.range = {
-        min: 30,
-        max: 60
-    };
-
-    // inicio prototipo
+    };   
 
     var chartLine = function (key) {
         this.key = key;
@@ -126,103 +126,15 @@ app.controller('termometroController', ['$scope', 'termometroService', function 
     $scope.sensors.push(new dsFamilyTempSensor('28fffe6593164b6', 'DS18B20', 9, 1));
     $scope.sensors.push(new dsFamilyTempSensor('28ffe76da2163d3', 'DS18B20', 11, 1));
 
-    // fim prototipo
-
-    var wsbroker = "file-server";  // mqtt websocket enabled broker
-
-    var wsport = 15675; // port for above
-
-    var client = new Paho.MQTT.Client(wsbroker, wsport, "/ws",
-        "myclientid_" + parseInt(Math.random() * 100, 10));
-
-    client.onConnectionLost = function (responseObject) {
-        console.log("CONNECTION LOST - " + responseObject.errorMessage);
-    };
-
-    client.onMessageArrived = function (message) {
-        switch (message.destinationName) {
-
-            case "ARTPUBTEMP":
-
-                var sensors = JSON.parse(message.payloadString);               
-
-                for (var i = 0; i < sensors.length; i++) {
-                    $scope.sensors[i].addLog(sensors[i]);
-                }
-
-                //console.log(sensors[0]);
-
-                $scope.$apply();
-
-                break;
-
-            default:
-        }
-    };
-    client.onMessageDelivered = function(message) {
-        console.log(message);
-    };
-    var options = {
-        userName: 'test',
-        password: 'test',
-        timeout: 3,
-        onSuccess: function () {
-            console.log("CONNECTION SUCCESS");
-            client.subscribe('ARTPUBTEMP', { qos: 1 });
-        },
-        onFailure: function (message) {
-            console.log("CONNECTION FAILURE - " + message.errorMessage);
-        },
-        mqttVersion: 3
-    };
-    
-    console.log("CONNECT TO " + wsbroker + ":" + wsport);
-    client.connect(options);
-
-
-    function serviceSample() {
-
-        $scope.lista = [];
-
-        termometroService.get().then(function (results) {
-
-            $scope.lista = results.data;
-
-        }, function (error) {
-            if (error.status !== 401) {
-                alert(error.data.message);
-            }
-        });
+    $scope.save = function () {
+        alert();
     }    
 
-    function signalRSample() {
-
-        (function () {
-
-            var deviceHub = $.connection.deviceHub;
-
-            $.connection.hub.logging = true;
-            $.connection.hub.start()
-                .done(function () {
-                    deviceHub.server.sendMessage('vai!!!');
-                })
-                .fail(function () {
-                    alert('erro no start');
-                });
-
-            deviceHub.client.hello = function () {
-                alert();
-            }
-
-            deviceHub.client.registerMessage = function (message) {
-                alert(message);
-            };
-
-        }());
-    }   
-
-    serviceSample();
-
-    signalRSample();
+    function temperatureReceivedCallback(sensors) {
+        for (var i = 0; i < sensors.length; i++) {
+            $scope.sensors[i].addLog(sensors[i]);
+        }
+        $scope.$apply();
+    }
 
 }]);

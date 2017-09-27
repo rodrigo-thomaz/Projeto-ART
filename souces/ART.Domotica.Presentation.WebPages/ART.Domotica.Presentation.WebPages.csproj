@@ -141,6 +141,8 @@
     <Content Include="src\js\directives\ui-uppercased.js" />
     <Content Include="src\js\services\authInterceptorService.js" />
     <Content Include="src\js\services\authService.js" />
+    <Content Include="src\js\services\mqttService.js" />
+    <Content Include="src\js\services\termometroMQTTService.js" />
     <Content Include="src\js\services\termometroService.js" />
     <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\psd\ui.zip" />

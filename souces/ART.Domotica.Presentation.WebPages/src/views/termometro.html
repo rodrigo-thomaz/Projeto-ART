@@ -97,7 +97,15 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-lg-offset-4 col-lg-8">
-                                    <slider ng-model="range.min" ng-model-range="range.max" floor="1" ceiling="100"></slider>
+                                    <slider ng-model-options="{ updateOn: blur, debounce: 2000 }" ng-model="range.min" ng-model-range="range.max" floor="1" ceiling="100"></slider>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-lg-offset-4 col-lg-8">
+                                    <button class="btn btn-success" ui-toggle-class="show inline" ng-click="save()" target="#spin">
+                                        <span class="text">Save</span>
+                                        <span class="text-active">Saving...</span>
+                                    </button>
                                 </div>
                             </div>
                         </form>
