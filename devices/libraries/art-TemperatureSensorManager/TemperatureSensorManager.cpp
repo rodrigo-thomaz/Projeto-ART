@@ -9,7 +9,6 @@
 
 // Data wire is plugged into port 2 on the Arduino
 #define ONE_WIRE_BUS 2
-#define TEMPERATURE_PRECISION 11
 
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(ONE_WIRE_BUS);
@@ -83,10 +82,7 @@ void TemperatureSensorManager::begin()
 		  arr[i].validFamily = sensors.validFamily(arr[i].deviceAddress);
 
 		  // family
-		  arr[i].family = getFamily(arr[i].deviceAddress);     
-
-		  // set the resolution per device
-		  sensors.setResolution(arr[i].deviceAddress, TEMPERATURE_PRECISION);    		  
+		  arr[i].family = getFamily(arr[i].deviceAddress);     		  		  
 		}
 		else{
 		  if (this->_debugManager->isDebug()) {
@@ -157,4 +153,36 @@ char *TemperatureSensorManager::getSensorsJson()
 	}
 
     return result;
+}
+
+void TemperatureSensorManager::setResolution(String json)
+{
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+
+	if (!root.success()) {
+		Serial.println("parse setResolution failed");
+		return;
+	}
+
+	String deviceAddressStr = root["deviceAddress"];
+	int value = root["value"];
+
+	const uint8_t *deviceAddress = convertStringToDeviceAddress(deviceAddressStr);
+	sensors.setResolution(deviceAddress, value);
+
+	Serial.print("deviceAddress=");
+	Serial.println(deviceAddressStr);
+
+	Serial.print("value=");
+	Serial.println(value);
+}
+
+const uint8_t *TemperatureSensorManager::convertStringToDeviceAddress(String deviceAddressStr) {	
+	for (int i = 0; i < sizeof(arr) / sizeof(int) + 1; ++i) {
+		if (arr[i].deviceAddressStr == deviceAddressStr) {
+			return arr[i].deviceAddress;
+		}
+	}
 }

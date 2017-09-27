@@ -22,7 +22,7 @@
 
 #define ID_MQTT  "HomeAut"
 
-#define TOPICO_SUBSCRIBE "ARTSUBTEMPMIN"     //tópico MQTT de escuta
+#define TOPICO_SET_RESOLUTION "ART_SET_RESOLUTION"     //tópico MQTT de escuta
 #define TOPICO_PUBLISH   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
 DebugManager debugManager(D0);
@@ -82,17 +82,20 @@ void initMQTT()
  
 void mqtt_callback(char* topic, byte* payload, unsigned int length) 
 {
-    String msg;
+    String json;
 
     //obtem a string do payload recebido
     for(int i = 0; i < length; i++) 
     {
        char c = (char)payload[i];
-       msg += c;
+       json += c;
     }
-  
-    Serial.print("RECEBIDO ");
-    Serial.println(msg);
+
+    String topicStr = String(topic);
+
+    if(topicStr == String(TOPICO_SET_RESOLUTION)){
+      temperatureSensorManager.setResolution(json);
+    }
 }
  
 void reconnectMQTT() 
@@ -104,7 +107,7 @@ void reconnectMQTT()
         if (MQTT.connect(ID_MQTT, "test", "test")) 
         {
             Serial.println("Conectado com sucesso ao broker MQTT!");
-            MQTT.subscribe(TOPICO_SUBSCRIBE); 
+            MQTT.subscribe(TOPICO_SET_RESOLUTION); 
         } 
         else 
         {

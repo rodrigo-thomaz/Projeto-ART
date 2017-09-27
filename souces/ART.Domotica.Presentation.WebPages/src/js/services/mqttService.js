@@ -24,6 +24,8 @@ app.factory('mqttService', ['$http', 'ngAuthSettings', function ($http, ngAuthSe
     client.stopTrace = stopTrace;
     client.subscribe = subscribe;
     client.unsubscribe = unsubscribe;
+    client.onSuccess = onSuccess;
+    client.onFailure = onFailure;
     client.onMessageArrived = onMessageArrived;
     client.onMessageDelivered = onMessageDelivered;
 
@@ -45,12 +47,12 @@ app.factory('mqttService', ['$http', 'ngAuthSettings', function ($http, ngAuthSe
     }
 
     // connects to the MQTT Server
-    function connect(successCallback, failureCallback) {
+    function connect() {
 
         var options = {};
 
-        options.onSuccess = successCallback;
-        options.onFailure = failureCallback;
+        options.onSuccess = onSuccess;
+        options.onFailure = onFailure;
         options.userName = client._userName;
         options.password = client._password;
         options.timeout = client._timeout;
@@ -82,6 +84,16 @@ app.factory('mqttService', ['$http', 'ngAuthSettings', function ($http, ngAuthSe
         client._client.onConnectionLost = onConnectionLost;
         client._client.onMessageArrived = onMessageArrived;
         client._client.onMessageDelivered = onMessageDelivered;
+    }   
+
+    function onSuccess() {
+        //console.log("Connected successfully!");
+        client.onSuccess();
+    }
+
+    function onFailure(message) {
+        //console.log("CONNECTION FAILURE - " + message.errorMessage);
+        client.onFailure(message);
     }
 
     function onMessageArrived(message) {

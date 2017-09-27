@@ -127,7 +127,7 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
     $scope.sensors.push(new dsFamilyTempSensor('28ffe76da2163d3', 'DS18B20', 11, 1));
 
     $scope.save = function () {
-        alert();
+        termometroMQTTService.setResolution('28fffe6593164b6', 11);
     }    
 
     function temperatureReceivedCallback(sensors) {

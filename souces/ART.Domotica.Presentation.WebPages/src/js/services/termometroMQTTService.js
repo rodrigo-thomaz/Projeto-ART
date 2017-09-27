@@ -3,50 +3,53 @@ app.factory('termometroMQTTService', ['$http', 'mqttService', function ($http, m
 
     // mqttService
 
-    mqttService.init();
+    mqttService.init();    
 
-    mqttService.connect(successCallback, failureCallback);
+    mqttService.onSuccess = onSuccess;
+    mqttService.onFailure = onFailure;
+    mqttService.onMessageArrived = onMessageArrived;
+    mqttService.onMessageDelivered = onMessageDelivered;
 
-    mqttService.onMessageArrived = messageArrivedCallback;
-    mqttService.onMessageDelivered = messageDeliveredCallback;
+    mqttService.connect();
 
     // serviceFactory
 
     var serviceFactory = {};
-                
+        
     serviceFactory.onTemperatureReceived = onTemperatureReceived;
-    
+    serviceFactory.setResolution = setResolution;
+
     return serviceFactory;
 
     // codes
 
-    function successCallback() {
+    function onSuccess() {
 
         mqttService.subscribe('ARTPUBTEMP', { qos: 1 });
 
-        //message = new Paho.MQTT.Message("Hello");
-        //message.destinationName = "/World";
-        //mqttService.send(message);
+        var message = new Paho.MQTT.Message("Hello");
+        message.destinationName = "/World";
+        mqttService.send(message);
     }
 
-    function failureCallback(message) {
+    function onFailure(message) {
         console.log("CONNECTION FAILURE - " + message.errorMessage);
     }
 
-    function messageArrivedCallback(message) {
+    function onMessageArrived(message) {
         switch (message.destinationName) {
             case "ARTPUBTEMP":
-                temperatureReceivedCallback(message.payloadString);
+                raiseTemperatureReceived(message.payloadString);
                 break;
             default:
         }
     }
 
-    function messageDeliveredCallback(message) {
+    function onMessageDelivered(message) {
         console.log("messageDeliveredCallback !!!");
     }    
 
-    function temperatureReceivedCallback(payloadString) {
+    function raiseTemperatureReceived(payloadString) {
         //console.log("temperatureReceivedCallback:" + payloadString);
         var sensors = JSON.parse(payloadString);
         serviceFactory.onTemperatureReceived(sensors);
@@ -56,4 +59,13 @@ app.factory('termometroMQTTService', ['$http', 'mqttService', function ($http, m
         //console.log("onTemperatureReceived:" + sensors);
     }
 
+    function setResolution(deviceAddress, value) {
+        var json = {
+            deviceAddress: deviceAddress,
+            value: value,
+        };        
+        var message = new Paho.MQTT.Message(JSON.stringify(json));
+        message.destinationName = "ART_SET_RESOLUTION";
+        mqttService.send(message);
+    }
 }]);

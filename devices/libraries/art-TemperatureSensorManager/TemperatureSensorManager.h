@@ -13,10 +13,12 @@ class TemperatureSensorManager
 	void begin();
 	char *getSensorsJson();
 	void setCallback(void(*sensorInCallback)(TemperatureSensor));
+	void setResolution(String json);
   private:
 	DebugManager*          _debugManager;
 	NTPManager*          _ntpManager;
 	void(*_sensorInCallback)(TemperatureSensor);
+	const uint8_t *convertStringToDeviceAddress(String deviceAddress);
 };
 
 #endif
