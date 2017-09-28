@@ -41,9 +41,9 @@ angular.module('app')
                   resolve: load([
                       'vr.directives.slider',
                       'ui.select',
-                      'js/services/termometroService.js',
-                      'js/services/mqttService.js',
-                      'js/services/termometroMQTTService.js',
+                      //'js/services/termometroService.js',
+                      //'js/services/mqttService.js',
+                      //'js/services/termometroMQTTService.js',
                       'js/controllers/termometroController.js',
                   ])
               })

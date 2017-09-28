@@ -1,8 +1,29 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', '$timeout', 'termometroService', 'termometroMQTTService', function ($scope, $timeout, termometroService, termometroMQTTService) {    
+app.controller('termometroController', ['$scope', '$timeout', '$stomp', '$log', function ($scope, $timeout, $stomp, $log) {    
 
-    termometroMQTTService.onTemperatureReceived = temperatureReceivedCallback;
+    $stomp.setDebug(function (args) {
+        //$log.debug(args)
+    })
+
+    $stomp
+        .connect('http://file-server:15674/stomp', JSON.parse('{"login":"test","passcode":"test"}'))
+
+        // frame = CONNECTED headers
+        .then(function (frame) {
+            var subscription = $stomp.subscribe('/topic/ARTPUBTEMP', function (payload, headers, res) {
+
+                for (var i = 0; i < payload.length; i++) {
+                    $scope.sensors[i].addLog(payload[i]);
+                }
+                $scope.$apply();
+
+            } , {
+                    'headers': 'are awesome'
+            })            
+        })
+
+    //termometroMQTTService.onTemperatureReceived = temperatureReceivedCallback;
 
     $scope.range = {
         min: 30,
@@ -35,7 +56,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroService
                     return d.temperature;
             },
             useInteractiveGuideline: true,
-            duration: 500,
+            duration: 0,
             xAxis: {
                 //axisLabel: 'Tempo',
                 tickFormat: function (d) {
@@ -80,7 +101,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroService
         this.selectedResolution = {};
         
         this.setResolution = function () {
-            termometroMQTTService.setResolution(this.deviceAddress, this.selectedResolution.value);
+            //termometroMQTTService.setResolution(this.deviceAddress, this.selectedResolution.value);
         }
 
         this.forceY = {
@@ -103,13 +124,13 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroService
 
         this.changeHighAlarm = function () { 
             if (_this.highAlarm != _this.alarm.highAlarm) {
-                termometroMQTTService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm);
+                //termometroMQTTService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm);
             }
         }
 
         this.changeLowAlarm = function () {
             if (_this.lowAlarm != _this.range.lowAlarm) {
-                termometroMQTTService.setLowAlarm(_this.deviceAddress, _this.range.lowAlarm);
+                //termometroMQTTService.setLowAlarm(_this.deviceAddress, _this.range.lowAlarm);
             }
         }
 
@@ -164,7 +185,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroService
     //gambi
     $scope.sensors.push(new dsFamilyTempSensor('28fffe6593164b6', 'DS18B20', 9, 1));
     $scope.sensors.push(new dsFamilyTempSensor('28ffe76da2163d3', 'DS18B20', 11, 1));
-
+        
     function temperatureReceivedCallback(sensors) {
         for (var i = 0; i < sensors.length; i++) {
             $scope.sensors[i].addLog(sensors[i]);

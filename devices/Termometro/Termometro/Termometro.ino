@@ -28,6 +28,9 @@
 
 #define TOPICO_PUBLISH   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
+#define MESSAGE_INTERVAL 5000
+uint64_t messageTimestamp = 0;
+
 DebugManager debugManager(D0);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
@@ -195,8 +198,12 @@ void loop() {
   //garante funcionamento das conexões WiFi e ao broker MQTT
   VerificaConexoesWiFIEMQTT(); 
 
-  sendTemp();
-
+  uint64_t now = millis();
+  if(now - messageTimestamp > MESSAGE_INTERVAL) {
+    messageTimestamp = now;
+    sendTemp();
+  }
+  
   displayManager.display.display();
 
   //keep-alive da comunicação com broker MQTT
