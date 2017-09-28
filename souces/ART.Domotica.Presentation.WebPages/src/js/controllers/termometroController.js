@@ -1,30 +1,16 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', '$timeout', '$stomp', '$log', function ($scope, $timeout, $stomp, $log) {    
+app.controller('termometroController', ['$scope', '$timeout', 'termometroStompService', '$log', function ($scope, $timeout, termometroStompService, $log) {    
 
-    $stomp.setDebug(function (args) {
-        //$log.debug(args)
-    })
+    termometroStompService.onReadReceived = onReadReceived;
 
-    $stomp
-        .connect('http://file-server:15674/stomp', JSON.parse('{"login":"test","passcode":"test"}'))
-
-        // frame = CONNECTED headers
-        .then(function (frame) {
-            var subscription = $stomp.subscribe('/topic/ARTPUBTEMP', function (payload, headers, res) {
-
-                for (var i = 0; i < payload.length; i++) {
-                    $scope.sensors[i].addLog(payload[i]);
-                }
-                $scope.$apply();
-
-            } , {
-                    'headers': 'are awesome'
-            })            
-        })
-
-    //termometroMQTTService.onTemperatureReceived = temperatureReceivedCallback;
-
+    function onReadReceived(payload) {
+        for (var i = 0; i < payload.length; i++) {
+            $scope.sensors[i].addLog(payload[i]);
+        }
+        $scope.$apply();
+    }
+    
     $scope.range = {
         min: 30,
         max: 60
@@ -101,7 +87,7 @@ app.controller('termometroController', ['$scope', '$timeout', '$stomp', '$log', 
         this.selectedResolution = {};
         
         this.setResolution = function () {
-            //termometroMQTTService.setResolution(this.deviceAddress, this.selectedResolution.value);
+            termometroStompService.setResolution(this.deviceAddress, this.selectedResolution.value);
         }
 
         this.forceY = {
@@ -124,13 +110,13 @@ app.controller('termometroController', ['$scope', '$timeout', '$stomp', '$log', 
 
         this.changeHighAlarm = function () { 
             if (_this.highAlarm != _this.alarm.highAlarm) {
-                //termometroMQTTService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm);
+                termometroStompService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm);
             }
         }
 
         this.changeLowAlarm = function () {
             if (_this.lowAlarm != _this.range.lowAlarm) {
-                //termometroMQTTService.setLowAlarm(_this.deviceAddress, _this.range.lowAlarm);
+                termometroStompService.setLowAlarm(_this.deviceAddress, _this.range.lowAlarm);
             }
         }
 
