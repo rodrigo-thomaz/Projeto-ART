@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', 'termometroService', 'termometroMQTTService', function ($scope, termometroService, termometroMQTTService) {    
+app.controller('termometroController', ['$scope', '$timeout', 'termometroService', 'termometroMQTTService', function ($scope, $timeout, termometroService, termometroMQTTService) {    
 
     termometroMQTTService.onTemperatureReceived = temperatureReceivedCallback;
 
@@ -9,26 +9,12 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
         max: 60
     };
 
-    $scope.selectedResolution = 10;
-
-    
-
-    //$scope.resolutions = [
-    //    { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
-    //    { mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 },
-    //    { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 },
-    //    { mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 },        
-    //];
-
-    $scope.resolution = {
-        availableOptions: [
-            { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
-            { mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 },
-            { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 },
-            { mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 },  
-        ],
-        selectedOption: { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 } //This sets the default value of the select in the ui
-    };
+    $scope.resolutions = [
+        { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
+        { mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 },
+        { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 },
+        { mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 }, 
+    ];
 
     $scope.options = {
         chart: {
@@ -77,6 +63,8 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
 
     var dsFamilyTempSensor = function (deviceAddress, family, resolution, scale) {
 
+        var _this = this;
+
         this.deviceAddress = deviceAddress;
         this.family = family;
 
@@ -86,10 +74,43 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
         this.temperature = null;
         this.epochTime = null;
 
+        this.highAlarm = null;
+        this.lowAlarm = null;
+
         this.selectedResolution = {};
         
         this.setResolution = function () {
             termometroMQTTService.setResolution(this.deviceAddress, this.selectedResolution.value);
+        }
+
+        this.forceY = {
+            min: 15,//gambeta
+            max: 35,//gambeta
+        };
+
+        this.changeForceYMin = function () {
+            alert();
+        }
+
+        this.changeForceYMax = function () {
+            alert();
+        }
+
+        this.alarm = {
+            lowAlarm: 22,//gambeta
+            highAlarm: 26,//gambeta
+        };        
+
+        this.changeHighAlarm = function () { 
+            if (_this.highAlarm != _this.alarm.highAlarm) {
+                termometroMQTTService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm);
+            }
+        }
+
+        this.changeLowAlarm = function () {
+            if (_this.lowAlarm != _this.range.lowAlarm) {
+                termometroMQTTService.setLowAlarm(_this.deviceAddress, _this.range.lowAlarm);
+            }
         }
 
         this.chart = [];
@@ -106,6 +127,10 @@ app.controller('termometroController', ['$scope', 'termometroService', 'termomet
             this.temperature = value.tempCelsius;
             this.chart[1].key = 'Temperatura ' + value.tempCelsius + ' °C';
             this.epochTime = value.epochTime;
+
+            this.highAlarm = value.highAlarm;
+            this.lowAlarm = value.lowAlarm;
+
 
             this.chart[0].values.push({
                 epochTime: value.epochTime,
