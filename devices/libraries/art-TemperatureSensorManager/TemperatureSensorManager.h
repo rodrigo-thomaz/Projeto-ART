@@ -14,7 +14,7 @@ class TemperatureSensorManager
 	char *getSensorsJson();
 	void setCallback(void(*sensorInCallback)(TemperatureSensor));
 
-	void setResolution(String json); 
+	void setResolution(String json);
 	void setLowAlarm(String json);
 	void setHighAlarm(String json);
 

@@ -115,8 +115,8 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
         }
 
         this.changeLowAlarm = function () {
-            if (_this.lowAlarm != _this.range.lowAlarm) {
-                termometroStompService.setLowAlarm(_this.deviceAddress, _this.range.lowAlarm);
+            if (_this.lowAlarm != _this.alarm.lowAlarm) {
+                termometroStompService.setLowAlarm(_this.deviceAddress, _this.alarm.lowAlarm);
             }
         }
 
@@ -171,12 +171,4 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
     //gambi
     $scope.sensors.push(new dsFamilyTempSensor('28fffe6593164b6', 'DS18B20', 9, 1));
     $scope.sensors.push(new dsFamilyTempSensor('28ffe76da2163d3', 'DS18B20', 11, 1));
-        
-    function temperatureReceivedCallback(sensors) {
-        for (var i = 0; i < sensors.length; i++) {
-            $scope.sensors[i].addLog(sensors[i]);
-        }
-        $scope.$apply();
-    }
-
 }]);

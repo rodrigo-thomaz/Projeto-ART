@@ -89,7 +89,7 @@ void initMQTT()
 void mqtt_callback(char* topic, byte* payload, unsigned int length) 
 {
     String json;
-
+    
     //obtem a string do payload recebido
     for(int i = 0; i < length; i++) 
     {

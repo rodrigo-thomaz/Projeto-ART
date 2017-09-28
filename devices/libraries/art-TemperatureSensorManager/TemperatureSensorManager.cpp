@@ -166,11 +166,12 @@ const uint8_t *TemperatureSensorManager::getDeviceAddress(String deviceAddressSt
 void TemperatureSensorManager::setResolution(String json)
 {
 	StaticJsonBuffer<200> jsonBuffer;
-
+	
 	JsonObject& root = jsonBuffer.parseObject(json);
 
 	if (!root.success()) {
-		Serial.println("parse setResolution failed");
+		Serial.print("parse setResolution failed: ");
+		Serial.println(json);
 		return;
 	}
 

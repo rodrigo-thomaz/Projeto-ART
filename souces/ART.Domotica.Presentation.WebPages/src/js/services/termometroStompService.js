@@ -42,12 +42,13 @@ app.factory('termometroStompService', ['$http', '$stomp', '$log', function ($htt
 
     function setResolution (deviceAddress, value) {
         var json = {
-            deviceAddress: deviceAddress,
-            value: value,
+            'deviceAddress': deviceAddress,
+            'value': value,
         };
-        var message = new Paho.MQTT.Message(JSON.stringify(json));
-        message.destinationName = "ART_SET_RESOLUTION";
-        mqttService.send(message);
+        $stomp.send('/topic/ART_SET_RESOLUTION', json, {
+                priority: 9,
+                //custom: 42 // Custom Headers
+        })
     }
 
     function setLowAlarm (deviceAddress, value) {
@@ -55,9 +56,10 @@ app.factory('termometroStompService', ['$http', '$stomp', '$log', function ($htt
             deviceAddress: deviceAddress,
             value: value,
         };
-        var message = new Paho.MQTT.Message(JSON.stringify(json));
-        message.destinationName = "ART_SET_LOW_ALARM";
-        mqttService.send(message);
+        $stomp.send('/topic/ART_SET_LOW_ALARM', json, {
+            priority: 9,
+            //custom: 42 // Custom Headers
+        })
     }
 
     function setHighAlarm (deviceAddress, value) {
@@ -65,9 +67,10 @@ app.factory('termometroStompService', ['$http', '$stomp', '$log', function ($htt
             deviceAddress: deviceAddress,
             value: value,
         };
-        var message = new Paho.MQTT.Message(JSON.stringify(json));
-        message.destinationName = "ART_SET_HIGH_ALARM";
-        mqttService.send(message);
+        $stomp.send('/topic/ART_SET_HIGH_ALARM', json, {
+            priority: 9,
+            //custom: 42 // Custom Headers
+        })
     }
     
 }]);
