@@ -28,7 +28,7 @@
 
 #define TOPICO_PUBLISH   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
-#define MESSAGE_INTERVAL 5000
+#define MESSAGE_INTERVAL 2500
 uint64_t messageTimestamp = 0;
 
 DebugManager debugManager(D0);

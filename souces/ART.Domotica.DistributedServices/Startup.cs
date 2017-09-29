@@ -21,8 +21,6 @@ namespace ART.Domotica.DistributedServices
             WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-
-            app.MapSignalR();
         }
 
         private void ConfigureOAuth(IAppBuilder app)
