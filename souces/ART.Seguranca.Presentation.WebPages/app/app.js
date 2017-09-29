@@ -48,11 +48,11 @@ app.config(function ($routeProvider) {
 });
 
 var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
-var domoticaDistributedServicesUri = 'http://localhost/ART.Domotica.DistributedServices/';
+var distributedServicesUri = 'http://localhost/ART.DistributedServices/';
 
 app.constant('ngAuthSettings', {
     segurancaDistributedServicesUri: segurancaDistributedServicesUri,
-    domoticaDistributedServicesUri: domoticaDistributedServicesUri,
+    distributedServicesUri: distributedServicesUri,
     clientId: 'ngAuthApp'
 });
 

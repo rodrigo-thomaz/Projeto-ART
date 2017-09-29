@@ -42,7 +42,7 @@ namespace ART.Seguranca.DistributedServices
 
         private async Task InsertUserInDomotica(IdentityUser user)
         {
-            var domoticaServiceUri = ConfigurationManager.AppSettings["ART.Domotica.DistributedServices.Uri"];
+            var domoticaServiceUri = ConfigurationManager.AppSettings["ART.DistributedServices.Uri"];
 
             var client = new HttpClient();
 

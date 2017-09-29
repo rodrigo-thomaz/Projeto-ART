@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.factory('dashboardService', ['$http', 'ngAuthSettings', function ($http, ngAuthSettings) {
 
-    var serviceBase = ngAuthSettings.domoticaDistributedServicesUri;
+    var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var serviceFactory = {};
 
