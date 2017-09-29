@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ART.DistributedServices.Models
+namespace ART.DistributedServices.Application.Models
 {
     public class GetHardwareInSpaceResponse
     {

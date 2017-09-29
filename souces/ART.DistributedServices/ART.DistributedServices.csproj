@@ -126,17 +126,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DSFamilyTempSensorController.cs" />
     <Compile Include="Controllers\HardwareController.cs" />
     <Compile Include="Controllers\TermometroController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Models\GetHardwareInSpaceResponse.cs" />
-    <Compile Include="Models\GetHardwareInSpaceRequest.cs" />
-    <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ART.DistributedServices.Application\ART.DistributedServices.Application.csproj">
+      <Project>{d00fe82f-addc-488e-a980-25b0b68983fe}</Project>
+      <Name>ART.DistributedServices.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.WebApi\ART.Infra.CrossCutting.WebApi.csproj">
       <Project>{0dbc73ae-9f5c-4a58-bb8a-3864bf4a5832}</Project>
       <Name>ART.Infra.CrossCutting.WebApi</Name>

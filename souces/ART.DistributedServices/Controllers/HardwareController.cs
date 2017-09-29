@@ -1,4 +1,4 @@
-﻿using ART.DistributedServices.Models;
+﻿using ART.DistributedServices.Application.Models;
 using ART.Infra.CrossCutting.WebApi;
 using MassTransit;
 using System;
@@ -29,7 +29,6 @@ namespace ART.DistributedServices.Controllers
         [ResponseType(typeof(GetHardwareInSpaceResponse))]
         [Route("getHardwareInSpace")]
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IHttpActionResult> GetHardwareInSpace(GetHardwareInSpaceRequest request)
         {
             try

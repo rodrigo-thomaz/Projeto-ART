@@ -1,4 +1,4 @@
-﻿using ART.DistributedServices.Models;
+﻿using ART.DistributedServices.Application.Models;
 using ART.Infra.CrossCutting.WebApi;
 using System.Threading.Tasks;
 using System.Web.Http;

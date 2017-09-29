@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Consumer", "ART.Consume
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.DistributedServices", "ART.DistributedServices\ART.DistributedServices.csproj", "{69BC6280-CF91-409C-81BF-28B95417ACBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.DistributedServices.Application", "ART.DistributedServices.Application\ART.DistributedServices.Application.csproj", "{D00FE82F-ADDC-488E-A980-25B0B68983FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -109,6 +111,14 @@ Global
 		{69BC6280-CF91-409C-81BF-28B95417ACBF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{69BC6280-CF91-409C-81BF-28B95417ACBF}.Release|x86.ActiveCfg = Release|Any CPU
 		{69BC6280-CF91-409C-81BF-28B95417ACBF}.Release|x86.Build.0 = Release|Any CPU
+		{D00FE82F-ADDC-488E-A980-25B0B68983FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D00FE82F-ADDC-488E-A980-25B0B68983FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D00FE82F-ADDC-488E-A980-25B0B68983FE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D00FE82F-ADDC-488E-A980-25B0B68983FE}.Debug|x86.Build.0 = Debug|Any CPU
+		{D00FE82F-ADDC-488E-A980-25B0B68983FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D00FE82F-ADDC-488E-A980-25B0B68983FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D00FE82F-ADDC-488E-A980-25B0B68983FE}.Release|x86.ActiveCfg = Release|Any CPU
+		{D00FE82F-ADDC-488E-A980-25B0B68983FE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
