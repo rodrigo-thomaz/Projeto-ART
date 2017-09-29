@@ -2,7 +2,7 @@
 
 namespace ART.DistributedServices.Application.Models
 {
-    public class GetHardwareInSpaceResponse
+    public class HardwareInSpaceGetResponse
     {
         #region public properties
 

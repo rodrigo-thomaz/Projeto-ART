@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ART.DistributedServices.Application.Models
 {
-    public class GetHardwareInSpaceRequest
+    public class HardwareInSpaceGetRequest
     {
         #region public properties
 

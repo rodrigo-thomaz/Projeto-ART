@@ -50,7 +50,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseApiController.cs" />
+    <Compile Include="GlobalExceptionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteConstraints\CustomMaxRouteConstraint.cs" />
+    <Compile Include="RouteConstraints\CustomLengthRouteConstraint.cs" />
+    <Compile Include="RouteConstraints\CustomMinRouteConstraint.cs" />
+    <Compile Include="RouteConstraints\CustomRangeRouteConstraint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

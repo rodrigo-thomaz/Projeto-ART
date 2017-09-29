@@ -26,10 +26,10 @@ namespace ART.DistributedServices.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [ResponseType(typeof(GetHardwareInSpaceResponse))]
+        [ResponseType(typeof(HardwareInSpaceGetResponse))]
         [Route("getHardwareInSpace")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetHardwareInSpace(GetHardwareInSpaceRequest request)
+        public async Task<IHttpActionResult> GetHardwareInSpace(HardwareInSpaceGetRequest request)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace ART.DistributedServices.Controllers
                 task.Wait();
 
                 //Cria a resposta
-                var response = new GetHardwareInSpaceResponse()
+                var response = new HardwareInSpaceGetResponse()
                 {
                     TransactionKey = request.SpaceId
                 };

@@ -41,6 +41,10 @@ angular.module('app')
                   resolve: load([
                       'vr.directives.slider',
                       'ui.select',
+
+                      'js/services/dsFamilyTempSensorService.js',
+                      'js/controllers/dsFamilyTempSensorController.js',
+
                       'js/services/termometroStompService.js',
                       //'js/services/mqttService.js',
                       //'js/services/termometroMQTTService.js',

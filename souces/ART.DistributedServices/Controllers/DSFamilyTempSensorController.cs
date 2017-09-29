@@ -1,5 +1,9 @@
-﻿using ART.Infra.CrossCutting.WebApi;
+﻿using ART.DistributedServices.Application.Models;
+using ART.Infra.CrossCutting.WebApi;
+using MassTransit;
+using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ART.DistributedServices.Controllers
 {
@@ -7,25 +11,47 @@ namespace ART.DistributedServices.Controllers
     [RoutePrefix("api/dsFamilyTempSensor")]    
     public class DSFamilyTempSensorController : BaseApiController
     {
-        //#region private readonly fields
+        #region private readonly fields
 
-        //private readonly IBancoAppService _bancoAppService;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        //#endregion
+        #endregion
 
-        //#region constructors
+        #region constructors
 
-        //public DSFamilyTempSensorController(IBancoAppService bancoAppService)
-        //{
-        //    _bancoAppService = bancoAppService;
-        //}
+        public DSFamilyTempSensorController(IPublishEndpoint publishEndpoint)
+        {
+            _publishEndpoint = publishEndpoint;
+        }
 
-        //#endregion
+        #endregion
 
-        //#region public voids
+        #region public voids
 
+        /// <summary>
+        /// Altera a resolução de um sensor
+        /// </summary>
+        /// <remarks>
+        /// Altera a resolução de um sensor
+        /// </remarks>
+        /// <param name="request">model do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [ResponseType(typeof(UserCreateModel))]
+        [Route("setResolution")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetResolution(DSFamilyTempSensorSetResolutionRequest request)
+        {
+            await _publishEndpoint.Publish(new DSFamilyTempSensorSetResolutionResponse
+            {
+                DeviceAddress = request.DeviceAddress,
+                Value = request.Value,
+            });
 
+            return Ok();
+        }
 
-        //#endregion
+        #endregion
     }
 }
