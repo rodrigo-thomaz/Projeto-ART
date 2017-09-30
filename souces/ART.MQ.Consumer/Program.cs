@@ -1,4 +1,5 @@
-﻿using ART.MQ.Consumer.Consumers;
+﻿using ART.MQ.Common.QueueNames;
+using ART.MQ.Consumer.Consumers.DSFamilyTempSensorConsumers;
 using ART.MQ.Consumer.IDomain;
 using ART.MQ.Consumer.IRepositories;
 using Autofac;
@@ -39,7 +40,7 @@ namespace ART.MQ.Consumer
                         settings.Password(password);
                     });
                     
-                    rabbit.ReceiveEndpoint(host, "DSFamilyTempSensorSetResolution", e =>
+                    rabbit.ReceiveEndpoint(host, DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueue, e =>
                     {
                         e.Consumer<DSFamilyTempSensorSetResolutionConsumer>();
                     });

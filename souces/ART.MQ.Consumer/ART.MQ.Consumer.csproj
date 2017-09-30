@@ -97,7 +97,7 @@
     <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
     <Compile Include="Configurations\UserConfiguration.cs" />
     <Compile Include="Configurations\UserInSpaceConfiguration.cs" />
-    <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
+    <Compile Include="Consumers\DSFamilyTempSensorConsumers\DSFamilyTempSensorSetResolutionConsumer.cs" />
     <Compile Include="Domain\DSFamilyTempSensorDomain.cs" />
     <Compile Include="IDomain\IDSFamilyTempSensorDomain.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
@@ -136,9 +136,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Contracts.csproj">
+    <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Common.csproj">
       <Project>{8c7dfa89-52d2-4907-b515-b3c776bcb12e}</Project>
-      <Name>ART.MQ.Contracts</Name>
+      <Name>ART.MQ.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

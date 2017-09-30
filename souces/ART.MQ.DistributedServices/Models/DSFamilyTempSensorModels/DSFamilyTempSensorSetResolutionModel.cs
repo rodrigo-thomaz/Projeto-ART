@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.DistributedServices.Models
+﻿namespace ART.MQ.DistributedServices.Models.DSFamilyTempSensorModels
 {
     public class DSFamilyTempSensorSetResolutionModel
     {

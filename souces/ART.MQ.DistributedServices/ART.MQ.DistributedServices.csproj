@@ -155,7 +155,8 @@
     <Compile Include="Controllers\TermometroController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Models\DSFamilyTempSensorSetResolutionModel.cs" />
+    <Compile Include="Helpers\MQApiControllerBase.cs" />
+    <Compile Include="Models\DSFamilyTempSensorModels\DSFamilyTempSensorSetResolutionModel.cs" />
     <Compile Include="Models\HardwareInSpaceGetRequest.cs" />
     <Compile Include="Models\HardwareInSpaceGetResponse.cs" />
     <Compile Include="Models\UserCreateModel.cs" />
@@ -167,9 +168,9 @@
       <Project>{0dbc73ae-9f5c-4a58-bb8a-3864bf4a5832}</Project>
       <Name>ART.Infra.CrossCutting.WebApi</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Contracts.csproj">
+    <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Common.csproj">
       <Project>{8c7dfa89-52d2-4907-b515-b3c776bcb12e}</Project>
-      <Name>ART.MQ.Contracts</Name>
+      <Name>ART.MQ.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
