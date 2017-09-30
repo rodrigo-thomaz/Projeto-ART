@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace ART.MQ.Consumer.Entities
+﻿namespace ART.MQ.Consumer.Entities
 {
-    public interface IEntity
+    public interface IEntity<TKey>
     {
         #region Primitive Properties
 
-        Guid Id { get; set; }
+        TKey Id { get; set; }
 
         #endregion        
     }

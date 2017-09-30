@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ART.MQ.Consumer.Entities
 {
-    public abstract class HardwareBase : IEntity
+    public abstract class HardwareBase : IEntity<Guid>
     {
         #region Primitive Properties
 

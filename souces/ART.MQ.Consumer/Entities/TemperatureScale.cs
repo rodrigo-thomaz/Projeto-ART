@@ -2,7 +2,7 @@
 
 namespace ART.MQ.Consumer.Entities
 {
-    public class TemperatureScale
+    public class TemperatureScale : IEntity<byte>
     {
         #region Primitive Properties
 

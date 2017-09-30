@@ -20,6 +20,7 @@ namespace ART.MQ.Consumer.Domain
         }
 
         #endregion
+
         #region public voids
 
         public async Task SetResolution(string deviceAddres, int value)

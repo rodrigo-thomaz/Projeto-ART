@@ -3,20 +3,8 @@ using System.Collections.Generic;
 
 namespace ART.MQ.Consumer.Entities
 {
-    public class DSFamilyTempSensorResolution
+    public class DSFamilyTempSensorResolution : IEntity<byte>
     {
-        #region Ignore Properties       
-
-        public byte ResolutionDecimalPlaces
-        {            
-            get
-            {
-                return BitConverter.GetBytes(decimal.GetBits(Resolution)[3])[2];
-            }
-        }
-
-        #endregion
-
         #region Primitive Properties
 
         public byte Id { get; set; }
@@ -25,6 +13,18 @@ namespace ART.MQ.Consumer.Entities
         public decimal ConversionTime { get; set; }
         public byte Bits { get; set; }
         public string Description { get; set; }
+
+        #endregion
+
+        #region Ignore Properties       
+
+        public byte ResolutionDecimalPlaces
+        {
+            get
+            {
+                return BitConverter.GetBytes(decimal.GetBits(Resolution)[3])[2];
+            }
+        }
 
         #endregion
 
