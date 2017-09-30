@@ -10,6 +10,8 @@ namespace ART.MQ.Consumer.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<BusControlService>();
+
             builder.Register(context =>
             {
                 var busControl = Bus.Factory.CreateUsingRabbitMq(rabbit =>

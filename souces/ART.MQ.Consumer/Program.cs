@@ -10,14 +10,12 @@ namespace ART.MQ.Consumer
     {
         static void Main(string[] args)
         {
-            var builder = new ContainerBuilder();
-
-            builder.RegisterType<BusControlService>();
+            var builder = new ContainerBuilder();            
 
             builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope();
 
-            builder.RegisterModule<DSFamilyTempSensorModule>();
             builder.RegisterModule<BusModule>();
+            builder.RegisterModule<DSFamilyTempSensorModule>();            
 
             IContainer container = builder.Build();
 
