@@ -1,7 +1,8 @@
 ﻿using ART.MQ.Consumer.Modules;
 using Autofac;
 using MassTransit;
-using System;
+using Topshelf;
+using Topshelf.Autofac;
 
 namespace ART.MQ.Consumer
 {
@@ -9,30 +10,34 @@ namespace ART.MQ.Consumer
     {
         static void Main(string[] args)
         {
-            CreateContainer();
-        }
-
-        private static IContainer CreateContainer()
-        {
             var builder = new ContainerBuilder();
 
+            builder.RegisterType<BusControlService>();
+
             builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope();
-            
+
             builder.RegisterModule<DSFamilyTempSensorModule>();
             builder.RegisterModule<BusModule>();
 
             IContainer container = builder.Build();
 
-            var busControl = container.Resolve<IBusControl>();
+            HostFactory.Run(c =>
+            {
+                c.SetServiceName("ART.MQ.Consumer");
+                c.SetDisplayName("ART MQ Consumer");
+                c.SetDescription("A ART MQ Consumer.");
+                
+                c.UseAutofacContainer(container);
 
-            busControl.Start();
-
-            Console.ReadKey();
-
-            busControl.Stop();
-
-            return container;
+                c.Service<BusControlService>(s =>
+                {
+                    s.ConstructUsingAutofacContainer();
+                    s.WhenStarted((service, control) => service.Start());
+                    s.WhenStopped((service, control) => service.Stop());
+                });              
+            });            
         }
-
     }
+
+    
 }
