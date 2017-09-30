@@ -1,4 +1,5 @@
-﻿using ART.MQ.Consumer.IDomain;
+﻿using System.Threading.Tasks;
+using ART.MQ.Consumer.IDomain;
 using ART.MQ.Consumer.IRepositories;
 
 namespace ART.MQ.Consumer.Domain
@@ -19,5 +20,14 @@ namespace ART.MQ.Consumer.Domain
         }
 
         #endregion
+        #region public voids
+
+        public async Task SetResolution(string deviceAddres, int value)
+        {
+            
+        } 
+
+        #endregion
     }
 }
+ 

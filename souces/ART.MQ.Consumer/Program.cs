@@ -1,7 +1,9 @@
 ﻿using ART.MQ.Common.QueueNames;
 using ART.MQ.Consumer.Consumers.DSFamilyTempSensorConsumers;
+using ART.MQ.Consumer.Domain;
 using ART.MQ.Consumer.IDomain;
 using ART.MQ.Consumer.IRepositories;
+using ART.MQ.Consumer.Repositories;
 using Autofac;
 using MassTransit;
 using System;
@@ -14,13 +16,15 @@ namespace ART.MQ.Consumer
     {
         static void Main(string[] args)
         {
+            IContainer container = null;
+
             var builder = new ContainerBuilder();
 
             // register repositories
-            builder.RegisterType<IDSFamilyTempSensorRepository>();
+            builder.RegisterType<DSFamilyTempSensorRepository>().As<IDSFamilyTempSensorRepository>();
 
             // register domain services
-            builder.RegisterType<IDSFamilyTempSensorDomain>();            
+            builder.RegisterType<DSFamilyTempSensorDomain>().As<IDSFamilyTempSensorDomain>();
 
             // just register all the consumers
             builder.RegisterConsumers(Assembly.GetExecutingAssembly());
@@ -41,8 +45,8 @@ namespace ART.MQ.Consumer
                     });
                     
                     rabbit.ReceiveEndpoint(host, DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueue, e =>
-                    {
-                        e.Consumer<DSFamilyTempSensorSetResolutionConsumer>();
+                    {                        
+                        e.Consumer<DSFamilyTempSensorSetResolutionConsumer>(context);
                     });
 
                 });
@@ -53,7 +57,7 @@ namespace ART.MQ.Consumer
                 .As<IBusControl>()
                 .As<IBus>();
 
-            var container = builder.Build();
+            container = builder.Build();
 
             var bc = container.Resolve<IBusControl>();
             bc.Start();
@@ -62,22 +66,5 @@ namespace ART.MQ.Consumer
 
             bc.Stop();
         }
-
-        //static IBusControl ConfigureBus()
-        //{
-        //    return Bus.Factory.CreateUsingRabbitMq(rabbit =>
-        //    {
-        //        var hostName = ConfigurationManager.AppSettings["RabbitMQHostName"];
-        //        var virtualHostName = ConfigurationManager.AppSettings["RabbitMQVirtualHostName"];
-        //        var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
-        //        var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
-
-        //        rabbit.Host(hostName, virtualHostName, settings =>
-        //        {
-        //            settings.Username(username);
-        //            settings.Password(password);
-        //        });
-        //    });
-        //}
     }
 }
