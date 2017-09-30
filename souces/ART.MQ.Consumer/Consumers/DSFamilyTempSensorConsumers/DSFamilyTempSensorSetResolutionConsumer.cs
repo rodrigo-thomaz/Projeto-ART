@@ -29,6 +29,7 @@ namespace ART.MQ.Consumer.Consumers.DSFamilyTempSensorConsumers
         {
             await Console.Out.WriteLineAsync($"[DSFamilyTempSensor][SetResolution] deviceAddress:{context.Message.DeviceAddress} value: {context.Message.Value} ");            
             await _dsFamilyTempSensorDomain.SetResolution(context.Message.DeviceAddress, context.Message.Value);
+            //await context.Publish("");
         } 
 
         #endregion

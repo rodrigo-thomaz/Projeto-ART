@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ART.MQ.Consumer.IDomain;
 using ART.MQ.Consumer.IRepositories;
+using System;
 
 namespace ART.MQ.Consumer.Domain
 {
@@ -25,6 +26,13 @@ namespace ART.MQ.Consumer.Domain
 
         public async Task SetResolution(string deviceAddres, int value)
         {
+            var entity = await _dsFamilyTempSensorRepository.GetByDeviceAddress(deviceAddres);
+
+            if(entity == null)
+            {
+                throw new Exception("DSFamilyTempSensor not found");
+            }
+
             
         } 
 

@@ -1,6 +1,7 @@
 ﻿using ART.MQ.Consumer.Entities;
 using ART.MQ.Consumer.IRepositories;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace ART.MQ.Consumer.Repositories
 {
@@ -11,35 +12,35 @@ namespace ART.MQ.Consumer.Repositories
         where TKey : struct
 
     {
-        private ARTDbContext _context;
+        protected ARTDbContext _context;
 
         public RepositoryBase(ARTDbContext context)
         {
             _context = context;
         }        
 
-        public TEntity GetById(TKey key)
+        public async Task<TEntity> GetById(TKey key)
         {
-            var entity = _context.Set<TEntity>().Find(key);
+            var entity = await _context.Set<TEntity>().FindAsync(key);
             return entity;
         }
 
-        public void Insert(TEntity entity)
+        public async Task Insert(TEntity entity)
         {
             _context.Set<TEntity>().Add(entity);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
         
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(TEntity entity)
+        public async Task Delete(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Deleted;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -7,11 +7,15 @@ namespace ART.MQ.Consumer
 {
     public class ARTDbContext : DbContext
     {
+        #region constructors
+
         public ARTDbContext()
              : base(@"Data Source=.\SQLEXPRESS;Initial Catalog=ARTDb;Integrated Security=false;User ID=sa;Password=b3b3xu!@#;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False")
         {
             Initialize();
         }
+
+        #endregion
 
         private void Initialize()
         {
@@ -22,7 +26,7 @@ namespace ART.MQ.Consumer
         {
             //Conventions
 
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();            
 
             //Configurations
 

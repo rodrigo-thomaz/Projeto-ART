@@ -16,7 +16,7 @@ namespace ART.MQ.Consumer.Repositories
 
         public UserRepository()
         {
-            _context = new ARTDbContext();
+            //_context = new ARTDbContext();
         }
 
         #endregion

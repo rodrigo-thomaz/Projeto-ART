@@ -20,6 +20,8 @@ namespace ART.MQ.Consumer
 
             var builder = new ContainerBuilder();
 
+            builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope(); 
+
             // register repositories
             builder.RegisterType<DSFamilyTempSensorRepository>().As<IDSFamilyTempSensorRepository>();
 
@@ -28,6 +30,9 @@ namespace ART.MQ.Consumer
 
             // just register all the consumers
             builder.RegisterConsumers(Assembly.GetExecutingAssembly());
+
+            // registering saga state machines from current assembly
+            //builder.RegisterStateMachineSagas(Assembly.GetExecutingAssembly());
 
             builder.Register(context =>
             {
@@ -47,6 +52,7 @@ namespace ART.MQ.Consumer
                     rabbit.ReceiveEndpoint(host, DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueue, e =>
                     {                        
                         e.Consumer<DSFamilyTempSensorSetResolutionConsumer>(context);
+                        //e.LoadStateMachineSagas(context);
                     });
 
                 });
