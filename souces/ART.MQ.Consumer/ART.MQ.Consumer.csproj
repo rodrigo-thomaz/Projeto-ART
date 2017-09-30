@@ -128,6 +128,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
+    <Compile Include="Modules\DSFamilyTempSensorModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />

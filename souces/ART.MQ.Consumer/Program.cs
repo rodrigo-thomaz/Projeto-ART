@@ -1,14 +1,10 @@
 ﻿using ART.MQ.Common.QueueNames;
 using ART.MQ.Consumer.Consumers.DSFamilyTempSensorConsumers;
-using ART.MQ.Consumer.Domain;
-using ART.MQ.Consumer.IDomain;
-using ART.MQ.Consumer.IRepositories;
-using ART.MQ.Consumer.Repositories;
+using ART.MQ.Consumer.Modules;
 using Autofac;
 using MassTransit;
 using System;
 using System.Configuration;
-using System.Reflection;
 
 namespace ART.MQ.Consumer
 {
@@ -16,24 +12,19 @@ namespace ART.MQ.Consumer
     {
         static void Main(string[] args)
         {
+            CreateContainer();
+        }
+
+        private static IContainer CreateContainer()
+        {
             IContainer container = null;
 
             var builder = new ContainerBuilder();
 
-            builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope(); 
-
-            // register repositories
-            builder.RegisterType<DSFamilyTempSensorRepository>().As<IDSFamilyTempSensorRepository>();
-
-            // register domain services
-            builder.RegisterType<DSFamilyTempSensorDomain>().As<IDSFamilyTempSensorDomain>();
-
-            // just register all the consumers
-            builder.RegisterConsumers(Assembly.GetExecutingAssembly());
-
-            // registering saga state machines from current assembly
-            //builder.RegisterStateMachineSagas(Assembly.GetExecutingAssembly());
-
+            builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope();
+            
+            builder.RegisterModule<DSFamilyTempSensorModule>();
+            
             builder.Register(context =>
             {
                 var busControl = Bus.Factory.CreateUsingRabbitMq(rabbit =>
@@ -48,11 +39,10 @@ namespace ART.MQ.Consumer
                         settings.Username(username);
                         settings.Password(password);
                     });
-                    
+
                     rabbit.ReceiveEndpoint(host, DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueue, e =>
-                    {                        
+                    {
                         e.Consumer<DSFamilyTempSensorSetResolutionConsumer>(context);
-                        //e.LoadStateMachineSagas(context);
                     });
 
                 });
@@ -71,6 +61,9 @@ namespace ART.MQ.Consumer
             Console.ReadKey();
 
             bc.Stop();
+
+            return container;
         }
+
     }
 }
