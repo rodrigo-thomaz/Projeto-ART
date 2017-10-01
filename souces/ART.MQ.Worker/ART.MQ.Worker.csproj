@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E2F7E686-A548-4FA5-968B-C5FD1F2DF1DD}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ART.MQ.Worker</RootNamespace>
+    <AssemblyName>ART.MQ.Worker</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.0.0\lib\net451\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Automatonymous, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Automatonymous.3.5.11\lib\net452\Automatonymous.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GreenPipes, Version=1.1.0.83, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\packages\GreenPipes.1.0.10\lib\net452\GreenPipes.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.3.5.7\lib\net452\MassTransit.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.AutofacIntegration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.Autofac.3.5.7\lib\net452\MassTransit.AutofacIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.Automatonymous.AutofacIntegration, Version=3.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.Automatonymous.Autofac.3.5.7\lib\net452\MassTransit.Automatonymous.AutofacIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.AutomatonymousIntegration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.Automatonymous.3.5.7\lib\net452\MassTransit.AutomatonymousIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.EntityFrameworkIntegration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.EntityFramework.3.5.7\lib\net452\MassTransit.EntityFrameworkIntegration.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.RabbitMqTransport, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\MassTransit.RabbitMQ.3.5.7\lib\net452\MassTransit.RabbitMqTransport.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="NewId, Version=3.0.1.17, Culture=neutral, PublicKeyToken=b8e0e9f2f1e657fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\NewId.3.0.1\lib\net452\NewId.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Topshelf, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Topshelf.4.0.3\lib\net452\Topshelf.dll</HintPath>
+    </Reference>
+    <Reference Include="Topshelf.Autofac, Version=2.0.0.0, Culture=neutral, PublicKeyToken=ebfabbe7fb167e88, processorArchitecture=MSIL">
+      <HintPath>..\packages\Topshelf.Autofac.3.1.1\lib\net452\Topshelf.Autofac.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ARTDbContext.cs" />
+    <Compile Include="BusControlService.cs" />
+    <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
+    <Compile Include="Configurations\DSFamilyTempSensorConfiguration.cs" />
+    <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
+    <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
+    <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
+    <Compile Include="Configurations\HardwareInSpaceConfiguration.cs" />
+    <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
+    <Compile Include="Configurations\SensorBaseConfiguration.cs" />
+    <Compile Include="Configurations\SpaceConfiguration.cs" />
+    <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
+    <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
+    <Compile Include="Configurations\UserConfiguration.cs" />
+    <Compile Include="Configurations\UserInSpaceConfiguration.cs" />
+    <Compile Include="Consumers\DSFamilyTempSensorConsumers\DSFamilyTempSensorSetResolutionConsumer.cs" />
+    <Compile Include="Domain\DSFamilyTempSensorDomain.cs" />
+    <Compile Include="IDomain\IDSFamilyTempSensorDomain.cs" />
+    <Compile Include="Entities\DeviceBase.cs" />
+    <Compile Include="Entities\DSFamilyTempSensor.cs" />
+    <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
+    <Compile Include="Entities\ESPDeviceBase.cs" />
+    <Compile Include="Entities\HardwareBase.cs" />
+    <Compile Include="Entities\HardwareInSpace.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\RaspberryDeviceBase.cs" />
+    <Compile Include="Entities\SensorBase.cs" />
+    <Compile Include="Entities\Space.cs" />
+    <Compile Include="Entities\TemperatureScale.cs" />
+    <Compile Include="Entities\ThermometerDevice.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserInSpace.cs" />
+    <Compile Include="IRepositories\IDSFamilyTempSensorRepository.cs" />
+    <Compile Include="IRepositories\IRepository.cs" />
+    <Compile Include="Migrations\201709290147410_InitialCreate.cs" />
+    <Compile Include="Migrations\201709290147410_InitialCreate.Designer.cs">
+      <DependentUpon>201709290147410_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\Seeds.cs" />
+    <Compile Include="Modules\BusModule.cs" />
+    <Compile Include="Modules\DSFamilyTempSensorModule.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />
+    <Compile Include="Repositories\RepositoryBase.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709290147410_InitialCreate.resx">
+      <DependentUpon>201709290147410_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Common.csproj">
+      <Project>{8c7dfa89-52d2-4907-b515-b3c776bcb12e}</Project>
+      <Name>ART.MQ.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
