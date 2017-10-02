@@ -82,7 +82,13 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
         this.selectedResolution = {};
         
         this.setResolution = function () {
-            dsFamilyTempSensorService.setResolution(this.deviceAddress, this.selectedResolution.value);
+            dsFamilyTempSensorService.setResolution(_this.deviceAddress, _this.selectedResolution.value).then(function (results) {
+                //alert('success');
+            }, function (error) {
+                if (error.status !== 401) {
+                    alert(error.data.message);
+                }
+            });
         }
 
         this.forceY = {
@@ -105,13 +111,25 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
 
         this.changeHighAlarm = function () { 
             if (_this.highAlarm != _this.alarm.highAlarm) {
-                dsFamilyTempSensorService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm);
+                dsFamilyTempSensorService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm).then(function (results) {
+                    //alert('success');
+                }, function (error) {
+                    if (error.status !== 401) {
+                        alert(error.data.message);
+                    }
+                });
             }
         }
 
         this.changeLowAlarm = function () {
             if (_this.lowAlarm != _this.alarm.lowAlarm) {
-                dsFamilyTempSensorService.setLowAlarm(_this.deviceAddress, _this.alarm.lowAlarm);
+                dsFamilyTempSensorService.setLowAlarm(_this.deviceAddress, _this.alarm.lowAlarm).then(function (results) {
+                    //alert('success');
+                }, function (error) {
+                    if (error.status !== 401) {
+                        alert(error.data.message);
+                    }
+                });
             }
         }
 

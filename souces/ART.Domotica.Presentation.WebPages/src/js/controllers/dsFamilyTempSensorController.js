@@ -6,12 +6,12 @@ app.controller('dsFamilyTempSensorController', ['$scope', '$timeout', 'dsFamilyT
 
     //dsFamilyTempSensorService.setResolution('28FFFE6593164B6', 10).then(function (results) {
 
-        alert('yeah!');
+    //    alert('yeah!');
 
-    }, function (error) {
-        if (error.status !== 401) {
-            alert(error.data.message);
-        }
-    });
+    //}, function (error) {
+    //    if (error.status !== 401) {
+    //        alert(error.data.message);
+    //    }
+    //});
 
 }]);

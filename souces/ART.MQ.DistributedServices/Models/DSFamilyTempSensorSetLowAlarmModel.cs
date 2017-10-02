@@ -3,6 +3,6 @@
     public class DSFamilyTempSensorSetLowAlarmModel
     {
         public string DeviceAddress { get; set; }
-        public int Value { get; set; }
+        public decimal Value { get; set; }
     }
 }

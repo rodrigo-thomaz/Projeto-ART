@@ -6,6 +6,6 @@ namespace ART.MQ.Common.Contracts
     public class DSFamilyTempSensorSetHighAlarmContract
     {
         public string DeviceAddress { get; set; }
-        public int Value { get; set; }
+        public decimal Value { get; set; }
     }
 }
