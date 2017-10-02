@@ -1,43 +1,31 @@
-﻿using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
+﻿using ART.MQ.Worker.Consumers;
+using RabbitMQ.Client;
 
 namespace ART.MQ.Worker
 {
     public class WorkerService
     {
+        #region private fields
+
         private readonly IConnection _connection;
-        private readonly IModel _model;
+        private readonly DSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
 
-        private readonly EventingBasicConsumer _setResolutionConsumer;
-        private readonly EventingBasicConsumer _setHighAlarmConsumer;
-        private readonly EventingBasicConsumer _setLowAlarmConsumer;
+        #endregion
 
-        public WorkerService(IConnection connection)
+        #region constructors
+
+        public WorkerService(IConnection connection, DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer)
         {
             _connection = connection;
+            _dsFamilyTempSensorConsumer = dsFamilyTempSensorConsumer;
+        }
 
-            _model = _connection.CreateModel();
+        #endregion
 
-            _model.QueueDeclare(
-                  queue: "DSFamilyTempSensor.SetResolution"
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
-
-            _setResolutionConsumer = new EventingBasicConsumer(_model);
-            _setHighAlarmConsumer = new EventingBasicConsumer(_model);
-            _setLowAlarmConsumer = new EventingBasicConsumer(_model);
-
-            _setResolutionConsumer.Received += SetResolutionReceived;
-            _setHighAlarmConsumer.Received += SetHighAlarmReceived;
-            _setLowAlarmConsumer.Received += SetLowAlarmReceived;
-
-            _model.BasicConsume("DSFamilyTempSensor.SetResolution", false, _setResolutionConsumer);
-        }        
+        #region public voids
 
         public bool Start()
-        {   
+        {
             return true;
         }
 
@@ -45,24 +33,8 @@ namespace ART.MQ.Worker
         {
             _connection.Close(30);
             return true;
-        }
+        }         
 
-        private void SetResolutionReceived(object sender, BasicDeliverEventArgs e)
-        {
-            var body = e.Body;
-            _model.BasicAck(e.DeliveryTag, false);
-        }
-
-        private void SetLowAlarmReceived(object sender, BasicDeliverEventArgs e)
-        {
-            var body = e.Body;
-            _model.BasicAck(e.DeliveryTag, false);
-        }
-
-        private void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
-        {
-            var body = e.Body;
-            _model.BasicAck(e.DeliveryTag, false);
-        }
+        #endregion
     }
 }

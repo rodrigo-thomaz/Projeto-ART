@@ -2,7 +2,7 @@
 using RabbitMQ.Client;
 using System.Configuration;
 
-namespace ART.MQ.Worker
+namespace ART.MQ.Worker.Modules
 {
     public class BusModule : Module
     {

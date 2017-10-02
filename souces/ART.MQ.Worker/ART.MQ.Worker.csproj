@@ -68,8 +68,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
+    <Compile Include="Helpers\DeserializationHelpers.cs" />
+    <Compile Include="Modules\ConsumerModule.cs" />
     <Compile Include="WorkerService.cs" />
-    <Compile Include="BusModule.cs" />
+    <Compile Include="Modules\BusModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

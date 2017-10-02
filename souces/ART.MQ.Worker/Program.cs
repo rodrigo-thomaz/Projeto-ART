@@ -1,5 +1,6 @@
 ﻿using ART.Data.Domain;
 using ART.Data.Repository;
+using ART.MQ.Worker.Modules;
 using Autofac;
 using Topshelf;
 using Topshelf.Autofac;
@@ -16,7 +17,8 @@ namespace ART.MQ.Worker
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
-            builder.RegisterModule<BusModule>();    
+            builder.RegisterModule<BusModule>();
+            builder.RegisterModule<ConsumerModule>();
 
             IContainer container = builder.Build();
 
