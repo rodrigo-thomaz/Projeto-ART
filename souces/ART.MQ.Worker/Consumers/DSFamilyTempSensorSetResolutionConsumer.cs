@@ -1,12 +1,12 @@
-﻿using ART.MQ.Common.Contracts;
-using ART.MQ.Consumer.IDomain;
+﻿using ART.Data.Domain.Interfaces;
+using ART.MQ.Common.Contracts.DSFamilyTempSensorContracts;
 using MassTransit;
 using System;
 using System.Threading.Tasks;
 
-namespace ART.MQ.Consumer.Consumers
+namespace ART.MQ.Worker.Consumers
 {
-    public class DSFamilyTempSensorSetResolutionConsumer : IConsumer<IDSFamilyTempSensorSetResolutionContract>
+    public class DSFamilyTempSensorSetResolutionConsumer : IConsumer<DSFamilyTempSensorSetResolutionContract>
     {
         #region private fields
 
@@ -25,7 +25,7 @@ namespace ART.MQ.Consumer.Consumers
 
         #region public void
 
-        public async Task Consume(ConsumeContext<IDSFamilyTempSensorSetResolutionContract> context)
+        public async Task Consume(ConsumeContext<DSFamilyTempSensorSetResolutionContract> context)
         {
             await Console.Out.WriteLineAsync($"[DSFamilyTempSensor][SetResolution] deviceAddress:{context.Message.DeviceAddress} value: {context.Message.Value} ");            
             await _dsFamilyTempSensorDomain.SetResolution(context.Message.DeviceAddress, context.Message.Value);

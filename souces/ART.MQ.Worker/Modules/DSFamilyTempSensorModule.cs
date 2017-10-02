@@ -1,8 +1,8 @@
-﻿using ART.MQ.Worker.Consumers.DSFamilyTempSensorConsumers;
-using ART.MQ.Worker.Domain;
-using ART.MQ.Worker.IDomain;
-using ART.MQ.Worker.IRepositories;
-using ART.MQ.Worker.Repositories;
+﻿using ART.Data.Domain.Interfaces;
+using ART.Data.Domain.Services;
+using ART.Data.Repository.Interfaces;
+using ART.Data.Repository.Repositories;
+using ART.MQ.Worker.Consumers;
 using Autofac;
 
 namespace ART.MQ.Worker.Modules

@@ -95,64 +95,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ARTDbContext.cs" />
     <Compile Include="BusControlService.cs" />
-    <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
-    <Compile Include="Configurations\DSFamilyTempSensorConfiguration.cs" />
-    <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
-    <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
-    <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
-    <Compile Include="Configurations\HardwareInSpaceConfiguration.cs" />
-    <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
-    <Compile Include="Configurations\SensorBaseConfiguration.cs" />
-    <Compile Include="Configurations\SpaceConfiguration.cs" />
-    <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
-    <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
-    <Compile Include="Configurations\UserConfiguration.cs" />
-    <Compile Include="Configurations\UserInSpaceConfiguration.cs" />
-    <Compile Include="Consumers\DSFamilyTempSensorConsumers\DSFamilyTempSensorSetResolutionConsumer.cs" />
-    <Compile Include="Domain\DSFamilyTempSensorDomain.cs" />
-    <Compile Include="IDomain\IDSFamilyTempSensorDomain.cs" />
-    <Compile Include="Entities\DeviceBase.cs" />
-    <Compile Include="Entities\DSFamilyTempSensor.cs" />
-    <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
-    <Compile Include="Entities\ESPDeviceBase.cs" />
-    <Compile Include="Entities\HardwareBase.cs" />
-    <Compile Include="Entities\HardwareInSpace.cs" />
-    <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\RaspberryDeviceBase.cs" />
-    <Compile Include="Entities\SensorBase.cs" />
-    <Compile Include="Entities\Space.cs" />
-    <Compile Include="Entities\TemperatureScale.cs" />
-    <Compile Include="Entities\ThermometerDevice.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserInSpace.cs" />
-    <Compile Include="IRepositories\IDSFamilyTempSensorRepository.cs" />
-    <Compile Include="IRepositories\IRepository.cs" />
-    <Compile Include="Migrations\201709290147410_InitialCreate.cs" />
-    <Compile Include="Migrations\201709290147410_InitialCreate.Designer.cs">
-      <DependentUpon>201709290147410_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Migrations\Seeds.cs" />
+    <Compile Include="Consumers\DSFamilyTempSensorSetResolutionConsumer.cs" />
     <Compile Include="Modules\BusModule.cs" />
     <Compile Include="Modules\DSFamilyTempSensorModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\UserRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709290147410_InitialCreate.resx">
-      <DependentUpon>201709290147410_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\ART.Data.Domain\ART.Data.Domain.csproj">
+      <Project>{f541f7ff-b9d6-47dc-9097-4cd7b6084c7f}</Project>
+      <Name>ART.Data.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Data.Repository\ART.Data.Repository.csproj">
+      <Project>{d0287824-c8bc-4025-8b99-5a8fd8aef1f1}</Project>
+      <Name>ART.Data.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Common.csproj">
       <Project>{8c7dfa89-52d2-4907-b515-b3c776bcb12e}</Project>
       <Name>ART.MQ.Common</Name>

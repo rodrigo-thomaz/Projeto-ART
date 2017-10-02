@@ -1,5 +1,5 @@
 ﻿using ART.MQ.Common.QueueNames;
-using ART.MQ.Worker.Consumers.DSFamilyTempSensorConsumers;
+using ART.MQ.Worker.Consumers;
 using Autofac;
 using MassTransit;
 using System.Configuration;

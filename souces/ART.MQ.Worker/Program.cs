@@ -1,4 +1,5 @@
-﻿using ART.MQ.Worker.Modules;
+﻿using ART.Data.Repository;
+using ART.MQ.Worker.Modules;
 using Autofac;
 using MassTransit;
 using Topshelf;
