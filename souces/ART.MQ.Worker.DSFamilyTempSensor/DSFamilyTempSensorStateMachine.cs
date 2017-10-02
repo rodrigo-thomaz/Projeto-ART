@@ -35,7 +35,7 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
             // missed data.
             DuringAny(
                 When(SetResolution)
-                    .Then(context => 
+                    .Then(context =>
                     {
                         context.Instance.CreateTime = context.Data.Timestamp;
                     }),
