@@ -84,6 +84,10 @@
     <Compile Include="Migrations\201709290147410_InitialCreate.Designer.cs">
       <DependentUpon>201709290147410_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710021852526_AddFieldsAlarm.cs" />
+    <Compile Include="Migrations\201710021852526_AddFieldsAlarm.Designer.cs">
+      <DependentUpon>201710021852526_AddFieldsAlarm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -99,6 +103,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709290147410_InitialCreate.resx">
       <DependentUpon>201709290147410_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710021852526_AddFieldsAlarm.resx">
+      <DependentUpon>201710021852526_AddFieldsAlarm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

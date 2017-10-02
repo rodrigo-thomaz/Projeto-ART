@@ -37,6 +37,14 @@ namespace ART.Data.Repository.Configurations
                 .WithMany(x => x.DSFamilyTempSensors)
                 .HasForeignKey(x => x.DSFamilyTempSensorResolutionId)
                 .WillCascadeOnDelete(false);
+
+            //HighAlarm
+            Property(x => x.HighAlarm)
+                .HasPrecision(6, 3);
+
+            //LowAlarm
+            Property(x => x.LowAlarm)
+                .HasPrecision(6, 3);
         }
     }
 }

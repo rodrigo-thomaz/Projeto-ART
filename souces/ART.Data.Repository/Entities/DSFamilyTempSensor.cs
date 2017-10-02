@@ -8,6 +8,8 @@
         public string Family { get; set; }
         public byte TemperatureScaleId { get; set; }
         public byte DSFamilyTempSensorResolutionId { get; set; }
+        public decimal HighAlarm { get; set; }
+        public decimal LowAlarm { get; set; }
 
         #endregion
 
