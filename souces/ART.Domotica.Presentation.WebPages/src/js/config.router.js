@@ -40,8 +40,8 @@ angular.module('app')
                   templateUrl: 'views/termometro.html',
                   resolve: load([
                       'vr.directives.slider',
-                      'ui.select',
-
+                      'ui.select',                      
+                      'js/services/dsFamilyTempSensorResolutionService.js',
                       'js/services/dsFamilyTempSensorService.js',
                       'js/controllers/dsFamilyTempSensorController.js',
 

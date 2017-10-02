@@ -41,47 +41,42 @@ namespace ART.MQ.DistributedServices.Controllers
         public IHttpActionResult SetResolution(DSFamilyTempSensorSetResolutionModel request)
         {
             _dsFamilyTempSensorProducer.SetResolution(request);
+            return Ok();
+        }
 
-            //var contract = new DSFamilyTempSensorSetResolutionContract
-            //{
-            //    DeviceAddress = request.DeviceAddress,
-            //    Value = request.Value,
-            //};
+        /// <summary>
+        /// Altera o alarme alto de um sensor
+        /// </summary>
+        /// <remarks>
+        /// Altera o alarme alto de um sensor
+        /// </remarks>
+        /// <param name="request">model do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setHighAlarm")]
+        [HttpPost]
+        public IHttpActionResult SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
+        {
+            _dsFamilyTempSensorProducer.SetHighAlarm(request);
+            return Ok();
+        }
 
-            //byte[] payload = SerializationHelpers.SerialiseIntoBinary(contract);
-            
-            //var model = _connection.CreateModel();
-
-            //model.QueueDeclare(
-            //      queue: "DSFamilyTempSensor.SetResolution"
-            //    , durable: true
-            //    , exclusive: false
-            //    , autoDelete: false
-            //    , arguments: null);
-
-            //model.QueueDeclare(
-            //      queue: "DSFamilyTempSensor.SetHighAlarm"
-            //    , durable: true
-            //    , exclusive: false
-            //    , autoDelete: false
-            //    , arguments: null);
-
-            //model.QueueDeclare(
-            //      queue: "DSFamilyTempSensor.SetLowAlarm"
-            //    , durable: true
-            //    , exclusive: false
-            //    , autoDelete: false
-            //    , arguments: null);
-
-            //IBasicProperties basicProperties = model.CreateBasicProperties();
-
-            ////basicProperties.ContentType = "text/plain";
-            //basicProperties.Persistent = true;
-            ////basicProperties.DeliveryMode = 2;
-            ////basicProperties.Expiration = "36000000";
-
-            //model.BasicPublish("", "DSFamilyTempSensor.SetResolution", null, payload);
-
+        /// <summary>
+        /// Altera o alarme baixo de um sensor
+        /// </summary>
+        /// <remarks>
+        /// Altera o alarme baixo de um sensor
+        /// </remarks>
+        /// <param name="request">model do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setLowAlarm")]
+        [HttpPost]
+        public IHttpActionResult SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
+        {
+            _dsFamilyTempSensorProducer.SetLowAlarm(request);
             return Ok();
         }
 

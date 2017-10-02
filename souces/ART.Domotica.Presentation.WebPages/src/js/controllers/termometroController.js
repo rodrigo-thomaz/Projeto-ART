@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', '$timeout', 'termometroStompService', '$log', function ($scope, $timeout, termometroStompService, $log) {    
+app.controller('termometroController', ['$scope', '$timeout', 'termometroStompService', 'dsFamilyTempSensorResolutionService', 'dsFamilyTempSensorService', '$log', function ($scope, $timeout, termometroStompService, dsFamilyTempSensorResolutionService, dsFamilyTempSensorService, $log) {    
 
     termometroStompService.onReadReceived = onReadReceived;
 
@@ -16,12 +16,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
         max: 60
     };
 
-    $scope.resolutions = [
-        { mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 },
-        { mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 },
-        { mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 },
-        { mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 }, 
-    ];
+    $scope.resolutions = dsFamilyTempSensorResolutionService.get();
 
     $scope.options = {
         chart: {
@@ -87,7 +82,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
         this.selectedResolution = {};
         
         this.setResolution = function () {
-            termometroStompService.setResolution(this.deviceAddress, this.selectedResolution.value);
+            dsFamilyTempSensorService.setResolution(this.deviceAddress, this.selectedResolution.value);
         }
 
         this.forceY = {
@@ -110,13 +105,13 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
 
         this.changeHighAlarm = function () { 
             if (_this.highAlarm != _this.alarm.highAlarm) {
-                termometroStompService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm);
+                dsFamilyTempSensorService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm);
             }
         }
 
         this.changeLowAlarm = function () {
             if (_this.lowAlarm != _this.alarm.lowAlarm) {
-                termometroStompService.setLowAlarm(_this.deviceAddress, _this.alarm.lowAlarm);
+                dsFamilyTempSensorService.setLowAlarm(_this.deviceAddress, _this.alarm.lowAlarm);
             }
         }
 
