@@ -1,6 +1,11 @@
-﻿using ART.MQ.Common.QueueNames;
+﻿using ART.Data.Repository;
+using ART.MQ.Common.QueueNames;
 using Autofac;
+using Automatonymous;
 using MassTransit;
+using MassTransit.EntityFrameworkIntegration;
+using MassTransit.EntityFrameworkIntegration.Saga;
+using MassTransit.Saga;
 using System;
 using System.Configuration;
 
@@ -8,11 +13,13 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
 {
     public class DSFamilyTempSensorModule : Module
     {
+        DSFamilyTempSensorStateMachine _machine = new DSFamilyTempSensorStateMachine();
+        //ISagaRepository<DSFamilyTempSensorState> _repository = new EntityFrameworkSagaRepository<DSFamilyTempSensorState>(new SagaDbContextFactory(() => new ARTDbContext()));
+        ISagaRepository<DSFamilyTempSensorState> _repository = new InMemorySagaRepository<DSFamilyTempSensorState>();
+
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<WorkerService>();
-
-            builder.RegisterType<DSFamilyTempSensorSetResolutionConsumer>();
+            builder.RegisterType<WorkerService>().SingleInstance();            
 
             builder.Register(context =>
             {
@@ -30,7 +37,8 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
 
                     rabbit.ReceiveEndpoint(host, DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueue, e =>
                     {
-                        e.Consumer<DSFamilyTempSensorSetResolutionConsumer>(context);
+                        //e.Consumer<DSFamilyTempSensorSetResolutionConsumer>(context);
+                        e.StateMachineSaga(_machine, _repository);
                     });
 
                 });
@@ -39,7 +47,11 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
             })
                 .SingleInstance()
                 .As<IBusControl>()
-                .As<IBus>();            
+                .As<IBus>();
+
+            //builder.RegisterType<DSFamilyTempSensorStateMachine>();
+            
+            //builder.RegisterType<DSFamilyTempSensorSetResolutionConsumer>();
         }
     }
 }

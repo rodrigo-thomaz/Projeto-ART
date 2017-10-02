@@ -96,6 +96,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorModule.cs" />
+    <Compile Include="DSFamilyTempSensorState.cs" />
+    <Compile Include="DSFamilyTempSensorStateMachine.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionConsumer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
