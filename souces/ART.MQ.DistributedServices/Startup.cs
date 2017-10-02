@@ -1,7 +1,6 @@
 ﻿using ART.MQ.DistributedServices.App_Start;
 using ART.MQ.DistributedServices.Controllers;
-using ART.MQ.DistributedServices.IProducers;
-using ART.MQ.DistributedServices.Producers;
+using ART.MQ.DistributedServices.Modules;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Microsoft.Owin;
@@ -56,7 +55,7 @@ namespace ART.MQ.DistributedServices
                 .As<IConnection>()
                 .SingleInstance();
 
-            builder.RegisterType<DSFamilyTempSensorProducer>().As<IDSFamilyTempSensorProducer>();
+            builder.RegisterModule<ProducerModule>();
 
             // Register anything else you might need...
             //builder.RegisterApiControllers();

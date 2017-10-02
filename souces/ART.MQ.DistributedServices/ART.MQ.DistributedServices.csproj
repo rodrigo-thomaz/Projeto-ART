@@ -137,6 +137,7 @@
     <Compile Include="Helpers\SerializationHelpers.cs" />
     <Compile Include="Models\DSFamilyTempSensorSetLowAlarmModel.cs" />
     <Compile Include="Models\DSFamilyTempSensorSetHighAlarmModel.cs" />
+    <Compile Include="Modules\ProducerModule.cs" />
     <Compile Include="Producers\DSFamilyTempSensorProducer.cs" />
     <Compile Include="Controllers\DSFamilyTempSensorController.cs" />
     <Compile Include="Controllers\HardwareController.cs" />
