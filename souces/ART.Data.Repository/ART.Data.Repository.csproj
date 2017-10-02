@@ -56,6 +56,7 @@
     <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
     <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
+    <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
     <Compile Include="Configurations\HardwareInSpaceConfiguration.cs" />
     <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorBaseConfiguration.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Entities\IEntity.cs" />
     <Compile Include="Entities\RaspberryDeviceBase.cs" />
     <Compile Include="Entities\SensorBase.cs" />
+    <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Space.cs" />
     <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ThermometerDevice.cs" />
@@ -88,6 +90,14 @@
     <Compile Include="Migrations\201710021852526_AddFieldsAlarm.cs" />
     <Compile Include="Migrations\201710021852526_AddFieldsAlarm.Designer.cs">
       <DependentUpon>201710021852526_AddFieldsAlarm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710022156402_AddTableSensorsInDevice.cs" />
+    <Compile Include="Migrations\201710022156402_AddTableSensorsInDevice.Designer.cs">
+      <DependentUpon>201710022156402_AddTableSensorsInDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710022226221_AddTableSensorsInDeviceIndex.cs" />
+    <Compile Include="Migrations\201710022226221_AddTableSensorsInDeviceIndex.Designer.cs">
+      <DependentUpon>201710022226221_AddTableSensorsInDeviceIndex.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -108,6 +118,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710021852526_AddFieldsAlarm.resx">
       <DependentUpon>201710021852526_AddFieldsAlarm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710022156402_AddTableSensorsInDevice.resx">
+      <DependentUpon>201710022156402_AddTableSensorsInDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710022226221_AddTableSensorsInDeviceIndex.resx">
+      <DependentUpon>201710022226221_AddTableSensorsInDeviceIndex.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

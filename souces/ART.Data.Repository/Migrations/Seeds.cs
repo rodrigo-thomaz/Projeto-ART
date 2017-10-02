@@ -161,6 +161,55 @@ namespace ART.Data.Repository.Migrations
 
             #endregion
 
+            #region ThermometerDevice
+
+            var thermometerDevice1MacAddress = "A0:20:A6:17:83:25";
+
+            var thermometerDevice1 = context.ThermometerDevice.SingleOrDefault(x => x.MacAddress.ToLower() == thermometerDevice1MacAddress.ToLower());
+
+            if (thermometerDevice1 == null)
+            {
+                thermometerDevice1 = new ThermometerDevice
+                {
+                    MacAddress = thermometerDevice1MacAddress
+                };
+                context.ThermometerDevice.Add(thermometerDevice1);
+            }
+            else
+            {
+                //code here
+            }           
+
+            context.SaveChanges();
+
+            #endregion
+
+            #region SensorsInDevice
+
+            var sensorsInDevice1 = new SensorsInDevice
+            {
+                SensorBaseId = sensor1.Id,
+                SensorBase = sensor1,
+                DeviceBaseId = thermometerDevice1.Id,
+                DeviceBase = thermometerDevice1,
+            };
+
+            context.SensorsInDevice.AddOrUpdate(sensorsInDevice1);
+
+            var sensorsInDevice2 = new SensorsInDevice
+            {
+                SensorBaseId = sensor2.Id,
+                SensorBase = sensor2,
+                DeviceBaseId = thermometerDevice1.Id,
+                DeviceBase = thermometerDevice1,
+            };
+
+            context.SensorsInDevice.AddOrUpdate(sensorsInDevice2);
+
+            context.SaveChanges();
+
+            #endregion
+
             #region Space
 
             var space1 = new Space

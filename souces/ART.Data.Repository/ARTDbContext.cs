@@ -37,6 +37,7 @@ namespace ART.Data.Repository
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
+            modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwareInSpaceConfiguration());
             modelBuilder.Configurations.Add(new SpaceConfiguration());
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
@@ -49,6 +50,7 @@ namespace ART.Data.Repository
                 
         public DbSet<DSFamilyTempSensor> DSFamilyTempSensor { get; set; }
         public DbSet<DSFamilyTempSensorResolution> DSFamilyTempSensorResolution { get; set; }
+        public DbSet<SensorsInDevice> SensorsInDevice { get; set; }
         public DbSet<HardwareInSpace> HardwareInSpace { get; set; }
         public DbSet<Space> Space { get; set; }
         public DbSet<TemperatureScale> TemperatureScale { get; set; }

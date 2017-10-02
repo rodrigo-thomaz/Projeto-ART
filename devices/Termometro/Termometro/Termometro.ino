@@ -22,9 +22,9 @@
 
 #define ID_MQTT  "HomeAut"
 
-#define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolution-"
-#define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarm-"
-#define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm-"
+#define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolution"
+#define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarm"
+#define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm"
 
 #define TOPICO_PUBLISH   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
@@ -78,6 +78,10 @@ void setup() {
 	displayManager.display.println("Wifi conectado !!!");
 	displayManager.display.display();
 	delay(2000);
+
+  Serial.println();
+  Serial.print("MAC: ");
+  Serial.println(WiFi.macAddress());
 }
 
 void initMQTT() 
@@ -98,6 +102,12 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
     }
 
     String topicStr = String(topic);
+
+    Serial.print("topic: ");
+    Serial.println(topicStr);
+
+    Serial.print("payload: ");
+    Serial.println(json);
 
     if(topicStr == String(TOPIC_SUB_SET_RESOLUTION)){
       temperatureSensorManager.setResolution(json);
@@ -120,15 +130,9 @@ void reconnectMQTT()
         {
             Serial.println("Conectado com sucesso ao broker MQTT!");
 
-            for(int i = 0; i < sizeof(temperatureSensorManager.Sensors)/sizeof(int) + 1; ++i){  
-              String setResolutionQueueName = TOPIC_SUB_SET_RESOLUTION + temperatureSensorManager.Sensors[i].deviceAddressStr;
-              String setHighAlarmQueueName = TOPIC_SUB_SET_HIGH_ALARM + temperatureSensorManager.Sensors[i].deviceAddressStr;
-              String setLowAlarmQueueName = TOPIC_SUB_SET_LOW_ALARM + temperatureSensorManager.Sensors[i].deviceAddressStr;
-              
-              MQTT.subscribe(const_cast<char*>(setResolutionQueueName.c_str())); 
-              MQTT.subscribe(const_cast<char*>(setHighAlarmQueueName.c_str())); 
-              MQTT.subscribe(const_cast<char*>(setLowAlarmQueueName.c_str()));  
-            }            
+            MQTT.subscribe(TOPIC_SUB_SET_RESOLUTION); 
+            MQTT.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
+            MQTT.subscribe(TOPIC_SUB_SET_LOW_ALARM);         
         } 
         else 
         {

@@ -5,7 +5,6 @@ using ART.MQ.Worker.Helpers;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ART.MQ.Worker.Consumers
@@ -81,17 +80,18 @@ namespace ART.MQ.Worker.Consumers
         private void SetResolutionReceived(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[DSFamilyTempSensorConsumer.SetResolutionReceived] {0}", Encoding.UTF8.GetString(e.Body));
+            //Console.WriteLine("[DSFamilyTempSensorConsumer.SetResolutionReceived] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
             var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetResolutionContract>(e.Body);
             Task.WaitAll(_dsFamilyTempSensorDomain.SetResolution(contract.DSFamilyTempSensorId, contract.DSFamilyTempSensorResolutionId));
             Console.WriteLine("[DSFamilyTempSensorDomain.SetResolution] Ok");
+            _model.BasicPublish("", "mqtt-subscription-HomeAutqos0", null, e.Body);            
         }
 
         private void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[DSFamilyTempSensorConsumer.SetHighAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
+            //Console.WriteLine("[DSFamilyTempSensorConsumer.SetHighAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
             var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetHighAlarmContract>(e.Body);
             Task.WaitAll(_dsFamilyTempSensorDomain.SetHighAlarm(contract.DSFamilyTempSensorId, contract.HighAlarm));
@@ -101,7 +101,7 @@ namespace ART.MQ.Worker.Consumers
         private void SetLowAlarmReceived(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[DSFamilyTempSensorConsumer.SetLowAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
+            //Console.WriteLine("[DSFamilyTempSensorConsumer.SetLowAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
             var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetLowAlarmContract>(e.Body);
             Task.WaitAll(_dsFamilyTempSensorDomain.SetLowAlarm(contract.DSFamilyTempSensorId, contract.LowAlarm));
