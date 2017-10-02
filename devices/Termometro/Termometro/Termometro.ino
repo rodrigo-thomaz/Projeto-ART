@@ -20,7 +20,7 @@
 #define D9    3
 #define D10   1
 
-#define ID_MQTT  "HomeAut"
+#define ID_MQTT  "294700e3-b9a7-e711-9bef-707781d470bc" // HardwareBaseId
 
 #define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolution"
 #define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarm"

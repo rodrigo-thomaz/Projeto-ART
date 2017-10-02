@@ -1,6 +1,8 @@
 ﻿using ART.Data.Repository.Entities;
 using ART.Data.Repository.Interfaces;
 using System;
+using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace ART.Data.Repository.Repositories
 {
@@ -9,6 +11,14 @@ namespace ART.Data.Repository.Repositories
         public DSFamilyTempSensorRepository(ARTDbContext context) : base(context)
         {
 
+        }
+
+        public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)
+        {
+            var entity = await _context.SensorsInDevice
+                .SingleOrDefaultAsync(x => x.SensorBaseId == dsFamilyTempSensorId);
+
+            return entity;
         }
     }
 }

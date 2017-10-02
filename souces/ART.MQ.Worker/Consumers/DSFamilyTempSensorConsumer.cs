@@ -82,10 +82,14 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine();
             //Console.WriteLine("[DSFamilyTempSensorConsumer.SetResolutionReceived] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
+
             var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetResolutionContract>(e.Body);
+
             Task.WaitAll(_dsFamilyTempSensorDomain.SetResolution(contract.DSFamilyTempSensorId, contract.DSFamilyTempSensorResolutionId));
             Console.WriteLine("[DSFamilyTempSensorDomain.SetResolution] Ok");
-            _model.BasicPublish("", "mqtt-subscription-HomeAutqos0", null, e.Body);            
+
+            var queueName = GetQueueName(contract.DSFamilyTempSensorId);
+            _model.BasicPublish("", queueName, null, e.Body);            
         }
 
         private void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
@@ -107,6 +111,15 @@ namespace ART.MQ.Worker.Consumers
             Task.WaitAll(_dsFamilyTempSensorDomain.SetLowAlarm(contract.DSFamilyTempSensorId, contract.LowAlarm));
             Console.WriteLine("[DSFamilyTempSensorDomain.SetLowAlarm] Ok");
         }        
+
+        private string GetQueueName(Guid dsFamilyTempSensorId)
+        {
+            var task = _dsFamilyTempSensorDomain.GetDeviceFromSensor(dsFamilyTempSensorId);
+            task.Wait();
+            var entity = task.Result;
+            var queueName = string.Format("mqtt-subscription-{0}qos0", entity.DeviceBaseId);
+            return queueName;
+        }
 
         #endregion
     }
