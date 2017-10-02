@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using System.Threading.Tasks;
 
 namespace ART.MQ.Worker.DSFamilyTempSensor
 {
@@ -11,16 +12,16 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
             _busControl = busControl;
         }
 
-        public bool Start()
+        public async Task<bool> StartAsync()
         {
-            _busControl.Start();
-            return _busControl != null;
+            await _busControl.StartAsync();
+            return true;
         }
 
-        public bool Stop()
+        public async Task<bool> StopAsync()
         {
-            _busControl.Stop();
-            return _busControl != null;
+            await _busControl.StopAsync();
+            return true;
         }
     }
 }

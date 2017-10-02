@@ -17,7 +17,6 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
-            builder.RegisterModule<BusModule>();
             builder.RegisterModule<DSFamilyTempSensorModule>();
 
             IContainer container = builder.Build();
@@ -33,8 +32,8 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
                 c.Service<WorkerService>(s =>
                 {
                     s.ConstructUsingAutofacContainer();
-                    s.WhenStarted((service, control) => service.Start());
-                    s.WhenStopped((service, control) => service.Stop());
+                    s.WhenStarted(async (service) => await service.StartAsync());
+                    s.WhenStopped(async (service) => await service.StopAsync());
                 });
             });
         }
