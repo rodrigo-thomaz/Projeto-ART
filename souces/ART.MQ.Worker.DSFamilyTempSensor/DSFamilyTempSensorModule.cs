@@ -1,7 +1,7 @@
 ﻿using ART.MQ.Common.QueueNames;
-using ART.MQ.Worker.DSFamilyTempSensor;
 using Autofac;
 using MassTransit;
+using System;
 using System.Configuration;
 
 namespace ART.MQ.Worker.DSFamilyTempSensor
@@ -19,11 +19,10 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
                 var busControl = Bus.Factory.CreateUsingRabbitMq(rabbit =>
                 {
                     var hostName = ConfigurationManager.AppSettings["RabbitMQHostName"];
-                    var virtualHostName = ConfigurationManager.AppSettings["RabbitMQVirtualHostName"];
                     var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
                     var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
 
-                    var host = rabbit.Host(hostName, virtualHostName, settings =>
+                    var host = rabbit.Host(new Uri(hostName), settings =>
                     {
                         settings.Username(username);
                         settings.Password(password);
