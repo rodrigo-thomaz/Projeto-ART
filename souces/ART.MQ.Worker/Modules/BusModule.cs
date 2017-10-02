@@ -10,7 +10,7 @@ namespace ART.MQ.Worker.Modules
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<BusControlService>();
+            builder.RegisterType<WorkerService>();
 
             builder.Register(context =>
             {

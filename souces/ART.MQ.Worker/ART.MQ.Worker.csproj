@@ -95,7 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusControlService.cs" />
+    <Compile Include="WorkerService.cs" />
     <Compile Include="DSFamilyTempSensor\DSFamilyTempSensorSetResolutionConsumer.cs" />
     <Compile Include="Modules\BusModule.cs" />
     <Compile Include="DSFamilyTempSensor\DSFamilyTempSensorModule.cs" />

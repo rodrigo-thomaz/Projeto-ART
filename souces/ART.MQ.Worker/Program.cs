@@ -1,4 +1,5 @@
-﻿using ART.Data.Repository;
+﻿using ART.Data.Domain;
+using ART.Data.Repository;
 using ART.MQ.Worker.DSFamilyTempSensor;
 using ART.MQ.Worker.Modules;
 using Autofac;
@@ -16,6 +17,8 @@ namespace ART.MQ.Worker
 
             builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope();
 
+            builder.RegisterModule<RepositoryModule>();
+            builder.RegisterModule<DomainModule>();
             builder.RegisterModule<BusModule>();
             builder.RegisterModule<DSFamilyTempSensorModule>();            
 
@@ -24,12 +27,12 @@ namespace ART.MQ.Worker
             HostFactory.Run(c =>
             {
                 c.SetServiceName("ART.MQ.Worker");
-                c.SetDisplayName("ART MQ Consumer");
-                c.SetDescription("A ART MQ Consumer.");
+                c.SetDisplayName("ART MQ Worker");
+                c.SetDescription("A ART MQ Worker.");
                 
                 c.UseAutofacContainer(container);
 
-                c.Service<BusControlService>(s =>
+                c.Service<WorkerService>(s =>
                 {
                     s.ConstructUsingAutofacContainer();
                     s.WhenStarted((service, control) => service.Start());

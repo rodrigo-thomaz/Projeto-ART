@@ -2,11 +2,11 @@
 
 namespace ART.MQ.Worker
 {
-    public class BusControlService
+    public class WorkerService
     {
         private readonly IBusControl _busControl;
 
-        public BusControlService(IBusControl busControl)
+        public WorkerService(IBusControl busControl)
         {
             _busControl = busControl;
         }
