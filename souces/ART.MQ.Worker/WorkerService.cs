@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using Topshelf;
 
 namespace ART.MQ.Worker
 {
