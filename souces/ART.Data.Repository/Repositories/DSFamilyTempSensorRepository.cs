@@ -12,10 +12,5 @@ namespace ART.Data.Repository.Repositories
         {
 
         }
-
-        public async Task<DSFamilyTempSensor> GetByDeviceAddress(string deviceAddress)
-        {
-            return await _context.DSFamilyTempSensor.SingleOrDefaultAsync(x => x.DeviceAddress == deviceAddress);
-        }
     }
 }

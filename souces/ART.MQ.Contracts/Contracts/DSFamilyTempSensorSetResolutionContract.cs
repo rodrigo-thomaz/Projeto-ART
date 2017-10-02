@@ -5,7 +5,7 @@ namespace ART.MQ.Common.Contracts
     [Serializable]
     public class DSFamilyTempSensorSetResolutionContract
     {
-        public string DeviceAddress { get; set; }
-        public int Value { get; set; }
+        public Guid DSFamilyTempSensorId { get; set; }
+        public byte DSFamilyTempSensorResolutionId { get; set; }
     }
 }

@@ -6,6 +6,6 @@ namespace ART.Data.Repository.Interfaces
 {
     public interface IDSFamilyTempSensorRepository : IRepository<DSFamilyTempSensor, Guid>
     {
-        Task<DSFamilyTempSensor> GetByDeviceAddress(string deviceAddress);
+
     }
 }

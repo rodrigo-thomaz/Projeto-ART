@@ -9,6 +9,7 @@ namespace ART.Data.Repository
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<DSFamilyTempSensorRepository>().As<IDSFamilyTempSensorRepository>();
+            builder.RegisterType<DSFamilyTempSensorResolutionRepository>().As<IDSFamilyTempSensorResolutionRepository>();
         }
     }
 }

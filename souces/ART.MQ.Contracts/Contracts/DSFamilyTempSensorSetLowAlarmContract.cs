@@ -5,7 +5,7 @@ namespace ART.MQ.Common.Contracts
     [Serializable]
     public class DSFamilyTempSensorSetLowAlarmContract
     {
-        public string DeviceAddress { get; set; }
-        public decimal Value { get; set; }
+        public Guid DSFamilyTempSensorId { get; set; }
+        public decimal LowAlarm { get; set; }
     }
 }

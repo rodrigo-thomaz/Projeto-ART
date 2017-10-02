@@ -63,10 +63,11 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
         this.values = [];
     }
 
-    var dsFamilyTempSensor = function (deviceAddress, family, resolution, scale) {
+    var dsFamilyTempSensor = function (dsFamilyTempSensorId, deviceAddress, family, resolution, scale) {
 
         var _this = this;
 
+        this.dsFamilyTempSensorId = dsFamilyTempSensorId;
         this.deviceAddress = deviceAddress;
         this.family = family;
 
@@ -82,7 +83,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
         this.selectedResolution = {};
         
         this.setResolution = function () {
-            dsFamilyTempSensorService.setResolution(_this.deviceAddress, _this.selectedResolution.value).then(function (results) {
+            dsFamilyTempSensorService.setResolution(_this.dsFamilyTempSensorId, _this.selectedResolution.dsFamilyTempSensorResolutionId).then(function (results) {
                 //alert('success');
             }, function (error) {
                 if (error.status !== 401) {
@@ -111,7 +112,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
 
         this.changeHighAlarm = function () { 
             if (_this.highAlarm != _this.alarm.highAlarm) {
-                dsFamilyTempSensorService.setHighAlarm(_this.deviceAddress, _this.alarm.highAlarm).then(function (results) {
+                dsFamilyTempSensorService.setHighAlarm(_this.dsFamilyTempSensorId, _this.alarm.highAlarm).then(function (results) {
                     //alert('success');
                 }, function (error) {
                     if (error.status !== 401) {
@@ -123,7 +124,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
 
         this.changeLowAlarm = function () {
             if (_this.lowAlarm != _this.alarm.lowAlarm) {
-                dsFamilyTempSensorService.setLowAlarm(_this.deviceAddress, _this.alarm.lowAlarm).then(function (results) {
+                dsFamilyTempSensorService.setLowAlarm(_this.dsFamilyTempSensorId, _this.alarm.lowAlarm).then(function (results) {
                     //alert('success');
                 }, function (error) {
                     if (error.status !== 401) {
@@ -182,6 +183,6 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
     $scope.sensors = [];
 
     //gambi
-    $scope.sensors.push(new dsFamilyTempSensor('28fffe6593164b6', 'DS18B20', 9, 1));
-    $scope.sensors.push(new dsFamilyTempSensor('28ffe76da2163d3', 'DS18B20', 11, 1));
+    $scope.sensors.push(new dsFamilyTempSensor('4fe0c742-b8a4-e711-9bee-707781d470bc', '28fffe6593164b6', 'DS18B20', 9, 1));
+    $scope.sensors.push(new dsFamilyTempSensor('4ee0c742-b8a4-e711-9bee-707781d470bc', '28ffe76da2163d3', 'DS18B20', 11, 1));
 }]);

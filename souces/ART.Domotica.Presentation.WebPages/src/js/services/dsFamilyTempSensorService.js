@@ -6,30 +6,30 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', function ($
 
     var serviceFactory = {};
 
-    var _setResolution = function (deviceAddress, value) {
+    var _setResolution = function (dsFamilyTempSensorId, dsFamilyTempSensorResolutionId) {
         var data = {
-            deviceAddress: deviceAddress,
-            value: value,
+            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            dsFamilyTempSensorResolutionId: dsFamilyTempSensorResolutionId,
         }
         return $http.post(serviceBase + 'api/dsFamilyTempSensor/setResolution', data).then(function (results) {
             return results;
         });
     };
 
-    var _setHighAlarm = function (deviceAddress, value) {
+    var _setHighAlarm = function (dsFamilyTempSensorId, highAlarm) {
         var data = {
-            deviceAddress: deviceAddress,
-            value: value,
+            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            highAlarm: highAlarm,
         }
         return $http.post(serviceBase + 'api/dsFamilyTempSensor/setHighAlarm', data).then(function (results) {
             return results;
         });
     };
 
-    var _setLowAlarm = function (deviceAddress, value) {
+    var _setLowAlarm = function (dsFamilyTempSensorId, lowAlarm) {
         var data = {
-            deviceAddress: deviceAddress,
-            value: value,
+            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            lowAlarm: lowAlarm,
         }
         return $http.post(serviceBase + 'api/dsFamilyTempSensor/setLowAlarm', data).then(function (results) {
             return results;

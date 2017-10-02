@@ -1,8 +1,10 @@
-﻿using ART.MQ.Common.Contracts;
+﻿using ART.Data.Domain.Interfaces;
+using ART.MQ.Common.Contracts;
 using ART.MQ.Common.QueueNames;
 using ART.MQ.Worker.Helpers;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using System.Threading.Tasks;
 
 namespace ART.MQ.Worker.Consumers
 {
@@ -17,11 +19,13 @@ namespace ART.MQ.Worker.Consumers
         private readonly EventingBasicConsumer _setHighAlarmConsumer;
         private readonly EventingBasicConsumer _setLowAlarmConsumer;
 
+        private readonly IDSFamilyTempSensorDomain _dsFamilyTempSensorDomain;
+
         #endregion
 
         #region constructors
 
-        public DSFamilyTempSensorConsumer(IConnection connection)
+        public DSFamilyTempSensorConsumer(IConnection connection, IDSFamilyTempSensorDomain dsFamilyTempSensorDomain)
         {
             _connection = connection;
 
@@ -30,6 +34,8 @@ namespace ART.MQ.Worker.Consumers
             _setResolutionConsumer = new EventingBasicConsumer(_model);
             _setHighAlarmConsumer = new EventingBasicConsumer(_model);
             _setLowAlarmConsumer = new EventingBasicConsumer(_model);
+
+            _dsFamilyTempSensorDomain = dsFamilyTempSensorDomain;
 
             Initialize();
         }
@@ -72,20 +78,23 @@ namespace ART.MQ.Worker.Consumers
 
         private void SetResolutionReceived(object sender, BasicDeliverEventArgs e)
         {
-            var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetResolutionContract>(e.Body);
             _model.BasicAck(e.DeliveryTag, false);
+            var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetResolutionContract>(e.Body);
+            Task.WaitAll(_dsFamilyTempSensorDomain.SetResolution(contract.DSFamilyTempSensorId, contract.DSFamilyTempSensorResolutionId));
         }
 
         private void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
-        {
-            var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetHighAlarmContract>(e.Body);
+        {            
             _model.BasicAck(e.DeliveryTag, false);
+            var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetHighAlarmContract>(e.Body);
+            Task.WaitAll(_dsFamilyTempSensorDomain.SetHighAlarm(contract.DSFamilyTempSensorId, contract.HighAlarm));
         }        
 
         private void SetLowAlarmReceived(object sender, BasicDeliverEventArgs e)
-        {
-            var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetLowAlarmContract>(e.Body);
+        {            
             _model.BasicAck(e.DeliveryTag, false);
+            var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetLowAlarmContract>(e.Body);
+            Task.WaitAll(_dsFamilyTempSensorDomain.SetLowAlarm(contract.DSFamilyTempSensorId, contract.LowAlarm));
         }        
 
         #endregion

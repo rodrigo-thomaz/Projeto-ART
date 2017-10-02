@@ -1,8 +1,10 @@
-﻿namespace ART.MQ.DistributedServices.Models
+﻿using System;
+
+namespace ART.MQ.DistributedServices.Models
 {
     public class DSFamilyTempSensorSetResolutionModel
     {
-        public string DeviceAddress { get; set; }
-        public int Value { get; set; }
+        public Guid DSFamilyTempSensorId { get; set; }
+        public byte DSFamilyTempSensorResolutionId { get; set; }
     }
 }
