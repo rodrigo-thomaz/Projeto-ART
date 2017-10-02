@@ -21,7 +21,7 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
             Initially(
                 When(SetResolution)
                     .Then(HandleRoutingSetResolution)
-                    .TransitionTo(Executing),
+                    .TransitionTo(Executing),                
                 When(SetResolutionCompleted)
                     .Then(HandleRoutingSetResolutionCompleted)
                     .TransitionTo(Completed),
@@ -35,7 +35,10 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
             // missed data.
             DuringAny(
                 When(SetResolution)
-                    .Then(context => context.Instance.CreateTime = context.Data.Timestamp),
+                    .Then(context => 
+                    {
+                        context.Instance.CreateTime = context.Data.Timestamp;
+                    }),
                 When(SetResolutionCompleted)
                     .Then(HandleRoutingSetResolutionCompleted)
                     .TransitionTo(Completed),
