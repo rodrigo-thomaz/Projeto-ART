@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 
-namespace ART.MQ.Worker
+namespace ART.MQ.Worker.DSFamilyTempSensor
 {
     public class WorkerService
     {

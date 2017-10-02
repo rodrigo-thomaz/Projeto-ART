@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Web.Http;
 using ART.MQ.Common.QueueNames;
-using ART.MQ.Common.Contracts.DSFamilyTempSensorContracts;
+using ART.MQ.Common.Contracts;
 using ART.MQ.DistributedServices.Helpers;
 using ART.MQ.DistributedServices.Models.DSFamilyTempSensorModels;
 

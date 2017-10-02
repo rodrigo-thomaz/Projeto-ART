@@ -1,5 +1,5 @@
 ﻿using ART.Data.Domain.Interfaces;
-using ART.MQ.Common.Contracts.DSFamilyTempSensorContracts;
+using ART.MQ.Common.Contracts;
 using MassTransit;
 using System;
 using System.Threading.Tasks;

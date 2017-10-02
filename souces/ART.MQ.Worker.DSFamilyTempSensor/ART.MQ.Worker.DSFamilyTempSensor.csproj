@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E2F7E686-A548-4FA5-968B-C5FD1F2DF1DD}</ProjectGuid>
+    <ProjectGuid>{E996626F-C492-4B28-B189-36B3AF5F6D16}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ART.MQ.Worker</RootNamespace>
-    <AssemblyName>ART.MQ.Worker</AssemblyName>
+    <RootNamespace>ART.MQ.Worker.DSFamilyTempSensor</RootNamespace>
+    <AssemblyName>ART.MQ.Worker.DSFamilyTempSensor</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -95,10 +95,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WorkerService.cs" />
     <Compile Include="BusModule.cs" />
+    <Compile Include="DSFamilyTempSensorModule.cs" />
+    <Compile Include="DSFamilyTempSensorSetResolutionConsumer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WorkerService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -114,10 +116,9 @@
       <Name>ART.Data.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Common.csproj">
-      <Project>{8c7dfa89-52d2-4907-b515-b3c776bcb12e}</Project>
+      <Project>{8C7DFA89-52D2-4907-B515-B3C776BCB12E}</Project>
       <Name>ART.MQ.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

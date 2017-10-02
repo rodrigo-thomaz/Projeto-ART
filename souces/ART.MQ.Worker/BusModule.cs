@@ -1,10 +1,8 @@
-﻿using ART.MQ.Common.QueueNames;
-using ART.MQ.Worker.DSFamilyTempSensor;
-using Autofac;
+﻿using Autofac;
 using MassTransit;
 using System.Configuration;
 
-namespace ART.MQ.Worker.Modules
+namespace ART.MQ.Worker
 {
     public class BusModule : Module
     {
@@ -25,11 +23,6 @@ namespace ART.MQ.Worker.Modules
                     {
                         settings.Username(username);
                         settings.Password(password);
-                    });
-
-                    rabbit.ReceiveEndpoint(host, DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueue, e =>
-                    {
-                        e.Consumer<DSFamilyTempSensorSetResolutionConsumer>(context);
                     });
 
                 });

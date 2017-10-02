@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.Common.Contracts.DSFamilyTempSensorContracts
+﻿namespace ART.MQ.Common.Contracts
 {
     public interface DSFamilyTempSensorSetResolutionContract
     {
