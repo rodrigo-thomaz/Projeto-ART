@@ -96,9 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusControlService.cs" />
-    <Compile Include="Consumers\DSFamilyTempSensorSetResolutionConsumer.cs" />
+    <Compile Include="DSFamilyTempSensor\DSFamilyTempSensorSetResolutionConsumer.cs" />
     <Compile Include="Modules\BusModule.cs" />
-    <Compile Include="Modules\DSFamilyTempSensorModule.cs" />
+    <Compile Include="DSFamilyTempSensor\DSFamilyTempSensorModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -120,5 +120,6 @@
       <Name>ART.MQ.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

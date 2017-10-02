@@ -2,10 +2,9 @@
 using ART.Data.Domain.Services;
 using ART.Data.Repository.Interfaces;
 using ART.Data.Repository.Repositories;
-using ART.MQ.Worker.Consumers;
 using Autofac;
 
-namespace ART.MQ.Worker.Modules
+namespace ART.MQ.Worker.DSFamilyTempSensor
 {
     public class DSFamilyTempSensorModule : Module
     {

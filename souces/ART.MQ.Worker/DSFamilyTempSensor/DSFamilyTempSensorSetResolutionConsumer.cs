@@ -4,7 +4,7 @@ using MassTransit;
 using System;
 using System.Threading.Tasks;
 
-namespace ART.MQ.Worker.Consumers
+namespace ART.MQ.Worker.DSFamilyTempSensor
 {
     public class DSFamilyTempSensorSetResolutionConsumer : IConsumer<DSFamilyTempSensorSetResolutionContract>
     {
