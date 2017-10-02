@@ -1,10 +1,7 @@
-﻿using ART.Data.Repository;
-using ART.MQ.Common.QueueNames;
+﻿using ART.MQ.Common.QueueNames;
 using Autofac;
 using Automatonymous;
 using MassTransit;
-using MassTransit.EntityFrameworkIntegration;
-using MassTransit.EntityFrameworkIntegration.Saga;
 using MassTransit.Saga;
 using System;
 using System.Configuration;
@@ -35,7 +32,7 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
                         settings.Password(password);
                     });
 
-                    rabbit.ReceiveEndpoint(host, DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueue, e =>
+                    rabbit.ReceiveEndpoint(host, DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName, e =>
                     {
                         //e.Consumer<DSFamilyTempSensorSetResolutionConsumer>(context);
                         e.StateMachineSaga(_machine, _repository);

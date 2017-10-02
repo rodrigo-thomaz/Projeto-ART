@@ -1,22 +1,25 @@
-﻿using MassTransit;
-using System.Threading.Tasks;
-using System.Web.Http;
-using ART.MQ.Common.QueueNames;
-using ART.MQ.Common.Contracts;
-using ART.MQ.DistributedServices.Helpers;
-using ART.MQ.DistributedServices.Models.DSFamilyTempSensorModels;
+﻿using System.Web.Http;
+using ART.MQ.DistributedServices.Models;
+using ART.Infra.CrossCutting.WebApi;
+using ART.MQ.DistributedServices.IProducers;
 
 namespace ART.MQ.DistributedServices.Controllers
 {
     [Authorize]
     [RoutePrefix("api/dsFamilyTempSensor")]    
-    public class DSFamilyTempSensorController : MQApiControllerBase
+    public class DSFamilyTempSensorController : BaseApiController
     {
+        #region private readonly fields
+
+        protected readonly IDSFamilyTempSensorProducer _dsFamilyTempSensorProducer;
+
+        #endregion
+
         #region constructors
 
-        public DSFamilyTempSensorController(IBus bus): base(bus)
+        public DSFamilyTempSensorController(IDSFamilyTempSensorProducer dsFamilyTempSensorProducer) //: base(connection)
         {
-            
+            _dsFamilyTempSensorProducer = dsFamilyTempSensorProducer;
         }
 
         #endregion
@@ -29,20 +32,56 @@ namespace ART.MQ.DistributedServices.Controllers
         /// <remarks>
         /// Altera a resolução de um sensor
         /// </remarks>
-        /// <param name="model">model do request</param>
+        /// <param name="request">model do request</param>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
         [Route("setResolution")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetResolution(DSFamilyTempSensorSetResolutionModel model)
-        {   
-            var sendEndpoint = await GetSendEndpoint(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueue);
-            await sendEndpoint.Send<DSFamilyTempSensorSetResolutionContract>(new
-            {
-                DeviceAddress = model.DeviceAddress,
-                Value = model.Value,
-            });
+        public IHttpActionResult SetResolution(DSFamilyTempSensorSetResolutionModel request)
+        {
+            _dsFamilyTempSensorProducer.SetResolution(request);
+
+            //var contract = new DSFamilyTempSensorSetResolutionContract
+            //{
+            //    DeviceAddress = request.DeviceAddress,
+            //    Value = request.Value,
+            //};
+
+            //byte[] payload = SerializationHelpers.SerialiseIntoBinary(contract);
+            
+            //var model = _connection.CreateModel();
+
+            //model.QueueDeclare(
+            //      queue: "DSFamilyTempSensor.SetResolution"
+            //    , durable: true
+            //    , exclusive: false
+            //    , autoDelete: false
+            //    , arguments: null);
+
+            //model.QueueDeclare(
+            //      queue: "DSFamilyTempSensor.SetHighAlarm"
+            //    , durable: true
+            //    , exclusive: false
+            //    , autoDelete: false
+            //    , arguments: null);
+
+            //model.QueueDeclare(
+            //      queue: "DSFamilyTempSensor.SetLowAlarm"
+            //    , durable: true
+            //    , exclusive: false
+            //    , autoDelete: false
+            //    , arguments: null);
+
+            //IBasicProperties basicProperties = model.CreateBasicProperties();
+
+            ////basicProperties.ContentType = "text/plain";
+            //basicProperties.Persistent = true;
+            ////basicProperties.DeliveryMode = 2;
+            ////basicProperties.Expiration = "36000000";
+
+            //model.BasicPublish("", "DSFamilyTempSensor.SetResolution", null, payload);
+
             return Ok();
         }
 

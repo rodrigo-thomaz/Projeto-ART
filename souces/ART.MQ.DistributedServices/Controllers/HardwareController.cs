@@ -1,6 +1,5 @@
 ﻿using ART.MQ.DistributedServices.Models;
 using ART.Infra.CrossCutting.WebApi;
-using MassTransit;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,28 +42,28 @@ namespace ART.MQ.DistributedServices.Controllers
                     return BadRequest(message);
                 }
 
-                //Conecta no barramento de servios
-                var bus = Bus.Factory.CreateUsingRabbitMq(sbc =>
-                {
-                    var host = sbc.Host(new Uri("rabbitmq://file-server/"), h =>
-                    {
-                        h.Username("test");
-                        h.Password("test");
-                    });
-                });
-                //Inicia o barramento
-                await bus.StartAsync();
+                ////Conecta no barramento de servios
+                //var bus = Bus.Factory.CreateUsingRabbitMq(sbc =>
+                //{
+                //    var host = sbc.Host(new Uri("rabbitmq://file-server/"), h =>
+                //    {
+                //        h.Username("test");
+                //        h.Password("test");
+                //    });
+                //});
+                ////Inicia o barramento
+                //await bus.StartAsync();
 
-                var task = bus.Publish(request);
+                //var task = bus.Publish(request);
 
-                task.Wait();
+                //task.Wait();
 
-                //Cria a resposta
-                var response = new HardwareInSpaceGetResponse()
-                {
-                    TransactionKey = request.SpaceId
-                };
-                return Ok(response);
+                ////Cria a resposta
+                //var response = new HardwareInSpaceGetResponse()
+                //{
+                //    TransactionKey = request.SpaceId
+                //};
+                return Ok();
             }
             catch (Exception ex)
             {

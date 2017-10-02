@@ -18,6 +18,8 @@ class TemperatureSensorManager
 	void setLowAlarm(String json);
 	void setHighAlarm(String json);
 
+	TemperatureSensor *Sensors;
+
   private:
 	DebugManager*          _debugManager;
 	NTPManager*          _ntpManager;

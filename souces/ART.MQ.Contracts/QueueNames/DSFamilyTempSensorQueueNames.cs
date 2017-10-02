@@ -2,6 +2,8 @@
 {
     public class DSFamilyTempSensorQueueNames
     {
-        public static readonly string DSFamilyTempSensorSetResolutionQueue = "DSFamilyTempSensorSetResolutionQueue";
+        public static readonly string DSFamilyTempSensorSetResolutionQueueName = "DSFamilyTempSensor.SetResolution";
+        public static readonly string DSFamilyTempSensorSetHighAlarmQueueName = "DSFamilyTempSensor.SetHighAlarm";
+        public static readonly string DSFamilyTempSensorSetLowAlarmQueueName = "DSFamilyTempSensor.SetLowAlarm";
     }
 }

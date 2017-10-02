@@ -1,15 +1,15 @@
 ﻿using ART.MQ.DistributedServices.App_Start;
 using ART.MQ.DistributedServices.Controllers;
+using ART.MQ.DistributedServices.IProducers;
+using ART.MQ.DistributedServices.Producers;
 using Autofac;
 using Autofac.Integration.WebApi;
-using MassTransit;
-using MassTransit.Util;
 using Microsoft.Owin;
 using Microsoft.Owin.BuilderProperties;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
-using System;
+using RabbitMQ.Client;
 using System.Configuration;
 using System.Threading;
 using System.Web.Http;
@@ -29,6 +29,8 @@ namespace ART.MQ.DistributedServices
 
             WebApiConfig.Register(config);
 
+            AutoMapperConfig.RegisterMappings();
+
             // Make the autofac container
             var builder = new ContainerBuilder();
 
@@ -36,24 +38,25 @@ namespace ART.MQ.DistributedServices
             builder.Register(c =>
             {
                 var hostName = ConfigurationManager.AppSettings["RabbitMQHostName"];
-                var virtualHostName = ConfigurationManager.AppSettings["RabbitMQVirtualHostName"];
+                var virtualHost = ConfigurationManager.AppSettings["RabbitMQVirtualHost"];
+                var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
+                var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
 
-                return Bus.Factory.CreateUsingRabbitMq(rabbit =>
-                    rabbit.Host(hostName, virtualHostName, settings =>
-                    {
-                        var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
-                        var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
+                var factory = new ConnectionFactory();
 
-                        //settings.Heartbeat(2000);
-                        settings.Username(username);
-                        settings.Password(password);
-                    })
-                );
+                factory.UserName = username;
+                factory.Password = password;
+                factory.VirtualHost = virtualHost;
+                factory.HostName = hostName;
+
+                IConnection conn = factory.CreateConnection();
+
+                return conn;
             })
-                .As<IBusControl>()
-                .As<IBus>()
-                .As<IPublishEndpoint>()
+                .As<IConnection>()
                 .SingleInstance();
+
+            builder.RegisterType<DSFamilyTempSensorProducer>().As<IDSFamilyTempSensorProducer>();
 
             // Register anything else you might need...
             //builder.RegisterApiControllers();
@@ -74,15 +77,16 @@ namespace ART.MQ.DistributedServices
             app.UseAutofacWebApi(config);           
             app.UseWebApi(config);
 
-            // Starts Mass Transit Service bus, and registers stopping of bus on app dispose
-            var bus = container.Resolve<IBusControl>();
-            var busHandle = TaskUtil.Await(() => bus.StartAsync());
-
+            var connection = container.Resolve<IConnection>();
+            
             var properties = new AppProperties(app.Properties);
 
             if (properties.OnAppDisposing != CancellationToken.None)
             {
-                properties.OnAppDisposing.Register(() => busHandle.Stop(TimeSpan.FromSeconds(30)));
+                properties.OnAppDisposing.Register(() =>
+                {
+                    connection.Close(30);
+                });
             }
         }
 

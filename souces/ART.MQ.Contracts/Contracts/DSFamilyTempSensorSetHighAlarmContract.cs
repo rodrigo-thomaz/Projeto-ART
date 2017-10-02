@@ -3,7 +3,7 @@
 namespace ART.MQ.Common.Contracts
 {
     [Serializable]
-    public class DSFamilyTempSensorSetResolutionContract
+    public class DSFamilyTempSensorSetHighAlarmContract
     {
         public string DeviceAddress { get; set; }
         public int Value { get; set; }

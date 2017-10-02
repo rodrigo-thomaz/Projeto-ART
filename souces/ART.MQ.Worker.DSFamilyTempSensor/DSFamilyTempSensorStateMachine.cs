@@ -11,7 +11,7 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
         {
             InstanceState(x => x.State, Executing, Completed, Faulted, CompensationFailed);
 
-            Event(() => SetResolution, x => x.CorrelateById(context => context.Message.TrackingNumber));
+            //Event(() => SetResolution, x => x.CorrelateById(context => context.Message.TrackingNumber));
             Event(() => SetResolutionCompleted, x => x.CorrelateById(context => context.Message.TrackingNumber));
             Event(() => SetResolutionFaulted, x => x.CorrelateById(context => context.Message.TrackingNumber));
             Event(() => SetResolutionCompensationFailed, x => x.CorrelateById(context => context.Message.TrackingNumber));
@@ -37,7 +37,7 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
                 When(SetResolution)
                     .Then(context =>
                     {
-                        context.Instance.CreateTime = context.Data.Timestamp;
+                        //context.Instance.CreateTime = context.Data.Timestamp;
                     }),
                 When(SetResolutionCompleted)
                     .Then(HandleRoutingSetResolutionCompleted)
@@ -62,7 +62,7 @@ namespace ART.MQ.Worker.DSFamilyTempSensor
 
         static void HandleRoutingSetResolution(BehaviorContext<DSFamilyTempSensorState, DSFamilyTempSensorSetResolutionContract> context)
         {
-            context.Instance.CreateTime = context.Data.Timestamp;
+            //context.Instance.CreateTime = context.Data.Timestamp;
         }        
 
         static void HandleRoutingSetResolutionCompleted(BehaviorContext<DSFamilyTempSensorState, RoutingSlipCompleted> context)

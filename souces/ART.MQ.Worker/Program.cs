@@ -1,7 +1,6 @@
 ﻿using ART.Data.Domain;
 using ART.Data.Repository;
 using Autofac;
-using MassTransit;
 using Topshelf;
 using Topshelf.Autofac;
 

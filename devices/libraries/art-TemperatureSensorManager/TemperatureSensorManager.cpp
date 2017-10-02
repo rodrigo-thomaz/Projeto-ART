@@ -14,9 +14,9 @@
 OneWire oneWire(ONE_WIRE_BUS);
 
 // Pass our oneWire reference to Dallas Temperature. 
-DallasTemperature sensors(&oneWire);
+DallasTemperature _dallas(&oneWire);
 
-TemperatureSensor *arr;
+//TemperatureSensor *Sensors;
 
 TemperatureSensorManager::TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager)
 { 
@@ -44,14 +44,14 @@ String getFamily(byte deviceAddress[8]){
 void TemperatureSensorManager::begin()
 {	
 	// Start up the library
-	sensors.begin();  
+	_dallas.begin();  
 
 	// Localizando devices
 	uint8_t deviceCount;
 	
-	deviceCount = sensors.getDeviceCount();
+	deviceCount = _dallas.getDeviceCount();
 	
-	arr = new TemperatureSensor[deviceCount]; 
+	Sensors = new TemperatureSensor[deviceCount]; 
 	
 	if (this->_debugManager->isDebug()) {
 		Serial.print("Localizando devices...");
@@ -61,28 +61,28 @@ void TemperatureSensorManager::begin()
 
 		// report parasite power requirements
 		Serial.print("Parasite power is: ");
-		if (sensors.isParasitePowerMode()) Serial.println("ON");
+		if (_dallas.isParasitePowerMode()) Serial.println("ON");
 		else Serial.println("OFF");
 	}	
 	
 	for(int i = 0; i < deviceCount; ++i){
 		DeviceAddress deviceAddress;
-		if (sensors.getAddress(deviceAddress, i))
+		if (_dallas.getAddress(deviceAddress, i))
 		{   
 		  // address
 		  for (uint8_t j = 0; j < 8; j++)
 		  {
-			arr[i].deviceAddress[j] = deviceAddress[j];			
-			arr[i].deviceAddressStr += String(arr[i].deviceAddress[j], HEX);	
+			Sensors[i].deviceAddress[j] = deviceAddress[j];			
+			Sensors[i].deviceAddressStr += String(Sensors[i].deviceAddress[j], HEX);	
 		  }
 		  
-		  if (this->_debugManager->isDebug()) Serial.println(arr[i].deviceAddressStr);
+		  if (this->_debugManager->isDebug()) Serial.println(Sensors[i].deviceAddressStr);
 
 		  //validFamily
-		  arr[i].validFamily = sensors.validFamily(arr[i].deviceAddress);
+		  Sensors[i].validFamily = _dallas.validFamily(Sensors[i].deviceAddress);
 
 		  // family
-		  arr[i].family = getFamily(arr[i].deviceAddress);     		  		  
+		  Sensors[i].family = getFamily(Sensors[i].deviceAddress);     		  		  
 		}
 		else{
 		  if (this->_debugManager->isDebug()) {
@@ -121,21 +121,21 @@ char *TemperatureSensorManager::getSensorsJson()
 
 	JsonArray& device = JSONbuffer.createArray();
 
-	sensors.requestTemperatures();
+	_dallas.requestTemperatures();
 
 	long epochTime = this->_ntpManager->getEpochTime();
 
-	for(int i = 0; i < sizeof(arr)/sizeof(int) + 1; ++i){	
-		arr[i].isConnected = sensors.isConnected(arr[i].deviceAddress);
-		arr[i].resolution = sensors.getResolution(arr[i].deviceAddress);    
-		arr[i].tempCelsius = sensors.getTempC(arr[i].deviceAddress);
-		arr[i].tempFahrenheit = sensors.getTempF(arr[i].deviceAddress);
-		arr[i].hasAlarm = sensors.hasAlarm(arr[i].deviceAddress);
-		arr[i].lowAlarm = sensors.getLowAlarmTemp(arr[i].deviceAddress);
-		arr[i].highAlarm = sensors.getHighAlarmTemp(arr[i].deviceAddress);
-		arr[i].epochTime = epochTime;
-		generateNestedSensor(arr[i], device);
-		_sensorInCallback(arr[i]);
+	for(int i = 0; i < sizeof(Sensors)/sizeof(int) + 1; ++i){	
+		Sensors[i].isConnected = _dallas.isConnected(Sensors[i].deviceAddress);
+		Sensors[i].resolution = _dallas.getResolution(Sensors[i].deviceAddress);    
+		Sensors[i].tempCelsius = _dallas.getTempC(Sensors[i].deviceAddress);
+		Sensors[i].tempFahrenheit = _dallas.getTempF(Sensors[i].deviceAddress);
+		Sensors[i].hasAlarm = _dallas.hasAlarm(Sensors[i].deviceAddress);
+		Sensors[i].lowAlarm = _dallas.getLowAlarmTemp(Sensors[i].deviceAddress);
+		Sensors[i].highAlarm = _dallas.getHighAlarmTemp(Sensors[i].deviceAddress);
+		Sensors[i].epochTime = epochTime;
+		generateNestedSensor(Sensors[i], device);
+		_sensorInCallback(Sensors[i]);
 	}
 	
 	int len = device.measureLength();
@@ -156,9 +156,9 @@ char *TemperatureSensorManager::getSensorsJson()
 }
 
 const uint8_t *TemperatureSensorManager::getDeviceAddress(String deviceAddressStr) {	
-	for (int i = 0; i < sizeof(arr) / sizeof(int) + 1; ++i) {
-		if (arr[i].deviceAddressStr == deviceAddressStr) {
-			return arr[i].deviceAddress;
+	for (int i = 0; i < sizeof(Sensors) / sizeof(int) + 1; ++i) {
+		if (Sensors[i].deviceAddressStr == deviceAddressStr) {
+			return Sensors[i].deviceAddress;
 		}
 	}
 }
@@ -178,7 +178,7 @@ void TemperatureSensorManager::setResolution(String json)
 	String deviceAddressStr = root["deviceAddress"];
 	int value = root["value"];
 
-	sensors.setResolution(getDeviceAddress(deviceAddressStr), value);
+	_dallas.setResolution(getDeviceAddress(deviceAddressStr), value);
 
 	Serial.print("setResolution=");
 	Serial.println(json);
@@ -198,7 +198,7 @@ void TemperatureSensorManager::setLowAlarm(String json)
 	String deviceAddressStr = root["deviceAddress"];
 	int value = root["value"];
 
-	sensors.setLowAlarmTemp(getDeviceAddress(deviceAddressStr), value);
+	_dallas.setLowAlarmTemp(getDeviceAddress(deviceAddressStr), value);
 
 	Serial.print("setLowAlarm=");
 	Serial.println(json);
@@ -218,7 +218,7 @@ void TemperatureSensorManager::setHighAlarm(String json)
 	String deviceAddressStr = root["deviceAddress"];
 	int value = root["value"];
 
-	sensors.setHighAlarmTemp(getDeviceAddress(deviceAddressStr), value);
+	_dallas.setHighAlarmTemp(getDeviceAddress(deviceAddressStr), value);
 
 	Serial.print("sethighAlarm=");
 	Serial.println(json);

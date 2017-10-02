@@ -1,5 +1,5 @@
 ﻿using Autofac;
-using MassTransit;
+using RabbitMQ.Client;
 using System.Configuration;
 
 namespace ART.MQ.Worker
@@ -8,30 +8,28 @@ namespace ART.MQ.Worker
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<WorkerService>();
+            builder.RegisterType<WorkerService>();           
 
             builder.Register(context =>
             {
-                var busControl = Bus.Factory.CreateUsingRabbitMq(rabbit =>
-                {
-                    var hostName = ConfigurationManager.AppSettings["RabbitMQHostName"];
-                    var virtualHostName = ConfigurationManager.AppSettings["RabbitMQVirtualHostName"];
-                    var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
-                    var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
+                var hostName = ConfigurationManager.AppSettings["RabbitMQHostName"];
+                var virtualHost = ConfigurationManager.AppSettings["RabbitMQVirtualHost"];
+                var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
+                var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
 
-                    var host = rabbit.Host(hostName, virtualHostName, settings =>
-                    {
-                        settings.Username(username);
-                        settings.Password(password);
-                    });
+                var factory = new ConnectionFactory();
 
-                });
+                factory.UserName = username;
+                factory.Password = password;
+                factory.VirtualHost = virtualHost;
+                factory.HostName = hostName;
 
-                return busControl;
+                IConnection connection = factory.CreateConnection();
+
+                return connection;
             })
-                .SingleInstance()
-                .As<IBusControl>()
-                .As<IBus>();
+                .As<IConnection>()
+                .SingleInstance();
         }
     }
 }

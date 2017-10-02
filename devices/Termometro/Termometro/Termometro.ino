@@ -22,9 +22,9 @@
 
 #define ID_MQTT  "HomeAut"
 
-#define TOPIC_SUB_SET_RESOLUTION "ART_SET_RESOLUTION"
-#define TOPIC_SUB_SET_HIGH_ALARM "ART_SET_HIGH_ALARM"
-#define TOPIC_SUB_SET_LOW_ALARM "ART_SET_LOW_ALARM"
+#define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolution-"
+#define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarm-"
+#define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm-"
 
 #define TOPICO_PUBLISH   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
@@ -119,9 +119,16 @@ void reconnectMQTT()
         if (MQTT.connect(ID_MQTT, "test", "test")) 
         {
             Serial.println("Conectado com sucesso ao broker MQTT!");
-            MQTT.subscribe(TOPIC_SUB_SET_RESOLUTION); 
-            MQTT.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
-            MQTT.subscribe(TOPIC_SUB_SET_LOW_ALARM); 
+
+            for(int i = 0; i < sizeof(temperatureSensorManager.Sensors)/sizeof(int) + 1; ++i){  
+              String setResolutionQueueName = TOPIC_SUB_SET_RESOLUTION + temperatureSensorManager.Sensors[i].deviceAddressStr;
+              String setHighAlarmQueueName = TOPIC_SUB_SET_HIGH_ALARM + temperatureSensorManager.Sensors[i].deviceAddressStr;
+              String setLowAlarmQueueName = TOPIC_SUB_SET_LOW_ALARM + temperatureSensorManager.Sensors[i].deviceAddressStr;
+              
+              MQTT.subscribe(const_cast<char*>(setResolutionQueueName.c_str())); 
+              MQTT.subscribe(const_cast<char*>(setHighAlarmQueueName.c_str())); 
+              MQTT.subscribe(const_cast<char*>(setLowAlarmQueueName.c_str()));  
+            }            
         } 
         else 
         {
