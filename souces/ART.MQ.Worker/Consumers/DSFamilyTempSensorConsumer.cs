@@ -79,44 +79,67 @@ namespace ART.MQ.Worker.Consumers
 
         private void SetResolutionReceived(object sender, BasicDeliverEventArgs e)
         {
+            Task.WaitAll(SetResolutionReceivedAsync(sender, e));         
+        }
+
+        private async Task SetResolutionReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
             Console.WriteLine();
             //Console.WriteLine("[DSFamilyTempSensorConsumer.SetResolutionReceived] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
 
             var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetResolutionContract>(e.Body);
 
-            Task.WaitAll(_dsFamilyTempSensorDomain.SetResolution(contract.DSFamilyTempSensorId, contract.DSFamilyTempSensorResolutionId));
+            await _dsFamilyTempSensorDomain.SetResolution(contract.DSFamilyTempSensorId, contract.DSFamilyTempSensorResolutionId);
             Console.WriteLine("[DSFamilyTempSensorDomain.SetResolution] Ok");
 
-            var queueName = GetQueueName(contract.DSFamilyTempSensorId);
-            _model.BasicPublish("", queueName, null, e.Body);            
+            var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
+            _model.BasicPublish("", queueName, null, e.Body);
         }
 
         private void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
         {
+            Task.WaitAll(SetHighAlarmReceivedAsync(sender, e));
+        }
+
+        private async Task SetHighAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
             Console.WriteLine();
             //Console.WriteLine("[DSFamilyTempSensorConsumer.SetHighAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
+
             var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetHighAlarmContract>(e.Body);
-            Task.WaitAll(_dsFamilyTempSensorDomain.SetHighAlarm(contract.DSFamilyTempSensorId, contract.HighAlarm));
+
+            await _dsFamilyTempSensorDomain.SetHighAlarm(contract.DSFamilyTempSensorId, contract.HighAlarm);
             Console.WriteLine("[DSFamilyTempSensorDomain.SetHighAlarm] Ok");
-        }        
+
+            var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
+            _model.BasicPublish("", queueName, null, e.Body);
+        }
 
         private void SetLowAlarmReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetLowAlarmReceivedAsync(sender, e));
+        }
+
+        private async Task SetLowAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             //Console.WriteLine("[DSFamilyTempSensorConsumer.SetLowAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
+
             var contract = DeserializationHelpers.Deserialize<DSFamilyTempSensorSetLowAlarmContract>(e.Body);
-            Task.WaitAll(_dsFamilyTempSensorDomain.SetLowAlarm(contract.DSFamilyTempSensorId, contract.LowAlarm));
+
+            await _dsFamilyTempSensorDomain.SetLowAlarm(contract.DSFamilyTempSensorId, contract.LowAlarm);
             Console.WriteLine("[DSFamilyTempSensorDomain.SetLowAlarm] Ok");
+
+            var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
+            _model.BasicPublish("", queueName, null, e.Body);
         }        
 
-        private string GetQueueName(Guid dsFamilyTempSensorId)
+        private async Task<string> GetQueueName(Guid dsFamilyTempSensorId)
         {
-            var task = _dsFamilyTempSensorDomain.GetDeviceFromSensor(dsFamilyTempSensorId);
-            task.Wait();
-            var entity = task.Result;
+            var entity = await _dsFamilyTempSensorDomain.GetDeviceFromSensor(dsFamilyTempSensorId);
             var queueName = string.Format("mqtt-subscription-{0}qos0", entity.DeviceBaseId);
             return queueName;
         }
