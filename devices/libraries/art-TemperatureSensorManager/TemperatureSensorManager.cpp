@@ -78,6 +78,17 @@ void TemperatureSensorManager::begin()
 		  
 		  if (this->_debugManager->isDebug()) Serial.println(Sensors[i].deviceAddressStr);
 
+
+		  //Temporario
+		  if (Sensors[i].deviceAddressStr == "28fffe6593164b6") {
+			  Sensors[i].dsFamilyTempSensorId = "4fe0c742-b8a4-e711-9bee-707781d470bc";
+		  }
+		  else if (Sensors[i].deviceAddressStr == "28ffe76da2163d3") {
+			  Sensors[i].dsFamilyTempSensorId = "4ee0c742-b8a4-e711-9bee-707781d470bc";
+		  }
+		  //Temporario
+
+
 		  //validFamily
 		  Sensors[i].validFamily = _dallas.validFamily(Sensors[i].deviceAddress);
 
@@ -155,9 +166,9 @@ char *TemperatureSensorManager::getSensorsJson()
     return result;
 }
 
-const uint8_t *TemperatureSensorManager::getDeviceAddress(String deviceAddressStr) {	
+const uint8_t *TemperatureSensorManager::getDeviceAddress(String dsFamilyTempSensorId) {
 	for (int i = 0; i < sizeof(Sensors) / sizeof(int) + 1; ++i) {
-		if (Sensors[i].deviceAddressStr == deviceAddressStr) {
+		if (Sensors[i].dsFamilyTempSensorId == dsFamilyTempSensorId) {
 			return Sensors[i].deviceAddress;
 		}
 	}
@@ -166,19 +177,19 @@ const uint8_t *TemperatureSensorManager::getDeviceAddress(String deviceAddressSt
 void TemperatureSensorManager::setResolution(String json)
 {
 	StaticJsonBuffer<200> jsonBuffer;
-	
-	JsonObject& root = jsonBuffer.parseObject(json);
 
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
 	if (!root.success()) {
 		Serial.print("parse setResolution failed: ");
 		Serial.println(json);
 		return;
-	}
+	}	
 
-	String deviceAddressStr = root["deviceAddress"];
-	int value = root["value"];
+	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
+	int value = root["dsFamilyTempSensorResolutionId"];
 
-	_dallas.setResolution(getDeviceAddress(deviceAddressStr), value);
+	_dallas.setResolution(getDeviceAddress(dsFamilyTempSensorId), value);
 
 	Serial.print("setResolution=");
 	Serial.println(json);
@@ -186,7 +197,7 @@ void TemperatureSensorManager::setResolution(String json)
 
 void TemperatureSensorManager::setLowAlarm(String json)
 {
-	StaticJsonBuffer<200> jsonBuffer;
+	StaticJsonBuffer<300> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(json);
 
@@ -195,10 +206,10 @@ void TemperatureSensorManager::setLowAlarm(String json)
 		return;
 	}
 
-	String deviceAddressStr = root["deviceAddress"];
-	int value = root["value"];
+	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
+	int value = root["dsFamilyTempSensorResolutionId"];
 
-	_dallas.setLowAlarmTemp(getDeviceAddress(deviceAddressStr), value);
+	_dallas.setLowAlarmTemp(getDeviceAddress(dsFamilyTempSensorId), value);
 
 	Serial.print("setLowAlarm=");
 	Serial.println(json);
@@ -215,10 +226,10 @@ void TemperatureSensorManager::setHighAlarm(String json)
 		return;
 	}
 
-	String deviceAddressStr = root["deviceAddress"];
-	int value = root["value"];
+	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
+	int value = root["dsFamilyTempSensorResolutionId"];
 
-	_dallas.setHighAlarmTemp(getDeviceAddress(deviceAddressStr), value);
+	_dallas.setHighAlarmTemp(getDeviceAddress(dsFamilyTempSensorId), value);
 
 	Serial.print("sethighAlarm=");
 	Serial.println(json);

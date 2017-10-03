@@ -7,6 +7,7 @@ class TemperatureSensor
 {
   public:
     TemperatureSensor();	
+	String dsFamilyTempSensorId;
 	byte deviceAddress[8];
 	String deviceAddressStr;
 	bool validFamily;

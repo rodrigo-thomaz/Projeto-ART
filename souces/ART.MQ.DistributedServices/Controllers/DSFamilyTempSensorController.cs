@@ -2,6 +2,7 @@
 using ART.MQ.DistributedServices.Models;
 using ART.Infra.CrossCutting.WebApi;
 using ART.MQ.DistributedServices.IProducers;
+using System.Threading.Tasks;
 
 namespace ART.MQ.DistributedServices.Controllers
 {
@@ -38,9 +39,9 @@ namespace ART.MQ.DistributedServices.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setResolution")]
         [HttpPost]
-        public IHttpActionResult SetResolution(DSFamilyTempSensorSetResolutionModel request)
+        public async Task<IHttpActionResult> SetResolution(DSFamilyTempSensorSetResolutionModel request)
         {
-            _dsFamilyTempSensorProducer.SetResolution(request);
+            await _dsFamilyTempSensorProducer.SetResolution(request);
             return Ok();
         }
 
@@ -56,9 +57,9 @@ namespace ART.MQ.DistributedServices.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setHighAlarm")]
         [HttpPost]
-        public IHttpActionResult SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
+        public async Task<IHttpActionResult> SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
         {
-            _dsFamilyTempSensorProducer.SetHighAlarm(request);
+            await _dsFamilyTempSensorProducer.SetHighAlarm(request);
             return Ok();
         }
 
@@ -74,9 +75,9 @@ namespace ART.MQ.DistributedServices.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setLowAlarm")]
         [HttpPost]
-        public IHttpActionResult SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
+        public async Task<IHttpActionResult> SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
         {
-            _dsFamilyTempSensorProducer.SetLowAlarm(request);
+            await _dsFamilyTempSensorProducer.SetLowAlarm(request);
             return Ok();
         }
 

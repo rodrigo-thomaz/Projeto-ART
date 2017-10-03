@@ -4,6 +4,7 @@ using ART.MQ.Common.QueueNames;
 using ART.MQ.Worker.Helpers;
 using ART.MQ.Worker.Models;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -98,7 +99,7 @@ namespace ART.MQ.Worker.Consumers
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
             var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName, contract);
-            var json = JsonConvert.SerializeObject(deviceMessage);
+            var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
         }
@@ -120,8 +121,8 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetHighAlarm] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName, contract);
-            var json = JsonConvert.SerializeObject(deviceMessage);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName, contract);
+            var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
         }
@@ -143,8 +144,8 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetLowAlarm] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName, contract);
-            var json = JsonConvert.SerializeObject(deviceMessage);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName, contract);
+            var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
         }        

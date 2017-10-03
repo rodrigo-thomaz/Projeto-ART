@@ -6,6 +6,7 @@
 #include "WiFiManager.h"
 #include "PubSubClient.h"
 #include "WiFiClient.h"
+#include "ArduinoJson.h"
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -101,22 +102,36 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
        json += c;
     }
 
-    String topicStr = String(topic);
-
-    Serial.print("topic: ");
-    Serial.println(topicStr);
-
     Serial.print("payload: ");
     Serial.println(json);
 
-    if(topicStr == String(TOPIC_SUB_SET_RESOLUTION)){
-      temperatureSensorManager.setResolution(json);
+    StaticJsonBuffer<300> jsonBuffer;
+    
+    JsonObject& root = jsonBuffer.parseObject(json);
+  
+    if (!root.success()) {
+      Serial.print("parse payload failed: ");
+      Serial.println(json);
+      return;
     }
-    if(topicStr == String(TOPIC_SUB_SET_HIGH_ALARM)){
-      temperatureSensorManager.setHighAlarm(json);
+
+    String payloadTopic = root["topic"];
+    String payloadContract = root["contract"];
+
+    Serial.print("payloadTopic: ");
+    Serial.println(payloadTopic);
+
+    Serial.print("payloadContract: ");
+    Serial.println(payloadContract);
+
+    if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
+      temperatureSensorManager.setResolution(payloadContract);
     }
-    if(topicStr == String(TOPIC_SUB_SET_LOW_ALARM)){
-      temperatureSensorManager.setLowAlarm(json);
+    if(payloadTopic == String(TOPIC_SUB_SET_HIGH_ALARM)){
+      temperatureSensorManager.setHighAlarm(payloadContract);
+    }
+    if(payloadTopic == String(TOPIC_SUB_SET_LOW_ALARM)){
+      temperatureSensorManager.setLowAlarm(payloadContract);
     }
 }
  

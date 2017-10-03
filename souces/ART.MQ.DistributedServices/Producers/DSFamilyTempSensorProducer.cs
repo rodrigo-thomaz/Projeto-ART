@@ -5,6 +5,7 @@ using ART.MQ.DistributedServices.IProducers;
 using ART.MQ.DistributedServices.Models;
 using AutoMapper;
 using RabbitMQ.Client;
+using System.Threading.Tasks;
 
 namespace ART.MQ.DistributedServices.Producers
 {
@@ -33,24 +34,24 @@ namespace ART.MQ.DistributedServices.Producers
 
         #region public voids
 
-        public void SetResolution(DSFamilyTempSensorSetResolutionModel request)
+        public async Task SetResolution(DSFamilyTempSensorSetResolutionModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetResolutionModel, DSFamilyTempSensorSetResolutionContract>(request);
-            byte[] payload = SerializationHelpers.SerialiseIntoBinary(contract);
+            byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName, null, payload);
         }
 
-        public void SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
+        public async Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetHighAlarmModel, DSFamilyTempSensorSetHighAlarmContract>(request);
-            byte[] payload = SerializationHelpers.SerialiseIntoBinary(contract);
+            byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName, null, payload);
         }
 
-        public void SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
+        public async Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetLowAlarmModel, DSFamilyTempSensorSetLowAlarmContract>(request);
-            byte[] payload = SerializationHelpers.SerialiseIntoBinary(contract);
+            byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName, null, payload);
         }
 
