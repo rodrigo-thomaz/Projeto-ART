@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', '$timeout', '$log', 'dsFamilyTempSensorService', function ($scope, $timeout, $log, dsFamilyTempSensorService) {    
+app.controller('termometroController', ['$scope', '$timeout', '$log', 'temperatureScaleService', 'dsFamilyTempSensorService', function ($scope, $timeout, $log, temperatureScaleService, dsFamilyTempSensorService) {    
 
     dsFamilyTempSensorService.onReadReceived = onReadReceived;
 
@@ -17,6 +17,7 @@ app.controller('termometroController', ['$scope', '$timeout', '$log', 'dsFamilyT
     };
 
     $scope.resolutions = dsFamilyTempSensorService.resolutions;
+    $scope.scales = temperatureScaleService.scales;
 
     $scope.options = {
         chart: {
@@ -81,6 +82,7 @@ app.controller('termometroController', ['$scope', '$timeout', '$log', 'dsFamilyT
         this.lowAlarm = null;
 
         this.selectedResolution = {};
+        this.selectedScale = {};
         
         this.setResolution = function () {
             dsFamilyTempSensorService.setResolution(_this.dsFamilyTempSensorId, _this.selectedResolution.id).then(function (results) {
@@ -90,6 +92,10 @@ app.controller('termometroController', ['$scope', '$timeout', '$log', 'dsFamilyT
                     alert(error.data.message);
                 }
             });
+        }
+
+        this.setResolution = function () {
+            
         }
 
         this.forceY = {

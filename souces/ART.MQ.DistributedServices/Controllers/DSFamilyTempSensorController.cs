@@ -33,13 +33,14 @@ namespace ART.MQ.DistributedServices.Controllers
         /// <remarks>
         /// Retornar uma lista de Resoluções
         /// </remarks>
+        /// <param name="session">session do broker do solicitante</param>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
         [Route("getResolutions/{session}")]
         [HttpGet]
-        public async Task<IHttpActionResult> getResolutions(string session)
+        public async Task<IHttpActionResult> GetResolutions(string session)
         {           
             await _dsFamilyTempSensorProducer.GetResolutions(session);
             return Ok();

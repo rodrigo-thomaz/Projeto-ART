@@ -43,6 +43,7 @@
     <Compile Include="Contracts\DSFamilyTempSensorSetHighAlarmContract.cs" />
     <Compile Include="Contracts\DSFamilyTempSensorSetLowAlarmContract.cs" />
     <Compile Include="Contracts\DSFamilyTempSensorSetResolutionContract.cs" />
+    <Compile Include="QueueNames\TemperatureScaleQueueNames.cs" />
     <Compile Include="QueueNames\DSFamilyTempSensorQueueNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -9,6 +9,7 @@ namespace ART.MQ.DistributedServices.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<DSFamilyTempSensorProducer>().As<IDSFamilyTempSensorProducer>();
+            builder.RegisterType<TemperatureScaleProducer>().As<ITemperatureScaleProducer>();
         }
     }
 }

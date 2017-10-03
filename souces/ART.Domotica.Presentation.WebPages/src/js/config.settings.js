@@ -2,7 +2,10 @@
 
 var segurancaPresentationWebPagesUri = 'http://localhost/ART.Seguranca.Presentation.WebPages/index.html';
 var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
-var distributedServicesUri = 'http://localhost/ART.DistributedServices/';
+
+//var distributedServicesUri = 'http://localhost/ART.DistributedServices/';
+var distributedServicesUri = 'http://localhost:47039/';
+
 var wsBrokerHostName = 'file-server';
 var wsBrokerPort = 15674;
 

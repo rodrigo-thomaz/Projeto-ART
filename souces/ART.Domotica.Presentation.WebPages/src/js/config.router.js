@@ -43,6 +43,7 @@ angular.module('app')
                       'ui.select',                      
 
                       'js/services/stompService.js',
+                      'js/services/temperatureScaleService.js',
                       'js/services/dsFamilyTempSensorService.js',
 
                       'js/controllers/dsFamilyTempSensorController.js',
