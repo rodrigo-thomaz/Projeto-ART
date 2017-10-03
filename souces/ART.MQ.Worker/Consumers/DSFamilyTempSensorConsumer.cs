@@ -2,9 +2,12 @@
 using ART.MQ.Common.Contracts;
 using ART.MQ.Common.QueueNames;
 using ART.MQ.Worker.Helpers;
+using ART.MQ.Worker.Models;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ART.MQ.Worker.Consumers
@@ -94,7 +97,10 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetResolution] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            _model.BasicPublish("", queueName, null, e.Body);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName, contract);
+            var json = JsonConvert.SerializeObject(deviceMessage);
+            var buffer = Encoding.UTF8.GetBytes(json);
+            _model.BasicPublish("", queueName, null, buffer);
         }
 
         private void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
@@ -114,7 +120,10 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetHighAlarm] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            _model.BasicPublish("", queueName, null, e.Body);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName, contract);
+            var json = JsonConvert.SerializeObject(deviceMessage);
+            var buffer = Encoding.UTF8.GetBytes(json);
+            _model.BasicPublish("", queueName, null, buffer);
         }
 
         private void SetLowAlarmReceived(object sender, BasicDeliverEventArgs e)
@@ -134,7 +143,10 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetLowAlarm] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            _model.BasicPublish("", queueName, null, e.Body);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName, contract);
+            var json = JsonConvert.SerializeObject(deviceMessage);
+            var buffer = Encoding.UTF8.GetBytes(json);
+            _model.BasicPublish("", queueName, null, buffer);
         }        
 
         private async Task<string> GetQueueName(Guid dsFamilyTempSensorId)
