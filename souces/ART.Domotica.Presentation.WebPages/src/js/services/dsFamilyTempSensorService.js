@@ -1,19 +1,30 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', function ($http, ngAuthSettings) {
+app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'stompService', function ($http, ngAuthSettings, stompService) {
 
-    //var serviceBase = ngAuthSettings.distributedServicesUri;
+    //var _serviceBase = ngAuthSettings.distributedServicesUri;
     var serviceBase = "http://localhost:47039/";
 
-    var serviceFactory = {};
+    var serviceFactory = {};    
 
-    var _getResolutions = function () {
+    var onConnected = function (frame) {
+        setSubscribes();
+    }
+
+    var setSubscribes = function () {
+
+        if (!stompService.client.connected) return;
+
+        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
+    }    
+
+    var getResolutions = function () {
         serviceFactory.resolutions.push({ dsFamilyTempSensorResolutionId: 9, mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 });
         serviceFactory.resolutions.push({ dsFamilyTempSensorResolutionId: 10, mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 });
         serviceFactory.resolutions.push({ dsFamilyTempSensorResolutionId: 11, mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 });
         serviceFactory.resolutions.push({ dsFamilyTempSensorResolutionId: 12, mode: '12 bits', resolution: '0.0625°C', conversionTime: '750 ms', value: 12 });        
     };
-
-    var _setResolution = function (dsFamilyTempSensorId, dsFamilyTempSensorResolutionId) {
+    
+    var setResolution = function (dsFamilyTempSensorId, dsFamilyTempSensorResolutionId) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
             dsFamilyTempSensorResolutionId: dsFamilyTempSensorResolutionId,
@@ -23,7 +34,7 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', function ($
         });
     };
 
-    var _setHighAlarm = function (dsFamilyTempSensorId, highAlarm) {
+    var setHighAlarm = function (dsFamilyTempSensorId, highAlarm) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
             highAlarm: highAlarm,
@@ -33,7 +44,7 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', function ($
         });
     };
 
-    var _setLowAlarm = function (dsFamilyTempSensorId, lowAlarm) {
+    var setLowAlarm = function (dsFamilyTempSensorId, lowAlarm) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
             lowAlarm: lowAlarm,
@@ -43,12 +54,25 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', function ($
         });
     };
 
-    serviceFactory.resolutions = [];
-    serviceFactory.setResolution = _setResolution;
-    serviceFactory.setHighAlarm = _setHighAlarm;
-    serviceFactory.setLowAlarm = _setLowAlarm;
+    var onReadReceived = function (payload) {
+        if (serviceFactory.onReadReceived != null) {
+            var sensors = JSON.parse(payload.body)
+            serviceFactory.onReadReceived(sensors);
+        }
+    }
 
-    _getResolutions();
+    // stompService
+    stompService.onConnected = onConnected;
+    setSubscribes();
+
+    // serviceFactory
+
+    serviceFactory.resolutions = [];
+    serviceFactory.setResolution = setResolution;
+    serviceFactory.setHighAlarm = setHighAlarm;
+    serviceFactory.setLowAlarm = setLowAlarm;
+
+    getResolutions();
 
     return serviceFactory;
 

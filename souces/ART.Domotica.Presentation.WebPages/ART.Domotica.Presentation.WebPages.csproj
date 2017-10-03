@@ -67,10 +67,6 @@
     <Content Include="libs\angular\angular-ui-grid\ui-grid.eot" />
     <Content Include="libs\angular\angular-ui-grid\ui-grid.ttf" />
     <Content Include="libs\angular\angular-ui-grid\ui-grid.woff" />
-    <Content Include="libs\angular\ng-stomp\dist\ng-stomp.min.js" />
-    <Content Include="libs\angular\ng-stomp\dist\ng-stomp.standalone.min.js" />
-    <Content Include="libs\angular\ng-stomp\Gruntfile.js" />
-    <Content Include="libs\angular\ng-stomp\src\ng-stomp.js" />
     <Content Include="libs\assets\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="libs\assets\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="libs\assets\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -159,11 +155,6 @@
     <Content Include="libs\assets\stomp-websocket\test\server.mock.coffee" />
     <Content Include="libs\assets\stomp-websocket\test\stomp.spec.coffee" />
     <Content Include="libs\assets\stomp-websocket\test\websocket.mock.coffee" />
-    <Content Include="libs\angular\ng-stomp\.bower.json" />
-    <Content Include="libs\angular\ng-stomp\bower.json" />
-    <Content Include="libs\angular\ng-stomp\LICENSE.md" />
-    <Content Include="libs\angular\ng-stomp\package.json" />
-    <Content Include="libs\angular\ng-stomp\README.md" />
     <None Include="Properties\PublishProfiles\ngauthenticationweb.pubxml" />
     <Content Include="src\css\less\app.arrow.less" />
     <Content Include="src\css\less\app.butterbar.less" />
@@ -221,9 +212,7 @@
     <Content Include="src\js\services\authInterceptorService.js" />
     <Content Include="src\js\services\authService.js" />
     <Content Include="src\js\services\dsFamilyTempSensorService.js" />
-    <Content Include="src\js\services\mqttService.js" />
-    <Content Include="src\js\services\termometroStompService.js" />
-    <Content Include="src\js\services\termometroMQTTService.js" />
+    <Content Include="src\js\services\stompService.js" />
     <Content Include="src\js\services\termometroService.js" />
     <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\psd\ui.zip" />

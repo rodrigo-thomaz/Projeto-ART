@@ -42,12 +42,10 @@ angular.module('app')
                       'vr.directives.slider',
                       'ui.select',                      
 
+                      'js/services/stompService.js',
                       'js/services/dsFamilyTempSensorService.js',
-                      'js/controllers/dsFamilyTempSensorController.js',
 
-                      'js/services/termometroStompService.js',
-                      //'js/services/mqttService.js',
-                      //'js/services/termometroMQTTService.js',
+                      'js/controllers/dsFamilyTempSensorController.js',
                       'js/controllers/termometroController.js',
                   ])
               })

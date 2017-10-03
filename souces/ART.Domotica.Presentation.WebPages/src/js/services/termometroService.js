@@ -5,14 +5,16 @@ app.factory('termometroService', ['$http', 'ngAuthSettings', function ($http, ng
 
     var serviceFactory = {};
 
-    var _get = function () {
+    var get = function () {
 
         return $http.get(serviceBase + 'api/termometro').then(function (results) {
             return results;
         });
     };
 
-    serviceFactory.get = _get;
+    //serviceFactory
+    
+    serviceFactory.get = get;
 
     return serviceFactory;
 

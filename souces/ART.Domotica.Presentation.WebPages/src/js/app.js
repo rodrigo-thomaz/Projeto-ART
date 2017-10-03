@@ -17,6 +17,5 @@ angular.module('app', [
     'ui.jq',
     'oc.lazyLoad',
     'pascalprecht.translate',
-    'ngStomp',
     'nvd3',
 ]);

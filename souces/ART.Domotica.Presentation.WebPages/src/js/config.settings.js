@@ -3,8 +3,8 @@
 var segurancaPresentationWebPagesUri = 'http://localhost/ART.Seguranca.Presentation.WebPages/index.html';
 var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
 var distributedServicesUri = 'http://localhost/ART.DistributedServices/';
-var wsbrokerUri = 'file-server';
-var wsport = 15675;
+var wsBrokerHostName = 'file-server';
+var wsBrokerPort = 15674;
 
 var app =
     angular.module('app')
@@ -12,7 +12,7 @@ var app =
             segurancaPresentationWebPagesUri: segurancaPresentationWebPagesUri,
             segurancaDistributedServicesUri: segurancaDistributedServicesUri,
             distributedServicesUri: distributedServicesUri,
-            wsbrokerUri: wsbrokerUri,
-            wsport: wsport,
+            wsBrokerHostName: wsBrokerHostName,
+            wsBrokerPort: wsBrokerPort,
             clientId: 'ngAuthApp'
 });

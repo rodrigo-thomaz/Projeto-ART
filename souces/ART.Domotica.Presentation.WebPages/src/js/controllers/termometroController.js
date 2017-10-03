@@ -1,8 +1,8 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', '$timeout', 'termometroStompService', 'dsFamilyTempSensorService', '$log', function ($scope, $timeout, termometroStompService, dsFamilyTempSensorService, $log) {    
+app.controller('termometroController', ['$scope', '$timeout', '$log', 'dsFamilyTempSensorService', function ($scope, $timeout, $log, dsFamilyTempSensorService) {    
 
-    termometroStompService.onReadReceived = onReadReceived;
+    dsFamilyTempSensorService.onReadReceived = onReadReceived;
 
     function onReadReceived(payload) {
         for (var i = 0; i < payload.length; i++) {
