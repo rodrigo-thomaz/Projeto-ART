@@ -77,13 +77,13 @@
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Escalas</label>
                                 <div class="col-lg-8">
-                                    <select class="form-control m-b" ng-options="item.name for item in scales track by item.id" ng-model="sensor.selectedResolution" ng-change="sensor.setResolution()"></select>
+                                    <select class="form-control m-b" ng-options="item.name for item in scales track by item.id" ng-model="sensor.selectedScale" ng-change="sensor.setScale()"></select>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Resolução</label>
                                 <div class="col-lg-8">
-                                   <select class="form-control m-b" ng-options="item.name for item in resolutions track by item.id" ng-model="sensor.selectedScale" ng-change="sensor.setScale()">                                       
+                                   <select class="form-control m-b" ng-options="item.name for item in resolutions track by item.id" ng-model="sensor.selectedResolution" ng-change="sensor.setResolution()">                                       
                                    </select>
                                 </div>
                             </div>

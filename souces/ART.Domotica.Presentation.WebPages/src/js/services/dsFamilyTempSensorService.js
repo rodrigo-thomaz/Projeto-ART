@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'stompService', function ($http, ngAuthSettings, stompService) {
+app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, ngAuthSettings, EventDispatcher, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -7,9 +7,9 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'stompServi
 
     var serviceFactory = {};
 
-    var onConnected = function (frame) {
+    EventDispatcher.on('stompService_onConnected', function (frame) {
         setSubscribes();
-    }
+    });   
 
     var setSubscribes = function () {
 
@@ -74,7 +74,6 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'stompServi
     }
 
     // stompService
-    stompService.onConnected = onConnected;
     setSubscribes();
 
     // serviceFactory

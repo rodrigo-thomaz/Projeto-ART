@@ -99,6 +99,7 @@ namespace ART.MQ.Worker.Consumers
         private void GetResolutionsReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetResolutionsReceivedAsync(sender, e));
+            //Task.Run(async () => await GetResolutionsReceivedAsync(sender, e));
         }
 
         private async Task GetResolutionsReceivedAsync(object sender, BasicDeliverEventArgs e)

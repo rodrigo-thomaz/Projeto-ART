@@ -94,7 +94,7 @@ app.controller('termometroController', ['$scope', '$timeout', '$log', 'temperatu
             });
         }
 
-        this.setResolution = function () {
+        this.setScale = function () {
             
         }
 

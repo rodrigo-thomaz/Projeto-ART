@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'stompService', 'EventDispatcher', function ($http, ngAuthSettings, stompService, EventDispatcher) {
+app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, ngAuthSettings, EventDispatcher, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 

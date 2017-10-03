@@ -11,10 +11,6 @@ app.factory('stompService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher
 
         EventDispatcher.trigger('stompService_onConnected', frame);
 
-        if (serviceFactory.onConnected != null) {
-            serviceFactory.onConnected(frame);
-        }        
-
         debug('connected in broker');
         debug('session: ' + frame.headers.session);        
     }
@@ -23,9 +19,8 @@ app.factory('stompService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher
 
         serviceFactory.session = null;
 
-        if (serviceFactory.onError != null) {
-            serviceFactory.onError();
-        }
+        EventDispatcher.trigger('stompService_onError', frame);
+
         debug('Error connecting in broker');
     }
 
@@ -51,8 +46,6 @@ app.factory('stompService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher
 
     // serviceFactory
 
-    serviceFactory.onConnected = null;
-    serviceFactory.onError = null;
     serviceFactory.client = client;
 
     return serviceFactory;   
