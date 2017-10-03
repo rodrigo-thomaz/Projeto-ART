@@ -9,6 +9,7 @@ namespace ART.Data.Domain
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<DSFamilyTempSensorDomain>().As<IDSFamilyTempSensorDomain>();
+            builder.RegisterType<TemperatureScaleDomain>().As<ITemperatureScaleDomain>();
         }
     }
 }

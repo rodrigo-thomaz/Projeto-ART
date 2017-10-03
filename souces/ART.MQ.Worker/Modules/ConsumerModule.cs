@@ -8,6 +8,7 @@ namespace ART.MQ.Worker.Modules
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<DSFamilyTempSensorConsumer>().SingleInstance();
+            builder.RegisterType<TemperatureScaleConsumer>().SingleInstance();
         }
     }
 }

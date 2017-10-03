@@ -1,15 +1,15 @@
 ﻿'use strict';
-app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'stompService', function ($http, ngAuthSettings, stompService) {
+app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'stompService', 'EventDispatcher', function ($http, ngAuthSettings, stompService, EventDispatcher) {
 
-    var _serviceBase = ngAuthSettings.distributedServicesUri;
+    var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var scalesInitialized = false;
 
     var serviceFactory = {};
 
-    var onConnected = function (frame) {
+    EventDispatcher.on('stompService_onConnected', function (frame) {
         setSubscribes();
-    }
+    });   
 
     var setSubscribes = function () {
 
@@ -35,7 +35,6 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'stompService
     };
 
     // stompService
-    stompService.onConnected = onConnected;
     setSubscribes();
 
     // serviceFactory

@@ -22,7 +22,11 @@ namespace ART.MQ.Worker
             builder.RegisterModule<BusModule>();
             builder.RegisterModule<ConsumerModule>();
 
-            Mapper.Initialize(x => x.AddProfile(new DSFamilyTempSensorProfile()));
+            Mapper.Initialize(x => 
+            {
+                x.AddProfile(new DSFamilyTempSensorProfile());
+                x.AddProfile(new TemperatureScaleProfile());
+            });            
 
             IContainer container = builder.Build();
 

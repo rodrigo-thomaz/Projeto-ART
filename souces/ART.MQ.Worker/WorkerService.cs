@@ -9,15 +9,17 @@ namespace ART.MQ.Worker
 
         private readonly IConnection _connection;
         private readonly DSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
+        private readonly TemperatureScaleConsumer _temperatureScaleConsumer;
 
         #endregion
 
         #region constructors
 
-        public WorkerService(IConnection connection, DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer)
+        public WorkerService(IConnection connection, DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer, TemperatureScaleConsumer temperatureScaleConsumer)
         {
             _connection = connection;
             _dsFamilyTempSensorConsumer = dsFamilyTempSensorConsumer;
+            _temperatureScaleConsumer = temperatureScaleConsumer;
         }
 
         #endregion

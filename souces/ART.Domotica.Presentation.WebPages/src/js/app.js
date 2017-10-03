@@ -18,4 +18,5 @@ angular.module('app', [
     'oc.lazyLoad',
     'pascalprecht.translate',
     'nvd3',
+    'angular-event-dispatcher',
 ]);

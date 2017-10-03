@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('stompService', ['$http', '$log', 'ngAuthSettings', function ($http, $log, ngAuthSettings) {
+app.factory('stompService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher', function ($http, $log, ngAuthSettings, EventDispatcher) {
     
     var serviceFactory = {};    
 
@@ -8,6 +8,8 @@ app.factory('stompService', ['$http', '$log', 'ngAuthSettings', function ($http,
     var onConnected = function (frame) {
 
         serviceFactory.session = frame.headers.session;
+
+        EventDispatcher.trigger('stompService_onConnected', frame);
 
         if (serviceFactory.onConnected != null) {
             serviceFactory.onConnected(frame);
