@@ -77,7 +77,7 @@
                             <div class="form-group">
                                 <label class="col-lg-4 control-label">Resolução</label>
                                 <div class="col-lg-8">
-                                   <select class="form-control m-b" ng-options="item.mode for item in resolutions track by item.value" ng-model="sensor.selectedResolution" ng-change="sensor.setResolution()">                                       
+                                   <select class="form-control m-b" ng-options="item.name for item in resolutions track by item.id" ng-model="sensor.selectedResolution" ng-change="sensor.setResolution()">                                       
                                    </select>
                                 </div>
                             </div>

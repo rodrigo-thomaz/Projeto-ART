@@ -8,7 +8,7 @@ namespace ART.MQ.DistributedServices.Controllers
 {
     [Authorize]
     [RoutePrefix("api/dsFamilyTempSensor")]    
-    public class DSFamilyTempSensorController : BaseApiController
+    public class DSFamilyTempSensorController : AuthenticatedApiController
     {
         #region private readonly fields
 
@@ -37,11 +37,11 @@ namespace ART.MQ.DistributedServices.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("getResolutions")]
+        [Route("getResolutions/{session}")]
         [HttpGet]
-        public async Task<IHttpActionResult> getResolutions()
-        {
-            await _dsFamilyTempSensorProducer.GetResolutions();
+        public async Task<IHttpActionResult> getResolutions(string session)
+        {           
+            await _dsFamilyTempSensorProducer.GetResolutions(session);
             return Ok();
         }
 

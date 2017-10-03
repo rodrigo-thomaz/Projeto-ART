@@ -6,7 +6,7 @@ using System.Web.Http;
 
 namespace ART.Infra.CrossCutting.WebApi
 {
-    public class BaseApiController : ApiController
+    public abstract class BaseApiController : ApiController
     {
         protected void ValidateModelState()
         {

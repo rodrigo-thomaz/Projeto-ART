@@ -1,13 +1,17 @@
 ﻿using ART.Data.Domain.Interfaces;
+using ART.Data.Repository.Entities;
 using ART.MQ.Common.Contracts;
 using ART.MQ.Common.QueueNames;
 using ART.MQ.Worker.Contracts;
 using ART.MQ.Worker.Helpers;
+using ART.MQ.Worker.Models;
+using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -57,7 +61,7 @@ namespace ART.MQ.Worker.Consumers
                   queue: DSFamilyTempSensorQueueNames.GetResolutionsQueueName
                 , durable: false
                 , exclusive: false
-                , autoDelete: false
+                , autoDelete: true
                 , arguments: null);
 
             _model.QueueDeclare(
@@ -102,9 +106,17 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine();
             Console.WriteLine("[DSFamilyTempSensorConsumer.GetResolutionsReceivedAsync] ");
             _model.BasicAck(e.DeliveryTag, false);
-            
-            var resolutions = await _dsFamilyTempSensorDomain.GetResolutions();
-            Console.WriteLine("[DSFamilyTempSensorDomain.GetResolutions] Ok");            
+
+            var session = DeserializationHelpers.Deserialize<string>(e.Body);
+            var exchange = string.Format("{0}-{1}", session, "GetResolutionsCompleted");
+
+            var entities = await _dsFamilyTempSensorDomain.GetResolutions();
+            Console.WriteLine("[DSFamilyTempSensorDomain.GetResolutions] Ok");
+
+            var models = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionModel>>(entities);
+            var json = JsonConvert.SerializeObject(models, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+            var buffer = Encoding.UTF8.GetBytes(json);
+            _model.BasicPublish("amq.topic", exchange, null, buffer);
         }
 
         private void SetResolutionReceived(object sender, BasicDeliverEventArgs e)

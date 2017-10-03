@@ -34,29 +34,30 @@ namespace ART.MQ.DistributedServices.Producers
 
         #region public voids
 
-        public async Task GetResolutions()
+        public async Task GetResolutions(string session)
         {
-            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetResolutionsQueueName));            
+            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(session);
+            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetResolutionsQueueName, null, payload));
         }
 
         public async Task SetResolution(DSFamilyTempSensorSetResolutionModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetResolutionModel, DSFamilyTempSensorSetResolutionContract>(request);
-            byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetResolutionQueueName, null, payload);
         }
 
         public async Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetHighAlarmModel, DSFamilyTempSensorSetHighAlarmContract>(request);
-            byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, null, payload);
         }
 
         public async Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetLowAlarmModel, DSFamilyTempSensorSetLowAlarmContract>(request);
-            byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, null, payload);
         }
 
@@ -66,6 +67,13 @@ namespace ART.MQ.DistributedServices.Producers
 
         private void Initialize()
         {
+            _model.QueueDeclare(
+                  queue: DSFamilyTempSensorQueueNames.GetResolutionsQueueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: true
+                , arguments: null);
+
             _model.QueueDeclare(
                   queue: DSFamilyTempSensorQueueNames.SetResolutionQueueName
                 , durable: true

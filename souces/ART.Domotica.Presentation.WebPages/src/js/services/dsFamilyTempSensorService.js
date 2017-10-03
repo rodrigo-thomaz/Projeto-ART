@@ -4,7 +4,9 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'stompServi
     //var _serviceBase = ngAuthSettings.distributedServicesUri;
     var serviceBase = "http://localhost:47039/";
 
-    var serviceFactory = {};    
+    var resolutionsInitialized = false;
+
+    var serviceFactory = {};
 
     var onConnected = function (frame) {
         setSubscribes();
@@ -15,9 +17,26 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'stompServi
         if (!stompService.client.connected) return;
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
+
+        stompService.client.subscribe('/topic/' + stompService.session + '-GetResolutionsCompleted', function (payload) {
+            var data = JSON.parse(payload.body);
+            for (var i = 0; i < data.length; i++) {
+                serviceFactory.resolutions.push(data[i]);
+            }
+        });
+
+        if (!resolutionsInitialized) {
+            resolutionsInitialized = true;
+            getResolutions();
+        }
     }    
 
     var getResolutions = function () {
+
+        return $http.get(serviceBase + 'api/dsFamilyTempSensor/getResolutions/' + stompService.session).then(function (results) {
+            //alert('envio bem sucedido');
+        });
+
         serviceFactory.resolutions.push({ dsFamilyTempSensorResolutionId: 9, mode: '9 bits', resolution: '0.5°C', conversionTime: '93.75 ms', value: 9 });
         serviceFactory.resolutions.push({ dsFamilyTempSensorResolutionId: 10, mode: '10 bits', resolution: '0.25°C', conversionTime: '187.5 ms', value: 10 });
         serviceFactory.resolutions.push({ dsFamilyTempSensorResolutionId: 11, mode: '11 bits', resolution: '0.125°C', conversionTime: '375 ms', value: 11 });
@@ -70,9 +89,7 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'stompServi
     serviceFactory.resolutions = [];
     serviceFactory.setResolution = setResolution;
     serviceFactory.setHighAlarm = setHighAlarm;
-    serviceFactory.setLowAlarm = setLowAlarm;
-
-    getResolutions();
+    serviceFactory.setLowAlarm = setLowAlarm;    
 
     return serviceFactory;
 

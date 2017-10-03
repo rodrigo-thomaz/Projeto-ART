@@ -1,7 +1,9 @@
 ﻿using ART.Data.Domain;
 using ART.Data.Repository;
+using ART.MQ.Worker.AutoMapper;
 using ART.MQ.Worker.Modules;
 using Autofac;
+using AutoMapper;
 using Topshelf;
 using Topshelf.Autofac;
 
@@ -19,6 +21,8 @@ namespace ART.MQ.Worker
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<BusModule>();
             builder.RegisterModule<ConsumerModule>();
+
+            Mapper.Initialize(x => x.AddProfile(new DSFamilyTempSensorProfile()));
 
             IContainer container = builder.Build();
 

@@ -35,6 +35,9 @@
     <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -68,9 +71,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
     <Compile Include="Helpers\DeserializationHelpers.cs" />
     <Compile Include="Contracts\DeviceMessageContract.cs" />
+    <Compile Include="Models\DSFamilyTempSensorResolutionModel.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />
     <Compile Include="WorkerService.cs" />
     <Compile Include="Modules\BusModule.cs" />
@@ -95,8 +100,6 @@
       <Name>ART.MQ.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

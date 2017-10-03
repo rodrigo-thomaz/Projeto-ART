@@ -83,7 +83,7 @@ app.controller('termometroController', ['$scope', '$timeout', '$log', 'dsFamilyT
         this.selectedResolution = {};
         
         this.setResolution = function () {
-            dsFamilyTempSensorService.setResolution(_this.dsFamilyTempSensorId, _this.selectedResolution.dsFamilyTempSensorResolutionId).then(function (results) {
+            dsFamilyTempSensorService.setResolution(_this.dsFamilyTempSensorId, _this.selectedResolution.id).then(function (results) {
                 //alert('success');
             }, function (error) {
                 if (error.status !== 401) {
