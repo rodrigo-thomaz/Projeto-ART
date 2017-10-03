@@ -1,3 +1,0 @@
-﻿# ART.Domotica.Devices.DistributedServices
-
-

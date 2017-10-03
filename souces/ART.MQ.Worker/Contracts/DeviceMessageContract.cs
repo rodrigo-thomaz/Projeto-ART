@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.Worker.Models
+﻿namespace ART.MQ.Worker.Contracts
 {
     public class DeviceMessageContract<TContract>
     {

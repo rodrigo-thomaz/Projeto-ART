@@ -41,7 +41,7 @@ angular.module('app')
                   resolve: load([
                       'vr.directives.slider',
                       'ui.select',                      
-                      'js/services/dsFamilyTempSensorResolutionService.js',
+
                       'js/services/dsFamilyTempSensorService.js',
                       'js/controllers/dsFamilyTempSensorController.js',
 

@@ -70,7 +70,7 @@
   <ItemGroup>
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
     <Compile Include="Helpers\DeserializationHelpers.cs" />
-    <Compile Include="Models\DeviceMessageContract.cs" />
+    <Compile Include="Contracts\DeviceMessageContract.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />
     <Compile Include="WorkerService.cs" />
     <Compile Include="Modules\BusModule.cs" />
@@ -95,6 +95,8 @@
       <Name>ART.MQ.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

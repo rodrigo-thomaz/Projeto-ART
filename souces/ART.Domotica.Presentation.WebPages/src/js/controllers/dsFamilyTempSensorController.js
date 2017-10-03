@@ -1,8 +1,8 @@
 ﻿'use strict';
 
-app.controller('dsFamilyTempSensorController', ['$scope', '$timeout', 'dsFamilyTempSensorResolutionService', 'dsFamilyTempSensorService', '$log', function ($scope, $timeout, dsFamilyTempSensorResolutionService, dsFamilyTempSensorService, $log) {    
+app.controller('dsFamilyTempSensorController', ['$scope', '$timeout', 'dsFamilyTempSensorService', '$log', function ($scope, $timeout, dsFamilyTempSensorService, $log) {    
 
-    $scope.resolutions = dsFamilyTempSensorResolutionService.get();
+    $scope.resolutions = dsFamilyTempSensorService.resolutions;
 
     //dsFamilyTempSensorService.setResolution('28FFFE6593164B6', 10).then(function (results) {
 

@@ -5,6 +5,7 @@ namespace ART.MQ.DistributedServices.IProducers
 {
     public interface IDSFamilyTempSensorProducer
     {
+        Task GetResolutions();
         Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request);
         Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request);
         Task SetResolution(DSFamilyTempSensorSetResolutionModel request);

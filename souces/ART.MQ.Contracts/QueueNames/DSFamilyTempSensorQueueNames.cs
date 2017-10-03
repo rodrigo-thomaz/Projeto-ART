@@ -1,9 +1,10 @@
 ﻿namespace ART.MQ.Common.QueueNames
 {
-    public class DSFamilyTempSensorQueueNames
+    public static class DSFamilyTempSensorQueueNames
     {
-        public static readonly string DSFamilyTempSensorSetResolutionQueueName = "DSFamilyTempSensor.SetResolution";
-        public static readonly string DSFamilyTempSensorSetHighAlarmQueueName = "DSFamilyTempSensor.SetHighAlarm";
-        public static readonly string DSFamilyTempSensorSetLowAlarmQueueName = "DSFamilyTempSensor.SetLowAlarm";
+        public static readonly string GetResolutionsQueueName = "DSFamilyTempSensor.GetResolutions";
+        public static readonly string SetResolutionQueueName = "DSFamilyTempSensor.SetResolution";
+        public static readonly string SetHighAlarmQueueName = "DSFamilyTempSensor.SetHighAlarm";
+        public static readonly string SetLowAlarmQueueName = "DSFamilyTempSensor.SetLowAlarm";
     }
 }

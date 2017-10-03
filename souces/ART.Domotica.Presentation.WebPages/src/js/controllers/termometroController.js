@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', '$timeout', 'termometroStompService', 'dsFamilyTempSensorResolutionService', 'dsFamilyTempSensorService', '$log', function ($scope, $timeout, termometroStompService, dsFamilyTempSensorResolutionService, dsFamilyTempSensorService, $log) {    
+app.controller('termometroController', ['$scope', '$timeout', 'termometroStompService', 'dsFamilyTempSensorService', '$log', function ($scope, $timeout, termometroStompService, dsFamilyTempSensorService, $log) {    
 
     termometroStompService.onReadReceived = onReadReceived;
 
@@ -16,7 +16,7 @@ app.controller('termometroController', ['$scope', '$timeout', 'termometroStompSe
         max: 60
     };
 
-    $scope.resolutions = dsFamilyTempSensorResolutionService.get();
+    $scope.resolutions = dsFamilyTempSensorService.resolutions;
 
     $scope.options = {
         chart: {

@@ -28,6 +28,24 @@ namespace ART.MQ.DistributedServices.Controllers
         #region public voids
 
         /// <summary>
+        /// Retornar uma lista de Resoluções
+        /// </summary>        
+        /// <remarks>
+        /// Retornar uma lista de Resoluções
+        /// </remarks>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("getResolutions")]
+        [HttpGet]
+        public async Task<IHttpActionResult> getResolutions()
+        {
+            await _dsFamilyTempSensorProducer.GetResolutions();
+            return Ok();
+        }
+
+        /// <summary>
         /// Altera a resolução de um sensor
         /// </summary>
         /// <remarks>

@@ -34,25 +34,30 @@ namespace ART.MQ.DistributedServices.Producers
 
         #region public voids
 
+        public async Task GetResolutions()
+        {
+            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetResolutionsQueueName));            
+        }
+
         public async Task SetResolution(DSFamilyTempSensorSetResolutionModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetResolutionModel, DSFamilyTempSensorSetResolutionContract>(request);
             byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
-            _model.BasicPublish("", DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName, null, payload);
+            _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetResolutionQueueName, null, payload);
         }
 
         public async Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetHighAlarmModel, DSFamilyTempSensorSetHighAlarmContract>(request);
             byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
-            _model.BasicPublish("", DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName, null, payload);
+            _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, null, payload);
         }
 
         public async Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetLowAlarmModel, DSFamilyTempSensorSetLowAlarmContract>(request);
             byte[] payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
-            _model.BasicPublish("", DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName, null, payload);
+            _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, null, payload);
         }
 
         #endregion
@@ -62,21 +67,21 @@ namespace ART.MQ.DistributedServices.Producers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName
+                  queue: DSFamilyTempSensorQueueNames.SetResolutionQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName
+                  queue: DSFamilyTempSensorQueueNames.SetHighAlarmQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName
+                  queue: DSFamilyTempSensorQueueNames.SetLowAlarmQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false

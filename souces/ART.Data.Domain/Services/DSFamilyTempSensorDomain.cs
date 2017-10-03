@@ -3,6 +3,7 @@ using System;
 using ART.Data.Domain.Interfaces;
 using ART.Data.Repository.Interfaces;
 using ART.Data.Repository.Entities;
+using System.Collections.Generic;
 
 namespace ART.Data.Domain.Services
 {
@@ -26,6 +27,11 @@ namespace ART.Data.Domain.Services
         #endregion
 
         #region public voids
+
+        public async Task<List<DSFamilyTempSensorResolution>> GetResolutions()
+        {
+            return await _dsFamilyTempSensorResolutionRepository.GetAll();
+        }
 
         public async Task SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId)
         {

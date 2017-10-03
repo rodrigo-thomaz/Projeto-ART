@@ -1,8 +1,8 @@
 ﻿using ART.Data.Domain.Interfaces;
 using ART.MQ.Common.Contracts;
 using ART.MQ.Common.QueueNames;
+using ART.MQ.Worker.Contracts;
 using ART.MQ.Worker.Helpers;
-using ART.MQ.Worker.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
@@ -20,6 +20,7 @@ namespace ART.MQ.Worker.Consumers
         private readonly IConnection _connection;
         private readonly IModel _model;
 
+        private readonly EventingBasicConsumer _getResolutionsConsumer;
         private readonly EventingBasicConsumer _setResolutionConsumer;
         private readonly EventingBasicConsumer _setHighAlarmConsumer;
         private readonly EventingBasicConsumer _setLowAlarmConsumer;
@@ -36,6 +37,7 @@ namespace ART.MQ.Worker.Consumers
 
             _model = _connection.CreateModel();
 
+            _getResolutionsConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
             _setHighAlarmConsumer = new EventingBasicConsumer(_model);
             _setLowAlarmConsumer = new EventingBasicConsumer(_model);
@@ -52,33 +54,57 @@ namespace ART.MQ.Worker.Consumers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName
+                  queue: DSFamilyTempSensorQueueNames.GetResolutionsQueueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueDeclare(
+                  queue: DSFamilyTempSensorQueueNames.SetResolutionQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName
+                  queue: DSFamilyTempSensorQueueNames.SetHighAlarmQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName
+                  queue: DSFamilyTempSensorQueueNames.SetLowAlarmQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
+            _getResolutionsConsumer.Received += GetResolutionsReceived;
             _setResolutionConsumer.Received += SetResolutionReceived;
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
             _setLowAlarmConsumer.Received += SetLowAlarmReceived;
 
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName, false, _setResolutionConsumer);
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName, false, _setHighAlarmConsumer);
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName, false, _setLowAlarmConsumer);
+            _model.BasicConsume(DSFamilyTempSensorQueueNames.GetResolutionsQueueName, false, _getResolutionsConsumer);
+            _model.BasicConsume(DSFamilyTempSensorQueueNames.SetResolutionQueueName, false, _setResolutionConsumer);
+            _model.BasicConsume(DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
+            _model.BasicConsume(DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
+        }
+
+        private void GetResolutionsReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(GetResolutionsReceivedAsync(sender, e));
+        }
+
+        private async Task GetResolutionsReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            Console.WriteLine();
+            Console.WriteLine("[DSFamilyTempSensorConsumer.GetResolutionsReceivedAsync] ");
+            _model.BasicAck(e.DeliveryTag, false);
+            
+            var resolutions = await _dsFamilyTempSensorDomain.GetResolutions();
+            Console.WriteLine("[DSFamilyTempSensorDomain.GetResolutions] Ok");            
         }
 
         private void SetResolutionReceived(object sender, BasicDeliverEventArgs e)
@@ -98,7 +124,7 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetResolution] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetResolutionQueueName, contract);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.SetResolutionQueueName, contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
@@ -121,7 +147,7 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetHighAlarm] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetHighAlarmQueueName, contract);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
@@ -144,7 +170,7 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetLowAlarm] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorQueueNames.DSFamilyTempSensorSetLowAlarmQueueName, contract);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
