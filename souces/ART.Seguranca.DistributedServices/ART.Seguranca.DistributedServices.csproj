@@ -165,6 +165,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\ART.Seguranca.Domain\ART.Seguranca.Domain.csproj">
+      <Project>{1563f63a-c65e-44d0-8a7f-e4334603a174}</Project>
+      <Name>ART.Seguranca.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Seguranca.Repository\ART.Seguranca.Repository.csproj">
       <Project>{8916a744-9781-4863-bbe0-026221d74b41}</Project>
       <Name>ART.Seguranca.Repository</Name>
