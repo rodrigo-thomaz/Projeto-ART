@@ -93,5 +93,11 @@
       <DependentUpon>201710041605269_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Repository\ART.Infra.CrossCutting.Repository.csproj">
+      <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
+      <Name>ART.Infra.CrossCutting.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

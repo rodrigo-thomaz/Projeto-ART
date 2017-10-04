@@ -4,8 +4,9 @@
     using System.Threading.Tasks;
 
     using ART.Data.Repository.Entities;
+    using ART.Infra.CrossCutting.Repository;
 
-    public interface IDSFamilyTempSensorResolutionRepository : IRepository<DSFamilyTempSensorResolution, byte>
+    public interface IDSFamilyTempSensorResolutionRepository : IRepository<ARTDbContext, DSFamilyTempSensorResolution, byte>
     {
         #region Methods
 

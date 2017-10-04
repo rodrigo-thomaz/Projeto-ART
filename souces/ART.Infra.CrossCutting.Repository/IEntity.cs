@@ -1,4 +1,4 @@
-﻿namespace ART.Data.Repository.Entities
+﻿namespace ART.Infra.CrossCutting.Repository
 {
     public interface IEntity<TKey>
     {

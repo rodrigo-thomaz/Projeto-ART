@@ -4,8 +4,9 @@
     using System.Threading.Tasks;
 
     using ART.Data.Repository.Entities;
+    using ART.Infra.CrossCutting.Repository;
 
-    public interface ITemperatureScaleRepository : IRepository<TemperatureScale, byte>
+    public interface ITemperatureScaleRepository : IRepository<ARTDbContext, TemperatureScale, byte>
     {
         #region Methods
 

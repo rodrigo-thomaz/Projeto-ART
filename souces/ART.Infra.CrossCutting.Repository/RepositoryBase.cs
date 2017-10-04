@@ -1,20 +1,20 @@
-﻿using ART.Data.Repository.Entities;
-using ART.Data.Repository.Interfaces;
+﻿using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace ART.Data.Repository.Repositories
+namespace ART.Infra.CrossCutting.Repository
 {
-    public abstract class RepositoryBase<TEntity, TKey>
-        : IRepository<TEntity, TKey>
+    public abstract class RepositoryBase<TDbContext, TEntity, TKey>
+        : IRepository<TDbContext, TEntity, TKey>
 
+        where TDbContext : DbContext
         where TEntity : class, IEntity<TKey>, new()
         where TKey : struct
 
     {
-        protected ARTDbContext _context;
-
-        public RepositoryBase(ARTDbContext context)
+        protected TDbContext _context;
+        
+        public RepositoryBase(TDbContext context)
         {
             _context = context;
         }        

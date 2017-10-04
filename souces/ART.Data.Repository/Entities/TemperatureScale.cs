@@ -1,5 +1,6 @@
 ﻿namespace ART.Data.Repository.Entities
 {
+    using ART.Infra.CrossCutting.Repository;
     using System.Collections.Generic;
 
     public class TemperatureScale : IEntity<byte>

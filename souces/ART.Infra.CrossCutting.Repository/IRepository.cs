@@ -1,10 +1,11 @@
-﻿namespace ART.Data.Repository.Interfaces
+﻿namespace ART.Infra.CrossCutting.Repository
 {
+    using System.Data.Entity;
     using System.Threading.Tasks;
 
-    using ART.Data.Repository.Entities;
+    public interface IRepository<TDbContext, TEntity, TKey>
 
-    public interface IRepository<TEntity, TKey>
+        where TDbContext : DbContext
         where TEntity : IEntity<TKey>
         where TKey : struct
     {
