@@ -3,27 +3,27 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Data.Repository.Configurations
 {
-    public class UserInSpaceConfiguration : EntityTypeConfiguration<UserInSpace>
+    public class UserInApplicationConfiguration : EntityTypeConfiguration<UserInApplication>
     {
-        public UserInSpaceConfiguration()
+        public UserInApplicationConfiguration()
         {
             //Primary Keys
             HasKey(x => new
             {
                 x.UserId,
-                x.SpaceId,
+                x.ApplicationId,
             });
 
             //Foreing Keys            
             HasRequired(x => x.User)
-                .WithMany(x => x.UsersInSpace)
+                .WithMany(x => x.UsersInApplication)
                 .HasForeignKey(x => x.UserId)
                 .WillCascadeOnDelete(false);
 
             //Foreing Keys            
-            HasRequired(x => x.Space)
-                .WithMany(x => x.UsersInSpace)
-                .HasForeignKey(x => x.SpaceId)
+            HasRequired(x => x.Application)
+                .WithMany(x => x.UsersInApplication)
+                .HasForeignKey(x => x.ApplicationId)
                 .WillCascadeOnDelete(false);
         }
     }

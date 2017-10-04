@@ -143,13 +143,10 @@
     <Compile Include="Producers\TemperatureScaleProducer.cs" />
     <Compile Include="Producers\DSFamilyTempSensorProducer.cs" />
     <Compile Include="Controllers\DSFamilyTempSensorController.cs" />
-    <Compile Include="Controllers\HardwareController.cs" />
     <Compile Include="Controllers\TermometroController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Models\DSFamilyTempSensorSetResolutionModel.cs" />
-    <Compile Include="Models\HardwareInSpaceGetRequest.cs" />
-    <Compile Include="Models\HardwareInSpaceGetResponse.cs" />
     <Compile Include="Models\UserCreateModel.cs" />
     <Compile Include="IProducers\IDSFamilyTempSensorProducer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ART.Data.Repository.Entities
 {
-    public class Space : IEntity<Guid>
+    public class Application : IEntity<Guid>
     {
         #region Primitive Properties
 
@@ -15,8 +15,8 @@ namespace ART.Data.Repository.Entities
 
         #region Navigation Properties
 
-        public ICollection<UserInSpace> UsersInSpace { get; set; }
-        public ICollection<HardwareInSpace> HardwaresInSpace { get; set; }
+        public ICollection<UserInApplication> UsersInApplication { get; set; }
+        public ICollection<HardwareInApplication> HardwaresInApplication { get; set; }
 
         #endregion
     }

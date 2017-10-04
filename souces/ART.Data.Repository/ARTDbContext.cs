@@ -38,12 +38,12 @@ namespace ART.Data.Repository
             modelBuilder.Configurations.Add(new RaspberryDeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
-            modelBuilder.Configurations.Add(new HardwareInSpaceConfiguration());
-            modelBuilder.Configurations.Add(new SpaceConfiguration());
+            modelBuilder.Configurations.Add(new HardwareInApplicationConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
             modelBuilder.Configurations.Add(new ThermometerDeviceConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
-            modelBuilder.Configurations.Add(new UserInSpaceConfiguration());
+            modelBuilder.Configurations.Add(new UserInApplicationConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
@@ -51,11 +51,11 @@ namespace ART.Data.Repository
         public DbSet<DSFamilyTempSensor> DSFamilyTempSensor { get; set; }
         public DbSet<DSFamilyTempSensorResolution> DSFamilyTempSensorResolution { get; set; }
         public DbSet<SensorsInDevice> SensorsInDevice { get; set; }
-        public DbSet<HardwareInSpace> HardwareInSpace { get; set; }
-        public DbSet<Space> Space { get; set; }
+        public DbSet<HardwareInApplication> HardwareInApplication { get; set; }
+        public DbSet<Application> Application { get; set; }
         public DbSet<TemperatureScale> TemperatureScale { get; set; }
         public DbSet<ThermometerDevice> ThermometerDevice { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<UserInSpace> UserInSpace { get; set; }
+        public DbSet<UserInApplication> UserInApplication { get; set; }
     }
 }

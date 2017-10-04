@@ -5,9 +5,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Data.Repository.Configurations
 {
-    public class SpaceConfiguration : EntityTypeConfiguration<Space>
+    public class ApplicationConfiguration : EntityTypeConfiguration<Application>
     {
-        public SpaceConfiguration()
+        public ApplicationConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);

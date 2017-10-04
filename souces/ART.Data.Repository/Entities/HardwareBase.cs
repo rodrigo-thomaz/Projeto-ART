@@ -13,7 +13,7 @@ namespace ART.Data.Repository.Entities
 
         #region Navigation Properties
 
-        public ICollection<HardwareInSpace> HardwaresInSpace { get; set; }
+        public ICollection<HardwareInApplication> HardwaresInApplication { get; set; }
 
         #endregion
     }

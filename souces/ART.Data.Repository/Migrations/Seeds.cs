@@ -210,21 +210,21 @@ namespace ART.Data.Repository.Migrations
 
             #endregion
 
-            #region Space
+            #region Application
 
-            var space1 = new Space
+            var space1 = new Application
             {
                 Name = "Aquário Sala",
                 Description = "Aquário Quarto",
             };
 
-            var space2 = new Space
+            var space2 = new Application
             {
                 Name = "Fonte com carpas",
                 Description = "Pequena fonte com carpas no quintal",
             };
 
-            context.Space.AddOrUpdate(x => x.Name
+            context.Application.AddOrUpdate(x => x.Name
                 , space1
                 , space2);
 
@@ -232,27 +232,27 @@ namespace ART.Data.Repository.Migrations
 
             #endregion
 
-            #region HardwareInSpace
+            #region HardwareInApplication
 
-            var hardwareInSpace1 = new HardwareInSpace
+            var hardwareInApplication1 = new HardwareInApplication
             {
                 HardwareBase = sensor1,
                 HardwareBaseId = sensor1.Id,
-                Space = space1,
-                SpaceId = space1.Id,
+                Application = space1,
+                ApplicationId = space1.Id,
             };
 
-            context.HardwareInSpace.AddOrUpdate(hardwareInSpace1);
+            context.HardwareInApplication.AddOrUpdate(hardwareInApplication1);
 
-            var hardwareInSpace2 = new HardwareInSpace
+            var hardwareInApplication2 = new HardwareInApplication
             {
                 HardwareBase = sensor2,
                 HardwareBaseId = sensor2.Id,
-                Space = space2,
-                SpaceId = space2.Id,
+                Application = space2,
+                ApplicationId = space2.Id,
             };
 
-            context.HardwareInSpace.AddOrUpdate(hardwareInSpace2);
+            context.HardwareInApplication.AddOrUpdate(hardwareInApplication2);
 
             context.SaveChanges();
 

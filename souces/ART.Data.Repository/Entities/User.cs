@@ -13,7 +13,7 @@ namespace ART.Data.Repository.Entities
 
         #region Navigation Properties
 
-        public ICollection<UserInSpace> UsersInSpace { get; set; }
+        public ICollection<UserInApplication> UsersInApplication { get; set; }
 
         #endregion
     }

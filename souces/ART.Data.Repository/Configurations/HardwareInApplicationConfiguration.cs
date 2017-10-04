@@ -4,15 +4,15 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Data.Repository.Configurations
 {
-    public class HardwareInSpaceConfiguration : EntityTypeConfiguration<HardwareInSpace>
+    public class HardwareInApplicationConfiguration : EntityTypeConfiguration<HardwareInApplication>
     {
-        public HardwareInSpaceConfiguration()
+        public HardwareInApplicationConfiguration()
         {
             //Primary Keys
             HasKey(x => new
             {
                 x.HardwareBaseId,
-                x.SpaceId,
+                x.ApplicationId,
             });
 
             //HardwareBaseId
@@ -20,21 +20,21 @@ namespace ART.Data.Repository.Configurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //SpaceId
-            Property(x => x.SpaceId)
+            //ApplicationId
+            Property(x => x.ApplicationId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //HardwareBase
             HasRequired(x => x.HardwareBase)
-                .WithMany(x => x.HardwaresInSpace)
+                .WithMany(x => x.HardwaresInApplication)
                 .HasForeignKey(x => x.HardwareBaseId)
                 .WillCascadeOnDelete(false);
 
-            //Space
-            HasRequired(x => x.Space)
-                .WithMany(x => x.HardwaresInSpace)
-                .HasForeignKey(x => x.SpaceId)
+            //Application
+            HasRequired(x => x.Application)
+                .WithMany(x => x.HardwaresInApplication)
+                .HasForeignKey(x => x.ApplicationId)
                 .WillCascadeOnDelete(false);
         }
     }
