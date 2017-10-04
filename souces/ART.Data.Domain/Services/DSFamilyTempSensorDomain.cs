@@ -28,6 +28,11 @@ namespace ART.Data.Domain.Services
 
         #region public voids
 
+        public async Task<DSFamilyTempSensor> Get(Guid dsFamilyTempSensorId)
+        {
+            return await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
+        }
+
         public async Task<List<DSFamilyTempSensorResolution>> GetResolutions()
         {
             return await _dsFamilyTempSensorResolutionRepository.GetAll();

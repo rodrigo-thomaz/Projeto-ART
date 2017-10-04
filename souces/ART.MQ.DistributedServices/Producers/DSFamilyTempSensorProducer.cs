@@ -6,6 +6,7 @@ using ART.MQ.DistributedServices.Models;
 using AutoMapper;
 using RabbitMQ.Client;
 using System.Threading.Tasks;
+using System;
 
 namespace ART.MQ.DistributedServices.Producers
 {
@@ -34,9 +35,17 @@ namespace ART.MQ.DistributedServices.Producers
 
         #region public voids
 
+        public async Task Get(Guid dsFamilyTempSensorId, string session)
+        {
+            var contract = new DSFamilyTempSensorGetContract { DSFamilyTempSensorId = dsFamilyTempSensorId, Session = session };
+            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetQueueName, null, payload));
+        }
+
         public async Task GetResolutions(string session)
         {
-            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(session);
+            var contract = new DSFamilyTempSensorGetResolutionsContract { Session = session };
+            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
             await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetResolutionsQueueName, null, payload));
         }
 
@@ -68,6 +77,13 @@ namespace ART.MQ.DistributedServices.Producers
         private void Initialize()
         {
             _model.QueueDeclare(
+                  queue: DSFamilyTempSensorQueueNames.GetQueueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: true
+                , arguments: null);
+
+            _model.QueueDeclare(
                   queue: DSFamilyTempSensorQueueNames.GetResolutionsQueueName
                 , durable: false
                 , exclusive: false
@@ -96,7 +112,7 @@ namespace ART.MQ.DistributedServices.Producers
                 , arguments: null);
 
             _basicProperties.Persistent = true;
-        }
+        }        
 
         #endregion
     }

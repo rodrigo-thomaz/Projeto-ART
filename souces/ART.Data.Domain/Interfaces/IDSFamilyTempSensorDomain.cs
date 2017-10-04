@@ -7,6 +7,7 @@ namespace ART.Data.Domain.Interfaces
 {
     public interface IDSFamilyTempSensorDomain
     {
+        Task<DSFamilyTempSensor> Get(Guid dsFamilyTempSensorId);
         Task<List<DSFamilyTempSensorResolution>> GetResolutions();
         Task SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId);
         Task SetHighAlarm(Guid dsFamilyTempSensorId, decimal highAlarm);

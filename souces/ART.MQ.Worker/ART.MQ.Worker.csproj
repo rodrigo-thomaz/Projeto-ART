@@ -77,6 +77,7 @@
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
     <Compile Include="Helpers\DeserializationHelpers.cs" />
     <Compile Include="Contracts\DeviceMessageContract.cs" />
+    <Compile Include="Models\DSFamilyTempSensorModel.cs" />
     <Compile Include="Models\TemperatureScaleModel.cs" />
     <Compile Include="Models\DSFamilyTempSensorResolutionModel.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />

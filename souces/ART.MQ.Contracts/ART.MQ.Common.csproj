@@ -40,8 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contracts\DSFamilyTempSensorGetContract.cs" />
     <Compile Include="Contracts\DSFamilyTempSensorSetHighAlarmContract.cs" />
     <Compile Include="Contracts\DSFamilyTempSensorSetLowAlarmContract.cs" />
+    <Compile Include="Contracts\DSFamilyTempSensorGetResolutionsContract.cs" />
     <Compile Include="Contracts\DSFamilyTempSensorSetResolutionContract.cs" />
     <Compile Include="QueueNames\TemperatureScaleQueueNames.cs" />
     <Compile Include="QueueNames\DSFamilyTempSensorQueueNames.cs" />

@@ -9,6 +9,7 @@ namespace ART.MQ.Worker.AutoMapper
         public DSFamilyTempSensorProfile()
         {
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionModel>();
+            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorModel>();
         }
     }
 }

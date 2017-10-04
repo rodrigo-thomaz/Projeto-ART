@@ -3,6 +3,7 @@ using ART.MQ.DistributedServices.Models;
 using ART.Infra.CrossCutting.WebApi;
 using ART.MQ.DistributedServices.IProducers;
 using System.Threading.Tasks;
+using System;
 
 namespace ART.MQ.DistributedServices.Controllers
 {
@@ -26,6 +27,26 @@ namespace ART.MQ.DistributedServices.Controllers
         #endregion
 
         #region public voids
+
+        /// <summary>
+        /// Retornar uma lista de Resoluções
+        /// </summary>        
+        /// <remarks>
+        /// Retornar uma lista de Resoluções
+        /// </remarks>
+        /// <param name="id">id do sensor</param>
+        /// <param name="session">session do broker do solicitante</param>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("{id}/{session}")]
+        [HttpGet]
+        public async Task<IHttpActionResult> Get(Guid id, string session)
+        {
+            await _dsFamilyTempSensorProducer.Get(id, session);
+            return Ok();
+        }
 
         /// <summary>
         /// Retornar uma lista de Resoluções

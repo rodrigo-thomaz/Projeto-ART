@@ -1,8 +1,7 @@
 namespace ART.Data.Repository.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class RenameSpaceToApplication : DbMigration
     {
         public override void Up()

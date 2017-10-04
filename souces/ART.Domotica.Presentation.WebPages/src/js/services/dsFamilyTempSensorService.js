@@ -7,6 +7,12 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
 
     var serviceFactory = {};    
 
+    var get = function (dsFamilyTempSensorId) {
+        return $http.get(serviceBase + 'api/dsFamilyTempSensor/' + dsFamilyTempSensorId + '/' + stompService.session).then(function (results) {
+            //alert('envio bem sucedido');
+        });
+    };
+
     var getResolutions = function () {
         return $http.get(serviceBase + 'api/dsFamilyTempSensor/getResolutions/' + stompService.session).then(function (results) {
             //alert('envio bem sucedido');
@@ -44,16 +50,26 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
     };
 
     var onConnected = function () {
+
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
         stompService.client.subscribe('/topic/' + stompService.session + '-GetResolutionsCompleted', onGetResolutionsCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-GetCompleted', onGetCompleted);
+
         if (!initResolutions) {
             initResolutions = true;
             getResolutions();
         }
+
+
+        get('4ee0c742-b8a4-e711-9bee-707781d470bc');
     }  
 
     var onReadReceived = function (payload) {
         EventDispatcher.trigger('dsFamilyTempSensorService_onReadReceived', JSON.parse(payload.body));
+    }
+
+    var onGetCompleted = function (payload) {
+        var data = JSON.parse(payload.body);        
     }
 
     var onGetResolutionsCompleted = function (payload) {
@@ -72,6 +88,7 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
     // serviceFactory
 
     serviceFactory.resolutions = [];
+    serviceFactory.get = get;
     serviceFactory.setResolution = setResolution;
     serviceFactory.setHighAlarm = setHighAlarm;
     serviceFactory.setLowAlarm = setLowAlarm;    
