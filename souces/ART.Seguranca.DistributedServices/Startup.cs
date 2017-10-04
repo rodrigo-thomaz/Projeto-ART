@@ -3,12 +3,9 @@
 namespace ART.Seguranca.DistributedServices
 {
     using System;
-    using System.Data.Entity;
     using System.Web.Http;
 
     using ART.Seguranca.DistributedServices.Providers;
-    using ART.Seguranca.Repository;
-    using ART.Seguranca.Repository.Migrations;
 
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Facebook;
@@ -16,6 +13,13 @@ namespace ART.Seguranca.DistributedServices
     using Microsoft.Owin.Security.OAuth;
 
     using Owin;
+    using Autofac;
+    using Autofac.Integration.WebApi;
+    using ART.Seguranca.DistributedServices.Controllers;
+    using Microsoft.Owin.BuilderProperties;
+    using System.Threading;
+    using ART.Seguranca.Domain;
+    using ART.Seguranca.Repository;
 
     public class Startup
     {
@@ -47,9 +51,45 @@ namespace ART.Seguranca.DistributedServices
             ConfigureOAuth(app);
 
             WebApiConfig.Register(config);
+
+            AutoMapperConfig.RegisterMappings();
+
+            // Make the autofac container
+            var builder = new ContainerBuilder();
+
+            builder.RegisterModule<RepositoryModule>();
+            builder.RegisterModule<DomainModule>();
+
+            // Register anything else you might need...
+            //builder.RegisterApiControllers();
+            builder.RegisterApiControllers(typeof(AccountController).Assembly);
+            builder.RegisterApiControllers(typeof(OrdersController).Assembly);
+            builder.RegisterApiControllers(typeof(RefreshTokensController).Assembly);
+
+            // Build the container
+            var container = builder.Build();
+
+            // OWIN WEB API SETUP:
+
+            // set the DependencyResolver
+            config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
+            // Register the Autofac middleware FIRST, then the Autofac Web API middleware,
+            // and finally the standard Web API middleware.
+
+            app.UseAutofacMiddleware(container);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
+            app.UseAutofacWebApi(config);
             app.UseWebApi(config);
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
+
+            var properties = new AppProperties(app.Properties);
+
+            if (properties.OnAppDisposing != CancellationToken.None)
+            {
+                properties.OnAppDisposing.Register(() =>
+                {
+                    //connection.Close(30);
+                });
+            }
         }
 
         public void ConfigureOAuth(IAppBuilder app)

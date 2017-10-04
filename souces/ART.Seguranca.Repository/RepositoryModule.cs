@@ -1,6 +1,5 @@
 ﻿namespace ART.Seguranca.Repository
 {
-    using ART.Seguranca.Repository.Repositories;
 
     using Autofac;
 
