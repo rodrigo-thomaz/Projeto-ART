@@ -1,14 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Web.Http;
-
-namespace ART.Corporativo.DistributedServices.Controllers
+﻿namespace ART.Corporativo.DistributedServices.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Claims;
+    using System.Web.Http;
+
     [Authorize]
     [RoutePrefix("api/minhaConta")]
     public class MinhaContaController : ApiController
     {
+        #region Methods
+
         [Route("")]
         public IEnumerable<object> Get()
         {
@@ -23,5 +25,7 @@ namespace ART.Corporativo.DistributedServices.Controllers
                 Value = c.Value
             });
         }
+
+        #endregion Methods
     }
 }

@@ -1,19 +1,16 @@
-﻿using System.Collections.Generic;
-
-namespace ART.Data.Repository.Entities
+﻿namespace ART.Data.Repository.Entities
 {
+    using System.Collections.Generic;
+
     public abstract class SensorBase : HardwareBase
     {
-        #region Primitive Properties
+        #region Properties
 
+        public ICollection<SensorsInDevice> SensorsInDevice
+        {
+            get; set;
+        }
 
-
-        #endregion
-
-        #region Navigation Properties
-
-        public ICollection<SensorsInDevice> SensorsInDevice { get; set; }
-
-        #endregion        
+        #endregion Properties
     }
 }

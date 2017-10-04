@@ -1,18 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Web.Http.Routing;
-
-namespace ART.Infra.CrossCutting.WebApi.RouteConstraints
+﻿namespace ART.Infra.CrossCutting.WebApi.RouteConstraints
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Web.Http.Routing;
+
     public class CustomMinRouteConstraint : IHttpRouteConstraint
     {
+        #region Fields
+
         private readonly long _min;
+
+        #endregion Fields
+
+        #region Constructors
 
         public CustomMinRouteConstraint(long min)
         {
             _min = min;
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         public bool Match(HttpRequestMessage request, IHttpRoute route, string parameterName, IDictionary<string, object> values, HttpRouteDirection routeDirection)
         {
@@ -35,5 +45,7 @@ namespace ART.Infra.CrossCutting.WebApi.RouteConstraints
 
             return false;
         }
+
+        #endregion Methods
     }
 }

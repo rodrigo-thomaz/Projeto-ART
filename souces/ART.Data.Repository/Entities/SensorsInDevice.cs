@@ -1,21 +1,31 @@
-﻿using System;
-
-namespace ART.Data.Repository.Entities
+﻿namespace ART.Data.Repository.Entities
 {
+    using System;
+
     public class SensorsInDevice
     {
-        #region Primitive Properties
+        #region Properties
 
-        public Guid SensorBaseId { get; set; }
-        public Guid DeviceBaseId { get; set; }
+        public DeviceBase DeviceBase
+        {
+            get; set;
+        }
 
-        #endregion
+        public Guid DeviceBaseId
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
+        public SensorBase SensorBase
+        {
+            get; set;
+        }
 
-        public SensorBase SensorBase { get; set; }
-        public DeviceBase DeviceBase { get; set; }
+        public Guid SensorBaseId
+        {
+            get; set;
+        }
 
-        #endregion
+        #endregion Properties
     }
 }

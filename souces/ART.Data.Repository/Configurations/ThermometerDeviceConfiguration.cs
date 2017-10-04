@@ -1,11 +1,14 @@
-﻿using ART.Data.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Data.Repository.Configurations
+﻿namespace ART.Data.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Data.Repository.Entities;
+
     public class ThermometerDeviceConfiguration : EntityTypeConfiguration<ThermometerDevice>
     {
+        #region Constructors
+
         public ThermometerDeviceConfiguration()
         {
             ToTable("ThermometerDevice");
@@ -22,5 +25,7 @@ namespace ART.Data.Repository.Configurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
         }
+
+        #endregion Constructors
     }
 }

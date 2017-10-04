@@ -4,12 +4,16 @@ namespace ART.Seguranca.DistributedServices.Migrations
 
     public partial class AddApplicationUser : DbMigration
     {
-        public override void Up()
-        {
-        }
-        
+        #region Methods
+
         public override void Down()
         {
         }
+
+        public override void Up()
+        {
+        }
+
+        #endregion Methods
     }
 }

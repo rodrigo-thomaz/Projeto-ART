@@ -1,12 +1,15 @@
-﻿using ART.Data.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Data.Repository.Configurations
+﻿namespace ART.Data.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Data.Repository.Entities;
+
     public class DSFamilyTempSensorConfiguration : EntityTypeConfiguration<DSFamilyTempSensor>
     {
+        #region Constructors
+
         public DSFamilyTempSensorConfiguration()
         {
             ToTable("DSFamilyTempSensor");
@@ -19,20 +22,20 @@ namespace ART.Data.Repository.Configurations
                 .HasMaxLength(15)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new IndexAttribute { IsUnique = true } )); 
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true } ));
 
             //Family
             Property(x => x.Family)
                 .HasMaxLength(10)
                 .IsRequired();
 
-            //TemperatureScale           
+            //TemperatureScale
             HasRequired(x => x.TemperatureScale)
                 .WithMany(x => x.DSFamilyTempSensors)
                 .HasForeignKey(x => x.TemperatureScaleId)
                 .WillCascadeOnDelete(false);
 
-            //DSFamilyTempSensorResolution           
+            //DSFamilyTempSensorResolution
             HasRequired(x => x.DSFamilyTempSensorResolution)
                 .WithMany(x => x.DSFamilyTempSensors)
                 .HasForeignKey(x => x.DSFamilyTempSensorResolutionId)
@@ -46,5 +49,7 @@ namespace ART.Data.Repository.Configurations
             Property(x => x.LowAlarm)
                 .HasPrecision(6, 3);
         }
+
+        #endregion Constructors
     }
 }

@@ -2,22 +2,48 @@
 {
     public class DSFamilyTempSensor : SensorBase
     {
-        #region Primitive Properties
+        #region Properties
 
-        public string DeviceAddress { get; set; }
-        public string Family { get; set; }
-        public byte TemperatureScaleId { get; set; }
-        public byte DSFamilyTempSensorResolutionId { get; set; }
-        public decimal HighAlarm { get; set; }
-        public decimal LowAlarm { get; set; }
+        public string DeviceAddress
+        {
+            get; set;
+        }
 
-        #endregion
+        public DSFamilyTempSensorResolution DSFamilyTempSensorResolution
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
+        public byte DSFamilyTempSensorResolutionId
+        {
+            get; set;
+        }
 
-        public TemperatureScale TemperatureScale { get; set; }
-        public DSFamilyTempSensorResolution DSFamilyTempSensorResolution { get; set; }
+        public string Family
+        {
+            get; set;
+        }
 
-        #endregion        
+        public decimal HighAlarm
+        {
+            get; set;
+        }
+
+        public decimal LowAlarm
+        {
+            get; set;
+        }
+
+        public TemperatureScale TemperatureScale
+        {
+            get; set;
+        }
+
+        public byte TemperatureScaleId
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

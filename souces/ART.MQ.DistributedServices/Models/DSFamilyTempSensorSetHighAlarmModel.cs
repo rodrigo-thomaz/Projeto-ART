@@ -1,10 +1,21 @@
-﻿using System;
-
-namespace ART.MQ.DistributedServices.Models
+﻿namespace ART.MQ.DistributedServices.Models
 {
+    using System;
+
     public class DSFamilyTempSensorSetHighAlarmModel
     {
-        public Guid DSFamilyTempSensorId { get; set; }
-        public decimal HighAlarm { get; set; }
+        #region Properties
+
+        public Guid DSFamilyTempSensorId
+        {
+            get; set;
+        }
+
+        public decimal HighAlarm
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

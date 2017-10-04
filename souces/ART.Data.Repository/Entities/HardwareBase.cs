@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ART.Data.Repository.Entities
+﻿namespace ART.Data.Repository.Entities
 {
+    using System;
+    using System.Collections.Generic;
+
     public abstract class HardwareBase : IEntity<Guid>
     {
-        #region Primitive Properties
+        #region Properties
 
-        public Guid Id { get; set; }
+        public ICollection<HardwareInApplication> HardwaresInApplication
+        {
+            get; set;
+        }
 
-        #endregion
+        public Guid Id
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
-
-        public ICollection<HardwareInApplication> HardwaresInApplication { get; set; }
-
-        #endregion
+        #endregion Properties
     }
 }

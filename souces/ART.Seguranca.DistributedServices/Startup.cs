@@ -1,22 +1,42 @@
-﻿using ART.Seguranca.DistributedServices.Providers;
-using Microsoft.Owin;
-using Microsoft.Owin.Security.Facebook;
-using Microsoft.Owin.Security.Google;
-using Microsoft.Owin.Security.OAuth;
-using Owin;
-using System;
-using System.Data.Entity;
-using System.Web.Http;
-
-[assembly: OwinStartup(typeof(ART.Seguranca.DistributedServices.Startup))]
+﻿[assembly: Microsoft.Owin.OwinStartup(typeof(ART.Seguranca.DistributedServices.Startup))]
 
 namespace ART.Seguranca.DistributedServices
 {
+    using System;
+    using System.Data.Entity;
+    using System.Web.Http;
+
+    using ART.Seguranca.DistributedServices.Providers;
+
+    using Microsoft.Owin;
+    using Microsoft.Owin.Security.Facebook;
+    using Microsoft.Owin.Security.Google;
+    using Microsoft.Owin.Security.OAuth;
+
+    using Owin;
+
     public class Startup
     {
-        public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
-        public static GoogleOAuth2AuthenticationOptions googleAuthOptions { get; private set; }
-        public static FacebookAuthenticationOptions facebookAuthOptions { get; private set; }
+        #region Properties
+
+        public static FacebookAuthenticationOptions facebookAuthOptions
+        {
+            get; private set;
+        }
+
+        public static GoogleOAuth2AuthenticationOptions googleAuthOptions
+        {
+            get; private set;
+        }
+
+        public static OAuthBearerAuthenticationOptions OAuthBearerOptions
+        {
+            get; private set;
+        }
+
+        #endregion Properties
+
+        #region Methods
 
         public void Configuration(IAppBuilder app)
         {
@@ -37,7 +57,7 @@ namespace ART.Seguranca.DistributedServices
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
 
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions() {
-            
+
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
@@ -66,8 +86,8 @@ namespace ART.Seguranca.DistributedServices
                 Provider = new FacebookAuthProvider()
             };
             app.UseFacebookAuthentication(facebookAuthOptions);
-
         }
-    }
 
+        #endregion Methods
+    }
 }

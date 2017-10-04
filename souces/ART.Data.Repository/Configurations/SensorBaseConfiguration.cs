@@ -1,10 +1,13 @@
-﻿using ART.Data.Repository.Entities;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Data.Repository.Configurations
+﻿namespace ART.Data.Repository.Configurations
 {
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Data.Repository.Entities;
+
     public class SensorBaseConfiguration : EntityTypeConfiguration<SensorBase>
     {
+        #region Constructors
+
         public SensorBaseConfiguration()
         {
             ToTable("SensorBase");
@@ -16,5 +19,7 @@ namespace ART.Data.Repository.Configurations
             Property(x => x.Id)
                 .IsRequired();
         }
+
+        #endregion Constructors
     }
 }

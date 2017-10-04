@@ -1,14 +1,18 @@
-﻿using Autofac;
-using RabbitMQ.Client;
-using System.Configuration;
-
-namespace ART.MQ.Worker.Modules
+﻿namespace ART.MQ.Worker.Modules
 {
+    using System.Configuration;
+
+    using Autofac;
+
+    using RabbitMQ.Client;
+
     public class BusModule : Module
     {
+        #region Methods
+
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<WorkerService>();           
+            builder.RegisterType<WorkerService>();
 
             builder.Register(context =>
             {
@@ -31,5 +35,7 @@ namespace ART.MQ.Worker.Modules
                 .As<IConnection>()
                 .SingleInstance();
         }
+
+        #endregion Methods
     }
 }

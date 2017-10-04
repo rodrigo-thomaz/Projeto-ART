@@ -1,22 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ART.Data.Repository.Entities
+﻿namespace ART.Data.Repository.Entities
 {
+    using System;
+    using System.Collections.Generic;
+
     public class DSFamilyTempSensorResolution : IEntity<byte>
     {
-        #region Primitive Properties
+        #region Properties
 
-        public byte Id { get; set; }
-        public string Name { get; set; }
-        public decimal Resolution { get; set; }
-        public decimal ConversionTime { get; set; }
-        public byte Bits { get; set; }
-        public string Description { get; set; }
+        public byte Bits
+        {
+            get; set;
+        }
 
-        #endregion
+        public decimal ConversionTime
+        {
+            get; set;
+        }
 
-        #region Ignore Properties       
+        public string Description
+        {
+            get; set;
+        }
+
+        public ICollection<DSFamilyTempSensor> DSFamilyTempSensors
+        {
+            get; set;
+        }
+
+        public byte Id
+        {
+            get; set;
+        }
+
+        public string Name
+        {
+            get; set;
+        }
+
+        public decimal Resolution
+        {
+            get; set;
+        }
 
         public byte ResolutionDecimalPlaces
         {
@@ -26,12 +50,6 @@ namespace ART.Data.Repository.Entities
             }
         }
 
-        #endregion
-
-        #region Navigation Properties
-
-        public ICollection<DSFamilyTempSensor> DSFamilyTempSensors { get; set; }
-
-        #endregion
+        #endregion Properties
     }
 }

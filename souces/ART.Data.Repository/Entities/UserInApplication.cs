@@ -1,21 +1,31 @@
-﻿using System;
-
-namespace ART.Data.Repository.Entities
+﻿namespace ART.Data.Repository.Entities
 {
+    using System;
+
     public class UserInApplication
     {
-        #region Primitive Properties
+        #region Properties
 
-        public Guid UserId { get; set; }
-        public Guid ApplicationId { get; set; }
+        public Application Application
+        {
+            get; set;
+        }
 
-        #endregion
+        public Guid ApplicationId
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
+        public User User
+        {
+            get; set;
+        }
 
-        public User User { get; set; }
-        public Application Application { get; set; }
+        public Guid UserId
+        {
+            get; set;
+        }
 
-        #endregion
+        #endregion Properties
     }
 }

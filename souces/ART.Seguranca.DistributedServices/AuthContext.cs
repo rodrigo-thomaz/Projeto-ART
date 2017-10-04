@@ -1,34 +1,46 @@
-﻿using ART.Seguranca.DistributedServices.Configurations;
-using ART.Seguranca.DistributedServices.Entities;
-using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-
-namespace ART.Seguranca.DistributedServices
+﻿namespace ART.Seguranca.DistributedServices
 {
+    using System;
+    using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
+
+    using ART.Seguranca.DistributedServices.Configurations;
+    using ART.Seguranca.DistributedServices.Entities;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     public class AuthContext : IdentityDbContext<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
     {
-        #region constructors
+        #region Constructors
 
         public AuthContext()
-         : base("AuthContext")
+            : base("AuthContext")
         {
             Initialize();
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region private voids
+        #region Properties
 
-        private void Initialize()
+        public DbSet<Application> Application
         {
-            Configuration.ValidateOnSaveEnabled = true;
+            get; set;
         }
 
-        #endregion
+        public DbSet<Client> Clients
+        {
+            get; set;
+        }
 
-        #region protected voids
+        public DbSet<RefreshToken> RefreshTokens
+        {
+            get; set;
+        }
+
+        #endregion Properties
+
+        #region Methods
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -44,15 +56,11 @@ namespace ART.Seguranca.DistributedServices
             base.OnModelCreating(modelBuilder);
         }
 
-        #endregion
+        private void Initialize()
+        {
+            Configuration.ValidateOnSaveEnabled = true;
+        }
 
-        #region public voids
-
-        public DbSet<Application> Application { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<RefreshToken> RefreshTokens { get; set; } 
-
-        #endregion
+        #endregion Methods
     }
-
 }

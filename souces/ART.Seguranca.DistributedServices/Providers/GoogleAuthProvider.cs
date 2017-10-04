@@ -1,11 +1,14 @@
-﻿using Microsoft.Owin.Security.Google;
-using System.Threading.Tasks;
-using System.Security.Claims;
-
-namespace ART.Seguranca.DistributedServices.Providers
+﻿namespace ART.Seguranca.DistributedServices.Providers
 {
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+
+    using Microsoft.Owin.Security.Google;
+
     public class GoogleAuthProvider : IGoogleOAuth2AuthenticationProvider
     {
+        #region Methods
+
         public void ApplyRedirect(GoogleOAuth2ApplyRedirectContext context)
         {
             context.Response.Redirect(context.RedirectUri);
@@ -21,5 +24,7 @@ namespace ART.Seguranca.DistributedServices.Providers
         {
             return Task.FromResult<object>(null);
         }
+
+        #endregion Methods
     }
 }

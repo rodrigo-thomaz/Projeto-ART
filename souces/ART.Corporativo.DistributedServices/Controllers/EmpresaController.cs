@@ -1,11 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Web.Http;
-
-namespace ART.Corporativo.DistributedServices.Controllers
+﻿namespace ART.Corporativo.DistributedServices.Controllers
 {
+    using System.Collections.Generic;
+    using System.Web.Http;
+
     [RoutePrefix("api/empresa")]
     public class EmpresaController : ApiController
     {
+        #region Methods
+
         [Route("")]
         public IEnumerable<object> Get()
         {
@@ -15,5 +17,7 @@ namespace ART.Corporativo.DistributedServices.Controllers
                 Value = "Value"
             };
         }
+
+        #endregion Methods
     }
 }

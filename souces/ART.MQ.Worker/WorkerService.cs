@@ -1,19 +1,20 @@
-﻿using ART.MQ.Worker.Consumers;
-using RabbitMQ.Client;
-
-namespace ART.MQ.Worker
+﻿namespace ART.MQ.Worker
 {
+    using ART.MQ.Worker.Consumers;
+
+    using RabbitMQ.Client;
+
     public class WorkerService
     {
-        #region private fields
+        #region Fields
 
         private readonly IConnection _connection;
         private readonly DSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
         private readonly TemperatureScaleConsumer _temperatureScaleConsumer;
 
-        #endregion
+        #endregion Fields
 
-        #region constructors
+        #region Constructors
 
         public WorkerService(IConnection connection, DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer, TemperatureScaleConsumer temperatureScaleConsumer)
         {
@@ -22,9 +23,9 @@ namespace ART.MQ.Worker
             _temperatureScaleConsumer = temperatureScaleConsumer;
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region public voids
+        #region Methods
 
         public bool Start()
         {
@@ -35,8 +36,8 @@ namespace ART.MQ.Worker
         {
             _connection.Close(30);
             return true;
-        }         
+        }
 
-        #endregion
+        #endregion Methods
     }
 }

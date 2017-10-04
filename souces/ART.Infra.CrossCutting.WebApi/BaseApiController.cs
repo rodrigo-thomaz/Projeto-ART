@@ -1,13 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Text;
-using System.Web.Http;
-
-
-namespace ART.Infra.CrossCutting.WebApi
+﻿namespace ART.Infra.CrossCutting.WebApi
 {
+    using System;
+    using System.Linq;
+    using System.Text;
+    using System.Web.Http;
+
     public abstract class BaseApiController : ApiController
     {
+        #region Methods
+
         protected void ValidateModelState()
         {
             if (!ModelState.IsValid)
@@ -21,5 +22,7 @@ namespace ART.Infra.CrossCutting.WebApi
                 throw new ArgumentException(sb.ToString());
             }
         }
+
+        #endregion Methods
     }
 }

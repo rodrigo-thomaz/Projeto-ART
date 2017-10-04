@@ -1,12 +1,15 @@
-﻿using ART.Data.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Data.Repository.Configurations
+﻿namespace ART.Data.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Data.Repository.Entities;
+
     public class ApplicationConfiguration : EntityTypeConfiguration<Application>
     {
+        #region Constructors
+
         public ApplicationConfiguration()
         {
             //Primary Keys
@@ -29,5 +32,7 @@ namespace ART.Data.Repository.Configurations
                 .HasMaxLength(5000)
                 .IsOptional();
         }
+
+        #endregion Constructors
     }
 }

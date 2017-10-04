@@ -4,6 +4,8 @@ namespace ART.Data.Repository.Migrations
 
     internal sealed class Configuration : DbMigrationsConfiguration<ARTDbContext>
     {
+        #region Constructors
+
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
@@ -11,11 +13,17 @@ namespace ART.Data.Repository.Migrations
             ContextKey = "ARTDomoticaDbContext";
         }
 
+        #endregion Constructors
+
+        #region Methods
+
         protected override void Seed(ARTDbContext context)
         {
             Seeds.Execute(context);
 
             base.Seed(context);
         }
+
+        #endregion Methods
     }
 }

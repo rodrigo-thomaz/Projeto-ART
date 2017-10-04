@@ -1,12 +1,15 @@
-﻿using ART.Data.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Data.Repository.Configurations
+﻿namespace ART.Data.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Data.Repository.Entities;
+
     public class DSFamilyTempSensorResolutionConfiguration : EntityTypeConfiguration<DSFamilyTempSensorResolution>
     {
+        #region Constructors
+
         public DSFamilyTempSensorResolutionConfiguration()
         {
             //Primary Keys
@@ -36,15 +39,17 @@ namespace ART.Data.Repository.Configurations
 
             //ResolutionDecimalPlaces
             Ignore(x => x.ResolutionDecimalPlaces);
-            
+
             //ConversionTime
             Property(x => x.ConversionTime)
                 .HasPrecision(5, 2);
-            
+
             //Description
             Property(x => x.Description)
                 .HasMaxLength(5000)
                 .IsOptional();
         }
+
+        #endregion Constructors
     }
 }

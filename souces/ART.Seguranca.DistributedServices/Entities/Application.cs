@@ -1,22 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ART.Seguranca.DistributedServices.Entities
+﻿namespace ART.Seguranca.DistributedServices.Entities
 {
+    using System;
+    using System.Collections.Generic;
+
     public class Application
     {
-        #region Primitive Properties
+        #region Properties
 
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string Description
+        {
+            get; set;
+        }
 
-        #endregion
+        public Guid Id
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
+        public string Name
+        {
+            get; set;
+        }
 
-        public ICollection<UsersInApplication> UsersInApplication { get; set; }
+        public ICollection<UsersInApplication> UsersInApplication
+        {
+            get; set;
+        }
 
-        #endregion
+        #endregion Properties
     }
 }

@@ -1,24 +1,38 @@
-﻿using ART.MQ.DistributedServices.App_Start;
-using ART.MQ.DistributedServices.Controllers;
-using ART.MQ.DistributedServices.Modules;
-using Autofac;
-using Autofac.Integration.WebApi;
-using Microsoft.Owin;
-using Microsoft.Owin.BuilderProperties;
-using Microsoft.Owin.Cors;
-using Microsoft.Owin.Security.OAuth;
-using Owin;
-using RabbitMQ.Client;
-using System.Configuration;
-using System.Threading;
-using System.Web.Http;
+﻿[assembly: Microsoft.Owin.OwinStartup(typeof(ART.MQ.DistributedServices.Startup))]
 
-[assembly: OwinStartup(typeof(ART.MQ.DistributedServices.Startup))]
 namespace ART.MQ.DistributedServices
 {
+    using System.Configuration;
+    using System.Threading;
+    using System.Web.Http;
+
+    using ART.MQ.DistributedServices.App_Start;
+    using ART.MQ.DistributedServices.Controllers;
+    using ART.MQ.DistributedServices.Modules;
+
+    using Autofac;
+    using Autofac.Integration.WebApi;
+
+    using Microsoft.Owin.BuilderProperties;
+    using Microsoft.Owin.Cors;
+    using Microsoft.Owin.Security.OAuth;
+
+    using Owin;
+
+    using RabbitMQ.Client;
+
     public class Startup
     {
-        public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
+        #region Properties
+
+        public static OAuthBearerAuthenticationOptions OAuthBearerOptions
+        {
+            get; private set;
+        }
+
+        #endregion Properties
+
+        #region Methods
 
         public void Configuration(IAppBuilder app)
         {
@@ -73,11 +87,11 @@ namespace ART.MQ.DistributedServices
 
             app.UseAutofacMiddleware(container);
             app.UseCors(CorsOptions.AllowAll);
-            app.UseAutofacWebApi(config);           
+            app.UseAutofacWebApi(config);
             app.UseWebApi(config);
 
             var connection = container.Resolve<IConnection>();
-            
+
             var properties = new AppProperties(app.Properties);
 
             if (properties.OnAppDisposing != CancellationToken.None)
@@ -95,5 +109,7 @@ namespace ART.MQ.DistributedServices
             //Token Consumption
             app.UseOAuthBearerAuthentication(OAuthBearerOptions);
         }
+
+        #endregion Methods
     }
 }

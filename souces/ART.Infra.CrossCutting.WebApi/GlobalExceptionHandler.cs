@@ -1,19 +1,25 @@
-﻿using System;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http.ExceptionHandling;
-using System.Web.Http.Results;
-
-namespace ART.Infra.CrossCutting.WebApi
+﻿namespace ART.Infra.CrossCutting.WebApi
 {
+    using System;
+    using System.Net;
+    using System.Net.Http;
+    using System.Web.Http.ExceptionHandling;
+    using System.Web.Http.Results;
+
     public class GlobalExceptionHandler : ExceptionHandler
     {
+        #region Constructors
+
         public GlobalExceptionHandler()
         {
-#if (!DEBUG)
+            #if (!DEBUG)
             //_rollbarClient = new RollbarClient();
-#endif
+            #endif
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         public override void Handle(ExceptionHandlerContext context)
         {
@@ -39,8 +45,12 @@ namespace ART.Infra.CrossCutting.WebApi
             context.Result = new ResponseMessageResult(responseMessage);
         }
 
-#if (!DEBUG)
-           // _rollbarClient.SendException(context.Exception);
-#endif
+        #endregion Methods
+
+        #if (!DEBUG)
+
+        // _rollbarClient.SendException(context.Exception);
+
+        #endif
     }
 }

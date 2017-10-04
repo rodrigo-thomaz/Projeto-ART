@@ -1,20 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace ART.Data.Repository.Entities
+﻿namespace ART.Data.Repository.Entities
 {
+    using System;
+    using System.Collections.Generic;
+
     public class User : IEntity<Guid>
     {
-        #region Primitive Properties
+        #region Properties
 
-        public Guid Id { get; set; }
+        public Guid Id
+        {
+            get; set;
+        }
 
-        #endregion
+        public ICollection<UserInApplication> UsersInApplication
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
-
-        public ICollection<UserInApplication> UsersInApplication { get; set; }
-
-        #endregion
+        #endregion Properties
     }
 }

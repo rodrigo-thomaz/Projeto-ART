@@ -1,11 +1,22 @@
-﻿using System;
-
-namespace ART.MQ.Common.Contracts
+﻿namespace ART.MQ.Common.Contracts
 {
+    using System;
+
     [Serializable]
     public class DSFamilyTempSensorGetContract
     {
-        public Guid DSFamilyTempSensorId { get; set; }
-        public string Session { get; set; }
+        #region Properties
+
+        public Guid DSFamilyTempSensorId
+        {
+            get; set;
+        }
+
+        public string Session
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

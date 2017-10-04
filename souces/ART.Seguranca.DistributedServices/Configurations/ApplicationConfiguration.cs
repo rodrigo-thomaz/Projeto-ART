@@ -1,12 +1,15 @@
-﻿using ART.Seguranca.DistributedServices.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Seguranca.DistributedServices.Configurations
+﻿namespace ART.Seguranca.DistributedServices.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Seguranca.DistributedServices.Entities;
+
     public class ApplicationConfiguration : EntityTypeConfiguration<Application>
     {
+        #region Constructors
+
         public ApplicationConfiguration()
         {
             //Primary Keys
@@ -29,5 +32,7 @@ namespace ART.Seguranca.DistributedServices.Configurations
                 .HasMaxLength(5000)
                 .IsOptional();
         }
+
+        #endregion Constructors
     }
 }

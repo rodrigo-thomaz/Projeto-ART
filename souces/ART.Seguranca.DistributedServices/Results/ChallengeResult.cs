@@ -1,22 +1,39 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
-
-namespace ART.Seguranca.DistributedServices.Results
+﻿namespace ART.Seguranca.DistributedServices.Results
 {
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using System.Web;
+    using System.Web.Http;
+
     public class ChallengeResult : IHttpActionResult
-    {        
-        public string LoginProvider { get; set; }
-        public HttpRequestMessage Request { get; set; }
+    {
+        #region Constructors
 
         public ChallengeResult(string loginProvider, ApiController controller)
         {
             LoginProvider = loginProvider;
             Request = controller.Request;
         }
+
+        #endregion Constructors
+
+        #region Properties
+
+        public string LoginProvider
+        {
+            get; set;
+        }
+
+        public HttpRequestMessage Request
+        {
+            get; set;
+        }
+
+        #endregion Properties
+
+        #region Methods
 
         public Task<HttpResponseMessage> ExecuteAsync(CancellationToken cancellationToken)
         {
@@ -26,5 +43,7 @@ namespace ART.Seguranca.DistributedServices.Results
             response.RequestMessage = Request;
             return Task.FromResult(response);
         }
+
+        #endregion Methods
     }
 }

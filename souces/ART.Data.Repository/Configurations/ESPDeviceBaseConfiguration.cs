@@ -1,12 +1,15 @@
-﻿using ART.Data.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Data.Repository.Configurations
+﻿namespace ART.Data.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Data.Repository.Entities;
+
     public class ESPDeviceBaseConfiguration : EntityTypeConfiguration<ESPDeviceBase>
     {
+        #region Constructors
+
         public ESPDeviceBaseConfiguration()
         {
             ToTable("ESPDeviceBase");
@@ -26,5 +29,7 @@ namespace ART.Data.Repository.Configurations
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
         }
+
+        #endregion Constructors
     }
 }

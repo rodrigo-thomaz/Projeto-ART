@@ -1,21 +1,31 @@
-﻿using System;
-
-namespace ART.Data.Repository.Entities
+﻿namespace ART.Data.Repository.Entities
 {
+    using System;
+
     public class HardwareInApplication
     {
-        #region Primitive Properties
+        #region Properties
 
-        public Guid HardwareBaseId { get; set; }
-        public Guid ApplicationId { get; set; }
+        public Application Application
+        {
+            get; set;
+        }
 
-        #endregion
+        public Guid ApplicationId
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
+        public HardwareBase HardwareBase
+        {
+            get; set;
+        }
 
-        public HardwareBase HardwareBase { get; set; }
-        public Application Application { get; set; }
+        public Guid HardwareBaseId
+        {
+            get; set;
+        }
 
-        #endregion
+        #endregion Properties
     }
 }

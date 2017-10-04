@@ -1,15 +1,17 @@
-﻿using Newtonsoft.Json.Serialization;
-using System.Linq;
-using System.Net.Http.Formatting;
-using System.Web.Http;
-
-namespace ART.Seguranca.DistributedServices
+﻿namespace ART.Seguranca.DistributedServices
 {
+    using System.Linq;
+    using System.Net.Http.Formatting;
+    using System.Web.Http;
+
+    using Newtonsoft.Json.Serialization;
+
     public static class WebApiConfig
     {
+        #region Methods
+
         public static void Register(HttpConfiguration config)
         {
-
             // Web API routes
             config.MapHttpAttributeRoutes();
 
@@ -22,5 +24,7 @@ namespace ART.Seguranca.DistributedServices
             var jsonFormatter = config.Formatters.OfType<JsonMediaTypeFormatter>().First();
             jsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
         }
+
+        #endregion Methods
     }
 }

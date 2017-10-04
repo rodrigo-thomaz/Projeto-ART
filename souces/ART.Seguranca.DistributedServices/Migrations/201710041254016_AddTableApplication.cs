@@ -1,10 +1,24 @@
 namespace ART.Seguranca.DistributedServices.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddTableApplication : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.UsersInApplication", "UserId", "dbo.AspNetUsers");
+            DropForeignKey("dbo.UsersInApplication", "ApplicationId", "dbo.Application");
+            DropIndex("dbo.UsersInApplication", new[] { "ApplicationId" });
+            DropIndex("dbo.UsersInApplication", new[] { "UserId" });
+            DropIndex("dbo.Application", new[] { "Name" });
+            DropTable("dbo.UsersInApplication");
+            DropTable("dbo.Application");
+            RenameTable(name: "dbo.RefreshToken", newName: "RefreshTokens");
+            RenameTable(name: "dbo.Client", newName: "Clients");
+        }
+
         public override void Up()
         {
             RenameTable(name: "dbo.Clients", newName: "Client");
@@ -19,7 +33,7 @@ namespace ART.Seguranca.DistributedServices.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
-            
+
             CreateTable(
                 "dbo.UsersInApplication",
                 c => new
@@ -32,20 +46,8 @@ namespace ART.Seguranca.DistributedServices.Migrations
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId)
                 .Index(t => t.UserId)
                 .Index(t => t.ApplicationId);
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.UsersInApplication", "UserId", "dbo.AspNetUsers");
-            DropForeignKey("dbo.UsersInApplication", "ApplicationId", "dbo.Application");
-            DropIndex("dbo.UsersInApplication", new[] { "ApplicationId" });
-            DropIndex("dbo.UsersInApplication", new[] { "UserId" });
-            DropIndex("dbo.Application", new[] { "Name" });
-            DropTable("dbo.UsersInApplication");
-            DropTable("dbo.Application");
-            RenameTable(name: "dbo.RefreshToken", newName: "RefreshTokens");
-            RenameTable(name: "dbo.Client", newName: "Clients");
-        }
+
+        #endregion Methods
     }
 }

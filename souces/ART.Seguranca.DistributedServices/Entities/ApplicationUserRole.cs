@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
-
-namespace ART.Seguranca.DistributedServices.Entities
+﻿namespace ART.Seguranca.DistributedServices.Entities
 {
+    using System;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     public class ApplicationUserRole : IdentityUserRole<Guid>
     {
     }

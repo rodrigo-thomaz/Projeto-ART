@@ -1,32 +1,73 @@
-﻿using ART.Data.Repository.Configurations;
-using ART.Data.Repository.Entities;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-
-namespace ART.Data.Repository
+﻿namespace ART.Data.Repository
 {
+    using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
+
+    using ART.Data.Repository.Configurations;
+    using ART.Data.Repository.Entities;
+
     public class ARTDbContext : DbContext
     {
-        #region constructors
+        #region Constructors
 
         public ARTDbContext()
-             : base(@"Data Source=.\SQLEXPRESS;Initial Catalog=ARTDb;Integrated Security=false;User ID=sa;Password=b3b3xu!@#;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False")
+            : base(@"Data Source=.\SQLEXPRESS;Initial Catalog=ARTDb;Integrated Security=false;User ID=sa;Password=b3b3xu!@#;Connect Timeout=15;Encrypt=False;TrustServerCertificate=False")
         {
             Initialize();
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region private voids
+        #region Properties
 
-        private void Initialize()
+        public DbSet<Application> Application
         {
-            Configuration.ValidateOnSaveEnabled = true;
+            get; set;
         }
 
-        #endregion
+        public DbSet<DSFamilyTempSensor> DSFamilyTempSensor
+        {
+            get; set;
+        }
 
-        #region protected voids
+        public DbSet<DSFamilyTempSensorResolution> DSFamilyTempSensorResolution
+        {
+            get; set;
+        }
+
+        public DbSet<HardwareInApplication> HardwareInApplication
+        {
+            get; set;
+        }
+
+        public DbSet<SensorsInDevice> SensorsInDevice
+        {
+            get; set;
+        }
+
+        public DbSet<TemperatureScale> TemperatureScale
+        {
+            get; set;
+        }
+
+        public DbSet<ThermometerDevice> ThermometerDevice
+        {
+            get; set;
+        }
+
+        public DbSet<User> User
+        {
+            get; set;
+        }
+
+        public DbSet<UserInApplication> UserInApplication
+        {
+            get; set;
+        }
+
+        #endregion Properties
+
+        #region Methods
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -54,20 +95,11 @@ namespace ART.Data.Repository
             base.OnModelCreating(modelBuilder);
         }
 
-        #endregion
+        private void Initialize()
+        {
+            Configuration.ValidateOnSaveEnabled = true;
+        }
 
-        #region public voids
-
-        public DbSet<DSFamilyTempSensor> DSFamilyTempSensor { get; set; }
-        public DbSet<DSFamilyTempSensorResolution> DSFamilyTempSensorResolution { get; set; }
-        public DbSet<SensorsInDevice> SensorsInDevice { get; set; }
-        public DbSet<HardwareInApplication> HardwareInApplication { get; set; }
-        public DbSet<Application> Application { get; set; }
-        public DbSet<TemperatureScale> TemperatureScale { get; set; }
-        public DbSet<ThermometerDevice> ThermometerDevice { get; set; }
-        public DbSet<User> User { get; set; }
-        public DbSet<UserInApplication> UserInApplication { get; set; } 
-
-        #endregion
+        #endregion Methods
     }
 }

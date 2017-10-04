@@ -4,6 +4,17 @@ namespace ART.Data.Repository.Migrations
 
     public partial class AddTableSensorsInDevice : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.SensorsInDevice", "SensorBaseId", "dbo.SensorBase");
+            DropForeignKey("dbo.SensorsInDevice", "DeviceBaseId", "dbo.DeviceBase");
+            DropIndex("dbo.SensorsInDevice", new[] { "DeviceBaseId" });
+            DropIndex("dbo.SensorsInDevice", new[] { "SensorBaseId" });
+            DropTable("dbo.SensorsInDevice");
+        }
+
         public override void Up()
         {
             CreateTable(
@@ -18,16 +29,8 @@ namespace ART.Data.Repository.Migrations
                 .ForeignKey("dbo.SensorBase", t => t.SensorBaseId)
                 .Index(t => t.SensorBaseId)
                 .Index(t => t.DeviceBaseId);
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.SensorsInDevice", "SensorBaseId", "dbo.SensorBase");
-            DropForeignKey("dbo.SensorsInDevice", "DeviceBaseId", "dbo.DeviceBase");
-            DropIndex("dbo.SensorsInDevice", new[] { "DeviceBaseId" });
-            DropIndex("dbo.SensorsInDevice", new[] { "SensorBaseId" });
-            DropTable("dbo.SensorsInDevice");
-        }
+
+        #endregion Methods
     }
 }

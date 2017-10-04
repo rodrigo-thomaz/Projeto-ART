@@ -1,11 +1,14 @@
-﻿using ART.Data.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Data.Repository.Configurations
+﻿namespace ART.Data.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Data.Repository.Entities;
+
     public class HardwareBaseConfiguration : EntityTypeConfiguration<HardwareBase>
     {
+        #region Constructors
+
         public HardwareBaseConfiguration()
         {
             //Primary Keys
@@ -16,5 +19,7 @@ namespace ART.Data.Repository.Configurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
         }
+
+        #endregion Constructors
     }
 }

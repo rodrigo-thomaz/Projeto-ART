@@ -1,22 +1,36 @@
-﻿using System.Collections.Generic;
-
-namespace ART.Data.Repository.Entities
+﻿namespace ART.Data.Repository.Entities
 {
+    using System.Collections.Generic;
+
     public class TemperatureScale : IEntity<byte>
     {
-        #region Primitive Properties
+        #region Properties
 
-        public byte Id { get; set; }
-        public string Name { get; set; }
-        public string Symbol { get; set; }
-        public string Description { get; set; }
+        public string Description
+        {
+            get; set;
+        }
 
-        #endregion
+        public ICollection<DSFamilyTempSensor> DSFamilyTempSensors
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
+        public byte Id
+        {
+            get; set;
+        }
 
-        public ICollection<DSFamilyTempSensor> DSFamilyTempSensors { get; set; }
+        public string Name
+        {
+            get; set;
+        }
 
-        #endregion
+        public string Symbol
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

@@ -1,18 +1,21 @@
-﻿using ART.Data.Repository.Entities;
-using System.Data.Entity.Migrations;
-using System.Linq;
-using System.Text;
-
-namespace ART.Data.Repository.Migrations
+﻿namespace ART.Data.Repository.Migrations
 {
+    using System.Data.Entity.Migrations;
+    using System.Linq;
+    using System.Text;
+
+    using ART.Data.Repository.Entities;
+
     public class Seeds
     {
+        #region Methods
+
         public static void Execute(ARTDbContext context)
         {
             #region TemperatureScale
 
             var celsiusDescription = new StringBuilder();
-            
+
             celsiusDescription.AppendLine("A escala de grau Celsius(símbolo: °C) é uma escala termométrica, do sistema métrico[1], usada na maioria dos países do mundo.Teve origem a partir do modelo proposto pelo astrônomo sueco Anders Celsius(1701 - 1744), inicialmente denominado escala centígrada(Grau centígrado).");
             celsiusDescription.AppendLine("Esta escala é baseada nos pontos de fusão e ebulição da água, em condição atmosférica padrão, aos quais são atribuídos os valores de 0 °C e 100 °C, respectivamente[2].Devido a esta divisão centesimal, se deu a antiga nomenclatura grau centígrado(cem partes/ graus) que, em 1948, durante a 9ª Conferência Geral de Pesos e Medidas(CR 64), teve seu nome oficialmente modificado para grau Celsius, em reconhecimento ao trabalho de Anders Celsius e para fim de desambiguação com o prefixo centi do SI.");
             celsiusDescription.AppendLine("Enquanto que os valores de congelação e evaporação da água estão aproximadamente corretos, a definição original não é apropriada como um padrão formal: ela depende da definição de pressão atmosférica padrão, que por sua vez depende da própria definição de temperatura.A definição oficial atual de grau Celsius define 0,01 °C como o ponto triplo da água, e 1 grau Celsius como sendo 1 / 273,16 da diferença de temperatura entre o ponto triplo da água e o zero absoluto. Esta definição garante que 1 grau Celsius apresenta a mesma variação de temperatura que 1 kelvin.");
@@ -48,7 +51,7 @@ namespace ART.Data.Repository.Migrations
 
             fahrenheitTemperatureScale.Name = "Fahrenheit";
             fahrenheitTemperatureScale.Symbol = "°F";
-            fahrenheitTemperatureScale.Description = fahrenheitDescription.ToString();            
+            fahrenheitTemperatureScale.Description = fahrenheitDescription.ToString();
 
             context.SaveChanges();
 
@@ -138,7 +141,7 @@ namespace ART.Data.Repository.Migrations
             {
                 sensor1.Family = "DS18B20";
             }
-            
+
             if (sensor2 == null)
             {
                 sensor2 = new DSFamilyTempSensor
@@ -151,7 +154,7 @@ namespace ART.Data.Repository.Migrations
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                 };
                 context.DSFamilyTempSensor.Add(sensor2);
-            }   
+            }
             else
             {
                 sensor2.Family = "DS18B20";
@@ -178,7 +181,7 @@ namespace ART.Data.Repository.Migrations
             else
             {
                 //code here
-            }           
+            }
 
             context.SaveChanges();
 
@@ -256,7 +259,9 @@ namespace ART.Data.Repository.Migrations
 
             context.SaveChanges();
 
-            #endregion            
+            #endregion
         }
+
+        #endregion Methods
     }
 }

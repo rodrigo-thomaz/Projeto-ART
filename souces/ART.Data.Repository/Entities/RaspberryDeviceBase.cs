@@ -2,16 +2,18 @@
 {
     public class RaspberryDeviceBase : DeviceBase
     {
-        #region Primitive Properties
+        #region Properties
 
-        public string LanMacAddress { get; set; }
-        public string WLanMacAddress { get; set; }
+        public string LanMacAddress
+        {
+            get; set;
+        }
 
-        #endregion
+        public string WLanMacAddress
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
-
-
-        #endregion        
+        #endregion Properties
     }
 }

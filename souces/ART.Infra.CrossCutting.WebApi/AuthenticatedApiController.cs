@@ -1,12 +1,13 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
-
-
-namespace ART.Infra.CrossCutting.WebApi
+﻿namespace ART.Infra.CrossCutting.WebApi
 {
+    using System;
+    using System.Linq;
+    using System.Security.Claims;
+
     public abstract class AuthenticatedApiController : BaseApiController
     {
+        #region Properties
+
         protected Guid _userId
         {
             get
@@ -17,5 +18,7 @@ namespace ART.Infra.CrossCutting.WebApi
                 return userId;
             }
         }
+
+        #endregion Properties
     }
 }

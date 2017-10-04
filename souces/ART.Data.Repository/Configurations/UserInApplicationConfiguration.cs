@@ -1,10 +1,13 @@
-﻿using ART.Data.Repository.Entities;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Data.Repository.Configurations
+﻿namespace ART.Data.Repository.Configurations
 {
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Data.Repository.Entities;
+
     public class UserInApplicationConfiguration : EntityTypeConfiguration<UserInApplication>
     {
+        #region Constructors
+
         public UserInApplicationConfiguration()
         {
             //Primary Keys
@@ -14,17 +17,19 @@ namespace ART.Data.Repository.Configurations
                 x.ApplicationId,
             });
 
-            //Foreing Keys            
+            //Foreing Keys
             HasRequired(x => x.User)
                 .WithMany(x => x.UsersInApplication)
                 .HasForeignKey(x => x.UserId)
                 .WillCascadeOnDelete(false);
 
-            //Foreing Keys            
+            //Foreing Keys
             HasRequired(x => x.Application)
                 .WithMany(x => x.UsersInApplication)
                 .HasForeignKey(x => x.ApplicationId)
                 .WillCascadeOnDelete(false);
         }
+
+        #endregion Constructors
     }
 }

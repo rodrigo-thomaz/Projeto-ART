@@ -2,22 +2,35 @@
 {
     public class DeviceMessageContract<TContract>
     {
-        private readonly string _topic;
+        #region Fields
+
         private readonly TContract _contract;
+        private readonly string _topic;
+
+        #endregion Fields
+
+        #region Constructors
 
         public DeviceMessageContract(string topic, TContract contract)
         {
             _topic = topic;
             _contract = contract;
         }
-        public string Topic
-        {
-            get { return _topic; }
-        }
+
+        #endregion Constructors
+
+        #region Properties
 
         public TContract Contract
         {
             get { return _contract; }
         }
+
+        public string Topic
+        {
+            get { return _topic; }
+        }
+
+        #endregion Properties
     }
 }

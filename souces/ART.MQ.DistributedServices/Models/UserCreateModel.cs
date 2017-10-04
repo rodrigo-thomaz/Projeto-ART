@@ -1,13 +1,16 @@
-﻿using System;
-
-namespace ART.MQ.DistributedServices.Models
+﻿namespace ART.MQ.DistributedServices.Models
 {
+    using System;
+
     public class UserCreateModel
     {
-        #region public properties
+        #region Properties
 
-        public Guid Id { get; set; }
+        public Guid Id
+        {
+            get; set;
+        }
 
-        #endregion
+        #endregion Properties
     }
 }

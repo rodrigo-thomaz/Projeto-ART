@@ -2,15 +2,13 @@
 {
     public abstract class ESPDeviceBase : DeviceBase
     {
-        #region Primitive Properties
+        #region Properties
 
-        public string MacAddress { get; set; }
+        public string MacAddress
+        {
+            get; set;
+        }
 
-        #endregion
-
-        #region Navigation Properties
-
-
-        #endregion
+        #endregion Properties
     }
 }

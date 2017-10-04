@@ -1,15 +1,23 @@
-﻿using ART.Data.Repository.Entities;
-using System.Threading.Tasks;
-
-namespace ART.Data.Repository.Interfaces
+﻿namespace ART.Data.Repository.Interfaces
 {
+    using System.Threading.Tasks;
+
+    using ART.Data.Repository.Entities;
+
     public interface IRepository<TEntity, TKey>
-        where TKey : struct
         where TEntity : IEntity<TKey>
+        where TKey : struct
     {
-        Task Insert(TEntity entity);
-        Task Update(TEntity entity);
+        #region Methods
+
         Task Delete(TEntity entity);
+
         Task<TEntity> GetById(TKey key);
+
+        Task Insert(TEntity entity);
+
+        Task Update(TEntity entity);
+
+        #endregion Methods
     }
 }

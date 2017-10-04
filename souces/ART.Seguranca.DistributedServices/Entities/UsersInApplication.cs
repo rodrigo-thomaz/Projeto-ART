@@ -1,21 +1,31 @@
-﻿using System;
-
-namespace ART.Seguranca.DistributedServices.Entities
+﻿namespace ART.Seguranca.DistributedServices.Entities
 {
+    using System;
+
     public class UsersInApplication
     {
-        #region Primitive Properties
+        #region Properties
 
-        public Guid UserId { get; set; }
-        public Guid ApplicationId { get; set; }
+        public Application Application
+        {
+            get; set;
+        }
 
-        #endregion
+        public Guid ApplicationId
+        {
+            get; set;
+        }
 
-        #region Navigation Properties
+        public ApplicationUser User
+        {
+            get; set;
+        }
 
-        public ApplicationUser User { get; set; }
-        public Application Application { get; set; }
+        public Guid UserId
+        {
+            get; set;
+        }
 
-        #endregion
+        #endregion Properties
     }
 }

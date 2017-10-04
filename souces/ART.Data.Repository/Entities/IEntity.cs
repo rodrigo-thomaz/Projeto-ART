@@ -2,10 +2,13 @@
 {
     public interface IEntity<TKey>
     {
-        #region Primitive Properties
+        #region Properties
 
-        TKey Id { get; set; }
+        TKey Id
+        {
+            get; set;
+        }
 
-        #endregion        
+        #endregion Properties
     }
 }
