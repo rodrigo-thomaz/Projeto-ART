@@ -3,32 +3,9 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var resolutionsInitialized = false;
+    var initResolutions = false;
 
-    var serviceFactory = {};
-
-    EventDispatcher.on('stompService_onConnected', function (frame) {
-        setSubscribes();
-    });   
-
-    var setSubscribes = function () {
-
-        if (!stompService.client.connected) return;
-
-        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
-
-        stompService.client.subscribe('/topic/' + stompService.session + '-GetResolutionsCompleted', function (payload) {
-            var data = JSON.parse(payload.body);
-            for (var i = 0; i < data.length; i++) {
-                serviceFactory.resolutions.push(data[i]);
-            }
-        });
-
-        if (!resolutionsInitialized) {
-            resolutionsInitialized = true;
-            getResolutions();
-        }
-    }    
+    var serviceFactory = {};    
 
     var getResolutions = function () {
         return $http.get(serviceBase + 'api/dsFamilyTempSensor/getResolutions/' + stompService.session).then(function (results) {
@@ -66,15 +43,31 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
         });
     };
 
+    var onConnected = function () {
+        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
+        stompService.client.subscribe('/topic/' + stompService.session + '-GetResolutionsCompleted', onGetResolutionsCompleted);
+        if (!initResolutions) {
+            initResolutions = true;
+            getResolutions();
+        }
+    }  
+
     var onReadReceived = function (payload) {
-        if (serviceFactory.onReadReceived != null) {
-            var sensors = JSON.parse(payload.body)
-            serviceFactory.onReadReceived(sensors);
+        EventDispatcher.trigger('dsFamilyTempSensorService_onReadReceived', JSON.parse(payload.body));
+    }
+
+    var onGetResolutionsCompleted = function (payload) {
+        var data = JSON.parse(payload.body);
+        for (var i = 0; i < data.length; i++) {
+            serviceFactory.resolutions.push(data[i]);
         }
     }
 
+    EventDispatcher.on('stompService_onConnected', onConnected);         
+
     // stompService
-    setSubscribes();
+    if (stompService.client.connected)
+        onConnected();
 
     // serviceFactory
 

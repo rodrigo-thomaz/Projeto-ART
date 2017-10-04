@@ -15,7 +15,7 @@ app.factory('stompService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher
         debug('session: ' + frame.headers.session);        
     }
 
-    var onError = function () {
+    var onError = function (frame) {
 
         serviceFactory.session = null;
 

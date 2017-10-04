@@ -3,30 +3,9 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'EventDispatc
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var scalesInitialized = false;
+    var initScales = false;
 
-    var serviceFactory = {};
-
-    EventDispatcher.on('stompService_onConnected', function (frame) {
-        setSubscribes();
-    });   
-
-    var setSubscribes = function () {
-
-        if (!stompService.client.connected) return;        
-
-        stompService.client.subscribe('/topic/' + stompService.session + '-GetScalesCompleted', function (payload) {
-            var data = JSON.parse(payload.body);
-            for (var i = 0; i < data.length; i++) {
-                serviceFactory.scales.push(data[i]);
-            }
-        });
-
-        if (!scalesInitialized) {
-            scalesInitialized = true;
-            getScales();
-        }
-    }    
+    var serviceFactory = {};    
 
     var getScales = function () {
         return $http.get(serviceBase + 'api/temperatureScale/getScales/' + stompService.session).then(function (results) {
@@ -34,8 +13,26 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'EventDispatc
         });
     };
 
+    var onConnected = function () {
+        stompService.client.subscribe('/topic/' + stompService.session + '-GetScalesCompleted', onGetScalesCompleted);
+        if (!initScales) {
+            initScales = true;
+            getScales();
+        }
+    }    
+
+    var onGetScalesCompleted = function (payload) {
+        var data = JSON.parse(payload.body);
+        for (var i = 0; i < data.length; i++) {
+            serviceFactory.scales.push(data[i]);
+        }
+    }
+
+    EventDispatcher.on('stompService_onConnected', onConnected);               
+
     // stompService
-    setSubscribes();
+    if (stompService.client.connected)
+        onConnected();
 
     // serviceFactory
 

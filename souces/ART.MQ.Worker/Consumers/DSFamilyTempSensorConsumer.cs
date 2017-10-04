@@ -5,6 +5,7 @@ using ART.MQ.Common.QueueNames;
 using ART.MQ.Worker.Contracts;
 using ART.MQ.Worker.Helpers;
 using ART.MQ.Worker.Models;
+using Autofac;
 using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -21,6 +22,8 @@ namespace ART.MQ.Worker.Consumers
     {
         #region private fields
 
+        private readonly IComponentContext _context;
+
         private readonly IConnection _connection;
         private readonly IModel _model;
 
@@ -35,8 +38,10 @@ namespace ART.MQ.Worker.Consumers
 
         #region constructors
 
-        public DSFamilyTempSensorConsumer(IConnection connection, IDSFamilyTempSensorDomain dsFamilyTempSensorDomain)
+        public DSFamilyTempSensorConsumer(IComponentContext context, IConnection connection, IDSFamilyTempSensorDomain dsFamilyTempSensorDomain)
         {
+            _context = context;
+
             _connection = connection;
 
             _model = _connection.CreateModel();
@@ -98,8 +103,7 @@ namespace ART.MQ.Worker.Consumers
 
         private void GetResolutionsReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetResolutionsReceivedAsync(sender, e));
-            //Task.Run(async () => await GetResolutionsReceivedAsync(sender, e));
+            Task.WaitAll(GetResolutionsReceivedAsync(sender, e));            
         }
 
         private async Task GetResolutionsReceivedAsync(object sender, BasicDeliverEventArgs e)
@@ -111,6 +115,7 @@ namespace ART.MQ.Worker.Consumers
             var session = DeserializationHelpers.Deserialize<string>(e.Body);
             var exchange = string.Format("{0}-{1}", session, "GetResolutionsCompleted");
 
+            //var dsFamilyTempSensorDomain = _context.Resolve<IDSFamilyTempSensorDomain>();
             var entities = await _dsFamilyTempSensorDomain.GetResolutions();
             Console.WriteLine("[DSFamilyTempSensorDomain.GetResolutions] Ok");
 

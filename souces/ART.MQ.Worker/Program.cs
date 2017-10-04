@@ -13,9 +13,10 @@ namespace ART.MQ.Worker
     {
         static void Main(string[] args)
         {
-            var builder = new ContainerBuilder();            
+            var builder = new ContainerBuilder();
 
-            builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope();
+            //builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<ARTDbContext>().InstancePerDependency();
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();

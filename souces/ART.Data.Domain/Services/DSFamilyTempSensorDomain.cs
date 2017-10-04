@@ -50,7 +50,6 @@ namespace ART.Data.Domain.Services
             }
 
             dsFamilyTempSensorEntity.DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolutionEntity.Id;
-            dsFamilyTempSensorEntity.DSFamilyTempSensorResolution = dsFamilyTempSensorResolutionEntity;
 
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
         }
