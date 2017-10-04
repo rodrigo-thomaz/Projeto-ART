@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace ART.Seguranca.DistributedServices
 {
-    public class AuthContext : IdentityDbContext<IdentityUser>
+    public class AuthContext : IdentityDbContext<ApplicationUser>
     {
         public AuthContext()
             : base("AuthContext")

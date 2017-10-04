@@ -1,4 +1,5 @@
-﻿using ART.Seguranca.DistributedServices.Models;
+﻿using ART.Seguranca.DistributedServices.Entities;
+using ART.Seguranca.DistributedServices.Models;
 using ART.Seguranca.DistributedServices.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -92,7 +93,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
+            ApplicationUser user = await _repo.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
 
@@ -124,7 +125,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            ApplicationUser user = await _repo.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
 
             bool hasRegistered = user != null;
 
@@ -133,7 +134,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return BadRequest("External user is already registered");
             }
 
-            user = new IdentityUser() { UserName = model.UserName };
+            user = new ApplicationUser() { UserName = model.UserName };
 
             IdentityResult result = await _repo.CreateAsync(user);
             if (!result.Succeeded)
@@ -176,7 +177,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            IdentityUser user = await _repo.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
+            ApplicationUser user = await _repo.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
 
             bool hasRegistered = user != null;
 

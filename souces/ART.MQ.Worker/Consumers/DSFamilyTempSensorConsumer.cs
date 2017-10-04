@@ -5,7 +5,6 @@ using ART.MQ.Common.QueueNames;
 using ART.MQ.Worker.Contracts;
 using ART.MQ.Worker.Helpers;
 using ART.MQ.Worker.Models;
-using Autofac;
 using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;

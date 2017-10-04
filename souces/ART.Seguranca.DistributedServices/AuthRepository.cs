@@ -18,17 +18,17 @@ namespace ART.Seguranca.DistributedServices
     {
         private AuthContext _ctx;
 
-        private UserManager<IdentityUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
 
         public AuthRepository()
         {
             _ctx = new AuthContext();
-            _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(_ctx));
+            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_ctx));
         }
 
         public async Task<IdentityResult> RegisterUser(UserModel userModel)
         {
-            IdentityUser user = new IdentityUser
+            ApplicationUser user = new ApplicationUser
             {
                 UserName = userModel.UserName
             };
@@ -40,7 +40,7 @@ namespace ART.Seguranca.DistributedServices
             return result;
         }
 
-        private async Task InsertUserInDomotica(IdentityUser user)
+        private async Task InsertUserInDomotica(ApplicationUser user)
         {
             var domoticaServiceUri = ConfigurationManager.AppSettings["ART.DistributedServices.Uri"];
 
@@ -61,9 +61,9 @@ namespace ART.Seguranca.DistributedServices
             client.Dispose();
         }
 
-        public async Task<IdentityUser> FindUser(string userName, string password)
+        public async Task<ApplicationUser> FindUser(string userName, string password)
         {
-            IdentityUser user = await _userManager.FindAsync(userName, password);
+            ApplicationUser user = await _userManager.FindAsync(userName, password);
 
             return user;
         }
@@ -120,14 +120,14 @@ namespace ART.Seguranca.DistributedServices
              return  _ctx.RefreshTokens.ToList();
         }
 
-        public async Task<IdentityUser> FindAsync(UserLoginInfo loginInfo)
+        public async Task<ApplicationUser> FindAsync(UserLoginInfo loginInfo)
         {
-            IdentityUser user = await _userManager.FindAsync(loginInfo);
+            ApplicationUser user = await _userManager.FindAsync(loginInfo);
 
             return user;
         }
 
-        public async Task<IdentityResult> CreateAsync(IdentityUser user)
+        public async Task<IdentityResult> CreateAsync(ApplicationUser user)
         {
             var result = await _userManager.CreateAsync(user);
 

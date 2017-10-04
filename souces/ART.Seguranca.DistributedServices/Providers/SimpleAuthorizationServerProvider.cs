@@ -82,7 +82,7 @@ namespace ART.Seguranca.DistributedServices.Providers
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            IdentityUser user = null;
+            ApplicationUser user = null;
 
             using (AuthRepository _repo = new AuthRepository())
             {
