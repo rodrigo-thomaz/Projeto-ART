@@ -2,7 +2,6 @@
 
 namespace ART.MQ.DistributedServices
 {
-    using System.Configuration;
     using System.Threading;
     using System.Web.Http;
 
@@ -20,6 +19,7 @@ namespace ART.MQ.DistributedServices
     using Owin;
 
     using RabbitMQ.Client;
+    using ART.Infra.CrossCutting.MQ;
 
     public class Startup
     {
@@ -45,30 +45,9 @@ namespace ART.MQ.DistributedServices
             AutoMapperConfig.RegisterMappings();
 
             // Make the autofac container
-            var builder = new ContainerBuilder();
+            var builder = new ContainerBuilder();           
 
-            // Register your Bus
-            builder.Register(c =>
-            {
-                var hostName = ConfigurationManager.AppSettings["RabbitMQHostName"];
-                var virtualHost = ConfigurationManager.AppSettings["RabbitMQVirtualHost"];
-                var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
-                var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
-
-                var factory = new ConnectionFactory();
-
-                factory.UserName = username;
-                factory.Password = password;
-                factory.VirtualHost = virtualHost;
-                factory.HostName = hostName;
-
-                IConnection conn = factory.CreateConnection();
-
-                return conn;
-            })
-                .As<IConnection>()
-                .SingleInstance();
-
+            builder.RegisterModule<MQModule>();
             builder.RegisterModule<ProducerModule>();
 
             // Register anything else you might need...

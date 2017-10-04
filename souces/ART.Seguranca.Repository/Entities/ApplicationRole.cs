@@ -2,8 +2,9 @@
 {
     using System;
 
-    using Microsoft.AspNet.Identity.EntityFramework;
     using ART.Infra.CrossCutting.Repository;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public class ApplicationRole : IdentityRole<Guid, ApplicationUserRole>, IEntity<Guid>
     {

@@ -172,6 +172,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Seguranca.Domain\ART.Seguranca.Domain.csproj">
       <Project>{1563f63a-c65e-44d0-8a7f-e4334603a174}</Project>
       <Name>ART.Seguranca.Domain</Name>

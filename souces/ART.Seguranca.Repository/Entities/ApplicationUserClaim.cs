@@ -3,9 +3,8 @@
     using System;
 
     using Microsoft.AspNet.Identity.EntityFramework;
-    using ART.Infra.CrossCutting.Repository;
 
-    public class ApplicationUserClaim : IdentityUserClaim<Guid> 
+    public class ApplicationUserClaim : IdentityUserClaim<Guid>
     {
     }
 }

@@ -25,6 +25,11 @@
             get; set;
         }
 
+        public DbSet<ApplicationUser> ApplicationUser
+        {
+            get; set;
+        }
+
         public DbSet<DSFamilyTempSensor> DSFamilyTempSensor
         {
             get; set;
@@ -51,11 +56,6 @@
         }
 
         public DbSet<ThermometerDevice> ThermometerDevice
-        {
-            get; set;
-        }
-
-        public DbSet<ApplicationUser> ApplicationUser
         {
             get; set;
         }

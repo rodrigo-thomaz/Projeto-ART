@@ -153,6 +153,10 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.WebApi\ART.Infra.CrossCutting.WebApi.csproj">
       <Project>{0dbc73ae-9f5c-4a58-bb8a-3864bf4a5832}</Project>
       <Name>ART.Infra.CrossCutting.WebApi</Name>

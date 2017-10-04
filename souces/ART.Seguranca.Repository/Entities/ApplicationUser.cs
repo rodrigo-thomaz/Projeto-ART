@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    using Microsoft.AspNet.Identity.EntityFramework;
     using ART.Infra.CrossCutting.Repository;
+
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public class ApplicationUser : IdentityUser<Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IEntity<Guid>
     {

@@ -22,6 +22,9 @@ namespace ART.Seguranca.DistributedServices
 
     using Owin;
 
+    using RabbitMQ.Client;
+    using ART.Infra.CrossCutting.MQ;
+
     public class Startup
     {
         #region Properties
@@ -62,6 +65,7 @@ namespace ART.Seguranca.DistributedServices
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
+            builder.RegisterModule<MQModule>();
 
             // Register Providers
             builder.RegisterType<FacebookAuthProvider>();
@@ -74,7 +78,7 @@ namespace ART.Seguranca.DistributedServices
             builder.RegisterApiControllers(typeof(AccountController).Assembly);
             builder.RegisterApiControllers(typeof(OrdersController).Assembly);
             builder.RegisterApiControllers(typeof(RefreshTokensController).Assembly);
-
+            
             // Build the container
             var container = builder.Build();
 
@@ -91,13 +95,15 @@ namespace ART.Seguranca.DistributedServices
             app.UseAutofacWebApi(config);
             app.UseWebApi(config);
 
+            var connection = container.Resolve<IConnection>();
+
             var properties = new AppProperties(app.Properties);
 
             if (properties.OnAppDisposing != CancellationToken.None)
             {
                 properties.OnAppDisposing.Register(() =>
                 {
-                    //connection.Close(30);
+                    connection.Close(30);
                 });
             }
         }
