@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace ART.Seguranca.DistributedServices.Entities
 {
-    public class ApplicationUser : IdentityUser<Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    public class Application
     {
         #region Primitive Properties
 
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
 
         #endregion
 

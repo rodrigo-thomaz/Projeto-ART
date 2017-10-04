@@ -1,8 +1,7 @@
 namespace ART.Seguranca.DistributedServices.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddApplicationTables : DbMigration
     {
         public override void Up()

@@ -17,20 +17,26 @@ namespace ART.Data.Repository
 
         #endregion
 
+        #region private voids
+
         private void Initialize()
         {
             Configuration.ValidateOnSaveEnabled = true;
         }
 
+        #endregion
+
+        #region protected voids
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             //Conventions
 
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();            
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             //Configurations
 
-            modelBuilder.Configurations.Add(new DeviceBaseConfiguration());            
+            modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());
             modelBuilder.Configurations.Add(new ESPDeviceBaseConfiguration());
@@ -47,7 +53,11 @@ namespace ART.Data.Repository
 
             base.OnModelCreating(modelBuilder);
         }
-                
+
+        #endregion
+
+        #region public voids
+
         public DbSet<DSFamilyTempSensor> DSFamilyTempSensor { get; set; }
         public DbSet<DSFamilyTempSensorResolution> DSFamilyTempSensorResolution { get; set; }
         public DbSet<SensorsInDevice> SensorsInDevice { get; set; }
@@ -56,6 +66,8 @@ namespace ART.Data.Repository
         public DbSet<TemperatureScale> TemperatureScale { get; set; }
         public DbSet<ThermometerDevice> ThermometerDevice { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<UserInApplication> UserInApplication { get; set; }
+        public DbSet<UserInApplication> UserInApplication { get; set; } 
+
+        #endregion
     }
 }
