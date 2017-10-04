@@ -49,7 +49,7 @@ namespace ART.Seguranca.DistributedServices
         {
             HttpConfiguration config = new HttpConfiguration();
 
-            ConfigureOAuth(app);
+            //ConfigureOAuth(app);
 
             WebApiConfig.Register(config);
 
@@ -60,6 +60,12 @@ namespace ART.Seguranca.DistributedServices
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
+
+            // Register Providers
+            builder.RegisterType<FacebookAuthProvider>();
+            builder.RegisterType<GoogleAuthProvider>();
+            builder.RegisterType<SimpleAuthorizationServerProvider>();
+            builder.RegisterType<SimpleRefreshTokenProvider>();
 
             // Register anything else you might need...
             //builder.RegisterApiControllers();
@@ -78,6 +84,7 @@ namespace ART.Seguranca.DistributedServices
             // and finally the standard Web API middleware.
 
             app.UseAutofacMiddleware(container);
+            ConfigureOAuth(app, container);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseAutofacWebApi(config);
             app.UseWebApi(config);
@@ -93,19 +100,24 @@ namespace ART.Seguranca.DistributedServices
             }
         }
 
-        public void ConfigureOAuth(IAppBuilder app)
+        public void ConfigureOAuth(IAppBuilder app, IContainer container)
         {
             //use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseExternalSignInCookie(Microsoft.AspNet.Identity.DefaultAuthenticationTypes.ExternalCookie);
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
+
+            var facebookAuthProvider = container.Resolve<FacebookAuthProvider>();
+            var googleAuthProvider = container.Resolve<GoogleAuthProvider>();
+            var simpleAuthorizationServerProvider = container.Resolve<SimpleAuthorizationServerProvider>();
+            var simpleRefreshTokenProvider = container.Resolve<SimpleRefreshTokenProvider>();
 
             OAuthAuthorizationServerOptions OAuthServerOptions = new OAuthAuthorizationServerOptions() {
 
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
-                Provider = new SimpleAuthorizationServerProvider(),
-                RefreshTokenProvider = new SimpleRefreshTokenProvider()
+                Provider = simpleAuthorizationServerProvider,
+                RefreshTokenProvider = simpleRefreshTokenProvider
             };
 
             // Token Generation
@@ -117,7 +129,7 @@ namespace ART.Seguranca.DistributedServices
             {
                 ClientId = "xxxxxx",
                 ClientSecret = "xxxxxx",
-                Provider = new GoogleAuthProvider()
+                Provider = googleAuthProvider
             };
             app.UseGoogleAuthentication(googleAuthOptions);
 
@@ -126,7 +138,7 @@ namespace ART.Seguranca.DistributedServices
             {
                 AppId = "xxxxxx",
                 AppSecret = "xxxxxx",
-                Provider = new FacebookAuthProvider()
+                Provider = facebookAuthProvider
             };
             app.UseFacebookAuthentication(facebookAuthOptions);
         }

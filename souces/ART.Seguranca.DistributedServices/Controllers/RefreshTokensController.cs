@@ -1,4 +1,4 @@
-﻿using ART.Seguranca.Repository.Repositories;
+﻿using ART.Seguranca.Domain.Interfaces;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -8,18 +8,18 @@ namespace ART.Seguranca.DistributedServices.Controllers
     public class RefreshTokensController : ApiController
     {
 
-        private AuthRepository _repo = null;
+        private readonly IAuthDomain _authDomain;
 
-        public RefreshTokensController()
+        public RefreshTokensController(IAuthDomain authDomain)
         {
-            _repo = new AuthRepository();
+            _authDomain = authDomain;
         }
 
         [Authorize(Users="Admin")]
         [Route("")]
         public IHttpActionResult Get()
         {
-            return Ok(_repo.GetAllRefreshTokens());
+            return Ok(_authDomain.GetAllRefreshTokens());
         }
 
         //[Authorize(Users = "Admin")]
@@ -27,7 +27,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
         [Route("")]
         public async Task<IHttpActionResult> Delete(string tokenId)
         {
-            var result = await _repo.RemoveRefreshToken(tokenId);
+            var result = await _authDomain.RemoveRefreshToken(tokenId);
             if (result)
             {
                 return Ok();
@@ -40,7 +40,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
         {
             if (disposing)
             {
-                _repo.Dispose();
+                _authDomain.Dispose();
             }
 
             base.Dispose(disposing);

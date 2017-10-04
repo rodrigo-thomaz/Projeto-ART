@@ -2,6 +2,7 @@
 {
     using ART.Seguranca.Repository.Interfaces;
     using ART.Seguranca.Repository.Repositories;
+
     using Autofac;
 
     public class RepositoryModule : Module
