@@ -1,4 +1,6 @@
-﻿using ART.Seguranca.DistributedServices.Entities;
+﻿using ART.Seguranca.Repository;
+using ART.Seguranca.Repository.Entities;
+using ART.Seguranca.Repository.Repositories;
 using Microsoft.Owin.Security.Infrastructure;
 using System;
 using System.Threading.Tasks;

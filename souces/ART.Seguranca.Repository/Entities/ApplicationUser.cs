@@ -1,4 +1,4 @@
-﻿namespace ART.Seguranca.DistributedServices.Entities
+﻿namespace ART.Seguranca.Repository.Entities
 {
     using System;
     using System.Collections.Generic;

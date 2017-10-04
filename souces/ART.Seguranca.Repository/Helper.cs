@@ -1,4 +1,4 @@
-﻿namespace ART.Seguranca.DistributedServices
+﻿namespace ART.Seguranca.Repository
 {
     using System;
     using System.Security.Cryptography;

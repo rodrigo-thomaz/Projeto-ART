@@ -1,27 +1,28 @@
-﻿namespace ART.Seguranca.DistributedServices.Entities
+﻿namespace ART.Seguranca.Repository.Entities
 {
     using System;
+    using System.Collections.Generic;
 
-    public class UsersInApplication
+    public class Application
     {
         #region Properties
 
-        public Application Application
+        public string Description
         {
             get; set;
         }
 
-        public Guid ApplicationId
+        public Guid Id
         {
             get; set;
         }
 
-        public ApplicationUser User
+        public string Name
         {
             get; set;
         }
 
-        public Guid UserId
+        public ICollection<UsersInApplication> UsersInApplication
         {
             get; set;
         }

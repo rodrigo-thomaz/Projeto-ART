@@ -1,4 +1,4 @@
-namespace ART.Seguranca.DistributedServices.Migrations
+namespace ART.Seguranca.Repository.Migrations
 {
     using System.Data.Entity.Migrations;
 

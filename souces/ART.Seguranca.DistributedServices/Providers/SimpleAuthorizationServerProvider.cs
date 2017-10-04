@@ -1,4 +1,6 @@
-﻿using ART.Seguranca.DistributedServices.Entities;
+﻿using ART.Seguranca.Repository;
+using ART.Seguranca.Repository.Entities;
+using ART.Seguranca.Repository.Repositories;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using System.Collections.Generic;
@@ -42,7 +44,7 @@ namespace ART.Seguranca.DistributedServices.Providers
                 return Task.FromResult<object>(null);
             }
 
-            if (client.ApplicationType == Models.ApplicationTypes.NativeConfidential)
+            if (client.ApplicationType == ApplicationTypes.NativeConfidential)
             {
                 if (string.IsNullOrWhiteSpace(clientSecret))
                 {

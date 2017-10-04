@@ -33,7 +33,21 @@
     <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,10 +57,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthContext.cs" />
+    <Compile Include="Configurations\ApplicationConfiguration.cs" />
+    <Compile Include="Configurations\UsersInApplicationConfiguration.cs" />
+    <Compile Include="Entities\Application.cs" />
+    <Compile Include="Entities\ApplicationRole.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\ApplicationUserClaim.cs" />
+    <Compile Include="Entities\ApplicationUserLogin.cs" />
+    <Compile Include="Entities\ApplicationUserRole.cs" />
+    <Compile Include="Entities\Client.cs" />
+    <Compile Include="Entities\ApplicationTypes.cs" />
+    <Compile Include="Entities\RefreshToken.cs" />
+    <Compile Include="Entities\UsersInApplication.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.cs" />
+    <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.Designer.cs">
+      <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710041156292_AddApplicationUser.cs" />
+    <Compile Include="Migrations\201710041156292_AddApplicationUser.Designer.cs">
+      <DependentUpon>201710041156292_AddApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710041219211_AddApplicationTables.cs" />
+    <Compile Include="Migrations\201710041219211_AddApplicationTables.Designer.cs">
+      <DependentUpon>201710041219211_AddApplicationTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710041254016_AddTableApplication.cs" />
+    <Compile Include="Migrations\201710041254016_AddTableApplication.Designer.cs">
+      <DependentUpon>201710041254016_AddTableApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AuthRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.resx">
+      <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710041156292_AddApplicationUser.resx">
+      <DependentUpon>201710041156292_AddApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710041219211_AddApplicationTables.resx">
+      <DependentUpon>201710041219211_AddApplicationTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710041254016_AddTableApplication.resx">
+      <DependentUpon>201710041254016_AddTableApplication.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

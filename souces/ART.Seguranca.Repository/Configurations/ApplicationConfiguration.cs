@@ -1,10 +1,10 @@
-﻿namespace ART.Seguranca.DistributedServices.Configurations
+﻿namespace ART.Seguranca.Repository.Configurations
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
-    using ART.Seguranca.DistributedServices.Entities;
+    using ART.Seguranca.Repository.Entities;
 
     public class ApplicationConfiguration : EntityTypeConfiguration<Application>
     {

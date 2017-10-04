@@ -1,5 +1,4 @@
-﻿using ART.Seguranca.DistributedServices.Entities;
-using ART.Seguranca.DistributedServices.Models;
+﻿using ART.Seguranca.Repository.Entities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -11,7 +10,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ART.Seguranca.DistributedServices
+namespace ART.Seguranca.Repository.Repositories
 {
 
     public class AuthRepository : IDisposable
@@ -26,14 +25,14 @@ namespace ART.Seguranca.DistributedServices
             _userManager = new UserManager<ApplicationUser, Guid>(new UserStore<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>(_ctx));
         }
 
-        public async Task<IdentityResult> RegisterUser(UserModel userModel)
+        public async Task<IdentityResult> RegisterUser(string userName, string password)
         {
             ApplicationUser user = new ApplicationUser
             {
-                UserName = userModel.UserName
+                UserName = userName
             };
 
-            var result = await _userManager.CreateAsync(user, userModel.Password);
+            var result = await _userManager.CreateAsync(user, password);
 
             await InsertUserInDomotica(user);
 

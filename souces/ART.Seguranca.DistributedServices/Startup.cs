@@ -7,6 +7,8 @@ namespace ART.Seguranca.DistributedServices
     using System.Web.Http;
 
     using ART.Seguranca.DistributedServices.Providers;
+    using ART.Seguranca.Repository;
+    using ART.Seguranca.Repository.Migrations;
 
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Facebook;
@@ -47,7 +49,7 @@ namespace ART.Seguranca.DistributedServices
             WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Configuration>());
         }
 
         public void ConfigureOAuth(IAppBuilder app)

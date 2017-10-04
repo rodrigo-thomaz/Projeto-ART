@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using ART.Seguranca.Repository.Repositories;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace ART.Seguranca.DistributedServices.Controllers

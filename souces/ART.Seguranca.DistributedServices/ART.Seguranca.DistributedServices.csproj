@@ -140,41 +140,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="AuthContext.cs" />
-    <Compile Include="AuthRepository.cs" />
-    <Compile Include="Configurations\ApplicationConfiguration.cs" />
-    <Compile Include="Configurations\UsersInApplicationConfiguration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\RefreshTokensController.cs" />
-    <Compile Include="Entities\Application.cs" />
-    <Compile Include="Entities\ApplicationRole.cs" />
-    <Compile Include="Entities\ApplicationUser.cs" />
-    <Compile Include="Entities\ApplicationUserClaim.cs" />
-    <Compile Include="Entities\ApplicationUserLogin.cs" />
-    <Compile Include="Entities\ApplicationUserRole.cs" />
-    <Compile Include="Entities\Client.cs" />
-    <Compile Include="Entities\RefreshToken.cs" />
-    <Compile Include="Entities\UsersInApplication.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.cs" />
-    <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.Designer.cs">
-      <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710041156292_AddApplicationUser.cs" />
-    <Compile Include="Migrations\201710041156292_AddApplicationUser.Designer.cs">
-      <DependentUpon>201710041156292_AddApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710041219211_AddApplicationTables.cs" />
-    <Compile Include="Migrations\201710041219211_AddApplicationTables.Designer.cs">
-      <DependentUpon>201710041219211_AddApplicationTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710041254016_AddTableApplication.cs" />
-    <Compile Include="Migrations\201710041254016_AddTableApplication.Designer.cs">
-      <DependentUpon>201710041254016_AddTableApplication.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ExternalLoginModels.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -195,23 +163,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.resx">
-      <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710041156292_AddApplicationUser.resx">
-      <DependentUpon>201710041156292_AddApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710041219211_AddApplicationTables.resx">
-      <DependentUpon>201710041219211_AddApplicationTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710041254016_AddTableApplication.resx">
-      <DependentUpon>201710041254016_AddTableApplication.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ART.Seguranca.Repository\ART.Seguranca.Repository.csproj">
       <Project>{8916a744-9781-4863-bbe0-026221d74b41}</Project>

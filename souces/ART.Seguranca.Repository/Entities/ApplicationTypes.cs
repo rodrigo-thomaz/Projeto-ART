@@ -1,4 +1,4 @@
-﻿namespace ART.Seguranca.DistributedServices.Models
+﻿namespace ART.Seguranca.Repository.Entities
 {
     #region Enumerations
 

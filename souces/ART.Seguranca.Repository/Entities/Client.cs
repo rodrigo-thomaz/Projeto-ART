@@ -1,8 +1,6 @@
-﻿namespace ART.Seguranca.DistributedServices.Entities
+﻿namespace ART.Seguranca.Repository.Entities
 {
     using System.ComponentModel.DataAnnotations;
-
-    using ART.Seguranca.DistributedServices.Models;
 
     public class Client
     {

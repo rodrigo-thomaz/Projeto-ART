@@ -1,11 +1,11 @@
-﻿namespace ART.Seguranca.DistributedServices
+﻿namespace ART.Seguranca.Repository
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.ModelConfiguration.Conventions;
 
-    using ART.Seguranca.DistributedServices.Configurations;
-    using ART.Seguranca.DistributedServices.Entities;
+    using ART.Seguranca.Repository.Configurations;
+    using ART.Seguranca.Repository.Entities;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 

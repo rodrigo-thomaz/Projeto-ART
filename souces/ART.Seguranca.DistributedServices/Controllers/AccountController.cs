@@ -1,6 +1,7 @@
-﻿using ART.Seguranca.DistributedServices.Entities;
-using ART.Seguranca.DistributedServices.Models;
+﻿using ART.Seguranca.DistributedServices.Models;
 using ART.Seguranca.DistributedServices.Results;
+using ART.Seguranca.Repository.Entities;
+using ART.Seguranca.Repository.Repositories;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -41,7 +42,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return BadRequest(ModelState);
             }
 
-             IdentityResult result = await _repo.RegisterUser(userModel);
+             IdentityResult result = await _repo.RegisterUser(userModel.UserName, userModel.Password);
 
              IHttpActionResult errorResult = GetErrorResult(result);
 
