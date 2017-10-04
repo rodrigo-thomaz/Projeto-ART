@@ -3,23 +3,24 @@
 namespace ART.Seguranca.DistributedServices
 {
     using System;
+    using System.Threading;
     using System.Web.Http;
 
+    using ART.Seguranca.DistributedServices.Controllers;
     using ART.Seguranca.DistributedServices.Providers;
+    using ART.Seguranca.Domain;
+    using ART.Seguranca.Repository;
+
+    using Autofac;
+    using Autofac.Integration.WebApi;
 
     using Microsoft.Owin;
+    using Microsoft.Owin.BuilderProperties;
     using Microsoft.Owin.Security.Facebook;
     using Microsoft.Owin.Security.Google;
     using Microsoft.Owin.Security.OAuth;
 
     using Owin;
-    using Autofac;
-    using Autofac.Integration.WebApi;
-    using ART.Seguranca.DistributedServices.Controllers;
-    using Microsoft.Owin.BuilderProperties;
-    using System.Threading;
-    using ART.Seguranca.Domain;
-    using ART.Seguranca.Repository;
 
     public class Startup
     {

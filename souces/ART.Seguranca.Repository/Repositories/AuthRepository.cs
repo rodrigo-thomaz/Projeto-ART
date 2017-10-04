@@ -1,4 +1,5 @@
 ﻿using ART.Seguranca.Repository.Entities;
+using ART.Seguranca.Repository.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 namespace ART.Seguranca.Repository.Repositories
 {
 
-    public class AuthRepository : IDisposable
+    public class AuthRepository : IDisposable, IAuthRepository
     {
         private AuthContext _ctx;
 
