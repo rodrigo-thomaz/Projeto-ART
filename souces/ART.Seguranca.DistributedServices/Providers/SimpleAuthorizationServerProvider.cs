@@ -1,6 +1,7 @@
-﻿using ART.Seguranca.Repository;
+﻿using ART.Seguranca.Domain.Interfaces;
+using ART.Seguranca.Repository;
 using ART.Seguranca.Repository.Entities;
-using ART.Seguranca.Repository.Repositories;
+using Autofac;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using System.Collections.Generic;
@@ -12,6 +13,13 @@ namespace ART.Seguranca.DistributedServices.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {
+        private readonly IComponentContext _container;
+
+        public SimpleAuthorizationServerProvider(IComponentContext container)
+        {
+            _container = container;            
+        }
+
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
 
@@ -33,9 +41,9 @@ namespace ART.Seguranca.DistributedServices.Providers
                 return Task.FromResult<object>(null);
             }
 
-            using (AuthRepository _repo = new AuthRepository())
+            using (var authDomain = _container.Resolve<IAuthDomain>())
             {
-                client = _repo.FindClient(context.ClientId);
+                client = authDomain.FindClient(context.ClientId);
             }
 
             if (client == null)
@@ -85,9 +93,9 @@ namespace ART.Seguranca.DistributedServices.Providers
 
             ApplicationUser user = null;
 
-            using (AuthRepository _repo = new AuthRepository())
+            using (var authDomain = _container.Resolve<IAuthDomain>())
             {
-                user = await _repo.FindUser(context.UserName, context.Password);
+                user = await authDomain.FindUser(context.UserName, context.Password);
 
                 if (user == null)
                 {
