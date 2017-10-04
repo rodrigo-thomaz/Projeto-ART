@@ -18,12 +18,12 @@ namespace ART.Seguranca.DistributedServices
     {
         private AuthContext _ctx;
 
-        private UserManager<ApplicationUser> _userManager;
+        private UserManager<ApplicationUser, Guid> _userManager;
 
         public AuthRepository()
         {
             _ctx = new AuthContext();
-            _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_ctx));
+            _userManager = new UserManager<ApplicationUser, Guid>(new UserStore<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>(_ctx));
         }
 
         public async Task<IdentityResult> RegisterUser(UserModel userModel)
@@ -134,7 +134,7 @@ namespace ART.Seguranca.DistributedServices
             return result;
         }
 
-        public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
+        public async Task<IdentityResult> AddLoginAsync(Guid userId, UserLoginInfo login)
         {
             var result = await _userManager.AddLoginAsync(userId, login);
 

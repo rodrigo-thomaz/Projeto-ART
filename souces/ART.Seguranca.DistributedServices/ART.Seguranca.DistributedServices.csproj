@@ -130,7 +130,11 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\RefreshTokensController.cs" />
+    <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\ApplicationUserClaim.cs" />
+    <Compile Include="Entities\ApplicationUserLogin.cs" />
+    <Compile Include="Entities\ApplicationUserRole.cs" />
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\RefreshToken.cs" />
     <Compile Include="Helper.cs" />
@@ -141,6 +145,10 @@
     <Compile Include="Migrations\201710041156292_AddApplicationUser.cs" />
     <Compile Include="Migrations\201710041156292_AddApplicationUser.Designer.cs">
       <DependentUpon>201710041156292_AddApplicationUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710041219211_AddApplicationTables.cs" />
+    <Compile Include="Migrations\201710041219211_AddApplicationTables.Designer.cs">
+      <DependentUpon>201710041219211_AddApplicationTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Enums.cs" />
@@ -173,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710041156292_AddApplicationUser.resx">
       <DependentUpon>201710041156292_AddApplicationUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710041219211_AddApplicationTables.resx">
+      <DependentUpon>201710041219211_AddApplicationTables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

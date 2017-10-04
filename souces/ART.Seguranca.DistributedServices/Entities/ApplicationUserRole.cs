@@ -3,7 +3,7 @@ using System;
 
 namespace ART.Seguranca.DistributedServices.Entities
 {
-    public class ApplicationUser : IdentityUser<Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    public class ApplicationUserRole : IdentityUserRole<Guid>
     {
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ART.Seguranca.DistributedServices.Entities;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using System.Collections.Generic;
@@ -99,7 +98,7 @@ namespace ART.Seguranca.DistributedServices.Providers
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
             identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("userId", user.Id));
+            identity.AddClaim(new Claim("userId", user.Id.ToString()));
 
             var props = new AuthenticationProperties(new Dictionary<string, string>
                 {
