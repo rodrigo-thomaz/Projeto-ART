@@ -58,6 +58,8 @@ namespace ART.Seguranca.DistributedServices
             // Make the autofac container
             var builder = new ContainerBuilder();
 
+            builder.RegisterType<AuthContext>().InstancePerDependency();
+
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
 

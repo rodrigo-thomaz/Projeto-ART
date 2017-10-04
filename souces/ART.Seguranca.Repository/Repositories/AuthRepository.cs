@@ -16,14 +16,14 @@ namespace ART.Seguranca.Repository.Repositories
 
     public class AuthRepository : IDisposable, IAuthRepository
     {
-        private AuthContext _ctx;
+        private readonly AuthContext _authContext;
 
         private UserManager<ApplicationUser, Guid> _userManager;
 
-        public AuthRepository()
+        public AuthRepository(AuthContext authContext)
         {
-            _ctx = new AuthContext();
-            _userManager = new UserManager<ApplicationUser, Guid>(new UserStore<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>(_ctx));
+            _authContext = authContext;
+            _userManager = new UserManager<ApplicationUser, Guid>(new UserStore<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>(_authContext));
         }
 
         public async Task<IdentityResult> RegisterUser(string userName, string password)
@@ -70,7 +70,7 @@ namespace ART.Seguranca.Repository.Repositories
 
         public Client FindClient(string clientId)
         {
-            var client = _ctx.Clients.Find(clientId);
+            var client = _authContext.Clients.Find(clientId);
 
             return client;
         }
@@ -78,25 +78,25 @@ namespace ART.Seguranca.Repository.Repositories
         public async Task<bool> AddRefreshToken(RefreshToken token)
         {
 
-           var existingToken = _ctx.RefreshTokens.Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId).SingleOrDefault();
+           var existingToken = _authContext.RefreshTokens.Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId).SingleOrDefault();
 
            if (existingToken != null)
            {
              var result = await RemoveRefreshToken(existingToken);
            }
           
-            _ctx.RefreshTokens.Add(token);
+            _authContext.RefreshTokens.Add(token);
 
-            return await _ctx.SaveChangesAsync() > 0;
+            return await _authContext.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> RemoveRefreshToken(string refreshTokenId)
         {
-           var refreshToken = await _ctx.RefreshTokens.FindAsync(refreshTokenId);
+           var refreshToken = await _authContext.RefreshTokens.FindAsync(refreshTokenId);
 
            if (refreshToken != null) {
-               _ctx.RefreshTokens.Remove(refreshToken);
-               return await _ctx.SaveChangesAsync() > 0;
+               _authContext.RefreshTokens.Remove(refreshToken);
+               return await _authContext.SaveChangesAsync() > 0;
            }
 
            return false;
@@ -104,20 +104,20 @@ namespace ART.Seguranca.Repository.Repositories
 
         public async Task<bool> RemoveRefreshToken(RefreshToken refreshToken)
         {
-            _ctx.RefreshTokens.Remove(refreshToken);
-             return await _ctx.SaveChangesAsync() > 0;
+            _authContext.RefreshTokens.Remove(refreshToken);
+             return await _authContext.SaveChangesAsync() > 0;
         }
 
         public async Task<RefreshToken> FindRefreshToken(string refreshTokenId)
         {
-            var refreshToken = await _ctx.RefreshTokens.FindAsync(refreshTokenId);
+            var refreshToken = await _authContext.RefreshTokens.FindAsync(refreshTokenId);
 
             return refreshToken;
         }
 
         public List<RefreshToken> GetAllRefreshTokens()
         {
-             return  _ctx.RefreshTokens.ToList();
+             return  _authContext.RefreshTokens.ToList();
         }
 
         public async Task<ApplicationUser> FindAsync(UserLoginInfo loginInfo)
@@ -143,7 +143,7 @@ namespace ART.Seguranca.Repository.Repositories
 
         public void Dispose()
         {
-            _ctx.Dispose();
+            _authContext.Dispose();
             _userManager.Dispose();
 
         }
