@@ -212,6 +212,12 @@
       <DependentUpon>201710041254016_AddTableApplication.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Seguranca.Repository\ART.Seguranca.Repository.csproj">
+      <Project>{8916a744-9781-4863-bbe0-026221d74b41}</Project>
+      <Name>ART.Seguranca.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
