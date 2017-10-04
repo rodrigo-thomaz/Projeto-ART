@@ -60,7 +60,7 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
             getResolutions();
         }
 
-
+        /////////////////////////////////////////////
         get('4ee0c742-b8a4-e711-9bee-707781d470bc');
     }  
 
