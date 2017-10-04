@@ -35,7 +35,7 @@ namespace ART.Seguranca.Repository.Repositories
 
             var result = await _userManager.CreateAsync(user, password);
 
-            await InsertUserInDomotica(user);
+            //await InsertUserInDomotica(user);
 
             return result;
         }

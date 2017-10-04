@@ -1,7 +1,7 @@
 ﻿using ART.Seguranca.DistributedServices.Models;
 using ART.Seguranca.DistributedServices.Results;
 using ART.Seguranca.Repository.Entities;
-using ART.Seguranca.Repository.Repositories;
+using ART.Seguranca.Repository.Interfaces;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -20,16 +20,16 @@ namespace ART.Seguranca.DistributedServices.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        private AuthRepository _repo = null;
+        private readonly IAuthRepository _authRepository;
 
         private IAuthenticationManager Authentication
         {
             get { return Request.GetOwinContext().Authentication; }
         }
 
-        public AccountController()
+        public AccountController(IAuthRepository authRepository)
         {
-            _repo = new AuthRepository();
+            _authRepository = authRepository;
         }
 
         // POST api/Account/Register
@@ -42,7 +42,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return BadRequest(ModelState);
             }
 
-             IdentityResult result = await _repo.RegisterUser(userModel.UserName, userModel.Password);
+             IdentityResult result = await _authRepository.RegisterUser(userModel.UserName, userModel.Password);
 
              IHttpActionResult errorResult = GetErrorResult(result);
 
@@ -93,7 +93,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return new ChallengeResult(provider, this);
             }
 
-            ApplicationUser user = await _repo.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
+            ApplicationUser user = await _authRepository.FindAsync(new UserLoginInfo(externalLogin.LoginProvider, externalLogin.ProviderKey));
 
             bool hasRegistered = user != null;
 
@@ -125,7 +125,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            ApplicationUser user = await _repo.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
+            ApplicationUser user = await _authRepository.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
 
             bool hasRegistered = user != null;
 
@@ -136,7 +136,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
 
             user = new ApplicationUser() { UserName = model.UserName };
 
-            IdentityResult result = await _repo.CreateAsync(user);
+            IdentityResult result = await _authRepository.CreateAsync(user);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -148,7 +148,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 Login = new UserLoginInfo(model.Provider, verifiedAccessToken.user_id)
             };
 
-            result = await _repo.AddLoginAsync(user.Id, info.Login);
+            result = await _authRepository.AddLoginAsync(user.Id, info.Login);
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);
@@ -177,7 +177,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return BadRequest("Invalid Provider or External Access Token");
             }
 
-            ApplicationUser user = await _repo.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
+            ApplicationUser user = await _authRepository.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
 
             bool hasRegistered = user != null;
 
@@ -197,7 +197,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
         {
             if (disposing)
             {
-                _repo.Dispose();
+                _authRepository.Dispose();
             }
 
             base.Dispose(disposing);
@@ -260,7 +260,7 @@ namespace ART.Seguranca.DistributedServices.Controllers
                 return "client_Id is required";
             }
 
-            var client = _repo.FindClient(clientId);
+            var client = _authRepository.FindClient(clientId);
 
             if (client == null)
             {

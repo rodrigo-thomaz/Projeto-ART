@@ -47,8 +47,8 @@ app.config(function ($routeProvider) {
 
 });
 
-//var segurancaDistributedServicesUri = 'http://localhost:26264/';
-var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
+var segurancaDistributedServicesUri = 'http://localhost:26264/';
+//var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
 var distributedServicesUri = 'http://localhost/ART.DistributedServices/';
 
 app.constant('ngAuthSettings', {

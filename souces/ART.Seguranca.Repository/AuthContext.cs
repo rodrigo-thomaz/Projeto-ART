@@ -51,6 +51,9 @@
             //Configurations
 
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationRoleConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationUserClaimConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new UsersInApplicationConfiguration());
 
             base.OnModelCreating(modelBuilder);

@@ -58,6 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthContext.cs" />
+    <Compile Include="Configurations\ApplicationRoleConfiguration.cs" />
+    <Compile Include="Configurations\ApplicationUserClaimConfiguration.cs" />
+    <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
     <Compile Include="Configurations\UsersInApplicationConfiguration.cs" />
     <Compile Include="Entities\Application.cs" />
@@ -71,21 +74,9 @@
     <Compile Include="Entities\RefreshToken.cs" />
     <Compile Include="Entities\UsersInApplication.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.cs" />
-    <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.Designer.cs">
-      <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710041156292_AddApplicationUser.cs" />
-    <Compile Include="Migrations\201710041156292_AddApplicationUser.Designer.cs">
-      <DependentUpon>201710041156292_AddApplicationUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710041219211_AddApplicationTables.cs" />
-    <Compile Include="Migrations\201710041219211_AddApplicationTables.Designer.cs">
-      <DependentUpon>201710041219211_AddApplicationTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710041254016_AddTableApplication.cs" />
-    <Compile Include="Migrations\201710041254016_AddTableApplication.Designer.cs">
-      <DependentUpon>201710041254016_AddTableApplication.cs</DependentUpon>
+    <Compile Include="Migrations\201710041605269_InitialCreate.cs" />
+    <Compile Include="Migrations\201710041605269_InitialCreate.Designer.cs">
+      <DependentUpon>201710041605269_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,19 +89,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.resx">
-      <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710041156292_AddApplicationUser.resx">
-      <DependentUpon>201710041156292_AddApplicationUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710041219211_AddApplicationTables.resx">
-      <DependentUpon>201710041219211_AddApplicationTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710041254016_AddTableApplication.resx">
-      <DependentUpon>201710041254016_AddTableApplication.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710041605269_InitialCreate.resx">
+      <DependentUpon>201710041605269_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
