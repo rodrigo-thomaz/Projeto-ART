@@ -1,8 +1,9 @@
 ﻿namespace ART.Data.Repository.Entities
 {
-    using ART.Infra.CrossCutting.Repository;
     using System;
     using System.Collections.Generic;
+
+    using ART.Infra.CrossCutting.Repository;
 
     public class Application : IEntity<Guid>
     {

@@ -4,8 +4,9 @@
     using System.Collections.Generic;
 
     using Microsoft.AspNet.Identity.EntityFramework;
+    using ART.Infra.CrossCutting.Repository;
 
-    public class ApplicationUser : IdentityUser<Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>
+    public class ApplicationUser : IdentityUser<Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IEntity<Guid>
     {
         #region Properties
 

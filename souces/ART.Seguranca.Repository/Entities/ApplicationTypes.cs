@@ -2,7 +2,7 @@
 {
     #region Enumerations
 
-    public enum ApplicationTypes
+    public enum ApplicationTypes : byte
     {
         JavaScript = 0,
         NativeConfidential = 1

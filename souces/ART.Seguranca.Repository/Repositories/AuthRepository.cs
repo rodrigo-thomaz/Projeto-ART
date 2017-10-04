@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace ART.Seguranca.Repository.Repositories
 {
 
-    public class AuthRepository : IDisposable, IAuthRepository
+    public class AuthRepository : IAuthRepository
     {
         private readonly AuthContext _authContext;
 

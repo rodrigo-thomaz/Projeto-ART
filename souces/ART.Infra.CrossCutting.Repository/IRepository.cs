@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
 
     public interface IRepository<TDbContext, TEntity, TKey>
-
         where TDbContext : DbContext
         where TEntity : IEntity<TKey>
         where TKey : struct

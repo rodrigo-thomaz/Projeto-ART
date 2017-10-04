@@ -1,9 +1,10 @@
 ﻿namespace ART.Seguranca.Repository.Entities
 {
+    using ART.Infra.CrossCutting.Repository;
     using System;
     using System.Collections.Generic;
 
-    public class Application
+    public class Application : IEntity<Guid>
     {
         #region Properties
 
