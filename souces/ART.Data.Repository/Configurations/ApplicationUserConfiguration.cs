@@ -5,11 +5,11 @@
 
     using ART.Data.Repository.Entities;
 
-    public class UserConfiguration : EntityTypeConfiguration<User>
+    public class ApplicationUserConfiguration : EntityTypeConfiguration<ApplicationUser>
     {
         #region Constructors
 
-        public UserConfiguration()
+        public ApplicationUserConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);

@@ -9,7 +9,7 @@
     {
         #region Properties
 
-        public ICollection<HardwareInApplication> HardwaresInApplication
+        public ICollection<HardwaresInApplication> HardwaresInApplication
         {
             get; set;
         }

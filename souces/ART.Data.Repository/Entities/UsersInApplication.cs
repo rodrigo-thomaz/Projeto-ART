@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class UserInApplication
+    public class UsersInApplication
     {
         #region Properties
 
@@ -16,7 +16,7 @@
             get; set;
         }
 
-        public User User
+        public ApplicationUser ApplicationUser
         {
             get; set;
         }

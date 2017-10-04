@@ -4,11 +4,11 @@
 
     using ART.Data.Repository.Entities;
 
-    public class UserInApplicationConfiguration : EntityTypeConfiguration<UserInApplication>
+    public class UsersInApplicationConfiguration : EntityTypeConfiguration<UsersInApplication>
     {
         #region Constructors
 
-        public UserInApplicationConfiguration()
+        public UsersInApplicationConfiguration()
         {
             //Primary Keys
             HasKey(x => new
@@ -18,7 +18,7 @@
             });
 
             //Foreing Keys
-            HasRequired(x => x.User)
+            HasRequired(x => x.ApplicationUser)
                 .WithMany(x => x.UsersInApplication)
                 .HasForeignKey(x => x.UserId)
                 .WillCascadeOnDelete(false);

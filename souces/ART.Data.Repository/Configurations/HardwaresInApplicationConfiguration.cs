@@ -5,11 +5,11 @@
 
     using ART.Data.Repository.Entities;
 
-    public class HardwareInApplicationConfiguration : EntityTypeConfiguration<HardwareInApplication>
+    public class HardwaresInApplicationConfiguration : EntityTypeConfiguration<HardwaresInApplication>
     {
         #region Constructors
 
-        public HardwareInApplicationConfiguration()
+        public HardwaresInApplicationConfiguration()
         {
             //Primary Keys
             HasKey(x => new

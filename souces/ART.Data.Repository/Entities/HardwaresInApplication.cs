@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class HardwareInApplication
+    public class HardwaresInApplication
     {
         #region Properties
 

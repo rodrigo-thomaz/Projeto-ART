@@ -57,28 +57,28 @@
     <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
-    <Compile Include="Configurations\HardwareInApplicationConfiguration.cs" />
+    <Compile Include="Configurations\HardwaresInApplicationConfiguration.cs" />
     <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorBaseConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
     <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
     <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
-    <Compile Include="Configurations\UserConfiguration.cs" />
-    <Compile Include="Configurations\UserInApplicationConfiguration.cs" />
+    <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
+    <Compile Include="Configurations\UsersInApplicationConfiguration.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
     <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
     <Compile Include="Entities\ESPDeviceBase.cs" />
     <Compile Include="Entities\HardwareBase.cs" />
-    <Compile Include="Entities\HardwareInApplication.cs" />
+    <Compile Include="Entities\HardwaresInApplication.cs" />
     <Compile Include="Entities\RaspberryDeviceBase.cs" />
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ThermometerDevice.cs" />
-    <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\UserInApplication.cs" />
+    <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\UsersInApplication.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
     <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201710040301291_RenameSpaceToApplication.cs" />
     <Compile Include="Migrations\201710040301291_RenameSpaceToApplication.Designer.cs">
       <DependentUpon>201710040301291_RenameSpaceToApplication.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710042138597_BugPlurais.cs" />
+    <Compile Include="Migrations\201710042138597_BugPlurais.Designer.cs">
+      <DependentUpon>201710042138597_BugPlurais.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -130,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710040301291_RenameSpaceToApplication.resx">
       <DependentUpon>201710040301291_RenameSpaceToApplication.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710042138597_BugPlurais.resx">
+      <DependentUpon>201710042138597_BugPlurais.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

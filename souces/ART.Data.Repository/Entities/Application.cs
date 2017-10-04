@@ -14,7 +14,7 @@
             get; set;
         }
 
-        public ICollection<HardwareInApplication> HardwaresInApplication
+        public ICollection<HardwaresInApplication> HardwaresInApplication
         {
             get; set;
         }
@@ -29,7 +29,7 @@
             get; set;
         }
 
-        public ICollection<UserInApplication> UsersInApplication
+        public ICollection<UsersInApplication> UsersInApplication
         {
             get; set;
         }

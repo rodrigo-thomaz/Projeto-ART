@@ -235,9 +235,9 @@
 
             #endregion
 
-            #region HardwareInApplication
+            #region HardwaresInApplication
 
-            var hardwareInApplication1 = new HardwareInApplication
+            var hardwaresInApplication1 = new HardwaresInApplication
             {
                 HardwareBase = sensor1,
                 HardwareBaseId = sensor1.Id,
@@ -245,9 +245,9 @@
                 ApplicationId = space1.Id,
             };
 
-            context.HardwareInApplication.AddOrUpdate(hardwareInApplication1);
+            context.HardwaresInApplication.AddOrUpdate(hardwaresInApplication1);
 
-            var hardwareInApplication2 = new HardwareInApplication
+            var hardwaresInApplication2 = new HardwaresInApplication
             {
                 HardwareBase = sensor2,
                 HardwareBaseId = sensor2.Id,
@@ -255,7 +255,7 @@
                 ApplicationId = space2.Id,
             };
 
-            context.HardwareInApplication.AddOrUpdate(hardwareInApplication2);
+            context.HardwaresInApplication.AddOrUpdate(hardwaresInApplication2);
 
             context.SaveChanges();
 

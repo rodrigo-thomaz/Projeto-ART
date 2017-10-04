@@ -5,7 +5,7 @@
 
     using ART.Infra.CrossCutting.Repository;
 
-    public class User : IEntity<Guid>
+    public class ApplicationUser : IEntity<Guid>
     {
         #region Properties
 
@@ -14,7 +14,7 @@
             get; set;
         }
 
-        public ICollection<UserInApplication> UsersInApplication
+        public ICollection<UsersInApplication> UsersInApplication
         {
             get; set;
         }

@@ -35,7 +35,7 @@
             get; set;
         }
 
-        public DbSet<HardwareInApplication> HardwareInApplication
+        public DbSet<HardwaresInApplication> HardwaresInApplication
         {
             get; set;
         }
@@ -55,12 +55,12 @@
             get; set;
         }
 
-        public DbSet<User> User
+        public DbSet<ApplicationUser> ApplicationUser
         {
             get; set;
         }
 
-        public DbSet<UserInApplication> UserInApplication
+        public DbSet<UsersInApplication> UsersInApplication
         {
             get; set;
         }
@@ -85,12 +85,12 @@
             modelBuilder.Configurations.Add(new RaspberryDeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
-            modelBuilder.Configurations.Add(new HardwareInApplicationConfiguration());
+            modelBuilder.Configurations.Add(new HardwaresInApplicationConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
             modelBuilder.Configurations.Add(new ThermometerDeviceConfiguration());
-            modelBuilder.Configurations.Add(new UserConfiguration());
-            modelBuilder.Configurations.Add(new UserInApplicationConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
+            modelBuilder.Configurations.Add(new UsersInApplicationConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

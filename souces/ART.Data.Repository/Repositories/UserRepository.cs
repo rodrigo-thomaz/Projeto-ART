@@ -23,9 +23,9 @@ namespace ART.Data.Repository.Repositories
 
         #region public voids
 
-        public async Task Insert(User entity)
+        public async Task Insert(ApplicationUser entity)
         {
-            _context.User.Add(entity);
+            _context.ApplicationUser.Add(entity);
             await _context.SaveChangesAsync();
         }
 
