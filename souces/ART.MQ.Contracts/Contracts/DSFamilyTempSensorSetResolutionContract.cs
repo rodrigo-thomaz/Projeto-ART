@@ -2,7 +2,6 @@
 {
     using System;
 
-    [Serializable]
     public class DSFamilyTempSensorSetResolutionContract
     {
         #region Properties

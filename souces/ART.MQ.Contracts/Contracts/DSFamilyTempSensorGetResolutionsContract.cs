@@ -1,8 +1,5 @@
 ﻿namespace ART.MQ.Common.Contracts
 {
-    using System;
-
-    [Serializable]
     public class DSFamilyTempSensorGetResolutionsContract
     {
         #region Properties

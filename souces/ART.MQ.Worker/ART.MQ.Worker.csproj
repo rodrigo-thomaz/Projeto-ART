@@ -71,8 +71,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
+    <Compile Include="Consumers\ApplicationUserConsumer.cs" />
     <Compile Include="Consumers\TemperatureScaleConsumer.cs" />
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
     <Compile Include="Contracts\DeviceMessageContract.cs" />
@@ -104,6 +106,10 @@
     <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Common.csproj">
       <Project>{8c7dfa89-52d2-4907-b515-b3c776bcb12e}</Project>
       <Name>ART.MQ.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Seguranca.Contracts\ART.Seguranca.Contracts.csproj">
+      <Project>{9ECB14DD-14DE-4381-A592-AA812C81ED2D}</Project>
+      <Name>ART.Seguranca.Contracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

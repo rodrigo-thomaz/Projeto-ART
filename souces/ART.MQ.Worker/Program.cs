@@ -22,16 +22,17 @@
             var builder = new ContainerBuilder();
 
             builder.RegisterType<WorkerService>();
-                        
+
             builder.RegisterType<ARTDbContext>().InstancePerDependency();
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ConsumerModule>();
-            
+
             Mapper.Initialize(x =>
             {
+                x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new TemperatureScaleProfile());
             });

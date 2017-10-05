@@ -45,6 +45,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Infra.CrossCutting.Repo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Infra.CrossCutting.MQ", "ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj", "{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Seguranca.Contracts", "ART.Seguranca.Contracts\ART.Seguranca.Contracts.csproj", "{9ECB14DD-14DE-4381-A592-AA812C81ED2D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,6 +175,14 @@ Global
 		{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}.Release|x86.ActiveCfg = Release|Any CPU
 		{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}.Release|x86.Build.0 = Release|Any CPU
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D}.Debug|x86.Build.0 = Debug|Any CPU
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D}.Release|x86.ActiveCfg = Release|Any CPU
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +203,7 @@ Global
 		{1563F63A-C65E-44D0-8A7F-E4334603A174} = {8E88B799-436B-45D7-8FF6-BEAD7BDC1DF7}
 		{30CB9C47-5A6D-45D9-8667-DF6D1E4807EB} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
 		{EB5E2271-76A2-4CF1-942E-F04FB9D1056B} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
+		{9ECB14DD-14DE-4381-A592-AA812C81ED2D} = {8E88B799-436B-45D7-8FF6-BEAD7BDC1DF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7BF3A15-A6FC-4D4A-A446-4CF58FF70F7C}

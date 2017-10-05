@@ -5,6 +5,7 @@ namespace ART.MQ.DistributedServices
     using System.Threading;
     using System.Web.Http;
 
+    using ART.Infra.CrossCutting.MQ;
     using ART.MQ.DistributedServices.App_Start;
     using ART.MQ.DistributedServices.Controllers;
     using ART.MQ.DistributedServices.Modules;
@@ -19,7 +20,6 @@ namespace ART.MQ.DistributedServices
     using Owin;
 
     using RabbitMQ.Client;
-    using ART.Infra.CrossCutting.MQ;
 
     public class Startup
     {
@@ -45,7 +45,7 @@ namespace ART.MQ.DistributedServices
             AutoMapperConfig.RegisterMappings();
 
             // Make the autofac container
-            var builder = new ContainerBuilder();           
+            var builder = new ContainerBuilder();
 
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ProducerModule>();

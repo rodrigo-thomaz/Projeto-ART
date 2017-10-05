@@ -6,6 +6,7 @@ namespace ART.Seguranca.DistributedServices
     using System.Threading;
     using System.Web.Http;
 
+    using ART.Infra.CrossCutting.MQ;
     using ART.Seguranca.DistributedServices.Controllers;
     using ART.Seguranca.DistributedServices.Providers;
     using ART.Seguranca.Domain;
@@ -23,7 +24,6 @@ namespace ART.Seguranca.DistributedServices
     using Owin;
 
     using RabbitMQ.Client;
-    using ART.Infra.CrossCutting.MQ;
 
     public class Startup
     {
@@ -78,7 +78,7 @@ namespace ART.Seguranca.DistributedServices
             builder.RegisterApiControllers(typeof(AccountController).Assembly);
             builder.RegisterApiControllers(typeof(OrdersController).Assembly);
             builder.RegisterApiControllers(typeof(RefreshTokensController).Assembly);
-            
+
             // Build the container
             var container = builder.Build();
 

@@ -10,6 +10,8 @@
     using RabbitMQ.Client;
     using System.Configuration;
     using ART.Infra.CrossCutting.MQ;
+    using global::AutoMapper;
+    using ART.Seguranca.Contracts;
 
     public class AuthDomain : IAuthDomain
     {
@@ -76,12 +78,12 @@
 
             var identityResult = await _authRepository.RegisterUser(applicationUser, password);
 
-            await InsertUserInDomotica(applicationUser);
+            await SendRegisterUserToBroker(applicationUser);
 
             return identityResult;
         }
 
-        private async Task InsertUserInDomotica(ApplicationUser applicationUser)
+        private async Task SendRegisterUserToBroker(ApplicationUser applicationUser)
         {
             var model = _connection.CreateModel();
             var basicProperties = model.CreateBasicProperties();
@@ -97,7 +99,9 @@
 
             basicProperties.Persistent = true;
 
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(applicationUser);
+            var contract = Mapper.Map<ApplicationUser, ApplicationUserContract>(applicationUser);
+
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
 
             await Task.Run(() => model.BasicPublish("", queueName, null, payload));            
         }

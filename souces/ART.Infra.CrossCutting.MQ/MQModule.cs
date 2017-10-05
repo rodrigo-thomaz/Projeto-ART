@@ -1,8 +1,10 @@
 ﻿namespace ART.Infra.CrossCutting.MQ
 {
-    using Autofac;
-    using RabbitMQ.Client;
     using System.Configuration;
+
+    using Autofac;
+
+    using RabbitMQ.Client;
 
     public class MQModule : Module
     {

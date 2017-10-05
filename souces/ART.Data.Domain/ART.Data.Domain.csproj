@@ -51,7 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainModule.cs" />
+    <Compile Include="Interfaces\IApplicationUserDomain.cs" />
+    <Compile Include="Interfaces\IApplicationDomain.cs" />
     <Compile Include="Interfaces\ITemperatureScaleDomain.cs" />
+    <Compile Include="Services\ApplicationDomain.cs" />
+    <Compile Include="Services\ApplicationUserDomain.cs" />
     <Compile Include="Services\DSFamilyTempSensorDomain.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
