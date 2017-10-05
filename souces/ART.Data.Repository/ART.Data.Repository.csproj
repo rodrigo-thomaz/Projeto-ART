@@ -84,29 +84,13 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
     <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
-    <Compile Include="Migrations\201709290147410_InitialCreate.cs" />
-    <Compile Include="Migrations\201709290147410_InitialCreate.Designer.cs">
-      <DependentUpon>201709290147410_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201710050218518_InitialCreate.cs" />
+    <Compile Include="Migrations\201710050218518_InitialCreate.Designer.cs">
+      <DependentUpon>201710050218518_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710021852526_AddFieldsAlarm.cs" />
-    <Compile Include="Migrations\201710021852526_AddFieldsAlarm.Designer.cs">
-      <DependentUpon>201710021852526_AddFieldsAlarm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710022156402_AddTableSensorsInDevice.cs" />
-    <Compile Include="Migrations\201710022156402_AddTableSensorsInDevice.Designer.cs">
-      <DependentUpon>201710022156402_AddTableSensorsInDevice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710022226221_AddTableSensorsInDeviceIndex.cs" />
-    <Compile Include="Migrations\201710022226221_AddTableSensorsInDeviceIndex.Designer.cs">
-      <DependentUpon>201710022226221_AddTableSensorsInDeviceIndex.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710040301291_RenameSpaceToApplication.cs" />
-    <Compile Include="Migrations\201710040301291_RenameSpaceToApplication.Designer.cs">
-      <DependentUpon>201710040301291_RenameSpaceToApplication.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710042138597_BugPlurais.cs" />
-    <Compile Include="Migrations\201710042138597_BugPlurais.Designer.cs">
-      <DependentUpon>201710042138597_BugPlurais.cs</DependentUpon>
+    <Compile Include="Migrations\201710050241416_InitialCreate1.cs" />
+    <Compile Include="Migrations\201710050241416_InitialCreate1.Designer.cs">
+      <DependentUpon>201710050241416_InitialCreate1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -123,30 +107,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201709290147410_InitialCreate.resx">
-      <DependentUpon>201709290147410_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710021852526_AddFieldsAlarm.resx">
-      <DependentUpon>201710021852526_AddFieldsAlarm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710022156402_AddTableSensorsInDevice.resx">
-      <DependentUpon>201710022156402_AddTableSensorsInDevice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710022226221_AddTableSensorsInDeviceIndex.resx">
-      <DependentUpon>201710022226221_AddTableSensorsInDeviceIndex.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710040301291_RenameSpaceToApplication.resx">
-      <DependentUpon>201710040301291_RenameSpaceToApplication.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710042138597_BugPlurais.resx">
-      <DependentUpon>201710042138597_BugPlurais.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ART.Infra.CrossCutting.Repository\ART.Infra.CrossCutting.Repository.csproj">
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710050218518_InitialCreate.resx">
+      <DependentUpon>201710050218518_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710050241416_InitialCreate1.resx">
+      <DependentUpon>201710050241416_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

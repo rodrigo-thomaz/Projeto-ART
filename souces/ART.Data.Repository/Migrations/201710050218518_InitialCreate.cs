@@ -1,5 +1,6 @@
 namespace ART.Data.Repository.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
 
     public partial class InitialCreate : DbMigration
@@ -12,14 +13,16 @@ namespace ART.Data.Repository.Migrations
             DropForeignKey("dbo.ThermometerDevice", "Id", "dbo.ESPDeviceBase");
             DropForeignKey("dbo.ESPDeviceBase", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
-            DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
             DropForeignKey("dbo.DSFamilyTempSensor", "TemperatureScaleId", "dbo.TemperatureScale");
+            DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
             DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.SensorBase");
             DropForeignKey("dbo.SensorBase", "Id", "dbo.HardwareBase");
-            DropForeignKey("dbo.HardwareInSpace", "SpaceId", "dbo.Space");
-            DropForeignKey("dbo.UserInSpace", "UserId", "dbo.User");
-            DropForeignKey("dbo.UserInSpace", "SpaceId", "dbo.Space");
-            DropForeignKey("dbo.HardwareInSpace", "HardwareBaseId", "dbo.HardwareBase");
+            DropForeignKey("dbo.UsersInApplication", "UserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.UsersInApplication", "ApplicationId", "dbo.Application");
+            DropForeignKey("dbo.HardwaresInApplication", "HardwareBaseId", "dbo.HardwareBase");
+            DropForeignKey("dbo.SensorsInDevice", "SensorBaseId", "dbo.SensorBase");
+            DropForeignKey("dbo.SensorsInDevice", "DeviceBaseId", "dbo.DeviceBase");
+            DropForeignKey("dbo.HardwaresInApplication", "ApplicationId", "dbo.Application");
             DropIndex("dbo.RaspberryDeviceBase", new[] { "WLanMacAddress" });
             DropIndex("dbo.RaspberryDeviceBase", new[] { "LanMacAddress" });
             DropIndex("dbo.RaspberryDeviceBase", new[] { "Id" });
@@ -27,37 +30,64 @@ namespace ART.Data.Repository.Migrations
             DropIndex("dbo.ESPDeviceBase", new[] { "MacAddress" });
             DropIndex("dbo.ESPDeviceBase", new[] { "Id" });
             DropIndex("dbo.DeviceBase", new[] { "Id" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "DSFamilyTempSensorResolutionId" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "TemperatureScaleId" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "DSFamilyTempSensorResolutionId" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
             DropIndex("dbo.SensorBase", new[] { "Id" });
+            DropIndex("dbo.UsersInApplication", new[] { "ApplicationId" });
+            DropIndex("dbo.UsersInApplication", new[] { "UserId" });
             DropIndex("dbo.TemperatureScale", new[] { "Symbol" });
             DropIndex("dbo.TemperatureScale", new[] { "Name" });
-            DropIndex("dbo.UserInSpace", new[] { "SpaceId" });
-            DropIndex("dbo.UserInSpace", new[] { "UserId" });
-            DropIndex("dbo.Space", new[] { "Name" });
-            DropIndex("dbo.HardwareInSpace", new[] { "SpaceId" });
-            DropIndex("dbo.HardwareInSpace", new[] { "HardwareBaseId" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
             DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
+            DropIndex("dbo.SensorsInDevice", new[] { "DeviceBaseId" });
+            DropIndex("dbo.SensorsInDevice", new[] { "SensorBaseId" });
+            DropIndex("dbo.HardwaresInApplication", new[] { "ApplicationId" });
+            DropIndex("dbo.HardwaresInApplication", new[] { "HardwareBaseId" });
+            DropIndex("dbo.Application", new[] { "Name" });
             DropTable("dbo.RaspberryDeviceBase");
             DropTable("dbo.ThermometerDevice");
             DropTable("dbo.ESPDeviceBase");
             DropTable("dbo.DeviceBase");
             DropTable("dbo.DSFamilyTempSensor");
             DropTable("dbo.SensorBase");
+            DropTable("dbo.ApplicationUser");
+            DropTable("dbo.UsersInApplication");
             DropTable("dbo.TemperatureScale");
-            DropTable("dbo.User");
-            DropTable("dbo.UserInSpace");
-            DropTable("dbo.Space");
-            DropTable("dbo.HardwareInSpace");
             DropTable("dbo.DSFamilyTempSensorResolution");
+            DropTable("dbo.SensorsInDevice");
             DropTable("dbo.HardwareBase");
+            DropTable("dbo.HardwaresInApplication");
+            DropTable("dbo.Application");
         }
 
         public override void Up()
         {
+            CreateTable(
+                "dbo.Application",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        Description = c.String(),
+                        Name = c.String(nullable: false, maxLength: 255),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
+
+            CreateTable(
+                "dbo.HardwaresInApplication",
+                c => new
+                    {
+                        HardwareBaseId = c.Guid(nullable: false),
+                        ApplicationId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.HardwareBaseId, t.ApplicationId })
+                .ForeignKey("dbo.Application", t => t.ApplicationId)
+                .ForeignKey("dbo.HardwareBase", t => t.HardwareBaseId)
+                .Index(t => t.HardwareBaseId)
+                .Index(t => t.ApplicationId);
+
             CreateTable(
                 "dbo.HardwareBase",
                 c => new
@@ -67,77 +97,66 @@ namespace ART.Data.Repository.Migrations
                 .PrimaryKey(t => t.Id);
 
             CreateTable(
+                "dbo.SensorsInDevice",
+                c => new
+                    {
+                        SensorBaseId = c.Guid(nullable: false),
+                        DeviceBaseId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.SensorBaseId, t.DeviceBaseId })
+                .ForeignKey("dbo.DeviceBase", t => t.DeviceBaseId)
+                .ForeignKey("dbo.SensorBase", t => t.SensorBaseId)
+                .Index(t => t.SensorBaseId, unique: true)
+                .Index(t => t.DeviceBaseId);
+
+            CreateTable(
                 "dbo.DSFamilyTempSensorResolution",
                 c => new
                     {
                         Id = c.Byte(nullable: false),
+                        Bits = c.Byte(nullable: false),
+                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
+                        Description = c.String(),
                         Name = c.String(nullable: false, maxLength: 255),
                         Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
-                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
-                        Bits = c.Byte(nullable: false),
-                        Description = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.Bits, unique: true);
-
-            CreateTable(
-                "dbo.HardwareInSpace",
-                c => new
-                    {
-                        HardwareBaseId = c.Guid(nullable: false),
-                        SpaceId = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.HardwareBaseId, t.SpaceId })
-                .ForeignKey("dbo.HardwareBase", t => t.HardwareBaseId)
-                .ForeignKey("dbo.Space", t => t.SpaceId)
-                .Index(t => t.HardwareBaseId)
-                .Index(t => t.SpaceId);
-
-            CreateTable(
-                "dbo.Space",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
+                .Index(t => t.Bits, unique: true)
                 .Index(t => t.Name, unique: true);
-
-            CreateTable(
-                "dbo.UserInSpace",
-                c => new
-                    {
-                        UserId = c.Guid(nullable: false),
-                        SpaceId = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.UserId, t.SpaceId })
-                .ForeignKey("dbo.Space", t => t.SpaceId)
-                .ForeignKey("dbo.User", t => t.UserId)
-                .Index(t => t.UserId)
-                .Index(t => t.SpaceId);
-
-            CreateTable(
-                "dbo.User",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                    })
-                .PrimaryKey(t => t.Id);
 
             CreateTable(
                 "dbo.TemperatureScale",
                 c => new
                     {
                         Id = c.Byte(nullable: false),
+                        Description = c.String(),
                         Name = c.String(nullable: false, maxLength: 255),
                         Symbol = c.String(nullable: false, maxLength: 2, fixedLength: true),
-                        Description = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true)
                 .Index(t => t.Symbol, unique: true);
+
+            CreateTable(
+                "dbo.UsersInApplication",
+                c => new
+                    {
+                        UserId = c.Guid(nullable: false),
+                        ApplicationId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.UserId, t.ApplicationId })
+                .ForeignKey("dbo.Application", t => t.ApplicationId)
+                .ForeignKey("dbo.ApplicationUser", t => t.UserId)
+                .Index(t => t.UserId)
+                .Index(t => t.ApplicationId);
+
+            CreateTable(
+                "dbo.ApplicationUser",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
 
             CreateTable(
                 "dbo.SensorBase",
@@ -155,18 +174,20 @@ namespace ART.Data.Repository.Migrations
                     {
                         Id = c.Guid(nullable: false),
                         DeviceAddress = c.String(nullable: false, maxLength: 15),
-                        Family = c.String(nullable: false, maxLength: 10),
-                        TemperatureScaleId = c.Byte(nullable: false),
                         DSFamilyTempSensorResolutionId = c.Byte(nullable: false),
+                        Family = c.String(nullable: false, maxLength: 10),
+                        HighAlarm = c.Decimal(nullable: false, precision: 6, scale: 3),
+                        LowAlarm = c.Decimal(nullable: false, precision: 6, scale: 3),
+                        TemperatureScaleId = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SensorBase", t => t.Id)
-                .ForeignKey("dbo.TemperatureScale", t => t.TemperatureScaleId)
                 .ForeignKey("dbo.DSFamilyTempSensorResolution", t => t.DSFamilyTempSensorResolutionId)
+                .ForeignKey("dbo.TemperatureScale", t => t.TemperatureScaleId)
                 .Index(t => t.Id)
                 .Index(t => t.DeviceAddress, unique: true)
-                .Index(t => t.TemperatureScaleId)
-                .Index(t => t.DSFamilyTempSensorResolutionId);
+                .Index(t => t.DSFamilyTempSensorResolutionId)
+                .Index(t => t.TemperatureScaleId);
 
             CreateTable(
                 "dbo.DeviceBase",

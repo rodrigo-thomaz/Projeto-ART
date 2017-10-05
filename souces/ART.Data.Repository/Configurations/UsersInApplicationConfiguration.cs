@@ -1,5 +1,6 @@
 ﻿namespace ART.Data.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
 
     using ART.Data.Repository.Entities;
@@ -16,6 +17,16 @@
                 x.UserId,
                 x.ApplicationId,
             });
+
+            //UserId
+            Property(x => x.UserId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //ApplicationId
+            Property(x => x.ApplicationId)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
 
             //Foreing Keys
             HasRequired(x => x.ApplicationUser)

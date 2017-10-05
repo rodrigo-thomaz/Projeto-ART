@@ -23,9 +23,7 @@
             // Name
             Property(x => x.Name)
                 .HasMaxLength(255)
-                .IsRequired()
-                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+                .IsRequired();
 
             //Description
             Property(x => x.Description)

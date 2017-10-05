@@ -7,13 +7,13 @@ namespace ART.Data.Repository.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class AddFieldsAlarm : IMigrationMetadata
+    public sealed partial class InitialCreate1 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddFieldsAlarm));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate1));
         
         string IMigrationMetadata.Id
         {
-            get { return "201710021852526_AddFieldsAlarm"; }
+            get { return "201710050241416_InitialCreate1"; }
         }
         
         string IMigrationMetadata.Source
