@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.Worker.Models
+﻿namespace ART.Domotica.Worker.Models
 {
     public class DSFamilyTempSensorModel
     {

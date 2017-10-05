@@ -1,10 +1,10 @@
-﻿namespace ART.MQ.Worker
+﻿namespace ART.Domotica.Worker
 {
     using ART.Domotica.Domain;
     using ART.Domotica.Repository;
     using ART.Infra.CrossCutting.MQ;
-    using ART.MQ.Worker.AutoMapper;
-    using ART.MQ.Worker.Modules;
+    using ART.Domotica.Worker.AutoMapper;
+    using ART.Domotica.Worker.Modules;
 
     using Autofac;
 
@@ -41,7 +41,7 @@
 
             HostFactory.Run(c =>
             {
-                c.SetServiceName("ART.MQ.Worker");
+                c.SetServiceName("ART.Domotica.Worker");
                 c.SetDisplayName("ART MQ Worker");
                 c.SetDescription("A ART MQ Worker.");
 

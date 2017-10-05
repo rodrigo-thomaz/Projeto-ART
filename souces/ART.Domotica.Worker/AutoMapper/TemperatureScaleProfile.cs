@@ -1,7 +1,7 @@
-﻿namespace ART.MQ.Worker.AutoMapper
+﻿namespace ART.Domotica.Worker.AutoMapper
 {
     using ART.Domotica.Repository.Entities;
-    using ART.MQ.Worker.Models;
+    using ART.Domotica.Worker.Models;
 
     using global::AutoMapper;
 

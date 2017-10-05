@@ -10,7 +10,7 @@ using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ART.MQ.Worker.Consumers
+namespace ART.Domotica.Worker.Consumers
 {
     public class ApplicationUserConsumer
     {

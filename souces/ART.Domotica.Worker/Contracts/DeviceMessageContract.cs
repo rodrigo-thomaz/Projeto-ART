@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.Worker.Contracts
+﻿namespace ART.Domotica.Worker.Contracts
 {
     public class DeviceMessageContract<TContract>
     {

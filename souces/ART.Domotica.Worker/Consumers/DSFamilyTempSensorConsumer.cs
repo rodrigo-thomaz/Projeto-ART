@@ -3,8 +3,8 @@ using ART.Domotica.Repository.Entities;
 using ART.Infra.CrossCutting.MQ;
 using ART.Domotica.Common.Contracts;
 using ART.Domotica.Common.QueueNames;
-using ART.MQ.Worker.Contracts;
-using ART.MQ.Worker.Models;
+using ART.Domotica.Worker.Contracts;
+using ART.Domotica.Worker.Models;
 using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ART.MQ.Worker.Consumers
+namespace ART.Domotica.Worker.Consumers
 {
     public class DSFamilyTempSensorConsumer
     {

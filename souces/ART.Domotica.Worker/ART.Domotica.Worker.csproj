@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{E2F7E686-A548-4FA5-968B-C5FD1F2DF1DD}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ART.MQ.Worker</RootNamespace>
-    <AssemblyName>ART.MQ.Worker</AssemblyName>
+    <RootNamespace>ART.Domotica.Worker</RootNamespace>
+    <AssemblyName>ART.Domotica.Worker</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

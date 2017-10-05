@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.Worker.AutoMapper
+﻿namespace ART.Domotica.Worker.AutoMapper
 {
     using ART.Domotica.Repository.Entities;
     using ART.Security.Contracts;

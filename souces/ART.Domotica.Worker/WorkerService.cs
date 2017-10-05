@@ -1,6 +1,6 @@
-﻿namespace ART.MQ.Worker
+﻿namespace ART.Domotica.Worker
 {
-    using ART.MQ.Worker.Consumers;
+    using ART.Domotica.Worker.Consumers;
 
     using RabbitMQ.Client;
 

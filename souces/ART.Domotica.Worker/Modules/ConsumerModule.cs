@@ -1,6 +1,6 @@
-﻿namespace ART.MQ.Worker.Modules
+﻿namespace ART.Domotica.Worker.Modules
 {
-    using ART.MQ.Worker.Consumers;
+    using ART.Domotica.Worker.Consumers;
 
     using Autofac;
 
