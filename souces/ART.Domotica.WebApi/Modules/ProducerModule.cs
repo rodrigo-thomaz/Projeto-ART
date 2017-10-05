@@ -1,7 +1,7 @@
-﻿namespace ART.MQ.DistributedServices.Modules
+﻿namespace ART.Domotica.WebApi.Modules
 {
-    using ART.MQ.DistributedServices.IProducers;
-    using ART.MQ.DistributedServices.Producers;
+    using ART.Domotica.WebApi.IProducers;
+    using ART.Domotica.WebApi.Producers;
 
     using Autofac;
 

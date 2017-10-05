@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.DistributedServices.Controllers
+﻿namespace ART.Domotica.WebApi.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -8,8 +8,8 @@
     using ART.Infra.CrossCutting.WebApi;
 
     [Authorize]
-    [RoutePrefix("api/dashboard")]
-    public class DashboardController : BaseApiController
+    [RoutePrefix("api/termometro")]
+    public class TermometroController : BaseApiController
     {
         #region Methods
 

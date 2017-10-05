@@ -1,9 +1,9 @@
-﻿namespace ART.MQ.DistributedServices.IProducers
+﻿namespace ART.Domotica.WebApi.IProducers
 {
     using System;
     using System.Threading.Tasks;
 
-    using ART.MQ.DistributedServices.Models;
+    using ART.Domotica.WebApi.Models;
 
     public interface IDSFamilyTempSensorProducer
     {

@@ -1,8 +1,8 @@
-﻿namespace ART.MQ.DistributedServices.Models
+﻿namespace ART.Domotica.WebApi.Models
 {
     using System;
 
-    public class DSFamilyTempSensorSetLowAlarmModel
+    public class DSFamilyTempSensorSetHighAlarmModel
     {
         #region Properties
 
@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public decimal LowAlarm
+        public decimal HighAlarm
         {
             get; set;
         }

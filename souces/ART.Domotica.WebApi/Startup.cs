@@ -1,14 +1,14 @@
-﻿[assembly: Microsoft.Owin.OwinStartup(typeof(ART.MQ.DistributedServices.Startup))]
+﻿[assembly: Microsoft.Owin.OwinStartup(typeof(ART.Domotica.WebApi.Startup))]
 
-namespace ART.MQ.DistributedServices
+namespace ART.Domotica.WebApi
 {
     using System.Threading;
     using System.Web.Http;
 
     using ART.Infra.CrossCutting.MQ;
-    using ART.MQ.DistributedServices.App_Start;
-    using ART.MQ.DistributedServices.Controllers;
-    using ART.MQ.DistributedServices.Modules;
+    using ART.Domotica.WebApi.App_Start;
+    using ART.Domotica.WebApi.Controllers;
+    using ART.Domotica.WebApi.Modules;
 
     using Autofac;
     using Autofac.Integration.WebApi;

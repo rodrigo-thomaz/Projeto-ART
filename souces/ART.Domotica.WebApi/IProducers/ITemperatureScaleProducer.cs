@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.DistributedServices.IProducers
+﻿namespace ART.Domotica.WebApi.IProducers
 {
     using System.Threading.Tasks;
 

@@ -1,11 +1,11 @@
 ﻿using System.Web.Http;
-using ART.MQ.DistributedServices.Models;
+using ART.Domotica.WebApi.Models;
 using ART.Infra.CrossCutting.WebApi;
-using ART.MQ.DistributedServices.IProducers;
+using ART.Domotica.WebApi.IProducers;
 using System.Threading.Tasks;
 using System;
 
-namespace ART.MQ.DistributedServices.Controllers
+namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
     [RoutePrefix("api/dsFamilyTempSensor")]    

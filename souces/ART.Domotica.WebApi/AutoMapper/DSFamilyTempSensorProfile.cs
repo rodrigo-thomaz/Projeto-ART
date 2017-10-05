@@ -1,7 +1,7 @@
-﻿namespace ART.MQ.DistributedServices.AutoMapper
+﻿namespace ART.Domotica.WebApi.AutoMapper
 {
     using ART.Domotica.Common.Contracts;
-    using ART.MQ.DistributedServices.Models;
+    using ART.Domotica.WebApi.Models;
 
     using global::AutoMapper;
 

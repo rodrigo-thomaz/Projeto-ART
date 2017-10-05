@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.DistributedServices.Models
+﻿namespace ART.Domotica.WebApi.Models
 {
     using System;
 

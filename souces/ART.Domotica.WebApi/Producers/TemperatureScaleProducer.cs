@@ -1,10 +1,10 @@
 ﻿using ART.Infra.CrossCutting.MQ;
 using ART.Domotica.Common.QueueNames;
-using ART.MQ.DistributedServices.IProducers;
+using ART.Domotica.WebApi.IProducers;
 using RabbitMQ.Client;
 using System.Threading.Tasks;
 
-namespace ART.MQ.DistributedServices.Producers
+namespace ART.Domotica.WebApi.Producers
 {
     public class TemperatureScaleProducer : ITemperatureScaleProducer
     {

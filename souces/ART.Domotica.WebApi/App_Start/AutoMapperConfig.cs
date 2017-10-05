@@ -1,6 +1,6 @@
-﻿namespace ART.MQ.DistributedServices.App_Start
+﻿namespace ART.Domotica.WebApi.App_Start
 {
-    using ART.MQ.DistributedServices.AutoMapper;
+    using ART.Domotica.WebApi.AutoMapper;
 
     using global::AutoMapper;
 

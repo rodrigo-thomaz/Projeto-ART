@@ -1,10 +1,10 @@
-﻿using ART.MQ.DistributedServices.Models;
+﻿using ART.Domotica.WebApi.Models;
 using ART.Infra.CrossCutting.WebApi;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 
-namespace ART.MQ.DistributedServices.Controllers
+namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
     [RoutePrefix("api/user")]

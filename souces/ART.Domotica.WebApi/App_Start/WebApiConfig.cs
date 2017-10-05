@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.DistributedServices.App_Start
+﻿namespace ART.Domotica.WebApi.App_Start
 {
     using System.Linq;
     using System.Net.Http.Formatting;

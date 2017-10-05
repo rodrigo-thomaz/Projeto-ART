@@ -1,14 +1,14 @@
 ﻿using ART.Domotica.Common.Contracts;
 using ART.Domotica.Common.QueueNames;
-using ART.MQ.DistributedServices.IProducers;
-using ART.MQ.DistributedServices.Models;
+using ART.Domotica.WebApi.IProducers;
+using ART.Domotica.WebApi.Models;
 using AutoMapper;
 using RabbitMQ.Client;
 using System.Threading.Tasks;
 using System;
 using ART.Infra.CrossCutting.MQ;
 
-namespace ART.MQ.DistributedServices.Producers
+namespace ART.Domotica.WebApi.Producers
 {
     public class DSFamilyTempSensorProducer : IDSFamilyTempSensorProducer
     {
