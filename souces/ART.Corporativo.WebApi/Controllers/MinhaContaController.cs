@@ -1,4 +1,4 @@
-﻿namespace ART.Corporativo.DistributedServices.Controllers
+﻿namespace ART.Corporativo.WebApi.Controllers
 {
     using System.Collections.Generic;
     using System.Linq;

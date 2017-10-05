@@ -1,10 +1,10 @@
-﻿[assembly: Microsoft.Owin.OwinStartup(typeof(ART.Corporativo.DistributedServices.Startup))]
+﻿[assembly: Microsoft.Owin.OwinStartup(typeof(ART.Corporativo.WebApi.Startup))]
 
-namespace ART.Corporativo.DistributedServices
+namespace ART.Corporativo.WebApi
 {
     using System.Web.Http;
 
-    using ART.Corporativo.DistributedServices.App_Start;
+    using ART.Corporativo.WebApi.App_Start;
 
     using Microsoft.Owin.Security.OAuth;
 

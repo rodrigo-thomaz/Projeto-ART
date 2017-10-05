@@ -34,7 +34,7 @@ app.config(function ($routeProvider) {
 
 var segurancaPresentationWebPagesUri = 'http://localhost/ART.Security.UI.Web/';
 var segurancaDistributedServicesUri = 'http://localhost/ART.Security.WebApi/';
-var corporativoDistributedServicesUri = 'http://localhost/ART.Corporativo.DistributedServices/';
+var corporativoDistributedServicesUri = 'http://localhost/ART.Corporativo.WebApi/';
 
 app.constant('ngAuthSettings', {
     segurancaPresentationWebPagesUri: segurancaPresentationWebPagesUri,

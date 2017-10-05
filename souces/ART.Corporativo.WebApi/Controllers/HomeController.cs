@@ -1,10 +1,10 @@
-﻿namespace ART.Corporativo.DistributedServices.Controllers
+﻿namespace ART.Corporativo.WebApi.Controllers
 {
     using System.Collections.Generic;
     using System.Web.Http;
 
-    [RoutePrefix("api/empresa")]
-    public class EmpresaController : ApiController
+    [RoutePrefix("api/home")]
+    public class HomeController : ApiController
     {
         #region Methods
 
