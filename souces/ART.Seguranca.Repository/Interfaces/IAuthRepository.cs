@@ -28,7 +28,7 @@
 
         List<RefreshToken> GetAllRefreshTokens();
 
-        Task<IdentityResult> RegisterUser(string userName, string password);
+        Task<IdentityResult> RegisterUser(ApplicationUser applicationUser, string password);
 
         Task<bool> RemoveRefreshToken(RefreshToken refreshToken);
 

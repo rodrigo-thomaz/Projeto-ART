@@ -75,7 +75,6 @@
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="Consumers\TemperatureScaleConsumer.cs" />
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
-    <Compile Include="Helpers\DeserializationHelpers.cs" />
     <Compile Include="Contracts\DeviceMessageContract.cs" />
     <Compile Include="Models\DSFamilyTempSensorModel.cs" />
     <Compile Include="Models\TemperatureScaleModel.cs" />
@@ -98,6 +97,10 @@
     <ProjectReference Include="..\ART.Data.Repository\ART.Data.Repository.csproj">
       <Project>{d0287824-c8bc-4025-8b99-5a8fd8aef1f1}</Project>
       <Name>ART.Data.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.MQ.Contracts\ART.MQ.Common.csproj">
       <Project>{8c7dfa89-52d2-4907-b515-b3c776bcb12e}</Project>

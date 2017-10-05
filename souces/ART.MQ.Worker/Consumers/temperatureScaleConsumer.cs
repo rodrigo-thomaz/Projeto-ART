@@ -1,7 +1,7 @@
 ﻿using ART.Data.Domain.Interfaces;
 using ART.Data.Repository.Entities;
+using ART.Infra.CrossCutting.MQ;
 using ART.MQ.Common.QueueNames;
-using ART.MQ.Worker.Helpers;
 using ART.MQ.Worker.Models;
 using AutoMapper;
 using Newtonsoft.Json;
@@ -72,7 +72,7 @@ namespace ART.MQ.Worker.Consumers
             Console.WriteLine("[TemperatureScaleConsumer.GetScalesReceivedAsync] ");
             _model.BasicAck(e.DeliveryTag, false);
 
-            var session = DeserializationHelpers.Deserialize<string>(e.Body);
+            var session = SerializationHelpers.DeserializeJsonBufferToType<string>(e.Body);
             var exchange = string.Format("{0}-{1}", session, "GetScalesCompleted");
 
             var entities = await _temperatureScaleDomain.GetScales();

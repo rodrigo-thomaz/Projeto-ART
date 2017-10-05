@@ -135,7 +135,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="Controllers\TemperatureScaleController.cs" />
-    <Compile Include="Helpers\SerializationHelpers.cs" />
     <Compile Include="IProducers\ITemperatureScaleProducer.cs" />
     <Compile Include="Models\DSFamilyTempSensorSetLowAlarmModel.cs" />
     <Compile Include="Models\DSFamilyTempSensorSetHighAlarmModel.cs" />

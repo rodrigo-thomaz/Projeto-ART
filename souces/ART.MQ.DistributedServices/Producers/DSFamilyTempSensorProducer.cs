@@ -1,12 +1,12 @@
 ﻿using ART.MQ.Common.Contracts;
 using ART.MQ.Common.QueueNames;
-using ART.MQ.DistributedServices.Helpers;
 using ART.MQ.DistributedServices.IProducers;
 using ART.MQ.DistributedServices.Models;
 using AutoMapper;
 using RabbitMQ.Client;
 using System.Threading.Tasks;
 using System;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.MQ.DistributedServices.Producers
 {
@@ -38,35 +38,35 @@ namespace ART.MQ.DistributedServices.Producers
         public async Task Get(Guid dsFamilyTempSensorId, string session)
         {
             var contract = new DSFamilyTempSensorGetContract { DSFamilyTempSensorId = dsFamilyTempSensorId, Session = session };
-            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetQueueName, null, payload));
         }
 
         public async Task GetResolutions(string session)
         {
             var contract = new DSFamilyTempSensorGetResolutionsContract { Session = session };
-            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetResolutionsQueueName, null, payload));
         }
 
         public async Task SetResolution(DSFamilyTempSensorSetResolutionModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetResolutionModel, DSFamilyTempSensorSetResolutionContract>(request);
-            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetResolutionQueueName, null, payload);
         }
 
         public async Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetHighAlarmModel, DSFamilyTempSensorSetHighAlarmContract>(request);
-            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, null, payload);
         }
 
         public async Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
         {
             var contract = Mapper.Map<DSFamilyTempSensorSetLowAlarmModel, DSFamilyTempSensorSetLowAlarmContract>(request);
-            var payload = await SerializationHelpers.SerialiseIntoBinaryAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, null, payload);
         }
 

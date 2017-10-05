@@ -4,11 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ART.Seguranca.Repository.Repositories
@@ -26,40 +22,11 @@ namespace ART.Seguranca.Repository.Repositories
             _userManager = new UserManager<ApplicationUser, Guid>(new UserStore<ApplicationUser, ApplicationRole, Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>(_authContext));
         }
 
-        public async Task<IdentityResult> RegisterUser(string userName, string password)
-        {
-            ApplicationUser user = new ApplicationUser
-            {
-                UserName = userName
-            };
-
-            var result = await _userManager.CreateAsync(user, password);
-
-            //await InsertUserInDomotica(user);
-
+        public async Task<IdentityResult> RegisterUser(ApplicationUser applicationUser, string password)
+        {           
+            var result = await _userManager.CreateAsync(applicationUser, password);            
             return result;
-        }
-
-        private async Task InsertUserInDomotica(ApplicationUser user)
-        {
-            var domoticaServiceUri = ConfigurationManager.AppSettings["ART.DistributedServices.Uri"];
-
-            var client = new HttpClient();
-
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            var json = "{id:'" + user.Id + "'}";
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            HttpResponseMessage response = await client.PostAsync(string.Format("{0}/api/user/insert", domoticaServiceUri), content);
-
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new Exception("O usuário foi criado em Segurança mas ocorreu um erro criando em Domótica.");
-            }
-
-            client.Dispose();
-        }
+        }        
 
         public async Task<ApplicationUser> FindUser(string userName, string password)
         {
