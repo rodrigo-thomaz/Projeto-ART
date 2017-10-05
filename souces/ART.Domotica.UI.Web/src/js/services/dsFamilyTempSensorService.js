@@ -7,8 +7,8 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
 
     var serviceFactory = {};    
 
-    var get = function (dsFamilyTempSensorId) {
-        return $http.get(serviceBase + 'api/dsFamilyTempSensor/' + dsFamilyTempSensorId + '/' + stompService.session).then(function (results) {
+    var getAll = function (applicationId) {
+        return $http.get(serviceBase + 'api/dsFamilyTempSensor/getAll/' + applicationId + '/' + stompService.session).then(function (results) {
             //alert('envio bem sucedido');
         });
     };
@@ -53,7 +53,7 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
         stompService.client.subscribe('/topic/' + stompService.session + '-GetResolutionsCompleted', onGetResolutionsCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-GetCompleted', onGetCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-GetAllCompleted', onGetAllCompleted);
 
         if (!initResolutions) {
             initResolutions = true;
@@ -61,14 +61,14 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
         }
 
         /////////////////////////////////////////////
-        get('4ee0c742-b8a4-e711-9bee-707781d470bc');
+        getAll('4ee0c742-b8a4-e711-9bee-707781d470bc');
     }  
 
     var onReadReceived = function (payload) {
         EventDispatcher.trigger('dsFamilyTempSensorService_onReadReceived', JSON.parse(payload.body));
     }
 
-    var onGetCompleted = function (payload) {
+    var onGetAllCompleted = function (payload) {
         var data = JSON.parse(payload.body);        
     }
 
@@ -88,7 +88,7 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
     // serviceFactory
 
     serviceFactory.resolutions = [];
-    serviceFactory.get = get;
+    serviceFactory.getAll = getAll;
     serviceFactory.setResolution = setResolution;
     serviceFactory.setHighAlarm = setHighAlarm;
     serviceFactory.setLowAlarm = setLowAlarm;    

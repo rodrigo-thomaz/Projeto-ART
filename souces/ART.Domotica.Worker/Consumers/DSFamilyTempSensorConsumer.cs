@@ -24,7 +24,7 @@ namespace ART.Domotica.Worker.Consumers
         private readonly IConnection _connection;
         private readonly IModel _model;
 
-        private readonly EventingBasicConsumer _getConsumer;
+        private readonly EventingBasicConsumer _getAllConsumer;
         private readonly EventingBasicConsumer _getResolutionsConsumer;
         private readonly EventingBasicConsumer _setResolutionConsumer;
         private readonly EventingBasicConsumer _setHighAlarmConsumer;
@@ -42,7 +42,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _model = _connection.CreateModel();
 
-            _getConsumer = new EventingBasicConsumer(_model);
+            _getAllConsumer = new EventingBasicConsumer(_model);
             _getResolutionsConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
             _setHighAlarmConsumer = new EventingBasicConsumer(_model);
@@ -60,7 +60,7 @@ namespace ART.Domotica.Worker.Consumers
         private void Initialize()
         {
             _model.QueueDeclare(
-                 queue: DSFamilyTempSensorQueueNames.GetQueueName
+                 queue: DSFamilyTempSensorQueueNames.GetAllQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
@@ -94,38 +94,38 @@ namespace ART.Domotica.Worker.Consumers
                 , autoDelete: false
                 , arguments: null);
 
-            _getConsumer.Received += GetReceived;
+            _getAllConsumer.Received += GetAllReceived;
             _getResolutionsConsumer.Received += GetResolutionsReceived;
             _setResolutionConsumer.Received += SetResolutionReceived;
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
             _setLowAlarmConsumer.Received += SetLowAlarmReceived;
 
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.GetQueueName, false, _getConsumer);
+            _model.BasicConsume(DSFamilyTempSensorQueueNames.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(DSFamilyTempSensorQueueNames.GetResolutionsQueueName, false, _getResolutionsConsumer);
             _model.BasicConsume(DSFamilyTempSensorQueueNames.SetResolutionQueueName, false, _setResolutionConsumer);
             _model.BasicConsume(DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
             _model.BasicConsume(DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
         }
 
-        private void GetReceived(object sender, BasicDeliverEventArgs e)
+        private void GetAllReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetReceivedAsync(sender, e));
+            Task.WaitAll(GetAllReceivedAsync(sender, e));
         }
 
-        private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[DSFamilyTempSensorConsumer.GetReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[DSFamilyTempSensorConsumer.GetAllReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorGetContract>(e.Body);
+            var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorGetAllContract>(e.Body);
 
-            var exchange = string.Format("{0}-{1}", contract.Session, "GetCompleted");
+            var exchange = string.Format("{0}-{1}", contract.Session, "GetAllCompleted");
 
-            var entities = await _dsFamilyTempSensorDomain.Get(contract.DSFamilyTempSensorId);
-            Console.WriteLine("[DSFamilyTempSensorDomain.Get] Ok");
+            var entities = await _dsFamilyTempSensorDomain.GetAll(contract.ApplicationId);
+            Console.WriteLine("[DSFamilyTempSensorDomain.GetAll] Ok");
 
-            var models = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorModel>(entities);
+            var models = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorModel>>(entities);
             var json = JsonConvert.SerializeObject(models, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("amq.topic", exchange, null, buffer);

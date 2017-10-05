@@ -22,6 +22,8 @@
 
         public DbSet<SensorsInDevice> SensorsInDevice { get; set; }
 
+        public DbSet<HardwaresInApplication> HardwaresInApplication { get; set; }
+
         public DbSet<Application> Application
         {
             get; set;

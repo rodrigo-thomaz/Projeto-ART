@@ -4,6 +4,8 @@ using ART.Infra.CrossCutting.Repository;
 using System;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ART.Domotica.Repository.Repositories
 {
@@ -12,6 +14,16 @@ namespace ART.Domotica.Repository.Repositories
         public DSFamilyTempSensorRepository(ARTDbContext context) : base(context)
         {
 
+        }
+
+        public async Task<List<DSFamilyTempSensor>> GetAll(Guid applicationId)
+        {
+            IQueryable<DSFamilyTempSensor> query = from sensor in _context.DSFamilyTempSensor
+                        join hardApp in _context.HardwaresInApplication on sensor.Id equals hardApp.HardwareBaseId
+                        where hardApp.ApplicationId == applicationId
+                        select sensor;
+
+            return await query.ToListAsync();
         }
 
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)

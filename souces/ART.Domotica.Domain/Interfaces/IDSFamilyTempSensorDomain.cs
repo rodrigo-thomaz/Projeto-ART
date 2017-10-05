@@ -10,7 +10,7 @@
     {
         #region Methods
 
-        Task<DSFamilyTempSensor> Get(Guid dsFamilyTempSensorId);
+        Task<List<DSFamilyTempSensor>> GetAll(Guid applicationId);
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 

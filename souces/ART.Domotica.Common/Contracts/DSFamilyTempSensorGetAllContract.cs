@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class DSFamilyTempSensorGetContract
+    public class DSFamilyTempSensorGetAllContract
     {
         #region Properties
 
-        public Guid DSFamilyTempSensorId
+        public Guid ApplicationId
         {
             get; set;
         }

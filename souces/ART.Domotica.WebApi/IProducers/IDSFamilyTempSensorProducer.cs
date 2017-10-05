@@ -9,7 +9,7 @@
     {
         #region Methods
 
-        Task Get(Guid dsFamilyTempSensorId, string session);
+        Task GetAll(Guid applicationId, string session);
 
         Task GetResolutions(string session);
 

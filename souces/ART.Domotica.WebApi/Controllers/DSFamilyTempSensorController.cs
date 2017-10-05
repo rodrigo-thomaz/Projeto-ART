@@ -29,22 +29,22 @@ namespace ART.Domotica.WebApi.Controllers
         #region public voids
 
         /// <summary>
-        /// Retornar uma lista de Resoluções
+        /// Retornar uma lista de sensores
         /// </summary>        
         /// <remarks>
-        /// Retornar uma lista de Resoluções
+        /// Retornar uma lista de sensores
         /// </remarks>
-        /// <param name="id">id do sensor</param>
+        /// <param name="applicationId">id da aplicação</param>
         /// <param name="session">session do broker do solicitante</param>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("{id}/{session}")]
+        [Route("getAll/{applicationId}/{session}")]
         [HttpGet]
-        public async Task<IHttpActionResult> Get(Guid id, string session)
+        public async Task<IHttpActionResult> GetAll(Guid applicationId, string session)
         {
-            await _dsFamilyTempSensorProducer.Get(id, session);
+            await _dsFamilyTempSensorProducer.GetAll(applicationId, session);
             return Ok();
         }
 
