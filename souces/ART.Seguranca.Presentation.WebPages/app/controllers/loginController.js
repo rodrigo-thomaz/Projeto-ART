@@ -21,7 +21,7 @@ app.controller('loginController', ['$scope', '$location', '$timeout', 'authServi
                 }, 2000);                
             }
             else {
-                $location.path('/orders');
+                window.location = ngAuthSettings.defaultRedirectUri;
             }
         },
          function (err) {

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\appAdmin.js" />
     <Content Include="app\controllers\associateController.js" />
     <Content Include="app\controllers\homeController.js" />
     <Content Include="app\controllers\indexController.js" />
@@ -107,6 +108,7 @@
     <Content Include="app\app.js" />
     <Content Include="content\css\bootstrap.min.css" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="admin.html" />
     <Content Include="index.html" />
     <Content Include="scripts\authComplete.js" />
     <Content Include="scripts\jquery-1.6.4.min.js" />

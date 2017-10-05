@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSettings', function ($http, $q, localStorageService, ngAuthSettings) {
+app.factory('authService', ['$http', '$q', '$localStorage', 'ngAuthSettings', function ($http, $q, $localStorage, ngAuthSettings) {
 
     var serviceBase = ngAuthSettings.segurancaDistributedServicesUri;
     var segurancaPresentationWebPagesUri = ngAuthSettings.segurancaPresentationWebPagesUri;
@@ -22,7 +22,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
     
     var _logOut = function () {
 
-        localStorageService.remove('authorizationData');
+        delete $localStorage.authorizationData;
 
         _authentication.isAuth = false;
         _authentication.userName = "";
@@ -31,7 +31,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', 'ngAuthSetting
 
     var _fillAuthData = function () {
 
-        var authData = localStorageService.get('authorizationData');
+        var authData = $localStorage.authorizationData;
         if (authData) {
             _authentication.isAuth = true;
             _authentication.userName = authData.userName;
