@@ -74,6 +74,7 @@
     <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
+    <Compile Include="Consumers\ApplicationConsumer.cs" />
     <Compile Include="Consumers\ApplicationUserConsumer.cs" />
     <Compile Include="Consumers\TemperatureScaleConsumer.cs" />
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
@@ -107,9 +108,9 @@
       <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
       <Name>ART.Infra.CrossCutting.MQ</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ART.Security.Contracts\ART.Security.Contracts.csproj">
+    <ProjectReference Include="..\ART.Security.Common\ART.Security.Common.csproj">
       <Project>{9ECB14DD-14DE-4381-A592-AA812C81ED2D}</Project>
-      <Name>ART.Security.Contracts</Name>
+      <Name>ART.Security.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

@@ -7,8 +7,8 @@
     <ProjectGuid>{9ECB14DD-14DE-4381-A592-AA812C81ED2D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.Security.Contracts</RootNamespace>
-    <AssemblyName>ART.Security.Contracts</AssemblyName>
+    <RootNamespace>ART.Security.Common</RootNamespace>
+    <AssemblyName>ART.Security.Common</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

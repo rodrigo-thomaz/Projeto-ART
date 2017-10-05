@@ -1,8 +1,7 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
     using ART.Domotica.Repository.Entities;
-    using ART.Security.Contracts;
-
+    using ART.Security.Common;
     using global::AutoMapper;
 
     public class ApplicationUserProfile : Profile

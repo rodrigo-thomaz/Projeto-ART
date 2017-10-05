@@ -11,7 +11,7 @@
     using System.Configuration;
     using ART.Infra.CrossCutting.MQ;
     using global::AutoMapper;
-    using ART.Security.Contracts;
+    using ART.Security.Common;
 
     public class AuthDomain : IAuthDomain
     {

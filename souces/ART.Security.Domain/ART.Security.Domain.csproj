@@ -88,9 +88,9 @@
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ART.Security.Contracts\ART.Security.Contracts.csproj">
-      <Project>{9ECB14DD-14DE-4381-A592-AA812C81ED2D}</Project>
-      <Name>ART.Security.Contracts</Name>
+    <ProjectReference Include="..\ART.Security.Common\ART.Security.Common.csproj">
+      <Project>{9ecb14dd-14de-4381-a592-aa812c81ed2d}</Project>
+      <Name>ART.Security.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Security.Repository\ART.Security.Repository.csproj">
       <Project>{8916A744-9781-4863-BBE0-026221D74B41}</Project>
