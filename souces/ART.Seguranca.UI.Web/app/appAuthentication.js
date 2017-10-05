@@ -5,17 +5,17 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/login", {
         controller: "loginController",
-        templateUrl: "app/views/login.html"
+        templateUrl: "app/views/authentication/login.html"
     });
 
     $routeProvider.when("/signup", {
         controller: "signupController",
-        templateUrl: "app/views/signup.html"
+        templateUrl: "app/views/authentication/signup.html"
     });
 
     $routeProvider.when("/refresh", {
         controller: "refreshController",
-        templateUrl: "app/views/refresh.html"
+        templateUrl: "app/views/authentication/refresh.html"
     });    
 
     $routeProvider.otherwise({ redirectTo: "/login" });

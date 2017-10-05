@@ -32,7 +32,7 @@ app.config(function ($routeProvider) {
 
 });
 
-var segurancaPresentationWebPagesUri = 'http://localhost/ART.Seguranca.Presentation.WebPages/index.html';
+var segurancaPresentationWebPagesUri = 'http://localhost/ART.Seguranca.UI.Web/';
 var segurancaDistributedServicesUri = 'http://localhost/ART.Seguranca.DistributedServices/';
 var corporativoDistributedServicesUri = 'http://localhost/ART.Corporativo.DistributedServices/';
 

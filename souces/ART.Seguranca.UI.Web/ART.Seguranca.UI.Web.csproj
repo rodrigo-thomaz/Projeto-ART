@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.Seguranca.Presentation.WebPages</RootNamespace>
-    <AssemblyName>ART.Seguranca.Presentation.WebPages</AssemblyName>
+    <RootNamespace>ART.Seguranca.UI.Web</RootNamespace>
+    <AssemblyName>ART.Seguranca.UI.Web</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
@@ -60,28 +60,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\appAdmin.js" />
-    <Content Include="app\controllers\associateController.js" />
-    <Content Include="app\controllers\homeController.js" />
-    <Content Include="app\controllers\indexController.js" />
-    <Content Include="app\controllers\loginController.js" />
-    <Content Include="app\controllers\dashboardController.js" />
-    <Content Include="app\controllers\ordersController.js" />
-    <Content Include="app\controllers\refreshController.js" />
-    <Content Include="app\controllers\signupController.js" />
-    <Content Include="app\controllers\tokensManagerController.js" />
-    <Content Include="app\services\authInterceptorService.js" />
-    <Content Include="app\services\authService.js" />
-    <Content Include="app\services\dashboardService.js" />
-    <Content Include="app\services\ordersService.js" />
-    <Content Include="app\services\tokensManagerService.js" />
-    <Content Include="app\views\associate.html" />
-    <Content Include="app\views\dashboard.html" />
-    <Content Include="app\views\home.html" />
-    <Content Include="app\views\login.html" />
-    <Content Include="app\views\orders.html" />
-    <Content Include="app\views\refresh.html" />
-    <Content Include="app\views\signup.html" />
-    <Content Include="app\views\tokens.html" />
+    <Content Include="app\controllers\admin\indexController.js" />
+    <Content Include="app\controllers\admin\associateController.js" />
+    <Content Include="app\controllers\authentication\indexController.js" />
+    <Content Include="app\controllers\admin\homeController.js" />
+    <Content Include="app\controllers\authentication\loginController.js" />
+    <Content Include="app\controllers\admin\dashboardController.js" />
+    <Content Include="app\controllers\admin\ordersController.js" />
+    <Content Include="app\controllers\authentication\refreshController.js" />
+    <Content Include="app\controllers\authentication\signupController.js" />
+    <Content Include="app\controllers\admin\tokensManagerController.js" />
+    <Content Include="app\services\authentication\authInterceptorService.js" />
+    <Content Include="app\services\authentication\authService.js" />
+    <Content Include="app\services\admin\dashboardService.js" />
+    <Content Include="app\services\admin\ordersService.js" />
+    <Content Include="app\services\admin\tokensManagerService.js" />
+    <Content Include="app\views\admin\associate.html" />
+    <Content Include="app\views\admin\dashboard.html" />
+    <Content Include="app\views\admin\home.html" />
+    <Content Include="app\views\authentication\login.html" />
+    <Content Include="app\views\admin\orders.html" />
+    <Content Include="app\views\authentication\refresh.html" />
+    <Content Include="app\views\authentication\signup.html" />
+    <Content Include="app\views\admin\tokens.html" />
     <Content Include="authComplete.html" />
     <Content Include="content\css\font-awesome.min.css" />
     <Content Include="content\css\loading-bar.css" />
@@ -105,7 +106,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.js" />
+    <Content Include="app\appAuthentication.js" />
     <Content Include="content\css\bootstrap.min.css" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="admin.html" />
@@ -136,7 +137,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>32176</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/ART.Seguranca.Presentation.WebPages</IISUrl>
+          <IISUrl>http://localhost/ART.Seguranca.UI.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

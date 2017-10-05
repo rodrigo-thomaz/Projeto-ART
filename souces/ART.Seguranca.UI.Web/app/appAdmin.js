@@ -5,42 +5,27 @@ app.config(function ($routeProvider) {
 
     $routeProvider.when("/home", {
         controller: "homeController",
-        templateUrl: "app/views/home.html"
-    });
-
-    $routeProvider.when("/login", {
-        controller: "loginController",
-        templateUrl: "app/views/login.html"
-    });
-
-    $routeProvider.when("/signup", {
-        controller: "signupController",
-        templateUrl: "app/views/signup.html"
+        templateUrl: "app/views/admin/home.html"
     });
 
     $routeProvider.when("/orders", {
         controller: "ordersController",
-        templateUrl: "app/views/orders.html"
-    });
-
-    $routeProvider.when("/refresh", {
-        controller: "refreshController",
-        templateUrl: "app/views/refresh.html"
+        templateUrl: "app/views/admin/orders.html"
     });
 
     $routeProvider.when("/tokens", {
         controller: "tokensManagerController",
-        templateUrl: "app/views/tokens.html"
+        templateUrl: "app/views/admin/tokens.html"
     });
 
     $routeProvider.when("/associate", {
         controller: "associateController",
-        templateUrl: "app/views/associate.html"
+        templateUrl: "app/views/admin/associate.html"
     });
 
     $routeProvider.when("/dashboard", {
         controller: "dashboardController",
-        templateUrl: "app/views/dashboard.html"
+        templateUrl: "app/views/admin/dashboard.html"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });
