@@ -2,6 +2,7 @@
 {
     using ART.Data.Domain;
     using ART.Data.Repository;
+    using ART.Infra.CrossCutting.MQ;
     using ART.MQ.Worker.AutoMapper;
     using ART.MQ.Worker.Modules;
 
@@ -20,14 +21,15 @@
         {
             var builder = new ContainerBuilder();
 
-            //builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope();
+            builder.RegisterType<WorkerService>();
+                        
             builder.RegisterType<ARTDbContext>().InstancePerDependency();
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
-            builder.RegisterModule<BusModule>();
+            builder.RegisterModule<MQModule>();
             builder.RegisterModule<ConsumerModule>();
-
+            
             Mapper.Initialize(x =>
             {
                 x.AddProfile(new DSFamilyTempSensorProfile());

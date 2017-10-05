@@ -81,7 +81,6 @@
     <Compile Include="Models\DSFamilyTempSensorResolutionModel.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />
     <Compile Include="WorkerService.cs" />
-    <Compile Include="Modules\BusModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
