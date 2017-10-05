@@ -1,7 +1,7 @@
-﻿namespace ART.MQ.Worker.AutoMapper
+﻿namespace ART.Security.Domain.AutoMapper
 {
-    using ART.Data.Repository.Entities;
     using ART.Security.Contracts;
+    using ART.Security.Repository.Entities;
 
     using global::AutoMapper;
 
@@ -11,8 +11,8 @@
 
         public ApplicationUserProfile()
         {
-            CreateMap<ApplicationUserContract, ApplicationUser>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ApplicationUserId));
+            CreateMap<ApplicationUser, ApplicationUserContract>()
+                .ForMember(dest => dest.ApplicationUserId, opt => opt.MapFrom(src => src.Id));
         }
 
         #endregion Constructors

@@ -1,7 +1,7 @@
 ﻿using ART.Data.Domain.Interfaces;
 using ART.Data.Repository.Entities;
 using ART.Infra.CrossCutting.MQ;
-using ART.Seguranca.Contracts;
+using ART.Security.Contracts;
 using AutoMapper;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
