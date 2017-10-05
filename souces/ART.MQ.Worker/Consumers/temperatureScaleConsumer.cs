@@ -1,5 +1,5 @@
-﻿using ART.Data.Domain.Interfaces;
-using ART.Data.Repository.Entities;
+﻿using ART.Domotica.Domain.Interfaces;
+using ART.Domotica.Repository.Entities;
 using ART.Infra.CrossCutting.MQ;
 using ART.MQ.Common.QueueNames;
 using ART.MQ.Worker.Models;

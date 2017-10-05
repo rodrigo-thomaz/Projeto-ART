@@ -91,13 +91,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ART.Data.Domain\ART.Data.Domain.csproj">
+    <ProjectReference Include="..\ART.Domotica.Domain\ART.Domotica.Domain.csproj">
       <Project>{f541f7ff-b9d6-47dc-9097-4cd7b6084c7f}</Project>
-      <Name>ART.Data.Domain</Name>
+      <Name>ART.Domotica.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ART.Data.Repository\ART.Data.Repository.csproj">
+    <ProjectReference Include="..\ART.Domotica.Repository\ART.Domotica.Repository.csproj">
       <Project>{d0287824-c8bc-4025-8b99-5a8fd8aef1f1}</Project>
-      <Name>ART.Data.Repository</Name>
+      <Name>ART.Domotica.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
       <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>

@@ -1,6 +1,6 @@
 ﻿namespace ART.MQ.Worker.AutoMapper
 {
-    using ART.Data.Repository.Entities;
+    using ART.Domotica.Repository.Entities;
     using ART.Security.Contracts;
 
     using global::AutoMapper;

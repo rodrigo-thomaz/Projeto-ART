@@ -1,7 +1,7 @@
 ﻿namespace ART.MQ.Worker
 {
-    using ART.Data.Domain;
-    using ART.Data.Repository;
+    using ART.Domotica.Domain;
+    using ART.Domotica.Repository;
     using ART.Infra.CrossCutting.MQ;
     using ART.MQ.Worker.AutoMapper;
     using ART.MQ.Worker.Modules;
