@@ -1,6 +1,6 @@
 ﻿namespace ART.Security.Domain.AutoMapper
 {
-    using ART.Security.Common;
+    using ART.Security.Common.Contracts;
     using ART.Security.Repository.Entities;
 
     using global::AutoMapper;

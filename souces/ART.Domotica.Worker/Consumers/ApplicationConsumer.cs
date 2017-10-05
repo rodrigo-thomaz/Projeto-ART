@@ -1,4 +1,5 @@
 ﻿using ART.Domotica.Domain.Interfaces;
+using ART.Security.Common.QueueNames;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -42,7 +43,7 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            var queueName = ConfigurationManager.AppSettings["RabbitMQRegisterUserQueueName"];
+            var queueName = ApplicationUserQueueName.RegisterUserQueueName;
 
             _model.QueueDeclare(
                  queue: queueName

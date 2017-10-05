@@ -84,6 +84,7 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
     <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
+    <Compile Include="Interfaces\IThermometerDeviceRepository.cs" />
     <Compile Include="Migrations\201710050218518_InitialCreate.cs" />
     <Compile Include="Migrations\201710050218518_InitialCreate.Designer.cs">
       <DependentUpon>201710050218518_InitialCreate.cs</DependentUpon>
@@ -100,6 +101,7 @@
     <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />
     <Compile Include="Repositories\TemperatureScaleRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
+    <Compile Include="Repositories\ThermometerDeviceRepository.cs" />
     <Compile Include="RepositoryModule.cs" />
   </ItemGroup>
   <ItemGroup>

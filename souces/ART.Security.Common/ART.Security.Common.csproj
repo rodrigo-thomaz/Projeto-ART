@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationUserContract.cs" />
+    <Compile Include="Contracts\ApplicationUserContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueueNames\ApplicationUserQueueName.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

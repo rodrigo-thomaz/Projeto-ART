@@ -11,7 +11,8 @@
     using System.Configuration;
     using ART.Infra.CrossCutting.MQ;
     using global::AutoMapper;
-    using ART.Security.Common;
+    using ART.Security.Common.Contracts;
+    using ART.Security.Common.QueueNames;
 
     public class AuthDomain : IAuthDomain
     {
@@ -88,7 +89,7 @@
             var model = _connection.CreateModel();
             var basicProperties = model.CreateBasicProperties();
 
-            var queueName = ConfigurationManager.AppSettings["RabbitMQRegisterUserQueueName"];
+            var queueName = ApplicationUserQueueName.RegisterUserQueueName;
 
             model.QueueDeclare(
                   queue: queueName

@@ -1,4 +1,4 @@
-﻿namespace ART.Security.Common
+﻿namespace ART.Security.Common.Contracts
 {
     using System;
 

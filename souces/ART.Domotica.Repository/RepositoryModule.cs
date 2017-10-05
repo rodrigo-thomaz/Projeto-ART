@@ -16,6 +16,7 @@
             builder.RegisterType<TemperatureScaleRepository>().As<ITemperatureScaleRepository>();
             builder.RegisterType<DSFamilyTempSensorRepository>().As<IDSFamilyTempSensorRepository>();
             builder.RegisterType<DSFamilyTempSensorResolutionRepository>().As<IDSFamilyTempSensorResolutionRepository>();
+            builder.RegisterType<ThermometerDeviceRepository>().As<IThermometerDeviceRepository>();
         }
 
         #endregion Methods

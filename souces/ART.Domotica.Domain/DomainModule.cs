@@ -15,6 +15,7 @@
             builder.RegisterType<ApplicationUserDomain>().As<IApplicationUserDomain>();
             builder.RegisterType<DSFamilyTempSensorDomain>().As<IDSFamilyTempSensorDomain>();
             builder.RegisterType<TemperatureScaleDomain>().As<ITemperatureScaleDomain>();
+            builder.RegisterType<ThermometerDeviceDomain>().As<IThermometerDeviceDomain>();
         }
 
         #endregion Methods
