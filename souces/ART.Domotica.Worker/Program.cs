@@ -2,9 +2,9 @@
 {
     using ART.Domotica.Domain;
     using ART.Domotica.Repository;
-    using ART.Infra.CrossCutting.MQ;
     using ART.Domotica.Worker.AutoMapper;
     using ART.Domotica.Worker.Modules;
+    using ART.Infra.CrossCutting.MQ;
 
     using Autofac;
 

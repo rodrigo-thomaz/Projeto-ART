@@ -20,10 +20,6 @@
 
         #region Properties
 
-        public DbSet<SensorsInDevice> SensorsInDevice { get; set; }
-
-        public DbSet<HardwaresInApplication> HardwaresInApplication { get; set; }
-
         public DbSet<Application> Application
         {
             get; set;
@@ -40,6 +36,16 @@
         }
 
         public DbSet<DSFamilyTempSensorResolution> DSFamilyTempSensorResolution
+        {
+            get; set;
+        }
+
+        public DbSet<HardwaresInApplication> HardwaresInApplication
+        {
+            get; set;
+        }
+
+        public DbSet<SensorsInDevice> SensorsInDevice
         {
             get; set;
         }

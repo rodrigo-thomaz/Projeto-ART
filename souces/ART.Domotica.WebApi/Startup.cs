@@ -5,10 +5,10 @@ namespace ART.Domotica.WebApi
     using System.Threading;
     using System.Web.Http;
 
-    using ART.Infra.CrossCutting.MQ;
     using ART.Domotica.WebApi.App_Start;
     using ART.Domotica.WebApi.Controllers;
     using ART.Domotica.WebApi.Modules;
+    using ART.Infra.CrossCutting.MQ;
 
     using Autofac;
     using Autofac.Integration.WebApi;

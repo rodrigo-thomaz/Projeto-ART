@@ -7,10 +7,10 @@ namespace ART.Security.WebApi
     using System.Web.Http;
 
     using ART.Infra.CrossCutting.MQ;
-    using ART.Security.WebApi.Controllers;
-    using ART.Security.WebApi.Providers;
     using ART.Security.Domain;
     using ART.Security.Repository;
+    using ART.Security.WebApi.Controllers;
+    using ART.Security.WebApi.Providers;
 
     using Autofac;
     using Autofac.Integration.WebApi;

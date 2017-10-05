@@ -8,8 +8,5 @@
 
     public class ApplicationUser : IdentityUser<Guid, ApplicationUserLogin, ApplicationUserRole, ApplicationUserClaim>, IEntity<Guid>
     {
-        #region Properties
-
-        #endregion Properties
     }
 }

@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Repository.Entities;
     using ART.Security.Common.Contracts;
+
     using global::AutoMapper;
 
     public class ApplicationUserProfile : Profile

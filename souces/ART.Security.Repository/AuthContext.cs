@@ -21,7 +21,7 @@
 
         #endregion Constructors
 
-        #region Properties        
+        #region Properties
 
         public DbSet<Client> Clients
         {
