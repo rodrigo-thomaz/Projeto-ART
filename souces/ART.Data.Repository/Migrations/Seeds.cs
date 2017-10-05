@@ -1,10 +1,10 @@
 ﻿namespace ART.Data.Repository.Migrations
 {
-    using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Text;
 
     using ART.Data.Repository.Entities;
+    using System.Data.Entity.Migrations;
 
     public class Seeds
     {
@@ -208,54 +208,6 @@
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice2);
-
-            context.SaveChanges();
-
-            #endregion
-
-            #region Application
-
-            var space1 = new Application
-            {
-                Name = "Aquário Sala",
-                Description = "Aquário Quarto",
-            };
-
-            var space2 = new Application
-            {
-                Name = "Fonte com carpas",
-                Description = "Pequena fonte com carpas no quintal",
-            };
-
-            context.Application.AddOrUpdate(x => x.Name
-                , space1
-                , space2);
-
-            context.SaveChanges();
-
-            #endregion
-
-            #region HardwaresInApplication
-
-            var hardwaresInApplication1 = new HardwaresInApplication
-            {
-                HardwareBase = sensor1,
-                HardwareBaseId = sensor1.Id,
-                Application = space1,
-                ApplicationId = space1.Id,
-            };
-
-            context.HardwaresInApplication.AddOrUpdate(hardwaresInApplication1);
-
-            var hardwaresInApplication2 = new HardwaresInApplication
-            {
-                HardwareBase = sensor2,
-                HardwareBaseId = sensor2.Id,
-                Application = space2,
-                ApplicationId = space2.Id,
-            };
-
-            context.HardwaresInApplication.AddOrUpdate(hardwaresInApplication2);
 
             context.SaveChanges();
 

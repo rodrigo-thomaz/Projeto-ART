@@ -61,9 +61,6 @@
     <Compile Include="Configurations\ApplicationRoleConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserClaimConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
-    <Compile Include="Configurations\ApplicationConfiguration.cs" />
-    <Compile Include="Configurations\UsersInApplicationConfiguration.cs" />
-    <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\ApplicationRole.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\ApplicationUserClaim.cs" />
@@ -72,15 +69,10 @@
     <Compile Include="Entities\Client.cs" />
     <Compile Include="Entities\ApplicationTypes.cs" />
     <Compile Include="Entities\RefreshToken.cs" />
-    <Compile Include="Entities\UsersInApplication.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Migrations\201710041605269_InitialCreate.cs" />
-    <Compile Include="Migrations\201710041605269_InitialCreate.Designer.cs">
-      <DependentUpon>201710041605269_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710041828200_InitialCreate1.cs" />
-    <Compile Include="Migrations\201710041828200_InitialCreate1.Designer.cs">
-      <DependentUpon>201710041828200_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\201710051159278_InitialCreate.cs" />
+    <Compile Include="Migrations\201710051159278_InitialCreate.Designer.cs">
+      <DependentUpon>201710051159278_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,18 +85,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710041605269_InitialCreate.resx">
-      <DependentUpon>201710041605269_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710041828200_InitialCreate1.resx">
-      <DependentUpon>201710041828200_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\ART.Infra.CrossCutting.Repository\ART.Infra.CrossCutting.Repository.csproj">
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710051159278_InitialCreate.resx">
+      <DependentUpon>201710051159278_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
