@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.Common.Contracts
+﻿namespace ART.Domotica.Common.Contracts
 {
     using System;
 

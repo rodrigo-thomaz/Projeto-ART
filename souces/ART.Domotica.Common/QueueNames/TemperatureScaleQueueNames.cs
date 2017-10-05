@@ -1,4 +1,4 @@
-﻿namespace ART.MQ.Common.QueueNames
+﻿namespace ART.Domotica.Common.QueueNames
 {
     public static class TemperatureScaleQueueNames
     {

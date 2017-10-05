@@ -1,5 +1,5 @@
 ﻿using ART.Infra.CrossCutting.MQ;
-using ART.MQ.Common.QueueNames;
+using ART.Domotica.Common.QueueNames;
 using ART.MQ.DistributedServices.IProducers;
 using RabbitMQ.Client;
 using System.Threading.Tasks;

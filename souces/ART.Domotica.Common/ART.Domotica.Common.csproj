@@ -7,8 +7,8 @@
     <ProjectGuid>{8C7DFA89-52D2-4907-B515-B3C776BCB12E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.MQ.Common</RootNamespace>
-    <AssemblyName>ART.MQ.Common</AssemblyName>
+    <RootNamespace>ART.Domotica.Common</RootNamespace>
+    <AssemblyName>ART.Domotica.Common</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

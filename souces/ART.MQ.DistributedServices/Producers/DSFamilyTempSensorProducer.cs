@@ -1,5 +1,5 @@
-﻿using ART.MQ.Common.Contracts;
-using ART.MQ.Common.QueueNames;
+﻿using ART.Domotica.Common.Contracts;
+using ART.Domotica.Common.QueueNames;
 using ART.MQ.DistributedServices.IProducers;
 using ART.MQ.DistributedServices.Models;
 using AutoMapper;

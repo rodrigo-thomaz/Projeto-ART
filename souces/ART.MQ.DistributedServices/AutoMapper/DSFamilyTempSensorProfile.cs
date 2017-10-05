@@ -1,6 +1,6 @@
 ﻿namespace ART.MQ.DistributedServices.AutoMapper
 {
-    using ART.MQ.Common.Contracts;
+    using ART.Domotica.Common.Contracts;
     using ART.MQ.DistributedServices.Models;
 
     using global::AutoMapper;

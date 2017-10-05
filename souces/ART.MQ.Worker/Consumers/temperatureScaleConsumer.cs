@@ -1,7 +1,7 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities;
 using ART.Infra.CrossCutting.MQ;
-using ART.MQ.Common.QueueNames;
+using ART.Domotica.Common.QueueNames;
 using ART.MQ.Worker.Models;
 using AutoMapper;
 using Newtonsoft.Json;
