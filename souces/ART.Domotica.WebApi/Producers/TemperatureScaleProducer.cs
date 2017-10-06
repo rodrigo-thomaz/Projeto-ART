@@ -23,7 +23,7 @@ namespace ART.Domotica.WebApi.Producers
         public async Task GetScales(AuthenticatedMessageContract message)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
-            await Task.Run(() => _model.BasicPublish("", TemperatureScaleConstants.GetScalesQueueName, null, payload));
+            _model.BasicPublish("", TemperatureScaleConstants.GetScalesQueueName, null, payload);
         }
 
         #endregion

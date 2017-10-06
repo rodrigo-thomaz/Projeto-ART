@@ -69,7 +69,7 @@ namespace ART.Domotica.WebApi.Controllers
         /// <remarks>
         /// Altera a resolução de um sensor
         /// </remarks>
-        /// <param name="request">model do request</param>
+        /// <param name="contract">contrato do request</param>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
@@ -87,7 +87,7 @@ namespace ART.Domotica.WebApi.Controllers
         /// <remarks>
         /// Altera o alarme alto de um sensor
         /// </remarks>
-        /// <param name="request">model do request</param>
+        /// <param name="contract">contrato do request</param>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
@@ -105,7 +105,7 @@ namespace ART.Domotica.WebApi.Controllers
         /// <remarks>
         /// Altera o alarme baixo de um sensor
         /// </remarks>
-        /// <param name="request">model do request</param>
+        /// <param name="contract">contrato do request</param>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>

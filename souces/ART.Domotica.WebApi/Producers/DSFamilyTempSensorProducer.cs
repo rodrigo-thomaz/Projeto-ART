@@ -24,13 +24,13 @@ namespace ART.Domotica.WebApi.Producers
         public async Task GetAll(AuthenticatedMessageContract message)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
-            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload));
+            _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload);
         }
 
         public async Task GetResolutions(AuthenticatedMessageContract message)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
-            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetResolutionsQueueName, null, payload));
+            _model.BasicPublish("", DSFamilyTempSensorConstants.GetResolutionsQueueName, null, payload);
         }
 
         public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
