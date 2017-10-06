@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ART.Infra.CrossCutting.MQ
+﻿namespace ART.Infra.CrossCutting.MQ
 {
     public class NoAuthenticatedMessageContract
     {
@@ -24,5 +22,5 @@ namespace ART.Infra.CrossCutting.MQ
         }
 
         #endregion Properties
-    }    
+    }
 }

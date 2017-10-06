@@ -1,5 +1,5 @@
-﻿using ART.Domotica.Domain.Interfaces;
-using ART.Security.Common.QueueNames;
+﻿using ART.Domotica.Constant;
+using ART.Domotica.Domain.Interfaces;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -42,29 +42,29 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            var queueName = ApplicationUserQueueName.RegisterUserQueueName;
+            var queueName = ApplicationConstants.GetAllQueueName;
 
             _model.QueueDeclare(
                  queue: queueName
-               , durable: true
+               , durable: false
                , exclusive: false
-               , autoDelete: false
+               , autoDelete: true
                , arguments: null);
 
-            _getAllConsumer.Received += RegisterUserReceived;
+            _getAllConsumer.Received += GetAllReceived;
 
             _model.BasicConsume(queueName, false, _getAllConsumer);
         }
 
-        private void RegisterUserReceived(object sender, BasicDeliverEventArgs e)
+        private void GetAllReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(RegisterUserAsync(sender, e));
+            Task.WaitAll(GetAllReceivedAsync(sender, e));
         }
 
-        private async Task RegisterUserAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[ApplicationUserConsumer.RegisterUserAsync] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[ApplicationConsumer.GetAllReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
 
             //var contract = SerializationHelpers.DeserializeJsonBufferToType<ApplicationUserContract>(e.Body);

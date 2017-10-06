@@ -1,8 +1,9 @@
-﻿using ART.Infra.CrossCutting.WebApi;
-using System.Linq;
-
-namespace ART.Infra.CrossCutting.MQ.WebApi
+﻿namespace ART.Infra.CrossCutting.MQ.WebApi
 {
+    using System.Linq;
+
+    using ART.Infra.CrossCutting.WebApi;
+
     public abstract class NoAuthenticatedMQApiControllerBase : NoAuthenticatedApiControllerBase
     {
         #region Properties
@@ -20,6 +21,8 @@ namespace ART.Infra.CrossCutting.MQ.WebApi
 
         #endregion Properties
 
+        #region Methods
+
         protected NoAuthenticatedMessageContract CreateMessage()
         {
             return new NoAuthenticatedMessageContract
@@ -36,5 +39,7 @@ namespace ART.Infra.CrossCutting.MQ.WebApi
                 Contract = contract,
             };
         }
+
+        #endregion Methods
     }
 }

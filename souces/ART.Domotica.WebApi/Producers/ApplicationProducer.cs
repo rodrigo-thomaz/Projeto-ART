@@ -1,9 +1,9 @@
 ﻿using ART.Domotica.WebApi.IProducers;
-using System;
 using System.Threading.Tasks;
 using RabbitMQ.Client;
 using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.WebApi;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.WebApi.Producers
 {
@@ -20,11 +20,11 @@ namespace ART.Domotica.WebApi.Producers
 
         #region public voids
 
-        public async Task Get(Guid applicationUserId)
+        public async Task GetAll(AuthenticatedMessageContract message)
         {
-            //var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
-            //await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload));
-        } 
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
+            _model.BasicPublish("", ApplicationConstants.GetAllQueueName, null, payload);
+        }
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace ART.Domotica.WebApi.Producers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: ApplicationConstants.GetQueueName
+                  queue: ApplicationConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

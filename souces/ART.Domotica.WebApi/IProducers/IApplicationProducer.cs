@@ -1,13 +1,13 @@
 ﻿namespace ART.Domotica.WebApi.IProducers
 {
-    using System;
+    using ART.Infra.CrossCutting.MQ;
     using System.Threading.Tasks;
 
     public interface IApplicationProducer
     {
         #region Methods
 
-        Task Get(Guid applicationUserId);
+        Task GetAll(AuthenticatedMessageContract message);
 
         #endregion Methods
     }

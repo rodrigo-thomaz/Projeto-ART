@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.WebApi.IProducers
 {
-    using ART.Infra.CrossCutting.MQ;
     using System.Threading.Tasks;
+
+    using ART.Infra.CrossCutting.MQ;
 
     public interface ITemperatureScaleProducer
     {

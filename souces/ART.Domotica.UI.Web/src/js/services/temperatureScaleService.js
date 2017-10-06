@@ -3,23 +3,23 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'EventDispatc
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var initScales = false;
+    var initialized = false;
 
     var serviceFactory = {};    
+
+    var onConnected = function () {
+        stompService.client.subscribe('/topic/' + stompService.session + '-GetScalesCompleted', onGetScalesCompleted);
+        if (!initialized) {
+            initialized = true;
+            getScales();
+        }
+    }   
 
     var getScales = function () {
         return $http.get(serviceBase + 'api/temperatureScale/getScales/' + stompService.session).then(function (results) {
             //alert('envio bem sucedido');
         });
-    };
-
-    var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-GetScalesCompleted', onGetScalesCompleted);
-        if (!initScales) {
-            initScales = true;
-            getScales();
-        }
-    }    
+    };     
 
     var onGetScalesCompleted = function (payload) {
         var data = JSON.parse(payload.body);

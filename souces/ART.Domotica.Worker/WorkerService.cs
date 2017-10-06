@@ -8,6 +8,7 @@
     {
         #region Fields
 
+        private readonly ApplicationConsumer _applicationConsumer;
         private readonly ApplicationUserConsumer _applicationUserConsumer;
         private readonly IConnection _connection;
         private readonly DSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
@@ -17,9 +18,10 @@
 
         #region Constructors
 
-        public WorkerService(IConnection connection, ApplicationUserConsumer applicationUserConsumer, DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer, TemperatureScaleConsumer temperatureScaleConsumer)
+        public WorkerService(IConnection connection, ApplicationConsumer applicationConsumer, ApplicationUserConsumer applicationUserConsumer, DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer, TemperatureScaleConsumer temperatureScaleConsumer)
         {
             _connection = connection;
+            _applicationConsumer = applicationConsumer;
             _applicationUserConsumer = applicationUserConsumer;
             _dsFamilyTempSensorConsumer = dsFamilyTempSensorConsumer;
             _temperatureScaleConsumer = temperatureScaleConsumer;

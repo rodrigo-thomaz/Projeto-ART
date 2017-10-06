@@ -1,17 +1,20 @@
-﻿using System;
-
-namespace ART.Infra.CrossCutting.MQ
+﻿namespace ART.Infra.CrossCutting.MQ
 {
+    using System;
+
     public class AuthenticatedMessageContract
     {
         #region Properties
+
+        public Guid ApplicationUserId
+        {
+            get; set;
+        }
 
         public string SouceMQSession
         {
             get; set;
         }
-
-        public Guid ApplicationUserId { get; set; }
 
         #endregion Properties
     }
@@ -26,5 +29,5 @@ namespace ART.Infra.CrossCutting.MQ
         }
 
         #endregion Properties
-    }    
+    }
 }

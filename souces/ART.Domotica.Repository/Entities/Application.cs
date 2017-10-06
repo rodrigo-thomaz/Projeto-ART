@@ -8,7 +8,7 @@
     public class Application : IEntity<Guid>
     {
         #region Properties
-        
+
         public ICollection<HardwaresInApplication> HardwaresInApplication
         {
             get; set;

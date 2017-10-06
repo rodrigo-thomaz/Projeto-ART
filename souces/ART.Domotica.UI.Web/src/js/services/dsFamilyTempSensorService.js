@@ -3,7 +3,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var initResolutions = false;
+    var initialized = false;
 
     var serviceFactory = {};    
 
@@ -62,8 +62,8 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
         stompService.client.subscribe('/topic/' + stompService.session + '-GetResolutionsCompleted', onGetResolutionsCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-GetAllCompleted', onGetAllCompleted);
 
-        if (!initResolutions) {
-            initResolutions = true;
+        if (!initialized) {
+            initialized = true;
             getResolutions();
         }
 

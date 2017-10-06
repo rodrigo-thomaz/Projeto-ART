@@ -1,8 +1,9 @@
-﻿using ART.Infra.CrossCutting.WebApi;
-using System.Linq;
-
-namespace ART.Infra.CrossCutting.MQ.WebApi
+﻿namespace ART.Infra.CrossCutting.MQ.WebApi
 {
+    using System.Linq;
+
+    using ART.Infra.CrossCutting.WebApi;
+
     public abstract class AuthenticatedMQApiControllerBase : AuthenticatedApiControllerBase
     {
         #region Properties
@@ -19,6 +20,8 @@ namespace ART.Infra.CrossCutting.MQ.WebApi
 
         #endregion Properties
 
+        #region Methods
+
         protected AuthenticatedMessageContract CreateMessage()
         {
             return new AuthenticatedMessageContract
@@ -32,10 +35,12 @@ namespace ART.Infra.CrossCutting.MQ.WebApi
         {
             return new AuthenticatedMessageContract<TContract>
             {
-                SouceMQSession = _souceMQSession,                
+                SouceMQSession = _souceMQSession,
                 ApplicationUserId = _applicationUserId,
                 Contract = contract,
             };
-        }        
+        }
+
+        #endregion Methods
     }
 }

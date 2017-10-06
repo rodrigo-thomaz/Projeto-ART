@@ -1,9 +1,8 @@
 ﻿namespace ART.Domotica.Contract
 {
-    using ART.Infra.CrossCutting.MQ;
     using System;
 
-    public class DSFamilyTempSensorSetLowAlarmContract 
+    public class DSFamilyTempSensorSetLowAlarmContract
     {
         #region Properties
 

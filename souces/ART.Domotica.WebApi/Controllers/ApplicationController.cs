@@ -4,6 +4,7 @@
 
     using ART.Domotica.WebApi.IProducers;
     using ART.Infra.CrossCutting.MQ.WebApi;
+    using System.Threading.Tasks;
 
     [Authorize]
     [RoutePrefix("api/application")]
@@ -24,5 +25,27 @@
         }
 
         #endregion Constructors
+
+        #region public voids
+
+        /// <summary>
+        /// Retornar uma lista de aplicações do usuário
+        /// </summary>        
+        /// <remarks>
+        /// Retornar uma lista de aplicações do usuário
+        /// </remarks>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("getAll")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetAll()
+        {
+            await _applicationProducer.GetAll(CreateMessage());
+            return Ok();
+        }
+
+        #endregion
     }
 }
