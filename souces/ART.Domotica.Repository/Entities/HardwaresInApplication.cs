@@ -1,10 +1,16 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using ART.Infra.CrossCutting.Repository;
     using System;
 
-    public class HardwaresInApplication
+    public class HardwaresInApplication : IEntity<Guid>
     {
         #region Properties
+
+        public Guid Id
+        {
+            get; set;
+        }
 
         public Application Application
         {

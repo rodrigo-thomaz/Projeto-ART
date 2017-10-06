@@ -17,6 +17,7 @@
 
             //Id
             Property(x => x.Id)
+                .HasColumnOrder(0)
                 .IsRequired();
         }
 

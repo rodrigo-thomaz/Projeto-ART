@@ -7,12 +7,7 @@
 
     public class Application : IEntity<Guid>
     {
-        #region Properties
-
-        public string Description
-        {
-            get; set;
-        }
+        #region Properties        
 
         public ICollection<HardwaresInApplication> HardwaresInApplication
         {
@@ -24,12 +19,12 @@
             get; set;
         }
 
-        public string Name
+        public ICollection<UsersInApplication> UsersInApplication
         {
             get; set;
         }
 
-        public ICollection<UsersInApplication> UsersInApplication
+        public ICollection<Project> Projects
         {
             get; set;
         }

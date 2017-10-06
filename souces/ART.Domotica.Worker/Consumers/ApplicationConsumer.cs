@@ -70,7 +70,7 @@ namespace ART.Domotica.Worker.Consumers
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, "GetAllCompleted");
 
             Console.WriteLine("[ApplicationConsumer.GetAllCompleted] {0}", Encoding.UTF8.GetString(buffer));
-
+            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 

@@ -17,11 +17,13 @@
 
             //Id
             Property(x => x.Id)
+                .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //Name
             Property(x => x.Name)
+                .HasColumnOrder(1)
                 .HasMaxLength(255)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -29,12 +31,14 @@
 
             //Bits
             Property(x => x.Bits)
+                .HasColumnOrder(2)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
 
             //Resolution
             Property(x => x.Resolution)
+                .HasColumnOrder(3)
                 .HasPrecision(5,4);
 
             //ResolutionDecimalPlaces
@@ -42,10 +46,12 @@
 
             //ConversionTime
             Property(x => x.ConversionTime)
+                .HasColumnOrder(4)
                 .HasPrecision(5, 2);
 
             //Description
             Property(x => x.Description)
+                .HasColumnOrder(5)
                 .HasMaxLength(5000)
                 .IsOptional();
         }

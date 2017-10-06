@@ -19,10 +19,12 @@
 
             //Id
             Property(x => x.Id)
+                .HasColumnOrder(0)
                 .IsRequired();
 
             //MacAddress
             Property(x => x.MacAddress)
+                .HasColumnOrder(1)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()

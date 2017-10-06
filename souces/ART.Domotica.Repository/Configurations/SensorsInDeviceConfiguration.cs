@@ -21,6 +21,7 @@
 
             //SensorBaseId
             Property(x => x.SensorBaseId)
+                .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -28,6 +29,7 @@
 
             //DeviceBaseId
             Property(x => x.DeviceBaseId)
+                .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 

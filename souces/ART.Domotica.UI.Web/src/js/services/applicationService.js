@@ -21,8 +21,9 @@ app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', 'EventDisp
         });
     };
 
-    var onGetAllCompleted = function (payload) {
-        var data = JSON.parse(payload.body);
+    var onGetAllCompleted = function (payload) {        
+        var dataUTF8 = decodeURIComponent(escape(payload.body));
+        var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
             serviceFactory.applications.push(data[i]);
         }

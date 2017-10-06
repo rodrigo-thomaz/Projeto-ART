@@ -17,8 +17,14 @@
             //Primary Keys
             HasKey(x => x.Id);
 
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(0)
+                .IsRequired();
+
             //DeviceAddress
             Property(x => x.DeviceAddress)
+                .HasColumnOrder(1)
                 .HasMaxLength(15)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -26,14 +32,29 @@
 
             //Family
             Property(x => x.Family)
+                .HasColumnOrder(2)
                 .HasMaxLength(10)
                 .IsRequired();
 
+            //HighAlarm
+            Property(x => x.HighAlarm)
+                .HasColumnOrder(3)
+                .HasPrecision(6, 3);
+
+            //LowAlarm
+            Property(x => x.LowAlarm)
+                .HasColumnOrder(4)
+                .HasPrecision(6, 3);
+
             //TemperatureScale
-            HasRequired(x => x.TemperatureScale)
+            HasRequired(x => x.TemperatureScale)                
                 .WithMany(x => x.DSFamilyTempSensors)
                 .HasForeignKey(x => x.TemperatureScaleId)
                 .WillCascadeOnDelete(false);
+
+            //TemperatureScaleId
+            Property(x => x.TemperatureScaleId)
+                .HasColumnOrder(5);
 
             //DSFamilyTempSensorResolution
             HasRequired(x => x.DSFamilyTempSensorResolution)
@@ -41,13 +62,9 @@
                 .HasForeignKey(x => x.DSFamilyTempSensorResolutionId)
                 .WillCascadeOnDelete(false);
 
-            //HighAlarm
-            Property(x => x.HighAlarm)
-                .HasPrecision(6, 3);
-
-            //LowAlarm
-            Property(x => x.LowAlarm)
-                .HasPrecision(6, 3);
+            //DSFamilyTempSensorResolutionId
+            Property(x => x.DSFamilyTempSensorResolutionId)
+                .HasColumnOrder(6);
         }
 
         #endregion Constructors

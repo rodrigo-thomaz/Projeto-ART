@@ -18,11 +18,7 @@
 
             //Id
             Property(x => x.Id)
-                .IsRequired();
-
-            //Id
-            Property(x => x.Id)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .HasColumnOrder(0)
                 .IsRequired();
         }
 

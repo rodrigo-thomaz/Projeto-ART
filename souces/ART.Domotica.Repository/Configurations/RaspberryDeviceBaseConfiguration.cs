@@ -19,10 +19,12 @@
 
             //Id
             Property(x => x.Id)
+                .HasColumnOrder(0)
                 .IsRequired();
 
             //LanMacAddress
             Property(x => x.LanMacAddress)
+                .HasColumnOrder(1)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()
@@ -31,6 +33,7 @@
 
             //WLanMacAddress
             Property(x => x.WLanMacAddress)
+                .HasColumnOrder(2)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()

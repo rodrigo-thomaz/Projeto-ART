@@ -17,11 +17,13 @@
 
             //Id
             Property(x => x.Id)
+                .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //Name
             Property(x => x.Name)
+                .HasColumnOrder(1)
                 .HasMaxLength(255)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -29,6 +31,7 @@
 
             //Symbol
             Property(x => x.Symbol)
+                .HasColumnOrder(2)
                 .HasMaxLength(2)
                 .IsFixedLength()
                 .IsRequired()
@@ -37,6 +40,7 @@
 
             //Description
             Property(x => x.Description)
+                .HasColumnOrder(3)
                 .HasMaxLength(5000)
                 .IsOptional();
         }

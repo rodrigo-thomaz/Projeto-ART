@@ -56,6 +56,7 @@
     <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
     <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
+    <Compile Include="Configurations\ProjectConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
     <Compile Include="Configurations\HardwaresInApplicationConfiguration.cs" />
     <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
@@ -70,7 +71,9 @@
     <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
     <Compile Include="Entities\ESPDeviceBase.cs" />
     <Compile Include="Entities\HardwareBase.cs" />
+    <Compile Include="Entities\HardwaresInProject.cs" />
     <Compile Include="Entities\HardwaresInApplication.cs" />
+    <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\RaspberryDeviceBase.cs" />
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
@@ -104,6 +107,26 @@
     <Compile Include="Migrations\201710061656149_AddFieldNameDescription.cs" />
     <Compile Include="Migrations\201710061656149_AddFieldNameDescription.Designer.cs">
       <DependentUpon>201710061656149_AddFieldNameDescription.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710062206450_AddTableProject.cs" />
+    <Compile Include="Migrations\201710062206450_AddTableProject.Designer.cs">
+      <DependentUpon>201710062206450_AddTableProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710062219278_FieldApplicationIdInProject.cs" />
+    <Compile Include="Migrations\201710062219278_FieldApplicationIdInProject.Designer.cs">
+      <DependentUpon>201710062219278_FieldApplicationIdInProject.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710062226105_FieldApplicationIdInProject1.cs" />
+    <Compile Include="Migrations\201710062226105_FieldApplicationIdInProject1.Designer.cs">
+      <DependentUpon>201710062226105_FieldApplicationIdInProject1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710062303034_FieldApplicationIdInProject2.cs" />
+    <Compile Include="Migrations\201710062303034_FieldApplicationIdInProject2.Designer.cs">
+      <DependentUpon>201710062303034_FieldApplicationIdInProject2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710062309343_FieldApplicationIdInProject3.cs" />
+    <Compile Include="Migrations\201710062309343_FieldApplicationIdInProject3.Designer.cs">
+      <DependentUpon>201710062309343_FieldApplicationIdInProject3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -141,6 +164,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710061656149_AddFieldNameDescription.resx">
       <DependentUpon>201710061656149_AddFieldNameDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710062206450_AddTableProject.resx">
+      <DependentUpon>201710062206450_AddTableProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710062219278_FieldApplicationIdInProject.resx">
+      <DependentUpon>201710062219278_FieldApplicationIdInProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710062226105_FieldApplicationIdInProject1.resx">
+      <DependentUpon>201710062226105_FieldApplicationIdInProject1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710062303034_FieldApplicationIdInProject2.resx">
+      <DependentUpon>201710062303034_FieldApplicationIdInProject2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710062309343_FieldApplicationIdInProject3.resx">
+      <DependentUpon>201710062309343_FieldApplicationIdInProject3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

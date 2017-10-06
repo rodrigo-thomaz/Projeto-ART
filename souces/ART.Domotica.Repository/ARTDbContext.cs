@@ -25,6 +25,11 @@
             get; set;
         }
 
+        public DbSet<Project> Project
+        {
+            get; set;
+        }
+
         public DbSet<ApplicationUser> ApplicationUser
         {
             get; set;
@@ -86,6 +91,7 @@
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwaresInApplicationConfiguration());
+            modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
             modelBuilder.Configurations.Add(new ThermometerDeviceConfiguration());
