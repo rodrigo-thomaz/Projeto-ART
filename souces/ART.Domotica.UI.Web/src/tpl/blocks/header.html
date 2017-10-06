@@ -37,21 +37,9 @@
               <span>Aplica&ccedil;&otilde;es</span> <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#" translate="header.navbar.new.PROJECT">Projects</a></li>
-              <li>
-                <a href>
-                  <span class="badge bg-info pull-right">5</span>
-                  <span translate="header.navbar.new.TASK">Task</span>
-                </a>
-              </li>
-              <li><a href translate="header.navbar.new.USER">User</a></li>
+              <li ng-repeat="item in applications"><a href="#">{{item.name}}</a></li>              
               <li class="divider"></li>
-              <li>
-                <a href>
-                  <span class="badge bg-danger pull-right">4</span>
-                  <span translate="header.navbar.new.EMAIL">Email</span>
-                </a>
-              </li>
+                <li><a href="#">Gerenciar aplicações</a></li>              
             </ul>
           </li>
         </ul>

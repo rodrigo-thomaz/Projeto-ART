@@ -32,11 +32,12 @@
         {
             var application = new Application
             {
+                Name = "Minha aplicação",
                 UsersInApplication = new List<UsersInApplication>
                 {
                     new UsersInApplication
                     {
-                        ApplicationUser = applicationUser
+                        ApplicationUser = applicationUser,                        
                     }
                 }
             };
