@@ -1,5 +1,6 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
+using ART.Infra.CrossCutting.MQ.Contract;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -67,9 +68,9 @@ namespace ART.Domotica.Worker.Consumers
             Console.WriteLine("[ApplicationConsumer.GetAllReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
 
-            //var contract = SerializationHelpers.DeserializeJsonBufferToType<ApplicationUserContract>(e.Body);
+            var contract = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             //var entity = Mapper.Map<ApplicationUserContract, ApplicationUser>(contract);
-            //await _applicationDomain.RegisterUser(entity);
+           // await _applicationDomain.
             //Console.WriteLine("[ApplicationUserDomain.RegisterUser] Ok");
         }
 

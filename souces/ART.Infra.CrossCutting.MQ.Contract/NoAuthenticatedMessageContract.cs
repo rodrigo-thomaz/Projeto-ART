@@ -1,4 +1,4 @@
-﻿namespace ART.Infra.CrossCutting.MQ
+﻿namespace ART.Infra.CrossCutting.MQ.Contract
 {
     public class NoAuthenticatedMessageContract
     {

@@ -8,7 +8,6 @@
     using Microsoft.AspNet.Identity;
     using ART.Security.Repository.Interfaces;
     using RabbitMQ.Client;
-    using ART.Infra.CrossCutting.MQ;
     using global::AutoMapper;
     using ART.Security.Common.Contracts;
     using ART.Security.Common.QueueNames;

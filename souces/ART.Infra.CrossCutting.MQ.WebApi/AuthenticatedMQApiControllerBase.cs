@@ -3,6 +3,7 @@
     using System.Linq;
 
     using ART.Infra.CrossCutting.WebApi;
+    using ART.Infra.CrossCutting.MQ.Contract;
 
     public abstract class AuthenticatedMQApiControllerBase : AuthenticatedApiControllerBase
     {

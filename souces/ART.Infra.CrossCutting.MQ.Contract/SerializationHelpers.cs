@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 
-namespace ART.Infra.CrossCutting.MQ
+namespace ART.Infra.CrossCutting.MQ.Contract
 {
     public static class SerializationHelpers
     {

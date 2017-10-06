@@ -1,6 +1,5 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities;
-using ART.Infra.CrossCutting.MQ;
 using ART.Security.Common.Contracts;
 using ART.Security.Common.QueueNames;
 using AutoMapper;

@@ -1,6 +1,5 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities;
-using ART.Infra.CrossCutting.MQ;
 using ART.Domotica.Contract;
 using ART.Domotica.Worker.Contracts;
 using ART.Domotica.Worker.Models;

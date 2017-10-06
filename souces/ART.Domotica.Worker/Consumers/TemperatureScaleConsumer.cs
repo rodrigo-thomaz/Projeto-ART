@@ -1,6 +1,5 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities;
-using ART.Infra.CrossCutting.MQ;
 using ART.Domotica.Worker.Models;
 using AutoMapper;
 using Newtonsoft.Json;

@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Contract;
-    using ART.Infra.CrossCutting.MQ;
+    using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IDSFamilyTempSensorProducer
     {
