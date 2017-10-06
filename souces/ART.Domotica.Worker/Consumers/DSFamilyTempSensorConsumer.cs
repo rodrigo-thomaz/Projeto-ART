@@ -118,11 +118,11 @@ namespace ART.Domotica.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorConsumer.GetAllReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorGetAllContract>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
 
-            var exchange = string.Format("{0}-{1}", contract.Session, "GetAllCompleted");
+            var exchange = string.Format("{0}-{1}", message.SouceMQSession, "GetAllCompleted");
 
-            var entities = await _dsFamilyTempSensorDomain.GetAll(contract.ApplicationId);
+            var entities = await _dsFamilyTempSensorDomain.GetAll(message.ApplicationUserId);
             Console.WriteLine("[DSFamilyTempSensorDomain.GetAll] Ok");
 
             var models = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorModel>>(entities);
@@ -142,9 +142,9 @@ namespace ART.Domotica.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorConsumer.GetResolutionsReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorGetResolutionsContract>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
 
-            var exchange = string.Format("{0}-{1}", contract.Session, "GetResolutionsCompleted");
+            var exchange = string.Format("{0}-{1}", message.SouceMQSession, "GetResolutionsCompleted");
 
             var entities = await _dsFamilyTempSensorDomain.GetResolutions();
             Console.WriteLine("[DSFamilyTempSensorDomain.GetResolutions] Ok");

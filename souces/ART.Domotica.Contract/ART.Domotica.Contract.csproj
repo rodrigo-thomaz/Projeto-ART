@@ -40,12 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DSFamilyTempSensorGetAllContract.cs" />
-    <Compile Include="DSFamilyTempSensorGetResolutionsContract.cs" />
     <Compile Include="DSFamilyTempSensorSetHighAlarmContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

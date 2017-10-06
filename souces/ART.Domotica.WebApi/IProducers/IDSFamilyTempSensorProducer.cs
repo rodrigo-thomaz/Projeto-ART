@@ -9,15 +9,15 @@
     {
         #region Methods
 
-        Task GetAll(AuthenticatedContract<DSFamilyTempSensorGetAllContract> contract);
+        Task GetAll(AuthenticatedMessageContract message);
 
-        Task GetResolutions(AuthenticatedContract<DSFamilyTempSensorGetResolutionsContract> contract);
+        Task GetResolutions(AuthenticatedMessageContract message);
 
-        Task SetHighAlarm(AuthenticatedContract<DSFamilyTempSensorSetHighAlarmContract> contract);
+        Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message);
 
-        Task SetLowAlarm(AuthenticatedContract<DSFamilyTempSensorSetLowAlarmContract> contract);
+        Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message);
 
-        Task SetResolution(AuthenticatedContract<DSFamilyTempSensorSetResolutionContract> contract);
+        Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message);
 
         #endregion Methods
     }

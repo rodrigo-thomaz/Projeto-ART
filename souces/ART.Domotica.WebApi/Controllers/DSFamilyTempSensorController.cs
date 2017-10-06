@@ -33,16 +33,15 @@ namespace ART.Domotica.WebApi.Controllers
         /// <remarks>
         /// Retornar uma lista de sensores
         /// </remarks>
-        /// <param name="contract">contrato do post</param>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
         [Route("getAll")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetAll(DSFamilyTempSensorGetAllContract contract)
+        public async Task<IHttpActionResult> GetAll()
         {
-            await _dsFamilyTempSensorProducer.GetAll(CreateContract(contract));
+            await _dsFamilyTempSensorProducer.GetAll(CreateMessage());
             return Ok();
         }
 
@@ -52,16 +51,15 @@ namespace ART.Domotica.WebApi.Controllers
         /// <remarks>
         /// Retornar uma lista de Resoluções
         /// </remarks>
-        /// <param name="session">session do broker do solicitante</param>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
         [Route("getResolutions")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetResolutions(DSFamilyTempSensorGetResolutionsContract contract)
+        public async Task<IHttpActionResult> GetResolutions()
         {
-            await _dsFamilyTempSensorProducer.GetResolutions(CreateContract(contract));
+            await _dsFamilyTempSensorProducer.GetResolutions(CreateMessage());
             return Ok();
         }
 
@@ -79,7 +77,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SetResolution(DSFamilyTempSensorSetResolutionContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetResolution(CreateContract(contract));
+            await _dsFamilyTempSensorProducer.SetResolution(CreateMessage(contract));
             return Ok();
         }
 
@@ -97,7 +95,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SetHighAlarm(DSFamilyTempSensorSetHighAlarmContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetHighAlarm(CreateContract(contract));
+            await _dsFamilyTempSensorProducer.SetHighAlarm(CreateMessage(contract));
             return Ok();
         }
 
@@ -115,7 +113,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SetLowAlarm(DSFamilyTempSensorSetLowAlarmContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetLowAlarm(CreateContract(contract));
+            await _dsFamilyTempSensorProducer.SetLowAlarm(CreateMessage(contract));
             return Ok();
         }
 

@@ -72,8 +72,8 @@ namespace ART.Domotica.Worker.Consumers
             Console.WriteLine("[TemperatureScaleConsumer.GetScalesReceivedAsync] ");
             _model.BasicAck(e.DeliveryTag, false);
 
-            var session = SerializationHelpers.DeserializeJsonBufferToType<string>(e.Body);
-            var exchange = string.Format("{0}-{1}", session, "GetScalesCompleted");
+            var contract = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
+            var exchange = string.Format("{0}-{1}", contract.SouceMQSession, "GetScalesCompleted");
 
             var entities = await _temperatureScaleDomain.GetScales();
             Console.WriteLine("[TemperatureScaleDomain.GetScales] Ok");

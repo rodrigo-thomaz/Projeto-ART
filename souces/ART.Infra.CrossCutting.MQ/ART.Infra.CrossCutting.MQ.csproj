@@ -53,10 +53,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticatedContract.cs" />
+    <Compile Include="NoAuthenticatedMessageContract.cs" />
     <Compile Include="MQModule.cs" />
-    <Compile Include="NoAuthenticatedContract.cs" />
-    <Compile Include="ProducerBase.cs" />
+    <Compile Include="AuthenticatedMessageContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SerializationHelpers.cs" />
   </ItemGroup>

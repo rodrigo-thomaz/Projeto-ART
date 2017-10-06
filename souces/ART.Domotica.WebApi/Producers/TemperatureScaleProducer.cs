@@ -3,6 +3,7 @@ using ART.Domotica.WebApi.IProducers;
 using RabbitMQ.Client;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;
+using ART.Infra.CrossCutting.MQ.WebApi;
 
 namespace ART.Domotica.WebApi.Producers
 {
@@ -19,9 +20,9 @@ namespace ART.Domotica.WebApi.Producers
 
         #region public voids
 
-        public async Task GetScales(AuthenticatedContract contract)
+        public async Task GetScales(AuthenticatedMessageContract message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
             await Task.Run(() => _model.BasicPublish("", TemperatureScaleConstants.GetScalesQueueName, null, payload));
         }
 

@@ -19,21 +19,21 @@ namespace ART.Infra.CrossCutting.MQ.WebApi
 
         #endregion Properties
 
-        protected AuthenticatedContract CreateContract()
+        protected AuthenticatedMessageContract CreateMessage()
         {
-            return new AuthenticatedContract
+            return new AuthenticatedMessageContract
             {
-                ApplicationUserId = _applicationUserId,
                 SouceMQSession = _souceMQSession,
+                ApplicationUserId = _applicationUserId,
             };
         }
 
-        protected AuthenticatedContract<TContract> CreateContract<TContract>(TContract contract)
+        protected AuthenticatedMessageContract<TContract> CreateMessage<TContract>(TContract contract)
         {
-            return new AuthenticatedContract<TContract>
+            return new AuthenticatedMessageContract<TContract>
             {
+                SouceMQSession = _souceMQSession,                
                 ApplicationUserId = _applicationUserId,
-                SouceMQSession = _souceMQSession,
                 Contract = contract,
             };
         }        

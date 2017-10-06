@@ -4,6 +4,7 @@ using RabbitMQ.Client;
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ;
 using ART.Domotica.Constant;
+using ART.Infra.CrossCutting.MQ.WebApi;
 
 namespace ART.Domotica.WebApi.Producers
 {
@@ -20,33 +21,33 @@ namespace ART.Domotica.WebApi.Producers
 
         #region public voids
 
-        public async Task GetAll(AuthenticatedContract<DSFamilyTempSensorGetAllContract> contract)
+        public async Task GetAll(AuthenticatedMessageContract message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
             await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload));
         }
 
-        public async Task GetResolutions(AuthenticatedContract<DSFamilyTempSensorGetResolutionsContract> contract)
+        public async Task GetResolutions(AuthenticatedMessageContract message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
             await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetResolutionsQueueName, null, payload));
         }
 
-        public async Task SetResolution(AuthenticatedContract<DSFamilyTempSensorSetResolutionContract> contract)
+        public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
             _model.BasicPublish("", DSFamilyTempSensorConstants.SetResolutionQueueName, null, payload);
         }
 
-        public async Task SetHighAlarm(AuthenticatedContract<DSFamilyTempSensorSetHighAlarmContract> contract)
+        public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
             _model.BasicPublish("", DSFamilyTempSensorConstants.SetHighAlarmQueueName, null, payload);
         }
 
-        public async Task SetLowAlarm(AuthenticatedContract<DSFamilyTempSensorSetLowAlarmContract> contract)
+        public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
             _model.BasicPublish("", DSFamilyTempSensorConstants.SetLowAlarmQueueName, null, payload);
         }
 

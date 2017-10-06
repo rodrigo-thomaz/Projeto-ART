@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Contract
 {
+    using ART.Infra.CrossCutting.MQ;
     using System;
 
     public class DSFamilyTempSensorSetHighAlarmContract

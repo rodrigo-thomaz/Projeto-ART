@@ -16,11 +16,12 @@ namespace ART.Domotica.Repository.Repositories
 
         }
 
-        public async Task<List<DSFamilyTempSensor>> GetAll(Guid applicationId)
+        public async Task<List<DSFamilyTempSensor>> GetAll(Guid applicationUserId)
         {
+            /////Errroooooo!!!!!
             IQueryable<DSFamilyTempSensor> query = from sensor in _context.DSFamilyTempSensor
                         join hardApp in _context.HardwaresInApplication on sensor.Id equals hardApp.HardwareBaseId
-                        where hardApp.ApplicationId == applicationId
+                        where hardApp.ApplicationId == applicationUserId
                         select sensor;
 
             return await query.ToListAsync();

@@ -32,7 +32,6 @@
         {
             var application = new Application
             {
-                Name = "Meu espaço de domótica",
                 UsersInApplication = new List<UsersInApplication>
                 {
                     new UsersInApplication

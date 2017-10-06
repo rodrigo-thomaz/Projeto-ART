@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher', function ($http, $log, ngAuthSettings, EventDispatcher) {
+app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, $log, ngAuthSettings, EventDispatcher, stompService) {
     
     var serviceFactory = {};    
     

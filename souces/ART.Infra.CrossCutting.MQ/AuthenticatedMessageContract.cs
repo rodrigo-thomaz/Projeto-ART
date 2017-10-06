@@ -1,6 +1,8 @@
-﻿namespace ART.Infra.CrossCutting.MQ
+﻿using System;
+
+namespace ART.Infra.CrossCutting.MQ
 {
-    public class NoAuthenticatedContract
+    public class AuthenticatedMessageContract
     {
         #region Properties
 
@@ -8,20 +10,17 @@
         {
             get; set;
         }
+
+        public Guid ApplicationUserId { get; set; }
 
         #endregion Properties
     }
 
-    public class NoAuthenticatedContract<TContract>
+    public class AuthenticatedMessageContract<TContract> : AuthenticatedMessageContract
     {
         #region Properties
 
         public TContract Contract
-        {
-            get; set;
-        }
-
-        public string SouceMQSession
         {
             get; set;
         }

@@ -11,7 +11,7 @@
     {
         #region Methods
 
-        Task<List<DSFamilyTempSensor>> GetAll(Guid applicationId);
+        Task<List<DSFamilyTempSensor>> GetAll(Guid applicationUserId);
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, ngAuthSettings, EventDispatcher, stompService) {
+app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, $log, ngAuthSettings, EventDispatcher, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 

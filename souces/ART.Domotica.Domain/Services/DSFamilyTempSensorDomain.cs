@@ -28,9 +28,9 @@ namespace ART.Domotica.Domain.Services
 
         #region public voids
 
-        public async Task<List<DSFamilyTempSensor>> GetAll(Guid applicationId)
+        public async Task<List<DSFamilyTempSensor>> GetAll(Guid applicationUserId)
         {
-            return await _dsFamilyTempSensorRepository.GetAll(applicationId);
+            return await _dsFamilyTempSensorRepository.GetAll(applicationUserId);
         }
 
         public async Task<List<DSFamilyTempSensorResolution>> GetResolutions()

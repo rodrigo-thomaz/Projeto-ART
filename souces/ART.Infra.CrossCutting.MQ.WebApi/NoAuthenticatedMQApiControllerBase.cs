@@ -20,9 +20,17 @@ namespace ART.Infra.CrossCutting.MQ.WebApi
 
         #endregion Properties
 
-        protected NoAuthenticatedContract<TContract> CreateContract<TContract>(TContract contract)
+        protected NoAuthenticatedMessageContract CreateMessage()
         {
-            return new NoAuthenticatedContract<TContract>
+            return new NoAuthenticatedMessageContract
+            {
+                SouceMQSession = _souceMQSession,
+            };
+        }
+
+        protected NoAuthenticatedMessageContract<TContract> CreateMessage<TContract>(TContract contract)
+        {
+            return new NoAuthenticatedMessageContract<TContract>
             {
                 SouceMQSession = _souceMQSession,
                 Contract = contract,

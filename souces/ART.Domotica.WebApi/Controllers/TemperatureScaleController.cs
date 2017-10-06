@@ -40,7 +40,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> GetScales()
         {           
-            await _temperatureScaleProducer.GetScales(CreateContract());
+            await _temperatureScaleProducer.GetScales(CreateMessage());
             return Ok();
         }
 

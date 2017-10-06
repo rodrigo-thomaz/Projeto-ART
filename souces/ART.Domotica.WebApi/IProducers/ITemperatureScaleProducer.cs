@@ -7,7 +7,7 @@
     {
         #region Methods
 
-        Task GetScales(AuthenticatedContract contract);
+        Task GetScales(AuthenticatedMessageContract message);
 
         #endregion Methods
     }

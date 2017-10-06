@@ -1,4 +1,4 @@
-﻿namespace ART.Infra.CrossCutting.MQ
+﻿namespace ART.Infra.CrossCutting.MQ.WebApi
 {
     using RabbitMQ.Client;
 
