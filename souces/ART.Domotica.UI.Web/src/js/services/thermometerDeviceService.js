@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('termometroService', ['$http', 'ngAuthSettings', function ($http, ngAuthSettings) {
+app.factory('thermometerDeviceService', ['$http', 'ngAuthSettings', function ($http, ngAuthSettings) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -7,7 +7,7 @@ app.factory('termometroService', ['$http', 'ngAuthSettings', function ($http, ng
 
     var get = function () {
 
-        return $http.get(serviceBase + 'api/termometro').then(function (results) {
+        return $http.get(serviceBase + 'api/thermometer').then(function (results) {
             return results;
         });
     };

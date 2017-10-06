@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('termometroController', ['$scope', '$timeout', '$log', 'EventDispatcher', 'temperatureScaleService', 'dsFamilyTempSensorService', function ($scope, $timeout, $log, EventDispatcher, temperatureScaleService, dsFamilyTempSensorService) {    
+app.controller('thermometerDeviceController', ['$scope', '$timeout', '$log', 'EventDispatcher', 'temperatureScaleService', 'dsFamilyTempSensorService', 'thermometerDeviceService', function ($scope, $timeout, $log, EventDispatcher, temperatureScaleService, dsFamilyTempSensorService, thermometerDeviceService) {    
 
     $scope.resolutions = dsFamilyTempSensorService.resolutions;
     $scope.scales = temperatureScaleService.scales;

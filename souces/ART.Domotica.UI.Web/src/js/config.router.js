@@ -35,21 +35,36 @@ angular.module('app')
                       'js/controllers/dashboardController.js',
                   ])
               })
-              .state('app.termometro', {
-                  url: '/termometro',
-                  templateUrl: 'views/termometro.html',
+
+              .state('app.devices', {
+                  url: '/devices',
+                  templateUrl: 'views/devices.html',
                   resolve: load([
                       'vr.directives.slider',
                       'ui.select',                      
 
-                      'js/services/stompService.js',
-                      'js/services/temperatureScaleService.js',
-                      'js/services/dsFamilyTempSensorService.js',
+                      'js/services/devicesService.js',
 
                       'js/controllers/dsFamilyTempSensorController.js',
-                      'js/controllers/termometroController.js',
+                      'js/controllers/thermometerDeviceController.js',
+                      'js/controllers/devicesController.js',
                   ])
               })
+              .state('app.sensors', {
+                  url: '/sensors',
+                  templateUrl: 'views/sensors.html',
+                  resolve: load([
+                      'vr.directives.slider',
+                      'ui.select',
+
+                      'js/services/sensorsService.js',
+
+                      'js/controllers/dsFamilyTempSensorController.js',
+                      'js/controllers/thermometerDeviceController.js',
+                      'js/controllers/sensorsController.js',
+                  ])
+              })
+
               // pages
               .state('app.page', {
                   url: '/page',

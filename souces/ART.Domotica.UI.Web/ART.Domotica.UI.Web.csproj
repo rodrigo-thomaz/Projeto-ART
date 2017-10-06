@@ -205,18 +205,26 @@
     <Content Include="src\js\app\mail\mails.json" />
     <Content Include="src\js\app\note\notes.json" />
     <Content Include="src\js\config.settings.js" />
+    <Content Include="src\js\controllers\devicesController.js" />
+    <Content Include="src\js\controllers\sensorsController.js" />
+    <Content Include="src\js\controllers\applicationUserController.js" />
     <Content Include="src\js\controllers\dashboardController.js" />
+    <Content Include="src\js\controllers\applicationController.js" />
     <Content Include="src\js\controllers\tab.js" />
     <Content Include="src\js\controllers\dsFamilyTempSensorController.js" />
-    <Content Include="src\js\controllers\termometroController.js" />
+    <Content Include="src\js\controllers\thermometerDeviceController.js" />
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
+    <Content Include="src\js\services\devicesService.js" />
+    <Content Include="src\js\services\sensorsService.js" />
+    <Content Include="src\js\services\applicationUserService.js" />
     <Content Include="src\js\services\authInterceptorService.js" />
     <Content Include="src\js\services\authService.js" />
+    <Content Include="src\js\services\applicationService.js" />
     <Content Include="src\js\services\temperatureScaleService.js" />
     <Content Include="src\js\services\dsFamilyTempSensorService.js" />
     <Content Include="src\js\services\stompService.js" />
-    <Content Include="src\js\services\termometroService.js" />
+    <Content Include="src\js\services\thermometerDeviceService.js" />
     <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\psd\ui.zip" />
     <Content Include="src\js\config.interceptor.js" />
@@ -466,7 +474,8 @@
     <Content Include="src\tpl\layout_fullwidth.html" />
     <Content Include="src\tpl\layout_mobile.html" />
     <Content Include="src\tpl\page_profile.html" />
-    <Content Include="src\views\termometro.html" />
+    <Content Include="src\views\sensors.html" />
+    <Content Include="src\views\devices.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
