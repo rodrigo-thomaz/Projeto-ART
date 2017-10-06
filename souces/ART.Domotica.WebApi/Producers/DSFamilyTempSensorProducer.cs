@@ -23,32 +23,47 @@ namespace ART.Domotica.WebApi.Producers
 
         public async Task GetAll(AuthenticatedMessageContract message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
-            _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload);
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload);
+            });            
         }
 
         public async Task GetResolutions(AuthenticatedMessageContract message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
-            _model.BasicPublish("", DSFamilyTempSensorConstants.GetResolutionsQueueName, null, payload);
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.GetResolutionsQueueName, null, payload);
+            });            
         }
 
         public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
-            _model.BasicPublish("", DSFamilyTempSensorConstants.SetResolutionQueueName, null, payload);
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetResolutionQueueName, null, payload);
+            });            
         }
 
         public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
-            _model.BasicPublish("", DSFamilyTempSensorConstants.SetHighAlarmQueueName, null, payload);
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetHighAlarmQueueName, null, payload);
+            });                        
         }
 
         public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(message);
-            _model.BasicPublish("", DSFamilyTempSensorConstants.SetLowAlarmQueueName, null, payload);
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetLowAlarmQueueName, null, payload);
+            });            
         }
 
         #endregion

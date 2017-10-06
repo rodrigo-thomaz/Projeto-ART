@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Worker
 {
     using ART.Domotica.Domain;
+    using ART.Domotica.Domain.AutoMapper;
     using ART.Domotica.Repository;
     using ART.Domotica.Worker.AutoMapper;
     using ART.Domotica.Worker.Modules;
@@ -32,6 +33,7 @@
 
             Mapper.Initialize(x =>
             {
+                x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new TemperatureScaleProfile());

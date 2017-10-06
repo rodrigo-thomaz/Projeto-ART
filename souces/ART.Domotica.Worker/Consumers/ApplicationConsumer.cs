@@ -73,9 +73,9 @@ namespace ART.Domotica.Worker.Consumers
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var models = await _applicationDomain.GetAll(message);
-            var buffer = await SerializationHelpers.SerializeToJsonBufferAsync(models);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(models);
             var exchange = string.Format("{0}-{1}", message.SouceMQSession, "GetAllCompleted");
-
+            
             _model.BasicPublish("amq.topic", exchange, null, buffer);
         }
 

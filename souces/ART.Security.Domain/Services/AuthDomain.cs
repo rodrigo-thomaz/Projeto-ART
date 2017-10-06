@@ -101,7 +101,7 @@
 
             var contract = Mapper.Map<ApplicationUser, ApplicationUserContract>(applicationUser);
 
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
+            var payload = SerializationHelpers.SerializeToJsonBufferAsync(contract);
 
             await Task.Run(() => model.BasicPublish("", queueName, null, payload));            
         }
