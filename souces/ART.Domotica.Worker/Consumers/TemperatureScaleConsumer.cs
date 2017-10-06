@@ -12,15 +12,13 @@ using System.Text;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
+using ART.Infra.CrossCutting.MQ.Worker;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class TemperatureScaleConsumer
+    public class TemperatureScaleConsumer : ConsumerBase
     {
         #region private fields
-
-        private readonly IConnection _connection;
-        private readonly IModel _model;
 
         private readonly EventingBasicConsumer _getScalesConsumer;
 
@@ -30,12 +28,8 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public TemperatureScaleConsumer(IConnection connection, ITemperatureScaleDomain temperatureScaleDomain)
+        public TemperatureScaleConsumer(IConnection connection, ITemperatureScaleDomain temperatureScaleDomain) : base(connection)
         {
-            _connection = connection;
-
-            _model = _connection.CreateModel();
-
             _getScalesConsumer = new EventingBasicConsumer(_model);
 
             _temperatureScaleDomain = temperatureScaleDomain;

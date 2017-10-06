@@ -1,6 +1,7 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
 using ART.Infra.CrossCutting.MQ.Contract;
+using ART.Infra.CrossCutting.MQ.Worker;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -9,12 +10,9 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class ApplicationConsumer
+    public class ApplicationConsumer : ConsumerBase
     {
         #region private fields
-
-        private readonly IConnection _connection;
-        private readonly IModel _model;
 
         private readonly EventingBasicConsumer _getAllConsumer;
 
@@ -24,12 +22,8 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public ApplicationConsumer(IConnection connection, IApplicationDomain applicationDomain)
+        public ApplicationConsumer(IConnection connection, IApplicationDomain applicationDomain) : base(connection)
         {
-            _connection = connection;
-
-            _model = _connection.CreateModel();
-
             _getAllConsumer = new EventingBasicConsumer(_model);
 
             _applicationDomain = applicationDomain;

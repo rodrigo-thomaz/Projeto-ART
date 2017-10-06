@@ -1,6 +1,7 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities;
 using ART.Infra.CrossCutting.MQ.Contract;
+using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Security.Common.Contracts;
 using ART.Security.Common.QueueNames;
 using AutoMapper;
@@ -12,13 +13,10 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class ApplicationUserConsumer
+    public class ApplicationUserConsumer : ConsumerBase
     {
         #region private fields
-
-        private readonly IConnection _connection;
-        private readonly IModel _model;
-
+        
         private readonly EventingBasicConsumer _registerUserConsumer;
 
         private readonly IApplicationUserDomain _applicationUserDomain;
@@ -27,12 +25,8 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public ApplicationUserConsumer(IConnection connection, IApplicationUserDomain applicationUserDomain)
+        public ApplicationUserConsumer(IConnection connection, IApplicationUserDomain applicationUserDomain) : base(connection)
         {
-            _connection = connection;
-
-            _model = _connection.CreateModel();
-
             _registerUserConsumer = new EventingBasicConsumer(_model);
 
             _applicationUserDomain = applicationUserDomain;

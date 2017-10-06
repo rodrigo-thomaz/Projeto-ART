@@ -2,8 +2,6 @@
 {
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
-
-    using AutoMapper;
     using global::AutoMapper;
 
     public class ApplicationProfile : Profile
