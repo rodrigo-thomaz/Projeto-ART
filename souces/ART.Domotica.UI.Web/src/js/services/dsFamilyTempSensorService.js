@@ -8,13 +8,20 @@ app.factory('dsFamilyTempSensorService', ['$http', 'ngAuthSettings', 'EventDispa
     var serviceFactory = {};    
 
     var getAll = function (applicationId) {
-        return $http.get(serviceBase + 'api/dsFamilyTempSensor/getAll/' + applicationId + '/' + stompService.session).then(function (results) {
+        var data = {
+            applicationId: applicationId,
+            session: stompService.session,
+        }
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/getAll', data).then(function (results) {
             //alert('envio bem sucedido');
         });
     };
 
     var getResolutions = function () {
-        return $http.get(serviceBase + 'api/dsFamilyTempSensor/getResolutions/' + stompService.session).then(function (results) {
+        var data = {
+            session: stompService.session,
+        }
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/getResolutions', data).then(function (results) {
             //alert('envio bem sucedido');
         });
     };
