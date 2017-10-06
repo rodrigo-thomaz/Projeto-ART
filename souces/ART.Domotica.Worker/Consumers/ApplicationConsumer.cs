@@ -1,8 +1,6 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
 using ART.Infra.CrossCutting.MQ.Contract;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;

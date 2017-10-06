@@ -4,16 +4,20 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class AddFieldNameDescription : DbMigration
     {
-        public override void Up()
-        {
-            AddColumn("dbo.Application", "Description", c => c.String());
-            AddColumn("dbo.Application", "Name", c => c.String(nullable: false, maxLength: 255));
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropColumn("dbo.Application", "Name");
             DropColumn("dbo.Application", "Description");
         }
+
+        public override void Up()
+        {
+            AddColumn("dbo.Application", "Description", c => c.String());
+            AddColumn("dbo.Application", "Name", c => c.String(nullable: false, maxLength: 255));
+        }
+
+        #endregion Methods
     }
 }

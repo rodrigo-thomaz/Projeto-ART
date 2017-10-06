@@ -1,15 +1,17 @@
-﻿using System;
-
-namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Model
 {
+    using System;
+
     public class ApplicationGetAllModel
     {
-        public Guid Id
-        {
-            get; set;
-        }     
+        #region Properties
 
         public string Description
+        {
+            get; set;
+        }
+
+        public Guid Id
         {
             get; set;
         }
@@ -18,5 +20,7 @@ namespace ART.Domotica.Model
         {
             get; set;
         }
+
+        #endregion Properties
     }
 }

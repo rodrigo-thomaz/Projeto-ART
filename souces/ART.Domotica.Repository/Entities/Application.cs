@@ -9,6 +9,11 @@
     {
         #region Properties
 
+        public string Description
+        {
+            get; set;
+        }
+
         public ICollection<HardwaresInApplication> HardwaresInApplication
         {
             get; set;
@@ -19,17 +24,12 @@
             get; set;
         }
 
-        public ICollection<UsersInApplication> UsersInApplication
-        {
-            get; set;
-        }
-
-        public string Description
-        {
-            get; set;
-        }
-
         public string Name
+        {
+            get; set;
+        }
+
+        public ICollection<UsersInApplication> UsersInApplication
         {
             get; set;
         }

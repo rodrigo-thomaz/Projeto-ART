@@ -1,17 +1,13 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Text;
-
-namespace ART.Infra.CrossCutting.MQ.Contract
+﻿namespace ART.Infra.CrossCutting.MQ.Contract
 {
+    using System.Text;
+
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
+
     public static class SerializationHelpers
     {
-        public static byte[] SerializeToJsonBufferAsync(object value)
-        {
-            var json = JsonConvert.SerializeObject(value, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
-            var result = Encoding.UTF8.GetBytes(json);
-            return result;
-        }
+        #region Methods
 
         public static T DeserializeJsonBufferToType<T>(byte[] value)
             where T : class
@@ -20,5 +16,14 @@ namespace ART.Infra.CrossCutting.MQ.Contract
             var result = JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             return result;
         }
+
+        public static byte[] SerializeToJsonBufferAsync(object value)
+        {
+            var json = JsonConvert.SerializeObject(value, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+            var result = Encoding.UTF8.GetBytes(json);
+            return result;
+        }
+
+        #endregion Methods
     }
 }

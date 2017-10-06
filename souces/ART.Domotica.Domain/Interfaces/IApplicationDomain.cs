@@ -2,8 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using ART.Infra.CrossCutting.MQ.Contract;
+
     using ART.Domotica.Model;
+    using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IApplicationDomain
     {
