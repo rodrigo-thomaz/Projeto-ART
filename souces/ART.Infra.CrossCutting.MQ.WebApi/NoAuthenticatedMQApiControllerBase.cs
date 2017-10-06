@@ -2,8 +2,8 @@
 {
     using System.Linq;
 
-    using ART.Infra.CrossCutting.WebApi;
     using ART.Infra.CrossCutting.MQ.Contract;
+    using ART.Infra.CrossCutting.WebApi;
 
     public abstract class NoAuthenticatedMQApiControllerBase : NoAuthenticatedApiControllerBase
     {

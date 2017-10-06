@@ -1,12 +1,16 @@
-﻿using ART.Domotica.Repository.Entities;
-using ART.Infra.CrossCutting.MQ.Contract;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace ART.Domotica.Domain.Interfaces
+﻿namespace ART.Domotica.Domain.Interfaces
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using ART.Infra.CrossCutting.MQ.Contract;
+    using ART.Domotica.Model;
+
     public interface IApplicationDomain
     {
-        Task<List<Application>> GetAll(AuthenticatedMessageContract message);
+        #region Methods
+
+        Task<List<ApplicationGetAllModel>> GetAll(AuthenticatedMessageContract message);
+
+        #endregion Methods
     }
 }

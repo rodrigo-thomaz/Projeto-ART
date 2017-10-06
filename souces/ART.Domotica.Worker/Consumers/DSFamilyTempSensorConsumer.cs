@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;
+using ART.Infra.CrossCutting.MQ.Contract;
 
 namespace ART.Domotica.Worker.Consumers
 {

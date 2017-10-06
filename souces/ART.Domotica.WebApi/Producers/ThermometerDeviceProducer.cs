@@ -2,6 +2,7 @@
 {
     using ART.Domotica.WebApi.IProducers;
     using ART.Infra.CrossCutting.MQ.WebApi;
+
     using RabbitMQ.Client;
 
     public class ThermometerDeviceProducer : ProducerBase, IThermometerDeviceProducer

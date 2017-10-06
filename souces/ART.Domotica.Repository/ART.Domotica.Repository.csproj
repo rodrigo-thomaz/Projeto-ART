@@ -101,6 +101,10 @@
     <Compile Include="Migrations\201710061342590_RemoveFieldApplicationNameDescription.Designer.cs">
       <DependentUpon>201710061342590_RemoveFieldApplicationNameDescription.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710061656149_AddFieldNameDescription.cs" />
+    <Compile Include="Migrations\201710061656149_AddFieldNameDescription.Designer.cs">
+      <DependentUpon>201710061656149_AddFieldNameDescription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710061342590_RemoveFieldApplicationNameDescription.resx">
       <DependentUpon>201710061342590_RemoveFieldApplicationNameDescription.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710061656149_AddFieldNameDescription.resx">
+      <DependentUpon>201710061656149_AddFieldNameDescription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

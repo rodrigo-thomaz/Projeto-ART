@@ -158,7 +158,7 @@
       <Name>ART.Domotica.Constant</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Contract\ART.Domotica.Contract.csproj">
-      <Project>{2f58031d-ff69-4bda-9c4a-4811560918dd}</Project>
+      <Project>{2F58031D-FF69-4BDA-9C4A-4811560918DD}</Project>
       <Name>ART.Domotica.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.Contract\ART.Infra.CrossCutting.MQ.Contract.csproj">

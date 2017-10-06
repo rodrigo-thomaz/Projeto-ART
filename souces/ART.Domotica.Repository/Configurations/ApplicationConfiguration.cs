@@ -18,6 +18,16 @@
             Property(x => x.Id)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
+
+            // Name
+            Property(x => x.Name)
+                .HasMaxLength(255)
+                .IsRequired();
+
+            //Description
+            Property(x => x.Description)
+                .HasMaxLength(5000)
+                .IsOptional();
         }
 
         #endregion Constructors

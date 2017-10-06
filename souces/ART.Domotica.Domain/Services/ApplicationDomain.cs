@@ -2,10 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using ART.Domotica.Domain.Interfaces;
-    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.MQ.Contract;
+    using ART.Domotica.Model;
+    using global::AutoMapper;
+    using ART.Domotica.Repository.Entities;
 
     public class ApplicationDomain : IApplicationDomain
     {
@@ -24,13 +27,15 @@
 
         #endregion Constructors
 
-        #region public voids
+        #region Methods
 
-        public Task<List<Application>> GetAll(AuthenticatedMessageContract message)
+        public async Task<List<ApplicationGetAllModel>> GetAll(AuthenticatedMessageContract message)
         {
-            throw new System.Exception();
-        } 
+            var entities = await _applicationRepository.GetAll(message.ApplicationUserId);
+            var models = Mapper.Map<List<Application>, List<ApplicationGetAllModel>>(entities);
+            return models;
+        }
 
-        #endregion
+        #endregion Methods
     }
 }

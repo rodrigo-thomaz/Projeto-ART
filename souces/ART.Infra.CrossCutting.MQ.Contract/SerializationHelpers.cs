@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -10,7 +11,7 @@ namespace ART.Infra.CrossCutting.MQ.Contract
     {
         public static async Task<byte[]> SerializeToJsonBufferAsync(object value)
         {
-            var json = JsonConvert.SerializeObject(value);
+            var json = JsonConvert.SerializeObject(value, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var memoryStream = new MemoryStream();
             var binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(memoryStream, json);
@@ -29,7 +30,7 @@ namespace ART.Infra.CrossCutting.MQ.Contract
             {
                 IFormatter br = new BinaryFormatter();
                 string json = br.Deserialize(ms).ToString();
-                result = JsonConvert.DeserializeObject<T>(json);
+                result = JsonConvert.DeserializeObject<T>(json, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             }
             return result;
         }

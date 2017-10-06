@@ -1,6 +1,8 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
 using ART.Infra.CrossCutting.MQ.Contract;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -66,12 +68,15 @@ namespace ART.Domotica.Worker.Consumers
         {
             Console.WriteLine();
             Console.WriteLine("[ApplicationConsumer.GetAllReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
+
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            //var entity = Mapper.Map<ApplicationUserContract, ApplicationUser>(contract);
-           // await _applicationDomain.
-            //Console.WriteLine("[ApplicationUserDomain.RegisterUser] Ok");
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
+            var models = await _applicationDomain.GetAll(message);
+            var buffer = await SerializationHelpers.SerializeToJsonBufferAsync(models);
+            var exchange = string.Format("{0}-{1}", message.SouceMQSession, "GetAllCompleted");
+
+            _model.BasicPublish("amq.topic", exchange, null, buffer);
         }
 
         #endregion

@@ -33,6 +33,9 @@
     <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -50,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\ApplicationProfile.cs" />
     <Compile Include="DomainModule.cs" />
     <Compile Include="Interfaces\IApplicationUserDomain.cs" />
     <Compile Include="Interfaces\IApplicationDomain.cs" />
@@ -68,6 +72,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ART.Domotica.Model\ART.Domotica.Model.csproj">
+      <Project>{49447556-dca8-4fc7-ac1d-7f5163e7abea}</Project>
+      <Name>ART.Domotica.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Repository\ART.Domotica.Repository.csproj">
       <Project>{d0287824-c8bc-4025-8b99-5a8fd8aef1f1}</Project>
       <Name>ART.Domotica.Repository</Name>

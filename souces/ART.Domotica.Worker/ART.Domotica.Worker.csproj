@@ -97,12 +97,16 @@
       <Name>ART.Domotica.Constant</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Contract\ART.Domotica.Contract.csproj">
-      <Project>{2f58031d-ff69-4bda-9c4a-4811560918dd}</Project>
+      <Project>{2F58031D-FF69-4BDA-9C4A-4811560918DD}</Project>
       <Name>ART.Domotica.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Domain\ART.Domotica.Domain.csproj">
       <Project>{f541f7ff-b9d6-47dc-9097-4cd7b6084c7f}</Project>
       <Name>ART.Domotica.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.Model\ART.Domotica.Model.csproj">
+      <Project>{49447556-dca8-4fc7-ac1d-7f5163e7abea}</Project>
+      <Name>ART.Domotica.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Repository\ART.Domotica.Repository.csproj">
       <Project>{d0287824-c8bc-4025-8b99-5a8fd8aef1f1}</Project>
