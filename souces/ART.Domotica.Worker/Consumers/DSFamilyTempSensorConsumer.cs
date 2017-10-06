@@ -116,6 +116,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             Console.WriteLine();
             Console.WriteLine("[DSFamilyTempSensorConsumer.GetAllReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
+
             _model.BasicAck(e.DeliveryTag, false);
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
@@ -140,6 +141,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             Console.WriteLine();
             Console.WriteLine("[DSFamilyTempSensorConsumer.GetResolutionsReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
+
             _model.BasicAck(e.DeliveryTag, false);
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
@@ -164,6 +166,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             Console.WriteLine();
             Console.WriteLine("[DSFamilyTempSensorConsumer.SetResolutionReceived] {0}", Encoding.UTF8.GetString(e.Body));
+
             _model.BasicAck(e.DeliveryTag, false);
 
             var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorSetResolutionContract>(e.Body);
@@ -187,6 +190,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             Console.WriteLine();
             Console.WriteLine("[DSFamilyTempSensorConsumer.SetHighAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
+
             _model.BasicAck(e.DeliveryTag, false);
 
             var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorSetHighAlarmContract>(e.Body);
@@ -210,6 +214,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             Console.WriteLine();
             Console.WriteLine("[DSFamilyTempSensorConsumer.SetLowAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
+
             _model.BasicAck(e.DeliveryTag, false);
 
             var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorSetLowAlarmContract>(e.Body);
