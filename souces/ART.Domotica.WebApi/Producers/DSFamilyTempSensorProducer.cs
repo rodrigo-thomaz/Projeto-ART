@@ -1,33 +1,18 @@
-﻿using ART.Domotica.Common.Contracts;
-using ART.Domotica.Common.QueueNames;
+﻿using ART.Domotica.Contract;
 using ART.Domotica.WebApi.IProducers;
-using ART.Domotica.WebApi.Models;
-using AutoMapper;
 using RabbitMQ.Client;
 using System.Threading.Tasks;
-using System;
 using ART.Infra.CrossCutting.MQ;
+using ART.Domotica.Constant;
 
 namespace ART.Domotica.WebApi.Producers
 {
-    public class DSFamilyTempSensorProducer : IDSFamilyTempSensorProducer
+    public class DSFamilyTempSensorProducer : ProducerBase, IDSFamilyTempSensorProducer
     {
-        #region private readonly fields
-
-        private readonly IConnection _connection;
-        private readonly IModel _model;
-        private readonly IBasicProperties _basicProperties;
-
-        #endregion
-
         #region constructors
 
-        public DSFamilyTempSensorProducer(IConnection connection)
+        public DSFamilyTempSensorProducer(IConnection connection) : base(connection)
         {
-            _connection = connection;
-            _model = _connection.CreateModel();
-            _basicProperties = _model.CreateBasicProperties();
-
             Initialize();
         }
 
@@ -35,39 +20,34 @@ namespace ART.Domotica.WebApi.Producers
 
         #region public voids
 
-        public async Task GetAll(Guid applicationId, string session)
+        public async Task GetAll(DSFamilyTempSensorGetAllContract contract)
         {
-            var contract = new DSFamilyTempSensorGetAllContract { ApplicationId = applicationId, Session = session };
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
-            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetAllQueueName, null, payload));
+            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload));
         }
 
-        public async Task GetResolutions(string session)
+        public async Task GetResolutions(DSFamilyTempSensorGetResolutionsContract contract)
         {
-            var contract = new DSFamilyTempSensorGetResolutionsContract { Session = session };
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
-            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorQueueNames.GetResolutionsQueueName, null, payload));
+            await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetResolutionsQueueName, null, payload));
         }
 
-        public async Task SetResolution(DSFamilyTempSensorSetResolutionModel request)
+        public async Task SetResolution(DSFamilyTempSensorSetResolutionContract contract)
         {
-            var contract = Mapper.Map<DSFamilyTempSensorSetResolutionModel, DSFamilyTempSensorSetResolutionContract>(request);
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
-            _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetResolutionQueueName, null, payload);
+            _model.BasicPublish("", DSFamilyTempSensorConstants.SetResolutionQueueName, null, payload);
         }
 
-        public async Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
+        public async Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmContract contract)
         {
-            var contract = Mapper.Map<DSFamilyTempSensorSetHighAlarmModel, DSFamilyTempSensorSetHighAlarmContract>(request);
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
-            _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, null, payload);
+            _model.BasicPublish("", DSFamilyTempSensorConstants.SetHighAlarmQueueName, null, payload);
         }
 
-        public async Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
+        public async Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmContract contract)
         {
-            var contract = Mapper.Map<DSFamilyTempSensorSetLowAlarmModel, DSFamilyTempSensorSetLowAlarmContract>(request);
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
-            _model.BasicPublish("", DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, null, payload);
+            _model.BasicPublish("", DSFamilyTempSensorConstants.SetLowAlarmQueueName, null, payload);
         }
 
         #endregion
@@ -77,35 +57,35 @@ namespace ART.Domotica.WebApi.Producers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.GetAllQueueName
+                  queue: DSFamilyTempSensorConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.GetResolutionsQueueName
+                  queue: DSFamilyTempSensorConstants.GetResolutionsQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.SetResolutionQueueName
+                  queue: DSFamilyTempSensorConstants.SetResolutionQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.SetHighAlarmQueueName
+                  queue: DSFamilyTempSensorConstants.SetHighAlarmQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.SetLowAlarmQueueName
+                  queue: DSFamilyTempSensorConstants.SetLowAlarmQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false

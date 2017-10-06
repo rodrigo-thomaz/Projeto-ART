@@ -92,9 +92,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ART.Domotica.Common\ART.Domotica.Common.csproj">
-      <Project>{8c7dfa89-52d2-4907-b515-b3c776bcb12e}</Project>
-      <Name>ART.Domotica.Common</Name>
+    <ProjectReference Include="..\ART.Domotica.Constant\ART.Domotica.Constant.csproj">
+      <Project>{62947BFD-C7BA-4076-A6FF-2BEA7CFCAADB}</Project>
+      <Name>ART.Domotica.Constant</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.Contract\ART.Domotica.Contract.csproj">
+      <Project>{2f58031d-ff69-4bda-9c4a-4811560918dd}</Project>
+      <Name>ART.Domotica.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Domain\ART.Domotica.Domain.csproj">
       <Project>{f541f7ff-b9d6-47dc-9097-4cd7b6084c7f}</Project>

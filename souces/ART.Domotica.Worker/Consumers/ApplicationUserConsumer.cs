@@ -7,7 +7,6 @@ using AutoMapper;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 

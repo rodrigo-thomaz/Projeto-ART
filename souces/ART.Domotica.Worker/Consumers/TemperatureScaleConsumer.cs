@@ -1,7 +1,6 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities;
 using ART.Infra.CrossCutting.MQ;
-using ART.Domotica.Common.QueueNames;
 using ART.Domotica.Worker.Models;
 using AutoMapper;
 using Newtonsoft.Json;
@@ -12,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ART.Domotica.Constant;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -50,7 +50,7 @@ namespace ART.Domotica.Worker.Consumers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: TemperatureScaleQueueNames.GetScalesQueueName
+                  queue: TemperatureScaleConstants.GetScalesQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
@@ -58,7 +58,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _getScalesConsumer.Received += GetScalesReceived;
 
-            _model.BasicConsume(TemperatureScaleQueueNames.GetScalesQueueName, false, _getScalesConsumer);
+            _model.BasicConsume(TemperatureScaleConstants.GetScalesQueueName, false, _getScalesConsumer);
         }
 
         private void GetScalesReceived(object sender, BasicDeliverEventArgs e)

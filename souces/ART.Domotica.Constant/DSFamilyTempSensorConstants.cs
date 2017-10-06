@@ -1,6 +1,6 @@
-﻿namespace ART.Domotica.Common.QueueNames
+﻿namespace ART.Domotica.Constant
 {
-    public static class DSFamilyTempSensorQueueNames
+    public static class DSFamilyTempSensorConstants
     {
         #region Fields
 

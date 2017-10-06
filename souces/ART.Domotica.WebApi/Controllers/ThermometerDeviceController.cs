@@ -8,8 +8,8 @@
     using ART.Infra.CrossCutting.WebApi;
 
     [Authorize]
-    [RoutePrefix("api/termometro")]
-    public class TermometroController : BaseApiController
+    [RoutePrefix("api/thermometerDevice")]
+    public class ThermometerDeviceController : BaseApiController
     {
         #region Methods
 

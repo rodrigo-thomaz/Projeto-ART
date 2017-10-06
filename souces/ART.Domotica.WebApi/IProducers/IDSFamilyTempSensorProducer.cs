@@ -1,23 +1,22 @@
 ﻿namespace ART.Domotica.WebApi.IProducers
 {
-    using System;
     using System.Threading.Tasks;
 
-    using ART.Domotica.WebApi.Models;
+    using ART.Domotica.Contract;
 
     public interface IDSFamilyTempSensorProducer
     {
         #region Methods
 
-        Task GetAll(Guid applicationId, string session);
+        Task GetAll(DSFamilyTempSensorGetAllContract contract);
 
-        Task GetResolutions(string session);
+        Task GetResolutions(DSFamilyTempSensorGetResolutionsContract contract);
 
-        Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request);
+        Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmContract contract);
 
-        Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request);
+        Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmContract contract);
 
-        Task SetResolution(DSFamilyTempSensorSetResolutionModel request);
+        Task SetResolution(DSFamilyTempSensorSetResolutionContract contract);
 
         #endregion Methods
     }

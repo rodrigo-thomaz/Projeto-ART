@@ -1,9 +1,8 @@
 ﻿using System.Web.Http;
-using ART.Domotica.WebApi.Models;
 using ART.Infra.CrossCutting.WebApi;
 using ART.Domotica.WebApi.IProducers;
 using System.Threading.Tasks;
-using System;
+using ART.Domotica.Contract;
 
 namespace ART.Domotica.WebApi.Controllers
 {
@@ -34,17 +33,16 @@ namespace ART.Domotica.WebApi.Controllers
         /// <remarks>
         /// Retornar uma lista de sensores
         /// </remarks>
-        /// <param name="applicationId">id da aplicação</param>
-        /// <param name="session">session do broker do solicitante</param>
+        /// <param name="contract">contrato do post</param>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("getAll/{applicationId}/{session}")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetAll(Guid applicationId, string session)
+        [Route("getAll")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetAll(DSFamilyTempSensorGetAllContract contract)
         {
-            await _dsFamilyTempSensorProducer.GetAll(applicationId, session);
+            await _dsFamilyTempSensorProducer.GetAll(contract);
             return Ok();
         }
 
@@ -59,11 +57,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("getResolutions/{session}")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetResolutions(string session)
+        [Route("getResolutions")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetResolutions(DSFamilyTempSensorGetResolutionsContract contract)
         {           
-            await _dsFamilyTempSensorProducer.GetResolutions(session);
+            await _dsFamilyTempSensorProducer.GetResolutions(contract);
             return Ok();
         }
 
@@ -79,9 +77,9 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setResolution")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetResolution(DSFamilyTempSensorSetResolutionModel request)
+        public async Task<IHttpActionResult> SetResolution(DSFamilyTempSensorSetResolutionContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetResolution(request);
+            await _dsFamilyTempSensorProducer.SetResolution(contract);
             return Ok();
         }
 
@@ -97,9 +95,9 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setHighAlarm")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetHighAlarm(DSFamilyTempSensorSetHighAlarmModel request)
+        public async Task<IHttpActionResult> SetHighAlarm(DSFamilyTempSensorSetHighAlarmContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetHighAlarm(request);
+            await _dsFamilyTempSensorProducer.SetHighAlarm(contract);
             return Ok();
         }
 
@@ -115,9 +113,9 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setLowAlarm")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetLowAlarm(DSFamilyTempSensorSetLowAlarmModel request)
+        public async Task<IHttpActionResult> SetLowAlarm(DSFamilyTempSensorSetLowAlarmContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetLowAlarm(request);
+            await _dsFamilyTempSensorProducer.SetLowAlarm(contract);
             return Ok();
         }
 

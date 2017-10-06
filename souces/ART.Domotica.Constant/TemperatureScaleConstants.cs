@@ -1,6 +1,6 @@
-﻿namespace ART.Domotica.Common.QueueNames
+﻿namespace ART.Domotica.Constant
 {
-    public static class TemperatureScaleQueueNames
+    public static class TemperatureScaleConstants
     {
         #region Fields
 

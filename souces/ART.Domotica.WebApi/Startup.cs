@@ -6,7 +6,6 @@ namespace ART.Domotica.WebApi
     using System.Web.Http;
 
     using ART.Domotica.WebApi.App_Start;
-    using ART.Domotica.WebApi.Controllers;
     using ART.Domotica.WebApi.Modules;
     using ART.Infra.CrossCutting.MQ;
 
@@ -42,18 +41,13 @@ namespace ART.Domotica.WebApi
 
             WebApiConfig.Register(config);
 
-            AutoMapperConfig.RegisterMappings();
-
             // Make the autofac container
             var builder = new ContainerBuilder();
 
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ProducerModule>();
-
-            // Register anything else you might need...
-            //builder.RegisterApiControllers();
-            builder.RegisterApiControllers(typeof(DSFamilyTempSensorController).Assembly);
-
+            builder.RegisterModule<ControllerModule>();
+            
             // Build the container
             var container = builder.Build();
 

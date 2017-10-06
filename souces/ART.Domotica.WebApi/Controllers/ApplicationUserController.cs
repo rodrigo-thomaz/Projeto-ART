@@ -1,14 +1,12 @@
-﻿using ART.Domotica.WebApi.Models;
-using ART.Infra.CrossCutting.WebApi;
+﻿using ART.Infra.CrossCutting.WebApi;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Description;
 
 namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/user")]
-    public class UserController : BaseApiController
+    [RoutePrefix("api/applicationUser")]
+    public class ApplicationUserController : BaseApiController
     {
         #region private readonly fields
 
@@ -18,7 +16,7 @@ namespace ART.Domotica.WebApi.Controllers
 
         #region constructors
 
-        public UserController()
+        public ApplicationUserController()
         {
             //_userRepository = new UserRepository();
         }
@@ -38,11 +36,10 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [ResponseType(typeof(UserCreateModel))]
         [Route("insert")]
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IHttpActionResult> Insert(UserCreateModel model)
+        public async Task<IHttpActionResult> Insert()
         {
             //ValidateModelState();
             //var user = new User

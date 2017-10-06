@@ -1,29 +1,17 @@
 ﻿using ART.Infra.CrossCutting.MQ;
-using ART.Domotica.Common.QueueNames;
 using ART.Domotica.WebApi.IProducers;
 using RabbitMQ.Client;
 using System.Threading.Tasks;
+using ART.Domotica.Constant;
 
 namespace ART.Domotica.WebApi.Producers
 {
-    public class TemperatureScaleProducer : ITemperatureScaleProducer
+    public class TemperatureScaleProducer : ProducerBase, ITemperatureScaleProducer
     {
-        #region private readonly fields
-
-        private readonly IConnection _connection;
-        private readonly IModel _model;
-        private readonly IBasicProperties _basicProperties;
-
-        #endregion
-
         #region constructors
 
-        public TemperatureScaleProducer(IConnection connection)
+        public TemperatureScaleProducer(IConnection connection) : base(connection)
         {
-            _connection = connection;
-            _model = _connection.CreateModel();
-            _basicProperties = _model.CreateBasicProperties();
-
             Initialize();
         }
 
@@ -34,7 +22,7 @@ namespace ART.Domotica.WebApi.Producers
         public async Task GetScales(string session)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(session);
-            await Task.Run(() => _model.BasicPublish("", TemperatureScaleQueueNames.GetScalesQueueName, null, payload));
+            await Task.Run(() => _model.BasicPublish("", TemperatureScaleConstants.GetScalesQueueName, null, payload));
         }
 
         #endregion
@@ -44,7 +32,7 @@ namespace ART.Domotica.WebApi.Producers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: TemperatureScaleQueueNames.GetScalesQueueName
+                  queue: TemperatureScaleConstants.GetScalesQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

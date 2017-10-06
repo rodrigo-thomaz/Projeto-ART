@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Common.Contracts
+﻿namespace ART.Domotica.Contract
 {
     using System;
 

@@ -1,8 +1,7 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities;
 using ART.Infra.CrossCutting.MQ;
-using ART.Domotica.Common.Contracts;
-using ART.Domotica.Common.QueueNames;
+using ART.Domotica.Contract;
 using ART.Domotica.Worker.Contracts;
 using ART.Domotica.Worker.Models;
 using AutoMapper;
@@ -14,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using ART.Domotica.Constant;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -60,35 +60,35 @@ namespace ART.Domotica.Worker.Consumers
         private void Initialize()
         {
             _model.QueueDeclare(
-                 queue: DSFamilyTempSensorQueueNames.GetAllQueueName
+                 queue: DSFamilyTempSensorConstants.GetAllQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
                , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.GetResolutionsQueueName
+                  queue: DSFamilyTempSensorConstants.GetResolutionsQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.SetResolutionQueueName
+                  queue: DSFamilyTempSensorConstants.SetResolutionQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.SetHighAlarmQueueName
+                  queue: DSFamilyTempSensorConstants.SetHighAlarmQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorQueueNames.SetLowAlarmQueueName
+                  queue: DSFamilyTempSensorConstants.SetLowAlarmQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
@@ -100,11 +100,11 @@ namespace ART.Domotica.Worker.Consumers
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
             _setLowAlarmConsumer.Received += SetLowAlarmReceived;
 
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.GetAllQueueName, false, _getAllConsumer);
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.GetResolutionsQueueName, false, _getResolutionsConsumer);
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.SetResolutionQueueName, false, _setResolutionConsumer);
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
-            _model.BasicConsume(DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllQueueName, false, _getAllConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.GetResolutionsQueueName, false, _getResolutionsConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.SetResolutionQueueName, false, _setResolutionConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
         }
 
         private void GetAllReceived(object sender, BasicDeliverEventArgs e)
@@ -172,7 +172,7 @@ namespace ART.Domotica.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetResolution] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorQueueNames.SetResolutionQueueName, contract);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorConstants.SetResolutionQueueName, contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
@@ -195,7 +195,7 @@ namespace ART.Domotica.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetHighAlarm] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorQueueNames.SetHighAlarmQueueName, contract);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorConstants.SetHighAlarmQueueName, contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
@@ -218,7 +218,7 @@ namespace ART.Domotica.Worker.Consumers
             Console.WriteLine("[DSFamilyTempSensorDomain.SetLowAlarm] Ok");
 
             var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorQueueNames.SetLowAlarmQueueName, contract);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorConstants.SetLowAlarmQueueName, contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);

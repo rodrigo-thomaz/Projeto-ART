@@ -60,6 +60,11 @@
             get; set;
         }
 
+        public DbSet<UsersInApplication> UsersInApplication
+        {
+            get; set;
+        }
+
         #endregion Properties
 
         #region Methods

@@ -1,8 +1,8 @@
-﻿namespace ART.Domotica.WebApi.Models
+﻿namespace ART.Domotica.Contract
 {
     using System;
 
-    public class DSFamilyTempSensorSetLowAlarmModel
+    public class DSFamilyTempSensorSetResolutionContract
     {
         #region Properties
 
@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public decimal LowAlarm
+        public byte DSFamilyTempSensorResolutionId
         {
             get; set;
         }
