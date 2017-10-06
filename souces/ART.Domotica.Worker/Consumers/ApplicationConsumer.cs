@@ -65,7 +65,7 @@ namespace ART.Domotica.Worker.Consumers
         private async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[ApplicationConsumer.GetAllReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[ApplicationConsumer.GetAllReceived] {0}", Encoding.UTF8.GetString(e.Body));
 
             _model.BasicAck(e.DeliveryTag, false);
 
@@ -74,7 +74,9 @@ namespace ART.Domotica.Worker.Consumers
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(models);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, "GetAllCompleted");
-            
+
+            Console.WriteLine("[ApplicationConsumer.GetAllCompleted] {0}", Encoding.UTF8.GetString(buffer));
+
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
