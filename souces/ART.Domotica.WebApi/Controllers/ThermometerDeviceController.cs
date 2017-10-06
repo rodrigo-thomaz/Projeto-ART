@@ -4,12 +4,11 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Web.Http;
-
-    using ART.Infra.CrossCutting.WebApi;
+    using ART.Infra.CrossCutting.MQ.WebApi;
 
     [Authorize]
     [RoutePrefix("api/thermometerDevice")]
-    public class ThermometerDeviceController : BaseApiController
+    public class ThermometerDeviceController : AuthenticatedMQApiControllerBase
     {
         #region Methods
 

@@ -1,14 +1,14 @@
 ﻿using System.Web.Http;
-using ART.Infra.CrossCutting.WebApi;
 using ART.Domotica.WebApi.IProducers;
 using System.Threading.Tasks;
 using ART.Domotica.Contract;
+using ART.Infra.CrossCutting.MQ.WebApi;
 
 namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
     [RoutePrefix("api/dsFamilyTempSensor")]    
-    public class DSFamilyTempSensorController : AuthenticatedApiController
+    public class DSFamilyTempSensorController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
@@ -42,7 +42,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> GetAll(DSFamilyTempSensorGetAllContract contract)
         {
-            await _dsFamilyTempSensorProducer.GetAll(contract);
+            await _dsFamilyTempSensorProducer.GetAll(CreateContract(contract));
             return Ok();
         }
 
@@ -60,8 +60,8 @@ namespace ART.Domotica.WebApi.Controllers
         [Route("getResolutions")]
         [HttpPost]
         public async Task<IHttpActionResult> GetResolutions(DSFamilyTempSensorGetResolutionsContract contract)
-        {           
-            await _dsFamilyTempSensorProducer.GetResolutions(contract);
+        {
+            await _dsFamilyTempSensorProducer.GetResolutions(CreateContract(contract));
             return Ok();
         }
 
@@ -79,7 +79,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SetResolution(DSFamilyTempSensorSetResolutionContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetResolution(contract);
+            await _dsFamilyTempSensorProducer.SetResolution(CreateContract(contract));
             return Ok();
         }
 
@@ -97,7 +97,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SetHighAlarm(DSFamilyTempSensorSetHighAlarmContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetHighAlarm(contract);
+            await _dsFamilyTempSensorProducer.SetHighAlarm(CreateContract(contract));
             return Ok();
         }
 
@@ -115,7 +115,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> SetLowAlarm(DSFamilyTempSensorSetLowAlarmContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetLowAlarm(contract);
+            await _dsFamilyTempSensorProducer.SetLowAlarm(CreateContract(contract));
             return Ok();
         }
 

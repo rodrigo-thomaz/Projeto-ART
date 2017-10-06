@@ -161,6 +161,10 @@
       <Project>{2f58031d-ff69-4bda-9c4a-4811560918dd}</Project>
       <Name>ART.Domotica.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.WebApi\ART.Infra.CrossCutting.MQ.WebApi.csproj">
+      <Project>{ADB99AEB-F606-417E-8380-81DE0AC6546C}</Project>
+      <Name>ART.Infra.CrossCutting.MQ.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
       <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
       <Name>ART.Infra.CrossCutting.MQ</Name>

@@ -108,7 +108,7 @@ namespace ART.Security.WebApi.Providers
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));
             identity.AddClaim(new Claim(ClaimTypes.Role, "user"));
             identity.AddClaim(new Claim("sub", context.UserName));
-            identity.AddClaim(new Claim("userId", user.Id.ToString()));
+            identity.AddClaim(new Claim("applicationUserId", user.Id.ToString()));
 
             var props = new AuthenticationProperties(new Dictionary<string, string>
                 {

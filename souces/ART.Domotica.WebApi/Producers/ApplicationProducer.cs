@@ -20,9 +20,8 @@ namespace ART.Domotica.WebApi.Producers
 
         #region public voids
 
-        public async Task GetAll(Guid applicationUserId)
+        public async Task Get(Guid applicationUserId)
         {
-            //var contract = new DSFamilyTempSensorGetAllContract { ApplicationId = applicationId, Session = session };
             //var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             //await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload));
         } 
@@ -34,7 +33,7 @@ namespace ART.Domotica.WebApi.Producers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: ApplicationConstants.GetAllQueueName
+                  queue: ApplicationConstants.GetQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

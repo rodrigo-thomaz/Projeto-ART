@@ -4,12 +4,11 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Web.Http;
-
-    using ART.Infra.CrossCutting.WebApi;
+    using ART.Infra.CrossCutting.MQ.WebApi;
 
     [Authorize]
     [RoutePrefix("api/dashboard")]
-    public class DashboardController : BaseApiController
+    public class DashboardController : AuthenticatedMQApiControllerBase
     {
         #region Methods
 

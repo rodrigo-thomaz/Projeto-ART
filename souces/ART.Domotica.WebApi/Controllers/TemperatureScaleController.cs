@@ -1,13 +1,13 @@
 ﻿using System.Web.Http;
-using ART.Infra.CrossCutting.WebApi;
 using ART.Domotica.WebApi.IProducers;
 using System.Threading.Tasks;
+using ART.Infra.CrossCutting.MQ.WebApi;
 
 namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
     [RoutePrefix("api/temperatureScale")]    
-    public class TemperatureScaleController : AuthenticatedApiController
+    public class TemperatureScaleController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
@@ -32,16 +32,15 @@ namespace ART.Domotica.WebApi.Controllers
         /// <remarks>
         /// Retornar uma lista de escalas
         /// </remarks>
-        /// <param name="session">session do broker do solicitante</param>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
         [Route("getScales/{session}")]
         [HttpGet]
-        public async Task<IHttpActionResult> GetScales(string session)
+        public async Task<IHttpActionResult> GetScales()
         {           
-            await _temperatureScaleProducer.GetScales(session);
+            await _temperatureScaleProducer.GetScales(CreateContract());
             return Ok();
         }
 

@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Configurations
 {
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
     using ART.Domotica.Repository.Entities;
@@ -21,7 +22,9 @@
             //UserId
             Property(x => x.UserId)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
 
             //ApplicationId
             Property(x => x.ApplicationId)

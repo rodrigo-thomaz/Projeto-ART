@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0DBC73AE-9F5C-4A58-BB8A-3864BF4A5832}</ProjectGuid>
+    <ProjectGuid>{ADB99AEB-F606-417E-8380-81DE0AC6546C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.Infra.CrossCutting.WebApi</RootNamespace>
-    <AssemblyName>ART.Infra.CrossCutting.WebApi</AssemblyName>
+    <RootNamespace>ART.Infra.CrossCutting.MQ.WebApi</RootNamespace>
+    <AssemblyName>ART.Infra.CrossCutting.MQ.WebApi</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,17 +50,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticatedApiControllerBase.cs" />
-    <Compile Include="NoAuthenticatedApiControllerBase.cs" />
-    <Compile Include="GlobalExceptionHandler.cs" />
+    <Compile Include="AuthenticatedMQApiControllerBase.cs" />
+    <Compile Include="NoAuthenticatedMQApiControllerBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RouteConstraints\CustomMaxRouteConstraint.cs" />
-    <Compile Include="RouteConstraints\CustomLengthRouteConstraint.cs" />
-    <Compile Include="RouteConstraints\CustomMinRouteConstraint.cs" />
-    <Compile Include="RouteConstraints\CustomRangeRouteConstraint.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{eb5e2271-76a2-4cf1-942e-f04fb9d1056b}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.WebApi\ART.Infra.CrossCutting.WebApi.csproj">
+      <Project>{0DBC73AE-9F5C-4A58-BB8A-3864BF4A5832}</Project>
+      <Name>ART.Infra.CrossCutting.WebApi</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -2,10 +2,5 @@
 {
     public interface IDashboardProducer
     {
-        #region Methods
-
-        
-
-        #endregion Methods
     }
 }

@@ -1,32 +1,29 @@
-﻿using ART.Domotica.WebApi.IProducers;
-using RabbitMQ.Client;
-using ART.Infra.CrossCutting.MQ;
-
-namespace ART.Domotica.WebApi.Producers
+﻿namespace ART.Domotica.WebApi.Producers
 {
+    using ART.Domotica.WebApi.IProducers;
+    using ART.Infra.CrossCutting.MQ;
+
+    using RabbitMQ.Client;
+
     public class ApplicationUserProducer : ProducerBase, IApplicationUserProducer
     {
-        #region constructors
+        #region Constructors
 
-        public ApplicationUserProducer(IConnection connection) : base(connection)
+        public ApplicationUserProducer(IConnection connection)
+            : base(connection)
         {
             Initialize();
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region public voids
-                
-
-        #endregion
-
-        #region private voids
+        #region Methods
 
         private void Initialize()
         {
             _basicProperties.Persistent = true;
         }
 
-        #endregion
+        #endregion Methods
     }
 }

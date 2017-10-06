@@ -2,10 +2,5 @@
 {
     public interface IApplicationUserProducer
     {
-        #region Methods
-
-        
-
-        #endregion Methods
     }
 }

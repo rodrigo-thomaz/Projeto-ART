@@ -19,9 +19,9 @@ namespace ART.Domotica.WebApi.Producers
 
         #region public voids
 
-        public async Task GetScales(string session)
+        public async Task GetScales(AuthenticatedContract contract)
         {
-            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(session);
+            var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             await Task.Run(() => _model.BasicPublish("", TemperatureScaleConstants.GetScalesQueueName, null, payload));
         }
 

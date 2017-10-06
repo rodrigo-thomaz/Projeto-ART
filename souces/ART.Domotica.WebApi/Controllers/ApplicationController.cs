@@ -3,24 +3,24 @@
     using System.Web.Http;
 
     using ART.Domotica.WebApi.IProducers;
-    using ART.Infra.CrossCutting.WebApi;
+    using ART.Infra.CrossCutting.MQ.WebApi;
 
     [Authorize]
     [RoutePrefix("api/application")]
-    public class ApplicationController : AuthenticatedApiController
+    public class ApplicationController : AuthenticatedMQApiControllerBase
     {
         #region Fields
 
-        protected readonly IDSFamilyTempSensorProducer _dsFamilyTempSensorProducer;
+        protected readonly IApplicationProducer _applicationProducer;
 
         #endregion Fields
 
         #region Constructors
 
         //: base(connection)
-        public ApplicationController(IDSFamilyTempSensorProducer dsFamilyTempSensorProducer)
+        public ApplicationController(IApplicationProducer applicationProducer)
         {
-            _dsFamilyTempSensorProducer = dsFamilyTempSensorProducer;
+            _applicationProducer = applicationProducer;
         }
 
         #endregion Constructors

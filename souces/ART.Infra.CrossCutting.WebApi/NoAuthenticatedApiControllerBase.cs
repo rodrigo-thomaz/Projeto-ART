@@ -5,7 +5,7 @@
     using System.Text;
     using System.Web.Http;
 
-    public abstract class BaseApiController : ApiController
+    public abstract class NoAuthenticatedApiControllerBase : ApiController
     {
         #region Methods
 

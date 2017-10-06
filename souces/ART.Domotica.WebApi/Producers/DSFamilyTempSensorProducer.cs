@@ -20,31 +20,31 @@ namespace ART.Domotica.WebApi.Producers
 
         #region public voids
 
-        public async Task GetAll(DSFamilyTempSensorGetAllContract contract)
+        public async Task GetAll(AuthenticatedContract<DSFamilyTempSensorGetAllContract> contract)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload));
         }
 
-        public async Task GetResolutions(DSFamilyTempSensorGetResolutionsContract contract)
+        public async Task GetResolutions(AuthenticatedContract<DSFamilyTempSensorGetResolutionsContract> contract)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             await Task.Run(() => _model.BasicPublish("", DSFamilyTempSensorConstants.GetResolutionsQueueName, null, payload));
         }
 
-        public async Task SetResolution(DSFamilyTempSensorSetResolutionContract contract)
+        public async Task SetResolution(AuthenticatedContract<DSFamilyTempSensorSetResolutionContract> contract)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorConstants.SetResolutionQueueName, null, payload);
         }
 
-        public async Task SetHighAlarm(DSFamilyTempSensorSetHighAlarmContract contract)
+        public async Task SetHighAlarm(AuthenticatedContract<DSFamilyTempSensorSetHighAlarmContract> contract)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorConstants.SetHighAlarmQueueName, null, payload);
         }
 
-        public async Task SetLowAlarm(DSFamilyTempSensorSetLowAlarmContract contract)
+        public async Task SetLowAlarm(AuthenticatedContract<DSFamilyTempSensorSetLowAlarmContract> contract)
         {
             var payload = await SerializationHelpers.SerializeToJsonBufferAsync(contract);
             _model.BasicPublish("", DSFamilyTempSensorConstants.SetLowAlarmQueueName, null, payload);

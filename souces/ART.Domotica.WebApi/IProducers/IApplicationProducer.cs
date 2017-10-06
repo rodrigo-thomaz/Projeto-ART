@@ -7,7 +7,7 @@
     {
         #region Methods
 
-        Task GetAll(Guid applicationUserId);
+        Task Get(Guid applicationUserId);
 
         #endregion Methods
     }
