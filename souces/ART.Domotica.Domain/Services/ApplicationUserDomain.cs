@@ -14,16 +14,14 @@
         #region Fields
         
         private readonly IApplicationUserRepository _applicationUserRepository;
-        private readonly IApplicationRepository _applicationRepository;
 
         #endregion Fields
 
         #region Constructors
 
-        public ApplicationUserDomain(IApplicationUserRepository applicationUserRepository, IApplicationRepository applicationRepository)
+        public ApplicationUserDomain(IApplicationUserRepository applicationUserRepository)
         {
-            _applicationUserRepository = applicationUserRepository;
-            _applicationRepository = applicationRepository;
+            _applicationUserRepository = applicationUserRepository;        
         }
 
         #endregion Constructors
