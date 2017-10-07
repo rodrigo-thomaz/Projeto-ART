@@ -6,12 +6,17 @@
     {
         #region Properties
 
-        public Project Project
+        public ApplicationUser CreateByApplicationUser
         {
             get; set;
         }
 
-        public Guid ProjectId
+        public Guid CreateByApplicationUserId
+        {
+            get; set;
+        }
+
+        public DateTime CreateDate
         {
             get; set;
         }
@@ -22,6 +27,21 @@
         }
 
         public Guid HardwaresInApplicationId
+        {
+            get; set;
+        }
+
+        public Guid Id
+        {
+            get; set;
+        }
+
+        public Project Project
+        {
+            get; set;
+        }
+
+        public Guid ProjectId
         {
             get; set;
         }

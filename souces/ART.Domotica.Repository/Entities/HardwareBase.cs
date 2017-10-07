@@ -9,6 +9,11 @@
     {
         #region Properties
 
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
         public ICollection<HardwaresInApplication> HardwaresInApplication
         {
             get; set;
@@ -18,8 +23,6 @@
         {
             get; set;
         }
-
-        public DateTime CreateDate { get; set; }
 
         #endregion Properties
     }

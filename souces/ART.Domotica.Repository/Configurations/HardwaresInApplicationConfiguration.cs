@@ -1,11 +1,11 @@
 ﻿namespace ART.Domotica.Repository.Configurations
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
     using ART.Domotica.Repository.Entities;
-    using System.Data.Entity.Infrastructure.Annotations;
-    using System.Collections.Generic;
 
     public class HardwaresInApplicationConfiguration : EntityTypeConfiguration<HardwaresInApplication>
     {

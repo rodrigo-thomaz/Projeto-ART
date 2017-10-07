@@ -47,7 +47,7 @@
                 .HasPrecision(6, 3);
 
             //TemperatureScale
-            HasRequired(x => x.TemperatureScale)                
+            HasRequired(x => x.TemperatureScale)
                 .WithMany(x => x.DSFamilyTempSensors)
                 .HasForeignKey(x => x.TemperatureScaleId)
                 .WillCascadeOnDelete(false);

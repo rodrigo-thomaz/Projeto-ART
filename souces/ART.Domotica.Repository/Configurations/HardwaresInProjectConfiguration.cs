@@ -1,6 +1,8 @@
 ﻿namespace ART.Domotica.Repository.Configurations
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
     using ART.Domotica.Repository.Entities;
@@ -12,23 +14,35 @@
         public HardwaresInProjectConfiguration()
         {
             //Primary Keys
-            HasKey(x => new
-            {
-                x.HardwaresInApplicationId,
-                x.ProjectId,
-            });
+            HasKey(x => x.Id);
+
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(0)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .IsRequired();
 
             //HardwaresInApplicationId
             Property(x => x.HardwaresInApplicationId)
-                .HasColumnOrder(0)
+                .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new List<IndexAttribute>
+                    {
+                        new IndexAttribute("IX_Unique_HardwaresInApplicationId_ProjectId", 0) { IsUnique = true },
+                    }));
 
             //ProjectId
             Property(x => x.ProjectId)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new List<IndexAttribute>
+                    {
+                        new IndexAttribute("IX_Unique_HardwaresInApplicationId_ProjectId", 1) { IsUnique = true },
+                    }));
 
             //HardwaresInApplication
             HasRequired(x => x.HardwaresInApplication)

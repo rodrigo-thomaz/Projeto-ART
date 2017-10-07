@@ -6,6 +6,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using System.Collections.Generic;
+    using System;
 
     public class ApplicationUserDomain : IApplicationUserDomain
     {
@@ -30,18 +31,12 @@
 
         public async Task RegisterUser(ApplicationUser applicationUser)
         {
-            var application = new Application
+            applicationUser.Application = new Application
             {
-                UsersInApplication = new List<UsersInApplication>
-                {
-                    new UsersInApplication
-                    {
-                        ApplicationUser = applicationUser,                        
-                    }
-                }
-            };
+                CreateDate = DateTime.Now,
+            };            
             
-            await _applicationRepository.Insert(application);           
+            await _applicationUserRepository.Insert(applicationUser);           
         }
 
         #endregion Methods

@@ -1,17 +1,13 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using ART.Infra.CrossCutting.Repository;
     using System;
     using System.Collections.Generic;
+
+    using ART.Infra.CrossCutting.Repository;
 
     public class HardwaresInApplication : IEntity<Guid>
     {
         #region Properties
-
-        public Guid Id
-        {
-            get; set;
-        }
 
         public Application Application
         {
@@ -19,6 +15,21 @@
         }
 
         public Guid ApplicationId
+        {
+            get; set;
+        }
+
+        public ApplicationUser CreateByApplicationUser
+        {
+            get; set;
+        }
+
+        public Guid CreateByApplicationUserId
+        {
+            get; set;
+        }
+
+        public DateTime CreateDate
         {
             get; set;
         }
@@ -38,11 +49,10 @@
             get; set;
         }
 
-        public DateTime CreateDate { get; set; }
-
-        public Guid CreateByApplicationUserId { get; set; }
-
-        public ApplicationUser CreateByApplicationUser { get; set; }
+        public Guid Id
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

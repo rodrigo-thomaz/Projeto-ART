@@ -8,7 +8,7 @@
     {
         #region Properties
 
-        public Guid Id
+        public Application Application
         {
             get; set;
         }
@@ -18,9 +18,15 @@
             get; set;
         }
 
-        public Application Application { get; set; }
+        public DateTime CreateDate
+        {
+            get; set;
+        }
 
-        public DateTime CreateDate { get; set; }
+        public Guid Id
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

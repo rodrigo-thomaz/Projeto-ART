@@ -7,7 +7,17 @@
 
     public class Application : IEntity<Guid>
     {
-        #region Properties        
+        #region Properties
+
+        public ICollection<ApplicationUser> ApplicationUsers
+        {
+            get; set;
+        }
+
+        public DateTime CreateDate
+        {
+            get; set;
+        }
 
         public ICollection<HardwaresInApplication> HardwaresInApplication
         {
@@ -23,13 +33,6 @@
         {
             get; set;
         }
-
-        public ICollection<ApplicationUser> ApplicationUsers
-        {
-            get; set;
-        }
-
-        public DateTime CreateDate { get; set; }
 
         #endregion Properties
     }

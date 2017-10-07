@@ -1,7 +1,7 @@
-﻿using RabbitMQ.Client;
-
-namespace ART.Infra.CrossCutting.MQ.Worker
+﻿namespace ART.Infra.CrossCutting.MQ.Worker
 {
+    using RabbitMQ.Client;
+
     public abstract class ConsumerBase
     {
         #region Fields

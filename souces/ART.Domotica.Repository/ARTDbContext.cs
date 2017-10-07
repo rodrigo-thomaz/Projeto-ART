@@ -25,11 +25,6 @@
             get; set;
         }
 
-        public DbSet<Project> Project
-        {
-            get; set;
-        }
-
         public DbSet<ApplicationUser> ApplicationUser
         {
             get; set;
@@ -51,6 +46,11 @@
         }
 
         public DbSet<HardwaresInProject> HardwaresInProject
+        {
+            get; set;
+        }
+
+        public DbSet<Project> Project
         {
             get; set;
         }
