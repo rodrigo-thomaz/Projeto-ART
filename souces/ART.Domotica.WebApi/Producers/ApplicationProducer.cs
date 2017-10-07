@@ -2,8 +2,8 @@
 using System.Threading.Tasks;
 using RabbitMQ.Client;
 using ART.Domotica.Constant;
-using ART.Infra.CrossCutting.MQ.WebApi;
 using ART.Infra.CrossCutting.MQ.Contract;
+using ART.Infra.CrossCutting.MQ.Producer;
 
 namespace ART.Domotica.WebApi.Producers
 {

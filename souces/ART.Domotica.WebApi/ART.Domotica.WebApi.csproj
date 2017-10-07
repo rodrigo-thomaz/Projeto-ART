@@ -165,6 +165,10 @@
       <Project>{e9386369-36e5-4fa6-8d5b-05119cb95b23}</Project>
       <Name>ART.Infra.CrossCutting.MQ.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.Producer\ART.Infra.CrossCutting.MQ.Producer.csproj">
+      <Project>{F21ECDF3-626E-4EBD-B665-D20D93AC333D}</Project>
+      <Name>ART.Infra.CrossCutting.MQ.Producer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.WebApi\ART.Infra.CrossCutting.MQ.WebApi.csproj">
       <Project>{ADB99AEB-F606-417E-8380-81DE0AC6546C}</Project>
       <Name>ART.Infra.CrossCutting.MQ.WebApi</Name>

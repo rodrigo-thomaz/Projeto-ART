@@ -12,16 +12,17 @@
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Security.Constant;
     using ART.Security.Contract;
+    using ART.Security.Domain.IProducers;
 
     public class AuthDomain : IAuthDomain
     {
         private readonly IAuthRepository _authRepository;
-        private readonly IConnection _connection;
+        private readonly IAuthProducer _authProducer;
 
-        public AuthDomain(IAuthRepository authRepository, IConnection connection)
+        public AuthDomain(IAuthRepository authRepository, IAuthProducer authProducer)
         {
             _authRepository = authRepository;
-            _connection = connection;
+            _authProducer = authProducer;
         }
 
         public async Task<IdentityResult> AddLoginAsync(Guid userId, UserLoginInfo login)
@@ -85,25 +86,12 @@
 
         private async Task SendRegisterUserToBroker(ApplicationUser applicationUser)
         {
-            var model = _connection.CreateModel();
-            var basicProperties = model.CreateBasicProperties();
-
-            var queueName = ApplicationUserQueueName.RegisterUserQueueName;
-
-            model.QueueDeclare(
-                  queue: queueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
-
-            basicProperties.Persistent = true;
-
             var contract = Mapper.Map<ApplicationUser, RegisterUserContract>(applicationUser);
-
-            var payload = SerializationHelpers.SerializeToJsonBufferAsync(contract);
-
-            await Task.Run(() => model.BasicPublish("", queueName, null, payload));            
+            await _authProducer.RegisterUser(new NoAuthenticatedMessageContract<RegisterUserContract>
+            {
+                Contract = contract,
+                SouceMQSession = "",
+            });
         }
 
         public async Task<bool> RemoveRefreshToken(RefreshToken refreshToken)

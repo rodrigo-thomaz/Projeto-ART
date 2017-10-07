@@ -64,10 +64,14 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<RegisterUserContract>(e.Body);
-            await _applicationUserDomain.RegisterUser(contract);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<NoAuthenticatedMessageContract<RegisterUserContract>>(e.Body);
+            await _applicationUserDomain.RegisterUser(message.Contract);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationUserQueueName.RegisterUserCompletedQueueName);
 
             Console.WriteLine("[{0}] Ok", ApplicationUserQueueName.RegisterUserCompletedQueueName);
+
+            _model.BasicPublish(exchange, rountingKey, null, null);
         }
 
         #endregion

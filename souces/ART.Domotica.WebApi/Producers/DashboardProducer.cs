@@ -1,7 +1,7 @@
 ﻿namespace ART.Domotica.WebApi.Producers
 {
     using ART.Domotica.WebApi.IProducers;
-    using ART.Infra.CrossCutting.MQ.WebApi;
+    using ART.Infra.CrossCutting.MQ.Producer;
 
     using RabbitMQ.Client;
 
