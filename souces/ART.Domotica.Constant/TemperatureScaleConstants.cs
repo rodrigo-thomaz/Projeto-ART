@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string GetAllQueueName = "TemperatureScale.GetAll";
         public static readonly string GetAllCompletedQueueName = "TemperatureScale.GetAllCompleted";
+        public static readonly string GetAllQueueName = "TemperatureScale.GetAll";
 
         #endregion Fields
     }

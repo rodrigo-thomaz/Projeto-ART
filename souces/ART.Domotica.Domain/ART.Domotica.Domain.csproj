@@ -90,9 +90,9 @@
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ART.Security.Common\ART.Security.Common.csproj">
-      <Project>{9ECB14DD-14DE-4381-A592-AA812C81ED2D}</Project>
-      <Name>ART.Security.Common</Name>
+    <ProjectReference Include="..\ART.Security.Contract\ART.Security.Contract.csproj">
+      <Project>{797D790B-26C7-4EF7-B38C-5F924168DB15}</Project>
+      <Name>ART.Security.Contract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

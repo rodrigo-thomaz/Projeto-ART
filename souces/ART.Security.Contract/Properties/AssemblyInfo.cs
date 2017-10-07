@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // As informações gerais sobre um assembly são controladas por
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associada a um assembly.
-[assembly: AssemblyTitle("ART.Security.Common")]
+[assembly: AssemblyTitle("ART.Security.Contract")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ART.Security.Common")]
+[assembly: AssemblyProduct("ART.Security.Contract")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // O GUID a seguir será destinado à ID de typelib se este projeto for exposto para COM
-[assembly: Guid("9ecb14dd-14de-4381-a592-aa812c81ed2d")]
+[assembly: Guid("797d790b-26c7-4ef7-b38c-5f924168db15")]
 
 // As informações da versão de um assembly consistem nos quatro valores a seguir:
 //

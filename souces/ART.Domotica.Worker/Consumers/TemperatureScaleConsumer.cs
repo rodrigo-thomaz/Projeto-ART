@@ -1,13 +1,7 @@
 ﻿using ART.Domotica.Domain.Interfaces;
-using ART.Domotica.Repository.Entities;
-using ART.Domotica.Worker.Models;
-using AutoMapper;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;

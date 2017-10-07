@@ -6,8 +6,8 @@
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using System;
-    using ART.Security.Common.Contracts;
     using global::AutoMapper;
+    using ART.Security.Contract;
 
     public class ApplicationUserDomain : IApplicationUserDomain
     {

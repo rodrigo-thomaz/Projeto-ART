@@ -9,9 +9,9 @@
     using ART.Security.Repository.Interfaces;
     using RabbitMQ.Client;
     using global::AutoMapper;
-    using ART.Security.Common.Contracts;
-    using ART.Security.Common.QueueNames;
     using ART.Infra.CrossCutting.MQ.Contract;
+    using ART.Security.Constant;
+    using ART.Security.Contract;
 
     public class AuthDomain : IAuthDomain
     {

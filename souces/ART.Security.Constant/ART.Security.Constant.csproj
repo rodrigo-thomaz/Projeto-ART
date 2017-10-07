@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9ECB14DD-14DE-4381-A592-AA812C81ED2D}</ProjectGuid>
+    <ProjectGuid>{9C881537-DFCB-4359-A2DC-3F15DE130886}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.Security.Common</RootNamespace>
-    <AssemblyName>ART.Security.Common</AssemblyName>
+    <RootNamespace>ART.Security.Constant</RootNamespace>
+    <AssemblyName>ART.Security.Constant</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,9 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\RegisterUserContract.cs" />
+    <Compile Include="ApplicationUserQueueName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueueNames\ApplicationUserQueueName.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

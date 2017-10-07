@@ -1,214 +1,11 @@
 namespace ART.Domotica.Repository.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class InitialCreate : DbMigration
     {
-        public override void Up()
-        {
-            CreateTable(
-                "dbo.Application",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        CreateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.ApplicationUser",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        ApplicationId = c.Guid(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Application", t => t.ApplicationId)
-                .Index(t => t.ApplicationId);
-            
-            CreateTable(
-                "dbo.HardwaresInApplication",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        ApplicationId = c.Guid(nullable: false),
-                        HardwareBaseId = c.Guid(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        CreateByApplicationUserId = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Application", t => t.ApplicationId)
-                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
-                .ForeignKey("dbo.HardwareBase", t => t.HardwareBaseId)
-                .Index(t => new { t.ApplicationId, t.HardwareBaseId }, unique: true, name: "IX_Unique_ApplicationId_HardwareBaseId")
-                .Index(t => t.HardwareBaseId, unique: true, name: "IX_Unique_HardwareBaseId")
-                .Index(t => t.CreateByApplicationUserId);
-            
-            CreateTable(
-                "dbo.HardwareBase",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        CreateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.SensorsInDevice",
-                c => new
-                    {
-                        SensorBaseId = c.Guid(nullable: false),
-                        DeviceBaseId = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.SensorBaseId, t.DeviceBaseId })
-                .ForeignKey("dbo.DeviceBase", t => t.DeviceBaseId)
-                .ForeignKey("dbo.SensorBase", t => t.SensorBaseId)
-                .Index(t => t.SensorBaseId, unique: true)
-                .Index(t => t.DeviceBaseId);
-            
-            CreateTable(
-                "dbo.DSFamilyTempSensorResolution",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Bits = c.Byte(nullable: false),
-                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
-                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.Bits, unique: true);
-            
-            CreateTable(
-                "dbo.TemperatureScale",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Symbol = c.String(nullable: false, maxLength: 2, fixedLength: true),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.Symbol, unique: true);
-            
-            CreateTable(
-                "dbo.HardwaresInProject",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        HardwaresInApplicationId = c.Guid(nullable: false),
-                        ProjectId = c.Guid(nullable: false),
-                        CreateByApplicationUserId = c.Guid(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId, cascadeDelete: true)
-                .ForeignKey("dbo.HardwaresInApplication", t => t.HardwaresInApplicationId)
-                .ForeignKey("dbo.Project", t => t.ProjectId)
-                .Index(t => new { t.HardwaresInApplicationId, t.ProjectId }, unique: true, name: "IX_Unique_HardwaresInApplicationId_ProjectId")
-                .Index(t => t.CreateByApplicationUserId);
-            
-            CreateTable(
-                "dbo.Project",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Description = c.String(),
-                        ApplicationId = c.Guid(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        CreateByApplicationUserId = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Application", t => t.ApplicationId)
-                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
-                .Index(t => t.ApplicationId)
-                .Index(t => t.CreateByApplicationUserId);
-            
-            CreateTable(
-                "dbo.SensorBase",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.HardwareBase", t => t.Id)
-                .Index(t => t.Id);
-            
-            CreateTable(
-                "dbo.DSFamilyTempSensor",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        DeviceAddress = c.String(nullable: false, maxLength: 15),
-                        Family = c.String(nullable: false, maxLength: 10),
-                        HighAlarm = c.Decimal(nullable: false, precision: 6, scale: 3),
-                        LowAlarm = c.Decimal(nullable: false, precision: 6, scale: 3),
-                        TemperatureScaleId = c.Byte(nullable: false),
-                        DSFamilyTempSensorResolutionId = c.Byte(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SensorBase", t => t.Id)
-                .ForeignKey("dbo.DSFamilyTempSensorResolution", t => t.DSFamilyTempSensorResolutionId)
-                .ForeignKey("dbo.TemperatureScale", t => t.TemperatureScaleId)
-                .Index(t => t.Id)
-                .Index(t => t.DeviceAddress, unique: true)
-                .Index(t => t.TemperatureScaleId)
-                .Index(t => t.DSFamilyTempSensorResolutionId);
-            
-            CreateTable(
-                "dbo.DeviceBase",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.HardwareBase", t => t.Id)
-                .Index(t => t.Id);
-            
-            CreateTable(
-                "dbo.ESPDeviceBase",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        MacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.MacAddress, unique: true);
-            
-            CreateTable(
-                "dbo.ThermometerDevice",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ESPDeviceBase", t => t.Id)
-                .Index(t => t.Id);
-            
-            CreateTable(
-                "dbo.RaspberryDeviceBase",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        LanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
-                        WLanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.LanMacAddress, unique: true)
-                .Index(t => t.WLanMacAddress, unique: true);
-            
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropForeignKey("dbo.RaspberryDeviceBase", "Id", "dbo.DeviceBase");
@@ -272,5 +69,210 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.ApplicationUser");
             DropTable("dbo.Application");
         }
+
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.Application",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+
+            CreateTable(
+                "dbo.ApplicationUser",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        ApplicationId = c.Guid(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Application", t => t.ApplicationId)
+                .Index(t => t.ApplicationId);
+
+            CreateTable(
+                "dbo.HardwaresInApplication",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        ApplicationId = c.Guid(nullable: false),
+                        HardwareBaseId = c.Guid(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                        CreateByApplicationUserId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Application", t => t.ApplicationId)
+                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
+                .ForeignKey("dbo.HardwareBase", t => t.HardwareBaseId)
+                .Index(t => new { t.ApplicationId, t.HardwareBaseId }, unique: true, name: "IX_Unique_ApplicationId_HardwareBaseId")
+                .Index(t => t.HardwareBaseId, unique: true, name: "IX_Unique_HardwareBaseId")
+                .Index(t => t.CreateByApplicationUserId);
+
+            CreateTable(
+                "dbo.HardwareBase",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+
+            CreateTable(
+                "dbo.SensorsInDevice",
+                c => new
+                    {
+                        SensorBaseId = c.Guid(nullable: false),
+                        DeviceBaseId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.SensorBaseId, t.DeviceBaseId })
+                .ForeignKey("dbo.DeviceBase", t => t.DeviceBaseId)
+                .ForeignKey("dbo.SensorBase", t => t.SensorBaseId)
+                .Index(t => t.SensorBaseId, unique: true)
+                .Index(t => t.DeviceBaseId);
+
+            CreateTable(
+                "dbo.DSFamilyTempSensorResolution",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Bits = c.Byte(nullable: false),
+                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
+                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.Bits, unique: true);
+
+            CreateTable(
+                "dbo.TemperatureScale",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Symbol = c.String(nullable: false, maxLength: 2, fixedLength: true),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.Symbol, unique: true);
+
+            CreateTable(
+                "dbo.HardwaresInProject",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        HardwaresInApplicationId = c.Guid(nullable: false),
+                        ProjectId = c.Guid(nullable: false),
+                        CreateByApplicationUserId = c.Guid(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId, cascadeDelete: true)
+                .ForeignKey("dbo.HardwaresInApplication", t => t.HardwaresInApplicationId)
+                .ForeignKey("dbo.Project", t => t.ProjectId)
+                .Index(t => new { t.HardwaresInApplicationId, t.ProjectId }, unique: true, name: "IX_Unique_HardwaresInApplicationId_ProjectId")
+                .Index(t => t.CreateByApplicationUserId);
+
+            CreateTable(
+                "dbo.Project",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Description = c.String(),
+                        ApplicationId = c.Guid(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                        CreateByApplicationUserId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Application", t => t.ApplicationId)
+                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
+                .Index(t => t.ApplicationId)
+                .Index(t => t.CreateByApplicationUserId);
+
+            CreateTable(
+                "dbo.SensorBase",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.HardwareBase", t => t.Id)
+                .Index(t => t.Id);
+
+            CreateTable(
+                "dbo.DSFamilyTempSensor",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        DeviceAddress = c.String(nullable: false, maxLength: 15),
+                        Family = c.String(nullable: false, maxLength: 10),
+                        HighAlarm = c.Decimal(nullable: false, precision: 6, scale: 3),
+                        LowAlarm = c.Decimal(nullable: false, precision: 6, scale: 3),
+                        TemperatureScaleId = c.Byte(nullable: false),
+                        DSFamilyTempSensorResolutionId = c.Byte(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.SensorBase", t => t.Id)
+                .ForeignKey("dbo.DSFamilyTempSensorResolution", t => t.DSFamilyTempSensorResolutionId)
+                .ForeignKey("dbo.TemperatureScale", t => t.TemperatureScaleId)
+                .Index(t => t.Id)
+                .Index(t => t.DeviceAddress, unique: true)
+                .Index(t => t.TemperatureScaleId)
+                .Index(t => t.DSFamilyTempSensorResolutionId);
+
+            CreateTable(
+                "dbo.DeviceBase",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.HardwareBase", t => t.Id)
+                .Index(t => t.Id);
+
+            CreateTable(
+                "dbo.ESPDeviceBase",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        MacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeviceBase", t => t.Id)
+                .Index(t => t.Id)
+                .Index(t => t.MacAddress, unique: true);
+
+            CreateTable(
+                "dbo.ThermometerDevice",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ESPDeviceBase", t => t.Id)
+                .Index(t => t.Id);
+
+            CreateTable(
+                "dbo.RaspberryDeviceBase",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        LanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                        WLanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeviceBase", t => t.Id)
+                .Index(t => t.Id)
+                .Index(t => t.LanMacAddress, unique: true)
+                .Index(t => t.WLanMacAddress, unique: true);
+        }
+
+        #endregion Methods
     }
 }

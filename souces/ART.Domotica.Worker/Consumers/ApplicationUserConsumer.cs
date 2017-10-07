@@ -1,10 +1,8 @@
 ﻿using ART.Domotica.Domain.Interfaces;
-using ART.Domotica.Repository.Entities;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
-using ART.Security.Common.Contracts;
-using ART.Security.Common.QueueNames;
-using AutoMapper;
+using ART.Security.Constant;
+using ART.Security.Contract;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;

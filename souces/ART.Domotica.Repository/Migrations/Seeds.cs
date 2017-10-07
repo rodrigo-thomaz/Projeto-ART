@@ -1,11 +1,11 @@
 ﻿namespace ART.Domotica.Repository.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Text;
 
     using ART.Domotica.Repository.Entities;
-    using System;
 
     public class Seeds
     {

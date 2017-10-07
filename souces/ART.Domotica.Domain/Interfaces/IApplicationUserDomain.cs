@@ -2,8 +2,7 @@
 {
     using System.Threading.Tasks;
 
-    using ART.Domotica.Repository.Entities;
-    using ART.Security.Common.Contracts;
+    using ART.Security.Contract;
 
     public interface IApplicationUserDomain
     {
