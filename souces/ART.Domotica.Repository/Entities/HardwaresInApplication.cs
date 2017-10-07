@@ -2,6 +2,7 @@
 {
     using ART.Infra.CrossCutting.Repository;
     using System;
+    using System.Collections.Generic;
 
     public class HardwaresInApplication : IEntity<Guid>
     {
@@ -28,6 +29,11 @@
         }
 
         public Guid HardwareBaseId
+        {
+            get; set;
+        }
+
+        public ICollection<HardwaresInProject> HardwaresInProject
         {
             get; set;
         }

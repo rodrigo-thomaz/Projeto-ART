@@ -50,6 +50,11 @@
             get; set;
         }
 
+        public DbSet<HardwaresInProject> HardwaresInProject
+        {
+            get; set;
+        }
+
         public DbSet<SensorsInDevice> SensorsInDevice
         {
             get; set;
@@ -91,6 +96,7 @@
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwaresInApplicationConfiguration());
+            modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());

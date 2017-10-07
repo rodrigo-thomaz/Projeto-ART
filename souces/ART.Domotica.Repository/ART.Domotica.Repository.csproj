@@ -56,6 +56,7 @@
     <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
     <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
+    <Compile Include="Configurations\HardwaresInProjectConfiguration.cs" />
     <Compile Include="Configurations\ProjectConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
     <Compile Include="Configurations\HardwaresInApplicationConfiguration.cs" />
@@ -128,6 +129,10 @@
     <Compile Include="Migrations\201710062309343_FieldApplicationIdInProject3.Designer.cs">
       <DependentUpon>201710062309343_FieldApplicationIdInProject3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710062337388_HardwaresInProjectTable.cs" />
+    <Compile Include="Migrations\201710062337388_HardwaresInProjectTable.Designer.cs">
+      <DependentUpon>201710062337388_HardwaresInProjectTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -179,6 +184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710062309343_FieldApplicationIdInProject3.resx">
       <DependentUpon>201710062309343_FieldApplicationIdInProject3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710062337388_HardwaresInProjectTable.resx">
+      <DependentUpon>201710062337388_HardwaresInProjectTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

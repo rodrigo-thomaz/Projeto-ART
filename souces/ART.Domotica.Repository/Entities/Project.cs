@@ -1,5 +1,6 @@
 ﻿using ART.Infra.CrossCutting.Repository;
 using System;
+using System.Collections.Generic;
 
 namespace ART.Domotica.Repository.Entities
 {
@@ -10,5 +11,9 @@ namespace ART.Domotica.Repository.Entities
         public string Description { get; set; }
         public Guid ApplicationId { get; set; }
         public Application Application { get; set; }
+        public ICollection<HardwaresInProject> HardwaresInProject
+        {
+            get; set;
+        }
     }
 }

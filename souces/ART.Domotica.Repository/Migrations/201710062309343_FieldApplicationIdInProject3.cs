@@ -1,8 +1,7 @@
 namespace ART.Domotica.Repository.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class FieldApplicationIdInProject3 : DbMigration
     {
         public override void Up()
