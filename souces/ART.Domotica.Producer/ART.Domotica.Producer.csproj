@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83ADED71-A463-4E44-9E4F-4E62606A769A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ART.Domotica.Producer</RootNamespace>
+    <AssemblyName>ART.Domotica.Producer</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
+    </Reference>
+    <Reference Include="RabbitMQ.Client, Version=5.0.0.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
+      <HintPath>..\packages\RabbitMQ.Client.5.0.1\lib\net451\RabbitMQ.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interfaces\IApplicationProducer.cs" />
+    <Compile Include="Interfaces\IApplicationUserProducer.cs" />
+    <Compile Include="Interfaces\IDashboardProducer.cs" />
+    <Compile Include="Interfaces\IDSFamilyTempSensorProducer.cs" />
+    <Compile Include="Interfaces\ITemperatureScaleProducer.cs" />
+    <Compile Include="Interfaces\IThermometerDeviceProducer.cs" />
+    <Compile Include="ProducerModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ApplicationProducer.cs" />
+    <Compile Include="Services\ApplicationUserProducer.cs" />
+    <Compile Include="Services\DashboardProducer.cs" />
+    <Compile Include="Services\DSFamilyTempSensorProducer.cs" />
+    <Compile Include="Services\TemperatureScaleProducer.cs" />
+    <Compile Include="Services\ThermometerDeviceProducer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Domotica.Constant\ART.Domotica.Constant.csproj">
+      <Project>{62947BFD-C7BA-4076-A6FF-2BEA7CFCAADB}</Project>
+      <Name>ART.Domotica.Constant</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.Contract\ART.Domotica.Contract.csproj">
+      <Project>{2F58031D-FF69-4BDA-9C4A-4811560918DD}</Project>
+      <Name>ART.Domotica.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.Contract\ART.Infra.CrossCutting.MQ.Contract.csproj">
+      <Project>{E9386369-36E5-4FA6-8D5B-05119CB95B23}</Project>
+      <Name>ART.Infra.CrossCutting.MQ.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.Producer\ART.Infra.CrossCutting.MQ.Producer.csproj">
+      <Project>{F21ECDF3-626E-4EBD-B665-D20D93AC333D}</Project>
+      <Name>ART.Infra.CrossCutting.MQ.Producer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

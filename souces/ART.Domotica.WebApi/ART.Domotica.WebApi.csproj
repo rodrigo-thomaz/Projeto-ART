@@ -131,24 +131,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\TemperatureScaleController.cs" />
-    <Compile Include="IProducers\IThermometerDeviceProducer.cs" />
-    <Compile Include="IProducers\IDashboardProducer.cs" />
-    <Compile Include="IProducers\IApplicationUserProducer.cs" />
-    <Compile Include="IProducers\IApplicationProducer.cs" />
-    <Compile Include="IProducers\ITemperatureScaleProducer.cs" />
     <Compile Include="Modules\ControllerModule.cs" />
-    <Compile Include="Modules\ProducerModule.cs" />
-    <Compile Include="Producers\ThermometerDeviceProducer.cs" />
-    <Compile Include="Producers\DashboardProducer.cs" />
-    <Compile Include="Producers\ApplicationUserProducer.cs" />
-    <Compile Include="Producers\ApplicationProducer.cs" />
-    <Compile Include="Producers\TemperatureScaleProducer.cs" />
-    <Compile Include="Producers\DSFamilyTempSensorProducer.cs" />
     <Compile Include="Controllers\DSFamilyTempSensorController.cs" />
     <Compile Include="Controllers\ThermometerDeviceController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ApplicationUserController.cs" />
-    <Compile Include="IProducers\IDSFamilyTempSensorProducer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -160,6 +147,10 @@
     <ProjectReference Include="..\ART.Domotica.Contract\ART.Domotica.Contract.csproj">
       <Project>{2F58031D-FF69-4BDA-9C4A-4811560918DD}</Project>
       <Name>ART.Domotica.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.Producer\ART.Domotica.Producer.csproj">
+      <Project>{83aded71-a463-4e44-9e4f-4e62606a769a}</Project>
+      <Name>ART.Domotica.Producer</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.Contract\ART.Infra.CrossCutting.MQ.Contract.csproj">
       <Project>{e9386369-36e5-4fa6-8d5b-05119cb95b23}</Project>
@@ -182,6 +173,7 @@
       <Name>ART.Infra.CrossCutting.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -7,10 +7,8 @@
     using ART.Security.Repository.Entities;
     using Microsoft.AspNet.Identity;
     using ART.Security.Repository.Interfaces;
-    using RabbitMQ.Client;
     using global::AutoMapper;
     using ART.Infra.CrossCutting.MQ.Contract;
-    using ART.Security.Constant;
     using ART.Security.Contract;
     using ART.Security.Domain.IProducers;
 

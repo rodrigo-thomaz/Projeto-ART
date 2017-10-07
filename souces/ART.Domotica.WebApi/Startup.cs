@@ -19,6 +19,7 @@ namespace ART.Domotica.WebApi
     using Owin;
 
     using RabbitMQ.Client;
+    using ART.Domotica.Producer;
 
     public class Startup
     {

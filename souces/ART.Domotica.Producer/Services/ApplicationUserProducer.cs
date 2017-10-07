@@ -1,15 +1,15 @@
-﻿namespace ART.Domotica.WebApi.Producers
+﻿namespace ART.Domotica.Producer.Services
 {
-    using ART.Domotica.WebApi.IProducers;
+    using ART.Domotica.Producer.Interfaces;
     using ART.Infra.CrossCutting.MQ.Producer;
 
     using RabbitMQ.Client;
 
-    public class DashboardProducer : ProducerBase, IDashboardProducer
+    public class ApplicationUserProducer : ProducerBase, IApplicationUserProducer
     {
         #region Constructors
 
-        public DashboardProducer(IConnection connection)
+        public ApplicationUserProducer(IConnection connection)
             : base(connection)
         {
             Initialize();

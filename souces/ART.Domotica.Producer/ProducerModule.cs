@@ -1,8 +1,7 @@
-﻿namespace ART.Domotica.WebApi.Modules
+﻿namespace ART.Domotica.Producer
 {
-    using ART.Domotica.WebApi.IProducers;
-    using ART.Domotica.WebApi.Producers;
-
+    using ART.Domotica.Producer.Interfaces;
+    using ART.Domotica.Producer.Services;
     using Autofac;
 
     public class ProducerModule : Module

@@ -1,8 +1,7 @@
-﻿namespace ART.Domotica.WebApi.IProducers
+﻿namespace ART.Domotica.Producer.Interfaces
 {
-    using System.Threading.Tasks;
-
     using ART.Infra.CrossCutting.MQ.Contract;
+    using System.Threading.Tasks;
 
     public interface IApplicationProducer
     {

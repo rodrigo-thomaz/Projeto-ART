@@ -1,11 +1,11 @@
-﻿using ART.Domotica.WebApi.IProducers;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using RabbitMQ.Client;
-using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
+using ART.Domotica.Producer.Interfaces;
+using ART.Domotica.Constant;
 
-namespace ART.Domotica.WebApi.Producers
+namespace ART.Domotica.Producer.Services
 {
     public class ApplicationProducer : ProducerBase, IApplicationProducer
     {

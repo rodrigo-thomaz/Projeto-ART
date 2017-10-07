@@ -1,8 +1,8 @@
 ﻿using System.Web.Http;
-using ART.Domotica.WebApi.IProducers;
 using System.Threading.Tasks;
 using ART.Domotica.Contract;
 using ART.Infra.CrossCutting.MQ.WebApi;
+using ART.Domotica.Producer.Interfaces;
 
 namespace ART.Domotica.WebApi.Controllers
 {

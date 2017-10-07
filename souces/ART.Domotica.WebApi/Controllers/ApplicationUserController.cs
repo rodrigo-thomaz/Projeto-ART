@@ -1,9 +1,8 @@
 ﻿namespace ART.Domotica.WebApi.Controllers
 {
     using System.Web.Http;
-
-    using ART.Domotica.WebApi.IProducers;
     using ART.Infra.CrossCutting.MQ.WebApi;
+    using ART.Domotica.Producer.Interfaces;
 
     [Authorize]
     [RoutePrefix("api/applicationUser")]

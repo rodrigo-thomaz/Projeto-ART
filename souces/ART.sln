@@ -62,6 +62,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Security.Contract", "AR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Infra.CrossCutting.MQ.Producer", "ART.Infra.CrossCutting.MQ.Producer\ART.Infra.CrossCutting.MQ.Producer.csproj", "{F21ECDF3-626E-4EBD-B665-D20D93AC333D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Domotica.Producer", "ART.Domotica.Producer\ART.Domotica.Producer.csproj", "{83ADED71-A463-4E44-9E4F-4E62606A769A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -254,6 +256,14 @@ Global
 		{F21ECDF3-626E-4EBD-B665-D20D93AC333D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F21ECDF3-626E-4EBD-B665-D20D93AC333D}.Release|x86.ActiveCfg = Release|Any CPU
 		{F21ECDF3-626E-4EBD-B665-D20D93AC333D}.Release|x86.Build.0 = Release|Any CPU
+		{83ADED71-A463-4E44-9E4F-4E62606A769A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83ADED71-A463-4E44-9E4F-4E62606A769A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83ADED71-A463-4E44-9E4F-4E62606A769A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{83ADED71-A463-4E44-9E4F-4E62606A769A}.Debug|x86.Build.0 = Debug|Any CPU
+		{83ADED71-A463-4E44-9E4F-4E62606A769A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83ADED71-A463-4E44-9E4F-4E62606A769A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83ADED71-A463-4E44-9E4F-4E62606A769A}.Release|x86.ActiveCfg = Release|Any CPU
+		{83ADED71-A463-4E44-9E4F-4E62606A769A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -282,6 +292,7 @@ Global
 		{9C881537-DFCB-4359-A2DC-3F15DE130886} = {8E88B799-436B-45D7-8FF6-BEAD7BDC1DF7}
 		{797D790B-26C7-4EF7-B38C-5F924168DB15} = {8E88B799-436B-45D7-8FF6-BEAD7BDC1DF7}
 		{F21ECDF3-626E-4EBD-B665-D20D93AC333D} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
+		{83ADED71-A463-4E44-9E4F-4E62606A769A} = {3B4488EC-9D6D-42CE-81E4-601B8CC29012}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7BF3A15-A6FC-4D4A-A446-4CF58FF70F7C}

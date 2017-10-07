@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.WebApi.IProducers
+﻿namespace ART.Domotica.Producer.Interfaces
 {
     public interface IThermometerDeviceProducer
     {
