@@ -40,6 +40,11 @@ namespace ART.Domotica.Repository.Configurations
             //ApplicationId
             Property(x => x.ApplicationId)
                 .HasColumnOrder(3);
+
+            //CreateDate
+            Property(x => x.CreateDate)
+                .HasColumnOrder(4)
+                .IsRequired();
         }
 
         #endregion Constructors

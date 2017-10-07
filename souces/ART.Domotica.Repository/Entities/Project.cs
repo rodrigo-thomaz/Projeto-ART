@@ -15,5 +15,7 @@ namespace ART.Domotica.Repository.Entities
         {
             get; set;
         }
+
+        public DateTime CreateDate { get; set; }
     }
 }

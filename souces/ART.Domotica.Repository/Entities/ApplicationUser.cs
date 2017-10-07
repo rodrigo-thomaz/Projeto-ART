@@ -1,7 +1,6 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
-    using System.Collections.Generic;
 
     using ART.Infra.CrossCutting.Repository;
 
@@ -14,10 +13,14 @@
             get; set;
         }
 
-        public ICollection<UsersInApplication> UsersInApplication
+        public Guid ApplicationId
         {
             get; set;
         }
+
+        public Application Application { get; set; }
+
+        public DateTime CreateDate { get; set; }
 
         #endregion Properties
     }

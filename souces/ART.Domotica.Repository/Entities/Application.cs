@@ -19,15 +19,17 @@
             get; set;
         }
 
-        public ICollection<UsersInApplication> UsersInApplication
-        {
-            get; set;
-        }
-
         public ICollection<Project> Projects
         {
             get; set;
         }
+
+        public ICollection<ApplicationUser> ApplicationUsers
+        {
+            get; set;
+        }
+
+        public DateTime CreateDate { get; set; }
 
         #endregion Properties
     }

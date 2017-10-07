@@ -7,8 +7,6 @@
     using ART.Infra.CrossCutting.Repository;
     using System.Threading.Tasks;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Data.Entity;
 
     public class ApplicationRepository : RepositoryBase<ARTDbContext, Application, Guid>, IApplicationRepository
     {
@@ -23,12 +21,14 @@
 
         public async Task<List<Application>> GetAll(Guid applicationUserId)
         {
-            IQueryable<Application> query = from app in _context.Application
-                                            join userapp in _context.UsersInApplication on app.Id equals userapp.ApplicationId
-                                            where userapp.UserId == applicationUserId
-                                            select app;
+            //IQueryable<Application> query = from app in _context.Application
+            //                                join userapp in _context.UsersInApplication on app.Id equals userapp.ApplicationId
+            //                                where userapp.UserId == applicationUserId
+            //                                select app;
 
-            return await query.ToListAsync();
+            //return await query.ToListAsync();
+
+            throw new NotImplementedException();
         }
     }
 }

@@ -19,6 +19,11 @@
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
+
+            //CreateDate
+            Property(x => x.CreateDate)
+                .HasColumnOrder(1)
+                .IsRequired();
         }
 
         #endregion Constructors

@@ -19,6 +19,8 @@
             get; set;
         }
 
+        public DateTime CreateDate { get; set; }
+
         #endregion Properties
     }
 }

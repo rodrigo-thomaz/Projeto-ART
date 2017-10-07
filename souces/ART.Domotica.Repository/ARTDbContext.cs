@@ -70,11 +70,6 @@
             get; set;
         }
 
-        public DbSet<UsersInApplication> UsersInApplication
-        {
-            get; set;
-        }
-
         #endregion Properties
 
         #region Methods
@@ -102,7 +97,6 @@
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
             modelBuilder.Configurations.Add(new ThermometerDeviceConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
-            modelBuilder.Configurations.Add(new UsersInApplicationConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
