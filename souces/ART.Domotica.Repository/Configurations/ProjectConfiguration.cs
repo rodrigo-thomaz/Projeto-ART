@@ -45,6 +45,16 @@ namespace ART.Domotica.Repository.Configurations
             Property(x => x.CreateDate)
                 .HasColumnOrder(4)
                 .IsRequired();
+
+            //CreateByApplicationUserId
+            Property(x => x.CreateByApplicationUserId)
+                .HasColumnOrder(5);
+
+            //CreateByApplicationUser
+            HasRequired(x => x.CreateByApplicationUser)
+                .WithMany()
+                .HasForeignKey(x => x.CreateByApplicationUserId)
+                .WillCascadeOnDelete(false);
         }
 
         #endregion Constructors

@@ -17,5 +17,9 @@ namespace ART.Domotica.Repository.Entities
         }
 
         public DateTime CreateDate { get; set; }
+
+        public Guid CreateByApplicationUserId { get; set; }
+
+        public ApplicationUser CreateByApplicationUser { get; set; }
     }
 }

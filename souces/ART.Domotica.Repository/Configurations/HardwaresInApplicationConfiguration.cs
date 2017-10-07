@@ -55,7 +55,22 @@
             HasRequired(x => x.HardwareBase)
                 .WithMany(x => x.HardwaresInApplication)
                 .HasForeignKey(x => x.HardwareBaseId)
-                .WillCascadeOnDelete(false);            
+                .WillCascadeOnDelete(false);
+
+            //CreateDate
+            Property(x => x.CreateDate)
+                .HasColumnOrder(3)
+                .IsRequired();
+
+            //CreateByApplicationUserId
+            Property(x => x.CreateByApplicationUserId)
+                .HasColumnOrder(4);
+
+            //CreateByApplicationUser
+            HasRequired(x => x.CreateByApplicationUser)
+                .WithMany()
+                .HasForeignKey(x => x.CreateByApplicationUserId)
+                .WillCascadeOnDelete(false);
         }
 
         #endregion Constructors

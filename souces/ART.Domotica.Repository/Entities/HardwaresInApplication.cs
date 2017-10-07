@@ -38,6 +38,12 @@
             get; set;
         }
 
+        public DateTime CreateDate { get; set; }
+
+        public Guid CreateByApplicationUserId { get; set; }
+
+        public ApplicationUser CreateByApplicationUser { get; set; }
+
         #endregion Properties
     }
 }
