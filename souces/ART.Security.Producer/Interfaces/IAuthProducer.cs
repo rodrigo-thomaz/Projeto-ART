@@ -1,4 +1,4 @@
-﻿namespace ART.Security.Domain.IProducers
+﻿namespace ART.Security.Producer.Interfaces
 {
     using System.Threading.Tasks;
 

@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Security.Repository.Entities;
 
     using Microsoft.AspNet.Identity;
-    using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IAuthDomain : IDisposable
     {

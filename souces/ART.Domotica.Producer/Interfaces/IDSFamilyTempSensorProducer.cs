@@ -1,8 +1,9 @@
 ﻿namespace ART.Domotica.Producer.Interfaces
 {
+    using System.Threading.Tasks;
+
     using ART.Domotica.Contract;
     using ART.Infra.CrossCutting.MQ.Contract;
-    using System.Threading.Tasks;
 
     public interface IDSFamilyTempSensorProducer
     {

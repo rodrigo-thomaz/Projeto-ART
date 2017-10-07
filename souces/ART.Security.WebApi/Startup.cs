@@ -8,6 +8,7 @@ namespace ART.Security.WebApi
 
     using ART.Infra.CrossCutting.MQ;
     using ART.Security.Domain;
+    using ART.Security.Producer;
     using ART.Security.Repository;
     using ART.Security.WebApi.Controllers;
     using ART.Security.WebApi.Providers;
@@ -66,6 +67,7 @@ namespace ART.Security.WebApi
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<MQModule>();
+            builder.RegisterModule<ProducerModule>();
 
             // Register Providers
             builder.RegisterType<FacebookAuthProvider>();

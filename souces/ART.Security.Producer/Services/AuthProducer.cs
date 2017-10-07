@@ -2,11 +2,11 @@
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Security.Constant;
 using ART.Security.Contract;
-using ART.Security.Domain.IProducers;
+using ART.Security.Producer.Interfaces;
 using RabbitMQ.Client;
 using System.Threading.Tasks;
 
-namespace ART.Security.Domain.Producers
+namespace ART.Security.Producer.Services
 {
     public class AuthProducer : ProducerBase, IAuthProducer
     {

@@ -192,6 +192,10 @@
       <Project>{1563f63a-c65e-44d0-8a7f-e4334603a174}</Project>
       <Name>ART.Security.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Security.Producer\ART.Security.Producer.csproj">
+      <Project>{69B5785A-4E83-4DC8-9D52-05981BE4E151}</Project>
+      <Name>ART.Security.Producer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Security.Repository\ART.Security.Repository.csproj">
       <Project>{8916A744-9781-4863-BBE0-026221D74B41}</Project>
       <Name>ART.Security.Repository</Name>

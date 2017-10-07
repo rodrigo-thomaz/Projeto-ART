@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // As informações gerais sobre um assembly são controladas por
 // conjunto de atributos. Altere estes valores de atributo para modificar as informações
 // associada a um assembly.
-[assembly: AssemblyTitle("ART.Domotica.Producer")]
+[assembly: AssemblyTitle("ART.Security.Producer")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ART.Domotica.Producer")]
+[assembly: AssemblyProduct("ART.Security.Producer")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // O GUID a seguir será destinado à ID de typelib se este projeto for exposto para COM
-[assembly: Guid("83aded71-a463-4e44-9e4f-4e62606a769a")]
+[assembly: Guid("69b5785a-4e83-4dc8-9d52-05981be4e151")]
 
 // As informações da versão de um assembly consistem nos quatro valores a seguir:
 //

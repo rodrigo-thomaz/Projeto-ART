@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Producer.Interfaces;
     using ART.Domotica.Producer.Services;
+
     using Autofac;
 
     public class ProducerModule : Module

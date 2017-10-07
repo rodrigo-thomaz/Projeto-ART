@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.Producer.Interfaces
 {
-    using ART.Infra.CrossCutting.MQ.Contract;
     using System.Threading.Tasks;
+
+    using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IApplicationProducer
     {

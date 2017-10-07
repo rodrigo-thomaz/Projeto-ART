@@ -10,7 +10,7 @@
     using global::AutoMapper;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Security.Contract;
-    using ART.Security.Domain.IProducers;
+    using ART.Security.Producer.Interfaces;
 
     public class AuthDomain : IAuthDomain
     {

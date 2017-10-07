@@ -5,6 +5,7 @@ namespace ART.Domotica.WebApi
     using System.Threading;
     using System.Web.Http;
 
+    using ART.Domotica.Producer;
     using ART.Domotica.WebApi.App_Start;
     using ART.Domotica.WebApi.Modules;
     using ART.Infra.CrossCutting.MQ;
@@ -19,7 +20,6 @@ namespace ART.Domotica.WebApi
     using Owin;
 
     using RabbitMQ.Client;
-    using ART.Domotica.Producer;
 
     public class Startup
     {
