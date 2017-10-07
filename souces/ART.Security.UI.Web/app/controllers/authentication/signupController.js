@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('signupController', ['$scope', '$location', '$timeout', 'authService', 'stompService', function ($scope, $location, $timeout, authService, stompService) {
+app.controller('signupController', ['$scope', '$location', '$timeout', 'authService', 'EventDispatcher', 'stompService', function ($scope, $location, $timeout, authService, EventDispatcher, stompService) {
 
     $scope.savedSuccessfully = false;
     $scope.message = "";
@@ -12,12 +12,9 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
 
     $scope.signUp = function () {
 
-        authService.saveRegistration($scope.registration).then(function (response) {
-
+        authService.saveRegistration($scope.registration).then(function (response) {                        
             $scope.savedSuccessfully = true;
-            $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
-            startTimer();
-
+            $scope.message = "Aguarde, solicitação enviada para o servidor...";
         },
          function (response) {
              var errors = [];
@@ -36,5 +33,24 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
             $location.path('/login');
         }, 2000);
     }
+
+    // stompService
+
+    var onConnected = function () {
+        stompService.client.subscribe('/topic/' + stompService.session + '-Security.RegisterUserCompleted', onRegisterUserCompleted);
+    }
+
+    var onRegisterUserCompleted = function (payload) {
+        $scope.savedSuccessfully = true;
+        $scope.message = "User has been registered successfully, you will be redicted to login page in 2 seconds.";
+        startTimer();
+    }
+
+    EventDispatcher.on('stompService_onConnected', onConnected);
+
+    if (stompService.client.connected)
+        onConnected();
+
+    // stompService
 
 }]);

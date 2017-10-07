@@ -2,7 +2,8 @@
 app.factory('authService', ['$http', '$q', '$localStorage', 'ngAuthSettings', function ($http, $q, $localStorage, ngAuthSettings) {
 
     var serviceBase = ngAuthSettings.segurancaDistributedServicesUri;
-    var authServiceFactory = {};
+
+    var authServiceFactory = {};    
 
     var _authentication = {
         isAuth: false,
