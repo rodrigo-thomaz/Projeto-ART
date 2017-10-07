@@ -1,12 +1,14 @@
 ﻿'use strict';
-app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localStorage', function ($q, $injector, $location, $localStorage) {
+app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localStorage', 'stompService', function ($q, $injector, $location, $localStorage, stompService) {
 
     var authInterceptorServiceFactory = {};
 
     var _request = function (config) {
 
         config.headers = config.headers || {};
-       
+
+        config.headers.souceMQSession = stompService.session;
+
         var authData = $localStorage.authorizationData;
         if (authData) {
             config.headers.Authorization = 'Bearer ' + authData.token;

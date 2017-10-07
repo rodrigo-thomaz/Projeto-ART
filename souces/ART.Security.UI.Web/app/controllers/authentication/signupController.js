@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('signupController', ['$scope', '$location', '$timeout', 'authService', function ($scope, $location, $timeout, authService) {
+app.controller('signupController', ['$scope', '$location', '$timeout', 'authService', 'stompService', function ($scope, $location, $timeout, authService, stompService) {
 
     $scope.savedSuccessfully = false;
     $scope.message = "";

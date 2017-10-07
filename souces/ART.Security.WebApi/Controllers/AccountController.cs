@@ -14,11 +14,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using ART.Infra.CrossCutting.MQ.WebApi;
 
 namespace ART.Security.WebApi.Controllers
 {
     [RoutePrefix("api/Account")]
-    public class AccountController : ApiController
+    public class AccountController : NoAuthenticatedMQApiControllerBase
     {
         private readonly IAuthDomain _authDomain;
 
@@ -42,7 +43,9 @@ namespace ART.Security.WebApi.Controllers
                 return BadRequest(ModelState);
             }
 
-             IdentityResult result = await _authDomain.RegisterUser(userModel.UserName, userModel.Password);
+            var message = CreateMessage();
+            
+             IdentityResult result = await _authDomain.RegisterUser(message, userModel.UserName, userModel.Password);
 
              IHttpActionResult errorResult = GetErrorResult(result);
 

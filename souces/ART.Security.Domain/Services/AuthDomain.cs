@@ -70,7 +70,7 @@
             return _authRepository.GetAllRefreshTokens();
         }
 
-        public async Task<IdentityResult> RegisterUser(string userName, string password)
+        public async Task<IdentityResult> RegisterUser(NoAuthenticatedMessageContract message, string userName, string password)
         {            
             ApplicationUser applicationUser = new ApplicationUser
             {
@@ -79,18 +79,18 @@
 
             var identityResult = await _authRepository.RegisterUser(applicationUser, password);
 
-            await SendRegisterUserToBroker(applicationUser);
+            await SendRegisterUserToBroker(message, applicationUser);
 
             return identityResult;
         }
 
-        private async Task SendRegisterUserToBroker(ApplicationUser applicationUser)
+        private async Task SendRegisterUserToBroker(NoAuthenticatedMessageContract message, ApplicationUser applicationUser)
         {
             var contract = Mapper.Map<ApplicationUser, RegisterUserContract>(applicationUser);
             await _authProducer.RegisterUser(new NoAuthenticatedMessageContract<RegisterUserContract>
             {
                 Contract = contract,
-                SouceMQSession = "",
+                SouceMQSession = message.SouceMQSession,
             });
         }
 

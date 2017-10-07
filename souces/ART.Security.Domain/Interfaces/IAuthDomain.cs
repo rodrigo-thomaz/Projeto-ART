@@ -7,6 +7,7 @@
     using ART.Security.Repository.Entities;
 
     using Microsoft.AspNet.Identity;
+    using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IAuthDomain : IDisposable
     {
@@ -28,7 +29,7 @@
 
         List<RefreshToken> GetAllRefreshTokens();
 
-        Task<IdentityResult> RegisterUser(string userName, string password);
+        Task<IdentityResult> RegisterUser(NoAuthenticatedMessageContract message, string userName, string password);
 
         Task<bool> RemoveRefreshToken(RefreshToken refreshToken);
 

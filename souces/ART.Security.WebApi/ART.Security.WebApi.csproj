@@ -172,9 +172,21 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.Contract\ART.Infra.CrossCutting.MQ.Contract.csproj">
+      <Project>{E9386369-36E5-4FA6-8D5B-05119CB95B23}</Project>
+      <Name>ART.Infra.CrossCutting.MQ.Contract</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.WebApi\ART.Infra.CrossCutting.MQ.WebApi.csproj">
+      <Project>{ADB99AEB-F606-417E-8380-81DE0AC6546C}</Project>
+      <Name>ART.Infra.CrossCutting.MQ.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
       <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
       <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.WebApi\ART.Infra.CrossCutting.WebApi.csproj">
+      <Project>{0DBC73AE-9F5C-4A58-BB8A-3864BF4A5832}</Project>
+      <Name>ART.Infra.CrossCutting.WebApi</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Security.Domain\ART.Security.Domain.csproj">
       <Project>{1563f63a-c65e-44d0-8a7f-e4334603a174}</Project>

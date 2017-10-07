@@ -1,5 +1,5 @@
 ﻿
-var app = angular.module('AngularAuthApp', ['ngRoute', 'ngStorage', 'angular-loading-bar']);
+var app = angular.module('AngularAuthApp', ['ngRoute', 'ngStorage', 'angular-loading-bar', 'angular-event-dispatcher']);
 
 app.config(function ($routeProvider) {
 
@@ -27,11 +27,16 @@ var segurancaDistributedServicesUri = 'http://localhost/ART.Security.WebApi/';
 var distributedServicesUri = 'http://localhost/ART.DistributedServices/';
 var defaultRedirectUri = 'http://localhost/ART.Corporativo.UI.Web/';
 
+var wsBrokerHostName = 'file-server';
+var wsBrokerPort = 15674;
+
 app.constant('ngAuthSettings', {
     segurancaDistributedServicesUri: segurancaDistributedServicesUri,
     distributedServicesUri: distributedServicesUri,
+    wsBrokerHostName: wsBrokerHostName,
+    wsBrokerPort: wsBrokerPort,
     defaultRedirectUri: defaultRedirectUri,
-    clientId: 'ngAuthApp'
+    clientId: 'ngAuthApp',
 });
 
 app.config(function ($httpProvider) {
