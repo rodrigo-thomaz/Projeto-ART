@@ -20,12 +20,12 @@ namespace ART.Domotica.WebApi.Producers
 
         #region public voids
 
-        public async Task GetScales(AuthenticatedMessageContract message)
+        public async Task GetAll(AuthenticatedMessageContract message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", TemperatureScaleConstants.GetScalesQueueName, null, payload);
+                _model.BasicPublish("", TemperatureScaleConstants.GetAllQueueName, null, payload);
             });            
         }
 
@@ -36,7 +36,7 @@ namespace ART.Domotica.WebApi.Producers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: TemperatureScaleConstants.GetScalesQueueName
+                  queue: TemperatureScaleConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

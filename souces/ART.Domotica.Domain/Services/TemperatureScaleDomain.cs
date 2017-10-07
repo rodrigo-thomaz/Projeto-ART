@@ -3,6 +3,8 @@ using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Interfaces;
 using ART.Domotica.Repository.Entities;
 using System.Collections.Generic;
+using ART.Domotica.Model;
+using AutoMapper;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -25,9 +27,11 @@ namespace ART.Domotica.Domain.Services
 
         #region public voids
 
-        public async Task<List<TemperatureScale>> GetScales()
+        public async Task<List<TemperatureScaleGetAllModel>> GetAll()
         {
-            return await _temperatureScaleRepository.GetAll();
+            var entities = await _temperatureScaleRepository.GetAll();
+            var models = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllModel>>(entities);
+            return models;
         }
 
         #endregion

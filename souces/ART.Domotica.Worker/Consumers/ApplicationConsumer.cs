@@ -64,8 +64,8 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var models = await _applicationDomain.Get(message);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(models);
+            var data = await _applicationDomain.Get(message);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, "GetCompleted");
 

@@ -36,11 +36,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("getScales/{session}")]
-        [HttpGet]
-        public async Task<IHttpActionResult> GetScales()
+        [Route("getAll")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetAll()
         {           
-            await _temperatureScaleProducer.GetScales(CreateMessage());
+            await _temperatureScaleProducer.GetAll(CreateMessage());
             return Ok();
         }
 

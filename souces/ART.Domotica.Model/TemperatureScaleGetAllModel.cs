@@ -1,6 +1,8 @@
-﻿namespace ART.Domotica.Worker.Models
+﻿namespace ART.Domotica.Model
 {
-    public class TemperatureScaleModel
+    using System;
+
+    public class TemperatureScaleGetAllModel
     {
         #region Properties
 

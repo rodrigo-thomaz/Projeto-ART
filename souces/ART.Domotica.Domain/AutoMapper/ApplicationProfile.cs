@@ -11,7 +11,7 @@
 
         public ApplicationProfile()
         {
-            CreateMap<Application, ApplicationGetAllModel>();
+            CreateMap<Application, ApplicationGetModel>();
         }
 
         #endregion Constructors

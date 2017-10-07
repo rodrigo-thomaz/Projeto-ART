@@ -20,7 +20,7 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _getScalesConsumer;
+        private readonly EventingBasicConsumer _getAllConsumer;
 
         private readonly ITemperatureScaleDomain _temperatureScaleDomain;
 
@@ -30,7 +30,7 @@ namespace ART.Domotica.Worker.Consumers
 
         public TemperatureScaleConsumer(IConnection connection, ITemperatureScaleDomain temperatureScaleDomain) : base(connection)
         {
-            _getScalesConsumer = new EventingBasicConsumer(_model);
+            _getAllConsumer = new EventingBasicConsumer(_model);
 
             _temperatureScaleDomain = temperatureScaleDomain;
 
@@ -44,38 +44,38 @@ namespace ART.Domotica.Worker.Consumers
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: TemperatureScaleConstants.GetScalesQueueName
+                  queue: TemperatureScaleConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
 
-            _getScalesConsumer.Received += GetScalesReceived;
+            _getAllConsumer.Received += GetAllReceived;
 
-            _model.BasicConsume(TemperatureScaleConstants.GetScalesQueueName, false, _getScalesConsumer);
+            _model.BasicConsume(TemperatureScaleConstants.GetAllQueueName, false, _getAllConsumer);
         }
 
-        private void GetScalesReceived(object sender, BasicDeliverEventArgs e)
+        private void GetAllReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetScalesReceivedAsync(sender, e));
+            Task.WaitAll(GetAllReceivedAsync(sender, e));
         }
 
-        private async Task GetScalesReceivedAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[TemperatureScaleConsumer.GetScalesReceivedAsync] ");
+            Console.WriteLine("[TemperatureScaleConsumer.GetAllReceived] {0}", Encoding.UTF8.GetString(e.Body));
+
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var exchange = string.Format("{0}-{1}", contract.SouceMQSession, "GetScalesCompleted");
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
+            var data = await _temperatureScaleDomain.GetAll();
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, "GetAllCompleted");
+                        
+            Console.WriteLine("[TemperatureScaleDomain.GetAllCompleted] {0}", Encoding.UTF8.GetString(buffer));
 
-            var entities = await _temperatureScaleDomain.GetScales();
-            Console.WriteLine("[TemperatureScaleDomain.GetScales] Ok");
-
-            var models = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleModel>>(entities);
-            var json = JsonConvert.SerializeObject(models, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
-            var buffer = Encoding.UTF8.GetBytes(json);
-            _model.BasicPublish("amq.topic", exchange, null, buffer);
+            _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
         #endregion

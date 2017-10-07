@@ -1,7 +1,7 @@
-﻿namespace ART.Domotica.Worker.AutoMapper
+﻿namespace ART.Domotica.Domain.AutoMapper
 {
+    using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
-    using ART.Domotica.Worker.Models;
 
     using global::AutoMapper;
 
@@ -11,7 +11,7 @@
 
         public TemperatureScaleProfile()
         {
-            CreateMap<TemperatureScale, TemperatureScaleModel>();
+            CreateMap<TemperatureScale, TemperatureScaleGetAllModel>();
         }
 
         #endregion Constructors

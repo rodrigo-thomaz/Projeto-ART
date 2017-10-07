@@ -8,21 +8,22 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'EventDispatc
     var serviceFactory = {};    
 
     var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-GetScalesCompleted', onGetScalesCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-GetAllCompleted', onGetAllCompleted);
         if (!initialized) {
             initialized = true;
-            getScales();
+            getAll();
         }
     }   
 
-    var getScales = function () {
-        return $http.get(serviceBase + 'api/temperatureScale/getScales/' + stompService.session).then(function (results) {
+    var getAll = function () {
+        return $http.post(serviceBase + 'api/temperatureScale/getAll').then(function (results) {
             //alert('envio bem sucedido');
         });
     };     
 
-    var onGetScalesCompleted = function (payload) {
-        var data = JSON.parse(payload.body);
+    var onGetAllCompleted = function (payload) {
+        var dataUTF8 = decodeURIComponent(escape(payload.body));
+        var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
             serviceFactory.scales.push(data[i]);
         }

@@ -71,7 +71,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="Consumers\ApplicationConsumer.cs" />
     <Compile Include="Consumers\ApplicationUserConsumer.cs" />
@@ -79,7 +78,6 @@
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
     <Compile Include="Contracts\DeviceMessageContract.cs" />
     <Compile Include="Models\DSFamilyTempSensorModel.cs" />
-    <Compile Include="Models\TemperatureScaleModel.cs" />
     <Compile Include="Models\DSFamilyTempSensorResolutionModel.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />
     <Compile Include="WorkerService.cs" />

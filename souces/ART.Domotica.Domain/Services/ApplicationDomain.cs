@@ -31,12 +31,12 @@
 
         #region Methods
 
-        public async Task<ApplicationGetAllModel> Get(AuthenticatedMessageContract message)
+        public async Task<ApplicationGetModel> Get(AuthenticatedMessageContract message)
         {
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
             var applicationEntity = await _applicationRepository.GetById(applicationUserEntity.ApplicationId);            
-            var models = Mapper.Map<Application, ApplicationGetAllModel>(applicationEntity);
-            return models;
+            var model = Mapper.Map<Application, ApplicationGetModel>(applicationEntity);
+            return model;
         }
 
         #endregion Methods
