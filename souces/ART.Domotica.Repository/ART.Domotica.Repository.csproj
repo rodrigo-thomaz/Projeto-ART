@@ -87,9 +87,9 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
     <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
     <Compile Include="Interfaces\IThermometerDeviceRepository.cs" />
-    <Compile Include="Migrations\201710070141585_InitialCreate.cs" />
-    <Compile Include="Migrations\201710070141585_InitialCreate.Designer.cs">
-      <DependentUpon>201710070141585_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201710071236123_InitialCreate.cs" />
+    <Compile Include="Migrations\201710071236123_InitialCreate.Designer.cs">
+      <DependentUpon>201710071236123_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -113,8 +113,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710070141585_InitialCreate.resx">
-      <DependentUpon>201710070141585_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201710071236123_InitialCreate.resx">
+      <DependentUpon>201710071236123_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\ApplicationProfile.cs" />
     <Compile Include="DomainModule.cs" />
     <Compile Include="Interfaces\IApplicationUserDomain.cs" />
@@ -87,6 +88,10 @@
     <ProjectReference Include="..\ART.Infra.CrossCutting.Repository\ART.Infra.CrossCutting.Repository.csproj">
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Security.Common\ART.Security.Common.csproj">
+      <Project>{9ECB14DD-14DE-4381-A592-AA812C81ED2D}</Project>
+      <Name>ART.Security.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

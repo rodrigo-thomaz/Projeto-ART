@@ -99,7 +99,7 @@
 
             basicProperties.Persistent = true;
 
-            var contract = Mapper.Map<ApplicationUser, ApplicationUserContract>(applicationUser);
+            var contract = Mapper.Map<ApplicationUser, RegisterUserContract>(applicationUser);
 
             var payload = SerializationHelpers.SerializeToJsonBufferAsync(contract);
 

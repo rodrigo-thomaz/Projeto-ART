@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Contracts\ApplicationUserContract.cs" />
+    <Compile Include="Contracts\RegisterUserContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueNames\ApplicationUserQueueName.cs" />
   </ItemGroup>

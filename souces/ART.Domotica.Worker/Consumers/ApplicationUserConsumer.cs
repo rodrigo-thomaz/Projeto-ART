@@ -65,9 +65,8 @@ namespace ART.Domotica.Worker.Consumers
             Console.WriteLine("[ApplicationUserConsumer.RegisterUserAsync] {0}", Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<ApplicationUserContract>(e.Body);
-            var entity = Mapper.Map<ApplicationUserContract, ApplicationUser>(contract);
-            await _applicationUserDomain.RegisterUser(entity);
+            var contract = SerializationHelpers.DeserializeJsonBufferToType<RegisterUserContract>(e.Body);
+            await _applicationUserDomain.RegisterUser(contract);
             Console.WriteLine("[ApplicationUserDomain.RegisterUser] Ok");
         }
 

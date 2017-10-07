@@ -23,6 +23,7 @@
             //CreateDate
             Property(x => x.CreateDate)
                 .HasColumnOrder(1)
+                //.HasColumnType("datetime2")
                 .IsRequired();
         }
 

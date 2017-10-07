@@ -71,7 +71,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="Consumers\ApplicationConsumer.cs" />

@@ -5,6 +5,7 @@
     using System.Text;
 
     using ART.Domotica.Repository.Entities;
+    using System;
 
     public class Seeds
     {
@@ -134,6 +135,7 @@
                     TemperatureScale = celsiusTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
+                    CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor1);
             }
@@ -152,6 +154,7 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor2);
             }
@@ -174,7 +177,8 @@
             {
                 thermometerDevice1 = new ThermometerDevice
                 {
-                    MacAddress = thermometerDevice1MacAddress
+                    MacAddress = thermometerDevice1MacAddress,
+                    CreateDate = DateTime.Now,
                 };
                 context.ThermometerDevice.Add(thermometerDevice1);
             }

@@ -11,7 +11,7 @@
 
         public ApplicationUserProfile()
         {
-            CreateMap<ApplicationUser, ApplicationUserContract>()
+            CreateMap<ApplicationUser, RegisterUserContract>()
                 .ForMember(dest => dest.ApplicationUserId, opt => opt.MapFrom(src => src.Id));
         }
 

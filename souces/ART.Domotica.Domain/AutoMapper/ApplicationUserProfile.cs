@@ -1,8 +1,7 @@
-﻿namespace ART.Domotica.Worker.AutoMapper
+﻿namespace ART.Domotica.Domain.AutoMapper
 {
     using ART.Domotica.Repository.Entities;
     using ART.Security.Common.Contracts;
-
     using global::AutoMapper;
 
     public class ApplicationUserProfile : Profile
@@ -11,7 +10,7 @@
 
         public ApplicationUserProfile()
         {
-            CreateMap<ApplicationUserContract, ApplicationUser>()
+            CreateMap<RegisterUserContract, ApplicationUser>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ApplicationUserId));
         }
 
