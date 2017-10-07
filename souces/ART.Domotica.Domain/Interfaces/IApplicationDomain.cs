@@ -10,7 +10,7 @@
     {
         #region Methods
 
-        Task<List<ApplicationGetAllModel>> GetAll(AuthenticatedMessageContract message);
+        Task<ApplicationGetAllModel> Get(AuthenticatedMessageContract message);
 
         #endregion Methods
     }

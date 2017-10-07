@@ -8,25 +8,22 @@ app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', 'EventDisp
     var initialized = false;
 
     var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-GetAllCompleted', onGetAllCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-GetCompleted', onGetCompleted);
         if (!initialized) {
             initialized = true;
-            getAll();
+            get();
         }
     }   
 
-    var getAll = function () {
-        return $http.post(serviceBase + 'api/application/getAll').then(function (results) {
+    var get = function () {
+        return $http.post(serviceBase + 'api/application/get').then(function (results) {
             //alert('envio bem sucedido');
         });
     };
 
-    var onGetAllCompleted = function (payload) {        
+    var onGetCompleted = function (payload) {        
         var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
-        for (var i = 0; i < data.length; i++) {
-            serviceFactory.applications.push(data[i]);
-        }
+        serviceFactory.application = JSON.parse(dataUTF8);
     }
 
     EventDispatcher.on('stompService_onConnected', onConnected);               
@@ -37,7 +34,7 @@ app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', 'EventDisp
 
     // serviceFactory
 
-    serviceFactory.applications = [];  
+    serviceFactory.application = {};  
 
     return serviceFactory;   
 

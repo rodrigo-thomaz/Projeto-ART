@@ -15,24 +15,27 @@
         #region Fields
 
         private readonly IApplicationRepository _applicationRepository;
+        private readonly IApplicationUserRepository _applicationUserRepository;
 
         #endregion Fields
 
         #region Constructors
 
-        public ApplicationDomain(IApplicationRepository applicationRepository)
+        public ApplicationDomain(IApplicationRepository applicationRepository, IApplicationUserRepository applicationUserRepository)
         {
             _applicationRepository = applicationRepository;
+            _applicationUserRepository = applicationUserRepository;
         }
 
         #endregion Constructors
 
         #region Methods
 
-        public async Task<List<ApplicationGetAllModel>> GetAll(AuthenticatedMessageContract message)
+        public async Task<ApplicationGetAllModel> Get(AuthenticatedMessageContract message)
         {
-            var entities = await _applicationRepository.GetAll(message.ApplicationUserId);
-            var models = Mapper.Map<List<Application>, List<ApplicationGetAllModel>>(entities);
+            var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
+            var applicationEntity = await _applicationRepository.GetById(applicationUserEntity.ApplicationId);            
+            var models = Mapper.Map<Application, ApplicationGetAllModel>(applicationEntity);
             return models;
         }
 

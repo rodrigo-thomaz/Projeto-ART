@@ -8,7 +8,7 @@
     {
         #region Methods
 
-        Task GetAll(AuthenticatedMessageContract message);
+        Task Get(AuthenticatedMessageContract message);
 
         #endregion Methods
     }

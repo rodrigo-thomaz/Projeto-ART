@@ -2,7 +2,7 @@
 app.controller('applicationController', ['$scope', '$translate', '$localStorage', '$window', '$location', 'authService', '$timeout', '$log', 'applicationService',
     function ($scope, $translate, $localStorage, $window, $location, authService, $timeout, $log, applicationService) {    
         
-        $scope.applications = applicationService.applications;
+        $scope.application = applicationService.application;
 
         // add 'ie' classes to html
         var isIE = !!navigator.userAgent.match(/MSIE/i);

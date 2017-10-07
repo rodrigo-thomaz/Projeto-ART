@@ -14,7 +14,7 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _getAllConsumer;
+        private readonly EventingBasicConsumer _getConsumer;
 
         private readonly IApplicationDomain _applicationDomain;
 
@@ -24,7 +24,7 @@ namespace ART.Domotica.Worker.Consumers
 
         public ApplicationConsumer(IConnection connection, IApplicationDomain applicationDomain) : base(connection)
         {
-            _getAllConsumer = new EventingBasicConsumer(_model);
+            _getConsumer = new EventingBasicConsumer(_model);
 
             _applicationDomain = applicationDomain;
 
@@ -37,7 +37,7 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            var queueName = ApplicationConstants.GetAllQueueName;
+            var queueName = ApplicationConstants.GetQueueName;
 
             _model.QueueDeclare(
                  queue: queueName
@@ -46,30 +46,30 @@ namespace ART.Domotica.Worker.Consumers
                , autoDelete: true
                , arguments: null);
 
-            _getAllConsumer.Received += GetAllReceived;
+            _getConsumer.Received += GetReceived;
 
-            _model.BasicConsume(queueName, false, _getAllConsumer);
+            _model.BasicConsume(queueName, false, _getConsumer);
         }
 
-        private void GetAllReceived(object sender, BasicDeliverEventArgs e)
+        private void GetReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetAllReceivedAsync(sender, e));
+            Task.WaitAll(GetReceivedAsync(sender, e));
         }
 
-        private async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[ApplicationConsumer.GetAllReceived] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[ApplicationConsumer.GetReceived] {0}", Encoding.UTF8.GetString(e.Body));
 
             _model.BasicAck(e.DeliveryTag, false);
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var models = await _applicationDomain.GetAll(message);
+            var models = await _applicationDomain.Get(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(models);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, "GetAllCompleted");
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, "GetCompleted");
 
-            Console.WriteLine("[ApplicationConsumer.GetAllCompleted] {0}", Encoding.UTF8.GetString(buffer));
+            Console.WriteLine("[ApplicationConsumer.GetCompleted] {0}", Encoding.UTF8.GetString(buffer));
             
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }

@@ -4,7 +4,7 @@
     {
         #region Fields
 
-        public static readonly string GetAllQueueName = "Application.GetAll";
+        public static readonly string GetQueueName = "Application.Get";
 
         #endregion Fields
     }

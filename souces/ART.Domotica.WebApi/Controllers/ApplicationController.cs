@@ -29,20 +29,20 @@
         #region public voids
 
         /// <summary>
-        /// Retornar uma lista de aplicações do usuário
+        /// Retornar a aplicação do usuário
         /// </summary>        
         /// <remarks>
-        /// Retornar uma lista de aplicações do usuário
+        /// Retornar a aplicação do usuário
         /// </remarks>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("getAll")]
+        [Route("get")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetAll()
+        public async Task<IHttpActionResult> Get()
         {
-            await _applicationProducer.GetAll(CreateMessage());
+            await _applicationProducer.Get(CreateMessage());
             return Ok();
         }
 

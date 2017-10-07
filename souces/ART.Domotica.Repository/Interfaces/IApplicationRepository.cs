@@ -11,7 +11,6 @@
     {
         #region Methods
 
-        Task<List<Application>> GetAll(Guid applicationUserId);
 
         #endregion Methods
     }
