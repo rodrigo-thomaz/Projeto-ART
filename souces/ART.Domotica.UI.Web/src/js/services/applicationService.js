@@ -8,7 +8,7 @@ app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', 'EventDisp
     var initialized = false;
 
     var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-GetCompleted', onGetCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-Application.GetCompleted', onGetCompleted);
         if (!initialized) {
             initialized = true;
             get();

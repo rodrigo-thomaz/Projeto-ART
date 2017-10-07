@@ -59,7 +59,7 @@ namespace ART.Domotica.Worker.Consumers
         private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[ApplicationConsumer.GetReceived] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[{0}] {1}", ApplicationConstants.GetQueueName, Encoding.UTF8.GetString(e.Body));
 
             _model.BasicAck(e.DeliveryTag, false);
 
@@ -67,9 +67,9 @@ namespace ART.Domotica.Worker.Consumers
             var data = await _applicationDomain.Get(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, "GetCompleted");
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetCompletedQueueName);
 
-            Console.WriteLine("[ApplicationConsumer.GetCompleted] {0}", Encoding.UTF8.GetString(buffer));
+            Console.WriteLine("[{0}] {1}", ApplicationConstants.GetCompletedQueueName, Encoding.UTF8.GetString(buffer));
             
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }

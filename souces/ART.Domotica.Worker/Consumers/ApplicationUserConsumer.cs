@@ -62,12 +62,14 @@ namespace ART.Domotica.Worker.Consumers
         private async Task RegisterUserAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[ApplicationUserConsumer.RegisterUserAsync] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[{0}] {1}", ApplicationUserQueueName.RegisterUserQueueName, Encoding.UTF8.GetString(e.Body));
+
             _model.BasicAck(e.DeliveryTag, false);
 
             var contract = SerializationHelpers.DeserializeJsonBufferToType<RegisterUserContract>(e.Body);
             await _applicationUserDomain.RegisterUser(contract);
-            Console.WriteLine("[ApplicationUserDomain.RegisterUser] Ok");
+
+            Console.WriteLine("[{0}] Ok", ApplicationUserQueueName.RegisterUserCompletedQueueName);
         }
 
         #endregion
