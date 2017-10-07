@@ -1,6 +1,6 @@
-﻿namespace ART.Domotica.Worker.Models
+﻿namespace ART.Domotica.Model
 {
-    public class DSFamilyTempSensorResolutionModel
+    public class DSFamilyTempSensorResolutionGetAllModel
     {
         #region Properties
 

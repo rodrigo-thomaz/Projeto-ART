@@ -3,7 +3,6 @@
     using ART.Domotica.Domain;
     using ART.Domotica.Domain.AutoMapper;
     using ART.Domotica.Repository;
-    using ART.Domotica.Worker.AutoMapper;
     using ART.Domotica.Worker.Modules;
     using ART.Infra.CrossCutting.MQ;
 
@@ -35,7 +34,8 @@
             {
                 x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationUserProfile());
-                x.AddProfile(new DSFamilyTempSensorProfile());
+                x.AddProfile(new AutoMapper.DSFamilyTempSensorProfile());
+                x.AddProfile(new Domain.AutoMapper.DSFamilyTempSensorProfile());
                 x.AddProfile(new TemperatureScaleProfile());
             });
 

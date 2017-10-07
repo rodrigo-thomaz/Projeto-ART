@@ -30,12 +30,12 @@ namespace ART.Domotica.Producer.Services
             });            
         }
 
-        public async Task GetResolutions(AuthenticatedMessageContract message)
+        public async Task GetAllResolutions(AuthenticatedMessageContract message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.GetResolutionsQueueName, null, payload);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllResolutionsQueueName, null, payload);
             });            
         }
 
@@ -80,7 +80,7 @@ namespace ART.Domotica.Producer.Services
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.GetResolutionsQueueName
+                  queue: DSFamilyTempSensorConstants.GetAllResolutionsQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

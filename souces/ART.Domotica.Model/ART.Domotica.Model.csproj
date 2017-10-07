@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSFamilyTempSensorResolutionGetAllModel.cs" />
     <Compile Include="TemperatureScaleGetAllModel.cs" />
     <Compile Include="ApplicationGetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

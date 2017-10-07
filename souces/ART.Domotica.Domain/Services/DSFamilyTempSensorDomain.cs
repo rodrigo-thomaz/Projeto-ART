@@ -4,6 +4,8 @@ using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Interfaces;
 using ART.Domotica.Repository.Entities;
 using System.Collections.Generic;
+using ART.Domotica.Model;
+using AutoMapper;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -33,9 +35,11 @@ namespace ART.Domotica.Domain.Services
             return await _dsFamilyTempSensorRepository.GetAll(applicationUserId);
         }
 
-        public async Task<List<DSFamilyTempSensorResolution>> GetResolutions()
+        public async Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions()
         {
-            return await _dsFamilyTempSensorResolutionRepository.GetAll();
+            var entities = await _dsFamilyTempSensorResolutionRepository.GetAll();
+            var models = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionGetAllModel>>(entities);
+            return models;
         }
 
         public async Task SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId)

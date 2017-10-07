@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Model;
 
     public interface IDSFamilyTempSensorDomain
     {
@@ -14,7 +15,7 @@
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 
-        Task<List<DSFamilyTempSensorResolution>> GetResolutions();
+        Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions();
 
         Task SetHighAlarm(Guid dsFamilyTempSensorId, decimal highAlarm);
 
