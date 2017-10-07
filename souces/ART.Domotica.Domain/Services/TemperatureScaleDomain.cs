@@ -29,9 +29,9 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<TemperatureScaleGetAllModel>> GetAll()
         {
-            var entities = await _temperatureScaleRepository.GetAll();
-            var models = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllModel>>(entities);
-            return models;
+            var data = await _temperatureScaleRepository.GetAll();
+            var result = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllModel>>(data);
+            return result;
         }
 
         #endregion

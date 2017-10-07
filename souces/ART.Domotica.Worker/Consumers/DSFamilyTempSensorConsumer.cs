@@ -1,15 +1,11 @@
 ﻿using ART.Domotica.Domain.Interfaces;
-using ART.Domotica.Repository.Entities;
 using ART.Domotica.Contract;
 using ART.Domotica.Worker.Contracts;
-using ART.Domotica.Worker.Models;
-using AutoMapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;
@@ -109,21 +105,19 @@ namespace ART.Domotica.Worker.Consumers
         private async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[DSFamilyTempSensorConsumer.GetAllReceivedAsync] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.GetAllQueueName, Encoding.UTF8.GetString(e.Body));
 
             _model.BasicAck(e.DeliveryTag, false);
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
+            var data = await _dsFamilyTempSensorDomain.GetAll(message.ApplicationUserId);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.GetAllCompletedQueueName);
 
-            var exchange = string.Format("{0}-{1}", message.SouceMQSession, "GetAllCompleted");
+            Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.GetAllCompletedQueueName, Encoding.UTF8.GetString(buffer));
 
-            var entities = await _dsFamilyTempSensorDomain.GetAll(message.ApplicationUserId);
-            Console.WriteLine("[DSFamilyTempSensorDomain.GetAll] Ok");
-
-            var models = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorModel>>(entities);
-            var json = JsonConvert.SerializeObject(models, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
-            var buffer = Encoding.UTF8.GetBytes(json);
-            _model.BasicPublish("amq.topic", exchange, null, buffer);
+            _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
         private void GetAllResolutionsReceived(object sender, BasicDeliverEventArgs e)

@@ -11,11 +11,11 @@
     {
         #region Methods
 
-        Task<List<DSFamilyTempSensor>> GetAll(Guid applicationUserId);
-
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
+        Task<List<DSFamilyTempSensorGetAllModel>> GetAll(Guid applicationUserId);
 
         Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions();
+
+        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);        
 
         Task SetHighAlarm(Guid dsFamilyTempSensorId, decimal highAlarm);
 

@@ -5,6 +5,7 @@
         #region Fields
 
         public static readonly string GetAllQueueName = "DSFamilyTempSensor.GetAll";
+        public static readonly string GetAllCompletedQueueName = "DSFamilyTempSensor.GetAllCompleted";
         public static readonly string GetAllResolutionsQueueName = "DSFamilyTempSensor.GetAllResolutions";
         public static readonly object GetAllResolutionsCompletedQueueName = "DSFamilyTempSensor.GetAllResolutionsCompleted";
         public static readonly string SetHighAlarmQueueName = "DSFamilyTempSensor.SetHighAlarm";

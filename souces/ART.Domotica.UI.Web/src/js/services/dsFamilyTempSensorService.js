@@ -7,12 +7,8 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
 
     var serviceFactory = {};    
 
-    var getAll = function (applicationId) {
-        var data = {
-            applicationId: applicationId,
-            session: stompService.session,
-        }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/getAll', data).then(function (results) {
+    var getAll = function () {
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/getAll').then(function (results) {
             //alert('envio bem sucedido');
         });
     };
@@ -57,15 +53,13 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsCompleted', onGetAllResolutionsCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-GetAllCompleted', onGetAllCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllCompleted', onGetAllCompleted);
 
         if (!initialized) {
             initialized = true;
             getAllResolutions();
+            getAll();
         }
-
-        /////////////////////////////////////////////
-        getAll('4ee0c742-b8a4-e711-9bee-707781d470bc');
     }  
 
     var onReadReceived = function (payload) {
@@ -73,7 +67,11 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
     }
 
     var onGetAllCompleted = function (payload) {
-        var data = JSON.parse(payload.body);        
+        var dataUTF8 = decodeURIComponent(escape(payload.body));
+        var data = JSON.parse(dataUTF8);
+        for (var i = 0; i < data.length; i++) {
+            serviceFactory.sensors.push(data[i]);
+        }
     }
 
     var onGetAllResolutionsCompleted = function (payload) {
@@ -93,7 +91,8 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
     // serviceFactory
 
     serviceFactory.resolutions = [];
-    serviceFactory.getAll = getAll;
+    serviceFactory.sensors = [];
+
     serviceFactory.setResolution = setResolution;
     serviceFactory.setHighAlarm = setHighAlarm;
     serviceFactory.setLowAlarm = setLowAlarm;    

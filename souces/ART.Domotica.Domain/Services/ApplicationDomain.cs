@@ -34,8 +34,8 @@
         {
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
             var applicationEntity = await _applicationRepository.GetById(applicationUserEntity.ApplicationId);            
-            var model = Mapper.Map<Application, ApplicationGetModel>(applicationEntity);
-            return model;
+            var result = Mapper.Map<Application, ApplicationGetModel>(applicationEntity);
+            return result;
         }
 
         #endregion Methods

@@ -28,10 +28,10 @@ namespace ART.Domotica.WebApi.Controllers
         #region public voids
 
         /// <summary>
-        /// Retornar uma lista de sensores
+        /// Retornar uma lista de DSFamilyTempSensor
         /// </summary>        
         /// <remarks>
-        /// Retornar uma lista de sensores
+        /// Retornar uma lista de DSFamilyTempSensor
         /// </remarks>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>

@@ -71,13 +71,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="Consumers\ApplicationConsumer.cs" />
     <Compile Include="Consumers\ApplicationUserConsumer.cs" />
     <Compile Include="Consumers\TemperatureScaleConsumer.cs" />
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
     <Compile Include="Contracts\DeviceMessageContract.cs" />
-    <Compile Include="Models\DSFamilyTempSensorModel.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />
     <Compile Include="WorkerService.cs" />
     <Compile Include="Program.cs" />

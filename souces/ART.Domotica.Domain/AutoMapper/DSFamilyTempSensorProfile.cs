@@ -11,6 +11,7 @@
 
         public DSFamilyTempSensorProfile()
         {
+            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllModel>();
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionGetAllModel>();
         }
 
