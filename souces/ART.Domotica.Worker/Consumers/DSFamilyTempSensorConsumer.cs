@@ -155,13 +155,13 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorSetResolutionContract>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract>>(e.Body);
 
-            await _dsFamilyTempSensorDomain.SetResolution(contract.DSFamilyTempSensorId, contract.DSFamilyTempSensorResolutionId);
+            await _dsFamilyTempSensorDomain.SetResolution(message.Contract.DSFamilyTempSensorId, message.Contract.DSFamilyTempSensorResolutionId);
             Console.WriteLine("[DSFamilyTempSensorDomain.SetResolution] Ok");
 
-            var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorConstants.SetResolutionQueueName, contract);
+            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorConstants.SetResolutionQueueName, message.Contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
@@ -179,13 +179,13 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorSetHighAlarmContract>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract>>(e.Body);
 
-            await _dsFamilyTempSensorDomain.SetHighAlarm(contract.DSFamilyTempSensorId, contract.HighAlarm);
+            await _dsFamilyTempSensorDomain.SetHighAlarm(message.Contract.DSFamilyTempSensorId, message.Contract.HighAlarm);
             Console.WriteLine("[DSFamilyTempSensorDomain.SetHighAlarm] Ok");
 
-            var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorConstants.SetHighAlarmQueueName, contract);
+            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorConstants.SetHighAlarmQueueName, message.Contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
@@ -203,13 +203,13 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
 
-            var contract = SerializationHelpers.DeserializeJsonBufferToType<DSFamilyTempSensorSetLowAlarmContract>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract>>(e.Body);
 
-            await _dsFamilyTempSensorDomain.SetLowAlarm(contract.DSFamilyTempSensorId, contract.LowAlarm);
+            await _dsFamilyTempSensorDomain.SetLowAlarm(message.Contract.DSFamilyTempSensorId, message.Contract.LowAlarm);
             Console.WriteLine("[DSFamilyTempSensorDomain.SetLowAlarm] Ok");
 
-            var queueName = await GetQueueName(contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorConstants.SetLowAlarmQueueName, contract);
+            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
+            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorConstants.SetLowAlarmQueueName, message.Contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
