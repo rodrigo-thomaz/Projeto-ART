@@ -1,9 +1,6 @@
-﻿using System.Threading.Tasks;
-using RabbitMQ.Client;
-using ART.Infra.CrossCutting.MQ.Contract;
+﻿using RabbitMQ.Client;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
-using ART.Domotica.Constant;
 
 namespace ART.Domotica.Producer.Services
 {

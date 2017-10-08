@@ -50,6 +50,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthenticatedApiControllerBase.cs" />
+    <Compile Include="ExpressionHelper.cs" />
+    <Compile Include="MasterListDTO\IMasterListDTOFilterColumn.cs" />
+    <Compile Include="MasterListDTO\IMasterListDTOSortColumn.cs" />
+    <Compile Include="MasterListDTO\MasterListDTOFilterCollection.cs" />
+    <Compile Include="MasterListDTO\MasterListDTOFilterColumn.cs" />
+    <Compile Include="MasterListDTO\MasterListDTOFilterCondition.cs" />
+    <Compile Include="MasterListDTO\MasterListDTOFilterCriteria.cs" />
+    <Compile Include="MasterListDTO\MasterListDTOHelper.cs" />
+    <Compile Include="MasterListDTO\MasterListDTORequest.cs" />
+    <Compile Include="MasterListDTO\MasterListDTOResponse.cs" />
+    <Compile Include="MasterListDTO\MasterListDTOSortColumn.cs" />
+    <Compile Include="MasterListDTO\PagedListSortDirection.cs" />
+    <Compile Include="MasterList\MasterListFilterColumn.cs" />
+    <Compile Include="MasterList\MasterListFilterColumnConvertAction.cs" />
+    <Compile Include="MasterList\MasterListFilterCondition.cs" />
+    <Compile Include="MasterList\MasterListFilterCriteria.cs" />
+    <Compile Include="MasterList\MasterListHelper.cs" />
+    <Compile Include="MasterList\MasterListRequest.cs" />
+    <Compile Include="MasterList\MasterListResponse.cs" />
+    <Compile Include="MasterList\MasterListSortColumn.cs" />
+    <Compile Include="MasterList\MasterListSortColumnConvertAction.cs" />
+    <Compile Include="MasterList\MasterListSortDirection.cs" />
     <Compile Include="NoAuthenticatedApiControllerBase.cs" />
     <Compile Include="GlobalExceptionHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
