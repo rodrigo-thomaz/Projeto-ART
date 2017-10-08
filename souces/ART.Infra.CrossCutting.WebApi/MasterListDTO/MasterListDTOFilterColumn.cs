@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ART.Infra.CrossCutting.WebApi.MasterList;
+using System;
 using System.Linq.Expressions;
 
 namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
@@ -6,9 +7,9 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
     public class MasterListDTOFilterColumn<TSource, TProperty> : IMasterListDTOFilterColumn
     {
         private readonly string _columnName;
-        private readonly MasterListDTOFilterCriteria[] _criteria;
+        private readonly MasterListFilterCriteria[] _criteria;
 
-        public MasterListDTOFilterColumn(Expression<Func<TSource, TProperty>> selector, MasterListDTOFilterCriteria[] criteria)
+        public MasterListDTOFilterColumn(Expression<Func<TSource, TProperty>> selector, MasterListFilterCriteria[] criteria)
         {
             if (selector == null)
             {
@@ -23,6 +24,6 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 
         public string ColumnName { get { return _columnName; } }
 
-        public MasterListDTOFilterCriteria[] Criteria { get { return _criteria; } }
+        public MasterListFilterCriteria[] Criteria { get { return _criteria; } }
     }
 }

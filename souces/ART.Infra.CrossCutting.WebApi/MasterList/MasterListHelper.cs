@@ -164,10 +164,10 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
 
             var selector = CreateExpression<TSource, TProperty>(filterColumn.ColumnName);
 
-            var masterListFiltersCriteria = new List<MasterListDTOFilterCriteria>();
+            var masterListFiltersCriteria = new List<MasterListFilterCriteria>();
 
             foreach (var item in filterColumn.Criteria)
-	        {
+            {
                 MasterListFilterCondition masterListDTOFilterCondition;
 
                 switch (item.FilterCondition)
@@ -201,7 +201,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
                         break;
                     default:
                         var type = typeof(TProperty);
-                        if(type.Equals(typeof(long)))
+                        if (type.Equals(typeof(long)))
                         {
                             masterListDTOFilterCondition = MasterListFilterCondition.Exact;
                         }
@@ -216,7 +216,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
                         break;
                 }
 
-                masterListFiltersCriteria.Add(new MasterListDTOFilterCriteria(item.Search, masterListDTOFilterCondition));
+                masterListFiltersCriteria.Add(new MasterListFilterCriteria { Search = item.Search, FilterCondition = masterListDTOFilterCondition} );
 	        }
             
             result = new MasterListDTOFilterColumn<TSource, TProperty>(

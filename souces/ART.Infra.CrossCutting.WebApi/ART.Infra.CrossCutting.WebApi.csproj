@@ -55,7 +55,6 @@
     <Compile Include="MasterListDTO\IMasterListDTOSortColumn.cs" />
     <Compile Include="MasterListDTO\MasterListDTOFilterCollection.cs" />
     <Compile Include="MasterListDTO\MasterListDTOFilterColumn.cs" />
-    <Compile Include="MasterListDTO\MasterListDTOFilterCriteria.cs" />
     <Compile Include="MasterListDTO\MasterListDTOHelper.cs" />
     <Compile Include="MasterListDTO\MasterListDTORequest.cs" />
     <Compile Include="MasterListDTO\MasterListDTOResponse.cs" />
