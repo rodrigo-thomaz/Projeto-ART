@@ -6,5 +6,6 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
     {
         string ColumnName { get; }
         MasterListSortDirection SortDirection { get; }
+        int Priority { get; set; }
     }
 }
