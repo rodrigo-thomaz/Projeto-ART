@@ -28,7 +28,34 @@
             <i class="glyphicon glyphicon-fire icon text-danger-dker"></i>
             <span>Sensores</span>
         </a>
+    </li>    
+    <li ui-sref-active="active">
+        <a ui-sref="app.hardwaresInApplication">
+            <i class="glyphicon glyphicon-fire icon text-danger-dker"></i>
+            <span>HardwaresInApp</span>
+        </a>
+    </li>    
+    <li ng-class="{active:$state.includes('app.admin')}">
+        <a href class="auto">
+            <span class="pull-right text-muted">
+                <i class="fa fa-fw fa-angle-right text"></i>
+                <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <i class="glyphicon glyphicon-th-large icon text-success"></i>
+            <span class="font-bold">Admin</span>
+        </a>
+        <ul class="nav nav-sub dk">
+            <li class="nav-sub-header">
+                <a href>
+                    <span>Admin</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.admin.hardware">
+                    <span>Hardware</span>
+                </a>
+            </li>
+        </ul>
     </li>
-
 </ul>
 <!-- / list -->

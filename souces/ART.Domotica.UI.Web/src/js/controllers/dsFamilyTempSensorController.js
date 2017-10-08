@@ -7,7 +7,8 @@ app.controller('dsFamilyTempSensorController', ['$scope', '$timeout', '$log', 't
     }
 
     $scope.init = onInit;
-    
+
+    $scope.sensors = dsFamilyTempSensorService.sensors;
     $scope.resolutions = dsFamilyTempSensorService.resolutions;
     $scope.scales = temperatureScaleService.scales;
     

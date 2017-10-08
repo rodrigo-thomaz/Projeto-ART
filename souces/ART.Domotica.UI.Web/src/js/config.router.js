@@ -64,6 +64,27 @@ angular.module('app')
                       'js/controllers/sensorsController.js',
                   ])
               })
+              // admin
+              .state('app.admin', {
+                  url: '/admin',
+                  template: '<div ui-view class="fade-in-down"></div>'
+              })  
+              .state('app.admin.hardware', {
+                  url: '/hardware',
+                  templateUrl: 'views/hardware.html',
+                  resolve: load([
+                      'js/services/hardwareService.js',
+                      'js/controllers/hardwareController.js',
+                  ])
+              })
+              .state('app.hardwaresInApplication', {
+                  url: '/hardwaresInApplication',
+                  templateUrl: 'views/hardwaresInApplication.html',
+                  resolve: load([
+                      'js/services/hardwaresInApplicationService.js',
+                      'js/controllers/hardwaresInApplicationController.js',
+                  ])
+              })
 
               // pages
               .state('app.page', {

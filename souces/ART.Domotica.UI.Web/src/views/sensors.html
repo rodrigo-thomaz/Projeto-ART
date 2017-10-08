@@ -3,12 +3,10 @@
     app.settings.asideDock = true;
   ">
     <div class="bg-light lter b-b wrapper-md">
-        <h1 class="m-n font-thin h3">Thermometers</h1>
+        <h1 class="m-n font-thin h3">Sensors</h1>
     </div>
     <div class="wrapper-md">
-        <div ng-controller="dsFamilyTempSensorController">
-        </div>
-        <div ng-controller="thermometerDeviceController">
+        <div ng-controller="dsFamilyTempSensorController">        
 
             <div class="row" ng-repeat="(key, sensor) in sensors">
                 <div class="col-md-6">
