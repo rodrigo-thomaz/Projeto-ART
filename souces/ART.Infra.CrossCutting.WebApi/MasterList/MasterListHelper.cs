@@ -9,7 +9,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
     public static class MasterListHelper<TSource>
     {
-        public static MasterListDTORequest<TSource> ConvertToMasterListDTORequest(MasterListRequest masterListModelRequest, Action<MasterListFilterColumnConvertAction> filterAction = null, Action<MasterListSortColumnConvertAction> sortAction = null)
+        public static MasterListDTORequest ConvertToMasterListDTORequest(MasterListRequest masterListModelRequest, Action<MasterListFilterColumnConvertAction> filterAction = null, Action<MasterListSortColumnConvertAction> sortAction = null)
         {
             List<IMasterListSortColumn> sortColumns = null;
             List<IMasterListFilterColumn> filterColumns = null;
@@ -24,11 +24,11 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
                 filterColumns = ConvertToMasterListDTOFilterColumns(masterListModelRequest.FilterColumns, filterAction);
             });
 
-            MasterListDTORequest<TSource> result;
+            MasterListDTORequest result;
 
             Task.WaitAll(sortColumnsTask, filterColumnsTask);
 
-            result = new MasterListDTORequest<TSource>
+            result = new MasterListDTORequest
                 (
                     pageNumber: masterListModelRequest.PageNumber,
                     pageSize: masterListModelRequest.PageSize,

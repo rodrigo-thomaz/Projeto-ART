@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 {
-    public class MasterListDTORequest<TSource>
+    public class MasterListDTORequest
     {
         private readonly int _pageNumber;
         private readonly int _pageSize;
