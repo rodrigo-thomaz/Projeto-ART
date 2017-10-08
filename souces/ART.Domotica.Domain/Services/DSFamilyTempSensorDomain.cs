@@ -6,6 +6,8 @@ using ART.Domotica.Repository.Entities;
 using System.Collections.Generic;
 using ART.Domotica.Model;
 using AutoMapper;
+using ART.Domotica.Contract;
+using ART.Infra.CrossCutting.MQ.Contract;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -44,16 +46,16 @@ namespace ART.Domotica.Domain.Services
             return result;
         }
 
-        public async Task SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId)
+        public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
         {
-            var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
+            var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
             if(dsFamilyTempSensorEntity == null)
             {
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            var dsFamilyTempSensorResolutionEntity = await _dsFamilyTempSensorResolutionRepository.GetById(dsFamilyTempSensorResolutionId);
+            var dsFamilyTempSensorResolutionEntity = await _dsFamilyTempSensorResolutionRepository.GetById(message.Contract.DSFamilyTempSensorResolutionId);
 
             if (dsFamilyTempSensorResolutionEntity == null)
             {
@@ -65,30 +67,30 @@ namespace ART.Domotica.Domain.Services
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
         }
 
-        public async Task SetHighAlarm(Guid dsFamilyTempSensorId, decimal highAlarm)
+        public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message)
         {
-            var entity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
+            var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
             if (entity == null)
             {
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            entity.HighAlarm = highAlarm;
+            entity.HighAlarm = message.Contract.HighAlarm;
 
             await _dsFamilyTempSensorRepository.Update(entity);
         }
 
-        public async Task SetLowAlarm(Guid dsFamilyTempSensorId, decimal lowAlarm)
+        public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message)
         {
-            var entity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
+            var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
             if (entity == null)
             {
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            entity.LowAlarm = lowAlarm;
+            entity.LowAlarm = message.Contract.LowAlarm;
 
             await _dsFamilyTempSensorRepository.Update(entity);
         }

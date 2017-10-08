@@ -151,15 +151,19 @@ namespace ART.Domotica.Worker.Consumers
         private async Task SetResolutionReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[DSFamilyTempSensorConsumer.SetResolutionReceived] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.SetResolutionQueueName, Encoding.UTF8.GetString(e.Body));
 
             _model.BasicAck(e.DeliveryTag, false);
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract>>(e.Body);
+            await _dsFamilyTempSensorDomain.SetResolution(message);
 
-            await _dsFamilyTempSensorDomain.SetResolution(message.Contract.DSFamilyTempSensorId, message.Contract.DSFamilyTempSensorResolutionId);
-            Console.WriteLine("[DSFamilyTempSensorDomain.SetResolution] Ok");
+            await SendSetResolutionToDevice(message);
+        }
 
+        private async Task SendSetResolutionToDevice(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
+        {
+            Console.WriteLine("[{0}] Device...", DSFamilyTempSensorConstants.SetResolutionQueueName);
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
             var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorConstants.SetResolutionQueueName, message.Contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
@@ -175,13 +179,13 @@ namespace ART.Domotica.Worker.Consumers
         private async Task SetHighAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[DSFamilyTempSensorConsumer.SetHighAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.SetHighAlarmQueueName, Encoding.UTF8.GetString(e.Body));
 
             _model.BasicAck(e.DeliveryTag, false);
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract>>(e.Body);
 
-            await _dsFamilyTempSensorDomain.SetHighAlarm(message.Contract.DSFamilyTempSensorId, message.Contract.HighAlarm);
+            await _dsFamilyTempSensorDomain.SetHighAlarm(message);
             Console.WriteLine("[DSFamilyTempSensorDomain.SetHighAlarm] Ok");
 
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
@@ -199,13 +203,13 @@ namespace ART.Domotica.Worker.Consumers
         private async Task SetLowAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
-            Console.WriteLine("[DSFamilyTempSensorConsumer.SetLowAlarmReceived] {0}", Encoding.UTF8.GetString(e.Body));
+            Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.SetLowAlarmQueueName, Encoding.UTF8.GetString(e.Body));
 
             _model.BasicAck(e.DeliveryTag, false);
 
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract>>(e.Body);
 
-            await _dsFamilyTempSensorDomain.SetLowAlarm(message.Contract.DSFamilyTempSensorId, message.Contract.LowAlarm);
+            await _dsFamilyTempSensorDomain.SetLowAlarm(message);
             Console.WriteLine("[DSFamilyTempSensorDomain.SetLowAlarm] Ok");
 
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);

@@ -75,6 +75,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ART.Domotica.Contract\ART.Domotica.Contract.csproj">
+      <Project>{2F58031D-FF69-4BDA-9C4A-4811560918DD}</Project>
+      <Name>ART.Domotica.Contract</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Model\ART.Domotica.Model.csproj">
       <Project>{49447556-dca8-4fc7-ac1d-7f5163e7abea}</Project>
       <Name>ART.Domotica.Model</Name>
