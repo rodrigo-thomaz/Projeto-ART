@@ -157,14 +157,14 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
             if (isFirstSortable)
             {
                 isFirstSortable = false;
-                if (sortColumn.SortDirection == MasterListDTOSortDirection.Ascending)
+                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
                     query = query.OrderBy(entitySelector);
                 else
                     query = query.OrderByDescending(entitySelector);
             }
             else
             {
-                if (sortColumn.SortDirection == MasterListDTOSortDirection.Ascending)
+                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
                     query = ((IOrderedQueryable<TEntity>)query).ThenBy(entitySelector);
                 else
                     query = ((IOrderedQueryable<TEntity>)query).ThenByDescending(entitySelector);
@@ -183,14 +183,14 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
             if (isFirstSortable)
             {
                 isFirstSortable = false;
-                if (sortColumn.SortDirection == MasterListDTOSortDirection.Ascending)
+                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
                     query = query.OrderBy(entitySelector);
                 else
                     query = query.OrderByDescending(entitySelector);
             }
             else
             {
-                if (sortColumn.SortDirection == MasterListDTOSortDirection.Ascending)
+                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
                     query = ((IOrderedEnumerable<TEntity>)query).ThenBy(entitySelector);
                 else
                     query = ((IOrderedEnumerable<TEntity>)query).ThenByDescending(entitySelector);

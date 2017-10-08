@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ART.Infra.CrossCutting.WebApi.MasterList;
+using System;
 using System.Linq.Expressions;
 
 namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
@@ -6,10 +7,10 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
     public class MasterListDTOSortColumn<TSource, TProperty> : IMasterListDTOSortColumn
     {
         private readonly string _columnName;
-        private readonly MasterListDTOSortDirection _sortDirection;
+        private readonly MasterListSortDirection _sortDirection;
         private readonly int _priority;
 
-        public MasterListDTOSortColumn(Expression<Func<TSource, TProperty>> selector, MasterListDTOSortDirection sortDirection, int priority)
+        public MasterListDTOSortColumn(Expression<Func<TSource, TProperty>> selector, MasterListSortDirection sortDirection, int priority)
         {
             if (selector == null)
             {
@@ -24,7 +25,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
         }
 
         public string ColumnName { get { return _columnName; } }
-        public MasterListDTOSortDirection SortDirection { get { return _sortDirection; } }
+        public MasterListSortDirection SortDirection { get { return _sortDirection; } }
         public int Priority { get { return _priority; } }
     }
 }

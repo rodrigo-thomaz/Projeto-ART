@@ -47,7 +47,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
             IMasterListDTOSortColumn result;
 
             var selector = CreateExpression<TSource, TProperty>(sortColumn.ColumnName);
-            var sortDirection = sortColumn.SortDirection == MasterListSortDirection.Ascending ? MasterListDTOSortDirection.Ascending : MasterListDTOSortDirection.Descending;
+            var sortDirection = sortColumn.SortDirection == MasterListSortDirection.Ascending ? MasterListSortDirection.Ascending : MasterListSortDirection.Descending;
 
             result = new MasterListDTOSortColumn<TSource, TProperty>(
                 selector: selector,

@@ -60,7 +60,6 @@
     <Compile Include="MasterListDTO\MasterListDTORequest.cs" />
     <Compile Include="MasterListDTO\MasterListDTOResponse.cs" />
     <Compile Include="MasterListDTO\MasterListDTOSortColumn.cs" />
-    <Compile Include="MasterListDTO\PagedListSortDirection.cs" />
     <Compile Include="MasterList\MasterListFilterColumn.cs" />
     <Compile Include="MasterList\MasterListFilterColumnConvertAction.cs" />
     <Compile Include="MasterList\MasterListFilterCondition.cs" />
