@@ -73,6 +73,7 @@ angular.module('app')
                   url: '/hardware',
                   templateUrl: 'views/hardware.html',
                   resolve: load([
+                      'ui.grid',
                       'js/services/hardwareService.js',
                       'js/controllers/hardwareController.js',
                   ])
