@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ART.Infra.CrossCutting.WebApi.MasterList;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -25,17 +26,17 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 
                 switch (criteria.FilterCondition)
                 {
-                    case MasterListDTOFilterCondition.StartsWith:
-                    case MasterListDTOFilterCondition.EndsWith:
-                    case MasterListDTOFilterCondition.Contains:
+                    case MasterListFilterCondition.StartsWith:
+                    case MasterListFilterCondition.EndsWith:
+                    case MasterListFilterCondition.Contains:
                         expression = CreateMethodCallExpression<TEntity, TProperty>(propertyInfo, retorno, criteria.FilterCondition);
                         break;
-                    case MasterListDTOFilterCondition.Exact:
-                    case MasterListDTOFilterCondition.GreaterThan:
-                    case MasterListDTOFilterCondition.GreaterThanOrEqual:
-                    case MasterListDTOFilterCondition.LessThan:
-                    case MasterListDTOFilterCondition.LessThanOrEqual:
-                    case MasterListDTOFilterCondition.NotEqual:
+                    case MasterListFilterCondition.Exact:
+                    case MasterListFilterCondition.GreaterThan:
+                    case MasterListFilterCondition.GreaterThanOrEqual:
+                    case MasterListFilterCondition.LessThan:
+                    case MasterListFilterCondition.LessThanOrEqual:
+                    case MasterListFilterCondition.NotEqual:
                         expression = CreateBinaryExpression<TEntity, TProperty>(propertyInfo, retorno, criteria.FilterCondition);
                         break;
                     default:
@@ -48,7 +49,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
             return result;
         }
 
-        private static Expression<Func<TEntity, bool>> CreateBinaryExpression<TEntity, TProperty>(PropertyInfo propertyInfo, TProperty value, MasterListDTOFilterCondition filterCondition)
+        private static Expression<Func<TEntity, bool>> CreateBinaryExpression<TEntity, TProperty>(PropertyInfo propertyInfo, TProperty value, MasterListFilterCondition filterCondition)
         {
             var parameterExpression = Expression.Parameter(typeof(TEntity), @"x");
             var memberExpression = Expression.MakeMemberAccess(parameterExpression, propertyInfo);
@@ -70,28 +71,28 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 
             switch (filterCondition)
             {
-                case MasterListDTOFilterCondition.StartsWith:
+                case MasterListFilterCondition.StartsWith:
                     throw new ArgumentOutOfRangeException();
-                case MasterListDTOFilterCondition.EndsWith:
+                case MasterListFilterCondition.EndsWith:
                     throw new ArgumentOutOfRangeException();
-                case MasterListDTOFilterCondition.Exact:
+                case MasterListFilterCondition.Exact:
                     binaryExpression = Expression.Equal(memberExpression, constantExpression);
                     break;
-                case MasterListDTOFilterCondition.Contains:
+                case MasterListFilterCondition.Contains:
                     throw new ArgumentOutOfRangeException();
-                case MasterListDTOFilterCondition.GreaterThan:
+                case MasterListFilterCondition.GreaterThan:
                     binaryExpression = Expression.GreaterThan(memberExpression, constantExpression);
                     break;
-                case MasterListDTOFilterCondition.GreaterThanOrEqual:
+                case MasterListFilterCondition.GreaterThanOrEqual:
                     binaryExpression = Expression.GreaterThanOrEqual(memberExpression, constantExpression);
                     break;
-                case MasterListDTOFilterCondition.LessThan:
+                case MasterListFilterCondition.LessThan:
                     binaryExpression = Expression.LessThan(memberExpression, constantExpression);
                     break;
-                case MasterListDTOFilterCondition.LessThanOrEqual:
+                case MasterListFilterCondition.LessThanOrEqual:
                     binaryExpression = Expression.LessThanOrEqual(memberExpression, constantExpression);
                     break;
-                case MasterListDTOFilterCondition.NotEqual:
+                case MasterListFilterCondition.NotEqual:
                     binaryExpression = Expression.NotEqual(memberExpression, constantExpression);
                     break;
                 default:
@@ -101,7 +102,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
             return Expression.Lambda<Func<TEntity, bool>>(binaryExpression, parameterExpression);
         }
 
-        private static Expression<Func<TEntity, bool>> CreateMethodCallExpression<TEntity, TProperty>(PropertyInfo propertyInfo, TProperty value, MasterListDTOFilterCondition filterCondition)
+        private static Expression<Func<TEntity, bool>> CreateMethodCallExpression<TEntity, TProperty>(PropertyInfo propertyInfo, TProperty value, MasterListFilterCondition filterCondition)
         {
             ParameterExpression parameter = Expression.Parameter(typeof(TEntity), "x");
             MemberExpression propertyAccess = Expression.MakeMemberAccess(parameter, propertyInfo);
@@ -110,26 +111,26 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 
             switch (filterCondition)
             {
-                case MasterListDTOFilterCondition.StartsWith:
+                case MasterListFilterCondition.StartsWith:
                     methodName = "StartsWith";
                     break;
-                case MasterListDTOFilterCondition.EndsWith:
+                case MasterListFilterCondition.EndsWith:
                     methodName = "EndsWith";
                     break;
-                case MasterListDTOFilterCondition.Exact:
+                case MasterListFilterCondition.Exact:
                     throw new ArgumentOutOfRangeException();
-                case MasterListDTOFilterCondition.Contains:
+                case MasterListFilterCondition.Contains:
                     methodName = "Contains";
                     break;
-                case MasterListDTOFilterCondition.GreaterThan:
+                case MasterListFilterCondition.GreaterThan:
                     throw new ArgumentOutOfRangeException();
-                case MasterListDTOFilterCondition.GreaterThanOrEqual:
+                case MasterListFilterCondition.GreaterThanOrEqual:
                     throw new ArgumentOutOfRangeException();
-                case MasterListDTOFilterCondition.LessThan:
+                case MasterListFilterCondition.LessThan:
                     throw new ArgumentOutOfRangeException();
-                case MasterListDTOFilterCondition.LessThanOrEqual:
+                case MasterListFilterCondition.LessThanOrEqual:
                     throw new ArgumentOutOfRangeException();
-                case MasterListDTOFilterCondition.NotEqual:
+                case MasterListFilterCondition.NotEqual:
                     throw new ArgumentOutOfRangeException();
                 default:
                     throw new ArgumentOutOfRangeException();

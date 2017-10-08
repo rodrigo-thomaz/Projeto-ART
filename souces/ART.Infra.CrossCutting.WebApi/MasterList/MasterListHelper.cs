@@ -168,46 +168,46 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
 
             foreach (var item in filterColumn.Criteria)
 	        {
-                MasterListDTOFilterCondition masterListDTOFilterCondition;
+                MasterListFilterCondition masterListDTOFilterCondition;
 
                 switch (item.FilterCondition)
                 {
                     case MasterListFilterCondition.StartsWith:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.StartsWith;
+                        masterListDTOFilterCondition = MasterListFilterCondition.StartsWith;
                         break;
                     case MasterListFilterCondition.EndsWith:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.EndsWith;
+                        masterListDTOFilterCondition = MasterListFilterCondition.EndsWith;
                         break;
                     case MasterListFilterCondition.Exact:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.Exact;
+                        masterListDTOFilterCondition = MasterListFilterCondition.Exact;
                         break;
                     case MasterListFilterCondition.Contains:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.Contains;
+                        masterListDTOFilterCondition = MasterListFilterCondition.Contains;
                         break;
                     case MasterListFilterCondition.GreaterThan:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.GreaterThan;
+                        masterListDTOFilterCondition = MasterListFilterCondition.GreaterThan;
                         break;
                     case MasterListFilterCondition.GreaterThanOrEqual:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.GreaterThanOrEqual;
+                        masterListDTOFilterCondition = MasterListFilterCondition.GreaterThanOrEqual;
                         break;
                     case MasterListFilterCondition.LessThan:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.LessThan;
+                        masterListDTOFilterCondition = MasterListFilterCondition.LessThan;
                         break;
                     case MasterListFilterCondition.LessThanOrEqual:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.LessThanOrEqual;
+                        masterListDTOFilterCondition = MasterListFilterCondition.LessThanOrEqual;
                         break;
                     case MasterListFilterCondition.NotEqual:
-                        masterListDTOFilterCondition = MasterListDTOFilterCondition.NotEqual;
+                        masterListDTOFilterCondition = MasterListFilterCondition.NotEqual;
                         break;
                     default:
                         var type = typeof(TProperty);
                         if(type.Equals(typeof(long)))
                         {
-                            masterListDTOFilterCondition = MasterListDTOFilterCondition.Exact;
+                            masterListDTOFilterCondition = MasterListFilterCondition.Exact;
                         }
                         else if (type.Equals(typeof(string)))
                         {
-                            masterListDTOFilterCondition = MasterListDTOFilterCondition.Contains;
+                            masterListDTOFilterCondition = MasterListFilterCondition.Contains;
                         }
                         else
                         {
