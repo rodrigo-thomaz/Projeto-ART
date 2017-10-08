@@ -5,14 +5,14 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
     public class MasterListFilterColumnConvertAction : EventArgs
     {
-        private readonly MasterListFilterColumn _column;
+        private readonly IMasterListFilterColumn _column;
 
-        public MasterListFilterColumnConvertAction(MasterListFilterColumn column)
+        public MasterListFilterColumnConvertAction(IMasterListFilterColumn column)
         {
             _column = column;
         }
 
-        public MasterListFilterColumn Column { get { return _column; } }
+        public IMasterListFilterColumn Column { get { return _column; } }
         public IMasterListFilterColumn FilterColumn { get; set; }
     }
 }

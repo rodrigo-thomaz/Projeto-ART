@@ -7,8 +7,8 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
         public int PageNumber { get; set; }
         public int PageSize { get; set; }        
         public string Search { get; set; }
-        public List<MasterListFilterColumn> FilterColumns { get; set; }
-        public List<MasterListSortColumn> SortColumns { get; set; }
+        public List<IMasterListFilterColumn> FilterColumns { get; set; }
+        public List<IMasterListSortColumn> SortColumns { get; set; }
 
         public int Skip
         {

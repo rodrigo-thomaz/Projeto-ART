@@ -5,14 +5,14 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
     public class MasterListSortColumnConvertAction : EventArgs
     {
-        private readonly MasterListSortColumn _column;
+        private readonly IMasterListSortColumn _column;
 
-        public MasterListSortColumnConvertAction(MasterListSortColumn column)
+        public MasterListSortColumnConvertAction(IMasterListSortColumn column)
         {
             _column = column;
         }
 
-        public MasterListSortColumn Column { get { return _column; } }
+        public IMasterListSortColumn Column { get { return _column; } }
         public IMasterListSortColumn SortColumn { get; set; }
     }
 }

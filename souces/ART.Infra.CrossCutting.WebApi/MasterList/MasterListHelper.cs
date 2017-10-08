@@ -9,7 +9,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
     public static class MasterListHelper<TSource>
     {
-        public static MasterListDTORequest ConvertToMasterListDTORequest(MasterListRequest masterListModelRequest, Action<MasterListFilterColumnConvertAction> filterAction = null, Action<MasterListSortColumnConvertAction> sortAction = null)
+        public static MasterListRequest ConvertToMasterListDTORequest(MasterListRequest masterListModelRequest, Action<MasterListFilterColumnConvertAction> filterAction = null, Action<MasterListSortColumnConvertAction> sortAction = null)
         {
             List<IMasterListSortColumn> sortColumns = null;
             List<IMasterListFilterColumn> filterColumns = null;
@@ -24,25 +24,25 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
                 filterColumns = ConvertToMasterListDTOFilterColumns(masterListModelRequest.FilterColumns, filterAction);
             });
 
-            MasterListDTORequest result;
+            MasterListRequest result;
 
             Task.WaitAll(sortColumnsTask, filterColumnsTask);
 
-            result = new MasterListDTORequest
-                (
-                    pageNumber: masterListModelRequest.PageNumber,
-                    pageSize: masterListModelRequest.PageSize,
-                    search: masterListModelRequest.Search,
-                    filterColumns: filterColumns,
-                    sortColumns: sortColumns
-                );
+            result = new MasterListRequest
+            {
+                PageNumber = masterListModelRequest.PageNumber,
+                PageSize = masterListModelRequest.PageSize,
+                Search = masterListModelRequest.Search,
+                FilterColumns = filterColumns,
+                SortColumns = sortColumns
+            };
 
             return result;
         }
 
         #region sort voids        
 
-        public static IMasterListSortColumn ConvertToMasterListDTOSortColumn<TProperty>(MasterListSortColumn sortColumn)
+        public static IMasterListSortColumn ConvertToMasterListDTOSortColumn<TProperty>(IMasterListSortColumn sortColumn)
         {
             IMasterListSortColumn result;
 
@@ -58,7 +58,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
             return result;
         }
 
-        private static List<IMasterListSortColumn> ConvertToMasterListDTOSortColumns(List<MasterListSortColumn> sortColumns, Action<MasterListSortColumnConvertAction> action)
+        private static List<IMasterListSortColumn> ConvertToMasterListDTOSortColumns(List<IMasterListSortColumn> sortColumns, Action<MasterListSortColumnConvertAction> action)
         {
             var result = new List<IMasterListSortColumn>();
 
@@ -158,7 +158,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
 
         #region filter voids        
 
-        public static IMasterListFilterColumn ConvertToMasterListDTOFilterColumn<TProperty>(MasterListFilterColumn filterColumn)
+        public static IMasterListFilterColumn ConvertToMasterListDTOFilterColumn<TProperty>(IMasterListFilterColumn filterColumn)
         {
             IMasterListFilterColumn result;
 
@@ -227,7 +227,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
             return result;
         }        
 
-        private static List<IMasterListFilterColumn> ConvertToMasterListDTOFilterColumns(List<MasterListFilterColumn >filterColumns, Action<MasterListFilterColumnConvertAction> action)
+        private static List<IMasterListFilterColumn> ConvertToMasterListDTOFilterColumns(List<IMasterListFilterColumn >filterColumns, Action<MasterListFilterColumnConvertAction> action)
         {
             var result = new List<IMasterListFilterColumn>();
 
