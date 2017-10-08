@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using ART.Infra.CrossCutting.WebApi.MasterList;
+using System.Collections.Generic;
 
 namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 {
@@ -7,10 +8,10 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
         private readonly int _pageNumber;
         private readonly int _pageSize;
         private readonly string _search;
-        private readonly List<IMasterListDTOFilterColumn> _filterColumns;
-        private readonly List<IMasterListDTOSortColumn> _sortColumns;
+        private readonly List<IMasterListFilterColumn> _filterColumns;
+        private readonly List<IMasterListSortColumn> _sortColumns;
 
-        public MasterListDTORequest(int pageNumber, int pageSize, string search, List<IMasterListDTOFilterColumn> filterColumns, List<IMasterListDTOSortColumn> sortColumns)
+        public MasterListDTORequest(int pageNumber, int pageSize, string search, List<IMasterListFilterColumn> filterColumns, List<IMasterListSortColumn> sortColumns)
         {
             _pageNumber = pageNumber;
             _pageSize = pageSize;
@@ -46,7 +47,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
         public int PageNumber { get { return _pageNumber; } }
         public int PageSize { get { return _pageSize; } }
         public string Search { get { return _search; } }
-        public List<IMasterListDTOFilterColumn> FilterColumns { get { return _filterColumns; } }
-        public List<IMasterListDTOSortColumn> SortColumns { get { return _sortColumns; } }
+        public List<IMasterListFilterColumn> FilterColumns { get { return _filterColumns; } }
+        public List<IMasterListSortColumn> SortColumns { get { return _sortColumns; } }
     }
 }

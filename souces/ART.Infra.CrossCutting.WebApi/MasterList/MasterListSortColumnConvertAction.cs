@@ -13,6 +13,6 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
         }
 
         public MasterListSortColumn Column { get { return _column; } }
-        public IMasterListDTOSortColumn SortColumn { get; set; }
+        public IMasterListSortColumn SortColumn { get; set; }
     }
 }

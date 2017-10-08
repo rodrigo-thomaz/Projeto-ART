@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ART.Infra.CrossCutting.WebApi.MasterList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,10 +8,10 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 {
     public class MasterListDTOFilterCollection<TEntity, TContract>
     {
-        private readonly List<IMasterListDTOFilterColumn> _filterColumns;
+        private readonly List<IMasterListFilterColumn> _filterColumns;
         private readonly List<Expression<Func<TEntity, bool>>> _filterExpressions;
 
-        public MasterListDTOFilterCollection(List<IMasterListDTOFilterColumn> filterColumns)
+        public MasterListDTOFilterCollection(List<IMasterListFilterColumn> filterColumns)
         {
             _filterColumns = filterColumns;
             _filterExpressions = new List<Expression<Func<TEntity, bool>>>();

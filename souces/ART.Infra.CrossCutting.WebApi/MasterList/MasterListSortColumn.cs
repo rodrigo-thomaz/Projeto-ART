@@ -1,6 +1,6 @@
 ﻿namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
-    public class MasterListSortColumn
+    public class MasterListSortColumn : IMasterListSortColumn
     {
         public string ColumnName { get; set; }
         public MasterListSortDirection SortDirection { get; set; }        

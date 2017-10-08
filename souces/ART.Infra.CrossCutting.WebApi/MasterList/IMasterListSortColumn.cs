@@ -1,8 +1,8 @@
 ﻿using ART.Infra.CrossCutting.WebApi.MasterList;
 
-namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
+namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
-    public interface IMasterListDTOSortColumn
+    public interface IMasterListSortColumn
     {
         string ColumnName { get; }
         MasterListSortDirection SortDirection { get; }

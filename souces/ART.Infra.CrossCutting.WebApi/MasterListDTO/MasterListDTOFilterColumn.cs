@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 {
-    public class MasterListDTOFilterColumn<TSource, TProperty> : IMasterListDTOFilterColumn
+    public class MasterListDTOFilterColumn<TSource, TProperty> : IMasterListFilterColumn
     {
         private readonly string _columnName;
         private readonly MasterListFilterCriteria[] _criteria;

@@ -13,6 +13,6 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
         }
 
         public MasterListFilterColumn Column { get { return _column; } }
-        public IMasterListDTOFilterColumn FilterColumn { get; set; }
+        public IMasterListFilterColumn FilterColumn { get; set; }
     }
 }

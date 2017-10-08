@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 {
-    public class MasterListDTOSortColumn<TSource, TProperty> : IMasterListDTOSortColumn
+    public class MasterListDTOSortColumn<TSource, TProperty> : IMasterListSortColumn
     {
         private readonly string _columnName;
         private readonly MasterListSortDirection _sortDirection;

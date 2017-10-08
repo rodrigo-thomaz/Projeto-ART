@@ -12,7 +12,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
     {
         #region filter voids
 
-        public static List<Expression<Func<TEntity, bool>>> CreateFilterExpression<TEntity, TContract, TProperty>(Expression<Func<TEntity, TProperty>> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, IMasterListDTOFilterColumn filterColumn)
+        public static List<Expression<Func<TEntity, bool>>> CreateFilterExpression<TEntity, TContract, TProperty>(Expression<Func<TEntity, TProperty>> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, IMasterListFilterColumn filterColumn)
         {
             var propertyInfo = ExpressionHelper.GetPropertyInfo(entitySelector);
 
@@ -145,7 +145,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 
         #region sort voids
 
-        public static void ApplySort<TEntity, TContract, TProperty>(IMasterListDTOSortColumn sortColumn, ref IQueryable<TEntity> query, Expression<Func<TEntity, TProperty>> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, ref bool isFirstSortable)
+        public static void ApplySort<TEntity, TContract, TProperty>(IMasterListSortColumn sortColumn, ref IQueryable<TEntity> query, Expression<Func<TEntity, TProperty>> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, ref bool isFirstSortable)
         {
             var propertyName = ExpressionHelper.GetPropertyName<TContract, TProperty>(contractSelector);
 
@@ -171,7 +171,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
             }
         }        
 
-        public static void ApplySort<TEntity, TContract, TProperty>(IMasterListDTOSortColumn sortColumn, ref IEnumerable<TEntity> query, Func<TEntity, TProperty> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, ref bool isFirstSortable)
+        public static void ApplySort<TEntity, TContract, TProperty>(IMasterListSortColumn sortColumn, ref IEnumerable<TEntity> query, Func<TEntity, TProperty> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, ref bool isFirstSortable)
         {
             var propertyName = ExpressionHelper.GetPropertyName<TContract, TProperty>(contractSelector);
 
