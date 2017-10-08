@@ -58,7 +58,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
             return result;
         }
 
-        private static List<IMasterListSortColumn> ConvertToMasterListDTOSortColumns(MasterListSortColumn[] sortColumns, Action<MasterListSortColumnConvertAction> action)
+        private static List<IMasterListSortColumn> ConvertToMasterListDTOSortColumns(List<MasterListSortColumn> sortColumns, Action<MasterListSortColumnConvertAction> action)
         {
             var result = new List<IMasterListSortColumn>();
 
@@ -227,7 +227,7 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
             return result;
         }        
 
-        private static List<IMasterListFilterColumn> ConvertToMasterListDTOFilterColumns(MasterListFilterColumn[] filterColumns, Action<MasterListFilterColumnConvertAction> action)
+        private static List<IMasterListFilterColumn> ConvertToMasterListDTOFilterColumns(List<MasterListFilterColumn >filterColumns, Action<MasterListFilterColumnConvertAction> action)
         {
             var result = new List<IMasterListFilterColumn>();
 
