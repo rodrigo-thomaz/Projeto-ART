@@ -1,18 +1,38 @@
-﻿using ART.Infra.CrossCutting.WebApi.MasterListDTO;
-using System;
-
-namespace ART.Infra.CrossCutting.WebApi.MasterList
+﻿namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
+    using System;
+
+    using ART.Infra.CrossCutting.WebApi.MasterListDTO;
+
     public class MasterListSortColumnConvertAction : EventArgs
     {
+        #region Fields
+
         private readonly IMasterListSortColumn _column;
+
+        #endregion Fields
+
+        #region Constructors
 
         public MasterListSortColumnConvertAction(IMasterListSortColumn column)
         {
             _column = column;
         }
 
-        public IMasterListSortColumn Column { get { return _column; } }
-        public IMasterListSortColumn SortColumn { get; set; }
+        #endregion Constructors
+
+        #region Properties
+
+        public IMasterListSortColumn Column
+        {
+            get { return _column; }
+        }
+
+        public IMasterListSortColumn SortColumn
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

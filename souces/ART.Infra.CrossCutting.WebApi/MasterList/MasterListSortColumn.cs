@@ -2,8 +2,23 @@
 {
     public class MasterListSortColumn : IMasterListSortColumn
     {
-        public string ColumnName { get; set; }
-        public MasterListSortDirection SortDirection { get; set; }        
-        public int Priority { get; set; }
+        #region Properties
+
+        public string ColumnName
+        {
+            get; set;
+        }
+
+        public int Priority
+        {
+            get; set;
+        }
+
+        public MasterListSortDirection SortDirection
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

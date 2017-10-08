@@ -1,11 +1,13 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Reflection;
-
-namespace ART.Infra.CrossCutting.WebApi
+﻿namespace ART.Infra.CrossCutting.WebApi
 {
+    using System;
+    using System.Linq.Expressions;
+    using System.Reflection;
+
     public static class ExpressionHelper
     {
+        #region Methods
+
         public static PropertyInfo GetPropertyInfo<TSource, TProperty>(Expression<Func<TSource, TProperty>> selector)
         {
             if (selector == null)
@@ -55,5 +57,7 @@ namespace ART.Infra.CrossCutting.WebApi
 
             return body.Member.Name;
         }
+
+        #endregion Methods
     }
 }

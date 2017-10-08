@@ -1,18 +1,38 @@
-﻿using ART.Infra.CrossCutting.WebApi.MasterListDTO;
-using System;
-
-namespace ART.Infra.CrossCutting.WebApi.MasterList
+﻿namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
+    using System;
+
+    using ART.Infra.CrossCutting.WebApi.MasterListDTO;
+
     public class MasterListFilterColumnConvertAction : EventArgs
     {
+        #region Fields
+
         private readonly IMasterListFilterColumn _column;
+
+        #endregion Fields
+
+        #region Constructors
 
         public MasterListFilterColumnConvertAction(IMasterListFilterColumn column)
         {
             _column = column;
         }
 
-        public IMasterListFilterColumn Column { get { return _column; } }
-        public IMasterListFilterColumn FilterColumn { get; set; }
+        #endregion Constructors
+
+        #region Properties
+
+        public IMasterListFilterColumn Column
+        {
+            get { return _column; }
+        }
+
+        public IMasterListFilterColumn FilterColumn
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

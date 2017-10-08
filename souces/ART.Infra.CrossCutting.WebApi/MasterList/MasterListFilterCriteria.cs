@@ -2,7 +2,18 @@
 {
     public class MasterListFilterCriteria
     {
-        public MasterListFilterCondition FilterCondition { get; set; }
-        public string Search { get; set; }
+        #region Properties
+
+        public MasterListFilterCondition FilterCondition
+        {
+            get; set;
+        }
+
+        public string Search
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

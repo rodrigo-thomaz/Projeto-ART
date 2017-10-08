@@ -1,13 +1,20 @@
-﻿using ART.Infra.CrossCutting.WebApi.MasterList;
-using System;
-using System.Linq.Expressions;
-
-namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
+﻿namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 {
+    using System;
+    using System.Linq.Expressions;
+
+    using ART.Infra.CrossCutting.WebApi.MasterList;
+
     public class MasterListDTOFilterColumn<TSource, TProperty> : IMasterListFilterColumn
     {
+        #region Fields
+
         private readonly string _columnName;
         private readonly MasterListFilterCriteria[] _criteria;
+
+        #endregion Fields
+
+        #region Constructors
 
         public MasterListDTOFilterColumn(Expression<Func<TSource, TProperty>> selector, MasterListFilterCriteria[] criteria)
         {
@@ -22,8 +29,20 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
             _criteria = criteria;
         }
 
-        public string ColumnName { get { return _columnName; } }
+        #endregion Constructors
 
-        public MasterListFilterCriteria[] Criteria { get { return _criteria; } }
+        #region Properties
+
+        public string ColumnName
+        {
+            get { return _columnName; }
+        }
+
+        public MasterListFilterCriteria[] Criteria
+        {
+            get { return _criteria; }
+        }
+
+        #endregion Properties
     }
 }

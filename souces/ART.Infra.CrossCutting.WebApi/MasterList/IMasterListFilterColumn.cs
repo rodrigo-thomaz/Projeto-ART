@@ -1,11 +1,21 @@
-﻿using ART.Infra.CrossCutting.WebApi.MasterList;
-
-namespace ART.Infra.CrossCutting.WebApi.MasterList
+﻿namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
+    using ART.Infra.CrossCutting.WebApi.MasterList;
+
     public interface IMasterListFilterColumn
     {
-        string ColumnName { get; }
+        #region Properties
 
-        MasterListFilterCriteria[] Criteria { get; }
+        string ColumnName
+        {
+            get;
+        }
+
+        MasterListFilterCriteria[] Criteria
+        {
+            get;
+        }
+
+        #endregion Properties
     }
 }

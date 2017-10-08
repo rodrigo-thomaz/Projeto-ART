@@ -1,10 +1,14 @@
 ﻿namespace ART.Domotica.Repository.Repositories
 {
     using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
+    using System.Linq;
+    using System.Data.Entity;
 
     public class HardwareRepository : RepositoryBase<ARTDbContext, HardwareBase, Guid>, IHardwareRepository
     {
@@ -16,5 +20,15 @@
         }
 
         #endregion Constructors
+
+        #region Methods
+
+        public async Task<List<HardwareBase>> GetList()
+        {
+            var data = await _context.Set<HardwareBase>().ToListAsync();            
+            return data;
+        }
+
+        #endregion Methods
     }
 }

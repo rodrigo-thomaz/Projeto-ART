@@ -1,21 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace ART.Infra.CrossCutting.WebApi.MasterList
+﻿namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
+    using System.Collections.Generic;
+
     public class MasterListRequest
     {
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }        
-        public string Search { get; set; }
-        public List<IMasterListFilterColumn> FilterColumns { get; set; }
-        public List<IMasterListSortColumn> SortColumns { get; set; }
+        #region Properties
 
-        public int Skip
+        public List<IMasterListFilterColumn> FilterColumns
         {
-            get
-            {
-                return (PageNumber - 1) * PageSize;
-            }
+            get; set;
         }
 
         public bool HasFilterColumns
@@ -33,5 +26,35 @@ namespace ART.Infra.CrossCutting.WebApi.MasterList
                 return SortColumns != null && SortColumns.Count > 0;
             }
         }
+
+        public int PageNumber
+        {
+            get; set;
+        }
+
+        public int PageSize
+        {
+            get; set;
+        }
+
+        public string Search
+        {
+            get; set;
+        }
+
+        public int Skip
+        {
+            get
+            {
+                return (PageNumber - 1) * PageSize;
+            }
+        }
+
+        public List<IMasterListSortColumn> SortColumns
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

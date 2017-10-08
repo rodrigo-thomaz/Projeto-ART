@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Domain.Services
 {
-
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Repository.Interfaces;
 
@@ -20,11 +19,5 @@
         }
 
         #endregion Constructors
-
-        #region Methods
-
-        
-
-        #endregion Methods
     }
 }

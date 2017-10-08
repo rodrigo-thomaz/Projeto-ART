@@ -4,8 +4,9 @@
     {
         #region Fields
 
-        //public static readonly string GetCompletedQueueName = "Application.GetCompleted";
-        
+        public static readonly string GetListCompletedQueueName = "Hardware.GetListCompleted";
+        public static readonly string GetListQueueName = "Hardware.GetList";
+
         #endregion Fields
     }
 }

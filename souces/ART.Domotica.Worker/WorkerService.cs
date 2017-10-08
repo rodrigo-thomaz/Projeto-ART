@@ -21,14 +21,14 @@
         #region Constructors
 
         public WorkerService(
-              IConnection connection
+            IConnection connection
             , ApplicationConsumer applicationConsumer
             , ApplicationUserConsumer applicationUserConsumer
             , DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer
             , TemperatureScaleConsumer temperatureScaleConsumer
             , HardwareConsumer hardwareConsumer
             , HardwaresInApplicationConsumer hardwaresInApplicationConsumer
-        )
+            )
         {
             _connection = connection;
             _applicationConsumer = applicationConsumer;

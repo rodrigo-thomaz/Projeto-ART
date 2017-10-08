@@ -11,16 +11,16 @@
     {
         #region Fields
 
-        protected readonly IApplicationProducer _applicationProducer;
+        protected readonly IHardwareProducer _hardwareProducer;
 
         #endregion Fields
 
         #region Constructors
 
         //: base(connection)
-        public HardwareController(IApplicationProducer applicationProducer)
+        public HardwareController(IHardwareProducer hardwareProducer)
         {
-            _applicationProducer = applicationProducer;
+            _hardwareProducer = hardwareProducer;
         }
 
         #endregion Constructors
@@ -28,20 +28,20 @@
         #region public voids
 
         /// <summary>
-        /// Retornar a aplicação do usuário
+        /// Retornar uma lista de hardwares
         /// </summary>        
         /// <remarks>
-        /// Retornar a aplicação do usuário
+        /// Retornar uma lista de hardwares
         /// </remarks>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("get")]
+        [Route("getList")]
         [HttpPost]
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> GetList()
         {
-            await _applicationProducer.Get(CreateMessage());
+            await _hardwareProducer.GetList(CreateMessage());
             return Ok();
         }
 

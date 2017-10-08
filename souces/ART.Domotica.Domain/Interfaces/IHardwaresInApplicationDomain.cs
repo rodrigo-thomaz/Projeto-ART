@@ -2,10 +2,5 @@
 {
     public interface IHardwaresInApplicationDomain
     {
-        #region Methods
-
-        
-
-        #endregion Methods
     }
 }

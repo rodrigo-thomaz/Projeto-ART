@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ART.Domotica.Repository.Entities;
-    using ART.Domotica.Model;
     using ART.Domotica.Contract;
+    using ART.Domotica.Model;
+    using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IDSFamilyTempSensorDomain
@@ -17,7 +17,7 @@
 
         Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions();
 
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);        
+        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 
         Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message);
 

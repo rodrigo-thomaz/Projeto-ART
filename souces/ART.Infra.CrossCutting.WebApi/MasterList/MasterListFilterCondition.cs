@@ -1,5 +1,7 @@
 ﻿namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
+    #region Enumerations
+
     public enum MasterListFilterCondition
     {
         StartsWith = 2,
@@ -12,4 +14,6 @@
         LessThanOrEqual = 256,
         NotEqual = 512,
     }
+
+    #endregion Enumerations
 }

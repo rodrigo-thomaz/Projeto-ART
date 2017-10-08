@@ -1,16 +1,69 @@
-﻿using ART.Infra.CrossCutting.WebApi.MasterList;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-
-namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
+﻿namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using System.Reflection;
+
+    using ART.Infra.CrossCutting.WebApi.MasterList;
+
     public static class MasterListDTOHelper
     {
-        #region filter voids
+        #region Methods
+
+        public static void ApplySort<TEntity, TContract, TProperty>(IMasterListSortColumn sortColumn, ref IQueryable<TEntity> query, Expression<Func<TEntity, TProperty>> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, ref bool isFirstSortable)
+        {
+            var propertyName = ExpressionHelper.GetPropertyName<TContract, TProperty>(contractSelector);
+
+            if (propertyName != sortColumn.ColumnName)
+            {
+                return;
+            }
+
+            if (isFirstSortable)
+            {
+                isFirstSortable = false;
+                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
+                    query = query.OrderBy(entitySelector);
+                else
+                    query = query.OrderByDescending(entitySelector);
+            }
+            else
+            {
+                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
+                    query = ((IOrderedQueryable<TEntity>)query).ThenBy(entitySelector);
+                else
+                    query = ((IOrderedQueryable<TEntity>)query).ThenByDescending(entitySelector);
+            }
+        }
+
+        public static void ApplySort<TEntity, TContract, TProperty>(IMasterListSortColumn sortColumn, ref IEnumerable<TEntity> query, Func<TEntity, TProperty> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, ref bool isFirstSortable)
+        {
+            var propertyName = ExpressionHelper.GetPropertyName<TContract, TProperty>(contractSelector);
+
+            if (propertyName != sortColumn.ColumnName)
+            {
+                return;
+            }
+
+            if (isFirstSortable)
+            {
+                isFirstSortable = false;
+                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
+                    query = query.OrderBy(entitySelector);
+                else
+                    query = query.OrderByDescending(entitySelector);
+            }
+            else
+            {
+                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
+                    query = ((IOrderedEnumerable<TEntity>)query).ThenBy(entitySelector);
+                else
+                    query = ((IOrderedEnumerable<TEntity>)query).ThenByDescending(entitySelector);
+            }
+        }
 
         public static List<Expression<Func<TEntity, bool>>> CreateFilterExpression<TEntity, TContract, TProperty>(Expression<Func<TEntity, TProperty>> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, IMasterListFilterColumn filterColumn)
         {
@@ -141,62 +194,6 @@ namespace ART.Infra.CrossCutting.WebApi.MasterListDTO
             return Expression.Lambda<Func<TEntity, bool>>(methodCallExpression, parameter);
         }
 
-        #endregion
-
-        #region sort voids
-
-        public static void ApplySort<TEntity, TContract, TProperty>(IMasterListSortColumn sortColumn, ref IQueryable<TEntity> query, Expression<Func<TEntity, TProperty>> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, ref bool isFirstSortable)
-        {
-            var propertyName = ExpressionHelper.GetPropertyName<TContract, TProperty>(contractSelector);
-
-            if (propertyName != sortColumn.ColumnName)
-            {
-                return;
-            }
-
-            if (isFirstSortable)
-            {
-                isFirstSortable = false;
-                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
-                    query = query.OrderBy(entitySelector);
-                else
-                    query = query.OrderByDescending(entitySelector);
-            }
-            else
-            {
-                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
-                    query = ((IOrderedQueryable<TEntity>)query).ThenBy(entitySelector);
-                else
-                    query = ((IOrderedQueryable<TEntity>)query).ThenByDescending(entitySelector);
-            }
-        }        
-
-        public static void ApplySort<TEntity, TContract, TProperty>(IMasterListSortColumn sortColumn, ref IEnumerable<TEntity> query, Func<TEntity, TProperty> entitySelector, Expression<Func<TContract, TProperty>> contractSelector, ref bool isFirstSortable)
-        {
-            var propertyName = ExpressionHelper.GetPropertyName<TContract, TProperty>(contractSelector);
-
-            if (propertyName != sortColumn.ColumnName)
-            {
-                return;
-            }
-
-            if (isFirstSortable)
-            {
-                isFirstSortable = false;
-                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
-                    query = query.OrderBy(entitySelector);
-                else
-                    query = query.OrderByDescending(entitySelector);
-            }
-            else
-            {
-                if (sortColumn.SortDirection == MasterListSortDirection.Ascending)
-                    query = ((IOrderedEnumerable<TEntity>)query).ThenBy(entitySelector);
-                else
-                    query = ((IOrderedEnumerable<TEntity>)query).ThenByDescending(entitySelector);
-            }
-        }
-
-        #endregion
+        #endregion Methods
     }
 }

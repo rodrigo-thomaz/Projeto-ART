@@ -1,6 +1,9 @@
 ﻿using RabbitMQ.Client;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
+using ART.Infra.CrossCutting.MQ.Contract;
+using System.Threading.Tasks;
+using ART.Domotica.Constant;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -17,14 +20,14 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids
 
-        //public async Task Get(AuthenticatedMessageContract message)
-        //{
-        //    await Task.Run(() => 
-        //    {
-        //        var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-        //        _model.BasicPublish("", HardwareConstants.GetQueueName, null, payload);
-        //    });            
-        //}
+        public async Task GetList(AuthenticatedMessageContract message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", HardwareConstants.GetListQueueName, null, payload);
+            });
+        }
 
         #endregion
 
@@ -32,12 +35,12 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            //_model.QueueDeclare(
-            //      queue: HardwareConstants.GetQueueName
-            //    , durable: false
-            //    , exclusive: false
-            //    , autoDelete: true
-            //    , arguments: null);
+            _model.QueueDeclare(
+                  queue: HardwareConstants.GetListQueueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: true
+                , arguments: null);
 
             _basicProperties.Persistent = true;
         }

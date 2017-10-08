@@ -2,8 +2,18 @@
 {
     public class MasterListFilterColumn : IMasterListFilterColumn
     {
-        public string ColumnName { get; set; }
+        #region Properties
 
-        public MasterListFilterCriteria[] Criteria { get; set; }
+        public string ColumnName
+        {
+            get; set;
+        }
+
+        public MasterListFilterCriteria[] Criteria
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

@@ -1,31 +1,38 @@
-﻿using System.Collections.Generic;
-
-namespace ART.Infra.CrossCutting.WebApi.MasterList
+﻿namespace ART.Infra.CrossCutting.WebApi.MasterList
 {
+    using System.Collections.Generic;
+
     public class MasterListModelResponse<TMasterModel>
     {
-        #region private fields
+        #region Fields
 
-        private readonly int _totalRecords;
         private readonly List<TMasterModel> _data;
+        private readonly int _totalRecords;
 
-        #endregion
+        #endregion Fields
 
-        #region constructors
+        #region Constructors
 
         public MasterListModelResponse(int totalRecords, List<TMasterModel> data)
         {
             _totalRecords = totalRecords;
             _data = data;
-        } 
+        }
 
-        #endregion
+        #endregion Constructors
 
-        #region public properties
+        #region Properties
 
-        public int TotalRecords { get { return _totalRecords; } }
-        public List<TMasterModel> Data { get { return _data; } }
-        
-        #endregion        
+        public List<TMasterModel> Data
+        {
+            get { return _data; }
+        }
+
+        public int TotalRecords
+        {
+            get { return _totalRecords; }
+        }
+
+        #endregion Properties
     }
 }
