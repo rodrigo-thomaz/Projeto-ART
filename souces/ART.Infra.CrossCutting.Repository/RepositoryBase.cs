@@ -7,7 +7,7 @@ namespace ART.Infra.CrossCutting.Repository
         : IRepository<TDbContext, TEntity, TKey>
 
         where TDbContext : DbContext
-        where TEntity : class, IEntity<TKey>, new()
+        where TEntity : class, IEntity<TKey>//, new()
         where TKey : struct
 
     {

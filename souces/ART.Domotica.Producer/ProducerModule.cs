@@ -15,6 +15,7 @@
             builder.RegisterType<ApplicationUserProducer>().As<IApplicationUserProducer>();
             builder.RegisterType<DashboardProducer>().As<IDashboardProducer>();
             builder.RegisterType<DSFamilyTempSensorProducer>().As<IDSFamilyTempSensorProducer>();
+            builder.RegisterType<HardwareProducer>().As<IHardwareProducer>();
             builder.RegisterType<TemperatureScaleProducer>().As<ITemperatureScaleProducer>();
             builder.RegisterType<ThermometerDeviceProducer>().As<IThermometerDeviceProducer>();
         }

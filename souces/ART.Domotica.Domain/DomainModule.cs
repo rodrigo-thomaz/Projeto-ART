@@ -14,6 +14,8 @@
             builder.RegisterType<ApplicationDomain>().As<IApplicationDomain>();
             builder.RegisterType<ApplicationUserDomain>().As<IApplicationUserDomain>();
             builder.RegisterType<DSFamilyTempSensorDomain>().As<IDSFamilyTempSensorDomain>();
+            builder.RegisterType<HardwareDomain>().As<IHardwareDomain>();
+            builder.RegisterType<HardwaresInApplicationDomain>().As<IHardwaresInApplicationDomain>();
             builder.RegisterType<TemperatureScaleDomain>().As<ITemperatureScaleDomain>();
             builder.RegisterType<ThermometerDeviceDomain>().As<IThermometerDeviceDomain>();
         }

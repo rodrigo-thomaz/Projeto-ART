@@ -60,8 +60,12 @@
     <Compile Include="DomainModule.cs" />
     <Compile Include="Interfaces\IApplicationUserDomain.cs" />
     <Compile Include="Interfaces\IApplicationDomain.cs" />
+    <Compile Include="Interfaces\IHardwaresInApplicationDomain.cs" />
+    <Compile Include="Interfaces\IHardwareDomain.cs" />
     <Compile Include="Interfaces\ITemperatureScaleDomain.cs" />
     <Compile Include="Interfaces\IThermometerDeviceDomain.cs" />
+    <Compile Include="Services\HardwaresInApplicationDomain.cs" />
+    <Compile Include="Services\HardwareDomain.cs" />
     <Compile Include="Services\ApplicationDomain.cs" />
     <Compile Include="Services\ApplicationUserDomain.cs" />
     <Compile Include="Services\DSFamilyTempSensorDomain.cs" />
