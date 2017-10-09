@@ -17,6 +17,7 @@ app.controller('hardwareController', ['$scope', '$timeout', '$log', 'uiGridConst
         columnDefs: [
             { name: 'Id', field: 'id', width: 270 },
             { name: 'Pin', field: 'pin', width: 70 },
+            { name: 'Em aplicação', field: 'inApplication', width: 70 },
             { name: 'Data criação', field: 'createDateFormatted', width: 150 }
         ],
     };

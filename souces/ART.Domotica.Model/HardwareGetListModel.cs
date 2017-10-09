@@ -21,6 +21,8 @@
             get; set;
         }
 
+        public bool InApplication { get; set; }
+
         #endregion Properties
     }
 }

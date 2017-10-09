@@ -24,7 +24,9 @@
 
         public async Task<List<HardwareBase>> GetList()
         {
-            var data = await _context.Set<HardwareBase>().ToListAsync();            
+            var data = await _context.Set<HardwareBase>()
+                .Include(x => x.HardwaresInApplication)
+                .ToListAsync();            
             return data;
         }
 
