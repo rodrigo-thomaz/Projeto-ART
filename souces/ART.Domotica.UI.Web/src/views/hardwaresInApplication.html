@@ -2,6 +2,24 @@
     <h1 class="m-n font-thin h3">Hardwares</h1>
 </div>
 <div class="wrapper-md" ng-controller="hardwaresInApplicationController">
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="panel panel-default">
+                <div class="panel-heading font-bold">Procurar hardware</div>
+                <div class="panel-body">
+                    <form role="form">
+                        <div class="form-group">
+                            <label>Pin</label>
+                            <input type="text" class="form-control" maxlength="4" placeholder="Entre com o número do Pin">
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-primary">Procurar</button>
+                    </form>
+                </div>
+            </div>
+        </div>        
+    </div>
+
     <h4>Hardwares in application</h4>
     <div class="table-responsive m-b-lg">
         <div ui-grid="gridOptions"></div>
