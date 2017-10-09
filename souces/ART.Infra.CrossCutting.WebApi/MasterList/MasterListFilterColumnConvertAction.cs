@@ -2,8 +2,6 @@
 {
     using System;
 
-    using ART.Infra.CrossCutting.WebApi.MasterListDTO;
-
     public class MasterListFilterColumnConvertAction : EventArgs
     {
         #region Fields

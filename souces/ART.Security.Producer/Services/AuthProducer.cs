@@ -1,5 +1,6 @@
 ﻿using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
+using ART.Infra.CrossCutting.Utils;
 using ART.Security.Constant;
 using ART.Security.Contract;
 using ART.Security.Producer.Interfaces;

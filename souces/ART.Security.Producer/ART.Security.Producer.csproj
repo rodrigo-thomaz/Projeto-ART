@@ -66,6 +66,10 @@
       <Project>{F21ECDF3-626E-4EBD-B665-D20D93AC333D}</Project>
       <Name>ART.Infra.CrossCutting.MQ.Producer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Utils\ART.Infra.CrossCutting.Utils.csproj">
+      <Project>{A26AA9F8-C0E9-4624-B9A8-BE76F908BFD0}</Project>
+      <Name>ART.Infra.CrossCutting.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Security.Constant\ART.Security.Constant.csproj">
       <Project>{9C881537-DFCB-4359-A2DC-3F15DE130886}</Project>
       <Name>ART.Security.Constant</Name>

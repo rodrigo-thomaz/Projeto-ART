@@ -1,7 +1,5 @@
 ﻿namespace ART.Domotica.Domain.AutoMapper
 {
-    using ART.Domotica.Model;
-    using ART.Domotica.Repository.Entities;
 
     using global::AutoMapper;
 

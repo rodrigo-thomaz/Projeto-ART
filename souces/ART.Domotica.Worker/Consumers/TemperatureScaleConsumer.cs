@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
+using ART.Infra.CrossCutting.Utils;
 
 namespace ART.Domotica.Worker.Consumers
 {

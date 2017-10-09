@@ -24,6 +24,11 @@
             get; set;
         }
 
+        public string Pin
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }

@@ -4,6 +4,7 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
 using ART.Domotica.Constant;
+using ART.Infra.CrossCutting.Utils;
 
 namespace ART.Domotica.Producer.Services
 {

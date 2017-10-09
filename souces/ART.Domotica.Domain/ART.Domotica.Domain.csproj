@@ -101,6 +101,10 @@
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Utils\ART.Infra.CrossCutting.Utils.csproj">
+      <Project>{A26AA9F8-C0E9-4624-B9A8-BE76F908BFD0}</Project>
+      <Name>ART.Infra.CrossCutting.Utils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Security.Contract\ART.Security.Contract.csproj">
       <Project>{797D790B-26C7-4EF7-B38C-5F924168DB15}</Project>
       <Name>ART.Security.Contract</Name>

@@ -1,6 +1,7 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
+using ART.Infra.CrossCutting.Utils;
 using ART.Security.Constant;
 using ART.Security.Contract;
 using RabbitMQ.Client;

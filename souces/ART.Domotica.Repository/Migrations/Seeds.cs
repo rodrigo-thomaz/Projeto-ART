@@ -135,6 +135,7 @@
                     TemperatureScale = celsiusTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
+                    Pin = RandomString(4),
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor1);
@@ -154,6 +155,7 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    Pin = RandomString(4),
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor2);
@@ -178,6 +180,7 @@
                 thermometerDevice1 = new ThermometerDevice
                 {
                     MacAddress = thermometerDevice1MacAddress,
+                    Pin = RandomString(4),
                     CreateDate = DateTime.Now,
                 };
                 context.ThermometerDevice.Add(thermometerDevice1);
@@ -216,6 +219,14 @@
             context.SaveChanges();
 
             #endregion
+        }
+
+        private static Random random = new Random();
+        private static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         #endregion Methods

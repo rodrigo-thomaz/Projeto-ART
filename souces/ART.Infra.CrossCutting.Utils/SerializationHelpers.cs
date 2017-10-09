@@ -1,4 +1,4 @@
-﻿namespace ART.Infra.CrossCutting.MQ.Contract
+﻿namespace ART.Infra.CrossCutting.Utils
 {
     using System.Text;
 
@@ -18,8 +18,9 @@
         }
 
         public static byte[] SerializeToJsonBufferAsync(object value)
-        {
-            var json = JsonConvert.SerializeObject(value, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+        {            
+            var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            var json = JsonConvert.SerializeObject(value, settings);
             var result = Encoding.UTF8.GetBytes(json);
             return result;
         }

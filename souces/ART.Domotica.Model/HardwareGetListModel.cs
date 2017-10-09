@@ -6,12 +6,17 @@
     {
         #region Properties
 
-        public DateTime CreateDate
+        public long CreateDate
         {
             get; set;
         }
 
         public Guid Id
+        {
+            get; set;
+        }
+
+        public string Pin
         {
             get; set;
         }
