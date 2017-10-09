@@ -81,6 +81,18 @@
             await _hardwaresInApplicationRepository.Insert(hardwaresInApplicationEntity);
         }
 
+        public async Task DeleteHardware(AuthenticatedMessageContract<HardwaresInApplicationDeleteHardwareContract> message)
+        {
+            var hardwareEntity = await _hardwaresInApplicationRepository.GetById(message.Contract.HardwaresInApplicationId);
+
+            if (hardwareEntity == null)
+            {
+                throw new Exception("HardwaresInApplication not found");
+            }            
+
+            await _hardwaresInApplicationRepository.Delete(hardwareEntity);
+        }
+
         #endregion Methods
     }
 }

@@ -17,6 +17,8 @@
 
         Task InsertHardware(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message);
 
+        Task DeleteHardware(AuthenticatedMessageContract<HardwaresInApplicationDeleteHardwareContract> message);
+
         #endregion Methods
     }
 }

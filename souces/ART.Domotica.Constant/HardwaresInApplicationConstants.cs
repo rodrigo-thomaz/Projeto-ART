@@ -13,6 +13,9 @@
         public static readonly string InsertHardwareCompletedQueueName = "HardwaresInApplication.InsertHardwareCompleted";
         public static readonly string InsertHardwareQueueName = "HardwaresInApplication.InsertHardware";
 
+        public static readonly string DeleteHardwareCompletedQueueName = "HardwaresInApplication.DeleteHardwareCompleted";
+        public static readonly string DeleteHardwareQueueName = "HardwaresInApplication.DeleteHardware";
+
         #endregion Fields
     }
 }

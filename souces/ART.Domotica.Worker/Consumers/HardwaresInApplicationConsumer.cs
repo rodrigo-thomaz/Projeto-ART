@@ -16,9 +16,10 @@
     {
         #region Fields
 
-        private readonly EventingBasicConsumer _getListConsumer;
+        private readonly EventingBasicConsumer _getListConsumer;        
         private readonly EventingBasicConsumer _searchPinConsumer;
         private readonly EventingBasicConsumer _insertHardwareConsumer;
+        private readonly EventingBasicConsumer _deleteHardwareConsumer;
 
         private readonly IHardwaresInApplicationDomain _hardwaresInApplicationDomain;
 
@@ -32,6 +33,7 @@
             _getListConsumer = new EventingBasicConsumer(_model);
             _searchPinConsumer = new EventingBasicConsumer(_model);
             _insertHardwareConsumer = new EventingBasicConsumer(_model);
+            _deleteHardwareConsumer = new EventingBasicConsumer(_model);
 
             _hardwaresInApplicationDomain = hardwaresInApplicationDomain;
 
@@ -65,13 +67,22 @@
                , autoDelete: true
                , arguments: null);
 
+            _model.QueueDeclare(
+                 queue: HardwaresInApplicationConstants.DeleteHardwareQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: true
+               , arguments: null);
+
             _getListConsumer.Received += GetListReceived;
             _searchPinConsumer.Received += SearchPinReceived;
             _insertHardwareConsumer.Received += InsertHardwareReceived;
+            _deleteHardwareConsumer.Received += DeleteHardwareReceived;
 
             _model.BasicConsume(HardwaresInApplicationConstants.GetListQueueName, false, _getListConsumer);
             _model.BasicConsume(HardwaresInApplicationConstants.SearchPinQueueName, false, _searchPinConsumer);
             _model.BasicConsume(HardwaresInApplicationConstants.InsertHardwareQueueName, false, _insertHardwareConsumer);
+            _model.BasicConsume(HardwaresInApplicationConstants.DeleteHardwareQueueName, false, _deleteHardwareConsumer);
         }
 
         #endregion Methods
@@ -130,6 +141,24 @@
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.InsertHardwareCompletedQueueName);
             Console.WriteLine("[{0}] Ok", HardwaresInApplicationConstants.InsertHardwareCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, null);
+        }
+
+        private void DeleteHardwareReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(DeleteHardwareReceivedAsync(sender, e));
+        }
+
+        private async Task DeleteHardwareReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            Console.WriteLine();
+            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.DeleteHardwareQueueName, Encoding.UTF8.GetString(e.Body));
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwaresInApplicationDeleteHardwareContract>>(e.Body);
+            await _hardwaresInApplicationDomain.DeleteHardware(message);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.DeleteHardwareCompletedQueueName);
+            Console.WriteLine("[{0}] Ok", HardwaresInApplicationConstants.DeleteHardwareCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
         }
 

@@ -9,6 +9,17 @@ app.controller('hardwaresInApplicationController', ['$scope', '$timeout', '$log'
         $scope.$apply();
     }
 
+    var onDeleteHardwareClick = function () {
+        hardwaresInApplicationJoinService.deleteHardware($scope.hardware.hardwaresInApplicationId);
+    }
+
+    var onDeleteHardwareCompleted = function (payload) {
+        alert("hardware deletado!!!");
+    }
+
+    EventDispatcher.on('hardwaresInApplicationService_onGetListCompleted', onGetListCompleted);
+    EventDispatcher.on('hardwaresInApplicationService_onDeleteHardwareReceived', onDeleteHardwareCompleted);
+
     $scope.gridOptions = {
         enableFiltering: true,
         enableSorting: true,
@@ -21,8 +32,8 @@ app.controller('hardwaresInApplicationController', ['$scope', '$timeout', '$log'
         ],
     };
 
-    hardwaresInApplicationService.getList();
+    $scope.deleteHardwareClick = onDeleteHardwareClick;
 
-    EventDispatcher.on('hardwaresInApplicationService_onGetListCompleted', onGetListCompleted);
+    hardwaresInApplicationService.getList();
 
 }]);

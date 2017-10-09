@@ -15,14 +15,14 @@ app.controller('hardwaresInApplicationJoinController', ['$scope', '$timeout', '$
 
     var onInsertHardwareCompleted = function (payload) {
         alert("hardware inserido!!!");
-    }
+    }    
 
     EventDispatcher.on('hardwaresInApplicationService_onSearchPinReceived', onSearchPinCompleted);
-    EventDispatcher.on('hardwaresInApplicationService_onInsertHardwareReceived', onInsertHardwareCompleted);
+    EventDispatcher.on('hardwaresInApplicationService_onInsertHardwareReceived', onInsertHardwareCompleted);    
 
     $scope.pin = "";
     $scope.hardware = {};
-    $scope.onSearchClick = onSearchClick;
-    $scope.onInsertHardwareClick = onInsertHardwareClick;
+    $scope.searchClick = onSearchClick;
+    $scope.insertHardwareClick = onInsertHardwareClick;    
 
 }]);

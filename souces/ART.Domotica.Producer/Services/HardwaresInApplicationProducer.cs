@@ -49,6 +49,15 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
+        public async Task DeleteHardware(AuthenticatedMessageContract<HardwaresInApplicationDeleteHardwareContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", HardwaresInApplicationConstants.DeleteHardwareQueueName, null, payload);
+            });
+        }
+
         #endregion
 
         #region private voids

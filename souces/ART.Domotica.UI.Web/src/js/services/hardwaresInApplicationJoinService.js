@@ -7,6 +7,7 @@ app.factory('hardwaresInApplicationJoinService', ['$http', '$log', 'ngAuthSettin
 
     var onConnected = function () {
         stompService.client.subscribe('/topic/' + stompService.session + '-HardwaresInApplication.SearchPinCompleted', onSearchPinCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-HardwaresInApplication.InsertHardwareCompleted', onInsertHardwareCompleted);        
     }
 
     var searchPin = function (pin) {
@@ -25,7 +26,7 @@ app.factory('hardwaresInApplicationJoinService', ['$http', '$log', 'ngAuthSettin
         return $http.post(serviceBase + 'api/hardwaresInApplication/insertHardware', data).then(function (results) {
             //alert('envio bem sucedido');
         });
-    };  
+    };     
 
     var onSearchPinCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
@@ -37,7 +38,7 @@ app.factory('hardwaresInApplicationJoinService', ['$http', '$log', 'ngAuthSettin
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         EventDispatcher.trigger('hardwaresInApplicationService_onInsertHardwareReceived', data);
-    }
+    }    
 
     EventDispatcher.on('stompService_onConnected', onConnected);
 
@@ -48,7 +49,7 @@ app.factory('hardwaresInApplicationJoinService', ['$http', '$log', 'ngAuthSettin
     // serviceFactory
 
     serviceFactory.searchPin = searchPin;
-    serviceFactory.insertHardware = insertHardware;
+    serviceFactory.insertHardware = insertHardware;    
 
     return serviceFactory;
 

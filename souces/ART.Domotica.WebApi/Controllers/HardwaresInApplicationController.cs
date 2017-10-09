@@ -65,6 +65,24 @@
         }
 
         /// <summary>
+        /// Remove um hardware pelo id
+        /// </summary>        
+        /// <remarks>
+        /// Remove um hardware pelo id
+        /// </remarks>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("deleteHardware")]
+        [HttpPost]
+        public async Task<IHttpActionResult> deleteHardware(HardwaresInApplicationDeleteHardwareContract contract)
+        {
+            await _hardwaresInApplicationProducer.DeleteHardware(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
         /// Retornar uma lista de hardwares da aplicação
         /// </summary>        
         /// <remarks>
