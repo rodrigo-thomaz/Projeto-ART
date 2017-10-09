@@ -9,6 +9,12 @@
 
     public class Seeds
     {
+        #region Fields
+
+        private static Random random = new Random();
+
+        #endregion Fields
+
         #region Methods
 
         public static void Execute(ARTDbContext context)
@@ -221,7 +227,6 @@
             #endregion
         }
 
-        private static Random random = new Random();
         private static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

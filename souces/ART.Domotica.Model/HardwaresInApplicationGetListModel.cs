@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class HardwareGetListModel
+    public class HardwaresInApplicationGetListModel
     {
         #region Properties
 
@@ -12,16 +12,6 @@
         }
 
         public Guid Id
-        {
-            get; set;
-        }
-
-        public bool InApplication
-        {
-            get; set;
-        }
-
-        public string Pin
         {
             get; set;
         }

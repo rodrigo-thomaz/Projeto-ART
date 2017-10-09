@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IHardwaresInApplicationProducer.cs" />
     <Compile Include="Interfaces\IHardwareProducer.cs" />
     <Compile Include="Interfaces\IApplicationProducer.cs" />
     <Compile Include="Interfaces\IApplicationUserProducer.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Interfaces\IThermometerDeviceProducer.cs" />
     <Compile Include="ProducerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\HardwaresInApplicationProducer.cs" />
     <Compile Include="Services\HardwareProducer.cs" />
     <Compile Include="Services\ApplicationProducer.cs" />
     <Compile Include="Services\ApplicationUserProducer.cs" />

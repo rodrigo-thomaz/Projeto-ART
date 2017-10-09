@@ -4,16 +4,20 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class InitialCreate2 : DbMigration
     {
-        public override void Up()
-        {
-            AlterColumn("dbo.HardwareBase", "Pin", c => c.String(nullable: false, maxLength: 4, fixedLength: true));
-            CreateIndex("dbo.HardwareBase", "Pin", unique: true);
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropIndex("dbo.HardwareBase", new[] { "Pin" });
             AlterColumn("dbo.HardwareBase", "Pin", c => c.String(maxLength: 4, fixedLength: true));
         }
+
+        public override void Up()
+        {
+            AlterColumn("dbo.HardwareBase", "Pin", c => c.String(nullable: false, maxLength: 4, fixedLength: true));
+            CreateIndex("dbo.HardwareBase", "Pin", unique: true);
+        }
+
+        #endregion Methods
     }
 }

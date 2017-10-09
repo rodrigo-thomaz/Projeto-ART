@@ -1,27 +1,33 @@
 ﻿namespace ART.Domotica.Worker.Consumers
 {
+    using ART.Domotica.Constant;
     using ART.Domotica.Domain.Interfaces;
+    using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
-
+    using ART.Infra.CrossCutting.Utils;
     using RabbitMQ.Client;
+    using RabbitMQ.Client.Events;
+    using System;
+    using System.Text;
+    using System.Threading.Tasks;
 
     public class HardwaresInApplicationConsumer : ConsumerBase
     {
         #region Fields
 
-        //private readonly EventingBasicConsumer _getConsumer;
-        private readonly IApplicationDomain _applicationDomain;
+        private readonly EventingBasicConsumer _getListConsumer;
+        private readonly IHardwaresInApplicationDomain _hardwaresInApplicationDomain;
 
         #endregion Fields
 
         #region Constructors
 
-        public HardwaresInApplicationConsumer(IConnection connection, IApplicationDomain applicationDomain)
+        public HardwaresInApplicationConsumer(IConnection connection, IHardwaresInApplicationDomain hardwaresInApplicationDomain)
             : base(connection)
         {
-            //_getConsumer = new EventingBasicConsumer(_model);
+            _getListConsumer = new EventingBasicConsumer(_model);
 
-            _applicationDomain = applicationDomain;
+            _hardwaresInApplicationDomain = hardwaresInApplicationDomain;
 
             Initialize();
         }
@@ -32,7 +38,7 @@
 
         private void Initialize()
         {
-            var queueName = "";// ApplicationConstants.GetQueueName;
+            var queueName = HardwaresInApplicationConstants.GetListQueueName;
 
             _model.QueueDeclare(
                  queue: queueName
@@ -41,32 +47,32 @@
                , autoDelete: true
                , arguments: null);
 
-            //_getConsumer.Received += GetReceived;
+            _getListConsumer.Received += GetListReceived;
 
-            //_model.BasicConsume(queueName, false, _getConsumer);
+            _model.BasicConsume(queueName, false, _getListConsumer);
         }
 
         #endregion Methods
 
-        #region Other
+        #region private voids
 
-        //private void GetReceived(object sender, BasicDeliverEventArgs e)
-        //{
-        //    Task.WaitAll(GetReceivedAsync(sender, e));
-        //}
-        //private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
-        //{
-        //    Console.WriteLine();
-        //    Console.WriteLine("[{0}] {1}", ApplicationConstants.GetQueueName, Encoding.UTF8.GetString(e.Body));
-        //    _model.BasicAck(e.DeliveryTag, false);
-        //    var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-        //    var data = await _applicationDomain.Get(message);
-        //    var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
-        //    var exchange = "amq.topic";
-        //    var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetCompletedQueueName);
-        //    Console.WriteLine("[{0}] {1}", ApplicationConstants.GetCompletedQueueName, Encoding.UTF8.GetString(buffer));
-        //    _model.BasicPublish(exchange, rountingKey, null, buffer);
-        //}
+        private void GetListReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(GetListReceivedAsync(sender, e));
+        }
+        private async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            Console.WriteLine();
+            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.GetListQueueName, Encoding.UTF8.GetString(e.Body));
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
+            var data = await _hardwaresInApplicationDomain.GetList(message);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.GetListCompletedQueueName);
+            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.GetListCompletedQueueName, Encoding.UTF8.GetString(buffer));
+            _model.BasicPublish(exchange, rountingKey, null, buffer);
+        }
 
         #endregion Other
     }

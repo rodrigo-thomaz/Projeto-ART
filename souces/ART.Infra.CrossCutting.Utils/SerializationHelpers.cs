@@ -18,7 +18,7 @@
         }
 
         public static byte[] SerializeToJsonBufferAsync(object value)
-        {            
+        {
             var settings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
             var json = JsonConvert.SerializeObject(value, settings);
             var result = Encoding.UTF8.GetBytes(json);

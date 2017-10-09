@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Domain.AutoMapper
 {
-
     using global::AutoMapper;
 
     public class HardwaresInApplicationProfile : Profile
