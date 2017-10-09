@@ -32,9 +32,7 @@ app.factory('hardwaresInApplicationService', ['$http', '$log', 'ngAuthSettings',
     }
 
     var onDeleteHardwareCompleted = function (payload) {
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
-        EventDispatcher.trigger('hardwaresInApplicationService_onDeleteHardwareReceived', data);
+        EventDispatcher.trigger('hardwaresInApplicationService_onDeleteHardwareReceived');
     }
 
     EventDispatcher.on('stompService_onConnected', onConnected);

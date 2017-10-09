@@ -9,18 +9,18 @@ app.controller('hardwaresInApplicationController', ['$scope', '$timeout', '$log'
         $scope.$apply();
     }
 
-    var onDeleteHardwareClick = function () {
-        hardwaresInApplicationJoinService.deleteHardware($scope.hardware.hardwaresInApplicationId);
+    var onDeleteHardwareClick = function (hardware) {
+        hardwaresInApplicationService.deleteHardware(hardware.id);
     }
 
-    var onDeleteHardwareCompleted = function (payload) {
+    var onDeleteHardwareCompleted = function () {
         alert("hardware deletado!!!");
     }
 
     EventDispatcher.on('hardwaresInApplicationService_onGetListCompleted', onGetListCompleted);
     EventDispatcher.on('hardwaresInApplicationService_onDeleteHardwareReceived', onDeleteHardwareCompleted);
 
-    $scope.gridOptions = {
+    $scope.gridOptions = {                                                 
         enableFiltering: true,
         enableSorting: true,
         showFooter: true,
@@ -28,7 +28,8 @@ app.controller('hardwaresInApplicationController', ['$scope', '$timeout', '$log'
         data: [],
         columnDefs: [
             { name: 'Id', field: 'id', width: 270 },
-            { name: 'Data criação', field: 'createDateFormatted', width: 150 }
+            { name: 'Data criação', field: 'createDateFormatted', width: 150 },
+            { name: 'Ações', cellTemplate: '<div class="text-center"><a ng-click="grid.appScope.deleteHardwareClick(row.entity)" class="btn btn-danger" href="" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>', width: 85 },
         ],
     };
 

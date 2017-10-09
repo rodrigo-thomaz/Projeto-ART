@@ -35,9 +35,7 @@ app.factory('hardwaresInApplicationJoinService', ['$http', '$log', 'ngAuthSettin
     }
 
     var onInsertHardwareCompleted = function (payload) {
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
-        EventDispatcher.trigger('hardwaresInApplicationService_onInsertHardwareReceived', data);
+        EventDispatcher.trigger('hardwaresInApplicationService_onInsertHardwareReceived');
     }    
 
     EventDispatcher.on('stompService_onConnected', onConnected);
