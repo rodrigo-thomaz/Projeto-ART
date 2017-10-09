@@ -73,6 +73,15 @@ angular.module('app')
                       'js/controllers/hardwaresInApplicationController.js',
                   ])
               })
+              .state('app.hardwaresInApplicationJoin', {
+                  url: '/hardwaresInApplicationJoin',
+                  templateUrl: 'views/hardwaresInApplicationJoin.html',
+                  resolve: load([
+                      'ui.grid',
+                      'js/services/hardwaresInApplicationJoinService.js',
+                      'js/controllers/hardwaresInApplicationJoinController.js',
+                  ])
+              })
 
               // admin
               .state('app.admin', {
