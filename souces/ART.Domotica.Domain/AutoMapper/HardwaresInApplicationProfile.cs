@@ -1,5 +1,7 @@
 ﻿namespace ART.Domotica.Domain.AutoMapper
 {
+    using ART.Domotica.Model;
+    using ART.Domotica.Repository.Entities;
     using global::AutoMapper;
 
     public class HardwaresInApplicationProfile : Profile
@@ -8,7 +10,7 @@
 
         public HardwaresInApplicationProfile()
         {
-            //CreateMap<Application, ApplicationGetModel>();
+            CreateMap<HardwareBase, HardwaresInApplicationSearchPinModel>();
         }
 
         #endregion Constructors

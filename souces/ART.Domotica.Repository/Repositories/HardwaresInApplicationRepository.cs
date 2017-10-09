@@ -34,6 +34,15 @@
             return data;
         }
 
+        public async Task<HardwareBase> SearchPin(string pin)
+        {
+            var data = await _context.Set<HardwareBase>()
+                .Where(x => x.Pin == pin)
+                .SingleAsync();
+
+            return data;
+        }
+
         #endregion Methods
     }
 }

@@ -5,6 +5,7 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.Utils;
+using ART.Domotica.Contract;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -30,6 +31,15 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
+        public async Task SearchPin(AuthenticatedMessageContract<HardwaresInApplicationSearchPinContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", HardwaresInApplicationConstants.SearchPinQueueName, null, payload);
+            });
+        }
+
         #endregion
 
         #region private voids
@@ -42,6 +52,13 @@ namespace ART.Domotica.Producer.Services
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
+
+            _model.QueueDeclare(
+                 queue: HardwaresInApplicationConstants.SearchPinQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: true
+               , arguments: null);
 
             _basicProperties.Persistent = true;
         }
