@@ -16,6 +16,7 @@
             builder.RegisterApiControllers(typeof(DashboardController).Assembly);
             builder.RegisterApiControllers(typeof(DSFamilyTempSensorController).Assembly);
             builder.RegisterApiControllers(typeof(HardwareController).Assembly);
+            builder.RegisterApiControllers(typeof(HardwaresInApplicationController).Assembly);
             builder.RegisterApiControllers(typeof(TemperatureScaleController).Assembly);
             builder.RegisterApiControllers(typeof(ThermometerDeviceController).Assembly);
         }

@@ -17,13 +17,11 @@ app.controller('hardwaresInApplicationController', ['$scope', '$timeout', '$log'
         data: [],
         columnDefs: [
             { name: 'Id', field: 'id', width: 270 },
-            { name: 'Pin', field: 'pin', width: 70 },
-            { name: 'Em uso', field: 'inApplication', cellTemplate: '<div class="checkbox text-center"><label class="i-checks"><input disabled type="checkbox" ng-checked="{{grid.getCellValue(row, col)}}" value=""><i></i> </label></div>', width: 85 },
             { name: 'Data criação', field: 'createDateFormatted', width: 150 }
         ],
     };
 
-    hardwareService.getList();
+    hardwaresInApplicationService.getList();
 
     EventDispatcher.on('hardwaresInApplicationService_onGetListCompleted', onGetListCompleted);
 

@@ -8,6 +8,7 @@
     using System.Threading.Tasks;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
 
     public class HardwaresInApplicationRepository : RepositoryBase<ARTDbContext, HardwaresInApplication, Guid>, IHardwaresInApplicationRepository
     {
@@ -22,10 +23,14 @@
 
         #region Methods
 
-        public async Task<List<HardwaresInApplication>> GetList()
+        public async Task<List<HardwaresInApplication>> GetList(Guid applicationUserId)
         {
-            var data = await _context.HardwaresInApplication
-                .ToListAsync();
+            IQueryable<HardwaresInApplication> query = from hia in _context.HardwaresInApplication
+                                                   join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
+                                                   where au.Id == applicationUserId
+                                                   select hia;
+
+            var data = await query.ToListAsync();
             return data;
         }
 

@@ -31,7 +31,7 @@
 
         public async Task<List<HardwaresInApplicationGetListModel>> GetList(AuthenticatedMessageContract message)
         {
-            var data = await _hardwaresInApplicationRepository.GetList();
+            var data = await _hardwaresInApplicationRepository.GetList(message.ApplicationUserId);
             var result = Mapper.Map<List<HardwaresInApplication>, List<HardwaresInApplicationGetListModel>>(data);
             return result;
         }

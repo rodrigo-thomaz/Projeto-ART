@@ -50,10 +50,37 @@
                     <span>Admin</span>
                 </a>
             </li>
-            <li ui-sref-active="active">
-                <a ui-sref="app.admin.hardware">
-                    <span>Hardware</span>
+            <li>
+                <a href class="auto">
+                    <span class="pull-right text-muted">
+                        <i class="fa fa-fw fa-angle-right text"></i>
+                        <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                    <span>Dispositivos</span>
                 </a>
+                <ul class="nav dker">
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.admin.thermometerDevice">
+                            <span>Termômetro</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href class="auto">
+                    <span class="pull-right text-muted">
+                        <i class="fa fa-fw fa-angle-right text"></i>
+                        <i class="fa fa-fw fa-angle-down text-active"></i>
+                    </span>
+                    <span>Sensores</span>
+                </a>
+                <ul class="nav dker">
+                    <li ui-sref-active="active">
+                        <a ui-sref="app.admin.dsFamilyTempSensor">
+                            <span>DS Family Temp</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </li>

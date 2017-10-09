@@ -38,6 +38,7 @@
                 x.AddProfile(new HardwareProfile());
                 x.AddProfile(new HardwaresInApplicationProfile());
                 x.AddProfile(new TemperatureScaleProfile());
+                x.AddProfile(new ThermometerDeviceProfile());
             });
 
             IContainer container = builder.Build();

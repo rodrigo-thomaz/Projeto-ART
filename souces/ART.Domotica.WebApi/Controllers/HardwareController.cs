@@ -17,7 +17,6 @@
 
         #region Constructors
 
-        //: base(connection)
         public HardwareController(IHardwareProducer hardwareProducer)
         {
             _hardwareProducer = hardwareProducer;

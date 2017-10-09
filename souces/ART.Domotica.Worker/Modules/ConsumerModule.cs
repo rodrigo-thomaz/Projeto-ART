@@ -16,6 +16,7 @@
             builder.RegisterType<HardwareConsumer>().SingleInstance();
             builder.RegisterType<HardwaresInApplicationConsumer>().SingleInstance();
             builder.RegisterType<TemperatureScaleConsumer>().SingleInstance();
+            builder.RegisterType<ThermometerDeviceConsumer>().SingleInstance();
         }
 
         #endregion Methods

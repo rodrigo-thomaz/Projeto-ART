@@ -64,28 +64,39 @@ angular.module('app')
                       'js/controllers/sensorsController.js',
                   ])
               })
+              .state('app.hardwaresInApplication', {
+                  url: '/hardwaresInApplication',
+                  templateUrl: 'views/hardwaresInApplication.html',
+                  resolve: load([
+                      'ui.grid',
+                      'js/services/hardwaresInApplicationService.js',
+                      'js/controllers/hardwaresInApplicationController.js',
+                  ])
+              })
+
               // admin
               .state('app.admin', {
                   url: '/admin',
                   template: '<div ui-view class="fade-in-down"></div>'
               })  
-              .state('app.admin.hardware', {
-                  url: '/hardware',
-                  templateUrl: 'views/hardware.html',
+              .state('app.admin.thermometerDevice', {
+                  url: '/admin/thermometerDevice',
+                  templateUrl: 'views/admin/thermometerDeviceAdmin.html',
                   resolve: load([
                       'ui.grid',
-                      'js/services/hardwareService.js',
-                      'js/controllers/hardwareController.js',
+                      'js/services/admin/thermometerDeviceAdminService.js',
+                      'js/controllers/admin/thermometerDeviceAdminController.js',
                   ])
-              })
-              .state('app.hardwaresInApplication', {
-                  url: '/hardwaresInApplication',
-                  templateUrl: 'views/hardwaresInApplication.html',
+              })              
+              .state('app.admin.dsFamilyTempSensor', {
+                  url: '/admin/dsFamilyTempSensor',
+                  templateUrl: 'views/admin/dsFamilyTempSensorAdmin.html',
                   resolve: load([
-                      'js/services/hardwaresInApplicationService.js',
-                      'js/controllers/hardwaresInApplicationController.js',
+                      'ui.grid',
+                      'js/services/admin/dsFamilyTempSensorAdminService.js',
+                      'js/controllers/admin/dsFamilyTempSensorAdminController.js',
                   ])
-              })
+              }) 
 
               // pages
               .state('app.page', {

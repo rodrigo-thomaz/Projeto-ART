@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('hardwareController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'hardwareService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, hardwareService) {    
+app.controller('thermometerDeviceAdminController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'thermometerDeviceAdminService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, thermometerDeviceAdminService) {    
 
     var onGetListCompleted = function (data) {
         for (var i = 0; i < data.length; i++) {
@@ -23,8 +23,8 @@ app.controller('hardwareController', ['$scope', '$timeout', '$log', 'uiGridConst
         ],
     };    
 
-    hardwareService.getList();
+    thermometerDeviceAdminService.getList();
 
-    EventDispatcher.on('hardwareService_onGetListCompleted', onGetListCompleted);
+    EventDispatcher.on('thermometerDeviceAdminService_onGetListCompleted', onGetListCompleted);
 
 }]);

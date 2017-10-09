@@ -15,6 +15,7 @@
         private readonly HardwareConsumer _hardwareConsumer;
         private readonly HardwaresInApplicationConsumer _hardwaresInApplicationConsumer;
         private readonly TemperatureScaleConsumer _temperatureScaleConsumer;
+        private readonly ThermometerDeviceConsumer _thermometerDeviceConsumer;
 
         #endregion Fields
 
@@ -28,6 +29,7 @@
             , TemperatureScaleConsumer temperatureScaleConsumer
             , HardwareConsumer hardwareConsumer
             , HardwaresInApplicationConsumer hardwaresInApplicationConsumer
+            , ThermometerDeviceConsumer thermometerDeviceConsumer
             )
         {
             _connection = connection;
@@ -37,6 +39,7 @@
             _hardwareConsumer = hardwareConsumer;
             _hardwaresInApplicationConsumer = hardwaresInApplicationConsumer;
             _temperatureScaleConsumer = temperatureScaleConsumer;
+            _thermometerDeviceConsumer = thermometerDeviceConsumer;
         }
 
         #endregion Constructors
