@@ -59,7 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="favicon.ico" />
+    <Content Include="src\img\favicon.ico" />
     <Content Include="libs\angular\angular-event-dispatcher\angular-event-dispatcher.js" />
     <Content Include="libs\angular\angular-event-dispatcher\angular-event-dispatcher.min.js" />
     <Content Include="libs\angular\angular-locales\angular-locale_pt-br.js" />
