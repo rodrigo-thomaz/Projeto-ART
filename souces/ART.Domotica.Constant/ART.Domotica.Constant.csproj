@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="ThermometerDeviceConstants.cs" />
     <Compile Include="HardwaresInApplicationConstants.cs" />
-    <Compile Include="HardwareConstants.cs" />
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="DSFamilyTempSensorConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

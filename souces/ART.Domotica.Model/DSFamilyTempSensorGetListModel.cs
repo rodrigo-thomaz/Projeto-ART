@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class HardwareGetListModel
+    public class DSFamilyTempSensorGetListModel
     {
         #region Properties
 
@@ -17,11 +17,6 @@
         }
 
         public bool InApplication
-        {
-            get; set;
-        }
-
-        public string Pin
         {
             get; set;
         }

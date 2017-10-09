@@ -19,6 +19,7 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
+        private readonly EventingBasicConsumer _getListConsumer;
         private readonly EventingBasicConsumer _getAllConsumer;
         private readonly EventingBasicConsumer _getAllResolutionsConsumer;
         private readonly EventingBasicConsumer _setResolutionConsumer;
@@ -33,6 +34,7 @@ namespace ART.Domotica.Worker.Consumers
 
         public DSFamilyTempSensorConsumer(IConnection connection, IDSFamilyTempSensorDomain dsFamilyTempSensorDomain) : base(connection)
         {
+            _getListConsumer = new EventingBasicConsumer(_model);
             _getAllConsumer = new EventingBasicConsumer(_model);
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
@@ -50,6 +52,13 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
+            _model.QueueDeclare(
+                 queue: DSFamilyTempSensorConstants.GetListAdminQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: true
+               , arguments: null);
+
             _model.QueueDeclare(
                  queue: DSFamilyTempSensorConstants.GetAllQueueName
                , durable: false
@@ -85,18 +94,39 @@ namespace ART.Domotica.Worker.Consumers
                 , autoDelete: false
                 , arguments: null);
 
+            _getListConsumer.Received += GetListReceived;
             _getAllConsumer.Received += GetAllReceived;
             _getAllResolutionsConsumer.Received += GetAllResolutionsReceived;
             _setResolutionConsumer.Received += SetResolutionReceived;
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
             _setLowAlarmConsumer.Received += SetLowAlarmReceived;
 
+            _model.BasicConsume(DSFamilyTempSensorConstants.GetListAdminQueueName, false, _getListConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetResolutionQueueName, false, _setResolutionConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
         }
+
+        private void GetListReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(GetListReceivedAsync(sender, e));
+        }
+        private async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            Console.WriteLine();
+            Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.GetListAdminQueueName, Encoding.UTF8.GetString(e.Body));
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
+            var data = await _dsFamilyTempSensorDomain.GetList(message);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.GetListCompletedAdminQueueName);
+            Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.GetListCompletedAdminQueueName, Encoding.UTF8.GetString(buffer));
+            _model.BasicPublish(exchange, rountingKey, null, buffer);
+        }
+
 
         private void GetAllReceived(object sender, BasicDeliverEventArgs e)
         {

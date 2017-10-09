@@ -13,7 +13,6 @@
             builder.RegisterType<ApplicationConsumer>().SingleInstance();
             builder.RegisterType<ApplicationUserConsumer>().SingleInstance();
             builder.RegisterType<DSFamilyTempSensorConsumer>().SingleInstance();
-            builder.RegisterType<HardwareConsumer>().SingleInstance();
             builder.RegisterType<HardwaresInApplicationConsumer>().SingleInstance();
             builder.RegisterType<TemperatureScaleConsumer>().SingleInstance();
             builder.RegisterType<ThermometerDeviceConsumer>().SingleInstance();

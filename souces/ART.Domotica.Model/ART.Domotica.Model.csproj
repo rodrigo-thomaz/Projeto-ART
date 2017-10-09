@@ -40,9 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSFamilyTempSensorGetListModel.cs" />
     <Compile Include="ThermometerDeviceGetListModel.cs" />
     <Compile Include="HardwaresInApplicationGetListModel.cs" />
-    <Compile Include="HardwareGetListModel.cs" />
     <Compile Include="DSFamilyTempSensorGetAllModel.cs" />
     <Compile Include="DSFamilyTempSensorResolutionGetAllModel.cs" />
     <Compile Include="TemperatureScaleGetAllModel.cs" />

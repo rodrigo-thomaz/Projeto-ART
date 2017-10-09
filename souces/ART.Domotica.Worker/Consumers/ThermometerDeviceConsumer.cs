@@ -16,18 +16,18 @@
         #region Fields
 
         private readonly EventingBasicConsumer _getListConsumer;
-        private readonly IThermometerDeviceDomain _thermometerDevice;
+        private readonly IThermometerDeviceDomain _thermometerDeviceDomain;
 
         #endregion Fields
 
         #region Constructors
 
-        public ThermometerDeviceConsumer(IConnection connection, IThermometerDeviceDomain thermometerDevice)
+        public ThermometerDeviceConsumer(IConnection connection, IThermometerDeviceDomain thermometerDeviceDomain)
             : base(connection)
         {
             _getListConsumer = new EventingBasicConsumer(_model);
 
-            _thermometerDevice = thermometerDevice;
+            _thermometerDeviceDomain = thermometerDeviceDomain;
 
             Initialize();
         }
@@ -38,10 +38,8 @@
 
         private void Initialize()
         {
-            var queueName = ThermometerDeviceConstants.GetListAdminQueueName;
-
             _model.QueueDeclare(
-                 queue: queueName
+                 queue: ThermometerDeviceConstants.GetListAdminQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
@@ -49,7 +47,7 @@
 
             _getListConsumer.Received += GetListReceived;
 
-            _model.BasicConsume(queueName, false, _getListConsumer);
+            _model.BasicConsume(ThermometerDeviceConstants.GetListAdminQueueName, false, _getListConsumer);
         }
 
         #endregion Methods
@@ -66,7 +64,7 @@
             Console.WriteLine("[{0}] {1}", ThermometerDeviceConstants.GetListAdminQueueName, Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var data = await _thermometerDevice.GetList(message);
+            var data = await _thermometerDeviceDomain.GetList(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ThermometerDeviceConstants.GetListCompletedAdminQueueName);

@@ -35,7 +35,6 @@
                 x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
-                x.AddProfile(new HardwareProfile());
                 x.AddProfile(new HardwaresInApplicationProfile());
                 x.AddProfile(new TemperatureScaleProfile());
                 x.AddProfile(new ThermometerDeviceProfile());

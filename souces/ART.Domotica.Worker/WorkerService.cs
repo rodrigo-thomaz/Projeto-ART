@@ -12,7 +12,6 @@
         private readonly ApplicationUserConsumer _applicationUserConsumer;
         private readonly IConnection _connection;
         private readonly DSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
-        private readonly HardwareConsumer _hardwareConsumer;
         private readonly HardwaresInApplicationConsumer _hardwaresInApplicationConsumer;
         private readonly TemperatureScaleConsumer _temperatureScaleConsumer;
         private readonly ThermometerDeviceConsumer _thermometerDeviceConsumer;
@@ -27,7 +26,6 @@
             , ApplicationUserConsumer applicationUserConsumer
             , DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer
             , TemperatureScaleConsumer temperatureScaleConsumer
-            , HardwareConsumer hardwareConsumer
             , HardwaresInApplicationConsumer hardwaresInApplicationConsumer
             , ThermometerDeviceConsumer thermometerDeviceConsumer
             )
@@ -36,7 +34,6 @@
             _applicationConsumer = applicationConsumer;
             _applicationUserConsumer = applicationUserConsumer;
             _dsFamilyTempSensorConsumer = dsFamilyTempSensorConsumer;
-            _hardwareConsumer = hardwareConsumer;
             _hardwaresInApplicationConsumer = hardwaresInApplicationConsumer;
             _temperatureScaleConsumer = temperatureScaleConsumer;
             _thermometerDeviceConsumer = thermometerDeviceConsumer;

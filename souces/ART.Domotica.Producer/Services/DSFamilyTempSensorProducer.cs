@@ -22,6 +22,15 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids
 
+        public async Task GetList(AuthenticatedMessageContract message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.GetListAdminQueueName, null, payload);
+            });
+        }
+
         public async Task GetAll(AuthenticatedMessageContract message)
         {
             await Task.Run(() =>
