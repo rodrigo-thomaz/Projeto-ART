@@ -9,7 +9,8 @@
         #region Methods
 
         Task GetList(AuthenticatedMessageContract message);
-        Task SearchPin(AuthenticatedMessageContract<HardwaresInApplicationSearchPinContract> message);
+        Task SearchPin(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message);
+        Task InsertHardware(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message);
 
         #endregion Methods
     }

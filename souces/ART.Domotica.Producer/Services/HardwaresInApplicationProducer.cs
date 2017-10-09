@@ -29,14 +29,23 @@ namespace ART.Domotica.Producer.Services
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
                 _model.BasicPublish("", HardwaresInApplicationConstants.GetListQueueName, null, payload);
             });
-        }
+        }        
 
-        public async Task SearchPin(AuthenticatedMessageContract<HardwaresInApplicationSearchPinContract> message)
+        public async Task SearchPin(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
                 _model.BasicPublish("", HardwaresInApplicationConstants.SearchPinQueueName, null, payload);
+            });
+        }
+
+        public async Task InsertHardware(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", HardwaresInApplicationConstants.InsertHardwareQueueName, null, payload);
             });
         }
 

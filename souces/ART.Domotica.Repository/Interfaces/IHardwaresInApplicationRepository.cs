@@ -13,7 +13,7 @@
 
         Task<List<HardwaresInApplication>> GetList(Guid applicationUserId);
 
-        Task<HardwareBase> SearchPin(string pin);
+        Task<HardwareBase> GetByPin(string pin);
 
         #endregion Methods
     }

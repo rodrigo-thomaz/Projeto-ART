@@ -13,7 +13,9 @@
 
         Task<List<HardwaresInApplicationGetListModel>> GetList(AuthenticatedMessageContract message);
 
-        Task<HardwaresInApplicationSearchPinModel> SearchPin(AuthenticatedMessageContract<HardwaresInApplicationSearchPinContract> message);
+        Task<HardwaresInApplicationSearchPinModel> SearchPin(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message);
+
+        Task InsertHardware(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message);
 
         #endregion Methods
     }

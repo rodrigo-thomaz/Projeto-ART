@@ -18,6 +18,8 @@
 
         private readonly EventingBasicConsumer _getListConsumer;
         private readonly EventingBasicConsumer _searchPinConsumer;
+        private readonly EventingBasicConsumer _insertHardwareConsumer;
+
         private readonly IHardwaresInApplicationDomain _hardwaresInApplicationDomain;
 
         #endregion Fields
@@ -29,6 +31,7 @@
         {
             _getListConsumer = new EventingBasicConsumer(_model);
             _searchPinConsumer = new EventingBasicConsumer(_model);
+            _insertHardwareConsumer = new EventingBasicConsumer(_model);
 
             _hardwaresInApplicationDomain = hardwaresInApplicationDomain;
 
@@ -55,11 +58,20 @@
                , autoDelete: true
                , arguments: null);
 
+            _model.QueueDeclare(
+                 queue: HardwaresInApplicationConstants.InsertHardwareQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: true
+               , arguments: null);
+
             _getListConsumer.Received += GetListReceived;
             _searchPinConsumer.Received += SearchPinReceived;
+            _insertHardwareConsumer.Received += InsertHardwareReceived;
 
             _model.BasicConsume(HardwaresInApplicationConstants.GetListQueueName, false, _getListConsumer);
             _model.BasicConsume(HardwaresInApplicationConstants.SearchPinQueueName, false, _searchPinConsumer);
+            _model.BasicConsume(HardwaresInApplicationConstants.InsertHardwareQueueName, false, _insertHardwareConsumer);
         }
 
         #endregion Methods
@@ -88,18 +100,37 @@
         {
             Task.WaitAll(SearchPinReceivedAsync(sender, e));
         }
+
         private async Task SearchPinReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.SearchPinQueueName, Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwaresInApplicationSearchPinContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwaresInApplicationPinContract>>(e.Body);
             var data = await _hardwaresInApplicationDomain.SearchPin(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.SearchPinCompletedQueueName);
             Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.SearchPinCompletedQueueName, Encoding.UTF8.GetString(buffer));
             _model.BasicPublish(exchange, rountingKey, null, buffer);
+        }
+
+        private void InsertHardwareReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(InsertHardwareReceivedAsync(sender, e));
+        }
+
+        private async Task InsertHardwareReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            Console.WriteLine();
+            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.InsertHardwareQueueName, Encoding.UTF8.GetString(e.Body));
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwaresInApplicationPinContract>>(e.Body);
+            await _hardwaresInApplicationDomain.InsertHardware(message);            
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.InsertHardwareCompletedQueueName);
+            Console.WriteLine("[{0}] Ok", HardwaresInApplicationConstants.InsertHardwareCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, null);
         }
 
         #endregion Other

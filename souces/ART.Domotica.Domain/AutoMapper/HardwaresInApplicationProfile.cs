@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
+    using ART.Infra.CrossCutting.Utils;
     using global::AutoMapper;
 
     public class HardwaresInApplicationProfile : Profile
@@ -10,7 +11,10 @@
 
         public HardwaresInApplicationProfile()
         {
-            CreateMap<HardwareBase, HardwaresInApplicationSearchPinModel>();
+            CreateMap<HardwaresInApplication, HardwaresInApplicationGetListModel>()
+                .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
+
+            CreateMap<HardwareBase, HardwaresInApplicationSearchPinModel>(); 
         }
 
         #endregion Constructors

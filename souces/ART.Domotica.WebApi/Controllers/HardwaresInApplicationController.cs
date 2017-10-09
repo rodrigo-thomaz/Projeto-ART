@@ -40,9 +40,27 @@
         /// <response code="500">Internal Server Error</response>
         [Route("searchPin")]
         [HttpPost]
-        public async Task<IHttpActionResult> SearchPin(HardwaresInApplicationSearchPinContract contract)
+        public async Task<IHttpActionResult> SearchPin(HardwaresInApplicationPinContract contract)
         {
             await _hardwaresInApplicationProducer.SearchPin(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
+        /// Adiciona um hardware pelo pin
+        /// </summary>        
+        /// <remarks>
+        /// Adiciona um hardware pelo pin
+        /// </remarks>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("insertHardware")]
+        [HttpPost]
+        public async Task<IHttpActionResult> InsertHardware(HardwaresInApplicationPinContract contract)
+        {
+            await _hardwaresInApplicationProducer.InsertHardware(CreateMessage(contract));
             return Ok();
         }
 

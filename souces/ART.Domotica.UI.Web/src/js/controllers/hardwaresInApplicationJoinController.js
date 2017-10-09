@@ -6,12 +6,23 @@ app.controller('hardwaresInApplicationJoinController', ['$scope', '$timeout', '$
     }
 
     var onSearchPinCompleted = function (payload) {
+        $scope.hardware = payload;
+    }
 
+    var onInsertHardwareClick = function () {
+        hardwaresInApplicationJoinService.insertHardware($scope.pin);
+    }
+
+    var onInsertHardwareCompleted = function (payload) {
+        alert("hardware inserido!!!");
     }
 
     EventDispatcher.on('hardwaresInApplicationService_onSearchPinReceived', onSearchPinCompleted);
+    EventDispatcher.on('hardwaresInApplicationService_onInsertHardwareReceived', onInsertHardwareCompleted);
 
     $scope.pin = "";
+    $scope.hardware = {};
     $scope.onSearchClick = onSearchClick;
+    $scope.onInsertHardwareClick = onInsertHardwareClick;
 
 }]);

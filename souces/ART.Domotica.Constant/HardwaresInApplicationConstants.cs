@@ -10,6 +10,9 @@
         public static readonly string SearchPinCompletedQueueName = "HardwaresInApplication.SearchPinCompleted";
         public static readonly string SearchPinQueueName = "HardwaresInApplication.SearchPin";
 
+        public static readonly string InsertHardwareCompletedQueueName = "HardwaresInApplication.InsertHardwareCompleted";
+        public static readonly string InsertHardwareQueueName = "HardwaresInApplication.InsertHardware";
+
         #endregion Fields
     }
 }

@@ -32,13 +32,13 @@
 
             var data = await query.ToListAsync();
             return data;
-        }
+        }        
 
-        public async Task<HardwareBase> SearchPin(string pin)
+        public async Task<HardwareBase> GetByPin(string pin)
         {
             var data = await _context.Set<HardwareBase>()
                 .Where(x => x.Pin == pin)
-                .SingleAsync();
+                .SingleOrDefaultAsync();
 
             return data;
         }

@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorSetHighAlarmContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmContract.cs" />
-    <Compile Include="HardwaresInApplicationSearchPinContract.cs" />
+    <Compile Include="HardwaresInApplicationPinContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

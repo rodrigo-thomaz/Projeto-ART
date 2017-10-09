@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class HardwaresInApplicationSearchPinContract
+    public class HardwaresInApplicationPinContract
     {
         #region Properties        
 
