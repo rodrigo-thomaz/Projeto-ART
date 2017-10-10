@@ -8,19 +8,23 @@
     using System;
     using global::AutoMapper;
     using ART.Security.Contract;
+    using log4net;
+    using ART.Infra.CrossCutting.Domain;
 
-    public class ApplicationUserDomain : IApplicationUserDomain
+    public class ApplicationUserDomain : DomainBase, IApplicationUserDomain
     {
         #region Fields
-        
+
+        private readonly ILog _log;
         private readonly IApplicationUserRepository _applicationUserRepository;
 
         #endregion Fields
 
         #region Constructors
 
-        public ApplicationUserDomain(IApplicationUserRepository applicationUserRepository)
+        public ApplicationUserDomain(ILog log, IApplicationUserRepository applicationUserRepository)
         {
+            _log = log;
             _applicationUserRepository = applicationUserRepository;        
         }
 
@@ -30,6 +34,8 @@
 
         public async Task RegisterUser(RegisterUserContract contract)
         {
+            _log.Debug(contract);
+
             var applicationEntity = new Application
             {
                 CreateDate = DateTime.Now,

@@ -8,13 +8,16 @@ using ART.Domotica.Model;
 using AutoMapper;
 using ART.Domotica.Contract;
 using ART.Infra.CrossCutting.MQ.Contract;
+using log4net;
+using ART.Infra.CrossCutting.Domain;
 
 namespace ART.Domotica.Domain.Services
 {
-    public class DSFamilyTempSensorDomain : IDSFamilyTempSensorDomain
+    public class DSFamilyTempSensorDomain : DomainBase, IDSFamilyTempSensorDomain
     {
         #region private readonly fields
 
+        private readonly ILog _log;
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
 
@@ -22,8 +25,9 @@ namespace ART.Domotica.Domain.Services
 
         #region constructors
 
-        public DSFamilyTempSensorDomain(IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository)
+        public DSFamilyTempSensorDomain(ILog log, IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository)
         {
+            _log = log;
             _dsFamilyTempSensorRepository = dsFamilyTempSensorRepository;
             _dsFamilyTempSensorResolutionRepository = dsFamilyTempSensorResolutionRepository;
         }
@@ -34,6 +38,8 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<DSFamilyTempSensorGetListModel>> GetList(AuthenticatedMessageContract message)
         {
+            _log.Debug(message);
+
             var data = await _dsFamilyTempSensorRepository.GetList();
             var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetListModel>>(data);
             return result;
@@ -41,6 +47,8 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<DSFamilyTempSensorGetAllModel>> GetAll(Guid applicationUserId)
         {
+            _log.Debug(applicationUserId);
+
             var data = await _dsFamilyTempSensorRepository.GetAll(applicationUserId);
             var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllModel>>(data);
             return result;
@@ -48,6 +56,8 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions()
         {
+            _log.Debug(null);
+
             var data = await _dsFamilyTempSensorResolutionRepository.GetAll();
             var result = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionGetAllModel>>(data);
             return result;
@@ -55,6 +65,8 @@ namespace ART.Domotica.Domain.Services
 
         public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
         {
+            _log.Debug(message);
+
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
             if(dsFamilyTempSensorEntity == null)
@@ -76,6 +88,8 @@ namespace ART.Domotica.Domain.Services
 
         public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message)
         {
+            _log.Debug(message);
+
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
             if (entity == null)
@@ -90,6 +104,8 @@ namespace ART.Domotica.Domain.Services
 
         public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message)
         {
+            _log.Debug(message);
+
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
             if (entity == null)
@@ -104,6 +120,8 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)
         {
+            _log.Debug(dsFamilyTempSensorId);
+
             var entity = await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorId);
 
             if (entity == null)

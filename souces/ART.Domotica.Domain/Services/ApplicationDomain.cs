@@ -8,11 +8,15 @@
     using ART.Domotica.Model;
     using global::AutoMapper;
     using ART.Domotica.Repository.Entities;
+    using ART.Infra.CrossCutting.Domain;
+    using log4net;
+    using ART.Infra.CrossCutting.Logging;
 
-    public class ApplicationDomain : IApplicationDomain
+    public class ApplicationDomain : DomainBase, IApplicationDomain
     {
         #region Fields
 
+        private readonly ILogger _logger;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
 
@@ -20,8 +24,9 @@
 
         #region Constructors
 
-        public ApplicationDomain(IApplicationRepository applicationRepository, IApplicationUserRepository applicationUserRepository)
+        public ApplicationDomain(ILogger logger, IApplicationRepository applicationRepository, IApplicationUserRepository applicationUserRepository) 
         {
+            _logger = logger;
             _applicationRepository = applicationRepository;
             _applicationUserRepository = applicationUserRepository;
         }
@@ -32,6 +37,7 @@
 
         public async Task<ApplicationGetModel> Get(AuthenticatedMessageContract message)
         {
+            _logger.Debug();
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
             var applicationEntity = await _applicationRepository.GetById(applicationUserEntity.ApplicationId);            
             var result = Mapper.Map<Application, ApplicationGetModel>(applicationEntity);

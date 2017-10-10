@@ -11,11 +11,14 @@
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Domotica.Contract;
     using System;
+    using log4net;
+    using ART.Infra.CrossCutting.Domain;
 
-    public class HardwaresInApplicationDomain : IHardwaresInApplicationDomain
+    public class HardwaresInApplicationDomain : DomainBase, IHardwaresInApplicationDomain
     {
         #region Fields
 
+        private readonly ILog _log;
         private readonly IHardwaresInApplicationRepository _hardwaresInApplicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
 
@@ -23,8 +26,9 @@
 
         #region Constructors
 
-        public HardwaresInApplicationDomain(IHardwaresInApplicationRepository hardwaresInApplicationRepository, IApplicationUserRepository applicationUserRepository)
+        public HardwaresInApplicationDomain(ILog log, IHardwaresInApplicationRepository hardwaresInApplicationRepository, IApplicationUserRepository applicationUserRepository)
         {
+            _log = log;
             _hardwaresInApplicationRepository = hardwaresInApplicationRepository;
             _applicationUserRepository = applicationUserRepository;
         }
@@ -35,6 +39,8 @@
 
         public async Task<List<HardwaresInApplicationGetListModel>> GetList(AuthenticatedMessageContract message)
         {
+            _log.Debug(message);
+
             var data = await _hardwaresInApplicationRepository.GetList(message.ApplicationUserId);
             var result = Mapper.Map<List<HardwaresInApplication>, List<HardwaresInApplicationGetListModel>>(data);
             return result;
@@ -42,6 +48,8 @@
 
         public async Task<HardwaresInApplicationSearchPinModel> SearchPin(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message)
         {
+            _log.Debug(message);
+
             var data = await _hardwaresInApplicationRepository.GetByPin(message.Contract.Pin);
 
             if (data == null)
@@ -56,6 +64,8 @@
 
         public async Task InsertHardware(AuthenticatedMessageContract<HardwaresInApplicationPinContract> message)
         {
+            _log.Debug(message);
+
             var hardwareEntity = await _hardwaresInApplicationRepository.GetByPin(message.Contract.Pin);
 
             if (hardwareEntity == null)
@@ -83,6 +93,8 @@
 
         public async Task DeleteHardware(AuthenticatedMessageContract<HardwaresInApplicationDeleteHardwareContract> message)
         {
+            _log.Debug(message);
+
             var hardwareEntity = await _hardwaresInApplicationRepository.GetById(message.Contract.HardwaresInApplicationId);
 
             if (hardwareEntity == null)

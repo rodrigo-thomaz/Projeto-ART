@@ -94,6 +94,10 @@
       <Project>{d0287824-c8bc-4025-8b99-5a8fd8aef1f1}</Project>
       <Name>ART.Domotica.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Domain\ART.Infra.CrossCutting.Domain.csproj">
+      <Project>{D06A9B85-BF4F-4002-BD06-A228D0F49BDA}</Project>
+      <Name>ART.Infra.CrossCutting.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.Logging\ART.Infra.CrossCutting.Logging.csproj">
       <Project>{8ca05fe6-15fe-4c6e-a10a-3360509f4f8c}</Project>
       <Name>ART.Infra.CrossCutting.Logging</Name>

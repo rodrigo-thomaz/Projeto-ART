@@ -3,9 +3,6 @@ using log4net;
 using System.Linq;
 using System.Reflection;
 using Autofac;
-using log4net.Config;
-using System;
-using System.IO;
 
 namespace ART.Infra.CrossCutting.Logging
 {
@@ -52,8 +49,7 @@ namespace ART.Infra.CrossCutting.Logging
 
         protected override void Load(ContainerBuilder builder)
         {
-            var fullFilePath = Path.Combine(Environment.CurrentDirectory, "log4net.config.xml");
-            XmlConfigurator.Configure(new FileInfo(fullFilePath));
+            builder.RegisterType<Logger>().As<ILogger>();
         }
     }
 }
