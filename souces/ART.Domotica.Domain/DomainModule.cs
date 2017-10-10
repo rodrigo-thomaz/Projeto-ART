@@ -19,7 +19,7 @@
                 .Where(x => x.Name.EndsWith("Domain"))
                 .AsImplementedInterfaces()
                 .EnableInterfaceInterceptors()
-                .InterceptedBy(typeof(CallDebugLogger)); ;
+                .InterceptedBy(typeof(CallDebugLogger)); 
         }
 
         #endregion Methods
