@@ -30,7 +30,6 @@ namespace ART.Infra.CrossCutting.Logging
                     properties["callerMethod"] = callerMethod;
                     properties["callerLine"] = callerLine;
 
-                    callerMethod = $"{method.GetMethod().ReflectedType.Name}.{callerMethod}";
                     break;
                 }
             }
