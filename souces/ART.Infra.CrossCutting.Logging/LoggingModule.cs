@@ -24,6 +24,7 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<Logger>().As<ILogger>();
+            builder.RegisterType<CallDebugLogger>();
         }
 
         private static void InjectLoggerProperties(object instance)

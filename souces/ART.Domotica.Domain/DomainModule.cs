@@ -1,22 +1,25 @@
 ﻿namespace ART.Domotica.Domain
 {
-    using ART.Domotica.Domain.Interfaces;
-    using ART.Domotica.Domain.Services;
+    using System.Reflection;
+
+    using ART.Infra.CrossCutting.Logging;
 
     using Autofac;
+    using Autofac.Extras.DynamicProxy;
 
-    public class DomainModule : Module
+    public class DomainModule : Autofac.Module
     {
         #region Methods
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ApplicationDomain>().As<IApplicationDomain>();
-            builder.RegisterType<ApplicationUserDomain>().As<IApplicationUserDomain>();
-            builder.RegisterType<DSFamilyTempSensorDomain>().As<IDSFamilyTempSensorDomain>();
-            builder.RegisterType<HardwaresInApplicationDomain>().As<IHardwaresInApplicationDomain>();
-            builder.RegisterType<TemperatureScaleDomain>().As<ITemperatureScaleDomain>();
-            builder.RegisterType<ThermometerDeviceDomain>().As<IThermometerDeviceDomain>();
+            var asm = Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(asm)
+                .Where(x => x.Name.EndsWith("Domain"))
+                .AsImplementedInterfaces()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(CallDebugLogger)); ;
         }
 
         #endregion Methods

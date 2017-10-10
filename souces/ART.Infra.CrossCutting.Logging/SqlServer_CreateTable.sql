@@ -25,7 +25,7 @@ CREATE TABLE [dbo].[Log](
 	[Namespace] [varchar](500) NOT NULL,
 	[Name] [varchar](500) NOT NULL,
 	[Method] [varchar](500) NOT NULL,
-	[Line] INT NOT NULL,		
+	[Line] INT NULL,		
 	[Message] [varchar](4000) NOT NULL,
 	[Exception] [varchar](2000) NULL,
 	[Identity] [varchar](256) NULL,
