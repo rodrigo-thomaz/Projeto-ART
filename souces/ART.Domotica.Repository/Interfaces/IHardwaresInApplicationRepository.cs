@@ -11,9 +11,9 @@
     {
         #region Methods
 
-        Task<List<HardwaresInApplication>> GetList(Guid applicationUserId);
-
         Task<HardwareBase> GetByPin(string pin);
+
+        Task<List<HardwaresInApplication>> GetList(Guid applicationUserId);
 
         #endregion Methods
     }

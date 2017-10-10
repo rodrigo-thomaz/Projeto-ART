@@ -10,6 +10,7 @@ using ART.Domotica.Contract;
 using ART.Infra.CrossCutting.MQ.Contract;
 using log4net;
 using ART.Infra.CrossCutting.Domain;
+using ART.Infra.CrossCutting.Logging;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -17,7 +18,7 @@ namespace ART.Domotica.Domain.Services
     {
         #region private readonly fields
 
-        private readonly ILog _log;
+        private readonly ILogger _logger;
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
 
@@ -25,9 +26,9 @@ namespace ART.Domotica.Domain.Services
 
         #region constructors
 
-        public DSFamilyTempSensorDomain(ILog log, IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository)
+        public DSFamilyTempSensorDomain(ILogger logger, IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository)
         {
-            _log = log;
+            _logger = logger;
             _dsFamilyTempSensorRepository = dsFamilyTempSensorRepository;
             _dsFamilyTempSensorResolutionRepository = dsFamilyTempSensorResolutionRepository;
         }
@@ -38,7 +39,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<DSFamilyTempSensorGetListModel>> GetList(AuthenticatedMessageContract message)
         {
-            _log.Debug(message);
+            _logger.Debug();
 
             var data = await _dsFamilyTempSensorRepository.GetList();
             var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetListModel>>(data);
@@ -47,7 +48,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<DSFamilyTempSensorGetAllModel>> GetAll(Guid applicationUserId)
         {
-            _log.Debug(applicationUserId);
+            _logger.Debug();
 
             var data = await _dsFamilyTempSensorRepository.GetAll(applicationUserId);
             var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllModel>>(data);
@@ -56,7 +57,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions()
         {
-            _log.Debug(null);
+            _logger.Debug();
 
             var data = await _dsFamilyTempSensorResolutionRepository.GetAll();
             var result = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionGetAllModel>>(data);
@@ -65,7 +66,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
         {
-            _log.Debug(message);
+            _logger.Debug();
 
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -88,7 +89,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message)
         {
-            _log.Debug(message);
+            _logger.Debug();
 
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -104,7 +105,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message)
         {
-            _log.Debug(message);
+            _logger.Debug();
 
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -120,7 +121,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)
         {
-            _log.Debug(dsFamilyTempSensorId);
+            _logger.Debug();
 
             var entity = await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorId);
 

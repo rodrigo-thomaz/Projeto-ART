@@ -13,13 +13,13 @@
     {
         #region Methods
 
-        Task<List<DSFamilyTempSensorGetListModel>> GetList(AuthenticatedMessageContract message);
-
         Task<List<DSFamilyTempSensorGetAllModel>> GetAll(Guid applicationUserId);
 
         Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions();
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
+
+        Task<List<DSFamilyTempSensorGetListModel>> GetList(AuthenticatedMessageContract message);
 
         Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message);
 

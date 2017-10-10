@@ -4,7 +4,7 @@
 
     public class HardwaresInApplicationSearchPinModel
     {
-        #region Properties        
+        #region Properties
 
         public Guid Id
         {

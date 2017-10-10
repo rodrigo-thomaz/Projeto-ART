@@ -1,13 +1,31 @@
-﻿using Autofac.Core;
-using log4net;
-using System.Linq;
-using System.Reflection;
-using Autofac;
-
-namespace ART.Infra.CrossCutting.Logging
+﻿namespace ART.Infra.CrossCutting.Logging
 {
+    using System.Linq;
+    using System.Reflection;
+
+    using Autofac;
+    using Autofac.Core;
+
+    using log4net;
+
     public class LoggingModule : Autofac.Module
     {
+        #region Methods
+
+        protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
+        {
+            // Handle constructor parameters.
+            registration.Preparing += OnComponentPreparing;
+
+            // Handle properties.
+            registration.Activated += (sender, e) => InjectLoggerProperties(e.Instance);
+        }
+
+        protected override void Load(ContainerBuilder builder)
+        {
+            builder.RegisterType<Logger>().As<ILogger>();
+        }
+
         private static void InjectLoggerProperties(object instance)
         {
             var instanceType = instance.GetType();
@@ -31,25 +49,13 @@ namespace ART.Infra.CrossCutting.Logging
             e.Parameters = e.Parameters.Union(
               new[]
               {
-        new ResolvedParameter(
+            new ResolvedParameter(
             (p, i) => p.ParameterType == typeof(ILog),
             (p, i) => LogManager.GetLogger(p.Member.DeclaringType)
-        ),
+            ),
               });
         }
 
-        protected override void AttachToComponentRegistration(IComponentRegistry componentRegistry, IComponentRegistration registration)
-        {
-            // Handle constructor parameters.
-            registration.Preparing += OnComponentPreparing;
-
-            // Handle properties.
-            registration.Activated += (sender, e) => InjectLoggerProperties(e.Instance);
-        }
-
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterType<Logger>().As<ILogger>();
-        }
+        #endregion Methods
     }
 }

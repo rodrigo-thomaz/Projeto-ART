@@ -2,7 +2,7 @@
 {
     public class HardwaresInApplicationPinContract
     {
-        #region Properties        
+        #region Properties
 
         public string Pin
         {

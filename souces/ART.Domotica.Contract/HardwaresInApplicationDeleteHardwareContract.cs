@@ -4,7 +4,7 @@
 
     public class HardwaresInApplicationDeleteHardwareContract
     {
-        #region Properties        
+        #region Properties
 
         public Guid HardwaresInApplicationId
         {

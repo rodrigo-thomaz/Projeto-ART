@@ -29,7 +29,7 @@ CREATE TABLE [dbo].[Log](
 	[Message] [varchar](4000) NOT NULL,
 	[Exception] [varchar](2000) NULL,
 	[Identity] [varchar](256) NULL,
-	[StackTraceDetail] [VARCHAR](8000) NULL
+	[StackTrace] [VARCHAR](8000) NULL
 ) ON [PRIMARY]
 
 GO

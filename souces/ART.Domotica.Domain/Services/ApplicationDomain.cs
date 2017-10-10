@@ -9,7 +9,6 @@
     using global::AutoMapper;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Domain;
-    using log4net;
     using ART.Infra.CrossCutting.Logging;
 
     public class ApplicationDomain : DomainBase, IApplicationDomain

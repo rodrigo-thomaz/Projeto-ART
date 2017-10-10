@@ -1,11 +1,12 @@
 ﻿namespace ART.Domotica.Domain.AutoMapper
 {
+    using System.Linq;
+
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Utils;
+
     using global::AutoMapper;
-    
-    using System.Linq;
 
     public class DSFamilyTempSensorProfile : Profile
     {
