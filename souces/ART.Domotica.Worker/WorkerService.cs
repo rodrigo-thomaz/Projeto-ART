@@ -51,6 +51,7 @@
         public bool Stop()
         {
             _connection.Close(30);
+            log4net.LogManager.Shutdown();
             return true;
         }
 

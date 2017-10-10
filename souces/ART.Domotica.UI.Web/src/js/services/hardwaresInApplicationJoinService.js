@@ -14,8 +14,10 @@ app.factory('hardwaresInApplicationJoinService', ['$http', '$log', 'ngAuthSettin
         var data = {
             pin: pin
         };
-        return $http.post(serviceBase + 'api/hardwaresInApplication/searchPin', data).then(function (results) {
-            //alert('envio bem sucedido');
+        return $http.post(serviceBase + 'api/hardwaresInApplication/searchPin', data).then(function successCallback(response) {
+
+        }, function errorCallback(response) {
+
         });
     };  
 
@@ -23,8 +25,10 @@ app.factory('hardwaresInApplicationJoinService', ['$http', '$log', 'ngAuthSettin
         var data = {
             pin: pin
         };
-        return $http.post(serviceBase + 'api/hardwaresInApplication/insertHardware', data).then(function (results) {
-            //alert('envio bem sucedido');
+        return $http.post(serviceBase + 'api/hardwaresInApplication/insertHardware', data).then(function successCallback(response) {
+
+        }, function errorCallback(response) {
+
         });
     };     
 
@@ -47,6 +51,7 @@ app.factory('hardwaresInApplicationJoinService', ['$http', '$log', 'ngAuthSettin
     // serviceFactory
 
     serviceFactory.searchPin = searchPin;
+
     serviceFactory.insertHardware = insertHardware;    
 
     return serviceFactory;

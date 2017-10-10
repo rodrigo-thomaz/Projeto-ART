@@ -1,7 +1,5 @@
 ﻿namespace ART.Domotica.Contract
 {
-    using System;
-
     public class HardwaresInApplicationPinContract
     {
         #region Properties        

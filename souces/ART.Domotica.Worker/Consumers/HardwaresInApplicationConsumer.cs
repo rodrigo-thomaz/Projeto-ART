@@ -6,6 +6,7 @@
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
     using ART.Infra.CrossCutting.Utils;
+    using log4net;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
     using System;
@@ -27,8 +28,8 @@
 
         #region Constructors
 
-        public HardwaresInApplicationConsumer(IConnection connection, IHardwaresInApplicationDomain hardwaresInApplicationDomain)
-            : base(connection)
+        public HardwaresInApplicationConsumer(IConnection connection, ILog log, IHardwaresInApplicationDomain hardwaresInApplicationDomain)
+            : base(connection, log)
         {
             _getListConsumer = new EventingBasicConsumer(_model);
             _searchPinConsumer = new EventingBasicConsumer(_model);
@@ -91,6 +92,10 @@
 
         private void GetListReceived(object sender, BasicDeliverEventArgs e)
         {
+            Console.WriteLine();
+            _log.Debug("Did it again!");
+            Console.WriteLine();
+
             Task.WaitAll(GetListReceivedAsync(sender, e));
         }
         private async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
@@ -117,8 +122,10 @@
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.SearchPinQueueName, Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
+
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwaresInApplicationPinContract>>(e.Body);
             var data = await _hardwaresInApplicationDomain.SearchPin(message);
+
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.SearchPinCompletedQueueName);

@@ -1,12 +1,22 @@
 ﻿'use strict';
 app.controller('hardwaresInApplicationJoinController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'hardwaresInApplicationJoinService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, hardwaresInApplicationJoinService) {    
 
-    var onSearchClick = function () {
-        hardwaresInApplicationJoinService.searchPin($scope.pin);
+    var onSearchPinClick = function () {    
+        $scope.searchingPin = true;
+            hardwaresInApplicationJoinService.searchPin($scope.pin).then(function successCallback(response) {
+            }, function errorCallback(response) {
+                $scope.searchingPin = false;
+                $scope.$apply();
+            });
+        //$timeout(function () {
+            
+        //})        
     }
 
     var onSearchPinCompleted = function (payload) {
+        $scope.searchingPin = false;
         $scope.hardware = payload;
+        $scope.$apply();
     }
 
     var onInsertHardwareClick = function () {
@@ -21,8 +31,9 @@ app.controller('hardwaresInApplicationJoinController', ['$scope', '$timeout', '$
     EventDispatcher.on('hardwaresInApplicationService_onInsertHardwareReceived', onInsertHardwareCompleted);    
 
     $scope.pin = "";
-    $scope.hardware = {};
-    $scope.searchClick = onSearchClick;
+    $scope.hardware = null;
+    $scope.searchPinClick = onSearchPinClick;
+    $scope.searchingPin = false;
     $scope.insertHardwareClick = onInsertHardwareClick;    
 
 }]);
