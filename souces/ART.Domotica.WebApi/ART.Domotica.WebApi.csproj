@@ -53,6 +53,9 @@
     <Reference Include="Autofac.Integration.WebApi.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.WebApi2.Owin.4.0.0\lib\net45\Autofac.Integration.WebApi.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
@@ -152,6 +155,10 @@
     <ProjectReference Include="..\ART.Domotica.Producer\ART.Domotica.Producer.csproj">
       <Project>{83aded71-a463-4e44-9e4f-4e62606a769a}</Project>
       <Name>ART.Domotica.Producer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Logging\ART.Infra.CrossCutting.Logging.csproj">
+      <Project>{8ca05fe6-15fe-4c6e-a10a-3360509f4f8c}</Project>
+      <Name>ART.Infra.CrossCutting.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.Contract\ART.Infra.CrossCutting.MQ.Contract.csproj">
       <Project>{e9386369-36e5-4fa6-8d5b-05119cb95b23}</Project>

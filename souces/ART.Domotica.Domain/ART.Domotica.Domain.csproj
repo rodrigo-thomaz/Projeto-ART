@@ -42,6 +42,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -90,6 +93,10 @@
     <ProjectReference Include="..\ART.Domotica.Repository\ART.Domotica.Repository.csproj">
       <Project>{d0287824-c8bc-4025-8b99-5a8fd8aef1f1}</Project>
       <Name>ART.Domotica.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Logging\ART.Infra.CrossCutting.Logging.csproj">
+      <Project>{8ca05fe6-15fe-4c6e-a10a-3360509f4f8c}</Project>
+      <Name>ART.Infra.CrossCutting.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ.Contract\ART.Infra.CrossCutting.MQ.Contract.csproj">
       <Project>{E9386369-36E5-4FA6-8D5B-05119CB95B23}</Project>
