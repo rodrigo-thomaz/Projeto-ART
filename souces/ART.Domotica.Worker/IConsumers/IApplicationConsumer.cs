@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using RabbitMQ.Client.Events;
 
-namespace ART.Domotica.Worker.Consumers
+namespace ART.Domotica.Worker.IConsumers
 {
     public interface IApplicationConsumer
     {

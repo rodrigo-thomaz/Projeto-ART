@@ -1,4 +1,5 @@
 ﻿using ART.Domotica.Domain.Interfaces;
+using ART.Domotica.Worker.IConsumers;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class ApplicationUserConsumer : ConsumerBase
+    public class ApplicationUserConsumer : ConsumerBase, IApplicationUserConsumer
     {
         #region private fields
         
@@ -53,12 +54,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicConsume(queueName, false, _registerUserConsumer);
         }
 
-        private void RegisterUserReceived(object sender, BasicDeliverEventArgs e)
+        public void RegisterUserReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(RegisterUserAsync(sender, e));
         }
 
-        private async Task RegisterUserAsync(object sender, BasicDeliverEventArgs e)
+        public async Task RegisterUserAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", ApplicationUserQueueName.RegisterUserQueueName, Encoding.UTF8.GetString(e.Body));

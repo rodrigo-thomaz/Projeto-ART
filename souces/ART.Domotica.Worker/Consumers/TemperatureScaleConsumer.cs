@@ -8,10 +8,11 @@ using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
+using ART.Domotica.Worker.IConsumers;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class TemperatureScaleConsumer : ConsumerBase
+    public class TemperatureScaleConsumer : ConsumerBase, ITemperatureScaleConsumer
     {
         #region private fields
 
@@ -50,12 +51,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicConsume(TemperatureScaleConstants.GetAllQueueName, false, _getAllConsumer);
         }
 
-        private void GetAllReceived(object sender, BasicDeliverEventArgs e)
+        public void GetAllReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetAllReceivedAsync(sender, e));
         }
 
-        private async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", TemperatureScaleConstants.GetAllQueueName, Encoding.UTF8.GetString(e.Body));

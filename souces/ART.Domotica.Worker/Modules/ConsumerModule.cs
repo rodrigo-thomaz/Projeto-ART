@@ -1,9 +1,11 @@
 ﻿namespace ART.Domotica.Worker.Modules
 {
     using ART.Domotica.Worker.Consumers;
+    using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;
     using Autofac;
     using Autofac.Extras.DynamicProxy;
+    using System.Reflection;
 
     public class ConsumerModule : Autofac.Module
     {
@@ -13,24 +15,27 @@
         {
             builder.RegisterType<ApplicationConsumer>()
                 .As<IApplicationConsumer>()
-                .AsImplementedInterfaces()
+                .SingleInstance()
+                //.AsImplementedInterfaces()
                 .EnableInterfaceInterceptors()
-                .InterceptedBy(typeof(CallDebugLogger))
-                .SingleInstance();
+                .InterceptedBy(typeof(CallDebugLogger));
 
-            //builder.RegisterType<ApplicationConsumer>().SingleInstance();
-            builder.RegisterType<ApplicationUserConsumer>().SingleInstance();
-            builder.RegisterType<DSFamilyTempSensorConsumer>().SingleInstance();            
-            builder.RegisterType<HardwaresInApplicationConsumer>().SingleInstance();
-            builder.RegisterType<TemperatureScaleConsumer>().SingleInstance();
-            builder.RegisterType<ThermometerDeviceConsumer>().SingleInstance();
+            
+
+            //builder.RegisterType<ApplicationConsumer>().As<IApplicationConsumer>().SingleInstance();
+            builder.RegisterType<ApplicationUserConsumer>().As<IApplicationUserConsumer>().SingleInstance();
+            builder.RegisterType<DSFamilyTempSensorConsumer>().As<IDSFamilyTempSensorConsumer>().SingleInstance();
+            builder.RegisterType<HardwaresInApplicationConsumer>().As<IHardwaresInApplicationConsumer>().SingleInstance();
+            builder.RegisterType<TemperatureScaleConsumer>().As<ITemperatureScaleConsumer>().SingleInstance();
+            builder.RegisterType<ThermometerDeviceConsumer>().As<IThermometerDeviceConsumer>().SingleInstance();
 
             //var asm = Assembly.GetExecutingAssembly();
 
             //builder.RegisterAssemblyTypes(asm)
             //    .Where(x => x.Name.EndsWith("Consumer"))
             //    .SingleInstance()
-            //    .EnableClassInterceptors()
+            //    .AsImplementedInterfaces()
+            //    .EnableInterfaceInterceptors()
             //    .InterceptedBy(typeof(CallDebugLogger));
         }
 

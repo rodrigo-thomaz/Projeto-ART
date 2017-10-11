@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Constant;
     using ART.Domotica.Domain.Interfaces;
+    using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
     using ART.Infra.CrossCutting.Utils;
@@ -11,7 +12,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class ThermometerDeviceConsumer : ConsumerBase
+    public class ThermometerDeviceConsumer : ConsumerBase, IThermometerDeviceConsumer
     {
         #region Fields
 
@@ -54,11 +55,11 @@
 
         #region private voids
 
-        private void GetListReceived(object sender, BasicDeliverEventArgs e)
+        public void GetListReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetListReceivedAsync(sender, e));
         }
-        private async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", ThermometerDeviceConstants.GetListAdminQueueName, Encoding.UTF8.GetString(e.Body));

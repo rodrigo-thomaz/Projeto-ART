@@ -12,10 +12,11 @@ using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
+using ART.Domotica.Worker.IConsumers;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class DSFamilyTempSensorConsumer : ConsumerBase
+    public class DSFamilyTempSensorConsumer : ConsumerBase, IDSFamilyTempSensorConsumer
     {
         #region private fields
 
@@ -109,11 +110,11 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicConsume(DSFamilyTempSensorConstants.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
         }
 
-        private void GetListReceived(object sender, BasicDeliverEventArgs e)
+        public void GetListReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetListReceivedAsync(sender, e));
         }
-        private async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.GetListAdminQueueName, Encoding.UTF8.GetString(e.Body));
@@ -128,12 +129,12 @@ namespace ART.Domotica.Worker.Consumers
         }
 
 
-        private void GetAllReceived(object sender, BasicDeliverEventArgs e)
+        public void GetAllReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetAllReceivedAsync(sender, e));
         }
 
-        private async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.GetAllQueueName, Encoding.UTF8.GetString(e.Body));
@@ -151,12 +152,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
-        private void GetAllResolutionsReceived(object sender, BasicDeliverEventArgs e)
+        public void GetAllResolutionsReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetAllResolutionsReceivedAsync(sender, e));            
         }
 
-        private async Task GetAllResolutionsReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetAllResolutionsReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.GetAllResolutionsQueueName, Encoding.UTF8.GetString(e.Body));
@@ -174,12 +175,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
-        private void SetResolutionReceived(object sender, BasicDeliverEventArgs e)
+        public void SetResolutionReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(SetResolutionReceivedAsync(sender, e));         
         }
 
-        private async Task SetResolutionReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetResolutionReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.SetResolutionQueueName, Encoding.UTF8.GetString(e.Body));
@@ -192,7 +193,7 @@ namespace ART.Domotica.Worker.Consumers
             await SendSetResolutionToDevice(message);
         }
 
-        private async Task SendSetResolutionToDevice(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
+        public async Task SendSetResolutionToDevice(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
         {
             Console.WriteLine("[{0}] Device...", DSFamilyTempSensorConstants.SetResolutionQueueName);
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
@@ -202,12 +203,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish("", queueName, null, buffer);
         }
 
-        private void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
+        public void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(SetHighAlarmReceivedAsync(sender, e));
         }
 
-        private async Task SetHighAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetHighAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.SetHighAlarmQueueName, Encoding.UTF8.GetString(e.Body));
@@ -226,12 +227,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish("", queueName, null, buffer);
         }
 
-        private void SetLowAlarmReceived(object sender, BasicDeliverEventArgs e)
+        public void SetLowAlarmReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(SetLowAlarmReceivedAsync(sender, e));
         }
 
-        private async Task SetLowAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetLowAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", DSFamilyTempSensorConstants.SetLowAlarmQueueName, Encoding.UTF8.GetString(e.Body));
@@ -248,7 +249,7 @@ namespace ART.Domotica.Worker.Consumers
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
-        }        
+        }
 
         private async Task<string> GetQueueName(Guid dsFamilyTempSensorId)
         {

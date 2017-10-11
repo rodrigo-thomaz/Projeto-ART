@@ -1,6 +1,5 @@
 ﻿namespace ART.Infra.CrossCutting.Logging
 {
-    using System.Linq;
     using System.Threading.Tasks;
 
     using Castle.DynamicProxy;
@@ -28,7 +27,7 @@
 
         public void Intercept(IInvocation invocation)
         {
-            var arguments = string.Join(", ", invocation.Arguments.Select(a => (a ?? "").ToString()).ToArray());
+            //var arguments = string.Join(", ", invocation.Arguments.Select(a => (a ?? "").ToString()).ToArray());
 
             var targetType = invocation.TargetType;
             var targetMethod = invocation.MethodInvocationTarget;
@@ -40,7 +39,9 @@
 
             }
 
-            properties["callerModule"] = targetType.Module.Name;
+            var module = targetType.Module == null ? "" : targetType.Module.Name;
+
+            properties["callerModule"] = module;
             properties["callerNamespace"] = targetType.Namespace;
             properties["callerName"] = targetType.Name;
             properties["callerMethod"] = targetMethod.Name;

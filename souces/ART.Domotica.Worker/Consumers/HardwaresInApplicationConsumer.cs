@@ -3,6 +3,7 @@
     using ART.Domotica.Constant;
     using ART.Domotica.Contract;
     using ART.Domotica.Domain.Interfaces;
+    using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
     using ART.Infra.CrossCutting.Utils;
@@ -12,7 +13,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class HardwaresInApplicationConsumer : ConsumerBase
+    public class HardwaresInApplicationConsumer : ConsumerBase, IHardwaresInApplicationConsumer
     {
         #region Fields
 
@@ -89,11 +90,11 @@
 
         #region private voids
 
-        private void GetListReceived(object sender, BasicDeliverEventArgs e)
+        public void GetListReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetListReceivedAsync(sender, e));
         }
-        private async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.GetListQueueName, Encoding.UTF8.GetString(e.Body));
@@ -107,12 +108,12 @@
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
-        private void SearchPinReceived(object sender, BasicDeliverEventArgs e)
+        public void SearchPinReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(SearchPinReceivedAsync(sender, e));
         }
 
-        private async Task SearchPinReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SearchPinReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.SearchPinQueueName, Encoding.UTF8.GetString(e.Body));
@@ -128,12 +129,12 @@
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
-        private void InsertHardwareReceived(object sender, BasicDeliverEventArgs e)
+        public void InsertHardwareReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(InsertHardwareReceivedAsync(sender, e));
         }
 
-        private async Task InsertHardwareReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task InsertHardwareReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.InsertHardwareQueueName, Encoding.UTF8.GetString(e.Body));
@@ -146,12 +147,12 @@
             _model.BasicPublish(exchange, rountingKey, null, null);
         }
 
-        private void DeleteHardwareReceived(object sender, BasicDeliverEventArgs e)
+        public void DeleteHardwareReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(DeleteHardwareReceivedAsync(sender, e));
         }
 
-        private async Task DeleteHardwareReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task DeleteHardwareReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.DeleteHardwareQueueName, Encoding.UTF8.GetString(e.Body));

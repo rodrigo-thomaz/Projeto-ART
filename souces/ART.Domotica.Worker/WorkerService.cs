@@ -1,7 +1,6 @@
 ﻿namespace ART.Domotica.Worker
 {
-    using ART.Domotica.Worker.Consumers;
-
+    using ART.Domotica.Worker.IConsumers;
     using RabbitMQ.Client;
 
     public class WorkerService
@@ -9,25 +8,25 @@
         #region Fields
 
         private readonly IApplicationConsumer _applicationConsumer;
-        private readonly ApplicationUserConsumer _applicationUserConsumer;
+        private readonly IApplicationUserConsumer _applicationUserConsumer;
         private readonly IConnection _connection;
-        private readonly DSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
-        private readonly HardwaresInApplicationConsumer _hardwaresInApplicationConsumer;
-        private readonly TemperatureScaleConsumer _temperatureScaleConsumer;
-        private readonly ThermometerDeviceConsumer _thermometerDeviceConsumer;
+        private readonly IDSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
+        private readonly IHardwaresInApplicationConsumer _hardwaresInApplicationConsumer;
+        private readonly ITemperatureScaleConsumer _temperatureScaleConsumer;
+        private readonly IThermometerDeviceConsumer _thermometerDeviceConsumer;
 
         #endregion Fields
 
         #region Constructors
 
         public WorkerService(
-            IConnection connection
+              IConnection connection
             , IApplicationConsumer applicationConsumer
-            , ApplicationUserConsumer applicationUserConsumer
-            , DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer
-            , TemperatureScaleConsumer temperatureScaleConsumer
-            , HardwaresInApplicationConsumer hardwaresInApplicationConsumer
-            , ThermometerDeviceConsumer thermometerDeviceConsumer
+            , IApplicationUserConsumer applicationUserConsumer
+            , IDSFamilyTempSensorConsumer dsFamilyTempSensorConsumer
+            , ITemperatureScaleConsumer temperatureScaleConsumer
+            , IHardwaresInApplicationConsumer hardwaresInApplicationConsumer
+            , IThermometerDeviceConsumer thermometerDeviceConsumer
             )
         {
             _connection = connection;

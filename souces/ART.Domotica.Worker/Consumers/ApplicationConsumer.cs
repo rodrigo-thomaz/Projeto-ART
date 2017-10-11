@@ -1,8 +1,11 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
+using ART.Domotica.Worker.IConsumers;
+using ART.Infra.CrossCutting.Logging;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
+using Autofac.Extras.DynamicProxy;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -52,12 +55,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicConsume(queueName, false, _getConsumer);
         }
 
-        public void GetReceived(object sender, BasicDeliverEventArgs e)
+        public virtual void GetReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetReceivedAsync(sender, e));
         }
 
-        public async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public virtual async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", ApplicationConstants.GetQueueName, Encoding.UTF8.GetString(e.Body));
