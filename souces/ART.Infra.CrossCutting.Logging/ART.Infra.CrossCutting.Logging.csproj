@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConsoleAppender.cs" />
     <Compile Include="SqlServerAppender.cs" />
     <Compile Include="CallDebugLogger.cs" />
     <Compile Include="ILogger.cs" />
