@@ -20,8 +20,10 @@
 
         static void Main(string[] args)
         {
-            var builder = new ContainerBuilder();
+            log4net.Config.XmlConfigurator.Configure();
 
+            var builder = new ContainerBuilder();
+            
             builder.RegisterType<WorkerService>();
 
             builder.RegisterType<ARTDbContext>().InstancePerDependency();
