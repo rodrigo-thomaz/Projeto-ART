@@ -5,6 +5,7 @@
     using ART.Domotica.Worker.Producer.Interfaces;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Domotica.Model;
+    using System;
 
     public class ApplicationProducer : IApplicationProducer
     {
@@ -23,7 +24,13 @@
 
         public async Task<ApplicationGetModel> Get(AuthenticatedMessageContract message)
         {
-            throw new System.NotImplementedException();
+            return await Task.Run(() => 
+            {
+                return new ApplicationGetModel
+                {
+                    Id = Guid.NewGuid(),
+                };
+            });
         }
     }
 }

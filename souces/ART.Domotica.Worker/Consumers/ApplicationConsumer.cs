@@ -2,6 +2,7 @@
 using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Model;
 using ART.Domotica.Worker.IConsumers;
+using ART.Domotica.Worker.Producer.Interfaces;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
@@ -18,16 +19,18 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _getConsumer;
 
         private readonly IApplicationDomain _applicationDomain;
+        private readonly IApplicationProducer _applicationProducer;
 
         #endregion
 
         #region constructors
 
-        public ApplicationConsumer(IConnection connection, IApplicationDomain applicationDomain) : base(connection)
+        public ApplicationConsumer(IConnection connection, IApplicationDomain applicationDomain, IApplicationProducer applicationProducer) : base(connection)
         {
             _getConsumer = new EventingBasicConsumer(_model);
 
             _applicationDomain = applicationDomain;
+            _applicationProducer = applicationProducer;
 
             Initialize();
         }
@@ -63,6 +66,7 @@ namespace ART.Domotica.Worker.Consumers
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var data = await _applicationDomain.Get(message);
             SendGetCompleted(message, data);
+            var data1 = await _applicationProducer.Get(message);
         }
 
         public void SendGetCompleted(AuthenticatedMessageContract message, ApplicationGetModel data)

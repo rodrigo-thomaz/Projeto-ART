@@ -4,6 +4,7 @@
     using ART.Domotica.Domain.AutoMapper;
     using ART.Domotica.Repository;
     using ART.Domotica.Worker.Modules;
+    using ART.Domotica.Worker.Producer;
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
 
@@ -30,6 +31,7 @@
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
+            builder.RegisterModule<ProducerModule>();
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ConsumerModule>();
 

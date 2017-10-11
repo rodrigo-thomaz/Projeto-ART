@@ -7,7 +7,7 @@
     using Autofac;
     using Autofac.Extras.DynamicProxy;
 
-    public class Producer2Module : Autofac.Module
+    public class ProducerModule : Autofac.Module
     {
         #region Methods
 

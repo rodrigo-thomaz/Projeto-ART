@@ -7,8 +7,8 @@
     <ProjectGuid>{D3393883-88E8-49CA-91C7-A123E4BCAA0E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.Domotica.Domain</RootNamespace>
-    <AssemblyName>ART.Domotica.Domain</AssemblyName>
+    <RootNamespace>ART.Domotica.Worker.Producer</RootNamespace>
+    <AssemblyName>ART.Domotica.Worker.Producer</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -63,7 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Producer2Module.cs" />
+    <Compile Include="ProducerModule.cs" />
     <Compile Include="Interfaces\IApplicationProducer.cs" />
     <Compile Include="Services\ApplicationProducer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
