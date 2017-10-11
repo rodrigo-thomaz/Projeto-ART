@@ -28,7 +28,7 @@
 
             builder.RegisterModule<LoggingModule>();
             builder.RegisterModule<RepositoryModule>();
-            builder.RegisterModule<DomainModule>();
+            builder.RegisterModule<DomainModule>();            
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ConsumerModule>();
 

@@ -8,7 +8,6 @@ using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
-using log4net;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -24,7 +23,7 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public TemperatureScaleConsumer(IConnection connection, ILog log, ITemperatureScaleDomain temperatureScaleDomain) : base(connection, log)
+        public TemperatureScaleConsumer(IConnection connection, ITemperatureScaleDomain temperatureScaleDomain) : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
 

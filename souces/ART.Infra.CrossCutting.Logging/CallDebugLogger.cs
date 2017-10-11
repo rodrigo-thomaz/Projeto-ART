@@ -35,6 +35,11 @@
 
             var properties = LogicalThreadContext.Properties;
 
+            if(targetType.Module.Name.Contains("Consumer"))
+            {
+
+            }
+
             properties["callerModule"] = targetType.Module.Name;
             properties["callerNamespace"] = targetType.Namespace;
             properties["callerName"] = targetType.Name;

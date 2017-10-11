@@ -8,7 +8,7 @@
     {
         #region Fields
 
-        private readonly ApplicationConsumer _applicationConsumer;
+        private readonly IApplicationConsumer _applicationConsumer;
         private readonly ApplicationUserConsumer _applicationUserConsumer;
         private readonly IConnection _connection;
         private readonly DSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
@@ -22,7 +22,7 @@
 
         public WorkerService(
             IConnection connection
-            , ApplicationConsumer applicationConsumer
+            , IApplicationConsumer applicationConsumer
             , ApplicationUserConsumer applicationUserConsumer
             , DSFamilyTempSensorConsumer dsFamilyTempSensorConsumer
             , TemperatureScaleConsumer temperatureScaleConsumer

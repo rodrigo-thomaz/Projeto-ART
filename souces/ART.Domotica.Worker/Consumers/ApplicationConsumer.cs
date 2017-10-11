@@ -3,7 +3,6 @@ using ART.Domotica.Domain.Interfaces;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
-using log4net;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class ApplicationConsumer : ConsumerBase
+    public class ApplicationConsumer : ConsumerBase, IApplicationConsumer
     {
         #region private fields
 
@@ -24,7 +23,7 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public ApplicationConsumer(IConnection connection, ILog log, IApplicationDomain applicationDomain) : base(connection, log)
+        public ApplicationConsumer(IConnection connection, IApplicationDomain applicationDomain) : base(connection)
         {
             _getConsumer = new EventingBasicConsumer(_model);
 
@@ -53,12 +52,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicConsume(queueName, false, _getConsumer);
         }
 
-        private void GetReceived(object sender, BasicDeliverEventArgs e)
+        public void GetReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetReceivedAsync(sender, e));
         }
 
-        private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             Console.WriteLine();
             Console.WriteLine("[{0}] {1}", ApplicationConstants.GetQueueName, Encoding.UTF8.GetString(e.Body));

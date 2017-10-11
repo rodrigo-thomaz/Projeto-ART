@@ -5,7 +5,6 @@
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
     using ART.Infra.CrossCutting.Utils;
-    using log4net;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
     using System;
@@ -23,8 +22,8 @@
 
         #region Constructors
 
-        public ThermometerDeviceConsumer(IConnection connection, ILog log, IThermometerDeviceDomain thermometerDeviceDomain)
-            : base(connection, log)
+        public ThermometerDeviceConsumer(IConnection connection, IThermometerDeviceDomain thermometerDeviceDomain)
+            : base(connection)
         {
             _getListConsumer = new EventingBasicConsumer(_model);
 

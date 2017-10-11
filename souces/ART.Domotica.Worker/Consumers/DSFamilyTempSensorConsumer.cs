@@ -12,7 +12,6 @@ using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
-using log4net;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -33,7 +32,7 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public DSFamilyTempSensorConsumer(IConnection connection, ILog log, IDSFamilyTempSensorDomain dsFamilyTempSensorDomain) : base(connection, log)
+        public DSFamilyTempSensorConsumer(IConnection connection, IDSFamilyTempSensorDomain dsFamilyTempSensorDomain) : base(connection)
         {
             _getListConsumer = new EventingBasicConsumer(_model);
             _getAllConsumer = new EventingBasicConsumer(_model);

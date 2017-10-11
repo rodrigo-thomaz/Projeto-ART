@@ -4,7 +4,6 @@ using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using ART.Security.Constant;
 using ART.Security.Contract;
-using log4net;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -25,7 +24,7 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public ApplicationUserConsumer(IConnection connection, ILog log, IApplicationUserDomain applicationUserDomain) : base(connection, log)
+        public ApplicationUserConsumer(IConnection connection, IApplicationUserDomain applicationUserDomain) : base(connection)
         {
             _registerUserConsumer = new EventingBasicConsumer(_model);
 

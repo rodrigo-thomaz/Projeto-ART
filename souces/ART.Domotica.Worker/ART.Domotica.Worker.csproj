@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consumers\IApplicationConsumer.cs" />
     <Compile Include="Consumers\ThermometerDeviceConsumer.cs" />
     <Compile Include="Consumers\HardwaresInApplicationConsumer.cs" />
     <Compile Include="Consumers\ApplicationConsumer.cs" />
