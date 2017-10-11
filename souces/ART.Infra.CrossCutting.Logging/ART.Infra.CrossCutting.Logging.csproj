@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SqlServerAppender.cs" />
     <Compile Include="CallDebugLogger.cs" />
     <Compile Include="ILogger.cs" />
     <Compile Include="Logger.cs" />
@@ -68,7 +69,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SqlServer_CreateTable.sql" />
+    <None Include="SqlServerCreateTable.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
