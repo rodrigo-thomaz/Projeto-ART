@@ -34,23 +34,6 @@
 
             var properties = LogicalThreadContext.Properties;
 
-            if(targetType.Module.Name.Contains("Consumer"))
-            {
-
-            }
-            else if (targetType.Name.Contains("Consumer"))
-            {
-
-            }
-            else if (targetMethod.Name.Contains("SendGetCompleted"))
-            {
-
-            }
-            else if (targetType.Module.Name.Contains("Producer"))
-            {
-
-            }
-
             var module = targetType.Module == null ? "" : targetType.Module.Name;
 
             properties["callerModule"] = module;
@@ -60,7 +43,7 @@
             properties["callerLine"] = 0;
             properties["callerStackTrace"] = "";
 
-            _log.DebugFormat("Calling");
+            _log.Debug("Calling");
 
             invocation.Proceed();
 

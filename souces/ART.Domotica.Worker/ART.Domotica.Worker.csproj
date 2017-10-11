@@ -123,10 +123,6 @@
       <Project>{d0287824-c8bc-4025-8b99-5a8fd8aef1f1}</Project>
       <Name>ART.Domotica.Repository</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ART.Domotica.Worker.Producer\ART.Domotica.Worker.Producer.csproj">
-      <Project>{d3393883-88e8-49ca-91c7-a123e4bcaa0e}</Project>
-      <Name>ART.Domotica.Worker.Producer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.Logging\ART.Infra.CrossCutting.Logging.csproj">
       <Project>{8CA05FE6-15FE-4C6E-A10A-3360509F4F8C}</Project>
       <Name>ART.Infra.CrossCutting.Logging</Name>

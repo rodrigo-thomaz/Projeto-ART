@@ -1,8 +1,7 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
-using ART.Domotica.Model;
 using ART.Domotica.Worker.IConsumers;
-using ART.Domotica.Worker.Producer.Interfaces;
+using ART.Infra.CrossCutting.Logging;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
@@ -19,18 +18,20 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _getConsumer;
 
         private readonly IApplicationDomain _applicationDomain;
-        private readonly IApplicationProducer _applicationProducer;
+
+        private readonly ILogger _logger;
 
         #endregion
 
         #region constructors
 
-        public ApplicationConsumer(IConnection connection, IApplicationDomain applicationDomain, IApplicationProducer applicationProducer) : base(connection)
+        public ApplicationConsumer(IConnection connection, ILogger logger, IApplicationDomain applicationDomain) : base(connection)
         {
             _getConsumer = new EventingBasicConsumer(_model);
 
             _applicationDomain = applicationDomain;
-            _applicationProducer = applicationProducer;
+
+            _logger = logger;
 
             Initialize();
         }
@@ -62,20 +63,16 @@ namespace ART.Domotica.Worker.Consumers
 
         private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var data = await _applicationDomain.Get(message);
-            SendGetCompleted(message, data);
-            var data1 = await _applicationProducer.Get(message);
-        }
-
-        public void SendGetCompleted(AuthenticatedMessageContract message, ApplicationGetModel data)
-        {
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, buffer);
-        }
+            _logger.DebugLeave();
+        }        
 
         #endregion
     }
