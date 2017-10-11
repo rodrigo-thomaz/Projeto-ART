@@ -8,8 +8,6 @@
     {
         #region Methods
 
-        void Initialize();
-
         void GetReceived(object sender, BasicDeliverEventArgs e);
 
         Task GetReceivedAsync(object sender, BasicDeliverEventArgs e);

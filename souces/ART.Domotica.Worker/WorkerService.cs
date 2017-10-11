@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Worker
 {
-    using ART.Domotica.Worker.IConsumers;
 
     using RabbitMQ.Client;
 
@@ -14,15 +13,7 @@
 
         #region Constructors
 
-        public WorkerService(
-            IConnection connection
-            , IApplicationConsumer applicationConsumer
-            , IApplicationUserConsumer applicationUserConsumer
-            , IDSFamilyTempSensorConsumer dsFamilyTempSensorConsumer
-            , ITemperatureScaleConsumer temperatureScaleConsumer
-            , IHardwaresInApplicationConsumer hardwaresInApplicationConsumer
-            , IThermometerDeviceConsumer thermometerDeviceConsumer
-            )
+        public WorkerService(IConnection connection)
         {
             _connection = connection;
         }

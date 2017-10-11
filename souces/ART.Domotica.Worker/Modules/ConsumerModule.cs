@@ -32,6 +32,7 @@
             builder.RegisterAssemblyTypes(asm)
                 .Where(x => x.Name.EndsWith("Consumer"))
                 .SingleInstance()
+                .AutoActivate()
                 .AsImplementedInterfaces()
                 .EnableInterfaceInterceptors()
                 .InterceptedBy(typeof(CallDebugLogger));
