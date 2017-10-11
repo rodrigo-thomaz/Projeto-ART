@@ -1,7 +1,5 @@
 ﻿namespace ART.Domotica.Worker.Modules
 {
-    using ART.Domotica.Worker.Consumers;
-    using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;
     using Autofac;
     using Autofac.Extras.DynamicProxy;
