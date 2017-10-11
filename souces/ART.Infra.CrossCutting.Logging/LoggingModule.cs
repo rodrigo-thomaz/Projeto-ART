@@ -47,12 +47,6 @@
 
         private static void OnComponentPreparing(object sender, PreparingEventArgs e)
         {
-            var teste = new ResolvedParameter
-                (
-                    (p, i) => p.ParameterType == typeof(ILog),
-                    (p, i) => LogManager.GetLogger(p.Member.DeclaringType)
-                );
-
             e.Parameters = e.Parameters.Union(
               new[]
               {
