@@ -28,7 +28,7 @@
         public void DebugEnter([CallerMemberName] string callerMethod = "", [CallerLineNumber] int callerLine = 0)
         {
             Prepare(callerMethod, callerLine, false);
-            _log.Debug("Enter");
+            _log.Debug("Enter task");
         }
 
         public void DebugLeave([CallerMemberName] string callerMethod = "", [CallerLineNumber] int callerLine = 0)

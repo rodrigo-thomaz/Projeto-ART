@@ -43,22 +43,22 @@
             properties["callerLine"] = 0;
             properties["callerStackTrace"] = "";
 
-            _log.Debug("Calling");
+            _log.Debug("Enter");
 
             invocation.Proceed();
 
             if (invocation.ReturnValue == null)
             {
-                _log.Debug("Done: no results.");
+                _log.Debug("Leave: no results.");
             }
             else if (invocation.ReturnValue.GetType().BaseType != null && invocation.ReturnValue.GetType().BaseType == typeof(Task))
             {
-                _log.Debug("Done task");
+                _log.Debug("Leave");
             }
             else
             {
-                _log.DebugFormat("Done: result was {0}.", invocation.ReturnValue);
-            }
+                _log.DebugFormat("Leave: result was {0}.", invocation.ReturnValue);                
+            }            
         }
 
         #endregion Methods
