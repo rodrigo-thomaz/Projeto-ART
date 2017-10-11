@@ -42,7 +42,9 @@ namespace ART.Domotica.WebApi
             ConfigureOAuth(app);
 
             WebApiConfig.Register(config);
-            
+
+            log4net.Config.XmlConfigurator.Configure();
+
             // Make the autofac container
             var builder = new ContainerBuilder();
 
