@@ -38,6 +38,18 @@
             {
 
             }
+            else if (targetType.Name.Contains("Consumer"))
+            {
+
+            }
+            else if (targetMethod.Name.Contains("SendGetCompleted"))
+            {
+
+            }
+            else if (targetType.Module.Name.Contains("Producer"))
+            {
+
+            }
 
             var module = targetType.Module == null ? "" : targetType.Module.Name;
 

@@ -1,5 +1,6 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
+using ART.Domotica.Model;
 using ART.Domotica.Worker.IConsumers;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
@@ -51,19 +52,24 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicConsume(queueName, false, _getConsumer);
         }
 
-        public virtual void GetReceived(object sender, BasicDeliverEventArgs e)
+        private void GetReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(GetReceivedAsync(sender, e));
         }
 
-        public virtual async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var data = await _applicationDomain.Get(message);
+            SendGetCompleted(message, data);
+        }
+
+        public void SendGetCompleted(AuthenticatedMessageContract message, ApplicationGetModel data)
+        {
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetCompletedQueueName);            
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
