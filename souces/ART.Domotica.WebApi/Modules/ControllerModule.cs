@@ -1,10 +1,12 @@
 ﻿namespace ART.Domotica.WebApi.Modules
 {
+    using System.Reflection;
+
     using ART.Infra.CrossCutting.Logging;
+
     using Autofac;
     using Autofac.Extras.DynamicProxy;
     using Autofac.Integration.WebApi;
-    using System.Reflection;
 
     public class ControllerModule : Autofac.Module
     {
@@ -12,9 +14,9 @@
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterApiControllers("Controller", Assembly.GetExecutingAssembly())            
+            builder.RegisterApiControllers("Controller", Assembly.GetExecutingAssembly())
                 .EnableClassInterceptors()
-                .InterceptedBy(typeof(CallDebugLogger)); 
+                .InterceptedBy(typeof(CallDebugLogger));
         }
 
         #endregion Methods

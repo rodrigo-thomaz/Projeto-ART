@@ -1,14 +1,11 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Worker.IConsumers;
-using ART.Infra.CrossCutting.Logging;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ART.Domotica.Worker.Consumers

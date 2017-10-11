@@ -27,12 +27,12 @@
             builder.RegisterType<ARTDbContext>().InstancePerDependency();
 
             builder.RegisterModule<LoggingModule>();
-                        
+
             builder.RegisterModule<RepositoryModule>();
-            builder.RegisterModule<DomainModule>();            
+            builder.RegisterModule<DomainModule>();
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ConsumerModule>();
-            
+
             Mapper.Initialize(x =>
             {
                 x.AddProfile(new ApplicationProfile());

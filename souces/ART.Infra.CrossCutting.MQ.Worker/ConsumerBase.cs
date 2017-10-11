@@ -1,6 +1,5 @@
 ﻿namespace ART.Infra.CrossCutting.MQ.Worker
 {
-
     using RabbitMQ.Client;
 
     public abstract class ConsumerBase

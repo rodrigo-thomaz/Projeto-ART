@@ -1,9 +1,11 @@
 ﻿namespace ART.Domotica.Worker.Modules
 {
+    using System.Reflection;
+
     using ART.Infra.CrossCutting.Logging;
+
     using Autofac;
     using Autofac.Extras.DynamicProxy;
-    using System.Reflection;
 
     public class ConsumerModule : Autofac.Module
     {
@@ -17,8 +19,6 @@
             //    //.AsImplementedInterfaces()
             //    .EnableInterfaceInterceptors()
             //    .InterceptedBy(typeof(CallDebugLogger));
-
-
 
             //builder.RegisterType<ApplicationConsumer>().As<IApplicationConsumer>().SingleInstance();
             //builder.RegisterType<ApplicationUserConsumer>().As<IApplicationUserConsumer>().SingleInstance();

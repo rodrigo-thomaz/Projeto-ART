@@ -8,8 +8,6 @@
     using ART.Infra.CrossCutting.Utils;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
-    using System;
-    using System.Text;
     using System.Threading.Tasks;
 
     public class ThermometerDeviceConsumer : ConsumerBase, IThermometerDeviceConsumer

@@ -1,9 +1,11 @@
 ﻿namespace ART.Domotica.Producer
 {
+    using System.Reflection;
+
     using ART.Infra.CrossCutting.Logging;
+
     using Autofac;
     using Autofac.Extras.DynamicProxy;
-    using System.Reflection;
 
     public class ProducerModule : Autofac.Module
     {
