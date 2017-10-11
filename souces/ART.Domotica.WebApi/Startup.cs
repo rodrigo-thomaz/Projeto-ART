@@ -1,5 +1,6 @@
 ﻿[assembly: Microsoft.Owin.OwinStartup(typeof(ART.Domotica.WebApi.Startup))]
-
+//[assembly: log4net.Config.XmlConfigurator(ConfigFileExtension ="config",ConfigFile = "log4net.webapi.config", Watch = true)]
+[assembly: log4net.Config.XmlConfigurator()]
 namespace ART.Domotica.WebApi
 {
     using System.Threading;
@@ -21,6 +22,10 @@ namespace ART.Domotica.WebApi
 
     using RabbitMQ.Client;
     using ART.Infra.CrossCutting.Logging;
+    using System.IO;
+    using System.Configuration;
+    using System;
+    using System.Web;
 
     public class Startup
     {
@@ -42,6 +47,20 @@ namespace ART.Domotica.WebApi
             ConfigureOAuth(app);
 
             WebApiConfig.Register(config);
+            
+            // work arround rodrigo (não estava funcionando)
+            var log4netConfig = ConfigurationManager.AppSettings["log4net.Config"];
+            var log4netConfigWatch = Convert.ToBoolean(ConfigurationManager.AppSettings["log4net.Config.Watch"]);
+            var log4netConfigFullName = Path.Combine(HttpRuntime.BinDirectory, log4netConfig);
+            var log4netConfigFileInfo = new FileInfo(log4netConfigFullName);
+            if (log4netConfigWatch)
+            {                
+                log4net.Config.XmlConfigurator.ConfigureAndWatch(log4netConfigFileInfo);
+            }
+            else
+                log4net.Config.XmlConfigurator.Configure(log4netConfigFileInfo);
+            // work arround rodrigo
+
 
             // Make the autofac container
             var builder = new ContainerBuilder();
