@@ -20,6 +20,7 @@ namespace ART.Domotica.WebApi
     using Owin;
 
     using RabbitMQ.Client;
+    using ART.Infra.CrossCutting.Logging;
 
     public class Startup
     {
@@ -45,6 +46,7 @@ namespace ART.Domotica.WebApi
             // Make the autofac container
             var builder = new ContainerBuilder();
 
+            builder.RegisterModule<LoggingModule>();
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ProducerModule>();
             builder.RegisterModule<ControllerModule>();
@@ -73,6 +75,7 @@ namespace ART.Domotica.WebApi
                 properties.OnAppDisposing.Register(() =>
                 {
                     connection.Close(30);
+                    log4net.LogManager.Shutdown();
                 });
             }
         }

@@ -1,23 +1,23 @@
 ﻿namespace ART.Domotica.Producer
 {
-    using ART.Domotica.Producer.Interfaces;
-    using ART.Domotica.Producer.Services;
-
+    using ART.Infra.CrossCutting.Logging;
     using Autofac;
+    using Autofac.Extras.DynamicProxy;
+    using System.Reflection;
 
-    public class ProducerModule : Module
+    public class ProducerModule : Autofac.Module
     {
         #region Methods
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ApplicationProducer>().As<IApplicationProducer>();
-            builder.RegisterType<ApplicationUserProducer>().As<IApplicationUserProducer>();
-            builder.RegisterType<DashboardProducer>().As<IDashboardProducer>();
-            builder.RegisterType<DSFamilyTempSensorProducer>().As<IDSFamilyTempSensorProducer>();
-            builder.RegisterType<HardwaresInApplicationProducer>().As<IHardwaresInApplicationProducer>();
-            builder.RegisterType<TemperatureScaleProducer>().As<ITemperatureScaleProducer>();
-            builder.RegisterType<ThermometerDeviceProducer>().As<IThermometerDeviceProducer>();
+            var asm = Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(asm)
+                .Where(x => x.Name.EndsWith("Producer"))
+                .AsImplementedInterfaces()
+                .EnableInterfaceInterceptors()
+                .InterceptedBy(typeof(CallDebugLogger));
         }
 
         #endregion Methods
