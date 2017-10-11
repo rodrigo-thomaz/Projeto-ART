@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Worker
 {
-
     using RabbitMQ.Client;
 
     public class WorkerService
