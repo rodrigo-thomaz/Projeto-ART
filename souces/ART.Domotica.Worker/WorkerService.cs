@@ -8,13 +8,7 @@
     {
         #region Fields
 
-        private readonly IApplicationConsumer _applicationConsumer;
-        private readonly IApplicationUserConsumer _applicationUserConsumer;
         private readonly IConnection _connection;
-        private readonly IDSFamilyTempSensorConsumer _dsFamilyTempSensorConsumer;
-        private readonly IHardwaresInApplicationConsumer _hardwaresInApplicationConsumer;
-        private readonly ITemperatureScaleConsumer _temperatureScaleConsumer;
-        private readonly IThermometerDeviceConsumer _thermometerDeviceConsumer;
 
         #endregion Fields
 
@@ -31,12 +25,6 @@
             )
         {
             _connection = connection;
-            _applicationConsumer = applicationConsumer;
-            _applicationUserConsumer = applicationUserConsumer;
-            _dsFamilyTempSensorConsumer = dsFamilyTempSensorConsumer;
-            _hardwaresInApplicationConsumer = hardwaresInApplicationConsumer;
-            _temperatureScaleConsumer = temperatureScaleConsumer;
-            _thermometerDeviceConsumer = thermometerDeviceConsumer;
         }
 
         #endregion Constructors

@@ -35,7 +35,7 @@ namespace ART.Domotica.Worker.Consumers
 
         #region private voids
 
-        private void Initialize()
+        public void Initialize()
         {
             var queueName = ApplicationConstants.GetQueueName;
 
