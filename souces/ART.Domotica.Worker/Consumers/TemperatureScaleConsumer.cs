@@ -58,19 +58,12 @@ namespace ART.Domotica.Worker.Consumers
 
         public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
-            Console.WriteLine();
-            Console.WriteLine("[{0}] {1}", TemperatureScaleConstants.GetAllQueueName, Encoding.UTF8.GetString(e.Body));
-
             _model.BasicAck(e.DeliveryTag, false);
-
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var data = await _temperatureScaleDomain.GetAll();
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
-
-            Console.WriteLine("[{0}] {1}", TemperatureScaleConstants.GetAllCompletedQueueName, Encoding.UTF8.GetString(buffer));
-
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 

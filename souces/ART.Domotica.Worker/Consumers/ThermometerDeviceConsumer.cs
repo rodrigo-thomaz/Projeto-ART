@@ -61,15 +61,12 @@
         }
         public async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
-            Console.WriteLine();
-            Console.WriteLine("[{0}] {1}", ThermometerDeviceConstants.GetListAdminQueueName, Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var data = await _thermometerDeviceDomain.GetList(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ThermometerDeviceConstants.GetListCompletedAdminQueueName);
-            Console.WriteLine("[{0}] {1}", ThermometerDeviceConstants.GetListCompletedAdminQueueName, Encoding.UTF8.GetString(buffer));
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 

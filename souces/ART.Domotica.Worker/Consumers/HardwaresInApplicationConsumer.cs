@@ -96,15 +96,12 @@
         }
         public async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
-            Console.WriteLine();
-            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.GetListQueueName, Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var data = await _hardwaresInApplicationDomain.GetList(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.GetListCompletedQueueName);
-            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.GetListCompletedQueueName, Encoding.UTF8.GetString(buffer));
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
@@ -115,17 +112,12 @@
 
         public async Task SearchPinReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
-            Console.WriteLine();
-            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.SearchPinQueueName, Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
-
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwaresInApplicationPinContract>>(e.Body);
             var data = await _hardwaresInApplicationDomain.SearchPin(message);
-
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.SearchPinCompletedQueueName);
-            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.SearchPinCompletedQueueName, Encoding.UTF8.GetString(buffer));
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
@@ -136,14 +128,11 @@
 
         public async Task InsertHardwareReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
-            Console.WriteLine();
-            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.InsertHardwareQueueName, Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwaresInApplicationPinContract>>(e.Body);
             await _hardwaresInApplicationDomain.InsertHardware(message);            
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.InsertHardwareCompletedQueueName);
-            Console.WriteLine("[{0}] Ok", HardwaresInApplicationConstants.InsertHardwareCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
         }
 
@@ -154,14 +143,11 @@
 
         public async Task DeleteHardwareReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
-            Console.WriteLine();
-            Console.WriteLine("[{0}] {1}", HardwaresInApplicationConstants.DeleteHardwareQueueName, Encoding.UTF8.GetString(e.Body));
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwaresInApplicationDeleteHardwareContract>>(e.Body);
             await _hardwaresInApplicationDomain.DeleteHardware(message);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, HardwaresInApplicationConstants.DeleteHardwareCompletedQueueName);
-            Console.WriteLine("[{0}] Ok", HardwaresInApplicationConstants.DeleteHardwareCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
         }
 
