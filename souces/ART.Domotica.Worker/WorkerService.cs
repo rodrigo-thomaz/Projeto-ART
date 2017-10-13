@@ -28,27 +28,8 @@
         public bool Start()
         {
             _scheduler.Start();
-
-
-
-            // define the job and tie it to our HelloJob class
-            IJobDetail job = JobBuilder.Create<UpdatePinJob>()
-                .WithIdentity("job1", "group1")
-                .Build();
-
-            // Trigger the job to run now, and then repeat every 10 seconds
-            ITrigger trigger = TriggerBuilder.Create()
-                .WithIdentity("trigger1", "group1")
-                .StartNow()
-                .WithSimpleSchedule(x => x
-                    .WithIntervalInSeconds(10)
-                    .RepeatForever())
-                .Build();
-
-            // Tell quartz to schedule the job using our trigger
-            _scheduler.ScheduleJob(job, trigger);
-
-
+            
+            ConfigureUpdatePinJob();            
 
             return true;
         }
@@ -59,6 +40,24 @@
             _scheduler.Shutdown();
             log4net.LogManager.Shutdown();
             return true;
+        }
+        
+        private void ConfigureUpdatePinJob()
+        {
+            IJobDetail job = JobBuilder.Create<UpdatePinJob>()
+                .WithIdentity("job1", "group1")
+                .Build();
+
+            ITrigger trigger = TriggerBuilder.Create()
+                .WithIdentity("trigger1", "group1")
+                .StartNow()
+                .WithSimpleSchedule(x => x
+                    .WithIntervalInSeconds(10)
+                    .RepeatForever())
+                .Build();
+
+
+            _scheduler.ScheduleJob(job, trigger);
         }
 
         #endregion Methods
