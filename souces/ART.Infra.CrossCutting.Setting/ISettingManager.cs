@@ -7,9 +7,9 @@
     {
         #region Methods
 
-        Task<bool> Exist(string key);
-
         Task Delete(string key);
+
+        Task<bool> Exist(string key);
 
         Task<T> GetValue<T>(string key);
 

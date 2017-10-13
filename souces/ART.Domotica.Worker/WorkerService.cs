@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Worker
 {
     using System;
+    using System.Configuration;
     using System.Threading.Tasks;
 
     using ART.Domotica.Job;
@@ -9,7 +10,6 @@
     using Quartz;
 
     using RabbitMQ.Client;
-    using System.Configuration;
 
     public class WorkerService
     {
