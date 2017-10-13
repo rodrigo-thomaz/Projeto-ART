@@ -10,7 +10,7 @@
     using Autofac;
 
     using global::AutoMapper;
-
+    using System;
     using Topshelf;
     using Topshelf.Autofac;
 
@@ -47,19 +47,34 @@
 
             IContainer container = builder.Build();
 
-            HostFactory.Run(c =>
+            HostFactory.Run(x =>
             {
-                c.SetServiceName("ART.Domotica.Worker");
-                c.SetDisplayName("ART MQ Worker");
-                c.SetDescription("A ART MQ Worker.");
+                x.UseAssemblyInfoForServiceInfo();
 
-                c.UseAutofacContainer(container);
+                x.UseAutofacContainer(container);
 
-                c.Service<WorkerService>(s =>
+                x.Service<WorkerService>(s =>
                 {
                     s.ConstructUsingAutofacContainer();
                     s.WhenStarted((service, control) => service.Start());
                     s.WhenStopped((service, control) => service.Stop());
+                });
+
+                x.SetStartTimeout(TimeSpan.FromSeconds(10));
+                x.SetStopTimeout(TimeSpan.FromSeconds(10));
+
+                x.EnableServiceRecovery(r =>
+                {
+                    r.RestartService(3);
+                    //r.RunProgram(7, "ping google.com");
+                    //r.RestartComputer(5, "message");
+                    r.OnCrashOnly();
+                    r.SetResetPeriod(2);
+                });
+
+                x.OnException((exception) =>
+                {
+                    Console.WriteLine("Exception thrown - " + exception.Message);
                 });
             });
         }
