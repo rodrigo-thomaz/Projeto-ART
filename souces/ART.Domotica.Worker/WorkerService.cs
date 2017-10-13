@@ -9,6 +9,7 @@
     using Quartz;
 
     using RabbitMQ.Client;
+    using System.Configuration;
 
     public class WorkerService
     {
@@ -54,19 +55,22 @@
         {
             Task.Run(async () =>
             {
-                //try
-                //{
-                //    var exists = await _settingManager.Exist("Teste");
-                //    await _settingManager.Insert("Teste");
-                //    var result1 = await _settingManager.GetValue<int>("Teste");
-                //    await _settingManager.SetValue("Teste", 99);
-                //    var result2 = await _settingManager.GetValue<int>("Teste");
-                //    await _settingManager.Delete("Teste");
-                //}
-                //catch (Exception ex)
-                //{
-                //    throw ex;
-                //}
+                var changePinIntervalInSecondsSettingsKey = "ChangePinIntervalInSeconds";
+
+                var exists = await _settingManager.Exist(changePinIntervalInSecondsSettingsKey);
+
+                int changePinIntervalInSeconds;
+
+                if (exists)
+                {
+                    changePinIntervalInSeconds = await _settingManager.GetValue<int>(changePinIntervalInSecondsSettingsKey);
+                }
+                else
+                {
+                    var changePinIntervalInSecondsDefault = Convert.ToInt32(ConfigurationManager.AppSettings["ChangePinIntervalInSecondsDefault"]);
+                    await _settingManager.Insert(changePinIntervalInSecondsSettingsKey, changePinIntervalInSecondsDefault);
+                    changePinIntervalInSeconds = changePinIntervalInSecondsDefault;
+                }
 
                 IJobDetail job = JobBuilder.Create<UpdatePinJob>()
                 .WithIdentity("job1", "group1")
@@ -76,7 +80,7 @@
                     .WithIdentity("trigger1", "group1")
                     .StartNow()
                     .WithSimpleSchedule(x => x
-                        .WithIntervalInSeconds(10)
+                        .WithIntervalInSeconds(changePinIntervalInSeconds)
                         .RepeatForever())
                     .Build();
 

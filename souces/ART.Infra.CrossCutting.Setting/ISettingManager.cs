@@ -13,7 +13,7 @@
 
         Task<T> GetValue<T>(string key);
 
-        Task Insert(string key);
+        Task Insert<T>(string key, T value);
 
         Task SetValue<T>(string key, T value);
 

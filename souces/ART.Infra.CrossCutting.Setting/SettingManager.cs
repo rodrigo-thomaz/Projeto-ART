@@ -40,7 +40,7 @@ namespace ART.Infra.CrossCutting.Setting
             return data;
         }        
 
-        public async Task Insert(string key)
+        public async Task Insert<T>(string key, T value)
         {
             KeyValidator(key);
 
@@ -53,7 +53,7 @@ namespace ART.Infra.CrossCutting.Setting
             try
             {
                 command = CreateCommand();
-                command.CommandText = InsertCommandText(key);
+                command.CommandText = InsertCommandText(key, value);
                 result = await command.ExecuteNonQueryAsync();
             }
             finally
@@ -176,9 +176,9 @@ namespace ART.Infra.CrossCutting.Setting
             return string.Format("SELECT COUNT([Key]) FROM Setting WHERE [Key] = '{0}'", key);
         }
 
-        private string InsertCommandText(string key)
+        private string InsertCommandText<T>(string key, T value)
         {
-            return string.Format("INSERT INTO Setting ([Key]) Values ('{0}')", key);
+            return string.Format("INSERT INTO Setting ([Key], Value) Values ('{0}', '{1}')", key, value);
         }
 
         private string DeleteCommandText(string key)
