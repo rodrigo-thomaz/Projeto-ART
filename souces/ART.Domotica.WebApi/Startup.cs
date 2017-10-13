@@ -10,6 +10,7 @@ namespace ART.Domotica.WebApi
     using ART.Domotica.WebApi.Modules;
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
+    using ART.Infra.CrossCutting.Setting;
 
     using Autofac;
     using Autofac.Integration.WebApi;
@@ -48,7 +49,11 @@ namespace ART.Domotica.WebApi
             // Make the autofac container
             var builder = new ContainerBuilder();
 
+            // CrossCutting Modules
+
             builder.RegisterModule<LoggingModule>();
+            builder.RegisterModule<SettingModule>();
+
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ProducerModule>();
             builder.RegisterModule<ControllerModule>();

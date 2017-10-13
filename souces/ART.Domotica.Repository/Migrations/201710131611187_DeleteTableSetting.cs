@@ -1,17 +1,13 @@
 namespace ART.Domotica.Repository.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
 
-    public partial class AddTableSetting : DbMigration
+    public partial class DeleteTableSetting : DbMigration
     {
         #region Methods
 
         public override void Down()
-        {
-            DropTable("dbo.Setting");
-        }
-
-        public override void Up()
         {
             CreateTable(
                 "dbo.Setting",
@@ -21,6 +17,11 @@ namespace ART.Domotica.Repository.Migrations
                         Value = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
+        }
+
+        public override void Up()
+        {
+            DropTable("dbo.Setting");
         }
 
         #endregion Methods

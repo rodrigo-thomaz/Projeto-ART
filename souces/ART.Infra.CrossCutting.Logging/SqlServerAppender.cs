@@ -1,5 +1,6 @@
 ﻿namespace ART.Infra.CrossCutting.Logging
 {
+    using System.Configuration;
     using System.Data;
     using System.Text;
 
@@ -96,7 +97,7 @@
 
         private string GetConnectionString()
         {
-            return @"data source=.\SQLEXPRESS;initial catalog=ART.Log;integrated security=false;persist security info=True;User ID=sa;Password=b3b3xu!@#";
+            return ConfigurationManager.AppSettings["ART.Log.ConnectionString"];
         }
 
         private string GetConnectionType()

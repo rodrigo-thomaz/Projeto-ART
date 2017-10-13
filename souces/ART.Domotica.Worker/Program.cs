@@ -10,6 +10,7 @@
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.Scheduler;
+    using ART.Infra.CrossCutting.Setting;
 
     using Autofac;
 
@@ -35,7 +36,10 @@
 
             builder.RegisterType<ARTDbContext>().InstancePerDependency();
 
+            // CrossCutting Modules
+
             builder.RegisterModule<LoggingModule>();
+            builder.RegisterModule<SettingModule>();
             builder.RegisterModule<SchedulerModule>();
 
             builder.RegisterModule<RepositoryModule>();

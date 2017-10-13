@@ -73,7 +73,6 @@
     <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorBaseConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
-    <Compile Include="Configurations\SettingConfiguration.cs" />
     <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
     <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
@@ -89,7 +88,6 @@
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
-    <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ThermometerDevice.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
@@ -117,6 +115,10 @@
     <Compile Include="Migrations\201710131430493_AddTableSetting.Designer.cs">
       <DependentUpon>201710131430493_AddTableSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710131611187_DeleteTableSetting.cs" />
+    <Compile Include="Migrations\201710131611187_DeleteTableSetting.Designer.cs">
+      <DependentUpon>201710131611187_DeleteTableSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -143,6 +145,10 @@
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Setting\ART.Infra.CrossCutting.Setting.csproj">
+      <Project>{951AFF8D-697B-4A63-8BF0-992164A2B619}</Project>
+      <Name>ART.Infra.CrossCutting.Setting</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710071236123_InitialCreate.resx">
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710131430493_AddTableSetting.resx">
       <DependentUpon>201710131430493_AddTableSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131611187_DeleteTableSetting.resx">
+      <DependentUpon>201710131611187_DeleteTableSetting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

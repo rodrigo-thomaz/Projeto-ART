@@ -4,8 +4,10 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
+    using ART.Infra.CrossCutting.Setting;
 
     public class Seeds
     {
