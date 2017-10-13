@@ -73,6 +73,7 @@
     <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorBaseConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
+    <Compile Include="Configurations\SettingConfiguration.cs" />
     <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
     <Compile Include="Configurations\ThermometerDeviceConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
+    <Compile Include="Entities\Setting.cs" />
     <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ThermometerDevice.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
@@ -110,6 +112,10 @@
     <Compile Include="Migrations\201710082306089_InitialCreate2.cs" />
     <Compile Include="Migrations\201710082306089_InitialCreate2.Designer.cs">
       <DependentUpon>201710082306089_InitialCreate2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710131430493_AddTableSetting.cs" />
+    <Compile Include="Migrations\201710131430493_AddTableSetting.Designer.cs">
+      <DependentUpon>201710131430493_AddTableSetting.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -147,6 +153,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710082306089_InitialCreate2.resx">
       <DependentUpon>201710082306089_InitialCreate2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710131430493_AddTableSetting.resx">
+      <DependentUpon>201710131430493_AddTableSetting.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

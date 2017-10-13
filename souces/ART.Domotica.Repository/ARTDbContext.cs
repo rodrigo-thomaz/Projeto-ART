@@ -20,6 +20,11 @@
 
         #region Properties
 
+        public DbSet<Setting> Setting
+        {
+            get; set;
+        }
+
         public DbSet<Application> Application
         {
             get; set;
@@ -82,6 +87,7 @@
 
             //Configurations
 
+            modelBuilder.Configurations.Add(new SettingConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());

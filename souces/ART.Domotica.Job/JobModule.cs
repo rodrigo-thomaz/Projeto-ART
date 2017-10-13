@@ -2,7 +2,6 @@
 {
     using Autofac;
     using Autofac.Extras.Quartz;
-    using Quartz;
 
     public class JobModule : Autofac.Module
     {
