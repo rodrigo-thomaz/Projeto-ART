@@ -75,6 +75,10 @@
       <Project>{F541F7FF-B9D6-47DC-9097-4CD7B6084C7F}</Project>
       <Name>ART.Domotica.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.Model\ART.Domotica.Model.csproj">
+      <Project>{49447556-DCA8-4FC7-AC1D-7F5163E7ABEA}</Project>
+      <Name>ART.Domotica.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

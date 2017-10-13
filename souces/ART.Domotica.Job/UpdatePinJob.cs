@@ -25,7 +25,11 @@
 
         public void Execute(IJobExecutionContext context)
         {
-            _hardwareDomain.UpdatePins().Wait();
+            var task = _hardwareDomain.UpdatePins();
+
+            task.Wait();
+
+            var teste = task.Result;
         }
 
         #endregion Methods
