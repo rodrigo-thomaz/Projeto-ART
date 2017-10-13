@@ -1,12 +1,9 @@
 ﻿namespace ART.Domotica.Worker.Modules
 {
-
-    using ART.Infra.CrossCutting.Logging;
-
-    using Autofac;
-    using Autofac.Extras.DynamicProxy;
     using ART.Domotica.Worker.Consumers;
     using ART.Domotica.Worker.IConsumers;
+
+    using Autofac;
 
     public class ConsumerModule : Autofac.Module
     {
@@ -14,20 +11,20 @@
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<ApplicationConsumer>()
-                .As<IApplicationConsumer>()
-                .SingleInstance()
-                .AutoActivate()
-                .AsImplementedInterfaces()
-                .EnableInterfaceInterceptors()
-                .InterceptedBy(typeof(CallDebugLogger));
-
-            //builder.RegisterType<ApplicationConsumer>().As<IApplicationConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<ApplicationConsumer>().As<IApplicationConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ApplicationUserConsumer>().As<IApplicationUserConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DSFamilyTempSensorConsumer>().As<IDSFamilyTempSensorConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<HardwaresInApplicationConsumer>().As<IHardwaresInApplicationConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<TemperatureScaleConsumer>().As<ITemperatureScaleConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ThermometerDeviceConsumer>().As<IThermometerDeviceConsumer>().SingleInstance().AutoActivate();
+
+            //builder.RegisterType<ApplicationConsumer>()
+            //    .As<IApplicationConsumer>()
+            //    .SingleInstance()
+            //    .AutoActivate()
+            //    .AsImplementedInterfaces()
+            //    .EnableInterfaceInterceptors()
+            //    .InterceptedBy(typeof(CallDebugLogger));
 
             //var asm = Assembly.GetExecutingAssembly();
 

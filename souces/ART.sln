@@ -74,6 +74,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Infra.CrossCutting.Doma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Infra.CrossCutting.Scheduler", "ART.Infra.CrossCutting.Scheduler\ART.Infra.CrossCutting.Scheduler.csproj", "{BC5A302C-5182-461D-A6AA-0D1B16DB4759}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Domotica.Job", "ART.Domotica.Job\ART.Domotica.Job.csproj", "{DE2C402C-DBDC-41C1-B987-0349F3975685}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -314,6 +316,14 @@ Global
 		{BC5A302C-5182-461D-A6AA-0D1B16DB4759}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BC5A302C-5182-461D-A6AA-0D1B16DB4759}.Release|x86.ActiveCfg = Release|Any CPU
 		{BC5A302C-5182-461D-A6AA-0D1B16DB4759}.Release|x86.Build.0 = Release|Any CPU
+		{DE2C402C-DBDC-41C1-B987-0349F3975685}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE2C402C-DBDC-41C1-B987-0349F3975685}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE2C402C-DBDC-41C1-B987-0349F3975685}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{DE2C402C-DBDC-41C1-B987-0349F3975685}.Debug|x86.Build.0 = Debug|Any CPU
+		{DE2C402C-DBDC-41C1-B987-0349F3975685}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE2C402C-DBDC-41C1-B987-0349F3975685}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE2C402C-DBDC-41C1-B987-0349F3975685}.Release|x86.ActiveCfg = Release|Any CPU
+		{DE2C402C-DBDC-41C1-B987-0349F3975685}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -348,6 +358,7 @@ Global
 		{8CA05FE6-15FE-4C6E-A10A-3360509F4F8C} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
 		{D06A9B85-BF4F-4002-BD06-A228D0F49BDA} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
 		{BC5A302C-5182-461D-A6AA-0D1B16DB4759} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
+		{DE2C402C-DBDC-41C1-B987-0349F3975685} = {3B4488EC-9D6D-42CE-81E4-601B8CC29012}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7BF3A15-A6FC-4D4A-A446-4CF58FF70F7C}

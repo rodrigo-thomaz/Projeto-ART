@@ -1,18 +1,25 @@
 ﻿namespace ART.Domotica.Worker
 {
+    using System;
+
     using ART.Domotica.Domain;
     using ART.Domotica.Domain.AutoMapper;
+    using ART.Domotica.Job;
     using ART.Domotica.Repository;
     using ART.Domotica.Worker.Modules;
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
+    using ART.Infra.CrossCutting.Scheduler;
 
     using Autofac;
 
     using global::AutoMapper;
-    using System;
+
+    using Quartz;
+
     using Topshelf;
     using Topshelf.Autofac;
+    using Topshelf.Quartz;
 
     class Program
     {
@@ -23,17 +30,19 @@
             log4net.Config.XmlConfigurator.Configure();
 
             var builder = new ContainerBuilder();
-            
+
             builder.RegisterType<WorkerService>();
 
             builder.RegisterType<ARTDbContext>().InstancePerDependency();
 
             builder.RegisterModule<LoggingModule>();
+            builder.RegisterModule<SchedulerModule>();
 
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ConsumerModule>();
+            builder.RegisterModule<JobModule>();
 
             Mapper.Initialize(x =>
             {
@@ -46,6 +55,8 @@
             });
 
             IContainer container = builder.Build();
+
+            ScheduleJobServiceConfiguratorExtensions.SchedulerFactory = () => container.Resolve<IScheduler>();
 
             HostFactory.Run(x =>
             {

@@ -2,8 +2,5 @@
 {
     public interface IApplicationConsumer
     {
-        #region Methods 
-
-        #endregion Methods
     }
 }

@@ -1,26 +1,60 @@
-﻿using log4net.Appender;
-
-namespace ART.Infra.CrossCutting.Logging
+﻿namespace ART.Infra.CrossCutting.Logging
 {
-    using log4net.Layout;
     using System.Data;
     using System.Text;
 
+    using log4net.Appender;
+    using log4net.Layout;
+
     public class SqlServerAppender : AdoNetAppender
     {
+        #region Constructors
+
         public SqlServerAppender()
         {
             Initialize();
         }
 
-        private void Initialize()
-        {
-            CommandType = CommandType.Text;
-            ConnectionType = GetConnectionType();
-            ConnectionString = GetConnectionString();
-            CommandText = GetCommandText();
+        #endregion Constructors
 
-            LoadParameters();                  
+        #region Methods
+
+        private void AddDateTimeParameterToAppender(string paramName)
+        {
+            AdoNetAppenderParameter param = new AdoNetAppenderParameter();
+            param.ParameterName = paramName;
+            param.DbType = DbType.DateTime;
+            param.Layout = new RawUtcTimeStampLayout();
+            AddParameter(param);
+        }
+
+        private void AddErrorParameterToAppender(string paramName, int size)
+        {
+            AdoNetAppenderParameter param = new AdoNetAppenderParameter();
+            param.ParameterName = paramName;
+            param.DbType = DbType.String;
+            param.Size = size;
+            param.Layout = new Layout2RawLayoutAdapter(new ExceptionLayout());
+            AddParameter(param);
+        }
+
+        private void AddIntParameterToAppender(string paramName, string conversionPattern)
+        {
+            AdoNetAppenderParameter param = new AdoNetAppenderParameter();
+            param.ParameterName = paramName;
+            param.DbType = DbType.Int32;
+            param.Layout = new Layout2RawLayoutAdapter(new PatternLayout(conversionPattern));
+            AddParameter(param);
+        }
+
+        private void AddStringParameterToAppender(string paramName, int size, string conversionPattern)
+        {
+            AdoNetAppenderParameter param = new AdoNetAppenderParameter();
+            param.ParameterName = paramName;
+            param.DbType = DbType.String;
+            param.Size = size;
+            param.Layout = new Layout2RawLayoutAdapter(new PatternLayout(conversionPattern));
+            AddParameter(param);
         }
 
         private string GetCommandText()
@@ -60,14 +94,24 @@ namespace ART.Infra.CrossCutting.Logging
             return sb.ToString();
         }
 
+        private string GetConnectionString()
+        {
+            return @"data source=.\SQLEXPRESS;initial catalog=ART.Log;integrated security=false;persist security info=True;User ID=sa;Password=b3b3xu!@#";
+        }
+
         private string GetConnectionType()
         {
             return "System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
         }
 
-        private string GetConnectionString()
+        private void Initialize()
         {
-            return @"data source=.\SQLEXPRESS;initial catalog=ART.Log;integrated security=false;persist security info=True;User ID=sa;Password=b3b3xu!@#";
+            CommandType = CommandType.Text;
+            ConnectionType = GetConnectionType();
+            ConnectionString = GetConnectionString();
+            CommandText = GetCommandText();
+
+            LoadParameters();
         }
 
         private void LoadParameters()
@@ -87,42 +131,6 @@ namespace ART.Infra.CrossCutting.Logging
             AddStringParameterToAppender("stacktrace", 500, "%property{callerStacktrace}");
         }
 
-        private void AddStringParameterToAppender(string paramName, int size, string conversionPattern)
-        {
-            AdoNetAppenderParameter param = new AdoNetAppenderParameter();
-            param.ParameterName = paramName;
-            param.DbType = DbType.String;
-            param.Size = size;
-            param.Layout = new Layout2RawLayoutAdapter(new PatternLayout(conversionPattern));
-            AddParameter(param);
-        }
-
-        private void AddIntParameterToAppender(string paramName, string conversionPattern)
-        {
-            AdoNetAppenderParameter param = new AdoNetAppenderParameter();
-            param.ParameterName = paramName;
-            param.DbType = DbType.Int32;
-            param.Layout = new Layout2RawLayoutAdapter(new PatternLayout(conversionPattern));
-            AddParameter(param);
-        }
-
-        private void AddDateTimeParameterToAppender(string paramName)
-        {
-            AdoNetAppenderParameter param = new AdoNetAppenderParameter();
-            param.ParameterName = paramName;
-            param.DbType = DbType.DateTime;
-            param.Layout = new RawUtcTimeStampLayout();
-            AddParameter(param);
-        }
-
-        private void AddErrorParameterToAppender(string paramName, int size)
-        {
-            AdoNetAppenderParameter param = new AdoNetAppenderParameter();
-            param.ParameterName = paramName;
-            param.DbType = DbType.String;
-            param.Size = size;
-            param.Layout = new Layout2RawLayoutAdapter(new ExceptionLayout());
-            AddParameter(param);
-        }
-    }    
+        #endregion Methods
+    }
 }

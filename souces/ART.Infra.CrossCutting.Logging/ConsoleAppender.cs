@@ -1,15 +1,21 @@
-﻿using log4net.Appender;
-using log4net.Core;
-using log4net.Layout;
-
-namespace ART.Infra.CrossCutting.Logging
+﻿namespace ART.Infra.CrossCutting.Logging
 {
+    using log4net.Appender;
+    using log4net.Core;
+    using log4net.Layout;
+
     public class ConsoleAppender : ColoredConsoleAppender
     {
+        #region Constructors
+
         public ConsoleAppender()
         {
             Initialize();
         }
+
+        #endregion Constructors
+
+        #region Methods
 
         private void Initialize()
         {
@@ -34,7 +40,7 @@ namespace ART.Infra.CrossCutting.Logging
             AddMapping(new LevelColors
             {
                 Level = Level.Error,
-                ForeColor = Colors.Red,                
+                ForeColor = Colors.Red,
             });
 
             AddMapping(new LevelColors
@@ -46,5 +52,7 @@ namespace ART.Infra.CrossCutting.Logging
 
             Layout = new PatternLayout("[%-5level][%property{callerNamespace}.%property{callerName}.%property{callerMethod}]%message %exception [%property{NDC}] %newline");
         }
+
+        #endregion Methods
     }
 }

@@ -57,8 +57,8 @@
             }
             else
             {
-                _log.DebugFormat("Leave: result was {0}.", invocation.ReturnValue);                
-            }            
+                _log.DebugFormat("Leave: result was {0}.", invocation.ReturnValue);
+            }
         }
 
         #endregion Methods
