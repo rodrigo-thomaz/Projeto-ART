@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Job
 {
-    using System.Threading.Tasks;
 
     using ART.Domotica.Domain.Interfaces;
 
@@ -27,10 +26,7 @@
 
         public void Execute(IJobExecutionContext context)
         {
-            Task.Run(() =>
-            {
-                _hardwareDomain.UpdatePins();
-            });
+            _hardwareDomain.UpdatePins().Wait();
         }
 
         #endregion Methods

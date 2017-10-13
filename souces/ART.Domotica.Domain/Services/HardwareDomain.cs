@@ -4,8 +4,8 @@
 
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Repository.Interfaces;
-    using System;
     using ART.Infra.CrossCutting.Domain;
+    using ART.Infra.CrossCutting.Utils;
 
     public class HardwareDomain : DomainBase, IHardwareDomain
     {
@@ -18,7 +18,7 @@
         #region Constructors
 
         public HardwareDomain(IHardwareRepository hardwareRepository)
-        {
+        {        
             _hardwareRepository = hardwareRepository;
         }
         
@@ -28,7 +28,19 @@
 
         public async Task UpdatePins()
         {
-            await _hardwareRepository.GetById(Guid.NewGuid());
+            var existingPins = await _hardwareRepository.GetExistingPins();
+            var hardwaresNotInApplication = await _hardwareRepository.GetHardwaresNotInApplication();
+
+            foreach (var item in hardwaresNotInApplication)
+            {
+                var pin = RandonHelper.RandomString(4);
+                while (existingPins.Contains(pin))
+                {
+                    pin = RandonHelper.RandomString(4);
+                }
+                item.Pin = pin;
+                await _hardwareRepository.Update(item);
+            }
         }
 
         #endregion Methods

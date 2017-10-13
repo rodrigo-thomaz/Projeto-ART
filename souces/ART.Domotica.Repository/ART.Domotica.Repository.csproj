@@ -149,6 +149,10 @@
       <Project>{951AFF8D-697B-4A63-8BF0-992164A2B619}</Project>
       <Name>ART.Infra.CrossCutting.Setting</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Utils\ART.Infra.CrossCutting.Utils.csproj">
+      <Project>{A26AA9F8-C0E9-4624-B9A8-BE76F908BFD0}</Project>
+      <Name>ART.Infra.CrossCutting.Utils</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201710071236123_InitialCreate.resx">

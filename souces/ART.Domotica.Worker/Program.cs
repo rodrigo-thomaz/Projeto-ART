@@ -21,6 +21,7 @@
     using Topshelf;
     using Topshelf.Autofac;
     using Topshelf.Quartz;
+    using Quartz.Spi;
 
     class Program
     {
@@ -40,13 +41,14 @@
 
             builder.RegisterModule<LoggingModule>();
             builder.RegisterModule<SettingModule>();
-            builder.RegisterModule<SchedulerModule>();
-
+            
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ConsumerModule>();
             builder.RegisterModule<JobModule>();
+
+            builder.RegisterModule<SchedulerModule>();
 
             Mapper.Initialize(x =>
             {
@@ -91,6 +93,16 @@
                 {
                     Console.WriteLine("Exception thrown - " + exception.Message);
                 });
+
+                x.UsingQuartzJobFactory(() => container.Resolve<IJobFactory>());
+
+                x.ScheduleQuartzJobAsService(q =>
+                {
+                    q.WithJob(() => JobBuilder.Create<UpdatePinJob>().Build());
+                    q.AddTrigger(() => TriggerBuilder.Create().WithSimpleSchedule(b => b.WithIntervalInSeconds(60).RepeatForever()).Build());
+                });
+
+                
             });
         }
 

@@ -19,7 +19,7 @@
 
             builder.RegisterModule(new QuartzAutofacFactoryModule
             {
-                ConfigurationProvider = c => schedulerConfig
+                ConfigurationProvider = c => schedulerConfig,
             });
         }
 

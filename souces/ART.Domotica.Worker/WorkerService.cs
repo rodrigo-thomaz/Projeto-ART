@@ -3,8 +3,6 @@
     using System;
     using System.Configuration;
     using System.Threading.Tasks;
-
-    using ART.Domotica.Job;
     using ART.Infra.CrossCutting.Setting;
 
     using Quartz;
@@ -36,7 +34,7 @@
 
         public bool Start()
         {
-            _scheduler.Start();
+            //_scheduler.Start();
 
             ConfigureUpdatePinJob();
 
@@ -71,20 +69,6 @@
                     await _settingManager.Insert(changePinIntervalInSecondsSettingsKey, changePinIntervalInSecondsDefault);
                     changePinIntervalInSeconds = changePinIntervalInSecondsDefault;
                 }
-
-                IJobDetail job = JobBuilder.Create<UpdatePinJob>()
-                .WithIdentity("job1", "group1")
-                .Build();
-
-                ITrigger trigger = TriggerBuilder.Create()
-                    .WithIdentity("trigger1", "group1")
-                    .StartNow()
-                    .WithSimpleSchedule(x => x
-                        .WithIntervalInSeconds(changePinIntervalInSeconds)
-                        .RepeatForever())
-                    .Build();
-
-                _scheduler.ScheduleJob(job, trigger);
             });
         }
 
