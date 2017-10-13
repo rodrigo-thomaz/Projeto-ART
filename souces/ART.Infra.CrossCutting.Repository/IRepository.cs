@@ -1,5 +1,6 @@
 ﻿namespace ART.Infra.CrossCutting.Repository
 {
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
 
@@ -17,6 +18,8 @@
         Task Insert(TEntity entity);
 
         Task Update(TEntity entity);
+
+        Task Update(List<TEntity> entities);
 
         #endregion Methods
     }

@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace ART.Infra.CrossCutting.Repository
@@ -33,6 +34,15 @@ namespace ART.Infra.CrossCutting.Repository
         public async Task Update(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Update(List<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                _context.Entry(entity).State = EntityState.Modified;
+            }            
             await _context.SaveChangesAsync();
         }
 

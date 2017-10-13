@@ -29,18 +29,18 @@
         public async Task UpdatePins()
         {
             var existingPins = await _hardwareRepository.GetExistingPins();
-            var hardwaresNotInApplication = await _hardwareRepository.GetHardwaresNotInApplication();
+            var entities = await _hardwareRepository.GetHardwaresNotInApplication();
 
-            foreach (var item in hardwaresNotInApplication)
+            foreach (var item in entities)
             {
                 var pin = RandonHelper.RandomString(4);
                 while (existingPins.Contains(pin))
                 {
                     pin = RandonHelper.RandomString(4);
                 }
-                item.Pin = pin;
-                await _hardwareRepository.Update(item);
+                item.Pin = pin;                
             }
+            await _hardwareRepository.Update(entities);
         }
 
         #endregion Methods
