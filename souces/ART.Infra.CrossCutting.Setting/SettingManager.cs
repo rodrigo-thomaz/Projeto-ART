@@ -16,7 +16,7 @@ namespace ART.Infra.CrossCutting.Setting
             _connection = new SqlConnection(connectionString);
         }
 
-        public async Task<bool> Exist(string key)
+        public async Task<bool> ExistAsync(string key)
         {
             KeyValidator(key);
 
@@ -40,7 +40,7 @@ namespace ART.Infra.CrossCutting.Setting
             return data;
         }        
 
-        public async Task Insert<T>(string key, T value)
+        public async Task InsertAsync<T>(string key, T value)
         {
             KeyValidator(key);
 
@@ -68,7 +68,7 @@ namespace ART.Infra.CrossCutting.Setting
             }
         }
 
-        public async Task Delete(string key)
+        public async Task DeleteAsync(string key)
         {
             KeyValidator(key);
 
@@ -96,7 +96,7 @@ namespace ART.Infra.CrossCutting.Setting
             }
         }
 
-        public async Task<T> GetValue<T>(string key)
+        public async Task<T> GetValueAsync<T>(string key)
         {
             KeyValidator(key);
 
@@ -129,7 +129,7 @@ namespace ART.Infra.CrossCutting.Setting
             return (T)Convert.ChangeType(data, typeof(T));
         }
 
-        public async Task SetValue<T>(string key, T value)
+        public async Task SetValueAsync<T>(string key, T value)
         {
             KeyValidator(key);
 
@@ -204,6 +204,35 @@ namespace ART.Infra.CrossCutting.Setting
         public void Dispose()
         {
             _connection.Dispose();
-        }        
+        }
+
+        public void Delete(string key)
+        {
+            DeleteAsync(key).Wait();
+        }
+
+        public bool Exist(string key)
+        {
+            var task = ExistAsync(key);
+            task.Wait();
+            return task.Result;
+        }
+
+        public T GetValue<T>(string key)
+        {
+            var task = GetValueAsync<T>(key);
+            task.Wait();
+            return task.Result;
+        }
+
+        public void Insert<T>(string key, T value)
+        {
+            InsertAsync<T>(key, value).Wait();
+        }
+
+        public void SetValue<T>(string key, T value)
+        {
+            SetValueAsync<T>(key, value).Wait();
+        }
     }
 }

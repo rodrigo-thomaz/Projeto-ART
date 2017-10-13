@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Job
 {
-
     using ART.Domotica.Domain.Interfaces;
 
     using Quartz;

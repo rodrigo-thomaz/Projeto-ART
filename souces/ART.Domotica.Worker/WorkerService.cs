@@ -3,6 +3,7 @@
     using System;
     using System.Configuration;
     using System.Threading.Tasks;
+
     using ART.Infra.CrossCutting.Setting;
 
     using Quartz;
@@ -55,18 +56,18 @@
             {
                 var changePinIntervalInSecondsSettingsKey = "ChangePinIntervalInSeconds";
 
-                var exists = await _settingManager.Exist(changePinIntervalInSecondsSettingsKey);
+                var exists = await _settingManager.ExistAsync(changePinIntervalInSecondsSettingsKey);
 
                 int changePinIntervalInSeconds;
 
                 if (exists)
                 {
-                    changePinIntervalInSeconds = await _settingManager.GetValue<int>(changePinIntervalInSecondsSettingsKey);
+                    changePinIntervalInSeconds = await _settingManager.GetValueAsync<int>(changePinIntervalInSecondsSettingsKey);
                 }
                 else
                 {
                     var changePinIntervalInSecondsDefault = Convert.ToInt32(ConfigurationManager.AppSettings["ChangePinIntervalInSecondsDefault"]);
-                    await _settingManager.Insert(changePinIntervalInSecondsSettingsKey, changePinIntervalInSecondsDefault);
+                    await _settingManager.InsertAsync(changePinIntervalInSecondsSettingsKey, changePinIntervalInSecondsDefault);
                     changePinIntervalInSeconds = changePinIntervalInSecondsDefault;
                 }
             });

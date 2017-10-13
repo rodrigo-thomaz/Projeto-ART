@@ -7,15 +7,25 @@
     {
         #region Methods
 
-        Task Delete(string key);
+        void Delete(string key);
 
-        Task<bool> Exist(string key);
+        Task DeleteAsync(string key);
 
-        Task<T> GetValue<T>(string key);
+        bool Exist(string key);
 
-        Task Insert<T>(string key, T value);
+        Task<bool> ExistAsync(string key);
 
-        Task SetValue<T>(string key, T value);
+        T GetValue<T>(string key);
+
+        Task<T> GetValueAsync<T>(string key);
+
+        void Insert<T>(string key, T value);
+
+        Task InsertAsync<T>(string key, T value);
+
+        void SetValue<T>(string key, T value);
+
+        Task SetValueAsync<T>(string key, T value);
 
         #endregion Methods
     }

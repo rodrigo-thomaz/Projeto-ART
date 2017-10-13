@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Worker
 {
     using System;
+    using System.Configuration;
 
     using ART.Domotica.Domain;
     using ART.Domotica.Domain.AutoMapper;
@@ -17,15 +18,39 @@
     using global::AutoMapper;
 
     using Quartz;
+    using Quartz.Spi;
 
     using Topshelf;
     using Topshelf.Autofac;
     using Topshelf.Quartz;
-    using Quartz.Spi;
 
     class Program
     {
         #region Methods
+
+        private static int GetChangePinIntervalInSeconds(IContainer container)
+        {
+            var settingManager = container.Resolve<ISettingManager>();
+
+            var changePinIntervalInSecondsSettingsKey = "ChangePinIntervalInSeconds";
+
+            var exists = settingManager.Exist(changePinIntervalInSecondsSettingsKey);
+
+            int changePinIntervalInSeconds;
+
+            if (exists)
+            {
+                changePinIntervalInSeconds = settingManager.GetValue<int>(changePinIntervalInSecondsSettingsKey);
+            }
+            else
+            {
+                var changePinIntervalInSecondsDefault = Convert.ToInt32(ConfigurationManager.AppSettings["ChangePinIntervalInSecondsDefault"]);
+                settingManager.Insert(changePinIntervalInSecondsSettingsKey, changePinIntervalInSecondsDefault);
+                changePinIntervalInSeconds = changePinIntervalInSecondsDefault;
+            }
+
+            return changePinIntervalInSeconds;
+        }
 
         static void Main(string[] args)
         {
@@ -41,7 +66,7 @@
 
             builder.RegisterModule<LoggingModule>();
             builder.RegisterModule<SettingModule>();
-            
+
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<MQModule>();
@@ -99,10 +124,13 @@
                 x.ScheduleQuartzJobAsService(q =>
                 {
                     q.WithJob(() => JobBuilder.Create<UpdatePinJob>().Build());
-                    q.AddTrigger(() => TriggerBuilder.Create().WithSimpleSchedule(b => b.WithIntervalInSeconds(60).RepeatForever()).Build());
+                    q.AddTrigger(() => TriggerBuilder.Create().WithSimpleSchedule(b =>
+                    {
+                        var interval = GetChangePinIntervalInSeconds(container);
+                        b.WithIntervalInSeconds(interval).RepeatForever();
+                    }).Build());
                 });
 
-                
             });
         }
 

@@ -1,11 +1,17 @@
-﻿using System;
-using System.Linq;
-
-namespace ART.Infra.CrossCutting.Utils
+﻿namespace ART.Infra.CrossCutting.Utils
 {
+    using System;
+    using System.Linq;
+
     public static class RandonHelper
     {
+        #region Fields
+
         private static Random random = new Random();
+
+        #endregion Fields
+
+        #region Methods
 
         public static string RandomString(int length)
         {
@@ -13,5 +19,7 @@ namespace ART.Infra.CrossCutting.Utils
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+        #endregion Methods
     }
 }
