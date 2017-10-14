@@ -1,5 +1,6 @@
-﻿namespace ART.Domotica.Job
+﻿namespace ART.Domotica.Worker.Modules
 {
+    using ART.Domotica.Worker.Jobs;
     using Autofac;
     using Autofac.Extras.Quartz;
 

@@ -1,21 +1,23 @@
-﻿namespace ART.Domotica.Job
+﻿namespace ART.Domotica.Worker.Jobs
 {
     using ART.Domotica.Domain.Interfaces;
-
+    using ART.Domotica.Worker.IConsumers;
     using Quartz;
 
     public class UpdatePinJob : IJob
     {
         #region Fields
 
+        private readonly IHardwareConsumer _hardwareConsumer;
         private readonly IHardwareDomain _hardwareDomain;
 
         #endregion Fields
 
         #region Constructors
 
-        public UpdatePinJob(IHardwareDomain hardwareDomain)
+        public UpdatePinJob(IHardwareConsumer hardwareConsumer, IHardwareDomain hardwareDomain)
         {
+            _hardwareConsumer = hardwareConsumer;
             _hardwareDomain = hardwareDomain;
         }
 
@@ -26,10 +28,9 @@
         public void Execute(IJobExecutionContext context)
         {
             var task = _hardwareDomain.UpdatePins();
-
             task.Wait();
-
-            var teste = task.Result;
+            var data = task.Result;
+            _hardwareConsumer.UpdatePinsAsync(data).Wait();
         }
 
         #endregion Methods

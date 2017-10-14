@@ -5,7 +5,6 @@
 
     using ART.Domotica.Domain;
     using ART.Domotica.Domain.AutoMapper;
-    using ART.Domotica.Job;
     using ART.Domotica.Repository;
     using ART.Domotica.Worker.Modules;
     using ART.Infra.CrossCutting.Logging;
@@ -23,6 +22,7 @@
     using Topshelf;
     using Topshelf.Autofac;
     using Topshelf.Quartz;
+    using ART.Domotica.Worker.Jobs;
 
     class Program
     {
