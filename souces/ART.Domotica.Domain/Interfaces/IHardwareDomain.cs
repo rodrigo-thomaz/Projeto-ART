@@ -1,8 +1,9 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
-    using ART.Domotica.Contract;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
+    using ART.Domotica.Contract;
 
     public interface IHardwareDomain
     {

@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Worker.IConsumers;
+
     using Quartz;
 
     public class UpdatePinJob : IJob
@@ -30,7 +31,7 @@
             var task = _hardwareDomain.UpdatePins();
             task.Wait();
             var data = task.Result;
-            _hardwareConsumer.UpdatePinsAsync(data).Wait();
+            _hardwareConsumer.UpdatePins(data);
         }
 
         #endregion Methods

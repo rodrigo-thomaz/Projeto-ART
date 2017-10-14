@@ -1,11 +1,15 @@
-﻿using ART.Domotica.Contract;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace ART.Domotica.Worker.IConsumers
+﻿namespace ART.Domotica.Worker.IConsumers
 {
+    using System.Collections.Generic;
+
+    using ART.Domotica.Contract;
+
     public interface IHardwareConsumer
     {
-        Task UpdatePinsAsync(List<HardwareUpdatePinsContract> contracts);
+        #region Methods
+
+        void UpdatePins(List<HardwareUpdatePinsContract> contracts);
+
+        #endregion Methods
     }
 }

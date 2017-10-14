@@ -1,10 +1,21 @@
-﻿using System;
-
-namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Contract
 {
+    using System;
+
     public class HardwareUpdatePinsContract
     {
-        public Guid HardwareId { get; set; }
-        public string Pin { get; set; }
+        #region Properties
+
+        public Guid HardwareId
+        {
+            get; set;
+        }
+
+        public string Pin
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

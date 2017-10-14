@@ -32,7 +32,7 @@
             log4net.LogManager.Shutdown();
             return true;
         }
-        
+
         #endregion Methods
     }
 }
