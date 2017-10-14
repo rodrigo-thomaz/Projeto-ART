@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Domain.AutoMapper
 {
-    using ART.Domotica.Model;
+    using ART.Domotica.Contract;
     using ART.Domotica.Repository.Entities;
 
     using global::AutoMapper;
@@ -11,7 +11,7 @@
 
         public HardwareProfile()
         {
-            CreateMap<HardwareBase, HardwareUpdatePinsModel>()
+            CreateMap<HardwareBase, HardwareUpdatePinsContract>()
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
         }
 

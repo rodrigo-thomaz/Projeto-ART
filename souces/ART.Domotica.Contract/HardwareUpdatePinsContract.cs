@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace ART.Domotica.Model
+namespace ART.Domotica.Contract
 {
-    public class HardwareUpdatePinsModel
+    public class HardwareUpdatePinsContract
     {
         public Guid HardwareId { get; set; }
         public string Pin { get; set; }

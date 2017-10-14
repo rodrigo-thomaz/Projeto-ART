@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetListModel.cs" />
     <Compile Include="HardwaresInApplicationSearchPinModel.cs" />
-    <Compile Include="HardwareUpdatePinsModel.cs" />
     <Compile Include="ThermometerDeviceGetListModel.cs" />
     <Compile Include="HardwaresInApplicationGetListModel.cs" />
     <Compile Include="DSFamilyTempSensorGetAllModel.cs" />

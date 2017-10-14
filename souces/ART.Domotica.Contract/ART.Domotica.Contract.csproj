@@ -45,6 +45,7 @@
     <Compile Include="HardwaresInApplicationDeleteHardwareContract.cs" />
     <Compile Include="HardwaresInApplicationPinContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionContract.cs" />
+    <Compile Include="HardwareUpdatePinsContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

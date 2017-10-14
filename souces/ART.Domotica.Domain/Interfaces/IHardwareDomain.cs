@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
-    using ART.Domotica.Model;
+    using ART.Domotica.Contract;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -8,7 +8,7 @@
     {
         #region Methods
 
-        Task<List<HardwareUpdatePinsModel>> UpdatePins();
+        Task<List<HardwareUpdatePinsContract>> UpdatePins();
 
         #endregion Methods
     }

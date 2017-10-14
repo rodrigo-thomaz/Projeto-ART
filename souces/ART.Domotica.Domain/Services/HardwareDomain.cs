@@ -7,9 +7,9 @@
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
     using System.Collections.Generic;
-    using ART.Domotica.Model;
     using global::AutoMapper;
     using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Contract;
 
     public class HardwareDomain : DomainBase, IHardwareDomain
     {
@@ -30,7 +30,7 @@
 
         #region Methods
 
-        public async Task<List<HardwareUpdatePinsModel>> UpdatePins()
+        public async Task<List<HardwareUpdatePinsContract>> UpdatePins()
         {
             var existingPins = await _hardwareRepository.GetExistingPins();
             var entities = await _hardwareRepository.GetHardwaresNotInApplication();
@@ -46,7 +46,7 @@
             }
             await _hardwareRepository.Update(entities);
 
-            var result = Mapper.Map<List<HardwareBase>, List<HardwareUpdatePinsModel>>(entities);
+            var result = Mapper.Map<List<HardwareBase>, List<HardwareUpdatePinsContract>>(entities);
 
             return result;
         }
