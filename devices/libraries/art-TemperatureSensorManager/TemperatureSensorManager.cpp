@@ -8,7 +8,7 @@
 #include "ArduinoJson.h"
 
 // Data wire is plugged into port 2 on the Arduino
-#define ONE_WIRE_BUS 2
+#define ONE_WIRE_BUS 0
 
 // Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
 OneWire oneWire(ONE_WIRE_BUS);
@@ -134,9 +134,9 @@ char *TemperatureSensorManager::getSensorsJson()
 
 	_dallas.requestTemperatures();
 
-	long epochTime = this->_ntpManager->getEpochTime();
-
-	for(int i = 0; i < sizeof(Sensors)/sizeof(int) + 1; ++i){	
+	long epochTime = this->_ntpManager->getEpochTime();	
+	
+	for(int i = 0; i < sizeof(Sensors)/sizeof(int); ++i){	
 		Sensors[i].isConnected = _dallas.isConnected(Sensors[i].deviceAddress);
 		Sensors[i].resolution = _dallas.getResolution(Sensors[i].deviceAddress);    
 		Sensors[i].tempCelsius = _dallas.getTempC(Sensors[i].deviceAddress);

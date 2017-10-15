@@ -32,10 +32,10 @@
 #define MESSAGE_INTERVAL 2500
 uint64_t messageTimestamp = 0;
 
-DebugManager debugManager(D0);
+DebugManager debugManager(D5);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
-WiFiManager wifiManager(D5, debugManager);
+WiFiManager wifiManager(D4, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
@@ -48,6 +48,9 @@ PubSubClient MQTT(espClient);
 void setup() {
 		
 	Serial.begin(9600);
+
+  pinMode(D4, INPUT);
+  pinMode(D5, INPUT);  
 
 	debugManager.update();
 
@@ -213,24 +216,24 @@ void configFailedToConnectCallback (String ssid, int connectionResult, String me
 
 void loop() {	
 
-  debugManager.update();
-  
-  // text display tests
-  displayManager.display.clearDisplay();
-  displayManager.display.setTextSize(1);
-  displayManager.display.setTextColor(WHITE);
-  displayManager.display.setCursor(0, 0);  	
+  debugManager.update();  
 
   //garante funcionamento das conexões WiFi e ao broker MQTT
   VerificaConexoesWiFIEMQTT(); 
 
   uint64_t now = millis();
   if(now - messageTimestamp > MESSAGE_INTERVAL) {
+    // text display tests
+    displayManager.display.clearDisplay();
+    displayManager.display.setTextSize(1);
+    displayManager.display.setTextColor(WHITE);
+    displayManager.display.setCursor(0, 0);    
+  
     messageTimestamp = now;
     sendTemp();
-  }
-  
-  displayManager.display.display();
+
+    displayManager.display.display();
+  }  
 
   //keep-alive da comunicação com broker MQTT
   MQTT.loop();
