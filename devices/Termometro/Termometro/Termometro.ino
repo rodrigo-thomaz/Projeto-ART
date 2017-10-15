@@ -32,10 +32,10 @@
 #define MESSAGE_INTERVAL 2500
 uint64_t messageTimestamp = 0;
 
-DebugManager debugManager(D5);
+DebugManager debugManager(D6);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
-WiFiManager wifiManager(D4, debugManager);
+WiFiManager wifiManager(D5, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
