@@ -49,6 +49,9 @@ void setup() {
 		
 	Serial.begin(9600);
 
+  // Buzzer
+  pinMode(D6,OUTPUT);
+
   pinMode(D4, INPUT);
   pinMode(D5, INPUT);  
 
@@ -233,6 +236,14 @@ void loop() {
     sendTemp();
 
     displayManager.display.display();
+
+    // Buzzer
+    //tone(D7,900,300); //aqui sai o som   
+  /*   
+   o número D7 indica que o pino positivo do buzzer está na porta 10   
+   o número 300 é a frequência que será tocado   
+   o número 300 é a duração do som   
+  */    
   }  
 
   //keep-alive da comunicação com broker MQTT
