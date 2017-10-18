@@ -10,20 +10,22 @@ class TemperatureSensorManager
 {
   public:
     TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager);
+	
 	void begin();
-	char *getSensorsJson();
-	void setCallback(void(*sensorInCallback)(TemperatureSensor));
-
+	void refresh();
+	
 	void setResolution(String json);
 	void setLowAlarm(String json);
 	void setHighAlarm(String json);
 
+	char *convertSensorsToJson();
+	
 	TemperatureSensor 		*Sensors;
-
+	
   private:
+	
 	DebugManager*          	_debugManager;
 	NTPManager*          	_ntpManager;
-	void(*_sensorInCallback)(TemperatureSensor);
 	const uint8_t *getDeviceAddress(String deviceAddress);
 };
 

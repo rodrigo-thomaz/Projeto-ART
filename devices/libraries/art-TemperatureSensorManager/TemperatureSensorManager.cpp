@@ -104,11 +104,6 @@ void TemperatureSensorManager::begin()
 	}
 }
 
-void TemperatureSensorManager::setCallback(void(*sensorInCallback)(TemperatureSensor))
-{
-	_sensorInCallback = sensorInCallback;
-}
-
 void generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
 {	
 	JsonObject& JSONencoder = root.createNestedObject();
@@ -126,12 +121,8 @@ void generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
 	JSONencoder["highAlarm"] = temperatureSensor.highAlarm;
 }
 
-char *TemperatureSensorManager::getSensorsJson()
+void TemperatureSensorManager::refresh()
 {	
-	StaticJsonBuffer<500> JSONbuffer;
-
-	JsonArray& device = JSONbuffer.createArray();
-
 	_dallas.requestTemperatures();
 
 	long epochTime = this->_ntpManager->getEpochTime();	
@@ -145,8 +136,17 @@ char *TemperatureSensorManager::getSensorsJson()
 		Sensors[i].lowAlarm = _dallas.getLowAlarmTemp(Sensors[i].deviceAddress);
 		Sensors[i].highAlarm = _dallas.getHighAlarmTemp(Sensors[i].deviceAddress);
 		Sensors[i].epochTime = epochTime;
+	}
+}
+
+char *TemperatureSensorManager::convertSensorsToJson()
+{	
+	StaticJsonBuffer<500> JSONbuffer;
+
+	JsonArray& device = JSONbuffer.createArray();
+
+	for(int i = 0; i < sizeof(Sensors)/sizeof(int); ++i){	
 		generateNestedSensor(Sensors[i], device);
-		_sensorInCallback(Sensors[i]);
 	}
 	
 	int len = device.measureLength();

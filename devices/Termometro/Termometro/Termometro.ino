@@ -48,8 +48,6 @@ int BROKER_PORT = 1883; // Porta do Broker MQTT
 WiFiClient espClient;
 PubSubClient MQTT(espClient);
 
-char *sensorsJson;
-
 void setup() {
 		
 	Serial.begin(9600);
@@ -65,7 +63,6 @@ void setup() {
 	displayManager.begin();
 
 	temperatureSensorManager.begin();
-  temperatureSensorManager.setCallback(sensorCallback);
 
 	if (debugManager.isDebug()) Serial.println("Iniciando...");
 
@@ -199,11 +196,6 @@ void printDataDisplay()
     displayManager.display.display();
 }
 
-void sensorCallback(TemperatureSensor sensor)
-{
-      
-}
-
 void configModeCallback (String ssid, String pwd, String ip) {
   Serial.println();
   Serial.print("Modo de configuração: { SSID: ");
@@ -249,14 +241,15 @@ void loop() {
 
   if(now - readTempTimestamp > READTEMP_INTERVAL) {
     readTempTimestamp = now;
-    sensorsJson = temperatureSensorManager.getSensorsJson();
+    temperatureSensorManager.refresh();
   }
 
   if(now - messageTimestamp > MESSAGE_INTERVAL) {
     messageTimestamp = now;
-    MQTT.publish(TOPICO_PUBLISH, sensorsJson);  
+    char *sensorsJson = temperatureSensorManager.convertSensorsToJson();
     Serial.print("enviando para o servidor => ");
     Serial.println(sensorsJson);
+    MQTT.publish(TOPICO_PUBLISH, sensorsJson);      
   }      
 
   printDataDisplay(); 
