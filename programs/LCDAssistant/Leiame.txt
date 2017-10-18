@@ -1,0 +1,1 @@
+A imagem deve ser criada e salva como um Bitmap de 24 Bits
