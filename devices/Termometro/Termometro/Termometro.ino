@@ -29,8 +29,11 @@
 
 #define TOPICO_PUBLISH   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
-#define MESSAGE_INTERVAL 2500
+#define MESSAGE_INTERVAL 4000
 uint64_t messageTimestamp = 0;
+
+#define READTEMP_INTERVAL 2000
+uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
 NTPManager ntpManager(debugManager);
@@ -44,6 +47,8 @@ int BROKER_PORT = 1883; // Porta do Broker MQTT
 
 WiFiClient espClient;
 PubSubClient MQTT(espClient);
+
+char *sensorsJson;
 
 void setup() {
 		
@@ -170,24 +175,33 @@ void VerificaConexoesWiFIEMQTT(void)
      wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
 }
 
-void printDataDisplay(TemperatureSensor temperatureSensor)
+void printDataDisplay()
 {
-  displayManager.display.print("Address=");
-  displayManager.display.println(temperatureSensor.deviceAddressStr);
-  displayManager.display.print(temperatureSensor.tempCelsius);
-  displayManager.display.print(" C | ");
-  displayManager.display.print(temperatureSensor.tempFahrenheit);
-  displayManager.display.println(" F");
+    // text display tests
+    displayManager.display.clearDisplay();
+    displayManager.display.setTextSize(1);
+    displayManager.display.setTextColor(WHITE);
+    displayManager.display.setCursor(0, 0);       
+
+    // Sensor
+    if(sizeof(temperatureSensorManager.Sensors)/sizeof(int) > 0){
+      displayManager.display.setTextSize(2);
+      displayManager.display.setTextColor(WHITE);
+      displayManager.display.setCursor(0, 0);    
+      
+      displayManager.display.print(temperatureSensorManager.Sensors[0].tempCelsius);
+      displayManager.display.print(" C");
+      
+      //displayManager.display.print(temperatureSensorManager.Sensors[0].tempFahrenheit);
+      //displayManager.display.println(" F");
+    }
+
+    displayManager.display.display();
 }
 
 void sensorCallback(TemperatureSensor sensor)
 {
-  printDataDisplay(sensor);       
-}
-
-void sendTemp(){
-  char *sensorsJson = temperatureSensorManager.getSensorsJson();
-  MQTT.publish(TOPICO_PUBLISH, sensorsJson);  
+      
 }
 
 void configModeCallback (String ssid, String pwd, String ip) {
@@ -201,11 +215,18 @@ void configModeCallback (String ssid, String pwd, String ip) {
   Serial.println(" }");
 }
 
-void configSuccessToConnectCallback (String ssid, int quality) {  
+void configSuccessToConnectCallback (String ssid, int quality, int bars) {  
   Serial.print("Conectado na rede Wifi: ");
   Serial.print(ssid);
   Serial.print(" qualidade: ");    
-  Serial.println(quality);
+  Serial.print(quality);
+  Serial.print(" bars: ");    
+  Serial.println(bars);
+
+  for (int b=0; b <= bars; b++) {
+    // display.fillRect(59 + (b*5),33 - (b*5),3,b*5,WHITE); 
+    displayManager.display.fillRect(10 + (b*5),48 - (b*5),3,b*5,WHITE); 
+  }
 }
 
 void configFailedToConnectCallback (String ssid, int connectionResult, String message) {  
@@ -224,28 +245,30 @@ void loop() {
   //garante funcionamento das conexões WiFi e ao broker MQTT
   VerificaConexoesWiFIEMQTT(); 
 
-  uint64_t now = millis();
+  uint64_t now = millis(); 
+
+  if(now - readTempTimestamp > READTEMP_INTERVAL) {
+    readTempTimestamp = now;
+    sensorsJson = temperatureSensorManager.getSensorsJson();
+  }
+
   if(now - messageTimestamp > MESSAGE_INTERVAL) {
-    // text display tests
-    displayManager.display.clearDisplay();
-    displayManager.display.setTextSize(1);
-    displayManager.display.setTextColor(WHITE);
-    displayManager.display.setCursor(0, 0);    
-  
     messageTimestamp = now;
-    sendTemp();
+    MQTT.publish(TOPICO_PUBLISH, sensorsJson);  
+    Serial.print("enviando para o servidor => ");
+    Serial.println(sensorsJson);
+  }      
 
-    displayManager.display.display();
-
-    // Buzzer
-    //tone(D7,900,300); //aqui sai o som   
+  printDataDisplay(); 
+  
+  // Buzzer
+  //tone(D7,900,300); //aqui sai o som   
   /*   
    o número D7 indica que o pino positivo do buzzer está na porta 10   
    o número 300 é a frequência que será tocado   
    o número 300 é a duração do som   
   */    
-  }  
-
+  
   //keep-alive da comunicação com broker MQTT
   MQTT.loop();
 }
