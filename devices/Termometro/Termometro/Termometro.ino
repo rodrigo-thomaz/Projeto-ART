@@ -233,15 +233,8 @@ void startConfigPortalCallback (String ssid, String pwd) {
     delay(400);
   } 
 
-  displayManager.display.clearDisplay();
-  displayManager.display.setCursor(0, 0);       
-  displayManager.display.setTextWrap(false);
+  printPortalHeaderInDisplay("  Conecte  ");
   
-  displayManager.display.setTextColor(BLACK, WHITE);
-  displayManager.display.println("  Conecte  ");
-  displayManager.display.display();
-  displayManager.display.setTextColor(WHITE);
-  displayManager.display.setTextSize(1);  
   displayManager.display.println();
   displayManager.display.println();
   displayManager.display.setFont(&FreeSansBold9pt7b);
@@ -257,17 +250,8 @@ void startConfigPortalCallback (String ssid, String pwd) {
 
 void captivePortalCallback (String ip) {
 
-  displayManager.display.clearDisplay();    
-  displayManager.display.setFont();
-  displayManager.display.setCursor(0, 0);       
-  displayManager.display.setTextWrap(false);
-  displayManager.display.setTextSize(2);
-  displayManager.display.setTextColor(BLACK, WHITE);
+  printPortalHeaderInDisplay("  Acesse    ");
   
-  displayManager.display.println("  Acesse    ");
-  displayManager.display.display();
-  displayManager.display.setTextColor(WHITE);
-  displayManager.display.setTextSize(1);  
   displayManager.display.println();
   displayManager.display.println();
   displayManager.display.println();
@@ -280,6 +264,20 @@ void captivePortalCallback (String ip) {
   displayManager.display.display();  
 
   //displayManager.display.startscrollleft(0x03, 0x0F);
+}
+
+void printPortalHeaderInDisplay(String title)
+{
+  displayManager.display.clearDisplay();
+  displayManager.display.setFont();
+  displayManager.display.setTextSize(2);  
+  displayManager.display.setCursor(0, 0);       
+  displayManager.display.setTextWrap(false);  
+  displayManager.display.setTextColor(BLACK, WHITE);
+  displayManager.display.println(title);
+  displayManager.display.display();
+  displayManager.display.setTextColor(WHITE);
+  displayManager.display.setTextSize(1);  
 }
 
 void configSuccessToConnectCallback (String ssid, int quality, int bars) {  
