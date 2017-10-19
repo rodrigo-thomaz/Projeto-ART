@@ -100,6 +100,10 @@ class WiFiManager
     void          setStartConfigPortalCallback( void (*func)(String, String) );
 	//called when Captive Portal is invoked
     void          setCaptivePortalCallback( void (*func)(String) );
+	
+	void          setSuccessConfigPortalCallback( void (*func)() );
+	void          setFailedConfigPortalCallback( void (*func)(String, int, String) );
+	
     //called when settings have been changed and connection was successful
 	void          setSuccessToConnectCallback( void (*func)(String, int, int) );
 	void          setFailedToConnectCallback( void (*func)(String, int, String) );
@@ -113,10 +117,10 @@ class WiFiManager
     //if this is true, remove duplicated Access Points - defaut true
     void          setRemoveDuplicateAPs(boolean removeDuplicates);	
 	
-	String          getSSID();	
-	String          getPassword();	
-	int             getQuality();	
-	int				convertQualitytToBarsSignal(int quality);
+	String        getSSID();	
+	String        getPassword();	
+	int           getQuality();	
+	int			  convertQualitytToBarsSignal(int quality);
 	
   private:
     std::unique_ptr<DNSServer>        dnsServer;
@@ -192,6 +196,9 @@ class WiFiManager
 	
     void (*_startConfigPortalCallback)(String, String) = NULL;
 	void (*_captivePortalCallback)(String) = NULL;
+	void (*_successConfigPortalCallback)() = NULL;
+	void (*_failedConfigPortalCallback)(String, int, String) = NULL;
+	
 	void (*_successToConnectCallback)(String, int, int) = NULL;
 	void (*_failedToConnectCallback)(String, int, String) = NULL;
 

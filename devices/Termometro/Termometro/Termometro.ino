@@ -77,6 +77,8 @@ void setup() {
 
 	wifiManager.setStartConfigPortalCallback(startConfigPortalCallback);
   wifiManager.setCaptivePortalCallback(captivePortalCallback);
+  wifiManager.setSuccessConfigPortalCallback(successConfigPortalCallback);    
+  wifiManager.setFailedConfigPortalCallback(failedConfigPortalCallback);    
   wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
   wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
   wifiManager.autoConnect();
@@ -238,6 +240,8 @@ void startConfigPortalCallback (String ssid, String pwd) {
     delay(400);
   } 
 
+  displayManager.display.clearDisplay();
+  
   printPortalHeaderInDisplay("  Conecte  ");
   
   displayManager.display.println();
@@ -260,6 +264,8 @@ void captivePortalCallback (String ip) {
   }
 
   firstTimecaptivePortalCallback = false;
+
+  displayManager.display.clearDisplay();
   
   printPortalHeaderInDisplay("  Acesse    ");
   
@@ -273,13 +279,35 @@ void captivePortalCallback (String ip) {
   displayManager.display.println(ip);    
     
   displayManager.display.display();  
+}
 
-  //displayManager.display.startscrollleft(0x03, 0x0F);
+void successConfigPortalCallback () {  
+
+  String ssid = wifiManager.getSSID();
+  
+  displayManager.display.clearDisplay();
+  
+  printPortalHeaderInDisplay("  Acesso    ");
+    
+  displayManager.display.println();
+  displayManager.display.println();
+  displayManager.display.setFont(&FreeSansBold9pt7b);
+  displayManager.display.setTextSize(1);  
+  displayManager.display.setTextWrap(false);
+  displayManager.display.println("Conectado a");
+  displayManager.display.print(ssid);
+    displayManager.display.print("!");
+  displayManager.display.display();  
+
+  delay(4000);
+}
+
+void failedConfigPortalCallback (String ssid, int connectionResult, String message) {  
+
 }
 
 void printPortalHeaderInDisplay(String title)
-{
-  displayManager.display.clearDisplay();
+{  
   displayManager.display.setFont();
   displayManager.display.setTextSize(2);  
   displayManager.display.setCursor(0, 0);       

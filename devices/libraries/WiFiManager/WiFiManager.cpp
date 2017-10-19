@@ -278,18 +278,13 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
 	  
       if (connectionResult != WL_CONNECTED) {
         DEBUG_WM(F("Failed to connect."));
-		if ( _failedToConnectCallback != NULL) {
-          //todo: check if any custom parameters actually exist, and check if they really changed maybe
-          _failedToConnectCallback(String(_ssid), connectionResult, convertConnectionResultToString(connectionResult));
+		if ( _failedConfigPortalCallback != NULL) {
+          _failedConfigPortalCallback(String(_ssid), connectionResult, convertConnectionResultToString(connectionResult));
         }
       } else {
-        //connected        
-        if ( _successToConnectCallback != NULL) {
-			//todo: check if any custom parameters actually exist, and check if they really changed maybe
-			int rssi = WiFi.RSSI();
-			int quality = getRSSIasQuality(rssi);
-			int bars = convertQualitytToBarsSignal(quality);
-			_successToConnectCallback(String(_ssid), quality, bars);
+		DEBUG_WM(F("Connected."));
+        if ( _successConfigPortalCallback != NULL) {
+			_successConfigPortalCallback();
         }
         break;
       }      
@@ -799,6 +794,14 @@ void WiFiManager::setStartConfigPortalCallback( void (*func)(String ssid, String
 
 void WiFiManager::setCaptivePortalCallback( void (*func)(String ip) ) {
   _captivePortalCallback = func;
+}
+
+void WiFiManager::setSuccessConfigPortalCallback( void (*func)() ) {
+  _successConfigPortalCallback = func;
+}
+
+void WiFiManager::setFailedConfigPortalCallback( void (*func)(String ssid, int connectionResult, String message) ) {
+  _failedConfigPortalCallback = func;
 }
 
 //start up save config callback
