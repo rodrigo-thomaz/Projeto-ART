@@ -296,7 +296,7 @@ void successConfigPortalCallback () {
   displayManager.display.setTextWrap(false);
   displayManager.display.println("Conectado a");
   displayManager.display.print(ssid);
-    displayManager.display.print("!");
+  displayManager.display.print("!");
   displayManager.display.display();  
 
   delay(4000);
@@ -304,6 +304,31 @@ void successConfigPortalCallback () {
 
 void failedConfigPortalCallback (String ssid, int connectionResult, String message) {  
 
+  displayManager.display.clearDisplay();
+  
+  printPortalHeaderInDisplay("  Acesso    ");
+
+  if(connectionResult == WL_CONNECT_FAILED){
+    displayManager.display.println();
+    displayManager.display.println();
+    displayManager.display.setFont(&FreeSansBold9pt7b);
+    displayManager.display.setTextSize(1);  
+    displayManager.display.setTextWrap(false);
+    displayManager.display.println("   Ops! falha");
+    displayManager.display.println("  na tentativa");
+  }
+    
+  displayManager.display.display();    
+
+  bool invertDisplay = false;
+  for (int i=0; i <= 30; i++) {
+    displayManager.display.invertDisplay(invertDisplay);
+    invertDisplay = !invertDisplay;
+    delay(500);
+  }
+
+  firstTimecaptivePortalCallback = true;
+  
 }
 
 void printPortalHeaderInDisplay(String title)
