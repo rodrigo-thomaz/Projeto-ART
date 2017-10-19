@@ -70,9 +70,7 @@ void setup() {
 	displayManager.display.clearDisplay();
 	displayManager.display.setTextSize(1);
 	displayManager.display.setTextColor(WHITE);
-	displayManager.display.setCursor(0, 0);
-
-	displayManager.display.println("Conectando Wifi...");
+	displayManager.display.setCursor(0, 0);	
 	displayManager.display.display();
 
 	wifiManager.setAPCallback(configModeCallback);
@@ -174,7 +172,6 @@ void VerificaConexoesWiFIEMQTT(void)
 
 void printDataDisplay()
 {
-    // text display tests
     displayManager.display.clearDisplay();
     displayManager.display.setTextSize(1);
     displayManager.display.setTextColor(WHITE);
@@ -210,14 +207,24 @@ void printDataDisplay()
 }
 
 void configModeCallback (String ssid, String pwd, String ip) {
-  Serial.println();
-  Serial.print("Modo de configuração: { SSID: ");
-  Serial.print(ssid);  
-  Serial.print(", PWD: ");
-  Serial.print(pwd);    
-  Serial.print(", IP: ");
-  Serial.print(ip);    
-  Serial.println(" }");
+
+  displayManager.display.clearDisplay();
+  displayManager.display.setTextSize(2);
+  displayManager.display.setTextColor(WHITE);
+  displayManager.display.setCursor(0, 0);       
+    
+  displayManager.display.println("* Acesse *");
+  displayManager.display.setTextSize(2);
+  displayManager.display.print("    ");
+  displayManager.display.println(ssid);  
+  displayManager.display.print(" ");
+  displayManager.display.setTextSize(2);
+  displayManager.display.println(pwd);    
+  displayManager.display.print(" ");
+  displayManager.display.println(ip);    
+
+  displayManager.display.display();
+  
 }
 
 void configSuccessToConnectCallback (String ssid, int quality, int bars) {  
