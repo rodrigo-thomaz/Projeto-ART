@@ -30,3 +30,15 @@ long NTPManager::getEpochTime()
 {
 	return timeClient.getEpochTime();
 }
+
+String NTPManager::getFormattedTime()
+{
+	int hours = timeClient.getHours();
+	int minutes = timeClient.getMinutes();
+	
+	static char str[5];
+	
+	sprintf(str, "%02d:%02d", hours, minutes);
+	
+	return String(str);
+}

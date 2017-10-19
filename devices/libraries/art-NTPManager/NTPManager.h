@@ -11,6 +11,7 @@ public:
 	~NTPManager();
 	void begin();
 	long getEpochTime();
+	String getFormattedTime();
 private:
 	DebugManager*          _debugManager;
 };

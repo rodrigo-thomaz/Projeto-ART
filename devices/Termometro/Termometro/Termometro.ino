@@ -187,12 +187,16 @@ void printDataDisplay()
       displayManager.display.setCursor(0, 0);    
       
       displayManager.display.print(temperatureSensorManager.Sensors[0].tempCelsius);
-      displayManager.display.print(" C");
+      displayManager.display.println(" C");
       
       //displayManager.display.print(temperatureSensorManager.Sensors[0].tempFahrenheit);
       //displayManager.display.println(" F");
     }
 
+    // Formatted Time
+    String formattedTime = ntpManager.getFormattedTime();
+    displayManager.display.println(formattedTime);
+    
     displayManager.display.display();
 }
 
