@@ -101,7 +101,7 @@ void DisplayManager::begin()
 	display.clearDisplay();
 	display.drawBitmap(LOGO_GLCD_X, LOGO_GLCD_Y,  logo16_glcd_bmp, LOGO_GLCD_WIDTH, LOGO_GLCD_HEIGHT, 1);						// internally, this will display the splashscreen.
 	display.display();
-	delay(5000);
+	delay(3000);
 	
 	// Clear the buffer.
 	display.clearDisplay();

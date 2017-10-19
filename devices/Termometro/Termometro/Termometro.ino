@@ -213,7 +213,25 @@ void startConfigPortalCallback (String ssid, String pwd) {
   displayManager.display.setTextSize(2);
   displayManager.display.setTextColor(WHITE);
   displayManager.display.setCursor(0, 0);       
-    
+
+  displayManager.display.println(" entrando");
+  displayManager.display.println(" no setup");
+  displayManager.display.println(" do  wifi");
+
+  displayManager.display.display();
+
+  delay(400);
+  
+  displayManager.display.print(" ");  
+  for (int i=0; i <= 6; i++) {
+    displayManager.display.print(".");  
+    displayManager.display.display();
+    delay(400);
+  } 
+
+  displayManager.display.clearDisplay();
+  displayManager.display.setCursor(0, 0);       
+  
   displayManager.display.println("* Acesse *");
   displayManager.display.print("ssid : ");
   displayManager.display.println(ssid);  
