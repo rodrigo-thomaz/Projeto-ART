@@ -97,7 +97,7 @@ class WiFiManager
     //sets config for a static IP
     void          setSTAStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);
     //called when AP mode and config portal is started
-    void          setAPCallback( void (*func)(String, String, String) );
+    void          setStartConfigPortalCallback( void (*func)(String, String, String) );
     //called when settings have been changed and connection was successful
 	void          setSuccessToConnectCallback( void (*func)(String, int, int) );
 	void          setFailedToConnectCallback( void (*func)(String, int, String) );
@@ -188,7 +188,7 @@ class WiFiManager
     boolean       connect;
     boolean       _debug = true;
 
-    void (*_apcallback)(String, String, String) = NULL;
+    void (*_startConfigPortalCallback)(String, String, String) = NULL;
 	void (*_successToConnectCallback)(String, int, int) = NULL;
 	void (*_failedToConnectCallback)(String, int, String) = NULL;
 

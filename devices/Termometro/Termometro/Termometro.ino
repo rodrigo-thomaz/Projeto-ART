@@ -73,7 +73,7 @@ void setup() {
 	displayManager.display.setCursor(0, 0);	
 	displayManager.display.display();
 
-	wifiManager.setAPCallback(configModeCallback);
+	wifiManager.setStartConfigPortalCallback(startConfigPortalCallback);
   wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
   wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
   wifiManager.autoConnect();
@@ -206,7 +206,7 @@ void printDataDisplay()
     displayManager.display.display();
 }
 
-void configModeCallback (String ssid, String pwd, String ip) {
+void startConfigPortalCallback (String ssid, String pwd, String ip) {
 
   displayManager.display.clearDisplay();
   displayManager.display.setTextSize(2);

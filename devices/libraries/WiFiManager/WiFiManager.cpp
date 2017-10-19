@@ -248,8 +248,8 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
   _apPassword = apPassword;
 
   //notify we entered AP mode
-  if ( _apcallback != NULL) {	 
-    _apcallback(String(apName), String(_apPassword), toStringIp(_ap_static_ip));
+  if ( _startConfigPortalCallback != NULL) {	 
+    _startConfigPortalCallback(String(apName), String(_apPassword), toStringIp(_ap_static_ip));
   }
 
   connect = false;
@@ -785,8 +785,8 @@ boolean WiFiManager::captivePortal() {
 }
 
 //start up config portal callback
-void WiFiManager::setAPCallback( void (*func)(String ssid, String pwd, String ip) ) {
-  _apcallback = func;
+void WiFiManager::setStartConfigPortalCallback( void (*func)(String ssid, String pwd, String ip) ) {
+  _startConfigPortalCallback = func;
 }
 
 //start up save config callback
