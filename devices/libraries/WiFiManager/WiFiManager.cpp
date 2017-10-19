@@ -272,7 +272,10 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
       DEBUG_WM(F("Connecting to new AP"));
 
       // using user-provided  _ssid, _pass in place of system-stored ssid and pass
+	  WiFi.mode(WIFI_STA);
+	  
 	  int connectionResult = connectWifi(_ssid, _pass);
+	  
       if (connectionResult != WL_CONNECTED) {
         DEBUG_WM(F("Failed to connect."));
 		if ( _failedToConnectCallback != NULL) {
@@ -280,8 +283,7 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
           _failedToConnectCallback(String(_ssid), connectionResult, convertConnectionResultToString(connectionResult));
         }
       } else {
-        //connected
-        WiFi.mode(WIFI_STA);
+        //connected        
         if ( _successToConnectCallback != NULL) {
 			//todo: check if any custom parameters actually exist, and check if they really changed maybe
 			int rssi = WiFi.RSSI();

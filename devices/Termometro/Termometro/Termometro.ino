@@ -176,6 +176,7 @@ void VerificaConexoesWiFIEMQTT(void)
 void printDataDisplay()
 {
     displayManager.display.clearDisplay();
+    displayManager.display.setFont();
     displayManager.display.setTextSize(1);
     displayManager.display.setTextColor(WHITE);
     displayManager.display.setCursor(0, 0);       
