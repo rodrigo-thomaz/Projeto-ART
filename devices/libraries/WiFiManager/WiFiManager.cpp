@@ -779,9 +779,19 @@ boolean WiFiManager::captivePortal() {
     server->sendHeader("Location", String("http://") + toStringIp(server->client().localIP()), true);
     server->send ( 302, "text/plain", ""); // Empty content inhibits Content-length header so we have to close the socket ourselves.
     server->client().stop(); // Stop is needed because we sent no content length
+	
+	//notify we entered captive portal
+	if ( _captivePortalCallback != NULL) {	 
+		_captivePortalCallback(toStringIp(_ap_static_ip));
+	}
+  
     return true;
   }
   return false;
+}
+
+void WiFiManager::setCaptivePortalCallback( void (*func)(String ip) ) {
+  _captivePortalCallback = func;
 }
 
 //start up config portal callback

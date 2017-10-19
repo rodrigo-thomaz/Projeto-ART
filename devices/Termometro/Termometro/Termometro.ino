@@ -74,6 +74,7 @@ void setup() {
 	displayManager.display.display();
 
 	wifiManager.setStartConfigPortalCallback(startConfigPortalCallback);
+  wifiManager.setCaptivePortalCallback(captivePortalCallback);
   wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
   wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
   wifiManager.autoConnect();
@@ -220,6 +221,20 @@ void startConfigPortalCallback (String ssid, String pwd, String ip) {
   displayManager.display.print(" ");
   displayManager.display.setTextSize(2);
   displayManager.display.println(pwd);    
+
+  displayManager.display.display();
+  
+}
+
+void captivePortalCallback (String ip) {
+
+  displayManager.display.clearDisplay();
+  displayManager.display.setTextSize(2);
+  displayManager.display.setTextColor(WHITE);
+  displayManager.display.setCursor(0, 0);       
+    
+  displayManager.display.println("* Acesse *");
+  displayManager.display.setTextSize(2);
   displayManager.display.print(" ");
   displayManager.display.println(ip);    
 

@@ -96,6 +96,8 @@ class WiFiManager
     void          setAPStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);
     //sets config for a static IP
     void          setSTAStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);
+	//called when Captive Portal is invoked
+    void          setCaptivePortalCallback( void (*func)(String) );
     //called when AP mode and config portal is started
     void          setStartConfigPortalCallback( void (*func)(String, String, String) );
     //called when settings have been changed and connection was successful
@@ -188,6 +190,7 @@ class WiFiManager
     boolean       connect;
     boolean       _debug = true;
 
+	void (*_captivePortalCallback)(String) = NULL;
     void (*_startConfigPortalCallback)(String, String, String) = NULL;
 	void (*_successToConnectCallback)(String, int, int) = NULL;
 	void (*_failedToConnectCallback)(String, int, String) = NULL;
