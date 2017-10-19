@@ -196,7 +196,16 @@ void printDataDisplay()
     // Formatted Time
     String formattedTime = ntpManager.getFormattedTime();
     displayManager.display.println(formattedTime);
-    
+
+
+    // Wifi
+    int quality = wifiManager.getQuality();
+    int bars = wifiManager.convertQualitytToBarsSignal(quality);
+    for (int b=0; b <= bars; b++) {
+      // display.fillRect(59 + (b*5),33 - (b*5),3,b*5,WHITE); 
+      displayManager.display.fillRect(10 + (b*5),48 - (b*5),3,b*5,WHITE); 
+    }
+  
     displayManager.display.display();
 }
 
