@@ -7,6 +7,8 @@
 #include "PubSubClient.h"
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
+#include "Fonts/FreeSans9pt7b.h"
+#include "Fonts/FreeSansBold9pt7b.h"
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -214,6 +216,8 @@ void startConfigPortalCallback (String ssid, String pwd) {
   displayManager.display.setTextColor(WHITE);
   displayManager.display.setCursor(0, 0);       
 
+  displayManager.display.setFont();
+
   displayManager.display.println(" entrando");
   displayManager.display.println(" no setup");
   displayManager.display.println(" do  wifi");
@@ -231,32 +235,51 @@ void startConfigPortalCallback (String ssid, String pwd) {
 
   displayManager.display.clearDisplay();
   displayManager.display.setCursor(0, 0);       
+  displayManager.display.setTextWrap(false);
   
-  displayManager.display.println("* Acesse *");
-  displayManager.display.print("ssid : ");
-  displayManager.display.println(ssid);  
-  displayManager.display.print("senha: ");
-  //displayManager.display.print("  ");
-  displayManager.display.print(pwd);    
-
+  displayManager.display.setTextColor(BLACK, WHITE);
+  displayManager.display.println("  Conecte  ");
   displayManager.display.display();
-  
+  displayManager.display.setTextColor(WHITE);
+  displayManager.display.setTextSize(1);  
+  displayManager.display.println();
+  displayManager.display.println();
+  displayManager.display.setFont(&FreeSansBold9pt7b);
+  displayManager.display.setTextSize(1);  
+  displayManager.display.print("ssid:  ");
+  displayManager.display.println(ssid);  
+  displayManager.display.print("pwd: ");  
+  displayManager.display.setTextWrap(false);
+  displayManager.display.print(pwd);    
+    
+  displayManager.display.display();
 }
 
 void captivePortalCallback (String ip) {
 
-  displayManager.display.clearDisplay();
-  displayManager.display.setTextSize(2);
-  displayManager.display.setTextColor(WHITE);
+  displayManager.display.clearDisplay();    
+  displayManager.display.setFont();
   displayManager.display.setCursor(0, 0);       
-    
-  displayManager.display.println("* Acesse *");
+  displayManager.display.setTextWrap(false);
   displayManager.display.setTextSize(2);
-  displayManager.display.print(" ");
-  displayManager.display.println(ip);    
-
-  displayManager.display.display();
+  displayManager.display.setTextColor(BLACK, WHITE);
   
+  displayManager.display.println("  Acesse    ");
+  displayManager.display.display();
+  displayManager.display.setTextColor(WHITE);
+  displayManager.display.setTextSize(1);  
+  displayManager.display.println();
+  displayManager.display.println();
+  displayManager.display.println();
+  displayManager.display.setFont(&FreeSansBold9pt7b);
+  displayManager.display.setTextSize(1);  
+  displayManager.display.setTextWrap(false);
+  displayManager.display.print("  http://");
+  displayManager.display.println(ip);    
+    
+  displayManager.display.display();  
+
+  //displayManager.display.startscrollleft(0x03, 0x0F);
 }
 
 void configSuccessToConnectCallback (String ssid, int quality, int bars) {  
