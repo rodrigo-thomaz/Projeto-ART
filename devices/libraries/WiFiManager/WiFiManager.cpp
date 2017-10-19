@@ -279,7 +279,7 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
       if (connectionResult != WL_CONNECTED) {
         DEBUG_WM(F("Failed to connect."));
 		if ( _failedConfigPortalCallback != NULL) {
-          _failedConfigPortalCallback(String(_ssid), connectionResult, convertConnectionResultToString(connectionResult));
+          _failedConfigPortalCallback(connectionResult);
         }
       } else {
 		DEBUG_WM(F("Connected."));
@@ -800,7 +800,7 @@ void WiFiManager::setSuccessConfigPortalCallback( void (*func)() ) {
   _successConfigPortalCallback = func;
 }
 
-void WiFiManager::setFailedConfigPortalCallback( void (*func)(String ssid, int connectionResult, String message) ) {
+void WiFiManager::setFailedConfigPortalCallback( void (*func)(int connectionResult) ) {
   _failedConfigPortalCallback = func;
 }
 

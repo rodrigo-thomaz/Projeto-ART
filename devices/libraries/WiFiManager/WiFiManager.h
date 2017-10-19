@@ -102,7 +102,7 @@ class WiFiManager
     void          setCaptivePortalCallback( void (*func)(String) );
 	
 	void          setSuccessConfigPortalCallback( void (*func)() );
-	void          setFailedConfigPortalCallback( void (*func)(String, int, String) );
+	void          setFailedConfigPortalCallback( void (*func)(int) );
 	
     //called when settings have been changed and connection was successful
 	void          setSuccessToConnectCallback( void (*func)(String, int, int) );
@@ -197,7 +197,7 @@ class WiFiManager
     void (*_startConfigPortalCallback)(String, String) = NULL;
 	void (*_captivePortalCallback)(String) = NULL;
 	void (*_successConfigPortalCallback)() = NULL;
-	void (*_failedConfigPortalCallback)(String, int, String) = NULL;
+	void (*_failedConfigPortalCallback)(int) = NULL;
 	
 	void (*_successToConnectCallback)(String, int, int) = NULL;
 	void (*_failedToConnectCallback)(String, int, String) = NULL;

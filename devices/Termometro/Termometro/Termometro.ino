@@ -302,7 +302,7 @@ void successConfigPortalCallback () {
   delay(4000);
 }
 
-void failedConfigPortalCallback (String ssid, int connectionResult, String message) {  
+void failedConfigPortalCallback (int connectionResult) {  
 
   displayManager.display.clearDisplay();
   
