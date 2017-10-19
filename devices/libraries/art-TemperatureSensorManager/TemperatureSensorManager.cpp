@@ -1,6 +1,5 @@
 #include "TemperatureSensorManager.h"
 #include "Arduino.h"
-#include "TemperatureSensor.h"
 #include "OneWire.h"
 #include "DallasTemperature.h"
 #include "NTPManager.h"
@@ -16,7 +15,13 @@ OneWire oneWire(ONE_WIRE_BUS);
 // Pass our oneWire reference to Dallas Temperature. 
 DallasTemperature _dallas(&oneWire);
 
-//TemperatureSensor *Sensors;
+
+
+TemperatureSensor::TemperatureSensor()
+{
+
+}
+
 
 TemperatureSensorManager::TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager)
 { 
