@@ -209,8 +209,12 @@ void printDataDisplay()
     displayManager.display.display();
 }
 
+bool firstTimecaptivePortalCallback = true;
+
 void startConfigPortalCallback (String ssid, String pwd) {
 
+  firstTimecaptivePortalCallback = true;
+  
   displayManager.display.clearDisplay();
   displayManager.display.setTextSize(2);
   displayManager.display.setTextColor(WHITE);
@@ -250,6 +254,12 @@ void startConfigPortalCallback (String ssid, String pwd) {
 
 void captivePortalCallback (String ip) {
 
+  if(!firstTimecaptivePortalCallback){
+    return;
+  }
+
+  firstTimecaptivePortalCallback = false;
+  
   printPortalHeaderInDisplay("  Acesse    ");
   
   displayManager.display.println();
