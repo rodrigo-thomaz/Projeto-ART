@@ -207,7 +207,7 @@ void printDataDisplay()
     displayManager.display.display();
 }
 
-void startConfigPortalCallback (String ssid, String pwd, String ip) {
+void startConfigPortalCallback (String ssid, String pwd) {
 
   displayManager.display.clearDisplay();
   displayManager.display.setTextSize(2);
@@ -215,12 +215,11 @@ void startConfigPortalCallback (String ssid, String pwd, String ip) {
   displayManager.display.setCursor(0, 0);       
     
   displayManager.display.println("* Acesse *");
-  displayManager.display.setTextSize(2);
-  displayManager.display.print("    ");
+  displayManager.display.print("ssid : ");
   displayManager.display.println(ssid);  
-  displayManager.display.print(" ");
-  displayManager.display.setTextSize(2);
-  displayManager.display.println(pwd);    
+  displayManager.display.print("senha: ");
+  //displayManager.display.print("  ");
+  displayManager.display.print(pwd);    
 
   displayManager.display.display();
   
