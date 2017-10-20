@@ -184,7 +184,6 @@ class WiFiManager
     String        toStringIp(IPAddress ip);
 
 	const char*   generatePassword(const int len);
-	String 		  convertConnectionResultToString(int code);
 	
 	bool		  firstAutoConnect = true;
 	

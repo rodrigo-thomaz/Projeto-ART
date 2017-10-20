@@ -181,51 +181,23 @@ void WiFiManager::autoConnect() {
 	}
 		
 	
-	if (WiFi.status() == WL_CONNECTED){
-		DEBUG_WM(F("Wifi Connect."));
-		//if ( _successToConnectCallback != NULL) {
-		//	int rssi = WiFi.RSSI();
-		//	int quality = getRSSIasQuality(rssi);
-		//	int bars = convertQualitytToBarsSignal(quality);
-        // _successToConnectCallback(String(_ssid), quality, bars);
-        //}		
+	if (WiFi.status() == WL_CONNECTED){		
+		int rssi = WiFi.RSSI();
+		int quality = getRSSIasQuality(rssi);
+		int bars = convertQualitytToBarsSignal(quality);
+		String debugMessage = "Wifi Connect => quality: " + String(quality) + "  bars: " + String(bars);
+		DEBUG_WM(debugMessage.c_str());        
 		return;
 	}
 	
-	// attempt to connect; should it fail, fall back to AP
-	WiFi.mode(WIFI_STA);
-	
+	// attempt to connect; should it fail, fall back to AP	
 	connectWifi("", "");		
 	int connectionResult = WiFi.status();
 	if(connectionResult != WL_CONNECTED){
-		DEBUG_WM(F("Failed to connect."));
-		//if ( _failedToConnectCallback != NULL) {
-		  //todo: check if any custom parameters actually exist, and check if they really changed maybe
-		//  _failedToConnectCallback(apName, connectionResult, convertConnectionResultToString(connectionResult));
-		//}
+		String debugMessage = "Failed to connect: connectionResult: " + String(connectionResult);
+		DEBUG_WM(debugMessage);
 	}
 }
-
-//boolean WiFiManager::autoConnect(char const *apName, char const *apPassword) {
-//  DEBUG_WM(F(""));
-//  DEBUG_WM(F("AutoConnect"));
-
-  // read eeprom for ssid and pass
-  //String ssid = getSSID();
-  //String pass = getPassword();
-
-  // attempt to connect; should it fail, fall back to AP
-//  WiFi.mode(WIFI_STA);
-
-//  if (connectWifi("", "") == WL_CONNECTED)   {
-//    DEBUG_WM(F("IP Address:"));
-//    DEBUG_WM(WiFi.localIP());
-    //connected
-//    return true;
-//  }
-
-//  return startConfigPortal(apName, apPassword);
-//}
 
 boolean WiFiManager::configPortalHasTimeout(){
     if(_configPortalTimeout == 0 || wifi_softap_get_station_num() > 0){
@@ -275,7 +247,6 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
           _connectingConfigPortalCallback();
         }
 		// using user-provided  _ssid, _pass in place of system-stored ssid and pass
-		WiFi.mode(WIFI_STA);
 	  
 		int connectionResult = connectWifi(_ssid, _pass);
 	  
@@ -306,6 +277,8 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
 int WiFiManager::connectWifi(String ssid, String pass) {
   DEBUG_WM(F("Connecting as wifi client..."));
 
+  WiFi.mode(WIFI_STA);
+  
   // check if we've got static_ip settings, if we do, use those.
   if (_sta_static_ip) {
     DEBUG_WM(F("Custom STA IP/GW/Subnet"));
@@ -824,29 +797,6 @@ void WiFiManager::setCustomHeadElement(const char* element) {
 //if this is true, remove duplicated Access Points - defaut true
 void WiFiManager::setRemoveDuplicateAPs(boolean removeDuplicates) {
   _removeDuplicateAPs = removeDuplicates;
-}
-
-String WiFiManager::convertConnectionResultToString(int code) {	
-	switch (code) {
-		case WL_NO_SHIELD: // 255
-		  return "WL_NO_SHIELD";
-		case WL_IDLE_STATUS: // 0
-		  return "WL_IDLE_STATUS";
-		case WL_NO_SSID_AVAIL: // 1
-		  return "WL_NO_SSID_AVAIL";
-		case WL_SCAN_COMPLETED: // 2
-		  return "WL_SCAN_COMPLETED";
-		case WL_CONNECTED: // 3
-		  return "WL_CONNECTED";
-		case WL_CONNECT_FAILED: // 4
-		  return "WL_CONNECT_FAILED";
-		case WL_CONNECTION_LOST:  // 5
-		  return "WL_CONNECTION_LOST";
-		case WL_DISCONNECTED:  // 6
-		  return "WL_DISCONNECTED";
-		default:
-		  return "Erro de conversão";
-	} 
 }
 
 template <typename Generic>
