@@ -75,17 +75,27 @@ void setup() {
 	displayManager.display.setCursor(0, 0);	
 	displayManager.display.display();
 
-	wifiManager.setStartConfigPortalCallback(startConfigPortalCallback);
-  wifiManager.setCaptivePortalCallback(captivePortalCallback);
-  wifiManager.setSuccessConfigPortalCallback(successConfigPortalCallback);    
-  wifiManager.setFailedConfigPortalCallback(failedConfigPortalCallback);    
-  wifiManager.setConnectingConfigPortalCallback(connectingConfigPortalCallback); 
+  //TODO: Gambeta, no displayWiFiManager.begin(); está comentado o código que deveria funcionar no lugar destes handlers abaixo
+  displayWiFiManager.begin();	
+	wifiManager.setStartConfigPortalCallback(handleStartConfigPortalCallback);
+  wifiManager.setCaptivePortalCallback(handleCaptivePortalCallback);
+  wifiManager.setSuccessConfigPortalCallback(handleSuccessConfigPortalCallback);    
+  wifiManager.setFailedConfigPortalCallback(handleFailedConfigPortalCallback);    
+  wifiManager.setConnectingConfigPortalCallback(handleConnectingConfigPortalCallback); 
+  
   wifiManager.autoConnect();
   
   initMQTT();
 
 	ntpManager.begin();
 }
+
+//TODO: Gambeta, no displayWiFiManager.begin(); está comentado o código que deveria funcionar no lugar destes handlers abaixo
+void handleStartConfigPortalCallback () {  displayWiFiManager.startConfigPortalCallback(); }
+void handleCaptivePortalCallback (String ip) {  displayWiFiManager.captivePortalCallback(ip); }
+void handleSuccessConfigPortalCallback () {  displayWiFiManager.successConfigPortalCallback(); }
+void handleFailedConfigPortalCallback (int connectionResult) {  displayWiFiManager.failedConfigPortalCallback(connectionResult); }
+void handleConnectingConfigPortalCallback () {  displayWiFiManager.connectingConfigPortalCallback(); }
 
 void initMQTT() 
 {
@@ -201,126 +211,6 @@ void printDataDisplay()
     }
   
     displayManager.display.display();
-}
-
-bool firstTimecaptivePortalCallback = true;
-
-void startConfigPortalCallback () {
-  firstTimecaptivePortalCallback = true;  
-  displayWiFiManager.showEnteringSetup();  
-  displayWiFiManager.showWiFiConect();  
-}
-
-void captivePortalCallback (String ip) {
-
-  displayManager.display.stopscroll();
-  
-  if(!firstTimecaptivePortalCallback){
-    return;
-  }
-
-  firstTimecaptivePortalCallback = false;
-
-  displayManager.display.clearDisplay();
-  
-  displayWiFiManager.printPortalHeaderInDisplay("  Acesse    ");
-  
-  displayManager.display.println();
-  displayManager.display.println();
-  displayManager.display.println();
-  displayManager.display.setFont(&FreeSansBold9pt7b);
-  displayManager.display.setTextSize(1);  
-  displayManager.display.setTextWrap(false);
-  displayManager.display.print("  http://");
-  displayManager.display.println(ip);    
-    
-  displayManager.display.display();  
-}
-
-void successConfigPortalCallback () {  
-
-  displayManager.display.stopscroll();
-  
-  String ssid = wifiManager.getSSID();
-  
-  displayManager.display.clearDisplay();
-  
-  displayWiFiManager.printPortalHeaderInDisplay("  Acesso    ");
-    
-  displayManager.display.println();
-  displayManager.display.println();
-  displayManager.display.setFont(&FreeSansBold9pt7b);
-  displayManager.display.setTextSize(1);  
-  displayManager.display.setTextWrap(false);
-  displayManager.display.println("Conectado a");
-  displayManager.display.print(ssid);
-  displayManager.display.print("!");
-  displayManager.display.display();  
-
-  delay(4000);
-}
-
-void failedConfigPortalCallback (int connectionResult) {  
-
-  displayManager.display.stopscroll();
-
-  displayManager.display.clearDisplay();
-  
-  displayWiFiManager.printPortalHeaderInDisplay("  Acesso    ");
-
-  if(connectionResult == WL_CONNECT_FAILED){
-    displayManager.display.println();
-    displayManager.display.println();
-    displayManager.display.setFont(&FreeSansBold9pt7b);
-    displayManager.display.setTextSize(1);  
-    displayManager.display.setTextWrap(false);
-    displayManager.display.println("   Ops! falha");
-    displayManager.display.println("  na tentativa");
-  }
-    
-  displayManager.display.display();    
-
-  bool invertDisplay = false;
-  for (int i=0; i <= 10; i++) {
-    displayManager.display.invertDisplay(invertDisplay);
-    invertDisplay = !invertDisplay;
-    delay(500);
-  }
-
-  firstTimecaptivePortalCallback = true;
-
-  displayWiFiManager.showWiFiConect();  
-  
-}
-
-void connectingConfigPortalCallback () {  
-
-  displayManager.display.stopscroll();
-
-  String ssid = wifiManager.getSSID();
-
-  displayManager.display.clearDisplay();
-  
-  displayWiFiManager.printPortalHeaderInDisplay("  Acesso    ");
-
-  displayManager.display.setCursor(0, 27);       
-
-  displayManager.display.setFont(&FreeSansBold9pt7b);
-  displayManager.display.setTextSize(1);  
-  displayManager.display.setTextWrap(false);  
-  displayManager.display.println(" Conectando a");
- 
-  displayManager.display.print(" ");
-  displayManager.display.println(ssid);
-    
-  displayManager.display.display();    
-
-  // progress  
-  displayManager.display.setCursor(0, 63);       
-  displayManager.display.setTextWrap(false);  
-  displayManager.display.println(".... .... .... .... .... .... .... .... .... .... .... ....");  
-  displayManager.display.display();
-  displayManager.display.startscrollleft(0x07, 0x0F);  
 }
 
 void loop() {	

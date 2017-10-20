@@ -14,13 +14,26 @@ class DisplayWiFiManager
 public:
 	DisplayWiFiManager(DisplayManager& displayManager, WiFiManager& wifiManager, DebugManager& debugManager);
 	~DisplayWiFiManager();	
-	void					printPortalHeaderInDisplay(String title);
-	void 					showEnteringSetup();
-	void 					showWiFiConect();
+	
+	void					begin();
+	
+	void 					startConfigPortalCallback ();
+	void 					captivePortalCallback (String ip);
+	void 					successConfigPortalCallback ();
+	void 					failedConfigPortalCallback (int connectionResult);
+	void 					connectingConfigPortalCallback ();
+	
 private:
+
 	DisplayManager*       	_displayManager;	
 	WiFiManager*          	_wifiManager;
 	DebugManager*         	_debugManager;
+	
+	bool 					_firstTimecaptivePortalCallback = true;
+	
+	void					printPortalHeaderInDisplay(String title);
+	void 					showEnteringSetup();
+	void 					showWiFiConect();
 };
 
 #endif
