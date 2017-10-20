@@ -356,6 +356,7 @@ void connectingConfigPortalCallback () {
   displayManager.display.setTextSize(1);  
   displayManager.display.setTextWrap(false);  
   displayManager.display.println(" Conectando a");
+ 
   displayManager.display.print(" ");
   displayManager.display.println(ssid);
     
