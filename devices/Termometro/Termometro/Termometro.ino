@@ -79,22 +79,12 @@ void setup() {
   wifiManager.setCaptivePortalCallback(captivePortalCallback);
   wifiManager.setSuccessConfigPortalCallback(successConfigPortalCallback);    
   wifiManager.setFailedConfigPortalCallback(failedConfigPortalCallback);    
-  wifiManager.setConnectingConfigPortalCallback(connectingConfigPortalCallback);    
-  wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
-  wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
+  wifiManager.setConnectingConfigPortalCallback(connectingConfigPortalCallback); 
   wifiManager.autoConnect();
   
   initMQTT();
 
 	ntpManager.begin();
-
-	displayManager.display.println("Wifi conectado !!!");
-	displayManager.display.display();
-	delay(2000);
-
-  Serial.println();
-  Serial.print("MAC: ");
-  Serial.println(WiFi.macAddress());
 }
 
 void initMQTT() 
@@ -381,29 +371,6 @@ void printPortalHeaderInDisplay(String title)
   displayManager.display.display();
   displayManager.display.setTextColor(WHITE);
   displayManager.display.setTextSize(1);  
-}
-
-void configSuccessToConnectCallback (String ssid, int quality, int bars) {  
-  Serial.print("Conectado na rede Wifi: ");
-  Serial.print(ssid);
-  Serial.print(" qualidade: ");    
-  Serial.print(quality);
-  Serial.print(" bars: ");    
-  Serial.println(bars);
-
-  for (int b=0; b <= bars; b++) {
-    // display.fillRect(59 + (b*5),33 - (b*5),3,b*5,WHITE); 
-    displayManager.display.fillRect(10 + (b*5),48 - (b*5),3,b*5,WHITE); 
-  }
-}
-
-void configFailedToConnectCallback (String ssid, int connectionResult, String message) {  
-  Serial.print("Não foi possível conectar na rede Wifi ");
-  Serial.println(ssid);
-  Serial.print("Code: ");
-  Serial.print(connectionResult);
-  Serial.print(" Mensagem: ");
-  Serial.println(message);
 }
 
 void loop() {	

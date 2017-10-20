@@ -105,9 +105,6 @@ class WiFiManager
 	void          setFailedConfigPortalCallback( void (*func)(int) );
 	void          setConnectingConfigPortalCallback( void (*func)() );
 	
-    //called when settings have been changed and connection was successful
-	void          setSuccessToConnectCallback( void (*func)(String, int, int) );
-	void          setFailedToConnectCallback( void (*func)(String, int, String) );
     //adds a custom parameter
     void          addParameter(WiFiManagerParameter *p);
     //if this is set, it will exit after config, even if connection is unsuccessful.
@@ -200,9 +197,6 @@ class WiFiManager
 	void (*_successConfigPortalCallback)() = NULL;
 	void (*_failedConfigPortalCallback)(int) = NULL;
 	void (*_connectingConfigPortalCallback)() = NULL;
-	
-	void (*_successToConnectCallback)(String, int, int) = NULL;
-	void (*_failedToConnectCallback)(String, int, String) = NULL;
 
     WiFiManagerParameter* _params[WIFI_MANAGER_MAX_PARAMS];
 

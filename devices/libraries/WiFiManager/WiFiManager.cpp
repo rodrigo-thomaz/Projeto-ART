@@ -182,12 +182,13 @@ void WiFiManager::autoConnect() {
 		
 	
 	if (WiFi.status() == WL_CONNECTED){
-		if ( _successToConnectCallback != NULL) {
-			int rssi = WiFi.RSSI();
-			int quality = getRSSIasQuality(rssi);
-			int bars = convertQualitytToBarsSignal(quality);
-          _successToConnectCallback(String(_ssid), quality, bars);
-        }		
+		DEBUG_WM(F("Wifi Connect."));
+		//if ( _successToConnectCallback != NULL) {
+		//	int rssi = WiFi.RSSI();
+		//	int quality = getRSSIasQuality(rssi);
+		//	int bars = convertQualitytToBarsSignal(quality);
+        // _successToConnectCallback(String(_ssid), quality, bars);
+        //}		
 		return;
 	}
 	
@@ -198,10 +199,10 @@ void WiFiManager::autoConnect() {
 	int connectionResult = WiFi.status();
 	if(connectionResult != WL_CONNECTED){
 		DEBUG_WM(F("Failed to connect."));
-		if ( _failedToConnectCallback != NULL) {
+		//if ( _failedToConnectCallback != NULL) {
 		  //todo: check if any custom parameters actually exist, and check if they really changed maybe
-		  _failedToConnectCallback(apName, connectionResult, convertConnectionResultToString(connectionResult));
-		}
+		//  _failedToConnectCallback(apName, connectionResult, convertConnectionResultToString(connectionResult));
+		//}
 	}
 }
 
@@ -808,16 +809,6 @@ void WiFiManager::setFailedConfigPortalCallback( void (*func)(int connectionResu
 
 void WiFiManager::setConnectingConfigPortalCallback( void (*func)() ) {
   _connectingConfigPortalCallback = func;
-}
-
-//start up save config callback
-void WiFiManager::setSuccessToConnectCallback( void (*func)(String ssid, int quality, int bars) ) {
-  _successToConnectCallback = func;
-}
-
-//start up save config callback
-void WiFiManager::setFailedToConnectCallback( void (*func)(String ssid, int connectionResult, String message) ) {
-  _failedToConnectCallback = func;
 }
 
 //sets a custom element to add to head, like a new style tag
