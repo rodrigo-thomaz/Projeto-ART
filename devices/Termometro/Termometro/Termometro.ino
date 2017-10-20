@@ -79,6 +79,7 @@ void setup() {
   wifiManager.setCaptivePortalCallback(captivePortalCallback);
   wifiManager.setSuccessConfigPortalCallback(successConfigPortalCallback);    
   wifiManager.setFailedConfigPortalCallback(failedConfigPortalCallback);    
+  wifiManager.setConnectingConfigPortalCallback(connectingConfigPortalCallback);    
   wifiManager.setSuccessToConnectCallback(configSuccessToConnectCallback);    
   wifiManager.setFailedToConnectCallback(configFailedToConnectCallback);    
   wifiManager.autoConnect();
@@ -216,6 +217,8 @@ bool firstTimecaptivePortalCallback = true;
 
 void startConfigPortalCallback (String ssid, String pwd) {
 
+  displayManager.display.stopscroll();
+  
   firstTimecaptivePortalCallback = true;
   
   displayManager.display.clearDisplay();
@@ -259,6 +262,8 @@ void startConfigPortalCallback (String ssid, String pwd) {
 
 void captivePortalCallback (String ip) {
 
+  displayManager.display.stopscroll();
+  
   if(!firstTimecaptivePortalCallback){
     return;
   }
@@ -283,6 +288,8 @@ void captivePortalCallback (String ip) {
 
 void successConfigPortalCallback () {  
 
+  displayManager.display.stopscroll();
+  
   String ssid = wifiManager.getSSID();
   
   displayManager.display.clearDisplay();
@@ -303,6 +310,8 @@ void successConfigPortalCallback () {
 }
 
 void failedConfigPortalCallback (int connectionResult) {  
+
+  displayManager.display.stopscroll();
 
   displayManager.display.clearDisplay();
   
@@ -329,6 +338,35 @@ void failedConfigPortalCallback (int connectionResult) {
 
   firstTimecaptivePortalCallback = true;
   
+}
+
+void connectingConfigPortalCallback () {  
+
+  displayManager.display.stopscroll();
+
+  String ssid = wifiManager.getSSID();
+
+  displayManager.display.clearDisplay();
+  
+  printPortalHeaderInDisplay("  Acesso    ");
+
+  displayManager.display.setCursor(0, 27);       
+
+  displayManager.display.setFont(&FreeSansBold9pt7b);
+  displayManager.display.setTextSize(1);  
+  displayManager.display.setTextWrap(false);  
+  displayManager.display.println(" Conectando a");
+  displayManager.display.print(" ");
+  displayManager.display.println(ssid);
+    
+  displayManager.display.display();    
+
+  // progress  
+  displayManager.display.setCursor(0, 63);       
+  displayManager.display.setTextWrap(false);  
+  displayManager.display.println(".... .... .... .... .... .... .... .... .... .... .... ....");  
+  displayManager.display.display();
+  displayManager.display.startscrollleft(0x07, 0x0F);  
 }
 
 void printPortalHeaderInDisplay(String title)

@@ -267,27 +267,29 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
 
 
     if (connect) {
-      connect = false;
-      delay(2000);
-      DEBUG_WM(F("Connecting to new AP"));
-
-      // using user-provided  _ssid, _pass in place of system-stored ssid and pass
-	  WiFi.mode(WIFI_STA);
-	  
-	  int connectionResult = connectWifi(_ssid, _pass);
-	  
-      if (connectionResult != WL_CONNECTED) {
-        DEBUG_WM(F("Failed to connect."));
-		if ( _failedConfigPortalCallback != NULL) {
-          _failedConfigPortalCallback(connectionResult);
+		connect = false;
+		delay(2000);
+		DEBUG_WM(F("Connecting to new AP"));
+		if ( _connectingConfigPortalCallback != NULL) {
+          _connectingConfigPortalCallback();
         }
-      } else {
-		DEBUG_WM(F("Connected."));
-        if ( _successConfigPortalCallback != NULL) {
-			_successConfigPortalCallback();
-        }
-        break;
-      }      
+		// using user-provided  _ssid, _pass in place of system-stored ssid and pass
+		WiFi.mode(WIFI_STA);
+	  
+		int connectionResult = connectWifi(_ssid, _pass);
+	  
+		if (connectionResult != WL_CONNECTED) {
+			DEBUG_WM(F("Failed to connect."));
+			if ( _failedConfigPortalCallback != NULL) {
+			  _failedConfigPortalCallback(connectionResult);
+			}
+		} else {
+			DEBUG_WM(F("Connected."));
+			if ( _successConfigPortalCallback != NULL) {
+				_successConfigPortalCallback();
+			}
+			break;
+		}      
     }
     yield();
   }
@@ -802,6 +804,10 @@ void WiFiManager::setSuccessConfigPortalCallback( void (*func)() ) {
 
 void WiFiManager::setFailedConfigPortalCallback( void (*func)(int connectionResult) ) {
   _failedConfigPortalCallback = func;
+}
+
+void WiFiManager::setConnectingConfigPortalCallback( void (*func)() ) {
+  _connectingConfigPortalCallback = func;
 }
 
 //start up save config callback
