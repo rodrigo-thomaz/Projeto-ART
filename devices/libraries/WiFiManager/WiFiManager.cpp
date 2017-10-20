@@ -250,7 +250,7 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
 
   //notify we entered AP mode
   if ( _startConfigPortalCallback != NULL) {	 
-    _startConfigPortalCallback(String(apName), String(_apPassword));
+    _startConfigPortalCallback();
   }
 
   connect = false;
@@ -284,6 +284,7 @@ boolean  WiFiManager::startConfigPortal(char const *apName, char const *apPasswo
 			if ( _failedConfigPortalCallback != NULL) {
 			  _failedConfigPortalCallback(connectionResult);
 			}
+			WiFi.mode(WIFI_AP_STA);
 		} else {
 			DEBUG_WM(F("Connected."));
 			if ( _successConfigPortalCallback != NULL) {
@@ -409,6 +410,10 @@ const char *WiFiManager::generatePassword(const int len) {
 
 String WiFiManager::getConfigPortalSSID() {
   return _apName;
+}
+
+String WiFiManager::getConfigPortalPwd() {
+  return _apPassword;
 }
 
 void WiFiManager::resetSettings() {
@@ -791,7 +796,7 @@ boolean WiFiManager::captivePortal() {
 }
 
 //start up config portal callback
-void WiFiManager::setStartConfigPortalCallback( void (*func)(String ssid, String pwd) ) {
+void WiFiManager::setStartConfigPortalCallback( void (*func)() ) {
   _startConfigPortalCallback = func;
 }
 

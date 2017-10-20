@@ -203,14 +203,10 @@ void printDataDisplay()
     displayManager.display.display();
 }
 
-bool firstTimecaptivePortalCallback = true;
-
-void startConfigPortalCallback (String ssid, String pwd) {
+void showEnteringSetup(){
 
   displayManager.display.stopscroll();
-  
-  firstTimecaptivePortalCallback = true;
-  
+
   displayManager.display.clearDisplay();
   displayManager.display.setTextSize(2);
   displayManager.display.setTextColor(WHITE);
@@ -232,7 +228,13 @@ void startConfigPortalCallback (String ssid, String pwd) {
     displayManager.display.display();
     delay(400);
   } 
+}
 
+void showWifiConect(){
+
+  String configPortalSSID = wifiManager.getConfigPortalSSID();
+  String configPortalPwd = wifiManager.getConfigPortalPwd();
+  
   displayManager.display.clearDisplay();
   
   printPortalHeaderInDisplay("  Conecte  ");
@@ -242,12 +244,20 @@ void startConfigPortalCallback (String ssid, String pwd) {
   displayManager.display.setFont(&FreeSansBold9pt7b);
   displayManager.display.setTextSize(1);  
   displayManager.display.print("ssid:  ");
-  displayManager.display.println(ssid);  
+  displayManager.display.println(configPortalSSID);  
   displayManager.display.print("pwd: ");  
   displayManager.display.setTextWrap(false);
-  displayManager.display.print(pwd);    
+  displayManager.display.print(configPortalPwd);    
     
   displayManager.display.display();
+}
+
+bool firstTimecaptivePortalCallback = true;
+
+void startConfigPortalCallback () {
+  firstTimecaptivePortalCallback = true;  
+  showEnteringSetup();  
+  showWifiConect();  
 }
 
 void captivePortalCallback (String ip) {
@@ -320,13 +330,15 @@ void failedConfigPortalCallback (int connectionResult) {
   displayManager.display.display();    
 
   bool invertDisplay = false;
-  for (int i=0; i <= 30; i++) {
+  for (int i=0; i <= 10; i++) {
     displayManager.display.invertDisplay(invertDisplay);
     invertDisplay = !invertDisplay;
     delay(500);
   }
 
   firstTimecaptivePortalCallback = true;
+
+  showWifiConect();  
   
 }
 

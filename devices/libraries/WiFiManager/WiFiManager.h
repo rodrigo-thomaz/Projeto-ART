@@ -77,6 +77,7 @@ class WiFiManager
 
     // get the AP name of the config portal, so it can be used in the callback
     String        getConfigPortalSSID();
+	String        getConfigPortalPwd();
 
     void          resetSettings();
 
@@ -97,7 +98,7 @@ class WiFiManager
     //sets config for a static IP
     void          setSTAStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);	
     //called when AP mode and config portal is started
-    void          setStartConfigPortalCallback( void (*func)(String, String) );
+    void          setStartConfigPortalCallback( void (*func)() );
 	//called when Captive Portal is invoked
     void          setCaptivePortalCallback( void (*func)(String) );
 	
@@ -115,8 +116,7 @@ class WiFiManager
     //if this is true, remove duplicated Access Points - defaut true
     void          setRemoveDuplicateAPs(boolean removeDuplicates);	
 	
-	String        getSSID();	
-	String        getPassword();	
+	String        getSSID();		
 	int           getQuality();	
 	int			  convertQualitytToBarsSignal(int quality);
 	
@@ -178,6 +178,7 @@ class WiFiManager
     const byte    DNS_PORT = 53;
 
     //helpers
+	String        getPassword();	
     int           getRSSIasQuality(int rssi);
     boolean       isIp(String str);
     String        toStringIp(IPAddress ip);
@@ -192,7 +193,7 @@ class WiFiManager
     boolean       connect;
     boolean       _debug = true;
 	
-    void (*_startConfigPortalCallback)(String, String) = NULL;
+    void (*_startConfigPortalCallback)() = NULL;
 	void (*_captivePortalCallback)(String) = NULL;
 	void (*_successConfigPortalCallback)() = NULL;
 	void (*_failedConfigPortalCallback)(int) = NULL;
