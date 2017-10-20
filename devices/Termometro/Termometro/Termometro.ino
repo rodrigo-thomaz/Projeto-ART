@@ -4,11 +4,10 @@
 #include "NTPManager.h"
 #include "DisplayManager.h"
 #include "WiFiManager.h"
+#include "DisplayWiFiManager.h"
 #include "PubSubClient.h"
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
-#include "Fonts/FreeSans9pt7b.h"
-#include "Fonts/FreeSansBold9pt7b.h"
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -41,6 +40,7 @@ DebugManager debugManager(D6);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
 WiFiManager wifiManager(D5, debugManager);
+DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
@@ -203,61 +203,12 @@ void printDataDisplay()
     displayManager.display.display();
 }
 
-void showEnteringSetup(){
-
-  displayManager.display.stopscroll();
-
-  displayManager.display.clearDisplay();
-  displayManager.display.setTextSize(2);
-  displayManager.display.setTextColor(WHITE);
-  displayManager.display.setCursor(0, 0);       
-
-  displayManager.display.setFont();
-
-  displayManager.display.println(" entrando");
-  displayManager.display.println(" no setup");
-  displayManager.display.println(" do  wifi");
-
-  displayManager.display.display();
-
-  delay(400);
-  
-  displayManager.display.print(" ");  
-  for (int i=0; i <= 6; i++) {
-    displayManager.display.print(".");  
-    displayManager.display.display();
-    delay(400);
-  } 
-}
-
-void showWifiConect(){
-
-  String configPortalSSID = wifiManager.getConfigPortalSSID();
-  String configPortalPwd = wifiManager.getConfigPortalPwd();
-  
-  displayManager.display.clearDisplay();
-  
-  printPortalHeaderInDisplay("  Conecte  ");
-  
-  displayManager.display.println();
-  displayManager.display.println();
-  displayManager.display.setFont(&FreeSansBold9pt7b);
-  displayManager.display.setTextSize(1);  
-  displayManager.display.print("ssid:  ");
-  displayManager.display.println(configPortalSSID);  
-  displayManager.display.print("pwd: ");  
-  displayManager.display.setTextWrap(false);
-  displayManager.display.print(configPortalPwd);    
-    
-  displayManager.display.display();
-}
-
 bool firstTimecaptivePortalCallback = true;
 
 void startConfigPortalCallback () {
   firstTimecaptivePortalCallback = true;  
-  showEnteringSetup();  
-  showWifiConect();  
+  displayWiFiManager.showEnteringSetup();  
+  displayWiFiManager.showWiFiConect();  
 }
 
 void captivePortalCallback (String ip) {
@@ -272,7 +223,7 @@ void captivePortalCallback (String ip) {
 
   displayManager.display.clearDisplay();
   
-  printPortalHeaderInDisplay("  Acesse    ");
+  displayWiFiManager.printPortalHeaderInDisplay("  Acesse    ");
   
   displayManager.display.println();
   displayManager.display.println();
@@ -294,7 +245,7 @@ void successConfigPortalCallback () {
   
   displayManager.display.clearDisplay();
   
-  printPortalHeaderInDisplay("  Acesso    ");
+  displayWiFiManager.printPortalHeaderInDisplay("  Acesso    ");
     
   displayManager.display.println();
   displayManager.display.println();
@@ -315,7 +266,7 @@ void failedConfigPortalCallback (int connectionResult) {
 
   displayManager.display.clearDisplay();
   
-  printPortalHeaderInDisplay("  Acesso    ");
+  displayWiFiManager.printPortalHeaderInDisplay("  Acesso    ");
 
   if(connectionResult == WL_CONNECT_FAILED){
     displayManager.display.println();
@@ -338,7 +289,7 @@ void failedConfigPortalCallback (int connectionResult) {
 
   firstTimecaptivePortalCallback = true;
 
-  showWifiConect();  
+  displayWiFiManager.showWiFiConect();  
   
 }
 
@@ -350,7 +301,7 @@ void connectingConfigPortalCallback () {
 
   displayManager.display.clearDisplay();
   
-  printPortalHeaderInDisplay("  Acesso    ");
+  displayWiFiManager.printPortalHeaderInDisplay("  Acesso    ");
 
   displayManager.display.setCursor(0, 27);       
 
@@ -370,19 +321,6 @@ void connectingConfigPortalCallback () {
   displayManager.display.println(".... .... .... .... .... .... .... .... .... .... .... ....");  
   displayManager.display.display();
   displayManager.display.startscrollleft(0x07, 0x0F);  
-}
-
-void printPortalHeaderInDisplay(String title)
-{  
-  displayManager.display.setFont();
-  displayManager.display.setTextSize(2);  
-  displayManager.display.setCursor(0, 0);       
-  displayManager.display.setTextWrap(false);  
-  displayManager.display.setTextColor(BLACK, WHITE);
-  displayManager.display.println(title);
-  displayManager.display.display();
-  displayManager.display.setTextColor(WHITE);
-  displayManager.display.setTextSize(1);  
 }
 
 void loop() {	
