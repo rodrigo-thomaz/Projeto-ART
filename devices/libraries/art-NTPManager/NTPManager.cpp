@@ -27,7 +27,7 @@ NTPManager::NTPManager(DebugManager& debugManager) {
   
   this->_debugManager = &debugManager;
   
-  int updateInterval = 60000;
+  int updateInterval = 15000;
   int timeOffset = 0; //UTC
   
   this->_udp            = new WiFiUDP();  
@@ -112,10 +112,14 @@ bool NTPManager::update() {
     || this->_lastUpdate == 0) {                                // Update if there was no update yet.
     if (!this->_udpSetup) this->begin();                         // setup the UDP client if needed
 	//notify
+	bool result = this->forceUpdate();
 	if ( _updateCallback != NULL) {	 
-		_updateCallback();
+		_updateCallback(result, true);
 	}
-    return this->forceUpdate();
+    return result;
+  }
+  if ( _updateCallback != NULL) {	 
+    _updateCallback(true, false);
   }
   return true;
 }
@@ -202,6 +206,6 @@ void NTPManager::sendNTPPacket() {
   this->_udp->endPacket();
 }
 
-void NTPManager::setUpdateCallback( void (*func)() ) {
+void NTPManager::setUpdateCallback( void (*func)(bool update, bool forceUpdate) ) {
 	_updateCallback = func;
 }

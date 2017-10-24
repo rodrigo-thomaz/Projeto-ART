@@ -7,6 +7,9 @@ DisplayMQTTManager::DisplayMQTTManager(DisplayManager& displayManager, DebugMana
 {
 	this->_displayManager = &displayManager;
 	this->_debugManager = &debugManager;
+	
+	this->_x = 80;
+	this->_y = 0;
 }
 
 DisplayMQTTManager::~DisplayMQTTManager()
@@ -15,34 +18,29 @@ DisplayMQTTManager::~DisplayMQTTManager()
 
 void DisplayMQTTManager::printConnected()
 {
-	int x = 74;
-	int y = 9;
+	int y = this->_y + 9;
 	
 	this->_displayManager->display.setTextSize(1);
 	this->_displayManager->display.setTextColor(WHITE, BLACK);  
-	this->_displayManager->display.setCursor(x, y);
+	this->_displayManager->display.setCursor(this->_x, y);
 	this->_displayManager->display.println("ART");  
 }
 
 void DisplayMQTTManager::printSent()
 {
-	int x = 74;
-	int y = 0;
-	
 	this->_displayManager->display.setTextSize(1);
 	this->_displayManager->display.setTextColor(WHITE, BLACK);  
-	this->_displayManager->display.setCursor(x, y);
+	this->_displayManager->display.setCursor(this->_x, this->_y);
 	this->_displayManager->display.write(24); // ↑
 }
 
 void DisplayMQTTManager::printReceived()
 {
-	int x = 86;
-	int y = 0;
+	int x = this->_x + 86;
 	
 	this->_displayManager->display.setTextSize(1);
 	this->_displayManager->display.setTextColor(WHITE, BLACK);  
-	this->_displayManager->display.setCursor(x, y);
+	this->_displayManager->display.setCursor(x, this->_y);
 	this->_displayManager->display.write(25); // ↓
 }
 

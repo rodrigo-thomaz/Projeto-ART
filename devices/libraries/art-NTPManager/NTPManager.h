@@ -27,7 +27,7 @@ class NTPManager {
 
     void          sendNTPPacket();
 
-	void 		  (*_updateCallback)() = NULL;
+	void 		  (*_updateCallback)(bool, bool) = NULL;
 	
 	DebugManager*          	_debugManager;
 	
@@ -97,5 +97,5 @@ class NTPManager {
      */
     void end();
 	
-	void setUpdateCallback( void (*func)() );
+	void setUpdateCallback( void (*func)(bool update, bool forceUpdate) );
 };

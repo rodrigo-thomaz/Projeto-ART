@@ -19,6 +19,9 @@ private:
 
 	DisplayManager*       	_displayManager;
 	DebugManager*         	_debugManager;
+	
+	int			         	_x;
+	int			         	_y;
 
 };
 

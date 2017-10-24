@@ -14,6 +14,7 @@ public:
 	~DisplayNTPManager();	
 	
 	void					printTime();
+	void					printUpdate(bool on);
 	
 private:
 

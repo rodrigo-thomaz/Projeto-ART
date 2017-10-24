@@ -28,3 +28,21 @@ void DisplayNTPManager::printTime()
 		this->_displayManager->display.println(formattedTime);	
 	}	
 }
+
+void DisplayNTPManager::printUpdate(bool on)
+{
+	this->_displayManager->display.setFont();
+	this->_displayManager->display.setTextSize(1);
+	if(on)		
+		this->_displayManager->display.setTextColor(BLACK, WHITE);
+	else
+		this->_displayManager->display.setTextColor(WHITE, BLACK);
+  
+	this->_displayManager->display.setCursor(66, 0);       
+	this->_displayManager->display.println("T");	
+	
+	this->_displayManager->display.drawChar(66, 9, 'S', WHITE, BLACK, 1);	
+	//this->_displayManager->display.drawChar(64, 8, 'S', BLACK, WHITE, 1);	
+	
+	this->_displayManager->display.setFont();
+}

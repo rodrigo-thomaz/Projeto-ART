@@ -107,10 +107,6 @@ void handleSuccessConfigPortalCallback () {  displayWiFiManager.successConfigPor
 void handleFailedConfigPortalCallback (int connectionResult) {  displayWiFiManager.failedConfigPortalCallback(connectionResult); }
 void handleConnectingConfigPortalCallback () {  displayWiFiManager.connectingConfigPortalCallback(); }
 
-void ntpManagerUpdateCallback(){
-  Serial.println("Aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Hora");
-}
-
 void initMQTT() 
 {
     MQTT.setServer(BROKER_MQTT, BROKER_PORT);   //informa qual broker e porta deve ser conectado
@@ -184,6 +180,12 @@ void reconnectMQTT()
             delay(2000);
         }
     }
+}
+
+void ntpManagerUpdateCallback(bool update, bool forceUpdate){
+  if(update){
+    displayNTPManager.printUpdate(forceUpdate);   
+  }  
 }
 
 void loop() {	
