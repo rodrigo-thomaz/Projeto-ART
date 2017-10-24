@@ -184,8 +184,7 @@ void VerificaConexoesWiFIEMQTT(void)
 
 void printDataDisplay(){    
   
-    // Time   
-
+    // Time
     displayNTPManager.printTime();
 
     // Wifi
