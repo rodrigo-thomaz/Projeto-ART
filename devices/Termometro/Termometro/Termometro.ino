@@ -176,19 +176,7 @@ void reconnectMQTT()
     }
 }
 
-void VerificaConexoesWiFIEMQTT(void)
-{    
-     reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
-     wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
-}
-
-void printDataDisplay(){    
-  
-    // Time
-    displayNTPManager.printTime();
-
-    // Wifi
-    displayWiFiManager.printSignal();
+void printDataDisplay(){       
     
     // Sensor
     
@@ -204,22 +192,17 @@ void printDataDisplay(){
       
       //displayManager.display.print(temperatureSensorManager.Sensors[0].tempFahrenheit);
       //displayManager.display.println(" F");
-    }    
-
-    // MQTT
-    if(MQTT.connected()){
-      displayMQTTManager.printConnected();  
-    }   
+    }        
 }
 
 void loop() {	
 
   debugManager.update();    
-  
-  //garante funcionamento das conexões WiFi e ao broker MQTT
-  VerificaConexoesWiFIEMQTT(); 
 
   displayManager.display.clearDisplay();
+  
+  reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
+  wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
 
   uint64_t now = millis();   
 
@@ -237,10 +220,18 @@ void loop() {
     MQTT.publish(TOPICO_PUBLISH, sensorsJson);      
   }      
 
-  printDataDisplay(); 
+  // Time
+  displayNTPManager.printTime();
 
-  displayManager.display.display();
+  // Wifi
+  displayWiFiManager.printSignal();
+    
+  printDataDisplay();   
 
+  // MQTT
+  if(MQTT.connected()){
+    displayMQTTManager.printConnected();  
+  }   
   
   // Buzzer
   //tone(D7,900,300); //aqui sai o som   
@@ -252,4 +243,7 @@ void loop() {
   
   //keep-alive da comunicação com broker MQTT
   MQTT.loop();
+
+  displayManager.display.display();
+  
 }
