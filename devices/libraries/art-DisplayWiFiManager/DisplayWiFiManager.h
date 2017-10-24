@@ -22,6 +22,8 @@ public:
 	void 					successConfigPortalCallback ();
 	void 					failedConfigPortalCallback (int connectionResult);
 	void 					connectingConfigPortalCallback ();
+	void					printSignal(int x, int y, int barWidth, int margin, int barSignal);
+	void					printNoSignal(int x, int y, int barWidth, int margin);
 	
 private:
 
@@ -34,6 +36,7 @@ private:
 	void					printPortalHeaderInDisplay(String title);
 	void 					showEnteringSetup();
 	void 					showWiFiConect();
+
 };
 
 #endif

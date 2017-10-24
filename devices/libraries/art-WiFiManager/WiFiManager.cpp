@@ -825,29 +825,29 @@ int WiFiManager::getQuality(){
 	return getRSSIasQuality(rssi);
 }
 
+bool WiFiManager::isConnected(){
+	return WiFi.status() == WL_CONNECTED;
+}
+
 int WiFiManager::convertQualitytToBarsSignal(int quality){
+		
+	// 3. Good quality: 90%
+	// 2. Medium quality: 60%
+	// 1. Low quality: 30%
+	// 0. Unusable quality: 8%
 	
-	// 5. High quality: 90% ~= -55db
-	// 4. Good quality: 75% ~= -65db
-	// 3. Medium quality: 50% ~= -75db
-	// 2. Low quality: 30% ~= -85db
-	// 1. Unusable quality: 8% ~= -96db
-	// 0. No signal
 	int bars;
 
 	if (quality >= 90) { 
-		bars = 5;
-	} else if (quality >= 75 & quality < 90) {
-		bars = 4;
-	} else if (quality >= 50 & quality < 75) {
 		bars = 3;
-	} else if (quality >= 30 & quality < 50) {
+	} else if (quality >= 60 & quality < 90) {
 		bars = 2;
-	} else if (quality >= 8 & quality < 30) {
+	} else if (quality >= 30 & quality < 60) {
 		bars = 1;
 	} else {
 		bars = 0;
 	}
+	
 	return bars;
 }
 

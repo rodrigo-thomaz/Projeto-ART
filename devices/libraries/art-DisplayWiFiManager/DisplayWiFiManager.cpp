@@ -26,6 +26,68 @@ void DisplayWiFiManager::begin()
 	// this->_wifiManager->setConnectingConfigPortalCallback(this->connectingConfigPortalCallback); 
 }
 
+void DisplayWiFiManager::printSignal(int x, int y, int barWidth, int margin, int barSignal){
+	
+	int barsCount = 4;
+	int barHeight = 4;
+
+	for (int i = 0; i < 4; i++)
+	{
+		int currentX = x + (barWidth * i) + (margin * i);
+		int currentY = (y + (barsCount - i - 1) * barHeight);
+		int currentHeight = 0;
+
+		if(i == 0)
+		{
+			currentHeight = 3;
+		}
+		else
+		{
+			currentHeight = barHeight * (i + 1) - 1;
+		}
+
+		if (barSignal <= i)
+		{
+			this->_displayManager->display.drawRect(currentX, currentY, barWidth, currentHeight, WHITE);
+		}
+		else
+		{
+			this->_displayManager->display.fillRect(currentX, currentY, barWidth, currentHeight, WHITE);
+		}
+	}
+}
+
+void DisplayWiFiManager::printNoSignal(int x, int y, int barWidth, int margin){
+	
+	int barsCount = 4;
+	int barHeight = 4;
+
+	for (int i = 0; i < 4; i++)
+	{
+		int currentX = x + (barWidth * i) + (margin * i);
+		int currentY = (y + (barsCount - i - 1) * barHeight);
+		int currentHeight = 0;
+
+		if(i == 0)
+		{
+			currentHeight = 3;
+		}
+		else
+		{
+			currentHeight = barHeight * (i + 1) - 1;
+		}
+
+		this->_displayManager->display.drawRect(currentX, currentY, barWidth, currentHeight, WHITE);
+	}
+	
+	this->_displayManager->display.setFont();
+    this->_displayManager->display.setTextSize(1);
+	this->_displayManager->display.setTextColor(BLACK, WHITE);
+    this->_displayManager->display.setCursor(x + 15, y + 7);     
+	this->_displayManager->display.setTextWrap(false);  	
+	this->_displayManager->display.println("X");
+}
+
 void DisplayWiFiManager::printPortalHeaderInDisplay(String title)
 {  
 	this->_displayManager->display.setFont();

@@ -149,7 +149,7 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
  
 void reconnectMQTT() 
 {
-    if (!MQTT.connected()) 
+    if (wifiManager.isConnected() && !MQTT.connected()) 
     {
         Serial.print("* Tentando se conectar ao Broker MQTT: ");
         Serial.println(BROKER_MQTT);
@@ -179,36 +179,44 @@ void VerificaConexoesWiFIEMQTT(void)
 void printDataDisplay()
 {
     displayManager.display.clearDisplay();
+  
+    // Formatted Time   
+    
     displayManager.display.setFont();
-    displayManager.display.setTextSize(1);
+    displayManager.display.setTextSize(2);
     displayManager.display.setTextColor(WHITE);
     displayManager.display.setCursor(0, 0);       
+        
+    String formattedTime = ntpManager.getFormattedTime();
+    displayManager.display.println(formattedTime);
 
+    // Wifi
+    int quality = wifiManager.getQuality();
+    int barSignal = wifiManager.convertQualitytToBarsSignal(quality);
+    if(wifiManager.isConnected())
+      displayWiFiManager.printSignal(106, 0, 4, 2, barSignal);
+    else
+      displayWiFiManager.printNoSignal(106, 0, 4, 2);
+    
     // Sensor
+    
+    displayManager.display.setFont();
+    displayManager.display.setTextSize(2);
+    displayManager.display.setTextColor(WHITE);
+    displayManager.display.setCursor(0, 16);       
+    
     if(sizeof(temperatureSensorManager.Sensors)/sizeof(int) > 0){
-      displayManager.display.setTextSize(2);
-      displayManager.display.setTextColor(WHITE);
-      displayManager.display.setCursor(0, 0);    
       
       displayManager.display.print(temperatureSensorManager.Sensors[0].tempCelsius);
       displayManager.display.println(" C");
       
       //displayManager.display.print(temperatureSensorManager.Sensors[0].tempFahrenheit);
       //displayManager.display.println(" F");
-    }
+    }    
 
-    // Formatted Time
-    String formattedTime = ntpManager.getFormattedTime();
-    displayManager.display.println(formattedTime);
+    
 
-
-    // Wifi
-    int quality = wifiManager.getQuality();
-    int bars = wifiManager.convertQualitytToBarsSignal(quality);
-    for (int b=0; b <= bars; b++) {
-      // display.fillRect(59 + (b*5),33 - (b*5),3,b*5,WHITE); 
-      displayManager.display.fillRect(10 + (b*5),48 - (b*5),3,b*5,WHITE); 
-    }
+    
   
     displayManager.display.display();
 }

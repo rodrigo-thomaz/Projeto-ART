@@ -118,6 +118,7 @@ class WiFiManager
 	
 	String        getSSID();		
 	int           getQuality();	
+	bool           isConnected();	
 	int			  convertQualitytToBarsSignal(int quality);
 	
   private:
