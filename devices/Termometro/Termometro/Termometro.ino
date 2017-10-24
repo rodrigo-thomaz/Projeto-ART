@@ -194,7 +194,7 @@ void printDataDisplay()
     int quality = wifiManager.getQuality();
     int barSignal = wifiManager.convertQualitytToBarsSignal(quality);
     if(wifiManager.isConnected())
-      displayWiFiManager.printSignal(106, 0, 4, 2, barSignal);
+      displayWiFiManager.printSignal(106, 1, 4, 2, barSignal);
     else
       displayWiFiManager.printNoSignal(106, 0, 4, 2);
     
@@ -214,11 +214,33 @@ void printDataDisplay()
       //displayManager.display.println(" F");
     }    
 
-    
+int xx = Serial.parseInt();
 
-    
+  if(xx <= 0 ){
+    xx = 0;
+  }
+  
+    testdrawchar(74, 0);
   
     displayManager.display.display();
+}
+
+void testdrawchar(int x, int y) {  
+    
+  displayManager.display.setTextSize(1);
+  displayManager.display.setTextColor(WHITE, BLACK);
+
+  displayManager.display.setCursor(x, y);
+  displayManager.display.write(24); // ↑
+
+  displayManager.display.setCursor(x + 12, y);
+  displayManager.display.write(25); // ↓
+
+  displayManager.display.setCursor(x, y + 9);
+
+  displayManager.display.println("ART");
+  
+  displayManager.display.display();  
 }
 
 void loop() {	
