@@ -7,6 +7,7 @@
 #include "DisplayWiFiManager.h"
 #include "DisplayMQTTManager.h"
 #include "DisplayNTPManager.h"
+#include "DisplayTemperatureSensorManager.h"
 #include "PubSubClient.h"
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
@@ -46,6 +47,7 @@ DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager)
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
+DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, temperatureSensorManager, debugManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
 const char* BROKER_MQTT = "file-server.rthomaz.local"; //URL do broker MQTT que se deseja utilizar
@@ -176,25 +178,6 @@ void reconnectMQTT()
     }
 }
 
-void printDataDisplay(){       
-    
-    // Sensor
-    
-    displayManager.display.setFont();
-    displayManager.display.setTextSize(2);
-    displayManager.display.setTextColor(WHITE);
-    displayManager.display.setCursor(0, 16);       
-    
-    if(sizeof(temperatureSensorManager.Sensors)/sizeof(int) > 0){
-      
-      displayManager.display.print(temperatureSensorManager.Sensors[0].tempCelsius);
-      displayManager.display.println(" C");
-      
-      //displayManager.display.print(temperatureSensorManager.Sensors[0].tempFahrenheit);
-      //displayManager.display.println(" F");
-    }        
-}
-
 void loop() {	
 
   debugManager.update();    
@@ -226,7 +209,8 @@ void loop() {
   // Wifi
   displayWiFiManager.printSignal();
     
-  printDataDisplay();   
+  // Sensor
+  displayTemperatureSensorManager.printSensors();
 
   // MQTT
   if(MQTT.connected()){
