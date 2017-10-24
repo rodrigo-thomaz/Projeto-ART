@@ -96,6 +96,7 @@ void setup() {
   
   initMQTT();
 
+  ntpManager.setUpdateCallback(ntpManagerUpdateCallback);
 	ntpManager.begin();
 }
 
@@ -105,6 +106,10 @@ void handleCaptivePortalCallback (String ip) {  displayWiFiManager.captivePortal
 void handleSuccessConfigPortalCallback () {  displayWiFiManager.successConfigPortalCallback(); }
 void handleFailedConfigPortalCallback (int connectionResult) {  displayWiFiManager.failedConfigPortalCallback(connectionResult); }
 void handleConnectingConfigPortalCallback () {  displayWiFiManager.connectingConfigPortalCallback(); }
+
+void ntpManagerUpdateCallback(){
+  Serial.println("Aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Hora");
+}
 
 void initMQTT() 
 {
@@ -183,10 +188,12 @@ void reconnectMQTT()
 
 void loop() {	
 
+  displayManager.display.clearDisplay();
+
   debugManager.update();    
 
-  displayManager.display.clearDisplay();
-  
+  ntpManager.update();
+    
   reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
   wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
 

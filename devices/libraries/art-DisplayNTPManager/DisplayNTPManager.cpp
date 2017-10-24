@@ -21,7 +21,7 @@ void DisplayNTPManager::printTime()
 	this->_displayManager->display.setFont();
 	this->_displayManager->display.setTextSize(2);
 	this->_displayManager->display.setTextColor(WHITE);
-	this->_displayManager->display.setCursor(0, 3);       
+	this->_displayManager->display.setCursor(0, 2);       
 		
 	if(this->_wifiManager->isConnected()){
 		String formattedTime = this->_ntpManager->getFormattedTime();
