@@ -12,8 +12,8 @@ public:
 	~DisplayMQTTManager();	
 	
 	void					printConnected();	
-	void					printSent();	
-	void					printReceived();	
+	void					printSent(bool on);	
+	void					printReceived(bool on);	
 	
 private:
 

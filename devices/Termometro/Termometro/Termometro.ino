@@ -115,7 +115,7 @@ void initMQTT()
  
 void mqtt_callback(char* topic, byte* payload, unsigned int length) 
 {
-    displayMQTTManager.printReceived();
+    displayMQTTManager.printReceived(true);
     
     String json;
     
@@ -204,21 +204,25 @@ void loop() {
   if(now - readTempTimestamp > READTEMP_INTERVAL) {
     readTempTimestamp = now;
     temperatureSensorManager.refresh();
-  }
-
+  }  
+  
   // MQTT
   if(MQTT.connected()){
     
     displayMQTTManager.printConnected();  
-
+    displayMQTTManager.printReceived(false);
+    
     if(now - messageTimestamp > MESSAGE_INTERVAL) {
       messageTimestamp = now;
-      displayMQTTManager.printSent();
+      displayMQTTManager.printSent(true);
       char *sensorsJson = temperatureSensorManager.convertSensorsToJson();
       Serial.print("enviando para o servidor => ");
       Serial.println(sensorsJson);
       MQTT.publish(TOPICO_PUBLISH, sensorsJson);      
     } 
+    else {
+      displayMQTTManager.printSent(false);
+    }
          
   }     
 
