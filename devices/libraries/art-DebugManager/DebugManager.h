@@ -8,11 +8,11 @@ class DebugManager
 public:
 	DebugManager(int pin);
 	~DebugManager();
-	void update();
-	bool isDebug();
+	void 						update();
+	bool 						isDebug();
 private:	
-	int _pin;
-	bool _isDebug;
+	int 						_pin;
+	bool 						_isDebug;
 };
 
 #endif

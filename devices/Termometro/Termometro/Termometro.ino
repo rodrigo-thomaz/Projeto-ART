@@ -4,6 +4,7 @@
 #include "NTPManager.h"
 #include "DisplayManager.h"
 #include "WiFiManager.h"
+#include "BuzzerManager.h"
 #include "DisplayWiFiManager.h"
 #include "DisplayMQTTManager.h"
 #include "DisplayNTPManager.h"
@@ -43,10 +44,12 @@ DebugManager debugManager(D6);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
 WiFiManager wifiManager(D5, debugManager);
+TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
+BuzzerManager buzzerManager(D7, debugManager);
+
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
-TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, temperatureSensorManager, debugManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
@@ -218,13 +221,8 @@ void loop() {
   }   
   
   // Buzzer
-  //tone(D7,900,300); //aqui sai o som   
-  /*   
-   o número D7 indica que o pino positivo do buzzer está na porta 10   
-   o número 300 é a frequência que será tocado   
-   o número 300 é a duração do som   
-  */    
-  
+  //buzzerManager.test();
+    
   //keep-alive da comunicação com broker MQTT
   MQTT.loop();
 
