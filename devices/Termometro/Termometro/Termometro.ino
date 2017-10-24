@@ -6,6 +6,7 @@
 #include "WiFiManager.h"
 #include "DisplayWiFiManager.h"
 #include "DisplayMQTTManager.h"
+#include "DisplayNTPManager.h"
 #include "PubSubClient.h"
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
@@ -43,6 +44,7 @@ DisplayManager displayManager(debugManager);
 WiFiManager wifiManager(D5, debugManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
+DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
@@ -183,14 +185,8 @@ void VerificaConexoesWiFIEMQTT(void)
 void printDataDisplay(){    
   
     // Formatted Time   
-    
-    displayManager.display.setFont();
-    displayManager.display.setTextSize(2);
-    displayManager.display.setTextColor(WHITE);
-    displayManager.display.setCursor(0, 0);       
-        
-    String formattedTime = ntpManager.getFormattedTime();
-    displayManager.display.println(formattedTime);
+
+    displayNTPManager.printTime();
 
     // Wifi
     int quality = wifiManager.getQuality();
