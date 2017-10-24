@@ -32,7 +32,7 @@ void DisplayWiFiManager::printSignal(){
     int barSignal = this->_wifiManager->convertQualitytToBarsSignal(quality);
 	
     if(this->_wifiManager->isConnected())
-      this->printConnectedSignal(106, 1, 4, 2, barSignal);
+      this->printConnectedSignal(106, 0, 4, 2, barSignal);
     else
       this->printNoConnectedSignal(106, 0, 4, 2);  
 }
@@ -48,15 +48,8 @@ void DisplayWiFiManager::printConnectedSignal(int x, int y, int barWidth, int ma
 		int currentY = (y + (barsCount - i - 1) * barHeight);
 		int currentHeight = 0;
 
-		if(i == 0)
-		{
-			currentHeight = 3;
-		}
-		else
-		{
-			currentHeight = barHeight * (i + 1) - 1;
-		}
-
+		currentHeight = barHeight * (i + 1);
+		
 		if (barSignal <= i)
 		{
 			this->_displayManager->display.drawRect(currentX, currentY, barWidth, currentHeight, WHITE);
