@@ -1,4 +1,4 @@
-#include "DisplayWifiManager.h"
+#include "DisplayWiFiManager.h"
 #include "Arduino.h"
 #include "DebugManager.h"
 #include "DisplayManager.h"

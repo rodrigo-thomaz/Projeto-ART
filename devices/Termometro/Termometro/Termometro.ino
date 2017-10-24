@@ -5,6 +5,7 @@
 #include "DisplayManager.h"
 #include "WiFiManager.h"
 #include "DisplayWiFiManager.h"
+#include "DisplayMQTTManager.h"
 #include "PubSubClient.h"
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
@@ -41,6 +42,7 @@ NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
 WiFiManager wifiManager(D5, debugManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
+DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
@@ -105,7 +107,7 @@ void initMQTT()
  
 void mqtt_callback(char* topic, byte* payload, unsigned int length) 
 {
-    printMQTTReceived(86, 0);
+    displayMQTTManager.printReceived();
     
     String json;
     
@@ -216,36 +218,8 @@ void printDataDisplay(){
 
     // MQTT
     if(MQTT.connected()){
-      printMQTTConnected(74, 9);  
+      displayMQTTManager.printConnected();  
     }   
-}
-
-void printMQTTConnected(int x, int y){
-  
-  displayManager.display.setTextSize(1);
-  displayManager.display.setTextColor(WHITE, BLACK);  
-
-  displayManager.display.setCursor(x, y);
-
-  displayManager.display.println("ART");
-}
-
-void printMQTTSent(int x, int y) {  
-    
-  displayManager.display.setTextSize(1);
-  displayManager.display.setTextColor(WHITE, BLACK);
-
-  displayManager.display.setCursor(x, y);
-  displayManager.display.write(24); // ↑
-}
-
-void printMQTTReceived(int x, int y) {  
-    
-  displayManager.display.setTextSize(1);
-  displayManager.display.setTextColor(WHITE, BLACK);
-
-  displayManager.display.setCursor(x, y);
-  displayManager.display.write(25); // ↓
 }
 
 void loop() {	
@@ -266,7 +240,7 @@ void loop() {
 
   if(now - messageTimestamp > MESSAGE_INTERVAL) {
     messageTimestamp = now;
-    printMQTTSent(74, 0);
+    displayMQTTManager.printSent();
     char *sensorsJson = temperatureSensorManager.convertSensorsToJson();
     Serial.print("enviando para o servidor => ");
     Serial.println(sensorsJson);
