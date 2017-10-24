@@ -197,14 +197,21 @@ void loop() {
     temperatureSensorManager.refresh();
   }
 
-  if(now - messageTimestamp > MESSAGE_INTERVAL) {
-    messageTimestamp = now;
-    displayMQTTManager.printSent();
-    char *sensorsJson = temperatureSensorManager.convertSensorsToJson();
-    Serial.print("enviando para o servidor => ");
-    Serial.println(sensorsJson);
-    MQTT.publish(TOPICO_PUBLISH, sensorsJson);      
-  }      
+  // MQTT
+  if(MQTT.connected()){
+    
+    displayMQTTManager.printConnected();  
+
+    if(now - messageTimestamp > MESSAGE_INTERVAL) {
+      messageTimestamp = now;
+      displayMQTTManager.printSent();
+      char *sensorsJson = temperatureSensorManager.convertSensorsToJson();
+      Serial.print("enviando para o servidor => ");
+      Serial.println(sensorsJson);
+      MQTT.publish(TOPICO_PUBLISH, sensorsJson);      
+    } 
+         
+  }     
 
   // Time
   displayNTPManager.printTime();
@@ -213,12 +220,7 @@ void loop() {
   displayWiFiManager.printSignal();
     
   // Sensor
-  displayTemperatureSensorManager.printSensors();
-
-  // MQTT
-  if(MQTT.connected()){
-    displayMQTTManager.printConnected();  
-  }   
+  displayTemperatureSensorManager.printSensors();  
   
   // Buzzer
   //buzzerManager.test();

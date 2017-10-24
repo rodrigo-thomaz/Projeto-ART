@@ -72,14 +72,7 @@ void DisplayWiFiManager::printNoConnectedSignal(int x, int y, int barWidth, int 
 		int currentY = (y + (barsCount - i - 1) * barHeight);
 		int currentHeight = 0;
 
-		if(i == 0)
-		{
-			currentHeight = 3;
-		}
-		else
-		{
-			currentHeight = barHeight * (i + 1) - 1;
-		}
+		currentHeight = barHeight * (i + 1);
 
 		this->_displayManager->display.drawRect(currentX, currentY, barWidth, currentHeight, WHITE);
 	}
@@ -87,7 +80,7 @@ void DisplayWiFiManager::printNoConnectedSignal(int x, int y, int barWidth, int 
 	this->_displayManager->display.setFont();
     this->_displayManager->display.setTextSize(1);
 	this->_displayManager->display.setTextColor(BLACK, WHITE);
-    this->_displayManager->display.setCursor(x + 15, y + 7);     
+    this->_displayManager->display.setCursor(x + 15, y + 8);     
 	this->_displayManager->display.setTextWrap(false);  	
 	this->_displayManager->display.println("X");
 }
