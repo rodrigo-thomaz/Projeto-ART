@@ -49,7 +49,7 @@ BuzzerManager buzzerManager(D7, debugManager);
 
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
-DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
+DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager, wifiManager);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, temperatureSensorManager, debugManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar

@@ -831,18 +831,21 @@ bool WiFiManager::isConnected(){
 
 int WiFiManager::convertQualitytToBarsSignal(int quality){
 		
-	// 3. Good quality: 90%
-	// 2. Medium quality: 60%
-	// 1. Low quality: 30%
-	// 0. Unusable quality: 8%
+	// 4. Good quality:     > 90%
+	// 3. Hight quality:    > 60%
+	// 2. Medium quality:   > 30%
+	// 1. Low quality:      > 9% 
+	// 0. Unusable quality: > 0% < 8%
 	
 	int bars;
 
 	if (quality >= 90) { 
-		bars = 3;
+		bars = 4;
 	} else if (quality >= 60 & quality < 90) {
-		bars = 2;
+		bars = 3;
 	} else if (quality >= 30 & quality < 60) {
+		bars = 2;
+	} else if (quality >= 9 & quality < 30) {
 		bars = 1;
 	} else {
 		bars = 0;
