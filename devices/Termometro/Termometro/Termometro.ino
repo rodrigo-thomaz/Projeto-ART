@@ -214,33 +214,39 @@ void printDataDisplay()
       //displayManager.display.println(" F");
     }    
 
-int xx = Serial.parseInt();
-
-  if(xx <= 0 ){
-    xx = 0;
-  }
-  
-    testdrawchar(74, 0);
+    printMQTTConnected(74, 9);
+    printMQTTSent(74, 0);
+    printMQTTReceived(86, 0);
   
     displayManager.display.display();
 }
 
-void testdrawchar(int x, int y) {  
+void printMQTTConnected(int x, int y){
+  
+  displayManager.display.setTextSize(1);
+  displayManager.display.setTextColor(WHITE, BLACK);  
+
+  displayManager.display.setCursor(x, y);
+
+  displayManager.display.println("ART");
+}
+
+void printMQTTSent(int x, int y) {  
     
   displayManager.display.setTextSize(1);
   displayManager.display.setTextColor(WHITE, BLACK);
 
   displayManager.display.setCursor(x, y);
   displayManager.display.write(24); // ↑
+}
 
-  displayManager.display.setCursor(x + 12, y);
+void printMQTTReceived(int x, int y) {  
+    
+  displayManager.display.setTextSize(1);
+  displayManager.display.setTextColor(WHITE, BLACK);
+
+  displayManager.display.setCursor(x, y);
   displayManager.display.write(25); // ↓
-
-  displayManager.display.setCursor(x, y + 9);
-
-  displayManager.display.println("ART");
-  
-  displayManager.display.display();  
 }
 
 void loop() {	
