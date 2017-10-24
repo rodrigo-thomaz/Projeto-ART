@@ -105,6 +105,8 @@ void initMQTT()
  
 void mqtt_callback(char* topic, byte* payload, unsigned int length) 
 {
+    printMQTTReceived(86, 0);
+    
     String json;
     
     //obtem a string do payload recebido
@@ -176,9 +178,7 @@ void VerificaConexoesWiFIEMQTT(void)
      wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
 }
 
-void printDataDisplay()
-{
-    displayManager.display.clearDisplay();
+void printDataDisplay(){    
   
     // Formatted Time   
     
@@ -214,11 +214,10 @@ void printDataDisplay()
       //displayManager.display.println(" F");
     }    
 
-    printMQTTConnected(74, 9);
-    printMQTTSent(74, 0);
-    printMQTTReceived(86, 0);
-  
-    displayManager.display.display();
+    // MQTT
+    if(MQTT.connected()){
+      printMQTTConnected(74, 9);  
+    }   
 }
 
 void printMQTTConnected(int x, int y){
@@ -251,12 +250,14 @@ void printMQTTReceived(int x, int y) {
 
 void loop() {	
 
-  debugManager.update();  
-
+  debugManager.update();    
+  
   //garante funcionamento das conexões WiFi e ao broker MQTT
   VerificaConexoesWiFIEMQTT(); 
 
-  uint64_t now = millis(); 
+  displayManager.display.clearDisplay();
+
+  uint64_t now = millis();   
 
   if(now - readTempTimestamp > READTEMP_INTERVAL) {
     readTempTimestamp = now;
@@ -265,6 +266,7 @@ void loop() {
 
   if(now - messageTimestamp > MESSAGE_INTERVAL) {
     messageTimestamp = now;
+    printMQTTSent(74, 0);
     char *sensorsJson = temperatureSensorManager.convertSensorsToJson();
     Serial.print("enviando para o servidor => ");
     Serial.println(sensorsJson);
@@ -272,6 +274,9 @@ void loop() {
   }      
 
   printDataDisplay(); 
+
+  displayManager.display.display();
+
   
   // Buzzer
   //tone(D7,900,300); //aqui sai o som   
