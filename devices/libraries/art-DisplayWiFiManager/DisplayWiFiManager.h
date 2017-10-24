@@ -22,8 +22,7 @@ public:
 	void 					successConfigPortalCallback ();
 	void 					failedConfigPortalCallback (int connectionResult);
 	void 					connectingConfigPortalCallback ();
-	void					printSignal(int x, int y, int barWidth, int margin, int barSignal);
-	void					printNoSignal(int x, int y, int barWidth, int margin);
+	void 					printSignal ();
 	
 private:
 
@@ -37,6 +36,9 @@ private:
 	void 					showEnteringSetup();
 	void 					showWiFiConect();
 
+	void					printConnectedSignal(int x, int y, int barWidth, int margin, int barSignal);
+	void					printNoConnectedSignal(int x, int y, int barWidth, int margin);
+	
 };
 
 #endif

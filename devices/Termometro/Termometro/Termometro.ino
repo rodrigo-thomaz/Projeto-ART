@@ -184,17 +184,12 @@ void VerificaConexoesWiFIEMQTT(void)
 
 void printDataDisplay(){    
   
-    // Formatted Time   
+    // Time   
 
     displayNTPManager.printTime();
 
     // Wifi
-    int quality = wifiManager.getQuality();
-    int barSignal = wifiManager.convertQualitytToBarsSignal(quality);
-    if(wifiManager.isConnected())
-      displayWiFiManager.printSignal(106, 1, 4, 2, barSignal);
-    else
-      displayWiFiManager.printNoSignal(106, 0, 4, 2);
+    displayWiFiManager.printSignal();
     
     // Sensor
     

@@ -26,7 +26,18 @@ void DisplayWiFiManager::begin()
 	// this->_wifiManager->setConnectingConfigPortalCallback(this->connectingConfigPortalCallback); 
 }
 
-void DisplayWiFiManager::printSignal(int x, int y, int barWidth, int margin, int barSignal){
+void DisplayWiFiManager::printSignal(){
+	
+	int quality = this->_wifiManager->getQuality();
+    int barSignal = this->_wifiManager->convertQualitytToBarsSignal(quality);
+	
+    if(this->_wifiManager->isConnected())
+      this->printConnectedSignal(106, 1, 4, 2, barSignal);
+    else
+      this->printNoConnectedSignal(106, 0, 4, 2);  
+}
+
+void DisplayWiFiManager::printConnectedSignal(int x, int y, int barWidth, int margin, int barSignal){
 	
 	int barsCount = 4;
 	int barHeight = 4;
@@ -57,7 +68,7 @@ void DisplayWiFiManager::printSignal(int x, int y, int barWidth, int margin, int
 	}
 }
 
-void DisplayWiFiManager::printNoSignal(int x, int y, int barWidth, int margin){
+void DisplayWiFiManager::printNoConnectedSignal(int x, int y, int barWidth, int margin){
 	
 	int barsCount = 4;
 	int barHeight = 4;
