@@ -49,7 +49,7 @@ BuzzerManager buzzerManager(D7, debugManager);
 
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
-DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager, wifiManager);
+DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, temperatureSensorManager, debugManager);
 
 //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
@@ -84,28 +84,28 @@ void setup() {
 	displayManager.display.setCursor(0, 0);	
 	displayManager.display.display();
 
-  //TODO: Gambeta, no displayWiFiManager.begin(); está comentado o código que deveria funcionar no lugar destes handlers abaixo
-  displayWiFiManager.begin();	
-	wifiManager.setStartConfigPortalCallback(handleStartConfigPortalCallback);
-  wifiManager.setCaptivePortalCallback(handleCaptivePortalCallback);
-  wifiManager.setSuccessConfigPortalCallback(handleSuccessConfigPortalCallback);    
-  wifiManager.setFailedConfigPortalCallback(handleFailedConfigPortalCallback);    
-  wifiManager.setConnectingConfigPortalCallback(handleConnectingConfigPortalCallback); 
+  //TODO: Gambeta, nos constructors estão comentados os códigos que deveriam funcionar no lugar destes handlers abaixo
+	wifiManager.setStartConfigPortalCallback(handleWMStartConfigPortalCallback);
+  wifiManager.setCaptivePortalCallback(handleWMCaptivePortalCallback);
+  wifiManager.setSuccessConfigPortalCallback(handleWMSuccessConfigPortalCallback);    
+  wifiManager.setFailedConfigPortalCallback(handleWMFailedConfigPortalCallback);    
+  wifiManager.setConnectingConfigPortalCallback(handleWMConnectingConfigPortalCallback); 
+  ntpManager.setUpdateCallback(handleNTPUpdateCallback);  
   
   wifiManager.autoConnect();
   
   initMQTT();
 
-  ntpManager.setUpdateCallback(ntpManagerUpdateCallback);
-	ntpManager.begin();
+  ntpManager.begin();  
 }
 
-//TODO: Gambeta, no displayWiFiManager.begin(); está comentado o código que deveria funcionar no lugar destes handlers abaixo
-void handleStartConfigPortalCallback () {  displayWiFiManager.startConfigPortalCallback(); }
-void handleCaptivePortalCallback (String ip) {  displayWiFiManager.captivePortalCallback(ip); }
-void handleSuccessConfigPortalCallback () {  displayWiFiManager.successConfigPortalCallback(); }
-void handleFailedConfigPortalCallback (int connectionResult) {  displayWiFiManager.failedConfigPortalCallback(connectionResult); }
-void handleConnectingConfigPortalCallback () {  displayWiFiManager.connectingConfigPortalCallback(); }
+//TODO: Gambeta, nos constructors estão comentados os códigos que deveriam funcionar no lugar destes handlers abaixo
+void handleWMStartConfigPortalCallback () {  displayWiFiManager.startConfigPortalCallback(); }
+void handleWMCaptivePortalCallback (String ip) {  displayWiFiManager.captivePortalCallback(ip); }
+void handleWMSuccessConfigPortalCallback () {  displayWiFiManager.successConfigPortalCallback(); }
+void handleWMFailedConfigPortalCallback (int connectionResult) {  displayWiFiManager.failedConfigPortalCallback(connectionResult); }
+void handleWMConnectingConfigPortalCallback () {  displayWiFiManager.connectingConfigPortalCallback(); }
+void handleNTPUpdateCallback(bool update, bool forceUpdate){ displayNTPManager.updateCallback(update, forceUpdate); }
 
 void initMQTT() 
 {
@@ -180,14 +180,6 @@ void reconnectMQTT()
             delay(2000);
         }
     }
-}
-
-void ntpManagerUpdateCallback(bool update, bool forceUpdate){
-  if(update){
-    // Time
-    displayNTPManager.printTime();
-    displayNTPManager.printUpdate(forceUpdate);   
-  }  
 }
 
 void loop() {	

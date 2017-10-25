@@ -15,8 +15,6 @@ public:
 	DisplayWiFiManager(DisplayManager& displayManager, WiFiManager& wifiManager, DebugManager& debugManager);
 	~DisplayWiFiManager();	
 	
-	void					begin();
-	
 	void 					startConfigPortalCallback ();
 	void 					captivePortalCallback (String ip);
 	void 					successConfigPortalCallback ();

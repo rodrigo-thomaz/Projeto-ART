@@ -5,14 +5,14 @@
 #include "DebugManager.h"
 #include "DisplayManager.h"
 #include "NTPManager.h"
-#include "WiFiManager.h"
 
 class DisplayNTPManager
 {
 public:
-	DisplayNTPManager(DisplayManager& displayManager, NTPManager& ntpManager, DebugManager& debugManager, WiFiManager& wifiManager);
+	DisplayNTPManager(DisplayManager& displayManager, NTPManager& ntpManager, DebugManager& debugManager);
 	~DisplayNTPManager();	
 	
+	void					updateCallback(bool update, bool forceUpdate);
 	void					printTime();
 	void					printUpdate(bool on);
 	
@@ -21,7 +21,6 @@ private:
 	DisplayManager*       	_displayManager;	
 	NTPManager*          	_ntpManager;
 	DebugManager*         	_debugManager;
-	WiFiManager*          	_wifiManager;
 
 };
 

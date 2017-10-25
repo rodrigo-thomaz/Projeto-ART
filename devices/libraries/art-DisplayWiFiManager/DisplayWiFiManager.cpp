@@ -9,21 +9,17 @@ DisplayWiFiManager::DisplayWiFiManager(DisplayManager& displayManager, WiFiManag
 	this->_displayManager = &displayManager;
 	this->_wifiManager = &wifiManager;
 	this->_debugManager = &debugManager;
-}
-
-DisplayWiFiManager::~DisplayWiFiManager()
-{
-}
-
-void DisplayWiFiManager::begin()
-{	
-	//TODO: Falta resolver como que efetua este tipo de chamada para remover os handlers
 	
+	//TODO: Falta resolver como que efetua este tipo de chamada para remover os handlers
 	// this->_wifiManager->setStartConfigPortalCallback(this->startConfigPortalCallback);
 	// this->_wifiManager->setCaptivePortalCallback(this->captivePortalCallback);
 	// this->_wifiManager->setSuccessConfigPortalCallback(this->successConfigPortalCallback);    
 	// this->_wifiManager->setFailedConfigPortalCallback(this->failedConfigPortalCallback);    
 	// this->_wifiManager->setConnectingConfigPortalCallback(this->connectingConfigPortalCallback); 
+}
+
+DisplayWiFiManager::~DisplayWiFiManager()
+{
 }
 
 void DisplayWiFiManager::printSignal(){
