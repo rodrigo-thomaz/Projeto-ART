@@ -184,6 +184,8 @@ void reconnectMQTT()
 
 void ntpManagerUpdateCallback(bool update, bool forceUpdate){
   if(update){
+    // Time
+    displayNTPManager.printTime();
     displayNTPManager.printUpdate(forceUpdate);   
   }  
 }
@@ -224,10 +226,7 @@ void loop() {
       displayMQTTManager.printSent(false);
     }
          
-  }     
-
-  // Time
-  displayNTPManager.printTime();
+  }       
 
   // Wifi
   displayWiFiManager.printSignal();

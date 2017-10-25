@@ -28,10 +28,10 @@ NTPManager::NTPManager(DebugManager& debugManager) {
   this->_debugManager = &debugManager;
   
   int updateInterval = 15000;
-  int timeOffset = 0; //UTC
+  int timeOffset = -2; //UTC
   
   this->_udp            = new WiFiUDP();  
-  this->_poolServerName = "a.st1.ntp.br";
+  this->_poolServerName = "pdc-server.rthomaz.local";
   this->_updateInterval = updateInterval;
   this->_timeOffset     = timeOffset;
 }
