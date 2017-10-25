@@ -31,3 +31,20 @@ void DisplayTemperatureSensorManager::printSensors()
       //this->_displayManager->display.println(" F");
     } 
 }
+
+void DisplayTemperatureSensorManager::printUpdate(bool on)
+{
+	this->_displayManager->display.setFont();
+	this->_displayManager->display.setTextSize(1);
+	if(on) {
+		
+		this->_displayManager->display.setTextColor(BLACK, WHITE);
+		this->_displayManager->display.setCursor(66, 8);       
+	}
+	else {
+		this->_displayManager->display.setTextColor(WHITE, BLACK);
+		this->_displayManager->display.setCursor(66, 9);       
+	}
+	
+	this->_displayManager->display.println("S");	
+}

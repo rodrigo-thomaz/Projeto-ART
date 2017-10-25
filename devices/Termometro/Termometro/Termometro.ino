@@ -197,8 +197,12 @@ void loop() {
 
   if(now - readTempTimestamp > READTEMP_INTERVAL) {
     readTempTimestamp = now;
+    displayTemperatureSensorManager.printUpdate(true);
     temperatureSensorManager.refresh();
   }  
+  else{
+    displayTemperatureSensorManager.printUpdate(false);
+  }
   
   // MQTT
   if(MQTT.connected()){

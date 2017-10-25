@@ -12,9 +12,8 @@ public:
 	DisplayNTPManager(DisplayManager& displayManager, NTPManager& ntpManager, DebugManager& debugManager);
 	~DisplayNTPManager();	
 	
-	void					updateCallback(bool update, bool forceUpdate);
-	void					printTime();
-	void					printUpdate(bool on);
+	//Também será private quando resolver o problema dos handlers
+	void					updateCallback(bool update, bool forceUpdate);	
 	
 private:
 
@@ -22,6 +21,9 @@ private:
 	NTPManager*          	_ntpManager;
 	DebugManager*         	_debugManager;
 
+	void					printTime();
+	void					printUpdate(bool on);
+	
 };
 
 #endif

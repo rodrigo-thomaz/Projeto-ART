@@ -13,6 +13,7 @@ public:
 	~DisplayTemperatureSensorManager();	
 	
 	void						printSensors();
+	void						printUpdate(bool on);	
 	
 private:
 

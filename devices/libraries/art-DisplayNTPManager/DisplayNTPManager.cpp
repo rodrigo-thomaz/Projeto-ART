@@ -8,9 +8,7 @@ DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, NTPManager&
 {
 	this->_displayManager = &displayManager;
 	this->_ntpManager = &ntpManager;
-	this->_debugManager = &debugManager;
-	
-	
+	this->_debugManager = &debugManager;	
 }
 
 DisplayNTPManager::~DisplayNTPManager()
@@ -46,9 +44,4 @@ void DisplayNTPManager::printUpdate(bool on)
   
 	this->_displayManager->display.setCursor(66, 0);       
 	this->_displayManager->display.println("T");	
-	
-	this->_displayManager->display.drawChar(66, 9, 'S', WHITE, BLACK, 1);	
-	//this->_displayManager->display.drawChar(64, 8, 'S', BLACK, WHITE, 1);	
-	
-	this->_displayManager->display.setFont();
 }
