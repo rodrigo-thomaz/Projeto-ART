@@ -21,6 +21,8 @@ private:
 	TemperatureSensorManager*   _temperatureSensorManager;
 	DebugManager*         		_debugManager;
 
+	void						printSensor(TemperatureSensor& temperatureSensor);
+	
 };
 
 #endif

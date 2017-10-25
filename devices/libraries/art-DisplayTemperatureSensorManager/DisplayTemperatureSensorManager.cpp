@@ -22,14 +22,9 @@ void DisplayTemperatureSensorManager::printSensors()
     this->_displayManager->display.setTextColor(WHITE);
     this->_displayManager->display.setCursor(0, 16);       
         
-	if(sizeof(this->_temperatureSensorManager->Sensors)/sizeof(int) > 0){
-      
-      this->_displayManager->display.print(this->_temperatureSensorManager->Sensors[0].tempCelsius);
-      this->_displayManager->display.println(" C");
-      
-      //this->_displayManager->display.print(temperatureSensorManager.Sensors[0].tempFahrenheit);
-      //this->_displayManager->display.println(" F");
-    } 
+	for(int i = 0; i < sizeof(this->_temperatureSensorManager->Sensors)/sizeof(int); ++i){	
+		this->printSensor(this->_temperatureSensorManager->Sensors[i]);	        
+	}	
 }
 
 void DisplayTemperatureSensorManager::printUpdate(bool on)
@@ -47,4 +42,13 @@ void DisplayTemperatureSensorManager::printUpdate(bool on)
 	}
 	
 	this->_displayManager->display.println("S");	
+}
+
+void DisplayTemperatureSensorManager::printSensor(TemperatureSensor& temperatureSensor)
+{
+	this->_displayManager->display.print(temperatureSensor.tempCelsius);
+    this->_displayManager->display.println(" C");
+      
+    // this->_displayManager->display.print(temperatureSensor.tempFahrenheit);
+    // this->_displayManager->display.println(" F");
 }
