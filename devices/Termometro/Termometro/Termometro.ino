@@ -214,9 +214,9 @@ void loop() {
       messageTimestamp = now;
       displayMQTTManager.printSent(true);
       char *sensorsJson = temperatureSensorManager.getSensorsJson();
-      Serial.print("enviando para o servidor => ");
-      Serial.println(sensorsJson);
-      MQTT.publish(TOPICO_PUBLISH, sensorsJson);      
+      Serial.println("enviando para o servidor => ");
+      //Serial.println(sensorsJson); // está estourando erro aqui
+      MQTT.publish(TOPICO_PUBLISH, sensorsJson);    
     } 
     else {
       displayMQTTManager.printSent(false);

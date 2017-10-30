@@ -21,6 +21,8 @@ TemperatureSensorManager::TemperatureSensorManager(DebugManager& debugManager, N
 	this->_ntpManager = &ntpManager;
 }
 
+
+
 void TemperatureSensorManager::begin()
 {	
 	// Start up the library
@@ -30,13 +32,13 @@ void TemperatureSensorManager::begin()
 	uint8_t deviceCount;
 	
 	deviceCount = _dallas.getDeviceCount();
-	
-	//this->_sensors = new TemperatureSensor[deviceCount]; 
+
+	this->_sensors.resize(deviceCount);	
 	
 	if (this->_debugManager->isDebug()) {
 		Serial.print("Localizando devices...");
 		Serial.print("Encontrado(s) ");
-		Serial.print(deviceCount, DEC);
+		Serial.print(this->_sensors.size());
 		Serial.println(" device(s).");
 
 		// report parasite power requirements
@@ -45,7 +47,7 @@ void TemperatureSensorManager::begin()
 		else Serial.println("OFF");
 	}	
 	
-	for(int i = 0; i < deviceCount; ++i){
+	for(int i = 0; i < this->_sensors.size(); ++i){
 		DeviceAddress deviceAddress;
 		if (_dallas.getAddress(deviceAddress, i))
 		{   
@@ -90,7 +92,7 @@ void TemperatureSensorManager::refresh()
 
 	long epochTime = this->_ntpManager->getEpochTime();	
 	
-	for(int i = 0; i < sizeof(this->_sensors)/sizeof(int); ++i){	
+	for(int i = 0; i < this->_sensors.size(); ++i){	
 		this->_sensors[i].isConnected = _dallas.isConnected(this->_sensors[i].deviceAddress);
 		this->_sensors[i].resolution = _dallas.getResolution(this->_sensors[i].deviceAddress);    
 		this->_sensors[i].tempCelsius = _dallas.getTempC(this->_sensors[i].deviceAddress);
@@ -104,16 +106,18 @@ void TemperatureSensorManager::refresh()
 
 TemperatureSensor *TemperatureSensorManager::getSensors()
 {
-	return this->_sensors;
+	TemperatureSensor arr[this->_sensors.size()];
+	std::copy(this->_sensors.begin(), this->_sensors.end(), arr);
+	return arr;
 }
 
 char *TemperatureSensorManager::getSensorsJson()
 {	
-	StaticJsonBuffer<500> JSONbuffer;
+	StaticJsonBuffer<900> JSONbuffer;
 
 	JsonArray& device = JSONbuffer.createArray();
 
-	for(int i = 0; i < sizeof(this->_sensors)/sizeof(int); ++i){	
+	for(int i = 0; i < this->_sensors.size(); ++i){	
 		generateNestedSensor(this->_sensors[i], device);
 	}
 	
@@ -127,7 +131,7 @@ char *TemperatureSensorManager::getSensorsJson()
 		Serial.print("tamanho device ==>");
 		Serial.println(len);
 		Serial.print("result device ==>");
-		device.printTo(Serial);
+		//device.printTo(Serial);  // está estourando erro aqui
 		Serial.println();
 	}
 
@@ -196,7 +200,7 @@ void TemperatureSensorManager::setHighAlarm(String json)
 }
 
 const uint8_t *TemperatureSensorManager::getDeviceAddress(String dsFamilyTempSensorId) {
-	for (int i = 0; i < sizeof(this->_sensors) / sizeof(int) + 1; ++i) {
+	for (int i = 0; i < this->_sensors.size(); ++i) {
 		if (this->_sensors[i].dsFamilyTempSensorId == dsFamilyTempSensorId) {
 			return this->_sensors[i].deviceAddress;
 		}
