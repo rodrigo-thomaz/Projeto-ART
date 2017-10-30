@@ -9,7 +9,7 @@
     {
         #region Methods
 
-        Task<List<HardwareUpdatePinsContract>> UpdatePins();
+        
 
         #endregion Methods
     }

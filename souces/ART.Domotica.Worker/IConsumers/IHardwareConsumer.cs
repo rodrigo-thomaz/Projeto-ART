@@ -6,10 +6,6 @@
 
     public interface IHardwareConsumer
     {
-        #region Methods
-
-        void UpdatePins(List<HardwareUpdatePinsContract> contracts);
-
-        #endregion Methods
+        
     }
 }

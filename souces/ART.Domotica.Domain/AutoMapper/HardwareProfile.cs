@@ -11,7 +11,7 @@
 
         public HardwareProfile()
         {
-            CreateMap<HardwareBase, HardwareUpdatePinsContract>()
+            CreateMap<HardwareBase, ThermometerDeviceUpdatePinsContract>()
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
         }
 

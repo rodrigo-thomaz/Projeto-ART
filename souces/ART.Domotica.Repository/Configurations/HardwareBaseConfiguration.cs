@@ -19,16 +19,7 @@
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
-                .IsRequired();
-
-            //Pin
-            Property(x => x.Pin)
-                .HasColumnOrder(1)
-                .HasMaxLength(4)
-                .IsFixedLength()
-                .IsRequired()
-                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+                .IsRequired();            
 
             //CreateDate
             Property(x => x.CreateDate)

@@ -119,6 +119,10 @@
     <Compile Include="Migrations\201710131611187_DeleteTableSetting.Designer.cs">
       <DependentUpon>201710131611187_DeleteTableSetting.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710301837365_PinChange.cs" />
+    <Compile Include="Migrations\201710301837365_PinChange.Designer.cs">
+      <DependentUpon>201710301837365_PinChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -169,6 +173,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710131611187_DeleteTableSetting.resx">
       <DependentUpon>201710131611187_DeleteTableSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710301837365_PinChange.resx">
+      <DependentUpon>201710301837365_PinChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

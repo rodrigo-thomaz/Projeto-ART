@@ -19,25 +19,6 @@
         {
         }
 
-        #endregion Constructors
-
-        public async Task<List<string>> GetExistingPins()
-        {
-            var entity = await _context.HardwaresInApplication.FirstOrDefaultAsync();
-
-            var data = await _context.Set<HardwareBase>()
-                .Where(x => x.HardwaresInApplication.Any())
-                .Select(x => x.Pin)
-                .ToListAsync();
-            return data;
-        }
-
-        public async Task<List<HardwareBase>> GetHardwaresNotInApplication()
-        {
-            var data = await _context.Set<HardwareBase>()
-                .Where(x => !x.HardwaresInApplication.Any())
-                .ToListAsync();
-            return data;
-        }
+        #endregion Constructors   
     }
 }

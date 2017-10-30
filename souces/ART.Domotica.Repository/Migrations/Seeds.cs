@@ -141,8 +141,7 @@
                     TemperatureScaleId = celsiusTemperatureScale.Id,
                     TemperatureScale = celsiusTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
-                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
-                    Pin = RandonHelper.RandomString(4),
+                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,                    
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_1);
@@ -162,7 +161,6 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
-                    Pin = RandonHelper.RandomString(4),
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_1);
@@ -182,7 +180,6 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
-                    Pin = RandonHelper.RandomString(4),
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_2);
@@ -202,7 +199,6 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
-                    Pin = RandonHelper.RandomString(4),
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_1);
@@ -222,7 +218,6 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
-                    Pin = RandonHelper.RandomString(4),
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_2);

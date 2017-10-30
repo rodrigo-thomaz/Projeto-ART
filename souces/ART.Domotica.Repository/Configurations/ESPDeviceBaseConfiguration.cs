@@ -30,6 +30,15 @@
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+
+            //Pin
+            Property(x => x.Pin)
+                .HasColumnOrder(2)
+                .HasMaxLength(4)
+                .IsFixedLength()
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
         }
 
         #endregion Constructors

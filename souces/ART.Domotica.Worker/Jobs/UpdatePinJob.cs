@@ -9,17 +9,17 @@
     {
         #region Fields
 
-        private readonly IHardwareConsumer _hardwareConsumer;
-        private readonly IHardwareDomain _hardwareDomain;
+        private readonly IThermometerDeviceConsumer _thermometerDeviceConsumer;
+        private readonly IThermometerDeviceDomain _thermometerDeviceDomain;
 
         #endregion Fields
 
         #region Constructors
 
-        public UpdatePinJob(IHardwareConsumer hardwareConsumer, IHardwareDomain hardwareDomain)
+        public UpdatePinJob(IThermometerDeviceConsumer thermometerDeviceConsumer, IThermometerDeviceDomain thermometerDeviceDomain)
         {
-            _hardwareConsumer = hardwareConsumer;
-            _hardwareDomain = hardwareDomain;
+            _thermometerDeviceConsumer = thermometerDeviceConsumer;
+            _thermometerDeviceDomain = thermometerDeviceDomain;
         }
 
         #endregion Constructors
@@ -28,10 +28,10 @@
 
         public void Execute(IJobExecutionContext context)
         {
-            var task = _hardwareDomain.UpdatePins();
+            var task = _thermometerDeviceDomain.UpdatePins();
             task.Wait();
             var data = task.Result;
-            _hardwareConsumer.UpdatePins(data);
+            _thermometerDeviceConsumer.UpdatePins(data);
         }
 
         #endregion Methods

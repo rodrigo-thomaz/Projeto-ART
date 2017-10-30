@@ -6,6 +6,7 @@
 
         public static readonly string GetListAdminQueueName = "ThermometerDeviceAdmin.GetList";
         public static readonly string GetListCompletedAdminQueueName = "ThermometerDeviceAdmin.GetListCompleted";
+        public static readonly string UpdatePinsQueueName = "ThermometerDevice.UpdatePins";
 
         #endregion Fields
     }

@@ -9,11 +9,9 @@
 
     public interface IHardwareRepository : IRepository<ARTDbContext, HardwareBase, Guid>
     {
-        #region Methods
+        #region Methods        
 
-        Task<List<string>> GetExistingPins();
-
-        Task<List<HardwareBase>> GetHardwaresNotInApplication();
+        
 
         #endregion Methods
     }

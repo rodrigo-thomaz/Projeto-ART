@@ -1,13 +1,20 @@
 ﻿namespace ART.Domotica.Worker.Consumers
 {
     using ART.Domotica.Constant;
+    using ART.Domotica.Contract;
     using ART.Domotica.Domain.Interfaces;
+    using ART.Domotica.Worker.Contracts;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
     using ART.Infra.CrossCutting.Utils;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Serialization;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
     using System.Threading.Tasks;
 
     public class ThermometerDeviceConsumer : ConsumerBase, IThermometerDeviceConsumer
@@ -44,6 +51,13 @@
                , autoDelete: true
                , arguments: null);
 
+            _model.QueueDeclare(
+                  queue: ThermometerDeviceConstants.UpdatePinsQueueName
+                , durable: true
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
             _getListConsumer.Received += GetListReceived;
 
             _model.BasicConsume(ThermometerDeviceConstants.GetListAdminQueueName, false, _getListConsumer);
@@ -68,6 +82,24 @@
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 
+        public void UpdatePins(List<ThermometerDeviceUpdatePinsContract> contracts)
+        {
+            foreach (var contract in contracts)
+            {
+                var queueName = GetQueueName(contract.HardwareId);
+                var deviceMessage = new DeviceMessageContract<ThermometerDeviceUpdatePinsContract>(ThermometerDeviceConstants.UpdatePinsQueueName, contract);
+                var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
+                var buffer = Encoding.UTF8.GetBytes(json);
+                _model.BasicPublish("", queueName, null, buffer);
+            }
+        }
+
         #endregion Other
+
+        private string GetQueueName(Guid hardwareId)
+        {
+            var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);
+            return queueName;
+        }
     }
 }

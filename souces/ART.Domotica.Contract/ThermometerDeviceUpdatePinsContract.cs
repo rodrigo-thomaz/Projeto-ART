@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class HardwareUpdatePinsContract
+    public class ThermometerDeviceUpdatePinsContract
     {
         #region Properties
 

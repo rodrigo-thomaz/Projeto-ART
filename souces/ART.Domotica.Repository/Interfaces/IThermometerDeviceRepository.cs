@@ -13,6 +13,10 @@
 
         Task<List<ThermometerDevice>> GetList();
 
+        Task<List<string>> GetExistingPins();
+
+        Task<List<ThermometerDevice>> GetThermometerDeviceNotInApplication();
+
         #endregion Methods
     }
 }

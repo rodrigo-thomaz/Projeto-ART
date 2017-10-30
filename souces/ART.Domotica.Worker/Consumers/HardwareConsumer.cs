@@ -27,34 +27,11 @@
 
         #endregion Constructors
 
-        #region Methods
-
-        public void UpdatePins(List<HardwareUpdatePinsContract> contracts)
-        {
-            foreach (var contract in contracts)
-            {
-                var queueName = GetQueueName(contract.HardwareId);
-                var deviceMessage = new DeviceMessageContract<HardwareUpdatePinsContract>(HardwareConstants.UpdatePinsQueueName, contract);
-                var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
-                var buffer = Encoding.UTF8.GetBytes(json);
-                _model.BasicPublish("", queueName, null, buffer);
-            }
-        }
-
-        private string GetQueueName(Guid hardwareId)
-        {
-            var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);
-            return queueName;
-        }
+        #region Methods                
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: HardwareConstants.UpdatePinsQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
+            
         }
 
         #endregion Methods

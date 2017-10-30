@@ -4,8 +4,6 @@
     {
         #region Fields
 
-        public static readonly string UpdatePinsQueueName = "Hardware.UpdatePins";
-
         #endregion Fields
     }
 }

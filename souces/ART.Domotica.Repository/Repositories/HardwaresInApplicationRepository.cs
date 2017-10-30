@@ -36,7 +36,7 @@
 
         public async Task<HardwareBase> GetByPin(string pin)
         {
-            var data = await _context.Set<HardwareBase>()
+            var data = await _context.ThermometerDevice
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
 

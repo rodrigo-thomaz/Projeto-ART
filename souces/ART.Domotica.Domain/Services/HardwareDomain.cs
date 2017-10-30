@@ -30,26 +30,7 @@
 
         #region Methods
 
-        public async Task<List<HardwareUpdatePinsContract>> UpdatePins()
-        {
-            var existingPins = await _hardwareRepository.GetExistingPins();
-            var entities = await _hardwareRepository.GetHardwaresNotInApplication();
-
-            foreach (var item in entities)
-            {
-                var pin = RandonHelper.RandomString(4);
-                while (existingPins.Contains(pin))
-                {
-                    pin = RandonHelper.RandomString(4);
-                }
-                item.Pin = pin;                
-            }
-            await _hardwareRepository.Update(entities);
-
-            var result = Mapper.Map<List<HardwareBase>, List<HardwareUpdatePinsContract>>(entities);
-
-            return result;
-        }
+        
 
         #endregion Methods
     }
