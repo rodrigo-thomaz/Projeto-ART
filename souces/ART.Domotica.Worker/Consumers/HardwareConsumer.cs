@@ -51,7 +51,7 @@
         {
             _model.QueueDeclare(
                   queue: HardwareConstants.UpdatePinsQueueName
-                , durable: false
+                , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);

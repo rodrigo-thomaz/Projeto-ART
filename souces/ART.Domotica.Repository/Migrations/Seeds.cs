@@ -120,17 +120,23 @@
 
             #region DSFamilyTempSensor
 
-            var sensor1Address = "28ffe76da2163d3";
-            var sensor2Address = "28fffe6593164b6";
+            var sensor_1_Address = "28fff62293165b0";
+            var sensor_2_1_Address = "28ffe76da2163d3";
+            var sensor_2_2_Address = "28fffe6593164b6";
+            var sensor_3_1_Address = "28ffc05f93164c3";            
+            var sensor_3_2_Address = "28ff715f9316441";
 
-            var sensor1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor1Address.ToLower());
-            var sensor2 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor2Address.ToLower());
+            var sensor_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
+            var sensor_2_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
+            var sensor_2_2 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
+            var sensor_3_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
+            var sensor_3_2 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
 
-            if(sensor1 == null)
+            if (sensor_1 == null)
             {
-                sensor1 = new DSFamilyTempSensor
+                sensor_1 = new DSFamilyTempSensor
                 {
-                    DeviceAddress = sensor1Address,
+                    DeviceAddress = sensor_1_Address,
                     Family = "DS18B20",
                     TemperatureScaleId = celsiusTemperatureScale.Id,
                     TemperatureScale = celsiusTemperatureScale,
@@ -139,18 +145,18 @@
                     Pin = RandonHelper.RandomString(4),
                     CreateDate = DateTime.Now,
                 };
-                context.DSFamilyTempSensor.Add(sensor1);
+                context.DSFamilyTempSensor.Add(sensor_1);
             }
             else
             {
-                sensor1.Family = "DS18B20";
+                sensor_1.Family = "DS18B20";
             }
 
-            if (sensor2 == null)
+            if (sensor_2_1 == null)
             {
-                sensor2 = new DSFamilyTempSensor
+                sensor_2_1 = new DSFamilyTempSensor
                 {
-                    DeviceAddress = sensor2Address,
+                    DeviceAddress = sensor_2_1_Address,
                     Family = "DS18B20",
                     TemperatureScaleId = fahrenheitTemperatureScale.Id,
                     TemperatureScale = fahrenheitTemperatureScale,
@@ -159,11 +165,71 @@
                     Pin = RandonHelper.RandomString(4),
                     CreateDate = DateTime.Now,
                 };
-                context.DSFamilyTempSensor.Add(sensor2);
+                context.DSFamilyTempSensor.Add(sensor_2_1);
             }
             else
             {
-                sensor2.Family = "DS18B20";
+                sensor_2_1.Family = "DS18B20";
+            }
+
+            if (sensor_2_2 == null)
+            {
+                sensor_2_2 = new DSFamilyTempSensor
+                {
+                    DeviceAddress = sensor_2_2_Address,
+                    Family = "DS18B20",
+                    TemperatureScaleId = fahrenheitTemperatureScale.Id,
+                    TemperatureScale = fahrenheitTemperatureScale,
+                    DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
+                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    Pin = RandonHelper.RandomString(4),
+                    CreateDate = DateTime.Now,
+                };
+                context.DSFamilyTempSensor.Add(sensor_2_2);
+            }
+            else
+            {
+                sensor_2_2.Family = "DS18B20";
+            }
+
+            if (sensor_3_1 == null)
+            {
+                sensor_3_1 = new DSFamilyTempSensor
+                {
+                    DeviceAddress = sensor_3_1_Address,
+                    Family = "DS18B20",
+                    TemperatureScaleId = fahrenheitTemperatureScale.Id,
+                    TemperatureScale = fahrenheitTemperatureScale,
+                    DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
+                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    Pin = RandonHelper.RandomString(4),
+                    CreateDate = DateTime.Now,
+                };
+                context.DSFamilyTempSensor.Add(sensor_3_1);
+            }
+            else
+            {
+                sensor_3_1.Family = "DS18B20";
+            }
+
+            if (sensor_3_2 == null)
+            {
+                sensor_3_2 = new DSFamilyTempSensor
+                {
+                    DeviceAddress = sensor_3_2_Address,
+                    Family = "DS18B20",
+                    TemperatureScaleId = fahrenheitTemperatureScale.Id,
+                    TemperatureScale = fahrenheitTemperatureScale,
+                    DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
+                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    Pin = RandonHelper.RandomString(4),
+                    CreateDate = DateTime.Now,
+                };
+                context.DSFamilyTempSensor.Add(sensor_3_2);
+            }
+            else
+            {
+                sensor_3_2.Family = "DS18B20";
             }
 
             context.SaveChanges();
@@ -195,27 +261,47 @@
 
             #endregion
 
-            #region SensorsInDevice
+            #region SensorsInDevice            
 
-            var sensorsInDevice1 = new SensorsInDevice
+            var sensorsInDevice_2_1 = new SensorsInDevice
             {
-                SensorBaseId = sensor1.Id,
-                SensorBase = sensor1,
+                SensorBaseId = sensor_2_1.Id,
+                SensorBase = sensor_2_1,
                 DeviceBaseId = thermometerDevice1.Id,
                 DeviceBase = thermometerDevice1,
             };
 
-            context.SensorsInDevice.AddOrUpdate(sensorsInDevice1);
+            context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_1);
 
-            var sensorsInDevice2 = new SensorsInDevice
+            var sensorsInDevice_2_2 = new SensorsInDevice
             {
-                SensorBaseId = sensor2.Id,
-                SensorBase = sensor2,
+                SensorBaseId = sensor_2_2.Id,
+                SensorBase = sensor_2_2,
                 DeviceBaseId = thermometerDevice1.Id,
                 DeviceBase = thermometerDevice1,
             };
 
-            context.SensorsInDevice.AddOrUpdate(sensorsInDevice2);
+            context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_2);
+
+            var sensorsInDevice_3_1 = new SensorsInDevice
+            {
+                SensorBaseId = sensor_3_1.Id,
+                SensorBase = sensor_3_1,
+                DeviceBaseId = thermometerDevice1.Id,
+                DeviceBase = thermometerDevice1,
+            };
+
+            context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_1);
+
+            var sensorsInDevice_3_2 = new SensorsInDevice
+            {
+                SensorBaseId = sensor_3_2.Id,
+                SensorBase = sensor_3_2,
+                DeviceBaseId = thermometerDevice1.Id,
+                DeviceBase = thermometerDevice1,
+            };
+
+            context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_2);
 
             context.SaveChanges();
 
