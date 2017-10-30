@@ -106,9 +106,8 @@ void TemperatureSensorManager::refresh()
 
 TemperatureSensor *TemperatureSensorManager::getSensors()
 {
-	TemperatureSensor arr[this->_sensors.size()];
-	std::copy(this->_sensors.begin(), this->_sensors.end(), arr);
-	return arr;
+	TemperatureSensor* array = this->_sensors.data();
+	return array;
 }
 
 char *TemperatureSensorManager::getSensorsJson()

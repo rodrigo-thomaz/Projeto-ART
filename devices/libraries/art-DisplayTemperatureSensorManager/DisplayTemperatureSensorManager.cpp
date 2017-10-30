@@ -55,10 +55,10 @@ void DisplayTemperatureSensorManager::printSensors()
 	int screenWidth = screenX2 - screenX1;
 	int screenHeight = screenY2 - screenY1;	
  
-	TemperatureSensor *sensors = this->_temperatureSensorManager->getSensors();
+	TemperatureSensor* sensors = this->_temperatureSensorManager->getSensors();
 	
-	int sensorsCount = sizeof(sensors)/sizeof(int);
-  
+	int sensorsCount = sizeof(sensors);
+    
 	int barChunk = screenWidth / (sensorsCount + 1);
    
 	this->_displayManager->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
