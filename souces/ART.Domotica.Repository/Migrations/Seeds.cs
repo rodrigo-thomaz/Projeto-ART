@@ -241,6 +241,8 @@
             {
                 thermometerDevice1 = new ThermometerDevice
                 {
+                    ChipId = "1540901",
+                    FlashChipId = "1458400",
                     MacAddress = thermometerDevice1MacAddress,
                     Pin = RandonHelper.RandomString(4),
                     CreateDate = DateTime.Now,
@@ -249,7 +251,8 @@
             }
             else
             {
-                //code here
+                thermometerDevice1.ChipId = "1540901";
+                thermometerDevice1.FlashChipId = "1458400";
             }
 
             context.SaveChanges();
