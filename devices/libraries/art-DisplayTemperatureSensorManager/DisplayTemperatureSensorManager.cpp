@@ -72,6 +72,14 @@ void DisplayTemperatureSensorManager::printSensors()
 
 void DisplayTemperatureSensorManager::printSensor(TemperatureSensor& temperatureSensor, int x, int y, int width, int height)
 {
+	double range = (double)temperatureSensor.highAlarm - (double)temperatureSensor.lowAlarm;
+	double value = temperatureSensor.tempCelsius - (double)temperatureSensor.lowAlarm;
+	double percent = (value * 100) / range;
+	int tempHeight = round((width * percent) / 100);
+	
+	//Serial.print("Aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
+	//Serial.println(percent);
+	
 	this->_displayManager->display.setFont();
     this->_displayManager->display.setTextSize(1);
     this->_displayManager->display.setTextColor(WHITE);
@@ -80,6 +88,7 @@ void DisplayTemperatureSensorManager::printSensor(TemperatureSensor& temperature
     this->_displayManager->display.println(" C");
       
 	this->_displayManager->display.drawRect(x, y, width, height, WHITE);
+	this->_displayManager->display.fillRect(x, y, width, tempHeight, WHITE);
 	  
     // this->_displayManager->display.print(temperatureSensor.tempFahrenheit);
     // this->_displayManager->display.println(" F");
