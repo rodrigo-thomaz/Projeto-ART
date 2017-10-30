@@ -34,13 +34,13 @@ void DisplayTemperatureSensorManager::printSensors()
 {
 	// variáveis
 	
-	int marginTop = 20;
+	int marginTop = 0;
 	int marginLeft = 4;
 	int marginRight = 4;
 	int marginBotton = 0;
 	
-	int barWidth = 10;
-	int barHeight = 15;
+	int barWidth = 15;
+	int barHeight = 25;
 	
 	// ---- engine
 	
@@ -59,12 +59,12 @@ void DisplayTemperatureSensorManager::printSensors()
 	
 	int sensorsCount = sizeof(sensors);
     
-	int barChunk = screenWidth / (sensorsCount + 1);
-   
+	int spaceChunk = round((screenWidth - (barWidth * sensorsCount)) / (sensorsCount - 1));
+		
 	this->_displayManager->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
  
 	for(int i = 0; i < sensorsCount; ++i){	
-		int barX = barChunk * (i + 1);
+		int barX = screenX1 + (i * barWidth) + (i * spaceChunk);
 		int barY = screenY2 - barHeight;
 		this->printSensor(sensors[i], barX, barY, barWidth, barHeight);	        
 	}	
@@ -73,9 +73,9 @@ void DisplayTemperatureSensorManager::printSensors()
 void DisplayTemperatureSensorManager::printSensor(TemperatureSensor& temperatureSensor, int x, int y, int width, int height)
 {
 	this->_displayManager->display.setFont();
-    this->_displayManager->display.setTextSize(2);
+    this->_displayManager->display.setTextSize(1);
     this->_displayManager->display.setTextColor(WHITE);
-    this->_displayManager->display.setCursor(20, 20);       
+    this->_displayManager->display.setCursor(x, y - 8);       
 	this->_displayManager->display.print(temperatureSensor.tempCelsius);
     this->_displayManager->display.println(" C");
       
