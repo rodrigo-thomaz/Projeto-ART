@@ -213,7 +213,7 @@ void loop() {
     if(now - messageTimestamp > MESSAGE_INTERVAL) {
       messageTimestamp = now;
       displayMQTTManager.printSent(true);
-      char *sensorsJson = temperatureSensorManager.convertSensorsToJson();
+      char *sensorsJson = temperatureSensorManager.getSensorsJson();
       Serial.print("enviando para o servidor => ");
       Serial.println(sensorsJson);
       MQTT.publish(TOPICO_PUBLISH, sensorsJson);      

@@ -4,7 +4,6 @@
 #include "DallasTemperature.h"
 #include "NTPManager.h"
 #include "DebugManager.h"
-#include "ArduinoJson.h"
 
 // Data wire is plugged into port 2 on the Arduino
 #define ONE_WIRE_BUS 0
@@ -16,34 +15,10 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature _dallas(&oneWire);
 
 
-
-TemperatureSensor::TemperatureSensor()
-{
-
-}
-
-
 TemperatureSensorManager::TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager)
 { 
 	this->_debugManager = &debugManager;
 	this->_ntpManager = &ntpManager;
-}
-
-String getFamily(byte deviceAddress[8]){
-  switch (deviceAddress[0]) {
-    case DS18S20MODEL:
-      return "DS18S20";
-    case DS18B20MODEL:
-      return "DS18B20";
-    case DS1822MODEL:
-      return "DS1822";
-    case DS1825MODEL:
-      return "DS1825";
-    case DS28EA00MODEL:
-      return "DS28EA00";
-    default:
-      return "";
-  } 
 }
 
 void TemperatureSensorManager::begin()
@@ -56,7 +31,7 @@ void TemperatureSensorManager::begin()
 	
 	deviceCount = _dallas.getDeviceCount();
 	
-	Sensors = new TemperatureSensor[deviceCount]; 
+	//this->_sensors = new TemperatureSensor[deviceCount]; 
 	
 	if (this->_debugManager->isDebug()) {
 		Serial.print("Localizando devices...");
@@ -77,28 +52,28 @@ void TemperatureSensorManager::begin()
 		  // address
 		  for (uint8_t j = 0; j < 8; j++)
 		  {
-			Sensors[i].deviceAddress[j] = deviceAddress[j];			
-			Sensors[i].deviceAddressStr += String(Sensors[i].deviceAddress[j], HEX);	
+			this->_sensors[i].deviceAddress[j] = deviceAddress[j];			
+			this->_sensors[i].deviceAddressStr += String(this->_sensors[i].deviceAddress[j], HEX);	
 		  }
 		  
-		  if (this->_debugManager->isDebug()) Serial.println(Sensors[i].deviceAddressStr);
+		  if (this->_debugManager->isDebug()) Serial.println(this->_sensors[i].deviceAddressStr);
 
 
 		  //Temporario
-		  if (Sensors[i].deviceAddressStr == "28fffe6593164b6") {
-			  Sensors[i].dsFamilyTempSensorId = "4fe0c742-b8a4-e711-9bee-707781d470bc";
+		  if (this->_sensors[i].deviceAddressStr == "28fffe6593164b6") {
+			  this->_sensors[i].dsFamilyTempSensorId = "4fe0c742-b8a4-e711-9bee-707781d470bc";
 		  }
-		  else if (Sensors[i].deviceAddressStr == "28ffe76da2163d3") {
-			  Sensors[i].dsFamilyTempSensorId = "4ee0c742-b8a4-e711-9bee-707781d470bc";
+		  else if (this->_sensors[i].deviceAddressStr == "28ffe76da2163d3") {
+			  this->_sensors[i].dsFamilyTempSensorId = "4ee0c742-b8a4-e711-9bee-707781d470bc";
 		  }
 		  //Temporario
 
 
 		  //validFamily
-		  Sensors[i].validFamily = _dallas.validFamily(Sensors[i].deviceAddress);
+		  this->_sensors[i].validFamily = _dallas.validFamily(this->_sensors[i].deviceAddress);
 
 		  // family
-		  Sensors[i].family = getFamily(Sensors[i].deviceAddress);     		  		  
+		  this->_sensors[i].family = getFamily(this->_sensors[i].deviceAddress);     		  		  
 		}
 		else{
 		  if (this->_debugManager->isDebug()) {
@@ -109,49 +84,37 @@ void TemperatureSensorManager::begin()
 	}
 }
 
-void generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
-{	
-	JsonObject& JSONencoder = root.createNestedObject();
-
-	JSONencoder["deviceAddress"] = temperatureSensor.deviceAddressStr;
-	JSONencoder["epochTime"] = temperatureSensor.epochTime;
-	JSONencoder["validFamily"] = temperatureSensor.validFamily;
-	JSONencoder["family"] = temperatureSensor.family;
-	JSONencoder["isConnected"] = temperatureSensor.isConnected;
-	JSONencoder["resolution"] = temperatureSensor.resolution;
-	JSONencoder["tempCelsius"] = temperatureSensor.tempCelsius;
-	JSONencoder["tempFahrenheit"] = temperatureSensor.tempFahrenheit;
-	JSONencoder["hasAlarm"] = temperatureSensor.hasAlarm;
-	JSONencoder["lowAlarm"] = temperatureSensor.lowAlarm;
-	JSONencoder["highAlarm"] = temperatureSensor.highAlarm;
-}
-
 void TemperatureSensorManager::refresh()
 {	
 	_dallas.requestTemperatures();
 
 	long epochTime = this->_ntpManager->getEpochTime();	
 	
-	for(int i = 0; i < sizeof(Sensors)/sizeof(int); ++i){	
-		Sensors[i].isConnected = _dallas.isConnected(Sensors[i].deviceAddress);
-		Sensors[i].resolution = _dallas.getResolution(Sensors[i].deviceAddress);    
-		Sensors[i].tempCelsius = _dallas.getTempC(Sensors[i].deviceAddress);
-		Sensors[i].tempFahrenheit = _dallas.getTempF(Sensors[i].deviceAddress);
-		Sensors[i].hasAlarm = _dallas.hasAlarm(Sensors[i].deviceAddress);
-		Sensors[i].lowAlarm = _dallas.getLowAlarmTemp(Sensors[i].deviceAddress);
-		Sensors[i].highAlarm = _dallas.getHighAlarmTemp(Sensors[i].deviceAddress);
-		Sensors[i].epochTime = epochTime;
+	for(int i = 0; i < sizeof(this->_sensors)/sizeof(int); ++i){	
+		this->_sensors[i].isConnected = _dallas.isConnected(this->_sensors[i].deviceAddress);
+		this->_sensors[i].resolution = _dallas.getResolution(this->_sensors[i].deviceAddress);    
+		this->_sensors[i].tempCelsius = _dallas.getTempC(this->_sensors[i].deviceAddress);
+		this->_sensors[i].tempFahrenheit = _dallas.getTempF(this->_sensors[i].deviceAddress);
+		this->_sensors[i].hasAlarm = _dallas.hasAlarm(this->_sensors[i].deviceAddress);
+		this->_sensors[i].lowAlarm = _dallas.getLowAlarmTemp(this->_sensors[i].deviceAddress);
+		this->_sensors[i].highAlarm = _dallas.getHighAlarmTemp(this->_sensors[i].deviceAddress);
+		this->_sensors[i].epochTime = epochTime;
 	}
 }
 
-char *TemperatureSensorManager::convertSensorsToJson()
+TemperatureSensor *TemperatureSensorManager::getSensors()
+{
+	return this->_sensors;
+}
+
+char *TemperatureSensorManager::getSensorsJson()
 {	
 	StaticJsonBuffer<500> JSONbuffer;
 
 	JsonArray& device = JSONbuffer.createArray();
 
-	for(int i = 0; i < sizeof(Sensors)/sizeof(int); ++i){	
-		generateNestedSensor(Sensors[i], device);
+	for(int i = 0; i < sizeof(this->_sensors)/sizeof(int); ++i){	
+		generateNestedSensor(this->_sensors[i], device);
 	}
 	
 	int len = device.measureLength();
@@ -169,14 +132,6 @@ char *TemperatureSensorManager::convertSensorsToJson()
 	}
 
     return result;
-}
-
-const uint8_t *TemperatureSensorManager::getDeviceAddress(String dsFamilyTempSensorId) {
-	for (int i = 0; i < sizeof(Sensors) / sizeof(int) + 1; ++i) {
-		if (Sensors[i].dsFamilyTempSensorId == dsFamilyTempSensorId) {
-			return Sensors[i].deviceAddress;
-		}
-	}
 }
 
 void TemperatureSensorManager::setResolution(String json)
@@ -238,4 +193,46 @@ void TemperatureSensorManager::setHighAlarm(String json)
 
 	Serial.print("sethighAlarm=");
 	Serial.println(json);
+}
+
+const uint8_t *TemperatureSensorManager::getDeviceAddress(String dsFamilyTempSensorId) {
+	for (int i = 0; i < sizeof(this->_sensors) / sizeof(int) + 1; ++i) {
+		if (this->_sensors[i].dsFamilyTempSensorId == dsFamilyTempSensorId) {
+			return this->_sensors[i].deviceAddress;
+		}
+	}
+}
+
+String TemperatureSensorManager::getFamily(byte deviceAddress[8]){
+  switch (deviceAddress[0]) {
+    case DS18S20MODEL:
+      return "DS18S20";
+    case DS18B20MODEL:
+      return "DS18B20";
+    case DS1822MODEL:
+      return "DS1822";
+    case DS1825MODEL:
+      return "DS1825";
+    case DS28EA00MODEL:
+      return "DS28EA00";
+    default:
+      return "";
+  } 
+}
+
+void TemperatureSensorManager::generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
+{	
+	JsonObject& JSONencoder = root.createNestedObject();
+
+	JSONencoder["deviceAddress"] = temperatureSensor.deviceAddressStr;
+	JSONencoder["epochTime"] = temperatureSensor.epochTime;
+	JSONencoder["validFamily"] = temperatureSensor.validFamily;
+	JSONencoder["family"] = temperatureSensor.family;
+	JSONencoder["isConnected"] = temperatureSensor.isConnected;
+	JSONencoder["resolution"] = temperatureSensor.resolution;
+	JSONencoder["tempCelsius"] = temperatureSensor.tempCelsius;
+	JSONencoder["tempFahrenheit"] = temperatureSensor.tempFahrenheit;
+	JSONencoder["hasAlarm"] = temperatureSensor.hasAlarm;
+	JSONencoder["lowAlarm"] = temperatureSensor.lowAlarm;
+	JSONencoder["highAlarm"] = temperatureSensor.highAlarm;
 }
