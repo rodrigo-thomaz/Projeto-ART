@@ -99,16 +99,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Consumers\HardwareConsumer.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
     <Compile Include="IConsumers\IDSFamilyTempSensorConsumer.cs" />
-    <Compile Include="IConsumers\IHardwareConsumer.cs" />
-    <Compile Include="IConsumers\IHardwaresInApplicationConsumer.cs" />
+    <Compile Include="IConsumers\IESPDeviceConsumer.cs" />
     <Compile Include="IConsumers\ITemperatureScaleConsumer.cs" />
     <Compile Include="IConsumers\IThermometerDeviceConsumer.cs" />
     <Compile Include="IConsumers\IApplicationConsumer.cs" />
     <Compile Include="Consumers\ThermometerDeviceConsumer.cs" />
-    <Compile Include="Consumers\HardwaresInApplicationConsumer.cs" />
+    <Compile Include="Consumers\ESPDeviceConsumer.cs" />
     <Compile Include="Consumers\ApplicationConsumer.cs" />
     <Compile Include="Consumers\ApplicationUserConsumer.cs" />
     <Compile Include="Consumers\TemperatureScaleConsumer.cs" />

@@ -2,11 +2,16 @@
 {
     using System;
 
-    public class ThermometerDeviceUpdatePinsContract
+    public class ESPDeviceUpdatePinsContract
     {
         #region Properties
 
         public Guid HardwareId
+        {
+            get; set;
+        }
+
+        public String FlashChipId
         {
             get; set;
         }

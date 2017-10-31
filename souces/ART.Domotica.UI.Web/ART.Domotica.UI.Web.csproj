@@ -209,8 +209,8 @@
     <Content Include="src\js\controllers\admin\dsFamilyTempSensorAdminController.js" />
     <Content Include="src\js\controllers\devicesController.js" />
     <Content Include="src\js\controllers\admin\thermometerDeviceAdminController.js" />
-    <Content Include="src\js\controllers\hardwaresInApplicationJoinController.js" />
-    <Content Include="src\js\controllers\hardwaresInApplicationController.js" />
+    <Content Include="src\js\controllers\espDeviceJoinController.js" />
+    <Content Include="src\js\controllers\espDeviceController.js" />
     <Content Include="src\js\controllers\sensorsController.js" />
     <Content Include="src\js\controllers\applicationUserController.js" />
     <Content Include="src\js\controllers\dashboardController.js" />
@@ -223,8 +223,8 @@
     <Content Include="src\js\services\admin\dsFamilyTempSensorAdminService.js" />
     <Content Include="src\js\services\devicesService.js" />
     <Content Include="src\js\services\admin\thermometerDeviceAdminService.js" />
-    <Content Include="src\js\services\hardwaresInApplicationJoinService.js" />
-    <Content Include="src\js\services\hardwaresInApplicationService.js" />
+    <Content Include="src\js\services\espDeviceJoinService.js" />
+    <Content Include="src\js\services\espDeviceService.js" />
     <Content Include="src\js\services\sensorsService.js" />
     <Content Include="src\js\services\applicationUserService.js" />
     <Content Include="src\js\services\authInterceptorService.js" />
@@ -485,8 +485,8 @@
     <Content Include="src\tpl\layout_mobile.html" />
     <Content Include="src\tpl\page_profile.html" />
     <Content Include="src\views\admin\thermometerDeviceAdmin.html" />
-    <Content Include="src\views\hardwaresInApplicationJoin.html" />
-    <Content Include="src\views\hardwaresInApplication.html" />
+    <Content Include="src\views\espDeviceJoin.html" />
+    <Content Include="src\views\espDevice.html" />
     <Content Include="src\views\sensors.html" />
     <Content Include="src\views\devices.html" />
     <Content Include="Web.config" />

@@ -31,7 +31,7 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new []{
                         new IndexAttribute { IsUnique = false }, // ChipId não é único pois repete por lote http://bbs.espressif.com/viewtopic.php?t=1303
-                    })); 
+                    }));
 
             //FlashChipId
             Property(x => x.FlashChipId)

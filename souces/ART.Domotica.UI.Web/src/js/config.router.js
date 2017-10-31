@@ -64,22 +64,22 @@ angular.module('app')
                       'js/controllers/sensorsController.js',
                   ])
               })
-              .state('app.hardwaresInApplication', {
-                  url: '/hardwaresInApplication',
-                  templateUrl: 'views/hardwaresInApplication.html',
+              .state('app.espDevice', {
+                  url: '/espDevice',
+                  templateUrl: 'views/espDevice.html',
                   resolve: load([
                       'ui.grid',
-                      'js/services/hardwaresInApplicationService.js',
-                      'js/controllers/hardwaresInApplicationController.js',
+                      'js/services/espDeviceService.js',
+                      'js/controllers/espDeviceController.js',
                   ])
               })
-              .state('app.hardwaresInApplicationJoin', {
-                  url: '/hardwaresInApplicationJoin',
-                  templateUrl: 'views/hardwaresInApplicationJoin.html',
+              .state('app.espDeviceJoin', {
+                  url: '/espDeviceJoin',
+                  templateUrl: 'views/espDeviceJoin.html',
                   resolve: load([
                       'ui.grid',
-                      'js/services/hardwaresInApplicationJoinService.js',
-                      'js/controllers/hardwaresInApplicationJoinController.js',
+                      'js/services/espDeviceJoinService.js',
+                      'js/controllers/espDeviceJoinController.js',
                   ])
               })
 

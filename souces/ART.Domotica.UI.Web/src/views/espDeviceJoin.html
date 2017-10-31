@@ -1,7 +1,7 @@
 ﻿<div class="bg-light lter b-b wrapper-md">
     <h1 class="m-n font-thin h3">Hardwares</h1>
 </div>
-<div class="wrapper-md" ng-controller="hardwaresInApplicationJoinController">
+<div class="wrapper-md" ng-controller="espDeviceJoinController">
 
     <div class="row">
         <div class="col-sm-6">
@@ -17,16 +17,16 @@
                                 <span class="sr-only">Loading...</span>
                             </div>-->
                         </div>
-                        <button type="submit" class="btn btn-sm btn-primary" ng-click="searchPinClick()">
+                        <button type="submit" class="btn btn-sm btn-primary" ng-click="getByPinClick()">
                             {{ !searchingPin ? 'Procurar' : 'Aguardando...'}}<i class='fa fa-spinner fa-spin' ng-hide="searchingPin == 0"></i>
                         </button>
                     </form>
                     <div class="line pull-in"></div>
-                    <article class="media" ng-show="hardware">
+                    <article class="media" ng-show="espDevice">
                         <span class="pull-left thumb-sm"><i class="fa fa-file-o fa-3x"></i></span>
                         <div class="media-body">
                             <div class="pull-right text-center text-muted">
-                                <button type="submit" class="btn btn-sm btn-primary" ng-click="insertHardwareClick()">Adicionar</button>
+                                <button type="submit" class="btn btn-sm btn-primary" ng-click="insertInApplicationClick()">Adicionar</button>
                             </div>
                             <a href class="h4">Bootstrap documents</a>
                             <small class="block"><a href class="">John Smith</a> <span class="label label-info">Friends</span></small>

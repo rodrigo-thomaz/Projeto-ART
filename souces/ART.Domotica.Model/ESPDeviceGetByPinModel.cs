@@ -1,10 +1,12 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Model
 {
-    public class HardwaresInApplicationPinContract
+    using System;
+
+    public class ESPDeviceGetByPinModel
     {
         #region Properties
 
-        public string Pin
+        public Guid Id
         {
             get; set;
         }

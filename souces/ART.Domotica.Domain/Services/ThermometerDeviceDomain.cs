@@ -10,8 +10,6 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.Domain;
-    using ART.Domotica.Contract;
-    using ART.Infra.CrossCutting.Utils;
 
     public class ThermometerDeviceDomain : DomainBase, IThermometerDeviceDomain
     {
@@ -37,28 +35,7 @@
             var data = await _thermometerDeviceRepository.GetList();
             var result = Mapper.Map<List<ThermometerDevice>, List<ThermometerDeviceGetListModel>>(data);
             return result;
-        }
-
-        public async Task<List<ThermometerDeviceUpdatePinsContract>> UpdatePins()
-        {
-            var existingPins = await _thermometerDeviceRepository.GetExistingPins();
-            var entities = await _thermometerDeviceRepository.GetThermometerDeviceNotInApplication();
-
-            foreach (var item in entities)
-            {
-                var pin = RandonHelper.RandomString(4);
-                while (existingPins.Contains(pin))
-                {
-                    pin = RandonHelper.RandomString(4);
-                }
-                item.Pin = pin;
-            }
-            await _thermometerDeviceRepository.Update(entities);
-
-            var result = Mapper.Map<List<ThermometerDevice>, List<ThermometerDeviceUpdatePinsContract>>(entities);
-
-            return result;
-        }
+        }        
 
         #endregion Methods
     }

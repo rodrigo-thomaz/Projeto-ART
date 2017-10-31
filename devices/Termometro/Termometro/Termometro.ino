@@ -12,6 +12,7 @@
 #include "PubSubClient.h"
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
+#include "EEPROMManager.h"
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -26,8 +27,15 @@
 #define D9    3
 #define D10   1
 
-#define ID_MQTT  "294700e3-b9a7-e711-9bef-707781d470bc" // HardwareBaseId
+struct config_t
+{
+    String hardwaresInApplicationId;
+    String hardwareId;
+} configuration;
 
+int configurationEEPROMAddr = 0;
+
+#define TOPIC_SUB_UPDATE_PIN "ESPDevice.UpdatePin"
 #define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolution"
 #define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarm"
 #define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm"
@@ -62,6 +70,8 @@ PubSubClient MQTT(espClient);
 void setup() {
 		
 	Serial.begin(9600);
+
+  //EEPROM.begin(512);
 
   // Buzzer
   pinMode(D6,OUTPUT);
@@ -111,6 +121,14 @@ void initMQTT()
 {
     MQTT.setServer(BROKER_MQTT, BROKER_PORT);   //informa qual broker e porta deve ser conectado
     MQTT.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega)
+
+    // 
+    
+    EEPROM_readAnything(0, configuration);
+
+    if(configuration.hardwaresInApplicationId == ""){
+      EEPROM_writeAnything(configurationEEPROMAddr, configuration);
+    }
 }
  
 void mqtt_callback(char* topic, byte* payload, unsigned int length) 
@@ -148,6 +166,9 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
     Serial.print("payloadContract: ");
     Serial.println(payloadContract);
 
+    if(payloadTopic == String(TOPIC_SUB_UPDATE_PIN)){
+      Serial.println("Update PIN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
       temperatureSensorManager.setResolution(payloadContract);
     }
@@ -165,10 +186,15 @@ void reconnectMQTT()
     {
         Serial.print("* Tentando se conectar ao Broker MQTT: ");
         Serial.println(BROKER_MQTT);
-        if (MQTT.connect(ID_MQTT, "test", "test")) 
+
+        Serial.print("Id: ");
+        Serial.println(String(ESP.getFlashChipId()).c_str());        
+        
+        if (MQTT.connect(String(ESP.getFlashChipId()).c_str(), "test", "test")) 
         {
             Serial.println("Conectado com sucesso ao broker MQTT!");
 
+            MQTT.subscribe(TOPIC_SUB_UPDATE_PIN); 
             MQTT.subscribe(TOPIC_SUB_SET_RESOLUTION); 
             MQTT.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
             MQTT.subscribe(TOPIC_SUB_SET_LOW_ALARM);         

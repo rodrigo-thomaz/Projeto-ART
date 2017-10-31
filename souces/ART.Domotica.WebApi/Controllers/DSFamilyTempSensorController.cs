@@ -18,7 +18,7 @@ namespace ART.Domotica.WebApi.Controllers
 
         #region constructors
 
-        public DSFamilyTempSensorController(IDSFamilyTempSensorProducer dsFamilyTempSensorProducer) //: base(connection)
+        public DSFamilyTempSensorController(IDSFamilyTempSensorProducer dsFamilyTempSensorProducer) 
         {
             _dsFamilyTempSensorProducer = dsFamilyTempSensorProducer;
         }

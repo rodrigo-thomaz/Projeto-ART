@@ -123,7 +123,7 @@
             var sensor_1_Address = "28fff62293165b0";
             var sensor_2_1_Address = "28ffe76da2163d3";
             var sensor_2_2_Address = "28fffe6593164b6";
-            var sensor_3_1_Address = "28ffc05f93164c3";            
+            var sensor_3_1_Address = "28ffc05f93164c3";
             var sensor_3_2_Address = "28ff715f9316441";
 
             var sensor_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
@@ -141,7 +141,7 @@
                     TemperatureScaleId = celsiusTemperatureScale.Id,
                     TemperatureScale = celsiusTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
-                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,                    
+                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_1);
@@ -259,7 +259,7 @@
 
             #endregion
 
-            #region SensorsInDevice            
+            #region SensorsInDevice
 
             var sensorsInDevice_2_1 = new SensorsInDevice
             {

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class HardwaresInApplicationDeleteHardwareContract
+    public class ESPDeviceDeleteFromApplicationContract
     {
         #region Properties
 

@@ -22,7 +22,7 @@
         public Guid Id
         {
             get; set;
-        }        
+        }
 
         #endregion Properties
     }

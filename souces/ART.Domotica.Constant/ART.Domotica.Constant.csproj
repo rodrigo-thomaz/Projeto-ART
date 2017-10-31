@@ -40,9 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HardwareConstants.cs" />
     <Compile Include="ThermometerDeviceConstants.cs" />
-    <Compile Include="HardwaresInApplicationConstants.cs" />
+    <Compile Include="ESPDeviceConstants.cs" />
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="DSFamilyTempSensorConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
