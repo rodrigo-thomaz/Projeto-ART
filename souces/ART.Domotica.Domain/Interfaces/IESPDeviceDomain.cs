@@ -21,6 +21,8 @@
 
         Task<List<ESPDeviceUpdatePinsContract>> UpdatePins();
 
+        Task<ESPDeviceGetInApplicationForDeviceResponseContract> GetInApplicationForDevice(ESPDeviceGetInApplicationForDeviceRequestContract contract);
+
         #endregion Methods
     }
 }

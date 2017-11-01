@@ -4,6 +4,7 @@
     using ART.Domotica.Worker.IConsumers;
 
     using Quartz;
+    using System;
 
     public class UpdatePinJob : IJob
     {
@@ -31,7 +32,10 @@
             var task = _espDeviceDomain.UpdatePins();
             task.Wait();
             var data = task.Result;
-            _espDeviceConsumer.UpdatePins(data);
+
+            var nextFireTimeInSeconds = context.NextFireTimeUtc.Value.Subtract(DateTimeOffset.Now).TotalSeconds;
+
+            _espDeviceConsumer.UpdatePins(data, nextFireTimeInSeconds);
         }
 
         #endregion Methods

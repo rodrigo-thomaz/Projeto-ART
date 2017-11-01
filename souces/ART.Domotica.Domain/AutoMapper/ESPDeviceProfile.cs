@@ -25,6 +25,10 @@
 
             CreateMap<ESPDeviceBase, ESPDeviceUpdatePinsContract>()
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
+
+            CreateMap<HardwaresInApplication, ESPDeviceGetInApplicationForDeviceResponseContract>()
+                .ForMember(vm => vm.HardwaresInApplicationId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.HardwareBaseId));
         }
 
         #endregion Constructors

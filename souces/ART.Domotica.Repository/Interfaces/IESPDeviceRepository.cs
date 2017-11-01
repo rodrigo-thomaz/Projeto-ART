@@ -25,6 +25,8 @@
 
         Task<List<ESPDeviceBase>> GetESPDevicesNotInApplication();
 
+        Task<HardwaresInApplication> GetInApplicationForDevice(string chipId, string flashChipId, string macAddress);
+
         #endregion Methods
     }
 }

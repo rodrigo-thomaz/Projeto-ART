@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ESPDeviceUpdatePinsContract
+    public class ESPDeviceGetInApplicationForDeviceResponseContract
     {
         #region Properties
 
@@ -11,17 +11,10 @@
             get; set;
         }
 
-        public String FlashChipId
+        public Guid HardwaresInApplicationId
         {
             get; set;
         }
-
-        public string Pin
-        {
-            get; set;
-        }
-
-        public double NextFireTimeInSeconds { get; set; }
 
         #endregion Properties
     }

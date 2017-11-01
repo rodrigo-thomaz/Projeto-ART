@@ -13,6 +13,7 @@
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
 #include "EEPROMManager.h"
+#include "DisplayAccessManager.h"
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -39,8 +40,10 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolution"
 #define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarm"
 #define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm"
+#define TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED   "ESPDevice.GetInApplicationForDeviceCompleted"    //tópico MQTT de envio de informações para Broker
 
-#define TOPICO_PUBLISH   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
+#define TOPIC_PUB_GET_IN_APPLICATION_FOR_DEVICE   "ESPDevice.GetInApplicationForDevice"    //tópico MQTT de envio de informações para Broker
+#define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
 #define MESSAGE_INTERVAL 4000
 uint64_t messageTimestamp = 0;
@@ -54,6 +57,7 @@ DisplayManager displayManager(debugManager);
 WiFiManager wifiManager(D5, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 BuzzerManager buzzerManager(D7, debugManager);
+DisplayAccessManager displayAccessManager(debugManager, displayManager);
 
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
@@ -103,6 +107,8 @@ void setup() {
   ntpManager.setUpdateCallback(handleNTPUpdateCallback);  
   
   wifiManager.autoConnect();
+
+  initConfiguration();
   
   initMQTT();
 
@@ -117,18 +123,15 @@ void handleWMFailedConfigPortalCallback (int connectionResult) {  displayWiFiMan
 void handleWMConnectingConfigPortalCallback () {  displayWiFiManager.connectingConfigPortalCallback(); }
 void handleNTPUpdateCallback(bool update, bool forceUpdate){ displayNTPManager.updateCallback(update, forceUpdate); }
 
+void initConfiguration()
+{
+  EEPROM_readAnything(0, configuration);
+}
+
 void initMQTT() 
 {
     MQTT.setServer(BROKER_MQTT, BROKER_PORT);   //informa qual broker e porta deve ser conectado
     MQTT.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega)
-
-    // 
-    
-    EEPROM_readAnything(0, configuration);
-
-    if(configuration.hardwaresInApplicationId == ""){
-      EEPROM_writeAnything(configurationEEPROMAddr, configuration);
-    }
 }
  
 void mqtt_callback(char* topic, byte* payload, unsigned int length) 
@@ -167,7 +170,10 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
     Serial.println(payloadContract);
 
     if(payloadTopic == String(TOPIC_SUB_UPDATE_PIN)){
-      Serial.println("Update PIN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      displayAccessManager.updatePin(payloadContract);
+    }
+    if(payloadTopic == String(TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED)){
+      getInApplicationForDeviceCompleted();      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
       temperatureSensorManager.setResolution(payloadContract);
@@ -178,6 +184,26 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TOPIC_SUB_SET_LOW_ALARM)){
       temperatureSensorManager.setLowAlarm(payloadContract);
     }
+}
+
+void getInApplicationForDevice()
+{
+  StaticJsonBuffer<200> JSONbuffer;
+  JsonObject& root = JSONbuffer.createObject();
+  root["chipId"] = ESP.getChipId();
+  root["flashChipId"] = ESP.getFlashChipId();
+  root["macAddress"] = WiFi.macAddress();
+  
+  int len = root.measureLength();
+  char result[len + 1];
+  root.printTo(result, sizeof(result));
+  
+  MQTT.publish(TOPIC_PUB_GET_IN_APPLICATION_FOR_DEVICE, result);    
+}
+
+void getInApplicationForDeviceCompleted()
+{
+  Serial.println("******************** TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED ******************** !!!!!!!!!!!!!!!!!!!!!!!!!");
 }
  
 void reconnectMQTT() 
@@ -195,9 +221,10 @@ void reconnectMQTT()
             Serial.println("Conectado com sucesso ao broker MQTT!");
 
             MQTT.subscribe(TOPIC_SUB_UPDATE_PIN); 
-            MQTT.subscribe(TOPIC_SUB_SET_RESOLUTION); 
-            MQTT.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
-            MQTT.subscribe(TOPIC_SUB_SET_LOW_ALARM);         
+            //MQTT.subscribe(TOPIC_SUB_SET_RESOLUTION); 
+            //MQTT.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
+            //MQTT.subscribe(TOPIC_SUB_SET_LOW_ALARM);    
+            //MQTT.subscribe(TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED);                
         } 
         else 
         {
@@ -208,17 +235,33 @@ void reconnectMQTT()
     }
 }
 
-void loop() {	
+void loop() {	  
 
-  displayManager.display.clearDisplay();
+  debugManager.update();      
 
-  debugManager.update();    
-
-  ntpManager.update();
-    
-  reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
   wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
+  reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
+  
+  if(configuration.hardwaresInApplicationId == ""){
+    displayAccessManager.loop();
+    //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
+    //getInApplicationForDevice();
+  }    
+  else{
+    loopInApplication();  
+  }  
+    
+  //keep-alive da comunicação com broker MQTT
+  MQTT.loop();  
+  
+}
 
+void loopInApplication()
+{
+  displayManager.display.clearDisplay();
+  
+  ntpManager.update();
+  
   uint64_t now = millis();   
 
   if(now - readTempTimestamp > READTEMP_INTERVAL) {
@@ -242,7 +285,7 @@ void loop() {
       char *sensorsJson = temperatureSensorManager.getSensorsJson();
       Serial.println("enviando para o servidor => ");
       //Serial.println(sensorsJson); // está estourando erro aqui
-      MQTT.publish(TOPICO_PUBLISH, sensorsJson);    
+      MQTT.publish(TOPIC_PUB_TEMP, sensorsJson);            
     } 
     else {
       displayMQTTManager.printSent(false);
@@ -258,10 +301,7 @@ void loop() {
   
   // Buzzer
   //buzzerManager.test();
-    
-  //keep-alive da comunicação com broker MQTT
-  MQTT.loop();
 
   displayManager.display.display();
-  
 }
+

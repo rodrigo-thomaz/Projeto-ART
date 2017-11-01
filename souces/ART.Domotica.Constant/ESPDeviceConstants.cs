@@ -13,6 +13,8 @@
         public static readonly string InsertInApplicationCompletedQueueName = "ESPDevice.InsertInApplicationCompleted";
         public static readonly string InsertInApplicationQueueName = "ESPDevice.InsertInApplication";
         public static readonly string UpdatePinQueueName = "ESPDevice.UpdatePin";
+        public static readonly string GetInApplicationForDeviceQueueName = "ESPDevice.GetInApplicationForDevice";
+        public static readonly string GetInApplicationForDeviceCompletedQueueName = "ESPDevice.GetInApplicationForDeviceCompleted";
 
         #endregion Fields
     }

@@ -117,6 +117,13 @@
             return result;
         }
 
+        public async Task<ESPDeviceGetInApplicationForDeviceResponseContract> GetInApplicationForDevice(ESPDeviceGetInApplicationForDeviceRequestContract contract)
+        {
+            var data = await _espDeviceRepository.GetInApplicationForDevice(contract.ChipId, contract.FlashChipId, contract.MacAddress);
+            var result = Mapper.Map<HardwaresInApplication, ESPDeviceGetInApplicationForDeviceResponseContract>(data);
+            return result;
+        }
+
         #endregion Methods
     }
 }

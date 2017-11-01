@@ -84,6 +84,19 @@
             var data = await _context.Set<ESPDeviceBase>()
                 .Where(x => !x.HardwaresInApplication.Any())
                 .ToListAsync();
+
+            return data;
+        }
+
+        public async Task<HardwaresInApplication> GetInApplicationForDevice(string chipId, string flashChipId, string macAddress)
+        {
+            var data = await _context.HardwaresInApplication
+               .Where(x => x.HardwareBase is ESPDeviceBase)
+               .Where(x => (x.HardwareBase as ESPDeviceBase).ChipId == chipId)
+               .Where(x => (x.HardwareBase as ESPDeviceBase).FlashChipId == flashChipId)
+               .Where(x => (x.HardwareBase as ESPDeviceBase).MacAddress == macAddress)
+               .SingleOrDefaultAsync();
+
             return data;
         }
 

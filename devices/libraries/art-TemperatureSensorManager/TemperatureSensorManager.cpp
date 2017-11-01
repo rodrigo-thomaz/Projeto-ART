@@ -21,8 +21,6 @@ TemperatureSensorManager::TemperatureSensorManager(DebugManager& debugManager, N
 	this->_ntpManager = &ntpManager;
 }
 
-
-
 void TemperatureSensorManager::begin()
 {	
 	// Start up the library
