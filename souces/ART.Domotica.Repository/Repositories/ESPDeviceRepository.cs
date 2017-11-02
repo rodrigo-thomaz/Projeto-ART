@@ -88,7 +88,7 @@
             return data;
         }
 
-        public async Task<HardwaresInApplication> GetInApplicationForDevice(string chipId, string flashChipId, string macAddress)
+        public async Task<HardwaresInApplication> GetInApplicationForDevice(int chipId, int flashChipId, string macAddress)
         {
             var data = await _context.HardwaresInApplication
                .Where(x => x.HardwareBase is ESPDeviceBase)

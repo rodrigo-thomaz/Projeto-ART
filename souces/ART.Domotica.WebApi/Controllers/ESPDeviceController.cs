@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using ART.Domotica.Producer.Interfaces;
     using ART.Domotica.Contract;
+    using System.Web.Http.Description;
 
     [Authorize]
     [RoutePrefix("api/espDevice")]
@@ -26,6 +27,36 @@
         #endregion Constructors
 
         #region public voids
+
+        /// <summary>
+        /// Retornar as configurações de um ESP Device
+        /// </summary>        
+        /// <remarks>
+        /// Retornar as configurações de um ESP Device
+        /// </remarks>
+        /// <param name="contract">Parâmetros da busca</param>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("getConfigurations")]
+        [HttpPost]
+        [AllowAnonymous]
+        [ResponseType(typeof(ESPDeviceGetConfigurationsContractResponse))]
+        public async Task<IHttpActionResult> GetConfigurations(ESPDeviceGetConfigurationsContractRequest contract)
+        {            
+            await Task.Run(() => { });
+
+            //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
+
+            var result = new ESPDeviceGetConfigurationsContractResponse
+            {
+                BrokerHost = "file-server.rthomaz.local",
+                BrokerPort = 1883,
+            };
+
+            return Ok(result);
+        }
 
         /// <summary>
         /// Retornar um ESP Device pelo pin

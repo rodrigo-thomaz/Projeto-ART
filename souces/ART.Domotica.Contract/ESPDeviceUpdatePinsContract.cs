@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public String FlashChipId
+        public int FlashChipId
         {
             get; set;
         }

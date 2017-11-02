@@ -25,8 +25,6 @@
             //ChipId
             Property(x => x.ChipId)
                 .HasColumnOrder(1)
-                .HasMaxLength(7)
-                .IsFixedLength()
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new []{
@@ -36,8 +34,6 @@
             //FlashChipId
             Property(x => x.FlashChipId)
                 .HasColumnOrder(2)
-                .HasMaxLength(7)
-                .IsFixedLength()
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new[]{

@@ -1,10 +1,12 @@
 #include "Arduino.h"
 #include "DebugManager.h"
+#include "AccessManager.h"
 #include "TemperatureSensorManager.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
 #include "WiFiManager.h"
 #include "BuzzerManager.h"
+#include "DisplayAccessManager.h"
 #include "DisplayWiFiManager.h"
 #include "DisplayMQTTManager.h"
 #include "DisplayNTPManager.h"
@@ -13,7 +15,6 @@
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
 #include "EEPROMManager.h"
-#include "DisplayAccessManager.h"
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -27,6 +28,10 @@
 #define D8    15
 #define D9    3
 #define D10   1
+
+#define HOST  "192.168.1.12"
+#define PORT  80
+#define URI   "/ART.Domotica.WebApi/"
 
 struct config_t
 {
@@ -52,21 +57,18 @@ uint64_t messageTimestamp = 0;
 uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
+AccessManager accessManager(debugManager, HOST, PORT, URI);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
 WiFiManager wifiManager(D5, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 BuzzerManager buzzerManager(D7, debugManager);
-DisplayAccessManager displayAccessManager(debugManager, displayManager);
 
+DisplayAccessManager displayAccessManager(debugManager, displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, temperatureSensorManager, debugManager);
-
-//const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
-const char* BROKER_MQTT = "file-server.rthomaz.local"; //URL do broker MQTT que se deseja utilizar
-int BROKER_PORT = 1883; // Porta do Broker MQTT
 
 WiFiClient espClient;
 PubSubClient MQTT(espClient);
@@ -75,15 +77,13 @@ void setup() {
 		
 	Serial.begin(9600);
 
-  //EEPROM.begin(512);
-
   // Buzzer
   pinMode(D6,OUTPUT);
 
   pinMode(D4, INPUT);
   pinMode(D5, INPUT);  
 
-	debugManager.update();
+	debugManager.update();  
 
 	displayManager.begin();
 
@@ -108,6 +108,8 @@ void setup() {
   
   wifiManager.autoConnect();
 
+  accessManager.begin();
+
   initConfiguration();
   
   initMQTT();
@@ -130,7 +132,10 @@ void initConfiguration()
 
 void initMQTT() 
 {
-    MQTT.setServer(BROKER_MQTT, BROKER_PORT);   //informa qual broker e porta deve ser conectado
+    const char *brokerHost = accessManager.getBrokerHost();
+    int brokerPort = accessManager.getBrokerPort();
+    
+    MQTT.setServer(brokerHost, brokerPort);   //informa qual broker e porta deve ser conectado
     MQTT.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega)
 }
  
@@ -205,13 +210,14 @@ void getInApplicationForDeviceCompleted()
 {
   Serial.println("******************** TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED ******************** !!!!!!!!!!!!!!!!!!!!!!!!!");
 }
- 
+
 void reconnectMQTT() 
 {
     if (wifiManager.isConnected() && !MQTT.connected()) 
     {
+        const char *brokerHost = accessManager.getBrokerHost();
         Serial.print("* Tentando se conectar ao Broker MQTT: ");
-        Serial.println(BROKER_MQTT);
+        Serial.println(brokerHost);
 
         Serial.print("Id: ");
         Serial.println(String(ESP.getFlashChipId()).c_str());        

@@ -21,12 +21,12 @@
             get; set;
         }
 
-        public string ChipId
+        public int ChipId
         {
             get; set;
         }
 
-        public string FlashChipId
+        public int FlashChipId
         {
             get; set;
         }

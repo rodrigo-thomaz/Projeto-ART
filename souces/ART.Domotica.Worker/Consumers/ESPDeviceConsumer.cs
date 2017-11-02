@@ -199,7 +199,7 @@
             }
         }        
 
-        private string GetQueueName(string flashChipId)
+        private string GetQueueName(int flashChipId)
         {
             var queueName = string.Format("mqtt-subscription-{0}qos0", flashChipId);
             return queueName;
