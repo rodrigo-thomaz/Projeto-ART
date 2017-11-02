@@ -16,6 +16,8 @@ class AccessManager
 	void								begin();
 	const char							*getBrokerHost();
 	int									getBrokerPort();
+	const char							*getBrokerUser();
+	const char							*getBrokerPwd();
 				
   private:			
 			
@@ -33,6 +35,8 @@ class AccessManager
 	
 	const char							*_brokerHost;
 	int									_brokerPort;
+	const char							*_brokerUser;
+	const char							*_brokerPwd;
 	
 };
 

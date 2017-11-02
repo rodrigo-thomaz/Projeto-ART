@@ -10,5 +10,7 @@ namespace ART.Domotica.Contract
     {
         public string BrokerHost { get; set; }
         public int BrokerPort { get; set; }
+        public string BrokerUser { get; set; }
+        public string BrokerPassword { get; set; }
     }
 }

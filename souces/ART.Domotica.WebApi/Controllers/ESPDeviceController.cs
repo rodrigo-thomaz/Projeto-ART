@@ -53,6 +53,8 @@
             {
                 BrokerHost = "file-server.rthomaz.local",
                 BrokerPort = 1883,
+                BrokerUser = "test",
+                BrokerPassword = "test",
             };
 
             return Ok(result);

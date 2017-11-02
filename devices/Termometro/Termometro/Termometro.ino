@@ -132,7 +132,7 @@ void initConfiguration()
 
 void initMQTT() 
 {
-    const char *brokerHost = accessManager.getBrokerHost();
+    char* const brokerHost = strdup(accessManager.getBrokerHost());
     int brokerPort = accessManager.getBrokerPort();
     
     MQTT.setServer(brokerHost, brokerPort);   //informa qual broker e porta deve ser conectado
@@ -215,14 +215,17 @@ void reconnectMQTT()
 {
     if (wifiManager.isConnected() && !MQTT.connected()) 
     {
-        const char *brokerHost = accessManager.getBrokerHost();
+        char* const brokerHost = strdup(accessManager.getBrokerHost());
+        char* const brokerUser = strdup(accessManager.getBrokerUser());
+        char* const brokerPwd  = strdup(accessManager.getBrokerPwd());
+        
         Serial.print("* Tentando se conectar ao Broker MQTT: ");
         Serial.println(brokerHost);
 
         Serial.print("Id: ");
         Serial.println(String(ESP.getFlashChipId()).c_str());        
         
-        if (MQTT.connect(String(ESP.getFlashChipId()).c_str(), "test", "test")) 
+        if (MQTT.connect(String(ESP.getFlashChipId()).c_str(), brokerUser, brokerPwd)) 
         {
             Serial.println("Conectado com sucesso ao broker MQTT!");
 

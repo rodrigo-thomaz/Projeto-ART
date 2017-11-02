@@ -28,6 +28,16 @@ int AccessManager::getBrokerPort()
 	return this->_brokerPort;
 }
 
+const char *AccessManager::getBrokerUser()
+{	
+	return this->_brokerUser;
+}
+
+const char *AccessManager::getBrokerPwd()
+{	
+	return this->_brokerPwd;
+}
+
 void AccessManager::getConfigurations()
 {	
 	HTTPClient http; 
@@ -57,15 +67,25 @@ void AccessManager::getConfigurations()
 	if(httpCode > 0) {
 		// file found at server
 		if(httpCode == HTTP_CODE_OK) {
+			
 			String payload = http.getString();
+			
 			StaticJsonBuffer<200> jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);
+			
 			this->_brokerHost = jsonObjectResponse["brokerHost"];
 			this->_brokerPort = jsonObjectResponse["brokerPort"];	
+			this->_brokerUser = jsonObjectResponse["brokerUser"];	
+			this->_brokerPwd = jsonObjectResponse["brokerPassword"];				
+			
 			Serial.print("Broker Host: ");
 			Serial.println(this->_brokerHost);
 			Serial.print("Broker Port: ");
 			Serial.println(this->_brokerPort);
+			Serial.print("Broker User: ");
+			Serial.println(this->_brokerUser);
+			Serial.print("Broker Pwd: ");
+			Serial.println(this->_brokerPwd);
 		}
 	} else {
 		Serial.print("[HTTP] GET... failed, error: ");
