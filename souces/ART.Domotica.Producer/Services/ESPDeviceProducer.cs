@@ -10,15 +10,24 @@ using System;
 using RabbitMQ.Client.Events;
 using System.Collections.Concurrent;
 using RabbitMQ.Client.MessagePatterns;
+using ART.Infra.CrossCutting.Setting;
 
 namespace ART.Domotica.Producer.Services
 {
     public class ESPDeviceProducer : ProducerBase, IESPDeviceProducer
     {
+        #region Fields
+
+        private readonly ISettingManager _settingsManager;
+
+        #endregion Fields
+
         #region constructors
 
-        public ESPDeviceProducer(IConnection connection) : base(connection)
-        {   
+        public ESPDeviceProducer(IConnection connection, ISettingManager settingsManager) : base(connection)
+        {
+            _settingsManager = settingsManager;
+
             Initialize();
         }
 
@@ -64,23 +73,21 @@ namespace ART.Domotica.Producer.Services
 
         public async Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract message)
         {
-            return await Task.Run(() =>
+            var rpcClientTimeOutMilliSeconds = await _settingsManager.GetValueAsync<int>(SettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey);
+            var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsQueueName);
+            rpcClient.TimeoutMilliseconds = rpcClientTimeOutMilliSeconds;
+            var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+            rpcClient.TimedOut += (sender, e) =>
             {
-                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsQueueName);
-                rpcClient.TimeoutMilliseconds = 5000;
-                var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                rpcClient.TimedOut += (sender, e) =>
-                {
-                    throw new TimeoutException("Worker time out");
-                };
-                rpcClient.Disconnected += (sender, e) =>
-                {
-                    throw new Exception("Worker disconected");
-                };
-                var bufferResult = rpcClient.Call(body);
-                var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsResponseContract>(bufferResult);
-                return result;
-            });       
+                throw new TimeoutException("Worker time out");
+            };
+            rpcClient.Disconnected += (sender, e) =>
+            {
+                throw new Exception("Worker disconected");
+            };
+            var bufferResult = rpcClient.Call(body);
+            var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsResponseContract>(bufferResult);
+            return result;
         }        
 
         #endregion

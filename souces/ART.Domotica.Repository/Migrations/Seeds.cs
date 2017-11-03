@@ -350,6 +350,12 @@
             {
                 settingManager.Insert(SettingsConstants.BrokerPwdSettingsKey, "test");
             }
+
+            // RpcClientTimeOutMilliSeconds
+            if (!settingManager.Exist(SettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey, 5000);
+            }            
         }
 
         #endregion Methods
