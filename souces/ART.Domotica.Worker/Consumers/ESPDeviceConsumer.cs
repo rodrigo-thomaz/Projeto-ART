@@ -211,8 +211,6 @@
 
         public async Task GetConfigurationsReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
-            //var teste = new SimpleRpcServer();
-
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRequestContract>(e.Body);
             var data = await _espDeviceDomain.GetConfigurations(requestContract);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);

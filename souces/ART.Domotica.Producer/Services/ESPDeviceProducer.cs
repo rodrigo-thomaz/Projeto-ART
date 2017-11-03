@@ -7,8 +7,6 @@ using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Contract;
 using System;
-using RabbitMQ.Client.Events;
-using System.Collections.Concurrent;
 using RabbitMQ.Client.MessagePatterns;
 using ART.Infra.CrossCutting.Setting;
 
@@ -122,13 +120,6 @@ namespace ART.Domotica.Producer.Services
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: null);
-
-            _model.QueueDeclare(
-                 queue: ESPDeviceConstants.GetConfigurationsQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: false
                , arguments: null);
         }
 

@@ -6,8 +6,6 @@
     using ART.Domotica.Producer.Interfaces;
     using ART.Domotica.Contract;
     using System.Web.Http.Description;
-    using ART.Domotica.Constant;
-    using ART.Infra.CrossCutting.Setting;
 
     [Authorize]
     [RoutePrefix("api/espDevice")]
