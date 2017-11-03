@@ -23,35 +23,12 @@
     using Topshelf;
     using Topshelf.Autofac;
     using Topshelf.Quartz;
+    using ART.Domotica.Constant;
 
     class Program
     {
         #region Methods
-
-        private static int GetChangePinIntervalInSeconds(IContainer container)
-        {
-            var settingManager = container.Resolve<ISettingManager>();
-
-            var changePinIntervalInSecondsSettingsKey = "ChangePinIntervalInSeconds";
-
-            var exists = settingManager.Exist(changePinIntervalInSecondsSettingsKey);
-
-            int changePinIntervalInSeconds;
-
-            if (exists)
-            {
-                changePinIntervalInSeconds = settingManager.GetValue<int>(changePinIntervalInSecondsSettingsKey);
-            }
-            else
-            {
-                var changePinIntervalInSecondsDefault = Convert.ToInt32(ConfigurationManager.AppSettings["ChangePinIntervalInSecondsDefault"]);
-                settingManager.Insert(changePinIntervalInSecondsSettingsKey, changePinIntervalInSecondsDefault);
-                changePinIntervalInSeconds = changePinIntervalInSecondsDefault;
-            }
-
-            return changePinIntervalInSeconds;
-        }
-
+        
         static void Main(string[] args)
         {
             log4net.Config.XmlConfigurator.Configure();
@@ -126,7 +103,8 @@
                     q.WithJob(() => JobBuilder.Create<UpdatePinJob>().Build());
                     q.AddTrigger(() => TriggerBuilder.Create().WithSimpleSchedule(b =>
                     {
-                        var interval = GetChangePinIntervalInSeconds(container);
+                        var settingManager = container.Resolve<ISettingManager>();
+                        var interval = settingManager.GetValue<int>(SettingsConstants.ChangePinIntervalInSecondsSettingsKey);                        
                         b.WithIntervalInSeconds(interval).RepeatForever();
                     }).Build());
                 });
