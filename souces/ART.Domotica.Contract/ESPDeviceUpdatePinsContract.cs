@@ -6,12 +6,17 @@
     {
         #region Properties
 
+        public int FlashChipId
+        {
+            get; set;
+        }
+
         public Guid HardwareId
         {
             get; set;
         }
 
-        public int FlashChipId
+        public double NextFireTimeInSeconds
         {
             get; set;
         }
@@ -20,8 +25,6 @@
         {
             get; set;
         }
-
-        public double NextFireTimeInSeconds { get; set; }
 
         #endregion Properties
     }

@@ -6,12 +6,17 @@
     {
         #region Properties
 
+        public int ChipId
+        {
+            get; set;
+        }
+
         public long CreateDate
         {
             get; set;
         }
 
-        public Guid HardwareInApplicationId
+        public int FlashChipId
         {
             get; set;
         }
@@ -21,12 +26,7 @@
             get; set;
         }
 
-        public int ChipId
-        {
-            get; set;
-        }
-
-        public int FlashChipId
+        public Guid HardwareInApplicationId
         {
             get; set;
         }

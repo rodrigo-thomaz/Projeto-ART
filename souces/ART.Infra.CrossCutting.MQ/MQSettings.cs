@@ -1,23 +1,66 @@
-﻿using ART.Infra.CrossCutting.Setting;
-
-namespace ART.Infra.CrossCutting.MQ
+﻿namespace ART.Infra.CrossCutting.MQ
 {
+    using ART.Infra.CrossCutting.Setting;
+
     public class MQSettings : IMQSettings
     {
+        #region Fields
+
         private readonly ISettingManager _settingsManager;
 
         private string _brokerHost;
-        private string _brokerVirtualHost;
         private int _brokerPort;
-        private string _brokerUser;
         private string _brokerPwd;
-
+        private string _brokerUser;
+        private string _brokerVirtualHost;
         private int _rpcClientTimeOutMilliSeconds;
+
+        #endregion Fields
+
+        #region Constructors
 
         public MQSettings(ISettingManager settingsManager)
         {
             _settingsManager = settingsManager;
         }
+
+        #endregion Constructors
+
+        #region Properties
+
+        public string BrokerHost
+        {
+            get { return _brokerHost; }
+        }
+
+        public int BrokerPort
+        {
+            get { return _brokerPort; }
+        }
+
+        public string BrokerPwd
+        {
+            get { return _brokerPwd; }
+        }
+
+        public string BrokerUser
+        {
+            get { return _brokerUser; }
+        }
+
+        public string BrokerVirtualHost
+        {
+            get { return _brokerVirtualHost; }
+        }
+
+        public int RpcClientTimeOutMilliSeconds
+        {
+            get { return _rpcClientTimeOutMilliSeconds; }
+        }
+
+        #endregion Properties
+
+        #region Methods
 
         public void Initialize()
         {
@@ -30,11 +73,6 @@ namespace ART.Infra.CrossCutting.MQ
             _rpcClientTimeOutMilliSeconds = _settingsManager.GetValue<int>(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey);
         }
 
-        public string BrokerHost { get { return _brokerHost; } }
-        public string BrokerVirtualHost { get { return _brokerVirtualHost; } }
-        public int BrokerPort { get { return _brokerPort; } }
-        public string BrokerUser { get { return _brokerUser; } }
-        public string BrokerPwd { get { return _brokerPwd; } }
-        public int RpcClientTimeOutMilliSeconds { get { return _rpcClientTimeOutMilliSeconds; } }
+        #endregion Methods
     }
 }

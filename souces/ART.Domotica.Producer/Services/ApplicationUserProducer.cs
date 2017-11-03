@@ -21,7 +21,6 @@
 
         private void Initialize()
         {
-            
         }
 
         #endregion Methods

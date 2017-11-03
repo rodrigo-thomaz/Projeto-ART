@@ -15,13 +15,13 @@
 
         Task<ESPDeviceGetByPinModel> GetByPin(AuthenticatedMessageContract<ESPDevicePinContract> message);
 
+        Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract);
+
         Task<List<ESPDeviceGetListModel>> GetListInApplication(AuthenticatedMessageContract message);
 
         Task InsertInApplication(AuthenticatedMessageContract<ESPDevicePinContract> message);
 
         Task<List<ESPDeviceUpdatePinsContract>> UpdatePins();
-
-        Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract);
 
         #endregion Methods
     }

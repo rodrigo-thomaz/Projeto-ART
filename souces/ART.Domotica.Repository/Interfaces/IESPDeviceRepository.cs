@@ -15,17 +15,17 @@
 
         Task<HardwareBase> GetByPin(string pin);
 
+        Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
+
+        Task<List<ESPDeviceBase>> GetESPDevicesNotInApplication();
+
+        Task<List<string>> GetExistingPins();
+
         Task<HardwareInApplication> GetInApplicationById(Guid hardwareInApplicationId);
 
         Task<List<HardwareInApplication>> GetListInApplication(Guid applicationUserId);
 
         Task InsertInApplication(HardwareInApplication entity);
-
-        Task<List<string>> GetExistingPins();        
-
-        Task<List<ESPDeviceBase>> GetESPDevicesNotInApplication();
-
-        Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 
         #endregion Methods
     }

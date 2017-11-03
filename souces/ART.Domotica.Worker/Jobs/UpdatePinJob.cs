@@ -1,10 +1,11 @@
 ﻿namespace ART.Domotica.Worker.Jobs
 {
+    using System;
+
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Worker.IConsumers;
 
     using Quartz;
-    using System;
 
     public class UpdatePinJob : IJob
     {

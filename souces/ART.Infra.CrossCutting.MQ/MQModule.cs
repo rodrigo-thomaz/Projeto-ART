@@ -1,6 +1,5 @@
 ﻿namespace ART.Infra.CrossCutting.MQ
 {
-
     using Autofac;
 
     using RabbitMQ.Client;
@@ -27,7 +26,7 @@
                 factory.HostName = settingManager.BrokerHost;
                 factory.VirtualHost = settingManager.BrokerVirtualHost;
                 factory.UserName = settingManager.BrokerUser;
-                factory.Password = settingManager.BrokerPwd;           
+                factory.Password = settingManager.BrokerPwd;
 
                 IConnection conn = factory.CreateConnection();
 

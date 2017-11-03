@@ -1,13 +1,14 @@
 ﻿namespace ART.Domotica.Domain.AutoMapper
 {
+    using System;
+    using System.Linq;
+
     using ART.Domotica.Contract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Utils;
 
     using global::AutoMapper;
-    using System;
-    using System.Linq;
 
     public class ESPDeviceProfile : Profile
     {

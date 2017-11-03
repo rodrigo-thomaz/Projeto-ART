@@ -5,7 +5,7 @@
         #region Fields
 
         public static readonly string ChangePinIntervalInSecondsSettingsKey = "ChangePinIntervalInSeconds";
-        
+
         #endregion Fields
     }
 }

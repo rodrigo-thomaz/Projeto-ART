@@ -4,6 +4,18 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class AddChipIdField2 : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropIndex("dbo.ESPDeviceBase", new[] { "FlashChipId" });
+            DropIndex("dbo.ESPDeviceBase", new[] { "ChipId" });
+            AlterColumn("dbo.ESPDeviceBase", "FlashChipId", c => c.String(nullable: false, maxLength: 7, fixedLength: true));
+            AlterColumn("dbo.ESPDeviceBase", "ChipId", c => c.String(nullable: false, maxLength: 7, fixedLength: true));
+            CreateIndex("dbo.ESPDeviceBase", "FlashChipId", unique: true);
+            CreateIndex("dbo.ESPDeviceBase", "ChipId");
+        }
+
         public override void Up()
         {
             DropIndex("dbo.ESPDeviceBase", new[] { "ChipId" });
@@ -15,15 +27,7 @@ namespace ART.Domotica.Repository.Migrations
             CreateIndex("dbo.ESPDeviceBase", "ChipId");
             CreateIndex("dbo.ESPDeviceBase", "FlashChipId", unique: true);
         }
-        
-        public override void Down()
-        {
-            DropIndex("dbo.ESPDeviceBase", new[] { "FlashChipId" });
-            DropIndex("dbo.ESPDeviceBase", new[] { "ChipId" });
-            AlterColumn("dbo.ESPDeviceBase", "FlashChipId", c => c.String(nullable: false, maxLength: 7, fixedLength: true));
-            AlterColumn("dbo.ESPDeviceBase", "ChipId", c => c.String(nullable: false, maxLength: 7, fixedLength: true));
-            CreateIndex("dbo.ESPDeviceBase", "FlashChipId", unique: true);
-            CreateIndex("dbo.ESPDeviceBase", "ChipId");
-        }
+
+        #endregion Methods
     }
 }

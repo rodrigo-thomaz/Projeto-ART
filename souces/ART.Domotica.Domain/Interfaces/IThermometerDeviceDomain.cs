@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using ART.Domotica.Model;
     using ART.Infra.CrossCutting.MQ.Contract;
 
@@ -9,7 +10,7 @@
     {
         #region Methods
 
-        Task<List<ThermometerDeviceGetListModel>> GetList(AuthenticatedMessageContract message);        
+        Task<List<ThermometerDeviceGetListModel>> GetList(AuthenticatedMessageContract message);
 
         #endregion Methods
     }

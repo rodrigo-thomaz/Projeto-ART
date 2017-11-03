@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Text;
 
-    using ART.Domotica.Repository.Entities;
-    using ART.Infra.CrossCutting.Utils;
-    using ART.Infra.CrossCutting.Setting;
     using ART.Domotica.Constant;
+    using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.MQ;
+    using ART.Infra.CrossCutting.Setting;
+    using ART.Infra.CrossCutting.Utils;
 
     public class Seeds
     {
@@ -356,7 +356,7 @@
             if (!settingManager.Exist(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey))
             {
                 settingManager.Insert(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey, 5000);
-            }            
+            }
         }
 
         #endregion Methods

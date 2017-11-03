@@ -2,10 +2,5 @@
 {
     public interface IThermometerDeviceConsumer
     {
-        #region Methods
-
-        
-
-        #endregion Methods
     }
 }

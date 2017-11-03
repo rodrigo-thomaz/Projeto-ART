@@ -2,6 +2,7 @@
 {
     using System;
 
+    using ART.Domotica.Constant;
     using ART.Domotica.Domain;
     using ART.Domotica.Domain.AutoMapper;
     using ART.Domotica.Repository;
@@ -22,12 +23,11 @@
     using Topshelf;
     using Topshelf.Autofac;
     using Topshelf.Quartz;
-    using ART.Domotica.Constant;
 
     class Program
     {
         #region Methods
-        
+
         static void Main(string[] args)
         {
             log4net.Config.XmlConfigurator.Configure();
@@ -103,7 +103,7 @@
                     q.AddTrigger(() => TriggerBuilder.Create().WithSimpleSchedule(b =>
                     {
                         var settingManager = container.Resolve<ISettingManager>();
-                        var interval = settingManager.GetValue<int>(SettingsConstants.ChangePinIntervalInSecondsSettingsKey);                        
+                        var interval = settingManager.GetValue<int>(SettingsConstants.ChangePinIntervalInSecondsSettingsKey);
                         b.WithIntervalInSeconds(interval).RepeatForever();
                     }).Build());
                 });

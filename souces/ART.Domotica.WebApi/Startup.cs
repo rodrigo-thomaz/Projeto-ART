@@ -57,7 +57,7 @@ namespace ART.Domotica.WebApi
             builder.RegisterModule<MQModule>();
             builder.RegisterModule<ProducerModule>();
             builder.RegisterModule<ControllerModule>();
-            
+
             // Build the container
             var container = builder.Build();
 
