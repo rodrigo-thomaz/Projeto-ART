@@ -15,11 +15,6 @@ namespace ART.Domotica.Producer.Services
 {
     public class ESPDeviceProducer : ProducerBase, IESPDeviceProducer
     {
-        #region Fields
-
-
-        #endregion Fields
-
         #region constructors
 
         public ESPDeviceProducer(IConnection connection) : base(connection)
@@ -69,57 +64,23 @@ namespace ART.Domotica.Producer.Services
 
         public async Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract message)
         {
-            //var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsQueueName);
-            //rpcClient.TimeoutMilliseconds = 5000;
-            //var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
-            //rpcClient.TimedOut += (sender, e) => 
-            //{
-
-            //};
-            //rpcClient.Disconnected += (sender, e) =>
-            //{
-
-            //};
-            //var bufferResult = rpcClient.Call(body);
-            //var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsResponseContract>(bufferResult);
-
-
             return await Task.Run(() =>
             {
-                var correlationId = Guid.NewGuid().ToString();
-
-                var basicProperties = _model.CreateBasicProperties();
-
-                var replyQueueName = _model.QueueDeclare().QueueName;
-
-                basicProperties.ReplyTo = replyQueueName;
-
-                basicProperties.CorrelationId = correlationId;
-
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-
-                _model.BasicPublish(
-                    exchange: "",
-                    routingKey: ESPDeviceConstants.GetConfigurationsQueueName,
-                    basicProperties: basicProperties,
-                    body: payload);
-
-                var getConfigurationsCompletedConsumer = new EventingBasicConsumer(_model);
-                var respQueue = new BlockingCollection<ESPDeviceGetConfigurationsResponseContract>();
-
-                getConfigurationsCompletedConsumer.Received += (model, e) =>
+                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsQueueName);
+                rpcClient.TimeoutMilliseconds = 5000;
+                var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                rpcClient.TimedOut += (sender, e) =>
                 {
-                    var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsResponseContract>(e.Body);
-                    if (e.BasicProperties.CorrelationId == correlationId)
-                    {
-                        respQueue.Add(requestContract);
-                    }
+                    throw new TimeoutException("Worker time out");
                 };
-
-                _model.BasicConsume(replyQueueName, true, getConfigurationsCompletedConsumer);
-
-                return respQueue.Take();
-            });            
+                rpcClient.Disconnected += (sender, e) =>
+                {
+                    throw new Exception("Worker disconected");
+                };
+                var bufferResult = rpcClient.Call(body);
+                var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsResponseContract>(bufferResult);
+                return result;
+            });       
         }        
 
         #endregion

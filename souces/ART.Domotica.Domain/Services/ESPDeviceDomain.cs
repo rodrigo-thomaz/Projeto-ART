@@ -124,7 +124,12 @@
         public async Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract)
         {
             var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);
-            
+
+            if (data == null)
+            {
+                throw new Exception("ESP Device not found");
+            }
+
             var brokerHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.BrokerHostSettingsKey);
             var brokerPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.BrokerPortSettingsKey);
             var brokerUser = await _settingsManager.GetValueAsync<string>(SettingsConstants.BrokerUserSettingsKey);
