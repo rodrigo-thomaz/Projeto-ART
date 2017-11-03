@@ -6,7 +6,6 @@
     {
         #region Fields
 
-        protected readonly IBasicProperties _basicProperties;
         protected readonly IConnection _connection;
         protected readonly IModel _model;
 
@@ -18,7 +17,6 @@
         {
             _connection = connection;
             _model = _connection.CreateModel();
-            _basicProperties = _model.CreateBasicProperties();
         }
 
         #endregion Constructors

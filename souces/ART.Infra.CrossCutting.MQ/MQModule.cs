@@ -15,7 +15,7 @@
             // Register your Bus
             builder.Register(c =>
             {
-                var hostName = ConfigurationManager.AppSettings["RabbitMQHostName"];
+                var brokerHost = ConfigurationManager.AppSettings["RabbitMQHostName"];
                 var virtualHost = ConfigurationManager.AppSettings["RabbitMQVirtualHost"];
                 var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
                 var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
@@ -25,7 +25,7 @@
                 factory.UserName = username;
                 factory.Password = password;
                 factory.VirtualHost = virtualHost;
-                factory.HostName = hostName;
+                factory.HostName = brokerHost;
 
                 IConnection conn = factory.CreateConnection();
 

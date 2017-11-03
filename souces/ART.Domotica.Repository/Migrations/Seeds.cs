@@ -7,6 +7,8 @@
 
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Utils;
+    using ART.Infra.CrossCutting.Setting;
+    using ART.Domotica.Constant;
 
     public class Seeds
     {
@@ -304,6 +306,50 @@
             context.SaveChanges();
 
             #endregion
+
+            ExecuteSettings();
+        }
+
+        private static void ExecuteSettings()
+        {
+            ISettingManager settingManager = new SettingManager();
+
+            // ChangePinIntervalInSeconds
+            if (!settingManager.Exist(SettingsConstants.ChangePinIntervalInSecondsSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.ChangePinIntervalInSecondsSettingsKey, 10);
+            }
+
+            // BrokerHost
+            if (!settingManager.Exist(SettingsConstants.BrokerHostSettingsKey))
+            {
+                // BROKER_MQTT_FREE = "broker.hivemq.com"
+                settingManager.Insert(SettingsConstants.BrokerHostSettingsKey, "file-server");
+            }
+
+            // BrokerVirtualHost
+            if (!settingManager.Exist(SettingsConstants.BrokerVirtualHostSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.BrokerVirtualHostSettingsKey, "/");
+            }
+
+            // BrokerPort
+            if (!settingManager.Exist(SettingsConstants.BrokerPortSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.BrokerPortSettingsKey, 1883);
+            }
+
+            // BrokerUser
+            if (!settingManager.Exist(SettingsConstants.BrokerUserSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.BrokerUserSettingsKey, "test");
+            }
+
+            // BrokerPwd
+            if (!settingManager.Exist(SettingsConstants.BrokerPwdSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.BrokerPwdSettingsKey, "test");
+            }
         }
 
         #endregion Methods

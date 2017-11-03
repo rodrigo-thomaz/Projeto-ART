@@ -16,9 +16,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         });
     };
 
-    var deleteFromApplication = function (hardwaresInApplicationId) {
+    var deleteFromApplication = function (hardwareInApplicationId) {
         var data = {
-            hardwaresInApplicationId: hardwaresInApplicationId
+            hardwareInApplicationId: hardwareInApplicationId
         };
         return $http.post(serviceBase + 'api/espDevice/deleteFromApplication', data).then(function (results) {
             //alert('envio bem sucedido');

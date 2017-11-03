@@ -5,7 +5,7 @@
 
     using ART.Infra.CrossCutting.Repository;
 
-    public class HardwaresInApplication : IEntity<Guid>
+    public class HardwareInApplication : IEntity<Guid>
     {
         #region Properties
 

@@ -4,6 +4,7 @@
     {
         #region Fields
 
+        public static readonly string GetConfigurationsQueueName = "ESPDevice.GetConfigurations";
         public static readonly string DeleteFromApplicationCompletedQueueName = "ESPDevice.DeleteFromApplicationCompleted";
         public static readonly string DeleteFromApplicationQueueName = "ESPDevice.DeleteFromApplication";
         public static readonly string GetByPinCompletedQueueName = "ESPDevice.GetByPinCompleted";

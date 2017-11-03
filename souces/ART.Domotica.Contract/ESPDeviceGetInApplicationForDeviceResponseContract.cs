@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public Guid HardwaresInApplicationId
+        public Guid HardwareInApplicationId
         {
             get; set;
         }

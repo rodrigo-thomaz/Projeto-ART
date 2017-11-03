@@ -11,21 +11,21 @@
     {
         #region Methods
 
-        Task DeleteFromApplication(HardwaresInApplication entity);
+        Task DeleteFromApplication(HardwareInApplication entity);
 
         Task<HardwareBase> GetByPin(string pin);
 
-        Task<HardwaresInApplication> GetInApplicationById(Guid hardwaresInApplicationId);
+        Task<HardwareInApplication> GetInApplicationById(Guid hardwareInApplicationId);
 
-        Task<List<HardwaresInApplication>> GetListInApplication(Guid applicationUserId);
+        Task<List<HardwareInApplication>> GetListInApplication(Guid applicationUserId);
 
-        Task InsertInApplication(HardwaresInApplication entity);
+        Task InsertInApplication(HardwareInApplication entity);
 
         Task<List<string>> GetExistingPins();        
 
         Task<List<ESPDeviceBase>> GetESPDevicesNotInApplication();
 
-        Task<HardwaresInApplication> GetInApplicationForDevice(int chipId, int flashChipId, string macAddress);
+        Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 
         #endregion Methods
     }

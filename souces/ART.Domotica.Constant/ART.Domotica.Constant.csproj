@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SettingsConstants.cs" />
     <Compile Include="ThermometerDeviceConstants.cs" />
     <Compile Include="ESPDeviceConstants.cs" />
     <Compile Include="ApplicationConstants.cs" />

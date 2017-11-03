@@ -38,6 +38,9 @@ class AccessManager
 	const char							*_brokerUser;
 	const char							*_brokerPwd;
 	
+	String								_hardwareId;
+	String								_hardwareInApplicationId;
+	
 };
 
 #endif

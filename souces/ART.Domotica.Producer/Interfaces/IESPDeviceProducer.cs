@@ -17,6 +17,8 @@
 
         Task InsertInApplication(AuthenticatedMessageContract<ESPDevicePinContract> message);
 
+        Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract);
+
         #endregion Methods
     }
 }

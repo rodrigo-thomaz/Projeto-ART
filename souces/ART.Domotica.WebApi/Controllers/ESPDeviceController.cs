@@ -6,6 +6,8 @@
     using ART.Domotica.Producer.Interfaces;
     using ART.Domotica.Contract;
     using System.Web.Http.Description;
+    using ART.Domotica.Constant;
+    using ART.Infra.CrossCutting.Setting;
 
     [Authorize]
     [RoutePrefix("api/espDevice")]
@@ -13,7 +15,7 @@
     {
         #region Fields
 
-        protected readonly IESPDeviceProducer _espDeviceProducer;
+        protected readonly IESPDeviceProducer _espDeviceProducer;        
 
         #endregion Fields
 
@@ -21,7 +23,7 @@
 
         public ESPDeviceController(IESPDeviceProducer espDeviceProducer)
         {
-            _espDeviceProducer = espDeviceProducer;
+            _espDeviceProducer = espDeviceProducer;            
         }
 
         #endregion Constructors
@@ -34,7 +36,7 @@
         /// <remarks>
         /// Retornar as configurações de um ESP Device
         /// </remarks>
-        /// <param name="contract">Parâmetros da busca</param>
+        /// <param name="request">Parâmetros da busca</param>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
@@ -42,21 +44,10 @@
         [Route("getConfigurations")]
         [HttpPost]
         [AllowAnonymous]
-        [ResponseType(typeof(ESPDeviceGetConfigurationsContractResponse))]
-        public async Task<IHttpActionResult> GetConfigurations(ESPDeviceGetConfigurationsContractRequest contract)
-        {            
-            await Task.Run(() => { });
-
-            //const char* BROKER_MQTT = "broker.hivemq.com"; //URL do broker MQTT que se deseja utilizar
-
-            var result = new ESPDeviceGetConfigurationsContractResponse
-            {
-                BrokerHost = "file-server.rthomaz.local",
-                BrokerPort = 1883,
-                BrokerUser = "test",
-                BrokerPassword = "test",
-            };
-
+        [ResponseType(typeof(ESPDeviceGetConfigurationsResponseContract))]
+        public async Task<IHttpActionResult> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract)
+        {
+            var result = await _espDeviceProducer.GetConfigurations(contract);  
             return Ok(result);
         }
 

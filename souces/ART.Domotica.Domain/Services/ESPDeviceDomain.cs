@@ -14,6 +14,8 @@
     using System;
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
+    using ART.Infra.CrossCutting.Setting;
+    using ART.Domotica.Constant;
 
     public class ESPDeviceDomain : DomainBase, IESPDeviceDomain
     {
@@ -21,15 +23,17 @@
 
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
+        private readonly ISettingManager _settingsManager;
 
         #endregion Fields
 
         #region Constructors
 
-        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository)
+        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository, ISettingManager settingsManager)
         {
             _espDeviceRepository = espDeviceRepository;
             _applicationUserRepository = applicationUserRepository;
+            _settingsManager = settingsManager;
         }
 
         #endregion Constructors
@@ -39,7 +43,7 @@
         public async Task<List<ESPDeviceGetListModel>> GetListInApplication(AuthenticatedMessageContract message)
         {
             var data = await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
-            var result = Mapper.Map<List<HardwaresInApplication>, List<ESPDeviceGetListModel>>(data);
+            var result = Mapper.Map<List<HardwareInApplication>, List<ESPDeviceGetListModel>>(data);
             return result;
         }
 
@@ -73,7 +77,7 @@
                 throw new Exception("ApplicationUser not found");
             }
 
-            var hardwaresInApplicationEntity = new HardwaresInApplication
+            var hardwaresInApplicationEntity = new HardwareInApplication
             {
                 ApplicationId = applicationUserEntity.ApplicationId,
                 HardwareBaseId = hardwareEntity.Id,
@@ -86,11 +90,11 @@
 
         public async Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationContract> message)
         {
-            var hardwareEntity = await _espDeviceRepository.GetInApplicationById(message.Contract.HardwaresInApplicationId);
+            var hardwareEntity = await _espDeviceRepository.GetInApplicationById(message.Contract.HardwareInApplicationId);
 
             if (hardwareEntity == null)
             {
-                throw new Exception("HardwaresInApplication not found");
+                throw new Exception("HardwareInApplication not found");
             }
 
             await _espDeviceRepository.DeleteFromApplication(hardwareEntity);
@@ -117,10 +121,25 @@
             return result;
         }
 
-        public async Task<ESPDeviceGetInApplicationForDeviceResponseContract> GetInApplicationForDevice(ESPDeviceGetInApplicationForDeviceRequestContract contract)
+        public async Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract)
         {
-            var data = await _espDeviceRepository.GetInApplicationForDevice(contract.ChipId, contract.FlashChipId, contract.MacAddress);
-            var result = Mapper.Map<HardwaresInApplication, ESPDeviceGetInApplicationForDeviceResponseContract>(data);
+            var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);
+            
+            var brokerHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.BrokerHostSettingsKey);
+            var brokerPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.BrokerPortSettingsKey);
+            var brokerUser = await _settingsManager.GetValueAsync<string>(SettingsConstants.BrokerUserSettingsKey);
+            var brokerPwd = await _settingsManager.GetValueAsync<string>(SettingsConstants.BrokerPwdSettingsKey);
+
+            var result = new ESPDeviceGetConfigurationsResponseContract
+            {
+                BrokerHost = brokerHost,
+                BrokerPort = brokerPort,
+                BrokerUser = brokerUser,
+                BrokerPassword = brokerPwd,
+            };
+
+            Mapper.Map(data, result);
+
             return result;
         }
 

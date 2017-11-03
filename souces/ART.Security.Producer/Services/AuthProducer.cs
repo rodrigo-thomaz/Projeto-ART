@@ -42,9 +42,7 @@ namespace ART.Security.Producer.Services
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
-                , arguments: null);
-
-            _basicProperties.Persistent = true;
+                , arguments: null);            
         }
 
         #endregion

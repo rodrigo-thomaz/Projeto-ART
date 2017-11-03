@@ -40,7 +40,7 @@
             get; set;
         }
 
-        public DbSet<HardwaresInApplication> HardwaresInApplication
+        public DbSet<HardwareInApplication> HardwareInApplication
         {
             get; set;
         }
@@ -90,7 +90,7 @@
             modelBuilder.Configurations.Add(new RaspberryDeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
-            modelBuilder.Configurations.Add(new HardwaresInApplicationConfiguration());
+            modelBuilder.Configurations.Add(new HardwareInApplicationConfiguration());
             modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());

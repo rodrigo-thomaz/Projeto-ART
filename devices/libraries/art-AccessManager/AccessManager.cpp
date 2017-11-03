@@ -70,13 +70,18 @@ void AccessManager::getConfigurations()
 			
 			String payload = http.getString();
 			
-			StaticJsonBuffer<200> jsonBufferResponse;
+			StaticJsonBuffer<300> jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);
 			
 			this->_brokerHost = jsonObjectResponse["brokerHost"];
 			this->_brokerPort = jsonObjectResponse["brokerPort"];	
 			this->_brokerUser = jsonObjectResponse["brokerUser"];	
 			this->_brokerPwd = jsonObjectResponse["brokerPassword"];				
+			
+			String hardwareId = jsonObjectResponse["hardwareId"];	
+			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];				
+			this->_hardwareId = hardwareId;	
+			this->_hardwareInApplicationId = hardwareInApplicationId;				
 			
 			Serial.print("Broker Host: ");
 			Serial.println(this->_brokerHost);
@@ -86,6 +91,11 @@ void AccessManager::getConfigurations()
 			Serial.println(this->_brokerUser);
 			Serial.print("Broker Pwd: ");
 			Serial.println(this->_brokerPwd);
+			
+			Serial.print("Broker HardwareId: ");
+			Serial.println(this->_hardwareId);
+			Serial.print("Broker HardwareInApplicationId: ");
+			Serial.println(this->_hardwareInApplicationId);
 		}
 	} else {
 		Serial.print("[HTTP] GET... failed, error: ");

@@ -7,11 +7,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class HardwaresInApplicationConfiguration : EntityTypeConfiguration<HardwaresInApplication>
+    public class HardwareInApplicationConfiguration : EntityTypeConfiguration<HardwareInApplication>
     {
         #region Constructors
 
-        public HardwaresInApplicationConfiguration()
+        public HardwareInApplicationConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);

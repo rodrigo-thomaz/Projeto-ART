@@ -42,8 +42,6 @@ namespace ART.Domotica.Producer.Services
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
-
-            _basicProperties.Persistent = true;
         }
 
         #endregion

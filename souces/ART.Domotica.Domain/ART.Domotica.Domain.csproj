@@ -89,6 +89,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ART.Domotica.Constant\ART.Domotica.Constant.csproj">
+      <Project>{62947BFD-C7BA-4076-A6FF-2BEA7CFCAADB}</Project>
+      <Name>ART.Domotica.Constant</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Contract\ART.Domotica.Contract.csproj">
       <Project>{2F58031D-FF69-4BDA-9C4A-4811560918DD}</Project>
       <Name>ART.Domotica.Contract</Name>
@@ -116,6 +120,10 @@
     <ProjectReference Include="..\ART.Infra.CrossCutting.Repository\ART.Infra.CrossCutting.Repository.csproj">
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Setting\ART.Infra.CrossCutting.Setting.csproj">
+      <Project>{951AFF8D-697B-4A63-8BF0-992164A2B619}</Project>
+      <Name>ART.Infra.CrossCutting.Setting</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.Utils\ART.Infra.CrossCutting.Utils.csproj">
       <Project>{A26AA9F8-C0E9-4624-B9A8-BE76F908BFD0}</Project>

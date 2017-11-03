@@ -27,7 +27,7 @@ namespace ART.Domotica.Repository.Repositories
         {
             /////Errroooooo!!!!!
             IQueryable<DSFamilyTempSensor> query = from sensor in _context.DSFamilyTempSensor
-                        join hardApp in _context.HardwaresInApplication on sensor.Id equals hardApp.HardwareBaseId
+                        join hardApp in _context.HardwareInApplication on sensor.Id equals hardApp.HardwareBaseId
                         where hardApp.ApplicationId == applicationUserId
                         select sensor;
 

@@ -23,9 +23,9 @@
 
         #region Methods
 
-        public async Task<List<HardwaresInApplication>> GetListInApplication(Guid applicationUserId)
+        public async Task<List<HardwareInApplication>> GetListInApplication(Guid applicationUserId)
         {
-            IQueryable<HardwaresInApplication> query = from hia in _context.HardwaresInApplication
+            IQueryable<HardwareInApplication> query = from hia in _context.HardwareInApplication
                                                    join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
                                                    where au.Id == applicationUserId
                                                    select hia;
@@ -50,27 +50,27 @@
             return data;
         }
 
-        public async Task<HardwaresInApplication> GetInApplicationById(Guid hardwaresInApplicationId)
+        public async Task<HardwareInApplication> GetInApplicationById(Guid hardwareInApplicationId)
         {
-            var entity = await _context.HardwaresInApplication.FindAsync(hardwaresInApplicationId);
+            var entity = await _context.HardwareInApplication.FindAsync(hardwareInApplicationId);
             return entity;
         }
 
-        public async Task InsertInApplication(HardwaresInApplication entity)
+        public async Task InsertInApplication(HardwareInApplication entity)
         {
-            _context.HardwaresInApplication.Add(entity);
+            _context.HardwareInApplication.Add(entity);
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteFromApplication(HardwaresInApplication entity)
+        public async Task DeleteFromApplication(HardwareInApplication entity)
         {
-            _context.HardwaresInApplication.Remove(entity);
+            _context.HardwareInApplication.Remove(entity);
             await _context.SaveChangesAsync();
         }
 
         public async Task<List<string>> GetExistingPins()
         {
-            var entity = await _context.HardwaresInApplication.FirstOrDefaultAsync();
+            var entity = await _context.HardwareInApplication.FirstOrDefaultAsync();
 
             var data = await _context.ThermometerDevice
                 .Where(x => x.HardwaresInApplication.Any())
@@ -88,13 +88,13 @@
             return data;
         }
 
-        public async Task<HardwaresInApplication> GetInApplicationForDevice(int chipId, int flashChipId, string macAddress)
+        public async Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress)
         {
-            var data = await _context.HardwaresInApplication
-               .Where(x => x.HardwareBase is ESPDeviceBase)
-               .Where(x => (x.HardwareBase as ESPDeviceBase).ChipId == chipId)
-               .Where(x => (x.HardwareBase as ESPDeviceBase).FlashChipId == flashChipId)
-               .Where(x => (x.HardwareBase as ESPDeviceBase).MacAddress == macAddress)
+            var data = await _context.Set<ESPDeviceBase>()
+               .Include(x => x.HardwaresInApplication)
+               .Where(x => x.ChipId == chipId)
+               .Where(x => x.FlashChipId == flashChipId)
+               .Where(x => x.MacAddress == macAddress)               
                .SingleOrDefaultAsync();
 
             return data;

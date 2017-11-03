@@ -21,7 +21,7 @@
 
         private void Initialize()
         {
-            _basicProperties.Persistent = true;
+            
         }
 
         #endregion Methods

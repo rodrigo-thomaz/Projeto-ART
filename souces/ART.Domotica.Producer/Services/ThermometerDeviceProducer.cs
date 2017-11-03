@@ -43,8 +43,6 @@
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
-
-            _basicProperties.Persistent = true;
         }
 
         #endregion Methods
