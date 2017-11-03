@@ -163,6 +163,10 @@
       <Project>{8ca05fe6-15fe-4c6e-a10a-3360509f4f8c}</Project>
       <Name>ART.Infra.CrossCutting.Logging</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.Repository\ART.Infra.CrossCutting.Repository.csproj">
       <Project>{30cb9c47-5a6d-45d9-8667-df6d1e4807eb}</Project>
       <Name>ART.Infra.CrossCutting.Repository</Name>

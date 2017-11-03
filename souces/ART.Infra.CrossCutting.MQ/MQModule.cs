@@ -1,6 +1,5 @@
 ﻿namespace ART.Infra.CrossCutting.MQ
 {
-    using System.Configuration;
 
     using Autofac;
 
@@ -12,20 +11,23 @@
 
         protected override void Load(ContainerBuilder builder)
         {
+            builder
+                .RegisterType<MQSettings>()
+                .As<IMQSettings>()
+                .SingleInstance();
+
             // Register your Bus
             builder.Register(c =>
             {
-                var brokerHost = ConfigurationManager.AppSettings["RabbitMQHostName"];
-                var virtualHost = ConfigurationManager.AppSettings["RabbitMQVirtualHost"];
-                var username = ConfigurationManager.AppSettings["RabbitMQUsername"];
-                var password = ConfigurationManager.AppSettings["RabbitMQPassword"];
+                var settingManager = c.Resolve<IMQSettings>();
+                settingManager.Initialize();
 
                 var factory = new ConnectionFactory();
 
-                factory.UserName = username;
-                factory.Password = password;
-                factory.VirtualHost = virtualHost;
-                factory.HostName = brokerHost;
+                factory.HostName = settingManager.BrokerHost;
+                factory.VirtualHost = settingManager.BrokerVirtualHost;
+                factory.UserName = settingManager.BrokerUser;
+                factory.Password = settingManager.BrokerPwd;           
 
                 IConnection conn = factory.CreateConnection();
 

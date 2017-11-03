@@ -102,6 +102,10 @@
       <Project>{F21ECDF3-626E-4EBD-B665-D20D93AC333D}</Project>
       <Name>ART.Infra.CrossCutting.MQ.Producer</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{EB5E2271-76A2-4CF1-942E-F04FB9D1056B}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.Setting\ART.Infra.CrossCutting.Setting.csproj">
       <Project>{951AFF8D-697B-4A63-8BF0-992164A2B619}</Project>
       <Name>ART.Infra.CrossCutting.Setting</Name>

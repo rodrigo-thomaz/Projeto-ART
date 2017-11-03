@@ -9,6 +9,7 @@
     using ART.Infra.CrossCutting.Utils;
     using ART.Infra.CrossCutting.Setting;
     using ART.Domotica.Constant;
+    using ART.Infra.CrossCutting.MQ;
 
     public class Seeds
     {
@@ -321,40 +322,40 @@
             }
 
             // BrokerHost
-            if (!settingManager.Exist(SettingsConstants.BrokerHostSettingsKey))
+            if (!settingManager.Exist(MQSettingsConstants.BrokerHostSettingsKey))
             {
                 // BROKER_MQTT_FREE = "broker.hivemq.com"
-                settingManager.Insert(SettingsConstants.BrokerHostSettingsKey, "file-server");
+                settingManager.Insert(MQSettingsConstants.BrokerHostSettingsKey, "file-server");
             }
 
             // BrokerVirtualHost
-            if (!settingManager.Exist(SettingsConstants.BrokerVirtualHostSettingsKey))
+            if (!settingManager.Exist(MQSettingsConstants.BrokerVirtualHostSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.BrokerVirtualHostSettingsKey, "/");
+                settingManager.Insert(MQSettingsConstants.BrokerVirtualHostSettingsKey, "/");
             }
 
             // BrokerPort
-            if (!settingManager.Exist(SettingsConstants.BrokerPortSettingsKey))
+            if (!settingManager.Exist(MQSettingsConstants.BrokerPortSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.BrokerPortSettingsKey, 1883);
+                settingManager.Insert(MQSettingsConstants.BrokerPortSettingsKey, 1883);
             }
 
             // BrokerUser
-            if (!settingManager.Exist(SettingsConstants.BrokerUserSettingsKey))
+            if (!settingManager.Exist(MQSettingsConstants.BrokerUserSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.BrokerUserSettingsKey, "test");
+                settingManager.Insert(MQSettingsConstants.BrokerUserSettingsKey, "test");
             }
 
             // BrokerPwd
-            if (!settingManager.Exist(SettingsConstants.BrokerPwdSettingsKey))
+            if (!settingManager.Exist(MQSettingsConstants.BrokerPwdSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.BrokerPwdSettingsKey, "test");
+                settingManager.Insert(MQSettingsConstants.BrokerPwdSettingsKey, "test");
             }
 
             // RpcClientTimeOutMilliSeconds
-            if (!settingManager.Exist(SettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey))
+            if (!settingManager.Exist(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey, 5000);
+                settingManager.Insert(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey, 5000);
             }            
         }
 

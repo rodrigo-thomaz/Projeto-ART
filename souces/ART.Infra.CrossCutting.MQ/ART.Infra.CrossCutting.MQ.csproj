@@ -53,11 +53,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IMQSettings.cs" />
     <Compile Include="MQModule.cs" />
+    <Compile Include="MQSettings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MQSettingsConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Setting\ART.Infra.CrossCutting.Setting.csproj">
+      <Project>{951AFF8D-697B-4A63-8BF0-992164A2B619}</Project>
+      <Name>ART.Infra.CrossCutting.Setting</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

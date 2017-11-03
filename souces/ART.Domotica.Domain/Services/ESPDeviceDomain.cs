@@ -14,8 +14,7 @@
     using System;
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
-    using ART.Infra.CrossCutting.Setting;
-    using ART.Domotica.Constant;
+    using ART.Infra.CrossCutting.MQ;
 
     public class ESPDeviceDomain : DomainBase, IESPDeviceDomain
     {
@@ -23,17 +22,17 @@
 
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
-        private readonly ISettingManager _settingsManager;
+        private readonly IMQSettings _mqSettings;
 
         #endregion Fields
 
         #region Constructors
 
-        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository, ISettingManager settingsManager)
+        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository, IMQSettings mqSettings)
         {
             _espDeviceRepository = espDeviceRepository;
             _applicationUserRepository = applicationUserRepository;
-            _settingsManager = settingsManager;
+            _mqSettings = mqSettings;
         }
 
         #endregion Constructors
@@ -130,17 +129,12 @@
                 throw new Exception("ESP Device not found");
             }
 
-            var brokerHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.BrokerHostSettingsKey);
-            var brokerPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.BrokerPortSettingsKey);
-            var brokerUser = await _settingsManager.GetValueAsync<string>(SettingsConstants.BrokerUserSettingsKey);
-            var brokerPwd = await _settingsManager.GetValueAsync<string>(SettingsConstants.BrokerPwdSettingsKey);
-
             var result = new ESPDeviceGetConfigurationsResponseContract
             {
-                BrokerHost = brokerHost,
-                BrokerPort = brokerPort,
-                BrokerUser = brokerUser,
-                BrokerPassword = brokerPwd,
+                BrokerHost = _mqSettings.BrokerHost,
+                BrokerPort = _mqSettings.BrokerPort,
+                BrokerUser = _mqSettings.BrokerUser,
+                BrokerPassword = _mqSettings.BrokerPwd,
             };
 
             Mapper.Map(data, result);

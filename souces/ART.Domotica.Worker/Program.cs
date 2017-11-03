@@ -1,7 +1,6 @@
 ﻿namespace ART.Domotica.Worker
 {
     using System;
-    using System.Configuration;
 
     using ART.Domotica.Domain;
     using ART.Domotica.Domain.AutoMapper;
