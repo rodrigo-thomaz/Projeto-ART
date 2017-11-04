@@ -252,8 +252,14 @@ void reconnectMQTT()
 
         Serial.print("[MQQT] Pwd: ");
         Serial.println(brokerPwd);        
+
+        byte willQoS = 0;
+        const char* willTopic = "willTopic";
+        const char* willMessage = "My Will Message";
+        boolean willRetain = false;
         
-        if (MQTT.connect(clientId, brokerUser, brokerPwd)) 
+        //if (MQTT.connect(clientId, brokerUser, brokerPwd)) 
+        if (MQTT.connect(clientId, brokerUser, brokerPwd, willTopic, willQoS, willRetain, willMessage)) 
         {
             Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 
