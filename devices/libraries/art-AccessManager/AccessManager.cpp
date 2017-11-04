@@ -94,7 +94,7 @@ void AccessManager::autoInitialize()
 			
 			String payload = http.getString();
 			
-			StaticJsonBuffer<300> jsonBufferResponse;
+			StaticJsonBuffer<350> jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);
 			
 			String brokerHost = jsonObjectResponse["brokerHost"];
