@@ -48,12 +48,11 @@ void DisplayAccessManager::loop()
 			this->_displayManager->display.print("PIN ");
 			this->_displayManager->display.println(_pin);
 			this->_displayManager->display.print(this->_nextFireTimeInSeconds);
-			if(this->_nextFireTimeInSeconds > 0){
-				this->_displayManager->display.println(" segundos");
+			this->_displayManager->display.println(" s");
+			if(this->_nextFireTimeInSeconds > 0){				
 				this->_displayManager->display.println("restantes");				
 			}
 			else{
-				 this->_displayManager->display.println(" segundo");
 				 this->_displayManager->display.println("restante");
 			}
 			this->_nextFireTimeInSeconds--;	

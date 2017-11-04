@@ -318,7 +318,7 @@
             // ChangePinIntervalInSeconds
             if (!settingManager.Exist(SettingsConstants.ChangePinIntervalInSecondsSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.ChangePinIntervalInSecondsSettingsKey, 10);
+                settingManager.Insert(SettingsConstants.ChangePinIntervalInSecondsSettingsKey, 20);
             }
 
             // BrokerHost
