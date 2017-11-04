@@ -11,18 +11,26 @@ class AccessManager
 {
   public:
   
-    AccessManager(DebugManager& debugManager, String host, uint16_t port, String uri = "/");
+    AccessManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri = "/");
 		
 	void								begin();
-	const char							*getBrokerHost();
+	
+	void								autoInitialize();
+	
+	bool								initialized();
+	
+	String								getBrokerHost();
 	int									getBrokerPort();
-	const char							*getBrokerUser();
-	const char							*getBrokerPwd();
-				
+	String								getBrokerUser();
+	String								getBrokerPwd();	
+	
   private:			
 			
 	DebugManager*          				_debugManager;	
+	WiFiManager*          				_wifiManager;
 
+	bool 								_initialized = false;
+	
 	String 								_host;
 	uint16_t 							_port;
 	String 								_uri;
@@ -31,12 +39,10 @@ class AccessManager
 	int									_flashChipId;
 	String								_macAddress;
 	
-	void								getConfigurations();
-	
-	const char							*_brokerHost;
+	String								_brokerHost;
 	int									_brokerPort;
-	const char							*_brokerUser;
-	const char							*_brokerPwd;
+	String								_brokerUser;
+	String								_brokerPwd;
 	
 	String								_hardwareId;
 	String								_hardwareInApplicationId;

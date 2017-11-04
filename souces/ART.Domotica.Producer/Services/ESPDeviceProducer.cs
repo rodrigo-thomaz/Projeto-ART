@@ -81,9 +81,12 @@ namespace ART.Domotica.Producer.Services
                 };
                 rpcClient.Disconnected += (sender, e) =>
                 {
+                    rpcClient.Close();
                     throw new Exception("Worker disconected");
                 };
+
                 var bufferResult = rpcClient.Call(body);
+                rpcClient.Close();
                 var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsResponseContract>(bufferResult);
                 return result;
             });            

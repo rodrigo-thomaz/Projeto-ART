@@ -325,7 +325,7 @@
             if (!settingManager.Exist(MQSettingsConstants.BrokerHostSettingsKey))
             {
                 // BROKER_MQTT_FREE = "broker.hivemq.com"
-                settingManager.Insert(MQSettingsConstants.BrokerHostSettingsKey, "file-server");
+                settingManager.Insert(MQSettingsConstants.BrokerHostSettingsKey, "file-server.rthomaz.local");
             }
 
             // BrokerVirtualHost

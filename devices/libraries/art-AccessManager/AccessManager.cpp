@@ -1,24 +1,30 @@
 #include "AccessManager.h"
 
-AccessManager::AccessManager(DebugManager& debugManager, String host, uint16_t port, String uri)
+AccessManager::AccessManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
 { 
 	this->_debugManager = &debugManager;
+	this->_wifiManager = &wifiManager;
 	
 	this->_host = host;
 	this->_port = port;
 	this->_uri = uri;
-	
-	this->_chipId = ESP.getChipId();
-	this->_flashChipId = ESP.getFlashChipId();
-	this->_macAddress = WiFi.macAddress();
 }
 
 void AccessManager::begin()
 {	
-	this->getConfigurations();
+	this->_chipId = ESP.getChipId();
+	this->_flashChipId = ESP.getFlashChipId();
+	this->_macAddress = WiFi.macAddress();
+	
+	this->autoInitialize();
 }
 
-const char *AccessManager::getBrokerHost()
+bool AccessManager::initialized()
+{	
+	return this->_initialized;
+}
+
+String AccessManager::getBrokerHost()
 {	
 	return this->_brokerHost;
 }
@@ -28,18 +34,22 @@ int AccessManager::getBrokerPort()
 	return this->_brokerPort;
 }
 
-const char *AccessManager::getBrokerUser()
+String AccessManager::getBrokerUser()
 {	
 	return this->_brokerUser;
 }
 
-const char *AccessManager::getBrokerPwd()
+String AccessManager::getBrokerPwd()
 {	
 	return this->_brokerPwd;
 }
 
-void AccessManager::getConfigurations()
+void AccessManager::autoInitialize()
 {	
+	if(!this->_wifiManager->isConnected() || this->_initialized){
+		return;
+	}
+	
 	HTTPClient http; 
 
 	String apiUri = this->_uri + "api/espDevice/getConfigurations";
@@ -56,6 +66,10 @@ void AccessManager::getConfigurations()
 	char dataRequest[lenRequest + 1];
 	jsonObjectRequest.printTo(dataRequest, sizeof(dataRequest));
 
+	Serial.print("[AccessManager] getConfigurations request: ");
+	jsonObjectRequest.printTo(Serial);
+	Serial.println();
+	
 	// start connection and send HTTP header
 	http.addHeader("access-control-allow-credentials", "true");
 	http.addHeader("content-length", String(lenRequest));
@@ -73,16 +87,23 @@ void AccessManager::getConfigurations()
 			StaticJsonBuffer<300> jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);
 			
-			this->_brokerHost = jsonObjectResponse["brokerHost"];
-			this->_brokerPort = jsonObjectResponse["brokerPort"];	
-			this->_brokerUser = jsonObjectResponse["brokerUser"];	
-			this->_brokerPwd = jsonObjectResponse["brokerPassword"];				
+			String brokerHost = jsonObjectResponse["brokerHost"];
+			int brokerPort = jsonObjectResponse["brokerPort"];	
+			String brokerUser = jsonObjectResponse["brokerUser"];	
+			String brokerPwd = jsonObjectResponse["brokerPassword"];	
+			
+			this->_brokerHost = brokerHost;
+			this->_brokerPort = brokerPort;
+			this->_brokerUser = brokerUser;
+			this->_brokerPwd = brokerPwd;
 			
 			String hardwareId = jsonObjectResponse["hardwareId"];	
-			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];				
+			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
+			
 			this->_hardwareId = hardwareId;	
 			this->_hardwareInApplicationId = hardwareInApplicationId;				
 			
+			Serial.println("AccessManager initialized with success !");
 			Serial.print("Broker Host: ");
 			Serial.println(this->_brokerHost);
 			Serial.print("Broker Port: ");
@@ -96,10 +117,12 @@ void AccessManager::getConfigurations()
 			Serial.println(this->_hardwareId);
 			Serial.print("Broker HardwareInApplicationId: ");
 			Serial.println(this->_hardwareInApplicationId);
+			
+			this->_initialized = true;
 		}
 	} else {
 		Serial.print("[HTTP] GET... failed, error: ");
-		Serial.println(http.errorToString(httpCode).c_str());
+		Serial.println(http.errorToString(httpCode).c_str());		
 	}
   
   http.end();

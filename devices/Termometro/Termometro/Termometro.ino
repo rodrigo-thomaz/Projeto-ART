@@ -57,10 +57,10 @@ uint64_t messageTimestamp = 0;
 uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
-AccessManager accessManager(debugManager, HOST, PORT, URI);
+WiFiManager wifiManager(D5, debugManager);
+AccessManager accessManager(debugManager, wifiManager, HOST, PORT, URI);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
-WiFiManager wifiManager(D5, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 BuzzerManager buzzerManager(D7, debugManager);
 
@@ -72,6 +72,8 @@ DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, 
 
 WiFiClient espClient;
 PubSubClient MQTT(espClient);
+
+bool _mqttInitialized = false;
 
 void setup() {
 		
@@ -108,9 +110,9 @@ void setup() {
   
   wifiManager.autoConnect();
 
-  accessManager.begin();
-
   initConfiguration();
+
+  accessManager.begin();  
   
   initMQTT();
 
@@ -132,11 +134,22 @@ void initConfiguration()
 
 void initMQTT() 
 {
-    char* const brokerHost = strdup(accessManager.getBrokerHost());
-    int brokerPort = accessManager.getBrokerPort();
-    
-    MQTT.setServer(brokerHost, brokerPort);   //informa qual broker e porta deve ser conectado
-    MQTT.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega)
+    if(wifiManager.isConnected() && accessManager.initialized()){
+      char* const brokerHost = strdup(accessManager.getBrokerHost().c_str());
+      int brokerPort = accessManager.getBrokerPort();
+      
+      MQTT.setServer(brokerHost, brokerPort);   //informa qual broker e porta deve ser conectado
+      MQTT.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega) 
+
+      _mqttInitialized = true;
+
+      Serial.println("[MQQT] Initialized with success !");
+    }
+    else{
+      _mqttInitialized = false;
+
+      Serial.println("[MQQT] Not initialized");
+    }    
 }
  
 void mqtt_callback(char* topic, byte* payload, unsigned int length) 
@@ -213,11 +226,19 @@ void getInApplicationForDeviceCompleted()
 
 void reconnectMQTT() 
 {
-    if (wifiManager.isConnected() && !MQTT.connected()) 
+    if(!wifiManager.isConnected() || !accessManager.initialized()){
+      return;
+    }
+    
+    if(!_mqttInitialized){
+      initMQTT();
+    }
+    
+    if (!MQTT.connected()) 
     {
-        char* const brokerHost = strdup(accessManager.getBrokerHost());
-        char* const brokerUser = strdup(accessManager.getBrokerUser());
-        char* const brokerPwd  = strdup(accessManager.getBrokerPwd());
+        char* const brokerHost = strdup(accessManager.getBrokerHost().c_str());
+        char* const brokerUser = strdup(accessManager.getBrokerUser().c_str());
+        char* const brokerPwd  = strdup(accessManager.getBrokerPwd().c_str());
         
         Serial.print("* Tentando se conectar ao Broker MQTT: ");
         Serial.println(brokerHost);
@@ -249,6 +270,7 @@ void loop() {
   debugManager.update();      
 
   wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
+  accessManager.autoInitialize(); 
   reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
   
   if(configuration.hardwaresInApplicationId == ""){
