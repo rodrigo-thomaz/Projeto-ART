@@ -3,8 +3,8 @@
 var segurancaPresentationWebPagesUri = 'http://localhost/ART.Security.UI.Web/';
 var segurancaDistributedServicesUri = 'http://localhost/ART.Security.WebApi/';
 
-//var distributedServicesUri = 'http://localhost/ART.DistributedServices/';
-var distributedServicesUri = 'http://localhost:47039/';
+var distributedServicesUri = 'http://localhost/ART.Domotica.WebApi/';
+//var distributedServicesUri = 'http://localhost:47039/';
 
 var wsBrokerHostName = 'file-server';
 var wsBrokerPort = 15674;

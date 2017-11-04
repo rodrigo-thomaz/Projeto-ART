@@ -25,6 +25,7 @@ namespace ART.Security.WebApi
     using Owin;
 
     using RabbitMQ.Client;
+    using ART.Infra.CrossCutting.Setting;
 
     public class Startup
     {
@@ -64,6 +65,7 @@ namespace ART.Security.WebApi
 
             builder.RegisterType<AuthContext>().InstancePerDependency();
 
+            builder.RegisterModule<SettingModule>();
             builder.RegisterModule<RepositoryModule>();
             builder.RegisterModule<DomainModule>();
             builder.RegisterModule<MQModule>();
