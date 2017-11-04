@@ -239,16 +239,23 @@ void reconnectMQTT()
         char* const brokerHost = strdup(accessManager.getBrokerHost().c_str());
         char* const brokerUser = strdup(accessManager.getBrokerUser().c_str());
         char* const brokerPwd  = strdup(accessManager.getBrokerPwd().c_str());
+        char* const clientId  = strdup(accessManager.getHardwareId().c_str());
         
-        Serial.print("* Tentando se conectar ao Broker MQTT: ");
+        Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
         Serial.println(brokerHost);
 
-        Serial.print("Id: ");
-        Serial.println(String(ESP.getFlashChipId()).c_str());        
+        Serial.print("[MQQT] ClientId: ");
+        Serial.println(clientId);        
         
-        if (MQTT.connect(String(ESP.getFlashChipId()).c_str(), brokerUser, brokerPwd)) 
+        Serial.print("[MQQT] User: ");
+        Serial.println(brokerUser);        
+
+        Serial.print("[MQQT] Pwd: ");
+        Serial.println(brokerPwd);        
+        
+        if (MQTT.connect(clientId, brokerUser, brokerPwd)) 
         {
-            Serial.println("Conectado com sucesso ao broker MQTT!");
+            Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 
             MQTT.subscribe(TOPIC_SUB_UPDATE_PIN); 
             //MQTT.subscribe(TOPIC_SUB_SET_RESOLUTION); 
@@ -258,8 +265,8 @@ void reconnectMQTT()
         } 
         else 
         {
-            Serial.println("Falha ao reconectar no broker.");
-            Serial.println("Havera nova tentatica de conexao em 2s");
+            Serial.println("[MQQT] Falha ao reconectar no broker.");
+            Serial.println("[MQQT] Havera nova tentatica de conexao em 2s");
             delay(2000);
         }
     }
@@ -273,7 +280,7 @@ void loop() {
   accessManager.autoInitialize(); 
   reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
   
-  if(configuration.hardwaresInApplicationId == ""){
+  if(accessManager.getHardwareInApplicationId() == ""){
     displayAccessManager.loop();
     //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
     //getInApplicationForDevice();

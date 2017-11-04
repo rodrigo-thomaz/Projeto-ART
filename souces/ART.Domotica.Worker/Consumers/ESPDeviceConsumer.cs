@@ -237,7 +237,7 @@
             foreach (var contract in contracts)
             {
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
-                var queueName = GetQueueName(contract.FlashChipId);
+                var queueName = GetQueueName(contract.HardwareId);
                 var deviceMessage = new DeviceMessageContract<ESPDeviceUpdatePinsContract>(ESPDeviceConstants.UpdatePinQueueName, contract);
                 var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
                 var buffer = Encoding.UTF8.GetBytes(json);
@@ -245,9 +245,9 @@
             }
         }        
 
-        private string GetQueueName(int flashChipId)
+        private string GetQueueName(Guid hardwareId)
         {
-            var queueName = string.Format("mqtt-subscription-{0}qos0", flashChipId);
+            var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);
             return queueName;
         }
 
@@ -262,7 +262,7 @@
             };
             var deviceMessage = new DeviceMessageContract<ESPDeviceGetInApplicationForDeviceResponseContract>(ESPDeviceConstants.GetInApplicationForDeviceCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetQueueName(message.FlashChipId);
+            var queueName = GetQueueName(Guid.NewGuid());
             _model.BasicPublish("", queueName, null, buffer);
         }
 

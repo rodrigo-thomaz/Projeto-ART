@@ -44,6 +44,16 @@ String AccessManager::getBrokerPwd()
 	return this->_brokerPwd;
 }
 
+String AccessManager::getHardwareId()
+{	
+	return this->_hardwareId;
+}
+
+String AccessManager::getHardwareInApplicationId()
+{	
+	return this->_hardwareInApplicationId;
+}
+
 void AccessManager::autoInitialize()
 {	
 	if(!this->_wifiManager->isConnected() || this->_initialized){
@@ -101,7 +111,7 @@ void AccessManager::autoInitialize()
 			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
 			
 			this->_hardwareId = hardwareId;	
-			this->_hardwareInApplicationId = hardwareInApplicationId;				
+			this->_hardwareInApplicationId = hardwareInApplicationId == "null" ? "" : hardwareInApplicationId;				
 			
 			Serial.println("AccessManager initialized with success !");
 			Serial.print("Broker Host: ");

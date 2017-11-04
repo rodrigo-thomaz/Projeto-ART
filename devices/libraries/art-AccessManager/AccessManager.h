@@ -24,6 +24,9 @@ class AccessManager
 	String								getBrokerUser();
 	String								getBrokerPwd();	
 	
+	String								getHardwareId();	
+	String								getHardwareInApplicationId();	
+	
   private:			
 			
 	DebugManager*          				_debugManager;	
@@ -44,8 +47,8 @@ class AccessManager
 	String								_brokerUser;
 	String								_brokerPwd;
 	
-	String								_hardwareId;
-	String								_hardwareInApplicationId;
+	String								_hardwareId = "";
+	String								_hardwareInApplicationId = "";
 	
 };
 
