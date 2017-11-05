@@ -206,10 +206,10 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
       temperatureSensorManager.setLowAlarm(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_INSERT_IN_APPLICATION)){
-      Serial.println("INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT ");
+      accessManager.insertInApplication(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_DELETE_FROM_APPLICATION)){
-      Serial.println("DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE ");
+      accessManager.deleteFromApplication();      
     }
 }
 

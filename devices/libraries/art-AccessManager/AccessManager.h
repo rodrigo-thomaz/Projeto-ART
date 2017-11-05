@@ -27,6 +27,9 @@ class AccessManager
 	String								getHardwareId();	
 	String								getHardwareInApplicationId();	
 	
+	void								insertInApplication(String json);	
+	void								deleteFromApplication();	
+	
   private:			
 			
 	DebugManager*          				_debugManager;	

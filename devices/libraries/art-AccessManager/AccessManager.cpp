@@ -54,6 +54,32 @@ String AccessManager::getHardwareInApplicationId()
 	return this->_hardwareInApplicationId;
 }
 
+void AccessManager::insertInApplication(String json)
+{	
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		Serial.print("parse setHardwareInApplicationId failed: ");
+		Serial.println(json);
+		return;
+	}	
+
+	String hardwareInApplicationId = root["hardwareInApplicationId"];
+
+	Serial.print("[AccessManager] insertInApplication: ");
+	Serial.println(hardwareInApplicationId);
+	
+	this->_hardwareInApplicationId = hardwareInApplicationId;
+}
+
+void AccessManager::deleteFromApplication()
+{	
+	Serial.println("[AccessManager] deleteFromApplication");
+	this->_hardwareInApplicationId = "";
+}
+
 void AccessManager::autoInitialize()
 {	
 	if(!this->_wifiManager->isConnected() || this->_initialized){
