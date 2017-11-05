@@ -41,7 +41,7 @@ namespace ART.Domotica.Producer.Services
             });
         }        
 
-        public async Task GetByPin(AuthenticatedMessageContract<ESPDevicePinContract> message)
+        public async Task GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
             await Task.Run(() =>
             {
@@ -50,7 +50,7 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task InsertInApplication(AuthenticatedMessageContract<ESPDevicePinContract> message)
+        public async Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
         {
             await Task.Run(() =>
             {
@@ -59,7 +59,7 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationContract> message)
+        public async Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
             await Task.Run(() =>
             {

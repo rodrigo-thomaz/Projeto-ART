@@ -42,11 +42,14 @@
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorSetHighAlarmContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmContract.cs" />
-    <Compile Include="ESPDeviceDeleteFromApplicationContract.cs" />
+    <Compile Include="ESPDeviceDeleteFromApplicationResponseContract.cs" />
+    <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsResponseContract.cs" />
     <Compile Include="ESPDeviceGetInApplicationForDeviceRequestContract.cs" />
-    <Compile Include="ESPDevicePinContract.cs" />
+    <Compile Include="ESPDeviceInsertInApplicationResponseContract.cs" />
+    <Compile Include="ESPDeviceInsertInApplicationRequestContract.cs" />
+    <Compile Include="ESPDeviceGetByPinRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionContract.cs" />
     <Compile Include="ESPDeviceGetInApplicationForDeviceResponseContract.cs" />
     <Compile Include="ESPDeviceUpdatePinsContract.cs" />

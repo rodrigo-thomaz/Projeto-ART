@@ -166,7 +166,7 @@
         public async Task GetByPinReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDevicePinContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract>>(e.Body);
             var data = await _espDeviceDomain.GetByPin(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
@@ -182,11 +182,18 @@
         public async Task InsertInApplicationReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDevicePinContract>>(e.Body);
-            await _espDeviceDomain.InsertInApplication(message);            
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract>>(e.Body);
+            var data = await _espDeviceDomain.InsertInApplication(message);            
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.InsertInApplicationCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
+
+            //Enviando para o Device
+
+            var deviceMessage = new DeviceMessageContract<ESPDeviceInsertInApplicationResponseContract>(ESPDeviceConstants.InsertInApplicationQueueName, data);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var queueName = GetQueueName(data.HardwareId);
+            _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
         public void DeleteFromApplicationReceived(object sender, BasicDeliverEventArgs e)
@@ -197,11 +204,18 @@
         public async Task DeleteFromApplicationReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationContract>>(e.Body);
-            await _espDeviceDomain.DeleteFromApplication(message);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract>>(e.Body);
+            var data = await _espDeviceDomain.DeleteFromApplication(message);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
+
+            //Enviando para o Device
+
+            var deviceMessage = new DeviceMessageContract<ESPDeviceDeleteFromApplicationResponseContract>(ESPDeviceConstants.DeleteFromApplicationQueueName, data);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var queueName = GetQueueName(data.HardwareId);
+            _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
         public void GetConfigurationsReceived(object sender, BasicDeliverEventArgs e)
@@ -229,7 +243,7 @@
                 basicProperties: replyProps, 
                 body: buffer);
 
-            _model.BasicAck(e.DeliveryTag, false);
+            _model.BasicAck(e.DeliveryTag, false);            
         }
 
         public void UpdatePins(List<ESPDeviceUpdatePinsContract> contracts, double nextFireTimeInSeconds)

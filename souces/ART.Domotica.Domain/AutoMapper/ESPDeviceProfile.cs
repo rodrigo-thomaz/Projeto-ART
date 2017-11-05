@@ -32,6 +32,14 @@
             CreateMap<ESPDeviceBase, ESPDeviceGetConfigurationsResponseContract>()
                 .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Any() ? x.HardwaresInApplication.First().Id : (Guid?)null))
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
+
+            CreateMap<HardwareInApplication, ESPDeviceDeleteFromApplicationResponseContract>()
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.HardwareBaseId));
+
+            CreateMap<HardwareInApplication, ESPDeviceInsertInApplicationResponseContract>()
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.HardwareBaseId));
         }
 
         #endregion Constructors

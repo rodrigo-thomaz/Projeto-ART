@@ -45,6 +45,9 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolution"
 #define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarm"
 #define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm"
+#define TOPIC_SUB_INSERT_IN_APPLICATION "ESPDevice.InsertInApplication"
+#define TOPIC_SUB_DELETE_FROM_APPLICATION "ESPDevice.DeleteFromApplication"
+
 #define TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED   "ESPDevice.GetInApplicationForDeviceCompleted"    //tópico MQTT de envio de informações para Broker
 
 #define TOPIC_PUB_GET_IN_APPLICATION_FOR_DEVICE   "ESPDevice.GetInApplicationForDevice"    //tópico MQTT de envio de informações para Broker
@@ -201,6 +204,12 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
     }
     if(payloadTopic == String(TOPIC_SUB_SET_LOW_ALARM)){
       temperatureSensorManager.setLowAlarm(payloadContract);
+    }
+    if(payloadTopic == String(TOPIC_SUB_INSERT_IN_APPLICATION)){
+      Serial.println("INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT INSERT ");
+    }
+    if(payloadTopic == String(TOPIC_SUB_DELETE_FROM_APPLICATION)){
+      Serial.println("DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE ");
     }
 }
 

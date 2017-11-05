@@ -11,15 +11,15 @@
     {
         #region Methods
 
-        Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationContract> message);
+        Task<ESPDeviceDeleteFromApplicationResponseContract> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
 
-        Task<ESPDeviceGetByPinModel> GetByPin(AuthenticatedMessageContract<ESPDevicePinContract> message);
+        Task<ESPDeviceGetByPinModel> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
         Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract);
 
         Task<List<ESPDeviceGetListModel>> GetListInApplication(AuthenticatedMessageContract message);
 
-        Task InsertInApplication(AuthenticatedMessageContract<ESPDevicePinContract> message);
+        Task<ESPDeviceInsertInApplicationResponseContract> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
         Task<List<ESPDeviceUpdatePinsContract>> UpdatePins();
 

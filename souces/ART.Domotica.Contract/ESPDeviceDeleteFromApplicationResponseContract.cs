@@ -2,11 +2,16 @@
 {
     using System;
 
-    public class ESPDeviceDeleteFromApplicationContract
+    public class ESPDeviceDeleteFromApplicationResponseContract
     {
         #region Properties
 
         public Guid HardwareInApplicationId
+        {
+            get; set;
+        }
+
+        public Guid HardwareId
         {
             get; set;
         }

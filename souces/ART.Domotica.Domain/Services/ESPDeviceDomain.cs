@@ -46,7 +46,7 @@
             return result;
         }
 
-        public async Task<ESPDeviceGetByPinModel> GetByPin(AuthenticatedMessageContract<ESPDevicePinContract> message)
+        public async Task<ESPDeviceGetByPinModel> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
             var data = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -60,7 +60,7 @@
             return result;
         }
 
-        public async Task InsertInApplication(AuthenticatedMessageContract<ESPDevicePinContract> message)
+        public async Task<ESPDeviceInsertInApplicationResponseContract> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
         {
             var hardwareEntity = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -85,9 +85,13 @@
             };
 
             await _espDeviceRepository.InsertInApplication(hardwaresInApplicationEntity);
+
+            var result = Mapper.Map<HardwareInApplication, ESPDeviceInsertInApplicationResponseContract>(hardwaresInApplicationEntity);
+
+            return result;
         }
 
-        public async Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationContract> message)
+        public async Task<ESPDeviceDeleteFromApplicationResponseContract> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
             var hardwareEntity = await _espDeviceRepository.GetInApplicationById(message.Contract.HardwareInApplicationId);
 
@@ -97,6 +101,10 @@
             }
 
             await _espDeviceRepository.DeleteFromApplication(hardwareEntity);
+
+            var result = Mapper.Map<HardwareInApplication, ESPDeviceDeleteFromApplicationResponseContract>(hardwareEntity);
+
+            return result;
         }
 
         public async Task<List<ESPDeviceUpdatePinsContract>> UpdatePins()

@@ -61,7 +61,7 @@
         /// <response code="500">Internal Server Error</response>
         [Route("getByPin")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetByPin(ESPDevicePinContract contract)
+        public async Task<IHttpActionResult> GetByPin(ESPDeviceGetByPinRequestContract contract)
         {
             await _espDeviceProducer.GetByPin(CreateMessage(contract));
             return Ok();
@@ -79,7 +79,7 @@
         /// <response code="500">Internal Server Error</response>
         [Route("insertInApplication")]
         [HttpPost]
-        public async Task<IHttpActionResult> InsertInApplication(ESPDevicePinContract contract)
+        public async Task<IHttpActionResult> InsertInApplication(ESPDeviceInsertInApplicationRequestContract contract)
         {
             await _espDeviceProducer.InsertInApplication(CreateMessage(contract));
             return Ok();
@@ -97,7 +97,7 @@
         /// <response code="500">Internal Server Error</response>
         [Route("deleteFromApplication")]
         [HttpPost]
-        public async Task<IHttpActionResult> DeleteFromApplication(ESPDeviceDeleteFromApplicationContract contract)
+        public async Task<IHttpActionResult> DeleteFromApplication(ESPDeviceDeleteFromApplicationRequestContract contract)
         {
             await _espDeviceProducer.DeleteFromApplication(CreateMessage(contract));
             return Ok();
