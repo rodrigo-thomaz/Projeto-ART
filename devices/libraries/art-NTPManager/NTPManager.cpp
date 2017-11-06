@@ -28,7 +28,7 @@ NTPManager::NTPManager(DebugManager& debugManager, ConfigurationManager& configu
   this->_debugManager = &debugManager;
   this->_configurationManager = &configurationManager;
   
-  int timeOffset = -2; //UTC
+  int timeOffset 		= 0; //UTC
   
   this->_udp            = new WiFiUDP();  
   this->_timeOffset     = timeOffset;
