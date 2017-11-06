@@ -131,8 +131,18 @@ bool NTPManager::update() {
 }
 
 unsigned long NTPManager::getEpochTime() {	
-	return this->_timeOffset + // User offset
-         this->_currentEpoc + // Epoc returned by the NTP server
+
+	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
+  
+	int timeOffset = ntpSettings->getDisplayTimeOffset();
+	
+	return timeOffset + // User offset	
+		this->_currentEpoc + // Epoc returned by the NTP server
+        ((millis() - this->_lastUpdate) / 1000); // Time since last update
+}
+
+unsigned long NTPManager::getEpochTimeUTC() {	
+	return this->_currentEpoc + // Epoc returned by the NTP server
          ((millis() - this->_lastUpdate) / 1000); // Time since last update
 }
 

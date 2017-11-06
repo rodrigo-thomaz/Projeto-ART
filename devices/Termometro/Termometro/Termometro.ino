@@ -144,8 +144,8 @@ void initMQTT()
       char* const host = strdup(brokerSettings->getHost().c_str());
       int port = brokerSettings->getPort();
       
-      MQTT.setServer(host, port);   //informa qual broker e porta deve ser conectado
-      MQTT.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega) 
+      MQTT.setServer(host, port);           //informa qual broker e porta deve ser conectado
+      MQTT.setCallback(mqtt_callback);      //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega) 
 
       _mqttInitialized = true;
 

@@ -85,6 +85,7 @@ class NTPManager {
      * @return time in seconds since Jan. 1, 1970
      */
     unsigned long getEpochTime();
+	unsigned long getEpochTimeUTC();
 
     /**
      * Stops the underlying UDP client

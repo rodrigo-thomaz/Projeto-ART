@@ -88,7 +88,7 @@ void TemperatureSensorManager::refresh()
 {	
 	_dallas.requestTemperatures();
 
-	long epochTime = this->_ntpManager->getEpochTime();	
+	long epochTime = this->_ntpManager->getEpochTimeUTC();	
 	
 	for(int i = 0; i < this->_sensors.size(); ++i){	
 		this->_sensors[i].isConnected = _dallas.isConnected(this->_sensors[i].deviceAddress);

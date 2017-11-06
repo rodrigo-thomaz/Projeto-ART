@@ -379,7 +379,7 @@
             // NTPDisplayTimeOffset
             if (!settingManager.Exist(SettingsConstants.NTPDisplayTimeOffsetSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.NTPDisplayTimeOffsetSettingsKey, -4);
+                settingManager.Insert(SettingsConstants.NTPDisplayTimeOffsetSettingsKey, -7200); // Cada hora são 3600 segundos
             }
         }
 
