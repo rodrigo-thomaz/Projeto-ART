@@ -53,8 +53,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_PUB_GET_IN_APPLICATION_FOR_DEVICE   "ESPDevice.GetInApplicationForDevice"    //tópico MQTT de envio de informações para Broker
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
-#define MESSAGE_INTERVAL 4000
-uint64_t messageTimestamp = 0;
+uint64_t publishMessageTimestamp = 0;
 
 #define READTEMP_INTERVAL 2000
 uint64_t readTempTimestamp = 0;
@@ -337,9 +336,11 @@ void loopInApplication()
     
     displayMQTTManager.printConnected();  
     displayMQTTManager.printReceived(false);
+
+    int publishMessageInterval = configurationManager.getPublishMessageInterval();
     
-    if(now - messageTimestamp > MESSAGE_INTERVAL) {
-      messageTimestamp = now;
+    if(now - publishMessageTimestamp > publishMessageInterval) {
+      publishMessageTimestamp = now;
       displayMQTTManager.printSent(true);
       char *sensorsJson = temperatureSensorManager.getSensorsJson();
       Serial.println("enviando para o servidor => ");
