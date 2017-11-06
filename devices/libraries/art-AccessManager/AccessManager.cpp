@@ -1,5 +1,7 @@
 #include "AccessManager.h"
 
+// BrokerSettings
+
 BrokerSettings::BrokerSettings(String host, int port, String user, String pwd) {
   _host = host;
   _port = port;
@@ -26,6 +28,37 @@ String BrokerSettings::getPwd()
 {	
 	return this->_pwd;
 }
+
+// NTPSettings
+
+NTPSettings::NTPSettings(String host, int port, int updateInterval, int displayTimeOffset) {
+  _host = host;
+  _port = port;
+  _updateInterval = updateInterval;
+  _displayTimeOffset = displayTimeOffset;
+}
+
+String NTPSettings::getHost()
+{	
+	return this->_host;
+}
+
+int NTPSettings::getPort()
+{	
+	return this->_port;
+}
+
+int NTPSettings::getUpdateInterval()
+{	
+	return this->_updateInterval;
+}
+
+int NTPSettings::getDisplayTimeOffset()
+{	
+	return this->_displayTimeOffset;
+}
+
+// AccessManager
 
 AccessManager::AccessManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
 { 
@@ -58,24 +91,9 @@ BrokerSettings* AccessManager::getBrokerSettings()
 	return this->_brokerSettings;
 }
 
-String AccessManager::getNTPServerName()
+NTPSettings* AccessManager::getNTPSettings()
 {	
-	return this->_ntpServerName;
-}
-
-int AccessManager::getNTPServerPort()
-{	
-	return this->_ntpServerPort;
-}
-
-int AccessManager::getNTPUpdateInterval()
-{	
-	return this->_ntpUpdateInterval;
-}
-
-int AccessManager::getNTPDisplayTimeOffset()
-{	
-	return this->_ntpDisplayTimeOffset;
+	return this->_ntpSettings;
 }
 
 String AccessManager::getHardwareId()
@@ -164,15 +182,12 @@ void AccessManager::autoInitialize()
 			
 			this->_brokerSettings = new BrokerSettings(brokerHost, brokerPort, brokerUser, brokerPwd);
 			
-			String ntpServerName = jsonObjectResponse["ntpServerName"];
-			int ntpServerPort = jsonObjectResponse["ntpServerPort"];	
+			String ntpHost = jsonObjectResponse["ntpServerName"];
+			int ntpPort = jsonObjectResponse["ntpServerPort"];	
 			int ntpUpdateInterval = jsonObjectResponse["ntpUpdateInterval"];	
 			int ntpDisplayTimeOffset = jsonObjectResponse["ntpDisplayTimeOffset"];	
 			
-			this->_ntpServerName = ntpServerName;	
-			this->_ntpServerPort = ntpServerPort;	
-			this->_ntpUpdateInterval = ntpUpdateInterval;	
-			this->_ntpDisplayTimeOffset = ntpDisplayTimeOffset;	
+			this->_ntpSettings = new NTPSettings(ntpHost, ntpPort, ntpUpdateInterval, ntpDisplayTimeOffset);			
 			
 			String hardwareId = jsonObjectResponse["hardwareId"];	
 			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
@@ -191,14 +206,14 @@ void AccessManager::autoInitialize()
 			Serial.print("Broker Pwd: ");
 			Serial.println(this->_brokerSettings->getPwd());
 			
-			Serial.print("NTP Server Name: ");
-			Serial.println(this->_ntpServerName);
-			Serial.print("NTP Server Port: ");
-			Serial.println(this->_ntpServerPort);
+			Serial.print("NTP Host: ");
+			Serial.println(this->_ntpSettings->getHost());
+			Serial.print("NTP Port: ");
+			Serial.println(this->_ntpSettings->getPort());
 			Serial.print("NTP Update Interval: ");
-			Serial.println(this->_ntpUpdateInterval);
+			Serial.println(this->_ntpSettings->getUpdateInterval());
 			Serial.print("NTP Display Time Offset: ");
-			Serial.println(this->_ntpDisplayTimeOffset);
+			Serial.println(this->_ntpSettings->getDisplayTimeOffset());
 			
 			Serial.print("HardwareId: ");
 			Serial.println(this->_hardwareId);

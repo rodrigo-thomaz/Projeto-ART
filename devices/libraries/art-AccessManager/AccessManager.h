@@ -27,6 +27,26 @@ class BrokerSettings {
     friend class AccessManager;
 };
 
+class NTPSettings {
+  public:
+
+    NTPSettings(String host, int port, int updateInterval, int displayTimeOffset);
+
+    String								getHost();
+	int									getPort();
+	int									getUpdateInterval();
+	int									getDisplayTimeOffset();
+	
+  private:
+    
+	String								_host;
+	int									_port;
+	int									_updateInterval;
+	int									_displayTimeOffset;
+
+    friend class AccessManager;
+};
+
 class AccessManager
 {
   public:
@@ -40,11 +60,7 @@ class AccessManager
 	bool								initialized();
 	
 	BrokerSettings*						getBrokerSettings();
-	
-	String								getNTPServerName();
-	int									getNTPServerPort();
-	int									getNTPUpdateInterval();
-	int									getNTPDisplayTimeOffset();
+	NTPSettings*						getNTPSettings();
 	
 	String								getHardwareId();	
 	String								getHardwareInApplicationId();	
@@ -68,11 +84,7 @@ class AccessManager
 	String								_macAddress;
 
 	BrokerSettings*						_brokerSettings;
-	
-	String								_ntpServerName;
-	int									_ntpServerPort;
-	int									_ntpUpdateInterval;
-	int									_ntpDisplayTimeOffset;
+	NTPSettings*						_ntpSettings;
 	
 	String								_hardwareId = "";
 	String								_hardwareInApplicationId = "";
