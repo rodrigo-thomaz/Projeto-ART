@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "DebugManager.h"
-#include "AccessManager.h"
+#include "ConfigurationManager.h"
 #include "TemperatureSensorManager.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
@@ -61,7 +61,7 @@ uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
 WiFiManager wifiManager(D5, debugManager);
-AccessManager accessManager(debugManager, wifiManager, HOST, PORT, URI);
+ConfigurationManager configurationManager(debugManager, wifiManager, HOST, PORT, URI);
 NTPManager ntpManager(debugManager);
 DisplayManager displayManager(debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
@@ -115,7 +115,7 @@ void setup() {
 
   initConfiguration();
 
-  accessManager.begin();  
+  configurationManager.begin();  
   
   initMQTT();
 
@@ -137,9 +137,9 @@ void initConfiguration()
 
 void initMQTT() 
 {
-    if(wifiManager.isConnected() && accessManager.initialized()){
+    if(wifiManager.isConnected() && configurationManager.initialized()){
 
-      BrokerSettings* brokerSettings = accessManager.getBrokerSettings();
+      BrokerSettings* brokerSettings = configurationManager.getBrokerSettings();
       
       char* const host = strdup(brokerSettings->getHost().c_str());
       int port = brokerSettings->getPort();
@@ -209,10 +209,10 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
       temperatureSensorManager.setLowAlarm(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_INSERT_IN_APPLICATION)){
-      accessManager.insertInApplication(payloadContract);      
+      configurationManager.insertInApplication(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_DELETE_FROM_APPLICATION)){
-      accessManager.deleteFromApplication();      
+      configurationManager.deleteFromApplication();      
     }
 }
 
@@ -238,7 +238,7 @@ void getInApplicationForDeviceCompleted()
 
 void reconnectMQTT() 
 {
-    if(!wifiManager.isConnected() || !accessManager.initialized()){
+    if(!wifiManager.isConnected() || !configurationManager.initialized()){
       return;
     }
     
@@ -248,13 +248,13 @@ void reconnectMQTT()
     
     if (!MQTT.connected()) 
     {
-        BrokerSettings* brokerSettings = accessManager.getBrokerSettings();
+        BrokerSettings* brokerSettings = configurationManager.getBrokerSettings();
       
         char* const host = strdup(brokerSettings->getHost().c_str());
         char* const user = strdup(brokerSettings->getUser().c_str());
         char* const pwd  = strdup(brokerSettings->getPwd().c_str());
         
-        char* const clientId  = strdup(accessManager.getHardwareId().c_str());
+        char* const clientId  = strdup(configurationManager.getHardwareId().c_str());
         
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
         Serial.println(host);
@@ -298,10 +298,10 @@ void loop() {
   debugManager.update();      
 
   wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
-  accessManager.autoInitialize(); 
+  configurationManager.autoInitialize(); 
   reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
   
-  if(accessManager.getHardwareInApplicationId() == ""){
+  if(configurationManager.getHardwareInApplicationId() == ""){
     displayAccessManager.loop();
     //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
     //getInApplicationForDevice();

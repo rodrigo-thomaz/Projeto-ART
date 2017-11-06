@@ -1,5 +1,5 @@
-#ifndef AccessManager_h
-#define AccessManager_h
+#ifndef ConfigurationManager_h
+#define ConfigurationManager_h
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
@@ -24,7 +24,7 @@ class BrokerSettings {
 	String								_user;
 	String								_pwd;
 
-    friend class AccessManager;
+    friend class ConfigurationManager;
 };
 
 class NTPSettings {
@@ -44,14 +44,14 @@ class NTPSettings {
 	int									_updateInterval;
 	int									_displayTimeOffset;
 
-    friend class AccessManager;
+    friend class ConfigurationManager;
 };
 
-class AccessManager
+class ConfigurationManager
 {
   public:
   
-    AccessManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri = "/");
+    ConfigurationManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri = "/");
 		
 	void								begin();
 	

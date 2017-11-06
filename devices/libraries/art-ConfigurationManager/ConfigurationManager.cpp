@@ -1,4 +1,4 @@
-#include "AccessManager.h"
+#include "ConfigurationManager.h"
 
 // BrokerSettings
 
@@ -58,9 +58,9 @@ int NTPSettings::getDisplayTimeOffset()
 	return this->_displayTimeOffset;
 }
 
-// AccessManager
+// ConfigurationManager
 
-AccessManager::AccessManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
+ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
 { 
 	this->_debugManager = &debugManager;
 	this->_wifiManager = &wifiManager;
@@ -72,7 +72,7 @@ AccessManager::AccessManager(DebugManager& debugManager, WiFiManager& wifiManage
 	this->_brokerSettings = NULL;
 }
 
-void AccessManager::begin()
+void ConfigurationManager::begin()
 {	
 	this->_chipId = ESP.getChipId();
 	this->_flashChipId = ESP.getFlashChipId();
@@ -81,32 +81,32 @@ void AccessManager::begin()
 	this->autoInitialize();
 }
 
-bool AccessManager::initialized()
+bool ConfigurationManager::initialized()
 {	
 	return this->_initialized;
 }
 
-BrokerSettings* AccessManager::getBrokerSettings()
+BrokerSettings* ConfigurationManager::getBrokerSettings()
 {	
 	return this->_brokerSettings;
 }
 
-NTPSettings* AccessManager::getNTPSettings()
+NTPSettings* ConfigurationManager::getNTPSettings()
 {	
 	return this->_ntpSettings;
 }
 
-String AccessManager::getHardwareId()
+String ConfigurationManager::getHardwareId()
 {	
 	return this->_hardwareId;
 }
 
-String AccessManager::getHardwareInApplicationId()
+String ConfigurationManager::getHardwareInApplicationId()
 {	
 	return this->_hardwareInApplicationId;
 }
 
-void AccessManager::insertInApplication(String json)
+void ConfigurationManager::insertInApplication(String json)
 {	
 	StaticJsonBuffer<200> jsonBuffer;
 
@@ -120,19 +120,19 @@ void AccessManager::insertInApplication(String json)
 
 	String hardwareInApplicationId = root["hardwareInApplicationId"];
 
-	Serial.print("[AccessManager] insertInApplication: ");
+	Serial.print("[ConfigurationManager] insertInApplication: ");
 	Serial.println(hardwareInApplicationId);
 	
 	this->_hardwareInApplicationId = hardwareInApplicationId;
 }
 
-void AccessManager::deleteFromApplication()
+void ConfigurationManager::deleteFromApplication()
 {	
-	Serial.println("[AccessManager] deleteFromApplication");
+	Serial.println("[ConfigurationManager] deleteFromApplication");
 	this->_hardwareInApplicationId = "";
 }
 
-void AccessManager::autoInitialize()
+void ConfigurationManager::autoInitialize()
 {	
 	if(!this->_wifiManager->isConnected() || this->_initialized){
 		return;
@@ -154,7 +154,7 @@ void AccessManager::autoInitialize()
 	char dataRequest[lenRequest + 1];
 	jsonObjectRequest.printTo(dataRequest, sizeof(dataRequest));
 
-	Serial.print("[AccessManager] getConfigurations request: ");
+	Serial.print("[ConfigurationManager] getConfigurations request: ");
 	jsonObjectRequest.printTo(Serial);
 	Serial.println();
 	
@@ -173,21 +173,19 @@ void AccessManager::autoInitialize()
 			String payload = http.getString();
 			
 			StaticJsonBuffer<500> jsonBufferResponse;
-			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);
+			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);			
 			
-			String brokerHost = jsonObjectResponse["brokerHost"];
-			int brokerPort = jsonObjectResponse["brokerPort"];	
-			String brokerUser = jsonObjectResponse["brokerUser"];	
-			String brokerPwd = jsonObjectResponse["brokerPassword"];	
+			this->_brokerSettings = new BrokerSettings(
+				jsonObjectResponse["brokerHost"], 
+				jsonObjectResponse["brokerPort"], 
+				jsonObjectResponse["brokerUser"], 
+				jsonObjectResponse["brokerPassword"]);
 			
-			this->_brokerSettings = new BrokerSettings(brokerHost, brokerPort, brokerUser, brokerPwd);
-			
-			String ntpHost = jsonObjectResponse["ntpHost"];
-			int ntpPort = jsonObjectResponse["ntpPort"];	
-			int ntpUpdateInterval = jsonObjectResponse["ntpUpdateInterval"];	
-			int ntpDisplayTimeOffset = jsonObjectResponse["ntpDisplayTimeOffset"];	
-			
-			this->_ntpSettings = new NTPSettings(ntpHost, ntpPort, ntpUpdateInterval, ntpDisplayTimeOffset);			
+			this->_ntpSettings = new NTPSettings(
+				jsonObjectResponse["ntpHost"], 
+				jsonObjectResponse["ntpPort"], 
+				jsonObjectResponse["ntpUpdateInterval"], 
+				jsonObjectResponse["ntpDisplayTimeOffset"]);			
 			
 			String hardwareId = jsonObjectResponse["hardwareId"];	
 			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
@@ -195,7 +193,7 @@ void AccessManager::autoInitialize()
 			this->_hardwareId = hardwareId;	
 			this->_hardwareInApplicationId = hardwareInApplicationId == "null" ? "" : hardwareInApplicationId;				
 			
-			Serial.println("AccessManager initialized with success !");
+			Serial.println("ConfigurationManager initialized with success !");
 			
 			Serial.print("Broker Host: ");
 			Serial.println(this->_brokerSettings->getHost());
