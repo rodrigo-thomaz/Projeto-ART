@@ -31,11 +31,11 @@ String BrokerSettings::getPwd()
 
 // NTPSettings
 
-NTPSettings::NTPSettings(String host, int port, int updateInterval, int displayTimeOffset) {
+NTPSettings::NTPSettings(String host, int port, int updateInterval, int timeOffset) {
   _host = host;
   _port = port;
   _updateInterval = updateInterval;
-  _displayTimeOffset = displayTimeOffset;
+  _timeOffset = timeOffset;
 }
 
 String NTPSettings::getHost()
@@ -53,9 +53,9 @@ int NTPSettings::getUpdateInterval()
 	return this->_updateInterval;
 }
 
-int NTPSettings::getDisplayTimeOffset()
+int NTPSettings::getTimeOffset()
 {	
-	return this->_displayTimeOffset;
+	return this->_timeOffset;
 }
 
 // ConfigurationManager
@@ -185,7 +185,7 @@ void ConfigurationManager::autoInitialize()
 				jsonObjectResponse["ntpHost"], 
 				jsonObjectResponse["ntpPort"], 
 				jsonObjectResponse["ntpUpdateInterval"], 
-				jsonObjectResponse["ntpDisplayTimeOffset"]);			
+				jsonObjectResponse["ntpTimeOffset"]);			
 			
 			String hardwareId = jsonObjectResponse["hardwareId"];	
 			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
@@ -210,8 +210,8 @@ void ConfigurationManager::autoInitialize()
 			Serial.println(this->_ntpSettings->getPort());
 			Serial.print("NTP Update Interval: ");
 			Serial.println(this->_ntpSettings->getUpdateInterval());
-			Serial.print("NTP Display Time Offset: ");
-			Serial.println(this->_ntpSettings->getDisplayTimeOffset());
+			Serial.print("NTP Time Offset: ");
+			Serial.println(this->_ntpSettings->getTimeOffset());
 			
 			Serial.print("HardwareId: ");
 			Serial.println(this->_hardwareId);

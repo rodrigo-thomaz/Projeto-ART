@@ -376,10 +376,10 @@
                 settingManager.Insert(SettingsConstants.NTPUpdateIntervalSettingsKey, 60000);
             }
 
-            // NTPDisplayTimeOffset
-            if (!settingManager.Exist(SettingsConstants.NTPDisplayTimeOffsetSettingsKey))
+            // NTPTimeOffset
+            if (!settingManager.Exist(SettingsConstants.NTPTimeOffsetSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.NTPDisplayTimeOffsetSettingsKey, -7200); // Cada hora são 3600 segundos
+                settingManager.Insert(SettingsConstants.NTPTimeOffsetSettingsKey, -7200); // Cada hora são 3600 segundos
             }
         }
 

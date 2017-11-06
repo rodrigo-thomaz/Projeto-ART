@@ -126,7 +126,7 @@ unsigned long NTPManager::getEpochTime() {
 
 	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
   
-	int timeOffset = ntpSettings->getDisplayTimeOffset();
+	int timeOffset = ntpSettings->getTimeOffset();
 	
 	return timeOffset + // User offset	
 		this->_currentEpoc + // Epoc returned by the NTP server

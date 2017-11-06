@@ -42,7 +42,7 @@
 
         public int NTPUpdateInterval { get; set; }
 
-        public int NTPDisplayTimeOffset { get; set; }
+        public int NTPTimeOffset { get; set; }
 
         #endregion Properties
     }

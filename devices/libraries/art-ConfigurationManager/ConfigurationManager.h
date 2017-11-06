@@ -30,19 +30,19 @@ class BrokerSettings {
 class NTPSettings {
   public:
 
-    NTPSettings(String host, int port, int updateInterval, int displayTimeOffset);
+    NTPSettings(String host, int port, int updateInterval, int timeOffset);
 
     String								getHost();
 	int									getPort();
 	int									getUpdateInterval();
-	int									getDisplayTimeOffset();
+	int									getTimeOffset();
 	
   private:
     
 	String								_host;
 	int									_port;
 	int									_updateInterval;
-	int									_displayTimeOffset;
+	int									_timeOffset;
 
     friend class ConfigurationManager;
 };

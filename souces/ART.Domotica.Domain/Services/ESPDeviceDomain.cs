@@ -144,7 +144,7 @@
             var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
             var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
             var ntpUpdateInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPUpdateIntervalSettingsKey);
-            var ntpDisplayTimeOffset = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPDisplayTimeOffsetSettingsKey);
+            var ntpTimeOffset = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPTimeOffsetSettingsKey);
 
             var result = new ESPDeviceGetConfigurationsResponseContract
             {
@@ -155,7 +155,7 @@
                 NTPHost = ntpHost,
                 NTPPort = ntpPort,
                 NTPUpdateInterval = ntpUpdateInterval,
-                NTPDisplayTimeOffset = ntpDisplayTimeOffset,
+                NTPTimeOffset = ntpTimeOffset,
             };
 
             Mapper.Map(data, result);
