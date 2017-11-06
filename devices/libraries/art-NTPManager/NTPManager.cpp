@@ -43,16 +43,29 @@ NTPManager::NTPManager(UDP& udp, int timeOffset) {
   this->_timeOffset     = timeOffset;
 }
 
-void NTPManager::begin() {
-  this->begin(NTP_DEFAULT_LOCAL_PORT);
-}
-
-void NTPManager::begin(int port) {
-  this->_port = port;
-
-  this->_udp->begin(this->_port);
-
-  this->_udpSetup = true;
+bool NTPManager::begin() {
+	
+	if(this->_initialized){
+      return true;;
+    }
+	
+	if(!this->_configurationManager->initialized()){
+	  Serial.println("[NTP Manager] Not initialized !");
+      return false;
+    }
+	
+	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
+  
+	int port = ntpSettings->getPort();
+	
+	this->_udp->begin(port);
+	this->_udpSetup = true;
+	
+	this->_initialized = true;
+	
+	Serial.println("[NTP Manager] Initialized with success !");
+	
+	return true;
 }
 
 bool NTPManager::forceUpdate() {
@@ -89,6 +102,10 @@ bool NTPManager::forceUpdate() {
 
 bool NTPManager::update() {
 	
+	if(!this->begin()){
+      return false;
+    }
+	
 	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
   
 	int updateInterval = ntpSettings->getUpdateInterval();
@@ -98,13 +115,17 @@ bool NTPManager::update() {
 		if (!this->_udpSetup) this->begin();                        // setup the UDP client if needed
 		//notify
 		bool result = this->forceUpdate();
-		if ( _updateCallback != NULL) {	 
+		if ( _updateCallback != NULL) {	 			
+			Serial.print("[NTP Manager] UpdateCallback => update: ");
+			Serial.print(result);
+			Serial.println(", forceUpdate: true");			
 			_updateCallback(result, true);
 		}
 		return result;
 	}
-	if ( _updateCallback != NULL) {	 
-		_updateCallback(true, false);
+	if ( _updateCallback != NULL) {	 	
+		Serial.println("[NTP Manager] UpdateCallback => update: true, forceUpdate: false");	
+	_updateCallback(true, false);
 	}
 	return true;
 }

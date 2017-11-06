@@ -8,27 +8,29 @@
 
 #define SEVENZYYEARS 2208988800UL
 #define NTP_PACKET_SIZE 48
-#define NTP_DEFAULT_LOCAL_PORT 1337
 
 class NTPManager {
+  
   private:
-    UDP*          _udp;
-    bool          _udpSetup       = false;
+  
+    UDP*          						_udp;
+    bool          						_udpSetup       = false;
+						
+    int           						_timeOffset     = 0;
+						
+    unsigned long 						_currentEpoc    = 0;      // In s
+    unsigned long 						_lastUpdate     = 0;      // In ms
+						
+    byte          						_packetBuffer[NTP_PACKET_SIZE];
+						
+    void          						sendNTPPacket();
 
-    int           _port           = NTP_DEFAULT_LOCAL_PORT;
-    int           _timeOffset     = 0;
-
-    unsigned long _currentEpoc    = 0;      // In s
-    unsigned long _lastUpdate     = 0;      // In ms
-
-    byte          _packetBuffer[NTP_PACKET_SIZE];
-
-    void          sendNTPPacket();
-
-	void 		  (*_updateCallback)(bool, bool) = NULL;
+	void 		  						(*_updateCallback)(bool, bool) = NULL;
 	
-	DebugManager*          	_debugManager;
-	ConfigurationManager*  	_configurationManager;
+	bool 								_initialized = false;
+	
+	DebugManager*          				_debugManager;
+	ConfigurationManager*  				_configurationManager;
 	
   public:
   
@@ -39,13 +41,8 @@ class NTPManager {
     /**
      * Starts the underlying UDP client with the default local port
      */
-    void begin();
-
-    /**
-     * Starts the underlying UDP client with the specified local port
-     */
-    void begin(int port);
-
+    bool begin();
+	
     /**
      * This should be called in the main loop of your application. By default an update from the NTP Server is only
      * made every 60 seconds. This can be configured in the NTPManager constructor.

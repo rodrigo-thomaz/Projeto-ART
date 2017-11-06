@@ -154,7 +154,7 @@ void initMQTT()
     else{
       _mqttInitialized = false;
 
-      Serial.println("[MQQT] Not initialized");
+      Serial.println("[MQQT] Not initialized !");
     }    
 }
  
