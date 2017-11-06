@@ -26,21 +26,13 @@
 NTPManager::NTPManager(DebugManager& debugManager, ConfigurationManager& configurationManager) {
   
   this->_debugManager = &debugManager;
-  this->_configurationManager = &configurationManager;
-  
-  int timeOffset 		= 0; //UTC
+  this->_configurationManager = &configurationManager;  
   
   this->_udp            = new WiFiUDP();  
-  this->_timeOffset     = timeOffset;
 }
 
 NTPManager::NTPManager(UDP& udp) {
   this->_udp            = &udp;
-}
-
-NTPManager::NTPManager(UDP& udp, int timeOffset) {
-  this->_udp            = &udp;
-  this->_timeOffset     = timeOffset;
 }
 
 bool NTPManager::begin() {
@@ -190,14 +182,6 @@ void NTPManager::end() {
   this->_udp->stop();
 
   this->_udpSetup = false;
-}
-
-void NTPManager::setTimeOffset(int timeOffset) {
-  this->_timeOffset     = timeOffset;
-}
-
-void NTPManager::setUpdateInterval(int updateInterval) {
-  //this->_updateInterval = updateInterval;
 }
 
 void NTPManager::sendNTPPacket() {

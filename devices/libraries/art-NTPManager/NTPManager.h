@@ -16,8 +16,6 @@ class NTPManager {
     UDP*          						_udp;
     bool          						_udpSetup       = false;
 						
-    int           						_timeOffset     = 0;
-						
     unsigned long 						_currentEpoc    = 0;      // In s
     unsigned long 						_lastUpdate     = 0;      // In ms
 						
@@ -36,7 +34,6 @@ class NTPManager {
   
 	NTPManager(DebugManager& debugManager, ConfigurationManager& configurationManager);
     NTPManager(UDP& udp);
-    NTPManager(UDP& udp, int timeOffset);
 
     /**
      * Starts the underlying UDP client with the default local port
@@ -61,18 +58,7 @@ class NTPManager {
     int getDay();
     int getHours();
     int getMinutes();
-    int getSeconds();
-
-    /**
-     * Changes the time offset. Useful for changing timezones dynamically
-     */
-    void setTimeOffset(int timeOffset);
-
-    /**
-     * Set the update interval to another frequency. E.g. useful when the
-     * timeOffset should not be set in the constructor
-     */
-    void setUpdateInterval(int updateInterval);
+    int getSeconds();   
 
     /**
      * @return time formatted like `hh:mm:ss`
