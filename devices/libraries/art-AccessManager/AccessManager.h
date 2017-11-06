@@ -24,6 +24,11 @@ class AccessManager
 	String								getBrokerUser();
 	String								getBrokerPwd();	
 	
+	String								getNTPServerName();
+	int									getNTPServerPort();
+	int									getNTPUpdateInterval();
+	int									getNTPDisplayTimeOffset();
+	
 	String								getHardwareId();	
 	String								getHardwareInApplicationId();	
 	
@@ -49,6 +54,11 @@ class AccessManager
 	int									_brokerPort;
 	String								_brokerUser;
 	String								_brokerPwd;
+	
+	String								_ntpServerName;
+	int									_ntpServerPort;
+	int									_ntpUpdateInterval;
+	int									_ntpDisplayTimeOffset;
 	
 	String								_hardwareId = "";
 	String								_hardwareInApplicationId = "";

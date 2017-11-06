@@ -44,6 +44,26 @@ String AccessManager::getBrokerPwd()
 	return this->_brokerPwd;
 }
 
+String AccessManager::getNTPServerName()
+{	
+	return this->_ntpServerName;
+}
+
+int AccessManager::getNTPServerPort()
+{	
+	return this->_ntpServerPort;
+}
+
+int AccessManager::getNTPUpdateInterval()
+{	
+	return this->_ntpUpdateInterval;
+}
+
+int AccessManager::getNTPDisplayTimeOffset()
+{	
+	return this->_ntpDisplayTimeOffset;
+}
+
 String AccessManager::getHardwareId()
 {	
 	return this->_hardwareId;
@@ -120,7 +140,7 @@ void AccessManager::autoInitialize()
 			
 			String payload = http.getString();
 			
-			StaticJsonBuffer<350> jsonBufferResponse;
+			StaticJsonBuffer<500> jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);
 			
 			String brokerHost = jsonObjectResponse["brokerHost"];
@@ -133,6 +153,16 @@ void AccessManager::autoInitialize()
 			this->_brokerUser = brokerUser;
 			this->_brokerPwd = brokerPwd;
 			
+			String ntpServerName = jsonObjectResponse["ntpServerName"];
+			int ntpServerPort = jsonObjectResponse["ntpServerPort"];	
+			int ntpUpdateInterval = jsonObjectResponse["ntpUpdateInterval"];	
+			int ntpDisplayTimeOffset = jsonObjectResponse["ntpDisplayTimeOffset"];	
+			
+			this->_ntpServerName = ntpServerName;	
+			this->_ntpServerPort = ntpServerPort;	
+			this->_ntpUpdateInterval = ntpUpdateInterval;	
+			this->_ntpDisplayTimeOffset = ntpDisplayTimeOffset;	
+			
 			String hardwareId = jsonObjectResponse["hardwareId"];	
 			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
 			
@@ -140,6 +170,7 @@ void AccessManager::autoInitialize()
 			this->_hardwareInApplicationId = hardwareInApplicationId == "null" ? "" : hardwareInApplicationId;				
 			
 			Serial.println("AccessManager initialized with success !");
+			
 			Serial.print("Broker Host: ");
 			Serial.println(this->_brokerHost);
 			Serial.print("Broker Port: ");
@@ -149,9 +180,18 @@ void AccessManager::autoInitialize()
 			Serial.print("Broker Pwd: ");
 			Serial.println(this->_brokerPwd);
 			
-			Serial.print("Broker HardwareId: ");
+			Serial.print("NTP Server Name: ");
+			Serial.println(this->_ntpServerName);
+			Serial.print("NTP Server Port: ");
+			Serial.println(this->_ntpServerPort);
+			Serial.print("NTP Update Interval: ");
+			Serial.println(this->_ntpUpdateInterval);
+			Serial.print("NTP Display Time Offset: ");
+			Serial.println(this->_ntpDisplayTimeOffset);
+			
+			Serial.print("HardwareId: ");
 			Serial.println(this->_hardwareId);
-			Serial.print("Broker HardwareInApplicationId: ");
+			Serial.print("HardwareInApplicationId: ");
 			Serial.println(this->_hardwareInApplicationId);
 			
 			this->_initialized = true;

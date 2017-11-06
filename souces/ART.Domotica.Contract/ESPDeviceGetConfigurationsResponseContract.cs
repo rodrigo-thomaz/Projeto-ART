@@ -36,6 +36,14 @@
             get; set;
         }
 
+        public string NTPServerName { get; set; }
+
+        public int NTPServerPort { get; set; }
+
+        public int NTPUpdateInterval { get; set; }
+
+        public int NTPDisplayTimeOffset { get; set; }
+
         #endregion Properties
     }
 }

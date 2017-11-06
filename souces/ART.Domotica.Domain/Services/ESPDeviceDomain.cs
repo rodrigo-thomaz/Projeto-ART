@@ -15,6 +15,8 @@
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
     using ART.Infra.CrossCutting.MQ;
+    using ART.Infra.CrossCutting.Setting;
+    using ART.Domotica.Constant;
 
     public class ESPDeviceDomain : DomainBase, IESPDeviceDomain
     {
@@ -22,16 +24,18 @@
 
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
+        private readonly ISettingManager _settingsManager;
         private readonly IMQSettings _mqSettings;
 
         #endregion Fields
 
         #region Constructors
 
-        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository, IMQSettings mqSettings)
+        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository, ISettingManager settingsManager, IMQSettings mqSettings)
         {
             _espDeviceRepository = espDeviceRepository;
             _applicationUserRepository = applicationUserRepository;
+            _settingsManager = settingsManager;
             _mqSettings = mqSettings;
         }
 
@@ -130,12 +134,17 @@
 
         public async Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract)
         {
-            var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);
+            var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);            
 
             if (data == null)
             {
                 throw new Exception("ESP Device not found");
             }
+
+            var ntpServerName = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPServerNameSettingsKey);
+            var ntpServerPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPServerPortSettingsKey);
+            var ntpUpdateInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPUpdateIntervalSettingsKey);
+            var ntpDisplayTimeOffset = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPDisplayTimeOffsetSettingsKey);
 
             var result = new ESPDeviceGetConfigurationsResponseContract
             {
@@ -143,6 +152,10 @@
                 BrokerPort = _mqSettings.BrokerPort,
                 BrokerUser = _mqSettings.BrokerUser,
                 BrokerPassword = _mqSettings.BrokerPwd,
+                NTPServerName = ntpServerName,
+                NTPServerPort = ntpServerPort,
+                NTPUpdateInterval = ntpUpdateInterval,
+                NTPDisplayTimeOffset = ntpDisplayTimeOffset,
             };
 
             Mapper.Map(data, result);
