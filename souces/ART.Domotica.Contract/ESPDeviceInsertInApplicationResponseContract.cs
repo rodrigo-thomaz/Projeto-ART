@@ -1,17 +1,17 @@
-﻿using System;
-
-namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Contract
 {
+    using System;
+
     public class ESPDeviceInsertInApplicationResponseContract
     {
         #region Properties
 
-        public Guid HardwareInApplicationId
+        public Guid HardwareId
         {
             get; set;
         }
 
-        public Guid HardwareId
+        public Guid HardwareInApplicationId
         {
             get; set;
         }

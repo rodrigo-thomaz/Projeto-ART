@@ -65,6 +65,8 @@ class ConfigurationManager
 	String								getHardwareId();	
 	String								getHardwareInApplicationId();	
 	
+	int									getPublishMessageInterval();	
+	
 	void								insertInApplication(String json);	
 	void								deleteFromApplication();	
 	
@@ -86,8 +88,10 @@ class ConfigurationManager
 	BrokerSettings*						_brokerSettings;
 	NTPSettings*						_ntpSettings;
 	
-	String								_hardwareId = "";
-	String								_hardwareInApplicationId = "";
+	String								_hardwareId;
+	String								_hardwareInApplicationId;
+	
+	int									_publishMessageInterval;
 	
 };
 

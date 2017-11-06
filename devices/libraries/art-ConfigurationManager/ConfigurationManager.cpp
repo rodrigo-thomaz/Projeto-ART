@@ -106,6 +106,11 @@ String ConfigurationManager::getHardwareInApplicationId()
 	return this->_hardwareInApplicationId;
 }
 
+int ConfigurationManager::getPublishMessageInterval()
+{	
+	return this->_publishMessageInterval;
+}
+
 void ConfigurationManager::insertInApplication(String json)
 {	
 	StaticJsonBuffer<200> jsonBuffer;
@@ -172,7 +177,7 @@ void ConfigurationManager::autoInitialize()
 			
 			String payload = http.getString();
 			
-			StaticJsonBuffer<500> jsonBufferResponse;
+			StaticJsonBuffer<550> jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);			
 			
 			this->_brokerSettings = new BrokerSettings(
@@ -188,10 +193,13 @@ void ConfigurationManager::autoInitialize()
 				jsonObjectResponse["ntpTimeOffset"]);			
 			
 			String hardwareId = jsonObjectResponse["hardwareId"];	
-			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
-			
 			this->_hardwareId = hardwareId;	
+			
+			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
 			this->_hardwareInApplicationId = hardwareInApplicationId == "null" ? "" : hardwareInApplicationId;				
+			
+			int publishMessageInterval = jsonObjectResponse["publishMessageInterval"];	
+			this->_publishMessageInterval = publishMessageInterval;
 			
 			Serial.println("ConfigurationManager initialized with success !");
 			
@@ -217,6 +225,9 @@ void ConfigurationManager::autoInitialize()
 			Serial.println(this->_hardwareId);
 			Serial.print("HardwareInApplicationId: ");
 			Serial.println(this->_hardwareInApplicationId);
+			
+			Serial.print("PublishMessageInterval: ");
+			Serial.println(this->_publishMessageInterval);
 			
 			this->_initialized = true;
 		}

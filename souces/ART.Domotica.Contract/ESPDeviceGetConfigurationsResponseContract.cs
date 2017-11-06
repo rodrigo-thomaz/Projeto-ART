@@ -36,13 +36,30 @@
             get; set;
         }
 
-        public string NTPHost { get; set; }
+        public string NTPHost
+        {
+            get; set;
+        }
 
-        public int NTPPort { get; set; }
+        public int NTPPort
+        {
+            get; set;
+        }
 
-        public int NTPUpdateInterval { get; set; }
+        public int NTPTimeOffset
+        {
+            get; set;
+        }
 
-        public int NTPTimeOffset { get; set; }
+        public int NTPUpdateInterval
+        {
+            get; set;
+        }
+
+        public int PublishMessageInterval
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

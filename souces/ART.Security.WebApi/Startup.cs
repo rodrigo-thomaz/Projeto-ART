@@ -7,6 +7,7 @@ namespace ART.Security.WebApi
     using System.Web.Http;
 
     using ART.Infra.CrossCutting.MQ;
+    using ART.Infra.CrossCutting.Setting;
     using ART.Security.Domain;
     using ART.Security.Producer;
     using ART.Security.Repository;
@@ -25,7 +26,6 @@ namespace ART.Security.WebApi
     using Owin;
 
     using RabbitMQ.Client;
-    using ART.Infra.CrossCutting.Setting;
 
     public class Startup
     {

@@ -146,6 +146,8 @@
             var ntpUpdateInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPUpdateIntervalSettingsKey);
             var ntpTimeOffset = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPTimeOffsetSettingsKey);
 
+            var publishMessageInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.PublishMessageIntervalSettingsKey);
+
             var result = new ESPDeviceGetConfigurationsResponseContract
             {
                 BrokerHost = _mqSettings.BrokerHost,
@@ -156,6 +158,7 @@
                 NTPPort = ntpPort,
                 NTPUpdateInterval = ntpUpdateInterval,
                 NTPTimeOffset = ntpTimeOffset,
+                PublishMessageInterval = publishMessageInterval,
             };
 
             Mapper.Map(data, result);

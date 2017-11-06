@@ -381,6 +381,12 @@
             {
                 settingManager.Insert(SettingsConstants.NTPTimeOffsetSettingsKey, -7200); // Cada hora são 3600 segundos
             }
+
+            // PublishMessageInterval
+            if (!settingManager.Exist(SettingsConstants.PublishMessageIntervalSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
+            }
         }
 
         #endregion Methods
