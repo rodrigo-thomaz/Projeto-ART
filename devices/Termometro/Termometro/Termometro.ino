@@ -138,10 +138,13 @@ void initConfiguration()
 void initMQTT() 
 {
     if(wifiManager.isConnected() && accessManager.initialized()){
-      char* const brokerHost = strdup(accessManager.getBrokerHost().c_str());
-      int brokerPort = accessManager.getBrokerPort();
+
+      BrokerSettings* brokerSettings = accessManager.getBrokerSettings();
       
-      MQTT.setServer(brokerHost, brokerPort);   //informa qual broker e porta deve ser conectado
+      char* const host = strdup(brokerSettings->getHost().c_str());
+      int port = brokerSettings->getPort();
+      
+      MQTT.setServer(host, port);   //informa qual broker e porta deve ser conectado
       MQTT.setCallback(mqtt_callback);            //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega) 
 
       _mqttInitialized = true;
@@ -245,22 +248,25 @@ void reconnectMQTT()
     
     if (!MQTT.connected()) 
     {
-        char* const brokerHost = strdup(accessManager.getBrokerHost().c_str());
-        char* const brokerUser = strdup(accessManager.getBrokerUser().c_str());
-        char* const brokerPwd  = strdup(accessManager.getBrokerPwd().c_str());
+        BrokerSettings* brokerSettings = accessManager.getBrokerSettings();
+      
+        char* const host = strdup(brokerSettings->getHost().c_str());
+        char* const user = strdup(brokerSettings->getUser().c_str());
+        char* const pwd  = strdup(brokerSettings->getPwd().c_str());
+        
         char* const clientId  = strdup(accessManager.getHardwareId().c_str());
         
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
-        Serial.println(brokerHost);
+        Serial.println(host);
 
         Serial.print("[MQQT] ClientId: ");
         Serial.println(clientId);        
         
         Serial.print("[MQQT] User: ");
-        Serial.println(brokerUser);        
+        Serial.println(user);        
 
         Serial.print("[MQQT] Pwd: ");
-        Serial.println(brokerPwd);        
+        Serial.println(pwd);        
 
         byte willQoS = 0;
         const char* willTopic = "willTopic";
@@ -268,7 +274,7 @@ void reconnectMQTT()
         boolean willRetain = false;
         
         //if (MQTT.connect(clientId, brokerUser, brokerPwd)) 
-        if (MQTT.connect(clientId, brokerUser, brokerPwd, willTopic, willQoS, willRetain, willMessage)) 
+        if (MQTT.connect(clientId, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
         {
             Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 

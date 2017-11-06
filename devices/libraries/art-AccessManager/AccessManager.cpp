@@ -1,5 +1,32 @@
 #include "AccessManager.h"
 
+BrokerSettings::BrokerSettings(String host, int port, String user, String pwd) {
+  _host = host;
+  _port = port;
+  _user = user;
+  _pwd = pwd;
+}
+
+String BrokerSettings::getHost()
+{	
+	return this->_host;
+}
+
+int BrokerSettings::getPort()
+{	
+	return this->_port;
+}
+
+String BrokerSettings::getUser()
+{	
+	return this->_user;
+}
+
+String BrokerSettings::getPwd()
+{	
+	return this->_pwd;
+}
+
 AccessManager::AccessManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
 { 
 	this->_debugManager = &debugManager;
@@ -8,6 +35,8 @@ AccessManager::AccessManager(DebugManager& debugManager, WiFiManager& wifiManage
 	this->_host = host;
 	this->_port = port;
 	this->_uri = uri;
+	
+	this->_brokerSettings = NULL;
 }
 
 void AccessManager::begin()
@@ -24,24 +53,9 @@ bool AccessManager::initialized()
 	return this->_initialized;
 }
 
-String AccessManager::getBrokerHost()
+BrokerSettings* AccessManager::getBrokerSettings()
 {	
-	return this->_brokerHost;
-}
-
-int AccessManager::getBrokerPort()
-{	
-	return this->_brokerPort;
-}
-
-String AccessManager::getBrokerUser()
-{	
-	return this->_brokerUser;
-}
-
-String AccessManager::getBrokerPwd()
-{	
-	return this->_brokerPwd;
+	return this->_brokerSettings;
 }
 
 String AccessManager::getNTPServerName()
@@ -148,10 +162,7 @@ void AccessManager::autoInitialize()
 			String brokerUser = jsonObjectResponse["brokerUser"];	
 			String brokerPwd = jsonObjectResponse["brokerPassword"];	
 			
-			this->_brokerHost = brokerHost;
-			this->_brokerPort = brokerPort;
-			this->_brokerUser = brokerUser;
-			this->_brokerPwd = brokerPwd;
+			this->_brokerSettings = new BrokerSettings(brokerHost, brokerPort, brokerUser, brokerPwd);
 			
 			String ntpServerName = jsonObjectResponse["ntpServerName"];
 			int ntpServerPort = jsonObjectResponse["ntpServerPort"];	
@@ -172,13 +183,13 @@ void AccessManager::autoInitialize()
 			Serial.println("AccessManager initialized with success !");
 			
 			Serial.print("Broker Host: ");
-			Serial.println(this->_brokerHost);
+			Serial.println(this->_brokerSettings->getHost());
 			Serial.print("Broker Port: ");
-			Serial.println(this->_brokerPort);
+			Serial.println(this->_brokerSettings->getPort());
 			Serial.print("Broker User: ");
-			Serial.println(this->_brokerUser);
+			Serial.println(this->_brokerSettings->getUser());
 			Serial.print("Broker Pwd: ");
-			Serial.println(this->_brokerPwd);
+			Serial.println(this->_brokerSettings->getPwd());
 			
 			Serial.print("NTP Server Name: ");
 			Serial.println(this->_ntpServerName);

@@ -7,6 +7,26 @@
 #include "WiFiManager.h"
 #include "ESP8266HTTPClient.h"
 
+class BrokerSettings {
+  public:
+
+    BrokerSettings(String host, int port, String user, String pwd);
+
+    String								getHost();
+	int									getPort();
+	String								getUser();
+	String								getPwd();	
+	
+  private:
+    
+	String								_host;
+	int									_port;
+	String								_user;
+	String								_pwd;
+
+    friend class AccessManager;
+};
+
 class AccessManager
 {
   public:
@@ -19,10 +39,7 @@ class AccessManager
 	
 	bool								initialized();
 	
-	String								getBrokerHost();
-	int									getBrokerPort();
-	String								getBrokerUser();
-	String								getBrokerPwd();	
+	BrokerSettings*						getBrokerSettings();
 	
 	String								getNTPServerName();
 	int									getNTPServerPort();
@@ -49,11 +66,8 @@ class AccessManager
 	int									_chipId;
 	int									_flashChipId;
 	String								_macAddress;
-	
-	String								_brokerHost;
-	int									_brokerPort;
-	String								_brokerUser;
-	String								_brokerPwd;
+
+	BrokerSettings*						_brokerSettings;
 	
 	String								_ntpServerName;
 	int									_ntpServerPort;
