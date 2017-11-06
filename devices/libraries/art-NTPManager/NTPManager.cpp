@@ -28,11 +28,9 @@ NTPManager::NTPManager(DebugManager& debugManager, ConfigurationManager& configu
   this->_debugManager = &debugManager;
   this->_configurationManager = &configurationManager;
   
-  int updateInterval = 15000;
   int timeOffset = -2; //UTC
   
   this->_udp            = new WiFiUDP();  
-  this->_updateInterval = updateInterval;
   this->_timeOffset     = timeOffset;
 }
 
@@ -43,12 +41,6 @@ NTPManager::NTPManager(UDP& udp) {
 NTPManager::NTPManager(UDP& udp, int timeOffset) {
   this->_udp            = &udp;
   this->_timeOffset     = timeOffset;
-}
-
-NTPManager::NTPManager(UDP& udp, int timeOffset, int updateInterval) {
-  this->_udp            = &udp;
-  this->_timeOffset     = timeOffset;
-  this->_updateInterval = updateInterval;
 }
 
 void NTPManager::begin() {
@@ -96,24 +88,29 @@ bool NTPManager::forceUpdate() {
 }
 
 bool NTPManager::update() {
-  if ((millis() - this->_lastUpdate >= this->_updateInterval)     // Update after _updateInterval
-    || this->_lastUpdate == 0) {                                // Update if there was no update yet.
-    if (!this->_udpSetup) this->begin();                         // setup the UDP client if needed
-	//notify
-	bool result = this->forceUpdate();
-	if ( _updateCallback != NULL) {	 
-		_updateCallback(result, true);
+	
+	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
+  
+	int updateInterval = ntpSettings->getUpdateInterval();
+  
+	if ((millis() - this->_lastUpdate >= updateInterval)     		// Update after _updateInterval
+		|| this->_lastUpdate == 0) {                                // Update if there was no update yet.
+		if (!this->_udpSetup) this->begin();                        // setup the UDP client if needed
+		//notify
+		bool result = this->forceUpdate();
+		if ( _updateCallback != NULL) {	 
+			_updateCallback(result, true);
+		}
+		return result;
 	}
-    return result;
-  }
-  if ( _updateCallback != NULL) {	 
-    _updateCallback(true, false);
-  }
-  return true;
+	if ( _updateCallback != NULL) {	 
+		_updateCallback(true, false);
+	}
+	return true;
 }
 
-unsigned long NTPManager::getEpochTime() {
-  return this->_timeOffset + // User offset
+unsigned long NTPManager::getEpochTime() {	
+	return this->_timeOffset + // User offset
          this->_currentEpoc + // Epoc returned by the NTP server
          ((millis() - this->_lastUpdate) / 1000); // Time since last update
 }
@@ -169,7 +166,7 @@ void NTPManager::setTimeOffset(int timeOffset) {
 }
 
 void NTPManager::setUpdateInterval(int updateInterval) {
-  this->_updateInterval = updateInterval;
+  //this->_updateInterval = updateInterval;
 }
 
 void NTPManager::sendNTPPacket() {

@@ -18,8 +18,6 @@ class NTPManager {
     int           _port           = NTP_DEFAULT_LOCAL_PORT;
     int           _timeOffset     = 0;
 
-    unsigned int  _updateInterval = 60000;  // In ms
-
     unsigned long _currentEpoc    = 0;      // In s
     unsigned long _lastUpdate     = 0;      // In ms
 
@@ -37,7 +35,6 @@ class NTPManager {
 	NTPManager(DebugManager& debugManager, ConfigurationManager& configurationManager);
     NTPManager(UDP& udp);
     NTPManager(UDP& udp, int timeOffset);
-    NTPManager(UDP& udp, int timeOffset, int updateInterval);
 
     /**
      * Starts the underlying UDP client with the default local port
