@@ -141,8 +141,8 @@
                 throw new Exception("ESP Device not found");
             }
 
-            var ntpServerName = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPServerNameSettingsKey);
-            var ntpServerPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPServerPortSettingsKey);
+            var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
+            var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
             var ntpUpdateInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPUpdateIntervalSettingsKey);
             var ntpDisplayTimeOffset = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPDisplayTimeOffsetSettingsKey);
 
@@ -152,8 +152,8 @@
                 BrokerPort = _mqSettings.BrokerPort,
                 BrokerUser = _mqSettings.BrokerUser,
                 BrokerPassword = _mqSettings.BrokerPwd,
-                NTPServerName = ntpServerName,
-                NTPServerPort = ntpServerPort,
+                NTPHost = ntpHost,
+                NTPPort = ntpPort,
                 NTPUpdateInterval = ntpUpdateInterval,
                 NTPDisplayTimeOffset = ntpDisplayTimeOffset,
             };

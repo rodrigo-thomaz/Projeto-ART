@@ -36,9 +36,9 @@
             get; set;
         }
 
-        public string NTPServerName { get; set; }
+        public string NTPHost { get; set; }
 
-        public int NTPServerPort { get; set; }
+        public int NTPPort { get; set; }
 
         public int NTPUpdateInterval { get; set; }
 

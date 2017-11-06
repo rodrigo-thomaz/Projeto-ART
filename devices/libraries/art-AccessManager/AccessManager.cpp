@@ -182,8 +182,8 @@ void AccessManager::autoInitialize()
 			
 			this->_brokerSettings = new BrokerSettings(brokerHost, brokerPort, brokerUser, brokerPwd);
 			
-			String ntpHost = jsonObjectResponse["ntpServerName"];
-			int ntpPort = jsonObjectResponse["ntpServerPort"];	
+			String ntpHost = jsonObjectResponse["ntpHost"];
+			int ntpPort = jsonObjectResponse["ntpPort"];	
 			int ntpUpdateInterval = jsonObjectResponse["ntpUpdateInterval"];	
 			int ntpDisplayTimeOffset = jsonObjectResponse["ntpDisplayTimeOffset"];	
 			

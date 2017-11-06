@@ -358,16 +358,16 @@
                 settingManager.Insert(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey, 5000);
             }
 
-            // NTPServerName
-            if (!settingManager.Exist(SettingsConstants.NTPServerNameSettingsKey))
+            // NTPHost
+            if (!settingManager.Exist(SettingsConstants.NTPHostSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.NTPServerNameSettingsKey, "pdc-server.rthomaz.local");
+                settingManager.Insert(SettingsConstants.NTPHostSettingsKey, "pdc-server.rthomaz.local");
             }
 
-            // NTPServerPort
-            if (!settingManager.Exist(SettingsConstants.NTPServerPortSettingsKey))
+            // NTPPort
+            if (!settingManager.Exist(SettingsConstants.NTPPortSettingsKey))
             {
-                settingManager.Insert(SettingsConstants.NTPServerPortSettingsKey, 1337);
+                settingManager.Insert(SettingsConstants.NTPPortSettingsKey, 1337);
             }
 
             // NTPUpdateInterval
