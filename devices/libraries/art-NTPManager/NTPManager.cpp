@@ -32,7 +32,6 @@ NTPManager::NTPManager(DebugManager& debugManager, ConfigurationManager& configu
   int timeOffset = -2; //UTC
   
   this->_udp            = new WiFiUDP();  
-  this->_poolServerName = "pdc-server.rthomaz.local";
   this->_updateInterval = updateInterval;
   this->_timeOffset     = timeOffset;
 }
@@ -46,21 +45,9 @@ NTPManager::NTPManager(UDP& udp, int timeOffset) {
   this->_timeOffset     = timeOffset;
 }
 
-NTPManager::NTPManager(UDP& udp, const char* poolServerName) {
-  this->_udp            = &udp;
-  this->_poolServerName = poolServerName;
-}
-
-NTPManager::NTPManager(UDP& udp, const char* poolServerName, int timeOffset) {
+NTPManager::NTPManager(UDP& udp, int timeOffset, int updateInterval) {
   this->_udp            = &udp;
   this->_timeOffset     = timeOffset;
-  this->_poolServerName = poolServerName;
-}
-
-NTPManager::NTPManager(UDP& udp, const char* poolServerName, int timeOffset, int updateInterval) {
-  this->_udp            = &udp;
-  this->_timeOffset     = timeOffset;
-  this->_poolServerName = poolServerName;
   this->_updateInterval = updateInterval;
 }
 
@@ -202,7 +189,12 @@ void NTPManager::sendNTPPacket() {
 
   // all NTP fields have been given values, now
   // you can send a packet requesting a timestamp:
-  this->_udp->beginPacket(this->_poolServerName, 123); //NTP requests are to port 123
+  
+  NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
+  
+  char* const host = strdup(ntpSettings->getHost().c_str());
+  
+  this->_udp->beginPacket(host, 123); //NTP requests are to port 123
   this->_udp->write(this->_packetBuffer, NTP_PACKET_SIZE);
   this->_udp->endPacket();
 }

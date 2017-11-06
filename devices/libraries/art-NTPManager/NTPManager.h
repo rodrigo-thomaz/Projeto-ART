@@ -15,7 +15,6 @@ class NTPManager {
     UDP*          _udp;
     bool          _udpSetup       = false;
 
-    const char*   _poolServerName = "time.nist.gov"; // Default time server
     int           _port           = NTP_DEFAULT_LOCAL_PORT;
     int           _timeOffset     = 0;
 
@@ -38,9 +37,7 @@ class NTPManager {
 	NTPManager(DebugManager& debugManager, ConfigurationManager& configurationManager);
     NTPManager(UDP& udp);
     NTPManager(UDP& udp, int timeOffset);
-    NTPManager(UDP& udp, const char* poolServerName);
-    NTPManager(UDP& udp, const char* poolServerName, int timeOffset);
-    NTPManager(UDP& udp, const char* poolServerName, int timeOffset, int updateInterval);
+    NTPManager(UDP& udp, int timeOffset, int updateInterval);
 
     /**
      * Starts the underlying UDP client with the default local port
