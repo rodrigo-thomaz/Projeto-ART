@@ -190,7 +190,7 @@ void ConfigurationManager::autoInitialize()
 				jsonObjectResponse["ntpHost"], 
 				jsonObjectResponse["ntpPort"], 
 				jsonObjectResponse["ntpUpdateInterval"], 
-				jsonObjectResponse["ntpTimeOffset"]);			
+				jsonObjectResponse["timeOffset"]);			
 			
 			String hardwareId = jsonObjectResponse["hardwareId"];	
 			this->_hardwareId = hardwareId;	

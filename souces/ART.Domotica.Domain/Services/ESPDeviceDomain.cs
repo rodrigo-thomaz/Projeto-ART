@@ -144,7 +144,6 @@
             var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
             var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
             var ntpUpdateInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPUpdateIntervalSettingsKey);
-            var ntpTimeOffset = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPTimeOffsetSettingsKey);
 
             var publishMessageInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.PublishMessageIntervalSettingsKey);
 
@@ -157,7 +156,6 @@
                 NTPHost = ntpHost,
                 NTPPort = ntpPort,
                 NTPUpdateInterval = ntpUpdateInterval,
-                NTPTimeOffset = ntpTimeOffset,
                 PublishMessageInterval = publishMessageInterval,
             };
 

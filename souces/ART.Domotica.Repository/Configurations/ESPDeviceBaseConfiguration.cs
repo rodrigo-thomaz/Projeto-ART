@@ -59,6 +59,11 @@
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+
+            //TimeOffset
+            Property(x => x.TimeOffset)
+                .HasColumnOrder(5)
+                .IsRequired();
         }
 
         #endregion Constructors

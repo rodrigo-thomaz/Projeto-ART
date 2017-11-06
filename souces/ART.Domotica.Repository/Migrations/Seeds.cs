@@ -248,6 +248,7 @@
                     FlashChipId = 1458400,
                     MacAddress = thermometerDevice1MacAddress,
                     Pin = RandonHelper.RandomString(4),
+                    TimeOffset = -7200, // Cada hora são 3600 segundos
                     CreateDate = DateTime.Now,
                 };
                 context.ThermometerDevice.Add(thermometerDevice1);
@@ -256,6 +257,7 @@
             {
                 thermometerDevice1.ChipId = 1540901;
                 thermometerDevice1.FlashChipId = 1458400;
+                thermometerDevice1.TimeOffset = -7200; // Cada hora são 3600 segundos
             }
 
             context.SaveChanges();
@@ -374,12 +376,6 @@
             if (!settingManager.Exist(SettingsConstants.NTPUpdateIntervalSettingsKey))
             {
                 settingManager.Insert(SettingsConstants.NTPUpdateIntervalSettingsKey, 60000);
-            }
-
-            // NTPTimeOffset
-            if (!settingManager.Exist(SettingsConstants.NTPTimeOffsetSettingsKey))
-            {
-                settingManager.Insert(SettingsConstants.NTPTimeOffsetSettingsKey, -7200); // Cada hora são 3600 segundos
             }
 
             // PublishMessageInterval

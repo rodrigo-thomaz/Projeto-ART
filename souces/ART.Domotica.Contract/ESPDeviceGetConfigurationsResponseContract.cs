@@ -46,7 +46,7 @@
             get; set;
         }
 
-        public int NTPTimeOffset
+        public int TimeOffset
         {
             get; set;
         }

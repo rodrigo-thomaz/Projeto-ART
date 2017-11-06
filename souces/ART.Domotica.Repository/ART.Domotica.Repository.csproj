@@ -138,6 +138,10 @@
     <Compile Include="Migrations\201711021949152_AddChipIdField3.Designer.cs">
       <DependentUpon>201711021949152_AddChipIdField3.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711061712442_AddFieldTimeOffset.cs" />
+    <Compile Include="Migrations\201711061712442_AddFieldTimeOffset.Designer.cs">
+      <DependentUpon>201711061712442_AddFieldTimeOffset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -210,6 +214,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711021949152_AddChipIdField3.resx">
       <DependentUpon>201711021949152_AddChipIdField3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061712442_AddFieldTimeOffset.resx">
+      <DependentUpon>201711061712442_AddFieldTimeOffset.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
