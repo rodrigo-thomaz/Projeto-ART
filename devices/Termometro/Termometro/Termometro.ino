@@ -62,7 +62,7 @@ uint64_t readTempTimestamp = 0;
 DebugManager debugManager(D6);
 WiFiManager wifiManager(D5, debugManager);
 ConfigurationManager configurationManager(debugManager, wifiManager, HOST, PORT, URI);
-NTPManager ntpManager(debugManager);
+NTPManager ntpManager(debugManager, configurationManager);
 DisplayManager displayManager(debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 BuzzerManager buzzerManager(D7, debugManager);

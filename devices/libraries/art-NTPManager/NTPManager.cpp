@@ -23,9 +23,10 @@
 #include "WiFiUdp.h"
 #include "DebugManager.h"
 
-NTPManager::NTPManager(DebugManager& debugManager) {
+NTPManager::NTPManager(DebugManager& debugManager, ConfigurationManager& configurationManager) {
   
   this->_debugManager = &debugManager;
+  this->_configurationManager = &configurationManager;
   
   int updateInterval = 15000;
   int timeOffset = -2; //UTC

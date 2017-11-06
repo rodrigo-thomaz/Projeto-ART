@@ -2,6 +2,7 @@
 
 #include "Arduino.h"
 #include "DebugManager.h"
+#include "ConfigurationManager.h"
 
 #include <Udp.h>
 
@@ -30,9 +31,11 @@ class NTPManager {
 	void 		  (*_updateCallback)(bool, bool) = NULL;
 	
 	DebugManager*          	_debugManager;
+	ConfigurationManager*  	_configurationManager;
 	
   public:
-	NTPManager(DebugManager& debugManager);
+  
+	NTPManager(DebugManager& debugManager, ConfigurationManager& configurationManager);
     NTPManager(UDP& udp);
     NTPManager(UDP& udp, int timeOffset);
     NTPManager(UDP& udp, const char* poolServerName);
