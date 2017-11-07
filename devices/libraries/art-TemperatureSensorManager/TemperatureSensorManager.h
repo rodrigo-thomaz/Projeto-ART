@@ -2,28 +2,73 @@
 #define TemperatureSensorManager_h
 
 #include "Arduino.h"
-#include <vector>
+#include "vector"
 #include "ArduinoJson.h"
 #include "DebugManager.h"
 #include "NTPManager.h"
+#include "OneWire.h"
+#include "DallasTemperature.h"
+
 
 class TemperatureSensor
 {
+	
   public:
-    TemperatureSensor();	
-	String dsFamilyTempSensorId;
-	byte deviceAddress[8];
-	String deviceAddressStr;
-	bool validFamily;
-	String family;
-	bool isConnected;	
-	int resolution;
-	float tempCelsius;
-	float tempFahrenheit;
-	bool hasAlarm;	
-	char lowAlarm;
-	char highAlarm;
-	long epochTime;
+  
+	TemperatureSensor(String dsFamilyTempSensorId, const uint8_t* deviceAddress, String deviceAddressStr, bool validFamily, String family);
+
+    String								getDSFamilyTempSensorId();		
+	
+	const uint8_t*						getDeviceAddress();		
+	
+	String								getDeviceAddressStr();
+	
+	bool								getValidFamily();
+	
+	String								getFamily();
+		
+	bool 								getConnected();	
+	void 								setConnected(bool value);	
+	
+	int 								getResolution();
+	void 								setResolution(int value);
+	
+	float 								getTempCelsius();
+	void 								setTempCelsius(float value);
+	
+	float 								getTempFahrenheit();
+	void 								setTempFahrenheit(float value);
+	
+	bool 								getHasAlarm();	
+	void 								setHasAlarm(bool value);	
+	
+	char 								getLowAlarm();
+	void 								setLowAlarm(char value);
+	
+	char 								getHighAlarm();
+	void 								setHighAlarm(char value);
+	
+	long 								getEpochTime();
+	void 								setEpochTime(long value);
+	
+  private:
+  
+	String 								_dsFamilyTempSensorId;
+	const uint8_t* 						_deviceAddress;
+	String 								_deviceAddressStr;
+	bool 								_validFamily;
+	String 								_family;
+	bool 								_connected;	
+	int 								_resolution;
+	float 								_tempCelsius;
+	float 								_tempFahrenheit;
+	bool 								_hasAlarm;	
+	char 								_lowAlarm;
+	char 								_highAlarm;
+	long 								_epochTime;
+	
+	friend class TemperatureSensorManager;
+	
 };
 
 class TemperatureSensorManager
