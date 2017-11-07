@@ -8,7 +8,8 @@
 #include "WiFiManager.h"
 #include "PubSubClient.h"
 
-#define MQTTMANAGER_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
+#define MQTTMANAGER_SUB_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
+#define MQTTMANAGER_CONNECTED_CALLBACK_SIGNATURE std::function<void(PubSubClient*)>
 
 class MQQTManager
 {
@@ -18,7 +19,10 @@ class MQQTManager
 	
 	bool												begin();
 	
-	MQQTManager& 										setCallback(MQTTMANAGER_CALLBACK_SIGNATURE callback);
+	MQQTManager& 										setSubCallback(MQTTMANAGER_SUB_CALLBACK_SIGNATURE callback);
+	MQQTManager& 										setConnectedCallback(MQTTMANAGER_CONNECTED_CALLBACK_SIGNATURE callback);
+	
+	void												autoConnect();	
 	
 	PubSubClient*										getMQQT();
 	
@@ -33,10 +37,12 @@ class MQQTManager
 	WiFiClient	 										_espClient;
 	PubSubClient* 										_mqqt;
 	
-	MQTTMANAGER_CALLBACK_SIGNATURE						_callback;
-	MQTTMANAGER_CALLBACK_SIGNATURE						_onCallback;
+	MQTTMANAGER_SUB_CALLBACK_SIGNATURE					_subCallback;
+	MQTTMANAGER_SUB_CALLBACK_SIGNATURE					_onSubCallback;
 	
-	void												onCallback(char* topic, byte* payload, unsigned int length);
+	MQTTMANAGER_CONNECTED_CALLBACK_SIGNATURE			_connectedCallback;
+	
+	void												onSubCallback(char* topic, byte* payload, unsigned int length);
 	
 	void teste1();
 	
