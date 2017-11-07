@@ -22,7 +22,7 @@ class MQQTManager
 	MQQTManager& 										setSubCallback(MQTTMANAGER_SUB_CALLBACK_SIGNATURE callback);
 	MQQTManager& 										setConnectedCallback(MQTTMANAGER_CONNECTED_CALLBACK_SIGNATURE callback);
 	
-	void												autoConnect();	
+	bool												autoConnect();	
 	
 	PubSubClient*										getMQQT();
 	

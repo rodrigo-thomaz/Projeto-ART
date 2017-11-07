@@ -40,19 +40,22 @@ bool MQQTManager::begin()
     }    	
 }
 
-void MQQTManager::autoConnect()
+bool MQQTManager::autoConnect()
 { 
 	if(!this->_wifiManager->isConnected() || !this->_configurationManager->initialized()){
-      return;
+      return false;
     }
     
-    if(!this->_begin){
-      return;
+    if(!this->begin()){
+      return false;
     }
     
-    if (!this->_mqqt->connected()) 
-    {
-        BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();
+    if (this->_mqqt->connected()) {
+        return true;
+    }
+	else {
+		
+		BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();
         HardwareSettings* hardwareSettings = this->_configurationManager->getHardwareSettings();
       
         char* const host = strdup(brokerSettings->getHost().c_str());
@@ -86,14 +89,18 @@ void MQQTManager::autoConnect()
             if (this->_connectedCallback) {
 				this->_connectedCallback(this->_mqqt);
 			}     
+			
+			return true;
         } 
         else 
         {
             Serial.println("[MQQT] Falha ao reconectar no broker.");
             Serial.println("[MQQT] Havera nova tentatica de conexao em 2s");
             delay(2000);
+			
+			return false;
         }
-    }
+	}
 }
 
 MQQTManager& MQQTManager::setSubCallback(MQTTMANAGER_SUB_CALLBACK_SIGNATURE callback) {
