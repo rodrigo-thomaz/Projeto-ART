@@ -24,8 +24,6 @@ class MQQTManager
 	
 	bool												autoConnect();	
 	
-	void												loop();	
-	
 	PubSubClient*										getMQQT();
 	
   private:			

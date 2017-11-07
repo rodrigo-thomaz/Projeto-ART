@@ -71,11 +71,6 @@ DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, temperatureSensorManager, debugManager);
 
-WiFiClient espClient;
-PubSubClient MQTT(espClient);
-
-bool _mqttInitialized = false;
-
 void setup() {
 		
 	Serial.begin(9600);
@@ -114,8 +109,10 @@ void setup() {
   initConfiguration();
 
   configurationManager.begin();  
-  
-  initMQTT();
+
+  mqqtManager.setConnectedCallback(mqtt_ConnectedCallback);
+  mqqtManager.setSubCallback(mqtt_SubCallback);  
+  mqqtManager.begin();
 
   ntpManager.begin();  
 }
@@ -133,30 +130,16 @@ void initConfiguration()
   EEPROM_readAnything(0, configuration);
 }
 
-void initMQTT() 
+void mqtt_ConnectedCallback(PubSubClient* mqqt)
 {
-    if(wifiManager.isConnected() && configurationManager.initialized()){
-
-      BrokerSettings* brokerSettings = configurationManager.getBrokerSettings();
-      
-      char* const host = strdup(brokerSettings->getHost().c_str());
-      int port = brokerSettings->getPort();
-      
-      MQTT.setServer(host, port);           //informa qual broker e porta deve ser conectado
-      MQTT.setCallback(mqtt_callback);      //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega) 
-
-      _mqttInitialized = true;
-
-      Serial.println("[MQQT] Initialized with success !");
-    }
-    else{
-      _mqttInitialized = false;
-
-      Serial.println("[MQQT] Not initialized !");
-    }    
+  mqqt->subscribe(TOPIC_SUB_UPDATE_PIN); 
+  //mqqt.subscribe(TOPIC_SUB_SET_RESOLUTION); 
+  //mqqt.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
+  //mqqt.subscribe(TOPIC_SUB_SET_LOW_ALARM);    
+  //mqqt.subscribe(TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED);            
 }
- 
-void mqtt_callback(char* topic, byte* payload, unsigned int length) 
+
+void mqtt_SubCallback(char* topic, byte* payload, unsigned int length) 
 {
     displayMQTTManager.printReceived(true);
     
@@ -229,70 +212,17 @@ void getInApplicationForDevice()
   root.printTo(result, sizeof(result));
   Serial.print("[MQQT] ");
   Serial.println("TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE");
-  MQTT.publish(TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE, result);    
+
+  PubSubClient* mqqt = mqqtManager.getMQQT();
+ 
+  if(mqqt->connected()){
+    mqqt->publish(TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE, result);    
+  }  
 }
 
 void getInApplicationForDeviceCompleted()
 {
   Serial.println("******************** TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED ******************** !!!!!!!!!!!!!!!!!!!!!!!!!");
-}
-
-void reconnectMQTT() 
-{
-    if(!wifiManager.isConnected() || !configurationManager.initialized()){
-      return;
-    }
-    
-    if(!_mqttInitialized){
-      initMQTT();
-    }
-    
-    if (!MQTT.connected()) 
-    {
-        BrokerSettings* brokerSettings = configurationManager.getBrokerSettings();
-        HardwareSettings* hardwareSettings = configurationManager.getHardwareSettings();
-      
-        char* const host = strdup(brokerSettings->getHost().c_str());
-        char* const user = strdup(brokerSettings->getUser().c_str());
-        char* const pwd  = strdup(brokerSettings->getPwd().c_str());
-        
-        char* const clientId  = strdup(hardwareSettings->getHardwareId().c_str());
-        
-        Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
-        Serial.println(host);
-
-        Serial.print("[MQQT] ClientId: ");
-        Serial.println(clientId);        
-        
-        Serial.print("[MQQT] User: ");
-        Serial.println(user);        
-
-        Serial.print("[MQQT] Pwd: ");
-        Serial.println(pwd);        
-
-        byte willQoS = 0;
-        const char* willTopic = "willTopic";
-        const char* willMessage = "My Will Message";
-        boolean willRetain = false;
-        
-        //if (MQTT.connect(clientId, brokerUser, brokerPwd)) 
-        if (MQTT.connect(clientId, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
-        {
-            Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
-
-            MQTT.subscribe(TOPIC_SUB_UPDATE_PIN); 
-            //MQTT.subscribe(TOPIC_SUB_SET_RESOLUTION); 
-            //MQTT.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
-            //MQTT.subscribe(TOPIC_SUB_SET_LOW_ALARM);    
-            //MQTT.subscribe(TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED);                
-        } 
-        else 
-        {
-            Serial.println("[MQQT] Falha ao reconectar no broker.");
-            Serial.println("[MQQT] Havera nova tentatica de conexao em 2s");
-            delay(2000);
-        }
-    }
 }
 
 void loop() {	  
@@ -301,7 +231,7 @@ void loop() {
 
   wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
   configurationManager.autoInitialize(); 
-  reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
+  mqqtManager.autoConnect(); //se não há conexão com o Broker, a conexão é refeita
 
   HardwareSettings* hardwareSettings = configurationManager.getHardwareSettings();
   
@@ -314,7 +244,7 @@ void loop() {
   }  
     
   //keep-alive da comunicação com broker MQTT
-  MQTT.loop();  
+  mqqtManager.getMQQT()->loop();  
   
 }
 
@@ -339,7 +269,9 @@ void loopInApplication()
   }
   
   // MQTT
-  if(MQTT.connected()){
+  PubSubClient* mqqt = mqqtManager.getMQQT();
+  
+  if(mqqt->connected()){
     
     displayMQTTManager.printConnected();  
     displayMQTTManager.printReceived(false);
@@ -352,7 +284,7 @@ void loopInApplication()
       char *sensorsJson = temperatureSensorManager.getSensorsJson();
       Serial.println("enviando para o servidor => ");
       //Serial.println(sensorsJson); // está estourando erro aqui
-      MQTT.publish(TOPIC_PUB_TEMP, sensorsJson);            
+      mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);            
     } 
     else {
       displayMQTTManager.printSent(false);
