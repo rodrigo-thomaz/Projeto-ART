@@ -1,4 +1,3 @@
-#include "Arduino.h"
 #include "DebugManager.h"
 #include "ConfigurationManager.h"
 #include "TemperatureSensorManager.h"
@@ -12,8 +11,6 @@
 #include "DisplayMQTTManager.h"
 #include "DisplayNTPManager.h"
 #include "DisplayTemperatureSensorManager.h"
-#include "WiFiClient.h"
-#include "ArduinoJson.h"
 #include "EEPROMManager.h"
 #include "MQQTManager.h"
 
