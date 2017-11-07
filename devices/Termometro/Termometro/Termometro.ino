@@ -2,6 +2,7 @@
 #include "DebugManager.h"
 #include "ConfigurationManager.h"
 #include "TemperatureSensorManager.h"
+#include "TemperatureScaleManager.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
 #include "WiFiManager.h"
@@ -11,10 +12,10 @@
 #include "DisplayMQTTManager.h"
 #include "DisplayNTPManager.h"
 #include "DisplayTemperatureSensorManager.h"
-#include "PubSubClient.h"
 #include "WiFiClient.h"
 #include "ArduinoJson.h"
 #include "EEPROMManager.h"
+#include "MQQTManager.h"
 
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
@@ -62,8 +63,10 @@ WiFiManager wifiManager(D5, debugManager);
 ConfigurationManager configurationManager(debugManager, wifiManager, HOST, PORT, URI);
 NTPManager ntpManager(debugManager, configurationManager);
 DisplayManager displayManager(debugManager);
-TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 BuzzerManager buzzerManager(D7, debugManager);
+TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
+TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager);
+MQQTManager mqqtManager(debugManager, configurationManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
@@ -216,11 +219,9 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
 
 void getInApplicationForDevice()
 {
-  HardwareSettings* hardwareSettings = configurationManager.getHardwareSettings();
+  if(!configurationManager.initialized()) return;
   
-  if(hardwareSettings == NULL) return;
-  
-  String hardwareInApplicationId = hardwareSettings->getHardwareInApplicationId();      
+  String hardwareInApplicationId = configurationManager.getHardwareSettings()->getHardwareInApplicationId();      
   
   StaticJsonBuffer<100> JSONbuffer;
   JsonObject& root = JSONbuffer.createObject();
