@@ -66,7 +66,7 @@ DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
 TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager);
-MQQTManager mqqtManager(debugManager, configurationManager);
+MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
@@ -335,6 +335,7 @@ void loopInApplication()
     temperatureSensorManager.refresh();
 
     getInApplicationForDevice();
+    mqqtManager.begin();
   }  
   else{
     displayTemperatureSensorManager.printUpdate(false);
