@@ -103,6 +103,11 @@ bool MQQTManager::autoConnect()
 	}
 }
 
+void MQQTManager::loop()
+{ 
+	this->_mqqt->loop();    
+}
+
 MQQTManager& MQQTManager::setSubCallback(MQTTMANAGER_SUB_CALLBACK_SIGNATURE callback) {
     this->_subCallback = callback;
     return *this;
