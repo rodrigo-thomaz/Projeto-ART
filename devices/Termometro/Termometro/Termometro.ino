@@ -47,10 +47,9 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm"
 #define TOPIC_SUB_INSERT_IN_APPLICATION "ESPDevice.InsertInApplication"
 #define TOPIC_SUB_DELETE_FROM_APPLICATION "ESPDevice.DeleteFromApplication"
+#define TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED   "TemperatureScale.GetAllCompleted"    //tópico MQTT de envio de informações para Broker
 
-#define TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED   "ESPDevice.GetInApplicationForDeviceCompleted"    //tópico MQTT de envio de informações para Broker
-
-#define TOPIC_PUB_GET_IN_APPLICATION_FOR_DEVICE   "ESPDevice.GetInApplicationForDevice"    //tópico MQTT de envio de informações para Broker
+#define TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE   "TemperatureScale.GetAllForDevice"    //tópico MQTT de envio de informações para Broker
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
 uint64_t publishMessageTimestamp = 0;
@@ -195,7 +194,7 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TOPIC_SUB_UPDATE_PIN)){
       displayAccessManager.updatePin(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED)){
+    if(payloadTopic == String(TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED)){
       getInApplicationForDeviceCompleted();      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
@@ -208,26 +207,31 @@ void mqtt_callback(char* topic, byte* payload, unsigned int length)
       temperatureSensorManager.setLowAlarm(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_INSERT_IN_APPLICATION)){
-      configurationManager.insertInApplication(payloadContract);      
+      configurationManager.getHardwareSettings()->insertInApplication(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_DELETE_FROM_APPLICATION)){
-      configurationManager.deleteFromApplication();      
+      configurationManager.getHardwareSettings()->deleteFromApplication();      
     }
 }
 
 void getInApplicationForDevice()
 {
-  StaticJsonBuffer<200> JSONbuffer;
+  HardwareSettings* hardwareSettings = configurationManager.getHardwareSettings();
+  
+  if(hardwareSettings == NULL) return;
+  
+  String hardwareInApplicationId = hardwareSettings->getHardwareInApplicationId();      
+  
+  StaticJsonBuffer<100> JSONbuffer;
   JsonObject& root = JSONbuffer.createObject();
-  root["chipId"] = ESP.getChipId();
-  root["flashChipId"] = ESP.getFlashChipId();
-  root["macAddress"] = WiFi.macAddress();
+  root["hardwareInApplicationId"] = hardwareInApplicationId;
   
   int len = root.measureLength();
-  char result[len + 1];
+  char result[len + 1]; 
   root.printTo(result, sizeof(result));
-  
-  MQTT.publish(TOPIC_PUB_GET_IN_APPLICATION_FOR_DEVICE, result);    
+  Serial.print("[MQQT] ");
+  Serial.println("TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE");
+  MQTT.publish(TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE, result);    
 }
 
 void getInApplicationForDeviceCompleted()
@@ -248,12 +252,13 @@ void reconnectMQTT()
     if (!MQTT.connected()) 
     {
         BrokerSettings* brokerSettings = configurationManager.getBrokerSettings();
+        HardwareSettings* hardwareSettings = configurationManager.getHardwareSettings();
       
         char* const host = strdup(brokerSettings->getHost().c_str());
         char* const user = strdup(brokerSettings->getUser().c_str());
         char* const pwd  = strdup(brokerSettings->getPwd().c_str());
         
-        char* const clientId  = strdup(configurationManager.getHardwareId().c_str());
+        char* const clientId  = strdup(hardwareSettings->getHardwareId().c_str());
         
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
         Serial.println(host);
@@ -299,11 +304,12 @@ void loop() {
   wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
   configurationManager.autoInitialize(); 
   reconnectMQTT(); //se não há conexão com o Broker, a conexão é refeita
+
+  HardwareSettings* hardwareSettings = configurationManager.getHardwareSettings();
   
-  if(configurationManager.getHardwareInApplicationId() == ""){
+  if(hardwareSettings != NULL && hardwareSettings->getHardwareInApplicationId() == ""){
     displayAccessManager.loop();
     //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
-    //getInApplicationForDevice();
   }    
   else{
     loopInApplication();  
@@ -326,6 +332,8 @@ void loopInApplication()
     readTempTimestamp = now;
     displayTemperatureSensorManager.printUpdate(true);
     temperatureSensorManager.refresh();
+
+    getInApplicationForDevice();
   }  
   else{
     displayTemperatureSensorManager.printUpdate(false);

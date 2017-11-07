@@ -58,6 +58,49 @@ int NTPSettings::getTimeOffset()
 	return this->_timeOffset;
 }
 
+// HardwareSettings
+
+HardwareSettings::HardwareSettings(String hardwareId, String hardwareInApplicationId) {	
+  _hardwareId = hardwareId;
+  _hardwareInApplicationId = hardwareInApplicationId == "null" ? "" : hardwareInApplicationId;				
+}
+
+String HardwareSettings::getHardwareId()
+{	
+	return this->_hardwareId;
+}
+
+String HardwareSettings::getHardwareInApplicationId()
+{	
+	return this->_hardwareInApplicationId;
+}
+
+void HardwareSettings::insertInApplication(String json)
+{	
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		Serial.print("parse setHardwareInApplicationId failed: ");
+		Serial.println(json);
+		return;
+	}	
+
+	String hardwareInApplicationId = root["hardwareInApplicationId"];
+
+	Serial.print("[ConfigurationManager.HardwareSettings] insertInApplication: ");
+	Serial.println(hardwareInApplicationId);
+	
+	this->_hardwareInApplicationId = hardwareInApplicationId;
+}
+
+void HardwareSettings::deleteFromApplication()
+{	
+	Serial.println("[ConfigurationManager.HardwareSettings] deleteFromApplication");
+	this->_hardwareInApplicationId = "";
+}
+
 // ConfigurationManager
 
 ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
@@ -70,6 +113,8 @@ ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManag
 	this->_uri = uri;
 	
 	this->_brokerSettings = NULL;
+	this->_ntpSettings = NULL;
+	this->_hardwareSettings = NULL;
 }
 
 void ConfigurationManager::begin()
@@ -96,45 +141,14 @@ NTPSettings* ConfigurationManager::getNTPSettings()
 	return this->_ntpSettings;
 }
 
-String ConfigurationManager::getHardwareId()
+HardwareSettings* ConfigurationManager::getHardwareSettings()
 {	
-	return this->_hardwareId;
-}
-
-String ConfigurationManager::getHardwareInApplicationId()
-{	
-	return this->_hardwareInApplicationId;
+	return this->_hardwareSettings;
 }
 
 int ConfigurationManager::getPublishMessageInterval()
 {	
 	return this->_publishMessageInterval;
-}
-
-void ConfigurationManager::insertInApplication(String json)
-{	
-	StaticJsonBuffer<200> jsonBuffer;
-
-	JsonObject& root = jsonBuffer.parseObject(json);
-	
-	if (!root.success()) {
-		Serial.print("parse setHardwareInApplicationId failed: ");
-		Serial.println(json);
-		return;
-	}	
-
-	String hardwareInApplicationId = root["hardwareInApplicationId"];
-
-	Serial.print("[ConfigurationManager] insertInApplication: ");
-	Serial.println(hardwareInApplicationId);
-	
-	this->_hardwareInApplicationId = hardwareInApplicationId;
-}
-
-void ConfigurationManager::deleteFromApplication()
-{	
-	Serial.println("[ConfigurationManager] deleteFromApplication");
-	this->_hardwareInApplicationId = "";
 }
 
 void ConfigurationManager::autoInitialize()
@@ -192,11 +206,9 @@ void ConfigurationManager::autoInitialize()
 				jsonObjectResponse["ntpUpdateInterval"], 
 				jsonObjectResponse["timeOffset"]);			
 			
-			String hardwareId = jsonObjectResponse["hardwareId"];	
-			this->_hardwareId = hardwareId;	
-			
-			String hardwareInApplicationId = jsonObjectResponse["hardwareInApplicationId"];	
-			this->_hardwareInApplicationId = hardwareInApplicationId == "null" ? "" : hardwareInApplicationId;				
+			this->_hardwareSettings = new HardwareSettings(
+				jsonObjectResponse["hardwareId"], 
+				jsonObjectResponse["hardwareInApplicationId"]);					
 			
 			int publishMessageInterval = jsonObjectResponse["publishMessageInterval"];	
 			this->_publishMessageInterval = publishMessageInterval;
@@ -222,9 +234,9 @@ void ConfigurationManager::autoInitialize()
 			Serial.println(this->_ntpSettings->getTimeOffset());
 			
 			Serial.print("HardwareId: ");
-			Serial.println(this->_hardwareId);
+			Serial.println(this->_hardwareSettings->getHardwareId());
 			Serial.print("HardwareInApplicationId: ");
-			Serial.println(this->_hardwareInApplicationId);
+			Serial.println(this->_hardwareSettings->getHardwareInApplicationId());
 			
 			Serial.print("PublishMessageInterval: ");
 			Serial.println(this->_publishMessageInterval);

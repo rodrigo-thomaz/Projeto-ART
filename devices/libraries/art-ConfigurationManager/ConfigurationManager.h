@@ -47,6 +47,25 @@ class NTPSettings {
     friend class ConfigurationManager;
 };
 
+class HardwareSettings {
+  public:
+
+    HardwareSettings(String hardwareId, String hardwareInApplicationId);
+
+    String								getHardwareId();	
+	String								getHardwareInApplicationId();	
+	
+	void								insertInApplication(String json);	
+	void								deleteFromApplication();	
+	
+  private:
+    
+	String								_hardwareId;
+	String								_hardwareInApplicationId;
+
+    friend class ConfigurationManager;
+};
+
 class ConfigurationManager
 {
   public:
@@ -61,14 +80,9 @@ class ConfigurationManager
 	
 	BrokerSettings*						getBrokerSettings();
 	NTPSettings*						getNTPSettings();
+	HardwareSettings*					getHardwareSettings();
 	
-	String								getHardwareId();	
-	String								getHardwareInApplicationId();	
-	
-	int									getPublishMessageInterval();	
-	
-	void								insertInApplication(String json);	
-	void								deleteFromApplication();	
+	int									getPublishMessageInterval();		
 	
   private:			
 			
@@ -86,10 +100,8 @@ class ConfigurationManager
 	String								_macAddress;
 
 	BrokerSettings*						_brokerSettings;
-	NTPSettings*						_ntpSettings;
-	
-	String								_hardwareId;
-	String								_hardwareInApplicationId;
+	NTPSettings*						_ntpSettings;	
+	HardwareSettings*					_hardwareSettings;	
 	
 	int									_publishMessageInterval;
 	

@@ -7,6 +7,11 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Worker.IConsumers;
+using System;
+using ART.Domotica.Worker.Contracts;
+using ART.Domotica.Model;
+using System.Collections.Generic;
+using ART.Domotica.Contract;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -15,6 +20,7 @@ namespace ART.Domotica.Worker.Consumers
         #region private fields
 
         private readonly EventingBasicConsumer _getAllConsumer;
+        private readonly EventingBasicConsumer _getAllForDeviceConsumer;
 
         private readonly ITemperatureScaleDomain _temperatureScaleDomain;
 
@@ -25,6 +31,7 @@ namespace ART.Domotica.Worker.Consumers
         public TemperatureScaleConsumer(IConnection connection, ITemperatureScaleDomain temperatureScaleDomain) : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
+            _getAllForDeviceConsumer = new EventingBasicConsumer(_model);
 
             _temperatureScaleDomain = temperatureScaleDomain;
 
@@ -44,9 +51,31 @@ namespace ART.Domotica.Worker.Consumers
                 , autoDelete: true
                 , arguments: null);
 
+            _model.ExchangeDeclare(
+                  exchange: "amq.topic"
+                , type: ExchangeType.Topic
+                , durable: true
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueDeclare(
+                  queue: TemperatureScaleConstants.GetAllForDeviceQueueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueBind(
+                  queue: TemperatureScaleConstants.GetAllForDeviceQueueName
+                , exchange: "amq.topic"
+                , routingKey: TemperatureScaleConstants.GetAllForDeviceQueueName
+                , arguments: null);
+
             _getAllConsumer.Received += GetAllReceived;
+            _getAllForDeviceConsumer.Received += GetAllForDeviceReceived;
 
             _model.BasicConsume(TemperatureScaleConstants.GetAllQueueName, false, _getAllConsumer);
+            _model.BasicConsume(TemperatureScaleConstants.GetAllForDeviceQueueName, false, _getAllForDeviceConsumer);
         }
 
         public void GetAllReceived(object sender, BasicDeliverEventArgs e)
@@ -63,6 +92,28 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, buffer);
+        }
+
+        public void GetAllForDeviceReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(GetAllForDeviceReceivedAsync(sender, e));
+        }
+
+        public async Task GetAllForDeviceReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {            
+            _model.BasicAck(e.DeliveryTag, false);            
+            var data = await _temperatureScaleDomain.GetAll();
+            var deviceMessage = new DeviceMessageContract<List<TemperatureScaleGetAllModel>>(TemperatureScaleConstants.GetAllCompletedQueueName, data);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
+            var queueName = GetQueueName(requestContract.HardwareInApplicationId);
+            _model.BasicPublish("", queueName, null, buffer);            
+        }
+
+        private string GetQueueName(Guid hardwareId)
+        {
+            var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);
+            return queueName;
         }
 
         #endregion

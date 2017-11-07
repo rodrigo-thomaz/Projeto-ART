@@ -114,6 +114,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             Task.WaitAll(GetListReceivedAsync(sender, e));
         }
+
         public async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _model.BasicAck(e.DeliveryTag, false);
