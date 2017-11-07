@@ -95,7 +95,7 @@ bool MQQTManager::autoConnect()
         else 
         {
             Serial.println("[MQQT] Falha ao reconectar no broker.");
-            Serial.println("[MQQT] Havera nova tentatica de conexao em 2s");
+            Serial.println("[MQQT] Haverá nova tentatica de conexao em 2s");
             delay(2000);
 			
 			return false;
