@@ -15,7 +15,7 @@ class TemperatureSensor
 	
   public:
   
-	TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family);
+	TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId);
 
     String								getDSFamilyTempSensorId();		
 	
@@ -27,6 +27,8 @@ class TemperatureSensor
 		
 	int 								getResolution();
 	void 								setResolution(int value);
+	
+	byte 								getTemperatureScaleId();
 	
 	bool 								getConnected();	
 	void 								setConnected(bool value);	
@@ -60,6 +62,8 @@ class TemperatureSensor
 	bool 								_validFamily;
 	
 	int 								_resolution;
+	
+	byte								_temperatureScaleId;
 	
 	bool 								_connected;		
 	float 								_tempCelsius;

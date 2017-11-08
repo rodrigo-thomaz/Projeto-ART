@@ -12,13 +12,15 @@ DallasTemperature _dallas(&oneWire);
 
 // TemperatureSensor
 
-TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family)
+TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
 	this->_deviceAddress = deviceAddress;
 	this->_deviceAddressArray = reinterpret_cast<const uint8_t*>(deviceAddress.c_str());	
 	this->_family = family;
 	this->_validFamily = true;
+	this->_resolution = resolution;
+	this->_temperatureScaleId = temperatureScaleId;
 }
 
 String TemperatureSensor::getDSFamilyTempSensorId()
@@ -54,6 +56,11 @@ int TemperatureSensor::getResolution()
 void TemperatureSensor::setResolution(int value)
 {
 	this->_resolution = value;
+}
+
+byte TemperatureSensor::getTemperatureScaleId()
+{
+	return this->_temperatureScaleId;
 }
 
 bool TemperatureSensor::getConnected()
@@ -174,14 +181,18 @@ void TemperatureSensorManager::begin()
 	
 			//validFamily
 			bool validFamily = _dallas.validFamily(deviceAddressChar);
-
+			int resolution = _dallas.getResolution(deviceAddressChar);
+			byte temperatureScaleId = 1;
+			
 			// family
 			String family = getFamily(deviceAddressChar);     		  		  
 
 			this->_sensors.push_back(TemperatureSensor(
 				dsFamilyTempSensorId, 
 				deviceAddressStr, 
-				family));
+				family,
+				resolution,
+				temperatureScaleId));
 			
 			if (this->_debugManager->isDebug()) Serial.println(deviceAddressStr);
 		  
