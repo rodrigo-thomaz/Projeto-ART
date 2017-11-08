@@ -1,5 +1,7 @@
 ﻿namespace ART.Infra.CrossCutting.MQ.Worker
 {
+    using System;
+
     using RabbitMQ.Client;
 
     public abstract class ConsumerBase
@@ -20,5 +22,15 @@
         }
 
         #endregion Constructors
+
+        #region Methods
+
+        protected string GetDeviceQueueName(Guid hardwareId)
+        {
+            var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);
+            return queueName;
+        }
+
+        #endregion Methods
     }
 }

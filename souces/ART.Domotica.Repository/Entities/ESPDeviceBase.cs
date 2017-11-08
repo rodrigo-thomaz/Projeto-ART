@@ -24,7 +24,10 @@
             get; set;
         }
 
-        public int TimeOffset { get; set; }
+        public int TimeOffset
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

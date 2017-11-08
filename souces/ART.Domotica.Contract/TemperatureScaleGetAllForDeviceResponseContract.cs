@@ -2,6 +2,8 @@
 {
     public class TemperatureScaleGetAllForDeviceResponseContract
     {
+        #region Properties
+
         public byte Id
         {
             get; set;
@@ -16,5 +18,7 @@
         {
             get; set;
         }
+
+        #endregion Properties
     }
 }

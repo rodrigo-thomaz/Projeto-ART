@@ -4,14 +4,18 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class AddFieldTimeOffset : DbMigration
     {
-        public override void Up()
-        {
-            AddColumn("dbo.ESPDeviceBase", "TimeOffset", c => c.Int(nullable: false));
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropColumn("dbo.ESPDeviceBase", "TimeOffset");
         }
+
+        public override void Up()
+        {
+            AddColumn("dbo.ESPDeviceBase", "TimeOffset", c => c.Int(nullable: false));
+        }
+
+        #endregion Methods
     }
 }

@@ -7,7 +7,6 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Worker.IConsumers;
-using System;
 using ART.Domotica.Worker.Contracts;
 using System.Collections.Generic;
 using ART.Domotica.Contract;
@@ -105,14 +104,8 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new DeviceMessageContract<List<TemperatureScaleGetAllForDeviceResponseContract>>(TemperatureScaleConstants.GetAllForDeviceCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
-            var queueName = GetQueueName(requestContract.HardwareId);
+            var queueName = GetDeviceQueueName(requestContract.HardwareId);
             _model.BasicPublish("", queueName, null, buffer);            
-        }
-
-        private string GetQueueName(Guid hardwareId)
-        {
-            var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);
-            return queueName;
         }
 
         #endregion

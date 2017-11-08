@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ART.Domotica.Model;
     using ART.Domotica.Contract;
+    using ART.Domotica.Model;
 
     public interface ITemperatureScaleDomain
     {

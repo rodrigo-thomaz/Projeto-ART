@@ -192,7 +192,7 @@
 
             var deviceMessage = new DeviceMessageContract<ESPDeviceInsertInApplicationResponseContract>(ESPDeviceConstants.InsertInApplicationQueueName, data);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetQueueName(data.HardwareId);
+            var queueName = GetDeviceQueueName(data.HardwareId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
@@ -214,7 +214,7 @@
 
             var deviceMessage = new DeviceMessageContract<ESPDeviceDeleteFromApplicationResponseContract>(ESPDeviceConstants.DeleteFromApplicationQueueName, data);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetQueueName(data.HardwareId);
+            var queueName = GetDeviceQueueName(data.HardwareId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
@@ -251,19 +251,13 @@
             foreach (var contract in contracts)
             {
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
-                var queueName = GetQueueName(contract.HardwareId);
+                var queueName = GetDeviceQueueName(contract.HardwareId);
                 var deviceMessage = new DeviceMessageContract<ESPDeviceUpdatePinsContract>(ESPDeviceConstants.UpdatePinQueueName, contract);
                 var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
                 var buffer = Encoding.UTF8.GetBytes(json);
                 _model.BasicPublish("", queueName, null, buffer);
             }
-        }        
-
-        private string GetQueueName(Guid hardwareId)
-        {
-            var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);
-            return queueName;
-        }
+        }                
 
         private void GetInApplicationForDeviceReceived(object sender, BasicDeliverEventArgs e)
         {
@@ -276,7 +270,7 @@
             };
             var deviceMessage = new DeviceMessageContract<ESPDeviceGetInApplicationForDeviceResponseContract>(ESPDeviceConstants.GetInApplicationForDeviceCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetQueueName(Guid.NewGuid());
+            var queueName = GetDeviceQueueName(Guid.NewGuid());
             _model.BasicPublish("", queueName, null, buffer);
         }
 

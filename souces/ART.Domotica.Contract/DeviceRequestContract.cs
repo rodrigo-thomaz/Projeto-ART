@@ -1,9 +1,16 @@
-﻿using System;
-
-namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Contract
 {
+    using System;
+
     public class DeviceRequestContract
     {
-        public Guid HardwareId { get; set; }
+        #region Properties
+
+        public Guid HardwareId
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

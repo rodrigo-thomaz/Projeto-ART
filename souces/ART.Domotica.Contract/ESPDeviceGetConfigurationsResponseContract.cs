@@ -46,17 +46,17 @@
             get; set;
         }
 
-        public int TimeOffset
-        {
-            get; set;
-        }
-
         public int NTPUpdateInterval
         {
             get; set;
         }
 
         public int PublishMessageInterval
+        {
+            get; set;
+        }
+
+        public int TimeOffset
         {
             get; set;
         }
