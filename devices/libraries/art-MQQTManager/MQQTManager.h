@@ -44,8 +44,6 @@ class MQQTManager
 	
 	void												onSubCallback(char* topic, byte* payload, unsigned int length);
 	
-	void teste1();
-	
 };
 
 #endif

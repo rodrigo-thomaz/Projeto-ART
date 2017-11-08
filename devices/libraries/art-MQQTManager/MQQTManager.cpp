@@ -124,9 +124,3 @@ PubSubClient* MQQTManager::getMQQT() {
     return this->_mqqt;
 }
 
-void MQQTManager::teste1() 
-{
-    std::function<void(void)> f = std::bind(&MQQTManager::teste1, this);
-}
-
-
