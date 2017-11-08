@@ -103,7 +103,7 @@ namespace ART.Domotica.Worker.Consumers
         {            
             _model.BasicAck(e.DeliveryTag, false);            
             var data = await _temperatureScaleDomain.GetAll();
-            var deviceMessage = new DeviceMessageContract<List<TemperatureScaleGetAllModel>>(TemperatureScaleConstants.GetAllCompletedQueueName, data);
+            var deviceMessage = new DeviceMessageContract<List<TemperatureScaleGetAllModel>>(TemperatureScaleConstants.GetAllForDeviceCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
             var queueName = GetQueueName(requestContract.HardwareInApplicationId);

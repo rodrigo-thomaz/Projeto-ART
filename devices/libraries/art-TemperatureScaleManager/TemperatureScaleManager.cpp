@@ -25,10 +25,11 @@ String TemperatureScale::getSimbol()
 
 // TemperatureScaleManager
 
-TemperatureScaleManager::TemperatureScaleManager(DebugManager& debugManager, ConfigurationManager& configurationManager)
+TemperatureScaleManager::TemperatureScaleManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager)
 { 
 	this->_debugManager = &debugManager;
 	this->_configurationManager = &configurationManager;
+	this->_mqqtManager = &mqqtManager;
 }
 
 bool TemperatureScaleManager::begin()

@@ -5,6 +5,7 @@
 #include "ArduinoJson.h"
 #include "DebugManager.h"
 #include "ConfigurationManager.h"
+#include "MQQTManager.h"
 
 class TemperatureScale {
   public:
@@ -28,7 +29,7 @@ class TemperatureScaleManager
 {
   public:
   
-    TemperatureScaleManager(DebugManager& debugManager, ConfigurationManager& configurationManager);
+    TemperatureScaleManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager);
 	
 	bool								begin();
 	
@@ -36,6 +37,7 @@ class TemperatureScaleManager
 			
 	DebugManager*          				_debugManager;	
 	ConfigurationManager*          		_configurationManager;	
+	MQQTManager* 						_mqqtManager;
 	
 	bool								_initialized;
 	

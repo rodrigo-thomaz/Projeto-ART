@@ -59,11 +59,11 @@ DebugManager debugManager(D6);
 WiFiManager wifiManager(D5, debugManager);
 ConfigurationManager configurationManager(debugManager, wifiManager, HOST, PORT, URI);
 NTPManager ntpManager(debugManager, configurationManager);
+MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
-TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager);
-MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
+TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager, mqqtManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
