@@ -16,6 +16,7 @@ class TemperatureSensor
   public:
   
 	TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId);
+	TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
 
     String								getDSFamilyTempSensorId();		
 	

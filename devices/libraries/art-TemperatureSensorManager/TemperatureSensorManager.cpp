@@ -21,6 +21,23 @@ TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, String deviceA
 	this->_validFamily = true;
 	this->_resolution = resolution;
 	this->_temperatureScaleId = temperatureScaleId;
+	this->_hasAlarm = false;
+	this->_lowAlarm = 0;
+	this->_highAlarm = 0;
+}
+
+TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm)
+{
+	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
+	this->_deviceAddress = deviceAddress;
+	this->_deviceAddressArray = reinterpret_cast<const uint8_t*>(deviceAddress.c_str());	
+	this->_family = family;
+	this->_validFamily = true;
+	this->_resolution = resolution;
+	this->_temperatureScaleId = temperatureScaleId;
+	this->_hasAlarm = true;
+	this->_lowAlarm = lowAlarm;
+	this->_highAlarm = highAlarm;
 }
 
 String TemperatureSensor::getDSFamilyTempSensorId()
