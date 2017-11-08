@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
+#include "vector"
 #include "DebugManager.h"
 #include "ConfigurationManager.h"
 #include "MQQTManager.h"
@@ -13,17 +14,17 @@
 class TemperatureScale {
   public:
 
-    TemperatureScale(int id, String name, String simbol);
+    TemperatureScale(int id, String name, String symbol);
 
     int									getId();
 	String								getName();
-	String								getSimbol();
+	String								getSymbol();
 	
   private:
     
 	int									_id;
 	String								_name;
-	String								_simbol;
+	String								_symbol;
 
     friend class TemperatureScaleManager;
 };
@@ -45,6 +46,8 @@ class TemperatureScaleManager
 	
 	bool								_begin;
 	bool								_beginning;
+	
+	std::vector<TemperatureScale> 		_scales;
 	
 };
 
