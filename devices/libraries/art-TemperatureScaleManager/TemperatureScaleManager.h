@@ -35,6 +35,7 @@ class TemperatureScaleManager
     TemperatureScaleManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager);
 	
 	bool								begin();
+	void								update(String json);
 	
   private:			
 			
@@ -42,7 +43,8 @@ class TemperatureScaleManager
 	ConfigurationManager*          		_configurationManager;	
 	MQQTManager* 						_mqqtManager;
 	
-	bool								_initialized;
+	bool								_begin;
+	bool								_beginning;
 	
 };
 

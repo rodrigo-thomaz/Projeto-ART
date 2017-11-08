@@ -34,11 +34,19 @@ TemperatureScaleManager::TemperatureScaleManager(DebugManager& debugManager, Con
 
 bool TemperatureScaleManager::begin()
 { 
-	if(!this->_configurationManager->initialized()) return false;
+	if(this->_begin) return true;	
 
+	if(!this->_configurationManager->initialized()) return false;	
+	
+	if(this->_beginning) return false;	
+	
 	PubSubClient* mqqt = this->_mqqtManager->getMQQT();
  
 	if(!mqqt->connected()) return false;	
+	
+	// Begin
+	
+	this->_beginning = true;
 	
 	String hardwareId = this->_configurationManager->getHardwareSettings()->getHardwareId();      
 
@@ -54,4 +62,12 @@ bool TemperatureScaleManager::begin()
 	Serial.println("MQQT_TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE");
 	
 	mqqt->publish(MQQT_TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE, result);    
+}
+
+void TemperatureScaleManager::update(String json)
+{ 
+	this->_begin = true;
+	this->_beginning = false;
+	
+	Serial.println("****************************************** TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED ******************** !!!!!!!!!!!!!!!!!!!!!!!!!");
 }

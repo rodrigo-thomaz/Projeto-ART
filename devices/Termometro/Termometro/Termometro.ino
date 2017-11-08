@@ -160,7 +160,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       displayAccessManager.updatePin(payloadContract);
     }
     if(payloadTopic == String(MQQT_TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED)){
-      getInApplicationForDeviceCompleted();      
+      temperatureScaleManager.update(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
       temperatureSensorManager.setResolution(payloadContract);
@@ -177,11 +177,6 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TOPIC_SUB_DELETE_FROM_APPLICATION)){
       configurationManager.getHardwareSettings()->deleteFromApplication();      
     }
-}
-
-void getInApplicationForDeviceCompleted()
-{
-  Serial.println("****************************************** TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED ******************** !!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 void loop() {	  
