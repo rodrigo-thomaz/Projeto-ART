@@ -15,23 +15,21 @@ class TemperatureSensor
 	
   public:
   
-	TemperatureSensor(String dsFamilyTempSensorId, const uint8_t* deviceAddress, String deviceAddressStr, bool validFamily, String family);
+	TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family);
 
     String								getDSFamilyTempSensorId();		
 	
-	const uint8_t*						getDeviceAddress();		
-	
-	String								getDeviceAddressStr();
-	
-	bool								getValidFamily();
+	String								getDeviceAddress();	
+	const uint8_t*						getDeviceAddressArray();		
 	
 	String								getFamily();
+	bool								getValidFamily();	
 		
-	bool 								getConnected();	
-	void 								setConnected(bool value);	
-	
 	int 								getResolution();
 	void 								setResolution(int value);
+	
+	bool 								getConnected();	
+	void 								setConnected(bool value);	
 	
 	float 								getTempCelsius();
 	void 								setTempCelsius(float value);
@@ -48,24 +46,29 @@ class TemperatureSensor
 	char 								getHighAlarm();
 	void 								setHighAlarm(char value);
 	
-	long 								getEpochTime();
-	void 								setEpochTime(long value);
+	long 								getEpochTimeUtc();
+	void 								setEpochTimeUtc(long value);
 	
   private:
   
 	String 								_dsFamilyTempSensorId;
-	const uint8_t* 						_deviceAddress;
-	String 								_deviceAddressStr;
-	bool 								_validFamily;
+	
+	String 								_deviceAddress;
+	const uint8_t* 						_deviceAddressArray;	
+	
 	String 								_family;
-	bool 								_connected;	
+	bool 								_validFamily;
+	
 	int 								_resolution;
+	
+	bool 								_connected;		
 	float 								_tempCelsius;
 	float 								_tempFahrenheit;
 	bool 								_hasAlarm;	
 	char 								_lowAlarm;
 	char 								_highAlarm;
-	long 								_epochTime;
+	
+	long 								_epochTimeUtc;
 	
 	friend class TemperatureSensorManager;
 	
