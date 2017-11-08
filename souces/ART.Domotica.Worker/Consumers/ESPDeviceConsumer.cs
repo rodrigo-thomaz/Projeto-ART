@@ -26,7 +26,6 @@
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsConsumer;
-        private readonly EventingBasicConsumer _getInApplicationForDeviceConsumer;
 
         private readonly IESPDeviceDomain _espDeviceDomain;
 
@@ -42,7 +41,6 @@
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsConsumer = new EventingBasicConsumer(_model);
-            _getInApplicationForDeviceConsumer = new EventingBasicConsumer(_model);
 
             _espDeviceDomain = espDeviceDomain;
 
@@ -91,13 +89,6 @@
                , arguments: null);
 
             _model.QueueDeclare(
-                 queue: ESPDeviceConstants.GetInApplicationForDeviceCompletedQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: null);
-
-            _model.QueueDeclare(
                   queue: ESPDeviceConstants.UpdatePinQueueName
                 , durable: true
                 , exclusive: false
@@ -111,32 +102,17 @@
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: ESPDeviceConstants.GetInApplicationForDeviceQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
-
-            _model.QueueBind(
-                  queue: ESPDeviceConstants.GetInApplicationForDeviceQueueName
-                , exchange: "amq.topic"
-                , routingKey: ESPDeviceConstants.GetInApplicationForDeviceQueueName
-                , arguments: null);
-
             _getListInApplicationConsumer.Received += GetListInApplicationReceived;
             _getByPinConsumer.Received += GetByPinReceived;
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsConsumer.Received += GetConfigurationsReceived;
-            _getInApplicationForDeviceConsumer.Received += GetInApplicationForDeviceReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetByPinQueueName, false, _getByPinConsumer);
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsQueueName, false, _getConfigurationsConsumer);
-            _model.BasicConsume(ESPDeviceConstants.GetInApplicationForDeviceQueueName, false, _getInApplicationForDeviceConsumer);
         }        
 
         #endregion Methods
@@ -257,22 +233,7 @@
                 var buffer = Encoding.UTF8.GetBytes(json);
                 _model.BasicPublish("", queueName, null, buffer);
             }
-        }                
-
-        private void GetInApplicationForDeviceReceived(object sender, BasicDeliverEventArgs e)
-        {
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetInApplicationForDeviceRequestContract>(e.Body);
-            var data = new ESPDeviceGetInApplicationForDeviceResponseContract
-            {
-                HardwareId = Guid.NewGuid(),
-                HardwareInApplicationId = Guid.NewGuid(),
-            };
-            var deviceMessage = new DeviceMessageContract<ESPDeviceGetInApplicationForDeviceResponseContract>(ESPDeviceConstants.GetInApplicationForDeviceCompletedQueueName, data);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(Guid.NewGuid());
-            _model.BasicPublish("", queueName, null, buffer);
-        }
+        }  
 
         #endregion Other
     }
