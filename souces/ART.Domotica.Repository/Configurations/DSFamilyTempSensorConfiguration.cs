@@ -36,15 +36,22 @@
                 .HasMaxLength(10)
                 .IsRequired();
 
-            //HighAlarm
-            Property(x => x.HighAlarm)
+            //HasAlarm
+            Property(x => x.HasAlarm)
                 .HasColumnOrder(3)
-                .HasPrecision(6, 3);
+                .IsRequired();
 
             //LowAlarm
             Property(x => x.LowAlarm)
                 .HasColumnOrder(4)
+                .IsOptional()
                 .HasPrecision(6, 3);
+
+            //HighAlarm
+            Property(x => x.HighAlarm)
+                .HasColumnOrder(5)
+                .IsOptional()
+                .HasPrecision(6, 3);            
 
             //TemperatureScale
             HasRequired(x => x.TemperatureScale)
@@ -54,7 +61,7 @@
 
             //TemperatureScaleId
             Property(x => x.TemperatureScaleId)
-                .HasColumnOrder(5);
+                .HasColumnOrder(6);
 
             //DSFamilyTempSensorResolution
             HasRequired(x => x.DSFamilyTempSensorResolution)
@@ -64,7 +71,7 @@
 
             //DSFamilyTempSensorResolutionId
             Property(x => x.DSFamilyTempSensorResolutionId)
-                .HasColumnOrder(6);
+                .HasColumnOrder(7);
         }
 
         #endregion Constructors

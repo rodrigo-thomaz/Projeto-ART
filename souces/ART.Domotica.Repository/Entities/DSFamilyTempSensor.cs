@@ -24,12 +24,17 @@
             get; set;
         }
 
-        public decimal HighAlarm
+        public bool HasAlarm
         {
             get; set;
         }
 
-        public decimal LowAlarm
+        public decimal? HighAlarm
+        {
+            get; set;
+        }
+
+        public decimal? LowAlarm
         {
             get; set;
         }

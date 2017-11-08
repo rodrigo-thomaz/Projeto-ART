@@ -1,6 +1,7 @@
 #include "DebugManager.h"
 #include "ConfigurationManager.h"
 #include "TemperatureSensorManager.h"
+#include "TemperatureSensorService.h"
 #include "TemperatureScaleManager.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
@@ -61,6 +62,7 @@ MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
 TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
+TemperatureSensorService temperatureSensorService(debugManager, ntpManager, configurationManager, mqqtManager);
 TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager, mqqtManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
@@ -132,12 +134,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     {
        char c = (char)payload[i];
        json += c;
-    }
+    }    
 
-    Serial.print("payload: ");
-    Serial.println(json);
-
-    StaticJsonBuffer<1000> jsonBuffer;
+    //StaticJsonBuffer<3000> jsonBuffer;
+    DynamicJsonBuffer jsonBuffer;
     
     JsonObject& root = jsonBuffer.parseObject(json);
   
@@ -153,14 +153,14 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     Serial.print("payloadTopic: ");
     Serial.println(payloadTopic);
 
-    Serial.print("payloadContract: ");
-    Serial.println(payloadContract);
-
     if(payloadTopic == String(TOPIC_SUB_UPDATE_PIN)){
       displayAccessManager.updatePin(payloadContract);
     }
     if(payloadTopic == String(TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_COMPLETED_MQQT_TOPIC_SUB)){
-      temperatureScaleManager.update(payloadContract);      
+      temperatureScaleManager.update(payloadContract);            
+    }
+    if(payloadTopic == String(TEMPERATURE_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB)){
+      temperatureSensorService.setSensorsByMQQTCallback(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
       temperatureSensorManager.setResolution(payloadContract);
@@ -217,6 +217,7 @@ void loopInApplication()
 
     // Temp
     temperatureScaleManager.begin();
+    temperatureSensorService.begin();
   }  
   else{
     displayTemperatureSensorManager.printUpdate(false);
