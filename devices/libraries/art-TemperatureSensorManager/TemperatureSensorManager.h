@@ -30,6 +30,15 @@ class TemperatureSensor
 	
 	byte 								getTemperatureScaleId();
 	
+	bool 								getHasAlarm();	
+	void 								setHasAlarm(bool value);	
+	
+	float 								getLowAlarm();
+	void 								setLowAlarm(float value);
+	
+	float 								getHighAlarm();
+	void 								setHighAlarm(float value);
+	
 	bool 								getConnected();	
 	void 								setConnected(bool value);	
 	
@@ -38,15 +47,6 @@ class TemperatureSensor
 	
 	float 								getTempFahrenheit();
 	void 								setTempFahrenheit(float value);
-	
-	bool 								getHasAlarm();	
-	void 								setHasAlarm(bool value);	
-	
-	char 								getLowAlarm();
-	void 								setLowAlarm(char value);
-	
-	char 								getHighAlarm();
-	void 								setHighAlarm(char value);
 	
 	long 								getEpochTimeUtc();
 	void 								setEpochTimeUtc(long value);
@@ -65,12 +65,13 @@ class TemperatureSensor
 	
 	byte								_temperatureScaleId;
 	
-	bool 								_connected;		
-	float 								_tempCelsius;
-	float 								_tempFahrenheit;
 	bool 								_hasAlarm;	
 	char 								_lowAlarm;
 	char 								_highAlarm;
+	
+	bool 								_connected;		
+	float 								_tempCelsius;
+	float 								_tempFahrenheit;	
 	
 	long 								_epochTimeUtc;
 	

@@ -63,6 +63,36 @@ byte TemperatureSensor::getTemperatureScaleId()
 	return this->_temperatureScaleId;
 }
 
+bool TemperatureSensor::getHasAlarm()
+{
+	return this->_hasAlarm;
+}
+
+void TemperatureSensor::setHasAlarm(bool value)
+{
+	this->_hasAlarm = value;
+}
+
+float TemperatureSensor::getLowAlarm()
+{
+	return this->_lowAlarm;
+}
+
+void TemperatureSensor::setLowAlarm(float value)
+{
+	this->_lowAlarm = value;
+}
+
+float TemperatureSensor::getHighAlarm()
+{
+	return this->_highAlarm;
+}
+
+void TemperatureSensor::setHighAlarm(float value)
+{
+	this->_highAlarm = value;
+}
+
 bool TemperatureSensor::getConnected()
 {
 	return this->_connected;
@@ -91,36 +121,6 @@ float TemperatureSensor::getTempFahrenheit()
 void TemperatureSensor::setTempFahrenheit(float value)
 {
 	this->_tempFahrenheit = value;
-}
-
-bool TemperatureSensor::getHasAlarm()
-{
-	return this->_hasAlarm;
-}
-
-void TemperatureSensor::setHasAlarm(bool value)
-{
-	this->_hasAlarm = value;
-}
-
-char TemperatureSensor::getLowAlarm()
-{
-	return this->_lowAlarm;
-}
-
-void TemperatureSensor::setLowAlarm(char value)
-{
-	this->_lowAlarm = value;
-}
-
-char TemperatureSensor::getHighAlarm()
-{
-	return this->_highAlarm;
-}
-
-void TemperatureSensor::setHighAlarm(char value)
-{
-	this->_highAlarm = value;
 }
 
 long TemperatureSensor::getEpochTimeUtc()
