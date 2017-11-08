@@ -120,24 +120,19 @@ void TemperatureSensor::setConnected(bool value)
 	this->_connected = value;
 }
 
-float TemperatureSensor::getTempCelsius()
+float TemperatureSensor::getRawTemperature()
 {
-	return this->_tempCelsius;
+	return this->_rawTemperature;
 }
 
-void TemperatureSensor::setTempCelsius(float value)
+void TemperatureSensor::setRawTemperature(float value)
 {
-	this->_tempCelsius = value;
+	this->_rawTemperature = value;
 }
 
-float TemperatureSensor::getTempFahrenheit()
+float TemperatureSensor::getTemperatureWithScale()
 {
-	return this->_tempFahrenheit;
-}
-
-void TemperatureSensor::setTempFahrenheit(float value)
-{
-	this->_tempFahrenheit = value;
+	return this->_rawTemperature;
 }
 
 long TemperatureSensor::getEpochTimeUtc()
@@ -232,8 +227,7 @@ void TemperatureSensorManager::refresh()
 	for(int i = 0; i < this->_sensors.size(); ++i){	
 		this->_sensors[i].setConnected(_dallas.isConnected(this->_sensors[i].getDeviceAddressArray()));
 		this->_sensors[i].setResolution(_dallas.getResolution(this->_sensors[i].getDeviceAddressArray()));
-		this->_sensors[i].setTempCelsius(_dallas.getTempC(this->_sensors[i].getDeviceAddressArray()));
-		this->_sensors[i].setTempFahrenheit(_dallas.getTempF(this->_sensors[i].getDeviceAddressArray()));
+		this->_sensors[i].setRawTemperature(_dallas.getTempC(this->_sensors[i].getDeviceAddressArray()));
 		this->_sensors[i].setHasAlarm(_dallas.hasAlarm(this->_sensors[i].getDeviceAddressArray()));
 		this->_sensors[i].setLowAlarm(_dallas.getLowAlarmTemp(this->_sensors[i].getDeviceAddressArray()));
 		this->_sensors[i].setHighAlarm(_dallas.getHighAlarmTemp(this->_sensors[i].getDeviceAddressArray()));
@@ -370,8 +364,7 @@ void TemperatureSensorManager::generateNestedSensor(TemperatureSensor temperatur
 	JSONencoder["family"] = temperatureSensor.getFamily();
 	JSONencoder["isConnected"] = temperatureSensor.getConnected();
 	JSONencoder["resolution"] = temperatureSensor.getResolution();
-	JSONencoder["tempCelsius"] = temperatureSensor.getTempCelsius();
-	JSONencoder["tempFahrenheit"] = temperatureSensor.getTempFahrenheit();
+	JSONencoder["rawTemperature"] = temperatureSensor.getRawTemperature();
 	JSONencoder["hasAlarm"] = temperatureSensor.getHasAlarm();
 	JSONencoder["lowAlarm"] = temperatureSensor.getLowAlarm();
 	JSONencoder["highAlarm"] = temperatureSensor.getHighAlarm();
