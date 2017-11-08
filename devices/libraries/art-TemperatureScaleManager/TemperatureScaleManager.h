@@ -8,23 +8,26 @@
 #include "ConfigurationManager.h"
 #include "MQQTManager.h"
 
-#define MQQT_TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE   				"TemperatureScale.GetAllForDevice" 
-#define MQQT_TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED   	"TemperatureScale.GetAllForDeviceCompleted"
+#define TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_REQUEST_JSON_SIZE 				100
+#define TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_RESPONSE_JSON_SIZE 			1000
+
+#define TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_MQQT_TOPIC_PUB   				"TemperatureScale.GetAllForDevice" 
+#define TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_COMPLETED_MQQT_TOPIC_SUB   	"TemperatureScale.GetAllForDeviceCompleted"
 
 class TemperatureScale {
   public:
 
     TemperatureScale(int id, String name, String symbol);
 
-    int									getId();
-	String								getName();
-	String								getSymbol();
-	
-  private:
-    
-	int									_id;
-	String								_name;
-	String								_symbol;
+    int																		getId();
+	String																	getName();
+	String																	getSymbol();
+										
+  private:									
+										
+	int																		_id;
+	String																	_name;
+	String																	_symbol;
 
     friend class TemperatureScaleManager;
 };
@@ -35,19 +38,19 @@ class TemperatureScaleManager
   
     TemperatureScaleManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager);
 	
-	bool								begin();
-	void								update(String json);
-	
-  private:			
-			
-	DebugManager*          				_debugManager;	
-	ConfigurationManager*          		_configurationManager;	
-	MQQTManager* 						_mqqtManager;
-	
-	bool								_begin;
-	bool								_beginning;
-	
-	std::vector<TemperatureScale> 		_scales;
+	bool																	begin();
+	void																	update(String json);
+										
+  private:												
+												
+	DebugManager*          													_debugManager;	
+	ConfigurationManager*          											_configurationManager;	
+	MQQTManager* 															_mqqtManager;
+										
+	bool																	_begin;
+	bool																	_beginning;
+										
+	std::vector<TemperatureScale> 											_scales;
 	
 };
 

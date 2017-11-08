@@ -159,7 +159,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TOPIC_SUB_UPDATE_PIN)){
       displayAccessManager.updatePin(payloadContract);
     }
-    if(payloadTopic == String(MQQT_TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED)){
+    if(payloadTopic == String(TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_COMPLETED_MQQT_TOPIC_SUB)){
       temperatureScaleManager.update(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
