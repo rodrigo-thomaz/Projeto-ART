@@ -14,16 +14,16 @@ public:
 	
 private:
 
-	DisplayManager*       				_displayManager;	
-	NTPManager*          				_ntpManager;
-	DebugManager*         				_debugManager;
-			
-	void								printTime();
-	void								printUpdate(bool on);
-				
-	void								updateCallback(bool update, bool forceUpdate);	
+	DisplayManager*       							_displayManager;	
+	NTPManager*          							_ntpManager;
+	DebugManager*         							_debugManager;
+						
+	void											printTime();
+	void											printUpdate(bool on);
+							
+	void											updateCallback(bool update, bool forceUpdate);	
 	
-	std::function<void(bool, bool)>		_updateCallback;
+	NTP_MANAGER_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
 	
 };
 
