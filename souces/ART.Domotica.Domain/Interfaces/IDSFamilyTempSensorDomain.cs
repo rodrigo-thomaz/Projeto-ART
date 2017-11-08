@@ -27,6 +27,8 @@
 
         Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message);
 
+        Task<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>> GetAllByHardwareInApplicationId(Guid hardwareApplicationId);
+
         #endregion Methods
     }
 }

@@ -17,16 +17,18 @@ namespace ART.Domotica.Domain.Services
         #region private readonly fields
 
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
+        private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
 
         #endregion
 
         #region constructors
 
-        public DSFamilyTempSensorDomain(IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository)
+        public DSFamilyTempSensorDomain(IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository, IESPDeviceRepository espDeviceRepository)
         {
             _dsFamilyTempSensorRepository = dsFamilyTempSensorRepository;
             _dsFamilyTempSensorResolutionRepository = dsFamilyTempSensorResolutionRepository;
+            _espDeviceRepository = espDeviceRepository;
         }
 
         #endregion
@@ -47,6 +49,14 @@ namespace ART.Domotica.Domain.Services
             return result;
         }
 
+        public async Task<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>> GetAllByHardwareInApplicationId(Guid hardwareApplicationId)
+        {
+            var hardwareInApplication = await _espDeviceRepository.GetInApplicationById(hardwareApplicationId);
+            var data = await _dsFamilyTempSensorRepository.GetAllByHardwareId(hardwareInApplication.HardwareBaseId);
+            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>>(data);
+            return result;
+        }
+        
         public async Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions()
         {
             var data = await _dsFamilyTempSensorResolutionRepository.GetAll();

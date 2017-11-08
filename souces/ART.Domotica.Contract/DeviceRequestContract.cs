@@ -11,6 +11,11 @@
             get; set;
         }
 
+        public Guid HardwareInApplicationId
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }

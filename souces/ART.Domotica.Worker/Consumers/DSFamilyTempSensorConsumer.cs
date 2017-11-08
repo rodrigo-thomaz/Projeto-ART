@@ -13,6 +13,7 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Worker.IConsumers;
+using System.Collections.Generic;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -22,6 +23,7 @@ namespace ART.Domotica.Worker.Consumers
 
         private readonly EventingBasicConsumer _getListConsumer;
         private readonly EventingBasicConsumer _getAllConsumer;
+        private readonly EventingBasicConsumer _getAllByHardwareInApplicationIdConsumer;
         private readonly EventingBasicConsumer _getAllResolutionsConsumer;
         private readonly EventingBasicConsumer _setResolutionConsumer;
         private readonly EventingBasicConsumer _setHighAlarmConsumer;
@@ -37,6 +39,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             _getListConsumer = new EventingBasicConsumer(_model);
             _getAllConsumer = new EventingBasicConsumer(_model);
+            _getAllByHardwareInApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
             _setHighAlarmConsumer = new EventingBasicConsumer(_model);
@@ -65,7 +68,7 @@ namespace ART.Domotica.Worker.Consumers
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: null);
+               , arguments: null);            
 
             _model.QueueDeclare(
                   queue: DSFamilyTempSensorConstants.GetAllResolutionsQueueName
@@ -95,8 +98,29 @@ namespace ART.Domotica.Worker.Consumers
                 , autoDelete: false
                 , arguments: null);
 
+            _model.ExchangeDeclare(
+                 exchange: "amq.topic"
+               , type: ExchangeType.Topic
+               , durable: true
+               , autoDelete: false
+               , arguments: null);
+
+            _model.QueueDeclare(
+                queue: DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName
+              , durable: false
+              , exclusive: false
+              , autoDelete: true
+              , arguments: null);
+
+            _model.QueueBind(
+                  queue: DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName
+                , exchange: "amq.topic"
+                , routingKey: DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName
+                , arguments: null);
+
             _getListConsumer.Received += GetListReceived;
             _getAllConsumer.Received += GetAllReceived;
+            _getAllByHardwareInApplicationIdConsumer.Received += GetAllByHardwareInApplicationIdReceived;
             _getAllResolutionsConsumer.Received += GetAllResolutionsReceived;
             _setResolutionConsumer.Received += SetResolutionReceived;
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
@@ -104,11 +128,12 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicConsume(DSFamilyTempSensorConstants.GetListAdminQueueName, false, _getListConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllQueueName, false, _getAllConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName, false, _getAllByHardwareInApplicationIdConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetResolutionQueueName, false, _setResolutionConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
-        }
+        }        
 
         public void GetListReceived(object sender, BasicDeliverEventArgs e)
         {
@@ -140,6 +165,22 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, buffer);
+        }
+
+        private void GetAllByHardwareInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(GetAllByHardwareInApplicationIdReceivedAsync(sender, e));
+        }
+
+        private async Task GetAllByHardwareInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _model.BasicAck(e.DeliveryTag, false);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
+            var data = await _dsFamilyTempSensorDomain.GetAllByHardwareInApplicationId(requestContract.HardwareInApplicationId);
+            var deviceMessage = new DeviceMessageContract<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>>(DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdCompletedQueueName, data);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
+            var queueName = GetDeviceQueueName(requestContract.HardwareId);
+            _model.BasicPublish("", queueName, null, buffer);
         }
 
         public void GetAllResolutionsReceived(object sender, BasicDeliverEventArgs e)

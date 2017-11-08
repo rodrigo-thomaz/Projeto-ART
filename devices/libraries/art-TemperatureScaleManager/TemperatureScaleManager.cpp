@@ -58,7 +58,7 @@ bool TemperatureScaleManager::begin()
 	char result[len + 1]; 
 	root.printTo(result, sizeof(result));
 	
-	Serial.println("[TemperatureScaleManager:: beginning...]");
+	Serial.println("[TemperatureScaleManager::begin] beginning...]");
 	
 	mqqt->publish(TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_MQQT_TOPIC_PUB, result);    
 }

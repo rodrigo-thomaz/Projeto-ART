@@ -41,5 +41,13 @@ namespace ART.Domotica.Repository.Repositories
 
             return entity;
         }
+
+        public async Task<List<DSFamilyTempSensor>> GetAllByHardwareId(Guid hardwareId)
+        {            
+            return await _context.DSFamilyTempSensor
+                .Include(x => x.DSFamilyTempSensorResolution)
+                .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == hardwareId) != null)
+                .ToListAsync();
+        }
     }
 }
