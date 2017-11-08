@@ -7,6 +7,9 @@
 #include "ConfigurationManager.h"
 #include "MQQTManager.h"
 
+#define MQQT_TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE   				"TemperatureScale.GetAllForDevice" 
+#define MQQT_TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED   	"TemperatureScale.GetAllForDeviceCompleted"
+
 class TemperatureScale {
   public:
 

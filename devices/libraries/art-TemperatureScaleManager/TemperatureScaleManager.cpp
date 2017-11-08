@@ -36,6 +36,10 @@ bool TemperatureScaleManager::begin()
 { 
 	if(!this->_configurationManager->initialized()) return false;
 
+	PubSubClient* mqqt = this->_mqqtManager.getMQQT();
+ 
+	if(!mqqt->connected()) return false;	
+	
 	String hardwareInApplicationId = this->_configurationManager->getHardwareSettings()->getHardwareInApplicationId();      
 
 	StaticJsonBuffer<100> JSONbuffer;
@@ -45,7 +49,9 @@ bool TemperatureScaleManager::begin()
 	int len = root.measureLength();
 	char result[len + 1]; 
 	root.printTo(result, sizeof(result));
+	
 	Serial.print("[MQQT] ");
 	Serial.println("TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE");
-	//MQTT.publish(TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE, result);    
+	
+	mqqt->publish(TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE, result);    
 }
