@@ -38,6 +38,12 @@ const char HTTP_END[] PROGMEM             = "</div></body></html>";
 
 #define WIFI_MANAGER_MAX_PARAMS 10
 
+#define WIFI_MANAGER_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void()>
+#define WIFI_MANAGER_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE std::function<void(String)>
+#define WIFI_MANAGER_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void()>
+#define WIFI_MANAGER_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void(int)>
+#define WIFI_MANAGER_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void()>
+
 class WiFiManagerParameter {
   public:
     WiFiManagerParameter(const char *custom);
@@ -97,15 +103,13 @@ class WiFiManager
     void          setAPStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);
     //sets config for a static IP
     void          setSTAStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);	
-    //called when AP mode and config portal is started
-    void          setStartConfigPortalCallback( void (*func)() );
-	//called when Captive Portal is invoked
-    void          setCaptivePortalCallback( void (*func)(String) );
-	
-	void          setSuccessConfigPortalCallback( void (*func)() );
-	void          setFailedConfigPortalCallback( void (*func)(int) );
-	void          setConnectingConfigPortalCallback( void (*func)() );
-	
+    
+    WiFiManager&  setStartConfigPortalCallback(WIFI_MANAGER_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);	
+    WiFiManager&  setCaptivePortalCallback(WIFI_MANAGER_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE callback);	
+	WiFiManager&  setSuccessConfigPortalCallback(WIFI_MANAGER_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
+	WiFiManager&  setFailedConfigPortalCallback(WIFI_MANAGER_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
+	WiFiManager&  setConnectingConfigPortalCallback(WIFI_MANAGER_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
+		
     //adds a custom parameter
     void          addParameter(WiFiManagerParameter *p);
     //if this is set, it will exit after config, even if connection is unsuccessful.
@@ -193,11 +197,11 @@ class WiFiManager
     boolean       connect;
     boolean       _debug = true;
 	
-    void (*_startConfigPortalCallback)() = NULL;
-	void (*_captivePortalCallback)(String) = NULL;
-	void (*_successConfigPortalCallback)() = NULL;
-	void (*_failedConfigPortalCallback)(int) = NULL;
-	void (*_connectingConfigPortalCallback)() = NULL;
+	WIFI_MANAGER_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE			_startConfigPortalCallback;
+	WIFI_MANAGER_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE				_captivePortalCallback;
+	WIFI_MANAGER_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE		_successConfigPortalCallback;
+	WIFI_MANAGER_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE		_failedConfigPortalCallback;
+	WIFI_MANAGER_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE	_connectingConfigPortalCallback;
 
     WiFiManagerParameter* _params[WIFI_MANAGER_MAX_PARAMS];
 

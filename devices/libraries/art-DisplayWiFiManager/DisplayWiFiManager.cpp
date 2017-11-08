@@ -1,8 +1,4 @@
 #include "DisplayWiFiManager.h"
-#include "Arduino.h"
-#include "DebugManager.h"
-#include "DisplayManager.h"
-#include "WiFiManager.h"
 
 DisplayWiFiManager::DisplayWiFiManager(DisplayManager& displayManager, WiFiManager& wifiManager, DebugManager& debugManager)
 {
@@ -10,12 +6,17 @@ DisplayWiFiManager::DisplayWiFiManager(DisplayManager& displayManager, WiFiManag
 	this->_wifiManager = &wifiManager;
 	this->_debugManager = &debugManager;
 	
-	//TODO: Falta resolver como que efetua este tipo de chamada para remover os handlers
-	// this->_wifiManager->setStartConfigPortalCallback(this->startConfigPortalCallback);
-	// this->_wifiManager->setCaptivePortalCallback(this->captivePortalCallback);
-	// this->_wifiManager->setSuccessConfigPortalCallback(this->successConfigPortalCallback);    
-	// this->_wifiManager->setFailedConfigPortalCallback(this->failedConfigPortalCallback);    
-	// this->_wifiManager->setConnectingConfigPortalCallback(this->connectingConfigPortalCallback); 
+	this->_startConfigPortalCallback = std::bind(&DisplayWiFiManager::startConfigPortalCallback, this);	
+	this->_captivePortalCallback = [=](String ip) { this->captivePortalCallback(ip); };		
+	this->_successConfigPortalCallback = std::bind(&DisplayWiFiManager::successConfigPortalCallback, this);
+	this->_failedConfigPortalCallback = [=](int connectionResult) { this->failedConfigPortalCallback(connectionResult); };		
+	this->_connectingConfigPortalCallback = std::bind(&DisplayWiFiManager::connectingConfigPortalCallback, this);
+		
+	this->_wifiManager->setStartConfigPortalCallback(this->_startConfigPortalCallback);
+	this->_wifiManager->setCaptivePortalCallback(this->_captivePortalCallback);
+	this->_wifiManager->setSuccessConfigPortalCallback(this->_successConfigPortalCallback);    
+	this->_wifiManager->setFailedConfigPortalCallback(this->_failedConfigPortalCallback);    
+	this->_wifiManager->setConnectingConfigPortalCallback(this->_connectingConfigPortalCallback); 
 }
 
 DisplayWiFiManager::~DisplayWiFiManager()

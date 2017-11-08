@@ -97,11 +97,6 @@ void setup() {
 	displayManager.display.display();
 
   //TODO: Gambeta, nos constructors estão comentados os códigos que deveriam funcionar no lugar destes handlers abaixo
-	wifiManager.setStartConfigPortalCallback(handleWMStartConfigPortalCallback);
-  wifiManager.setCaptivePortalCallback(handleWMCaptivePortalCallback);
-  wifiManager.setSuccessConfigPortalCallback(handleWMSuccessConfigPortalCallback);    
-  wifiManager.setFailedConfigPortalCallback(handleWMFailedConfigPortalCallback);    
-  wifiManager.setConnectingConfigPortalCallback(handleWMConnectingConfigPortalCallback); 
   ntpManager.setUpdateCallback(handleNTPUpdateCallback);  
   
   wifiManager.autoConnect();
@@ -118,11 +113,6 @@ void setup() {
 }
 
 //TODO: Gambeta, nos constructors estão comentados os códigos que deveriam funcionar no lugar destes handlers abaixo
-void handleWMStartConfigPortalCallback () {  displayWiFiManager.startConfigPortalCallback(); }
-void handleWMCaptivePortalCallback (String ip) {  displayWiFiManager.captivePortalCallback(ip); }
-void handleWMSuccessConfigPortalCallback () {  displayWiFiManager.successConfigPortalCallback(); }
-void handleWMFailedConfigPortalCallback (int connectionResult) {  displayWiFiManager.failedConfigPortalCallback(connectionResult); }
-void handleWMConnectingConfigPortalCallback () {  displayWiFiManager.connectingConfigPortalCallback(); }
 void handleNTPUpdateCallback(bool update, bool forceUpdate){ displayNTPManager.updateCallback(update, forceUpdate); }
 
 void initConfiguration()

@@ -768,25 +768,29 @@ boolean WiFiManager::captivePortal() {
   return false;
 }
 
-//start up config portal callback
-void WiFiManager::setStartConfigPortalCallback( void (*func)() ) {
-  _startConfigPortalCallback = func;
+WiFiManager& WiFiManager::setStartConfigPortalCallback(WIFI_MANAGER_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE callback) {
+	this->_startConfigPortalCallback = callback;
+	return *this;
 }
 
-void WiFiManager::setCaptivePortalCallback( void (*func)(String ip) ) {
-  _captivePortalCallback = func;
+WiFiManager& WiFiManager::setCaptivePortalCallback(WIFI_MANAGER_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE callback) {
+	this->_captivePortalCallback = callback;
+	return *this;
 }
 
-void WiFiManager::setSuccessConfigPortalCallback( void (*func)() ) {
-  _successConfigPortalCallback = func;
+WiFiManager& WiFiManager::setSuccessConfigPortalCallback(WIFI_MANAGER_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE callback) {
+	this->_successConfigPortalCallback = callback;
+	return *this;
 }
 
-void WiFiManager::setFailedConfigPortalCallback( void (*func)(int connectionResult) ) {
-  _failedConfigPortalCallback = func;
+WiFiManager& WiFiManager::setFailedConfigPortalCallback(WIFI_MANAGER_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE callback) {
+	this->_failedConfigPortalCallback = callback;
+	return *this;
 }
 
-void WiFiManager::setConnectingConfigPortalCallback( void (*func)() ) {
-  _connectingConfigPortalCallback = func;
+WiFiManager& WiFiManager::setConnectingConfigPortalCallback(WIFI_MANAGER_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE callback) {
+	this->_connectingConfigPortalCallback = callback;
+	return *this;
 }
 
 //sets a custom element to add to head, like a new style tag
