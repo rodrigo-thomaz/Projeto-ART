@@ -9,7 +9,6 @@ using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Worker.IConsumers;
 using System;
 using ART.Domotica.Worker.Contracts;
-using ART.Domotica.Model;
 using System.Collections.Generic;
 using ART.Domotica.Contract;
 
@@ -102,11 +101,11 @@ namespace ART.Domotica.Worker.Consumers
         public async Task GetAllForDeviceReceivedAsync(object sender, BasicDeliverEventArgs e)
         {            
             _model.BasicAck(e.DeliveryTag, false);            
-            var data = await _temperatureScaleDomain.GetAll();
-            var deviceMessage = new DeviceMessageContract<List<TemperatureScaleGetAllModel>>(TemperatureScaleConstants.GetAllForDeviceCompletedQueueName, data);
+            var data = await _temperatureScaleDomain.GetAllForDevice();
+            var deviceMessage = new DeviceMessageContract<List<TemperatureScaleGetAllForDeviceResponseContract>>(TemperatureScaleConstants.GetAllForDeviceCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
-            var queueName = GetQueueName(requestContract.HardwareInApplicationId);
+            var queueName = GetQueueName(requestContract.HardwareId);
             _model.BasicPublish("", queueName, null, buffer);            
         }
 

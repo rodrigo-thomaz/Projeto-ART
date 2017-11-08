@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using ART.Domotica.Model;
 using AutoMapper;
 using ART.Infra.CrossCutting.Domain;
+using ART.Domotica.Contract;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -32,6 +33,13 @@ namespace ART.Domotica.Domain.Services
         {
             var data = await _temperatureScaleRepository.GetAll();
             var result = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllModel>>(data);
+            return result;
+        }
+
+        public async Task<List<TemperatureScaleGetAllForDeviceResponseContract>> GetAllForDevice()
+        {
+            var data = await _temperatureScaleRepository.GetAll();
+            var result = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllForDeviceResponseContract>>(data);
             return result;
         }
 

@@ -45,9 +45,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm"
 #define TOPIC_SUB_INSERT_IN_APPLICATION "ESPDevice.InsertInApplication"
 #define TOPIC_SUB_DELETE_FROM_APPLICATION "ESPDevice.DeleteFromApplication"
-#define TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED   "TemperatureScale.GetAllCompleted"    //tópico MQTT de envio de informações para Broker
 
-#define TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE   "TemperatureScale.GetAllForDevice"    //tópico MQTT de envio de informações para Broker
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
 uint64_t publishMessageTimestamp = 0;
@@ -139,7 +137,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     Serial.print("payload: ");
     Serial.println(json);
 
-    StaticJsonBuffer<300> jsonBuffer;
+    StaticJsonBuffer<1000> jsonBuffer;
     
     JsonObject& root = jsonBuffer.parseObject(json);
   
@@ -161,7 +159,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TOPIC_SUB_UPDATE_PIN)){
       displayAccessManager.updatePin(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED)){
+    if(payloadTopic == String(MQQT_TOPIC_SUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE_COMPLETED)){
       getInApplicationForDeviceCompleted();      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
@@ -181,32 +179,9 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     }
 }
 
-void getInApplicationForDevice()
-{
-  if(!configurationManager.initialized()) return;
-  
-  String hardwareInApplicationId = configurationManager.getHardwareSettings()->getHardwareInApplicationId();      
-  
-  StaticJsonBuffer<100> JSONbuffer;
-  JsonObject& root = JSONbuffer.createObject();
-  root["hardwareInApplicationId"] = hardwareInApplicationId;
-  
-  int len = root.measureLength();
-  char result[len + 1]; 
-  root.printTo(result, sizeof(result));
-  Serial.print("[MQQT] ");
-  Serial.println("TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE");
-
-  PubSubClient* mqqt = mqqtManager.getMQQT();
- 
-  if(mqqt->connected()){
-    mqqt->publish(TOPIC_PUB_GET_ALL_TEMPERATURE_SCALE_FOR_DEVICE, result);    
-  }  
-}
-
 void getInApplicationForDeviceCompleted()
 {
-  Serial.println("******************** TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED ******************** !!!!!!!!!!!!!!!!!!!!!!!!!");
+  Serial.println("****************************************** TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED ******************** !!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 void loop() {	  
@@ -245,8 +220,8 @@ void loopInApplication()
     displayTemperatureSensorManager.printUpdate(true);
     temperatureSensorManager.refresh();
 
-    getInApplicationForDevice();
-    mqqtManager.begin();
+    // Temp
+    temperatureScaleManager.begin();
   }  
   else{
     displayTemperatureSensorManager.printUpdate(false);

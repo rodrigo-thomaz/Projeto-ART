@@ -4,6 +4,6 @@ namespace ART.Domotica.Contract
 {
     public class DeviceRequestContract
     {
-        public Guid HardwareInApplicationId { get; set; }
+        public Guid HardwareId { get; set; }
     }
 }

@@ -55,6 +55,7 @@
     <Compile Include="ESPDeviceGetInApplicationForDeviceResponseContract.cs" />
     <Compile Include="ESPDeviceUpdatePinsContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemperatureScaleGetAllForDeviceResponseContract.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
