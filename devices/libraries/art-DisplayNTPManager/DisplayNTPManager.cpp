@@ -8,7 +8,10 @@ DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, NTPManager&
 {
 	this->_displayManager = &displayManager;
 	this->_ntpManager = &ntpManager;
-	this->_debugManager = &debugManager;	
+	this->_debugManager = &debugManager;
+
+	this->_updateCallback = [=](bool update, bool forceUpdate) { this->updateCallback(update, forceUpdate); };	
+	this->_ntpManager->setUpdateCallback(this->_updateCallback);	
 }
 
 DisplayNTPManager::~DisplayNTPManager()

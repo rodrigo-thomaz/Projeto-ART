@@ -95,9 +95,6 @@ void setup() {
 	displayManager.display.setTextColor(WHITE);
 	displayManager.display.setCursor(0, 0);	
 	displayManager.display.display();
-
-  //TODO: Gambeta, nos constructors estão comentados os códigos que deveriam funcionar no lugar destes handlers abaixo
-  ntpManager.setUpdateCallback(handleNTPUpdateCallback);  
   
   wifiManager.autoConnect();
 
@@ -111,9 +108,6 @@ void setup() {
 
   ntpManager.begin();  
 }
-
-//TODO: Gambeta, nos constructors estão comentados os códigos que deveriam funcionar no lugar destes handlers abaixo
-void handleNTPUpdateCallback(bool update, bool forceUpdate){ displayNTPManager.updateCallback(update, forceUpdate); }
 
 void initConfiguration()
 {

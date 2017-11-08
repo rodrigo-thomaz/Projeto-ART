@@ -211,6 +211,7 @@ void NTPManager::sendNTPPacket() {
   this->_udp->endPacket();
 }
 
-void NTPManager::setUpdateCallback( void (*func)(bool update, bool forceUpdate) ) {
-	_updateCallback = func;
+NTPManager& NTPManager::setUpdateCallback(NTP_MANAGER_SET_UPDATE_CALLBACK_SIGNATURE callback) {
+	this->_updateCallback = callback;
+	return *this;
 }

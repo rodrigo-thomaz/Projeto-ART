@@ -10,19 +10,20 @@ class DisplayNTPManager
 {
 public:
 	DisplayNTPManager(DisplayManager& displayManager, NTPManager& ntpManager, DebugManager& debugManager);
-	~DisplayNTPManager();	
-	
-	//Também será private quando resolver o problema dos handlers
-	void					updateCallback(bool update, bool forceUpdate);	
+	~DisplayNTPManager();
 	
 private:
 
-	DisplayManager*       	_displayManager;	
-	NTPManager*          	_ntpManager;
-	DebugManager*         	_debugManager;
-
-	void					printTime();
-	void					printUpdate(bool on);
+	DisplayManager*       				_displayManager;	
+	NTPManager*          				_ntpManager;
+	DebugManager*         				_debugManager;
+			
+	void								printTime();
+	void								printUpdate(bool on);
+				
+	void								updateCallback(bool update, bool forceUpdate);	
+	
+	std::function<void(bool, bool)>		_updateCallback;
 	
 };
 
