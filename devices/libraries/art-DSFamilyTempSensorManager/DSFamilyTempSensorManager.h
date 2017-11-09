@@ -85,8 +85,10 @@ class DSFamilyTempSensorManager
   
     DSFamilyTempSensorManager(DebugManager& debugManager, NTPManager& ntpManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager);
 	
-	bool 								begin();
+	void 								begin();
 				
+	bool								initialize();
+	
 	void 								refresh();	
 			
 	DSFamilyTempSensor 					*getSensors();
@@ -101,7 +103,10 @@ class DSFamilyTempSensorManager
 	DebugManager*          				_debugManager;
 	NTPManager*          				_ntpManager;
 	ConfigurationManager*				_configurationManager;	
-	MQQTManager* 		                _mqqtManager;
+	MQQTManager* 		                _mqqtManager;				
+	
+	bool								_initialized;
+	bool								_initializing;					
 				
 	const uint8_t* 						getDeviceAddressById(String deviceAddress);
 	String 								getFamily(byte deviceAddress[8]);
@@ -109,12 +114,6 @@ class DSFamilyTempSensorManager
 	String 								convertDeviceAddressToString(DeviceAddress deviceAddress);
 	
 	std::vector<DSFamilyTempSensor> 	_sensors;
-	
-	bool								_dallasInitialized;
-	
-	bool								_begin;
-	bool								_beginning;
-	
 };
 
 #endif

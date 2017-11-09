@@ -150,13 +150,14 @@ DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager,
 	this->_mqqtManager = &mqqtManager;
 }
 
-bool DSFamilyTempSensorManager::begin()
+void DSFamilyTempSensorManager::begin()
 {	
-	if(!this->_dallasInitialized){		
-		_dallas.begin();  
-		this->_dallasInitialized = true;
-	}	
-
+	_dallas.begin();  	
+	this->initialize();
+}
+	
+bool DSFamilyTempSensorManager::initialize()
+{
 	// Localizando devices
 	uint8_t deviceCount = _dallas.getDeviceCount();
 		
@@ -202,6 +203,8 @@ bool DSFamilyTempSensorManager::begin()
 
 void DSFamilyTempSensorManager::refresh()
 {	
+	if(!this->initialize()) return;
+	
 	_dallas.requestTemperatures();
 	long epochTimeUtc = this->_ntpManager->getEpochTimeUTC();		
 	for(int i = 0; i < this->_sensors.size(); ++i){		
@@ -214,7 +217,7 @@ void DSFamilyTempSensorManager::refresh()
 		this->_sensors[i].setEpochTimeUtc(epochTimeUtc);
 	}
 }
-	
+
 DSFamilyTempSensor *DSFamilyTempSensorManager::getSensors()
 {
 	DSFamilyTempSensor* array = this->_sensors.data();
