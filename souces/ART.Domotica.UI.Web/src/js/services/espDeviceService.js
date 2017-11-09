@@ -67,6 +67,10 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
     }
 
     var onInsertInApplicationCompleted = function (payload) {
+        var dataUTF8 = decodeURIComponent(escape(payload.body));
+        var data = JSON.parse(dataUTF8);
+        data.createDate = new Date(data.createDate * 1000).toLocaleString();
+        serviceFactory.devices.push(data);
         EventDispatcher.trigger('espDeviceService_onInsertInApplicationCompleted');
     }  
 
