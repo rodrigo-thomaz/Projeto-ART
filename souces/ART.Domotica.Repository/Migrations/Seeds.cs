@@ -124,10 +124,10 @@
             #region DSFamilyTempSensor
 
             var sensor_1_Address = "28fff62293165b0";
-            var sensor_2_1_Address = "28ffe76da2163d3";
-            var sensor_2_2_Address = "28fffe6593164b6";
-            var sensor_3_1_Address = "28ffc05f93164c3";
-            var sensor_3_2_Address = "28ff715f9316441";
+            var sensor_2_1_Address = "40:255:231:109:162:22:3:211";
+            var sensor_2_2_Address = "40:255:254:101:147:22:4:182";
+            var sensor_3_1_Address = "40:255:192:95:147:22:4:195";
+            var sensor_3_2_Address = "40:255:113:95:147:22:4:65";
 
             var sensor_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
             var sensor_2_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
@@ -152,6 +152,7 @@
             else
             {
                 sensor_1.Family = "DS18B20";
+                sensor_1.DeviceAddress = sensor_1_Address;
             }
 
             if (sensor_2_1 == null)
@@ -171,6 +172,7 @@
             else
             {
                 sensor_2_1.Family = "DS18B20";
+                sensor_2_1.DeviceAddress = sensor_2_1_Address;
             }
 
             if (sensor_2_2 == null)
@@ -190,6 +192,7 @@
             else
             {
                 sensor_2_2.Family = "DS18B20";
+                sensor_2_2.DeviceAddress = sensor_2_2_Address;
             }
 
             if (sensor_3_1 == null)
@@ -209,6 +212,7 @@
             else
             {
                 sensor_3_1.Family = "DS18B20";
+                sensor_3_1.DeviceAddress = sensor_3_1_Address;
             }
 
             if (sensor_3_2 == null)
@@ -228,6 +232,7 @@
             else
             {
                 sensor_3_2.Family = "DS18B20";
+                sensor_3_2.DeviceAddress = sensor_3_2_Address;
             }
 
             context.SaveChanges();

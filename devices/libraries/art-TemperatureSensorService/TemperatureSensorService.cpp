@@ -12,11 +12,10 @@
 
 // TemperatureSensor
 
-TemperatureSensor2::TemperatureSensor2(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId)
+TemperatureSensor2::TemperatureSensor2(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
 	this->_deviceAddress = deviceAddress;
-	this->_deviceAddressArray = reinterpret_cast<const uint8_t*>(deviceAddress.c_str());	
 	this->_family = family;
 	this->_validFamily = true;
 	this->_resolution = resolution;
@@ -26,11 +25,10 @@ TemperatureSensor2::TemperatureSensor2(String dsFamilyTempSensorId, String devic
 	this->_highAlarm = 0;
 }
 
-TemperatureSensor2::TemperatureSensor2(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm)
+TemperatureSensor2::TemperatureSensor2(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
 	this->_deviceAddress = deviceAddress;
-	this->_deviceAddressArray = reinterpret_cast<const uint8_t*>(deviceAddress.c_str());	
 	this->_family = family;
 	this->_validFamily = true;
 	this->_resolution = resolution;
@@ -45,14 +43,9 @@ String TemperatureSensor2::getDSFamilyTempSensorId()
 	return this->_dsFamilyTempSensorId;
 }
 
-String TemperatureSensor2::getDeviceAddress()
+byte* TemperatureSensor2::getDeviceAddress()
 {
 	return this->_deviceAddress;
-}
-
-const uint8_t* TemperatureSensor2::getDeviceAddressArray()
-{
-	return this->_deviceAddressArray;
 }
 
 String TemperatureSensor2::getFamily()
@@ -207,10 +200,18 @@ void TemperatureSensorService::setSensorsByMQQTCallback(String json)
 	{
 		Serial.println("EntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrou");
 		
-		JsonObject& root = it->as<JsonObject>();
+		JsonObject& root = it->as<JsonObject>();		
+		
+		root.printTo(Serial);
+		
+		byte deviceAddress[8];			
+		for (uint8_t i = 0; i < 8; i++)
+		{
+			deviceAddress[i] = root["deviceAddress"][i];
+			Serial.println(deviceAddress[i]);
+		}		
 		
 		String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
-		String deviceAddress = root["deviceAddress"];
 		String family = root["family"];		
 		int resolution = int(root["resolutionBits"]);				
 		byte temperatureScaleId = byte(root["temperatureScaleId"]);			

@@ -6,7 +6,7 @@ namespace ART.Domotica.Contract
     {
         public Guid DSFamilyTempSensorId { get; set; }
 
-        public string DeviceAddress
+        public short[] DeviceAddress
         {
             get; set;
         }

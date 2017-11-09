@@ -8,6 +8,7 @@
 
     using global::AutoMapper;
     using ART.Domotica.Contract;
+    using System;
 
     public class DSFamilyTempSensorProfile : Profile
     {
@@ -18,6 +19,15 @@
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllModel>();
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>()
+                .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
+                    var split = src.DeviceAddress.Split(':');
+                    var result = new short[8];
+                    for (int i = 0; i < 8; i++)
+                    {
+                        result[i] = short.Parse(split[i]);
+                    }
+                    return result;
+                }))
                 .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.DSFamilyTempSensorResolution.Bits))
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
 

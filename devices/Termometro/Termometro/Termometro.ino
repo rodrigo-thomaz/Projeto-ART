@@ -1,6 +1,6 @@
 #include "DebugManager.h"
 #include "ConfigurationManager.h"
-#include "TemperatureSensorManager.h"
+#include "DSFamilyTempSensorManager.h"
 #include "TemperatureSensorService.h"
 #include "TemperatureScaleManager.h"
 #include "NTPManager.h"
@@ -61,7 +61,7 @@ NTPManager ntpManager(debugManager, configurationManager);
 MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
-TemperatureSensorManager temperatureSensorManager(debugManager, ntpManager);
+DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, ntpManager);
 TemperatureSensorService temperatureSensorService(debugManager, ntpManager, configurationManager, mqqtManager);
 TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager, mqqtManager);
 
@@ -69,7 +69,7 @@ DisplayAccessManager displayAccessManager(debugManager, displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
-DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, temperatureSensorManager, debugManager);
+DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager);
 
 void setup() {
 		
@@ -85,7 +85,7 @@ void setup() {
 
 	displayManager.begin();
 
-	temperatureSensorManager.begin();
+	dsFamilyTempSensorManager.begin();
 
 	if (debugManager.isDebug()) Serial.println("Iniciando...");
 
@@ -163,13 +163,13 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       temperatureSensorService.setSensorsByMQQTCallback(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
-      temperatureSensorManager.setResolution(payloadContract);
+      dsFamilyTempSensorManager.setResolution(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_SET_HIGH_ALARM)){
-      temperatureSensorManager.setHighAlarm(payloadContract);
+      dsFamilyTempSensorManager.setHighAlarm(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_SET_LOW_ALARM)){
-      temperatureSensorManager.setLowAlarm(payloadContract);
+      dsFamilyTempSensorManager.setLowAlarm(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_INSERT_IN_APPLICATION)){
       configurationManager.getHardwareSettings()->insertInApplication(payloadContract);      
@@ -213,7 +213,7 @@ void loopInApplication()
   if(now - readTempTimestamp > READTEMP_INTERVAL) {
     readTempTimestamp = now;
     displayTemperatureSensorManager.printUpdate(true);
-    temperatureSensorManager.refresh();
+    dsFamilyTempSensorManager.refresh();
 
     // Temp
     temperatureScaleManager.begin();
@@ -236,7 +236,7 @@ void loopInApplication()
     if(now - publishMessageTimestamp > publishMessageInterval) {
       publishMessageTimestamp = now;
       displayMQTTManager.printSent(true);
-      char *sensorsJson = temperatureSensorManager.getSensorsJson();
+      char *sensorsJson = dsFamilyTempSensorManager.getSensorsJson();
       Serial.println("enviando para o servidor => ");
       //Serial.println(sensorsJson); // está estourando erro aqui
       mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);            

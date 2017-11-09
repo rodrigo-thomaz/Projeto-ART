@@ -146,6 +146,10 @@
     <Compile Include="Migrations\201711082011212_HasAlarmFiledAdd.Designer.cs">
       <DependentUpon>201711082011212_HasAlarmFiledAdd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711090025514_HasAlarmFiledAdd2.cs" />
+    <Compile Include="Migrations\201711090025514_HasAlarmFiledAdd2.Designer.cs">
+      <DependentUpon>201711090025514_HasAlarmFiledAdd2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -224,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711082011212_HasAlarmFiledAdd.resx">
       <DependentUpon>201711082011212_HasAlarmFiledAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711090025514_HasAlarmFiledAdd2.resx">
+      <DependentUpon>201711090025514_HasAlarmFiledAdd2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

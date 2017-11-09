@@ -4,12 +4,12 @@
 #include "Arduino.h"
 #include "DebugManager.h"
 #include "DisplayManager.h"
-#include "TemperatureSensorManager.h"
+#include "DSFamilyTempSensorManager.h"
 
 class DisplayTemperatureSensorManager
 {
 public:
-	DisplayTemperatureSensorManager(DisplayManager& displayManager, TemperatureSensorManager& temperatureSensorManager, DebugManager& debugManager);
+	DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager);
 	~DisplayTemperatureSensorManager();	
 		
 	void						printUpdate(bool on);	
@@ -18,7 +18,7 @@ public:
 private:
 
 	DisplayManager*       		_displayManager;	
-	TemperatureSensorManager*   _temperatureSensorManager;
+	DSFamilyTempSensorManager*   _dsFamilyTempSensorManager;
 	DebugManager*         		_debugManager;
 
 	void						printSensor(TemperatureSensor& temperatureSensor, int x, int y, int width, int height);

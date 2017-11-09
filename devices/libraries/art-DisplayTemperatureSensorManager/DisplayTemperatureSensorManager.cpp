@@ -2,12 +2,12 @@
 #include "Arduino.h"
 #include "DebugManager.h"
 #include "DisplayManager.h"
-#include "TemperatureSensorManager.h"
+#include "DSFamilyTempSensorManager.h"
 
-DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, TemperatureSensorManager& temperatureSensorManager, DebugManager& debugManager)
+DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager)
 {
 	this->_displayManager = &displayManager;
-	this->_temperatureSensorManager = &temperatureSensorManager;
+	this->_dsFamilyTempSensorManager = &dsFamilyTempSensorManager;
 	this->_debugManager = &debugManager;
 }
 
@@ -55,7 +55,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	int screenWidth = screenX2 - screenX1;
 	int screenHeight = screenY2 - screenY1;	
  
-	TemperatureSensor* sensors = this->_temperatureSensorManager->getSensors();
+	TemperatureSensor* sensors = this->_dsFamilyTempSensorManager->getSensors();
 	
 	int sensorsCount = sizeof(sensors);
     

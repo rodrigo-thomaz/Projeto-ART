@@ -22,13 +22,12 @@ class TemperatureSensor2
 	
   public:
   
-	TemperatureSensor2(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId);
-	TemperatureSensor2(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
+	TemperatureSensor2(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId);
+	TemperatureSensor2(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
 
     String								getDSFamilyTempSensorId();
 	
-	String								getDeviceAddress();	
-	const uint8_t*						getDeviceAddressArray();		
+	byte*								getDeviceAddress();	
 	
 	String								getFamily();	
 	bool								getValidFamily();	
@@ -60,8 +59,7 @@ class TemperatureSensor2
   
 	String 								_dsFamilyTempSensorId;	
 	
-	String 								_deviceAddress;
-	const uint8_t* 						_deviceAddressArray;	
+	byte* 								_deviceAddress;
 	
 	String 								_family;
 	bool 								_validFamily;
@@ -80,7 +78,7 @@ class TemperatureSensor2
 	
 	long 								_epochTimeUtc;	
 	
-	friend class TemperatureSensorManager;
+	friend class DSFamilyTempSensorManager;
 	
 };
 

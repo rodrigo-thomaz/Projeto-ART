@@ -25,7 +25,7 @@
             //DeviceAddress
             Property(x => x.DeviceAddress)
                 .HasColumnOrder(1)
-                .HasMaxLength(15)
+                .HasMaxLength(32)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true } ));

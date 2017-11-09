@@ -1,5 +1,5 @@
-#ifndef TemperatureSensorManager_h
-#define TemperatureSensorManager_h
+#ifndef DSFamilyTempSensorManager_h
+#define DSFamilyTempSensorManager_h
 
 #include "Arduino.h"
 #include "vector"
@@ -15,13 +15,12 @@ class TemperatureSensor
 	
   public:
   
-	TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId);
-	TemperatureSensor(String dsFamilyTempSensorId, String deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
+	TemperatureSensor(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId);
+	TemperatureSensor(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
 
     String								getDSFamilyTempSensorId();		
 	
-	String								getDeviceAddress();	
-	const uint8_t*						getDeviceAddressArray();		
+	byte*								getDeviceAddress();	
 	
 	String								getFamily();
 	bool								getValidFamily();	
@@ -55,8 +54,7 @@ class TemperatureSensor
   
 	String 								_dsFamilyTempSensorId;	
 	
-	String 								_deviceAddress;
-	const uint8_t* 						_deviceAddressArray;	
+	byte* 								_deviceAddress;
 	
 	String 								_family;
 	bool 								_validFamily;
@@ -75,15 +73,15 @@ class TemperatureSensor
 	
 	long 								_epochTimeUtc;	
 	
-	friend class TemperatureSensorManager;
+	friend class DSFamilyTempSensorManager;
 	
 };
 
-class TemperatureSensorManager
+class DSFamilyTempSensorManager
 {
   public:
   
-    TemperatureSensorManager(DebugManager& debugManager, NTPManager& ntpManager);
+    DSFamilyTempSensorManager(DebugManager& debugManager, NTPManager& ntpManager);
 	
 	void 								begin();
 				
