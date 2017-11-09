@@ -181,13 +181,14 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract>>(e.Body);
             var data = await _espDeviceDomain.DeleteFromApplication(message);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, null);
+            _model.BasicPublish(exchange, rountingKey, null, buffer);
 
             //Enviando para o Device
 
-            var deviceMessage = new DeviceMessageContract<ESPDeviceDeleteFromApplicationResponseContract>(ESPDeviceConstants.DeleteFromApplicationQueueName, data);
+            var deviceMessage = new DeviceMessageContract<ESPDeviceDeleteFromApplicationResponseContract>(ESPDeviceConstants.DeleteFromApplicationQueueName, null);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var queueName = GetDeviceQueueName(data.HardwareId);
             _model.BasicPublish("", queueName, null, deviceBuffer);

@@ -3,11 +3,17 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
+    var initialized = false;
+
     var serviceFactory = {};
 
     var onConnected = function () {
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetListInApplicationCompleted', onGetListInApplicationCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.DeleteFromApplicationCompleted', onDeleteFromApplicationCompleted);
+        if (!initialized) {
+            initialized = true;
+            getListInApplication();
+        }
     }
 
     var getListInApplication = function () {
@@ -28,10 +34,20 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
     var onGetListInApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        EventDispatcher.trigger('espDeviceService_onGetListInApplicationCompleted', data);
+        for (var i = 0; i < data.length; i++) {
+            data[i].createDate = new Date(data[i].createDate * 1000).toLocaleString();
+            serviceFactory.devices.push(data[i]);
+        }
     }
 
     var onDeleteFromApplicationCompleted = function (payload) {
+        var dataUTF8 = decodeURIComponent(escape(payload.body));
+        var data = JSON.parse(dataUTF8);
+        for (var i = 0; i < serviceFactory.devices.length; i++) {
+            if (serviceFactory.devices[i].hardwareInApplicationId == data.hardwareInApplicationId) {
+                serviceFactory.devices.splice(i, 1);
+            }
+        }
         EventDispatcher.trigger('espDeviceService_onDeleteFromApplicationCompleted');
     }
 
@@ -43,8 +59,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
 
     // serviceFactory
 
-    serviceFactory.getListInApplication = getListInApplication;
     serviceFactory.deleteFromApplication = deleteFromApplication;
+
+    serviceFactory.devices = [];  
 
     return serviceFactory;
 
