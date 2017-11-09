@@ -412,7 +412,7 @@ void DSFamilyTempSensorManager::generateNestedSensor(DSFamilyTempSensor dsFamily
 {	
 	JsonObject& JSONencoder = root.createNestedObject();
 
-	JSONencoder["deviceAddress"] = dsFamilyTempSensor.getDeviceAddress();
+	JSONencoder["deviceAddress"] = this->convertDeviceAddressToString(dsFamilyTempSensor.getDeviceAddress());
 	JSONencoder["epochTimeUtc"] = dsFamilyTempSensor.getEpochTimeUtc();
 	JSONencoder["validFamily"] = dsFamilyTempSensor.getValidFamily();
 	JSONencoder["family"] = dsFamilyTempSensor.getFamily();
@@ -424,7 +424,7 @@ void DSFamilyTempSensorManager::generateNestedSensor(DSFamilyTempSensor dsFamily
 	JSONencoder["highAlarm"] = dsFamilyTempSensor.getHighAlarm();
 }
 
-String DSFamilyTempSensorManager::convertDeviceAddressToString(DeviceAddress deviceAddress)
+String DSFamilyTempSensorManager::convertDeviceAddressToString(const uint8_t* deviceAddress)
 {
 	String result;	
 	for (uint8_t i = 0; i < 8; i++)
