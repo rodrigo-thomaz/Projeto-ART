@@ -20,7 +20,7 @@ class DSFamilyTempSensor
 
     String								getDSFamilyTempSensorId();		
 	
-	uint8_t		 						*getDeviceAddress();	
+	const uint8_t*		 				getDeviceAddress();	
 	
 	String								getFamily();
 	bool								getValidFamily();	

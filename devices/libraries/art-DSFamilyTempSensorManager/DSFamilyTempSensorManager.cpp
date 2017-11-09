@@ -45,7 +45,7 @@ String DSFamilyTempSensor::getDSFamilyTempSensorId()
 	return this->_dsFamilyTempSensorId;
 }
 
-uint8_t *DSFamilyTempSensor::getDeviceAddress()
+const uint8_t* DSFamilyTempSensor::getDeviceAddress()
 {
 	return this->_deviceAddress.data();
 }
