@@ -168,7 +168,7 @@ bool DSFamilyTempSensorManager::initialized()
  
 	if(!mqqt->connected()) return false;	
 	
-	// Begin
+	// initializing
 	
 	this->_initializing = true;
 	
