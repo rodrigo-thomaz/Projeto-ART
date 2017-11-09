@@ -266,7 +266,7 @@ void DSFamilyTempSensorManager::setResolution(String json)
 	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
 	int value = root["dsFamilyTempSensorResolutionId"];
 
-	_dallas.setResolution(getDeviceAddress(dsFamilyTempSensorId), value);
+	_dallas.setResolution(getDeviceAddressById(dsFamilyTempSensorId), value);
 
 	Serial.print("setResolution=");
 	Serial.println(json);
@@ -286,7 +286,7 @@ void DSFamilyTempSensorManager::setLowAlarm(String json)
 	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
 	int value = root["dsFamilyTempSensorResolutionId"];
 
-	_dallas.setLowAlarmTemp(getDeviceAddress(dsFamilyTempSensorId), value);
+	_dallas.setLowAlarmTemp(getDeviceAddressById(dsFamilyTempSensorId), value);
 
 	Serial.print("setLowAlarm=");
 	Serial.println(json);
@@ -306,13 +306,13 @@ void DSFamilyTempSensorManager::setHighAlarm(String json)
 	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
 	int value = root["dsFamilyTempSensorResolutionId"];
 
-	_dallas.setHighAlarmTemp(getDeviceAddress(dsFamilyTempSensorId), value);
+	_dallas.setHighAlarmTemp(getDeviceAddressById(dsFamilyTempSensorId), value);
 
 	Serial.print("sethighAlarm=");
 	Serial.println(json);
 }
 
-const uint8_t *DSFamilyTempSensorManager::getDeviceAddress(String dsFamilyTempSensorId) {
+const uint8_t* DSFamilyTempSensorManager::getDeviceAddressById(String dsFamilyTempSensorId) {
 	for (int i = 0; i < this->_sensors.size(); ++i) {
 		if (this->_sensors[i].getDSFamilyTempSensorId() == dsFamilyTempSensorId) {
 			return this->_sensors[i].getDeviceAddress();

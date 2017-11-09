@@ -99,7 +99,7 @@ class DSFamilyTempSensorManager
 	DebugManager*          				_debugManager;
 	NTPManager*          				_ntpManager;
 				
-	const uint8_t 						*getDeviceAddress(String deviceAddress);
+	const uint8_t* 						getDeviceAddressById(String deviceAddress);
 	String 								getFamily(byte deviceAddress[8]);
 	void								generateNestedSensor(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
 	
