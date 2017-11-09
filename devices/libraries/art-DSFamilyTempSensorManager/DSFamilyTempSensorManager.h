@@ -15,12 +15,12 @@ class TemperatureSensor
 	
   public:
   
-	TemperatureSensor(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId);
-	TemperatureSensor(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
+	TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId);
+	TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
 
     String								getDSFamilyTempSensorId();		
 	
-	byte*								getDeviceAddress();	
+	byte		 						*getDeviceAddress();	
 	
 	String								getFamily();
 	bool								getValidFamily();	
@@ -54,7 +54,7 @@ class TemperatureSensor
   
 	String 								_dsFamilyTempSensorId;	
 	
-	byte* 								_deviceAddress;
+	std::vector<byte> 					_deviceAddress;
 	
 	String 								_family;
 	bool 								_validFamily;

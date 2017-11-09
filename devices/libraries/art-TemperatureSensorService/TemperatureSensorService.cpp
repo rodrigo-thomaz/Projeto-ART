@@ -180,7 +180,7 @@ bool TemperatureSensorService::begin()
 
 void TemperatureSensorService::setSensorsByMQQTCallback(String json)
 {
-	Serial.println("[TemperatureSensorService::setSensorsByMQQTCallback]");
+	Serial.println("[TemperatureSensorService::setSensorsByMQQTCallback] Enter");
 	
 	this->_begin = true;
 	this->_beginning = false;
@@ -198,18 +198,20 @@ void TemperatureSensorService::setSensorsByMQQTCallback(String json)
 
 	for(JsonArray::iterator it=jsonArray.begin(); it!=jsonArray.end(); ++it) 
 	{
-		Serial.println("EntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrouEntrou");
-		
 		JsonObject& root = it->as<JsonObject>();		
 		
-		root.printTo(Serial);
 		
+		// DeviceAddress
 		byte deviceAddress[8];			
+		Serial.print("[TemperatureSensorService::setSensorsByMQQTCallback] Device address: ");
 		for (uint8_t i = 0; i < 8; i++)
 		{
 			deviceAddress[i] = root["deviceAddress"][i];
-			Serial.println(deviceAddress[i]);
-		}		
+			Serial.print(deviceAddress[i]);
+			if(i < 7) Serial.print(":");
+		}
+		Serial.println();
+		
 		
 		String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
 		String family = root["family"];		

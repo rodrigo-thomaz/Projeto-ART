@@ -1,8 +1,5 @@
 #include "DSFamilyTempSensorManager.h"
 
-#include "OneWire.h"
-#include "DallasTemperature.h"
-
 // Data wire is plugged into port 0
 #define ONE_WIRE_BUS 0
 
@@ -15,10 +12,9 @@ DallasTemperature _dallas(&oneWire);
 
 // TemperatureSensor
 
-TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId)
+TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
-	this->_deviceAddress = deviceAddress;
 	this->_family = family;
 	this->_validFamily = true;
 	this->_resolution = resolution;
@@ -26,12 +22,13 @@ TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, byte deviceAdd
 	this->_hasAlarm = false;
 	this->_lowAlarm = 0;
 	this->_highAlarm = 0;
+	
+	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back((byte)deviceAddress[i]);	
 }
 
-TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, byte deviceAddress[8], String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm)
+TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
-	this->_deviceAddress = deviceAddress;
 	this->_family = family;
 	this->_validFamily = true;
 	this->_resolution = resolution;
@@ -39,6 +36,8 @@ TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, byte deviceAdd
 	this->_hasAlarm = true;
 	this->_lowAlarm = lowAlarm;
 	this->_highAlarm = highAlarm;
+	
+	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back((byte)deviceAddress[i]);	
 }
 
 String TemperatureSensor::getDSFamilyTempSensorId()
@@ -46,9 +45,9 @@ String TemperatureSensor::getDSFamilyTempSensorId()
 	return this->_dsFamilyTempSensorId;
 }
 
-byte* TemperatureSensor::getDeviceAddress()
+byte *TemperatureSensor::getDeviceAddress()
 {
-	return this->_deviceAddress;
+	return this->_deviceAddress.data();
 }
 
 String TemperatureSensor::getFamily()
@@ -173,50 +172,29 @@ void DSFamilyTempSensorManager::begin()
 		
 		if (_dallas.getAddress(deviceAddress, i))
 		{ 			
-			// deviceAddress
+			// Print DeviceAddress
 			Serial.print("Device address: ");
-			byte deviceAddressChar[8];
 			for (uint8_t i = 0; i < 8; i++)
 			{
-				deviceAddressChar[i] = (byte)deviceAddress[i];							
 				Serial.print((byte)deviceAddress[i]);
 				if(i < 7) Serial.print(":");
 			}
 			Serial.println();
 	
 			//validFamily
-			//bool validFamily = _dallas.validFamily(deviceAddressChar);
+			//bool validFamily = _dallas.validFamily(deviceAddress);
 			
 			String dsFamilyTempSensorId = "4fe0c742-b8a4-e711-9bee-707781d470bc";						
-			int resolution = _dallas.getResolution(deviceAddressChar);
+			int resolution = _dallas.getResolution(deviceAddress);
 			byte temperatureScaleId = 1;
-			String family = getFamily(deviceAddressChar);     		  		  
+			String family = getFamily(deviceAddress);     		  		  
 
 			this->_sensors.push_back(TemperatureSensor(
 				dsFamilyTempSensorId, 
-				deviceAddressChar, 
+				deviceAddress, 
 				family,
 				resolution,
-				temperatureScaleId));		 
-
-			_dallas.setResolution(deviceAddress, 9);		
-
-
-
-			bool validAddress = _dallas.validAddress(this->_sensors[0].getDeviceAddress());		
-			Serial.print("Valid Address: ");
-			Serial.println(validAddress);
-			
-			bool isConnected = _dallas.isConnected(this->_sensors[0].getDeviceAddress());
-			Serial.print("isConnected: ");
-			Serial.println(isConnected);		
-			
-			Serial.print("Temperatura: ");
-			Serial.println(_dallas.getTempC(this->_sensors[0].getDeviceAddress()));
-
-
-
-		
+				temperatureScaleId));
 		}
 		else{
 		  Serial.print("Não foi possível encontrar um endereço para o Device ");
@@ -228,31 +206,8 @@ void DSFamilyTempSensorManager::begin()
 void DSFamilyTempSensorManager::refresh()
 {	
 	_dallas.requestTemperatures();
-
-	long epochTimeUtc = this->_ntpManager->getEpochTimeUTC();	
-	
-	Serial.println("RefreshRefreshRefreshRefreshRefreshRefreshRefreshRefreshRefreshRefreshRefreshRefreshRefreshRefreshRefreshRefresh");
-	
-	
-	
-	
+	long epochTimeUtc = this->_ntpManager->getEpochTimeUTC();		
 	for(int i = 0; i < this->_sensors.size(); ++i){		
-		
-		bool requestTemperaturesByAddressResult = _dallas.requestTemperaturesByAddress(this->_sensors[i].getDeviceAddress());
-		Serial.print("requestTemperaturesByAddressrequestTemperaturesByAddressrequestTemperaturesByAddress: ");
-		Serial.println(requestTemperaturesByAddressResult);
-		
-		bool validAddress = _dallas.validAddress(this->_sensors[i].getDeviceAddress());		
-		Serial.print("Valid Address: ");
-		Serial.println(validAddress);
-		
-		bool isConnected = _dallas.isConnected(this->_sensors[i].getDeviceAddress());
-		Serial.print("isConnected: ");
-		Serial.println(isConnected);		
-		
-		Serial.print("Temperatura: ");
-		Serial.println(_dallas.getTempC(this->_sensors[i].getDeviceAddress()));
-		
 		this->_sensors[i].setConnected(_dallas.isConnected(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setResolution(_dallas.getResolution(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setRawTemperature(_dallas.getTempC(this->_sensors[i].getDeviceAddress()));
