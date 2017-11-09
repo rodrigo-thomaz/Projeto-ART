@@ -61,7 +61,7 @@ NTPManager ntpManager(debugManager, configurationManager);
 MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
-DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, ntpManager);
+DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, ntpManager, configurationManager, mqqtManager);
 TemperatureSensorService temperatureSensorService(debugManager, ntpManager, configurationManager, mqqtManager);
 TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager, mqqtManager);
 

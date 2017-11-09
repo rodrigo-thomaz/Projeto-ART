@@ -142,13 +142,15 @@ void DSFamilyTempSensor::setEpochTimeUtc(long value)
 
 // DSFamilyTempSensorManager
 
-DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, NTPManager& ntpManager)
+DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, NTPManager& ntpManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager)
 { 
 	this->_debugManager = &debugManager;
 	this->_ntpManager = &ntpManager;
+	this->_configurationManager = &configurationManager;
+	this->_mqqtManager = &mqqtManager;
 }
 
-void DSFamilyTempSensorManager::begin()
+bool DSFamilyTempSensorManager::begin()
 {	
 	if(!this->_dallasInitialized){		
 		_dallas.begin();  
@@ -203,6 +205,8 @@ void DSFamilyTempSensorManager::begin()
 		  Serial.println(i);
 		}
 	}
+	
+	return true;
 }
 
 void DSFamilyTempSensorManager::refresh()

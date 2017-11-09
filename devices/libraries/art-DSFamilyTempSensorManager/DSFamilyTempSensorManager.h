@@ -6,6 +6,8 @@
 #include "ArduinoJson.h"
 #include "DebugManager.h"
 #include "NTPManager.h"
+#include "ConfigurationManager.h"
+#include "MQQTManager.h"
 #include "OneWire.h"
 #include "DallasTemperature.h"
 
@@ -81,9 +83,9 @@ class DSFamilyTempSensorManager
 {
   public:
   
-    DSFamilyTempSensorManager(DebugManager& debugManager, NTPManager& ntpManager);
+    DSFamilyTempSensorManager(DebugManager& debugManager, NTPManager& ntpManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager);
 	
-	void 								begin();
+	bool 								begin();
 				
 	void 								refresh();	
 			
@@ -98,6 +100,8 @@ class DSFamilyTempSensorManager
 			
 	DebugManager*          				_debugManager;
 	NTPManager*          				_ntpManager;
+	ConfigurationManager*				_configurationManager;	
+	MQQTManager* 		                _mqqtManager;
 				
 	const uint8_t* 						getDeviceAddressById(String deviceAddress);
 	String 								getFamily(byte deviceAddress[8]);
@@ -106,6 +110,9 @@ class DSFamilyTempSensorManager
 	std::vector<DSFamilyTempSensor> 	_sensors;
 	
 	bool								_dallasInitialized;
+	
+	bool								_begin;
+	bool								_beginning;
 	
 };
 
