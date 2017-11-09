@@ -72,23 +72,26 @@ void DisplayTemperatureSensorManager::printSensors()
 
 void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
 {
-	double range = (double)dsFamilyTempSensor.getHighAlarm() - (double)dsFamilyTempSensor.getLowAlarm();
-	double value = dsFamilyTempSensor.getTemperatureWithScale() - (double)dsFamilyTempSensor.getLowAlarm();
-	double percent = (value * 100) / range;
-	int tempHeight = round((width * percent) / 100);
-	
-	//Serial.print("Aqui!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
-	//Serial.println(percent);
-	
 	this->_displayManager->display.setFont();
     this->_displayManager->display.setTextSize(1);
     this->_displayManager->display.setTextColor(WHITE);
     this->_displayManager->display.setCursor(x, y - 8);       
 	this->_displayManager->display.print(dsFamilyTempSensor.getTemperatureWithScale());
     this->_displayManager->display.println(" C");
-      
+	
+	if(!dsFamilyTempSensor.getHasAlarm()) return;
+ 
+	double range = (double)dsFamilyTempSensor.getHighAlarm() - (double)dsFamilyTempSensor.getLowAlarm();
+	double value = dsFamilyTempSensor.getTemperatureWithScale() - (double)dsFamilyTempSensor.getLowAlarm();
+	double percent = (value * 100) / range;
+	int tempHeight = round((width * percent) / 100);
+	
 	this->_displayManager->display.drawRect(x, y, width, height, WHITE);
 	this->_displayManager->display.fillRect(x, y, width, tempHeight, WHITE);
+	  
+	Serial.println("AquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAqui");
+	String message = "height: " + String(height) + " tempHeight; " + String(tempHeight);
+	Serial.println(message);
 	  
     // this->_displayManager->display.print(dsFamilyTempSensor.tempFahrenheit);
     // this->_displayManager->display.println(" F");

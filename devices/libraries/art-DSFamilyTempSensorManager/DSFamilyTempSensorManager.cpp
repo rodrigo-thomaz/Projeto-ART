@@ -239,8 +239,10 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		String family = root["family"];		
 		int resolution = int(root["resolutionBits"]);				
 		byte temperatureScaleId = byte(root["temperatureScaleId"]);			
-		
 		bool hasAlarm = bool(root["hasAlarm"]);
+				
+		_dallas.setResolution(deviceAddress, resolution);		
+		_dallas.resetAlarmSearch();
 		
 		if(hasAlarm){
 			
@@ -255,6 +257,9 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 				temperatureScaleId,
 				lowAlarm,
 				highAlarm));
+				
+			_dallas.setLowAlarmTemp(deviceAddress, char(lowAlarm));
+			_dallas.setHighAlarmTemp(deviceAddress, char(highAlarm));
 		}
 		else{			
 			this->_sensors.push_back(DSFamilyTempSensor(
