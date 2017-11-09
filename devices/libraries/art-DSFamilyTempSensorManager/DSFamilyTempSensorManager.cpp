@@ -153,11 +153,107 @@ DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager,
 void DSFamilyTempSensorManager::begin()
 {	
 	_dallas.begin();  	
-	this->initialize();
+	this->initialized();
 }
 	
-bool DSFamilyTempSensorManager::initialize()
+bool DSFamilyTempSensorManager::initialized()
 {
+	if(this->_initialized) return true;	
+
+	if(!this->_configurationManager->initialized()) return false;	
+	
+	if(this->_initializing) return false;	
+	
+	PubSubClient* mqqt = this->_mqqtManager->getMQQT();
+ 
+	if(!mqqt->connected()) return false;	
+	
+	// Begin
+	
+	this->_initializing = true;
+	
+	Serial.println("[DSFamilyTempSensorManager::initialized] initializing...]");
+	
+	String hardwareId = this->_configurationManager->getHardwareSettings()->getHardwareId();      
+	String hardwareInApplicationId = this->_configurationManager->getHardwareSettings()->getHardwareInApplicationId();      
+
+	StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
+	JsonObject& root = JSONbuffer.createObject();
+	root["hardwareId"] = hardwareId;
+	root["hardwareInApplicationId"] = hardwareInApplicationId;
+
+	int len = root.measureLength();
+	char result[len + 1]; 
+	root.printTo(result, sizeof(result));
+	
+	mqqt->publish(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_MQQT_TOPIC_PUB, result); 
+	
+	return true;
+}
+
+void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
+{
+	Serial.println("[DSFamilyTempSensorManager::setSensorsByMQQTCallback] Enter");
+	
+	this->_initialized = true;
+	this->_initializing = false;
+
+	DynamicJsonBuffer jsonBuffer;
+	//StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
+
+	JsonArray& jsonArray = jsonBuffer.parseArray(json);
+
+	if (!jsonArray.success()) {
+		Serial.print("[DSFamilyTempSensorManager::setSensorsByMQQTCallback] parse failed: ");
+		Serial.println(json);
+		return;
+	}			
+
+	for(JsonArray::iterator it=jsonArray.begin(); it!=jsonArray.end(); ++it) 
+	{
+		JsonObject& root = it->as<JsonObject>();		
+		
+		// DeviceAddress
+		DeviceAddress deviceAddress;			
+		for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = root["deviceAddress"][i];
+		
+		String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
+		String family = root["family"];		
+		int resolution = int(root["resolutionBits"]);				
+		byte temperatureScaleId = byte(root["temperatureScaleId"]);			
+		
+		bool hasAlarm = bool(root["hasAlarm"]);
+		
+		if(hasAlarm){
+			
+			double lowAlarm = double(root["lowAlarm"]);				
+			double highAlarm = double(root["highAlarm"]);			
+			
+			this->_sensors.push_back(DSFamilyTempSensor(
+				dsFamilyTempSensorId,
+				deviceAddress,
+				family,
+				resolution,
+				temperatureScaleId,
+				lowAlarm,
+				highAlarm));
+		}
+		else{			
+			this->_sensors.push_back(DSFamilyTempSensor(
+				dsFamilyTempSensorId,
+				deviceAddress,
+				family,
+				resolution,
+				temperatureScaleId));				
+		}
+	}
+				
+	Serial.println("[DSFamilyTempSensorManager::setSensorsByMQQTCallback] initialized with success !");
+	
+	
+	return;
+	
+	
 	// Localizando devices
 	uint8_t deviceCount = _dallas.getDeviceCount();
 		
@@ -197,14 +293,10 @@ bool DSFamilyTempSensorManager::initialize()
 		  Serial.println(i);
 		}
 	}
-	
-	return true;
 }
 
 void DSFamilyTempSensorManager::refresh()
 {	
-	if(!this->initialize()) return;
-	
 	_dallas.requestTemperatures();
 	long epochTimeUtc = this->_ntpManager->getEpochTimeUTC();		
 	for(int i = 0; i < this->_sensors.size(); ++i){		

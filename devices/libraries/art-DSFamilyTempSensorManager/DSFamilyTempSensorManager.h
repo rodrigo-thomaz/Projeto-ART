@@ -11,6 +11,12 @@
 #include "OneWire.h"
 #include "DallasTemperature.h"
 
+#define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
+#define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
+
+#define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_MQQT_TOPIC_PUB   			"DSFamilyTempSensor.GetAllByHardwareInApplicationId" 
+#define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB   	"DSFamilyTempSensor.GetAllByHardwareInApplicationIdCompleted"
+
 
 class DSFamilyTempSensor
 {
@@ -87,7 +93,8 @@ class DSFamilyTempSensorManager
 	
 	void 								begin();
 				
-	bool								initialize();
+	bool								initialized();
+	void 								setSensorsByMQQTCallback(String json);				
 	
 	void 								refresh();	
 			

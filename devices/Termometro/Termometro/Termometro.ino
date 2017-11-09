@@ -160,7 +160,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       temperatureScaleManager.update(payloadContract);            
     }
     if(payloadTopic == String(TEMPERATURE_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB)){
-      temperatureSensorService.setSensorsByMQQTCallback(payloadContract);      
+      dsFamilyTempSensorManager.setSensorsByMQQTCallback(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
       dsFamilyTempSensorManager.setResolution(payloadContract);
@@ -210,23 +210,25 @@ void loopInApplication()
   
   uint64_t now = millis();   
 
-  if(now - readTempTimestamp > READTEMP_INTERVAL) {
-    readTempTimestamp = now;
-    displayTemperatureSensorManager.printUpdate(true);
-    dsFamilyTempSensorManager.refresh();
-
-    // Temp
-    temperatureScaleManager.begin();
-    temperatureSensorService.begin();
+  if(dsFamilyTempSensorManager.initialized()) {
+    if(now - readTempTimestamp > READTEMP_INTERVAL) {
+      readTempTimestamp = now;
+      displayTemperatureSensorManager.printUpdate(true);
+      dsFamilyTempSensorManager.refresh();
+  
+      // Temp
+      temperatureScaleManager.begin();
+      temperatureSensorService.begin();
+    }  
+    else{
+      displayTemperatureSensorManager.printUpdate(false);
+    }    
   }  
-  else{
-    displayTemperatureSensorManager.printUpdate(false);
-  }
   
   // MQTT
   PubSubClient* mqqt = mqqtManager.getMQQT();
   
-  if(mqqt->connected()){
+  if(mqqt->connected() && dsFamilyTempSensorManager.initialized()){
     
     displayMQTTManager.printConnected();  
     displayMQTTManager.printReceived(false);
@@ -244,14 +246,13 @@ void loopInApplication()
     else {
       displayMQTTManager.printSent(false);
     }
-         
+
+    // Sensor
+    displayTemperatureSensorManager.printSensors();  
   }       
 
   // Wifi
   displayWiFiManager.printSignal();
-    
-  // Sensor
-  displayTemperatureSensorManager.printSensors();  
   
   // Buzzer
   //buzzerManager.test();
