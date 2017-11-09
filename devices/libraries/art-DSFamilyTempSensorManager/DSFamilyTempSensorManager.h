@@ -106,6 +106,7 @@ class DSFamilyTempSensorManager
 	const uint8_t* 						getDeviceAddressById(String deviceAddress);
 	String 								getFamily(byte deviceAddress[8]);
 	void								generateNestedSensor(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
+	String 								convertDeviceAddressToString(DeviceAddress deviceAddress);
 	
 	std::vector<DSFamilyTempSensor> 	_sensors;
 	

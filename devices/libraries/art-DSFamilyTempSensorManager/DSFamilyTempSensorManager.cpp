@@ -164,11 +164,6 @@ bool DSFamilyTempSensorManager::begin()
 	Serial.print("Encontrado(s) ");
 	Serial.print(deviceCount);
 	Serial.println(" device(s).");
-
-	// report parasite power requirements
-	Serial.print("Parasite power is: ");
-	if (_dallas.isParasitePowerMode()) Serial.println("ON");
-	else Serial.println("OFF");
 	
 	for(int i = 0; i < deviceCount; ++i){
 		
@@ -178,11 +173,7 @@ bool DSFamilyTempSensorManager::begin()
 		{ 			
 			// Print DeviceAddress
 			Serial.print("Device address: ");
-			for (uint8_t i = 0; i < 8; i++)
-			{
-				Serial.print((byte)deviceAddress[i]);
-				if(i < 7) Serial.print(":");
-			}
+			Serial.print(this->convertDeviceAddressToString(deviceAddress));
 			Serial.println();
 	
 			//validFamily
@@ -357,4 +348,15 @@ void DSFamilyTempSensorManager::generateNestedSensor(DSFamilyTempSensor dsFamily
 	JSONencoder["hasAlarm"] = dsFamilyTempSensor.getHasAlarm();
 	JSONencoder["lowAlarm"] = dsFamilyTempSensor.getLowAlarm();
 	JSONencoder["highAlarm"] = dsFamilyTempSensor.getHighAlarm();
+}
+
+String DSFamilyTempSensorManager::convertDeviceAddressToString(DeviceAddress deviceAddress)
+{
+	String result;	
+	for (uint8_t i = 0; i < 8; i++)
+	{
+		result += String(deviceAddress[i]);
+		if(i < 7) result += ":";
+	}
+	return result;
 }
