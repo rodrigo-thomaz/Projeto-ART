@@ -103,7 +103,9 @@ class DSFamilyTempSensorManager
 	String 								getFamily(byte deviceAddress[8]);
 	void								generateNestedSensor(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
 	
-	std::vector<DSFamilyTempSensor> 		_sensors;
+	std::vector<DSFamilyTempSensor> 	_sensors;
+	
+	bool								_dallasInitialized;
 	
 };
 

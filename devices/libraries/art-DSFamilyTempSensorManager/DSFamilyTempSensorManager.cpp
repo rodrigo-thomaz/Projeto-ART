@@ -150,8 +150,10 @@ DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager,
 
 void DSFamilyTempSensorManager::begin()
 {	
-	// Start up the library
-	_dallas.begin();  
+	if(!this->_dallasInitialized){		
+		_dallas.begin();  
+		this->_dallasInitialized = true;
+	}	
 
 	// Localizando devices
 	uint8_t deviceCount = _dallas.getDeviceCount();
