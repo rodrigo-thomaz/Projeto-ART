@@ -1,7 +1,6 @@
 #include "DebugManager.h"
 #include "ConfigurationManager.h"
 #include "DSFamilyTempSensorManager.h"
-#include "TemperatureSensorService.h"
 #include "TemperatureScaleManager.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
@@ -62,7 +61,6 @@ MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, ntpManager, configurationManager, mqqtManager);
-TemperatureSensorService temperatureSensorService(debugManager, ntpManager, configurationManager, mqqtManager);
 TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager, mqqtManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
@@ -159,7 +157,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_COMPLETED_MQQT_TOPIC_SUB)){
       temperatureScaleManager.update(payloadContract);            
     }
-    if(payloadTopic == String(TEMPERATURE_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB)){
+    if(payloadTopic == String(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB)){
       dsFamilyTempSensorManager.setSensorsByMQQTCallback(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
@@ -218,7 +216,6 @@ void loopInApplication()
   
       // Temp
       temperatureScaleManager.begin();
-      temperatureSensorService.begin();
     }  
     else{
       displayTemperatureSensorManager.printUpdate(false);
