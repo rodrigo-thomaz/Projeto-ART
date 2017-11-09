@@ -23,7 +23,7 @@ DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddres
 	this->_lowAlarm = 0;
 	this->_highAlarm = 0;
 	
-	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back((byte)deviceAddress[i]);	
+	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back(deviceAddress[i]);	
 }
 
 DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm)
@@ -37,7 +37,7 @@ DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddres
 	this->_lowAlarm = lowAlarm;
 	this->_highAlarm = highAlarm;
 	
-	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back((byte)deviceAddress[i]);	
+	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back(deviceAddress[i]);	
 }
 
 String DSFamilyTempSensor::getDSFamilyTempSensorId()
@@ -45,7 +45,7 @@ String DSFamilyTempSensor::getDSFamilyTempSensorId()
 	return this->_dsFamilyTempSensorId;
 }
 
-byte *DSFamilyTempSensor::getDeviceAddress()
+uint8_t *DSFamilyTempSensor::getDeviceAddress()
 {
 	return this->_deviceAddress.data();
 }

@@ -20,7 +20,7 @@ class DSFamilyTempSensor
 
     String								getDSFamilyTempSensorId();		
 	
-	byte		 						*getDeviceAddress();	
+	uint8_t		 						*getDeviceAddress();	
 	
 	String								getFamily();
 	bool								getValidFamily();	
@@ -54,7 +54,7 @@ class DSFamilyTempSensor
   
 	String 								_dsFamilyTempSensorId;	
 	
-	std::vector<byte> 					_deviceAddress;
+	std::vector<uint8_t> 				_deviceAddress;
 	
 	String 								_family;
 	bool 								_validFamily;
