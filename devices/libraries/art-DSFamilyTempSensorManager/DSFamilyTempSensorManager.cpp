@@ -179,9 +179,27 @@ bool DSFamilyTempSensorManager::initialized()
 
 	StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
 	JsonObject& root = JSONbuffer.createObject();
+	
 	root["hardwareId"] = hardwareId;
 	root["hardwareInApplicationId"] = hardwareInApplicationId;
 
+	// device addresses prepare	
+	uint8_t deviceCount = _dallas.getDeviceCount();		
+	if(deviceCount > 0) {	
+		JsonArray& deviceAddressJsonArray = root.createNestedArray("deviceAddresses");
+		for(int i = 0; i < deviceCount; ++i){		
+			DeviceAddress deviceAddress;		
+			if (_dallas.getAddress(deviceAddress, i))
+			{ 	
+				deviceAddressJsonArray.add(this->convertDeviceAddressToString(deviceAddress));				
+			}
+			else{
+			  Serial.print("Não foi possível encontrar um endereço para o Device: ");
+			  Serial.println(i);
+			}
+		}
+	}
+	
 	int len = root.measureLength();
 	char result[len + 1]; 
 	root.printTo(result, sizeof(result));
@@ -249,50 +267,6 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 	}
 				
 	Serial.println("[DSFamilyTempSensorManager::setSensorsByMQQTCallback] initialized with success !");
-	
-	
-	return;
-	
-	
-	// Localizando devices
-	uint8_t deviceCount = _dallas.getDeviceCount();
-		
-	Serial.print("Localizando devices...");
-	Serial.print("Encontrado(s) ");
-	Serial.print(deviceCount);
-	Serial.println(" device(s).");
-	
-	for(int i = 0; i < deviceCount; ++i){
-		
-		DeviceAddress deviceAddress;
-		
-		if (_dallas.getAddress(deviceAddress, i))
-		{ 			
-			// Print DeviceAddress
-			Serial.print("Device address: ");
-			Serial.print(this->convertDeviceAddressToString(deviceAddress));
-			Serial.println();
-	
-			//validFamily
-			//bool validFamily = _dallas.validFamily(deviceAddress);
-			
-			String dsFamilyTempSensorId = "4fe0c742-b8a4-e711-9bee-707781d470bc";						
-			int resolution = _dallas.getResolution(deviceAddress);
-			byte temperatureScaleId = 1;
-			String family = getFamily(deviceAddress);     		  		  
-
-			this->_sensors.push_back(DSFamilyTempSensor(
-				dsFamilyTempSensorId, 
-				deviceAddress, 
-				family,
-				resolution,
-				temperatureScaleId));
-		}
-		else{
-		  Serial.print("Não foi possível encontrar um endereço para o Device ");
-		  Serial.println(i);
-		}
-	}
 }
 
 void DSFamilyTempSensorManager::refresh()
