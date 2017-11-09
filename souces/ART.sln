@@ -76,6 +76,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Infra.CrossCutting.Sche
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Infra.CrossCutting.Setting", "ART.Infra.CrossCutting.Setting\ART.Infra.CrossCutting.Setting.csproj", "{951AFF8D-697B-4A63-8BF0-992164A2B619}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ART.Domotica.IoTContract", "ART.Domotica.IoTContract\ART.Domotica.IoTContract.csproj", "{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -324,6 +326,14 @@ Global
 		{951AFF8D-697B-4A63-8BF0-992164A2B619}.Release|Any CPU.Build.0 = Release|Any CPU
 		{951AFF8D-697B-4A63-8BF0-992164A2B619}.Release|x86.ActiveCfg = Release|Any CPU
 		{951AFF8D-697B-4A63-8BF0-992164A2B619}.Release|x86.Build.0 = Release|Any CPU
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}.Debug|x86.Build.0 = Debug|Any CPU
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}.Release|x86.ActiveCfg = Release|Any CPU
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -359,6 +369,7 @@ Global
 		{D06A9B85-BF4F-4002-BD06-A228D0F49BDA} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
 		{BC5A302C-5182-461D-A6AA-0D1B16DB4759} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
 		{951AFF8D-697B-4A63-8BF0-992164A2B619} = {E1573EA4-9598-4535-B5C5-1E475FCCB96D}
+		{5677264E-C6FA-4FE8-8205-77A5EFCF7D12} = {3B4488EC-9D6D-42CE-81E4-601B8CC29012}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F7BF3A15-A6FC-4D4A-A446-4CF58FF70F7C}

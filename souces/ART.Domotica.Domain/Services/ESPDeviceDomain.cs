@@ -43,10 +43,10 @@
 
         #region Methods
 
-        public async Task<List<ESPDeviceGetListModel>> GetListInApplication(AuthenticatedMessageContract message)
+        public async Task<List<ESPDeviceDetailModel>> GetListInApplication(AuthenticatedMessageContract message)
         {
             var data = await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
-            var result = Mapper.Map<List<HardwareInApplication>, List<ESPDeviceGetListModel>>(data);
+            var result = Mapper.Map<List<HardwareInApplication>, List<ESPDeviceDetailModel>>(data);
             return result;
         }
 
@@ -64,7 +64,7 @@
             return result;
         }
 
-        public async Task<ESPDeviceInsertInApplicationResponseContract> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
+        public async Task<HardwareInApplication> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
         {
             var hardwareEntity = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -90,9 +90,7 @@
 
             await _espDeviceRepository.InsertInApplication(hardwaresInApplicationEntity);
 
-            var result = Mapper.Map<HardwareInApplication, ESPDeviceInsertInApplicationResponseContract>(hardwaresInApplicationEntity);
-
-            return result;
+            return hardwaresInApplicationEntity;
         }
 
         public async Task<ESPDeviceDeleteFromApplicationResponseContract> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)

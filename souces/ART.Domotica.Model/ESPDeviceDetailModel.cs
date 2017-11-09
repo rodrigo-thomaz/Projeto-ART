@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ESPDeviceGetListModel
+    public class ESPDeviceDetailModel
     {
         #region Properties
 

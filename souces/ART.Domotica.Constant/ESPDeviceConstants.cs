@@ -11,7 +11,8 @@
         public static readonly string GetConfigurationsQueueName = "ESPDevice.GetConfigurations";
         public static readonly string GetListInApplicationCompletedQueueName = "ESPDevice.GetListInApplicationCompleted";
         public static readonly string GetListInApplicationQueueName = "ESPDevice.GetListInApplication";
-        public static readonly string InsertInApplicationCompletedQueueName = "ESPDevice.InsertInApplicationCompleted";
+        public static readonly string InsertInApplicationIoTCompletedQueueName = "ESPDevice.InsertInApplicationIoTCompleted";
+        public static readonly string InsertInApplicationViewCompletedQueueName = "ESPDevice.InsertInApplicationViewCompleted";
         public static readonly string InsertInApplicationQueueName = "ESPDevice.InsertInApplication";
         public static readonly string UpdatePinQueueName = "ESPDevice.UpdatePin";
 

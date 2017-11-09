@@ -7,7 +7,7 @@ app.factory('espDeviceJoinService', ['$http', '$log', 'ngAuthSettings', 'EventDi
 
     var onConnected = function () {
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetByPinCompleted', onGetByPinCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.InsertInApplicationCompleted', onInsertInApplicationCompleted);        
+        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);        
     }
 
     var getByPin = function (pin) {

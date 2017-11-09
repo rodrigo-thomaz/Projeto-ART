@@ -8,7 +8,6 @@
 
     using global::AutoMapper;
     using ART.Domotica.Contract;
-    using System;
 
     public class DSFamilyTempSensorProfile : Profile
     {

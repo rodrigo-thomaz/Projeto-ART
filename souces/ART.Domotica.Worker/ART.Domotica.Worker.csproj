@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
     <Compile Include="IConsumers\IDSFamilyTempSensorConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />
@@ -111,7 +112,6 @@
     <Compile Include="Consumers\ApplicationUserConsumer.cs" />
     <Compile Include="Consumers\TemperatureScaleConsumer.cs" />
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
-    <Compile Include="Contracts\DeviceMessageContract.cs" />
     <Compile Include="Jobs\UpdatePinJob.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />
     <Compile Include="Modules\JobModule.cs" />
@@ -138,6 +138,10 @@
     <ProjectReference Include="..\ART.Domotica.Domain\ART.Domotica.Domain.csproj">
       <Project>{f541f7ff-b9d6-47dc-9097-4cd7b6084c7f}</Project>
       <Name>ART.Domotica.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.IoTContract\ART.Domotica.IoTContract.csproj">
+      <Project>{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}</Project>
+      <Name>ART.Domotica.IoTContract</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Model\ART.Domotica.Model.csproj">
       <Project>{49447556-dca8-4fc7-ac1d-7f5163e7abea}</Project>
@@ -184,6 +188,8 @@
       <Name>ART.Security.Contract</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

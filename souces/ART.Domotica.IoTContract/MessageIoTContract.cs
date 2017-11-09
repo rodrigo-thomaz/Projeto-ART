@@ -1,6 +1,6 @@
-﻿namespace ART.Domotica.Worker.Contracts
+﻿namespace ART.Domotica.IoTContract
 {
-    public class DeviceMessageContract<TContract>
+    public class MessageIoTContract<TContract>
     {
         #region Fields
 
@@ -11,7 +11,7 @@
 
         #region Constructors
 
-        public DeviceMessageContract(string topic, TContract contract)
+        public MessageIoTContract(string topic, TContract contract)
         {
             _topic = topic;
             _contract = contract;

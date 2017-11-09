@@ -48,7 +48,6 @@
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsResponseContract.cs" />
-    <Compile Include="ESPDeviceInsertInApplicationResponseContract.cs" />
     <Compile Include="ESPDeviceInsertInApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetByPinRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionContract.cs" />

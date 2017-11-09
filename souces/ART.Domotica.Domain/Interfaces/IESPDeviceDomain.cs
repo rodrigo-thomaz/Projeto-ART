@@ -6,6 +6,7 @@
     using ART.Domotica.Contract;
     using ART.Domotica.Model;
     using ART.Infra.CrossCutting.MQ.Contract;
+    using ART.Domotica.Repository.Entities;
 
     public interface IESPDeviceDomain
     {
@@ -17,9 +18,9 @@
 
         Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract);
 
-        Task<List<ESPDeviceGetListModel>> GetListInApplication(AuthenticatedMessageContract message);
+        Task<List<ESPDeviceDetailModel>> GetListInApplication(AuthenticatedMessageContract message);
 
-        Task<ESPDeviceInsertInApplicationResponseContract> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
+        Task<HardwareInApplication> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
         Task<List<ESPDeviceUpdatePinsContract>> UpdatePins();
 

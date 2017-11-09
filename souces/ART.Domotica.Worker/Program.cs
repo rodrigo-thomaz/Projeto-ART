@@ -57,6 +57,7 @@
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());
+                x.AddProfile(new AutoMapper.ESPDeviceProfile());
                 x.AddProfile(new TemperatureScaleProfile());
                 x.AddProfile(new ThermometerDeviceProfile());
             });

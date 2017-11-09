@@ -3,11 +3,14 @@
     using ART.Domotica.Constant;
     using ART.Domotica.Contract;
     using ART.Domotica.Domain.Interfaces;
-    using ART.Domotica.Worker.Contracts;
+    using ART.Domotica.IoTContract;
+    using ART.Domotica.Model;
+    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
     using ART.Infra.CrossCutting.Utils;
+    using global::AutoMapper;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
     using RabbitMQ.Client;
@@ -158,16 +161,20 @@
         {
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract>>(e.Body);
-            var data = await _espDeviceDomain.InsertInApplication(message);            
+            var data = await _espDeviceDomain.InsertInApplication(message);
+
+            //Enviando para View
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.InsertInApplicationCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, null);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
+            var viewModel = Mapper.Map<HardwareInApplication, ESPDeviceDetailModel>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-            //Enviando para o Device
-
-            var deviceMessage = new DeviceMessageContract<ESPDeviceInsertInApplicationResponseContract>(ESPDeviceConstants.InsertInApplicationQueueName, data);
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<HardwareInApplication, ESPDeviceInsertInApplicationResponseIoTContract>(data);
+            var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(ESPDeviceConstants.InsertInApplicationIoTCompletedQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(data.HardwareId);
+            var queueName = GetDeviceQueueName(data.HardwareBaseId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
@@ -188,7 +195,7 @@
 
             //Enviando para o Device
 
-            var deviceMessage = new DeviceMessageContract<ESPDeviceDeleteFromApplicationResponseContract>(ESPDeviceConstants.DeleteFromApplicationQueueName, null);
+            var deviceMessage = new MessageIoTContract<ESPDeviceDeleteFromApplicationResponseContract>(ESPDeviceConstants.DeleteFromApplicationQueueName, null);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var queueName = GetDeviceQueueName(data.HardwareId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
@@ -228,7 +235,7 @@
             {
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
                 var queueName = GetDeviceQueueName(contract.HardwareId);
-                var deviceMessage = new DeviceMessageContract<ESPDeviceUpdatePinsContract>(ESPDeviceConstants.UpdatePinQueueName, contract);
+                var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsContract>(ESPDeviceConstants.UpdatePinQueueName, contract);
                 var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
                 var buffer = Encoding.UTF8.GetBytes(json);
                 _model.BasicPublish("", queueName, null, buffer);

@@ -1,6 +1,5 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Contract;
-using ART.Domotica.Worker.Contracts;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using RabbitMQ.Client;
@@ -14,6 +13,7 @@ using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Worker.IConsumers;
 using System.Collections.Generic;
+using ART.Domotica.IoTContract;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -177,7 +177,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
             var data = await _dsFamilyTempSensorDomain.GetAllByHardwareInApplicationId(requestContract.HardwareInApplicationId);
-            var deviceMessage = new DeviceMessageContract<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>>(DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdCompletedQueueName, data);
+            var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>>(DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
             var queueName = GetDeviceQueueName(requestContract.HardwareId);
             _model.BasicPublish("", queueName, null, buffer);
@@ -215,7 +215,7 @@ namespace ART.Domotica.Worker.Consumers
         public async Task SendSetResolutionToDevice(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
         {
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorConstants.SetResolutionQueueName, message.Contract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetResolutionContract>(DSFamilyTempSensorConstants.SetResolutionQueueName, message.Contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
@@ -232,7 +232,7 @@ namespace ART.Domotica.Worker.Consumers
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract>>(e.Body);
             await _dsFamilyTempSensorDomain.SetHighAlarm(message);
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorConstants.SetHighAlarmQueueName, message.Contract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetHighAlarmContract>(DSFamilyTempSensorConstants.SetHighAlarmQueueName, message.Contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);
@@ -249,7 +249,7 @@ namespace ART.Domotica.Worker.Consumers
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract>>(e.Body);
             await _dsFamilyTempSensorDomain.SetLowAlarm(message);
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
-            var deviceMessage = new DeviceMessageContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorConstants.SetLowAlarmQueueName, message.Contract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetLowAlarmContract>(DSFamilyTempSensorConstants.SetLowAlarmQueueName, message.Contract);
             var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
             var buffer = Encoding.UTF8.GetBytes(json);
             _model.BasicPublish("", queueName, null, buffer);

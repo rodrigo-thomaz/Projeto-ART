@@ -7,9 +7,9 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Worker.IConsumers;
-using ART.Domotica.Worker.Contracts;
 using System.Collections.Generic;
 using ART.Domotica.Contract;
+using ART.Domotica.IoTContract;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -101,7 +101,7 @@ namespace ART.Domotica.Worker.Consumers
         {            
             _model.BasicAck(e.DeliveryTag, false);            
             var data = await _temperatureScaleDomain.GetAllForDevice();
-            var deviceMessage = new DeviceMessageContract<List<TemperatureScaleGetAllForDeviceResponseContract>>(TemperatureScaleConstants.GetAllForDeviceCompletedQueueName, data);
+            var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForDeviceResponseContract>>(TemperatureScaleConstants.GetAllForDeviceCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
             var queueName = GetDeviceQueueName(requestContract.HardwareId);

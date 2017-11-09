@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{49447556-DCA8-4FC7-AC1D-7F5163E7ABEA}</ProjectGuid>
+    <ProjectGuid>{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ART.Domotica.Model</RootNamespace>
-    <AssemblyName>ART.Domotica.Model</AssemblyName>
+    <RootNamespace>ART.Domotica.IoTContract</RootNamespace>
+    <AssemblyName>ART.Domotica.IoTContract</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,14 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DSFamilyTempSensorGetListModel.cs" />
-    <Compile Include="ESPDeviceGetByPinModel.cs" />
-    <Compile Include="ThermometerDeviceGetListModel.cs" />
-    <Compile Include="ESPDeviceDetailModel.cs" />
-    <Compile Include="DSFamilyTempSensorGetAllModel.cs" />
-    <Compile Include="DSFamilyTempSensorResolutionGetAllModel.cs" />
-    <Compile Include="TemperatureScaleGetAllModel.cs" />
-    <Compile Include="ApplicationGetModel.cs" />
+    <Compile Include="ESPDeviceInsertInApplicationResponseIoTContract.cs" />
+    <Compile Include="MessageIoTContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
