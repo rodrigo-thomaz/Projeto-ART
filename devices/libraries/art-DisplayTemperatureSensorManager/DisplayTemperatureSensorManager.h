@@ -21,7 +21,7 @@ private:
 	DSFamilyTempSensorManager*   _dsFamilyTempSensorManager;
 	DebugManager*         		_debugManager;
 
-	void						printSensor(TemperatureSensor& temperatureSensor, int x, int y, int width, int height);
+	void						printSensor(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height);
 	
 };
 

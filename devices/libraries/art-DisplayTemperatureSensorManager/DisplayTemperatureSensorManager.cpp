@@ -55,7 +55,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	int screenWidth = screenX2 - screenX1;
 	int screenHeight = screenY2 - screenY1;	
  
-	TemperatureSensor* sensors = this->_dsFamilyTempSensorManager->getSensors();
+	DSFamilyTempSensor* sensors = this->_dsFamilyTempSensorManager->getSensors();
 	
 	int sensorsCount = sizeof(sensors);
     
@@ -70,10 +70,10 @@ void DisplayTemperatureSensorManager::printSensors()
 	}	
 }
 
-void DisplayTemperatureSensorManager::printSensor(TemperatureSensor& temperatureSensor, int x, int y, int width, int height)
+void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
 {
-	double range = (double)temperatureSensor.getHighAlarm() - (double)temperatureSensor.getLowAlarm();
-	double value = temperatureSensor.getTemperatureWithScale() - (double)temperatureSensor.getLowAlarm();
+	double range = (double)dsFamilyTempSensor.getHighAlarm() - (double)dsFamilyTempSensor.getLowAlarm();
+	double value = dsFamilyTempSensor.getTemperatureWithScale() - (double)dsFamilyTempSensor.getLowAlarm();
 	double percent = (value * 100) / range;
 	int tempHeight = round((width * percent) / 100);
 	
@@ -84,12 +84,12 @@ void DisplayTemperatureSensorManager::printSensor(TemperatureSensor& temperature
     this->_displayManager->display.setTextSize(1);
     this->_displayManager->display.setTextColor(WHITE);
     this->_displayManager->display.setCursor(x, y - 8);       
-	this->_displayManager->display.print(temperatureSensor.getTemperatureWithScale());
+	this->_displayManager->display.print(dsFamilyTempSensor.getTemperatureWithScale());
     this->_displayManager->display.println(" C");
       
 	this->_displayManager->display.drawRect(x, y, width, height, WHITE);
 	this->_displayManager->display.fillRect(x, y, width, tempHeight, WHITE);
 	  
-    // this->_displayManager->display.print(temperatureSensor.tempFahrenheit);
+    // this->_displayManager->display.print(dsFamilyTempSensor.tempFahrenheit);
     // this->_displayManager->display.println(" F");
 }

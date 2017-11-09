@@ -10,9 +10,9 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature _dallas(&oneWire);
 
 
-// TemperatureSensor
+// DSFamilyTempSensor
 
-TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId)
+DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
 	this->_family = family;
@@ -26,7 +26,7 @@ TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress 
 	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back((byte)deviceAddress[i]);	
 }
 
-TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm)
+DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
 	this->_family = family;
@@ -40,102 +40,102 @@ TemperatureSensor::TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress 
 	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back((byte)deviceAddress[i]);	
 }
 
-String TemperatureSensor::getDSFamilyTempSensorId()
+String DSFamilyTempSensor::getDSFamilyTempSensorId()
 {
 	return this->_dsFamilyTempSensorId;
 }
 
-byte *TemperatureSensor::getDeviceAddress()
+byte *DSFamilyTempSensor::getDeviceAddress()
 {
 	return this->_deviceAddress.data();
 }
 
-String TemperatureSensor::getFamily()
+String DSFamilyTempSensor::getFamily()
 {
 	return this->_family;
 }
 
-bool TemperatureSensor::getValidFamily()
+bool DSFamilyTempSensor::getValidFamily()
 {
 	return this->_validFamily;
 }
 
-int TemperatureSensor::getResolution()
+int DSFamilyTempSensor::getResolution()
 {
 	return this->_resolution;
 }
 
-void TemperatureSensor::setResolution(int value)
+void DSFamilyTempSensor::setResolution(int value)
 {
 	this->_resolution = value;
 }
 
-byte TemperatureSensor::getTemperatureScaleId()
+byte DSFamilyTempSensor::getTemperatureScaleId()
 {
 	return this->_temperatureScaleId;
 }
 
-bool TemperatureSensor::getHasAlarm()
+bool DSFamilyTempSensor::getHasAlarm()
 {
 	return this->_hasAlarm;
 }
 
-void TemperatureSensor::setHasAlarm(bool value)
+void DSFamilyTempSensor::setHasAlarm(bool value)
 {
 	this->_hasAlarm = value;
 }
 
-float TemperatureSensor::getLowAlarm()
+float DSFamilyTempSensor::getLowAlarm()
 {
 	return this->_lowAlarm;
 }
 
-void TemperatureSensor::setLowAlarm(float value)
+void DSFamilyTempSensor::setLowAlarm(float value)
 {
 	this->_lowAlarm = value;
 }
 
-float TemperatureSensor::getHighAlarm()
+float DSFamilyTempSensor::getHighAlarm()
 {
 	return this->_highAlarm;
 }
 
-void TemperatureSensor::setHighAlarm(float value)
+void DSFamilyTempSensor::setHighAlarm(float value)
 {
 	this->_highAlarm = value;
 }
 
-bool TemperatureSensor::getConnected()
+bool DSFamilyTempSensor::getConnected()
 {
 	return this->_connected;
 }
 
-void TemperatureSensor::setConnected(bool value)
+void DSFamilyTempSensor::setConnected(bool value)
 {
 	this->_connected = value;
 }
 
-float TemperatureSensor::getRawTemperature()
+float DSFamilyTempSensor::getRawTemperature()
 {
 	return this->_rawTemperature;
 }
 
-void TemperatureSensor::setRawTemperature(float value)
+void DSFamilyTempSensor::setRawTemperature(float value)
 {
 	this->_rawTemperature = value;
 }
 
-float TemperatureSensor::getTemperatureWithScale()
+float DSFamilyTempSensor::getTemperatureWithScale()
 {
 	return this->_rawTemperature;
 }
 
-long TemperatureSensor::getEpochTimeUtc()
+long DSFamilyTempSensor::getEpochTimeUtc()
 {
 	return this->_epochTimeUtc;
 }
 
-void TemperatureSensor::setEpochTimeUtc(long value)
+void DSFamilyTempSensor::setEpochTimeUtc(long value)
 {
 	this->_epochTimeUtc = value;
 }
@@ -189,7 +189,7 @@ void DSFamilyTempSensorManager::begin()
 			byte temperatureScaleId = 1;
 			String family = getFamily(deviceAddress);     		  		  
 
-			this->_sensors.push_back(TemperatureSensor(
+			this->_sensors.push_back(DSFamilyTempSensor(
 				dsFamilyTempSensorId, 
 				deviceAddress, 
 				family,
@@ -218,9 +218,9 @@ void DSFamilyTempSensorManager::refresh()
 	}
 }
 	
-TemperatureSensor *DSFamilyTempSensorManager::getSensors()
+DSFamilyTempSensor *DSFamilyTempSensorManager::getSensors()
 {
-	TemperatureSensor* array = this->_sensors.data();
+	DSFamilyTempSensor* array = this->_sensors.data();
 	return array;
 }
 
@@ -337,18 +337,18 @@ String DSFamilyTempSensorManager::getFamily(byte deviceAddress[8]){
   } 
 }
 
-void DSFamilyTempSensorManager::generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root)
+void DSFamilyTempSensorManager::generateNestedSensor(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root)
 {	
 	JsonObject& JSONencoder = root.createNestedObject();
 
-	JSONencoder["deviceAddress"] = temperatureSensor.getDeviceAddress();
-	JSONencoder["epochTimeUtc"] = temperatureSensor.getEpochTimeUtc();
-	JSONencoder["validFamily"] = temperatureSensor.getValidFamily();
-	JSONencoder["family"] = temperatureSensor.getFamily();
-	JSONencoder["isConnected"] = temperatureSensor.getConnected();
-	JSONencoder["resolution"] = temperatureSensor.getResolution();
-	JSONencoder["rawTemperature"] = temperatureSensor.getRawTemperature();
-	JSONencoder["hasAlarm"] = temperatureSensor.getHasAlarm();
-	JSONencoder["lowAlarm"] = temperatureSensor.getLowAlarm();
-	JSONencoder["highAlarm"] = temperatureSensor.getHighAlarm();
+	JSONencoder["deviceAddress"] = dsFamilyTempSensor.getDeviceAddress();
+	JSONencoder["epochTimeUtc"] = dsFamilyTempSensor.getEpochTimeUtc();
+	JSONencoder["validFamily"] = dsFamilyTempSensor.getValidFamily();
+	JSONencoder["family"] = dsFamilyTempSensor.getFamily();
+	JSONencoder["isConnected"] = dsFamilyTempSensor.getConnected();
+	JSONencoder["resolution"] = dsFamilyTempSensor.getResolution();
+	JSONencoder["rawTemperature"] = dsFamilyTempSensor.getRawTemperature();
+	JSONencoder["hasAlarm"] = dsFamilyTempSensor.getHasAlarm();
+	JSONencoder["lowAlarm"] = dsFamilyTempSensor.getLowAlarm();
+	JSONencoder["highAlarm"] = dsFamilyTempSensor.getHighAlarm();
 }

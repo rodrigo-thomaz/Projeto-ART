@@ -10,13 +10,13 @@
 #include "DallasTemperature.h"
 
 
-class TemperatureSensor
+class DSFamilyTempSensor
 {
 	
   public:
   
-	TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId);
-	TemperatureSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
+	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId);
+	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
 
     String								getDSFamilyTempSensorId();		
 	
@@ -87,7 +87,7 @@ class DSFamilyTempSensorManager
 				
 	void 								refresh();	
 			
-	TemperatureSensor 					*getSensors();
+	DSFamilyTempSensor 					*getSensors();
 	char 								*getSensorsJson();		
 				
 	void 								setResolution(String json);
@@ -101,9 +101,9 @@ class DSFamilyTempSensorManager
 				
 	const uint8_t 						*getDeviceAddress(String deviceAddress);
 	String 								getFamily(byte deviceAddress[8]);
-	void								generateNestedSensor(TemperatureSensor temperatureSensor, JsonArray& root);
+	void								generateNestedSensor(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
 	
-	std::vector<TemperatureSensor> 		_sensors;
+	std::vector<DSFamilyTempSensor> 		_sensors;
 	
 };
 
