@@ -223,7 +223,6 @@
     <Content Include="src\js\services\admin\dsFamilyTempSensorAdminService.js" />
     <Content Include="src\js\services\devicesService.js" />
     <Content Include="src\js\services\admin\thermometerDeviceAdminService.js" />
-    <Content Include="src\js\services\espDeviceJoinService.js" />
     <Content Include="src\js\services\espDeviceService.js" />
     <Content Include="src\js\services\sensorsService.js" />
     <Content Include="src\js\services\applicationUserService.js" />

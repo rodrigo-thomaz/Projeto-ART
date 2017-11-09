@@ -78,7 +78,7 @@ angular.module('app')
                   templateUrl: 'views/espDeviceJoin.html',
                   resolve: load([
                       'ui.grid',
-                      'js/services/espDeviceJoinService.js',
+                      'js/services/espDeviceService.js',
                       'js/controllers/espDeviceJoinController.js',
                   ])
               })

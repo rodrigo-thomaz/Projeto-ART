@@ -1,9 +1,9 @@
 ﻿'use strict';
-app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'espDeviceJoinService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, espDeviceJoinService) {    
+app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'espDeviceService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, espDeviceService) {    
 
     var onGetByPinClick = function () {    
         $scope.searchingPin = true;
-        espDeviceJoinService.getByPin($scope.pin).then(function successCallback(response) {
+        espDeviceService.getByPin($scope.pin).then(function successCallback(response) {
             }, function errorCallback(response) {
                 $scope.searchingPin = false;
                 $scope.$apply();
@@ -20,7 +20,7 @@ app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', 'uiGrid
     }
 
     var onInsertInApplicationClick = function () {
-        espDeviceJoinService.insertInApplication($scope.pin);
+        espDeviceService.insertInApplication($scope.pin);
     }
 
     var onInsertInApplicationCompleted = function (payload) {
