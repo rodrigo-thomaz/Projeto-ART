@@ -99,7 +99,7 @@
                , arguments: null);
 
             _model.QueueDeclare(
-                  queue: ESPDeviceConstants.UpdatePinQueueName
+                  queue: ESPDeviceConstants.UpdatePinIoTQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
@@ -272,12 +272,12 @@
         {
             foreach (var contract in contracts)
             {
+                //Enviando para o IoT
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
                 var queueName = GetDeviceQueueName(contract.HardwareId);
-                var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsContract>(ESPDeviceConstants.UpdatePinQueueName, contract);
-                var json = JsonConvert.SerializeObject(deviceMessage, new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() });
-                var buffer = Encoding.UTF8.GetBytes(json);
-                _model.BasicPublish("", queueName, null, buffer);
+                var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsContract>(ESPDeviceConstants.UpdatePinIoTQueueName, contract);
+                var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+                _model.BasicPublish("", queueName, null, deviceBuffer);
             }
         }  
 
