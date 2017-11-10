@@ -12,7 +12,7 @@
     {
         #region Methods
 
-        Task<ESPDeviceDeleteFromApplicationResponseContract> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
+        Task<HardwareInApplication> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
 
         Task<ESPDeviceGetByPinModel> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 

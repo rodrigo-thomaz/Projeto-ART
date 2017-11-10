@@ -93,20 +93,18 @@
             return hardwaresInApplicationEntity;
         }
 
-        public async Task<ESPDeviceDeleteFromApplicationResponseContract> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
+        public async Task<HardwareInApplication> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
-            var hardwareEntity = await _espDeviceRepository.GetInApplicationById(message.Contract.HardwareInApplicationId);
+            var entity = await _espDeviceRepository.GetInApplicationById(message.Contract.HardwareInApplicationId);
 
-            if (hardwareEntity == null)
+            if (entity == null)
             {
                 throw new Exception("HardwareInApplication not found");
             }
 
-            await _espDeviceRepository.DeleteFromApplication(hardwareEntity);
+            await _espDeviceRepository.DeleteFromApplication(entity);
 
-            var result = Mapper.Map<HardwareInApplication, ESPDeviceDeleteFromApplicationResponseContract>(hardwareEntity);
-
-            return result;
+            return entity;
         }
 
         public async Task<List<ESPDeviceUpdatePinsContract>> UpdatePins()

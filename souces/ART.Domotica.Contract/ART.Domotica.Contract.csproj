@@ -44,7 +44,6 @@
     <Compile Include="DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract.cs" />
     <Compile Include="DSFamilyTempSensorSetHighAlarmContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmContract.cs" />
-    <Compile Include="ESPDeviceDeleteFromApplicationResponseContract.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsResponseContract.cs" />

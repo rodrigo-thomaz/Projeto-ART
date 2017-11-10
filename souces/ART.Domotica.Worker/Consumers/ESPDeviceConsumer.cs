@@ -172,7 +172,7 @@
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<HardwareInApplication, ESPDeviceInsertInApplicationResponseIoTContract>(data);
-            var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(ESPDeviceConstants.InsertInApplicationIoTCompletedQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(ESPDeviceConstants.InsertInApplicationIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var queueName = GetDeviceQueueName(data.HardwareBaseId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
@@ -188,16 +188,18 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract>>(e.Body);
             var data = await _espDeviceDomain.DeleteFromApplication(message);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+
+            //Enviando para View
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, buffer);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
+            var viewModel = Mapper.Map<HardwareInApplication, ESPDeviceDeleteFromApplicationModel>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);                        
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-            //Enviando para o Device
-
-            var deviceMessage = new MessageIoTContract<ESPDeviceDeleteFromApplicationResponseContract>(ESPDeviceConstants.DeleteFromApplicationQueueName, null);
+            //Enviando para o IoT
+            var deviceMessage = new MessageIoTContract<string>(ESPDeviceConstants.DeleteFromApplicationIoTQueueName, string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(data.HardwareId);
+            var queueName = GetDeviceQueueName(data.HardwareBaseId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 

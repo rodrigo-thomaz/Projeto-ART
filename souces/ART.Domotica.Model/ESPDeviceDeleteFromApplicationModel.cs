@@ -1,8 +1,8 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Model
 {
     using System;
 
-    public class ESPDeviceDeleteFromApplicationResponseContract
+    public class ESPDeviceDeleteFromApplicationModel
     {
         #region Properties
 

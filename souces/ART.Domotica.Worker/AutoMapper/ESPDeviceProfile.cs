@@ -23,6 +23,10 @@
             
             CreateMap<HardwareInApplication, ESPDeviceInsertInApplicationResponseIoTContract>()
                 .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.Id));
+
+            CreateMap<HardwareInApplication, ESPDeviceDeleteFromApplicationModel>()
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.HardwareBaseId));
         }
 
         #endregion Constructors
