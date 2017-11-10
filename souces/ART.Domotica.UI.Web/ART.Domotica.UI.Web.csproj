@@ -484,6 +484,7 @@
     <Content Include="src\tpl\layout_mobile.html" />
     <Content Include="src\tpl\page_profile.html" />
     <Content Include="src\views\admin\thermometerDeviceAdmin.html" />
+    <Content Include="src\views\dsFamilyTempSensor.html" />
     <Content Include="src\views\espDeviceJoin.html" />
     <Content Include="src\views\espDevice.html" />
     <Content Include="src\views\sensors.html" />
