@@ -43,11 +43,9 @@
 
         #region Methods
 
-        public async Task<List<ESPDeviceDetailModel>> GetListInApplication(AuthenticatedMessageContract message)
+        public async Task<List<HardwareInApplication>> GetListInApplication(AuthenticatedMessageContract message)
         {
-            var data = await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
-            var result = Mapper.Map<List<HardwareInApplication>, List<ESPDeviceDetailModel>>(data);
-            return result;
+            return await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
         }
 
         public async Task<ESPDeviceGetByPinModel> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)

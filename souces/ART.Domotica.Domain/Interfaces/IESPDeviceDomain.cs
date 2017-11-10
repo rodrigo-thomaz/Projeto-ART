@@ -18,7 +18,7 @@
 
         Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract);
 
-        Task<List<ESPDeviceDetailModel>> GetListInApplication(AuthenticatedMessageContract message);
+        Task<List<HardwareInApplication>> GetListInApplication(AuthenticatedMessageContract message);
 
         Task<HardwareInApplication> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 

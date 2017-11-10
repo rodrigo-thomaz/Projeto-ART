@@ -130,10 +130,13 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var data = await _espDeviceDomain.GetListInApplication(message);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<List<HardwareInApplication>, List<ESPDeviceDetailModel>>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetListInApplicationCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, buffer);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
         }
 
         public void GetByPinReceived(object sender, BasicDeliverEventArgs e)
