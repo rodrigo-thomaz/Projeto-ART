@@ -42,10 +42,10 @@
         [Route("getConfigurations")]
         [HttpPost]
         [AllowAnonymous]
-        [ResponseType(typeof(ESPDeviceGetConfigurationsResponseContract))]
-        public async Task<IHttpActionResult> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract)
+        [ResponseType(typeof(ESPDeviceGetConfigurationsRPCResponseContract))]
+        public async Task<IHttpActionResult> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
         {
-            var result = await _espDeviceProducer.GetConfigurations(contract);  
+            var result = await _espDeviceProducer.GetConfigurationsRPC(contract);  
             return Ok(result);
         }
 

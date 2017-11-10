@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ESPDeviceGetConfigurationsResponseContract
+    public class ESPDeviceGetConfigurationsRPCResponseContract
     {
         #region Properties
 

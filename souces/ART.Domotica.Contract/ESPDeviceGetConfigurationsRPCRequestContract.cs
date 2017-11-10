@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Contract
 {
-    public class ESPDeviceGetConfigurationsRequestContract
+    public class ESPDeviceGetConfigurationsRPCRequestContract
     {
         #region Properties
 

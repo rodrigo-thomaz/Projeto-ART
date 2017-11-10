@@ -68,11 +68,11 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract message)
+        public async Task<ESPDeviceGetConfigurationsRPCResponseContract> GetConfigurationsRPC(ESPDeviceGetConfigurationsRPCRequestContract message)
         {
             return await Task.Run(() =>
             {
-                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsQueueName);
+                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsRPCQueueName);
                 rpcClient.TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds;
                 var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
                 rpcClient.TimedOut += (sender, e) =>
@@ -87,7 +87,7 @@ namespace ART.Domotica.Producer.Services
 
                 var bufferResult = rpcClient.Call(body);
                 rpcClient.Close();
-                var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsResponseContract>(bufferResult);
+                var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCResponseContract>(bufferResult);
                 return result;
             });            
         }        

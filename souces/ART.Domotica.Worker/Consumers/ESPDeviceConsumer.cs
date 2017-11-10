@@ -7,8 +7,10 @@
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
+    using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
+    using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;
     using global::AutoMapper;
     using Newtonsoft.Json;
@@ -27,24 +29,30 @@
         private readonly EventingBasicConsumer _getByPinConsumer;
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
-        private readonly EventingBasicConsumer _getConfigurationsConsumer;
+        private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
 
         private readonly IESPDeviceDomain _espDeviceDomain;
+
+        private readonly ISettingManager _settingsManager;
+        private readonly IMQSettings _mqSettings;
 
         #endregion Fields
 
         #region Constructors
 
-        public ESPDeviceConsumer(IConnection connection, IESPDeviceDomain espDeviceDomain)
+        public ESPDeviceConsumer(IConnection connection, IESPDeviceDomain espDeviceDomain, ISettingManager settingsManager, IMQSettings mqSettings)
             : base(connection)
         {
             _getListInApplicationConsumer = new EventingBasicConsumer(_model);
             _getByPinConsumer = new EventingBasicConsumer(_model);
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
-            _getConfigurationsConsumer = new EventingBasicConsumer(_model);
+            _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
 
             _espDeviceDomain = espDeviceDomain;
+
+            _settingsManager = settingsManager;
+            _mqSettings = mqSettings;
 
             Initialize();
         }
@@ -84,7 +92,7 @@
                , arguments: null);
 
             _model.QueueDeclare(
-                 queue: ESPDeviceConstants.GetConfigurationsQueueName
+                 queue: ESPDeviceConstants.GetConfigurationsRPCQueueName
                , durable: false
                , exclusive: false
                , autoDelete: false
@@ -108,13 +116,13 @@
             _getByPinConsumer.Received += GetByPinReceived;
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
-            _getConfigurationsConsumer.Received += GetConfigurationsReceived;
+            _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetByPinQueueName, false, _getByPinConsumer);
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
-            _model.BasicConsume(ESPDeviceConstants.GetConfigurationsQueueName, false, _getConfigurationsConsumer);
+            _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
         }        
 
         #endregion Methods
@@ -209,16 +217,39 @@
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
-        public void GetConfigurationsReceived(object sender, BasicDeliverEventArgs e)
+        public void GetConfigurationsRPCReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetConfigurationsReceivedAsync(sender, e));
+            Task.WaitAll(GetConfigurationsRPCReceivedAsync(sender, e));
         }
 
-        public async Task GetConfigurationsReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetConfigurationsRPCReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
-            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRequestContract>(e.Body);
-            var data = await _espDeviceDomain.GetConfigurations(requestContract);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCRequestContract>(e.Body);
+            var data = await _espDeviceDomain.GetConfigurations(requestContract);            
+            
+            var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
+            var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
+            var ntpUpdateInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPUpdateIntervalSettingsKey);
+
+            var publishMessageInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.PublishMessageIntervalSettingsKey);
+
+            var responseContract = new ESPDeviceGetConfigurationsRPCResponseContract
+            {
+                BrokerHost = _mqSettings.BrokerHost,
+                BrokerPort = _mqSettings.BrokerPort,
+                BrokerUser = _mqSettings.BrokerUser,
+                BrokerPassword = _mqSettings.BrokerPwd,
+                NTPHost = ntpHost,
+                NTPPort = ntpPort,
+                NTPUpdateInterval = ntpUpdateInterval,
+                PublishMessageInterval = publishMessageInterval,
+            };
+
+            Mapper.Map(data, responseContract);
+
+            //Enviando para o Producer
+
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(responseContract);
 
             _model.BasicQos(0, 1, false);
 

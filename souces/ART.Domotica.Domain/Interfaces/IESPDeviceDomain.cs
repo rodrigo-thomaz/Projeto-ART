@@ -16,7 +16,7 @@
 
         Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
-        Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract);
+        Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
 
         Task<List<HardwareInApplication>> GetListInApplication(AuthenticatedMessageContract message);
 

@@ -13,7 +13,7 @@
 
         Task GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
-        Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract);
+        Task<ESPDeviceGetConfigurationsRPCResponseContract> GetConfigurationsRPC(ESPDeviceGetConfigurationsRPCRequestContract contract);
 
         Task GetListInApplication(AuthenticatedMessageContract message);
 

@@ -23,20 +23,16 @@
         #region Fields
 
         private readonly IESPDeviceRepository _espDeviceRepository;
-        private readonly IApplicationUserRepository _applicationUserRepository;
-        private readonly ISettingManager _settingsManager;
-        private readonly IMQSettings _mqSettings;
+        private readonly IApplicationUserRepository _applicationUserRepository;                
 
         #endregion Fields
 
         #region Constructors
 
-        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository, ISettingManager settingsManager, IMQSettings mqSettings)
+        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository)
         {
             _espDeviceRepository = espDeviceRepository;
             _applicationUserRepository = applicationUserRepository;
-            _settingsManager = settingsManager;
-            _mqSettings = mqSettings;
         }
 
         #endregion Constructors
@@ -123,7 +119,7 @@
             return result;
         }
 
-        public async Task<ESPDeviceGetConfigurationsResponseContract> GetConfigurations(ESPDeviceGetConfigurationsRequestContract contract)
+        public async Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
         {
             var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);            
 
@@ -131,28 +127,8 @@
             {
                 throw new Exception("ESP Device not found");
             }
-
-            var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
-            var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
-            var ntpUpdateInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPUpdateIntervalSettingsKey);
-
-            var publishMessageInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.PublishMessageIntervalSettingsKey);
-
-            var result = new ESPDeviceGetConfigurationsResponseContract
-            {
-                BrokerHost = _mqSettings.BrokerHost,
-                BrokerPort = _mqSettings.BrokerPort,
-                BrokerUser = _mqSettings.BrokerUser,
-                BrokerPassword = _mqSettings.BrokerPwd,
-                NTPHost = ntpHost,
-                NTPPort = ntpPort,
-                NTPUpdateInterval = ntpUpdateInterval,
-                PublishMessageInterval = publishMessageInterval,
-            };
-
-            Mapper.Map(data, result);
-
-            return result;
+            
+            return data;
         }
 
         #endregion Methods
