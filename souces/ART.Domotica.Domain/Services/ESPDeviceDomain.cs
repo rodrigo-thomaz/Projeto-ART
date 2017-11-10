@@ -17,16 +17,20 @@
         #region Fields
 
         private readonly IESPDeviceRepository _espDeviceRepository;
+        private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
+        private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;                
 
         #endregion Fields
 
         #region Constructors
 
-        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IApplicationUserRepository applicationUserRepository)
+        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IApplicationUserRepository applicationUserRepository, IHardwareInApplicationRepository hardwareInApplicationRepository)
         {
             _espDeviceRepository = espDeviceRepository;
+            _dsFamilyTempSensorRepository = dsFamilyTempSensorRepository;
             _applicationUserRepository = applicationUserRepository;
+            _hardwareInApplicationRepository = hardwareInApplicationRepository;
         }
 
         #endregion Constructors
@@ -73,21 +77,36 @@
                 CreateDate = DateTime.Now.ToUniversalTime(),
             };
 
-            await _espDeviceRepository.InsertInApplication(hardwaresInApplicationEntity);
+            await _hardwareInApplicationRepository.Insert(hardwaresInApplicationEntity);
+
+            var allSensorsThatAreNotInApplication = await _dsFamilyTempSensorRepository.GetAllThatAreNotInApplicationByDevice(hardwareEntity.Id);
+
+            foreach (var item in allSensorsThatAreNotInApplication)
+            {
+                var hardwaresInApplicationSensorEntity = new HardwareInApplication
+                {
+                    ApplicationId = applicationUserEntity.ApplicationId,
+                    HardwareBaseId = item.Id,
+                    CreateByApplicationUserId = applicationUserEntity.Id,
+                    CreateDate = DateTime.Now.ToUniversalTime(),
+                };
+
+                await _hardwareInApplicationRepository.Insert(hardwaresInApplicationSensorEntity);
+            }            
 
             return hardwaresInApplicationEntity;
         }
 
         public async Task<HardwareInApplication> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
-            var entity = await _espDeviceRepository.GetInApplicationById(message.Contract.HardwareInApplicationId);
+            var entity = await _hardwareInApplicationRepository.GetById(message.Contract.HardwareInApplicationId);
 
             if (entity == null)
             {
                 throw new Exception("HardwareInApplication not found");
             }
 
-            await _espDeviceRepository.DeleteFromApplication(entity);
+            await _hardwareInApplicationRepository.Delete(entity);
 
             return entity;
         }

@@ -91,6 +91,7 @@
     <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ThermometerDevice.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Interfaces\IHardwareInApplicationRepository.cs" />
     <Compile Include="Interfaces\IESPDeviceRepository.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationUserRepository.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />
+    <Compile Include="Repositories\HardwareInApplicationRepository.cs" />
     <Compile Include="Repositories\ESPDeviceRepository.cs" />
     <Compile Include="Repositories\TemperatureScaleRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />

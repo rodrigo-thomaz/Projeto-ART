@@ -49,5 +49,13 @@ namespace ART.Domotica.Repository.Repositories
                 .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == hardwareId) != null)
                 .ToListAsync();
         }
+
+        public async Task<List<DSFamilyTempSensor>> GetAllThatAreNotInApplicationByDevice(Guid deviceBaseId)
+        {
+            return await _context.DSFamilyTempSensor
+                .Where(x => x.SensorsInDevice.Any(y => y.DeviceBaseId == deviceBaseId))
+                .Where(x => !x.HardwaresInApplication.Any())
+                .ToListAsync();
+        }
     }
 }

@@ -23,49 +23,12 @@
 
         #region Methods
 
-        public async Task<List<HardwareInApplication>> GetListInApplication(Guid applicationUserId)
-        {
-            IQueryable<HardwareInApplication> query = from hia in _context.HardwareInApplication
-                                                   join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
-                                                   where au.Id == applicationUserId
-                                                   select hia;
-
-            var data = await query.ToListAsync();
-
-            var ids = data.Select(x => x.HardwareBaseId);
-
-            await _context.Set<HardwareBase>()
-                .Where(x => ids.Contains(x.Id))
-                .LoadAsync();
-
-            return data;
-        }        
-
         public async Task<ESPDeviceBase> GetByPin(string pin)
         {
             var data = await _context.Set<ESPDeviceBase>()
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
             return data;
-        }
-
-        public async Task<HardwareInApplication> GetInApplicationById(Guid hardwareInApplicationId)
-        {
-            var entity = await _context.HardwareInApplication
-                .FindAsync(hardwareInApplicationId);
-            return entity;
-        }
-
-        public async Task InsertInApplication(HardwareInApplication entity)
-        {
-            _context.HardwareInApplication.Add(entity);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task DeleteFromApplication(HardwareInApplication entity)
-        {
-            _context.HardwareInApplication.Remove(entity);
-            await _context.SaveChangesAsync();
         }
 
         public async Task<List<string>> GetExistingPins()
@@ -96,6 +59,25 @@
                .Where(x => x.FlashChipId == flashChipId)
                .Where(x => x.MacAddress == macAddress)               
                .SingleOrDefaultAsync();
+
+            return data;
+        }
+
+        public async Task<List<HardwareInApplication>> GetListInApplication(Guid applicationUserId)
+        {
+            IQueryable<HardwareInApplication> query = from hia in _context.HardwareInApplication
+                                                      join esp in _context.Set<ESPDeviceBase>() on hia.HardwareBaseId equals esp.Id
+                                                      join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
+                                                      where au.Id == applicationUserId
+                                                      select hia;
+
+            var data = await query.ToListAsync();
+
+            var ids = data.Select(x => x.HardwareBaseId);
+
+            await _context.Set<ESPDeviceBase>()
+                .Where(x => ids.Contains(x.Id))
+                .LoadAsync();
 
             return data;
         }

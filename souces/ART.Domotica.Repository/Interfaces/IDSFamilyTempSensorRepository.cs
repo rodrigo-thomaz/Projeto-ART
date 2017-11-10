@@ -19,6 +19,8 @@
 
         Task<List<DSFamilyTempSensor>> GetList();
 
+        Task<List<DSFamilyTempSensor>> GetAllThatAreNotInApplicationByDevice(Guid deviceBaseId);
+
         #endregion Methods
     }
 }

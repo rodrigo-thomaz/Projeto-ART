@@ -19,16 +19,18 @@ namespace ART.Domotica.Domain.Services
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
+        private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
 
         #endregion
 
         #region constructors
 
-        public DSFamilyTempSensorDomain(IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository, IESPDeviceRepository espDeviceRepository)
+        public DSFamilyTempSensorDomain(IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository, IESPDeviceRepository espDeviceRepository, IHardwareInApplicationRepository hardwareInApplicationRepository)
         {
             _dsFamilyTempSensorRepository = dsFamilyTempSensorRepository;
             _dsFamilyTempSensorResolutionRepository = dsFamilyTempSensorResolutionRepository;
             _espDeviceRepository = espDeviceRepository;
+            _hardwareInApplicationRepository = hardwareInApplicationRepository;
         }
 
         #endregion
@@ -51,7 +53,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>> GetAllByHardwareInApplicationId(Guid hardwareApplicationId)
         {
-            var hardwareInApplication = await _espDeviceRepository.GetInApplicationById(hardwareApplicationId);
+            var hardwareInApplication = await _hardwareInApplicationRepository.GetById(hardwareApplicationId);
             var data = await _dsFamilyTempSensorRepository.GetAllByHardwareId(hardwareInApplication.HardwareBaseId);
             var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>>(data);
             return result;
