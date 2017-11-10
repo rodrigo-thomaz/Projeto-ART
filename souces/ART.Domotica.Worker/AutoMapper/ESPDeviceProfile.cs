@@ -17,12 +17,12 @@
 
         public ESPDeviceProfile()
         {
-            CreateMap<HardwareInApplication, ESPDeviceDetailModel>()
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.HardwareBaseId))
-                .ForMember(vm => vm.ChipId, m => m.MapFrom(x => ((ESPDeviceBase)x.HardwareBase).ChipId))
-                .ForMember(vm => vm.FlashChipId, m => m.MapFrom(x => ((ESPDeviceBase)x.HardwareBase).FlashChipId))
-                .ForMember(vm => vm.MacAddress, m => m.MapFrom(x => ((ESPDeviceBase)x.HardwareBase).MacAddress))
+            CreateMap<ESPDeviceBase, ESPDeviceDetailModel>()
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.First().Id))
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.ChipId, m => m.MapFrom(x => x.ChipId))
+                .ForMember(vm => vm.FlashChipId, m => m.MapFrom(x => x.FlashChipId))
+                .ForMember(vm => vm.MacAddress, m => m.MapFrom(x => x.MacAddress))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
 
             CreateMap<HardwareInApplication, ESPDeviceInsertInApplicationResponseIoTContract>()

@@ -19,7 +19,7 @@
 
         Task<List<string>> GetExistingPins();
 
-        Task<List<HardwareInApplication>> GetListInApplication(Guid applicationUserId);
+        Task<List<ESPDeviceBase>> GetListInApplication(Guid applicationUserId);
 
         #endregion Methods
     }

@@ -63,20 +63,20 @@
             return data;
         }
 
-        public async Task<List<HardwareInApplication>> GetListInApplication(Guid applicationUserId)
+        public async Task<List<ESPDeviceBase>> GetListInApplication(Guid applicationUserId)
         {
-            IQueryable<HardwareInApplication> query = from hia in _context.HardwareInApplication
+            IQueryable<ESPDeviceBase> query = from hia in _context.HardwareInApplication
                                                       join esp in _context.Set<ESPDeviceBase>() on hia.HardwareBaseId equals esp.Id
                                                       join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
                                                       where au.Id == applicationUserId
-                                                      select hia;
+                                                      select esp;
 
             var data = await query.ToListAsync();
 
-            var ids = data.Select(x => x.HardwareBaseId);
+            var ids = data.Select(x => x.Id);
 
-            await _context.Set<ESPDeviceBase>()
-                .Where(x => ids.Contains(x.Id))
+            await _context.Set<HardwareInApplication>()
+                .Where(x => ids.Contains(x.HardwareBaseId))
                 .LoadAsync();
 
             return data;

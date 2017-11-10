@@ -138,7 +138,7 @@
             var data = await _espDeviceDomain.GetListInApplication(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<HardwareInApplication>, List<ESPDeviceDetailModel>>(data);
+            var viewModel = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);

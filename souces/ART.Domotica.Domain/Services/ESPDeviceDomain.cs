@@ -37,7 +37,7 @@
 
         #region Methods
 
-        public async Task<List<HardwareInApplication>> GetListInApplication(AuthenticatedMessageContract message)
+        public async Task<List<ESPDeviceBase>> GetListInApplication(AuthenticatedMessageContract message)
         {
             return await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
         }
