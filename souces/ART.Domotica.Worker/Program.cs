@@ -6,6 +6,7 @@
     using ART.Domotica.Domain;
     using ART.Domotica.Domain.AutoMapper;
     using ART.Domotica.Repository;
+    using ART.Domotica.Worker.AutoMapper;
     using ART.Domotica.Worker.Jobs;
     using ART.Domotica.Worker.Modules;
     using ART.Infra.CrossCutting.Logging;
@@ -57,7 +58,6 @@
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());
-                x.AddProfile(new AutoMapper.ESPDeviceProfile());
                 x.AddProfile(new TemperatureScaleProfile());
                 x.AddProfile(new ThermometerDeviceProfile());
             });

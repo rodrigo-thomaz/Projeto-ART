@@ -1,17 +1,17 @@
-﻿using System;
-
-namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Contract
 {
+    using System;
+
     public class DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract
     {
-        public Guid DSFamilyTempSensorId { get; set; }
+        #region Properties
 
         public short[] DeviceAddress
         {
             get; set;
         }
 
-        public byte ResolutionBits
+        public Guid DSFamilyTempSensorId
         {
             get; set;
         }
@@ -36,9 +36,16 @@ namespace ART.Domotica.Contract
             get; set;
         }
 
+        public byte ResolutionBits
+        {
+            get; set;
+        }
+
         public byte TemperatureScaleId
         {
             get; set;
         }
+
+        #endregion Properties
     }
 }

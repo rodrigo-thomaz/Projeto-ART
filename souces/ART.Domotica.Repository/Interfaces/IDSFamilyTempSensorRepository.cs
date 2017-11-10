@@ -13,11 +13,11 @@
 
         Task<List<DSFamilyTempSensor>> GetAll(Guid applicationUserId);
 
+        Task<List<DSFamilyTempSensor>> GetAllByHardwareId(Guid hardwareId);
+
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 
         Task<List<DSFamilyTempSensor>> GetList();
-
-        Task<List<DSFamilyTempSensor>> GetAllByHardwareId(Guid hardwareId);
 
         #endregion Methods
     }

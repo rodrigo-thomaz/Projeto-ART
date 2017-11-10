@@ -4,9 +4,8 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Contract;
-    using ART.Domotica.Model;
-    using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Domotica.Repository.Entities;
+    using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IESPDeviceDomain
     {
@@ -22,7 +21,7 @@
 
         Task<HardwareInApplication> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
-        Task<List<ESPDeviceUpdatePinsContract>> UpdatePins();
+        Task<List<ESPDeviceBase>> UpdatePins();
 
         #endregion Methods
     }

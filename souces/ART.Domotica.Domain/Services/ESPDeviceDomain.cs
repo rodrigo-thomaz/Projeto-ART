@@ -1,22 +1,16 @@
 ﻿namespace ART.Domotica.Domain.Services
 {
-
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ART.Domotica.Domain.Interfaces;
-    using ART.Domotica.Model;
     using ART.Domotica.Repository.Interfaces;
-    using global::AutoMapper;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Domotica.Contract;
     using System;
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
-    using ART.Infra.CrossCutting.MQ;
-    using ART.Infra.CrossCutting.Setting;
-    using ART.Domotica.Constant;
 
     public class ESPDeviceDomain : DomainBase, IESPDeviceDomain
     {
@@ -98,7 +92,7 @@
             return entity;
         }
 
-        public async Task<List<ESPDeviceUpdatePinsContract>> UpdatePins()
+        public async Task<List<ESPDeviceBase>> UpdatePins()
         {
             var existingPins = await _espDeviceRepository.GetExistingPins();
             var entities = await _espDeviceRepository.GetESPDevicesNotInApplication();
@@ -112,11 +106,9 @@
                 }
                 item.Pin = pin;
             }
-            await _espDeviceRepository.Update(entities);
+            await _espDeviceRepository.Update(entities);            
 
-            var result = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceUpdatePinsContract>>(entities);
-
-            return result;
+            return entities;
         }
 
         public async Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)

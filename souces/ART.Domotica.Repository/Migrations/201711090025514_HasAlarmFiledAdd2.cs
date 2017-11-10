@@ -4,18 +4,22 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class HasAlarmFiledAdd2 : DbMigration
     {
-        public override void Up()
-        {
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
-            AlterColumn("dbo.DSFamilyTempSensor", "DeviceAddress", c => c.String(nullable: false, maxLength: 32));
-            CreateIndex("dbo.DSFamilyTempSensor", "DeviceAddress", unique: true);
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
             AlterColumn("dbo.DSFamilyTempSensor", "DeviceAddress", c => c.String(nullable: false, maxLength: 15));
             CreateIndex("dbo.DSFamilyTempSensor", "DeviceAddress", unique: true);
         }
+
+        public override void Up()
+        {
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
+            AlterColumn("dbo.DSFamilyTempSensor", "DeviceAddress", c => c.String(nullable: false, maxLength: 32));
+            CreateIndex("dbo.DSFamilyTempSensor", "DeviceAddress", unique: true);
+        }
+
+        #endregion Methods
     }
 }

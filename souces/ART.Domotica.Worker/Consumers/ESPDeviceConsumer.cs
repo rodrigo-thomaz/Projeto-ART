@@ -13,12 +13,10 @@
     using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;
     using global::AutoMapper;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
+    using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Threading.Tasks;
 
     public class ESPDeviceConsumer : ConsumerBase, IESPDeviceConsumer
@@ -268,18 +266,27 @@
             _model.BasicAck(e.DeliveryTag, false);            
         }
 
-        public void UpdatePins(List<ESPDeviceUpdatePinsContract> contracts, double nextFireTimeInSeconds)
+        public void UpdatePins(DateTimeOffset nextFireTimeUtc)
         {
+            Task.WaitAll(UpdatePinsAsync(nextFireTimeUtc));
+        }
+
+        private async Task UpdatePinsAsync(DateTimeOffset nextFireTimeUtc)
+        {
+            var data = await _espDeviceDomain.UpdatePins();
+            var contracts = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
+
             foreach (var contract in contracts)
             {
                 //Enviando para o IoT
+                var nextFireTimeInSeconds = nextFireTimeUtc.Subtract(DateTimeOffset.Now).TotalSeconds;
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
                 var queueName = GetDeviceQueueName(contract.HardwareId);
-                var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsContract>(ESPDeviceConstants.UpdatePinIoTQueueName, contract);
+                var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(ESPDeviceConstants.UpdatePinIoTQueueName, contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
                 _model.BasicPublish("", queueName, null, deviceBuffer);
             }
-        }  
+        }
 
         #endregion Other
     }

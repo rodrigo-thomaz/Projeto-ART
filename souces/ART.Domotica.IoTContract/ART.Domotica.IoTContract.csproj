@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ESPDeviceInsertInApplicationResponseIoTContract.cs" />
+    <Compile Include="ESPDeviceUpdatePinsResponseIoTContract.cs" />
     <Compile Include="MessageIoTContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

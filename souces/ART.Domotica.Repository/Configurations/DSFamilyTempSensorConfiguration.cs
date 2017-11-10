@@ -51,7 +51,7 @@
             Property(x => x.HighAlarm)
                 .HasColumnOrder(5)
                 .IsOptional()
-                .HasPrecision(6, 3);            
+                .HasPrecision(6, 3);
 
             //TemperatureScale
             HasRequired(x => x.TemperatureScale)

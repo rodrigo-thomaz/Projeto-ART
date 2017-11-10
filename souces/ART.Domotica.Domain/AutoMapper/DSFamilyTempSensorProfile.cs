@@ -2,12 +2,12 @@
 {
     using System.Linq;
 
+    using ART.Domotica.Contract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Utils;
 
     using global::AutoMapper;
-    using ART.Domotica.Contract;
 
     public class DSFamilyTempSensorProfile : Profile
     {

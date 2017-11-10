@@ -1,8 +1,8 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.IoTContract
 {
     using System;
 
-    public class ESPDeviceUpdatePinsContract
+    public class ESPDeviceUpdatePinsResponseIoTContract
     {
         #region Properties
 

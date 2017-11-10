@@ -15,6 +15,8 @@
 
         Task<List<DSFamilyTempSensorGetAllModel>> GetAll(Guid applicationUserId);
 
+        Task<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>> GetAllByHardwareInApplicationId(Guid hardwareApplicationId);
+
         Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions();
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
@@ -26,8 +28,6 @@
         Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message);
 
         Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message);
-
-        Task<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>> GetAllByHardwareInApplicationId(Guid hardwareApplicationId);
 
         #endregion Methods
     }

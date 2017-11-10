@@ -1,14 +1,12 @@
 ﻿namespace ART.Domotica.Worker.IConsumers
 {
-    using System.Collections.Generic;
-
-    using ART.Domotica.Contract;
+    using System;
 
     public interface IESPDeviceConsumer
     {
         #region Methods
 
-        void UpdatePins(List<ESPDeviceUpdatePinsContract> contracts, double nextFireTimeInSeconds);
+        void UpdatePins(DateTimeOffset nextFireTimeUtc);
 
         #endregion Methods
     }

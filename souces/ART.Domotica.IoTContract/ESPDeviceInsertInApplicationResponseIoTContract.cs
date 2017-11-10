@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace ART.Domotica.IoTContract
+﻿namespace ART.Domotica.IoTContract
 {
+    using System;
+
     public class ESPDeviceInsertInApplicationResponseIoTContract
     {
         #region Properties
