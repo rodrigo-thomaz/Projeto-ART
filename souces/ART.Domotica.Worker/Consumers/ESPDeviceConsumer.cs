@@ -149,9 +149,12 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract>>(e.Body);
             var data = await _espDeviceDomain.GetByPin(message);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+
+            //Enviando para View
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetByPinCompletedQueueName);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetByPinViewCompletedQueueName);
+            var viewModel = Mapper.Map<HardwareBase, ESPDeviceGetByPinModel>(data);
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 

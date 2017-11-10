@@ -16,8 +16,6 @@
 
         public ESPDeviceProfile()
         {
-            CreateMap<HardwareBase, ESPDeviceGetByPinModel>();
-
             CreateMap<ESPDeviceBase, ESPDeviceUpdatePinsContract>()
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
 

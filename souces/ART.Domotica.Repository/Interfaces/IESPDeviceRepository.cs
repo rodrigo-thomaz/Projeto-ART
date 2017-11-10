@@ -13,7 +13,7 @@
 
         Task DeleteFromApplication(HardwareInApplication entity);
 
-        Task<HardwareBase> GetByPin(string pin);
+        Task<ESPDeviceBase> GetByPin(string pin);
 
         Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 

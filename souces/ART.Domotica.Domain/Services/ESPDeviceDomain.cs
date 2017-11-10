@@ -48,7 +48,7 @@
             return await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
         }
 
-        public async Task<ESPDeviceGetByPinModel> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
+        public async Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
             var data = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -56,10 +56,7 @@
             {
                 throw new Exception("Pin not found");
             }
-
-            var result = Mapper.Map<HardwareBase, ESPDeviceGetByPinModel>(data);
-
-            return result;
+            return data;
         }
 
         public async Task<HardwareInApplication> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)

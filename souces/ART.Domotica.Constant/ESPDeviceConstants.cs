@@ -7,7 +7,7 @@
         public static readonly string DeleteFromApplicationViewCompletedQueueName = "ESPDevice.DeleteFromApplicationViewCompleted";
         public static readonly string DeleteFromApplicationQueueName = "ESPDevice.DeleteFromApplication";
         public static readonly string DeleteFromApplicationIoTQueueName = "ESPDevice.DeleteFromApplicationIoT";
-        public static readonly string GetByPinCompletedQueueName = "ESPDevice.GetByPinCompleted";
+        public static readonly string GetByPinViewCompletedQueueName = "ESPDevice.GetByPinViewCompleted";
         public static readonly string GetByPinQueueName = "ESPDevice.GetByPin";
         public static readonly string GetConfigurationsQueueName = "ESPDevice.GetConfigurations";
         public static readonly string GetListInApplicationViewCompletedQueueName = "ESPDevice.GetListInApplicationViewCompleted";

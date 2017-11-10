@@ -11,7 +11,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetListInApplicationViewCompleted', onGetListInApplicationCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);        
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetByPinCompleted', onGetByPinCompleted);        
+        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);        
         if (!initialized) {
             initialized = true;
             getListInApplication();

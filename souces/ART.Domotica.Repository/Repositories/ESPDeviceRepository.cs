@@ -41,18 +41,18 @@
             return data;
         }        
 
-        public async Task<HardwareBase> GetByPin(string pin)
+        public async Task<ESPDeviceBase> GetByPin(string pin)
         {
-            var data = await _context.ThermometerDevice
+            var data = await _context.Set<ESPDeviceBase>()
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
-
             return data;
         }
 
         public async Task<HardwareInApplication> GetInApplicationById(Guid hardwareInApplicationId)
         {
-            var entity = await _context.HardwareInApplication.FindAsync(hardwareInApplicationId);
+            var entity = await _context.HardwareInApplication
+                .FindAsync(hardwareInApplicationId);
             return entity;
         }
 
@@ -72,7 +72,7 @@
         {
             var entity = await _context.HardwareInApplication.FirstOrDefaultAsync();
 
-            var data = await _context.ThermometerDevice
+            var data = await _context.Set<ESPDeviceBase>()
                 .Where(x => x.HardwaresInApplication.Any())
                 .Select(x => x.Pin)
                 .ToListAsync();
