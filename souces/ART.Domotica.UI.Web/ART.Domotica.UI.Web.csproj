@@ -216,7 +216,7 @@
     <Content Include="src\js\controllers\dashboardController.js" />
     <Content Include="src\js\controllers\applicationController.js" />
     <Content Include="src\js\controllers\tab.js" />
-    <Content Include="src\js\controllers\dsFamilyTempSensorController.js" />
+    <Content Include="src\js\controllers\dsFamilyTempSensorManagerController.js" />
     <Content Include="src\js\controllers\thermometerDeviceController.js" />
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
@@ -484,7 +484,7 @@
     <Content Include="src\tpl\layout_mobile.html" />
     <Content Include="src\tpl\page_profile.html" />
     <Content Include="src\views\admin\thermometerDeviceAdmin.html" />
-    <Content Include="src\views\dsFamilyTempSensor.html" />
+    <Content Include="src\views\dsFamilyTempSensorManager.html" />
     <Content Include="src\views\espDeviceJoin.html" />
     <Content Include="src\views\espDevice.html" />
     <Content Include="src\views\sensors.html" />

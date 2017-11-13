@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-app.controller('dsFamilyTempSensorController', ['$scope', '$timeout', '$log', 'temperatureScaleService', 'dsFamilyTempSensorService', function ($scope, $timeout, $log, temperatureScaleService, dsFamilyTempSensorService) {    
+app.controller('dsFamilyTempSensorManagerController', ['$scope', '$timeout', '$log', 'temperatureScaleService', 'dsFamilyTempSensorService', function ($scope, $timeout, $log, temperatureScaleService, dsFamilyTempSensorService) {    
 
     $scope.gridOptions = {
         enableFiltering: true,
