@@ -19,7 +19,7 @@
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 
-        Task<List<DSFamilyTempSensorGetListModel>> GetList(AuthenticatedMessageContract message);
+        Task<List<DSFamilyTempSensorGetAllModel>> GetAll(AuthenticatedMessageContract message);
 
         Task<List<DSFamilyTempSensorGetListInApplicationModel>> GetListInApplication(Guid applicationUserId);
 

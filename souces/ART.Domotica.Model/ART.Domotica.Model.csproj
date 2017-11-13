@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DSFamilyTempSensorGetListModel.cs" />
+    <Compile Include="DSFamilyTempSensorGetAllModel.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />
     <Compile Include="ESPDeviceDetailModel.cs" />

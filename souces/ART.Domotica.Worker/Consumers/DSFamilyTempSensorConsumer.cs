@@ -22,7 +22,7 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _getListConsumer;
+        private readonly EventingBasicConsumer _getAllConsumer;
         private readonly EventingBasicConsumer _getListInApplicationConsumer;
         private readonly EventingBasicConsumer _getAllByHardwareInApplicationIdConsumer;
         private readonly EventingBasicConsumer _getAllResolutionsConsumer;
@@ -38,7 +38,7 @@ namespace ART.Domotica.Worker.Consumers
 
         public DSFamilyTempSensorConsumer(IConnection connection, IComponentContext componentContext) : base(connection)
         {
-            _getListConsumer = new EventingBasicConsumer(_model);
+            _getAllConsumer = new EventingBasicConsumer(_model);
             _getListInApplicationConsumer = new EventingBasicConsumer(_model);
             _getAllByHardwareInApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
@@ -58,7 +58,7 @@ namespace ART.Domotica.Worker.Consumers
         private void Initialize()
         {
             _model.QueueDeclare(
-                 queue: DSFamilyTempSensorConstants.GetListAdminQueueName
+                 queue: DSFamilyTempSensorConstants.GetAllQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
@@ -119,7 +119,7 @@ namespace ART.Domotica.Worker.Consumers
                 , routingKey: DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName
                 , arguments: null);
 
-            _getListConsumer.Received += GetListReceived;
+            _getAllConsumer.Received += GetAllReceived;
             _getListInApplicationConsumer.Received += GetListInApplicationReceived;
             _getAllByHardwareInApplicationIdConsumer.Received += GetAllByHardwareInApplicationIdReceived;
             _getAllResolutionsConsumer.Received += GetAllResolutionsReceived;
@@ -127,7 +127,7 @@ namespace ART.Domotica.Worker.Consumers
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
             _setLowAlarmConsumer.Received += SetLowAlarmReceived;
 
-            _model.BasicConsume(DSFamilyTempSensorConstants.GetListAdminQueueName, false, _getListConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName, false, _getAllByHardwareInApplicationIdConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
@@ -136,20 +136,20 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicConsume(DSFamilyTempSensorConstants.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
         }        
 
-        public void GetListReceived(object sender, BasicDeliverEventArgs e)
+        public void GetAllReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetListReceivedAsync(sender, e));
+            Task.WaitAll(GetAllReceivedAsync(sender, e));
         }
 
-        public async Task GetListReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.GetList(message);
+            var data = await domain.GetAll(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.GetListCompletedAdminQueueName);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
 

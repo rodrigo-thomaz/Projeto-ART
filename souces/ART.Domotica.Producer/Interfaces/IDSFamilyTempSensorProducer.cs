@@ -11,7 +11,7 @@
 
         Task GetAllResolutions(AuthenticatedMessageContract message);
 
-        Task GetList(AuthenticatedMessageContract message);
+        Task GetAll(AuthenticatedMessageContract message);
 
         Task GetListInApplication(AuthenticatedMessageContract message);
 

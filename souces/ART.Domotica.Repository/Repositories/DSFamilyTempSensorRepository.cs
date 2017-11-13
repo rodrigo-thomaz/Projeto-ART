@@ -16,7 +16,7 @@ namespace ART.Domotica.Repository.Repositories
 
         }
 
-        public async Task<List<DSFamilyTempSensor>> GetList()
+        public async Task<List<DSFamilyTempSensor>> GetAll()
         {
             var data = await _context.DSFamilyTempSensor
                 .ToListAsync();

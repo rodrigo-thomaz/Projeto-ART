@@ -42,10 +42,10 @@ namespace ART.Domotica.Domain.Services
 
         #region public voids
 
-        public async Task<List<DSFamilyTempSensorGetListModel>> GetList(AuthenticatedMessageContract message)
+        public async Task<List<DSFamilyTempSensorGetAllModel>> GetAll(AuthenticatedMessageContract message)
         {
-            var data = await _dsFamilyTempSensorRepository.GetList();
-            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetListModel>>(data);
+            var data = await _dsFamilyTempSensorRepository.GetAll();
+            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllModel>>(data);
             return result;
         }
 

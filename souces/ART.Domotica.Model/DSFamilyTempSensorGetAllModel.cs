@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorGetListModel
+    public class DSFamilyTempSensorGetAllModel
     {
         #region Properties
 
