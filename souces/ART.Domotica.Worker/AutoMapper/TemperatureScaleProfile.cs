@@ -1,6 +1,6 @@
-﻿namespace ART.Domotica.Domain.AutoMapper
+﻿namespace ART.Domotica.Worker.AutoMapper
 {
-    using ART.Domotica.Contract;
+    using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 
@@ -13,7 +13,7 @@
         public TemperatureScaleProfile()
         {
             CreateMap<TemperatureScale, TemperatureScaleGetAllModel>();
-            CreateMap<TemperatureScale, TemperatureScaleGetAllForDeviceResponseContract>();
+            CreateMap<TemperatureScale, TemperatureScaleGetAllForIoTResponseContract>();
         }
 
         #endregion Constructors

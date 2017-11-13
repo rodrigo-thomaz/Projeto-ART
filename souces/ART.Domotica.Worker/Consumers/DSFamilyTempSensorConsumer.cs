@@ -178,7 +178,7 @@ namespace ART.Domotica.Worker.Consumers
         private async Task GetAllByHardwareInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _model.BasicAck(e.DeliveryTag, false);
-            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
             var data = await domain.GetAllByHardwareInApplicationId(requestContract.HardwareInApplicationId);
             var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>>(DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdCompletedQueueName, data);

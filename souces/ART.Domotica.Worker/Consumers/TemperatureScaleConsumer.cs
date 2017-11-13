@@ -8,9 +8,11 @@ using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Worker.IConsumers;
 using System.Collections.Generic;
-using ART.Domotica.Contract;
 using ART.Domotica.IoTContract;
 using Autofac;
+using AutoMapper;
+using ART.Domotica.Repository.Entities;
+using ART.Domotica.Model;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -19,7 +21,7 @@ namespace ART.Domotica.Worker.Consumers
         #region private fields
 
         private readonly EventingBasicConsumer _getAllConsumer;
-        private readonly EventingBasicConsumer _getAllForDeviceConsumer;
+        private readonly EventingBasicConsumer _getAllForIoTConsumer;
 
         private readonly IComponentContext _componentContext;
 
@@ -30,7 +32,7 @@ namespace ART.Domotica.Worker.Consumers
         public TemperatureScaleConsumer(IConnection connection, IComponentContext componentContext) : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
-            _getAllForDeviceConsumer = new EventingBasicConsumer(_model);
+            _getAllForIoTConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -58,23 +60,23 @@ namespace ART.Domotica.Worker.Consumers
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: TemperatureScaleConstants.GetAllForDeviceQueueName
+                  queue: TemperatureScaleConstants.GetAllForIoTQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueBind(
-                  queue: TemperatureScaleConstants.GetAllForDeviceQueueName
+                  queue: TemperatureScaleConstants.GetAllForIoTQueueName
                 , exchange: "amq.topic"
-                , routingKey: TemperatureScaleConstants.GetAllForDeviceQueueName
+                , routingKey: TemperatureScaleConstants.GetAllForIoTQueueName
                 , arguments: null);
 
             _getAllConsumer.Received += GetAllReceived;
-            _getAllForDeviceConsumer.Received += GetAllForDeviceReceived;
+            _getAllForIoTConsumer.Received += GetAllForIoTReceived;
 
             _model.BasicConsume(TemperatureScaleConstants.GetAllQueueName, false, _getAllConsumer);
-            _model.BasicConsume(TemperatureScaleConstants.GetAllForDeviceQueueName, false, _getAllForDeviceConsumer);
+            _model.BasicConsume(TemperatureScaleConstants.GetAllForIoTQueueName, false, _getAllForIoTConsumer);
         }
 
         public void GetAllReceived(object sender, BasicDeliverEventArgs e)
@@ -88,27 +90,33 @@ namespace ART.Domotica.Worker.Consumers
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<ITemperatureScaleDomain>();
             var data = await domain.GetAll();
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllModel>>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, buffer);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
         }
 
-        public void GetAllForDeviceReceived(object sender, BasicDeliverEventArgs e)
+        public void GetAllForIoTReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetAllForDeviceReceivedAsync(sender, e));
+            Task.WaitAll(GetAllForIoTReceivedAsync(sender, e));
         }
 
-        public async Task GetAllForDeviceReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetAllForIoTReceivedAsync(object sender, BasicDeliverEventArgs e)
         {            
             _model.BasicAck(e.DeliveryTag, false);
             var domain = _componentContext.Resolve<ITemperatureScaleDomain>();
-            var data = await domain.GetAllForDevice();
-            var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForDeviceResponseContract>>(TemperatureScaleConstants.GetAllForDeviceCompletedQueueName, data);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);
+            var data = await domain.GetAll();
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllForIoTResponseContract>>(data);
+            var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForIoTResponseContract>>(TemperatureScaleConstants.GetAllForIoTCompletedQueueName, iotContract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
             var queueName = GetDeviceQueueName(requestContract.HardwareId);
-            _model.BasicPublish("", queueName, null, buffer);            
+            _model.BasicPublish("", queueName, null, deviceBuffer);            
         }
 
         #endregion

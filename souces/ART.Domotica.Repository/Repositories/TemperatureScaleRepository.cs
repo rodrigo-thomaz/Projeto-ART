@@ -16,7 +16,8 @@ namespace ART.Domotica.Repository.Repositories
 
         public async Task<List<TemperatureScale>> GetAll()
         {
-            return await _context.TemperatureScale.ToListAsync();
+            return await _context.TemperatureScale
+                .ToListAsync();
         }
     }
 }

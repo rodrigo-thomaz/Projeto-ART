@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeviceRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract.cs" />
     <Compile Include="DSFamilyTempSensorSetHighAlarmContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmContract.cs" />
@@ -51,7 +50,6 @@
     <Compile Include="ESPDeviceGetByPinRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TemperatureScaleGetAllForDeviceResponseContract.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">

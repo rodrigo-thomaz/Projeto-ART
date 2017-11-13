@@ -2,17 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using ART.Domotica.Contract;
-    using ART.Domotica.Model;
+    using ART.Domotica.Repository.Entities;
 
     public interface ITemperatureScaleDomain
     {
         #region Methods
 
-        Task<List<TemperatureScaleGetAllModel>> GetAll();
-
-        Task<List<TemperatureScaleGetAllForDeviceResponseContract>> GetAllForDevice();
+        Task<List<TemperatureScale>> GetAll();
 
         #endregion Methods
     }

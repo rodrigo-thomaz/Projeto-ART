@@ -1,6 +1,6 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.IoTContract
 {
-    public class TemperatureScaleGetAllForDeviceResponseContract
+    public class TemperatureScaleGetAllForIoTResponseContract
     {
         #region Properties
 

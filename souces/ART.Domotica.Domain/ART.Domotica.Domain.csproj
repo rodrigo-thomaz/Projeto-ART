@@ -67,7 +67,6 @@
     <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\ApplicationProfile.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
-    <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="DomainModule.cs" />
     <Compile Include="Interfaces\IApplicationUserDomain.cs" />
     <Compile Include="Interfaces\IApplicationDomain.cs" />
