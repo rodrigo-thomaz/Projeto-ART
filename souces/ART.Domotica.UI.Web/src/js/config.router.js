@@ -47,7 +47,6 @@ angular.module('app')
                       'js/services/espDeviceService.js',
                       'js/controllers/espDeviceListController.js',
 
-                      'js/services/thermometerDeviceService.js',                      
                       'js/controllers/thermometerDeviceController.js',                      
                   ])
               })

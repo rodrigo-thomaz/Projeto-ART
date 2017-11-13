@@ -230,7 +230,6 @@
     <Content Include="src\js\services\temperatureScaleService.js" />
     <Content Include="src\js\services\dsFamilyTempSensorService.js" />
     <Content Include="src\js\services\stompService.js" />
-    <Content Include="src\js\services\thermometerDeviceService.js" />
     <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\psd\ui.zip" />
     <Content Include="src\js\config.interceptor.js" />
