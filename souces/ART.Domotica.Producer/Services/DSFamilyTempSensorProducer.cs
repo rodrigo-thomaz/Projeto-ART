@@ -31,12 +31,12 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task GetAll(AuthenticatedMessageContract message)
+        public async Task GetListInApplication(AuthenticatedMessageContract message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.GetListInApplicationQueueName, null, payload);
             });            
         }
 
@@ -83,7 +83,7 @@ namespace ART.Domotica.Producer.Services
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.GetAllQueueName
+                  queue: DSFamilyTempSensorConstants.GetListInApplicationQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

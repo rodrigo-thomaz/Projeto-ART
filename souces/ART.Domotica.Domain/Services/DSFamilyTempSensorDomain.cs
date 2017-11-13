@@ -49,10 +49,10 @@ namespace ART.Domotica.Domain.Services
             return result;
         }
 
-        public async Task<List<DSFamilyTempSensorGetAllModel>> GetAll(Guid applicationUserId)
+        public async Task<List<DSFamilyTempSensorGetListInApplicationModel>> GetListInApplication(Guid applicationUserId)
         {
-            var data = await _dsFamilyTempSensorRepository.GetAll(applicationUserId);
-            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllModel>>(data);
+            var data = await _dsFamilyTempSensorRepository.GetListInApplication(applicationUserId);
+            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetListInApplicationModel>>(data);
             return result;
         }
 

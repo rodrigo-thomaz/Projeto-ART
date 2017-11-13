@@ -1,8 +1,12 @@
-﻿namespace ART.Domotica.Model
+﻿using System;
+
+namespace ART.Domotica.Model
 {
-    public class DSFamilyTempSensorGetAllModel
+    public class DSFamilyTempSensorGetListInApplicationModel
     {
         #region Properties
+
+        public Guid DSFamilyTempSensorId { get; set; }
 
         public string DeviceAddress
         {

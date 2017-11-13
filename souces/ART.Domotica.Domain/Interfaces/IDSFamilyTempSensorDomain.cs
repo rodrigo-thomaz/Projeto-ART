@@ -13,7 +13,7 @@
     {
         #region Methods
 
-        Task<List<DSFamilyTempSensorGetAllModel>> GetAll(Guid applicationUserId);
+        Task<List<DSFamilyTempSensorGetListInApplicationModel>> GetListInApplication(Guid applicationUserId);
 
         Task<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>> GetAllByHardwareInApplicationId(Guid hardwareApplicationId);
 

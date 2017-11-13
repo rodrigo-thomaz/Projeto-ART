@@ -15,7 +15,8 @@
 
         public DSFamilyTempSensorProfile()
         {
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllModel>();
+            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetListInApplicationModel>()
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>()
                 .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {

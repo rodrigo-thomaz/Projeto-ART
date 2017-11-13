@@ -55,11 +55,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("getAll")]
+        [Route("getListInApplication")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetAll()
+        public async Task<IHttpActionResult> GetListInApplication()
         {
-            await _dsFamilyTempSensorProducer.GetAll(CreateMessage());
+            await _dsFamilyTempSensorProducer.GetListInApplication(CreateMessage());
             return Ok();
         }
 
