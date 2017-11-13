@@ -7,8 +7,5 @@
 
     public interface IHardwareInApplicationRepository : IRepository<ARTDbContext, HardwareInApplication, Guid>
     {
-        #region Methods
-
-        #endregion Methods
     }
 }

@@ -1,11 +1,12 @@
-﻿using ART.Domotica.Domain.DTOs;
-using ART.Domotica.Repository.Entities;
-using AutoMapper;
-using System;
-using System.Linq;
-
-namespace ART.Domotica.Domain.AutoMapper
+﻿namespace ART.Domotica.Domain.AutoMapper
 {
+    using System;
+    using System.Linq;
+
+    using ART.Domotica.Domain.DTOs;
+    using ART.Domotica.Repository.Entities;
+    using global::AutoMapper;
+
     public class ESPDeviceProfile : Profile
     {
         #region Constructors
@@ -20,7 +21,7 @@ namespace ART.Domotica.Domain.AutoMapper
                         return src.HardwaresInApplication.SingleOrDefault().Id;
                     }
                     return (Guid?)null;
-                }));            
+                }));
         }
 
         #endregion Constructors

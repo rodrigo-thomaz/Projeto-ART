@@ -1,17 +1,32 @@
-﻿using System;
-
-namespace ART.Domotica.Domain.DTOs
+﻿namespace ART.Domotica.Domain.DTOs
 {
+    using System;
+
     public class ESPDeviceBaseDTO
     {
-        public Guid ESPDeviceId { get; set; }
+        #region Properties
 
         public int ChipId
         {
             get; set;
         }
 
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public Guid ESPDeviceId
+        {
+            get; set;
+        }
+
         public int FlashChipId
+        {
+            get; set;
+        }
+
+        public Guid? HardwaresInApplicationId
         {
             get; set;
         }
@@ -31,8 +46,6 @@ namespace ART.Domotica.Domain.DTOs
             get; set;
         }
 
-        public DateTime CreateDate { get; set; }
-
-        public Guid? HardwaresInApplicationId { get; set; }
+        #endregion Properties
     }
 }

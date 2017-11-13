@@ -1,13 +1,12 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
-
     using ART.Domotica.Contract;
+    using ART.Domotica.Domain.DTOs;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Infra.CrossCutting.Utils;
 
     using global::AutoMapper;
-    using ART.Domotica.Domain.DTOs;
 
     public class ESPDeviceProfile : Profile
     {

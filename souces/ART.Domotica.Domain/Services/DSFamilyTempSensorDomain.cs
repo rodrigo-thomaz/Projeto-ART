@@ -9,6 +9,9 @@ using AutoMapper;
 using ART.Domotica.Contract;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.Domain;
+using Autofac;
+using ART.Domotica.Repository;
+using ART.Domotica.Repository.Repositories;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -25,12 +28,14 @@ namespace ART.Domotica.Domain.Services
 
         #region constructors
 
-        public DSFamilyTempSensorDomain(IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IDSFamilyTempSensorResolutionRepository dsFamilyTempSensorResolutionRepository, IESPDeviceRepository espDeviceRepository, IHardwareInApplicationRepository hardwareInApplicationRepository)
+        public DSFamilyTempSensorDomain(IComponentContext componentContext)
         {
-            _dsFamilyTempSensorRepository = dsFamilyTempSensorRepository;
-            _dsFamilyTempSensorResolutionRepository = dsFamilyTempSensorResolutionRepository;
-            _espDeviceRepository = espDeviceRepository;
-            _hardwareInApplicationRepository = hardwareInApplicationRepository;
+            var context = componentContext.Resolve<ARTDbContext>();
+
+            _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
+            _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);
+            _espDeviceRepository = new ESPDeviceRepository(context);
+            _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
         }
 
         #endregion

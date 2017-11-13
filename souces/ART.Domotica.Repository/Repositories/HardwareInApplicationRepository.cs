@@ -16,10 +16,5 @@
         }
 
         #endregion Constructors
-
-        #region Methods        
-                
-
-        #endregion Methods
     }
 }

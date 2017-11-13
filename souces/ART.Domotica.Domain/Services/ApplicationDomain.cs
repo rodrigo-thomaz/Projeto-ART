@@ -9,6 +9,9 @@
     using global::AutoMapper;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Domain;
+    using ART.Domotica.Repository;
+    using Autofac;
+    using ART.Domotica.Repository.Repositories;
 
     public class ApplicationDomain : DomainBase, IApplicationDomain
     {
@@ -21,10 +24,12 @@
 
         #region Constructors
 
-        public ApplicationDomain(IApplicationRepository applicationRepository, IApplicationUserRepository applicationUserRepository) 
+        public ApplicationDomain(IComponentContext componentContext) 
         {
-            _applicationRepository = applicationRepository;
-            _applicationUserRepository = applicationUserRepository;
+            var context = componentContext.Resolve<ARTDbContext>();
+
+            _applicationRepository = new ApplicationRepository(context);
+            _applicationUserRepository = new ApplicationUserRepository(context);
         }
 
         #endregion Constructors

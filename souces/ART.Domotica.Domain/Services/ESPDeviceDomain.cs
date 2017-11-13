@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Repository.Interfaces;
     using ART.Domotica.Repository.Entities;
@@ -14,6 +13,9 @@
     using System.Transactions;
     using ART.Domotica.Domain.DTOs;
     using global::AutoMapper;
+    using Autofac;
+    using ART.Domotica.Repository;
+    using ART.Domotica.Repository.Repositories;
 
     public class ESPDeviceDomain : DomainBase, IESPDeviceDomain
     {
@@ -28,12 +30,14 @@
 
         #region Constructors
 
-        public ESPDeviceDomain(IESPDeviceRepository espDeviceRepository, IDSFamilyTempSensorRepository dsFamilyTempSensorRepository, IApplicationUserRepository applicationUserRepository, IHardwareInApplicationRepository hardwareInApplicationRepository)
+        public ESPDeviceDomain(IComponentContext componentContext)
         {
-            _espDeviceRepository = espDeviceRepository;
-            _dsFamilyTempSensorRepository = dsFamilyTempSensorRepository;
-            _applicationUserRepository = applicationUserRepository;
-            _hardwareInApplicationRepository = hardwareInApplicationRepository;
+            var context = componentContext.Resolve<ARTDbContext>();
+
+            _espDeviceRepository = new ESPDeviceRepository(context);
+            _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
+            _applicationUserRepository = new ApplicationUserRepository(context);
+            _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
         }
 
         #endregion Constructors
@@ -74,30 +78,16 @@
                 throw new Exception("ApplicationUser not found");
             }
 
-            var entitiesToInsert = new List<HardwareInApplication>();
-
-            if (hardwareEntity.HardwaresInApplication == null)
-                hardwareEntity.HardwaresInApplication = new List<HardwareInApplication>();
-
-            hardwareEntity.HardwaresInApplication.Add(new HardwareInApplication
+            var entitiesToInsert = new List<HardwareInApplication>
             {
-                ApplicationId = applicationUserEntity.ApplicationId,
-                HardwareBaseId = hardwareEntity.Id,
-                HardwareBase = hardwareEntity,
-                CreateByApplicationUserId = applicationUserEntity.Id,
-                CreateDate = DateTime.Now.ToUniversalTime(),
-            });
-
-            //entitiesToInsert.Add(new HardwareInApplication
-            //{
-            //    ApplicationId = applicationUserEntity.ApplicationId,
-            //    HardwareBaseId = hardwareEntity.Id,
-            //    HardwareBase = hardwareEntity,
-            //    CreateByApplicationUserId = applicationUserEntity.Id,
-            //    CreateDate = DateTime.Now.ToUniversalTime(),
-            //});
-
-            await _espDeviceRepository.Update(hardwareEntity);
+                new HardwareInApplication
+                {
+                    ApplicationId = applicationUserEntity.ApplicationId,
+                    HardwareBaseId = hardwareEntity.Id,
+                    CreateByApplicationUserId = applicationUserEntity.Id,
+                    CreateDate = DateTime.Now.ToUniversalTime(),
+                }
+            };
 
             var allSensorsThatAreNotInApplication = await _dsFamilyTempSensorRepository.GetAllThatAreNotInApplicationByDevice(hardwareEntity.Id);
 
@@ -111,6 +101,7 @@
                     CreateDate = DateTime.Now.ToUniversalTime(),
                 });                
             }
+
             using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 await _hardwareInApplicationRepository.Insert(entitiesToInsert);
@@ -150,7 +141,12 @@
                 }
                 item.Pin = pin;
             }
-            await _espDeviceRepository.Update(entities);
+
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                await _espDeviceRepository.Update(entities);
+                scope.Complete();
+            }
 
             return Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceBaseDTO>>(entities);
         }

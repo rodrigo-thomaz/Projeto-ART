@@ -5,6 +5,7 @@ using ART.Infra.CrossCutting.Logging;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
+using Autofac;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace ART.Domotica.Worker.Consumers
 
         private readonly EventingBasicConsumer _getConsumer;
 
-        private readonly IApplicationDomain _applicationDomain;
+        private readonly IComponentContext _componentContext;
 
         private readonly ILogger _logger;
 
@@ -25,11 +26,11 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public ApplicationConsumer(IConnection connection, ILogger logger, IApplicationDomain applicationDomain) : base(connection)
+        public ApplicationConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
             _getConsumer = new EventingBasicConsumer(_model);
 
-            _applicationDomain = applicationDomain;
+            _componentContext = componentContext;
 
             _logger = logger;
 
@@ -66,7 +67,8 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugEnter();
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var data = await _applicationDomain.Get(message);
+            var domain = _componentContext.Resolve<IApplicationDomain>();
+            var data = await domain.Get(message);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetCompletedQueueName);

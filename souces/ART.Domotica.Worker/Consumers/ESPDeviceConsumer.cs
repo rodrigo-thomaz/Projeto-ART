@@ -6,7 +6,6 @@
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
-    using ART.Domotica.Repository;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.MQ.Contract;
@@ -31,8 +30,6 @@
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
 
-        //private readonly IESPDeviceDomain _espDeviceDomain;
-
         private readonly ISettingManager _settingsManager;
         private readonly IMQSettings _mqSettings;
 
@@ -42,7 +39,7 @@
 
         #region Constructors
 
-        public ESPDeviceConsumer(IConnection connection, IESPDeviceDomain espDeviceDomain, ISettingManager settingsManager, IMQSettings mqSettings, IComponentContext componentContext)
+        public ESPDeviceConsumer(IConnection connection, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
             : base(connection)
         {
             _getListInApplicationConsumer = new EventingBasicConsumer(_model);
@@ -51,7 +48,6 @@
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
 
-            //_espDeviceDomain = espDeviceDomain;
             _componentContext = componentContext;
 
             _settingsManager = settingsManager;

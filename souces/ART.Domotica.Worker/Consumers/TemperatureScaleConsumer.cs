@@ -10,6 +10,7 @@ using ART.Domotica.Worker.IConsumers;
 using System.Collections.Generic;
 using ART.Domotica.Contract;
 using ART.Domotica.IoTContract;
+using Autofac;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -20,18 +21,18 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _getAllConsumer;
         private readonly EventingBasicConsumer _getAllForDeviceConsumer;
 
-        private readonly ITemperatureScaleDomain _temperatureScaleDomain;
+        private readonly IComponentContext _componentContext;
 
         #endregion
 
         #region constructors
 
-        public TemperatureScaleConsumer(IConnection connection, ITemperatureScaleDomain temperatureScaleDomain) : base(connection)
+        public TemperatureScaleConsumer(IConnection connection, IComponentContext componentContext) : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
             _getAllForDeviceConsumer = new EventingBasicConsumer(_model);
 
-            _temperatureScaleDomain = temperatureScaleDomain;
+            _componentContext = componentContext;
 
             Initialize();
         }
@@ -85,7 +86,8 @@ namespace ART.Domotica.Worker.Consumers
         {
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var data = await _temperatureScaleDomain.GetAll();
+            var domain = _componentContext.Resolve<ITemperatureScaleDomain>();
+            var data = await domain.GetAll();
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
@@ -99,8 +101,9 @@ namespace ART.Domotica.Worker.Consumers
 
         public async Task GetAllForDeviceReceivedAsync(object sender, BasicDeliverEventArgs e)
         {            
-            _model.BasicAck(e.DeliveryTag, false);            
-            var data = await _temperatureScaleDomain.GetAllForDevice();
+            _model.BasicAck(e.DeliveryTag, false);
+            var domain = _componentContext.Resolve<ITemperatureScaleDomain>();
+            var data = await domain.GetAllForDevice();
             var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForDeviceResponseContract>>(TemperatureScaleConstants.GetAllForDeviceCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<DeviceRequestContract>(e.Body);

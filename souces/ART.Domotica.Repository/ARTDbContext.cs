@@ -40,6 +40,11 @@
             get; set;
         }
 
+        public DbSet<ESPDeviceBase> ESPDeviceBase
+        {
+            get; set;
+        }
+
         public DbSet<HardwareInApplication> HardwareInApplication
         {
             get; set;
@@ -61,11 +66,6 @@
         }
 
         public DbSet<TemperatureScale> TemperatureScale
-        {
-            get; set;
-        }
-
-        public DbSet<ESPDeviceBase> ESPDeviceBase
         {
             get; set;
         }
