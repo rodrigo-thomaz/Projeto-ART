@@ -16,7 +16,10 @@ app.controller('espDeviceAdminController', ['$scope', '$timeout', '$log', 'uiGri
         rowHeight: 36,
         data: [],
         columnDefs: [
-            { name: 'Id', field: 'id', width: 270 },
+            { name: 'HardwareId', field: 'hardwareId', width: 270 },
+            { name: 'MacAddress', field: 'macAddress', width: 150 },
+            { name: 'ChipId', field: 'chipId', width: 100 },
+            { name: 'FlashChipId', field: 'flashChipId', width: 120 },
             { name: 'Pin', field: 'pin', width: 70 },
             { name: 'Em uso', field: 'inApplication', cellTemplate: '<div class="checkbox text-center"><label class="i-checks"><input disabled type="checkbox" ng-checked="{{grid.getCellValue(row, col)}}" value=""><i></i> </label></div>', width: 85 },
             { name: 'Data criação', field: 'createDateFormatted', width: 150 }
