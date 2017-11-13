@@ -26,6 +26,7 @@
         public async Task<List<ESPDeviceBase>> GetAll()
         {
             return await _context.ESPDeviceBase
+                .Include(x => x.HardwaresInApplication)
                 .ToListAsync();
         }
 

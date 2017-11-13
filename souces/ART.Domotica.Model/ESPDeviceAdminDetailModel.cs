@@ -6,6 +6,8 @@
     {
         #region Properties
 
+        public bool InApplication { get; set; }
+
         public int ChipId
         {
             get; set;
