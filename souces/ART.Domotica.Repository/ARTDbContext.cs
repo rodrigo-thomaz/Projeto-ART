@@ -65,7 +65,7 @@
             get; set;
         }
 
-        public DbSet<ThermometerDevice> ThermometerDevice
+        public DbSet<ESPDeviceBase> ESPDeviceBase
         {
             get; set;
         }
@@ -95,7 +95,6 @@
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
-            modelBuilder.Configurations.Add(new ThermometerDeviceConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
 
             base.OnModelCreating(modelBuilder);

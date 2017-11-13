@@ -143,7 +143,6 @@
     <Compile Include="Controllers\TemperatureScaleController.cs" />
     <Compile Include="Modules\ControllerModule.cs" />
     <Compile Include="Controllers\DSFamilyTempSensorController.cs" />
-    <Compile Include="Controllers\ThermometerDeviceController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ApplicationUserController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

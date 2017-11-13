@@ -16,7 +16,6 @@
             builder.RegisterType<DSFamilyTempSensorConsumer>().As<IDSFamilyTempSensorConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ESPDeviceConsumer>().As<IESPDeviceConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<TemperatureScaleConsumer>().As<ITemperatureScaleConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<ThermometerDeviceConsumer>().As<IThermometerDeviceConsumer>().SingleInstance().AutoActivate();
 
             //builder.RegisterType<ApplicationConsumer>()
             //    .As<IApplicationConsumer>()

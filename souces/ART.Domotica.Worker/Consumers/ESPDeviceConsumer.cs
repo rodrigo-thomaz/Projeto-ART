@@ -2,16 +2,18 @@
 {
     using ART.Domotica.Constant;
     using ART.Domotica.Contract;
+    using ART.Domotica.Domain.DTOs;
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
-    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
     using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;
+    using Autofac;
     using global::AutoMapper;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
@@ -29,16 +31,18 @@
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
 
-        private readonly IESPDeviceDomain _espDeviceDomain;
+        //private readonly IESPDeviceDomain _espDeviceDomain;
 
         private readonly ISettingManager _settingsManager;
         private readonly IMQSettings _mqSettings;
+
+        private readonly IComponentContext _componentContext;
 
         #endregion Fields
 
         #region Constructors
 
-        public ESPDeviceConsumer(IConnection connection, IESPDeviceDomain espDeviceDomain, ISettingManager settingsManager, IMQSettings mqSettings)
+        public ESPDeviceConsumer(IConnection connection, IESPDeviceDomain espDeviceDomain, ISettingManager settingsManager, IMQSettings mqSettings, IComponentContext componentContext)
             : base(connection)
         {
             _getListInApplicationConsumer = new EventingBasicConsumer(_model);
@@ -47,12 +51,13 @@
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
 
-            _espDeviceDomain = espDeviceDomain;
+            //_espDeviceDomain = espDeviceDomain;
+            _componentContext = componentContext;
 
             _settingsManager = settingsManager;
             _mqSettings = mqSettings;
 
-            Initialize();
+            Initialize();            
         }
 
         #endregion Constructors
@@ -135,10 +140,11 @@
         {
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var data = await _espDeviceDomain.GetListInApplication(message);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.GetListInApplication(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceDetailModel>>(data);
+            var viewModel = Mapper.Map<List<ESPDeviceBaseDTO>, List<ESPDeviceDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
@@ -154,12 +160,13 @@
         {
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract>>(e.Body);
-            var data = await _espDeviceDomain.GetByPin(message);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.GetByPin(message);
 
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetByPinViewCompletedQueueName);
-            var viewModel = Mapper.Map<HardwareBase, ESPDeviceGetByPinModel>(data);
+            var viewModel = Mapper.Map<ESPDeviceBaseDTO, ESPDeviceGetByPinModel>(data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
@@ -173,20 +180,21 @@
         {
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract>>(e.Body);
-            var data = await _espDeviceDomain.InsertInApplication(message);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.InsertInApplication(message);
 
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
-            var viewModel = Mapper.Map<HardwareInApplication, ESPDeviceDetailModel>(data);
+            var viewModel = Mapper.Map<ESPDeviceBaseDTO, ESPDeviceDetailModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<HardwareInApplication, ESPDeviceInsertInApplicationResponseIoTContract>(data);
+            var iotContract = Mapper.Map<ESPDeviceBaseDTO, ESPDeviceInsertInApplicationResponseIoTContract>(data);
             var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(ESPDeviceConstants.InsertInApplicationIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(data.HardwareBaseId);
+            var queueName = GetDeviceQueueName(data.ESPDeviceId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
@@ -199,19 +207,20 @@
         {
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract>>(e.Body);
-            var data = await _espDeviceDomain.DeleteFromApplication(message);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.DeleteFromApplication(message);
 
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
-            var viewModel = Mapper.Map<HardwareInApplication, ESPDeviceDeleteFromApplicationModel>(data);
+            var viewModel = Mapper.Map<ESPDeviceBaseDTO, ESPDeviceDeleteFromApplicationModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);                        
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o IoT
             var deviceMessage = new MessageIoTContract<string>(ESPDeviceConstants.DeleteFromApplicationIoTQueueName, string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(data.HardwareBaseId);
+            var queueName = GetDeviceQueueName(data.ESPDeviceId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
@@ -223,7 +232,8 @@
         public async Task GetConfigurationsRPCReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCRequestContract>(e.Body);
-            var data = await _espDeviceDomain.GetConfigurations(requestContract);            
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.GetConfigurations(requestContract);            
             
             var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
             var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
@@ -273,8 +283,9 @@
 
         private async Task UpdatePinsAsync(DateTimeOffset nextFireTimeUtc)
         {
-            var data = await _espDeviceDomain.UpdatePins();
-            var contracts = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.UpdatePins();
+            var contracts = Mapper.Map<List<ESPDeviceBaseDTO>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
 
             foreach (var contract in contracts)
             {

@@ -11,6 +11,9 @@
     using System;
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
+    using System.Transactions;
+    using ART.Domotica.Domain.DTOs;
+    using global::AutoMapper;
 
     public class ESPDeviceDomain : DomainBase, IESPDeviceDomain
     {
@@ -37,12 +40,13 @@
 
         #region Methods
 
-        public async Task<List<ESPDeviceBase>> GetListInApplication(AuthenticatedMessageContract message)
+        public async Task<List<ESPDeviceBaseDTO>> GetListInApplication(AuthenticatedMessageContract message)
         {
-            return await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
+            var data = await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
+            return Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceBaseDTO>>(data);
         }
 
-        public async Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
+        public async Task<ESPDeviceBaseDTO> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
             var data = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -50,10 +54,11 @@
             {
                 throw new Exception("Pin not found");
             }
-            return data;
+
+            return Mapper.Map<ESPDeviceBase, ESPDeviceBaseDTO>(data);
         }
 
-        public async Task<HardwareInApplication> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
+        public async Task<ESPDeviceBaseDTO> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
         {
             var hardwareEntity = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -64,54 +69,74 @@
 
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
 
-            if (hardwareEntity == null)
+            if (applicationUserEntity == null)
             {
                 throw new Exception("ApplicationUser not found");
             }
 
-            var hardwaresInApplicationEntity = new HardwareInApplication
+            var entitiesToInsert = new List<HardwareInApplication>();
+
+            if (hardwareEntity.HardwaresInApplication == null)
+                hardwareEntity.HardwaresInApplication = new List<HardwareInApplication>();
+
+            hardwareEntity.HardwaresInApplication.Add(new HardwareInApplication
             {
                 ApplicationId = applicationUserEntity.ApplicationId,
                 HardwareBaseId = hardwareEntity.Id,
+                HardwareBase = hardwareEntity,
                 CreateByApplicationUserId = applicationUserEntity.Id,
                 CreateDate = DateTime.Now.ToUniversalTime(),
-            };
+            });
 
-            await _hardwareInApplicationRepository.Insert(hardwaresInApplicationEntity);
+            //entitiesToInsert.Add(new HardwareInApplication
+            //{
+            //    ApplicationId = applicationUserEntity.ApplicationId,
+            //    HardwareBaseId = hardwareEntity.Id,
+            //    HardwareBase = hardwareEntity,
+            //    CreateByApplicationUserId = applicationUserEntity.Id,
+            //    CreateDate = DateTime.Now.ToUniversalTime(),
+            //});
+
+            await _espDeviceRepository.Update(hardwareEntity);
 
             var allSensorsThatAreNotInApplication = await _dsFamilyTempSensorRepository.GetAllThatAreNotInApplicationByDevice(hardwareEntity.Id);
 
             foreach (var item in allSensorsThatAreNotInApplication)
             {
-                var hardwaresInApplicationSensorEntity = new HardwareInApplication
+                entitiesToInsert.Add(new HardwareInApplication
                 {
                     ApplicationId = applicationUserEntity.ApplicationId,
                     HardwareBaseId = item.Id,
                     CreateByApplicationUserId = applicationUserEntity.Id,
                     CreateDate = DateTime.Now.ToUniversalTime(),
-                };
+                });                
+            }
+            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+            {
+                await _hardwareInApplicationRepository.Insert(entitiesToInsert);
+                scope.Complete();
+            }
 
-                await _hardwareInApplicationRepository.Insert(hardwaresInApplicationSensorEntity);
-            }            
-
-            return hardwaresInApplicationEntity;
+            return Mapper.Map<ESPDeviceBase, ESPDeviceBaseDTO>(hardwareEntity);
         }
 
-        public async Task<HardwareInApplication> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
+        public async Task<ESPDeviceBaseDTO> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
-            var entity = await _hardwareInApplicationRepository.GetById(message.Contract.HardwareInApplicationId);
-
-            if (entity == null)
+            var hardwareInApplicationEntity = await _hardwareInApplicationRepository.GetById(message.Contract.HardwareInApplicationId);
+            
+            if (hardwareInApplicationEntity == null)
             {
                 throw new Exception("HardwareInApplication not found");
             }
 
-            await _hardwareInApplicationRepository.Delete(entity);
+            await _hardwareInApplicationRepository.Delete(hardwareInApplicationEntity);
 
-            return entity;
+            var hardwareEntity = await _espDeviceRepository.GetById(hardwareInApplicationEntity.HardwareBaseId);
+
+            return Mapper.Map<ESPDeviceBase, ESPDeviceBaseDTO>(hardwareEntity);
         }
 
-        public async Task<List<ESPDeviceBase>> UpdatePins()
+        public async Task<List<ESPDeviceBaseDTO>> UpdatePins()
         {
             var existingPins = await _espDeviceRepository.GetExistingPins();
             var entities = await _espDeviceRepository.GetESPDevicesNotInApplication();
@@ -125,12 +150,12 @@
                 }
                 item.Pin = pin;
             }
-            await _espDeviceRepository.Update(entities);            
+            await _espDeviceRepository.Update(entities);
 
-            return entities;
+            return Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceBaseDTO>>(entities);
         }
 
-        public async Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
+        public async Task<ESPDeviceBaseDTO> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
         {
             var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);            
 
@@ -138,8 +163,8 @@
             {
                 throw new Exception("ESP Device not found");
             }
-            
-            return data;
+
+            return Mapper.Map<ESPDeviceBase, ESPDeviceBaseDTO>(data);
         }
 
         #endregion Methods

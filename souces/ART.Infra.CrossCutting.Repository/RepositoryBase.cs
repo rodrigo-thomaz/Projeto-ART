@@ -8,7 +8,7 @@ namespace ART.Infra.CrossCutting.Repository
         : IRepository<TDbContext, TEntity, TKey>
 
         where TDbContext : DbContext
-        where TEntity : class, IEntity<TKey>//, new()
+        where TEntity : class, IEntity<TKey>, new()
         where TKey : struct
 
     {
@@ -30,7 +30,16 @@ namespace ART.Infra.CrossCutting.Repository
             _context.Set<TEntity>().Add(entity);
             await _context.SaveChangesAsync();
         }
-        
+
+        public async Task Insert(List<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                _context.Set<TEntity>().Add(entity);
+            }            
+            await _context.SaveChangesAsync();
+        }
+
         public async Task Update(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
@@ -49,6 +58,15 @@ namespace ART.Infra.CrossCutting.Repository
         public async Task Delete(TEntity entity)
         {
             _context.Entry(entity).State = EntityState.Deleted;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task Delete(List<TEntity> entities)
+        {
+            foreach (var entity in entities)
+            {
+                _context.Entry(entity).State = EntityState.Deleted;
+            }
             await _context.SaveChangesAsync();
         }
     }

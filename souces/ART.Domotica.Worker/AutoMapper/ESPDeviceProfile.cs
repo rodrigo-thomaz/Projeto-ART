@@ -1,15 +1,13 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
-    using System;
-    using System.Linq;
 
     using ART.Domotica.Contract;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
-    using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Utils;
 
     using global::AutoMapper;
+    using ART.Domotica.Domain.DTOs;
 
     public class ESPDeviceProfile : Profile
     {
@@ -17,29 +15,29 @@
 
         public ESPDeviceProfile()
         {
-            CreateMap<ESPDeviceBase, ESPDeviceDetailModel>()
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.First().Id))
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
+            CreateMap<ESPDeviceBaseDTO, ESPDeviceDetailModel>()
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplicationId))
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.ESPDeviceId))
                 .ForMember(vm => vm.ChipId, m => m.MapFrom(x => x.ChipId))
                 .ForMember(vm => vm.FlashChipId, m => m.MapFrom(x => x.FlashChipId))
                 .ForMember(vm => vm.MacAddress, m => m.MapFrom(x => x.MacAddress))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
 
-            CreateMap<HardwareInApplication, ESPDeviceInsertInApplicationResponseIoTContract>()
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.Id));
+            CreateMap<ESPDeviceBaseDTO, ESPDeviceInsertInApplicationResponseIoTContract>()
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplicationId));
 
-            CreateMap<HardwareInApplication, ESPDeviceDeleteFromApplicationModel>()
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.HardwareBaseId));
+            CreateMap<ESPDeviceBaseDTO, ESPDeviceDeleteFromApplicationModel>()
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplicationId))
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.ESPDeviceId));
 
-            CreateMap<HardwareBase, ESPDeviceGetByPinModel>();
+            CreateMap<ESPDeviceBaseDTO, ESPDeviceGetByPinModel>();
 
-            CreateMap<ESPDeviceBase, ESPDeviceGetConfigurationsRPCResponseContract>()
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Any() ? x.HardwaresInApplication.First().Id : (Guid?)null))
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
+            CreateMap<ESPDeviceBaseDTO, ESPDeviceGetConfigurationsRPCResponseContract>()
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplicationId))
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.ESPDeviceId));
 
-            CreateMap<ESPDeviceBase, ESPDeviceUpdatePinsResponseIoTContract>()
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
+            CreateMap<ESPDeviceBaseDTO, ESPDeviceUpdatePinsResponseIoTContract>()
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.ESPDeviceId));
         }
 
         #endregion Constructors

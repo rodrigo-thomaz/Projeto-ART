@@ -239,30 +239,30 @@
 
             #endregion
 
-            #region ThermometerDevice
+            #region ESPDeviceBase
 
-            var thermometerDevice1MacAddress = "A0:20:A6:17:83:25";
+            var espDevice1MacAddress = "A0:20:A6:17:83:25";
 
-            var thermometerDevice1 = context.ThermometerDevice.SingleOrDefault(x => x.MacAddress.ToLower() == thermometerDevice1MacAddress.ToLower());
+            var espDeviceBase1 = context.ESPDeviceBase.SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
 
-            if (thermometerDevice1 == null)
+            if (espDeviceBase1 == null)
             {
-                thermometerDevice1 = new ThermometerDevice
+                espDeviceBase1 = new ESPDeviceBase
                 {
                     ChipId = 1540901,
                     FlashChipId = 1458400,
-                    MacAddress = thermometerDevice1MacAddress,
+                    MacAddress = espDevice1MacAddress,
                     Pin = RandonHelper.RandomString(4),
                     TimeOffset = -7200, // Cada hora são 3600 segundos
                     CreateDate = DateTime.Now,
                 };
-                context.ThermometerDevice.Add(thermometerDevice1);
+                context.ESPDeviceBase.Add(espDeviceBase1);
             }
             else
             {
-                thermometerDevice1.ChipId = 1540901;
-                thermometerDevice1.FlashChipId = 1458400;
-                thermometerDevice1.TimeOffset = -7200; // Cada hora são 3600 segundos
+                espDeviceBase1.ChipId = 1540901;
+                espDeviceBase1.FlashChipId = 1458400;
+                espDeviceBase1.TimeOffset = -7200; // Cada hora são 3600 segundos
             }
 
             context.SaveChanges();
@@ -275,8 +275,8 @@
             {
                 SensorBaseId = sensor_2_1.Id,
                 SensorBase = sensor_2_1,
-                DeviceBaseId = thermometerDevice1.Id,
-                DeviceBase = thermometerDevice1,
+                DeviceBaseId = espDeviceBase1.Id,
+                DeviceBase = espDeviceBase1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_1);
@@ -285,8 +285,8 @@
             {
                 SensorBaseId = sensor_2_2.Id,
                 SensorBase = sensor_2_2,
-                DeviceBaseId = thermometerDevice1.Id,
-                DeviceBase = thermometerDevice1,
+                DeviceBaseId = espDeviceBase1.Id,
+                DeviceBase = espDeviceBase1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_2);
@@ -295,8 +295,8 @@
             {
                 SensorBaseId = sensor_3_1.Id,
                 SensorBase = sensor_3_1,
-                DeviceBaseId = thermometerDevice1.Id,
-                DeviceBase = thermometerDevice1,
+                DeviceBaseId = espDeviceBase1.Id,
+                DeviceBase = espDeviceBase1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_1);
@@ -305,8 +305,8 @@
             {
                 SensorBaseId = sensor_3_2.Id,
                 SensorBase = sensor_3_2,
-                DeviceBaseId = thermometerDevice1.Id,
-                DeviceBase = thermometerDevice1,
+                DeviceBaseId = espDeviceBase1.Id,
+                DeviceBase = espDeviceBase1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_2);

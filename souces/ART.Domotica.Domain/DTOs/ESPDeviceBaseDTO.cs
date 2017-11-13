@@ -1,8 +1,10 @@
-﻿namespace ART.Domotica.Repository.Entities
+﻿using System;
+
+namespace ART.Domotica.Domain.DTOs
 {
-    public class ESPDeviceBase : DeviceBase
+    public class ESPDeviceBaseDTO
     {
-        #region Properties
+        public Guid ESPDeviceId { get; set; }
 
         public int ChipId
         {
@@ -29,6 +31,8 @@
             get; set;
         }
 
-        #endregion Properties
+        public DateTime CreateDate { get; set; }
+
+        public Guid? HardwaresInApplicationId { get; set; }
     }
 }

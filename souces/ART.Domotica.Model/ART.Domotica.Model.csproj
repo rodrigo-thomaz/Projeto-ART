@@ -43,7 +43,6 @@
     <Compile Include="DSFamilyTempSensorGetListModel.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />
-    <Compile Include="ThermometerDeviceGetListModel.cs" />
     <Compile Include="ESPDeviceDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorGetAllModel.cs" />
     <Compile Include="DSFamilyTempSensorResolutionGetAllModel.cs" />

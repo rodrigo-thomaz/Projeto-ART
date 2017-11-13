@@ -55,6 +55,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,17 +64,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\ThermometerDeviceProfile.cs" />
+    <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
     <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\ApplicationProfile.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="DomainModule.cs" />
+    <Compile Include="DTOs\ESPDeviceBaseDTO.cs" />
     <Compile Include="Interfaces\IApplicationUserDomain.cs" />
     <Compile Include="Interfaces\IApplicationDomain.cs" />
     <Compile Include="Interfaces\IESPDeviceDomain.cs" />
     <Compile Include="Interfaces\ITemperatureScaleDomain.cs" />
-    <Compile Include="Interfaces\IThermometerDeviceDomain.cs" />
     <Compile Include="Services\ESPDeviceDomain.cs" />
     <Compile Include="Services\ApplicationDomain.cs" />
     <Compile Include="Services\ApplicationUserDomain.cs" />
@@ -81,7 +82,6 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\TemperatureScaleDomain.cs" />
-    <Compile Include="Services\ThermometerDeviceDomain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
