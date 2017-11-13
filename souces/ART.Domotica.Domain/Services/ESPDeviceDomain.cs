@@ -129,7 +129,7 @@
         public async Task<List<ESPDeviceBase>> UpdatePins()
         {
             var existingPins = await _espDeviceRepository.GetExistingPins();
-            var entities = await _espDeviceRepository.GetESPDevicesNotInApplication();
+            var entities = await _espDeviceRepository.GetListNotInApplication();
 
             foreach (var item in entities)
             {

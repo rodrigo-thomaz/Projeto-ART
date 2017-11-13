@@ -40,7 +40,7 @@
             return data;
         }
 
-        public async Task<List<ESPDeviceBase>> GetESPDevicesNotInApplication()
+        public async Task<List<ESPDeviceBase>> GetListNotInApplication()
         {
             var data = await _context.ESPDeviceBase
                 .Where(x => !x.HardwaresInApplication.Any())

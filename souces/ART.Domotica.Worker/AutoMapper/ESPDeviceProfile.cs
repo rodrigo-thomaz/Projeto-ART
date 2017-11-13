@@ -1,5 +1,8 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
+    using System;
+    using System.Linq;
+
     using ART.Domotica.Contract;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
@@ -7,8 +10,6 @@
     using ART.Infra.CrossCutting.Utils;
 
     using global::AutoMapper;
-    using System;
-    using System.Linq;
 
     public class ESPDeviceProfile : Profile
     {
@@ -17,7 +18,7 @@
         public ESPDeviceProfile()
         {
             CreateMap<ESPDeviceBase, ESPDeviceDetailModel>()
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id))                
+                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id))
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.ChipId, m => m.MapFrom(x => x.ChipId))
                 .ForMember(vm => vm.FlashChipId, m => m.MapFrom(x => x.FlashChipId))

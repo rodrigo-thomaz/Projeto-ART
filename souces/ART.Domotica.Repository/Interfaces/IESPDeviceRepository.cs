@@ -15,11 +15,11 @@
 
         Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 
-        Task<List<ESPDeviceBase>> GetESPDevicesNotInApplication();
-
         Task<List<string>> GetExistingPins();
 
         Task<List<ESPDeviceBase>> GetListInApplication(Guid applicationUserId);
+
+        Task<List<ESPDeviceBase>> GetListNotInApplication();
 
         #endregion Methods
     }

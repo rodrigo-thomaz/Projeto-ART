@@ -9,11 +9,11 @@
     {
         #region Methods
 
-        Task GetListInApplication(AuthenticatedMessageContract message);
-
         Task GetAllResolutions(AuthenticatedMessageContract message);
 
         Task GetList(AuthenticatedMessageContract message);
+
+        Task GetListInApplication(AuthenticatedMessageContract message);
 
         Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message);
 
