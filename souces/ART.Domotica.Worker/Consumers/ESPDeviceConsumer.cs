@@ -2,10 +2,10 @@
 {
     using ART.Domotica.Constant;
     using ART.Domotica.Contract;
-    using ART.Domotica.Domain.DTOs;
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
+    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.MQ.Contract;
@@ -140,7 +140,7 @@
             var data = await domain.GetListInApplication(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<ESPDeviceBaseDTO>, List<ESPDeviceDetailModel>>(data);
+            var viewModel = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
@@ -162,7 +162,7 @@
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetByPinViewCompletedQueueName);
-            var viewModel = Mapper.Map<ESPDeviceBaseDTO, ESPDeviceGetByPinModel>(data);
+            var viewModel = Mapper.Map<ESPDeviceBase, ESPDeviceGetByPinModel>(data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
         }
@@ -182,15 +182,15 @@
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
-            var viewModel = Mapper.Map<ESPDeviceBaseDTO, ESPDeviceDetailModel>(data);
+            var viewModel = Mapper.Map<ESPDeviceBase, ESPDeviceDetailModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<ESPDeviceBaseDTO, ESPDeviceInsertInApplicationResponseIoTContract>(data);
+            var iotContract = Mapper.Map<ESPDeviceBase, ESPDeviceInsertInApplicationResponseIoTContract>(data);
             var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(ESPDeviceConstants.InsertInApplicationIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(data.ESPDeviceId);
+            var queueName = GetDeviceQueueName(data.Id);
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
@@ -209,14 +209,14 @@
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
-            var viewModel = Mapper.Map<ESPDeviceBaseDTO, ESPDeviceDeleteFromApplicationModel>(data);
+            var viewModel = Mapper.Map<ESPDeviceBase, ESPDeviceDeleteFromApplicationModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);                        
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o IoT
             var deviceMessage = new MessageIoTContract<string>(ESPDeviceConstants.DeleteFromApplicationIoTQueueName, string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(data.ESPDeviceId);
+            var queueName = GetDeviceQueueName(data.Id);
             _model.BasicPublish("", queueName, null, deviceBuffer);
         }
 
@@ -281,7 +281,7 @@
         {
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.UpdatePins();
-            var contracts = Mapper.Map<List<ESPDeviceBaseDTO>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
+            var contracts = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
 
             foreach (var contract in contracts)
             {

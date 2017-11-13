@@ -11,7 +11,6 @@
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
     using System.Transactions;
-    using ART.Domotica.Domain.DTOs;
     using global::AutoMapper;
     using Autofac;
     using ART.Domotica.Repository;
@@ -44,13 +43,13 @@
 
         #region Methods
 
-        public async Task<List<ESPDeviceBaseDTO>> GetListInApplication(AuthenticatedMessageContract message)
+        public async Task<List<ESPDeviceBase>> GetListInApplication(AuthenticatedMessageContract message)
         {
             var data = await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
-            return Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceBaseDTO>>(data);
+            return Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceBase>>(data);
         }
 
-        public async Task<ESPDeviceBaseDTO> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
+        public async Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
             var data = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -59,10 +58,10 @@
                 throw new Exception("Pin not found");
             }
 
-            return Mapper.Map<ESPDeviceBase, ESPDeviceBaseDTO>(data);
+            return data;
         }
 
-        public async Task<ESPDeviceBaseDTO> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
+        public async Task<ESPDeviceBase> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
         {
             var hardwareEntity = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -108,10 +107,10 @@
                 scope.Complete();
             }
 
-            return Mapper.Map<ESPDeviceBase, ESPDeviceBaseDTO>(hardwareEntity);
+            return hardwareEntity;
         }
 
-        public async Task<ESPDeviceBaseDTO> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
+        public async Task<ESPDeviceBase> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
             var hardwareInApplicationEntity = await _hardwareInApplicationRepository.GetById(message.Contract.HardwareInApplicationId);
             
@@ -124,10 +123,10 @@
 
             var hardwareEntity = await _espDeviceRepository.GetById(hardwareInApplicationEntity.HardwareBaseId);
 
-            return Mapper.Map<ESPDeviceBase, ESPDeviceBaseDTO>(hardwareEntity);
+            return hardwareEntity;
         }
 
-        public async Task<List<ESPDeviceBaseDTO>> UpdatePins()
+        public async Task<List<ESPDeviceBase>> UpdatePins()
         {
             var existingPins = await _espDeviceRepository.GetExistingPins();
             var entities = await _espDeviceRepository.GetESPDevicesNotInApplication();
@@ -148,10 +147,10 @@
                 scope.Complete();
             }
 
-            return Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceBaseDTO>>(entities);
+            return entities;
         }
 
-        public async Task<ESPDeviceBaseDTO> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
+        public async Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
         {
             var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);            
 
@@ -160,7 +159,7 @@
                 throw new Exception("ESP Device not found");
             }
 
-            return Mapper.Map<ESPDeviceBase, ESPDeviceBaseDTO>(data);
+            return data;
         }
 
         #endregion Methods

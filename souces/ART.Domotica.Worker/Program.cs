@@ -23,6 +23,7 @@
     using Topshelf;
     using Topshelf.Autofac;
     using Topshelf.Quartz;
+    using ART.Domotica.Worker.AutoMapper;
 
     class Program
     {
@@ -37,7 +38,6 @@
             builder.RegisterType<WorkerService>();
 
             builder.RegisterType<ARTDbContext>().InstancePerDependency();
-            //builder.RegisterType<ARTDbContext>().InstancePerLifetimeScope();
 
             // CrossCutting Modules
 
@@ -57,8 +57,7 @@
                 x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
-                x.AddProfile(new AutoMapper.ESPDeviceProfile());
-                x.AddProfile(new Domain.AutoMapper.ESPDeviceProfile());
+                x.AddProfile(new ESPDeviceProfile());
                 x.AddProfile(new TemperatureScaleProfile());
             });
 

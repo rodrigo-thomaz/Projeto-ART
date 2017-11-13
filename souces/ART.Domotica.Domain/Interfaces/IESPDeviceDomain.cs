@@ -4,24 +4,24 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Contract;
-    using ART.Domotica.Domain.DTOs;
     using ART.Infra.CrossCutting.MQ.Contract;
+    using ART.Domotica.Repository.Entities;
 
     public interface IESPDeviceDomain
     {
         #region Methods
 
-        Task<ESPDeviceBaseDTO> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
+        Task<ESPDeviceBase> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
 
-        Task<ESPDeviceBaseDTO> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
+        Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
-        Task<ESPDeviceBaseDTO> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
+        Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
 
-        Task<List<ESPDeviceBaseDTO>> GetListInApplication(AuthenticatedMessageContract message);
+        Task<List<ESPDeviceBase>> GetListInApplication(AuthenticatedMessageContract message);
 
-        Task<ESPDeviceBaseDTO> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
+        Task<ESPDeviceBase> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
-        Task<List<ESPDeviceBaseDTO>> UpdatePins();
+        Task<List<ESPDeviceBase>> UpdatePins();
 
         #endregion Methods
     }
