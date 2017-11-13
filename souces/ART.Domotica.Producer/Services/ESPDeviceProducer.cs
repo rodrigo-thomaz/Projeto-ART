@@ -32,6 +32,15 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids
 
+        public async Task GetAll(AuthenticatedMessageContract message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", ESPDeviceConstants.GetAllQueueName, null, payload);
+            });
+        }
+
         public async Task GetListInApplication(AuthenticatedMessageContract message)
         {
             await Task.Run(() =>

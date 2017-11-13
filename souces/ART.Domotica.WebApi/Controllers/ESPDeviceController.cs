@@ -29,6 +29,24 @@
         #region public voids
 
         /// <summary>
+        /// Retornar todos os ESP Devices para o Admin
+        /// </summary>        
+        /// <remarks>
+        /// Retornar todos os de ESP Devices para o Admin
+        /// </remarks>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("getAll")]
+        [HttpPost]
+        public async Task<IHttpActionResult> GetAll()
+        {
+            await _espDeviceProducer.GetAll(CreateMessage());
+            return Ok();
+        }
+
+        /// <summary>
         /// Retornar as configurações de um ESP Device
         /// </summary>        
         /// <remarks>

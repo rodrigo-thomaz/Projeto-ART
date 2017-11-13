@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetAllModel.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
+    <Compile Include="ESPDeviceAdminDetailModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />
     <Compile Include="ESPDeviceDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorGetListInApplicationModel.cs" />

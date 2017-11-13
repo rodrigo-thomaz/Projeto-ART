@@ -11,6 +11,8 @@
     {
         #region Methods
 
+        Task<List<ESPDeviceBase>> GetAll();
+
         Task<ESPDeviceBase> GetByPin(string pin);
 
         Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);

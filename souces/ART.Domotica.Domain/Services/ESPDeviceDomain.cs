@@ -11,7 +11,6 @@
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
     using System.Transactions;
-    using global::AutoMapper;
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
@@ -43,10 +42,14 @@
 
         #region Methods
 
+        public async Task<List<ESPDeviceBase>> GetAll()
+        {
+            return await _espDeviceRepository.GetAll();
+        }
+
         public async Task<List<ESPDeviceBase>> GetListInApplication(AuthenticatedMessageContract message)
         {
-            var data = await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
-            return Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceBase>>(data);
+            return await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
         }
 
         public async Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)

@@ -24,6 +24,7 @@
     {
         #region Fields
 
+        private readonly EventingBasicConsumer _getAllConsumer;
         private readonly EventingBasicConsumer _getListInApplicationConsumer;        
         private readonly EventingBasicConsumer _getByPinConsumer;
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
@@ -42,6 +43,7 @@
         public ESPDeviceConsumer(IConnection connection, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
             : base(connection)
         {
+            _getAllConsumer = new EventingBasicConsumer(_model);
             _getListInApplicationConsumer = new EventingBasicConsumer(_model);
             _getByPinConsumer = new EventingBasicConsumer(_model);
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
@@ -62,6 +64,13 @@
 
         private void Initialize()
         {
+            _model.QueueDeclare(
+                 queue: ESPDeviceConstants.GetAllQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: true
+               , arguments: null);
+
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetListInApplicationQueueName
                , durable: false
@@ -111,22 +120,44 @@
                 , autoDelete: false
                 , arguments: null);
 
+            _getAllConsumer.Received += GetAllReceived;
             _getListInApplicationConsumer.Received += GetListInApplicationReceived;
             _getByPinConsumer.Received += GetByPinReceived;
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
 
+            _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetByPinQueueName, false, _getByPinConsumer);
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
-        }        
+        }
 
         #endregion Methods
 
         #region private voids
+
+        public void GetAllReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(GetAllReceivedAsync(sender, e));
+        }
+
+        public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.GetAll();
+
+            //Enviando para View
+            var viewModel = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceAdminDetailModel>>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetAllCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+        }
 
         public void GetListInApplicationReceived(object sender, BasicDeliverEventArgs e)
         {

@@ -23,6 +23,12 @@
 
         #region Methods
 
+        public async Task<List<ESPDeviceBase>> GetAll()
+        {
+            return await _context.ESPDeviceBase
+                .ToListAsync();
+        }
+
         public async Task<ESPDeviceBase> GetByPin(string pin)
         {
             var data = await _context.ESPDeviceBase

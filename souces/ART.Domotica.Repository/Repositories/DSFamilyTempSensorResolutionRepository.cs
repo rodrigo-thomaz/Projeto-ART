@@ -16,7 +16,8 @@ namespace ART.Domotica.Repository.Repositories
 
         public async Task<List<DSFamilyTempSensorResolution>> GetAll()
         {
-            return await _context.DSFamilyTempSensorResolution.ToListAsync();
+            return await _context.DSFamilyTempSensorResolution
+                .ToListAsync();
         }
     }
 }
