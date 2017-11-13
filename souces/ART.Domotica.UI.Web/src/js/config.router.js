@@ -36,31 +36,34 @@ angular.module('app')
                   ])
               })
 
-              .state('app.devices', {
-                  url: '/devices',
-                  templateUrl: 'views/devices.html',
+              .state('app.espDeviceList', {
+                  url: '/espDeviceList',
+                  templateUrl: 'views/espDeviceList.html',
                   resolve: load([
                       'vr.directives.slider',
-                      'ui.select',                      
+                      'ui.select',               
+                      'js/services/temperatureScaleService.js',
+                      'js/services/dsFamilyTempSensorService.js',
+                      'js/services/espDeviceService.js',
+                      'js/controllers/espDeviceListController.js',
 
-                      'js/services/devicesService.js',
-
-                      'js/controllers/thermometerDeviceController.js',
-                      'js/controllers/devicesController.js',
+                      'js/services/thermometerDeviceService.js',                      
+                      'js/controllers/thermometerDeviceController.js',                      
                   ])
               })
               .state('app.dsFamilyTempSensorList', {
-                  url: '/sensors',
+                  url: '/dsFamilyTempSensorList',
                   templateUrl: 'views/dsFamilyTempSensorList.html',
                   resolve: load([
                       'vr.directives.slider',
                       'ui.select',
-                      'js/services/espDeviceService.js',
+                      'js/services/temperatureScaleService.js',
+                      'js/services/dsFamilyTempSensorService.js',
                       'js/controllers/dsFamilyTempSensorListController.js',
                   ])
               })
               .state('app.espDeviceManager', {
-                  url: '/espDevice',
+                  url: '/espDeviceManager',
                   templateUrl: 'views/espDeviceManager.html',
                   resolve: load([
                       'ui.grid',
@@ -78,10 +81,11 @@ angular.module('app')
                   ])
               })
               .state('app.dsFamilyTempSensorManager', {
-                  url: '/dsFamilyTempSensor',
+                  url: '/dsFamilyTempSensorManager',
                   templateUrl: 'views/dsFamilyTempSensorManager.html',
                   resolve: load([
                       'ui.grid',
+                      'js/services/temperatureScaleService.js',
                       'js/services/dsFamilyTempSensorService.js',
                       'js/controllers/dsFamilyTempSensorManagerController.js',
                   ])

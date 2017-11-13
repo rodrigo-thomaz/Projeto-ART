@@ -207,10 +207,10 @@
     <Content Include="src\js\app\note\notes.json" />
     <Content Include="src\js\config.settings.js" />
     <Content Include="src\js\controllers\admin\dsFamilyTempSensorAdminController.js" />
-    <Content Include="src\js\controllers\devicesController.js" />
     <Content Include="src\js\controllers\admin\thermometerDeviceAdminController.js" />
     <Content Include="src\js\controllers\dsFamilyTempSensorManagerController.js" />
     <Content Include="src\js\controllers\espDeviceJoinController.js" />
+    <Content Include="src\js\controllers\espDeviceListController.js" />
     <Content Include="src\js\controllers\espDeviceManagerController.js" />
     <Content Include="src\js\controllers\applicationUserController.js" />
     <Content Include="src\js\controllers\dashboardController.js" />
@@ -221,7 +221,6 @@
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
     <Content Include="src\js\services\admin\dsFamilyTempSensorAdminService.js" />
-    <Content Include="src\js\services\devicesService.js" />
     <Content Include="src\js\services\admin\thermometerDeviceAdminService.js" />
     <Content Include="src\js\services\espDeviceService.js" />
     <Content Include="src\js\services\applicationUserService.js" />
@@ -487,7 +486,7 @@
     <Content Include="src\views\espDeviceJoin.html" />
     <Content Include="src\views\espDeviceManager.html" />
     <Content Include="src\views\dsFamilyTempSensorList.html" />
-    <Content Include="src\views\devices.html" />
+    <Content Include="src\views\espDeviceList.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
