@@ -50,7 +50,7 @@ bool TemperatureScaleManager::begin()
 	
 	String hardwareId = this->_configurationManager->getHardwareSettings()->getHardwareId();      
 
-	StaticJsonBuffer<TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_REQUEST_JSON_SIZE> JSONbuffer;
+	StaticJsonBuffer<TEMPERATURE_SCALE_GET_ALL_FOR_IOT_REQUEST_JSON_SIZE> JSONbuffer;
 	JsonObject& root = JSONbuffer.createObject();
 	root["hardwareId"] = hardwareId;
 
@@ -60,7 +60,7 @@ bool TemperatureScaleManager::begin()
 	
 	Serial.println("[TemperatureScaleManager::begin] beginning...]");
 	
-	mqqt->publish(TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_MQQT_TOPIC_PUB, result);    
+	mqqt->publish(TEMPERATURE_SCALE_GET_ALL_FOR_IOT_MQQT_TOPIC_PUB, result);    
 }
 
 void TemperatureScaleManager::update(String json)
@@ -68,7 +68,7 @@ void TemperatureScaleManager::update(String json)
 	this->_begin = true;
 	this->_beginning = false;
 				
-	StaticJsonBuffer<TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_RESPONSE_JSON_SIZE> jsonBuffer;
+	StaticJsonBuffer<TEMPERATURE_SCALE_GET_ALL_FOR_IOT_RESPONSE_JSON_SIZE> jsonBuffer;
 
 	JsonArray& jsonArray = jsonBuffer.parseArray(json);
 	

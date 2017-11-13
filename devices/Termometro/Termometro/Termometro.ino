@@ -118,7 +118,7 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
   //mqqt.subscribe(TOPIC_SUB_SET_RESOLUTION); 
   //mqqt.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
   //mqqt.subscribe(TOPIC_SUB_SET_LOW_ALARM);    
-  //mqqt.subscribe(TOPIC_SUB_GET_IN_APPLICATION_FOR_DEVICE_COMPLETED);            
+  //mqqt.subscribe(TOPIC_SUB_GET_IN_APPLICATION_FOR_IOT_COMPLETED);            
 }
 
 void mqtt_SubCallback(char* topic, byte* payload, unsigned int length) 
@@ -154,7 +154,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TOPIC_SUB_UPDATE_PIN)){
       displayAccessManager.updatePin(payloadContract);
     }
-    if(payloadTopic == String(TEMPERATURE_SCALE_GET_ALL_FOR_DEVICE_COMPLETED_MQQT_TOPIC_SUB)){
+    if(payloadTopic == String(TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED_MQQT_TOPIC_SUB)){
       temperatureScaleManager.update(payloadContract);            
     }
     if(payloadTopic == String(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB)){
