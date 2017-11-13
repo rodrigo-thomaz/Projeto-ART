@@ -1,5 +1,6 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Worker.IConsumers;
+using ART.Infra.CrossCutting.Logging;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
@@ -20,15 +21,19 @@ namespace ART.Domotica.Worker.Consumers
 
         private readonly IComponentContext _componentContext;
 
+        private readonly ILogger _logger;
+
         #endregion
 
         #region constructors
 
-        public ApplicationUserConsumer(IConnection connection, IComponentContext componentContext) : base(connection)
+        public ApplicationUserConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
             _registerUserConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
+
+            _logger = logger;
 
             Initialize();
         }
@@ -60,6 +65,8 @@ namespace ART.Domotica.Worker.Consumers
 
         public async Task RegisterUserAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<NoAuthenticatedMessageContract<RegisterUserContract>>(e.Body);
             var domain = _componentContext.Resolve<IApplicationUserDomain>();
@@ -67,6 +74,8 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationUserQueueName.RegisterUserCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
+
+            _logger.DebugLeave();
         }
 
         #endregion

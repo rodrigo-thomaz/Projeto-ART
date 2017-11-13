@@ -1,11 +1,14 @@
 ﻿using ART.Domotica.Constant;
 using ART.Domotica.Domain.Interfaces;
+using ART.Domotica.Model;
+using ART.Domotica.Repository.Entities;
 using ART.Domotica.Worker.IConsumers;
 using ART.Infra.CrossCutting.Logging;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
 using Autofac;
+using AutoMapper;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Threading.Tasks;
@@ -65,14 +68,19 @@ namespace ART.Domotica.Worker.Consumers
         private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<IApplicationDomain>();
             var data = await domain.Get(message);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<Application, ApplicationGetModel>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, buffer);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
             _logger.DebugLeave();
         }        
 

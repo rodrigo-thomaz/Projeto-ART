@@ -7,6 +7,7 @@
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
+    using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Infra.CrossCutting.MQ.Worker;
@@ -36,11 +37,13 @@
 
         private readonly IComponentContext _componentContext;
 
+        private readonly ILogger _logger;
+
         #endregion Fields
 
         #region Constructors
 
-        public ESPDeviceConsumer(IConnection connection, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
+        public ESPDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
             : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
@@ -51,6 +54,8 @@
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
+
+            _logger = logger;
 
             _settingsManager = settingsManager;
             _mqSettings = mqSettings;
@@ -146,6 +151,8 @@
 
         public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -155,8 +162,10 @@
             var viewModel = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceAdminDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetAllCompletedQueueName);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetAllViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
         }
 
         public void GetListInApplicationReceived(object sender, BasicDeliverEventArgs e)
@@ -165,6 +174,8 @@
         }
         public async Task GetListInApplicationReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -176,6 +187,8 @@
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
         }
 
         public void GetByPinReceived(object sender, BasicDeliverEventArgs e)
@@ -185,6 +198,8 @@
 
         public async Task GetByPinReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -196,6 +211,8 @@
             var viewModel = Mapper.Map<ESPDeviceBase, ESPDeviceGetByPinModel>(data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
+
+            _logger.DebugLeave();
         }
 
         public void InsertInApplicationReceived(object sender, BasicDeliverEventArgs e)
@@ -205,6 +222,8 @@
 
         public async Task InsertInApplicationReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -223,6 +242,8 @@
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var queueName = GetDeviceQueueName(data.Id);
             _model.BasicPublish("", queueName, null, deviceBuffer);
+
+            _logger.DebugLeave();
         }
 
         public void DeleteFromApplicationReceived(object sender, BasicDeliverEventArgs e)
@@ -232,6 +253,8 @@
 
         public async Task DeleteFromApplicationReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -253,6 +276,8 @@
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var queueName = GetDeviceQueueName(data.Id);
             _model.BasicPublish("", queueName, null, deviceBuffer);
+
+            _logger.DebugLeave();
         }
 
         public void GetConfigurationsRPCReceived(object sender, BasicDeliverEventArgs e)
@@ -262,6 +287,8 @@
 
         public async Task GetConfigurationsRPCReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
+
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCRequestContract>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.GetConfigurations(requestContract);            
@@ -304,7 +331,9 @@
                 basicProperties: replyProps, 
                 body: buffer);
 
-            _model.BasicAck(e.DeliveryTag, false);            
+            _model.BasicAck(e.DeliveryTag, false);
+
+            _logger.DebugLeave();
         }
 
         public void UpdatePins(DateTimeOffset nextFireTimeUtc)
@@ -314,6 +343,8 @@
 
         private async Task UpdatePinsAsync(DateTimeOffset nextFireTimeUtc)
         {
+            _logger.DebugEnter();
+
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.UpdatePins();
             var contracts = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
@@ -328,6 +359,8 @@
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
                 _model.BasicPublish("", queueName, null, deviceBuffer);
             }
+
+            _logger.DebugLeave();
         }
 
         #endregion Other

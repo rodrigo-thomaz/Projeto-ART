@@ -5,8 +5,6 @@
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.MQ.Contract;
-    using ART.Domotica.Model;
-    using global::AutoMapper;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Domain;
     using ART.Domotica.Repository;
@@ -36,12 +34,10 @@
 
         #region Methods
 
-        public async Task<ApplicationGetModel> Get(AuthenticatedMessageContract message)
+        public async Task<Application> Get(AuthenticatedMessageContract message)
         {
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
-            var applicationEntity = await _applicationRepository.GetById(applicationUserEntity.ApplicationId);            
-            var result = Mapper.Map<Application, ApplicationGetModel>(applicationEntity);
-            return result;
+            return await _applicationRepository.GetById(applicationUserEntity.ApplicationId);                        
         }
 
         #endregion Methods

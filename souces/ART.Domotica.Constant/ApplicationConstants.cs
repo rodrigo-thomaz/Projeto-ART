@@ -4,7 +4,7 @@
     {
         #region Fields
 
-        public static readonly string GetCompletedQueueName = "Application.GetCompleted";
+        public static readonly string GetViewCompletedQueueName = "Application.GetViewCompleted";
         public static readonly string GetQueueName = "Application.Get";
 
         #endregion Fields

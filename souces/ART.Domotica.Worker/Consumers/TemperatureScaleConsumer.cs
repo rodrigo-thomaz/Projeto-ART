@@ -13,6 +13,7 @@ using Autofac;
 using AutoMapper;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Model;
+using ART.Infra.CrossCutting.Logging;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -25,16 +26,20 @@ namespace ART.Domotica.Worker.Consumers
 
         private readonly IComponentContext _componentContext;
 
+        private readonly ILogger _logger;
+
         #endregion
 
         #region constructors
 
-        public TemperatureScaleConsumer(IConnection connection, IComponentContext componentContext) : base(connection)
+        public TemperatureScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
             _getAllForIoTConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
+
+            _logger = logger;
 
             Initialize();
         }
@@ -86,6 +91,8 @@ namespace ART.Domotica.Worker.Consumers
 
         public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
+            _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<ITemperatureScaleDomain>();
@@ -97,6 +104,8 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
         }
 
         public void GetAllForIoTReceived(object sender, BasicDeliverEventArgs e)
@@ -105,7 +114,9 @@ namespace ART.Domotica.Worker.Consumers
         }
 
         public async Task GetAllForIoTReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {            
+        {
+            _logger.DebugEnter();
+
             _model.BasicAck(e.DeliveryTag, false);
             var domain = _componentContext.Resolve<ITemperatureScaleDomain>();
             var data = await domain.GetAll();
@@ -116,7 +127,9 @@ namespace ART.Domotica.Worker.Consumers
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
             var queueName = GetDeviceQueueName(requestContract.HardwareId);
-            _model.BasicPublish("", queueName, null, deviceBuffer);            
+            _model.BasicPublish("", queueName, null, deviceBuffer);
+
+            _logger.DebugLeave();
         }
 
         #endregion

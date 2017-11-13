@@ -17,7 +17,7 @@
         public static readonly string InsertInApplicationViewCompletedQueueName = "ESPDevice.InsertInApplicationViewCompleted";
         public static readonly string UpdatePinIoTQueueName = "ESPDevice.UpdatePinIoT";
         public static readonly string GetAllQueueName = "ESPDeviceAdmin.GetAll";
-        public static readonly string GetAllCompletedQueueName = "ESPDeviceAdmin.GetAllCompleted";
+        public static readonly string GetAllViewCompletedQueueName = "ESPDeviceAdmin.GetAllViewCompleted";
 
         #endregion Fields
     }
