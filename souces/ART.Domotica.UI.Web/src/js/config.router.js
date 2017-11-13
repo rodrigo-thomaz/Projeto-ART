@@ -45,23 +45,18 @@ angular.module('app')
 
                       'js/services/devicesService.js',
 
-                      'js/controllers/dsFamilyTempSensorManagerController.js',
                       'js/controllers/thermometerDeviceController.js',
                       'js/controllers/devicesController.js',
                   ])
               })
-              .state('app.sensors', {
+              .state('app.dsFamilyTempSensorList', {
                   url: '/sensors',
-                  templateUrl: 'views/sensors.html',
+                  templateUrl: 'views/dsFamilyTempSensorList.html',
                   resolve: load([
                       'vr.directives.slider',
                       'ui.select',
-
-                      'js/services/sensorsService.js',
-
-                      'js/controllers/dsFamilyTempSensorManagerController.js',
-                      'js/controllers/thermometerDeviceController.js',
-                      'js/controllers/sensorsController.js',
+                      'js/services/espDeviceService.js',
+                      'js/controllers/dsFamilyTempSensorListController.js',
                   ])
               })
               .state('app.espDeviceManager', {

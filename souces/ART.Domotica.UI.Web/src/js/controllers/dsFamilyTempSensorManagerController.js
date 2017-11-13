@@ -22,6 +22,4 @@ app.controller('dsFamilyTempSensorManagerController', ['$scope', '$timeout', '$l
     };
 
     $scope.gridOptions.data = dsFamilyTempSensorService.sensors;
-    
-
 }]);
