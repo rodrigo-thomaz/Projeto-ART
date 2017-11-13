@@ -8,6 +8,8 @@ namespace ART.Domotica.Model
 
         public Guid DSFamilyTempSensorId { get; set; }
 
+        public Guid HardwareInApplicationId { get; set; }
+
         public string DeviceAddress
         {
             get; set;

@@ -31,7 +31,15 @@ namespace ART.Domotica.Repository.Repositories
                                               where au.Id == applicationUserId
                                               select sensor;
 
-            return await query.ToListAsync();
+            var data = await query.ToListAsync();
+
+            var ids = data.Select(x => x.Id);
+
+            await _context.HardwareInApplication
+                .Where(x => ids.Contains(x.HardwareBaseId))
+                .LoadAsync();
+
+            return data;
         }
 
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)

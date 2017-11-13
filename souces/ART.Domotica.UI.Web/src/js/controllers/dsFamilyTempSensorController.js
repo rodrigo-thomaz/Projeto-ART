@@ -9,7 +9,8 @@ app.controller('dsFamilyTempSensorController', ['$scope', '$timeout', '$log', 't
         rowHeight: 36,
         data: [],
         columnDefs: [
-            { name: 'id', field: 'dsFamilyTempSensorId', width: 270 },
+            { name: 'hardwareInApplicationId', field: 'hardwareInApplicationId', width: 270 },
+            { name: 'dsFamilyTempSensorId', field: 'dsFamilyTempSensorId', width: 270 },
             { name: 'dsFamilyTempSensorResolutionId', field: 'dsFamilyTempSensorResolutionId', width: 270 },
             { name: 'deviceAddress', field: 'deviceAddress', width: 270 },
             { name: 'family', field: 'family', width: 270 },

@@ -18,7 +18,7 @@ app.controller('espDeviceController', ['$scope', '$timeout', '$log', 'uiGridCons
         rowHeight: 36,
         data: [],
         columnDefs: [
-            { name: 'Id', field: 'hardwareInApplicationId', width: 270 },
+            { name: 'HardwareInApplicationId', field: 'hardwareInApplicationId', width: 270 },
             { name: 'HardwareId', field: 'hardwareId', width: 270 },
             { name: 'ChipId', field: 'chipId', width: 270 },
             { name: 'FlashChipId', field: 'flashChipId', width: 270 },
