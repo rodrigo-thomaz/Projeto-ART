@@ -64,13 +64,13 @@ angular.module('app')
                       'js/controllers/sensorsController.js',
                   ])
               })
-              .state('app.espDevice', {
+              .state('app.espDeviceManager', {
                   url: '/espDevice',
-                  templateUrl: 'views/espDevice.html',
+                  templateUrl: 'views/espDeviceManager.html',
                   resolve: load([
                       'ui.grid',
                       'js/services/espDeviceService.js',
-                      'js/controllers/espDeviceController.js',
+                      'js/controllers/espDeviceManagerController.js',
                   ])
               })
               .state('app.espDeviceJoin', {
