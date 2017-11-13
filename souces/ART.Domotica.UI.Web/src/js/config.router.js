@@ -95,13 +95,13 @@ angular.module('app')
                   url: '/admin',
                   template: '<div ui-view class="fade-in-down"></div>'
               })  
-              .state('app.admin.thermometerDevice', {
-                  url: '/admin/thermometerDevice',
-                  templateUrl: 'views/admin/thermometerDeviceAdmin.html',
+              .state('app.admin.espDevice', {
+                  url: '/admin/espDevice',
+                  templateUrl: 'views/admin/espDeviceAdmin.html',
                   resolve: load([
                       'ui.grid',
-                      'js/services/admin/thermometerDeviceAdminService.js',
-                      'js/controllers/admin/thermometerDeviceAdminController.js',
+                      'js/services/admin/espDeviceAdminService.js',
+                      'js/controllers/admin/espDeviceAdminController.js',
                   ])
               })              
               .state('app.admin.dsFamilyTempSensor', {

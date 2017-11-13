@@ -1,7 +1,7 @@
 ﻿'use strict';
-app.controller('thermometerDeviceAdminController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'thermometerDeviceAdminService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, thermometerDeviceAdminService) {    
+app.controller('espDeviceAdminController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'espDeviceAdminService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, espDeviceAdminService) {    
 
-    var onGetListCompleted = function (data) {
+    var onGetAllCompleted = function (data) {
         for (var i = 0; i < data.length; i++) {
             data[i].createDateFormatted = new Date(data[i].createDate * 1000).toLocaleString();
         }
@@ -23,8 +23,8 @@ app.controller('thermometerDeviceAdminController', ['$scope', '$timeout', '$log'
         ],
     };    
 
-    thermometerDeviceAdminService.getList();
+    espDeviceAdminService.getAll();
 
-    EventDispatcher.on('thermometerDeviceAdminService_onGetListCompleted', onGetListCompleted);
+    EventDispatcher.on('espDeviceAdminService_onGetAllCompleted', onGetAllCompleted);
 
 }]);
