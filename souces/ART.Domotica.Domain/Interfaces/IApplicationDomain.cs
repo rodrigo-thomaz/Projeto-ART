@@ -1,8 +1,9 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
     using System.Threading.Tasks;
-    using ART.Infra.CrossCutting.MQ.Contract;
+
     using ART.Domotica.Repository.Entities;
+    using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IApplicationDomain
     {

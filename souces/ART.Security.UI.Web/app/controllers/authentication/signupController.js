@@ -37,7 +37,7 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
     // stompService
 
     var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-Security.RegisterUserCompleted', onRegisterUserCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-Security.RegisterUserViewCompleted', onRegisterUserCompleted);
     }
 
     var onRegisterUserCompleted = function (payload) {

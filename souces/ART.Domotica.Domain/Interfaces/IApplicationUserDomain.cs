@@ -2,13 +2,13 @@
 {
     using System.Threading.Tasks;
 
-    using ART.Security.Contract;
+    using ART.Domotica.Repository.Entities;
 
     public interface IApplicationUserDomain
     {
         #region Methods
 
-        Task RegisterUser(RegisterUserContract contract);
+        Task RegisterUser(ApplicationUser entity);
 
         #endregion Methods
     }

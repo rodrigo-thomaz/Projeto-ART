@@ -9,9 +9,9 @@
     {
         #region Methods
 
-        Task GetAllResolutions(AuthenticatedMessageContract message);
-
         Task GetAll(AuthenticatedMessageContract message);
+
+        Task GetAllResolutions(AuthenticatedMessageContract message);
 
         Task GetListInApplication(AuthenticatedMessageContract message);
 

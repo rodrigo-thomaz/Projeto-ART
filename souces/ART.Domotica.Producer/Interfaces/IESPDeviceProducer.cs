@@ -9,9 +9,9 @@
     {
         #region Methods
 
-        Task GetAll(AuthenticatedMessageContract message);
-
         Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
+
+        Task GetAll(AuthenticatedMessageContract message);
 
         Task GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 

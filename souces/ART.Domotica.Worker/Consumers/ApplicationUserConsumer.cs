@@ -1,4 +1,5 @@
 ﻿using ART.Domotica.Domain.Interfaces;
+using ART.Domotica.Repository.Entities;
 using ART.Domotica.Worker.IConsumers;
 using ART.Infra.CrossCutting.Logging;
 using ART.Infra.CrossCutting.MQ.Contract;
@@ -7,6 +8,7 @@ using ART.Infra.CrossCutting.Utils;
 using ART.Security.Constant;
 using ART.Security.Contract;
 using Autofac;
+using AutoMapper;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Threading.Tasks;
@@ -70,9 +72,12 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<NoAuthenticatedMessageContract<RegisterUserContract>>(e.Body);
             var domain = _componentContext.Resolve<IApplicationUserDomain>();
-            await domain.RegisterUser(message.Contract);
+            var applicationUserEntity = Mapper.Map<RegisterUserContract, ApplicationUser>(message.Contract);
+            await domain.RegisterUser(applicationUserEntity);
+
+            //Enviando para View
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationUserQueueName.RegisterUserCompletedQueueName);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationUserQueueName.RegisterUserViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
 
             _logger.DebugLeave();

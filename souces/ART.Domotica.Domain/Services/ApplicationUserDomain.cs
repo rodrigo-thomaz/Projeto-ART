@@ -6,8 +6,6 @@
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using System;
-    using global::AutoMapper;
-    using ART.Security.Contract;
     using ART.Infra.CrossCutting.Domain;
     using Autofac;
     using ART.Domotica.Repository;
@@ -34,19 +32,16 @@
 
         #region Methods
 
-        public async Task RegisterUser(RegisterUserContract contract)
+        public async Task RegisterUser(ApplicationUser entity)
         {
-            var applicationEntity = new Application
+            entity.Application = new Application
             {
                 CreateDate = DateTime.Now,
             };
 
-            var applicationUserEntity = Mapper.Map<RegisterUserContract, ApplicationUser>(contract);
+            entity.CreateDate = DateTime.Now;
 
-            applicationUserEntity.Application = applicationEntity;
-            applicationUserEntity.CreateDate = DateTime.Now;
-
-            await _applicationUserRepository.Insert(applicationUserEntity);           
+            await _applicationUserRepository.Insert(entity);           
         }
 
         #endregion Methods

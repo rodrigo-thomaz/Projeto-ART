@@ -19,7 +19,7 @@
         {
             CreateMap<ESPDeviceBase, ESPDeviceDetailModel>()
                 .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id))
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))                
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
 
             CreateMap<ESPDeviceBase, ESPDeviceInsertInApplicationResponseIoTContract>()
@@ -41,7 +41,7 @@
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
 
             CreateMap<ESPDeviceBase, ESPDeviceAdminDetailModel>()
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))                
+                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
                 .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.HardwaresInApplication.Any()));
         }

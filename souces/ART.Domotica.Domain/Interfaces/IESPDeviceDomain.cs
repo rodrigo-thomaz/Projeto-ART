@@ -13,11 +13,11 @@
 
         Task<ESPDeviceBase> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
 
+        Task<List<ESPDeviceBase>> GetAll();
+
         Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
         Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
-
-        Task<List<ESPDeviceBase>> GetAll();
 
         Task<List<ESPDeviceBase>> GetListInApplication(AuthenticatedMessageContract message);
 

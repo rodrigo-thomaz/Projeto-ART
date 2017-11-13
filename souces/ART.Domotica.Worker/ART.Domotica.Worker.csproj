@@ -100,6 +100,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapper\ApplicationProfile.cs" />
+    <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
