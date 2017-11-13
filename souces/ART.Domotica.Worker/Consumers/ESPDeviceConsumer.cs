@@ -209,7 +209,11 @@
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
-            var viewModel = Mapper.Map<ESPDeviceBase, ESPDeviceDeleteFromApplicationModel>(data);
+            var viewModel = new ESPDeviceDeleteFromApplicationModel
+            {
+                HardwareId = data.Id,
+                HardwareInApplicationId = message.Contract.HardwareInApplicationId
+            };
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);                        
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
