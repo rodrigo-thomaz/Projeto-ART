@@ -47,6 +47,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsViewCompleted', onGetAllResolutionsCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetLowAlarmViewCompleted', onSetLowAlarmCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetHighAlarmViewCompleted', onSetHighAlarmCompleted);
 
         if (!initialized) {
             initialized = true;
@@ -64,6 +67,18 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
         for (var i = 0; i < data.length; i++) {
             serviceFactory.resolutions.push(data[i]);
         }
+    }
+
+    var onSetResolutionCompleted = function (payload) {
+        
+    }
+
+    var onSetLowAlarmCompleted = function (payload) {
+
+    }
+
+    var onSetHighAlarmCompleted = function (payload) {
+
     }
 
     EventDispatcher.on('stompService_onConnected', onConnected);         
