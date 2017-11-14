@@ -243,7 +243,8 @@ void loopInApplication()
       
       root["deviceId"] = deviceSettings->getDeviceId();
       root["deviceInApplicationId"] = deviceSettings->getDeviceInApplicationId();
-
+      root["wifiQuality"] = wifiManager.getQuality();
+      
       dsFamilyTempSensorManager.createSensorsJsonNestedArray(root);
 
       int sensorsJsonLen = root.measureLength();
