@@ -23,6 +23,8 @@ app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', 'uiG
             { name: 'ChipId', field: 'chipId', width: 270 },
             { name: 'FlashChipId', field: 'flashChipId', width: 270 },
             { name: 'MacAddress', field: 'macAddress', width: 270 },
+            { name: 'Última atualização', field: 'epochTimeUtc', width: 270 },
+            { name: 'WifiQuality', field: 'wifiQuality', width: 100 },
             { name: 'Data criação', field: 'createDate', width: 150 },
             { name: 'Ações', cellTemplate: '<div class="text-center"><a ng-click="grid.appScope.deleteFromApplicationClick(row.entity)" class="btn btn-danger" href="" aria-label="Delete"><i class="fa fa-trash-o" aria-hidden="true"></i></a></div>', width: 85 },
         ],

@@ -130,22 +130,12 @@ float DSFamilyTempSensor::getTemperatureWithScale()
 	return this->_rawTemperature;
 }
 
-long DSFamilyTempSensor::getEpochTimeUtc()
-{
-	return this->_epochTimeUtc;
-}
-
-void DSFamilyTempSensor::setEpochTimeUtc(long value)
-{
-	this->_epochTimeUtc = value;
-}
 
 // DSFamilyTempSensorManager
 
-DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, NTPManager& ntpManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager)
+DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager)
 { 
 	this->_debugManager = &debugManager;
-	this->_ntpManager = &ntpManager;
 	this->_configurationManager = &configurationManager;
 	this->_mqqtManager = &mqqtManager;
 }
@@ -277,7 +267,6 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 void DSFamilyTempSensorManager::refresh()
 {	
 	_dallas.requestTemperatures();
-	long epochTimeUtc = this->_ntpManager->getEpochTimeUTC();		
 	for(int i = 0; i < this->_sensors.size(); ++i){		
 		this->_sensors[i].setConnected(_dallas.isConnected(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setResolution(_dallas.getResolution(this->_sensors[i].getDeviceAddress()));
@@ -285,7 +274,6 @@ void DSFamilyTempSensorManager::refresh()
 		this->_sensors[i].setHasAlarm(_dallas.hasAlarm(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setLowAlarm(_dallas.getLowAlarmTemp(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setHighAlarm(_dallas.getHighAlarmTemp(this->_sensors[i].getDeviceAddress()));
-		this->_sensors[i].setEpochTimeUtc(epochTimeUtc);
 	}
 }
 
@@ -393,8 +381,7 @@ void DSFamilyTempSensorManager::createSensorJsonNestedObject(DSFamilyTempSensor 
 {	
 	JsonObject& JSONencoder = root.createNestedObject();
 
-	JSONencoder["deviceAddress"] = this->convertDeviceAddressToString(dsFamilyTempSensor.getDeviceAddress());
-	JSONencoder["epochTimeUtc"] = dsFamilyTempSensor.getEpochTimeUtc();
+	JSONencoder["dsFamilyTempSensorId"] = dsFamilyTempSensor.getDSFamilyTempSensorId();
 	JSONencoder["validFamily"] = dsFamilyTempSensor.getValidFamily();
 	JSONencoder["family"] = dsFamilyTempSensor.getFamily();
 	JSONencoder["isConnected"] = dsFamilyTempSensor.getConnected();

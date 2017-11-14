@@ -55,9 +55,6 @@ class DSFamilyTempSensor
 	
 	float 								getTemperatureWithScale();
 	
-	long 								getEpochTimeUtc();
-	void 								setEpochTimeUtc(long value);	
-	
   private:
   
 	String 								_dsFamilyTempSensorId;	
@@ -89,7 +86,7 @@ class DSFamilyTempSensorManager
 {
   public:
   
-    DSFamilyTempSensorManager(DebugManager& debugManager, NTPManager& ntpManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager);
+    DSFamilyTempSensorManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager);
 	
 	void 								begin();
 				
@@ -109,7 +106,6 @@ class DSFamilyTempSensorManager
   private:			
 			
 	DebugManager*          				_debugManager;
-	NTPManager*          				_ntpManager;
 	ConfigurationManager*				_configurationManager;	
 	MQQTManager* 		                _mqqtManager;				
 	

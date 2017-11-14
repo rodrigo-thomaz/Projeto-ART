@@ -12,6 +12,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);        
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);        
+
+        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
+
         if (!initialized) {
             initialized = true;
             getListInApplication();
@@ -51,6 +54,32 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         });
     };  
 
+    var onReadReceived = function (payload) {
+        var dataUTF8 = decodeURIComponent(escape(payload.body));
+        var data = JSON.parse(dataUTF8);
+        for (var i = 0; i < serviceFactory.devices.length; i++) {
+            var device = serviceFactory.devices[i];
+            if (device.deviceInApplicationId == data.deviceInApplicationId) {
+                device.epochTimeUtc = data.epochTimeUtc;
+                device.wifiQuality = data.wifiQuality;
+                updateSensors(device.sensors, data.dsFamilyTempSensors);
+                break;
+            }
+        } 
+    }
+
+    var updateSensors = function (oldSensors, newSensors) {
+        for (var i = 0; i < oldSensors.length; i++) {
+            for (var j = 0; j < newSensors.length; j++) {
+                if (oldSensors[i].dsFamilyTempSensorId = newSensors[j].dsFamilyTempSensorId) {
+                    oldSensors[i].isConnected = newSensors[j].isConnected;
+                    oldSensors[i].rawTemperature = newSensors[j].rawTemperature;
+                    break;
+                }
+            }
+        }
+    }
+
     var onGetListInApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
@@ -81,7 +110,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
             if (serviceFactory.devices[i].deviceInApplicationId == data.deviceInApplicationId) {
                 serviceFactory.devices.splice(i, 1);
                 EventDispatcher.trigger('espDeviceService_onDeleteFromApplicationCompleted');
-                return;
+                break;
             }
         }       
     }

@@ -60,7 +60,7 @@ NTPManager ntpManager(debugManager, configurationManager);
 MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
-DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, ntpManager, configurationManager, mqqtManager);
+DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, configurationManager, mqqtManager);
 TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager, mqqtManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
@@ -239,11 +239,9 @@ void loopInApplication()
       StaticJsonBuffer<900> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
 
-      DeviceSettings* deviceSettings = configurationManager.getDeviceSettings();
-      
-      root["deviceId"] = deviceSettings->getDeviceId();
-      root["deviceInApplicationId"] = deviceSettings->getDeviceInApplicationId();
+      root["deviceInApplicationId"] = configurationManager.getDeviceSettings()->getDeviceInApplicationId();
       root["wifiQuality"] = wifiManager.getQuality();
+      root["epochTimeUtc"] = ntpManager.getEpochTimeUTC();    
       
       dsFamilyTempSensorManager.createSensorsJsonNestedArray(root);
 
