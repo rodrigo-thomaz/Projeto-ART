@@ -6,13 +6,13 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class ESPDeviceBaseConfiguration : EntityTypeConfiguration<ESPDeviceBase>
+    public class ESPDeviceConfiguration : EntityTypeConfiguration<ESPDevice>
     {
         #region Constructors
 
-        public ESPDeviceBaseConfiguration()
+        public ESPDeviceConfiguration()
         {
-            ToTable("ESPDeviceBase");
+            ToTable("ESPDevice");
 
             //Primary Keys
             HasKey(x => x.Id);

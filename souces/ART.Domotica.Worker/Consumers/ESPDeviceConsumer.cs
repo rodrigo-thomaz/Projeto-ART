@@ -159,7 +159,7 @@
             var data = await domain.GetAll();
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceAdminDetailModel>>(data);
+            var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceAdminDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetAllViewCompletedQueueName);
@@ -182,7 +182,7 @@
             var data = await domain.GetListInApplication(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceDetailModel>>(data);
+            var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
@@ -208,7 +208,7 @@
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetByPinViewCompletedQueueName);
-            var viewModel = Mapper.Map<ESPDeviceBase, ESPDeviceGetByPinModel>(data);
+            var viewModel = Mapper.Map<ESPDevice, ESPDeviceGetByPinModel>(data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
 
@@ -232,12 +232,12 @@
             //Enviando para View
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
-            var viewModel = Mapper.Map<ESPDeviceBase, ESPDeviceDetailModel>(data);
+            var viewModel = Mapper.Map<ESPDevice, ESPDeviceDetailModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<ESPDeviceBase, ESPDeviceInsertInApplicationResponseIoTContract>(data);
+            var iotContract = Mapper.Map<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>(data);
             var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(ESPDeviceConstants.InsertInApplicationIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var queueName = GetDeviceQueueName(data.Id);
@@ -347,7 +347,7 @@
 
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.UpdatePins();
-            var contracts = Mapper.Map<List<ESPDeviceBase>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
+            var contracts = Mapper.Map<List<ESPDevice>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
 
             foreach (var contract in contracts)
             {

@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    public class ESPDeviceBase : DeviceBase
+    public class ESPDevice : DeviceBase
     {
         #region Properties
 

@@ -11,19 +11,19 @@
     {
         #region Methods
 
-        Task<ESPDeviceBase> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
+        Task<ESPDevice> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
 
-        Task<List<ESPDeviceBase>> GetAll();
+        Task<List<ESPDevice>> GetAll();
 
-        Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
+        Task<ESPDevice> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
-        Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
+        Task<ESPDevice> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
 
-        Task<List<ESPDeviceBase>> GetListInApplication(AuthenticatedMessageContract message);
+        Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message);
 
-        Task<ESPDeviceBase> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
+        Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
-        Task<List<ESPDeviceBase>> UpdatePins();
+        Task<List<ESPDevice>> UpdatePins();
 
         #endregion Methods
     }

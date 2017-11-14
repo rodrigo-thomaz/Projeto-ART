@@ -40,7 +40,7 @@
             get; set;
         }
 
-        public DbSet<ESPDeviceBase> ESPDeviceBase
+        public DbSet<ESPDevice> ESPDevice
         {
             get; set;
         }
@@ -85,7 +85,7 @@
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());
-            modelBuilder.Configurations.Add(new ESPDeviceBaseConfiguration());
+            modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());

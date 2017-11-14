@@ -239,15 +239,15 @@
 
             #endregion
 
-            #region ESPDeviceBase
+            #region ESPDevice
 
             var espDevice1MacAddress = "A0:20:A6:17:83:25";
 
-            var espDeviceBase1 = context.ESPDeviceBase.SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
+            var espDevice1 = context.ESPDevice.SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
 
-            if (espDeviceBase1 == null)
+            if (espDevice1 == null)
             {
-                espDeviceBase1 = new ESPDeviceBase
+                espDevice1 = new ESPDevice
                 {
                     ChipId = 1540901,
                     FlashChipId = 1458400,
@@ -256,13 +256,13 @@
                     TimeOffset = -7200, // Cada hora são 3600 segundos
                     CreateDate = DateTime.Now,
                 };
-                context.ESPDeviceBase.Add(espDeviceBase1);
+                context.ESPDevice.Add(espDevice1);
             }
             else
             {
-                espDeviceBase1.ChipId = 1540901;
-                espDeviceBase1.FlashChipId = 1458400;
-                espDeviceBase1.TimeOffset = -7200; // Cada hora são 3600 segundos
+                espDevice1.ChipId = 1540901;
+                espDevice1.FlashChipId = 1458400;
+                espDevice1.TimeOffset = -7200; // Cada hora são 3600 segundos
             }
 
             context.SaveChanges();
@@ -275,8 +275,8 @@
             {
                 SensorBaseId = sensor_2_1.Id,
                 SensorBase = sensor_2_1,
-                DeviceBaseId = espDeviceBase1.Id,
-                DeviceBase = espDeviceBase1,
+                DeviceBaseId = espDevice1.Id,
+                DeviceBase = espDevice1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_1);
@@ -285,8 +285,8 @@
             {
                 SensorBaseId = sensor_2_2.Id,
                 SensorBase = sensor_2_2,
-                DeviceBaseId = espDeviceBase1.Id,
-                DeviceBase = espDeviceBase1,
+                DeviceBaseId = espDevice1.Id,
+                DeviceBase = espDevice1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_2);
@@ -295,8 +295,8 @@
             {
                 SensorBaseId = sensor_3_1.Id,
                 SensorBase = sensor_3_1,
-                DeviceBaseId = espDeviceBase1.Id,
-                DeviceBase = espDeviceBase1,
+                DeviceBaseId = espDevice1.Id,
+                DeviceBase = espDevice1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_1);
@@ -305,8 +305,8 @@
             {
                 SensorBaseId = sensor_3_2.Id,
                 SensorBase = sensor_3_2,
-                DeviceBaseId = espDeviceBase1.Id,
-                DeviceBase = espDeviceBase1,
+                DeviceBaseId = espDevice1.Id,
+                DeviceBase = espDevice1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_2);

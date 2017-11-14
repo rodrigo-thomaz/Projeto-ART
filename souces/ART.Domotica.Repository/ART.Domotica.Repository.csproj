@@ -64,7 +64,7 @@
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\DSFamilyTempSensorConfiguration.cs" />
     <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
-    <Compile Include="Configurations\ESPDeviceBaseConfiguration.cs" />
+    <Compile Include="Configurations\ESPDeviceConfiguration.cs" />
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwaresInProjectConfiguration.cs" />
     <Compile Include="Configurations\ProjectConfiguration.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="Entities\DeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
     <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
-    <Compile Include="Entities\ESPDeviceBase.cs" />
+    <Compile Include="Entities\ESPDevice.cs" />
     <Compile Include="Entities\HardwareBase.cs" />
     <Compile Include="Entities\HardwaresInProject.cs" />
     <Compile Include="Entities\HardwareInApplication.cs" />
@@ -151,6 +151,10 @@
     <Compile Include="Migrations\201711131128037_RemoveTableThermometerDevice.cs" />
     <Compile Include="Migrations\201711131128037_RemoveTableThermometerDevice.Designer.cs">
       <DependentUpon>201711131128037_RemoveTableThermometerDevice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711141239529_RenameESPDeviceBaseTable.cs" />
+    <Compile Include="Migrations\201711141239529_RenameESPDeviceBaseTable.Designer.cs">
+      <DependentUpon>201711141239529_RenameESPDeviceBaseTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -236,6 +240,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711131128037_RemoveTableThermometerDevice.resx">
       <DependentUpon>201711131128037_RemoveTableThermometerDevice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711141239529_RenameESPDeviceBaseTable.resx">
+      <DependentUpon>201711141239529_RenameESPDeviceBaseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

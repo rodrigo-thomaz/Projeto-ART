@@ -17,17 +17,17 @@
 
         public ESPDeviceProfile()
         {
-            CreateMap<ESPDeviceBase, ESPDeviceDetailModel>()
+            CreateMap<ESPDevice, ESPDeviceDetailModel>()
                 .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id))
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
 
-            CreateMap<ESPDeviceBase, ESPDeviceInsertInApplicationResponseIoTContract>()
+            CreateMap<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>()
                 .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id));
 
-            CreateMap<ESPDeviceBase, ESPDeviceGetByPinModel>();
+            CreateMap<ESPDevice, ESPDeviceGetByPinModel>();
 
-            CreateMap<ESPDeviceBase, ESPDeviceGetConfigurationsRPCResponseContract>()//
+            CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
                 .ForMember(vm => vm.HardwareInApplicationId, m => m.ResolveUsing(src => {
                     if(src.HardwaresInApplication != null && src.HardwaresInApplication.Any())
                     {
@@ -37,10 +37,10 @@
                 }))
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
 
-            CreateMap<ESPDeviceBase, ESPDeviceUpdatePinsResponseIoTContract>()
+            CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
 
-            CreateMap<ESPDeviceBase, ESPDeviceAdminDetailModel>()
+            CreateMap<ESPDevice, ESPDeviceAdminDetailModel>()
                 .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
                 .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.HardwaresInApplication.Any()));

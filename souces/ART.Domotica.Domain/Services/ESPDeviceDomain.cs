@@ -42,17 +42,17 @@
 
         #region Methods
 
-        public async Task<List<ESPDeviceBase>> GetAll()
+        public async Task<List<ESPDevice>> GetAll()
         {
             return await _espDeviceRepository.GetAll();
         }
 
-        public async Task<List<ESPDeviceBase>> GetListInApplication(AuthenticatedMessageContract message)
+        public async Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message)
         {
             return await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
         }
 
-        public async Task<ESPDeviceBase> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
+        public async Task<ESPDevice> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
             var data = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -64,7 +64,7 @@
             return data;
         }
 
-        public async Task<ESPDeviceBase> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
+        public async Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
         {
             var hardwareEntity = await _espDeviceRepository.GetByPin(message.Contract.Pin);
 
@@ -113,7 +113,7 @@
             return hardwareEntity;
         }
 
-        public async Task<ESPDeviceBase> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
+        public async Task<ESPDevice> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
             var hardwareInApplicationEntity = await _hardwareInApplicationRepository.GetById(message.Contract.HardwareInApplicationId);
             
@@ -129,7 +129,7 @@
             return hardwareEntity;
         }
 
-        public async Task<List<ESPDeviceBase>> UpdatePins()
+        public async Task<List<ESPDevice>> UpdatePins()
         {
             var existingPins = await _espDeviceRepository.GetExistingPins();
             var entities = await _espDeviceRepository.GetListNotInApplication();
@@ -153,7 +153,7 @@
             return entities;
         }
 
-        public async Task<ESPDeviceBase> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
+        public async Task<ESPDevice> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
         {
             var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);            
 

@@ -7,21 +7,21 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IESPDeviceRepository : IRepository<ARTDbContext, ESPDeviceBase, Guid>
+    public interface IESPDeviceRepository : IRepository<ARTDbContext, ESPDevice, Guid>
     {
         #region Methods
 
-        Task<List<ESPDeviceBase>> GetAll();
+        Task<List<ESPDevice>> GetAll();
 
-        Task<ESPDeviceBase> GetByPin(string pin);
+        Task<ESPDevice> GetByPin(string pin);
 
-        Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
+        Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 
         Task<List<string>> GetExistingPins();
 
-        Task<List<ESPDeviceBase>> GetListInApplication(Guid applicationUserId);
+        Task<List<ESPDevice>> GetListInApplication(Guid applicationUserId);
 
-        Task<List<ESPDeviceBase>> GetListNotInApplication();
+        Task<List<ESPDevice>> GetListNotInApplication();
 
         #endregion Methods
     }

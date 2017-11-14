@@ -10,7 +10,7 @@
     using System.Data.Entity;
     using System.Linq;
 
-    public class ESPDeviceRepository : RepositoryBase<ARTDbContext, ESPDeviceBase, Guid>, IESPDeviceRepository
+    public class ESPDeviceRepository : RepositoryBase<ARTDbContext, ESPDevice, Guid>, IESPDeviceRepository
     {
         #region Constructors
 
@@ -23,16 +23,16 @@
 
         #region Methods
 
-        public async Task<List<ESPDeviceBase>> GetAll()
+        public async Task<List<ESPDevice>> GetAll()
         {
-            return await _context.ESPDeviceBase
+            return await _context.ESPDevice
                 .Include(x => x.HardwaresInApplication)
                 .ToListAsync();
         }
 
-        public async Task<ESPDeviceBase> GetByPin(string pin)
+        public async Task<ESPDevice> GetByPin(string pin)
         {
-            var data = await _context.ESPDeviceBase
+            var data = await _context.ESPDevice
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
             return data;
@@ -40,25 +40,25 @@
 
         public async Task<List<string>> GetExistingPins()
         {
-            var data = await _context.ESPDeviceBase
+            var data = await _context.ESPDevice
                 .Where(x => x.HardwaresInApplication.Any())
                 .Select(x => x.Pin)
                 .ToListAsync();
             return data;
         }
 
-        public async Task<List<ESPDeviceBase>> GetListNotInApplication()
+        public async Task<List<ESPDevice>> GetListNotInApplication()
         {
-            var data = await _context.ESPDeviceBase
+            var data = await _context.ESPDevice
                 .Where(x => !x.HardwaresInApplication.Any())
                 .ToListAsync();
 
             return data;
         }
 
-        public async Task<ESPDeviceBase> GetDeviceInApplication(int chipId, int flashChipId, string macAddress)
+        public async Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress)
         {
-            var data = await _context.ESPDeviceBase
+            var data = await _context.ESPDevice
                .Include(x => x.HardwaresInApplication)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)
@@ -68,10 +68,10 @@
             return data;
         }
 
-        public async Task<List<ESPDeviceBase>> GetListInApplication(Guid applicationUserId)
+        public async Task<List<ESPDevice>> GetListInApplication(Guid applicationUserId)
         {
-            IQueryable<ESPDeviceBase> query = from hia in _context.HardwareInApplication
-                                                      join esp in _context.ESPDeviceBase on hia.HardwareBaseId equals esp.Id
+            IQueryable<ESPDevice> query = from hia in _context.HardwareInApplication
+                                                      join esp in _context.ESPDevice on hia.HardwareBaseId equals esp.Id
                                                       join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
                                                       where au.Id == applicationUserId
                                                       select esp;
