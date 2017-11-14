@@ -17,9 +17,7 @@
 
         Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions();
 
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
-
-        Task<List<DSFamilyTempSensorGetListInApplicationModel>> GetListInApplication(Guid applicationUserId);
+        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);        
 
         Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message);
 

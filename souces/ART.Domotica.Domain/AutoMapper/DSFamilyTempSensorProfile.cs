@@ -12,10 +12,6 @@
 
         public DSFamilyTempSensorProfile()
         {
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetListInApplicationModel>()
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
-                //.ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id));
-
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>()
                 .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
                     var split = src.DeviceAddress.Split(':');

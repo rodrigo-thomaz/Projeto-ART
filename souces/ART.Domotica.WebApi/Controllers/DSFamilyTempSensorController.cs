@@ -26,25 +26,7 @@ namespace ART.Domotica.WebApi.Controllers
         #endregion
 
         #region public voids        
-
-        /// <summary>
-        /// Retornar uma lista de DSFamilyTempSensor
-        /// </summary>        
-        /// <remarks>
-        /// Retornar uma lista de DSFamilyTempSensor
-        /// </remarks>
-        /// <response code="200">OK</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal Server Error</response>
-        [Route("getListInApplication")]
-        [HttpPost]
-        public async Task<IHttpActionResult> GetListInApplication()
-        {
-            await _dsFamilyTempSensorProducer.GetListInApplication(CreateMessage());
-            return Ok();
-        }
-
+        
         /// <summary>
         /// Retornar uma lista de Resoluções
         /// </summary>        

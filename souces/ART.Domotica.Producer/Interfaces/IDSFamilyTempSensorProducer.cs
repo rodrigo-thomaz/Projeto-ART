@@ -11,8 +11,6 @@
 
         Task GetAllResolutions(AuthenticatedMessageContract message);
 
-        Task GetListInApplication(AuthenticatedMessageContract message);
-
         Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message);
 
         Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message);

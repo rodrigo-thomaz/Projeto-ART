@@ -20,16 +20,7 @@ namespace ART.Domotica.Producer.Services
 
         #endregion
 
-        #region public voids        
-
-        public async Task GetListInApplication(AuthenticatedMessageContract message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.GetListInApplicationQueueName, null, payload);
-            });            
-        }
+        #region public voids  
 
         public async Task GetAllResolutions(AuthenticatedMessageContract message)
         {
@@ -73,13 +64,6 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.GetListInApplicationQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: null);
-
             _model.QueueDeclare(
                   queue: DSFamilyTempSensorConstants.GetAllResolutionsQueueName
                 , durable: false

@@ -42,13 +42,6 @@ namespace ART.Domotica.Domain.Services
 
         #region public voids
 
-        public async Task<List<DSFamilyTempSensorGetListInApplicationModel>> GetListInApplication(Guid applicationUserId)
-        {
-            var data = await _dsFamilyTempSensorRepository.GetListInApplication(applicationUserId);
-            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetListInApplicationModel>>(data);
-            return result;
-        }
-
         public async Task<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
         {
             var deviceInApplication = await _deviceInApplicationRepository.GetById(deviceInApplicationId);

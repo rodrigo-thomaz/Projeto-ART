@@ -6,13 +6,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
     var initialized = false;
 
     var serviceFactory = {};    
-
-    var getListInApplication = function () {
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/getListInApplication').then(function (results) {
-            //alert('envio bem sucedido');
-        });
-    };
-
+    
     var getAllResolutions = function () {
         return $http.post(serviceBase + 'api/dsFamilyTempSensor/getAllResolutions').then(function (results) {
             //alert('envio bem sucedido');
@@ -53,27 +47,17 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsCompleted', onGetAllResolutionsCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetListInApplicationCompleted', onGetAllCompleted);
 
         if (!initialized) {
             initialized = true;
             getAllResolutions();
-            getListInApplication();
         }
     }  
 
     var onReadReceived = function (payload) {
         EventDispatcher.trigger('dsFamilyTempSensorService_onReadReceived', JSON.parse(payload.body));
     }
-
-    var onGetAllCompleted = function (payload) {
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
-        for (var i = 0; i < data.length; i++) {
-            serviceFactory.sensors.push(data[i]);
-        }
-    }
-
+    
     var onGetAllResolutionsCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);

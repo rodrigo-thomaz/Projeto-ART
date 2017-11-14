@@ -50,17 +50,6 @@ angular.module('app')
                       'js/controllers/thermometerDeviceController.js',                      
                   ])
               })
-              .state('app.dsFamilyTempSensorList', {
-                  url: '/dsFamilyTempSensorList',
-                  templateUrl: 'views/dsFamilyTempSensorList.html',
-                  resolve: load([
-                      'vr.directives.slider',
-                      'ui.select',
-                      'js/services/temperatureScaleService.js',
-                      'js/services/dsFamilyTempSensorService.js',
-                      'js/controllers/dsFamilyTempSensorListController.js',
-                  ])
-              })
               .state('app.espDeviceManager', {
                   url: '/espDeviceManager',
                   templateUrl: 'views/espDeviceManager.html',
@@ -77,16 +66,6 @@ angular.module('app')
                       'ui.grid',
                       'js/services/espDeviceService.js',
                       'js/controllers/espDeviceJoinController.js',
-                  ])
-              })
-              .state('app.dsFamilyTempSensorManager', {
-                  url: '/dsFamilyTempSensorManager',
-                  templateUrl: 'views/dsFamilyTempSensorManager.html',
-                  resolve: load([
-                      'ui.grid',
-                      'js/services/temperatureScaleService.js',
-                      'js/services/dsFamilyTempSensorService.js',
-                      'js/controllers/dsFamilyTempSensorManagerController.js',
                   ])
               })
 

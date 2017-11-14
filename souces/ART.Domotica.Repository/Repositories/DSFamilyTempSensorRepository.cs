@@ -16,25 +16,6 @@ namespace ART.Domotica.Repository.Repositories
 
         }
 
-        public async Task<List<DSFamilyTempSensor>> GetListInApplication(Guid applicationUserId)
-        {
-            IQueryable<DSFamilyTempSensor> query = from hia in _context.DeviceInApplication
-                                              join sensor in _context.DSFamilyTempSensor on hia.DeviceBaseId equals sensor.Id
-                                              join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
-                                              where au.Id == applicationUserId
-                                              select sensor;
-
-            var data = await query.ToListAsync();
-
-            var ids = data.Select(x => x.Id);
-
-            await _context.DeviceInApplication
-                .Where(x => ids.Contains(x.DeviceBaseId))
-                .LoadAsync();
-
-            return data;
-        }
-
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)
         {
             var entity = await _context.SensorsInDevice
