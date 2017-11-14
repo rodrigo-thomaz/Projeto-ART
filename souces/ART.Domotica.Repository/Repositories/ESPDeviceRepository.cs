@@ -68,23 +68,13 @@
             return data;
         }
 
-        public async Task<List<ESPDevice>> GetListInApplication(Guid applicationUserId)
+        public async Task<List<ESPDevice>> GetListInApplication(Guid applicationId)
         {
-            IQueryable<ESPDevice> query = from hia in _context.DeviceInApplication
-                                                      join esp in _context.ESPDevice on hia.DeviceBaseId equals esp.Id
-                                                      join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
-                                                      where au.Id == applicationUserId
-                                                      select esp;
-
-            var data = await query.ToListAsync();
-
-            var ids = data.Select(x => x.Id);
-
-            await _context.DeviceInApplication
-                .Where(x => ids.Contains(x.DeviceBaseId))
-                .LoadAsync();
-
-            return data;
+            return await _context.ESPDevice
+                .Include(x => x.DevicesInApplication)
+                .Include(x => x.SensorsInDevice)
+                .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
+                .ToListAsync();
         }
 
         #endregion Methods

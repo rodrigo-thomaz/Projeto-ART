@@ -19,7 +19,7 @@
 
         Task<List<string>> GetExistingPins();
 
-        Task<List<ESPDevice>> GetListInApplication(Guid applicationUserId);
+        Task<List<ESPDevice>> GetListInApplication(Guid applicationId);
 
         Task<List<ESPDevice>> GetListNotInApplication();
 

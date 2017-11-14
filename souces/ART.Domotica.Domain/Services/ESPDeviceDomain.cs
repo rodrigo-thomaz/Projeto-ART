@@ -49,7 +49,8 @@
 
         public async Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message)
         {
-            return await _espDeviceRepository.GetListInApplication(message.ApplicationUserId);
+            var applicationUser = await _applicationUserRepository.GetById(message.ApplicationUserId);
+            return await _espDeviceRepository.GetListInApplication(applicationUser.ApplicationId);
         }
 
         public async Task<ESPDevice> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
