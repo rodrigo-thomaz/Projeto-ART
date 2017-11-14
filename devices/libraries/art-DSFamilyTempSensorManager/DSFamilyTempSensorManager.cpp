@@ -382,8 +382,6 @@ void DSFamilyTempSensorManager::createSensorJsonNestedObject(DSFamilyTempSensor 
 	JsonObject& JSONencoder = root.createNestedObject();
 
 	JSONencoder["dsFamilyTempSensorId"] = dsFamilyTempSensor.getDSFamilyTempSensorId();
-	JSONencoder["validFamily"] = dsFamilyTempSensor.getValidFamily();
-	JSONencoder["family"] = dsFamilyTempSensor.getFamily();
 	JSONencoder["isConnected"] = dsFamilyTempSensor.getConnected();
 	JSONencoder["resolution"] = dsFamilyTempSensor.getResolution();
 	JSONencoder["rawTemperature"] = dsFamilyTempSensor.getRawTemperature();
