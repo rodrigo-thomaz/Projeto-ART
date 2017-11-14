@@ -238,20 +238,21 @@ void loopInApplication()
 
       StaticJsonBuffer<900> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
-      root["teste"] = "Rodrigo Thomaz e Lucas e Vanessa";     
+
+      DeviceSettings* deviceSettings = configurationManager.getDeviceSettings();
+      
+      root["deviceId"] = deviceSettings->getDeviceId();
+      root["deviceInApplicationId"] = deviceSettings->getDeviceInApplicationId();
 
       dsFamilyTempSensorManager.createSensorsJsonNestedArray(root);
 
-      int len = root.measureLength();
-      char sensorsJson[len + 1];
+      int sensorsJsonLen = root.measureLength();
+      char sensorsJson[sensorsJsonLen + 1];
       root.printTo(sensorsJson, sizeof(sensorsJson));
-
-
-
-
   
-      Serial.println("enviando para o servidor => ");
-      //Serial.println(sensorsJson); // está estourando erro aqui
+      Serial.print("enviando para o servidor (Char Len)=> ");
+      Serial.println(sensorsJsonLen);
+      
       mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);            
     } 
     else {

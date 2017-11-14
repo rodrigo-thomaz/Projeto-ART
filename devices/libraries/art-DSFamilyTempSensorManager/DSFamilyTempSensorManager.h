@@ -99,6 +99,7 @@ class DSFamilyTempSensorManager
 	void 								refresh();	
 			
 	DSFamilyTempSensor 					*getSensors();
+	
 	void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 				
 	void 								setResolution(String json);
