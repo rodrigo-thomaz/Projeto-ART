@@ -50,11 +50,9 @@ namespace ART.Domotica.Domain.Services
             return result;
         }
         
-        public async Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions()
+        public async Task<List<DSFamilyTempSensorResolution>> GetAllResolutions()
         {
-            var data = await _dsFamilyTempSensorResolutionRepository.GetAll();
-            var result = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionGetAllModel>>(data);
-            return result;
+            return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
 
         public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)

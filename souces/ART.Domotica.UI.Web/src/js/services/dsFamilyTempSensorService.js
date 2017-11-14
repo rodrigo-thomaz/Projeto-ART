@@ -46,7 +46,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
     var onConnected = function () {
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsCompleted', onGetAllResolutionsCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsViewCompleted', onGetAllResolutionsCompleted);
 
         if (!initialized) {
             initialized = true;

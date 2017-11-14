@@ -45,7 +45,7 @@
     <Compile Include="ESPDeviceAdminDetailModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />
     <Compile Include="ESPDeviceDetailModel.cs" />
-    <Compile Include="DSFamilyTempSensorResolutionGetAllModel.cs" />
+    <Compile Include="DSFamilyTempSensorResolutionDetailModel.cs" />
     <Compile Include="TemperatureScaleGetAllModel.cs" />
     <Compile Include="ApplicationGetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

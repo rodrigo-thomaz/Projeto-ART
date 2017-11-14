@@ -16,6 +16,9 @@ using System.Collections.Generic;
 using ART.Domotica.IoTContract;
 using Autofac;
 using ART.Infra.CrossCutting.Logging;
+using AutoMapper;
+using ART.Domotica.Repository.Entities;
+using ART.Domotica.Model;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -153,10 +156,13 @@ namespace ART.Domotica.Worker.Consumers
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
             var data = await domain.GetAllResolutions();
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionDetailModel>>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.GetAllResolutionsCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, buffer);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.GetAllResolutionsViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

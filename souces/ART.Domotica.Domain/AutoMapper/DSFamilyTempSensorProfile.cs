@@ -23,9 +23,7 @@
                     return result;
                 }))
                 .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.DSFamilyTempSensorResolution.Bits))
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
-
-            CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionGetAllModel>();
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));            
         }
 
         #endregion Constructors
