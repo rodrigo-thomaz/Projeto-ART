@@ -99,7 +99,7 @@ class DSFamilyTempSensorManager
 	void 								refresh();	
 			
 	DSFamilyTempSensor 					*getSensors();
-	char 								*getSensorsJson();		
+	void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 				
 	void 								setResolution(String json);
 	void 								setLowAlarm(String json);
@@ -117,7 +117,7 @@ class DSFamilyTempSensorManager
 				
 	const uint8_t* 						getDeviceAddressById(String deviceAddress);
 	String 								getFamily(byte deviceAddress[8]);
-	void								generateNestedSensor(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
+	void								createSensorJsonNestedObject(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
 	String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 	
 	std::vector<DSFamilyTempSensor> 	_sensors;

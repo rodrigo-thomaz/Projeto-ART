@@ -7,9 +7,9 @@ app.controller('thermometerDeviceController', ['$scope', '$timeout', '$log', 'Ev
 
     EventDispatcher.on('dsFamilyTempSensorService_onReadReceived', onReadReceived);         
 
-    function onReadReceived(payload) {
-        for (var i = 0; i < payload.length; i++) {
-            $scope.sensors[i].addLog(payload[i]);
+    function onReadReceived(payload) {        
+        for (var i = 0; i < payload.dsFamilyTempSensors.length; i++) {
+            $scope.sensors[i].addLog(payload.dsFamilyTempSensors[i]);
         }
         $scope.$apply();
     }

@@ -295,31 +295,12 @@ DSFamilyTempSensor *DSFamilyTempSensorManager::getSensors()
 	return array;
 }
 
-char *DSFamilyTempSensorManager::getSensorsJson()
+void DSFamilyTempSensorManager::createSensorsJsonNestedArray(JsonObject& jsonObject)
 {	
-	StaticJsonBuffer<900> JSONbuffer;
-
-	JsonArray& device = JSONbuffer.createArray();
-
+	JsonArray& jsonArray = jsonObject.createNestedArray("dsFamilyTempSensors");     
 	for(int i = 0; i < this->_sensors.size(); ++i){	
-		generateNestedSensor(this->_sensors[i], device);
-	}
-	
-	int len = device.measureLength();
-
-	char result[len + 1];
-
-	device.printTo(result, sizeof(result));
-
-	if (this->_debugManager->isDebug()) {
-		Serial.print("tamanho device ==>");
-		Serial.println(len);
-		Serial.print("result device ==>");
-		//device.printTo(Serial);  // está estourando erro aqui
-		Serial.println();
-	}
-
-    return result;
+		createSensorJsonNestedObject(this->_sensors[i], jsonArray);
+	}	
 }
 
 void DSFamilyTempSensorManager::setResolution(String json)
@@ -408,7 +389,7 @@ String DSFamilyTempSensorManager::getFamily(byte deviceAddress[8]){
   } 
 }
 
-void DSFamilyTempSensorManager::generateNestedSensor(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root)
+void DSFamilyTempSensorManager::createSensorJsonNestedObject(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root)
 {	
 	JsonObject& JSONencoder = root.createNestedObject();
 

@@ -235,7 +235,21 @@ void loopInApplication()
     if(now - publishMessageTimestamp > publishMessageInterval) {
       publishMessageTimestamp = now;
       displayMQTTManager.printSent(true);
-      char *sensorsJson = dsFamilyTempSensorManager.getSensorsJson();
+
+      StaticJsonBuffer<900> jsonBuffer;
+      JsonObject& root = jsonBuffer.createObject();
+      root["teste"] = "Rodrigo Thomaz e Lucas e Vanessa";     
+
+      dsFamilyTempSensorManager.createSensorsJsonNestedArray(root);
+
+      int len = root.measureLength();
+      char sensorsJson[len + 1];
+      root.printTo(sensorsJson, sizeof(sensorsJson));
+
+
+
+
+  
       Serial.println("enviando para o servidor => ");
       //Serial.println(sensorsJson); // está estourando erro aqui
       mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);            
