@@ -40,15 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetHighAlarmContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetLowAlarmContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetHighAlarmRequestContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetLowAlarmRequestContract.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCResponseContract.cs" />
     <Compile Include="ESPDeviceInsertInApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetByPinRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetResolutionContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetResolutionRequestContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

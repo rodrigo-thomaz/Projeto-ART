@@ -1,8 +1,8 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.IoTContract
 {
     using System;
 
-    public class DSFamilyTempSensorSetResolutionContract
+    public class DSFamilyTempSensorSetHighAlarmRequestIoTContract
     {
         #region Properties
 
@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public byte DSFamilyTempSensorResolutionId
+        public decimal HighAlarm
         {
             get; set;
         }

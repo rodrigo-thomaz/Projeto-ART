@@ -31,7 +31,7 @@ namespace ART.Domotica.Producer.Services
             });            
         }
 
-        public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
+        public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message)
         {
             await Task.Run(() =>
             {
@@ -40,7 +40,7 @@ namespace ART.Domotica.Producer.Services
             });            
         }
 
-        public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message)
+        public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message)
         {
             await Task.Run(() =>
             {
@@ -49,7 +49,7 @@ namespace ART.Domotica.Producer.Services
             });                        
         }
 
-        public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message)
+        public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract> message)
         {
             await Task.Run(() =>
             {

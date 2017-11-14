@@ -37,7 +37,10 @@
             get; set;
         }
 
-        public List<DSFamilyTempSensorGetDetailModel> Sensors { get; set; }
+        public List<DSFamilyTempSensorGetDetailModel> Sensors
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

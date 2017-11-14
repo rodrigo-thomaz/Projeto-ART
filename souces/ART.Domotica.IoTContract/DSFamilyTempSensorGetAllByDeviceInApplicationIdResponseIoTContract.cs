@@ -1,8 +1,8 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.IoTContract
 {
     using System;
 
-    public class DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract
+    public class DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract
     {
         #region Properties
 

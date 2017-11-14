@@ -4,8 +4,6 @@ using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Interfaces;
 using ART.Domotica.Repository.Entities;
 using System.Collections.Generic;
-using ART.Domotica.Model;
-using AutoMapper;
 using ART.Domotica.Contract;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.Domain;
@@ -42,12 +40,10 @@ namespace ART.Domotica.Domain.Services
 
         #region public voids
 
-        public async Task<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
+        public async Task<List<DSFamilyTempSensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
         {
             var deviceInApplication = await _deviceInApplicationRepository.GetById(deviceInApplicationId);
-            var data = await _dsFamilyTempSensorRepository.GetAllByDeviceId(deviceInApplication.DeviceBaseId);
-            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>>(data);
-            return result;
+            return await _dsFamilyTempSensorRepository.GetAllByDeviceId(deviceInApplication.DeviceBaseId);            
         }
         
         public async Task<List<DSFamilyTempSensorResolution>> GetAllResolutions()
@@ -55,7 +51,7 @@ namespace ART.Domotica.Domain.Services
             return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
 
-        public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message)
+        public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message)
         {
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -76,7 +72,7 @@ namespace ART.Domotica.Domain.Services
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
         }
 
-        public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message)
+        public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -90,7 +86,7 @@ namespace ART.Domotica.Domain.Services
             await _dsFamilyTempSensorRepository.Update(entity);
         }
 
-        public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message)
+        public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 

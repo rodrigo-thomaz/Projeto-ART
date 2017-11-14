@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetHighAlarmRequestIoTContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetLowAlarmRequestIoTContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetResolutionRequestIoTContract.cs" />
     <Compile Include="ESPDeviceInsertInApplicationResponseIoTContract.cs" />
     <Compile Include="ESPDeviceUpdatePinsResponseIoTContract.cs" />
     <Compile Include="IoTRequestContract.cs" />

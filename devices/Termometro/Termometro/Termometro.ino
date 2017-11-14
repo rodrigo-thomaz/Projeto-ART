@@ -42,9 +42,9 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_UPDATE_PIN "ESPDevice.UpdatePinIoT"
 #define TOPIC_SUB_INSERT_IN_APPLICATION "ESPDevice.InsertInApplicationIoT"
 #define TOPIC_SUB_DELETE_FROM_APPLICATION "ESPDevice.DeleteFromApplicationIoT"
-#define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolution"
-#define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarm"
-#define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarm"
+#define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolutionIoT"
+#define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarmIoT"
+#define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarmIoT"
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 

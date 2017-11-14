@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Contract;
-    using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.MQ.Contract;
 
@@ -13,17 +12,17 @@
     {
         #region Methods
 
-        Task<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId);
+        Task<List<DSFamilyTempSensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId);
 
         Task<List<DSFamilyTempSensorResolution>> GetAllResolutions();
 
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);        
+        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 
-        Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message);
+        Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message);
 
-        Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message);
+        Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract> message);
 
-        Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message);
+        Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
 
         #endregion Methods
     }

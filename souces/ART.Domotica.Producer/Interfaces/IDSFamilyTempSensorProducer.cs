@@ -11,11 +11,11 @@
 
         Task GetAllResolutions(AuthenticatedMessageContract message);
 
-        Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmContract> message);
+        Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message);
 
-        Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmContract> message);
+        Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract> message);
 
-        Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionContract> message);
+        Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
 
         #endregion Methods
     }

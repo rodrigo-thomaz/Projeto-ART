@@ -4,7 +4,6 @@
 
     using ART.Domotica.Constant;
     using ART.Domotica.Domain;
-    using ART.Domotica.Domain.AutoMapper;
     using ART.Domotica.Repository;
     using ART.Domotica.Worker.AutoMapper;
     using ART.Domotica.Worker.Jobs;
@@ -56,8 +55,7 @@
             {
                 x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationUserProfile());
-                x.AddProfile(new Domain.AutoMapper.DSFamilyTempSensorProfile());
-                x.AddProfile(new AutoMapper.DSFamilyTempSensorProfile());
+                x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());
                 x.AddProfile(new TemperatureScaleProfile());
             });
