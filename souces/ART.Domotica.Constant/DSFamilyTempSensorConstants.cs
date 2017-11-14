@@ -6,8 +6,6 @@
 
         public static readonly string GetAllByDeviceInApplicationIdCompletedQueueName = "DSFamilyTempSensor.GetAllByDeviceInApplicationIdCompleted";
         public static readonly string GetAllByDeviceInApplicationIdQueueName = "DSFamilyTempSensor.GetAllByDeviceInApplicationId";
-        public static readonly string GetAllCompletedQueueName = "DSFamilyTempSensorAdmin.GetAllCompleted";
-        public static readonly string GetAllQueueName = "DSFamilyTempSensorAdmin.GetAll";
         public static readonly object GetAllResolutionsCompletedQueueName = "DSFamilyTempSensor.GetAllResolutionsCompleted";
         public static readonly string GetAllResolutionsQueueName = "DSFamilyTempSensor.GetAllResolutions";
         public static readonly string GetListInApplicationCompletedQueueName = "DSFamilyTempSensor.GetListInApplicationCompleted";

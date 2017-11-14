@@ -206,7 +206,6 @@
     <Content Include="src\js\app\mail\mails.json" />
     <Content Include="src\js\app\note\notes.json" />
     <Content Include="src\js\config.settings.js" />
-    <Content Include="src\js\controllers\admin\dsFamilyTempSensorAdminController.js" />
     <Content Include="src\js\controllers\admin\espDeviceAdminController.js" />
     <Content Include="src\js\controllers\dsFamilyTempSensorManagerController.js" />
     <Content Include="src\js\controllers\espDeviceJoinController.js" />
@@ -220,7 +219,6 @@
     <Content Include="src\js\controllers\thermometerDeviceController.js" />
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
-    <Content Include="src\js\services\admin\dsFamilyTempSensorAdminService.js" />
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />
     <Content Include="src\js\services\espDeviceService.js" />
     <Content Include="src\js\services\applicationUserService.js" />
@@ -464,7 +462,6 @@
     <Content Include="src\l10n\it_IT.js" />
     <Content Include="src\psd\ui.png" />
     <Content Include="src\tpl\app.html" />
-    <Content Include="src\views\admin\dsFamilyTempSensorAdmin.html" />
     <Content Include="src\views\dashboard.html" />
     <Content Include="src\tpl\blocks\aside.html" />
     <Content Include="src\tpl\blocks\aside.right.html" />

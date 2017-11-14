@@ -42,13 +42,6 @@ namespace ART.Domotica.Domain.Services
 
         #region public voids
 
-        public async Task<List<DSFamilyTempSensorGetAllModel>> GetAll(AuthenticatedMessageContract message)
-        {
-            var data = await _dsFamilyTempSensorRepository.GetAll();
-            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllModel>>(data);
-            return result;
-        }
-
         public async Task<List<DSFamilyTempSensorGetListInApplicationModel>> GetListInApplication(Guid applicationUserId)
         {
             var data = await _dsFamilyTempSensorRepository.GetListInApplication(applicationUserId);

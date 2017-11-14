@@ -13,8 +13,6 @@
     {
         #region Methods
 
-        Task<List<DSFamilyTempSensorGetAllModel>> GetAll(AuthenticatedMessageContract message);
-
         Task<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId);
 
         Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions();

@@ -31,10 +31,6 @@
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
 
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionGetAllModel>();
-
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllModel>()
-                //.ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.HardwaresInApplication.Any()))
-                .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
         }
 
         #endregion Constructors

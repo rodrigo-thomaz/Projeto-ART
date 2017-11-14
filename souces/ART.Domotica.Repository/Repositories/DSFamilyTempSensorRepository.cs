@@ -16,12 +16,6 @@ namespace ART.Domotica.Repository.Repositories
 
         }
 
-        public async Task<List<DSFamilyTempSensor>> GetAll()
-        {
-            return await _context.DSFamilyTempSensor
-                .ToListAsync();
-        }
-
         public async Task<List<DSFamilyTempSensor>> GetListInApplication(Guid applicationUserId)
         {
             IQueryable<DSFamilyTempSensor> query = from hia in _context.DeviceInApplication

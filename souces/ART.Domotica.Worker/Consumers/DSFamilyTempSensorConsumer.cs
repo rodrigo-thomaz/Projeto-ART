@@ -23,7 +23,6 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _getAllConsumer;
         private readonly EventingBasicConsumer _getListInApplicationConsumer;
         private readonly EventingBasicConsumer _getAllByDeviceInApplicationIdConsumer;
         private readonly EventingBasicConsumer _getAllResolutionsConsumer;
@@ -41,7 +40,6 @@ namespace ART.Domotica.Worker.Consumers
 
         public DSFamilyTempSensorConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
-            _getAllConsumer = new EventingBasicConsumer(_model);
             _getListInApplicationConsumer = new EventingBasicConsumer(_model);
             _getAllByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
@@ -62,13 +60,6 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                 queue: DSFamilyTempSensorConstants.GetAllQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: null);
-
             _model.QueueDeclare(
                  queue: DSFamilyTempSensorConstants.GetListInApplicationQueueName
                , durable: false
@@ -124,7 +115,6 @@ namespace ART.Domotica.Worker.Consumers
                 , routingKey: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdQueueName
                 , arguments: null);
 
-            _getAllConsumer.Received += GetAllReceived;
             _getListInApplicationConsumer.Received += GetListInApplicationReceived;
             _getAllByDeviceInApplicationIdConsumer.Received += GetAllByDeviceInApplicationIdReceived;
             _getAllResolutionsConsumer.Received += GetAllResolutionsReceived;
@@ -132,35 +122,13 @@ namespace ART.Domotica.Worker.Consumers
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
             _setLowAlarmConsumer.Received += SetLowAlarmReceived;
 
-            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdQueueName, false, _getAllByDeviceInApplicationIdConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetResolutionQueueName, false, _setResolutionConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
-        }        
-
-        public void GetAllReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(GetAllReceivedAsync(sender, e));
-        }
-
-        public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.GetAll(message);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(data);
-            var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.GetAllCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, buffer);
-
-            _logger.DebugLeave();
-        }
+        }         
 
         public void GetListInApplicationReceived(object sender, BasicDeliverEventArgs e)
         {

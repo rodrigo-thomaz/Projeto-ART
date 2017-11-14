@@ -20,16 +20,7 @@ namespace ART.Domotica.Producer.Services
 
         #endregion
 
-        #region public voids
-
-        public async Task GetAll(AuthenticatedMessageContract message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllQueueName, null, payload);
-            });
-        }
+        #region public voids        
 
         public async Task GetListInApplication(AuthenticatedMessageContract message)
         {

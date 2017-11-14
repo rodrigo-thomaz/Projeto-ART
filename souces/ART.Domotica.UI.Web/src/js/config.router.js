@@ -103,16 +103,7 @@ angular.module('app')
                       'js/services/admin/espDeviceAdminService.js',
                       'js/controllers/admin/espDeviceAdminController.js',
                   ])
-              })              
-              .state('app.admin.dsFamilyTempSensor', {
-                  url: '/admin/dsFamilyTempSensor',
-                  templateUrl: 'views/admin/dsFamilyTempSensorAdmin.html',
-                  resolve: load([
-                      'ui.grid',
-                      'js/services/admin/dsFamilyTempSensorAdminService.js',
-                      'js/controllers/admin/dsFamilyTempSensorAdminController.js',
-                  ])
-              }) 
+              })                            
 
               // pages
               .state('app.page', {
