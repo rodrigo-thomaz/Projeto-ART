@@ -20,6 +20,7 @@
             CreateMap<ESPDevice, ESPDeviceDetailModel>()
                 .ForMember(vm => vm.DeviceInApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.Sensors, m => m.MapFrom(x => x.SensorsInDevice))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
 
             CreateMap<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>()

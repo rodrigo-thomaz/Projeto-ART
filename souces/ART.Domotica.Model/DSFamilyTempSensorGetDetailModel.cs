@@ -1,43 +1,45 @@
 ﻿namespace ART.Domotica.Model
 {
     using System;
-    using System.Collections.Generic;
 
-    public class ESPDeviceDetailModel
+    public class DSFamilyTempSensorGetDetailModel
     {
         #region Properties
 
-        public int ChipId
+        public string DeviceAddress
         {
             get; set;
         }
 
-        public long CreateDate
+        public Guid DSFamilyTempSensorId
         {
             get; set;
         }
 
-        public Guid DeviceId
+        public byte DSFamilyTempSensorResolutionId
         {
             get; set;
         }
 
-        public Guid DeviceInApplicationId
+        public string Family
         {
             get; set;
         }
 
-        public int FlashChipId
+        public decimal HighAlarm
         {
             get; set;
         }
 
-        public string MacAddress
+        public decimal LowAlarm
         {
             get; set;
         }
 
-        public List<DSFamilyTempSensorGetDetailModel> Sensors { get; set; }
+        public byte TemperatureScaleId
+        {
+            get; set;
+        }
 
         #endregion Properties
     }
