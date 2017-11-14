@@ -6,13 +6,13 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class RaspberryDeviceBaseConfiguration : EntityTypeConfiguration<RaspberryDeviceBase>
+    public class RaspberryDeviceConfiguration : EntityTypeConfiguration<RaspberryDevice>
     {
         #region Constructors
 
-        public RaspberryDeviceBaseConfiguration()
+        public RaspberryDeviceConfiguration()
         {
-            ToTable("RaspberryDeviceBase");
+            ToTable("RaspberryDevice");
 
             //Primary Keys
             HasKey(x => x.Id);

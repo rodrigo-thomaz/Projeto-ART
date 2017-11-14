@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    public class RaspberryDeviceBase : DeviceBase
+    public class RaspberryDevice : DeviceBase
     {
         #region Properties
 

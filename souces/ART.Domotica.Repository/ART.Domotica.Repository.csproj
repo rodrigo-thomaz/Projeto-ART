@@ -70,7 +70,7 @@
     <Compile Include="Configurations\ProjectConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
     <Compile Include="Configurations\HardwareInApplicationConfiguration.cs" />
-    <Compile Include="Configurations\RaspberryDeviceBaseConfiguration.cs" />
+    <Compile Include="Configurations\RaspberryDeviceConfiguration.cs" />
     <Compile Include="Configurations\SensorBaseConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
     <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
@@ -83,7 +83,7 @@
     <Compile Include="Entities\HardwaresInProject.cs" />
     <Compile Include="Entities\HardwareInApplication.cs" />
     <Compile Include="Entities\Project.cs" />
-    <Compile Include="Entities\RaspberryDeviceBase.cs" />
+    <Compile Include="Entities\RaspberryDevice.cs" />
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
@@ -155,6 +155,10 @@
     <Compile Include="Migrations\201711141239529_RenameESPDeviceBaseTable.cs" />
     <Compile Include="Migrations\201711141239529_RenameESPDeviceBaseTable.Designer.cs">
       <DependentUpon>201711141239529_RenameESPDeviceBaseTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711141243444_RenameRaspberryDeviceBaseTable.cs" />
+    <Compile Include="Migrations\201711141243444_RenameRaspberryDeviceBaseTable.Designer.cs">
+      <DependentUpon>201711141243444_RenameRaspberryDeviceBaseTable.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -243,6 +247,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711141239529_RenameESPDeviceBaseTable.resx">
       <DependentUpon>201711141239529_RenameESPDeviceBaseTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711141243444_RenameRaspberryDeviceBaseTable.resx">
+      <DependentUpon>201711141243444_RenameRaspberryDeviceBaseTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
