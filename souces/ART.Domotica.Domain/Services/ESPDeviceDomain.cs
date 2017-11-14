@@ -21,7 +21,7 @@
 
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
-        private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
+        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;                
 
         #endregion Fields
@@ -35,7 +35,7 @@
             _espDeviceRepository = new ESPDeviceRepository(context);
             _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
-            _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
+            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
         }
 
         #endregion Constructors
@@ -78,53 +78,31 @@
             if (applicationUserEntity == null)
             {
                 throw new Exception("ApplicationUser not found");
-            }
+            }            
 
-            var entitiesToInsert = new List<HardwareInApplication>
+            await _deviceInApplicationRepository.Insert(new DeviceInApplication
             {
-                new HardwareInApplication
-                {
-                    ApplicationId = applicationUserEntity.ApplicationId,
-                    HardwareBaseId = hardwareEntity.Id,
-                    CreateByApplicationUserId = applicationUserEntity.Id,
-                    CreateDate = DateTime.Now.ToUniversalTime(),
-                }
-            };
-
-            var allSensorsThatAreNotInApplication = await _dsFamilyTempSensorRepository.GetAllThatAreNotInApplicationByDevice(hardwareEntity.Id);
-
-            foreach (var item in allSensorsThatAreNotInApplication)
-            {
-                entitiesToInsert.Add(new HardwareInApplication
-                {
-                    ApplicationId = applicationUserEntity.ApplicationId,
-                    HardwareBaseId = item.Id,
-                    CreateByApplicationUserId = applicationUserEntity.Id,
-                    CreateDate = DateTime.Now.ToUniversalTime(),
-                });                
-            }
-
-            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                await _hardwareInApplicationRepository.Insert(entitiesToInsert);
-                scope.Complete();
-            }
+                ApplicationId = applicationUserEntity.ApplicationId,
+                DeviceBaseId = hardwareEntity.Id,
+                CreateByApplicationUserId = applicationUserEntity.Id,
+                CreateDate = DateTime.Now.ToUniversalTime(),
+            });
 
             return hardwareEntity;
         }
 
         public async Task<ESPDevice> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
-            var hardwareInApplicationEntity = await _hardwareInApplicationRepository.GetById(message.Contract.HardwareInApplicationId);
+            var deviceInApplicationEntity = await _deviceInApplicationRepository.GetById(message.Contract.DeviceInApplicationId);
             
-            if (hardwareInApplicationEntity == null)
+            if (deviceInApplicationEntity == null)
             {
-                throw new Exception("HardwareInApplication not found");
+                throw new Exception("DeviceInApplication not found");
             }
 
-            await _hardwareInApplicationRepository.Delete(hardwareInApplicationEntity);
+            await _deviceInApplicationRepository.Delete(deviceInApplicationEntity);
 
-            var hardwareEntity = await _espDeviceRepository.GetById(hardwareInApplicationEntity.HardwareBaseId);
+            var hardwareEntity = await _espDeviceRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
 
             return hardwareEntity;
         }

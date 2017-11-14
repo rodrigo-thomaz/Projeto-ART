@@ -157,7 +157,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED_MQQT_TOPIC_SUB)){
       temperatureScaleManager.update(payloadContract);            
     }
-    if(payloadTopic == String(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB)){
+    if(payloadTopic == String(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB)){
       dsFamilyTempSensorManager.setSensorsByMQQTCallback(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
@@ -170,10 +170,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       dsFamilyTempSensorManager.setLowAlarm(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_INSERT_IN_APPLICATION)){
-      configurationManager.getHardwareSettings()->insertInApplication(payloadContract);      
+      configurationManager.getDeviceSettings()->insertInApplication(payloadContract);      
     }
     if(payloadTopic == String(TOPIC_SUB_DELETE_FROM_APPLICATION)){
-      configurationManager.getHardwareSettings()->deleteFromApplication();      
+      configurationManager.getDeviceSettings()->deleteFromApplication();      
     }
 }
 
@@ -185,9 +185,9 @@ void loop() {
   configurationManager.autoInitialize(); 
   mqqtManager.autoConnect(); //se não há conexão com o Broker, a conexão é refeita
 
-  HardwareSettings* hardwareSettings = configurationManager.getHardwareSettings();
+  DeviceSettings* deviceSettings = configurationManager.getDeviceSettings();
   
-  if(hardwareSettings != NULL && hardwareSettings->getHardwareInApplicationId() == ""){
+  if(deviceSettings != NULL && deviceSettings->getDeviceInApplicationId() == ""){
     displayAccessManager.loop();
     //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
   }    

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract
+    public class DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract
     {
         #region Properties
 

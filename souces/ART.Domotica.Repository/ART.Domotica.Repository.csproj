@@ -69,7 +69,7 @@
     <Compile Include="Configurations\HardwaresInProjectConfiguration.cs" />
     <Compile Include="Configurations\ProjectConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
-    <Compile Include="Configurations\HardwareInApplicationConfiguration.cs" />
+    <Compile Include="Configurations\DeviceInApplicationConfiguration.cs" />
     <Compile Include="Configurations\RaspberryDeviceConfiguration.cs" />
     <Compile Include="Configurations\SensorBaseConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="Entities\ESPDevice.cs" />
     <Compile Include="Entities\HardwareBase.cs" />
     <Compile Include="Entities\HardwaresInProject.cs" />
-    <Compile Include="Entities\HardwareInApplication.cs" />
+    <Compile Include="Entities\DeviceInApplication.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\RaspberryDevice.cs" />
     <Compile Include="Entities\SensorBase.cs" />
@@ -89,76 +89,20 @@
     <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
-    <Compile Include="Interfaces\IHardwareInApplicationRepository.cs" />
+    <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IESPDeviceRepository.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationUserRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
     <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
-    <Compile Include="Migrations\201710071236123_InitialCreate.cs" />
-    <Compile Include="Migrations\201710071236123_InitialCreate.Designer.cs">
-      <DependentUpon>201710071236123_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201711141307489_InitialCreate.cs" />
+    <Compile Include="Migrations\201711141307489_InitialCreate.Designer.cs">
+      <DependentUpon>201711141307489_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201710082259592_InitialCreate1.cs" />
-    <Compile Include="Migrations\201710082259592_InitialCreate1.Designer.cs">
-      <DependentUpon>201710082259592_InitialCreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710082306089_InitialCreate2.cs" />
-    <Compile Include="Migrations\201710082306089_InitialCreate2.Designer.cs">
-      <DependentUpon>201710082306089_InitialCreate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710131430493_AddTableSetting.cs" />
-    <Compile Include="Migrations\201710131430493_AddTableSetting.Designer.cs">
-      <DependentUpon>201710131430493_AddTableSetting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710131611187_DeleteTableSetting.cs" />
-    <Compile Include="Migrations\201710131611187_DeleteTableSetting.Designer.cs">
-      <DependentUpon>201710131611187_DeleteTableSetting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710301837365_PinChange.cs" />
-    <Compile Include="Migrations\201710301837365_PinChange.Designer.cs">
-      <DependentUpon>201710301837365_PinChange.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710301914234_AddChipIdField.cs" />
-    <Compile Include="Migrations\201710301914234_AddChipIdField.Designer.cs">
-      <DependentUpon>201710301914234_AddChipIdField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201710311318144_AddChipIdField1.cs" />
-    <Compile Include="Migrations\201710311318144_AddChipIdField1.Designer.cs">
-      <DependentUpon>201710311318144_AddChipIdField1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711021026168_AddChipIdField2.cs" />
-    <Compile Include="Migrations\201711021026168_AddChipIdField2.Designer.cs">
-      <DependentUpon>201711021026168_AddChipIdField2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711021949152_AddChipIdField3.cs" />
-    <Compile Include="Migrations\201711021949152_AddChipIdField3.Designer.cs">
-      <DependentUpon>201711021949152_AddChipIdField3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711061712442_AddFieldTimeOffset.cs" />
-    <Compile Include="Migrations\201711061712442_AddFieldTimeOffset.Designer.cs">
-      <DependentUpon>201711061712442_AddFieldTimeOffset.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711082011212_HasAlarmFiledAdd.cs" />
-    <Compile Include="Migrations\201711082011212_HasAlarmFiledAdd.Designer.cs">
-      <DependentUpon>201711082011212_HasAlarmFiledAdd.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711090025514_HasAlarmFiledAdd2.cs" />
-    <Compile Include="Migrations\201711090025514_HasAlarmFiledAdd2.Designer.cs">
-      <DependentUpon>201711090025514_HasAlarmFiledAdd2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711131128037_RemoveTableThermometerDevice.cs" />
-    <Compile Include="Migrations\201711131128037_RemoveTableThermometerDevice.Designer.cs">
-      <DependentUpon>201711131128037_RemoveTableThermometerDevice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711141239529_RenameESPDeviceBaseTable.cs" />
-    <Compile Include="Migrations\201711141239529_RenameESPDeviceBaseTable.Designer.cs">
-      <DependentUpon>201711141239529_RenameESPDeviceBaseTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711141243444_RenameRaspberryDeviceBaseTable.cs" />
-    <Compile Include="Migrations\201711141243444_RenameRaspberryDeviceBaseTable.Designer.cs">
-      <DependentUpon>201711141243444_RenameRaspberryDeviceBaseTable.cs</DependentUpon>
+    <Compile Include="Migrations\201711141326401_InitialCreate1.cs" />
+    <Compile Include="Migrations\201711141326401_InitialCreate1.Designer.cs">
+      <DependentUpon>201711141326401_InitialCreate1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -166,7 +110,7 @@
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />
-    <Compile Include="Repositories\HardwareInApplicationRepository.cs" />
+    <Compile Include="Repositories\DeviceInApplicationRepository.cs" />
     <Compile Include="Repositories\ESPDeviceRepository.cs" />
     <Compile Include="Repositories\TemperatureScaleRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
@@ -203,53 +147,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201710071236123_InitialCreate.resx">
-      <DependentUpon>201710071236123_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711141307489_InitialCreate.resx">
+      <DependentUpon>201711141307489_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710082259592_InitialCreate1.resx">
-      <DependentUpon>201710082259592_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710082306089_InitialCreate2.resx">
-      <DependentUpon>201710082306089_InitialCreate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710131430493_AddTableSetting.resx">
-      <DependentUpon>201710131430493_AddTableSetting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710131611187_DeleteTableSetting.resx">
-      <DependentUpon>201710131611187_DeleteTableSetting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710301837365_PinChange.resx">
-      <DependentUpon>201710301837365_PinChange.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710301914234_AddChipIdField.resx">
-      <DependentUpon>201710301914234_AddChipIdField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201710311318144_AddChipIdField1.resx">
-      <DependentUpon>201710311318144_AddChipIdField1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711021026168_AddChipIdField2.resx">
-      <DependentUpon>201711021026168_AddChipIdField2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711021949152_AddChipIdField3.resx">
-      <DependentUpon>201711021949152_AddChipIdField3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711061712442_AddFieldTimeOffset.resx">
-      <DependentUpon>201711061712442_AddFieldTimeOffset.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711082011212_HasAlarmFiledAdd.resx">
-      <DependentUpon>201711082011212_HasAlarmFiledAdd.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711090025514_HasAlarmFiledAdd2.resx">
-      <DependentUpon>201711090025514_HasAlarmFiledAdd2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711131128037_RemoveTableThermometerDevice.resx">
-      <DependentUpon>201711131128037_RemoveTableThermometerDevice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711141239529_RenameESPDeviceBaseTable.resx">
-      <DependentUpon>201711141239529_RenameESPDeviceBaseTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711141243444_RenameRaspberryDeviceBaseTable.resx">
-      <DependentUpon>201711141243444_RenameRaspberryDeviceBaseTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711141326401_InitialCreate1.resx">
+      <DependentUpon>201711141326401_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

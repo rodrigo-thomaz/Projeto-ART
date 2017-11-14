@@ -30,6 +30,11 @@
             get; set;
         }
 
+        public DbSet<DeviceInApplication> DeviceInApplication
+        {
+            get; set;
+        }
+
         public DbSet<DSFamilyTempSensor> DSFamilyTempSensor
         {
             get; set;
@@ -41,11 +46,6 @@
         }
 
         public DbSet<ESPDevice> ESPDevice
-        {
-            get; set;
-        }
-
-        public DbSet<HardwareInApplication> HardwareInApplication
         {
             get; set;
         }
@@ -90,7 +90,7 @@
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
-            modelBuilder.Configurations.Add(new HardwareInApplicationConfiguration());
+            modelBuilder.Configurations.Add(new DeviceInApplicationConfiguration());
             modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());

@@ -22,7 +22,7 @@ namespace ART.Domotica.Domain.Services
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
-        private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
+        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
 
         #endregion
 
@@ -35,7 +35,7 @@ namespace ART.Domotica.Domain.Services
             _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
             _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);
             _espDeviceRepository = new ESPDeviceRepository(context);
-            _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
+            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
         }
 
         #endregion
@@ -56,11 +56,11 @@ namespace ART.Domotica.Domain.Services
             return result;
         }
 
-        public async Task<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>> GetAllByHardwareInApplicationId(Guid hardwareApplicationId)
+        public async Task<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
         {
-            var hardwareInApplication = await _hardwareInApplicationRepository.GetById(hardwareApplicationId);
-            var data = await _dsFamilyTempSensorRepository.GetAllByHardwareId(hardwareInApplication.HardwareBaseId);
-            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>>(data);
+            var deviceInApplication = await _deviceInApplicationRepository.GetById(deviceInApplicationId);
+            var data = await _dsFamilyTempSensorRepository.GetAllByDeviceId(deviceInApplication.DeviceBaseId);
+            var result = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>>(data);
             return result;
         }
         

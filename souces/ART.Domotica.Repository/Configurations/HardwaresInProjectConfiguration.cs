@@ -22,15 +22,15 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
 
-            //HardwareInApplicationId
-            Property(x => x.HardwareInApplicationId)
+            //DeviceInApplicationId
+            Property(x => x.DeviceInApplicationId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("IX_Unique_HardwareInApplicationId_ProjectId", 0) { IsUnique = true },
+                        new IndexAttribute("IX_Unique_DeviceInApplicationId_ProjectId", 0) { IsUnique = true },
                     }));
 
             //ProjectId
@@ -41,13 +41,13 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("IX_Unique_HardwareInApplicationId_ProjectId", 1) { IsUnique = true },
+                        new IndexAttribute("IX_Unique_DeviceInApplicationId_ProjectId", 1) { IsUnique = true },
                     }));
 
-            //HardwareInApplication
-            HasRequired(x => x.HardwareInApplication)
+            //DeviceInApplication
+            HasRequired(x => x.DeviceInApplication)
                 .WithMany(x => x.HardwaresInProject)
-                .HasForeignKey(x => x.HardwareInApplicationId)
+                .HasForeignKey(x => x.DeviceInApplicationId)
                 .WillCascadeOnDelete(false);
 
             //Project

@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string GetAllByHardwareInApplicationIdCompletedQueueName = "DSFamilyTempSensor.GetAllByHardwareInApplicationIdCompleted";
-        public static readonly string GetAllByHardwareInApplicationIdQueueName = "DSFamilyTempSensor.GetAllByHardwareInApplicationId";
+        public static readonly string GetAllByDeviceInApplicationIdCompletedQueueName = "DSFamilyTempSensor.GetAllByDeviceInApplicationIdCompleted";
+        public static readonly string GetAllByDeviceInApplicationIdQueueName = "DSFamilyTempSensor.GetAllByDeviceInApplicationId";
         public static readonly string GetAllCompletedQueueName = "DSFamilyTempSensorAdmin.GetAllCompleted";
         public static readonly string GetAllQueueName = "DSFamilyTempSensorAdmin.GetAll";
         public static readonly object GetAllResolutionsCompletedQueueName = "DSFamilyTempSensor.GetAllResolutionsCompleted";

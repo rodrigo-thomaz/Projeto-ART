@@ -11,6 +11,11 @@
             get; set;
         }
 
+        public Guid DeviceInApplicationId
+        {
+            get; set;
+        }
+
         public Guid DSFamilyTempSensorId
         {
             get; set;
@@ -22,11 +27,6 @@
         }
 
         public string Family
-        {
-            get; set;
-        }
-
-        public Guid HardwareInApplicationId
         {
             get; set;
         }

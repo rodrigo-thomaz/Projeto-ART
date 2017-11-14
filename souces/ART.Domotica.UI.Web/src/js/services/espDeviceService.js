@@ -42,9 +42,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         });
     };     
 
-    var deleteFromApplication = function (hardwareInApplicationId) {
+    var deleteFromApplication = function (deviceInApplicationId) {
         var data = {
-            hardwareInApplicationId: hardwareInApplicationId
+            deviceInApplicationId: deviceInApplicationId
         };
         return $http.post(serviceBase + 'api/espDevice/deleteFromApplication', data).then(function (results) {
             //alert('envio bem sucedido');
@@ -78,7 +78,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < serviceFactory.devices.length; i++) {
-            if (serviceFactory.devices[i].hardwareInApplicationId == data.hardwareInApplicationId) {
+            if (serviceFactory.devices[i].deviceInApplicationId == data.deviceInApplicationId) {
                 serviceFactory.devices.splice(i, 1);
                 EventDispatcher.trigger('espDeviceService_onDeleteFromApplicationCompleted');
                 return;

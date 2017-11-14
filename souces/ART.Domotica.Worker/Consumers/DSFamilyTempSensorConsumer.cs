@@ -25,7 +25,7 @@ namespace ART.Domotica.Worker.Consumers
 
         private readonly EventingBasicConsumer _getAllConsumer;
         private readonly EventingBasicConsumer _getListInApplicationConsumer;
-        private readonly EventingBasicConsumer _getAllByHardwareInApplicationIdConsumer;
+        private readonly EventingBasicConsumer _getAllByDeviceInApplicationIdConsumer;
         private readonly EventingBasicConsumer _getAllResolutionsConsumer;
         private readonly EventingBasicConsumer _setResolutionConsumer;
         private readonly EventingBasicConsumer _setHighAlarmConsumer;
@@ -43,7 +43,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
             _getListInApplicationConsumer = new EventingBasicConsumer(_model);
-            _getAllByHardwareInApplicationIdConsumer = new EventingBasicConsumer(_model);
+            _getAllByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
             _setHighAlarmConsumer = new EventingBasicConsumer(_model);
@@ -112,21 +112,21 @@ namespace ART.Domotica.Worker.Consumers
                , arguments: null);
 
             _model.QueueDeclare(
-                queue: DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName
+                queue: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdQueueName
               , durable: false
               , exclusive: false
               , autoDelete: true
               , arguments: null);
 
             _model.QueueBind(
-                  queue: DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName
+                  queue: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdQueueName
                 , exchange: "amq.topic"
-                , routingKey: DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName
+                , routingKey: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdQueueName
                 , arguments: null);
 
             _getAllConsumer.Received += GetAllReceived;
             _getListInApplicationConsumer.Received += GetListInApplicationReceived;
-            _getAllByHardwareInApplicationIdConsumer.Received += GetAllByHardwareInApplicationIdReceived;
+            _getAllByDeviceInApplicationIdConsumer.Received += GetAllByDeviceInApplicationIdReceived;
             _getAllResolutionsConsumer.Received += GetAllResolutionsReceived;
             _setResolutionConsumer.Received += SetResolutionReceived;
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
@@ -134,7 +134,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
-            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdQueueName, false, _getAllByHardwareInApplicationIdConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdQueueName, false, _getAllByDeviceInApplicationIdConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetResolutionQueueName, false, _setResolutionConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
@@ -183,22 +183,22 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugLeave();
         }
 
-        private void GetAllByHardwareInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
+        private void GetAllByDeviceInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetAllByHardwareInApplicationIdReceivedAsync(sender, e));
+            Task.WaitAll(GetAllByDeviceInApplicationIdReceivedAsync(sender, e));
         }
 
-        private async Task GetAllByHardwareInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetAllByDeviceInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.GetAllByHardwareInApplicationId(requestContract.HardwareInApplicationId);
-            var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>>(DSFamilyTempSensorConstants.GetAllByHardwareInApplicationIdCompletedQueueName, data);
+            var data = await domain.GetAllByDeviceInApplicationId(requestContract.DeviceInApplicationId);
+            var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>>(DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdCompletedQueueName, data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
-            var queueName = GetDeviceQueueName(requestContract.HardwareId);
+            var queueName = GetDeviceQueueName(requestContract.DeviceId);
             _model.BasicPublish("", queueName, null, buffer);
 
             _logger.DebugLeave();

@@ -13,9 +13,7 @@
 
         Task<List<DSFamilyTempSensor>> GetAll();
 
-        Task<List<DSFamilyTempSensor>> GetAllByHardwareId(Guid hardwareId);
-
-        Task<List<DSFamilyTempSensor>> GetAllThatAreNotInApplicationByDevice(Guid deviceBaseId);
+        Task<List<DSFamilyTempSensor>> GetAllByDeviceId(Guid deviceId);
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 

@@ -7,11 +7,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class HardwareInApplicationConfiguration : EntityTypeConfiguration<HardwareInApplication>
+    public class DeviceInApplicationConfiguration : EntityTypeConfiguration<DeviceInApplication>
     {
         #region Constructors
 
-        public HardwareInApplicationConfiguration()
+        public DeviceInApplicationConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);
@@ -30,31 +30,31 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("IX_Unique_ApplicationId_HardwareBaseId", 0) { IsUnique = true },
+                        new IndexAttribute("IX_Unique_ApplicationId_DeviceBaseId", 0) { IsUnique = true },
                     }));
 
             //Application
             HasRequired(x => x.Application)
-                .WithMany(x => x.HardwaresInApplication)
+                .WithMany(x => x.DevicesInApplication)
                 .HasForeignKey(x => x.ApplicationId)
                 .WillCascadeOnDelete(false);
 
-            //HardwareBaseId
-            Property(x => x.HardwareBaseId)
+            //DeviceBaseId
+            Property(x => x.DeviceBaseId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute ("IX_Unique_HardwareBaseId") { IsUnique = true },
-                        new IndexAttribute("IX_Unique_ApplicationId_HardwareBaseId", 1) { IsUnique = true },
+                        new IndexAttribute ("IX_Unique_DeviceBaseId") { IsUnique = true },
+                        new IndexAttribute("IX_Unique_ApplicationId_DeviceBaseId", 1) { IsUnique = true },
                     }));
 
-            //HardwareBase
-            HasRequired(x => x.HardwareBase)
-                .WithMany(x => x.HardwaresInApplication)
-                .HasForeignKey(x => x.HardwareBaseId)
+            //DeviceBase
+            HasRequired(x => x.DeviceBase)
+                .WithMany(x => x.DevicesInApplication)
+                .HasForeignKey(x => x.DeviceBaseId)
                 .WillCascadeOnDelete(false);
 
             //CreateDate

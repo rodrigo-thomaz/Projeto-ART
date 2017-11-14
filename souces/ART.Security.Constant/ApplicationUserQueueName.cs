@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string RegisterUserViewCompletedQueueName = "Security.RegisterUserViewCompleted";
         public static readonly string RegisterUserQueueName = "Security.RegisterUser";
+        public static readonly string RegisterUserViewCompletedQueueName = "Security.RegisterUserViewCompleted";
 
         #endregion Fields
     }

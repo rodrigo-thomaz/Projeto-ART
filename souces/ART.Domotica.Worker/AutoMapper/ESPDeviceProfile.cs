@@ -18,32 +18,32 @@
         public ESPDeviceProfile()
         {
             CreateMap<ESPDevice, ESPDeviceDetailModel>()
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id))
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceInApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().Id))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
 
             CreateMap<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>()
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id));
+                .ForMember(vm => vm.DeviceInApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().Id));
 
             CreateMap<ESPDevice, ESPDeviceGetByPinModel>();
 
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.ResolveUsing(src => {
-                    if(src.HardwaresInApplication != null && src.HardwaresInApplication.Any())
+                .ForMember(vm => vm.DeviceInApplicationId, m => m.ResolveUsing(src => {
+                    if(src.DevicesInApplication != null && src.DevicesInApplication.Any())
                     {
-                        return src.HardwaresInApplication.Single().Id;
+                        return src.DevicesInApplication.Single().Id;
                     }
                     return (Guid?)null;
                 }))
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));
 
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id));
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));
 
             CreateMap<ESPDevice, ESPDeviceAdminDetailModel>()
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
-                .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.HardwaresInApplication.Any()));
+                .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));
         }
 
         #endregion Constructors

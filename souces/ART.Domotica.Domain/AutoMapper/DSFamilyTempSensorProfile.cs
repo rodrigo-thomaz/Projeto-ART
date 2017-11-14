@@ -1,7 +1,5 @@
 ﻿namespace ART.Domotica.Domain.AutoMapper
 {
-    using System.Linq;
-
     using ART.Domotica.Contract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
@@ -16,10 +14,10 @@
         public DSFamilyTempSensorProfile()
         {
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetListInApplicationModel>()
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id));
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
+                //.ForMember(vm => vm.HardwareInApplicationId, m => m.MapFrom(x => x.HardwaresInApplication.Single().Id));
 
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>()
+            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>()
                 .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
                     var split = src.DeviceAddress.Split(':');
                     var result = new short[8];
@@ -35,7 +33,7 @@
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionGetAllModel>();
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllModel>()
-                .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.HardwaresInApplication.Any()))
+                //.ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.HardwaresInApplication.Any()))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
         }
 

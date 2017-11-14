@@ -6,6 +6,11 @@
     {
         #region Properties
 
+        public ICollection<DeviceInApplication> DevicesInApplication
+        {
+            get; set;
+        }
+
         public ICollection<SensorsInDevice> SensorsInDevice
         {
             get; set;

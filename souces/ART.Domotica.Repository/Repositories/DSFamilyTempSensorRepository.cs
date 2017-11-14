@@ -24,8 +24,8 @@ namespace ART.Domotica.Repository.Repositories
 
         public async Task<List<DSFamilyTempSensor>> GetListInApplication(Guid applicationUserId)
         {
-            IQueryable<DSFamilyTempSensor> query = from hia in _context.HardwareInApplication
-                                              join sensor in _context.DSFamilyTempSensor on hia.HardwareBaseId equals sensor.Id
+            IQueryable<DSFamilyTempSensor> query = from hia in _context.DeviceInApplication
+                                              join sensor in _context.DSFamilyTempSensor on hia.DeviceBaseId equals sensor.Id
                                               join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
                                               where au.Id == applicationUserId
                                               select sensor;
@@ -34,8 +34,8 @@ namespace ART.Domotica.Repository.Repositories
 
             var ids = data.Select(x => x.Id);
 
-            await _context.HardwareInApplication
-                .Where(x => ids.Contains(x.HardwareBaseId))
+            await _context.DeviceInApplication
+                .Where(x => ids.Contains(x.DeviceBaseId))
                 .LoadAsync();
 
             return data;
@@ -49,19 +49,11 @@ namespace ART.Domotica.Repository.Repositories
             return entity;
         }
 
-        public async Task<List<DSFamilyTempSensor>> GetAllByHardwareId(Guid hardwareId)
+        public async Task<List<DSFamilyTempSensor>> GetAllByDeviceId(Guid deviceId)
         {            
             return await _context.DSFamilyTempSensor
                 .Include(x => x.DSFamilyTempSensorResolution)
-                .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == hardwareId) != null)
-                .ToListAsync();
-        }
-
-        public async Task<List<DSFamilyTempSensor>> GetAllThatAreNotInApplicationByDevice(Guid deviceBaseId)
-        {
-            return await _context.DSFamilyTempSensor
-                .Where(x => x.SensorsInDevice.Any(y => y.DeviceBaseId == deviceBaseId))
-                .Where(x => !x.HardwaresInApplication.Any())
+                .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == deviceId) != null)
                 .ToListAsync();
         }
     }

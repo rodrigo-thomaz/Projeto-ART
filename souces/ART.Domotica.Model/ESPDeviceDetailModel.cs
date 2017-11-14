@@ -16,17 +16,17 @@
             get; set;
         }
 
+        public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public Guid DeviceInApplicationId
+        {
+            get; set;
+        }
+
         public int FlashChipId
-        {
-            get; set;
-        }
-
-        public Guid HardwareId
-        {
-            get; set;
-        }
-
-        public Guid HardwareInApplicationId
         {
             get; set;
         }

@@ -47,21 +47,21 @@ class NTPSettings {
     friend class ConfigurationManager;
 };
 
-class HardwareSettings {
+class DeviceSettings {
   public:
 
-    HardwareSettings(String hardwareId, String hardwareInApplicationId);
+    DeviceSettings(String deviceId, String deviceInApplicationId);
 
-    String								getHardwareId();	
-	String								getHardwareInApplicationId();	
+    String								getDeviceId();	
+	String								getDeviceInApplicationId();	
 	
 	void								insertInApplication(String json);	
 	void								deleteFromApplication();	
 	
   private:
     
-	String								_hardwareId;
-	String								_hardwareInApplicationId;
+	String								_deviceId;
+	String								_deviceInApplicationId;
 
     friend class ConfigurationManager;
 };
@@ -80,7 +80,7 @@ class ConfigurationManager
 	
 	BrokerSettings*						getBrokerSettings();
 	NTPSettings*						getNTPSettings();
-	HardwareSettings*					getHardwareSettings();
+	DeviceSettings*						getDeviceSettings();
 	
 	int									getPublishMessageInterval();		
 	
@@ -101,7 +101,7 @@ class ConfigurationManager
 
 	BrokerSettings*						_brokerSettings;
 	NTPSettings*						_ntpSettings;	
-	HardwareSettings*					_hardwareSettings;	
+	DeviceSettings*						_deviceSettings;	
 	
 	int									_publishMessageInterval;
 	

@@ -2,7 +2,7 @@
 app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'espDeviceService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, espDeviceService) {    
         
     var onDeleteFromApplicationClick = function (espDevice) {
-        espDeviceService.deleteFromApplication(espDevice.hardwareInApplicationId);
+        espDeviceService.deleteFromApplication(espDevice.deviceInApplicationId);
     }
 
     var onDeleteFromApplicationCompleted = function () {
@@ -18,8 +18,8 @@ app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', 'uiG
         rowHeight: 36,
         data: [],
         columnDefs: [
-            { name: 'HardwareInApplicationId', field: 'hardwareInApplicationId', width: 270 },
-            { name: 'HardwareId', field: 'hardwareId', width: 270 },
+            { name: 'DeviceInApplicationId', field: 'deviceInApplicationId', width: 270 },
+            { name: 'DeviceId', field: 'deviceId', width: 270 },
             { name: 'ChipId', field: 'chipId', width: 270 },
             { name: 'FlashChipId', field: 'flashChipId', width: 270 },
             { name: 'MacAddress', field: 'macAddress', width: 270 },

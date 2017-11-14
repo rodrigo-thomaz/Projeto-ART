@@ -174,14 +174,14 @@ bool DSFamilyTempSensorManager::initialized()
 	
 	Serial.println("[DSFamilyTempSensorManager::initialized] initializing...]");
 	
-	String hardwareId = this->_configurationManager->getHardwareSettings()->getHardwareId();      
-	String hardwareInApplicationId = this->_configurationManager->getHardwareSettings()->getHardwareInApplicationId();      
+	String deviceId = this->_configurationManager->getDeviceSettings()->getDeviceId();      
+	String deviceInApplicationId = this->_configurationManager->getDeviceSettings()->getDeviceInApplicationId();      
 
-	StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
+	StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
 	JsonObject& root = JSONbuffer.createObject();
 	
-	root["hardwareId"] = hardwareId;
-	root["hardwareInApplicationId"] = hardwareInApplicationId;
+	root["deviceId"] = deviceId;
+	root["deviceInApplicationId"] = deviceInApplicationId;
 
 	// device addresses prepare	
 	uint8_t deviceCount = _dallas.getDeviceCount();		
@@ -204,7 +204,7 @@ bool DSFamilyTempSensorManager::initialized()
 	char result[len + 1]; 
 	root.printTo(result, sizeof(result));
 	
-	mqqt->publish(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_MQQT_TOPIC_PUB, result); 
+	mqqt->publish(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_MQQT_TOPIC_PUB, result); 
 	
 	return true;
 }
@@ -217,7 +217,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 	this->_initializing = false;
 
 	DynamicJsonBuffer jsonBuffer;
-	//StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_HARDWARE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
+	//StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
 
 	JsonArray& jsonArray = jsonBuffer.parseArray(json);
 

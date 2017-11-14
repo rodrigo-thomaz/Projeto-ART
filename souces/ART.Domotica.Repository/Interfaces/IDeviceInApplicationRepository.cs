@@ -5,7 +5,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IHardwareInApplicationRepository : IRepository<ARTDbContext, HardwareInApplication, Guid>
+    public interface IDeviceInApplicationRepository : IRepository<ARTDbContext, DeviceInApplication, Guid>
     {
     }
 }

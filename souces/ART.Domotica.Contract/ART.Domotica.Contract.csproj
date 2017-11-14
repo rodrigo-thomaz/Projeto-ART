@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract.cs" />
+    <Compile Include="DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract.cs" />
     <Compile Include="DSFamilyTempSensorSetHighAlarmContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmContract.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />

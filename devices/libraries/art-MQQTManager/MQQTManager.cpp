@@ -56,13 +56,13 @@ bool MQQTManager::autoConnect()
 	else {
 		
 		BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();
-        HardwareSettings* hardwareSettings = this->_configurationManager->getHardwareSettings();
+        DeviceSettings* deviceSettings = this->_configurationManager->getDeviceSettings();
       
         char* const host = strdup(brokerSettings->getHost().c_str());
         char* const user = strdup(brokerSettings->getUser().c_str());
         char* const pwd  = strdup(brokerSettings->getPwd().c_str());
         
-        char* const clientId  = strdup(hardwareSettings->getHardwareId().c_str());
+        char* const clientId  = strdup(deviceSettings->getDeviceId().c_str());
         
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
         Serial.println(host);

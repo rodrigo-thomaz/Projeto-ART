@@ -16,12 +16,12 @@
             get; set;
         }
 
-        public int FlashChipId
+        public Guid DeviceId
         {
             get; set;
         }
 
-        public Guid HardwareId
+        public int FlashChipId
         {
             get; set;
         }

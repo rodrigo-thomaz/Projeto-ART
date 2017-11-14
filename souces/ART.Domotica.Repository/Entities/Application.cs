@@ -19,7 +19,7 @@
             get; set;
         }
 
-        public ICollection<HardwareInApplication> HardwaresInApplication
+        public ICollection<DeviceInApplication> DevicesInApplication
         {
             get; set;
         }

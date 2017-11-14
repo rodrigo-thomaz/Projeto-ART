@@ -21,12 +21,12 @@
             get; set;
         }
 
-        public HardwareInApplication HardwareInApplication
+        public DeviceInApplication DeviceInApplication
         {
             get; set;
         }
 
-        public Guid HardwareInApplicationId
+        public Guid DeviceInApplicationId
         {
             get; set;
         }

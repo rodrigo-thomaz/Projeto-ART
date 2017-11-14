@@ -126,7 +126,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForIoTResponseContract>>(TemperatureScaleConstants.GetAllForIoTCompletedQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
-            var queueName = GetDeviceQueueName(requestContract.HardwareId);
+            var queueName = GetDeviceQueueName(requestContract.DeviceId);
             _model.BasicPublish("", queueName, null, deviceBuffer);
 
             _logger.DebugLeave();

@@ -58,47 +58,47 @@ int NTPSettings::getTimeOffset()
 	return this->_timeOffset;
 }
 
-// HardwareSettings
+// DeviceSettings
 
-HardwareSettings::HardwareSettings(String hardwareId, String hardwareInApplicationId) {	
-  _hardwareId = hardwareId;
-  _hardwareInApplicationId = hardwareInApplicationId == "null" ? "" : hardwareInApplicationId;				
+DeviceSettings::DeviceSettings(String deviceId, String deviceInApplicationId) {	
+  _deviceId = deviceId;
+  _deviceInApplicationId = deviceInApplicationId == "null" ? "" : deviceInApplicationId;				
 }
 
-String HardwareSettings::getHardwareId()
+String DeviceSettings::getDeviceId()
 {	
-	return this->_hardwareId;
+	return this->_deviceId;
 }
 
-String HardwareSettings::getHardwareInApplicationId()
+String DeviceSettings::getDeviceInApplicationId()
 {	
-	return this->_hardwareInApplicationId;
+	return this->_deviceInApplicationId;
 }
 
-void HardwareSettings::insertInApplication(String json)
+void DeviceSettings::insertInApplication(String json)
 {	
 	StaticJsonBuffer<200> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		Serial.print("parse setHardwareInApplicationId failed: ");
+		Serial.print("parse insertInApplication failed: ");
 		Serial.println(json);
 		return;
 	}	
 
-	String hardwareInApplicationId = root["hardwareInApplicationId"];
+	String deviceInApplicationId = root["deviceInApplicationId"];
 
-	Serial.print("[ConfigurationManager.HardwareSettings] insertInApplication: ");
-	Serial.println(hardwareInApplicationId);
+	Serial.print("[ConfigurationManager.DeviceSettings] insertInApplication: ");
+	Serial.println(deviceInApplicationId);
 	
-	this->_hardwareInApplicationId = hardwareInApplicationId;
+	this->_deviceInApplicationId = deviceInApplicationId;
 }
 
-void HardwareSettings::deleteFromApplication()
+void DeviceSettings::deleteFromApplication()
 {	
-	Serial.println("[ConfigurationManager.HardwareSettings] deleteFromApplication");
-	this->_hardwareInApplicationId = "";
+	Serial.println("[ConfigurationManager.DeviceSettings] deleteFromApplication");
+	this->_deviceInApplicationId = "";
 }
 
 // ConfigurationManager
@@ -114,7 +114,7 @@ ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManag
 	
 	this->_brokerSettings = NULL;
 	this->_ntpSettings = NULL;
-	this->_hardwareSettings = NULL;
+	this->_deviceSettings = NULL;
 }
 
 void ConfigurationManager::begin()
@@ -141,9 +141,9 @@ NTPSettings* ConfigurationManager::getNTPSettings()
 	return this->_ntpSettings;
 }
 
-HardwareSettings* ConfigurationManager::getHardwareSettings()
+DeviceSettings* ConfigurationManager::getDeviceSettings()
 {	
-	return this->_hardwareSettings;
+	return this->_deviceSettings;
 }
 
 int ConfigurationManager::getPublishMessageInterval()
@@ -206,9 +206,9 @@ void ConfigurationManager::autoInitialize()
 				jsonObjectResponse["ntpUpdateInterval"], 
 				jsonObjectResponse["timeOffset"]);			
 			
-			this->_hardwareSettings = new HardwareSettings(
-				jsonObjectResponse["hardwareId"], 
-				jsonObjectResponse["hardwareInApplicationId"]);					
+			this->_deviceSettings = new DeviceSettings(
+				jsonObjectResponse["deviceId"], 
+				jsonObjectResponse["deviceInApplicationId"]);					
 			
 			int publishMessageInterval = jsonObjectResponse["publishMessageInterval"];	
 			this->_publishMessageInterval = publishMessageInterval;
@@ -233,10 +233,10 @@ void ConfigurationManager::autoInitialize()
 			Serial.print("NTP Time Offset: ");
 			Serial.println(this->_ntpSettings->getTimeOffset());
 			
-			Serial.print("HardwareId: ");
-			Serial.println(this->_hardwareSettings->getHardwareId());
-			Serial.print("HardwareInApplicationId: ");
-			Serial.println(this->_hardwareSettings->getHardwareInApplicationId());
+			Serial.print("DeviceId: ");
+			Serial.println(this->_deviceSettings->getDeviceId());
+			Serial.print("DeviceInApplicationId: ");
+			Serial.println(this->_deviceSettings->getDeviceInApplicationId());
 			
 			Serial.print("PublishMessageInterval: ");
 			Serial.println(this->_publishMessageInterval);

@@ -48,11 +48,11 @@ bool TemperatureScaleManager::begin()
 	
 	this->_beginning = true;
 	
-	String hardwareId = this->_configurationManager->getHardwareSettings()->getHardwareId();      
+	String deviceId = this->_configurationManager->getDeviceSettings()->getDeviceId();      
 
 	StaticJsonBuffer<TEMPERATURE_SCALE_GET_ALL_FOR_IOT_REQUEST_JSON_SIZE> JSONbuffer;
 	JsonObject& root = JSONbuffer.createObject();
-	root["hardwareId"] = hardwareId;
+	root["deviceId"] = deviceId;
 
 	int len = root.measureLength();
 	char result[len + 1]; 

@@ -6,12 +6,12 @@
     {
         #region Properties
 
-        public Guid HardwareId
+        public Guid DeviceId
         {
             get; set;
         }
 
-        public Guid HardwareInApplicationId
+        public Guid DeviceInApplicationId
         {
             get; set;
         }

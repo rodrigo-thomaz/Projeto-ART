@@ -26,7 +26,7 @@
         public async Task<List<ESPDevice>> GetAll()
         {
             return await _context.ESPDevice
-                .Include(x => x.HardwaresInApplication)
+                .Include(x => x.DevicesInApplication)
                 .ToListAsync();
         }
 
@@ -41,7 +41,7 @@
         public async Task<List<string>> GetExistingPins()
         {
             var data = await _context.ESPDevice
-                .Where(x => x.HardwaresInApplication.Any())
+                .Where(x => x.DevicesInApplication.Any())
                 .Select(x => x.Pin)
                 .ToListAsync();
             return data;
@@ -50,7 +50,7 @@
         public async Task<List<ESPDevice>> GetListNotInApplication()
         {
             var data = await _context.ESPDevice
-                .Where(x => !x.HardwaresInApplication.Any())
+                .Where(x => !x.DevicesInApplication.Any())
                 .ToListAsync();
 
             return data;
@@ -59,7 +59,7 @@
         public async Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress)
         {
             var data = await _context.ESPDevice
-               .Include(x => x.HardwaresInApplication)
+               .Include(x => x.DevicesInApplication)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)
                .Where(x => x.MacAddress == macAddress)               
@@ -70,8 +70,8 @@
 
         public async Task<List<ESPDevice>> GetListInApplication(Guid applicationUserId)
         {
-            IQueryable<ESPDevice> query = from hia in _context.HardwareInApplication
-                                                      join esp in _context.ESPDevice on hia.HardwareBaseId equals esp.Id
+            IQueryable<ESPDevice> query = from hia in _context.DeviceInApplication
+                                                      join esp in _context.ESPDevice on hia.DeviceBaseId equals esp.Id
                                                       join au in _context.ApplicationUser on hia.ApplicationId equals au.ApplicationId
                                                       where au.Id == applicationUserId
                                                       select esp;
@@ -80,8 +80,8 @@
 
             var ids = data.Select(x => x.Id);
 
-            await _context.HardwareInApplication
-                .Where(x => ids.Contains(x.HardwareBaseId))
+            await _context.DeviceInApplication
+                .Where(x => ids.Contains(x.DeviceBaseId))
                 .LoadAsync();
 
             return data;

@@ -4,6 +4,7 @@ app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', 'uiGrid
     var onGetByPinClick = function () {    
         $scope.searchingPin = true;
         espDeviceService.getByPin($scope.pin).then(function successCallback(response) {
+
             }, function errorCallback(response) {
                 $scope.searchingPin = false;
                 $scope.$apply();

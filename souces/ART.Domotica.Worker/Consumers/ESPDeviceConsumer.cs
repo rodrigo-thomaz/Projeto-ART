@@ -265,8 +265,8 @@
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
             var viewModel = new ESPDeviceDeleteFromApplicationModel
             {
-                HardwareId = data.Id,
-                HardwareInApplicationId = message.Contract.HardwareInApplicationId
+                DeviceId = data.Id,
+                DeviceInApplicationId = message.Contract.DeviceInApplicationId
             };
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);                        
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -354,7 +354,7 @@
                 //Enviando para o IoT
                 var nextFireTimeInSeconds = nextFireTimeUtc.Subtract(DateTimeOffset.Now).TotalSeconds;
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
-                var queueName = GetDeviceQueueName(contract.HardwareId);
+                var queueName = GetDeviceQueueName(contract.DeviceId);
                 var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(ESPDeviceConstants.UpdatePinIoTQueueName, contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
                 _model.BasicPublish("", queueName, null, deviceBuffer);

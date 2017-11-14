@@ -6,7 +6,7 @@
     {
         #region Properties
 
-        public Guid HardwareInApplicationId
+        public Guid DeviceInApplicationId
         {
             get; set;
         }

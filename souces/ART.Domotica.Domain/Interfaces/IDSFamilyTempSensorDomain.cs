@@ -15,7 +15,7 @@
 
         Task<List<DSFamilyTempSensorGetAllModel>> GetAll(AuthenticatedMessageContract message);
 
-        Task<List<DSFamilyTempSensorGetAllByHardwareInApplicationIdResponseContract>> GetAllByHardwareInApplicationId(Guid hardwareApplicationId);
+        Task<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseContract>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId);
 
         Task<List<DSFamilyTempSensorResolutionGetAllModel>> GetAllResolutions();
 
