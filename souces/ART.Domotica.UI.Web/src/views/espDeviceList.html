@@ -8,12 +8,13 @@
     <div class="wrapper-md">
         
         <div ng-controller="espDeviceListController">
-            <div class="row" ng-repeat="(key, device) in devices">
+            <div class="row" ng-repeat="(deviceKey, device) in devices">
                 <div class="col-md-6">
 
                     <div class="panel panel-default">
-                        <div class="panel-heading font-bold">Device {{key + 1}}</div>
+                        <div class="panel-heading font-bold">Device {{deviceKey + 1}}</div>
                         <div class="panel-body">
+
                             <form class="bs-example form-horizontal">
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label">Status</label>
@@ -39,6 +40,102 @@
                                     </div>
                                 </div>
                             </form>
+                            
+                            <tabset justified="true" class="tab-container">
+                                <tab heading="Sensor {{sensorKey + 1}}" ng-repeat="(sensorKey, sensor) in device.sensors">
+                                
+                                    <form class="bs-example form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Status</label>
+                                            <div class="col-lg-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i ng-class="sensor.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
+                                                    </span>
+                                                    <input type="text" class="form-control" readonly value="{{sensor.isConnected ? 'On-line' : 'Off-line'}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Temperatura</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" readonly value="{{sensor.temperature == null ? '' : sensor.temperature | number : 2}} °C">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Endereço</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" readonly uppercased ng-model="sensor.deviceAddress">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Família</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" readonly ng-model="sensor.family">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Resolução</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" readonly ng-model="sensor.resolution">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Escalas</label>
+                                            <div class="col-lg-8">
+                                                <select class="form-control m-b" ng-options="item.name for item in scales track by item.id" ng-model="sensor.selectedScale" ng-change="sensor.setScale()"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Resolução</label>
+                                            <div class="col-lg-8">
+                                                <select class="form-control m-b" ng-options="item.name for item in resolutions track by item.id" ng-model="sensor.selectedResolution" ng-change="sensor.setResolution()"></select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Alarme</label>
+                                            <div class="col-lg-8">
+                                                <div class="checkbox">
+                                                    <label class="i-checks">
+                                                        <input type="checkbox" checked><i></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Máximo</label>
+                                            <div class="col-lg-8">
+                                                <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeForceYMax()" ui-jq="TouchSpin" type="number" ng-model="sensor.forceY.max" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Mínimo</label>
+                                            <div class="col-lg-8">
+                                                <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeForceYMin()" ui-jq="TouchSpin" type="number" ng-model="sensor.forceY.min" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Alto</label>
+                                            <div class="col-lg-8">
+                                                <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeHighAlarm()" ui-jq="TouchSpin" type="number" ng-model="sensor.alarm.highAlarm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Baixo</label>
+                                            <div class="col-lg-8">
+                                                <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeLowAlarm()" ui-jq="TouchSpin" type="number" ng-model="sensor.alarm.lowAlarm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-lg-offset-4 col-lg-8">
+                                                <!--<slider ng-model="sensor.range.lowAlarm" ng-model-range="sensor.range.highAlarm" floor="{{sensor.range.min}}" ceiling="{{sensor.range.max}}" ng-change="sensor.changeAlarm()"></slider>-->
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </tab>
+                            </tabset>
+
                         </div>
                     </div>
 
