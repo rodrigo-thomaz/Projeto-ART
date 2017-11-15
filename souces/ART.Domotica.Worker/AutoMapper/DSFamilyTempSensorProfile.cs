@@ -38,6 +38,15 @@
             CreateMap<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetLowAlarmRequestContract, DSFamilyTempSensorSetLowAlarmRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetHighAlarmRequestContract, DSFamilyTempSensorSetHighAlarmRequestIoTContract>();
+
+            CreateMap<DSFamilyTempSensor, SetResolutionCompletedModel>()
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
+
+            CreateMap<DSFamilyTempSensor, SetLowAlarmCompletedModel>()
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
+
+            CreateMap<DSFamilyTempSensor, SetHighAlarmCompletedModel>()
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
         }
 
         #endregion Constructors

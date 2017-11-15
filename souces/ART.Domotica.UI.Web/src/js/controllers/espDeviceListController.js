@@ -15,9 +15,9 @@ app.controller('espDeviceItemController', ['$scope', '$timeout', '$log', 'EventD
 
 }]);
 
-app.controller('dsFamilyTempSensorItemController', ['$scope', '$timeout', '$log', 'EventDispatcher', 'espDeviceService', 'dsFamilyTempSensorService', 'temperatureScaleService', function ($scope, $timeout, $log, EventDispatcher, espDeviceService, dsFamilyTempSensorService, temperatureScaleService) {
+app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'EventDispatcher', 'espDeviceService', 'dsFamilyTempSensorService', 'temperatureScaleService', function ($scope, $rootScope, $timeout, $log, EventDispatcher, espDeviceService, dsFamilyTempSensorService, temperatureScaleService) {
 
-    $scope.sensor = {};
+    $scope.sensor = {};           
 
     $scope.scale = {
         availableScales: temperatureScaleService.scales,
@@ -29,25 +29,47 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$timeout', '$log'
         selectedResolution: {},
     };
 
+    $scope.changeScale = function () {
+        //temperatureScaleService.setScale();
+        alert($scope.scale.selectedScale.name);
+    };
+
+    $scope.changeResolution = function () {
+        dsFamilyTempSensorService.setResolution($scope.sensor.dsFamilyTempSensorId, $scope.resolution.selectedResolution.id);
+    };
+
     $scope.init = function (sensor) {
 
         $scope.sensor = sensor;
+        
+        $scope.scale.selectedScale = temperatureScaleService.getScaleById(sensor.temperatureScaleId);
 
-        for (var i = 0; i < $scope.scale.availableScales.length; i++) {
-            if ($scope.scale.availableScales[i].id == sensor.temperatureScaleId) {
-                $scope.scale.selectedScale = $scope.scale.availableScales[i];
-                break;
-            }
+        $scope.resolution.selectedResolution = dsFamilyTempSensorService.getResolutionById(sensor.dsFamilyTempSensorResolutionId);
+        
+    };
+
+    var clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted', function (event, data) {
+        if ($scope.sensor.dsFamilyTempSensorId == data.dsFamilyTempSensorId) {
+            alert($scope.sensor.dsFamilyTempSensorId);
         }
+        else {
+            alert("Passei aqui");
+        }        
+    });
 
-        for (var i = 0; i < $scope.resolution.availableResolutions.length; i++) {
-            if ($scope.resolution.availableResolutions[i].id == sensor.dsFamilyTempSensorResolutionId) {
-                $scope.resolution.selectedResolution = $scope.resolution.availableResolutions[i];
-                break;
-            }
-        }
-    }
+    $scope.$on('$destroy', function () {
+        clearOnSetResolutionCompleted();
+    });
 
-    $scope.selectedScale = {};
+    var onSetLowAlarmCompleted = function () {
+        alert("onSetLowAlarmCompleted");
+    };
+
+    var onSetHighAlarmCompleted = function () {
+        alert("onSetHighAlarmCompleted");
+    };
+
+    EventDispatcher.on('dsFamilyTempSensorService_onSetLowAlarmCompleted', onSetLowAlarmCompleted);
+    EventDispatcher.on('dsFamilyTempSensorService_onSetHighAlarmCompleted', onSetHighAlarmCompleted);  
 
 }]);

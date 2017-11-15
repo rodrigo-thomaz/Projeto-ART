@@ -51,7 +51,7 @@ namespace ART.Domotica.Domain.Services
             return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
 
-        public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message)
+        public async Task<DSFamilyTempSensor> SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message)
         {
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -70,9 +70,11 @@ namespace ART.Domotica.Domain.Services
             dsFamilyTempSensorEntity.DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolutionEntity.Id;
 
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
+
+            return dsFamilyTempSensorEntity;
         }
 
-        public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message)
+        public async Task<DSFamilyTempSensor> SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -84,9 +86,11 @@ namespace ART.Domotica.Domain.Services
             entity.HighAlarm = message.Contract.HighAlarm;
 
             await _dsFamilyTempSensorRepository.Update(entity);
+
+            return entity;
         }
 
-        public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract> message)
+        public async Task<DSFamilyTempSensor> SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -98,6 +102,8 @@ namespace ART.Domotica.Domain.Services
             entity.LowAlarm = message.Contract.LowAlarm;
 
             await _dsFamilyTempSensorRepository.Update(entity);
+
+            return entity;
         }
 
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)

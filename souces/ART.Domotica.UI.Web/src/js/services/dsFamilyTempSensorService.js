@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, $log, ngAuthSettings, EventDispatcher, stompService) {
+app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, $log, $rootScope, ngAuthSettings, EventDispatcher, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -43,6 +43,14 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
         });
     };
 
+    var getResolutionById = function (dsFamilyTempSensorResolutionId) {
+        for (var i = 0; i < serviceFactory.resolutions.length; i++) {
+            if (serviceFactory.resolutions[i].id == dsFamilyTempSensorResolutionId) {
+                return serviceFactory.resolutions[i];
+            }
+        }
+    };
+
     var onConnected = function () {
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
@@ -70,15 +78,15 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
     }
 
     var onSetResolutionCompleted = function (payload) {
-        
+        $rootScope.$emit("dsFamilyTempSensorService_onSetResolutionCompleted", JSON.parse(payload.body));
     }
 
     var onSetLowAlarmCompleted = function (payload) {
-
+        EventDispatcher.trigger('dsFamilyTempSensorService_onSetLowAlarmCompleted');
     }
 
     var onSetHighAlarmCompleted = function (payload) {
-
+        EventDispatcher.trigger('dsFamilyTempSensorService_onSetHighAlarmCompleted');
     }
 
     EventDispatcher.on('stompService_onConnected', onConnected);         
@@ -95,6 +103,8 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', 'ngAuthSettings', 'Ev
     serviceFactory.setResolution = setResolution;
     serviceFactory.setHighAlarm = setHighAlarm;
     serviceFactory.setLowAlarm = setLowAlarm;    
+
+    serviceFactory.getResolutionById = getResolutionById;
 
     return serviceFactory;
 
