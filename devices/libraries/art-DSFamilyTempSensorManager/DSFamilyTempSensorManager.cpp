@@ -357,10 +357,8 @@ void DSFamilyTempSensorManager::setAlarmOn(String json)
 	_dallas.setLowAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), lowAlarm);
 	_dallas.setHighAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), highAlarm);
 
-	Serial.print("[DSFamilyTempSensorManager::setAlarmOn] LowAlarm: ");
-	Serial.print(lowAlarm);
-	Serial.print(" HighAlarm: ");
-	Serial.println(highAlarm);
+	Serial.print("[DSFamilyTempSensorManager::setAlarmOn] ");
+	Serial.println(json);
 }
 
 void DSFamilyTempSensorManager::setAlarmOff(String json)
@@ -376,9 +374,10 @@ void DSFamilyTempSensorManager::setAlarmOff(String json)
 
 	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
 
-	//_dallas.setHasAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), value);
+	_dallas.setLowAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), -55);
+	_dallas.setHighAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), 125);
 
-	Serial.print("setHasAlarm=");
+	Serial.print("[DSFamilyTempSensorManager::setAlarmOff] ");
 	Serial.println(json);
 }
 
