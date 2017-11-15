@@ -8,8 +8,10 @@
     <div class="wrapper-md">
         
         <div ng-controller="espDeviceListController">
-            <div class="row" ng-repeat="(deviceKey, device) in devices">
-                <div class="col-md-6">
+
+            <div class="row" ng-repeat="(deviceKey, deviceItem) in devices">                
+
+                <div class="col-md-6" ng-controller="espDeviceItemController" ng-init="init(deviceItem)">
 
                     <div class="panel panel-default">
                         <div class="panel-heading font-bold">Device {{deviceKey + 1}}</div>
@@ -42,9 +44,9 @@
                             </form>
                             
                             <tabset justified="true" class="tab-container">
-                                <tab heading="Sensor {{sensorKey + 1}}" ng-repeat="(sensorKey, sensor) in device.sensors">
+                                <tab heading="Sensor {{sensorKey + 1}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
                                 
-                                    <form class="bs-example form-horizontal">
+                                    <form class="bs-example form-horizontal" ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Status</label>
                                             <div class="col-lg-8">
@@ -61,23 +63,29 @@
                                             <div class="col-lg-8">
                                                 <input type="text" class="form-control" readonly value="{{sensor.rawTemperature == null ? '' : sensor.rawTemperature | number : 2}} °C">
                                             </div>
+                                        </div>                                        
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Escalas</label>
+                                            <div class="col-lg-8">
+                                                <select class="form-control m-b" ng-options="item.name for item in scale.availableScales track by item.id" ng-model="scale.selectedScale"></select>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-4 control-label">Resolução</label>
+                                            <label class="col-lg-4 control-label">Resolução Sensor</label>
                                             <div class="col-lg-8">
                                                 <input type="text" class="form-control" readonly ng-model="sensor.dsFamilyTempSensorResolutionId">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-4 control-label">Escalas</label>
+                                            <label class="col-lg-4 control-label">Resolução</label>
                                             <div class="col-lg-8">
-                                                <select class="form-control m-b" ng-options="item.name for item in scales track by item.id" ng-model="sensor.selectedScale" ng-change="sensor.setScale()"></select>
+                                                <select class="form-control m-b" ng-options="item.name for item in resolution.availableResolutions track by item.id" ng-model="resolution.selectedResolution"></select>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-4 control-label">Resolução</label>
+                                            <label class="col-lg-4 control-label">Resolução selecionada</label>
                                             <div class="col-lg-8">
-                                                <select class="form-control m-b" ng-options="item.name for item in resolutions track by item.id" ng-model="sensor.selectedResolution" ng-change="sensor.setResolution()"></select>
+                                                <input type="text" class="form-control" readonly ng-model="sensor.selectedResolution.name">
                                             </div>
                                         </div>
                                         <div class="form-group">
