@@ -38,7 +38,8 @@
 
             CreateMap<DSFamilyTempSensorSetScaleRequestContract, DSFamilyTempSensorSetScaleRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>();
-            CreateMap<DSFamilyTempSensorSetHasAlarmRequestContract, DSFamilyTempSensorSetHasAlarmRequestIoTContract>();
+            CreateMap<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnRequestIoTContract>();
+            CreateMap<DSFamilyTempSensorSetAlarmOffRequestContract, DSFamilyTempSensorSetAlarmOffRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetLowAlarmRequestContract, DSFamilyTempSensorSetLowAlarmRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetHighAlarmRequestContract, DSFamilyTempSensorSetHighAlarmRequestIoTContract>();
 
@@ -46,9 +47,13 @@
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.DSFamilyTempSensorResolutionId));
 
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetHasAlarmCompletedModel>()
+            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetAlarmOnCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.HasAlarm, m => m.MapFrom(x => x.HasAlarm));
+                .ForMember(vm => vm.LowAlarm, m => m.MapFrom(x => x.LowAlarm))
+                .ForMember(vm => vm.HighAlarm, m => m.MapFrom(x => x.HighAlarm));
+
+            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetAlarmOffCompletedModel>()
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetLowAlarmCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))

@@ -49,12 +49,21 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task SetHasAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHasAlarmRequestContract> message)
+        public async Task SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetHasAlarmQueueName, null, payload);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmOnQueueName, null, payload);
+            });
+        }
+
+        public async Task SetAlarmOff(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOffRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmOffQueueName, null, payload);
             });
         }
 
@@ -104,7 +113,14 @@ namespace ART.Domotica.Producer.Services
                , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetHasAlarmQueueName
+                  queue: DSFamilyTempSensorConstants.SetAlarmOnQueueName
+                , durable: true
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueDeclare(
+                  queue: DSFamilyTempSensorConstants.SetAlarmOffQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false

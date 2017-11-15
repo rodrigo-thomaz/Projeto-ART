@@ -1,17 +1,12 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Model
 {
     using System;
 
-    public class DSFamilyTempSensorSetHasAlarmRequestContract
+    public class DSFamilyTempSensorSetAlarmOffCompletedModel
     {
         #region Properties
 
         public Guid DSFamilyTempSensorId
-        {
-            get; set;
-        }
-
-        public bool HasAlarm
         {
             get; set;
         }

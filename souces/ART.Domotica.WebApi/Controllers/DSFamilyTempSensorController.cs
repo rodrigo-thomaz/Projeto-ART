@@ -82,20 +82,38 @@ namespace ART.Domotica.WebApi.Controllers
         }
 
         /// <summary>
-        /// Liga ou desliga o alarme de um sensor
+        /// Liga o alarme de um sensor
         /// </summary>
         /// <remarks>
-        /// Liga ou desliga o alarme de um sensor
+        /// Liga o alarme de um sensor
         /// </remarks>
         /// <param name="contract">contrato do request</param>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("setHasAlarm")]
+        [Route("setAlarmOn")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetHasAlarm(DSFamilyTempSensorSetHasAlarmRequestContract contract)
+        public async Task<IHttpActionResult> SetAlarmOn(DSFamilyTempSensorSetAlarmOnRequestContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetHasAlarm(CreateMessage(contract));
+            await _dsFamilyTempSensorProducer.SetAlarmOn(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
+        /// Desliga o alarme de um sensor
+        /// </summary>
+        /// <remarks>
+        /// Desliga o alarme de um sensor
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setAlarmOff")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetAlarmOff(DSFamilyTempSensorSetAlarmOffRequestContract contract)
+        {
+            await _dsFamilyTempSensorProducer.SetAlarmOff(CreateMessage(contract));
             return Ok();
         }
 

@@ -102,6 +102,7 @@ class DSFamilyTempSensorManager
 				
 	void 								setScale(String json);
 	void 								setResolution(String json);
+	void 								setHasAlarm(String json);
 	void 								setLowAlarm(String json);
 	void 								setHighAlarm(String json);
 				

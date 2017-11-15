@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetHasAlarmCompletedModel
+    public class DSFamilyTempSensorSetAlarmOnCompletedModel
     {
         #region Properties
 
@@ -11,7 +11,12 @@
             get; set;
         }
 
-        public bool HasAlarm
+        public decimal LowAlarm
+        {
+            get; set;
+        }
+
+        public decimal HighAlarm
         {
             get; set;
         }

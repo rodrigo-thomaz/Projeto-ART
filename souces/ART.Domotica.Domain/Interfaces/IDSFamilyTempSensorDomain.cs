@@ -26,7 +26,9 @@
 
         Task<DSFamilyTempSensor> SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message);
 
-        Task<DSFamilyTempSensor> SetHasAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHasAlarmRequestContract> message);
+        Task<DSFamilyTempSensor> SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message);
+
+        Task<DSFamilyTempSensor> SetAlarmOff(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOffRequestContract> message);
 
         #endregion Methods
     }

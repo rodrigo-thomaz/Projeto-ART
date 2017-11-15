@@ -33,12 +33,22 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         });
     };
 
-    var setHasAlarm = function (dsFamilyTempSensorId, hasAlarm) {
+    var setAlarmOn = function (dsFamilyTempSensorId, lowAlarm, highAlarm) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
-            hasAlarm: hasAlarm,
+            lowAlarm: lowAlarm,
+            highAlarm: highAlarm,
         }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setHasAlarm', data).then(function (results) {
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setAlarmOn', data).then(function (results) {
+            return results;
+        });
+    };
+
+    var setAlarmOff = function (dsFamilyTempSensorId) {
+        var data = {
+            dsFamilyTempSensorId: dsFamilyTempSensorId,
+        }
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setAlarmOff', data).then(function (results) {
             return results;
         });
     };
@@ -77,7 +87,8 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsViewCompleted', onGetAllResolutionsCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetScaleViewCompleted', onSetScaleCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetHasAlarmViewCompleted', onSetHasAlarmCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmOnViewCompleted', onSetAlarmOnCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmOffViewCompleted', onSetAlarmOffCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetLowAlarmViewCompleted', onSetLowAlarmCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetHighAlarmViewCompleted', onSetHighAlarmCompleted);
 
@@ -109,9 +120,14 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         $rootScope.$emit('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
     }
 
-    var onSetHasAlarmCompleted = function (payload) {
+    var onSetAlarmOnCompleted = function (payload) {
         var dsFamilyTempSensorId = JSON.parse(payload.body).dsFamilyTempSensorId;
-        $rootScope.$emit('dsFamilyTempSensorService_onSetHasAlarmCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
+        $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
+    }
+
+    var onSetAlarmOffCompleted = function (payload) {
+        var dsFamilyTempSensorId = JSON.parse(payload.body).dsFamilyTempSensorId;
+        $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmOffCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
     }
 
     var onSetLowAlarmCompleted = function (payload) {
@@ -137,7 +153,8 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     serviceFactory.setScale = setScale;
     serviceFactory.setResolution = setResolution;
-    serviceFactory.setHasAlarm = setHasAlarm;
+    serviceFactory.setAlarmOn = setAlarmOn;
+    serviceFactory.setAlarmOff = setAlarmOff;
     serviceFactory.setHighAlarm = setHighAlarm;    
     serviceFactory.setLowAlarm = setLowAlarm;    
 

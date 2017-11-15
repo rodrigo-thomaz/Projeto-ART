@@ -27,7 +27,8 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _getAllResolutionsConsumer;
         private readonly EventingBasicConsumer _setScaleConsumer;
         private readonly EventingBasicConsumer _setResolutionConsumer;
-        private readonly EventingBasicConsumer _setHasAlarmConsumer;
+        private readonly EventingBasicConsumer _setAlarmOnConsumer;
+        private readonly EventingBasicConsumer _setAlarmOffConsumer;
         private readonly EventingBasicConsumer _setHighAlarmConsumer;
         private readonly EventingBasicConsumer _setLowAlarmConsumer;
 
@@ -45,7 +46,8 @@ namespace ART.Domotica.Worker.Consumers
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
             _setScaleConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
-            _setHasAlarmConsumer = new EventingBasicConsumer(_model);
+            _setAlarmOnConsumer = new EventingBasicConsumer(_model);
+            _setAlarmOffConsumer = new EventingBasicConsumer(_model);
             _setHighAlarmConsumer = new EventingBasicConsumer(_model);
             _setLowAlarmConsumer = new EventingBasicConsumer(_model);
 
@@ -84,7 +86,14 @@ namespace ART.Domotica.Worker.Consumers
                , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetHasAlarmQueueName
+                  queue: DSFamilyTempSensorConstants.SetAlarmOnQueueName
+                , durable: true
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueDeclare(
+                  queue: DSFamilyTempSensorConstants.SetAlarmOffQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
@@ -128,7 +137,8 @@ namespace ART.Domotica.Worker.Consumers
             _getAllResolutionsConsumer.Received += GetAllResolutionsReceived;
             _setResolutionConsumer.Received += SetResolutionReceived;
             _setScaleConsumer.Received += SetScaleReceived;
-            _setHasAlarmConsumer.Received += SetHasAlarmReceived;
+            _setAlarmOnConsumer.Received += SetAlarmOnReceived;
+            _setAlarmOffConsumer.Received += SetAlarmOffReceived;
             _setHighAlarmConsumer.Received += SetHighAlarmReceived;
             _setLowAlarmConsumer.Received += SetLowAlarmReceived;
 
@@ -136,7 +146,8 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetScaleQueueName, false, _setScaleConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetResolutionQueueName, false, _setResolutionConsumer);
-            _model.BasicConsume(DSFamilyTempSensorConstants.SetHasAlarmQueueName, false, _setHasAlarmConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.SetAlarmOnQueueName, false, _setAlarmOnConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.SetAlarmOffQueueName, false, _setAlarmOffConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
         }
@@ -282,31 +293,62 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugLeave();
         }
 
-        public void SetHasAlarmReceived(object sender, BasicDeliverEventArgs e)
+        public void SetAlarmOnReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetHasAlarmReceivedAsync(sender, e));
+            Task.WaitAll(SetAlarmOnReceivedAsync(sender, e));
         }
 
-        public async Task SetHasAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetAlarmOnReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetHasAlarmRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetHasAlarm(message);
+            var data = await domain.SetAlarmOn(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetHasAlarmCompletedModel>(data);
+            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetAlarmOnCompletedModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetHasAlarmViewCompletedQueueName);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
-            var iotContract = Mapper.Map<DSFamilyTempSensorSetHasAlarmRequestContract, DSFamilyTempSensorSetHasAlarmRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetHasAlarmRequestIoTContract>(DSFamilyTempSensorConstants.SetHasAlarmIoTQueueName, iotContract);
+            var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmOnRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmOnIoTQueueName, iotContract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            _model.BasicPublish("", queueName, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetAlarmOffReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetAlarmOffReceivedAsync(sender, e));
+        }
+
+        public async Task SetAlarmOffReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOffRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
+            var data = await domain.SetAlarmOff(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetAlarmOffCompletedModel>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmOffViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            //Enviando para o Iot
+            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
+            var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmOffRequestContract, DSFamilyTempSensorSetAlarmOffRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmOffRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmOffIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             _model.BasicPublish("", queueName, null, deviceBuffer);
 

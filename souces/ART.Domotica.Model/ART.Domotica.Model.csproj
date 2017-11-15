@@ -41,7 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetDetailModel.cs" />
-    <Compile Include="DSFamilyTempSensorSetHasAlarmCompletedModel.cs" />
+    <Compile Include="DSFamilyTempSensorSetAlarmOnCompletedModel.cs" />
+    <Compile Include="DSFamilyTempSensorSetAlarmOffCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetScaleCompletedModel.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
