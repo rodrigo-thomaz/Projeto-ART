@@ -37,8 +37,27 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         dsFamilyTempSensorService.setResolution($scope.sensor.dsFamilyTempSensorId, $scope.resolution.selectedResolution.id);
     };
 
-    $scope.hasLowAlarm = true;
-    $scope.hasHighAlarm = true;
+    $scope.selectedHasLowAlarm = false;
+    $scope.selectedHasHighAlarm = false;
+
+    $scope.selectedLowAlarm = 0;
+    $scope.selectedHighAlarm = 0;
+
+    $scope.changeHasLowAlarm = function () {
+        
+    };
+
+    $scope.changeHasHighAlarm = function () {
+
+    };
+
+    $scope.changeLowAlarm = function () {
+        dsFamilyTempSensorService.setLowAlarm($scope.sensor.dsFamilyTempSensorId, $scope.selectedLowAlarm);
+    };
+
+    $scope.changeHighAlarm = function () {
+        dsFamilyTempSensorService.setHighAlarm($scope.sensor.dsFamilyTempSensorId, $scope.selectedHighAlarm);
+    };
 
     $scope.init = function (sensor) {
 
@@ -46,6 +65,12 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         
         $scope.scale.selectedScale = temperatureScaleService.getScaleById(sensor.temperatureScaleId);
         $scope.resolution.selectedResolution = dsFamilyTempSensorService.getResolutionById(sensor.dsFamilyTempSensorResolutionId);
+
+        $scope.selectedHasLowAlarm = sensor.hasLowAlarm;
+        $scope.selectedHasHighAlarm = sensor.hasHighAlarm;
+
+        $scope.selectedLowAlarm = sensor.lowAlarm;
+        $scope.selectedHighAlarm = sensor.highAlarm;
 
         clearOnSetScaleCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetScaleCompleted);
         clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetResolutionCompleted);
