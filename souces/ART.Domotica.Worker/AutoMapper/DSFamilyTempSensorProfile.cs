@@ -35,6 +35,7 @@
                 .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.DSFamilyTempSensorResolution.Bits))
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
 
+            CreateMap<DSFamilyTempSensorSetScaleRequestContract, DSFamilyTempSensorSetScaleRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetLowAlarmRequestContract, DSFamilyTempSensorSetLowAlarmRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetHighAlarmRequestContract, DSFamilyTempSensorSetHighAlarmRequestIoTContract>();
@@ -50,6 +51,10 @@
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetHighAlarmCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.HighAlarm, m => m.MapFrom(x => x.HighAlarm));
+
+            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetScaleCompletedModel>()
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.TemperatureScaleId, m => m.MapFrom(x => x.TemperatureScaleId));
         }
 
         #endregion Constructors

@@ -43,6 +43,7 @@
     <Compile Include="DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetHighAlarmRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmRequestIoTContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetScaleRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionRequestIoTContract.cs" />
     <Compile Include="ESPDeviceInsertInApplicationResponseIoTContract.cs" />
     <Compile Include="ESPDeviceUpdatePinsResponseIoTContract.cs" />

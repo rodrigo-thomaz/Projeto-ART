@@ -64,6 +64,24 @@ namespace ART.Domotica.WebApi.Controllers
         }
 
         /// <summary>
+        /// Altera a escala de um sensor
+        /// </summary>
+        /// <remarks>
+        /// Altera a escala de um sensor
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setScale")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetScale(DSFamilyTempSensorSetScaleRequestContract contract)
+        {
+            await _dsFamilyTempSensorProducer.SetScale(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
         /// Altera o alarme alto de um sensor
         /// </summary>
         /// <remarks>

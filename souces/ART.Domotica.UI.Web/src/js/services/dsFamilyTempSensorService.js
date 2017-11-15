@@ -13,6 +13,16 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         });
     };
     
+    var setScale = function (dsFamilyTempSensorId, temperatureScaleId) {
+        var data = {
+            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            temperatureScaleId: temperatureScaleId,
+        }
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setScale', data).then(function (results) {
+            return results;
+        });
+    };
+
     var setResolution = function (dsFamilyTempSensorId, dsFamilyTempSensorResolutionId) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
@@ -55,6 +65,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsViewCompleted', onGetAllResolutionsCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetScaleViewCompleted', onSetScaleCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetLowAlarmViewCompleted', onSetLowAlarmCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetHighAlarmViewCompleted', onSetHighAlarmCompleted);
@@ -75,6 +86,11 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         for (var i = 0; i < data.length; i++) {
             serviceFactory.resolutions.push(data[i]);
         }
+    }
+
+    var onSetScaleCompleted = function (payload) {
+        var dsFamilyTempSensorId = JSON.parse(payload.body).dsFamilyTempSensorId;
+        $rootScope.$emit('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
     }
 
     var onSetResolutionCompleted = function (payload) {
@@ -103,6 +119,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     serviceFactory.resolutions = [];
     serviceFactory.sensors = [];
 
+    serviceFactory.setScale = setScale;
     serviceFactory.setResolution = setResolution;
     serviceFactory.setHighAlarm = setHighAlarm;
     serviceFactory.setLowAlarm = setLowAlarm;    

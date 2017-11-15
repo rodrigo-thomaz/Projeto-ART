@@ -21,6 +21,7 @@ namespace ART.Domotica.Domain.Services
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
+        private readonly ITemperatureScaleRepository _temperatureScaleRepository;
 
         #endregion
 
@@ -34,6 +35,7 @@ namespace ART.Domotica.Domain.Services
             _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);
             _espDeviceRepository = new ESPDeviceRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
+            _temperatureScaleRepository = new TemperatureScaleRepository(context);
         }
 
         #endregion
@@ -51,11 +53,34 @@ namespace ART.Domotica.Domain.Services
             return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
 
-        public async Task<DSFamilyTempSensor> SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message)
+        public async Task<DSFamilyTempSensor> SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message)
         {
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
             if(dsFamilyTempSensorEntity == null)
+            {
+                throw new Exception("DSFamilyTempSensor not found");
+            }
+
+            var temperatureScaleEntity = await _temperatureScaleRepository.GetById(message.Contract.TemperatureScaleId);
+
+            if (temperatureScaleEntity == null)
+            {
+                throw new Exception("TemperatureScale not found");
+            }
+
+            dsFamilyTempSensorEntity.TemperatureScaleId = temperatureScaleEntity.Id;
+
+            await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
+
+            return dsFamilyTempSensorEntity;
+        }
+
+        public async Task<DSFamilyTempSensor> SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message)
+        {
+            var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
+
+            if (dsFamilyTempSensorEntity == null)
             {
                 throw new Exception("DSFamilyTempSensor not found");
             }
