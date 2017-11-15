@@ -9,6 +9,8 @@
         
         <div ng-controller="espDeviceListController">
 
+            <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
+
             <div class="row" ng-repeat="(deviceKey, deviceItem) in devices">                
 
                 <div class="col-md-6" ng-controller="espDeviceItemController" ng-init="init(deviceItem)">

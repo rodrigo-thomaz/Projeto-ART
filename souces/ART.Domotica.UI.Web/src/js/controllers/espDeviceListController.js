@@ -15,7 +15,7 @@ app.controller('espDeviceItemController', ['$scope', '$timeout', '$log', 'EventD
 
 }]);
 
-app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'EventDispatcher', 'espDeviceService', 'dsFamilyTempSensorService', 'temperatureScaleService', function ($scope, $rootScope, $timeout, $log, EventDispatcher, espDeviceService, dsFamilyTempSensorService, temperatureScaleService) {
+app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorService', 'temperatureScaleService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorService, temperatureScaleService) {
 
     $scope.sensor = {};           
 
@@ -62,15 +62,15 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     var onSetResolutionCompleted = function (event, data) {
         $scope.sensor.dsFamilyTempSensorResolutionId = data.dsFamilyTempSensorResolutionId;
-        alert("onSetResolutionCompleted");
+        toaster.pop('success', 'Sucesso', 'resolução alterada');
     };
 
     var onSetLowAlarmCompleted = function (event, data) {
-        alert("onSetLowAlarmCompleted");
+        toaster.pop('success', 'Sucesso', 'alarme baixo alterado');
     };
 
     var onSetHighAlarmCompleted = function (event, data) {
-        alert("onSetHighAlarmCompleted");
+        toaster.pop('success', 'Sucesso', 'alarme alto alterado');
     }; 
 
 }]);

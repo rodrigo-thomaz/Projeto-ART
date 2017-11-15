@@ -41,7 +41,8 @@ angular.module('app')
                   templateUrl: 'views/espDeviceList.html',
                   resolve: load([
                       'vr.directives.slider',
-                      'ui.select',               
+                      'ui.select',   
+                      'toaster',
                       'js/services/temperatureScaleService.js',
                       'js/services/dsFamilyTempSensorService.js',
                       'js/services/espDeviceService.js',
