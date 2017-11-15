@@ -182,7 +182,7 @@ namespace ART.Domotica.Worker.Consumers
             var data = await domain.SetResolution(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, SetResolutionCompletedModel>(data);
+            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetResolutionViewCompletedQueueName);
@@ -213,7 +213,7 @@ namespace ART.Domotica.Worker.Consumers
             var data = await domain.SetHighAlarm(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, SetHighAlarmCompletedModel>(data);
+            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetHighAlarmCompletedModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetHighAlarmViewCompletedQueueName);
@@ -244,7 +244,7 @@ namespace ART.Domotica.Worker.Consumers
             var data = await domain.SetLowAlarm(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, SetLowAlarmCompletedModel>(data);
+            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetLowAlarmCompletedModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetLowAlarmViewCompletedQueueName);

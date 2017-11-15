@@ -41,14 +41,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetDetailModel.cs" />
+    <Compile Include="DSFamilyTempSensorSetLowAlarmCompletedModel.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
     <Compile Include="ESPDeviceAdminDetailModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />
     <Compile Include="ESPDeviceDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorResolutionDetailModel.cs" />
-    <Compile Include="SetHighAlarmCompletedModel.cs" />
-    <Compile Include="SetLowAlarmCompletedModel.cs" />
-    <Compile Include="SetResolutionCompletedModel.cs" />
+    <Compile Include="DSFamilyTempSensorSetHighAlarmCompletedModel.cs" />
+    <Compile Include="DSFamilyTempSensorSetResolutionCompletedModel.cs" />
     <Compile Include="TemperatureScaleGetAllModel.cs" />
     <Compile Include="ApplicationGetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

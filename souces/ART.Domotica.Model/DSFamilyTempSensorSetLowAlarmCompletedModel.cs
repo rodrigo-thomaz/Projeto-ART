@@ -2,11 +2,13 @@
 
 namespace ART.Domotica.Model
 {
-    public class SetHighAlarmCompletedModel
+    public class DSFamilyTempSensorSetLowAlarmCompletedModel
     {
         public Guid DSFamilyTempSensorId
         {
             get; set;
         }
+
+        public decimal? LowAlarm { get; set; }
     }
 }

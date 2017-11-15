@@ -43,7 +43,6 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         $scope.sensor = sensor;
         
         $scope.scale.selectedScale = temperatureScaleService.getScaleById(sensor.temperatureScaleId);
-
         $scope.resolution.selectedResolution = dsFamilyTempSensorService.getResolutionById(sensor.dsFamilyTempSensorResolutionId);
 
         clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetResolutionCompleted);
@@ -62,15 +61,15 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     });
 
     var onSetResolutionCompleted = function (event, data) {
-        //$scope.sensor
+        $scope.sensor.dsFamilyTempSensorResolutionId = data.dsFamilyTempSensorResolutionId;
         alert("onSetResolutionCompleted");
     };
 
-    var onSetLowAlarmCompleted = function () {
+    var onSetLowAlarmCompleted = function (event, data) {
         alert("onSetLowAlarmCompleted");
     };
 
-    var onSetHighAlarmCompleted = function () {
+    var onSetHighAlarmCompleted = function (event, data) {
         alert("onSetHighAlarmCompleted");
     }; 
 

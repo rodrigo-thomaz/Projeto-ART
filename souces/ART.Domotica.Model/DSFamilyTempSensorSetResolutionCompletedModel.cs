@@ -2,11 +2,13 @@
 
 namespace ART.Domotica.Model
 {
-    public class SetResolutionCompletedModel
+    public class DSFamilyTempSensorSetResolutionCompletedModel
     {
         public Guid DSFamilyTempSensorId
         {
             get; set;
         }
+
+        public byte DSFamilyTempSensorResolutionId { get; set; }
     }
 }
