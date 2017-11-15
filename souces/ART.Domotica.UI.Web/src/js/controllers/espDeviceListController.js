@@ -37,6 +37,9 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         dsFamilyTempSensorService.setResolution($scope.sensor.dsFamilyTempSensorId, $scope.resolution.selectedResolution.id);
     };
 
+    $scope.hasLowAlarm = true;
+    $scope.hasHighAlarm = true;
+
     $scope.init = function (sensor) {
 
         $scope.sensor = sensor;
