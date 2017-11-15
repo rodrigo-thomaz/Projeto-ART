@@ -6,22 +6,12 @@
     {
         #region Properties
 
-        public string DeviceAddress
-        {
-            get; set;
-        }
-
         public Guid DSFamilyTempSensorId
         {
             get; set;
         }
 
         public byte DSFamilyTempSensorResolutionId
-        {
-            get; set;
-        }
-
-        public string Family
         {
             get; set;
         }
