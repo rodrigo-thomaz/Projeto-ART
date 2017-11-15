@@ -78,15 +78,18 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     }
 
     var onSetResolutionCompleted = function (payload) {
-        $rootScope.$emit("dsFamilyTempSensorService_onSetResolutionCompleted", JSON.parse(payload.body));
+        var dsFamilyTempSensorId = JSON.parse(payload.body).dsFamilyTempSensorId;
+        $rootScope.$emit('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
     }
 
     var onSetLowAlarmCompleted = function (payload) {
-        EventDispatcher.trigger('dsFamilyTempSensorService_onSetLowAlarmCompleted');
+        var dsFamilyTempSensorId = JSON.parse(payload.body).dsFamilyTempSensorId;
+        $rootScope.$emit('dsFamilyTempSensorService_onSetLowAlarmCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
     }
 
     var onSetHighAlarmCompleted = function (payload) {
-        EventDispatcher.trigger('dsFamilyTempSensorService_onSetHighAlarmCompleted');
+        var dsFamilyTempSensorId = JSON.parse(payload.body).dsFamilyTempSensorId;
+        $rootScope.$emit('dsFamilyTempSensorService_onSetHighAlarmCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
     }
 
     EventDispatcher.on('stompService_onConnected', onConnected);         

@@ -45,21 +45,26 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         $scope.scale.selectedScale = temperatureScaleService.getScaleById(sensor.temperatureScaleId);
 
         $scope.resolution.selectedResolution = dsFamilyTempSensorService.getResolutionById(sensor.dsFamilyTempSensorResolutionId);
-        
-    };
 
-    var clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted', function (event, data) {
-        if ($scope.sensor.dsFamilyTempSensorId == data.dsFamilyTempSensorId) {
-            alert($scope.sensor.dsFamilyTempSensorId);
-        }
-        else {
-            alert("Passei aqui");
-        }        
-    });
+        clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetResolutionCompleted);
+        clearOnSetLowAlarmCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetLowAlarmCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetLowAlarmCompleted);
+        clearOnSetHighAlarmCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetHighAlarmCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetHighAlarmCompleted);
+    };    
 
+    var clearOnSetResolutionCompleted = null;
+    var clearOnSetLowAlarmCompleted = null;
+    var clearOnSetHighAlarmCompleted = null;
+    
     $scope.$on('$destroy', function () {
         clearOnSetResolutionCompleted();
+        clearOnSetLowAlarmCompleted();
+        clearOnSetHighAlarmCompleted();
     });
+
+    var onSetResolutionCompleted = function (event, data) {
+        //$scope.sensor
+        alert("onSetResolutionCompleted");
+    };
 
     var onSetLowAlarmCompleted = function () {
         alert("onSetLowAlarmCompleted");
@@ -67,9 +72,6 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     var onSetHighAlarmCompleted = function () {
         alert("onSetHighAlarmCompleted");
-    };
-
-    EventDispatcher.on('dsFamilyTempSensorService_onSetLowAlarmCompleted', onSetLowAlarmCompleted);
-    EventDispatcher.on('dsFamilyTempSensorService_onSetHighAlarmCompleted', onSetHighAlarmCompleted);  
+    }; 
 
 }]);
