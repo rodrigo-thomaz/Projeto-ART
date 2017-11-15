@@ -16,6 +16,10 @@
             get; set;
         }
 
+        public bool HasHighAlarm { get; set; }
+
+        public bool HasLowAlarm { get; set; }
+
         public decimal HighAlarm
         {
             get; set;

@@ -145,6 +145,10 @@
                     TemperatureScale = celsiusTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
+                    LowAlarm = -55,
+                    HighAlarm = 127,
+                    HasLowAlarm = false,
+                    HasHighAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_1);
@@ -165,6 +169,10 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    LowAlarm = -55,
+                    HighAlarm = 127,
+                    HasLowAlarm = false,
+                    HasHighAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_1);
@@ -185,6 +193,10 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    LowAlarm = -55,
+                    HighAlarm = 127,
+                    HasLowAlarm = false,
+                    HasHighAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_2);
@@ -205,6 +217,10 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    LowAlarm = -55,
+                    HighAlarm = 127,
+                    HasLowAlarm = false,
+                    HasHighAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_1);
@@ -225,6 +241,10 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    LowAlarm = -55,
+                    HighAlarm = 127,
+                    HasLowAlarm = false,
+                    HasHighAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_2);
