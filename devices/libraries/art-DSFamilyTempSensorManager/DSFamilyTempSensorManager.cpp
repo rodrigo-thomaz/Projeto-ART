@@ -339,21 +339,44 @@ void DSFamilyTempSensorManager::setResolution(String json)
 	Serial.println(json);
 }
 
-void DSFamilyTempSensorManager::setHasAlarm(String json)
+void DSFamilyTempSensorManager::setAlarmOn(String json)
 {
 	StaticJsonBuffer<300> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(json);
 
 	if (!root.success()) {
-		Serial.println("parse setHasAlarm failed");
+		Serial.println("parse setAlarmOn failed");
 		return;
 	}
 
 	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
-	int value = root["hasAlarm"];
+	int lowAlarm = root["lowAlarm"];
+	int highAlarm = root["highAlarm"];	
 
-	_dallas.setHasAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), value);
+	_dallas.setLowAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), lowAlarm);
+	_dallas.setHighAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), highAlarm);
+
+	Serial.print("[DSFamilyTempSensorManager::setAlarmOn] LowAlarm: ");
+	Serial.print(lowAlarm);
+	Serial.print(" HighAlarm: ");
+	Serial.println(highAlarm);
+}
+
+void DSFamilyTempSensorManager::setAlarmOff(String json)
+{
+	StaticJsonBuffer<300> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+
+	if (!root.success()) {
+		Serial.println("parse setAlarmOff failed");
+		return;
+	}
+
+	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
+
+	//_dallas.setHasAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), value);
 
 	Serial.print("setHasAlarm=");
 	Serial.println(json);
