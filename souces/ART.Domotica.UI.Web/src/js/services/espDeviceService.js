@@ -71,7 +71,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
     var updateSensors = function (oldSensors, newSensors) {
         for (var i = 0; i < oldSensors.length; i++) {
             for (var j = 0; j < newSensors.length; j++) {
-                if (oldSensors[i].dsFamilyTempSensorId = newSensors[j].dsFamilyTempSensorId) {
+                if (oldSensors[i].dsFamilyTempSensorId == newSensors[j].dsFamilyTempSensorId) {
                     oldSensors[i].isConnected = newSensors[j].isConnected;
                     oldSensors[i].rawTemperature = newSensors[j].rawTemperature;
                     break;
