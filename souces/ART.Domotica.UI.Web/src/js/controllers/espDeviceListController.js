@@ -19,6 +19,10 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     $scope.sensor = {};           
 
+    $scope.selectedHasAlarm = false;
+    $scope.selectedLowAlarm = 0;
+    $scope.selectedHighAlarm = 0;
+
     $scope.scale = {
         availableScales: temperatureScaleService.scales,
         selectedScale: {},
@@ -35,20 +39,10 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     $scope.changeResolution = function () {
         dsFamilyTempSensorService.setResolution($scope.sensor.dsFamilyTempSensorId, $scope.resolution.selectedResolution.id);
-    };
+    };    
 
-    $scope.selectedHasLowAlarm = false;
-    $scope.selectedHasHighAlarm = false;
-
-    $scope.selectedLowAlarm = 0;
-    $scope.selectedHighAlarm = 0;
-
-    $scope.changeHasLowAlarm = function () {
+    $scope.changeHasAlarm = function () {
         
-    };
-
-    $scope.changeHasHighAlarm = function () {
-
     };
 
     $scope.changeLowAlarm = function () {

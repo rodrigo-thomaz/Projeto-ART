@@ -55,7 +55,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var getResolutionById = function (dsFamilyTempSensorResolutionId) {
         for (var i = 0; i < serviceFactory.resolutions.length; i++) {
-            if (serviceFactory.resolutions[i].id == dsFamilyTempSensorResolutionId) {
+            if (serviceFactory.resolutions[i].id === dsFamilyTempSensorResolutionId) {
                 return serviceFactory.resolutions[i];
             }
         }

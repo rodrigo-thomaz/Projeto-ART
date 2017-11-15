@@ -24,12 +24,7 @@
             get; set;
         }
 
-        public bool HasHighAlarm
-        {
-            get; set;
-        }
-
-        public bool HasLowAlarm
+        public bool HasAlarm
         {
             get; set;
         }

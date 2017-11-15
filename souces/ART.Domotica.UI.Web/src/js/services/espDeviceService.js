@@ -59,7 +59,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < serviceFactory.devices.length; i++) {
             var device = serviceFactory.devices[i];
-            if (device.deviceInApplicationId == data.deviceInApplicationId) {
+            if (device.deviceInApplicationId === data.deviceInApplicationId) {
                 device.epochTimeUtc = data.epochTimeUtc;
                 device.wifiQuality = data.wifiQuality;
                 updateSensors(device.sensors, data.dsFamilyTempSensors);
@@ -71,7 +71,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
     var updateSensors = function (oldSensors, newSensors) {
         for (var i = 0; i < oldSensors.length; i++) {
             for (var j = 0; j < newSensors.length; j++) {
-                if (oldSensors[i].dsFamilyTempSensorId == newSensors[j].dsFamilyTempSensorId) {
+                if (oldSensors[i].dsFamilyTempSensorId === newSensors[j].dsFamilyTempSensorId) {
                     oldSensors[i].isConnected = newSensors[j].isConnected;
                     oldSensors[i].rawTemperature = newSensors[j].rawTemperature;
                     break;
@@ -107,7 +107,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < serviceFactory.devices.length; i++) {
-            if (serviceFactory.devices[i].deviceInApplicationId == data.deviceInApplicationId) {
+            if (serviceFactory.devices[i].deviceInApplicationId === data.deviceInApplicationId) {
                 serviceFactory.devices.splice(i, 1);
                 EventDispatcher.trigger('espDeviceService_onDeleteFromApplicationCompleted');
                 break;

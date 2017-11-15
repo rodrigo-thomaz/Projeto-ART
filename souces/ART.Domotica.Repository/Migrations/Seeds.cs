@@ -147,8 +147,7 @@
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
                     LowAlarm = -55,
                     HighAlarm = 125,
-                    HasLowAlarm = false,
-                    HasHighAlarm = false,
+                    HasAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_1);
@@ -171,8 +170,7 @@
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     LowAlarm = -55,
                     HighAlarm = 125,
-                    HasLowAlarm = false,
-                    HasHighAlarm = false,
+                    HasAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_1);
@@ -195,8 +193,7 @@
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     LowAlarm = -55,
                     HighAlarm = 125,
-                    HasLowAlarm = false,
-                    HasHighAlarm = false,
+                    HasAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_2);
@@ -219,8 +216,7 @@
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     LowAlarm = -55,
                     HighAlarm = 125,
-                    HasLowAlarm = false,
-                    HasHighAlarm = false,
+                    HasAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_1);
@@ -243,8 +239,7 @@
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     LowAlarm = -55,
                     HighAlarm = 125,
-                    HasLowAlarm = false,
-                    HasHighAlarm = false,
+                    HasAlarm = false,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_2);

@@ -30,11 +30,11 @@ app.controller('thermometerDeviceController', ['$scope', '$timeout', '$log', 'Ev
                 left: 40
             },
             x: function (d) {
-                if (d == null) return null;                
+                if (d === null) return null;                
                     return d.epochTime;
             },
             y: function (d) {
-                if (d == null) return null;    
+                if (d === null) return null;    
                     return d.temperature;
             },
             useInteractiveGuideline: true,
@@ -117,7 +117,7 @@ app.controller('thermometerDeviceController', ['$scope', '$timeout', '$log', 'Ev
         };        
 
         this.changeHighAlarm = function () { 
-            if (_this.highAlarm != _this.alarm.highAlarm) {
+            if (_this.highAlarm !== _this.alarm.highAlarm) {
                 dsFamilyTempSensorService.setHighAlarm(_this.dsFamilyTempSensorId, _this.alarm.highAlarm).then(function (results) {
                     //alert('success');
                 }, function (error) {
@@ -129,7 +129,7 @@ app.controller('thermometerDeviceController', ['$scope', '$timeout', '$log', 'Ev
         }
 
         this.changeLowAlarm = function () {
-            if (_this.lowAlarm != _this.alarm.lowAlarm) {
+            if (_this.lowAlarm !== _this.alarm.lowAlarm) {
                 dsFamilyTempSensorService.setLowAlarm(_this.dsFamilyTempSensorId, _this.alarm.lowAlarm).then(function (results) {
                     //alert('success');
                 }, function (error) {
