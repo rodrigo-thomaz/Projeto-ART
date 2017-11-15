@@ -37,6 +37,7 @@ class DSFamilyTempSensor
 	void 								setResolution(int value);
 	
 	byte 								getTemperatureScaleId();
+	void 								setTemperatureScaleId(int value);
 	
 	bool 								getHasAlarm();	
 	void 								setHasAlarm(bool value);	
@@ -99,6 +100,7 @@ class DSFamilyTempSensorManager
 	
 	void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 				
+	void 								setScale(String json);
 	void 								setResolution(String json);
 	void 								setLowAlarm(String json);
 	void 								setHighAlarm(String json);
@@ -112,7 +114,7 @@ class DSFamilyTempSensorManager
 	bool								_initialized;
 	bool								_initializing;					
 				
-	const uint8_t* 						getDeviceAddressById(String deviceAddress);
+	DSFamilyTempSensor					getDSFamilyTempSensorById(String deviceAddress);
 	String 								getFamily(byte deviceAddress[8]);
 	void								createSensorJsonNestedObject(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
 	String 								convertDeviceAddressToString(const uint8_t* deviceAddress);

@@ -42,6 +42,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_UPDATE_PIN "ESPDevice.UpdatePinIoT"
 #define TOPIC_SUB_INSERT_IN_APPLICATION "ESPDevice.InsertInApplicationIoT"
 #define TOPIC_SUB_DELETE_FROM_APPLICATION "ESPDevice.DeleteFromApplicationIoT"
+#define TOPIC_SUB_SET_SCALE "DSFamilyTempSensor.SetScaleIoT"
 #define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolutionIoT"
 #define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarmIoT"
 #define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarmIoT"
@@ -159,6 +160,9 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     }
     if(payloadTopic == String(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB)){
       dsFamilyTempSensorManager.setSensorsByMQQTCallback(payloadContract);      
+    }
+    if(payloadTopic == String(TOPIC_SUB_SET_SCALE)){
+      dsFamilyTempSensorManager.setScale(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_SET_RESOLUTION)){
       dsFamilyTempSensorManager.setResolution(payloadContract);
