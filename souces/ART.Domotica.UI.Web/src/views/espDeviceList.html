@@ -3,7 +3,7 @@
     app.settings.asideDock = true;
   ">
     <div class="bg-light lter b-b wrapper-md">
-        <h1 class="m-n font-thin h3">Thermometers</h1>
+        <h1 class="m-n font-thin h3">Lista de ESP Devices</h1>
     </div>
     <div class="wrapper-md">
         
@@ -73,21 +73,9 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-4 control-label">Resolução Sensor</label>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" readonly ng-model="sensor.dsFamilyTempSensorResolutionId">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
                                             <label class="col-lg-4 control-label">Resolução</label>
                                             <div class="col-lg-8">
                                                 <select class="form-control m-b" ng-options="item.name for item in resolution.availableResolutions track by item.id" ng-model="resolution.selectedResolution" ng-change="changeResolution()"></select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Resolução selecionada</label>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" readonly ng-model="sensor.selectedResolution.name">
                                             </div>
                                         </div>
                                         <div class="form-group">
