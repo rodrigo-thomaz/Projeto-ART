@@ -42,7 +42,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };    
 
     $scope.changeHasAlarm = function () {
-        
+        dsFamilyTempSensorService.setHasAlarm($scope.sensor.dsFamilyTempSensorId, $scope.selectedHasAlarm);
     };
 
     $scope.changeLowAlarm = function () {
@@ -60,26 +60,27 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         $scope.scale.selectedScale = temperatureScaleService.getScaleById(sensor.temperatureScaleId);
         $scope.resolution.selectedResolution = dsFamilyTempSensorService.getResolutionById(sensor.dsFamilyTempSensorResolutionId);
 
-        $scope.selectedHasLowAlarm = sensor.hasLowAlarm;
-        $scope.selectedHasHighAlarm = sensor.hasHighAlarm;
-
+        $scope.selectedHasAlarm = sensor.hasAlarm;
         $scope.selectedLowAlarm = sensor.lowAlarm;
         $scope.selectedHighAlarm = sensor.highAlarm;
 
         clearOnSetScaleCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetScaleCompleted);
         clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetResolutionCompleted);
+        clearOnSetHasAlarmCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetHasAlarmCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetHasAlarmCompleted);
         clearOnSetLowAlarmCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetLowAlarmCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetLowAlarmCompleted);
         clearOnSetHighAlarmCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetHighAlarmCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetHighAlarmCompleted);
     };    
 
     var clearOnSetScaleCompleted = null;
     var clearOnSetResolutionCompleted = null;
+    var clearOnSetHasAlarmCompleted = null;
     var clearOnSetLowAlarmCompleted = null;
     var clearOnSetHighAlarmCompleted = null;
     
     $scope.$on('$destroy', function () {
         clearOnSetScaleCompleted();
         clearOnSetResolutionCompleted();
+        clearOnSetHasAlarmCompleted();
         clearOnSetLowAlarmCompleted();
         clearOnSetHighAlarmCompleted();
     });
@@ -92,6 +93,10 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     var onSetResolutionCompleted = function (event, data) {
         $scope.sensor.dsFamilyTempSensorResolutionId = data.dsFamilyTempSensorResolutionId;
         toaster.pop('success', 'Sucesso', 'resolução alterada');
+    };
+
+    var onSetHasAlarmCompleted = function (event, data) {
+        toaster.pop('success', 'Sucesso', 'alarme alterado');
     };
 
     var onSetLowAlarmCompleted = function (event, data) {

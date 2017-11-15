@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DSFamilyTempSensorSetHasAlarmRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetHighAlarmRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetScaleRequestContract.cs" />

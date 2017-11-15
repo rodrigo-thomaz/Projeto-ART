@@ -82,6 +82,24 @@ namespace ART.Domotica.WebApi.Controllers
         }
 
         /// <summary>
+        /// Liga ou desliga o alarme de um sensor
+        /// </summary>
+        /// <remarks>
+        /// Liga ou desliga o alarme de um sensor
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setHasAlarm")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetHasAlarm(DSFamilyTempSensorSetHasAlarmRequestContract contract)
+        {
+            await _dsFamilyTempSensorProducer.SetHasAlarm(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
         /// Altera o alarme alto de um sensor
         /// </summary>
         /// <remarks>

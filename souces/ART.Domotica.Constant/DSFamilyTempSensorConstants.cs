@@ -8,6 +8,9 @@
         public static readonly string GetAllByDeviceInApplicationIdIoTQueueName = "DSFamilyTempSensor.GetAllByDeviceInApplicationIdIoT";
         public static readonly string GetAllResolutionsQueueName = "DSFamilyTempSensor.GetAllResolutions";
         public static readonly object GetAllResolutionsViewCompletedQueueName = "DSFamilyTempSensor.GetAllResolutionsViewCompleted";
+        public static readonly string SetHasAlarmIoTQueueName = "DSFamilyTempSensor.SetHasAlarmIoT";
+        public static readonly string SetHasAlarmQueueName = "DSFamilyTempSensor.SetHasAlarm";
+        public static readonly string SetHasAlarmViewCompletedQueueName = "DSFamilyTempSensor.SetHasAlarmViewCompleted";
         public static readonly string SetHighAlarmIoTQueueName = "DSFamilyTempSensor.SetHighAlarmIoT";
         public static readonly string SetHighAlarmQueueName = "DSFamilyTempSensor.SetHighAlarm";
         public static readonly string SetHighAlarmViewCompletedQueueName = "DSFamilyTempSensor.SetHighAlarmViewCompleted";

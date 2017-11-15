@@ -99,6 +99,22 @@ namespace ART.Domotica.Domain.Services
             return dsFamilyTempSensorEntity;
         }
 
+        public async Task<DSFamilyTempSensor> SetHasAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHasAlarmRequestContract> message)
+        {
+            var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
+
+            if (entity == null)
+            {
+                throw new Exception("DSFamilyTempSensor not found");
+            }
+
+            entity.HasAlarm = message.Contract.HasAlarm;
+
+            await _dsFamilyTempSensorRepository.Update(entity);
+
+            return entity;
+        }
+
         public async Task<DSFamilyTempSensor> SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);

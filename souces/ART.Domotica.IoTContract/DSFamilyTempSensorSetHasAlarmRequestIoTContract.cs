@@ -1,8 +1,8 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.IoTContract
 {
     using System;
 
-    public class DSFamilyTempSensorSetLowAlarmCompletedModel
+    public class DSFamilyTempSensorSetHasAlarmRequestIoTContract
     {
         #region Properties
 
@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public decimal? LowAlarm
+        public bool HasAlarm
         {
             get; set;
         }

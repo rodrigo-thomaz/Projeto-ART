@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetHasAlarmRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetHighAlarmRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLowAlarmRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetScaleRequestIoTContract.cs" />
