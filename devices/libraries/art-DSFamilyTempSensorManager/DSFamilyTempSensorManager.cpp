@@ -138,11 +138,12 @@ float DSFamilyTempSensor::getTemperatureWithScale()
 
 // DSFamilyTempSensorManager
 
-DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager)
+DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager, BuzzerManager& buzzerManager)
 { 
 	this->_debugManager = &debugManager;
 	this->_configurationManager = &configurationManager;
 	this->_mqqtManager = &mqqtManager;
+	this->_buzzerManager = &buzzerManager;
 }
 
 void DSFamilyTempSensorManager::begin()
@@ -271,6 +272,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 
 void DSFamilyTempSensorManager::refresh()
 {	
+	bool hasAlarm = false;
 	_dallas.requestTemperatures();
 	for(int i = 0; i < this->_sensors.size(); ++i){		
 		this->_sensors[i].setConnected(_dallas.isConnected(this->_sensors[i].getDeviceAddress()));
@@ -278,7 +280,12 @@ void DSFamilyTempSensorManager::refresh()
 		this->_sensors[i].setRawTemperature(_dallas.getTempC(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setHasAlarm(_dallas.hasAlarm(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setLowAlarm(_dallas.getLowAlarmTemp(this->_sensors[i].getDeviceAddress()));
-		this->_sensors[i].setHighAlarm(_dallas.getHighAlarmTemp(this->_sensors[i].getDeviceAddress()));
+		this->_sensors[i].setHighAlarm(_dallas.getHighAlarmTemp(this->_sensors[i].getDeviceAddress()));		
+		
+		if(this->_sensors[i].getHasAlarm()) hasAlarm = true;
+	}
+	if(hasAlarm){
+		this->_buzzerManager->test();
 	}
 }
 

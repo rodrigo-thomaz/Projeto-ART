@@ -6,6 +6,7 @@
 #include "ArduinoJson.h"
 #include "DebugManager.h"
 #include "NTPManager.h"
+#include "BuzzerManager.h"
 #include "ConfigurationManager.h"
 #include "MQQTManager.h"
 #include "OneWire.h"
@@ -87,7 +88,7 @@ class DSFamilyTempSensorManager
 {
   public:
   
-    DSFamilyTempSensorManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager);
+    DSFamilyTempSensorManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager, BuzzerManager& buzzerManager);
 	
 	void 								begin();
 				
@@ -112,6 +113,7 @@ class DSFamilyTempSensorManager
 	DebugManager*          				_debugManager;
 	ConfigurationManager*				_configurationManager;	
 	MQQTManager* 		                _mqqtManager;				
+	BuzzerManager* 		                _buzzerManager;				
 	
 	bool								_initialized;
 	bool								_initializing;					
