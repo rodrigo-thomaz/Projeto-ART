@@ -91,25 +91,45 @@
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Máximo</label>
                                             <div class="col-lg-8">
-                                                <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeForceYMax()" ui-jq="TouchSpin" type="number" ng-model="sensor.forceY.max" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                <div class="input-group m-b">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox">
+                                                    </span>
+                                                    <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeForceYMax()" ui-jq="TouchSpin" type="number" ng-model="sensor.forceY.max" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                </div>                                                
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Mínimo</label>
                                             <div class="col-lg-8">
-                                                <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeForceYMin()" ui-jq="TouchSpin" type="number" ng-model="sensor.forceY.min" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                <div class="input-group m-b">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox">
+                                                    </span>
+                                                    <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeForceYMin()" ui-jq="TouchSpin" type="number" ng-model="sensor.forceY.min" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                </div>                                                 
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Alto</label>
                                             <div class="col-lg-8">
-                                                <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeHighAlarm()" ui-jq="TouchSpin" type="number" ng-model="sensor.alarm.highAlarm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                <div class="input-group m-b">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox">
+                                                    </span>
+                                                    <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeHighAlarm()" ui-jq="TouchSpin" type="number" ng-model="sensor.alarm.highAlarm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                </div>                                                 
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Baixo</label>
                                             <div class="col-lg-8">
-                                                <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeLowAlarm()" ui-jq="TouchSpin" type="number" ng-model="sensor.alarm.lowAlarm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                <div class="input-group m-b">
+                                                    <span class="input-group-addon">
+                                                        <input type="checkbox">
+                                                    </span>
+                                                    <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeLowAlarm()" ui-jq="TouchSpin" type="number" ng-model="sensor.alarm.lowAlarm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                </div>                                                 
                                             </div>
                                         </div>
                                         <div class="form-group">
