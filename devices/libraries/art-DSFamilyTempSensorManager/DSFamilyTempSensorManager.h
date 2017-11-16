@@ -18,14 +18,45 @@
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_MQQT_TOPIC_PUB   				"DSFamilyTempSensor.GetAllByDeviceInApplicationIdIoT" 
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB   	"DSFamilyTempSensor.GetAllByDeviceInApplicationIdCompletedIoT"
 
+enum TempSensorAlarmPosition { High, Low };
+
+class TempSensorAlarm
+{	
+	public:
+	
+		TempSensorAlarm(bool alarmOn, float alarmValue, bool alarmBuzzerOn, TempSensorAlarmPosition alarmPosition);
+		
+		bool 								getAlarmOn();	
+		void 								setAlarmOn(bool value);
+		
+		float 								getAlarmValue();
+		void 								setAlarmValue(float value);
+		
+		bool 								getAlarmBuzzerOn();	
+		void 								setAlarmBuzzerOn(bool value);
+		
+		bool 								hasAlarm();
+		
+		bool 								hasAlarmBuzzer();
+		
+		void 								setRawTemperature(float value);
+	
+	private:
+	
+		bool 								_alarmOn;		
+		float 								_alarmValue;
+		bool 								_alarmBuzzerOn;
+		TempSensorAlarmPosition				_alarmPosition;
+		
+		float 								_rawTemperature;
+};
 
 class DSFamilyTempSensor
 {
 	
   public:
   
-	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId);
-	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, float lowAlarm, float highAlarm);
+	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm& lowAlarm, TempSensorAlarm& highAlarm);
 
     String								getDSFamilyTempSensorId();		
 	
@@ -40,14 +71,8 @@ class DSFamilyTempSensor
 	byte 								getTemperatureScaleId();
 	void 								setTemperatureScaleId(int value);
 	
-	bool 								getHasAlarm();	
-	void 								setHasAlarm(bool value);	
-	
-	float 								getLowAlarm();
-	void 								setLowAlarm(float value);
-	
-	float 								getHighAlarm();
-	void 								setHighAlarm(float value);
+	TempSensorAlarm* 					getLowAlarm();	
+	TempSensorAlarm* 					getHighAlarm();	
 	
 	bool 								getConnected();	
 	void 								setConnected(bool value);
@@ -56,6 +81,8 @@ class DSFamilyTempSensor
 	void 								setRawTemperature(float value);
 	
 	float 								getTemperatureWithScale();
+	
+	bool 								hasAlarm();	
 	
   private:
   
@@ -69,18 +96,17 @@ class DSFamilyTempSensor
 	int 								_resolution;
 	
 	byte								_temperatureScaleId;
-	
-	bool 								_hasAlarm;	
-	float 								_lowAlarm;
-	float 								_highAlarm;
-	
+		
+	TempSensorAlarm* 					_lowAlarm;
+	TempSensorAlarm* 					_highAlarm;
+		
 	bool 								_connected;	
 	
 	float 								_rawTemperature;
 	
 	long 								_epochTimeUtc;	
 	
-	friend class DSFamilyTempSensorManager;
+	friend class 						DSFamilyTempSensorManager;
 	
 };
 

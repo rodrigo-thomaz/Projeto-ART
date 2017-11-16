@@ -99,7 +99,7 @@ namespace ART.Domotica.Domain.Services
             return dsFamilyTempSensorEntity;
         }
 
-        public async Task<DSFamilyTempSensor> SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message)
+        public async Task SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -108,16 +108,15 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            entity.HasAlarm = true;
-            entity.LowAlarm = message.Contract.LowAlarm;
-            entity.HighAlarm = message.Contract.HighAlarm;
+            if(message.Contract.Position == TempSensorAlarmPositionContract.High)
+                entity.HighAlarm.AlarmOn = message.Contract.AlarmOn;
+            else if (message.Contract.Position == TempSensorAlarmPositionContract.Low)
+                entity.LowAlarm.AlarmOn = message.Contract.AlarmOn;
 
             await _dsFamilyTempSensorRepository.Update(entity);
-
-            return entity;
         }
 
-        public async Task<DSFamilyTempSensor> SetAlarmOff(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOffRequestContract> message)
+        public async Task SetAlarmValue(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -126,14 +125,15 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            entity.HasAlarm = false;
-
+            if (message.Contract.Position == TempSensorAlarmPositionContract.High)
+                entity.HighAlarm.AlarmValue = message.Contract.AlarmValue;
+            else if (message.Contract.Position == TempSensorAlarmPositionContract.Low)
+                entity.LowAlarm.AlarmValue = message.Contract.AlarmValue;
+            
             await _dsFamilyTempSensorRepository.Update(entity);
-
-            return entity;
         }
 
-        public async Task<DSFamilyTempSensor> SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message)
+        public async Task SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -142,27 +142,12 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            entity.HighAlarm = message.Contract.HighAlarm;
+            if (message.Contract.Position == TempSensorAlarmPositionContract.High)
+                entity.HighAlarm.AlarmBuzzerOn = message.Contract.AlarmBuzzerOn;
+            else if (message.Contract.Position == TempSensorAlarmPositionContract.Low)
+                entity.LowAlarm.AlarmBuzzerOn = message.Contract.AlarmBuzzerOn;
 
             await _dsFamilyTempSensorRepository.Update(entity);
-
-            return entity;
-        }
-
-        public async Task<DSFamilyTempSensor> SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract> message)
-        {
-            var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
-
-            if (entity == null)
-            {
-                throw new Exception("DSFamilyTempSensor not found");
-            }
-
-            entity.LowAlarm = message.Contract.LowAlarm;
-
-            await _dsFamilyTempSensorRepository.Update(entity);
-
-            return entity;
         }
 
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)

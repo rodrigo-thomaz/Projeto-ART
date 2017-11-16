@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetHighAlarmRequestContract
+    public class DSFamilyTempSensorSetAlarmBuzzerOnRequestContract
     {
         #region Properties
 
@@ -11,7 +11,12 @@
             get; set;
         }
 
-        public decimal HighAlarm
+        public bool AlarmBuzzerOn
+        {
+            get; set;
+        }
+
+        public TempSensorAlarmPositionContract Position
         {
             get; set;
         }

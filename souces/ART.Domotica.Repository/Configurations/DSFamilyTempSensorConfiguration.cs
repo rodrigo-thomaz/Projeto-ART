@@ -36,23 +36,6 @@
                 .HasMaxLength(10)
                 .IsRequired();
 
-            //HasAlarm
-            Property(x => x.HasAlarm)
-                .HasColumnOrder(3)
-                .IsRequired();
-
-            //LowAlarm
-            Property(x => x.LowAlarm)
-                .HasColumnOrder(4)
-                .IsRequired()
-                .HasPrecision(6, 3);
-
-            //HighAlarm
-            Property(x => x.HighAlarm)
-                .HasColumnOrder(5)
-                .IsRequired()
-                .HasPrecision(6, 3);
-
             //TemperatureScale
             HasRequired(x => x.TemperatureScale)
                 .WithMany(x => x.DSFamilyTempSensors)
@@ -61,7 +44,7 @@
 
             //TemperatureScaleId
             Property(x => x.TemperatureScaleId)
-                .HasColumnOrder(6);
+                .HasColumnOrder(3);
 
             //DSFamilyTempSensorResolution
             HasRequired(x => x.DSFamilyTempSensorResolution)
@@ -71,7 +54,45 @@
 
             //DSFamilyTempSensorResolutionId
             Property(x => x.DSFamilyTempSensorResolutionId)
-                .HasColumnOrder(7);
+                .HasColumnOrder(4);
+
+            //LowTempSensorAlarm.AlarmOn
+            Property(x => x.LowAlarm.AlarmOn)
+                .HasColumnOrder(5)
+                .HasColumnName("LowAlarmOn")
+                .IsRequired();
+
+            //LowTempSensorAlarm.AlarmValue
+            Property(x => x.LowAlarm.AlarmValue)
+                .HasColumnOrder(6)
+                .HasPrecision(6, 3)
+                .HasColumnName("LowAlarmValue")
+                .IsRequired();
+
+            //LowTempSensorAlarm.AlarmBuzzerOn
+            Property(x => x.LowAlarm.AlarmBuzzerOn)
+                .HasColumnOrder(7)
+                .HasColumnName("LowAlarmBuzzerOn")
+                .IsRequired();
+
+            //HighTempSensorAlarm.AlarmOn
+            Property(x => x.HighAlarm.AlarmOn)
+                .HasColumnOrder(8)
+                .HasColumnName("HighAlarmOn")
+                .IsRequired();
+
+            //HighTempSensorAlarm.AlarmValue
+            Property(x => x.HighAlarm.AlarmValue)
+                .HasColumnOrder(9)
+                .HasPrecision(6, 3)
+                .HasColumnName("HighAlarmValue")
+                .IsRequired();
+
+            //HighTempSensorAlarm.AlarmBuzzerOn
+            Property(x => x.HighAlarm.AlarmBuzzerOn)
+                .HasColumnOrder(10)
+                .HasColumnName("HighAlarmBuzzerOn")
+                .IsRequired();            
         }
 
         #endregion Constructors

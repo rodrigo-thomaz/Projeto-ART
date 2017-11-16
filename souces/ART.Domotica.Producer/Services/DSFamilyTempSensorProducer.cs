@@ -58,31 +58,22 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task SetAlarmOff(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOffRequestContract> message)
+        public async Task SetAlarmValue(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmOffQueueName, null, payload);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmValueQueueName, null, payload);
             });
         }
 
-        public async Task SetHighAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract> message)
+        public async Task SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetHighAlarmQueueName, null, payload);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmBuzzerOnQueueName, null, payload);
             });                        
-        }
-
-        public async Task SetLowAlarm(AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract> message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetLowAlarmQueueName, null, payload);
-            });            
         }
 
         #endregion
@@ -120,25 +111,18 @@ namespace ART.Domotica.Producer.Services
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetAlarmOffQueueName
+                  queue: DSFamilyTempSensorConstants.SetAlarmValueQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetHighAlarmQueueName
+                  queue: DSFamilyTempSensorConstants.SetAlarmBuzzerOnQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
-                , arguments: null);
-
-            _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetLowAlarmQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);            
+                , arguments: null);          
         }        
 
         #endregion

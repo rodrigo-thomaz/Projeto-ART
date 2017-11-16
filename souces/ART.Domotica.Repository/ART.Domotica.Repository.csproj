@@ -89,6 +89,7 @@
     <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
+    <Compile Include="Entities\TempSensorAlarm.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IESPDeviceRepository.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
@@ -111,6 +112,14 @@
     <Compile Include="Migrations\201711151658197_InitialCreate3.cs" />
     <Compile Include="Migrations\201711151658197_InitialCreate3.Designer.cs">
       <DependentUpon>201711151658197_InitialCreate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711161340472_InitialCreate4.cs" />
+    <Compile Include="Migrations\201711161340472_InitialCreate4.Designer.cs">
+      <DependentUpon>201711161340472_InitialCreate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711161343141_InitialCreate5.cs" />
+    <Compile Include="Migrations\201711161343141_InitialCreate5.Designer.cs">
+      <DependentUpon>201711161343141_InitialCreate5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -166,6 +175,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711151658197_InitialCreate3.resx">
       <DependentUpon>201711151658197_InitialCreate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711161340472_InitialCreate4.resx">
+      <DependentUpon>201711161340472_InitialCreate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711161343141_InitialCreate5.resx">
+      <DependentUpon>201711161343141_InitialCreate5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

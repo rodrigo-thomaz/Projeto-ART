@@ -41,9 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorSetAlarmOnRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetAlarmOffRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetHighAlarmRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetLowAlarmRequestContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetAlarmValueRequestContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetAlarmBuzzerOnRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetScaleRequestContract.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCRequestContract.cs" />
@@ -52,6 +51,7 @@
     <Compile Include="ESPDeviceGetByPinRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionRequestContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TempSensorAlarmPositionContract.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">

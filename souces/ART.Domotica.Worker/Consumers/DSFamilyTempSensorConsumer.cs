@@ -28,9 +28,8 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _setScaleConsumer;
         private readonly EventingBasicConsumer _setResolutionConsumer;
         private readonly EventingBasicConsumer _setAlarmOnConsumer;
-        private readonly EventingBasicConsumer _setAlarmOffConsumer;
-        private readonly EventingBasicConsumer _setHighAlarmConsumer;
-        private readonly EventingBasicConsumer _setLowAlarmConsumer;
+        private readonly EventingBasicConsumer _setAlarmValueConsumer;
+        private readonly EventingBasicConsumer _setAlarmBuzzerOnConsumer;
 
         private readonly IComponentContext _componentContext;
 
@@ -47,9 +46,8 @@ namespace ART.Domotica.Worker.Consumers
             _setScaleConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
             _setAlarmOnConsumer = new EventingBasicConsumer(_model);
-            _setAlarmOffConsumer = new EventingBasicConsumer(_model);
-            _setHighAlarmConsumer = new EventingBasicConsumer(_model);
-            _setLowAlarmConsumer = new EventingBasicConsumer(_model);
+            _setAlarmValueConsumer = new EventingBasicConsumer(_model);
+            _setAlarmBuzzerOnConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -93,21 +91,14 @@ namespace ART.Domotica.Worker.Consumers
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetAlarmOffQueueName
+                  queue: DSFamilyTempSensorConstants.SetAlarmValueQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetHighAlarmQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
-
-            _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetLowAlarmQueueName
+                  queue: DSFamilyTempSensorConstants.SetAlarmBuzzerOnQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
@@ -138,18 +129,16 @@ namespace ART.Domotica.Worker.Consumers
             _setResolutionConsumer.Received += SetResolutionReceived;
             _setScaleConsumer.Received += SetScaleReceived;
             _setAlarmOnConsumer.Received += SetAlarmOnReceived;
-            _setAlarmOffConsumer.Received += SetAlarmOffReceived;
-            _setHighAlarmConsumer.Received += SetHighAlarmReceived;
-            _setLowAlarmConsumer.Received += SetLowAlarmReceived;
+            _setAlarmValueConsumer.Received += SetAlarmValueReceived;
+            _setAlarmBuzzerOnConsumer.Received += SetAlarmBuzzerOnReceived;
 
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName, false, _getAllByDeviceInApplicationIdConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetScaleQueueName, false, _setScaleConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetResolutionQueueName, false, _setResolutionConsumer);
             _model.BasicConsume(DSFamilyTempSensorConstants.SetAlarmOnQueueName, false, _setAlarmOnConsumer);
-            _model.BasicConsume(DSFamilyTempSensorConstants.SetAlarmOffQueueName, false, _setAlarmOffConsumer);
-            _model.BasicConsume(DSFamilyTempSensorConstants.SetHighAlarmQueueName, false, _setHighAlarmConsumer);
-            _model.BasicConsume(DSFamilyTempSensorConstants.SetLowAlarmQueueName, false, _setLowAlarmConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.SetAlarmValueQueueName, false, _setAlarmValueConsumer);
+            _model.BasicConsume(DSFamilyTempSensorConstants.SetAlarmBuzzerOnQueueName, false, _setAlarmBuzzerOnConsumer);
         }
                 
         private void GetAllByDeviceInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
@@ -262,37 +251,6 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugLeave();
         }
 
-        public void SetHighAlarmReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(SetHighAlarmReceivedAsync(sender, e));
-        }
-
-        public async Task SetHighAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetHighAlarmRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetHighAlarm(message);
-
-            //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetHighAlarmCompletedModel>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
-            var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetHighAlarmViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
-
-            //Enviando para o Iot
-            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
-            var iotContract = Mapper.Map<DSFamilyTempSensorSetHighAlarmRequestContract, DSFamilyTempSensorSetHighAlarmRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetHighAlarmRequestIoTContract>(DSFamilyTempSensorConstants.SetHighAlarmIoTQueueName, iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            _model.BasicPublish("", queueName, null, deviceBuffer);
-
-            _logger.DebugLeave();
-        }
-
         public void SetAlarmOnReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(SetAlarmOnReceivedAsync(sender, e));
@@ -305,10 +263,10 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetAlarmOn(message);
+            await domain.SetAlarmOn(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetAlarmOnCompletedModel>(data);
+            var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnCompletedModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmOnViewCompletedQueueName);
@@ -324,62 +282,62 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugLeave();
         }
 
-        public void SetAlarmOffReceived(object sender, BasicDeliverEventArgs e)
+        public void SetAlarmValueReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetAlarmOffReceivedAsync(sender, e));
+            Task.WaitAll(SetAlarmValueReceivedAsync(sender, e));
         }
 
-        public async Task SetAlarmOffReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetAlarmValueReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOffRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetAlarmOff(message);
+            await domain.SetAlarmValue(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetAlarmOffCompletedModel>(data);
+            var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmValueRequestContract, DSFamilyTempSensorSetAlarmValueCompletedModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmOffViewCompletedQueueName);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmValueViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
-            var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmOffRequestContract, DSFamilyTempSensorSetAlarmOffRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmOffRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmOffIoTQueueName, iotContract);
+            var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmValueRequestContract, DSFamilyTempSensorSetAlarmValueRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmValueRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmValueIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             _model.BasicPublish("", queueName, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
 
-        public void SetLowAlarmReceived(object sender, BasicDeliverEventArgs e)
+        public void SetAlarmBuzzerOnReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetLowAlarmReceivedAsync(sender, e));
+            Task.WaitAll(SetAlarmBuzzerOnReceivedAsync(sender, e));
         }
 
-        public async Task SetLowAlarmReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetAlarmBuzzerOnReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetLowAlarmRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetLowAlarm(message);
+            await domain.SetAlarmBuzzerOn(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetLowAlarmCompletedModel>(data);
+            var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnCompletedModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetLowAlarmViewCompletedQueueName);
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmBuzzerOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
             var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
-            var iotContract = Mapper.Map<DSFamilyTempSensorSetLowAlarmRequestContract, DSFamilyTempSensorSetLowAlarmRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetLowAlarmRequestIoTContract>(DSFamilyTempSensorConstants.SetLowAlarmIoTQueueName, iotContract);
+            var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmBuzzerOnIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             _model.BasicPublish("", queueName, null, deviceBuffer);
 

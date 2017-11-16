@@ -248,7 +248,7 @@ void loopInApplication()
       publishMessageTimestamp = now;
       displayMQTTManager.printSent(true);
 
-      StaticJsonBuffer<900> jsonBuffer;
+      StaticJsonBuffer<2048> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
 
       root["deviceInApplicationId"] = configurationManager.getDeviceSettings()->getDeviceInApplicationId();

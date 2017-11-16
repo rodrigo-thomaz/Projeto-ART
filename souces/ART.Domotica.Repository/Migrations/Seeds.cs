@@ -145,9 +145,18 @@
                     TemperatureScale = celsiusTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
-                    LowAlarm = -55,
-                    HighAlarm = 125,
-                    HasAlarm = false,
+                    LowAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = -55,
+                        AlarmBuzzerOn = false,
+                    },
+                    HighAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = 125,
+                        AlarmBuzzerOn = false,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_1);
@@ -168,9 +177,18 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
-                    LowAlarm = -55,
-                    HighAlarm = 125,
-                    HasAlarm = false,
+                    LowAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = -55,
+                        AlarmBuzzerOn = false,
+                    },
+                    HighAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = 125,
+                        AlarmBuzzerOn = false,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_1);
@@ -191,9 +209,18 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
-                    LowAlarm = -55,
-                    HighAlarm = 125,
-                    HasAlarm = false,
+                    LowAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = -55,
+                        AlarmBuzzerOn = false,
+                    },
+                    HighAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = 125,
+                        AlarmBuzzerOn = false,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_2);
@@ -214,9 +241,18 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
-                    LowAlarm = -55,
-                    HighAlarm = 125,
-                    HasAlarm = false,
+                    LowAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = -55,
+                        AlarmBuzzerOn = false,
+                    },
+                    HighAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = 125,
+                        AlarmBuzzerOn = false,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_1);
@@ -237,9 +273,18 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
-                    LowAlarm = -55,
-                    HighAlarm = 125,
-                    HasAlarm = false,
+                    LowAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = -55,
+                        AlarmBuzzerOn = false,
+                    },
+                    HighAlarm = new TempSensorAlarm
+                    {
+                        AlarmOn = false,
+                        AlarmValue = 125,
+                        AlarmBuzzerOn = false,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_2);

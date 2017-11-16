@@ -24,20 +24,9 @@
             get; set;
         }
 
-        public bool HasAlarm
-        {
-            get; set;
-        }
+        public TempSensorAlarm LowAlarm { get; set; }
 
-        public decimal HighAlarm
-        {
-            get; set;
-        }
-
-        public decimal LowAlarm
-        {
-            get; set;
-        }
+        public TempSensorAlarm HighAlarm { get; set; }       
 
         public TemperatureScale TemperatureScale
         {

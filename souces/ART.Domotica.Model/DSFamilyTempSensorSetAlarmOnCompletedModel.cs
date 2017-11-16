@@ -11,12 +11,12 @@
             get; set;
         }
 
-        public decimal LowAlarm
+        public bool AlarmOn
         {
             get; set;
         }
 
-        public decimal HighAlarm
+        public TempSensorAlarmPositionModel Position
         {
             get; set;
         }

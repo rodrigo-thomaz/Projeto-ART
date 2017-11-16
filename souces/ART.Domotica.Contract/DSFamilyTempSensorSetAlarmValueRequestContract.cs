@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetLowAlarmRequestContract
+    public class DSFamilyTempSensorSetAlarmValueRequestContract
     {
         #region Properties
 
@@ -11,7 +11,12 @@
             get; set;
         }
 
-        public decimal LowAlarm
+        public decimal AlarmValue
+        {
+            get; set;
+        }
+
+        public TempSensorAlarmPositionContract Position
         {
             get; set;
         }

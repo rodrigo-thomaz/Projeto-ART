@@ -21,20 +21,9 @@
             get; set;
         }
 
-        public bool HasAlarm
-        {
-            get; set;
-        }
+        public TempSensorAlarmResponseIoTContract LowAlarm { get; set; }
 
-        public decimal? HighAlarm
-        {
-            get; set;
-        }
-
-        public decimal? LowAlarm
-        {
-            get; set;
-        }
+        public TempSensorAlarmResponseIoTContract HighAlarm { get; set; }        
 
         public byte ResolutionBits
         {

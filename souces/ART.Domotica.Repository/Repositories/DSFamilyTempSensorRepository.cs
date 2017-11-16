@@ -25,7 +25,7 @@ namespace ART.Domotica.Repository.Repositories
         }
 
         public async Task<List<DSFamilyTempSensor>> GetAllByDeviceId(Guid deviceId)
-        {            
+        {
             return await _context.DSFamilyTempSensor
                 .Include(x => x.DSFamilyTempSensorResolution)
                 .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == deviceId) != null)

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetHighAlarmRequestIoTContract
+    public class DSFamilyTempSensorSetAlarmValueRequestIoTContract
     {
         #region Properties
 
@@ -11,7 +11,12 @@
             get; set;
         }
 
-        public decimal HighAlarm
+        public decimal AlarmValue
+        {
+            get; set;
+        }
+
+        public TempSensorAlarmPositionIoTContract Position
         {
             get; set;
         }

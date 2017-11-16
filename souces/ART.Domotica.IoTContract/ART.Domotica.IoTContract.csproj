@@ -42,9 +42,8 @@
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnRequestIoTContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetAlarmOffRequestIoTContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetHighAlarmRequestIoTContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetLowAlarmRequestIoTContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetAlarmValueRequestIoTContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetScaleRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionRequestIoTContract.cs" />
     <Compile Include="ESPDeviceInsertInApplicationResponseIoTContract.cs" />
@@ -53,6 +52,8 @@
     <Compile Include="MessageIoTContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TemperatureScaleGetAllForIoTResponseContract.cs" />
+    <Compile Include="TempSensorAlarmPositionIoTContract.cs" />
+    <Compile Include="TempSensorAlarmResponseIoTContract.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
