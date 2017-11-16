@@ -383,78 +383,70 @@ void DSFamilyTempSensorManager::setAlarmOn(String json)
 		return;
 	}
 
-	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
-	char lowAlarm = root["lowAlarm"];
-	char highAlarm = root["highAlarm"];	
+	String dsFamilyTempSensorId 			= root["dsFamilyTempSensorId"];
+	bool alarmOn 							= root["alarmOn"];
+	TempSensorAlarmPosition position 		= static_cast<TempSensorAlarmPosition>(root["position"].as<int>());	
 
-	DSFamilyTempSensor dsFamilyTempSensor = getDSFamilyTempSensorById(dsFamilyTempSensorId);
+	DSFamilyTempSensor dsFamilyTempSensor 	= getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
-	_dallas.setLowAlarmTemp(dsFamilyTempSensor.getDeviceAddress(), lowAlarm);
-	_dallas.setHighAlarmTemp(dsFamilyTempSensor.getDeviceAddress(), highAlarm);
-
+	if(position == High)
+		dsFamilyTempSensor.getHighAlarm()->setAlarmOn(alarmOn);
+	else if(position == Low)
+		dsFamilyTempSensor.getLowAlarm()->setAlarmOn(alarmOn);
+	
 	Serial.print("[DSFamilyTempSensorManager::setAlarmOn] ");
 	Serial.println(json);
 }
 
-void DSFamilyTempSensorManager::setAlarmOff(String json)
+void DSFamilyTempSensorManager::setAlarmValue(String json)
 {
 	StaticJsonBuffer<300> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(json);
 
 	if (!root.success()) {
-		Serial.println("parse setAlarmOff failed");
+		Serial.println("parse setAlarmValue failed");
 		return;
 	}
 
-	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
+	String dsFamilyTempSensorId 			= root["dsFamilyTempSensorId"];
+	float alarmValue 						= root["alarmValue"];
+	TempSensorAlarmPosition position 		= static_cast<TempSensorAlarmPosition>(root["position"].as<int>());	
+	
+	DSFamilyTempSensor dsFamilyTempSensor = getDSFamilyTempSensorById(dsFamilyTempSensorId);
+	
+	if(position == High)
+		dsFamilyTempSensor.getHighAlarm()->setAlarmValue(alarmValue);
+	else if(position == Low)
+		dsFamilyTempSensor.getLowAlarm()->setAlarmValue(alarmValue);
+
+	Serial.print("[DSFamilyTempSensorManager::setAlarmValue] ");
+	Serial.println(json);
+}
+
+void DSFamilyTempSensorManager::setAlarmBuzzerOn(String json)
+{
+	StaticJsonBuffer<300> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+
+	if (!root.success()) {
+		Serial.println("parse setAlarmBuzzerOn failed");
+		return;
+	}
+
+	String dsFamilyTempSensorId 			= root["dsFamilyTempSensorId"];
+	bool alarmBuzzerOn 						= root["alarmBuzzerOn"];
+	TempSensorAlarmPosition position 		= static_cast<TempSensorAlarmPosition>(root["position"].as<int>());	
 
 	DSFamilyTempSensor dsFamilyTempSensor = getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
-	_dallas.setLowAlarmTemp(dsFamilyTempSensor.getDeviceAddress(), char(-54));
-	_dallas.setHighAlarmTemp(dsFamilyTempSensor.getDeviceAddress(), char(124));
+	if(position == High)
+		dsFamilyTempSensor.getHighAlarm()->setAlarmBuzzerOn(alarmBuzzerOn);
+	else if(position == Low)
+		dsFamilyTempSensor.getLowAlarm()->setAlarmBuzzerOn(alarmBuzzerOn);
 
-	Serial.print("[DSFamilyTempSensorManager::setAlarmOff] ");
-	Serial.println(json);
-}
-
-void DSFamilyTempSensorManager::setLowAlarm(String json)
-{
-	StaticJsonBuffer<300> jsonBuffer;
-
-	JsonObject& root = jsonBuffer.parseObject(json);
-
-	if (!root.success()) {
-		Serial.println("parse setLowAlarm failed");
-		return;
-	}
-
-	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
-	int value = root["lowAlarm"];
-
-	_dallas.setLowAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), value);
-
-	Serial.print("setLowAlarm=");
-	Serial.println(json);
-}
-
-void DSFamilyTempSensorManager::setHighAlarm(String json)
-{
-	StaticJsonBuffer<200> jsonBuffer;
-
-	JsonObject& root = jsonBuffer.parseObject(json);
-
-	if (!root.success()) {
-		Serial.println("parse sethighAlarm failed");
-		return;
-	}
-
-	String dsFamilyTempSensorId = root["dsFamilyTempSensorId"];
-	int value = root["highAlarm"];
-
-	_dallas.setHighAlarmTemp(getDSFamilyTempSensorById(dsFamilyTempSensorId).getDeviceAddress(), value);
-
-	Serial.print("sethighAlarm=");
+	Serial.print("[DSFamilyTempSensorManager::setAlarmBuzzerOn] ");
 	Serial.println(json);
 }
 

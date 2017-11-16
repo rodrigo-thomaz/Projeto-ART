@@ -18,7 +18,11 @@
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_MQQT_TOPIC_PUB   				"DSFamilyTempSensor.GetAllByDeviceInApplicationIdIoT" 
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB   	"DSFamilyTempSensor.GetAllByDeviceInApplicationIdCompletedIoT"
 
-enum TempSensorAlarmPosition { High, Low };
+enum TempSensorAlarmPosition 
+{ 
+	High = 0, 
+	Low  = 1, 
+};
 
 class TempSensorAlarm
 {	
@@ -129,10 +133,10 @@ class DSFamilyTempSensorManager
 				
 	void 								setScale(String json);
 	void 								setResolution(String json);
+	
 	void 								setAlarmOn(String json);
-	void 								setAlarmOff(String json);
-	void 								setLowAlarm(String json);
-	void 								setHighAlarm(String json);
+	void 								setAlarmValue(String json);
+	void 								setAlarmBuzzerOn(String json);
 				
   private:			
 			

@@ -45,9 +45,8 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_SET_SCALE "DSFamilyTempSensor.SetScaleIoT"
 #define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolutionIoT"
 #define TOPIC_SUB_SET_ALARM_ON "DSFamilyTempSensor.SetAlarmOnIoT"
-#define TOPIC_SUB_SET_ALARM_OFF "DSFamilyTempSensor.SetAlarmOffIoT"
-#define TOPIC_SUB_SET_HIGH_ALARM "DSFamilyTempSensor.SetHighAlarmIoT"
-#define TOPIC_SUB_SET_LOW_ALARM "DSFamilyTempSensor.SetLowAlarmIoT"
+#define TOPIC_SUB_SET_ALARM_VALUE "DSFamilyTempSensor.SetAlarmValueIoT"
+#define TOPIC_SUB_SET_ALARM_BUZZER_ON "DSFamilyTempSensor.SetAlarmBuzzerOnIoT"
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
@@ -172,14 +171,11 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TOPIC_SUB_SET_ALARM_ON)){
       dsFamilyTempSensorManager.setAlarmOn(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_SET_ALARM_OFF)){
-      dsFamilyTempSensorManager.setAlarmOff(payloadContract);
+    if(payloadTopic == String(TOPIC_SUB_SET_ALARM_VALUE)){
+      dsFamilyTempSensorManager.setAlarmValue(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_SET_HIGH_ALARM)){
-      dsFamilyTempSensorManager.setHighAlarm(payloadContract);
-    }
-    if(payloadTopic == String(TOPIC_SUB_SET_LOW_ALARM)){
-      dsFamilyTempSensorManager.setLowAlarm(payloadContract);
+    if(payloadTopic == String(TOPIC_SUB_SET_ALARM_BUZZER_ON)){
+      dsFamilyTempSensorManager.setAlarmBuzzerOn(payloadContract);
     }
     if(payloadTopic == String(TOPIC_SUB_INSERT_IN_APPLICATION)){
       configurationManager.getDeviceSettings()->insertInApplication(payloadContract);      
