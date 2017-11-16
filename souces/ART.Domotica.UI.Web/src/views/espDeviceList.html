@@ -101,7 +101,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Alarme alto</label>
                                             <div class="col-lg-8">
-                                                <input ng-disabled="!selectedHighAlarm.alarmOn" ng-model-options="{ debounce: 1000 }" ng-change="changeAlarmValue('High', selectedHighAlarm.alarmValue)" ui-jq="TouchSpin" type="number" ng-model="selectedHighAlarm.alarmValue" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                <input ng-disabled="!selectedHighAlarm.alarmOn" ng-model-options="{ debounce: 1000 }" ng-change="changeAlarmValue('High', selectedHighAlarm.alarmValue)" ui-jq="TouchSpin" type="number" ng-model="selectedHighAlarm.alarmValue" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -127,7 +127,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Alarme baixo</label>
                                             <div class="col-lg-8">
-                                                <input ng-disabled="!selectedLowAlarm.alarmOn" ng-model-options="{ debounce: 1000 }" ng-change="changeAlarmValue('Low', selectedLowAlarm.alarmValue)" ui-jq="TouchSpin" type="number" ng-model="selectedLowAlarm.alarmValue" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
+                                                <input ng-disabled="!selectedLowAlarm.alarmOn" ng-model-options="{ debounce: 1000 }" ng-change="changeAlarmValue('Low', selectedLowAlarm.alarmValue)" type="number" ng-model="selectedLowAlarm.alarmValue" class="form-control" ui-jq="TouchSpin" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
                                             </div>
                                         </div>                                                                         
                                     </form>
