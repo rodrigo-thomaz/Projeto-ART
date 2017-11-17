@@ -494,19 +494,6 @@ void DSFamilyTempSensorManager::createSensorJsonNestedObject(DSFamilyTempSensor 
 	JSONencoder["isConnected"] = dsFamilyTempSensor.getConnected();
 	JSONencoder["resolution"] = dsFamilyTempSensor.getResolution();
 	JSONencoder["rawTemperature"] = dsFamilyTempSensor.getRawTemperature();
-	
-	// Temporário
-	// JSONencoder["lowAlarmValue"] = dsFamilyTempSensor.getLowAlarm()->getAlarmValue();
-	// JSONencoder["lowAlarmOn"] = dsFamilyTempSensor.getLowAlarm()->getAlarmOn();
-	// JSONencoder["lowAlarmBuzzerOn"] = dsFamilyTempSensor.getLowAlarm()->getAlarmBuzzerOn();	
-	// JSONencoder["highAlarmValue"] = dsFamilyTempSensor.getHighAlarm()->getAlarmValue();
-	// JSONencoder["highAlarmOn"] = dsFamilyTempSensor.getHighAlarm()->getAlarmOn();
-	// JSONencoder["highAlarmBuzzerOn"] = dsFamilyTempSensor.getHighAlarm()->getAlarmBuzzerOn();
-	
-	Serial.println("Low Value Low Value Low Value Low Value Low Value Low Value Low Value Low Value Low Value  Low Value  ");
-	Serial.println(dsFamilyTempSensor.getLowAlarm().getAlarmValue());
-	Serial.println("High Value High Value High Value High Value High Value High Value High Value High Value High Value High Value ");
-	Serial.println(dsFamilyTempSensor.getHighAlarm().getAlarmValue());	
 }
 
 String DSFamilyTempSensorManager::convertDeviceAddressToString(const uint8_t* deviceAddress)
