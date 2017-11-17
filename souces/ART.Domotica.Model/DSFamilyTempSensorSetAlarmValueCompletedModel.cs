@@ -6,12 +6,17 @@
     {
         #region Properties
 
-        public Guid DSFamilyTempSensorId
+        public decimal AlarmValue
         {
             get; set;
         }
 
-        public decimal AlarmValue
+        public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public Guid DSFamilyTempSensorId
         {
             get; set;
         }

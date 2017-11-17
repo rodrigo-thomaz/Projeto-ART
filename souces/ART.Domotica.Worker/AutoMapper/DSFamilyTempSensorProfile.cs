@@ -1,12 +1,13 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
+    using System.Linq;
+
     using ART.Domotica.Contract;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 
     using global::AutoMapper;
-    using System.Linq;
 
     public class DSFamilyTempSensorProfile : Profile
     {
@@ -35,7 +36,7 @@
             CreateMap<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetAlarmValueRequestContract, DSFamilyTempSensorSetAlarmValueRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>();
-            
+
             CreateMap<TempSensorAlarmPositionContract, TempSensorAlarmPositionModel>();
             CreateMap<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnCompletedModel>();
             CreateMap<DSFamilyTempSensorSetAlarmValueRequestContract, DSFamilyTempSensorSetAlarmValueCompletedModel>();
@@ -48,6 +49,7 @@
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetScaleCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
                 .ForMember(vm => vm.TemperatureScaleId, m => m.MapFrom(x => x.TemperatureScaleId));
 
             CreateMap<TempSensorAlarm, TempSensorAlarmGetDetailModel>();

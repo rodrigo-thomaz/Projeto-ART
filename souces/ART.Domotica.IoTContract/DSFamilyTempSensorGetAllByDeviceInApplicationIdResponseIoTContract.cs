@@ -21,9 +21,15 @@
             get; set;
         }
 
-        public TempSensorAlarmResponseIoTContract LowAlarm { get; set; }
+        public TempSensorAlarmResponseIoTContract HighAlarm
+        {
+            get; set;
+        }
 
-        public TempSensorAlarmResponseIoTContract HighAlarm { get; set; }        
+        public TempSensorAlarmResponseIoTContract LowAlarm
+        {
+            get; set;
+        }
 
         public byte ResolutionBits
         {

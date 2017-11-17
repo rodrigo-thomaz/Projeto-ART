@@ -2,8 +2,23 @@
 {
     public class TempSensorAlarmResponseIoTContract
     {
-        public bool AlarmOn { get; set; }
-        public decimal AlarmValue { get; set; }
-        public bool AlarmBuzzerOn { get; set; }
+        #region Properties
+
+        public bool AlarmBuzzerOn
+        {
+            get; set;
+        }
+
+        public bool AlarmOn
+        {
+            get; set;
+        }
+
+        public decimal AlarmValue
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

@@ -92,7 +92,7 @@
             Property(x => x.HighAlarm.AlarmBuzzerOn)
                 .HasColumnOrder(10)
                 .HasColumnName("HighAlarmBuzzerOn")
-                .IsRequired();            
+                .IsRequired();
         }
 
         #endregion Constructors

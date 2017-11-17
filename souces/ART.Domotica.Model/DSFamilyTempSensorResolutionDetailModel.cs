@@ -14,6 +14,11 @@
             get; set;
         }
 
+        public byte DecimalPlaces
+        {
+            get; set;
+        }
+
         public string Description
         {
             get; set;
@@ -30,11 +35,6 @@
         }
 
         public decimal Resolution
-        {
-            get; set;
-        }
-
-        public byte DecimalPlaces
         {
             get; set;
         }

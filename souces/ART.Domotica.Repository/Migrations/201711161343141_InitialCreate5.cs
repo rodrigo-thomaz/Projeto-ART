@@ -4,16 +4,8 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class InitialCreate5 : DbMigration
     {
-        public override void Up()
-        {
-            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "LowTempSensorAlarmOn", newName: "LowAlarmOn");
-            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "LowTempSensorAlarmValue", newName: "LowAlarmValue");
-            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "LowTempSensorAlarmBuzzerOn", newName: "LowAlarmBuzzerOn");
-            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "HighTempSensorAlarmOn", newName: "HighAlarmOn");
-            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "HighTempSensorAlarmValue", newName: "HighAlarmValue");
-            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "HighTempSensorAlarmBuzzerOn", newName: "HighAlarmBuzzerOn");
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             RenameColumn(table: "dbo.DSFamilyTempSensor", name: "HighAlarmBuzzerOn", newName: "HighTempSensorAlarmBuzzerOn");
@@ -23,5 +15,17 @@ namespace ART.Domotica.Repository.Migrations
             RenameColumn(table: "dbo.DSFamilyTempSensor", name: "LowAlarmValue", newName: "LowTempSensorAlarmValue");
             RenameColumn(table: "dbo.DSFamilyTempSensor", name: "LowAlarmOn", newName: "LowTempSensorAlarmOn");
         }
+
+        public override void Up()
+        {
+            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "LowTempSensorAlarmOn", newName: "LowAlarmOn");
+            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "LowTempSensorAlarmValue", newName: "LowAlarmValue");
+            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "LowTempSensorAlarmBuzzerOn", newName: "LowAlarmBuzzerOn");
+            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "HighTempSensorAlarmOn", newName: "HighAlarmOn");
+            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "HighTempSensorAlarmValue", newName: "HighAlarmValue");
+            RenameColumn(table: "dbo.DSFamilyTempSensor", name: "HighTempSensorAlarmBuzzerOn", newName: "HighAlarmBuzzerOn");
+        }
+
+        #endregion Methods
     }
 }

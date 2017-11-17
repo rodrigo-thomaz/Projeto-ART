@@ -16,10 +16,16 @@
             get; set;
         }
 
-        public TempSensorAlarmGetDetailModel LowAlarm { get; set; }
+        public TempSensorAlarmGetDetailModel HighAlarm
+        {
+            get; set;
+        }
 
-        public TempSensorAlarmGetDetailModel HighAlarm { get; set; }
-               
+        public TempSensorAlarmGetDetailModel LowAlarm
+        {
+            get; set;
+        }
+
         public byte TemperatureScaleId
         {
             get; set;

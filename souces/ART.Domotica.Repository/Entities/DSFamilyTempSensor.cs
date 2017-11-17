@@ -24,9 +24,15 @@
             get; set;
         }
 
-        public TempSensorAlarm LowAlarm { get; set; }
+        public TempSensorAlarm HighAlarm
+        {
+            get; set;
+        }
 
-        public TempSensorAlarm HighAlarm { get; set; }       
+        public TempSensorAlarm LowAlarm
+        {
+            get; set;
+        }
 
         public TemperatureScale TemperatureScale
         {
