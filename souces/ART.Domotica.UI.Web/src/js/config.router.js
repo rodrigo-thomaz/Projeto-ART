@@ -44,6 +44,7 @@ angular.module('app')
                       'ui.select',   
                       'toaster',
                       'js/services/temperatureScaleService.js',
+                      'js/services/dsFamilyTempSensorResolutionService.js',
                       'js/services/dsFamilyTempSensorService.js',
                       'js/services/espDeviceService.js',
                       'js/controllers/espDeviceListController.js',

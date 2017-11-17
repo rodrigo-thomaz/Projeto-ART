@@ -5,13 +5,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var initialized = false;
 
-    var serviceFactory = {};    
-    
-    var getAllResolutions = function () {
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/getAllResolutions').then(function (results) {
-            //alert('envio bem sucedido');
-        });
-    };
+    var serviceFactory = {};   
     
     var setScale = function (dsFamilyTempSensorId, temperatureScaleId) {
         var data = {
@@ -66,18 +60,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         });
     };
 
-    var getResolutionById = function (dsFamilyTempSensorResolutionId) {
-        for (var i = 0; i < serviceFactory.resolutions.length; i++) {
-            if (serviceFactory.resolutions[i].id === dsFamilyTempSensorResolutionId) {
-                return serviceFactory.resolutions[i];
-            }
-        }
-    };
-
     var onConnected = function () {
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsViewCompleted', onGetAllResolutionsCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetScaleViewCompleted', onSetScaleCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmOnViewCompleted', SetAlarmOnCompleted);
@@ -85,21 +70,12 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmBuzzerOnViewCompleted', SetAlarmBuzzerOnCompleted);
 
         if (!initialized) {
-            initialized = true;
-            getAllResolutions();
+            initialized = true;            
         }
     }  
 
     var onReadReceived = function (payload) {
         EventDispatcher.trigger('dsFamilyTempSensorService_onReadReceived', JSON.parse(payload.body));
-    }
-    
-    var onGetAllResolutionsCompleted = function (payload) {
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
-        for (var i = 0; i < data.length; i++) {
-            serviceFactory.resolutions.push(data[i]);
-        }
     }
 
     var onSetScaleCompleted = function (payload) {
@@ -135,7 +111,6 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     // serviceFactory
 
-    serviceFactory.resolutions = [];
     serviceFactory.sensors = [];
 
     serviceFactory.setScale = setScale;
@@ -144,8 +119,6 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     serviceFactory.setAlarmOn = setAlarmOn;
     serviceFactory.setAlarmValue = setAlarmValue;
     serviceFactory.setAlarmBuzzerOn = setAlarmBuzzerOn;    
-
-    serviceFactory.getResolutionById = getResolutionById;
 
     return serviceFactory;
 

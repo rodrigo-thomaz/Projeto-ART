@@ -218,6 +218,7 @@
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />
+    <Content Include="src\js\services\dsFamilyTempSensorResolutionService.js" />
     <Content Include="src\js\services\espDeviceService.js" />
     <Content Include="src\js\services\applicationUserService.js" />
     <Content Include="src\js\services\authInterceptorService.js" />
