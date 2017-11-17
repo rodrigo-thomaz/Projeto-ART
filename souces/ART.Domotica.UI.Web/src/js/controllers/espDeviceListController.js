@@ -131,8 +131,14 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
 
-    $scope.convertTemperature = function (temperature) {
-        return temperature;
+    $scope.convertTemperature = function (rawTemperature) {
+        switch ($scope.sensor.temperatureScaleId) {
+            case 1:
+                return rawTemperature * 0.0078125;
+            case 2:
+                return (rawTemperature * 0.0140625) + 32;
+            default:
+        }
     }
 }]);
 

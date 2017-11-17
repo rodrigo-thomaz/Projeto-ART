@@ -314,7 +314,7 @@ void DSFamilyTempSensorManager::refresh()
 	for(int i = 0; i < this->_sensors.size(); ++i){		
 		this->_sensors[i].setConnected(_dallas.isConnected(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setResolution(_dallas.getResolution(this->_sensors[i].getDeviceAddress()));
-		this->_sensors[i].setRawTemperature(_dallas.getTempC(this->_sensors[i].getDeviceAddress()));
+		this->_sensors[i].setRawTemperature(_dallas.getTemp(this->_sensors[i].getDeviceAddress()));
 		
 		if(this->_sensors[i].hasAlarm()) 		hasAlarm 		= true;
 		if(this->_sensors[i].hasAlarmBuzzer()) 	hasAlarmBuzzer 	= true;
