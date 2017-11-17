@@ -169,6 +169,11 @@ bool DSFamilyTempSensor::hasAlarm()
 	return this->_alarms[0].hasAlarm() || this->_alarms[1].hasAlarm();
 }
 
+bool DSFamilyTempSensor::hasAlarmBuzzer()
+{
+	return this->_alarms[0].hasAlarmBuzzer() || this->_alarms[1].hasAlarmBuzzer();
+}
+
 
 // DSFamilyTempSensorManager
 
@@ -275,11 +280,11 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		
 		bool 			lowAlarmOn 				= bool(lowAlarmJsonObject["alarmOn"]);
 		double 			lowAlarmValue 			= double(lowAlarmJsonObject["alarmValue"]);
-		bool 			lowAlarmBuzzerOn 			= bool(lowAlarmJsonObject["buzzerOn"]);
+		bool 			lowAlarmBuzzerOn 		= bool(lowAlarmJsonObject["buzzerOn"]);
 		
 		bool 			highAlarmOn 			= bool(highAlarmJsonObject["alarmOn"]);
 		double 			highAlarmValue 			= double(highAlarmJsonObject["alarmValue"]);
-		bool 			highAlarmBuzzerOn 			= bool(highAlarmJsonObject["alarmBuzzerOn"]);
+		bool 			highAlarmBuzzerOn 		= bool(highAlarmJsonObject["alarmBuzzerOn"]);
 				
 		TempSensorAlarm lowAlarm 				= TempSensorAlarm(lowAlarmOn, lowAlarmValue, lowAlarmBuzzerOn, Low);
 		TempSensorAlarm highAlarm 				= TempSensorAlarm(highAlarmOn, highAlarmValue, highAlarmBuzzerOn, High);
@@ -303,15 +308,18 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 void DSFamilyTempSensorManager::refresh()
 {	
 	bool hasAlarm = false;
+	bool hasAlarmBuzzer = false;
+	
 	_dallas.requestTemperatures();
 	for(int i = 0; i < this->_sensors.size(); ++i){		
 		this->_sensors[i].setConnected(_dallas.isConnected(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setResolution(_dallas.getResolution(this->_sensors[i].getDeviceAddress()));
 		this->_sensors[i].setRawTemperature(_dallas.getTempC(this->_sensors[i].getDeviceAddress()));
 		
-		if(this->_sensors[i].hasAlarm()) hasAlarm = true;
+		if(this->_sensors[i].hasAlarm()) 		hasAlarm 		= true;
+		if(this->_sensors[i].hasAlarmBuzzer()) 	hasAlarmBuzzer 	= true;
 	}
-	if(hasAlarm){
+	if(hasAlarmBuzzer){
 		this->_buzzerManager->test();
 	}
 }

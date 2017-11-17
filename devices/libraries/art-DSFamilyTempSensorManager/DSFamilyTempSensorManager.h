@@ -89,6 +89,7 @@ class DSFamilyTempSensor
 	float 								getTemperatureWithScale();
 	
 	bool 								hasAlarm();	
+	bool 								hasAlarmBuzzer();	
 	
   private:	
 	
