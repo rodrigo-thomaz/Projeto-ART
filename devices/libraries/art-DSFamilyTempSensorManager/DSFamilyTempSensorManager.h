@@ -103,9 +103,6 @@ class DSFamilyTempSensor
 	
 	byte								_temperatureScaleId;
 		
-	//TempSensorAlarm 					_lowAlarm;
-	//TempSensorAlarm 					_highAlarm;
-		
 	std::vector<TempSensorAlarm> 		_alarms; 
 	
 	bool 								_connected;	
