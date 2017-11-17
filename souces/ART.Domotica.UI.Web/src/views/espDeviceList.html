@@ -63,7 +63,7 @@
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Temperatura</label>
                                             <div class="col-lg-8">
-                                                <input type="text" class="form-control" readonly value="{{sensor.rawTemperature == null ? '' : sensor.rawTemperature | number : 2}} °C">
+                                                <input type="text" class="form-control" readonly value="{{sensor.rawTemperature == null ? '' : sensor.rawTemperature | number : 2}} {{scale.selectedScale.symbol}}">
                                             </div>
                                         </div>                                        
                                         <div class="form-group">
