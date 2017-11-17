@@ -22,11 +22,11 @@
 
         Task<DSFamilyTempSensor> SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message);
 
-        Task SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message);
+        Task<DSFamilyTempSensor> SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message);
 
-        Task SetAlarmValue(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract> message);
+        Task<DSFamilyTempSensor> SetAlarmValue(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract> message);
 
-        Task SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message);
+        Task<DSFamilyTempSensor> SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message);
 
         #endregion Methods
     }

@@ -211,7 +211,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
+            var queueName = GetQueueNameNew(viewModel.DeviceId);
             var iotContract = Mapper.Map<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetResolutionRequestIoTContract>(DSFamilyTempSensorConstants.SetResolutionIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
@@ -355,6 +355,17 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugLeave();
 
             return queueName;            
+        }
+
+        private string GetQueueNameNew(Guid deviceId)
+        {
+            _logger.DebugEnter();
+
+            var queueName = string.Format("mqtt-subscription-{0}qos0", deviceId);
+
+            _logger.DebugLeave();
+
+            return queueName;
         }
 
         #endregion

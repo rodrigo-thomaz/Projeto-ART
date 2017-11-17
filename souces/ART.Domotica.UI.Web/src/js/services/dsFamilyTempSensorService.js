@@ -78,49 +78,47 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         EventDispatcher.trigger('dsFamilyTempSensorService_onReadReceived', JSON.parse(payload.body));
     }
 
-    var getSensorById = function (dsFamilyTempSensorId) {
-        for (var i = 0; i < espDeviceService.devices.length; i++) {
-            var device = espDeviceService.devices[i];
-            for (var j = 0; j < device.sensors.length; j++) {
-                var sensor = device.sensors[j];
-                if (sensor.dsFamilyTempSensorId === dsFamilyTempSensorId) {
-                    return sensor;
-                }
+    var getSensorFromPayload = function (payloadObject) {     
+        var device = espDeviceService.getDeviceById(payloadObject.deviceId);
+        for (var i = 0; i < device.sensors.length; i++) {
+            var sensor = device.sensors[i];
+            if (sensor.dsFamilyTempSensorId === payloadObject.dsFamilyTempSensorId) {
+                return sensor;
             }
         }
     };  
 
     var onSetScaleCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getSensorById(result.dsFamilyTempSensorId);
+        var sensor = getSensorFromPayload(result);
         sensor.temperatureScaleId = result.temperatureScaleId;
         $rootScope.$emit('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }    
 
     var onSetResolutionCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getSensorById(result.dsFamilyTempSensorId);
+        var sensor = getSensorFromPayload(result);
         sensor.dsFamilyTempSensorResolutionId = result.dsFamilyTempSensorResolutionId;
         $rootScope.$emit('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
     var SetAlarmOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getSensorById(result.dsFamilyTempSensorId);
+        var sensor = getSensorFromPayload(result);
         sensor.alarmOn = result.alarmOn;
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
     var SetAlarmValueCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getSensorById(result.dsFamilyTempSensorId);
+        var sensor = getSensorFromPayload(result);
         sensor.alarmValue = result.alarmValue;
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmValueCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
     var SetAlarmBuzzerOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getSensorById(result.dsFamilyTempSensorId);
+        var sensor = getSensorFromPayload(result);
         sensor.alarmBuzzerOn = result.alarmBuzzerOn;
         $rootScope.$emit('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }

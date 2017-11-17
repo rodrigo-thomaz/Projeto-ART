@@ -16,6 +16,11 @@
             get; set;
         }
 
+        public Guid DeviceId
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }

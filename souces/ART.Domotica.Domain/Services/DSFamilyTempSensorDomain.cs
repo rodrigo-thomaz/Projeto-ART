@@ -68,10 +68,13 @@ namespace ART.Domotica.Domain.Services
             {
                 throw new Exception("TemperatureScale not found");
             }
-
+            
             dsFamilyTempSensorEntity.TemperatureScaleId = temperatureScaleEntity.Id;
 
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
+
+            //LoadDevice
+            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorEntity.Id);
 
             return dsFamilyTempSensorEntity;
         }
@@ -91,15 +94,18 @@ namespace ART.Domotica.Domain.Services
             {
                 throw new Exception("DSFamilyTempSensorResolution not found");
             }
-
+            
             dsFamilyTempSensorEntity.DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolutionEntity.Id;
 
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
 
+            //LoadDevice
+            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorEntity.Id);
+
             return dsFamilyTempSensorEntity;
         }
 
-        public async Task SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message)
+        public async Task<DSFamilyTempSensor> SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -114,9 +120,14 @@ namespace ART.Domotica.Domain.Services
                 entity.LowAlarm.AlarmOn = message.Contract.AlarmOn;
 
             await _dsFamilyTempSensorRepository.Update(entity);
+
+            //LoadDevice
+            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
+
+            return entity;
         }
 
-        public async Task SetAlarmValue(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract> message)
+        public async Task<DSFamilyTempSensor> SetAlarmValue(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -131,9 +142,14 @@ namespace ART.Domotica.Domain.Services
                 entity.LowAlarm.AlarmValue = message.Contract.AlarmValue;
             
             await _dsFamilyTempSensorRepository.Update(entity);
+
+            //LoadDevice
+            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
+
+            return entity;
         }
 
-        public async Task SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message)
+        public async Task<DSFamilyTempSensor> SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -148,6 +164,11 @@ namespace ART.Domotica.Domain.Services
                 entity.LowAlarm.AlarmBuzzerOn = message.Contract.AlarmBuzzerOn;
 
             await _dsFamilyTempSensorRepository.Update(entity);
+
+            //LoadDevice
+            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
+
+            return entity;
         }
 
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)

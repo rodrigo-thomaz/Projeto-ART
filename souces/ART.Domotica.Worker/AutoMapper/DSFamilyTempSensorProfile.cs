@@ -6,6 +6,7 @@
     using ART.Domotica.Repository.Entities;
 
     using global::AutoMapper;
+    using System.Linq;
 
     public class DSFamilyTempSensorProfile : Profile
     {
@@ -42,6 +43,7 @@
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.DSFamilyTempSensorResolutionId));
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetScaleCompletedModel>()

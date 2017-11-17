@@ -54,6 +54,14 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
         });
     };  
 
+    var getDeviceById = function (deviceId) {
+        for (var i = 0; i < serviceFactory.devices.length; i++) {
+            if (serviceFactory.devices[i].deviceId === deviceId) {
+                return serviceFactory.devices[i];
+            }
+        }
+    }; 
+
     var onReadReceived = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
@@ -124,6 +132,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
     // serviceFactory
 
     serviceFactory.getByPin = getByPin;
+    serviceFactory.getDeviceById = getDeviceById;
     serviceFactory.insertInApplication = insertInApplication;    
     serviceFactory.deleteFromApplication = deleteFromApplication;
 
