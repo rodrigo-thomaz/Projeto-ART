@@ -57,14 +57,14 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         $scope.sensor = sensor;
 
         if (temperatureScaleService.initialized())
-            $scope.scale.selectedScale = temperatureScaleService.getScaleById($scope.sensor.temperatureScaleId);
+            setSelectedScale();
         else
-            clearOnTemperatureScaleServiceInitialized = $rootScope.$on('TemperatureScaleService_Initialized', onTemperatureScaleServiceInitialized);        
+            clearOnTemperatureScaleServiceInitialized = $rootScope.$on('TemperatureScaleService_Initialized', setSelectedScale);        
 
         if (dsFamilyTempSensorResolutionService.initialized())
-            $scope.resolution.selectedResolution = dsFamilyTempSensorResolutionService.getResolutionById($scope.sensor.dsFamilyTempSensorResolutionId);
+            setSelectedResolution();
         else
-            clearOnDSFamilyTempSensorResolutionServiceInitialized = $rootScope.$on('DSFamilyTempSensorResolutionService_Initialized', onDSFamilyTempSensorResolutionServiceInitialized);        
+            clearOnDSFamilyTempSensorResolutionServiceInitialized = $rootScope.$on('DSFamilyTempSensorResolutionService_Initialized', setSelectedResolution);        
         
         $scope.selectedLowAlarm = sensor.lowAlarm;
         $scope.selectedHighAlarm = sensor.highAlarm;
@@ -93,11 +93,11 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnSetAlarmBuzzerOnCompleted();        
     });
 
-    var onTemperatureScaleServiceInitialized = function () {         
+    var setSelectedScale = function () {         
         $scope.scale.selectedScale = temperatureScaleService.getScaleById($scope.sensor.temperatureScaleId);
     };
 
-    var onDSFamilyTempSensorResolutionServiceInitialized = function () {
+    var setSelectedResolution = function () {
         $scope.resolution.selectedResolution = dsFamilyTempSensorResolutionService.getResolutionById($scope.sensor.dsFamilyTempSensorResolutionId);
     };
 
