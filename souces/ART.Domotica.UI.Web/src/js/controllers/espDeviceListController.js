@@ -115,7 +115,6 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var onSetResolutionCompleted = function (event, data) {
-        $scope.sensor.dsFamilyTempSensorResolutionId = data.dsFamilyTempSensorResolutionId;
         toaster.pop('success', 'Sucesso', 'resolução alterada');
     };
 
