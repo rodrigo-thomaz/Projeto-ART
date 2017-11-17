@@ -79,7 +79,7 @@ class DSFamilyTempSensor
 	
 	TempSensorAlarm& 					getLowAlarm();	
 	TempSensorAlarm& 					getHighAlarm();	
-	
+	 
 	bool 								getConnected();	
 	void 								setConnected(bool value);
 
