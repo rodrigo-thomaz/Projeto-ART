@@ -45,6 +45,7 @@ angular.module('app')
                       'toaster',
                       'js/directives/uiTouchSpinScaleExtension.js',
                       'js/services/temperatureScaleService.js',
+                      'js/services/temperatureScaleConverter.js',
                       'js/services/dsFamilyTempSensorResolutionService.js',
                       'js/services/dsFamilyTempSensorService.js',
                       'js/services/espDeviceService.js',

@@ -15,7 +15,7 @@ app.controller('espDeviceItemController', ['$scope', '$timeout', '$log', 'EventD
 
 }]);
 
-app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'temperatureScaleService', 'dsFamilyTempSensorService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, temperatureScaleService, dsFamilyTempSensorService) {
+app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'temperatureScaleConverter', 'temperatureScaleService', 'dsFamilyTempSensorService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, temperatureScaleConverter, temperatureScaleService, dsFamilyTempSensorService) {
 
     $scope.sensor = {};           
 
@@ -131,14 +131,9 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
 
-    $scope.convertTemperature = function (rawTemperature) {
-        switch ($scope.sensor.temperatureScaleId) {
-            case 1:
-                return rawTemperature * 0.0078125;
-            case 2:
-                return (rawTemperature * 0.0140625) + 32;
-            default:
-        }
-    }
+    $scope.convertTemperature = function (raw) {
+        return temperatureScaleConverter.convertFromRaw($scope.sensor.temperatureScaleId, raw);
+    }  
+
 }]);
 

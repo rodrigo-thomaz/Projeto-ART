@@ -56,7 +56,7 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope',
     serviceFactory.scales = [];  
 
     serviceFactory.initialized = initialized;
-    serviceFactory.getScaleById = getScaleById;
+    serviceFactory.getScaleById = getScaleById;    
 
     return serviceFactory;
 

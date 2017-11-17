@@ -225,6 +225,7 @@
     <Content Include="src\js\services\authInterceptorService.js" />
     <Content Include="src\js\services\authService.js" />
     <Content Include="src\js\services\applicationService.js" />
+    <Content Include="src\js\services\temperatureScaleConverter.js" />
     <Content Include="src\js\services\temperatureScaleService.js" />
     <Content Include="src\js\services\dsFamilyTempSensorService.js" />
     <Content Include="src\js\services\stompService.js" />
