@@ -132,6 +132,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
 
     $scope.convertTemperature = function (raw) {
+        //return temperatureScaleConverter.convertToRaw($scope.sensor.temperatureScaleId, temperature);
         return temperatureScaleConverter.convertFromRaw($scope.sensor.temperatureScaleId, raw);
     }  
 
