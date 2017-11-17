@@ -18,11 +18,13 @@
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_MQQT_TOPIC_PUB   				"DSFamilyTempSensor.GetAllByDeviceInApplicationIdIoT" 
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_MQQT_TOPIC_SUB   	"DSFamilyTempSensor.GetAllByDeviceInApplicationIdCompletedIoT"
 
+
 enum TempSensorAlarmPosition 
 { 
 	High = 0, 
 	Low  = 1, 
 };
+
 
 class TempSensorAlarm
 {	
@@ -60,7 +62,7 @@ class DSFamilyTempSensor
 	
   public:
   
-	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm& lowAlarm, TempSensorAlarm& highAlarm);
+	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm);
 
     String								getDSFamilyTempSensorId();		
 	
@@ -75,8 +77,8 @@ class DSFamilyTempSensor
 	byte 								getTemperatureScaleId();
 	void 								setTemperatureScaleId(int value);
 	
-	TempSensorAlarm* 					getLowAlarm();	
-	TempSensorAlarm* 					getHighAlarm();	
+	TempSensorAlarm& 					getLowAlarm();	
+	TempSensorAlarm& 					getHighAlarm();	
 	
 	bool 								getConnected();	
 	void 								setConnected(bool value);
@@ -88,8 +90,8 @@ class DSFamilyTempSensor
 	
 	bool 								hasAlarm();	
 	
-  private:
-  
+  private:	
+	
 	String 								_dsFamilyTempSensorId;	
 	
 	std::vector<uint8_t> 				_deviceAddress;
@@ -101,9 +103,11 @@ class DSFamilyTempSensor
 	
 	byte								_temperatureScaleId;
 		
-	TempSensorAlarm* 					_lowAlarm;
-	TempSensorAlarm* 					_highAlarm;
+	//TempSensorAlarm 					_lowAlarm;
+	//TempSensorAlarm 					_highAlarm;
 		
+	std::vector<TempSensorAlarm> 		_alarms; 
+	
 	bool 								_connected;	
 	
 	float 								_rawTemperature;
@@ -148,7 +152,7 @@ class DSFamilyTempSensorManager
 	bool								_initialized;
 	bool								_initializing;					
 				
-	DSFamilyTempSensor					getDSFamilyTempSensorById(String deviceAddress);
+	DSFamilyTempSensor&					getDSFamilyTempSensorById(String deviceAddress);
 	String 								getFamily(byte deviceAddress[8]);
 	void								createSensorJsonNestedObject(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
 	String 								convertDeviceAddressToString(const uint8_t* deviceAddress);

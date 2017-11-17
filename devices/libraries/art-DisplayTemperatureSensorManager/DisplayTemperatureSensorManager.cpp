@@ -81,8 +81,11 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
 	
 	if(!dsFamilyTempSensor.hasAlarm()) return;
  
-	double lowAlarm = (double)dsFamilyTempSensor.getLowAlarm()->getAlarmValue();
-	double highAlarm = (double)dsFamilyTempSensor.getHighAlarm()->getAlarmValue();
+	//Temp
+	return;
+	
+	double lowAlarm = (double)dsFamilyTempSensor.getLowAlarm().getAlarmValue();
+	double highAlarm = (double)dsFamilyTempSensor.getHighAlarm().getAlarmValue();
  
 	double range = highAlarm - lowAlarm;
 	double value = dsFamilyTempSensor.getTemperatureWithScale() - lowAlarm;

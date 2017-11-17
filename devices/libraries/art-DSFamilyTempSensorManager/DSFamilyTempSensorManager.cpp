@@ -73,17 +73,20 @@ void TempSensorAlarm::setRawTemperature(float value)
 
 // DSFamilyTempSensor
 
-DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm& lowAlarm, TempSensorAlarm& highAlarm)
+DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
 	this->_family = family;
 	this->_validFamily = true;
 	this->_resolution = resolution;
 	this->_temperatureScaleId = temperatureScaleId;
-	this->_lowAlarm = &lowAlarm;
-	this->_highAlarm = &highAlarm;
+	//this->_lowAlarm = lowAlarm;
+	//this->_highAlarm = highAlarm;
 	
 	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back(deviceAddress[i]);	
+		
+	_alarms.push_back(lowAlarm);
+	_alarms.push_back(highAlarm);
 }
 
 String DSFamilyTempSensor::getDSFamilyTempSensorId()
@@ -126,14 +129,16 @@ void DSFamilyTempSensor::setTemperatureScaleId(int value)
 	this->_temperatureScaleId = value;
 }
 
-TempSensorAlarm* DSFamilyTempSensor::getLowAlarm()
+TempSensorAlarm& DSFamilyTempSensor::getLowAlarm()
 {
-	return this->_lowAlarm;
+	//return this->_lowAlarm;	
+	return this->_alarms[0];
 }
 
-TempSensorAlarm* DSFamilyTempSensor::getHighAlarm()
+TempSensorAlarm& DSFamilyTempSensor::getHighAlarm()
 {
-	return this->_highAlarm;
+	//return this->_highAlarm;
+	return this->_alarms[1];
 }
 
 bool DSFamilyTempSensor::getConnected()
@@ -154,8 +159,8 @@ float DSFamilyTempSensor::getRawTemperature()
 void DSFamilyTempSensor::setRawTemperature(float value)
 {
 	this->_rawTemperature = value;
-	this->_lowAlarm->setRawTemperature(value);
-	this->_highAlarm->setRawTemperature(value);	
+	//this->_lowAlarm->setRawTemperature(value);
+	//this->_highAlarm->setRawTemperature(value);	
 }
 
 float DSFamilyTempSensor::getTemperatureWithScale()
@@ -165,7 +170,8 @@ float DSFamilyTempSensor::getTemperatureWithScale()
 
 bool DSFamilyTempSensor::hasAlarm()
 {
-	return this->_lowAlarm->hasAlarm() || this->_highAlarm->hasAlarm();
+	return false;
+	//return this->_lowAlarm->hasAlarm() || this->_highAlarm->hasAlarm();
 }
 
 
@@ -387,12 +393,12 @@ void DSFamilyTempSensorManager::setAlarmOn(String json)
 	bool alarmOn 							= root["alarmOn"];
 	TempSensorAlarmPosition position 		= static_cast<TempSensorAlarmPosition>(root["position"].as<int>());	
 
-	DSFamilyTempSensor dsFamilyTempSensor 	= getDSFamilyTempSensorById(dsFamilyTempSensorId);
+	DSFamilyTempSensor& dsFamilyTempSensor 	= getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
 	if(position == High)
-		dsFamilyTempSensor.getHighAlarm()->setAlarmOn(alarmOn);
+		dsFamilyTempSensor.getHighAlarm().setAlarmOn(alarmOn);
 	else if(position == Low)
-		dsFamilyTempSensor.getLowAlarm()->setAlarmOn(alarmOn);
+		dsFamilyTempSensor.getLowAlarm().setAlarmOn(alarmOn);
 	
 	Serial.print("[DSFamilyTempSensorManager::setAlarmOn] ");
 	Serial.println(json);
@@ -413,13 +419,13 @@ void DSFamilyTempSensorManager::setAlarmValue(String json)
 	float alarmValue 						= root["alarmValue"];
 	TempSensorAlarmPosition position 		= static_cast<TempSensorAlarmPosition>(root["position"].as<int>());	
 	
-	DSFamilyTempSensor dsFamilyTempSensor = getDSFamilyTempSensorById(dsFamilyTempSensorId);
+	DSFamilyTempSensor& dsFamilyTempSensor  = getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
 	if(position == High)
-		dsFamilyTempSensor.getHighAlarm()->setAlarmValue(alarmValue);
+		dsFamilyTempSensor.getHighAlarm().setAlarmValue(alarmValue);
 	else if(position == Low)
-		dsFamilyTempSensor.getLowAlarm()->setAlarmValue(alarmValue);
-
+		dsFamilyTempSensor.getLowAlarm().setAlarmValue(alarmValue);
+	
 	Serial.print("[DSFamilyTempSensorManager::setAlarmValue] ");
 	Serial.println(json);
 }
@@ -439,18 +445,18 @@ void DSFamilyTempSensorManager::setAlarmBuzzerOn(String json)
 	bool alarmBuzzerOn 						= root["alarmBuzzerOn"];
 	TempSensorAlarmPosition position 		= static_cast<TempSensorAlarmPosition>(root["position"].as<int>());	
 
-	DSFamilyTempSensor dsFamilyTempSensor = getDSFamilyTempSensorById(dsFamilyTempSensorId);
+	DSFamilyTempSensor& dsFamilyTempSensor  = getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
 	if(position == High)
-		dsFamilyTempSensor.getHighAlarm()->setAlarmBuzzerOn(alarmBuzzerOn);
+		dsFamilyTempSensor.getHighAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
 	else if(position == Low)
-		dsFamilyTempSensor.getLowAlarm()->setAlarmBuzzerOn(alarmBuzzerOn);
+		dsFamilyTempSensor.getLowAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
 
 	Serial.print("[DSFamilyTempSensorManager::setAlarmBuzzerOn] ");
 	Serial.println(json);
 }
 
-DSFamilyTempSensor DSFamilyTempSensorManager::getDSFamilyTempSensorById(String dsFamilyTempSensorId) {
+DSFamilyTempSensor& DSFamilyTempSensorManager::getDSFamilyTempSensorById(String dsFamilyTempSensorId) {
 	for (int i = 0; i < this->_sensors.size(); ++i) {
 		if (this->_sensors[i].getDSFamilyTempSensorId() == dsFamilyTempSensorId) {
 			return this->_sensors[i];
@@ -491,6 +497,11 @@ void DSFamilyTempSensorManager::createSensorJsonNestedObject(DSFamilyTempSensor 
 	// JSONencoder["highAlarmValue"] = dsFamilyTempSensor.getHighAlarm()->getAlarmValue();
 	// JSONencoder["highAlarmOn"] = dsFamilyTempSensor.getHighAlarm()->getAlarmOn();
 	// JSONencoder["highAlarmBuzzerOn"] = dsFamilyTempSensor.getHighAlarm()->getAlarmBuzzerOn();
+	
+	Serial.println("Low Value Low Value Low Value Low Value Low Value Low Value Low Value Low Value Low Value  Low Value  ");
+	Serial.println(dsFamilyTempSensor.getLowAlarm().getAlarmValue());
+	Serial.println("High Value High Value High Value High Value High Value High Value High Value High Value High Value High Value ");
+	Serial.println(dsFamilyTempSensor.getHighAlarm().getAlarmValue());	
 }
 
 String DSFamilyTempSensorManager::convertDeviceAddressToString(const uint8_t* deviceAddress)
