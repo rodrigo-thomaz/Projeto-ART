@@ -1,19 +1,24 @@
 ﻿'use strict';
-app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, ngAuthSettings, EventDispatcher, stompService) {
+app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'EventDispatcher', 'stompService', function ($http, ngAuthSettings, $rootScope, EventDispatcher, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var initialized = false;
+    var _initializing = false;
+    var _initialized  = false;
 
     var serviceFactory = {};    
 
     var onConnected = function () {
         stompService.client.subscribe('/topic/' + stompService.session + '-TemperatureScale.GetAllViewCompleted', onGetAllCompleted);
-        if (!initialized) {
-            initialized = true;
+        if (!_initializing && !_initialized) {
+            _initializing = true;
             getAll();
         }
     }   
+
+    var initialized = function () {
+        return _initialized;
+    };
 
     var getAll = function () {
         return $http.post(serviceBase + 'api/temperatureScale/getAll').then(function (results) {
@@ -35,6 +40,9 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'EventDispatc
         for (var i = 0; i < data.length; i++) {
             serviceFactory.scales.push(data[i]);
         }
+        _initializing = false;
+        _initialized = true;
+        $rootScope.$emit('TemperatureScaleService_Initialized');
     }
 
     EventDispatcher.on('stompService_onConnected', onConnected);               
@@ -44,9 +52,10 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', 'EventDispatc
         onConnected();
 
     // serviceFactory
-
+        
     serviceFactory.scales = [];  
 
+    serviceFactory.initialized = initialized;
     serviceFactory.getScaleById = getScaleById;
 
     return serviceFactory;
