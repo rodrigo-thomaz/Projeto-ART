@@ -42,16 +42,18 @@
                 .HasPrecision(5,4);
 
             //ResolutionDecimalPlaces
-            Ignore(x => x.ResolutionDecimalPlaces);
+            Property(x => x.DecimalPlaces)
+                .IsRequired()
+                .HasColumnOrder(4);
 
             //ConversionTime
             Property(x => x.ConversionTime)
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .HasPrecision(5, 2);
 
             //Description
             Property(x => x.Description)
-                .HasColumnOrder(5)
+                .HasColumnOrder(6)
                 .HasMaxLength(5000)
                 .IsOptional();
         }

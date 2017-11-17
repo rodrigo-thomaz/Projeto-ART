@@ -34,7 +34,7 @@
             get; set;
         }
 
-        public string ResolutionDecimalPlaces
+        public byte DecimalPlaces
         {
             get; set;
         }

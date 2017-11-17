@@ -123,4 +123,9 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         toaster.pop('success', 'Sucesso', 'alarme buzzer ligado/desligado');
     };
 
+
+    $scope.convertTemperature = function (temperature) {
+        return temperature;
+    }
 }]);
+

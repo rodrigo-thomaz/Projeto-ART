@@ -97,24 +97,28 @@
             dsFamilyTempSensorResolution9.Bits = 9;
             dsFamilyTempSensorResolution9.Resolution = 0.5M;
             dsFamilyTempSensorResolution9.ConversionTime = 93.75M;
+            dsFamilyTempSensorResolution9.DecimalPlaces = 1;
             dsFamilyTempSensorResolution9.Description = "Resolução de 9 bits";
 
             dsFamilyTempSensorResolution10.Name = "10 bits";
             dsFamilyTempSensorResolution10.Bits = 10;
             dsFamilyTempSensorResolution10.Resolution = 0.25M;
             dsFamilyTempSensorResolution10.ConversionTime = 187.5M;
+            dsFamilyTempSensorResolution10.DecimalPlaces = 2;
             dsFamilyTempSensorResolution10.Description = "Resolução de 10 bits";
 
             dsFamilyTempSensorResolution11.Name = "11 bits";
             dsFamilyTempSensorResolution11.Bits = 11;
             dsFamilyTempSensorResolution11.Resolution = 0.125M;
             dsFamilyTempSensorResolution11.ConversionTime = 375;
+            dsFamilyTempSensorResolution11.DecimalPlaces = 3;
             dsFamilyTempSensorResolution11.Description = "Resolução de 11 bits";
 
             dsFamilyTempSensorResolution12.Name = "12 bits";
             dsFamilyTempSensorResolution12.Bits = 12;
             dsFamilyTempSensorResolution12.Resolution = 0.0625M;
             dsFamilyTempSensorResolution12.ConversionTime = 750;
+            dsFamilyTempSensorResolution12.DecimalPlaces = 4;
             dsFamilyTempSensorResolution12.Description = "Resolução de 12 bits";
 
             context.SaveChanges();

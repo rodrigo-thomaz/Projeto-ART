@@ -44,12 +44,9 @@
             get; set;
         }
 
-        public byte ResolutionDecimalPlaces
+        public byte DecimalPlaces
         {
-            get
-            {
-                return BitConverter.GetBytes(decimal.GetBits(Resolution)[3])[2];
-            }
+            get; set;
         }
 
         #endregion Properties
