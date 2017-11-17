@@ -16,6 +16,7 @@ using ART.Infra.CrossCutting.Logging;
 using AutoMapper;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Model;
+using System.Linq;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -211,7 +212,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var queueName = GetQueueNameNew(viewModel.DeviceId);
+            var queueName = GetQueueName(viewModel.DeviceId);
             var iotContract = Mapper.Map<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetResolutionRequestIoTContract>(DSFamilyTempSensorConstants.SetResolutionIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
@@ -242,7 +243,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var queueName = GetQueueNameNew(viewModel.DeviceId);
+            var queueName = GetQueueName(viewModel.DeviceId);
             var iotContract = Mapper.Map<DSFamilyTempSensorSetScaleRequestContract, DSFamilyTempSensorSetScaleRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetScaleRequestIoTContract>(DSFamilyTempSensorConstants.SetScaleIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
@@ -263,17 +264,18 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            await domain.SetAlarmOn(message);
+            var data = await domain.SetAlarmOn(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnCompletedModel>(message.Contract);
+            viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
+            var queueName = GetQueueName(viewModel.DeviceId);
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmOnRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmOnIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
@@ -294,17 +296,18 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            await domain.SetAlarmValue(message);
+            var data = await domain.SetAlarmValue(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmValueRequestContract, DSFamilyTempSensorSetAlarmValueCompletedModel>(message.Contract);
+            viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmValueViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
+            var queueName = GetQueueName(viewModel.DeviceId);
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmValueRequestContract, DSFamilyTempSensorSetAlarmValueRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmValueRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmValueIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
@@ -325,17 +328,18 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            await domain.SetAlarmBuzzerOn(message);
+            var data = await domain.SetAlarmBuzzerOn(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnCompletedModel>(message.Contract);
+            viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmBuzzerOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
-            var queueName = await GetQueueName(message.Contract.DSFamilyTempSensorId);
+            var queueName = GetQueueName(viewModel.DeviceId);
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmBuzzerOnIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
@@ -344,20 +348,7 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugLeave();
         }
 
-        private async Task<string> GetQueueName(Guid dsFamilyTempSensorId)
-        {
-            _logger.DebugEnter();
-
-            var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var entity = await domain.GetDeviceFromSensor(dsFamilyTempSensorId);
-            var queueName = string.Format("mqtt-subscription-{0}qos0", entity.DeviceBaseId);
-
-            _logger.DebugLeave();
-
-            return queueName;            
-        }
-
-        private string GetQueueNameNew(Guid deviceId)
+        private string GetQueueName(Guid deviceId)
         {
             _logger.DebugEnter();
 

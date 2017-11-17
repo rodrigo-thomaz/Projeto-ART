@@ -16,8 +16,6 @@
 
         Task<List<DSFamilyTempSensorResolution>> GetAllResolutions();
 
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
-
         Task<DSFamilyTempSensor> SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message);
 
         Task<DSFamilyTempSensor> SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message);

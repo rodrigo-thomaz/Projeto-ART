@@ -171,18 +171,6 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
-        public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)
-        {
-            var entity = await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorId);
-
-            if (entity == null)
-            {
-                throw new Exception("DSFamilyTempSensor not found");
-            }            
-
-            return entity;
-        }
-
         #endregion
     }
 }
