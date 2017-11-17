@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, $log, $rootScope, ngAuthSettings, EventDispatcher, stompService) {
+app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'EventDispatcher', 'stompService', 'espDeviceService', function ($http, $log, $rootScope, ngAuthSettings, EventDispatcher, stompService, espDeviceService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -79,9 +79,23 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     }
 
     var onSetScaleCompleted = function (payload) {
-        var dsFamilyTempSensorId = JSON.parse(payload.body).dsFamilyTempSensorId;
-        $rootScope.$emit('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + dsFamilyTempSensorId, JSON.parse(payload.body));
+        var result = JSON.parse(payload.body);
+        var sensor = getSensorById(result.dsFamilyTempSensorId);
+        sensor.temperatureScaleId = result.temperatureScaleId;
+        $rootScope.$emit('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
+
+    var getSensorById = function (dsFamilyTempSensorId) {
+        for (var i = 0; i < espDeviceService.devices.length; i++) {
+            var device = espDeviceService.devices[i];
+            for (var j = 0; j < device.sensors.length; j++) {
+                var sensor = device.sensors[j];
+                if (sensor.dsFamilyTempSensorId === dsFamilyTempSensorId) {
+                    return sensor;
+                }
+            }            
+        }
+    };  
 
     var onSetResolutionCompleted = function (payload) {
         var dsFamilyTempSensorId = JSON.parse(payload.body).dsFamilyTempSensorId;
@@ -110,8 +124,6 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         onConnected();
 
     // serviceFactory
-
-    serviceFactory.sensors = [];
 
     serviceFactory.setScale = setScale;
     serviceFactory.setResolution = setResolution;

@@ -33,24 +33,31 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     $scope.changeScale = function () {
+        if (!initialized) return;
         dsFamilyTempSensorService.setScale($scope.sensor.dsFamilyTempSensorId, $scope.scale.selectedScale.id);
     };
 
     $scope.changeResolution = function () {
+        if (!initialized) return;
         dsFamilyTempSensorService.setResolution($scope.sensor.dsFamilyTempSensorId, $scope.resolution.selectedResolution.id);
     };   
 
     $scope.changeAlarmOn = function (position, alarmOn) {
+        if (!initialized) return;
         dsFamilyTempSensorService.setAlarmOn($scope.sensor.dsFamilyTempSensorId, alarmOn, position);        
     };
 
     $scope.changeAlarmValue = function (position, alarmValue) {
+        if (!initialized) return;
         dsFamilyTempSensorService.setAlarmValue($scope.sensor.dsFamilyTempSensorId, alarmValue, position);        
     };
 
     $scope.changeAlarmBuzzerOn = function (position, alarmBuzzerOn) {
+        if (!initialized) return;
         dsFamilyTempSensorService.setAlarmBuzzerOn($scope.sensor.dsFamilyTempSensorId, alarmBuzzerOn, position);        
     };
+
+    var initialized = false;
 
     $scope.init = function (sensor) {
 
@@ -74,6 +81,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnSetAlarmOnCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmOnCompleted);
         clearOnSetAlarmValueCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetAlarmValueCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmValueCompleted);
         clearOnSetAlarmBuzzerOnCompleted = $rootScope.$on('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmBuzzerOnCompleted);        
+
+        initialized = true;
     };    
         
     var clearOnTemperatureScaleServiceInitialized = null;
@@ -93,7 +102,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnSetAlarmBuzzerOnCompleted();        
     });
 
-    var setSelectedScale = function () {         
+    var setSelectedScale = function () {  
         $scope.scale.selectedScale = temperatureScaleService.getScaleById($scope.sensor.temperatureScaleId);
     };
 
@@ -102,7 +111,6 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var onSetScaleCompleted = function (event, data) {
-        $scope.sensor.temperatureScaleId = data.temperatureScaleId;
         toaster.pop('success', 'Sucesso', 'escala alterada');
     };
 
