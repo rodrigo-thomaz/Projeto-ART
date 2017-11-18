@@ -109,11 +109,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("setAlarmValue")]
+        [Route("setAlarmCelsius")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetAlarmValue(DSFamilyTempSensorSetAlarmValueRequestContract contract)
+        public async Task<IHttpActionResult> SetAlarmCelsius(DSFamilyTempSensorSetAlarmCelsiusRequestContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetAlarmValue(CreateMessage(contract));
+            await _dsFamilyTempSensorProducer.SetAlarmCelsius(CreateMessage(contract));
             return Ok();
         }
 

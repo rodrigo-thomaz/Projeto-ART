@@ -41,7 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorSetAlarmOnRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetAlarmValueRequestContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetAlarmCelsiusRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmBuzzerOnRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetScaleRequestContract.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />

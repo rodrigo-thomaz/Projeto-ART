@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnCompletedModel.cs" />
-    <Compile Include="DSFamilyTempSensorSetAlarmValueCompletedModel.cs" />
+    <Compile Include="DSFamilyTempSensorSetAlarmCelsiusCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetScaleCompletedModel.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
     <Compile Include="ESPDeviceAdminDetailModel.cs" />

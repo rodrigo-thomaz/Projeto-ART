@@ -76,7 +76,7 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
     this->_displayManager->display.setTextSize(1);
     this->_displayManager->display.setTextColor(WHITE);
     this->_displayManager->display.setCursor(x, y - 8);       
-	this->_displayManager->display.print(dsFamilyTempSensor.getTemperatureWithScale());
+	this->_displayManager->display.print(dsFamilyTempSensor.getTempConverted());
     this->_displayManager->display.println(" C");
 	
 	if(!dsFamilyTempSensor.hasAlarm()) return;
@@ -84,11 +84,11 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
 	//Temp
 	return;
 	
-	double lowAlarm = (double)dsFamilyTempSensor.getLowAlarm().getAlarmValue();
-	double highAlarm = (double)dsFamilyTempSensor.getHighAlarm().getAlarmValue();
+	double lowAlarm = (double)dsFamilyTempSensor.getLowAlarm().getAlarmCelsius();
+	double highAlarm = (double)dsFamilyTempSensor.getHighAlarm().getAlarmCelsius();
  
 	double range = highAlarm - lowAlarm;
-	double value = dsFamilyTempSensor.getTemperatureWithScale() - lowAlarm;
+	double value = dsFamilyTempSensor.getTempConverted() - lowAlarm;
 	double percent = (value * 100) / range;
 	int tempHeight = round((width * percent) / 100);
 	

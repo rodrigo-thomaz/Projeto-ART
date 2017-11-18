@@ -30,13 +30,13 @@ class TempSensorAlarm
 {	
 	public:
 	
-		TempSensorAlarm(bool alarmOn, float alarmValue, bool alarmBuzzerOn, TempSensorAlarmPosition alarmPosition);
+		TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, TempSensorAlarmPosition alarmPosition);
 		
 		bool 								getAlarmOn();	
 		void 								setAlarmOn(bool value);
 		
-		float 								getAlarmValue();
-		void 								setAlarmValue(float value);
+		float 								getAlarmCelsius();
+		void 								setAlarmCelsius(float value);
 		
 		bool 								getAlarmBuzzerOn();	
 		void 								setAlarmBuzzerOn(bool value);
@@ -45,16 +45,16 @@ class TempSensorAlarm
 		
 		bool 								hasAlarmBuzzer();
 		
-		void 								setRawTemperature(float value);
+		void 								setTempCelsius(float value);
 	
 	private:
 	
 		bool 								_alarmOn;		
-		float 								_alarmValue;
+		float 								_alarmCelsius;
 		bool 								_alarmBuzzerOn;
 		TempSensorAlarmPosition				_alarmPosition;
 		
-		float 								_rawTemperature;
+		float 								_tempCelsius;
 };
 
 class DSFamilyTempSensor
@@ -83,10 +83,10 @@ class DSFamilyTempSensor
 	bool 								getConnected();	
 	void 								setConnected(bool value);
 
-	float 								getRawTemperature();
-	void 								setRawTemperature(float value);
+	float 								getTempCelsius();
+	void 								setTempCelsius(float value);
 	
-	float 								getTemperatureWithScale();
+	float 								getTempConverted();
 	
 	bool 								hasAlarm();	
 	bool 								hasAlarmBuzzer();	
@@ -108,7 +108,7 @@ class DSFamilyTempSensor
 	
 	bool 								_connected;	
 	
-	float 								_rawTemperature;
+	float 								_tempCelsius;
 	
 	long 								_epochTimeUtc;	
 	
@@ -137,7 +137,7 @@ class DSFamilyTempSensorManager
 	void 								setResolution(String json);
 	
 	void 								setAlarmOn(String json);
-	void 								setAlarmValue(String json);
+	void 								setAlarmCelsius(String json);
 	void 								setAlarmBuzzerOn(String json);
 				
   private:			

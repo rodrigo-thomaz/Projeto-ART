@@ -62,11 +62,11 @@
                 .HasColumnName("LowAlarmOn")
                 .IsRequired();
 
-            //LowTempSensorAlarm.AlarmValue
-            Property(x => x.LowAlarm.AlarmValue)
+            //LowTempSensorAlarm.AlarmCelsius
+            Property(x => x.LowAlarm.AlarmCelsius)
                 .HasColumnOrder(6)
                 .HasPrecision(9, 4)
-                .HasColumnName("LowAlarmValue")
+                .HasColumnName("LowAlarmCelsius")
                 .IsRequired();
 
             //LowTempSensorAlarm.AlarmBuzzerOn
@@ -81,11 +81,11 @@
                 .HasColumnName("HighAlarmOn")
                 .IsRequired();
 
-            //HighTempSensorAlarm.AlarmValue
-            Property(x => x.HighAlarm.AlarmValue)
+            //HighTempSensorAlarm.AlarmCelsius
+            Property(x => x.HighAlarm.AlarmCelsius)
                 .HasColumnOrder(9)
                 .HasPrecision(9, 4)
-                .HasColumnName("HighAlarmValue")
+                .HasColumnName("HighAlarmCelsius")
                 .IsRequired();
 
             //HighTempSensorAlarm.AlarmBuzzerOn

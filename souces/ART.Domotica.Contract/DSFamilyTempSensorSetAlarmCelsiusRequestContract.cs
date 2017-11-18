@@ -1,17 +1,12 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Contract
 {
     using System;
 
-    public class DSFamilyTempSensorSetAlarmValueCompletedModel
+    public class DSFamilyTempSensorSetAlarmCelsiusRequestContract
     {
         #region Properties
 
-        public decimal AlarmValue
-        {
-            get; set;
-        }
-
-        public Guid DeviceId
+        public decimal AlarmCelsius
         {
             get; set;
         }
@@ -21,7 +16,7 @@
             get; set;
         }
 
-        public TempSensorAlarmPositionModel Position
+        public TempSensorAlarmPositionContract Position
         {
             get; set;
         }

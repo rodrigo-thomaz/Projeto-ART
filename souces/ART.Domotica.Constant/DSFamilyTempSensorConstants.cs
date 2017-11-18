@@ -14,9 +14,9 @@
         public static readonly string SetAlarmOnIoTQueueName = "DSFamilyTempSensor.SetAlarmOnIoT";
         public static readonly string SetAlarmOnQueueName = "DSFamilyTempSensor.SetAlarmOn";
         public static readonly string SetAlarmOnViewCompletedQueueName = "DSFamilyTempSensor.SetAlarmOnViewCompleted";
-        public static readonly string SetAlarmValueIoTQueueName = "DSFamilyTempSensor.SetAlarmValueIoT";
-        public static readonly string SetAlarmValueQueueName = "DSFamilyTempSensor.SetAlarmValue";
-        public static readonly string SetAlarmValueViewCompletedQueueName = "DSFamilyTempSensor.SetAlarmValueViewCompleted";
+        public static readonly string SetAlarmCelsiusIoTQueueName = "DSFamilyTempSensor.SetAlarmCelsiusIoT";
+        public static readonly string SetAlarmCelsiusQueueName = "DSFamilyTempSensor.SetAlarmCelsius";
+        public static readonly string SetAlarmCelsiusViewCompletedQueueName = "DSFamilyTempSensor.SetAlarmCelsiusViewCompleted";
         public static readonly string SetResolutionIoTQueueName = "DSFamilyTempSensor.SetResolutionIoT";
         public static readonly string SetResolutionQueueName = "DSFamilyTempSensor.SetResolution";
         public static readonly string SetResolutionViewCompletedQueueName = "DSFamilyTempSensor.SetResolutionViewCompleted";

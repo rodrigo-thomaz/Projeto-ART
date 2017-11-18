@@ -14,7 +14,7 @@
             get; set;
         }
 
-        public decimal AlarmValue
+        public decimal AlarmCelsius
         {
             get; set;
         }

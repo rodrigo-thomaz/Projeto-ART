@@ -38,13 +38,13 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         });
     };
 
-    var setAlarmValue = function (dsFamilyTempSensorId, alarmValue, position) {
+    var setAlarmCelsius = function (dsFamilyTempSensorId, alarmCelsius, position) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
-            alarmValue: alarmValue,
+            alarmCelsius: alarmCelsius,
             position: position,
         }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setAlarmValue', data).then(function (results) {
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setAlarmCelsius', data).then(function (results) {
             return results;
         });
     };
@@ -66,7 +66,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetScaleViewCompleted', onSetScaleCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmOnViewCompleted', SetAlarmOnCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmValueViewCompleted', SetAlarmValueCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmCelsiusViewCompleted', SetAlarmCelsiusCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmBuzzerOnViewCompleted', SetAlarmBuzzerOnCompleted);
 
         if (!initialized) {
@@ -109,11 +109,11 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
-    var SetAlarmValueCompleted = function (payload) {
+    var SetAlarmCelsiusCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        sensor.alarmValue = result.alarmValue;
-        $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmValueCompleted_Id_' + result.dsFamilyTempSensorId, result);
+        sensor.alarmCelsius = result.alarmCelsius;
+        $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
     var SetAlarmBuzzerOnCompleted = function (payload) {
@@ -135,7 +135,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     serviceFactory.setResolution = setResolution;
 
     serviceFactory.setAlarmOn = setAlarmOn;
-    serviceFactory.setAlarmValue = setAlarmValue;
+    serviceFactory.setAlarmCelsius = setAlarmCelsius;
     serviceFactory.setAlarmBuzzerOn = setAlarmBuzzerOn;    
 
     return serviceFactory;

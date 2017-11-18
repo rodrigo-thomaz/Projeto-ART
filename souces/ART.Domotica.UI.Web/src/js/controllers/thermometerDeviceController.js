@@ -151,8 +151,8 @@ app.controller('thermometerDeviceController', ['$scope', '$timeout', '$log', 'Ev
             this.isConnected = value.isConnected;
             this.resolution = value.resolution;
             //this.scale = value.scale;
-            this.temperature = value.rawTemperature;
-            this.chart[1].key = 'Temperatura ' + value.rawTemperature + ' °C';
+            this.temperature = value.tempCelsius;
+            this.chart[1].key = 'Temperatura ' + value.tempCelsius + ' °C';
             this.epochTime = value.epochTimeUtc;
 
             this.highAlarm = value.highAlarm;
@@ -166,7 +166,7 @@ app.controller('thermometerDeviceController', ['$scope', '$timeout', '$log', 'Ev
 
             this.chart[1].values.push({
                 epochTime: value.epochTimeUtc,
-                temperature: value.rawTemperature,
+                temperature: value.tempCelsius,
             });
 
             this.chart[2].values.push({

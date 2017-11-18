@@ -81,7 +81,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
             for (var j = 0; j < newSensors.length; j++) {
                 if (oldSensors[i].dsFamilyTempSensorId === newSensors[j].dsFamilyTempSensorId) {
                     oldSensors[i].isConnected = newSensors[j].isConnected;
-                    oldSensors[i].rawTemperature = newSensors[j].rawTemperature;
+                    oldSensors[i].tempCelsius = newSensors[j].tempCelsius;
                     break;
                 }
             }

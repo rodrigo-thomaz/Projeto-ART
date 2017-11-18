@@ -58,12 +58,12 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task SetAlarmValue(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract> message)
+        public async Task SetAlarmCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmCelsiusRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmValueQueueName, null, payload);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmCelsiusQueueName, null, payload);
             });
         }
 
@@ -111,7 +111,7 @@ namespace ART.Domotica.Producer.Services
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetAlarmValueQueueName
+                  queue: DSFamilyTempSensorConstants.SetAlarmCelsiusQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false

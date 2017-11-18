@@ -152,13 +152,13 @@
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = -55,
+                        AlarmCelsius = -55,
                         AlarmBuzzerOn = false,
                     },
                     HighAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = 125,
+                        AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
                     CreateDate = DateTime.Now,
@@ -184,13 +184,13 @@
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = -55,
+                        AlarmCelsius = -55,
                         AlarmBuzzerOn = false,
                     },
                     HighAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = 125,
+                        AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
                     CreateDate = DateTime.Now,
@@ -216,13 +216,13 @@
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = -55,
+                        AlarmCelsius = -55,
                         AlarmBuzzerOn = false,
                     },
                     HighAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = 125,
+                        AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
                     CreateDate = DateTime.Now,
@@ -248,13 +248,13 @@
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = -55,
+                        AlarmCelsius = -55,
                         AlarmBuzzerOn = false,
                     },
                     HighAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = 125,
+                        AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
                     CreateDate = DateTime.Now,
@@ -280,13 +280,13 @@
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = -55,
+                        AlarmCelsius = -55,
                         AlarmBuzzerOn = false,
                     },
                     HighAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
-                        AlarmValue = 125,
+                        AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
                     CreateDate = DateTime.Now,

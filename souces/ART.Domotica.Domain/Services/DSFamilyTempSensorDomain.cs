@@ -127,7 +127,7 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
-        public async Task<DSFamilyTempSensor> SetAlarmValue(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmValueRequestContract> message)
+        public async Task<DSFamilyTempSensor> SetAlarmCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmCelsiusRequestContract> message)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
 
@@ -137,9 +137,9 @@ namespace ART.Domotica.Domain.Services
             }
 
             if (message.Contract.Position == TempSensorAlarmPositionContract.High)
-                entity.HighAlarm.AlarmValue = message.Contract.AlarmValue;
+                entity.HighAlarm.AlarmCelsius = message.Contract.AlarmCelsius;
             else if (message.Contract.Position == TempSensorAlarmPositionContract.Low)
-                entity.LowAlarm.AlarmValue = message.Contract.AlarmValue;
+                entity.LowAlarm.AlarmCelsius = message.Contract.AlarmCelsius;
             
             await _dsFamilyTempSensorRepository.Update(entity);
 
