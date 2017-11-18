@@ -105,9 +105,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var SetAlarmOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        if (result.position = 0)
+        if (result.position = 'Low')
             sensor.lowAlarm.alarmOn = result.alarmOn;
-        else if (result.position = 1)
+        else if (result.position = 'High')
             sensor.highAlarm.alarmOn = result.alarmOn;
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
@@ -115,9 +115,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var SetAlarmCelsiusCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        if(result.position = 0)
+        if (result.position = 'Low')
             sensor.lowAlarm.alarmCelsius = result.alarmCelsius;
-        else if (result.position = 1)
+        else if (result.position = 'High')
             sensor.highAlarm.alarmCelsius = result.alarmCelsius;
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
@@ -125,9 +125,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var SetAlarmBuzzerOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        if (result.position = 0)
+        if (result.position = 'Low')
             sensor.lowAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
-        else if (result.position = 1)
+        else if (result.position = 'High')
             sensor.highAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
         $rootScope.$emit('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
