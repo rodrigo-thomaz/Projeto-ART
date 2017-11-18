@@ -142,6 +142,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     var onSetAlarmCelsiusCompleted = function (event, data) {
         toaster.pop('success', 'Sucesso', 'alarme alterado');
+        var sensor = $scope.sensor;
     };
 
     var onSetAlarmBuzzerOnCompleted = function (event, data) {
