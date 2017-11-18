@@ -102,7 +102,7 @@
                                             <label class="col-lg-4 control-label">Alarme alto</label>
                                             <div class="col-lg-8">
                                                 <!--data-min='-55' data-max="125"-->
-                                                <input ng-disabled="!selectedHighAlarm.alarmOn" ng-model-options="{ debounce: 1000 }" ng-change="changeAlarmCelsius('High', selectedHighAlarm.alarmCelsius)" type="number" ng-model="selectedHighAlarm.alarmCelsius" class="form-control" ui-jq="TouchSpin" data-step="0.1" data-decimals="4" data-postfix="{{ scale.selectedScale.symbol }}" ui-touch-spin-scale-extension="scale.selectedScale">
+                                                <input ng-disabled="!selectedHighAlarm.alarmOn" ng-model-options="{ debounce: 1000 }" ng-change="changeAlarmValue('High', selectedHighAlarm.alarmCelsius)" type="number" ng-model="selectedHighAlarm.alarmCelsius" class="form-control" ui-jq="TouchSpin" data-step="0.1" data-decimals="4" data-postfix="{{ scale.selectedScale.symbol }}" ui-touch-spin-scale-extension="scale.selectedScale">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -129,7 +129,7 @@
                                             <label class="col-lg-4 control-label">Alarme baixo</label>
                                             <div class="col-lg-8">
                                                 <!--data-min='-55' data-max="125"-->
-                                                <input ng-disabled="!selectedLowAlarm.alarmOn" ng-model-options="{ debounce: 1000 }" ng-change="changeAlarmCelsius('Low', selectedLowAlarm.alarmCelsius)" type="number" ng-model="selectedLowAlarm.alarmCelsius" class="form-control" ui-jq="TouchSpin" data-step="0.1" data-decimals="4" data-postfix="{{ scale.selectedScale.symbol }}" ui-touch-spin-scale-extension="scale.selectedScale">
+                                                <input ng-disabled="!selectedLowAlarm.alarmOn" ng-model-options="{ debounce: 1000 }" ng-change="changeAlarmValue('Low', selectedLowAlarm.alarmCelsius)" type="number" ng-model="selectedLowAlarm.alarmCelsius" class="form-control" ui-jq="TouchSpin" data-step="0.1" data-decimals="4" data-postfix="{{ scale.selectedScale.symbol }}" ui-touch-spin-scale-extension="scale.selectedScale">
                                             </div>
                                         </div>                                                                         
                                     </form>

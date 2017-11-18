@@ -5,55 +5,45 @@ app.factory('temperatureScaleConverter', function () {
 
     // To
 
-    var convertToRaw = function (temperatureScaleId, temperature) {
+    var convertToCelsius = function (temperatureScaleId, temperature) {
         switch (temperatureScaleId) {
             case 1:
-                return convertCelsiusToRaw(temperature);
+                return temperature;
             case 2:
-                return convertFahrenheitToRaw(temperature);
+                return convertFahrenheitToCelsius(temperature);
             default:
         }
     };
 
-    var convertRawToCelsius = function (raw) {
-        return raw * 0.0078125;
-    }
-
-    var convertRawToFahrenheit = function (raw) {
-        return (raw * 0.0140625) + 32;
-    }
+    var convertFahrenheitToCelsius = function (fahrenheit) {
+        return (fahrenheit - 32) * (5 / 9);
+    }       
 
     // From
 
-    var convertFromRaw = function (temperatureScaleId, raw) {
+    var convertFromCelsius = function (temperatureScaleId, celsius) {
         switch (temperatureScaleId) {
             case 1:
-                return convertRawToCelsius(raw);
+                return celsius;
             case 2:
-                return convertRawToFahrenheit(raw);
+                return convertCelsiusToFahrenheit(celsius);
             default:
         }
-    };
+    };       
 
-    var convertCelsiusToRaw = function (celsius) {
-        return celsius / 0.0078125;
+    var convertCelsiusToFahrenheit = function (celsius) {
+        return (celsius * 1.8) + 32;
     }
-
-    var convertFahrenheitToRaw = function (fahrenheit) {
-        return (fahrenheit - 32) / 0.0140625;
-    }   
 
     // To
 
-    serviceFactory.convertToRaw = convertToRaw;
-    serviceFactory.convertRawToCelsius = convertRawToCelsius;
-    serviceFactory.convertRawToFahrenheit = convertRawToFahrenheit;
+    serviceFactory.convertToCelsius = convertToCelsius;
+    serviceFactory.convertFahrenheitToCelsius = convertFahrenheitToCelsius;
 
     // From
 
-    serviceFactory.convertFromRaw = convertFromRaw;
-    serviceFactory.convertCelsiusToRaw = convertCelsiusToRaw;
-    serviceFactory.convertFahrenheitToRaw = convertFahrenheitToRaw;
+    serviceFactory.convertFromCelsius = convertFromCelsius;
+    serviceFactory.convertCelsiusToFahrenheit = convertCelsiusToFahrenheit;
         
     return serviceFactory;
 
