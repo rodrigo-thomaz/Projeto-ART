@@ -19,8 +19,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     $scope.sensor = {};           
 
-    $scope.selectedLowAlarm = {};
-    $scope.selectedHighAlarm = {};
+    $scope.lowAlarmView = {};
+    $scope.highAlarmView = {};
 
     $scope.scale = {
         availableScales: temperatureScaleService.scales,
@@ -64,25 +64,33 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
         $scope.sensor = sensor;
 
+        // Scale
         if (temperatureScaleService.initialized())
             setSelectedScale();
         else
             clearOnTemperatureScaleServiceInitialized = $rootScope.$on('TemperatureScaleService_Initialized', setSelectedScale);        
 
+        // Resolution
         if (dsFamilyTempSensorResolutionService.initialized())
             setSelectedResolution();
         else
             clearOnDSFamilyTempSensorResolutionServiceInitialized = $rootScope.$on('DSFamilyTempSensorResolutionService_Initialized', setSelectedResolution);        
-                
-
-        $scope.selectedLowAlarm = sensor.lowAlarm;
-        $scope.selectedHighAlarm = sensor.highAlarm;
-
+        
+        // Alarm
         var lowAlarmCelsiusConverted = temperatureScaleConverter.convertFromCelsius(sensor.temperatureScaleId, sensor.lowAlarm.alarmCelsius);
         var highAlarmCelsiusConverted = temperatureScaleConverter.convertFromCelsius(sensor.temperatureScaleId, sensor.highAlarm.alarmCelsius);
 
-        $scope.selectedLowAlarm.alarmCelsius = lowAlarmCelsiusConverted;
-        $scope.selectedHighAlarm.alarmCelsius = highAlarmCelsiusConverted;
+        $scope.lowAlarmView = {
+            alarmOn: sensor.lowAlarm.alarmOn,
+            alarmValue: lowAlarmCelsiusConverted,
+            alarmBuzzerOn: sensor.lowAlarm.alarmBuzzerOn,
+        };
+
+        $scope.highAlarmView = {
+            alarmOn: sensor.highAlarm.alarmOn,
+            alarmValue: highAlarmCelsiusConverted,
+            alarmBuzzerOn: sensor.highAlarm.alarmBuzzerOn,
+        };        
         
         clearOnSetScaleCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetScaleCompleted);
         clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetResolutionCompleted);
@@ -119,9 +127,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var onSetScaleCompleted = function (event, data) {
-        $scope.sensor.tempCelsius = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.tempCelsius);
-        $scope.selectedHighAlarm.alarmCelsius = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.highAlarm.alarmCelsius);
-        $scope.selectedLowAlarm.alarmCelsius = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.lowAlarm.alarmCelsius);
+        $scope.highAlarmView.alarmValue = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.highAlarm.alarmCelsius);
+        $scope.lowAlarmView.alarmValue = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.lowAlarm.alarmCelsius);
         toaster.pop('success', 'Sucesso', 'escala alterada');
     };
 
@@ -142,8 +149,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
 
-    $scope.convertTemperature = function (raw) {
-        return temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, raw);
+    $scope.convertTemperature = function (temperature) {
+        return temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, temperature);
     }  
 
 }]);
