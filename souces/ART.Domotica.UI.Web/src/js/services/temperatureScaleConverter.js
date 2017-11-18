@@ -8,7 +8,7 @@ app.factory('temperatureScaleConverter', function () {
     var convertToCelsius = function (temperatureScaleId, temperature) {
         switch (temperatureScaleId) {
             case 1:
-                return temperature;
+                return parseFloat(temperature.toFixed(4));
             case 2:
                 return convertFahrenheitToCelsius(temperature);
             default:
@@ -16,7 +16,8 @@ app.factory('temperatureScaleConverter', function () {
     };
 
     var convertFahrenheitToCelsius = function (fahrenheit) {
-        return (fahrenheit - 32) * (5 / 9);
+        var result = (fahrenheit - 32) * (5 / 9);
+        return parseFloat(result.toFixed(4));
     }       
 
     // From
@@ -24,7 +25,7 @@ app.factory('temperatureScaleConverter', function () {
     var convertFromCelsius = function (temperatureScaleId, celsius) {
         switch (temperatureScaleId) {
             case 1:
-                return celsius;
+                return parseFloat(celsius.toFixed(4));
             case 2:
                 return convertCelsiusToFahrenheit(celsius);
             default:
@@ -32,7 +33,8 @@ app.factory('temperatureScaleConverter', function () {
     };       
 
     var convertCelsiusToFahrenheit = function (celsius) {
-        return (celsius * 1.8) + 32;
+        var result = (celsius * 1.8) + 32;
+        return parseFloat(result.toFixed(4));
     }
 
     // To
