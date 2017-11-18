@@ -65,7 +65,7 @@
             //LowTempSensorAlarm.AlarmCelsius
             Property(x => x.LowAlarm.AlarmCelsius)
                 .HasColumnOrder(6)
-                .HasPrecision(9, 4)
+                .HasPrecision(7, 4)
                 .HasColumnName("LowAlarmCelsius")
                 .IsRequired();
 
@@ -84,7 +84,7 @@
             //HighTempSensorAlarm.AlarmCelsius
             Property(x => x.HighAlarm.AlarmCelsius)
                 .HasColumnOrder(9)
-                .HasPrecision(9, 4)
+                .HasPrecision(7, 4)
                 .HasColumnName("HighAlarmCelsius")
                 .IsRequired();
 
