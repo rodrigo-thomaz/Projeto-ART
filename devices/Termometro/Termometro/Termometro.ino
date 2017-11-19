@@ -2,6 +2,7 @@
 #include "ConfigurationManager.h"
 #include "DSFamilyTempSensorManager.h"
 #include "TemperatureScaleManager.h"
+#include "TemperatureScaleConverter.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
 #include "WiFiManager.h"
@@ -64,12 +65,13 @@ DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, configurationManager, mqqtManager, buzzerManager);
 TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager, mqqtManager);
+TemperatureScaleConverter temperatureScaleConverter(debugManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
-DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager);
+DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager, temperatureScaleConverter);
 
 void setup() {
 		

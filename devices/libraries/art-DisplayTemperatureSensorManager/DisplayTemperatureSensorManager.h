@@ -5,11 +5,12 @@
 #include "DebugManager.h"
 #include "DisplayManager.h"
 #include "DSFamilyTempSensorManager.h"
+#include "TemperatureScaleConverter.h"
 
 class DisplayTemperatureSensorManager
 {
 public:
-	DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager);
+	DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager, TemperatureScaleConverter& temperatureScaleConverter);
 	~DisplayTemperatureSensorManager();	
 		
 	void						printUpdate(bool on);	
@@ -18,8 +19,9 @@ public:
 private:
 
 	DisplayManager*       		_displayManager;	
-	DSFamilyTempSensorManager*   _dsFamilyTempSensorManager;
+	DSFamilyTempSensorManager*  _dsFamilyTempSensorManager;
 	DebugManager*         		_debugManager;
+	TemperatureScaleConverter*  _temperatureScaleConverter;
 
 	void						printSensor(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height);
 	

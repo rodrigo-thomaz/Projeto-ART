@@ -86,8 +86,6 @@ class DSFamilyTempSensor
 	float 								getTempCelsius();
 	void 								setTempCelsius(float value);
 	
-	float 								getTempConverted();
-	
 	bool 								hasAlarm();	
 	bool 								hasAlarmBuzzer();	
 	

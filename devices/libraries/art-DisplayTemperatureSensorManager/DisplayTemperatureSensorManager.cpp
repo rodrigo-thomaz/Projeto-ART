@@ -4,11 +4,12 @@
 #include "DisplayManager.h"
 #include "DSFamilyTempSensorManager.h"
 
-DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager)
+DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager, TemperatureScaleConverter& temperatureScaleConverter)
 {
 	this->_displayManager = &displayManager;
 	this->_dsFamilyTempSensorManager = &dsFamilyTempSensorManager;
 	this->_debugManager = &debugManager;
+	this->_temperatureScaleConverter = &temperatureScaleConverter;
 }
 
 DisplayTemperatureSensorManager::~DisplayTemperatureSensorManager()
@@ -72,11 +73,13 @@ void DisplayTemperatureSensorManager::printSensors()
 
 void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
 {
+	float tempConverted = this->_temperatureScaleConverter->convertFromCelsius(dsFamilyTempSensor.getTemperatureScaleId(), dsFamilyTempSensor.getTempCelsius());
+	
 	this->_displayManager->display.setFont();
     this->_displayManager->display.setTextSize(1);
     this->_displayManager->display.setTextColor(WHITE);
     this->_displayManager->display.setCursor(x, y - 8);       
-	this->_displayManager->display.print(dsFamilyTempSensor.getTempConverted());
+	this->_displayManager->display.print(tempConverted);
     this->_displayManager->display.println(" C");
 	
 	if(!dsFamilyTempSensor.hasAlarm()) return;
@@ -88,7 +91,7 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
 	double highAlarm = (double)dsFamilyTempSensor.getHighAlarm().getAlarmCelsius();
  
 	double range = highAlarm - lowAlarm;
-	double value = dsFamilyTempSensor.getTempConverted() - lowAlarm;
+	double value = dsFamilyTempSensor.getTempCelsius() - lowAlarm;
 	double percent = (value * 100) / range;
 	int tempHeight = round((width * percent) / 100);
 	

@@ -159,11 +159,6 @@ void DSFamilyTempSensor::setTempCelsius(float value)
 	this->_alarms[1].setTempCelsius(value);	
 }
 
-float DSFamilyTempSensor::getTempConverted()
-{
-	return this->_tempCelsius;
-}
-
 bool DSFamilyTempSensor::hasAlarm()
 {
 	return this->_alarms[0].hasAlarm() || this->_alarms[1].hasAlarm();
