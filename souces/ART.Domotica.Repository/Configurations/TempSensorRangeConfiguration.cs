@@ -17,7 +17,17 @@
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //Min
+            Property(x => x.Min)
+                .HasColumnOrder(1)
+                .IsRequired();
+
+            //Max
+            Property(x => x.Max)
+                .HasColumnOrder(2)
                 .IsRequired();
         }
 

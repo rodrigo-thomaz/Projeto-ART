@@ -44,6 +44,16 @@
             get; set;
         }
 
+        public byte TempSensorRangeId
+        {
+            get; set;
+        }
+
+        public TempSensorRange TempSensorRange
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }

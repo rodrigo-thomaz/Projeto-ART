@@ -17,6 +17,23 @@
 
         public static void Execute(ARTDbContext context)
         {
+            #region TempSensorRange
+            
+            var tempSensorRange1 = context.TempSensorRange.SingleOrDefault(x => x.Id == 1);
+
+            if (tempSensorRange1 == null)
+            {
+                tempSensorRange1 = new TempSensorRange { Id = 1 };
+                context.TempSensorRange.Add(tempSensorRange1);
+            }
+
+            tempSensorRange1.Min = -55;
+            tempSensorRange1.Max = 125;
+            
+            context.SaveChanges();
+
+            #endregion
+
             #region TemperatureScale
 
             var celsiusDescription = new StringBuilder();
@@ -145,6 +162,7 @@
                 {
                     DeviceAddress = sensor_1_Address,
                     Family = "DS18B20",
+                    TempSensorRangeId = tempSensorRange1.Id,
                     TemperatureScaleId = celsiusTemperatureScale.Id,
                     TemperatureScale = celsiusTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
@@ -177,6 +195,7 @@
                 {
                     DeviceAddress = sensor_2_1_Address,
                     Family = "DS18B20",
+                    TempSensorRangeId = tempSensorRange1.Id,
                     TemperatureScaleId = fahrenheitTemperatureScale.Id,
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
@@ -209,6 +228,7 @@
                 {
                     DeviceAddress = sensor_2_2_Address,
                     Family = "DS18B20",
+                    TempSensorRangeId = tempSensorRange1.Id,
                     TemperatureScaleId = fahrenheitTemperatureScale.Id,
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
@@ -241,6 +261,7 @@
                 {
                     DeviceAddress = sensor_3_1_Address,
                     Family = "DS18B20",
+                    TempSensorRangeId = tempSensorRange1.Id,
                     TemperatureScaleId = fahrenheitTemperatureScale.Id,
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
@@ -273,6 +294,7 @@
                 {
                     DeviceAddress = sensor_3_2_Address,
                     Family = "DS18B20",
+                    TempSensorRangeId = tempSensorRange1.Id,
                     TemperatureScaleId = fahrenheitTemperatureScale.Id,
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,

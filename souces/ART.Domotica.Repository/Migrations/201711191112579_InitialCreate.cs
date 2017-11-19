@@ -1,75 +1,10 @@
 namespace ART.Domotica.Repository.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class InitialCreate : DbMigration
     {
-        #region Methods
-
-        public override void Down()
-        {
-            DropForeignKey("dbo.RaspberryDevice", "Id", "dbo.DeviceBase");
-            DropForeignKey("dbo.ESPDevice", "Id", "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
-            DropForeignKey("dbo.DSFamilyTempSensor", "TemperatureScaleId", "dbo.TemperatureScale");
-            DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
-            DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.SensorBase");
-            DropForeignKey("dbo.SensorBase", "Id", "dbo.HardwareBase");
-            DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
-            DropForeignKey("dbo.Project", "CreateByApplicationUserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.Project", "ApplicationId", "dbo.Application");
-            DropForeignKey("dbo.HardwaresInProject", "HardwareInApplicationId", "dbo.DeviceInApplication");
-            DropForeignKey("dbo.HardwaresInProject", "CreateByApplicationUserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.DeviceInApplication", "DeviceBaseId", "dbo.DeviceBase");
-            DropForeignKey("dbo.SensorsInDevice", "SensorBaseId", "dbo.SensorBase");
-            DropForeignKey("dbo.SensorsInDevice", "DeviceBaseId", "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceInApplication", "CreateByApplicationUserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.DeviceInApplication", "ApplicationId", "dbo.Application");
-            DropForeignKey("dbo.ApplicationUser", "ApplicationId", "dbo.Application");
-            DropIndex("dbo.RaspberryDevice", new[] { "WLanMacAddress" });
-            DropIndex("dbo.RaspberryDevice", new[] { "LanMacAddress" });
-            DropIndex("dbo.RaspberryDevice", new[] { "Id" });
-            DropIndex("dbo.ESPDevice", new[] { "Pin" });
-            DropIndex("dbo.ESPDevice", new[] { "MacAddress" });
-            DropIndex("dbo.ESPDevice", new[] { "FlashChipId" });
-            DropIndex("dbo.ESPDevice", new[] { "ChipId" });
-            DropIndex("dbo.ESPDevice", new[] { "Id" });
-            DropIndex("dbo.DeviceBase", new[] { "Id" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "DSFamilyTempSensorResolutionId" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "TemperatureScaleId" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
-            DropIndex("dbo.SensorBase", new[] { "Id" });
-            DropIndex("dbo.Project", new[] { "CreateByApplicationUserId" });
-            DropIndex("dbo.Project", new[] { "ApplicationId" });
-            DropIndex("dbo.HardwaresInProject", new[] { "CreateByApplicationUserId" });
-            DropIndex("dbo.HardwaresInProject", "IX_Unique_HardwareInApplicationId_ProjectId");
-            DropIndex("dbo.TemperatureScale", new[] { "Symbol" });
-            DropIndex("dbo.TemperatureScale", new[] { "Name" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
-            DropIndex("dbo.SensorsInDevice", new[] { "DeviceBaseId" });
-            DropIndex("dbo.SensorsInDevice", new[] { "SensorBaseId" });
-            DropIndex("dbo.DeviceInApplication", new[] { "CreateByApplicationUserId" });
-            DropIndex("dbo.DeviceInApplication", "IX_Unique_DeviceBaseId");
-            DropIndex("dbo.DeviceInApplication", "IX_Unique_ApplicationId_DeviceBaseId");
-            DropIndex("dbo.ApplicationUser", new[] { "ApplicationId" });
-            DropTable("dbo.RaspberryDevice");
-            DropTable("dbo.ESPDevice");
-            DropTable("dbo.DeviceBase");
-            DropTable("dbo.DSFamilyTempSensor");
-            DropTable("dbo.SensorBase");
-            DropTable("dbo.Project");
-            DropTable("dbo.HardwaresInProject");
-            DropTable("dbo.TemperatureScale");
-            DropTable("dbo.DSFamilyTempSensorResolution");
-            DropTable("dbo.SensorsInDevice");
-            DropTable("dbo.HardwareBase");
-            DropTable("dbo.DeviceInApplication");
-            DropTable("dbo.ApplicationUser");
-            DropTable("dbo.Application");
-        }
-
         public override void Up()
         {
             CreateTable(
@@ -80,7 +15,7 @@ namespace ART.Domotica.Repository.Migrations
                         CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbo.ApplicationUser",
                 c => new
@@ -92,7 +27,7 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Application", t => t.ApplicationId)
                 .Index(t => t.ApplicationId);
-
+            
             CreateTable(
                 "dbo.DeviceInApplication",
                 c => new
@@ -110,7 +45,7 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => new { t.ApplicationId, t.DeviceBaseId }, unique: true, name: "IX_Unique_ApplicationId_DeviceBaseId")
                 .Index(t => t.DeviceBaseId, unique: true, name: "IX_Unique_DeviceBaseId")
                 .Index(t => t.CreateByApplicationUserId);
-
+            
             CreateTable(
                 "dbo.HardwareBase",
                 c => new
@@ -119,7 +54,7 @@ namespace ART.Domotica.Repository.Migrations
                         CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbo.SensorsInDevice",
                 c => new
@@ -132,7 +67,7 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.SensorBase", t => t.SensorBaseId)
                 .Index(t => t.SensorBaseId, unique: true)
                 .Index(t => t.DeviceBaseId);
-
+            
             CreateTable(
                 "dbo.DSFamilyTempSensorResolution",
                 c => new
@@ -141,13 +76,14 @@ namespace ART.Domotica.Repository.Migrations
                         Name = c.String(nullable: false, maxLength: 255),
                         Bits = c.Byte(nullable: false),
                         Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
+                        DecimalPlaces = c.Byte(nullable: false),
                         ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
                         Description = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true)
                 .Index(t => t.Bits, unique: true);
-
+            
             CreateTable(
                 "dbo.TemperatureScale",
                 c => new
@@ -160,24 +96,34 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true)
                 .Index(t => t.Symbol, unique: true);
-
+            
+            CreateTable(
+                "dbo.TempSensorRange",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Min = c.Short(nullable: false),
+                        Max = c.Short(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
             CreateTable(
                 "dbo.HardwaresInProject",
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true),
-                        HardwareInApplicationId = c.Guid(nullable: false),
+                        DeviceInApplicationId = c.Guid(nullable: false),
                         ProjectId = c.Guid(nullable: false),
                         CreateByApplicationUserId = c.Guid(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId, cascadeDelete: true)
-                .ForeignKey("dbo.DeviceInApplication", t => t.HardwareInApplicationId)
+                .ForeignKey("dbo.DeviceInApplication", t => t.DeviceInApplicationId)
                 .ForeignKey("dbo.Project", t => t.ProjectId)
-                .Index(t => new { t.HardwareInApplicationId, t.ProjectId }, unique: true, name: "IX_Unique_HardwareInApplicationId_ProjectId")
+                .Index(t => new { t.DeviceInApplicationId, t.ProjectId }, unique: true, name: "IX_Unique_DeviceInApplicationId_ProjectId")
                 .Index(t => t.CreateByApplicationUserId);
-
+            
             CreateTable(
                 "dbo.Project",
                 c => new
@@ -194,7 +140,7 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
                 .Index(t => t.ApplicationId)
                 .Index(t => t.CreateByApplicationUserId);
-
+            
             CreateTable(
                 "dbo.SensorBase",
                 c => new
@@ -204,7 +150,7 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.HardwareBase", t => t.Id)
                 .Index(t => t.Id);
-
+            
             CreateTable(
                 "dbo.DSFamilyTempSensor",
                 c => new
@@ -212,21 +158,27 @@ namespace ART.Domotica.Repository.Migrations
                         Id = c.Guid(nullable: false),
                         DeviceAddress = c.String(nullable: false, maxLength: 32),
                         Family = c.String(nullable: false, maxLength: 10),
-                        HasAlarm = c.Boolean(nullable: false),
-                        LowAlarm = c.Decimal(precision: 6, scale: 3),
-                        HighAlarm = c.Decimal(precision: 6, scale: 3),
+                        TempSensorRangeId = c.Byte(nullable: false),
                         TemperatureScaleId = c.Byte(nullable: false),
                         DSFamilyTempSensorResolutionId = c.Byte(nullable: false),
+                        LowAlarmOn = c.Boolean(nullable: false),
+                        LowAlarmCelsius = c.Decimal(nullable: false, precision: 7, scale: 4),
+                        LowAlarmBuzzerOn = c.Boolean(nullable: false),
+                        HighAlarmOn = c.Boolean(nullable: false),
+                        HighAlarmCelsius = c.Decimal(nullable: false, precision: 7, scale: 4),
+                        HighAlarmBuzzerOn = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SensorBase", t => t.Id)
                 .ForeignKey("dbo.DSFamilyTempSensorResolution", t => t.DSFamilyTempSensorResolutionId)
                 .ForeignKey("dbo.TemperatureScale", t => t.TemperatureScaleId)
+                .ForeignKey("dbo.TempSensorRange", t => t.TempSensorRangeId)
                 .Index(t => t.Id)
                 .Index(t => t.DeviceAddress, unique: true)
+                .Index(t => t.TempSensorRangeId)
                 .Index(t => t.TemperatureScaleId)
                 .Index(t => t.DSFamilyTempSensorResolutionId);
-
+            
             CreateTable(
                 "dbo.DeviceBase",
                 c => new
@@ -236,7 +188,7 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.HardwareBase", t => t.Id)
                 .Index(t => t.Id);
-
+            
             CreateTable(
                 "dbo.ESPDevice",
                 c => new
@@ -255,7 +207,7 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.FlashChipId, unique: true)
                 .Index(t => t.MacAddress, unique: true)
                 .Index(t => t.Pin, unique: true);
-
+            
             CreateTable(
                 "dbo.RaspberryDevice",
                 c => new
@@ -269,8 +221,74 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.Id)
                 .Index(t => t.LanMacAddress, unique: true)
                 .Index(t => t.WLanMacAddress, unique: true);
+            
         }
-
-        #endregion Methods
+        
+        public override void Down()
+        {
+            DropForeignKey("dbo.RaspberryDevice", "Id", "dbo.DeviceBase");
+            DropForeignKey("dbo.ESPDevice", "Id", "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
+            DropForeignKey("dbo.DSFamilyTempSensor", "TempSensorRangeId", "dbo.TempSensorRange");
+            DropForeignKey("dbo.DSFamilyTempSensor", "TemperatureScaleId", "dbo.TemperatureScale");
+            DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
+            DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.SensorBase");
+            DropForeignKey("dbo.SensorBase", "Id", "dbo.HardwareBase");
+            DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
+            DropForeignKey("dbo.Project", "CreateByApplicationUserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.Project", "ApplicationId", "dbo.Application");
+            DropForeignKey("dbo.HardwaresInProject", "DeviceInApplicationId", "dbo.DeviceInApplication");
+            DropForeignKey("dbo.HardwaresInProject", "CreateByApplicationUserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.DeviceInApplication", "DeviceBaseId", "dbo.DeviceBase");
+            DropForeignKey("dbo.SensorsInDevice", "SensorBaseId", "dbo.SensorBase");
+            DropForeignKey("dbo.SensorsInDevice", "DeviceBaseId", "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceInApplication", "CreateByApplicationUserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.DeviceInApplication", "ApplicationId", "dbo.Application");
+            DropForeignKey("dbo.ApplicationUser", "ApplicationId", "dbo.Application");
+            DropIndex("dbo.RaspberryDevice", new[] { "WLanMacAddress" });
+            DropIndex("dbo.RaspberryDevice", new[] { "LanMacAddress" });
+            DropIndex("dbo.RaspberryDevice", new[] { "Id" });
+            DropIndex("dbo.ESPDevice", new[] { "Pin" });
+            DropIndex("dbo.ESPDevice", new[] { "MacAddress" });
+            DropIndex("dbo.ESPDevice", new[] { "FlashChipId" });
+            DropIndex("dbo.ESPDevice", new[] { "ChipId" });
+            DropIndex("dbo.ESPDevice", new[] { "Id" });
+            DropIndex("dbo.DeviceBase", new[] { "Id" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "DSFamilyTempSensorResolutionId" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "TemperatureScaleId" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "TempSensorRangeId" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
+            DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
+            DropIndex("dbo.SensorBase", new[] { "Id" });
+            DropIndex("dbo.Project", new[] { "CreateByApplicationUserId" });
+            DropIndex("dbo.Project", new[] { "ApplicationId" });
+            DropIndex("dbo.HardwaresInProject", new[] { "CreateByApplicationUserId" });
+            DropIndex("dbo.HardwaresInProject", "IX_Unique_DeviceInApplicationId_ProjectId");
+            DropIndex("dbo.TemperatureScale", new[] { "Symbol" });
+            DropIndex("dbo.TemperatureScale", new[] { "Name" });
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
+            DropIndex("dbo.SensorsInDevice", new[] { "DeviceBaseId" });
+            DropIndex("dbo.SensorsInDevice", new[] { "SensorBaseId" });
+            DropIndex("dbo.DeviceInApplication", new[] { "CreateByApplicationUserId" });
+            DropIndex("dbo.DeviceInApplication", "IX_Unique_DeviceBaseId");
+            DropIndex("dbo.DeviceInApplication", "IX_Unique_ApplicationId_DeviceBaseId");
+            DropIndex("dbo.ApplicationUser", new[] { "ApplicationId" });
+            DropTable("dbo.RaspberryDevice");
+            DropTable("dbo.ESPDevice");
+            DropTable("dbo.DeviceBase");
+            DropTable("dbo.DSFamilyTempSensor");
+            DropTable("dbo.SensorBase");
+            DropTable("dbo.Project");
+            DropTable("dbo.HardwaresInProject");
+            DropTable("dbo.TempSensorRange");
+            DropTable("dbo.TemperatureScale");
+            DropTable("dbo.DSFamilyTempSensorResolution");
+            DropTable("dbo.SensorsInDevice");
+            DropTable("dbo.HardwareBase");
+            DropTable("dbo.DeviceInApplication");
+            DropTable("dbo.ApplicationUser");
+            DropTable("dbo.Application");
+        }
     }
 }
