@@ -81,18 +81,14 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
     this->_displayManager->display.setCursor(x, y - 8);       
 	this->_displayManager->display.print(tempConverted);
     //this->_displayManager->display.println(" C");
-	
-	if(!dsFamilyTempSensor.hasAlarm()) return;
+
+ 	
+	float lowChartLimiterCelsius = dsFamilyTempSensor.getLowChartLimiterCelsius();
+	float highChartLimiterCelsius = dsFamilyTempSensor.getHighChartLimiterCelsius();
  
-	//Temp
-	return;
-	
-	double lowAlarm = (double)dsFamilyTempSensor.getLowAlarm().getAlarmCelsius();
-	double highAlarm = (double)dsFamilyTempSensor.getHighAlarm().getAlarmCelsius();
- 
-	double range = highAlarm - lowAlarm;
-	double value = dsFamilyTempSensor.getTempCelsius() - lowAlarm;
-	double percent = (value * 100) / range;
+	float range = highChartLimiterCelsius - lowChartLimiterCelsius;
+	float value = dsFamilyTempSensor.getTempCelsius() - lowChartLimiterCelsius;
+	float percent = (value * 100) / range;
 	int tempHeight = round((width * percent) / 100);
 	
 	this->_displayManager->display.drawRect(x, y, width, height, WHITE);
