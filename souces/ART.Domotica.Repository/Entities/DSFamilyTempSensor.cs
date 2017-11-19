@@ -44,12 +44,22 @@
             get; set;
         }
 
+        public TempSensorRange TempSensorRange
+        {
+            get; set;
+        }
+
         public byte TempSensorRangeId
         {
             get; set;
         }
 
-        public TempSensorRange TempSensorRange
+        public decimal HighChartLimiterCelsius
+        {
+            get; set;
+        }
+
+        public decimal LowChartLimiterCelsius
         {
             get; set;
         }

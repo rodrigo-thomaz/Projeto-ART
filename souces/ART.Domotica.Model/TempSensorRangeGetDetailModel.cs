@@ -2,8 +2,18 @@
 {
     public class TempSensorRangeGetDetailModel
     {
-        public short Min { get; set; }
+        #region Properties
 
-        public short Max { get; set; }
+        public short Max
+        {
+            get; set;
+        }
+
+        public short Min
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

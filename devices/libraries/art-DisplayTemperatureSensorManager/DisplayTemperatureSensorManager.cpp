@@ -80,7 +80,7 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
     this->_displayManager->display.setTextColor(WHITE);
     this->_displayManager->display.setCursor(x, y - 8);       
 	this->_displayManager->display.print(tempConverted);
-    this->_displayManager->display.println(" C");
+    //this->_displayManager->display.println(" C");
 	
 	if(!dsFamilyTempSensor.hasAlarm()) return;
  

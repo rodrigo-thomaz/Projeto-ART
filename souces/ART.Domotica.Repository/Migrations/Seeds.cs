@@ -18,7 +18,7 @@
         public static void Execute(ARTDbContext context)
         {
             #region TempSensorRange
-            
+
             var tempSensorRange1 = context.TempSensorRange.SingleOrDefault(x => x.Id == 1);
 
             if (tempSensorRange1 == null)
@@ -29,7 +29,7 @@
 
             tempSensorRange1.Min = -55;
             tempSensorRange1.Max = 125;
-            
+
             context.SaveChanges();
 
             #endregion
@@ -179,6 +179,8 @@
                         AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
+                    LowChartLimiterCelsius = 20,
+                    HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_1);
@@ -212,6 +214,8 @@
                         AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
+                    LowChartLimiterCelsius = 20,
+                    HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_1);
@@ -245,6 +249,8 @@
                         AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
+                    LowChartLimiterCelsius = 20,
+                    HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_2);
@@ -278,6 +284,8 @@
                         AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
+                    LowChartLimiterCelsius = 20,
+                    HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_1);
@@ -311,6 +319,8 @@
                         AlarmCelsius = 125,
                         AlarmBuzzerOn = false,
                     },
+                    LowChartLimiterCelsius = 20,
+                    HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_2);

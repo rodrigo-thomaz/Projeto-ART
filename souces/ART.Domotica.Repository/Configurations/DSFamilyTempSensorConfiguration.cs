@@ -103,6 +103,20 @@
                 .HasColumnOrder(11)
                 .HasColumnName("HighAlarmBuzzerOn")
                 .IsRequired();
+
+            //LowChartLimiterCelsius
+            Property(x => x.LowChartLimiterCelsius)
+                .HasColumnOrder(12)
+                .HasPrecision(7, 4)
+                .HasColumnName("LowChartLimiterCelsius")
+                .IsRequired();
+
+            //HighChartLimiterCelsius
+            Property(x => x.HighChartLimiterCelsius)
+                .HasColumnOrder(13)
+                .HasPrecision(7, 4)
+                .HasColumnName("HighChartLimiterCelsius")
+                .IsRequired();
         }
 
         #endregion Constructors

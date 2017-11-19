@@ -60,6 +60,8 @@
                 .ForMember(vm => vm.TempSensorRange, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).TempSensorRange))
                 .ForMember(vm => vm.HighAlarm, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).HighAlarm))
                 .ForMember(vm => vm.LowAlarm, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).LowAlarm))
+                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).LowChartLimiterCelsius))
+                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).HighChartLimiterCelsius))
                 .ForMember(vm => vm.TemperatureScaleId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).TemperatureScaleId));
 
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionDetailModel>();

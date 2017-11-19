@@ -16,8 +16,6 @@
             get; set;
         }
 
-        public TempSensorRangeGetDetailModel TempSensorRange { get; set; }
-
         public TempSensorAlarmGetDetailModel HighAlarm
         {
             get; set;
@@ -29,6 +27,21 @@
         }
 
         public byte TemperatureScaleId
+        {
+            get; set;
+        }
+
+        public TempSensorRangeGetDetailModel TempSensorRange
+        {
+            get; set;
+        }
+
+        public decimal HighChartLimiterCelsius
+        {
+            get; set;
+        }
+
+        public decimal LowChartLimiterCelsius
         {
             get; set;
         }
