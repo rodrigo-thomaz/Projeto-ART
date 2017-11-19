@@ -104,6 +104,7 @@
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
+    <Compile Include="AutoMapper\TempSensorRangeProfile.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
     <Compile Include="IConsumers\IDSFamilyTempSensorConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />

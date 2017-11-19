@@ -70,6 +70,8 @@
 
         public async Task<List<ESPDevice>> GetListInApplication(Guid applicationId)
         {
+            await _context.TempSensorRange.LoadAsync();
+
             return await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)
                 .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))

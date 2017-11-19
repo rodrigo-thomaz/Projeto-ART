@@ -16,6 +16,8 @@
             get; set;
         }
 
+        public TempSensorRangeGetDetailModel TempSensorRange { get; set; }
+
         public TempSensorAlarmGetDetailModel HighAlarm
         {
             get; set;

@@ -56,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempSensorAlarmGetDetailModel.cs" />
     <Compile Include="TempSensorAlarmPositionModel.cs" />
+    <Compile Include="TempSensorRangeGetDetailModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
