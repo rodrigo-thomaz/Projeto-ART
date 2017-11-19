@@ -91,6 +91,11 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
             alarmValue: highAlarmCelsiusConverted,
             alarmBuzzerOn: sensor.highAlarm.alarmBuzzerOn,
         };        
+
+        $scope.tempSensorRangeView = {
+            min: sensor.tempSensorRange.min,
+            max: sensor.tempSensorRange.max,
+        };  
         
         clearOnSetScaleCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetScaleCompleted);
         clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetResolutionCompleted);
