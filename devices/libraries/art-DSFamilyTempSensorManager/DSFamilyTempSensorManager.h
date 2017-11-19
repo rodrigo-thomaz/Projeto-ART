@@ -146,6 +146,7 @@ class DSFamilyTempSensorManager
 	void 								setAlarmOn(String json);
 	void 								setAlarmCelsius(String json);
 	void 								setAlarmBuzzerOn(String json);
+	void 								setChartLimiterCelsius(String json);
 				
   private:			
 			

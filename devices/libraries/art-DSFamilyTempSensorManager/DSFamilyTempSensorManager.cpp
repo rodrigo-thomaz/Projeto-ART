@@ -483,6 +483,32 @@ void DSFamilyTempSensorManager::setAlarmBuzzerOn(String json)
 	Serial.println(json);
 }
 
+void DSFamilyTempSensorManager::setChartLimiterCelsius(String json)
+{
+	StaticJsonBuffer<300> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+
+	if (!root.success()) {
+		Serial.println("parse setChartLimiterCelsius failed");
+		return;
+	}
+
+	String dsFamilyTempSensorId 			= root["dsFamilyTempSensorId"];
+	float chartLimiterCelsius 				= root["chartLimiterCelsius"];
+	TempSensorAlarmPosition position 		= static_cast<TempSensorAlarmPosition>(root["position"].as<int>());	
+
+	DSFamilyTempSensor& dsFamilyTempSensor  = getDSFamilyTempSensorById(dsFamilyTempSensorId);
+	
+	if(position == High)
+		dsFamilyTempSensor.setHighChartLimiterCelsius(chartLimiterCelsius);
+	else if(position == Low)
+		dsFamilyTempSensor.setLowChartLimiterCelsius(chartLimiterCelsius);
+
+	Serial.print("[DSFamilyTempSensorManager::setChartLimiterCelsius] ");
+	Serial.println(json);
+}
+
 DSFamilyTempSensor& DSFamilyTempSensorManager::getDSFamilyTempSensorById(String dsFamilyTempSensorId) {
 	for (int i = 0; i < this->_sensors.size(); ++i) {
 		if (this->_sensors[i].getDSFamilyTempSensorId() == dsFamilyTempSensorId) {

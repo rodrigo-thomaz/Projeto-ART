@@ -48,6 +48,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_SET_ALARM_ON "DSFamilyTempSensor.SetAlarmOnIoT"
 #define TOPIC_SUB_SET_ALARM_CELSIUS "DSFamilyTempSensor.SetAlarmCelsiusIoT"
 #define TOPIC_SUB_SET_ALARM_BUZZER_ON "DSFamilyTempSensor.SetAlarmBuzzerOnIoT"
+#define TOPIC_SUB_SET_CHART_LIMITER_CELSIUS "DSFamilyTempSensor.SetChartLimiterCelsiusIoT"
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
@@ -179,6 +180,9 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(payloadTopic == String(TOPIC_SUB_SET_ALARM_BUZZER_ON)){
       dsFamilyTempSensorManager.setAlarmBuzzerOn(payloadContract);
     }
+    if(payloadTopic == String(TOPIC_SUB_SET_CHART_LIMITER_CELSIUS)){
+      dsFamilyTempSensorManager.setChartLimiterCelsius(payloadContract);
+    }    
     if(payloadTopic == String(TOPIC_SUB_INSERT_IN_APPLICATION)){
       configurationManager.getDeviceSettings()->insertInApplication(payloadContract);      
     }
