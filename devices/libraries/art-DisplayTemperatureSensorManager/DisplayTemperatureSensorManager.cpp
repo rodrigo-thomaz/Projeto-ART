@@ -79,9 +79,8 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
     this->_displayManager->display.setTextSize(1);
     this->_displayManager->display.setTextColor(WHITE);
     this->_displayManager->display.setCursor(x, y - 8);       
-	this->_displayManager->display.print(tempConverted);
+	this->_displayManager->display.print(tempConverted, 1);
     //this->_displayManager->display.println(" C");
-
  	
 	float lowChartLimiterCelsius = dsFamilyTempSensor.getLowChartLimiterCelsius();
 	float highChartLimiterCelsius = dsFamilyTempSensor.getHighChartLimiterCelsius();
@@ -94,11 +93,4 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
 	
 	this->_displayManager->display.drawRect(x, y, width, height, WHITE);	
 	this->_displayManager->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
-	  
-	Serial.println("AquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAqui");
-	String message = "height: " + String(height) + " tempHeight; " + String(tempHeight);
-	Serial.println(message);
-	  
-    // this->_displayManager->display.print(dsFamilyTempSensor.tempFahrenheit);
-    // this->_displayManager->display.println(" F");
 }
