@@ -217,7 +217,6 @@
     <Content Include="src\js\controllers\thermometerDeviceController.js" />
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
-    <Content Include="src\js\directives\uiTouchSpinScaleExtension.js" />
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />
     <Content Include="src\js\services\dsFamilyTempSensorResolutionService.js" />
     <Content Include="src\js\services\espDeviceService.js" />

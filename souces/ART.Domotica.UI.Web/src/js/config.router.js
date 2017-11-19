@@ -43,7 +43,6 @@ angular.module('app')
                       'vr.directives.slider',
                       'ui.select',   
                       'toaster',
-                      'js/directives/uiTouchSpinScaleExtension.js',
                       'js/services/temperatureScaleService.js',
                       'js/services/temperatureScaleConverter.js',
                       'js/services/dsFamilyTempSensorResolutionService.js',

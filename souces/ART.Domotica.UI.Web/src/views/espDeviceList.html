@@ -107,21 +107,6 @@
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Alarme alto</label>
                                             <div class="col-lg-8">
-                                                
-                                                <!--<input type="number"
-                                                   ng-disabled="!highAlarmView.alarmOn"
-                                                   ng-model="highAlarmView.alarmValue"
-                                                   ng-model-options="{ debounce: 1000 }"
-                                                   ng-change="changeAlarmValue('High', highAlarmView.alarmValue)"
-                                                   data-min="{{tempSensorRangeView.min}}"
-                                                   data-max="{{tempSensorRangeView.max}}"
-                                                   ui-jq="TouchSpin"
-                                                   data-step="0.1"
-                                                   data-decimals="4"
-                                                   data-postfix="{{ scale.selectedScale.symbol }}"
-                                                   ui-touch-spin-scale-extension="scale.selectedScale"
-                                                   class="form-control">-->
-
                                                 <input name="inputHighAlarmValue" 
                                                        type="number"
                                                        ng-model="highAlarmView.alarmValue"
@@ -132,7 +117,6 @@
                                                        ng-disabled="!highAlarmView.alarmOn"
                                                        required
                                                        class="form-control">
-
                                                 <span ng-show="formDevice.inputHighAlarmValue.$touched && formDevice.inputHighAlarmValue.$invalid">
                                                     Alarme alto deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                 </span>
@@ -162,21 +146,6 @@
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Alarme baixo</label>
                                             <div class="col-lg-8">
-
-                                                <!--<input type="number"
-                                                       ng-disabled="!lowAlarmView.alarmOn" 
-                                                       ng-model="lowAlarmView.alarmValue" 
-                                                       ng-model-options="{ debounce: 1000 }" 
-                                                       ng-change="changeAlarmValue('Low', lowAlarmView.alarmValue)"                                                                                                               
-                                                       data-min="{{tempSensorRangeView.min}}" 
-                                                       data-max="{{tempSensorRangeView.max}}"
-                                                       ui-jq="TouchSpin" 
-                                                       data-step="0.1" 
-                                                       data-decimals="4" 
-                                                       data-postfix="{{ scale.selectedScale.symbol }}" 
-                                                       ui-touch-spin-scale-extension="scale.selectedScale"
-                                                       class="form-control">-->
-
                                                 <input name="inputLowAlarmValue" 
                                                        type="number" 
                                                        ng-model="lowAlarmView.alarmValue"
@@ -186,11 +155,9 @@
                                                        max="{{tempSensorRangeView.max}}"
                                                        ng-disabled="!lowAlarmView.alarmOn"
                                                        class="form-control">
-
                                                 <span ng-show="formDevice.inputLowAlarmValue.$touched && formDevice.inputLowAlarmValue.$invalid">
                                                     Alarme baixo deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                 </span>
-
                                             </div>
                                         </div>                                                                         
                                     </form>
