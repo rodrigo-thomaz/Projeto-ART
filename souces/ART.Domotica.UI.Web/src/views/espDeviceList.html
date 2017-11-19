@@ -48,7 +48,7 @@
                             <tabset justified="true" class="tab-container">
                                 <tab heading="Sensor {{sensorKey + 1}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
                                 
-                                    <form class="bs-example form-horizontal" ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
+                                    <form name="formDevice" class="bs-example form-horizontal" ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Status</label>
                                             <div class="col-lg-8">
@@ -122,14 +122,20 @@
                                                    ui-touch-spin-scale-extension="scale.selectedScale"
                                                    class="form-control">-->
 
-                                                <input type="number"
+                                                <input name="inputHighAlarmValue" 
+                                                       type="number"
                                                        ng-model="highAlarmView.alarmValue"
                                                        ng-model-options="{ debounce: 1000 }"
                                                        ng-change="changeAlarmValue('High', highAlarmView.alarmValue)"
                                                        min="{{tempSensorRangeView.min}}"
                                                        max="{{tempSensorRangeView.max}}"
                                                        ng-disabled="!highAlarmView.alarmOn"
+                                                       required
                                                        class="form-control">
+
+                                                <span ng-show="formDevice.inputHighAlarmValue.$touched && formDevice.inputHighAlarmValue.$invalid">
+                                                    Alarme alto deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                </span>
 
                                             </div>
                                         </div>
@@ -171,7 +177,8 @@
                                                        ui-touch-spin-scale-extension="scale.selectedScale"
                                                        class="form-control">-->
 
-                                                <input type="number" 
+                                                <input name="inputLowAlarmValue" 
+                                                       type="number" 
                                                        ng-model="lowAlarmView.alarmValue"
                                                        ng-model-options="{ debounce: 1000 }"
                                                        ng-change="changeAlarmValue('Low', lowAlarmView.alarmValue)"
@@ -179,6 +186,10 @@
                                                        max="{{tempSensorRangeView.max}}"
                                                        ng-disabled="!lowAlarmView.alarmOn"
                                                        class="form-control">
+
+                                                <span ng-show="formDevice.inputLowAlarmValue.$touched && formDevice.inputLowAlarmValue.$invalid">
+                                                    Alarme baixo deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                </span>
 
                                             </div>
                                         </div>                                                                         
