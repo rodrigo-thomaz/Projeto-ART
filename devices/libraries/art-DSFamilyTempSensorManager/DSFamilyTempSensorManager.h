@@ -62,7 +62,7 @@ class DSFamilyTempSensor
 	
   public:
   
-	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm);
+	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
 
     String								getDSFamilyTempSensorId();		
 	
@@ -89,6 +89,12 @@ class DSFamilyTempSensor
 	bool 								hasAlarm();	
 	bool 								hasAlarmBuzzer();	
 	
+	float 								getLowChartLimiterCelsius();
+	void 								setLowChartLimiterCelsius(float value);
+	
+	float 								getHighChartLimiterCelsius();
+	void 								setHighChartLimiterCelsius(float value);
+	
   private:	
 	
 	String 								_dsFamilyTempSensorId;	
@@ -106,9 +112,12 @@ class DSFamilyTempSensor
 	
 	bool 								_connected;	
 	
-	float 								_tempCelsius;
+	float 								_tempCelsius;	
 	
 	long 								_epochTimeUtc;	
+	
+	float 								_lowChartLimiterCelsius;
+	float 								_highChartLimiterCelsius;
 	
 	friend class 						DSFamilyTempSensorManager;
 	

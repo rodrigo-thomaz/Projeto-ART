@@ -73,13 +73,15 @@ void TempSensorAlarm::setTempCelsius(float value)
 
 // DSFamilyTempSensor
 
-DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm)
+DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
 	this->_family = family;
 	this->_validFamily = true;
 	this->_resolution = resolution;
 	this->_temperatureScaleId = temperatureScaleId;
+	this->_lowChartLimiterCelsius = lowChartLimiterCelsius;
+	this->_highChartLimiterCelsius = highChartLimiterCelsius;
 	
 	for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back(deviceAddress[i]);	
 		
@@ -167,6 +169,26 @@ bool DSFamilyTempSensor::hasAlarm()
 bool DSFamilyTempSensor::hasAlarmBuzzer()
 {
 	return this->_alarms[0].hasAlarmBuzzer() || this->_alarms[1].hasAlarmBuzzer();
+}
+
+float DSFamilyTempSensor::getLowChartLimiterCelsius()
+{
+	return this->_lowChartLimiterCelsius;
+}
+
+void DSFamilyTempSensor::setLowChartLimiterCelsius(float value)
+{
+	this->_lowChartLimiterCelsius = value;
+}
+
+float DSFamilyTempSensor::getHighChartLimiterCelsius()
+{
+	return this->_highChartLimiterCelsius;
+}
+
+void DSFamilyTempSensor::setHighChartLimiterCelsius(float value)
+{
+	this->_highChartLimiterCelsius = value;
 }
 
 
@@ -270,15 +292,18 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		int 			resolution 				= int(deviceJsonObject["resolutionBits"]);				
 		byte 			temperatureScaleId 		= byte(deviceJsonObject["temperatureScaleId"]);		
 		
+		float 			lowChartLimiterCelsius	= float(deviceJsonObject["lowChartLimiterCelsius"]);
+		float 			highChartLimiterCelsius	= float(deviceJsonObject["highChartLimiterCelsius"]);
+		
 		JsonObject& 	lowAlarmJsonObject 		= deviceJsonObject["lowAlarm"].as<JsonObject>();	
 		JsonObject& 	highAlarmJsonObject 	= deviceJsonObject["highAlarm"].as<JsonObject>();	
-		
+						
 		bool 			lowAlarmOn 				= bool(lowAlarmJsonObject["alarmOn"]);
-		double 			lowAlarmCelsius			= double(lowAlarmJsonObject["alarmCelsius"]);
+		float 			lowAlarmCelsius			= float(lowAlarmJsonObject["alarmCelsius"]);
 		bool 			lowAlarmBuzzerOn 		= bool(lowAlarmJsonObject["buzzerOn"]);
 		
 		bool 			highAlarmOn 			= bool(highAlarmJsonObject["alarmOn"]);
-		double 			highAlarmCelsius		= double(highAlarmJsonObject["alarmCelsius"]);
+		float 			highAlarmCelsius		= float(highAlarmJsonObject["alarmCelsius"]);
 		bool 			highAlarmBuzzerOn 		= bool(highAlarmJsonObject["alarmBuzzerOn"]);
 				
 		TempSensorAlarm lowAlarm 				= TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, Low);
@@ -291,7 +316,9 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 				resolution,
 				temperatureScaleId,
 				lowAlarm,
-				highAlarm));
+				highAlarm,
+				lowChartLimiterCelsius,
+				highChartLimiterCelsius));
 				
 		_dallas.setResolution(deviceAddress, resolution);		
 		_dallas.resetAlarmSearch();		
