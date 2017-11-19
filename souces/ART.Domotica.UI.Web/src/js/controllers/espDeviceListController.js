@@ -60,7 +60,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     $scope.changeChartLimiterValue = function (position, chartLimiterValue) {
         if (!initialized) return;
-        //dsFamilyTempSensorService.setAlarmBuzzerOn($scope.sensor.dsFamilyTempSensorId, alarmBuzzerOn, position);
+        var chartLimiterCelsius = temperatureScaleConverter.convertToCelsius($scope.sensor.temperatureScaleId, chartLimiterValue);
+        dsFamilyTempSensorService.setChartLimiterCelsius($scope.sensor.dsFamilyTempSensorId, chartLimiterCelsius, position);
     };
 
     var initialized = false;
@@ -109,6 +110,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnSetAlarmOnCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmOnCompleted);
         clearOnSetAlarmCelsiusCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetAlarmCelsiusCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmCelsiusCompleted);
         clearOnSetAlarmBuzzerOnCompleted = $rootScope.$on('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmBuzzerOnCompleted);        
+        clearOnSetChartLimiterCelsiusCompleted = $rootScope.$on('dsFamilyTempSensorService_SetChartLimiterCelsiusCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetChartLimiterCelsiusCompleted);        
 
         initialized = true;
     };    
@@ -120,6 +122,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     var clearOnSetAlarmOnCompleted = null;
     var clearOnSetAlarmCelsiusCompleted = null;
     var clearOnSetAlarmBuzzerOnCompleted = null;
+    var clearOnSetChartLimiterCelsiusCompleted = null;
         
     $scope.$on('$destroy', function () {
         if (clearOnTemperatureScaleServiceInitialized != null) clearOnTemperatureScaleServiceInitialized();
@@ -127,7 +130,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnSetResolutionCompleted();
         clearOnSetAlarmOnCompleted();
         clearOnSetAlarmCelsiusCompleted();
-        clearOnSetAlarmBuzzerOnCompleted();        
+        clearOnSetAlarmBuzzerOnCompleted(); 
+        clearOnSetChartLimiterCelsiusCompleted();
     });
 
     var setSelectedScale = function () {  
@@ -168,6 +172,9 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         toaster.pop('success', 'Sucesso', 'alarme buzzer ligado/desligado');
     };
 
+    var onSetChartLimiterCelsiusCompleted = function (event, data) {
+        toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
+    };
 
     $scope.convertTemperature = function (temperature) {
         return temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, temperature);

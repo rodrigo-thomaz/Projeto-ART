@@ -60,14 +60,26 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         });
     };
 
+    var setChartLimiterCelsius = function (dsFamilyTempSensorId, chartLimiterCelsius, position) {
+        var data = {
+            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            chartLimiterCelsius: chartLimiterCelsius,
+            position: position,
+        }
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setChartLimiterCelsius', data).then(function (results) {
+            return results;
+        });
+    };
+
     var onConnected = function () {
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetScaleViewCompleted', onSetScaleCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmOnViewCompleted', SetAlarmOnCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmCelsiusViewCompleted', SetAlarmCelsiusCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmBuzzerOnViewCompleted', SetAlarmBuzzerOnCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmOnViewCompleted', onSetAlarmOnCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmCelsiusViewCompleted', onSetAlarmCelsiusCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmBuzzerOnViewCompleted', onSetAlarmBuzzerOnCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetChartLimiterCelsiusViewCompleted', onSetChartLimiterCelsiusCompleted);
 
         if (!initialized) {
             initialized = true;            
@@ -102,7 +114,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         $rootScope.$emit('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
-    var SetAlarmOnCompleted = function (payload) {
+    var onSetAlarmOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
         if (result.position = 'Low')
@@ -112,7 +124,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
-    var SetAlarmCelsiusCompleted = function (payload) {
+    var onSetAlarmCelsiusCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
         if (result.position = 'Low')
@@ -122,7 +134,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
-    var SetAlarmBuzzerOnCompleted = function (payload) {
+    var onSetAlarmBuzzerOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
         if (result.position = 'Low')
@@ -130,6 +142,16 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         else if (result.position = 'High')
             sensor.highAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
         $rootScope.$emit('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
+    }
+
+    var onSetChartLimiterCelsiusCompleted = function (payload) {
+        var result = JSON.parse(payload.body);
+        var sensor = getSensorFromPayload(result);
+        if (result.position = 'Low')
+            sensor.lowChartLimiterCelsius = result.chartLimiterCelsius;
+        else if (result.position = 'High')
+            sensor.highChartLimiterCelsius = result.chartLimiterCelsius;
+        $rootScope.$emit('dsFamilyTempSensorService_SetChartLimiterCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
     EventDispatcher.on('stompService_onConnected', onConnected);         
@@ -146,6 +168,8 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     serviceFactory.setAlarmOn = setAlarmOn;
     serviceFactory.setAlarmCelsius = setAlarmCelsius;
     serviceFactory.setAlarmBuzzerOn = setAlarmBuzzerOn;    
+
+    serviceFactory.setChartLimiterCelsius = setChartLimiterCelsius;    
 
     return serviceFactory;
 
