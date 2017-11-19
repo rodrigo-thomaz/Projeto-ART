@@ -67,6 +67,12 @@
                                             </div>
                                         </div>                                        
                                         <div class="form-group">
+                                            <label class="col-lg-4 control-label">Range</label>
+                                            <div class="col-lg-8">
+                                                <input type="text" class="form-control" readonly value="{{tempSensorRangeView.min}} {{scale.selectedScale.symbol}} a {{tempSensorRangeView.max}} {{scale.selectedScale.symbol}}">
+                                            </div>
+                                        </div>     
+                                        <div class="form-group">
                                             <label class="col-lg-4 control-label">Escalas</label>
                                             <div class="col-lg-8">
                                                 <select class="form-control m-b" ng-options="item.name for item in scale.availableScales track by item.id" ng-model="scale.selectedScale" ng-change="changeScale()"></select>
