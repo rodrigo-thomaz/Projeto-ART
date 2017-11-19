@@ -90,9 +90,10 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
 	float value = dsFamilyTempSensor.getTempCelsius() - lowChartLimiterCelsius;
 	float percent = (value * 100) / range;
 	int tempHeight = round((width * percent) / 100);
+	int tempRectY = y + height - tempHeight;
 	
-	this->_displayManager->display.drawRect(x, y, width, height, WHITE);
-	this->_displayManager->display.fillRect(x, y, width, tempHeight, WHITE);
+	this->_displayManager->display.drawRect(x, y, width, height, WHITE);	
+	this->_displayManager->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
 	  
 	Serial.println("AquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAquiAqui");
 	String message = "height: " + String(height) + " tempHeight; " + String(tempHeight);
