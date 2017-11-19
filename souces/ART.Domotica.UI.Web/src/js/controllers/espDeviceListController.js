@@ -77,24 +77,22 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
             clearOnDSFamilyTempSensorResolutionServiceInitialized = $rootScope.$on('DSFamilyTempSensorResolutionService_Initialized', setSelectedResolution);        
         
         // Alarm
-        var lowAlarmCelsiusConverted = temperatureScaleConverter.convertFromCelsius(sensor.temperatureScaleId, sensor.lowAlarm.alarmCelsius);
-        var highAlarmCelsiusConverted = temperatureScaleConverter.convertFromCelsius(sensor.temperatureScaleId, sensor.highAlarm.alarmCelsius);
-
         $scope.lowAlarmView = {
             alarmOn: sensor.lowAlarm.alarmOn,
-            alarmValue: lowAlarmCelsiusConverted,
+            alarmValue: temperatureScaleConverter.convertFromCelsius(sensor.temperatureScaleId, sensor.lowAlarm.alarmCelsius),
             alarmBuzzerOn: sensor.lowAlarm.alarmBuzzerOn,
         };
 
         $scope.highAlarmView = {
             alarmOn: sensor.highAlarm.alarmOn,
-            alarmValue: highAlarmCelsiusConverted,
+            alarmValue: temperatureScaleConverter.convertFromCelsius(sensor.temperatureScaleId, sensor.highAlarm.alarmCelsius),
             alarmBuzzerOn: sensor.highAlarm.alarmBuzzerOn,
         };        
 
+        // Temp Sensor Range
         $scope.tempSensorRangeView = {
-            min: sensor.tempSensorRange.min,
-            max: sensor.tempSensorRange.max,
+            min: temperatureScaleConverter.convertFromCelsius(sensor.temperatureScaleId, sensor.tempSensorRange.min),
+            max: temperatureScaleConverter.convertFromCelsius(sensor.temperatureScaleId, sensor.tempSensorRange.max),
         };  
         
         clearOnSetScaleCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetScaleCompleted);
@@ -134,6 +132,10 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     var onSetScaleCompleted = function (event, data) {
         $scope.highAlarmView.alarmValue = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.highAlarm.alarmCelsius);
         $scope.lowAlarmView.alarmValue = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.lowAlarm.alarmCelsius);
+
+        $scope.tempSensorRangeView.min = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.tempSensorRange.min);
+        $scope.tempSensorRangeView.max = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.tempSensorRange.max);
+
         toaster.pop('success', 'Sucesso', 'escala alterada');
     };
 
