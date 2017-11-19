@@ -29,7 +29,17 @@
             get; set;
         }
 
+        public decimal HighChartLimiterCelsius
+        {
+            get; set;
+        }
+
         public TempSensorAlarm LowAlarm
+        {
+            get; set;
+        }
+
+        public decimal LowChartLimiterCelsius
         {
             get; set;
         }
@@ -50,16 +60,6 @@
         }
 
         public byte TempSensorRangeId
-        {
-            get; set;
-        }
-
-        public decimal HighChartLimiterCelsius
-        {
-            get; set;
-        }
-
-        public decimal LowChartLimiterCelsius
         {
             get; set;
         }

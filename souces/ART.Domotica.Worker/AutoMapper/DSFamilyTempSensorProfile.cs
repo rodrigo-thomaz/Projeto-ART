@@ -28,6 +28,8 @@
                     return result;
                 }))
                 .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.DSFamilyTempSensorResolution.Bits))
+                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.LowChartLimiterCelsius))
+                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.HighChartLimiterCelsius))
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
 
             CreateMap<TempSensorAlarmPositionContract, TempSensorAlarmPositionIoTContract>();

@@ -26,7 +26,17 @@
             get; set;
         }
 
+        public decimal HighChartLimiterCelsius
+        {
+            get; set;
+        }
+
         public TempSensorAlarmResponseIoTContract LowAlarm
+        {
+            get; set;
+        }
+
+        public decimal LowChartLimiterCelsius
         {
             get; set;
         }

@@ -21,7 +21,17 @@
             get; set;
         }
 
+        public decimal HighChartLimiterCelsius
+        {
+            get; set;
+        }
+
         public TempSensorAlarmGetDetailModel LowAlarm
+        {
+            get; set;
+        }
+
+        public decimal LowChartLimiterCelsius
         {
             get; set;
         }
@@ -32,16 +42,6 @@
         }
 
         public TempSensorRangeGetDetailModel TempSensorRange
-        {
-            get; set;
-        }
-
-        public decimal HighChartLimiterCelsius
-        {
-            get; set;
-        }
-
-        public decimal LowChartLimiterCelsius
         {
             get; set;
         }
