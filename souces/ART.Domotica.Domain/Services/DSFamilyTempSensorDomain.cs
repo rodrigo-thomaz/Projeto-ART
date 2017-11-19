@@ -171,6 +171,28 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
+        public async Task<DSFamilyTempSensor> SetChartLimiterCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract> message)
+        {
+            var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
+
+            if (entity == null)
+            {
+                throw new Exception("DSFamilyTempSensor not found");
+            }
+
+            if (message.Contract.Position == TempSensorAlarmPositionContract.High)
+                entity.HighChartLimiterCelsius = message.Contract.ChartLimiterCelsius;
+            else if (message.Contract.Position == TempSensorAlarmPositionContract.Low)
+                entity.LowChartLimiterCelsius = message.Contract.ChartLimiterCelsius;
+
+            await _dsFamilyTempSensorRepository.Update(entity);
+
+            //LoadDevice
+            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
+
+            return entity;
+        }
+
         #endregion
     }
 }

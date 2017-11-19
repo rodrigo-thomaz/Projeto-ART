@@ -23,6 +23,9 @@
         public static readonly string SetScaleIoTQueueName = "DSFamilyTempSensor.SetScaleIoT";
         public static readonly string SetScaleQueueName = "DSFamilyTempSensor.SetScale";
         public static readonly string SetScaleViewCompletedQueueName = "DSFamilyTempSensor.SetScaleViewCompleted";
+        public static readonly string SetChartLimiterCelsiusIoTQueueName = "DSFamilyTempSensor.SetChartLimiterCelsiusIoT";
+        public static readonly string SetChartLimiterCelsiusQueueName = "DSFamilyTempSensor.SetChartLimiterCelsius";
+        public static readonly string SetChartLimiterCelsiusViewCompletedQueueName = "DSFamilyTempSensor.SetChartLimiterCelsiusViewCompleted";
 
         #endregion Fields
     }
