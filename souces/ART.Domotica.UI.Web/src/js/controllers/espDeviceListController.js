@@ -48,7 +48,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     $scope.changeAlarmValue = function (position, alarmValue) {
-        if (!initialized || alarmValue === undefined) return;
+        if (!initialized || isNaN(alarmValue) || alarmValue === null) return;
         var alarmCelsius = temperatureScaleConverter.convertToCelsius($scope.sensor.temperatureScaleId, alarmValue);
         dsFamilyTempSensorService.setAlarmCelsius($scope.sensor.dsFamilyTempSensorId, alarmCelsius, position);        
     };
