@@ -70,6 +70,11 @@
             get; set;
         }
 
+        public DbSet<TempSensorRange> TempSensorRange
+        {
+            get; set;
+        }
+
         #endregion Properties
 
         #region Methods
@@ -96,6 +101,7 @@
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
+            modelBuilder.Configurations.Add(new TempSensorRangeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

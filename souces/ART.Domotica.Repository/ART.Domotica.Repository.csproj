@@ -75,6 +75,7 @@
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
     <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
+    <Compile Include="Configurations\TempSensorRangeConfiguration.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
     <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Entities\TemperatureScale.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\TempSensorAlarm.cs" />
+    <Compile Include="Entities\TempSensorRange.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IESPDeviceRepository.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
@@ -136,6 +138,10 @@
     <Compile Include="Migrations\201711181359243_Initial10.cs" />
     <Compile Include="Migrations\201711181359243_Initial10.Designer.cs">
       <DependentUpon>201711181359243_Initial10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711191047203_Initial11.cs" />
+    <Compile Include="Migrations\201711191047203_Initial11.Designer.cs">
+      <DependentUpon>201711191047203_Initial11.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -209,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711181359243_Initial10.resx">
       <DependentUpon>201711181359243_Initial10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711191047203_Initial11.resx">
+      <DependentUpon>201711191047203_Initial11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

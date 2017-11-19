@@ -3,8 +3,8 @@
     using System.Text;
 
     using Newtonsoft.Json;
-    using Newtonsoft.Json.Serialization;
     using Newtonsoft.Json.Converters;
+    using Newtonsoft.Json.Serialization;
 
     public static class SerializationHelpers
     {

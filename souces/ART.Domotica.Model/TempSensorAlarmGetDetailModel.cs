@@ -9,12 +9,12 @@
             get; set;
         }
 
-        public bool AlarmOn
+        public decimal AlarmCelsius
         {
             get; set;
         }
 
-        public decimal AlarmCelsius
+        public bool AlarmOn
         {
             get; set;
         }

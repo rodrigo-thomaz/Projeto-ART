@@ -11,12 +11,12 @@
         public static readonly string SetAlarmBuzzerOnIoTQueueName = "DSFamilyTempSensor.SetAlarmBuzzerOnIoT";
         public static readonly string SetAlarmBuzzerOnQueueName = "DSFamilyTempSensor.SetAlarmBuzzerOn";
         public static readonly string SetAlarmBuzzerOnViewCompletedQueueName = "DSFamilyTempSensor.SetAlarmBuzzerOnViewCompleted";
-        public static readonly string SetAlarmOnIoTQueueName = "DSFamilyTempSensor.SetAlarmOnIoT";
-        public static readonly string SetAlarmOnQueueName = "DSFamilyTempSensor.SetAlarmOn";
-        public static readonly string SetAlarmOnViewCompletedQueueName = "DSFamilyTempSensor.SetAlarmOnViewCompleted";
         public static readonly string SetAlarmCelsiusIoTQueueName = "DSFamilyTempSensor.SetAlarmCelsiusIoT";
         public static readonly string SetAlarmCelsiusQueueName = "DSFamilyTempSensor.SetAlarmCelsius";
         public static readonly string SetAlarmCelsiusViewCompletedQueueName = "DSFamilyTempSensor.SetAlarmCelsiusViewCompleted";
+        public static readonly string SetAlarmOnIoTQueueName = "DSFamilyTempSensor.SetAlarmOnIoT";
+        public static readonly string SetAlarmOnQueueName = "DSFamilyTempSensor.SetAlarmOn";
+        public static readonly string SetAlarmOnViewCompletedQueueName = "DSFamilyTempSensor.SetAlarmOnViewCompleted";
         public static readonly string SetResolutionIoTQueueName = "DSFamilyTempSensor.SetResolutionIoT";
         public static readonly string SetResolutionQueueName = "DSFamilyTempSensor.SetResolution";
         public static readonly string SetResolutionViewCompletedQueueName = "DSFamilyTempSensor.SetResolutionViewCompleted";
