@@ -4,11 +4,12 @@
 #include "DisplayManager.h"
 #include "DSFamilyTempSensorManager.h"
 
-DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager, TemperatureScaleConverter& temperatureScaleConverter)
+DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager, TemperatureScaleManager& temperatureScaleManager, TemperatureScaleConverter& temperatureScaleConverter)
 {
 	this->_displayManager = &displayManager;
 	this->_dsFamilyTempSensorManager = &dsFamilyTempSensorManager;
 	this->_debugManager = &debugManager;
+	this->_temperatureScaleManager = &temperatureScaleManager;
 	this->_temperatureScaleConverter = &temperatureScaleConverter;
 }
 
@@ -36,12 +37,12 @@ void DisplayTemperatureSensorManager::printSensors()
 	// variáveis
 	
 	int marginTop = 0;
-	int marginLeft = 4;
-	int marginRight = 4;
+	int marginLeft = 0;
+	int marginRight = 0;
 	int marginBotton = 0;
 	
-	int barWidth = 15;
-	int barHeight = 25;
+	int barWidth = 20;
+	int barHeight = 35;
 	
 	// ---- engine
 	
@@ -73,14 +74,21 @@ void DisplayTemperatureSensorManager::printSensors()
 
 void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
 {
-	float tempConverted = this->_temperatureScaleConverter->convertFromCelsius(dsFamilyTempSensor.getTemperatureScaleId(), dsFamilyTempSensor.getTempCelsius());
+	if(!this->_temperatureScaleManager->begin()) return;
 	
+	int temperatureScaleId = dsFamilyTempSensor.getTemperatureScaleId();
+	
+	float tempConverted = this->_temperatureScaleConverter->convertFromCelsius(temperatureScaleId, dsFamilyTempSensor.getTempCelsius());	
+	
+	TemperatureScale& temperatureScale = this->_temperatureScaleManager->getById(temperatureScaleId);
+		
 	this->_displayManager->display.setFont();
     this->_displayManager->display.setTextSize(1);
     this->_displayManager->display.setTextColor(WHITE);
-    this->_displayManager->display.setCursor(x, y - 8);       
+    this->_displayManager->display.setCursor(x, y - 10);   
+	this->_displayManager->display.setTextWrap(false);
 	this->_displayManager->display.print(tempConverted, 1);
-    //this->_displayManager->display.println(" C");
+    this->_displayManager->display.println(temperatureScale.getSymbol());
  	
 	float lowChartLimiterCelsius = dsFamilyTempSensor.getLowChartLimiterCelsius();
 	float highChartLimiterCelsius = dsFamilyTempSensor.getHighChartLimiterCelsius();

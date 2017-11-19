@@ -40,6 +40,7 @@ class TemperatureScaleManager
 	
 	bool																	begin();
 	void																	update(String json);
+	TemperatureScale&														getById(int id);
 										
   private:												
 												

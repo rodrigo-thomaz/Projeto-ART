@@ -83,7 +83,7 @@ void TemperatureScaleManager::update(String json)
 	for(JsonArray::iterator it=jsonArray.begin(); it!=jsonArray.end(); ++it) 
 	{
 		JsonObject& root = it->as<JsonObject>();
-		
+			
 		int id = int(root["id"]);
 		String name = root["name"];			
 		String symbol = root["symbol"];			
@@ -95,4 +95,13 @@ void TemperatureScaleManager::update(String json)
 	}
 				
 	Serial.println("[TemperatureScaleManager:: begin]");
+}
+
+TemperatureScale& TemperatureScaleManager::getById(int id)
+{
+	for (int i = 0; i < this->_scales.size(); ++i) {
+		if (this->_scales[i].getId() == id) {
+			return this->_scales[i];
+		}
+	}
 }

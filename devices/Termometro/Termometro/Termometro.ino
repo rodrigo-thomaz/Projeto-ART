@@ -72,7 +72,7 @@ DisplayAccessManager displayAccessManager(debugManager, displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
-DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager, temperatureScaleConverter);
+DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager, temperatureScaleManager, temperatureScaleConverter);
 
 void setup() {
 		
