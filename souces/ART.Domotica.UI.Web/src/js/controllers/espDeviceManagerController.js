@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$modal', 'uiGridConstants', 'EventDispatcher', 'espDeviceService', function ($scope, $timeout, $log, $modal, uiGridConstants, EventDispatcher, espDeviceService) {    
+app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$modal', 'uiGridConstants', '$rootScope', 'espDeviceService', function ($scope, $timeout, $log, $modal, uiGridConstants, $rootScope, espDeviceService) {    
         
     var onDeleteFromApplicationClick = function (espDevice) {
         espDeviceService.deleteFromApplication(espDevice.deviceInApplicationId);
@@ -9,8 +9,12 @@ app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$mo
         alert("ESP Device deletado!!!");
     }
 
-    EventDispatcher.on('espDeviceService_onDeleteFromApplicationCompleted', onDeleteFromApplicationCompleted);
+    $scope.$on('$destroy', function () {
+        clearOnDeleteFromApplicationCompleted();
+    });
 
+    var clearOnDeleteFromApplicationCompleted = $rootScope.$on('espDeviceService_onDeleteFromApplicationCompleted', onDeleteFromApplicationCompleted);        
+    
     $scope.gridOptions = {                                                 
         enableFiltering: true,
         enableSorting: true,
