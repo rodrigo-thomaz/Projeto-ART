@@ -70,30 +70,73 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
             if (device.deviceInApplicationId === data.deviceInApplicationId) {
                 device.epochTimeUtc = data.epochTimeUtc;
                 device.wifiQuality = data.wifiQuality;
-                updateSensors(device.sensors, data.dsFamilyTempSensors);
+                updateSensors(device, data.dsFamilyTempSensors);
                 break;
             }
         } 
     }
 
-    var updateSensors = function (oldSensors, newSensors) {
+    var updateSensors = function (device, newSensors) {
+        var oldSensors = device.sensors;
         for (var i = 0; i < oldSensors.length; i++) {
             for (var j = 0; j < newSensors.length; j++) {
                 if (oldSensors[i].dsFamilyTempSensorId === newSensors[j].dsFamilyTempSensorId) {
                     oldSensors[i].isConnected = newSensors[j].isConnected;
                     oldSensors[i].tempCelsius = newSensors[j].tempCelsius;
+
+                    //Chart
+
+                    oldSensors[i].chart[1].key = 'Temperatura ' + oldSensors[i].tempCelsius + ' °C';
+
+                    oldSensors[i].chart[0].values.push({
+                        epochTime: device.epochTimeUtc,
+                        temperature: oldSensors[i].highAlarm.alarmCelsius,
+                    });
+
+                    oldSensors[i].chart[1].values.push({
+                        epochTime: device.epochTimeUtc,
+                        temperature: oldSensors[i].tempCelsius,
+                    });
+
+                    oldSensors[i].chart[2].values.push({
+                        epochTime: device.epochTimeUtc,
+                        temperature: oldSensors[i].lowAlarm.alarmCelsius,
+                    });
+                    
+                    if (oldSensors[i].chart[0].values.length > 60)
+                        oldSensors[i].chart[0].values.shift();
+
+                    if (oldSensors[i].chart[1].values.length > 60)
+                        oldSensors[i].chart[1].values.shift();
+
+                    if (oldSensors[i].chart[2].values.length > 60)
+                        oldSensors[i].chart[2].values.shift();
+
                     break;
                 }
             }
         }
     }
 
+    var chartLine = function (key) {
+        this.key = key;
+        this.values = [];
+    }
+
     var onGetListInApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            data[i].createDate = new Date(data[i].createDate * 1000).toLocaleString();
-            serviceFactory.devices.push(data[i]);
+            var device = data[i];
+            device.createDate = new Date(device.createDate * 1000).toLocaleString();
+            serviceFactory.devices.push(device);
+            for (var j = 0; j < device.sensors.length; j++) {
+                var sensor = device.sensors[j];
+                sensor.chart = [];
+                sensor.chart.push(new chartLine("Máximo"));
+                sensor.chart.push(new chartLine("Temperatura"));
+                sensor.chart.push(new chartLine("Mínimo")); 
+            }
         }
     }
 

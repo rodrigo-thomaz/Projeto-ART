@@ -214,7 +214,6 @@
     <Content Include="src\js\controllers\dashboardController.js" />
     <Content Include="src\js\controllers\applicationController.js" />
     <Content Include="src\js\controllers\tab.js" />
-    <Content Include="src\js\controllers\thermometerDeviceController.js" />
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />

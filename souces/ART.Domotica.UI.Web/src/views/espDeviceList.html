@@ -44,163 +44,161 @@
                                     </div>
                                 </div>
                             </form>
-                            
+
                             <tabset justified="true" class="tab-container">
                                 <tab heading="Sensor {{sensorKey + 1}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
-                                
-                                    <form name="formDevice" class="form-horizontal" ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Status</label>
-                                            <div class="col-lg-8">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i ng-class="sensor.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
+                                    <div ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
+                                        <div style="height:240px">
+                                            <nvd3 options="options" data="sensor.chart"></nvd3>
+                                        </div>
+                                        <form name="formDevice" class="form-horizontal">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Status</label>
+                                                <div class="col-lg-8">
+                                                    <div class="input-group">
+                                                        <span class="input-group-addon">
+                                                            <i ng-class="sensor.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
+                                                        </span>
+                                                        <input type="text" class="form-control" readonly value="{{sensor.isConnected ? 'On-line' : 'Off-line'}}">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Temperatura</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" class="form-control" readonly value="{{sensor.tempCelsius == null ? '' : convertTemperature(sensor.tempCelsius) | number : resolution.selectedResolution.decimalPlaces}} {{scale.selectedScale.symbol}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Range</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" class="form-control" readonly value="{{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} a {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Escalas</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control m-b" ng-options="item.name for item in scale.availableScales track by item.id" ng-model="scale.selectedScale" ng-change="changeScale()"></select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Resolução</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control m-b" ng-options="item.name for item in resolution.availableResolutions track by item.id" ng-model="resolution.selectedResolution" ng-change="changeResolution()"></select>
+                                                </div>
+                                            </div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Tem alarme alto</label>
+                                                <div class="col-lg-8">
+                                                    <div class="checkbox">
+                                                        <label class="i-checks">
+                                                            <input type="checkbox" ng-model="highAlarmView.alarmOn" ng-change="changeAlarmOn('High', highAlarmView.alarmOn)"><i></i>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Tem buzzer alto</label>
+                                                <div class="col-lg-8">
+                                                    <div class="checkbox">
+                                                        <label class="i-checks">
+                                                            <input ng-disabled="!highAlarmView.alarmOn" type="checkbox" ng-model="highAlarmView.alarmBuzzerOn" ng-change="changeAlarmBuzzerOn('High', highAlarmView.alarmBuzzerOn)"><i></i>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Alarme alto</label>
+                                                <div class="col-lg-8">
+                                                    <input name="inputHighAlarmValue"
+                                                           type="number"
+                                                           ng-model="highAlarmView.alarmValue"
+                                                           ng-model-options="{ debounce: 1000 }"
+                                                           ng-change="changeAlarmValue('High', highAlarmView.alarmValue)"
+                                                           min="{{tempSensorRangeView.min}}"
+                                                           max="{{tempSensorRangeView.max}}"
+                                                           ng-disabled="!highAlarmView.alarmOn"
+                                                           required
+                                                           class="form-control">
+                                                    <span ng-show="formDevice.inputHighAlarmValue.$touched && formDevice.inputHighAlarmValue.$invalid">
+                                                        Alarme alto deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                     </span>
-                                                    <input type="text" class="form-control" readonly value="{{sensor.isConnected ? 'On-line' : 'Off-line'}}">
+
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Temperatura</label>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" readonly value="{{sensor.tempCelsius == null ? '' : convertTemperature(sensor.tempCelsius) | number : resolution.selectedResolution.decimalPlaces}} {{scale.selectedScale.symbol}}">
-                                            </div>
-                                        </div>                                        
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Range</label>
-                                            <div class="col-lg-8">
-                                                <input type="text" class="form-control" readonly value="{{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} a {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}">
-                                            </div>
-                                        </div>     
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Escalas</label>
-                                            <div class="col-lg-8">
-                                                <select class="form-control m-b" ng-options="item.name for item in scale.availableScales track by item.id" ng-model="scale.selectedScale" ng-change="changeScale()"></select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Resolução</label>
-                                            <div class="col-lg-8">
-                                                <select class="form-control m-b" ng-options="item.name for item in resolution.availableResolutions track by item.id" ng-model="resolution.selectedResolution" ng-change="changeResolution()"></select>
-                                            </div>
-                                        </div>
-
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Tem alarme alto</label>
-                                            <div class="col-lg-8">
-                                                <div class="checkbox">
-                                                    <label class="i-checks">
-                                                        <input type="checkbox" ng-model="highAlarmView.alarmOn" ng-change="changeAlarmOn('High', highAlarmView.alarmOn)"><i></i>
-                                                    </label>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Tem alarme baixo</label>
+                                                <div class="col-lg-8">
+                                                    <div class="checkbox">
+                                                        <label class="i-checks">
+                                                            <input type="checkbox" ng-model="lowAlarmView.alarmOn" ng-change="changeAlarmOn('Low', lowAlarmView.alarmOn)"><i></i>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Tem buzzer alto</label>
-                                            <div class="col-lg-8">
-                                                <div class="checkbox">
-                                                    <label class="i-checks">
-                                                        <input ng-disabled="!highAlarmView.alarmOn" type="checkbox" ng-model="highAlarmView.alarmBuzzerOn" ng-change="changeAlarmBuzzerOn('High', highAlarmView.alarmBuzzerOn)"><i></i>
-                                                    </label>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Tem buzzer baixo</label>
+                                                <div class="col-lg-8">
+                                                    <div class="checkbox">
+                                                        <label class="i-checks">
+                                                            <input ng-disabled="!lowAlarmView.alarmOn" type="checkbox" ng-model="lowAlarmView.alarmBuzzerOn" ng-change="changeAlarmBuzzerOn('Low', lowAlarmView.alarmBuzzerOn)"><i></i>
+                                                        </label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Alarme alto</label>
-                                            <div class="col-lg-8">
-                                                <input name="inputHighAlarmValue" 
-                                                       type="number"
-                                                       ng-model="highAlarmView.alarmValue"
-                                                       ng-model-options="{ debounce: 1000 }"
-                                                       ng-change="changeAlarmValue('High', highAlarmView.alarmValue)"
-                                                       min="{{tempSensorRangeView.min}}"
-                                                       max="{{tempSensorRangeView.max}}"
-                                                       ng-disabled="!highAlarmView.alarmOn"
-                                                       required
-                                                       class="form-control">
-                                                <span ng-show="formDevice.inputHighAlarmValue.$touched && formDevice.inputHighAlarmValue.$invalid">
-                                                    Alarme alto deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
-                                                </span>
-
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Tem alarme baixo</label>
-                                            <div class="col-lg-8">
-                                                <div class="checkbox">
-                                                    <label class="i-checks">
-                                                        <input type="checkbox" ng-model="lowAlarmView.alarmOn" ng-change="changeAlarmOn('Low', lowAlarmView.alarmOn)"><i></i>
-                                                    </label>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Alarme baixo</label>
+                                                <div class="col-lg-8">
+                                                    <input name="inputLowAlarmValue"
+                                                           type="number"
+                                                           ng-model="lowAlarmView.alarmValue"
+                                                           ng-model-options="{ debounce: 1000 }"
+                                                           ng-change="changeAlarmValue('Low', lowAlarmView.alarmValue)"
+                                                           min="{{tempSensorRangeView.min}}"
+                                                           max="{{tempSensorRangeView.max}}"
+                                                           ng-disabled="!lowAlarmView.alarmOn"
+                                                           class="form-control">
+                                                    <span ng-show="formDevice.inputLowAlarmValue.$touched && formDevice.inputLowAlarmValue.$invalid">
+                                                        Alarme baixo deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                    </span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Tem buzzer baixo</label>
-                                            <div class="col-lg-8">
-                                                <div class="checkbox">
-                                                    <label class="i-checks">
-                                                        <input ng-disabled="!lowAlarmView.alarmOn" type="checkbox" ng-model="lowAlarmView.alarmBuzzerOn" ng-change="changeAlarmBuzzerOn('Low', lowAlarmView.alarmBuzzerOn)"><i></i>
-                                                    </label>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Limite do gráfico alto</label>
+                                                <div class="col-lg-8">
+                                                    <input name="inputHighChartLimiterValue"
+                                                           type="number"
+                                                           ng-model="highChartLimiterView"
+                                                           ng-model-options="{ debounce: 1000 }"
+                                                           ng-change="changeChartLimiterValue('High', highChartLimiterView)"
+                                                           min="{{tempSensorRangeView.min}}"
+                                                           max="{{tempSensorRangeView.max}}"
+                                                           class="form-control">
+                                                    <span ng-show="formDevice.inputHighChartLimiterValue.$touched && formDevice.inputHighChartLimiterValue.$invalid">
+                                                        Limite alto do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                    </span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Alarme baixo</label>
-                                            <div class="col-lg-8">
-                                                <input name="inputLowAlarmValue" 
-                                                       type="number" 
-                                                       ng-model="lowAlarmView.alarmValue"
-                                                       ng-model-options="{ debounce: 1000 }"
-                                                       ng-change="changeAlarmValue('Low', lowAlarmView.alarmValue)"
-                                                       min="{{tempSensorRangeView.min}}" 
-                                                       max="{{tempSensorRangeView.max}}"
-                                                       ng-disabled="!lowAlarmView.alarmOn"
-                                                       class="form-control">
-                                                <span ng-show="formDevice.inputLowAlarmValue.$touched && formDevice.inputLowAlarmValue.$invalid">
-                                                    Alarme baixo deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
-                                                </span>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Limite do gráfico baixo</label>
+                                                <div class="col-lg-8">
+                                                    <input name="inputLowChartLimiterValue"
+                                                           type="number"
+                                                           ng-model="lowChartLimiterView"
+                                                           ng-model-options="{ debounce: 1000 }"
+                                                           ng-change="changeChartLimiterValue('Low', lowChartLimiterView)"
+                                                           min="{{tempSensorRangeView.min}}"
+                                                           max="{{tempSensorRangeView.max}}"
+                                                           class="form-control">
+                                                    <span ng-show="formDevice.inputLowChartLimiterValue.$touched && formDevice.inputLowChartLimiterValue.$invalid">
+                                                        Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                    </span>
+                                                </div>
                                             </div>
-                                        </div> 
-
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Limite do gráfico alto</label>
-                                            <div class="col-lg-8">
-                                                <input name="inputHighChartLimiterValue"
-                                                       type="number"
-                                                       ng-model="highChartLimiterView"
-                                                       ng-model-options="{ debounce: 1000 }"
-                                                       ng-change="changeChartLimiterValue('High', highChartLimiterView)"
-                                                       min="{{tempSensorRangeView.min}}"
-                                                       max="{{tempSensorRangeView.max}}"
-                                                       class="form-control">
-                                                <span ng-show="formDevice.inputHighChartLimiterValue.$touched && formDevice.inputHighChartLimiterValue.$invalid">
-                                                    Limite alto do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Limite do gráfico baixo</label>
-                                            <div class="col-lg-8">
-                                                <input name="inputLowChartLimiterValue"
-                                                       type="number"
-                                                       ng-model="lowChartLimiterView"
-                                                       ng-model-options="{ debounce: 1000 }"
-                                                       ng-change="changeChartLimiterValue('Low', lowChartLimiterView)"
-                                                       min="{{tempSensorRangeView.min}}"
-                                                       max="{{tempSensorRangeView.max}}"
-                                                       class="form-control">
-                                                <span ng-show="formDevice.inputLowChartLimiterValue.$touched && formDevice.inputLowChartLimiterValue.$invalid">
-                                                    Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
-                                                </span>
-                                            </div>
-                                        </div>
-                                        
-                                    </form>
-
+                                        </form>
+                                    </div>                                
                                 </tab>
                             </tabset>
 
@@ -209,135 +207,6 @@
 
                 </div>
             </div>
-        </div>        
-
-        <div ng-controller="thermometerDeviceController">
-
-            <div class="row" ng-repeat="(key, sensor) in sensors">
-                <div class="col-md-6">
-
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <ul class="nav nav-pills pull-right">
-                                <li><a href="">{{sensor.isConnected ? 'On-line' : 'Off-line'}}<i class="glyphicon"></i></a></li>
-                                <li><a href="">{{sensor.epochTime == null ? '' : sensor.epochTime * 1000 | date:'dd/MM/yyyy HH:mm:ss Z'}}<i class="glyphicon"></i></a></li>
-                                <li><a href=""><i class="glyphicon glyphicon-cog"></i></a></li>
-                            </ul>
-                            <i ng-class="sensor.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
-                            <span class="font-bold">&nbsp;&nbsp;Sensor {{key + 1}}</span>
-                        </div>
-                        <div class="panel-body">
-                            <div style="height:240px">
-                                <!--<nvd3 options="options" data="sensor.chart"></nvd3>-->
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="col-md-6">
-                    <div class="panel panel-default">
-                        <div class="panel-heading font-bold">Configurações do sensor {{key + 1}}</div>
-                        <div class="panel-body">
-                            <form class="bs-example form-horizontal" style="height:240px">
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Status</label>
-                                    <div class="col-lg-8">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i ng-class="sensor.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
-                                            </span>
-                                            <input type="text" class="form-control" readonly value="{{sensor.isConnected ? 'On-line' : 'Off-line'}}">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Temperatura</label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" readonly value="{{sensor.temperature == null ? '' : sensor.temperature | number : 2}} °C">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Última atualização</label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" readonly value="{{sensor.epochTime == null ? '' : sensor.epochTime * 1000 | date:'dd/MM/yyyy HH:mm:ss Z'}}">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Endereço</label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" readonly uppercased ng-model="sensor.deviceAddress">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Família</label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" readonly ng-model="sensor.family">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Resolução</label>
-                                    <div class="col-lg-8">
-                                        <input type="text" class="form-control" readonly ng-model="sensor.resolution">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Escalas</label>
-                                    <div class="col-lg-8">
-                                        <select class="form-control m-b" ng-options="item.name for item in scales track by item.id" ng-model="sensor.selectedScale" ng-change="sensor.setScale()"></select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Resolução</label>
-                                    <div class="col-lg-8">
-                                        <select class="form-control m-b" ng-options="item.name for item in resolutions track by item.id" ng-model="sensor.selectedResolution" ng-change="sensor.setResolution()"></select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Alarme</label>
-                                    <div class="col-lg-8">
-                                        <div class="checkbox">
-                                            <label class="i-checks">
-                                                <input type="checkbox" checked><i></i>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Máximo</label>
-                                    <div class="col-lg-8">
-                                        <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeForceYMax()" ui-jq="TouchSpin" type="number" ng-model="sensor.forceY.max" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Mínimo</label>
-                                    <div class="col-lg-8">
-                                        <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeForceYMin()" ui-jq="TouchSpin" type="number" ng-model="sensor.forceY.min" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Alto</label>
-                                    <div class="col-lg-8">
-                                        <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeHighAlarm()" ui-jq="TouchSpin" type="number" ng-model="sensor.alarm.highAlarm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Baixo</label>
-                                    <div class="col-lg-8">
-                                        <input ng-model-options="{ debounce: 1000 }" ng-change="sensor.changeLowAlarm()" ui-jq="TouchSpin" type="number" ng-model="sensor.alarm.lowAlarm" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" class="form-control" data-min='-55' data-max="125" data-step="0.1" data-decimals="2" data-postfix="°C">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-offset-4 col-lg-8">
-                                        <!--<slider ng-model="sensor.range.lowAlarm" ng-model-range="sensor.range.highAlarm" floor="{{sensor.range.min}}" ceiling="{{sensor.range.max}}" ng-change="sensor.changeAlarm()"></slider>-->
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        </div>                
     </div>
 </div>

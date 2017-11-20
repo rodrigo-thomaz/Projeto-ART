@@ -192,5 +192,48 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         return temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, temperature);
     }  
 
+    $scope.options = {
+        chart: {
+            type: 'lineChart',
+            height: 240,
+            margin: {
+                top: 20,
+                right: 30,
+                bottom: 35,
+                left: 40
+            },
+            x: function (d) {
+                if (d === null) return null;
+                return d.epochTime;
+            },
+            y: function (d) {
+                if (d === null) return null;
+                return d.temperature;
+            },
+            useInteractiveGuideline: true,
+            duration: 0,
+            xAxis: {
+                //axisLabel: 'Tempo',
+                tickFormat: function (d) {
+                    return new Date(d * 1000).toLocaleTimeString();
+                },
+                tickPadding: 18,
+                axisLabelDistance: 0,
+            },
+            yAxis: {
+                //axisLabel: 'Temperatura',
+                tickFormat: function (d) {
+                    return d3.format('.02f')(d);
+                },
+                tickPadding: 5,
+                axisLabelDistance: 0,
+            },
+            forceY: [
+                $scope.lowChartLimiterView,
+                $scope.highChartLimiterView
+            ],
+        }
+    };   
+
 }]);
 

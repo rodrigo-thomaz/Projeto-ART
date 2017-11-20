@@ -48,9 +48,7 @@ angular.module('app')
                       'js/services/dsFamilyTempSensorResolutionService.js',
                       'js/services/dsFamilyTempSensorService.js',
                       'js/services/espDeviceService.js',
-                      'js/controllers/espDeviceListController.js',
-
-                      'js/controllers/thermometerDeviceController.js',                      
+                      'js/controllers/espDeviceListController.js',                      
                   ])
               })
               .state('app.espDeviceManager', {
