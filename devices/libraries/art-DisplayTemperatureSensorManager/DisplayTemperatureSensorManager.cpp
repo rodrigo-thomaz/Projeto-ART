@@ -98,13 +98,23 @@ void DisplayTemperatureSensorManager::printBar(DSFamilyTempSensor& dsFamilyTempS
 
 void DisplayTemperatureSensorManager::printBarValue(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
 {	
-	float lowChartLimiterCelsius = dsFamilyTempSensor.getLowChartLimiterCelsius();
 	float highChartLimiterCelsius = dsFamilyTempSensor.getHighChartLimiterCelsius();
+	float lowChartLimiterCelsius = dsFamilyTempSensor.getLowChartLimiterCelsius();	
+ 
+ 
+	Serial.println("lowChartLimiterCelsius lowChartLimiterCelsius lowChartLimiterCelsius lowChartLimiterCelsius lowChartLimiterCelsius ");
+	Serial.println(lowChartLimiterCelsius);
  
 	float range = highChartLimiterCelsius - lowChartLimiterCelsius;
 	float value = dsFamilyTempSensor.getTempCelsius() - lowChartLimiterCelsius;
 	float percent = (value * 100) / range;
-	int tempHeight = round((width * percent) / 100);
+	
+	int tempHeight = dsFamilyTempSensor.getTempCelsius() - lowChartLimiterCelsius;
+	
+	if(tempHeight > height) tempHeight = height;
+	else if(tempHeight < height) tempHeight = 0;
+	
+	//int tempHeight = round((width * percent) / 100);
 	int tempRectY = y + height - tempHeight;
 	
 	this->_displayManager->display.drawRect(x, y, width, height, WHITE);	

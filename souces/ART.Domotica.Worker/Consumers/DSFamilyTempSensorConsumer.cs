@@ -280,7 +280,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -312,7 +312,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmCelsiusRequestContract, DSFamilyTempSensorSetAlarmCelsiusCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmCelsiusViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -344,7 +344,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmBuzzerOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -376,7 +376,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract, DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var exchange = "amq.topic";
             var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, DSFamilyTempSensorConstants.SetChartLimiterCelsiusViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
