@@ -135,14 +135,14 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var onGetByPinCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        EventDispatcher.trigger('espDeviceService_onGetByPinCompleted', data);
+        $rootScope.$emit('espDeviceService_onGetByPinCompleted', data);
     }
 
     var onInsertInApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         insertDeviceInCollection(data);
-        EventDispatcher.trigger('espDeviceService_onInsertInApplicationCompleted');
+        $rootScope.$emit('espDeviceService_onInsertInApplicationCompleted');
     }  
 
     var onDeleteFromApplicationCompleted = function (payload) {
@@ -151,7 +151,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         for (var i = 0; i < serviceFactory.devices.length; i++) {
             if (serviceFactory.devices[i].deviceInApplicationId === data.deviceInApplicationId) {
                 serviceFactory.devices.splice(i, 1);
-                EventDispatcher.trigger('espDeviceService_onDeleteFromApplicationCompleted');
+                $rootScope.$emit('espDeviceService_onDeleteFromApplicationCompleted');
                 break;
             }
         }       

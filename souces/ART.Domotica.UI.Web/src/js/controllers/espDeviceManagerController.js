@@ -39,7 +39,7 @@ app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$mo
     $scope.openDeviceJoin = function () {
         var modalInstance = $modal.open({
             templateUrl: 'espDeviceJoinHtml',
-            controller: 'espDeviceJoinController',
+            //controller: 'espDeviceJoinController',
             size: 'lg',
         });
 

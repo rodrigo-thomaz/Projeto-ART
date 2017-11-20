@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', 'EventDispatcher', 'espDeviceService', function ($scope, $timeout, $log, EventDispatcher, espDeviceService) {    
+app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootScope', 'espDeviceService', function ($scope, $timeout, $log, $rootScope, espDeviceService) {    
 
     var onGetByPinClick = function () {    
         $scope.searchingPin = true;
@@ -26,15 +26,20 @@ app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', 'EventD
 
     var onInsertInApplicationCompleted = function (payload) {
         alert("ESP Device inserido!!!");
-    }    
+    } 
 
-    EventDispatcher.on('espDeviceService_onGetByPinCompleted', onGetByPinCompleted);
-    EventDispatcher.on('espDeviceService_onInsertInApplicationCompleted', onInsertInApplicationCompleted);    
+    $scope.$on('$destroy', function () {
+        clearOnGetByPinCompleted();
+        clearOnInsertInApplicationCompleted();
+    });
 
+    var clearOnGetByPinCompleted = $rootScope.$on('espDeviceService_onGetByPinCompleted', onGetByPinCompleted);        
+    var clearOnInsertInApplicationCompleted = $rootScope.$on('espDeviceService_onInsertInApplicationCompleted', onInsertInApplicationCompleted);        
+    
     $scope.pin = "";
     $scope.espDevice = null;
     $scope.getByPinClick = onGetByPinClick;
     $scope.searchingPin = false;
-    $scope.insertInApplicationClick = onInsertInApplicationClick;        
+    $scope.insertInApplicationClick = onInsertInApplicationClick;            
 
 }]);
