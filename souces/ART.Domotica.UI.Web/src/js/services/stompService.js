@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('stompService', ['$log', 'ngAuthSettings', 'EventDispatcher', function ($log, ngAuthSettings, EventDispatcher) {
+app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', function ($log, ngAuthSettings, $rootScope) {
     
     var serviceFactory = {};    
 
@@ -9,7 +9,7 @@ app.factory('stompService', ['$log', 'ngAuthSettings', 'EventDispatcher', functi
 
         serviceFactory.session = frame.headers.session;
 
-        EventDispatcher.trigger('stompService_onConnected', frame);
+        $rootScope.$emit('stompService_onConnected', frame);
 
         debug('connected in broker');
         debug('session: ' + frame.headers.session);        
@@ -19,7 +19,7 @@ app.factory('stompService', ['$log', 'ngAuthSettings', 'EventDispatcher', functi
 
         serviceFactory.session = null;
 
-        EventDispatcher.trigger('stompService_onError', frame);
+        $rootScope.$emit('stompService_onError', frame);
 
         debug('Error connecting in broker');
     }

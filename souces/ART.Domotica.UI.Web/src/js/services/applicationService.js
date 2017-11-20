@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, $log, ngAuthSettings, EventDispatcher, stompService) {
+app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, $log, ngAuthSettings, $rootScope, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -26,7 +26,11 @@ app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', 'EventDisp
         serviceFactory.application = JSON.parse(dataUTF8);
     }
 
-    EventDispatcher.on('stompService_onConnected', onConnected);               
+    $rootScope.$on('$destroy', function () {
+        clearOnConnected();
+    });
+
+    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected);        
 
     // stompService
     if (stompService.client.connected)

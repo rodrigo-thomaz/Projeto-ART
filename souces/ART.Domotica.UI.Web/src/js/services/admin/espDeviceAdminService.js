@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('espDeviceAdminService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, $log, ngAuthSettings, EventDispatcher, stompService) {
+app.factory('espDeviceAdminService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, $log, ngAuthSettings, $rootScope, stompService) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -18,10 +18,14 @@ app.factory('espDeviceAdminService', ['$http', '$log', 'ngAuthSettings', 'EventD
     var onGetAllCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        EventDispatcher.trigger('espDeviceAdminService_onGetAllCompleted', data);        
+        $rootScope.$emit('espDeviceAdminService_onGetAllCompleted', data);
     }
 
-    EventDispatcher.on('stompService_onConnected', onConnected);
+    $rootScope.$on('$destroy', function () {
+        clearOnConnected();
+    });
+
+    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected);        
 
     // stompService
     if (stompService.client.connected)

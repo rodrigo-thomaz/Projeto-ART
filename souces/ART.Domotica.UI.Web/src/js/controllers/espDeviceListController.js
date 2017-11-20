@@ -1,11 +1,11 @@
 ﻿'use strict';
-app.controller('espDeviceListController', ['$scope', '$timeout', '$log', 'EventDispatcher', 'espDeviceService', function ($scope, $timeout, $log, EventDispatcher, espDeviceService) {    
+app.controller('espDeviceListController', ['$scope', '$timeout', '$log', 'espDeviceService', function ($scope, $timeout, $log, espDeviceService) {    
    
     $scope.devices = espDeviceService.devices;    
 
 }]);
 
-app.controller('espDeviceItemController', ['$scope', '$timeout', '$log', 'EventDispatcher', 'espDeviceService', function ($scope, $timeout, $log, EventDispatcher, espDeviceService) {
+app.controller('espDeviceItemController', ['$scope', '$timeout', '$log', 'espDeviceService', function ($scope, $timeout, $log, espDeviceService) {
 
     $scope.device = {};
 

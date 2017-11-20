@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'EventDispatcher', 'stompService', function ($http, ngAuthSettings, $rootScope, EventDispatcher, stompService) {
+app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -45,7 +45,11 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope',
         $rootScope.$emit('TemperatureScaleService_Initialized');
     }
 
-    EventDispatcher.on('stompService_onConnected', onConnected);               
+    $rootScope.$on('$destroy', function () {
+        clearOnConnected();
+    });
+
+    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected);        
 
     // stompService
     if (stompService.client.connected)

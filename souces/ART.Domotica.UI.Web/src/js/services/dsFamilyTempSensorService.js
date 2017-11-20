@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'EventDispatcher', 'stompService', 'espDeviceService', function ($http, $log, $rootScope, ngAuthSettings, EventDispatcher, stompService, espDeviceService) {
+app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'espDeviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, espDeviceService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -149,7 +149,11 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         $rootScope.$emit('dsFamilyTempSensorService_SetChartLimiterCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
 
-    EventDispatcher.on('stompService_onConnected', onConnected);         
+    $rootScope.$on('$destroy', function () {
+        clearOnConnected();
+    });
+
+    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
 
     // stompService
     if (stompService.client.connected)

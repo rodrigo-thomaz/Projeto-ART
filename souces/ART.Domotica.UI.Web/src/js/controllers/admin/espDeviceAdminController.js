@@ -1,7 +1,7 @@
 ﻿'use strict';
-app.controller('espDeviceAdminController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'espDeviceAdminService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, espDeviceAdminService) {    
+app.controller('espDeviceAdminController', ['$scope', '$timeout', '$log', 'uiGridConstants', '$rootScope', 'espDeviceAdminService', function ($scope, $timeout, $log, uiGridConstants, $rootScope, espDeviceAdminService) {    
 
-    var onGetAllCompleted = function (data) {
+    var onGetAllCompleted = function (event, data) {
         for (var i = 0; i < data.length; i++) {
             data[i].createDateFormatted = new Date(data[i].createDate * 1000).toLocaleString();
         }
@@ -28,6 +28,10 @@ app.controller('espDeviceAdminController', ['$scope', '$timeout', '$log', 'uiGri
 
     espDeviceAdminService.getAll();
 
-    EventDispatcher.on('espDeviceAdminService_onGetAllCompleted', onGetAllCompleted);
+    $scope.$on('$destroy', function () {
+        clearOnGetAllCompleted();
+    });
+
+    var clearOnGetAllCompleted = $rootScope.$on('espDeviceAdminService_onGetAllCompleted', onGetAllCompleted);        
 
 }]);
