@@ -25,8 +25,9 @@ private:
 	TemperatureScaleManager* 	_temperatureScaleManager;
 	TemperatureScaleConverter*  _temperatureScaleConverter;
 
-	void						printSensor(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height);
-	
+	void						printBar(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height);
+	void						printBarValue(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height);
+	void						printText(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y);
 };
 
 #endif

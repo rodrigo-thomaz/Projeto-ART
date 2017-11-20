@@ -34,9 +34,11 @@ void DisplayTemperatureSensorManager::printUpdate(bool on)
 
 void DisplayTemperatureSensorManager::printSensors()
 {
+	if(!this->_temperatureScaleManager->begin()) return;
+	
 	// variáveis
 	
-	int marginTop = 0;
+	int marginTop = 2;
 	int marginLeft = 0;
 	int marginRight = 0;
 	int marginBotton = 0;
@@ -61,35 +63,41 @@ void DisplayTemperatureSensorManager::printSensors()
 	
 	int sensorsCount = sizeof(sensors);
     
-	int spaceChunk = round((screenWidth - (barWidth * sensorsCount)) / (sensorsCount - 1));
+	int boxChunk = round(screenWidth / sensorsCount);
 		
-	this->_displayManager->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
+	//this->_displayManager->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
  
 	for(int i = 0; i < sensorsCount; ++i){	
-		int barX = screenX1 + (i * barWidth) + (i * spaceChunk);
-		int barY = screenY2 - barHeight;
-		this->printSensor(sensors[i], barX, barY, barWidth, barHeight);	        
+		int boxX = screenX1 + (boxChunk * i);
+		this->printBar(sensors[i], boxX, screenY1, boxChunk, screenHeight);	
+		this->printText(sensors[i], boxX, screenY1);	        
 	}	
 }
 
-void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
+void DisplayTemperatureSensorManager::printBar(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
 {
-	if(!this->_temperatureScaleManager->begin()) return;
+	int barMarginTop = 10;
+	int barMarginLeft = 5;
+	int barMarginRight = 5;
+	int barMarginBotton = 0;
 	
-	int temperatureScaleId = dsFamilyTempSensor.getTemperatureScaleId();
+	int barX1 = x + barMarginLeft;
+	int barY1 = y + barMarginTop;
 	
-	float tempConverted = this->_temperatureScaleConverter->convertFromCelsius(temperatureScaleId, dsFamilyTempSensor.getTempCelsius());	
+	int barX2 = x + width - barMarginRight;
+	int barY2 = y + height - barMarginBotton;
 	
-	TemperatureScale& temperatureScale = this->_temperatureScaleManager->getById(temperatureScaleId);
-		
-	this->_displayManager->display.setFont();
-    this->_displayManager->display.setTextSize(1);
-    this->_displayManager->display.setTextColor(WHITE);
-    this->_displayManager->display.setCursor(x, y - 10);   
-	this->_displayManager->display.setTextWrap(false);
-	this->_displayManager->display.print(tempConverted, 1);
-    this->_displayManager->display.println(temperatureScale.getSymbol());
- 	
+	int barWidth = barX2 - barX1;
+	int barHeight = barY2 - barY1;	
+	
+	// Box
+	//this->_displayManager->display.drawRect(x, y, width, height, WHITE);	
+	// Bar
+	this->printBarValue(dsFamilyTempSensor, barX1, barY1, barWidth, barHeight);	        
+}
+
+void DisplayTemperatureSensorManager::printBarValue(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
+{	
 	float lowChartLimiterCelsius = dsFamilyTempSensor.getLowChartLimiterCelsius();
 	float highChartLimiterCelsius = dsFamilyTempSensor.getHighChartLimiterCelsius();
  
@@ -101,4 +109,21 @@ void DisplayTemperatureSensorManager::printSensor(DSFamilyTempSensor& dsFamilyTe
 	
 	this->_displayManager->display.drawRect(x, y, width, height, WHITE);	
 	this->_displayManager->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
+}
+
+void DisplayTemperatureSensorManager::printText(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y)
+{
+	int temperatureScaleId = dsFamilyTempSensor.getTemperatureScaleId();
+	
+	float tempConverted = this->_temperatureScaleConverter->convertFromCelsius(temperatureScaleId, dsFamilyTempSensor.getTempCelsius());	
+	
+	TemperatureScale& temperatureScale = this->_temperatureScaleManager->getById(temperatureScaleId);
+		
+	this->_displayManager->display.setFont();
+    this->_displayManager->display.setTextSize(1);
+    this->_displayManager->display.setTextColor(WHITE);
+    this->_displayManager->display.setCursor(x, y);   
+	this->_displayManager->display.setTextWrap(false);
+	this->_displayManager->display.print(tempConverted, 1);
+    this->_displayManager->display.println(temperatureScale.getSymbol());
 }
