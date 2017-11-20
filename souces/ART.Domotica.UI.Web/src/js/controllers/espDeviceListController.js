@@ -111,6 +111,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnSetAlarmCelsiusCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetAlarmCelsiusCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmCelsiusCompleted);
         clearOnSetAlarmBuzzerOnCompleted = $rootScope.$on('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmBuzzerOnCompleted);        
         clearOnSetChartLimiterCelsiusCompleted = $rootScope.$on('dsFamilyTempSensorService_SetChartLimiterCelsiusCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetChartLimiterCelsiusCompleted);        
+        clearOnReadReceived = $rootScope.$on('ESPDeviceService_onReadReceived', onReadReceived);        
 
         initialized = true;
     };    
@@ -123,6 +124,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     var clearOnSetAlarmCelsiusCompleted = null;
     var clearOnSetAlarmBuzzerOnCompleted = null;
     var clearOnSetChartLimiterCelsiusCompleted = null;
+    var clearOnReadReceived = null;
         
     $scope.$on('$destroy', function () {
         if (clearOnTemperatureScaleServiceInitialized != null) clearOnTemperatureScaleServiceInitialized();
@@ -132,6 +134,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnSetAlarmCelsiusCompleted();
         clearOnSetAlarmBuzzerOnCompleted(); 
         clearOnSetChartLimiterCelsiusCompleted();
+        clearOnReadReceived();
     });
 
     var setSelectedScale = function () {  
@@ -186,6 +189,10 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
             toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
         else if (data.position === 'Low')
             toaster.pop('success', 'Sucesso', 'Limite baixo do gráfico alterado');
+    };
+
+    var onReadReceived = function (event, data) {
+        $scope.$apply();
     };
 
     $scope.convertTemperature = function (temperature) {

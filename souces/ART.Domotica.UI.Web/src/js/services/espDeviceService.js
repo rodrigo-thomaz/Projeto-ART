@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispatcher', 'stompService', function ($http, $log, ngAuthSettings, EventDispatcher, stompService) {
+app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'EventDispatcher', 'stompService', function ($http, $log, ngAuthSettings, $rootScope, EventDispatcher, stompService) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -74,6 +74,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', 'EventDispat
                 break;
             }
         } 
+        $rootScope.$emit('ESPDeviceService_onReadReceived');
     }
 
     var updateSensors = function (device, newSensors) {
