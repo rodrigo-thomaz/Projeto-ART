@@ -57,16 +57,8 @@ angular.module('app')
                   resolve: load([
                       'ui.grid',
                       'js/services/espDeviceService.js',
-                      'js/controllers/espDeviceManagerController.js',
-                  ])
-              })
-              .state('app.espDeviceJoin', {
-                  url: '/espDeviceJoin',
-                  templateUrl: 'views/espDeviceJoin.html',
-                  resolve: load([
-                      'ui.grid',
-                      'js/services/espDeviceService.js',
                       'js/controllers/espDeviceJoinController.js',
+                      'js/controllers/espDeviceManagerController.js',
                   ])
               })
 

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', 'uiGridConstants', 'EventDispatcher', 'espDeviceService', function ($scope, $timeout, $log, uiGridConstants, EventDispatcher, espDeviceService) {    
+app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$modal', 'uiGridConstants', 'EventDispatcher', 'espDeviceService', function ($scope, $timeout, $log, $modal, uiGridConstants, EventDispatcher, espDeviceService) {    
         
     var onDeleteFromApplicationClick = function (espDevice) {
         espDeviceService.deleteFromApplication(espDevice.deviceInApplicationId);
@@ -33,5 +33,21 @@ app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', 'uiG
     $scope.deleteFromApplicationClick = onDeleteFromApplicationClick;
 
     $scope.gridOptions.data = espDeviceService.devices;
+
+    // Join
+
+    $scope.openDeviceJoin = function () {
+        var modalInstance = $modal.open({
+            templateUrl: 'espDeviceJoinHtml',
+            controller: 'espDeviceJoinController',
+            size: 'lg',
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            //$scope.selected = selectedItem;
+        }, function () {
+            //$log.info('Modal dismissed at: ' + new Date());
+        });
+    };
 
 }]);

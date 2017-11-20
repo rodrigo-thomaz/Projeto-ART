@@ -2,7 +2,17 @@
     <h1 class="m-n font-thin h3">Gerenciar devices</h1>
 </div>
 <div class="wrapper-md" ng-controller="espDeviceManagerController">
+    
+    <script type="text/ng-template" id="espDeviceJoinHtml">
+        <div ng-include="'views/espDeviceJoin.html'"></div>
+    </script>
+
     <h4>Gerencie seus devices</h4>
+
+    <div style="margin-bottom:10px;">
+        <button ng-click="openDeviceJoin()" class="btn btn-primary btn-addon btn-lg"><i class="fa fa-plus"></i>Adicionar</button>
+    </div>    
+    
     <div class="table-responsive m-b-lg">
         <div ui-grid="gridOptions"></div>
     </div>
