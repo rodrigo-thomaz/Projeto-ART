@@ -1,41 +1,39 @@
-﻿<div class="bg-light lter b-b wrapper-md">
-    <h1 class="m-n font-thin h3">Adicionar novo device na aplicação</h1>
+﻿<div class="modal-header">
+    <h3 class="modal-title">Adicionar novo device na aplicação</h3>
 </div>
-<div class="wrapper-md" ng-controller="espDeviceJoinController">
-
-    <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-default">
-                <div class="panel-heading font-bold">Procurar device</div>
-                <div class="panel-body">
-                    <form role="form">
-                        <div class="form-group">
-                            <label>Pin</label>
-                            <input type="text" uppercased class="form-control" maxlength="4" placeholder="Entre com o número do Pin" ng-model="pin">
-                            <!--<div>
-                                <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
-                                <span class="sr-only">Loading...</span>
-                            </div>-->
-                        </div>
-                        <button type="submit" class="btn btn-sm btn-primary" ng-click="getByPinClick()">
-                            {{ !searchingPin ? 'Procurar' : 'Aguardando...'}}<i class='fa fa-spinner fa-spin' ng-hide="searchingPin == 0"></i>
-                        </button>
-                    </form>
-                    <div class="line pull-in"></div>
-                    <article class="media" ng-show="espDevice">
-                        <span class="pull-left thumb-sm"><i class="fa fa-file-o fa-3x"></i></span>
-                        <div class="media-body">
-                            <div class="pull-right text-center text-muted">
-                                <button type="submit" class="btn btn-sm btn-primary" ng-click="insertInApplicationClick()">Adicionar</button>
-                            </div>
-                            <a href class="h4">Bootstrap documents</a>
-                            <small class="block"><a href class="">John Smith</a> <span class="label label-info">Friends</span></small>
-                            <small class="block m-t-sm">There are a few easy ways to quickly get started with Bootstrap, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</small>
-                        </div>
-                    </article>
+<div class="modal-body">
+    <div class="panel panel-default">
+        <div class="panel-heading font-bold">Procurar device</div>
+        <div class="panel-body" ng-controller="espDeviceJoinController">
+            <form role="form">
+                <div class="form-group">
+                    <label>Pin</label>
+                    <input type="text" uppercased class="form-control" maxlength="4" placeholder="Entre com o número do Pin" ng-model="pin">
+                    <!--<div>
+                        <i class="fa fa-spinner fa-spin fa-2x fa-fw"></i>
+                        <span class="sr-only">Loading...</span>
+                    </div>-->
+                </div>    
+                <button type="submit" class="btn btn-sm btn-primary" ng-click="getByPinClick()">
+                    {{ !searchingPin ? 'Procurar' : 'Aguardando...'}}<i class='fa fa-spinner fa-spin' ng-hide="searchingPin == 0"></i>
+                </button>
+            </form>
+            <div class="line pull-in"></div>
+            <article class="media" ng-show="espDevice">
+                <span class="pull-left thumb-sm"><i class="fa fa-file-o fa-3x"></i></span>
+                <div class="media-body">
+                    <div class="pull-right text-center text-muted">
+                        <button type="submit" class="btn btn-sm btn-primary" ng-click="insertInApplicationClick()">Adicionar</button>
+                    </div>
+                    <a href class="h4">Bootstrap documents</a>
+                    <small class="block"><a href class="">John Smith</a> <span class="label label-info">Friends</span></small>
+                    <small class="block m-t-sm">There are a few easy ways to quickly get started with Bootstrap, each one appealing to a different skill level and use case. Read through to see what suits your particular needs.</small>
                 </div>
-            </div>
-        </div>        
+            </article>
+        </div>
     </div>
-
 </div>
+<!--<div class="modal-footer">    
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+</div>-->
