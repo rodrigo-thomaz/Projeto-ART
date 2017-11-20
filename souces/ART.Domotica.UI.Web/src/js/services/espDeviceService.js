@@ -128,16 +128,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            var device = data[i];
-            device.createDate = new Date(device.createDate * 1000).toLocaleString();
-            serviceFactory.devices.push(device);
-            for (var j = 0; j < device.sensors.length; j++) {
-                var sensor = device.sensors[j];
-                sensor.chart = [];
-                sensor.chart.push(new chartLine("Máximo"));
-                sensor.chart.push(new chartLine("Temperatura"));
-                sensor.chart.push(new chartLine("Mínimo")); 
-            }
+            insertDeviceInCollection(data[i]);
         }
     }
 
@@ -150,8 +141,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var onInsertInApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        data.createDate = new Date(data.createDate * 1000).toLocaleString();
-        serviceFactory.devices.push(data);
+        insertDeviceInCollection(data);
         EventDispatcher.trigger('espDeviceService_onInsertInApplicationCompleted');
     }  
 
@@ -165,6 +155,18 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
                 break;
             }
         }       
+    }
+
+    var insertDeviceInCollection = function (device) {
+        device.createDate = new Date(device.createDate * 1000).toLocaleString();
+        serviceFactory.devices.push(device);
+        for (var i = 0; i < device.sensors.length; i++) {
+            var sensor = device.sensors[i];
+            sensor.chart = [];
+            sensor.chart.push(new chartLine("Máximo"));
+            sensor.chart.push(new chartLine("Temperatura"));
+            sensor.chart.push(new chartLine("Mínimo"));
+        }
     }
 
     EventDispatcher.on('stompService_onConnected', onConnected);
