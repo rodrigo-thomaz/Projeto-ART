@@ -73,7 +73,6 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var onConnected = function () {
 
-        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetScaleViewCompleted', onSetScaleCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
         stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmOnViewCompleted', onSetAlarmOnCompleted);
@@ -85,10 +84,6 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
             initialized = true;            
         }
     }  
-
-    var onReadReceived = function (payload) {
-        EventDispatcher.trigger('dsFamilyTempSensorService_onReadReceived', JSON.parse(payload.body));
-    }
 
     var getSensorFromPayload = function (payloadObject) {     
         var device = espDeviceService.getDeviceById(payloadObject.deviceId);
