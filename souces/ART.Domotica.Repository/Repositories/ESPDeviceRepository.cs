@@ -33,8 +33,23 @@
         public async Task<ESPDevice> GetByPin(string pin)
         {
             var data = await _context.ESPDevice
+                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
+
+            // Load TempSensorRanges
+
+            var tempSensorRangeIds = data
+                .SensorsInDevice
+                .Select(y => y.SensorBase as DSFamilyTempSensor)
+                        .Select(z => z.TempSensorRangeId)
+                .Distinct()
+                .ToList();
+
+            await _context.TempSensorRange
+                .Where(x => tempSensorRangeIds.Contains(x.Id))
+                .LoadAsync();
+
             return data;
         }
 
@@ -70,13 +85,26 @@
 
         public async Task<List<ESPDevice>> GetListInApplication(Guid applicationId)
         {
-            await _context.TempSensorRange.LoadAsync();
-
-            return await _context.ESPDevice
+            var data = await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)
                 .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();
+
+            // Load TempSensorRanges
+
+            var tempSensorRangeIds = data
+                .SelectMany(x => x.SensorsInDevice
+                    .Select(y => y.SensorBase as DSFamilyTempSensor)
+                        .Select(z => z.TempSensorRangeId))
+                .Distinct()
+                .ToList();
+
+            await _context.TempSensorRange
+                .Where(x => tempSensorRangeIds.Contains(x.Id))
+                .LoadAsync();
+
+            return data;
         }
 
         #endregion Methods
