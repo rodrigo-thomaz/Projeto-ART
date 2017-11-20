@@ -117,9 +117,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var onSetAlarmOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        if (result.position = 'Low')
+        if (result.position === 'Low')
             sensor.lowAlarm.alarmOn = result.alarmOn;
-        else if (result.position = 'High')
+        else if (result.position === 'High')
             sensor.highAlarm.alarmOn = result.alarmOn;
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
@@ -127,9 +127,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var onSetAlarmCelsiusCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        if (result.position = 'Low')
+        if (result.position === 'Low')
             sensor.lowAlarm.alarmCelsius = result.alarmCelsius;
-        else if (result.position = 'High')
+        else if (result.position === 'High')
             sensor.highAlarm.alarmCelsius = result.alarmCelsius;
         $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
@@ -137,9 +137,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var onSetAlarmBuzzerOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        if (result.position = 'Low')
+        if (result.position === 'Low')
             sensor.lowAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
-        else if (result.position = 'High')
+        else if (result.position === 'High')
             sensor.highAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
         $rootScope.$emit('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }
@@ -147,9 +147,9 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var onSetChartLimiterCelsiusCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        if (result.position = 'Low')
+        if (result.position === 'Low')
             sensor.lowChartLimiterCelsius = result.chartLimiterCelsius;
-        else if (result.position = 'High')
+        else if (result.position === 'High')
             sensor.highChartLimiterCelsius = result.chartLimiterCelsius;
         $rootScope.$emit('dsFamilyTempSensorService_SetChartLimiterCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }

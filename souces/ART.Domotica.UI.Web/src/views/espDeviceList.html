@@ -173,12 +173,12 @@
                                                        type="number"
                                                        ng-model="highChartLimiterView"
                                                        ng-model-options="{ debounce: 1000 }"
-                                                       ng-change="changeChartLimiterValue('Low', highChartLimiterView)"
+                                                       ng-change="changeChartLimiterValue('High', highChartLimiterView)"
                                                        min="{{tempSensorRangeView.min}}"
                                                        max="{{tempSensorRangeView.max}}"
                                                        class="form-control">
                                                 <span ng-show="formDevice.inputHighChartLimiterValue.$touched && formDevice.inputHighChartLimiterValue.$invalid">
-                                                    Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                    Limite alto do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                 </span>
                                             </div>
                                         </div>
