@@ -51,7 +51,7 @@
             }
 
             celsiusTemperatureScale.Name = "Celsius";
-            celsiusTemperatureScale.Symbol = "°C";
+            celsiusTemperatureScale.Symbol = "C";
             celsiusTemperatureScale.Description = celsiusDescription.ToString();
 
             var fahrenheitDescription = new StringBuilder();
@@ -72,7 +72,7 @@
             }
 
             fahrenheitTemperatureScale.Name = "Fahrenheit";
-            fahrenheitTemperatureScale.Symbol = "°F";
+            fahrenheitTemperatureScale.Symbol = "F";
             fahrenheitTemperatureScale.Description = fahrenheitDescription.ToString();
 
             context.SaveChanges();
