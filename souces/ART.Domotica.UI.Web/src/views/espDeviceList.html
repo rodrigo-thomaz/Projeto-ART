@@ -48,7 +48,7 @@
                             <tabset justified="true" class="tab-container">
                                 <tab heading="Sensor {{sensorKey + 1}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
                                 
-                                    <form name="formDevice" class="bs-example form-horizontal" ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
+                                    <form name="formDevice" class="form-horizontal" ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Status</label>
                                             <div class="col-lg-8">
@@ -84,6 +84,9 @@
                                                 <select class="form-control m-b" ng-options="item.name for item in resolution.availableResolutions track by item.id" ng-model="resolution.selectedResolution" ng-change="changeResolution()"></select>
                                             </div>
                                         </div>
+
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
                                         <div class="form-group">
                                             <label class="col-lg-4 control-label">Tem alarme alto</label>
                                             <div class="col-lg-8">
@@ -159,25 +162,12 @@
                                                     Alarme baixo deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                 </span>
                                             </div>
-                                        </div>                                                                         
+                                        </div> 
+
+                                        <div class="line line-dashed b-b line-lg pull-in"></div>
+
                                         <div class="form-group">
-                                            <label class="col-lg-4 control-label">Limite baixo do gráfico</label>
-                                            <div class="col-lg-8">
-                                                <input name="inputLowChartLimiterValue"
-                                                       type="number"
-                                                       ng-model="lowChartLimiterView"
-                                                       ng-model-options="{ debounce: 1000 }"
-                                                       ng-change="changeChartLimiterValue('Low', lowChartLimiterView)"
-                                                       min="{{tempSensorRangeView.min}}"
-                                                       max="{{tempSensorRangeView.max}}"
-                                                       class="form-control">
-                                                <span ng-show="formDevice.inputLowChartLimiterValue.$touched && formDevice.inputLowChartLimiterValue.$invalid">
-                                                    Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
-                                                </span>
-                                            </div>
-                                        </div>    
-                                        <div class="form-group">
-                                            <label class="col-lg-4 control-label">Limite alto do gráfico</label>
+                                            <label class="col-lg-4 control-label">Limite do gráfico alto</label>
                                             <div class="col-lg-8">
                                                 <input name="inputHighChartLimiterValue"
                                                        type="number"
@@ -191,7 +181,24 @@
                                                     Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                 </span>
                                             </div>
-                                        </div>    
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-4 control-label">Limite do gráfico baixo</label>
+                                            <div class="col-lg-8">
+                                                <input name="inputLowChartLimiterValue"
+                                                       type="number"
+                                                       ng-model="lowChartLimiterView"
+                                                       ng-model-options="{ debounce: 1000 }"
+                                                       ng-change="changeChartLimiterValue('Low', lowChartLimiterView)"
+                                                       min="{{tempSensorRangeView.min}}"
+                                                       max="{{tempSensorRangeView.max}}"
+                                                       class="form-control">
+                                                <span ng-show="formDevice.inputLowChartLimiterValue.$touched && formDevice.inputLowChartLimiterValue.$invalid">
+                                                    Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        
                                     </form>
 
                                 </tab>
