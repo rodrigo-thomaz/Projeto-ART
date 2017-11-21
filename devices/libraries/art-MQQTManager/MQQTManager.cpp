@@ -127,10 +127,17 @@ PubSubClient* MQQTManager::getMQQT() {
     return this->_mqqt;
 }
 
-const char* MQQTManager::getRoutingKey(String topic)
+void MQQTManager::publish(const char* topic, const char* payload)
 {
-  String result = "ART/ESPDevice/" + this->_clientId + "/" + topic;
-  return result.c_str();
+	const char* routingKey = this->getRoutingKey(topic);	
+	this->_mqqt->publish(routingKey, payload); 
+}
+
+void MQQTManager::subscribe(const char* topic)
+{
+	const char* routingKey = this->getRoutingKey(topic);	
+	this->_mqqt->subscribe(routingKey);
+	this->_mqqt->loop();  
 }
 
 String MQQTManager::getTopicKey(char* routingKey)
@@ -145,4 +152,10 @@ String MQQTManager::getTopicKey(char* routingKey)
 	String result = routingKeyStr.substring(restLastIndexOf + 1, restSize);
 		
 	return result;
+}
+
+const char* MQQTManager::getRoutingKey(const char* topic)
+{
+  String result = "ART/ESPDevice/" + this->_clientId + "/" + String(topic);
+  return result.c_str();
 }

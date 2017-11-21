@@ -120,41 +120,18 @@ void initConfiguration()
 void mqtt_ConnectedCallback(PubSubClient* mqqt)
 {
   Serial.println("[MQQT::mqtt_ConnectedCallback] initializing ...");
-    
-  String clientId  = String(configurationManager.getDeviceSettings()->getDeviceId());
 
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_ESPDEVICE_UPDATE_PIN)); 
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION)); 
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)); 
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED));
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED));
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE)); 
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION)); 
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON));
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS));
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON));
-  mqqt->loop();  
-
-  mqqt->subscribe(mqqtManager.getRoutingKey(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS));  
-  mqqt->loop(); 
+  mqqtManager.subscribe(TOPIC_SUB_ESPDEVICE_UPDATE_PIN);
+  mqqtManager.subscribe(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION);
+  mqqtManager.subscribe(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
+  mqqtManager.subscribe(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED);
+  mqqtManager.subscribe(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
+  mqqtManager.subscribe(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE);
+  mqqtManager.subscribe(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
+  mqqtManager.subscribe(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
+  mqqtManager.subscribe(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
+  mqqtManager.subscribe(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
+  mqqtManager.subscribe(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS);
 
   Serial.println("[MQQT::mqtt_ConnectedCallback] Initialized with success !");
 }

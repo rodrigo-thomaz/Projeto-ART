@@ -60,9 +60,9 @@ bool TemperatureScaleManager::begin()
 	
 	Serial.println("[TemperatureScaleManager::begin] beginning...]");
 	
-	const char* routingKey = this->_mqqtManager->getRoutingKey(TOPIC_PUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT);
-		
-	mqqt->publish(routingKey, result);    
+	this->_mqqtManager->publish(TOPIC_PUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT, result); 
+	
+	return true;
 }
 
 void TemperatureScaleManager::update(String json)
