@@ -233,8 +233,8 @@
             var iotContract = Mapper.Map<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>(data);
             var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(ESPDeviceConstants.InsertInApplicationIoTQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(data.Id);
-            _model.BasicPublish("", queueName, null, deviceBuffer);
+            var routingKey = GetRoutingKeyForIoT(data.Id, ESPDeviceConstants.InsertInApplicationIoTQueueName);
+            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -267,8 +267,8 @@
             //Enviando para o IoT
             var deviceMessage = new MessageIoTContract<string>(ESPDeviceConstants.DeleteFromApplicationIoTQueueName, string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var queueName = GetDeviceQueueName(data.Id);
-            _model.BasicPublish("", queueName, null, deviceBuffer);
+            var routingKey = GetRoutingKeyForIoT(data.Id, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
+            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }

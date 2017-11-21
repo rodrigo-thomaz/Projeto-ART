@@ -41,8 +41,8 @@ struct config_t
 int configurationEEPROMAddr = 0;
 
 #define TOPIC_SUB_UPDATE_PIN "UpdatePinIoT"
-#define TOPIC_SUB_INSERT_IN_APPLICATION "ESPDevice.InsertInApplicationIoT"
-#define TOPIC_SUB_DELETE_FROM_APPLICATION "ESPDevice.DeleteFromApplicationIoT"
+#define TOPIC_SUB_INSERT_IN_APPLICATION "InsertInApplicationIoT"
+#define TOPIC_SUB_DELETE_FROM_APPLICATION "DeleteFromApplicationIoT"
 #define TOPIC_SUB_SET_SCALE "DSFamilyTempSensor.SetScaleIoT"
 #define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolutionIoT"
 #define TOPIC_SUB_SET_ALARM_ON "DSFamilyTempSensor.SetAlarmOnIoT"
@@ -122,6 +122,8 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
   String clientId  = String(configurationManager.getDeviceSettings()->getDeviceId());
   
   mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_UPDATE_PIN)); 
+  mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_INSERT_IN_APPLICATION)); 
+  mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_DELETE_FROM_APPLICATION)); 
 
   //mqqt.subscribe(TOPIC_SUB_SET_RESOLUTION); 
   //mqqt.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
