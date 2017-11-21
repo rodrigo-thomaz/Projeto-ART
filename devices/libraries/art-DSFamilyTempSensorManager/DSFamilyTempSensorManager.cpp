@@ -256,7 +256,9 @@ bool DSFamilyTempSensorManager::initialized()
 	char result[len + 1]; 
 	root.printTo(result, sizeof(result));
 	
-	mqqt->publish(TOPIC_PUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID, result); 
+	const char* routingKey = this->_mqqtManager->getRoutingKey(TOPIC_PUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID);
+	
+	mqqt->publish(routingKey, result); 
 	
 	return true;
 }

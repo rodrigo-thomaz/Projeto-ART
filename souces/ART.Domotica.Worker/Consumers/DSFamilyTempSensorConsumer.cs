@@ -131,7 +131,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.QueueBind(
                   queue: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
                 , exchange: "amq.topic"
-                , routingKey: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
+                , routingKey: string.Format("ART.ESPDevice.*.{0}", DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName)
                 , arguments: null);
 
             _getAllByDeviceInApplicationIdConsumer.Received += GetAllByDeviceInApplicationIdReceived;
