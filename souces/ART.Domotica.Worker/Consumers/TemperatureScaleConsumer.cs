@@ -75,6 +75,7 @@ namespace ART.Domotica.Worker.Consumers
                   queue: TemperatureScaleConstants.GetAllForIoTQueueName
                 , exchange: "amq.topic"
                 , routingKey: TemperatureScaleConstants.GetAllForIoTQueueName
+                //, routingKey: "TemperatureScale.GetAllForIoT"
                 , arguments: null);
 
             _getAllConsumer.Received += GetAllReceived;

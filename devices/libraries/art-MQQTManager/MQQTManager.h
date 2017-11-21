@@ -26,6 +26,8 @@ class MQQTManager
 	
 	PubSubClient*										getMQQT();
 	
+	const char* 										getRoutingKey(String topic);
+	
   private:			
 			
 	DebugManager*          								_debugManager;	
@@ -33,7 +35,9 @@ class MQQTManager
 	WiFiManager* 										_wifiManager;
 	
 	bool												_begin;
-				
+	
+	String		 										_clientId;
+	
 	WiFiClient	 										_espClient;
 	PubSubClient* 										_mqqt;
 	

@@ -62,13 +62,15 @@ bool MQQTManager::autoConnect()
         char* const user = strdup(brokerSettings->getUser().c_str());
         char* const pwd  = strdup(brokerSettings->getPwd().c_str());
         
-        char* const clientId  = strdup(deviceSettings->getDeviceId().c_str());
-        
+		this->_clientId = String(deviceSettings->getDeviceId());
+		
+        char* const clientIdStrDup  = strdup(this->_clientId.c_str());
+        		
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
         Serial.println(host);
 
         Serial.print("[MQQT] ClientId: ");
-        Serial.println(clientId);        
+        Serial.println(clientIdStrDup);        
         
         Serial.print("[MQQT] User: ");
         Serial.println(user);        
@@ -81,8 +83,8 @@ bool MQQTManager::autoConnect()
         const char* willMessage = "My Will Message";
         boolean willRetain = false;
         
-        if (this->_mqqt->connect(clientId, user, pwd)) 
-        //if (this->_mqqt->connect(clientId, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
+        if (this->_mqqt->connect(clientIdStrDup, user, pwd)) 
+        //if (this->_mqqt->connect(clientIdStrDup, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
         {
             Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 
@@ -124,3 +126,8 @@ PubSubClient* MQQTManager::getMQQT() {
     return this->_mqqt;
 }
 
+const char* MQQTManager::getRoutingKey(String topic)
+{
+  String result = "ART/ESPDevice/" + this->_clientId + "/" + topic;
+  return result.c_str();
+}
