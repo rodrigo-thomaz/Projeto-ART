@@ -256,7 +256,7 @@ bool DSFamilyTempSensorManager::initialized()
 	char result[len + 1]; 
 	root.printTo(result, sizeof(result));
 	
-	mqqt->publish(DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_MQQT_TOPIC_PUB, result); 
+	mqqt->publish(TOPIC_PUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID, result); 
 	
 	return true;
 }

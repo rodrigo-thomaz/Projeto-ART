@@ -11,8 +11,8 @@
 #define TEMPERATURE_SCALE_GET_ALL_FOR_IOT_REQUEST_JSON_SIZE 				100
 #define TEMPERATURE_SCALE_GET_ALL_FOR_IOT_RESPONSE_JSON_SIZE 				1000
 
-#define TEMPERATURE_SCALE_GET_ALL_FOR_IOT_MQQT_TOPIC_PUB   					"TemperatureScale.GetAllForIoT" 
-#define TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED_MQQT_TOPIC_SUB   		"TemperatureScale.GetAllForIoTCompleted"
+#define TOPIC_PUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT		   					"TemperatureScale.GetAllForIoT" 
+#define TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED		   		"TemperatureScale.GetAllForIoTCompleted"
 
 class TemperatureScale {
   public:

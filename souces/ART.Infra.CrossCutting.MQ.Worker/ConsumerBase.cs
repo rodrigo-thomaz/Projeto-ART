@@ -31,12 +31,6 @@
             return routingKey;
         }
 
-        protected string GetDeviceQueueName(Guid hardwareId)
-        {
-            var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);
-            return queueName;
-        }
-
         #endregion Methods
     }
 }

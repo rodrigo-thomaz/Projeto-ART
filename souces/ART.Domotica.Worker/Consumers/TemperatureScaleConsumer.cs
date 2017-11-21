@@ -125,9 +125,9 @@ namespace ART.Domotica.Worker.Consumers
             var iotContract = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllForIoTResponseContract>>(data);
             var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForIoTResponseContract>>(TemperatureScaleConstants.GetAllForIoTCompletedQueueName, iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
-            var queueName = GetDeviceQueueName(requestContract.DeviceId);
-            _model.BasicPublish("", queueName, null, deviceBuffer);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);           
+            var routingKey = GetRoutingKeyForIoT(requestContract.DeviceId, TemperatureScaleConstants.GetAllForIoTCompletedQueueName);
+            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }

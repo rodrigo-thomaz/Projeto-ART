@@ -60,7 +60,7 @@ bool TemperatureScaleManager::begin()
 	
 	Serial.println("[TemperatureScaleManager::begin] beginning...]");
 	
-	mqqt->publish(TEMPERATURE_SCALE_GET_ALL_FOR_IOT_MQQT_TOPIC_PUB, result);    
+	mqqt->publish(TOPIC_PUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT, result);    
 }
 
 void TemperatureScaleManager::update(String json)
@@ -94,7 +94,7 @@ void TemperatureScaleManager::update(String json)
 				symbol));
 	}
 				
-	Serial.println("[TemperatureScaleManager:: begin]");
+	Serial.println("[TemperatureScaleManager:: begin] Initialized with success !");
 }
 
 TemperatureScale& TemperatureScaleManager::getById(int id)
