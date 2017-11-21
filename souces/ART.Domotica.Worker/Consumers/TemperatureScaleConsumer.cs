@@ -50,19 +50,19 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: TemperatureScaleConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: null);
-
             _model.ExchangeDeclare(
                   exchange: "amq.topic"
                 , type: ExchangeType.Topic
                 , durable: true
                 , autoDelete: false
                 , arguments: null);
+
+            _model.QueueDeclare(
+                  queue: TemperatureScaleConstants.GetAllQueueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: true
+                , arguments: null);            
 
             _model.QueueDeclare(
                   queue: TemperatureScaleConstants.GetAllForIoTQueueName

@@ -65,6 +65,13 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
+            _model.ExchangeDeclare(
+                 exchange: "amq.topic"
+               , type: ExchangeType.Topic
+               , durable: true
+               , autoDelete: false
+               , arguments: null);
+
             _model.QueueDeclare(
                   queue: DSFamilyTempSensorConstants.GetAllResolutionsQueueName
                 , durable: false
@@ -113,13 +120,6 @@ namespace ART.Domotica.Worker.Consumers
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
-
-            _model.ExchangeDeclare(
-                 exchange: "amq.topic"
-               , type: ExchangeType.Topic
-               , durable: true
-               , autoDelete: false
-               , arguments: null);
 
             _model.QueueDeclare(
                 queue: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName

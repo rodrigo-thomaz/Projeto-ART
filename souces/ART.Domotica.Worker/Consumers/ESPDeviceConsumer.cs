@@ -69,6 +69,13 @@
 
         private void Initialize()
         {
+            _model.ExchangeDeclare(
+                  exchange: "amq.topic"
+                , type: ExchangeType.Topic
+                , durable: true
+                , autoDelete: false
+                , arguments: null);
+
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetAllQueueName
                , durable: false
@@ -109,14 +116,7 @@
                , durable: false
                , exclusive: false
                , autoDelete: false
-               , arguments: null);            
-
-            _model.ExchangeDeclare(
-                  exchange: "amq.topic"
-                , type: ExchangeType.Topic
-                , durable: true
-                , autoDelete: false
-                , arguments: null);
+               , arguments: null); 
 
             _getAllConsumer.Received += GetAllReceived;
             _getListInApplicationConsumer.Received += GetListInApplicationReceived;
