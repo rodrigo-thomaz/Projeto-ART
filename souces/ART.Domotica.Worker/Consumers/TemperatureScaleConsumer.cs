@@ -74,8 +74,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.QueueBind(
                   queue: TemperatureScaleConstants.GetAllForIoTQueueName
                 , exchange: "amq.topic"
-                , routingKey: TemperatureScaleConstants.GetAllForIoTQueueName
-                //, routingKey: "TemperatureScale.GetAllForIoT"
+                , routingKey: string.Format("ART.ESPDevice.*.{0}", TemperatureScaleConstants.GetAllForIoTQueueName)
                 , arguments: null);
 
             _getAllConsumer.Received += GetAllReceived;
