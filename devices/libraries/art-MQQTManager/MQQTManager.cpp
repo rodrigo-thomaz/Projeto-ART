@@ -137,15 +137,12 @@ String MQQTManager::getTopicKey(char* routingKey)
 {
 	String routingKeyStr = String(routingKey);
 	int lastIndexOf = routingKeyStr.lastIndexOf('/');
-	int size = sizeof(routingKeyStr) - lastIndexOf;
-	String methodString = routingKeyStr.substring(lastIndexOf + 1, size - 1);
 	
 	String restString = routingKeyStr.substring(0, lastIndexOf);
 	int restLastIndexOf = restString.lastIndexOf('/');
-	int restSize = sizeof(restString) - restLastIndexOf;
-	String classString = restString.substring(restLastIndexOf + 1, restSize);
-
-	String result = classString + "/" + methodString;
+	int restSize = sizeof(routingKeyStr) - restLastIndexOf;
+	
+	String result = routingKeyStr.substring(restLastIndexOf + 1, restSize);
 		
 	return result;
 }
