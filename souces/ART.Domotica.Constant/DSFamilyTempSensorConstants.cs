@@ -17,10 +17,10 @@
         public static readonly string SetAlarmOnIoTQueueName = "DSFamilyTempSensor.SetAlarmOnIoT";
         public static readonly string SetAlarmOnQueueName = "DSFamilyTempSensor.SetAlarmOn";
         public static readonly string SetAlarmOnViewCompletedQueueName = "DSFamilyTempSensor.SetAlarmOnViewCompleted";
-        public static readonly string SetResolutionIoTQueueName = "SetResolutionIoT";
+        public static readonly string SetResolutionIoTQueueName = "DSFamilyTempSensor.SetResolutionIoT";
         public static readonly string SetResolutionQueueName = "DSFamilyTempSensor.SetResolution";
         public static readonly string SetResolutionViewCompletedQueueName = "DSFamilyTempSensor.SetResolutionViewCompleted";
-        public static readonly string SetScaleIoTQueueName = "SetScaleIoT";
+        public static readonly string SetScaleIoTQueueName = "DSFamilyTempSensor.SetScaleIoT";
         public static readonly string SetScaleQueueName = "DSFamilyTempSensor.SetScale";
         public static readonly string SetScaleViewCompletedQueueName = "DSFamilyTempSensor.SetScaleViewCompleted";
         public static readonly string SetChartLimiterCelsiusIoTQueueName = "DSFamilyTempSensor.SetChartLimiterCelsiusIoT";
