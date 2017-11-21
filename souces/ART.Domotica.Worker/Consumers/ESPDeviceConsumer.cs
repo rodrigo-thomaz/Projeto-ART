@@ -231,7 +231,7 @@
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>(data);
-            var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(ESPDeviceConstants.InsertInApplicationIoTQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetRoutingKeyForIoT(data.Id, ESPDeviceConstants.InsertInApplicationIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
@@ -265,7 +265,7 @@
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o IoT
-            var deviceMessage = new MessageIoTContract<string>(ESPDeviceConstants.DeleteFromApplicationIoTQueueName, string.Empty);
+            var deviceMessage = new MessageIoTContract<string>(string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetRoutingKeyForIoT(data.Id, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
@@ -347,7 +347,7 @@
                 //Enviando para o IoT
                 var nextFireTimeInSeconds = nextFireTimeUtc.Subtract(DateTimeOffset.Now).TotalSeconds;
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;                
-                var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(ESPDeviceConstants.UpdatePinIoTQueueName, contract);
+                var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
                 var routingKey = GetRoutingKeyForIoT(contract.DeviceId, ESPDeviceConstants.UpdatePinIoTQueueName);
                 _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);

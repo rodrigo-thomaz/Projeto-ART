@@ -169,7 +169,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
-            var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
             var routingKey = GetRoutingKeyForIoT(requestContract.DeviceId, DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
@@ -224,7 +224,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetResolutionRequestIoTContract>(DSFamilyTempSensorConstants.SetResolutionIoTQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetResolutionRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetRoutingKeyForIoT(viewModel.DeviceId, DSFamilyTempSensorConstants.SetResolutionIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
@@ -255,7 +255,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetScaleRequestContract, DSFamilyTempSensorSetScaleRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetScaleRequestIoTContract>(DSFamilyTempSensorConstants.SetScaleIoTQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetScaleRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetRoutingKeyForIoT(viewModel.DeviceId, DSFamilyTempSensorConstants.SetScaleIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
@@ -287,7 +287,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmOnRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmOnIoTQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmOnRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetRoutingKeyForIoT(viewModel.DeviceId, DSFamilyTempSensorConstants.SetAlarmOnIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
@@ -319,7 +319,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmCelsiusRequestContract, DSFamilyTempSensorSetAlarmCelsiusRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmCelsiusRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmCelsiusIoTQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmCelsiusRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetRoutingKeyForIoT(viewModel.DeviceId, DSFamilyTempSensorConstants.SetAlarmCelsiusIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
@@ -351,7 +351,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(DSFamilyTempSensorConstants.SetAlarmBuzzerOnIoTQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetRoutingKeyForIoT(viewModel.DeviceId, DSFamilyTempSensorConstants.SetAlarmBuzzerOnIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
@@ -383,7 +383,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract, DSFamilyTempSensorSetChartLimiterCelsiusRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestIoTContract>(DSFamilyTempSensorConstants.SetChartLimiterCelsiusIoTQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetRoutingKeyForIoT(viewModel.DeviceId, DSFamilyTempSensorConstants.SetChartLimiterCelsiusIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);

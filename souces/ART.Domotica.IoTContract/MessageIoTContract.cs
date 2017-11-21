@@ -5,15 +5,13 @@
         #region Fields
 
         private readonly TContract _contract;
-        private readonly string _topic;
 
         #endregion Fields
 
         #region Constructors
 
-        public MessageIoTContract(string topic, TContract contract)
+        public MessageIoTContract(TContract contract)
         {
-            _topic = topic;
             _contract = contract;
         }
 
@@ -24,11 +22,6 @@
         public TContract Contract
         {
             get { return _contract; }
-        }
-
-        public string Topic
-        {
-            get { return _topic; }
         }
 
         #endregion Properties

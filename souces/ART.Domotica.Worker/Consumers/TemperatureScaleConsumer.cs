@@ -123,7 +123,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllForIoTResponseContract>>(data);
-            var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForIoTResponseContract>>(TemperatureScaleConstants.GetAllForIoTCompletedQueueName, iotContract);
+            var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForIoTResponseContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);           
             var routingKey = GetRoutingKeyForIoT(requestContract.DeviceId, TemperatureScaleConstants.GetAllForIoTCompletedQueueName);
