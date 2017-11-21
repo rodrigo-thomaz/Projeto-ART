@@ -109,14 +109,7 @@
                , durable: false
                , exclusive: false
                , autoDelete: false
-               , arguments: null);
-
-            _model.QueueDeclare(
-                  queue: ESPDeviceConstants.UpdatePinIoTQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
+               , arguments: null);            
 
             _model.ExchangeDeclare(
                   exchange: "amq.topic"
@@ -354,10 +347,10 @@
                 //Enviando para o IoT
                 var nextFireTimeInSeconds = nextFireTimeUtc.Subtract(DateTimeOffset.Now).TotalSeconds;
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
-                var queueName = GetDeviceQueueName(contract.DeviceId);
+                var routingKey = GetRoutingKeyForIoT(contract.DeviceId, ESPDeviceConstants.UpdatePinIoTQueueName);
                 var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(ESPDeviceConstants.UpdatePinIoTQueueName, contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-                _model.BasicPublish("", queueName, null, deviceBuffer);
+                _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
             }
 
             _logger.DebugLeave();

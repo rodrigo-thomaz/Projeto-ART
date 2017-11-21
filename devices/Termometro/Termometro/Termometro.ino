@@ -40,7 +40,7 @@ struct config_t
 
 int configurationEEPROMAddr = 0;
 
-#define TOPIC_SUB_UPDATE_PIN "ESPDevice.UpdatePinIoT"
+#define TOPIC_SUB_UPDATE_PIN "UpdatePinIoT"
 #define TOPIC_SUB_INSERT_IN_APPLICATION "ESPDevice.InsertInApplicationIoT"
 #define TOPIC_SUB_DELETE_FROM_APPLICATION "ESPDevice.DeleteFromApplicationIoT"
 #define TOPIC_SUB_SET_SCALE "DSFamilyTempSensor.SetScaleIoT"
@@ -119,15 +119,27 @@ void initConfiguration()
 
 void mqtt_ConnectedCallback(PubSubClient* mqqt)
 {
-  mqqt->subscribe(TOPIC_SUB_UPDATE_PIN); 
+  String clientId  = String(configurationManager.getDeviceSettings()->getDeviceId());
+  
+  mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_UPDATE_PIN)); 
+
   //mqqt.subscribe(TOPIC_SUB_SET_RESOLUTION); 
   //mqqt.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
   //mqqt.subscribe(TOPIC_SUB_SET_LOW_ALARM);    
   //mqqt.subscribe(TOPIC_SUB_GET_IN_APPLICATION_FOR_IOT_COMPLETED);            
 }
 
+const char* getRoutingKey(String clientId, String topic)
+{
+  String result = "ART/ESPDevice/" + clientId + "/" + topic;
+  return result.c_str();
+}
+
 void mqtt_SubCallback(char* topic, byte* payload, unsigned int length) 
 {
+    Serial.println("Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic :");
+    Serial.println(topic);
+  
     displayMQTTManager.printReceived(true);
     
     String json;
@@ -267,6 +279,9 @@ void loopInApplication()
       Serial.println(sensorsJsonLen);
       
       mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);            
+
+      mqqt->publish("art/devices", sensorsJson);            
+      
     } 
     else {
       displayMQTTManager.printSent(false);

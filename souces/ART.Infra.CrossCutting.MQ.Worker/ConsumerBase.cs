@@ -25,6 +25,12 @@
 
         #region Methods
 
+        protected string GetRoutingKeyForIoT(Guid hardwareId, string topic)
+        {
+            var routingKey = string.Format("ART.ESPDevice.{0}.{1}", hardwareId, topic);
+            return routingKey;
+        }
+
         protected string GetDeviceQueueName(Guid hardwareId)
         {
             var queueName = string.Format("mqtt-subscription-{0}qos0", hardwareId);

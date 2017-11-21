@@ -81,8 +81,8 @@ bool MQQTManager::autoConnect()
         const char* willMessage = "My Will Message";
         boolean willRetain = false;
         
-        //if (MQTT.connect(clientId, brokerUser, brokerPwd)) 
-        if (this->_mqqt->connect(clientId, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
+        if (this->_mqqt->connect(clientId, user, pwd)) 
+        //if (this->_mqqt->connect(clientId, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
         {
             Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 
