@@ -351,6 +351,12 @@
                     Pin = RandonHelper.RandomString(4),
                     TimeOffset = -7200, // Cada hora são 3600 segundos
                     CreateDate = DateTime.Now,
+                    BrokerSetting = new DeviceBrokerSetting
+                    {
+                        User = "test",
+                        Password = "test",
+                        ClientId = RandonHelper.RandomString(4),
+                    },
                 };
                 context.ESPDevice.Add(espDevice1);
             }

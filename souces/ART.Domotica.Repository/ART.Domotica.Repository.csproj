@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ARTDbContext.cs" />
+    <Compile Include="Configurations\DeviceBrokerSettingConfiguration.cs" />
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\DSFamilyTempSensorConfiguration.cs" />
     <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
@@ -76,6 +77,7 @@
     <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\TempSensorRangeConfiguration.cs" />
+    <Compile Include="Entities\DeviceBrokerSetting.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
     <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
@@ -107,6 +109,14 @@
     <Compile Include="Migrations\201711191524022_InitialCreate1.cs" />
     <Compile Include="Migrations\201711191524022_InitialCreate1.Designer.cs">
       <DependentUpon>201711191524022_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711212138516_AddTableDeviceBrokkerSetting.cs" />
+    <Compile Include="Migrations\201711212138516_AddTableDeviceBrokkerSetting.Designer.cs">
+      <DependentUpon>201711212138516_AddTableDeviceBrokkerSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711212144305_AddTableDeviceBrokkerSetting1.cs" />
+    <Compile Include="Migrations\201711212144305_AddTableDeviceBrokkerSetting1.Designer.cs">
+      <DependentUpon>201711212144305_AddTableDeviceBrokkerSetting1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -157,6 +167,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711191524022_InitialCreate1.resx">
       <DependentUpon>201711191524022_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212138516_AddTableDeviceBrokkerSetting.resx">
+      <DependentUpon>201711212138516_AddTableDeviceBrokkerSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212144305_AddTableDeviceBrokkerSetting1.resx">
+      <DependentUpon>201711212144305_AddTableDeviceBrokkerSetting1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

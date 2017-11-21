@@ -6,6 +6,8 @@
     {
         #region Properties
 
+        public DeviceBrokerSetting BrokerSetting { get; set; }
+
         public ICollection<DeviceInApplication> DevicesInApplication
         {
             get; set;

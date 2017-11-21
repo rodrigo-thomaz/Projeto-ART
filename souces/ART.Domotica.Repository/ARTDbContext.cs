@@ -75,6 +75,11 @@
             get; set;
         }
 
+        public DbSet<DeviceBrokerSetting> BrokerSetting
+        {
+            get; set;
+        }
+
         #endregion Properties
 
         #region Methods
@@ -93,6 +98,7 @@
             modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
+            modelBuilder.Configurations.Add(new DeviceBrokerSettingConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
             modelBuilder.Configurations.Add(new DeviceInApplicationConfiguration());
