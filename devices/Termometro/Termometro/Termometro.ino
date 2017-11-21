@@ -40,15 +40,15 @@ struct config_t
 
 int configurationEEPROMAddr = 0;
 
-#define TOPIC_SUB_ESPDEVICE_UPDATE_PIN "UpdatePinIoT"
-#define TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION "InsertInApplicationIoT"
-#define TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION "DeleteFromApplicationIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE "DSFamilyTempSensor.SetScaleIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION "DSFamilyTempSensor.SetResolutionIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON "DSFamilyTempSensor.SetAlarmOnIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor.SetAlarmCelsiusIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor.SetAlarmBuzzerOnIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS "DSFamilyTempSensor.SetChartLimiterCelsiusIoT"
+#define TOPIC_SUB_ESPDEVICE_UPDATE_PIN "ESPDevice/UpdatePinIoT"
+#define TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION "ESPDevice/InsertInApplicationIoT"
+#define TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION "ESPDevice/DeleteFromApplicationIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE "DSFamilyTempSensor/SetScaleIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION "DSFamilyTempSensor/SetResolutionIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON "DSFamilyTempSensor/SetAlarmOnIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor/SetAlarmCelsiusIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS "DSFamilyTempSensor/SetChartLimiterCelsiusIoT"
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
@@ -170,9 +170,6 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
 
 void mqtt_SubCallback(char* topic, byte* payload, unsigned int length) 
 {
-    Serial.println("Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic Topic :");
-    Serial.println(topic);
-  
     displayMQTTManager.printReceived(true);
     
     String json;
@@ -195,43 +192,43 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       return;
     }
 
-    String payloadTopic = root["topic"];
+    String topicKey = mqqtManager.getTopicKey(topic);
     String payloadContract = root["contract"];
 
-    Serial.print("payloadTopic: ");
-    Serial.println(payloadTopic);
+    Serial.print("topicKey: ");
+    Serial.println(topicKey);
 
-    if(payloadTopic == String(TOPIC_SUB_ESPDEVICE_UPDATE_PIN)){
+    if(topicKey == String(TOPIC_SUB_ESPDEVICE_UPDATE_PIN)){
       displayAccessManager.updatePin(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION)){
+    if(topicKey == String(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION)){
       configurationManager.getDeviceSettings()->insertInApplication(payloadContract);      
     }
-    if(payloadTopic == String(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)){
+    if(topicKey == String(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)){
       configurationManager.getDeviceSettings()->deleteFromApplication();      
     }
-    if(payloadTopic == String(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED)){
+    if(topicKey == String(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED)){
       temperatureScaleManager.update(payloadContract);            
     }
-    if(payloadTopic == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
       dsFamilyTempSensorManager.setSensorsByMQQTCallback(payloadContract);      
     }
-    if(payloadTopic == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE)){
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE)){
       dsFamilyTempSensorManager.setScale(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION)){
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION)){
       dsFamilyTempSensorManager.setResolution(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)){
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)){
       dsFamilyTempSensorManager.setAlarmOn(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS)){
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS)){
       dsFamilyTempSensorManager.setAlarmCelsius(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON)){
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON)){
       dsFamilyTempSensorManager.setAlarmBuzzerOn(payloadContract);
     }
-    if(payloadTopic == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS)){
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS)){
       dsFamilyTempSensorManager.setChartLimiterCelsius(payloadContract);
     }        
 }

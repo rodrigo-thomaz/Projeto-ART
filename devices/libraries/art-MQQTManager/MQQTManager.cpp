@@ -1,4 +1,5 @@
 #include "MQQTManager.h"
+#include <cstddef>         // std::size_t
 
 // MQQTManager
 
@@ -130,4 +131,21 @@ const char* MQQTManager::getRoutingKey(String topic)
 {
   String result = "ART/ESPDevice/" + this->_clientId + "/" + topic;
   return result.c_str();
+}
+
+String MQQTManager::getTopicKey(char* routingKey)
+{
+	String routingKeyStr = String(routingKey);
+	int lastIndexOf = routingKeyStr.lastIndexOf('/');
+	int size = sizeof(routingKeyStr) - lastIndexOf;
+	String methodString = routingKeyStr.substring(lastIndexOf + 1, size - 1);
+	
+	String restString = routingKeyStr.substring(0, lastIndexOf);
+	int restLastIndexOf = restString.lastIndexOf('/');
+	int restSize = sizeof(restString) - restLastIndexOf;
+	String classString = restString.substring(restLastIndexOf + 1, restSize);
+
+	String result = classString + "/" + methodString;
+		
+	return result;
 }

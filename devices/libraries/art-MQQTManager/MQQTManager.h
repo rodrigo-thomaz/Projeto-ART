@@ -27,6 +27,7 @@ class MQQTManager
 	PubSubClient*										getMQQT();
 	
 	const char* 										getRoutingKey(String topic);
+	String 												getTopicKey(char* routingKey);
 	
   private:			
 			
