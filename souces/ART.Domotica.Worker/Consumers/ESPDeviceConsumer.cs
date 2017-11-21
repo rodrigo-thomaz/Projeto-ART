@@ -346,10 +346,10 @@
             {
                 //Enviando para o IoT
                 var nextFireTimeInSeconds = nextFireTimeUtc.Subtract(DateTimeOffset.Now).TotalSeconds;
-                contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
-                var routingKey = GetRoutingKeyForIoT(contract.DeviceId, ESPDeviceConstants.UpdatePinIoTQueueName);
+                contract.NextFireTimeInSeconds = nextFireTimeInSeconds;                
                 var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(ESPDeviceConstants.UpdatePinIoTQueueName, contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+                var routingKey = GetRoutingKeyForIoT(contract.DeviceId, ESPDeviceConstants.UpdatePinIoTQueueName);
                 _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
             }
 

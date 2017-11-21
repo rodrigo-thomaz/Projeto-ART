@@ -43,8 +43,8 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_UPDATE_PIN "UpdatePinIoT"
 #define TOPIC_SUB_INSERT_IN_APPLICATION "InsertInApplicationIoT"
 #define TOPIC_SUB_DELETE_FROM_APPLICATION "DeleteFromApplicationIoT"
-#define TOPIC_SUB_SET_SCALE "DSFamilyTempSensor.SetScaleIoT"
-#define TOPIC_SUB_SET_RESOLUTION "DSFamilyTempSensor.SetResolutionIoT"
+#define TOPIC_SUB_SET_SCALE "SetScaleIoT"
+#define TOPIC_SUB_SET_RESOLUTION "SetResolutionIoT"
 #define TOPIC_SUB_SET_ALARM_ON "DSFamilyTempSensor.SetAlarmOnIoT"
 #define TOPIC_SUB_SET_ALARM_CELSIUS "DSFamilyTempSensor.SetAlarmCelsiusIoT"
 #define TOPIC_SUB_SET_ALARM_BUZZER_ON "DSFamilyTempSensor.SetAlarmBuzzerOnIoT"
@@ -124,8 +124,9 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
   mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_UPDATE_PIN)); 
   mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_INSERT_IN_APPLICATION)); 
   mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_DELETE_FROM_APPLICATION)); 
+  mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_SET_SCALE)); 
+  mqqt->subscribe(getRoutingKey(clientId, TOPIC_SUB_SET_RESOLUTION)); 
 
-  //mqqt.subscribe(TOPIC_SUB_SET_RESOLUTION); 
   //mqqt.subscribe(TOPIC_SUB_SET_HIGH_ALARM); 
   //mqqt.subscribe(TOPIC_SUB_SET_LOW_ALARM);    
   //mqqt.subscribe(TOPIC_SUB_GET_IN_APPLICATION_FOR_IOT_COMPLETED);            
