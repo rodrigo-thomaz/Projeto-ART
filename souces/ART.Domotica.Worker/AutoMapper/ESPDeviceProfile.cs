@@ -40,7 +40,9 @@
                 .ForMember(vm => vm.BrokerUser, m => m.MapFrom(x => x.DeviceBrokerSetting.User))
                 .ForMember(vm => vm.BrokerPassword, m => m.MapFrom(x => x.DeviceBrokerSetting.Password))
                 .ForMember(vm => vm.BrokerClientId, m => m.MapFrom(x => x.DeviceBrokerSetting.ClientId))
-                .ForMember(vm => vm.BrokerDeviceTopic, m => m.MapFrom(x => x.DeviceBrokerSetting.Topic));
+                .ForMember(vm => vm.BrokerDeviceTopic, m => m.MapFrom(x => x.DeviceBrokerSetting.Topic))
+                .ForMember(vm => vm.NTPUpdateInterval, m => m.MapFrom(x => x.DeviceNTPSetting.UpdateIntervalInMilliSecond))
+                .ForMember(vm => vm.TimeOffset, m => m.MapFrom(x => x.DeviceNTPSetting.TimeOffsetInSecond));
 
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));

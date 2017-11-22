@@ -8,7 +8,7 @@
     {
         #region Properties
 
-        public int TimeOffset
+        public int TimeOffsetInSecond
         {
             get; set;
         }
@@ -23,7 +23,7 @@
             get; set;
         }
 
-        public int UpdateInterval
+        public int UpdateIntervalInMilliSecond
         {
             get; set;
         }

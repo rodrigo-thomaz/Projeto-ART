@@ -78,6 +78,7 @@
             var data = await _context.ESPDevice
                .Include(x => x.DevicesInApplication)
                .Include(x => x.DeviceBrokerSetting)
+               .Include(x => x.DeviceNTPSetting)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)
                .Where(x => x.MacAddress == macAddress)               

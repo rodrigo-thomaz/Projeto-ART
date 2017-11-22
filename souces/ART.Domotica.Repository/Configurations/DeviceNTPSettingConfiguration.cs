@@ -24,13 +24,13 @@
             HasRequired(x => x.DeviceBase)
                .WithRequiredDependent(x => x.DeviceNTPSetting);
 
-            //TimeOffset
-            Property(x => x.TimeOffset)
+            //TimeOffsetInSecond
+            Property(x => x.TimeOffsetInSecond)
                 .HasColumnOrder(1)
                 .IsRequired();
 
-            //UpdateInterval
-            Property(x => x.UpdateInterval)
+            //UpdateIntervalInMilliSecond
+            Property(x => x.UpdateIntervalInMilliSecond)
                 .HasColumnOrder(2)
                 .IsRequired();
         }

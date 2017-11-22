@@ -358,7 +358,6 @@
                     FlashChipId = 1458400,
                     MacAddress = espDevice1MacAddress,
                     Pin = RandonHelper.RandomString(4),
-                    TimeOffset = -7200, // Cada hora são 3600 segundos
                     CreateDate = DateTime.Now,
                     DeviceBrokerSetting = new DeviceBrokerSetting
                     {
@@ -369,8 +368,8 @@
                     },
                     DeviceNTPSetting = new DeviceNTPSetting
                     {
-                        TimeOffset = -7200,
-                        UpdateInterval = 60000,
+                        TimeOffsetInSecond = -7200, // Cada hora são 3600 segundos
+                        UpdateIntervalInMilliSecond = 60000,
                     },
                 };
                 context.ESPDevice.Add(espDevice1);
@@ -379,7 +378,6 @@
             {
                 espDevice1.ChipId = 1540901;
                 espDevice1.FlashChipId = 1458400;
-                espDevice1.TimeOffset = -7200; // Cada hora são 3600 segundos
                 if(espDevice1.DeviceBrokerSetting == null)
                 {
                     espDevice1.DeviceBrokerSetting = new DeviceBrokerSetting
@@ -394,8 +392,8 @@
                 {
                     espDevice1.DeviceNTPSetting = new DeviceNTPSetting
                     {
-                        TimeOffset = -7200,
-                        UpdateInterval = 60000,
+                        TimeOffsetInSecond = -7200,// Cada hora são 3600 segundos
+                        UpdateIntervalInMilliSecond = 60000,
                     };
                 }
             }
@@ -510,12 +508,6 @@
             if (!settingManager.Exist(SettingsConstants.NTPPortSettingsKey))
             {
                 settingManager.Insert(SettingsConstants.NTPPortSettingsKey, 1337);
-            }
-
-            // NTPUpdateInterval
-            if (!settingManager.Exist(SettingsConstants.NTPUpdateIntervalSettingsKey))
-            {
-                settingManager.Insert(SettingsConstants.NTPUpdateIntervalSettingsKey, 60000);
             }
 
             // PublishMessageInterval
