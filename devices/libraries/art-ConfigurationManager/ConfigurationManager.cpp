@@ -93,28 +93,9 @@ String DeviceSettings::getDeviceInApplicationId()
 	return this->_deviceInApplicationId;
 }
 
-void DeviceSettings::insertInApplication(String json)
+void DeviceSettings::setDeviceInApplicationId(String value)
 {	
-	StaticJsonBuffer<300> jsonBuffer;
-
-	JsonObject& root = jsonBuffer.parseObject(json);
-	
-	if (!root.success()) {
-		Serial.print("parse insertInApplication failed: ");
-		Serial.println(json);
-		return;
-	}	
-
-	String deviceInApplicationId = root["deviceInApplicationId"];
-	String brokerApplicationTopic = root["brokerApplicationTopic"];
-
-	Serial.println("[ConfigurationManager::DeviceSettings] insertInApplication ");
-	Serial.print("deviceInApplicationId :");
-	Serial.println(deviceInApplicationId);
-	Serial.print("brokerApplicationTopic :");
-	Serial.println(brokerApplicationTopic);
-	
-	this->_deviceInApplicationId = deviceInApplicationId;
+	this->_deviceInApplicationId = value;
 }
 
 void DeviceSettings::deleteFromApplication()
@@ -282,3 +263,26 @@ void ConfigurationManager::autoInitialize()
   http.end();
 }
 
+void ConfigurationManager::insertInApplication(String json)
+{	
+	StaticJsonBuffer<300> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		Serial.print("[ConfigurationManager::insertInApplication] parse failed: ");
+		Serial.println(json);
+		return;
+	}	
+
+	String deviceInApplicationId = root["deviceInApplicationId"];
+	String brokerApplicationTopic = root["brokerApplicationTopic"];
+
+	Serial.println("[ConfigurationManager::DeviceSettings] insertInApplication ");
+	Serial.print("deviceInApplicationId :");
+	Serial.println(deviceInApplicationId);
+	Serial.print("brokerApplicationTopic :");
+	Serial.println(brokerApplicationTopic);
+	
+	this->_deviceSettings->setDeviceInApplicationId(deviceInApplicationId);
+}

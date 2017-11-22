@@ -59,9 +59,10 @@ class DeviceSettings {
     DeviceSettings(String deviceId, String deviceInApplicationId);
 
     String								getDeviceId();	
-	String								getDeviceInApplicationId();	
 	
-	void								insertInApplication(String json);	
+	String								getDeviceInApplicationId();	
+	void								setDeviceInApplicationId(String value);	
+	
 	void								deleteFromApplication();	
 	
   private:
@@ -88,7 +89,9 @@ class ConfigurationManager
 	NTPSettings*						getNTPSettings();
 	DeviceSettings*						getDeviceSettings();
 	
-	int									getPublishMessageInterval();		
+	int									getPublishMessageInterval();
+
+	void								insertInApplication(String json);		
 	
   private:			
 			

@@ -173,7 +173,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       displayAccessManager.updatePin(payloadContract);
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION)){
-      configurationManager.getDeviceSettings()->insertInApplication(payloadContract);      
+      configurationManager.insertInApplication(payloadContract);      
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)){
       configurationManager.getDeviceSettings()->deleteFromApplication();      
