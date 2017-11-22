@@ -98,12 +98,6 @@ void DeviceSettings::setDeviceInApplicationId(String value)
 	this->_deviceInApplicationId = value;
 }
 
-void DeviceSettings::deleteFromApplication()
-{	
-	Serial.println("[ConfigurationManager.DeviceSettings] deleteFromApplication");
-	this->_deviceInApplicationId = "";
-}
-
 // ConfigurationManager
 
 ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
@@ -276,13 +270,20 @@ void ConfigurationManager::insertInApplication(String json)
 	}	
 
 	String deviceInApplicationId = root["deviceInApplicationId"];
-	String brokerApplicationTopic = root["brokerApplicationTopic"];
-
-	Serial.println("[ConfigurationManager::DeviceSettings] insertInApplication ");
-	Serial.print("deviceInApplicationId :");
-	Serial.println(deviceInApplicationId);
-	Serial.print("brokerApplicationTopic :");
-	Serial.println(brokerApplicationTopic);
+	String brokerApplicationTopic = root["brokerApplicationTopic"];	
 	
 	this->_deviceSettings->setDeviceInApplicationId(deviceInApplicationId);
+	
+	Serial.println("[ConfigurationManager::insertInApplication] ");
+	Serial.print("deviceInApplicationId: ");
+	Serial.println(deviceInApplicationId);
+	Serial.print("brokerApplicationTopic: ");
+	Serial.println(brokerApplicationTopic);
+}
+
+void ConfigurationManager::deleteFromApplication()
+{	
+	this->_deviceSettings->setDeviceInApplicationId("");	
+	
+	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
 }

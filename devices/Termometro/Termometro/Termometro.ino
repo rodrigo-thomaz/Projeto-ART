@@ -176,7 +176,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       configurationManager.insertInApplication(payloadContract);      
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)){
-      configurationManager.getDeviceSettings()->deleteFromApplication();      
+      configurationManager.deleteFromApplication();      
     }
     if(topicKey == String(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED)){
       temperatureScaleManager.update(payloadContract);            

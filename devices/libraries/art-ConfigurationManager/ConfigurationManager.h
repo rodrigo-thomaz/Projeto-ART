@@ -63,8 +63,6 @@ class DeviceSettings {
 	String								getDeviceInApplicationId();	
 	void								setDeviceInApplicationId(String value);	
 	
-	void								deleteFromApplication();	
-	
   private:
     
 	String								_deviceId;
@@ -91,7 +89,8 @@ class ConfigurationManager
 	
 	int									getPublishMessageInterval();
 
-	void								insertInApplication(String json);		
+	void								insertInApplication(String json);
+	void								deleteFromApplication();		
 	
   private:			
 			
