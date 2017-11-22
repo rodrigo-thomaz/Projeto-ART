@@ -75,6 +75,7 @@
                                                     <input type="text" class="form-control" readonly value="{{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} a {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}">
                                                 </div>
                                             </div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Rótulo</label>
                                                 <div class="col-lg-8">
@@ -84,12 +85,14 @@
                                                     </span>
                                                 </div>
                                             </div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Escalas</label>
                                                 <div class="col-lg-8">
                                                     <select class="form-control m-b" ng-options="item.name for item in scale.availableScales track by item.id" ng-model="scale.selectedScale" ng-change="changeScale()"></select>
                                                 </div>
                                             </div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Resolução</label>
                                                 <div class="col-lg-8">
