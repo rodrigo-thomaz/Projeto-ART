@@ -95,7 +95,7 @@ String DeviceSettings::getDeviceInApplicationId()
 
 void DeviceSettings::insertInApplication(String json)
 {	
-	StaticJsonBuffer<200> jsonBuffer;
+	StaticJsonBuffer<300> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
@@ -106,9 +106,13 @@ void DeviceSettings::insertInApplication(String json)
 	}	
 
 	String deviceInApplicationId = root["deviceInApplicationId"];
+	String brokerApplicationTopic = root["brokerApplicationTopic"];
 
-	Serial.print("[ConfigurationManager.DeviceSettings] insertInApplication: ");
+	Serial.println("[ConfigurationManager::DeviceSettings] insertInApplication ");
+	Serial.print("deviceInApplicationId :");
 	Serial.println(deviceInApplicationId);
+	Serial.print("brokerApplicationTopic :");
+	Serial.println(brokerApplicationTopic);
 	
 	this->_deviceInApplicationId = deviceInApplicationId;
 }
