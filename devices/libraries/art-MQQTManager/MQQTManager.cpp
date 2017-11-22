@@ -56,22 +56,18 @@ bool MQQTManager::autoConnect()
     }
 	else {
 		
-		BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();
-        DeviceSettings* deviceSettings = this->_configurationManager->getDeviceSettings();
+		BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();        
       
-        char* const host = strdup(brokerSettings->getHost().c_str());
-        char* const user = strdup(brokerSettings->getUser().c_str());
-        char* const pwd  = strdup(brokerSettings->getPwd().c_str());
-        
-		this->_clientId = String(deviceSettings->getDeviceId());
-		
-        char* const clientIdStrDup  = strdup(this->_clientId.c_str());
+        char* const host 		= strdup(brokerSettings->getHost().c_str());
+        char* const user 		= strdup(brokerSettings->getUser().c_str());
+        char* const pwd  		= strdup(brokerSettings->getPwd().c_str());
+		char* const clientId  	= strdup(brokerSettings->getClientId().c_str());
         		
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
         Serial.println(host);
 
         Serial.print("[MQQT] ClientId: ");
-        Serial.println(clientIdStrDup);        
+        Serial.println(clientId);        
         
         Serial.print("[MQQT] User: ");
         Serial.println(user);        
@@ -84,8 +80,8 @@ bool MQQTManager::autoConnect()
         const char* willMessage = "My Will Message";
         boolean willRetain = false;
         
-        if (this->_mqqt->connect(clientIdStrDup, user, pwd)) 
-        //if (this->_mqqt->connect(clientIdStrDup, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
+        if (this->_mqqt->connect(clientId, user, pwd)) 
+        //if (this->_mqqt->connect(clientId, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
         {
             Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 
@@ -159,8 +155,11 @@ String MQQTManager::getTopicKey(char* routingKey)
 
 String MQQTManager::getRoutingKey(const char* topic)
 {
-	String routingKey = String("ART/ESPDevice/");
-	routingKey.concat(_clientId);
+	BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();        
+	String deviceTopic = brokerSettings->getTopic();
+	
+	String routingKey = String("ART/Device/");
+	routingKey.concat(deviceTopic);
 	routingKey.concat("/");
 	routingKey.concat(topic);
 	return routingKey;

@@ -74,7 +74,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.QueueBind(
                   queue: TemperatureScaleConstants.GetAllForIoTQueueName
                 , exchange: "amq.topic"
-                , routingKey: string.Format("ART.ESPDevice.*.{0}", TemperatureScaleConstants.GetAllForIoTQueueName)
+                , routingKey: GetRoutingKeyForAllIoT(TemperatureScaleConstants.GetAllForIoTQueueName)
                 , arguments: null);
 
             _getAllConsumer.Received += GetAllReceived;
@@ -118,15 +118,18 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var domain = _componentContext.Resolve<ITemperatureScaleDomain>();
-            var data = await domain.GetAll();
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
+            var temperatureScaleDomain = _componentContext.Resolve<ITemperatureScaleDomain>();            
+            var data = await temperatureScaleDomain.GetAll();
+
+            var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
+            var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(requestContract.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllForIoTResponseContract>>(data);
             var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForIoTResponseContract>>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);           
-            var routingKey = GetRoutingKeyForIoT(requestContract.DeviceId, TemperatureScaleConstants.GetAllForIoTCompletedQueueName);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
+            var routingKey = GetRoutingKeyForIoT(deviceBrokerSetting.Topic, TemperatureScaleConstants.GetAllForIoTCompletedQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

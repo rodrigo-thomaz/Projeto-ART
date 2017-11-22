@@ -108,6 +108,15 @@
             return data;
         }
 
+        public async Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId)
+        {
+            return await _context.ESPDevice
+                .Include(x => x.DeviceBrokerSetting)
+                .Where(x => x.Id == deviceId)
+                .Select(x => x.DeviceBrokerSetting)
+                .FirstOrDefaultAsync();
+        }
+
         #endregion Methods
     }
 }

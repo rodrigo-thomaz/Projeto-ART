@@ -23,6 +23,8 @@
 
         Task<List<ESPDevice>> GetListNotInApplication();
 
+        Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId);
+
         #endregion Methods
     }
 }

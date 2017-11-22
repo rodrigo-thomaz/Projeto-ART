@@ -144,6 +144,18 @@
             return data;
         }
 
+        public async Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId)
+        {
+            var data = await _espDeviceRepository.GetDeviceBrokerSetting(deviceId);
+
+            if (data == null)
+            {
+                throw new Exception("ESP Device not found");
+            }
+
+            return data;
+        }
+
         #endregion Methods
     }
 }
