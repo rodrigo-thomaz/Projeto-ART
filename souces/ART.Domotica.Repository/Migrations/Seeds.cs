@@ -347,6 +347,7 @@
 
             var espDevice1 = context.ESPDevice
                 .Include(x => x.DeviceBrokerSetting)
+                .Include(x => x.DeviceNTPSetting)
                 .SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
 
             if (espDevice1 == null)
@@ -366,6 +367,11 @@
                         ClientId = RandonHelper.RandomString(10),
                         Topic = RandonHelper.RandomString(10),
                     },
+                    DeviceNTPSetting = new DeviceNTPSetting
+                    {
+                        TimeOffset = -7200,
+                        UpdateInterval = 60000,
+                    },
                 };
                 context.ESPDevice.Add(espDevice1);
             }
@@ -384,12 +390,13 @@
                         Topic = RandonHelper.RandomString(10),
                     };
                 }
-                else
+                if (espDevice1.DeviceNTPSetting == null)
                 {
-                    espDevice1.DeviceBrokerSetting.User = "test";
-                    espDevice1.DeviceBrokerSetting.Password = "test";
-                    espDevice1.DeviceBrokerSetting.ClientId = RandonHelper.RandomString(10);
-                    espDevice1.DeviceBrokerSetting.Topic = RandonHelper.RandomString(10);
+                    espDevice1.DeviceNTPSetting = new DeviceNTPSetting
+                    {
+                        TimeOffset = -7200,
+                        UpdateInterval = 60000,
+                    };
                 }
             }
 

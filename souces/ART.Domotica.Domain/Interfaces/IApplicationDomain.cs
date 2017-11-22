@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
-    using System;
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;

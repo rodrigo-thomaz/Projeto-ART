@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="ARTDbContext.cs" />
     <Compile Include="Configurations\ApplicationBrokerSettingConfiguration.cs" />
+    <Compile Include="Configurations\DeviceNTPSettingConfiguration.cs" />
     <Compile Include="Configurations\DeviceBrokerSettingConfiguration.cs" />
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\DSFamilyTempSensorConfiguration.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\TempSensorRangeConfiguration.cs" />
     <Compile Include="Entities\ApplicationBrokerSetting.cs" />
+    <Compile Include="Entities\DeviceNTPSetting.cs" />
     <Compile Include="Entities\DeviceBrokerSetting.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
@@ -135,6 +137,10 @@
     <Compile Include="Migrations\201711221813354_AddTableDeviceBrokkerSetting5.cs" />
     <Compile Include="Migrations\201711221813354_AddTableDeviceBrokkerSetting5.Designer.cs">
       <DependentUpon>201711221813354_AddTableDeviceBrokkerSetting5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711222040541_AddTableDeviceBrokkerSetting6.cs" />
+    <Compile Include="Migrations\201711222040541_AddTableDeviceBrokkerSetting6.Designer.cs">
+      <DependentUpon>201711222040541_AddTableDeviceBrokkerSetting6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -203,6 +209,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711221813354_AddTableDeviceBrokkerSetting5.resx">
       <DependentUpon>201711221813354_AddTableDeviceBrokkerSetting5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711222040541_AddTableDeviceBrokkerSetting6.resx">
+      <DependentUpon>201711222040541_AddTableDeviceBrokkerSetting6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

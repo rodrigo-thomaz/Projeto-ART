@@ -11,6 +11,11 @@
             get; set;
         }
 
+        public DeviceNTPSetting DeviceNTPSetting
+        {
+            get; set;
+        }
+
         public ICollection<DeviceInApplication> DevicesInApplication
         {
             get; set;

@@ -28,14 +28,19 @@
         public DbSet<ApplicationBrokerSetting> ApplicationBrokerSetting
         {
             get; set;
-        }
+        }        
 
         public DbSet<ApplicationUser> ApplicationUser
         {
             get; set;
         }
 
-        public DbSet<DeviceBrokerSetting> BrokerSetting
+        public DbSet<DeviceBrokerSetting> DeviceBrokerSetting
+        {
+            get; set;
+        }
+
+        public DbSet<DeviceNTPSetting> DeviceNTPSetting
         {
             get; set;
         }
@@ -104,6 +109,7 @@
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
             modelBuilder.Configurations.Add(new DeviceBrokerSettingConfiguration());
+            modelBuilder.Configurations.Add(new DeviceNTPSettingConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
             modelBuilder.Configurations.Add(new DeviceInApplicationConfiguration());

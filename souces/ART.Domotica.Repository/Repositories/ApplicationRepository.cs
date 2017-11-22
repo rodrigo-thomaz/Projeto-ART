@@ -1,9 +1,6 @@
 ﻿namespace ART.Domotica.Repository.Repositories
 {
     using System;
-    using System.Data.Entity;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;

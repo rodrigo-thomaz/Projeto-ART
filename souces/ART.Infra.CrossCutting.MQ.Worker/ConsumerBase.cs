@@ -1,6 +1,5 @@
 ﻿namespace ART.Infra.CrossCutting.MQ.Worker
 {
-    using System;
 
     using RabbitMQ.Client;
 
