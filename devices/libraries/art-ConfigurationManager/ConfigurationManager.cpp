@@ -191,7 +191,7 @@ void ConfigurationManager::autoInitialize()
 			
 			String payload = http.getString();
 			
-			StaticJsonBuffer<550> jsonBufferResponse;
+			DynamicJsonBuffer jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);			
 			
 			this->_brokerSettings = new BrokerSettings(

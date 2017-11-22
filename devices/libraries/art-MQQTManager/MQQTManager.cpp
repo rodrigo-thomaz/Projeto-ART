@@ -138,6 +138,9 @@ void MQQTManager::subscribe(const char* topic)
 	const char* routingKey = this->getRoutingKey(topic);	
 	this->_mqqt->subscribe(routingKey);
 	this->_mqqt->loop();  
+	
+	Serial.print("[MQQTManager::subscribe] Subscribe with success RoutingKey: ");
+    Serial.println(routingKey);
 }
 
 String MQQTManager::getTopicKey(char* routingKey)
@@ -156,6 +159,9 @@ String MQQTManager::getTopicKey(char* routingKey)
 
 const char* MQQTManager::getRoutingKey(const char* topic)
 {
-  String result = "ART/ESPDevice/" + this->_clientId + "/" + String(topic);
-  return result.c_str();
+	std::string routingKey ("ART/ESPDevice/");
+	routingKey.append(_clientId.c_str());
+	routingKey.append("/");
+	routingKey.append(topic);
+	return routingKey.c_str();
 }

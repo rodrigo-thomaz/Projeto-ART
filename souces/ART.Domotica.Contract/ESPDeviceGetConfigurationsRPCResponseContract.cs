@@ -26,6 +26,16 @@
             get; set;
         }
 
+        public string BrokerClientId
+        {
+            get; set;
+        }
+
+        public string BrokerTopic
+        {
+            get; set;
+        }
+
         public Guid DeviceId
         {
             get; set;

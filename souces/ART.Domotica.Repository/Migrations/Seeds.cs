@@ -4,6 +4,7 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Text;
+    using System.Data.Entity;
 
     using ART.Domotica.Constant;
     using ART.Domotica.Repository.Entities;
@@ -339,7 +340,9 @@
 
             var espDevice1MacAddress = "A0:20:A6:17:83:25";
 
-            var espDevice1 = context.ESPDevice.SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
+            var espDevice1 = context.ESPDevice
+                .Include(x => x.DeviceBrokerSetting)
+                .SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
 
             if (espDevice1 == null)
             {
@@ -351,11 +354,12 @@
                     Pin = RandonHelper.RandomString(4),
                     TimeOffset = -7200, // Cada hora são 3600 segundos
                     CreateDate = DateTime.Now,
-                    BrokerSetting = new DeviceBrokerSetting
+                    DeviceBrokerSetting = new DeviceBrokerSetting
                     {
                         User = "test",
                         Password = "test",
-                        ClientId = RandonHelper.RandomString(4),
+                        ClientId = RandonHelper.RandomString(10),
+                        Topic = RandonHelper.RandomString(10),
                     },
                 };
                 context.ESPDevice.Add(espDevice1);
@@ -365,6 +369,23 @@
                 espDevice1.ChipId = 1540901;
                 espDevice1.FlashChipId = 1458400;
                 espDevice1.TimeOffset = -7200; // Cada hora são 3600 segundos
+                if(espDevice1.DeviceBrokerSetting == null)
+                {
+                    espDevice1.DeviceBrokerSetting = new DeviceBrokerSetting
+                    {
+                        User = "test",
+                        Password = "test",
+                        ClientId = RandonHelper.RandomString(10),
+                        Topic = RandonHelper.RandomString(10),
+                    };
+                }
+                else
+                {
+                    espDevice1.DeviceBrokerSetting.User = "test";
+                    espDevice1.DeviceBrokerSetting.Password = "test";
+                    espDevice1.DeviceBrokerSetting.ClientId = RandonHelper.RandomString(10);
+                    espDevice1.DeviceBrokerSetting.Topic = RandonHelper.RandomString(10);
+                }
             }
 
             context.SaveChanges();

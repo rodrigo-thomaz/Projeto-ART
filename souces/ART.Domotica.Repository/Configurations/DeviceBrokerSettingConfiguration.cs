@@ -22,7 +22,7 @@ namespace ART.Domotica.Repository.Configurations
 
             //DeviceBase
             HasRequired(x => x.DeviceBase)               
-               .WithRequiredDependent(x => x.BrokerSetting);
+               .WithRequiredDependent(x => x.DeviceBrokerSetting);
 
             //User
             Property(x => x.User)
@@ -43,7 +43,15 @@ namespace ART.Domotica.Repository.Configurations
             //ClientId
             Property(x => x.ClientId)
                 .HasColumnOrder(3)
-                .HasMaxLength(4)
+                .HasMaxLength(32)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+
+            //Topic
+            Property(x => x.Topic)
+                .HasColumnOrder(4)
+                .HasMaxLength(32)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));

@@ -13,6 +13,8 @@ namespace ART.Domotica.Repository.Entities
 
         public string ClientId { get; set; }
 
+        public string Topic { get; set; }
+
         public DeviceBase DeviceBase { get; set; }        
     }
 }

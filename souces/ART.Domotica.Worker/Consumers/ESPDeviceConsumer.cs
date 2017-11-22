@@ -296,8 +296,6 @@
             {
                 BrokerHost = _mqSettings.BrokerHost,
                 BrokerPort = _mqSettings.BrokerPort,
-                BrokerUser = _mqSettings.BrokerUser,
-                BrokerPassword = _mqSettings.BrokerPwd,
                 NTPHost = ntpHost,
                 NTPPort = ntpPort,
                 NTPUpdateInterval = ntpUpdateInterval,

@@ -118,6 +118,14 @@
     <Compile Include="Migrations\201711212144305_AddTableDeviceBrokkerSetting1.Designer.cs">
       <DependentUpon>201711212144305_AddTableDeviceBrokkerSetting1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711212243493_AddTableDeviceBrokkerSetting2.cs" />
+    <Compile Include="Migrations\201711212243493_AddTableDeviceBrokkerSetting2.Designer.cs">
+      <DependentUpon>201711212243493_AddTableDeviceBrokkerSetting2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711220024376_AddTableDeviceBrokkerSetting3.cs" />
+    <Compile Include="Migrations\201711220024376_AddTableDeviceBrokkerSetting3.Designer.cs">
+      <DependentUpon>201711220024376_AddTableDeviceBrokkerSetting3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -173,6 +181,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711212144305_AddTableDeviceBrokkerSetting1.resx">
       <DependentUpon>201711212144305_AddTableDeviceBrokkerSetting1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711212243493_AddTableDeviceBrokkerSetting2.resx">
+      <DependentUpon>201711212243493_AddTableDeviceBrokkerSetting2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711220024376_AddTableDeviceBrokkerSetting3.resx">
+      <DependentUpon>201711220024376_AddTableDeviceBrokkerSetting3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

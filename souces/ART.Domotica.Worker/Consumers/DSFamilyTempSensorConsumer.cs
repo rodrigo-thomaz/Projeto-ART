@@ -125,7 +125,7 @@ namespace ART.Domotica.Worker.Consumers
                 queue: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
               , durable: false
               , exclusive: false
-              , autoDelete: true
+              , autoDelete: false
               , arguments: null);
 
             _model.QueueBind(

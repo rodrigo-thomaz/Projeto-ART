@@ -30,13 +30,17 @@
 
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
                 .ForMember(vm => vm.DeviceInApplicationId, m => m.ResolveUsing(src => {
-                    if(src.DevicesInApplication != null && src.DevicesInApplication.Any())
+                    if (src.DevicesInApplication != null && src.DevicesInApplication.Any())
                     {
                         return src.DevicesInApplication.Single().Id;
                     }
                     return (Guid?)null;
                 }))
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.BrokerUser, m => m.MapFrom(x => x.DeviceBrokerSetting.User))
+                .ForMember(vm => vm.BrokerPassword, m => m.MapFrom(x => x.DeviceBrokerSetting.Password))
+                .ForMember(vm => vm.BrokerClientId, m => m.MapFrom(x => x.DeviceBrokerSetting.ClientId))
+                .ForMember(vm => vm.BrokerTopic, m => m.MapFrom(x => x.DeviceBrokerSetting.Topic));
 
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));
