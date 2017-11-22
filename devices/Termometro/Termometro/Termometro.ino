@@ -139,7 +139,7 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
 void mqtt_SubCallback(char* topic, byte* payload, unsigned int length) 
 {
     Serial.print("[MQQT::mqtt_SubCallback] Topic: ");
-    Serial.print(topic);
+    Serial.println(topic);
     
     displayMQTTManager.printReceived(true);
     

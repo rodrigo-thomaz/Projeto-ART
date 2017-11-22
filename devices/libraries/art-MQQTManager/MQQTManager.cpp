@@ -129,14 +129,14 @@ PubSubClient* MQQTManager::getMQQT() {
 
 void MQQTManager::publish(const char* topic, const char* payload)
 {
-	const char* routingKey = this->getRoutingKey(topic);	
-	this->_mqqt->publish(routingKey, payload); 
+	String routingKey = this->getRoutingKey(topic);	
+	this->_mqqt->publish(routingKey.c_str(), payload); 
 }
 
 void MQQTManager::subscribe(const char* topic)
 {
-	const char* routingKey = this->getRoutingKey(topic);	
-	this->_mqqt->subscribe(routingKey);
+	String routingKey = this->getRoutingKey(topic);	
+	this->_mqqt->subscribe(routingKey.c_str());
 	this->_mqqt->loop();  
 	
 	Serial.print("[MQQTManager::subscribe] Subscribe with success RoutingKey: ");
@@ -157,11 +157,11 @@ String MQQTManager::getTopicKey(char* routingKey)
 	return result;
 }
 
-const char* MQQTManager::getRoutingKey(const char* topic)
+String MQQTManager::getRoutingKey(const char* topic)
 {
-	std::string routingKey ("ART/ESPDevice/");
-	routingKey.append(_clientId.c_str());
-	routingKey.append("/");
-	routingKey.append(topic);
-	return routingKey.c_str();
+	String routingKey = String("ART/ESPDevice/");
+	routingKey.concat(_clientId);
+	routingKey.concat("/");
+	routingKey.concat(topic);
+	return routingKey;
 }

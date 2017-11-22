@@ -52,7 +52,7 @@ class MQQTManager
 	
 	void												onSubCallback(char* topic, byte* payload, unsigned int length);
 	
-	const char* 										getRoutingKey(const char* topic);
+	String 												getRoutingKey(const char* topic);
 };
 
 #endif
