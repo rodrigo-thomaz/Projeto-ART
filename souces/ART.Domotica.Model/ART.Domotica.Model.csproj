@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetDetailModel.cs" />
+    <Compile Include="DSFamilyTempSensorSetLabelCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmCelsiusCompletedModel.cs" />

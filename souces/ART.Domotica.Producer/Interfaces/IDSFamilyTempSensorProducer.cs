@@ -23,6 +23,8 @@
 
         Task SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message);
 
+        Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message);
+
         #endregion Methods
     }
 }

@@ -85,6 +85,15 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
+        public async Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetLabelQueueName, null, payload);
+            });
+        }
+
         #endregion
 
         #region private voids
@@ -107,6 +116,13 @@ namespace ART.Domotica.Producer.Services
 
             _model.QueueDeclare(
                  queue: DSFamilyTempSensorConstants.SetScaleQueueName
+               , durable: true
+               , exclusive: false
+               , autoDelete: false
+               , arguments: null);
+
+            _model.QueueDeclare(
+                 queue: DSFamilyTempSensorConstants.SetLabelQueueName
                , durable: true
                , exclusive: false
                , autoDelete: false
@@ -139,7 +155,7 @@ namespace ART.Domotica.Producer.Services
                , exclusive: false
                , autoDelete: false
                , arguments: null);
-        }        
+        }
 
         #endregion
     }

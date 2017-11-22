@@ -78,7 +78,10 @@
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Rótulo</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" class="form-control" ng-model="sensor.label">
+                                                    <input name="inputLabel" type="text" class="form-control" ng-model="labelView" ng-model-options="{ debounce: 1000 }" ng-change="changeLabel()" required>
+                                                    <span ng-show="formDevice.inputLabel.$touched && formDevice.inputLabel.$invalid">
+                                                        Label é requerido
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="form-group">

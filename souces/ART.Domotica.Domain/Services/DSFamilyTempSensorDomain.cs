@@ -193,6 +193,25 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
+        public async Task<DSFamilyTempSensor> SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message)
+        {
+            var entity = await _dsFamilyTempSensorRepository.GetById(message.Contract.DSFamilyTempSensorId);
+
+            if (entity == null)
+            {
+                throw new Exception("DSFamilyTempSensor not found");
+            }
+
+            entity.Label = message.Contract.Label;
+
+            await _dsFamilyTempSensorRepository.Update(entity);
+
+            //LoadDevice
+            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
+
+            return entity;
+        }
+
         #endregion
     }
 }

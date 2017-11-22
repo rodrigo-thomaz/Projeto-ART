@@ -100,6 +100,24 @@ namespace ART.Domotica.WebApi.Controllers
         }
 
         /// <summary>
+        /// Altera o rótulo de um sensor
+        /// </summary>
+        /// <remarks>
+        /// Altera o rótulo de um sensor
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setLabel")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetLabel(DSFamilyTempSensorSetLabelRequestContract contract)
+        {
+            await _dsFamilyTempSensorProducer.SetLabel(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
         /// Altera o valor do alarme de um sensor
         /// </summary>
         /// <remarks>
