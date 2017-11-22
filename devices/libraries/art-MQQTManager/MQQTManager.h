@@ -27,7 +27,8 @@ class MQQTManager
 	PubSubClient*										getMQQT();
 	
 	void												publish(const char* topic, const char* payload);
-	void												subscribe(const char* topic);	
+	void												subscribeInApplication(const char* topic);	
+	void												subscribeInDevice(const char* topic);	
 	
 	String 												getTopicKey(char* routingKey);
 	
@@ -52,7 +53,8 @@ class MQQTManager
 	
 	void												onSubCallback(char* topic, byte* payload, unsigned int length);
 	
-	String 												getRoutingKey(const char* topic);
+	String 												getApplicationRoutingKey(const char* topic);
+	String 												getDeviceRoutingKey(const char* topic);
 };
 
 #endif

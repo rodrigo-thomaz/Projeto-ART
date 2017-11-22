@@ -125,17 +125,27 @@ PubSubClient* MQQTManager::getMQQT() {
 
 void MQQTManager::publish(const char* topic, const char* payload)
 {
-	String routingKey = this->getRoutingKey(topic);	
+	String routingKey = this->getApplicationRoutingKey(topic);	
 	this->_mqqt->publish(routingKey.c_str(), payload); 
 }
 
-void MQQTManager::subscribe(const char* topic)
+void MQQTManager::subscribeInApplication(const char* topic)
 {
-	String routingKey = this->getRoutingKey(topic);	
+	String routingKey = this->getApplicationRoutingKey(topic);	
 	this->_mqqt->subscribe(routingKey.c_str());
 	this->_mqqt->loop();  
 	
-	Serial.print("[MQQTManager::subscribe] Subscribe with success RoutingKey: ");
+	Serial.print("[MQQTManager::subscribe] Subscribe in application with success routingKey: ");
+    Serial.println(routingKey);
+}
+
+void MQQTManager::subscribeInDevice(const char* topic)
+{
+	String routingKey = this->getDeviceRoutingKey(topic);	
+	this->_mqqt->subscribe(routingKey.c_str());
+	this->_mqqt->loop();  
+	
+	Serial.print("[MQQTManager::subscribe] Subscribe in application with success routingKey: ");
     Serial.println(routingKey);
 }
 
@@ -153,7 +163,19 @@ String MQQTManager::getTopicKey(char* routingKey)
 	return result;
 }
 
-String MQQTManager::getRoutingKey(const char* topic)
+String MQQTManager::getApplicationRoutingKey(const char* topic)
+{
+	BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();        
+	String deviceTopic = brokerSettings->getDeviceTopic();
+	
+	String routingKey = String("ART/Device/");
+	routingKey.concat(deviceTopic);
+	routingKey.concat("/");
+	routingKey.concat(topic);
+	return routingKey;
+}
+
+String MQQTManager::getDeviceRoutingKey(const char* topic)
 {
 	BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();        
 	String deviceTopic = brokerSettings->getDeviceTopic();
