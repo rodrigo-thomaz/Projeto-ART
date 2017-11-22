@@ -2,11 +2,13 @@
 
 // BrokerSettings
 
-BrokerSettings::BrokerSettings(String host, int port, String user, String pwd) {
+BrokerSettings::BrokerSettings(String host, int port, String user, String pwd, String clientId, String topic) {
   _host = host;
   _port = port;
   _user = user;
   _pwd = pwd;
+  _clientId = clientId;
+  _topic = topic;
 }
 
 String BrokerSettings::getHost()
@@ -27,6 +29,16 @@ String BrokerSettings::getUser()
 String BrokerSettings::getPwd()
 {	
 	return this->_pwd;
+}
+
+String BrokerSettings::getClientId()
+{	
+	return this->_clientId;
+}
+
+String BrokerSettings::getTopic()
+{	
+	return this->_topic;
 }
 
 // NTPSettings
@@ -198,7 +210,9 @@ void ConfigurationManager::autoInitialize()
 				jsonObjectResponse["brokerHost"], 
 				jsonObjectResponse["brokerPort"], 
 				jsonObjectResponse["brokerUser"], 
-				jsonObjectResponse["brokerPassword"]);
+				jsonObjectResponse["brokerPassword"],
+				jsonObjectResponse["brokerClientId"],
+				jsonObjectResponse["brokerTopic"]);
 			
 			this->_ntpSettings = new NTPSettings(
 				jsonObjectResponse["ntpHost"], 
@@ -223,6 +237,10 @@ void ConfigurationManager::autoInitialize()
 			Serial.println(this->_brokerSettings->getUser());
 			Serial.print("Broker Pwd: ");
 			Serial.println(this->_brokerSettings->getPwd());
+			Serial.print("Broker ClientId: ");
+			Serial.println(this->_brokerSettings->getClientId());
+			Serial.print("Broker Topic: ");
+			Serial.println(this->_brokerSettings->getTopic());
 			
 			Serial.print("NTP Host: ");
 			Serial.println(this->_ntpSettings->getHost());

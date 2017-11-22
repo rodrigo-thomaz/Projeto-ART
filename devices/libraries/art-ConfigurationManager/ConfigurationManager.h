@@ -10,12 +10,14 @@
 class BrokerSettings {
   public:
 
-    BrokerSettings(String host, int port, String user, String pwd);
+    BrokerSettings(String host, int port, String user, String pwd, String clientId, String topic);
 
     String								getHost();
 	int									getPort();
 	String								getUser();
 	String								getPwd();	
+	String								getClientId();	
+	String								getTopic();	
 	
   private:
     
@@ -23,6 +25,8 @@ class BrokerSettings {
 	int									_port;
 	String								_user;
 	String								_pwd;
+	String								_clientId;
+	String								_topic;
 
     friend class ConfigurationManager;
 };
