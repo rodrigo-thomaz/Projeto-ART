@@ -34,6 +34,7 @@
         {
             var data = await _context.ESPDevice
                 .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))
+                .Include(x => x.DeviceBrokerSetting)
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
 
@@ -65,6 +66,7 @@
         public async Task<List<ESPDevice>> GetListNotInApplication()
         {
             var data = await _context.ESPDevice
+                .Include(x => x.DeviceBrokerSetting)
                 .Where(x => !x.DevicesInApplication.Any())
                 .ToListAsync();
 

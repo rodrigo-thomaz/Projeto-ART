@@ -338,19 +338,17 @@
             _logger.DebugEnter();
 
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.UpdatePins();
-            var contracts = Mapper.Map<List<ESPDevice>, List<ESPDeviceUpdatePinsResponseIoTContract>>(data);
+            var data = await domain.UpdatePins();            
 
-            foreach (var contract in contracts)
+            foreach (var item in data)
             {
                 //Enviando para o IoT
+                var contract = Mapper.Map<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>(item);
                 var nextFireTimeInSeconds = nextFireTimeUtc.Subtract(DateTimeOffset.Now).TotalSeconds;
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;                
                 var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-                //Temp
-                var temp = data.First(x => x.Id == contract.DeviceId);
-                var routingKey = GetRoutingKeyForIoT(temp.DeviceBrokerSetting.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
+                var routingKey = GetRoutingKeyForIoT(item.DeviceBrokerSetting.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
                 _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
             }
 

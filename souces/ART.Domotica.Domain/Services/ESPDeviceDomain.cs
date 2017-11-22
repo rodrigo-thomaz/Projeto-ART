@@ -105,6 +105,9 @@
 
             var hardwareEntity = await _espDeviceRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
 
+            //Load Broker Setting
+            await _espDeviceRepository.GetDeviceBrokerSetting(deviceInApplicationEntity.DeviceBaseId);
+
             return hardwareEntity;
         }
 
