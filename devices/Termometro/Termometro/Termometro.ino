@@ -121,9 +121,41 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
 {
   Serial.println("[MQQT::mqtt_ConnectedCallback] initializing ...");
 
+  if(configurationManager.getDeviceSettings()->getDeviceInApplicationId() == ""){
+    subscribeNotInApplication();
+  }
+  else{
+    subscribeInApplication();
+  }
+
+  Serial.println("[MQQT::mqtt_ConnectedCallback] Initialized with success !");
+}
+
+void subscribeNotInApplication()
+{
+  Serial.println("[MQQT::subscribeNotInApplication] initializing ...");
+  
   mqqtManager.subscribeInDevice(TOPIC_SUB_ESPDEVICE_UPDATE_PIN);
   mqqtManager.subscribeInDevice(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
+
+  Serial.println("[MQQT::subscribeNotInApplication] Initialized with success !");
+}
+
+void unSubscribeNotInApplication()
+{
+  Serial.println("[MQQT::unSubscribeNotInApplication] initializing ...");
+
+  mqqtManager.unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_UPDATE_PIN);
+  mqqtManager.unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION);
+  
+  Serial.println("[MQQT::unSubscribeNotInApplication] Initialized with success !");
+}
+
+void subscribeInApplication()
+{
+  Serial.println("[MQQT::subscribeInApplication] initializing ...");
+
+  mqqtManager.subscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
   mqqtManager.subscribeInApplication(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE);
@@ -133,7 +165,24 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS);
 
-  Serial.println("[MQQT::mqtt_ConnectedCallback] Initialized with success !");
+  Serial.println("[MQQT::subscribeInApplication] Initialized with success !");
+}
+
+void unSubscribeInApplication()
+{
+  Serial.println("[MQQT::unSubscribeInApplication] initializing ...");  
+
+  mqqtManager.unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS);
+  
+  Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
 
 void mqtt_SubCallback(char* topic, byte* payload, unsigned int length) 
@@ -173,10 +222,14 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       displayAccessManager.updatePin(payloadContract);
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION)){
-      configurationManager.insertInApplication(payloadContract);      
+      unSubscribeNotInApplication();
+      configurationManager.insertInApplication(payloadContract);          
+      subscribeInApplication();  
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)){
-      configurationManager.deleteFromApplication();      
+      unSubscribeInApplication();
+      configurationManager.deleteFromApplication();            
+      subscribeNotInApplication();
     }
     if(topicKey == String(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED)){
       temperatureScaleManager.update(payloadContract);            

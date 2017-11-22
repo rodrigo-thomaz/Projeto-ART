@@ -236,7 +236,7 @@
             iotContract.BrokerApplicationTopic = applicationBrokerSetting.Topic;
             var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.InsertInApplicationIoTQueueName);
+            var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.InsertInApplicationIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -270,7 +270,7 @@
             //Enviando para o IoT
             var deviceMessage = new MessageIoTContract<string>(string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
+            var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
             _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -289,7 +289,12 @@
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.GetConfigurations(requestContract);
 
-            var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(data.Id); 
+            var applicationTopic = string.Empty;
+            if (data.DevicesInApplication != null && data.DevicesInApplication.Any())
+            {
+                var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(data.Id);
+                applicationTopic = applicationBrokerSetting.Topic;
+            }             
 
             var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
             var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
@@ -301,7 +306,7 @@
             {
                 BrokerHost = _mqSettings.BrokerHost,
                 BrokerPort = _mqSettings.BrokerPort,
-                BrokerApplicationTopic = applicationBrokerSetting.Topic,
+                BrokerApplicationTopic = applicationTopic,
                 NTPHost = ntpHost,
                 NTPPort = ntpPort,
                 NTPUpdateInterval = ntpUpdateInterval,
@@ -353,7 +358,7 @@
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;                
                 var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-                var routingKey = GetRoutingKeyForIoT(item.DeviceBrokerSetting.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
+                var routingKey = GetDeviceRoutingKeyForIoT(item.DeviceBrokerSetting.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
                 _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
             }
 
