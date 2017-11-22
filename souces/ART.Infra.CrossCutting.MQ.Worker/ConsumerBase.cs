@@ -25,15 +25,15 @@
 
         #region Methods
 
-        protected string GetRoutingKeyForIoT(string deviceTopic, string topic)
-        {
-            var routingKey = string.Format("ART.Device.{0}.{1}", deviceTopic, topic);
-            return routingKey;
-        }
-
         protected string GetRoutingKeyForAllIoT(string topic)
         {
             var routingKey = string.Format("ART.Device.*.{0}", topic);
+            return routingKey;
+        }
+
+        protected string GetRoutingKeyForIoT(string deviceTopic, string topic)
+        {
+            var routingKey = string.Format("ART.Device.{0}.{1}", deviceTopic, topic);
             return routingKey;
         }
 

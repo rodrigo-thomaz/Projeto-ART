@@ -4,18 +4,22 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class AddTableDeviceBrokkerSetting1 : DbMigration
     {
-        public override void Up()
-        {
-            DropIndex("dbo.DeviceBrokerSetting", new[] { "ClientId" });
-            AlterColumn("dbo.DeviceBrokerSetting", "ClientId", c => c.String(nullable: false, maxLength: 4));
-            CreateIndex("dbo.DeviceBrokerSetting", "ClientId", unique: true);
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropIndex("dbo.DeviceBrokerSetting", new[] { "ClientId" });
             AlterColumn("dbo.DeviceBrokerSetting", "ClientId", c => c.String(nullable: false, maxLength: 8));
             CreateIndex("dbo.DeviceBrokerSetting", "ClientId", unique: true);
         }
+
+        public override void Up()
+        {
+            DropIndex("dbo.DeviceBrokerSetting", new[] { "ClientId" });
+            AlterColumn("dbo.DeviceBrokerSetting", "ClientId", c => c.String(nullable: false, maxLength: 4));
+            CreateIndex("dbo.DeviceBrokerSetting", "ClientId", unique: true);
+        }
+
+        #endregion Methods
     }
 }

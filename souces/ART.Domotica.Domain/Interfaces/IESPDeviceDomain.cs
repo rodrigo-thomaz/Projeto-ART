@@ -1,12 +1,12 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ART.Domotica.Contract;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.MQ.Contract;
-    using System;
 
     public interface IESPDeviceDomain
     {
@@ -16,17 +16,19 @@
 
         Task<List<ESPDevice>> GetAll();
 
+        Task<ApplicationBrokerSetting> GetApplicationBrokerSetting(Guid deviceId);
+
         Task<ESPDevice> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
         Task<ESPDevice> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
+
+        Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId);
 
         Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message);
 
         Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
         Task<List<ESPDevice>> UpdatePins();
-
-        Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId);
 
         #endregion Methods
     }

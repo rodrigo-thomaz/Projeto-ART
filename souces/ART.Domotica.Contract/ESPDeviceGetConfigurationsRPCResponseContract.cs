@@ -6,6 +6,21 @@
     {
         #region Properties
 
+        public string BrokerApplicationTopic
+        {
+            get; set;
+        }
+
+        public string BrokerClientId
+        {
+            get; set;
+        }
+
+        public string BrokerDeviceTopic
+        {
+            get; set;
+        }
+
         public string BrokerHost
         {
             get; set;
@@ -22,21 +37,6 @@
         }
 
         public string BrokerUser
-        {
-            get; set;
-        }
-
-        public string BrokerClientId
-        {
-            get; set;
-        }
-
-        public string BrokerApplicationTopic
-        {
-            get; set;
-        }
-
-        public string BrokerDeviceTopic
         {
             get; set;
         }

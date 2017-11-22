@@ -1,10 +1,10 @@
 ﻿namespace ART.Domotica.Repository.Migrations
 {
     using System;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
     using System.Text;
-    using System.Data.Entity;
 
     using ART.Domotica.Constant;
     using ART.Domotica.Repository.Entities;

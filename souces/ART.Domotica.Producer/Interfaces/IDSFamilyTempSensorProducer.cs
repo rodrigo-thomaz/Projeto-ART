@@ -17,10 +17,11 @@
 
         Task SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message);
 
+        Task SetChartLimiterCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract> message);
+
         Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
 
         Task SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message);
-        Task SetChartLimiterCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract> message);
 
         #endregion Methods
     }

@@ -40,7 +40,6 @@
                 .ForMember(vm => vm.BrokerUser, m => m.MapFrom(x => x.DeviceBrokerSetting.User))
                 .ForMember(vm => vm.BrokerPassword, m => m.MapFrom(x => x.DeviceBrokerSetting.Password))
                 .ForMember(vm => vm.BrokerClientId, m => m.MapFrom(x => x.DeviceBrokerSetting.ClientId))
-                .ForMember(vm => vm.BrokerApplicationTopic, m => m.MapFrom(x => x.DeviceBrokerSetting.Topic))
                 .ForMember(vm => vm.BrokerDeviceTopic, m => m.MapFrom(x => x.DeviceBrokerSetting.Topic));
 
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()

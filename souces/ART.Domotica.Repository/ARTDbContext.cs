@@ -35,6 +35,11 @@
             get; set;
         }
 
+        public DbSet<DeviceBrokerSetting> BrokerSetting
+        {
+            get; set;
+        }
+
         public DbSet<DeviceInApplication> DeviceInApplication
         {
             get; set;
@@ -76,11 +81,6 @@
         }
 
         public DbSet<TempSensorRange> TempSensorRange
-        {
-            get; set;
-        }
-
-        public DbSet<DeviceBrokerSetting> BrokerSetting
         {
             get; set;
         }

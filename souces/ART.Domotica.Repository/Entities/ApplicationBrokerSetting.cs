@@ -1,14 +1,28 @@
-﻿using ART.Infra.CrossCutting.Repository;
-using System;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using System;
+
+    using ART.Infra.CrossCutting.Repository;
+
     public class ApplicationBrokerSetting : IEntity<Guid>
     {
-        public Guid Id { get; set; }
+        #region Properties
 
-        public string Topic { get; set; }
+        public Application Application
+        {
+            get; set;
+        }
 
-        public Application Application { get; set; }        
+        public Guid Id
+        {
+            get; set;
+        }
+
+        public string Topic
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

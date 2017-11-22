@@ -4,6 +4,18 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class AddTableDeviceBrokkerSetting : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.DeviceBrokerSetting", "Id", "dbo.DeviceBase");
+            DropIndex("dbo.DeviceBrokerSetting", new[] { "ClientId" });
+            DropIndex("dbo.DeviceBrokerSetting", new[] { "Password" });
+            DropIndex("dbo.DeviceBrokerSetting", new[] { "User" });
+            DropIndex("dbo.DeviceBrokerSetting", new[] { "Id" });
+            DropTable("dbo.DeviceBrokerSetting");
+        }
+
         public override void Up()
         {
             CreateTable(
@@ -21,17 +33,8 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.User, unique: true)
                 .Index(t => t.Password, unique: true)
                 .Index(t => t.ClientId, unique: true);
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.DeviceBrokerSetting", "Id", "dbo.DeviceBase");
-            DropIndex("dbo.DeviceBrokerSetting", new[] { "ClientId" });
-            DropIndex("dbo.DeviceBrokerSetting", new[] { "Password" });
-            DropIndex("dbo.DeviceBrokerSetting", new[] { "User" });
-            DropIndex("dbo.DeviceBrokerSetting", new[] { "Id" });
-            DropTable("dbo.DeviceBrokerSetting");
-        }
+
+        #endregion Methods
     }
 }

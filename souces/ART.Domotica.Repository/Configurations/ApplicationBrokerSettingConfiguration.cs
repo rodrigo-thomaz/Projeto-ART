@@ -1,10 +1,11 @@
-﻿using ART.Domotica.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Domotica.Repository.Configurations
+﻿namespace ART.Domotica.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Domotica.Repository.Entities;
+
     public class ApplicationBrokerSettingConfiguration : EntityTypeConfiguration<ApplicationBrokerSetting>
     {
         #region Constructors
@@ -21,8 +22,8 @@ namespace ART.Domotica.Repository.Configurations
                 .IsRequired();
 
             //Application
-            HasRequired(x => x.Application)               
-               .WithRequiredDependent(x => x.ApplicationBrokerSetting);            
+            HasRequired(x => x.Application)
+               .WithRequiredDependent(x => x.ApplicationBrokerSetting);
 
             //Topic
             Property(x => x.Topic)

@@ -119,6 +119,16 @@
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<ApplicationBrokerSetting> GetApplicationBrokerSetting(Guid deviceId)
+        {
+            IQueryable<ApplicationBrokerSetting> query = from abs in _context.ApplicationBrokerSetting
+                        join dia in _context.DeviceInApplication on abs.Id equals dia.ApplicationId
+                        where dia.DeviceBaseId == deviceId
+                        select abs;
+
+            return await query.SingleOrDefaultAsync();
+        }
+
         #endregion Methods
     }
 }

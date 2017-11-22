@@ -1,10 +1,11 @@
-﻿using ART.Domotica.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Infrastructure.Annotations;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Domotica.Repository.Configurations
+﻿namespace ART.Domotica.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Domotica.Repository.Entities;
+
     public class DeviceBrokerSettingConfiguration : EntityTypeConfiguration<DeviceBrokerSetting>
     {
         #region Constructors
@@ -21,7 +22,7 @@ namespace ART.Domotica.Repository.Configurations
                 .IsRequired();
 
             //DeviceBase
-            HasRequired(x => x.DeviceBase)               
+            HasRequired(x => x.DeviceBase)
                .WithRequiredDependent(x => x.DeviceBrokerSetting);
 
             //User

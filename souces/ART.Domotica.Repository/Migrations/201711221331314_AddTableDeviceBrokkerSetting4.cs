@@ -2,9 +2,19 @@ namespace ART.Domotica.Repository.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddTableDeviceBrokkerSetting4 : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.ApplicationBrokerSetting", "Id", "dbo.Application");
+            DropIndex("dbo.ApplicationBrokerSetting", new[] { "Topic" });
+            DropIndex("dbo.ApplicationBrokerSetting", new[] { "Id" });
+            DropTable("dbo.ApplicationBrokerSetting");
+        }
+
         public override void Up()
         {
             CreateTable(
@@ -18,15 +28,8 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.Application", t => t.Id)
                 .Index(t => t.Id)
                 .Index(t => t.Topic, unique: true);
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.ApplicationBrokerSetting", "Id", "dbo.Application");
-            DropIndex("dbo.ApplicationBrokerSetting", new[] { "Topic" });
-            DropIndex("dbo.ApplicationBrokerSetting", new[] { "Id" });
-            DropTable("dbo.ApplicationBrokerSetting");
-        }
+
+        #endregion Methods
     }
 }

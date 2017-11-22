@@ -6,7 +6,10 @@
     {
         #region Properties
 
-        public DeviceBrokerSetting DeviceBrokerSetting { get; set; }
+        public DeviceBrokerSetting DeviceBrokerSetting
+        {
+            get; set;
+        }
 
         public ICollection<DeviceInApplication> DevicesInApplication
         {

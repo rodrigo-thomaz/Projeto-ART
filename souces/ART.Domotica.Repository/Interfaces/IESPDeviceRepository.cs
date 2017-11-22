@@ -13,7 +13,11 @@
 
         Task<List<ESPDevice>> GetAll();
 
+        Task<ApplicationBrokerSetting> GetApplicationBrokerSetting(Guid deviceId);
+
         Task<ESPDevice> GetByPin(string pin);
+
+        Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId);
 
         Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 
@@ -22,8 +26,6 @@
         Task<List<ESPDevice>> GetListInApplication(Guid applicationId);
 
         Task<List<ESPDevice>> GetListNotInApplication();
-
-        Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId);
 
         #endregion Methods
     }

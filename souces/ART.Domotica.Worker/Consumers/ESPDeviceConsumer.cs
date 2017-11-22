@@ -285,8 +285,10 @@
 
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCRequestContract>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.GetConfigurations(requestContract);            
-            
+            var data = await domain.GetConfigurations(requestContract);
+
+            var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(data.Id); 
+
             var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
             var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
             var ntpUpdateInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPUpdateIntervalSettingsKey);
@@ -297,6 +299,7 @@
             {
                 BrokerHost = _mqSettings.BrokerHost,
                 BrokerPort = _mqSettings.BrokerPort,
+                BrokerApplicationTopic = applicationBrokerSetting.Topic,
                 NTPHost = ntpHost,
                 NTPPort = ntpPort,
                 NTPUpdateInterval = ntpUpdateInterval,

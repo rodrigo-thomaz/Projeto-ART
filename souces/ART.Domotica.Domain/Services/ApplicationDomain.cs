@@ -10,6 +10,7 @@
     using ART.Domotica.Repository;
     using Autofac;
     using ART.Domotica.Repository.Repositories;
+    using System;
 
     public class ApplicationDomain : DomainBase, IApplicationDomain
     {
