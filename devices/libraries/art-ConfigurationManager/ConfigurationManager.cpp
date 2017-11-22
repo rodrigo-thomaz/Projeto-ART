@@ -2,12 +2,13 @@
 
 // BrokerSettings
 
-BrokerSettings::BrokerSettings(String host, int port, String user, String pwd, String clientId, String deviceTopic) {
+BrokerSettings::BrokerSettings(String host, int port, String user, String pwd, String clientId, String applicationTopic, String deviceTopic) {
   _host = host;
   _port = port;
   _user = user;
   _pwd = pwd;
   _clientId = clientId;
+  _applicationTopic = applicationTopic;
   _deviceTopic = deviceTopic;
 }
 
@@ -34,6 +35,11 @@ String BrokerSettings::getPwd()
 String BrokerSettings::getClientId()
 {	
 	return this->_clientId;
+}
+
+String BrokerSettings::getApplicationTopic()
+{	
+	return this->_applicationTopic;
 }
 
 String BrokerSettings::getDeviceTopic()
@@ -212,6 +218,7 @@ void ConfigurationManager::autoInitialize()
 				jsonObjectResponse["brokerUser"], 
 				jsonObjectResponse["brokerPassword"],
 				jsonObjectResponse["brokerClientId"],
+				jsonObjectResponse["brokerApplicationTopic"],
 				jsonObjectResponse["brokerDeviceTopic"]);
 			
 			this->_ntpSettings = new NTPSettings(
@@ -239,6 +246,8 @@ void ConfigurationManager::autoInitialize()
 			Serial.println(this->_brokerSettings->getPwd());
 			Serial.print("Broker ClientId: ");
 			Serial.println(this->_brokerSettings->getClientId());
+			Serial.print("Broker Application Topic: ");
+			Serial.println(this->_brokerSettings->getApplicationTopic());
 			Serial.print("Broker Device Topic: ");
 			Serial.println(this->_brokerSettings->getDeviceTopic());
 			
