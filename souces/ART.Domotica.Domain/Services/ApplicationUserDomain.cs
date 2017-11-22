@@ -10,6 +10,7 @@
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
+    using ART.Infra.CrossCutting.Utils;
 
     public class ApplicationUserDomain : DomainBase, IApplicationUserDomain
     {
@@ -36,6 +37,10 @@
         {
             entity.Application = new Application
             {
+                ApplicationBrokerSetting = new ApplicationBrokerSetting
+                {
+                    Topic = RandonHelper.RandomString(10),
+                },
                 CreateDate = DateTime.Now,
             };
 

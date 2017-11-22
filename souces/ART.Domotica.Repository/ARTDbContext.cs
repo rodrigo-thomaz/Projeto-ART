@@ -25,6 +25,11 @@
             get; set;
         }
 
+        public DbSet<ApplicationBrokerSetting> ApplicationBrokerSetting
+        {
+            get; set;
+        }
+
         public DbSet<ApplicationUser> ApplicationUser
         {
             get; set;
@@ -105,6 +110,7 @@
             modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
+            modelBuilder.Configurations.Add(new ApplicationBrokerSettingConfiguration());
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new TempSensorRangeConfiguration());

@@ -9,6 +9,8 @@
     {
         #region Properties
 
+        public ApplicationBrokerSetting ApplicationBrokerSetting { get; set; }
+
         public ICollection<ApplicationUser> ApplicationUsers
         {
             get; set;
