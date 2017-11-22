@@ -31,7 +31,12 @@
             get; set;
         }
 
-        public string BrokerTopic
+        public string BrokerApplicationTopic
+        {
+            get; set;
+        }
+
+        public string BrokerDeviceTopic
         {
             get; set;
         }

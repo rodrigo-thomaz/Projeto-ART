@@ -156,7 +156,7 @@ String MQQTManager::getTopicKey(char* routingKey)
 String MQQTManager::getRoutingKey(const char* topic)
 {
 	BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();        
-	String deviceTopic = brokerSettings->getTopic();
+	String deviceTopic = brokerSettings->getDeviceTopic();
 	
 	String routingKey = String("ART/Device/");
 	routingKey.concat(deviceTopic);

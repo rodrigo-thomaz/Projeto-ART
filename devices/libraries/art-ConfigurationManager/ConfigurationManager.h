@@ -17,7 +17,7 @@ class BrokerSettings {
 	String								getUser();
 	String								getPwd();	
 	String								getClientId();	
-	String								getTopic();	
+	String								getDeviceTopic();	
 	
   private:
     
@@ -26,7 +26,7 @@ class BrokerSettings {
 	String								_user;
 	String								_pwd;
 	String								_clientId;
-	String								_topic;
+	String								_deviceTopic;
 
     friend class ConfigurationManager;
 };
