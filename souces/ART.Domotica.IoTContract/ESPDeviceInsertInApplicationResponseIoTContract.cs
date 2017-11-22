@@ -6,12 +6,12 @@
     {
         #region Properties
 
-        public Guid DeviceInApplicationId
+        public string BrokerApplicationTopic
         {
             get; set;
         }
 
-        public string BrokerApplicationTopic
+        public Guid DeviceInApplicationId
         {
             get; set;
         }

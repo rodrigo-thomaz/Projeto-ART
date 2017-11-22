@@ -46,7 +46,7 @@
                             </form>
 
                             <tabset justified="true" class="tab-container">
-                                <tab heading="Sensor {{sensorKey + 1}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
+                                <tab heading="{{sensorItem.label}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
                                     <div ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
                                         <div style="height:240px">
                                             <nvd3 options="options" data="sensor.chart"></nvd3>
@@ -73,6 +73,12 @@
                                                 <label class="col-lg-4 control-label">Range</label>
                                                 <div class="col-lg-8">
                                                     <input type="text" class="form-control" readonly value="{{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} a {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Rótulo</label>
+                                                <div class="col-lg-8">
+                                                    <input type="text" class="form-control" ng-model="sensor.label">
                                                 </div>
                                             </div>
                                             <div class="form-group">

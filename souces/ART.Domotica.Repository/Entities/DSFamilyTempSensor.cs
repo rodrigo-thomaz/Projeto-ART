@@ -24,6 +24,11 @@
             get; set;
         }
 
+        public string Label
+        {
+            get; set;
+        }
+
         public TempSensorAlarm HighAlarm
         {
             get; set;

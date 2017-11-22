@@ -168,6 +168,7 @@
                     TemperatureScale = celsiusTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
+                    Label = "Sensor 1",
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -203,6 +204,7 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    Label = "Sensor 1",
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -238,6 +240,7 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    Label = "Sensor 2",
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -273,6 +276,7 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    Label = "Sensor 3",
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -308,6 +312,7 @@
                     TemperatureScale = fahrenheitTemperatureScale,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    Label = "Sensor 4",
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
