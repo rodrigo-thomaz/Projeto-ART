@@ -42,6 +42,11 @@ String BrokerSettings::getApplicationTopic()
 	return this->_applicationTopic;
 }
 
+void BrokerSettings::setApplicationTopic(String value)
+{	
+	this->_applicationTopic = value;
+}
+
 String BrokerSettings::getDeviceTopic()
 {	
 	return this->_deviceTopic;
@@ -273,6 +278,7 @@ void ConfigurationManager::insertInApplication(String json)
 	String brokerApplicationTopic = root["brokerApplicationTopic"];	
 	
 	this->_deviceSettings->setDeviceInApplicationId(deviceInApplicationId);
+	this->_brokerSettings->setApplicationTopic(brokerApplicationTopic);
 	
 	Serial.println("[ConfigurationManager::insertInApplication] ");
 	Serial.print("deviceInApplicationId: ");
@@ -284,6 +290,7 @@ void ConfigurationManager::insertInApplication(String json)
 void ConfigurationManager::deleteFromApplication()
 {	
 	this->_deviceSettings->setDeviceInApplicationId("");	
+	this->_brokerSettings->setApplicationTopic("");
 	
 	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
 }

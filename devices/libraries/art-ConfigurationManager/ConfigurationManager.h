@@ -17,7 +17,10 @@ class BrokerSettings {
 	String								getUser();
 	String								getPwd();	
 	String								getClientId();	
+	
 	String								getApplicationTopic();	
+	void								setApplicationTopic(String value);	
+	
 	String								getDeviceTopic();	
 	
   private:
