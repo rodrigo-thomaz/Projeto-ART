@@ -18,9 +18,7 @@ class BrokerSettings {
 	String								getPwd();	
 	String								getClientId();	
 	
-	String								getApplicationTopic();	
-	void								setApplicationTopic(String value);	
-	
+	String								getApplicationTopic();			
 	String								getDeviceTopic();	
 	
   private:
@@ -33,6 +31,8 @@ class BrokerSettings {
 	String								_applicationTopic;
 	String								_deviceTopic;
 
+	void								setApplicationTopic(String value);	
+	
     friend class ConfigurationManager;
 };
 
@@ -64,13 +64,14 @@ class DeviceSettings {
     String								getDeviceId();	
 	
 	String								getDeviceInApplicationId();	
-	void								setDeviceInApplicationId(String value);	
-	
+		
   private:
     
 	String								_deviceId;
 	String								_deviceInApplicationId;
 
+	void								setDeviceInApplicationId(String value);	
+	
     friend class ConfigurationManager;
 };
 
