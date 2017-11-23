@@ -69,6 +69,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     };
 
     var onConnected = function () {
+
         stompService.subscribe('ESPDevice.GetListInApplicationViewCompleted', onGetListInApplicationCompleted);
         stompService.subscribe('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
         stompService.subscribe('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);

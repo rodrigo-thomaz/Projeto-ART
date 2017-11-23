@@ -98,11 +98,12 @@ namespace ART.Domotica.Worker.Consumers
             var domain = _componentContext.Resolve<ITemperatureScaleDomain>();
             var data = await domain.GetAll();
 
+            var exchange = "amq.topic";
+
             //Enviando para View
             var viewModel = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllModel>>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
-            var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

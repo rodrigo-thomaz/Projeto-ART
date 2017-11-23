@@ -74,11 +74,12 @@ namespace ART.Domotica.Worker.Consumers
             var domain = _componentContext.Resolve<IApplicationDomain>();
             var data = await domain.Get(message);
 
+            var exchange = "amq.topic";
+
             //Enviando para View
             var viewModel = Mapper.Map<Application, ApplicationGetModel>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
-            var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationConstants.GetViewCompletedQueueName);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ApplicationConstants.GetViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

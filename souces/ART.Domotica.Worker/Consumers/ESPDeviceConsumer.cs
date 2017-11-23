@@ -174,11 +174,12 @@
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.GetAll();
 
+            var exchange = "amq.topic";
+
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceAdminDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
-            var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetAllViewCompletedQueueName);
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.GetAllViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
@@ -197,11 +198,12 @@
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.GetListInApplication(message);
 
+            var exchange = "amq.topic";
+
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
-            var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
@@ -221,9 +223,10 @@
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.GetByPin(message);
 
-            //Enviando para View
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.GetByPinViewCompletedQueueName);
+
+            //Enviando para View
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.GetByPinViewCompletedQueueName);
             var viewModel = Mapper.Map<ESPDevice, ESPDeviceGetByPinModel>(data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
@@ -245,9 +248,10 @@
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.InsertInApplication(message);
 
-            //Enviando para View
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
+
+            //Enviando para View
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
             var viewModel = Mapper.Map<ESPDevice, ESPDeviceDetailModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -259,7 +263,7 @@
             var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.InsertInApplicationIoTQueueName);
-            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -278,9 +282,10 @@
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.DeleteFromApplication(message);
 
-            //Enviando para View
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
+
+            //Enviando para View
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
             var viewModel = new ESPDeviceDeleteFromApplicationModel
             {
                 DeviceId = data.Id,
@@ -293,7 +298,7 @@
             var deviceMessage = new MessageIoTContract<string>(string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
-            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -368,7 +373,9 @@
             _logger.DebugEnter();
 
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.UpdatePins();            
+            var data = await domain.UpdatePins();
+
+            var exchange = "amq.topic";
 
             foreach (var item in data)
             {
@@ -379,7 +386,7 @@
                 var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
                 var routingKey = GetDeviceRoutingKeyForIoT(item.DeviceBrokerSetting.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
-                _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
+                _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
             }
 
             _logger.DebugLeave();
@@ -399,12 +406,13 @@
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.SetTimeOffsetInSecond(message.Contract.DeviceId, message.Contract.TimeOffsetInSecond);
 
+            var exchange = "amq.topic";
+
             //Enviando para View
             var viewModel = Mapper.Map<ESPDeviceSetTimeOffsetInSecondRequestContract, ESPDeviceSetTimeOffsetInSecondCompletedModel>(message.Contract);
             viewModel.DeviceId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.SetTimeOffsetInSecondViewCompletedQueueName);
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.SetTimeOffsetInSecondViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(viewModel.DeviceId);
@@ -415,7 +423,7 @@
             var deviceMessage = new MessageIoTContract<ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetTimeOffsetInSecondIoTQueueName);
-            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -434,12 +442,13 @@
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await domain.SetUpdateIntervalInMilliSecond(message.Contract.DeviceId, message.Contract.UpdateIntervalInMilliSecond);
 
+            var exchange = "amq.topic";
+
             //Enviando para View
             var viewModel = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel>(message.Contract);
             viewModel.DeviceId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(viewModel.DeviceId);
@@ -450,7 +459,7 @@
             var deviceMessage = new MessageIoTContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
-            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }

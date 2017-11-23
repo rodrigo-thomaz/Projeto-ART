@@ -178,7 +178,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     var clearOnReadReceived = null;
         
     $scope.$on('$destroy', function () {
-        if (clearOnTemperatureScaleServiceInitialized != null) clearOnTemperatureScaleServiceInitialized();
+        if (clearOnTemperatureScaleServiceInitialized !== null) clearOnTemperatureScaleServiceInitialized();
         clearOnSetScaleCompleted();
         clearOnSetResolutionCompleted();
         clearOnSetLabelCompleted();

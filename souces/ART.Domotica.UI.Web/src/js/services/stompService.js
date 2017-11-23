@@ -7,7 +7,8 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', function ($
 
     var onConnected = function (frame) {
 
-        serviceFactory.session = frame.headers.session;
+        var clientTopic = getRandomInt(100000000, 999999999);
+        serviceFactory.session = clientTopic;
 
         $rootScope.$emit('stompService_onConnected', frame);
 
@@ -27,9 +28,9 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', function ($
     var debug = function (str) {
         console.log(str);
     };
-        
+
     var subscribe = function (topic, callback) {
-        client.subscribe('/topic/' + serviceFactory.session + '-' + topic, callback);
+        client.subscribe('/topic/ART.WebUI.' + serviceFactory.session + '.' + topic, callback);
     };
 
     var getRandomInt = function (min, max) {
@@ -54,12 +55,10 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', function ($
 
     client.connect(headers, onConnected, onError);    
 
-    // serviceFactory
-
-    serviceFactory.clientTopic = getRandomInt(100000000, 999999999);
+    // serviceFactory    
 
     serviceFactory.subscribe = subscribe;
-
+    
     serviceFactory.client = client;
 
     return serviceFactory;   

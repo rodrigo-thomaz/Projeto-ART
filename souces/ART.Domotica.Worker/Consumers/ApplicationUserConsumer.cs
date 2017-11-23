@@ -75,9 +75,10 @@ namespace ART.Domotica.Worker.Consumers
             var applicationUserEntity = Mapper.Map<RegisterUserContract, ApplicationUser>(message.Contract);
             await domain.RegisterUser(applicationUserEntity);
 
-            //Enviando para View
             var exchange = "amq.topic";
-            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ApplicationUserQueueName.RegisterUserViewCompletedQueueName);
+
+            //Enviando para View            
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ApplicationUserQueueName.RegisterUserViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
 
             _logger.DebugLeave();

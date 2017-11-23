@@ -41,6 +41,12 @@
             return routingKey;
         }
 
+        protected string GetApplicationRoutingKeyForView(string viewTopic, string topic)
+        {
+            var routingKey = string.Format("ART.WebUI.{0}.{1}", viewTopic, topic);
+            return routingKey;
+        }
+
         #endregion Methods
     }
 }
