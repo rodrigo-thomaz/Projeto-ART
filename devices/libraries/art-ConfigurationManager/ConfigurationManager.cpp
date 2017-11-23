@@ -76,9 +76,19 @@ int NTPSettings::getTimeOffsetInSecond()
 	return this->_timeOffsetInSecond;
 }
 
+void NTPSettings::setTimeOffsetInSecond(int value)
+{	
+	this->_timeOffsetInSecond = value;
+}
+
 int NTPSettings::getUpdateIntervalInMilliSecond()
 {	
 	return this->_updateIntervalInMilliSecond;
+}
+
+void NTPSettings::setUpdateIntervalInMilliSecond(int value)
+{	
+	this->_updateIntervalInMilliSecond = value;
 }
 
 // DeviceSettings

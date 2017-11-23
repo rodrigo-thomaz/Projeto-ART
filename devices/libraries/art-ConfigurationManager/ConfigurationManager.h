@@ -53,6 +53,9 @@ class NTPSettings {
 	int									_timeOffsetInSecond;
 	int									_updateIntervalInMilliSecond;	
 
+	void								setTimeOffsetInSecond(int value);
+	void								setUpdateIntervalInMilliSecond(int value);	
+	
     friend class ConfigurationManager;
 };
 
