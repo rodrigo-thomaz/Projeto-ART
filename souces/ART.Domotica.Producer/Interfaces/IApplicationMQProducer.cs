@@ -4,7 +4,7 @@
 
     using ART.Infra.CrossCutting.MQ.Contract;
 
-    public interface IApplicationBrokerSettingProducer
+    public interface IApplicationMQProducer
     {
         #region Methods
 

@@ -5,11 +5,11 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.MQ.Contract;
 
-    public interface IApplicationBrokerSettingDomain
+    public interface IApplicationMQDomain
     {
         #region Methods
 
-        Task<ApplicationBrokerSetting> Get(AuthenticatedMessageContract message);
+        Task<ApplicationMQ> Get(AuthenticatedMessageContract message);
 
         #endregion Methods
     }

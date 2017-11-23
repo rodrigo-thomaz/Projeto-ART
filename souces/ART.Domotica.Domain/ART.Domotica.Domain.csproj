@@ -62,12 +62,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainModule.cs" />
-    <Compile Include="Interfaces\IApplicationBrokerSettingDomain.cs" />
+    <Compile Include="Interfaces\IApplicationMQDomain.cs" />
     <Compile Include="Interfaces\IApplicationUserDomain.cs" />
     <Compile Include="Interfaces\IApplicationDomain.cs" />
     <Compile Include="Interfaces\IESPDeviceDomain.cs" />
     <Compile Include="Interfaces\ITemperatureScaleDomain.cs" />
-    <Compile Include="Services\ApplicationBrokerSettingDomain.cs" />
+    <Compile Include="Services\ApplicationMQDomain.cs" />
     <Compile Include="Services\ESPDeviceDomain.cs" />
     <Compile Include="Services\ApplicationDomain.cs" />
     <Compile Include="Services\ApplicationUserDomain.cs" />

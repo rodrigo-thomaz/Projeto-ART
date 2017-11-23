@@ -1,10 +1,9 @@
 ﻿'use strict';
-app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicationBroker', function ($log, ngAuthSettings, $rootScope, applicationBroker) {
+app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicationMQ', function ($log, ngAuthSettings, $rootScope, applicationMQ) {
     
     var serviceFactory = {};    
     
     serviceFactory.session = null; 
-    serviceFactory.applicationBrokerSetting = {};    
     
     var onConnected = function (frame) {
         $rootScope.$emit('stompService_onConnected', frame);
@@ -31,15 +30,15 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         return Math.floor(Math.random() * (max - min)) + min;
     };
 
-    var onApplicationBrokerInitialized = function (event, data) {
-        clearOnApplicationBrokerInitialized();
+    var onApplicationMQInitialized = function (event, data) {
+        clearOnApplicationMQInitialized();
         //client.connect(headers, onConnected, onError);    
     };
 
-    var clearOnApplicationBrokerInitialized = $rootScope.$on('applicationBrokerSettingServiceInitialized', onApplicationBrokerInitialized);        
+    var clearOnApplicationMQInitialized = $rootScope.$on('applicationMQServiceInitialized', onApplicationMQInitialized);        
 
     $rootScope.$on('$destroy', function () {
-        clearOnApplicationBrokerInitialized();
+        clearOnApplicationMQInitialized();
     });
     
     // stomp

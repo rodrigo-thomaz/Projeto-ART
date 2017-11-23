@@ -5,13 +5,13 @@
 
     using global::AutoMapper;
 
-    public class ApplicationBrokerSettingProfile : Profile
+    public class ApplicationMQProfile : Profile
     {
         #region Constructors
 
-        public ApplicationBrokerSettingProfile()
+        public ApplicationMQProfile()
         {
-            CreateMap<ApplicationBrokerSetting, ApplicationBrokerSettingDetailModel>()
+            CreateMap<ApplicationMQ, ApplicationMQDetailModel>()
                 .ForMember(vm => vm.BrokerApplicationTopic, m => m.MapFrom(x => x.Topic));
         }
 

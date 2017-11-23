@@ -1,11 +1,11 @@
 ﻿'use strict';
 
-app.factory('applicationBroker', [function () {
+app.factory('applicationMQ', [function () {
 
     var serviceFactory = {};    
     
-    var init = function (applicationBroker) {
-        serviceFactory.brokerApplicationTopic = applicationBroker.brokerApplicationTopic;
+    var init = function (applicationMQ) {
+        serviceFactory.brokerApplicationTopic = applicationMQ.brokerApplicationTopic;
         serviceFactory.initialized = true;
     }
     
@@ -20,13 +20,13 @@ app.factory('applicationBroker', [function () {
 
 }]);
 
-app.factory('applicationBrokerSettingService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'applicationBroker', function ($http, $log, ngAuthSettings, $rootScope, stompService, applicationBroker) {
+app.factory('applicationMQService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'applicationMQ', function ($http, $log, ngAuthSettings, $rootScope, stompService, applicationMQ) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var serviceFactory = {};    
 
-    serviceFactory.applicationBrokerSetting = {};
+    serviceFactory.applicationMQ = {};
 
     var initialized = false;
     var initializing = false;
@@ -36,25 +36,25 @@ app.factory('applicationBrokerSettingService', ['$http', '$log', 'ngAuthSettings
             return;
         }
         else if (!initialized && !initializing) {
-            stompService.subscribe('ApplicationBrokerSetting.GetViewCompleted', onGetApplicationBrokerSettingCompleted);
-            getApplicationBrokerSetting();
+            stompService.subscribe('ApplicationMQ.GetViewCompleted', onGetApplicationMQCompleted);
+            getApplicationMQ();
             initializing = true;            
         }    
     }   
 
-    var getApplicationBrokerSetting = function () {
-        return $http.post(serviceBase + 'api/applicationBrokerSetting/get').then(function (results) {
+    var getApplicationMQ = function () {
+        return $http.post(serviceBase + 'api/applicationMQ/get').then(function (results) {
             //alert('envio bem sucedido');
         });
     };
 
-    var onGetApplicationBrokerSettingCompleted = function (payload) {        
+    var onGetApplicationMQCompleted = function (payload) {        
         var dataUTF8 = decodeURIComponent(escape(payload.body));
-        applicationBroker.init(JSON.parse(dataUTF8));
+        applicationMQ.init(JSON.parse(dataUTF8));
         clearOnConnected();
         initialized = true;
         initializing = false;
-        $rootScope.$emit('applicationBrokerSettingServiceInitialized');
+        $rootScope.$emit('applicationMQServiceInitialized');
     }
 
     $rootScope.$on('$destroy', function () {

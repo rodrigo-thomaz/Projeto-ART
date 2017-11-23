@@ -6,21 +6,21 @@
     using ART.Domotica.Producer.Interfaces;
 
     [Authorize]
-    [RoutePrefix("api/applicationBrokerSetting")]
-    public class ApplicationBrokerSettingController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/applicationMQ")]
+    public class ApplicationMQController : AuthenticatedMQApiControllerBase
     {
         #region Fields
 
-        protected readonly IApplicationBrokerSettingProducer _applicationBrokerSettingProducer;
+        protected readonly IApplicationMQProducer _applicationMQProducer;
 
         #endregion Fields
 
         #region Constructors
 
         //: base(connection)
-        public ApplicationBrokerSettingController(IApplicationBrokerSettingProducer applicationBrokerSettingProducer)
+        public ApplicationMQController(IApplicationMQProducer applicationMQProducer)
         {
-            _applicationBrokerSettingProducer = applicationBrokerSettingProducer;
+            _applicationMQProducer = applicationMQProducer;
         }
 
         #endregion Constructors
@@ -41,7 +41,7 @@
         [HttpPost]
         public async Task<IHttpActionResult> Get()
         {
-            await _applicationBrokerSettingProducer.Get(CreateMessage());
+            await _applicationMQProducer.Get(CreateMessage());
             return Ok();
         }
 

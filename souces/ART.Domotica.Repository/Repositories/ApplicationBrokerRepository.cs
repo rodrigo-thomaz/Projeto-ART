@@ -6,7 +6,7 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
 
-    public class ApplicationBrokerSettingRepository : RepositoryBase<ARTDbContext, ApplicationBrokerSetting, Guid>, IApplicationBrokerSettingRepository
+    public class ApplicationBrokerSettingRepository : RepositoryBase<ARTDbContext, ApplicationBroker, Guid>, IApplicationBrokerRepository
     {
         #region Constructors
 

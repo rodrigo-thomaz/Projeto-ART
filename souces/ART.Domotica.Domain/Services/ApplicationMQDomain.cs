@@ -11,22 +11,22 @@
     using Autofac;
     using ART.Domotica.Repository.Repositories;
 
-    public class ApplicationBrokerSettingDomain : DomainBase, IApplicationBrokerSettingDomain
+    public class ApplicationMQDomain : DomainBase, IApplicationMQDomain
     {
         #region Fields
 
-        private readonly IApplicationBrokerSettingRepository _applicationBrokerSettingRepository;
+        private readonly IApplicationMQRepository _applicationMQRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
 
         #endregion Fields
 
         #region Constructors
 
-        public ApplicationBrokerSettingDomain(IComponentContext componentContext) 
+        public ApplicationMQDomain(IComponentContext componentContext) 
         {
             var context = componentContext.Resolve<ARTDbContext>();
 
-            _applicationBrokerSettingRepository = new ApplicationBrokerSettingRepository(context);
+            _applicationMQRepository = new ApplicationMQRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
         }
 
@@ -34,10 +34,10 @@
 
         #region Methods
 
-        public async Task<ApplicationBrokerSetting> Get(AuthenticatedMessageContract message)
+        public async Task<ApplicationMQ> Get(AuthenticatedMessageContract message)
         {
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
-            return await _applicationBrokerSettingRepository.GetById(applicationUserEntity.ApplicationId);
+            return await _applicationMQRepository.GetById(applicationUserEntity.ApplicationId);
         }
 
         #endregion Methods

@@ -9,7 +9,7 @@
     {
         #region Properties
 
-        public ApplicationBrokerSetting ApplicationBrokerSetting
+        public ApplicationMQ ApplicationMQ
         {
             get; set;
         }

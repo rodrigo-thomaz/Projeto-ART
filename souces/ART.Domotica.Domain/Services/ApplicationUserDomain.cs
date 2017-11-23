@@ -37,7 +37,7 @@
         {
             entity.Application = new Application
             {
-                ApplicationBrokerSetting = new ApplicationBrokerSetting
+                ApplicationMQ = new ApplicationMQ
                 {
                     Topic = RandonHelper.RandomString(10),
                 },

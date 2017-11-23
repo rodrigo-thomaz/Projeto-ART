@@ -163,9 +163,9 @@
             return data;
         }
 
-        public async Task<ApplicationBrokerSetting> GetApplicationBrokerSetting(Guid deviceId)
+        public async Task<ApplicationMQ> GetApplicationMQ(Guid deviceId)
         {
-            var data = await _espDeviceRepository.GetApplicationBrokerSetting(deviceId);
+            var data = await _espDeviceRepository.GetApplicationMQ(deviceId);
 
             if (data == null)
             {

@@ -112,9 +112,9 @@
             return data;
         } 
 
-        public async Task<ApplicationBrokerSetting> GetApplicationBrokerSetting(Guid deviceId)
+        public async Task<ApplicationMQ> GetApplicationMQ(Guid deviceId)
         {
-            IQueryable<ApplicationBrokerSetting> query = from abs in _context.ApplicationBrokerSetting
+            IQueryable<ApplicationMQ> query = from abs in _context.ApplicationMQ
                         join dia in _context.DeviceInApplication on abs.Id equals dia.ApplicationId
                         where dia.DeviceBaseId == deviceId
                         select abs;

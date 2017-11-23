@@ -16,7 +16,7 @@
 
         Task<List<ESPDevice>> GetAll();
 
-        Task<ApplicationBrokerSetting> GetApplicationBrokerSetting(Guid deviceId);
+        Task<ApplicationMQ> GetApplicationMQ(Guid deviceId);
 
         Task<ESPDevice> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 

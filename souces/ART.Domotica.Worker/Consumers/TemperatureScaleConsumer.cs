@@ -124,7 +124,7 @@ namespace ART.Domotica.Worker.Consumers
             var data = await temperatureScaleDomain.GetAll();
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var applicationBrokerSetting = await espDeviceDomain.GetApplicationBrokerSetting(requestContract.DeviceId);
+            var applicationMQ = await espDeviceDomain.GetApplicationMQ(requestContract.DeviceId);
             var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(requestContract.DeviceId);
 
             var exchange = "amq.topic";
@@ -133,7 +133,7 @@ namespace ART.Domotica.Worker.Consumers
             var iotContract = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllForIoTResponseContract>>(data);
             var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForIoTResponseContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, TemperatureScaleConstants.GetAllForIoTCompletedQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, TemperatureScaleConstants.GetAllForIoTCompletedQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

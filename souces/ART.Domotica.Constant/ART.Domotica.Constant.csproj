@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationBrokerSettingConstants.cs" />
+    <Compile Include="ApplicationMQConstants.cs" />
     <Compile Include="SettingsConstants.cs" />
     <Compile Include="ESPDeviceConstants.cs" />
     <Compile Include="ApplicationConstants.cs" />

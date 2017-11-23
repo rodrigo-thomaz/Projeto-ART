@@ -54,7 +54,7 @@
             Mapper.Initialize(x =>
             {
                 x.AddProfile(new ApplicationProfile());
-                x.AddProfile(new ApplicationBrokerSettingProfile());
+                x.AddProfile(new ApplicationMQProfile());
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());

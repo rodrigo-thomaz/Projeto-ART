@@ -6,11 +6,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class ApplicationBrokerSettingConfiguration : EntityTypeConfiguration<ApplicationBrokerSetting>
+    public class ApplicationMQConfiguration : EntityTypeConfiguration<ApplicationMQ>
     {
         #region Constructors
 
-        public ApplicationBrokerSettingConfiguration()
+        public ApplicationMQConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);
@@ -23,7 +23,7 @@
 
             //Application
             HasRequired(x => x.Application)
-               .WithRequiredDependent(x => x.ApplicationBrokerSetting);
+               .WithRequiredDependent(x => x.ApplicationMQ);
 
             //Topic
             Property(x => x.Topic)

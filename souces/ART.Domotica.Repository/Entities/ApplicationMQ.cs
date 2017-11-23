@@ -4,7 +4,7 @@
 
     using ART.Infra.CrossCutting.Repository;
 
-    public class ApplicationBrokerSetting : IEntity<Guid>
+    public class ApplicationMQ : IEntity<Guid>
     {
         #region Properties
 

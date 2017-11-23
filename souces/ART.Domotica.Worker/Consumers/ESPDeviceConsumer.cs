@@ -258,8 +258,8 @@
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>(data);
-            var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(data.Id);
-            iotContract.BrokerApplicationTopic = applicationBrokerSetting.Topic;
+            var applicationMQ = await domain.GetApplicationMQ(data.Id);
+            iotContract.BrokerApplicationTopic = applicationMQ.Topic;
             var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.InsertInApplicationIoTQueueName);
@@ -319,8 +319,8 @@
             var applicationTopic = string.Empty;
             if (data.DevicesInApplication != null && data.DevicesInApplication.Any())
             {
-                var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(data.Id);
-                applicationTopic = applicationBrokerSetting.Topic;
+                var applicationMQ = await domain.GetApplicationMQ(data.Id);
+                applicationTopic = applicationMQ.Topic;
             }             
 
             var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
@@ -415,14 +415,14 @@
             var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.SetTimeOffsetInSecondViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-            var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(viewModel.DeviceId);
+            var applicationMQ = await domain.GetApplicationMQ(viewModel.DeviceId);
             var deviceBrokerSetting = await domain.GetDeviceBrokerSetting(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDeviceSetTimeOffsetInSecondRequestContract, ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetTimeOffsetInSecondIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetTimeOffsetInSecondIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -451,14 +451,14 @@
             var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-            var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(viewModel.DeviceId);
+            var applicationMQ = await domain.GetApplicationMQ(viewModel.DeviceId);
             var deviceBrokerSetting = await domain.GetDeviceBrokerSetting(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

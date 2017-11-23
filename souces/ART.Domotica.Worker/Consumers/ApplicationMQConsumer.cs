@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class ApplicationBrokerSettingConsumer : ConsumerBase, IApplicationBrokerSettingConsumer
+    public class ApplicationMQConsumer : ConsumerBase, IApplicationMQConsumer
     {
         #region private fields
 
@@ -29,7 +29,7 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public ApplicationBrokerSettingConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
             _getConsumer = new EventingBasicConsumer(_model);
 
@@ -46,7 +46,7 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            var queueName = ApplicationBrokerSettingConstants.GetQueueName;
+            var queueName = ApplicationMQConstants.GetQueueName;
 
             _model.QueueDeclare(
                  queue: queueName
@@ -71,15 +71,15 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var domain = _componentContext.Resolve<IApplicationBrokerSettingDomain>();
+            var domain = _componentContext.Resolve<IApplicationMQDomain>();
             var data = await domain.Get(message);
 
             var exchange = "amq.topic";
 
             //Enviando para View
-            var viewModel = Mapper.Map<ApplicationBrokerSetting, ApplicationBrokerSettingDetailModel>(data);
+            var viewModel = Mapper.Map<ApplicationMQ, ApplicationMQDetailModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
-            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ApplicationBrokerSettingConstants.GetViewCompletedQueueName);
+            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ApplicationMQConstants.GetViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
