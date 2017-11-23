@@ -17,11 +17,12 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     }
 
     var subscribe = function (topic, callback) {
-        client.subscribe('/topic/ART.WebUI.' + serviceFactory.session + '.' + topic, callback);
+        var applicationTopic = applicationMQ.topic;
+        client.subscribe('/topic/ART.Application.' + applicationTopic + '.WebUI.' + serviceFactory.session + '.' + topic, callback);
     };
 
     var unsubscribe = function (topic) {
-        client.unsubscribe('/topic/ART.WebUI.' + serviceFactory.session + '.' + topic);
+        client.unsubscribe('/topic/ART.Application.' + applicationTopic + '.WebUI.' + serviceFactory.session + '.' + topic);
     };
 
     var getRandomInt = function (min, max) {
