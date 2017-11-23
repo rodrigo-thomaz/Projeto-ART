@@ -100,7 +100,7 @@ bool NTPManager::update() {
 	
 	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
   
-	int updateInterval = ntpSettings->getUpdateInterval();
+	int updateInterval = ntpSettings->getUpdateIntervalInMilliSecond();
   
 	if ((millis() - this->_lastUpdate >= updateInterval)     		// Update after _updateInterval
 		|| this->_lastUpdate == 0) {                                // Update if there was no update yet.
@@ -126,7 +126,7 @@ unsigned long NTPManager::getEpochTime() {
 
 	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
   
-	int timeOffset = ntpSettings->getTimeOffset();
+	int timeOffset = ntpSettings->getTimeOffsetInSecond();
 	
 	return timeOffset + // User offset	
 		this->_currentEpoc + // Epoc returned by the NTP server

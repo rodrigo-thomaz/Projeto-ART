@@ -54,11 +54,11 @@ String BrokerSettings::getDeviceTopic()
 
 // NTPSettings
 
-NTPSettings::NTPSettings(String host, int port, int updateInterval, int timeOffset) {
+NTPSettings::NTPSettings(String host, int port, int timeOffsetInSecond, int updateIntervalInMilliSecond) {
   _host = host;
-  _port = port;
-  _updateInterval = updateInterval;
-  _timeOffset = timeOffset;
+  _port = port;  
+  _timeOffsetInSecond = timeOffsetInSecond;
+  _updateIntervalInMilliSecond = updateIntervalInMilliSecond;
 }
 
 String NTPSettings::getHost()
@@ -71,14 +71,14 @@ int NTPSettings::getPort()
 	return this->_port;
 }
 
-int NTPSettings::getUpdateInterval()
+int NTPSettings::getTimeOffsetInSecond()
 {	
-	return this->_updateInterval;
+	return this->_timeOffsetInSecond;
 }
 
-int NTPSettings::getTimeOffset()
+int NTPSettings::getUpdateIntervalInMilliSecond()
 {	
-	return this->_timeOffset;
+	return this->_updateIntervalInMilliSecond;
 }
 
 // DeviceSettings
@@ -208,8 +208,8 @@ void ConfigurationManager::autoInitialize()
 			this->_ntpSettings = new NTPSettings(
 				jsonObjectResponse["ntpHost"], 
 				jsonObjectResponse["ntpPort"], 
-				jsonObjectResponse["ntpUpdateInterval"], 
-				jsonObjectResponse["timeOffset"]);			
+				jsonObjectResponse["timeOffset"],
+				jsonObjectResponse["ntpUpdateInterval"]);			
 			
 			this->_deviceSettings = new DeviceSettings(
 				jsonObjectResponse["deviceId"], 
@@ -238,11 +238,11 @@ void ConfigurationManager::autoInitialize()
 			Serial.print("NTP Host: ");
 			Serial.println(this->_ntpSettings->getHost());
 			Serial.print("NTP Port: ");
-			Serial.println(this->_ntpSettings->getPort());
-			Serial.print("NTP Update Interval: ");
-			Serial.println(this->_ntpSettings->getUpdateInterval());
+			Serial.println(this->_ntpSettings->getPort());			
 			Serial.print("NTP Time Offset: ");
-			Serial.println(this->_ntpSettings->getTimeOffset());
+			Serial.println(this->_ntpSettings->getTimeOffsetInSecond());
+			Serial.print("NTP Update Interval: ");
+			Serial.println(this->_ntpSettings->getUpdateIntervalInMilliSecond());
 			
 			Serial.print("DeviceId: ");
 			Serial.println(this->_deviceSettings->getDeviceId());
