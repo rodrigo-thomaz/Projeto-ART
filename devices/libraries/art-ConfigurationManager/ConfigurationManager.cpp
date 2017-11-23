@@ -304,3 +304,46 @@ void ConfigurationManager::deleteFromApplication()
 	
 	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
 }
+
+void ConfigurationManager::setTimeOffsetInSecond(String json)
+{
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		Serial.print("[ConfigurationManager::setTimeOffsetInSecond] parse failed: ");
+		Serial.println(json);
+		return;
+	}	
+
+	int timeOffsetInSecond = root["timeOffsetInSecond"];
+	
+	this->_ntpSettings->setTimeOffsetInSecond(timeOffsetInSecond);
+	
+	Serial.println("[ConfigurationManager::setTimeOffsetInSecond] ");
+	Serial.print("timeOffsetInSecond: ");
+	Serial.println(timeOffsetInSecond);
+}
+
+void ConfigurationManager::setUpdateIntervalInMilliSecond(String json)
+{
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		Serial.print("[ConfigurationManager::setUpdateIntervalInMilliSecond] parse failed: ");
+		Serial.println(json);
+		return;
+	}	
+
+	int updateIntervalInMilliSecond = root["updateIntervalInMilliSecond"];
+	
+	this->_ntpSettings->setUpdateIntervalInMilliSecond(updateIntervalInMilliSecond);
+	
+	Serial.println("[ConfigurationManager::setUpdateIntervalInMilliSecond] ");
+	Serial.print("updateIntervalInMilliSecond: ");
+	Serial.println(updateIntervalInMilliSecond);
+}
+	

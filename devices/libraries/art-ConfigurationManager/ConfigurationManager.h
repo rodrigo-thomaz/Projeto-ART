@@ -99,6 +99,9 @@ class ConfigurationManager
 	void								insertInApplication(String json);
 	void								deleteFromApplication();		
 	
+	void								setTimeOffsetInSecond(String json);
+	void								setUpdateIntervalInMilliSecond(String json);
+	
   private:			
 			
 	DebugManager*          				_debugManager;	
