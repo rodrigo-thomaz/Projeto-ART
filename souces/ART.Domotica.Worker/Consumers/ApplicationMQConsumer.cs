@@ -1,6 +1,6 @@
 ﻿using ART.Domotica.Constant;
+using ART.Domotica.Contract;
 using ART.Domotica.Domain.Interfaces;
-using ART.Domotica.Model;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Worker.IConsumers;
 using ART.Infra.CrossCutting.Logging;
@@ -19,7 +19,7 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _getConsumer;
+        private readonly EventingBasicConsumer _getRPCConsumer;
 
         private readonly IComponentContext _componentContext;
 
@@ -31,7 +31,7 @@ namespace ART.Domotica.Worker.Consumers
 
         public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
-            _getConsumer = new EventingBasicConsumer(_model);
+            _getRPCConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -46,41 +46,52 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            var queueName = ApplicationMQConstants.GetQueueName;
+            var queueName = ApplicationMQConstants.GetRPCQueueName;
 
             _model.QueueDeclare(
                  queue: queueName
                , durable: false
                , exclusive: false
-               , autoDelete: true
+               , autoDelete: false
                , arguments: null);
 
-            _getConsumer.Received += GetReceived;
+            _getRPCConsumer.Received += GetRPCReceived;
 
-            _model.BasicConsume(queueName, false, _getConsumer);
+            _model.BasicConsume(queueName, false, _getRPCConsumer);
         }
 
-        private void GetReceived(object sender, BasicDeliverEventArgs e)
+        private void GetRPCReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetReceivedAsync(sender, e));
+            Task.WaitAll(GetRPCReceivedAsync(sender, e));
         }
 
-        private async Task GetReceivedAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetRPCReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<IApplicationMQDomain>();
-            var data = await domain.Get(message);
-
-            var exchange = "amq.topic";
-
+            var data = await domain.Get(requestContract);
+            
             //Enviando para View
-            var viewModel = Mapper.Map<ApplicationMQ, ApplicationMQDetailModel>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
-            var rountingKey = GetApplicationRoutingKeyForView(message.SouceMQSession, ApplicationMQConstants.GetViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            var responseContract = Mapper.Map<ApplicationMQ, ApplicationMQGetRPCResponseContract>(data);
+            var responseBuffer = SerializationHelpers.SerializeToJsonBufferAsync(responseContract);
+
+            _model.BasicQos(0, 1, false);
+
+            var props = e.BasicProperties;
+
+            var replyProps = _model.CreateBasicProperties();
+
+            replyProps.CorrelationId = props.CorrelationId;
+
+            _model.BasicPublish(
+                exchange: "",
+                routingKey: props.ReplyTo,
+                basicProperties: replyProps,
+                body: responseBuffer);
+
+            _model.BasicAck(e.DeliveryTag, false);
 
             _logger.DebugLeave();
         }        

@@ -4,6 +4,8 @@
     using ART.Infra.CrossCutting.MQ.WebApi;
     using System.Threading.Tasks;
     using ART.Domotica.Producer.Interfaces;
+    using System.Web.Http.Description;
+    using ART.Domotica.Contract;
 
     [Authorize]
     [RoutePrefix("api/applicationMQ")]
@@ -39,10 +41,11 @@
         /// <response code="500">Internal Server Error</response>
         [Route("get")]
         [HttpPost]
+        [ResponseType(typeof(ApplicationMQGetRPCResponseContract))]
         public async Task<IHttpActionResult> Get()
         {
-            await _applicationMQProducer.Get(CreateMessage());
-            return Ok();
+            var result = await _applicationMQProducer.GetRPC(CreateMessage());
+            return Ok(result);
         }
 
         #endregion

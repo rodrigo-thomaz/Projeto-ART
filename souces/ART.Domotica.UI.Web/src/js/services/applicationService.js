@@ -33,7 +33,7 @@ app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', '$rootScop
     var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected);        
 
     // stompService
-    if (stompService.client.connected)
+    if (stompService.client && stompService.client.connected)
         onConnected();
 
     // serviceFactory

@@ -31,41 +31,43 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     };
 
     var onApplicationMQInitialized = function (event, data) {
-        clearOnApplicationMQInitialized();
-        //client.connect(headers, onConnected, onError);    
-    };
 
-    var clearOnApplicationMQInitialized = $rootScope.$on('applicationMQServiceInitialized', onApplicationMQInitialized);        
+        clearOnApplicationMQInitialized();
+
+        // stomp        
+
+        var headers = {
+            login: 'test',
+            passcode: 'test',
+        };
+
+        client = Stomp.client(url);
+
+        serviceFactory.client = client;
+
+        var clientTopic = getRandomInt(100000000, 999999999);
+        serviceFactory.session = clientTopic;
+
+        var wsBrokerHostName = ngAuthSettings.wsBrokerHostName;
+        var wsBrokerPort = ngAuthSettings.wsBrokerPort;        
+
+        client.connect(headers, onConnected, onError);    
+    };    
 
     $rootScope.$on('$destroy', function () {
-        clearOnApplicationMQInitialized();
+        clearOnApplicationMQInitialized();        
     });
-    
-    // stomp
-
-    var wsBrokerHostName = ngAuthSettings.wsBrokerHostName;
-    var wsBrokerPort = ngAuthSettings.wsBrokerPort;
 
     var url = 'ws://' + wsBrokerHostName + ':' + wsBrokerPort + '/ws';
 
     var client = Stomp.client(url);
 
-    var headers = {
-        login: 'test',
-        passcode: 'test',        
-    };
-
-    client.connect(headers, onConnected, onError);    
-
+    var clearOnApplicationMQInitialized = $rootScope.$on('applicationMQServiceInitialized', onApplicationMQInitialized);        
+    
     // serviceFactory    
 
     serviceFactory.subscribe = subscribe;
-    serviceFactory.unsubscribe = unsubscribe;
-    
-    serviceFactory.client = client;
-
-    var clientTopic = getRandomInt(100000000, 999999999);
-    serviceFactory.session = clientTopic;
+    serviceFactory.unsubscribe = unsubscribe;    
 
     return serviceFactory;   
 

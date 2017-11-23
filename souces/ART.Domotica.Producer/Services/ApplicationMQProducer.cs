@@ -5,15 +5,25 @@ using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
 using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.Utils;
+using ART.Domotica.Contract;
+using RabbitMQ.Client.MessagePatterns;
+using ART.Infra.CrossCutting.MQ;
+using System;
 
 namespace ART.Domotica.Producer.Services
 {
     public class ApplicationMQProducer : ProducerBase, IApplicationMQProducer
     {
+        #region Fields
+
+        private readonly IMQSettings _mqSettings;
+
+        #endregion Fields
         #region constructors
 
-        public ApplicationMQProducer(IConnection connection) : base(connection)
+        public ApplicationMQProducer(IConnection connection, IMQSettings mqSettings) : base(connection)
         {
+            _mqSettings = mqSettings;
             Initialize();
         }
 
@@ -21,13 +31,28 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids
 
-        public async Task Get(AuthenticatedMessageContract message)
+        public async Task<ApplicationMQGetRPCResponseContract> GetRPC(AuthenticatedMessageContract message)
         {
-            await Task.Run(() => 
+            return await Task.Run(() =>
             {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ApplicationMQConstants.GetQueueName, null, payload);
-            });            
+                var rpcClient = new SimpleRpcClient(_model, ApplicationMQConstants.GetRPCQueueName);
+                rpcClient.TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds;
+                var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                rpcClient.TimedOut += (sender, e) =>
+                {
+                    throw new TimeoutException("Worker time out");
+                };
+                rpcClient.Disconnected += (sender, e) =>
+                {
+                    rpcClient.Close();
+                    throw new Exception("Worker disconected");
+                };
+
+                var bufferResult = rpcClient.Call(body);
+                rpcClient.Close();
+                var result = SerializationHelpers.DeserializeJsonBufferToType<ApplicationMQGetRPCResponseContract>(bufferResult);
+                return result;
+            });     
         }
 
         #endregion
@@ -36,12 +61,7 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: ApplicationMQConstants.GetQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: null);
+
         }
 
         #endregion

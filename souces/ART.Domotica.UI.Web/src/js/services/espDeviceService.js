@@ -7,6 +7,8 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
     var serviceFactory = {};    
 
+    serviceFactory.devices = [];  
+
     var getListInApplication = function () {
         return $http.post(serviceBase + 'api/espDevice/getListInApplication').then(function (results) {
             //alert('envio bem sucedido');
@@ -213,7 +215,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
 
     // stompService
-    if (stompService.client.connected)
+    if (stompService.client && stompService.client.connected)
         onConnected();
 
     // serviceFactory
@@ -225,8 +227,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
     serviceFactory.setTimeOffsetInSecond = setTimeOffsetInSecond;
     serviceFactory.setUpdateIntervalInMilliSecond = setUpdateIntervalInMilliSecond;
-
-    serviceFactory.devices = [];  
+       
 
     return serviceFactory;
 

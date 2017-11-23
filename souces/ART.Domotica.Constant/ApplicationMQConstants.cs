@@ -4,8 +4,7 @@
     {
         #region Fields
 
-        public static readonly string GetQueueName = "ApplicationMQ.Get";
-        public static readonly string GetViewCompletedQueueName = "ApplicationMQ.GetViewCompleted";
+        public static readonly string GetRPCQueueName = "ApplicationMQ.GetRPC";
 
         #endregion Fields
     }

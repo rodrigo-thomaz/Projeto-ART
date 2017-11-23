@@ -40,7 +40,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationMQDetailModel.cs" />
     <Compile Include="DeviceNTPSettingDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorDetailModel.cs" />
     <Compile Include="ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel.cs" />

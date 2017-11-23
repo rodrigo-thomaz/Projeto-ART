@@ -2,13 +2,14 @@
 {
     using System.Threading.Tasks;
 
+    using ART.Domotica.Contract;
     using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IApplicationMQProducer
     {
         #region Methods
 
-        Task Get(AuthenticatedMessageContract message);
+        Task<ApplicationMQGetRPCResponseContract> GetRPC(AuthenticatedMessageContract message);
 
         #endregion Methods
     }
