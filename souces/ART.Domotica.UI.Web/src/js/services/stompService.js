@@ -1,19 +1,13 @@
 ﻿'use strict';
-app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', function ($log, ngAuthSettings, $rootScope) {
+app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicationBroker', function ($log, ngAuthSettings, $rootScope, applicationBroker) {
     
     var serviceFactory = {};    
     
-    serviceFactory.session = null;    
-
+    serviceFactory.session = null; 
+    serviceFactory.applicationBrokerSetting = {};    
+    
     var onConnected = function (frame) {
-
-        var clientTopic = getRandomInt(100000000, 999999999);
-        serviceFactory.session = clientTopic;
-
         $rootScope.$emit('stompService_onConnected', frame);
-
-        debug('connected in broker');
-        debug('session: ' + frame.headers.session);        
     }
 
     var onError = function (frame) {
@@ -21,16 +15,14 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', function ($
         serviceFactory.session = null;
 
         $rootScope.$emit('stompService_onError', frame);
-
-        debug('Error connecting in broker');
     }
-
-    var debug = function (str) {
-        console.log(str);
-    };
 
     var subscribe = function (topic, callback) {
         client.subscribe('/topic/ART.WebUI.' + serviceFactory.session + '.' + topic, callback);
+    };
+
+    var unsubscribe = function (topic) {
+        client.unsubscribe('/topic/ART.WebUI.' + serviceFactory.session + '.' + topic);
     };
 
     var getRandomInt = function (min, max) {
@@ -39,6 +31,17 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', function ($
         return Math.floor(Math.random() * (max - min)) + min;
     };
 
+    var onApplicationBrokerInitialized = function (event, data) {
+        clearOnApplicationBrokerInitialized();
+        //client.connect(headers, onConnected, onError);    
+    };
+
+    var clearOnApplicationBrokerInitialized = $rootScope.$on('applicationBrokerSettingServiceInitialized', onApplicationBrokerInitialized);        
+
+    $rootScope.$on('$destroy', function () {
+        clearOnApplicationBrokerInitialized();
+    });
+    
     // stomp
 
     var wsBrokerHostName = ngAuthSettings.wsBrokerHostName;
@@ -58,8 +61,12 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', function ($
     // serviceFactory    
 
     serviceFactory.subscribe = subscribe;
+    serviceFactory.unsubscribe = unsubscribe;
     
     serviceFactory.client = client;
+
+    var clientTopic = getRandomInt(100000000, 999999999);
+    serviceFactory.session = clientTopic;
 
     return serviceFactory;   
 

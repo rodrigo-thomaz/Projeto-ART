@@ -99,6 +99,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapper\ApplicationBrokerSettingProfile.cs" />
     <Compile Include="AutoMapper\ApplicationProfile.cs" />
     <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\DeviceNTPSettingProfile.cs" />
@@ -106,6 +107,8 @@
     <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="AutoMapper\TempSensorRangeProfile.cs" />
+    <Compile Include="Consumers\ApplicationBrokerSettingConsumer.cs" />
+    <Compile Include="IConsumers\IApplicationBrokerSettingConsumer.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
     <Compile Include="IConsumers\IDSFamilyTempSensorConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />

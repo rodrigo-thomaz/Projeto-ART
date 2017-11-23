@@ -17,7 +17,6 @@
 
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
-        private readonly IApplicationBrokerSettingRepository _applicationBrokerSettingRepository;
 
         #endregion Fields
 
@@ -29,7 +28,6 @@
 
             _applicationRepository = new ApplicationRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
-            _applicationBrokerSettingRepository = new ApplicationBrokerSettingRepository(context);
         }
 
         #endregion Constructors
@@ -39,10 +37,7 @@
         public async Task<Application> Get(AuthenticatedMessageContract message)
         {
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
-            var result = await _applicationRepository.GetById(applicationUserEntity.ApplicationId);
-            //Load Broker Settings
-            await _applicationBrokerSettingRepository.GetById(applicationUserEntity.ApplicationId);
-            return result;
+            return await _applicationRepository.GetById(applicationUserEntity.ApplicationId);
         }
 
         #endregion Methods

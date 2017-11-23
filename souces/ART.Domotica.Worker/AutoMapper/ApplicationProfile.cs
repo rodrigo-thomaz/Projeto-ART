@@ -11,9 +11,8 @@
 
         public ApplicationProfile()
         {
-            CreateMap<Application, ApplicationGetModel>()
-                .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.BrokerApplicationTopic, m => m.MapFrom(x => x.ApplicationBrokerSetting.Topic));
+            CreateMap<Application, ApplicationDetailModel>()
+                .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.Id));
         }
 
         #endregion Constructors

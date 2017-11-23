@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationBrokerSettingDetailModel.cs" />
     <Compile Include="DeviceNTPSettingDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorDetailModel.cs" />
     <Compile Include="ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel.cs" />
@@ -57,7 +58,7 @@
     <Compile Include="DSFamilyTempSensorSetAlarmBuzzerOnCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionCompletedModel.cs" />
     <Compile Include="TemperatureScaleGetAllModel.cs" />
-    <Compile Include="ApplicationGetModel.cs" />
+    <Compile Include="ApplicationDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempSensorAlarmGetDetailModel.cs" />
     <Compile Include="TempSensorAlarmPositionModel.cs" />

@@ -12,6 +12,7 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<ApplicationConsumer>().As<IApplicationConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<ApplicationBrokerSettingConsumer>().As<IApplicationBrokerSettingConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ApplicationUserConsumer>().As<IApplicationUserConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DSFamilyTempSensorConsumer>().As<IDSFamilyTempSensorConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ESPDeviceConsumer>().As<IESPDeviceConsumer>().SingleInstance().AutoActivate();

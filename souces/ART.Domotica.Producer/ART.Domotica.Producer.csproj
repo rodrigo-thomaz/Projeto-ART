@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IApplicationBrokerSettingProducer.cs" />
     <Compile Include="Interfaces\IESPDeviceProducer.cs" />
     <Compile Include="Interfaces\IApplicationProducer.cs" />
     <Compile Include="Interfaces\IApplicationUserProducer.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Interfaces\ITemperatureScaleProducer.cs" />
     <Compile Include="ProducerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ApplicationBrokerSettingProducer.cs" />
     <Compile Include="Services\ESPDeviceProducer.cs" />
     <Compile Include="Services\ApplicationProducer.cs" />
     <Compile Include="Services\ApplicationUserProducer.cs" />
