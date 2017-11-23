@@ -35,15 +35,15 @@
             return routingKey;
         }
 
-        protected string GetDeviceRoutingKeyForIoT(string deviceTopic, string topic)
-        {
-            var routingKey = string.Format("ART.Device.{0}.{1}", deviceTopic, topic);
-            return routingKey;
-        }
-
         protected string GetApplicationRoutingKeyForView(string viewTopic, string topic)
         {
             var routingKey = string.Format("ART.WebUI.{0}.{1}", viewTopic, topic);
+            return routingKey;
+        }
+
+        protected string GetDeviceRoutingKeyForIoT(string deviceTopic, string topic)
+        {
+            var routingKey = string.Format("ART.Device.{0}.{1}", deviceTopic, topic);
             return routingKey;
         }
 

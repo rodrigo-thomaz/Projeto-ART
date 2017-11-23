@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
+
     using global::AutoMapper;
 
     public class DeviceNTPSettingProfile : Profile

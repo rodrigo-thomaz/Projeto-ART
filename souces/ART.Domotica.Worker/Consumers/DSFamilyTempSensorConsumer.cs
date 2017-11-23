@@ -2,7 +2,6 @@
 using ART.Domotica.Contract;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
-using System;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
@@ -182,12 +181,14 @@ namespace ART.Domotica.Worker.Consumers
             var applicationBrokerSetting = await espDeviceDomain.GetApplicationBrokerSetting(requestContract.DeviceId);
             var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(requestContract.DeviceId);
 
+            var exchange = "amq.topic";
+
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
             var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
             var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
-            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -461,17 +462,6 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
-        }
-
-        private string GetQueueName(Guid deviceId)
-        {
-            _logger.DebugEnter();
-
-            var queueName = string.Format("mqtt-subscription-{0}qos0", deviceId);
-
-            _logger.DebugLeave();
-
-            return queueName;
         }
 
         #endregion

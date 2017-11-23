@@ -127,12 +127,14 @@ namespace ART.Domotica.Worker.Consumers
             var applicationBrokerSetting = await espDeviceDomain.GetApplicationBrokerSetting(requestContract.DeviceId);
             var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(requestContract.DeviceId);
 
+            var exchange = "amq.topic";
+
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllForIoTResponseContract>>(data);
             var deviceMessage = new MessageIoTContract<List<TemperatureScaleGetAllForIoTResponseContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
             var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, TemperatureScaleConstants.GetAllForIoTCompletedQueueName);
-            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
