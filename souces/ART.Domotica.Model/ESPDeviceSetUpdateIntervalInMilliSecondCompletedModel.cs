@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetLabelCompletedModel
+    public class ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel
     {
         #region Properties
 
@@ -11,12 +11,7 @@
             get; set;
         }
 
-        public Guid DSFamilyTempSensorId
-        {
-            get; set;
-        }
-
-        public string Label
+        public int UpdateIntervalInMilliSecond
         {
             get; set;
         }

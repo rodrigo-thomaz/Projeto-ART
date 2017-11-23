@@ -40,7 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DSFamilyTempSensorGetDetailModel.cs" />
+    <Compile Include="DeviceNTPSettingDetailModel.cs" />
+    <Compile Include="DSFamilyTempSensorDetailModel.cs" />
+    <Compile Include="ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel.cs" />
+    <Compile Include="ESPDeviceSetTimeOffsetInSecondCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetLabelCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnCompletedModel.cs" />

@@ -59,7 +59,7 @@
 
             CreateMap<TempSensorAlarm, TempSensorAlarmGetDetailModel>();
 
-            CreateMap<SensorsInDevice, DSFamilyTempSensorGetDetailModel>()
+            CreateMap<SensorsInDevice, DSFamilyTempSensorDetailModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.SensorBaseId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).DSFamilyTempSensorResolutionId))
                 .ForMember(vm => vm.TempSensorRange, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).TempSensorRange))

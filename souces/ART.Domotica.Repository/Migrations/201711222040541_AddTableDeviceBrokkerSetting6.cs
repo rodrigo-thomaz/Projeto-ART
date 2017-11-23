@@ -1,10 +1,18 @@
 namespace ART.Domotica.Repository.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class AddTableDeviceBrokkerSetting6 : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.DeviceNTPSetting", "Id", "dbo.DeviceBase");
+            DropIndex("dbo.DeviceNTPSetting", new[] { "Id" });
+            DropTable("dbo.DeviceNTPSetting");
+        }
+
         public override void Up()
         {
             CreateTable(
@@ -18,14 +26,8 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DeviceBase", t => t.Id)
                 .Index(t => t.Id);
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.DeviceNTPSetting", "Id", "dbo.DeviceBase");
-            DropIndex("dbo.DeviceNTPSetting", new[] { "Id" });
-            DropTable("dbo.DeviceNTPSetting");
-        }
+
+        #endregion Methods
     }
 }

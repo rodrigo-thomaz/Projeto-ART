@@ -28,7 +28,7 @@
         public DbSet<ApplicationBrokerSetting> ApplicationBrokerSetting
         {
             get; set;
-        }        
+        }
 
         public DbSet<ApplicationUser> ApplicationUser
         {
@@ -40,12 +40,12 @@
             get; set;
         }
 
-        public DbSet<DeviceNTPSetting> DeviceNTPSetting
+        public DbSet<DeviceInApplication> DeviceInApplication
         {
             get; set;
         }
 
-        public DbSet<DeviceInApplication> DeviceInApplication
+        public DbSet<DeviceNTPSetting> DeviceNTPSetting
         {
             get; set;
         }

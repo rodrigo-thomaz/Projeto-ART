@@ -27,6 +27,11 @@
             get; set;
         }
 
+        public DeviceNTPSettingDetailModel DeviceNTPSetting
+        {
+            get; set;
+        }
+
         public int FlashChipId
         {
             get; set;
@@ -37,7 +42,7 @@
             get; set;
         }
 
-        public List<DSFamilyTempSensorGetDetailModel> Sensors
+        public List<DSFamilyTempSensorDetailModel> Sensors
         {
             get; set;
         }

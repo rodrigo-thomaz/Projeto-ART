@@ -91,6 +91,7 @@
         {
             var data = await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)
+                .Include(x => x.DeviceNTPSetting)
                 .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();
@@ -109,16 +110,7 @@
                 .LoadAsync();
 
             return data;
-        }
-
-        public async Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId)
-        {
-            return await _context.ESPDevice
-                .Include(x => x.DeviceBrokerSetting)
-                .Where(x => x.Id == deviceId)
-                .Select(x => x.DeviceBrokerSetting)
-                .FirstOrDefaultAsync();
-        }
+        } 
 
         public async Task<ApplicationBrokerSetting> GetApplicationBrokerSetting(Guid deviceId)
         {

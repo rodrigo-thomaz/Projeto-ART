@@ -98,7 +98,9 @@
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\TempSensorAlarm.cs" />
     <Compile Include="Entities\TempSensorRange.cs" />
+    <Compile Include="Interfaces\IDeviceBrokerSettingRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
+    <Compile Include="Interfaces\IDeviceNTPSettingRepository.cs" />
     <Compile Include="Interfaces\IESPDeviceRepository.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationUserRepository.cs" />
@@ -154,6 +156,8 @@
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
+    <Compile Include="Repositories\DeviceBrokerSettingRepository.cs" />
+    <Compile Include="Repositories\DeviceNTPSettingRepository.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />
     <Compile Include="Repositories\DeviceInApplicationRepository.cs" />

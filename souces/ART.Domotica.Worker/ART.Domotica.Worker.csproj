@@ -101,6 +101,7 @@
   <ItemGroup>
     <Compile Include="AutoMapper\ApplicationProfile.cs" />
     <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
+    <Compile Include="AutoMapper\DeviceNTPSettingProfile.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />

@@ -5,21 +5,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
     var initialized = false;
 
-    var serviceFactory = {};
-
-    var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetListInApplicationViewCompleted', onGetListInApplicationCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);        
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);        
-
-        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
-
-        if (!initialized) {
-            initialized = true;
-            getListInApplication();
-        }
-    }
+    var serviceFactory = {};    
 
     var getListInApplication = function () {
         return $http.post(serviceBase + 'api/espDevice/getListInApplication').then(function (results) {
@@ -61,6 +47,42 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             }
         }
     }; 
+
+    var setTimeOffsetInSecond = function (deviceId, timeOffsetInSecond) {
+        var data = {
+            deviceId: deviceId,
+            timeOffsetInSecond: timeOffsetInSecond,
+        }
+        return $http.post(serviceBase + 'api/espDevice/setTimeOffsetInSecond', data).then(function (results) {
+            return results;
+        });
+    };
+
+    var setUpdateIntervalInMilliSecond = function (deviceId, updateIntervalInMilliSecond) {
+        var data = {
+            deviceId: deviceId,
+            updateIntervalInMilliSecond: updateIntervalInMilliSecond,
+        }
+        return $http.post(serviceBase + 'api/espDevice/setUpdateIntervalInMilliSecond', data).then(function (results) {
+            return results;
+        });
+    };
+
+    var onConnected = function () {
+        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetListInApplicationViewCompleted', onGetListInApplicationCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.SetTimeOffsetInSecondViewCompleted', onSetTimeOffsetInSecondCompleted);
+        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
+
+        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
+
+        if (!initialized) {
+            initialized = true;
+            getListInApplication();
+        }
+    }
 
     var onReadReceived = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
@@ -157,6 +179,20 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         }       
     }
 
+    var onSetTimeOffsetInSecondCompleted = function (payload) {
+        var result = JSON.parse(payload.body);
+        var device = getDeviceById(result.deviceId);
+        device.timeOffsetInSecond = result.timeOffsetInSecond;
+        $rootScope.$emit('espDeviceService_onSetTimeOffsetInSecondCompleted_Id_' + result.deviceId, result);
+    };
+
+    var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
+        var result = JSON.parse(payload.body);
+        var device = getDeviceById(result.deviceId);
+        device.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
+        $rootScope.$emit('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + result.deviceId, result);
+    }
+
     var insertDeviceInCollection = function (device) {
         device.createDate = new Date(device.createDate * 1000).toLocaleString();
         serviceFactory.devices.push(device);
@@ -185,6 +221,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     serviceFactory.getDeviceById = getDeviceById;
     serviceFactory.insertInApplication = insertInApplication;    
     serviceFactory.deleteFromApplication = deleteFromApplication;
+
+    serviceFactory.setTimeOffsetInSecond = setTimeOffsetInSecond;
+    serviceFactory.setUpdateIntervalInMilliSecond = setUpdateIntervalInMilliSecond;
 
     serviceFactory.devices = [];  
 

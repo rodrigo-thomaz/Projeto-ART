@@ -59,6 +59,7 @@
                 x.AddProfile(new ESPDeviceProfile());
                 x.AddProfile(new TemperatureScaleProfile());
                 x.AddProfile(new TempSensorRangeProfile());
+                x.AddProfile(new DeviceNTPSettingProfile());
             });
 
             IContainer container = builder.Build();

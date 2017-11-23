@@ -20,15 +20,15 @@
         public static readonly string SetChartLimiterCelsiusIoTQueueName = "DSFamilyTempSensor.SetChartLimiterCelsiusIoT";
         public static readonly string SetChartLimiterCelsiusQueueName = "DSFamilyTempSensor.SetChartLimiterCelsius";
         public static readonly string SetChartLimiterCelsiusViewCompletedQueueName = "DSFamilyTempSensor.SetChartLimiterCelsiusViewCompleted";
+        public static readonly string SetLabelIoTQueueName = "DSFamilyTempSensor.SetLabelIoT";
+        public static readonly string SetLabelQueueName = "DSFamilyTempSensor.SetLabel";
+        public static readonly string SetLabelViewCompletedQueueName = "DSFamilyTempSensor.SetLabelViewCompleted";
         public static readonly string SetResolutionIoTQueueName = "DSFamilyTempSensor.SetResolutionIoT";
         public static readonly string SetResolutionQueueName = "DSFamilyTempSensor.SetResolution";
         public static readonly string SetResolutionViewCompletedQueueName = "DSFamilyTempSensor.SetResolutionViewCompleted";
         public static readonly string SetScaleIoTQueueName = "DSFamilyTempSensor.SetScaleIoT";
         public static readonly string SetScaleQueueName = "DSFamilyTempSensor.SetScale";
         public static readonly string SetScaleViewCompletedQueueName = "DSFamilyTempSensor.SetScaleViewCompleted";
-        public static readonly string SetLabelIoTQueueName = "DSFamilyTempSensor.SetLabelIoT";
-        public static readonly string SetLabelQueueName = "DSFamilyTempSensor.SetLabel";
-        public static readonly string SetLabelViewCompletedQueueName = "DSFamilyTempSensor.SetLabelViewCompleted";
 
         #endregion Fields
     }

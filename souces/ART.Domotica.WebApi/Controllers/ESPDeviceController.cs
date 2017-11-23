@@ -139,6 +139,42 @@
             return Ok();
         }
 
+        /// <summary>
+        /// Altera o TimeOffsetInSecond de um device
+        /// </summary>
+        /// <remarks>
+        /// Altera o TimeOffsetInSecond de um device
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setTimeOffsetInSecond")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetTimeOffsetInSecond(ESPDeviceSetTimeOffsetInSecondRequestContract contract)
+        {
+            await _espDeviceProducer.SetTimeOffsetInSecond(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
+        /// Altera o UpdateIntervalInMilliSecond de um device
+        /// </summary>
+        /// <remarks>
+        /// Altera o UpdateIntervalInMilliSecond de um device
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setUpdateIntervalInMilliSecond")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetUpdateIntervalInMilliSecond(ESPDeviceSetUpdateIntervalInMilliSecondRequestContract contract)
+        {
+            await _espDeviceProducer.SetUpdateIntervalInMilliSecond(CreateMessage(contract));
+            return Ok();
+        }
+
         #endregion
     }
 }

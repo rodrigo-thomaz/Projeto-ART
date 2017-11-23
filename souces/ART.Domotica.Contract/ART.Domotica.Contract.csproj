@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ESPDeviceSetTimeOffsetInSecondRequestContract.cs" />
+    <Compile Include="ESPDeviceSetUpdateIntervalInMilliSecondRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLabelRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetChartLimiterCelsiusRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnRequestContract.cs" />

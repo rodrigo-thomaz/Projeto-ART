@@ -1,17 +1,17 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Model
 {
     using System;
 
-    public class DSFamilyTempSensorSetLabelRequestContract
+    public class ESPDeviceSetTimeOffsetInSecondCompletedModel
     {
         #region Properties
 
-        public Guid DSFamilyTempSensorId
+        public Guid DeviceId
         {
             get; set;
         }
 
-        public string Label
+        public int TimeOffsetInSecond
         {
             get; set;
         }

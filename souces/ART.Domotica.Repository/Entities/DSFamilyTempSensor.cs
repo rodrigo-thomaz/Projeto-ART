@@ -24,17 +24,17 @@
             get; set;
         }
 
-        public string Label
-        {
-            get; set;
-        }
-
         public TempSensorAlarm HighAlarm
         {
             get; set;
         }
 
         public decimal HighChartLimiterCelsius
+        {
+            get; set;
+        }
+
+        public string Label
         {
             get; set;
         }

@@ -17,8 +17,6 @@
 
         Task<ESPDevice> GetByPin(string pin);
 
-        Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId);
-
         Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 
         Task<List<string>> GetExistingPins();

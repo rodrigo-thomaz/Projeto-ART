@@ -21,6 +21,10 @@
 
         Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
+        Task SetTimeOffsetInSecond(AuthenticatedMessageContract<ESPDeviceSetTimeOffsetInSecondRequestContract> message);
+
+        Task SetUpdateIntervalInMilliSecond(AuthenticatedMessageContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract> message);
+
         #endregion Methods
     }
 }

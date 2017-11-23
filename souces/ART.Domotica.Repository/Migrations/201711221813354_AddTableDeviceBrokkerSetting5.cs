@@ -4,14 +4,18 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class AddTableDeviceBrokkerSetting5 : DbMigration
     {
-        public override void Up()
-        {
-            AddColumn("dbo.DSFamilyTempSensor", "Label", c => c.String(nullable: false, maxLength: 50));
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropColumn("dbo.DSFamilyTempSensor", "Label");
         }
+
+        public override void Up()
+        {
+            AddColumn("dbo.DSFamilyTempSensor", "Label", c => c.String(nullable: false, maxLength: 50));
+        }
+
+        #endregion Methods
     }
 }

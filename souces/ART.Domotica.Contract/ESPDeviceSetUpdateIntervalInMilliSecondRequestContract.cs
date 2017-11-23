@@ -2,16 +2,16 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetLabelRequestContract
+    public class ESPDeviceSetUpdateIntervalInMilliSecondRequestContract
     {
         #region Properties
 
-        public Guid DSFamilyTempSensorId
+        public Guid DeviceId
         {
             get; set;
         }
 
-        public string Label
+        public int UpdateIntervalInMilliSecond
         {
             get; set;
         }

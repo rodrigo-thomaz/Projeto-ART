@@ -5,13 +5,52 @@ app.controller('espDeviceListController', ['$scope', '$timeout', '$log', 'espDev
 
 }]);
 
-app.controller('espDeviceItemController', ['$scope', '$timeout', '$log', 'espDeviceService', function ($scope, $timeout, $log, espDeviceService) {
+app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService) {
 
     $scope.device = {};
 
+    var initialized = false;
+
     $scope.init = function (device) {
-        $scope.device = device;        
+
+        $scope.device = device; 
+
+        $scope.deviceNTPSettingView = {
+            timeOffsetInSecond: device.deviceNTPSetting.timeOffsetInSecond,
+            updateIntervalInMilliSecond: device.deviceNTPSetting.updateIntervalInMilliSecond,
+        };
+
+        clearOnSetTimeOffsetInSecondCompleted = $rootScope.$on('espDeviceService_onSetTimeOffsetInSecondCompleted_Id_' + $scope.device.deviceId, onSetTimeOffsetInSecondCompleted);        
+        clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.device.deviceId, onSetUpdateIntervalInMilliSecondCompleted);        
+
+        initialized = true;
     }
+
+    var clearOnSetTimeOffsetInSecondCompleted = null;
+    var clearOnSetUpdateIntervalInMilliSecondCompleted = null;
+
+    $scope.$on('$destroy', function () {
+        clearOnSetTimeOffsetInSecondCompleted();
+        clearOnSetUpdateIntervalInMilliSecondCompleted();
+    });
+
+    var onSetTimeOffsetInSecondCompleted = function (event, data) {
+        toaster.pop('success', 'Sucesso', 'TimeOffsetInSecond alterado');
+    };
+
+    var onSetUpdateIntervalInMilliSecondCompleted = function (event, data) {
+        toaster.pop('success', 'Sucesso', 'UpdateIntervalInMilliSecond alterado');
+    };
+
+    $scope.changeTimeOffsetInSecond = function () {
+        if (!initialized) return;
+        espDeviceService.setTimeOffsetInSecond($scope.device.deviceId, $scope.deviceNTPSettingView.timeOffsetInSecond);
+    };
+
+    $scope.changeUpdateIntervalInMilliSecond = function () {
+        if (!initialized) return;
+        espDeviceService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.deviceNTPSettingView.updateIntervalInMilliSecond);
+    };
 
 }]);
 

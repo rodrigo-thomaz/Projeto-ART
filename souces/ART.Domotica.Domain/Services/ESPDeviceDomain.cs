@@ -22,7 +22,9 @@
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
-        private readonly IApplicationUserRepository _applicationUserRepository;                
+        private readonly IApplicationUserRepository _applicationUserRepository;
+        private readonly IDeviceBrokerSettingRepository _deviceBrokerSettingRepository;
+        private readonly IDeviceNTPSettingRepository _deviceNTPSettingRepository;
 
         #endregion Fields
 
@@ -36,6 +38,8 @@
             _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
+            _deviceBrokerSettingRepository = new DeviceBrokerSettingRepository(context);
+            _deviceNTPSettingRepository = new DeviceNTPSettingRepository(context);
         }
 
         #endregion Constructors
@@ -106,7 +110,7 @@
             var hardwareEntity = await _espDeviceRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
 
             //Load Broker Setting
-            await _espDeviceRepository.GetDeviceBrokerSetting(deviceInApplicationEntity.DeviceBaseId);
+            await _deviceBrokerSettingRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
 
             return hardwareEntity;
         }
@@ -149,7 +153,7 @@
 
         public async Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId)
         {
-            var data = await _espDeviceRepository.GetDeviceBrokerSetting(deviceId);
+            var data = await _deviceBrokerSettingRepository.GetById(deviceId);
 
             if (data == null)
             {
@@ -169,6 +173,38 @@
             }
 
             return data;
+        }
+
+        public async Task<ESPDevice> SetTimeOffsetInSecond(Guid deviceId, int timeOffsetInSecond)
+        {
+            var entity = await _deviceNTPSettingRepository.GetById(deviceId);
+
+            if (entity == null)
+            {
+                throw new Exception("ESP Device not found");
+            }
+
+            entity.TimeOffsetInSecond = timeOffsetInSecond;
+
+            await _deviceNTPSettingRepository.Update(entity);
+
+            return await _espDeviceRepository.GetById(deviceId);
+        }
+
+        public async Task<ESPDevice> SetUpdateIntervalInMilliSecond(Guid deviceId, int updateIntervalInMilliSecond)
+        {
+            var entity = await _deviceNTPSettingRepository.GetById(deviceId);
+
+            if (entity == null)
+            {
+                throw new Exception("ESP Device not found");
+            }
+
+            entity.UpdateIntervalInMilliSecond = updateIntervalInMilliSecond;
+
+            await _deviceNTPSettingRepository.Update(entity);
+
+            return await _espDeviceRepository.GetById(deviceId);
         }
 
         #endregion Methods

@@ -19,11 +19,11 @@
 
         Task SetChartLimiterCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract> message);
 
+        Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message);
+
         Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
 
         Task SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message);
-
-        Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message);
 
         #endregion Methods
     }

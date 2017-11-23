@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorGetDetailModel
+    public class DSFamilyTempSensorDetailModel
     {
         #region Properties
 
@@ -26,6 +26,11 @@
             get; set;
         }
 
+        public string Label
+        {
+            get; set;
+        }
+
         public TempSensorAlarmGetDetailModel LowAlarm
         {
             get; set;
@@ -42,11 +47,6 @@
         }
 
         public TempSensorRangeGetDetailModel TempSensorRange
-        {
-            get; set;
-        }
-
-        public string Label
         {
             get; set;
         }

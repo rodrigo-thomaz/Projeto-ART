@@ -19,7 +19,7 @@
                         <div class="panel-heading font-bold">Device {{deviceKey + 1}}</div>
                         <div class="panel-body">
 
-                            <form class="form-horizontal form-validation">
+                            <form name="formDevice" class="form-horizontal form-validation">
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label">Status</label>
                                     <div class="col-lg-8">
@@ -43,6 +43,25 @@
                                         <input type="text" class="form-control" readonly uppercased ng-model="device.wifiQuality">
                                     </div>
                                 </div>
+                                <div class="line line-dashed b-b line-lg pull-in"></div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Time Offset In Second</label>
+                                    <div class="col-lg-8">
+                                        <input name="inputTimeOffsetInSecond" type="number" ng-model="deviceNTPSettingView.timeOffsetInSecond" ng-model-options="{ debounce: 1000 }" ng-change="changeTimeOffsetInSecond()" required class="form-control">
+                                    </div>
+                                    <span ng-show="formDevice.inputTimeOffsetInSecond.$touched && formDevice.inputTimeOffsetInSecond.$invalid">
+                                        Time Offset In Second requerido
+                                    </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Update Interval In MilliSecond</label>
+                                    <div class="col-lg-8">
+                                        <input name="inputUpdateIntervalInMilliSecond" type="number" ng-model="deviceNTPSettingView.updateIntervalInMilliSecond" ng-model-options="{ debounce: 1000 }" ng-change="changeUpdateIntervalInMilliSecond()" required class="form-control">
+                                    </div>
+                                    <span ng-show="formDevice.inputUpdateIntervalInMilliSecond.$touched && formDevice.inputUpdateIntervalInMilliSecond.$invalid">
+                                        Update Interval In MilliSecond requerido
+                                    </span>
+                                </div>
                             </form>
 
                             <tabset justified="true" class="tab-container">
@@ -51,7 +70,7 @@
                                         <div style="height:240px">
                                             <nvd3 options="options" data="sensor.chart"></nvd3>
                                         </div>
-                                        <form name="formDevice" class="form-horizontal">
+                                        <form name="formSensor" class="form-horizontal">
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Status</label>
                                                 <div class="col-lg-8">
@@ -80,7 +99,7 @@
                                                 <label class="col-lg-4 control-label">Rótulo</label>
                                                 <div class="col-lg-8">
                                                     <input name="inputLabel" type="text" class="form-control" ng-model="labelView" ng-model-options="{ debounce: 1000 }" ng-change="changeLabel()" required>
-                                                    <span ng-show="formDevice.inputLabel.$touched && formDevice.inputLabel.$invalid">
+                                                    <span ng-show="formSensor.inputLabel.$touched && formSensor.inputLabel.$invalid">
                                                         Label é requerido
                                                     </span>
                                                 </div>
@@ -98,20 +117,7 @@
                                                 <div class="col-lg-8">
                                                     <select class="form-control m-b" ng-options="item.name for item in resolution.availableResolutions track by item.id" ng-model="resolution.selectedResolution" ng-change="changeResolution()"></select>
                                                 </div>
-                                            </div>
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label">Time Offset In Second</label>
-                                                <div class="col-lg-8">
-                                                    <input name="inputTimeOffsetInSecond" type="number" class="form-control">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label">Update Interval In MilliSecond</label>
-                                                <div class="col-lg-8">
-                                                    <input name="inputUpdateIntervalInMilliSecond" type="number" class="form-control">
-                                                </div>
-                                            </div>
+                                            </div>                                            
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Tem alarme alto</label>
@@ -146,7 +152,7 @@
                                                            ng-disabled="!highAlarmView.alarmOn"
                                                            required
                                                            class="form-control">
-                                                    <span ng-show="formDevice.inputHighAlarmValue.$touched && formDevice.inputHighAlarmValue.$invalid">
+                                                    <span ng-show="formSensor.inputHighAlarmValue.$touched && formSensor.inputHighAlarmValue.$invalid">
                                                         Alarme alto deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                     </span>
 
@@ -183,8 +189,9 @@
                                                            min="{{tempSensorRangeView.min}}"
                                                            max="{{tempSensorRangeView.max}}"
                                                            ng-disabled="!lowAlarmView.alarmOn"
+                                                           required
                                                            class="form-control">
-                                                    <span ng-show="formDevice.inputLowAlarmValue.$touched && formDevice.inputLowAlarmValue.$invalid">
+                                                    <span ng-show="formSensor.inputLowAlarmValue.$touched && formSensor.inputLowAlarmValue.$invalid">
                                                         Alarme baixo deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                     </span>
                                                 </div>
@@ -200,8 +207,9 @@
                                                            ng-change="changeChartLimiterValue('High', highChartLimiterView)"
                                                            min="{{tempSensorRangeView.min}}"
                                                            max="{{tempSensorRangeView.max}}"
+                                                           required
                                                            class="form-control">
-                                                    <span ng-show="formDevice.inputHighChartLimiterValue.$touched && formDevice.inputHighChartLimiterValue.$invalid">
+                                                    <span ng-show="formSensor.inputHighChartLimiterValue.$touched && formSensor.inputHighChartLimiterValue.$invalid">
                                                         Limite alto do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                     </span>
                                                 </div>
@@ -216,8 +224,9 @@
                                                            ng-change="changeChartLimiterValue('Low', lowChartLimiterView)"
                                                            min="{{tempSensorRangeView.min}}"
                                                            max="{{tempSensorRangeView.max}}"
+                                                           required
                                                            class="form-control">
-                                                    <span ng-show="formDevice.inputLowChartLimiterValue.$touched && formDevice.inputLowChartLimiterValue.$invalid">
+                                                    <span ng-show="formSensor.inputLowChartLimiterValue.$touched && formSensor.inputLowChartLimiterValue.$invalid">
                                                         Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
                                                     </span>
                                                 </div>

@@ -28,6 +28,10 @@
 
         Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
+        Task<ESPDevice> SetTimeOffsetInSecond(Guid deviceId, int timeOffsetInSecond);
+
+        Task<ESPDevice> SetUpdateIntervalInMilliSecond(Guid deviceId, int updateIntervalInMilliSecond);
+
         Task<List<ESPDevice>> UpdatePins();
 
         #endregion Methods

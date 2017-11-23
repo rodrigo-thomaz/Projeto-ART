@@ -99,7 +99,25 @@ namespace ART.Domotica.Producer.Services
                 var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCResponseContract>(bufferResult);
                 return result;
             });            
-        }        
+        }
+
+        public async Task SetTimeOffsetInSecond(AuthenticatedMessageContract<ESPDeviceSetTimeOffsetInSecondRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", ESPDeviceConstants.SetTimeOffsetInSecondQueueName, null, payload);
+            });
+        }
+
+        public async Task SetUpdateIntervalInMilliSecond(AuthenticatedMessageContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName, null, payload);
+            });
+        }
 
         #endregion
 
@@ -134,6 +152,20 @@ namespace ART.Domotica.Producer.Services
                , exclusive: false
                , autoDelete: true
                , arguments: null);
+
+            _model.QueueDeclare(
+                queue: ESPDeviceConstants.SetTimeOffsetInSecondQueueName
+              , durable: false
+              , exclusive: false
+              , autoDelete: true
+              , arguments: null);
+
+            _model.QueueDeclare(
+                queue: ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName
+              , durable: false
+              , exclusive: false
+              , autoDelete: true
+              , arguments: null);
         }
 
         #endregion

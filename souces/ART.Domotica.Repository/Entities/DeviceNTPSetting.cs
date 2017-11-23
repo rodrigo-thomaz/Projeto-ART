@@ -8,17 +8,17 @@
     {
         #region Properties
 
-        public int TimeOffsetInSecond
-        {
-            get; set;
-        }
-
         public DeviceBase DeviceBase
         {
             get; set;
         }
 
         public Guid Id
+        {
+            get; set;
+        }
+
+        public int TimeOffsetInSecond
         {
             get; set;
         }

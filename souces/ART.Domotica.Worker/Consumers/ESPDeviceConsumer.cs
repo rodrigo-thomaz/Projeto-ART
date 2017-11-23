@@ -32,6 +32,8 @@
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
+        private readonly EventingBasicConsumer _setTimeOffsetInSecondConsumer;
+        private readonly EventingBasicConsumer _setUpdateIntervalInMilliSecondConsumer;
 
         private readonly ISettingManager _settingsManager;
         private readonly IMQSettings _mqSettings;
@@ -53,6 +55,8 @@
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
+            _setTimeOffsetInSecondConsumer = new EventingBasicConsumer(_model);
+            _setUpdateIntervalInMilliSecondConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -113,6 +117,20 @@
                , arguments: null);
 
             _model.QueueDeclare(
+                queue: ESPDeviceConstants.SetTimeOffsetInSecondQueueName
+              , durable: false
+              , exclusive: false
+              , autoDelete: true
+              , arguments: null);
+
+            _model.QueueDeclare(
+                queue: ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName
+              , durable: false
+              , exclusive: false
+              , autoDelete: true
+              , arguments: null);
+
+            _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetConfigurationsRPCQueueName
                , durable: false
                , exclusive: false
@@ -125,6 +143,8 @@
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
+            _setTimeOffsetInSecondConsumer.Received += SetTimeOffsetInSecondReceived;
+            _setUpdateIntervalInMilliSecondConsumer.Received += SetUpdateIntervalInMilliSecondReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
@@ -132,6 +152,8 @@
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
+            _model.BasicConsume(ESPDeviceConstants.SetTimeOffsetInSecondQueueName, false, _setTimeOffsetInSecondConsumer);
+            _model.BasicConsume(ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName, false, _setUpdateIntervalInMilliSecondConsumer);
         }
 
         #endregion Methods
@@ -359,6 +381,76 @@
                 var routingKey = GetDeviceRoutingKeyForIoT(item.DeviceBrokerSetting.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
                 _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
             }
+
+            _logger.DebugLeave();
+        }
+
+        public void SetTimeOffsetInSecondReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetTimeOffsetInSecondReceivedAsync(sender, e));
+        }
+
+        public async Task SetTimeOffsetInSecondReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetTimeOffsetInSecondRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.SetTimeOffsetInSecond(message.Contract.DeviceId, message.Contract.TimeOffsetInSecond);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<ESPDeviceSetTimeOffsetInSecondRequestContract, ESPDeviceSetTimeOffsetInSecondCompletedModel>(message.Contract);
+            viewModel.DeviceId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.SetTimeOffsetInSecondViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(viewModel.DeviceId);
+            var deviceBrokerSetting = await domain.GetDeviceBrokerSetting(viewModel.DeviceId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<ESPDeviceSetTimeOffsetInSecondRequestContract, ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(iotContract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetTimeOffsetInSecondIoTQueueName);
+            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetUpdateIntervalInMilliSecondReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetUpdateIntervalInMilliSecondReceivedAsync(sender, e));
+        }
+
+        public async Task SetUpdateIntervalInMilliSecondReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.SetUpdateIntervalInMilliSecond(message.Contract.DeviceId, message.Contract.UpdateIntervalInMilliSecond);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel>(message.Contract);
+            viewModel.DeviceId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var exchange = "amq.topic";
+            var rountingKey = string.Format("{0}-{1}", message.SouceMQSession, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            var applicationBrokerSetting = await domain.GetApplicationBrokerSetting(viewModel.DeviceId);
+            var deviceBrokerSetting = await domain.GetDeviceBrokerSetting(viewModel.DeviceId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(iotContract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationBrokerSetting.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
+            _model.BasicPublish("amq.topic", routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
