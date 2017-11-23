@@ -83,13 +83,13 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var onConnected = function () {
 
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetScaleViewCompleted', onSetScaleCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetLabelViewCompleted', onSetLabelCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmOnViewCompleted', onSetAlarmOnCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmCelsiusViewCompleted', onSetAlarmCelsiusCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetAlarmBuzzerOnViewCompleted', onSetAlarmBuzzerOnCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.SetChartLimiterCelsiusViewCompleted', onSetChartLimiterCelsiusCompleted);
+        stompService.subscribe('DSFamilyTempSensor.SetScaleViewCompleted', onSetScaleCompleted);
+        stompService.subscribe('DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
+        stompService.subscribe('DSFamilyTempSensor.SetLabelViewCompleted', onSetLabelCompleted);
+        stompService.subscribe('DSFamilyTempSensor.SetAlarmOnViewCompleted', onSetAlarmOnCompleted);
+        stompService.subscribe('DSFamilyTempSensor.SetAlarmCelsiusViewCompleted', onSetAlarmCelsiusCompleted);
+        stompService.subscribe('DSFamilyTempSensor.SetAlarmBuzzerOnViewCompleted', onSetAlarmBuzzerOnCompleted);
+        stompService.subscribe('DSFamilyTempSensor.SetChartLimiterCelsiusViewCompleted', onSetChartLimiterCelsiusCompleted);
 
         if (!initialized) {
             initialized = true;            

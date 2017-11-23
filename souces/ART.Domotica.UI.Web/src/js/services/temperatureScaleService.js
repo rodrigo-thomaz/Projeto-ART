@@ -9,7 +9,9 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope',
     var serviceFactory = {};    
 
     var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-TemperatureScale.GetAllViewCompleted', onGetAllCompleted);
+
+        stompService.subscribe('TemperatureScale.GetAllViewCompleted', onGetAllCompleted);
+
         if (!_initializing && !_initialized) {
             _initializing = true;
             getAll();

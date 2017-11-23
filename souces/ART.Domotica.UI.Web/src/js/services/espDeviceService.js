@@ -69,12 +69,12 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     };
 
     var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetListInApplicationViewCompleted', onGetListInApplicationCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.SetTimeOffsetInSecondViewCompleted', onSetTimeOffsetInSecondCompleted);
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
+        stompService.subscribe('ESPDevice.GetListInApplicationViewCompleted', onGetListInApplicationCompleted);
+        stompService.subscribe('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
+        stompService.subscribe('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
+        stompService.subscribe('ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
+        stompService.subscribe('ESPDevice.SetTimeOffsetInSecondViewCompleted', onSetTimeOffsetInSecondCompleted);
+        stompService.subscribe('ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
 

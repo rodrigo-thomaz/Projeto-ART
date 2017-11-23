@@ -6,7 +6,7 @@ app.factory('espDeviceAdminService', ['$http', '$log', 'ngAuthSettings', '$rootS
     var serviceFactory = {};
 
     var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-ESPDeviceAdmin.GetAllViewCompleted', onGetAllCompleted);
+        stompService.subscribe('ESPDeviceAdmin.GetAllViewCompleted', onGetAllCompleted);
     }
 
     var getAll = function () {

@@ -9,7 +9,7 @@ app.factory('dsFamilyTempSensorResolutionService', ['$http', '$log', '$rootScope
     var serviceFactory = {};
 
     var onConnected = function () {
-        stompService.client.subscribe('/topic/' + stompService.session + '-DSFamilyTempSensor.GetAllResolutionsViewCompleted', onGetAllCompleted);
+        stompService.subscribe('DSFamilyTempSensor.GetAllResolutionsViewCompleted', onGetAllCompleted);
         if (!_initializing && !_initialized) {
             _initializing = true;
             getAll();
