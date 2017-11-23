@@ -4,7 +4,17 @@
     {
         #region Properties
 
+        public string Password
+        {
+            get; set;
+        }
+
         public string Topic
+        {
+            get; set;
+        }
+
+        public string User
         {
             get; set;
         }

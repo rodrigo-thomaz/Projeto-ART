@@ -5,7 +5,11 @@ app.factory('applicationMQ', [function () {
     var serviceFactory = {};    
     
     var init = function (applicationMQ) {
+
+        serviceFactory.user = applicationMQ.user;
+        serviceFactory.password = applicationMQ.password;
         serviceFactory.topic = applicationMQ.topic;
+
         serviceFactory.initialized = true;
     }
     
@@ -14,6 +18,9 @@ app.factory('applicationMQ', [function () {
 
     //Properties
     serviceFactory.initialized = false;
+
+    serviceFactory.user = null;
+    serviceFactory.password = null;
     serviceFactory.topic = null;
 
     return serviceFactory;

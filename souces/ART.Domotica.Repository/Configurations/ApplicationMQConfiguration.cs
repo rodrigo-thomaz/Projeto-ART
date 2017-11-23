@@ -25,9 +25,25 @@
             HasRequired(x => x.Application)
                .WithRequiredDependent(x => x.ApplicationMQ);
 
+            //User
+            Property(x => x.User)
+                .HasColumnOrder(1)
+                .HasMaxLength(12)
+                .IsRequired();
+                //.HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                //    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+
+            //Password
+            Property(x => x.Password)
+                .HasColumnOrder(2)
+                .HasMaxLength(12)
+                .IsRequired();
+                //.HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                //    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+            
             //Topic
             Property(x => x.Topic)
-                .HasColumnOrder(1)
+                .HasColumnOrder(3)
                 .HasMaxLength(32)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,

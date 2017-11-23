@@ -11,22 +11,27 @@
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
     using ART.Infra.CrossCutting.Utils;
+    using ART.Infra.CrossCutting.Setting;
+    using ART.Infra.CrossCutting.MQ;
 
     public class ApplicationUserDomain : DomainBase, IApplicationUserDomain
     {
         #region Fields
 
         private readonly IApplicationUserRepository _applicationUserRepository;
+        private readonly ISettingManager _settingsManager;
 
         #endregion Fields
 
         #region Constructors
 
-        public ApplicationUserDomain(IComponentContext componentContext)
+        public ApplicationUserDomain(IComponentContext componentContext, ISettingManager settingsManager)
         {
             var context = componentContext.Resolve<ARTDbContext>();
 
-            _applicationUserRepository = new ApplicationUserRepository(context);        
+            _applicationUserRepository = new ApplicationUserRepository(context);
+
+            _settingsManager = settingsManager;
         }
 
         #endregion Constructors
@@ -35,10 +40,15 @@
 
         public async Task RegisterUser(ApplicationUser entity)
         {
+            var mqUser = _settingsManager.GetValue<string>(MQSettingsConstants.BrokerUserSettingsKey);
+            var mqPwd = _settingsManager.GetValue<string>(MQSettingsConstants.BrokerPwdSettingsKey);
+
             entity.Application = new Application
             {
                 ApplicationMQ = new ApplicationMQ
                 {
+                    User = mqUser,
+                    Password = mqPwd,
                     Topic = RandonHelper.RandomString(10),
                 },
                 CreateDate = DateTime.Now,

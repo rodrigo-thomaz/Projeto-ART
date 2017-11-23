@@ -37,8 +37,8 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         // stomp        
 
         var headers = {
-            login: 'test',
-            passcode: 'test',
+            login: applicationMQ.user,
+            passcode: applicationMQ.password,
         };
 
         client = Stomp.client(url);

@@ -12,6 +12,8 @@
         public ApplicationMQProfile()
         {
             CreateMap<ApplicationMQ, ApplicationMQGetRPCResponseContract>()
+                .ForMember(vm => vm.User, m => m.MapFrom(x => x.User))
+                .ForMember(vm => vm.Password, m => m.MapFrom(x => x.Password))
                 .ForMember(vm => vm.Topic, m => m.MapFrom(x => x.Topic));
         }
 
