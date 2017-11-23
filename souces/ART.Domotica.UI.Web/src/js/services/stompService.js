@@ -34,8 +34,6 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
 
         clearOnApplicationMQInitialized();
 
-        // stomp        
-
         var headers = {
             login: applicationMQ.user,
             passcode: applicationMQ.password,
