@@ -48,7 +48,7 @@ app.controller('signupController', ['$scope', '$location', '$timeout', 'authServ
 
     EventDispatcher.on('stompService_onConnected', onConnected);
 
-    if (stompService.client.connected)
+    if (stompService.connected())
         onConnected();
 
     // stompService

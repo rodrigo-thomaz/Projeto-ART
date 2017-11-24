@@ -174,7 +174,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
 
     // stompService
-    if (stompService.client.connected)
+    if (stompService.connected())
         onConnected();
 
     // serviceFactory

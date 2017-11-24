@@ -54,7 +54,7 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope',
     var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected);        
 
     // stompService
-    if (stompService.client.connected)
+    if (stompService.connected())
         onConnected();
 
     // serviceFactory

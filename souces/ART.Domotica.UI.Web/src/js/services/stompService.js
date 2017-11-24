@@ -23,6 +23,10 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         return '/topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + applicationMQ.webUITopic + '.' + topic;
     }
 
+    var connected = function () {
+        return client.connected;
+    };
+
     var onApplicationMQInitialized = function (event, data) {
 
         clearOnApplicationMQInitialized();
@@ -55,7 +59,8 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     // serviceFactory    
 
     serviceFactory.subscribe = subscribe;
-    serviceFactory.unsubscribe = unsubscribe;    
+    serviceFactory.unsubscribe = unsubscribe;
+    serviceFactory.connected = connected;
 
     return serviceFactory;   
 
