@@ -8,7 +8,8 @@ app.factory('applicationMQ', [function () {
 
         serviceFactory.user = applicationMQ.user;
         serviceFactory.password = applicationMQ.password;
-        serviceFactory.topic = applicationMQ.topic;
+        serviceFactory.applicationTopic = applicationMQ.applicationTopic;
+        serviceFactory.webUITopic = applicationMQ.webUITopic;
 
         serviceFactory.initialized = true;
     }

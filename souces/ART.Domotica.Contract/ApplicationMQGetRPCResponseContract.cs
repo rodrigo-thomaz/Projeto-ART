@@ -9,7 +9,12 @@
             get; set;
         }
 
-        public string Topic
+        public string ApplicationTopic
+        {
+            get; set;
+        }
+
+        public string WebUITopic
         {
             get; set;
         }

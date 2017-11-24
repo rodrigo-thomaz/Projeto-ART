@@ -2,7 +2,7 @@
 {
     using ART.Domotica.Contract;
     using ART.Domotica.Repository.Entities;
-
+    using ART.Infra.CrossCutting.Utils;
     using global::AutoMapper;
 
     public class ApplicationMQProfile : Profile
@@ -14,7 +14,11 @@
             CreateMap<ApplicationMQ, ApplicationMQGetRPCResponseContract>()
                 .ForMember(vm => vm.User, m => m.MapFrom(x => x.User))
                 .ForMember(vm => vm.Password, m => m.MapFrom(x => x.Password))
-                .ForMember(vm => vm.Topic, m => m.MapFrom(x => x.Topic));
+                .ForMember(vm => vm.ApplicationTopic, m => m.MapFrom(x => x.Topic))
+                .ForMember(vm => vm.WebUITopic, m => m.MapFrom(x => x.Topic))
+                .ForMember(vm => vm.WebUITopic, m => m.ResolveUsing(src => {                    
+                    return RandonHelper.RandomString(10);
+                }));
         }
 
         #endregion Constructors

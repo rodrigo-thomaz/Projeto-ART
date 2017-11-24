@@ -17,19 +17,14 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     }
 
     var subscribe = function (topic, callback) {
-        var applicationTopic = applicationMQ.topic;
+        var applicationTopic = applicationMQ.applicationTopic;
         client.subscribe('/topic/ART.Application.' + applicationTopic + '.WebUI.' + serviceFactory.session + '.' + topic, callback);
     };
 
     var unsubscribe = function (topic) {
+        var applicationTopic = applicationMQ.applicationTopic;
         client.unsubscribe('/topic/ART.Application.' + applicationTopic + '.WebUI.' + serviceFactory.session + '.' + topic);
-    };
-
-    var getRandomInt = function (min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min;
-    };
+    };    
 
     var onApplicationMQInitialized = function (event, data) {
 
@@ -44,8 +39,7 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
 
         serviceFactory.client = client;
 
-        var clientTopic = getRandomInt(100000000, 999999999);
-        serviceFactory.session = clientTopic;
+        serviceFactory.session = applicationMQ.webUITopic;
 
         var wsBrokerHostName = ngAuthSettings.wsBrokerHostName;
         var wsBrokerPort = ngAuthSettings.wsBrokerPort;        
