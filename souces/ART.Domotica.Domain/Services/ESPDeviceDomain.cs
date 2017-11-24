@@ -23,7 +23,7 @@
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
-        private readonly IDeviceBrokerSettingRepository _deviceBrokerSettingRepository;
+        private readonly IDeviceMQRepository _deviceMQRepository;
         private readonly IDeviceNTPSettingRepository _deviceNTPSettingRepository;
 
         #endregion Fields
@@ -38,7 +38,7 @@
             _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
-            _deviceBrokerSettingRepository = new DeviceBrokerSettingRepository(context);
+            _deviceMQRepository = new DeviceMQRepository(context);
             _deviceNTPSettingRepository = new DeviceNTPSettingRepository(context);
         }
 
@@ -110,7 +110,7 @@
             var hardwareEntity = await _espDeviceRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
 
             //Load Broker Setting
-            await _deviceBrokerSettingRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
+            await _deviceMQRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
 
             return hardwareEntity;
         }
@@ -151,9 +151,9 @@
             return data;
         }
 
-        public async Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId)
+        public async Task<DeviceMQ> GetDeviceMQ(Guid deviceId)
         {
-            var data = await _deviceBrokerSettingRepository.GetById(deviceId);
+            var data = await _deviceMQRepository.GetById(deviceId);
 
             if (data == null)
             {

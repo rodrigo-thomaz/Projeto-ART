@@ -6,7 +6,7 @@
     {
         #region Properties
 
-        public DeviceBrokerSetting DeviceBrokerSetting
+        public DeviceMQ DeviceMQ
         {
             get; set;
         }

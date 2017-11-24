@@ -5,7 +5,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IDeviceBrokerSettingRepository : IRepository<ARTDbContext, DeviceBrokerSetting, Guid>
+    public interface IDeviceMQRepository : IRepository<ARTDbContext, DeviceMQ, Guid>
     {
     }
 }

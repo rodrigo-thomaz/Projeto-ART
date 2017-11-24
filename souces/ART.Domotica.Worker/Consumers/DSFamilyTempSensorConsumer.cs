@@ -179,7 +179,7 @@ namespace ART.Domotica.Worker.Consumers
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
             var applicationMQ = await espDeviceDomain.GetApplicationMQ(requestContract.DeviceId);
-            var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(requestContract.DeviceId);
+            var deviceMQ = await espDeviceDomain.GetDeviceMQ(requestContract.DeviceId);
 
             var exchange = "amq.topic";
 
@@ -187,7 +187,7 @@ namespace ART.Domotica.Worker.Consumers
             var iotContract = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
             var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -247,13 +247,13 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(viewModel.DeviceId);
+            var deviceMQ = await espDeviceDomain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetResolutionRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, DSFamilyTempSensorConstants.SetResolutionIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.SetResolutionIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -285,13 +285,13 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(viewModel.DeviceId);
+            var deviceMQ = await espDeviceDomain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetScaleRequestContract, DSFamilyTempSensorSetScaleRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetScaleRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, DSFamilyTempSensorConstants.SetScaleIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.SetScaleIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -353,13 +353,13 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(viewModel.DeviceId);
+            var deviceMQ = await espDeviceDomain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmOnRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, DSFamilyTempSensorConstants.SetAlarmOnIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.SetAlarmOnIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -392,13 +392,13 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(viewModel.DeviceId);
+            var deviceMQ = await espDeviceDomain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmCelsiusRequestContract, DSFamilyTempSensorSetAlarmCelsiusRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmCelsiusRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, DSFamilyTempSensorConstants.SetAlarmCelsiusIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.SetAlarmCelsiusIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -431,13 +431,13 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(viewModel.DeviceId);
+            var deviceMQ = await espDeviceDomain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, DSFamilyTempSensorConstants.SetAlarmBuzzerOnIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.SetAlarmBuzzerOnIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -470,13 +470,13 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var deviceBrokerSetting = await espDeviceDomain.GetDeviceBrokerSetting(viewModel.DeviceId);
+            var deviceMQ = await espDeviceDomain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract, DSFamilyTempSensorSetChartLimiterCelsiusRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, DSFamilyTempSensorConstants.SetChartLimiterCelsiusIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.SetChartLimiterCelsiusIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

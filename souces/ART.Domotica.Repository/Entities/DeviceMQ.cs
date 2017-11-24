@@ -4,7 +4,7 @@
 
     using ART.Infra.CrossCutting.Repository;
 
-    public class DeviceBrokerSetting : IEntity<Guid>
+    public class DeviceMQ : IEntity<Guid>
     {
         #region Properties
 

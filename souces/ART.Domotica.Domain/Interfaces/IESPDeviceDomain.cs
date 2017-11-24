@@ -22,7 +22,7 @@
 
         Task<ESPDevice> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
 
-        Task<DeviceBrokerSetting> GetDeviceBrokerSetting(Guid deviceId);
+        Task<DeviceMQ> GetDeviceMQ(Guid deviceId);
 
         Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message);
 

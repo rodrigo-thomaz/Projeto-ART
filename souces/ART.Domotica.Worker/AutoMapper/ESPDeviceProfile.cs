@@ -38,10 +38,10 @@
                     return (Guid?)null;
                 }))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.BrokerUser, m => m.MapFrom(x => x.DeviceBrokerSetting.User))
-                .ForMember(vm => vm.BrokerPassword, m => m.MapFrom(x => x.DeviceBrokerSetting.Password))
-                .ForMember(vm => vm.BrokerClientId, m => m.MapFrom(x => x.DeviceBrokerSetting.ClientId))
-                .ForMember(vm => vm.BrokerDeviceTopic, m => m.MapFrom(x => x.DeviceBrokerSetting.Topic))
+                .ForMember(vm => vm.BrokerUser, m => m.MapFrom(x => x.DeviceMQ.User))
+                .ForMember(vm => vm.BrokerPassword, m => m.MapFrom(x => x.DeviceMQ.Password))
+                .ForMember(vm => vm.BrokerClientId, m => m.MapFrom(x => x.DeviceMQ.ClientId))
+                .ForMember(vm => vm.BrokerDeviceTopic, m => m.MapFrom(x => x.DeviceMQ.Topic))
                 .ForMember(vm => vm.NTPUpdateInterval, m => m.MapFrom(x => x.DeviceNTPSetting.UpdateIntervalInMilliSecond))
                 .ForMember(vm => vm.TimeOffset, m => m.MapFrom(x => x.DeviceNTPSetting.TimeOffsetInSecond));
 

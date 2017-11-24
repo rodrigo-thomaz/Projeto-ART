@@ -6,11 +6,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class DeviceBrokerSettingConfiguration : EntityTypeConfiguration<DeviceBrokerSetting>
+    public class DeviceMQConfiguration : EntityTypeConfiguration<DeviceMQ>
     {
         #region Constructors
 
-        public DeviceBrokerSettingConfiguration()
+        public DeviceMQConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);
@@ -23,7 +23,7 @@
 
             //DeviceBase
             HasRequired(x => x.DeviceBase)
-               .WithRequiredDependent(x => x.DeviceBrokerSetting);
+               .WithRequiredDependent(x => x.DeviceMQ);
 
             //User
             Property(x => x.User)

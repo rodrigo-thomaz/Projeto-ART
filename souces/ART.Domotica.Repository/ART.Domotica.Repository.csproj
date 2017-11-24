@@ -63,7 +63,7 @@
     <Compile Include="ARTDbContext.cs" />
     <Compile Include="Configurations\ApplicationMQConfiguration.cs" />
     <Compile Include="Configurations\DeviceNTPSettingConfiguration.cs" />
-    <Compile Include="Configurations\DeviceBrokerSettingConfiguration.cs" />
+    <Compile Include="Configurations\DeviceMQConfiguration.cs" />
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\DSFamilyTempSensorConfiguration.cs" />
     <Compile Include="Configurations\DSFamilyTempSensorResolutionConfiguration.cs" />
@@ -81,7 +81,7 @@
     <Compile Include="Configurations\TempSensorRangeConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
     <Compile Include="Entities\DeviceNTPSetting.cs" />
-    <Compile Include="Entities\DeviceBrokerSetting.cs" />
+    <Compile Include="Entities\DeviceMQ.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
     <Compile Include="Entities\DSFamilyTempSensor.cs" />
     <Compile Include="Entities\DSFamilyTempSensorResolution.cs" />
@@ -98,7 +98,7 @@
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\TempSensorAlarm.cs" />
     <Compile Include="Entities\TempSensorRange.cs" />
-    <Compile Include="Interfaces\IDeviceBrokerSettingRepository.cs" />
+    <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceNTPSettingRepository.cs" />
@@ -165,11 +165,15 @@
     <Compile Include="Migrations\201711232047310_AddTableDeviceBrokkerSetting11.Designer.cs">
       <DependentUpon>201711232047310_AddTableDeviceBrokkerSetting11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711241611441_AddTableDeviceBrokkerSetting12.cs" />
+    <Compile Include="Migrations\201711241611441_AddTableDeviceBrokkerSetting12.Designer.cs">
+      <DependentUpon>201711241611441_AddTableDeviceBrokkerSetting12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
-    <Compile Include="Repositories\DeviceBrokerSettingRepository.cs" />
+    <Compile Include="Repositories\DeviceMQRepository.cs" />
     <Compile Include="Repositories\ApplicationMQRepository.cs" />
     <Compile Include="Repositories\DeviceNTPSettingRepository.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorResolutionRepository.cs" />
@@ -253,6 +257,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711232047310_AddTableDeviceBrokkerSetting11.resx">
       <DependentUpon>201711232047310_AddTableDeviceBrokkerSetting11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711241611441_AddTableDeviceBrokkerSetting12.resx">
+      <DependentUpon>201711241611441_AddTableDeviceBrokkerSetting12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

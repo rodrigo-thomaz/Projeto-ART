@@ -346,7 +346,7 @@
             var espDevice1MacAddress = "A0:20:A6:17:83:25";
 
             var espDevice1 = context.ESPDevice
-                .Include(x => x.DeviceBrokerSetting)
+                .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTPSetting)
                 .SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
 
@@ -359,7 +359,7 @@
                     MacAddress = espDevice1MacAddress,
                     Pin = RandonHelper.RandomString(4),
                     CreateDate = DateTime.Now,
-                    DeviceBrokerSetting = new DeviceBrokerSetting
+                    DeviceMQ = new DeviceMQ
                     {
                         User = "test",
                         Password = "test",
@@ -378,9 +378,9 @@
             {
                 espDevice1.ChipId = 1540901;
                 espDevice1.FlashChipId = 1458400;
-                if(espDevice1.DeviceBrokerSetting == null)
+                if(espDevice1.DeviceMQ == null)
                 {
-                    espDevice1.DeviceBrokerSetting = new DeviceBrokerSetting
+                    espDevice1.DeviceMQ = new DeviceMQ
                     {
                         User = "test",
                         Password = "test",

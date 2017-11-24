@@ -273,7 +273,7 @@
             iotContract.BrokerApplicationTopic = applicationMQ.Topic;
             var deviceMessage = new MessageIoTContract<ESPDeviceInsertInApplicationResponseIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.InsertInApplicationIoTQueueName);
+            var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceMQ.Topic, ESPDeviceConstants.InsertInApplicationIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -311,7 +311,7 @@
             //Enviando para o IoT
             var deviceMessage = new MessageIoTContract<string>(string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceBrokerSetting.Topic, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
+            var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceMQ.Topic, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -399,7 +399,7 @@
                 contract.NextFireTimeInSeconds = nextFireTimeInSeconds;                
                 var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-                var routingKey = GetDeviceRoutingKeyForIoT(item.DeviceBrokerSetting.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
+                var routingKey = GetDeviceRoutingKeyForIoT(item.DeviceMQ.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
                 _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
             }
 
@@ -432,13 +432,13 @@
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.SetTimeOffsetInSecondViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-            var deviceBrokerSetting = await domain.GetDeviceBrokerSetting(viewModel.DeviceId);
+            var deviceMQ = await domain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDeviceSetTimeOffsetInSecondRequestContract, ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetTimeOffsetInSecondIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetTimeOffsetInSecondIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
@@ -470,13 +470,13 @@
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-            var deviceBrokerSetting = await domain.GetDeviceBrokerSetting(viewModel.DeviceId);
+            var deviceMQ = await domain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceBrokerSetting.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

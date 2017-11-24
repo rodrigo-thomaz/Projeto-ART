@@ -40,7 +40,7 @@
                 .IsRequired();
                 //.HasColumnAnnotation(IndexAnnotation.AnnotationName,
                 //    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
-            
+
             //Topic
             Property(x => x.Topic)
                 .HasColumnOrder(3)

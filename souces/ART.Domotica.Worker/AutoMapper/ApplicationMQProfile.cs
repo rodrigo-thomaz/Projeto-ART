@@ -3,6 +3,7 @@
     using ART.Domotica.Contract;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Utils;
+
     using global::AutoMapper;
 
     public class ApplicationMQProfile : Profile

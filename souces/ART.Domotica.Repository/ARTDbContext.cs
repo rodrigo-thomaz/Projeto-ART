@@ -35,12 +35,12 @@
             get; set;
         }
 
-        public DbSet<DeviceBrokerSetting> DeviceBrokerSetting
+        public DbSet<DeviceInApplication> DeviceInApplication
         {
             get; set;
         }
 
-        public DbSet<DeviceInApplication> DeviceInApplication
+        public DbSet<DeviceMQ> DeviceMQ
         {
             get; set;
         }
@@ -108,7 +108,7 @@
             modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
-            modelBuilder.Configurations.Add(new DeviceBrokerSettingConfiguration());
+            modelBuilder.Configurations.Add(new DeviceMQConfiguration());
             modelBuilder.Configurations.Add(new DeviceNTPSettingConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());

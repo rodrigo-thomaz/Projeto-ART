@@ -34,7 +34,7 @@
         {
             var data = await _context.ESPDevice
                 .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))
-                .Include(x => x.DeviceBrokerSetting)
+                .Include(x => x.DeviceMQ)
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
 
@@ -66,7 +66,7 @@
         public async Task<List<ESPDevice>> GetListNotInApplication()
         {
             var data = await _context.ESPDevice
-                .Include(x => x.DeviceBrokerSetting)
+                .Include(x => x.DeviceMQ)
                 .Where(x => !x.DevicesInApplication.Any())
                 .ToListAsync();
 
@@ -77,7 +77,7 @@
         {
             var data = await _context.ESPDevice
                .Include(x => x.DevicesInApplication)
-               .Include(x => x.DeviceBrokerSetting)
+               .Include(x => x.DeviceMQ)
                .Include(x => x.DeviceNTPSetting)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)

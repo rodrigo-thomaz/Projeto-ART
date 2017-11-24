@@ -4,12 +4,17 @@
     {
         #region Properties
 
+        public string ApplicationTopic
+        {
+            get; set;
+        }
+
         public string Password
         {
             get; set;
         }
 
-        public string ApplicationTopic
+        public string User
         {
             get; set;
         }
@@ -18,11 +23,6 @@
         {
             get; set;
         }
-
-        public string User
-        {
-            get; set;
-        }        
 
         #endregion Properties
     }
