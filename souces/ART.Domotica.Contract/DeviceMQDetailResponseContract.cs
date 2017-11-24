@@ -2,6 +2,8 @@
 {
     public class DeviceMQDetailResponseContract
     {
+        #region Properties
+
         public string ApplicationTopic
         {
             get; set;
@@ -36,5 +38,7 @@
         {
             get; set;
         }
+
+        #endregion Properties
     }
 }

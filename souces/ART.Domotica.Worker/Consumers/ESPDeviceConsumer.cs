@@ -349,9 +349,12 @@
                     Host = _mqSettings.BrokerHost,
                     Port = _mqSettings.BrokerPort,
                     ApplicationTopic = applicationTopic,
-                },             
-                NTPHost = ntpHost,
-                NTPPort = ntpPort,
+                },  
+                DeviceNTP = new DeviceNTPDetailResponseContract
+                {
+                    Host = ntpHost,
+                    Port = ntpPort,
+                },                
                 PublishMessageInterval = publishMessageInterval,
             };
 

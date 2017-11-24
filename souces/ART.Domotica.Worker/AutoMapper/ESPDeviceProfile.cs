@@ -35,6 +35,10 @@
                 .ForMember(vm => vm.ClientId, m => m.MapFrom(x => x.ClientId))
                 .ForMember(vm => vm.DeviceTopic, m => m.MapFrom(x => x.Topic));
 
+            CreateMap<DeviceNTP, DeviceNTPDetailResponseContract>()
+                .ForMember(vm => vm.UpdateIntervalInMilliSecond, m => m.MapFrom(x => x.UpdateIntervalInMilliSecond))
+                .ForMember(vm => vm.TimeOffsetInSecond, m => m.MapFrom(x => x.TimeOffsetInSecond));
+
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
                 .ForMember(vm => vm.DeviceInApplicationId, m => m.ResolveUsing(src => {
                     if (src.DevicesInApplication != null && src.DevicesInApplication.Any())
@@ -45,8 +49,7 @@
                 }))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))
-                .ForMember(vm => vm.NTPUpdateInterval, m => m.MapFrom(x => x.DeviceNTP.UpdateIntervalInMilliSecond))
-                .ForMember(vm => vm.TimeOffset, m => m.MapFrom(x => x.DeviceNTP.TimeOffsetInSecond));
+                .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP));
 
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));

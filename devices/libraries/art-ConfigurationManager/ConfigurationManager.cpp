@@ -207,6 +207,7 @@ void ConfigurationManager::autoInitialize()
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);			
 			
 			JsonObject& deviceMQ = jsonObjectResponse["deviceMQ"];
+			JsonObject& deviceNTP = jsonObjectResponse["deviceNTP"];
 			
 			this->_brokerSettings = new BrokerSettings(
 				deviceMQ["host"], 
@@ -218,10 +219,10 @@ void ConfigurationManager::autoInitialize()
 				deviceMQ["deviceTopic"]);
 			
 			this->_ntpSettings = new NTPSettings(
-				jsonObjectResponse["ntpHost"], 
-				jsonObjectResponse["ntpPort"], 
-				jsonObjectResponse["timeOffset"],
-				jsonObjectResponse["ntpUpdateInterval"]);			
+				deviceNTP["host"], 
+				deviceNTP["port"], 
+				deviceNTP["timeOffsetInSecond"],
+				deviceNTP["updateIntervalInMilliSecond"]);			
 			
 			this->_deviceSettings = new DeviceSettings(
 				jsonObjectResponse["deviceId"], 

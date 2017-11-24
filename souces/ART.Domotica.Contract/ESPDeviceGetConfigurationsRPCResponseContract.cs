@@ -6,8 +6,6 @@
     {
         #region Properties
 
-        public DeviceMQDetailResponseContract DeviceMQ { get; set; }
-
         public Guid DeviceId
         {
             get; set;
@@ -18,27 +16,17 @@
             get; set;
         }
 
-        public string NTPHost
+        public DeviceMQDetailResponseContract DeviceMQ
         {
             get; set;
         }
 
-        public int NTPPort
-        {
-            get; set;
-        }
-
-        public int NTPUpdateInterval
+        public DeviceNTPDetailResponseContract DeviceNTP
         {
             get; set;
         }
 
         public int PublishMessageInterval
-        {
-            get; set;
-        }
-
-        public int TimeOffset
         {
             get; set;
         }
