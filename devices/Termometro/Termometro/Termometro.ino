@@ -123,7 +123,7 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
 {
   Serial.println("[MQQT::mqtt_ConnectedCallback] initializing ...");
 
-  if(configurationManager.getDeviceSettings()->getDeviceInApplicationId() == ""){
+  if(configurationManager.getDeviceInApplication()->getDeviceInApplicationId() == ""){
     subscribeNotInApplication();
   }
   else{
@@ -277,9 +277,9 @@ void loop() {
   configurationManager.autoInitialize(); 
   mqqtManager.autoConnect(); //se não há conexão com o Broker, a conexão é refeita
 
-  DeviceSettings* deviceSettings = configurationManager.getDeviceSettings();
+  DeviceInApplication* deviceInApplication = configurationManager.getDeviceInApplication();
   
-  if(deviceSettings != NULL && deviceSettings->getDeviceInApplicationId() == ""){
+  if(deviceInApplication != NULL && deviceInApplication->getDeviceInApplicationId() == ""){
     displayAccessManager.loop();
     //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
   }    
@@ -331,7 +331,7 @@ void loopInApplication()
       StaticJsonBuffer<2048> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
 
-      root["deviceInApplicationId"] = configurationManager.getDeviceSettings()->getDeviceInApplicationId();
+      root["deviceInApplicationId"] = configurationManager.getDeviceInApplication()->getDeviceInApplicationId();
       root["wifiQuality"] = wifiManager.getQuality();
       root["epochTimeUtc"] = ntpManager.getEpochTimeUTC();    
       

@@ -226,8 +226,8 @@ bool DSFamilyTempSensorManager::initialized()
 	
 	Serial.println("[DSFamilyTempSensorManager::initialized] initializing...]");
 	
-	String deviceId = this->_configurationManager->getDeviceSettings()->getDeviceId();      
-	String deviceInApplicationId = this->_configurationManager->getDeviceSettings()->getDeviceInApplicationId();      
+	String deviceId = this->_configurationManager->getDeviceInApplication()->getDeviceId();      
+	String deviceInApplicationId = this->_configurationManager->getDeviceInApplication()->getDeviceInApplicationId();      
 
 	StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
 	JsonObject& root = JSONbuffer.createObject();

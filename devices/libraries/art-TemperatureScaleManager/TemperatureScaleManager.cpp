@@ -48,7 +48,7 @@ bool TemperatureScaleManager::begin()
 	
 	this->_beginning = true;
 	
-	String deviceId = this->_configurationManager->getDeviceSettings()->getDeviceId();      
+	String deviceId = this->_configurationManager->getDeviceInApplication()->getDeviceId();      
 
 	StaticJsonBuffer<TEMPERATURE_SCALE_GET_ALL_FOR_IOT_REQUEST_JSON_SIZE> JSONbuffer;
 	JsonObject& root = JSONbuffer.createObject();

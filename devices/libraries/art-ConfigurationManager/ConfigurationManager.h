@@ -59,10 +59,10 @@ class DeviceNTP {
     friend class ConfigurationManager;
 };
 
-class DeviceSettings {
+class DeviceInApplication {
   public:
 
-    DeviceSettings(String deviceId, String deviceInApplicationId);
+    DeviceInApplication(String deviceId, String deviceInApplicationId);
 
     String								getDeviceId();	
 	
@@ -92,7 +92,7 @@ class ConfigurationManager
 	
 	DeviceMQ*							getDeviceMQ();
 	DeviceNTP*							getDeviceNTP();
-	DeviceSettings*						getDeviceSettings();
+	DeviceInApplication*				getDeviceInApplication();
 	
 	int									getPublishMessageInterval();
 
@@ -119,7 +119,7 @@ class ConfigurationManager
 
 	DeviceMQ*							_deviceMQ;
 	DeviceNTP*							_deviceNTP;	
-	DeviceSettings*						_deviceSettings;	
+	DeviceInApplication*				_deviceInApplication;	
 	
 	int									_publishMessageInterval;
 	
