@@ -14,11 +14,7 @@
             CreateMap<ApplicationMQ, ApplicationMQGetRPCResponseContract>()
                 .ForMember(vm => vm.User, m => m.MapFrom(x => x.User))
                 .ForMember(vm => vm.Password, m => m.MapFrom(x => x.Password))
-                .ForMember(vm => vm.ApplicationTopic, m => m.MapFrom(x => x.Topic))
-                .ForMember(vm => vm.WebUITopic, m => m.MapFrom(x => x.Topic))
-                .ForMember(vm => vm.WebUITopic, m => m.ResolveUsing(src => {                    
-                    return RandonHelper.RandomString(10);
-                }));
+                .ForMember(vm => vm.ApplicationTopic, m => m.MapFrom(x => x.Topic));
         }
 
         #endregion Constructors

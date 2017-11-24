@@ -4,6 +4,7 @@ using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Worker.IConsumers;
 using ART.Infra.CrossCutting.Logging;
+using ART.Infra.CrossCutting.MQ;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
@@ -20,22 +21,21 @@ namespace ART.Domotica.Worker.Consumers
         #region private fields
 
         private readonly EventingBasicConsumer _getRPCConsumer;
-
         private readonly IComponentContext _componentContext;
-
         private readonly ILogger _logger;
+        private readonly IMQSettings _mqSettings;
 
         #endregion
 
         #region constructors
 
-        public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings) : base(connection)
         {
             _getRPCConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
-
             _logger = logger;
+            _mqSettings = mqSettings;
 
             Initialize();
         }
@@ -75,6 +75,11 @@ namespace ART.Domotica.Worker.Consumers
             
             //Enviando para View
             var responseContract = Mapper.Map<ApplicationMQ, ApplicationMQGetRPCResponseContract>(data);
+
+            responseContract.Host = _mqSettings.BrokerHost;
+            responseContract.Port = _mqSettings.BrokerPort;
+            responseContract.WebUITopic = RandonHelper.RandomString(10);
+
             var responseBuffer = SerializationHelpers.SerializeToJsonBufferAsync(responseContract);
 
             _model.BasicQos(0, 1, false);
