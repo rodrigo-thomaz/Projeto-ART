@@ -60,7 +60,7 @@ bool MQQTManager::autoConnect()
       
         char* const host 		= strdup(brokerSettings->getHost().c_str());
         char* const user 		= strdup(brokerSettings->getUser().c_str());
-        char* const pwd  		= strdup(brokerSettings->getPwd().c_str());
+        char* const password  	= strdup(brokerSettings->getPassword().c_str());
 		char* const clientId  	= strdup(brokerSettings->getClientId().c_str());
         		
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
@@ -72,16 +72,16 @@ bool MQQTManager::autoConnect()
         Serial.print("[MQQT] User: ");
         Serial.println(user);        
 
-        Serial.print("[MQQT] Pwd: ");
-        Serial.println(pwd);        
+        Serial.print("[MQQT] Password: ");
+        Serial.println(password);        
 
         byte willQoS = 0;
         const char* willTopic = "willTopic";
         const char* willMessage = "My Will Message";
         boolean willRetain = false;
         
-        if (this->_mqqt->connect(clientId, user, pwd)) 
-        //if (this->_mqqt->connect(clientId, user, pwd, willTopic, willQoS, willRetain, willMessage)) 
+        if (this->_mqqt->connect(clientId, user, password)) 
+        //if (this->_mqqt->connect(clientId, user, password, willTopic, willQoS, willRetain, willMessage)) 
         {
             Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 
