@@ -22,7 +22,8 @@ app.factory('applicationMQ', [function () {
 
     serviceFactory.user = null;
     serviceFactory.password = null;
-    serviceFactory.topic = null;
+    serviceFactory.applicationTopic = null;
+    serviceFactory.webUITopic = null;
 
     return serviceFactory;
 

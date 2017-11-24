@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localStorage', 'stompService', function ($q, $injector, $location, $localStorage, stompService) {
+app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localStorage', 'applicationMQ', function ($q, $injector, $location, $localStorage, applicationMQ) {
 
     var authInterceptorServiceFactory = {};
 
@@ -7,7 +7,7 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localSt
 
         config.headers = config.headers || {};
 
-        config.headers.souceMQSession = stompService.session;
+        config.headers.souceMQSession = applicationMQ.webUITopic;
         
         var authData = $localStorage.authorizationData;
         if (authData) {
