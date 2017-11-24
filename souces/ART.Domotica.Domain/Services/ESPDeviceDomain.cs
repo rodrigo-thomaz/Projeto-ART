@@ -24,7 +24,7 @@
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly IDeviceMQRepository _deviceMQRepository;
-        private readonly IDeviceNTPSettingRepository _deviceNTPSettingRepository;
+        private readonly IDeviceNTPRepository _deviceNTPRepository;
 
         #endregion Fields
 
@@ -39,7 +39,7 @@
             _applicationUserRepository = new ApplicationUserRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _deviceMQRepository = new DeviceMQRepository(context);
-            _deviceNTPSettingRepository = new DeviceNTPSettingRepository(context);
+            _deviceNTPRepository = new DeviceNTPRepository(context);
         }
 
         #endregion Constructors
@@ -177,7 +177,7 @@
 
         public async Task<ESPDevice> SetTimeOffsetInSecond(Guid deviceId, int timeOffsetInSecond)
         {
-            var entity = await _deviceNTPSettingRepository.GetById(deviceId);
+            var entity = await _deviceNTPRepository.GetById(deviceId);
 
             if (entity == null)
             {
@@ -186,14 +186,14 @@
 
             entity.TimeOffsetInSecond = timeOffsetInSecond;
 
-            await _deviceNTPSettingRepository.Update(entity);
+            await _deviceNTPRepository.Update(entity);
 
             return await _espDeviceRepository.GetById(deviceId);
         }
 
         public async Task<ESPDevice> SetUpdateIntervalInMilliSecond(Guid deviceId, int updateIntervalInMilliSecond)
         {
-            var entity = await _deviceNTPSettingRepository.GetById(deviceId);
+            var entity = await _deviceNTPRepository.GetById(deviceId);
 
             if (entity == null)
             {
@@ -202,7 +202,7 @@
 
             entity.UpdateIntervalInMilliSecond = updateIntervalInMilliSecond;
 
-            await _deviceNTPSettingRepository.Update(entity);
+            await _deviceNTPRepository.Update(entity);
 
             return await _espDeviceRepository.GetById(deviceId);
         }

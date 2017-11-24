@@ -40,7 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DeviceNTPSettingDetailModel.cs" />
+    <Compile Include="DeviceNTPDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorDetailModel.cs" />
     <Compile Include="ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel.cs" />
     <Compile Include="ESPDeviceSetTimeOffsetInSecondCompletedModel.cs" />

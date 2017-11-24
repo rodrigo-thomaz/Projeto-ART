@@ -15,9 +15,9 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
         $scope.device = device; 
 
-        $scope.deviceNTPSettingView = {
-            timeOffsetInSecond: device.deviceNTPSetting.timeOffsetInSecond,
-            updateIntervalInMilliSecond: device.deviceNTPSetting.updateIntervalInMilliSecond,
+        $scope.deviceNTPView = {
+            timeOffsetInSecond: device.deviceNTP.timeOffsetInSecond,
+            updateIntervalInMilliSecond: device.deviceNTP.updateIntervalInMilliSecond,
         };
 
         clearOnSetTimeOffsetInSecondCompleted = $rootScope.$on('espDeviceService_onSetTimeOffsetInSecondCompleted_Id_' + $scope.device.deviceId, onSetTimeOffsetInSecondCompleted);        
@@ -44,12 +44,12 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
     $scope.changeTimeOffsetInSecond = function () {
         if (!initialized) return;
-        espDeviceService.setTimeOffsetInSecond($scope.device.deviceId, $scope.deviceNTPSettingView.timeOffsetInSecond);
+        espDeviceService.setTimeOffsetInSecond($scope.device.deviceId, $scope.deviceNTPView.timeOffsetInSecond);
     };
 
     $scope.changeUpdateIntervalInMilliSecond = function () {
         if (!initialized) return;
-        espDeviceService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.deviceNTPSettingView.updateIntervalInMilliSecond);
+        espDeviceService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.deviceNTPView.updateIntervalInMilliSecond);
     };
 
 }]);

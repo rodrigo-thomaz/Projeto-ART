@@ -5,7 +5,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IDeviceNTPSettingRepository : IRepository<ARTDbContext, DeviceNTPSetting, Guid>
+    public interface IDeviceNTPRepository : IRepository<ARTDbContext, DeviceNTP, Guid>
     {
     }
 }

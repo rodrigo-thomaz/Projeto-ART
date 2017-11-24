@@ -6,11 +6,11 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
 
-    public class DeviceNTPSettingRepository : RepositoryBase<ARTDbContext, DeviceNTPSetting, Guid>, IDeviceNTPSettingRepository
+    public class DeviceNTPRepository : RepositoryBase<ARTDbContext, DeviceNTP, Guid>, IDeviceNTPRepository
     {
         #region Constructors
 
-        public DeviceNTPSettingRepository(ARTDbContext context)
+        public DeviceNTPRepository(ARTDbContext context)
             : base(context)
         {
         }

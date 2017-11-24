@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Model
 {
-    public class DeviceNTPSettingDetailModel
+    public class DeviceNTPDetailModel
     {
         #region Properties
 

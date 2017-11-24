@@ -4,7 +4,7 @@
 
     using ART.Infra.CrossCutting.Repository;
 
-    public class DeviceNTPSetting : IEntity<Guid>
+    public class DeviceNTP : IEntity<Guid>
     {
         #region Properties
 

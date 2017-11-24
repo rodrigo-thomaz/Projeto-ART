@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class DeviceNTPSettingConfiguration : EntityTypeConfiguration<DeviceNTPSetting>
+    public class DeviceNTPConfiguration : EntityTypeConfiguration<DeviceNTP>
     {
         #region Constructors
 
-        public DeviceNTPSettingConfiguration()
+        public DeviceNTPConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);
@@ -22,7 +22,7 @@
 
             //DeviceBase
             HasRequired(x => x.DeviceBase)
-               .WithRequiredDependent(x => x.DeviceNTPSetting);
+               .WithRequiredDependent(x => x.DeviceNTP);
 
             //TimeOffsetInSecond
             Property(x => x.TimeOffsetInSecond)

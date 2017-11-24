@@ -5,13 +5,13 @@
 
     using global::AutoMapper;
 
-    public class DeviceNTPSettingProfile : Profile
+    public class DeviceNTPProfile : Profile
     {
         #region Constructors
 
-        public DeviceNTPSettingProfile()
+        public DeviceNTPProfile()
         {
-            CreateMap<DeviceNTPSetting, DeviceNTPSettingDetailModel>();
+            CreateMap<DeviceNTP, DeviceNTPDetailModel>();
         }
 
         #endregion Constructors

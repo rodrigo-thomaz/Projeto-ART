@@ -27,7 +27,7 @@
             get; set;
         }
 
-        public DeviceNTPSettingDetailModel DeviceNTPSetting
+        public DeviceNTPDetailModel DeviceNTP
         {
             get; set;
         }

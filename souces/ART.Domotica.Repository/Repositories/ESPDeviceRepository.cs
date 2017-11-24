@@ -78,7 +78,7 @@
             var data = await _context.ESPDevice
                .Include(x => x.DevicesInApplication)
                .Include(x => x.DeviceMQ)
-               .Include(x => x.DeviceNTPSetting)
+               .Include(x => x.DeviceNTP)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)
                .Where(x => x.MacAddress == macAddress)               
@@ -91,7 +91,7 @@
         {
             var data = await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)
-                .Include(x => x.DeviceNTPSetting)
+                .Include(x => x.DeviceNTP)
                 .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();

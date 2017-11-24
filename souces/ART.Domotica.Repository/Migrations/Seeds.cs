@@ -347,7 +347,7 @@
 
             var espDevice1 = context.ESPDevice
                 .Include(x => x.DeviceMQ)
-                .Include(x => x.DeviceNTPSetting)
+                .Include(x => x.DeviceNTP)
                 .SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
 
             if (espDevice1 == null)
@@ -366,7 +366,7 @@
                         ClientId = RandonHelper.RandomString(10),
                         Topic = RandonHelper.RandomString(10),
                     },
-                    DeviceNTPSetting = new DeviceNTPSetting
+                    DeviceNTP = new DeviceNTP
                     {
                         TimeOffsetInSecond = -7200, // Cada hora são 3600 segundos
                         UpdateIntervalInMilliSecond = 60000,
@@ -388,9 +388,9 @@
                         Topic = RandonHelper.RandomString(10),
                     };
                 }
-                if (espDevice1.DeviceNTPSetting == null)
+                if (espDevice1.DeviceNTP == null)
                 {
-                    espDevice1.DeviceNTPSetting = new DeviceNTPSetting
+                    espDevice1.DeviceNTP = new DeviceNTP
                     {
                         TimeOffsetInSecond = -7200,// Cada hora são 3600 segundos
                         UpdateIntervalInMilliSecond = 60000,

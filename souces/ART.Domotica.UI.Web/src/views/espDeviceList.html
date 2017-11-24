@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label">Time Offset In Second</label>
                                     <div class="col-lg-8">
-                                        <input name="inputTimeOffsetInSecond" type="number" ng-model="deviceNTPSettingView.timeOffsetInSecond" ng-model-options="{ debounce: 1000 }" ng-change="changeTimeOffsetInSecond()" required class="form-control">
+                                        <input name="inputTimeOffsetInSecond" type="number" ng-model="deviceNTPView.timeOffsetInSecond" ng-model-options="{ debounce: 1000 }" ng-change="changeTimeOffsetInSecond()" required class="form-control">
                                     </div>
                                     <span ng-show="formDevice.inputTimeOffsetInSecond.$touched && formDevice.inputTimeOffsetInSecond.$invalid">
                                         Time Offset In Second requerido
@@ -56,7 +56,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label">Update Interval In MilliSecond</label>
                                     <div class="col-lg-8">
-                                        <input name="inputUpdateIntervalInMilliSecond" type="number" ng-model="deviceNTPSettingView.updateIntervalInMilliSecond" ng-model-options="{ debounce: 1000 }" ng-change="changeUpdateIntervalInMilliSecond()" required class="form-control">
+                                        <input name="inputUpdateIntervalInMilliSecond" type="number" ng-model="deviceNTPView.updateIntervalInMilliSecond" ng-model-options="{ debounce: 1000 }" ng-change="changeUpdateIntervalInMilliSecond()" required class="form-control">
                                     </div>
                                     <span ng-show="formDevice.inputUpdateIntervalInMilliSecond.$touched && formDevice.inputUpdateIntervalInMilliSecond.$invalid">
                                         Update Interval In MilliSecond requerido

@@ -45,7 +45,7 @@
             get; set;
         }
 
-        public DbSet<DeviceNTPSetting> DeviceNTPSetting
+        public DbSet<DeviceNTP> DeviceNTP
         {
             get; set;
         }
@@ -109,7 +109,7 @@
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
             modelBuilder.Configurations.Add(new DeviceMQConfiguration());
-            modelBuilder.Configurations.Add(new DeviceNTPSettingConfiguration());
+            modelBuilder.Configurations.Add(new DeviceNTPConfiguration());
             modelBuilder.Configurations.Add(new SensorBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
             modelBuilder.Configurations.Add(new DeviceInApplicationConfiguration());

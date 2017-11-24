@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public DeviceNTPSetting DeviceNTPSetting
+        public DeviceNTP DeviceNTP
         {
             get; set;
         }
