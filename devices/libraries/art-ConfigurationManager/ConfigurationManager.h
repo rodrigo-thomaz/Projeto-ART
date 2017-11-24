@@ -7,10 +7,10 @@
 #include "WiFiManager.h"
 #include "ESP8266HTTPClient.h"
 
-class BrokerSettings {
+class DeviceMQ {
   public:
 
-    BrokerSettings(String host, int port, String user, String password, String clientId, String applicationTopic, String deviceTopic);
+    DeviceMQ(String host, int port, String user, String password, String clientId, String applicationTopic, String deviceTopic);
 
     String								getHost();
 	int									getPort();
@@ -90,7 +90,7 @@ class ConfigurationManager
 	
 	bool								initialized();
 	
-	BrokerSettings*						getBrokerSettings();
+	DeviceMQ*							getDeviceMQ();
 	NTPSettings*						getNTPSettings();
 	DeviceSettings*						getDeviceSettings();
 	
@@ -117,7 +117,7 @@ class ConfigurationManager
 	int									_flashChipId;
 	String								_macAddress;
 
-	BrokerSettings*						_brokerSettings;
+	DeviceMQ*							_deviceMQ;
 	NTPSettings*						_ntpSettings;	
 	DeviceSettings*						_deviceSettings;	
 	

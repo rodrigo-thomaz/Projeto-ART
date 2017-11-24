@@ -22,13 +22,13 @@ bool MQQTManager::begin()
 	
 	if(this->_wifiManager->isConnected() && this->_configurationManager->initialized()){
 
-		BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();
+		DeviceMQ* deviceMQ = this->_configurationManager->getDeviceMQ();
 
-		char* const host = strdup(brokerSettings->getHost().c_str());
-		int port = brokerSettings->getPort();
+		char* const host = strdup(deviceMQ->getHost().c_str());
+		int port = deviceMQ->getPort();
 
 		this->_mqqt->setServer(host, port);         //informa qual broker e porta deve ser conectado			
-		this->_mqqt->setCallback(_onSubCallback);      //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega) 
+		this->_mqqt->setCallback(_onSubCallback);   //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega) 
 
 		this->_begin = true;
 
@@ -56,12 +56,12 @@ bool MQQTManager::autoConnect()
     }
 	else {
 		
-		BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();        
+		DeviceMQ* deviceMQ = this->_configurationManager->getDeviceMQ();        
       
-        char* const host 		= strdup(brokerSettings->getHost().c_str());
-        char* const user 		= strdup(brokerSettings->getUser().c_str());
-        char* const password  	= strdup(brokerSettings->getPassword().c_str());
-		char* const clientId  	= strdup(brokerSettings->getClientId().c_str());
+        char* const host 		= strdup(deviceMQ->getHost().c_str());
+        char* const user 		= strdup(deviceMQ->getUser().c_str());
+        char* const password  	= strdup(deviceMQ->getPassword().c_str());
+		char* const clientId  	= strdup(deviceMQ->getClientId().c_str());
         		
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
         Serial.println(host);
@@ -185,9 +185,9 @@ String MQQTManager::getTopicKey(char* routingKey)
 
 String MQQTManager::getApplicationRoutingKey(const char* topic)
 {
-	BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();        
-	String applicationTopic = brokerSettings->getApplicationTopic();
-	String deviceTopic = brokerSettings->getDeviceTopic();
+	DeviceMQ* deviceMQ = this->_configurationManager->getDeviceMQ();        
+	String applicationTopic = deviceMQ->getApplicationTopic();
+	String deviceTopic = deviceMQ->getDeviceTopic();
 	
 	String routingKey = String("ART/Application/");
 	routingKey.concat(applicationTopic);
@@ -201,8 +201,8 @@ String MQQTManager::getApplicationRoutingKey(const char* topic)
 
 String MQQTManager::getDeviceRoutingKey(const char* topic)
 {
-	BrokerSettings* brokerSettings = this->_configurationManager->getBrokerSettings();        
-	String deviceTopic = brokerSettings->getDeviceTopic();
+	DeviceMQ* deviceMQ = this->_configurationManager->getDeviceMQ();        
+	String deviceTopic = deviceMQ->getDeviceTopic();
 	
 	String routingKey = String("ART/Device/");
 	routingKey.concat(deviceTopic);

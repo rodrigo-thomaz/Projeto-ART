@@ -1,8 +1,8 @@
 #include "ConfigurationManager.h"
 
-// BrokerSettings
+// DeviceMQ
 
-BrokerSettings::BrokerSettings(String host, int port, String user, String password, String clientId, String applicationTopic, String deviceTopic) {
+DeviceMQ::DeviceMQ(String host, int port, String user, String password, String clientId, String applicationTopic, String deviceTopic) {
   _host = host;
   _port = port;
   _user = user;
@@ -12,42 +12,42 @@ BrokerSettings::BrokerSettings(String host, int port, String user, String passwo
   _deviceTopic = deviceTopic;
 }
 
-String BrokerSettings::getHost()
+String DeviceMQ::getHost()
 {	
 	return this->_host;
 }
 
-int BrokerSettings::getPort()
+int DeviceMQ::getPort()
 {	
 	return this->_port;
 }
 
-String BrokerSettings::getUser()
+String DeviceMQ::getUser()
 {	
 	return this->_user;
 }
 
-String BrokerSettings::getPassword()
+String DeviceMQ::getPassword()
 {	
 	return this->_password;
 }
 
-String BrokerSettings::getClientId()
+String DeviceMQ::getClientId()
 {	
 	return this->_clientId;
 }
 
-String BrokerSettings::getApplicationTopic()
+String DeviceMQ::getApplicationTopic()
 {	
 	return this->_applicationTopic;
 }
 
-void BrokerSettings::setApplicationTopic(String value)
+void DeviceMQ::setApplicationTopic(String value)
 {	
 	this->_applicationTopic = value;
 }
 
-String BrokerSettings::getDeviceTopic()
+String DeviceMQ::getDeviceTopic()
 {	
 	return this->_deviceTopic;
 }
@@ -124,7 +124,7 @@ ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManag
 	this->_port = port;
 	this->_uri = uri;
 	
-	this->_brokerSettings = NULL;
+	this->_deviceMQ = NULL;
 	this->_ntpSettings = NULL;
 	this->_deviceSettings = NULL;
 }
@@ -143,9 +143,9 @@ bool ConfigurationManager::initialized()
 	return this->_initialized;
 }
 
-BrokerSettings* ConfigurationManager::getBrokerSettings()
+DeviceMQ* ConfigurationManager::getDeviceMQ()
 {	
-	return this->_brokerSettings;
+	return this->_deviceMQ;
 }
 
 NTPSettings* ConfigurationManager::getNTPSettings()
@@ -209,7 +209,7 @@ void ConfigurationManager::autoInitialize()
 			JsonObject& deviceMQ = jsonObjectResponse["deviceMQ"];
 			JsonObject& deviceNTP = jsonObjectResponse["deviceNTP"];
 			
-			this->_brokerSettings = new BrokerSettings(
+			this->_deviceMQ = new DeviceMQ(
 				deviceMQ["host"], 
 				deviceMQ["port"], 
 				deviceMQ["user"], 
@@ -233,29 +233,33 @@ void ConfigurationManager::autoInitialize()
 			
 			Serial.println("ConfigurationManager initialized with success !");
 			
-			Serial.print("Broker Host: ");
-			Serial.println(this->_brokerSettings->getHost());
-			Serial.print("Broker Port: ");
-			Serial.println(this->_brokerSettings->getPort());
-			Serial.print("Broker User: ");
-			Serial.println(this->_brokerSettings->getUser());
-			Serial.print("Broker Password: ");
-			Serial.println(this->_brokerSettings->getPassword());
-			Serial.print("Broker ClientId: ");
-			Serial.println(this->_brokerSettings->getClientId());
-			Serial.print("Broker Application Topic: ");
-			Serial.println(this->_brokerSettings->getApplicationTopic());
-			Serial.print("Broker Device Topic: ");
-			Serial.println(this->_brokerSettings->getDeviceTopic());
+			Serial.print("DeviceMQ Host: ");
+			Serial.println(this->_deviceMQ->getHost());
+			Serial.print("DeviceMQ Port: ");
+			Serial.println(this->_deviceMQ->getPort());
+			Serial.print("DeviceMQ User: ");
+			Serial.println(this->_deviceMQ->getUser());
+			Serial.print("DeviceMQ Password: ");
+			Serial.println(this->_deviceMQ->getPassword());
+			Serial.print("DeviceMQ ClientId: ");
+			Serial.println(this->_deviceMQ->getClientId());
+			Serial.print("DeviceMQ Application Topic: ");
+			Serial.println(this->_deviceMQ->getApplicationTopic());
+			Serial.print("DeviceMQ Device Topic: ");
+			Serial.println(this->_deviceMQ->getDeviceTopic());
 			
-			Serial.print("NTP Host: ");
+			Serial.println();
+			
+			Serial.print("DeviceNTP Host: ");
 			Serial.println(this->_ntpSettings->getHost());
-			Serial.print("NTP Port: ");
+			Serial.print("DeviceNTP Port: ");
 			Serial.println(this->_ntpSettings->getPort());			
-			Serial.print("NTP Time Offset: ");
+			Serial.print("DeviceNTP Time Offset: ");
 			Serial.println(this->_ntpSettings->getTimeOffsetInSecond());
-			Serial.print("NTP Update Interval: ");
+			Serial.print("DeviceNTP Update Interval: ");
 			Serial.println(this->_ntpSettings->getUpdateIntervalInMilliSecond());
+			
+			Serial.println();
 			
 			Serial.print("DeviceId: ");
 			Serial.println(this->_deviceSettings->getDeviceId());
@@ -291,7 +295,7 @@ void ConfigurationManager::insertInApplication(String json)
 	String brokerApplicationTopic = root["brokerApplicationTopic"];	
 	
 	this->_deviceSettings->setDeviceInApplicationId(deviceInApplicationId);
-	this->_brokerSettings->setApplicationTopic(brokerApplicationTopic);
+	this->_deviceMQ->setApplicationTopic(brokerApplicationTopic);
 	
 	Serial.println("[ConfigurationManager::insertInApplication] ");
 	Serial.print("deviceInApplicationId: ");
@@ -303,7 +307,7 @@ void ConfigurationManager::insertInApplication(String json)
 void ConfigurationManager::deleteFromApplication()
 {	
 	this->_deviceSettings->setDeviceInApplicationId("");	
-	this->_brokerSettings->setApplicationTopic("");
+	this->_deviceMQ->setApplicationTopic("");
 	
 	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
 }
