@@ -6,40 +6,7 @@
     {
         #region Properties
 
-        public string BrokerApplicationTopic
-        {
-            get; set;
-        }
-
-        public string BrokerClientId
-        {
-            get; set;
-        }
-
-        public string BrokerDeviceTopic
-        {
-            get; set;
-        }
-
-        public string BrokerHost
-        {
-            get; set;
-        }
-
-        public string BrokerPassword
-        {
-            get; set;
-        }
-
-        public int BrokerPort
-        {
-            get; set;
-        }
-
-        public string BrokerUser
-        {
-            get; set;
-        }
+        public DeviceMQDetailResponseContract DeviceMQ { get; set; }
 
         public Guid DeviceId
         {

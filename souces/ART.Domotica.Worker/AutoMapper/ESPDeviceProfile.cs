@@ -29,6 +29,12 @@
 
             CreateMap<ESPDevice, ESPDeviceGetByPinModel>();
 
+            CreateMap<DeviceMQ, DeviceMQDetailResponseContract>()
+                .ForMember(vm => vm.User, m => m.MapFrom(x => x.User))
+                .ForMember(vm => vm.Password, m => m.MapFrom(x => x.Password))
+                .ForMember(vm => vm.ClientId, m => m.MapFrom(x => x.ClientId))
+                .ForMember(vm => vm.DeviceTopic, m => m.MapFrom(x => x.Topic));
+
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
                 .ForMember(vm => vm.DeviceInApplicationId, m => m.ResolveUsing(src => {
                     if (src.DevicesInApplication != null && src.DevicesInApplication.Any())
@@ -38,10 +44,7 @@
                     return (Guid?)null;
                 }))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.BrokerUser, m => m.MapFrom(x => x.DeviceMQ.User))
-                .ForMember(vm => vm.BrokerPassword, m => m.MapFrom(x => x.DeviceMQ.Password))
-                .ForMember(vm => vm.BrokerClientId, m => m.MapFrom(x => x.DeviceMQ.ClientId))
-                .ForMember(vm => vm.BrokerDeviceTopic, m => m.MapFrom(x => x.DeviceMQ.Topic))
+                .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))
                 .ForMember(vm => vm.NTPUpdateInterval, m => m.MapFrom(x => x.DeviceNTP.UpdateIntervalInMilliSecond))
                 .ForMember(vm => vm.TimeOffset, m => m.MapFrom(x => x.DeviceNTP.TimeOffsetInSecond));
 

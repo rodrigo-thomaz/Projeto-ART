@@ -344,9 +344,12 @@
 
             var responseContract = new ESPDeviceGetConfigurationsRPCResponseContract
             {
-                BrokerHost = _mqSettings.BrokerHost,
-                BrokerPort = _mqSettings.BrokerPort,
-                BrokerApplicationTopic = applicationTopic,
+                DeviceMQ = new DeviceMQDetailResponseContract
+                {
+                    Host = _mqSettings.BrokerHost,
+                    Port = _mqSettings.BrokerPort,
+                    ApplicationTopic = applicationTopic,
+                },             
                 NTPHost = ntpHost,
                 NTPPort = ntpPort,
                 PublishMessageInterval = publishMessageInterval,

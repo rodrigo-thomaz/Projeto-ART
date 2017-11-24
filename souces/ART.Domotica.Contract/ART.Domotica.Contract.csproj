@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationMQGetRPCResponseContract.cs" />
+    <Compile Include="DeviceMQDetailResponseContract.cs" />
     <Compile Include="ESPDeviceSetTimeOffsetInSecondRequestContract.cs" />
     <Compile Include="ESPDeviceSetUpdateIntervalInMilliSecondRequestContract.cs" />
     <Compile Include="DSFamilyTempSensorSetLabelRequestContract.cs" />

@@ -206,14 +206,16 @@ void ConfigurationManager::autoInitialize()
 			DynamicJsonBuffer jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);			
 			
+			JsonObject& deviceMQ = jsonObjectResponse["deviceMQ"];
+			
 			this->_brokerSettings = new BrokerSettings(
-				jsonObjectResponse["brokerHost"], 
-				jsonObjectResponse["brokerPort"], 
-				jsonObjectResponse["brokerUser"], 
-				jsonObjectResponse["brokerPassword"],
-				jsonObjectResponse["brokerClientId"],
-				jsonObjectResponse["brokerApplicationTopic"],
-				jsonObjectResponse["brokerDeviceTopic"]);
+				deviceMQ["host"], 
+				deviceMQ["port"], 
+				deviceMQ["user"], 
+				deviceMQ["password"],
+				deviceMQ["clientId"],
+				deviceMQ["applicationTopic"],
+				deviceMQ["deviceTopic"]);
 			
 			this->_ntpSettings = new NTPSettings(
 				jsonObjectResponse["ntpHost"], 
