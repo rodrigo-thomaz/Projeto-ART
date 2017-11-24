@@ -3,28 +3,25 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     
     var serviceFactory = {};    
     
-    serviceFactory.session = null; 
-    
     var onConnected = function (frame) {
         $rootScope.$emit('stompService_onConnected', frame);
     }
 
     var onError = function (frame) {
-
-        serviceFactory.session = null;
-
         $rootScope.$emit('stompService_onError', frame);
     }
 
     var subscribe = function (topic, callback) {
-        var applicationTopic = applicationMQ.applicationTopic;
-        client.subscribe('/topic/ART.Application.' + applicationTopic + '.WebUI.' + serviceFactory.session + '.' + topic, callback);
+        client.subscribe(generateStringTopic(topic), callback);
     };
 
     var unsubscribe = function (topic) {
-        var applicationTopic = applicationMQ.applicationTopic;
-        client.unsubscribe('/topic/ART.Application.' + applicationTopic + '.WebUI.' + serviceFactory.session + '.' + topic);
+        client.unsubscribe(generateStringTopic(topic));
     };    
+
+    var generateStringTopic = function (topic){
+        return '/topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + applicationMQ.webUITopic + '.' + topic;
+    }
 
     var onApplicationMQInitialized = function (event, data) {
 
@@ -38,8 +35,6 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         client = Stomp.client(url);
 
         serviceFactory.client = client;
-
-        serviceFactory.session = applicationMQ.webUITopic;
 
         var wsBrokerHostName = ngAuthSettings.wsBrokerHostName;
         var wsBrokerPort = ngAuthSettings.wsBrokerPort;        
