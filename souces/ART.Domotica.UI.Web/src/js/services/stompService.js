@@ -38,10 +38,7 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
 
         client = Stomp.client(url);
 
-        serviceFactory.client = client;
-
-        var wsBrokerHostName = ngAuthSettings.wsBrokerHostName;
-        var wsBrokerPort = ngAuthSettings.wsBrokerPort;        
+        serviceFactory.client = client;         
 
         client.connect(headers, onConnected, onError);    
     };    
@@ -49,6 +46,9 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     $rootScope.$on('$destroy', function () {
         clearOnApplicationMQInitialized();        
     });
+
+    var wsBrokerHostName = ngAuthSettings.wsBrokerHostName;
+    var wsBrokerPort = ngAuthSettings.wsBrokerPort;       
 
     var url = 'ws://' + wsBrokerHostName + ':' + wsBrokerPort + '/ws';
 

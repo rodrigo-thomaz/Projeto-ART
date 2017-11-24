@@ -76,8 +76,6 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var responseContract = Mapper.Map<ApplicationMQ, ApplicationMQGetRPCResponseContract>(data);
 
-            responseContract.Host = _mqSettings.BrokerHost;
-            responseContract.Port = _mqSettings.BrokerPort;
             responseContract.WebUITopic = RandonHelper.RandomString(10);
 
             var responseBuffer = SerializationHelpers.SerializeToJsonBufferAsync(responseContract);

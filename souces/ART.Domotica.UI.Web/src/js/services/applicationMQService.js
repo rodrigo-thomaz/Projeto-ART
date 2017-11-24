@@ -6,8 +6,6 @@ app.factory('applicationMQ', [function () {
     
     var init = function (applicationMQ) {
 
-        serviceFactory.host = applicationMQ.host;
-        serviceFactory.port = applicationMQ.port;
         serviceFactory.user = applicationMQ.user;
         serviceFactory.password = applicationMQ.password;
         serviceFactory.applicationTopic = applicationMQ.applicationTopic;
@@ -22,8 +20,6 @@ app.factory('applicationMQ', [function () {
     //Properties
     serviceFactory.initialized = false;
 
-    serviceFactory.host = null;
-    serviceFactory.port = null;
     serviceFactory.user = null;
     serviceFactory.password = null;
     serviceFactory.applicationTopic = null;
