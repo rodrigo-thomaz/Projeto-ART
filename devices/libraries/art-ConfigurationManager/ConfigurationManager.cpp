@@ -52,41 +52,41 @@ String DeviceMQ::getDeviceTopic()
 	return this->_deviceTopic;
 }
 
-// NTPSettings
+// DeviceNTP
 
-NTPSettings::NTPSettings(String host, int port, int timeOffsetInSecond, int updateIntervalInMilliSecond) {
+DeviceNTP::DeviceNTP(String host, int port, int timeOffsetInSecond, int updateIntervalInMilliSecond) {
   _host = host;
   _port = port;  
   _timeOffsetInSecond = timeOffsetInSecond;
   _updateIntervalInMilliSecond = updateIntervalInMilliSecond;
 }
 
-String NTPSettings::getHost()
+String DeviceNTP::getHost()
 {	
 	return this->_host;
 }
 
-int NTPSettings::getPort()
+int DeviceNTP::getPort()
 {	
 	return this->_port;
 }
 
-int NTPSettings::getTimeOffsetInSecond()
+int DeviceNTP::getTimeOffsetInSecond()
 {	
 	return this->_timeOffsetInSecond;
 }
 
-void NTPSettings::setTimeOffsetInSecond(int value)
+void DeviceNTP::setTimeOffsetInSecond(int value)
 {	
 	this->_timeOffsetInSecond = value;
 }
 
-int NTPSettings::getUpdateIntervalInMilliSecond()
+int DeviceNTP::getUpdateIntervalInMilliSecond()
 {	
 	return this->_updateIntervalInMilliSecond;
 }
 
-void NTPSettings::setUpdateIntervalInMilliSecond(int value)
+void DeviceNTP::setUpdateIntervalInMilliSecond(int value)
 {	
 	this->_updateIntervalInMilliSecond = value;
 }
@@ -125,7 +125,7 @@ ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManag
 	this->_uri = uri;
 	
 	this->_deviceMQ = NULL;
-	this->_ntpSettings = NULL;
+	this->_deviceNTP = NULL;
 	this->_deviceSettings = NULL;
 }
 
@@ -148,9 +148,9 @@ DeviceMQ* ConfigurationManager::getDeviceMQ()
 	return this->_deviceMQ;
 }
 
-NTPSettings* ConfigurationManager::getNTPSettings()
+DeviceNTP* ConfigurationManager::getDeviceNTP()
 {	
-	return this->_ntpSettings;
+	return this->_deviceNTP;
 }
 
 DeviceSettings* ConfigurationManager::getDeviceSettings()
@@ -218,7 +218,7 @@ void ConfigurationManager::autoInitialize()
 				deviceMQ["applicationTopic"],
 				deviceMQ["deviceTopic"]);
 			
-			this->_ntpSettings = new NTPSettings(
+			this->_deviceNTP = new DeviceNTP(
 				deviceNTP["host"], 
 				deviceNTP["port"], 
 				deviceNTP["timeOffsetInSecond"],
@@ -248,18 +248,14 @@ void ConfigurationManager::autoInitialize()
 			Serial.print("DeviceMQ Device Topic: ");
 			Serial.println(this->_deviceMQ->getDeviceTopic());
 			
-			Serial.println();
-			
 			Serial.print("DeviceNTP Host: ");
-			Serial.println(this->_ntpSettings->getHost());
+			Serial.println(this->_deviceNTP->getHost());
 			Serial.print("DeviceNTP Port: ");
-			Serial.println(this->_ntpSettings->getPort());			
+			Serial.println(this->_deviceNTP->getPort());			
 			Serial.print("DeviceNTP Time Offset: ");
-			Serial.println(this->_ntpSettings->getTimeOffsetInSecond());
+			Serial.println(this->_deviceNTP->getTimeOffsetInSecond());
 			Serial.print("DeviceNTP Update Interval: ");
-			Serial.println(this->_ntpSettings->getUpdateIntervalInMilliSecond());
-			
-			Serial.println();
+			Serial.println(this->_deviceNTP->getUpdateIntervalInMilliSecond());
 			
 			Serial.print("DeviceId: ");
 			Serial.println(this->_deviceSettings->getDeviceId());
@@ -326,7 +322,7 @@ void ConfigurationManager::setTimeOffsetInSecond(String json)
 
 	int timeOffsetInSecond = root["timeOffsetInSecond"];
 	
-	this->_ntpSettings->setTimeOffsetInSecond(timeOffsetInSecond);
+	this->_deviceNTP->setTimeOffsetInSecond(timeOffsetInSecond);
 	
 	Serial.println("[ConfigurationManager::setTimeOffsetInSecond] ");
 	Serial.print("timeOffsetInSecond: ");
@@ -347,7 +343,7 @@ void ConfigurationManager::setUpdateIntervalInMilliSecond(String json)
 
 	int updateIntervalInMilliSecond = root["updateIntervalInMilliSecond"];
 	
-	this->_ntpSettings->setUpdateIntervalInMilliSecond(updateIntervalInMilliSecond);
+	this->_deviceNTP->setUpdateIntervalInMilliSecond(updateIntervalInMilliSecond);
 	
 	Serial.println("[ConfigurationManager::setUpdateIntervalInMilliSecond] ");
 	Serial.print("updateIntervalInMilliSecond: ");

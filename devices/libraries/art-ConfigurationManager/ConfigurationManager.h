@@ -36,10 +36,10 @@ class DeviceMQ {
     friend class ConfigurationManager;
 };
 
-class NTPSettings {
+class DeviceNTP {
   public:
 
-    NTPSettings(String host, int port, int timeOffsetInSecond, int updateIntervalInMilliSecond);
+    DeviceNTP(String host, int port, int timeOffsetInSecond, int updateIntervalInMilliSecond);
 
     String								getHost();
 	int									getPort();
@@ -91,7 +91,7 @@ class ConfigurationManager
 	bool								initialized();
 	
 	DeviceMQ*							getDeviceMQ();
-	NTPSettings*						getNTPSettings();
+	DeviceNTP*							getDeviceNTP();
 	DeviceSettings*						getDeviceSettings();
 	
 	int									getPublishMessageInterval();
@@ -118,7 +118,7 @@ class ConfigurationManager
 	String								_macAddress;
 
 	DeviceMQ*							_deviceMQ;
-	NTPSettings*						_ntpSettings;	
+	DeviceNTP*							_deviceNTP;	
 	DeviceSettings*						_deviceSettings;	
 	
 	int									_publishMessageInterval;

@@ -46,9 +46,9 @@ bool NTPManager::begin() {
       return false;
     }
 	
-	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
+	DeviceNTP* deviceNTP = this->_configurationManager->getDeviceNTP();
   
-	int port = ntpSettings->getPort();
+	int port = deviceNTP->getPort();
 	
 	this->_udp->begin(port);
 	this->_udpSetup = true;
@@ -98,9 +98,9 @@ bool NTPManager::update() {
       return false;
     }
 	
-	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
+	DeviceNTP* deviceNTP = this->_configurationManager->getDeviceNTP();
   
-	int updateInterval = ntpSettings->getUpdateIntervalInMilliSecond();
+	int updateInterval = deviceNTP->getUpdateIntervalInMilliSecond();
   
 	if ((millis() - this->_lastUpdate >= updateInterval)     		// Update after _updateInterval
 		|| this->_lastUpdate == 0) {                                // Update if there was no update yet.
@@ -124,9 +124,9 @@ bool NTPManager::update() {
 
 unsigned long NTPManager::getEpochTime() {	
 
-	NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
+	DeviceNTP* deviceNTP = this->_configurationManager->getDeviceNTP();
   
-	int timeOffset = ntpSettings->getTimeOffsetInSecond();
+	int timeOffset = deviceNTP->getTimeOffsetInSecond();
 	
 	return timeOffset + // User offset	
 		this->_currentEpoc + // Epoc returned by the NTP server
@@ -202,9 +202,9 @@ void NTPManager::sendNTPPacket() {
   // all NTP fields have been given values, now
   // you can send a packet requesting a timestamp:
   
-  NTPSettings* ntpSettings = this->_configurationManager->getNTPSettings();
+  DeviceNTP* deviceNTP = this->_configurationManager->getDeviceNTP();
   
-  char* const host = strdup(ntpSettings->getHost().c_str());
+  char* const host = strdup(deviceNTP->getHost().c_str());
   
   this->_udp->beginPacket(host, 123); //NTP requests are to port 123
   this->_udp->write(this->_packetBuffer, NTP_PACKET_SIZE);
