@@ -56,7 +56,8 @@
     <Compile Include="DSFamilyTempSensorResolutionDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmBuzzerOnCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionCompletedModel.cs" />
-    <Compile Include="TemperatureScaleGetAllModel.cs" />
+    <Compile Include="TimeZoneDetailModel.cs" />
+    <Compile Include="TemperatureScaleDetailModel.cs" />
     <Compile Include="ApplicationDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempSensorAlarmGetDetailModel.cs" />

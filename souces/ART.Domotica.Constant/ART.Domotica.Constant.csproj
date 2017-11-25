@@ -46,6 +46,7 @@
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="DSFamilyTempSensorConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeZoneConstants.cs" />
     <Compile Include="TemperatureScaleConstants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

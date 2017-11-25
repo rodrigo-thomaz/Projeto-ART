@@ -141,6 +141,7 @@
     <Compile Include="Controllers\ApplicationMQController.cs" />
     <Compile Include="Controllers\ESPDeviceController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
+    <Compile Include="Controllers\TimeZoneController.cs" />
     <Compile Include="Controllers\TemperatureScaleController.cs" />
     <Compile Include="Modules\ControllerModule.cs" />
     <Compile Include="Controllers\DSFamilyTempSensorController.cs" />

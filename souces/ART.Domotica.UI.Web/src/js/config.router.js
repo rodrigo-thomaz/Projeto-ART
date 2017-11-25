@@ -45,6 +45,7 @@ angular.module('app')
                       'toaster',
                       'js/services/temperatureScaleService.js',
                       'js/services/temperatureScaleConverter.js',
+                      'js/services/timeZoneService.js',
                       'js/services/dsFamilyTempSensorResolutionService.js',
                       'js/services/dsFamilyTempSensorService.js',
                       'js/services/espDeviceService.js',

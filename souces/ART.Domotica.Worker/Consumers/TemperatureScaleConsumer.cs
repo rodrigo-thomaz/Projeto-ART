@@ -104,7 +104,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.Get(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleGetAllModel>>(data);
+            var viewModel = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

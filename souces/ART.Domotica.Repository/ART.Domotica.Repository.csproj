@@ -109,6 +109,7 @@
     <Compile Include="Interfaces\IApplicationUserRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
+    <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
     <Compile Include="Interfaces\ITempSensorRangeRepository.cs" />
     <Compile Include="Migrations\201711191112579_InitialCreate.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />
     <Compile Include="Repositories\DeviceInApplicationRepository.cs" />
     <Compile Include="Repositories\ESPDeviceRepository.cs" />
+    <Compile Include="Repositories\TimeZoneRepository.cs" />
     <Compile Include="Repositories\TempSensorRangeRepository.cs" />
     <Compile Include="Repositories\TemperatureScaleRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />

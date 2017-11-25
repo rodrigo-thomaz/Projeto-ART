@@ -12,7 +12,7 @@
 
         public TemperatureScaleProfile()
         {
-            CreateMap<TemperatureScale, TemperatureScaleGetAllModel>();
+            CreateMap<TemperatureScale, TemperatureScaleDetailModel>();
             CreateMap<TemperatureScale, TemperatureScaleGetAllForIoTResponseContract>();
         }
 

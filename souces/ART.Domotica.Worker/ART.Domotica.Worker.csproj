@@ -105,13 +105,16 @@
     <Compile Include="AutoMapper\DeviceNTPProfile.cs" />
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
+    <Compile Include="AutoMapper\TimeZoneProfile.cs" />
     <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
     <Compile Include="AutoMapper\TempSensorRangeProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
+    <Compile Include="Consumers\TimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IApplicationMQConsumer.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
     <Compile Include="IConsumers\IDSFamilyTempSensorConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />
+    <Compile Include="IConsumers\ITimeZoneConsumer.cs" />
     <Compile Include="IConsumers\ITemperatureScaleConsumer.cs" />
     <Compile Include="IConsumers\IApplicationConsumer.cs" />
     <Compile Include="Consumers\ESPDeviceConsumer.cs" />

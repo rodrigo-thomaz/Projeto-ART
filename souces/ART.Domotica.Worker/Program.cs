@@ -61,6 +61,7 @@
                 x.AddProfile(new TemperatureScaleProfile());
                 x.AddProfile(new TempSensorRangeProfile());
                 x.AddProfile(new DeviceNTPProfile());
+                x.AddProfile(new TimeZoneProfile());
             });
 
             IContainer container = builder.Build();
