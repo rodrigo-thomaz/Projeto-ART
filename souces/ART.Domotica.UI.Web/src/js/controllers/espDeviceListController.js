@@ -65,7 +65,7 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
     }; 
 
     $scope.changeUpdateIntervalInMilliSecond = function () {
-        if (!initialized) return;
+        if (!initialized || !$scope.updateIntervalInMilliSecondView) return;
         espDeviceService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.updateIntervalInMilliSecondView);
     };
 
