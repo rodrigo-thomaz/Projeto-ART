@@ -50,7 +50,7 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
     };
 
     var onSetUpdateIntervalInMilliSecondCompleted = function (event, data) {
-        $scope.$apply();
+        $scope.updateIntervalInMilliSecondView = data.updateIntervalInMilliSecond;
         toaster.pop('success', 'Sucesso', 'UpdateIntervalInMilliSecond alterado');
     };
 
