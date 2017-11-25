@@ -90,16 +90,6 @@
             get; set;
         }
 
-        public DbSet<Country> Country
-        {
-            get; set;
-        }
-
-        public DbSet<Zone> Zone
-        {
-            get; set;
-        }
-
         public DbSet<TimeZone> TimeZone
         {
             get; set;
@@ -116,9 +106,7 @@
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             //Configurations
-
-            modelBuilder.Configurations.Add(new CountryConfiguration());
-            modelBuilder.Configurations.Add(new ZoneConfiguration());
+                        
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());

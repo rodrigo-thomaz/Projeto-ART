@@ -62,7 +62,6 @@
   <ItemGroup>
     <Compile Include="ARTDbContext.cs" />
     <Compile Include="Configurations\ApplicationMQConfiguration.cs" />
-    <Compile Include="Configurations\CountryConfiguration.cs" />
     <Compile Include="Configurations\DeviceNTPConfiguration.cs" />
     <Compile Include="Configurations\DeviceMQConfiguration.cs" />
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
@@ -81,9 +80,7 @@
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\TempSensorRangeConfiguration.cs" />
     <Compile Include="Configurations\TimeZoneConfiguration.cs" />
-    <Compile Include="Configurations\ZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
-    <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\DeviceNTP.cs" />
     <Compile Include="Entities\DeviceMQ.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
@@ -103,7 +100,6 @@
     <Compile Include="Entities\TempSensorAlarm.cs" />
     <Compile Include="Entities\TempSensorRange.cs" />
     <Compile Include="Entities\TimeZone.cs" />
-    <Compile Include="Entities\Zone.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationMQRepository.cs" />
@@ -187,6 +183,10 @@
     <Compile Include="Migrations\201711242128358_AddTableDeviceBrokkerSetting15.Designer.cs">
       <DependentUpon>201711242128358_AddTableDeviceBrokkerSetting15.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711250030101_Initial3.cs" />
+    <Compile Include="Migrations\201711250030101_Initial3.Designer.cs">
+      <DependentUpon>201711250030101_Initial3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -205,9 +205,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="InitialFiles\TimeZoneDb\country.csv" />
-    <None Include="InitialFiles\TimeZoneDb\timezone.csv" />
-    <None Include="InitialFiles\TimeZoneDb\zone.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -291,9 +288,9 @@
     <EmbeddedResource Include="Migrations\201711242128358_AddTableDeviceBrokkerSetting15.resx">
       <DependentUpon>201711242128358_AddTableDeviceBrokkerSetting15.cs</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="InitialFiles\TimeZoneDb\readme.txt" />
+    <EmbeddedResource Include="Migrations\201711250030101_Initial3.resx">
+      <DependentUpon>201711250030101_Initial3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -11,8 +11,6 @@
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;
-    using System.IO;
-    using System.Collections.Generic;
 
     public class Seeds
     {
@@ -20,6 +18,27 @@
 
         public static void Execute(ARTDbContext context)
         {
+            #region TimeZone
+
+            if (!context.TimeZone.Any()) 
+            {
+                var systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
+
+                foreach (var item in systemTimeZones)
+                {
+                    context.TimeZone.Add(new Entities.TimeZone
+                    {
+                        DisplayName = item.DisplayName,
+                        SupportsDaylightSavingTime = item.SupportsDaylightSavingTime,
+                        UtcTimeOffsetInSecond = (int)item.BaseUtcOffset.TotalSeconds,
+                    });
+                }
+
+                context.SaveChanges();
+            }
+
+            #endregion
+
             #region TempSensorRange
 
             var tempSensorRange1 = context.TempSensorRange.SingleOrDefault(x => x.Id == 1);
@@ -451,8 +470,6 @@
             #endregion
 
             ExecuteSettings();
-
-            LoadTimeZoneDb(context);
         }
 
         private static void ExecuteSettings()
@@ -519,129 +536,7 @@
             {
                 settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
             }
-        }
-
-        #region TimeZoneDb
-
-        private static void LoadTimeZoneDb(ARTDbContext context)
-        {
-            var currentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
-            var directoryBase = Path.Combine(currentDirectory, "InitialFiles", "TimeZoneDb");
-
-            var countries = ExecuteCountry(context, directoryBase);
-            var zones = ExecuteZone(context, directoryBase, countries);
-            ExecuteTimeZone(context, directoryBase, zones);
-        }
-
-        private static List<Country> ExecuteCountry(ARTDbContext context, string directoryBase)
-        {
-            if (context.Country.Any()) return context.Country.ToList();
-
-            var countries = new List<Country>();
-
-            string filePath = Path.Combine(directoryBase, "country.csv");
-
-            var lines = File.ReadAllLines(filePath).Select(a => a.Split(','));
-
-            foreach (var line in lines)
-            {
-                var code = line[0].Replace("\"", "");
-                var name = line[1].Replace("\"", "");
-
-                var country = new Country
-                {
-                    Code = code,
-                    Name = name,
-                };
-
-                context.Country.Add(country);
-                countries.Add(country);
-            }
-
-            context.SaveChanges();
-
-            return countries;
-        }
-
-        private static List<Zone> ExecuteZone(ARTDbContext context, string directoryBase, List<Country> countries)
-        {
-            if (context.Zone.Any()) return context.Zone.ToList();
-
-            var zones = new List<Zone>();
-
-            string filePath = Path.Combine(directoryBase, "zone.csv");
-
-            var lines = File.ReadAllLines(filePath).Select(a => a.Split(','));
-
-            foreach (var line in lines)
-            {
-                var id = Convert.ToInt16(line[0].Replace("\"", ""));
-                var countryCode = line[1].Replace("\"", "");
-                var name = line[2].Replace("\"", "");
-
-                var country = countries.First(x => x.Code == countryCode);
-
-                var zone = new Zone
-                {
-                    Id = id,
-                    CountryId = country.Id,
-                    Name = name,
-                };
-
-                context.Zone.Add(zone);
-                zones.Add(zone);
-            }
-
-            context.SaveChanges();
-
-            return zones;
-        }
-
-        private static void ExecuteTimeZone(ARTDbContext context, string directoryBase, List<Zone> zones)
-        {
-            if (context.TimeZone.Any()) return;            
-
-            string filePath = Path.Combine(directoryBase, "timezone.csv");
-
-            var lines = File.ReadAllLines(filePath).Select(a => a.Split(','));
-
-            int saveCounter = 0;
-            int saveChunk = 50;
-
-            foreach (var line in lines)
-            {
-                var zoneId = Convert.ToInt16(line[0].Replace("\"", ""));
-                var abreviation = line[1].Replace("\"", "");
-                var timeStart = Convert.ToDecimal(line[2].Replace("\"", ""));
-                var gmtOffset = Convert.ToInt32(line[3].Replace("\"", ""));
-                var dst = line[4].Replace("\"", "");
-
-                var zone = zones.First(x => x.Id == zoneId);
-
-                context.TimeZone.Add(new Entities.TimeZone
-                {
-                    ZoneId = zone.Id,
-                    Abreviation = abreviation,
-                    TimeStart = timeStart,
-                    GMTOffset = gmtOffset,
-                    DST = dst,
-                });
-
-                if (saveCounter == saveChunk)
-                {
-                    saveCounter = 0;
-                    context.SaveChanges();
-                }
-                else
-                {
-                    saveCounter++;
-                }                
-            }
-
-            context.SaveChanges();
-        }
-
-        #endregion
+        }        
 
         #endregion Methods
     }

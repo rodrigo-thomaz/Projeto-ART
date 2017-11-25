@@ -17,38 +17,20 @@ namespace ART.Domotica.Repository.Configurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
 
-            //Zone
-            HasRequired(x => x.Zone)
-                .WithMany(x => x.TimeZones)
-                .HasForeignKey(x => x.ZoneId)
-                .WillCascadeOnDelete(false);
+            //DisplayName
+            Property(x => x.DisplayName)
+                .HasColumnOrder(1)
+                .HasMaxLength(100)
+                .IsRequired();
 
-            //ZoneId
-            Property(x => x.ZoneId)
-                .HasColumnOrder(1);
-
-            //Abreviation
-            Property(x => x.Abreviation)
+            //SupportsDaylightSavingTime
+            Property(x => x.SupportsDaylightSavingTime)
                 .HasColumnOrder(2)
-                .HasMaxLength(6)
                 .IsRequired();
 
-            //TimeStart
-            Property(x => x.TimeStart)
-                .HasColumnOrder(3)
-                .HasPrecision(11,0)
-                .IsRequired();
-
-            //GMTOffset
-            Property(x => x.GMTOffset)
-                .HasColumnOrder(4)                
-                .IsRequired();
-
-            //DST
-            Property(x => x.DST)
-                .HasColumnOrder(5)
-                .HasMaxLength(1)
-                .IsFixedLength()
+            //UtcTimeOffsetInSecond
+            Property(x => x.UtcTimeOffsetInSecond)
+                .HasColumnOrder(3)                
                 .IsRequired();
         }
     }
