@@ -43,7 +43,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_ESPDEVICE_UPDATE_PIN "ESPDevice/UpdatePinIoT"
 #define TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION "ESPDevice/InsertInApplicationIoT"
 #define TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION "ESPDevice/DeleteFromApplicationIoT"
-#define TOPIC_SUB_ESPDEVICE_SET_TIME_OFF_SET_IN_SECOND "ESPDevice/SetTimeOffsetInSecondIoT"
+#define TOPIC_SUB_ESPDEVICE_SET_UTC_TIME_OFF_SET_IN_SECOND "ESPDevice/SetUtcTimeOffsetInSecondIoT"
 #define TOPIC_SUB_ESPDEVICE_SET_UPDATE_INTERVAL_IN_MILLI_SECOND "ESPDevice/SetUpdateIntervalInMilliSecondIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE "DSFamilyTempSensor/SetScaleIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION "DSFamilyTempSensor/SetResolutionIoT"
@@ -158,7 +158,7 @@ void subscribeInApplication()
   Serial.println("[MQQT::subscribeInApplication] initializing ...");
 
   mqqtManager.subscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_TIME_OFF_SET_IN_SECOND);
+  mqqtManager.subscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_UTC_TIME_OFF_SET_IN_SECOND);
   mqqtManager.subscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
   mqqtManager.subscribeInApplication(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
@@ -177,7 +177,7 @@ void unSubscribeInApplication()
   Serial.println("[MQQT::unSubscribeInApplication] initializing ...");  
 
   mqqtManager.unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_TIME_OFF_SET_IN_SECOND);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_UTC_TIME_OFF_SET_IN_SECOND);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
@@ -237,8 +237,8 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       configurationManager.deleteFromApplication();            
       subscribeNotInApplication();
     }    
-    if(topicKey == String(TOPIC_SUB_ESPDEVICE_SET_TIME_OFF_SET_IN_SECOND)){
-      configurationManager.setTimeOffsetInSecond(payloadContract);
+    if(topicKey == String(TOPIC_SUB_ESPDEVICE_SET_UTC_TIME_OFF_SET_IN_SECOND)){
+      configurationManager.setUtcTimeOffsetInSecond(payloadContract);
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_SET_UPDATE_INTERVAL_IN_MILLI_SECOND)){
       configurationManager.setUpdateIntervalInMilliSecond(payloadContract);

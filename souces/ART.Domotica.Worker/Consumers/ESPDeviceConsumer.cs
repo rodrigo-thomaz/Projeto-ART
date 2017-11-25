@@ -32,7 +32,7 @@
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
-        private readonly EventingBasicConsumer _setTimeOffsetInSecondConsumer;
+        private readonly EventingBasicConsumer _setTimeZoneConsumer;
         private readonly EventingBasicConsumer _setUpdateIntervalInMilliSecondConsumer;
 
         private readonly ISettingManager _settingsManager;
@@ -55,7 +55,7 @@
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
-            _setTimeOffsetInSecondConsumer = new EventingBasicConsumer(_model);
+            _setTimeZoneConsumer = new EventingBasicConsumer(_model);
             _setUpdateIntervalInMilliSecondConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
@@ -143,7 +143,7 @@
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
-            _setTimeOffsetInSecondConsumer.Received += SetTimeOffsetInSecondReceived;
+            _setTimeZoneConsumer.Received += SetTimeZoneReceived;
             _setUpdateIntervalInMilliSecondConsumer.Received += SetUpdateIntervalInMilliSecondReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
@@ -152,7 +152,7 @@
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
-            _model.BasicConsume(ESPDeviceConstants.SetTimeZoneQueueName, false, _setTimeOffsetInSecondConsumer);
+            _model.BasicConsume(ESPDeviceConstants.SetTimeZoneQueueName, false, _setTimeZoneConsumer);
             _model.BasicConsume(ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName, false, _setUpdateIntervalInMilliSecondConsumer);
         }
 
@@ -412,12 +412,12 @@
             _logger.DebugLeave();
         }
 
-        public void SetTimeOffsetInSecondReceived(object sender, BasicDeliverEventArgs e)
+        public void SetTimeZoneReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetTimeOffsetInSecondReceivedAsync(sender, e));
+            Task.WaitAll(SetTimeZoneReceivedAsync(sender, e));
         }
 
-        public async Task SetTimeOffsetInSecondReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetTimeZoneReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
@@ -441,10 +441,10 @@
             var deviceMQ = await domain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(iotContract);
+            var iotContract = Mapper.Map<ESPDevice, ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>(data);
+            var deviceMessage = new MessageIoTContract<ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetTimeOffsetInSecondIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetUtcTimeOffsetInSecondIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

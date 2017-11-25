@@ -54,10 +54,10 @@ String DeviceMQ::getDeviceTopic()
 
 // DeviceNTP
 
-DeviceNTP::DeviceNTP(String host, int port, int timeOffsetInSecond, int updateIntervalInMilliSecond) {
+DeviceNTP::DeviceNTP(String host, int port, int utcTimeOffsetInSecond, int updateIntervalInMilliSecond) {
   _host = host;
   _port = port;  
-  _timeOffsetInSecond = timeOffsetInSecond;
+  _utcTimeOffsetInSecond = utcTimeOffsetInSecond;
   _updateIntervalInMilliSecond = updateIntervalInMilliSecond;
 }
 
@@ -71,14 +71,14 @@ int DeviceNTP::getPort()
 	return this->_port;
 }
 
-int DeviceNTP::getTimeOffsetInSecond()
+int DeviceNTP::getUtcTimeOffsetInSecond()
 {	
-	return this->_timeOffsetInSecond;
+	return this->_utcTimeOffsetInSecond;
 }
 
-void DeviceNTP::setTimeOffsetInSecond(int value)
+void DeviceNTP::setUtcTimeOffsetInSecond(int value)
 {	
-	this->_timeOffsetInSecond = value;
+	this->_utcTimeOffsetInSecond = value;
 }
 
 int DeviceNTP::getUpdateIntervalInMilliSecond()
@@ -221,7 +221,7 @@ void ConfigurationManager::autoInitialize()
 			this->_deviceNTP = new DeviceNTP(
 				deviceNTP["host"], 
 				deviceNTP["port"], 
-				deviceNTP["timeOffsetInSecond"],
+				deviceNTP["utcTimeOffsetInSecond"],
 				deviceNTP["updateIntervalInMilliSecond"]);			
 			
 			this->_deviceInApplication = new DeviceInApplication(
@@ -252,8 +252,8 @@ void ConfigurationManager::autoInitialize()
 			Serial.println(this->_deviceNTP->getHost());
 			Serial.print("DeviceNTP Port: ");
 			Serial.println(this->_deviceNTP->getPort());			
-			Serial.print("DeviceNTP Time Offset: ");
-			Serial.println(this->_deviceNTP->getTimeOffsetInSecond());
+			Serial.print("DeviceNTP Utc Time Offset in second: ");
+			Serial.println(this->_deviceNTP->getUtcTimeOffsetInSecond());
 			Serial.print("DeviceNTP Update Interval: ");
 			Serial.println(this->_deviceNTP->getUpdateIntervalInMilliSecond());
 			
@@ -308,25 +308,25 @@ void ConfigurationManager::deleteFromApplication()
 	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
 }
 
-void ConfigurationManager::setTimeOffsetInSecond(String json)
+void ConfigurationManager::setUtcTimeOffsetInSecond(String json)
 {
 	StaticJsonBuffer<200> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		Serial.print("[ConfigurationManager::setTimeOffsetInSecond] parse failed: ");
+		Serial.print("[ConfigurationManager::setUtcTimeOffsetInSecond] parse failed: ");
 		Serial.println(json);
 		return;
 	}	
 
-	int timeOffsetInSecond = root["timeOffsetInSecond"];
+	int utcTimeOffsetInSecond = root["utcTimeOffsetInSecond"];
 	
-	this->_deviceNTP->setTimeOffsetInSecond(timeOffsetInSecond);
+	this->_deviceNTP->setUtcTimeOffsetInSecond(utcTimeOffsetInSecond);
 	
-	Serial.println("[ConfigurationManager::setTimeOffsetInSecond] ");
-	Serial.print("timeOffsetInSecond: ");
-	Serial.println(timeOffsetInSecond);
+	Serial.println("[ConfigurationManager::setUtcTimeOffsetInSecond] ");
+	Serial.print("utcTimeOffsetInSecond: ");
+	Serial.println(utcTimeOffsetInSecond);
 }
 
 void ConfigurationManager::setUpdateIntervalInMilliSecond(String json)

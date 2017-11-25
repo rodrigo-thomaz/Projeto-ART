@@ -37,7 +37,7 @@
 
             CreateMap<DeviceNTP, DeviceNTPDetailResponseContract>()
                 .ForMember(vm => vm.UpdateIntervalInMilliSecond, m => m.MapFrom(x => x.UpdateIntervalInMilliSecond))
-                .ForMember(vm => vm.TimeOffsetInSecond, m => m.MapFrom(x => x.TimeZone.UtcTimeOffsetInSecond));
+                .ForMember(vm => vm.UtcTimeOffsetInSecond, m => m.MapFrom(x => x.TimeZone.UtcTimeOffsetInSecond));
 
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
                 .ForMember(vm => vm.DeviceInApplicationId, m => m.ResolveUsing(src => {
@@ -59,7 +59,9 @@
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
                 .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));
 
-            CreateMap<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeOffsetInSecondRequestIoTContract>();
+            CreateMap<ESPDevice, ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>()
+                .ForMember(vm => vm.UtcTimeOffsetInSecond, m => m.MapFrom(x => x.DeviceNTP.TimeZone.UtcTimeOffsetInSecond));
+
             CreateMap<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>();
 
             CreateMap<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeZoneCompletedModel>();

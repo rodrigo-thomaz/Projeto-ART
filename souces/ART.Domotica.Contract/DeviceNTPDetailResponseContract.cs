@@ -14,7 +14,7 @@
             get; set;
         }
 
-        public int TimeOffsetInSecond
+        public int UtcTimeOffsetInSecond
         {
             get; set;
         }

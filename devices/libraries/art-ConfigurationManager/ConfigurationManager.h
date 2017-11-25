@@ -39,21 +39,21 @@ class DeviceMQ {
 class DeviceNTP {
   public:
 
-    DeviceNTP(String host, int port, int timeOffsetInSecond, int updateIntervalInMilliSecond);
+    DeviceNTP(String host, int port, int utcTimeOffsetInSecond, int updateIntervalInMilliSecond);
 
     String								getHost();
 	int									getPort();
-	int									getTimeOffsetInSecond();
+	int									getUtcTimeOffsetInSecond();
 	int									getUpdateIntervalInMilliSecond();	
 	
   private:
     
 	String								_host;
 	int									_port;
-	int									_timeOffsetInSecond;
+	int									_utcTimeOffsetInSecond;
 	int									_updateIntervalInMilliSecond;	
 
-	void								setTimeOffsetInSecond(int value);
+	void								setUtcTimeOffsetInSecond(int value);
 	void								setUpdateIntervalInMilliSecond(int value);	
 	
     friend class ConfigurationManager;
@@ -99,7 +99,7 @@ class ConfigurationManager
 	void								insertInApplication(String json);
 	void								deleteFromApplication();		
 	
-	void								setTimeOffsetInSecond(String json);
+	void								setUtcTimeOffsetInSecond(String json);
 	void								setUpdateIntervalInMilliSecond(String json);
 	
   private:			
