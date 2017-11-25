@@ -4,7 +4,7 @@
     {
         #region Properties
 
-        public string SouceMQSession
+        public string WebUITopic
         {
             get; set;
         }

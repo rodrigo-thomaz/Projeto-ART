@@ -106,7 +106,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, TemperatureScaleConstants.GetAllCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, TemperatureScaleConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

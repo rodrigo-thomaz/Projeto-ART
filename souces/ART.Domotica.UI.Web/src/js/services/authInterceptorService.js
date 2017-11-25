@@ -7,7 +7,7 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localSt
 
         config.headers = config.headers || {};
 
-        config.headers.souceMQSession = applicationMQ.webUITopic;
+        config.headers.webUITopic = applicationMQ.webUITopic;
         
         var authData = $localStorage.authorizationData;
         if (authData) {

@@ -9,12 +9,12 @@
     {
         #region Properties
 
-        protected string _souceMQSession
+        protected string _webUITopic
         {
             get
             {
                 var value = Request.Headers
-                    .SingleOrDefault(x => x.Key == "souceMQSession")
+                    .SingleOrDefault(x => x.Key == "webUITopic")
                     .Value.SingleOrDefault();
                 return value;
             }
@@ -28,7 +28,7 @@
         {
             return new NoAuthenticatedMessageContract
             {
-                SouceMQSession = _souceMQSession,
+                WebUITopic = _webUITopic,
             };
         }
 
@@ -36,7 +36,7 @@
         {
             return new NoAuthenticatedMessageContract<TContract>
             {
-                SouceMQSession = _souceMQSession,
+                WebUITopic = _webUITopic,
                 Contract = contract,
             };
         }

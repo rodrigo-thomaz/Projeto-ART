@@ -215,7 +215,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, DSFamilyTempSensorConstants.GetAllResolutionsViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.GetAllResolutionsViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
@@ -243,7 +243,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, DSFamilyTempSensorConstants.SetResolutionViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.SetResolutionViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -281,7 +281,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetScaleCompletedModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, DSFamilyTempSensorConstants.SetScaleViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.SetScaleViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -320,7 +320,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<DSFamilyTempSensorSetLabelRequestContract, DSFamilyTempSensorSetLabelCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, DSFamilyTempSensorConstants.SetLabelViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.SetLabelViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
@@ -349,7 +349,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmOnViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.SetAlarmOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -388,7 +388,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmCelsiusRequestContract, DSFamilyTempSensorSetAlarmCelsiusCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmCelsiusViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.SetAlarmCelsiusViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -427,7 +427,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, DSFamilyTempSensorConstants.SetAlarmBuzzerOnViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.SetAlarmBuzzerOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
@@ -466,7 +466,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract, DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, DSFamilyTempSensorConstants.SetChartLimiterCelsiusViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.SetChartLimiterCelsiusViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();

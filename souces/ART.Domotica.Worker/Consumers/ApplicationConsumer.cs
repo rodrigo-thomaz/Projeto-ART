@@ -82,7 +82,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<Application, ApplicationDetailModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ApplicationConstants.GetViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ApplicationConstants.GetViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

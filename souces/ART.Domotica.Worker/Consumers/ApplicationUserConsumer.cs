@@ -78,7 +78,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             //Enviando para View            
-            var rountingKey = GetNotInApplicationRoutingKeyForView(message.SouceMQSession, ApplicationUserQueueName.RegisterUserViewCompletedQueueName);
+            var rountingKey = GetNotInApplicationRoutingKeyForView(message.WebUITopic, ApplicationUserQueueName.RegisterUserViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, null);
 
             _logger.DebugLeave();

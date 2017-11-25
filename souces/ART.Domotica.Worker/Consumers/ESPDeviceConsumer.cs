@@ -182,7 +182,7 @@
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceAdminDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.GetAllViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetAllViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
@@ -209,7 +209,7 @@
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
@@ -235,7 +235,7 @@
             var applicationMQ = await applicationMQDomain.Get(message);
 
             //Enviando para View
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.GetByPinViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetByPinViewCompletedQueueName);
             var viewModel = Mapper.Map<ESPDevice, ESPDeviceGetByPinModel>(data);
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
@@ -263,7 +263,7 @@
             var applicationMQ = await applicationMQDomain.Get(message);
 
             //Enviando para View
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
             var viewModel = Mapper.Map<ESPDevice, ESPDeviceDetailModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -299,7 +299,7 @@
             var applicationMQ = await applicationMQDomain.Get(message);
 
             //Enviando para View
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
             var viewModel = new ESPDeviceDeleteFromApplicationModel
             {
                 DeviceId = data.Id,
@@ -435,7 +435,7 @@
             var viewModel = Mapper.Map<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeZoneCompletedModel>(message.Contract);
             viewModel.DeviceId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.SetTimeZoneViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.SetTimeZoneViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQ = await domain.GetDeviceMQ(viewModel.DeviceId);
@@ -473,7 +473,7 @@
             var viewModel = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel>(message.Contract);
             viewModel.DeviceId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQ = await domain.GetDeviceMQ(viewModel.DeviceId);

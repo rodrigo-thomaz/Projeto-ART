@@ -7,7 +7,7 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localSt
 
         config.headers = config.headers || {};
 
-        config.headers.souceMQSession = stompService.session;
+        config.headers.webUITopic = stompService.session;
 
         var authData = $localStorage.authorizationData;
         if (authData) {

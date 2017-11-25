@@ -88,7 +88,7 @@
             await _authProducer.RegisterUser(new NoAuthenticatedMessageContract<RegisterUserContract>
             {
                 Contract = contract,
-                SouceMQSession = message.SouceMQSession,
+                WebUITopic = message.WebUITopic,
             });
         }
 

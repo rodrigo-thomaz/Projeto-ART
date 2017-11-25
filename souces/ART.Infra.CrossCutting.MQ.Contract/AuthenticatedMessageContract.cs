@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public string SouceMQSession
+        public string WebUITopic
         {
             get; set;
         }
