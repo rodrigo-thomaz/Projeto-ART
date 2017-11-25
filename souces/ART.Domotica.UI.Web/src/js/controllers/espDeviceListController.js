@@ -241,10 +241,14 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var onSetAlarmOnCompleted = function (event, data) {
-        if (data.position === 'High')
+        if (data.position === 'High') {
+            $scope.highAlarmView.alarmOn = data.alarmOn;
             toaster.pop('success', 'Sucesso', 'Alarme alto ligado/desligado');
-        else if (data.position === 'Low')
+        }
+        else if (data.position === 'Low') {
+            $scope.lowAlarmView.alarmOn = data.alarmOn;
             toaster.pop('success', 'Sucesso', 'Alarme baixo ligado/desligado');
+        }
     };
 
     var onSetAlarmCelsiusCompleted = function (event, data) {
