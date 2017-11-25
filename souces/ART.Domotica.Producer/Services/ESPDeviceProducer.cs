@@ -119,6 +119,15 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
+        public async Task SetLabel(AuthenticatedMessageContract<ESPDeviceSetLabelRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", ESPDeviceConstants.SetLabelQueueName, null, payload);
+            });
+        }
+
         #endregion
 
         #region private voids
@@ -166,7 +175,14 @@ namespace ART.Domotica.Producer.Services
               , exclusive: false
               , autoDelete: true
               , arguments: null);
-        }
+
+            _model.QueueDeclare(
+               queue: ESPDeviceConstants.SetLabelQueueName
+             , durable: false
+             , exclusive: false
+             , autoDelete: true
+             , arguments: null);
+        }        
 
         #endregion
     }

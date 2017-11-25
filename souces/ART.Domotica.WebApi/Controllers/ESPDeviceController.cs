@@ -175,6 +175,24 @@
             return Ok();
         }
 
+        /// <summary>
+        /// Altera o Label de um device
+        /// </summary>
+        /// <remarks>
+        /// Altera o Label de um device
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setLabel")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetLabel(ESPDeviceSetLabelRequestContract contract)
+        {
+            await _espDeviceProducer.SetLabel(CreateMessage(contract));
+            return Ok();
+        }
+
         #endregion
     }
 }

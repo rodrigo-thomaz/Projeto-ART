@@ -34,6 +34,8 @@
 
         Task<List<ESPDevice>> UpdatePins();
 
+        Task<ESPDevice> SetLabel(Guid deviceId, string label);
+
         #endregion Methods
     }
 }

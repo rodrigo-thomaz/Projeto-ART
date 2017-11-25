@@ -34,6 +34,7 @@
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
         private readonly EventingBasicConsumer _setTimeZoneConsumer;
         private readonly EventingBasicConsumer _setUpdateIntervalInMilliSecondConsumer;
+        private readonly EventingBasicConsumer _setLabelConsumer;
 
         private readonly ISettingManager _settingsManager;
         private readonly IMQSettings _mqSettings;
@@ -57,6 +58,7 @@
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
             _setTimeZoneConsumer = new EventingBasicConsumer(_model);
             _setUpdateIntervalInMilliSecondConsumer = new EventingBasicConsumer(_model);
+            _setLabelConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -131,6 +133,13 @@
               , arguments: null);
 
             _model.QueueDeclare(
+                queue: ESPDeviceConstants.SetLabelQueueName
+              , durable: false
+              , exclusive: false
+              , autoDelete: true
+              , arguments: null);
+
+            _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetConfigurationsRPCQueueName
                , durable: false
                , exclusive: false
@@ -145,6 +154,7 @@
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
             _setTimeZoneConsumer.Received += SetTimeZoneReceived;
             _setUpdateIntervalInMilliSecondConsumer.Received += SetUpdateIntervalInMilliSecondReceived;
+            _setLabelConsumer.Received += SetLabelReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
@@ -154,6 +164,7 @@
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
             _model.BasicConsume(ESPDeviceConstants.SetTimeZoneQueueName, false, _setTimeZoneConsumer);
             _model.BasicConsume(ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName, false, _setUpdateIntervalInMilliSecondConsumer);
+            _model.BasicConsume(ESPDeviceConstants.SetLabelQueueName, false, _setLabelConsumer);
         }
 
         #endregion Methods
@@ -484,6 +495,35 @@
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetLabelReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetLabelReceivedAsync(sender, e));
+        }
+
+        public async Task SetLabelReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetLabelRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.SetLabel(message.Contract.DeviceId, message.Contract.Label);
+
+            var exchange = "amq.topic";
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.Get(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelCompletedModel>(message.Contract);
+            viewModel.DeviceId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetLabelViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

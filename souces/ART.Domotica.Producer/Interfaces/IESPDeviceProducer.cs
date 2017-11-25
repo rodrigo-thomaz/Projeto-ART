@@ -25,6 +25,8 @@
 
         Task SetUpdateIntervalInMilliSecond(AuthenticatedMessageContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract> message);
 
+        Task SetLabel(AuthenticatedMessageContract<ESPDeviceSetLabelRequestContract> message);
+
         #endregion Methods
     }
 }

@@ -17,6 +17,11 @@
             get; set;
         }
 
+        public string Label
+        {
+            get; set;
+        }
+
         public Guid DeviceId
         {
             get; set;

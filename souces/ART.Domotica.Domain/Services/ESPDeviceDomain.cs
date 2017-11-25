@@ -215,6 +215,22 @@
 
             return await _espDeviceRepository.GetById(deviceId);
         }
+        
+        public async Task<ESPDevice> SetLabel(Guid deviceId, string label)
+        {
+            var entity = await _espDeviceRepository.GetById(deviceId);
+
+            if (entity == null)
+            {
+                throw new Exception("ESP Device not found");
+            }
+
+            entity.Label = label;
+
+            await _espDeviceRepository.Update(entity);
+
+            return entity;
+        }
 
         #endregion Methods
     }

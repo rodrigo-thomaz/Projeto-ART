@@ -69,6 +69,16 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             return results;
         });
     };
+    
+    var setLabel = function (deviceId, label) {
+        var data = {
+            deviceId: deviceId,
+            label: label,
+        }
+        return $http.post(serviceBase + 'api/espDevice/setLabel', data).then(function (results) {
+            return results;
+        });
+    };
 
     var onConnected = function () {
 
@@ -78,6 +88,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         stompService.subscribe('ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
         stompService.subscribeAllViews('ESPDevice.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
         stompService.subscribeAllViews('ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
+        stompService.subscribeAllViews('ESPDevice.SetLabelViewCompleted', onSetLabelCompleted);
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
 
@@ -196,6 +207,13 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         $rootScope.$emit('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + result.deviceId, result);
     }
 
+    var onSetLabelCompleted = function (payload) {
+        var result = JSON.parse(payload.body);
+        var device = getDeviceById(result.deviceId);
+        device.label = result.label;
+        $rootScope.$emit('espDeviceService_onSetLabelCompleted_Id_' + result.deviceId, result);
+    }
+
     var insertDeviceInCollection = function (device) {
         device.createDate = new Date(device.createDate * 1000).toLocaleString();
         serviceFactory.devices.push(device);
@@ -227,7 +245,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
     serviceFactory.setTimeZone = setTimeZone;
     serviceFactory.setUpdateIntervalInMilliSecond = setUpdateIntervalInMilliSecond;
-       
+    serviceFactory.setLabel = setLabel;       
 
     return serviceFactory;
 

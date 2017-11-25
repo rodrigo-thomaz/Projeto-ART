@@ -24,6 +24,8 @@
         public static readonly string SetUpdateIntervalInMilliSecondQueueName = "ESPDevice.SetUpdateIntervalInMilliSecond";
         public static readonly string SetUpdateIntervalInMilliSecondViewCompletedQueueName = "ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted";
         public static readonly string UpdatePinIoTQueueName = "ESPDevice.UpdatePinIoT";
+        public static readonly string SetLabelQueueName = "ESPDevice.SetLabel";
+        public static readonly string SetLabelViewCompletedQueueName = "ESPDevice.SetLabelViewCompleted";
 
         #endregion Fields
     }
