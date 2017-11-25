@@ -45,6 +45,15 @@
                                 </div>
                                 <div class="line line-dashed b-b line-lg pull-in"></div>
                                 <div class="form-group">
+                                    <label class="col-lg-4 control-label">Resolução</label>
+                                    <div class="col-lg-8">
+                                        <select class="form-control m-b" 
+                                                ng-options="item.displayName for item in timeZone.availableTimeZones track by item.id" 
+                                                ng-model="timeZone.selectedTimeZone">
+                                        </select>
+                                    </div>
+                                </div> 
+                                <div class="form-group">
                                     <label class="col-lg-4 control-label">Time Offset In Second</label>
                                     <div class="col-lg-8">
                                         <input name="inputTimeOffsetInSecond" type="number" ng-model="deviceNTPView.timeOffsetInSecond" ng-model-options="{ debounce: 1000 }" ng-change="changeTimeOffsetInSecond()" required class="form-control">

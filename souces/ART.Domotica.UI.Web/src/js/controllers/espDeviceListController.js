@@ -5,7 +5,7 @@ app.controller('espDeviceListController', ['$scope', '$timeout', '$log', 'espDev
 
 }]);
 
-app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService) {
+app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'timeZoneService', 'espDeviceService', function ($scope, $rootScope, $timeout, $log, toaster, timeZoneService, espDeviceService) {
 
     $scope.device = {};
 
@@ -42,6 +42,11 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
         toaster.pop('success', 'Sucesso', 'UpdateIntervalInMilliSecond alterado');
     };
 
+    $scope.timeZone = {
+        availableTimeZones: timeZoneService.timeZones,
+        selectedTimeZone: {},
+    };
+
     $scope.changeTimeOffsetInSecond = function () {
         if (!initialized) return;
         espDeviceService.setTimeOffsetInSecond($scope.device.deviceId, $scope.deviceNTPView.timeOffsetInSecond);
@@ -54,14 +59,14 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
 }]);
 
-app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'temperatureScaleConverter', 'temperatureScaleService', 'dsFamilyTempSensorService', 'timeZoneService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, temperatureScaleConverter, temperatureScaleService, dsFamilyTempSensorService, timeZoneService) {
+app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'temperatureScaleConverter', 'temperatureScaleService', 'dsFamilyTempSensorService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, temperatureScaleConverter, temperatureScaleService, dsFamilyTempSensorService) {
 
     $scope.sensor = {};           
 
     $scope.lowAlarmView = {};
     $scope.highAlarmView = {};    
 
-    $scope.labelView = "";    
+    $scope.labelView = "";  
 
     $scope.scale = {
         availableScales: temperatureScaleService.scales,
@@ -81,7 +86,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     $scope.changeResolution = function () {
         if (!initialized) return;
         dsFamilyTempSensorService.setResolution($scope.sensor.dsFamilyTempSensorId, $scope.resolution.selectedResolution.id);
-    };   
+    }; 
 
     $scope.changeLabel = function () {
         if (!initialized) return;
