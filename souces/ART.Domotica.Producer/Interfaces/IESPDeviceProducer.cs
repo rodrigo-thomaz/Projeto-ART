@@ -21,7 +21,7 @@
 
         Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
-        Task SetTimeOffsetInSecond(AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract> message);
+        Task SetTimeZone(AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract> message);
 
         Task SetUpdateIntervalInMilliSecond(AuthenticatedMessageContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract> message);
 

@@ -101,7 +101,7 @@ namespace ART.Domotica.Producer.Services
             });            
         }
 
-        public async Task SetTimeOffsetInSecond(AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract> message)
+        public async Task SetTimeZone(AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract> message)
         {
             await Task.Run(() =>
             {

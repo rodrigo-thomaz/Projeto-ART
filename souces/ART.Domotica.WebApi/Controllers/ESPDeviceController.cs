@@ -140,20 +140,20 @@
         }
 
         /// <summary>
-        /// Altera o TimeOffsetInSecond de um device
+        /// Altera o TimeZone de um device
         /// </summary>
         /// <remarks>
-        /// Altera o TimeOffsetInSecond de um device
+        /// Altera o TimeZone de um device
         /// </remarks>
         /// <param name="contract">contrato do request</param>
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("setTimeOffsetInSecond")]
+        [Route("setTimeZone")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetTimeOffsetInSecond(ESPDeviceSetTimeZoneRequestContract contract)
+        public async Task<IHttpActionResult> SetTimeZone(ESPDeviceSetTimeZoneRequestContract contract)
         {
-            await _espDeviceProducer.SetTimeOffsetInSecond(CreateMessage(contract));
+            await _espDeviceProducer.SetTimeZone(CreateMessage(contract));
             return Ok();
         }
 

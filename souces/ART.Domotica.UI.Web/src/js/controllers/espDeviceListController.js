@@ -16,26 +16,38 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
         $scope.device = device; 
 
         $scope.deviceNTPView = {
-            timeOffsetInSecond: device.deviceNTP.timeOffsetInSecond,
             updateIntervalInMilliSecond: device.deviceNTP.updateIntervalInMilliSecond,
         };
 
-        clearOnSetTimeOffsetInSecondCompleted = $rootScope.$on('espDeviceService_onSetTimeOffsetInSecondCompleted_Id_' + $scope.device.deviceId, onSetTimeOffsetInSecondCompleted);        
+        // Time Zone
+        if (timeZoneService.initialized())
+            setSelectedTimeZone();
+        else
+            clearOnTimeZoneServiceInitialized = $rootScope.$on('timeZoneService_Initialized', setSelectedTimeZone);        
+
+
+        clearOnSetTimeZoneCompleted = $rootScope.$on('espDeviceService_onSetTimeZoneCompleted_Id_' + $scope.device.deviceId, onSetTimeZoneCompleted);        
         clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.device.deviceId, onSetUpdateIntervalInMilliSecondCompleted);        
 
         initialized = true;
     }
 
-    var clearOnSetTimeOffsetInSecondCompleted = null;
+    var clearOnTimeZoneServiceInitialized = null;
+    var clearOnSetTimeZoneCompleted = null;
     var clearOnSetUpdateIntervalInMilliSecondCompleted = null;
 
     $scope.$on('$destroy', function () {
-        clearOnSetTimeOffsetInSecondCompleted();
+        if (clearOnTimeZoneServiceInitialized !== null) clearOnTimeZoneServiceInitialized();
+        clearOnSetTimeZoneCompleted();
         clearOnSetUpdateIntervalInMilliSecondCompleted();
     });
 
-    var onSetTimeOffsetInSecondCompleted = function (event, data) {
-        toaster.pop('success', 'Sucesso', 'TimeOffsetInSecond alterado');
+    var setSelectedTimeZone = function () {
+        $scope.timeZone.selectedTimeZone = timeZoneService.getTimeZoneById($scope.device.deviceNTP.timeZoneId);
+    };
+
+    var onSetTimeZoneCompleted = function (event, data) {
+        toaster.pop('success', 'Sucesso', 'Fuso horário alterado');
     };
 
     var onSetUpdateIntervalInMilliSecondCompleted = function (event, data) {
@@ -47,10 +59,10 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
         selectedTimeZone: {},
     };
 
-    $scope.changeTimeOffsetInSecond = function () {
+    $scope.changeTimeZone = function () {
         if (!initialized) return;
-        espDeviceService.setTimeOffsetInSecond($scope.device.deviceId, $scope.deviceNTPView.timeOffsetInSecond);
-    };
+        espDeviceService.setTimeZone($scope.device.deviceId, $scope.timeZone.selectedTimeZone.id);
+    }; 
 
     $scope.changeUpdateIntervalInMilliSecond = function () {
         if (!initialized) return;

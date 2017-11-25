@@ -44,7 +44,7 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
         }
         _initializing = false;
         _initialized = true;
-        $rootScope.$emit('TimeZoneService_Initialized');
+        $rootScope.$emit('timeZoneService_Initialized');
     }
 
     $rootScope.$on('$destroy', function () {

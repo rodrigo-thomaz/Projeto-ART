@@ -50,12 +50,12 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         }
     }; 
 
-    var setTimeOffsetInSecond = function (deviceId, timeOffsetInSecond) {
+    var setTimeZone = function (deviceId, timeZoneId) {
         var data = {
             deviceId: deviceId,
-            timeOffsetInSecond: timeOffsetInSecond,
+            timeZoneId: timeZoneId,
         }
-        return $http.post(serviceBase + 'api/espDevice/setTimeOffsetInSecond', data).then(function (results) {
+        return $http.post(serviceBase + 'api/espDevice/setTimeZone', data).then(function (results) {
             return results;
         });
     };
@@ -76,7 +76,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         stompService.subscribe('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
         stompService.subscribe('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
         stompService.subscribe('ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
-        stompService.subscribe('ESPDevice.SetTimeOffsetInSecondViewCompleted', onSetTimeOffsetInSecondCompleted);
+        stompService.subscribe('ESPDevice.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
         stompService.subscribe('ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
@@ -182,11 +182,11 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         }       
     }
 
-    var onSetTimeOffsetInSecondCompleted = function (payload) {
+    var onSetTimeZoneCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var device = getDeviceById(result.deviceId);
-        device.timeOffsetInSecond = result.timeOffsetInSecond;
-        $rootScope.$emit('espDeviceService_onSetTimeOffsetInSecondCompleted_Id_' + result.deviceId, result);
+        device.timeZoneId = result.timeZoneId;
+        $rootScope.$emit('espDeviceService_onSetTimeZoneCompleted_Id_' + result.deviceId, result);
     };
 
     var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
@@ -225,7 +225,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     serviceFactory.insertInApplication = insertInApplication;    
     serviceFactory.deleteFromApplication = deleteFromApplication;
 
-    serviceFactory.setTimeOffsetInSecond = setTimeOffsetInSecond;
+    serviceFactory.setTimeZone = setTimeZone;
     serviceFactory.setUpdateIntervalInMilliSecond = setUpdateIntervalInMilliSecond;
        
 
