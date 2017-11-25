@@ -15,12 +15,20 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         client.subscribe(generateStringTopic(topic), callback);
     };
 
+    var subscribeAllViews = function (topic, callback) {
+        client.subscribe(generateStringTopicAllViews(topic), callback);
+    };
+
     var unsubscribe = function (topic) {
         client.unsubscribe(generateStringTopic(topic));
     };    
 
     var generateStringTopic = function (topic){
         return '/topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + applicationMQ.webUITopic + '.' + topic;
+    }
+
+    var generateStringTopicAllViews = function (topic) {
+        return '/topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + topic;
     }
 
     var connected = function () {
@@ -59,6 +67,7 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     // serviceFactory    
 
     serviceFactory.subscribe = subscribe;
+    serviceFactory.subscribeAllViews = subscribeAllViews;
     serviceFactory.unsubscribe = unsubscribe;
     serviceFactory.connected = connected;
 

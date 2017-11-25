@@ -76,8 +76,8 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         stompService.subscribe('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
         stompService.subscribe('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
         stompService.subscribe('ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
-        stompService.subscribe('ESPDevice.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
-        stompService.subscribe('ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
+        stompService.subscribeAllViews('ESPDevice.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
+        stompService.subscribeAllViews('ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
 
