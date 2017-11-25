@@ -185,7 +185,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var onSetTimeZoneCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var device = getDeviceById(result.deviceId);
-        device.timeZoneId = result.timeZoneId;
+        device.deviceNTP.timeZoneId = result.timeZoneId;
         $rootScope.$emit('espDeviceService_onSetTimeZoneCompleted_Id_' + result.deviceId, result);
     };
 

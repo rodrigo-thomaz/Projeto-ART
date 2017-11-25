@@ -47,10 +47,12 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
     };
 
     var onSetTimeZoneCompleted = function (event, data) {
+        setSelectedTimeZone();
         toaster.pop('success', 'Sucesso', 'Fuso horário alterado');
     };
 
     var onSetUpdateIntervalInMilliSecondCompleted = function (event, data) {
+        $scope.$apply();
         toaster.pop('success', 'Sucesso', 'UpdateIntervalInMilliSecond alterado');
     };
 
