@@ -34,11 +34,6 @@
             get; set;
         }
 
-        public string Label
-        {
-            get; set;
-        }
-
         public TempSensorAlarm LowAlarm
         {
             get; set;

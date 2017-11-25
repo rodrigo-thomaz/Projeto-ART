@@ -381,6 +381,7 @@
                     FlashChipId = 1458400,
                     MacAddress = espDevice1MacAddress,
                     Pin = RandonHelper.RandomString(4),
+                    Label = "Device 1",
                     CreateDate = DateTime.Now,
                     DeviceMQ = new DeviceMQ
                     {

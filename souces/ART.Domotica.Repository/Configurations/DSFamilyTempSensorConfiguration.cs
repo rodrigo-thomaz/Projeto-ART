@@ -64,62 +64,56 @@
 
             //DSFamilyTempSensorResolutionId
             Property(x => x.DSFamilyTempSensorResolutionId)
-                .HasColumnOrder(5);
-
-            //Label
-            Property(x => x.Label)
-                .HasColumnOrder(6)
-                .HasMaxLength(50)
-                .IsRequired();
+                .HasColumnOrder(5);            
 
             //LowTempSensorAlarm.AlarmOn
             Property(x => x.LowAlarm.AlarmOn)
-                .HasColumnOrder(7)
+                .HasColumnOrder(6)
                 .HasColumnName("LowAlarmOn")
                 .IsRequired();
 
             //LowTempSensorAlarm.AlarmCelsius
             Property(x => x.LowAlarm.AlarmCelsius)
-                .HasColumnOrder(8)
+                .HasColumnOrder(7)
                 .HasPrecision(7, 4)
                 .HasColumnName("LowAlarmCelsius")
                 .IsRequired();
 
             //LowTempSensorAlarm.AlarmBuzzerOn
             Property(x => x.LowAlarm.AlarmBuzzerOn)
-                .HasColumnOrder(9)
+                .HasColumnOrder(8)
                 .HasColumnName("LowAlarmBuzzerOn")
                 .IsRequired();
 
             //HighTempSensorAlarm.AlarmOn
             Property(x => x.HighAlarm.AlarmOn)
-                .HasColumnOrder(10)
+                .HasColumnOrder(9)
                 .HasColumnName("HighAlarmOn")
                 .IsRequired();
 
             //HighTempSensorAlarm.AlarmCelsius
             Property(x => x.HighAlarm.AlarmCelsius)
-                .HasColumnOrder(11)
+                .HasColumnOrder(10)
                 .HasPrecision(7, 4)
                 .HasColumnName("HighAlarmCelsius")
                 .IsRequired();
 
             //HighTempSensorAlarm.AlarmBuzzerOn
             Property(x => x.HighAlarm.AlarmBuzzerOn)
-                .HasColumnOrder(12)
+                .HasColumnOrder(11)
                 .HasColumnName("HighAlarmBuzzerOn")
                 .IsRequired();
 
             //LowChartLimiterCelsius
             Property(x => x.LowChartLimiterCelsius)
-                .HasColumnOrder(13)
+                .HasColumnOrder(12)
                 .HasPrecision(7, 4)
                 .HasColumnName("LowChartLimiterCelsius")
                 .IsRequired();
 
             //HighChartLimiterCelsius
             Property(x => x.HighChartLimiterCelsius)
-                .HasColumnOrder(14)
+                .HasColumnOrder(13)
                 .HasPrecision(7, 4)
                 .HasColumnName("HighChartLimiterCelsius")
                 .IsRequired();

@@ -20,6 +20,12 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
 
+            //Label
+            Property(x => x.Label)
+                .HasColumnOrder(1)
+                .HasMaxLength(50)
+                .IsRequired();
+
             //CreateDate
             Property(x => x.CreateDate)
                 .HasColumnOrder(2)
