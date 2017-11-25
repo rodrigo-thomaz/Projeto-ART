@@ -275,9 +275,11 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     var onSetChartLimiterCelsiusCompleted = function (event, data) {
         if (data.position === 'High') {
+            $scope.highChartLimiterView = data.chartLimiterCelsius;
             toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
         }
         else if (data.position === 'Low') {
+            $scope.lowChartLimiterView = data.chartLimiterCelsius;
             toaster.pop('success', 'Sucesso', 'Limite baixo do gráfico alterado');
         }
     };
