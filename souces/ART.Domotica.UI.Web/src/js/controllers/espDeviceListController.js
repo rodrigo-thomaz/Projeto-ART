@@ -233,6 +233,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var onSetLabelCompleted = function (event, data) {
+        $scope.labelView = data.label;
         toaster.pop('success', 'Sucesso', 'label alterado');
     };
 
