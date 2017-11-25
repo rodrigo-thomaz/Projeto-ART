@@ -60,7 +60,7 @@
                                         <input name="inputUpdateIntervalInMilliSecond" type="number" ng-model="updateIntervalInMilliSecondView" ng-model-options="{ debounce: 1000 }" ng-change="changeUpdateIntervalInMilliSecond()" min="5000" required class="form-control">
                                     </div>
                                     <span ng-show="formDevice.inputUpdateIntervalInMilliSecond.$touched && formDevice.inputUpdateIntervalInMilliSecond.$invalid">
-                                        Update Interval In MilliSecond requerido
+                                        Update Interval In MilliSecond deve ser maior que 5000
                                     </span>
                                 </div>
                             </form>
