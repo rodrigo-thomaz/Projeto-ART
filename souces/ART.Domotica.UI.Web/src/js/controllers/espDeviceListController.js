@@ -252,24 +252,34 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var onSetAlarmCelsiusCompleted = function (event, data) {
-        if (data.position === 'High')
+        if (data.position === 'High') {
+            $scope.highAlarmView.alarmValue = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, data.alarmCelsius);
             toaster.pop('success', 'Sucesso', 'Alarme alto alterado');
-        else if (data.position === 'Low')
+        }
+        else if (data.position === 'Low') {
+            $scope.lowAlarmView.alarmValue = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, data.alarmCelsius);
             toaster.pop('success', 'Sucesso', 'Alarme baixo alterado');
+        }
     };
 
     var onSetAlarmBuzzerOnCompleted = function (event, data) {
-        if (data.position === 'High')
+        if (data.position === 'High') {
+            $scope.highAlarmView.alarmBuzzerOn = data.alarmBuzzerOn;
             toaster.pop('success', 'Sucesso', 'Alarme buzzer alto ligado/desligado');
-        else if (data.position === 'Low')
+        }
+        else if (data.position === 'Low') {
+            $scope.lowAlarmView.alarmBuzzerOn = data.alarmBuzzerOn;
             toaster.pop('success', 'Sucesso', 'Alarme buzzer baixo ligado/desligado');
+        }
     };
 
     var onSetChartLimiterCelsiusCompleted = function (event, data) {
-        if(data.position === 'High')
+        if (data.position === 'High') {
             toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
-        else if (data.position === 'Low')
+        }
+        else if (data.position === 'Low') {
             toaster.pop('success', 'Sucesso', 'Limite baixo do gráfico alterado');
+        }
     };
 
     var onReadReceived = function (event, data) {
