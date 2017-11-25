@@ -216,6 +216,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     var onSetScaleCompleted = function (event, data) {
 
+        setSelectedScale();
+
         $scope.highAlarmView.alarmValue = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.highAlarm.alarmCelsius);
         $scope.lowAlarmView.alarmValue = temperatureScaleConverter.convertFromCelsius($scope.sensor.temperatureScaleId, $scope.sensor.lowAlarm.alarmCelsius);
 
@@ -229,6 +231,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var onSetResolutionCompleted = function (event, data) {
+        setSelectedResolution();
         toaster.pop('success', 'Sucesso', 'resolução alterada');
     };
 
