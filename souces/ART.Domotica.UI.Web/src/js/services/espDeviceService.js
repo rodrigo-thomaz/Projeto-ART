@@ -83,8 +83,8 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var onConnected = function () {
 
         stompService.subscribe('ESPDevice.GetListInApplicationViewCompleted', onGetListInApplicationCompleted);
-        stompService.subscribe('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
-        stompService.subscribe('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
+        stompService.subscribeAllViews('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
+        stompService.subscribeAllViews('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
         stompService.subscribe('ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
         stompService.subscribeAllViews('ESPDevice.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
         stompService.subscribeAllViews('ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);

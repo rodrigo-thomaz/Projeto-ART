@@ -274,7 +274,7 @@
             var applicationMQ = await applicationMQDomain.Get(message);
 
             //Enviando para View
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
             var viewModel = Mapper.Map<ESPDevice, ESPDeviceDetailModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -310,7 +310,7 @@
             var applicationMQ = await applicationMQDomain.Get(message);
 
             //Enviando para View
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
             var viewModel = new ESPDeviceDeleteFromApplicationModel
             {
                 DeviceId = data.Id,
