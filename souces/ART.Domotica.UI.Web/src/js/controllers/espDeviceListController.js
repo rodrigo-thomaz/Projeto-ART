@@ -101,7 +101,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     }; 
 
     $scope.changeLabel = function () {
-        if (!initialized) return;
+        if (!initialized || !$scope.labelView) return;
         dsFamilyTempSensorService.setLabel($scope.sensor.dsFamilyTempSensorId, $scope.labelView);
     };
 
@@ -122,7 +122,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     $scope.changeChartLimiterValue = function (position, chartLimiterValue) {
-        if (!initialized) return;
+        if (!initialized || chartLimiterValue === undefined) return;
         var chartLimiterCelsius = temperatureScaleConverter.convertToCelsius($scope.sensor.temperatureScaleId, chartLimiterValue);
         dsFamilyTempSensorService.setChartLimiterCelsius($scope.sensor.dsFamilyTempSensorId, chartLimiterCelsius, position);
     };
