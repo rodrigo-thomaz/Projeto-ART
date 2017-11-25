@@ -15,9 +15,7 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
         $scope.device = device; 
 
-        $scope.deviceNTPView = {
-            updateIntervalInMilliSecond: device.deviceNTP.updateIntervalInMilliSecond,
-        };
+        $scope.updateIntervalInMilliSecondView = device.deviceNTP.updateIntervalInMilliSecond;
 
         // Time Zone
         if (timeZoneService.initialized())
@@ -68,7 +66,7 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
     $scope.changeUpdateIntervalInMilliSecond = function () {
         if (!initialized) return;
-        espDeviceService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.deviceNTPView.updateIntervalInMilliSecond);
+        espDeviceService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.updateIntervalInMilliSecondView);
     };
 
 }]);
