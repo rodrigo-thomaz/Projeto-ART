@@ -1,8 +1,8 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Model
 {
     using System;
 
-    public class ESPDeviceSetTimeOffsetInSecondRequestContract
+    public class ESPDeviceSetTimeZoneCompletedModel
     {
         #region Properties
 
@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public int TimeOffsetInSecond
+        public byte TimeZoneId
         {
             get; set;
         }

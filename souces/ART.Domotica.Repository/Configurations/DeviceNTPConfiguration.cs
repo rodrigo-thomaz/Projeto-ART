@@ -24,10 +24,16 @@
             HasRequired(x => x.DeviceBase)
                .WithRequiredDependent(x => x.DeviceNTP);
 
-            //TimeOffsetInSecond
-            Property(x => x.TimeOffsetInSecond)
+            //TimeZoneId
+            Property(x => x.TimeZoneId)
                 .HasColumnOrder(1)
                 .IsRequired();
+
+            //TimeZone
+            HasRequired(x => x.TimeZone)
+                .WithMany(x => x.DevicesNTP)
+                .HasForeignKey(x => x.TimeZoneId)
+                .WillCascadeOnDelete(false);
 
             //UpdateIntervalInMilliSecond
             Property(x => x.UpdateIntervalInMilliSecond)

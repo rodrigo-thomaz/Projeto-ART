@@ -30,7 +30,7 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope',
 
     var getScaleById = function (temperatureScaleId) {
         for (var i = 0; i < serviceFactory.scales.length; i++) {
-            if (serviceFactory.scales[i].id == temperatureScaleId) {
+            if (serviceFactory.scales[i].id === temperatureScaleId) {
                 return serviceFactory.scales[i];
             }
         }

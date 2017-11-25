@@ -101,12 +101,12 @@ namespace ART.Domotica.Producer.Services
             });            
         }
 
-        public async Task SetTimeOffsetInSecond(AuthenticatedMessageContract<ESPDeviceSetTimeOffsetInSecondRequestContract> message)
+        public async Task SetTimeOffsetInSecond(AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ESPDeviceConstants.SetTimeOffsetInSecondQueueName, null, payload);
+                _model.BasicPublish("", ESPDeviceConstants.SetTimeZoneQueueName, null, payload);
             });
         }
 
@@ -154,7 +154,7 @@ namespace ART.Domotica.Producer.Services
                , arguments: null);
 
             _model.QueueDeclare(
-                queue: ESPDeviceConstants.SetTimeOffsetInSecondQueueName
+                queue: ESPDeviceConstants.SetTimeZoneQueueName
               , durable: false
               , exclusive: false
               , autoDelete: true

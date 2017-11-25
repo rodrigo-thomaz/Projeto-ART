@@ -4,7 +4,7 @@
     {
         #region Properties
 
-        public int TimeOffsetInSecond
+        public byte TimeZoneId
         {
             get; set;
         }

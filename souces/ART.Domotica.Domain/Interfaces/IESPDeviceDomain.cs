@@ -28,7 +28,7 @@
 
         Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
-        Task<ESPDevice> SetTimeOffsetInSecond(Guid deviceId, int timeOffsetInSecond);
+        Task<ESPDevice> SetTimeZone(Guid deviceId, byte timeZoneId);
 
         Task<ESPDevice> SetUpdateIntervalInMilliSecond(Guid deviceId, int updateIntervalInMilliSecond);
 

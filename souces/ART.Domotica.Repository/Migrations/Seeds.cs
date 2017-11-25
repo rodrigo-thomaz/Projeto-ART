@@ -373,6 +373,8 @@
 
             if (espDevice1 == null)
             {
+                var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
+
                 espDevice1 = new ESPDevice
                 {
                     ChipId = 1540901,
@@ -389,10 +391,11 @@
                     },
                     DeviceNTP = new DeviceNTP
                     {
-                        TimeOffsetInSecond = -7200, // Cada hora são 3600 segundos
+                        TimeZoneId = timeZoneBrasilia.Id, // Cada hora são 3600 segundos
                         UpdateIntervalInMilliSecond = 60000,
                     },
                 };
+
                 context.ESPDevice.Add(espDevice1);
             }
             else
@@ -411,9 +414,11 @@
                 }
                 if (espDevice1.DeviceNTP == null)
                 {
+                    var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
+
                     espDevice1.DeviceNTP = new DeviceNTP
                     {
-                        TimeOffsetInSecond = -7200,// Cada hora são 3600 segundos
+                        TimeZoneId = timeZoneBrasilia.Id, // Cada hora são 3600 segundos
                         UpdateIntervalInMilliSecond = 60000,
                     };
                 }

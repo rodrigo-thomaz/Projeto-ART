@@ -151,7 +151,7 @@
         /// <response code="500">Internal Server Error</response>
         [Route("setTimeOffsetInSecond")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetTimeOffsetInSecond(ESPDeviceSetTimeOffsetInSecondRequestContract contract)
+        public async Task<IHttpActionResult> SetTimeOffsetInSecond(ESPDeviceSetTimeZoneRequestContract contract)
         {
             await _espDeviceProducer.SetTimeOffsetInSecond(CreateMessage(contract));
             return Ok();

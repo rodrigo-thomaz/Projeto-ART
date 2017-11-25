@@ -43,7 +43,7 @@
     <Compile Include="DeviceNTPDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorDetailModel.cs" />
     <Compile Include="ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel.cs" />
-    <Compile Include="ESPDeviceSetTimeOffsetInSecondCompletedModel.cs" />
+    <Compile Include="ESPDeviceSetTimeZoneCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetLabelCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnCompletedModel.cs" />

@@ -25,6 +25,7 @@
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly IDeviceMQRepository _deviceMQRepository;
         private readonly IDeviceNTPRepository _deviceNTPRepository;
+        private readonly ITimeZoneRepository _timeZoneRepository;
 
         #endregion Fields
 
@@ -40,6 +41,7 @@
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _deviceMQRepository = new DeviceMQRepository(context);
             _deviceNTPRepository = new DeviceNTPRepository(context);
+            _timeZoneRepository = new TimeZoneRepository(context);
         }
 
         #endregion Constructors
@@ -175,7 +177,7 @@
             return data;
         }
 
-        public async Task<ESPDevice> SetTimeOffsetInSecond(Guid deviceId, int timeOffsetInSecond)
+        public async Task<ESPDevice> SetTimeZone(Guid deviceId, byte timeZoneId)
         {
             var entity = await _deviceNTPRepository.GetById(deviceId);
 
@@ -184,7 +186,14 @@
                 throw new Exception("ESP Device not found");
             }
 
-            entity.TimeOffsetInSecond = timeOffsetInSecond;
+            var timeZone = await _timeZoneRepository.GetById(timeZoneId);
+
+            if (timeZone == null)
+            {
+                throw new Exception("Time Zone not found");
+            }
+
+            entity.TimeZoneId = timeZoneId;
 
             await _deviceNTPRepository.Update(entity);
 

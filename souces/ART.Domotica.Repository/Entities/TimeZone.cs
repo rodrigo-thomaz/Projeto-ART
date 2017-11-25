@@ -1,4 +1,5 @@
 ﻿using ART.Infra.CrossCutting.Repository;
+using System.Collections.Generic;
 
 namespace ART.Domotica.Repository.Entities
 {
@@ -8,5 +9,10 @@ namespace ART.Domotica.Repository.Entities
         public string DisplayName { get; set; }
         public bool SupportsDaylightSavingTime { get; set; }
         public int UtcTimeOffsetInSecond { get; set; }
+
+        public ICollection<DeviceNTP> DevicesNTP
+        {
+            get; set;
+        }
     }
 }

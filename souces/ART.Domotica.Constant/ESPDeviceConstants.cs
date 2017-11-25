@@ -18,8 +18,8 @@
         public static readonly string InsertInApplicationQueueName = "ESPDevice.InsertInApplication";
         public static readonly string InsertInApplicationViewCompletedQueueName = "ESPDevice.InsertInApplicationViewCompleted";
         public static readonly string SetTimeOffsetInSecondIoTQueueName = "ESPDevice.SetTimeOffsetInSecondIoT";
-        public static readonly string SetTimeOffsetInSecondQueueName = "ESPDevice.SetTimeOffsetInSecond";
-        public static readonly string SetTimeOffsetInSecondViewCompletedQueueName = "ESPDevice.SetTimeOffsetInSecondViewCompleted";
+        public static readonly string SetTimeZoneQueueName = "ESPDevice.SetTimeZone";
+        public static readonly string SetTimeZoneViewCompletedQueueName = "ESPDevice.SetTimeZoneViewCompleted";
         public static readonly string SetUpdateIntervalInMilliSecondIoTQueueName = "ESPDevice.SetUpdateIntervalInMilliSecondIoT";
         public static readonly string SetUpdateIntervalInMilliSecondQueueName = "ESPDevice.SetUpdateIntervalInMilliSecond";
         public static readonly string SetUpdateIntervalInMilliSecondViewCompletedQueueName = "ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted";

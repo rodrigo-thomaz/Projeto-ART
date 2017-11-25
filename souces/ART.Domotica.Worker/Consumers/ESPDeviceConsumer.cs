@@ -117,7 +117,7 @@
                , arguments: null);
 
             _model.QueueDeclare(
-                queue: ESPDeviceConstants.SetTimeOffsetInSecondQueueName
+                queue: ESPDeviceConstants.SetTimeZoneQueueName
               , durable: false
               , exclusive: false
               , autoDelete: true
@@ -152,7 +152,7 @@
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
-            _model.BasicConsume(ESPDeviceConstants.SetTimeOffsetInSecondQueueName, false, _setTimeOffsetInSecondConsumer);
+            _model.BasicConsume(ESPDeviceConstants.SetTimeZoneQueueName, false, _setTimeOffsetInSecondConsumer);
             _model.BasicConsume(ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName, false, _setUpdateIntervalInMilliSecondConsumer);
         }
 
@@ -422,9 +422,9 @@
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetTimeOffsetInSecondRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.SetTimeOffsetInSecond(message.Contract.DeviceId, message.Contract.TimeOffsetInSecond);
+            var data = await domain.SetTimeZone(message.Contract.DeviceId, message.Contract.TimeZoneId);
 
             var exchange = "amq.topic";
 
@@ -432,16 +432,16 @@
             var applicationMQ = await applicationMQDomain.Get(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<ESPDeviceSetTimeOffsetInSecondRequestContract, ESPDeviceSetTimeOffsetInSecondCompletedModel>(message.Contract);
+            var viewModel = Mapper.Map<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeZoneCompletedModel>(message.Contract);
             viewModel.DeviceId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.SetTimeOffsetInSecondViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.SouceMQSession, ESPDeviceConstants.SetTimeZoneViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQ = await domain.GetDeviceMQ(viewModel.DeviceId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<ESPDeviceSetTimeOffsetInSecondRequestContract, ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(message.Contract);
+            var iotContract = Mapper.Map<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<ESPDeviceSetTimeOffsetInSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetTimeOffsetInSecondIoTQueueName);
