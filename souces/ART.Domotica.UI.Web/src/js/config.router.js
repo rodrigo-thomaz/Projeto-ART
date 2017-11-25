@@ -57,6 +57,7 @@ angular.module('app')
                   templateUrl: 'views/espDeviceManager.html',
                   resolve: load([
                       'ui.grid',
+                      'toaster',
                       'js/services/espDeviceService.js',
                       'js/controllers/espDeviceJoinController.js',
                       'js/controllers/espDeviceManagerController.js',
@@ -73,6 +74,7 @@ angular.module('app')
                   templateUrl: 'views/admin/espDeviceAdmin.html',
                   resolve: load([
                       'ui.grid',
+                      'toaster',
                       'js/services/admin/espDeviceAdminService.js',
                       'js/controllers/admin/espDeviceAdminController.js',
                   ])

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootScope', 'espDeviceService', function ($scope, $timeout, $log, $rootScope, espDeviceService) {    
+app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootScope', 'toaster', 'espDeviceService', function ($scope, $timeout, $log, $rootScope, toaster, espDeviceService) {    
 
     var onGetByPinClick = function () {    
         $scope.searchingPin = true;
@@ -25,7 +25,7 @@ app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootS
     }
 
     var onInsertInApplicationCompleted = function (payload) {
-        alert("ESP Device inserido!!!");
+        toaster.pop('success', 'Sucesso', 'Device inserido');
     } 
 
     $scope.$on('$destroy', function () {

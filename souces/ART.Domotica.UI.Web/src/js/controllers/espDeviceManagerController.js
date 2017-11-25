@@ -1,12 +1,12 @@
 ﻿'use strict';
-app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$modal', 'uiGridConstants', '$rootScope', 'espDeviceService', function ($scope, $timeout, $log, $modal, uiGridConstants, $rootScope, espDeviceService) {    
+app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$modal', 'uiGridConstants', '$rootScope', 'toaster', 'espDeviceService', function ($scope, $timeout, $log, $modal, uiGridConstants, $rootScope, toaster, espDeviceService) {    
         
     var onDeleteFromApplicationClick = function (espDevice) {
         espDeviceService.deleteFromApplication(espDevice.deviceInApplicationId);
     }
 
     var onDeleteFromApplicationCompleted = function () {
-        alert("ESP Device deletado!!!");
+        toaster.pop('success', 'Sucesso', 'Device deletado');
     }
 
     $scope.$on('$destroy', function () {
