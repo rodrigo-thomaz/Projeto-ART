@@ -316,8 +316,8 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetLabel(message);
+            var hardwareDomain = _componentContext.Resolve<IHardwareDomain>();
+            var data = await hardwareDomain.SetLabel(message.Contract.DSFamilyTempSensorId, message.Contract.Label);
 
             var exchange = "amq.topic";
 
@@ -326,7 +326,9 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetLabelRequestContract, DSFamilyTempSensorSetLabelCompletedModel>(message.Contract);
-            viewModel.DeviceId = data.SensorsInDevice.Single().DeviceBaseId;
+            var dsFamilyTempSensorDomain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
+            var device = await dsFamilyTempSensorDomain.GetDeviceFromSensor(message.Contract.DSFamilyTempSensorId);
+            viewModel.DeviceId = device.DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DSFamilyTempSensorConstants.SetLabelViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
