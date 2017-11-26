@@ -54,8 +54,8 @@
                                     </div>
                                 </div>
                                 <div class="line line-dashed b-b line-lg pull-in"></div>
+
                                 <fieldset ng-controller="deviceNTPController" ng-init="init(device.deviceId, device.deviceNTP)">
-                                    <legend>NTP</legend>
                                     <div class="form-group">
                                         <label class="col-lg-4 control-label">Fuso horário</label>
                                         <div class="col-lg-8">
@@ -74,7 +74,8 @@
                                             Update Interval In MilliSecond deve ser maior que 5000
                                         </span>
                                     </div>
-                                </fieldset>                                
+                                </fieldset> 
+                                
                             </form>
 
                             <tabset justified="true" class="tab-container">
