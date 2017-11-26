@@ -216,7 +216,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.GetByPin(message);
+            var data = await domain.GetByPin(message.Contract.Pin);
 
             var exchange = "amq.topic";
 
@@ -244,7 +244,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.InsertInApplication(message);
+            var data = await domain.InsertInApplication(message.Contract.Pin, message.ApplicationUserId);
 
             var exchange = "amq.topic";
 
@@ -280,7 +280,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.DeleteFromApplication(message);
+            var data = await domain.DeleteFromApplication(message.Contract.DeviceInApplicationId);
 
             var exchange = "amq.topic";
 

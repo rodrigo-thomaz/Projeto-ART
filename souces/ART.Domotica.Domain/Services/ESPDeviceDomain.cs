@@ -59,9 +59,9 @@
             return await _espDeviceRepository.GetListInApplication(applicationUser.ApplicationId);
         }
 
-        public async Task<ESPDevice> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
+        public async Task<ESPDevice> GetByPin(string pin)
         {
-            var data = await _espDeviceRepository.GetByPin(message.Contract.Pin);
+            var data = await _espDeviceRepository.GetByPin(pin);
 
             if (data == null)
             {
@@ -71,16 +71,16 @@
             return data;
         }
 
-        public async Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
+        public async Task<ESPDevice> InsertInApplication(string pin, Guid createByApplicationUserId)
         {
-            var hardwareEntity = await _espDeviceRepository.GetByPin(message.Contract.Pin);
+            var hardwareEntity = await _espDeviceRepository.GetByPin(pin);
 
             if (hardwareEntity == null)
             {
                 throw new Exception("Pin not found");
             }
 
-            var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
+            var applicationUserEntity = await _applicationUserRepository.GetById(createByApplicationUserId);
 
             if (applicationUserEntity == null)
             {
@@ -98,9 +98,9 @@
             return hardwareEntity;
         }
 
-        public async Task<ESPDevice> DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
+        public async Task<ESPDevice> DeleteFromApplication(Guid deviceInApplicationId)
         {
-            var deviceInApplicationEntity = await _deviceInApplicationRepository.GetById(message.Contract.DeviceInApplicationId);
+            var deviceInApplicationEntity = await _deviceInApplicationRepository.GetById(deviceInApplicationId);
             
             if (deviceInApplicationEntity == null)
             {
