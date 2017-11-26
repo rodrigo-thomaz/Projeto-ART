@@ -4,12 +4,12 @@
 
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Repository.Interfaces;
-    using ART.Infra.CrossCutting.MQ.Contract;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Domain;
     using ART.Domotica.Repository;
     using Autofac;
     using ART.Domotica.Repository.Repositories;
+    using System;
 
     public class ApplicationDomain : DomainBase, IApplicationDomain
     {
@@ -34,10 +34,16 @@
 
         #region Methods
 
-        public async Task<Application> Get(AuthenticatedMessageContract message)
+        public async Task<Application> GetById(Guid applicationId)
         {
-            var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
-            return await _applicationRepository.GetById(applicationUserEntity.ApplicationId);
+            var data =  await _applicationRepository.GetById(applicationId);
+
+            if (data == null)
+            {
+                throw new Exception("Application not found");
+            }
+
+            return data;
         }
 
         #endregion Methods

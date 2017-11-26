@@ -34,6 +34,18 @@
             _settingsManager = settingsManager;
         }
 
+        public async Task<ApplicationUser> GetById(Guid applicationUserId)
+        {
+            var data = await _applicationUserRepository.GetById(applicationUserId);
+
+            if (data == null)
+            {
+                throw new Exception("ApplicationUser not found");
+            }
+
+            return data;
+        }
+
         #endregion Constructors
 
         #region Methods

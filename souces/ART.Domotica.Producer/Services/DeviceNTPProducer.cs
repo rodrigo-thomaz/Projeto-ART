@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Contract;
-using System;
-using RabbitMQ.Client.MessagePatterns;
-using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Producer.Services
 {

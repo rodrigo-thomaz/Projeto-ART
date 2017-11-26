@@ -71,8 +71,12 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var domain = _componentContext.Resolve<IApplicationDomain>();
-            var data = await domain.Get(message);
+            
+            var applicationUserDomain = _componentContext.Resolve<IApplicationUserDomain>();
+            var applicationUser = await applicationUserDomain.GetById(message.ApplicationUserId);
+
+            var applicationDomain = _componentContext.Resolve<IApplicationDomain>();
+            var application = await applicationDomain.GetById(applicationUser.ApplicationId);
 
             var exchange = "amq.topic";
 
@@ -80,7 +84,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<Application, ApplicationDetailModel>(data);
+            var viewModel = Mapper.Map<Application, ApplicationDetailModel>(application);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ApplicationConstants.GetViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

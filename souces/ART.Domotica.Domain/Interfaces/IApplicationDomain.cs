@@ -3,13 +3,13 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
-    using ART.Infra.CrossCutting.MQ.Contract;
+    using System;
 
     public interface IApplicationDomain
     {
         #region Methods
 
-        Task<Application> Get(AuthenticatedMessageContract message);
+        Task<Application> GetById(Guid applicationId);
 
         #endregion Methods
     }
