@@ -291,6 +291,9 @@
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetById(data.Id);
+
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
             var viewModel = new ESPDeviceDeleteFromApplicationModel
@@ -304,7 +307,7 @@
             //Enviando para o IoT
             var deviceMessage = new MessageIoTContract<string>(string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceMQ.Topic, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
+            var routingKey = GetDeviceRoutingKeyForIoT(deviceMQ.Topic, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

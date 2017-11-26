@@ -113,9 +113,6 @@
 
             var hardwareEntity = await _espDeviceRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
 
-            //Load Broker Setting
-            await _deviceMQRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
-
             return hardwareEntity;
         }
 

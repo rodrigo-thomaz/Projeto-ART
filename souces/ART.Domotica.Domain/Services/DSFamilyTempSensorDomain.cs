@@ -44,6 +44,12 @@ namespace ART.Domotica.Domain.Services
         public async Task<List<DSFamilyTempSensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
         {
             var deviceInApplication = await _deviceInApplicationRepository.GetById(deviceInApplicationId);
+
+            if (deviceInApplication == null)
+            {
+                throw new Exception("DeviceInApplication not found");
+            }
+
             return await _dsFamilyTempSensorRepository.GetAllByDeviceId(deviceInApplication.DeviceBaseId);            
         }
         
@@ -194,7 +200,14 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)
         {
-            return await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorId);
+            var data = await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorId);
+
+            if (data == null)
+            {
+                throw new Exception("DSFamilyTempSensor not found");
+            }
+
+            return data;
         }
 
         #endregion
