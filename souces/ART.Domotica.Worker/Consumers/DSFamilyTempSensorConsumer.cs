@@ -241,7 +241,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetResolution(message);
+            var data = await domain.SetResolution(message.Contract.DSFamilyTempSensorId, message.Contract.DSFamilyTempSensorResolutionId);
 
             var exchange = "amq.topic";
 
@@ -280,7 +280,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetScale(message);
+            var data = await domain.SetScale(message.Contract.DSFamilyTempSensorId, message.Contract.TemperatureScaleId);
 
             var exchange = "amq.topic";
 
@@ -349,7 +349,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetAlarmOn(message);
+            var data = await domain.SetAlarmOn(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.AlarmOn);
 
             var exchange = "amq.topic";
 
@@ -388,7 +388,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmCelsiusRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetAlarmCelsius(message);
+            var data = await domain.SetAlarmCelsius(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.AlarmCelsius);
 
             var exchange = "amq.topic";
 
@@ -427,7 +427,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetAlarmBuzzerOn(message);
+            var data = await domain.SetAlarmBuzzerOn(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.AlarmBuzzerOn);
 
             var exchange = "amq.topic";
 
@@ -466,7 +466,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetChartLimiterCelsius(message);
+            var data = await domain.SetChartLimiterCelsius(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.ChartLimiterCelsius);
 
             var exchange = "amq.topic";
 
