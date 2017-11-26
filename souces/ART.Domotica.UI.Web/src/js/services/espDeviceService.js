@@ -84,6 +84,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             if (device.deviceInApplicationId === data.deviceInApplicationId) {
                 device.epochTimeUtc = data.epochTimeUtc;
                 device.wifiQuality = data.wifiQuality;
+                device.localIPAddress = data.localIPAddress;
                 updateSensors(device, data.dsFamilyTempSensors);
                 break;
             }

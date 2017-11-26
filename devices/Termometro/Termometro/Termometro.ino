@@ -334,6 +334,7 @@ void loopInApplication()
       root["deviceInApplicationId"] = configurationManager.getDeviceInApplication()->getDeviceInApplicationId();
       root["wifiQuality"] = wifiManager.getQuality();
       root["epochTimeUtc"] = ntpManager.getEpochTimeUTC();    
+      root["localIPAddress"] = wifiManager.getLocalIPAddress();    
       
       dsFamilyTempSensorManager.createSensorsJsonNestedArray(root);
 

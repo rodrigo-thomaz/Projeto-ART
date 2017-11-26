@@ -858,6 +858,11 @@ int WiFiManager::convertQualitytToBarsSignal(int quality){
 	return bars;
 }
 
+String WiFiManager::getLocalIPAddress()
+{
+	return this->toStringIp(WiFi.localIP());
+}
+
 /** Is this an IP? */
 boolean WiFiManager::isIp(String str) {
   for (int i = 0; i < str.length(); i++) {

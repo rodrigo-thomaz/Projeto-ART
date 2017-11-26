@@ -122,8 +122,9 @@ class WiFiManager
 	
 	String        getSSID();		
 	int           getQuality();	
-	bool           isConnected();	
+	bool          isConnected();	
 	int			  convertQualitytToBarsSignal(int quality);
+	String		  getLocalIPAddress();
 	
   private:
     std::unique_ptr<DNSServer>        dnsServer;
