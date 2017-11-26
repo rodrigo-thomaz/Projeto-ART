@@ -60,8 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="src\img\favicon.ico" />
-    <Content Include="libs\angular\angular-event-dispatcher\angular-event-dispatcher.js" />
-    <Content Include="libs\angular\angular-event-dispatcher\angular-event-dispatcher.min.js" />
     <Content Include="libs\angular\angular-locales\angular-locale_pt-br.js" />
     <Content Include="libs\angular\angular-nvd3\angular-nvd3.min.js" />
     <Content Include="libs\angular\angular-nvd3\d3.js" />
