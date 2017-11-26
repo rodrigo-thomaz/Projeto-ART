@@ -434,7 +434,7 @@
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var domain = _componentContext.Resolve<IDeviceNTPDomain>();
             var data = await domain.SetTimeZone(message.Contract.DeviceId, message.Contract.TimeZoneId);
 
             var exchange = "amq.topic";
@@ -453,7 +453,7 @@
             var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<ESPDevice, ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>(data);
+            var iotContract = Mapper.Map<DeviceNTP, ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>(data);
             var deviceMessage = new MessageIoTContract<ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetUtcTimeOffsetInSecondIoTQueueName);
@@ -473,7 +473,7 @@
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var domain = _componentContext.Resolve<IDeviceNTPDomain>();
             var data = await domain.SetUpdateIntervalInMilliSecond(message.Contract.DeviceId, message.Contract.UpdateIntervalInMilliSecond);
 
             var exchange = "amq.topic";

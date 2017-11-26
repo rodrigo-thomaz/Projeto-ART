@@ -24,11 +24,7 @@
 
         Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message);
 
-        Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
-
-        Task<ESPDevice> SetTimeZone(Guid deviceId, byte timeZoneId);
-
-        Task<ESPDevice> SetUpdateIntervalInMilliSecond(Guid deviceId, int updateIntervalInMilliSecond);
+        Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);        
 
         Task<List<ESPDevice>> UpdatePins();
 

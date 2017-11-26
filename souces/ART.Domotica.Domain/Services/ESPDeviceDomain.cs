@@ -165,45 +165,6 @@
             return data;
         }
 
-        public async Task<ESPDevice> SetTimeZone(Guid deviceId, byte timeZoneId)
-        {
-            var entity = await _deviceNTPRepository.GetById(deviceId);
-
-            if (entity == null)
-            {
-                throw new Exception("ESP Device not found");
-            }
-
-            var timeZone = await _timeZoneRepository.GetById(timeZoneId);
-
-            if (timeZone == null)
-            {
-                throw new Exception("Time Zone not found");
-            }
-
-            entity.TimeZoneId = timeZoneId;
-
-            await _deviceNTPRepository.Update(entity);
-
-            return await _espDeviceRepository.GetById(deviceId);
-        }
-
-        public async Task<ESPDevice> SetUpdateIntervalInMilliSecond(Guid deviceId, int updateIntervalInMilliSecond)
-        {
-            var entity = await _deviceNTPRepository.GetById(deviceId);
-
-            if (entity == null)
-            {
-                throw new Exception("ESP Device not found");
-            }
-
-            entity.UpdateIntervalInMilliSecond = updateIntervalInMilliSecond;
-
-            await _deviceNTPRepository.Update(entity);
-
-            return await _espDeviceRepository.GetById(deviceId);
-        }
-
         #endregion Methods
     }
 }
