@@ -21,7 +21,6 @@
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
-        private readonly IDeviceMQRepository _deviceMQRepository;
 
         #endregion Fields
 
@@ -35,7 +34,6 @@
             _applicationRepository = new ApplicationRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
-            _deviceMQRepository = new DeviceMQRepository(context);
         }
 
         #endregion Constructors

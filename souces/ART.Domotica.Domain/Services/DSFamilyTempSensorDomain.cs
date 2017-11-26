@@ -17,7 +17,6 @@ namespace ART.Domotica.Domain.Services
         #region private readonly fields
 
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
-        private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly ITemperatureScaleRepository _temperatureScaleRepository;
@@ -32,7 +31,6 @@ namespace ART.Domotica.Domain.Services
 
             _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
             _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);
-            _espDeviceRepository = new ESPDeviceRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _temperatureScaleRepository = new TemperatureScaleRepository(context);
         }
