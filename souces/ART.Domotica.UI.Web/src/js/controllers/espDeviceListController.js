@@ -15,20 +15,53 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
         $scope.device = device; 
 
-        $scope.updateIntervalInMilliSecondView = device.deviceNTP.updateIntervalInMilliSecond;
-
         $scope.labelView = device.label;
+
+        clearOnSetLabelCompleted = $rootScope.$on('espDeviceService_onSetLabelCompleted_Id_' + $scope.device.deviceId, onSetLabelCompleted);        
+
+        initialized = true;
+    }
+
+    var clearOnSetLabelCompleted = null;
+
+    $scope.$on('$destroy', function () {
+        clearOnSetLabelCompleted();
+    });
+
+    var onSetLabelCompleted = function (event, data) {
+        $scope.labelView = data.label;
+        toaster.pop('success', 'Sucesso', 'Label alterado');
+    };    
+
+    $scope.changeLabel = function () {
+        if (!initialized || !$scope.labelView) return;
+        espDeviceService.setLabel($scope.device.deviceId, $scope.labelView);
+    };
+
+}]);
+
+app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'timeZoneService', 'deviceNTPService', function ($scope, $rootScope, $timeout, $log, toaster, timeZoneService, deviceNTPService) {
+
+    $scope.deviceId = null;
+    $scope.deviceNTP = {};
+
+    var initialized = false;
+
+    $scope.init = function (deviceId, deviceNTP) {
+
+        $scope.deviceId = deviceId;
+        $scope.deviceNTP = deviceNTP;
+
+        $scope.updateIntervalInMilliSecondView = deviceNTP.updateIntervalInMilliSecond;
 
         // Time Zone
         if (timeZoneService.initialized())
             setSelectedTimeZone();
         else
-            clearOnTimeZoneServiceInitialized = $rootScope.$on('timeZoneService_Initialized', setSelectedTimeZone);        
+            clearOnTimeZoneServiceInitialized = $rootScope.$on('timeZoneService_Initialized', setSelectedTimeZone);
 
-
-        clearOnSetTimeZoneCompleted = $rootScope.$on('espDeviceService_onSetTimeZoneCompleted_Id_' + $scope.device.deviceId, onSetTimeZoneCompleted);        
-        clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.device.deviceId, onSetUpdateIntervalInMilliSecondCompleted);        
-        clearOnSetLabelCompleted = $rootScope.$on('espDeviceService_onSetLabelCompleted_Id_' + $scope.device.deviceId, onSetLabelCompleted);        
+        clearOnSetTimeZoneCompleted = $rootScope.$on('espDeviceService_onSetTimeZoneCompleted_Id_' + $scope.deviceId, onSetTimeZoneCompleted);
+        clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.deviceId, onSetUpdateIntervalInMilliSecondCompleted);
 
         initialized = true;
     }
@@ -36,17 +69,15 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
     var clearOnTimeZoneServiceInitialized = null;
     var clearOnSetTimeZoneCompleted = null;
     var clearOnSetUpdateIntervalInMilliSecondCompleted = null;
-    var clearOnSetLabelCompleted = null;
 
     $scope.$on('$destroy', function () {
         if (clearOnTimeZoneServiceInitialized !== null) clearOnTimeZoneServiceInitialized();
         clearOnSetTimeZoneCompleted();
         clearOnSetUpdateIntervalInMilliSecondCompleted();
-        clearOnSetLabelCompleted();
     });
 
     var setSelectedTimeZone = function () {
-        $scope.timeZone.selectedTimeZone = timeZoneService.getTimeZoneById($scope.device.deviceNTP.timeZoneId);
+        $scope.timeZone.selectedTimeZone = timeZoneService.getTimeZoneById($scope.deviceNTP.timeZoneId);
     };
 
     var onSetTimeZoneCompleted = function (event, data) {
@@ -57,12 +88,7 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
     var onSetUpdateIntervalInMilliSecondCompleted = function (event, data) {
         $scope.updateIntervalInMilliSecondView = data.updateIntervalInMilliSecond;
         toaster.pop('success', 'Sucesso', 'UpdateIntervalInMilliSecond alterado');
-    };
-
-    var onSetLabelCompleted = function (event, data) {
-        $scope.labelView = data.label;
-        toaster.pop('success', 'Sucesso', 'Label alterado');
-    };
+    };   
 
     $scope.timeZone = {
         availableTimeZones: timeZoneService.timeZones,
@@ -71,17 +97,12 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
     $scope.changeTimeZone = function () {
         if (!initialized) return;
-        deviceNTPService.setTimeZone($scope.device.deviceId, $scope.timeZone.selectedTimeZone.id);
-    }; 
+        deviceNTPService.setTimeZone($scope.deviceId, $scope.timeZone.selectedTimeZone.id);
+    };
 
     $scope.changeUpdateIntervalInMilliSecond = function () {
         if (!initialized || !$scope.updateIntervalInMilliSecondView) return;
-        deviceNTPService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.updateIntervalInMilliSecondView);
-    };
-
-    $scope.changeLabel = function () {
-        if (!initialized || !$scope.labelView) return;
-        espDeviceService.setLabel($scope.device.deviceId, $scope.labelView);
+        deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceId, $scope.updateIntervalInMilliSecondView);
     };
 
 }]);
