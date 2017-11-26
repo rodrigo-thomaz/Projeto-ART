@@ -41,8 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
-    <Compile Include="ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract.cs" />
-    <Compile Include="ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract.cs" />
+    <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract.cs" />
+    <Compile Include="DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetChartLimiterCelsiusRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmCelsiusRequestIoTContract.cs" />

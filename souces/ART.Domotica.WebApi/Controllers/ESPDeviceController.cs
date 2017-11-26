@@ -140,42 +140,6 @@
         }
 
         /// <summary>
-        /// Altera o TimeZone de um device
-        /// </summary>
-        /// <remarks>
-        /// Altera o TimeZone de um device
-        /// </remarks>
-        /// <param name="contract">contrato do request</param>
-        /// <response code="400">Bad Request</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal Server Error</response>
-        [Route("setTimeZone")]
-        [HttpPost]
-        public async Task<IHttpActionResult> SetTimeZone(ESPDeviceSetTimeZoneRequestContract contract)
-        {
-            await _espDeviceProducer.SetTimeZone(CreateMessage(contract));
-            return Ok();
-        }
-
-        /// <summary>
-        /// Altera o UpdateIntervalInMilliSecond de um device
-        /// </summary>
-        /// <remarks>
-        /// Altera o UpdateIntervalInMilliSecond de um device
-        /// </remarks>
-        /// <param name="contract">contrato do request</param>
-        /// <response code="400">Bad Request</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal Server Error</response>
-        [Route("setUpdateIntervalInMilliSecond")]
-        [HttpPost]
-        public async Task<IHttpActionResult> SetUpdateIntervalInMilliSecond(ESPDeviceSetUpdateIntervalInMilliSecondRequestContract contract)
-        {
-            await _espDeviceProducer.SetUpdateIntervalInMilliSecond(CreateMessage(contract));
-            return Ok();
-        }
-
-        /// <summary>
         /// Altera o Label de um device
         /// </summary>
         /// <remarks>

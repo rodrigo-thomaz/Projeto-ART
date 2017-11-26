@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ESPDeviceSetTimeZoneRequestContract
+    public class DeviceNTPSetTimeZoneRequestContract
     {
         #region Properties
 

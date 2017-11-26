@@ -32,8 +32,6 @@
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
-        private readonly EventingBasicConsumer _setTimeZoneConsumer;
-        private readonly EventingBasicConsumer _setUpdateIntervalInMilliSecondConsumer;
         private readonly EventingBasicConsumer _setLabelConsumer;
 
         private readonly ISettingManager _settingsManager;
@@ -56,8 +54,6 @@
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
-            _setTimeZoneConsumer = new EventingBasicConsumer(_model);
-            _setUpdateIntervalInMilliSecondConsumer = new EventingBasicConsumer(_model);
             _setLabelConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
@@ -119,20 +115,6 @@
                , arguments: null);
 
             _model.QueueDeclare(
-                queue: ESPDeviceConstants.SetTimeZoneQueueName
-              , durable: false
-              , exclusive: false
-              , autoDelete: true
-              , arguments: null);
-
-            _model.QueueDeclare(
-                queue: ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName
-              , durable: false
-              , exclusive: false
-              , autoDelete: true
-              , arguments: null);
-
-            _model.QueueDeclare(
                 queue: ESPDeviceConstants.SetLabelQueueName
               , durable: false
               , exclusive: false
@@ -152,8 +134,6 @@
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
-            _setTimeZoneConsumer.Received += SetTimeZoneReceived;
-            _setUpdateIntervalInMilliSecondConsumer.Received += SetUpdateIntervalInMilliSecondReceived;
             _setLabelConsumer.Received += SetLabelReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
@@ -162,8 +142,6 @@
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
-            _model.BasicConsume(ESPDeviceConstants.SetTimeZoneQueueName, false, _setTimeZoneConsumer);
-            _model.BasicConsume(ESPDeviceConstants.SetUpdateIntervalInMilliSecondQueueName, false, _setUpdateIntervalInMilliSecondConsumer);
             _model.BasicConsume(ESPDeviceConstants.SetLabelQueueName, false, _setLabelConsumer);
         }
 
@@ -422,85 +400,7 @@
             }
 
             _logger.DebugLeave();
-        }
-
-        public void SetTimeZoneReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(SetTimeZoneReceivedAsync(sender, e));
-        }
-
-        public async Task SetTimeZoneReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IDeviceNTPDomain>();
-            var data = await domain.SetTimeZone(message.Contract.DeviceId, message.Contract.TimeZoneId);
-
-            var exchange = "amq.topic";
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            //Enviando para View
-            var viewModel = Mapper.Map<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeZoneCompletedModel>(message.Contract);
-            viewModel.DeviceId = data.Id;
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetTimeZoneViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
-
-            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
-
-            //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceNTP, ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>(data);
-            var deviceMessage = new MessageIoTContract<ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetUtcTimeOffsetInSecondIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
-
-            _logger.DebugLeave();
-        }
-
-        public void SetUpdateIntervalInMilliSecondReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(SetUpdateIntervalInMilliSecondReceivedAsync(sender, e));
-        }
-
-        public async Task SetUpdateIntervalInMilliSecondReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IDeviceNTPDomain>();
-            var data = await domain.SetUpdateIntervalInMilliSecond(message.Contract.DeviceId, message.Contract.UpdateIntervalInMilliSecond);
-
-            var exchange = "amq.topic";
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            //Enviando para View
-            var viewModel = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel>(message.Contract);
-            viewModel.DeviceId = data.Id;
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
-
-            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
-
-            //Enviando para o Iot
-            var iotContract = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
-
-            _logger.DebugLeave();
-        }
+        }       
 
         public void SetLabelReceived(object sender, BasicDeliverEventArgs e)
         {

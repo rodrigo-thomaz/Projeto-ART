@@ -30,16 +30,6 @@
 
             CreateMap<ESPDevice, ESPDeviceGetByPinModel>();
 
-            CreateMap<DeviceMQ, DeviceMQDetailResponseContract>()
-                .ForMember(vm => vm.User, m => m.MapFrom(x => x.User))
-                .ForMember(vm => vm.Password, m => m.MapFrom(x => x.Password))
-                .ForMember(vm => vm.ClientId, m => m.MapFrom(x => x.ClientId))
-                .ForMember(vm => vm.DeviceTopic, m => m.MapFrom(x => x.Topic));
-
-            CreateMap<DeviceNTP, DeviceNTPDetailResponseContract>()
-                .ForMember(vm => vm.UpdateIntervalInMilliSecond, m => m.MapFrom(x => x.UpdateIntervalInMilliSecond))
-                .ForMember(vm => vm.UtcTimeOffsetInSecond, m => m.MapFrom(x => x.TimeZone.UtcTimeOffsetInSecond));
-
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
                 .ForMember(vm => vm.DeviceInApplicationId, m => m.ResolveUsing(src => {
                     if (src.DevicesInApplication != null && src.DevicesInApplication.Any())
@@ -60,10 +50,6 @@
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
                 .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));
 
-            CreateMap<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>();
-
-            CreateMap<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeZoneCompletedModel>();
-            CreateMap<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel>();
             CreateMap<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelCompletedModel>();
         }
 

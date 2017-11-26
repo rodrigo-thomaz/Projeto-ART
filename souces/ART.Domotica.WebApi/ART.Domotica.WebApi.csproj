@@ -139,6 +139,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApplicationMQController.cs" />
+    <Compile Include="Controllers\DeviceNTPController.cs" />
     <Compile Include="Controllers\ESPDeviceController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\TimeZoneController.cs" />

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ESPDeviceSetTimeZoneCompletedModel
+    public class DeviceNTPSetTimeZoneCompletedModel
     {
         #region Properties
 

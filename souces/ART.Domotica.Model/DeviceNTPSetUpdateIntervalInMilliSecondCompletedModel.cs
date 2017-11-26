@@ -1,8 +1,8 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Model
 {
     using System;
 
-    public class ESPDeviceSetUpdateIntervalInMilliSecondRequestContract
+    public class DeviceNTPSetUpdateIntervalInMilliSecondCompletedModel
     {
         #region Properties
 

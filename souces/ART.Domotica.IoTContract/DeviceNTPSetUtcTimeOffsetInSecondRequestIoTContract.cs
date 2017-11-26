@@ -1,10 +1,10 @@
 ﻿namespace ART.Domotica.IoTContract
 {
-    public class ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract
+    public class DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract
     {
         #region Properties
 
-        public int UpdateIntervalInMilliSecond
+        public int UtcTimeOffsetInSecond
         {
             get; set;
         }

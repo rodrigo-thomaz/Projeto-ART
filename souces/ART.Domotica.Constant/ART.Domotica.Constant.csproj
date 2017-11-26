@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationMQConstants.cs" />
+    <Compile Include="DeviceNTPConstants.cs" />
     <Compile Include="SettingsConstants.cs" />
     <Compile Include="ESPDeviceConstants.cs" />
     <Compile Include="ApplicationConstants.cs" />
