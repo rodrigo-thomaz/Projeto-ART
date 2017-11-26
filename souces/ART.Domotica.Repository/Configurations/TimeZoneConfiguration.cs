@@ -1,11 +1,14 @@
-﻿using ART.Domotica.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Domotica.Repository.Configurations
+﻿namespace ART.Domotica.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Domotica.Repository.Entities;
+
     public class TimeZoneConfiguration : EntityTypeConfiguration<TimeZone>
     {
+        #region Constructors
+
         public TimeZoneConfiguration()
         {
             //Primary Keys
@@ -30,8 +33,10 @@ namespace ART.Domotica.Repository.Configurations
 
             //UtcTimeOffsetInSecond
             Property(x => x.UtcTimeOffsetInSecond)
-                .HasColumnOrder(3)                
+                .HasColumnOrder(3)
                 .IsRequired();
         }
+
+        #endregion Constructors
     }
 }

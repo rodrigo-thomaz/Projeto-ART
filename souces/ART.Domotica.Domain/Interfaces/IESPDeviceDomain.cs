@@ -16,15 +16,13 @@
 
         Task<List<ESPDevice>> GetAll();
 
-        Task<ApplicationMQ> GetApplicationMQ(Guid deviceId);
-
         Task<ESPDevice> GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
         Task<ESPDevice> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
 
         Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message);
 
-        Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);        
+        Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
         Task<List<ESPDevice>> UpdatePins();
 

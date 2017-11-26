@@ -13,12 +13,12 @@
             get; set;
         }
 
-        public string Label
+        public Guid Id
         {
             get; set;
         }
 
-        public Guid Id
+        public string Label
         {
             get; set;
         }

@@ -13,8 +13,6 @@
 
         Task<List<ESPDevice>> GetAll();
 
-        Task<ApplicationMQ> GetApplicationMQ(Guid deviceId);
-
         Task<ESPDevice> GetByPin(string pin);
 
         Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);

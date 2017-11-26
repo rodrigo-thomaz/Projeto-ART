@@ -112,16 +112,6 @@
             return data;
         } 
 
-        public async Task<ApplicationMQ> GetApplicationMQ(Guid deviceId)
-        {
-            IQueryable<ApplicationMQ> query = from abs in _context.ApplicationMQ
-                        join dia in _context.DeviceInApplication on abs.Id equals dia.ApplicationId
-                        where dia.DeviceBaseId == deviceId
-                        select abs;
-
-            return await query.SingleOrDefaultAsync();
-        }
-
         #endregion Methods
     }
 }

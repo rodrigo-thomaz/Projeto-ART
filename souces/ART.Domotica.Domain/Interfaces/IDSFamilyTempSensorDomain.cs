@@ -16,6 +16,8 @@
 
         Task<List<DSFamilyTempSensorResolution>> GetAllResolutions();
 
+        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
+
         Task<DSFamilyTempSensor> SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message);
 
         Task<DSFamilyTempSensor> SetAlarmCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmCelsiusRequestContract> message);
@@ -24,11 +26,9 @@
 
         Task<DSFamilyTempSensor> SetChartLimiterCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract> message);
 
-        Task<DSFamilyTempSensor> SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message);
-
         Task<DSFamilyTempSensor> SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
 
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
+        Task<DSFamilyTempSensor> SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message);
 
         #endregion Methods
     }

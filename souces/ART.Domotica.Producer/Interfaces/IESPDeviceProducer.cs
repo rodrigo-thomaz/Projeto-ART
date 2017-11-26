@@ -21,11 +21,11 @@
 
         Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
+        Task SetLabel(AuthenticatedMessageContract<ESPDeviceSetLabelRequestContract> message);
+
         Task SetTimeZone(AuthenticatedMessageContract<ESPDeviceSetTimeZoneRequestContract> message);
 
         Task SetUpdateIntervalInMilliSecond(AuthenticatedMessageContract<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract> message);
-
-        Task SetLabel(AuthenticatedMessageContract<ESPDeviceSetLabelRequestContract> message);
 
         #endregion Methods
     }

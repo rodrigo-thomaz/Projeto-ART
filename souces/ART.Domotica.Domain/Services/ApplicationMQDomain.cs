@@ -10,6 +10,7 @@
     using ART.Domotica.Repository;
     using Autofac;
     using ART.Domotica.Repository.Repositories;
+    using System;
 
     public class ApplicationMQDomain : DomainBase, IApplicationMQDomain
     {
@@ -28,16 +29,21 @@
 
             _applicationMQRepository = new ApplicationMQRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
-        }
+        }        
 
         #endregion Constructors
 
         #region Methods
 
-        public async Task<ApplicationMQ> GetById(AuthenticatedMessageContract message)
+        public async Task<ApplicationMQ> GetByApplicationUserId(AuthenticatedMessageContract message)
         {
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
             return await _applicationMQRepository.GetById(applicationUserEntity.ApplicationId);
+        }
+
+        public async Task<ApplicationMQ> GetByDeviceId(Guid deviceId)
+        {
+            return await _applicationMQRepository.GetByDeviceId(deviceId);
         }
 
         #endregion Methods

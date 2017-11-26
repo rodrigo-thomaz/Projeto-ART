@@ -4,6 +4,16 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class Initial5 : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            AddColumn("dbo.DeviceNTP", "TimeOffsetInSecond", c => c.Int(nullable: false));
+            DropForeignKey("dbo.DeviceNTP", "TimeZoneId", "dbo.TimeZone");
+            DropIndex("dbo.DeviceNTP", new[] { "TimeZoneId" });
+            DropColumn("dbo.DeviceNTP", "TimeZoneId");
+        }
+
         public override void Up()
         {
             AddColumn("dbo.DeviceNTP", "TimeZoneId", c => c.Byte(nullable: false));
@@ -12,13 +22,7 @@ namespace ART.Domotica.Repository.Migrations
             Sql("UPDATE dbo.DeviceNTP SET TimeZoneId = 1");
             DropColumn("dbo.DeviceNTP", "TimeOffsetInSecond");
         }
-        
-        public override void Down()
-        {
-            AddColumn("dbo.DeviceNTP", "TimeOffsetInSecond", c => c.Int(nullable: false));
-            DropForeignKey("dbo.DeviceNTP", "TimeZoneId", "dbo.TimeZone");
-            DropIndex("dbo.DeviceNTP", new[] { "TimeZoneId" });
-            DropColumn("dbo.DeviceNTP", "TimeZoneId");
-        }
+
+        #endregion Methods
     }
 }

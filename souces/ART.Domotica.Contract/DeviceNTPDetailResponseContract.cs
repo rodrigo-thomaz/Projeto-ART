@@ -14,12 +14,12 @@
             get; set;
         }
 
-        public int UtcTimeOffsetInSecond
+        public int UpdateIntervalInMilliSecond
         {
             get; set;
         }
 
-        public int UpdateIntervalInMilliSecond
+        public int UtcTimeOffsetInSecond
         {
             get; set;
         }

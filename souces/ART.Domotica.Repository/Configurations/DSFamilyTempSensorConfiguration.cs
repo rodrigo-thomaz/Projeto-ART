@@ -64,7 +64,7 @@
 
             //DSFamilyTempSensorResolutionId
             Property(x => x.DSFamilyTempSensorResolutionId)
-                .HasColumnOrder(5);            
+                .HasColumnOrder(5);
 
             //LowTempSensorAlarm.AlarmOn
             Property(x => x.LowAlarm.AlarmOn)

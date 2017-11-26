@@ -20,7 +20,7 @@
         {
             #region TimeZone
 
-            if (!context.TimeZone.Any()) 
+            if (!context.TimeZone.Any())
             {
                 var systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
 
@@ -542,7 +542,7 @@
             {
                 settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
             }
-        }        
+        }
 
         #endregion Methods
     }

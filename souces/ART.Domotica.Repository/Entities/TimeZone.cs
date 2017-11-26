@@ -1,18 +1,38 @@
-﻿using ART.Infra.CrossCutting.Repository;
-using System.Collections.Generic;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using System.Collections.Generic;
+
+    using ART.Infra.CrossCutting.Repository;
+
     public class TimeZone : IEntity<byte>
     {
-        public byte Id { get; set; }
-        public string DisplayName { get; set; }
-        public bool SupportsDaylightSavingTime { get; set; }
-        public int UtcTimeOffsetInSecond { get; set; }
+        #region Properties
 
         public ICollection<DeviceNTP> DevicesNTP
         {
             get; set;
         }
+
+        public string DisplayName
+        {
+            get; set;
+        }
+
+        public byte Id
+        {
+            get; set;
+        }
+
+        public bool SupportsDaylightSavingTime
+        {
+            get; set;
+        }
+
+        public int UtcTimeOffsetInSecond
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

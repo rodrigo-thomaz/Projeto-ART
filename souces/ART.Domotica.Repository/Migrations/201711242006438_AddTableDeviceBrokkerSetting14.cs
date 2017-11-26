@@ -4,6 +4,20 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class AddTableDeviceBrokkerSetting14 : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.TimeZone", "ZoneId", "dbo.Zone");
+            DropForeignKey("dbo.Zone", "CountryId", "dbo.Country");
+            DropIndex("dbo.TimeZone", new[] { "ZoneId" });
+            DropIndex("dbo.Zone", new[] { "CountryId" });
+            DropIndex("dbo.Country", new[] { "Code" });
+            DropTable("dbo.TimeZone");
+            DropTable("dbo.Zone");
+            DropTable("dbo.Country");
+        }
+
         public override void Up()
         {
             CreateTable(
@@ -16,7 +30,7 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Code, unique: true);
-            
+
             CreateTable(
                 "dbo.Zone",
                 c => new
@@ -28,7 +42,7 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Country", t => t.CountryId)
                 .Index(t => t.CountryId);
-            
+
             CreateTable(
                 "dbo.TimeZone",
                 c => new
@@ -43,19 +57,8 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Zone", t => t.ZoneId)
                 .Index(t => t.ZoneId);
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.TimeZone", "ZoneId", "dbo.Zone");
-            DropForeignKey("dbo.Zone", "CountryId", "dbo.Country");
-            DropIndex("dbo.TimeZone", new[] { "ZoneId" });
-            DropIndex("dbo.Zone", new[] { "CountryId" });
-            DropIndex("dbo.Country", new[] { "Code" });
-            DropTable("dbo.TimeZone");
-            DropTable("dbo.Zone");
-            DropTable("dbo.Country");
-        }
+
+        #endregion Methods
     }
 }

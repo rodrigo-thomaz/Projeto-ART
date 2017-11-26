@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
+    using System;
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
@@ -9,7 +10,9 @@
     {
         #region Methods
 
-        Task<ApplicationMQ> GetById(AuthenticatedMessageContract message);
+        Task<ApplicationMQ> GetByApplicationUserId(AuthenticatedMessageContract message);
+
+        Task<ApplicationMQ> GetByDeviceId(Guid deviceId);
 
         #endregion Methods
     }

@@ -153,18 +153,6 @@
             return data;
         }
 
-        public async Task<ApplicationMQ> GetApplicationMQ(Guid deviceId)
-        {
-            var data = await _espDeviceRepository.GetApplicationMQ(deviceId);
-
-            if (data == null)
-            {
-                throw new Exception("ESP Device not found");
-            }
-
-            return data;
-        }
-
         #endregion Methods
     }
 }

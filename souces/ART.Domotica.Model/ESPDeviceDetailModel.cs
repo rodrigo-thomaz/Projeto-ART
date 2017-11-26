@@ -17,11 +17,6 @@
             get; set;
         }
 
-        public string Label
-        {
-            get; set;
-        }
-
         public Guid DeviceId
         {
             get; set;
@@ -38,6 +33,11 @@
         }
 
         public int FlashChipId
+        {
+            get; set;
+        }
+
+        public string Label
         {
             get; set;
         }

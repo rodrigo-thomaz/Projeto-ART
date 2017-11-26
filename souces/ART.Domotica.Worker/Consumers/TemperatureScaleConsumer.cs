@@ -101,7 +101,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetById(message);
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<List<TemperatureScale>, List<TemperatureScaleDetailModel>>(data);
@@ -126,8 +126,8 @@ namespace ART.Domotica.Worker.Consumers
             var temperatureScaleDomain = _componentContext.Resolve<ITemperatureScaleDomain>();            
             var data = await temperatureScaleDomain.GetAll();
 
-            var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var applicationMQ = await espDeviceDomain.GetApplicationMQ(requestContract.DeviceId);
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetById(requestContract.DeviceId);

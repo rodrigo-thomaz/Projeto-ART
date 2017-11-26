@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using ART.Domotica.Repository.Entities;
 
     public interface IHardwareDomain

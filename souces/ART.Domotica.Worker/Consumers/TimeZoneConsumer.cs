@@ -83,7 +83,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetById(message);
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<List<TimeZone>, List<TimeZoneDetailModel>>(data);

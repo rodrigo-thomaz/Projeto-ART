@@ -18,14 +18,20 @@
             get; set;
         }
 
-        public int UpdateIntervalInMilliSecond
+        public TimeZone TimeZone
         {
             get; set;
         }
 
-        public byte TimeZoneId { get; set; }
+        public byte TimeZoneId
+        {
+            get; set;
+        }
 
-        public TimeZone TimeZone { get; set; }
+        public int UpdateIntervalInMilliSecond
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

@@ -41,15 +41,15 @@
             return routingKey;
         }
 
-        protected string GetInApplicationRoutingKeyForView(string applicationTopic, string webUITopic, string topic)
-        {
-            var routingKey = string.Format("ART.Application.{0}.WebUI.{1}.{2}", applicationTopic, webUITopic, topic);
-            return routingKey;
-        }
-
         protected string GetInApplicationRoutingKeyForAllView(string applicationTopic, string topic)
         {
             var routingKey = string.Format("ART.Application.{0}.WebUI.{1}", applicationTopic, topic);
+            return routingKey;
+        }
+
+        protected string GetInApplicationRoutingKeyForView(string applicationTopic, string webUITopic, string topic)
+        {
+            var routingKey = string.Format("ART.Application.{0}.WebUI.{1}.{2}", applicationTopic, webUITopic, topic);
             return routingKey;
         }
 

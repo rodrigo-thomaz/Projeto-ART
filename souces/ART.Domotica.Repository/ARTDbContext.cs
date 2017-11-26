@@ -106,7 +106,7 @@
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             //Configurations
-                        
+
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());

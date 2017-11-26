@@ -2,11 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using ART.Domotica.Repository.Entities;
 
     public interface IDeviceMQDomain
     {
-        #region Methods       
+        #region Methods
 
         Task<DeviceMQ> GetById(Guid deviceMQId);
 

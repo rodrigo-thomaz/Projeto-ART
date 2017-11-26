@@ -58,7 +58,7 @@
             CreateMap<ESPDevice, ESPDeviceAdminDetailModel>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
-                .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));            
+                .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));
 
             CreateMap<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>();
 
