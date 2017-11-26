@@ -78,9 +78,6 @@ namespace ART.Domotica.Domain.Services
 
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
 
-            //LoadDevice
-            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorEntity.Id);
-
             return dsFamilyTempSensorEntity;
         }
 
@@ -104,9 +101,6 @@ namespace ART.Domotica.Domain.Services
 
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
 
-            //LoadDevice
-            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorEntity.Id);
-
             return dsFamilyTempSensorEntity;
         }
 
@@ -125,9 +119,6 @@ namespace ART.Domotica.Domain.Services
                 entity.LowAlarm.AlarmOn = alarmOn;
 
             await _dsFamilyTempSensorRepository.Update(entity);
-
-            //LoadDevice
-            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
 
             return entity;
         }
@@ -148,9 +139,6 @@ namespace ART.Domotica.Domain.Services
             
             await _dsFamilyTempSensorRepository.Update(entity);
 
-            //LoadDevice
-            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
-
             return entity;
         }
 
@@ -170,9 +158,6 @@ namespace ART.Domotica.Domain.Services
 
             await _dsFamilyTempSensorRepository.Update(entity);
 
-            //LoadDevice
-            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
-
             return entity;
         }
 
@@ -191,9 +176,6 @@ namespace ART.Domotica.Domain.Services
                 entity.LowChartLimiterCelsius = chartLimiterCelsius;
 
             await _dsFamilyTempSensorRepository.Update(entity);
-
-            //LoadDevice
-            await _dsFamilyTempSensorRepository.GetDeviceFromSensor(entity.Id);
 
             return entity;
         }
