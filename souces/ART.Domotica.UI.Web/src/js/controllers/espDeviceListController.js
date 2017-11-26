@@ -5,7 +5,7 @@ app.controller('espDeviceListController', ['$scope', '$timeout', '$log', 'espDev
 
 }]);
 
-app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'timeZoneService', 'espDeviceService', function ($scope, $rootScope, $timeout, $log, toaster, timeZoneService, espDeviceService) {
+app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'timeZoneService', 'espDeviceService', 'deviceNTPService', function ($scope, $rootScope, $timeout, $log, toaster, timeZoneService, espDeviceService, deviceNTPService) {
 
     $scope.device = {};
 
@@ -71,12 +71,12 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
     $scope.changeTimeZone = function () {
         if (!initialized) return;
-        espDeviceService.setTimeZone($scope.device.deviceId, $scope.timeZone.selectedTimeZone.id);
+        deviceNTPService.setTimeZone($scope.device.deviceId, $scope.timeZone.selectedTimeZone.id);
     }; 
 
     $scope.changeUpdateIntervalInMilliSecond = function () {
         if (!initialized || !$scope.updateIntervalInMilliSecondView) return;
-        espDeviceService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.updateIntervalInMilliSecondView);
+        deviceNTPService.setUpdateIntervalInMilliSecond($scope.device.deviceId, $scope.updateIntervalInMilliSecondView);
     };
 
     $scope.changeLabel = function () {

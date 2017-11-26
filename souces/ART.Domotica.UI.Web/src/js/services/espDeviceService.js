@@ -49,26 +49,6 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             }
         }
     }; 
-
-    var setTimeZone = function (deviceId, timeZoneId) {
-        var data = {
-            deviceId: deviceId,
-            timeZoneId: timeZoneId,
-        }
-        return $http.post(serviceBase + 'api/deviceNTP/setTimeZone', data).then(function (results) {
-            return results;
-        });
-    };
-
-    var setUpdateIntervalInMilliSecond = function (deviceId, updateIntervalInMilliSecond) {
-        var data = {
-            deviceId: deviceId,
-            updateIntervalInMilliSecond: updateIntervalInMilliSecond,
-        }
-        return $http.post(serviceBase + 'api/deviceNTP/setUpdateIntervalInMilliSecond', data).then(function (results) {
-            return results;
-        });
-    };
     
     var setLabel = function (deviceId, label) {
         var data = {
@@ -86,8 +66,6 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         stompService.subscribeAllViews('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
         stompService.subscribeAllViews('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
         stompService.subscribe('ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
-        stompService.subscribeAllViews('DeviceNTP.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
-        stompService.subscribeAllViews('DeviceNTP.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
         stompService.subscribeAllViews('ESPDevice.SetLabelViewCompleted', onSetLabelCompleted);
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
@@ -192,21 +170,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             }
         }       
     }
-
-    var onSetTimeZoneCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var device = getDeviceById(result.deviceId);
-        device.deviceNTP.timeZoneId = result.timeZoneId;
-        $rootScope.$emit('espDeviceService_onSetTimeZoneCompleted_Id_' + result.deviceId, result);
-    };
-
-    var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var device = getDeviceById(result.deviceId);
-        device.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
-        $rootScope.$emit('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + result.deviceId, result);
-    }
-
+       
     var onSetLabelCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var device = getDeviceById(result.deviceId);
@@ -243,8 +207,6 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     serviceFactory.insertInApplication = insertInApplication;    
     serviceFactory.deleteFromApplication = deleteFromApplication;
 
-    serviceFactory.setTimeZone = setTimeZone;
-    serviceFactory.setUpdateIntervalInMilliSecond = setUpdateIntervalInMilliSecond;
     serviceFactory.setLabel = setLabel;       
 
     return serviceFactory;
