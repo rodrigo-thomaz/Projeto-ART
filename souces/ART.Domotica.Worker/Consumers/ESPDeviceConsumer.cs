@@ -449,7 +449,8 @@
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetTimeZoneViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-            var deviceMQ = await domain.GetDeviceMQ(viewModel.DeviceId);
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDevice, ESPDeviceSetUtcTimeOffsetInSecondRequestIoTContract>(data);
@@ -487,7 +488,8 @@
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-            var deviceMQ = await domain.GetDeviceMQ(viewModel.DeviceId);
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondRequestIoTContract>(message.Contract);

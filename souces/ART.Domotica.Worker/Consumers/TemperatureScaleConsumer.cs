@@ -128,7 +128,9 @@ namespace ART.Domotica.Worker.Consumers
 
             var espDeviceDomain = _componentContext.Resolve<IESPDeviceDomain>();
             var applicationMQ = await espDeviceDomain.GetApplicationMQ(requestContract.DeviceId);
-            var deviceMQ = await espDeviceDomain.GetDeviceMQ(requestContract.DeviceId);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetById(requestContract.DeviceId);
 
             var exchange = "amq.topic";
 

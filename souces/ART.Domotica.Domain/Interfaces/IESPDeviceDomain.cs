@@ -22,8 +22,6 @@
 
         Task<ESPDevice> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract);
 
-        Task<DeviceMQ> GetDeviceMQ(Guid deviceId);
-
         Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message);
 
         Task<ESPDevice> InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
