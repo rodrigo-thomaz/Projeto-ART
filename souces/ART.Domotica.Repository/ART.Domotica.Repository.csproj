@@ -104,6 +104,7 @@
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceNTPRepository.cs" />
+    <Compile Include="Interfaces\IHardwareRepository.cs" />
     <Compile Include="Interfaces\IESPDeviceRepository.cs" />
     <Compile Include="Interfaces\IApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationUserRepository.cs" />
@@ -206,6 +207,7 @@
     <Compile Include="Repositories\DSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Repositories\DSFamilyTempSensorRepository.cs" />
     <Compile Include="Repositories\DeviceInApplicationRepository.cs" />
+    <Compile Include="Repositories\HardwareRepository.cs" />
     <Compile Include="Repositories\ESPDeviceRepository.cs" />
     <Compile Include="Repositories\TimeZoneRepository.cs" />
     <Compile Include="Repositories\TempSensorRangeRepository.cs" />

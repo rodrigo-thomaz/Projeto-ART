@@ -510,7 +510,7 @@
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetLabelRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var domain = _componentContext.Resolve<IHardwareDomain>();
             var data = await domain.SetLabel(message.Contract.DeviceId, message.Contract.Label);
 
             var exchange = "amq.topic";
