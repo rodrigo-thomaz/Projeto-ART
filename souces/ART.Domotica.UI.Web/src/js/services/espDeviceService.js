@@ -55,7 +55,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             deviceId: deviceId,
             timeZoneId: timeZoneId,
         }
-        return $http.post(serviceBase + 'api/espDevice/setTimeZone', data).then(function (results) {
+        return $http.post(serviceBase + 'api/deviceNTP/setTimeZone', data).then(function (results) {
             return results;
         });
     };
@@ -65,7 +65,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             deviceId: deviceId,
             updateIntervalInMilliSecond: updateIntervalInMilliSecond,
         }
-        return $http.post(serviceBase + 'api/espDevice/setUpdateIntervalInMilliSecond', data).then(function (results) {
+        return $http.post(serviceBase + 'api/deviceNTP/setUpdateIntervalInMilliSecond', data).then(function (results) {
             return results;
         });
     };
@@ -86,8 +86,8 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         stompService.subscribeAllViews('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
         stompService.subscribeAllViews('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
         stompService.subscribe('ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
-        stompService.subscribeAllViews('ESPDevice.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
-        stompService.subscribeAllViews('ESPDevice.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
+        stompService.subscribeAllViews('DeviceNTP.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
+        stompService.subscribeAllViews('DeviceNTP.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
         stompService.subscribeAllViews('ESPDevice.SetLabelViewCompleted', onSetLabelCompleted);
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
