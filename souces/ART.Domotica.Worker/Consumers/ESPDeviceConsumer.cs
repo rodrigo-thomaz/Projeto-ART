@@ -187,8 +187,12 @@
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.GetListInApplication(message);
+
+            var applicationUserDomain = _componentContext.Resolve<IApplicationUserDomain>();
+            var applicationUser = await applicationUserDomain.GetById(message.ApplicationUserId);
+
+            var espDevicedomain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await espDevicedomain.GetListInApplication(applicationUser.ApplicationId);
 
             var exchange = "amq.topic";
 
@@ -317,7 +321,7 @@
 
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCRequestContract>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.GetConfigurations(requestContract);
+            var data = await domain.GetConfigurations(requestContract.ChipId, requestContract.FlashChipId, requestContract.MacAddress);
 
             var applicationTopic = string.Empty;
             if (data.DevicesInApplication != null && data.DevicesInApplication.Any())

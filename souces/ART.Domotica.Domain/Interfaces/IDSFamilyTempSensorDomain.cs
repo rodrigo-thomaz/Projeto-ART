@@ -6,7 +6,6 @@
 
     using ART.Domotica.Contract;
     using ART.Domotica.Repository.Entities;
-    using ART.Infra.CrossCutting.MQ.Contract;
 
     public interface IDSFamilyTempSensorDomain
     {

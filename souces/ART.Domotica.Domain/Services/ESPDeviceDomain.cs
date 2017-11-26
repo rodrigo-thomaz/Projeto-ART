@@ -5,8 +5,6 @@
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Repository.Interfaces;
     using ART.Domotica.Repository.Entities;
-    using ART.Infra.CrossCutting.MQ.Contract;
-    using ART.Domotica.Contract;
     using System;
     using ART.Infra.CrossCutting.Domain;
     using ART.Infra.CrossCutting.Utils;
@@ -20,12 +18,10 @@
         #region Fields
 
         private readonly IESPDeviceRepository _espDeviceRepository;
-        private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
+        private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly IDeviceMQRepository _deviceMQRepository;
-        private readonly IDeviceNTPRepository _deviceNTPRepository;
-        private readonly ITimeZoneRepository _timeZoneRepository;
 
         #endregion Fields
 
@@ -36,12 +32,10 @@
             var context = componentContext.Resolve<ARTDbContext>();
 
             _espDeviceRepository = new ESPDeviceRepository(context);
-            _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
+            _applicationRepository = new ApplicationRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _deviceMQRepository = new DeviceMQRepository(context);
-            _deviceNTPRepository = new DeviceNTPRepository(context);
-            _timeZoneRepository = new TimeZoneRepository(context);
         }
 
         #endregion Constructors
@@ -53,10 +47,18 @@
             return await _espDeviceRepository.GetAll();
         }
 
-        public async Task<List<ESPDevice>> GetListInApplication(AuthenticatedMessageContract message)
+        public async Task<List<ESPDevice>> GetListInApplication(Guid applicationId)
         {
-            var applicationUser = await _applicationUserRepository.GetById(message.ApplicationUserId);
-            return await _espDeviceRepository.GetListInApplication(applicationUser.ApplicationId);
+            var application = await _applicationRepository.GetById(applicationId);
+
+            if (application == null)
+            {
+                throw new Exception("Application not found");
+            }
+
+            var data = await _espDeviceRepository.GetListInApplication(applicationId);            
+
+            return data;
         }
 
         public async Task<ESPDevice> GetByPin(string pin)
@@ -141,9 +143,9 @@
             return entities;
         }
 
-        public async Task<ESPDevice> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
+        public async Task<ESPDevice> GetConfigurations(int chipId, int flashChipId, string macAddress)
         {
-            var data = await _espDeviceRepository.GetDeviceInApplication(contract.ChipId, contract.FlashChipId, contract.MacAddress);            
+            var data = await _espDeviceRepository.GetDeviceInApplication(chipId, flashChipId, macAddress);            
 
             if (data == null)
             {
