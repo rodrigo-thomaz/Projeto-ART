@@ -218,7 +218,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionDetailModel>>(data);
@@ -246,7 +246,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>(data);
@@ -285,7 +285,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetScaleCompletedModel>(data);
@@ -323,7 +323,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetLabelRequestContract, DSFamilyTempSensorSetLabelCompletedModel>(message.Contract);
@@ -354,7 +354,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmOnRequestContract, DSFamilyTempSensorSetAlarmOnCompletedModel>(message.Contract);
@@ -393,7 +393,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmCelsiusRequestContract, DSFamilyTempSensorSetAlarmCelsiusCompletedModel>(message.Contract);
@@ -432,7 +432,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract, DSFamilyTempSensorSetAlarmBuzzerOnCompletedModel>(message.Contract);
@@ -471,7 +471,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract, DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel>(message.Contract);

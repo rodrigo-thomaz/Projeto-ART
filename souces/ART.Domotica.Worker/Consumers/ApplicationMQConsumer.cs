@@ -71,7 +71,7 @@ namespace ART.Domotica.Worker.Consumers
 
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<IApplicationMQDomain>();
-            var data = await domain.Get(requestContract);
+            var data = await domain.GetById(requestContract);
             
             //Enviando para View
             var responseContract = Mapper.Map<ApplicationMQ, ApplicationMQGetRPCResponseContract>(data);

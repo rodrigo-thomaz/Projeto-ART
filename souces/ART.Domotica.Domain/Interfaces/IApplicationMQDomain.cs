@@ -9,7 +9,7 @@
     {
         #region Methods
 
-        Task<ApplicationMQ> Get(AuthenticatedMessageContract message);
+        Task<ApplicationMQ> GetById(AuthenticatedMessageContract message);
 
         #endregion Methods
     }

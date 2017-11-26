@@ -188,7 +188,7 @@
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceAdminDetailModel>>(data);
@@ -215,7 +215,7 @@
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceDetailModel>>(data);
@@ -243,7 +243,7 @@
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetByPinViewCompletedQueueName);
@@ -271,7 +271,7 @@
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
@@ -307,7 +307,7 @@
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
@@ -440,7 +440,7 @@
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<ESPDeviceSetTimeZoneRequestContract, ESPDeviceSetTimeZoneCompletedModel>(message.Contract);
@@ -479,7 +479,7 @@
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<ESPDeviceSetUpdateIntervalInMilliSecondRequestContract, ESPDeviceSetUpdateIntervalInMilliSecondCompletedModel>(message.Contract);
@@ -518,7 +518,7 @@
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.Get(message);
+            var applicationMQ = await applicationMQDomain.GetById(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelCompletedModel>(message.Contract);

@@ -34,7 +34,7 @@
 
         #region Methods
 
-        public async Task<ApplicationMQ> Get(AuthenticatedMessageContract message)
+        public async Task<ApplicationMQ> GetById(AuthenticatedMessageContract message)
         {
             var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
             return await _applicationMQRepository.GetById(applicationUserEntity.ApplicationId);
