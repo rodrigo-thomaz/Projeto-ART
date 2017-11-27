@@ -25,6 +25,11 @@
             get; set;
         }
 
+        public DbSet<UnitOfMeasurementType> UnitOfMeasurementType
+        {
+            get; set;
+        }
+
         public DbSet<ApplicationMQ> ApplicationMQ
         {
             get; set;
@@ -126,6 +131,7 @@
             modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new TempSensorRangeConfiguration());
+            modelBuilder.Configurations.Add(new UnitOfMeasurementTypeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

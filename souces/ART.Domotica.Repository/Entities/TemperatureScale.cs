@@ -33,6 +33,10 @@
             get; set;
         }
 
+        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId { get; set; }
+
+        public UnitOfMeasurementType UnitOfMeasurementType { get; set; }
+
         #endregion Properties
     }
 }

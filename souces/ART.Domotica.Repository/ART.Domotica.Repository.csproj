@@ -79,6 +79,7 @@
     <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\TempSensorRangeConfiguration.cs" />
+    <Compile Include="Configurations\UnitOfMeasurementTypeConfiguration.cs" />
     <Compile Include="Configurations\TimeZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
     <Compile Include="Entities\DeviceNTP.cs" />
@@ -100,6 +101,8 @@
     <Compile Include="Entities\TempSensorAlarm.cs" />
     <Compile Include="Entities\TempSensorRange.cs" />
     <Compile Include="Entities\TimeZone.cs" />
+    <Compile Include="Entities\UnitOfMeasurementType.cs" />
+    <Compile Include="Entities\UnitOfMeasurementTypeEnum.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationMQRepository.cs" />
@@ -113,89 +116,9 @@
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
     <Compile Include="Interfaces\ITempSensorRangeRepository.cs" />
-    <Compile Include="Migrations\201711191112579_InitialCreate.cs" />
-    <Compile Include="Migrations\201711191112579_InitialCreate.Designer.cs">
-      <DependentUpon>201711191112579_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711191524022_InitialCreate1.cs" />
-    <Compile Include="Migrations\201711191524022_InitialCreate1.Designer.cs">
-      <DependentUpon>201711191524022_InitialCreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711212138516_AddTableDeviceBrokkerSetting.cs" />
-    <Compile Include="Migrations\201711212138516_AddTableDeviceBrokkerSetting.Designer.cs">
-      <DependentUpon>201711212138516_AddTableDeviceBrokkerSetting.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711212144305_AddTableDeviceBrokkerSetting1.cs" />
-    <Compile Include="Migrations\201711212144305_AddTableDeviceBrokkerSetting1.Designer.cs">
-      <DependentUpon>201711212144305_AddTableDeviceBrokkerSetting1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711212243493_AddTableDeviceBrokkerSetting2.cs" />
-    <Compile Include="Migrations\201711212243493_AddTableDeviceBrokkerSetting2.Designer.cs">
-      <DependentUpon>201711212243493_AddTableDeviceBrokkerSetting2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711220024376_AddTableDeviceBrokkerSetting3.cs" />
-    <Compile Include="Migrations\201711220024376_AddTableDeviceBrokkerSetting3.Designer.cs">
-      <DependentUpon>201711220024376_AddTableDeviceBrokkerSetting3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711221331314_AddTableDeviceBrokkerSetting4.cs" />
-    <Compile Include="Migrations\201711221331314_AddTableDeviceBrokkerSetting4.Designer.cs">
-      <DependentUpon>201711221331314_AddTableDeviceBrokkerSetting4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711221813354_AddTableDeviceBrokkerSetting5.cs" />
-    <Compile Include="Migrations\201711221813354_AddTableDeviceBrokkerSetting5.Designer.cs">
-      <DependentUpon>201711221813354_AddTableDeviceBrokkerSetting5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711222040541_AddTableDeviceBrokkerSetting6.cs" />
-    <Compile Include="Migrations\201711222040541_AddTableDeviceBrokkerSetting6.Designer.cs">
-      <DependentUpon>201711222040541_AddTableDeviceBrokkerSetting6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711222116539_AddTableDeviceBrokkerSetting7.cs" />
-    <Compile Include="Migrations\201711222116539_AddTableDeviceBrokkerSetting7.Designer.cs">
-      <DependentUpon>201711222116539_AddTableDeviceBrokkerSetting7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711222118015_AddTableDeviceBrokkerSetting8.cs" />
-    <Compile Include="Migrations\201711222118015_AddTableDeviceBrokkerSetting8.Designer.cs">
-      <DependentUpon>201711222118015_AddTableDeviceBrokkerSetting8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711231648132_AddTableDeviceBrokkerSetting9.cs" />
-    <Compile Include="Migrations\201711231648132_AddTableDeviceBrokkerSetting9.Designer.cs">
-      <DependentUpon>201711231648132_AddTableDeviceBrokkerSetting9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711232034074_AddTableDeviceBrokkerSetting10.cs" />
-    <Compile Include="Migrations\201711232034074_AddTableDeviceBrokkerSetting10.Designer.cs">
-      <DependentUpon>201711232034074_AddTableDeviceBrokkerSetting10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711232047310_AddTableDeviceBrokkerSetting11.cs" />
-    <Compile Include="Migrations\201711232047310_AddTableDeviceBrokkerSetting11.Designer.cs">
-      <DependentUpon>201711232047310_AddTableDeviceBrokkerSetting11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711241611441_AddTableDeviceBrokkerSetting12.cs" />
-    <Compile Include="Migrations\201711241611441_AddTableDeviceBrokkerSetting12.Designer.cs">
-      <DependentUpon>201711241611441_AddTableDeviceBrokkerSetting12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711241624516_AddTableDeviceBrokkerSetting13.cs" />
-    <Compile Include="Migrations\201711241624516_AddTableDeviceBrokkerSetting13.Designer.cs">
-      <DependentUpon>201711241624516_AddTableDeviceBrokkerSetting13.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711242006438_AddTableDeviceBrokkerSetting14.cs" />
-    <Compile Include="Migrations\201711242006438_AddTableDeviceBrokkerSetting14.Designer.cs">
-      <DependentUpon>201711242006438_AddTableDeviceBrokkerSetting14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711242128358_AddTableDeviceBrokkerSetting15.cs" />
-    <Compile Include="Migrations\201711242128358_AddTableDeviceBrokkerSetting15.Designer.cs">
-      <DependentUpon>201711242128358_AddTableDeviceBrokkerSetting15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711250030101_Initial3.cs" />
-    <Compile Include="Migrations\201711250030101_Initial3.Designer.cs">
-      <DependentUpon>201711250030101_Initial3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711250143382_Initial5.cs" />
-    <Compile Include="Migrations\201711250143382_Initial5.Designer.cs">
-      <DependentUpon>201711250143382_Initial5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711251630102_Initial6.cs" />
-    <Compile Include="Migrations\201711251630102_Initial6.Designer.cs">
-      <DependentUpon>201711251630102_Initial6.cs</DependentUpon>
+    <Compile Include="Migrations\201711271711068_InitialCreate.cs" />
+    <Compile Include="Migrations\201711271711068_InitialCreate.Designer.cs">
+      <DependentUpon>201711271711068_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -246,68 +169,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711191112579_InitialCreate.resx">
-      <DependentUpon>201711191112579_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711191524022_InitialCreate1.resx">
-      <DependentUpon>201711191524022_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711212138516_AddTableDeviceBrokkerSetting.resx">
-      <DependentUpon>201711212138516_AddTableDeviceBrokkerSetting.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711212144305_AddTableDeviceBrokkerSetting1.resx">
-      <DependentUpon>201711212144305_AddTableDeviceBrokkerSetting1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711212243493_AddTableDeviceBrokkerSetting2.resx">
-      <DependentUpon>201711212243493_AddTableDeviceBrokkerSetting2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711220024376_AddTableDeviceBrokkerSetting3.resx">
-      <DependentUpon>201711220024376_AddTableDeviceBrokkerSetting3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711221331314_AddTableDeviceBrokkerSetting4.resx">
-      <DependentUpon>201711221331314_AddTableDeviceBrokkerSetting4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711221813354_AddTableDeviceBrokkerSetting5.resx">
-      <DependentUpon>201711221813354_AddTableDeviceBrokkerSetting5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711222040541_AddTableDeviceBrokkerSetting6.resx">
-      <DependentUpon>201711222040541_AddTableDeviceBrokkerSetting6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711222116539_AddTableDeviceBrokkerSetting7.resx">
-      <DependentUpon>201711222116539_AddTableDeviceBrokkerSetting7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711222118015_AddTableDeviceBrokkerSetting8.resx">
-      <DependentUpon>201711222118015_AddTableDeviceBrokkerSetting8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711231648132_AddTableDeviceBrokkerSetting9.resx">
-      <DependentUpon>201711231648132_AddTableDeviceBrokkerSetting9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711232034074_AddTableDeviceBrokkerSetting10.resx">
-      <DependentUpon>201711232034074_AddTableDeviceBrokkerSetting10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711232047310_AddTableDeviceBrokkerSetting11.resx">
-      <DependentUpon>201711232047310_AddTableDeviceBrokkerSetting11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711241611441_AddTableDeviceBrokkerSetting12.resx">
-      <DependentUpon>201711241611441_AddTableDeviceBrokkerSetting12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711241624516_AddTableDeviceBrokkerSetting13.resx">
-      <DependentUpon>201711241624516_AddTableDeviceBrokkerSetting13.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711242006438_AddTableDeviceBrokkerSetting14.resx">
-      <DependentUpon>201711242006438_AddTableDeviceBrokkerSetting14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711242128358_AddTableDeviceBrokkerSetting15.resx">
-      <DependentUpon>201711242128358_AddTableDeviceBrokkerSetting15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711250030101_Initial3.resx">
-      <DependentUpon>201711250030101_Initial3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711250143382_Initial5.resx">
-      <DependentUpon>201711250143382_Initial5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711251630102_Initial6.resx">
-      <DependentUpon>201711251630102_Initial6.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711271711068_InitialCreate.resx">
+      <DependentUpon>201711271711068_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

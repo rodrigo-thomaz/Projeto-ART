@@ -56,6 +56,206 @@
 
             #endregion
 
+            #region UnitOfMeasurementType
+
+            // 1  =  Unidades de área
+            // 2  =  Unidades de capacidade
+            // 3  =  Unidades de comprimento
+            // 4  =  Unidades de densidade
+            // 5  =  Unidades de energia
+            // 6  =  Unidades de força
+            // 7  =  Unidades de massa
+            // 8  =  Unidades de peso específico
+            // 9  =  Unidades de potência
+            // 10 =  Unidades de pressão
+            // 11 =  Unidades de temperatura
+            // 12 =  Unidades de tempo
+            // 13 =  Unidades de velocidade
+            // 14 =  Unidades de viscosidade
+            // 15 =  Unidades de volume
+            // 16 =  Unidades elétrica
+
+            var areaUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Area);
+            var capacityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Capacity);
+            var lengthUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Length);
+            var densityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Density);
+            var energyUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Energy);
+            var forceUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Force);
+            var massUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Mass);
+            var specificWeightUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.SpecificWeight);
+            var potencyUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Potency);
+            var pressureUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Pressure);
+            var temperatureUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Temperature);
+            var timeUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Time);
+            var velocityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Velocity);
+            var viscosityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Viscosity);
+            var volumeUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Volume);
+            var electricalUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Electrical);
+
+            if (areaUnitOfMeasurementType == null)
+            {
+                areaUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Area,
+                    Name = "Área",
+                };
+                context.UnitOfMeasurementType.Add(areaUnitOfMeasurementType);
+            }
+
+            if (capacityUnitOfMeasurementType == null)
+            {
+                capacityUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Capacity,
+                    Name = "Capacidade",
+                };
+                context.UnitOfMeasurementType.Add(capacityUnitOfMeasurementType);
+            }
+
+            if (lengthUnitOfMeasurementType == null)
+            {
+                lengthUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Length,
+                    Name = "Comprimento",
+                };
+                context.UnitOfMeasurementType.Add(lengthUnitOfMeasurementType);
+            }
+
+            if (densityUnitOfMeasurementType == null)
+            {
+                densityUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Density,
+                    Name = "Densidade",
+                };
+                context.UnitOfMeasurementType.Add(densityUnitOfMeasurementType);
+            }
+
+            if (energyUnitOfMeasurementType == null)
+            {
+                energyUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Energy,
+                    Name = "Energia",
+                };
+                context.UnitOfMeasurementType.Add(energyUnitOfMeasurementType);
+            }
+
+            if (forceUnitOfMeasurementType == null)
+            {
+                forceUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Force,
+                    Name = "Força",
+                };
+                context.UnitOfMeasurementType.Add(forceUnitOfMeasurementType);
+            }
+
+            if (massUnitOfMeasurementType == null)
+            {
+                massUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Mass,
+                    Name = "Massa",
+                };
+                context.UnitOfMeasurementType.Add(massUnitOfMeasurementType);
+            }
+
+            if (specificWeightUnitOfMeasurementType == null)
+            {
+                specificWeightUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.SpecificWeight,
+                    Name = "Peso específico",
+                };
+                context.UnitOfMeasurementType.Add(specificWeightUnitOfMeasurementType);
+            }
+
+            if (potencyUnitOfMeasurementType == null)
+            {
+                potencyUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Potency,
+                    Name = "Potência",
+                };
+                context.UnitOfMeasurementType.Add(potencyUnitOfMeasurementType);
+            }
+
+            if (pressureUnitOfMeasurementType == null)
+            {
+                pressureUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Pressure,
+                    Name = "Pressão",
+                };
+                context.UnitOfMeasurementType.Add(pressureUnitOfMeasurementType);
+            }
+
+            if (temperatureUnitOfMeasurementType == null)
+            {
+                temperatureUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Temperature,
+                    Name = "Temperatura",
+                };
+                context.UnitOfMeasurementType.Add(temperatureUnitOfMeasurementType);
+            }
+
+            if (timeUnitOfMeasurementType == null)
+            {
+                timeUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Time,
+                    Name = "Tempo",
+                };
+                context.UnitOfMeasurementType.Add(timeUnitOfMeasurementType);
+            }
+
+            if (velocityUnitOfMeasurementType == null)
+            {
+                velocityUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Velocity,
+                    Name = "Velocidade",
+                };
+                context.UnitOfMeasurementType.Add(velocityUnitOfMeasurementType);
+            }
+
+            if (viscosityUnitOfMeasurementType == null)
+            {
+                viscosityUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Viscosity,
+                    Name = "Viscosidade",
+                };
+                context.UnitOfMeasurementType.Add(viscosityUnitOfMeasurementType);
+            }
+
+            if (volumeUnitOfMeasurementType == null)
+            {
+                volumeUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Volume,
+                    Name = "Volume",
+                };
+                context.UnitOfMeasurementType.Add(volumeUnitOfMeasurementType);
+            }
+
+            if (electricalUnitOfMeasurementType == null)
+            {
+                electricalUnitOfMeasurementType = new UnitOfMeasurementType
+                {
+                    Id = UnitOfMeasurementTypeEnum.Electrical,
+                    Name = "Elétrica",
+                };
+                context.UnitOfMeasurementType.Add(electricalUnitOfMeasurementType);
+            }
+
+            context.SaveChanges();
+
+            #endregion
+
             #region TemperatureScale
 
             var celsiusDescription = new StringBuilder();
@@ -68,7 +268,11 @@
 
             if (celsiusTemperatureScale == null)
             {
-                celsiusTemperatureScale = new TemperatureScale { Id = 1 };
+                celsiusTemperatureScale = new TemperatureScale
+                {
+                    Id = 1,
+                    UnitOfMeasurementTypeId = temperatureUnitOfMeasurementType.Id,
+                };
                 context.TemperatureScale.Add(celsiusTemperatureScale);
             }
 
@@ -89,7 +293,11 @@
 
             if (fahrenheitTemperatureScale == null)
             {
-                fahrenheitTemperatureScale = new TemperatureScale { Id = 2 };
+                fahrenheitTemperatureScale = new TemperatureScale
+                {
+                    Id = 2,
+                    UnitOfMeasurementTypeId = temperatureUnitOfMeasurementType.Id,
+                };
                 context.TemperatureScale.Add(fahrenheitTemperatureScale);
             }
 

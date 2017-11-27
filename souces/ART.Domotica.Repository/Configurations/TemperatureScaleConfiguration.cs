@@ -21,9 +21,21 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
+            //UnitOfMeasurementTypeId
+            Property(x => x.UnitOfMeasurementTypeId)
+                .HasColumnOrder(1)
+                .IsRequired();
+
+            //UnitOfMeasurementType
+            HasRequired(x => x.UnitOfMeasurementType)
+                .WithMany(x => x.TemperatureScales)
+                .HasForeignKey(x => x.UnitOfMeasurementTypeId)
+                .WillCascadeOnDelete(false);
+
+
             //Name
             Property(x => x.Name)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .HasMaxLength(255)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -31,7 +43,7 @@
 
             //Symbol
             Property(x => x.Symbol)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .HasMaxLength(2)
                 .IsFixedLength()
                 .IsRequired()
@@ -40,7 +52,7 @@
 
             //Description
             Property(x => x.Description)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .HasMaxLength(5000)
                 .IsOptional();
         }
