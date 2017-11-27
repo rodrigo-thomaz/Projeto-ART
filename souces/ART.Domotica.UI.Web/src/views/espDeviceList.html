@@ -105,13 +105,13 @@
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Temperatura</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" class="form-control" readonly value="{{sensor.tempCelsius == null ? '' : convertTemperature(sensor.tempCelsius) | number : resolution.selectedResolution.decimalPlaces}} {{scale.selectedScale.symbol}}">
+                                                    <input type="text" class="form-control" readonly value="{{sensor.tempCelsius == null ? '' : convertTemperature(sensor.tempCelsius) | number : resolution.selectedResolution.decimalPlaces}} {{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Range</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" class="form-control" readonly value="{{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} a {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}">
+                                                    <input type="text" class="form-control" readonly value="{{tempSensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} a {{tempSensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}">
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -128,7 +128,7 @@
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Escalas</label>
                                                 <div class="col-lg-8">
-                                                    <select class="form-control m-b" ng-options="item.name for item in scale.availableScales track by item.id" ng-model="scale.selectedScale" ng-change="changeScale()"></select>
+                                                    <select class="form-control m-b" ng-options="item.name for item in unitOfMeasurement.availableUnitOfMeasurements track by item.id" ng-model="unitOfMeasurement.selectedUnitOfMeasurement" ng-change="changeUnitOfMeasurement()"></select>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -173,7 +173,7 @@
                                                            required
                                                            class="form-control">
                                                     <span ng-show="formSensor.inputHighAlarmValue.$touched && formSensor.inputHighAlarmValue.$invalid">
-                                                        Alarme alto deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                        Alarme alto deve estar entre {{tempSensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{tempSensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
                                                     </span>
 
                                                 </div>
@@ -212,7 +212,7 @@
                                                            required
                                                            class="form-control">
                                                     <span ng-show="formSensor.inputLowAlarmValue.$touched && formSensor.inputLowAlarmValue.$invalid">
-                                                        Alarme baixo deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                        Alarme baixo deve estar entre {{tempSensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{tempSensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -230,7 +230,7 @@
                                                            required
                                                            class="form-control">
                                                     <span ng-show="formSensor.inputHighChartLimiterValue.$touched && formSensor.inputHighChartLimiterValue.$invalid">
-                                                        Limite alto do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                        Limite alto do gráfico deve estar entre {{tempSensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{tempSensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -247,7 +247,7 @@
                                                            required
                                                            class="form-control">
                                                     <span ng-show="formSensor.inputLowChartLimiterValue.$touched && formSensor.inputLowChartLimiterValue.$invalid">
-                                                        Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{scale.selectedScale.symbol}} e {{tempSensorRangeView.max}}{{scale.selectedScale.symbol}}
+                                                        Limite baixo do gráfico deve estar entre {{tempSensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{tempSensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
                                                     </span>
                                                 </div>
                                             </div>

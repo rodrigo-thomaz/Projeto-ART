@@ -1,10 +1,12 @@
-﻿namespace ART.Domotica.IoTContract
+﻿using ART.Domotica.Enums;
+
+namespace ART.Domotica.IoTContract
 {
     public class UnitOfMeasurementGetAllForIoTResponseContract
     {
         #region Properties
 
-        public byte Id
+        public UnitOfMeasurementEnum Id
         {
             get; set;
         }

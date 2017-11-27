@@ -28,10 +28,10 @@ app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope'
         });
     };     
 
-    var getScaleById = function (unitOfMeasurementId) {
-        for (var i = 0; i < serviceFactory.scales.length; i++) {
-            if (serviceFactory.scales[i].id === unitOfMeasurementId) {
-                return serviceFactory.scales[i];
+    var getByKey = function (unitOfMeasurementId, unitOfMeasurementTypeId) {
+        for (var i = 0; i < serviceFactory.unitOfMeasurements.length; i++) {
+            if (serviceFactory.unitOfMeasurements[i].id === unitOfMeasurementId && serviceFactory.unitOfMeasurements[i].unitOfMeasurementTypeId === unitOfMeasurementTypeId) {
+                return serviceFactory.unitOfMeasurements[i];
             }
         }
     };
@@ -40,7 +40,7 @@ app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope'
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            serviceFactory.scales.push(data[i]);
+            serviceFactory.unitOfMeasurements.push(data[i]);
         }
         _initializing = false;
         _initialized = true;
@@ -59,10 +59,10 @@ app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope'
 
     // serviceFactory
         
-    serviceFactory.scales = [];  
+    serviceFactory.unitOfMeasurements = [];  
 
     serviceFactory.initialized = initialized;
-    serviceFactory.getScaleById = getScaleById;    
+    serviceFactory.getByKey = getByKey;    
 
     return serviceFactory;
 

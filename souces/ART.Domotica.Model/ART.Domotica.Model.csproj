@@ -49,7 +49,7 @@
     <Compile Include="DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmCelsiusCompletedModel.cs" />
-    <Compile Include="DSFamilyTempSensorSetScaleCompletedModel.cs" />
+    <Compile Include="DSFamilyTempSensorSetUnitOfMeasurementCompletedModel.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
     <Compile Include="ESPDeviceAdminDetailModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />

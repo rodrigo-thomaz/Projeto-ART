@@ -1,4 +1,6 @@
-﻿namespace ART.Domotica.Model
+﻿using ART.Domotica.Enums;
+
+namespace ART.Domotica.Model
 {
     public class UnitOfMeasurementDetailModel
     {
@@ -9,7 +11,7 @@
             get; set;
         }
 
-        public byte Id
+        public UnitOfMeasurementEnum Id
         {
             get; set;
         }

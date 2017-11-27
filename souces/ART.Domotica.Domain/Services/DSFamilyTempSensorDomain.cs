@@ -57,7 +57,7 @@ namespace ART.Domotica.Domain.Services
             return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
 
-        public async Task<DSFamilyTempSensor> SetScale(Guid dsFamilyTempSensorId, UnitOfMeasurementEnum unitOfMeasurementId)
+        public async Task<DSFamilyTempSensor> SetUnitOfMeasurement(Guid dsFamilyTempSensorId, UnitOfMeasurementEnum unitOfMeasurementId)
         {
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
 
@@ -66,7 +66,7 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            var unitOfMeasurementEntity = await _unitOfMeasurementRepository.GetById(unitOfMeasurementId, UnitOfMeasurementTypeEnum.Temperature);
+            var unitOfMeasurementEntity = await _unitOfMeasurementRepository.GetByKey(unitOfMeasurementId, UnitOfMeasurementTypeEnum.Temperature);
 
             if (unitOfMeasurementEntity == null)
             {

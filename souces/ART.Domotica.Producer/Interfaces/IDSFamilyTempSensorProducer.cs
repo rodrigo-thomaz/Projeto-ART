@@ -23,7 +23,7 @@
 
         Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
 
-        Task SetScale(AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract> message);
+        Task SetUnitOfMeasurement(AuthenticatedMessageContract<DSFamilyTempSensorSetUnitOfMeasurementRequestContract> message);
 
         #endregion Methods
     }

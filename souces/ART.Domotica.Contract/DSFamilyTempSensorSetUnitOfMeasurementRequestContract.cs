@@ -3,7 +3,7 @@
     using ART.Domotica.Enums;
     using System;
 
-    public class DSFamilyTempSensorSetScaleRequestContract
+    public class DSFamilyTempSensorSetUnitOfMeasurementRequestContract
     {
         #region Properties
 

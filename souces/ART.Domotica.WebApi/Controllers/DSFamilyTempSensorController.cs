@@ -73,11 +73,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("setScale")]
+        [Route("setUnitOfMeasurement")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetScale(DSFamilyTempSensorSetScaleRequestContract contract)
+        public async Task<IHttpActionResult> SetUnitOfMeasurement(DSFamilyTempSensorSetUnitOfMeasurementRequestContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetScale(CreateMessage(contract));
+            await _dsFamilyTempSensorProducer.SetUnitOfMeasurement(CreateMessage(contract));
             return Ok();
         }
 

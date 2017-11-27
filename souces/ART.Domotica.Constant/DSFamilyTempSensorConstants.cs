@@ -26,9 +26,9 @@
         public static readonly string SetResolutionIoTQueueName = "DSFamilyTempSensor.SetResolutionIoT";
         public static readonly string SetResolutionQueueName = "DSFamilyTempSensor.SetResolution";
         public static readonly string SetResolutionViewCompletedQueueName = "DSFamilyTempSensor.SetResolutionViewCompleted";
-        public static readonly string SetScaleIoTQueueName = "DSFamilyTempSensor.SetScaleIoT";
-        public static readonly string SetScaleQueueName = "DSFamilyTempSensor.SetScale";
-        public static readonly string SetScaleViewCompletedQueueName = "DSFamilyTempSensor.SetScaleViewCompleted";
+        public static readonly string SetUnitOfMeasurementIoTQueueName = "DSFamilyTempSensor.SetUnitOfMeasurementIoT";
+        public static readonly string SetUnitOfMeasurementQueueName = "DSFamilyTempSensor.SetUnitOfMeasurement";
+        public static readonly string SetUnitOfMeasurementViewCompletedQueueName = "DSFamilyTempSensor.SetUnitOfMeasurementViewCompleted";
 
         #endregion Fields
     }

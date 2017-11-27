@@ -116,9 +116,9 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     $scope.labelView = "";  
 
-    $scope.scale = {
-        availableScales: unitOfMeasurementService.scales,
-        selectedScale: {},
+    $scope.unitOfMeasurement = {
+        availableUnitOfMeasurements: unitOfMeasurementService.unitOfMeasurements,
+        selectedUnitOfMeasurement: {},
     };
 
     $scope.resolution = {
@@ -126,9 +126,9 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         selectedResolution: {},
     };
 
-    $scope.changeScale = function () {
+    $scope.changeUnitOfMeasurement = function () {
         if (!initialized) return;
-        dsFamilyTempSensorService.setScale($scope.sensor.dsFamilyTempSensorId, $scope.scale.selectedScale.id);
+        dsFamilyTempSensorService.setUnitOfMeasurement($scope.sensor.dsFamilyTempSensorId, $scope.unitOfMeasurement.selectedUnitOfMeasurement.id);
     };
 
     $scope.changeResolution = function () {
@@ -169,11 +169,11 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
         $scope.sensor = sensor;
 
-        // Scale
+        // UnitOfMeasurement
         if (unitOfMeasurementService.initialized())
-            setSelectedScale();
+            setSelectedUnitOfMeasurement();
         else
-            clearOnUnitOfMeasurementServiceInitialized = $rootScope.$on('UnitOfMeasurementService_Initialized', setSelectedScale);        
+            clearOnUnitOfMeasurementServiceInitialized = $rootScope.$on('UnitOfMeasurementService_Initialized', setSelectedUnitOfMeasurement);        
 
         // Resolution
         if (dsFamilyTempSensorResolutionService.initialized())
@@ -207,7 +207,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         $scope.lowChartLimiterView = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.lowChartLimiterCelsius);
         $scope.highChartLimiterView = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.highChartLimiterCelsius);
 
-        clearOnSetScaleCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetScaleCompleted);
+        clearOnSetUnitOfMeasurementCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetUnitOfMeasurementCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetUnitOfMeasurementCompleted);
         clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetResolutionCompleted);
         clearOnSetLabelCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetLabelCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetLabelCompleted);
         clearOnSetAlarmOnCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmOnCompleted);
@@ -221,7 +221,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         
     var clearOnUnitOfMeasurementServiceInitialized = null;
     var clearOnDSFamilyTempSensorResolutionServiceInitialized = null;
-    var clearOnSetScaleCompleted = null;
+    var clearOnSetUnitOfMeasurementCompleted = null;
     var clearOnSetResolutionCompleted = null;
     var clearOnSetLabelCompleted = null;
     var clearOnSetAlarmOnCompleted = null;
@@ -232,7 +232,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         
     $scope.$on('$destroy', function () {
         if (clearOnUnitOfMeasurementServiceInitialized !== null) clearOnUnitOfMeasurementServiceInitialized();
-        clearOnSetScaleCompleted();
+        clearOnSetUnitOfMeasurementCompleted();
         clearOnSetResolutionCompleted();
         clearOnSetLabelCompleted();
         clearOnSetAlarmOnCompleted();
@@ -242,17 +242,17 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnReadReceived();
     });
 
-    var setSelectedScale = function () {  
-        $scope.scale.selectedScale = unitOfMeasurementService.getScaleById($scope.sensor.unitOfMeasurementId);
+    var setSelectedUnitOfMeasurement = function () {  
+        $scope.unitOfMeasurement.selectedUnitOfMeasurement = unitOfMeasurementService.getByKey($scope.sensor.unitOfMeasurementId);
     };
 
     var setSelectedResolution = function () {
         $scope.resolution.selectedResolution = dsFamilyTempSensorResolutionService.getResolutionById($scope.sensor.dsFamilyTempSensorResolutionId);
     };
 
-    var onSetScaleCompleted = function (event, data) {
+    var onSetUnitOfMeasurementCompleted = function (event, data) {
 
-        setSelectedScale();
+        setSelectedUnitOfMeasurement();
 
         $scope.highAlarmView.alarmValue = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.highAlarm.alarmCelsius);
         $scope.lowAlarmView.alarmValue = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.lowAlarm.alarmCelsius);
