@@ -3,9 +3,8 @@
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
-    using ART.Infra.CrossCutting.Repository;
 
-    public class UnitOfMeasurement : IEntity<byte>
+    public class UnitOfMeasurement 
     {
         #region Properties
 

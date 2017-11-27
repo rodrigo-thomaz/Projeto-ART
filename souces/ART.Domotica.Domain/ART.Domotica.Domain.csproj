@@ -99,6 +99,10 @@
       <Project>{2F58031D-FF69-4BDA-9C4A-4811560918DD}</Project>
       <Name>ART.Domotica.Contract</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.Enums\ART.Domotica.Enums.csproj">
+      <Project>{7FBCB625-237B-486A-805A-527CD3AE83E3}</Project>
+      <Name>ART.Domotica.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.Model\ART.Domotica.Model.csproj">
       <Project>{49447556-dca8-4fc7-ac1d-7f5163e7abea}</Project>
       <Name>ART.Domotica.Model</Name>

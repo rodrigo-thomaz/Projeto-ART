@@ -116,9 +116,9 @@
     <Compile Include="Interfaces\IUnitOfMeasurementRepository.cs" />
     <Compile Include="Interfaces\ITempSensorRangeRepository.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201711271930357_InitialCreate.cs" />
-    <Compile Include="Migrations\201711271930357_InitialCreate.Designer.cs">
-      <DependentUpon>201711271930357_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201711272018360_InitialCreate.cs" />
+    <Compile Include="Migrations\201711272018360_InitialCreate.Designer.cs">
+      <DependentUpon>201711272018360_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -174,8 +174,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711271930357_InitialCreate.resx">
-      <DependentUpon>201711271930357_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711272018360_InitialCreate.resx">
+      <DependentUpon>201711272018360_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,13 +4,15 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
-    using ART.Infra.CrossCutting.Repository;
+    using ART.Domotica.Enums;
 
-    public interface IUnitOfMeasurementRepository : IRepository<ARTDbContext, UnitOfMeasurement, byte>
+    public interface IUnitOfMeasurementRepository 
     {
         #region Methods
 
         Task<List<UnitOfMeasurement>> GetAll();
+
+        Task<UnitOfMeasurement> GetById(byte unitOfMeasurementId, UnitOfMeasurementTypeEnum unitOfMeasurementTypeId);
 
         #endregion Methods
     }

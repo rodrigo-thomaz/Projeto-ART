@@ -9,6 +9,7 @@ using ART.Infra.CrossCutting.Domain;
 using Autofac;
 using ART.Domotica.Repository;
 using ART.Domotica.Repository.Repositories;
+using ART.Domotica.Enums;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -65,7 +66,7 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            var unitOfMeasurementEntity = await _unitOfMeasurementRepository.GetById(unitOfMeasurementId);
+            var unitOfMeasurementEntity = await _unitOfMeasurementRepository.GetById(unitOfMeasurementId, UnitOfMeasurementTypeEnum.Temperature);
 
             if (unitOfMeasurementEntity == null)
             {

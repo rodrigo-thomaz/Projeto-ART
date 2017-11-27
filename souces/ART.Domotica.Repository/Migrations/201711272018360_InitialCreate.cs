@@ -136,7 +136,7 @@ namespace ART.Domotica.Repository.Migrations
                         Symbol = c.String(nullable: false, maxLength: 2, fixedLength: true),
                         Description = c.String(),
                     })
-                .PrimaryKey(t => t.Id)
+                .PrimaryKey(t => new { t.Id, t.UnitOfMeasurementTypeId })
                 .ForeignKey("dbo.UnitOfMeasurementType", t => t.UnitOfMeasurementTypeId)
                 .Index(t => t.UnitOfMeasurementTypeId)
                 .Index(t => t.Name, unique: true)
@@ -218,12 +218,13 @@ namespace ART.Domotica.Repository.Migrations
                     {
                         Id = c.Guid(nullable: false),
                         UnitOfMeasurementId = c.Byte(nullable: false),
+                        UnitOfMeasurementTypeId = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.HardwareBase", t => t.Id)
-                .ForeignKey("dbo.UnitOfMeasurement", t => t.UnitOfMeasurementId)
+                .ForeignKey("dbo.UnitOfMeasurement", t => new { t.UnitOfMeasurementId, t.UnitOfMeasurementTypeId })
                 .Index(t => t.Id)
-                .Index(t => t.UnitOfMeasurementId);
+                .Index(t => new { t.UnitOfMeasurementId, t.UnitOfMeasurementTypeId });
             
             CreateTable(
                 "dbo.DSFamilyTempSensor",
@@ -304,7 +305,7 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.DSFamilyTempSensor", "TempSensorRangeId", "dbo.TempSensorRange");
             DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
             DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.SensorBase");
-            DropForeignKey("dbo.SensorBase", "UnitOfMeasurementId", "dbo.UnitOfMeasurement");
+            DropForeignKey("dbo.SensorBase", new[] { "UnitOfMeasurementId", "UnitOfMeasurementTypeId" }, "dbo.UnitOfMeasurement");
             DropForeignKey("dbo.SensorBase", "Id", "dbo.HardwareBase");
             DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
             DropForeignKey("dbo.Project", "CreateByApplicationUserId", "dbo.ApplicationUser");
@@ -335,7 +336,7 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.DSFamilyTempSensor", new[] { "TempSensorRangeId" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
-            DropIndex("dbo.SensorBase", new[] { "UnitOfMeasurementId" });
+            DropIndex("dbo.SensorBase", new[] { "UnitOfMeasurementId", "UnitOfMeasurementTypeId" });
             DropIndex("dbo.SensorBase", new[] { "Id" });
             DropIndex("dbo.Project", new[] { "CreateByApplicationUserId" });
             DropIndex("dbo.Project", new[] { "ApplicationId" });

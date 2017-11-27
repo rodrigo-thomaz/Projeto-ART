@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using ART.Domotica.Enums;
     using System.Collections.Generic;
 
     public abstract class SensorBase : HardwareBase
@@ -21,6 +22,11 @@
             get; set;
         }
 
+        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
+        {
+            get; set;
+        }
+                
         #endregion Properties
     }
 }

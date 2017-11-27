@@ -23,12 +23,20 @@
             //UnitOfMeasurement
             HasRequired(x => x.UnitOfMeasurement)
                 .WithMany(x => x.Sensors)
-                .HasForeignKey(x => x.UnitOfMeasurementId)
+                .HasForeignKey(x => new 
+                {
+                    x.UnitOfMeasurementId,
+                    x.UnitOfMeasurementTypeId,
+                })
                 .WillCascadeOnDelete(false);
 
             //UnitOfMeasurementId
             Property(x => x.UnitOfMeasurementId)
                 .HasColumnOrder(1);
+
+            //UnitOfMeasurementTypeId
+            Property(x => x.UnitOfMeasurementTypeId)
+                .HasColumnOrder(2);
         }
 
         #endregion Constructors

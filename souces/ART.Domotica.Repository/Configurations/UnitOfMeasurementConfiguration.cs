@@ -13,17 +13,22 @@
         public UnitOfMeasurementConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.UnitOfMeasurementTypeId,
+            });
 
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
-
+            
             //UnitOfMeasurementTypeId
             Property(x => x.UnitOfMeasurementTypeId)
                 .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //UnitOfMeasurementType
