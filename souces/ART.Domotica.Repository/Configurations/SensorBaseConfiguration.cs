@@ -23,7 +23,7 @@
             //UnitOfMeasurement
             HasRequired(x => x.UnitOfMeasurement)
                 .WithMany(x => x.Sensors)
-                .HasForeignKey(x => new 
+                .HasForeignKey(x => new
                 {
                     x.UnitOfMeasurementId,
                     x.UnitOfMeasurementTypeId,

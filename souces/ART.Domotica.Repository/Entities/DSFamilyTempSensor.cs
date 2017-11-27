@@ -2,10 +2,14 @@
 {
     public class DSFamilyTempSensor : SensorBase
     {
+        #region Constructors
+
         public DSFamilyTempSensor()
         {
             UnitOfMeasurementTypeId = Enums.UnitOfMeasurementTypeEnum.Temperature;
         }
+
+        #endregion Constructors
 
         #region Properties
 
@@ -57,7 +61,7 @@
         public byte TempSensorRangeId
         {
             get; set;
-        }        
+        }
 
         #endregion Properties
     }

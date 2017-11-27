@@ -44,7 +44,7 @@
 
             //TempSensorRangeId
             Property(x => x.TempSensorRangeId)
-                .HasColumnOrder(3);            
+                .HasColumnOrder(3);
 
             //DSFamilyTempSensorResolution
             HasRequired(x => x.DSFamilyTempSensorResolution)

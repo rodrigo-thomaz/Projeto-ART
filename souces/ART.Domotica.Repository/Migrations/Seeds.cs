@@ -260,7 +260,7 @@
             #endregion
 
             #region UnitOfMeasurement
-            
+
             var celsiusDescription = new StringBuilder();
 
             celsiusDescription.AppendLine("A escala de grau Celsius(símbolo: °C) é uma escala termométrica, do sistema métrico[1], usada na maioria dos países do mundo.Teve origem a partir do modelo proposto pelo astrônomo sueco Anders Celsius(1701 - 1744), inicialmente denominado escala centígrada(Grau centígrado).");

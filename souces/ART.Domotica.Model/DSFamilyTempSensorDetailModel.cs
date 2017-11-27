@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.Model
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class DSFamilyTempSensorDetailModel
     {

@@ -1,7 +1,7 @@
-﻿using ART.Domotica.Enums;
-
-namespace ART.Domotica.IoTContract
+﻿namespace ART.Domotica.IoTContract
 {
+    using ART.Domotica.Enums;
+
     public class UnitOfMeasurementGetAllForIoTResponseContract
     {
         #region Properties

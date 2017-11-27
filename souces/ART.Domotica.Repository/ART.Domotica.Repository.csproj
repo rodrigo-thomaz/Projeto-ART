@@ -96,6 +96,7 @@
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
+    <Compile Include="Entities\TemperatureSensorBase.cs" />
     <Compile Include="Entities\UnitOfMeasurement.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\TempSensorAlarm.cs" />

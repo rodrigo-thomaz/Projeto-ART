@@ -5,8 +5,8 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Contract;
-    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Enums;
+    using ART.Domotica.Repository.Entities;
 
     public interface IDSFamilyTempSensorDomain
     {

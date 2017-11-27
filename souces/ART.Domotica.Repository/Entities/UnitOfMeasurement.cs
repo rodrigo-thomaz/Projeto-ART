@@ -4,16 +4,11 @@
 
     using ART.Domotica.Enums;
 
-    public class UnitOfMeasurement 
+    public class UnitOfMeasurement
     {
         #region Properties
 
         public string Description
-        {
-            get; set;
-        }
-
-        public ICollection<SensorBase> Sensors
         {
             get; set;
         }
@@ -24,6 +19,11 @@
         }
 
         public string Name
+        {
+            get; set;
+        }
+
+        public ICollection<SensorBase> Sensors
         {
             get; set;
         }

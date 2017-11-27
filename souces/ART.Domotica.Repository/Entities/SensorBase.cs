@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using ART.Domotica.Enums;
     using System.Collections.Generic;
+
+    using ART.Domotica.Enums;
 
     public abstract class SensorBase : HardwareBase
     {
@@ -26,7 +27,7 @@
         {
             get; protected set;
         }
-                
+
         #endregion Properties
     }
 }

@@ -24,7 +24,7 @@
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
-            
+
             //UnitOfMeasurementTypeId
             Property(x => x.UnitOfMeasurementTypeId)
                 .HasColumnOrder(1)
