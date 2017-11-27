@@ -1,12 +1,14 @@
-﻿namespace ART.Domotica.Repository.Entities
+﻿using ART.Domotica.Enums;
+
+namespace ART.Domotica.Repository.Entities
 {
-    public class DSFamilyTempSensor : SensorBase
+    public class DSFamilyTempSensor : TemperatureSensorBase
     {
         #region Constructors
 
         public DSFamilyTempSensor()
         {
-            UnitOfMeasurementTypeId = Enums.UnitOfMeasurementTypeEnum.Temperature;
+            UnitOfMeasurementTypeId = UnitOfMeasurementTypeEnum.Temperature;
         }
 
         #endregion Constructors

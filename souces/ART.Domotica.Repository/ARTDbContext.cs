@@ -114,6 +114,7 @@
 
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
+            modelBuilder.Configurations.Add(new TemperatureSensorBaseConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());
             modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
@@ -132,7 +133,7 @@
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new TempSensorRangeConfiguration());
             modelBuilder.Configurations.Add(new UnitOfMeasurementTypeConfiguration());
-
+            
             base.OnModelCreating(modelBuilder);
         }
 
