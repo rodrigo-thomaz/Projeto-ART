@@ -9,9 +9,9 @@ float UnitOfMeasurementConverter::convertFromCelsius(int unitOfMeasurementId, fl
 { 
 	switch (unitOfMeasurementId)
 	{
-		case 1:
+		case 101:
 			return celsius;
-		case 2:
+		case 102:
 			return convertCelsiusToFahrenheit(celsius);
 		default:		
 			break;
