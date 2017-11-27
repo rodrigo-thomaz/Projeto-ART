@@ -6,11 +6,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class TemperatureScaleConfiguration : EntityTypeConfiguration<TemperatureScale>
+    public class UnitOfMeasurementConfiguration : EntityTypeConfiguration<UnitOfMeasurement>
     {
         #region Constructors
 
-        public TemperatureScaleConfiguration()
+        public UnitOfMeasurementConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);
@@ -28,7 +28,7 @@
 
             //UnitOfMeasurementType
             HasRequired(x => x.UnitOfMeasurementType)
-                .WithMany(x => x.TemperatureScales)
+                .WithMany(x => x.UnitOfMeasurements)
                 .HasForeignKey(x => x.UnitOfMeasurementTypeId)
                 .WillCascadeOnDelete(false);
 

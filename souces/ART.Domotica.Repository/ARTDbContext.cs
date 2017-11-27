@@ -80,17 +80,17 @@
             get; set;
         }
 
-        public DbSet<TemperatureScale> TemperatureScale
-        {
-            get; set;
-        }
-
         public DbSet<TempSensorRange> TempSensorRange
         {
             get; set;
         }
 
         public DbSet<TimeZone> TimeZone
+        {
+            get; set;
+        }
+
+        public DbSet<UnitOfMeasurement> UnitOfMeasurement
         {
             get; set;
         }
@@ -128,7 +128,7 @@
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new ApplicationMQConfiguration());
-            modelBuilder.Configurations.Add(new TemperatureScaleConfiguration());
+            modelBuilder.Configurations.Add(new UnitOfMeasurementConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new TempSensorRangeConfiguration());
             modelBuilder.Configurations.Add(new UnitOfMeasurementTypeConfiguration());

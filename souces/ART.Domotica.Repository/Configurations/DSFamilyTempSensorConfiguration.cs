@@ -46,14 +46,14 @@
             Property(x => x.TempSensorRangeId)
                 .HasColumnOrder(3);
 
-            //TemperatureScale
-            HasRequired(x => x.TemperatureScale)
+            //UnitOfMeasurement
+            HasRequired(x => x.UnitOfMeasurement)
                 .WithMany(x => x.DSFamilyTempSensors)
-                .HasForeignKey(x => x.TemperatureScaleId)
+                .HasForeignKey(x => x.UnitOfMeasurementId)
                 .WillCascadeOnDelete(false);
 
-            //TemperatureScaleId
-            Property(x => x.TemperatureScaleId)
+            //UnitOfMeasurementId
+            Property(x => x.UnitOfMeasurementId)
                 .HasColumnOrder(4);
 
             //DSFamilyTempSensorResolution

@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
 
-    using ART.Infra.CrossCutting.Repository;
     using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
 
     // https://pt.wikipedia.org/wiki/Unidade_de_medida
     public class UnitOfMeasurementType : IEntity<UnitOfMeasurementTypeEnum>
@@ -20,7 +20,7 @@
             get; set;
         }
 
-        public ICollection<TemperatureScale> TemperatureScales
+        public ICollection<UnitOfMeasurement> UnitOfMeasurements
         {
             get; set;
         }

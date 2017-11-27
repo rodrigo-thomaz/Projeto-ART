@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
-    using ART.Domotica.Enums;
 
     public interface IUnitOfMeasurementTypeRepository : IRepository<ARTDbContext, UnitOfMeasurementType, UnitOfMeasurementTypeEnum>
     {

@@ -16,7 +16,7 @@
             builder.RegisterType<ApplicationUserConsumer>().As<IApplicationUserConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DSFamilyTempSensorConsumer>().As<IDSFamilyTempSensorConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ESPDeviceConsumer>().As<IESPDeviceConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<TemperatureScaleConsumer>().As<ITemperatureScaleConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<UnitOfMeasurementConsumer>().As<IUnitOfMeasurementConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<TimeZoneConsumer>().As<ITimeZoneConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceNTPConsumer>().As<IDeviceNTPConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<UnitOfMeasurementTypeConsumer>().As<IUnitOfMeasurementTypeConsumer>().SingleInstance().AutoActivate();

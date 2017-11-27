@@ -41,12 +41,12 @@
             get; set;
         }
 
-        public byte TemperatureScaleId
+        public TempSensorRangeGetDetailModel TempSensorRange
         {
             get; set;
         }
 
-        public TempSensorRangeGetDetailModel TempSensorRange
+        public byte UnitOfMeasurementId
         {
             get; set;
         }

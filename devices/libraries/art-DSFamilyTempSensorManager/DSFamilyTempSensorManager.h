@@ -61,7 +61,7 @@ class DSFamilyTempSensor
 	
   public:
   
-	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
+	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
 
     String								getDSFamilyTempSensorId();		
 	
@@ -73,8 +73,8 @@ class DSFamilyTempSensor
 	int 								getResolution();
 	void 								setResolution(int value);
 	
-	byte 								getTemperatureScaleId();
-	void 								setTemperatureScaleId(int value);
+	byte 								getUnitOfMeasurementId();
+	void 								setUnitOfMeasurementId(int value);
 	
 	TempSensorAlarm& 					getLowAlarm();	
 	TempSensorAlarm& 					getHighAlarm();	
@@ -105,7 +105,7 @@ class DSFamilyTempSensor
 	
 	int 								_resolution;
 	
-	byte								_temperatureScaleId;
+	byte								_unitOfMeasurementId;
 		
 	std::vector<TempSensorAlarm> 		_alarms; 
 	

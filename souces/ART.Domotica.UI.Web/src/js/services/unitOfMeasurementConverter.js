@@ -1,12 +1,12 @@
 ﻿'use strict';
-app.factory('temperatureScaleConverter', function () {
+app.factory('unitOfMeasurementConverter', function () {
 
     var serviceFactory = {};    
 
     // To
 
-    var convertToCelsius = function (temperatureScaleId, temperature) {
-        switch (temperatureScaleId) {
+    var convertToCelsius = function (unitOfMeasurementId, temperature) {
+        switch (unitOfMeasurementId) {
             case 1:
                 return parseFloat(temperature.toFixed(4));
             case 2:
@@ -22,8 +22,8 @@ app.factory('temperatureScaleConverter', function () {
 
     // From
 
-    var convertFromCelsius = function (temperatureScaleId, celsius) {
-        switch (temperatureScaleId) {
+    var convertFromCelsius = function (unitOfMeasurementId, celsius) {
+        switch (unitOfMeasurementId) {
             case 1:
                 return parseFloat(celsius.toFixed(4));
             case 2:

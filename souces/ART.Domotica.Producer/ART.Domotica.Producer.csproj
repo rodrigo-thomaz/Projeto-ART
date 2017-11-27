@@ -68,7 +68,7 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorProducer.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementTypeProducer.cs" />
     <Compile Include="Interfaces\ITimeZoneProducer.cs" />
-    <Compile Include="Interfaces\ITemperatureScaleProducer.cs" />
+    <Compile Include="Interfaces\IUnitOfMeasurementProducer.cs" />
     <Compile Include="ProducerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationMQProducer.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Services\DSFamilyTempSensorProducer.cs" />
     <Compile Include="Services\UnitOfMeasurementTypeProducer.cs" />
     <Compile Include="Services\TimeZoneProducer.cs" />
-    <Compile Include="Services\TemperatureScaleProducer.cs" />
+    <Compile Include="Services\UnitOfMeasurementProducer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

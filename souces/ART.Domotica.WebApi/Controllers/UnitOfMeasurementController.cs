@@ -6,20 +6,20 @@ using ART.Domotica.Producer.Interfaces;
 namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/temperatureScale")]    
-    public class TemperatureScaleController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/unitOfMeasurement")]    
+    public class UnitOfMeasurementController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly ITemperatureScaleProducer _temperatureScaleProducer;
+        protected readonly IUnitOfMeasurementProducer _unitOfMeasurementProducer;
 
         #endregion
 
         #region constructors
 
-        public TemperatureScaleController(ITemperatureScaleProducer temperatureScaleProducer) //: base(connection)
+        public UnitOfMeasurementController(IUnitOfMeasurementProducer unitOfMeasurementProducer) //: base(connection)
         {
-            _temperatureScaleProducer = temperatureScaleProducer;
+            _unitOfMeasurementProducer = unitOfMeasurementProducer;
         }
 
         #endregion
@@ -40,7 +40,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> GetAll()
         {           
-            await _temperatureScaleProducer.GetAll(CreateMessage());
+            await _unitOfMeasurementProducer.GetAll(CreateMessage());
             return Ok();
         }
 

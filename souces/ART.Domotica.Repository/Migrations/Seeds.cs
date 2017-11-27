@@ -7,11 +7,11 @@
     using System.Text;
 
     using ART.Domotica.Constant;
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;
-    using ART.Domotica.Enums;
 
     public class Seeds
     {
@@ -257,7 +257,7 @@
 
             #endregion
 
-            #region TemperatureScale
+            #region UnitOfMeasurement
 
             var celsiusDescription = new StringBuilder();
 
@@ -265,21 +265,21 @@
             celsiusDescription.AppendLine("Esta escala é baseada nos pontos de fusão e ebulição da água, em condição atmosférica padrão, aos quais são atribuídos os valores de 0 °C e 100 °C, respectivamente[2].Devido a esta divisão centesimal, se deu a antiga nomenclatura grau centígrado(cem partes/ graus) que, em 1948, durante a 9ª Conferência Geral de Pesos e Medidas(CR 64), teve seu nome oficialmente modificado para grau Celsius, em reconhecimento ao trabalho de Anders Celsius e para fim de desambiguação com o prefixo centi do SI.");
             celsiusDescription.AppendLine("Enquanto que os valores de congelação e evaporação da água estão aproximadamente corretos, a definição original não é apropriada como um padrão formal: ela depende da definição de pressão atmosférica padrão, que por sua vez depende da própria definição de temperatura.A definição oficial atual de grau Celsius define 0,01 °C como o ponto triplo da água, e 1 grau Celsius como sendo 1 / 273,16 da diferença de temperatura entre o ponto triplo da água e o zero absoluto. Esta definição garante que 1 grau Celsius apresenta a mesma variação de temperatura que 1 kelvin.");
 
-            var celsiusTemperatureScale = context.TemperatureScale.SingleOrDefault(x => x.Id == 1);
+            var celsiusUnitOfMeasurement = context.UnitOfMeasurement.SingleOrDefault(x => x.Id == 1);
 
-            if (celsiusTemperatureScale == null)
+            if (celsiusUnitOfMeasurement == null)
             {
-                celsiusTemperatureScale = new TemperatureScale
+                celsiusUnitOfMeasurement = new UnitOfMeasurement
                 {
                     Id = 1,
                     UnitOfMeasurementTypeId = temperatureUnitOfMeasurementType.Id,
                 };
-                context.TemperatureScale.Add(celsiusTemperatureScale);
+                context.UnitOfMeasurement.Add(celsiusUnitOfMeasurement);
             }
 
-            celsiusTemperatureScale.Name = "Celsius";
-            celsiusTemperatureScale.Symbol = "C";
-            celsiusTemperatureScale.Description = celsiusDescription.ToString();
+            celsiusUnitOfMeasurement.Name = "Celsius";
+            celsiusUnitOfMeasurement.Symbol = "C";
+            celsiusUnitOfMeasurement.Description = celsiusDescription.ToString();
 
             var fahrenheitDescription = new StringBuilder();
 
@@ -290,21 +290,21 @@
             fahrenheitDescription.AppendLine("Esta escala foi utilizada principalmente pelos países que foram colonizados pelos britânicos, mas seu uso atualmente se restringe a poucos países de língua inglesa, como os Estados Unidos e Belize. E também, muito utilizada com o povo grego, para medir a temperatura de um corpo.Jakelinneh Devocerg, mulher francesa que criou a teoria 'Fahrenheit Devocerg' que para passar de celsius para fahrenheit se usa sempre 1,8.Ex: f = 137 * e c = 20 * f + 137 - 20 + c.1,8 fc = 117.1,8 = 1,20202020");
             fahrenheitDescription.AppendLine("Para uso científico, há uma escala de temperatura, chamada de Rankine, que leva o marco zero de sua escala ao zero absoluto e possui a mesma variação da escala fahrenheit, existindo, portanto, correlação entre a escala de Rankine e grau fahrenheit do mesmo modo que existe correlação das escalas kelvin e grau Celsius.");
 
-            var fahrenheitTemperatureScale = context.TemperatureScale.SingleOrDefault(x => x.Id == 2);
+            var fahrenheitUnitOfMeasurement = context.UnitOfMeasurement.SingleOrDefault(x => x.Id == 2);
 
-            if (fahrenheitTemperatureScale == null)
+            if (fahrenheitUnitOfMeasurement == null)
             {
-                fahrenheitTemperatureScale = new TemperatureScale
+                fahrenheitUnitOfMeasurement = new UnitOfMeasurement
                 {
                     Id = 2,
                     UnitOfMeasurementTypeId = temperatureUnitOfMeasurementType.Id,
                 };
-                context.TemperatureScale.Add(fahrenheitTemperatureScale);
+                context.UnitOfMeasurement.Add(fahrenheitUnitOfMeasurement);
             }
 
-            fahrenheitTemperatureScale.Name = "Fahrenheit";
-            fahrenheitTemperatureScale.Symbol = "F";
-            fahrenheitTemperatureScale.Description = fahrenheitDescription.ToString();
+            fahrenheitUnitOfMeasurement.Name = "Fahrenheit";
+            fahrenheitUnitOfMeasurement.Symbol = "F";
+            fahrenheitUnitOfMeasurement.Description = fahrenheitDescription.ToString();
 
             context.SaveChanges();
 
@@ -394,8 +394,8 @@
                     DeviceAddress = sensor_1_Address,
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
-                    TemperatureScaleId = celsiusTemperatureScale.Id,
-                    TemperatureScale = celsiusTemperatureScale,
+                    UnitOfMeasurementId = celsiusUnitOfMeasurement.Id,
+                    UnitOfMeasurement = celsiusUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
                     Label = "Sensor 1",
@@ -430,8 +430,8 @@
                     DeviceAddress = sensor_2_1_Address,
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
-                    TemperatureScaleId = fahrenheitTemperatureScale.Id,
-                    TemperatureScale = fahrenheitTemperatureScale,
+                    UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
+                    UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 1",
@@ -466,8 +466,8 @@
                     DeviceAddress = sensor_2_2_Address,
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
-                    TemperatureScaleId = fahrenheitTemperatureScale.Id,
-                    TemperatureScale = fahrenheitTemperatureScale,
+                    UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
+                    UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 2",
@@ -502,8 +502,8 @@
                     DeviceAddress = sensor_3_1_Address,
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
-                    TemperatureScaleId = fahrenheitTemperatureScale.Id,
-                    TemperatureScale = fahrenheitTemperatureScale,
+                    UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
+                    UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 3",
@@ -538,8 +538,8 @@
                     DeviceAddress = sensor_3_2_Address,
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
-                    TemperatureScaleId = fahrenheitTemperatureScale.Id,
-                    TemperatureScale = fahrenheitTemperatureScale,
+                    UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
+                    UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 4",

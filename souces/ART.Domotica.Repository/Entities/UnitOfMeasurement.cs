@@ -2,10 +2,10 @@
 {
     using System.Collections.Generic;
 
-    using ART.Infra.CrossCutting.Repository;
     using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
 
-    public class TemperatureScale : IEntity<byte>
+    public class UnitOfMeasurement : IEntity<byte>
     {
         #region Properties
 

@@ -44,22 +44,22 @@
             get; set;
         }
 
-        public TemperatureScale TemperatureScale
-        {
-            get; set;
-        }
-
-        public byte TemperatureScaleId
-        {
-            get; set;
-        }
-
         public TempSensorRange TempSensorRange
         {
             get; set;
         }
 
         public byte TempSensorRangeId
+        {
+            get; set;
+        }
+
+        public UnitOfMeasurement UnitOfMeasurement
+        {
+            get; set;
+        }
+
+        public byte UnitOfMeasurementId
         {
             get; set;
         }

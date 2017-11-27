@@ -7,28 +7,28 @@ using ART.Infra.CrossCutting.Domain;
 
 namespace ART.Domotica.Domain.Services
 {
-    public class TemperatureScaleDomain : DomainBase, ITemperatureScaleDomain
+    public class UnitOfMeasurementDomain : DomainBase, IUnitOfMeasurementDomain
     {
         #region private readonly fields
 
-        private readonly ITemperatureScaleRepository _temperatureScaleRepository;
+        private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepository;
 
         #endregion
 
         #region constructors
 
-        public TemperatureScaleDomain(ITemperatureScaleRepository temperatureScaleRepository)
+        public UnitOfMeasurementDomain(IUnitOfMeasurementRepository unitOfMeasurementRepository)
         {
-            _temperatureScaleRepository = temperatureScaleRepository;
+            _unitOfMeasurementRepository = unitOfMeasurementRepository;
         }
 
         #endregion
 
         #region public voids
 
-        public async Task<List<TemperatureScale>> GetAll()
+        public async Task<List<UnitOfMeasurement>> GetAll()
         {
-            return await _temperatureScaleRepository.GetAll();
+            return await _unitOfMeasurementRepository.GetAll();
         }
 
         #endregion

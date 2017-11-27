@@ -283,7 +283,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetScaleRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetScale(message.Contract.DSFamilyTempSensorId, message.Contract.TemperatureScaleId);
+            var data = await domain.SetScale(message.Contract.DSFamilyTempSensorId, message.Contract.UnitOfMeasurementId);
 
             var exchange = "amq.topic";
 

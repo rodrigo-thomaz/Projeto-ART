@@ -108,7 +108,7 @@
     <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
     <Compile Include="AutoMapper\UnitOfMeasurementTypeProfile.cs" />
     <Compile Include="AutoMapper\TimeZoneProfile.cs" />
-    <Compile Include="AutoMapper\TemperatureScaleProfile.cs" />
+    <Compile Include="AutoMapper\UnitOfMeasurementProfile.cs" />
     <Compile Include="AutoMapper\TempSensorRangeProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
@@ -121,12 +121,12 @@
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />
     <Compile Include="IConsumers\IUnitOfMeasurementTypeConsumer.cs" />
     <Compile Include="IConsumers\ITimeZoneConsumer.cs" />
-    <Compile Include="IConsumers\ITemperatureScaleConsumer.cs" />
+    <Compile Include="IConsumers\IUnitOfMeasurementConsumer.cs" />
     <Compile Include="IConsumers\IApplicationConsumer.cs" />
     <Compile Include="Consumers\ESPDeviceConsumer.cs" />
     <Compile Include="Consumers\ApplicationConsumer.cs" />
     <Compile Include="Consumers\ApplicationUserConsumer.cs" />
-    <Compile Include="Consumers\TemperatureScaleConsumer.cs" />
+    <Compile Include="Consumers\UnitOfMeasurementConsumer.cs" />
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
     <Compile Include="Jobs\UpdatePinJob.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />

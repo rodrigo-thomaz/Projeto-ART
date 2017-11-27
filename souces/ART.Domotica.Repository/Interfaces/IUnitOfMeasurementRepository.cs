@@ -6,11 +6,11 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface ITemperatureScaleRepository : IRepository<ARTDbContext, TemperatureScale, byte>
+    public interface IUnitOfMeasurementRepository : IRepository<ARTDbContext, UnitOfMeasurement, byte>
     {
         #region Methods
 
-        Task<List<TemperatureScale>> GetAll();
+        Task<List<UnitOfMeasurement>> GetAll();
 
         #endregion Methods
     }

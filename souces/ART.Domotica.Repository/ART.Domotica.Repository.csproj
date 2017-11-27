@@ -76,7 +76,7 @@
     <Compile Include="Configurations\RaspberryDeviceConfiguration.cs" />
     <Compile Include="Configurations\SensorBaseConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
-    <Compile Include="Configurations\TemperatureScaleConfiguration.cs" />
+    <Compile Include="Configurations\UnitOfMeasurementConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\TempSensorRangeConfiguration.cs" />
     <Compile Include="Configurations\UnitOfMeasurementTypeConfiguration.cs" />
@@ -96,7 +96,7 @@
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
-    <Compile Include="Entities\TemperatureScale.cs" />
+    <Compile Include="Entities\UnitOfMeasurement.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\TempSensorAlarm.cs" />
     <Compile Include="Entities\TempSensorRange.cs" />
@@ -113,12 +113,12 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
-    <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfMeasurementRepository.cs" />
     <Compile Include="Interfaces\ITempSensorRangeRepository.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201711271711068_InitialCreate.cs" />
-    <Compile Include="Migrations\201711271711068_InitialCreate.Designer.cs">
-      <DependentUpon>201711271711068_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201711271848233_InitialCreate.cs" />
+    <Compile Include="Migrations\201711271848233_InitialCreate.Designer.cs">
+      <DependentUpon>201711271848233_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -134,7 +134,7 @@
     <Compile Include="Repositories\ESPDeviceRepository.cs" />
     <Compile Include="Repositories\TimeZoneRepository.cs" />
     <Compile Include="Repositories\TempSensorRangeRepository.cs" />
-    <Compile Include="Repositories\TemperatureScaleRepository.cs" />
+    <Compile Include="Repositories\UnitOfMeasurementRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\UnitOfMeasurementTypeRepository.cs" />
     <Compile Include="RepositoryModule.cs" />
@@ -174,8 +174,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711271711068_InitialCreate.resx">
-      <DependentUpon>201711271711068_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711271848233_InitialCreate.resx">
+      <DependentUpon>201711271848233_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

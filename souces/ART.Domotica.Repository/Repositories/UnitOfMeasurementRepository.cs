@@ -7,16 +7,16 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories
 {
-    public class TemperatureScaleRepository : RepositoryBase<ARTDbContext, TemperatureScale, byte>, ITemperatureScaleRepository
+    public class UnitOfMeasurementRepository : RepositoryBase<ARTDbContext, UnitOfMeasurement, byte>, IUnitOfMeasurementRepository
     {
-        public TemperatureScaleRepository(ARTDbContext context) : base(context)
+        public UnitOfMeasurementRepository(ARTDbContext context) : base(context)
         {
 
         }
 
-        public async Task<List<TemperatureScale>> GetAll()
+        public async Task<List<UnitOfMeasurement>> GetAll()
         {
-            return await _context.TemperatureScale
+            return await _context.UnitOfMeasurement
                 .ToListAsync();
         }
     }

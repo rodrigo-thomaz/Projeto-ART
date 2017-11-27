@@ -7,10 +7,10 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var serviceFactory = {};   
     
-    var setScale = function (dsFamilyTempSensorId, temperatureScaleId) {
+    var setScale = function (dsFamilyTempSensorId, unitOfMeasurementId) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
-            temperatureScaleId: temperatureScaleId,
+            unitOfMeasurementId: unitOfMeasurementId,
         }
         return $http.post(serviceBase + 'api/dsFamilyTempSensor/setScale', data).then(function (results) {
             return results;
@@ -109,7 +109,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     var onSetScaleCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getSensorFromPayload(result);
-        sensor.temperatureScaleId = result.temperatureScaleId;
+        sensor.unitOfMeasurementId = result.unitOfMeasurementId;
         $rootScope.$emit('dsFamilyTempSensorService_onSetScaleCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }    
 

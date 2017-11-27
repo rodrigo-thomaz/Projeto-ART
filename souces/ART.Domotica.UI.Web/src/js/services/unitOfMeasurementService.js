@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
+app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -10,7 +10,7 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope',
 
     var onConnected = function () {
 
-        stompService.subscribe('TemperatureScale.GetAllViewCompleted', onGetAllCompleted);
+        stompService.subscribe('UnitOfMeasurement.GetAllViewCompleted', onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -23,14 +23,14 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope',
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/temperatureScale/getAll').then(function (results) {
+        return $http.post(serviceBase + 'api/unitOfMeasurement/getAll').then(function (results) {
             //alert('envio bem sucedido');
         });
     };     
 
-    var getScaleById = function (temperatureScaleId) {
+    var getScaleById = function (unitOfMeasurementId) {
         for (var i = 0; i < serviceFactory.scales.length; i++) {
-            if (serviceFactory.scales[i].id === temperatureScaleId) {
+            if (serviceFactory.scales[i].id === unitOfMeasurementId) {
                 return serviceFactory.scales[i];
             }
         }
@@ -44,7 +44,7 @@ app.factory('temperatureScaleService', ['$http', 'ngAuthSettings', '$rootScope',
         }
         _initializing = false;
         _initialized = true;
-        $rootScope.$emit('TemperatureScaleService_Initialized');
+        $rootScope.$emit('UnitOfMeasurementService_Initialized');
     }
 
     $rootScope.$on('$destroy', function () {

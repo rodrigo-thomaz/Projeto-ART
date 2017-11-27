@@ -59,7 +59,7 @@
     <Compile Include="DSFamilyTempSensorSetResolutionCompletedModel.cs" />
     <Compile Include="UnitOfMeasurementTypeDetailModel.cs" />
     <Compile Include="TimeZoneDetailModel.cs" />
-    <Compile Include="TemperatureScaleDetailModel.cs" />
+    <Compile Include="UnitOfMeasurementDetailModel.cs" />
     <Compile Include="ApplicationDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempSensorAlarmGetDetailModel.cs" />

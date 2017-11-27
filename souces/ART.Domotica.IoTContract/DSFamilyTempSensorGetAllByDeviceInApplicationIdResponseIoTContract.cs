@@ -46,7 +46,7 @@
             get; set;
         }
 
-        public byte TemperatureScaleId
+        public byte UnitOfMeasurementId
         {
             get; set;
         }

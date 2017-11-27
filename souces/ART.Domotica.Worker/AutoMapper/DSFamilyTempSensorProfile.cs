@@ -55,7 +55,7 @@
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetScaleCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
-                .ForMember(vm => vm.TemperatureScaleId, m => m.MapFrom(x => x.TemperatureScaleId));
+                .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => x.UnitOfMeasurementId));
 
             CreateMap<TempSensorAlarm, TempSensorAlarmGetDetailModel>();
 
@@ -67,7 +67,7 @@
                 .ForMember(vm => vm.LowAlarm, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).LowAlarm))
                 .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).LowChartLimiterCelsius))
                 .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).HighChartLimiterCelsius))
-                .ForMember(vm => vm.TemperatureScaleId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).TemperatureScaleId))
+                .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).UnitOfMeasurementId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).Label));
 
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionDetailModel>();

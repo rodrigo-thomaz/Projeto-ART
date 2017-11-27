@@ -4,13 +4,12 @@
 #include "DisplayManager.h"
 #include "DSFamilyTempSensorManager.h"
 
-DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager, TemperatureScaleManager& temperatureScaleManager, TemperatureScaleConverter& temperatureScaleConverter)
+DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager, UnitOfMeasurementConverter& unitOfMeasurementConverter)
 {
 	this->_displayManager = &displayManager;
 	this->_dsFamilyTempSensorManager = &dsFamilyTempSensorManager;
 	this->_debugManager = &debugManager;
-	this->_temperatureScaleManager = &temperatureScaleManager;
-	this->_temperatureScaleConverter = &temperatureScaleConverter;
+	this->_unitOfMeasurementConverter = &unitOfMeasurementConverter;
 }
 
 DisplayTemperatureSensorManager::~DisplayTemperatureSensorManager()
@@ -34,8 +33,6 @@ void DisplayTemperatureSensorManager::printUpdate(bool on)
 
 void DisplayTemperatureSensorManager::printSensors()
 {
-	if(!this->_temperatureScaleManager->begin()) return;
-	
 	// variáveis
 	
 	int marginTop = 2;
@@ -119,11 +116,12 @@ void DisplayTemperatureSensorManager::printBarValue(DSFamilyTempSensor& dsFamily
 
 void DisplayTemperatureSensorManager::printText(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y)
 {
-	int temperatureScaleId = dsFamilyTempSensor.getTemperatureScaleId();
+	int unitOfMeasurementId = dsFamilyTempSensor.getUnitOfMeasurementId();
 	
-	float tempConverted = this->_temperatureScaleConverter->convertFromCelsius(temperatureScaleId, dsFamilyTempSensor.getTempCelsius());	
-	
-	TemperatureScale& temperatureScale = this->_temperatureScaleManager->getById(temperatureScaleId);
+	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitOfMeasurementId, dsFamilyTempSensor.getTempCelsius());	
+
+    //Temporario
+	String symbol = "C";
 		
 	this->_displayManager->display.setFont();
     this->_displayManager->display.setTextSize(1);
@@ -131,5 +129,5 @@ void DisplayTemperatureSensorManager::printText(DSFamilyTempSensor& dsFamilyTemp
     this->_displayManager->display.setCursor(x, y);   
 	this->_displayManager->display.setTextWrap(false);
 	this->_displayManager->display.print(tempConverted, 1);
-    this->_displayManager->display.println(temperatureScale.getSymbol());
+    this->_displayManager->display.println(symbol);
 }

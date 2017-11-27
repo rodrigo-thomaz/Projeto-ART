@@ -73,13 +73,13 @@ void TempSensorAlarm::setTempCelsius(float value)
 
 // DSFamilyTempSensor
 
-DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte temperatureScaleId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
+DSFamilyTempSensor::DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
 {
 	this->_dsFamilyTempSensorId = dsFamilyTempSensorId;
 	this->_family = family;
 	this->_validFamily = true;
 	this->_resolution = resolution;
-	this->_temperatureScaleId = temperatureScaleId;
+	this->_unitOfMeasurementId = unitOfMeasurementId;
 	this->_lowChartLimiterCelsius = lowChartLimiterCelsius;
 	this->_highChartLimiterCelsius = highChartLimiterCelsius;
 	
@@ -119,14 +119,14 @@ void DSFamilyTempSensor::setResolution(int value)
 	this->_resolution = value;
 }
 
-byte DSFamilyTempSensor::getTemperatureScaleId()
+byte DSFamilyTempSensor::getUnitOfMeasurementId()
 {
-	return this->_temperatureScaleId;
+	return this->_unitOfMeasurementId;
 }
 
-void DSFamilyTempSensor::setTemperatureScaleId(int value)
+void DSFamilyTempSensor::setUnitOfMeasurementId(int value)
 {
-	this->_temperatureScaleId = value;
+	this->_unitOfMeasurementId = value;
 }
 
 TempSensorAlarm& DSFamilyTempSensor::getLowAlarm()
@@ -290,7 +290,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		String 			dsFamilyTempSensorId 	= deviceJsonObject["dsFamilyTempSensorId"];
 		String 			family 					= deviceJsonObject["family"];		
 		int 			resolution 				= int(deviceJsonObject["resolutionBits"]);				
-		byte 			temperatureScaleId 		= byte(deviceJsonObject["temperatureScaleId"]);		
+		byte 			unitOfMeasurementId 		= byte(deviceJsonObject["unitOfMeasurementId"]);		
 		
 		float 			lowChartLimiterCelsius	= float(deviceJsonObject["lowChartLimiterCelsius"]);
 		float 			highChartLimiterCelsius	= float(deviceJsonObject["highChartLimiterCelsius"]);
@@ -314,7 +314,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 				deviceAddress,
 				family,
 				resolution,
-				temperatureScaleId,
+				unitOfMeasurementId,
 				lowAlarm,
 				highAlarm,
 				lowChartLimiterCelsius,
@@ -373,10 +373,10 @@ void DSFamilyTempSensorManager::setScale(String json)
 	}	
 
 	String dsFamilyTempSensorId 			= root["dsFamilyTempSensorId"];
-	int value 								= root["temperatureScaleId"];
+	int value 								= root["unitOfMeasurementId"];
 
 	DSFamilyTempSensor& dsFamilyTempSensor 	= getDSFamilyTempSensorById(dsFamilyTempSensorId);
-	dsFamilyTempSensor.setTemperatureScaleId(value);
+	dsFamilyTempSensor.setUnitOfMeasurementId(value);
 
 	Serial.print("setScale=");
 	Serial.println(json);

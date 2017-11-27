@@ -6,14 +6,14 @@
 
     using global::AutoMapper;
 
-    public class TemperatureScaleProfile : Profile
+    public class UnitOfMeasurementProfile : Profile
     {
         #region Constructors
 
-        public TemperatureScaleProfile()
+        public UnitOfMeasurementProfile()
         {
-            CreateMap<TemperatureScale, TemperatureScaleDetailModel>();
-            CreateMap<TemperatureScale, TemperatureScaleGetAllForIoTResponseContract>();
+            CreateMap<UnitOfMeasurement, UnitOfMeasurementDetailModel>();
+            CreateMap<UnitOfMeasurement, UnitOfMeasurementGetAllForIoTResponseContract>();
         }
 
         #endregion Constructors

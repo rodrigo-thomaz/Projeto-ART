@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public interface ITemperatureScaleDomain
+    public interface IUnitOfMeasurementDomain
     {
         #region Methods
 
-        Task<List<TemperatureScale>> GetAll();
+        Task<List<UnitOfMeasurement>> GetAll();
 
         #endregion Methods
     }

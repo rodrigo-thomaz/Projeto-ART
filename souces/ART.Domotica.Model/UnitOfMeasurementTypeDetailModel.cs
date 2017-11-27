@@ -1,7 +1,7 @@
-﻿using ART.Domotica.Enums;
-
-namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Model
 {
+    using ART.Domotica.Enums;
+
     public class UnitOfMeasurementTypeDetailModel
     {
         #region Properties

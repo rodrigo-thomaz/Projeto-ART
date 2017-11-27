@@ -19,7 +19,7 @@ namespace ART.Domotica.Domain.Services
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
-        private readonly ITemperatureScaleRepository _temperatureScaleRepository;
+        private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepository;
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace ART.Domotica.Domain.Services
             _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
             _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
-            _temperatureScaleRepository = new TemperatureScaleRepository(context);
+            _unitOfMeasurementRepository = new UnitOfMeasurementRepository(context);
         }
 
         #endregion
@@ -56,7 +56,7 @@ namespace ART.Domotica.Domain.Services
             return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
 
-        public async Task<DSFamilyTempSensor> SetScale(Guid dsFamilyTempSensorId, byte temperatureScaleId)
+        public async Task<DSFamilyTempSensor> SetScale(Guid dsFamilyTempSensorId, byte unitOfMeasurementId)
         {
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
 
@@ -65,14 +65,14 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            var temperatureScaleEntity = await _temperatureScaleRepository.GetById(temperatureScaleId);
+            var unitOfMeasurementEntity = await _unitOfMeasurementRepository.GetById(unitOfMeasurementId);
 
-            if (temperatureScaleEntity == null)
+            if (unitOfMeasurementEntity == null)
             {
-                throw new Exception("TemperatureScale not found");
+                throw new Exception("UnitOfMeasurement not found");
             }
             
-            dsFamilyTempSensorEntity.TemperatureScaleId = temperatureScaleEntity.Id;
+            dsFamilyTempSensorEntity.UnitOfMeasurementId = unitOfMeasurementEntity.Id;
 
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
 

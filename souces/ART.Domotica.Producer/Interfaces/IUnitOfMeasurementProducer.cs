@@ -4,7 +4,7 @@
 
     using ART.Infra.CrossCutting.MQ.Contract;
 
-    public interface ITemperatureScaleProducer
+    public interface IUnitOfMeasurementProducer
     {
         #region Methods
 

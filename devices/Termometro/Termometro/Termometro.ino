@@ -1,8 +1,7 @@
 #include "DebugManager.h"
 #include "ConfigurationManager.h"
 #include "DSFamilyTempSensorManager.h"
-#include "TemperatureScaleManager.h"
-#include "TemperatureScaleConverter.h"
+#include "UnitOfMeasurementConverter.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
 #include "WiFiManager.h"
@@ -67,14 +66,13 @@ MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, configurationManager, mqqtManager, buzzerManager);
-TemperatureScaleManager temperatureScaleManager(debugManager, configurationManager, mqqtManager);
-TemperatureScaleConverter temperatureScaleConverter(debugManager);
+UnitOfMeasurementConverter unitOfMeasurementConverter(debugManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
-DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager, temperatureScaleManager, temperatureScaleConverter);
+DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager, unitOfMeasurementConverter);
 
 void setup() {
 		
@@ -160,7 +158,6 @@ void subscribeInApplication()
   mqqtManager.subscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
@@ -179,7 +176,6 @@ void unSubscribeInApplication()
   mqqtManager.unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_SCALE);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
@@ -243,9 +239,6 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(topicKey == String(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND)){
       configurationManager.setUpdateIntervalInMilliSecond(payloadContract);
     }    
-    if(topicKey == String(TOPIC_SUB_TEMPERATURE_SCALE_GET_ALL_FOR_IOT_COMPLETED)){
-      temperatureScaleManager.update(payloadContract);            
-    }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
       dsFamilyTempSensorManager.setSensorsByMQQTCallback(payloadContract);      
     }
@@ -305,9 +298,6 @@ void loopInApplication()
       readTempTimestamp = now;
       displayTemperatureSensorManager.printUpdate(true);
       dsFamilyTempSensorManager.refresh();
-  
-      // Temp
-      temperatureScaleManager.begin();
     }  
     else{
       displayTemperatureSensorManager.printUpdate(false);

@@ -58,7 +58,7 @@
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());
-                x.AddProfile(new TemperatureScaleProfile());
+                x.AddProfile(new UnitOfMeasurementProfile());
                 x.AddProfile(new TempSensorRangeProfile());
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DeviceMQProfile());
