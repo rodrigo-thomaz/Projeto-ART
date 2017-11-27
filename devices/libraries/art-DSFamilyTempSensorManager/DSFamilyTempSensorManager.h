@@ -139,7 +139,7 @@ class DSFamilyTempSensorManager
 	
 	void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 				
-	void 								setScale(String json);
+	void 								SetUnitOfMeasurement(String json);
 	void 								setResolution(String json);
 	
 	void 								setAlarmOn(String json);
