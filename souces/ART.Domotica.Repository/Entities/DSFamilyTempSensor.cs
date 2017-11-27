@@ -2,6 +2,11 @@
 {
     public class DSFamilyTempSensor : SensorBase
     {
+        public DSFamilyTempSensor()
+        {
+            UnitOfMeasurementTypeId = Enums.UnitOfMeasurementTypeEnum.Temperature;
+        }
+
         #region Properties
 
         public string DeviceAddress

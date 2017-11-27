@@ -24,7 +24,7 @@
 
         public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
-            get; set;
+            get; protected set;
         }
                 
         #endregion Properties
