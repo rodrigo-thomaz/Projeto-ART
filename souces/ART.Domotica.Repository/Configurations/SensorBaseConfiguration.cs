@@ -19,6 +19,16 @@
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .IsRequired();
+
+            //UnitOfMeasurement
+            HasRequired(x => x.UnitOfMeasurement)
+                .WithMany(x => x.Sensors)
+                .HasForeignKey(x => x.UnitOfMeasurementId)
+                .WillCascadeOnDelete(false);
+
+            //UnitOfMeasurementId
+            Property(x => x.UnitOfMeasurementId)
+                .HasColumnOrder(1);
         }
 
         #endregion Constructors

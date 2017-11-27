@@ -127,32 +127,6 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.DeviceBaseId);
             
             CreateTable(
-                "dbo.DSFamilyTempSensorResolution",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Bits = c.Byte(nullable: false),
-                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
-                        DecimalPlaces = c.Byte(nullable: false),
-                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.Bits, unique: true);
-            
-            CreateTable(
-                "dbo.TempSensorRange",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        Min = c.Short(nullable: false),
-                        Max = c.Short(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
                 "dbo.UnitOfMeasurement",
                 c => new
                     {
@@ -177,6 +151,32 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
+            
+            CreateTable(
+                "dbo.DSFamilyTempSensorResolution",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Bits = c.Byte(nullable: false),
+                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
+                        DecimalPlaces = c.Byte(nullable: false),
+                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.Bits, unique: true);
+            
+            CreateTable(
+                "dbo.TempSensorRange",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Min = c.Short(nullable: false),
+                        Max = c.Short(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
             
             CreateTable(
                 "dbo.HardwaresInProject",
@@ -217,10 +217,13 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
+                        UnitOfMeasurementId = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.HardwareBase", t => t.Id)
-                .Index(t => t.Id);
+                .ForeignKey("dbo.UnitOfMeasurement", t => t.UnitOfMeasurementId)
+                .Index(t => t.Id)
+                .Index(t => t.UnitOfMeasurementId);
             
             CreateTable(
                 "dbo.DSFamilyTempSensor",
@@ -230,7 +233,6 @@ namespace ART.Domotica.Repository.Migrations
                         DeviceAddress = c.String(nullable: false, maxLength: 32),
                         Family = c.String(nullable: false, maxLength: 10),
                         TempSensorRangeId = c.Byte(nullable: false),
-                        UnitOfMeasurementId = c.Byte(nullable: false),
                         DSFamilyTempSensorResolutionId = c.Byte(nullable: false),
                         LowAlarmOn = c.Boolean(nullable: false),
                         LowAlarmCelsius = c.Decimal(nullable: false, precision: 7, scale: 4),
@@ -245,11 +247,9 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.SensorBase", t => t.Id)
                 .ForeignKey("dbo.DSFamilyTempSensorResolution", t => t.DSFamilyTempSensorResolutionId)
                 .ForeignKey("dbo.TempSensorRange", t => t.TempSensorRangeId)
-                .ForeignKey("dbo.UnitOfMeasurement", t => t.UnitOfMeasurementId)
                 .Index(t => t.Id)
                 .Index(t => t.DeviceAddress, unique: true)
                 .Index(t => t.TempSensorRangeId)
-                .Index(t => t.UnitOfMeasurementId)
                 .Index(t => t.DSFamilyTempSensorResolutionId);
             
             CreateTable(
@@ -301,10 +301,10 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.RaspberryDevice", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.ESPDevice", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
-            DropForeignKey("dbo.DSFamilyTempSensor", "UnitOfMeasurementId", "dbo.UnitOfMeasurement");
             DropForeignKey("dbo.DSFamilyTempSensor", "TempSensorRangeId", "dbo.TempSensorRange");
             DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
             DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.SensorBase");
+            DropForeignKey("dbo.SensorBase", "UnitOfMeasurementId", "dbo.UnitOfMeasurement");
             DropForeignKey("dbo.SensorBase", "Id", "dbo.HardwareBase");
             DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
             DropForeignKey("dbo.Project", "CreateByApplicationUserId", "dbo.ApplicationUser");
@@ -332,21 +332,21 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.ESPDevice", new[] { "Id" });
             DropIndex("dbo.DeviceBase", new[] { "Id" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DSFamilyTempSensorResolutionId" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "UnitOfMeasurementId" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "TempSensorRangeId" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
+            DropIndex("dbo.SensorBase", new[] { "UnitOfMeasurementId" });
             DropIndex("dbo.SensorBase", new[] { "Id" });
             DropIndex("dbo.Project", new[] { "CreateByApplicationUserId" });
             DropIndex("dbo.Project", new[] { "ApplicationId" });
             DropIndex("dbo.HardwaresInProject", new[] { "CreateByApplicationUserId" });
             DropIndex("dbo.HardwaresInProject", "IX_Unique_DeviceInApplicationId_ProjectId");
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
+            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
             DropIndex("dbo.UnitOfMeasurementType", new[] { "Name" });
             DropIndex("dbo.UnitOfMeasurement", new[] { "Symbol" });
             DropIndex("dbo.UnitOfMeasurement", new[] { "Name" });
             DropIndex("dbo.UnitOfMeasurement", new[] { "UnitOfMeasurementTypeId" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
             DropIndex("dbo.SensorsInDevice", new[] { "DeviceBaseId" });
             DropIndex("dbo.SensorsInDevice", new[] { "SensorBaseId" });
             DropIndex("dbo.DeviceNTP", new[] { "TimeZoneId" });
@@ -369,10 +369,10 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.SensorBase");
             DropTable("dbo.Project");
             DropTable("dbo.HardwaresInProject");
-            DropTable("dbo.UnitOfMeasurementType");
-            DropTable("dbo.UnitOfMeasurement");
             DropTable("dbo.TempSensorRange");
             DropTable("dbo.DSFamilyTempSensorResolution");
+            DropTable("dbo.UnitOfMeasurementType");
+            DropTable("dbo.UnitOfMeasurement");
             DropTable("dbo.SensorsInDevice");
             DropTable("dbo.TimeZone");
             DropTable("dbo.DeviceNTP");

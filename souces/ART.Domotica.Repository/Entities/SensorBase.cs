@@ -11,6 +11,16 @@
             get; set;
         }
 
+        public UnitOfMeasurement UnitOfMeasurement
+        {
+            get; set;
+        }
+
+        public byte UnitOfMeasurementId
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }
