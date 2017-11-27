@@ -6,6 +6,7 @@
 
     using ART.Domotica.Contract;
     using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Enums;
 
     public interface IDSFamilyTempSensorDomain
     {
@@ -27,7 +28,7 @@
 
         Task<DSFamilyTempSensor> SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId);
 
-        Task<DSFamilyTempSensor> SetScale(Guid dsFamilyTempSensorId, byte unitOfMeasurementId);
+        Task<DSFamilyTempSensor> SetScale(Guid dsFamilyTempSensorId, UnitOfMeasurementEnum unitOfMeasurementId);
 
         #endregion Methods
     }

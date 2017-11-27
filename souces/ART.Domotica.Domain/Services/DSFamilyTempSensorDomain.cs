@@ -57,7 +57,7 @@ namespace ART.Domotica.Domain.Services
             return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
 
-        public async Task<DSFamilyTempSensor> SetScale(Guid dsFamilyTempSensorId, byte unitOfMeasurementId)
+        public async Task<DSFamilyTempSensor> SetScale(Guid dsFamilyTempSensorId, UnitOfMeasurementEnum unitOfMeasurementId)
         {
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
 

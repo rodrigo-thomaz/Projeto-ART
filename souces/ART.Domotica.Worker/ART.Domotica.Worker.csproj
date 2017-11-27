@@ -155,6 +155,10 @@
       <Project>{f541f7ff-b9d6-47dc-9097-4cd7b6084c7f}</Project>
       <Name>ART.Domotica.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.Enums\ART.Domotica.Enums.csproj">
+      <Project>{7FBCB625-237B-486A-805A-527CD3AE83E3}</Project>
+      <Name>ART.Domotica.Enums</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Domotica.IoTContract\ART.Domotica.IoTContract.csproj">
       <Project>{5677264E-C6FA-4FE8-8205-77A5EFCF7D12}</Project>
       <Name>ART.Domotica.IoTContract</Name>

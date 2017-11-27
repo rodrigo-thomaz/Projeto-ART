@@ -18,7 +18,7 @@
             get; set;
         }
 
-        public byte Id
+        public UnitOfMeasurementEnum Id
         {
             get; set;
         }

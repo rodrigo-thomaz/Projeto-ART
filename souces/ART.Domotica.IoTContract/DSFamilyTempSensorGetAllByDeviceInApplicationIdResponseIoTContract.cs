@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.IoTContract
 {
+    using ART.Domotica.Enums;
     using System;
 
     public class DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract
@@ -46,7 +47,7 @@
             get; set;
         }
 
-        public byte UnitOfMeasurementId
+        public UnitOfMeasurementEnum UnitOfMeasurementId
         {
             get; set;
         }

@@ -22,7 +22,7 @@ namespace ART.Domotica.Repository.Repositories
                 .ToListAsync();
         }
 
-        public async Task<UnitOfMeasurement> GetById(byte unitOfMeasurementId, UnitOfMeasurementTypeEnum unitOfMeasurementTypeId)
+        public async Task<UnitOfMeasurement> GetById(UnitOfMeasurementEnum unitOfMeasurementId, UnitOfMeasurementTypeEnum unitOfMeasurementTypeId)
         {
             var entity = await _context.Set<UnitOfMeasurement>().FindAsync(new object[] 
             {

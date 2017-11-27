@@ -12,7 +12,7 @@
 
         Task<List<UnitOfMeasurement>> GetAll();
 
-        Task<UnitOfMeasurement> GetById(byte unitOfMeasurementId, UnitOfMeasurementTypeEnum unitOfMeasurementTypeId);
+        Task<UnitOfMeasurement> GetById(UnitOfMeasurementEnum unitOfMeasurementId, UnitOfMeasurementTypeEnum unitOfMeasurementTypeId);
 
         #endregion Methods
     }

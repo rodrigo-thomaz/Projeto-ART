@@ -59,22 +59,24 @@
 
             #region UnitOfMeasurementType
 
-            // 1  =  Unidades de área
-            // 2  =  Unidades de capacidade
-            // 3  =  Unidades de comprimento
-            // 4  =  Unidades de densidade
-            // 5  =  Unidades de energia
-            // 6  =  Unidades de força
-            // 7  =  Unidades de massa
-            // 8  =  Unidades de peso específico
-            // 9  =  Unidades de potência
-            // 10 =  Unidades de pressão
-            // 11 =  Unidades de temperatura
-            // 12 =  Unidades de tempo
-            // 13 =  Unidades de velocidade
-            // 14 =  Unidades de viscosidade
-            // 15 =  Unidades de volume
-            // 16 =  Unidades elétrica
+            // https://pt.wikipedia.org/wiki/Unidade_de_medida
+
+            //Area = 1,               - Unidades de área
+            //Capacity = 2,           - Unidades de capacidade
+            //Length = 3,             - Unidades de comprimento
+            //Density = 4,            - Unidades de densidade
+            //Energy = 5,             - Unidades de energia
+            //Force = 6,              - Unidades de força
+            //Mass = 7,               - Unidades de massa
+            //SpecificWeight = 8,     - Unidades de peso específico
+            //Potency = 9,            - Unidades de potência
+            //Pressure = 10,          - Unidades de pressão
+            //Temperature = 11,       - Unidades de temperatura
+            //Time = 12,              - Unidades de tempo
+            //Velocity = 13,          - Unidades de velocidade
+            //Viscosity = 14,         - Unidades de viscosidade
+            //Volume = 15,            - Unidades de volume
+            //Electrical = 16,        - Unidades elétrica
 
             var areaUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Area);
             var capacityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Capacity);
@@ -258,20 +260,20 @@
             #endregion
 
             #region UnitOfMeasurement
-
+            
             var celsiusDescription = new StringBuilder();
 
             celsiusDescription.AppendLine("A escala de grau Celsius(símbolo: °C) é uma escala termométrica, do sistema métrico[1], usada na maioria dos países do mundo.Teve origem a partir do modelo proposto pelo astrônomo sueco Anders Celsius(1701 - 1744), inicialmente denominado escala centígrada(Grau centígrado).");
             celsiusDescription.AppendLine("Esta escala é baseada nos pontos de fusão e ebulição da água, em condição atmosférica padrão, aos quais são atribuídos os valores de 0 °C e 100 °C, respectivamente[2].Devido a esta divisão centesimal, se deu a antiga nomenclatura grau centígrado(cem partes/ graus) que, em 1948, durante a 9ª Conferência Geral de Pesos e Medidas(CR 64), teve seu nome oficialmente modificado para grau Celsius, em reconhecimento ao trabalho de Anders Celsius e para fim de desambiguação com o prefixo centi do SI.");
             celsiusDescription.AppendLine("Enquanto que os valores de congelação e evaporação da água estão aproximadamente corretos, a definição original não é apropriada como um padrão formal: ela depende da definição de pressão atmosférica padrão, que por sua vez depende da própria definição de temperatura.A definição oficial atual de grau Celsius define 0,01 °C como o ponto triplo da água, e 1 grau Celsius como sendo 1 / 273,16 da diferença de temperatura entre o ponto triplo da água e o zero absoluto. Esta definição garante que 1 grau Celsius apresenta a mesma variação de temperatura que 1 kelvin.");
 
-            var celsiusUnitOfMeasurement = context.UnitOfMeasurement.SingleOrDefault(x => x.Id == 1);
+            var celsiusUnitOfMeasurement = context.UnitOfMeasurement.FirstOrDefault(x => x.Id == UnitOfMeasurementEnum.Celsius);
 
             if (celsiusUnitOfMeasurement == null)
             {
                 celsiusUnitOfMeasurement = new UnitOfMeasurement
                 {
-                    Id = 1,
+                    Id = UnitOfMeasurementEnum.Celsius,
                     UnitOfMeasurementTypeId = temperatureUnitOfMeasurementType.Id,
                 };
                 context.UnitOfMeasurement.Add(celsiusUnitOfMeasurement);
@@ -290,13 +292,13 @@
             fahrenheitDescription.AppendLine("Esta escala foi utilizada principalmente pelos países que foram colonizados pelos britânicos, mas seu uso atualmente se restringe a poucos países de língua inglesa, como os Estados Unidos e Belize. E também, muito utilizada com o povo grego, para medir a temperatura de um corpo.Jakelinneh Devocerg, mulher francesa que criou a teoria 'Fahrenheit Devocerg' que para passar de celsius para fahrenheit se usa sempre 1,8.Ex: f = 137 * e c = 20 * f + 137 - 20 + c.1,8 fc = 117.1,8 = 1,20202020");
             fahrenheitDescription.AppendLine("Para uso científico, há uma escala de temperatura, chamada de Rankine, que leva o marco zero de sua escala ao zero absoluto e possui a mesma variação da escala fahrenheit, existindo, portanto, correlação entre a escala de Rankine e grau fahrenheit do mesmo modo que existe correlação das escalas kelvin e grau Celsius.");
 
-            var fahrenheitUnitOfMeasurement = context.UnitOfMeasurement.SingleOrDefault(x => x.Id == 2);
+            var fahrenheitUnitOfMeasurement = context.UnitOfMeasurement.SingleOrDefault(x => x.Id == UnitOfMeasurementEnum.Fahrenheit);
 
             if (fahrenheitUnitOfMeasurement == null)
             {
                 fahrenheitUnitOfMeasurement = new UnitOfMeasurement
                 {
-                    Id = 2,
+                    Id = UnitOfMeasurementEnum.Fahrenheit,
                     UnitOfMeasurementTypeId = temperatureUnitOfMeasurementType.Id,
                 };
                 context.UnitOfMeasurement.Add(fahrenheitUnitOfMeasurement);
@@ -395,6 +397,7 @@
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
                     UnitOfMeasurementId = celsiusUnitOfMeasurement.Id,
+                    UnitOfMeasurementTypeId = celsiusUnitOfMeasurement.UnitOfMeasurementTypeId,
                     UnitOfMeasurement = celsiusUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
@@ -431,6 +434,7 @@
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
                     UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
+                    UnitOfMeasurementTypeId = fahrenheitUnitOfMeasurement.UnitOfMeasurementTypeId,
                     UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
@@ -467,6 +471,7 @@
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
                     UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
+                    UnitOfMeasurementTypeId = fahrenheitUnitOfMeasurement.UnitOfMeasurementTypeId,
                     UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
@@ -503,6 +508,7 @@
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
                     UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
+                    UnitOfMeasurementTypeId = fahrenheitUnitOfMeasurement.UnitOfMeasurementTypeId,
                     UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
@@ -539,6 +545,7 @@
                     Family = "DS18B20",
                     TempSensorRangeId = tempSensorRange1.Id,
                     UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
+                    UnitOfMeasurementTypeId = fahrenheitUnitOfMeasurement.UnitOfMeasurementTypeId,
                     UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,

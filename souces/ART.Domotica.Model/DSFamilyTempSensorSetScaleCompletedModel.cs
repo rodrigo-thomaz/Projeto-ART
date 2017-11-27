@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Model
 {
+    using ART.Domotica.Enums;
     using System;
 
     public class DSFamilyTempSensorSetScaleCompletedModel
@@ -16,7 +17,7 @@
             get; set;
         }
 
-        public byte UnitOfMeasurementId
+        public UnitOfMeasurementEnum UnitOfMeasurementId
         {
             get; set;
         }

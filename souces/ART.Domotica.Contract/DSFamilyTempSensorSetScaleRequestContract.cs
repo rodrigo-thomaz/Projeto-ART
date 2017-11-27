@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Contract
 {
+    using ART.Domotica.Enums;
     using System;
 
     public class DSFamilyTempSensorSetScaleRequestContract
@@ -11,7 +12,7 @@
             get; set;
         }
 
-        public byte UnitOfMeasurementId
+        public UnitOfMeasurementEnum UnitOfMeasurementId
         {
             get; set;
         }

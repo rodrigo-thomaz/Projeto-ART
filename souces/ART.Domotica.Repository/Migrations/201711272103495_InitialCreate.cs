@@ -130,7 +130,7 @@ namespace ART.Domotica.Repository.Migrations
                 "dbo.UnitOfMeasurement",
                 c => new
                     {
-                        Id = c.Byte(nullable: false),
+                        Id = c.Short(nullable: false),
                         UnitOfMeasurementTypeId = c.Byte(nullable: false),
                         Name = c.String(nullable: false, maxLength: 255),
                         Symbol = c.String(nullable: false, maxLength: 2, fixedLength: true),
@@ -217,7 +217,7 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        UnitOfMeasurementId = c.Byte(nullable: false),
+                        UnitOfMeasurementId = c.Short(nullable: false),
                         UnitOfMeasurementTypeId = c.Byte(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)

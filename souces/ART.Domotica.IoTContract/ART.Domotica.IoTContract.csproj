@@ -58,5 +58,11 @@
     <Compile Include="TempSensorAlarmPositionIoTContract.cs" />
     <Compile Include="TempSensorAlarmResponseIoTContract.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Domotica.Enums\ART.Domotica.Enums.csproj">
+      <Project>{7FBCB625-237B-486A-805A-527CD3AE83E3}</Project>
+      <Name>ART.Domotica.Enums</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
