@@ -25,11 +25,6 @@
             get; set;
         }
 
-        public DbSet<UnitOfMeasurementType> UnitOfMeasurementType
-        {
-            get; set;
-        }
-
         public DbSet<ApplicationMQ> ApplicationMQ
         {
             get; set;
@@ -96,6 +91,11 @@
         }
 
         public DbSet<TimeZone> TimeZone
+        {
+            get; set;
+        }
+
+        public DbSet<UnitOfMeasurementType> UnitOfMeasurementType
         {
             get; set;
         }

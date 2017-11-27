@@ -11,6 +11,7 @@
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;
+    using ART.Domotica.Enums;
 
     public class Seeds
     {

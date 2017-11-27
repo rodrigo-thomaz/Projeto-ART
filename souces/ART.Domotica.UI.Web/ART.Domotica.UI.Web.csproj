@@ -224,6 +224,7 @@
     <Content Include="src\js\services\authService.js" />
     <Content Include="src\js\services\applicationService.js" />
     <Content Include="src\js\services\temperatureScaleConverter.js" />
+    <Content Include="src\js\services\unitOfMeasurementTypeService.js" />
     <Content Include="src\js\services\timeZoneService.js" />
     <Content Include="src\js\services\temperatureScaleService.js" />
     <Content Include="src\js\services\dsFamilyTempSensorService.js" />

@@ -1,5 +1,7 @@
-﻿namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Enums
 {
+    #region Enumerations
+
     public enum UnitOfMeasurementTypeEnum : byte
     {
         Area = 1,               // Unidades de área
@@ -19,4 +21,6 @@
         Volume = 15,            // Unidades de volume
         Electrical = 16,        // Unidades elétrica
     }
+
+    #endregion Enumerations
 }

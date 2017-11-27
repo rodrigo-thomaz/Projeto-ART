@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
+app.factory('unitOfMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -10,7 +10,7 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
 
     var onConnected = function () {
 
-        stompService.subscribe('TimeZone.GetAllViewCompleted', onGetAllCompleted);
+        stompService.subscribe('UnitOfMeasurementType.GetAllViewCompleted', onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -23,15 +23,15 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/timeZone/getAll').then(function (results) {
+        return $http.post(serviceBase + 'api/unitOfMeasurementType/getAll').then(function (results) {
             //alert('envio bem sucedido');
         });
     };     
 
-    var getTimeZoneById = function (timeZoneId) {
-        for (var i = 0; i < serviceFactory.timeZones.length; i++) {
-            if (serviceFactory.timeZones[i].id === timeZoneId) {
-                return serviceFactory.timeZones[i];
+    var getUnitOfMeasurementTypeById = function (unitOfMeasurementTypeId) {
+        for (var i = 0; i < serviceFactory.unitOfMeasurementTypes.length; i++) {
+            if (serviceFactory.unitOfMeasurementTypes[i].id == unitOfMeasurementTypeId) {
+                return serviceFactory.unitOfMeasurementTypes[i];
             }
         }
     };
@@ -40,11 +40,11 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            serviceFactory.timeZones.push(data[i]);
+            serviceFactory.unitOfMeasurementTypes.push(data[i]);
         }
         _initializing = false;
         _initialized = true;
-        $rootScope.$emit('timeZoneService_Initialized');
+        $rootScope.$emit('unitOfMeasurementTypeService_Initialized');
     }
 
     $rootScope.$on('$destroy', function () {
@@ -59,10 +59,10 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
 
     // serviceFactory
         
-    serviceFactory.timeZones = [];  
+    serviceFactory.unitOfMeasurementTypes = [];  
 
     serviceFactory.initialized = initialized;
-    serviceFactory.getTimeZoneById = getTimeZoneById;    
+    serviceFactory.getUnitOfMeasurementTypeById = getUnitOfMeasurementTypeById;    
 
     return serviceFactory;
 

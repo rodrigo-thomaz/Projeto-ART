@@ -66,6 +66,7 @@
     <Compile Include="Interfaces\IApplicationUserProducer.cs" />
     <Compile Include="Interfaces\IDashboardProducer.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorProducer.cs" />
+    <Compile Include="Interfaces\IUnitOfMeasurementTypeProducer.cs" />
     <Compile Include="Interfaces\ITimeZoneProducer.cs" />
     <Compile Include="Interfaces\ITemperatureScaleProducer.cs" />
     <Compile Include="ProducerModule.cs" />
@@ -77,6 +78,7 @@
     <Compile Include="Services\ApplicationUserProducer.cs" />
     <Compile Include="Services\DashboardProducer.cs" />
     <Compile Include="Services\DSFamilyTempSensorProducer.cs" />
+    <Compile Include="Services\UnitOfMeasurementTypeProducer.cs" />
     <Compile Include="Services\TimeZoneProducer.cs" />
     <Compile Include="Services\TemperatureScaleProducer.cs" />
   </ItemGroup>

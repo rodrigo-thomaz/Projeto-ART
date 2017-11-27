@@ -63,6 +63,7 @@
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DeviceMQProfile());
                 x.AddProfile(new TimeZoneProfile());
+                x.AddProfile(new UnitOfMeasurementTypeProfile());
             });
 
             IContainer container = builder.Build();

@@ -43,6 +43,7 @@ angular.module('app')
                       'vr.directives.slider',
                       'ui.select',   
                       'toaster',
+                      'js/services/unitOfMeasurementTypeService.js',
                       'js/services/temperatureScaleService.js',
                       'js/services/temperatureScaleConverter.js',
                       'js/services/timeZoneService.js',                      

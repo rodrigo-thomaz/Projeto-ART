@@ -32,7 +32,6 @@
                 .HasForeignKey(x => x.UnitOfMeasurementTypeId)
                 .WillCascadeOnDelete(false);
 
-
             //Name
             Property(x => x.Name)
                 .HasColumnOrder(2)

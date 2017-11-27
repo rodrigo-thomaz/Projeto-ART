@@ -1,10 +1,10 @@
 ﻿namespace ART.Domotica.Repository.Configurations
 {
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
     using ART.Domotica.Repository.Entities;
-    using System.Data.Entity.Infrastructure.Annotations;
 
     public class UnitOfMeasurementTypeConfiguration : EntityTypeConfiguration<UnitOfMeasurementType>
     {
@@ -26,7 +26,7 @@
                 .HasColumnOrder(1)
                 .HasMaxLength(25)
                 .IsRequired().HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new IndexAttribute { IsUnique = true })); 
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
         }
 
         #endregion Constructors

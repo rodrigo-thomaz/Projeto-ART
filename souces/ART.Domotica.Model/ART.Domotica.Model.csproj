@@ -57,6 +57,7 @@
     <Compile Include="DSFamilyTempSensorResolutionDetailModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmBuzzerOnCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionCompletedModel.cs" />
+    <Compile Include="UnitOfMeasurementTypeDetailModel.cs" />
     <Compile Include="TimeZoneDetailModel.cs" />
     <Compile Include="TemperatureScaleDetailModel.cs" />
     <Compile Include="ApplicationDetailModel.cs" />
@@ -64,6 +65,12 @@
     <Compile Include="TempSensorAlarmGetDetailModel.cs" />
     <Compile Include="TempSensorAlarmPositionModel.cs" />
     <Compile Include="TempSensorRangeGetDetailModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Domotica.Enums\ART.Domotica.Enums.csproj">
+      <Project>{7FBCB625-237B-486A-805A-527CD3AE83E3}</Project>
+      <Name>ART.Domotica.Enums</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

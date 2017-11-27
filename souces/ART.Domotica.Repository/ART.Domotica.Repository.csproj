@@ -102,7 +102,6 @@
     <Compile Include="Entities\TempSensorRange.cs" />
     <Compile Include="Entities\TimeZone.cs" />
     <Compile Include="Entities\UnitOfMeasurementType.cs" />
-    <Compile Include="Entities\UnitOfMeasurementTypeEnum.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationMQRepository.cs" />
@@ -116,6 +115,7 @@
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\ITemperatureScaleRepository.cs" />
     <Compile Include="Interfaces\ITempSensorRangeRepository.cs" />
+    <Compile Include="Interfaces\IUnitOfMeasurementTypeRepository.cs" />
     <Compile Include="Migrations\201711271711068_InitialCreate.cs" />
     <Compile Include="Migrations\201711271711068_InitialCreate.Designer.cs">
       <DependentUpon>201711271711068_InitialCreate.cs</DependentUpon>
@@ -136,6 +136,7 @@
     <Compile Include="Repositories\TempSensorRangeRepository.cs" />
     <Compile Include="Repositories\TemperatureScaleRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
+    <Compile Include="Repositories\UnitOfMeasurementTypeRepository.cs" />
     <Compile Include="RepositoryModule.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -146,6 +147,10 @@
     <ProjectReference Include="..\ART.Domotica.Constant\ART.Domotica.Constant.csproj">
       <Project>{62947BFD-C7BA-4076-A6FF-2BEA7CFCAADB}</Project>
       <Name>ART.Domotica.Constant</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ART.Domotica.Enums\ART.Domotica.Enums.csproj">
+      <Project>{7FBCB625-237B-486A-805A-527CD3AE83E3}</Project>
+      <Name>ART.Domotica.Enums</Name>
     </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.Logging\ART.Infra.CrossCutting.Logging.csproj">
       <Project>{8ca05fe6-15fe-4c6e-a10a-3360509f4f8c}</Project>

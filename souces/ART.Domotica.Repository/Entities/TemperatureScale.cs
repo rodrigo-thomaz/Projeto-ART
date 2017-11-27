@@ -3,6 +3,7 @@
     using System.Collections.Generic;
 
     using ART.Infra.CrossCutting.Repository;
+    using ART.Domotica.Enums;
 
     public class TemperatureScale : IEntity<byte>
     {
@@ -33,9 +34,15 @@
             get; set;
         }
 
-        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId { get; set; }
+        public UnitOfMeasurementType UnitOfMeasurementType
+        {
+            get; set;
+        }
 
-        public UnitOfMeasurementType UnitOfMeasurementType { get; set; }
+        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
+        {
+            get; set;
+        }
 
         #endregion Properties
     }
