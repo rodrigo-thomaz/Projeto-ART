@@ -1,14 +1,12 @@
-﻿using ART.Infra.CrossCutting.Repository;
-using System;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using System;
+
+    using ART.Infra.CrossCutting.Repository;
+
     public class SensorChartLimiter : IEntity<Guid>
     {
-        public SensorBase SensorBase
-        {
-            get; set;
-        }
+        #region Properties
 
         public Guid Id
         {
@@ -24,5 +22,12 @@ namespace ART.Domotica.Repository.Entities
         {
             get; set;
         }
+
+        public SensorBase SensorBase
+        {
+            get; set;
+        }
+
+        #endregion Properties
     }
 }

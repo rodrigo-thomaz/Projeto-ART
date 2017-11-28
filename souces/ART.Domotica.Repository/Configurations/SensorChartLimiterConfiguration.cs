@@ -1,11 +1,14 @@
-﻿using ART.Domotica.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Domotica.Repository.Configurations
+﻿namespace ART.Domotica.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Domotica.Repository.Entities;
+
     public class SensorChartLimiterConfiguration : EntityTypeConfiguration<SensorChartLimiter>
     {
+        #region Constructors
+
         public SensorChartLimiterConfiguration()
         {
             //Primary Keys
@@ -33,5 +36,7 @@ namespace ART.Domotica.Repository.Configurations
                 .HasPrecision(7, 4)
                 .IsRequired();
         }
+
+        #endregion Constructors
     }
 }

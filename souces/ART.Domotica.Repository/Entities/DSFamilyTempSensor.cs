@@ -33,7 +33,7 @@
         public string Family
         {
             get; set;
-        } 
+        }
 
         #endregion Properties
     }

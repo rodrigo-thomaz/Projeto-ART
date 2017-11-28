@@ -8,11 +8,6 @@
     {
         #region Properties
 
-        public ICollection<SensorBase> Sensors
-        {
-            get; set;
-        }
-
         public byte Id
         {
             get; set;
@@ -24,6 +19,11 @@
         }
 
         public short Min
+        {
+            get; set;
+        }
+
+        public ICollection<SensorBase> Sensors
         {
             get; set;
         }

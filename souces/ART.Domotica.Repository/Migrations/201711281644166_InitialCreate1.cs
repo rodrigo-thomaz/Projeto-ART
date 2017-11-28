@@ -4,6 +4,15 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class InitialCreate1 : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.SensorChartLimiter", "Id", "dbo.SensorBase");
+            DropIndex("dbo.SensorChartLimiter", new[] { "Id" });
+            DropTable("dbo.SensorChartLimiter");
+        }
+
         public override void Up()
         {
             CreateTable(
@@ -17,14 +26,8 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SensorBase", t => t.Id)
                 .Index(t => t.Id);
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.SensorChartLimiter", "Id", "dbo.SensorBase");
-            DropIndex("dbo.SensorChartLimiter", new[] { "Id" });
-            DropTable("dbo.SensorChartLimiter");
-        }
+
+        #endregion Methods
     }
 }

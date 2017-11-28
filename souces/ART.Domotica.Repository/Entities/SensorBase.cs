@@ -8,7 +8,20 @@
     {
         #region Properties
 
-        public SensorChartLimiter SensorChartLimiter { get; set; }
+        public SensorChartLimiter SensorChartLimiter
+        {
+            get; set;
+        }
+
+        public SensorRange SensorRange
+        {
+            get; set;
+        }
+
+        public byte? SensorRangeId
+        {
+            get; set;
+        }
 
         public ICollection<SensorsInDevice> SensorsInDevice
         {
@@ -33,16 +46,6 @@
         public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
             get; protected set;
-        }
-
-        public SensorRange SensorRange
-        {
-            get; set;
-        }
-
-        public byte? SensorRangeId
-        {
-            get; set;
         }
 
         #endregion Properties

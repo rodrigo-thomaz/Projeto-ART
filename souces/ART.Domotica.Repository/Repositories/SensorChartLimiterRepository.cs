@@ -1,10 +1,11 @@
-﻿using ART.Domotica.Repository.Entities;
-using ART.Domotica.Repository.Interfaces;
-using ART.Infra.CrossCutting.Repository;
-using System;
-
-namespace ART.Domotica.Repository.Repositories
+﻿namespace ART.Domotica.Repository.Repositories
 {
+    using System;
+
+    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Interfaces;
+    using ART.Infra.CrossCutting.Repository;
+
     public class SensorChartLimiterRepository : RepositoryBase<ARTDbContext, SensorChartLimiter, Guid>, ISensorChartLimiterRepository
     {
         #region Constructors
@@ -15,6 +16,5 @@ namespace ART.Domotica.Repository.Repositories
         }
 
         #endregion Constructors
-
     }
 }

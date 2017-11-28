@@ -34,7 +34,7 @@
             Property(x => x.Family)
                 .HasColumnOrder(2)
                 .HasMaxLength(10)
-                .IsRequired();            
+                .IsRequired();
 
             //DSFamilyTempSensorResolution
             HasRequired(x => x.DSFamilyTempSensorResolution)

@@ -75,12 +75,7 @@
             get; set;
         }
 
-        public DbSet<SensorsInDevice> SensorsInDevice
-        {
-            get; set;
-        }
-
-        public DbSet<SensorTrigger> SensorTrigger
+        public DbSet<SensorChartLimiter> SensorChartLimiter
         {
             get; set;
         }
@@ -90,7 +85,12 @@
             get; set;
         }
 
-        public DbSet<SensorChartLimiter> SensorChartLimiter
+        public DbSet<SensorsInDevice> SensorsInDevice
+        {
+            get; set;
+        }
+
+        public DbSet<SensorTrigger> SensorTrigger
         {
             get; set;
         }
