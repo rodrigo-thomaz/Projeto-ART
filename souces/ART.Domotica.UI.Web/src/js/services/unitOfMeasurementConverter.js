@@ -7,9 +7,9 @@ app.factory('unitOfMeasurementConverter', function () {
 
     var convertToCelsius = function (unitOfMeasurementId, temperature) {
         switch (unitOfMeasurementId) {
-            case 1:
+            case 101:
                 return parseFloat(temperature.toFixed(4));
-            case 2:
+            case 102:
                 return convertFahrenheitToCelsius(temperature);
             default:
         }
@@ -24,9 +24,9 @@ app.factory('unitOfMeasurementConverter', function () {
 
     var convertFromCelsius = function (unitOfMeasurementId, celsius) {
         switch (unitOfMeasurementId) {
-            case 1:
+            case 101:
                 return parseFloat(celsius.toFixed(4));
-            case 2:
+            case 102:
                 return convertCelsiusToFahrenheit(celsius);
             default:
         }

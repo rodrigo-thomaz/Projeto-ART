@@ -10,6 +10,7 @@ using Autofac;
 using ART.Domotica.Repository;
 using ART.Domotica.Repository.Repositories;
 using ART.Domotica.Enums;
+using System.Linq;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -121,6 +122,25 @@ namespace ART.Domotica.Domain.Services
 
             await _dsFamilyTempSensorRepository.Update(entity);
 
+            // SensorTrigger
+
+            var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
+
+            if (position == TempSensorAlarmPositionContract.High)
+            {
+                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
+                sensorTrigger.TriggerOn = alarmOn;
+            }
+            else if (position == TempSensorAlarmPositionContract.Low)
+            {
+                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
+                sensorTrigger.TriggerOn = alarmOn;
+            }
+
+            await _sensorTriggerRepository.Update(sensorTriggers);
+
             return entity;
         }
 
@@ -140,6 +160,25 @@ namespace ART.Domotica.Domain.Services
             
             await _dsFamilyTempSensorRepository.Update(entity);
 
+            // SensorTrigger
+
+            var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
+
+            if (position == TempSensorAlarmPositionContract.High)
+            {
+                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
+                sensorTrigger.TriggerValue = alarmCelsius.ToString();
+            }
+            else if (position == TempSensorAlarmPositionContract.Low)
+            {
+                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
+                sensorTrigger.TriggerValue = alarmCelsius.ToString();
+            }
+
+            await _sensorTriggerRepository.Update(sensorTriggers);
+
             return entity;
         }
 
@@ -158,6 +197,25 @@ namespace ART.Domotica.Domain.Services
                 entity.LowAlarm.AlarmBuzzerOn = alarmBuzzerOn;
 
             await _dsFamilyTempSensorRepository.Update(entity);
+
+            // SensorTrigger
+
+            var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
+
+            if (position == TempSensorAlarmPositionContract.High)
+            {
+                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
+                sensorTrigger.BuzzerOn = alarmBuzzerOn;
+            }
+            else if (position == TempSensorAlarmPositionContract.Low)
+            {
+                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
+                sensorTrigger.BuzzerOn = alarmBuzzerOn;
+            }
+
+            await _sensorTriggerRepository.Update(sensorTriggers);
 
             return entity;
         }
