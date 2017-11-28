@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Model
 {
-    public class SensorRangeGetDetailModel
+    public class SensorRangeDetailModel
     {
         #region Properties
 
@@ -10,6 +10,11 @@
         }
 
         public short Min
+        {
+            get; set;
+        }
+
+        public byte SensorRangeId
         {
             get; set;
         }

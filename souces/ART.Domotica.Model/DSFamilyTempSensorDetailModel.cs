@@ -43,7 +43,7 @@
             get; set;
         }
 
-        public SensorRangeGetDetailModel SensorRange
+        public SensorRangeDetailModel SensorRange
         {
             get; set;
         }

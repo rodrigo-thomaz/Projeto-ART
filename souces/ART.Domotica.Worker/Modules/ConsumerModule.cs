@@ -14,6 +14,7 @@
             builder.RegisterType<ApplicationConsumer>().As<IApplicationConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ApplicationMQConsumer>().As<IApplicationMQConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ApplicationUserConsumer>().As<IApplicationUserConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<SensorRangeConsumer>().As<ISensorRangeConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DSFamilyTempSensorConsumer>().As<IDSFamilyTempSensorConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ESPDeviceConsumer>().As<IESPDeviceConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<UnitOfMeasurementConsumer>().As<IUnitOfMeasurementConsumer>().SingleInstance().AutoActivate();

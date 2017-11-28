@@ -8,7 +8,7 @@
 
     using Autofac;
 
-    public class SensorChartLimiterDomain : DomainBase, ISensorRangeDomain
+    public class SensorChartLimiterDomain : DomainBase, ISensorChartLimiterDomain
     {
         #region Fields
 

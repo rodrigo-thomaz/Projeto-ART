@@ -112,6 +112,7 @@
     <Compile Include="AutoMapper\SensorRangeProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
+    <Compile Include="Consumers\SensorRangeConsumer.cs" />
     <Compile Include="Consumers\UnitOfMeasurementTypeConsumer.cs" />
     <Compile Include="Consumers\TimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IApplicationMQConsumer.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="IConsumers\IDSFamilyTempSensorConsumer.cs" />
     <Compile Include="IConsumers\IDeviceNTPConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />
+    <Compile Include="IConsumers\ISensorRangeConsumer.cs" />
     <Compile Include="IConsumers\IUnitOfMeasurementTypeConsumer.cs" />
     <Compile Include="IConsumers\ITimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IUnitOfMeasurementConsumer.cs" />

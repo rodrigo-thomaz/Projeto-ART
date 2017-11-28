@@ -2,11 +2,14 @@
 {
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Repository;
+    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Domotica.Repository.Repositories;
     using ART.Infra.CrossCutting.Domain;
 
     using Autofac;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public class SensorRangeDomain : DomainBase, ISensorRangeDomain
     {
@@ -26,5 +29,10 @@
         }
 
         #endregion Constructors
+
+        public async Task<List<SensorRange>> GetAll()
+        {
+            return await _sensorRangeRepository.GetAll();
+        }
     }
 }

@@ -11,7 +11,10 @@
 
         public SensorRangeProfile()
         {
-            CreateMap<SensorRange, SensorRangeGetDetailModel>();
+            CreateMap<SensorRange, SensorRangeDetailModel>()
+                .ForMember(vm => vm.SensorRangeId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.Max, m => m.MapFrom(x => x.Max))
+                .ForMember(vm => vm.Min, m => m.MapFrom(x => x.Min));
         }
 
         #endregion Constructors
