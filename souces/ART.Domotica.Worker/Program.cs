@@ -56,10 +56,10 @@
                 x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationMQProfile());
                 x.AddProfile(new ApplicationUserProfile());
+                x.AddProfile(new SensorRangeProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());
-                x.AddProfile(new UnitOfMeasurementProfile());
-                x.AddProfile(new SensorRangeProfile());
+                x.AddProfile(new UnitOfMeasurementProfile());                
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DeviceMQProfile());
                 x.AddProfile(new TimeZoneProfile());

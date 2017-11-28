@@ -34,17 +34,7 @@
             Property(x => x.Family)
                 .HasColumnOrder(2)
                 .HasMaxLength(10)
-                .IsRequired();
-
-            //SensorRange
-            HasOptional(x => x.SensorRange)
-                .WithMany(x => x.DSFamilyTempSensors)
-                .HasForeignKey(x => x.SensorRangeId)
-                .WillCascadeOnDelete(false);
-
-            //RangeId
-            Property(x => x.SensorRangeId)
-                .HasColumnOrder(3);
+                .IsRequired();            
 
             //DSFamilyTempSensorResolution
             HasRequired(x => x.DSFamilyTempSensorResolution)
@@ -54,18 +44,18 @@
 
             //DSFamilyTempSensorResolutionId
             Property(x => x.DSFamilyTempSensorResolutionId)
-                .HasColumnOrder(4);
+                .HasColumnOrder(3);
 
             //LowChartLimiterCelsius
             Property(x => x.LowChartLimiterCelsius)
-                .HasColumnOrder(5)
+                .HasColumnOrder(4)
                 .HasPrecision(7, 4)
                 .HasColumnName("LowChartLimiterCelsius")
                 .IsRequired();
 
             //HighChartLimiterCelsius
             Property(x => x.HighChartLimiterCelsius)
-                .HasColumnOrder(6)
+                .HasColumnOrder(5)
                 .HasPrecision(7, 4)
                 .HasColumnName("HighChartLimiterCelsius")
                 .IsRequired();

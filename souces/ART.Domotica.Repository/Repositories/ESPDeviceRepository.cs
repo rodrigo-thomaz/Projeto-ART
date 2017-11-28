@@ -33,23 +33,11 @@
         public async Task<ESPDevice> GetByPin(string pin)
         {
             var data = await _context.ESPDevice
-                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))
+                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase.SensorRange))
+                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase.SensorTriggers))
                 .Include(x => x.DeviceMQ)
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
-
-            // Load SensorRanges
-
-            var sensorRangeIds = data
-                .SensorsInDevice
-                .Select(y => y.SensorBase as DSFamilyTempSensor)
-                        .Select(z => z.SensorRangeId)
-                .Distinct()
-                .ToList();
-
-            await _context.SensorRange
-                .Where(x => sensorRangeIds.Contains(x.Id))
-                .LoadAsync();
 
             return data;
         }

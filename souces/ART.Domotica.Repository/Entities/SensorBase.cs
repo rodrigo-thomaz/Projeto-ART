@@ -33,6 +33,16 @@
             get; protected set;
         }
 
+        public SensorRange SensorRange
+        {
+            get; set;
+        }
+
+        public byte? SensorRangeId
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }

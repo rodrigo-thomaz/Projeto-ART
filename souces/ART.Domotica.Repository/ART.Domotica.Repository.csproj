@@ -120,33 +120,9 @@
     <Compile Include="Interfaces\IUnitOfMeasurementRepository.cs" />
     <Compile Include="Interfaces\ISensorRangeRepository.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201711272256505_InitialCreate.cs" />
-    <Compile Include="Migrations\201711272256505_InitialCreate.Designer.cs">
-      <DependentUpon>201711272256505_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281151497_InitialCreate2.cs" />
-    <Compile Include="Migrations\201711281151497_InitialCreate2.Designer.cs">
-      <DependentUpon>201711281151497_InitialCreate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281200205_InitialCreate3.cs" />
-    <Compile Include="Migrations\201711281200205_InitialCreate3.Designer.cs">
-      <DependentUpon>201711281200205_InitialCreate3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281322387_InitialCreate4.cs" />
-    <Compile Include="Migrations\201711281322387_InitialCreate4.Designer.cs">
-      <DependentUpon>201711281322387_InitialCreate4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281420107_InitialCreate5.cs" />
-    <Compile Include="Migrations\201711281420107_InitialCreate5.Designer.cs">
-      <DependentUpon>201711281420107_InitialCreate5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281424341_InitialCreate6.cs" />
-    <Compile Include="Migrations\201711281424341_InitialCreate6.Designer.cs">
-      <DependentUpon>201711281424341_InitialCreate6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711281444570_InitialCreate76.cs" />
-    <Compile Include="Migrations\201711281444570_InitialCreate76.Designer.cs">
-      <DependentUpon>201711281444570_InitialCreate76.cs</DependentUpon>
+    <Compile Include="Migrations\201711281453114_InitialCreate.cs" />
+    <Compile Include="Migrations\201711281453114_InitialCreate.Designer.cs">
+      <DependentUpon>201711281453114_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -203,26 +179,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711272256505_InitialCreate.resx">
-      <DependentUpon>201711272256505_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281151497_InitialCreate2.resx">
-      <DependentUpon>201711281151497_InitialCreate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281200205_InitialCreate3.resx">
-      <DependentUpon>201711281200205_InitialCreate3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281322387_InitialCreate4.resx">
-      <DependentUpon>201711281322387_InitialCreate4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281420107_InitialCreate5.resx">
-      <DependentUpon>201711281420107_InitialCreate5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281424341_InitialCreate6.resx">
-      <DependentUpon>201711281424341_InitialCreate6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711281444570_InitialCreate76.resx">
-      <DependentUpon>201711281444570_InitialCreate76.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201711281453114_InitialCreate.resx">
+      <DependentUpon>201711281453114_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

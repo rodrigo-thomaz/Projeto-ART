@@ -37,6 +37,16 @@
             //UnitOfMeasurementTypeId
             Property(x => x.UnitOfMeasurementTypeId)
                 .HasColumnOrder(2);
+
+            //SensorRange
+            HasOptional(x => x.SensorRange)
+                .WithMany(x => x.Sensors)
+                .HasForeignKey(x => x.SensorRangeId)
+                .WillCascadeOnDelete(false);
+
+            //SensorRangeId
+            Property(x => x.SensorRangeId)
+                .HasColumnOrder(3);
         }
 
         #endregion Constructors

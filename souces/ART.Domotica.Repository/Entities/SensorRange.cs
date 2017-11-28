@@ -8,7 +8,7 @@
     {
         #region Properties
 
-        public ICollection<DSFamilyTempSensor> DSFamilyTempSensors
+        public ICollection<SensorBase> Sensors
         {
             get; set;
         }
