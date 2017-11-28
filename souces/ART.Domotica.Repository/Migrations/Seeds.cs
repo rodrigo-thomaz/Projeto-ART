@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Migrations
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -401,6 +402,21 @@
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
                     Label = "Sensor 1",
+                    SensorTriggers = new List<SensorTrigger>
+                    {
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "-55",
+                            BuzzerOn = true,
+                        },
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "125",
+                            BuzzerOn = true,
+                        },
+                    },
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -423,6 +439,24 @@
             {
                 sensor_1.Family = "DS18B20";
                 sensor_1.DeviceAddress = sensor_1_Address;
+
+                if(sensor_1.SensorTriggers == null)
+                {
+                    sensor_1.SensorTriggers = new List<SensorTrigger>();
+
+                    sensor_1.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "-55",
+                        BuzzerOn = true,
+                    });
+                    sensor_1.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "125",
+                        BuzzerOn = true,
+                    });
+                }
             }
 
             if (sensor_2_1 == null)
@@ -437,6 +471,21 @@
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 1",
+                    SensorTriggers = new List<SensorTrigger>
+                    {
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "-55",
+                            BuzzerOn = true,
+                        },
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "125",
+                            BuzzerOn = true,
+                        },
+                    },
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -459,6 +508,24 @@
             {
                 sensor_2_1.Family = "DS18B20";
                 sensor_2_1.DeviceAddress = sensor_2_1_Address;
+
+                if (sensor_2_1.SensorTriggers == null)
+                {
+                    sensor_2_1.SensorTriggers = new List<SensorTrigger>();
+
+                    sensor_2_1.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "-55",
+                        BuzzerOn = true,
+                    });
+                    sensor_2_1.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "125",
+                        BuzzerOn = true,
+                    });
+                }
             }
 
             if (sensor_2_2 == null)
@@ -473,6 +540,21 @@
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 2",
+                    SensorTriggers = new List<SensorTrigger>
+                    {
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "-55",
+                            BuzzerOn = true,
+                        },
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "125",
+                            BuzzerOn = true,
+                        },
+                    },
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -495,6 +577,24 @@
             {
                 sensor_2_2.Family = "DS18B20";
                 sensor_2_2.DeviceAddress = sensor_2_2_Address;
+
+                if (sensor_2_2.SensorTriggers == null)
+                {
+                    sensor_2_2.SensorTriggers = new List<SensorTrigger>();
+
+                    sensor_2_2.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "-55",
+                        BuzzerOn = true,
+                    });
+                    sensor_2_2.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "125",
+                        BuzzerOn = true,
+                    });
+                }
             }
 
             if (sensor_3_1 == null)
@@ -509,6 +609,21 @@
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 3",
+                    SensorTriggers = new List<SensorTrigger>
+                    {
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "-55",
+                            BuzzerOn = true,
+                        },
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "125",
+                            BuzzerOn = true,
+                        },
+                    },
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -531,6 +646,24 @@
             {
                 sensor_3_1.Family = "DS18B20";
                 sensor_3_1.DeviceAddress = sensor_3_1_Address;
+
+                if (sensor_3_1.SensorTriggers == null)
+                {
+                    sensor_3_1.SensorTriggers = new List<SensorTrigger>();
+
+                    sensor_3_1.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "-55",
+                        BuzzerOn = true,
+                    });
+                    sensor_3_1.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "125",
+                        BuzzerOn = true,
+                    });
+                }
             }
 
             if (sensor_3_2 == null)
@@ -545,6 +678,21 @@
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 4",
+                    SensorTriggers = new List<SensorTrigger>
+                    {
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "-55",
+                            BuzzerOn = true,
+                        },
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            TriggerValue = "125",
+                            BuzzerOn = true,
+                        },
+                    },
                     LowAlarm = new TempSensorAlarm
                     {
                         AlarmOn = false,
@@ -567,6 +715,24 @@
             {
                 sensor_3_2.Family = "DS18B20";
                 sensor_3_2.DeviceAddress = sensor_3_2_Address;
+
+                if (sensor_3_2.SensorTriggers == null)
+                {
+                    sensor_3_2.SensorTriggers = new List<SensorTrigger>();
+
+                    sensor_3_2.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "-55",
+                        BuzzerOn = true,
+                    });
+                    sensor_3_2.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        TriggerValue = "125",
+                        BuzzerOn = true,
+                    });
+                }
             }
 
             context.SaveChanges();
