@@ -37,7 +37,7 @@
                 .IsRequired();
 
             //SensorRange
-            HasRequired(x => x.SensorRange)
+            HasOptional(x => x.SensorRange)
                 .WithMany(x => x.DSFamilyTempSensors)
                 .HasForeignKey(x => x.SensorRangeId)
                 .WillCascadeOnDelete(false);

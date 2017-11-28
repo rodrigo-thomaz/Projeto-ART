@@ -50,7 +50,7 @@
             get; set;
         }
 
-        public byte SensorRangeId
+        public byte? SensorRangeId
         {
             get; set;
         }
