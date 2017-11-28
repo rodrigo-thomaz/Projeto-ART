@@ -198,10 +198,12 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         };        
 
         // Temp Sensor Range
-        $scope.sensorRangeView = {
-            min: unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.min),
-            max: unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.max),
-        };  
+        if (sensorRangeService.initialized()) {
+            setSensorRange();
+        }
+        else {
+            clearOnSensorRangeServiceInitialized = $rootScope.$on('sensorRangeService_Initialized', setSensorRange);        
+        }
 
         // Chart Limiter
         $scope.lowChartLimiterView = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.lowChartLimiterCelsius);
@@ -229,9 +231,11 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     var clearOnSetAlarmBuzzerOnCompleted = null;
     var clearOnSetChartLimiterCelsiusCompleted = null;
     var clearOnReadReceived = null;
-        
+    var clearOnSensorRangeServiceInitialized = null;
+
     $scope.$on('$destroy', function () {
         if (clearOnUnitOfMeasurementServiceInitialized !== null) clearOnUnitOfMeasurementServiceInitialized();
+        if (clearOnSensorRangeServiceInitialized !== null) clearOnSensorRangeServiceInitialized();
         clearOnSetUnitOfMeasurementCompleted();
         clearOnSetResolutionCompleted();
         clearOnSetLabelCompleted();
@@ -248,6 +252,14 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     var setSelectedResolution = function () {
         $scope.resolution.selectedResolution = dsFamilyTempSensorResolutionService.getResolutionById($scope.sensor.dsFamilyTempSensorResolutionId);
+    };
+
+    var setSensorRange = function () {
+        var sensorRange = sensorRangeService.getById($scope.sensor.sensorRangeId);
+        $scope.sensorRangeView = {
+            min: unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, sensorRange.min),
+            max: unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, sensorRange.max),
+        };
     };
 
     var onSetUnitOfMeasurementCompleted = function (event, data) {

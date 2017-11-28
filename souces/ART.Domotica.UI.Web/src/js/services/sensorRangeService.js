@@ -30,7 +30,7 @@ app.factory('sensorRangeService', ['$http', 'ngAuthSettings', '$rootScope', 'sto
 
     var getById = function (sensorRangeId) {
         for (var i = 0; i < serviceFactory.sensorRanges.length; i++) {
-            if (serviceFactory.sensorRanges[i].id === sensorRangeId) {
+            if (serviceFactory.sensorRanges[i].sensorRangeId === sensorRangeId) {
                 return serviceFactory.sensorRanges[i];
             }
         }
