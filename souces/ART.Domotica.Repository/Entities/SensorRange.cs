@@ -4,7 +4,7 @@
 
     using ART.Infra.CrossCutting.Repository;
 
-    public class TempSensorRange : IEntity<byte>
+    public class SensorRange : IEntity<byte>
     {
         #region Properties
 

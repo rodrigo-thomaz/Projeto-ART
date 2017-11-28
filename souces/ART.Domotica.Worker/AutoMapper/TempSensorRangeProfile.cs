@@ -11,7 +11,7 @@
 
         public TempSensorRangeProfile()
         {
-            CreateMap<TempSensorRange, TempSensorRangeGetDetailModel>();
+            CreateMap<SensorRange, TempSensorRangeGetDetailModel>();
         }
 
         #endregion Constructors

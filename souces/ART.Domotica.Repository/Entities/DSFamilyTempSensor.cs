@@ -45,7 +45,7 @@
             get; set;
         }
 
-        public TempSensorRange TempSensorRange
+        public SensorRange TempSensorRange
         {
             get; set;
         }

@@ -85,7 +85,7 @@
             get; set;
         }
 
-        public DbSet<TempSensorRange> TempSensorRange
+        public DbSet<SensorRange> TempSensorRange
         {
             get; set;
         }
@@ -137,7 +137,7 @@
             modelBuilder.Configurations.Add(new ApplicationMQConfiguration());
             modelBuilder.Configurations.Add(new UnitOfMeasurementConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
-            modelBuilder.Configurations.Add(new TempSensorRangeConfiguration());
+            modelBuilder.Configurations.Add(new SensorRangeConfiguration());
             modelBuilder.Configurations.Add(new UnitOfMeasurementTypeConfiguration());
 
             base.OnModelCreating(modelBuilder);

@@ -80,7 +80,7 @@
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
     <Compile Include="Configurations\UnitOfMeasurementConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
-    <Compile Include="Configurations\TempSensorRangeConfiguration.cs" />
+    <Compile Include="Configurations\SensorRangeConfiguration.cs" />
     <Compile Include="Configurations\UnitOfMeasurementTypeConfiguration.cs" />
     <Compile Include="Configurations\TimeZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
@@ -102,7 +102,7 @@
     <Compile Include="Entities\TemperatureSensorBase.cs" />
     <Compile Include="Entities\UnitOfMeasurement.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
-    <Compile Include="Entities\TempSensorRange.cs" />
+    <Compile Include="Entities\SensorRange.cs" />
     <Compile Include="Entities\TimeZone.cs" />
     <Compile Include="Entities\UnitOfMeasurementType.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
@@ -118,7 +118,7 @@
     <Compile Include="Interfaces\ISensorTriggerRepository.cs" />
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementRepository.cs" />
-    <Compile Include="Interfaces\ITempSensorRangeRepository.cs" />
+    <Compile Include="Interfaces\ISensorRangeRepository.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementTypeRepository.cs" />
     <Compile Include="Migrations\201711272256505_InitialCreate.cs" />
     <Compile Include="Migrations\201711272256505_InitialCreate.Designer.cs">
@@ -136,6 +136,10 @@
     <Compile Include="Migrations\201711281322387_InitialCreate4.Designer.cs">
       <DependentUpon>201711281322387_InitialCreate4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711281420107_InitialCreate5.cs" />
+    <Compile Include="Migrations\201711281420107_InitialCreate5.Designer.cs">
+      <DependentUpon>201711281420107_InitialCreate5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,7 +154,7 @@
     <Compile Include="Repositories\ESPDeviceRepository.cs" />
     <Compile Include="Repositories\SensorTriggerRepository.cs" />
     <Compile Include="Repositories\TimeZoneRepository.cs" />
-    <Compile Include="Repositories\TempSensorRangeRepository.cs" />
+    <Compile Include="Repositories\SensorRangeRepository.cs" />
     <Compile Include="Repositories\UnitOfMeasurementRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\UnitOfMeasurementTypeRepository.cs" />
@@ -202,6 +206,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711281322387_InitialCreate4.resx">
       <DependentUpon>201711281322387_InitialCreate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711281420107_InitialCreate5.resx">
+      <DependentUpon>201711281420107_InitialCreate5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

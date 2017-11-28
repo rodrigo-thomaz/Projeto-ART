@@ -6,11 +6,11 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface ITempSensorRangeRepository : IRepository<ARTDbContext, TempSensorRange, byte>
+    public interface ISensorRangeRepository : IRepository<ARTDbContext, SensorRange, byte>
     {
         #region Methods
 
-        Task<List<TempSensorRange>> GetAll();
+        Task<List<SensorRange>> GetAll();
 
         #endregion Methods
     }

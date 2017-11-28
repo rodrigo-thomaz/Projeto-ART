@@ -47,7 +47,7 @@
 
             if (tempSensorRange1 == null)
             {
-                tempSensorRange1 = new TempSensorRange { Id = 1 };
+                tempSensorRange1 = new SensorRange { Id = 1 };
                 context.TempSensorRange.Add(tempSensorRange1);
             }
 

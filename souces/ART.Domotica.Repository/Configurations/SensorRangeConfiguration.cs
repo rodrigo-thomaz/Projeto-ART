@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class TempSensorRangeConfiguration : EntityTypeConfiguration<TempSensorRange>
+    public class SensorRangeConfiguration : EntityTypeConfiguration<SensorRange>
     {
         #region Constructors
 
-        public TempSensorRangeConfiguration()
+        public SensorRangeConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);

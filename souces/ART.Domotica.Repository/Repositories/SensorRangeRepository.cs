@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories
 {
-    public class TempSensorRangeRepository : RepositoryBase<ARTDbContext, TempSensorRange, byte>, ITempSensorRangeRepository
+    public class SensorRangeRepository : RepositoryBase<ARTDbContext, SensorRange, byte>, ISensorRangeRepository
     {
-        public TempSensorRangeRepository(ARTDbContext context) : base(context)
+        public SensorRangeRepository(ARTDbContext context) : base(context)
         {
 
         }
 
-        public async Task<List<TempSensorRange>> GetAll()
+        public async Task<List<SensorRange>> GetAll()
         {
             return await _context.TempSensorRange
                 .ToListAsync();
