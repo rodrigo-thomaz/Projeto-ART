@@ -8,6 +8,8 @@
     {
         #region Properties
 
+        public SensorChartLimiter SensorChartLimiter { get; set; }
+
         public ICollection<SensorsInDevice> SensorsInDevice
         {
             get; set;

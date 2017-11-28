@@ -71,6 +71,7 @@
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwaresInProjectConfiguration.cs" />
     <Compile Include="Configurations\ProjectConfiguration.cs" />
+    <Compile Include="Configurations\SensorChartLimiterConfiguration.cs" />
     <Compile Include="Configurations\SensorTriggerConfiguration.cs" />
     <Compile Include="Configurations\TemperatureSensorBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\RaspberryDevice.cs" />
     <Compile Include="Entities\SensorBase.cs" />
+    <Compile Include="Entities\SensorChartLimiter.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\SensorTrigger.cs" />
@@ -123,6 +125,10 @@
     <Compile Include="Migrations\201711281453114_InitialCreate.cs" />
     <Compile Include="Migrations\201711281453114_InitialCreate.Designer.cs">
       <DependentUpon>201711281453114_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711281644166_InitialCreate1.cs" />
+    <Compile Include="Migrations\201711281644166_InitialCreate1.Designer.cs">
+      <DependentUpon>201711281644166_InitialCreate1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -181,6 +187,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711281453114_InitialCreate.resx">
       <DependentUpon>201711281453114_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711281644166_InitialCreate1.resx">
+      <DependentUpon>201711281644166_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

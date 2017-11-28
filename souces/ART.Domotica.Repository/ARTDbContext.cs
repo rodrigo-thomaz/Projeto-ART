@@ -90,6 +90,11 @@
             get; set;
         }
 
+        public DbSet<SensorChartLimiter> SensorChartLimiter
+        {
+            get; set;
+        }
+
         public DbSet<TimeZone> TimeZone
         {
             get; set;
@@ -120,6 +125,7 @@
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
+            modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());
             modelBuilder.Configurations.Add(new TemperatureSensorBaseConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());
