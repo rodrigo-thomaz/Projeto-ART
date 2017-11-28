@@ -76,15 +76,6 @@ namespace ART.Domotica.Producer.Services
             });                        
         }
 
-        public async Task SetChartLimiterCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract> message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetChartLimiterCelsiusQueueName, null, payload);
-            });
-        }
-
         public async Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message)
         {
             await Task.Run(() =>
@@ -148,13 +139,6 @@ namespace ART.Domotica.Producer.Services
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
-
-            _model.QueueDeclare(
-                 queue: DSFamilyTempSensorConstants.SetChartLimiterCelsiusQueueName
-               , durable: true
-               , exclusive: false
-               , autoDelete: false
-               , arguments: null);
         }
 
         #endregion

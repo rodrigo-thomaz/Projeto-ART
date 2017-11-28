@@ -2,26 +2,28 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel
+    using ART.Domotica.Enums;
+
+    public class SensorChartLimiterSetValueCompletedModel
     {
         #region Properties
-
-        public decimal ChartLimiterCelsius
-        {
-            get; set;
-        }
 
         public Guid DeviceId
         {
             get; set;
         }
 
-        public Guid DSFamilyTempSensorId
+        public SensorChartLimiterPositionEnum Position
         {
             get; set;
         }
 
-        public TempSensorAlarmPositionModel Position
+        public Guid SensorChartLimiterId
+        {
+            get; set;
+        }
+
+        public decimal Value
         {
             get; set;
         }

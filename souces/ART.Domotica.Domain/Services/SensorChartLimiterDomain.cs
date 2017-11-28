@@ -1,12 +1,17 @@
 ﻿namespace ART.Domotica.Domain.Services
 {
+    using ART.Domotica.Contract;
     using ART.Domotica.Domain.Interfaces;
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository;
+    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Domotica.Repository.Repositories;
     using ART.Infra.CrossCutting.Domain;
 
     using Autofac;
+    using System;
+    using System.Threading.Tasks;
 
     public class SensorChartLimiterDomain : DomainBase, ISensorChartLimiterDomain
     {
@@ -26,5 +31,24 @@
         }
 
         #endregion Constructors
+
+        public async Task<SensorChartLimiter> SetValue(Guid sensorChartLimiterId, SensorChartLimiterPositionEnum position, decimal value)
+        {
+            var entity = await _sensorChartLimiterRepository.GetById(sensorChartLimiterId);
+
+            if (entity == null)
+            {
+                throw new Exception("SensorChartLimiter not found");
+            }
+
+            if (position == SensorChartLimiterPositionEnum.Max)
+                entity.Max = value;
+            else if (position == SensorChartLimiterPositionEnum.Min)
+                entity.Min = value;
+
+            await _sensorChartLimiterRepository.Update(entity);
+
+            return entity;
+        }
     }
 }

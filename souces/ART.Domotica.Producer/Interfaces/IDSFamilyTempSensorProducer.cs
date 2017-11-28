@@ -17,8 +17,6 @@
 
         Task SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message);
 
-        Task SetChartLimiterCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract> message);
-
         Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message);
 
         Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);

@@ -49,7 +49,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON "DSFamilyTempSensor/SetAlarmOnIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor/SetAlarmCelsiusIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS "DSFamilyTempSensor/SetChartLimiterCelsiusIoT"
+#define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorChartLimiter/SetValueIoT"
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
@@ -164,7 +164,7 @@ void subscribeInApplication()
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS);
+  mqqtManager.subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
 
   Serial.println("[MQQT::subscribeInApplication] Initialized with success !");
 }
@@ -182,7 +182,7 @@ void unSubscribeInApplication()
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
   
   Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
@@ -257,7 +257,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON)){
       dsFamilyTempSensorManager.setAlarmBuzzerOn(payloadContract);
     }
-    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_CHART_LIMITER_CELSIUS)){
+    if(topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)){
       dsFamilyTempSensorManager.setChartLimiterCelsius(payloadContract);
     }        
 }

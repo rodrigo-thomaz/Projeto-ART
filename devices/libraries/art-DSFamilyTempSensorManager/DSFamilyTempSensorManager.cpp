@@ -56,8 +56,8 @@ bool TempSensorAlarm::hasAlarm()
 		
 	switch(this->_alarmPosition)
 	{
-		case Low  : return this->_tempCelsius < this->_alarmCelsius;
-		case High : return this->_tempCelsius > this->_alarmCelsius;
+		case Max : return this->_tempCelsius > this->_alarmCelsius;
+		case Min : return this->_tempCelsius < this->_alarmCelsius;		
 	}
 }
 
@@ -306,8 +306,8 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		float 			highAlarmCelsius		= float(highAlarmJsonObject["alarmCelsius"]);
 		bool 			highAlarmBuzzerOn 		= bool(highAlarmJsonObject["alarmBuzzerOn"]);
 				
-		TempSensorAlarm lowAlarm 				= TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, Low);
-		TempSensorAlarm highAlarm 				= TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, High);
+		TempSensorAlarm highAlarm 				= TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, Max);				
+		TempSensorAlarm lowAlarm 				= TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, Min);		
 		
 		this->_sensors.push_back(DSFamilyTempSensor(
 				dsFamilyTempSensorId,
@@ -422,9 +422,9 @@ void DSFamilyTempSensorManager::setAlarmOn(String json)
 
 	DSFamilyTempSensor& dsFamilyTempSensor 	= getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
-	if(position == High)
+	if(position == Max)
 		dsFamilyTempSensor.getHighAlarm().setAlarmOn(alarmOn);
-	else if(position == Low)
+	else if(position == Min)
 		dsFamilyTempSensor.getLowAlarm().setAlarmOn(alarmOn);
 	
 	Serial.print("[DSFamilyTempSensorManager::setAlarmOn] ");
@@ -448,9 +448,9 @@ void DSFamilyTempSensorManager::setAlarmCelsius(String json)
 	
 	DSFamilyTempSensor& dsFamilyTempSensor  = getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
-	if(position == High)
+	if(position == Max)
 		dsFamilyTempSensor.getHighAlarm().setAlarmCelsius(alarmCelsius);
-	else if(position == Low)
+	else if(position == Min)
 		dsFamilyTempSensor.getLowAlarm().setAlarmCelsius(alarmCelsius);
 	
 	Serial.print("[DSFamilyTempSensorManager::setAlarmCelsius] ");
@@ -474,9 +474,9 @@ void DSFamilyTempSensorManager::setAlarmBuzzerOn(String json)
 
 	DSFamilyTempSensor& dsFamilyTempSensor  = getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
-	if(position == High)
+	if(position == Max)
 		dsFamilyTempSensor.getHighAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
-	else if(position == Low)
+	else if(position == Min)
 		dsFamilyTempSensor.getLowAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
 
 	Serial.print("[DSFamilyTempSensorManager::setAlarmBuzzerOn] ");
@@ -494,15 +494,15 @@ void DSFamilyTempSensorManager::setChartLimiterCelsius(String json)
 		return;
 	}
 
-	String dsFamilyTempSensorId 			= root["dsFamilyTempSensorId"];
-	float chartLimiterCelsius 				= root["chartLimiterCelsius"];
+	String dsFamilyTempSensorId 			= root["sensorChartLimiterId"];
+	float chartLimiterCelsius 				= root["value"];
 	TempSensorAlarmPosition position 		= static_cast<TempSensorAlarmPosition>(root["position"].as<int>());	
 
 	DSFamilyTempSensor& dsFamilyTempSensor  = getDSFamilyTempSensorById(dsFamilyTempSensorId);
 	
-	if(position == High)
+	if(position == Max)
 		dsFamilyTempSensor.setHighChartLimiterCelsius(chartLimiterCelsius);
-	else if(position == Low)
+	else if(position == Min)
 		dsFamilyTempSensor.setLowChartLimiterCelsius(chartLimiterCelsius);
 
 	Serial.print("[DSFamilyTempSensorManager::setChartLimiterCelsius] ");

@@ -13,7 +13,6 @@ using AutoMapper;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Model;
 using ART.Infra.CrossCutting.Logging;
-using System.Linq;
 
 namespace ART.Domotica.Worker.Consumers
 {

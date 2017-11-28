@@ -218,6 +218,7 @@
     <Content Include="src\js\services\applicationMQService.js" />
     <Content Include="src\js\services\dsFamilyTempSensorResolutionService.js" />
     <Content Include="src\js\services\deviceNTPService.js" />
+    <Content Include="src\js\services\sensorChartLimiterService.js" />
     <Content Include="src\js\services\espDeviceService.js" />
     <Content Include="src\js\services\applicationUserService.js" />
     <Content Include="src\js\services\authInterceptorService.js" />

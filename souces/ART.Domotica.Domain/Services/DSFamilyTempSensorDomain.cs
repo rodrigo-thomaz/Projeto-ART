@@ -23,7 +23,6 @@ namespace ART.Domotica.Domain.Services
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepository;
         private readonly ISensorTriggerRepository _sensorTriggerRepository;
-        private readonly ISensorChartLimiterRepository _sensorChartLimiterRepository;
 
         #endregion
 
@@ -38,7 +37,6 @@ namespace ART.Domotica.Domain.Services
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _unitOfMeasurementRepository = new UnitOfMeasurementRepository(context);
             _sensorTriggerRepository = new SensorTriggerRepository(context);
-            _sensorChartLimiterRepository = new SensorChartLimiterRepository(context);
         }
 
         #endregion
@@ -108,7 +106,7 @@ namespace ART.Domotica.Domain.Services
             return dsFamilyTempSensorEntity;
         }
 
-        public async Task<DSFamilyTempSensor> SetAlarmOn(Guid dsFamilyTempSensorId, TempSensorAlarmPositionContract position, bool alarmOn)
+        public async Task<DSFamilyTempSensor> SetAlarmOn(Guid dsFamilyTempSensorId, SensorChartLimiterPositionEnum position, bool alarmOn)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
 
@@ -119,13 +117,13 @@ namespace ART.Domotica.Domain.Services
 
             var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
 
-            if (position == TempSensorAlarmPositionContract.High)
+            if (position == SensorChartLimiterPositionEnum.Max)
             {
                 var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
                 sensorTrigger.TriggerOn = alarmOn;
             }
-            else if (position == TempSensorAlarmPositionContract.Low)
+            else if (position == SensorChartLimiterPositionEnum.Min)
             {
                 var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
@@ -137,7 +135,7 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
-        public async Task<DSFamilyTempSensor> SetAlarmCelsius(Guid dsFamilyTempSensorId, TempSensorAlarmPositionContract position, decimal alarmCelsius)
+        public async Task<DSFamilyTempSensor> SetAlarmCelsius(Guid dsFamilyTempSensorId, SensorChartLimiterPositionEnum position, decimal alarmCelsius)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
 
@@ -148,13 +146,13 @@ namespace ART.Domotica.Domain.Services
 
             var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
 
-            if (position == TempSensorAlarmPositionContract.High)
+            if (position == SensorChartLimiterPositionEnum.Max)
             {
                 var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
                 sensorTrigger.TriggerValue = alarmCelsius.ToString();
             }
-            else if (position == TempSensorAlarmPositionContract.Low)
+            else if (position == SensorChartLimiterPositionEnum.Min)
             {
                 var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
@@ -166,7 +164,7 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
-        public async Task<DSFamilyTempSensor> SetAlarmBuzzerOn(Guid dsFamilyTempSensorId, TempSensorAlarmPositionContract position, bool alarmBuzzerOn)
+        public async Task<DSFamilyTempSensor> SetAlarmBuzzerOn(Guid dsFamilyTempSensorId, SensorChartLimiterPositionEnum position, bool alarmBuzzerOn)
         {
             var entity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
 
@@ -177,13 +175,13 @@ namespace ART.Domotica.Domain.Services
 
             var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
 
-            if (position == TempSensorAlarmPositionContract.High)
+            if (position == SensorChartLimiterPositionEnum.Max)
             {
                 var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
                 sensorTrigger.BuzzerOn = alarmBuzzerOn;
             }
-            else if (position == TempSensorAlarmPositionContract.Low)
+            else if (position == SensorChartLimiterPositionEnum.Min)
             {
                 var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
@@ -191,25 +189,6 @@ namespace ART.Domotica.Domain.Services
             }
 
             await _sensorTriggerRepository.Update(sensorTriggers);
-
-            return entity;
-        }
-
-        public async Task<SensorChartLimiter> SetChartLimiterCelsius(Guid sensorBaseId, TempSensorAlarmPositionContract position, decimal chartLimiterCelsius)
-        {
-            var entity = await _sensorChartLimiterRepository.GetById(sensorBaseId);
-
-            if (entity == null)
-            {
-                throw new Exception("DSFamilyTempSensor not found");
-            }
-
-            if (position == TempSensorAlarmPositionContract.High)
-                entity.Max = chartLimiterCelsius;
-            else if (position == TempSensorAlarmPositionContract.Low)
-                entity.Min = chartLimiterCelsius;
-
-            await _sensorChartLimiterRepository.Update(entity);
 
             return entity;
         }

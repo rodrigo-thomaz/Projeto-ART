@@ -2,21 +2,23 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetChartLimiterCelsiusRequestIoTContract
+    using ART.Domotica.Enums;
+
+    public class SensorChartLimiterSetValueRequestIoTContract
     {
         #region Properties
 
-        public decimal ChartLimiterCelsius
+        public SensorChartLimiterPositionEnum Position
         {
             get; set;
         }
 
-        public Guid DSFamilyTempSensorId
+        public Guid SensorChartLimiterId
         {
             get; set;
         }
 
-        public TempSensorAlarmPositionIoTContract Position
+        public decimal Value
         {
             get; set;
         }

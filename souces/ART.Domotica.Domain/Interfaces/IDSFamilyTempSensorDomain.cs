@@ -20,13 +20,11 @@
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
 
-        Task<DSFamilyTempSensor> SetAlarmBuzzerOn(Guid dsFamilyTempSensorId, TempSensorAlarmPositionContract position, bool alarmBuzzerOn);
+        Task<DSFamilyTempSensor> SetAlarmBuzzerOn(Guid dsFamilyTempSensorId, SensorChartLimiterPositionEnum position, bool alarmBuzzerOn);
 
-        Task<DSFamilyTempSensor> SetAlarmCelsius(Guid dsFamilyTempSensorId, TempSensorAlarmPositionContract position, decimal alarmCelsius);
+        Task<DSFamilyTempSensor> SetAlarmCelsius(Guid dsFamilyTempSensorId, SensorChartLimiterPositionEnum position, decimal alarmCelsius);
 
-        Task<DSFamilyTempSensor> SetAlarmOn(Guid dsFamilyTempSensorId, TempSensorAlarmPositionContract position, bool alarmOn);
-
-        Task<SensorChartLimiter> SetChartLimiterCelsius(Guid sensorBaseId, TempSensorAlarmPositionContract position, decimal chartLimiterCelsius);
+        Task<DSFamilyTempSensor> SetAlarmOn(Guid dsFamilyTempSensorId, SensorChartLimiterPositionEnum position, bool alarmOn);
 
         Task<DSFamilyTempSensor> SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId);
 

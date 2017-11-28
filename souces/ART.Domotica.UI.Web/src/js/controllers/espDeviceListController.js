@@ -107,7 +107,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
 }]);
 
-app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'unitOfMeasurementConverter', 'unitOfMeasurementTypeService', 'unitOfMeasurementService', 'sensorRangeService', 'dsFamilyTempSensorService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, unitOfMeasurementConverter, unitOfMeasurementTypeService, unitOfMeasurementService, sensorRangeService, dsFamilyTempSensorService) {
+app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'unitOfMeasurementConverter', 'unitOfMeasurementTypeService', 'unitOfMeasurementService', 'sensorRangeService', 'sensorChartLimiterService', 'dsFamilyTempSensorService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, unitOfMeasurementConverter, unitOfMeasurementTypeService, unitOfMeasurementService, sensorRangeService, sensorChartLimiterService, dsFamilyTempSensorService) {
 
     $scope.sensor = {};           
 
@@ -159,8 +159,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
     $scope.changeChartLimiterValue = function (position, chartLimiterValue) {
         if (!initialized || chartLimiterValue === undefined) return;
-        var chartLimiterCelsius = unitOfMeasurementConverter.convertToCelsius($scope.sensor.unitOfMeasurementId, chartLimiterValue);
-        dsFamilyTempSensorService.setChartLimiterCelsius($scope.sensor.dsFamilyTempSensorId, chartLimiterCelsius, position);
+        var value = unitOfMeasurementConverter.convertToCelsius($scope.sensor.unitOfMeasurementId, chartLimiterValue);
+        sensorChartLimiterService.setValue($scope.sensor.dsFamilyTempSensorId, value, position);
     };
 
     var initialized = false;
@@ -215,7 +215,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         clearOnSetAlarmOnCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmOnCompleted);
         clearOnSetAlarmCelsiusCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetAlarmCelsiusCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmCelsiusCompleted);
         clearOnSetAlarmBuzzerOnCompleted = $rootScope.$on('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmBuzzerOnCompleted);        
-        clearOnSetChartLimiterCelsiusCompleted = $rootScope.$on('dsFamilyTempSensorService_SetChartLimiterCelsiusCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetChartLimiterCelsiusCompleted);        
+        clearOnSetChartLimiterCelsiusCompleted = $rootScope.$on('sensorChartLimiterService_SetValueCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetChartLimiterCelsiusCompleted);        
         clearOnReadReceived = $rootScope.$on('ESPDeviceService_onReadReceived', onReadReceived);        
 
         initialized = true;
@@ -289,45 +289,45 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var onSetAlarmOnCompleted = function (event, data) {
-        if (data.position === 'High') {
+        if (data.position === 'Max') {
             $scope.highAlarmView.alarmOn = data.alarmOn;
             toaster.pop('success', 'Sucesso', 'Alarme alto ligado/desligado');
         }
-        else if (data.position === 'Low') {
+        else if (data.position === 'Min') {
             $scope.lowAlarmView.alarmOn = data.alarmOn;
             toaster.pop('success', 'Sucesso', 'Alarme baixo ligado/desligado');
         }
     };
 
     var onSetAlarmCelsiusCompleted = function (event, data) {
-        if (data.position === 'High') {
+        if (data.position === 'Max') {
             $scope.highAlarmView.alarmValue = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, data.alarmCelsius);
             toaster.pop('success', 'Sucesso', 'Alarme alto alterado');
         }
-        else if (data.position === 'Low') {
+        else if (data.position === 'Min') {
             $scope.lowAlarmView.alarmValue = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, data.alarmCelsius);
             toaster.pop('success', 'Sucesso', 'Alarme baixo alterado');
         }
     };
 
     var onSetAlarmBuzzerOnCompleted = function (event, data) {
-        if (data.position === 'High') {
+        if (data.position === 'Max') {
             $scope.highAlarmView.alarmBuzzerOn = data.alarmBuzzerOn;
             toaster.pop('success', 'Sucesso', 'Alarme buzzer alto ligado/desligado');
         }
-        else if (data.position === 'Low') {
+        else if (data.position === 'Min') {
             $scope.lowAlarmView.alarmBuzzerOn = data.alarmBuzzerOn;
             toaster.pop('success', 'Sucesso', 'Alarme buzzer baixo ligado/desligado');
         }
     };
 
     var onSetChartLimiterCelsiusCompleted = function (event, data) {
-        if (data.position === 'High') {
-            $scope.highChartLimiterView = data.chartLimiterCelsius;
+        if (data.position === 'Max') {
+            $scope.highChartLimiterView = data.value;
             toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
         }
-        else if (data.position === 'Low') {
-            $scope.lowChartLimiterView = data.chartLimiterCelsius;
+        else if (data.position === 'Min') {
+            $scope.lowChartLimiterView = data.value;
             toaster.pop('success', 'Sucesso', 'Limite baixo do gráfico alterado');
         }
     };

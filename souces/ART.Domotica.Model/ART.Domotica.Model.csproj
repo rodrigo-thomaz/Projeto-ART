@@ -46,7 +46,7 @@
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondCompletedModel.cs" />
     <Compile Include="DeviceNTPSetTimeZoneCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetLabelCompletedModel.cs" />
-    <Compile Include="DSFamilyTempSensorSetChartLimiterCelsiusCompletedModel.cs" />
+    <Compile Include="SensorChartLimiterSetValueCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmOnCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetAlarmCelsiusCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetUnitOfMeasurementCompletedModel.cs" />
@@ -64,7 +64,6 @@
     <Compile Include="ApplicationDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TempSensorAlarmGetDetailModel.cs" />
-    <Compile Include="TempSensorAlarmPositionModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ART.Domotica.Enums\ART.Domotica.Enums.csproj">

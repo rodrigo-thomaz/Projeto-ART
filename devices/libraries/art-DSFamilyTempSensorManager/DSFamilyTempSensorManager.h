@@ -20,8 +20,8 @@
 
 enum TempSensorAlarmPosition 
 { 
-	High = 0, 
-	Low  = 1, 
+	Max  = 0, 
+	Min  = 1, 
 };
 
 

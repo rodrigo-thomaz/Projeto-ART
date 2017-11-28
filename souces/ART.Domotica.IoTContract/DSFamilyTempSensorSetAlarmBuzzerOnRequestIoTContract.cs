@@ -2,6 +2,8 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
+
     public class DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract
     {
         #region Properties
@@ -16,7 +18,7 @@
             get; set;
         }
 
-        public TempSensorAlarmPositionIoTContract Position
+        public SensorChartLimiterPositionEnum Position
         {
             get; set;
         }
