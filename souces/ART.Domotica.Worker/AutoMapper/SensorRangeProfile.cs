@@ -5,13 +5,13 @@
 
     using global::AutoMapper;
 
-    public class TempSensorRangeProfile : Profile
+    public class SensorRangeProfile : Profile
     {
         #region Constructors
 
-        public TempSensorRangeProfile()
+        public SensorRangeProfile()
         {
-            CreateMap<SensorRange, TempSensorRangeGetDetailModel>();
+            CreateMap<SensorRange, SensorRangeGetDetailModel>();
         }
 
         #endregion Constructors

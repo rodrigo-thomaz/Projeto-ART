@@ -38,17 +38,17 @@
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
 
-            // Load TempSensorRanges
+            // Load SensorRanges
 
-            var tempSensorRangeIds = data
+            var sensorRangeIds = data
                 .SensorsInDevice
                 .Select(y => y.SensorBase as DSFamilyTempSensor)
-                        .Select(z => z.TempSensorRangeId)
+                        .Select(z => z.SensorRangeId)
                 .Distinct()
                 .ToList();
 
-            await _context.TempSensorRange
-                .Where(x => tempSensorRangeIds.Contains(x.Id))
+            await _context.SensorRange
+                .Where(x => sensorRangeIds.Contains(x.Id))
                 .LoadAsync();
 
             return data;
@@ -96,17 +96,17 @@
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();
 
-            // Load TempSensorRanges
+            // Load SensorRanges
 
-            var tempSensorRangeIds = data
+            var sensorRangeIds = data
                 .SelectMany(x => x.SensorsInDevice
                     .Select(y => y.SensorBase as DSFamilyTempSensor)
-                        .Select(z => z.TempSensorRangeId))
+                        .Select(z => z.SensorRangeId))
                 .Distinct()
                 .ToList();
 
-            await _context.TempSensorRange
-                .Where(x => tempSensorRangeIds.Contains(x.Id))
+            await _context.SensorRange
+                .Where(x => sensorRangeIds.Contains(x.Id))
                 .LoadAsync();
 
             return data;

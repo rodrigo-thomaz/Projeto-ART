@@ -16,7 +16,7 @@ namespace ART.Domotica.Repository.Repositories
 
         public async Task<List<SensorRange>> GetAll()
         {
-            return await _context.TempSensorRange
+            return await _context.SensorRange
                 .ToListAsync();
         }
     }

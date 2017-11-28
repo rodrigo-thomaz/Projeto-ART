@@ -36,14 +36,14 @@
                 .HasMaxLength(10)
                 .IsRequired();
 
-            //TempSensorRange
-            HasRequired(x => x.TempSensorRange)
+            //SensorRange
+            HasRequired(x => x.SensorRange)
                 .WithMany(x => x.DSFamilyTempSensors)
-                .HasForeignKey(x => x.TempSensorRangeId)
+                .HasForeignKey(x => x.SensorRangeId)
                 .WillCascadeOnDelete(false);
 
-            //TempSensorRangeId
-            Property(x => x.TempSensorRangeId)
+            //RangeId
+            Property(x => x.SensorRangeId)
                 .HasColumnOrder(3);
 
             //DSFamilyTempSensorResolution

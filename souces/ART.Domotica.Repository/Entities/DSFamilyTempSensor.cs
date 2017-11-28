@@ -45,12 +45,12 @@
             get; set;
         }
 
-        public SensorRange TempSensorRange
+        public SensorRange SensorRange
         {
             get; set;
         }
 
-        public byte TempSensorRangeId
+        public byte SensorRangeId
         {
             get; set;
         }

@@ -59,7 +59,7 @@
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());
                 x.AddProfile(new UnitOfMeasurementProfile());
-                x.AddProfile(new TempSensorRangeProfile());
+                x.AddProfile(new SensorRangeProfile());
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DeviceMQProfile());
                 x.AddProfile(new TimeZoneProfile());

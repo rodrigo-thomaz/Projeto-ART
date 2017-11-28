@@ -85,7 +85,7 @@
             get; set;
         }
 
-        public DbSet<SensorRange> TempSensorRange
+        public DbSet<SensorRange> SensorRange
         {
             get; set;
         }

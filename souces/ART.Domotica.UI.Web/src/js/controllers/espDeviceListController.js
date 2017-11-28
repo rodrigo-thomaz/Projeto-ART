@@ -198,9 +198,9 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         };        
 
         // Temp Sensor Range
-        $scope.tempSensorRangeView = {
-            min: unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.tempSensorRange.min),
-            max: unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.tempSensorRange.max),
+        $scope.sensorRangeView = {
+            min: unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.min),
+            max: unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.max),
         };  
 
         // Chart Limiter
@@ -257,8 +257,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         $scope.highAlarmView.alarmValue = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.highAlarm.alarmCelsius);
         $scope.lowAlarmView.alarmValue = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.lowAlarm.alarmCelsius);
 
-        $scope.tempSensorRangeView.min = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.tempSensorRange.min);
-        $scope.tempSensorRangeView.max = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.tempSensorRange.max);
+        $scope.sensorRangeView.min = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.sensorRange.min);
+        $scope.sensorRangeView.max = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.sensorRange.max);
 
         $scope.lowChartLimiterView = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.lowChartLimiterCelsius);
         $scope.highChartLimiterView = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.highChartLimiterCelsius);

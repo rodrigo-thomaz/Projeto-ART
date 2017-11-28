@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Model
 {
-    public class TempSensorRangeGetDetailModel
+    public class SensorRangeGetDetailModel
     {
         #region Properties
 

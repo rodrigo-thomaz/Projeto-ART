@@ -109,7 +109,7 @@
     <Compile Include="AutoMapper\UnitOfMeasurementTypeProfile.cs" />
     <Compile Include="AutoMapper\TimeZoneProfile.cs" />
     <Compile Include="AutoMapper\UnitOfMeasurementProfile.cs" />
-    <Compile Include="AutoMapper\TempSensorRangeProfile.cs" />
+    <Compile Include="AutoMapper\SensorRangeProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
     <Compile Include="Consumers\UnitOfMeasurementTypeConsumer.cs" />

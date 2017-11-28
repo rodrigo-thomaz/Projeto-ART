@@ -41,18 +41,18 @@
 
             #endregion
 
-            #region TempSensorRange
+            #region SensorRange
 
-            var tempSensorRange1 = context.TempSensorRange.SingleOrDefault(x => x.Id == 1);
+            var sensorRange1 = context.SensorRange.SingleOrDefault(x => x.Id == 1);
 
-            if (tempSensorRange1 == null)
+            if (sensorRange1 == null)
             {
-                tempSensorRange1 = new SensorRange { Id = 1 };
-                context.TempSensorRange.Add(tempSensorRange1);
+                sensorRange1 = new SensorRange { Id = 1 };
+                context.SensorRange.Add(sensorRange1);
             }
 
-            tempSensorRange1.Min = -55;
-            tempSensorRange1.Max = 125;
+            sensorRange1.Min = -55;
+            sensorRange1.Max = 125;
 
             context.SaveChanges();
 
@@ -396,7 +396,7 @@
                 {
                     DeviceAddress = sensor_1_Address,
                     Family = "DS18B20",
-                    TempSensorRangeId = tempSensorRange1.Id,
+                    SensorRangeId = sensorRange1.Id,
                     UnitOfMeasurementId = celsiusUnitOfMeasurement.Id,
                     UnitOfMeasurement = celsiusUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
@@ -453,7 +453,7 @@
                 {
                     DeviceAddress = sensor_2_1_Address,
                     Family = "DS18B20",
-                    TempSensorRangeId = tempSensorRange1.Id,
+                    SensorRangeId = sensorRange1.Id,
                     UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
                     UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
@@ -510,7 +510,7 @@
                 {
                     DeviceAddress = sensor_2_2_Address,
                     Family = "DS18B20",
-                    TempSensorRangeId = tempSensorRange1.Id,
+                    SensorRangeId = sensorRange1.Id,
                     UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
                     UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
@@ -567,7 +567,7 @@
                 {
                     DeviceAddress = sensor_3_1_Address,
                     Family = "DS18B20",
-                    TempSensorRangeId = tempSensorRange1.Id,
+                    SensorRangeId = sensorRange1.Id,
                     UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
                     UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
@@ -624,7 +624,7 @@
                 {
                     DeviceAddress = sensor_3_2_Address,
                     Family = "DS18B20",
-                    TempSensorRangeId = tempSensorRange1.Id,
+                    SensorRangeId = sensorRange1.Id,
                     UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
                     UnitOfMeasurement = fahrenheitUnitOfMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
