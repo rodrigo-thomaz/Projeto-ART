@@ -71,6 +71,7 @@
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwaresInProjectConfiguration.cs" />
     <Compile Include="Configurations\ProjectConfiguration.cs" />
+    <Compile Include="Configurations\SensorTriggerConfiguration.cs" />
     <Compile Include="Configurations\TemperatureSensorBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
     <Compile Include="Configurations\DeviceInApplicationConfiguration.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Entities\SensorBase.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
+    <Compile Include="Entities\SensorTrigger.cs" />
     <Compile Include="Entities\TemperatureSensorBase.cs" />
     <Compile Include="Entities\UnitOfMeasurement.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
@@ -121,6 +123,10 @@
     <Compile Include="Migrations\201711272256505_InitialCreate.cs" />
     <Compile Include="Migrations\201711272256505_InitialCreate.Designer.cs">
       <DependentUpon>201711272256505_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711281151497_InitialCreate2.cs" />
+    <Compile Include="Migrations\201711281151497_InitialCreate2.Designer.cs">
+      <DependentUpon>201711281151497_InitialCreate2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -178,6 +184,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201711272256505_InitialCreate.resx">
       <DependentUpon>201711272256505_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711281151497_InitialCreate2.resx">
+      <DependentUpon>201711281151497_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

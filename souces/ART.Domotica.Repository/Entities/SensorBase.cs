@@ -13,6 +13,11 @@
             get; set;
         }
 
+        public ICollection<SensorTrigger> SensorTriggers
+        {
+            get; set;
+        }
+
         public UnitOfMeasurement UnitOfMeasurement
         {
             get; set;

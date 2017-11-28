@@ -18,7 +18,7 @@
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
-                .IsRequired();           
+                .IsRequired();
         }
 
         #endregion Constructors

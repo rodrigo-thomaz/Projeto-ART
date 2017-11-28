@@ -1,7 +1,7 @@
-﻿using ART.Domotica.Enums;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using ART.Domotica.Enums;
+
     public class DSFamilyTempSensor : TemperatureSensorBase
     {
         #region Constructors
