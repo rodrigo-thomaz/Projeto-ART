@@ -384,11 +384,11 @@
             var sensor_3_1_Address = "40:255:192:95:147:22:4:195";
             var sensor_3_2_Address = "40:255:113:95:147:22:4:65";
 
-            var sensor_1 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
-            var sensor_2_1 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
-            var sensor_2_2 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
-            var sensor_3_1 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
-            var sensor_3_2 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
+            var sensor_1 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
+            var sensor_2_1 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
+            var sensor_2_2 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
+            var sensor_3_1 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
+            var sensor_3_2 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
 
             if (sensor_1 == null)
             {
@@ -448,6 +448,16 @@
                         BuzzerOn = true,
                     });
                 }
+
+                if (sensor_1.SensorChartLimiter == null)
+                {
+                    sensor_1.SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    };
+                }
+
             }
 
             if (sensor_2_1 == null)
@@ -507,6 +517,15 @@
                         TriggerValue = "125",
                         BuzzerOn = true,
                     });
+                }
+
+                if (sensor_2_1.SensorChartLimiter == null)
+                {
+                    sensor_2_1.SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    };
                 }
             }
 
@@ -568,6 +587,15 @@
                         BuzzerOn = true,
                     });
                 }
+
+                if (sensor_2_2.SensorChartLimiter == null)
+                {
+                    sensor_2_2.SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    };
+                }
             }
 
             if (sensor_3_1 == null)
@@ -628,6 +656,15 @@
                         BuzzerOn = true,
                     });
                 }
+
+                if (sensor_3_1.SensorChartLimiter == null)
+                {
+                    sensor_3_1.SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    };
+                }
             }
 
             if (sensor_3_2 == null)
@@ -687,6 +724,15 @@
                         TriggerValue = "125",
                         BuzzerOn = true,
                     });
+                }
+
+                if (sensor_3_2.SensorChartLimiter == null)
+                {
+                    sensor_3_2.SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    };
                 }
             }
 
