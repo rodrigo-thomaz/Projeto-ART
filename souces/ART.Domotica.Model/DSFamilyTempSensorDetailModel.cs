@@ -43,7 +43,7 @@
             get; set;
         }
 
-        public SensorRangeDetailModel SensorRange
+        public byte SensorRangeId
         {
             get; set;
         }

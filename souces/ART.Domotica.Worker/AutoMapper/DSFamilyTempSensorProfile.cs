@@ -69,7 +69,7 @@
             CreateMap<SensorsInDevice, DSFamilyTempSensorDetailModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.SensorBaseId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).DSFamilyTempSensorResolutionId))
-                .ForMember(vm => vm.SensorRange, m => m.MapFrom(x => x.SensorBase.SensorRange))
+                .ForMember(vm => vm.SensorRangeId, m => m.MapFrom(x => x.SensorBase.SensorRangeId.Value))
                 .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorBase.SensorChartLimiter.Min))
                 .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorBase.SensorChartLimiter.Max))
                 .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).UnitOfMeasurementId))
