@@ -45,20 +45,6 @@
             //DSFamilyTempSensorResolutionId
             Property(x => x.DSFamilyTempSensorResolutionId)
                 .HasColumnOrder(3);
-
-            //LowChartLimiterCelsius
-            Property(x => x.LowChartLimiterCelsius)
-                .HasColumnOrder(4)
-                .HasPrecision(7, 4)
-                .HasColumnName("LowChartLimiterCelsius")
-                .IsRequired();
-
-            //HighChartLimiterCelsius
-            Property(x => x.HighChartLimiterCelsius)
-                .HasColumnOrder(5)
-                .HasPrecision(7, 4)
-                .HasColumnName("HighChartLimiterCelsius")
-                .IsRequired();
         }
 
         #endregion Constructors

@@ -35,6 +35,7 @@
             var data = await _context.ESPDevice
                 .Include(x => x.SensorsInDevice.Select(y => y.SensorBase.SensorRange))
                 .Include(x => x.SensorsInDevice.Select(y => y.SensorBase.SensorTriggers))
+                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase.SensorChartLimiter))
                 .Include(x => x.DeviceMQ)
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
@@ -80,22 +81,11 @@
             var data = await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)
                 .Include(x => x.DeviceNTP)
-                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase).Select(z => z.SensorTriggers))
+                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase.SensorTriggers))
+                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase.SensorChartLimiter))
+                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase.SensorRange))
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
-                .ToListAsync();
-
-            // Load SensorRanges
-
-            var sensorRangeIds = data
-                .SelectMany(x => x.SensorsInDevice
-                    .Select(y => y.SensorBase as DSFamilyTempSensor)
-                        .Select(z => z.SensorRangeId))
-                .Distinct()
-                .ToList();
-
-            await _context.SensorRange
-                .Where(x => sensorRangeIds.Contains(x.Id))
-                .LoadAsync();
+                .ToListAsync();           
 
             return data;
         } 

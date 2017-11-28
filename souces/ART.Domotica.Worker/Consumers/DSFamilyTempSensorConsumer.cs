@@ -482,7 +482,8 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetChartLimiterCelsiusRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var data = await domain.SetChartLimiterCelsius(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.ChartLimiterCelsius);
+            await domain.SetChartLimiterCelsius(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.ChartLimiterCelsius);
+            var data = await domain.GetById(message.Contract.DSFamilyTempSensorId);
 
             var exchange = "amq.topic";
 

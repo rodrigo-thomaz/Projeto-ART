@@ -23,6 +23,7 @@ namespace ART.Domotica.Domain.Services
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepository;
         private readonly ISensorTriggerRepository _sensorTriggerRepository;
+        private readonly ISensorChartLimiterRepository _sensorChartLimiterRepository;
 
         #endregion
 
@@ -37,6 +38,7 @@ namespace ART.Domotica.Domain.Services
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _unitOfMeasurementRepository = new UnitOfMeasurementRepository(context);
             _sensorTriggerRepository = new SensorTriggerRepository(context);
+            _sensorChartLimiterRepository = new SensorChartLimiterRepository(context);
         }
 
         #endregion
@@ -193,9 +195,9 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
-        public async Task<DSFamilyTempSensor> SetChartLimiterCelsius(Guid dsFamilyTempSensorId, TempSensorAlarmPositionContract position, decimal chartLimiterCelsius)
+        public async Task<SensorChartLimiter> SetChartLimiterCelsius(Guid sensorBaseId, TempSensorAlarmPositionContract position, decimal chartLimiterCelsius)
         {
-            var entity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
+            var entity = await _sensorChartLimiterRepository.GetById(sensorBaseId);
 
             if (entity == null)
             {
@@ -203,11 +205,11 @@ namespace ART.Domotica.Domain.Services
             }
 
             if (position == TempSensorAlarmPositionContract.High)
-                entity.HighChartLimiterCelsius = chartLimiterCelsius;
+                entity.Max = chartLimiterCelsius;
             else if (position == TempSensorAlarmPositionContract.Low)
-                entity.LowChartLimiterCelsius = chartLimiterCelsius;
+                entity.Min = chartLimiterCelsius;
 
-            await _dsFamilyTempSensorRepository.Update(entity);
+            await _sensorChartLimiterRepository.Update(entity);
 
             return entity;
         }
@@ -215,6 +217,18 @@ namespace ART.Domotica.Domain.Services
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)
         {
             var data = await _dsFamilyTempSensorRepository.GetDeviceFromSensor(dsFamilyTempSensorId);
+
+            if (data == null)
+            {
+                throw new Exception("DSFamilyTempSensor not found");
+            }
+
+            return data;
+        }
+
+        public async Task<DSFamilyTempSensor> GetById(Guid dsFamilyTempSensorId)
+        {
+            var data = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
 
             if (data == null)
             {

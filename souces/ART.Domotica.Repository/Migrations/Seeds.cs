@@ -417,8 +417,11 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowChartLimiterCelsius = 20,
-                    HighChartLimiterCelsius = 30,
+                    SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_1);
@@ -474,8 +477,11 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowChartLimiterCelsius = 20,
-                    HighChartLimiterCelsius = 30,
+                    SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_1);
@@ -531,8 +537,11 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowChartLimiterCelsius = 20,
-                    HighChartLimiterCelsius = 30,
+                    SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_2_2);
@@ -588,8 +597,11 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowChartLimiterCelsius = 20,
-                    HighChartLimiterCelsius = 30,
+                    SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_1);
@@ -645,8 +657,11 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowChartLimiterCelsius = 20,
-                    HighChartLimiterCelsius = 30,
+                    SensorChartLimiter = new SensorChartLimiter
+                    {
+                        Min = 20,
+                        Max = 30,
+                    },
                     CreateDate = DateTime.Now,
                 };
                 context.DSFamilyTempSensor.Add(sensor_3_2);

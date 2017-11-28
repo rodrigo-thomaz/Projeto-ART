@@ -28,6 +28,7 @@ namespace ART.Domotica.Repository.Repositories
         {
             return await _context.DSFamilyTempSensor
                 .Include(x => x.DSFamilyTempSensorResolution)
+                .Include(x => x.SensorChartLimiter)
                 .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == deviceId) != null)
                 .ToListAsync();
         }

@@ -33,17 +33,7 @@
         public string Family
         {
             get; set;
-        }
-
-        public decimal HighChartLimiterCelsius
-        {
-            get; set;
-        }
-
-        public decimal LowChartLimiterCelsius
-        {
-            get; set;
-        }        
+        } 
 
         #endregion Properties
     }

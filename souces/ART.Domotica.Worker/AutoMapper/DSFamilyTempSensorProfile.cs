@@ -32,8 +32,8 @@
                     return result;
                 }))
                 .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.DSFamilyTempSensorResolution.Bits))
-                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.LowChartLimiterCelsius))
-                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.HighChartLimiterCelsius))
+                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorChartLimiter.Min))
+                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorChartLimiter.Max))
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
 
             CreateMap<TempSensorAlarmPositionContract, TempSensorAlarmPositionIoTContract>();
@@ -70,8 +70,8 @@
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.SensorBaseId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).DSFamilyTempSensorResolutionId))
                 .ForMember(vm => vm.SensorRange, m => m.MapFrom(x => x.SensorBase.SensorRange))
-                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).LowChartLimiterCelsius))
-                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).HighChartLimiterCelsius))
+                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorBase.SensorChartLimiter.Min))
+                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorBase.SensorChartLimiter.Max))
                 .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).UnitOfMeasurementId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).Label))
                 .ForMember(vm => vm.HighAlarm, m => m.ResolveUsing(src => {
