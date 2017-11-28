@@ -21,6 +21,7 @@ namespace ART.Domotica.Domain.Services
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepository;
+        private readonly ISensorTriggerRepository _sensorTriggerRepository;
 
         #endregion
 
@@ -34,6 +35,7 @@ namespace ART.Domotica.Domain.Services
             _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _unitOfMeasurementRepository = new UnitOfMeasurementRepository(context);
+            _sensorTriggerRepository = new SensorTriggerRepository(context);
         }
 
         #endregion
