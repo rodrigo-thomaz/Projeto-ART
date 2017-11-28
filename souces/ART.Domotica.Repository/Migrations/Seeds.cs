@@ -384,11 +384,11 @@
             var sensor_3_1_Address = "40:255:192:95:147:22:4:195";
             var sensor_3_2_Address = "40:255:113:95:147:22:4:65";
 
-            var sensor_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
-            var sensor_2_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
-            var sensor_2_2 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
-            var sensor_3_1 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
-            var sensor_3_2 = context.DSFamilyTempSensor.SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
+            var sensor_1 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
+            var sensor_2_1 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
+            var sensor_2_2 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
+            var sensor_3_1 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
+            var sensor_3_2 = context.DSFamilyTempSensor.Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
 
             if (sensor_1 == null)
             {
@@ -417,18 +417,6 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = -55,
-                        AlarmBuzzerOn = false,
-                    },
-                    HighAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = 125,
-                        AlarmBuzzerOn = false,
-                    },
                     LowChartLimiterCelsius = 20,
                     HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
@@ -440,7 +428,7 @@
                 sensor_1.Family = "DS18B20";
                 sensor_1.DeviceAddress = sensor_1_Address;
 
-                if(sensor_1.SensorTriggers == null)
+                if(!sensor_1.SensorTriggers.Any())
                 {
                     sensor_1.SensorTriggers = new List<SensorTrigger>();
 
@@ -486,18 +474,6 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = -55,
-                        AlarmBuzzerOn = false,
-                    },
-                    HighAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = 125,
-                        AlarmBuzzerOn = false,
-                    },
                     LowChartLimiterCelsius = 20,
                     HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
@@ -509,7 +485,7 @@
                 sensor_2_1.Family = "DS18B20";
                 sensor_2_1.DeviceAddress = sensor_2_1_Address;
 
-                if (sensor_2_1.SensorTriggers == null)
+                if (!sensor_2_1.SensorTriggers.Any())
                 {
                     sensor_2_1.SensorTriggers = new List<SensorTrigger>();
 
@@ -555,18 +531,6 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = -55,
-                        AlarmBuzzerOn = false,
-                    },
-                    HighAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = 125,
-                        AlarmBuzzerOn = false,
-                    },
                     LowChartLimiterCelsius = 20,
                     HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
@@ -578,7 +542,7 @@
                 sensor_2_2.Family = "DS18B20";
                 sensor_2_2.DeviceAddress = sensor_2_2_Address;
 
-                if (sensor_2_2.SensorTriggers == null)
+                if (!sensor_2_2.SensorTriggers.Any())
                 {
                     sensor_2_2.SensorTriggers = new List<SensorTrigger>();
 
@@ -624,18 +588,6 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = -55,
-                        AlarmBuzzerOn = false,
-                    },
-                    HighAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = 125,
-                        AlarmBuzzerOn = false,
-                    },
                     LowChartLimiterCelsius = 20,
                     HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
@@ -647,7 +599,7 @@
                 sensor_3_1.Family = "DS18B20";
                 sensor_3_1.DeviceAddress = sensor_3_1_Address;
 
-                if (sensor_3_1.SensorTriggers == null)
+                if (!sensor_3_1.SensorTriggers.Any())
                 {
                     sensor_3_1.SensorTriggers = new List<SensorTrigger>();
 
@@ -693,18 +645,6 @@
                             BuzzerOn = true,
                         },
                     },
-                    LowAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = -55,
-                        AlarmBuzzerOn = false,
-                    },
-                    HighAlarm = new TempSensorAlarm
-                    {
-                        AlarmOn = false,
-                        AlarmCelsius = 125,
-                        AlarmBuzzerOn = false,
-                    },
                     LowChartLimiterCelsius = 20,
                     HighChartLimiterCelsius = 30,
                     CreateDate = DateTime.Now,
@@ -716,7 +656,7 @@
                 sensor_3_2.Family = "DS18B20";
                 sensor_3_2.DeviceAddress = sensor_3_2_Address;
 
-                if (sensor_3_2.SensorTriggers == null)
+                if (!sensor_3_2.SensorTriggers.Any())
                 {
                     sensor_3_2.SensorTriggers = new List<SensorTrigger>();
 

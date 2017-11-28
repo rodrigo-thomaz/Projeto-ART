@@ -35,17 +35,7 @@
             get; set;
         }
 
-        public TempSensorAlarm HighAlarm
-        {
-            get; set;
-        }
-
         public decimal HighChartLimiterCelsius
-        {
-            get; set;
-        }
-
-        public TempSensorAlarm LowAlarm
         {
             get; set;
         }

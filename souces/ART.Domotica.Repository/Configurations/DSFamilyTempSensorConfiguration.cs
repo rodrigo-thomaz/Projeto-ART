@@ -56,54 +56,16 @@
             Property(x => x.DSFamilyTempSensorResolutionId)
                 .HasColumnOrder(4);
 
-            //LowTempSensorAlarm.AlarmOn
-            Property(x => x.LowAlarm.AlarmOn)
-                .HasColumnOrder(5)
-                .HasColumnName("LowAlarmOn")
-                .IsRequired();
-
-            //LowTempSensorAlarm.AlarmCelsius
-            Property(x => x.LowAlarm.AlarmCelsius)
-                .HasColumnOrder(6)
-                .HasPrecision(7, 4)
-                .HasColumnName("LowAlarmCelsius")
-                .IsRequired();
-
-            //LowTempSensorAlarm.AlarmBuzzerOn
-            Property(x => x.LowAlarm.AlarmBuzzerOn)
-                .HasColumnOrder(7)
-                .HasColumnName("LowAlarmBuzzerOn")
-                .IsRequired();
-
-            //HighTempSensorAlarm.AlarmOn
-            Property(x => x.HighAlarm.AlarmOn)
-                .HasColumnOrder(8)
-                .HasColumnName("HighAlarmOn")
-                .IsRequired();
-
-            //HighTempSensorAlarm.AlarmCelsius
-            Property(x => x.HighAlarm.AlarmCelsius)
-                .HasColumnOrder(9)
-                .HasPrecision(7, 4)
-                .HasColumnName("HighAlarmCelsius")
-                .IsRequired();
-
-            //HighTempSensorAlarm.AlarmBuzzerOn
-            Property(x => x.HighAlarm.AlarmBuzzerOn)
-                .HasColumnOrder(10)
-                .HasColumnName("HighAlarmBuzzerOn")
-                .IsRequired();
-
             //LowChartLimiterCelsius
             Property(x => x.LowChartLimiterCelsius)
-                .HasColumnOrder(11)
+                .HasColumnOrder(5)
                 .HasPrecision(7, 4)
                 .HasColumnName("LowChartLimiterCelsius")
                 .IsRequired();
 
             //HighChartLimiterCelsius
             Property(x => x.HighChartLimiterCelsius)
-                .HasColumnOrder(12)
+                .HasColumnOrder(6)
                 .HasPrecision(7, 4)
                 .HasColumnName("HighChartLimiterCelsius")
                 .IsRequired();

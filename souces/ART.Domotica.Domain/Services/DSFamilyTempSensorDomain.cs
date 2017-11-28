@@ -113,16 +113,7 @@ namespace ART.Domotica.Domain.Services
             if (entity == null)
             {
                 throw new Exception("DSFamilyTempSensor not found");
-            }
-
-            if(position == TempSensorAlarmPositionContract.High)
-                entity.HighAlarm.AlarmOn = alarmOn;
-            else if (position == TempSensorAlarmPositionContract.Low)
-                entity.LowAlarm.AlarmOn = alarmOn;
-
-            await _dsFamilyTempSensorRepository.Update(entity);
-
-            // SensorTrigger
+            }           
 
             var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
 
@@ -153,15 +144,6 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            if (position == TempSensorAlarmPositionContract.High)
-                entity.HighAlarm.AlarmCelsius = alarmCelsius;
-            else if (position == TempSensorAlarmPositionContract.Low)
-                entity.LowAlarm.AlarmCelsius = alarmCelsius;
-            
-            await _dsFamilyTempSensorRepository.Update(entity);
-
-            // SensorTrigger
-
             var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
 
             if (position == TempSensorAlarmPositionContract.High)
@@ -190,15 +172,6 @@ namespace ART.Domotica.Domain.Services
             {
                 throw new Exception("DSFamilyTempSensor not found");
             }
-
-            if (position == TempSensorAlarmPositionContract.High)
-                entity.HighAlarm.AlarmBuzzerOn = alarmBuzzerOn;
-            else if (position == TempSensorAlarmPositionContract.Low)
-                entity.LowAlarm.AlarmBuzzerOn = alarmBuzzerOn;
-
-            await _dsFamilyTempSensorRepository.Update(entity);
-
-            // SensorTrigger
 
             var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
 

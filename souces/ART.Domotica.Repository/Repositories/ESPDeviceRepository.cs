@@ -92,7 +92,7 @@
             var data = await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)
                 .Include(x => x.DeviceNTP)
-                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase))
+                .Include(x => x.SensorsInDevice.Select(y => y.SensorBase).Select(z => z.SensorTriggers))
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();
 

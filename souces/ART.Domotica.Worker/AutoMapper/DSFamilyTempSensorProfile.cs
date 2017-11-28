@@ -8,6 +8,7 @@
     using ART.Domotica.Repository.Entities;
 
     using global::AutoMapper;
+    using System;
 
     public class DSFamilyTempSensorProfile : Profile
     {
@@ -15,7 +16,10 @@
 
         public DSFamilyTempSensorProfile()
         {
-            CreateMap<TempSensorAlarm, TempSensorAlarmResponseIoTContract>();
+            CreateMap<SensorTrigger, TempSensorAlarmResponseIoTContract>()
+                .ForMember(vm => vm.AlarmOn, m => m.MapFrom(x => x.TriggerOn))
+                .ForMember(vm => vm.AlarmCelsius, m => m.MapFrom(x => Convert.ToDecimal(x.TriggerValue)))
+                .ForMember(vm => vm.AlarmBuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>()
                 .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
@@ -57,18 +61,29 @@
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
                 .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => x.UnitOfMeasurementId));
 
-            CreateMap<TempSensorAlarm, TempSensorAlarmGetDetailModel>();
+            CreateMap<SensorTrigger, TempSensorAlarmGetDetailModel>()
+                .ForMember(vm => vm.AlarmOn, m => m.MapFrom(x => x.TriggerOn))
+                .ForMember(vm => vm.AlarmCelsius, m => m.MapFrom(x => Convert.ToDecimal(x.TriggerValue)))
+                .ForMember(vm => vm.AlarmBuzzerOn, m => m.MapFrom(x => x.BuzzerOn)); ;
 
             CreateMap<SensorsInDevice, DSFamilyTempSensorDetailModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.SensorBaseId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).DSFamilyTempSensorResolutionId))
                 .ForMember(vm => vm.TempSensorRange, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).TempSensorRange))
-                .ForMember(vm => vm.HighAlarm, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).HighAlarm))
-                .ForMember(vm => vm.LowAlarm, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).LowAlarm))
                 .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).LowChartLimiterCelsius))
                 .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).HighChartLimiterCelsius))
                 .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).UnitOfMeasurementId))
-                .ForMember(vm => vm.Label, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).Label));
+                .ForMember(vm => vm.Label, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).Label))
+                .ForMember(vm => vm.HighAlarm, m => m.ResolveUsing(src => {
+                    var max = src.SensorBase.SensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
+                    var sensorTrigger = src.SensorBase.SensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == max);
+                    return sensorTrigger;
+                }))
+                .ForMember(vm => vm.LowAlarm, m => m.ResolveUsing(src => {
+                    var min = src.SensorBase.SensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
+                    var sensorTrigger = src.SensorBase.SensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == min);
+                    return sensorTrigger;
+                }));
 
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionDetailModel>();
         }
