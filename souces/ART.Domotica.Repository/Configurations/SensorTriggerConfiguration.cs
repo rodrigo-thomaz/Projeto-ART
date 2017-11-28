@@ -37,10 +37,10 @@
                 .IsRequired();
 
             //TriggerValue
-            //Property(x => x.TriggerValue)
-            //    .HasColumnOrder(3)
-            //    .HasPrecision(7, 4)
-            //    .IsRequired();
+            Property(x => x.TriggerValue)
+                .HasColumnOrder(3)
+                .HasMaxLength(50)
+                .IsRequired();
 
             //BuzzerOn
             Property(x => x.BuzzerOn)

@@ -33,10 +33,10 @@
             get; set;
         }
 
-        //public decimal TriggerValue
-        //{
-        //    get; set;
-        //}
+        public string TriggerValue
+        {
+            get; set;
+        }
 
         #endregion Properties
     }
