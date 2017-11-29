@@ -25,11 +25,6 @@
             get; set;
         }
 
-        public DbSet<SensorUnitOfMeasurementDefault> SensorUnitOfMeasurementDefault
-        {
-            get; set;
-        }
-
         public DbSet<Application> Application
         {
             get; set;
@@ -90,6 +85,11 @@
             get; set;
         }
 
+        public DbSet<SensorDatasheet> SensorDataSheet
+        {
+            get; set;
+        }
+
         public DbSet<SensorRange> SensorRange
         {
             get; set;
@@ -110,7 +110,7 @@
             get; set;
         }
 
-        public DbSet<SensorDatasheet> SensorDataSheet
+        public DbSet<SensorUnitOfMeasurementDefault> SensorUnitOfMeasurementDefault
         {
             get; set;
         }

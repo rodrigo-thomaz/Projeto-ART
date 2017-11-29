@@ -22,7 +22,10 @@
             get; set;
         }
 
-        public SensorUnitOfMeasurementDefault SensorUnitOfMeasurementDefault { get; set; }
+        public SensorUnitOfMeasurementDefault SensorUnitOfMeasurementDefault
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

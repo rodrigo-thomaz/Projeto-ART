@@ -1,11 +1,23 @@
-﻿using ART.Domotica.Enums;
-using ART.Infra.CrossCutting.Repository;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
+
     public class SensorUnitOfMeasurementDefault : IEntity<SensorDatasheetEnum>
     {
+        #region Properties
+
         public SensorDatasheetEnum Id
+        {
+            get; set;
+        }
+
+        public decimal Max
+        {
+            get; set;
+        }
+
+        public decimal Min
         {
             get; set;
         }
@@ -29,23 +41,17 @@ namespace ART.Domotica.Repository.Entities
         {
             get; set;
         }
+
         public UnitOfMeasurementEnum UnitOfMeasurementId
         {
             get; set;
         }
+
         public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
             get; protected set;
         }
-        public decimal Max
-        {
-            get; set;
-        }
-        public decimal Min
-        {
-            get; set;
-        }
 
-        
+        #endregion Properties
     }
 }

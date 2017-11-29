@@ -2,9 +2,21 @@ namespace ART.Domotica.Repository.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class Initial5 : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.SensorUnitOfMeasurementDefault", new[] { "UnitOfMeasurementId", "UnitOfMeasurementTypeId" }, "dbo.UnitOfMeasurement");
+            DropForeignKey("dbo.SensorUnitOfMeasurementDefault", "SensorTypeId", "dbo.SensorType");
+            DropForeignKey("dbo.SensorUnitOfMeasurementDefault", new[] { "Id", "SensorTypeId" }, "dbo.SensorDatasheet");
+            DropIndex("dbo.SensorUnitOfMeasurementDefault", new[] { "UnitOfMeasurementId", "UnitOfMeasurementTypeId" });
+            DropIndex("dbo.SensorUnitOfMeasurementDefault", new[] { "Id", "SensorTypeId" });
+            DropTable("dbo.SensorUnitOfMeasurementDefault");
+        }
+
         public override void Up()
         {
             CreateTable(
@@ -24,17 +36,8 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.UnitOfMeasurement", t => new { t.UnitOfMeasurementId, t.UnitOfMeasurementTypeId })
                 .Index(t => new { t.Id, t.SensorTypeId })
                 .Index(t => new { t.UnitOfMeasurementId, t.UnitOfMeasurementTypeId });
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.SensorUnitOfMeasurementDefault", new[] { "UnitOfMeasurementId", "UnitOfMeasurementTypeId" }, "dbo.UnitOfMeasurement");
-            DropForeignKey("dbo.SensorUnitOfMeasurementDefault", "SensorTypeId", "dbo.SensorType");
-            DropForeignKey("dbo.SensorUnitOfMeasurementDefault", new[] { "Id", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropIndex("dbo.SensorUnitOfMeasurementDefault", new[] { "UnitOfMeasurementId", "UnitOfMeasurementTypeId" });
-            DropIndex("dbo.SensorUnitOfMeasurementDefault", new[] { "Id", "SensorTypeId" });
-            DropTable("dbo.SensorUnitOfMeasurementDefault");
-        }
+
+        #endregion Methods
     }
 }

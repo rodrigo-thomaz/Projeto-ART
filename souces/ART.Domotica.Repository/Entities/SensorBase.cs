@@ -1,9 +1,9 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using System;
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
-    using System;
     using ART.Infra.CrossCutting.Repository;
 
     public abstract class SensorBase : IEntity<Guid>
