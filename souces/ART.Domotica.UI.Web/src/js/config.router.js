@@ -56,7 +56,6 @@ angular.module('app')
                       'js/services/espDeviceService.js',
 
                       'js/controllers/sensorChartLimiterController.js',
-                      'js/controllers/sensorRangeController.js',
                       'js/controllers/sensorTriggerController.js',
 
                       'js/controllers/espDeviceListController.js',                      
