@@ -4,7 +4,6 @@ using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Interfaces;
 using ART.Domotica.Repository.Entities;
 using System.Collections.Generic;
-using ART.Domotica.Contract;
 using ART.Infra.CrossCutting.Domain;
 using Autofac;
 using ART.Domotica.Repository;

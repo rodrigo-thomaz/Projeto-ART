@@ -48,6 +48,7 @@ angular.module('app')
                       'js/services/unitOfMeasurementConverter.js',
                       'js/services/sensorRangeService.js',
                       'js/services/sensorChartLimiterService.js',
+                      'js/services/sensorTriggerService.js',
                       'js/services/timeZoneService.js',                      
                       'js/services/deviceNTPService.js',
                       'js/services/dsFamilyTempSensorResolutionService.js',

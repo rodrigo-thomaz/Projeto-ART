@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.IoTContract
 {
-    public class TempSensorAlarmResponseIoTContract
+    public class SensorTriggerGetResponseIoTContract
     {
         #region Properties
 

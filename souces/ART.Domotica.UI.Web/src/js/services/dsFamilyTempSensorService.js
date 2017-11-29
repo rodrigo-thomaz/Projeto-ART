@@ -45,50 +45,14 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         return $http.post(serviceBase + 'api/dsFamilyTempSensor/setLabel', data).then(function (results) {
             return results;
         });
-    };
-
-    var setAlarmOn = function (dsFamilyTempSensorId, alarmOn, position) {
-        var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
-            alarmOn: alarmOn,
-            position: position,
-        }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setAlarmOn', data).then(function (results) {
-            return results;
-        });
-    };
-
-    var setAlarmCelsius = function (dsFamilyTempSensorId, alarmCelsius, position) {
-        var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
-            alarmCelsius: alarmCelsius,
-            position: position,
-        }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setAlarmCelsius', data).then(function (results) {
-            return results;
-        });
-    };
-
-    var setAlarmBuzzerOn = function (dsFamilyTempSensorId, alarmBuzzerOn, position) {
-        var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
-            alarmBuzzerOn: alarmBuzzerOn,
-            position: position,
-        }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setAlarmBuzzerOn', data).then(function (results) {
-            return results;
-        });
-    };
+    };   
 
     var onConnected = function () {
 
         stompService.subscribeAllViews('DSFamilyTempSensor.SetUnitOfMeasurementViewCompleted', onSetUnitOfMeasurementCompleted);
         stompService.subscribeAllViews('DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
         stompService.subscribeAllViews('DSFamilyTempSensor.SetLabelViewCompleted', onSetLabelCompleted);
-        stompService.subscribeAllViews('DSFamilyTempSensor.SetAlarmOnViewCompleted', onSetAlarmOnCompleted);
-        stompService.subscribeAllViews('DSFamilyTempSensor.SetAlarmCelsiusViewCompleted', onSetAlarmCelsiusCompleted);
-        stompService.subscribeAllViews('DSFamilyTempSensor.SetAlarmBuzzerOnViewCompleted', onSetAlarmBuzzerOnCompleted);
-
+        
         if (!initialized) {
             initialized = true;            
         }
@@ -113,37 +77,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
         sensor.label = result.label;
         $rootScope.$emit('dsFamilyTempSensorService_onSetLabelCompleted_Id_' + result.dsFamilyTempSensorId, result);
-    }
-
-    var onSetAlarmOnCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
-        if (result.position === 'Low')
-            sensor.lowAlarm.alarmOn = result.alarmOn;
-        else if (result.position === 'High')
-            sensor.highAlarm.alarmOn = result.alarmOn;
-        $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
-    }
-
-    var onSetAlarmCelsiusCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
-        if (result.position === 'Low')
-            sensor.lowAlarm.alarmCelsius = result.alarmCelsius;
-        else if (result.position === 'High')
-            sensor.highAlarm.alarmCelsius = result.alarmCelsius;
-        $rootScope.$emit('dsFamilyTempSensorService_onSetAlarmCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
-    }
-
-    var onSetAlarmBuzzerOnCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
-        if (result.position === 'Low')
-            sensor.lowAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
-        else if (result.position === 'High')
-            sensor.highAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
-        $rootScope.$emit('dsFamilyTempSensorService_SetAlarmBuzzerOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
-    }
+    }    
 
     $rootScope.$on('$destroy', function () {
         clearOnConnected();
@@ -161,11 +95,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     serviceFactory.setUnitOfMeasurement = setUnitOfMeasurement;
     serviceFactory.setResolution = setResolution;
-    serviceFactory.setLabel = setLabel;
-
-    serviceFactory.setAlarmOn = setAlarmOn;
-    serviceFactory.setAlarmCelsius = setAlarmCelsius;
-    serviceFactory.setAlarmBuzzerOn = setAlarmBuzzerOn;    
+    serviceFactory.setLabel = setLabel;   
 
     return serviceFactory;
 

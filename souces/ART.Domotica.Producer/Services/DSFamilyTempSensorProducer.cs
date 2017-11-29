@@ -47,34 +47,7 @@ namespace ART.Domotica.Producer.Services
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
                 _model.BasicPublish("", DSFamilyTempSensorConstants.SetResolutionQueueName, null, payload);
             });
-        }
-
-        public async Task SetAlarmOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmOnRequestContract> message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmOnQueueName, null, payload);
-            });
-        }
-
-        public async Task SetAlarmCelsius(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmCelsiusRequestContract> message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmCelsiusQueueName, null, payload);
-            });
-        }
-
-        public async Task SetAlarmBuzzerOn(AuthenticatedMessageContract<DSFamilyTempSensorSetAlarmBuzzerOnRequestContract> message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetAlarmBuzzerOnQueueName, null, payload);
-            });                        
-        }
+        }        
 
         public async Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message)
         {
@@ -118,27 +91,6 @@ namespace ART.Domotica.Producer.Services
                , exclusive: false
                , autoDelete: false
                , arguments: null);
-
-            _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetAlarmOnQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
-
-            _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetAlarmCelsiusQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
-
-            _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetAlarmBuzzerOnQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
         }
 
         #endregion

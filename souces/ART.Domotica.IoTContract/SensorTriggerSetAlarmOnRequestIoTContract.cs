@@ -1,14 +1,14 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.IoTContract
 {
     using System;
 
     using ART.Domotica.Enums;
 
-    public class DSFamilyTempSensorSetAlarmCelsiusRequestContract
+    public class SensorTriggerSetAlarmOnRequestIoTContract
     {
         #region Properties
 
-        public decimal AlarmCelsius
+        public bool AlarmOn
         {
             get; set;
         }

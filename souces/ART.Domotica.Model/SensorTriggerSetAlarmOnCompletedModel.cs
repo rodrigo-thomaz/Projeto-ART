@@ -4,11 +4,11 @@
 
     using ART.Domotica.Enums;
 
-    public class DSFamilyTempSensorSetAlarmCelsiusCompletedModel
+    public class SensorTriggerSetAlarmOnCompletedModel
     {
         #region Properties
 
-        public decimal AlarmCelsius
+        public bool AlarmOn
         {
             get; set;
         }

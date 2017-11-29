@@ -57,6 +57,7 @@
                 x.AddProfile(new ApplicationMQProfile());
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new SensorRangeProfile());
+                x.AddProfile(new SensorTriggerProfile());
                 x.AddProfile(new SensorChartLimiterProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());

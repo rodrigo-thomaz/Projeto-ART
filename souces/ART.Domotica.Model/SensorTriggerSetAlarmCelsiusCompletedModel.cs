@@ -1,14 +1,19 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Model
 {
     using System;
 
     using ART.Domotica.Enums;
 
-    public class DSFamilyTempSensorSetAlarmBuzzerOnRequestContract
+    public class SensorTriggerSetAlarmCelsiusCompletedModel
     {
         #region Properties
 
-        public bool AlarmBuzzerOn
+        public decimal AlarmCelsius
+        {
+            get; set;
+        }
+
+        public Guid DeviceId
         {
             get; set;
         }

@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Domain.Services
 {
-    using ART.Domotica.Contract;
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Enums;
     using ART.Domotica.Repository;

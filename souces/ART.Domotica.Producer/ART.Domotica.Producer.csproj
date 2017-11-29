@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IApplicationMQProducer.cs" />
     <Compile Include="Interfaces\IDeviceNTPProducer.cs" />
+    <Compile Include="Interfaces\ISensorTriggerProducer.cs" />
     <Compile Include="Interfaces\ISensorChartLimiterProducer.cs" />
     <Compile Include="Interfaces\IESPDeviceProducer.cs" />
     <Compile Include="Interfaces\IApplicationProducer.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationMQProducer.cs" />
     <Compile Include="Services\DeviceNTPProducer.cs" />
+    <Compile Include="Services\SensorTriggerProducer.cs" />
     <Compile Include="Services\SensorChartLimiterProducer.cs" />
     <Compile Include="Services\ESPDeviceProducer.cs" />
     <Compile Include="Services\ApplicationProducer.cs" />

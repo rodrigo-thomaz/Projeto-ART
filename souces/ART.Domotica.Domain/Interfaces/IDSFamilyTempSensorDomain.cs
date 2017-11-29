@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ART.Domotica.Contract;
     using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
 

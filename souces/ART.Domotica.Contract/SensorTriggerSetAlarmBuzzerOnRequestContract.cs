@@ -1,10 +1,10 @@
-﻿namespace ART.Domotica.IoTContract
+﻿namespace ART.Domotica.Contract
 {
     using System;
 
     using ART.Domotica.Enums;
 
-    public class DSFamilyTempSensorSetAlarmBuzzerOnRequestIoTContract
+    public class SensorTriggerSetAlarmBuzzerOnRequestContract
     {
         #region Properties
 

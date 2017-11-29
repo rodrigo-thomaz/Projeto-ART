@@ -23,7 +23,7 @@
             get; set;
         }
 
-        public TempSensorAlarmResponseIoTContract HighAlarm
+        public SensorTriggerGetResponseIoTContract HighAlarm
         {
             get; set;
         }
@@ -33,7 +33,7 @@
             get; set;
         }
 
-        public TempSensorAlarmResponseIoTContract LowAlarm
+        public SensorTriggerGetResponseIoTContract LowAlarm
         {
             get; set;
         }
