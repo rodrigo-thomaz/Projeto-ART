@@ -2,7 +2,7 @@
 {
     using ART.Domotica.Enums;
 
-    public class DSFamilyTempSensor : TemperatureSensorBase
+    public class DSFamilyTempSensor : SensorBase
     {
         #region Constructors
 

@@ -77,7 +77,6 @@
     <Compile Include="Configurations\ActuatorTypeConfiguration.cs" />
     <Compile Include="Configurations\SensorTypeConfiguration.cs" />
     <Compile Include="Configurations\SensorUnitOfMeasurementDefaultConfiguration.cs" />
-    <Compile Include="Configurations\TemperatureSensorBaseConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
     <Compile Include="Configurations\DeviceInApplicationConfiguration.cs" />
     <Compile Include="Configurations\RaspberryDeviceConfiguration.cs" />
@@ -109,7 +108,6 @@
     <Compile Include="Entities\SensorType.cs" />
     <Compile Include="Entities\SensorDatasheet.cs" />
     <Compile Include="Entities\SensorUnitOfMeasurementDefault.cs" />
-    <Compile Include="Entities\TemperatureSensorBase.cs" />
     <Compile Include="Entities\UnitOfMeasurement.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\SensorRange.cs" />
@@ -162,6 +160,10 @@
     <Compile Include="Migrations\201711292326009_Initial7.cs" />
     <Compile Include="Migrations\201711292326009_Initial7.Designer.cs">
       <DependentUpon>201711292326009_Initial7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711292330304_Initial8.cs" />
+    <Compile Include="Migrations\201711292330304_Initial8.Designer.cs">
+      <DependentUpon>201711292330304_Initial8.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -242,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711292326009_Initial7.resx">
       <DependentUpon>201711292326009_Initial7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711292330304_Initial8.resx">
+      <DependentUpon>201711292330304_Initial8.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -150,7 +150,6 @@
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
             modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());
-            modelBuilder.Configurations.Add(new TemperatureSensorBaseConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());
             modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());
             modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
