@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
+    using System.Collections.Generic;
 
     public class SensorType : IEntity<SensorTypeEnum>
     {
@@ -16,6 +17,8 @@
         {
             get; set;
         }
+
+        public ICollection<SensorDatasheet> SensorDatasheets { get; set; }
 
         #endregion Properties
     }

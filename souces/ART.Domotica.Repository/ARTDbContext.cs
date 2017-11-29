@@ -105,6 +105,11 @@
             get; set;
         }
 
+        public DbSet<SensorDatasheet> SensorDataSheet
+        {
+            get; set;
+        }
+
         public DbSet<TimeZone> TimeZone
         {
             get; set;
@@ -134,6 +139,7 @@
 
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new SensorTypeConfiguration());
+            modelBuilder.Configurations.Add(new SensorDatasheetConfiguration());
             modelBuilder.Configurations.Add(new ActuatorTypeConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());

@@ -112,6 +112,33 @@
 
             #endregion
 
+            #region SensorDatasheet
+
+            var sensorDatasheetTemperatureDS18B20 = context.SensorDataSheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
+            var sensorDatasheetUltrasonicHCSR04 = context.SensorDataSheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
+
+            if (sensorDatasheetTemperatureDS18B20 == null)
+            {
+                sensorDatasheetTemperatureDS18B20 = new SensorDatasheet
+                {
+                    Id = SensorDatasheetEnum.Temperature_DS18B20,
+                    SensorTypeId = temperatureSensorType.Id,
+                };
+                context.SensorDataSheet.Add(sensorDatasheetTemperatureDS18B20);
+            }
+
+            if (sensorDatasheetUltrasonicHCSR04 == null)
+            {
+                sensorDatasheetUltrasonicHCSR04 = new SensorDatasheet
+                {
+                    Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
+                    SensorTypeId = proximityDistanceSensorType.Id,
+                };
+                context.SensorDataSheet.Add(sensorDatasheetUltrasonicHCSR04);
+            }
+
+            #endregion
+
             #region ActuatorType
 
             var genericActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Generic);
