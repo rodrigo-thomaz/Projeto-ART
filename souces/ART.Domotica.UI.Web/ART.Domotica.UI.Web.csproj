@@ -211,6 +211,9 @@
     <Content Include="src\js\controllers\applicationUserController.js" />
     <Content Include="src\js\controllers\dashboardController.js" />
     <Content Include="src\js\controllers\applicationController.js" />
+    <Content Include="src\js\controllers\sensorChartLimiterController.js" />
+    <Content Include="src\js\controllers\sensorRangeController.js" />
+    <Content Include="src\js\controllers\sensorTriggerController.js" />
     <Content Include="src\js\controllers\tab.js" />
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />

@@ -167,13 +167,13 @@
                                                            ng-model="highAlarmView.alarmValue"
                                                            ng-model-options="{ debounce: 1000 }"
                                                            ng-change="changeAlarmValue('Max', highAlarmView.alarmValue)"
-                                                           min="{{sensorRangeView.min}}"
-                                                           max="{{sensorRangeView.max}}"
+                                                           min="{{sensorItem.sensorRange.min}}"
+                                                           max="{{sensorItem.sensorRange.max}}"
                                                            ng-disabled="!highAlarmView.alarmOn"
                                                            required
                                                            class="form-control">
                                                     <span ng-show="formSensor.inputHighAlarmValue.$touched && formSensor.inputHighAlarmValue.$invalid">
-                                                        Alarme alto deve estar entre {{sensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
+                                                        Alarme alto deve estar entre {{sensorItem.sensorRange.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
                                                     </span>
 
                                                 </div>
@@ -206,51 +206,53 @@
                                                            ng-model="lowAlarmView.alarmValue"
                                                            ng-model-options="{ debounce: 1000 }"
                                                            ng-change="changeAlarmValue('Min', lowAlarmView.alarmValue)"
-                                                           min="{{sensorRangeView.min}}"
-                                                           max="{{sensorRangeView.max}}"
+                                                           min="{{sensorItem.sensorRange.min}}"
+                                                           max="{{sensorItem.sensorRange.max}}"
                                                            ng-disabled="!lowAlarmView.alarmOn"
                                                            required
                                                            class="form-control">
                                                     <span ng-show="formSensor.inputLowAlarmValue.$touched && formSensor.inputLowAlarmValue.$invalid">
-                                                        Alarme baixo deve estar entre {{sensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
+                                                        Alarme baixo deve estar entre {{sensorItem.sensorRange.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label">Limite do gráfico alto</label>
-                                                <div class="col-lg-8">
-                                                    <input name="inputHighChartLimiterValue"
-                                                           type="number"
-                                                           ng-model="highChartLimiterView"
-                                                           ng-model-options="{ debounce: 1000 }"
-                                                           ng-change="changeChartLimiterValue('Max', highChartLimiterView)"
-                                                           min="{{sensorRangeView.min}}"
-                                                           max="{{sensorRangeView.max}}"
-                                                           required
-                                                           class="form-control">
-                                                    <span ng-show="formSensor.inputHighChartLimiterValue.$touched && formSensor.inputHighChartLimiterValue.$invalid">
-                                                        Limite alto do gráfico deve estar entre {{sensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
-                                                    </span>
+                                            <fieldset ng-controller="sensorChartLimiterController" ng-init="init(sensorItem)">
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label">Limite do gráfico alto</label>
+                                                    <div class="col-lg-8">
+                                                        <input name="inputSensorChartLimiterMax"
+                                                               type="number"
+                                                               ng-model="maxView"
+                                                               ng-model-options="{ debounce: 1000 }"
+                                                               ng-change="changeChartLimiterValue('Max', maxView)"
+                                                               max="{{sensorItem.sensorRange.max}}"
+                                                               min="{{sensorItem.sensorRange.min}}"                                                               
+                                                               required
+                                                               class="form-control">
+                                                        <span ng-show="formSensor.inputSensorChartLimiterMax.$touched && formSensor.inputSensorChartLimiterMax.$invalid">
+                                                            Limite alto do gráfico deve estar entre {{sensorItem.sensorRange.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label">Limite do gráfico baixo</label>
-                                                <div class="col-lg-8">
-                                                    <input name="inputLowChartLimiterValue"
-                                                           type="number"
-                                                           ng-model="lowChartLimiterView"
-                                                           ng-model-options="{ debounce: 1000 }"
-                                                           ng-change="changeChartLimiterValue('Min', lowChartLimiterView)"
-                                                           min="{{sensorRangeView.min}}"
-                                                           max="{{sensorRangeView.max}}"
-                                                           required
-                                                           class="form-control">
-                                                    <span ng-show="formSensor.inputLowChartLimiterValue.$touched && formSensor.inputLowChartLimiterValue.$invalid">
-                                                        Limite baixo do gráfico deve estar entre {{sensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
-                                                    </span>
+                                                <div class="form-group">
+                                                    <label class="col-lg-4 control-label">Limite do gráfico baixo</label>
+                                                    <div class="col-lg-8">
+                                                        <input name="inputSensorChartLimiterMin"
+                                                               type="number"
+                                                               ng-model="minView"
+                                                               ng-model-options="{ debounce: 1000 }"
+                                                               ng-change="changeChartLimiterValue('Min', minView)"
+                                                               max="{{sensorItem.sensorRange.max}}"
+                                                               min="{{sensorItem.sensorRange.min}}"                                                               
+                                                               required
+                                                               class="form-control">
+                                                        <span ng-show="formSensor.inputSensorChartLimiterMin.$touched && formSensor.inputSensorChartLimiterMin.$invalid">
+                                                            Limite baixo do gráfico deve estar entre {{sensorItem.sensorRange.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
+                                                        </span>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </fieldset>
                                         </form>
                                     </div>                                
                                 </tab>

@@ -1,20 +1,22 @@
 ﻿namespace ART.Domotica.Model
 {
-    public class TempSensorAlarmGetDetailModel
+    using System;
+
+    public class SensorChartLimiterDetailModel
     {
         #region Properties
 
-        public bool AlarmBuzzerOn
+        public Guid Id
         {
             get; set;
         }
 
-        public decimal AlarmCelsius
+        public decimal Max
         {
             get; set;
         }
 
-        public bool AlarmOn
+        public decimal Min
         {
             get; set;
         }

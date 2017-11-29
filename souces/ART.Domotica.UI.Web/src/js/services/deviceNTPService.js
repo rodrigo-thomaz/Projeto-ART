@@ -7,8 +7,6 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
     var serviceFactory = {};    
 
-    serviceFactory.devices = [];    
-
     var setTimeZone = function (deviceId, timeZoneId) {
         var data = {
             deviceId: deviceId,

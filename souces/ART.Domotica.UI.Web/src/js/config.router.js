@@ -54,6 +54,11 @@ angular.module('app')
                       'js/services/dsFamilyTempSensorResolutionService.js',
                       'js/services/dsFamilyTempSensorService.js',
                       'js/services/espDeviceService.js',
+
+                      'js/controllers/sensorChartLimiterController.js',
+                      'js/controllers/sensorRangeController.js',
+                      'js/controllers/sensorTriggerController.js',
+
                       'js/controllers/espDeviceListController.js',                      
                   ])
               })

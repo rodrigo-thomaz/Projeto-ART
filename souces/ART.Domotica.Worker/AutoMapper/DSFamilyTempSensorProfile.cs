@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
+    using System;
     using System.Linq;
 
     using ART.Domotica.Contract;
@@ -46,6 +47,26 @@
                 .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => x.UnitOfMeasurementId));
 
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionDetailModel>();
+
+            CreateMap<SensorsInDevice, DSFamilyTempSensorDetailModel>()
+                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.SensorBaseId))
+                .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.SensorBase).DSFamilyTempSensorResolutionId))
+                .ForMember(vm => vm.SensorRangeId, m => m.MapFrom(x => x.SensorBase.SensorRangeId.Value))
+                .ForMember(vm => vm.SensorChartLimiter, m => m.MapFrom(x => x.SensorBase.SensorChartLimiter))
+                .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => x.SensorBase.UnitOfMeasurementId))
+                .ForMember(vm => vm.Label, m => m.MapFrom(x => x.SensorBase.Label))
+                .ForMember(vm => vm.HighAlarm, m => m.ResolveUsing(src => {
+                    if (src.SensorBase.SensorTriggers == null) return null;
+                    var max = src.SensorBase.SensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
+                    var sensorTrigger = src.SensorBase.SensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == max);
+                    return sensorTrigger;
+                }))
+                .ForMember(vm => vm.LowAlarm, m => m.ResolveUsing(src => {
+                    if (src.SensorBase.SensorTriggers == null) return null;
+                    var min = src.SensorBase.SensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
+                    var sensorTrigger = src.SensorBase.SensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == min);
+                    return sensorTrigger;
+                }));
         }
 
         #endregion Constructors

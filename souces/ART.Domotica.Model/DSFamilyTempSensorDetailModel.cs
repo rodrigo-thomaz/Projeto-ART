@@ -18,12 +18,7 @@
             get; set;
         }
 
-        public TempSensorAlarmGetDetailModel HighAlarm
-        {
-            get; set;
-        }
-
-        public decimal HighChartLimiterCelsius
+        public SensorTriggerDetailModel HighAlarm
         {
             get; set;
         }
@@ -33,12 +28,12 @@
             get; set;
         }
 
-        public TempSensorAlarmGetDetailModel LowAlarm
+        public SensorTriggerDetailModel LowAlarm
         {
             get; set;
         }
 
-        public decimal LowChartLimiterCelsius
+        public SensorChartLimiterDetailModel SensorChartLimiter
         {
             get; set;
         }
