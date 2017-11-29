@@ -144,7 +144,7 @@
                                                 <div class="col-lg-8">
                                                     <div class="checkbox">
                                                         <label class="i-checks">
-                                                            <input type="checkbox" ng-model="highAlarmView.alarmOn" ng-change="changeAlarmOn('High', highAlarmView.alarmOn)"><i></i>
+                                                            <input type="checkbox" ng-model="highAlarmView.alarmOn" ng-change="changeAlarmOn('Max', highAlarmView.alarmOn)"><i></i>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -154,7 +154,7 @@
                                                 <div class="col-lg-8">
                                                     <div class="checkbox">
                                                         <label class="i-checks">
-                                                            <input ng-disabled="!highAlarmView.alarmOn" type="checkbox" ng-model="highAlarmView.alarmBuzzerOn" ng-change="changeAlarmBuzzerOn('High', highAlarmView.alarmBuzzerOn)"><i></i>
+                                                            <input ng-disabled="!highAlarmView.alarmOn" type="checkbox" ng-model="highAlarmView.alarmBuzzerOn" ng-change="changeAlarmBuzzerOn('Max', highAlarmView.alarmBuzzerOn)"><i></i>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -166,7 +166,7 @@
                                                            type="number"
                                                            ng-model="highAlarmView.alarmValue"
                                                            ng-model-options="{ debounce: 1000 }"
-                                                           ng-change="changeAlarmValue('High', highAlarmView.alarmValue)"
+                                                           ng-change="changeAlarmValue('Max', highAlarmView.alarmValue)"
                                                            min="{{sensorRangeView.min}}"
                                                            max="{{sensorRangeView.max}}"
                                                            ng-disabled="!highAlarmView.alarmOn"
@@ -183,7 +183,7 @@
                                                 <div class="col-lg-8">
                                                     <div class="checkbox">
                                                         <label class="i-checks">
-                                                            <input type="checkbox" ng-model="lowAlarmView.alarmOn" ng-change="changeAlarmOn('Low', lowAlarmView.alarmOn)"><i></i>
+                                                            <input type="checkbox" ng-model="lowAlarmView.alarmOn" ng-change="changeAlarmOn('Min', lowAlarmView.alarmOn)"><i></i>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -193,7 +193,7 @@
                                                 <div class="col-lg-8">
                                                     <div class="checkbox">
                                                         <label class="i-checks">
-                                                            <input ng-disabled="!lowAlarmView.alarmOn" type="checkbox" ng-model="lowAlarmView.alarmBuzzerOn" ng-change="changeAlarmBuzzerOn('Low', lowAlarmView.alarmBuzzerOn)"><i></i>
+                                                            <input ng-disabled="!lowAlarmView.alarmOn" type="checkbox" ng-model="lowAlarmView.alarmBuzzerOn" ng-change="changeAlarmBuzzerOn('Min', lowAlarmView.alarmBuzzerOn)"><i></i>
                                                         </label>
                                                     </div>
                                                 </div>
@@ -205,7 +205,7 @@
                                                            type="number"
                                                            ng-model="lowAlarmView.alarmValue"
                                                            ng-model-options="{ debounce: 1000 }"
-                                                           ng-change="changeAlarmValue('Low', lowAlarmView.alarmValue)"
+                                                           ng-change="changeAlarmValue('Min', lowAlarmView.alarmValue)"
                                                            min="{{sensorRangeView.min}}"
                                                            max="{{sensorRangeView.max}}"
                                                            ng-disabled="!lowAlarmView.alarmOn"
@@ -224,7 +224,7 @@
                                                            type="number"
                                                            ng-model="highChartLimiterView"
                                                            ng-model-options="{ debounce: 1000 }"
-                                                           ng-change="changeChartLimiterValue('High', highChartLimiterView)"
+                                                           ng-change="changeChartLimiterValue('Max', highChartLimiterView)"
                                                            min="{{sensorRangeView.min}}"
                                                            max="{{sensorRangeView.max}}"
                                                            required
@@ -241,7 +241,7 @@
                                                            type="number"
                                                            ng-model="lowChartLimiterView"
                                                            ng-model-options="{ debounce: 1000 }"
-                                                           ng-change="changeChartLimiterValue('Low', lowChartLimiterView)"
+                                                           ng-change="changeChartLimiterValue('Min', lowChartLimiterView)"
                                                            min="{{sensorRangeView.min}}"
                                                            max="{{sensorRangeView.max}}"
                                                            required

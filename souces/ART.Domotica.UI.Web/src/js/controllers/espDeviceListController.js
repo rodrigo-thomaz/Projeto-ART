@@ -169,6 +169,8 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
 
         $scope.sensor = sensor;
 
+        $scope.sensorRangeView = {};
+
         // UnitOfMeasurement
         if (unitOfMeasurementService.initialized())
             setSelectedUnitOfMeasurement();
@@ -255,11 +257,9 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var setSensorRange = function () {
-        var sensorRange = sensorRangeService.getById($scope.sensor.sensorRangeId);
-        $scope.sensorRangeView = {
-            min: unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, sensorRange.min),
-            max: unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, sensorRange.max),
-        };
+        var sensorRange = sensorRangeService.getById($scope.sensor.sensorRangeId);        
+        $scope.sensorRangeView.min = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, sensorRange.min);
+        $scope.sensorRangeView.max = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, sensorRange.max);        
     };
 
     var onSetUnitOfMeasurementCompleted = function (event, data) {
@@ -269,8 +269,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
         $scope.highAlarmView.alarmValue = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.highAlarm.alarmCelsius);
         $scope.lowAlarmView.alarmValue = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.lowAlarm.alarmCelsius);
 
-        $scope.sensorRangeView.min = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.sensorRange.min);
-        $scope.sensorRangeView.max = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.sensorRange.max);
+        setSensorRange();
 
         $scope.lowChartLimiterView = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.lowChartLimiterCelsius);
         $scope.highChartLimiterView = unitOfMeasurementConverter.convertFromCelsius($scope.sensor.unitOfMeasurementId, $scope.sensor.highChartLimiterCelsius);
