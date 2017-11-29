@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorChartLimiterService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'dsFamilyTempSensorService', function ($http, $log, $rootScope, ngAuthSettings, stompService, dsFamilyTempSensorService) {
+app.factory('sensorChartLimiterService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitOfMeasurementConverter', 'dsFamilyTempSensorService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitOfMeasurementConverter, dsFamilyTempSensorService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -30,10 +30,14 @@ app.factory('sensorChartLimiterService', ['$http', '$log', '$rootScope', 'ngAuth
     var onSetValueCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = dsFamilyTempSensorService.getById(result.deviceId, result.sensorChartLimiterId);
-        if (result.position === 'Max')
-            sensor.highChartLimiterCelsius = result.value;
-        else if (result.position === 'Min')
-            sensor.lowChartLimiterCelsius = result.value;        
+        if (result.position === 'Max') {
+            sensor.sensorChartLimiter.max = result.value;
+            sensor.sensorChartLimiter.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.max);            
+        }
+        else if (result.position === 'Min') {
+            sensor.sensorChartLimiter.min = result.value;
+            sensor.sensorChartLimiter.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.min);
+        }
         $rootScope.$emit('sensorChartLimiterService_SetValueCompleted_Id_' + result.sensorChartLimiterId, result);
     }
 

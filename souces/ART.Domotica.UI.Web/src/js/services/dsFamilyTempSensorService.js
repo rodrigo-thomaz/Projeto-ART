@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'espDeviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, espDeviceService) {
+app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitOfMeasurementService', 'unitOfMeasurementConverter', 'espDeviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitOfMeasurementService, unitOfMeasurementConverter, espDeviceService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -59,9 +59,29 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     }  
 
     var onSetUnitOfMeasurementCompleted = function (payload) {
+
         var result = JSON.parse(payload.body);        
         var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
+
+        //unitOfMeasurement
         sensor.unitOfMeasurementId = result.unitOfMeasurementId;
+        sensor.unitOfMeasurement = unitOfMeasurementService.getByKey(sensor.unitOfMeasurementId);
+
+        //temp
+        sensor.tempConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.tempCelsius);
+
+        //sensorRange
+        sensor.sensorRange.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.max);
+        sensor.sensorRange.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.min);
+
+        //sensorChartLimiter
+        sensor.sensorChartLimiter.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.max);
+        sensor.sensorChartLimiter.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.min);
+
+        //alarms
+        sensor.highAlarm.alarmConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.highAlarm.alarmCelsius);
+        sensor.lowAlarm.alarmConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.lowAlarm.alarmCelsius);
+
         $rootScope.$emit('dsFamilyTempSensorService_onSetUnitOfMeasurementCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }    
 

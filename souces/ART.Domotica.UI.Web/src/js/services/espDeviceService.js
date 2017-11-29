@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, $log, ngAuthSettings, $rootScope, stompService) {
+app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorRangeService', 'unitOfMeasurementService', 'unitOfMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, sensorRangeService, unitOfMeasurementService, unitOfMeasurementConverter) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -97,8 +97,12 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         for (var i = 0; i < oldSensors.length; i++) {
             for (var j = 0; j < newSensors.length; j++) {
                 if (oldSensors[i].dsFamilyTempSensorId === newSensors[j].dsFamilyTempSensorId) {
+
                     oldSensors[i].isConnected = newSensors[j].isConnected;
-                    oldSensors[i].tempCelsius = newSensors[j].tempCelsius;
+
+                    //Temp
+                    oldSensors[i].tempCelsius = newSensors[j].tempCelsius;                    
+                    oldSensors[i].tempConverted = unitOfMeasurementConverter.convertFromCelsius(oldSensors[i].unitOfMeasurementId, oldSensors[i].tempCelsius);
 
                     //Chart
 
@@ -183,7 +187,30 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         device.createDate = new Date(device.createDate * 1000).toLocaleString();
         serviceFactory.devices.push(device);
         for (var i = 0; i < device.sensors.length; i++) {
+
             var sensor = device.sensors[i];
+
+            //temp
+            sensor.tempConverted = null;
+
+            //unitOfMeasurement
+            sensor.unitOfMeasurement = unitOfMeasurementService.getByKey(sensor.unitOfMeasurementId);
+
+            //SensorRange
+            var sensorRange = sensorRangeService.getById(sensor.sensorRangeId);
+            sensor.sensorRange = sensorRange;
+            sensor.sensorRange.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.max);
+            sensor.sensorRange.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.min);
+
+            //sensorChartLimiter
+            sensor.sensorChartLimiter.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.max);
+            sensor.sensorChartLimiter.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.min);
+
+            //alarms
+            sensor.highAlarm.alarmConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.highAlarm.alarmCelsius);
+            sensor.lowAlarm.alarmConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.lowAlarm.alarmCelsius);
+
+            //Chart
             sensor.chart = [];
             sensor.chart.push(new chartLine("Máximo"));
             sensor.chart.push(new chartLine("Temperatura"));

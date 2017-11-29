@@ -225,13 +225,13 @@
                                                                type="number"
                                                                ng-model="maxView"
                                                                ng-model-options="{ debounce: 1000 }"
-                                                               ng-change="changeChartLimiterValue('Max', maxView)"
-                                                               max="{{sensorItem.sensorRange.max}}"
-                                                               min="{{sensorItem.sensorRange.min}}"                                                               
+                                                               ng-change="changeValue('Max', maxView)"
+                                                               max="{{sensorItem.sensorRange.maxConverted}}"
+                                                               min="{{sensorItem.sensorRange.minConverted}}"                                                               
                                                                required
                                                                class="form-control">
                                                         <span ng-show="formSensor.inputSensorChartLimiterMax.$touched && formSensor.inputSensorChartLimiterMax.$invalid">
-                                                            Limite alto do gráfico deve estar entre {{sensorItem.sensorRange.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
+                                                            Limite alto do gráfico deve estar entre {{sensorItem.sensorRange.minConverted}}{{sensorItem.unitOfMeasurement.symbol}} e {{sensorItem.sensorRange.maxConverted}}{{sensorItem.unitOfMeasurement.symbol}}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -242,13 +242,13 @@
                                                                type="number"
                                                                ng-model="minView"
                                                                ng-model-options="{ debounce: 1000 }"
-                                                               ng-change="changeChartLimiterValue('Min', minView)"
-                                                               max="{{sensorItem.sensorRange.max}}"
-                                                               min="{{sensorItem.sensorRange.min}}"                                                               
+                                                               ng-change="changeValue('Min', minView)"
+                                                               max="{{sensorItem.sensorRange.maxConverted}}"
+                                                               min="{{sensorItem.sensorRange.minConverted}}"                                                               
                                                                required
                                                                class="form-control">
                                                         <span ng-show="formSensor.inputSensorChartLimiterMin.$touched && formSensor.inputSensorChartLimiterMin.$invalid">
-                                                            Limite baixo do gráfico deve estar entre {{sensorItem.sensorRange.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
+                                                            Limite baixo do gráfico deve estar entre {{sensorItem.sensorRange.minConverted}}{{sensorItem.unitOfMeasurement.symbol}} e {{sensorItem.sensorRange.maxConverted}}{{sensorItem.unitOfMeasurement.symbol}}
                                                         </span>
                                                     </div>
                                                 </div>

@@ -7,34 +7,37 @@
     $scope.init = function (sensor) {
 
         $scope.sensor = sensor;
-
-        $scope.maxView = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.max);
-        $scope.minView = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.min);
         
-        clearOnSetChartLimiterCelsiusCompleted = $rootScope.$on('sensorChartLimiterService_SetValueCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetChartLimiterCelsiusCompleted);
+        clearOnSetValueCompleted = $rootScope.$on('sensorChartLimiterService_SetValueCompleted_Id_' + sensor.sensorChartLimiter.id, onSetValueCompleted);
 
         initialized = true;
     };
 
-    var clearOnSetChartLimiterCelsiusCompleted = null;
+    var clearOnSetValueCompleted = null;
 
     $scope.$on('$destroy', function () {
-        clearOnSetChartLimiterCelsiusCompleted();
+        clearOnSetValueCompleted();
     });
 
-    $scope.changeChartLimiterValue = function (position, chartLimiterValue) {
-        if (!initialized || chartLimiterValue === undefined) return;
-        var value = unitOfMeasurementConverter.convertToCelsius($scope.sensor.unitOfMeasurementId, chartLimiterValue);
-        sensorChartLimiterService.setValue($scope.sensor.dsFamilyTempSensorId, value, position);
+    $scope.changeValue = function (position, value) {
+        if (!initialized || value === undefined) return;
+        var valueConverted = unitOfMeasurementConverter.convertToCelsius($scope.sensor.unitOfMeasurementId, value);
+        sensorChartLimiterService.setValue($scope.sensor.sensorChartLimiter.id, valueConverted, position);
     };
 
-    var onSetChartLimiterCelsiusCompleted = function (event, data) {
+    $scope.$watch('sensor.sensorChartLimiter.maxConverted', function (newValue, oldValue) {
+        $scope.maxView = $scope.sensor.sensorChartLimiter.maxConverted;
+    });
+
+    $scope.$watch('sensor.sensorChartLimiter.minConverted', function (newValue, oldValue) {
+        $scope.minView = $scope.sensor.sensorChartLimiter.minConverted
+    });
+
+    var onSetValueCompleted = function (event, data) {
         if (data.position === 'Max') {
-            $scope.maxView = data.value;
             toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
         }
         else if (data.position === 'Min') {
-            $scope.minView = data.value;
             toaster.pop('success', 'Sucesso', 'Limite baixo do gráfico alterado');
         }
     };
