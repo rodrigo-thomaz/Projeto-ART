@@ -23,11 +23,15 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         client.unsubscribe(generateStringTopic(topic));
     };    
 
-    var generateStringTopic = function (topic){
+    var generateStringTopic = function (topic) {
+        //https://rabbitmq.docs.pivotal.io/36/rabbit-web-docs/stomp.html        
+        //return '/exchange/amq.topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + applicationMQ.webUITopic + '.' + topic;
         return '/topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + applicationMQ.webUITopic + '.' + topic;
     }
 
     var generateStringTopicAllViews = function (topic) {
+        //https://rabbitmq.docs.pivotal.io/36/rabbit-web-docs/stomp.html        
+        //return '/exchange/amq.topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + topic;
         return '/topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + topic;
     }
 
