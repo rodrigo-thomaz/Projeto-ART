@@ -20,6 +20,11 @@
 
         #region Properties
 
+        public DbSet<SensorType> SensorType
+        {
+            get; set;
+        }
+
         public DbSet<Application> Application
         {
             get; set;
@@ -123,6 +128,7 @@
             //Configurations
 
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
+            modelBuilder.Configurations.Add(new SensorTypeConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
             modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());

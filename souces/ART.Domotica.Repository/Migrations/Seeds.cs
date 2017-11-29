@@ -41,6 +41,77 @@
 
             #endregion
 
+            #region SensorType
+
+            var genericSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Generic);
+            var luminositySensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Luminosity);
+            var motionSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Motion);
+            var pressureSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Pressure);
+            var proximityDistanceSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.ProximityDistance);
+            var temperatureSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Temperature);
+
+            if (genericSensorType == null)
+            {
+                genericSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Generic,
+                    Name = "Genérico",
+                };
+                context.SensorType.Add(genericSensorType);
+            }
+
+            if (luminositySensorType == null)
+            {
+                luminositySensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Luminosity,
+                    Name = "Luminosidade",
+                };
+                context.SensorType.Add(luminositySensorType);
+            }
+
+            if (motionSensorType == null)
+            {
+                motionSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Motion,
+                    Name = "Movimento",
+                };
+                context.SensorType.Add(motionSensorType);
+            }
+
+            if (pressureSensorType == null)
+            {
+                pressureSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Pressure,
+                    Name = "Pressão",
+                };
+                context.SensorType.Add(pressureSensorType);
+            }
+
+            if (proximityDistanceSensorType == null)
+            {
+                proximityDistanceSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.ProximityDistance,
+                    Name = "Proximidade/Distância",
+                };
+                context.SensorType.Add(proximityDistanceSensorType);
+            }
+
+            if (temperatureSensorType == null)
+            {
+                temperatureSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Temperature,
+                    Name = "Temperatura",
+                };
+                context.SensorType.Add(temperatureSensorType);
+            }
+
+            #endregion
+
             #region SensorRange
 
             var sensorRange1 = context.SensorRange.SingleOrDefault(x => x.Id == 1);
