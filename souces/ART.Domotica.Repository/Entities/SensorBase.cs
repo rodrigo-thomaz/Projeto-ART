@@ -3,10 +3,27 @@
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
+    using System;
+    using ART.Infra.CrossCutting.Repository;
 
-    public abstract class SensorBase : HardwareBase
+    public abstract class SensorBase : IEntity<Guid>
     {
         #region Properties
+
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public Guid Id
+        {
+            get; set;
+        }
+
+        public string Label
+        {
+            get; set;
+        }
 
         public SensorChartLimiter SensorChartLimiter
         {
