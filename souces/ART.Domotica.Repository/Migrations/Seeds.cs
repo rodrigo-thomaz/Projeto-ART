@@ -112,6 +112,66 @@
 
             #endregion
 
+            #region ActuatorType
+
+            var genericActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Generic);
+            var lightActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Light);
+            var motorActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Motor);
+            var relayActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Relay);
+            var valveActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Valve);
+
+            if (genericActuatorType == null)
+            {
+                genericActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Generic,
+                    Name = "Genérico",
+                };
+                context.ActuatorType.Add(genericActuatorType);
+            }
+
+            if (lightActuatorType == null)
+            {
+                lightActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Light,
+                    Name = "Luz",
+                };
+                context.ActuatorType.Add(lightActuatorType);
+            }
+
+            if (motorActuatorType == null)
+            {
+                motorActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Motor,
+                    Name = "Motor",
+                };
+                context.ActuatorType.Add(motorActuatorType);
+            }
+
+            if (relayActuatorType == null)
+            {
+                relayActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Relay,
+                    Name = "Relê",
+                };
+                context.ActuatorType.Add(relayActuatorType);
+            }
+
+            if (valveActuatorType == null)
+            {
+                valveActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Valve,
+                    Name = "Válvula",
+                };
+                context.ActuatorType.Add(valveActuatorType);
+            }
+
+            #endregion
+
             #region SensorRange
 
             var sensorRange1 = context.SensorRange.SingleOrDefault(x => x.Id == 1);

@@ -3,11 +3,11 @@
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public class SensorType : IEntity<SensorTypeEnum>
+    public class ActuatorType : IEntity<ActuatorTypeEnum>
     {
         #region Properties
 
-        public SensorTypeEnum Id
+        public ActuatorTypeEnum Id
         {
             get; set;
         }

@@ -6,11 +6,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class SensorTypeConfiguration : EntityTypeConfiguration<SensorType>
+    public class ActuatorTypeConfiguration : EntityTypeConfiguration<ActuatorType>
     {
         #region Constructors
 
-        public SensorTypeConfiguration()
+        public ActuatorTypeConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);

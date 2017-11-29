@@ -3,20 +3,20 @@ namespace ART.Domotica.Repository.Migrations
     using System;
     using System.Data.Entity.Migrations;
 
-    public partial class Initial2 : DbMigration
+    public partial class Initial3 : DbMigration
     {
         #region Methods
 
         public override void Down()
         {
-            DropIndex("dbo.SensorType", new[] { "Name" });
-            DropTable("dbo.SensorType");
+            DropIndex("dbo.ActuatorType", new[] { "Name" });
+            DropTable("dbo.ActuatorType");
         }
 
         public override void Up()
         {
             CreateTable(
-                "dbo.SensorType",
+                "dbo.ActuatorType",
                 c => new
                     {
                         Id = c.Short(nullable: false),

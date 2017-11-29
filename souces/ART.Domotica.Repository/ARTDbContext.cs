@@ -20,7 +20,7 @@
 
         #region Properties
 
-        public DbSet<SensorType> SensorType
+        public DbSet<ActuatorType> ActuatorType
         {
             get; set;
         }
@@ -100,6 +100,11 @@
             get; set;
         }
 
+        public DbSet<SensorType> SensorType
+        {
+            get; set;
+        }
+
         public DbSet<TimeZone> TimeZone
         {
             get; set;
@@ -129,6 +134,7 @@
 
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new SensorTypeConfiguration());
+            modelBuilder.Configurations.Add(new ActuatorTypeConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
             modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());
