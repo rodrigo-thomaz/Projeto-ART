@@ -28,6 +28,8 @@
             get; set;
         }
 
+        public ICollection<SensorUnitOfMeasurementDefault> SensorUnitOfMeasurementDefaults { get; set; }
+
         public string Symbol
         {
             get; set;

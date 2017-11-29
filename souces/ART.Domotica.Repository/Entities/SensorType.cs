@@ -19,7 +19,7 @@
         }
 
         public ICollection<SensorDatasheet> SensorDatasheets { get; set; }
-
+        public ICollection<SensorUnitOfMeasurementDefault> SensorUnitOfMeasurementDefaults { get; set; }
         #endregion Properties
     }
 }

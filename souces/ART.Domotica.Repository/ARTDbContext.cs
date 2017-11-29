@@ -25,6 +25,11 @@
             get; set;
         }
 
+        public DbSet<SensorUnitOfMeasurementDefault> SensorUnitOfMeasurementDefault
+        {
+            get; set;
+        }
+
         public DbSet<Application> Application
         {
             get; set;
@@ -140,6 +145,7 @@
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new SensorTypeConfiguration());
             modelBuilder.Configurations.Add(new SensorDatasheetConfiguration());
+            modelBuilder.Configurations.Add(new SensorUnitOfMeasurementDefaultConfiguration());
             modelBuilder.Configurations.Add(new ActuatorTypeConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());

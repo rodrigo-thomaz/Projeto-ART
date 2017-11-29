@@ -22,31 +22,8 @@
             get; set;
         }
 
+        public SensorUnitOfMeasurementDefault SensorUnitOfMeasurementDefault { get; set; }
+
         #endregion Properties
-
-        #region Other
-
-        //public UnitOfMeasurement UnitOfMeasurement
-        //{
-        //    get; set;
-        //}
-        //public UnitOfMeasurementEnum UnitOfMeasurementId
-        //{
-        //    get; set;
-        //}
-        //public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
-        //{
-        //    get; protected set;
-        //}
-        //public short Max
-        //{
-        //    get; set;
-        //}
-        //public short Min
-        //{
-        //    get; set;
-        //}
-
-        #endregion Other
     }
 }
