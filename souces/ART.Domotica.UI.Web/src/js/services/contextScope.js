@@ -3,6 +3,8 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     var context = $rootScope.$new();
 
+    // Public Properties
+
     context.unitOfMeasurementTypeLoaded = false;
     context.unitOfMeasurementTypes = [];    
 
@@ -19,31 +21,9 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     context.sensorUnitOfMeasurementDefaults = [];
 
     context.sensorsLoaded = false;
-    context.sensors = [];
+    context.sensors = [];    
 
-
-
-    context.$watch('unitOfMeasurementTypeLoaded', function (newValue, oldValue) {
-        bind_UnitOfMeasurement_UnitOfMeasurementType();
-    });
-
-    context.$watch('unitOfMeasurementLoaded', function (newValue, oldValue) {
-        bind_UnitOfMeasurement_UnitOfMeasurementType();
-    });
-
-    var bind_UnitOfMeasurement_UnitOfMeasurementType = function () {
-        if (context.unitOfMeasurementTypeLoaded && context.unitOfMeasurementLoaded) {
-            for (var i = 0; i < context.unitOfMeasurements.length; i++) {
-                var unitOfMeasurement = context.unitOfMeasurements[i];
-                var unitOfMeasurementType = getUnitOfMeasurementTypeByKey(unitOfMeasurement.unitOfMeasurementTypeId);
-                unitOfMeasurement.unitOfMeasurementType = unitOfMeasurementType;
-                if (unitOfMeasurementType.unitOfMeasurements === undefined) {
-                    unitOfMeasurementType.unitOfMeasurements = [];
-                }
-                unitOfMeasurementType.unitOfMeasurements.push(unitOfMeasurement);
-            }
-        }
-    };
+    // Finders
 
     var getUnitOfMeasurementTypeByKey = function (unitOfMeasurementTypeId) {
         for (var i = 0; i < context.unitOfMeasurementTypes.length; i++) {
@@ -61,29 +41,33 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     }
 
-    context.$watchCollection('unitOfMeasurementTypes', function (newValues, oldValues) {
+    // Navigation Properties Binds
 
+    var bind_UnitOfMeasurement_UnitOfMeasurementType = function () {
+        if (context.unitOfMeasurementTypeLoaded && context.unitOfMeasurementLoaded) {
+            for (var i = 0; i < context.unitOfMeasurements.length; i++) {
+                var unitOfMeasurement = context.unitOfMeasurements[i];
+                var unitOfMeasurementType = getUnitOfMeasurementTypeByKey(unitOfMeasurement.unitOfMeasurementTypeId);
+                unitOfMeasurement.unitOfMeasurementType = unitOfMeasurementType;
+                if (unitOfMeasurementType.unitOfMeasurements === undefined) {
+                    unitOfMeasurementType.unitOfMeasurements = [];
+                }
+                unitOfMeasurementType.unitOfMeasurements.push(unitOfMeasurement);
+            }
+        }
+    };
+
+    // Watches
+
+    context.$watch('unitOfMeasurementTypeLoaded', function (newValue, oldValue) {
+        bind_UnitOfMeasurement_UnitOfMeasurementType();
     });
 
-    context.$watchCollection('unitOfMeasurements', function (newValues, oldValues) {
+    context.$watch('unitOfMeasurementLoaded', function (newValue, oldValue) {
+        bind_UnitOfMeasurement_UnitOfMeasurementType();
+    });    
 
-    });
-
-    context.$watchCollection('sensorTypes', function (newValues, oldValues) {
-
-    });
-
-    context.$watchCollection('sensorDatasheets', function (newValues, oldValues) {
-
-    });
-
-    context.$watchCollection('sensorUnitOfMeasurementDefaults', function (newValues, oldValues) {
-
-    });
-
-    context.$watchCollection('sensors', function (newValues, oldValues) {
-
-    });
+    // Public Methods
 
     context.getUnitOfMeasurementTypeByKey = getUnitOfMeasurementTypeByKey;
     context.getUnitOfMeasurementByKey = getUnitOfMeasurementByKey;
