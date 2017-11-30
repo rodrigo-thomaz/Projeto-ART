@@ -6,12 +6,12 @@
     {
         #region Properties
 
-        public SensorTypeEnum SensorTypeId
+        public string Name
         {
             get; set;
         }
 
-        public string Name
+        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }

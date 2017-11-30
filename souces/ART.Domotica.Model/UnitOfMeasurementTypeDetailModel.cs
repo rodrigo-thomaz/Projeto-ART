@@ -6,12 +6,12 @@
     {
         #region Properties
 
-        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
+        public string Name
         {
             get; set;
         }
 
-        public string Name
+        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
             get; set;
         }

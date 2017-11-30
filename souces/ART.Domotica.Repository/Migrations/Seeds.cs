@@ -534,7 +534,7 @@
 
             context.SaveChanges();
 
-            #endregion            
+            #endregion
 
             #region DSFamilyTempSensorResolutions
 

@@ -6,7 +6,7 @@
     {
         #region Properties
 
-        public SensorDatasheetEnum Id
+        public SensorDatasheetEnum SensorUnitOfMeasurementDefaultId
         {
             get; set;
         }
@@ -33,7 +33,7 @@
 
         public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
-            get; protected set;
+            get; set;
         }
 
         #endregion Properties

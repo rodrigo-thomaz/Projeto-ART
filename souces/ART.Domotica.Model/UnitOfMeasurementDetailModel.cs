@@ -11,22 +11,22 @@
             get; set;
         }
 
-        public UnitOfMeasurementEnum UnitOfMeasurementId
-        {
-            get; set;
-        }
-
-        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
-        {
-            get; set;
-        }
-
         public string Name
         {
             get; set;
         }
 
         public string Symbol
+        {
+            get; set;
+        }
+
+        public UnitOfMeasurementEnum UnitOfMeasurementId
+        {
+            get; set;
+        }
+
+        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
             get; set;
         }
