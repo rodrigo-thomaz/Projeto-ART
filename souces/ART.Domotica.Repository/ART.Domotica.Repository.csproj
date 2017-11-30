@@ -80,7 +80,7 @@
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
     <Compile Include="Configurations\DeviceInApplicationConfiguration.cs" />
     <Compile Include="Configurations\RaspberryDeviceConfiguration.cs" />
-    <Compile Include="Configurations\SensorBaseConfiguration.cs" />
+    <Compile Include="Configurations\SensorConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
     <Compile Include="Configurations\UnitOfMeasurementConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
@@ -99,7 +99,7 @@
     <Compile Include="Entities\DeviceInApplication.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\RaspberryDevice.cs" />
-    <Compile Include="Entities\SensorBase.cs" />
+    <Compile Include="Entities\Sensor.cs" />
     <Compile Include="Entities\SensorChartLimiter.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
@@ -164,6 +164,10 @@
     <Compile Include="Migrations\201711292330304_Initial8.cs" />
     <Compile Include="Migrations\201711292330304_Initial8.Designer.cs">
       <DependentUpon>201711292330304_Initial8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711292356348_Initial9.cs" />
+    <Compile Include="Migrations\201711292356348_Initial9.Designer.cs">
+      <DependentUpon>201711292356348_Initial9.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -247,6 +251,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711292330304_Initial8.resx">
       <DependentUpon>201711292330304_Initial8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711292356348_Initial9.resx">
+      <DependentUpon>201711292356348_Initial9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

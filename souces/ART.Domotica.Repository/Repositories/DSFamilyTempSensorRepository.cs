@@ -19,7 +19,7 @@ namespace ART.Domotica.Repository.Repositories
         public async Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId)
         {
             var entity = await _context.SensorsInDevice
-                .SingleOrDefaultAsync(x => x.SensorBaseId == dsFamilyTempSensorId);
+                .SingleOrDefaultAsync(x => x.SensorId == dsFamilyTempSensorId);
 
             return entity;
         }

@@ -5,13 +5,13 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class SensorBaseConfiguration : EntityTypeConfiguration<SensorBase>
+    public class SensorConfiguration : EntityTypeConfiguration<Sensor>
     {
         #region Constructors
 
-        public SensorBaseConfiguration()
+        public SensorConfiguration()
         {
-            ToTable("SensorBase");
+            ToTable("Sensor");
 
             //Primary Keys
             HasKey(x => x.Id);

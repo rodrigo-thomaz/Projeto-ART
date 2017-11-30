@@ -114,7 +114,7 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }           
 
-            var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
+            var sensorTriggers = await _sensorTriggerRepository.GetSensorId(dsFamilyTempSensorId);
 
             if (position == SensorChartLimiterPositionEnum.Max)
             {
@@ -143,7 +143,7 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
+            var sensorTriggers = await _sensorTriggerRepository.GetSensorId(dsFamilyTempSensorId);
 
             if (position == SensorChartLimiterPositionEnum.Max)
             {
@@ -172,7 +172,7 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            var sensorTriggers = await _sensorTriggerRepository.GetSensorBaseId(dsFamilyTempSensorId);
+            var sensorTriggers = await _sensorTriggerRepository.GetSensorId(dsFamilyTempSensorId);
 
             if (position == SensorChartLimiterPositionEnum.Max)
             {

@@ -20,8 +20,8 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //SensorBase
-            HasRequired(x => x.SensorBase)
+            //Sensor
+            HasRequired(x => x.Sensor)
                .WithRequiredDependent(x => x.SensorChartLimiter);
 
             //Min

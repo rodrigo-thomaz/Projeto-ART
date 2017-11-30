@@ -969,8 +969,8 @@
 
             var sensorsInDevice_2_1 = new SensorsInDevice
             {
-                SensorBaseId = sensor_2_1.Id,
-                SensorBase = sensor_2_1,
+                SensorId = sensor_2_1.Id,
+                Sensor = sensor_2_1,
                 DeviceBaseId = espDevice1.Id,
                 DeviceBase = espDevice1,
             };
@@ -979,8 +979,8 @@
 
             var sensorsInDevice_2_2 = new SensorsInDevice
             {
-                SensorBaseId = sensor_2_2.Id,
-                SensorBase = sensor_2_2,
+                SensorId = sensor_2_2.Id,
+                Sensor = sensor_2_2,
                 DeviceBaseId = espDevice1.Id,
                 DeviceBase = espDevice1,
             };
@@ -989,8 +989,8 @@
 
             var sensorsInDevice_3_1 = new SensorsInDevice
             {
-                SensorBaseId = sensor_3_1.Id,
-                SensorBase = sensor_3_1,
+                SensorId = sensor_3_1.Id,
+                Sensor = sensor_3_1,
                 DeviceBaseId = espDevice1.Id,
                 DeviceBase = espDevice1,
             };
@@ -999,8 +999,8 @@
 
             var sensorsInDevice_3_2 = new SensorsInDevice
             {
-                SensorBaseId = sensor_3_2.Id,
-                SensorBase = sensor_3_2,
+                SensorId = sensor_3_2.Id,
+                Sensor = sensor_3_2,
                 DeviceBaseId = espDevice1.Id,
                 DeviceBase = espDevice1,
             };

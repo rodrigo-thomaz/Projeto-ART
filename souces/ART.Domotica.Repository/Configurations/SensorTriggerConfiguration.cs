@@ -20,15 +20,15 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
 
-            //SensorBaseId
-            Property(x => x.SensorBaseId)
+            //SensorId
+            Property(x => x.SensorId)
                 .HasColumnOrder(1)
                 .IsRequired();
 
-            //SensorBase
-            HasRequired(x => x.SensorBase)
+            //Sensor
+            HasRequired(x => x.Sensor)
                 .WithMany(x => x.SensorTriggers)
-                .HasForeignKey(x => x.SensorBaseId)
+                .HasForeignKey(x => x.SensorId)
                 .WillCascadeOnDelete(false);
 
             //TriggerOn

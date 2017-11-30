@@ -6,7 +6,7 @@
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public abstract class SensorBase : IEntity<Guid>
+    public abstract class Sensor : IEntity<Guid>
     {
         #region Properties
 

@@ -157,7 +157,7 @@
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
             modelBuilder.Configurations.Add(new DeviceMQConfiguration());
             modelBuilder.Configurations.Add(new DeviceNTPConfiguration());
-            modelBuilder.Configurations.Add(new SensorBaseConfiguration());
+            modelBuilder.Configurations.Add(new SensorConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
             modelBuilder.Configurations.Add(new DeviceInApplicationConfiguration());
             modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());

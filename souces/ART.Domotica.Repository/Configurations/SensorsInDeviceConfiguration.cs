@@ -15,12 +15,12 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.SensorBaseId,
+                x.SensorId,
                 x.DeviceBaseId,
             });
 
-            //SensorBaseId
-            Property(x => x.SensorBaseId)
+            //SensorId
+            Property(x => x.SensorId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
@@ -33,10 +33,10 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //SensorBase
-            HasRequired(x => x.SensorBase)
+            //Sensor
+            HasRequired(x => x.Sensor)
                 .WithMany(x => x.SensorsInDevice)
-                .HasForeignKey(x => x.SensorBaseId)
+                .HasForeignKey(x => x.SensorId)
                 .WillCascadeOnDelete(false);
 
             //DeviceBase

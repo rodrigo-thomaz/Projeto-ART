@@ -23,7 +23,7 @@
             get; set;
         }
 
-        public SensorBase SensorBase
+        public Sensor Sensor
         {
             get; set;
         }

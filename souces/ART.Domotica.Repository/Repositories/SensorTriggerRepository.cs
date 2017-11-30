@@ -16,10 +16,10 @@ namespace ART.Domotica.Repository.Repositories
 
         }
 
-        public async Task<List<SensorTrigger>> GetSensorBaseId(Guid sensorBaseId)
+        public async Task<List<SensorTrigger>> GetSensorId(Guid sensorId)
         {
             return await _context.SensorTrigger
-                .Where(x => x.SensorBaseId == sensorBaseId)
+                .Where(x => x.SensorId == sensorId)
                 .ToListAsync();
         }
     }

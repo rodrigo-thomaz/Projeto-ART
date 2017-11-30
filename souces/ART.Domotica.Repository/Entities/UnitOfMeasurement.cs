@@ -23,7 +23,7 @@
             get; set;
         }
 
-        public ICollection<SensorBase> Sensors
+        public ICollection<Sensor> Sensors
         {
             get; set;
         }

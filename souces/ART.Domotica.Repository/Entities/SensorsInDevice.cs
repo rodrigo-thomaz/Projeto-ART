@@ -16,12 +16,12 @@
             get; set;
         }
 
-        public SensorBase SensorBase
+        public Sensor Sensor
         {
             get; set;
         }
 
-        public Guid SensorBaseId
+        public Guid SensorId
         {
             get; set;
         }

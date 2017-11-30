@@ -11,7 +11,7 @@
     {
         #region Methods
 
-        Task<List<SensorTrigger>> GetSensorBaseId(Guid sensorBaseId);
+        Task<List<SensorTrigger>> GetSensorId(Guid sensorId);
 
         #endregion Methods
     }
