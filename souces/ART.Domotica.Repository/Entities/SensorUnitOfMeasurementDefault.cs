@@ -49,7 +49,7 @@
 
         public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
-            get; protected set;
+            get; set;
         }
 
         #endregion Properties

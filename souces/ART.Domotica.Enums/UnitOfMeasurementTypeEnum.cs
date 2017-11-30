@@ -13,7 +13,7 @@
         Mass = 7,               // Unidades de massa
         SpecificWeight = 8,     // Unidades de peso específico
         Potency = 9,            // Unidades de potência
-        Pressure = 10,           // Unidades de pressão
+        Pressure = 10,          // Unidades de pressão
         Temperature = 11,       // Unidades de temperatura
         Time = 12,              // Unidades de tempo
         Velocity = 13,          // Unidades de velocidade
