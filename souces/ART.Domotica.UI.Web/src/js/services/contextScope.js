@@ -119,12 +119,28 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
             mapper_SensorUnitOfMeasurementDefault_UnitOfMeasurement_Init = true;
             for (var i = 0; i < context.sensorUnitOfMeasurementDefaults.length; i++) {
                 var sensorUnitOfMeasurementDefault = context.sensorUnitOfMeasurementDefaults[i];
-                var unitOfMeasurement = getUnitOfMeasurementByKey(sensorUnitOfMeasurementDefault.unitOfMeasurementId, sensorUnitOfMeasurementDefault.UnitOfMeasurementTypeId);
+                var unitOfMeasurement = getUnitOfMeasurementByKey(sensorUnitOfMeasurementDefault.unitOfMeasurementId, sensorUnitOfMeasurementDefault.unitOfMeasurementTypeId);
                 sensorUnitOfMeasurementDefault.unitOfMeasurement = unitOfMeasurement;
                 if (unitOfMeasurement.sensorUnitOfMeasurementDefaults === undefined) {
                     unitOfMeasurement.sensorUnitOfMeasurementDefaults = [];
                 }
                 unitOfMeasurement.sensorUnitOfMeasurementDefaults.push(sensorUnitOfMeasurementDefault);
+            }
+        }
+    };
+
+    var mapper_SensorUnitOfMeasurementDefault_SensorType_Init = false;
+    var mapper_SensorUnitOfMeasurementDefault_SensorType = function () {
+        if (!mapper_SensorUnitOfMeasurementDefault_SensorType_Init && context.sensorUnitOfMeasurementDefaultLoaded && context.sensorTypeLoaded) {
+            mapper_SensorUnitOfMeasurementDefault_SensorType_Init = true;
+            for (var i = 0; i < context.sensorUnitOfMeasurementDefaults.length; i++) {
+                var sensorUnitOfMeasurementDefault = context.sensorUnitOfMeasurementDefaults[i];
+                var sensorType = getSensorTypeByKey(sensorUnitOfMeasurementDefault.sensorTypeId);
+                sensorUnitOfMeasurementDefault.sensorType = sensorType;
+                if (sensorType.sensorUnitOfMeasurementDefaults === undefined) {
+                    sensorType.sensorUnitOfMeasurementDefaults = [];
+                }
+                sensorType.sensorUnitOfMeasurementDefaults.push(sensorUnitOfMeasurementDefault);
             }
         }
     };
@@ -142,6 +158,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
         mapper_SensorDatasheet_SensorTypeType();
+        mapper_SensorUnitOfMeasurementDefault_SensorType();
     });
 
     context.$watch('sensorDatasheetLoaded', function (newValue, oldValue) {
@@ -150,6 +167,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('sensorUnitOfMeasurementDefaultLoaded', function (newValue, oldValue) {
         mapper_SensorUnitOfMeasurementDefault_UnitOfMeasurement();
+        mapper_SensorUnitOfMeasurementDefault_SensorType();
     });
 
     context.$watch('sensorsLoaded', function (newValue, oldValue) {

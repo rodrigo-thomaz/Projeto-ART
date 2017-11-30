@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorUnitOfMeasurementDefaultService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
+app.factory('sensorUnitOfMeasurementDefaultService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -27,21 +27,14 @@ app.factory('sensorUnitOfMeasurementDefaultService', ['$http', 'ngAuthSettings',
             //alert('envio bem sucedido');
         });
     };     
-
-    var getSensorUnitOfMeasurementDefaultById = function (sensorUnitOfMeasurementDefaultId) {
-        for (var i = 0; i < serviceFactory.sensorUnitOfMeasurementDefaults.length; i++) {
-            if (serviceFactory.sensorUnitOfMeasurementDefaults[i].id === sensorUnitOfMeasurementDefaultId) {
-                return serviceFactory.sensorUnitOfMeasurementDefaults[i];
-            }
-        }
-    };
-
+    
     var onGetAllCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            serviceFactory.sensorUnitOfMeasurementDefaults.push(data[i]);
+            contextScope.sensorUnitOfMeasurementDefaults.push(data[i]);
         }
+        contextScope.sensorUnitOfMeasurementDefaultLoaded = true;
         _initializing = false;
         _initialized = true;
         $rootScope.$emit('sensorUnitOfMeasurementDefaultService_Initialized');
@@ -59,10 +52,7 @@ app.factory('sensorUnitOfMeasurementDefaultService', ['$http', 'ngAuthSettings',
 
     // serviceFactory
         
-    serviceFactory.sensorUnitOfMeasurementDefaults = [];  
-
     serviceFactory.initialized = initialized;
-    serviceFactory.getSensorUnitOfMeasurementDefaultById = getSensorUnitOfMeasurementDefaultById;    
 
     return serviceFactory;
 

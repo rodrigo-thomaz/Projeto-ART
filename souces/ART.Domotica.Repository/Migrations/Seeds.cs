@@ -441,6 +441,8 @@
                     SensorTypeId = temperatureSensorType.Id,
                     UnitOfMeasurementId = celsiusUnitOfMeasurement.Id,
                     UnitOfMeasurementTypeId = celsiusUnitOfMeasurement.UnitOfMeasurementTypeId,
+                    Max = 125M,
+                    Min = -55M,
                 };
                 context.SensorUnitOfMeasurementDefault.Add(sensorUnitOfMeasurementDefaultTemperatureDS18B20);
             }
@@ -451,8 +453,10 @@
                 {
                     Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
                     SensorTypeId = proximityDistanceSensorType.Id,
-                    UnitOfMeasurementId = celsiusUnitOfMeasurement.Id,
-                    UnitOfMeasurementTypeId = celsiusUnitOfMeasurement.UnitOfMeasurementTypeId,
+                    UnitOfMeasurementId = meterUnitOfMeasurement.Id,
+                    UnitOfMeasurementTypeId = meterUnitOfMeasurement.UnitOfMeasurementTypeId,
+                    Max = 2.3M,
+                    Min = 0.2M,
                 };
                 context.SensorUnitOfMeasurementDefault.Add(sensorUnitOfMeasurementDefaultUltrasonicHCSR04);
             }
