@@ -6,7 +6,7 @@
     {
         #region Properties
 
-        public UnitOfMeasurementTypeEnum Id
+        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
             get; set;
         }

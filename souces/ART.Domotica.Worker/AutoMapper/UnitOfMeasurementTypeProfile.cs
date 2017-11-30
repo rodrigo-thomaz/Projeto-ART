@@ -11,7 +11,9 @@
 
         public UnitOfMeasurementTypeProfile()
         {
-            CreateMap<UnitOfMeasurementType, UnitOfMeasurementTypeDetailModel>();
+            CreateMap<UnitOfMeasurementType, UnitOfMeasurementTypeDetailModel>()
+                .ForMember(vm => vm.UnitOfMeasurementTypeId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name));
         }
 
         #endregion Constructors

@@ -91,7 +91,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<List<Sensor>, List<SensorDetailModel>>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 

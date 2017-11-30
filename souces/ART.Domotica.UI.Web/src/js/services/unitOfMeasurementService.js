@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
+app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -29,9 +29,9 @@ app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope'
     };     
 
     var getByKey = function (unitOfMeasurementId, unitOfMeasurementTypeId) {
-        for (var i = 0; i < serviceFactory.unitOfMeasurements.length; i++) {
-            if (serviceFactory.unitOfMeasurements[i].id === unitOfMeasurementId && serviceFactory.unitOfMeasurements[i].unitOfMeasurementTypeId === unitOfMeasurementTypeId) {
-                return serviceFactory.unitOfMeasurements[i];
+        for (var i = 0; i < contextScope.unitOfMeasurements.length; i++) {
+            if (contextScope.unitOfMeasurements[i].id === unitOfMeasurementId && contextScope.unitOfMeasurements[i].unitOfMeasurementTypeId === unitOfMeasurementTypeId) {
+                return contextScope.unitOfMeasurements[i];
             }
         }
     };
@@ -40,8 +40,9 @@ app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope'
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            serviceFactory.unitOfMeasurements.push(data[i]);
+            contextScope.unitOfMeasurements.push(data[i]);
         }
+        contextScope.unitOfMeasurementLoaded = true;
         _initializing = false;
         _initialized = true;
         $rootScope.$emit('UnitOfMeasurementService_Initialized');
@@ -58,8 +59,6 @@ app.factory('unitOfMeasurementService', ['$http', 'ngAuthSettings', '$rootScope'
         onConnected();
 
     // serviceFactory
-        
-    serviceFactory.unitOfMeasurements = [];  
 
     serviceFactory.initialized = initialized;
     serviceFactory.getByKey = getByKey;    

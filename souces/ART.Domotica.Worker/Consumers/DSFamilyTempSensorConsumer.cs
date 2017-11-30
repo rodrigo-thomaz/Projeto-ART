@@ -170,7 +170,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionDetailModel>>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.GetAllResolutionsViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
@@ -201,7 +201,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DSFamilyTempSensorConstants.SetResolutionViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
@@ -243,7 +243,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetUnitOfMeasurementCompletedModel>(data);            
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DSFamilyTempSensorConstants.SetUnitOfMeasurementViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 

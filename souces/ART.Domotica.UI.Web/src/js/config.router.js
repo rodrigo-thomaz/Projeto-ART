@@ -46,6 +46,8 @@ angular.module('app')
 
                       'js/services/timeZoneService.js',                      
 
+                      'js/services/contextScope.js',
+
                       'js/services/unitOfMeasurementTypeService.js',
                       'js/services/unitOfMeasurementService.js',
                       'js/services/unitOfMeasurementConverter.js',

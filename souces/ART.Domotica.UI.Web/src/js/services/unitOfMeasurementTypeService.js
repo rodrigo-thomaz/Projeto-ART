@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('unitOfMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
+app.factory('unitOfMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -29,9 +29,9 @@ app.factory('unitOfMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootSc
     };     
 
     var getUnitOfMeasurementTypeById = function (unitOfMeasurementTypeId) {
-        for (var i = 0; i < serviceFactory.unitOfMeasurementTypes.length; i++) {
-            if (serviceFactory.unitOfMeasurementTypes[i].id == unitOfMeasurementTypeId) {
-                return serviceFactory.unitOfMeasurementTypes[i];
+        for (var i = 0; i < contextScope.unitOfMeasurementTypes.length; i++) {
+            if (contextScope.unitOfMeasurementTypes[i].id == unitOfMeasurementTypeId) {
+                return contextScope.unitOfMeasurementTypes[i];
             }
         }
     };
@@ -40,8 +40,9 @@ app.factory('unitOfMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootSc
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            serviceFactory.unitOfMeasurementTypes.push(data[i]);
+            contextScope.unitOfMeasurementTypes.push(data[i]);
         }
+        contextScope.unitOfMeasurementTypeLoaded = true;
         _initializing = false;
         _initialized = true;
         $rootScope.$emit('unitOfMeasurementTypeService_Initialized');
@@ -58,8 +59,6 @@ app.factory('unitOfMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootSc
         onConnected();
 
     // serviceFactory
-        
-    serviceFactory.unitOfMeasurementTypes = [];  
 
     serviceFactory.initialized = initialized;
     serviceFactory.getUnitOfMeasurementTypeById = getUnitOfMeasurementTypeById;    

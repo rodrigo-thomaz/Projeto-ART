@@ -78,7 +78,7 @@ namespace ART.Domotica.Worker.Consumers
 
             responseContract.WebUITopic = RandonHelper.RandomString(10);
 
-            var responseBuffer = SerializationHelpers.SerializeToJsonBufferAsync(responseContract);
+            var responseBuffer = SerializationHelpers.SerializeToJsonBufferAsync(responseContract, true);
 
             _model.BasicQos(0, 1, false);
 

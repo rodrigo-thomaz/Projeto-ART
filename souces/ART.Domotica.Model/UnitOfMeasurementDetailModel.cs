@@ -11,7 +11,12 @@
             get; set;
         }
 
-        public UnitOfMeasurementEnum Id
+        public UnitOfMeasurementEnum UnitOfMeasurementId
+        {
+            get; set;
+        }
+
+        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
         {
             get; set;
         }

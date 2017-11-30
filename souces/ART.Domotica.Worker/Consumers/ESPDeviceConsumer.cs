@@ -170,7 +170,7 @@
 
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceAdminDetailModel>>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetAllViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
@@ -201,7 +201,7 @@
 
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceDetailModel>>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
@@ -230,7 +230,7 @@
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetByPinViewCompletedQueueName);
             var viewModel = Mapper.Map<ESPDevice, ESPDeviceGetByPinModel>(data);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);            
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             _model.BasicPublish(exchange, rountingKey, null, buffer);
 
             _logger.DebugLeave();
@@ -258,7 +258,7 @@
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
             var viewModel = Mapper.Map<ESPDevice, ESPDeviceDetailModel>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o Iot
@@ -301,7 +301,7 @@
                 DeviceId = data.Id,
                 DeviceInApplicationId = message.Contract.DeviceInApplicationId
             };
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel);                        
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);                        
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando para o IoT
