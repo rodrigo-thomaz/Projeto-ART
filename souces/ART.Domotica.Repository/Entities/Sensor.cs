@@ -55,6 +55,11 @@
             get; set;
         }
 
+        public UnitOfMeasurementType UnitOfMeasurementType
+        {
+            get; set;
+        }
+
         public UnitOfMeasurementEnum UnitOfMeasurementId
         {
             get; set;

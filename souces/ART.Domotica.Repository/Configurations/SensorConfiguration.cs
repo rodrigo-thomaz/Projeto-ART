@@ -42,6 +42,12 @@
             Property(x => x.UnitOfMeasurementId)
                 .HasColumnOrder(2);
 
+            //UnitOfMeasurementUnitOfMeasurementType
+            HasRequired(x => x.UnitOfMeasurementType)
+                .WithMany(x => x.Sensors)
+                .HasForeignKey(x => x.UnitOfMeasurementTypeId)
+                .WillCascadeOnDelete(false);
+
             //UnitOfMeasurementTypeId
             Property(x => x.UnitOfMeasurementTypeId)
                 .HasColumnOrder(3);

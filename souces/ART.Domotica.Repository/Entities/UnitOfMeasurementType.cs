@@ -25,6 +25,11 @@
             get; set;
         }
 
+        public ICollection<Sensor> Sensors
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }
