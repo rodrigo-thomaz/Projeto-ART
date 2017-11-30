@@ -59,6 +59,10 @@
     <Compile Include="SensorTriggerSetAlarmBuzzerOnCompletedModel.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionCompletedModel.cs" />
     <Compile Include="SensorRangeDetailModel.cs" />
+    <Compile Include="SensorDatasheetDetailModel.cs" />
+    <Compile Include="SensorTypeDetailModel.cs" />
+    <Compile Include="SensorDetailModel.cs" />
+    <Compile Include="SensorUnitOfMeasurementDefaultDetailModel.cs" />
     <Compile Include="UnitOfMeasurementTypeDetailModel.cs" />
     <Compile Include="TimeZoneDetailModel.cs" />
     <Compile Include="UnitOfMeasurementDetailModel.cs" />

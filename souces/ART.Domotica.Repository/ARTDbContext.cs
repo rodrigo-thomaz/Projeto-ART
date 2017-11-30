@@ -85,7 +85,7 @@
             get; set;
         }
 
-        public DbSet<SensorDatasheet> SensorDataSheet
+        public DbSet<SensorDatasheet> SensorDatasheet
         {
             get; set;
         }

@@ -108,6 +108,10 @@
     <Compile Include="AutoMapper\DSFamilyTempSensorProfile.cs" />
     <Compile Include="AutoMapper\DeviceMQProfile.cs" />
     <Compile Include="AutoMapper\ESPDeviceProfile.cs" />
+    <Compile Include="AutoMapper\SensorUnitOfMeasurementDefaultProfile.cs" />
+    <Compile Include="AutoMapper\SensorDatasheetProfile.cs" />
+    <Compile Include="AutoMapper\SensorTypeProfile.cs" />
+    <Compile Include="AutoMapper\SensorProfile.cs" />
     <Compile Include="AutoMapper\UnitOfMeasurementTypeProfile.cs" />
     <Compile Include="AutoMapper\TimeZoneProfile.cs" />
     <Compile Include="AutoMapper\UnitOfMeasurementProfile.cs" />
@@ -117,6 +121,10 @@
     <Compile Include="Consumers\SensorTriggerConsumer.cs" />
     <Compile Include="Consumers\SensorChartLimiterConsumer.cs" />
     <Compile Include="Consumers\SensorRangeConsumer.cs" />
+    <Compile Include="Consumers\SensorUnitOfMeasurementDefaultConsumer.cs" />
+    <Compile Include="Consumers\SensorDatasheetConsumer.cs" />
+    <Compile Include="Consumers\SensorTypeConsumer.cs" />
+    <Compile Include="Consumers\SensorConsumer.cs" />
     <Compile Include="Consumers\UnitOfMeasurementTypeConsumer.cs" />
     <Compile Include="Consumers\TimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IApplicationMQConsumer.cs" />
@@ -127,6 +135,10 @@
     <Compile Include="IConsumers\ISensorChartLimiterConsumer.cs" />
     <Compile Include="IConsumers\ISensorRangeConsumer.cs" />
     <Compile Include="IConsumers\ISensorTriggerConsumer.cs" />
+    <Compile Include="IConsumers\ISensorUnitOfMeasurementDefaultConsumer.cs" />
+    <Compile Include="IConsumers\ISensorDatasheetConsumer.cs" />
+    <Compile Include="IConsumers\ISensorTypeConsumer.cs" />
+    <Compile Include="IConsumers\ISensorConsumer.cs" />
     <Compile Include="IConsumers\IUnitOfMeasurementTypeConsumer.cs" />
     <Compile Include="IConsumers\ITimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IUnitOfMeasurementConsumer.cs" />

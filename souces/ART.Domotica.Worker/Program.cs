@@ -53,18 +53,22 @@
 
             Mapper.Initialize(x =>
             {
-                x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationMQProfile());
+                x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationUserProfile());
-                x.AddProfile(new SensorRangeProfile());
-                x.AddProfile(new SensorTriggerProfile());
-                x.AddProfile(new SensorChartLimiterProfile());
+                x.AddProfile(new DeviceMQProfile());
+                x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());
-                x.AddProfile(new UnitOfMeasurementProfile());
-                x.AddProfile(new DeviceNTPProfile());
-                x.AddProfile(new DeviceMQProfile());
+                x.AddProfile(new SensorChartLimiterProfile());
+                x.AddProfile(new SensorDatasheetProfile());
+                x.AddProfile(new SensorProfile());
+                x.AddProfile(new SensorRangeProfile());
+                x.AddProfile(new SensorTriggerProfile());
+                x.AddProfile(new SensorTypeProfile());
+                x.AddProfile(new SensorUnitOfMeasurementDefaultProfile());
                 x.AddProfile(new TimeZoneProfile());
+                x.AddProfile(new UnitOfMeasurementProfile());
                 x.AddProfile(new UnitOfMeasurementTypeProfile());
             });
 

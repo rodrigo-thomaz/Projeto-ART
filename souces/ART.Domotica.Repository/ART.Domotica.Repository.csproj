@@ -125,6 +125,10 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
     <Compile Include="Interfaces\ISensorChartLimiterRepository.cs" />
     <Compile Include="Interfaces\ISensorTriggerRepository.cs" />
+    <Compile Include="Interfaces\ISensorUnitOfMeasurementDefaultRepository.cs" />
+    <Compile Include="Interfaces\ISensorDatasheetRepository.cs" />
+    <Compile Include="Interfaces\ISensorTypeRepository.cs" />
+    <Compile Include="Interfaces\ISensorRepository.cs" />
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementRepository.cs" />
     <Compile Include="Interfaces\ISensorRangeRepository.cs" />
@@ -182,7 +186,11 @@
     <Compile Include="Repositories\HardwareRepository.cs" />
     <Compile Include="Repositories\ESPDeviceRepository.cs" />
     <Compile Include="Repositories\SensorChartLimiterRepository.cs" />
+    <Compile Include="Repositories\SensorRepository.cs" />
+    <Compile Include="Repositories\SensorTypeRepository.cs" />
     <Compile Include="Repositories\SensorTriggerRepository.cs" />
+    <Compile Include="Repositories\SensorDatasheetRepository.cs" />
+    <Compile Include="Repositories\SensorUnitOfMeasurementDefaultRepository.cs" />
     <Compile Include="Repositories\TimeZoneRepository.cs" />
     <Compile Include="Repositories\SensorRangeRepository.cs" />
     <Compile Include="Repositories\UnitOfMeasurementRepository.cs" />

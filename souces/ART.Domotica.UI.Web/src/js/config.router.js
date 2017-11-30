@@ -43,16 +43,26 @@ angular.module('app')
                       'vr.directives.slider',
                       'ui.select',   
                       'toaster',
+
+                      'js/services/timeZoneService.js',                      
+
                       'js/services/unitOfMeasurementTypeService.js',
                       'js/services/unitOfMeasurementService.js',
                       'js/services/unitOfMeasurementConverter.js',
+
+                      'js/services/sensorTypeService.js',                      
+                      'js/services/sensorDatasheetService.js',                      
+                      'js/services/sensorUnitOfMeasurementDefaultService.js',
+                      'js/services/sensorService.js',
+                                            
                       'js/services/sensorRangeService.js',
                       'js/services/sensorChartLimiterService.js',
                       'js/services/sensorTriggerService.js',
-                      'js/services/timeZoneService.js',                      
-                      'js/services/deviceNTPService.js',
+
                       'js/services/dsFamilyTempSensorResolutionService.js',
                       'js/services/dsFamilyTempSensorService.js',
+
+                      'js/services/deviceNTPService.js',                      
                       'js/services/espDeviceService.js',
 
                       'js/controllers/sensorChartLimiterController.js',

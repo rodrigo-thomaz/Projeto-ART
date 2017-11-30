@@ -70,9 +70,13 @@
     <Compile Include="Interfaces\IHardwareDomain.cs" />
     <Compile Include="Interfaces\IESPDeviceDomain.cs" />
     <Compile Include="Interfaces\ISensorChartLimiterDomain.cs" />
+    <Compile Include="Interfaces\ISensorDomain.cs" />
+    <Compile Include="Interfaces\ISensorTypeDomain.cs" />
     <Compile Include="Interfaces\ISensorRangeDomain.cs" />
     <Compile Include="Interfaces\ISensorTriggerDomain.cs" />
+    <Compile Include="Interfaces\ISensorDatasheetDomain.cs" />
     <Compile Include="Interfaces\ITimeZoneDomain.cs" />
+    <Compile Include="Interfaces\ISensorUnitOfMeasurementDefaultDomain.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementDomain.cs" />
     <Compile Include="Interfaces\IUnitOfMeasurementTypeDomain.cs" />
     <Compile Include="Services\ApplicationMQDomain.cs" />
@@ -86,8 +90,12 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SensorChartLimiterDomain.cs" />
+    <Compile Include="Services\SensorDomain.cs" />
+    <Compile Include="Services\SensorTypeDomain.cs" />
     <Compile Include="Services\SensorRangeDomain.cs" />
     <Compile Include="Services\SensorTriggerDomain.cs" />
+    <Compile Include="Services\SensorDatasheetDomain.cs" />
+    <Compile Include="Services\SensorUnitOfMeasurementDefaultDomain.cs" />
     <Compile Include="Services\TimeZoneDomain.cs" />
     <Compile Include="Services\UnitOfMeasurementDomain.cs" />
     <Compile Include="Services\UnitOfMeasurementTypeDomain.cs" />
