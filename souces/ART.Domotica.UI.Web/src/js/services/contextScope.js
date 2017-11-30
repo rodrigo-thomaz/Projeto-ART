@@ -79,7 +79,8 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
-    // Navigation Properties Binds
+    // Navigation Properties Mappers
+
     var mapper_UnitOfMeasurement_UnitOfMeasurementType_Init = false;
     var mapper_UnitOfMeasurement_UnitOfMeasurementType = function () {
         if (!mapper_UnitOfMeasurement_UnitOfMeasurementType_Init && context.unitOfMeasurementTypeLoaded && context.unitOfMeasurementLoaded) {
@@ -112,6 +113,22 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
+    var mapper_SensorUnitOfMeasurementDefault_UnitOfMeasurement_Init = false;
+    var mapper_SensorUnitOfMeasurementDefault_UnitOfMeasurement = function () {
+        if (!mapper_SensorUnitOfMeasurementDefault_UnitOfMeasurement_Init && context.sensorUnitOfMeasurementDefaultLoaded && context.unitOfMeasurementLoaded) {
+            mapper_SensorUnitOfMeasurementDefault_UnitOfMeasurement_Init = true;
+            for (var i = 0; i < context.sensorUnitOfMeasurementDefaults.length; i++) {
+                var sensorUnitOfMeasurementDefault = context.sensorUnitOfMeasurementDefaults[i];
+                var unitOfMeasurement = getUnitOfMeasurementByKey(sensorUnitOfMeasurementDefault.unitOfMeasurementId, sensorUnitOfMeasurementDefault.UnitOfMeasurementTypeId);
+                sensorUnitOfMeasurementDefault.unitOfMeasurement = unitOfMeasurement;
+                if (unitOfMeasurement.sensorUnitOfMeasurementDefaults === undefined) {
+                    unitOfMeasurement.sensorUnitOfMeasurementDefaults = [];
+                }
+                unitOfMeasurement.sensorUnitOfMeasurementDefaults.push(sensorUnitOfMeasurementDefault);
+            }
+        }
+    };
+
     // Watches
 
     context.$watch('unitOfMeasurementTypeLoaded', function (newValue, oldValue) {
@@ -120,6 +137,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('unitOfMeasurementLoaded', function (newValue, oldValue) {
         mapper_UnitOfMeasurement_UnitOfMeasurementType();
+        mapper_SensorUnitOfMeasurementDefault_UnitOfMeasurement();
     });    
 
     context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
@@ -131,7 +149,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     });
 
     context.$watch('sensorUnitOfMeasurementDefaultLoaded', function (newValue, oldValue) {
-        
+        mapper_SensorUnitOfMeasurementDefault_UnitOfMeasurement();
     });
 
     context.$watch('sensorsLoaded', function (newValue, oldValue) {
