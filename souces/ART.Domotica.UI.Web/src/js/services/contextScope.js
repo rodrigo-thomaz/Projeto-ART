@@ -80,9 +80,10 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     };
 
     // Navigation Properties Binds
-
-    var bind_UnitOfMeasurement_UnitOfMeasurementType = function () {
-        if (context.unitOfMeasurementTypeLoaded && context.unitOfMeasurementLoaded) {
+    var mapper_UnitOfMeasurement_UnitOfMeasurementType_Init = false;
+    var mapper_UnitOfMeasurement_UnitOfMeasurementType = function () {
+        if (!mapper_UnitOfMeasurement_UnitOfMeasurementType_Init && context.unitOfMeasurementTypeLoaded && context.unitOfMeasurementLoaded) {
+            mapper_UnitOfMeasurement_UnitOfMeasurementType_Init = true;
             for (var i = 0; i < context.unitOfMeasurements.length; i++) {
                 var unitOfMeasurement = context.unitOfMeasurements[i];
                 var unitOfMeasurementType = getUnitOfMeasurementTypeByKey(unitOfMeasurement.unitOfMeasurementTypeId);
@@ -95,22 +96,38 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
+    var mapper_SensorDatasheet_SensorTypeType_Init = false;
+    var mapper_SensorDatasheet_SensorTypeType = function () {
+        if (!mapper_SensorDatasheet_SensorTypeType_Init && context.sensorDatasheetLoaded && context.sensorTypeLoaded) {
+            mapper_SensorDatasheet_SensorTypeType_Init = true;
+            for (var i = 0; i < context.sensorDatasheets.length; i++) {
+                var sensorDatasheet = context.sensorDatasheets[i];
+                var sensorType = getSensorTypeByKey(sensorDatasheet.sensorTypeId);
+                sensorDatasheet.sensorType = sensorType;
+                if (sensorType.sensorDatasheets === undefined) {
+                    sensorType.sensorDatasheets = [];
+                }
+                sensorType.sensorDatasheets.push(sensorDatasheet);
+            }
+        }
+    };
+
     // Watches
 
     context.$watch('unitOfMeasurementTypeLoaded', function (newValue, oldValue) {
-        bind_UnitOfMeasurement_UnitOfMeasurementType();
+        mapper_UnitOfMeasurement_UnitOfMeasurementType();
     });
 
     context.$watch('unitOfMeasurementLoaded', function (newValue, oldValue) {
-        bind_UnitOfMeasurement_UnitOfMeasurementType();
+        mapper_UnitOfMeasurement_UnitOfMeasurementType();
     });    
 
     context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
-        
+        mapper_SensorDatasheet_SensorTypeType();
     });
 
     context.$watch('sensorDatasheetLoaded', function (newValue, oldValue) {
-        
+        mapper_SensorDatasheet_SensorTypeType();
     });
 
     context.$watch('sensorUnitOfMeasurementDefaultLoaded', function (newValue, oldValue) {

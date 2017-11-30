@@ -11,7 +11,9 @@
 
         public SensorDatasheetProfile()
         {
-            CreateMap<SensorDatasheet, SensorDatasheetDetailModel>();
+            CreateMap<SensorDatasheet, SensorDatasheetDetailModel>()
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId));
         }
 
         #endregion Constructors

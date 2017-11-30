@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
+app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -27,21 +27,14 @@ app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 
             //alert('envio bem sucedido');
         });
     };     
-
-    var getSensorDatasheetById = function (sensorDatasheetId) {
-        for (var i = 0; i < serviceFactory.sensorDatasheets.length; i++) {
-            if (serviceFactory.sensorDatasheets[i].id === sensorDatasheetId) {
-                return serviceFactory.sensorDatasheets[i];
-            }
-        }
-    };
-
+    
     var onGetAllCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            serviceFactory.sensorDatasheets.push(data[i]);
+            contextScope.sensorDatasheets.push(data[i]);
         }
+        contextScope.sensorDatasheetLoaded = true;
         _initializing = false;
         _initialized = true;
         $rootScope.$emit('sensorDatasheetService_Initialized');
@@ -58,11 +51,8 @@ app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 
         onConnected();
 
     // serviceFactory
-        
-    serviceFactory.sensorDatasheets = [];  
 
     serviceFactory.initialized = initialized;
-    serviceFactory.getSensorDatasheetById = getSensorDatasheetById;    
 
     return serviceFactory;
 

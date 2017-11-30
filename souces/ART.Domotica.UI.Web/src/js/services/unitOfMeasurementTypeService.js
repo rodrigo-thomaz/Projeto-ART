@@ -26,15 +26,7 @@ app.factory('unitOfMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootSc
         return $http.post(serviceBase + 'api/unitOfMeasurementType/getAll').then(function (results) {
             //alert('envio bem sucedido');
         });
-    };     
-
-    var getUnitOfMeasurementTypeById = function (unitOfMeasurementTypeId) {
-        for (var i = 0; i < contextScope.unitOfMeasurementTypes.length; i++) {
-            if (contextScope.unitOfMeasurementTypes[i].id == unitOfMeasurementTypeId) {
-                return contextScope.unitOfMeasurementTypes[i];
-            }
-        }
-    };
+    };       
 
     var onGetAllCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
@@ -61,7 +53,6 @@ app.factory('unitOfMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootSc
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.getUnitOfMeasurementTypeById = getUnitOfMeasurementTypeById;    
 
     return serviceFactory;
 
