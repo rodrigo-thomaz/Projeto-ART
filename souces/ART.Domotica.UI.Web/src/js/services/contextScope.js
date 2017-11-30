@@ -27,19 +27,57 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     var getUnitOfMeasurementTypeByKey = function (unitOfMeasurementTypeId) {
         for (var i = 0; i < context.unitOfMeasurementTypes.length; i++) {
-            if (context.unitOfMeasurementTypes[i].unitOfMeasurementTypeId === unitOfMeasurementTypeId) {
-                return context.unitOfMeasurementTypes[i];
+            var item = context.unitOfMeasurementTypes[i];
+            if (item.unitOfMeasurementTypeId === unitOfMeasurementTypeId) {
+                return item;
             }
         }
     }
 
     var getUnitOfMeasurementByKey = function (unitOfMeasurementId, unitOfMeasurementTypeId) {
         for (var i = 0; i < context.unitOfMeasurements.length; i++) {
-            if (context.unitOfMeasurements[i].unitOfMeasurementId === unitOfMeasurementId && context.unitOfMeasurements[i].unitOfMeasurementTypeId === unitOfMeasurementTypeId) {
-                return context.unitOfMeasurements[i];
+            var item = context.unitOfMeasurements[i];
+            if (item.unitOfMeasurementId === unitOfMeasurementId && item.unitOfMeasurementTypeId === unitOfMeasurementTypeId) {
+                return item;
             }
         }
     }
+
+    var getSensorTypeByKey = function (sensorTypeId) {
+        for (var i = 0; i < context.sensorTypes.length; i++) {
+            var item = context.sensorTypes[i];
+            if (item.sensorTypeId === sensorTypeId) {
+                return item;
+            }
+        }
+    }
+
+    var getSensorDatasheetByKey = function (sensorDatasheetId, sensorTypeId) {
+        for (var i = 0; i < context.sensorDatasheets.length; i++) {
+            var item = context.sensorDatasheets[i];
+            if (item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId) {
+                return item;
+            }
+        }
+    }
+
+    var getSensorUnitOfMeasurementDefaultByKey = function (sensorUnitOfMeasurementDefaultId, sensorTypeId) {
+        for (var i = 0; i < context.sensorUnitOfMeasurementDefaults.length; i++) {
+            var item = context.sensorUnitOfMeasurementDefaults[i];
+            if (item.sensorUnitOfMeasurementDefaultId === sensorUnitOfMeasurementDefaultId && item.sensorTypeId === sensorTypeId) {
+                return item;
+            }
+        }
+    };
+
+    var getSensorByKey = function (sensorId) {
+        for (var i = 0; i < context.sensors.length; i++) {
+            var item = context.sensors[i];
+            if (item.sensorId === sensorId) {
+                return item;
+            }
+        }
+    };
 
     // Navigation Properties Binds
 
@@ -67,10 +105,30 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         bind_UnitOfMeasurement_UnitOfMeasurementType();
     });    
 
+    context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
+        
+    });
+
+    context.$watch('sensorDatasheetLoaded', function (newValue, oldValue) {
+        
+    });
+
+    context.$watch('sensorUnitOfMeasurementDefaultLoaded', function (newValue, oldValue) {
+        
+    });
+
+    context.$watch('sensorsLoaded', function (newValue, oldValue) {
+        
+    });
+
     // Public Methods
 
     context.getUnitOfMeasurementTypeByKey = getUnitOfMeasurementTypeByKey;
     context.getUnitOfMeasurementByKey = getUnitOfMeasurementByKey;
+    context.getSensorTypeByKey = getSensorTypeByKey;
+    context.getSensorDatasheetByKey = getSensorDatasheetByKey;
+    context.getSensorUnitOfMeasurementDefaultByKey = getSensorUnitOfMeasurementDefaultByKey;
+    context.getSensorByKey = getSensorByKey;
 
     return context;
 
