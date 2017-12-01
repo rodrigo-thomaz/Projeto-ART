@@ -1,7 +1,7 @@
-﻿using ART.Domotica.Enums;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using ART.Domotica.Enums;
+
     public class NumericalScaleTypeCountry
     {
         #region Properties
@@ -16,12 +16,12 @@ namespace ART.Domotica.Repository.Entities
             get; set;
         }
 
-        public NumericalScaleTypeEnum NumericalScaleTypeId
+        public NumericalScaleType NumericalScaleType
         {
             get; set;
         }
 
-        public NumericalScaleType NumericalScaleType
+        public NumericalScaleTypeEnum NumericalScaleTypeId
         {
             get; set;
         }

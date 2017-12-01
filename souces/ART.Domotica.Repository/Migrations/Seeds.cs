@@ -1191,359 +1191,7 @@
                 }
 
                 context.SaveChanges();
-            }            
-        }
-
-        private static void ExecuteNumericalScaleType(ARTDbContext context)
-        {
-            var @long = context.NumericalScaleType.SingleOrDefault(x => x.Id == NumericalScaleTypeEnum.Long);
-            var @short = context.NumericalScaleType.SingleOrDefault(x => x.Id == NumericalScaleTypeEnum.Short);
-
-            if (@long == null)
-            {
-                @long = new NumericalScaleType
-                {
-                    Id = NumericalScaleTypeEnum.Long,
-                };
-                context.NumericalScaleType.Add(@long);
             }
-            @long.Name = "Longa";
-
-            if (@short == null)
-            {
-                @short = new NumericalScaleType
-                {
-                    Id = NumericalScaleTypeEnum.Short,
-                };
-                context.NumericalScaleType.Add(@short);
-            }
-            @short.Name = "Curta";
-
-            context.SaveChanges();
-        }
-
-        private static void ExecuteSettings()
-        {
-            ISettingManager settingManager = new SettingManager();
-
-            // ChangePinIntervalInSeconds
-            if (!settingManager.Exist(SettingsConstants.ChangePinIntervalInSecondsSettingsKey))
-            {
-                settingManager.Insert(SettingsConstants.ChangePinIntervalInSecondsSettingsKey, 20);
-            }
-
-            // BrokerHost
-            if (!settingManager.Exist(MQSettingsConstants.BrokerHostSettingsKey))
-            {
-                // BROKER_MQTT_FREE = "broker.hivemq.com"
-                settingManager.Insert(MQSettingsConstants.BrokerHostSettingsKey, "file-server.rthomaz.local");
-            }
-
-            // BrokerVirtualHost
-            if (!settingManager.Exist(MQSettingsConstants.BrokerVirtualHostSettingsKey))
-            {
-                settingManager.Insert(MQSettingsConstants.BrokerVirtualHostSettingsKey, "/");
-            }
-
-            // BrokerPort
-            if (!settingManager.Exist(MQSettingsConstants.BrokerPortSettingsKey))
-            {
-                settingManager.Insert(MQSettingsConstants.BrokerPortSettingsKey, 1883);
-            }
-
-            // BrokerUser
-            if (!settingManager.Exist(MQSettingsConstants.BrokerUserSettingsKey))
-            {
-                settingManager.Insert(MQSettingsConstants.BrokerUserSettingsKey, "test");
-            }
-
-            // BrokerPwd
-            if (!settingManager.Exist(MQSettingsConstants.BrokerPwdSettingsKey))
-            {
-                settingManager.Insert(MQSettingsConstants.BrokerPwdSettingsKey, "test");
-            }
-
-            // RpcClientTimeOutMilliSeconds
-            if (!settingManager.Exist(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey))
-            {
-                settingManager.Insert(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey, 5000);
-            }
-
-            // NTPHost
-            if (!settingManager.Exist(SettingsConstants.NTPHostSettingsKey))
-            {
-                settingManager.Insert(SettingsConstants.NTPHostSettingsKey, "pdc-server.rthomaz.local");
-            }
-
-            // NTPPort
-            if (!settingManager.Exist(SettingsConstants.NTPPortSettingsKey))
-            {
-                settingManager.Insert(SettingsConstants.NTPPortSettingsKey, 1337);
-            }
-
-            // PublishMessageInterval
-            if (!settingManager.Exist(SettingsConstants.PublishMessageIntervalSettingsKey))
-            {
-                settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
-            }
-        }
-
-        private static void ExecuteNumericalScalePrefix(ARTDbContext context)
-        {
-            var yotta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Yotta);
-            var zetta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Zetta);
-            var exa = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Exa);
-            var peta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Peta);
-            var tera = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Tera);
-            var giga = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Giga);
-            var mega = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Mega);
-            var quilo = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Quilo);
-            var hecto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Hecto);
-            var deca = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Deca);
-            var none = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.None);
-            var deci = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Deci);
-            var centi = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Centi);
-            var mili = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Mili);
-            var micro = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Micro);
-            var nano = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Nano);
-            var pico = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Pico);
-            var femto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Femto);
-            var atto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Atto);
-            var zepto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Zepto);
-            var yocto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Yocto);
-
-            if (yotta == null)
-            {
-                yotta = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Yotta,
-                };
-                context.NumericalScalePrefix.Add(yotta);
-            }
-            yotta.Name = "yotta";
-            yotta.Symbol = "Y";
-
-            if (zetta == null)
-            {
-                zetta = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Zetta,
-                };
-                context.NumericalScalePrefix.Add(zetta);
-            }
-            zetta.Name = "zetta";
-            zetta.Symbol = "Z";
-
-            if (exa == null)
-            {
-                exa = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Exa,
-                };
-                context.NumericalScalePrefix.Add(exa);
-            }
-            exa.Name = "exa";
-            exa.Symbol = "E";
-
-            if (peta == null)
-            {
-                peta = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Peta,
-                };
-                context.NumericalScalePrefix.Add(peta);
-            }
-            peta.Name = "peta";
-            peta.Symbol = "P";
-
-            if (tera == null)
-            {
-                tera = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Tera,
-                };
-                context.NumericalScalePrefix.Add(tera);
-            }
-            tera.Name = "tera";
-            tera.Symbol = "T";
-
-            if (giga == null)
-            {
-                giga = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Giga,
-                };
-                context.NumericalScalePrefix.Add(giga);
-            }
-            giga.Name = "giga";
-            giga.Symbol = "G";
-
-            if (mega == null)
-            {
-                mega = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Mega,
-                };
-                context.NumericalScalePrefix.Add(mega);
-            }
-            mega.Name = "mega";
-            mega.Symbol = "M";
-
-            if (quilo == null)
-            {
-                quilo = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Quilo,
-                };
-                context.NumericalScalePrefix.Add(quilo);
-            }
-            quilo.Name = "quilo";
-            quilo.Symbol = "k";
-
-            if (hecto == null)
-            {
-                hecto = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Hecto,
-                };
-                context.NumericalScalePrefix.Add(hecto);
-            }
-            hecto.Name = "hecto";
-            hecto.Symbol = "h";
-
-            if (deca == null)
-            {
-                deca = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Deca,
-                };
-                context.NumericalScalePrefix.Add(deca);
-            }
-            deca.Name = "deca";
-            deca.Symbol = "da";
-
-            if (none == null)
-            {
-                none = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.None,
-                };
-                context.NumericalScalePrefix.Add(none);
-            }
-            none.Name = "none";
-            none.Symbol = null;
-
-            if (deci == null)
-            {
-                deci = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Deci,
-                };
-                context.NumericalScalePrefix.Add(deci);
-            }
-            deci.Name = "deci";
-            deci.Symbol = "d";
-
-            if (centi == null)
-            {
-                centi = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Centi,
-                };
-                context.NumericalScalePrefix.Add(centi);
-            }
-            centi.Name = "centi";
-            centi.Symbol = "c";
-
-            if (mili == null)
-            {
-                mili = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Mili,
-                };
-                context.NumericalScalePrefix.Add(mili);
-            }
-            mili.Name = "mili";
-            mili.Symbol = "m";
-
-            if (micro == null)
-            {
-                micro = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Micro,
-                };
-                context.NumericalScalePrefix.Add(micro);
-            }
-            micro.Name = "micro";
-            micro.Symbol = "µ";
-
-            if (nano == null)
-            {
-                nano = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Nano,
-                };
-                context.NumericalScalePrefix.Add(nano);
-            }
-            nano.Name = "nano";
-            nano.Symbol = "n";
-
-            if (pico == null)
-            {
-                pico = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Pico,
-                };
-                context.NumericalScalePrefix.Add(pico);
-            }
-            pico.Name = "pico";
-            pico.Symbol = "p";
-
-            if (femto == null)
-            {
-                femto = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Femto,
-                };
-                context.NumericalScalePrefix.Add(femto);
-            }
-            femto.Name = "femto";
-            femto.Symbol = "f";
-
-            if (atto == null)
-            {
-                atto = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Atto,
-                };
-                context.NumericalScalePrefix.Add(atto);
-            }
-            atto.Name = "atto";
-            atto.Symbol = "a";
-
-            if (zepto == null)
-            {
-                zepto = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Zepto,
-                };
-                context.NumericalScalePrefix.Add(zepto);
-            }
-            zepto.Name = "zepto";
-            zepto.Symbol = "z";
-
-            if (yocto == null)
-            {
-                yocto = new NumericalScalePrefix
-                {
-                    Id = NumericalScalePrefixEnum.Yocto,
-                };
-                context.NumericalScalePrefix.Add(yocto);
-            }
-            yocto.Name = "yocto";
-            yocto.Symbol = "y";
-
-            context.SaveChanges();
         }
 
         private static void ExecuteNumericalScaleLong(ARTDbContext context)
@@ -1988,7 +1636,265 @@
             longYocto.Name = "Quadrilionésimo";
             longYocto.Base = 10;
             longYocto.Exponent = -24;
-            
+
+            context.SaveChanges();
+        }
+
+        private static void ExecuteNumericalScalePrefix(ARTDbContext context)
+        {
+            var yotta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Yotta);
+            var zetta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Zetta);
+            var exa = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Exa);
+            var peta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Peta);
+            var tera = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Tera);
+            var giga = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Giga);
+            var mega = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Mega);
+            var quilo = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Quilo);
+            var hecto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Hecto);
+            var deca = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Deca);
+            var none = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.None);
+            var deci = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Deci);
+            var centi = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Centi);
+            var mili = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Mili);
+            var micro = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Micro);
+            var nano = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Nano);
+            var pico = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Pico);
+            var femto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Femto);
+            var atto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Atto);
+            var zepto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Zepto);
+            var yocto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Yocto);
+
+            if (yotta == null)
+            {
+                yotta = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Yotta,
+                };
+                context.NumericalScalePrefix.Add(yotta);
+            }
+            yotta.Name = "yotta";
+            yotta.Symbol = "Y";
+
+            if (zetta == null)
+            {
+                zetta = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Zetta,
+                };
+                context.NumericalScalePrefix.Add(zetta);
+            }
+            zetta.Name = "zetta";
+            zetta.Symbol = "Z";
+
+            if (exa == null)
+            {
+                exa = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Exa,
+                };
+                context.NumericalScalePrefix.Add(exa);
+            }
+            exa.Name = "exa";
+            exa.Symbol = "E";
+
+            if (peta == null)
+            {
+                peta = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Peta,
+                };
+                context.NumericalScalePrefix.Add(peta);
+            }
+            peta.Name = "peta";
+            peta.Symbol = "P";
+
+            if (tera == null)
+            {
+                tera = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Tera,
+                };
+                context.NumericalScalePrefix.Add(tera);
+            }
+            tera.Name = "tera";
+            tera.Symbol = "T";
+
+            if (giga == null)
+            {
+                giga = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Giga,
+                };
+                context.NumericalScalePrefix.Add(giga);
+            }
+            giga.Name = "giga";
+            giga.Symbol = "G";
+
+            if (mega == null)
+            {
+                mega = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Mega,
+                };
+                context.NumericalScalePrefix.Add(mega);
+            }
+            mega.Name = "mega";
+            mega.Symbol = "M";
+
+            if (quilo == null)
+            {
+                quilo = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Quilo,
+                };
+                context.NumericalScalePrefix.Add(quilo);
+            }
+            quilo.Name = "quilo";
+            quilo.Symbol = "k";
+
+            if (hecto == null)
+            {
+                hecto = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Hecto,
+                };
+                context.NumericalScalePrefix.Add(hecto);
+            }
+            hecto.Name = "hecto";
+            hecto.Symbol = "h";
+
+            if (deca == null)
+            {
+                deca = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Deca,
+                };
+                context.NumericalScalePrefix.Add(deca);
+            }
+            deca.Name = "deca";
+            deca.Symbol = "da";
+
+            if (none == null)
+            {
+                none = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.None,
+                };
+                context.NumericalScalePrefix.Add(none);
+            }
+            none.Name = "none";
+            none.Symbol = null;
+
+            if (deci == null)
+            {
+                deci = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Deci,
+                };
+                context.NumericalScalePrefix.Add(deci);
+            }
+            deci.Name = "deci";
+            deci.Symbol = "d";
+
+            if (centi == null)
+            {
+                centi = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Centi,
+                };
+                context.NumericalScalePrefix.Add(centi);
+            }
+            centi.Name = "centi";
+            centi.Symbol = "c";
+
+            if (mili == null)
+            {
+                mili = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Mili,
+                };
+                context.NumericalScalePrefix.Add(mili);
+            }
+            mili.Name = "mili";
+            mili.Symbol = "m";
+
+            if (micro == null)
+            {
+                micro = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Micro,
+                };
+                context.NumericalScalePrefix.Add(micro);
+            }
+            micro.Name = "micro";
+            micro.Symbol = "µ";
+
+            if (nano == null)
+            {
+                nano = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Nano,
+                };
+                context.NumericalScalePrefix.Add(nano);
+            }
+            nano.Name = "nano";
+            nano.Symbol = "n";
+
+            if (pico == null)
+            {
+                pico = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Pico,
+                };
+                context.NumericalScalePrefix.Add(pico);
+            }
+            pico.Name = "pico";
+            pico.Symbol = "p";
+
+            if (femto == null)
+            {
+                femto = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Femto,
+                };
+                context.NumericalScalePrefix.Add(femto);
+            }
+            femto.Name = "femto";
+            femto.Symbol = "f";
+
+            if (atto == null)
+            {
+                atto = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Atto,
+                };
+                context.NumericalScalePrefix.Add(atto);
+            }
+            atto.Name = "atto";
+            atto.Symbol = "a";
+
+            if (zepto == null)
+            {
+                zepto = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Zepto,
+                };
+                context.NumericalScalePrefix.Add(zepto);
+            }
+            zepto.Name = "zepto";
+            zepto.Symbol = "z";
+
+            if (yocto == null)
+            {
+                yocto = new NumericalScalePrefix
+                {
+                    Id = NumericalScalePrefixEnum.Yocto,
+                };
+                context.NumericalScalePrefix.Add(yocto);
+            }
+            yocto.Name = "yocto";
+            yocto.Symbol = "y";
+
             context.SaveChanges();
         }
 
@@ -2436,6 +2342,100 @@
             shortYocto.Exponent = -8;
 
             context.SaveChanges();
+        }
+
+        private static void ExecuteNumericalScaleType(ARTDbContext context)
+        {
+            var @long = context.NumericalScaleType.SingleOrDefault(x => x.Id == NumericalScaleTypeEnum.Long);
+            var @short = context.NumericalScaleType.SingleOrDefault(x => x.Id == NumericalScaleTypeEnum.Short);
+
+            if (@long == null)
+            {
+                @long = new NumericalScaleType
+                {
+                    Id = NumericalScaleTypeEnum.Long,
+                };
+                context.NumericalScaleType.Add(@long);
+            }
+            @long.Name = "Longa";
+
+            if (@short == null)
+            {
+                @short = new NumericalScaleType
+                {
+                    Id = NumericalScaleTypeEnum.Short,
+                };
+                context.NumericalScaleType.Add(@short);
+            }
+            @short.Name = "Curta";
+
+            context.SaveChanges();
+        }
+
+        private static void ExecuteSettings()
+        {
+            ISettingManager settingManager = new SettingManager();
+
+            // ChangePinIntervalInSeconds
+            if (!settingManager.Exist(SettingsConstants.ChangePinIntervalInSecondsSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.ChangePinIntervalInSecondsSettingsKey, 20);
+            }
+
+            // BrokerHost
+            if (!settingManager.Exist(MQSettingsConstants.BrokerHostSettingsKey))
+            {
+                // BROKER_MQTT_FREE = "broker.hivemq.com"
+                settingManager.Insert(MQSettingsConstants.BrokerHostSettingsKey, "file-server.rthomaz.local");
+            }
+
+            // BrokerVirtualHost
+            if (!settingManager.Exist(MQSettingsConstants.BrokerVirtualHostSettingsKey))
+            {
+                settingManager.Insert(MQSettingsConstants.BrokerVirtualHostSettingsKey, "/");
+            }
+
+            // BrokerPort
+            if (!settingManager.Exist(MQSettingsConstants.BrokerPortSettingsKey))
+            {
+                settingManager.Insert(MQSettingsConstants.BrokerPortSettingsKey, 1883);
+            }
+
+            // BrokerUser
+            if (!settingManager.Exist(MQSettingsConstants.BrokerUserSettingsKey))
+            {
+                settingManager.Insert(MQSettingsConstants.BrokerUserSettingsKey, "test");
+            }
+
+            // BrokerPwd
+            if (!settingManager.Exist(MQSettingsConstants.BrokerPwdSettingsKey))
+            {
+                settingManager.Insert(MQSettingsConstants.BrokerPwdSettingsKey, "test");
+            }
+
+            // RpcClientTimeOutMilliSeconds
+            if (!settingManager.Exist(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey))
+            {
+                settingManager.Insert(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey, 5000);
+            }
+
+            // NTPHost
+            if (!settingManager.Exist(SettingsConstants.NTPHostSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.NTPHostSettingsKey, "pdc-server.rthomaz.local");
+            }
+
+            // NTPPort
+            if (!settingManager.Exist(SettingsConstants.NTPPortSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.NTPPortSettingsKey, 1337);
+            }
+
+            // PublishMessageInterval
+            if (!settingManager.Exist(SettingsConstants.PublishMessageIntervalSettingsKey))
+            {
+                settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
+            }
         }
 
         private static Encoding GetEncoding()

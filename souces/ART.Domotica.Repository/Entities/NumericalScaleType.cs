@@ -7,12 +7,7 @@
 
     public class NumericalScaleType : IEntity<NumericalScaleTypeEnum>
     {
-        #region Properties        
-
-        public ICollection<UnitMeasurementScale> UnitMeasurementScales
-        {
-            get; set;
-        }
+        #region Properties
 
         public NumericalScaleTypeEnum Id
         {
@@ -33,7 +28,12 @@
         {
             get; set;
         }
-        
+
+        public ICollection<UnitMeasurementScale> UnitMeasurementScales
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }

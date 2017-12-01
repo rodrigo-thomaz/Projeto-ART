@@ -1,9 +1,10 @@
-﻿using ART.Domotica.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Domotica.Repository.Configurations
+﻿namespace ART.Domotica.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Domotica.Repository.Entities;
+
     public class UnitMeasurementScaleConfiguration : EntityTypeConfiguration<UnitMeasurementScale>
     {
         #region Constructors
@@ -53,7 +54,7 @@ namespace ART.Domotica.Repository.Configurations
             Property(x => x.NumericalScalePrefixId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();            
+                .IsRequired();
 
             //NumericalScaleTypeId
             Property(x => x.NumericalScaleTypeId)

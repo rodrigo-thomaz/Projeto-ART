@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using ART.Domotica.Enums;
     using System.Collections.Generic;
+
+    using ART.Domotica.Enums;
 
     public class NumericalScale
     {
@@ -22,22 +23,22 @@
             get; set;
         }
 
-        public NumericalScaleType NumericalScaleType
-        {
-            get; set;
-        }
-
-        public NumericalScaleTypeEnum NumericalScaleTypeId
-        {
-            get; set;
-        }
-
         public NumericalScalePrefix NumericalScalePrefix
         {
             get; set;
         }
 
         public NumericalScalePrefixEnum NumericalScalePrefixId
+        {
+            get; set;
+        }
+
+        public NumericalScaleType NumericalScaleType
+        {
+            get; set;
+        }
+
+        public NumericalScaleTypeEnum NumericalScaleTypeId
         {
             get; set;
         }

@@ -1,8 +1,9 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using System.Collections.Generic;
+
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
-    using System.Collections.Generic;
 
     public class Country : IEntity<short>
     {
@@ -26,7 +27,7 @@
         public string Name
         {
             get; set;
-        }        
+        }
 
         public ICollection<NumericalScaleTypeCountry> NumericalScaleTypesCountry
         {

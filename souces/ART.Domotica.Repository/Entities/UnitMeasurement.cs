@@ -34,12 +34,12 @@
             get; set;
         }
 
-        public ICollection<UnitMeasurementScale> UnitMeasurementScales
+        public string Symbol
         {
             get; set;
         }
-        
-        public string Symbol
+
+        public ICollection<UnitMeasurementScale> UnitMeasurementScales
         {
             get; set;
         }

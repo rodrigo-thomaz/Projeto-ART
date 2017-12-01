@@ -19,12 +19,12 @@
             get; set;
         }
 
-        public string Symbol
+        public ICollection<NumericalScale> NumericalScales
         {
             get; set;
         }
 
-        public ICollection<NumericalScale> NumericalScales
+        public string Symbol
         {
             get; set;
         }

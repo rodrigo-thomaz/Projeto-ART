@@ -25,17 +25,6 @@
             get; set;
         }
 
-        public DbSet<UnitMeasurementScale> UnitMeasurementScale
-        {
-            get; set;
-        }
-
-
-        public DbSet<NumericalScaleTypeCountry> NumericalScaleTypeCountry
-        {
-            get; set;
-        }
-
         public DbSet<Application> Application
         {
             get; set;
@@ -96,7 +85,22 @@
             get; set;
         }
 
+        public DbSet<NumericalScale> NumericalScale
+        {
+            get; set;
+        }
+
+        public DbSet<NumericalScalePrefix> NumericalScalePrefix
+        {
+            get; set;
+        }
+
         public DbSet<NumericalScaleType> NumericalScaleType
+        {
+            get; set;
+        }
+
+        public DbSet<NumericalScaleTypeCountry> NumericalScaleTypeCountry
         {
             get; set;
         }
@@ -151,12 +155,7 @@
             get; set;
         }
 
-        public DbSet<NumericalScalePrefix> NumericalScalePrefix
-        {
-            get; set;
-        }
-
-        public DbSet<NumericalScale> NumericalScale
+        public DbSet<UnitMeasurementScale> UnitMeasurementScale
         {
             get; set;
         }
