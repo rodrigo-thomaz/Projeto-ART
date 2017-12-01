@@ -182,7 +182,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="InitialFiles\countries.csv" />
+    <None Include="InitialFiles\continent.csv" />
+    <None Include="InitialFiles\country.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

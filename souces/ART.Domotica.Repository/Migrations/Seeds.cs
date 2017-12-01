@@ -22,15 +22,12 @@
 
         public static void Execute(ARTDbContext context)
         {
-            var currentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
-            var directoryBase = Path.Combine(currentDirectory, "InitialFiles");
-
             ExecuteNumericalScaleType(context);
             ExecuteNumericalScalePrefix(context);
             ExecuteNumericalScaleLong(context);
             ExecuteNumericalScaleShort(context);
             ExecuteContinent(context);
-            ExecuteCountry(context, directoryBase);
+            ExecuteCountry(context);
 
             #region TimeZone
 
@@ -1095,74 +1092,45 @@
             ExecuteSettings();
         }
 
-        private static void ExecuteContinent(ARTDbContext context)
+        private static IEnumerable<string[]> GetMatrixFromFile(string fileName)
         {
-            var africa = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Africa);
-            var america = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.America);
-            var asia = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Asia);
-            var europe = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Europe);
-            var oceania = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Oceania);
-
-            if (africa == null)
-            {
-                africa = new Continent
-                {
-                    Id = ContinentEnum.Africa,
-                };
-                context.Continent.Add(africa);
-            }
-            africa.Name = "África";
-
-            if (america == null)
-            {
-                america = new Continent
-                {
-                    Id = ContinentEnum.America,
-                };
-                context.Continent.Add(america);
-            }
-            america.Name = "América";
-
-            if (asia == null)
-            {
-                asia = new Continent
-                {
-                    Id = ContinentEnum.Asia,
-                };
-                context.Continent.Add(asia);
-            }
-            asia.Name = "Ásia";
-
-            if (europe == null)
-            {
-                europe = new Continent
-                {
-                    Id = ContinentEnum.Europe,
-                };
-                context.Continent.Add(europe);
-            }
-            europe.Name = "Europa";
-
-            if (oceania == null)
-            {
-                oceania = new Continent
-                {
-                    Id = ContinentEnum.Oceania,
-                };
-                context.Continent.Add(oceania);
-            }
-            oceania.Name = "Oceania";
-
-            context.SaveChanges();
+            var currentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+            var directoryBase = Path.Combine(currentDirectory, "InitialFiles");
+            string filePath = Path.Combine(directoryBase, fileName);
+            var lines = File.ReadAllLines(filePath, GetEncoding()).Select(a => a.Split(';'));
+            return lines;
         }
 
-        private static void ExecuteCountry(ARTDbContext context, string directoryBase)
+        private static void ExecuteContinent(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("continent.csv");
+
+            foreach (var line in lines)
+            {
+                var continentId = (ContinentEnum)Enum.Parse(typeof(ContinentEnum), line[0]);
+                var name = line[1];
+
+                var continent = context.Continent.SingleOrDefault(x => x.Id == continentId);
+
+                if (continent == null)
+                {
+                    continent = new Continent
+                    {
+                        Id = continentId,
+                    };
+                    context.Continent.Add(continent);
+                }
+                continent.Name = name;        
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void ExecuteCountry(ARTDbContext context)
         {
             if (context.Country.Any()) return;
 
-            string countiesFilePath = Path.Combine(directoryBase, "countries.csv");
-
-            var lines = File.ReadAllLines(countiesFilePath, GetEncoding()).Select(a => a.Split(';'));
+            var lines = GetMatrixFromFile("country.csv");
 
             foreach (var line in lines)
             {
