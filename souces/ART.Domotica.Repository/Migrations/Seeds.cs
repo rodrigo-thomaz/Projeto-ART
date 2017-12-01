@@ -1110,17 +1110,17 @@
                 var continentId = (ContinentEnum)Enum.Parse(typeof(ContinentEnum), line[0]);
                 var name = line[1];
 
-                var continent = context.Continent.SingleOrDefault(x => x.Id == continentId);
+                var entity = context.Continent.SingleOrDefault(x => x.Id == continentId);
 
-                if (continent == null)
+                if (entity == null)
                 {
-                    continent = new Continent
+                    entity = new Continent
                     {
                         Id = continentId,
                     };
-                    context.Continent.Add(continent);
+                    context.Continent.Add(entity);
                 }
-                continent.Name = name;        
+                entity.Name = name;        
 
                 context.SaveChanges();
             }
@@ -1137,13 +1137,13 @@
                 var name = line[0];
                 var continentId = (ContinentEnum)Enum.Parse(typeof(ContinentEnum), line[1]);
 
-                var country = new Country
+                var entity = new Country
                 {
                     Name = name,
                     ContinentId = continentId,
                 };
 
-                context.Country.Add(country);
+                context.Country.Add(entity);
 
                 var numericalScaleTypes = line[2].Split(',');
 
@@ -1153,7 +1153,7 @@
 
                     context.NumericalScaleTypeCountry.Add(new NumericalScaleTypeCountry
                     {
-                        CountryId = country.Id,
+                        CountryId = entity.Id,
                         NumericalScaleTypeId = numericalScaleTypeId,
                     });
                 }
@@ -2314,30 +2314,27 @@
 
         private static void ExecuteNumericalScaleType(ARTDbContext context)
         {
-            var @long = context.NumericalScaleType.SingleOrDefault(x => x.Id == NumericalScaleTypeEnum.Long);
-            var @short = context.NumericalScaleType.SingleOrDefault(x => x.Id == NumericalScaleTypeEnum.Short);
+            var lines = GetMatrixFromFile("NumericalScaleType.csv");
 
-            if (@long == null)
+            foreach (var line in lines)
             {
-                @long = new NumericalScaleType
-                {
-                    Id = NumericalScaleTypeEnum.Long,
-                };
-                context.NumericalScaleType.Add(@long);
-            }
-            @long.Name = "Longa";
+                var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[0]);
+                var name = line[1];
 
-            if (@short == null)
-            {
-                @short = new NumericalScaleType
-                {
-                    Id = NumericalScaleTypeEnum.Short,
-                };
-                context.NumericalScaleType.Add(@short);
-            }
-            @short.Name = "Curta";
+                var entity = context.NumericalScaleType.SingleOrDefault(x => x.Id == numericalScaleTypeId);
 
-            context.SaveChanges();
+                if (entity == null)
+                {
+                    entity = new NumericalScaleType
+                    {
+                        Id = numericalScaleTypeId,
+                    };
+                    context.NumericalScaleType.Add(entity);
+                }
+                entity.Name = name;
+
+                context.SaveChanges();
+            }
         }
 
         private static void ExecuteSettings()
