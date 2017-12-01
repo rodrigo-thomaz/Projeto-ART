@@ -12,6 +12,8 @@
 
         public UnitOfMeasurementConfiguration()
         {
+            ToTable("UnitOfMeasurement", "si");
+
             //Primary Keys
             HasKey(x => new
             {
