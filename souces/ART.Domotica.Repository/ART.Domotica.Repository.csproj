@@ -182,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="InitialFiles\UnitMeasurement.csv" />
     <None Include="InitialFiles\UnitMeasurementType.csv" />
     <None Include="InitialFiles\NumericalScale.csv" />
     <None Include="InitialFiles\NumericalScalePrefix.csv" />

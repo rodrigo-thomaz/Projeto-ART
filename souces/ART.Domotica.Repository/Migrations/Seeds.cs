@@ -30,7 +30,6 @@
             ExecuteTimeZone(context);
             ExecuteUnitMeasurementType(context);
             ExecuteUnitMeasurement(context);
-            
 
             #region SensorType
 
@@ -141,8 +140,8 @@
                 {
                     Id = SensorDatasheetEnum.Temperature_DS18B20,
                     SensorTypeId = temperatureSensorType.Id,
-                    UnitMeasurementId = celsiusUnitMeasurement.Id,
-                    UnitMeasurementTypeId = celsiusUnitMeasurement.UnitMeasurementTypeId,
+                    UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                     Max = 125M,
                     Min = -55M,
                 };
@@ -155,8 +154,8 @@
                 {
                     Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
                     SensorTypeId = proximityDistanceSensorType.Id,
-                    UnitMeasurementId = meterUnitMeasurement.Id,
-                    UnitMeasurementTypeId = meterUnitMeasurement.UnitMeasurementTypeId,
+                    UnitMeasurementId = UnitMeasurementEnum.Meter,
+                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
                     Max = 2.3M,
                     Min = 0.2M,
                 };
@@ -326,8 +325,7 @@
                     DeviceAddress = sensor_1_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitMeasurementId = celsiusUnitMeasurement.Id,
-                    UnitMeasurement = celsiusUnitMeasurement,
+                    UnitMeasurementId = UnitMeasurementEnum.Celsius,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
                     Label = "Sensor 1",
@@ -396,8 +394,7 @@
                     DeviceAddress = sensor_2_1_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitMeasurementId = fahrenheitUnitMeasurement.Id,
-                    UnitMeasurement = fahrenheitUnitMeasurement,
+                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 1",
@@ -465,8 +462,7 @@
                     DeviceAddress = sensor_2_2_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitMeasurementId = fahrenheitUnitMeasurement.Id,
-                    UnitMeasurement = fahrenheitUnitMeasurement,
+                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 2",
@@ -534,8 +530,7 @@
                     DeviceAddress = sensor_3_1_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitMeasurementId = fahrenheitUnitMeasurement.Id,
-                    UnitMeasurement = fahrenheitUnitMeasurement,
+                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 3",
@@ -603,8 +598,7 @@
                     DeviceAddress = sensor_3_2_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitMeasurementId = fahrenheitUnitMeasurement.Id,
-                    UnitMeasurement = fahrenheitUnitMeasurement,
+                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 4",
@@ -783,122 +777,6 @@
             #endregion
 
             ExecuteSettings();
-        }
-
-        private static void ExecuteUnitMeasurement(ARTDbContext context)
-        {
-            #region UnitMeasurement
-
-            var celsiusDescription = new StringBuilder();
-
-            celsiusDescription.AppendLine("A escala de grau Celsius(símbolo: °C) é uma escala termométrica, do sistema métrico[1], usada na maioria dos países do mundo.Teve origem a partir do modelo proposto pelo astrônomo sueco Anders Celsius(1701 - 1744), inicialmente denominado escala centígrada(Grau centígrado).");
-            celsiusDescription.AppendLine("Esta escala é baseada nos pontos de fusão e ebulição da água, em condição atmosférica padrão, aos quais são atribuídos os valores de 0 °C e 100 °C, respectivamente[2].Devido a esta divisão centesimal, se deu a antiga nomenclatura grau centígrado(cem partes/ graus) que, em 1948, durante a 9ª Conferência Geral de Pesos e Medidas(CR 64), teve seu nome oficialmente modificado para grau Celsius, em reconhecimento ao trabalho de Anders Celsius e para fim de desambiguação com o prefixo centi do SI.");
-            celsiusDescription.AppendLine("Enquanto que os valores de congelação e evaporação da água estão aproximadamente corretos, a definição original não é apropriada como um padrão formal: ela depende da definição de pressão atmosférica padrão, que por sua vez depende da própria definição de temperatura.A definição oficial atual de grau Celsius define 0,01 °C como o ponto triplo da água, e 1 grau Celsius como sendo 1 / 273,16 da diferença de temperatura entre o ponto triplo da água e o zero absoluto. Esta definição garante que 1 grau Celsius apresenta a mesma variação de temperatura que 1 kelvin.");
-
-            var celsiusUnitMeasurement = context.UnitMeasurement.FirstOrDefault(x => x.Id == UnitMeasurementEnum.Celsius);
-
-            if (celsiusUnitMeasurement == null)
-            {
-                celsiusUnitMeasurement = new UnitMeasurement
-                {
-                    Id = UnitMeasurementEnum.Celsius,
-                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
-                };
-                context.UnitMeasurement.Add(celsiusUnitMeasurement);
-            }
-
-            celsiusUnitMeasurement.Name = "Celsius";
-            celsiusUnitMeasurement.Symbol = "C";
-            celsiusUnitMeasurement.Description = celsiusDescription.ToString();
-
-            var fahrenheitDescription = new StringBuilder();
-
-            fahrenheitDescription.AppendLine("O grau fahrenheit(símbolo: °F) é uma escala de temperatura proposta por Daniel Gabriel Fahrenheit em 1724.Nesta escala:");
-            fahrenheitDescription.AppendLine("- o ponto de fusão da água(0 °C) é de 32 °F.");
-            fahrenheitDescription.AppendLine("- o ponto de ebulição da água(100 °C) é de 212 °F.");
-            fahrenheitDescription.AppendLine("Uma diferença de 1,8 °F é igual a uma diferença de 1 °C.");
-            fahrenheitDescription.AppendLine("Esta escala foi utilizada principalmente pelos países que foram colonizados pelos britânicos, mas seu uso atualmente se restringe a poucos países de língua inglesa, como os Estados Unidos e Belize. E também, muito utilizada com o povo grego, para medir a temperatura de um corpo.Jakelinneh Devocerg, mulher francesa que criou a teoria 'Fahrenheit Devocerg' que para passar de celsius para fahrenheit se usa sempre 1,8.Ex: f = 137 * e c = 20 * f + 137 - 20 + c.1,8 fc = 117.1,8 = 1,20202020");
-            fahrenheitDescription.AppendLine("Para uso científico, há uma escala de temperatura, chamada de Rankine, que leva o marco zero de sua escala ao zero absoluto e possui a mesma variação da escala fahrenheit, existindo, portanto, correlação entre a escala de Rankine e grau fahrenheit do mesmo modo que existe correlação das escalas kelvin e grau Celsius.");
-
-            var fahrenheitUnitMeasurement = context.UnitMeasurement.SingleOrDefault(x => x.Id == UnitMeasurementEnum.Fahrenheit);
-
-            if (fahrenheitUnitMeasurement == null)
-            {
-                fahrenheitUnitMeasurement = new UnitMeasurement
-                {
-                    Id = UnitMeasurementEnum.Fahrenheit,
-                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
-                };
-                context.UnitMeasurement.Add(fahrenheitUnitMeasurement);
-            }
-
-            fahrenheitUnitMeasurement.Name = "Fahrenheit";
-            fahrenheitUnitMeasurement.Symbol = "F";
-            fahrenheitUnitMeasurement.Description = fahrenheitDescription.ToString();
-
-            // Meter
-
-            var meterUnitMeasurement = context.UnitMeasurement.SingleOrDefault(x => x.Id == UnitMeasurementEnum.Meter);
-
-            if (meterUnitMeasurement == null)
-            {
-                meterUnitMeasurement = new UnitMeasurement
-                {
-                    Id = UnitMeasurementEnum.Meter,
-                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
-                };
-                context.UnitMeasurement.Add(meterUnitMeasurement);
-            }
-
-            meterUnitMeasurement.Name = "Metro";
-            meterUnitMeasurement.Symbol = "m";
-
-            // Inch
-
-            var inchUnitMeasurement = context.UnitMeasurement.SingleOrDefault(x => x.Id == UnitMeasurementEnum.Inch);
-
-            if (inchUnitMeasurement == null)
-            {
-                inchUnitMeasurement = new UnitMeasurement
-                {
-                    Id = UnitMeasurementEnum.Inch,
-                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
-                };
-                context.UnitMeasurement.Add(inchUnitMeasurement);
-            }
-
-            inchUnitMeasurement.Name = "Polegada";
-            inchUnitMeasurement.Symbol = "''";
-
-            context.SaveChanges();
-
-            #endregion
-        }
-
-        private static void ExecuteUnitMeasurementType(ARTDbContext context)
-        {
-            var lines = GetMatrixFromFile("UnitMeasurementType.csv");
-
-            foreach (var line in lines)
-            {
-                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[0]);
-                var name = line[1];
-
-                var entity = context.UnitMeasurementType.SingleOrDefault(x => x.Id == unitMeasurementTypeId);
-
-                if (entity == null)
-                {
-                    entity = new UnitMeasurementType
-                    {
-                        Id = unitMeasurementTypeId,
-                        Name = name,
-                    };
-                    context.UnitMeasurementType.Add(entity);
-                }
-                entity.Name = name;
-
-                context.SaveChanges();
-            }
         }
 
         private static void ExecuteContinent(ARTDbContext context)
@@ -1129,6 +1007,63 @@
                         UtcTimeOffsetInSecond = (int)item.BaseUtcOffset.TotalSeconds,
                     });
                 }
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void ExecuteUnitMeasurement(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("UnitMeasurement.csv");
+
+            foreach (var line in lines)
+            {
+                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[0]);
+                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[1]);
+                var name = line[2];
+                var symbol = line[3];
+                var description = line[4];
+
+                var entity = context.UnitMeasurement.SingleOrDefault(x => x.Id == unitMeasurementId);
+
+                if (entity == null)
+                {
+                    entity = new UnitMeasurement
+                    {
+                        Id = unitMeasurementId,
+                        UnitMeasurementTypeId = unitMeasurementTypeId,
+                    };
+                    context.UnitMeasurement.Add(entity);
+                }
+                entity.Name = name;
+                entity.Symbol = symbol;
+                entity.Description = description;
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void ExecuteUnitMeasurementType(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("UnitMeasurementType.csv");
+
+            foreach (var line in lines)
+            {
+                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[0]);
+                var name = line[1];
+
+                var entity = context.UnitMeasurementType.SingleOrDefault(x => x.Id == unitMeasurementTypeId);
+
+                if (entity == null)
+                {
+                    entity = new UnitMeasurementType
+                    {
+                        Id = unitMeasurementTypeId,
+                        Name = name,
+                    };
+                    context.UnitMeasurementType.Add(entity);
+                }
+                entity.Name = name;
 
                 context.SaveChanges();
             }
