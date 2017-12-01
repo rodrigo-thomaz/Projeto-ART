@@ -27,7 +27,8 @@
 
             ExecuteNumericalScale(context);
             ExecuteUnitMeasurementPrefix(context);
-            ExecuteUnitMeasurementScale(context);
+            ExecuteUnitMeasurementScaleLong(context);
+            ExecuteUnitMeasurementScaleShort(context);
             ExecuteContinent(context);
             ExecuteCountry(context, directoryBase);
 
@@ -1532,7 +1533,7 @@
             context.SaveChanges();
         }
 
-        private static void ExecuteUnitMeasurementScale(ARTDbContext context)
+        private static void ExecuteUnitMeasurementScaleLong(ARTDbContext context)
         {
             //longYotta
 
@@ -1975,6 +1976,452 @@
             longYocto.Base = 10;
             longYocto.Exponent = -24;
             
+            context.SaveChanges();
+        }
+
+        private static void ExecuteUnitMeasurementScaleShort(ARTDbContext context)
+        {
+            //shortYotta
+
+            var shortYotta = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Yotta)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortYotta == null)
+            {
+                shortYotta = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Yotta,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortYotta);
+            }
+            shortYotta.Name = "Septilhão";
+            shortYotta.Base = 1000;
+            shortYotta.Exponent = 8;
+
+            //shortZetta
+
+            var shortZetta = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Zetta)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortZetta == null)
+            {
+                shortZetta = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Zetta,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortZetta);
+            }
+            shortZetta.Name = "Sextilhão";
+            shortZetta.Base = 1000;
+            shortZetta.Exponent = 7;
+
+            //shortExa
+
+            var shortExa = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Exa)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortExa == null)
+            {
+                shortExa = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Exa,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortExa);
+            }
+            shortExa.Name = "Quintilhão";
+            shortExa.Base = 1000;
+            shortExa.Exponent = 6;
+
+            //shortPeta
+
+            var shortPeta = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Peta)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortPeta == null)
+            {
+                shortPeta = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Peta,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortPeta);
+            }
+            shortPeta.Name = "Quadrilhão";
+            shortPeta.Base = 1000;
+            shortPeta.Exponent = 5;
+
+            //shortTera
+
+            var shortTera = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Tera)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortTera == null)
+            {
+                shortTera = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Tera,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortTera);
+            }
+            shortTera.Name = "Trilhão";
+            shortTera.Base = 1000;
+            shortTera.Exponent = 4;
+
+            //shortGiga
+
+            var shortGiga = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Giga)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortGiga == null)
+            {
+                shortGiga = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Giga,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortGiga);
+            }
+            shortGiga.Name = "Bilhão";
+            shortGiga.Base = 1000;
+            shortGiga.Exponent = 3;
+
+            //shortMega
+
+            var shortMega = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Mega)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortMega == null)
+            {
+                shortMega = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Mega,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortMega);
+            }
+            shortMega.Name = "Milhão";
+            shortMega.Base = 1000;
+            shortMega.Exponent = 2;
+
+            //shortQuilo
+
+            var shortQuilo = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Quilo)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortQuilo == null)
+            {
+                shortQuilo = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Quilo,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortQuilo);
+            }
+            shortQuilo.Name = "Mil";
+            shortQuilo.Base = 1000;
+            shortQuilo.Exponent = 1;
+
+            //shortHecto
+
+            var shortHecto = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Hecto)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortHecto == null)
+            {
+                shortHecto = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Hecto,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortHecto);
+            }
+            shortHecto.Name = "Cem";
+            shortHecto.Base = 1000;
+            shortHecto.Exponent = 2/3;
+
+            //shortDeca
+
+            var shortDeca = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Deca)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortDeca == null)
+            {
+                shortDeca = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Deca,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortDeca);
+            }
+            shortDeca.Name = "Dez";
+            shortDeca.Base = 1000;
+            shortDeca.Exponent = 1/3;
+
+            //shortNone
+
+            var shortNone = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.None)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortNone == null)
+            {
+                shortNone = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.None,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortNone);
+            }
+            shortNone.Name = "Unidade";
+            shortNone.Base = 1000;
+            shortNone.Exponent = 0;
+
+            //shortDeci
+
+            var shortDeci = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Deci)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortDeci == null)
+            {
+                shortDeci = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Deci,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortDeci);
+            }
+            shortDeci.Name = "Décimo";
+            shortDeci.Base = 1000;
+            shortDeci.Exponent = -1/3;
+
+            //shortCenti
+
+            var shortCenti = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Centi)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortCenti == null)
+            {
+                shortCenti = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Centi,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortCenti);
+            }
+            shortCenti.Name = "Centésimo";
+            shortCenti.Base = 1000;
+            shortCenti.Exponent = -2/3;
+
+            //shortMili
+
+            var shortMili = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Mili)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortMili == null)
+            {
+                shortMili = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Mili,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortMili);
+            }
+            shortMili.Name = "Milésimo";
+            shortMili.Base = 1000;
+            shortMili.Exponent = -1;
+
+            //shortMicro
+
+            var shortMicro = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Micro)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortMicro == null)
+            {
+                shortMicro = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Micro,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortMicro);
+            }
+            shortMicro.Name = "Milionésimo";
+            shortMicro.Base = 1000;
+            shortMicro.Exponent = -2;
+
+            //shortNano
+
+            var shortNano = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Nano)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortNano == null)
+            {
+                shortNano = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Nano,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortNano);
+            }
+            shortNano.Name = "Bilionésimo";
+            shortNano.Base = 1000;
+            shortNano.Exponent = -3;
+
+            //shortPico
+
+            var shortPico = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Pico)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortPico == null)
+            {
+                shortPico = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Pico,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortPico);
+            }
+            shortPico.Name = "Trilionésimo";
+            shortPico.Base = 1000;
+            shortPico.Exponent = -4;
+
+            //shortFemto
+
+            var shortFemto = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Femto)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortFemto == null)
+            {
+                shortFemto = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Femto,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortFemto);
+            }
+            shortFemto.Name = "Quadrilionésimo";
+            shortFemto.Base = 1000;
+            shortFemto.Exponent = -5;
+
+            //shortAtto
+
+            var shortAtto = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Atto)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortAtto == null)
+            {
+                shortAtto = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Atto,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortAtto);
+            }
+            shortAtto.Name = "Quintilionésimo";
+            shortAtto.Base = 1000;
+            shortAtto.Exponent = -6;
+
+            //shortZepto
+
+            var shortZepto = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Zepto)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortZepto == null)
+            {
+                shortZepto = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Zepto,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortZepto);
+            }
+            shortZepto.Name = "Sextilionésimo";
+            shortZepto.Base = 1000;
+            shortZepto.Exponent = -7;
+
+            //shortYocto
+
+            var shortYocto = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Yocto)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Short)
+                .SingleOrDefault();
+
+            if (shortYocto == null)
+            {
+                shortYocto = new UnitMeasurementScale
+                {
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Yocto,
+                    NumericalScaleId = NumericalScaleEnum.Short
+
+                };
+                context.UnitMeasurementScale.Add(shortYocto);
+            }
+            shortYocto.Name = "Septilionésimo";
+            shortYocto.Base = 1000;
+            shortYocto.Exponent = -8;
+
             context.SaveChanges();
         }
 
