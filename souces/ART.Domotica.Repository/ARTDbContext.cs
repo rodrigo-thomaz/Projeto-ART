@@ -25,6 +25,12 @@
             get; set;
         }
 
+
+        public DbSet<NumericalScaleCountry> NumericalScaleCountry
+        {
+            get; set;
+        }
+
         public DbSet<Application> Application
         {
             get; set;
@@ -183,6 +189,7 @@
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
             modelBuilder.Configurations.Add(new NumericalScaleConfiguration());
+            modelBuilder.Configurations.Add(new NumericalScaleCountryConfiguration());
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
             modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());

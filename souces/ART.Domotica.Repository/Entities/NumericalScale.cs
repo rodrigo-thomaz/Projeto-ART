@@ -29,6 +29,11 @@
             get; set;
         }
 
+        public ICollection<NumericalScaleCountry> NumericalScaleCountries
+        {
+            get; set;
+        }
+        
         #endregion Properties
     }
 }

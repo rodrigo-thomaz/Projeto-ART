@@ -39,17 +39,6 @@
                 .WithMany(x => x.Countries)
                 .HasForeignKey(x => x.ContinentId)
                 .WillCascadeOnDelete(false);
-
-            //NumericalScaleId
-            Property(x => x.NumericalScaleId)
-                .HasColumnOrder(3)
-                .IsRequired();
-
-            //NumericalScale
-            HasRequired(x => x.NumericalScale)
-                .WithMany(x => x.Countries)
-                .HasForeignKey(x => x.NumericalScaleId)
-                .WillCascadeOnDelete(false);
         }
 
         #endregion Constructors

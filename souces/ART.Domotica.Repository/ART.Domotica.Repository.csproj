@@ -72,6 +72,7 @@
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwaresInProjectConfiguration.cs" />
     <Compile Include="Configurations\NumericalScaleConfiguration.cs" />
+    <Compile Include="Configurations\NumericalScaleCountryConfiguration.cs" />
     <Compile Include="Configurations\ProjectConfiguration.cs" />
     <Compile Include="Configurations\SensorChartLimiterConfiguration.cs" />
     <Compile Include="Configurations\SensorDatasheetConfiguration.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Entities\HardwaresInProject.cs" />
     <Compile Include="Entities\DeviceInApplication.cs" />
     <Compile Include="Entities\NumericalScale.cs" />
+    <Compile Include="Entities\NumericalScaleCountry.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\RaspberryDevice.cs" />
     <Compile Include="Entities\Sensor.cs" />
@@ -162,6 +164,10 @@
     <Compile Include="Migrations\201712011428496_Initial5.cs" />
     <Compile Include="Migrations\201712011428496_Initial5.Designer.cs">
       <DependentUpon>201712011428496_Initial5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712011558334_Initial6.cs" />
+    <Compile Include="Migrations\201712011558334_Initial6.Designer.cs">
+      <DependentUpon>201712011558334_Initial6.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -238,6 +244,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712011428496_Initial5.resx">
       <DependentUpon>201712011428496_Initial5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712011558334_Initial6.resx">
+      <DependentUpon>201712011558334_Initial6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

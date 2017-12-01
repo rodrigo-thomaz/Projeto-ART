@@ -1174,7 +1174,7 @@
                 {
                     Name = name,
                     ContinentId = continentId,
-                    NumericalScaleId = numericalScaleId,
+                    //NumericalScaleId = numericalScaleId,
                 });
             }
 

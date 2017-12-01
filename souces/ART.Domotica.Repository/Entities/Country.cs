@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
+    using System.Collections.Generic;
 
     public class Country : IEntity<short>
     {
@@ -25,14 +26,9 @@
         public string Name
         {
             get; set;
-        }
+        }        
 
-        public NumericalScale NumericalScale
-        {
-            get; set;
-        }
-
-        public NumericalScaleEnum NumericalScaleId
+        public ICollection<NumericalScaleCountry> NumericalScalesCountry
         {
             get; set;
         }
