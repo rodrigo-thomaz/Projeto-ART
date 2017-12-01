@@ -112,6 +112,7 @@
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\SensorRange.cs" />
     <Compile Include="Entities\TimeZone.cs" />
+    <Compile Include="Entities\UnitMeasurementPrefix.cs" />
     <Compile Include="Entities\UnitMeasurementType.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />

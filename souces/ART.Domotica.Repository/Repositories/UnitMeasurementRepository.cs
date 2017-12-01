@@ -1,19 +1,18 @@
 ﻿using ART.Domotica.Enums;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Repository.Interfaces;
+using ART.Infra.CrossCutting.Repository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories
 {
-    public class UnitMeasurementRepository : IUnitMeasurementRepository
+    public class UnitMeasurementRepository : RepositoryBase<ARTDbContext, UnitMeasurement, UnitMeasurementEnum>, IUnitMeasurementRepository
     {
-        private readonly ARTDbContext _context;
-
-        public UnitMeasurementRepository(ARTDbContext context)
+        public UnitMeasurementRepository(ARTDbContext context) : base(context)
         {
-            _context = context;
+
         }
 
         public async Task<List<UnitMeasurement>> GetAll()
