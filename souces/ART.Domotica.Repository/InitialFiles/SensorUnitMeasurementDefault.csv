@@ -1,5 +1,2 @@
-Africa;África
-America;América
-Asia;Ásia
-Europe;Europa
-Oceania;Oceania
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;2,3;0,2
+Temperature_DS18B20;Temperature;Celsius;Temperature;125;-55

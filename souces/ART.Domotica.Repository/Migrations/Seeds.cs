@@ -593,70 +593,61 @@
 
         private static void ExecuteSensorUnitMeasurementDefault(ARTDbContext context)
         {
-            #region SensorUnitMeasurementDefault
+            var lines = GetMatrixFromFile("SensorUnitMeasurementDefault.csv");
 
-            var sensorUnitMeasurementDefaultTemperatureDS18B20 = context.SensorUnitMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
-            var sensorUnitMeasurementDefaultUltrasonicHCSR04 = context.SensorUnitMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
-
-            if (sensorUnitMeasurementDefaultTemperatureDS18B20 == null)
+            foreach (var line in lines)
             {
-                sensorUnitMeasurementDefaultTemperatureDS18B20 = new SensorUnitMeasurementDefault
-                {
-                    Id = SensorDatasheetEnum.Temperature_DS18B20,
-                    SensorTypeId = SensorTypeEnum.Temperature,
-                    UnitMeasurementId = UnitMeasurementEnum.Celsius,
-                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
-                    Max = 125M,
-                    Min = -55M,
-                };
-                context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultTemperatureDS18B20);
-            }
+                var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
+                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
+                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[2]); 
+                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[3]); 
+                var max = Convert.ToDecimal(line[4]);
+                var min = Convert.ToDecimal(line[5]);
 
-            if (sensorUnitMeasurementDefaultUltrasonicHCSR04 == null)
-            {
-                sensorUnitMeasurementDefaultUltrasonicHCSR04 = new SensorUnitMeasurementDefault
-                {
-                    Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
-                    SensorTypeId = SensorTypeEnum.ProximityDistance,
-                    UnitMeasurementId = UnitMeasurementEnum.Meter,
-                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
-                    Max = 2.3M,
-                    Min = 0.2M,
-                };
-                context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultUltrasonicHCSR04);
-            }
+                var entity = context.SensorUnitMeasurementDefault.SingleOrDefault(x => x.Id == sensorDatasheetId);
 
-            #endregion            
+                if (entity == null)
+                {
+                    entity = new SensorUnitMeasurementDefault
+                    {
+                        Id = sensorDatasheetId,
+                        SensorTypeId = sensorTypeId,
+                    };
+                    context.SensorUnitMeasurementDefault.Add(entity);
+                }
+
+                entity.UnitMeasurementId = unitMeasurementId;
+                entity.UnitMeasurementTypeId = unitMeasurementTypeId;
+                entity.Max = max;
+                entity.Min = min;
+
+                context.SaveChanges();
+            }            
         }
 
         private static void ExecuteSensorDatasheet(ARTDbContext context)
         {
-            #region SensorDatasheet
+            var lines = GetMatrixFromFile("SensorDatasheet.csv");
 
-            var sensorDatasheetTemperatureDS18B20 = context.SensorDatasheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
-            var sensorDatasheetUltrasonicHCSR04 = context.SensorDatasheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
-
-            if (sensorDatasheetTemperatureDS18B20 == null)
+            foreach (var line in lines)
             {
-                sensorDatasheetTemperatureDS18B20 = new SensorDatasheet
-                {
-                    Id = SensorDatasheetEnum.Temperature_DS18B20,
-                    SensorTypeId = SensorTypeEnum.Temperature,
-                };
-                context.SensorDatasheet.Add(sensorDatasheetTemperatureDS18B20);
-            }
+                var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
+                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
 
-            if (sensorDatasheetUltrasonicHCSR04 == null)
-            {
-                sensorDatasheetUltrasonicHCSR04 = new SensorDatasheet
-                {
-                    Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
-                    SensorTypeId = SensorTypeEnum.ProximityDistance,
-                };
-                context.SensorDatasheet.Add(sensorDatasheetUltrasonicHCSR04);
-            }
+                var entity = context.SensorDatasheet.SingleOrDefault(x => x.Id == sensorDatasheetId);
 
-            #endregion
+                if (entity == null)
+                {
+                    entity = new SensorDatasheet
+                    {
+                        Id = sensorDatasheetId,
+                        SensorTypeId = sensorTypeId,
+                    };
+                    context.SensorDatasheet.Add(entity);
+                }
+
+                context.SaveChanges();
+            }
         }
 
         private static void ExecuteSensorType(ARTDbContext context)
