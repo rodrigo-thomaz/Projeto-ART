@@ -182,8 +182,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="InitialFiles\continent.csv" />
-    <None Include="InitialFiles\country.csv" />
+    <None Include="InitialFiles\NumericalScale.csv" />
+    <None Include="InitialFiles\Continent.csv" />
+    <None Include="InitialFiles\Country.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

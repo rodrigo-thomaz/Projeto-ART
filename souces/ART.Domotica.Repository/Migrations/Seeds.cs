@@ -1103,7 +1103,7 @@
 
         private static void ExecuteContinent(ARTDbContext context)
         {
-            var lines = GetMatrixFromFile("continent.csv");
+            var lines = GetMatrixFromFile("Continent.csv");
 
             foreach (var line in lines)
             {
@@ -1130,7 +1130,7 @@
         {
             if (context.Country.Any()) return;
 
-            var lines = GetMatrixFromFile("country.csv");
+            var lines = GetMatrixFromFile("Country.csv");
 
             foreach (var line in lines)
             {
