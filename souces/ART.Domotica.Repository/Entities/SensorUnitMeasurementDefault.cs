@@ -37,7 +37,7 @@
             get; set;
         }
 
-        public UnitMeasurement UnitMeasurement
+        public UnitMeasurementScale UnitMeasurementScale
         {
             get; set;
         }
@@ -47,7 +47,37 @@
             get; set;
         }
 
+        public UnitMeasurement UnitMeasurement
+        {
+            get; set;
+        }
+
+        public UnitMeasurementType UnitMeasurementType
+        {
+            get; set;
+        }
+
         public UnitMeasurementTypeEnum UnitMeasurementTypeId
+        {
+            get; set;
+        }
+
+        public NumericalScalePrefix NumericalScalePrefix
+        {
+            get; set;
+        }
+
+        public NumericalScalePrefixEnum NumericalScalePrefixId
+        {
+            get; set;
+        }
+
+        public NumericalScaleType NumericalScaleType
+        {
+            get; set;
+        }
+
+        public NumericalScaleTypeEnum NumericalScaleTypeId
         {
             get; set;
         }

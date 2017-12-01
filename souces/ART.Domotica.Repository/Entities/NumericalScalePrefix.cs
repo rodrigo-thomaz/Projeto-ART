@@ -8,7 +8,10 @@
     public class NumericalScalePrefix : IEntity<NumericalScalePrefixEnum>
     {
         #region Properties
-
+        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
+        {
+            get; set;
+        }
         public NumericalScalePrefixEnum Id
         {
             get; set;

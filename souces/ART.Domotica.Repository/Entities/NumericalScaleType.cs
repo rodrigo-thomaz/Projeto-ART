@@ -8,7 +8,10 @@
     public class NumericalScaleType : IEntity<NumericalScaleTypeEnum>
     {
         #region Properties
-
+        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
+        {
+            get; set;
+        }
         public NumericalScaleTypeEnum Id
         {
             get; set;

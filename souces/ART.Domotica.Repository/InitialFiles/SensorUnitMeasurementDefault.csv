@@ -1,2 +1,4 @@
-Ultrasonic_HCSR04;ProximityDistance;Meter;Length;2,3;0,2
-Temperature_DS18B20;Temperature;Celsius;Temperature;125;-55
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;Centi;Long;2,3;0,2
+Temperature_DS18B20;Temperature;Celsius;Temperature;None;Long;125;-55
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;Centi;Short;2,3;0,2
+Temperature_DS18B20;Temperature;Celsius;Temperature;None;Long;125;-55

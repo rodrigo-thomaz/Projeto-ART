@@ -24,7 +24,10 @@
         {
             get; set;
         }
-
+        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
+        {
+            get; set;
+        }
         public ICollection<UnitMeasurement> UnitMeasurements
         {
             get; set;
@@ -34,7 +37,6 @@
         {
             get; set;
         }
-
         #endregion Properties
     }
 }

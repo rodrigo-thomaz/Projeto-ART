@@ -836,8 +836,11 @@
                 var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
                 var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[2]);
                 var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[3]);
-                var max = Convert.ToDecimal(line[4]);
-                var min = Convert.ToDecimal(line[5]);
+                var numericalScalePrefixId = (NumericalScalePrefixEnum)Enum.Parse(typeof(NumericalScalePrefixEnum), line[4]);
+                var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[5]);
+
+                var max = Convert.ToDecimal(line[6]);
+                var min = Convert.ToDecimal(line[7]);
 
                 var entity = context.SensorUnitMeasurementDefault
                     .Where(x => x.Id == sensorDatasheetId)
@@ -856,6 +859,8 @@
 
                 entity.UnitMeasurementId = unitMeasurementId;
                 entity.UnitMeasurementTypeId = unitMeasurementTypeId;
+                entity.NumericalScalePrefixId = numericalScalePrefixId;
+                entity.NumericalScaleTypeId = numericalScaleTypeId;
                 entity.Max = max;
                 entity.Min = min;
 
