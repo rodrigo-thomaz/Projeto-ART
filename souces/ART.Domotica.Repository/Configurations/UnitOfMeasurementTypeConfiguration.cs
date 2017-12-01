@@ -12,7 +12,7 @@
 
         public UnitOfMeasurementTypeConfiguration()
         {
-            ToTable("UnitOfMeasurementType", "si");
+            ToTable("UnitOfMeasurementType", "SI");
 
             //Primary Keys
             HasKey(x => x.Id);
