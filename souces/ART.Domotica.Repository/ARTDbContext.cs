@@ -25,11 +25,6 @@
             get; set;
         }
 
-        public DbSet<Continent> Continent
-        {
-            get; set;
-        }
-
         public DbSet<Application> Application
         {
             get; set;
@@ -41,6 +36,11 @@
         }
 
         public DbSet<ApplicationUser> ApplicationUser
+        {
+            get; set;
+        }
+
+        public DbSet<Continent> Continent
         {
             get; set;
         }

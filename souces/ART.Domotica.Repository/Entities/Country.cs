@@ -7,6 +7,16 @@
     {
         #region Properties
 
+        public Continent Continent
+        {
+            get; set;
+        }
+
+        public ContinentEnum ContinentId
+        {
+            get; set;
+        }
+
         public short Id
         {
             get; set;
@@ -23,16 +33,6 @@
         }
 
         public NumericalScaleEnum NumericalScaleId
-        {
-            get; set;
-        }
-
-        public ContinentEnum ContinentId
-        {
-            get; set;
-        }
-
-        public Continent Continent
         {
             get; set;
         }

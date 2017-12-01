@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Text;
 
@@ -13,8 +15,6 @@
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;
-    using System.IO;
-    using System.Globalization;
 
     public class Seeds
     {
@@ -27,6 +27,7 @@
 
             ExecuteNumericalScale(context);
             ExecuteUnitMeasurementPrefix(context);
+            ExecuteUnitMeasurementScale(context);
             ExecuteContinent(context);
             ExecuteCountry(context, directoryBase);
 
@@ -1093,6 +1094,120 @@
             ExecuteSettings();
         }
 
+        private static void ExecuteContinent(ARTDbContext context)
+        {
+            var africa = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Africa);
+            var america = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.America);
+            var asia = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Asia);
+            var europe = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Europe);
+            var oceania = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Oceania);
+
+            if (africa == null)
+            {
+                africa = new Continent
+                {
+                    Id = ContinentEnum.Africa,
+                };
+                context.Continent.Add(africa);
+            }
+            africa.Name = "África";
+
+            if (america == null)
+            {
+                america = new Continent
+                {
+                    Id = ContinentEnum.America,
+                };
+                context.Continent.Add(america);
+            }
+            america.Name = "América";
+
+            if (asia == null)
+            {
+                asia = new Continent
+                {
+                    Id = ContinentEnum.Asia,
+                };
+                context.Continent.Add(asia);
+            }
+            asia.Name = "Ásia";
+
+            if (europe == null)
+            {
+                europe = new Continent
+                {
+                    Id = ContinentEnum.Europe,
+                };
+                context.Continent.Add(europe);
+            }
+            europe.Name = "Europa";
+
+            if (oceania == null)
+            {
+                oceania = new Continent
+                {
+                    Id = ContinentEnum.Oceania,
+                };
+                context.Continent.Add(oceania);
+            }
+            oceania.Name = "Oceania";
+
+            context.SaveChanges();
+        }
+
+        private static void ExecuteCountry(ARTDbContext context, string directoryBase)
+        {
+            if (context.Country.Any()) return;
+
+            string countiesFilePath = Path.Combine(directoryBase, "countries.csv");
+
+            var lines = File.ReadAllLines(countiesFilePath, GetEncoding()).Select(a => a.Split(';'));
+
+            foreach (var line in lines)
+            {
+                var name = line[0];
+                var continentId = (ContinentEnum)Enum.Parse(typeof(ContinentEnum), line[1]);
+                var numericalScaleId = (NumericalScaleEnum)Enum.Parse(typeof(NumericalScaleEnum), line[2]);
+
+                context.Country.Add(new Country
+                {
+                    Name = name,
+                    ContinentId = continentId,
+                    NumericalScaleId = numericalScaleId,
+                });
+            }
+
+            context.SaveChanges();
+        }
+
+        private static void ExecuteNumericalScale(ARTDbContext context)
+        {
+            var @long = context.NumericalScale.SingleOrDefault(x => x.Id == NumericalScaleEnum.Long);
+            var @short = context.NumericalScale.SingleOrDefault(x => x.Id == NumericalScaleEnum.Short);
+
+            if (@long == null)
+            {
+                @long = new NumericalScale
+                {
+                    Id = NumericalScaleEnum.Long,
+                };
+                context.NumericalScale.Add(@long);
+            }
+            @long.Name = "Longa";
+
+            if (@short == null)
+            {
+                @short = new NumericalScale
+                {
+                    Id = NumericalScaleEnum.Short,
+                };
+                context.NumericalScale.Add(@short);
+            }
+            @short.Name = "Curta";
+
+            context.SaveChanges();
+        }
+
         private static void ExecuteSettings()
         {
             ISettingManager settingManager = new SettingManager();
@@ -1159,34 +1274,6 @@
             }
         }
 
-        private static void ExecuteNumericalScale(ARTDbContext context)
-        {
-            var @long = context.NumericalScale.SingleOrDefault(x => x.Id == NumericalScaleEnum.Long);
-            var @short = context.NumericalScale.SingleOrDefault(x => x.Id == NumericalScaleEnum.Short);
-            
-            if (@long == null)
-            {
-                @long = new NumericalScale
-                {
-                    Id = NumericalScaleEnum.Long,
-                };
-                context.NumericalScale.Add(@long);
-            }
-            @long.Name = "Longa";
-
-            if (@short == null)
-            {
-                @short = new NumericalScale
-                {
-                    Id = NumericalScaleEnum.Short,
-                };
-                context.NumericalScale.Add(@short);
-            }
-            @short.Name = "Curta";
-            
-            context.SaveChanges();
-        }
-
         private static void ExecuteUnitMeasurementPrefix(ARTDbContext context)
         {
             var yotta = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Yotta);
@@ -1210,7 +1297,7 @@
             var atto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Atto);
             var zepto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Zepto);
             var yocto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Yocto);
-            
+
             if (yotta == null)
             {
                 yotta = new UnitMeasurementPrefix
@@ -1221,7 +1308,7 @@
             }
             yotta.Name = "yotta";
             yotta.Symbol = "Y";
-            
+
             if (zetta == null)
             {
                 zetta = new UnitMeasurementPrefix
@@ -1243,7 +1330,7 @@
             }
             exa.Name = "exa";
             exa.Symbol = "E";
-            
+
             if (peta == null)
             {
                 peta = new UnitMeasurementPrefix
@@ -1445,95 +1532,33 @@
             context.SaveChanges();
         }
 
-        private static void ExecuteContinent(ARTDbContext context)
+        private static void ExecuteUnitMeasurementScale(ARTDbContext context)
         {
-            var africa = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Africa);
-            var america = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.America);
-            var asia = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Asia);
-            var europe = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Europe);
-            var oceania = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Oceania);
-            
-            if (africa == null)
-            {
-                africa = new Continent
-                {
-                    Id = ContinentEnum.Africa,                    
-                };
-                context.Continent.Add(africa);
-            }
-            africa.Name = "África";
+            var longYotta = context.UnitMeasurementScale
+                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Yotta)
+                .Where(x => x.NumericalScaleId == NumericalScaleEnum.Long)
+                .SingleOrDefault();
 
-            if (america == null)
+            if (longYotta == null)
             {
-                america = new Continent
+                longYotta = new UnitMeasurementScale
                 {
-                    Id = ContinentEnum.America,
-                };
-                context.Continent.Add(america);
-            }
-            america.Name = "América";
+                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Yotta,
+                    NumericalScaleId = NumericalScaleEnum.Long
 
-            if (asia == null)
-            {
-                asia = new Continent
-                {
-                    Id = ContinentEnum.Asia,
                 };
-                context.Continent.Add(asia);
+                context.UnitMeasurementScale.Add(longYotta);
             }
-            asia.Name = "Ásia";
-
-            if (europe == null)
-            {
-                europe = new Continent
-                {
-                    Id = ContinentEnum.Europe,
-                };
-                context.Continent.Add(europe);
-            }
-            europe.Name = "Europa";
-
-            if (oceania == null)
-            {
-                oceania = new Continent
-                {
-                    Id = ContinentEnum.Oceania,
-                };
-                context.Continent.Add(oceania);
-            }
-            oceania.Name = "Oceania";
+            longYotta.Name = "Quadrilião";
+            longYotta.Base = 10;
+            longYotta.Exponent = 24;
 
             context.SaveChanges();
         }
 
-        private static void ExecuteCountry(ARTDbContext context, string directoryBase)
-        {
-            if (context.Country.Any()) return;
-
-            string countiesFilePath = Path.Combine(directoryBase, "countries.csv");
-
-            var lines = File.ReadAllLines(countiesFilePath, GetEncoding()).Select(a => a.Split(';'));
-
-            foreach (var line in lines)
-            {
-                var name = line[0];
-                var continentId = (ContinentEnum)Enum.Parse(typeof(ContinentEnum), line[1]);
-                var numericalScaleId = (NumericalScaleEnum)Enum.Parse(typeof(NumericalScaleEnum), line[2]);
-
-                context.Country.Add(new Country
-                {                    
-                    Name = name,                    
-                    ContinentId = continentId,
-                    NumericalScaleId = numericalScaleId,
-                });
-            }
-
-            context.SaveChanges();            
-        }
-
         private static Encoding GetEncoding()
         {
-            return Encoding.GetEncoding(CultureInfo.GetCultureInfo("pt-BR").TextInfo.ANSICodePage); 
+            return Encoding.GetEncoding(CultureInfo.GetCultureInfo("pt-BR").TextInfo.ANSICodePage);
         }
 
         #endregion Methods

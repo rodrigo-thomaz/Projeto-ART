@@ -1,12 +1,18 @@
-﻿using ART.Domotica.Enums;
-using ART.Infra.CrossCutting.Repository;
-using System.Collections.Generic;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using System.Collections.Generic;
+
+    using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
+
     public class Continent : IEntity<ContinentEnum>
     {
         #region Properties
+
+        public ICollection<Country> Countries
+        {
+            get; set;
+        }
 
         public ContinentEnum Id
         {
@@ -14,11 +20,6 @@ namespace ART.Domotica.Repository.Entities
         }
 
         public string Name
-        {
-            get; set;
-        }
-
-        public ICollection<Country> Countries
         {
             get; set;
         }
