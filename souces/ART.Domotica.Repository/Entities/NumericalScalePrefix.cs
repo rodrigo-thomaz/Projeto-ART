@@ -5,11 +5,11 @@
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public class UnitMeasurementPrefix : IEntity<UnitMeasurementPrefixEnum>
+    public class NumericalScalePrefix : IEntity<NumericalScalePrefixEnum>
     {
         #region Properties
 
-        public UnitMeasurementPrefixEnum Id
+        public NumericalScalePrefixEnum Id
         {
             get; set;
         }

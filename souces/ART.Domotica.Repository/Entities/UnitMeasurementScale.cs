@@ -31,12 +31,12 @@
             get; set;
         }
 
-        public UnitMeasurementPrefix UnitMeasurementPrefix
+        public NumericalScalePrefix NumericalScalePrefix
         {
             get; set;
         }
 
-        public UnitMeasurementPrefixEnum UnitMeasurementPrefixId
+        public NumericalScalePrefixEnum NumericalScalePrefixId
         {
             get; set;
         }

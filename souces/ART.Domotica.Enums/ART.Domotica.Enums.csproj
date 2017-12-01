@@ -48,7 +48,7 @@
     <Compile Include="SensorDatasheetEnum.cs" />
     <Compile Include="UnitMeasurementEnum.cs" />
     <Compile Include="SensorTypeEnum.cs" />
-    <Compile Include="UnitMeasurementPrefixEnum.cs" />
+    <Compile Include="NumericalScalePrefixEnum.cs" />
     <Compile Include="UnitMeasurementTypeEnum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

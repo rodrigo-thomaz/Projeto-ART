@@ -13,7 +13,7 @@ namespace ART.Domotica.Repository.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201712011727424_InitialCreate"; }
+            get { return "201712011738193_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

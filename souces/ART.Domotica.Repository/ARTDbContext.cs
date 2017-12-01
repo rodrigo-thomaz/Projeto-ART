@@ -146,7 +146,7 @@
             get; set;
         }
 
-        public DbSet<UnitMeasurementPrefix> UnitMeasurementPrefix
+        public DbSet<NumericalScalePrefix> NumericalScalePrefix
         {
             get; set;
         }
@@ -202,7 +202,7 @@
             modelBuilder.Configurations.Add(new SensorUnitMeasurementDefaultConfiguration());
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new UnitMeasurementConfiguration());
-            modelBuilder.Configurations.Add(new UnitMeasurementPrefixConfiguration());
+            modelBuilder.Configurations.Add(new NumericalScalePrefixConfiguration());
             modelBuilder.Configurations.Add(new UnitMeasurementScaleConfiguration());
             modelBuilder.Configurations.Add(new UnitMeasurementTypeConfiguration());
 

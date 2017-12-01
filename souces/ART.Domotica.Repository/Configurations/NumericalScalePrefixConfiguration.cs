@@ -6,13 +6,13 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class UnitMeasurementPrefixConfiguration : EntityTypeConfiguration<UnitMeasurementPrefix>
+    public class NumericalScalePrefixConfiguration : EntityTypeConfiguration<NumericalScalePrefix>
     {
         #region Constructors
 
-        public UnitMeasurementPrefixConfiguration()
+        public NumericalScalePrefixConfiguration()
         {
-            ToTable("UnitMeasurementPrefix", "SI");
+            ToTable("NumericalScalePrefix", "SI");
 
             //Primary Keys
             HasKey(x => x.Id);

@@ -26,7 +26,7 @@
             var directoryBase = Path.Combine(currentDirectory, "InitialFiles");
 
             ExecuteNumericalScaleType(context);
-            ExecuteUnitMeasurementPrefix(context);
+            ExecuteNumericalScalePrefix(context);
             ExecuteUnitMeasurementScaleLong(context);
             ExecuteUnitMeasurementScaleShort(context);
             ExecuteContinent(context);
@@ -1288,257 +1288,257 @@
             }
         }
 
-        private static void ExecuteUnitMeasurementPrefix(ARTDbContext context)
+        private static void ExecuteNumericalScalePrefix(ARTDbContext context)
         {
-            var yotta = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Yotta);
-            var zetta = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Zetta);
-            var exa = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Exa);
-            var peta = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Peta);
-            var tera = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Tera);
-            var giga = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Giga);
-            var mega = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Mega);
-            var quilo = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Quilo);
-            var hecto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Hecto);
-            var deca = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Deca);
-            var none = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.None);
-            var deci = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Deci);
-            var centi = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Centi);
-            var mili = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Mili);
-            var micro = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Micro);
-            var nano = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Nano);
-            var pico = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Pico);
-            var femto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Femto);
-            var atto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Atto);
-            var zepto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Zepto);
-            var yocto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Yocto);
+            var yotta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Yotta);
+            var zetta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Zetta);
+            var exa = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Exa);
+            var peta = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Peta);
+            var tera = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Tera);
+            var giga = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Giga);
+            var mega = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Mega);
+            var quilo = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Quilo);
+            var hecto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Hecto);
+            var deca = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Deca);
+            var none = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.None);
+            var deci = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Deci);
+            var centi = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Centi);
+            var mili = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Mili);
+            var micro = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Micro);
+            var nano = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Nano);
+            var pico = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Pico);
+            var femto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Femto);
+            var atto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Atto);
+            var zepto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Zepto);
+            var yocto = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == NumericalScalePrefixEnum.Yocto);
 
             if (yotta == null)
             {
-                yotta = new UnitMeasurementPrefix
+                yotta = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Yotta,
+                    Id = NumericalScalePrefixEnum.Yotta,
                 };
-                context.UnitMeasurementPrefix.Add(yotta);
+                context.NumericalScalePrefix.Add(yotta);
             }
             yotta.Name = "yotta";
             yotta.Symbol = "Y";
 
             if (zetta == null)
             {
-                zetta = new UnitMeasurementPrefix
+                zetta = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Zetta,
+                    Id = NumericalScalePrefixEnum.Zetta,
                 };
-                context.UnitMeasurementPrefix.Add(zetta);
+                context.NumericalScalePrefix.Add(zetta);
             }
             zetta.Name = "zetta";
             zetta.Symbol = "Z";
 
             if (exa == null)
             {
-                exa = new UnitMeasurementPrefix
+                exa = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Exa,
+                    Id = NumericalScalePrefixEnum.Exa,
                 };
-                context.UnitMeasurementPrefix.Add(exa);
+                context.NumericalScalePrefix.Add(exa);
             }
             exa.Name = "exa";
             exa.Symbol = "E";
 
             if (peta == null)
             {
-                peta = new UnitMeasurementPrefix
+                peta = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Peta,
+                    Id = NumericalScalePrefixEnum.Peta,
                 };
-                context.UnitMeasurementPrefix.Add(peta);
+                context.NumericalScalePrefix.Add(peta);
             }
             peta.Name = "peta";
             peta.Symbol = "P";
 
             if (tera == null)
             {
-                tera = new UnitMeasurementPrefix
+                tera = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Tera,
+                    Id = NumericalScalePrefixEnum.Tera,
                 };
-                context.UnitMeasurementPrefix.Add(tera);
+                context.NumericalScalePrefix.Add(tera);
             }
             tera.Name = "tera";
             tera.Symbol = "T";
 
             if (giga == null)
             {
-                giga = new UnitMeasurementPrefix
+                giga = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Giga,
+                    Id = NumericalScalePrefixEnum.Giga,
                 };
-                context.UnitMeasurementPrefix.Add(giga);
+                context.NumericalScalePrefix.Add(giga);
             }
             giga.Name = "giga";
             giga.Symbol = "G";
 
             if (mega == null)
             {
-                mega = new UnitMeasurementPrefix
+                mega = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Mega,
+                    Id = NumericalScalePrefixEnum.Mega,
                 };
-                context.UnitMeasurementPrefix.Add(mega);
+                context.NumericalScalePrefix.Add(mega);
             }
             mega.Name = "mega";
             mega.Symbol = "M";
 
             if (quilo == null)
             {
-                quilo = new UnitMeasurementPrefix
+                quilo = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Quilo,
+                    Id = NumericalScalePrefixEnum.Quilo,
                 };
-                context.UnitMeasurementPrefix.Add(quilo);
+                context.NumericalScalePrefix.Add(quilo);
             }
             quilo.Name = "quilo";
             quilo.Symbol = "k";
 
             if (hecto == null)
             {
-                hecto = new UnitMeasurementPrefix
+                hecto = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Hecto,
+                    Id = NumericalScalePrefixEnum.Hecto,
                 };
-                context.UnitMeasurementPrefix.Add(hecto);
+                context.NumericalScalePrefix.Add(hecto);
             }
             hecto.Name = "hecto";
             hecto.Symbol = "h";
 
             if (deca == null)
             {
-                deca = new UnitMeasurementPrefix
+                deca = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Deca,
+                    Id = NumericalScalePrefixEnum.Deca,
                 };
-                context.UnitMeasurementPrefix.Add(deca);
+                context.NumericalScalePrefix.Add(deca);
             }
             deca.Name = "deca";
             deca.Symbol = "da";
 
             if (none == null)
             {
-                none = new UnitMeasurementPrefix
+                none = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.None,
+                    Id = NumericalScalePrefixEnum.None,
                 };
-                context.UnitMeasurementPrefix.Add(none);
+                context.NumericalScalePrefix.Add(none);
             }
             none.Name = "none";
             none.Symbol = null;
 
             if (deci == null)
             {
-                deci = new UnitMeasurementPrefix
+                deci = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Deci,
+                    Id = NumericalScalePrefixEnum.Deci,
                 };
-                context.UnitMeasurementPrefix.Add(deci);
+                context.NumericalScalePrefix.Add(deci);
             }
             deci.Name = "deci";
             deci.Symbol = "d";
 
             if (centi == null)
             {
-                centi = new UnitMeasurementPrefix
+                centi = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Centi,
+                    Id = NumericalScalePrefixEnum.Centi,
                 };
-                context.UnitMeasurementPrefix.Add(centi);
+                context.NumericalScalePrefix.Add(centi);
             }
             centi.Name = "centi";
             centi.Symbol = "c";
 
             if (mili == null)
             {
-                mili = new UnitMeasurementPrefix
+                mili = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Mili,
+                    Id = NumericalScalePrefixEnum.Mili,
                 };
-                context.UnitMeasurementPrefix.Add(mili);
+                context.NumericalScalePrefix.Add(mili);
             }
             mili.Name = "mili";
             mili.Symbol = "m";
 
             if (micro == null)
             {
-                micro = new UnitMeasurementPrefix
+                micro = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Micro,
+                    Id = NumericalScalePrefixEnum.Micro,
                 };
-                context.UnitMeasurementPrefix.Add(micro);
+                context.NumericalScalePrefix.Add(micro);
             }
             micro.Name = "micro";
             micro.Symbol = "µ";
 
             if (nano == null)
             {
-                nano = new UnitMeasurementPrefix
+                nano = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Nano,
+                    Id = NumericalScalePrefixEnum.Nano,
                 };
-                context.UnitMeasurementPrefix.Add(nano);
+                context.NumericalScalePrefix.Add(nano);
             }
             nano.Name = "nano";
             nano.Symbol = "n";
 
             if (pico == null)
             {
-                pico = new UnitMeasurementPrefix
+                pico = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Pico,
+                    Id = NumericalScalePrefixEnum.Pico,
                 };
-                context.UnitMeasurementPrefix.Add(pico);
+                context.NumericalScalePrefix.Add(pico);
             }
             pico.Name = "pico";
             pico.Symbol = "p";
 
             if (femto == null)
             {
-                femto = new UnitMeasurementPrefix
+                femto = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Femto,
+                    Id = NumericalScalePrefixEnum.Femto,
                 };
-                context.UnitMeasurementPrefix.Add(femto);
+                context.NumericalScalePrefix.Add(femto);
             }
             femto.Name = "femto";
             femto.Symbol = "f";
 
             if (atto == null)
             {
-                atto = new UnitMeasurementPrefix
+                atto = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Atto,
+                    Id = NumericalScalePrefixEnum.Atto,
                 };
-                context.UnitMeasurementPrefix.Add(atto);
+                context.NumericalScalePrefix.Add(atto);
             }
             atto.Name = "atto";
             atto.Symbol = "a";
 
             if (zepto == null)
             {
-                zepto = new UnitMeasurementPrefix
+                zepto = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Zepto,
+                    Id = NumericalScalePrefixEnum.Zepto,
                 };
-                context.UnitMeasurementPrefix.Add(zepto);
+                context.NumericalScalePrefix.Add(zepto);
             }
             zepto.Name = "zepto";
             zepto.Symbol = "z";
 
             if (yocto == null)
             {
-                yocto = new UnitMeasurementPrefix
+                yocto = new NumericalScalePrefix
                 {
-                    Id = UnitMeasurementPrefixEnum.Yocto,
+                    Id = NumericalScalePrefixEnum.Yocto,
                 };
-                context.UnitMeasurementPrefix.Add(yocto);
+                context.NumericalScalePrefix.Add(yocto);
             }
             yocto.Name = "yocto";
             yocto.Symbol = "y";
@@ -1551,7 +1551,7 @@
             //longYotta
 
             var longYotta = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Yotta)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Yotta)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1559,7 +1559,7 @@
             {
                 longYotta = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Yotta,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Yotta,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1572,7 +1572,7 @@
             //longZetta
 
             var longZetta = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Zetta)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Zetta)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1580,7 +1580,7 @@
             {
                 longZetta = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Zetta,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Zetta,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1593,7 +1593,7 @@
             //longExa
 
             var longExa = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Exa)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Exa)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1601,7 +1601,7 @@
             {
                 longExa = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Exa,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Exa,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1614,7 +1614,7 @@
             //longPeta
 
             var longPeta = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Peta)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Peta)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1622,7 +1622,7 @@
             {
                 longPeta = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Peta,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Peta,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1635,7 +1635,7 @@
             //longTera
 
             var longTera = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Tera)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Tera)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1643,7 +1643,7 @@
             {
                 longTera = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Tera,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Tera,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1656,7 +1656,7 @@
             //longGiga
 
             var longGiga = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Giga)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Giga)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1664,7 +1664,7 @@
             {
                 longGiga = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Giga,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Giga,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1677,7 +1677,7 @@
             //longMega
 
             var longMega = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Mega)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Mega)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1685,7 +1685,7 @@
             {
                 longMega = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Mega,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Mega,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1698,7 +1698,7 @@
             //longQuilo
 
             var longQuilo = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Quilo)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Quilo)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1706,7 +1706,7 @@
             {
                 longQuilo = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Quilo,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Quilo,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1719,7 +1719,7 @@
             //longHecto
 
             var longHecto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Hecto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Hecto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1727,7 +1727,7 @@
             {
                 longHecto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Hecto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Hecto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1740,7 +1740,7 @@
             //longDeca
 
             var longDeca = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Deca)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Deca)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1748,7 +1748,7 @@
             {
                 longDeca = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Deca,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Deca,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1761,7 +1761,7 @@
             //longNone
 
             var longNone = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.None)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.None)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1769,7 +1769,7 @@
             {
                 longNone = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.None,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.None,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1782,7 +1782,7 @@
             //longDeci
 
             var longDeci = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Deci)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Deci)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1790,7 +1790,7 @@
             {
                 longDeci = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Deci,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Deci,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1803,7 +1803,7 @@
             //longCenti
 
             var longCenti = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Centi)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Centi)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1811,7 +1811,7 @@
             {
                 longCenti = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Centi,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Centi,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1824,7 +1824,7 @@
             //longMili
 
             var longMili = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Mili)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Mili)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1832,7 +1832,7 @@
             {
                 longMili = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Mili,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Mili,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1845,7 +1845,7 @@
             //longMicro
 
             var longMicro = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Micro)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Micro)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1853,7 +1853,7 @@
             {
                 longMicro = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Micro,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Micro,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1866,7 +1866,7 @@
             //longNano
 
             var longNano = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Nano)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Nano)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1874,7 +1874,7 @@
             {
                 longNano = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Nano,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Nano,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1887,7 +1887,7 @@
             //longPico
 
             var longPico = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Pico)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Pico)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1895,7 +1895,7 @@
             {
                 longPico = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Pico,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Pico,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1908,7 +1908,7 @@
             //longFemto
 
             var longFemto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Femto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Femto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1916,7 +1916,7 @@
             {
                 longFemto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Femto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Femto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1929,7 +1929,7 @@
             //longAtto
 
             var longAtto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Atto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Atto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1937,7 +1937,7 @@
             {
                 longAtto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Atto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Atto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1950,7 +1950,7 @@
             //longZepto
 
             var longZepto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Zepto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Zepto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1958,7 +1958,7 @@
             {
                 longZepto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Zepto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Zepto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1971,7 +1971,7 @@
             //longYocto
 
             var longYocto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Yocto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Yocto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Long)
                 .SingleOrDefault();
 
@@ -1979,7 +1979,7 @@
             {
                 longYocto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Yocto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Yocto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Long
 
                 };
@@ -1997,7 +1997,7 @@
             //shortYotta
 
             var shortYotta = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Yotta)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Yotta)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2005,7 +2005,7 @@
             {
                 shortYotta = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Yotta,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Yotta,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2018,7 +2018,7 @@
             //shortZetta
 
             var shortZetta = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Zetta)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Zetta)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2026,7 +2026,7 @@
             {
                 shortZetta = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Zetta,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Zetta,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2039,7 +2039,7 @@
             //shortExa
 
             var shortExa = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Exa)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Exa)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2047,7 +2047,7 @@
             {
                 shortExa = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Exa,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Exa,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2060,7 +2060,7 @@
             //shortPeta
 
             var shortPeta = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Peta)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Peta)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2068,7 +2068,7 @@
             {
                 shortPeta = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Peta,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Peta,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2081,7 +2081,7 @@
             //shortTera
 
             var shortTera = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Tera)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Tera)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2089,7 +2089,7 @@
             {
                 shortTera = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Tera,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Tera,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2102,7 +2102,7 @@
             //shortGiga
 
             var shortGiga = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Giga)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Giga)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2110,7 +2110,7 @@
             {
                 shortGiga = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Giga,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Giga,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2123,7 +2123,7 @@
             //shortMega
 
             var shortMega = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Mega)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Mega)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2131,7 +2131,7 @@
             {
                 shortMega = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Mega,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Mega,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2144,7 +2144,7 @@
             //shortQuilo
 
             var shortQuilo = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Quilo)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Quilo)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2152,7 +2152,7 @@
             {
                 shortQuilo = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Quilo,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Quilo,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2165,7 +2165,7 @@
             //shortHecto
 
             var shortHecto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Hecto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Hecto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2173,7 +2173,7 @@
             {
                 shortHecto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Hecto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Hecto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2186,7 +2186,7 @@
             //shortDeca
 
             var shortDeca = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Deca)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Deca)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2194,7 +2194,7 @@
             {
                 shortDeca = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Deca,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Deca,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2207,7 +2207,7 @@
             //shortNone
 
             var shortNone = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.None)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.None)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2215,7 +2215,7 @@
             {
                 shortNone = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.None,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.None,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2228,7 +2228,7 @@
             //shortDeci
 
             var shortDeci = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Deci)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Deci)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2236,7 +2236,7 @@
             {
                 shortDeci = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Deci,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Deci,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2249,7 +2249,7 @@
             //shortCenti
 
             var shortCenti = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Centi)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Centi)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2257,7 +2257,7 @@
             {
                 shortCenti = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Centi,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Centi,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2270,7 +2270,7 @@
             //shortMili
 
             var shortMili = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Mili)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Mili)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2278,7 +2278,7 @@
             {
                 shortMili = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Mili,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Mili,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2291,7 +2291,7 @@
             //shortMicro
 
             var shortMicro = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Micro)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Micro)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2299,7 +2299,7 @@
             {
                 shortMicro = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Micro,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Micro,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2312,7 +2312,7 @@
             //shortNano
 
             var shortNano = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Nano)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Nano)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2320,7 +2320,7 @@
             {
                 shortNano = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Nano,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Nano,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2333,7 +2333,7 @@
             //shortPico
 
             var shortPico = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Pico)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Pico)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2341,7 +2341,7 @@
             {
                 shortPico = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Pico,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Pico,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2354,7 +2354,7 @@
             //shortFemto
 
             var shortFemto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Femto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Femto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2362,7 +2362,7 @@
             {
                 shortFemto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Femto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Femto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2375,7 +2375,7 @@
             //shortAtto
 
             var shortAtto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Atto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Atto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2383,7 +2383,7 @@
             {
                 shortAtto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Atto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Atto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2396,7 +2396,7 @@
             //shortZepto
 
             var shortZepto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Zepto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Zepto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2404,7 +2404,7 @@
             {
                 shortZepto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Zepto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Zepto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };
@@ -2417,7 +2417,7 @@
             //shortYocto
 
             var shortYocto = context.UnitMeasurementScale
-                .Where(x => x.UnitMeasurementPrefixId == UnitMeasurementPrefixEnum.Yocto)
+                .Where(x => x.NumericalScalePrefixId == NumericalScalePrefixEnum.Yocto)
                 .Where(x => x.NumericalScaleTypeId == NumericalScaleTypeEnum.Short)
                 .SingleOrDefault();
 
@@ -2425,7 +2425,7 @@
             {
                 shortYocto = new UnitMeasurementScale
                 {
-                    UnitMeasurementPrefixId = UnitMeasurementPrefixEnum.Yocto,
+                    NumericalScalePrefixId = NumericalScalePrefixEnum.Yocto,
                     NumericalScaleTypeId = NumericalScaleTypeEnum.Short
 
                 };

@@ -2,7 +2,7 @@
 {
     #region Enumerations
 
-    public enum UnitMeasurementPrefixEnum
+    public enum NumericalScalePrefixEnum
     {
         Yotta = 1,
         Zetta = 2,
