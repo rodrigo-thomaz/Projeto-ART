@@ -27,27 +27,7 @@
             ExecuteNumericalScale(context);
             ExecuteContinent(context);
             ExecuteCountry(context);
-
-            #region TimeZone
-
-            if (!context.TimeZone.Any())
-            {
-                var systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
-
-                foreach (var item in systemTimeZones)
-                {
-                    context.TimeZone.Add(new Entities.TimeZone
-                    {
-                        DisplayName = item.DisplayName,
-                        SupportsDaylightSavingTime = item.SupportsDaylightSavingTime,
-                        UtcTimeOffsetInSecond = (int)item.BaseUtcOffset.TotalSeconds,
-                    });
-                }
-
-                context.SaveChanges();
-            }
-
-            #endregion
+            ExecuteTimeZone(context);
 
             #region UnitMeasurementType
 
@@ -1301,6 +1281,26 @@
             if (!settingManager.Exist(SettingsConstants.PublishMessageIntervalSettingsKey))
             {
                 settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
+            }
+        }
+
+        private static void ExecuteTimeZone(ARTDbContext context)
+        {
+            if (!context.TimeZone.Any())
+            {
+                var systemTimeZones = TimeZoneInfo.GetSystemTimeZones();
+
+                foreach (var item in systemTimeZones)
+                {
+                    context.TimeZone.Add(new Entities.TimeZone
+                    {
+                        DisplayName = item.DisplayName,
+                        SupportsDaylightSavingTime = item.SupportsDaylightSavingTime,
+                        UtcTimeOffsetInSecond = (int)item.BaseUtcOffset.TotalSeconds,
+                    });
+                }
+
+                context.SaveChanges();
             }
         }
 
