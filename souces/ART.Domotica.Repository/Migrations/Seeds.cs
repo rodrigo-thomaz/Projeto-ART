@@ -32,68 +32,9 @@
             ExecuteUnitMeasurement(context);
             ExecuteSensorType(context);
             ExecuteActuatorType(context);
-            
-            #region SensorDatasheet
-
-            var sensorDatasheetTemperatureDS18B20 = context.SensorDatasheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
-            var sensorDatasheetUltrasonicHCSR04 = context.SensorDatasheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
-
-            if (sensorDatasheetTemperatureDS18B20 == null)
-            {
-                sensorDatasheetTemperatureDS18B20 = new SensorDatasheet
-                {
-                    Id = SensorDatasheetEnum.Temperature_DS18B20,
-                    SensorTypeId = SensorTypeEnum.Temperature,
-                };
-                context.SensorDatasheet.Add(sensorDatasheetTemperatureDS18B20);
-            }
-
-            if (sensorDatasheetUltrasonicHCSR04 == null)
-            {
-                sensorDatasheetUltrasonicHCSR04 = new SensorDatasheet
-                {
-                    Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
-                    SensorTypeId = SensorTypeEnum.ProximityDistance,
-                };
-                context.SensorDatasheet.Add(sensorDatasheetUltrasonicHCSR04);
-            }
-
-            #endregion
-
-            #region SensorUnitMeasurementDefault
-
-            var sensorUnitMeasurementDefaultTemperatureDS18B20 = context.SensorUnitMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
-            var sensorUnitMeasurementDefaultUltrasonicHCSR04 = context.SensorUnitMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
-
-            if (sensorUnitMeasurementDefaultTemperatureDS18B20 == null)
-            {
-                sensorUnitMeasurementDefaultTemperatureDS18B20 = new SensorUnitMeasurementDefault
-                {
-                    Id = SensorDatasheetEnum.Temperature_DS18B20,
-                    SensorTypeId = SensorTypeEnum.Temperature,
-                    UnitMeasurementId = UnitMeasurementEnum.Celsius,
-                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
-                    Max = 125M,
-                    Min = -55M,
-                };
-                context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultTemperatureDS18B20);
-            }
-
-            if (sensorUnitMeasurementDefaultUltrasonicHCSR04 == null)
-            {
-                sensorUnitMeasurementDefaultUltrasonicHCSR04 = new SensorUnitMeasurementDefault
-                {
-                    Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
-                    SensorTypeId = SensorTypeEnum.ProximityDistance,
-                    UnitMeasurementId = UnitMeasurementEnum.Meter,
-                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
-                    Max = 2.3M,
-                    Min = 0.2M,
-                };
-                context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultUltrasonicHCSR04);
-            }
-
-            #endregion            
+            ExecuteSensorDatasheet(context);
+            ExecuteSensorUnitMeasurementDefault(context);
+                       
 
             #region SensorRange
 
@@ -648,6 +589,74 @@
             #endregion
 
             ExecuteSettings();
+        }
+
+        private static void ExecuteSensorUnitMeasurementDefault(ARTDbContext context)
+        {
+            #region SensorUnitMeasurementDefault
+
+            var sensorUnitMeasurementDefaultTemperatureDS18B20 = context.SensorUnitMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
+            var sensorUnitMeasurementDefaultUltrasonicHCSR04 = context.SensorUnitMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
+
+            if (sensorUnitMeasurementDefaultTemperatureDS18B20 == null)
+            {
+                sensorUnitMeasurementDefaultTemperatureDS18B20 = new SensorUnitMeasurementDefault
+                {
+                    Id = SensorDatasheetEnum.Temperature_DS18B20,
+                    SensorTypeId = SensorTypeEnum.Temperature,
+                    UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                    Max = 125M,
+                    Min = -55M,
+                };
+                context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultTemperatureDS18B20);
+            }
+
+            if (sensorUnitMeasurementDefaultUltrasonicHCSR04 == null)
+            {
+                sensorUnitMeasurementDefaultUltrasonicHCSR04 = new SensorUnitMeasurementDefault
+                {
+                    Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
+                    SensorTypeId = SensorTypeEnum.ProximityDistance,
+                    UnitMeasurementId = UnitMeasurementEnum.Meter,
+                    UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
+                    Max = 2.3M,
+                    Min = 0.2M,
+                };
+                context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultUltrasonicHCSR04);
+            }
+
+            #endregion            
+        }
+
+        private static void ExecuteSensorDatasheet(ARTDbContext context)
+        {
+            #region SensorDatasheet
+
+            var sensorDatasheetTemperatureDS18B20 = context.SensorDatasheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
+            var sensorDatasheetUltrasonicHCSR04 = context.SensorDatasheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
+
+            if (sensorDatasheetTemperatureDS18B20 == null)
+            {
+                sensorDatasheetTemperatureDS18B20 = new SensorDatasheet
+                {
+                    Id = SensorDatasheetEnum.Temperature_DS18B20,
+                    SensorTypeId = SensorTypeEnum.Temperature,
+                };
+                context.SensorDatasheet.Add(sensorDatasheetTemperatureDS18B20);
+            }
+
+            if (sensorDatasheetUltrasonicHCSR04 == null)
+            {
+                sensorDatasheetUltrasonicHCSR04 = new SensorDatasheet
+                {
+                    Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
+                    SensorTypeId = SensorTypeEnum.ProximityDistance,
+                };
+                context.SensorDatasheet.Add(sensorDatasheetUltrasonicHCSR04);
+            }
+
+            #endregion
         }
 
         private static void ExecuteSensorType(ARTDbContext context)
