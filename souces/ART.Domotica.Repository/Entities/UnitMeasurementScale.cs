@@ -6,7 +6,12 @@
     {
         #region Properties
 
-        public float CientificNotation
+        public short Base
+        {
+            get; set;
+        }
+
+        public short Exponent
         {
             get; set;
         }

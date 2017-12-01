@@ -54,9 +54,14 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
 
-            //CientificNotation
-            Property(x => x.CientificNotation)
+            //Base
+            Property(x => x.Base)
                 .HasColumnOrder(3)
+                .IsRequired();
+
+            //Exponent
+            Property(x => x.Exponent)
+                .HasColumnOrder(4)
                 .IsRequired();
         }
 
