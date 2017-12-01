@@ -13,6 +13,8 @@
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;
+    using System.IO;
+    using System.Globalization;
 
     public class Seeds
     {
@@ -20,6 +22,14 @@
 
         public static void Execute(ARTDbContext context)
         {
+            var currentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+            var directoryBase = Path.Combine(currentDirectory, "InitialFiles");
+
+            ExecuteNumericalScale(context);
+            ExecuteUnitMeasurementPrefix(context);
+            ExecuteContinent(context);
+            ExecuteCountry(context, directoryBase);
+
             #region TimeZone
 
             if (!context.TimeZone.Any())
@@ -658,7 +668,7 @@
                 sensor_1.Family = "DS18B20";
                 sensor_1.DeviceAddress = sensor_1_Address;
 
-                if(!sensor_1.SensorTriggers.Any())
+                if (!sensor_1.SensorTriggers.Any())
                 {
                     sensor_1.SensorTriggers = new List<SensorTrigger>();
 
@@ -1008,7 +1018,7 @@
             {
                 espDevice1.ChipId = 1540901;
                 espDevice1.FlashChipId = 1458400;
-                if(espDevice1.DeviceMQ == null)
+                if (espDevice1.DeviceMQ == null)
                 {
                     espDevice1.DeviceMQ = new DeviceMQ
                     {
@@ -1147,6 +1157,383 @@
             {
                 settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
             }
+        }
+
+        private static void ExecuteNumericalScale(ARTDbContext context)
+        {
+            var @long = context.NumericalScale.SingleOrDefault(x => x.Id == NumericalScaleEnum.Long);
+            var @short = context.NumericalScale.SingleOrDefault(x => x.Id == NumericalScaleEnum.Short);
+            
+            if (@long == null)
+            {
+                @long = new NumericalScale
+                {
+                    Id = NumericalScaleEnum.Long,
+                };
+                context.NumericalScale.Add(@long);
+            }
+            @long.Name = "Longa";
+
+            if (@short == null)
+            {
+                @short = new NumericalScale
+                {
+                    Id = NumericalScaleEnum.Short,
+                };
+                context.NumericalScale.Add(@short);
+            }
+            @short.Name = "Curta";
+            
+            context.SaveChanges();
+        }
+
+        private static void ExecuteUnitMeasurementPrefix(ARTDbContext context)
+        {
+            var yotta = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Yotta);
+            var zetta = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Zetta);
+            var exa = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Exa);
+            var peta = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Peta);
+            var tera = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Tera);
+            var giga = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Giga);
+            var mega = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Mega);
+            var quilo = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Quilo);
+            var hecto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Hecto);
+            var deca = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Deca);
+            var none = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.None);
+            var deci = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Deci);
+            var centi = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Centi);
+            var mili = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Mili);
+            var micro = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Micro);
+            var nano = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Nano);
+            var pico = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Pico);
+            var femto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Femto);
+            var atto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Atto);
+            var zepto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Zepto);
+            var yocto = context.UnitMeasurementPrefix.SingleOrDefault(x => x.Id == UnitMeasurementPrefixEnum.Yocto);
+            
+            if (yotta == null)
+            {
+                yotta = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Yotta,
+                };
+                context.UnitMeasurementPrefix.Add(yotta);
+            }
+            yotta.Name = "yotta";
+            yotta.Symbol = "Y";
+            
+            if (zetta == null)
+            {
+                zetta = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Zetta,
+                };
+                context.UnitMeasurementPrefix.Add(zetta);
+            }
+            zetta.Name = "zetta";
+            zetta.Symbol = "Z";
+
+            if (exa == null)
+            {
+                exa = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Exa,
+                };
+                context.UnitMeasurementPrefix.Add(exa);
+            }
+            exa.Name = "exa";
+            exa.Symbol = "E";
+            
+            if (peta == null)
+            {
+                peta = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Peta,
+                };
+                context.UnitMeasurementPrefix.Add(peta);
+            }
+            peta.Name = "peta";
+            peta.Symbol = "P";
+
+            if (tera == null)
+            {
+                tera = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Tera,
+                };
+                context.UnitMeasurementPrefix.Add(tera);
+            }
+            tera.Name = "tera";
+            tera.Symbol = "T";
+
+            if (giga == null)
+            {
+                giga = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Giga,
+                };
+                context.UnitMeasurementPrefix.Add(giga);
+            }
+            giga.Name = "giga";
+            giga.Symbol = "G";
+
+            if (mega == null)
+            {
+                mega = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Mega,
+                };
+                context.UnitMeasurementPrefix.Add(mega);
+            }
+            mega.Name = "mega";
+            mega.Symbol = "M";
+
+            if (quilo == null)
+            {
+                quilo = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Quilo,
+                };
+                context.UnitMeasurementPrefix.Add(quilo);
+            }
+            quilo.Name = "quilo";
+            quilo.Symbol = "k";
+
+            if (hecto == null)
+            {
+                hecto = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Hecto,
+                };
+                context.UnitMeasurementPrefix.Add(hecto);
+            }
+            hecto.Name = "hecto";
+            hecto.Symbol = "h";
+
+            if (deca == null)
+            {
+                deca = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Deca,
+                };
+                context.UnitMeasurementPrefix.Add(deca);
+            }
+            deca.Name = "deca";
+            deca.Symbol = "da";
+
+            if (none == null)
+            {
+                none = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.None,
+                };
+                context.UnitMeasurementPrefix.Add(none);
+            }
+            none.Name = "none";
+            none.Symbol = null;
+
+            if (deci == null)
+            {
+                deci = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Deci,
+                };
+                context.UnitMeasurementPrefix.Add(deci);
+            }
+            deci.Name = "deci";
+            deci.Symbol = "d";
+
+            if (centi == null)
+            {
+                centi = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Centi,
+                };
+                context.UnitMeasurementPrefix.Add(centi);
+            }
+            centi.Name = "centi";
+            centi.Symbol = "c";
+
+            if (mili == null)
+            {
+                mili = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Mili,
+                };
+                context.UnitMeasurementPrefix.Add(mili);
+            }
+            mili.Name = "mili";
+            mili.Symbol = "m";
+
+            if (micro == null)
+            {
+                micro = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Micro,
+                };
+                context.UnitMeasurementPrefix.Add(micro);
+            }
+            micro.Name = "micro";
+            micro.Symbol = "µ";
+
+            if (nano == null)
+            {
+                nano = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Nano,
+                };
+                context.UnitMeasurementPrefix.Add(nano);
+            }
+            nano.Name = "nano";
+            nano.Symbol = "n";
+
+            if (pico == null)
+            {
+                pico = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Pico,
+                };
+                context.UnitMeasurementPrefix.Add(pico);
+            }
+            pico.Name = "pico";
+            pico.Symbol = "p";
+
+            if (femto == null)
+            {
+                femto = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Femto,
+                };
+                context.UnitMeasurementPrefix.Add(femto);
+            }
+            femto.Name = "femto";
+            femto.Symbol = "f";
+
+            if (atto == null)
+            {
+                atto = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Atto,
+                };
+                context.UnitMeasurementPrefix.Add(atto);
+            }
+            atto.Name = "atto";
+            atto.Symbol = "a";
+
+            if (zepto == null)
+            {
+                zepto = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Zepto,
+                };
+                context.UnitMeasurementPrefix.Add(zepto);
+            }
+            zepto.Name = "zepto";
+            zepto.Symbol = "z";
+
+            if (yocto == null)
+            {
+                yocto = new UnitMeasurementPrefix
+                {
+                    Id = UnitMeasurementPrefixEnum.Yocto,
+                };
+                context.UnitMeasurementPrefix.Add(yocto);
+            }
+            yocto.Name = "yocto";
+            yocto.Symbol = "y";
+
+            context.SaveChanges();
+        }
+
+        private static void ExecuteContinent(ARTDbContext context)
+        {
+            var africa = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Africa);
+            var america = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.America);
+            var asia = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Asia);
+            var europe = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Europe);
+            var oceania = context.Continent.SingleOrDefault(x => x.Id == ContinentEnum.Oceania);
+            
+            if (africa == null)
+            {
+                africa = new Continent
+                {
+                    Id = ContinentEnum.Africa,                    
+                };
+                context.Continent.Add(africa);
+            }
+            africa.Name = "África";
+
+            if (america == null)
+            {
+                america = new Continent
+                {
+                    Id = ContinentEnum.America,
+                };
+                context.Continent.Add(america);
+            }
+            america.Name = "América";
+
+            if (asia == null)
+            {
+                asia = new Continent
+                {
+                    Id = ContinentEnum.Asia,
+                };
+                context.Continent.Add(asia);
+            }
+            asia.Name = "Ásia";
+
+            if (europe == null)
+            {
+                europe = new Continent
+                {
+                    Id = ContinentEnum.Europe,
+                };
+                context.Continent.Add(europe);
+            }
+            europe.Name = "Europa";
+
+            if (oceania == null)
+            {
+                oceania = new Continent
+                {
+                    Id = ContinentEnum.Oceania,
+                };
+                context.Continent.Add(oceania);
+            }
+            oceania.Name = "Oceania";
+
+            context.SaveChanges();
+        }
+
+        private static void ExecuteCountry(ARTDbContext context, string directoryBase)
+        {
+            if (context.Country.Any()) return;
+
+            string countiesFilePath = Path.Combine(directoryBase, "countries.csv");
+
+            var lines = File.ReadAllLines(countiesFilePath, GetEncoding()).Select(a => a.Split(';'));
+
+            foreach (var line in lines)
+            {
+                var name = line[0];
+                var continentId = (ContinentEnum)Enum.Parse(typeof(ContinentEnum), line[1]);
+                var numericalScaleId = (NumericalScaleEnum)Enum.Parse(typeof(NumericalScaleEnum), line[2]);
+
+                context.Country.Add(new Country
+                {                    
+                    Name = name,                    
+                    ContinentId = continentId,
+                    NumericalScaleId = numericalScaleId,
+                });
+            }
+
+            context.SaveChanges();            
+        }
+
+        private static Encoding GetEncoding()
+        {
+            return Encoding.GetEncoding(CultureInfo.GetCultureInfo("pt-BR").TextInfo.ANSICodePage); 
         }
 
         #endregion Methods

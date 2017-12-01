@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContinentEnum.cs" />
+    <Compile Include="NumericalScaleEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorChartLimiterPositionEnum.cs" />
     <Compile Include="ActuatorTypeEnum.cs" />
     <Compile Include="SensorDatasheetEnum.cs" />
     <Compile Include="UnitMeasurementEnum.cs" />
     <Compile Include="SensorTypeEnum.cs" />
+    <Compile Include="UnitMeasurementPrefixEnum.cs" />
     <Compile Include="UnitMeasurementTypeEnum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

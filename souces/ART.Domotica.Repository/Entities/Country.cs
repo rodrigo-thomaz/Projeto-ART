@@ -1,15 +1,13 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using System.Collections.Generic;
-
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public class UnitMeasurementPrefix : IEntity<UnitMeasurementPrefixEnum>
+    public class Country : IEntity<short>
     {
         #region Properties
 
-        public UnitMeasurementPrefixEnum Id
+        public short Id
         {
             get; set;
         }
@@ -19,12 +17,22 @@
             get; set;
         }
 
-        public string Symbol
+        public NumericalScale NumericalScale
         {
             get; set;
         }
 
-        public ICollection<UnitMeasurementScale> UnitMeasurementScales
+        public NumericalScaleEnum NumericalScaleId
+        {
+            get; set;
+        }
+
+        public ContinentEnum ContinentId
+        {
+            get; set;
+        }
+
+        public Continent Continent
         {
             get; set;
         }
