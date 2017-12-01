@@ -1092,15 +1092,6 @@
             ExecuteSettings();
         }
 
-        private static IEnumerable<string[]> GetMatrixFromFile(string fileName)
-        {
-            var currentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
-            var directoryBase = Path.Combine(currentDirectory, "InitialFiles");
-            string filePath = Path.Combine(directoryBase, fileName);
-            var lines = File.ReadAllLines(filePath, GetEncoding()).Select(a => a.Split(';'));
-            return lines;
-        }
-
         private static void ExecuteContinent(ARTDbContext context)
         {
             var lines = GetMatrixFromFile("Continent.csv");
@@ -1120,7 +1111,7 @@
                     };
                     context.Continent.Add(entity);
                 }
-                entity.Name = name;        
+                entity.Name = name;
 
                 context.SaveChanges();
             }
@@ -2401,11 +2392,16 @@
             {
                 settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
             }
-        }
+        }        
 
-        private static Encoding GetEncoding()
+        private static IEnumerable<string[]> GetMatrixFromFile(string fileName)
         {
-            return Encoding.GetEncoding(CultureInfo.GetCultureInfo("pt-BR").TextInfo.ANSICodePage);
+            var currentDirectory = Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory).Parent.Parent.FullName;
+            var directoryBase = Path.Combine(currentDirectory, "InitialFiles");
+            string filePath = Path.Combine(directoryBase, fileName);
+            var encoding = Encoding.GetEncoding(CultureInfo.GetCultureInfo("pt-BR").TextInfo.ANSICodePage);
+            var lines = File.ReadAllLines(filePath, encoding).Select(a => a.Split(';'));
+            return lines;
         }
 
         #endregion Methods
