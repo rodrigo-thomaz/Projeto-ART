@@ -1,0 +1,42 @@
+Yotta;Long;Quadrilião;10;24
+Zetta;Long;Milhar de trilião;10;21
+Exa;Long;Trilião;10;18
+Peta;Long;Milhar de bilião;10;15
+Tera;Long;Bilião;10;12
+Giga;Long;Milhar de milhão;10;9
+Mega;Long;Milhão;10;6
+Quilo;Long;Milhar;10;3
+Hecto;Long;Centena;10;2
+Deca;Long;Dezena;10;1
+None;Long;Unidade;10;0
+Deci;Long;Décimo;10;-1
+Centi;Long;Centésimo;10;-2
+Mili;Long;Milésimo;10;-3
+Micro;Long;Milionésimo;10;-6
+Nano;Long;Milésimo de milionésimo;10;-9
+Pico;Long;Bilionésimo;10;-12
+Femto;Long;Milésimo de bilionésimo;10;-15
+Atto;Long;Trilionésimo;10;-18
+Zepto;Long;Milésimo de trilionésimo;10;-21
+Yocto;Long;Quadrilionésimo;10;-24
+Yotta;Short;Septilhão;1000;8
+Zetta;Short;Sextilhão;1000;7
+Exa;Short;Quintilhão;1000;6
+Peta;Short;Quadrilhão;1000;5
+Tera;Short;Trilhão;1000;4
+Giga;Short;Bilhão;1000;3
+Mega;Short;Milhão;1000;2
+Quilo;Short;Mil;1000;1
+Hecto;Short;Cem;1000;2/3
+Deca;Short;Dez;1000;1/3
+None;Short;Unidade;1000;0
+Deci;Short;Décimo;1000;-1/3
+Centi;Short;Centésimo;1000;-2/3
+Mili;Short;Milésimo;1000;-1
+Micro;Short;Milionésimo;1000;-2
+Nano;Short;Bilionésimo;1000;-3
+Pico;Short;Trilionésimo;1000;-4
+Femto;Short;Quadrilionésimo;1000;-5
+Atto;Short;Quintilionésimo;1000;-6
+Zepto;Short;Sextilionésimo;1000;-7
+Yocto;Short;Septilionésimo;1000;-8

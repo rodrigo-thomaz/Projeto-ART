@@ -8,12 +8,12 @@
     {
         #region Properties
 
-        public short Base
+        public short ScientificNotationBase
         {
             get; set;
         }
 
-        public short Exponent
+        public short ScientificNotationExponent
         {
             get; set;
         }

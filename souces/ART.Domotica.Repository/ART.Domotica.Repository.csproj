@@ -186,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="InitialFiles\NumericalScale.csv" />
     <None Include="InitialFiles\NumericalScalePrefix.csv" />
     <None Include="InitialFiles\NumericalScaleType.csv" />
     <None Include="InitialFiles\Continent.csv" />

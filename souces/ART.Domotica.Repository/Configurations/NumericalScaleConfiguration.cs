@@ -51,12 +51,12 @@
                 .IsRequired();
 
             //Base
-            Property(x => x.Base)
+            Property(x => x.ScientificNotationBase)
                 .HasColumnOrder(3)
                 .IsRequired();
 
             //Exponent
-            Property(x => x.Exponent)
+            Property(x => x.ScientificNotationExponent)
                 .HasColumnOrder(4)
                 .IsRequired();
         }
