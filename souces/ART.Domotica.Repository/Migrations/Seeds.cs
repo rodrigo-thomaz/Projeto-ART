@@ -35,7 +35,6 @@
             ExecuteActuatorType(context);
             ExecuteSensorDatasheet(context);
             ExecuteSensorUnitMeasurementDefault(context);
-                       
 
             #region SensorRange
 
@@ -592,133 +591,6 @@
             ExecuteSettings();
         }
 
-        private static void ExecuteUnitMeasurementScale(ARTDbContext context)
-        {
-            var lines = GetMatrixFromFile("UnitMeasurementScale.csv");
-
-            foreach (var line in lines)
-            {                
-                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[0]);
-                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[1]);
-                var numericalScalePrefixId = (NumericalScalePrefixEnum)Enum.Parse(typeof(NumericalScalePrefixEnum), line[2]);
-                var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[3]);
-
-                var entity = context.UnitMeasurementScale
-                    .Where(x => x.UnitMeasurementId == unitMeasurementId)
-                    .Where(x => x.UnitMeasurementTypeId == unitMeasurementTypeId)
-                    .Where(x => x.NumericalScalePrefixId == numericalScalePrefixId)
-                    .Where(x => x.NumericalScaleTypeId == numericalScaleTypeId)
-                    .SingleOrDefault();
-
-                if (entity == null)
-                {
-                    entity = new UnitMeasurementScale
-                    {
-                        UnitMeasurementId = unitMeasurementId,
-                        UnitMeasurementTypeId = unitMeasurementTypeId,
-                        NumericalScalePrefixId = numericalScalePrefixId,
-                        NumericalScaleTypeId = numericalScaleTypeId,
-                    };
-
-                    context.UnitMeasurementScale.Add(entity);
-                }
-
-                context.SaveChanges();
-            }
-        }
-
-        private static void ExecuteSensorUnitMeasurementDefault(ARTDbContext context)
-        {
-            var lines = GetMatrixFromFile("SensorUnitMeasurementDefault.csv");
-
-            foreach (var line in lines)
-            {
-                var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
-                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
-                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[2]); 
-                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[3]); 
-                var max = Convert.ToDecimal(line[4]);
-                var min = Convert.ToDecimal(line[5]);
-
-                var entity = context.SensorUnitMeasurementDefault
-                    .Where(x => x.Id == sensorDatasheetId)
-                    .Where(x => x.SensorTypeId == sensorTypeId)
-                    .SingleOrDefault();
-
-                if (entity == null)
-                {
-                    entity = new SensorUnitMeasurementDefault
-                    {
-                        Id = sensorDatasheetId,
-                        SensorTypeId = sensorTypeId,
-                    };
-                    context.SensorUnitMeasurementDefault.Add(entity);
-                }
-
-                entity.UnitMeasurementId = unitMeasurementId;
-                entity.UnitMeasurementTypeId = unitMeasurementTypeId;
-                entity.Max = max;
-                entity.Min = min;
-
-                context.SaveChanges();
-            }            
-        }
-
-        private static void ExecuteSensorDatasheet(ARTDbContext context)
-        {
-            var lines = GetMatrixFromFile("SensorDatasheet.csv");
-
-            foreach (var line in lines)
-            {
-                var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
-                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
-
-                var entity = context.SensorDatasheet
-                    .Where(x => x.Id == sensorDatasheetId)
-                    .Where(x => x.SensorTypeId == sensorTypeId)
-                    .SingleOrDefault();
-
-                if (entity == null)
-                {
-                    entity = new SensorDatasheet
-                    {
-                        Id = sensorDatasheetId,
-                        SensorTypeId = sensorTypeId,
-                    };
-                    context.SensorDatasheet.Add(entity);
-                }
-
-                context.SaveChanges();
-            }
-        }
-
-        private static void ExecuteSensorType(ARTDbContext context)
-        {
-            var lines = GetMatrixFromFile("SensorType.csv");
-
-            foreach (var line in lines)
-            {
-                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[0]);
-                var name = line[1];
-
-                var entity = context.SensorType
-                    .Where(x => x.Id == sensorTypeId)
-                    .SingleOrDefault();
-
-                if (entity == null)
-                {
-                    entity = new SensorType
-                    {
-                        Id = sensorTypeId,
-                    };
-                    context.SensorType.Add(entity);
-                }
-                entity.Name = name;
-
-                context.SaveChanges();
-            }
-        }
-
         private static void ExecuteActuatorType(ARTDbContext context)
         {
             var lines = GetMatrixFromFile("ActuatorType.csv");
@@ -899,6 +771,98 @@
             }
         }
 
+        private static void ExecuteSensorDatasheet(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("SensorDatasheet.csv");
+
+            foreach (var line in lines)
+            {
+                var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
+                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
+
+                var entity = context.SensorDatasheet
+                    .Where(x => x.Id == sensorDatasheetId)
+                    .Where(x => x.SensorTypeId == sensorTypeId)
+                    .SingleOrDefault();
+
+                if (entity == null)
+                {
+                    entity = new SensorDatasheet
+                    {
+                        Id = sensorDatasheetId,
+                        SensorTypeId = sensorTypeId,
+                    };
+                    context.SensorDatasheet.Add(entity);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void ExecuteSensorType(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("SensorType.csv");
+
+            foreach (var line in lines)
+            {
+                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[0]);
+                var name = line[1];
+
+                var entity = context.SensorType
+                    .Where(x => x.Id == sensorTypeId)
+                    .SingleOrDefault();
+
+                if (entity == null)
+                {
+                    entity = new SensorType
+                    {
+                        Id = sensorTypeId,
+                    };
+                    context.SensorType.Add(entity);
+                }
+                entity.Name = name;
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void ExecuteSensorUnitMeasurementDefault(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("SensorUnitMeasurementDefault.csv");
+
+            foreach (var line in lines)
+            {
+                var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
+                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
+                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[2]);
+                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[3]);
+                var max = Convert.ToDecimal(line[4]);
+                var min = Convert.ToDecimal(line[5]);
+
+                var entity = context.SensorUnitMeasurementDefault
+                    .Where(x => x.Id == sensorDatasheetId)
+                    .Where(x => x.SensorTypeId == sensorTypeId)
+                    .SingleOrDefault();
+
+                if (entity == null)
+                {
+                    entity = new SensorUnitMeasurementDefault
+                    {
+                        Id = sensorDatasheetId,
+                        SensorTypeId = sensorTypeId,
+                    };
+                    context.SensorUnitMeasurementDefault.Add(entity);
+                }
+
+                entity.UnitMeasurementId = unitMeasurementId;
+                entity.UnitMeasurementTypeId = unitMeasurementTypeId;
+                entity.Max = max;
+                entity.Min = min;
+
+                context.SaveChanges();
+            }
+        }
+
         private static void ExecuteSettings()
         {
             ISettingManager settingManager = new SettingManager();
@@ -1014,6 +978,41 @@
                 entity.Name = name;
                 entity.Symbol = symbol;
                 entity.Description = description;
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void ExecuteUnitMeasurementScale(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("UnitMeasurementScale.csv");
+
+            foreach (var line in lines)
+            {
+                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[0]);
+                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[1]);
+                var numericalScalePrefixId = (NumericalScalePrefixEnum)Enum.Parse(typeof(NumericalScalePrefixEnum), line[2]);
+                var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[3]);
+
+                var entity = context.UnitMeasurementScale
+                    .Where(x => x.UnitMeasurementId == unitMeasurementId)
+                    .Where(x => x.UnitMeasurementTypeId == unitMeasurementTypeId)
+                    .Where(x => x.NumericalScalePrefixId == numericalScalePrefixId)
+                    .Where(x => x.NumericalScaleTypeId == numericalScaleTypeId)
+                    .SingleOrDefault();
+
+                if (entity == null)
+                {
+                    entity = new UnitMeasurementScale
+                    {
+                        UnitMeasurementId = unitMeasurementId,
+                        UnitMeasurementTypeId = unitMeasurementTypeId,
+                        NumericalScalePrefixId = numericalScalePrefixId,
+                        NumericalScaleTypeId = numericalScaleTypeId,
+                    };
+
+                    context.UnitMeasurementScale.Add(entity);
+                }
 
                 context.SaveChanges();
             }
