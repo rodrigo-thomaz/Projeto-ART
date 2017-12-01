@@ -26,7 +26,7 @@
             //Name
             Property(x => x.Name)
                 .HasColumnOrder(1)
-                .HasMaxLength(5)
+                .HasMaxLength(15)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));

@@ -155,6 +155,10 @@
     <Compile Include="Migrations\201712011819187_InitialCreate1.Designer.cs">
       <DependentUpon>201712011819187_InitialCreate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712011923084_InitialCreate2.cs" />
+    <Compile Include="Migrations\201712011923084_InitialCreate2.Designer.cs">
+      <DependentUpon>201712011923084_InitialCreate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -182,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="InitialFiles\NumericalScalePrefix.csv" />
     <None Include="InitialFiles\NumericalScaleType.csv" />
     <None Include="InitialFiles\Continent.csv" />
     <None Include="InitialFiles\Country.csv" />
@@ -223,6 +228,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712011819187_InitialCreate1.resx">
       <DependentUpon>201712011819187_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712011923084_InitialCreate2.resx">
+      <DependentUpon>201712011923084_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
