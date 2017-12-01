@@ -28,208 +28,9 @@
             ExecuteContinent(context);
             ExecuteCountry(context);
             ExecuteTimeZone(context);
+            ExecuteUnitMeasurementType(context);
 
-            #region UnitMeasurementType
-
-            // https://pt.wikipedia.org/wiki/Unidade_de_medida
-
-            //Area = 1,               - Unidades de área
-            //Capacity = 2,           - Unidades de capacidade
-            //Length = 3,             - Unidades de comprimento
-            //Density = 4,            - Unidades de densidade
-            //Energy = 5,             - Unidades de energia
-            //Force = 6,              - Unidades de força
-            //Mass = 7,               - Unidades de massa
-            //SpecificWeight = 8,     - Unidades de peso específico
-            //Potency = 9,            - Unidades de potência
-            //Pressure = 10,          - Unidades de pressão
-            //Temperature = 11,       - Unidades de temperatura
-            //Time = 12,              - Unidades de tempo
-            //Velocity = 13,          - Unidades de velocidade
-            //Viscosity = 14,         - Unidades de viscosidade
-            //Volume = 15,            - Unidades de volume
-            //Electrical = 16,        - Unidades elétrica
-
-            var areaUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Area);
-            var capacityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Capacity);
-            var lengthUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Length);
-            var densityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Density);
-            var energyUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Energy);
-            var forceUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Force);
-            var massUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Mass);
-            var specificWeightUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.SpecificWeight);
-            var potencyUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Potency);
-            var pressureUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Pressure);
-            var temperatureUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Temperature);
-            var timeUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Time);
-            var velocityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Velocity);
-            var viscosityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Viscosity);
-            var volumeUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Volume);
-            var electricalUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Electrical);
-
-            if (areaUnitMeasurementType == null)
-            {
-                areaUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Area,
-                    Name = "Área",
-                };
-                context.UnitMeasurementType.Add(areaUnitMeasurementType);
-            }
-
-            if (capacityUnitMeasurementType == null)
-            {
-                capacityUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Capacity,
-                    Name = "Capacidade",
-                };
-                context.UnitMeasurementType.Add(capacityUnitMeasurementType);
-            }
-
-            if (lengthUnitMeasurementType == null)
-            {
-                lengthUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Length,
-                    Name = "Comprimento",
-                };
-                context.UnitMeasurementType.Add(lengthUnitMeasurementType);
-            }
-
-            if (densityUnitMeasurementType == null)
-            {
-                densityUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Density,
-                    Name = "Densidade",
-                };
-                context.UnitMeasurementType.Add(densityUnitMeasurementType);
-            }
-
-            if (energyUnitMeasurementType == null)
-            {
-                energyUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Energy,
-                    Name = "Energia",
-                };
-                context.UnitMeasurementType.Add(energyUnitMeasurementType);
-            }
-
-            if (forceUnitMeasurementType == null)
-            {
-                forceUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Force,
-                    Name = "Força",
-                };
-                context.UnitMeasurementType.Add(forceUnitMeasurementType);
-            }
-
-            if (massUnitMeasurementType == null)
-            {
-                massUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Mass,
-                    Name = "Massa",
-                };
-                context.UnitMeasurementType.Add(massUnitMeasurementType);
-            }
-
-            if (specificWeightUnitMeasurementType == null)
-            {
-                specificWeightUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.SpecificWeight,
-                    Name = "Peso específico",
-                };
-                context.UnitMeasurementType.Add(specificWeightUnitMeasurementType);
-            }
-
-            if (potencyUnitMeasurementType == null)
-            {
-                potencyUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Potency,
-                    Name = "Potência",
-                };
-                context.UnitMeasurementType.Add(potencyUnitMeasurementType);
-            }
-
-            if (pressureUnitMeasurementType == null)
-            {
-                pressureUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Pressure,
-                    Name = "Pressão",
-                };
-                context.UnitMeasurementType.Add(pressureUnitMeasurementType);
-            }
-
-            if (temperatureUnitMeasurementType == null)
-            {
-                temperatureUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Temperature,
-                    Name = "Temperatura",
-                };
-                context.UnitMeasurementType.Add(temperatureUnitMeasurementType);
-            }
-
-            if (timeUnitMeasurementType == null)
-            {
-                timeUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Time,
-                    Name = "Tempo",
-                };
-                context.UnitMeasurementType.Add(timeUnitMeasurementType);
-            }
-
-            if (velocityUnitMeasurementType == null)
-            {
-                velocityUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Velocity,
-                    Name = "Velocidade",
-                };
-                context.UnitMeasurementType.Add(velocityUnitMeasurementType);
-            }
-
-            if (viscosityUnitMeasurementType == null)
-            {
-                viscosityUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Viscosity,
-                    Name = "Viscosidade",
-                };
-                context.UnitMeasurementType.Add(viscosityUnitMeasurementType);
-            }
-
-            if (volumeUnitMeasurementType == null)
-            {
-                volumeUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Volume,
-                    Name = "Volume",
-                };
-                context.UnitMeasurementType.Add(volumeUnitMeasurementType);
-            }
-
-            if (electricalUnitMeasurementType == null)
-            {
-                electricalUnitMeasurementType = new UnitMeasurementType
-                {
-                    Id = UnitMeasurementTypeEnum.Electrical,
-                    Name = "Elétrica",
-                };
-                context.UnitMeasurementType.Add(electricalUnitMeasurementType);
-            }
-
-            context.SaveChanges();
-
-            #endregion
+            
 
             #region UnitMeasurement
 
@@ -1069,6 +870,211 @@
             #endregion
 
             ExecuteSettings();
+        }
+
+        private static void ExecuteUnitMeasurementType(ARTDbContext context)
+        {
+            #region UnitMeasurementType
+
+            // https://pt.wikipedia.org/wiki/Unidade_de_medida
+
+            //Area = 1,               - Unidades de área
+            //Capacity = 2,           - Unidades de capacidade
+            //Length = 3,             - Unidades de comprimento
+            //Density = 4,            - Unidades de densidade
+            //Energy = 5,             - Unidades de energia
+            //Force = 6,              - Unidades de força
+            //Mass = 7,               - Unidades de massa
+            //SpecificWeight = 8,     - Unidades de peso específico
+            //Potency = 9,            - Unidades de potência
+            //Pressure = 10,          - Unidades de pressão
+            //Temperature = 11,       - Unidades de temperatura
+            //Time = 12,              - Unidades de tempo
+            //Velocity = 13,          - Unidades de velocidade
+            //Viscosity = 14,         - Unidades de viscosidade
+            //Volume = 15,            - Unidades de volume
+            //Electrical = 16,        - Unidades elétrica
+
+            var areaUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Area);
+            var capacityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Capacity);
+            var lengthUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Length);
+            var densityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Density);
+            var energyUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Energy);
+            var forceUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Force);
+            var massUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Mass);
+            var specificWeightUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.SpecificWeight);
+            var potencyUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Potency);
+            var pressureUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Pressure);
+            var temperatureUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Temperature);
+            var timeUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Time);
+            var velocityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Velocity);
+            var viscosityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Viscosity);
+            var volumeUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Volume);
+            var electricalUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Electrical);
+
+            if (areaUnitMeasurementType == null)
+            {
+                areaUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Area,
+                    Name = "Área",
+                };
+                context.UnitMeasurementType.Add(areaUnitMeasurementType);
+            }
+
+            if (capacityUnitMeasurementType == null)
+            {
+                capacityUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Capacity,
+                    Name = "Capacidade",
+                };
+                context.UnitMeasurementType.Add(capacityUnitMeasurementType);
+            }
+
+            if (lengthUnitMeasurementType == null)
+            {
+                lengthUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Length,
+                    Name = "Comprimento",
+                };
+                context.UnitMeasurementType.Add(lengthUnitMeasurementType);
+            }
+
+            if (densityUnitMeasurementType == null)
+            {
+                densityUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Density,
+                    Name = "Densidade",
+                };
+                context.UnitMeasurementType.Add(densityUnitMeasurementType);
+            }
+
+            if (energyUnitMeasurementType == null)
+            {
+                energyUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Energy,
+                    Name = "Energia",
+                };
+                context.UnitMeasurementType.Add(energyUnitMeasurementType);
+            }
+
+            if (forceUnitMeasurementType == null)
+            {
+                forceUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Force,
+                    Name = "Força",
+                };
+                context.UnitMeasurementType.Add(forceUnitMeasurementType);
+            }
+
+            if (massUnitMeasurementType == null)
+            {
+                massUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Mass,
+                    Name = "Massa",
+                };
+                context.UnitMeasurementType.Add(massUnitMeasurementType);
+            }
+
+            if (specificWeightUnitMeasurementType == null)
+            {
+                specificWeightUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.SpecificWeight,
+                    Name = "Peso específico",
+                };
+                context.UnitMeasurementType.Add(specificWeightUnitMeasurementType);
+            }
+
+            if (potencyUnitMeasurementType == null)
+            {
+                potencyUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Potency,
+                    Name = "Potência",
+                };
+                context.UnitMeasurementType.Add(potencyUnitMeasurementType);
+            }
+
+            if (pressureUnitMeasurementType == null)
+            {
+                pressureUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Pressure,
+                    Name = "Pressão",
+                };
+                context.UnitMeasurementType.Add(pressureUnitMeasurementType);
+            }
+
+            if (temperatureUnitMeasurementType == null)
+            {
+                temperatureUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Temperature,
+                    Name = "Temperatura",
+                };
+                context.UnitMeasurementType.Add(temperatureUnitMeasurementType);
+            }
+
+            if (timeUnitMeasurementType == null)
+            {
+                timeUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Time,
+                    Name = "Tempo",
+                };
+                context.UnitMeasurementType.Add(timeUnitMeasurementType);
+            }
+
+            if (velocityUnitMeasurementType == null)
+            {
+                velocityUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Velocity,
+                    Name = "Velocidade",
+                };
+                context.UnitMeasurementType.Add(velocityUnitMeasurementType);
+            }
+
+            if (viscosityUnitMeasurementType == null)
+            {
+                viscosityUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Viscosity,
+                    Name = "Viscosidade",
+                };
+                context.UnitMeasurementType.Add(viscosityUnitMeasurementType);
+            }
+
+            if (volumeUnitMeasurementType == null)
+            {
+                volumeUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Volume,
+                    Name = "Volume",
+                };
+                context.UnitMeasurementType.Add(volumeUnitMeasurementType);
+            }
+
+            if (electricalUnitMeasurementType == null)
+            {
+                electricalUnitMeasurementType = new UnitMeasurementType
+                {
+                    Id = UnitMeasurementTypeEnum.Electrical,
+                    Name = "Elétrica",
+                };
+                context.UnitMeasurementType.Add(electricalUnitMeasurementType);
+            }
+
+            context.SaveChanges();
+
+            #endregion
         }
 
         private static void ExecuteContinent(ARTDbContext context)
