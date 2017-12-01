@@ -7,12 +7,7 @@
 
     public class NumericalScale : IEntity<NumericalScaleEnum>
     {
-        #region Properties
-
-        public ICollection<Country> Countries
-        {
-            get; set;
-        }
+        #region Properties        
 
         public NumericalScaleEnum Id
         {

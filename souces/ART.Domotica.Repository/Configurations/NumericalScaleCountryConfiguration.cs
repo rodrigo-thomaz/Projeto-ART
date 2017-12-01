@@ -10,6 +10,8 @@ namespace ART.Domotica.Repository.Configurations
 
         public NumericalScaleCountryConfiguration()
         {
+            ToTable("NumericalScaleCountry", "SI");
+
             //Primary Keys
             HasKey(x => new
             {
