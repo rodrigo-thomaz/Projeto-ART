@@ -1168,17 +1168,30 @@
             {
                 var name = line[0];
                 var continentId = (ContinentEnum)Enum.Parse(typeof(ContinentEnum), line[1]);
-                var numericalScaleId = (NumericalScaleEnum)Enum.Parse(typeof(NumericalScaleEnum), line[2]);
 
-                context.Country.Add(new Country
+                var country = new Country
                 {
                     Name = name,
                     ContinentId = continentId,
-                    //NumericalScaleId = numericalScaleId,
-                });
-            }
+                };
 
-            context.SaveChanges();
+                context.Country.Add(country);
+
+                var numericalScales = line[2].Split(',');
+
+                foreach (var item in numericalScales)
+                {
+                    var numericalScaleId = (NumericalScaleEnum)Enum.Parse(typeof(NumericalScaleEnum), item);
+
+                    context.NumericalScaleCountry.Add(new NumericalScaleCountry
+                    {
+                        CountryId = country.Id,
+                        NumericalScaleId = numericalScaleId,
+                    });
+                }
+
+                context.SaveChanges();
+            }            
         }
 
         private static void ExecuteNumericalScale(ARTDbContext context)
