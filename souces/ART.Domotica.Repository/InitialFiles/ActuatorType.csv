@@ -1,4 +1,5 @@
-Meter;Length;Metro;m;
-Inch;Length;Polegada;'';
-Celsius;Temperature;Celsius;C;A escala de grau Celsius(símbolo: °C) é uma escala termométrica, do sistema métrico, usada na maioria dos países do mundo. Teve origem a partir do modelo proposto pelo astrônomo sueco Anders Celsius(1701 - 1744), inicialmente denominado escala centígrada(Grau centígrado).
-Fahrenheit;Temperature;Fahrenheit;F;O grau fahrenheit(símbolo: °F) é uma escala de temperatura proposta por Daniel Gabriel Fahrenheit em 1724.
+Generic;Genérico
+Light;Luz
+Motor;Motor
+Relay;Relê
+Valve;Válvula

@@ -652,139 +652,52 @@
 
         private static void ExecuteSensorType(ARTDbContext context)
         {
-            #region SensorType
+            var lines = GetMatrixFromFile("SensorType.csv");
 
-            var genericSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Generic);
-            var luminositySensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Luminosity);
-            var motionSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Motion);
-            var pressureSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Pressure);
-            var proximityDistanceSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.ProximityDistance);
-            var temperatureSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Temperature);
-
-            if (genericSensorType == null)
+            foreach (var line in lines)
             {
-                genericSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Generic,
-                    Name = "Genérico",
-                };
-                context.SensorType.Add(genericSensorType);
-            }
+                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[0]);
+                var name = line[1];
 
-            if (luminositySensorType == null)
-            {
-                luminositySensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Luminosity,
-                    Name = "Luminosidade",
-                };
-                context.SensorType.Add(luminositySensorType);
-            }
+                var entity = context.SensorType.SingleOrDefault(x => x.Id == sensorTypeId);
 
-            if (motionSensorType == null)
-            {
-                motionSensorType = new SensorType
+                if (entity == null)
                 {
-                    Id = SensorTypeEnum.Motion,
-                    Name = "Movimento",
-                };
-                context.SensorType.Add(motionSensorType);
-            }
+                    entity = new SensorType
+                    {
+                        Id = sensorTypeId,
+                    };
+                    context.SensorType.Add(entity);
+                }
+                entity.Name = name;
 
-            if (pressureSensorType == null)
-            {
-                pressureSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Pressure,
-                    Name = "Pressão",
-                };
-                context.SensorType.Add(pressureSensorType);
+                context.SaveChanges();
             }
-
-            if (proximityDistanceSensorType == null)
-            {
-                proximityDistanceSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.ProximityDistance,
-                    Name = "Proximidade/Distância",
-                };
-                context.SensorType.Add(proximityDistanceSensorType);
-            }
-
-            if (temperatureSensorType == null)
-            {
-                temperatureSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Temperature,
-                    Name = "Temperatura",
-                };
-                context.SensorType.Add(temperatureSensorType);
-            }
-
-            #endregion
         }
 
         private static void ExecuteActuatorType(ARTDbContext context)
         {
-            #region ActuatorType
+            var lines = GetMatrixFromFile("ActuatorType.csv");
 
-            var genericActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Generic);
-            var lightActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Light);
-            var motorActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Motor);
-            var relayActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Relay);
-            var valveActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Valve);
-
-            if (genericActuatorType == null)
+            foreach (var line in lines)
             {
-                genericActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Generic,
-                    Name = "Genérico",
-                };
-                context.ActuatorType.Add(genericActuatorType);
-            }
+                var actuatorTypeId = (ActuatorTypeEnum)Enum.Parse(typeof(ActuatorTypeEnum), line[0]);
+                var name = line[1];
 
-            if (lightActuatorType == null)
-            {
-                lightActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Light,
-                    Name = "Luz",
-                };
-                context.ActuatorType.Add(lightActuatorType);
-            }
+                var entity = context.ActuatorType.SingleOrDefault(x => x.Id == actuatorTypeId);
 
-            if (motorActuatorType == null)
-            {
-                motorActuatorType = new ActuatorType
+                if (entity == null)
                 {
-                    Id = ActuatorTypeEnum.Motor,
-                    Name = "Motor",
-                };
-                context.ActuatorType.Add(motorActuatorType);
-            }
+                    entity = new ActuatorType
+                    {
+                        Id = actuatorTypeId,
+                    };
+                    context.ActuatorType.Add(entity);
+                }
+                entity.Name = name;
 
-            if (relayActuatorType == null)
-            {
-                relayActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Relay,
-                    Name = "Relê",
-                };
-                context.ActuatorType.Add(relayActuatorType);
+                context.SaveChanges();
             }
-
-            if (valveActuatorType == null)
-            {
-                valveActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Valve,
-                    Name = "Válvula",
-                };
-                context.ActuatorType.Add(valveActuatorType);
-            }
-
-            #endregion
         }
 
         private static void ExecuteContinent(ARTDbContext context)
