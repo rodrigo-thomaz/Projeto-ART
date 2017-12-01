@@ -34,6 +34,11 @@
             get; set;
         }
 
+        public ICollection<UnitMeasurementScale> UnitMeasurementScales
+        {
+            get; set;
+        }
+        
         public string Symbol
         {
             get; set;

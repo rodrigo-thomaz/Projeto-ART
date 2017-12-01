@@ -42,7 +42,7 @@
             Property(x => x.UnitMeasurementId)
                 .HasColumnOrder(2);
 
-            //UnitMeasurementUnitMeasurementType
+            //UnitMeasurementType
             HasRequired(x => x.UnitMeasurementType)
                 .WithMany(x => x.Sensors)
                 .HasForeignKey(x => x.UnitMeasurementTypeId)

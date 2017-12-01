@@ -30,6 +30,11 @@
             get; set;
         }
 
+        public ICollection<UnitMeasurementScale> UnitMeasurementScales
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }

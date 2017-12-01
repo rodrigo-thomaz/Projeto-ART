@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using ART.Domotica.Enums;
+    using System.Collections.Generic;
 
     public class NumericalScale
     {
@@ -37,6 +38,11 @@
         }
 
         public NumericalScalePrefixEnum NumericalScalePrefixId
+        {
+            get; set;
+        }
+
+        public ICollection<UnitMeasurementScale> UnitMeasurementScales
         {
             get; set;
         }

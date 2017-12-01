@@ -9,6 +9,11 @@
     {
         #region Properties        
 
+        public ICollection<UnitMeasurementScale> UnitMeasurementScales
+        {
+            get; set;
+        }
+
         public NumericalScaleTypeEnum Id
         {
             get; set;

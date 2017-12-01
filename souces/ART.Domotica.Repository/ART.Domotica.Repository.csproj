@@ -91,6 +91,7 @@
     <Compile Include="Configurations\CountryConfiguration.cs" />
     <Compile Include="Configurations\NumericalScalePrefixConfiguration.cs" />
     <Compile Include="Configurations\NumericalScaleConfiguration.cs" />
+    <Compile Include="Configurations\UnitMeasurementScaleConfiguration.cs" />
     <Compile Include="Configurations\UnitMeasurementTypeConfiguration.cs" />
     <Compile Include="Configurations\TimeZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Entities\TimeZone.cs" />
     <Compile Include="Entities\NumericalScalePrefix.cs" />
     <Compile Include="Entities\NumericalScale.cs" />
+    <Compile Include="Entities\UnitMeasurementScale.cs" />
     <Compile Include="Entities\UnitMeasurementType.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
@@ -148,6 +150,10 @@
     <Compile Include="Migrations\201712011751392_InitialCreate.cs" />
     <Compile Include="Migrations\201712011751392_InitialCreate.Designer.cs">
       <DependentUpon>201712011751392_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712011819187_InitialCreate1.cs" />
+    <Compile Include="Migrations\201712011819187_InitialCreate1.Designer.cs">
+      <DependentUpon>201712011819187_InitialCreate1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -212,6 +218,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712011751392_InitialCreate.resx">
       <DependentUpon>201712011751392_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712011819187_InitialCreate1.resx">
+      <DependentUpon>201712011819187_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
