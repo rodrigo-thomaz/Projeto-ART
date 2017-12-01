@@ -27,11 +27,11 @@ Tera;Short;Trilhão;1000;4
 Giga;Short;Bilhão;1000;3
 Mega;Short;Milhão;1000;2
 Quilo;Short;Mil;1000;1
-Hecto;Short;Cem;1000;2/3
-Deca;Short;Dez;1000;1/3
+Hecto;Short;Cem;1000;0,666666666667
+Deca;Short;Dez;1000;0,333333333333
 None;Short;Unidade;1000;0
-Deci;Short;Décimo;1000;-1/3
-Centi;Short;Centésimo;1000;-2/3
+Deci;Short;Décimo;1000;-0,333333333333
+Centi;Short;Centésimo;1000;-0,666666666667
 Mili;Short;Milésimo;1000;-1
 Micro;Short;Milionésimo;1000;-2
 Nano;Short;Bilionésimo;1000;-3

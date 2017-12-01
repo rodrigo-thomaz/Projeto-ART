@@ -33,12 +33,12 @@
             get; set;
         }
 
-        public short ScientificNotationBase
+        public decimal ScientificNotationBase
         {
             get; set;
         }
 
-        public short ScientificNotationExponent
+        public decimal ScientificNotationExponent
         {
             get; set;
         }

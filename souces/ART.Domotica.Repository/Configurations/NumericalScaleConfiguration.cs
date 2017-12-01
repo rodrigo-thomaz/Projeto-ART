@@ -53,11 +53,13 @@
             //Base
             Property(x => x.ScientificNotationBase)
                 .HasColumnOrder(3)
+                .HasPrecision(24,12)
                 .IsRequired();
 
             //Exponent
             Property(x => x.ScientificNotationExponent)
                 .HasColumnOrder(4)
+                .HasPrecision(24, 12)
                 .IsRequired();
         }
 
