@@ -8,16 +8,6 @@
     {
         #region Properties
 
-        public short ScientificNotationBase
-        {
-            get; set;
-        }
-
-        public short ScientificNotationExponent
-        {
-            get; set;
-        }
-
         public string Name
         {
             get; set;
@@ -39,6 +29,16 @@
         }
 
         public NumericalScaleTypeEnum NumericalScaleTypeId
+        {
+            get; set;
+        }
+
+        public short ScientificNotationBase
+        {
+            get; set;
+        }
+
+        public short ScientificNotationExponent
         {
             get; set;
         }

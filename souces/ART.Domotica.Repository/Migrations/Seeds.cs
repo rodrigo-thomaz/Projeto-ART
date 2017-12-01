@@ -1168,7 +1168,7 @@
                    .Where(x => x.NumericalScalePrefixId == numericalScalePrefixId)
                    .Where(x => x.NumericalScaleTypeId == numericalScaleTypeId)
                    .SingleOrDefault();
-                
+
                 if (entity == null)
                 {
                     entity = new NumericalScale
@@ -1302,7 +1302,7 @@
             {
                 settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
             }
-        }        
+        }
 
         private static IEnumerable<string[]> GetMatrixFromFile(string fileName)
         {
