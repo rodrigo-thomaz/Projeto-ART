@@ -28,7 +28,7 @@
             get; set;
         }        
 
-        public ICollection<NumericalScaleCountry> NumericalScalesCountry
+        public ICollection<NumericalScaleTypeCountry> NumericalScaleTypesCountry
         {
             get; set;
         }

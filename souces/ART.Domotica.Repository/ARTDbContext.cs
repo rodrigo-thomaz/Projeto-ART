@@ -26,7 +26,7 @@
         }
 
 
-        public DbSet<NumericalScaleCountry> NumericalScaleCountry
+        public DbSet<NumericalScaleTypeCountry> NumericalScaleTypeCountry
         {
             get; set;
         }
@@ -91,7 +91,7 @@
             get; set;
         }
 
-        public DbSet<NumericalScale> NumericalScale
+        public DbSet<NumericalScaleType> NumericalScaleType
         {
             get; set;
         }
@@ -188,8 +188,8 @@
             modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScaleConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScaleCountryConfiguration());
+            modelBuilder.Configurations.Add(new NumericalScaleTypeConfiguration());
+            modelBuilder.Configurations.Add(new NumericalScaleTypeCountryConfiguration());
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
             modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());

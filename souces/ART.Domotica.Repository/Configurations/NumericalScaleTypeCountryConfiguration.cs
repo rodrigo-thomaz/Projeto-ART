@@ -4,31 +4,31 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace ART.Domotica.Repository.Configurations
 {
-    public class NumericalScaleCountryConfiguration : EntityTypeConfiguration<NumericalScaleCountry>
+    public class NumericalScaleTypeCountryConfiguration : EntityTypeConfiguration<NumericalScaleTypeCountry>
     {
         #region Constructors
 
-        public NumericalScaleCountryConfiguration()
+        public NumericalScaleTypeCountryConfiguration()
         {
-            ToTable("NumericalScaleCountry", "SI");
+            ToTable("NumericalScaleTypeCountry", "SI");
 
             //Primary Keys
             HasKey(x => new
             {
-                x.NumericalScaleId,
+                x.NumericalScaleTypeId,
                 x.CountryId,
             });
 
-            //NumericalScaleId
-            Property(x => x.NumericalScaleId)
+            //NumericalScaleTypeId
+            Property(x => x.NumericalScaleTypeId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //NumericalScale
-            HasRequired(x => x.NumericalScale)
-                .WithMany(x => x.NumericalScaleCountries)
-                .HasForeignKey(x => x.NumericalScaleId)
+            //NumericalScaleType
+            HasRequired(x => x.NumericalScaleType)
+                .WithMany(x => x.NumericalScaleTypeCountries)
+                .HasForeignKey(x => x.NumericalScaleTypeId)
                 .WillCascadeOnDelete(false);
 
             //CountryId
@@ -37,9 +37,9 @@ namespace ART.Domotica.Repository.Configurations
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //NumericalScale
+            //NumericalScaleType
             HasRequired(x => x.Country)
-                .WithMany(x => x.NumericalScalesCountry)
+                .WithMany(x => x.NumericalScaleTypesCountry)
                 .HasForeignKey(x => x.CountryId)
                 .WillCascadeOnDelete(false);
         }

@@ -71,8 +71,8 @@
     <Compile Include="Configurations\ESPDeviceConfiguration.cs" />
     <Compile Include="Configurations\HardwareBaseConfiguration.cs" />
     <Compile Include="Configurations\HardwaresInProjectConfiguration.cs" />
-    <Compile Include="Configurations\NumericalScaleConfiguration.cs" />
-    <Compile Include="Configurations\NumericalScaleCountryConfiguration.cs" />
+    <Compile Include="Configurations\NumericalScaleTypeConfiguration.cs" />
+    <Compile Include="Configurations\NumericalScaleTypeCountryConfiguration.cs" />
     <Compile Include="Configurations\ProjectConfiguration.cs" />
     <Compile Include="Configurations\SensorChartLimiterConfiguration.cs" />
     <Compile Include="Configurations\SensorDatasheetConfiguration.cs" />
@@ -105,8 +105,8 @@
     <Compile Include="Entities\HardwareBase.cs" />
     <Compile Include="Entities\HardwaresInProject.cs" />
     <Compile Include="Entities\DeviceInApplication.cs" />
-    <Compile Include="Entities\NumericalScale.cs" />
-    <Compile Include="Entities\NumericalScaleCountry.cs" />
+    <Compile Include="Entities\NumericalScaleType.cs" />
+    <Compile Include="Entities\NumericalScaleTypeCountry.cs" />
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\RaspberryDevice.cs" />
     <Compile Include="Entities\Sensor.cs" />
@@ -145,13 +145,9 @@
     <Compile Include="Interfaces\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\ISensorRangeRepository.cs" />
     <Compile Include="Interfaces\IUnitMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201712011601335_Initial.cs" />
-    <Compile Include="Migrations\201712011601335_Initial.Designer.cs">
-      <DependentUpon>201712011601335_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712011613486_Initial1.cs" />
-    <Compile Include="Migrations\201712011613486_Initial1.Designer.cs">
-      <DependentUpon>201712011613486_Initial1.cs</DependentUpon>
+    <Compile Include="Migrations\201712011727424_InitialCreate.cs" />
+    <Compile Include="Migrations\201712011727424_InitialCreate.Designer.cs">
+      <DependentUpon>201712011727424_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -214,11 +210,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712011601335_Initial.resx">
-      <DependentUpon>201712011601335_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712011613486_Initial1.resx">
-      <DependentUpon>201712011613486_Initial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712011727424_InitialCreate.resx">
+      <DependentUpon>201712011727424_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

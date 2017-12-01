@@ -2,7 +2,7 @@
 {
     #region Enumerations
 
-    public enum NumericalScaleEnum : byte
+    public enum NumericalScaleTypeEnum : byte
     {
         Long = 1,
         Short = 2,

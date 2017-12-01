@@ -6,13 +6,13 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class NumericalScaleConfiguration : EntityTypeConfiguration<NumericalScale>
+    public class NumericalScaleTypeConfiguration : EntityTypeConfiguration<NumericalScaleType>
     {
         #region Constructors
 
-        public NumericalScaleConfiguration()
+        public NumericalScaleTypeConfiguration()
         {
-            ToTable("NumericalScale", "SI");
+            ToTable("NumericalScaleType", "SI");
 
             //Primary Keys
             HasKey(x => x.Id);

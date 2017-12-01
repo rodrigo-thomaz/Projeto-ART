@@ -21,12 +21,12 @@
             get; set;
         }
 
-        public NumericalScale NumericalScale
+        public NumericalScaleType NumericalScaleType
         {
             get; set;
         }
 
-        public NumericalScaleEnum NumericalScaleId
+        public NumericalScaleTypeEnum NumericalScaleTypeId
         {
             get; set;
         }

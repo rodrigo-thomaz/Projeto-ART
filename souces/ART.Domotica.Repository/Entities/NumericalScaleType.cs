@@ -5,11 +5,11 @@
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public class NumericalScale : IEntity<NumericalScaleEnum>
+    public class NumericalScaleType : IEntity<NumericalScaleTypeEnum>
     {
         #region Properties        
 
-        public NumericalScaleEnum Id
+        public NumericalScaleTypeEnum Id
         {
             get; set;
         }
@@ -24,7 +24,7 @@
             get; set;
         }
 
-        public ICollection<NumericalScaleCountry> NumericalScaleCountries
+        public ICollection<NumericalScaleTypeCountry> NumericalScaleTypeCountries
         {
             get; set;
         }

@@ -3,7 +3,7 @@ namespace ART.Domotica.Repository.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -329,20 +329,20 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.ContinentId);
             
             CreateTable(
-                "dbo.NumericalScaleCountry",
+                "SI.NumericalScaleTypeCountry",
                 c => new
                     {
-                        NumericalScaleId = c.Byte(nullable: false),
+                        NumericalScaleTypeId = c.Byte(nullable: false),
                         CountryId = c.Short(nullable: false),
                     })
-                .PrimaryKey(t => new { t.NumericalScaleId, t.CountryId })
+                .PrimaryKey(t => new { t.NumericalScaleTypeId, t.CountryId })
                 .ForeignKey("dbo.Country", t => t.CountryId)
-                .ForeignKey("SI.NumericalScale", t => t.NumericalScaleId)
-                .Index(t => t.NumericalScaleId)
+                .ForeignKey("SI.NumericalScaleType", t => t.NumericalScaleTypeId)
+                .Index(t => t.NumericalScaleTypeId)
                 .Index(t => t.CountryId);
             
             CreateTable(
-                "SI.NumericalScale",
+                "SI.NumericalScaleType",
                 c => new
                     {
                         Id = c.Byte(nullable: false),
@@ -356,16 +356,16 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         UnitMeasurementPrefixId = c.Int(nullable: false),
-                        NumericalScaleId = c.Byte(nullable: false),
+                        NumericalScaleTypeId = c.Byte(nullable: false),
                         Name = c.String(nullable: false, maxLength: 30),
                         Base = c.Short(nullable: false),
                         Exponent = c.Short(nullable: false),
                     })
-                .PrimaryKey(t => new { t.UnitMeasurementPrefixId, t.NumericalScaleId })
-                .ForeignKey("SI.NumericalScale", t => t.NumericalScaleId)
+                .PrimaryKey(t => new { t.UnitMeasurementPrefixId, t.NumericalScaleTypeId })
+                .ForeignKey("SI.NumericalScaleType", t => t.NumericalScaleTypeId)
                 .ForeignKey("SI.UnitMeasurementPrefix", t => t.UnitMeasurementPrefixId)
                 .Index(t => t.UnitMeasurementPrefixId)
-                .Index(t => t.NumericalScaleId);
+                .Index(t => t.NumericalScaleTypeId);
             
             CreateTable(
                 "SI.UnitMeasurementPrefix",
@@ -445,10 +445,10 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
             DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
             DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.Sensor");
-            DropForeignKey("dbo.NumericalScaleCountry", "NumericalScaleId", "SI.NumericalScale");
+            DropForeignKey("SI.NumericalScaleTypeCountry", "NumericalScaleTypeId", "SI.NumericalScaleType");
             DropForeignKey("SI.UnitMeasurementScale", "UnitMeasurementPrefixId", "SI.UnitMeasurementPrefix");
-            DropForeignKey("SI.UnitMeasurementScale", "NumericalScaleId", "SI.NumericalScale");
-            DropForeignKey("dbo.NumericalScaleCountry", "CountryId", "dbo.Country");
+            DropForeignKey("SI.UnitMeasurementScale", "NumericalScaleTypeId", "SI.NumericalScaleType");
+            DropForeignKey("SI.NumericalScaleTypeCountry", "CountryId", "dbo.Country");
             DropForeignKey("dbo.Country", "ContinentId", "dbo.Continent");
             DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
             DropForeignKey("dbo.Project", "CreateByApplicationUserId", "dbo.ApplicationUser");
@@ -488,11 +488,11 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
             DropIndex("SI.UnitMeasurementPrefix", new[] { "Name" });
-            DropIndex("SI.UnitMeasurementScale", new[] { "NumericalScaleId" });
+            DropIndex("SI.UnitMeasurementScale", new[] { "NumericalScaleTypeId" });
             DropIndex("SI.UnitMeasurementScale", new[] { "UnitMeasurementPrefixId" });
-            DropIndex("SI.NumericalScale", new[] { "Name" });
-            DropIndex("dbo.NumericalScaleCountry", new[] { "CountryId" });
-            DropIndex("dbo.NumericalScaleCountry", new[] { "NumericalScaleId" });
+            DropIndex("SI.NumericalScaleType", new[] { "Name" });
+            DropIndex("SI.NumericalScaleTypeCountry", new[] { "CountryId" });
+            DropIndex("SI.NumericalScaleTypeCountry", new[] { "NumericalScaleTypeId" });
             DropIndex("dbo.Country", new[] { "ContinentId" });
             DropIndex("dbo.Country", new[] { "Name" });
             DropIndex("dbo.Continent", new[] { "Name" });
@@ -536,8 +536,8 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.DSFamilyTempSensor");
             DropTable("SI.UnitMeasurementPrefix");
             DropTable("SI.UnitMeasurementScale");
-            DropTable("SI.NumericalScale");
-            DropTable("dbo.NumericalScaleCountry");
+            DropTable("SI.NumericalScaleType");
+            DropTable("SI.NumericalScaleTypeCountry");
             DropTable("dbo.Country");
             DropTable("dbo.Continent");
             DropTable("dbo.Project");

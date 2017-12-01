@@ -17,7 +17,7 @@
             HasKey(x => new
             {
                 x.UnitMeasurementPrefixId,
-                x.NumericalScaleId,
+                x.NumericalScaleTypeId,
             });
 
             //UnitMeasurementPrefixId
@@ -32,16 +32,16 @@
                 .HasForeignKey(x => x.UnitMeasurementPrefixId)
                 .WillCascadeOnDelete(false);
 
-            //NumericalScaleId
-            Property(x => x.NumericalScaleId)
+            //NumericalScaleTypeId
+            Property(x => x.NumericalScaleTypeId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //NumericalScale
-            HasRequired(x => x.NumericalScale)
+            //NumericalScaleType
+            HasRequired(x => x.NumericalScaleType)
                 .WithMany(x => x.UnitMeasurementScales)
-                .HasForeignKey(x => x.NumericalScaleId)
+                .HasForeignKey(x => x.NumericalScaleTypeId)
                 .WillCascadeOnDelete(false);
 
             //Name
