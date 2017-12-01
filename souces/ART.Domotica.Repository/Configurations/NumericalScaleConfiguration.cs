@@ -5,13 +5,13 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class UnitMeasurementScaleConfiguration : EntityTypeConfiguration<UnitMeasurementScale>
+    public class NumericalScaleConfiguration : EntityTypeConfiguration<NumericalScale>
     {
         #region Constructors
 
-        public UnitMeasurementScaleConfiguration()
+        public NumericalScaleConfiguration()
         {
-            ToTable("UnitMeasurementScale", "SI");
+            ToTable("NumericalScale", "SI");
 
             //Primary Keys
             HasKey(x => new
@@ -28,7 +28,7 @@
 
             //NumericalScalePrefix
             HasRequired(x => x.NumericalScalePrefix)
-                .WithMany(x => x.UnitMeasurementScales)
+                .WithMany(x => x.NumericalScales)
                 .HasForeignKey(x => x.NumericalScalePrefixId)
                 .WillCascadeOnDelete(false);
 
@@ -40,7 +40,7 @@
 
             //NumericalScaleType
             HasRequired(x => x.NumericalScaleType)
-                .WithMany(x => x.UnitMeasurementScales)
+                .WithMany(x => x.NumericalScales)
                 .HasForeignKey(x => x.NumericalScaleTypeId)
                 .WillCascadeOnDelete(false);
 

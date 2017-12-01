@@ -352,7 +352,7 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.Name, unique: true);
             
             CreateTable(
-                "SI.UnitMeasurementScale",
+                "SI.NumericalScale",
                 c => new
                     {
                         NumericalScalePrefixId = c.Int(nullable: false),
@@ -446,8 +446,8 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
             DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.Sensor");
             DropForeignKey("SI.NumericalScaleTypeCountry", "NumericalScaleTypeId", "SI.NumericalScaleType");
-            DropForeignKey("SI.UnitMeasurementScale", "NumericalScaleTypeId", "SI.NumericalScaleType");
-            DropForeignKey("SI.UnitMeasurementScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
+            DropForeignKey("SI.NumericalScale", "NumericalScaleTypeId", "SI.NumericalScaleType");
+            DropForeignKey("SI.NumericalScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
             DropForeignKey("SI.NumericalScaleTypeCountry", "CountryId", "dbo.Country");
             DropForeignKey("dbo.Country", "ContinentId", "dbo.Continent");
             DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
@@ -488,8 +488,8 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
             DropIndex("SI.NumericalScalePrefix", new[] { "Name" });
-            DropIndex("SI.UnitMeasurementScale", new[] { "NumericalScaleTypeId" });
-            DropIndex("SI.UnitMeasurementScale", new[] { "NumericalScalePrefixId" });
+            DropIndex("SI.NumericalScale", new[] { "NumericalScaleTypeId" });
+            DropIndex("SI.NumericalScale", new[] { "NumericalScalePrefixId" });
             DropIndex("SI.NumericalScaleType", new[] { "Name" });
             DropIndex("SI.NumericalScaleTypeCountry", new[] { "CountryId" });
             DropIndex("SI.NumericalScaleTypeCountry", new[] { "NumericalScaleTypeId" });
@@ -535,7 +535,7 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.DeviceBase");
             DropTable("dbo.DSFamilyTempSensor");
             DropTable("SI.NumericalScalePrefix");
-            DropTable("SI.UnitMeasurementScale");
+            DropTable("SI.NumericalScale");
             DropTable("SI.NumericalScaleType");
             DropTable("SI.NumericalScaleTypeCountry");
             DropTable("dbo.Country");

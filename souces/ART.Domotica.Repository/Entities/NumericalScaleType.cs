@@ -19,7 +19,7 @@
             get; set;
         }
 
-        public ICollection<UnitMeasurementScale> UnitMeasurementScales
+        public ICollection<NumericalScale> NumericalScales
         {
             get; set;
         }

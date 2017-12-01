@@ -2,7 +2,7 @@
 {
     using ART.Domotica.Enums;
 
-    public class UnitMeasurementScale
+    public class NumericalScale
     {
         #region Properties
 
