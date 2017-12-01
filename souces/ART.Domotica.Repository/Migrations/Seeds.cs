@@ -30,78 +30,9 @@
             ExecuteTimeZone(context);
             ExecuteUnitMeasurementType(context);
             ExecuteUnitMeasurement(context);
-
-            #region SensorType
-
-            var genericSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Generic);
-            var luminositySensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Luminosity);
-            var motionSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Motion);
-            var pressureSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Pressure);
-            var proximityDistanceSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.ProximityDistance);
-            var temperatureSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Temperature);
-
-            if (genericSensorType == null)
-            {
-                genericSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Generic,
-                    Name = "Genérico",
-                };
-                context.SensorType.Add(genericSensorType);
-            }
-
-            if (luminositySensorType == null)
-            {
-                luminositySensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Luminosity,
-                    Name = "Luminosidade",
-                };
-                context.SensorType.Add(luminositySensorType);
-            }
-
-            if (motionSensorType == null)
-            {
-                motionSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Motion,
-                    Name = "Movimento",
-                };
-                context.SensorType.Add(motionSensorType);
-            }
-
-            if (pressureSensorType == null)
-            {
-                pressureSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Pressure,
-                    Name = "Pressão",
-                };
-                context.SensorType.Add(pressureSensorType);
-            }
-
-            if (proximityDistanceSensorType == null)
-            {
-                proximityDistanceSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.ProximityDistance,
-                    Name = "Proximidade/Distância",
-                };
-                context.SensorType.Add(proximityDistanceSensorType);
-            }
-
-            if (temperatureSensorType == null)
-            {
-                temperatureSensorType = new SensorType
-                {
-                    Id = SensorTypeEnum.Temperature,
-                    Name = "Temperatura",
-                };
-                context.SensorType.Add(temperatureSensorType);
-            }
-
-            #endregion
-
+            ExecuteSensorType(context);
+            ExecuteActuatorType(context);
+            
             #region SensorDatasheet
 
             var sensorDatasheetTemperatureDS18B20 = context.SensorDatasheet.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
@@ -112,7 +43,7 @@
                 sensorDatasheetTemperatureDS18B20 = new SensorDatasheet
                 {
                     Id = SensorDatasheetEnum.Temperature_DS18B20,
-                    SensorTypeId = temperatureSensorType.Id,
+                    SensorTypeId = SensorTypeEnum.Temperature,
                 };
                 context.SensorDatasheet.Add(sensorDatasheetTemperatureDS18B20);
             }
@@ -122,7 +53,7 @@
                 sensorDatasheetUltrasonicHCSR04 = new SensorDatasheet
                 {
                     Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
-                    SensorTypeId = proximityDistanceSensorType.Id,
+                    SensorTypeId = SensorTypeEnum.ProximityDistance,
                 };
                 context.SensorDatasheet.Add(sensorDatasheetUltrasonicHCSR04);
             }
@@ -139,7 +70,7 @@
                 sensorUnitMeasurementDefaultTemperatureDS18B20 = new SensorUnitMeasurementDefault
                 {
                     Id = SensorDatasheetEnum.Temperature_DS18B20,
-                    SensorTypeId = temperatureSensorType.Id,
+                    SensorTypeId = SensorTypeEnum.Temperature,
                     UnitMeasurementId = UnitMeasurementEnum.Celsius,
                     UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                     Max = 125M,
@@ -153,7 +84,7 @@
                 sensorUnitMeasurementDefaultUltrasonicHCSR04 = new SensorUnitMeasurementDefault
                 {
                     Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
-                    SensorTypeId = proximityDistanceSensorType.Id,
+                    SensorTypeId = SensorTypeEnum.ProximityDistance,
                     UnitMeasurementId = UnitMeasurementEnum.Meter,
                     UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
                     Max = 2.3M,
@@ -162,67 +93,7 @@
                 context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultUltrasonicHCSR04);
             }
 
-            #endregion
-
-            #region ActuatorType
-
-            var genericActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Generic);
-            var lightActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Light);
-            var motorActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Motor);
-            var relayActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Relay);
-            var valveActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Valve);
-
-            if (genericActuatorType == null)
-            {
-                genericActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Generic,
-                    Name = "Genérico",
-                };
-                context.ActuatorType.Add(genericActuatorType);
-            }
-
-            if (lightActuatorType == null)
-            {
-                lightActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Light,
-                    Name = "Luz",
-                };
-                context.ActuatorType.Add(lightActuatorType);
-            }
-
-            if (motorActuatorType == null)
-            {
-                motorActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Motor,
-                    Name = "Motor",
-                };
-                context.ActuatorType.Add(motorActuatorType);
-            }
-
-            if (relayActuatorType == null)
-            {
-                relayActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Relay,
-                    Name = "Relê",
-                };
-                context.ActuatorType.Add(relayActuatorType);
-            }
-
-            if (valveActuatorType == null)
-            {
-                valveActuatorType = new ActuatorType
-                {
-                    Id = ActuatorTypeEnum.Valve,
-                    Name = "Válvula",
-                };
-                context.ActuatorType.Add(valveActuatorType);
-            }
-
-            #endregion
+            #endregion            
 
             #region SensorRange
 
@@ -777,6 +648,143 @@
             #endregion
 
             ExecuteSettings();
+        }
+
+        private static void ExecuteSensorType(ARTDbContext context)
+        {
+            #region SensorType
+
+            var genericSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Generic);
+            var luminositySensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Luminosity);
+            var motionSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Motion);
+            var pressureSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Pressure);
+            var proximityDistanceSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.ProximityDistance);
+            var temperatureSensorType = context.SensorType.FirstOrDefault(x => x.Id == SensorTypeEnum.Temperature);
+
+            if (genericSensorType == null)
+            {
+                genericSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Generic,
+                    Name = "Genérico",
+                };
+                context.SensorType.Add(genericSensorType);
+            }
+
+            if (luminositySensorType == null)
+            {
+                luminositySensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Luminosity,
+                    Name = "Luminosidade",
+                };
+                context.SensorType.Add(luminositySensorType);
+            }
+
+            if (motionSensorType == null)
+            {
+                motionSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Motion,
+                    Name = "Movimento",
+                };
+                context.SensorType.Add(motionSensorType);
+            }
+
+            if (pressureSensorType == null)
+            {
+                pressureSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Pressure,
+                    Name = "Pressão",
+                };
+                context.SensorType.Add(pressureSensorType);
+            }
+
+            if (proximityDistanceSensorType == null)
+            {
+                proximityDistanceSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.ProximityDistance,
+                    Name = "Proximidade/Distância",
+                };
+                context.SensorType.Add(proximityDistanceSensorType);
+            }
+
+            if (temperatureSensorType == null)
+            {
+                temperatureSensorType = new SensorType
+                {
+                    Id = SensorTypeEnum.Temperature,
+                    Name = "Temperatura",
+                };
+                context.SensorType.Add(temperatureSensorType);
+            }
+
+            #endregion
+        }
+
+        private static void ExecuteActuatorType(ARTDbContext context)
+        {
+            #region ActuatorType
+
+            var genericActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Generic);
+            var lightActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Light);
+            var motorActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Motor);
+            var relayActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Relay);
+            var valveActuatorType = context.ActuatorType.FirstOrDefault(x => x.Id == ActuatorTypeEnum.Valve);
+
+            if (genericActuatorType == null)
+            {
+                genericActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Generic,
+                    Name = "Genérico",
+                };
+                context.ActuatorType.Add(genericActuatorType);
+            }
+
+            if (lightActuatorType == null)
+            {
+                lightActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Light,
+                    Name = "Luz",
+                };
+                context.ActuatorType.Add(lightActuatorType);
+            }
+
+            if (motorActuatorType == null)
+            {
+                motorActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Motor,
+                    Name = "Motor",
+                };
+                context.ActuatorType.Add(motorActuatorType);
+            }
+
+            if (relayActuatorType == null)
+            {
+                relayActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Relay,
+                    Name = "Relê",
+                };
+                context.ActuatorType.Add(relayActuatorType);
+            }
+
+            if (valveActuatorType == null)
+            {
+                valveActuatorType = new ActuatorType
+                {
+                    Id = ActuatorTypeEnum.Valve,
+                    Name = "Válvula",
+                };
+                context.ActuatorType.Add(valveActuatorType);
+            }
+
+            #endregion
         }
 
         private static void ExecuteContinent(ARTDbContext context)
