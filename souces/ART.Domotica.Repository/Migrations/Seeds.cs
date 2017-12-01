@@ -30,6 +30,7 @@
             ExecuteTimeZone(context);
             ExecuteUnitMeasurementType(context);
             ExecuteUnitMeasurement(context);
+            ExecuteUnitMeasurementScale(context);
             ExecuteSensorType(context);
             ExecuteActuatorType(context);
             ExecuteSensorDatasheet(context);
@@ -591,6 +592,41 @@
             ExecuteSettings();
         }
 
+        private static void ExecuteUnitMeasurementScale(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("UnitMeasurementScale.csv");
+
+            foreach (var line in lines)
+            {                
+                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[0]);
+                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[1]);
+                var numericalScalePrefixId = (NumericalScalePrefixEnum)Enum.Parse(typeof(NumericalScalePrefixEnum), line[2]);
+                var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[3]);
+
+                var entity = context.UnitMeasurementScale
+                    .Where(x => x.UnitMeasurementId == unitMeasurementId)
+                    .Where(x => x.UnitMeasurementTypeId == unitMeasurementTypeId)
+                    .Where(x => x.NumericalScalePrefixId == numericalScalePrefixId)
+                    .Where(x => x.NumericalScaleTypeId == numericalScaleTypeId)
+                    .SingleOrDefault();
+
+                if (entity == null)
+                {
+                    entity = new UnitMeasurementScale
+                    {
+                        UnitMeasurementId = unitMeasurementId,
+                        UnitMeasurementTypeId = unitMeasurementTypeId,
+                        NumericalScalePrefixId = numericalScalePrefixId,
+                        NumericalScaleTypeId = numericalScaleTypeId,
+                    };
+
+                    context.UnitMeasurementScale.Add(entity);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
         private static void ExecuteSensorUnitMeasurementDefault(ARTDbContext context)
         {
             var lines = GetMatrixFromFile("SensorUnitMeasurementDefault.csv");
@@ -604,7 +640,10 @@
                 var max = Convert.ToDecimal(line[4]);
                 var min = Convert.ToDecimal(line[5]);
 
-                var entity = context.SensorUnitMeasurementDefault.SingleOrDefault(x => x.Id == sensorDatasheetId);
+                var entity = context.SensorUnitMeasurementDefault
+                    .Where(x => x.Id == sensorDatasheetId)
+                    .Where(x => x.SensorTypeId == sensorTypeId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
@@ -634,7 +673,10 @@
                 var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
                 var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
 
-                var entity = context.SensorDatasheet.SingleOrDefault(x => x.Id == sensorDatasheetId);
+                var entity = context.SensorDatasheet
+                    .Where(x => x.Id == sensorDatasheetId)
+                    .Where(x => x.SensorTypeId == sensorTypeId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
@@ -659,7 +701,9 @@
                 var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[0]);
                 var name = line[1];
 
-                var entity = context.SensorType.SingleOrDefault(x => x.Id == sensorTypeId);
+                var entity = context.SensorType
+                    .Where(x => x.Id == sensorTypeId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
@@ -684,7 +728,9 @@
                 var actuatorTypeId = (ActuatorTypeEnum)Enum.Parse(typeof(ActuatorTypeEnum), line[0]);
                 var name = line[1];
 
-                var entity = context.ActuatorType.SingleOrDefault(x => x.Id == actuatorTypeId);
+                var entity = context.ActuatorType
+                    .Where(x => x.Id == actuatorTypeId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
@@ -709,7 +755,9 @@
                 var continentId = (ContinentEnum)Enum.Parse(typeof(ContinentEnum), line[0]);
                 var name = line[1];
 
-                var entity = context.Continent.SingleOrDefault(x => x.Id == continentId);
+                var entity = context.Continent
+                    .Where(x => x.Id == continentId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
@@ -805,7 +853,9 @@
                 var name = line[1];
                 var symbol = line[2];
 
-                var entity = context.NumericalScalePrefix.SingleOrDefault(x => x.Id == numericalScalePrefixId);
+                var entity = context.NumericalScalePrefix
+                    .Where(x => x.Id == numericalScalePrefixId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
@@ -831,7 +881,9 @@
                 var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[0]);
                 var name = line[1];
 
-                var entity = context.NumericalScaleType.SingleOrDefault(x => x.Id == numericalScaleTypeId);
+                var entity = context.NumericalScaleType
+                    .Where(x => x.Id == numericalScaleTypeId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
@@ -945,7 +997,10 @@
                 var symbol = line[3];
                 var description = line[4];
 
-                var entity = context.UnitMeasurement.SingleOrDefault(x => x.Id == unitMeasurementId);
+                var entity = context.UnitMeasurement
+                    .Where(x => x.Id == unitMeasurementId)
+                    .Where(x => x.UnitMeasurementTypeId == unitMeasurementTypeId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
@@ -973,7 +1028,9 @@
                 var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[0]);
                 var name = line[1];
 
-                var entity = context.UnitMeasurementType.SingleOrDefault(x => x.Id == unitMeasurementTypeId);
+                var entity = context.UnitMeasurementType
+                    .Where(x => x.Id == unitMeasurementTypeId)
+                    .SingleOrDefault();
 
                 if (entity == null)
                 {
