@@ -27,7 +27,7 @@
 
         Task<DSFamilyTempSensor> SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId);
 
-        Task<DSFamilyTempSensor> SetUnitOfMeasurement(Guid dsFamilyTempSensorId, UnitOfMeasurementEnum unitOfMeasurementId);
+        Task<DSFamilyTempSensor> SetUnitMeasurement(Guid dsFamilyTempSensorId, UnitMeasurementEnum unitMeasurementId);
 
         #endregion Methods
     }

@@ -20,7 +20,7 @@ namespace ART.Domotica.Domain.Services
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
-        private readonly IUnitOfMeasurementRepository _unitOfMeasurementRepository;
+        private readonly IUnitMeasurementRepository _unitMeasurementRepository;
         private readonly ISensorTriggerRepository _sensorTriggerRepository;
 
         #endregion
@@ -34,7 +34,7 @@ namespace ART.Domotica.Domain.Services
             _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
             _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
-            _unitOfMeasurementRepository = new UnitOfMeasurementRepository(context);
+            _unitMeasurementRepository = new UnitMeasurementRepository(context);
             _sensorTriggerRepository = new SensorTriggerRepository(context);
         }
 
@@ -59,7 +59,7 @@ namespace ART.Domotica.Domain.Services
             return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
 
-        public async Task<DSFamilyTempSensor> SetUnitOfMeasurement(Guid dsFamilyTempSensorId, UnitOfMeasurementEnum unitOfMeasurementId)
+        public async Task<DSFamilyTempSensor> SetUnitMeasurement(Guid dsFamilyTempSensorId, UnitMeasurementEnum unitMeasurementId)
         {
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
 
@@ -68,14 +68,14 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DSFamilyTempSensor not found");
             }
 
-            var unitOfMeasurementEntity = await _unitOfMeasurementRepository.GetByKey(unitOfMeasurementId, UnitOfMeasurementTypeEnum.Temperature);
+            var unitMeasurementEntity = await _unitMeasurementRepository.GetByKey(unitMeasurementId, UnitMeasurementTypeEnum.Temperature);
 
-            if (unitOfMeasurementEntity == null)
+            if (unitMeasurementEntity == null)
             {
-                throw new Exception("UnitOfMeasurement not found");
+                throw new Exception("UnitMeasurement not found");
             }
             
-            dsFamilyTempSensorEntity.UnitOfMeasurementId = unitOfMeasurementEntity.Id;
+            dsFamilyTempSensorEntity.UnitMeasurementId = unitMeasurementEntity.Id;
 
             await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
 

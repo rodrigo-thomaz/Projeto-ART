@@ -15,7 +15,7 @@
 
         Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
 
-        Task SetUnitOfMeasurement(AuthenticatedMessageContract<DSFamilyTempSensorSetUnitOfMeasurementRequestContract> message);
+        Task SetUnitMeasurement(AuthenticatedMessageContract<DSFamilyTempSensorSetUnitMeasurementRequestContract> message);
 
         #endregion Methods
     }

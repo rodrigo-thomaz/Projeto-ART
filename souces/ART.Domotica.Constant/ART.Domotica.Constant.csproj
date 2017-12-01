@@ -50,13 +50,13 @@
     <Compile Include="DSFamilyTempSensorConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorRangeConstants.cs" />
-    <Compile Include="SensorUnitOfMeasurementDefaultConstants.cs" />
+    <Compile Include="SensorUnitMeasurementDefaultConstants.cs" />
     <Compile Include="SensorDatasheetConstants.cs" />
     <Compile Include="SensorTypeConstants.cs" />
     <Compile Include="SensorConstants.cs" />
-    <Compile Include="UnitOfMeasurementTypeConstants.cs" />
+    <Compile Include="UnitMeasurementTypeConstants.cs" />
     <Compile Include="TimeZoneConstants.cs" />
-    <Compile Include="UnitOfMeasurementConstants.cs" />
+    <Compile Include="UnitMeasurementConstants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

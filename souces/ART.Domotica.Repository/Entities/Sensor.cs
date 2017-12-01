@@ -50,22 +50,22 @@
             get; set;
         }
 
-        public UnitOfMeasurement UnitOfMeasurement
+        public UnitMeasurement UnitMeasurement
         {
             get; set;
         }
 
-        public UnitOfMeasurementType UnitOfMeasurementType
+        public UnitMeasurementEnum UnitMeasurementId
         {
             get; set;
         }
 
-        public UnitOfMeasurementEnum UnitOfMeasurementId
+        public UnitMeasurementType UnitMeasurementType
         {
             get; set;
         }
 
-        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
+        public UnitMeasurementTypeEnum UnitMeasurementTypeId
         {
             get; protected set;
         }

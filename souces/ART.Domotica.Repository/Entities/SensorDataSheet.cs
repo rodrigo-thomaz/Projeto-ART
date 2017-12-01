@@ -22,7 +22,7 @@
             get; set;
         }
 
-        public SensorUnitOfMeasurementDefault SensorUnitOfMeasurementDefault
+        public SensorUnitMeasurementDefault SensorUnitMeasurementDefault
         {
             get; set;
         }

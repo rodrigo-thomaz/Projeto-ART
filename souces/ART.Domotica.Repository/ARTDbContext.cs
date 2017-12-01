@@ -110,7 +110,7 @@
             get; set;
         }
 
-        public DbSet<SensorUnitOfMeasurementDefault> SensorUnitOfMeasurementDefault
+        public DbSet<SensorUnitMeasurementDefault> SensorUnitMeasurementDefault
         {
             get; set;
         }
@@ -120,12 +120,12 @@
             get; set;
         }
 
-        public DbSet<UnitOfMeasurement> UnitOfMeasurement
+        public DbSet<UnitMeasurement> UnitMeasurement
         {
             get; set;
         }
 
-        public DbSet<UnitOfMeasurementType> UnitOfMeasurementType
+        public DbSet<UnitMeasurementType> UnitMeasurementType
         {
             get; set;
         }
@@ -145,7 +145,7 @@
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new SensorTypeConfiguration());
             modelBuilder.Configurations.Add(new SensorDatasheetConfiguration());
-            modelBuilder.Configurations.Add(new SensorUnitOfMeasurementDefaultConfiguration());
+            modelBuilder.Configurations.Add(new SensorUnitMeasurementDefaultConfiguration());
             modelBuilder.Configurations.Add(new ActuatorTypeConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
@@ -164,10 +164,10 @@
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new ApplicationMQConfiguration());
-            modelBuilder.Configurations.Add(new UnitOfMeasurementConfiguration());
+            modelBuilder.Configurations.Add(new UnitMeasurementConfiguration());
             modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
             modelBuilder.Configurations.Add(new SensorRangeConfiguration());
-            modelBuilder.Configurations.Add(new UnitOfMeasurementTypeConfiguration());
+            modelBuilder.Configurations.Add(new UnitMeasurementTypeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

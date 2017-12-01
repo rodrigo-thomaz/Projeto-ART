@@ -105,13 +105,13 @@
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Temperatura</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" class="form-control" readonly value="{{sensor.tempCelsius == null ? '' : convertTemperature(sensor.tempCelsius) | number : resolution.selectedResolution.decimalPlaces}} {{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}">
+                                                    <input type="text" class="form-control" readonly value="{{sensor.tempCelsius == null ? '' : convertTemperature(sensor.tempCelsius) | number : resolution.selectedResolution.decimalPlaces}} {{unitMeasurement.selectedUnitMeasurement.symbol}}">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Range</label>
                                                 <div class="col-lg-8">
-                                                    <input type="text" class="form-control" readonly value="{{sensorRangeView.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} a {{sensorRangeView.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}">
+                                                    <input type="text" class="form-control" readonly value="{{sensorRangeView.min}}{{unitMeasurement.selectedUnitMeasurement.symbol}} a {{sensorRangeView.max}}{{unitMeasurement.selectedUnitMeasurement.symbol}}">
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -128,7 +128,7 @@
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Escalas</label>
                                                 <div class="col-lg-8">
-                                                    <select class="form-control m-b" ng-options="item.name for item in unitOfMeasurement.availableUnitOfMeasurements track by item.id" ng-model="unitOfMeasurement.selectedUnitOfMeasurement" ng-change="changeUnitOfMeasurement()"></select>
+                                                    <select class="form-control m-b" ng-options="item.name for item in unitMeasurement.availableUnitMeasurements track by item.id" ng-model="unitMeasurement.selectedUnitMeasurement" ng-change="changeUnitMeasurement()"></select>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -173,7 +173,7 @@
                                                            required
                                                            class="form-control">
                                                     <span ng-show="formSensor.inputHighAlarmValue.$touched && formSensor.inputHighAlarmValue.$invalid">
-                                                        Alarme alto deve estar entre {{sensorItem.sensorRange.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
+                                                        Alarme alto deve estar entre {{sensorItem.sensorRange.min}}{{unitMeasurement.selectedUnitMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitMeasurement.selectedUnitMeasurement.symbol}}
                                                     </span>
 
                                                 </div>
@@ -212,7 +212,7 @@
                                                            required
                                                            class="form-control">
                                                     <span ng-show="formSensor.inputLowAlarmValue.$touched && formSensor.inputLowAlarmValue.$invalid">
-                                                        Alarme baixo deve estar entre {{sensorItem.sensorRange.min}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitOfMeasurement.selectedUnitOfMeasurement.symbol}}
+                                                        Alarme baixo deve estar entre {{sensorItem.sensorRange.min}}{{unitMeasurement.selectedUnitMeasurement.symbol}} e {{sensorItem.sensorRange.max}}{{unitMeasurement.selectedUnitMeasurement.symbol}}
                                                     </span>
                                                 </div>
                                             </div>
@@ -231,7 +231,7 @@
                                                                required
                                                                class="form-control">
                                                         <span ng-show="formSensor.inputSensorChartLimiterMax.$touched && formSensor.inputSensorChartLimiterMax.$invalid">
-                                                            Limite alto do gráfico deve estar entre {{sensorItem.sensorRange.minConverted}}{{sensorItem.unitOfMeasurement.symbol}} e {{sensorItem.sensorRange.maxConverted}}{{sensorItem.unitOfMeasurement.symbol}}
+                                                            Limite alto do gráfico deve estar entre {{sensorItem.sensorRange.minConverted}}{{sensorItem.unitMeasurement.symbol}} e {{sensorItem.sensorRange.maxConverted}}{{sensorItem.unitMeasurement.symbol}}
                                                         </span>
                                                     </div>
                                                 </div>
@@ -248,7 +248,7 @@
                                                                required
                                                                class="form-control">
                                                         <span ng-show="formSensor.inputSensorChartLimiterMin.$touched && formSensor.inputSensorChartLimiterMin.$invalid">
-                                                            Limite baixo do gráfico deve estar entre {{sensorItem.sensorRange.minConverted}}{{sensorItem.unitOfMeasurement.symbol}} e {{sensorItem.sensorRange.maxConverted}}{{sensorItem.unitOfMeasurement.symbol}}
+                                                            Limite baixo do gráfico deve estar entre {{sensorItem.sensorRange.minConverted}}{{sensorItem.unitMeasurement.symbol}} e {{sensorItem.sensorRange.maxConverted}}{{sensorItem.unitMeasurement.symbol}}
                                                         </span>
                                                     </div>
                                                 </div>

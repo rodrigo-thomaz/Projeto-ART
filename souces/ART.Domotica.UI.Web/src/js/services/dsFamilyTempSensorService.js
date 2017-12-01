@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitOfMeasurementService', 'unitOfMeasurementConverter', 'espDeviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitOfMeasurementService, unitOfMeasurementConverter, espDeviceService) {
+app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitMeasurementService', 'unitMeasurementConverter', 'espDeviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitMeasurementService, unitMeasurementConverter, espDeviceService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -17,12 +17,12 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         }
     };
 
-    var setUnitOfMeasurement = function (dsFamilyTempSensorId, unitOfMeasurementId) {
+    var setUnitMeasurement = function (dsFamilyTempSensorId, unitMeasurementId) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
-            unitOfMeasurementId: unitOfMeasurementId,
+            unitMeasurementId: unitMeasurementId,
         }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setUnitOfMeasurement', data).then(function (results) {
+        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setUnitMeasurement', data).then(function (results) {
             return results;
         });
     };
@@ -49,7 +49,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var onConnected = function () {
 
-        stompService.subscribeAllViews('DSFamilyTempSensor.SetUnitOfMeasurementViewCompleted', onSetUnitOfMeasurementCompleted);
+        stompService.subscribeAllViews('DSFamilyTempSensor.SetUnitMeasurementViewCompleted', onSetUnitMeasurementCompleted);
         stompService.subscribeAllViews('DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
         stompService.subscribeAllViews('DSFamilyTempSensor.SetLabelViewCompleted', onSetLabelCompleted);
         
@@ -58,31 +58,31 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         }
     }  
 
-    var onSetUnitOfMeasurementCompleted = function (payload) {
+    var onSetUnitMeasurementCompleted = function (payload) {
 
         var result = JSON.parse(payload.body);        
         var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
 
-        //unitOfMeasurement
-        sensor.unitOfMeasurementId = result.unitOfMeasurementId;
-        sensor.unitOfMeasurement = unitOfMeasurementService.getByKey(sensor.unitOfMeasurementId);
+        //unitMeasurement
+        sensor.unitMeasurementId = result.unitMeasurementId;
+        sensor.unitMeasurement = unitMeasurementService.getByKey(sensor.unitMeasurementId);
 
         //temp
-        sensor.tempConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.tempCelsius);
+        sensor.tempConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.tempCelsius);
 
         //sensorRange
-        sensor.sensorRange.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.max);
-        sensor.sensorRange.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.min);
+        sensor.sensorRange.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorRange.max);
+        sensor.sensorRange.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorRange.min);
 
         //sensorChartLimiter
-        sensor.sensorChartLimiter.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.max);
-        sensor.sensorChartLimiter.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.min);
+        sensor.sensorChartLimiter.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorChartLimiter.max);
+        sensor.sensorChartLimiter.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorChartLimiter.min);
 
         //alarms
-        sensor.highAlarm.alarmConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.highAlarm.alarmCelsius);
-        sensor.lowAlarm.alarmConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.lowAlarm.alarmCelsius);
+        sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
+        sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
 
-        $rootScope.$emit('dsFamilyTempSensorService_onSetUnitOfMeasurementCompleted_Id_' + result.dsFamilyTempSensorId, result);
+        $rootScope.$emit('dsFamilyTempSensorService_onSetUnitMeasurementCompleted_Id_' + result.dsFamilyTempSensorId, result);
     }    
 
     var onSetResolutionCompleted = function (payload) {
@@ -113,7 +113,7 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
 
     serviceFactory.getById = getById;
 
-    serviceFactory.setUnitOfMeasurement = setUnitOfMeasurement;
+    serviceFactory.setUnitMeasurement = setUnitMeasurement;
     serviceFactory.setResolution = setResolution;
     serviceFactory.setLabel = setLabel;   
 

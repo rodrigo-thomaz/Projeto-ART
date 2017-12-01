@@ -23,10 +23,10 @@
             builder.RegisterType<SensorRangeConsumer>().As<ISensorRangeConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTriggerConsumer>().As<ISensorTriggerConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTypeConsumer>().As<ISensorTypeConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<SensorUnitOfMeasurementDefaultConsumer>().As<ISensorUnitOfMeasurementDefaultConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<SensorUnitMeasurementDefaultConsumer>().As<ISensorUnitMeasurementDefaultConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<TimeZoneConsumer>().As<ITimeZoneConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<UnitOfMeasurementConsumer>().As<IUnitOfMeasurementConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<UnitOfMeasurementTypeConsumer>().As<IUnitOfMeasurementTypeConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<UnitMeasurementConsumer>().As<IUnitMeasurementConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<UnitMeasurementTypeConsumer>().As<IUnitMeasurementTypeConsumer>().SingleInstance().AutoActivate();
 
             //builder.RegisterType<ApplicationConsumer>()
             //    .As<IApplicationConsumer>()

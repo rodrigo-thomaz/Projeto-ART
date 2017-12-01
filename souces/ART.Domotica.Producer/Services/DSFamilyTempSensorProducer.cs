@@ -31,12 +31,12 @@ namespace ART.Domotica.Producer.Services
             });            
         }
 
-        public async Task SetUnitOfMeasurement(AuthenticatedMessageContract<DSFamilyTempSensorSetUnitOfMeasurementRequestContract> message)
+        public async Task SetUnitMeasurement(AuthenticatedMessageContract<DSFamilyTempSensorSetUnitMeasurementRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetUnitOfMeasurementQueueName, null, payload);
+                _model.BasicPublish("", DSFamilyTempSensorConstants.SetUnitMeasurementQueueName, null, payload);
             });            
         }
 
@@ -79,7 +79,7 @@ namespace ART.Domotica.Producer.Services
                 , arguments: null);
 
             _model.QueueDeclare(
-                 queue: DSFamilyTempSensorConstants.SetUnitOfMeasurementQueueName
+                 queue: DSFamilyTempSensorConstants.SetUnitMeasurementQueueName
                , durable: true
                , exclusive: false
                , autoDelete: false

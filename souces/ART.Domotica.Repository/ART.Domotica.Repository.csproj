@@ -76,16 +76,16 @@
     <Compile Include="Configurations\SensorTriggerConfiguration.cs" />
     <Compile Include="Configurations\ActuatorTypeConfiguration.cs" />
     <Compile Include="Configurations\SensorTypeConfiguration.cs" />
-    <Compile Include="Configurations\SensorUnitOfMeasurementDefaultConfiguration.cs" />
+    <Compile Include="Configurations\SensorUnitMeasurementDefaultConfiguration.cs" />
     <Compile Include="Configurations\SensorsInDeviceConfiguration.cs" />
     <Compile Include="Configurations\DeviceInApplicationConfiguration.cs" />
     <Compile Include="Configurations\RaspberryDeviceConfiguration.cs" />
     <Compile Include="Configurations\SensorConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
-    <Compile Include="Configurations\UnitOfMeasurementConfiguration.cs" />
+    <Compile Include="Configurations\UnitMeasurementConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\SensorRangeConfiguration.cs" />
-    <Compile Include="Configurations\UnitOfMeasurementTypeConfiguration.cs" />
+    <Compile Include="Configurations\UnitMeasurementTypeConfiguration.cs" />
     <Compile Include="Configurations\TimeZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
     <Compile Include="Entities\DeviceNTP.cs" />
@@ -107,12 +107,12 @@
     <Compile Include="Entities\ActuatorType.cs" />
     <Compile Include="Entities\SensorType.cs" />
     <Compile Include="Entities\SensorDatasheet.cs" />
-    <Compile Include="Entities\SensorUnitOfMeasurementDefault.cs" />
-    <Compile Include="Entities\UnitOfMeasurement.cs" />
+    <Compile Include="Entities\SensorUnitMeasurementDefault.cs" />
+    <Compile Include="Entities\UnitMeasurement.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
     <Compile Include="Entities\SensorRange.cs" />
     <Compile Include="Entities\TimeZone.cs" />
-    <Compile Include="Entities\UnitOfMeasurementType.cs" />
+    <Compile Include="Entities\UnitMeasurementType.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationMQRepository.cs" />
@@ -125,29 +125,17 @@
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
     <Compile Include="Interfaces\ISensorChartLimiterRepository.cs" />
     <Compile Include="Interfaces\ISensorTriggerRepository.cs" />
-    <Compile Include="Interfaces\ISensorUnitOfMeasurementDefaultRepository.cs" />
+    <Compile Include="Interfaces\ISensorUnitMeasurementDefaultRepository.cs" />
     <Compile Include="Interfaces\ISensorDatasheetRepository.cs" />
     <Compile Include="Interfaces\ISensorTypeRepository.cs" />
     <Compile Include="Interfaces\ISensorRepository.cs" />
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
-    <Compile Include="Interfaces\IUnitOfMeasurementRepository.cs" />
+    <Compile Include="Interfaces\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\ISensorRangeRepository.cs" />
-    <Compile Include="Interfaces\IUnitOfMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201711301349362_InitialCreate.cs" />
-    <Compile Include="Migrations\201711301349362_InitialCreate.Designer.cs">
-      <DependentUpon>201711301349362_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201711302036253_Initial1.cs" />
-    <Compile Include="Migrations\201711302036253_Initial1.Designer.cs">
-      <DependentUpon>201711302036253_Initial1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712010749354_Initial2.cs" />
-    <Compile Include="Migrations\201712010749354_Initial2.Designer.cs">
-      <DependentUpon>201712010749354_Initial2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712010751232_Initial3.cs" />
-    <Compile Include="Migrations\201712010751232_Initial3.Designer.cs">
-      <DependentUpon>201712010751232_Initial3.cs</DependentUpon>
+    <Compile Include="Interfaces\IUnitMeasurementTypeRepository.cs" />
+    <Compile Include="Migrations\201712010838413_Initial1.cs" />
+    <Compile Include="Migrations\201712010838413_Initial1.Designer.cs">
+      <DependentUpon>201712010838413_Initial1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -166,12 +154,12 @@
     <Compile Include="Repositories\SensorTypeRepository.cs" />
     <Compile Include="Repositories\SensorTriggerRepository.cs" />
     <Compile Include="Repositories\SensorDatasheetRepository.cs" />
-    <Compile Include="Repositories\SensorUnitOfMeasurementDefaultRepository.cs" />
+    <Compile Include="Repositories\SensorUnitMeasurementDefaultRepository.cs" />
     <Compile Include="Repositories\TimeZoneRepository.cs" />
     <Compile Include="Repositories\SensorRangeRepository.cs" />
-    <Compile Include="Repositories\UnitOfMeasurementRepository.cs" />
+    <Compile Include="Repositories\UnitMeasurementRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
-    <Compile Include="Repositories\UnitOfMeasurementTypeRepository.cs" />
+    <Compile Include="Repositories\UnitMeasurementTypeRepository.cs" />
     <Compile Include="RepositoryModule.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,17 +197,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201711301349362_InitialCreate.resx">
-      <DependentUpon>201711301349362_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201711302036253_Initial1.resx">
-      <DependentUpon>201711302036253_Initial1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712010749354_Initial2.resx">
-      <DependentUpon>201712010749354_Initial2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712010751232_Initial3.resx">
-      <DependentUpon>201712010751232_Initial3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712010838413_Initial1.resx">
+      <DependentUpon>201712010838413_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

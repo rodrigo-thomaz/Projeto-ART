@@ -66,10 +66,10 @@
                 x.AddProfile(new SensorRangeProfile());
                 x.AddProfile(new SensorTriggerProfile());
                 x.AddProfile(new SensorTypeProfile());
-                x.AddProfile(new SensorUnitOfMeasurementDefaultProfile());
+                x.AddProfile(new SensorUnitMeasurementDefaultProfile());
                 x.AddProfile(new TimeZoneProfile());
-                x.AddProfile(new UnitOfMeasurementProfile());
-                x.AddProfile(new UnitOfMeasurementTypeProfile());
+                x.AddProfile(new UnitMeasurementProfile());
+                x.AddProfile(new UnitMeasurementTypeProfile());
             });
 
             IContainer container = builder.Build();

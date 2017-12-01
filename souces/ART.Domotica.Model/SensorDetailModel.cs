@@ -23,12 +23,12 @@
             get; set;
         }
 
-        public UnitOfMeasurementEnum UnitOfMeasurementId
+        public UnitMeasurementEnum UnitMeasurementId
         {
             get; set;
         }
 
-        public UnitOfMeasurementTypeEnum UnitOfMeasurementTypeId
+        public UnitMeasurementTypeEnum UnitMeasurementTypeId
         {
             get; protected set;
         }

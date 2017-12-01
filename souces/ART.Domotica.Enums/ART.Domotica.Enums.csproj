@@ -44,9 +44,9 @@
     <Compile Include="SensorChartLimiterPositionEnum.cs" />
     <Compile Include="ActuatorTypeEnum.cs" />
     <Compile Include="SensorDatasheetEnum.cs" />
-    <Compile Include="UnitOfMeasurementEnum.cs" />
+    <Compile Include="UnitMeasurementEnum.cs" />
     <Compile Include="SensorTypeEnum.cs" />
-    <Compile Include="UnitOfMeasurementTypeEnum.cs" />
+    <Compile Include="UnitMeasurementTypeEnum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

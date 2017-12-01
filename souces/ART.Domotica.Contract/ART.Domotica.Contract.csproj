@@ -51,7 +51,7 @@
     <Compile Include="SensorTriggerSetAlarmOnRequestContract.cs" />
     <Compile Include="SensorTriggerSetAlarmCelsiusRequestContract.cs" />
     <Compile Include="SensorTriggerSetAlarmBuzzerOnRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetUnitOfMeasurementRequestContract.cs" />
+    <Compile Include="DSFamilyTempSensorSetUnitMeasurementRequestContract.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCResponseContract.cs" />

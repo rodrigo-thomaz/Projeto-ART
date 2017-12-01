@@ -28,28 +28,28 @@
                 .HasMaxLength(50)
                 .IsRequired();
 
-            //UnitOfMeasurement
-            HasRequired(x => x.UnitOfMeasurement)
+            //UnitMeasurement
+            HasRequired(x => x.UnitMeasurement)
                 .WithMany(x => x.Sensors)
                 .HasForeignKey(x => new
                 {
-                    x.UnitOfMeasurementId,
-                    x.UnitOfMeasurementTypeId,
+                    x.UnitMeasurementId,
+                    x.UnitMeasurementTypeId,
                 })
                 .WillCascadeOnDelete(false);
 
-            //UnitOfMeasurementId
-            Property(x => x.UnitOfMeasurementId)
+            //UnitMeasurementId
+            Property(x => x.UnitMeasurementId)
                 .HasColumnOrder(2);
 
-            //UnitOfMeasurementUnitOfMeasurementType
-            HasRequired(x => x.UnitOfMeasurementType)
+            //UnitMeasurementUnitMeasurementType
+            HasRequired(x => x.UnitMeasurementType)
                 .WithMany(x => x.Sensors)
-                .HasForeignKey(x => x.UnitOfMeasurementTypeId)
+                .HasForeignKey(x => x.UnitMeasurementTypeId)
                 .WillCascadeOnDelete(false);
 
-            //UnitOfMeasurementTypeId
-            Property(x => x.UnitOfMeasurementTypeId)
+            //UnitMeasurementTypeId
+            Property(x => x.UnitMeasurementTypeId)
                 .HasColumnOrder(3);
 
             //SensorRange

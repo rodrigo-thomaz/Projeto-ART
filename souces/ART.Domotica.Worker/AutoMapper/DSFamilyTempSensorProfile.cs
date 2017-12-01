@@ -31,7 +31,7 @@
                 .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorChartLimiter.Max))
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
 
-            CreateMap<DSFamilyTempSensorSetUnitOfMeasurementRequestContract, DSFamilyTempSensorSetUnitOfMeasurementRequestIoTContract>();
+            CreateMap<DSFamilyTempSensorSetUnitMeasurementRequestContract, DSFamilyTempSensorSetUnitMeasurementRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>();
 
             CreateMap<DSFamilyTempSensorSetLabelRequestContract, DSFamilyTempSensorSetLabelCompletedModel>();
@@ -41,10 +41,10 @@
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.DSFamilyTempSensorResolutionId));
 
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetUnitOfMeasurementCompletedModel>()
+            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetUnitMeasurementCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
-                .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => x.UnitOfMeasurementId));
+                .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId));
 
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionDetailModel>();
 
@@ -53,7 +53,7 @@
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.Sensor).DSFamilyTempSensorResolutionId))
                 .ForMember(vm => vm.SensorRangeId, m => m.MapFrom(x => x.Sensor.SensorRangeId.Value))
                 .ForMember(vm => vm.SensorChartLimiter, m => m.MapFrom(x => x.Sensor.SensorChartLimiter))
-                .ForMember(vm => vm.UnitOfMeasurementId, m => m.MapFrom(x => x.Sensor.UnitOfMeasurementId))
+                .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.Sensor.UnitMeasurementId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Sensor.Label))
                 .ForMember(vm => vm.HighAlarm, m => m.ResolveUsing(src => {
                     if (src.Sensor.SensorTriggers == null) return null;

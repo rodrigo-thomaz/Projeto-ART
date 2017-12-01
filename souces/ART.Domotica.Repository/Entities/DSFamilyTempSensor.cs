@@ -8,7 +8,7 @@
 
         public DSFamilyTempSensor()
         {
-            UnitOfMeasurementTypeId = UnitOfMeasurementTypeEnum.Temperature;
+            UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature;
         }
 
         #endregion Constructors

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorRangeService', 'unitOfMeasurementService', 'unitOfMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, sensorRangeService, unitOfMeasurementService, unitOfMeasurementConverter) {
+app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorRangeService', 'unitMeasurementService', 'unitMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, sensorRangeService, unitMeasurementService, unitMeasurementConverter) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -102,7 +102,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
                     //Temp
                     oldSensors[i].tempCelsius = newSensors[j].tempCelsius;                    
-                    oldSensors[i].tempConverted = unitOfMeasurementConverter.convertFromCelsius(oldSensors[i].unitOfMeasurementId, oldSensors[i].tempCelsius);
+                    oldSensors[i].tempConverted = unitMeasurementConverter.convertFromCelsius(oldSensors[i].unitMeasurementId, oldSensors[i].tempCelsius);
 
                     //Chart
 
@@ -193,22 +193,22 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             //temp
             sensor.tempConverted = null;
 
-            //unitOfMeasurement
-            sensor.unitOfMeasurement = unitOfMeasurementService.getByKey(sensor.unitOfMeasurementId);
+            //unitMeasurement
+            sensor.unitMeasurement = unitMeasurementService.getByKey(sensor.unitMeasurementId);
 
             //SensorRange
             var sensorRange = sensorRangeService.getById(sensor.sensorRangeId);
             sensor.sensorRange = sensorRange;
-            sensor.sensorRange.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.max);
-            sensor.sensorRange.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorRange.min);
+            sensor.sensorRange.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorRange.max);
+            sensor.sensorRange.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorRange.min);
 
             //sensorChartLimiter
-            sensor.sensorChartLimiter.maxConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.max);
-            sensor.sensorChartLimiter.minConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.sensorChartLimiter.min);
+            sensor.sensorChartLimiter.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorChartLimiter.max);
+            sensor.sensorChartLimiter.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorChartLimiter.min);
 
             //alarms
-            sensor.highAlarm.alarmConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.highAlarm.alarmCelsius);
-            sensor.lowAlarm.alarmConverted = unitOfMeasurementConverter.convertFromCelsius(sensor.unitOfMeasurementId, sensor.lowAlarm.alarmCelsius);
+            sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
+            sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
 
             //Chart
             sensor.chart = [];

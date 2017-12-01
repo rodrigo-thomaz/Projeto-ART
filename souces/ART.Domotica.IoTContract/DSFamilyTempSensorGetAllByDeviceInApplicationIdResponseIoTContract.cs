@@ -48,7 +48,7 @@
             get; set;
         }
 
-        public UnitOfMeasurementEnum UnitOfMeasurementId
+        public UnitMeasurementEnum UnitMeasurementId
         {
             get; set;
         }

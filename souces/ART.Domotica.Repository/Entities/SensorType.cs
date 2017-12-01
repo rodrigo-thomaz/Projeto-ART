@@ -24,7 +24,7 @@
             get; set;
         }
 
-        public ICollection<SensorUnitOfMeasurementDefault> SensorUnitOfMeasurementDefaults
+        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
         {
             get; set;
         }

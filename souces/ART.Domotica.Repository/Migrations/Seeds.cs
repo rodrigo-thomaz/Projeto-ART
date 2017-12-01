@@ -41,7 +41,7 @@
 
             #endregion
 
-            #region UnitOfMeasurementType
+            #region UnitMeasurementType
 
             // https://pt.wikipedia.org/wiki/Unidade_de_medida
 
@@ -62,188 +62,188 @@
             //Volume = 15,            - Unidades de volume
             //Electrical = 16,        - Unidades elétrica
 
-            var areaUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Area);
-            var capacityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Capacity);
-            var lengthUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Length);
-            var densityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Density);
-            var energyUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Energy);
-            var forceUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Force);
-            var massUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Mass);
-            var specificWeightUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.SpecificWeight);
-            var potencyUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Potency);
-            var pressureUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Pressure);
-            var temperatureUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Temperature);
-            var timeUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Time);
-            var velocityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Velocity);
-            var viscosityUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Viscosity);
-            var volumeUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Volume);
-            var electricalUnitOfMeasurementType = context.UnitOfMeasurementType.FirstOrDefault(x => x.Id == UnitOfMeasurementTypeEnum.Electrical);
+            var areaUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Area);
+            var capacityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Capacity);
+            var lengthUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Length);
+            var densityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Density);
+            var energyUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Energy);
+            var forceUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Force);
+            var massUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Mass);
+            var specificWeightUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.SpecificWeight);
+            var potencyUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Potency);
+            var pressureUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Pressure);
+            var temperatureUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Temperature);
+            var timeUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Time);
+            var velocityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Velocity);
+            var viscosityUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Viscosity);
+            var volumeUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Volume);
+            var electricalUnitMeasurementType = context.UnitMeasurementType.FirstOrDefault(x => x.Id == UnitMeasurementTypeEnum.Electrical);
 
-            if (areaUnitOfMeasurementType == null)
+            if (areaUnitMeasurementType == null)
             {
-                areaUnitOfMeasurementType = new UnitOfMeasurementType
+                areaUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Area,
+                    Id = UnitMeasurementTypeEnum.Area,
                     Name = "Área",
                 };
-                context.UnitOfMeasurementType.Add(areaUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(areaUnitMeasurementType);
             }
 
-            if (capacityUnitOfMeasurementType == null)
+            if (capacityUnitMeasurementType == null)
             {
-                capacityUnitOfMeasurementType = new UnitOfMeasurementType
+                capacityUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Capacity,
+                    Id = UnitMeasurementTypeEnum.Capacity,
                     Name = "Capacidade",
                 };
-                context.UnitOfMeasurementType.Add(capacityUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(capacityUnitMeasurementType);
             }
 
-            if (lengthUnitOfMeasurementType == null)
+            if (lengthUnitMeasurementType == null)
             {
-                lengthUnitOfMeasurementType = new UnitOfMeasurementType
+                lengthUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Length,
+                    Id = UnitMeasurementTypeEnum.Length,
                     Name = "Comprimento",
                 };
-                context.UnitOfMeasurementType.Add(lengthUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(lengthUnitMeasurementType);
             }
 
-            if (densityUnitOfMeasurementType == null)
+            if (densityUnitMeasurementType == null)
             {
-                densityUnitOfMeasurementType = new UnitOfMeasurementType
+                densityUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Density,
+                    Id = UnitMeasurementTypeEnum.Density,
                     Name = "Densidade",
                 };
-                context.UnitOfMeasurementType.Add(densityUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(densityUnitMeasurementType);
             }
 
-            if (energyUnitOfMeasurementType == null)
+            if (energyUnitMeasurementType == null)
             {
-                energyUnitOfMeasurementType = new UnitOfMeasurementType
+                energyUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Energy,
+                    Id = UnitMeasurementTypeEnum.Energy,
                     Name = "Energia",
                 };
-                context.UnitOfMeasurementType.Add(energyUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(energyUnitMeasurementType);
             }
 
-            if (forceUnitOfMeasurementType == null)
+            if (forceUnitMeasurementType == null)
             {
-                forceUnitOfMeasurementType = new UnitOfMeasurementType
+                forceUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Force,
+                    Id = UnitMeasurementTypeEnum.Force,
                     Name = "Força",
                 };
-                context.UnitOfMeasurementType.Add(forceUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(forceUnitMeasurementType);
             }
 
-            if (massUnitOfMeasurementType == null)
+            if (massUnitMeasurementType == null)
             {
-                massUnitOfMeasurementType = new UnitOfMeasurementType
+                massUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Mass,
+                    Id = UnitMeasurementTypeEnum.Mass,
                     Name = "Massa",
                 };
-                context.UnitOfMeasurementType.Add(massUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(massUnitMeasurementType);
             }
 
-            if (specificWeightUnitOfMeasurementType == null)
+            if (specificWeightUnitMeasurementType == null)
             {
-                specificWeightUnitOfMeasurementType = new UnitOfMeasurementType
+                specificWeightUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.SpecificWeight,
+                    Id = UnitMeasurementTypeEnum.SpecificWeight,
                     Name = "Peso específico",
                 };
-                context.UnitOfMeasurementType.Add(specificWeightUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(specificWeightUnitMeasurementType);
             }
 
-            if (potencyUnitOfMeasurementType == null)
+            if (potencyUnitMeasurementType == null)
             {
-                potencyUnitOfMeasurementType = new UnitOfMeasurementType
+                potencyUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Potency,
+                    Id = UnitMeasurementTypeEnum.Potency,
                     Name = "Potência",
                 };
-                context.UnitOfMeasurementType.Add(potencyUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(potencyUnitMeasurementType);
             }
 
-            if (pressureUnitOfMeasurementType == null)
+            if (pressureUnitMeasurementType == null)
             {
-                pressureUnitOfMeasurementType = new UnitOfMeasurementType
+                pressureUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Pressure,
+                    Id = UnitMeasurementTypeEnum.Pressure,
                     Name = "Pressão",
                 };
-                context.UnitOfMeasurementType.Add(pressureUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(pressureUnitMeasurementType);
             }
 
-            if (temperatureUnitOfMeasurementType == null)
+            if (temperatureUnitMeasurementType == null)
             {
-                temperatureUnitOfMeasurementType = new UnitOfMeasurementType
+                temperatureUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Temperature,
+                    Id = UnitMeasurementTypeEnum.Temperature,
                     Name = "Temperatura",
                 };
-                context.UnitOfMeasurementType.Add(temperatureUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(temperatureUnitMeasurementType);
             }
 
-            if (timeUnitOfMeasurementType == null)
+            if (timeUnitMeasurementType == null)
             {
-                timeUnitOfMeasurementType = new UnitOfMeasurementType
+                timeUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Time,
+                    Id = UnitMeasurementTypeEnum.Time,
                     Name = "Tempo",
                 };
-                context.UnitOfMeasurementType.Add(timeUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(timeUnitMeasurementType);
             }
 
-            if (velocityUnitOfMeasurementType == null)
+            if (velocityUnitMeasurementType == null)
             {
-                velocityUnitOfMeasurementType = new UnitOfMeasurementType
+                velocityUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Velocity,
+                    Id = UnitMeasurementTypeEnum.Velocity,
                     Name = "Velocidade",
                 };
-                context.UnitOfMeasurementType.Add(velocityUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(velocityUnitMeasurementType);
             }
 
-            if (viscosityUnitOfMeasurementType == null)
+            if (viscosityUnitMeasurementType == null)
             {
-                viscosityUnitOfMeasurementType = new UnitOfMeasurementType
+                viscosityUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Viscosity,
+                    Id = UnitMeasurementTypeEnum.Viscosity,
                     Name = "Viscosidade",
                 };
-                context.UnitOfMeasurementType.Add(viscosityUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(viscosityUnitMeasurementType);
             }
 
-            if (volumeUnitOfMeasurementType == null)
+            if (volumeUnitMeasurementType == null)
             {
-                volumeUnitOfMeasurementType = new UnitOfMeasurementType
+                volumeUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Volume,
+                    Id = UnitMeasurementTypeEnum.Volume,
                     Name = "Volume",
                 };
-                context.UnitOfMeasurementType.Add(volumeUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(volumeUnitMeasurementType);
             }
 
-            if (electricalUnitOfMeasurementType == null)
+            if (electricalUnitMeasurementType == null)
             {
-                electricalUnitOfMeasurementType = new UnitOfMeasurementType
+                electricalUnitMeasurementType = new UnitMeasurementType
                 {
-                    Id = UnitOfMeasurementTypeEnum.Electrical,
+                    Id = UnitMeasurementTypeEnum.Electrical,
                     Name = "Elétrica",
                 };
-                context.UnitOfMeasurementType.Add(electricalUnitOfMeasurementType);
+                context.UnitMeasurementType.Add(electricalUnitMeasurementType);
             }
 
             context.SaveChanges();
 
             #endregion
 
-            #region UnitOfMeasurement
+            #region UnitMeasurement
 
             var celsiusDescription = new StringBuilder();
 
@@ -251,21 +251,21 @@
             celsiusDescription.AppendLine("Esta escala é baseada nos pontos de fusão e ebulição da água, em condição atmosférica padrão, aos quais são atribuídos os valores de 0 °C e 100 °C, respectivamente[2].Devido a esta divisão centesimal, se deu a antiga nomenclatura grau centígrado(cem partes/ graus) que, em 1948, durante a 9ª Conferência Geral de Pesos e Medidas(CR 64), teve seu nome oficialmente modificado para grau Celsius, em reconhecimento ao trabalho de Anders Celsius e para fim de desambiguação com o prefixo centi do SI.");
             celsiusDescription.AppendLine("Enquanto que os valores de congelação e evaporação da água estão aproximadamente corretos, a definição original não é apropriada como um padrão formal: ela depende da definição de pressão atmosférica padrão, que por sua vez depende da própria definição de temperatura.A definição oficial atual de grau Celsius define 0,01 °C como o ponto triplo da água, e 1 grau Celsius como sendo 1 / 273,16 da diferença de temperatura entre o ponto triplo da água e o zero absoluto. Esta definição garante que 1 grau Celsius apresenta a mesma variação de temperatura que 1 kelvin.");
 
-            var celsiusUnitOfMeasurement = context.UnitOfMeasurement.FirstOrDefault(x => x.Id == UnitOfMeasurementEnum.Celsius);
+            var celsiusUnitMeasurement = context.UnitMeasurement.FirstOrDefault(x => x.Id == UnitMeasurementEnum.Celsius);
 
-            if (celsiusUnitOfMeasurement == null)
+            if (celsiusUnitMeasurement == null)
             {
-                celsiusUnitOfMeasurement = new UnitOfMeasurement
+                celsiusUnitMeasurement = new UnitMeasurement
                 {
-                    Id = UnitOfMeasurementEnum.Celsius,
-                    UnitOfMeasurementTypeId = temperatureUnitOfMeasurementType.Id,
+                    Id = UnitMeasurementEnum.Celsius,
+                    UnitMeasurementTypeId = temperatureUnitMeasurementType.Id,
                 };
-                context.UnitOfMeasurement.Add(celsiusUnitOfMeasurement);
+                context.UnitMeasurement.Add(celsiusUnitMeasurement);
             }
 
-            celsiusUnitOfMeasurement.Name = "Celsius";
-            celsiusUnitOfMeasurement.Symbol = "C";
-            celsiusUnitOfMeasurement.Description = celsiusDescription.ToString();
+            celsiusUnitMeasurement.Name = "Celsius";
+            celsiusUnitMeasurement.Symbol = "C";
+            celsiusUnitMeasurement.Description = celsiusDescription.ToString();
 
             var fahrenheitDescription = new StringBuilder();
 
@@ -276,55 +276,55 @@
             fahrenheitDescription.AppendLine("Esta escala foi utilizada principalmente pelos países que foram colonizados pelos britânicos, mas seu uso atualmente se restringe a poucos países de língua inglesa, como os Estados Unidos e Belize. E também, muito utilizada com o povo grego, para medir a temperatura de um corpo.Jakelinneh Devocerg, mulher francesa que criou a teoria 'Fahrenheit Devocerg' que para passar de celsius para fahrenheit se usa sempre 1,8.Ex: f = 137 * e c = 20 * f + 137 - 20 + c.1,8 fc = 117.1,8 = 1,20202020");
             fahrenheitDescription.AppendLine("Para uso científico, há uma escala de temperatura, chamada de Rankine, que leva o marco zero de sua escala ao zero absoluto e possui a mesma variação da escala fahrenheit, existindo, portanto, correlação entre a escala de Rankine e grau fahrenheit do mesmo modo que existe correlação das escalas kelvin e grau Celsius.");
 
-            var fahrenheitUnitOfMeasurement = context.UnitOfMeasurement.SingleOrDefault(x => x.Id == UnitOfMeasurementEnum.Fahrenheit);
+            var fahrenheitUnitMeasurement = context.UnitMeasurement.SingleOrDefault(x => x.Id == UnitMeasurementEnum.Fahrenheit);
 
-            if (fahrenheitUnitOfMeasurement == null)
+            if (fahrenheitUnitMeasurement == null)
             {
-                fahrenheitUnitOfMeasurement = new UnitOfMeasurement
+                fahrenheitUnitMeasurement = new UnitMeasurement
                 {
-                    Id = UnitOfMeasurementEnum.Fahrenheit,
-                    UnitOfMeasurementTypeId = temperatureUnitOfMeasurementType.Id,
+                    Id = UnitMeasurementEnum.Fahrenheit,
+                    UnitMeasurementTypeId = temperatureUnitMeasurementType.Id,
                 };
-                context.UnitOfMeasurement.Add(fahrenheitUnitOfMeasurement);
+                context.UnitMeasurement.Add(fahrenheitUnitMeasurement);
             }
 
-            fahrenheitUnitOfMeasurement.Name = "Fahrenheit";
-            fahrenheitUnitOfMeasurement.Symbol = "F";
-            fahrenheitUnitOfMeasurement.Description = fahrenheitDescription.ToString();
+            fahrenheitUnitMeasurement.Name = "Fahrenheit";
+            fahrenheitUnitMeasurement.Symbol = "F";
+            fahrenheitUnitMeasurement.Description = fahrenheitDescription.ToString();
 
             // Meter
 
-            var meterUnitOfMeasurement = context.UnitOfMeasurement.SingleOrDefault(x => x.Id == UnitOfMeasurementEnum.Meter);
+            var meterUnitMeasurement = context.UnitMeasurement.SingleOrDefault(x => x.Id == UnitMeasurementEnum.Meter);
 
-            if (meterUnitOfMeasurement == null)
+            if (meterUnitMeasurement == null)
             {
-                meterUnitOfMeasurement = new UnitOfMeasurement
+                meterUnitMeasurement = new UnitMeasurement
                 {
-                    Id = UnitOfMeasurementEnum.Meter,
-                    UnitOfMeasurementTypeId = lengthUnitOfMeasurementType.Id,
+                    Id = UnitMeasurementEnum.Meter,
+                    UnitMeasurementTypeId = lengthUnitMeasurementType.Id,
                 };
-                context.UnitOfMeasurement.Add(meterUnitOfMeasurement);
+                context.UnitMeasurement.Add(meterUnitMeasurement);
             }
 
-            meterUnitOfMeasurement.Name = "Metro";
-            meterUnitOfMeasurement.Symbol = "m";
+            meterUnitMeasurement.Name = "Metro";
+            meterUnitMeasurement.Symbol = "m";
 
             // Inch
 
-            var inchUnitOfMeasurement = context.UnitOfMeasurement.SingleOrDefault(x => x.Id == UnitOfMeasurementEnum.Inch);
+            var inchUnitMeasurement = context.UnitMeasurement.SingleOrDefault(x => x.Id == UnitMeasurementEnum.Inch);
 
-            if (inchUnitOfMeasurement == null)
+            if (inchUnitMeasurement == null)
             {
-                inchUnitOfMeasurement = new UnitOfMeasurement
+                inchUnitMeasurement = new UnitMeasurement
                 {
-                    Id = UnitOfMeasurementEnum.Inch,
-                    UnitOfMeasurementTypeId = lengthUnitOfMeasurementType.Id,
+                    Id = UnitMeasurementEnum.Inch,
+                    UnitMeasurementTypeId = lengthUnitMeasurementType.Id,
                 };
-                context.UnitOfMeasurement.Add(inchUnitOfMeasurement);
+                context.UnitMeasurement.Add(inchUnitMeasurement);
             }
 
-            inchUnitOfMeasurement.Name = "Polegada";
-            inchUnitOfMeasurement.Symbol = "''";
+            inchUnitMeasurement.Name = "Polegada";
+            inchUnitMeasurement.Symbol = "''";
 
             context.SaveChanges();
 
@@ -428,37 +428,37 @@
 
             #endregion
 
-            #region SensorUnitOfMeasurementDefault
+            #region SensorUnitMeasurementDefault
 
-            var sensorUnitOfMeasurementDefaultTemperatureDS18B20 = context.SensorUnitOfMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
-            var sensorUnitOfMeasurementDefaultUltrasonicHCSR04 = context.SensorUnitOfMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
+            var sensorUnitMeasurementDefaultTemperatureDS18B20 = context.SensorUnitMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Temperature_DS18B20);
+            var sensorUnitMeasurementDefaultUltrasonicHCSR04 = context.SensorUnitMeasurementDefault.FirstOrDefault(x => x.Id == SensorDatasheetEnum.Ultrasonic_HCSR04);
 
-            if (sensorUnitOfMeasurementDefaultTemperatureDS18B20 == null)
+            if (sensorUnitMeasurementDefaultTemperatureDS18B20 == null)
             {
-                sensorUnitOfMeasurementDefaultTemperatureDS18B20 = new SensorUnitOfMeasurementDefault
+                sensorUnitMeasurementDefaultTemperatureDS18B20 = new SensorUnitMeasurementDefault
                 {
                     Id = SensorDatasheetEnum.Temperature_DS18B20,
                     SensorTypeId = temperatureSensorType.Id,
-                    UnitOfMeasurementId = celsiusUnitOfMeasurement.Id,
-                    UnitOfMeasurementTypeId = celsiusUnitOfMeasurement.UnitOfMeasurementTypeId,
+                    UnitMeasurementId = celsiusUnitMeasurement.Id,
+                    UnitMeasurementTypeId = celsiusUnitMeasurement.UnitMeasurementTypeId,
                     Max = 125M,
                     Min = -55M,
                 };
-                context.SensorUnitOfMeasurementDefault.Add(sensorUnitOfMeasurementDefaultTemperatureDS18B20);
+                context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultTemperatureDS18B20);
             }
 
-            if (sensorUnitOfMeasurementDefaultUltrasonicHCSR04 == null)
+            if (sensorUnitMeasurementDefaultUltrasonicHCSR04 == null)
             {
-                sensorUnitOfMeasurementDefaultUltrasonicHCSR04 = new SensorUnitOfMeasurementDefault
+                sensorUnitMeasurementDefaultUltrasonicHCSR04 = new SensorUnitMeasurementDefault
                 {
                     Id = SensorDatasheetEnum.Ultrasonic_HCSR04,
                     SensorTypeId = proximityDistanceSensorType.Id,
-                    UnitOfMeasurementId = meterUnitOfMeasurement.Id,
-                    UnitOfMeasurementTypeId = meterUnitOfMeasurement.UnitOfMeasurementTypeId,
+                    UnitMeasurementId = meterUnitMeasurement.Id,
+                    UnitMeasurementTypeId = meterUnitMeasurement.UnitMeasurementTypeId,
                     Max = 2.3M,
                     Min = 0.2M,
                 };
-                context.SensorUnitOfMeasurementDefault.Add(sensorUnitOfMeasurementDefaultUltrasonicHCSR04);
+                context.SensorUnitMeasurementDefault.Add(sensorUnitMeasurementDefaultUltrasonicHCSR04);
             }
 
             #endregion
@@ -624,8 +624,8 @@
                     DeviceAddress = sensor_1_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitOfMeasurementId = celsiusUnitOfMeasurement.Id,
-                    UnitOfMeasurement = celsiusUnitOfMeasurement,
+                    UnitMeasurementId = celsiusUnitMeasurement.Id,
+                    UnitMeasurement = celsiusUnitMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
                     Label = "Sensor 1",
@@ -694,8 +694,8 @@
                     DeviceAddress = sensor_2_1_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
-                    UnitOfMeasurement = fahrenheitUnitOfMeasurement,
+                    UnitMeasurementId = fahrenheitUnitMeasurement.Id,
+                    UnitMeasurement = fahrenheitUnitMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 1",
@@ -763,8 +763,8 @@
                     DeviceAddress = sensor_2_2_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
-                    UnitOfMeasurement = fahrenheitUnitOfMeasurement,
+                    UnitMeasurementId = fahrenheitUnitMeasurement.Id,
+                    UnitMeasurement = fahrenheitUnitMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 2",
@@ -832,8 +832,8 @@
                     DeviceAddress = sensor_3_1_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
-                    UnitOfMeasurement = fahrenheitUnitOfMeasurement,
+                    UnitMeasurementId = fahrenheitUnitMeasurement.Id,
+                    UnitMeasurement = fahrenheitUnitMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 3",
@@ -901,8 +901,8 @@
                     DeviceAddress = sensor_3_2_Address,
                     Family = "DS18B20",
                     SensorRangeId = sensorRange1.Id,
-                    UnitOfMeasurementId = fahrenheitUnitOfMeasurement.Id,
-                    UnitOfMeasurement = fahrenheitUnitOfMeasurement,
+                    UnitMeasurementId = fahrenheitUnitMeasurement.Id,
+                    UnitMeasurement = fahrenheitUnitMeasurement,
                     DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
                     DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
                     Label = "Sensor 4",

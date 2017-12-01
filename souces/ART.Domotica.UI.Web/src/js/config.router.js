@@ -48,13 +48,13 @@ angular.module('app')
 
                       'js/services/contextScope.js',
 
-                      'js/services/unitOfMeasurementTypeService.js',
-                      'js/services/unitOfMeasurementService.js',
-                      'js/services/unitOfMeasurementConverter.js',
+                      'js/services/unitMeasurementTypeService.js',
+                      'js/services/unitMeasurementService.js',
+                      'js/services/unitMeasurementConverter.js',
 
                       'js/services/sensorTypeService.js',                      
                       'js/services/sensorDatasheetService.js',                      
-                      'js/services/sensorUnitOfMeasurementDefaultService.js',
+                      'js/services/sensorUnitMeasurementDefaultService.js',
                       'js/services/sensorService.js',
                                             
                       'js/services/sensorRangeService.js',

@@ -145,13 +145,13 @@
     <Compile Include="Controllers\ESPDeviceController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\SensorRangeController.cs" />
-    <Compile Include="Controllers\SensorUnitOfMeasurementDefaultController.cs" />
+    <Compile Include="Controllers\SensorUnitMeasurementDefaultController.cs" />
     <Compile Include="Controllers\SensorDatasheetController.cs" />
     <Compile Include="Controllers\SensorTypeController.cs" />
     <Compile Include="Controllers\SensorController.cs" />
-    <Compile Include="Controllers\UnitOfMeasurementTypeController.cs" />
+    <Compile Include="Controllers\UnitMeasurementTypeController.cs" />
     <Compile Include="Controllers\TimeZoneController.cs" />
-    <Compile Include="Controllers\UnitOfMeasurementController.cs" />
+    <Compile Include="Controllers\UnitMeasurementController.cs" />
     <Compile Include="Modules\ControllerModule.cs" />
     <Compile Include="Controllers\DSFamilyTempSensorController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />

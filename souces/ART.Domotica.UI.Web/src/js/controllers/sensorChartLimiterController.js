@@ -1,4 +1,4 @@
-﻿app.controller('sensorChartLimiterController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'unitOfMeasurementConverter', 'sensorChartLimiterService', function ($scope, $rootScope, $timeout, $log, toaster, unitOfMeasurementConverter, sensorChartLimiterService) {
+﻿app.controller('sensorChartLimiterController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'unitMeasurementConverter', 'sensorChartLimiterService', function ($scope, $rootScope, $timeout, $log, toaster, unitMeasurementConverter, sensorChartLimiterService) {
 
     $scope.sensor = {};    
 
@@ -21,7 +21,7 @@
 
     $scope.changeValue = function (position, value) {
         if (!initialized || value === undefined) return;
-        var valueConverted = unitOfMeasurementConverter.convertToCelsius($scope.sensor.unitOfMeasurementId, value);
+        var valueConverted = unitMeasurementConverter.convertToCelsius($scope.sensor.unitMeasurementId, value);
         sensorChartLimiterService.setValue($scope.sensor.sensorChartLimiter.id, valueConverted, position);
     };
 
