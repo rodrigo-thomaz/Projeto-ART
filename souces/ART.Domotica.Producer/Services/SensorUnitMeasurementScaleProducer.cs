@@ -2,17 +2,17 @@
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
+using ART.Domotica.Producer.Interfaces;
+using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.Utils;
-using ART.Domotica.Constant.SI;
-using ART.Domotica.Producer.Interfaces.SI;
 
-namespace ART.Domotica.Producer.Services.SI
+namespace ART.Domotica.Producer.Services
 {
-    public class UnitMeasurementProducer : ProducerBase, IUnitMeasurementProducer
+    public class SensorUnitMeasurementScaleProducer : ProducerBase, ISensorUnitMeasurementScaleProducer
     {
         #region constructors
 
-        public UnitMeasurementProducer(IConnection connection) : base(connection)
+        public SensorUnitMeasurementScaleProducer(IConnection connection) : base(connection)
         {
             Initialize();
         }
@@ -26,7 +26,7 @@ namespace ART.Domotica.Producer.Services.SI
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", UnitMeasurementConstants.GetAllQueueName, null, payload);
+                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.GetAllQueueName, null, payload);
             });            
         }
 
@@ -37,7 +37,7 @@ namespace ART.Domotica.Producer.Services.SI
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: UnitMeasurementConstants.GetAllQueueName
+                  queue: SensorUnitMeasurementScaleConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

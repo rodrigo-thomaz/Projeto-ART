@@ -8,11 +8,11 @@ using ART.Domotica.Producer.Interfaces.SI;
 
 namespace ART.Domotica.Producer.Services.SI
 {
-    public class UnitMeasurementProducer : ProducerBase, IUnitMeasurementProducer
+    public class NumericalScaleProducer : ProducerBase, INumericalScaleProducer
     {
         #region constructors
 
-        public UnitMeasurementProducer(IConnection connection) : base(connection)
+        public NumericalScaleProducer(IConnection connection) : base(connection)
         {
             Initialize();
         }
@@ -26,7 +26,7 @@ namespace ART.Domotica.Producer.Services.SI
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", UnitMeasurementConstants.GetAllQueueName, null, payload);
+                _model.BasicPublish("", NumericalScaleConstants.GetAllQueueName, null, payload);
             });            
         }
 
@@ -37,7 +37,7 @@ namespace ART.Domotica.Producer.Services.SI
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: UnitMeasurementConstants.GetAllQueueName
+                  queue: NumericalScaleConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

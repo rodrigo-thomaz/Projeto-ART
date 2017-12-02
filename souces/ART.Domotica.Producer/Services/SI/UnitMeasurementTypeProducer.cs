@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
-using ART.Domotica.Producer.Interfaces;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Constant.SI;
 using ART.Domotica.Producer.Interfaces.SI;

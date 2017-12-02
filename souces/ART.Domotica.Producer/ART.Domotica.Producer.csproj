@@ -100,7 +100,15 @@
     <Compile Include="Services\SensorDatasheetProducer.cs" />
     <Compile Include="Services\SensorTypeProducer.cs" />
     <Compile Include="Services\SensorProducer.cs" />
+    <Compile Include="Services\SI\NumericalScaleProducer.cs" />
+    <Compile Include="Services\SI\NumericalScalePrefixProducer.cs" />
+    <Compile Include="Services\SI\NumericalScaleTypeProducer.cs" />
+    <Compile Include="Services\SI\NumericalScaleTypeCountryProducer.cs" />
+    <Compile Include="Services\SI\UnitMeasurementScaleProducer.cs" />
     <Compile Include="Services\SI\UnitMeasurementTypeProducer.cs" />
+    <Compile Include="Services\ContinentProducer.cs" />
+    <Compile Include="Services\CountryProducer.cs" />
+    <Compile Include="Services\SensorUnitMeasurementScaleProducer.cs" />
     <Compile Include="Services\TimeZoneProducer.cs" />
     <Compile Include="Services\SI\UnitMeasurementProducer.cs" />
   </ItemGroup>

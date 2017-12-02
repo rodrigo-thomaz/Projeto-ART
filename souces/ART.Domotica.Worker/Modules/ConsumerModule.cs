@@ -17,7 +17,7 @@
             builder.RegisterType<NumericalScaleConsumer>().As<INumericalScaleConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<NumericalScalePrefixConsumer>().As<INumericalScalePrefixConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<NumericalScaleTypeConsumer>().As<INumericalScaleTypeConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<NumericalScaleTypeCountryConsumer>().As<INumericalScaleTypeCountryConsumer>().SingleInstance().AutoActivate();            
+            builder.RegisterType<NumericalScaleTypeCountryConsumer>().As<INumericalScaleTypeCountryConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<UnitMeasurementConsumer>().As<IUnitMeasurementConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<UnitMeasurementTypeConsumer>().As<IUnitMeasurementTypeConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<UnitMeasurementScaleConsumer>().As<IUnitMeasurementScaleConsumer>().SingleInstance().AutoActivate();
@@ -39,7 +39,6 @@
             builder.RegisterType<SensorUnitMeasurementDefaultConsumer>().As<ISensorUnitMeasurementDefaultConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorUnitMeasurementScaleConsumer>().As<ISensorUnitMeasurementScaleConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<TimeZoneConsumer>().As<ITimeZoneConsumer>().SingleInstance().AutoActivate();
-                        
 
             //builder.RegisterType<ApplicationConsumer>()
             //    .As<IApplicationConsumer>()
