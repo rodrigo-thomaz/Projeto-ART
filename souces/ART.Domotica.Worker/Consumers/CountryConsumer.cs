@@ -9,15 +9,14 @@ using System.Collections.Generic;
 using Autofac;
 using AutoMapper;
 using ART.Infra.CrossCutting.Logging;
-using ART.Domotica.Repository.Entities.SI;
-using ART.Domotica.Domain.Interfaces.SI;
-using ART.Domotica.Constant.SI;
-using ART.Domotica.Model.SI;
-using ART.Domotica.Worker.IConsumers.SI;
+using ART.Domotica.Worker.IConsumers;
+using ART.Domotica.Repository.Entities;
+using ART.Domotica.Model;
+using ART.Domotica.Constant;
 
-namespace ART.Domotica.Worker.Consumers.SI
+namespace ART.Domotica.Worker.Consumers
 {
-    public class UnitMeasurementTypeConsumer : ConsumerBase, IUnitMeasurementTypeConsumer
+    public class CountryConsumer : ConsumerBase, ICountryConsumer
     {
         #region private fields
 
@@ -31,7 +30,7 @@ namespace ART.Domotica.Worker.Consumers.SI
 
         #region constructors
 
-        public UnitMeasurementTypeConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public CountryConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
 
@@ -56,7 +55,7 @@ namespace ART.Domotica.Worker.Consumers.SI
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: UnitMeasurementTypeConstants.GetAllQueueName
+                  queue: CountryConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
@@ -64,7 +63,7 @@ namespace ART.Domotica.Worker.Consumers.SI
 
             _getAllConsumer.Received += GetAllReceived;
 
-            _model.BasicConsume(UnitMeasurementTypeConstants.GetAllQueueName, false, _getAllConsumer);
+            _model.BasicConsume(CountryConstants.GetAllQueueName, false, _getAllConsumer);
         }
 
         public void GetAllReceived(object sender, BasicDeliverEventArgs e)
@@ -78,7 +77,7 @@ namespace ART.Domotica.Worker.Consumers.SI
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var domain = _componentContext.Resolve<IUnitMeasurementTypeDomain>();
+            var domain = _componentContext.Resolve<ICountryDomain>();
             var data = await domain.GetAll();
 
             var exchange = "amq.topic";
@@ -87,9 +86,9 @@ namespace ART.Domotica.Worker.Consumers.SI
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<UnitMeasurementType>, List<UnitMeasurementTypeDetailModel>>(data);
+            var viewModel = Mapper.Map<List<Country>, List<CountryDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, UnitMeasurementTypeConstants.GetAllCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, CountryConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

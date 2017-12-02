@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
-using ART.Domotica.Worker.IConsumers;
 using System.Collections.Generic;
 using ART.Domotica.IoTContract;
 using Autofac;
