@@ -185,6 +185,24 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
+    var mapper_NumericalScale_NumericalScalePrefix_Init = false;
+    var mapper_NumericalScale_NumericalScalePrefix = function () {
+        if (!mapper_NumericalScale_NumericalScalePrefix_Init && context.numericalScaleLoaded && context.numericalScalePrefixLoaded) {
+            mapper_NumericalScale_NumericalScalePrefix_Init = true;            
+            for (var i = 0; i < context.numericalScales.length; i++) {
+                var numericalScale = context.numericalScales[i];
+                var numericalScalePrefix = getNumericalScalePrefixByKey(numericalScale.numericalScalePrefixId);
+                numericalScale.numericalScalePrefix = numericalScalePrefix;
+                delete numericalScale.numericalScalePrefixId;
+                if (numericalScalePrefix.numericalScales === undefined) {
+                    numericalScalePrefix.numericalScales = [];
+                }
+                numericalScalePrefix.numericalScales.push(numericalScale);
+            }
+            
+        }
+    };
+
     // SI
 
     var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
@@ -269,11 +287,11 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     // SI
 
     context.$watch('numericalScaleLoaded', function (newValue, oldValue) {
-        
+        mapper_NumericalScale_NumericalScalePrefix();
     });
 
     context.$watch('numericalScalePrefixLoaded', function (newValue, oldValue) {
-        
+        mapper_NumericalScale_NumericalScalePrefix();
     });
 
     context.$watch('numericalScaleTypeLoaded', function (newValue, oldValue) {
