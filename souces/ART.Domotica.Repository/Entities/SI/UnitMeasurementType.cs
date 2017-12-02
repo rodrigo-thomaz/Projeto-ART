@@ -20,20 +20,10 @@
             get; set;
         }
 
-        public ICollection<Sensor> Sensors
-        {
-            get; set;
-        }
-
-        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
-        {
-            get; set;
-        }
-
         public ICollection<UnitMeasurement> UnitMeasurements
         {
             get; set;
-        }        
+        }
 
         #endregion Properties
     }

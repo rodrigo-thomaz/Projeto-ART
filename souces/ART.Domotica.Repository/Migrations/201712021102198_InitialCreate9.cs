@@ -2,18 +2,18 @@ namespace ART.Domotica.Repository.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    public partial class InitialCreate3 : DbMigration
+    public partial class InitialCreate9 : DbMigration
     {
         #region Methods
 
         public override void Down()
         {
-            AddForeignKey("dbo.SensorUnitMeasurementScale", "SensorTypeId", "dbo.SensorType", "Id");
+            AddForeignKey("dbo.Sensor", "UnitMeasurementTypeId", "SI.UnitMeasurementType", "Id");
         }
 
         public override void Up()
         {
-            DropForeignKey("dbo.SensorUnitMeasurementScale", "SensorTypeId", "dbo.SensorType");
+            DropForeignKey("dbo.Sensor", "UnitMeasurementTypeId", "SI.UnitMeasurementType");
         }
 
         #endregion Methods

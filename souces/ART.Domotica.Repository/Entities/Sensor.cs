@@ -61,11 +61,6 @@
             get; set;
         }
 
-        public UnitMeasurementType UnitMeasurementType
-        {
-            get; set;
-        }
-
         public UnitMeasurementTypeEnum UnitMeasurementTypeId
         {
             get; protected set;

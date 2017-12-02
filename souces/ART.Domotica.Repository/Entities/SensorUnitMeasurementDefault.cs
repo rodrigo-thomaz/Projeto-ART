@@ -24,17 +24,7 @@
             get; set;
         }
 
-        public NumericalScalePrefix NumericalScalePrefix
-        {
-            get; set;
-        }
-
         public NumericalScalePrefixEnum NumericalScalePrefixId
-        {
-            get; set;
-        }
-
-        public NumericalScaleType NumericalScaleType
         {
             get; set;
         }
@@ -49,17 +39,7 @@
             get; set;
         }
 
-        public SensorType SensorType
-        {
-            get; set;
-        }
-
         public SensorTypeEnum SensorTypeId
-        {
-            get; set;
-        }
-
-        public UnitMeasurement UnitMeasurement
         {
             get; set;
         }
@@ -70,11 +50,6 @@
         }
 
         public UnitMeasurementScale UnitMeasurementScale
-        {
-            get; set;
-        }
-
-        public UnitMeasurementType UnitMeasurementType
         {
             get; set;
         }

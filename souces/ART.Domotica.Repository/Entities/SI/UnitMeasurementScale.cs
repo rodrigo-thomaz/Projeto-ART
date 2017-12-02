@@ -13,14 +13,10 @@
             get; set;
         }
 
-        
-
         public NumericalScalePrefixEnum NumericalScalePrefixId
         {
             get; set;
         }
-
-        
 
         public NumericalScaleTypeEnum NumericalScaleTypeId
         {
@@ -45,7 +41,7 @@
         public UnitMeasurementEnum UnitMeasurementId
         {
             get; set;
-        }        
+        }
 
         public UnitMeasurementTypeEnum UnitMeasurementTypeId
         {

@@ -30,12 +30,6 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //SensorType
-            HasRequired(x => x.SensorType)
-                .WithMany(x => x.SensorUnitMeasurementDefaults)
-                .HasForeignKey(x => x.SensorTypeId)
-                .WillCascadeOnDelete(false);
-
             //SensorDatasheet
             HasRequired(x => x.SensorDatasheet)
                .WithRequiredDependent(x => x.SensorUnitMeasurementDefault);
@@ -74,34 +68,6 @@
                     x.NumericalScalePrefixId,
                     x.NumericalScaleTypeId,
                 })
-                .WillCascadeOnDelete(false);
-
-            //UnitMeasurement
-            HasRequired(x => x.UnitMeasurement)
-                .WithMany(x => x.SensorUnitMeasurementDefaults)
-                .HasForeignKey(x => new
-                {
-                    x.UnitMeasurementId,
-                    x.UnitMeasurementTypeId,
-                })
-                .WillCascadeOnDelete(false);
-
-            //UnitMeasurementType
-            HasRequired(x => x.UnitMeasurementType)
-                .WithMany(x => x.SensorUnitMeasurementDefaults)
-                .HasForeignKey(x => x.UnitMeasurementTypeId)
-                .WillCascadeOnDelete(false);
-
-            //NumericalScalePrefix
-            HasRequired(x => x.NumericalScalePrefix)
-                .WithMany(x => x.SensorUnitMeasurementDefaults)
-                .HasForeignKey(x => x.NumericalScalePrefixId)
-                .WillCascadeOnDelete(false);
-
-            //NumericalScaleType
-            HasRequired(x => x.NumericalScaleType)
-                .WithMany(x => x.SensorUnitMeasurementDefaults)
-                .HasForeignKey(x => x.NumericalScaleTypeId)
                 .WillCascadeOnDelete(false);
 
             //Min

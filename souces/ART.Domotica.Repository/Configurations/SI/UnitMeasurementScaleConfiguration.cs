@@ -42,7 +42,7 @@
                     x.UnitMeasurementId,
                     x.UnitMeasurementTypeId,
                 })
-                .WillCascadeOnDelete(false);           
+                .WillCascadeOnDelete(false);
 
             //NumericalScalePrefixId
             Property(x => x.NumericalScalePrefixId)
@@ -64,7 +64,7 @@
                     x.NumericalScalePrefixId,
                     x.NumericalScaleTypeId,
                 })
-                .WillCascadeOnDelete(false);  
+                .WillCascadeOnDelete(false);
         }
 
         #endregion Constructors
