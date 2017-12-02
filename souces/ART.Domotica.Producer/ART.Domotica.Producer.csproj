@@ -73,6 +73,14 @@
     <Compile Include="Interfaces\ISensorDatasheetProducer.cs" />
     <Compile Include="Interfaces\ISensorTypeProducer.cs" />
     <Compile Include="Interfaces\ISensorProducer.cs" />
+    <Compile Include="Interfaces\IContinentProducer.cs" />
+    <Compile Include="Interfaces\ICountryProducer.cs" />
+    <Compile Include="Interfaces\ISensorUnitMeasurementScaleProducer.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleProducer.cs" />
+    <Compile Include="Interfaces\SI\INumericalScalePrefixProducer.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleTypeProducer.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleTypeCountryProducer.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementScaleProducer.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeProducer.cs" />
     <Compile Include="Interfaces\ITimeZoneProducer.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementProducer.cs" />
