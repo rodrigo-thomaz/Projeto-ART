@@ -145,6 +145,11 @@
             get; set;
         }
 
+        public DbSet<SensorUnitMeasurementScale> SensorUnitMeasurementScale
+        {
+            get; set;
+        }
+
         public DbSet<TimeZone> TimeZone
         {
             get; set;
@@ -206,6 +211,7 @@
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
             modelBuilder.Configurations.Add(new SensorTypeConfiguration());
             modelBuilder.Configurations.Add(new SensorUnitMeasurementDefaultConfiguration());
+            modelBuilder.Configurations.Add(new SensorUnitMeasurementScaleConfiguration());
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
             modelBuilder.Configurations.Add(new UnitMeasurementConfiguration());
             modelBuilder.Configurations.Add(new UnitMeasurementScaleConfiguration());

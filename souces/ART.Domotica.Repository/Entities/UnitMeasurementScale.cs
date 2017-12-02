@@ -1,16 +1,12 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using ART.Domotica.Enums;
     using System.Collections.Generic;
+
+    using ART.Domotica.Enums;
 
     public class UnitMeasurementScale
     {
         #region Properties
-
-        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
-        {
-            get; set;
-        }
 
         public NumericalScale NumericalScale
         {
@@ -33,6 +29,11 @@
         }
 
         public NumericalScaleTypeEnum NumericalScaleTypeId
+        {
+            get; set;
+        }
+
+        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
         {
             get; set;
         }

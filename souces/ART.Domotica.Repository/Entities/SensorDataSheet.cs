@@ -1,5 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using System.Collections.Generic;
+
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
@@ -23,6 +25,11 @@
         }
 
         public SensorUnitMeasurementDefault SensorUnitMeasurementDefault
+        {
+            get; set;
+        }
+
+        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
         {
             get; set;
         }

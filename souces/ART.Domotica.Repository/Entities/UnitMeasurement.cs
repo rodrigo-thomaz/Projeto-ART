@@ -34,6 +34,11 @@
             get; set;
         }
 
+        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
+        {
+            get; set;
+        }
+
         public string Symbol
         {
             get; set;

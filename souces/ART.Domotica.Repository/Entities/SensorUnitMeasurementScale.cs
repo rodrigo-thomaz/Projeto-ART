@@ -1,23 +1,12 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using ART.Domotica.Enums;
-    using ART.Infra.CrossCutting.Repository;
 
-    public class SensorUnitMeasurementDefault : IEntity<SensorDatasheetEnum>
+    public class SensorUnitMeasurementScale
     {
         #region Properties
 
-        public SensorDatasheetEnum Id
-        {
-            get; set;
-        }
-
-        public decimal Max
-        {
-            get; set;
-        }
-
-        public decimal Min
+        public NumericalScale NumericalScale
         {
             get; set;
         }
@@ -47,6 +36,11 @@
             get; set;
         }
 
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
         public SensorType SensorType
         {
             get; set;
@@ -63,11 +57,6 @@
         }
 
         public UnitMeasurementEnum UnitMeasurementId
-        {
-            get; set;
-        }
-
-        public UnitMeasurementScale UnitMeasurementScale
         {
             get; set;
         }

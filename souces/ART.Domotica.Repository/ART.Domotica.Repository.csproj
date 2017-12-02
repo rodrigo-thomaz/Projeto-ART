@@ -85,6 +85,7 @@
     <Compile Include="Configurations\RaspberryDeviceConfiguration.cs" />
     <Compile Include="Configurations\SensorConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
+    <Compile Include="Configurations\SensorUnitMeasurementScaleConfiguration.cs" />
     <Compile Include="Configurations\UnitMeasurementConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\SensorRangeConfiguration.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Entities\TimeZone.cs" />
     <Compile Include="Entities\NumericalScalePrefix.cs" />
     <Compile Include="Entities\NumericalScale.cs" />
+    <Compile Include="Entities\SensorUnitMeasurementScale.cs" />
     <Compile Include="Entities\UnitMeasurementScale.cs" />
     <Compile Include="Entities\UnitMeasurementType.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
@@ -150,6 +152,10 @@
     <Compile Include="Migrations\201712012309290_InitialCreate.cs" />
     <Compile Include="Migrations\201712012309290_InitialCreate.Designer.cs">
       <DependentUpon>201712012309290_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712020843260_InitialCreate1.cs" />
+    <Compile Include="Migrations\201712020843260_InitialCreate1.Designer.cs">
+      <DependentUpon>201712020843260_InitialCreate1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -225,6 +231,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712012309290_InitialCreate.resx">
       <DependentUpon>201712012309290_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712020843260_InitialCreate1.resx">
+      <DependentUpon>201712020843260_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
