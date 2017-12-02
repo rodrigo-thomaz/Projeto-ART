@@ -112,7 +112,15 @@
     <Compile Include="AutoMapper\SensorDatasheetProfile.cs" />
     <Compile Include="AutoMapper\SensorTypeProfile.cs" />
     <Compile Include="AutoMapper\SensorProfile.cs" />
+    <Compile Include="AutoMapper\SI\NumericalScaleProfile.cs" />
+    <Compile Include="AutoMapper\SI\NumericalScalePrefixProfile.cs" />
+    <Compile Include="AutoMapper\SI\NumericalScaleTypeProfile.cs" />
+    <Compile Include="AutoMapper\SI\NumericalScaleTypeCountryProfile.cs" />
+    <Compile Include="AutoMapper\SI\UnitMeasurementScaleProfile.cs" />
     <Compile Include="AutoMapper\SI\UnitMeasurementTypeProfile.cs" />
+    <Compile Include="AutoMapper\ContinentProfile.cs" />
+    <Compile Include="AutoMapper\CountryProfile.cs" />
+    <Compile Include="AutoMapper\SensorUnitMeasurementScaleProfile.cs" />
     <Compile Include="AutoMapper\TimeZoneProfile.cs" />
     <Compile Include="AutoMapper\SI\UnitMeasurementProfile.cs" />
     <Compile Include="AutoMapper\SensorRangeProfile.cs" />

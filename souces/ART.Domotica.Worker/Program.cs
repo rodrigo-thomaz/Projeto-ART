@@ -6,6 +6,7 @@
     using ART.Domotica.Domain;
     using ART.Domotica.Repository;
     using ART.Domotica.Worker.AutoMapper;
+    using ART.Domotica.Worker.AutoMapper.SI;
     using ART.Domotica.Worker.Jobs;
     using ART.Domotica.Worker.Modules;
     using ART.Infra.CrossCutting.Logging;
@@ -23,7 +24,6 @@
     using Topshelf;
     using Topshelf.Autofac;
     using Topshelf.Quartz;
-    using ART.Domotica.Worker.AutoMapper.SI;
 
     class Program
     {
@@ -54,9 +54,20 @@
 
             Mapper.Initialize(x =>
             {
+                //SI
+                x.AddProfile(new NumericalScalePrefixProfile());
+                x.AddProfile(new NumericalScaleProfile());
+                x.AddProfile(new NumericalScaleTypeCountryProfile());
+                x.AddProfile(new NumericalScaleTypeProfile());
+                x.AddProfile(new UnitMeasurementProfile());
+                x.AddProfile(new UnitMeasurementScaleProfile());
+                x.AddProfile(new UnitMeasurementTypeProfile());
+
                 x.AddProfile(new ApplicationMQProfile());
                 x.AddProfile(new ApplicationProfile());
                 x.AddProfile(new ApplicationUserProfile());
+                x.AddProfile(new ContinentProfile());
+                x.AddProfile(new CountryProfile());
                 x.AddProfile(new DeviceMQProfile());
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
@@ -68,9 +79,8 @@
                 x.AddProfile(new SensorTriggerProfile());
                 x.AddProfile(new SensorTypeProfile());
                 x.AddProfile(new SensorUnitMeasurementDefaultProfile());
+                x.AddProfile(new SensorUnitMeasurementScaleProfile());
                 x.AddProfile(new TimeZoneProfile());
-                x.AddProfile(new UnitMeasurementProfile());
-                x.AddProfile(new UnitMeasurementTypeProfile());
             });
 
             IContainer container = builder.Build();
