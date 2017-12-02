@@ -48,12 +48,24 @@ angular.module('app')
 
                       'js/services/contextScope.js',
 
+                      //Locale
+                      'js/services/continentService.js',
+                      'js/services/countryService.js',
+
+                      //SI
+                      'js/services/si/numericalScaleService.js',
+                      'js/services/si/numericalScalePrefixService.js',
+                      'js/services/si/numericalScaleTypeService.js',
+                      'js/services/si/numericalScaleTypeCountryService.js',
+
+                      'js/services/si/unitMeasurementScaleService.js',
                       'js/services/si/unitMeasurementTypeService.js',
                       'js/services/si/unitMeasurementService.js',
                       'js/services/si/unitMeasurementConverter.js',
-
+                      
                       'js/services/sensorTypeService.js',                      
                       'js/services/sensorDatasheetService.js',                      
+                      'js/services/sensorUnitMeasurementScaleService.js',
                       'js/services/sensorUnitMeasurementDefaultService.js',
                       'js/services/sensorService.js',
                                             

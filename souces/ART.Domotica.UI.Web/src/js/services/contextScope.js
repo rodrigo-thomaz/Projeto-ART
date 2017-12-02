@@ -5,11 +5,38 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     // Public Properties
 
+    // Locale
+
+    context.continents = [];    
+    context.continentLoaded = false;    
+
+    context.countries = [];    
+    context.countryLoaded = false;    
+
+    //SI
+
+    context.numericalScales = [];    
+    context.numericalScaleLoaded = false;
+
+    context.numericalScalePrefixes = [];    
+    context.numericalScalePrefixLoaded = false;    
+
+    context.numericalScaleTypes = [];    
+    context.numericalScaleTypeLoaded = false;    
+
+    context.numericalScaleTypeCountries = []; 
+    context.numericalScaleTypeCountryLoaded = false;    
+    
+    context.unitMeasurementScales = [];
+    context.unitMeasurementScaleLoaded = [];
+
     context.unitMeasurementTypeLoaded = false;
     context.unitMeasurementTypes = [];    
 
     context.unitMeasurementLoaded = false;
     context.unitMeasurements = [];
+
+    //
 
     context.sensorTypeLoaded = false;
     context.sensorTypes = [];

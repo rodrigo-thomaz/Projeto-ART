@@ -1,5 +1,25 @@
 ﻿'use strict';
-app.controller('espDeviceListController', ['$scope', '$timeout', '$log', 'espDeviceService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorTypeService', 'sensorDatasheetService', 'sensorUnitMeasurementDefaultService', 'sensorService',  function ($scope, $timeout, $log, espDeviceService) {    
+app.controller('espDeviceListController', [
+    '$scope',
+    '$timeout',
+    '$log',
+    'espDeviceService',
+    'continentService',
+    'countryService',
+    'numericalScaleService',
+    'numericalScalePrefixService',
+    'numericalScaleTypeService',
+    'numericalScaleTypeCountryService',
+    'unitMeasurementScaleService',
+    'unitMeasurementConverter',
+    'unitMeasurementTypeService',
+    'unitMeasurementService',
+    'sensorTypeService',
+    'sensorDatasheetService',
+    'sensorUnitMeasurementScaleService',
+    'sensorUnitMeasurementDefaultService',
+    'sensorService',
+    function ($scope, $timeout, $log, espDeviceService) {    
    
     $scope.devices = espDeviceService.devices;    
 
