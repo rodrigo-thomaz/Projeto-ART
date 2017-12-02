@@ -23,7 +23,7 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', '$rootScope', 
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/unitMeasurement/getAll').then(function (results) {
+        return $http.post(serviceBase + 'api/si/unitMeasurement/getAll').then(function (results) {
             //alert('envio bem sucedido');
         });
     };        
