@@ -14,6 +14,7 @@ using ART.Domotica.Model;
 using ART.Infra.CrossCutting.Logging;
 using ART.Domotica.Repository.Entities.SI;
 using ART.Domotica.Domain.Interfaces.SI;
+using ART.Domotica.Constant.SI;
 
 namespace ART.Domotica.Worker.Consumers
 {

@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Constant
+﻿namespace ART.Domotica.Constant.SI
 {
     public static class UnitMeasurementTypeConstants
     {

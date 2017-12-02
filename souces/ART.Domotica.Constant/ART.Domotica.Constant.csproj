@@ -54,9 +54,9 @@
     <Compile Include="SensorDatasheetConstants.cs" />
     <Compile Include="SensorTypeConstants.cs" />
     <Compile Include="SensorConstants.cs" />
-    <Compile Include="UnitMeasurementTypeConstants.cs" />
+    <Compile Include="SI\UnitMeasurementTypeConstants.cs" />
     <Compile Include="TimeZoneConstants.cs" />
-    <Compile Include="UnitMeasurementConstants.cs" />
+    <Compile Include="SI\UnitMeasurementConstants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
