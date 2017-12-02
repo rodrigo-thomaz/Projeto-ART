@@ -1,15 +1,15 @@
-﻿namespace ART.Domotica.Domain.Interfaces
+﻿namespace ART.Domotica.Domain.Interfaces.SI
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities.SI;
 
-    public interface IUnitMeasurementDomain
+    public interface IUnitMeasurementTypeDomain
     {
         #region Methods
 
-        Task<List<UnitMeasurement>> GetAll();
+        Task<List<UnitMeasurementType>> GetAll();
 
         #endregion Methods
     }

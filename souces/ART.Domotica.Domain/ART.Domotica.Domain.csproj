@@ -77,8 +77,8 @@
     <Compile Include="Interfaces\ISensorDatasheetDomain.cs" />
     <Compile Include="Interfaces\ITimeZoneDomain.cs" />
     <Compile Include="Interfaces\ISensorUnitMeasurementDefaultDomain.cs" />
-    <Compile Include="Interfaces\IUnitMeasurementDomain.cs" />
-    <Compile Include="Interfaces\IUnitMeasurementTypeDomain.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementDomain.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementTypeDomain.cs" />
     <Compile Include="Services\ApplicationMQDomain.cs" />
     <Compile Include="Services\DeviceNTPDomain.cs" />
     <Compile Include="Services\DeviceMQDomain.cs" />
@@ -97,8 +97,8 @@
     <Compile Include="Services\SensorDatasheetDomain.cs" />
     <Compile Include="Services\SensorUnitMeasurementDefaultDomain.cs" />
     <Compile Include="Services\TimeZoneDomain.cs" />
-    <Compile Include="Services\UnitMeasurementDomain.cs" />
-    <Compile Include="Services\UnitMeasurementTypeDomain.cs" />
+    <Compile Include="Services\SI\UnitMeasurementDomain.cs" />
+    <Compile Include="Services\SI\UnitMeasurementTypeDomain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

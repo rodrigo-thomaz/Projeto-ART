@@ -1,11 +1,12 @@
 ﻿using ART.Domotica.Domain.Interfaces;
+using ART.Domotica.Domain.Interfaces.SI;
 using ART.Domotica.Repository.Entities.SI;
 using ART.Domotica.Repository.Interfaces.SI;
 using ART.Infra.CrossCutting.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ART.Domotica.Domain.Services
+namespace ART.Domotica.Domain.Services.SI
 {
     public class UnitMeasurementTypeDomain : DomainBase, IUnitMeasurementTypeDomain
     {
