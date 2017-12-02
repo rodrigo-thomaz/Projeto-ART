@@ -17,7 +17,7 @@ using ART.Domotica.Constant.SI;
 using ART.Domotica.Model.SI;
 using ART.Domotica.Worker.IConsumers.SI;
 
-namespace ART.Domotica.Worker.Consumers
+namespace ART.Domotica.Worker.Consumers.SI
 {
     public class UnitMeasurementConsumer : ConsumerBase, IUnitMeasurementConsumer
     {

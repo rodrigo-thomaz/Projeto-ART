@@ -133,7 +133,7 @@
     <Compile Include="Consumers\SensorDatasheetConsumer.cs" />
     <Compile Include="Consumers\SensorTypeConsumer.cs" />
     <Compile Include="Consumers\SensorConsumer.cs" />
-    <Compile Include="Consumers\UnitMeasurementTypeConsumer.cs" />
+    <Compile Include="Consumers\SI\UnitMeasurementTypeConsumer.cs" />
     <Compile Include="Consumers\TimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IApplicationMQConsumer.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
@@ -162,7 +162,7 @@
     <Compile Include="Consumers\ESPDeviceConsumer.cs" />
     <Compile Include="Consumers\ApplicationConsumer.cs" />
     <Compile Include="Consumers\ApplicationUserConsumer.cs" />
-    <Compile Include="Consumers\UnitMeasurementConsumer.cs" />
+    <Compile Include="Consumers\SI\UnitMeasurementConsumer.cs" />
     <Compile Include="Consumers\DSFamilyTempSensorConsumer.cs" />
     <Compile Include="Jobs\UpdatePinJob.cs" />
     <Compile Include="Modules\ConsumerModule.cs" />
