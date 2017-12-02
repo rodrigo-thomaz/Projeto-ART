@@ -54,6 +54,11 @@
     <Compile Include="SensorDatasheetConstants.cs" />
     <Compile Include="SensorTypeConstants.cs" />
     <Compile Include="SensorConstants.cs" />
+    <Compile Include="SI\NumericalScaleConstants.cs" />
+    <Compile Include="SI\NumericalScalePrefixConstants.cs" />
+    <Compile Include="SI\NumericalScaleTypeConstants.cs" />
+    <Compile Include="SI\NumericalScaleTypeCountryConstants.cs" />
+    <Compile Include="SI\UnitMeasurementScaleConstants.cs" />
     <Compile Include="SI\UnitMeasurementTypeConstants.cs" />
     <Compile Include="TimeZoneConstants.cs" />
     <Compile Include="SI\UnitMeasurementConstants.cs" />

@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string GetAllCompletedQueueName = "UnitMeasurementType.GetAllViewCompleted";
-        public static readonly string GetAllQueueName = "UnitMeasurementType.GetAll";
+        public static readonly string GetAllCompletedQueueName = "SI.UnitMeasurementType.GetAllViewCompleted";
+        public static readonly string GetAllQueueName = "SI.UnitMeasurementType.GetAll";
 
         #endregion Fields
     }

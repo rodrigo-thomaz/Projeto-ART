@@ -4,10 +4,10 @@
     {
         #region Fields
 
-        public static readonly string GetAllCompletedQueueName = "UnitMeasurement.GetAllViewCompleted";
-        public static readonly string GetAllForIoTCompletedQueueName = "UnitMeasurement.GetAllForIoTCompleted";
-        public static readonly string GetAllForIoTQueueName = "UnitMeasurement.GetAllForIoT";
-        public static readonly string GetAllQueueName = "UnitMeasurement.GetAll";
+        public static readonly string GetAllCompletedQueueName = "SI.UnitMeasurement.GetAllViewCompleted";
+        public static readonly string GetAllForIoTCompletedQueueName = "SI.UnitMeasurement.GetAllForIoTCompleted";
+        public static readonly string GetAllForIoTQueueName = "SI.UnitMeasurement.GetAllForIoT";
+        public static readonly string GetAllQueueName = "SI.UnitMeasurement.GetAll";
 
         #endregion Fields
     }
