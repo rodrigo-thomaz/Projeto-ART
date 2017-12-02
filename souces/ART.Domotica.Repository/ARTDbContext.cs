@@ -6,6 +6,7 @@
     using ART.Domotica.Repository.Configurations;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Entities.SI;
+    using ART.Domotica.Repository.Configurations.SI;
 
     public class ARTDbContext : DbContext
     {
@@ -183,6 +184,15 @@
 
             //Configurations
 
+            //SI
+            modelBuilder.Configurations.Add(new NumericalScaleTypeConfiguration());
+            modelBuilder.Configurations.Add(new NumericalScaleTypeCountryConfiguration());
+            modelBuilder.Configurations.Add(new NumericalScalePrefixConfiguration());
+            modelBuilder.Configurations.Add(new NumericalScaleConfiguration());
+            modelBuilder.Configurations.Add(new UnitMeasurementConfiguration());
+            modelBuilder.Configurations.Add(new UnitMeasurementScaleConfiguration());
+            modelBuilder.Configurations.Add(new UnitMeasurementTypeConfiguration());
+
             modelBuilder.Configurations.Add(new ActuatorTypeConfiguration());
             modelBuilder.Configurations.Add(new ApplicationConfiguration());
             modelBuilder.Configurations.Add(new ApplicationMQConfiguration());
@@ -197,11 +207,7 @@
             modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());
             modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
-            modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScaleTypeConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScaleTypeCountryConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScalePrefixConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScaleConfiguration());
+            modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());            
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
             modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());
@@ -214,9 +220,6 @@
             modelBuilder.Configurations.Add(new SensorUnitMeasurementDefaultConfiguration());
             modelBuilder.Configurations.Add(new SensorUnitMeasurementScaleConfiguration());
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
-            modelBuilder.Configurations.Add(new UnitMeasurementConfiguration());
-            modelBuilder.Configurations.Add(new UnitMeasurementScaleConfiguration());
-            modelBuilder.Configurations.Add(new UnitMeasurementTypeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
