@@ -23,6 +23,7 @@
     using Topshelf;
     using Topshelf.Autofac;
     using Topshelf.Quartz;
+    using ART.Domotica.Worker.AutoMapper.SI;
 
     class Program
     {

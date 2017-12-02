@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Worker.AutoMapper
+﻿namespace ART.Domotica.Worker.AutoMapper.SI
 {
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model.SI;
