@@ -102,7 +102,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     }
 
     var getNumericalScalePrefixByKey = function (numericalScalePrefixId) {
-        for (var i = 0; i < context.unitMeasurements.length; i++) {
+        for (var i = 0; i < context.numericalScalePrefixes.length; i++) {
             var item = context.numericalScalePrefixes[i];
             if (item.numericalScalePrefixId === numericalScalePrefixId) {
                 return item;
