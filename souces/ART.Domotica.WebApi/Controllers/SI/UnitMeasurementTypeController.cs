@@ -6,7 +6,7 @@ using ART.Domotica.Producer.Interfaces.SI;
 namespace ART.Domotica.WebApi.Controllers.SI
 {
     [Authorize]
-    [RoutePrefix("api/unitMeasurementType")]    
+    [RoutePrefix("api/si/unitMeasurementType")]    
     public class UnitMeasurementTypeController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields

@@ -149,6 +149,14 @@
     <Compile Include="Controllers\SensorDatasheetController.cs" />
     <Compile Include="Controllers\SensorTypeController.cs" />
     <Compile Include="Controllers\SensorController.cs" />
+    <Compile Include="Controllers\ContinentController.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\SI\NumericalScaleController.cs" />
+    <Compile Include="Controllers\SI\NumericalScalePrefixController.cs" />
+    <Compile Include="Controllers\SI\NumericalScaleTypeController.cs" />
+    <Compile Include="Controllers\SI\NumericalScaleTypeCountryController.cs" />
+    <Compile Include="Controllers\SensorUnitMeasurementScaleController.cs" />
+    <Compile Include="Controllers\SI\UnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementTypeController.cs" />
     <Compile Include="Controllers\TimeZoneController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementController.cs" />

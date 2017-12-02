@@ -2,24 +2,25 @@
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.WebApi;
 using ART.Domotica.Producer.Interfaces.SI;
+using ART.Domotica.Producer.Interfaces;
 
-namespace ART.Domotica.WebApi.Controllers.SI
+namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/si/unitMeasurement")]    
-    public class UnitMeasurementController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/sensorUnitMeasurementScale")]    
+    public class SensorUnitMeasurementScaleController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly IUnitMeasurementProducer _unitMeasurementProducer;
+        protected readonly ISensorUnitMeasurementScaleProducer _sensorUnitMeasurementScaleProducer;
 
         #endregion
 
         #region constructors
 
-        public UnitMeasurementController(IUnitMeasurementProducer unitMeasurementProducer) //: base(connection)
+        public SensorUnitMeasurementScaleController(ISensorUnitMeasurementScaleProducer sensorUnitMeasurementScaleProducer) 
         {
-            _unitMeasurementProducer = unitMeasurementProducer;
+            _sensorUnitMeasurementScaleProducer = sensorUnitMeasurementScaleProducer;
         }
 
         #endregion
@@ -27,10 +28,10 @@ namespace ART.Domotica.WebApi.Controllers.SI
         #region public voids
 
         /// <summary>
-        /// Retornar uma lista de escalas
+        /// Retornar uma lista de escalas do sensor
         /// </summary>        
         /// <remarks>
-        /// Retornar uma lista de escalas
+        /// Retornar uma lista de escalas do sensor
         /// </remarks>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
@@ -40,7 +41,7 @@ namespace ART.Domotica.WebApi.Controllers.SI
         [HttpPost]
         public async Task<IHttpActionResult> GetAll()
         {           
-            await _unitMeasurementProducer.GetAll(CreateMessage());
+            await _sensorUnitMeasurementScaleProducer.GetAll(CreateMessage());
             return Ok();
         }
 

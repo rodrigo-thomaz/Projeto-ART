@@ -6,20 +6,20 @@ using ART.Domotica.Producer.Interfaces.SI;
 namespace ART.Domotica.WebApi.Controllers.SI
 {
     [Authorize]
-    [RoutePrefix("api/si/unitMeasurement")]    
-    public class UnitMeasurementController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/si/numericalScale")]    
+    public class NumericalScaleController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly IUnitMeasurementProducer _unitMeasurementProducer;
+        protected readonly INumericalScaleProducer _numericalScaleProducer;
 
         #endregion
 
         #region constructors
 
-        public UnitMeasurementController(IUnitMeasurementProducer unitMeasurementProducer) //: base(connection)
+        public NumericalScaleController(INumericalScaleProducer numericalScaleProducer) 
         {
-            _unitMeasurementProducer = unitMeasurementProducer;
+            _numericalScaleProducer = numericalScaleProducer;
         }
 
         #endregion
@@ -27,10 +27,10 @@ namespace ART.Domotica.WebApi.Controllers.SI
         #region public voids
 
         /// <summary>
-        /// Retornar uma lista de escalas
+        /// Retornar uma lista de escalas numéricas
         /// </summary>        
         /// <remarks>
-        /// Retornar uma lista de escalas
+        /// Retornar uma lista de escalas numéricas
         /// </remarks>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
@@ -40,7 +40,7 @@ namespace ART.Domotica.WebApi.Controllers.SI
         [HttpPost]
         public async Task<IHttpActionResult> GetAll()
         {           
-            await _unitMeasurementProducer.GetAll(CreateMessage());
+            await _numericalScaleProducer.GetAll(CreateMessage());
             return Ok();
         }
 
