@@ -133,6 +133,24 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     // *** Navigation Properties Mappers ***
 
+    // Locale
+
+    var mapper_Country_Continent_Init = false;
+    var mapper_Country_Continent = function () {
+        if (!mapper_Country_Continent_Init && context.continentLoaded && context.countryLoaded) {
+            mapper_Country_Continent_Init = true;
+            for (var i = 0; i < context.countries.length; i++) {
+                var country = context.countries[i];
+                var continent = getContinentByKey(country.continentId);
+                country.continent = continent;
+                if (continent.countries === undefined) {
+                    continent.countries = [];
+                }
+                continent.countries.push(country);
+            }
+        }
+    };
+
     // SI
 
     var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
@@ -206,11 +224,11 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     // Locale
 
     context.$watch('continentLoaded', function (newValue, oldValue) {
-
+        mapper_Country_Continent();
     });
 
     context.$watch('countryLoaded', function (newValue, oldValue) {
-
+        mapper_Country_Continent();
     });
 
     // SI
