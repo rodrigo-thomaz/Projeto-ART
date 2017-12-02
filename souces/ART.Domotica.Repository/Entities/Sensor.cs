@@ -4,6 +4,7 @@
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
+    using ART.Domotica.Repository.Entities.SI;
     using ART.Infra.CrossCutting.Repository;
 
     public abstract class Sensor : IEntity<Guid>

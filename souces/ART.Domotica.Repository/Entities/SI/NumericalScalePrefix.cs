@@ -1,44 +1,40 @@
-﻿namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities.SI
 {
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
 
-    public class NumericalScale
+    public class NumericalScalePrefix : IEntity<NumericalScalePrefixEnum>
     {
         #region Properties
+
+        public NumericalScalePrefixEnum Id
+        {
+            get; set;
+        }
 
         public string Name
         {
             get; set;
         }
 
-        public NumericalScalePrefix NumericalScalePrefix
+        public ICollection<NumericalScale> NumericalScales
         {
             get; set;
         }
 
-        public NumericalScalePrefixEnum NumericalScalePrefixId
+        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
         {
             get; set;
         }
 
-        public NumericalScaleType NumericalScaleType
+        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
         {
             get; set;
         }
 
-        public NumericalScaleTypeEnum NumericalScaleTypeId
-        {
-            get; set;
-        }
-
-        public decimal ScientificNotationBase
-        {
-            get; set;
-        }
-
-        public decimal ScientificNotationExponent
+        public string Symbol
         {
             get; set;
         }

@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Enums;
-    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Entities.SI;
 
     public interface IUnitMeasurementRepository
     {

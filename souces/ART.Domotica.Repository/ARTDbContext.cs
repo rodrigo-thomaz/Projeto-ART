@@ -5,6 +5,7 @@
 
     using ART.Domotica.Repository.Configurations;
     using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Entities.SI;
 
     public class ARTDbContext : DbContext
     {

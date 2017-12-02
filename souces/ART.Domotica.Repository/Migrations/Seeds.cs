@@ -12,6 +12,7 @@
     using ART.Domotica.Constant;
     using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Entities.SI;
     using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.Setting;
     using ART.Infra.CrossCutting.Utils;

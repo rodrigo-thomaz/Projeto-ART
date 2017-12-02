@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using ART.Domotica.Enums;
+    using ART.Domotica.Repository.Entities.SI;
     using ART.Infra.CrossCutting.Repository;
 
     public class SensorUnitMeasurementDefault : IEntity<SensorDatasheetEnum>

@@ -1,15 +1,16 @@
-﻿namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities.SI
 {
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public class NumericalScalePrefix : IEntity<NumericalScalePrefixEnum>
+    // https://pt.wikipedia.org/wiki/Unidade_de_medida
+    public class UnitMeasurementType : IEntity<UnitMeasurementTypeEnum>
     {
         #region Properties
 
-        public NumericalScalePrefixEnum Id
+        public UnitMeasurementTypeEnum Id
         {
             get; set;
         }
@@ -19,7 +20,7 @@
             get; set;
         }
 
-        public ICollection<NumericalScale> NumericalScales
+        public ICollection<Sensor> Sensors
         {
             get; set;
         }
@@ -34,7 +35,7 @@
             get; set;
         }
 
-        public string Symbol
+        public ICollection<UnitMeasurement> UnitMeasurements
         {
             get; set;
         }

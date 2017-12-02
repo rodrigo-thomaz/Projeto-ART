@@ -11,9 +11,9 @@ using System.Collections.Generic;
 using ART.Domotica.IoTContract;
 using Autofac;
 using AutoMapper;
-using ART.Domotica.Repository.Entities;
 using ART.Domotica.Model;
 using ART.Infra.CrossCutting.Logging;
+using ART.Domotica.Repository.Entities.SI;
 
 namespace ART.Domotica.Worker.Consumers
 {

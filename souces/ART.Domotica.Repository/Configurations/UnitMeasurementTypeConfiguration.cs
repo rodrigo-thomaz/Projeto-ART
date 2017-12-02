@@ -4,7 +4,7 @@
     using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
-    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Entities.SI;
 
     public class UnitMeasurementTypeConfiguration : EntityTypeConfiguration<UnitMeasurementType>
     {

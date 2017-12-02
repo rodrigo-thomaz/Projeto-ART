@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Interfaces;
-using ART.Domotica.Repository.Entities;
 using System.Collections.Generic;
 using ART.Infra.CrossCutting.Domain;
+using ART.Domotica.Repository.Entities.SI;
 
 namespace ART.Domotica.Domain.Services
 {
