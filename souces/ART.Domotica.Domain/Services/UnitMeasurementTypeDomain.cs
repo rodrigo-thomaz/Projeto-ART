@@ -1,6 +1,6 @@
 ﻿using ART.Domotica.Domain.Interfaces;
 using ART.Domotica.Repository.Entities.SI;
-using ART.Domotica.Repository.Interfaces;
+using ART.Domotica.Repository.Interfaces.SI;
 using ART.Infra.CrossCutting.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;

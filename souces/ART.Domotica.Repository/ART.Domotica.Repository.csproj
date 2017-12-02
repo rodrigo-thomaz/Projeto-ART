@@ -146,9 +146,9 @@
     <Compile Include="Interfaces\ISensorTypeRepository.cs" />
     <Compile Include="Interfaces\ISensorRepository.cs" />
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
-    <Compile Include="Interfaces\IUnitMeasurementRepository.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\ISensorRangeRepository.cs" />
-    <Compile Include="Interfaces\IUnitMeasurementTypeRepository.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
     <Compile Include="Migrations\201712012309290_InitialCreate.cs" />
     <Compile Include="Migrations\201712012309290_InitialCreate.Designer.cs">
       <DependentUpon>201712012309290_InitialCreate.cs</DependentUpon>
@@ -177,9 +177,9 @@
     <Compile Include="Repositories\SensorUnitMeasurementDefaultRepository.cs" />
     <Compile Include="Repositories\TimeZoneRepository.cs" />
     <Compile Include="Repositories\SensorRangeRepository.cs" />
-    <Compile Include="Repositories\UnitMeasurementRepository.cs" />
+    <Compile Include="Repositories\SI\UnitMeasurementRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
-    <Compile Include="Repositories\UnitMeasurementTypeRepository.cs" />
+    <Compile Include="Repositories\SI\UnitMeasurementTypeRepository.cs" />
     <Compile Include="RepositoryModule.cs" />
   </ItemGroup>
   <ItemGroup>

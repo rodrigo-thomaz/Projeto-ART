@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using ART.Domotica.Enums;
+    using ART.Domotica.Enums.SI;
 
     public class UnitMeasurementScale
     {

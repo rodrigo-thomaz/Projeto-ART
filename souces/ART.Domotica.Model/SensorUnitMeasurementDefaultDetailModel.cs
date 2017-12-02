@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Model
 {
     using ART.Domotica.Enums;
+    using ART.Domotica.Enums.SI;
 
     public class SensorUnitMeasurementDefaultDetailModel
     {

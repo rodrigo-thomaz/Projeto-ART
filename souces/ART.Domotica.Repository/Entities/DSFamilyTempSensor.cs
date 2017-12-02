@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using ART.Domotica.Enums;
+    using ART.Domotica.Enums.SI;
 
     public class DSFamilyTempSensor : Sensor
     {

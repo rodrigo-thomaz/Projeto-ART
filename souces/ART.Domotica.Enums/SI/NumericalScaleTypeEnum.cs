@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Enums
+﻿namespace ART.Domotica.Enums.SI
 {
     #region Enumerations
 

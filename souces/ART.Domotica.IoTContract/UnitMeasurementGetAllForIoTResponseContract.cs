@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.IoTContract
 {
-    using ART.Domotica.Enums;
+    using ART.Domotica.Enums.SI;
 
     public class UnitMeasurementGetAllForIoTResponseContract
     {

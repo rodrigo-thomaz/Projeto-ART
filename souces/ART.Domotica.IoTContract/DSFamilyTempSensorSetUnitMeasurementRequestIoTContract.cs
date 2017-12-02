@@ -2,7 +2,7 @@
 {
     using System;
 
-    using ART.Domotica.Enums;
+    using ART.Domotica.Enums.SI;
 
     public class DSFamilyTempSensorSetUnitMeasurementRequestIoTContract
     {

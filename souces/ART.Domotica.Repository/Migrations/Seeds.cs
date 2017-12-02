@@ -11,6 +11,7 @@
 
     using ART.Domotica.Constant;
     using ART.Domotica.Enums;
+    using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Entities.SI;
     using ART.Infra.CrossCutting.MQ;

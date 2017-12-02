@@ -1,12 +1,12 @@
-﻿using ART.Domotica.Enums;
+﻿using ART.Domotica.Enums.SI;
 using ART.Domotica.Repository.Entities.SI;
-using ART.Domotica.Repository.Interfaces;
+using ART.Domotica.Repository.Interfaces.SI;
 using ART.Infra.CrossCutting.Repository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace ART.Domotica.Repository.Repositories
+namespace ART.Domotica.Repository.Repositories.SI
 {
     public class UnitMeasurementTypeRepository : RepositoryBase<ARTDbContext, UnitMeasurementType, UnitMeasurementTypeEnum>, IUnitMeasurementTypeRepository
     {

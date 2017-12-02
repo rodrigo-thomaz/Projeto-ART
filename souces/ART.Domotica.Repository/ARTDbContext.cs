@@ -4,9 +4,9 @@
     using System.Data.Entity.ModelConfiguration.Conventions;
 
     using ART.Domotica.Repository.Configurations;
+    using ART.Domotica.Repository.Configurations.SI;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Entities.SI;
-    using ART.Domotica.Repository.Configurations.SI;
 
     public class ARTDbContext : DbContext
     {
@@ -207,7 +207,7 @@
             modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());
             modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
-            modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());            
+            modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
             modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());

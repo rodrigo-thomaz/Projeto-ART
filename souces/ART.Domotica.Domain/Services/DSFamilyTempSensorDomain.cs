@@ -10,6 +10,9 @@ using ART.Domotica.Repository;
 using ART.Domotica.Repository.Repositories;
 using ART.Domotica.Enums;
 using System.Linq;
+using ART.Domotica.Repository.Interfaces.SI;
+using ART.Domotica.Repository.Repositories.SI;
+using ART.Domotica.Enums.SI;
 
 namespace ART.Domotica.Domain.Services
 {

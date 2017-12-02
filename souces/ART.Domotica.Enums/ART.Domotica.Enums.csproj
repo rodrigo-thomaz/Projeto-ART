@@ -41,15 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContinentEnum.cs" />
-    <Compile Include="NumericalScaleTypeEnum.cs" />
+    <Compile Include="SI\NumericalScaleTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorChartLimiterPositionEnum.cs" />
     <Compile Include="ActuatorTypeEnum.cs" />
     <Compile Include="SensorDatasheetEnum.cs" />
-    <Compile Include="UnitMeasurementEnum.cs" />
+    <Compile Include="SI\UnitMeasurementEnum.cs" />
     <Compile Include="SensorTypeEnum.cs" />
-    <Compile Include="NumericalScalePrefixEnum.cs" />
-    <Compile Include="UnitMeasurementTypeEnum.cs" />
+    <Compile Include="SI\NumericalScalePrefixEnum.cs" />
+    <Compile Include="SI\UnitMeasurementTypeEnum.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

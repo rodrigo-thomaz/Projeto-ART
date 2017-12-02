@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using ART.Domotica.Enums;
+    using ART.Domotica.Enums.SI;
     using ART.Infra.CrossCutting.Repository;
 
     public class NumericalScaleType : IEntity<NumericalScaleTypeEnum>
