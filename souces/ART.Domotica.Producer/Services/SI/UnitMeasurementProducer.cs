@@ -5,14 +5,15 @@ using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
 using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Constant.SI;
+using ART.Domotica.Producer.Interfaces.SI;
 
-namespace ART.Domotica.Producer.Services
+namespace ART.Domotica.Producer.Services.SI
 {
-    public class UnitMeasurementTypeProducer : ProducerBase, IUnitMeasurementTypeProducer
+    public class UnitMeasurementProducer : ProducerBase, IUnitMeasurementProducer
     {
         #region constructors
 
-        public UnitMeasurementTypeProducer(IConnection connection) : base(connection)
+        public UnitMeasurementProducer(IConnection connection) : base(connection)
         {
             Initialize();
         }
@@ -26,7 +27,7 @@ namespace ART.Domotica.Producer.Services
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", UnitMeasurementTypeConstants.GetAllQueueName, null, payload);
+                _model.BasicPublish("", UnitMeasurementConstants.GetAllQueueName, null, payload);
             });            
         }
 
@@ -37,7 +38,7 @@ namespace ART.Domotica.Producer.Services
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: UnitMeasurementTypeConstants.GetAllQueueName
+                  queue: UnitMeasurementConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

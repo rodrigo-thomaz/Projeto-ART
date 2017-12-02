@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Producer.Interfaces
+﻿namespace ART.Domotica.Producer.Interfaces.SI
 {
     using System.Threading.Tasks;
 

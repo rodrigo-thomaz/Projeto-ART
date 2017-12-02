@@ -73,9 +73,9 @@
     <Compile Include="Interfaces\ISensorDatasheetProducer.cs" />
     <Compile Include="Interfaces\ISensorTypeProducer.cs" />
     <Compile Include="Interfaces\ISensorProducer.cs" />
-    <Compile Include="Interfaces\IUnitMeasurementTypeProducer.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementTypeProducer.cs" />
     <Compile Include="Interfaces\ITimeZoneProducer.cs" />
-    <Compile Include="Interfaces\IUnitMeasurementProducer.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementProducer.cs" />
     <Compile Include="ProducerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationMQProducer.cs" />
@@ -92,9 +92,9 @@
     <Compile Include="Services\SensorDatasheetProducer.cs" />
     <Compile Include="Services\SensorTypeProducer.cs" />
     <Compile Include="Services\SensorProducer.cs" />
-    <Compile Include="Services\UnitMeasurementTypeProducer.cs" />
+    <Compile Include="Services\SI\UnitMeasurementTypeProducer.cs" />
     <Compile Include="Services\TimeZoneProducer.cs" />
-    <Compile Include="Services\UnitMeasurementProducer.cs" />
+    <Compile Include="Services\SI\UnitMeasurementProducer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

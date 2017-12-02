@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.WebApi;
 using ART.Domotica.Producer.Interfaces;
+using ART.Domotica.Producer.Interfaces.SI;
 
 namespace ART.Domotica.WebApi.Controllers
 {
