@@ -30,11 +30,6 @@
             get; set;
         }
 
-        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
-        {
-            get; set;
-        }
-
         public ICollection<UnitMeasurement> UnitMeasurements
         {
             get; set;

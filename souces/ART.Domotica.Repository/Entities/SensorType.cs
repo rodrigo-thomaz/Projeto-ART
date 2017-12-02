@@ -29,11 +29,6 @@
             get; set;
         }
 
-        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
-        {
-            get; set;
-        }
-
         #endregion Properties
     }
 }
