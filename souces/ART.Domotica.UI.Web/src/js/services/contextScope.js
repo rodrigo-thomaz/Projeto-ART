@@ -74,6 +74,15 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     // SI
 
+    var getNumericalScaleTypeByKey = function (numericalScaleTypeId) {
+        for (var i = 0; i < context.numericalScaleTypes.length; i++) {
+            var item = context.numericalScaleTypes[i];
+            if (item.numericalScaleTypeId === numericalScaleTypeId) {
+                return item;
+            }
+        }
+    }
+
     var getUnitMeasurementTypeByKey = function (unitMeasurementTypeId) {
         for (var i = 0; i < context.unitMeasurementTypes.length; i++) {
             var item = context.unitMeasurementTypes[i];
@@ -137,17 +146,43 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     var mapper_Country_Continent_Init = false;
     var mapper_Country_Continent = function () {
-        if (!mapper_Country_Continent_Init && context.continentLoaded && context.countryLoaded) {
+        if (!mapper_Country_Continent_Init && context.countryLoaded && context.continentLoaded) {
             mapper_Country_Continent_Init = true;
             for (var i = 0; i < context.countries.length; i++) {
                 var country = context.countries[i];
                 var continent = getContinentByKey(country.continentId);
                 country.continent = continent;
+                delete country.continentId;
                 if (continent.countries === undefined) {
                     continent.countries = [];
                 }
                 continent.countries.push(country);
             }
+        }
+    };
+
+
+    var mapper_NumericalScaleTypeCountry_Country_Init = false;
+    var mapper_NumericalScaleTypeCountry_Country = function () {
+        if (!mapper_NumericalScaleTypeCountry_Country_Init && context.numericalScaleTypeCountryLoaded && context.countryLoaded) {
+            mapper_NumericalScaleTypeCountry_Country_Init = true;
+            for (var i = 0; i < context.numericalScaleTypeCountries.length; i++) {
+                var numericalScaleTypeCountry = context.numericalScaleTypeCountries[i];
+                var numericalScaleType = getNumericalScaleTypeByKey(numericalScaleTypeCountry.numericalScaleTypeId);
+                var country = getCountryByKey(numericalScaleTypeCountry.countryId);
+                //Atach in numericalScaleType
+                if (numericalScaleType.countries === undefined) {
+                    numericalScaleType.countries = [];
+                }
+                numericalScaleType.countries.push(country);
+                //Atach in country
+                if (country.numericalScaleTypes === undefined) {
+                    country.numericalScaleTypes = [];
+                }
+                country.numericalScaleTypes.push(numericalScaleType);
+            }
+            delete context.numericalScaleTypeCountries;
+            delete context.numericalScaleTypeCountryLoaded;
         }
     };
 
@@ -229,6 +264,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('countryLoaded', function (newValue, oldValue) {
         mapper_Country_Continent();
+        mapper_NumericalScaleTypeCountry_Country();
     });
 
     // SI
@@ -242,7 +278,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     });
 
     context.$watch('numericalScaleTypeLoaded', function (newValue, oldValue) {
-        
+        mapper_NumericalScaleTypeCountry_Country();
     });
 
     context.$watch('numericalScaleTypeCountryLoaded', function (newValue, oldValue) {
