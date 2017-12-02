@@ -63,7 +63,15 @@
     <Compile Include="SensorTypeDetailModel.cs" />
     <Compile Include="SensorDetailModel.cs" />
     <Compile Include="SensorUnitMeasurementDefaultDetailModel.cs" />
+    <Compile Include="SI\NumericalScalePrefixDetailModel.cs" />
+    <Compile Include="SI\NumericalScaleTypeDetailModel.cs" />
+    <Compile Include="SI\NumericalScaleTypeCountryDetailModel.cs" />
+    <Compile Include="SI\UnitMeasurementScaleDetailModel.cs" />
+    <Compile Include="SI\NumericalScaleDetailModel.cs" />
     <Compile Include="SI\UnitMeasurementTypeDetailModel.cs" />
+    <Compile Include="ContinentDetailModel.cs" />
+    <Compile Include="CountryDetailModel.cs" />
+    <Compile Include="SensorUnitMeasurementScaleDetailModel.cs" />
     <Compile Include="TimeZoneDetailModel.cs" />
     <Compile Include="SI\UnitMeasurementDetailModel.cs" />
     <Compile Include="ApplicationDetailModel.cs" />

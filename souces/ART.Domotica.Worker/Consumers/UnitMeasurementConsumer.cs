@@ -2,7 +2,6 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Threading.Tasks;
-using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
@@ -11,7 +10,6 @@ using System.Collections.Generic;
 using ART.Domotica.IoTContract;
 using Autofac;
 using AutoMapper;
-using ART.Domotica.Model;
 using ART.Infra.CrossCutting.Logging;
 using ART.Domotica.Repository.Entities.SI;
 using ART.Domotica.Domain.Interfaces.SI;

@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
-    using ART.Domotica.Model;
     using ART.Domotica.Model.SI;
     using ART.Domotica.Repository.Entities.SI;
 

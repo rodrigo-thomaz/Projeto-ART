@@ -1,21 +1,10 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Model.SI
 {
-    using ART.Domotica.Enums;
     using ART.Domotica.Enums.SI;
 
-    public class SensorUnitMeasurementDefaultDetailModel
+    public class UnitMeasurementScaleDetailModel
     {
         #region Properties
-
-        public decimal Max
-        {
-            get; set;
-        }
-
-        public decimal Min
-        {
-            get; set;
-        }
 
         public NumericalScalePrefixEnum NumericalScalePrefixId
         {
@@ -23,16 +12,6 @@
         }
 
         public NumericalScaleTypeEnum NumericalScaleTypeId
-        {
-            get; set;
-        }
-
-        public SensorTypeEnum SensorTypeId
-        {
-            get; set;
-        }
-
-        public SensorDatasheetEnum SensorUnitMeasurementDefaultId
         {
             get; set;
         }

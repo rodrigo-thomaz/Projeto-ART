@@ -3,19 +3,9 @@
     using ART.Domotica.Enums;
     using ART.Domotica.Enums.SI;
 
-    public class SensorUnitMeasurementDefaultDetailModel
+    public class SensorUnitMeasurementScaleDetailModel
     {
         #region Properties
-
-        public decimal Max
-        {
-            get; set;
-        }
-
-        public decimal Min
-        {
-            get; set;
-        }
 
         public NumericalScalePrefixEnum NumericalScalePrefixId
         {
@@ -27,12 +17,12 @@
             get; set;
         }
 
-        public SensorTypeEnum SensorTypeId
+        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
 
-        public SensorDatasheetEnum SensorUnitMeasurementDefaultId
+        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }
