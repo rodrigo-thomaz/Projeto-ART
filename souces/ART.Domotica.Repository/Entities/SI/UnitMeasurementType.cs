@@ -33,12 +33,7 @@
         public ICollection<UnitMeasurement> UnitMeasurements
         {
             get; set;
-        }
-
-        public ICollection<UnitMeasurementScale> UnitMeasurementScales
-        {
-            get; set;
-        }
+        }        
 
         #endregion Properties
     }

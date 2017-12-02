@@ -42,13 +42,7 @@
                     x.UnitMeasurementId,
                     x.UnitMeasurementTypeId,
                 })
-                .WillCascadeOnDelete(false);
-
-            //UnitMeasurementType
-            HasRequired(x => x.UnitMeasurementType)
-                .WithMany(x => x.UnitMeasurementScales)
-                .HasForeignKey(x => x.UnitMeasurementTypeId)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);           
 
             //NumericalScalePrefixId
             Property(x => x.NumericalScalePrefixId)
@@ -70,19 +64,7 @@
                     x.NumericalScalePrefixId,
                     x.NumericalScaleTypeId,
                 })
-                .WillCascadeOnDelete(false);
-
-            //NumericalScalePrefix
-            HasRequired(x => x.NumericalScalePrefix)
-                .WithMany(x => x.UnitMeasurementScales)
-                .HasForeignKey(x => x.NumericalScalePrefixId)
-                .WillCascadeOnDelete(false);
-
-            //NumericalScaleType
-            HasRequired(x => x.NumericalScaleType)
-                .WithMany(x => x.UnitMeasurementScales)
-                .HasForeignKey(x => x.NumericalScaleTypeId)
-                .WillCascadeOnDelete(false);
+                .WillCascadeOnDelete(false);  
         }
 
         #endregion Constructors
