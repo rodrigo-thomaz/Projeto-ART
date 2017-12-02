@@ -6,6 +6,7 @@
     using ART.Domotica.Domain;
     using ART.Domotica.Repository;
     using ART.Domotica.Worker.AutoMapper;
+    using ART.Domotica.Worker.AutoMapper.Locale;
     using ART.Domotica.Worker.AutoMapper.SI;
     using ART.Domotica.Worker.Jobs;
     using ART.Domotica.Worker.Modules;

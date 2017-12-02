@@ -60,8 +60,8 @@
     <Compile Include="SI\NumericalScaleTypeCountryConstants.cs" />
     <Compile Include="SI\UnitMeasurementScaleConstants.cs" />
     <Compile Include="SI\UnitMeasurementTypeConstants.cs" />
-    <Compile Include="ContinentConstants.cs" />
-    <Compile Include="CountryConstants.cs" />
+    <Compile Include="Locale\ContinentConstants.cs" />
+    <Compile Include="Locale\CountryConstants.cs" />
     <Compile Include="SensorUnitMeasurementScaleConstants.cs" />
     <Compile Include="TimeZoneConstants.cs" />
     <Compile Include="SI\UnitMeasurementConstants.cs" />

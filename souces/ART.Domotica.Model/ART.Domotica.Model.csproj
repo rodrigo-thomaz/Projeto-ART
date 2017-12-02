@@ -69,8 +69,8 @@
     <Compile Include="SI\UnitMeasurementScaleDetailModel.cs" />
     <Compile Include="SI\NumericalScaleDetailModel.cs" />
     <Compile Include="SI\UnitMeasurementTypeDetailModel.cs" />
-    <Compile Include="ContinentDetailModel.cs" />
-    <Compile Include="CountryDetailModel.cs" />
+    <Compile Include="Locale\ContinentDetailModel.cs" />
+    <Compile Include="Locale\CountryDetailModel.cs" />
     <Compile Include="SensorUnitMeasurementScaleDetailModel.cs" />
     <Compile Include="TimeZoneDetailModel.cs" />
     <Compile Include="SI\UnitMeasurementDetailModel.cs" />

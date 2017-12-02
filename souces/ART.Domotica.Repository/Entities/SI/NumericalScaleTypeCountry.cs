@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Entities.SI
 {
     using ART.Domotica.Enums.SI;
+    using ART.Domotica.Repository.Entities.Locale;
 
     public class NumericalScaleTypeCountry
     {

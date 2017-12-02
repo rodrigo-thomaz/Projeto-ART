@@ -4,8 +4,10 @@
     using System.Data.Entity.ModelConfiguration.Conventions;
 
     using ART.Domotica.Repository.Configurations;
+    using ART.Domotica.Repository.Configurations.Locale;
     using ART.Domotica.Repository.Configurations.SI;
     using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Entities.Locale;
     using ART.Domotica.Repository.Entities.SI;
 
     public class ARTDbContext : DbContext

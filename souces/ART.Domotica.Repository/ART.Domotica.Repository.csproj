@@ -62,7 +62,7 @@
   <ItemGroup>
     <Compile Include="ARTDbContext.cs" />
     <Compile Include="Configurations\ApplicationMQConfiguration.cs" />
-    <Compile Include="Configurations\ContinentConfiguration.cs" />
+    <Compile Include="Configurations\Locale\ContinentConfiguration.cs" />
     <Compile Include="Configurations\DeviceNTPConfiguration.cs" />
     <Compile Include="Configurations\DeviceMQConfiguration.cs" />
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
@@ -89,15 +89,15 @@
     <Compile Include="Configurations\SI\UnitMeasurementConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\SensorRangeConfiguration.cs" />
-    <Compile Include="Configurations\CountryConfiguration.cs" />
+    <Compile Include="Configurations\Locale\CountryConfiguration.cs" />
     <Compile Include="Configurations\SI\NumericalScalePrefixConfiguration.cs" />
     <Compile Include="Configurations\SI\NumericalScaleConfiguration.cs" />
     <Compile Include="Configurations\SI\UnitMeasurementScaleConfiguration.cs" />
     <Compile Include="Configurations\SI\UnitMeasurementTypeConfiguration.cs" />
     <Compile Include="Configurations\TimeZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
-    <Compile Include="Entities\Continent.cs" />
-    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Locale\Continent.cs" />
+    <Compile Include="Entities\Locale\Country.cs" />
     <Compile Include="Entities\DeviceNTP.cs" />
     <Compile Include="Entities\DeviceMQ.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
@@ -135,7 +135,7 @@
     <Compile Include="Interfaces\SI\IUnitMeasurementScaleRepository.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleTypeRepository.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleTypeCountryRepository.cs" />
-    <Compile Include="Interfaces\ICountryRepository.cs" />
+    <Compile Include="Interfaces\Locale\ICountryRepository.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationMQRepository.cs" />
@@ -152,7 +152,7 @@
     <Compile Include="Interfaces\ISensorDatasheetRepository.cs" />
     <Compile Include="Interfaces\ISensorTypeRepository.cs" />
     <Compile Include="Interfaces\ISensorRepository.cs" />
-    <Compile Include="Interfaces\IContinentRepository.cs" />
+    <Compile Include="Interfaces\Locale\IContinentRepository.cs" />
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\ISensorRangeRepository.cs" />
@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201712021102198_InitialCreate9.Designer.cs">
       <DependentUpon>201712021102198_InitialCreate9.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712021723517_InitialCreate10.cs" />
+    <Compile Include="Migrations\201712021723517_InitialCreate10.Designer.cs">
+      <DependentUpon>201712021723517_InitialCreate10.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -206,7 +210,7 @@
     <Compile Include="Repositories\SI\NumericalScaleTypeCountryRepository.cs" />
     <Compile Include="Repositories\SI\NumericalScaleTypeRepository.cs" />
     <Compile Include="Repositories\SI\NumericalScaleRepository.cs" />
-    <Compile Include="Repositories\CountryRepository.cs" />
+    <Compile Include="Repositories\Locale\CountryRepository.cs" />
     <Compile Include="Repositories\DeviceMQRepository.cs" />
     <Compile Include="Repositories\ApplicationMQRepository.cs" />
     <Compile Include="Repositories\DeviceNTPRepository.cs" />
@@ -221,7 +225,7 @@
     <Compile Include="Repositories\SensorTriggerRepository.cs" />
     <Compile Include="Repositories\SensorDatasheetRepository.cs" />
     <Compile Include="Repositories\SensorUnitMeasurementDefaultRepository.cs" />
-    <Compile Include="Repositories\ContinentRepository.cs" />
+    <Compile Include="Repositories\Locale\ContinentRepository.cs" />
     <Compile Include="Repositories\SI\NumericalScalePrefixRepository.cs" />
     <Compile Include="Repositories\TimeZoneRepository.cs" />
     <Compile Include="Repositories\SensorRangeRepository.cs" />
@@ -306,6 +310,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712021102198_InitialCreate9.resx">
       <DependentUpon>201712021102198_InitialCreate9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712021723517_InitialCreate10.resx">
+      <DependentUpon>201712021723517_InitialCreate10.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,25 +1,25 @@
 ﻿using System.Web.Http;
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.WebApi;
-using ART.Domotica.Producer.Interfaces;
+using ART.Domotica.Producer.Interfaces.Locale;
 
-namespace ART.Domotica.WebApi.Controllers
+namespace ART.Domotica.WebApi.Controllers.Locale
 {
     [Authorize]
-    [RoutePrefix("api/sensorUnitMeasurementScale")]    
-    public class SensorUnitMeasurementScaleController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/locale/country")]    
+    public class CountryController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly ISensorUnitMeasurementScaleProducer _sensorUnitMeasurementScaleProducer;
+        protected readonly ICountryProducer _countryProducer;
 
         #endregion
 
         #region constructors
 
-        public SensorUnitMeasurementScaleController(ISensorUnitMeasurementScaleProducer sensorUnitMeasurementScaleProducer) 
+        public CountryController(ICountryProducer countryProducer) 
         {
-            _sensorUnitMeasurementScaleProducer = sensorUnitMeasurementScaleProducer;
+            _countryProducer = countryProducer;
         }
 
         #endregion
@@ -27,10 +27,10 @@ namespace ART.Domotica.WebApi.Controllers
         #region public voids
 
         /// <summary>
-        /// Retornar uma lista de escalas do sensor
+        /// Retornar uma lista de Paises
         /// </summary>        
         /// <remarks>
-        /// Retornar uma lista de escalas do sensor
+        /// Retornar uma lista de Paises
         /// </remarks>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
@@ -40,7 +40,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> GetAll()
         {           
-            await _sensorUnitMeasurementScaleProducer.GetAll(CreateMessage());
+            await _countryProducer.GetAll(CreateMessage());
             return Ok();
         }
 

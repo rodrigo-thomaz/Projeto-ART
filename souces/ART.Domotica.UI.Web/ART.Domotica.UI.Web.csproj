@@ -245,8 +245,8 @@
     <Content Include="src\js\services\dsFamilyTempSensorService.js" />
     <Content Include="src\js\services\stompService.js" />
     <Content Include="src\js\services\dashboardService.js" />
-    <Content Include="src\js\services\continentService.js" />
-    <Content Include="src\js\services\countryService.js" />
+    <Content Include="src\js\services\locale\continentService.js" />
+    <Content Include="src\js\services\locale\countryService.js" />
     <Content Include="src\js\services\sensorUnitMeasurementScaleService.js" />
     <Content Include="src\l10n\pt.js" />
     <Content Include="src\psd\ui.zip" />

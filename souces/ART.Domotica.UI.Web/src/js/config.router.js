@@ -49,8 +49,8 @@ angular.module('app')
                       'js/services/contextScope.js',
 
                       //Locale
-                      'js/services/continentService.js',
-                      'js/services/countryService.js',
+                      'js/services/locale/continentService.js',
+                      'js/services/locale/countryService.js',
 
                       //SI
                       'js/services/si/numericalScaleService.js',
@@ -189,7 +189,7 @@ angular.module('app')
                           return $ocLazyLoad.load(JQ_CONFIG[src]);
                         }
                         angular.forEach(MODULE_CONFIG, function(module) {
-                          if( module.name == src){
+                          if( module.name === src){
                             name = module.name;
                           }else{
                             name = src;

@@ -149,8 +149,8 @@
     <Compile Include="Controllers\SensorDatasheetController.cs" />
     <Compile Include="Controllers\SensorTypeController.cs" />
     <Compile Include="Controllers\SensorController.cs" />
-    <Compile Include="Controllers\ContinentController.cs" />
-    <Compile Include="Controllers\CountryController.cs" />
+    <Compile Include="Controllers\Locale\ContinentController.cs" />
+    <Compile Include="Controllers\Locale\CountryController.cs" />
     <Compile Include="Controllers\SI\NumericalScaleController.cs" />
     <Compile Include="Controllers\SI\NumericalScalePrefixController.cs" />
     <Compile Include="Controllers\SI\NumericalScaleTypeController.cs" />

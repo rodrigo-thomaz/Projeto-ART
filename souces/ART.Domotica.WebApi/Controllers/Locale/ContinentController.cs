@@ -1,25 +1,25 @@
 ﻿using System.Web.Http;
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.WebApi;
-using ART.Domotica.Producer.Interfaces;
+using ART.Domotica.Producer.Interfaces.Locale;
 
-namespace ART.Domotica.WebApi.Controllers
+namespace ART.Domotica.WebApi.Controllers.Locale
 {
     [Authorize]
-    [RoutePrefix("api/sensorUnitMeasurementScale")]    
-    public class SensorUnitMeasurementScaleController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/locale/continent")]    
+    public class ContinentController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly ISensorUnitMeasurementScaleProducer _sensorUnitMeasurementScaleProducer;
+        protected readonly IContinentProducer _continentProducer;
 
         #endregion
 
         #region constructors
 
-        public SensorUnitMeasurementScaleController(ISensorUnitMeasurementScaleProducer sensorUnitMeasurementScaleProducer) 
+        public ContinentController(IContinentProducer continentProducer) 
         {
-            _sensorUnitMeasurementScaleProducer = sensorUnitMeasurementScaleProducer;
+            _continentProducer = continentProducer;
         }
 
         #endregion
@@ -27,10 +27,10 @@ namespace ART.Domotica.WebApi.Controllers
         #region public voids
 
         /// <summary>
-        /// Retornar uma lista de escalas do sensor
+        /// Retornar uma lista de Continentes
         /// </summary>        
         /// <remarks>
-        /// Retornar uma lista de escalas do sensor
+        /// Retornar uma lista de Continentes
         /// </remarks>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
@@ -40,7 +40,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> GetAll()
         {           
-            await _sensorUnitMeasurementScaleProducer.GetAll(CreateMessage());
+            await _continentProducer.GetAll(CreateMessage());
             return Ok();
         }
 
