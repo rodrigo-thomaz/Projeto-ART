@@ -3,23 +3,23 @@ using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.WebApi;
 using ART.Domotica.Producer.Interfaces.SI;
 
-namespace ART.Domotica.WebApi.Controllers
+namespace ART.Domotica.WebApi.Controllers.SI
 {
     [Authorize]
-    [RoutePrefix("api/unitMeasurementType")]    
-    public class UnitMeasurementTypeController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/unitMeasurement")]    
+    public class UnitMeasurementController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly IUnitMeasurementTypeProducer _unitMeasurementTypeProducer;
+        protected readonly IUnitMeasurementProducer _unitMeasurementProducer;
 
         #endregion
 
         #region constructors
 
-        public UnitMeasurementTypeController(IUnitMeasurementTypeProducer unitMeasurementTypeProducer) 
+        public UnitMeasurementController(IUnitMeasurementProducer unitMeasurementProducer) //: base(connection)
         {
-            _unitMeasurementTypeProducer = unitMeasurementTypeProducer;
+            _unitMeasurementProducer = unitMeasurementProducer;
         }
 
         #endregion
@@ -27,10 +27,10 @@ namespace ART.Domotica.WebApi.Controllers
         #region public voids
 
         /// <summary>
-        /// Retornar uma lista de tipos de unidade de medida
+        /// Retornar uma lista de escalas
         /// </summary>        
         /// <remarks>
-        /// Retornar uma lista de tipos de unidade de medida
+        /// Retornar uma lista de escalas
         /// </remarks>
         /// <response code="200">OK</response>
         /// <response code="400">Bad Request</response>
@@ -40,7 +40,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> GetAll()
         {           
-            await _unitMeasurementTypeProducer.GetAll(CreateMessage());
+            await _unitMeasurementProducer.GetAll(CreateMessage());
             return Ok();
         }
 
