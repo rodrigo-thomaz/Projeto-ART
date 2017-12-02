@@ -233,10 +233,10 @@
     <Content Include="src\js\services\sensorDatasheetService.js" />
     <Content Include="src\js\services\sensorTypeService.js" />
     <Content Include="src\js\services\sensorService.js" />
-    <Content Include="src\js\services\unitMeasurementConverter.js" />
-    <Content Include="src\js\services\unitMeasurementTypeService.js" />
+    <Content Include="src\js\services\si\unitMeasurementConverter.js" />
+    <Content Include="src\js\services\si\unitMeasurementTypeService.js" />
     <Content Include="src\js\services\timeZoneService.js" />
-    <Content Include="src\js\services\unitMeasurementService.js" />
+    <Content Include="src\js\services\si\unitMeasurementService.js" />
     <Content Include="src\js\services\dsFamilyTempSensorService.js" />
     <Content Include="src\js\services\stompService.js" />
     <Content Include="src\js\services\dashboardService.js" />

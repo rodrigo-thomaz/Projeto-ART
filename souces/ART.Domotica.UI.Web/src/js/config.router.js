@@ -48,9 +48,9 @@ angular.module('app')
 
                       'js/services/contextScope.js',
 
-                      'js/services/unitMeasurementTypeService.js',
-                      'js/services/unitMeasurementService.js',
-                      'js/services/unitMeasurementConverter.js',
+                      'js/services/si/unitMeasurementTypeService.js',
+                      'js/services/si/unitMeasurementService.js',
+                      'js/services/si/unitMeasurementConverter.js',
 
                       'js/services/sensorTypeService.js',                      
                       'js/services/sensorDatasheetService.js',                      
