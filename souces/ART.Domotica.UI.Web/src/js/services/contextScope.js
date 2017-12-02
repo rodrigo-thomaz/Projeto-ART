@@ -162,10 +162,10 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     };
 
 
-    var mapper_NumericalScaleTypeCountry_Country_Init = false;
-    var mapper_NumericalScaleTypeCountry_Country = function () {
-        if (!mapper_NumericalScaleTypeCountry_Country_Init && context.numericalScaleTypeCountryLoaded && context.countryLoaded) {
-            mapper_NumericalScaleTypeCountry_Country_Init = true;
+    var mapper_NumericalScaleTypeCountry_Init = false;
+    var mapper_NumericalScaleTypeCountry = function () {
+        if (!mapper_NumericalScaleTypeCountry_Init && context.numericalScaleTypeCountryLoaded && context.countryLoaded) {
+            mapper_NumericalScaleTypeCountry_Init = true;
             for (var i = 0; i < context.numericalScaleTypeCountries.length; i++) {
                 var numericalScaleTypeCountry = context.numericalScaleTypeCountries[i];
                 var numericalScaleType = getNumericalScaleTypeByKey(numericalScaleTypeCountry.numericalScaleTypeId);
@@ -264,7 +264,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('countryLoaded', function (newValue, oldValue) {
         mapper_Country_Continent();
-        mapper_NumericalScaleTypeCountry_Country();
+        mapper_NumericalScaleTypeCountry();
     });
 
     // SI
@@ -278,7 +278,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     });
 
     context.$watch('numericalScaleTypeLoaded', function (newValue, oldValue) {
-        mapper_NumericalScaleTypeCountry_Country();
+        mapper_NumericalScaleTypeCountry();
     });
 
     context.$watch('numericalScaleTypeCountryLoaded', function (newValue, oldValue) {
