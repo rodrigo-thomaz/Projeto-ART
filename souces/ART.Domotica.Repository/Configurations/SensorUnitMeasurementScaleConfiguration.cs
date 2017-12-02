@@ -101,6 +101,18 @@
                 .WithMany(x => x.SensorUnitMeasurementScales)
                 .HasForeignKey(x => x.NumericalScaleTypeId)
                 .WillCascadeOnDelete(false);
+
+            //UnitMeasurementScale
+            HasRequired(x => x.UnitMeasurementScale)
+                .WithMany(x => x.SensorUnitMeasurementScales)
+                .HasForeignKey(x => new
+                {
+                    x.UnitMeasurementId,
+                    x.UnitMeasurementTypeId,
+                    x.NumericalScalePrefixId,
+                    x.NumericalScaleTypeId,
+                })
+                .WillCascadeOnDelete(false);
         }
 
         #endregion Constructors

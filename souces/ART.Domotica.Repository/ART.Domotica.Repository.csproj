@@ -129,6 +129,13 @@
     <Compile Include="Entities\SensorUnitMeasurementScale.cs" />
     <Compile Include="Entities\SI\UnitMeasurementScale.cs" />
     <Compile Include="Entities\SI\UnitMeasurementType.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleRepository.cs" />
+    <Compile Include="Interfaces\SI\INumericalScalePrefixRepository.cs" />
+    <Compile Include="Interfaces\ISensorUnitMeasurementScaleRepository.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementScaleRepository.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleTypeRepository.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleTypeCountryRepository.cs" />
+    <Compile Include="Interfaces\ICountryRepository.cs" />
     <Compile Include="Interfaces\IDeviceMQRepository.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationRepository.cs" />
     <Compile Include="Interfaces\IApplicationMQRepository.cs" />
@@ -145,6 +152,7 @@
     <Compile Include="Interfaces\ISensorDatasheetRepository.cs" />
     <Compile Include="Interfaces\ISensorTypeRepository.cs" />
     <Compile Include="Interfaces\ISensorRepository.cs" />
+    <Compile Include="Interfaces\IContinentRepository.cs" />
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\ISensorRangeRepository.cs" />
@@ -156,6 +164,10 @@
     <Compile Include="Migrations\201712020843260_InitialCreate1.cs" />
     <Compile Include="Migrations\201712020843260_InitialCreate1.Designer.cs">
       <DependentUpon>201712020843260_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712021021346_InitialCreate2.cs" />
+    <Compile Include="Migrations\201712021021346_InitialCreate2.Designer.cs">
+      <DependentUpon>201712021021346_InitialCreate2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -234,6 +246,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712020843260_InitialCreate1.resx">
       <DependentUpon>201712020843260_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712021021346_InitialCreate2.resx">
+      <DependentUpon>201712021021346_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

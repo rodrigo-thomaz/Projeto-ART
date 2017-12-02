@@ -38,6 +38,11 @@
             get; set;
         }
 
+        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
+        {
+            get; set;
+        }
+
         public UnitMeasurement UnitMeasurement
         {
             get; set;

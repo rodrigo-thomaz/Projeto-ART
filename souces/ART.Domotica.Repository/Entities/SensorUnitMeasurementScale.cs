@@ -63,6 +63,11 @@
             get; set;
         }
 
+        public UnitMeasurementScale UnitMeasurementScale
+        {
+            get; set;
+        }
+
         public UnitMeasurementType UnitMeasurementType
         {
             get; set;
