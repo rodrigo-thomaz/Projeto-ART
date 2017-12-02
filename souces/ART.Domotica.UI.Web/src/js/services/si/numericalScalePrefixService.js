@@ -32,7 +32,7 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.numericalScalePrefixs.push(data[i]);
+            contextScope.numericalScalePrefixes.push(data[i]);
         }
         contextScope.numericalScalePrefixLoaded = true;
         _initializing = false;

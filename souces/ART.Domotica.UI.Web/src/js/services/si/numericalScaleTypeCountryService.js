@@ -32,7 +32,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.numericalScaleTypeCountrys.push(data[i]);
+            contextScope.numericalScaleTypeCountries.push(data[i]);
         }
         contextScope.numericalScaleTypeCountryLoaded = true;
         _initializing = false;
