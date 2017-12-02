@@ -3,7 +3,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     var context = $rootScope.$new();
 
-    // Public Properties
+    // *** Public Properties ***
 
     // Locale
 
@@ -50,7 +50,29 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     context.sensorsLoaded = false;
     context.sensors = [];    
 
-    // Finders
+    // *** Finders ***
+
+    // Locale
+
+    var getContinentByKey = function (continentId) {
+        for (var i = 0; i < context.continents.length; i++) {
+            var item = context.continents[i];
+            if (item.continentId === continentId) {
+                return item;
+            }
+        }
+    }
+
+    var getCountryByKey = function (countryId) {
+        for (var i = 0; i < context.countries.length; i++) {
+            var item = context.countries[i];
+            if (item.countryId === countryId) {
+                return item;
+            }
+        }
+    }
+
+    // SI
 
     var getUnitMeasurementTypeByKey = function (unitMeasurementTypeId) {
         for (var i = 0; i < context.unitMeasurementTypes.length; i++) {
@@ -70,6 +92,8 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     }
 
+    //
+    
     var getSensorTypeByKey = function (sensorTypeId) {
         for (var i = 0; i < context.sensorTypes.length; i++) {
             var item = context.sensorTypes[i];
@@ -106,7 +130,10 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
-    // Navigation Properties Mappers
+    // *** Navigation Properties Mappers ***
+
+
+    // SI
 
     var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
     var mapper_UnitMeasurement_UnitMeasurementType = function () {
@@ -123,6 +150,8 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
             }
         }
     };
+
+    //
 
     var mapper_SensorDatasheet_SensorTypeType_Init = false;
     var mapper_SensorDatasheet_SensorTypeType = function () {
@@ -172,7 +201,45 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
-    // Watches
+    // *** Watches ***
+
+    // Locale
+
+    context.$watch('continentLoaded', function (newValue, oldValue) {
+
+    });
+
+    context.$watch('countryLoaded', function (newValue, oldValue) {
+
+    });
+
+    // SI
+
+    context.$watch('numericalScaleLoaded', function (newValue, oldValue) {
+        
+    });
+
+    context.$watch('numericalScalePrefixLoaded', function (newValue, oldValue) {
+        
+    });
+
+    context.$watch('numericalScaleTypeLoaded', function (newValue, oldValue) {
+        
+    });
+
+    context.$watch('numericalScaleTypeCountryLoaded', function (newValue, oldValue) {
+        
+    });
+
+    context.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
+        
+    });
+
+    //
+
+    context.$watch('sensorUnitMeasurementScaleLoaded', function (newValue, oldValue) {
+
+    });
 
     context.$watch('unitMeasurementTypeLoaded', function (newValue, oldValue) {
         mapper_UnitMeasurement_UnitMeasurementType();
@@ -201,10 +268,20 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         
     });
 
-    // Public Methods
+    // *** Public Methods ***
+
+    // Locale
+
+    context.getContinentByKey = getContinentByKey;
+    context.getCountryByKey = getCountryByKey;
+
+    // SI
 
     context.getUnitMeasurementTypeByKey = getUnitMeasurementTypeByKey;
     context.getUnitMeasurementByKey = getUnitMeasurementByKey;
+
+    //
+        
     context.getSensorTypeByKey = getSensorTypeByKey;
     context.getSensorDatasheetByKey = getSensorDatasheetByKey;
     context.getSensorUnitMeasurementDefaultByKey = getSensorUnitMeasurementDefaultByKey;
