@@ -7,28 +7,28 @@ using ART.Domotica.Domain.Interfaces.SI;
 
 namespace ART.Domotica.Domain.Services.SI
 {
-    public class UnitMeasurementDomain : DomainBase, IUnitMeasurementDomain
+    public class UnitMeasurementScaleDomain : DomainBase, IUnitMeasurementScaleDomain
     {
         #region private readonly fields
 
-        private readonly IUnitMeasurementRepository _unitMeasurementRepository;
+        private readonly IUnitMeasurementScaleRepository _unitMeasurementScaleRepository;
 
         #endregion
 
         #region constructors
 
-        public UnitMeasurementDomain(IUnitMeasurementRepository unitMeasurementRepository)
+        public UnitMeasurementScaleDomain(IUnitMeasurementScaleRepository unitMeasurementScaleRepository)
         {
-            _unitMeasurementRepository = unitMeasurementRepository;
+            _unitMeasurementScaleRepository = unitMeasurementScaleRepository;
         }
 
         #endregion
 
         #region public voids
 
-        public async Task<List<UnitMeasurement>> GetAll()
+        public async Task<List<UnitMeasurementScale>> GetAll()
         {
-            return await _unitMeasurementRepository.GetAll();
+            return await _unitMeasurementScaleRepository.GetAll();
         }
 
         #endregion

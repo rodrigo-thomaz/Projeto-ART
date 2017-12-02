@@ -104,6 +104,14 @@
     <Compile Include="Services\SensorTriggerDomain.cs" />
     <Compile Include="Services\SensorDatasheetDomain.cs" />
     <Compile Include="Services\SensorUnitMeasurementDefaultDomain.cs" />
+    <Compile Include="Services\SI\NumericalScaleDomain.cs" />
+    <Compile Include="Services\SI\NumericalScalePrefixDomain.cs" />
+    <Compile Include="Services\SI\NumericalScaleTypeDomain.cs" />
+    <Compile Include="Services\SI\NumericalScaleTypeCountryDomain.cs" />
+    <Compile Include="Services\SI\UnitMeasurementScaleDomain.cs" />
+    <Compile Include="Services\ContinentDomain.cs" />
+    <Compile Include="Services\CountryDomain.cs" />
+    <Compile Include="Services\SensorUnitMeasurementScaleDomain.cs" />
     <Compile Include="Services\TimeZoneDomain.cs" />
     <Compile Include="Services\SI\UnitMeasurementDomain.cs" />
     <Compile Include="Services\SI\UnitMeasurementTypeDomain.cs" />

@@ -1,5 +1,4 @@
-﻿using ART.Domotica.Domain.Interfaces;
-using ART.Domotica.Domain.Interfaces.SI;
+﻿using ART.Domotica.Domain.Interfaces.SI;
 using ART.Domotica.Repository.Entities.SI;
 using ART.Domotica.Repository.Interfaces.SI;
 using ART.Infra.CrossCutting.Domain;
