@@ -130,8 +130,8 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
-    // *** Navigation Properties Mappers ***
 
+    // *** Navigation Properties Mappers ***
 
     // SI
 
