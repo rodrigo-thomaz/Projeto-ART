@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Model.SI
 {
     using ART.Domotica.Enums.SI;
 

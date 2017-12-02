@@ -63,9 +63,9 @@
     <Compile Include="SensorTypeDetailModel.cs" />
     <Compile Include="SensorDetailModel.cs" />
     <Compile Include="SensorUnitMeasurementDefaultDetailModel.cs" />
-    <Compile Include="UnitMeasurementTypeDetailModel.cs" />
+    <Compile Include="SI\UnitMeasurementTypeDetailModel.cs" />
     <Compile Include="TimeZoneDetailModel.cs" />
-    <Compile Include="UnitMeasurementDetailModel.cs" />
+    <Compile Include="SI\UnitMeasurementDetailModel.cs" />
     <Compile Include="ApplicationDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorTriggerDetailModel.cs" />
