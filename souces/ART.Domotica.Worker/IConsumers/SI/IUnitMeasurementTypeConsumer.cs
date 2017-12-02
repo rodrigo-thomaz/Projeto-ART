@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Worker.IConsumers
+﻿namespace ART.Domotica.Worker.IConsumers.SI
 {
     public interface IUnitMeasurementTypeConsumer
     {

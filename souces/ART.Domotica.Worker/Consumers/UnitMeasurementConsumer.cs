@@ -15,6 +15,7 @@ using ART.Domotica.Repository.Entities.SI;
 using ART.Domotica.Domain.Interfaces.SI;
 using ART.Domotica.Constant.SI;
 using ART.Domotica.Model.SI;
+using ART.Domotica.Worker.IConsumers.SI;
 
 namespace ART.Domotica.Worker.Consumers
 {

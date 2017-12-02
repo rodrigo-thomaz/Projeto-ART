@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Worker.Consumers;
     using ART.Domotica.Worker.IConsumers;
+    using ART.Domotica.Worker.IConsumers.SI;
 
     using Autofac;
 
@@ -11,6 +12,10 @@
 
         protected override void Load(ContainerBuilder builder)
         {
+            //SI
+            builder.RegisterType<UnitMeasurementConsumer>().As<IUnitMeasurementConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<UnitMeasurementTypeConsumer>().As<IUnitMeasurementTypeConsumer>().SingleInstance().AutoActivate();
+
             builder.RegisterType<ApplicationConsumer>().As<IApplicationConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ApplicationMQConsumer>().As<IApplicationMQConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ApplicationUserConsumer>().As<IApplicationUserConsumer>().SingleInstance().AutoActivate();
@@ -25,8 +30,6 @@
             builder.RegisterType<SensorTypeConsumer>().As<ISensorTypeConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorUnitMeasurementDefaultConsumer>().As<ISensorUnitMeasurementDefaultConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<TimeZoneConsumer>().As<ITimeZoneConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<UnitMeasurementConsumer>().As<IUnitMeasurementConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<UnitMeasurementTypeConsumer>().As<IUnitMeasurementTypeConsumer>().SingleInstance().AutoActivate();
 
             //builder.RegisterType<ApplicationConsumer>()
             //    .As<IApplicationConsumer>()
