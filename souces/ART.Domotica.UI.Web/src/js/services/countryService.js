@@ -32,7 +32,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.countrys.push(data[i]);
+            contextScope.countries.push(data[i]);
         }
         contextScope.countryLoaded = true;
         _initializing = false;
