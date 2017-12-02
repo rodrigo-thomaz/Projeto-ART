@@ -65,6 +65,8 @@
     <Compile Include="Interfaces\IApplicationMQDomain.cs" />
     <Compile Include="Interfaces\IApplicationUserDomain.cs" />
     <Compile Include="Interfaces\IApplicationDomain.cs" />
+    <Compile Include="Interfaces\ISensorUnitMeasurementScaleDomain.cs" />
+    <Compile Include="Interfaces\ICountryDomain.cs" />
     <Compile Include="Interfaces\IDeviceNTPDomain.cs" />
     <Compile Include="Interfaces\IDeviceMQDomain.cs" />
     <Compile Include="Interfaces\IHardwareDomain.cs" />
@@ -75,8 +77,14 @@
     <Compile Include="Interfaces\ISensorRangeDomain.cs" />
     <Compile Include="Interfaces\ISensorTriggerDomain.cs" />
     <Compile Include="Interfaces\ISensorDatasheetDomain.cs" />
+    <Compile Include="Interfaces\IContinentDomain.cs" />
     <Compile Include="Interfaces\ITimeZoneDomain.cs" />
     <Compile Include="Interfaces\ISensorUnitMeasurementDefaultDomain.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleDomain.cs" />
+    <Compile Include="Interfaces\SI\INumericalScalePrefixDomain.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleTypeDomain.cs" />
+    <Compile Include="Interfaces\SI\INumericalScaleTypeCountryDomain.cs" />
+    <Compile Include="Interfaces\SI\IUnitMeasurementScaleDomain.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementDomain.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeDomain.cs" />
     <Compile Include="Services\ApplicationMQDomain.cs" />
