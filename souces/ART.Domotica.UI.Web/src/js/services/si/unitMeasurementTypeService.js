@@ -10,7 +10,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
 
     var onConnected = function () {
 
-        stompService.subscribe('UnitMeasurementType.GetAllViewCompleted', onGetAllCompleted);
+        stompService.subscribe('SI.UnitMeasurementType.GetAllViewCompleted', onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;

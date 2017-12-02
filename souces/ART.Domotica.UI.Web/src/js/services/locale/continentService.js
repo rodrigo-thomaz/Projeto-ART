@@ -10,7 +10,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
 
     var onConnected = function () {
 
-        stompService.subscribe('Continent.GetAllViewCompleted', onGetAllCompleted);
+        stompService.subscribe('Locale.Continent.GetAllViewCompleted', onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;

@@ -10,7 +10,7 @@ app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', '
 
     var onConnected = function () {
 
-        stompService.subscribe('NumericalScale.GetAllViewCompleted', onGetAllCompleted);
+        stompService.subscribe('SI.NumericalScale.GetAllViewCompleted', onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;

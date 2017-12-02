@@ -10,7 +10,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
 
     var onConnected = function () {
 
-        stompService.subscribe('NumericalScaleTypeCountry.GetAllViewCompleted', onGetAllCompleted);
+        stompService.subscribe('SI.NumericalScaleTypeCountry.GetAllViewCompleted', onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
