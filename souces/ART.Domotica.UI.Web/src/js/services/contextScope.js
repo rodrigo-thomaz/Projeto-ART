@@ -160,8 +160,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
             }
         }
     };
-
-
+    
     var mapper_NumericalScaleTypeCountry_Init = false;
     var mapper_NumericalScaleTypeCountry = function () {
         if (!mapper_NumericalScaleTypeCountry_Init && context.numericalScaleTypeCountryLoaded && context.countryLoaded) {
