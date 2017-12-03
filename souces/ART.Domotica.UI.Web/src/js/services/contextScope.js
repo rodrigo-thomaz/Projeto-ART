@@ -56,8 +56,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
                 return item;
             }
         }
-    };
-
+    };    
 
     // *** Navigation Properties Mappers ***   
 
@@ -77,18 +76,18 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
         }
     };
 
-    var mapper_SensorUnitMeasurementDefault_UnitMeasurement_Init = false;
-    var mapper_SensorUnitMeasurementDefault_UnitMeasurement = function () {
-        if (!mapper_SensorUnitMeasurementDefault_UnitMeasurement_Init && context.sensorUnitMeasurementDefaultLoaded && context.unitMeasurementLoaded) {
-            mapper_SensorUnitMeasurementDefault_UnitMeasurement_Init = true;
+    var mapper_SensorUnitMeasurementDefault_UnitMeasurementScale_Init = false;
+    var mapper_SensorUnitMeasurementDefault_UnitMeasurementScale = function () {
+        if (!mapper_SensorUnitMeasurementDefault_UnitMeasurementScale_Init && context.sensorUnitMeasurementDefaultLoaded && siContext.unitMeasurementScaleLoaded) {
+            mapper_SensorUnitMeasurementDefault_UnitMeasurementScale_Init = true;
             for (var i = 0; i < context.sensorUnitMeasurementDefaults.length; i++) {
                 var sensorUnitMeasurementDefault = context.sensorUnitMeasurementDefaults[i];
-                var unitMeasurement = getUnitMeasurementByKey(sensorUnitMeasurementDefault.unitMeasurementId, sensorUnitMeasurementDefault.unitMeasurementTypeId);
-                sensorUnitMeasurementDefault.unitMeasurement = unitMeasurement;
-                if (unitMeasurement.sensorUnitMeasurementDefaults === undefined) {
-                    unitMeasurement.sensorUnitMeasurementDefaults = [];
+                var unitMeasurementScale = siContext.getUnitMeasurementScaleByKey(sensorUnitMeasurementDefault.unitMeasurementId, sensorUnitMeasurementDefault.unitMeasurementTypeId, sensorUnitMeasurementDefault.numericalScalePrefixId, sensorUnitMeasurementDefault.numericalScaleTypeId);
+                sensorUnitMeasurementDefault.unitMeasurementScale = unitMeasurementScale;
+                if (unitMeasurementScale.sensorUnitMeasurementDefaults === undefined) {
+                    unitMeasurementScale.sensorUnitMeasurementDefaults = [];
                 }
-                unitMeasurement.sensorUnitMeasurementDefaults.push(sensorUnitMeasurementDefault);
+                unitMeasurementScale.sensorUnitMeasurementDefaults.push(sensorUnitMeasurementDefault);
             }
         }
     };    
@@ -113,14 +112,14 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
 
     // SI
 
-    siContext.$watch('unitMeasurementLoaded', function (newValue, oldValue) {
-        mapper_SensorUnitMeasurementDefault_UnitMeasurement();
+    siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
+        mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
     }); 
 
     //
 
     context.$watch('sensorUnitMeasurementScaleLoaded', function (newValue, oldValue) {
-        mapper_SensorUnitMeasurementScale_SensorDatasheet();
+        mapper_SensorUnitMeasurementScale_SensorDatasheet();        
     });    
 
     context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
@@ -133,7 +132,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     });
 
     context.$watch('sensorUnitMeasurementDefaultLoaded', function (newValue, oldValue) {
-        mapper_SensorUnitMeasurementDefault_UnitMeasurement();
+        mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
     });
 
     context.$watch('sensorsLoaded', function (newValue, oldValue) {
