@@ -8,6 +8,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllApiUri = 'api/si/unitMeasurementType/getAll';
     var getAllCompletedTopic = 'SI.UnitMeasurementType.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
@@ -28,7 +29,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/si/unitMeasurementType/getAll').then(function (results) {
+        return $http.post(serviceBase + getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       

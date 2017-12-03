@@ -8,6 +8,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllApiUri = 'api/si/numericalScaleTypeCountry/getAll';
     var getAllCompletedTopic = 'SI.NumericalScaleTypeCountry.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
@@ -28,7 +29,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/si/numericalScaleTypeCountry/getAll').then(function (results) {
+        return $http.post(serviceBase + getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       

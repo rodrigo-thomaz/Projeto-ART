@@ -8,6 +8,7 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', '$rootScope
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllApiUri = 'api/si/numericalScaleType/getAll';
     var getAllCompletedTopic = 'SI.NumericalScaleType.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
@@ -28,7 +29,7 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', '$rootScope
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/si/numericalScaleType/getAll').then(function (results) {
+        return $http.post(serviceBase + getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       

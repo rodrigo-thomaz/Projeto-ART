@@ -8,6 +8,7 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllApiUri = 'api/si/numericalScalePrefix/getAll';
     var getAllCompletedTopic = 'SI.NumericalScalePrefix.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
@@ -28,7 +29,7 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/si/numericalScalePrefix/getAll').then(function (results) {
+        return $http.post(serviceBase + getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       

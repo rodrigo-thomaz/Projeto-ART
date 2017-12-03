@@ -8,6 +8,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllApiUri = 'api/locale/country/getAll';
     var getAllCompletedTopic = 'Locale.Country.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
@@ -28,7 +29,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/locale/country/getAll').then(function (results) {
+        return $http.post(serviceBase + getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       

@@ -8,6 +8,7 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootSco
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllApiUri = 'api/si/unitMeasurementScale/getAll';
     var getAllCompletedTopic = 'Locale.Country.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
@@ -28,7 +29,7 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootSco
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/si/unitMeasurementScale/getAll').then(function (results) {
+        return $http.post(serviceBase + getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       

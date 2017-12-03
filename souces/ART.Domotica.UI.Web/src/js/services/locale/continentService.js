@@ -8,6 +8,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllApiUri = 'api/locale/continent/getAll';
     var getAllCompletedTopic = 'Locale.Continent.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
@@ -28,7 +29,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/locale/continent/getAll').then(function (results) {
+        return $http.post(serviceBase + getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
