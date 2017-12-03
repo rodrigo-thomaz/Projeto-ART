@@ -4,6 +4,9 @@ using ART.Infra.CrossCutting.Domain;
 using ART.Domotica.Repository.Entities.SI;
 using ART.Domotica.Repository.Interfaces.SI;
 using ART.Domotica.Domain.Interfaces.SI;
+using Autofac;
+using ART.Domotica.Repository;
+using ART.Domotica.Repository.Repositories.SI;
 
 namespace ART.Domotica.Domain.Services.SI
 {
@@ -17,9 +20,11 @@ namespace ART.Domotica.Domain.Services.SI
 
         #region constructors
 
-        public NumericalScalePrefixDomain(INumericalScalePrefixRepository numericalScalePrefixRepository)
+        public NumericalScalePrefixDomain(IComponentContext componentContext)
         {
-            _numericalScalePrefixRepository = numericalScalePrefixRepository;
+            var context = componentContext.Resolve<ARTDbContext>();
+
+            _numericalScalePrefixRepository = new NumericalScalePrefixRepository(context);
         }
 
         #endregion

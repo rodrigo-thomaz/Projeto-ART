@@ -4,6 +4,9 @@ using ART.Domotica.Repository.Interfaces.SI;
 using ART.Infra.CrossCutting.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Autofac;
+using ART.Domotica.Repository;
+using ART.Domotica.Repository.Repositories.SI;
 
 namespace ART.Domotica.Domain.Services.SI
 {
@@ -17,9 +20,11 @@ namespace ART.Domotica.Domain.Services.SI
 
         #region constructors
 
-        public UnitMeasurementTypeDomain(IUnitMeasurementTypeRepository unitMeasurementTypeRepository)
+        public UnitMeasurementTypeDomain(IComponentContext componentContext)
         {
-            _unitMeasurementTypeRepository = unitMeasurementTypeRepository;
+            var context = componentContext.Resolve<ARTDbContext>();
+
+            _unitMeasurementTypeRepository = new UnitMeasurementTypeRepository(context);
         }
 
         #endregion

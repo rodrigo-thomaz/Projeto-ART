@@ -4,6 +4,9 @@ using ART.Infra.CrossCutting.Domain;
 using ART.Domotica.Domain.Interfaces.Locale;
 using ART.Domotica.Repository.Entities.Locale;
 using ART.Domotica.Repository.Interfaces.Locale;
+using Autofac;
+using ART.Domotica.Repository;
+using ART.Domotica.Repository.Repositories.Locale;
 
 namespace ART.Domotica.Domain.Services.Locale
 {
@@ -17,9 +20,11 @@ namespace ART.Domotica.Domain.Services.Locale
 
         #region constructors
 
-        public ContinentDomain(IContinentRepository continentRepository)
+        public ContinentDomain(IComponentContext componentContext)
         {
-            _continentRepository = continentRepository;
+            var context = componentContext.Resolve<ARTDbContext>();
+
+            _continentRepository = new ContinentRepository(context);
         }
 
         #endregion
