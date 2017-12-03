@@ -1,6 +1,8 @@
 ﻿'use strict';
 app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
 
+    var serviceFactory = {};    
+
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var _initializing = false;
@@ -9,7 +11,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
     var getAllCompletedTopic = 'SI.NumericalScaleTypeCountry.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
-    var serviceFactory = {};    
+    var initializedEventName = 'numericalScaleTypeCountryService.onInitialized';
 
     var onConnected = function () {
 
@@ -46,7 +48,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit('numericalScaleTypeCountryService_Initialized');
+        $rootScope.$emit(initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -62,6 +64,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
     // serviceFactory
 
     serviceFactory.initialized = initialized;
+    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 

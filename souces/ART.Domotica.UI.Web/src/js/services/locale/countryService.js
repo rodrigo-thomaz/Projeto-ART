@@ -1,6 +1,8 @@
 ﻿'use strict';
 app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, $rootScope, stompService, localeContext) {
 
+    var serviceFactory = {};    
+
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var _initializing = false;
@@ -9,7 +11,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
     var getAllCompletedTopic = 'Locale.Country.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
-    var serviceFactory = {};    
+    var initializedEventName = 'countryService.onInitialized';
 
     var onConnected = function () {
 
@@ -62,6 +64,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
     // serviceFactory
 
     serviceFactory.initialized = initialized;
+    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 

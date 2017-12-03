@@ -1,6 +1,8 @@
 ﻿'use strict';
 app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
 
+    var serviceFactory = {};    
+
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var _initializing = false;
@@ -9,7 +11,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
     var getAllCompletedTopic = 'SI.UnitMeasurementType.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
-    var serviceFactory = {};    
+    var initializedEventName = 'unitMeasurementTypeService.onInitialized';
 
     var onConnected = function () {
 
@@ -46,7 +48,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit('unitMeasurementTypeService_Initialized');
+        $rootScope.$emit(initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -62,6 +64,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
     // serviceFactory
 
     serviceFactory.initialized = initialized;
+    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 
