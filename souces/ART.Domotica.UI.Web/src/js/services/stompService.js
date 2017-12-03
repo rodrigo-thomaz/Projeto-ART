@@ -15,6 +15,7 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     }
 
     var subscribe = function (topic, callback) {
+        //return client.subscribe(generateStringTopic(topic), callback);
         return client.subscribe(generateStringTopic(topic), callback, { id: topic });
     };
 
