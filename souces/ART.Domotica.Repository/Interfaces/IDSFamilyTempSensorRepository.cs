@@ -7,8 +7,5 @@
 
     public interface IDSFamilyTempSensorRepository : IRepository<ARTDbContext, DSFamilyTempSensor, Guid>
     {
-        #region Methods
-        
-        #endregion Methods
     }
 }

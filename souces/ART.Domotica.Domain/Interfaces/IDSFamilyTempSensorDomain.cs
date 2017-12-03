@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using ART.Domotica.Repository.Entities;
 
     public interface IDSFamilyTempSensorDomain
@@ -11,7 +12,7 @@
 
         Task<List<DSFamilyTempSensorResolution>> GetAllResolutions();
 
-        Task<DSFamilyTempSensor> SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId);        
+        Task<DSFamilyTempSensor> SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId);
 
         #endregion Methods
     }

@@ -31,15 +31,6 @@ namespace ART.Domotica.Producer.Services
             });            
         }
 
-        public async Task SetUnitMeasurement(AuthenticatedMessageContract<SensorSetUnitMeasurementRequestContract> message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorConstants.SetUnitMeasurementQueueName, null, payload);
-            });            
-        }
-
         public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message)
         {
             await Task.Run(() =>
@@ -48,15 +39,6 @@ namespace ART.Domotica.Producer.Services
                 _model.BasicPublish("", DSFamilyTempSensorConstants.SetResolutionQueueName, null, payload);
             });
         }        
-
-        public async Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorConstants.SetLabelQueueName, null, payload);
-            });
-        }
 
         #endregion
 
@@ -77,20 +59,6 @@ namespace ART.Domotica.Producer.Services
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
-
-            _model.QueueDeclare(
-                 queue: SensorConstants.SetUnitMeasurementQueueName
-               , durable: true
-               , exclusive: false
-               , autoDelete: false
-               , arguments: null);
-
-            _model.QueueDeclare(
-                 queue: SensorConstants.SetLabelQueueName
-               , durable: true
-               , exclusive: false
-               , autoDelete: false
-               , arguments: null);
         }
 
         #endregion

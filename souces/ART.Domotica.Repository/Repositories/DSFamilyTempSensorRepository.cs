@@ -1,15 +1,20 @@
-﻿using ART.Domotica.Repository.Entities;
-using ART.Domotica.Repository.Interfaces;
-using ART.Infra.CrossCutting.Repository;
-using System;
-
-namespace ART.Domotica.Repository.Repositories
+﻿namespace ART.Domotica.Repository.Repositories
 {
+    using System;
+
+    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Interfaces;
+    using ART.Infra.CrossCutting.Repository;
+
     public class DSFamilyTempSensorRepository : RepositoryBase<ARTDbContext, DSFamilyTempSensor, Guid>, IDSFamilyTempSensorRepository
     {
-        public DSFamilyTempSensorRepository(ARTDbContext context) : base(context)
-        {
+        #region Constructors
 
-        } 
+        public DSFamilyTempSensorRepository(ARTDbContext context)
+            : base(context)
+        {
+        }
+
+        #endregion Constructors
     }
 }
