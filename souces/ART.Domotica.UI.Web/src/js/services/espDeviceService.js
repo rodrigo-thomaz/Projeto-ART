@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorRangeService', 'unitMeasurementService', 'unitMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, sensorRangeService, unitMeasurementService, unitMeasurementConverter) {
+app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', 'sensorRangeService', 'unitMeasurementService', 'unitMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, siContext, sensorRangeService, unitMeasurementService, unitMeasurementConverter) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -194,7 +194,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             sensor.tempConverted = null;
 
             //unitMeasurement
-            sensor.unitMeasurement = unitMeasurementService.getByKey(sensor.unitMeasurementId);
+
+            // Arrumar aqui !!!
+            sensor.unitMeasurement = siContext.getUnitMeasurementScaleByKey(sensor.unitMeasurementId);
 
             //SensorRange
             var sensorRange = sensorRangeService.getById(sensor.sensorRangeId);
