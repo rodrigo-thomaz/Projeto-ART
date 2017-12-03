@@ -28,8 +28,7 @@ app.factory('espDeviceAdminService', ['$http', '$log', 'ngAuthSettings', '$rootS
     var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
 
     // stompService
-    if (stompService.connected())
-        onConnected();
+    if (stompService.connected()) onConnected();
 
     // serviceFactory
 

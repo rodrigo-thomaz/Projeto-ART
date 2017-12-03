@@ -47,8 +47,7 @@ app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 
     var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
 
     // stompService
-    if (stompService.connected())
-        onConnected();
+    if (stompService.connected()) onConnected();
 
     // serviceFactory
 

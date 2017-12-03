@@ -34,8 +34,10 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootSco
     };       
 
     var onGetAllCompleted = function (payload) {
+
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
+
         for (var i = 0; i < data.length; i++) {
             siContext.unitMeasurementScales.push(data[i]);
         }
@@ -58,8 +60,7 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootSco
     var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
 
     // stompService
-    if (stompService.connected())
-        onConnected();
+    if (stompService.connected()) onConnected();
 
     // serviceFactory
 

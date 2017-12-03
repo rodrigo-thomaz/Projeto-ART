@@ -88,8 +88,7 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
     var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
 
     // stompService
-    if (stompService.connected())
-        onConnected();
+    if (stompService.connected()) onConnected();
 
     // serviceFactory
 

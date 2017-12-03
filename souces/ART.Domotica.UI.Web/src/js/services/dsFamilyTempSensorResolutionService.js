@@ -52,8 +52,7 @@ app.factory('dsFamilyTempSensorResolutionService', ['$http', '$log', '$rootScope
     var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
 
     // stompService
-    if (stompService.connected())
-        onConnected();
+    if (stompService.connected()) onConnected();
 
     // serviceFactory
 

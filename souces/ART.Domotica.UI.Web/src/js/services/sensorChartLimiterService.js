@@ -48,8 +48,7 @@ app.factory('sensorChartLimiterService', ['$http', '$log', '$rootScope', 'ngAuth
     var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
 
     // stompService
-    if (stompService.connected())
-        onConnected();
+    if (stompService.connected()) onConnected();
 
     // serviceFactory
 

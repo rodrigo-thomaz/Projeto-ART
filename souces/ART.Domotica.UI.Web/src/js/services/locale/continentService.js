@@ -34,8 +34,10 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     };       
 
     var onGetAllCompleted = function (payload) {
+
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
+
         for (var i = 0; i < data.length; i++) {
             localeContext.continents.push(data[i]);
         }
@@ -58,8 +60,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
 
     // stompService
-    if (stompService.connected())
-        onConnected();
+    if (stompService.connected()) onConnected();
 
     // serviceFactory
 
