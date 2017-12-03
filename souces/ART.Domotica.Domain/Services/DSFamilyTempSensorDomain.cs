@@ -20,10 +20,7 @@ namespace ART.Domotica.Domain.Services
 
         private readonly IDSFamilyTempSensorRepository _dsFamilyTempSensorRepository;
         private readonly IDSFamilyTempSensorResolutionRepository _dsFamilyTempSensorResolutionRepository;
-        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
-        private readonly IUnitMeasurementRepository _unitMeasurementRepository;
-        private readonly ISensorTriggerRepository _sensorTriggerRepository;
-
+        
         #endregion
 
         #region constructors
@@ -33,56 +30,18 @@ namespace ART.Domotica.Domain.Services
             var context = componentContext.Resolve<ARTDbContext>();
 
             _dsFamilyTempSensorRepository = new DSFamilyTempSensorRepository(context);
-            _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);
-            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
-            _unitMeasurementRepository = new UnitMeasurementRepository(context);
-            _sensorTriggerRepository = new SensorTriggerRepository(context);
+            _dsFamilyTempSensorResolutionRepository = new DSFamilyTempSensorResolutionRepository(context);            
         }
 
         #endregion
 
         #region public voids
-
-        public async Task<List<DSFamilyTempSensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
-        {
-            var deviceInApplication = await _deviceInApplicationRepository.GetById(deviceInApplicationId);
-
-            if (deviceInApplication == null)
-            {
-                throw new Exception("DeviceInApplication not found");
-            }
-
-            return await _dsFamilyTempSensorRepository.GetAllByDeviceId(deviceInApplication.DeviceBaseId);            
-        }
-        
+                
         public async Task<List<DSFamilyTempSensorResolution>> GetAllResolutions()
         {
             return await _dsFamilyTempSensorResolutionRepository.GetAll();
         }
-
-        public async Task<DSFamilyTempSensor> SetUnitMeasurement(Guid dsFamilyTempSensorId, UnitMeasurementEnum unitMeasurementId)
-        {
-            var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);
-
-            if(dsFamilyTempSensorEntity == null)
-            {
-                throw new Exception("DSFamilyTempSensor not found");
-            }
-
-            var unitMeasurementEntity = await _unitMeasurementRepository.GetByKey(unitMeasurementId, UnitMeasurementTypeEnum.Temperature);
-
-            if (unitMeasurementEntity == null)
-            {
-                throw new Exception("UnitMeasurement not found");
-            }
-            
-            dsFamilyTempSensorEntity.UnitMeasurementId = unitMeasurementEntity.Id;
-
-            await _dsFamilyTempSensorRepository.Update(dsFamilyTempSensorEntity);
-
-            return dsFamilyTempSensorEntity;
-        }
-
+        
         public async Task<DSFamilyTempSensor> SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId)
         {
             var dsFamilyTempSensorEntity = await _dsFamilyTempSensorRepository.GetById(dsFamilyTempSensorId);

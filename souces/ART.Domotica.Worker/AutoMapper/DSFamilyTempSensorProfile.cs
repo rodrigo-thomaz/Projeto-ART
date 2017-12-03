@@ -16,21 +16,6 @@
 
         public DSFamilyTempSensorProfile()
         {
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>()
-                .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
-                    var split = src.DeviceAddress.Split(':');
-                    var result = new short[8];
-                    for (int i = 0; i < 8; i++)
-                    {
-                        result[i] = short.Parse(split[i]);
-                    }
-                    return result;
-                }))
-                .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.DSFamilyTempSensorResolution.Bits))
-                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorChartLimiter.Min))
-                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorChartLimiter.Max))
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
-
             CreateMap<DSFamilyTempSensorSetUnitMeasurementRequestContract, DSFamilyTempSensorSetUnitMeasurementRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>();
 
@@ -40,12 +25,7 @@
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.DSFamilyTempSensorResolutionId));
-
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetUnitMeasurementCompletedModel>()
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
-                .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId));
-
+            
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionDetailModel>();
 
             CreateMap<SensorsInDevice, DSFamilyTempSensorDetailModel>()

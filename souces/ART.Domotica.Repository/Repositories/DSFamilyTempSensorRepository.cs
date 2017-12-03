@@ -14,15 +14,6 @@ namespace ART.Domotica.Repository.Repositories
         public DSFamilyTempSensorRepository(ARTDbContext context) : base(context)
         {
 
-        }        
-
-        public async Task<List<DSFamilyTempSensor>> GetAllByDeviceId(Guid deviceId)
-        {
-            return await _context.DSFamilyTempSensor
-                .Include(x => x.DSFamilyTempSensorResolution)
-                .Include(x => x.SensorChartLimiter)
-                .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == deviceId) != null)
-                .ToListAsync();
-        }
+        } 
     }
 }

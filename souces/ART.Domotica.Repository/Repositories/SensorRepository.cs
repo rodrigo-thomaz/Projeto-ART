@@ -4,6 +4,7 @@ using ART.Infra.CrossCutting.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories
@@ -29,6 +30,15 @@ namespace ART.Domotica.Repository.Repositories
                 .SingleOrDefaultAsync(x => x.SensorId == sensorId);
 
             return entity;
+        }
+
+        public async Task<List<DSFamilyTempSensor>> GetAllByDeviceId(Guid deviceId)
+        {
+            return await _context.DSFamilyTempSensor
+                .Include(x => x.DSFamilyTempSensorResolution)
+                .Include(x => x.SensorChartLimiter)
+                .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == deviceId) != null)
+                .ToListAsync();
         }
     }
 }

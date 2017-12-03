@@ -10,6 +10,9 @@ using ART.Domotica.Repository.Repositories;
 using System.Linq;
 using Autofac;
 using ART.Domotica.Repository;
+using ART.Domotica.Enums.SI;
+using ART.Domotica.Repository.Interfaces.SI;
+using ART.Domotica.Repository.Repositories.SI;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -19,6 +22,8 @@ namespace ART.Domotica.Domain.Services
 
         private readonly ISensorRepository _sensorRepository;
         private readonly ISensorTriggerRepository _sensorTriggerRepository;
+        private readonly IUnitMeasurementRepository _unitMeasurementRepository;
+        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
 
         #endregion
 
@@ -30,6 +35,8 @@ namespace ART.Domotica.Domain.Services
 
             _sensorRepository = new SensorRepository(context);
             _sensorTriggerRepository = new SensorTriggerRepository(context);
+            _unitMeasurementRepository = new UnitMeasurementRepository(context);
+            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
         }
 
         #endregion
@@ -151,7 +158,42 @@ namespace ART.Domotica.Domain.Services
 
             return data;
         }
-        
+
+        public async Task<Sensor> SetUnitMeasurement(Guid sensorId, UnitMeasurementEnum unitMeasurementId)
+        {
+            var dsFamilyTempSensorEntity = await _sensorRepository.GetById(sensorId);
+
+            if (dsFamilyTempSensorEntity == null)
+            {
+                throw new Exception("Sensor not found");
+            }
+
+            var unitMeasurementEntity = await _unitMeasurementRepository.GetByKey(unitMeasurementId, UnitMeasurementTypeEnum.Temperature);
+
+            if (unitMeasurementEntity == null)
+            {
+                throw new Exception("UnitMeasurement not found");
+            }
+
+            dsFamilyTempSensorEntity.UnitMeasurementId = unitMeasurementEntity.Id;
+
+            await _sensorRepository.Update(dsFamilyTempSensorEntity);
+
+            return dsFamilyTempSensorEntity;
+        }
+
+        public async Task<List<DSFamilyTempSensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
+        {
+            var deviceInApplication = await _deviceInApplicationRepository.GetById(deviceInApplicationId);
+
+            if (deviceInApplication == null)
+            {
+                throw new Exception("DeviceInApplication not found");
+            }
+
+            return await _sensorRepository.GetAllByDeviceId(deviceInApplication.DeviceBaseId);
+        }
+
         #endregion
     }
 }

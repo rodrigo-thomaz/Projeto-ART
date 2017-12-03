@@ -10,9 +10,7 @@
     public interface IDSFamilyTempSensorRepository : IRepository<ARTDbContext, DSFamilyTempSensor, Guid>
     {
         #region Methods
-
-        Task<List<DSFamilyTempSensor>> GetAllByDeviceId(Guid deviceId);
-
+        
         #endregion Methods
     }
 }

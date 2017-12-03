@@ -129,7 +129,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
-            var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();            
+            var domain = _componentContext.Resolve<ISensorDomain>();            
             var data = await domain.GetAllByDeviceInApplicationId(requestContract.DeviceInApplicationId);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
@@ -231,7 +231,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetUnitMeasurementRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
+            var domain = _componentContext.Resolve<ISensorDomain>();
             var data = await domain.SetUnitMeasurement(message.Contract.DSFamilyTempSensorId, message.Contract.UnitMeasurementId);
 
             var exchange = "amq.topic";
@@ -240,11 +240,10 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Load device into context
-            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
-            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
+            var device = await domain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetUnitMeasurementCompletedModel>(data);            
+            var viewModel = Mapper.Map<Sensor, DSFamilyTempSensorSetUnitMeasurementCompletedModel>(data);            
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DSFamilyTempSensorConstants.SetUnitMeasurementViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
