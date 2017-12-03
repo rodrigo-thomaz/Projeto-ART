@@ -162,7 +162,7 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<List<DSFamilyTempSensor>, List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
+            var iotContract = Mapper.Map<List<Sensor>, List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
             var deviceMessage = new MessageIoTContract<List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);

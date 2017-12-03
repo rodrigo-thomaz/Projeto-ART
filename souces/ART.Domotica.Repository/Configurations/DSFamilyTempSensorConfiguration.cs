@@ -17,10 +17,15 @@
             //Primary Keys
             HasKey(x => x.Id);
 
-            //Id
+            // Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
+
+            //Sensor
+            HasRequired(x => x.Sensor)
+               .WithRequiredDependent(x => x.DSFamilyTempSensor);            
 
             //DeviceAddress
             Property(x => x.DeviceAddress)

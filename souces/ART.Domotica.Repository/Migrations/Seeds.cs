@@ -129,22 +129,25 @@
             var sensor_3_1_Address = "40:255:192:95:147:22:4:195";
             var sensor_3_2_Address = "40:255:113:95:147:22:4:65";
 
-            var sensor_1 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
-            var sensor_2_1 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
-            var sensor_2_2 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
-            var sensor_3_1 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
-            var sensor_3_2 = context.DSFamilyTempSensor.Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
+            var sensor_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
+            var sensor_2_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
+            var sensor_2_2 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
+            var sensor_3_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
+            var sensor_3_2 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
 
             if (sensor_1 == null)
             {
-                sensor_1 = new DSFamilyTempSensor
-                {
-                    DeviceAddress = sensor_1_Address,
-                    Family = "DS18B20",
+                sensor_1 = new Sensor
+                {                    
                     SensorRangeId = sensorRange1.Id,
                     UnitMeasurementId = UnitMeasurementEnum.Celsius,
-                    DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
-                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
+                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    {
+                        DeviceAddress = sensor_1_Address,
+                        Family = "DS18B20",
+                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
+                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
+                    },                    
                     Label = "Sensor 1",
                     SensorTriggers = new List<SensorTrigger>
                     {
@@ -168,12 +171,12 @@
                     },
                     CreateDate = DateTime.Now,
                 };
-                context.DSFamilyTempSensor.Add(sensor_1);
+                context.Sensor.Add(sensor_1);
             }
             else
             {
-                sensor_1.Family = "DS18B20";
-                sensor_1.DeviceAddress = sensor_1_Address;
+                sensor_1.DSFamilyTempSensor.Family = "DS18B20";
+                sensor_1.DSFamilyTempSensor.DeviceAddress = sensor_1_Address;
 
                 if (!sensor_1.SensorTriggers.Any())
                 {
@@ -206,14 +209,18 @@
 
             if (sensor_2_1 == null)
             {
-                sensor_2_1 = new DSFamilyTempSensor
+                sensor_2_1 = new Sensor
                 {
-                    DeviceAddress = sensor_2_1_Address,
-                    Family = "DS18B20",
+                    
                     SensorRangeId = sensorRange1.Id,
-                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
-                    DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
-                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,                    
+                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    {
+                        DeviceAddress = sensor_2_1_Address,
+                        Family = "DS18B20",
+                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
+                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    },
                     Label = "Sensor 1",
                     SensorTriggers = new List<SensorTrigger>
                     {
@@ -237,12 +244,12 @@
                     },
                     CreateDate = DateTime.Now,
                 };
-                context.DSFamilyTempSensor.Add(sensor_2_1);
+                context.Sensor.Add(sensor_2_1);
             }
             else
             {
-                sensor_2_1.Family = "DS18B20";
-                sensor_2_1.DeviceAddress = sensor_2_1_Address;
+                sensor_2_1.DSFamilyTempSensor.Family = "DS18B20";
+                sensor_2_1.DSFamilyTempSensor.DeviceAddress = sensor_2_1_Address;
 
                 if (!sensor_2_1.SensorTriggers.Any())
                 {
@@ -274,14 +281,17 @@
 
             if (sensor_2_2 == null)
             {
-                sensor_2_2 = new DSFamilyTempSensor
-                {
-                    DeviceAddress = sensor_2_2_Address,
-                    Family = "DS18B20",
+                sensor_2_2 = new Sensor
+                {                    
                     SensorRangeId = sensorRange1.Id,
                     UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
-                    DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
-                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    {
+                        DeviceAddress = sensor_2_2_Address,
+                        Family = "DS18B20",
+                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
+                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    },                    
                     Label = "Sensor 2",
                     SensorTriggers = new List<SensorTrigger>
                     {
@@ -305,12 +315,12 @@
                     },
                     CreateDate = DateTime.Now,
                 };
-                context.DSFamilyTempSensor.Add(sensor_2_2);
+                context.Sensor.Add(sensor_2_2);
             }
             else
             {
-                sensor_2_2.Family = "DS18B20";
-                sensor_2_2.DeviceAddress = sensor_2_2_Address;
+                sensor_2_2.DSFamilyTempSensor.Family = "DS18B20";
+                sensor_2_2.DSFamilyTempSensor.DeviceAddress = sensor_2_2_Address;
 
                 if (!sensor_2_2.SensorTriggers.Any())
                 {
@@ -342,15 +352,18 @@
 
             if (sensor_3_1 == null)
             {
-                sensor_3_1 = new DSFamilyTempSensor
-                {
-                    DeviceAddress = sensor_3_1_Address,
-                    Family = "DS18B20",
+                sensor_3_1 = new Sensor
+                {                    
                     SensorRangeId = sensorRange1.Id,
-                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
-                    DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
-                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,                    
                     Label = "Sensor 3",
+                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    {
+                        DeviceAddress = sensor_3_1_Address,
+                        Family = "DS18B20",
+                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
+                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    },
                     SensorTriggers = new List<SensorTrigger>
                     {
                         new SensorTrigger
@@ -373,12 +386,12 @@
                     },
                     CreateDate = DateTime.Now,
                 };
-                context.DSFamilyTempSensor.Add(sensor_3_1);
+                context.Sensor.Add(sensor_3_1);
             }
             else
             {
-                sensor_3_1.Family = "DS18B20";
-                sensor_3_1.DeviceAddress = sensor_3_1_Address;
+                sensor_3_1.DSFamilyTempSensor.Family = "DS18B20";
+                sensor_3_1.DSFamilyTempSensor.DeviceAddress = sensor_3_1_Address;
 
                 if (!sensor_3_1.SensorTriggers.Any())
                 {
@@ -410,14 +423,17 @@
 
             if (sensor_3_2 == null)
             {
-                sensor_3_2 = new DSFamilyTempSensor
-                {
-                    DeviceAddress = sensor_3_2_Address,
-                    Family = "DS18B20",
+                sensor_3_2 = new Sensor
+                {                    
                     SensorRangeId = sensorRange1.Id,
                     UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
-                    DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
-                    DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    {
+                        DeviceAddress = sensor_3_2_Address,
+                        Family = "DS18B20",
+                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
+                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                    },                    
                     Label = "Sensor 4",
                     SensorTriggers = new List<SensorTrigger>
                     {
@@ -441,12 +457,12 @@
                     },
                     CreateDate = DateTime.Now,
                 };
-                context.DSFamilyTempSensor.Add(sensor_3_2);
+                context.Sensor.Add(sensor_3_2);
             }
             else
             {
-                sensor_3_2.Family = "DS18B20";
-                sensor_3_2.DeviceAddress = sensor_3_2_Address;
+                sensor_3_2.DSFamilyTempSensor.Family = "DS18B20";
+                sensor_3_2.DSFamilyTempSensor.DeviceAddress = sensor_3_2_Address;
 
                 if (!sensor_3_2.SensorTriggers.Any())
                 {

@@ -23,14 +23,14 @@
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Sensor.SensorsInDevice.Single().DeviceBaseId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.DSFamilyTempSensorResolutionId));
 
             CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionDetailModel>();
 
             CreateMap<SensorsInDevice, DSFamilyTempSensorDetailModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.SensorId))
-                .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => ((DSFamilyTempSensor)x.Sensor).DSFamilyTempSensorResolutionId))
+                .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.Sensor.DSFamilyTempSensor.DSFamilyTempSensorResolutionId))
                 .ForMember(vm => vm.SensorRangeId, m => m.MapFrom(x => x.Sensor.SensorRangeId.Value))
                 .ForMember(vm => vm.SensorChartLimiter, m => m.MapFrom(x => x.Sensor.SensorChartLimiter))
                 .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.Sensor.UnitMeasurementId))

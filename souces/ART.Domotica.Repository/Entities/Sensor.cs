@@ -7,7 +7,7 @@
     using ART.Domotica.Repository.Entities.SI;
     using ART.Infra.CrossCutting.Repository;
 
-    public abstract class Sensor : IEntity<Guid>
+    public class Sensor : IEntity<Guid>
     {
         #region Properties
 
@@ -27,6 +27,11 @@
         }
 
         public SensorChartLimiter SensorChartLimiter
+        {
+            get; set;
+        }
+
+        public DSFamilyTempSensor DSFamilyTempSensor
         {
             get; set;
         }

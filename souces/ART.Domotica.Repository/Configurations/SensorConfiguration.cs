@@ -11,8 +11,6 @@
 
         public SensorConfiguration()
         {
-            ToTable("Sensor");
-
             //Primary Keys
             HasKey(x => x.Id);
 

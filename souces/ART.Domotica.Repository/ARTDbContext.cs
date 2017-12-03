@@ -29,6 +29,11 @@
             get; set;
         }
 
+        public DbSet<Sensor> Sensor
+        {
+            get; set;
+        }
+
         public DbSet<Application> Application
         {
             get; set;

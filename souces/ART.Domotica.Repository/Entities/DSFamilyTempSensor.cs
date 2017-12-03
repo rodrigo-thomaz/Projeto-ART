@@ -1,19 +1,22 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using ART.Domotica.Enums.SI;
+    using ART.Infra.CrossCutting.Repository;
+    using System;
 
-    public class DSFamilyTempSensor : Sensor
+    public class DSFamilyTempSensor : IEntity<Guid>
     {
-        #region Constructors
+        #region Properties
 
-        public DSFamilyTempSensor()
+        public Guid Id
         {
-            UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature;
+            get; set;
         }
 
-        #endregion Constructors
-
-        #region Properties
+        public Sensor Sensor
+        {
+            get; set;
+        }
 
         public string DeviceAddress
         {

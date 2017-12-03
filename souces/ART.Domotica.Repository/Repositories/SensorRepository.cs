@@ -32,10 +32,10 @@ namespace ART.Domotica.Repository.Repositories
             return entity;
         }
 
-        public async Task<List<DSFamilyTempSensor>> GetAllByDeviceId(Guid deviceId)
+        public async Task<List<Sensor>> GetAllByDeviceId(Guid deviceId)
         {
-            return await _context.DSFamilyTempSensor
-                .Include(x => x.DSFamilyTempSensorResolution)
+            return await _context.Sensor
+                .Include(x => x.DSFamilyTempSensor.DSFamilyTempSensorResolution)
                 .Include(x => x.SensorChartLimiter)
                 .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == deviceId) != null)
                 .ToListAsync();
