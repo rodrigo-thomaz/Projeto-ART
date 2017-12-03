@@ -13,8 +13,6 @@
 
         Task<List<DSFamilyTempSensor>> GetAllByDeviceId(Guid deviceId);
 
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid dsFamilyTempSensorId);
-
         #endregion Methods
     }
 }

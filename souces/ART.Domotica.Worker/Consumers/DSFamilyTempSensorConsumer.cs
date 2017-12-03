@@ -197,7 +197,8 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Load device into context
-            var device = await domain.GetDeviceFromSensor(data.Id);
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>(data);
@@ -239,7 +240,8 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Load device into context
-            var device = await domain.GetDeviceFromSensor(data.Id);
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetUnitMeasurementCompletedModel>(data);            
@@ -279,8 +281,8 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
-            var dsFamilyTempSensorDomain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var device = await dsFamilyTempSensorDomain.GetDeviceFromSensor(message.Contract.DSFamilyTempSensorId);
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.DSFamilyTempSensorId);
 
             //Enviando para View
             var viewModel = new DSFamilyTempSensorSetLabelCompletedModel { DeviceId = device.DeviceBaseId };

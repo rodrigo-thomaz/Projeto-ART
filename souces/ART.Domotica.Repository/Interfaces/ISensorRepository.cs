@@ -13,6 +13,8 @@
 
         Task<List<Sensor>> GetAll(Guid applicationId);
 
+        Task<SensorsInDevice> GetDeviceFromSensor(Guid sensorId);
+
         #endregion Methods
     }
 }

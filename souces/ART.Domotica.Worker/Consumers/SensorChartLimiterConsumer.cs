@@ -86,8 +86,8 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Load device into context
-            var dsFamilyTempSensorDomain = _componentContext.Resolve<IDSFamilyTempSensorDomain>();
-            var device = await dsFamilyTempSensorDomain.GetDeviceFromSensor(message.Contract.SensorChartLimiterId);
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.SensorChartLimiterId);
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorChartLimiterSetValueRequestContract, SensorChartLimiterSetValueCompletedModel>(message.Contract);

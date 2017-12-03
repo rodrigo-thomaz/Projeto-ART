@@ -22,5 +22,13 @@ namespace ART.Domotica.Repository.Repositories
                 .Include(x => x.SensorChartLimiter)
                 .ToListAsync();
         }
+
+        public async Task<SensorsInDevice> GetDeviceFromSensor(Guid sensorId)
+        {
+            var entity = await _context.SensorsInDevice
+                .SingleOrDefaultAsync(x => x.SensorId == sensorId);
+
+            return entity;
+        }
     }
 }
