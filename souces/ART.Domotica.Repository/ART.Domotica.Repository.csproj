@@ -237,6 +237,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="InitialFiles\ActuatorType.csv" />
+    <None Include="InitialFiles\SensorUnitMeasurementScale.csv" />
     <None Include="InitialFiles\UnitMeasurementScale.csv" />
     <None Include="InitialFiles\SensorUnitMeasurementDefault.csv" />
     <None Include="InitialFiles\SensorDatasheet.csv" />
