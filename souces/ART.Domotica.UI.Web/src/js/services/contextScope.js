@@ -92,6 +92,15 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     }
 
+    var getNumericalScaleByKey = function (numericalScalePrefixId, numericalScaleTypeId) {
+        for (var i = 0; i < context.numericalScales.length; i++) {
+            var item = context.numericalScales[i];
+            if (item.numericalScalePrefixId === numericalScalePrefixId && item.numericalScaleTypeId === numericalScaleTypeId) {
+                return item;
+            }
+        }
+    }
+
     var getUnitMeasurementTypeByKey = function (unitMeasurementTypeId) {
         for (var i = 0; i < context.unitMeasurementTypes.length; i++) {
             var item = context.unitMeasurementTypes[i];
@@ -269,6 +278,22 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
+    var mapper_UnitMeasurementScale_NumericalScale_Init = false;
+    var mapper_UnitMeasurementScale_NumericalScale = function () {
+        if (!mapper_UnitMeasurementScale_NumericalScale_Init && context.unitMeasurementScaleLoaded && context.numericalScaleLoaded) {
+            mapper_UnitMeasurementScale_NumericalScale_Init = true;
+            for (var i = 0; i < context.unitMeasurementScales.length; i++) {
+                var unitMeasurementScale = context.unitMeasurementScales[i];
+                var numericalScale = getNumericalScaleByKey(unitMeasurementScale.numericalScalePrefixId, unitMeasurementScale.numericalScaleTypeId);
+                unitMeasurementScale.numericalScale = numericalScale;
+                if (numericalScale.unitMeasurementScales === undefined) {
+                    numericalScale.unitMeasurementScales = [];
+                }
+                numericalScale.unitMeasurementScales.push(unitMeasurementScale);
+            }
+        }
+    };
+
     //
 
     var mapper_SensorDatasheet_SensorTypeType_Init = false;
@@ -337,6 +362,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     context.$watch('numericalScaleLoaded', function (newValue, oldValue) {
         mapper_NumericalScale_NumericalScalePrefix();
         mapper_NumericalScale_NumericalScaleType();
+        mapper_UnitMeasurementScale_NumericalScale();
     });
 
     context.$watch('numericalScalePrefixLoaded', function (newValue, oldValue) {
@@ -354,6 +380,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
         mapper_UnitMeasurementScale_UnitMeasurement();
+        mapper_UnitMeasurementScale_NumericalScale();
     });
 
     //
