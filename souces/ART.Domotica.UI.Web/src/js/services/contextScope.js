@@ -91,23 +91,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
                 unitMeasurement.sensorUnitMeasurementDefaults.push(sensorUnitMeasurementDefault);
             }
         }
-    };
-
-    var mapper_SensorUnitMeasurementDefault_SensorType_Init = false;
-    var mapper_SensorUnitMeasurementDefault_SensorType = function () {
-        if (!mapper_SensorUnitMeasurementDefault_SensorType_Init && context.sensorUnitMeasurementDefaultLoaded && context.sensorTypeLoaded) {
-            mapper_SensorUnitMeasurementDefault_SensorType_Init = true;
-            for (var i = 0; i < context.sensorUnitMeasurementDefaults.length; i++) {
-                var sensorUnitMeasurementDefault = context.sensorUnitMeasurementDefaults[i];
-                var sensorType = getSensorTypeByKey(sensorUnitMeasurementDefault.sensorTypeId);
-                sensorUnitMeasurementDefault.sensorType = sensorType;
-                if (sensorType.sensorUnitMeasurementDefaults === undefined) {
-                    sensorType.sensorUnitMeasurementDefaults = [];
-                }
-                sensorType.sensorUnitMeasurementDefaults.push(sensorUnitMeasurementDefault);
-            }
-        }
-    };
+    };    
 
     var mapper_SensorUnitMeasurementScale_SensorDatasheet_Init = false;
     var mapper_SensorUnitMeasurementScale_SensorDatasheet = function () {
@@ -141,7 +125,6 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
 
     context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
         mapper_SensorDatasheet_SensorTypeType();
-        mapper_SensorUnitMeasurementDefault_SensorType();
     });
 
     context.$watch('sensorDatasheetLoaded', function (newValue, oldValue) {
@@ -151,7 +134,6 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
 
     context.$watch('sensorUnitMeasurementDefaultLoaded', function (newValue, oldValue) {
         mapper_SensorUnitMeasurementDefault_UnitMeasurement();
-        mapper_SensorUnitMeasurementDefault_SensorType();
     });
 
     context.$watch('sensorsLoaded', function (newValue, oldValue) {
