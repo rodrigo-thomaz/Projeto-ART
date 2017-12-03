@@ -253,6 +253,22 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
+    var mapper_UnitMeasurementScale_UnitMeasurement_Init = false;
+    var mapper_UnitMeasurementScale_UnitMeasurement = function () {
+        if (!mapper_UnitMeasurementScale_UnitMeasurement_Init && context.unitMeasurementScaleLoaded && context.unitMeasurementLoaded) {
+            mapper_UnitMeasurementScale_UnitMeasurement_Init = true;
+            for (var i = 0; i < context.unitMeasurementScales.length; i++) {
+                var unitMeasurementScale = context.unitMeasurementScales[i];
+                var unitMeasurement = getUnitMeasurementByKey(unitMeasurementScale.unitMeasurementId, unitMeasurementScale.unitMeasurementTypeId);
+                unitMeasurementScale.unitMeasurement = unitMeasurement;
+                if (unitMeasurement.unitMeasurementScales === undefined) {
+                    unitMeasurement.unitMeasurementScales = [];
+                }
+                unitMeasurement.unitMeasurementScales.push(unitMeasurementScale);
+            }
+        }
+    };
+
     //
 
     var mapper_SensorDatasheet_SensorTypeType_Init = false;
@@ -337,7 +353,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     });
 
     context.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
-        
+        mapper_UnitMeasurementScale_UnitMeasurement();
     });
 
     //
@@ -352,6 +368,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('unitMeasurementLoaded', function (newValue, oldValue) {
         mapper_UnitMeasurement_UnitMeasurementType();
+        mapper_UnitMeasurementScale_UnitMeasurement();
         mapper_SensorUnitMeasurementDefault_UnitMeasurement();
     });    
 
