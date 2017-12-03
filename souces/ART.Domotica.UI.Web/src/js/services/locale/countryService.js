@@ -37,6 +37,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
         localeContext.countryLoaded = true;
         _initializing = false;
         _initialized = true;
+        clearOnConnected();
         $rootScope.$emit('countryService_Initialized');
     }
 

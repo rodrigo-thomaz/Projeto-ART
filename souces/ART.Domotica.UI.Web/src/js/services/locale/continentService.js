@@ -37,6 +37,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
         localeContext.continentLoaded = true;
         _initializing = false;
         _initialized = true;
+        clearOnConnected();
         $rootScope.$emit('continentService_Initialized');
     }
 
