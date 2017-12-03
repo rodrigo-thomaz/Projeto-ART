@@ -44,7 +44,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$r
         clearOnConnected();
     });
 
-    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected);        
+    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
 
     // stompService
     if (stompService.connected())

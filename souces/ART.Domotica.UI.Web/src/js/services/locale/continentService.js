@@ -53,7 +53,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
         clearOnConnected();
     });
 
-    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected);        
+    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
 
     // stompService
     if (stompService.connected())

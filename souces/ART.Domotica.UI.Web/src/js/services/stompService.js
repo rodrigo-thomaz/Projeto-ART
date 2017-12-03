@@ -4,11 +4,11 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     var serviceFactory = {};    
     
     var onConnected = function (frame) {
-        $rootScope.$emit('stompService_onConnected', frame);
+        $rootScope.$emit(serviceFactory.connectedEventName, frame);
     }
 
     var onError = function (frame) {
-        $rootScope.$emit('stompService_onError', frame);
+        $rootScope.$emit(serviceFactory.errorEventName, frame);
     }
 
     var subscribe = function (topic, callback) {
@@ -70,11 +70,14 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     
     // serviceFactory    
 
+    serviceFactory.connectedEventName = 'stompService_Connected';
+    serviceFactory.errorEventName = 'stompService_Error';
+
     serviceFactory.subscribe = subscribe;
     serviceFactory.subscribeAllViews = subscribeAllViews;
     serviceFactory.unsubscribe = unsubscribe;
     serviceFactory.connected = connected;
-
+    
     return serviceFactory;   
 
 }]);

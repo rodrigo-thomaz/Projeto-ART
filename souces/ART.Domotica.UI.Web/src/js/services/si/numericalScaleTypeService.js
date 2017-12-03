@@ -53,7 +53,7 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', '$rootScope
         clearOnConnected();
     });
 
-    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected);        
+    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
 
     // stompService
     if (stompService.connected())
