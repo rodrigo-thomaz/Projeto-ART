@@ -17,16 +17,6 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         }
     };
 
-    var setUnitMeasurement = function (dsFamilyTempSensorId, unitMeasurementId) {
-        var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
-            unitMeasurementId: unitMeasurementId,
-        }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setUnitMeasurement', data).then(function (results) {
-            return results;
-        });
-    };
-
     var setResolution = function (dsFamilyTempSensorId, dsFamilyTempSensorResolutionId) {
         var data = {
             dsFamilyTempSensorId: dsFamilyTempSensorId,
@@ -37,67 +27,21 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
         });
     };
 
-    var setLabel = function (dsFamilyTempSensorId, label) {
-        var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
-            label: label,
-        }
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/setLabel', data).then(function (results) {
-            return results;
-        });
-    };   
-
     var onConnected = function () {
 
-        stompService.subscribeAllViews('DSFamilyTempSensor.SetUnitMeasurementViewCompleted', onSetUnitMeasurementCompleted);
         stompService.subscribeAllViews('DSFamilyTempSensor.SetResolutionViewCompleted', onSetResolutionCompleted);
-        stompService.subscribeAllViews('DSFamilyTempSensor.SetLabelViewCompleted', onSetLabelCompleted);
-        
+                
         if (!initialized) {
             initialized = true;            
         }
-    }  
-
-    var onSetUnitMeasurementCompleted = function (payload) {
-
-        var result = JSON.parse(payload.body);        
-        var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
-
-        //unitMeasurement
-        sensor.unitMeasurementId = result.unitMeasurementId;
-        sensor.unitMeasurement = unitMeasurementService.getByKey(sensor.unitMeasurementId);
-
-        //temp
-        sensor.tempConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.tempCelsius);
-
-        //sensorRange
-        sensor.sensorRange.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorRange.max);
-        sensor.sensorRange.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorRange.min);
-
-        //sensorChartLimiter
-        sensor.sensorChartLimiter.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorChartLimiter.max);
-        sensor.sensorChartLimiter.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorChartLimiter.min);
-
-        //alarms
-        sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
-        sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
-
-        $rootScope.$emit('dsFamilyTempSensorService_onSetUnitMeasurementCompleted_Id_' + result.dsFamilyTempSensorId, result);
-    }    
+    }      
 
     var onSetResolutionCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
         sensor.dsFamilyTempSensorResolutionId = result.dsFamilyTempSensorResolutionId;
         $rootScope.$emit('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + result.dsFamilyTempSensorId, result);
-    }
-
-    var onSetLabelCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
-        sensor.label = result.label;
-        $rootScope.$emit('dsFamilyTempSensorService_onSetLabelCompleted_Id_' + result.dsFamilyTempSensorId, result);
-    }    
+    }     
 
     $rootScope.$on('$destroy', function () {
         clearOnConnected();
@@ -111,11 +55,8 @@ app.factory('dsFamilyTempSensorService', ['$http', '$log', '$rootScope', 'ngAuth
     // serviceFactory
 
     serviceFactory.getById = getById;
-
-    serviceFactory.setUnitMeasurement = setUnitMeasurement;
     serviceFactory.setResolution = setResolution;
-    serviceFactory.setLabel = setLabel;   
-
+    
     return serviceFactory;
 
 }]);
