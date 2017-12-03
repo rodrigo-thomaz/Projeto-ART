@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -32,11 +32,12 @@ app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', '
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.numericalScales.push(data[i]);
+            siContext.numericalScales.push(data[i]);
         }
-        contextScope.numericalScaleLoaded = true;
+        siContext.numericalScaleLoaded = true;
         _initializing = false;
         _initialized = true;
+        clearOnConnected();
         $rootScope.$emit('numericalScaleService_Initialized');
     }
 

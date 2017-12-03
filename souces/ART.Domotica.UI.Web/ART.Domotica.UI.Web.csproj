@@ -235,6 +235,8 @@
     <Content Include="src\js\services\sensorDatasheetService.js" />
     <Content Include="src\js\services\sensorTypeService.js" />
     <Content Include="src\js\services\sensorService.js" />
+    <Content Include="src\js\services\si\siMapper.js" />
+    <Content Include="src\js\services\si\siContext.js" />
     <Content Include="src\js\services\si\unitMeasurementConverter.js" />
     <Content Include="src\js\services\si\numericalScaleService.js" />
     <Content Include="src\js\services\si\numericalScalePrefixService.js" />

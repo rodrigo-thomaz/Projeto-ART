@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -32,11 +32,12 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.numericalScalePrefixes.push(data[i]);
+            siContext.numericalScalePrefixes.push(data[i]);
         }
-        contextScope.numericalScalePrefixLoaded = true;
+        siContext.numericalScalePrefixLoaded = true;
         _initializing = false;
         _initialized = true;
+        clearOnConnected();
         $rootScope.$emit('numericalScalePrefixService_Initialized');
     }
 
