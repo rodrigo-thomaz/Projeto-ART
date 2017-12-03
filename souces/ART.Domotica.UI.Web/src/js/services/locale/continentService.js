@@ -6,11 +6,14 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllCompletedTopic = 'Locale.Continent.GetAllViewCompleted';
+    var getAllCompletedSubscription = null;
+
     var serviceFactory = {};    
 
     var onConnected = function () {
 
-        stompService.subscribe('Locale.Continent.GetAllViewCompleted', onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -34,10 +37,15 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
         for (var i = 0; i < data.length; i++) {
             localeContext.continents.push(data[i]);
         }
-        localeContext.continentLoaded = true;
+        
         _initializing = false;
         _initialized = true;
+
+        localeContext.continentLoaded = true;
         clearOnConnected();
+
+        getAllCompletedSubscription.unsubscribe();
+
         $rootScope.$emit('continentService_Initialized');
     }
 

@@ -6,11 +6,14 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', '$rootScope', 
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllCompletedTopic = 'SI.UnitMeasurement.GetAllViewCompleted';
+    var getAllCompletedSubscription = null;
+
     var serviceFactory = {};    
 
     var onConnected = function () {
 
-        stompService.subscribe('SI.UnitMeasurement.GetAllViewCompleted', onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -34,10 +37,15 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', '$rootScope', 
         for (var i = 0; i < data.length; i++) {
             siContext.unitMeasurements.push(data[i]);
         }
-        siContext.unitMeasurementLoaded = true;
+        
         _initializing = false;
         _initialized = true;
+
+        siContext.unitMeasurementLoaded = true;
         clearOnConnected();
+
+        getAllCompletedSubscription.unsubscribe();
+
         $rootScope.$emit('UnitMeasurementService_Initialized');
     }
 

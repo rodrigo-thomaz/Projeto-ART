@@ -6,11 +6,14 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', '$rootScope
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllCompletedTopic = 'SI.NumericalScaleType.GetAllViewCompleted';
+    var getAllCompletedSubscription = null;
+
     var serviceFactory = {};    
 
     var onConnected = function () {
 
-        stompService.subscribe('SI.NumericalScaleType.GetAllViewCompleted', onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -34,10 +37,15 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', '$rootScope
         for (var i = 0; i < data.length; i++) {
             siContext.numericalScaleTypes.push(data[i]);
         }
-        siContext.numericalScaleTypeLoaded = true;
+        
         _initializing = false;
         _initialized = true;
+
+        siContext.numericalScaleTypeLoaded = true;
         clearOnConnected();
+
+        getAllCompletedSubscription.unsubscribe();
+
         $rootScope.$emit('numericalScaleTypeService_Initialized');
     }
 

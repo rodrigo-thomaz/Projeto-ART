@@ -12,15 +12,15 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     }
 
     var subscribe = function (topic, callback) {
-        client.subscribe(generateStringTopic(topic), callback);
+        return client.subscribe(generateStringTopic(topic), callback);
     };
 
     var subscribeAllViews = function (topic, callback) {
-        client.subscribe(generateStringTopicAllViews(topic), callback);
+        return client.subscribe(generateStringTopicAllViews(topic), callback);
     };
 
-    var unsubscribe = function (topic) {
-        client.unsubscribe(generateStringTopic(topic));
+    var unsubscribe = function (subscriptionId) {
+        return client.unsubscribe(subscriptionId);
     };    
 
     var generateStringTopic = function (topic) {

@@ -6,11 +6,14 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllCompletedTopic = 'SI.NumericalScaleTypeCountry.GetAllViewCompleted';
+    var getAllCompletedSubscription = null;
+
     var serviceFactory = {};    
 
     var onConnected = function () {
 
-        stompService.subscribe('SI.NumericalScaleTypeCountry.GetAllViewCompleted', onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -34,10 +37,15 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
         for (var i = 0; i < data.length; i++) {
             siContext.numericalScaleTypeCountries.push(data[i]);
         }
-        siContext.numericalScaleTypeCountryLoaded = true;
+        
         _initializing = false;
         _initialized = true;
+
+        siContext.numericalScaleTypeCountryLoaded = true;
         clearOnConnected();
+
+        getAllCompletedSubscription.unsubscribe();
+
         $rootScope.$emit('numericalScaleTypeCountryService_Initialized');
     }
 

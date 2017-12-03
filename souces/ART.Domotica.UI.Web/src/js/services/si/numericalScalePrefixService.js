@@ -6,11 +6,14 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
     var _initializing = false;
     var _initialized  = false;
 
+    var getAllCompletedTopic = 'SI.NumericalScalePrefix.GetAllViewCompleted';
+    var getAllCompletedSubscription = null;
+
     var serviceFactory = {};    
 
     var onConnected = function () {
 
-        stompService.subscribe('SI.NumericalScalePrefix.GetAllViewCompleted', onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -34,10 +37,15 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
         for (var i = 0; i < data.length; i++) {
             siContext.numericalScalePrefixes.push(data[i]);
         }
-        siContext.numericalScalePrefixLoaded = true;
+        
         _initializing = false;
         _initialized = true;
+
+        siContext.numericalScalePrefixLoaded = true;
         clearOnConnected();
+
+        getAllCompletedSubscription.unsubscribe();
+
         $rootScope.$emit('numericalScalePrefixService_Initialized');
     }
 
