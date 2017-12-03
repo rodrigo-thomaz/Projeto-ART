@@ -35,7 +35,6 @@
             builder.RegisterType<SensorChartLimiterConsumer>().As<ISensorChartLimiterConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorConsumer>().As<ISensorConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorDatasheetConsumer>().As<ISensorDatasheetConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<SensorRangeConsumer>().As<ISensorRangeConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTriggerConsumer>().As<ISensorTriggerConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTypeConsumer>().As<ISensorTypeConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorUnitMeasurementDefaultConsumer>().As<ISensorUnitMeasurementDefaultConsumer>().SingleInstance().AutoActivate();

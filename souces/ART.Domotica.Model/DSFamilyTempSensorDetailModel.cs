@@ -38,11 +38,6 @@
             get; set;
         }
 
-        public byte SensorRangeId
-        {
-            get; set;
-        }
-
         public UnitMeasurementEnum UnitMeasurementId
         {
             get; set;

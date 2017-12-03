@@ -44,16 +44,6 @@
             Property(x => x.UnitMeasurementTypeId)
                 .HasColumnOrder(3);
 
-            //SensorRange
-            HasOptional(x => x.SensorRange)
-                .WithMany(x => x.Sensors)
-                .HasForeignKey(x => x.SensorRangeId)
-                .WillCascadeOnDelete(false);
-
-            //SensorRangeId
-            Property(x => x.SensorRangeId)
-                .HasColumnOrder(4);
-
             //CreateDate
             Property(x => x.CreateDate)
                 .HasColumnOrder(5)

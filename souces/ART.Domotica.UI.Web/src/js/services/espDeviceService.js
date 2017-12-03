@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', 'sensorRangeService', 'unitMeasurementService', 'unitMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, siContext, sensorRangeService, unitMeasurementService, unitMeasurementConverter) {
+app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', 'unitMeasurementService', 'unitMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, siContext, unitMeasurementService, unitMeasurementConverter) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -197,12 +197,6 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
             // Arrumar aqui !!!
             sensor.unitMeasurement = siContext.getUnitMeasurementScaleByKey(sensor.unitMeasurementId);
-
-            //SensorRange
-            var sensorRange = sensorRangeService.getById(sensor.sensorRangeId);
-            sensor.sensorRange = sensorRange;
-            sensor.sensorRange.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorRange.max);
-            sensor.sensorRange.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorRange.min);
 
             //sensorChartLimiter
             sensor.sensorChartLimiter.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorChartLimiter.max);

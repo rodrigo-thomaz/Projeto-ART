@@ -33,7 +33,6 @@
         public async Task<ESPDevice> GetByPin(string pin)
         {
             var data = await _context.ESPDevice
-                .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorRange))
                 .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorTriggers))
                 .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorChartLimiter))
                 .Include(x => x.DeviceMQ)
@@ -83,7 +82,6 @@
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorTriggers))
                 .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorChartLimiter))
-                .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorRange))
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();           
 

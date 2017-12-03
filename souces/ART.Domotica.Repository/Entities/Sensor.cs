@@ -36,16 +36,6 @@
             get; set;
         }
 
-        public SensorRange SensorRange
-        {
-            get; set;
-        }
-
-        public byte? SensorRangeId
-        {
-            get; set;
-        }
-
         public ICollection<SensorsInDevice> SensorsInDevice
         {
             get; set;

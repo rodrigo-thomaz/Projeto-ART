@@ -144,7 +144,6 @@
     <Compile Include="Controllers\SensorChartLimiterController.cs" />
     <Compile Include="Controllers\ESPDeviceController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
-    <Compile Include="Controllers\SensorRangeController.cs" />
     <Compile Include="Controllers\SensorUnitMeasurementDefaultController.cs" />
     <Compile Include="Controllers\SensorDatasheetController.cs" />
     <Compile Include="Controllers\SensorTypeController.cs" />

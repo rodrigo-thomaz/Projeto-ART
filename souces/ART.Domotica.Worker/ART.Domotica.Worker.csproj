@@ -123,7 +123,6 @@
     <Compile Include="AutoMapper\SensorDatasheetUnitMeasurementScaleProfile.cs" />
     <Compile Include="AutoMapper\TimeZoneProfile.cs" />
     <Compile Include="AutoMapper\SI\UnitMeasurementProfile.cs" />
-    <Compile Include="AutoMapper\SensorRangeProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
     <Compile Include="Consumers\Locale\ContinentConsumer.cs" />
@@ -131,7 +130,6 @@
     <Compile Include="Consumers\SensorDatasheetUnitMeasurementScaleConsumer.cs" />
     <Compile Include="Consumers\SensorTriggerConsumer.cs" />
     <Compile Include="Consumers\SensorChartLimiterConsumer.cs" />
-    <Compile Include="Consumers\SensorRangeConsumer.cs" />
     <Compile Include="Consumers\SensorUnitMeasurementDefaultConsumer.cs" />
     <Compile Include="Consumers\SensorDatasheetConsumer.cs" />
     <Compile Include="Consumers\SensorTypeConsumer.cs" />
@@ -149,7 +147,6 @@
     <Compile Include="IConsumers\IDeviceNTPConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />
     <Compile Include="IConsumers\ISensorChartLimiterConsumer.cs" />
-    <Compile Include="IConsumers\ISensorRangeConsumer.cs" />
     <Compile Include="IConsumers\ISensorTriggerConsumer.cs" />
     <Compile Include="IConsumers\ISensorUnitMeasurementDefaultConsumer.cs" />
     <Compile Include="IConsumers\ISensorDatasheetConsumer.cs" />

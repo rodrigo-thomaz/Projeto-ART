@@ -41,23 +41,6 @@
             ExecuteSensorUnitMeasurementDefault(context);
             ExecuteSensorDatasheetUnitMeasurementScale(context);
 
-            #region SensorRange
-
-            var sensorRange1 = context.SensorRange.SingleOrDefault(x => x.Id == 1);
-
-            if (sensorRange1 == null)
-            {
-                sensorRange1 = new SensorRange { Id = 1 };
-                context.SensorRange.Add(sensorRange1);
-            }
-
-            sensorRange1.Min = -55;
-            sensorRange1.Max = 125;
-
-            context.SaveChanges();
-
-            #endregion
-
             #region DSFamilyTempSensorResolutions
 
             var dsFamilyTempSensorResolution9 = context.DSFamilyTempSensorResolution.SingleOrDefault(x => x.Id == 9);
@@ -139,7 +122,6 @@
             {
                 sensor_1 = new Sensor
                 {
-                    SensorRangeId = sensorRange1.Id,
                     UnitMeasurementId = UnitMeasurementEnum.Celsius,
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {
@@ -212,7 +194,6 @@
                 sensor_2_1 = new Sensor
                 {
 
-                    SensorRangeId = sensorRange1.Id,
                     UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {
@@ -283,7 +264,6 @@
             {
                 sensor_2_2 = new Sensor
                 {
-                    SensorRangeId = sensorRange1.Id,
                     UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {
@@ -354,7 +334,6 @@
             {
                 sensor_3_1 = new Sensor
                 {
-                    SensorRangeId = sensorRange1.Id,
                     UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     Label = "Sensor 3",
                     DSFamilyTempSensor = new DSFamilyTempSensor
@@ -425,7 +404,6 @@
             {
                 sensor_3_2 = new Sensor
                 {
-                    SensorRangeId = sensorRange1.Id,
                     UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {

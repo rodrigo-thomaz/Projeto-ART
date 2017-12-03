@@ -230,7 +230,6 @@
     <Content Include="src\js\services\authInterceptorService.js" />
     <Content Include="src\js\services\authService.js" />
     <Content Include="src\js\services\applicationService.js" />
-    <Content Include="src\js\services\sensorRangeService.js" />
     <Content Include="src\js\services\sensorUnitMeasurementDefaultService.js" />
     <Content Include="src\js\services\sensorDatasheetService.js" />
     <Content Include="src\js\services\sensorTypeService.js" />

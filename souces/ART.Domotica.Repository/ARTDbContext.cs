@@ -134,11 +134,6 @@
             get; set;
         }
 
-        public DbSet<SensorRange> SensorRange
-        {
-            get; set;
-        }
-
         public DbSet<SensorsInDevice> SensorsInDevice
         {
             get; set;
@@ -220,7 +215,6 @@
             modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());
             modelBuilder.Configurations.Add(new SensorConfiguration());
             modelBuilder.Configurations.Add(new SensorDatasheetConfiguration());
-            modelBuilder.Configurations.Add(new SensorRangeConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
             modelBuilder.Configurations.Add(new SensorTypeConfiguration());

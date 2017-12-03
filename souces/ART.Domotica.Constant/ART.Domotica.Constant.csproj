@@ -49,7 +49,6 @@
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="DSFamilyTempSensorConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SensorRangeConstants.cs" />
     <Compile Include="SensorUnitMeasurementDefaultConstants.cs" />
     <Compile Include="SensorDatasheetConstants.cs" />
     <Compile Include="SensorTypeConstants.cs" />

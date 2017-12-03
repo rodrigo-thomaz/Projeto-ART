@@ -76,7 +76,6 @@ angular.module('app')
                       'js/services/sensorUnitMeasurementDefaultService.js',
                       'js/services/sensorService.js',
                                             
-                      'js/services/sensorRangeService.js',
                       'js/services/sensorChartLimiterService.js',
                       'js/services/sensorTriggerService.js',
 
