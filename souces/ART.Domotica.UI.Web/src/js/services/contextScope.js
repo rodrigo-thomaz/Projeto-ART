@@ -1,17 +1,9 @@
 ﻿'use strict';
-app.factory('contextScope', ['$rootScope', function ($rootScope) {
+app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', function ($rootScope, localeContext, localeMapper) {
 
     var context = $rootScope.$new();
 
-    // *** Public Properties ***
-
-    // Locale
-
-    context.continents = [];    
-    context.continentLoaded = false;    
-
-    context.countries = [];    
-    context.countryLoaded = false;    
+    // *** Public Properties ***    
 
     //SI
 
@@ -50,27 +42,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     context.sensorsLoaded = false;
     context.sensors = [];    
 
-    // *** Finders ***
-
-    // Locale
-
-    var getContinentByKey = function (continentId) {
-        for (var i = 0; i < context.continents.length; i++) {
-            var item = context.continents[i];
-            if (item.continentId === continentId) {
-                return item;
-            }
-        }
-    }
-
-    var getCountryByKey = function (countryId) {
-        for (var i = 0; i < context.countries.length; i++) {
-            var item = context.countries[i];
-            if (item.countryId === countryId) {
-                return item;
-            }
-        }
-    }
+    // *** Finders ***    
 
     // SI
 
@@ -168,36 +140,17 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
 
     // *** Navigation Properties Mappers ***
-
-    // Locale
-
-    var mapper_Country_Continent_Init = false;
-    var mapper_Country_Continent = function () {
-        if (!mapper_Country_Continent_Init && context.countryLoaded && context.continentLoaded) {
-            mapper_Country_Continent_Init = true;
-            for (var i = 0; i < context.countries.length; i++) {
-                var country = context.countries[i];
-                var continent = getContinentByKey(country.continentId);
-                country.continent = continent;
-                delete country.continentId; // removendo a foreing key
-                if (continent.countries === undefined) {
-                    continent.countries = [];
-                }
-                continent.countries.push(country);
-            }
-        }
-    };
-
+    
     // SI
 
     var mapper_NumericalScaleTypeCountry_Init = false;
     var mapper_NumericalScaleTypeCountry = function () {
-        if (!mapper_NumericalScaleTypeCountry_Init && context.numericalScaleTypeCountryLoaded && context.countryLoaded) {
+        if (!mapper_NumericalScaleTypeCountry_Init && context.numericalScaleTypeCountryLoaded && localeContext.countryLoaded) {
             mapper_NumericalScaleTypeCountry_Init = true;
             for (var i = 0; i < context.numericalScaleTypeCountries.length; i++) {
                 var numericalScaleTypeCountry = context.numericalScaleTypeCountries[i];
                 var numericalScaleType = getNumericalScaleTypeByKey(numericalScaleTypeCountry.numericalScaleTypeId);
-                var country = getCountryByKey(numericalScaleTypeCountry.countryId);
+                var country = localeContext.getCountryByKey(numericalScaleTypeCountry.countryId);
                 //Atach in numericalScaleType
                 if (numericalScaleType.countries === undefined) {
                     numericalScaleType.countries = [];
@@ -346,14 +299,9 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     // *** Watches ***
 
-    // Locale
+    // Locale   
 
-    context.$watch('continentLoaded', function (newValue, oldValue) {
-        mapper_Country_Continent();
-    });
-
-    context.$watch('countryLoaded', function (newValue, oldValue) {
-        mapper_Country_Continent();
+    localeContext.$watch('countryLoaded', function (newValue, oldValue) {
         mapper_NumericalScaleTypeCountry();
     });
 
@@ -418,12 +366,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     });
 
     // *** Public Methods ***
-
-    // Locale
-
-    context.getContinentByKey = getContinentByKey;
-    context.getCountryByKey = getCountryByKey;
-
+    
     // SI
 
     context.getUnitMeasurementTypeByKey = getUnitMeasurementTypeByKey;

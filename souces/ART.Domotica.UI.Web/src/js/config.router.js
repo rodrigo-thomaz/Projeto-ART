@@ -49,6 +49,8 @@ angular.module('app')
                       'js/services/contextScope.js',
 
                       //Locale
+                      'js/services/locale/localeContext.js',
+                      'js/services/locale/localeMapper.js',
                       'js/services/locale/continentService.js',
                       'js/services/locale/countryService.js',
 

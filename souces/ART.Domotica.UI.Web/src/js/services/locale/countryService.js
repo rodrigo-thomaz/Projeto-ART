@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, $rootScope, stompService, localeContext) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -32,9 +32,9 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.countries.push(data[i]);
+            localeContext.countries.push(data[i]);
         }
-        contextScope.countryLoaded = true;
+        localeContext.countryLoaded = true;
         _initializing = false;
         _initialized = true;
         $rootScope.$emit('countryService_Initialized');

@@ -221,6 +221,8 @@
     <Content Include="src\js\services\contextScope.js" />
     <Content Include="src\js\services\dsFamilyTempSensorResolutionService.js" />
     <Content Include="src\js\services\deviceNTPService.js" />
+    <Content Include="src\js\services\locale\localeMapper.js" />
+    <Content Include="src\js\services\locale\localeContext.js" />
     <Content Include="src\js\services\sensorTriggerService.js" />
     <Content Include="src\js\services\sensorChartLimiterService.js" />
     <Content Include="src\js\services\espDeviceService.js" />
