@@ -15,11 +15,11 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     }
 
     var subscribe = function (topic, callback) {
-        return client.subscribe(generateStringTopic(topic), callback);
+        return client.subscribe(generateStringTopic(topic), callback, { id: topic });
     };
 
     var subscribeAllViews = function (topic, callback) {
-        return client.subscribe(generateStringTopicAllViews(topic), callback);
+        return client.subscribe(generateStringTopicAllViews(topic), callback, { id: topic });
     };
 
     var unsubscribe = function (subscriptionId) {
@@ -49,6 +49,8 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         var headers = {
             login: applicationMQ.user,
             passcode: applicationMQ.password,
+            // additional header
+            //'client-id': 'my-client-id'
         };
 
         client = Stomp.client(url);
