@@ -36,7 +36,7 @@ namespace ART.Domotica.Producer.Services
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetUnitMeasurementQueueName, null, payload);
+                _model.BasicPublish("", SensorConstants.SetUnitMeasurementQueueName, null, payload);
             });            
         }
 
@@ -54,7 +54,7 @@ namespace ART.Domotica.Producer.Services
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetLabelQueueName, null, payload);
+                _model.BasicPublish("", SensorConstants.SetLabelQueueName, null, payload);
             });
         }
 
@@ -79,14 +79,14 @@ namespace ART.Domotica.Producer.Services
                 , arguments: null);
 
             _model.QueueDeclare(
-                 queue: DSFamilyTempSensorConstants.SetUnitMeasurementQueueName
+                 queue: SensorConstants.SetUnitMeasurementQueueName
                , durable: true
                , exclusive: false
                , autoDelete: false
                , arguments: null);
 
             _model.QueueDeclare(
-                 queue: DSFamilyTempSensorConstants.SetLabelQueueName
+                 queue: SensorConstants.SetLabelQueueName
                , durable: true
                , exclusive: false
                , autoDelete: false
