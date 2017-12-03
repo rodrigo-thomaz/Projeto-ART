@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetLabelCompletedModel
+    public class SensorSetLabelCompletedModel
     {
         #region Properties
 

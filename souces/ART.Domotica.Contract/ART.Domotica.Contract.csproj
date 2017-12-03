@@ -46,12 +46,12 @@
     <Compile Include="DeviceNTPSetTimeZoneRequestContract.cs" />
     <Compile Include="ESPDeviceSetLabelRequestContract.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetLabelRequestContract.cs" />
+    <Compile Include="SensorSetLabelRequestContract.cs" />
     <Compile Include="SensorChartLimiterSetValueRequestContract.cs" />
     <Compile Include="SensorTriggerSetAlarmOnRequestContract.cs" />
     <Compile Include="SensorTriggerSetAlarmCelsiusRequestContract.cs" />
     <Compile Include="SensorTriggerSetAlarmBuzzerOnRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetUnitMeasurementRequestContract.cs" />
+    <Compile Include="SensorSetUnitMeasurementRequestContract.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCResponseContract.cs" />

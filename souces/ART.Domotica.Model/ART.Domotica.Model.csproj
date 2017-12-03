@@ -46,11 +46,11 @@
     <Compile Include="ESPDeviceSetLabelCompletedModel.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondCompletedModel.cs" />
     <Compile Include="DeviceNTPSetTimeZoneCompletedModel.cs" />
-    <Compile Include="DSFamilyTempSensorSetLabelCompletedModel.cs" />
+    <Compile Include="SensorSetLabelCompletedModel.cs" />
     <Compile Include="SensorChartLimiterSetValueCompletedModel.cs" />
     <Compile Include="SensorTriggerSetAlarmOnCompletedModel.cs" />
     <Compile Include="SensorTriggerSetAlarmCelsiusCompletedModel.cs" />
-    <Compile Include="DSFamilyTempSensorSetUnitMeasurementCompletedModel.cs" />
+    <Compile Include="SensorSetUnitMeasurementCompletedModel.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
     <Compile Include="ESPDeviceAdminDetailModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />

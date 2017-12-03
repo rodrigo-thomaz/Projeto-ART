@@ -162,8 +162,8 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
-            var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
+            var iotContract = Mapper.Map<List<DSFamilyTempSensor>, List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
+            var deviceMessage = new MessageIoTContract<List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
@@ -181,7 +181,7 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetUnitMeasurementRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorSetUnitMeasurementRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<ISensorDomain>();
             var data = await domain.SetUnitMeasurement(message.Contract.DSFamilyTempSensorId, message.Contract.UnitMeasurementId);
 
@@ -194,7 +194,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await domain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<Sensor, DSFamilyTempSensorSetUnitMeasurementCompletedModel>(data);
+            var viewModel = Mapper.Map<Sensor, SensorSetUnitMeasurementCompletedModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.SetUnitMeasurementViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -203,8 +203,8 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DSFamilyTempSensorSetUnitMeasurementRequestContract, DSFamilyTempSensorSetUnitMeasurementRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetUnitMeasurementRequestIoTContract>(iotContract);
+            var iotContract = Mapper.Map<SensorSetUnitMeasurementRequestContract, SensorSetUnitMeasurementRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<SensorSetUnitMeasurementRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorConstants.SetUnitMeasurementIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
@@ -222,7 +222,7 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorSetLabelRequestContract>>(e.Body);
             var hardwareDomain = _componentContext.Resolve<IHardwareDomain>();
             var data = await hardwareDomain.SetLabel(message.Contract.DSFamilyTempSensorId, message.Contract.Label);
 
@@ -235,7 +235,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await sensorDomain.GetDeviceFromSensor(message.Contract.DSFamilyTempSensorId);
 
             //Enviando para View
-            var viewModel = new DSFamilyTempSensorSetLabelCompletedModel { DeviceId = device.DeviceBaseId };
+            var viewModel = new SensorSetLabelCompletedModel { DeviceId = device.DeviceBaseId };
             Mapper.Map(data, viewModel);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.SetLabelViewCompletedQueueName);

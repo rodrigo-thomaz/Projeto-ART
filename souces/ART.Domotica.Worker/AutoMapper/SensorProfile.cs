@@ -16,12 +16,12 @@
             CreateMap<Sensor, SensorDetailModel>()
                 .ForMember(vm => vm.SensorChartLimiter, m => m.MapFrom(x => x.SensorChartLimiter));
 
-            CreateMap<Sensor, DSFamilyTempSensorSetUnitMeasurementCompletedModel>()
+            CreateMap<Sensor, SensorSetUnitMeasurementCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId))
                 .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId));
 
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>()
+            CreateMap<DSFamilyTempSensor, SensorGetAllByDeviceInApplicationIdResponseIoTContract>()
                 .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
                     var split = src.DeviceAddress.Split(':');
                     var result = new short[8];

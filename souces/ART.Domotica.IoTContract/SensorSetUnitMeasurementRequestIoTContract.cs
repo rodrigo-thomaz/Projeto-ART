@@ -1,8 +1,10 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.IoTContract
 {
     using System;
 
-    public class DSFamilyTempSensorSetLabelRequestContract
+    using ART.Domotica.Enums.SI;
+
+    public class SensorSetUnitMeasurementRequestIoTContract
     {
         #region Properties
 
@@ -11,7 +13,7 @@
             get; set;
         }
 
-        public string Label
+        public UnitMeasurementEnum UnitMeasurementId
         {
             get; set;
         }

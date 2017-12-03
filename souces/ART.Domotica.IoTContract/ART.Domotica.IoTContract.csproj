@@ -40,14 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
+    <Compile Include="SensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract.cs" />
     <Compile Include="DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract.cs" />
     <Compile Include="SensorChartLimiterSetValueRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetAlarmOnRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetAlarmCelsiusRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetAlarmBuzzerOnRequestIoTContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetUnitMeasurementRequestIoTContract.cs" />
+    <Compile Include="SensorSetUnitMeasurementRequestIoTContract.cs" />
     <Compile Include="DSFamilyTempSensorSetResolutionRequestIoTContract.cs" />
     <Compile Include="ESPDeviceInsertInApplicationResponseIoTContract.cs" />
     <Compile Include="ESPDeviceUpdatePinsResponseIoTContract.cs" />

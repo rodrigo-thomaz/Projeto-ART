@@ -31,7 +31,7 @@ namespace ART.Domotica.Producer.Services
             });            
         }
 
-        public async Task SetUnitMeasurement(AuthenticatedMessageContract<DSFamilyTempSensorSetUnitMeasurementRequestContract> message)
+        public async Task SetUnitMeasurement(AuthenticatedMessageContract<SensorSetUnitMeasurementRequestContract> message)
         {
             await Task.Run(() =>
             {
@@ -49,7 +49,7 @@ namespace ART.Domotica.Producer.Services
             });
         }        
 
-        public async Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message)
+        public async Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message)
         {
             await Task.Run(() =>
             {

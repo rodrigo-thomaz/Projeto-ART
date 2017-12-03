@@ -16,10 +16,10 @@
 
         public DSFamilyTempSensorProfile()
         {
-            CreateMap<DSFamilyTempSensorSetUnitMeasurementRequestContract, DSFamilyTempSensorSetUnitMeasurementRequestIoTContract>();
+            CreateMap<SensorSetUnitMeasurementRequestContract, SensorSetUnitMeasurementRequestIoTContract>();
             CreateMap<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>();
 
-            CreateMap<DSFamilyTempSensorSetLabelRequestContract, DSFamilyTempSensorSetLabelCompletedModel>();
+            CreateMap<SensorSetLabelRequestContract, SensorSetLabelCompletedModel>();
 
             CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))

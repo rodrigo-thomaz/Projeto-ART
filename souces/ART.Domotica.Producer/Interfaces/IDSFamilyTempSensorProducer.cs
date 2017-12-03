@@ -11,11 +11,11 @@
 
         Task GetAllResolutions(AuthenticatedMessageContract message);
 
-        Task SetLabel(AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract> message);
+        Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message);
 
         Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
 
-        Task SetUnitMeasurement(AuthenticatedMessageContract<DSFamilyTempSensorSetUnitMeasurementRequestContract> message);
+        Task SetUnitMeasurement(AuthenticatedMessageContract<SensorSetUnitMeasurementRequestContract> message);
 
         #endregion Methods
     }

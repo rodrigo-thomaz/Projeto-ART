@@ -1,17 +1,12 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Contract
 {
     using System;
 
     using ART.Domotica.Enums.SI;
 
-    public class DSFamilyTempSensorSetUnitMeasurementCompletedModel
+    public class SensorSetUnitMeasurementRequestContract
     {
         #region Properties
-
-        public Guid DeviceId
-        {
-            get; set;
-        }
 
         public Guid DSFamilyTempSensorId
         {

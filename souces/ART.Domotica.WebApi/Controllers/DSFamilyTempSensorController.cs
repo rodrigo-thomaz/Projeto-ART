@@ -75,7 +75,7 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setUnitMeasurement")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetUnitMeasurement(DSFamilyTempSensorSetUnitMeasurementRequestContract contract)
+        public async Task<IHttpActionResult> SetUnitMeasurement(SensorSetUnitMeasurementRequestContract contract)
         {
             await _dsFamilyTempSensorProducer.SetUnitMeasurement(CreateMessage(contract));
             return Ok();
@@ -93,7 +93,7 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setLabel")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetLabel(DSFamilyTempSensorSetLabelRequestContract contract)
+        public async Task<IHttpActionResult> SetLabel(SensorSetLabelRequestContract contract)
         {
             await _dsFamilyTempSensorProducer.SetLabel(CreateMessage(contract));
             return Ok();

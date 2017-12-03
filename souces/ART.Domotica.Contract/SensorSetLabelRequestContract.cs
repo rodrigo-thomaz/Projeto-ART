@@ -2,9 +2,7 @@
 {
     using System;
 
-    using ART.Domotica.Enums.SI;
-
-    public class DSFamilyTempSensorSetUnitMeasurementRequestContract
+    public class SensorSetLabelRequestContract
     {
         #region Properties
 
@@ -13,7 +11,7 @@
             get; set;
         }
 
-        public UnitMeasurementEnum UnitMeasurementId
+        public string Label
         {
             get; set;
         }
