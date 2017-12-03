@@ -14,6 +14,9 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     context.sensorUnitMeasurementDefaultLoaded = false;
     context.sensorUnitMeasurementDefaults = [];
 
+    context.sensorUnitMeasurementScaleLoaded = false;
+    context.sensorUnitMeasurementScales = [];
+
     context.sensorsLoaded = false;
     context.sensors = [];    
 
@@ -106,6 +109,22 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
         }
     };
 
+    var mapper_SensorUnitMeasurementScale_SensorDatasheet_Init = false;
+    var mapper_SensorUnitMeasurementScale_SensorDatasheet = function () {
+        if (!mapper_SensorUnitMeasurementScale_SensorDatasheet_Init && context.sensorUnitMeasurementScaleLoaded && context.sensorDatasheetLoaded) {
+            mapper_SensorUnitMeasurementScale_SensorDatasheet_Init = true;
+            for (var i = 0; i < context.sensorUnitMeasurementScales.length; i++) {
+                var sensorUnitMeasurementScale = context.sensorUnitMeasurementScales[i];
+                var sensorDatasheet = getSensorDatasheetByKey(sensorUnitMeasurementScale.sensorDatasheetId, sensorUnitMeasurementScale.sensorTypeId);
+                sensorUnitMeasurementScale.sensorDatasheet = sensorDatasheet;
+                if (sensorDatasheet.sensorUnitMeasurementScales === undefined) {
+                    sensorDatasheet.sensorUnitMeasurementScales = [];
+                }
+                sensorDatasheet.sensorUnitMeasurementScales.push(sensorUnitMeasurementScale);
+            }
+        }
+    };
+
     // *** Watches ***
 
     // SI
@@ -117,7 +136,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     //
 
     context.$watch('sensorUnitMeasurementScaleLoaded', function (newValue, oldValue) {
-
+        mapper_SensorUnitMeasurementScale_SensorDatasheet();
     });    
 
     context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
@@ -127,6 +146,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
 
     context.$watch('sensorDatasheetLoaded', function (newValue, oldValue) {
         mapper_SensorDatasheet_SensorTypeType();
+        mapper_SensorUnitMeasurementScale_SensorDatasheet();
     });
 
     context.$watch('sensorUnitMeasurementDefaultLoaded', function (newValue, oldValue) {
