@@ -8,23 +8,23 @@ namespace ART.Domotica.Repository.Migrations
 
         public override void Down()
         {
-            DropForeignKey("dbo.SensorUnitMeasurementScale", "UnitMeasurementTypeId", "SI.UnitMeasurementType");
-            DropForeignKey("dbo.SensorUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" }, "SI.UnitMeasurement");
-            DropForeignKey("dbo.SensorUnitMeasurementScale", "SensorTypeId", "dbo.SensorType");
-            DropForeignKey("dbo.SensorUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("dbo.SensorUnitMeasurementScale", "NumericalScaleTypeId", "SI.NumericalScaleType");
-            DropForeignKey("dbo.SensorUnitMeasurementScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
-            DropForeignKey("dbo.SensorUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.NumericalScale");
-            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" });
-            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" });
-            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
-            DropTable("dbo.SensorUnitMeasurementScale");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", "UnitMeasurementTypeId", "SI.UnitMeasurementType");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" }, "SI.UnitMeasurement");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", "SensorTypeId", "dbo.SensorType");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", "NumericalScaleTypeId", "SI.NumericalScaleType");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.NumericalScale");
+            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" });
+            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" });
+            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
+            DropTable("dbo.SensorDatasheetUnitMeasurementScale");
         }
 
         public override void Up()
         {
             CreateTable(
-                "dbo.SensorUnitMeasurementScale",
+                "dbo.SensorDatasheetUnitMeasurementScale",
                 c => new
                     {
                         SensorDatasheetId = c.Short(nullable: false),

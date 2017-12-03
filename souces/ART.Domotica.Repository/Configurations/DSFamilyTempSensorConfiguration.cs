@@ -25,7 +25,7 @@
 
             //Sensor
             HasRequired(x => x.Sensor)
-               .WithRequiredDependent(x => x.DSFamilyTempSensor);            
+               .WithRequiredDependent(x => x.DSFamilyTempSensor);
 
             //DeviceAddress
             Property(x => x.DeviceAddress)

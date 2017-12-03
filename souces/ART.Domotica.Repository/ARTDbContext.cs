@@ -29,11 +29,6 @@
             get; set;
         }
 
-        public DbSet<Sensor> Sensor
-        {
-            get; set;
-        }
-
         public DbSet<Application> Application
         {
             get; set;
@@ -119,12 +114,22 @@
             get; set;
         }
 
+        public DbSet<Sensor> Sensor
+        {
+            get; set;
+        }
+
         public DbSet<SensorChartLimiter> SensorChartLimiter
         {
             get; set;
         }
 
         public DbSet<SensorDatasheet> SensorDatasheet
+        {
+            get; set;
+        }
+
+        public DbSet<SensorDatasheetUnitMeasurementScale> SensorDatasheetUnitMeasurementScale
         {
             get; set;
         }
@@ -150,11 +155,6 @@
         }
 
         public DbSet<SensorUnitMeasurementDefault> SensorUnitMeasurementDefault
-        {
-            get; set;
-        }
-
-        public DbSet<SensorUnitMeasurementScale> SensorUnitMeasurementScale
         {
             get; set;
         }
@@ -225,7 +225,7 @@
             modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
             modelBuilder.Configurations.Add(new SensorTypeConfiguration());
             modelBuilder.Configurations.Add(new SensorUnitMeasurementDefaultConfiguration());
-            modelBuilder.Configurations.Add(new SensorUnitMeasurementScaleConfiguration());
+            modelBuilder.Configurations.Add(new SensorDatasheetUnitMeasurementScaleConfiguration());
             modelBuilder.Configurations.Add(new TimeZoneConfiguration());
 
             base.OnModelCreating(modelBuilder);

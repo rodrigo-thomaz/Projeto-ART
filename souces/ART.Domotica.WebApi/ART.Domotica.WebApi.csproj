@@ -155,7 +155,7 @@
     <Compile Include="Controllers\SI\NumericalScalePrefixController.cs" />
     <Compile Include="Controllers\SI\NumericalScaleTypeController.cs" />
     <Compile Include="Controllers\SI\NumericalScaleTypeCountryController.cs" />
-    <Compile Include="Controllers\SensorUnitMeasurementScaleController.cs" />
+    <Compile Include="Controllers\SensorDatasheetUnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementTypeController.cs" />
     <Compile Include="Controllers\TimeZoneController.cs" />

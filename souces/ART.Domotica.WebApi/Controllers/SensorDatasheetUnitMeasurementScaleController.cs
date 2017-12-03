@@ -6,20 +6,20 @@ using ART.Domotica.Producer.Interfaces;
 namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/sensorUnitMeasurementScale")]    
-    public class SensorUnitMeasurementScaleController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/sensorDatasheetUnitMeasurementScale")]    
+    public class SensorDatasheetUnitMeasurementScaleController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly ISensorUnitMeasurementScaleProducer _sensorUnitMeasurementScaleProducer;
+        protected readonly ISensorDatasheetUnitMeasurementScaleProducer _sensorDatasheetUnitMeasurementScaleProducer;
 
         #endregion
 
         #region constructors
 
-        public SensorUnitMeasurementScaleController(ISensorUnitMeasurementScaleProducer sensorUnitMeasurementScaleProducer) 
+        public SensorDatasheetUnitMeasurementScaleController(ISensorDatasheetUnitMeasurementScaleProducer sensorDatasheetUnitMeasurementScaleProducer) 
         {
-            _sensorUnitMeasurementScaleProducer = sensorUnitMeasurementScaleProducer;
+            _sensorDatasheetUnitMeasurementScaleProducer = sensorDatasheetUnitMeasurementScaleProducer;
         }
 
         #endregion
@@ -40,7 +40,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> GetAll()
         {           
-            await _sensorUnitMeasurementScaleProducer.GetAll(CreateMessage());
+            await _sensorDatasheetUnitMeasurementScaleProducer.GetAll(CreateMessage());
             return Ok();
         }
 

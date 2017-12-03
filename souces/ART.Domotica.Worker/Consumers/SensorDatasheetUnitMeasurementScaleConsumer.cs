@@ -16,7 +16,7 @@ using ART.Domotica.Constant;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class SensorUnitMeasurementScaleConsumer : ConsumerBase, ISensorUnitMeasurementScaleConsumer
+    public class SensorDatasheetUnitMeasurementScaleConsumer : ConsumerBase, ISensorDatasheetUnitMeasurementScaleConsumer
     {
         #region private fields
 
@@ -30,7 +30,7 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public SensorUnitMeasurementScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public SensorDatasheetUnitMeasurementScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
 
@@ -55,7 +55,7 @@ namespace ART.Domotica.Worker.Consumers
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: SensorUnitMeasurementScaleConstants.GetAllQueueName
+                  queue: SensorDatasheetUnitMeasurementScaleConstants.GetAllQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
@@ -63,7 +63,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _getAllConsumer.Received += GetAllReceived;
 
-            _model.BasicConsume(SensorUnitMeasurementScaleConstants.GetAllQueueName, false, _getAllConsumer);
+            _model.BasicConsume(SensorDatasheetUnitMeasurementScaleConstants.GetAllQueueName, false, _getAllConsumer);
         }
 
         public void GetAllReceived(object sender, BasicDeliverEventArgs e)
@@ -77,7 +77,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-            var domain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
+            var domain = _componentContext.Resolve<ISensorDatasheetUnitMeasurementScaleDomain>();
             var data = await domain.GetAll();
 
             var exchange = "amq.topic";
@@ -86,9 +86,9 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<SensorUnitMeasurementScale>, List<SensorUnitMeasurementScaleDetailModel>>(data);
+            var viewModel = Mapper.Map<List<SensorDatasheetUnitMeasurementScale>, List<SensorDatasheetUnitMeasurementScaleDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorUnitMeasurementScaleConstants.GetAllCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorDatasheetUnitMeasurementScaleConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

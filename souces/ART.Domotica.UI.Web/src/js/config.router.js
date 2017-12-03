@@ -72,7 +72,7 @@ angular.module('app')
                       //
                       'js/services/sensorTypeService.js',                      
                       'js/services/sensorDatasheetService.js',                      
-                      'js/services/sensorUnitMeasurementScaleService.js',
+                      'js/services/sensorDatasheetUnitMeasurementScaleService.js',
                       'js/services/sensorUnitMeasurementDefaultService.js',
                       'js/services/sensorService.js',
                                             

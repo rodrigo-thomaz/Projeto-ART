@@ -251,7 +251,7 @@
     <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\js\services\locale\continentService.js" />
     <Content Include="src\js\services\locale\countryService.js" />
-    <Content Include="src\js\services\sensorUnitMeasurementScaleService.js" />
+    <Content Include="src\js\services\sensorDatasheetUnitMeasurementScaleService.js" />
     <Content Include="src\l10n\pt.js" />
     <Content Include="src\psd\ui.zip" />
     <Content Include="src\js\config.interceptor.js" />

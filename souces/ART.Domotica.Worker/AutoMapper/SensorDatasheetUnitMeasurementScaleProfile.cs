@@ -5,13 +5,13 @@
 
     using global::AutoMapper;
 
-    public class SensorUnitMeasurementScaleProfile : Profile
+    public class SensorDatasheetUnitMeasurementScaleProfile : Profile
     {
         #region Constructors
 
-        public SensorUnitMeasurementScaleProfile()
+        public SensorDatasheetUnitMeasurementScaleProfile()
         {
-            CreateMap<SensorUnitMeasurementScale, SensorUnitMeasurementScaleDetailModel>()
+            CreateMap<SensorDatasheetUnitMeasurementScale, SensorDatasheetUnitMeasurementScaleDetailModel>()
                 .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId))

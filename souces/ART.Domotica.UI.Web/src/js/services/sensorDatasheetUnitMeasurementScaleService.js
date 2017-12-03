@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -10,7 +10,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$r
 
     var onConnected = function () {
 
-        stompService.subscribe('SensorUnitMeasurementScale.GetAllViewCompleted', onGetAllCompleted);
+        stompService.subscribe('SensorDatasheetUnitMeasurementScale.GetAllViewCompleted', onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -23,7 +23,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$r
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/sensorUnitMeasurementScale/getAll').then(function (results) {
+        return $http.post(serviceBase + 'api/sensorDatasheetUnitMeasurementScale/getAll').then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
@@ -32,12 +32,12 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$r
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.sensorUnitMeasurementScales.push(data[i]);
+            contextScope.sensorDatasheetUnitMeasurementScales.push(data[i]);
         }
-        contextScope.sensorUnitMeasurementScaleLoaded = true;
+        contextScope.sensorDatasheetUnitMeasurementScaleLoaded = true;
         _initializing = false;
         _initialized = true;
-        $rootScope.$emit('sensorUnitMeasurementScaleService_Initialized');
+        $rootScope.$emit('sensorDatasheetUnitMeasurementScaleService_Initialized');
     }
 
     $rootScope.$on('$destroy', function () {

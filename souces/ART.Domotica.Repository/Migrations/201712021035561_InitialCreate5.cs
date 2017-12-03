@@ -8,14 +8,14 @@ namespace ART.Domotica.Repository.Migrations
 
         public override void Down()
         {
-            CreateIndex("dbo.SensorUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" });
-            AddForeignKey("dbo.SensorUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.NumericalScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, cascadeDelete: true);
+            CreateIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" });
+            AddForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.NumericalScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, cascadeDelete: true);
         }
 
         public override void Up()
         {
-            DropForeignKey("dbo.SensorUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.NumericalScale");
-            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" });
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.NumericalScale");
+            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" });
         }
 
         #endregion Methods

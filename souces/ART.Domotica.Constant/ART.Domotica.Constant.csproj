@@ -62,7 +62,7 @@
     <Compile Include="SI\UnitMeasurementTypeConstants.cs" />
     <Compile Include="Locale\ContinentConstants.cs" />
     <Compile Include="Locale\CountryConstants.cs" />
-    <Compile Include="SensorUnitMeasurementScaleConstants.cs" />
+    <Compile Include="SensorDatasheetUnitMeasurementScaleConstants.cs" />
     <Compile Include="TimeZoneConstants.cs" />
     <Compile Include="SI\UnitMeasurementConstants.cs" />
   </ItemGroup>

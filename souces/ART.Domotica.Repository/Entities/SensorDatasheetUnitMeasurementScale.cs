@@ -1,9 +1,10 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Repository.Entities
 {
     using ART.Domotica.Enums;
     using ART.Domotica.Enums.SI;
+    using ART.Domotica.Repository.Entities.SI;
 
-    public class SensorUnitMeasurementScaleDetailModel
+    public class SensorDatasheetUnitMeasurementScale
     {
         #region Properties
 
@@ -13,6 +14,11 @@
         }
 
         public NumericalScaleTypeEnum NumericalScaleTypeId
+        {
+            get; set;
+        }
+
+        public SensorDatasheet SensorDatasheet
         {
             get; set;
         }
@@ -28,6 +34,11 @@
         }
 
         public UnitMeasurementEnum UnitMeasurementId
+        {
+            get; set;
+        }
+
+        public UnitMeasurementScale UnitMeasurementScale
         {
             get; set;
         }

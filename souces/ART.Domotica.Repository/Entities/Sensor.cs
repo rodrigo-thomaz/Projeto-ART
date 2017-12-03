@@ -16,6 +16,11 @@
             get; set;
         }
 
+        public DSFamilyTempSensor DSFamilyTempSensor
+        {
+            get; set;
+        }
+
         public Guid Id
         {
             get; set;
@@ -27,11 +32,6 @@
         }
 
         public SensorChartLimiter SensorChartLimiter
-        {
-            get; set;
-        }
-
-        public DSFamilyTempSensor DSFamilyTempSensor
         {
             get; set;
         }

@@ -8,12 +8,12 @@ namespace ART.Domotica.Repository.Migrations
 
         public override void Down()
         {
-            AddForeignKey("dbo.SensorUnitMeasurementScale", "SensorTypeId", "dbo.SensorType", "Id");
+            AddForeignKey("dbo.SensorDatasheetUnitMeasurementScale", "SensorTypeId", "dbo.SensorType", "Id");
         }
 
         public override void Up()
         {
-            DropForeignKey("dbo.SensorUnitMeasurementScale", "SensorTypeId", "dbo.SensorType");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", "SensorTypeId", "dbo.SensorType");
         }
 
         #endregion Methods

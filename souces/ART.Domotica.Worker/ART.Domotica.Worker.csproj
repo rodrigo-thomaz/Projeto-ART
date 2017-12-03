@@ -120,7 +120,7 @@
     <Compile Include="AutoMapper\SI\UnitMeasurementTypeProfile.cs" />
     <Compile Include="AutoMapper\Locale\ContinentProfile.cs" />
     <Compile Include="AutoMapper\Locale\CountryProfile.cs" />
-    <Compile Include="AutoMapper\SensorUnitMeasurementScaleProfile.cs" />
+    <Compile Include="AutoMapper\SensorDatasheetUnitMeasurementScaleProfile.cs" />
     <Compile Include="AutoMapper\TimeZoneProfile.cs" />
     <Compile Include="AutoMapper\SI\UnitMeasurementProfile.cs" />
     <Compile Include="AutoMapper\SensorRangeProfile.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
     <Compile Include="Consumers\Locale\ContinentConsumer.cs" />
     <Compile Include="Consumers\Locale\CountryConsumer.cs" />
-    <Compile Include="Consumers\SensorUnitMeasurementScaleConsumer.cs" />
+    <Compile Include="Consumers\SensorDatasheetUnitMeasurementScaleConsumer.cs" />
     <Compile Include="Consumers\SensorTriggerConsumer.cs" />
     <Compile Include="Consumers\SensorChartLimiterConsumer.cs" />
     <Compile Include="Consumers\SensorRangeConsumer.cs" />
@@ -157,7 +157,7 @@
     <Compile Include="IConsumers\ISensorConsumer.cs" />
     <Compile Include="IConsumers\Locale\ICountryConsumer.cs" />
     <Compile Include="IConsumers\Locale\IContinentConsumer.cs" />
-    <Compile Include="IConsumers\ISensorUnitMeasurementScaleConsumer.cs" />
+    <Compile Include="IConsumers\ISensorDatasheetUnitMeasurementScaleConsumer.cs" />
     <Compile Include="IConsumers\SI\INumericalScaleConsumer.cs" />
     <Compile Include="IConsumers\SI\INumericalScalePrefixConsumer.cs" />
     <Compile Include="IConsumers\SI\INumericalScaleTypeCountryConsumer.cs" />

@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class SensorUnitMeasurementScaleConfiguration : EntityTypeConfiguration<SensorUnitMeasurementScale>
+    public class SensorDatasheetUnitMeasurementScaleConfiguration : EntityTypeConfiguration<SensorDatasheetUnitMeasurementScale>
     {
         #region Constructors
 
-        public SensorUnitMeasurementScaleConfiguration()
+        public SensorDatasheetUnitMeasurementScaleConfiguration()
         {
             //Primary Keys
             HasKey(x => new
@@ -60,7 +60,7 @@
 
             //SensorDatasheet
             HasRequired(x => x.SensorDatasheet)
-                .WithMany(x => x.SensorUnitMeasurementScales)
+                .WithMany(x => x.SensorDatasheetUnitMeasurementScales)
                 .HasForeignKey(x => new
                 {
                     x.SensorDatasheetId,
@@ -70,7 +70,7 @@
 
             //UnitMeasurementScale
             HasRequired(x => x.UnitMeasurementScale)
-                .WithMany(x => x.SensorUnitMeasurementScales)
+                .WithMany(x => x.SensorDatasheetUnitMeasurementScales)
                 .HasForeignKey(x => new
                 {
                     x.UnitMeasurementId,

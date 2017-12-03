@@ -85,7 +85,7 @@
     <Compile Include="Configurations\RaspberryDeviceConfiguration.cs" />
     <Compile Include="Configurations\SensorConfiguration.cs" />
     <Compile Include="Configurations\ApplicationConfiguration.cs" />
-    <Compile Include="Configurations\SensorUnitMeasurementScaleConfiguration.cs" />
+    <Compile Include="Configurations\SensorDatasheetUnitMeasurementScaleConfiguration.cs" />
     <Compile Include="Configurations\SI\UnitMeasurementConfiguration.cs" />
     <Compile Include="Configurations\ApplicationUserConfiguration.cs" />
     <Compile Include="Configurations\SensorRangeConfiguration.cs" />
@@ -126,12 +126,12 @@
     <Compile Include="Entities\TimeZone.cs" />
     <Compile Include="Entities\SI\NumericalScalePrefix.cs" />
     <Compile Include="Entities\SI\NumericalScale.cs" />
-    <Compile Include="Entities\SensorUnitMeasurementScale.cs" />
+    <Compile Include="Entities\SensorDatasheetUnitMeasurementScale.cs" />
     <Compile Include="Entities\SI\UnitMeasurementScale.cs" />
     <Compile Include="Entities\SI\UnitMeasurementType.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleRepository.cs" />
     <Compile Include="Interfaces\SI\INumericalScalePrefixRepository.cs" />
-    <Compile Include="Interfaces\ISensorUnitMeasurementScaleRepository.cs" />
+    <Compile Include="Interfaces\ISensorDatasheetUnitMeasurementScaleRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementScaleRepository.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleTypeRepository.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleTypeCountryRepository.cs" />
@@ -205,11 +205,15 @@
     <Compile Include="Migrations\201712031645361_InitialCreate11.Designer.cs">
       <DependentUpon>201712031645361_InitialCreate11.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712031736421_InitialCreate12.cs" />
+    <Compile Include="Migrations\201712031736421_InitialCreate12.Designer.cs">
+      <DependentUpon>201712031736421_InitialCreate12.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
-    <Compile Include="Repositories\SensorUnitMeasurementScaleRepository.cs" />
+    <Compile Include="Repositories\SensorDatasheetUnitMeasurementScaleRepository.cs" />
     <Compile Include="Repositories\SI\UnitMeasurementScaleRepository.cs" />
     <Compile Include="Repositories\SI\NumericalScaleTypeCountryRepository.cs" />
     <Compile Include="Repositories\SI\NumericalScaleTypeRepository.cs" />
@@ -241,7 +245,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="InitialFiles\ActuatorType.csv" />
-    <None Include="InitialFiles\SensorUnitMeasurementScale.csv" />
+    <None Include="InitialFiles\SensorDatasheetUnitMeasurementScale.csv" />
     <None Include="InitialFiles\UnitMeasurementScale.csv" />
     <None Include="InitialFiles\SensorUnitMeasurementDefault.csv" />
     <None Include="InitialFiles\SensorDatasheet.csv" />
@@ -321,6 +325,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712031645361_InitialCreate11.resx">
       <DependentUpon>201712031645361_InitialCreate11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712031736421_InitialCreate12.resx">
+      <DependentUpon>201712031736421_InitialCreate12.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
