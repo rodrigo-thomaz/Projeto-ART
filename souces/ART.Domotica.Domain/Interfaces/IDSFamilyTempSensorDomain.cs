@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+
     using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities;
 
@@ -12,7 +13,7 @@
 
         Task<List<DSFamilyTempSensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId);
 
-        Task<List<DSFamilyTempSensorResolution>> GetAllResolutions();        
+        Task<List<DSFamilyTempSensorResolution>> GetAllResolutions();
 
         Task<DSFamilyTempSensor> SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId);
 

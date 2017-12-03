@@ -885,7 +885,7 @@
                 var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[3]);
                 var numericalScalePrefixId = (NumericalScalePrefixEnum)Enum.Parse(typeof(NumericalScalePrefixEnum), line[4]);
                 var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[5]);
-                
+
                 var entity = context.SensorUnitMeasurementScale
                     .Where(x => x.SensorDatasheetId == sensorDatasheetId)
                     .Where(x => x.SensorTypeId == sensorTypeId)
@@ -907,7 +907,7 @@
                         NumericalScaleTypeId = numericalScaleTypeId,
                     };
                     context.SensorUnitMeasurementScale.Add(entity);
-                }                
+                }
 
                 context.SaveChanges();
             }
