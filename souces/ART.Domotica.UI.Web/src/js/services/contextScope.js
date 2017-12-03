@@ -333,7 +333,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     });
 
     context.$watch('numericalScaleTypeCountryLoaded', function (newValue, oldValue) {
-        
+        mapper_NumericalScaleTypeCountry();
     });
 
     context.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
