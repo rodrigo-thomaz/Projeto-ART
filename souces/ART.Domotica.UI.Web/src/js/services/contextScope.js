@@ -83,6 +83,15 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     }
 
+    var getNumericalScalePrefixByKey = function (numericalScalePrefixId) {
+        for (var i = 0; i < context.numericalScalePrefixes.length; i++) {
+            var item = context.numericalScalePrefixes[i];
+            if (item.numericalScalePrefixId === numericalScalePrefixId) {
+                return item;
+            }
+        }
+    }
+
     var getUnitMeasurementTypeByKey = function (unitMeasurementTypeId) {
         for (var i = 0; i < context.unitMeasurementTypes.length; i++) {
             var item = context.unitMeasurementTypes[i];
@@ -101,14 +110,14 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     }
 
-    var getNumericalScalePrefixByKey = function (numericalScalePrefixId) {
-        for (var i = 0; i < context.numericalScalePrefixes.length; i++) {
-            var item = context.numericalScalePrefixes[i];
-            if (item.numericalScalePrefixId === numericalScalePrefixId) {
+    var getUnitMeasurementScaleByKey = function (unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
+        for (var i = 0; i < context.unitMeasurementScales.length; i++) {
+            var item = context.unitMeasurementScales[i];
+            if (item.unitMeasurementId === unitMeasurementId && item.unitMeasurementTypeId === unitMeasurementTypeId && item.numericalScalePrefixId === numericalScalePrefixId && item.numericalScaleTypeId === numericalScaleTypeId) {
                 return item;
             }
         }
-    }
+    }    
 
     //
     
@@ -169,7 +178,9 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
             }
         }
     };
-    
+
+    // SI
+
     var mapper_NumericalScaleTypeCountry_Init = false;
     var mapper_NumericalScaleTypeCountry = function () {
         if (!mapper_NumericalScaleTypeCountry_Init && context.numericalScaleTypeCountryLoaded && context.countryLoaded) {
@@ -210,24 +221,21 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
         }
     };
 
-    var mapper_NumericalScale_UnitMeasurementScale_Init = false;
-    var mapper_NumericalScale_UnitMeasurementScale = function () {
-        if (!mapper_NumericalScale_UnitMeasurementScale_Init && context.numericalScaleLoaded && context.unitMeasurementScaleLoaded) {
-            mapper_NumericalScale_UnitMeasurementScale_Init = true;
+    var mapper_NumericalScale_NumericalScaleType_Init = false;
+    var mapper_NumericalScale_NumericalScaleType = function () {
+        if (!mapper_NumericalScale_NumericalScaleType_Init && context.numericalScaleLoaded && context.numericalScaleTypeLoaded) {
+            mapper_NumericalScale_NumericalScaleType_Init = true;
             for (var i = 0; i < context.numericalScales.length; i++) {
                 var numericalScale = context.numericalScales[i];
-                var unitMeasurementScale = getUnitMeasurementScaleByKey(numericalScale.unitMeasurementScaleId);
-                numericalScale.unitMeasurementScale = unitMeasurementScale;
-                delete numericalScale.unitMeasurementScaleId;
-                if (unitMeasurementScale.numericalScales === undefined) {
-                    unitMeasurementScale.numericalScales = [];
+                var numericalScaleType = getNumericalScaleTypeByKey(numericalScale.numericalScaleTypeId);
+                numericalScale.numericalScaleType = numericalScaleType;
+                if (numericalScaleType.numericalScales === undefined) {
+                    numericalScaleType.numericalScales = [];
                 }
-                unitMeasurementScale.numericalScales.push(numericalScale);
+                numericalScaleType.numericalScales.push(numericalScale);
             }
         }
-    };
-
-    // SI
+    };    
 
     var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
     var mapper_UnitMeasurement_UnitMeasurementType = function () {
@@ -312,7 +320,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('numericalScaleLoaded', function (newValue, oldValue) {
         mapper_NumericalScale_NumericalScalePrefix();
-        mapper_NumericalScale_UnitMeasurementScale();
+        mapper_NumericalScale_NumericalScaleType();
     });
 
     context.$watch('numericalScalePrefixLoaded', function (newValue, oldValue) {
@@ -321,6 +329,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
 
     context.$watch('numericalScaleTypeLoaded', function (newValue, oldValue) {
         mapper_NumericalScaleTypeCountry();
+        mapper_NumericalScale_NumericalScaleType();
     });
 
     context.$watch('numericalScaleTypeCountryLoaded', function (newValue, oldValue) {
@@ -328,7 +337,7 @@ app.factory('contextScope', ['$rootScope', function ($rootScope) {
     });
 
     context.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
-        mapper_NumericalScale_UnitMeasurementScale();
+        
     });
 
     //
