@@ -8,9 +8,6 @@ using ART.Infra.CrossCutting.Domain;
 using Autofac;
 using ART.Domotica.Repository;
 using ART.Domotica.Repository.Repositories;
-using ART.Domotica.Repository.Interfaces.SI;
-using ART.Domotica.Repository.Repositories.SI;
-using ART.Domotica.Enums.SI;
 
 namespace ART.Domotica.Domain.Services
 {

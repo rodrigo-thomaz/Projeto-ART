@@ -22,11 +22,8 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _getAllByDeviceInApplicationIdConsumer;
         private readonly EventingBasicConsumer _getAllResolutionsConsumer;
-        private readonly EventingBasicConsumer _setUnitMeasurementConsumer;
-        private readonly EventingBasicConsumer _setResolutionConsumer;
-        private readonly EventingBasicConsumer _setLabelConsumer;
+        private readonly EventingBasicConsumer _setResolutionConsumer;        
         
         private readonly IComponentContext _componentContext;
 
@@ -38,12 +35,9 @@ namespace ART.Domotica.Worker.Consumers
 
         public DSFamilyTempSensorConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
-            _getAllByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
-            _setUnitMeasurementConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
-            _setLabelConsumer = new EventingBasicConsumer(_model);
-
+            
             _componentContext = componentContext;
 
             _logger = logger;
@@ -72,86 +66,23 @@ namespace ART.Domotica.Worker.Consumers
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetUnitMeasurementQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
-
-            _model.QueueDeclare(
                  queue: DSFamilyTempSensorConstants.SetResolutionQueueName
                , durable: true
                , exclusive: false
                , autoDelete: false
                , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetLabelQueueName
-                , durable: true
-                , exclusive: false
-                , autoDelete: false
-                , arguments: null);
-
-            _model.QueueDeclare(
-                queue: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
-              , durable: false
-              , exclusive: false
-              , autoDelete: false
-              , arguments: null);
-
-            _model.QueueBind(
-                  queue: DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
-                , exchange: "amq.topic"
-                , routingKey: GetApplicationRoutingKeyForAllIoT(DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName)
-                , arguments: null);
-
-            _getAllByDeviceInApplicationIdConsumer.Received += GetAllByDeviceInApplicationIdReceived;
             _getAllResolutionsConsumer.Received += GetAllResolutionsReceived;
             _setResolutionConsumer.Received += SetResolutionReceived;
-            _setUnitMeasurementConsumer.Received += SetUnitMeasurementReceived;
-            _setLabelConsumer.Received += SetLabelReceived;
-
-            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdIoTQueueName, false, _getAllByDeviceInApplicationIdConsumer);
-            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
-            _model.BasicConsume(DSFamilyTempSensorConstants.SetUnitMeasurementQueueName, false, _setUnitMeasurementConsumer);
+                        
             _model.BasicConsume(DSFamilyTempSensorConstants.SetResolutionQueueName, false, _setResolutionConsumer);
-            _model.BasicConsume(DSFamilyTempSensorConstants.SetLabelQueueName, false, _setLabelConsumer);            
-        }
-                
-        private void GetAllByDeviceInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(GetAllByDeviceInApplicationIdReceivedAsync(sender, e));
-        }
-
-        private async Task GetAllByDeviceInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
-            var domain = _componentContext.Resolve<ISensorDomain>();            
-            var data = await domain.GetAllByDeviceInApplicationId(requestContract.DeviceInApplicationId);
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
-            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(requestContract.DeviceId);
-
-            var exchange = "amq.topic";
-
-            //Enviando para o Iot
-            var iotContract = Mapper.Map<List<DSFamilyTempSensor>, List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
-            var deviceMessage = new MessageIoTContract<List<DSFamilyTempSensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
-
-            _logger.DebugLeave();
+            _model.BasicConsume(DSFamilyTempSensorConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
+            
         }
 
         public void GetAllResolutionsReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetAllResolutionsReceivedAsync(sender, e));            
+            Task.WaitAll(GetAllResolutionsReceivedAsync(sender, e));
         }
 
         public async Task GetAllResolutionsReceivedAsync(object sender, BasicDeliverEventArgs e)
@@ -170,7 +101,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<List<DSFamilyTempSensorResolution>, List<DSFamilyTempSensorResolutionDetailModel>>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DSFamilyTempSensorConstants.GetAllResolutionsViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
@@ -179,7 +110,7 @@ namespace ART.Domotica.Worker.Consumers
 
         public void SetResolutionReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetResolutionReceivedAsync(sender, e));         
+            Task.WaitAll(SetResolutionReceivedAsync(sender, e));
         }
 
         public async Task SetResolutionReceivedAsync(object sender, BasicDeliverEventArgs e)
@@ -202,7 +133,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DSFamilyTempSensorConstants.SetResolutionViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
@@ -214,81 +145,8 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetResolutionRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.SetResolutionIoTQueueName);
-            
+
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
-
-            _logger.DebugLeave();
-        }
-
-        private void SetUnitMeasurementReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(SetUnitMeasurementReceivedAsync(sender, e));
-        }
-
-        private async Task SetUnitMeasurementReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetUnitMeasurementRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.SetUnitMeasurement(message.Contract.DSFamilyTempSensorId, message.Contract.UnitMeasurementId);
-
-            var exchange = "amq.topic";
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            //Load device into context
-            var device = await domain.GetDeviceFromSensor(data.Id);
-
-            //Enviando para View
-            var viewModel = Mapper.Map<Sensor, DSFamilyTempSensorSetUnitMeasurementCompletedModel>(data);            
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DSFamilyTempSensorConstants.SetUnitMeasurementViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
-
-            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
-
-            //Enviando para o Iot
-            var iotContract = Mapper.Map<DSFamilyTempSensorSetUnitMeasurementRequestContract, DSFamilyTempSensorSetUnitMeasurementRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DSFamilyTempSensorSetUnitMeasurementRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DSFamilyTempSensorConstants.SetUnitMeasurementIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
-
-            _logger.DebugLeave();
-        }
-
-        public void SetLabelReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(SetLabelReceivedAsync(sender, e));
-        }
-
-        public async Task SetLabelReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DSFamilyTempSensorSetLabelRequestContract>>(e.Body);
-            var hardwareDomain = _componentContext.Resolve<IHardwareDomain>();
-            var data = await hardwareDomain.SetLabel(message.Contract.DSFamilyTempSensorId, message.Contract.Label);
-
-            var exchange = "amq.topic";
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
-            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.DSFamilyTempSensorId);
-
-            //Enviando para View
-            var viewModel = new DSFamilyTempSensorSetLabelCompletedModel { DeviceId = device.DeviceBaseId };
-            Mapper.Map(data, viewModel);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DSFamilyTempSensorConstants.SetLabelViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

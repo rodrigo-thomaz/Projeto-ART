@@ -3,8 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities;
 
     public interface IDSFamilyTempSensorDomain
