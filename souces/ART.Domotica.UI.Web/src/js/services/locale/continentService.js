@@ -1,6 +1,8 @@
 ﻿'use strict';
 app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, $rootScope, stompService, localeContext) {
 
+    var serviceFactory = {};    
+
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var _initializing = false;
@@ -9,8 +11,8 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     var getAllCompletedTopic = 'Locale.Continent.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
-    var serviceFactory = {};    
-
+    var initializedEventName = 'continentService.onInitialized';
+    
     var onConnected = function () {
 
         getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
@@ -46,7 +48,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit('continentService_Initialized');
+        $rootScope.$emit(initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -62,6 +64,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     // serviceFactory
 
     serviceFactory.initialized = initialized;
+    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 

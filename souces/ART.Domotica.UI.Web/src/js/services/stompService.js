@@ -1,14 +1,17 @@
 ﻿'use strict';
 app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicationMQ', function ($log, ngAuthSettings, $rootScope, applicationMQ) {
-    
+
     var serviceFactory = {};    
+
+    var connectedEventName = 'stompService.onConnected';
+    var errorEventName = 'stompService.onError';
     
     var onConnected = function (frame) {
-        $rootScope.$emit(serviceFactory.connectedEventName, frame);
+        $rootScope.$emit(connectedEventName, frame);
     }
 
     var onError = function (frame) {
-        $rootScope.$emit(serviceFactory.errorEventName, frame);
+        $rootScope.$emit(errorEventName, frame);
     }
 
     var subscribe = function (topic, callback) {
@@ -70,8 +73,8 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     
     // serviceFactory    
 
-    serviceFactory.connectedEventName = 'stompService_Connected';
-    serviceFactory.errorEventName = 'stompService_Error';
+    serviceFactory.connectedEventName = connectedEventName;
+    serviceFactory.errorEventName = errorEventName;
 
     serviceFactory.subscribe = subscribe;
     serviceFactory.subscribeAllViews = subscribeAllViews;
