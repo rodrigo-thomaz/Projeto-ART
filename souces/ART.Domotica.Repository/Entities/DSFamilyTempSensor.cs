@@ -1,8 +1,6 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
-
-    using ART.Domotica.Enums.SI;
     using ART.Infra.CrossCutting.Repository;
 
     public class DSFamilyTempSensor : IEntity<Guid>

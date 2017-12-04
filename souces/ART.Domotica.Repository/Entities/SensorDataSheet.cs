@@ -19,6 +19,11 @@
             get; set;
         }
 
+        public ICollection<Sensor> Sensors
+        {
+            get; set;
+        }
+
         public SensorType SensorType
         {
             get; set;

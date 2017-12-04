@@ -20,15 +20,30 @@
                 .HasColumnOrder(0)
                 .IsRequired();
 
+            //SensorDatasheetId
+            Property(x => x.Id)
+                .HasColumnOrder(1)
+                .IsRequired();
+
+            //SensorDatasheet
+            HasRequired(x => x.SensorDatasheet)
+                .WithMany(x => x.Sensors)
+                .HasForeignKey(x => new
+                {
+                    x.SensorDatasheetId,
+                    x.SensorTypeId,
+                })
+                .WillCascadeOnDelete(false);
+
             //Label
             Property(x => x.Label)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .HasMaxLength(50)
                 .IsRequired();
 
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired();
         }
 

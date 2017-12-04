@@ -2,9 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-
-    using ART.Domotica.Enums.SI;
-    using ART.Domotica.Repository.Entities.SI;
     using ART.Infra.CrossCutting.Repository;
     using ART.Domotica.Enums;
 
@@ -12,15 +9,20 @@
     {
         #region Properties
 
-        //public SensorDatasheetEnum SensorDatasheetId
-        //{
-        //    get; set;
-        //}
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
 
-        //public SensorTypeEnum SensorTypeId
-        //{
-        //    get; set;
-        //}
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
+        public SensorDatasheet SensorDatasheet
+        {
+            get; set;
+        }
 
         public DateTime CreateDate
         {
