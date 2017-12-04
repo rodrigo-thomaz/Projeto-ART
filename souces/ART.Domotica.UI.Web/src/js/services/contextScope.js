@@ -163,13 +163,13 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
         
     });
 
-    context.$watch('deviceSensorsLoaded', function (newValue, oldValue) {
-
-    });
-
     context.$watch('sensorsInDeviceLoaded', function (newValue, oldValue) {
 
     });
+
+    context.$watch('deviceSensorsLoaded', function (newValue, oldValue) {
+
+    });    
 
     // *** Public Methods ***
     

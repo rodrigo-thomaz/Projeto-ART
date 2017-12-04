@@ -85,11 +85,11 @@ angular.module('app')
                       'js/services/deviceNTPService.js',                      
                       'js/services/espDeviceService.js',
 
-                      'js/controllers/sensorUnitMeasurementScaleController.js',
-                      'js/controllers/sensorTriggerController.js',
+                      'js/services/deviceSensorsService.js',
+                      'js/services/sensorsInDeviceService.js',
 
-                      'js/controllers/deviceSensorsService.js',
-                      'js/controllers/sensorsInDeviceService.js',
+                      'js/controllers/sensorUnitMeasurementScaleController.js',
+                      'js/controllers/sensorTriggerController.js',                      
 
                       'js/controllers/espDeviceListController.js',                      
                   ])
