@@ -2,26 +2,9 @@
 {
     using System;
 
-    using ART.Domotica.Enums.SI;
-
     public class SensorTempDSFamilyGetModel
     {
         #region Properties
-
-        public SensorTriggerGetModel HighAlarm
-        {
-            get; set;
-        }
-
-        public string Label
-        {
-            get; set;
-        }
-
-        public SensorTriggerGetModel LowAlarm
-        {
-            get; set;
-        }
 
         public Guid SensorTempDSFamilyId
         {
@@ -29,16 +12,6 @@
         }
 
         public byte SensorTempDSFamilyResolutionId
-        {
-            get; set;
-        }
-
-        public SensorUnitMeasurementScaleGetModel SensorUnitMeasurementScale
-        {
-            get; set;
-        }
-
-        public UnitMeasurementEnum UnitMeasurementId
         {
             get; set;
         }

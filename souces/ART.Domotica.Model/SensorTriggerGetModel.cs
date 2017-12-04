@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Model
 {
+    using System;
+
     public class SensorTriggerGetModel
     {
         #region Properties
-
-        public Guid SensorTriggerId { get; set; }
 
         public bool BuzzerOn
         {
@@ -14,6 +12,11 @@ namespace ART.Domotica.Model
         }
 
         public Guid SensorId
+        {
+            get; set;
+        }
+
+        public Guid SensorTriggerId
         {
             get; set;
         }

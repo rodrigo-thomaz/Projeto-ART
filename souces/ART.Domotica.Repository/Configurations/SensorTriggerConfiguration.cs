@@ -34,7 +34,7 @@
             //TriggerOn
             Property(x => x.TriggerOn)
                 .HasColumnOrder(2)
-                .IsRequired();            
+                .IsRequired();
 
             //BuzzerOn
             Property(x => x.BuzzerOn)

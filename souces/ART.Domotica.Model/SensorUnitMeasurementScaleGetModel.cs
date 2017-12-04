@@ -1,16 +1,12 @@
 ﻿namespace ART.Domotica.Model
 {
-    using ART.Domotica.Enums.SI;
     using System;
+
+    using ART.Domotica.Enums.SI;
 
     public class SensorUnitMeasurementScaleGetModel
     {
         #region Properties
-
-        public Guid SensorUnitMeasurementScaleId
-        {
-            get; set;
-        }
 
         public decimal ChartLimiterMax
         {
@@ -38,6 +34,11 @@
         }
 
         public decimal RangeMin
+        {
+            get; set;
+        }
+
+        public Guid SensorUnitMeasurementScaleId
         {
             get; set;
         }
