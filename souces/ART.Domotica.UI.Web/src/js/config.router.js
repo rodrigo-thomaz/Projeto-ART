@@ -88,6 +88,9 @@ angular.module('app')
                       'js/controllers/sensorUnitMeasurementScaleController.js',
                       'js/controllers/sensorTriggerController.js',
 
+                      'js/controllers/deviceSensorsService.js',
+                      'js/controllers/sensorsInDeviceService.js',
+
                       'js/controllers/espDeviceListController.js',                      
                   ])
               })

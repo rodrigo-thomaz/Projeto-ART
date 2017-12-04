@@ -20,6 +20,12 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     context.sensorsLoaded = false;
     context.sensors = [];    
 
+    context.deviceSensorsLoaded = false;
+    context.deviceSensors = [];    
+
+    context.sensorsInDeviceLoaded = false;
+    context.sensorsInDevice = [];    
+
     // *** Finders ***        
     
     var getSensorTypeByKey = function (sensorTypeId) {
@@ -57,6 +63,24 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
             }
         }
     };    
+
+    var getDeviceSensorsByKey = function (deviceSensorsId) {
+        for (var i = 0; i < context.deviceSensors.length; i++) {
+            var item = context.deviceSensors[i];
+            if (item.deviceSensorsId === deviceSensorsId) {
+                return item;
+            }
+        }
+    }; 
+
+    var getSensorsInDeviceByKey = function (deviceSensorsId, sensorId) {
+        for (var i = 0; i < context.sensorsInDevice.length; i++) {
+            var item = context.sensorsInDevice[i];
+            if (item.deviceSensorsId === deviceSensorsId && item.sensorId === sensorId) {
+                return item;
+            }
+        }
+    }; 
 
     // *** Navigation Properties Mappers ***   
 
@@ -139,12 +163,22 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
         
     });
 
+    context.$watch('deviceSensorsLoaded', function (newValue, oldValue) {
+
+    });
+
+    context.$watch('sensorsInDeviceLoaded', function (newValue, oldValue) {
+
+    });
+
     // *** Public Methods ***
     
     context.getSensorTypeByKey = getSensorTypeByKey;
     context.getSensorDatasheetByKey = getSensorDatasheetByKey;
     context.getSensorUnitMeasurementDefaultByKey = getSensorUnitMeasurementDefaultByKey;
     context.getSensorByKey = getSensorByKey;
+    context.getDeviceSensorsByKey = getDeviceSensorsByKey;
+    context.getSensorsInDeviceByKey = getSensorsInDeviceByKey;
 
     return context;
 

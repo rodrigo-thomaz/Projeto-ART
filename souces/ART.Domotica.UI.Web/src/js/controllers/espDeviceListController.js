@@ -18,6 +18,8 @@ app.controller('espDeviceListController', [
     'sensorDatasheetService',
     'sensorDatasheetUnitMeasurementScaleService',
     'sensorUnitMeasurementDefaultService',
+    'deviceSensorsService',
+    'sensorsInDeviceService',
     'sensorService',
     function ($scope, $timeout, $log, espDeviceService) {    
    
