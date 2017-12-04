@@ -29,6 +29,11 @@
             get; set;
         }
 
+        public DbSet<DeviceSensors> DeviceSensors
+        {
+            get; set;
+        }
+
         public DbSet<Application> Application
         {
             get; set;
@@ -202,6 +207,7 @@
             modelBuilder.Configurations.Add(new ContinentConfiguration());
             modelBuilder.Configurations.Add(new CountryConfiguration());
             modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
+            modelBuilder.Configurations.Add(new DeviceSensorsConfiguration());
             modelBuilder.Configurations.Add(new DeviceInApplicationConfiguration());
             modelBuilder.Configurations.Add(new DeviceMQConfiguration());
             modelBuilder.Configurations.Add(new DeviceNTPConfiguration());

@@ -26,6 +26,8 @@
             get; set;
         }
 
+        public DeviceSensors DeviceSensors { get; set; }
+
         #endregion Properties
     }
 }

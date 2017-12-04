@@ -12,8 +12,6 @@
 
         public SensorTempDSFamilyConfiguration()
         {
-            ToTable("SensorTempDSFamily");
-
             //Primary Keys
             HasKey(x => x.Id);
 
