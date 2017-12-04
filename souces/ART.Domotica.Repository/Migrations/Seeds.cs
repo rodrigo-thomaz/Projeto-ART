@@ -603,6 +603,7 @@
             {
                 SensorId = sensor_2_1.Id,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                Ordination = 0,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_1);
@@ -611,6 +612,7 @@
             {
                 SensorId = sensor_2_2.Id,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                Ordination = 1,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_2);
@@ -619,6 +621,7 @@
             {
                 SensorId = sensor_3_1.Id,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                Ordination = 2,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_1);
@@ -627,6 +630,7 @@
             {
                 SensorId = sensor_3_2.Id,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                Ordination = 3,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_2);

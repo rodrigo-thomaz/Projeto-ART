@@ -160,6 +160,14 @@
     <Compile Include="Migrations\201712041339086_InitialCreate.Designer.cs">
       <DependentUpon>201712041339086_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712041351328_InitialCreate1.cs" />
+    <Compile Include="Migrations\201712041351328_InitialCreate1.Designer.cs">
+      <DependentUpon>201712041351328_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712041355141_InitialCreate2.cs" />
+    <Compile Include="Migrations\201712041355141_InitialCreate2.Designer.cs">
+      <DependentUpon>201712041355141_InitialCreate2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -242,6 +250,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712041339086_InitialCreate.resx">
       <DependentUpon>201712041339086_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041351328_InitialCreate1.resx">
+      <DependentUpon>201712041351328_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712041355141_InitialCreate2.resx">
+      <DependentUpon>201712041355141_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

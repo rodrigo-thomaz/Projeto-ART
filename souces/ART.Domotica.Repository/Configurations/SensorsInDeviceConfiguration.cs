@@ -44,6 +44,11 @@
                 .WithMany(x => x.SensorsInDevice)
                 .HasForeignKey(x => x.SensorId)
                 .WillCascadeOnDelete(false);
+
+            //Ordination
+            Property(x => x.Ordination)
+                .HasColumnOrder(2)
+                .IsRequired();
         }
 
         #endregion Constructors

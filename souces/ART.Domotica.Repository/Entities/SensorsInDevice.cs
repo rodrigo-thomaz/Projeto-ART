@@ -26,6 +26,11 @@
             get; set;
         }
 
+        public short Ordination
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }
