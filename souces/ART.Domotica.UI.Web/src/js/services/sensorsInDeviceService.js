@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorsInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', function ($http, ngAuthSettings, $rootScope, stompService) {
+app.factory('sensorsInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -40,13 +40,13 @@ app.factory('sensorsInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', 
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            serviceFactory.sensorsInDevice.push(data[i]);
+            contextScope.sensorsInDevice.push(data[i]);
         }
 
         _initializing = false;
         _initialized = true;
 
-        siContext.sensorsInDeviceLoaded = true;
+        contextScope.sensorsInDeviceLoaded = true;
         clearOnConnected();
 
         getAllByApplicationIdCompletedSubscription.unsubscribe();
