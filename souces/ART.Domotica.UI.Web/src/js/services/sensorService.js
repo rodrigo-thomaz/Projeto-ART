@@ -20,9 +20,9 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
     var setLabelApiUri = 'api/sensor/setLabel';
     var setLabelCompletedTopic = 'Sensor.SetLabelViewCompleted';
     var setLabelCompletedSubscription = null;
-    var setLabelCompletedEventName = 'service.onSetLabelCompleted_Id_';
+    var setLabelCompletedEventName = 'sensorService.onSetLabelCompleted_Id_';
 
-    var initializedEventName = 'deviceSensorsService.onInitialized';
+    var initializedEventName = 'sensorService.onInitialized';
 
     var onConnected = function () {
 
@@ -128,10 +128,13 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
     // serviceFactory
         
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
+    serviceFactory.initializedEventName = initializedEventName;    
         
-    serviceFactory.setUnitMeasurement = setUnitMeasurement;
     serviceFactory.setLabel = setLabel;   
+    serviceFactory.setLabelCompletedEventName = setLabelCompletedEventName;
+
+    serviceFactory.setUnitMeasurement = setUnitMeasurement;
+    serviceFactory.setUnitMeasurementCompletedEventName = setUnitMeasurementCompletedEventName;
 
     return serviceFactory;
 

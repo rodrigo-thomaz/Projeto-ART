@@ -11,22 +11,27 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var getAllByApplicationIdApiUri = 'api/espDevice/getAllByApplicationId';
     var getAllByApplicationIdCompletedTopic = 'ESPDevice.GetAllByApplicationIdViewCompleted';
     var getAllByApplicationIdCompletedSubscription = null;
+    var getAllByApplicationIdCompletedEventName = 'espDeviceService.onGetAllByApplicationIdCompleted_Id_';
 
     var insertInApplicationApiUri = 'api/espDevice/insertInApplication';
     var insertInApplicationCompletedTopic = 'ESPDevice.InsertInApplicationViewCompleted';
     var insertInApplicationCompletedSubscription = null;
+    var insertInApplicationCompletedEventName = 'espDeviceService.onInsertInApplicationCompleted';
 
     var deleteFromApplicationApiUri = 'api/espDevice/deleteFromApplication';
     var deleteFromApplicationCompletedTopic = 'ESPDevice.DeleteFromApplicationViewCompleted';
     var deleteFromApplicationCompletedSubscription = null;
+    var deleteFromApplicationCompletedEventName = 'espDeviceService.onDeleteFromApplicationCompleted';
 
     var getByPinApiUri = 'api/espDevice/getByPin';
     var getByPinCompletedTopic = 'ESPDevice.GetByPinViewCompleted';
     var getByPinCompletedSubscription = null;
+    var getByPinCompletedEventName = 'espDeviceService.onGetByPinCompleted';
 
     var setLabelApiUri = 'api/espDevice/setLabel';
     var setLabelCompletedTopic = 'ESPDevice.SetLabelViewCompleted';
     var setLabelCompletedSubscription = null;
+    var setLabelCompletedEventName = 'espDeviceService.onSetLabelCompleted_Id_';
 
     var initializedEventName = 'espDeviceService.onInitialized';
 
@@ -183,14 +188,14 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var onGetByPinCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        $rootScope.$emit('espDeviceService_onGetByPinCompleted', data);
+        $rootScope.$emit(getByPinCompletedEventName, data);
     }
 
     var onInsertInApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         insertDeviceInCollection(data);
-        $rootScope.$emit('espDeviceService_onInsertInApplicationCompleted');
+        $rootScope.$emit(insertInApplicationCompletedEventName);
     }  
 
     var onDeleteFromApplicationCompleted = function (payload) {
@@ -199,7 +204,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         for (var i = 0; i < contextScope.devices.length; i++) {
             if (contextScope.devices[i].deviceInApplicationId === data.deviceInApplicationId) {
                 contextScope.devices.splice(i, 1);
-                $rootScope.$emit('espDeviceService_onDeleteFromApplicationCompleted');
+                $rootScope.$emit(deleteFromApplicationCompletedEventName);
                 break;
             }
         }       
@@ -209,7 +214,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var result = JSON.parse(payload.body);
         var device = contextScope.getDeviceById(result.deviceId);
         device.label = result.label;
-        $rootScope.$emit('espDeviceService_onSetLabelCompleted_Id_' + result.deviceId, result);
+        $rootScope.$emit(setLabelCompletedEventName + result.deviceId, result);
     }
 
     var insertDeviceInCollection = function (device) {
