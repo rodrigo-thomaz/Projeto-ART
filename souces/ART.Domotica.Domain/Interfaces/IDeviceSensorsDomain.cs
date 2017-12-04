@@ -3,12 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Collections.Generic;
+    using ART.Domotica.Repository.Entities;
 
-    public interface IDeviceSernsorsDomain
+    public interface IDeviceSensorsDomain
     {
         #region Methods
 
-        Task<List<DeviceSernsors>> GetAllByApplicationId(Guid applicationId);
+        Task<List<DeviceSensors>> GetAllByApplicationId(Guid applicationId);
 
         #endregion Methods
     }
