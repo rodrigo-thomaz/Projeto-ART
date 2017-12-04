@@ -22,7 +22,7 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _getAllConsumer;
+        private readonly EventingBasicConsumer _getAllByApplicationIdConsumer;
         private readonly EventingBasicConsumer _getAllByDeviceInApplicationIdConsumer;
         private readonly EventingBasicConsumer _setUnitMeasurementConsumer;
         private readonly EventingBasicConsumer _setLabelConsumer;
@@ -37,7 +37,7 @@ namespace ART.Domotica.Worker.Consumers
 
         public SensorConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
-            _getAllConsumer = new EventingBasicConsumer(_model);
+            _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);
             _setUnitMeasurementConsumer = new EventingBasicConsumer(_model);
             _setLabelConsumer = new EventingBasicConsumer(_model);
@@ -63,7 +63,7 @@ namespace ART.Domotica.Worker.Consumers
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: SensorConstants.GetAllQueueName
+                  queue: SensorConstants.GetAllByApplicationIdQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
@@ -96,23 +96,23 @@ namespace ART.Domotica.Worker.Consumers
                 , routingKey: GetApplicationRoutingKeyForAllIoT(SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName)
                 , arguments: null);
 
-            _getAllConsumer.Received += GetAllReceived;
+            _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;
             _getAllByDeviceInApplicationIdConsumer.Received += GetAllByDeviceInApplicationIdReceived;
             _setUnitMeasurementConsumer.Received += SetUnitMeasurementReceived;
             _setLabelConsumer.Received += SetLabelReceived;
 
-            _model.BasicConsume(SensorConstants.GetAllQueueName, false, _getAllConsumer);
+            _model.BasicConsume(SensorConstants.GetAllByApplicationIdQueueName, false, _getAllByApplicationIdConsumer);
             _model.BasicConsume(SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName, false, _getAllByDeviceInApplicationIdConsumer);
             _model.BasicConsume(SensorConstants.SetLabelQueueName, false, _setLabelConsumer);
             _model.BasicConsume(SensorConstants.SetUnitMeasurementQueueName, false, _setUnitMeasurementConsumer);
         }
 
-        public void GetAllReceived(object sender, BasicDeliverEventArgs e)
+        public void GetAllByApplicationIdReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetAllReceivedAsync(sender, e));
+            Task.WaitAll(GetAllByApplicationIdReceivedAsync(sender, e));
         }
 
-        public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetAllByApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
@@ -123,7 +123,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationUser = await applicationUserDomain.GetById(message.ApplicationUserId);
 
             var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.GetAll(applicationUser.ApplicationId);
+            var data = await domain.GetAllByApplicationId(applicationUser.ApplicationId);
 
             var exchange = "amq.topic";
 
@@ -133,7 +133,7 @@ namespace ART.Domotica.Worker.Consumers
             //Enviando para View
             var viewModel = Mapper.Map<List<Sensor>, List<SensorDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorConstants.GetAllCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorConstants.GetAllByApplicationIdCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

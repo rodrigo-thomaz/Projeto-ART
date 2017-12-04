@@ -9,7 +9,7 @@
     {
         #region Methods
 
-        Task GetAll(AuthenticatedMessageContract message);
+        Task GetAllByApplicationId(AuthenticatedMessageContract message);
 
         Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message);
 

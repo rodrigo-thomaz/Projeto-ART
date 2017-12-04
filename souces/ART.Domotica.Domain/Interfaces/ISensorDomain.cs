@@ -12,7 +12,7 @@
     {
         #region Methods
 
-        Task<List<Sensor>> GetAll(Guid applicationId);
+        Task<List<Sensor>> GetAllByApplicationId(Guid applicationId);
 
         Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId);
 

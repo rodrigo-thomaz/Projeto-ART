@@ -43,9 +43,9 @@ namespace ART.Domotica.Domain.Services
 
         #region public voids
 
-        public async Task<List<Sensor>> GetAll(Guid applicationId)
+        public async Task<List<Sensor>> GetAllByApplicationId(Guid applicationId)
         {
-            return await _sensorRepository.GetAll(applicationId);
+            return await _sensorRepository.GetAllByApplicationId(applicationId);
         }
 
         public async Task<Sensor> SetAlarmOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmOn)

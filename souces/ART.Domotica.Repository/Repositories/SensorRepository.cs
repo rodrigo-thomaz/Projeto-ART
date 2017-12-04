@@ -16,7 +16,7 @@ namespace ART.Domotica.Repository.Repositories
 
         }
 
-        public async Task<List<Sensor>> GetAll(Guid applicationId)
+        public async Task<List<Sensor>> GetAllByApplicationId(Guid applicationId)
         {
             // Arrumar depois da Refatoração !!!
             return await _context.Set<Sensor>()

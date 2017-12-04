@@ -22,12 +22,12 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids
 
-        public async Task GetAll(AuthenticatedMessageContract message)
+        public async Task GetAllByApplicationId(AuthenticatedMessageContract message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorConstants.GetAllQueueName, null, payload);
+                _model.BasicPublish("", SensorConstants.GetAllByApplicationIdQueueName, null, payload);
             });            
         }
 
@@ -56,7 +56,7 @@ namespace ART.Domotica.Producer.Services
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: SensorConstants.GetAllQueueName
+                  queue: SensorConstants.GetAllByApplicationIdQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true

@@ -37,11 +37,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("getAll")]
+        [Route("getAllByApplicationId")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetAll()
+        public async Task<IHttpActionResult> GetAllByApplicationId()
         {           
-            await _sensorProducer.GetAll(CreateMessage());
+            await _sensorProducer.GetAllByApplicationId(CreateMessage());
             return Ok();
         }
 
