@@ -149,8 +149,12 @@
                     },
                     SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     },
                     CreateDate = DateTime.Now,
                 };
@@ -183,8 +187,12 @@
                 {
                     sensor_1.SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     };
                 }
 
@@ -221,8 +229,12 @@
                     },
                     SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     },
                     CreateDate = DateTime.Now,
                 };
@@ -255,8 +267,12 @@
                 {
                     sensor_2_1.SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     };
                 }
             }
@@ -292,8 +308,12 @@
                     },
                     SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     },
                     CreateDate = DateTime.Now,
                 };
@@ -326,8 +346,12 @@
                 {
                     sensor_2_2.SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     };
                 }
             }
@@ -363,8 +387,12 @@
                     },
                     SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     },
                     CreateDate = DateTime.Now,
                 };
@@ -397,8 +425,12 @@
                 {
                     sensor_3_1.SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     };
                 }
             }
@@ -434,8 +466,12 @@
                     },
                     SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     },
                     CreateDate = DateTime.Now,
                 };
@@ -468,8 +504,12 @@
                 {
                     sensor_3_2.SensorChartLimiter = new SensorChartLimiter
                     {
-                        Min = 20,
-                        Max = 30,
+                        UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.None,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Long,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
                     };
                 }
             }

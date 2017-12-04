@@ -41,9 +41,9 @@
             }
 
             if (position == SensorChartLimiterPositionEnum.Max)
-                entity.Max = value;
+                entity.ChartLimiterMax = value;
             else if (position == SensorChartLimiterPositionEnum.Min)
-                entity.Min = value;
+                entity.ChartLimiterMin = value;
 
             await _sensorChartLimiterRepository.Update(entity);
 
