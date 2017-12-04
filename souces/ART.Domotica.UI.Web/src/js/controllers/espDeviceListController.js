@@ -129,7 +129,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
 }]);
 
-app.controller('sensorTempDSFamilyItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'sensorTempDSFamilyResolutionService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorUnitMeasurementScaleService', 'sensorTriggerService', 'sensorTempDSFamilyService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, sensorTempDSFamilyResolutionService, unitMeasurementConverter, unitMeasurementTypeService, unitMeasurementService, sensorUnitMeasurementScaleService, sensorTriggerService, sensorTempDSFamilyService) {
+app.controller('sensorTempDSFamilyItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'sensorTempDSFamilyResolutionService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorUnitMeasurementScaleService', 'sensorTriggerService', 'sensorTempDSFamilyService', 'siContext', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, sensorTempDSFamilyResolutionService, unitMeasurementConverter, unitMeasurementTypeService, unitMeasurementService, sensorUnitMeasurementScaleService, sensorTriggerService, sensorTempDSFamilyService, siContext) {
 
     $scope.sensor = {};           
 
@@ -246,7 +246,7 @@ app.controller('sensorTempDSFamilyItemController', ['$scope', '$rootScope', '$ti
     });
 
     var setSelectedUnitMeasurement = function () {  
-        $scope.unitMeasurement.selectedUnitMeasurement = unitMeasurementService.getByKey($scope.sensor.unitMeasurementId);
+        $scope.unitMeasurement.selectedUnitMeasurement = siContext.getUnitMeasurementScaleByKey($scope.sensor.unitMeasurementId, $scope.sensor.unitMeasurementTypeId, $scope.sensor.numericalScalePrefixId, $scope.sensor.numericalScaleTypeId);
     };
 
     var setSelectedResolution = function () {
