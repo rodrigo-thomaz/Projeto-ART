@@ -41,70 +41,70 @@
             ExecuteSensorUnitMeasurementDefault(context);
             ExecuteSensorDatasheetUnitMeasurementScale(context);
 
-            #region DSFamilyTempSensorResolutions
+            #region SensorTempDSFamilyResolutions
 
-            var dsFamilyTempSensorResolution9 = context.DSFamilyTempSensorResolution.SingleOrDefault(x => x.Id == 9);
-            var dsFamilyTempSensorResolution10 = context.DSFamilyTempSensorResolution.SingleOrDefault(x => x.Id == 10);
-            var dsFamilyTempSensorResolution11 = context.DSFamilyTempSensorResolution.SingleOrDefault(x => x.Id == 11);
-            var dsFamilyTempSensorResolution12 = context.DSFamilyTempSensorResolution.SingleOrDefault(x => x.Id == 12);
+            var sensorTempDSFamilyResolution9 = context.SensorTempDSFamilyResolution.SingleOrDefault(x => x.Id == 9);
+            var sensorTempDSFamilyResolution10 = context.SensorTempDSFamilyResolution.SingleOrDefault(x => x.Id == 10);
+            var sensorTempDSFamilyResolution11 = context.SensorTempDSFamilyResolution.SingleOrDefault(x => x.Id == 11);
+            var sensorTempDSFamilyResolution12 = context.SensorTempDSFamilyResolution.SingleOrDefault(x => x.Id == 12);
 
-            if (dsFamilyTempSensorResolution9 == null)
+            if (sensorTempDSFamilyResolution9 == null)
             {
-                dsFamilyTempSensorResolution9 = new DSFamilyTempSensorResolution { Id = 9 };
-                context.DSFamilyTempSensorResolution.Add(dsFamilyTempSensorResolution9);
+                sensorTempDSFamilyResolution9 = new SensorTempDSFamilyResolution { Id = 9 };
+                context.SensorTempDSFamilyResolution.Add(sensorTempDSFamilyResolution9);
             }
 
-            if (dsFamilyTempSensorResolution10 == null)
+            if (sensorTempDSFamilyResolution10 == null)
             {
-                dsFamilyTempSensorResolution10 = new DSFamilyTempSensorResolution { Id = 10 };
-                context.DSFamilyTempSensorResolution.Add(dsFamilyTempSensorResolution10);
+                sensorTempDSFamilyResolution10 = new SensorTempDSFamilyResolution { Id = 10 };
+                context.SensorTempDSFamilyResolution.Add(sensorTempDSFamilyResolution10);
             }
 
-            if (dsFamilyTempSensorResolution11 == null)
+            if (sensorTempDSFamilyResolution11 == null)
             {
-                dsFamilyTempSensorResolution11 = new DSFamilyTempSensorResolution { Id = 11 };
-                context.DSFamilyTempSensorResolution.Add(dsFamilyTempSensorResolution11);
+                sensorTempDSFamilyResolution11 = new SensorTempDSFamilyResolution { Id = 11 };
+                context.SensorTempDSFamilyResolution.Add(sensorTempDSFamilyResolution11);
             }
 
-            if (dsFamilyTempSensorResolution12 == null)
+            if (sensorTempDSFamilyResolution12 == null)
             {
-                dsFamilyTempSensorResolution12 = new DSFamilyTempSensorResolution { Id = 12 };
-                context.DSFamilyTempSensorResolution.Add(dsFamilyTempSensorResolution12);
+                sensorTempDSFamilyResolution12 = new SensorTempDSFamilyResolution { Id = 12 };
+                context.SensorTempDSFamilyResolution.Add(sensorTempDSFamilyResolution12);
             }
 
-            dsFamilyTempSensorResolution9.Name = "9 bits";
-            dsFamilyTempSensorResolution9.Bits = 9;
-            dsFamilyTempSensorResolution9.Resolution = 0.5M;
-            dsFamilyTempSensorResolution9.ConversionTime = 93.75M;
-            dsFamilyTempSensorResolution9.DecimalPlaces = 1;
-            dsFamilyTempSensorResolution9.Description = "Resolução de 9 bits";
+            sensorTempDSFamilyResolution9.Name = "9 bits";
+            sensorTempDSFamilyResolution9.Bits = 9;
+            sensorTempDSFamilyResolution9.Resolution = 0.5M;
+            sensorTempDSFamilyResolution9.ConversionTime = 93.75M;
+            sensorTempDSFamilyResolution9.DecimalPlaces = 1;
+            sensorTempDSFamilyResolution9.Description = "Resolução de 9 bits";
 
-            dsFamilyTempSensorResolution10.Name = "10 bits";
-            dsFamilyTempSensorResolution10.Bits = 10;
-            dsFamilyTempSensorResolution10.Resolution = 0.25M;
-            dsFamilyTempSensorResolution10.ConversionTime = 187.5M;
-            dsFamilyTempSensorResolution10.DecimalPlaces = 2;
-            dsFamilyTempSensorResolution10.Description = "Resolução de 10 bits";
+            sensorTempDSFamilyResolution10.Name = "10 bits";
+            sensorTempDSFamilyResolution10.Bits = 10;
+            sensorTempDSFamilyResolution10.Resolution = 0.25M;
+            sensorTempDSFamilyResolution10.ConversionTime = 187.5M;
+            sensorTempDSFamilyResolution10.DecimalPlaces = 2;
+            sensorTempDSFamilyResolution10.Description = "Resolução de 10 bits";
 
-            dsFamilyTempSensorResolution11.Name = "11 bits";
-            dsFamilyTempSensorResolution11.Bits = 11;
-            dsFamilyTempSensorResolution11.Resolution = 0.125M;
-            dsFamilyTempSensorResolution11.ConversionTime = 375;
-            dsFamilyTempSensorResolution11.DecimalPlaces = 3;
-            dsFamilyTempSensorResolution11.Description = "Resolução de 11 bits";
+            sensorTempDSFamilyResolution11.Name = "11 bits";
+            sensorTempDSFamilyResolution11.Bits = 11;
+            sensorTempDSFamilyResolution11.Resolution = 0.125M;
+            sensorTempDSFamilyResolution11.ConversionTime = 375;
+            sensorTempDSFamilyResolution11.DecimalPlaces = 3;
+            sensorTempDSFamilyResolution11.Description = "Resolução de 11 bits";
 
-            dsFamilyTempSensorResolution12.Name = "12 bits";
-            dsFamilyTempSensorResolution12.Bits = 12;
-            dsFamilyTempSensorResolution12.Resolution = 0.0625M;
-            dsFamilyTempSensorResolution12.ConversionTime = 750;
-            dsFamilyTempSensorResolution12.DecimalPlaces = 4;
-            dsFamilyTempSensorResolution12.Description = "Resolução de 12 bits";
+            sensorTempDSFamilyResolution12.Name = "12 bits";
+            sensorTempDSFamilyResolution12.Bits = 12;
+            sensorTempDSFamilyResolution12.Resolution = 0.0625M;
+            sensorTempDSFamilyResolution12.ConversionTime = 750;
+            sensorTempDSFamilyResolution12.DecimalPlaces = 4;
+            sensorTempDSFamilyResolution12.Description = "Resolução de 12 bits";
 
             context.SaveChanges();
 
             #endregion
 
-            #region DSFamilyTempSensor
+            #region SensorTempDSFamily
 
             var sensor_1_Address = "28fff62293165b0";
             var sensor_2_1_Address = "40:255:231:109:162:22:3:211";
@@ -112,24 +112,24 @@
             var sensor_3_1_Address = "40:255:192:95:147:22:4:195";
             var sensor_3_2_Address = "40:255:113:95:147:22:4:65";
 
-            var sensor_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
-            var sensor_2_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
-            var sensor_2_2 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
-            var sensor_3_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
-            var sensor_3_2 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
+            var sensor_1 = context.Sensor.Include(x => x.SensorTempDSFamily).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.SensorTempDSFamily.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
+            var sensor_2_1 = context.Sensor.Include(x => x.SensorTempDSFamily).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.SensorTempDSFamily.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
+            var sensor_2_2 = context.Sensor.Include(x => x.SensorTempDSFamily).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.SensorTempDSFamily.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
+            var sensor_3_1 = context.Sensor.Include(x => x.SensorTempDSFamily).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.SensorTempDSFamily.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
+            var sensor_3_2 = context.Sensor.Include(x => x.SensorTempDSFamily).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.SensorTempDSFamily.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
 
             if (sensor_1 == null)
             {
                 sensor_1 = new Sensor
-                {         
+                {
                     SensorDatasheetId = SensorDatasheetEnum.Temperature_DS18B20,
                     SensorTypeId = SensorTypeEnum.Temperature,
-                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    SensorTempDSFamily = new SensorTempDSFamily
                     {
                         DeviceAddress = sensor_1_Address,
                         Family = "DS18B20",
-                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution9.Id,
-                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution9,
+                        SensorTempDSFamilyResolutionId = sensorTempDSFamilyResolution9.Id,
+                        SensorTempDSFamilyResolution = sensorTempDSFamilyResolution9,
                     },
                     Label = "Sensor 1",
                     SensorTriggers = new List<SensorTrigger>
@@ -162,8 +162,8 @@
             }
             else
             {
-                sensor_1.DSFamilyTempSensor.Family = "DS18B20";
-                sensor_1.DSFamilyTempSensor.DeviceAddress = sensor_1_Address;
+                sensor_1.SensorTempDSFamily.Family = "DS18B20";
+                sensor_1.SensorTempDSFamily.DeviceAddress = sensor_1_Address;
 
                 if (!sensor_1.SensorTriggers.Any())
                 {
@@ -204,12 +204,12 @@
                 {
                     SensorDatasheetId = SensorDatasheetEnum.Temperature_DS18B20,
                     SensorTypeId = SensorTypeEnum.Temperature,
-                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    SensorTempDSFamily = new SensorTempDSFamily
                     {
                         DeviceAddress = sensor_2_1_Address,
                         Family = "DS18B20",
-                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
-                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                        SensorTempDSFamilyResolutionId = sensorTempDSFamilyResolution11.Id,
+                        SensorTempDSFamilyResolution = sensorTempDSFamilyResolution11,
                     },
                     Label = "Sensor 1",
                     SensorTriggers = new List<SensorTrigger>
@@ -242,8 +242,8 @@
             }
             else
             {
-                sensor_2_1.DSFamilyTempSensor.Family = "DS18B20";
-                sensor_2_1.DSFamilyTempSensor.DeviceAddress = sensor_2_1_Address;
+                sensor_2_1.SensorTempDSFamily.Family = "DS18B20";
+                sensor_2_1.SensorTempDSFamily.DeviceAddress = sensor_2_1_Address;
 
                 if (!sensor_2_1.SensorTriggers.Any())
                 {
@@ -283,12 +283,12 @@
                 {
                     SensorDatasheetId = SensorDatasheetEnum.Temperature_DS18B20,
                     SensorTypeId = SensorTypeEnum.Temperature,
-                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    SensorTempDSFamily = new SensorTempDSFamily
                     {
                         DeviceAddress = sensor_2_2_Address,
                         Family = "DS18B20",
-                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
-                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                        SensorTempDSFamilyResolutionId = sensorTempDSFamilyResolution11.Id,
+                        SensorTempDSFamilyResolution = sensorTempDSFamilyResolution11,
                     },
                     Label = "Sensor 2",
                     SensorTriggers = new List<SensorTrigger>
@@ -321,8 +321,8 @@
             }
             else
             {
-                sensor_2_2.DSFamilyTempSensor.Family = "DS18B20";
-                sensor_2_2.DSFamilyTempSensor.DeviceAddress = sensor_2_2_Address;
+                sensor_2_2.SensorTempDSFamily.Family = "DS18B20";
+                sensor_2_2.SensorTempDSFamily.DeviceAddress = sensor_2_2_Address;
 
                 if (!sensor_2_2.SensorTriggers.Any())
                 {
@@ -363,12 +363,12 @@
                     SensorDatasheetId = SensorDatasheetEnum.Temperature_DS18B20,
                     SensorTypeId = SensorTypeEnum.Temperature,
                     Label = "Sensor 3",
-                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    SensorTempDSFamily = new SensorTempDSFamily
                     {
                         DeviceAddress = sensor_3_1_Address,
                         Family = "DS18B20",
-                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
-                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                        SensorTempDSFamilyResolutionId = sensorTempDSFamilyResolution11.Id,
+                        SensorTempDSFamilyResolution = sensorTempDSFamilyResolution11,
                     },
                     SensorTriggers = new List<SensorTrigger>
                     {
@@ -400,8 +400,8 @@
             }
             else
             {
-                sensor_3_1.DSFamilyTempSensor.Family = "DS18B20";
-                sensor_3_1.DSFamilyTempSensor.DeviceAddress = sensor_3_1_Address;
+                sensor_3_1.SensorTempDSFamily.Family = "DS18B20";
+                sensor_3_1.SensorTempDSFamily.DeviceAddress = sensor_3_1_Address;
 
                 if (!sensor_3_1.SensorTriggers.Any())
                 {
@@ -441,12 +441,12 @@
                 {
                     SensorDatasheetId = SensorDatasheetEnum.Temperature_DS18B20,
                     SensorTypeId = SensorTypeEnum.Temperature,
-                    DSFamilyTempSensor = new DSFamilyTempSensor
+                    SensorTempDSFamily = new SensorTempDSFamily
                     {
                         DeviceAddress = sensor_3_2_Address,
                         Family = "DS18B20",
-                        DSFamilyTempSensorResolutionId = dsFamilyTempSensorResolution11.Id,
-                        DSFamilyTempSensorResolution = dsFamilyTempSensorResolution11,
+                        SensorTempDSFamilyResolutionId = sensorTempDSFamilyResolution11.Id,
+                        SensorTempDSFamilyResolution = sensorTempDSFamilyResolution11,
                     },
                     Label = "Sensor 4",
                     SensorTriggers = new List<SensorTrigger>
@@ -479,8 +479,8 @@
             }
             else
             {
-                sensor_3_2.DSFamilyTempSensor.Family = "DS18B20";
-                sensor_3_2.DSFamilyTempSensor.DeviceAddress = sensor_3_2_Address;
+                sensor_3_2.SensorTempDSFamily.Family = "DS18B20";
+                sensor_3_2.SensorTempDSFamily.DeviceAddress = sensor_3_2_Address;
 
                 if (!sensor_3_2.SensorTriggers.Any())
                 {

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'dsFamilyTempSensorService', function ($http, $log, $rootScope, ngAuthSettings, stompService, dsFamilyTempSensorService) {
+app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorTempDSFamilyService', function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorTempDSFamilyService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -7,9 +7,9 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
     var serviceFactory = {};   
     
-    var setAlarmOn = function (dsFamilyTempSensorId, alarmOn, position) {
+    var setAlarmOn = function (sensorTempDSFamilyId, alarmOn, position) {
         var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            sensorTempDSFamilyId: sensorTempDSFamilyId,
             alarmOn: alarmOn,
             position: position,
         }
@@ -18,9 +18,9 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
         });
     };
 
-    var setAlarmCelsius = function (dsFamilyTempSensorId, alarmCelsius, position) {
+    var setAlarmCelsius = function (sensorTempDSFamilyId, alarmCelsius, position) {
         var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            sensorTempDSFamilyId: sensorTempDSFamilyId,
             alarmCelsius: alarmCelsius,
             position: position,
         }
@@ -29,9 +29,9 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
         });
     };
 
-    var setAlarmBuzzerOn = function (dsFamilyTempSensorId, alarmBuzzerOn, position) {
+    var setAlarmBuzzerOn = function (sensorTempDSFamilyId, alarmBuzzerOn, position) {
         var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            sensorTempDSFamilyId: sensorTempDSFamilyId,
             alarmBuzzerOn: alarmBuzzerOn,
             position: position,
         }
@@ -53,32 +53,32 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
     var onSetAlarmOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = dsFamilyTempSensorService.getById(result.deviceId, result.dsFamilyTempSensorId);
+        var sensor = sensorTempDSFamilyService.getById(result.deviceId, result.sensorTempDSFamilyId);
         if (result.position === 'Low')
             sensor.lowAlarm.alarmOn = result.alarmOn;
         else if (result.position === 'High')
             sensor.highAlarm.alarmOn = result.alarmOn;
-        $rootScope.$emit('sensorTriggerService_onSetAlarmOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
+        $rootScope.$emit('sensorTriggerService_onSetAlarmOnCompleted_Id_' + result.sensorTempDSFamilyId, result);
     }
 
     var onSetAlarmCelsiusCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = dsFamilyTempSensorService.getById(result.deviceId, result.dsFamilyTempSensorId);
+        var sensor = sensorTempDSFamilyService.getById(result.deviceId, result.sensorTempDSFamilyId);
         if (result.position === 'Low')
             sensor.lowAlarm.alarmCelsius = result.alarmCelsius;
         else if (result.position === 'High')
             sensor.highAlarm.alarmCelsius = result.alarmCelsius;
-        $rootScope.$emit('sensorTriggerService_onSetAlarmCelsiusCompleted_Id_' + result.dsFamilyTempSensorId, result);
+        $rootScope.$emit('sensorTriggerService_onSetAlarmCelsiusCompleted_Id_' + result.sensorTempDSFamilyId, result);
     }
 
     var onSetAlarmBuzzerOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = dsFamilyTempSensorService.getById(result.deviceId, result.dsFamilyTempSensorId);
+        var sensor = sensorTempDSFamilyService.getById(result.deviceId, result.sensorTempDSFamilyId);
         if (result.position === 'Low')
             sensor.lowAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
         else if (result.position === 'High')
             sensor.highAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
-        $rootScope.$emit('sensorTriggerService_SetAlarmBuzzerOnCompleted_Id_' + result.dsFamilyTempSensorId, result);
+        $rootScope.$emit('sensorTriggerService_SetAlarmBuzzerOnCompleted_Id_' + result.sensorTempDSFamilyId, result);
     }
 
     $rootScope.$on('$destroy', function () {

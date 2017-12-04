@@ -11,12 +11,12 @@
             get; set;
         }
 
-        public Guid DSFamilyTempSensorId
+        public string Label
         {
             get; set;
         }
 
-        public string Label
+        public Guid SensorTempDSFamilyId
         {
             get; set;
         }

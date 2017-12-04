@@ -6,13 +6,13 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class DSFamilyTempSensorConfiguration : EntityTypeConfiguration<DSFamilyTempSensor>
+    public class SensorTempDSFamilyConfiguration : EntityTypeConfiguration<SensorTempDSFamily>
     {
         #region Constructors
 
-        public DSFamilyTempSensorConfiguration()
+        public SensorTempDSFamilyConfiguration()
         {
-            ToTable("DSFamilyTempSensor");
+            ToTable("SensorTempDSFamily");
 
             //Primary Keys
             HasKey(x => x.Id);
@@ -25,7 +25,7 @@
 
             //Sensor
             HasRequired(x => x.Sensor)
-               .WithRequiredDependent(x => x.DSFamilyTempSensor);
+               .WithRequiredDependent(x => x.SensorTempDSFamily);
 
             //DeviceAddress
             Property(x => x.DeviceAddress)
@@ -41,14 +41,14 @@
                 .HasMaxLength(10)
                 .IsRequired();
 
-            //DSFamilyTempSensorResolution
-            HasRequired(x => x.DSFamilyTempSensorResolution)
-                .WithMany(x => x.DSFamilyTempSensors)
-                .HasForeignKey(x => x.DSFamilyTempSensorResolutionId)
+            //SensorTempDSFamilyResolution
+            HasRequired(x => x.SensorTempDSFamilyResolution)
+                .WithMany(x => x.SensorTempDSFamilys)
+                .HasForeignKey(x => x.SensorTempDSFamilyResolutionId)
                 .WillCascadeOnDelete(false);
 
-            //DSFamilyTempSensorResolutionId
-            Property(x => x.DSFamilyTempSensorResolutionId)
+            //SensorTempDSFamilyResolutionId
+            Property(x => x.SensorTempDSFamilyResolutionId)
                 .HasColumnOrder(3);
         }
 

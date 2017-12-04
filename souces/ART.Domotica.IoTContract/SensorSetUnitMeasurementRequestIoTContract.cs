@@ -8,7 +8,7 @@
     {
         #region Properties
 
-        public Guid DSFamilyTempSensorId
+        public Guid SensorTempDSFamilyId
         {
             get; set;
         }

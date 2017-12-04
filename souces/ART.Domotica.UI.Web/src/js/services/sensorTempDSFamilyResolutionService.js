@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('dsFamilyTempSensorResolutionService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', function ($http, $log, $rootScope, ngAuthSettings, stompService) {
+app.factory('sensorTempDSFamilyResolutionService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', function ($http, $log, $rootScope, ngAuthSettings, stompService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -9,7 +9,7 @@ app.factory('dsFamilyTempSensorResolutionService', ['$http', '$log', '$rootScope
     var serviceFactory = {};
 
     var onConnected = function () {
-        stompService.subscribe('DSFamilyTempSensor.GetAllResolutionsViewCompleted', onGetAllCompleted);
+        stompService.subscribe('SensorTempDSFamily.GetAllResolutionsViewCompleted', onGetAllCompleted);
         if (!_initializing && !_initialized) {
             _initializing = true;
             getAll();
@@ -21,14 +21,14 @@ app.factory('dsFamilyTempSensorResolutionService', ['$http', '$log', '$rootScope
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/dsFamilyTempSensor/getAllResolutions').then(function (results) {
+        return $http.post(serviceBase + 'api/sensorTempDSFamily/getAllResolutions').then(function (results) {
             //alert('envio bem sucedido');
         });
     };   
 
-    var getResolutionById = function (dsFamilyTempSensorResolutionId) {
+    var getResolutionById = function (sensorTempDSFamilyResolutionId) {
         for (var i = 0; i < serviceFactory.resolutions.length; i++) {
-            if (serviceFactory.resolutions[i].id === dsFamilyTempSensorResolutionId) {
+            if (serviceFactory.resolutions[i].id === sensorTempDSFamilyResolutionId) {
                 return serviceFactory.resolutions[i];
             }
         }
@@ -42,7 +42,7 @@ app.factory('dsFamilyTempSensorResolutionService', ['$http', '$log', '$rootScope
         }
         _initializing = false;
         _initialized = true;
-        $rootScope.$emit('DSFamilyTempSensorResolutionService_Initialized');
+        $rootScope.$emit('SensorTempDSFamilyResolutionService_Initialized');
     }
     
     $rootScope.$on('$destroy', function () {

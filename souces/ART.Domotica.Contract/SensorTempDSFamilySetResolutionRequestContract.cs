@@ -2,16 +2,16 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetResolutionRequestContract
+    public class SensorTempDSFamilySetResolutionRequestContract
     {
         #region Properties
 
-        public Guid DSFamilyTempSensorId
+        public Guid SensorTempDSFamilyId
         {
             get; set;
         }
 
-        public byte DSFamilyTempSensorResolutionId
+        public byte SensorTempDSFamilyResolutionId
         {
             get; set;
         }

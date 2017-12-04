@@ -30,9 +30,9 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
         });
     };     
 
-    var setUnitMeasurement = function (dsFamilyTempSensorId, unitMeasurementId) {
+    var setUnitMeasurement = function (sensorTempDSFamilyId, unitMeasurementId) {
         var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            sensorTempDSFamilyId: sensorTempDSFamilyId,
             unitMeasurementId: unitMeasurementId,
         }
         return $http.post(serviceBase + 'api/sensor/setUnitMeasurement', data).then(function (results) {
@@ -40,9 +40,9 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
         });
     };
 
-    var setLabel = function (dsFamilyTempSensorId, label) {
+    var setLabel = function (sensorTempDSFamilyId, label) {
         var data = {
-            dsFamilyTempSensorId: dsFamilyTempSensorId,
+            sensorTempDSFamilyId: sensorTempDSFamilyId,
             label: label,
         }
         return $http.post(serviceBase + 'api/sensor/setLabel', data).then(function (results) {
@@ -72,7 +72,7 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
     var onSetUnitMeasurementCompleted = function (payload) {
 
         var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
+        var sensor = getById(result.deviceId, result.sensorTempDSFamilyId);
 
         //unitMeasurement
         sensor.unitMeasurementId = result.unitMeasurementId;
@@ -89,14 +89,14 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
         sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
         sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
 
-        $rootScope.$emit('sensorService_onSetUnitMeasurementCompleted_Id_' + result.dsFamilyTempSensorId, result);
+        $rootScope.$emit('sensorService_onSetUnitMeasurementCompleted_Id_' + result.sensorTempDSFamilyId, result);
     }    
 
     var onSetLabelCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.dsFamilyTempSensorId);
+        var sensor = getById(result.deviceId, result.sensorTempDSFamilyId);
         sensor.label = result.label;
-        $rootScope.$emit('service_onSetLabelCompleted_Id_' + result.dsFamilyTempSensorId, result);
+        $rootScope.$emit('service_onSetLabelCompleted_Id_' + result.sensorTempDSFamilyId, result);
     }   
 
     $rootScope.$on('$destroy', function () {

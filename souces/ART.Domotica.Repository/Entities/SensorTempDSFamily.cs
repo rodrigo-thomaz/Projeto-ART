@@ -1,23 +1,14 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
+
     using ART.Infra.CrossCutting.Repository;
 
-    public class DSFamilyTempSensor : IEntity<Guid>
+    public class SensorTempDSFamily : IEntity<Guid>
     {
         #region Properties
 
         public string DeviceAddress
-        {
-            get; set;
-        }
-
-        public DSFamilyTempSensorResolution DSFamilyTempSensorResolution
-        {
-            get; set;
-        }
-
-        public byte DSFamilyTempSensorResolutionId
         {
             get; set;
         }
@@ -33,6 +24,16 @@
         }
 
         public Sensor Sensor
+        {
+            get; set;
+        }
+
+        public SensorTempDSFamilyResolution SensorTempDSFamilyResolution
+        {
+            get; set;
+        }
+
+        public byte SensorTempDSFamilyResolutionId
         {
             get; set;
         }

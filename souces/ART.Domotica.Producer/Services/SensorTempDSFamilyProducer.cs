@@ -9,11 +9,11 @@ using ART.Infra.CrossCutting.Utils;
 
 namespace ART.Domotica.Producer.Services
 {
-    public class DSFamilyTempSensorProducer : ProducerBase, IDSFamilyTempSensorProducer
+    public class SensorTempDSFamilyProducer : ProducerBase, ISensorTempDSFamilyProducer
     {
         #region constructors
 
-        public DSFamilyTempSensorProducer(IConnection connection) : base(connection)
+        public SensorTempDSFamilyProducer(IConnection connection) : base(connection)
         {
             Initialize();
         }
@@ -27,16 +27,16 @@ namespace ART.Domotica.Producer.Services
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.GetAllResolutionsQueueName, null, payload);
+                _model.BasicPublish("", SensorTempDSFamilyConstants.GetAllResolutionsQueueName, null, payload);
             });            
         }
 
-        public async Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message)
+        public async Task SetResolution(AuthenticatedMessageContract<SensorTempDSFamilySetResolutionRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DSFamilyTempSensorConstants.SetResolutionQueueName, null, payload);
+                _model.BasicPublish("", SensorTempDSFamilyConstants.SetResolutionQueueName, null, payload);
             });
         }        
 
@@ -47,14 +47,14 @@ namespace ART.Domotica.Producer.Services
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.GetAllResolutionsQueueName
+                  queue: SensorTempDSFamilyConstants.GetAllResolutionsQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: DSFamilyTempSensorConstants.SetResolutionQueueName
+                  queue: SensorTempDSFamilyConstants.SetResolutionQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false

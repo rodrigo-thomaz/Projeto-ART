@@ -71,7 +71,7 @@
                 x.AddProfile(new CountryProfile());
                 x.AddProfile(new DeviceMQProfile());
                 x.AddProfile(new DeviceNTPProfile());
-                x.AddProfile(new DSFamilyTempSensorProfile());
+                x.AddProfile(new SensorTempDSFamilyProfile());
                 x.AddProfile(new ESPDeviceProfile());
                 x.AddProfile(new SensorUnitMeasurementScaleProfile());
                 x.AddProfile(new SensorDatasheetProfile());

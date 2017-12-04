@@ -57,7 +57,7 @@
     <Compile Include="ESPDeviceGetConfigurationsRPCResponseContract.cs" />
     <Compile Include="ESPDeviceInsertInApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetByPinRequestContract.cs" />
-    <Compile Include="DSFamilyTempSensorSetResolutionRequestContract.cs" />
+    <Compile Include="SensorTempDSFamilySetResolutionRequestContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

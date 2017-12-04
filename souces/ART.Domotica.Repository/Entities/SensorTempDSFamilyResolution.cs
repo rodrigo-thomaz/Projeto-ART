@@ -4,7 +4,7 @@
 
     using ART.Infra.CrossCutting.Repository;
 
-    public class DSFamilyTempSensorResolution : IEntity<byte>
+    public class SensorTempDSFamilyResolution : IEntity<byte>
     {
         #region Properties
 
@@ -28,11 +28,6 @@
             get; set;
         }
 
-        public ICollection<DSFamilyTempSensor> DSFamilyTempSensors
-        {
-            get; set;
-        }
-
         public byte Id
         {
             get; set;
@@ -44,6 +39,11 @@
         }
 
         public decimal Resolution
+        {
+            get; set;
+        }
+
+        public ICollection<SensorTempDSFamily> SensorTempDSFamilys
         {
             get; set;
         }

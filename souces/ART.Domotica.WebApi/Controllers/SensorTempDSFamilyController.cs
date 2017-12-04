@@ -7,20 +7,20 @@ using ART.Domotica.Producer.Interfaces;
 namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/dsFamilyTempSensor")]    
-    public class DSFamilyTempSensorController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/sensorTempDSFamily")]    
+    public class SensorTempDSFamilyController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly IDSFamilyTempSensorProducer _dsFamilyTempSensorProducer;
+        protected readonly ISensorTempDSFamilyProducer _sensorTempDSFamilyProducer;
 
         #endregion
 
         #region constructors
 
-        public DSFamilyTempSensorController(IDSFamilyTempSensorProducer dsFamilyTempSensorProducer) 
+        public SensorTempDSFamilyController(ISensorTempDSFamilyProducer sensorTempDSFamilyProducer) 
         {
-            _dsFamilyTempSensorProducer = dsFamilyTempSensorProducer;
+            _sensorTempDSFamilyProducer = sensorTempDSFamilyProducer;
         }
 
         #endregion
@@ -41,7 +41,7 @@ namespace ART.Domotica.WebApi.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> GetAllResolutions()
         {
-            await _dsFamilyTempSensorProducer.GetAllResolutions(CreateMessage());
+            await _sensorTempDSFamilyProducer.GetAllResolutions(CreateMessage());
             return Ok();
         }
 
@@ -57,9 +57,9 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setResolution")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetResolution(DSFamilyTempSensorSetResolutionRequestContract contract)
+        public async Task<IHttpActionResult> SetResolution(SensorTempDSFamilySetResolutionRequestContract contract)
         {
-            await _dsFamilyTempSensorProducer.SetResolution(CreateMessage(contract));
+            await _sensorTempDSFamilyProducer.SetResolution(CreateMessage(contract));
             return Ok();
         }
 

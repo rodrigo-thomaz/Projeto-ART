@@ -47,7 +47,7 @@
             get; set;
         }
 
-        public List<DSFamilyTempSensorDetailModel> Sensors
+        public List<SensorTempDSFamilyDetailModel> Sensors
         {
             get; set;
         }

@@ -6,11 +6,11 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IDSFamilyTempSensorResolutionRepository : IRepository<ARTDbContext, DSFamilyTempSensorResolution, byte>
+    public interface ISensorTempDSFamilyResolutionRepository : IRepository<ARTDbContext, SensorTempDSFamilyResolution, byte>
     {
         #region Methods
 
-        Task<List<DSFamilyTempSensorResolution>> GetAll();
+        Task<List<SensorTempDSFamilyResolution>> GetAll();
 
         #endregion Methods
     }

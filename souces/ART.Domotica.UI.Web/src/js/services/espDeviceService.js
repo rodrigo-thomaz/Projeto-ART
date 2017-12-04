@@ -85,7 +85,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
                 device.epochTimeUtc = data.epochTimeUtc;
                 device.wifiQuality = data.wifiQuality;
                 device.localIPAddress = data.localIPAddress;
-                updateSensors(device, data.dsFamilyTempSensors);
+                updateSensors(device, data.sensorTempDSFamilys);
                 break;
             }
         } 
@@ -96,7 +96,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var oldSensors = device.sensors;
         for (var i = 0; i < oldSensors.length; i++) {
             for (var j = 0; j < newSensors.length; j++) {
-                if (oldSensors[i].dsFamilyTempSensorId === newSensors[j].dsFamilyTempSensorId) {
+                if (oldSensors[i].sensorTempDSFamilyId === newSensors[j].sensorTempDSFamilyId) {
 
                     oldSensors[i].isConnected = newSensors[j].isConnected;
 

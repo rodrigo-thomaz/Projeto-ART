@@ -127,7 +127,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
 }]);
 
-app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorUnitMeasurementScaleService', 'sensorTriggerService', 'dsFamilyTempSensorService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, unitMeasurementConverter, unitMeasurementTypeService, unitMeasurementService, sensorUnitMeasurementScaleService, sensorTriggerService, dsFamilyTempSensorService) {
+app.controller('sensorTempDSFamilyItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'sensorTempDSFamilyResolutionService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorUnitMeasurementScaleService', 'sensorTriggerService', 'sensorTempDSFamilyService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, sensorTempDSFamilyResolutionService, unitMeasurementConverter, unitMeasurementTypeService, unitMeasurementService, sensorUnitMeasurementScaleService, sensorTriggerService, sensorTempDSFamilyService) {
 
     $scope.sensor = {};           
 
@@ -142,39 +142,39 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     $scope.resolution = {
-        availableResolutions: dsFamilyTempSensorResolutionService.resolutions,
+        availableResolutions: sensorTempDSFamilyResolutionService.resolutions,
         selectedResolution: {},
     };
 
     $scope.changeUnitMeasurement = function () {
         if (!initialized) return;
-        dsFamilyTempSensorService.setUnitMeasurement($scope.sensor.dsFamilyTempSensorId, $scope.unitMeasurement.selectedUnitMeasurement.id);
+        sensorTempDSFamilyService.setUnitMeasurement($scope.sensor.sensorTempDSFamilyId, $scope.unitMeasurement.selectedUnitMeasurement.id);
     };
 
     $scope.changeResolution = function () {
         if (!initialized) return;
-        dsFamilyTempSensorService.setResolution($scope.sensor.dsFamilyTempSensorId, $scope.resolution.selectedResolution.id);
+        sensorTempDSFamilyService.setResolution($scope.sensor.sensorTempDSFamilyId, $scope.resolution.selectedResolution.id);
     }; 
 
     $scope.changeLabel = function () {
         if (!initialized || !$scope.labelView) return;
-        dsFamilyTempSensorService.setLabel($scope.sensor.dsFamilyTempSensorId, $scope.labelView);
+        sensorTempDSFamilyService.setLabel($scope.sensor.sensorTempDSFamilyId, $scope.labelView);
     };
 
     $scope.changeAlarmOn = function (position, alarmOn) {
         if (!initialized) return;
-        sensorTriggerService.setAlarmOn($scope.sensor.dsFamilyTempSensorId, alarmOn, position);        
+        sensorTriggerService.setAlarmOn($scope.sensor.sensorTempDSFamilyId, alarmOn, position);        
     };
 
     $scope.changeAlarmValue = function (position, alarmValue) {
         if (!initialized || isNaN(alarmValue) || alarmValue === null) return;
         var alarmCelsius = unitMeasurementConverter.convertToCelsius($scope.sensor.unitMeasurementId, alarmValue);
-        sensorTriggerService.setAlarmCelsius($scope.sensor.dsFamilyTempSensorId, alarmCelsius, position);        
+        sensorTriggerService.setAlarmCelsius($scope.sensor.sensorTempDSFamilyId, alarmCelsius, position);        
     };
 
     $scope.changeAlarmBuzzerOn = function (position, alarmBuzzerOn) {
         if (!initialized) return;
-        sensorTriggerService.setAlarmBuzzerOn($scope.sensor.dsFamilyTempSensorId, alarmBuzzerOn, position);        
+        sensorTriggerService.setAlarmBuzzerOn($scope.sensor.sensorTempDSFamilyId, alarmBuzzerOn, position);        
     }; 
 
     var initialized = false;
@@ -190,10 +190,10 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
             clearOnUnitMeasurementServiceInitialized = $rootScope.$on('UnitMeasurementService_Initialized', setSelectedUnitMeasurement);        
 
         // Resolution
-        if (dsFamilyTempSensorResolutionService.initialized())
+        if (sensorTempDSFamilyResolutionService.initialized())
             setSelectedResolution();
         else
-            clearOnDSFamilyTempSensorResolutionServiceInitialized = $rootScope.$on('DSFamilyTempSensorResolutionService_Initialized', setSelectedResolution);        
+            clearOnSensorTempDSFamilyResolutionServiceInitialized = $rootScope.$on('SensorTempDSFamilyResolutionService_Initialized', setSelectedResolution);        
 
         // Label
         $scope.labelView = sensor.label;
@@ -211,19 +211,19 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
             alarmBuzzerOn: sensor.highAlarm.alarmBuzzerOn,
         };        
                      
-        clearOnSetUnitMeasurementCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetUnitMeasurementCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetUnitMeasurementCompleted);
-        clearOnSetResolutionCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetResolutionCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetResolutionCompleted);
-        clearOnSetLabelCompleted = $rootScope.$on('dsFamilyTempSensorService_onSetLabelCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetLabelCompleted);
-        clearOnSetAlarmOnCompleted = $rootScope.$on('sensorTriggerService_onSetAlarmOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmOnCompleted);
-        clearOnSetAlarmCelsiusCompleted = $rootScope.$on('sensorTriggerService_onSetAlarmCelsiusCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmCelsiusCompleted);
-        clearOnSetAlarmBuzzerOnCompleted = $rootScope.$on('sensorTriggerService_SetAlarmBuzzerOnCompleted_Id_' + $scope.sensor.dsFamilyTempSensorId, onSetAlarmBuzzerOnCompleted);        
+        clearOnSetUnitMeasurementCompleted = $rootScope.$on('sensorTempDSFamilyService_onSetUnitMeasurementCompleted_Id_' + $scope.sensor.sensorTempDSFamilyId, onSetUnitMeasurementCompleted);
+        clearOnSetResolutionCompleted = $rootScope.$on('sensorTempDSFamilyService_onSetResolutionCompleted_Id_' + $scope.sensor.sensorTempDSFamilyId, onSetResolutionCompleted);
+        clearOnSetLabelCompleted = $rootScope.$on('sensorTempDSFamilyService_onSetLabelCompleted_Id_' + $scope.sensor.sensorTempDSFamilyId, onSetLabelCompleted);
+        clearOnSetAlarmOnCompleted = $rootScope.$on('sensorTriggerService_onSetAlarmOnCompleted_Id_' + $scope.sensor.sensorTempDSFamilyId, onSetAlarmOnCompleted);
+        clearOnSetAlarmCelsiusCompleted = $rootScope.$on('sensorTriggerService_onSetAlarmCelsiusCompleted_Id_' + $scope.sensor.sensorTempDSFamilyId, onSetAlarmCelsiusCompleted);
+        clearOnSetAlarmBuzzerOnCompleted = $rootScope.$on('sensorTriggerService_SetAlarmBuzzerOnCompleted_Id_' + $scope.sensor.sensorTempDSFamilyId, onSetAlarmBuzzerOnCompleted);        
         clearOnReadReceived = $rootScope.$on('ESPDeviceService_onReadReceived', onReadReceived);        
 
         initialized = true;
     };    
         
     var clearOnUnitMeasurementServiceInitialized = null;
-    var clearOnDSFamilyTempSensorResolutionServiceInitialized = null;
+    var clearOnSensorTempDSFamilyResolutionServiceInitialized = null;
     var clearOnSetUnitMeasurementCompleted = null;
     var clearOnSetResolutionCompleted = null;
     var clearOnSetLabelCompleted = null;
@@ -248,7 +248,7 @@ app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$ti
     };
 
     var setSelectedResolution = function () {
-        $scope.resolution.selectedResolution = dsFamilyTempSensorResolutionService.getResolutionById($scope.sensor.dsFamilyTempSensorResolutionId);
+        $scope.resolution.selectedResolution = sensorTempDSFamilyResolutionService.getResolutionById($scope.sensor.sensorTempDSFamilyResolutionId);
     };
 
     var onSetUnitMeasurementCompleted = function (event, data) {

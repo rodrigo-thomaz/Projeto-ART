@@ -86,7 +86,7 @@
 
                             <tabset justified="true" class="tab-container">
                                 <tab heading="{{sensorItem.label}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
-                                    <div ng-controller="dsFamilyTempSensorItemController" ng-init="init(sensorItem)">
+                                    <div ng-controller="sensorTempDSFamilyItemController" ng-init="init(sensorItem)">
                                         <div style="height:240px">
                                             <nvd3 options="options" data="sensor.chart"></nvd3>
                                         </div>

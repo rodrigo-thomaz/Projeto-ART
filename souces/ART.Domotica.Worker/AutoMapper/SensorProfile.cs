@@ -18,13 +18,13 @@
                 .ForMember(vm => vm.SensorUnitMeasurementScale, m => m.MapFrom(x => x.SensorUnitMeasurementScale));
 
             CreateMap<Sensor, SensorSetUnitMeasurementCompletedModel>()
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId));
                 //.ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId));
 
             CreateMap<Sensor, SensorGetAllByDeviceInApplicationIdResponseIoTContract>()
                 .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
-                    var split = src.DSFamilyTempSensor.DeviceAddress.Split(':');
+                    var split = src.SensorTempDSFamily.DeviceAddress.Split(':');
                     var result = new short[8];
                     for (int i = 0; i < 8; i++)
                     {
@@ -32,10 +32,10 @@
                     }
                     return result;
                 }))
-                .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.DSFamilyTempSensor.DSFamilyTempSensorResolution.Bits))
+                .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.SensorTempDSFamily.SensorTempDSFamilyResolution.Bits))
                 .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMin))
                 .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMax))
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
+                .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id));
         }
 
         #endregion Constructors

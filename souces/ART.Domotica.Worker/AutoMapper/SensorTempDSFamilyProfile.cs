@@ -10,27 +10,27 @@
 
     using global::AutoMapper;
 
-    public class DSFamilyTempSensorProfile : Profile
+    public class SensorTempDSFamilyProfile : Profile
     {
         #region Constructors
 
-        public DSFamilyTempSensorProfile()
+        public SensorTempDSFamilyProfile()
         {
             CreateMap<SensorSetUnitMeasurementRequestContract, SensorSetUnitMeasurementRequestIoTContract>();
-            CreateMap<DSFamilyTempSensorSetResolutionRequestContract, DSFamilyTempSensorSetResolutionRequestIoTContract>();
+            CreateMap<SensorTempDSFamilySetResolutionRequestContract, SensorTempDSFamilySetResolutionRequestIoTContract>();
 
             CreateMap<SensorSetLabelRequestContract, SensorSetLabelCompletedModel>();
 
-            CreateMap<DSFamilyTempSensor, DSFamilyTempSensorSetResolutionCompletedModel>()
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
+            CreateMap<SensorTempDSFamily, SensorTempDSFamilySetResolutionCompletedModel>()
+                .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Sensor.SensorsInDevice.Single().DeviceBaseId))
-                .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.DSFamilyTempSensorResolutionId));
+                .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.SensorTempDSFamilyResolutionId));
 
-            CreateMap<DSFamilyTempSensorResolution, DSFamilyTempSensorResolutionDetailModel>();
+            CreateMap<SensorTempDSFamilyResolution, SensorTempDSFamilyResolutionDetailModel>();
 
-            CreateMap<SensorsInDevice, DSFamilyTempSensorDetailModel>()
-                .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.SensorId))
-                .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.Sensor.DSFamilyTempSensor.DSFamilyTempSensorResolutionId))
+            CreateMap<SensorsInDevice, SensorTempDSFamilyDetailModel>()
+                .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolutionId))
                 .ForMember(vm => vm.SensorUnitMeasurementScale, m => m.MapFrom(x => x.Sensor.SensorUnitMeasurementScale))
                 //.ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.Sensor.UnitMeasurementId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Sensor.Label))

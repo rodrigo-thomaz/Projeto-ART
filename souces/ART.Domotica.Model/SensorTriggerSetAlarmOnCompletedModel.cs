@@ -18,12 +18,12 @@
             get; set;
         }
 
-        public Guid DSFamilyTempSensorId
+        public SensorUnitMeasurementScalePositionEnum Position
         {
             get; set;
         }
 
-        public SensorUnitMeasurementScalePositionEnum Position
+        public Guid SensorTempDSFamilyId
         {
             get; set;
         }

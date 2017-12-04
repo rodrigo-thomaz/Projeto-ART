@@ -219,7 +219,7 @@
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />
     <Content Include="src\js\services\applicationMQService.js" />
     <Content Include="src\js\services\contextScope.js" />
-    <Content Include="src\js\services\dsFamilyTempSensorResolutionService.js" />
+    <Content Include="src\js\services\sensorTempDSFamilyResolutionService.js" />
     <Content Include="src\js\services\deviceNTPService.js" />
     <Content Include="src\js\services\locale\localeMapper.js" />
     <Content Include="src\js\services\locale\localeContext.js" />
@@ -245,7 +245,7 @@
     <Content Include="src\js\services\si\unitMeasurementTypeService.js" />
     <Content Include="src\js\services\timeZoneService.js" />
     <Content Include="src\js\services\si\unitMeasurementService.js" />
-    <Content Include="src\js\services\dsFamilyTempSensorService.js" />
+    <Content Include="src\js\services\sensorTempDSFamilyService.js" />
     <Content Include="src\js\services\stompService.js" />
     <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\js\services\locale\continentService.js" />

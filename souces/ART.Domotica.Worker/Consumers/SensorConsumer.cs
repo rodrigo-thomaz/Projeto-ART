@@ -183,7 +183,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorSetUnitMeasurementRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.SetUnitMeasurement(message.Contract.DSFamilyTempSensorId, message.Contract.UnitMeasurementId);
+            var data = await domain.SetUnitMeasurement(message.Contract.SensorTempDSFamilyId, message.Contract.UnitMeasurementId);
 
             var exchange = "amq.topic";
 
@@ -224,7 +224,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorSetLabelRequestContract>>(e.Body);
             var hardwareDomain = _componentContext.Resolve<IHardwareDomain>();
-            var data = await hardwareDomain.SetLabel(message.Contract.DSFamilyTempSensorId, message.Contract.Label);
+            var data = await hardwareDomain.SetLabel(message.Contract.SensorTempDSFamilyId, message.Contract.Label);
 
             var exchange = "amq.topic";
 
@@ -232,7 +232,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
-            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.DSFamilyTempSensorId);
+            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.SensorTempDSFamilyId);
 
             //Enviando para View
             var viewModel = new SensorSetLabelCompletedModel { DeviceId = device.DeviceBaseId };

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class DSFamilyTempSensorSetResolutionCompletedModel
+    public class SensorTempDSFamilySetResolutionCompletedModel
     {
         #region Properties
 
@@ -11,12 +11,12 @@
             get; set;
         }
 
-        public Guid DSFamilyTempSensorId
+        public Guid SensorTempDSFamilyId
         {
             get; set;
         }
 
-        public byte DSFamilyTempSensorResolutionId
+        public byte SensorTempDSFamilyResolutionId
         {
             get; set;
         }

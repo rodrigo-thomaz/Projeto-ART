@@ -5,13 +5,13 @@
     using ART.Domotica.Contract;
     using ART.Infra.CrossCutting.MQ.Contract;
 
-    public interface IDSFamilyTempSensorProducer
+    public interface ISensorTempDSFamilyProducer
     {
         #region Methods
 
         Task GetAllResolutions(AuthenticatedMessageContract message);
 
-        Task SetResolution(AuthenticatedMessageContract<DSFamilyTempSensorSetResolutionRequestContract> message);
+        Task SetResolution(AuthenticatedMessageContract<SensorTempDSFamilySetResolutionRequestContract> message);
 
         #endregion Methods
     }

@@ -5,7 +5,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IDSFamilyTempSensorRepository : IRepository<ARTDbContext, DSFamilyTempSensor, Guid>
+    public interface ISensorTempDSFamilyRepository : IRepository<ARTDbContext, SensorTempDSFamily, Guid>
     {
     }
 }

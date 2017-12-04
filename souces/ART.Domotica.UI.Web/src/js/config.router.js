@@ -79,8 +79,8 @@ angular.module('app')
                       'js/services/sensorUnitMeasurementScaleService.js',
                       'js/services/sensorTriggerService.js',
 
-                      'js/services/dsFamilyTempSensorResolutionService.js',
-                      'js/services/dsFamilyTempSensorService.js',
+                      'js/services/sensorTempDSFamilyResolutionService.js',
+                      'js/services/sensorTempDSFamilyService.js',
 
                       'js/services/deviceNTPService.js',                      
                       'js/services/espDeviceService.js',

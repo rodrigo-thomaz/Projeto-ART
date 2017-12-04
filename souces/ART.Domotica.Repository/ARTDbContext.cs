@@ -69,16 +69,6 @@
             get; set;
         }
 
-        public DbSet<DSFamilyTempSensor> DSFamilyTempSensor
-        {
-            get; set;
-        }
-
-        public DbSet<DSFamilyTempSensorResolution> DSFamilyTempSensorResolution
-        {
-            get; set;
-        }
-
         public DbSet<ESPDevice> ESPDevice
         {
             get; set;
@@ -119,11 +109,6 @@
             get; set;
         }
 
-        public DbSet<SensorUnitMeasurementScale> SensorUnitMeasurementScale
-        {
-            get; set;
-        }
-
         public DbSet<SensorDatasheet> SensorDatasheet
         {
             get; set;
@@ -139,6 +124,16 @@
             get; set;
         }
 
+        public DbSet<SensorTempDSFamily> SensorTempDSFamily
+        {
+            get; set;
+        }
+
+        public DbSet<SensorTempDSFamilyResolution> SensorTempDSFamilyResolution
+        {
+            get; set;
+        }
+
         public DbSet<SensorTrigger> SensorTrigger
         {
             get; set;
@@ -150,6 +145,11 @@
         }
 
         public DbSet<SensorUnitMeasurementDefault> SensorUnitMeasurementDefault
+        {
+            get; set;
+        }
+
+        public DbSet<SensorUnitMeasurementScale> SensorUnitMeasurementScale
         {
             get; set;
         }
@@ -205,8 +205,8 @@
             modelBuilder.Configurations.Add(new DeviceInApplicationConfiguration());
             modelBuilder.Configurations.Add(new DeviceMQConfiguration());
             modelBuilder.Configurations.Add(new DeviceNTPConfiguration());
-            modelBuilder.Configurations.Add(new DSFamilyTempSensorConfiguration());
-            modelBuilder.Configurations.Add(new DSFamilyTempSensorResolutionConfiguration());
+            modelBuilder.Configurations.Add(new SensorTempDSFamilyConfiguration());
+            modelBuilder.Configurations.Add(new SensorTempDSFamilyResolutionConfiguration());
             modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
             modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
             modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());

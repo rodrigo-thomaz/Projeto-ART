@@ -2,34 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
-    using ART.Infra.CrossCutting.Repository;
+
     using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
 
     public class Sensor : IEntity<Guid>
     {
         #region Properties
 
-        public SensorDatasheetEnum SensorDatasheetId
-        {
-            get; set;
-        }
-
-        public SensorTypeEnum SensorTypeId
-        {
-            get; set;
-        }
-
-        public SensorDatasheet SensorDatasheet
-        {
-            get; set;
-        }
-
         public DateTime CreateDate
-        {
-            get; set;
-        }
-
-        public DSFamilyTempSensor DSFamilyTempSensor
         {
             get; set;
         }
@@ -44,7 +25,12 @@
             get; set;
         }
 
-        public SensorUnitMeasurementScale SensorUnitMeasurementScale
+        public SensorDatasheet SensorDatasheet
+        {
+            get; set;
+        }
+
+        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
@@ -54,10 +40,25 @@
             get; set;
         }
 
+        public SensorTempDSFamily SensorTempDSFamily
+        {
+            get; set;
+        }
+
         public ICollection<SensorTrigger> SensorTriggers
         {
             get; set;
-        }      
+        }
+
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
+        public SensorUnitMeasurementScale SensorUnitMeasurementScale
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

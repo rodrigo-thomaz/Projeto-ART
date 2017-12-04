@@ -2,35 +2,20 @@
 {
     using System;
 
-    using ART.Infra.CrossCutting.Repository;
     using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities.SI;
+    using ART.Infra.CrossCutting.Repository;
 
     public class SensorUnitMeasurementScale : IEntity<Guid>
     {
         #region Properties
 
-        public NumericalScalePrefixEnum NumericalScalePrefixId
+        public decimal ChartLimiterMax
         {
             get; set;
         }
 
-        public NumericalScaleTypeEnum NumericalScaleTypeId
-        {
-            get; set;
-        }
-
-        public UnitMeasurementEnum UnitMeasurementId
-        {
-            get; set;
-        }
-
-        public UnitMeasurementScale UnitMeasurementScale
-        {
-            get; set;
-        }
-
-        public UnitMeasurementTypeEnum UnitMeasurementTypeId
+        public decimal ChartLimiterMin
         {
             get; set;
         }
@@ -40,12 +25,12 @@
             get; set;
         }
 
-        public decimal ChartLimiterMax
+        public NumericalScalePrefixEnum NumericalScalePrefixId
         {
             get; set;
         }
 
-        public decimal ChartLimiterMin
+        public NumericalScaleTypeEnum NumericalScaleTypeId
         {
             get; set;
         }
@@ -61,6 +46,21 @@
         }
 
         public Sensor Sensor
+        {
+            get; set;
+        }
+
+        public UnitMeasurementEnum UnitMeasurementId
+        {
+            get; set;
+        }
+
+        public UnitMeasurementScale UnitMeasurementScale
+        {
+            get; set;
+        }
+
+        public UnitMeasurementTypeEnum UnitMeasurementTypeId
         {
             get; set;
         }

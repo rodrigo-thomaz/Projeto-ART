@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Worker.IConsumers
 {
-    public interface IDSFamilyTempSensorConsumer
+    public interface ISensorTempDSFamilyConsumer
     {
     }
 }

@@ -6,11 +6,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class DSFamilyTempSensorResolutionConfiguration : EntityTypeConfiguration<DSFamilyTempSensorResolution>
+    public class SensorTempDSFamilyResolutionConfiguration : EntityTypeConfiguration<SensorTempDSFamilyResolution>
     {
         #region Constructors
 
-        public DSFamilyTempSensorResolutionConfiguration()
+        public SensorTempDSFamilyResolutionConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);

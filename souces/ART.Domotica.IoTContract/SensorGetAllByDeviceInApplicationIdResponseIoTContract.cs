@@ -13,11 +13,6 @@
             get; set;
         }
 
-        public Guid DSFamilyTempSensorId
-        {
-            get; set;
-        }
-
         public string Family
         {
             get; set;
@@ -44,6 +39,11 @@
         }
 
         public byte ResolutionBits
+        {
+            get; set;
+        }
+
+        public Guid SensorTempDSFamilyId
         {
             get; set;
         }

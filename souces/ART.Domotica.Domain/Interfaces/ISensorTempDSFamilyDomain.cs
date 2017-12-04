@@ -6,13 +6,13 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public interface IDSFamilyTempSensorDomain
+    public interface ISensorTempDSFamilyDomain
     {
         #region Methods
 
-        Task<List<DSFamilyTempSensorResolution>> GetAllResolutions();
+        Task<List<SensorTempDSFamilyResolution>> GetAllResolutions();
 
-        Task<DSFamilyTempSensor> SetResolution(Guid dsFamilyTempSensorId, byte dsFamilyTempSensorResolutionId);
+        Task<SensorTempDSFamily> SetResolution(Guid sensorTempDSFamilyId, byte sensorTempDSFamilyResolutionId);
 
         #endregion Methods
     }

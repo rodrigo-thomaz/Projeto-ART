@@ -93,8 +93,8 @@
     <Compile Include="Services\ESPDeviceDomain.cs" />
     <Compile Include="Services\ApplicationDomain.cs" />
     <Compile Include="Services\ApplicationUserDomain.cs" />
-    <Compile Include="Services\DSFamilyTempSensorDomain.cs" />
-    <Compile Include="Interfaces\IDSFamilyTempSensorDomain.cs" />
+    <Compile Include="Services\SensorTempDSFamilyDomain.cs" />
+    <Compile Include="Interfaces\ISensorTempDSFamilyDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\SensorUnitMeasurementScaleDomain.cs" />
     <Compile Include="Services\SensorDomain.cs" />

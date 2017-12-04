@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="DeviceNTPDetailModel.cs" />
     <Compile Include="SensorUnitMeasurementScaleDetailModel.cs" />
-    <Compile Include="DSFamilyTempSensorDetailModel.cs" />
+    <Compile Include="SensorTempDSFamilyDetailModel.cs" />
     <Compile Include="ESPDeviceSetLabelCompletedModel.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondCompletedModel.cs" />
     <Compile Include="DeviceNTPSetTimeZoneCompletedModel.cs" />
@@ -55,9 +55,9 @@
     <Compile Include="ESPDeviceAdminDetailModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />
     <Compile Include="ESPDeviceDetailModel.cs" />
-    <Compile Include="DSFamilyTempSensorResolutionDetailModel.cs" />
+    <Compile Include="SensorTempDSFamilyResolutionDetailModel.cs" />
     <Compile Include="SensorTriggerSetAlarmBuzzerOnCompletedModel.cs" />
-    <Compile Include="DSFamilyTempSensorSetResolutionCompletedModel.cs" />
+    <Compile Include="SensorTempDSFamilySetResolutionCompletedModel.cs" />
     <Compile Include="SensorDatasheetDetailModel.cs" />
     <Compile Include="SensorTypeDetailModel.cs" />
     <Compile Include="SensorDetailModel.cs" />

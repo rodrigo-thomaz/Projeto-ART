@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitMeasurementConverter', 'dsFamilyTempSensorService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitMeasurementConverter, dsFamilyTempSensorService) {
+app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitMeasurementConverter', 'sensorTempDSFamilyService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitMeasurementConverter, sensorTempDSFamilyService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -29,7 +29,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
     var onSetValueCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = dsFamilyTempSensorService.getById(result.deviceId, result.sensorUnitMeasurementScaleId);
+        var sensor = sensorTempDSFamilyService.getById(result.deviceId, result.sensorUnitMeasurementScaleId);
         if (result.position === 'Max') {
             sensor.sensorUnitMeasurementScale.max = result.value;
             sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);            

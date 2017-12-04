@@ -161,9 +161,9 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<Sensor> SetUnitMeasurement(Guid sensorId, UnitMeasurementEnum unitMeasurementId)
         {
-            var dsFamilyTempSensorEntity = await _sensorRepository.GetById(sensorId);
+            var sensorTempDSFamilyEntity = await _sensorRepository.GetById(sensorId);
 
-            if (dsFamilyTempSensorEntity == null)
+            if (sensorTempDSFamilyEntity == null)
             {
                 throw new Exception("Sensor not found");
             }
@@ -175,11 +175,11 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("UnitMeasurement not found");
             }
 
-            //dsFamilyTempSensorEntity.UnitMeasurementId = unitMeasurementEntity.Id;
+            //sensorTempDSFamilyEntity.UnitMeasurementId = unitMeasurementEntity.Id;
 
-            await _sensorRepository.Update(dsFamilyTempSensorEntity);
+            await _sensorRepository.Update(sensorTempDSFamilyEntity);
 
-            return dsFamilyTempSensorEntity;
+            return sensorTempDSFamilyEntity;
         }
 
         public async Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)

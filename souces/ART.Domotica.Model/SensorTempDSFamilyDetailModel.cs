@@ -4,19 +4,9 @@
 
     using ART.Domotica.Enums.SI;
 
-    public class DSFamilyTempSensorDetailModel
+    public class SensorTempDSFamilyDetailModel
     {
         #region Properties
-
-        public Guid DSFamilyTempSensorId
-        {
-            get; set;
-        }
-
-        public byte DSFamilyTempSensorResolutionId
-        {
-            get; set;
-        }
 
         public SensorTriggerDetailModel HighAlarm
         {
@@ -29,6 +19,16 @@
         }
 
         public SensorTriggerDetailModel LowAlarm
+        {
+            get; set;
+        }
+
+        public Guid SensorTempDSFamilyId
+        {
+            get; set;
+        }
+
+        public byte SensorTempDSFamilyResolutionId
         {
             get; set;
         }

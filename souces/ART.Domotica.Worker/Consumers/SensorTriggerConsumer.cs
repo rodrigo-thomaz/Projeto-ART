@@ -101,7 +101,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.SetAlarmOn(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.AlarmOn);
+            var data = await domain.SetAlarmOn(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmOn);
 
             var exchange = "amq.topic";
 
@@ -143,7 +143,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmCelsiusRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.SetAlarmCelsius(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.AlarmCelsius);
+            var data = await domain.SetAlarmCelsius(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmCelsius);
 
             var exchange = "amq.topic";
 
@@ -185,7 +185,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmBuzzerOnRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.SetAlarmBuzzerOn(message.Contract.DSFamilyTempSensorId, message.Contract.Position, message.Contract.AlarmBuzzerOn);
+            var data = await domain.SetAlarmBuzzerOn(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmBuzzerOn);
 
             var exchange = "amq.topic";
 

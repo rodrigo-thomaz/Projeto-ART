@@ -83,8 +83,6 @@
                 .HasColumnOrder(8)
                 .HasPrecision(7, 4)
                 .IsRequired();
-
-
         }
 
         #endregion Constructors

@@ -6,11 +6,11 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
 
-    public class DSFamilyTempSensorRepository : RepositoryBase<ARTDbContext, DSFamilyTempSensor, Guid>, IDSFamilyTempSensorRepository
+    public class SensorTempDSFamilyRepository : RepositoryBase<ARTDbContext, SensorTempDSFamily, Guid>, ISensorTempDSFamilyRepository
     {
         #region Constructors
 
-        public DSFamilyTempSensorRepository(ARTDbContext context)
+        public SensorTempDSFamilyRepository(ARTDbContext context)
             : base(context)
         {
         }
