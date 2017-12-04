@@ -140,6 +140,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApplicationMQController.cs" />
     <Compile Include="Controllers\DeviceNTPController.cs" />
+    <Compile Include="Controllers\SensorsInDeviceController.cs" />
     <Compile Include="Controllers\SensorTriggerController.cs" />
     <Compile Include="Controllers\SensorUnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\ESPDeviceController.cs" />
@@ -157,6 +158,7 @@
     <Compile Include="Controllers\SensorDatasheetUnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementTypeController.cs" />
+    <Compile Include="Controllers\DeviceSensorsController.cs" />
     <Compile Include="Controllers\TimeZoneController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementController.cs" />
     <Compile Include="Modules\ControllerModule.cs" />

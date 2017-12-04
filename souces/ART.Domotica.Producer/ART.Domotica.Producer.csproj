@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IApplicationMQProducer.cs" />
     <Compile Include="Interfaces\IDeviceNTPProducer.cs" />
+    <Compile Include="Interfaces\ISensorsInDeviceProducer.cs" />
     <Compile Include="Interfaces\ISensorTriggerProducer.cs" />
     <Compile Include="Interfaces\ISensorUnitMeasurementScaleProducer.cs" />
     <Compile Include="Interfaces\IESPDeviceProducer.cs" />
@@ -72,6 +73,7 @@
     <Compile Include="Interfaces\ISensorDatasheetProducer.cs" />
     <Compile Include="Interfaces\ISensorTypeProducer.cs" />
     <Compile Include="Interfaces\ISensorProducer.cs" />
+    <Compile Include="Interfaces\IDeviceSensorsProducer.cs" />
     <Compile Include="Interfaces\Locale\IContinentProducer.cs" />
     <Compile Include="Interfaces\Locale\ICountryProducer.cs" />
     <Compile Include="Interfaces\ISensorDatasheetUnitMeasurementScaleProducer.cs" />
@@ -87,6 +89,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationMQProducer.cs" />
     <Compile Include="Services\DeviceNTPProducer.cs" />
+    <Compile Include="Services\SensorsInDeviceProducer.cs" />
     <Compile Include="Services\SensorTriggerProducer.cs" />
     <Compile Include="Services\SensorUnitMeasurementScaleProducer.cs" />
     <Compile Include="Services\ESPDeviceProducer.cs" />
@@ -107,6 +110,7 @@
     <Compile Include="Services\Locale\ContinentProducer.cs" />
     <Compile Include="Services\Locale\CountryProducer.cs" />
     <Compile Include="Services\SensorDatasheetUnitMeasurementScaleProducer.cs" />
+    <Compile Include="Services\DeviceSensorsProducer.cs" />
     <Compile Include="Services\TimeZoneProducer.cs" />
     <Compile Include="Services\SI\UnitMeasurementProducer.cs" />
   </ItemGroup>
