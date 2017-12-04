@@ -3,9 +3,9 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var initialized = false;
-
     var serviceFactory = {};   
+
+    var initialized = false;
 
     var setValue = function (sensorUnitMeasurementScaleId, value, position) {
         var data = {
