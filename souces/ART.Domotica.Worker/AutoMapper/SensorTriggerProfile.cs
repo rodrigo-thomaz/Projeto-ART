@@ -16,9 +16,11 @@
         public SensorTriggerProfile()
         {
             CreateMap<SensorTrigger, SensorTriggerGetModel>()
-                .ForMember(vm => vm.AlarmOn, m => m.MapFrom(x => x.TriggerOn))
-                .ForMember(vm => vm.AlarmCelsius, m => m.MapFrom(x => Convert.ToDecimal(x.TriggerValue)))
-                .ForMember(vm => vm.AlarmBuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn))
+                .ForMember(vm => vm.TriggerOn, m => m.MapFrom(x => x.TriggerOn))
+                .ForMember(vm => vm.TriggerValue, m => m.MapFrom(x => x.TriggerValue));
 
             CreateMap<SensorTrigger, SensorTriggerGetResponseIoTContract>()
                 .ForMember(vm => vm.AlarmOn, m => m.MapFrom(x => x.TriggerOn))

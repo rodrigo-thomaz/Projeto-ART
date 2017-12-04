@@ -6,7 +6,7 @@
     {
         #region Properties
 
-        public Guid Id
+        public Guid SensorUnitMeasurementScaleId
         {
             get; set;
         }

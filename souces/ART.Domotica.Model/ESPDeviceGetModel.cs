@@ -1,7 +1,6 @@
 ﻿namespace ART.Domotica.Model
 {
     using System;
-    using System.Collections.Generic;
 
     public class ESPDeviceGetModel
     {
@@ -43,11 +42,6 @@
         }
 
         public string MacAddress
-        {
-            get; set;
-        }
-
-        public List<SensorTempDSFamilyGetModel> Sensors
         {
             get; set;
         }

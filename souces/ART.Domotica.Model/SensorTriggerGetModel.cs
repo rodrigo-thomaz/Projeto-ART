@@ -1,20 +1,29 @@
-﻿namespace ART.Domotica.Model
+﻿using System;
+
+namespace ART.Domotica.Model
 {
     public class SensorTriggerGetModel
     {
         #region Properties
 
-        public bool AlarmBuzzerOn
+        public Guid SensorTriggerId { get; set; }
+
+        public bool BuzzerOn
         {
             get; set;
         }
 
-        public decimal AlarmCelsius
+        public Guid SensorId
         {
             get; set;
         }
 
-        public bool AlarmOn
+        public bool TriggerOn
+        {
+            get; set;
+        }
+
+        public string TriggerValue
         {
             get; set;
         }

@@ -34,17 +34,17 @@
             //TriggerOn
             Property(x => x.TriggerOn)
                 .HasColumnOrder(2)
+                .IsRequired();            
+
+            //BuzzerOn
+            Property(x => x.BuzzerOn)
+                .HasColumnOrder(3)
                 .IsRequired();
 
             //TriggerValue
             Property(x => x.TriggerValue)
-                .HasColumnOrder(3)
-                .HasMaxLength(50)
-                .IsRequired();
-
-            //BuzzerOn
-            Property(x => x.BuzzerOn)
                 .HasColumnOrder(4)
+                .HasMaxLength(50)
                 .IsRequired();
         }
 
