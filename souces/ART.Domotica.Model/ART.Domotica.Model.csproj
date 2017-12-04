@@ -71,6 +71,8 @@
     <Compile Include="Locale\ContinentDetailModel.cs" />
     <Compile Include="Locale\CountryDetailModel.cs" />
     <Compile Include="SensorDatasheetUnitMeasurementScaleDetailModel.cs" />
+    <Compile Include="DeviceSensorsDetailModel.cs" />
+    <Compile Include="SensorsInDeviceDetailModel.cs" />
     <Compile Include="TimeZoneDetailModel.cs" />
     <Compile Include="SI\UnitMeasurementDetailModel.cs" />
     <Compile Include="ApplicationDetailModel.cs" />

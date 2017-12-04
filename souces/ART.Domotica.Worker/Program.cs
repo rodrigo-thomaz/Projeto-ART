@@ -71,11 +71,13 @@
                 x.AddProfile(new CountryProfile());
                 x.AddProfile(new DeviceMQProfile());
                 x.AddProfile(new DeviceNTPProfile());
+                x.AddProfile(new DeviceSensorsProfile());
                 x.AddProfile(new SensorTempDSFamilyProfile());
                 x.AddProfile(new ESPDeviceProfile());
                 x.AddProfile(new SensorUnitMeasurementScaleProfile());
                 x.AddProfile(new SensorDatasheetProfile());
                 x.AddProfile(new SensorProfile());
+                x.AddProfile(new SensorsInDeviceProfile());
                 x.AddProfile(new SensorTriggerProfile());
                 x.AddProfile(new SensorTypeProfile());
                 x.AddProfile(new SensorUnitMeasurementDefaultProfile());

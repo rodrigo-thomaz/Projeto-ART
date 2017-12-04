@@ -121,10 +121,13 @@
     <Compile Include="AutoMapper\Locale\ContinentProfile.cs" />
     <Compile Include="AutoMapper\Locale\CountryProfile.cs" />
     <Compile Include="AutoMapper\SensorDatasheetUnitMeasurementScaleProfile.cs" />
+    <Compile Include="AutoMapper\DeviceSensorsProfile.cs" />
+    <Compile Include="AutoMapper\SensorsInDeviceProfile.cs" />
     <Compile Include="AutoMapper\TimeZoneProfile.cs" />
     <Compile Include="AutoMapper\SI\UnitMeasurementProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
+    <Compile Include="Consumers\SensorsInDeviceConsumer.cs" />
     <Compile Include="Consumers\Locale\ContinentConsumer.cs" />
     <Compile Include="Consumers\Locale\CountryConsumer.cs" />
     <Compile Include="Consumers\SensorDatasheetUnitMeasurementScaleConsumer.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="Consumers\SI\UnitMeasurementScaleConsumer.cs" />
     <Compile Include="Consumers\SI\NumericalScaleConsumer.cs" />
     <Compile Include="Consumers\SI\UnitMeasurementTypeConsumer.cs" />
+    <Compile Include="Consumers\DeviceSensorsConsumer.cs" />
     <Compile Include="Consumers\TimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IApplicationMQConsumer.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
@@ -152,6 +156,8 @@
     <Compile Include="IConsumers\ISensorDatasheetConsumer.cs" />
     <Compile Include="IConsumers\ISensorTypeConsumer.cs" />
     <Compile Include="IConsumers\ISensorConsumer.cs" />
+    <Compile Include="IConsumers\IDeviceSensorsConsumer.cs" />
+    <Compile Include="IConsumers\ISensorsInDeviceConsumer.cs" />
     <Compile Include="IConsumers\Locale\ICountryConsumer.cs" />
     <Compile Include="IConsumers\Locale\IContinentConsumer.cs" />
     <Compile Include="IConsumers\ISensorDatasheetUnitMeasurementScaleConsumer.cs" />
