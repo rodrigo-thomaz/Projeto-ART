@@ -26,6 +26,9 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     context.sensorsInDeviceLoaded = false;
     context.sensorsInDevice = [];    
 
+    context.deviceLoaded = false;
+    context.devices = [];   
+
     // *** Finders ***        
     
     var getSensorTypeByKey = function (sensorTypeId) {
@@ -77,6 +80,15 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
         for (var i = 0; i < context.sensorsInDevice.length; i++) {
             var item = context.sensorsInDevice[i];
             if (item.deviceSensorsId === deviceSensorsId && item.sensorId === sensorId) {
+                return item;
+            }
+        }
+    }; 
+
+    var getDeviceByKey = function (deviceId) {
+        for (var i = 0; i < context.devices.length; i++) {
+            var item = context.devices[i];
+            if (item.deviceId === deviceId) {
                 return item;
             }
         }
@@ -171,6 +183,10 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
 
     });    
 
+    context.$watch('deviceLoaded', function (newValue, oldValue) {
+
+    }); 
+
     // *** Public Methods ***
     
     context.getSensorTypeByKey = getSensorTypeByKey;
@@ -179,6 +195,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     context.getSensorByKey = getSensorByKey;
     context.getDeviceSensorsByKey = getDeviceSensorsByKey;
     context.getSensorsInDeviceByKey = getSensorsInDeviceByKey;
+    context.getDeviceByKey = getDeviceByKey;
 
     return context;
 

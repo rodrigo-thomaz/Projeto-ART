@@ -1,16 +1,57 @@
 ﻿'use strict';
-app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', 'unitMeasurementService', 'unitMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, siContext, unitMeasurementService, unitMeasurementConverter) {
+app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', 'contextScope', 'unitMeasurementService', 'unitMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, siContext, contextScope, unitMeasurementService, unitMeasurementConverter) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var initialized = false;
-
     var serviceFactory = {};    
 
-    serviceFactory.devices = [];  
+    var _initializing = false;
+    var _initialized = false;
+    
+    var getAllByApplicationIdApiUri = 'api/espDevice/getAllByApplicationId';
+    var getAllByApplicationIdCompletedTopic = 'ESPDevice.GetAllByApplicationIdViewCompleted';
+    var getAllByApplicationIdCompletedSubscription = null;
 
-    var getListInApplication = function () {
-        return $http.post(serviceBase + 'api/espDevice/getListInApplication').then(function (results) {
+    var insertInApplicationApiUri = 'api/espDevice/insertInApplication';
+    var insertInApplicationCompletedTopic = 'ESPDevice.InsertInApplicationViewCompleted';
+    var insertInApplicationCompletedSubscription = null;
+
+    var deleteFromApplicationApiUri = 'api/espDevice/deleteFromApplication';
+    var deleteFromApplicationCompletedTopic = 'ESPDevice.DeleteFromApplicationViewCompleted';
+    var deleteFromApplicationCompletedSubscription = null;
+
+    var getByPinApiUri = 'api/espDevice/getByPin';
+    var getByPinCompletedTopic = 'ESPDevice.GetByPinViewCompleted';
+    var getByPinCompletedSubscription = null;
+
+    var setLabelApiUri = 'api/espDevice/setLabel';
+    var setLabelCompletedTopic = 'ESPDevice.SetLabelViewCompleted';
+    var setLabelCompletedSubscription = null;
+
+    var initializedEventName = 'espDeviceService.onInitialized';
+
+    var onConnected = function () {
+
+        getAllByApplicationIdCompletedSubscription = stompService.subscribe(getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
+        insertInApplicationCompletedSubscription = stompService.subscribeAllViews(insertInApplicationCompletedTopic, onInsertInApplicationCompleted);
+        deleteFromApplicationCompletedSubscription = stompService.subscribeAllViews(deleteFromApplicationCompletedTopic, onDeleteFromApplicationCompleted);
+        getByPinCompletedSubscription = stompService.subscribe(getByPinCompletedTopic, onGetByPinCompleted);
+        setLabelCompletedSubscription = stompService.subscribeAllViews(setLabelCompletedTopic, onSetLabelCompleted);
+
+        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
+
+        if (!_initializing && !_initialized) {
+            _initializing = true;
+            getAllByApplicationId();
+        }
+    }
+
+    var initialized = function () {
+        return _initialized;
+    };
+
+    var getAllByApplicationId = function () {
+        return $http.post(serviceBase + getAllByApplicationIdApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };
@@ -19,7 +60,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var data = {
             pin: pin
         };
-        return $http.post(serviceBase + 'api/espDevice/getByPin', data).then(function successCallback(response) {
+        return $http.post(serviceBase + getByPinApiUri, data).then(function successCallback(response) {
             //alert('envio bem sucedido');
         });
     };  
@@ -28,7 +69,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var data = {
             pin: pin
         };
-        return $http.post(serviceBase + 'api/espDevice/insertInApplication', data).then(function successCallback(response) {
+        return $http.post(serviceBase + insertInApplicationApiUri, data).then(function successCallback(response) {
             //alert('envio bem sucedido');
         });
     };     
@@ -37,44 +78,20 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var data = {
             deviceInApplicationId: deviceInApplicationId
         };
-        return $http.post(serviceBase + 'api/espDevice/deleteFromApplication', data).then(function (results) {
+        return $http.post(serviceBase + deleteFromApplicationApiUri, data).then(function (results) {
             //alert('envio bem sucedido');
         });
-    };  
-
-    var getDeviceById = function (deviceId) {
-        for (var i = 0; i < serviceFactory.devices.length; i++) {
-            if (serviceFactory.devices[i].deviceId === deviceId) {
-                return serviceFactory.devices[i];
-            }
-        }
-    }; 
+    };
     
     var setLabel = function (deviceId, label) {
         var data = {
             deviceId: deviceId,
             label: label,
         }
-        return $http.post(serviceBase + 'api/espDevice/setLabel', data).then(function (results) {
+        return $http.post(serviceBase + setLabelApiUri, data).then(function (results) {
             return results;
         });
     };
-
-    var onConnected = function () {
-
-        stompService.subscribe('ESPDevice.GetListInApplicationViewCompleted', onGetListInApplicationCompleted);
-        stompService.subscribeAllViews('ESPDevice.InsertInApplicationViewCompleted', onInsertInApplicationCompleted);
-        stompService.subscribeAllViews('ESPDevice.DeleteFromApplicationViewCompleted', onDeleteFromApplicationCompleted);
-        stompService.subscribe('ESPDevice.GetByPinViewCompleted', onGetByPinCompleted);
-        stompService.subscribeAllViews('ESPDevice.SetLabelViewCompleted', onSetLabelCompleted);
-
-        stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
-
-        if (!initialized) {
-            initialized = true;
-            getListInApplication();
-        }
-    }
 
     var onReadReceived = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
@@ -143,12 +160,24 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         this.values = [];
     }
 
-    var onGetListInApplicationCompleted = function (payload) {
+    var onGetAllByApplicationIdCompleted = function (payload) {
+
         var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
+        var data = JSON.parse(dataUTF8);        
+
         for (var i = 0; i < data.length; i++) {
             insertDeviceInCollection(data[i]);
         }
+
+        _initializing = false;
+        _initialized = true;
+
+        contextScope.deviceLoaded = true;
+        clearOnConnected();
+
+        getAllByApplicationIdCompletedSubscription.unsubscribe();
+
+        $rootScope.$emit(initializedEventName);
     }
 
     var onGetByPinCompleted = function (payload) {
@@ -167,9 +196,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var onDeleteFromApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        for (var i = 0; i < serviceFactory.devices.length; i++) {
-            if (serviceFactory.devices[i].deviceInApplicationId === data.deviceInApplicationId) {
-                serviceFactory.devices.splice(i, 1);
+        for (var i = 0; i < contextScope.devices.length; i++) {
+            if (contextScope.devices[i].deviceInApplicationId === data.deviceInApplicationId) {
+                contextScope.devices.splice(i, 1);
                 $rootScope.$emit('espDeviceService_onDeleteFromApplicationCompleted');
                 break;
             }
@@ -178,14 +207,14 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
        
     var onSetLabelCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var device = getDeviceById(result.deviceId);
+        var device = contextScope.getDeviceById(result.deviceId);
         device.label = result.label;
         $rootScope.$emit('espDeviceService_onSetLabelCompleted_Id_' + result.deviceId, result);
     }
 
     var insertDeviceInCollection = function (device) {
         device.createDate = new Date(device.createDate * 1000).toLocaleString();
-        serviceFactory.devices.push(device);
+        contextScope.devices.push(device);
         for (var i = 0; i < device.sensors.length; i++) {
 
             var sensor = device.sensors[i];
@@ -196,7 +225,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             //unitMeasurement
 
             // Arrumar aqui !!!
-            sensor.unitMeasurement = siContext.getUnitMeasurementScaleByKey(sensor.unitMeasurementId);
+            //sensor.unitMeasurement = siContext.getUnitMeasurementScaleByKey(sensor.unitMeasurementId);
 
             //sensorUnitMeasurementScale
             sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
@@ -218,18 +247,19 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         clearOnConnected();
     });
 
-    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
+    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected); 
 
     // stompService
     if (stompService.connected()) onConnected();
 
     // serviceFactory
 
+    serviceFactory.initialized = initialized;
+    serviceFactory.initializedEventName = initializedEventName;
+
     serviceFactory.getByPin = getByPin;
-    serviceFactory.getDeviceById = getDeviceById;
     serviceFactory.insertInApplication = insertInApplication;    
     serviceFactory.deleteFromApplication = deleteFromApplication;
-
     serviceFactory.setLabel = setLabel;       
 
     return serviceFactory;
