@@ -220,12 +220,12 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var insertDeviceInCollection = function (device) {
         device.createDate = new Date(device.createDate * 1000).toLocaleString();
         contextScope.devices.push(device);
-        for (var i = 0; i < device.sensors.length; i++) {
+        //for (var i = 0; i < device.sensors.length; i++) {
 
-            var sensor = device.sensors[i];
+            //var sensor = device.sensors[i];
 
             //temp
-            sensor.tempConverted = null;
+            //sensor.tempConverted = null;
 
             //unitMeasurement
 
@@ -233,19 +233,19 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             //sensor.unitMeasurement = siContext.getUnitMeasurementScaleByKey(sensor.unitMeasurementId);
 
             //sensorUnitMeasurementScale
-            sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
-            sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
+            //sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
+            //sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
 
             //alarms
-            sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
-            sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
+            //sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
+            //sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
 
             //Chart
-            sensor.chart = [];
-            sensor.chart.push(new chartLine("Máximo"));
-            sensor.chart.push(new chartLine("Temperatura"));
-            sensor.chart.push(new chartLine("Mínimo"));
-        }
+            //sensor.chart = [];
+            //sensor.chart.push(new chartLine("Máximo"));
+            //sensor.chart.push(new chartLine("Temperatura"));
+            //sensor.chart.push(new chartLine("Mínimo"));
+        //}
     }
 
     $rootScope.$on('$destroy', function () {
