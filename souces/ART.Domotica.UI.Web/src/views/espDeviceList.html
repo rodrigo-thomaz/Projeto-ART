@@ -211,11 +211,11 @@
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <fieldset ng-controller="sensorChartLimiterController" ng-init="init(sensorItem)">
+                                            <fieldset ng-controller="sensorUnitMeasurementScaleController" ng-init="init(sensorItem)">
                                                 <div class="form-group">
                                                     <label class="col-lg-4 control-label">Limite do gráfico alto</label>
                                                     <div class="col-lg-8">
-                                                        <input name="inputSensorChartLimiterMax"
+                                                        <input name="inputSensorUnitMeasurementScaleMax"
                                                                type="number"
                                                                ng-model="maxView"
                                                                ng-model-options="{ debounce: 1000 }"
@@ -224,7 +224,7 @@
                                                                min="{{sensorItem.sensorRange.minConverted}}"                                                               
                                                                required
                                                                class="form-control">
-                                                        <span ng-show="formSensor.inputSensorChartLimiterMax.$touched && formSensor.inputSensorChartLimiterMax.$invalid">
+                                                        <span ng-show="formSensor.inputSensorUnitMeasurementScaleMax.$touched && formSensor.inputSensorUnitMeasurementScaleMax.$invalid">
                                                             Limite alto do gráfico deve estar entre {{sensorItem.sensorRange.minConverted}}{{sensorItem.unitMeasurement.symbol}} e {{sensorItem.sensorRange.maxConverted}}{{sensorItem.unitMeasurement.symbol}}
                                                         </span>
                                                     </div>
@@ -232,7 +232,7 @@
                                                 <div class="form-group">
                                                     <label class="col-lg-4 control-label">Limite do gráfico baixo</label>
                                                     <div class="col-lg-8">
-                                                        <input name="inputSensorChartLimiterMin"
+                                                        <input name="inputSensorUnitMeasurementScaleMin"
                                                                type="number"
                                                                ng-model="minView"
                                                                ng-model-options="{ debounce: 1000 }"
@@ -241,7 +241,7 @@
                                                                min="{{sensorItem.sensorRange.minConverted}}"                                                               
                                                                required
                                                                class="form-control">
-                                                        <span ng-show="formSensor.inputSensorChartLimiterMin.$touched && formSensor.inputSensorChartLimiterMin.$invalid">
+                                                        <span ng-show="formSensor.inputSensorUnitMeasurementScaleMin.$touched && formSensor.inputSensorUnitMeasurementScaleMin.$invalid">
                                                             Limite baixo do gráfico deve estar entre {{sensorItem.sensorRange.minConverted}}{{sensorItem.unitMeasurement.symbol}} e {{sensorItem.sensorRange.maxConverted}}{{sensorItem.unitMeasurement.symbol}}
                                                         </span>
                                                     </div>

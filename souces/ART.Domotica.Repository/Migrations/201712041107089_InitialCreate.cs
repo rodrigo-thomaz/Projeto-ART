@@ -183,23 +183,31 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.Bits, unique: true);
             
             CreateTable(
-                "dbo.SensorChartLimiter",
+                "dbo.SensorDatasheet",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        Id = c.Short(nullable: false),
+                        SensorTypeId = c.Short(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Id, t.SensorTypeId })
+                .ForeignKey("dbo.SensorType", t => t.SensorTypeId)
+                .Index(t => t.SensorTypeId);
+            
+            CreateTable(
+                "dbo.SensorDatasheetUnitMeasurementScale",
+                c => new
+                    {
+                        SensorDatasheetId = c.Short(nullable: false),
+                        SensorTypeId = c.Short(nullable: false),
                         UnitMeasurementId = c.Short(nullable: false),
                         UnitMeasurementTypeId = c.Byte(nullable: false),
                         NumericalScalePrefixId = c.Int(nullable: false),
                         NumericalScaleTypeId = c.Byte(nullable: false),
-                        RangeMax = c.Decimal(nullable: false, precision: 7, scale: 4),
-                        RangeMin = c.Decimal(nullable: false, precision: 7, scale: 4),
-                        ChartLimiterMax = c.Decimal(nullable: false, precision: 7, scale: 4),
-                        ChartLimiterMin = c.Decimal(nullable: false, precision: 7, scale: 4),
                     })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Sensor", t => t.Id)
+                .PrimaryKey(t => new { t.SensorDatasheetId, t.SensorTypeId, t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
                 .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .Index(t => t.Id)
+                .Index(t => new { t.SensorDatasheetId, t.SensorTypeId })
                 .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
             
             CreateTable(
@@ -291,44 +299,6 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.Name, unique: true);
             
             CreateTable(
-                "dbo.SensorDatasheetUnitMeasurementScale",
-                c => new
-                    {
-                        SensorDatasheetId = c.Short(nullable: false),
-                        SensorTypeId = c.Short(nullable: false),
-                        UnitMeasurementId = c.Short(nullable: false),
-                        UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
-                        NumericalScaleTypeId = c.Byte(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.SensorDatasheetId, t.SensorTypeId, t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
-                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .Index(t => new { t.SensorDatasheetId, t.SensorTypeId })
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-            
-            CreateTable(
-                "dbo.SensorDatasheet",
-                c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        SensorTypeId = c.Short(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Id, t.SensorTypeId })
-                .ForeignKey("dbo.SensorType", t => t.SensorTypeId)
-                .Index(t => t.SensorTypeId);
-            
-            CreateTable(
-                "dbo.SensorType",
-                c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 50),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true);
-            
-            CreateTable(
                 "dbo.SensorUnitMeasurementDefault",
                 c => new
                     {
@@ -345,6 +315,26 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.SensorDatasheet", t => new { t.Id, t.SensorTypeId })
                 .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
                 .Index(t => new { t.Id, t.SensorTypeId })
+                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
+            
+            CreateTable(
+                "dbo.SensorUnitMeasurementScale",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        UnitMeasurementId = c.Short(nullable: false),
+                        UnitMeasurementTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
+                        NumericalScaleTypeId = c.Byte(nullable: false),
+                        RangeMax = c.Decimal(nullable: false, precision: 7, scale: 4),
+                        RangeMin = c.Decimal(nullable: false, precision: 7, scale: 4),
+                        ChartLimiterMax = c.Decimal(nullable: false, precision: 7, scale: 4),
+                        ChartLimiterMin = c.Decimal(nullable: false, precision: 7, scale: 4),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sensor", t => t.Id)
+                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .Index(t => t.Id)
                 .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
             
             CreateTable(
@@ -369,6 +359,16 @@ namespace ART.Domotica.Repository.Migrations
                     {
                         Id = c.Byte(nullable: false),
                         Name = c.String(nullable: false, maxLength: 25),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
+            
+            CreateTable(
+                "dbo.SensorType",
+                c => new
+                    {
+                        Id = c.Short(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
@@ -479,21 +479,21 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.SensorsInDevice", "SensorId", "dbo.Sensor");
             DropForeignKey("dbo.SensorTrigger", "SensorId", "dbo.Sensor");
             DropForeignKey("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("dbo.SensorChartLimiter", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
+            DropForeignKey("dbo.SensorDatasheet", "SensorTypeId", "dbo.SensorType");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
             DropForeignKey("SI.UnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" }, "SI.UnitMeasurement");
             DropForeignKey("SI.UnitMeasurement", "UnitMeasurementTypeId", "SI.UnitMeasurementType");
-            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
-            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
+            DropForeignKey("dbo.SensorUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
+            DropForeignKey("dbo.SensorUnitMeasurementScale", "Id", "dbo.Sensor");
             DropForeignKey("dbo.SensorUnitMeasurementDefault", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
             DropForeignKey("dbo.SensorUnitMeasurementDefault", new[] { "Id", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("dbo.SensorDatasheet", "SensorTypeId", "dbo.SensorType");
             DropForeignKey("SI.UnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.NumericalScale");
             DropForeignKey("SI.NumericalScale", "NumericalScaleTypeId", "SI.NumericalScaleType");
             DropForeignKey("SI.NumericalScaleTypeCountry", "NumericalScaleTypeId", "SI.NumericalScaleType");
             DropForeignKey("SI.NumericalScaleTypeCountry", "CountryId", "Locale.Country");
             DropForeignKey("Locale.Country", "ContinentId", "Locale.Continent");
             DropForeignKey("SI.NumericalScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
-            DropForeignKey("dbo.SensorChartLimiter", "Id", "dbo.Sensor");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
             DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.Sensor");
             DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
             DropForeignKey("dbo.SensorsInDevice", "DeviceBaseId", "dbo.DeviceBase");
@@ -518,16 +518,15 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.HardwaresInProject", new[] { "CreateByApplicationUserId" });
             DropIndex("dbo.HardwaresInProject", "IX_Unique_DeviceInApplicationId_ProjectId");
             DropIndex("dbo.SensorTrigger", new[] { "SensorId" });
+            DropIndex("dbo.SensorType", new[] { "Name" });
             DropIndex("SI.UnitMeasurementType", new[] { "Name" });
             DropIndex("SI.UnitMeasurement", new[] { "Symbol" });
             DropIndex("SI.UnitMeasurement", new[] { "Name" });
             DropIndex("SI.UnitMeasurement", new[] { "UnitMeasurementTypeId" });
+            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
+            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "Id" });
             DropIndex("dbo.SensorUnitMeasurementDefault", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
             DropIndex("dbo.SensorUnitMeasurementDefault", new[] { "Id", "SensorTypeId" });
-            DropIndex("dbo.SensorType", new[] { "Name" });
-            DropIndex("dbo.SensorDatasheet", new[] { "SensorTypeId" });
-            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
-            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
             DropIndex("Locale.Continent", new[] { "Name" });
             DropIndex("Locale.Country", new[] { "ContinentId" });
             DropIndex("Locale.Country", new[] { "Name" });
@@ -539,8 +538,9 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("SI.NumericalScale", new[] { "NumericalScalePrefixId" });
             DropIndex("SI.UnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" });
             DropIndex("SI.UnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" });
-            DropIndex("dbo.SensorChartLimiter", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
-            DropIndex("dbo.SensorChartLimiter", new[] { "Id" });
+            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
+            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
+            DropIndex("dbo.SensorDatasheet", new[] { "SensorTypeId" });
             DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
             DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
             DropIndex("dbo.DSFamilyTempSensor", new[] { "DSFamilyTempSensorResolutionId" });
@@ -569,12 +569,11 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.Project");
             DropTable("dbo.HardwaresInProject");
             DropTable("dbo.SensorTrigger");
+            DropTable("dbo.SensorType");
             DropTable("SI.UnitMeasurementType");
             DropTable("SI.UnitMeasurement");
+            DropTable("dbo.SensorUnitMeasurementScale");
             DropTable("dbo.SensorUnitMeasurementDefault");
-            DropTable("dbo.SensorType");
-            DropTable("dbo.SensorDatasheet");
-            DropTable("dbo.SensorDatasheetUnitMeasurementScale");
             DropTable("Locale.Continent");
             DropTable("Locale.Country");
             DropTable("SI.NumericalScaleTypeCountry");
@@ -582,7 +581,8 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("SI.NumericalScalePrefix");
             DropTable("SI.NumericalScale");
             DropTable("SI.UnitMeasurementScale");
-            DropTable("dbo.SensorChartLimiter");
+            DropTable("dbo.SensorDatasheetUnitMeasurementScale");
+            DropTable("dbo.SensorDatasheet");
             DropTable("dbo.DSFamilyTempSensorResolution");
             DropTable("dbo.DSFamilyTempSensor");
             DropTable("dbo.Sensor");

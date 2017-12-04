@@ -76,7 +76,7 @@ angular.module('app')
                       'js/services/sensorUnitMeasurementDefaultService.js',
                       'js/services/sensorService.js',
                                             
-                      'js/services/sensorChartLimiterService.js',
+                      'js/services/sensorUnitMeasurementScaleService.js',
                       'js/services/sensorTriggerService.js',
 
                       'js/services/dsFamilyTempSensorResolutionService.js',
@@ -85,7 +85,7 @@ angular.module('app')
                       'js/services/deviceNTPService.js',                      
                       'js/services/espDeviceService.js',
 
-                      'js/controllers/sensorChartLimiterController.js',
+                      'js/controllers/sensorUnitMeasurementScaleController.js',
                       'js/controllers/sensorTriggerController.js',
 
                       'js/controllers/espDeviceListController.js',                      

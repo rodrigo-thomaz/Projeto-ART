@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class SensorChartLimiterConfiguration : EntityTypeConfiguration<SensorChartLimiter>
+    public class SensorUnitMeasurementScaleConfiguration : EntityTypeConfiguration<SensorUnitMeasurementScale>
     {
         #region Constructors
 
-        public SensorChartLimiterConfiguration()
+        public SensorUnitMeasurementScaleConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);
@@ -22,7 +22,7 @@
 
             //Sensor
             HasRequired(x => x.Sensor)
-               .WithRequiredDependent(x => x.SensorChartLimiter);
+               .WithRequiredDependent(x => x.SensorUnitMeasurementScale);
 
             //UnitMeasurementId
             Property(x => x.UnitMeasurementId)
@@ -50,7 +50,7 @@
 
             //UnitMeasurementScale
             HasRequired(x => x.UnitMeasurementScale)
-                .WithMany(x => x.SensorChartLimiters)
+                .WithMany(x => x.SensorUnitMeasurementScales)
                 .HasForeignKey(x => new
                 {
                     x.UnitMeasurementId,

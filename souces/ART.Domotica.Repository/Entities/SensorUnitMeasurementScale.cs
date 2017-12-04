@@ -6,7 +6,7 @@
     using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities.SI;
 
-    public class SensorChartLimiter : IEntity<Guid>
+    public class SensorUnitMeasurementScale : IEntity<Guid>
     {
         #region Properties
 

@@ -141,7 +141,7 @@
     <Compile Include="Controllers\ApplicationMQController.cs" />
     <Compile Include="Controllers\DeviceNTPController.cs" />
     <Compile Include="Controllers\SensorTriggerController.cs" />
-    <Compile Include="Controllers\SensorChartLimiterController.cs" />
+    <Compile Include="Controllers\SensorUnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\ESPDeviceController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\SensorUnitMeasurementDefaultController.cs" />

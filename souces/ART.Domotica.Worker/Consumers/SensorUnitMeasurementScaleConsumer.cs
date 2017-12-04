@@ -16,7 +16,7 @@ using ART.Domotica.Model;
 
 namespace ART.Domotica.Worker.Consumers
 {
-    public class SensorChartLimiterConsumer : ConsumerBase, ISensorChartLimiterConsumer
+    public class SensorUnitMeasurementScaleConsumer : ConsumerBase, ISensorUnitMeasurementScaleConsumer
     {
         #region private fields
 
@@ -30,7 +30,7 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public SensorChartLimiterConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public SensorUnitMeasurementScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
             _setValueConsumer = new EventingBasicConsumer(_model);
 
@@ -55,7 +55,7 @@ namespace ART.Domotica.Worker.Consumers
                , arguments: null);           
 
             _model.QueueDeclare(
-                  queue: SensorChartLimiterConstants.SetValueQueueName
+                  queue: SensorUnitMeasurementScaleConstants.SetValueQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
@@ -63,7 +63,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _setValueConsumer.Received += SetValueReceived;
 
-            _model.BasicConsume(SensorChartLimiterConstants.SetValueQueueName, false, _setValueConsumer);
+            _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetValueQueueName, false, _setValueConsumer);
         }
 
         public void SetValueReceived(object sender, BasicDeliverEventArgs e)
@@ -76,9 +76,9 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorChartLimiterSetValueRequestContract>>(e.Body);
-            var sensorChartLimiterDomain = _componentContext.Resolve<ISensorChartLimiterDomain>();
-            await sensorChartLimiterDomain.SetValue(message.Contract.SensorChartLimiterId, message.Contract.Position, message.Contract.Value);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract>>(e.Body);
+            var sensorUnitMeasurementScaleDomain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
+            await sensorUnitMeasurementScaleDomain.SetValue(message.Contract.SensorUnitMeasurementScaleId, message.Contract.Position, message.Contract.Value);
 
             var exchange = "amq.topic";
 
@@ -87,23 +87,23 @@ namespace ART.Domotica.Worker.Consumers
 
             //Load device into context
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
-            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.SensorChartLimiterId);
+            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.SensorUnitMeasurementScaleId);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorChartLimiterSetValueRequestContract, SensorChartLimiterSetValueCompletedModel>(message.Contract);
+            var viewModel = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueCompletedModel>(message.Contract);
             viewModel.DeviceId = device.DeviceBaseId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorChartLimiterConstants.SetValueViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetValueViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<SensorChartLimiterSetValueRequestContract, SensorChartLimiterSetValueRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorChartLimiterSetValueRequestIoTContract>(iotContract);
+            var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<SensorUnitMeasurementScaleSetValueRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorChartLimiterConstants.SetValueIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetValueIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

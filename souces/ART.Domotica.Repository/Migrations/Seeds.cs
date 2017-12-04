@@ -112,11 +112,11 @@
             var sensor_3_1_Address = "40:255:192:95:147:22:4:195";
             var sensor_3_2_Address = "40:255:113:95:147:22:4:65";
 
-            var sensor_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
-            var sensor_2_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
-            var sensor_2_2 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
-            var sensor_3_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
-            var sensor_3_2 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorChartLimiter).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
+            var sensor_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_1_Address.ToLower());
+            var sensor_2_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_2_1_Address.ToLower());
+            var sensor_2_2 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_2_2_Address.ToLower());
+            var sensor_3_1 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_3_1_Address.ToLower());
+            var sensor_3_2 = context.Sensor.Include(x => x.DSFamilyTempSensor).Include(x => x.SensorUnitMeasurementScale).Include(x => x.SensorTriggers).SingleOrDefault(x => x.DSFamilyTempSensor.DeviceAddress.ToLower() == sensor_3_2_Address.ToLower());
 
             if (sensor_1 == null)
             {
@@ -147,7 +147,7 @@
                             BuzzerOn = true,
                         },
                     },
-                    SensorChartLimiter = new SensorChartLimiter
+                    SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -183,9 +183,9 @@
                     });
                 }
 
-                if (sensor_1.SensorChartLimiter == null)
+                if (sensor_1.SensorUnitMeasurementScale == null)
                 {
-                    sensor_1.SensorChartLimiter = new SensorChartLimiter
+                    sensor_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -227,7 +227,7 @@
                             BuzzerOn = true,
                         },
                     },
-                    SensorChartLimiter = new SensorChartLimiter
+                    SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -263,9 +263,9 @@
                     });
                 }
 
-                if (sensor_2_1.SensorChartLimiter == null)
+                if (sensor_2_1.SensorUnitMeasurementScale == null)
                 {
-                    sensor_2_1.SensorChartLimiter = new SensorChartLimiter
+                    sensor_2_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -306,7 +306,7 @@
                             BuzzerOn = true,
                         },
                     },
-                    SensorChartLimiter = new SensorChartLimiter
+                    SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -342,9 +342,9 @@
                     });
                 }
 
-                if (sensor_2_2.SensorChartLimiter == null)
+                if (sensor_2_2.SensorUnitMeasurementScale == null)
                 {
-                    sensor_2_2.SensorChartLimiter = new SensorChartLimiter
+                    sensor_2_2.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -385,7 +385,7 @@
                             BuzzerOn = true,
                         },
                     },
-                    SensorChartLimiter = new SensorChartLimiter
+                    SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -421,9 +421,9 @@
                     });
                 }
 
-                if (sensor_3_1.SensorChartLimiter == null)
+                if (sensor_3_1.SensorUnitMeasurementScale == null)
                 {
-                    sensor_3_1.SensorChartLimiter = new SensorChartLimiter
+                    sensor_3_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -464,7 +464,7 @@
                             BuzzerOn = true,
                         },
                     },
-                    SensorChartLimiter = new SensorChartLimiter
+                    SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
@@ -500,9 +500,9 @@
                     });
                 }
 
-                if (sensor_3_2.SensorChartLimiter == null)
+                if (sensor_3_2.SensorUnitMeasurementScale == null)
                 {
-                    sensor_3_2.SensorChartLimiter = new SensorChartLimiter
+                    sensor_3_2.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,

@@ -15,7 +15,7 @@
         public SensorProfile()
         {
             CreateMap<Sensor, SensorDetailModel>()
-                .ForMember(vm => vm.SensorChartLimiter, m => m.MapFrom(x => x.SensorChartLimiter));
+                .ForMember(vm => vm.SensorUnitMeasurementScale, m => m.MapFrom(x => x.SensorUnitMeasurementScale));
 
             CreateMap<Sensor, SensorSetUnitMeasurementCompletedModel>()
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id))
@@ -33,8 +33,8 @@
                     return result;
                 }))
                 .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.DSFamilyTempSensor.DSFamilyTempSensorResolution.Bits))
-                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorChartLimiter.ChartLimiterMin))
-                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorChartLimiter.ChartLimiterMax))
+                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMin))
+                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMax))
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.Id));
         }
 

@@ -6,11 +6,11 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
 
-    public class SensorChartLimiterRepository : RepositoryBase<ARTDbContext, SensorChartLimiter, Guid>, ISensorChartLimiterRepository
+    public class SensorUnitMeasurementScaleRepository : RepositoryBase<ARTDbContext, SensorUnitMeasurementScale, Guid>, ISensorUnitMeasurementScaleRepository
     {
         #region Constructors
 
-        public SensorChartLimiterRepository(ARTDbContext context)
+        public SensorUnitMeasurementScaleRepository(ARTDbContext context)
             : base(context)
         {
         }

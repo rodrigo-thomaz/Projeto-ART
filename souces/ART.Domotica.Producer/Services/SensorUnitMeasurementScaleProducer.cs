@@ -9,11 +9,11 @@ using ART.Infra.CrossCutting.Utils;
 
 namespace ART.Domotica.Producer.Services
 {
-    public class SensorChartLimiterProducer : ProducerBase, ISensorChartLimiterProducer
+    public class SensorUnitMeasurementScaleProducer : ProducerBase, ISensorUnitMeasurementScaleProducer
     {
         #region constructors
 
-        public SensorChartLimiterProducer(IConnection connection) : base(connection)
+        public SensorUnitMeasurementScaleProducer(IConnection connection) : base(connection)
         {
             Initialize();
         }
@@ -22,12 +22,12 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids          
 
-        public async Task SetValue(AuthenticatedMessageContract<SensorChartLimiterSetValueRequestContract> message)
+        public async Task SetValue(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorChartLimiterConstants.SetValueQueueName, null, payload);
+                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.SetValueQueueName, null, payload);
             });
         }
 
@@ -38,7 +38,7 @@ namespace ART.Domotica.Producer.Services
         private void Initialize()
         {
             _model.QueueDeclare(
-                 queue: SensorChartLimiterConstants.SetValueQueueName
+                 queue: SensorUnitMeasurementScaleConstants.SetValueQueueName
                , durable: true
                , exclusive: false
                , autoDelete: false

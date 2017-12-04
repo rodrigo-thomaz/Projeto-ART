@@ -127,7 +127,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
 }]);
 
-app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorChartLimiterService', 'sensorTriggerService', 'dsFamilyTempSensorService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, unitMeasurementConverter, unitMeasurementTypeService, unitMeasurementService, sensorChartLimiterService, sensorTriggerService, dsFamilyTempSensorService) {
+app.controller('dsFamilyTempSensorItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'dsFamilyTempSensorResolutionService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorUnitMeasurementScaleService', 'sensorTriggerService', 'dsFamilyTempSensorService', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, dsFamilyTempSensorResolutionService, unitMeasurementConverter, unitMeasurementTypeService, unitMeasurementService, sensorUnitMeasurementScaleService, sensorTriggerService, dsFamilyTempSensorService) {
 
     $scope.sensor = {};           
 

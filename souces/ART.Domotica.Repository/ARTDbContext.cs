@@ -119,7 +119,7 @@
             get; set;
         }
 
-        public DbSet<SensorChartLimiter> SensorChartLimiter
+        public DbSet<SensorUnitMeasurementScale> SensorUnitMeasurementScale
         {
             get; set;
         }
@@ -212,7 +212,7 @@
             modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
             modelBuilder.Configurations.Add(new ProjectConfiguration());
             modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
-            modelBuilder.Configurations.Add(new SensorChartLimiterConfiguration());
+            modelBuilder.Configurations.Add(new SensorUnitMeasurementScaleConfiguration());
             modelBuilder.Configurations.Add(new SensorConfiguration());
             modelBuilder.Configurations.Add(new SensorDatasheetConfiguration());
             modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());

@@ -28,7 +28,7 @@
             get; set;
         }
 
-        public ICollection<SensorChartLimiter> SensorChartLimiters
+        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
         {
             get; set;
         }

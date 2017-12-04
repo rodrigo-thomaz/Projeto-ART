@@ -34,7 +34,7 @@
         {
             var data = await _context.ESPDevice
                 .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorTriggers))
-                .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorChartLimiter))
+                .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
                 .Include(x => x.DeviceMQ)
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
@@ -81,7 +81,7 @@
                 .Include(x => x.DevicesInApplication)
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorTriggers))
-                .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorChartLimiter))
+                .Include(x => x.SensorsInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();           
 

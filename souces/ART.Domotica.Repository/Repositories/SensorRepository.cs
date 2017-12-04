@@ -20,7 +20,7 @@ namespace ART.Domotica.Repository.Repositories
         {
             // Arrumar depois da Refatoração !!!
             return await _context.Set<Sensor>()
-                .Include(x => x.SensorChartLimiter)
+                .Include(x => x.SensorUnitMeasurementScale)
                 .ToListAsync();
         }
 
@@ -36,7 +36,7 @@ namespace ART.Domotica.Repository.Repositories
         {
             return await _context.Sensor
                 .Include(x => x.DSFamilyTempSensor.DSFamilyTempSensorResolution)
-                .Include(x => x.SensorChartLimiter)
+                .Include(x => x.SensorUnitMeasurementScale)
                 .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == deviceId) != null)
                 .ToListAsync();
         }

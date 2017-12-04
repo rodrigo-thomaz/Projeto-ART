@@ -5,11 +5,11 @@
     using ART.Domotica.Contract;
     using ART.Infra.CrossCutting.MQ.Contract;
 
-    public interface ISensorChartLimiterProducer
+    public interface ISensorUnitMeasurementScaleProducer
     {
         #region Methods
 
-        Task SetValue(AuthenticatedMessageContract<SensorChartLimiterSetValueRequestContract> message);
+        Task SetValue(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract> message);
 
         #endregion Methods
     }

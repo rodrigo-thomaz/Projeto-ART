@@ -211,7 +211,7 @@
     <Content Include="src\js\controllers\applicationUserController.js" />
     <Content Include="src\js\controllers\dashboardController.js" />
     <Content Include="src\js\controllers\applicationController.js" />
-    <Content Include="src\js\controllers\sensorChartLimiterController.js" />
+    <Content Include="src\js\controllers\sensorUnitMeasurementScaleController.js" />
     <Content Include="src\js\controllers\sensorTriggerController.js" />
     <Content Include="src\js\controllers\tab.js" />
     <Content Include="src\js\controllers\vectormap.js" />
@@ -224,7 +224,7 @@
     <Content Include="src\js\services\locale\localeMapper.js" />
     <Content Include="src\js\services\locale\localeContext.js" />
     <Content Include="src\js\services\sensorTriggerService.js" />
-    <Content Include="src\js\services\sensorChartLimiterService.js" />
+    <Content Include="src\js\services\sensorUnitMeasurementScaleService.js" />
     <Content Include="src\js\services\espDeviceService.js" />
     <Content Include="src\js\services\applicationUserService.js" />
     <Content Include="src\js\services\authInterceptorService.js" />

@@ -6,11 +6,11 @@
     using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
 
-    public interface ISensorChartLimiterDomain
+    public interface ISensorUnitMeasurementScaleDomain
     {
         #region Methods
 
-        Task<SensorChartLimiter> SetValue(Guid sensorChartLimiterId, SensorChartLimiterPositionEnum position, decimal value);
+        Task<SensorUnitMeasurementScale> SetValue(Guid sensorUnitMeasurementScaleId, SensorUnitMeasurementScalePositionEnum position, decimal value);
 
         #endregion Methods
     }

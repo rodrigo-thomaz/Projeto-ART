@@ -5,7 +5,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface ISensorChartLimiterRepository : IRepository<ARTDbContext, SensorChartLimiter, Guid>
+    public interface ISensorUnitMeasurementScaleRepository : IRepository<ARTDbContext, SensorUnitMeasurementScale, Guid>
     {
     }
 }

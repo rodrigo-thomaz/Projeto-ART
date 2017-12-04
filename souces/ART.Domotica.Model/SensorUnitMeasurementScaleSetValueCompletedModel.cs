@@ -4,7 +4,7 @@
 
     using ART.Domotica.Enums;
 
-    public class SensorChartLimiterSetValueCompletedModel
+    public class SensorUnitMeasurementScaleSetValueCompletedModel
     {
         #region Properties
 
@@ -13,12 +13,12 @@
             get; set;
         }
 
-        public SensorChartLimiterPositionEnum Position
+        public SensorUnitMeasurementScalePositionEnum Position
         {
             get; set;
         }
 
-        public Guid SensorChartLimiterId
+        public Guid SensorUnitMeasurementScaleId
         {
             get; set;
         }

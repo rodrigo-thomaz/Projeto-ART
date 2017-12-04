@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class SensorChartLimiterDetailModel
+    public class SensorUnitMeasurementScaleDetailModel
     {
         #region Properties
 

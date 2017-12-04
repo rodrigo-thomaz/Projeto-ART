@@ -74,7 +74,7 @@
     <Compile Include="Configurations\SI\NumericalScaleTypeConfiguration.cs" />
     <Compile Include="Configurations\SI\NumericalScaleTypeCountryConfiguration.cs" />
     <Compile Include="Configurations\ProjectConfiguration.cs" />
-    <Compile Include="Configurations\SensorChartLimiterConfiguration.cs" />
+    <Compile Include="Configurations\SensorUnitMeasurementScaleConfiguration.cs" />
     <Compile Include="Configurations\SensorDatasheetConfiguration.cs" />
     <Compile Include="Configurations\SensorTriggerConfiguration.cs" />
     <Compile Include="Configurations\ActuatorTypeConfiguration.cs" />
@@ -111,7 +111,7 @@
     <Compile Include="Entities\Project.cs" />
     <Compile Include="Entities\RaspberryDevice.cs" />
     <Compile Include="Entities\Sensor.cs" />
-    <Compile Include="Entities\SensorChartLimiter.cs" />
+    <Compile Include="Entities\SensorUnitMeasurementScale.cs" />
     <Compile Include="Entities\SensorsInDevice.cs" />
     <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\SensorTrigger.cs" />
@@ -144,7 +144,7 @@
     <Compile Include="Interfaces\IApplicationUserRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorResolutionRepository.cs" />
     <Compile Include="Interfaces\IDSFamilyTempSensorRepository.cs" />
-    <Compile Include="Interfaces\ISensorChartLimiterRepository.cs" />
+    <Compile Include="Interfaces\ISensorUnitMeasurementScaleRepository.cs" />
     <Compile Include="Interfaces\ISensorTriggerRepository.cs" />
     <Compile Include="Interfaces\ISensorUnitMeasurementDefaultRepository.cs" />
     <Compile Include="Interfaces\ISensorDatasheetRepository.cs" />
@@ -154,9 +154,9 @@
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201712041046524_InitialCreate.cs" />
-    <Compile Include="Migrations\201712041046524_InitialCreate.Designer.cs">
-      <DependentUpon>201712041046524_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201712041107089_InitialCreate.cs" />
+    <Compile Include="Migrations\201712041107089_InitialCreate.Designer.cs">
+      <DependentUpon>201712041107089_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -176,7 +176,7 @@
     <Compile Include="Repositories\DeviceInApplicationRepository.cs" />
     <Compile Include="Repositories\HardwareRepository.cs" />
     <Compile Include="Repositories\ESPDeviceRepository.cs" />
-    <Compile Include="Repositories\SensorChartLimiterRepository.cs" />
+    <Compile Include="Repositories\SensorUnitMeasurementScaleRepository.cs" />
     <Compile Include="Repositories\SensorRepository.cs" />
     <Compile Include="Repositories\SensorTypeRepository.cs" />
     <Compile Include="Repositories\SensorTriggerRepository.cs" />
@@ -238,8 +238,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712041046524_InitialCreate.resx">
-      <DependentUpon>201712041046524_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712041107089_InitialCreate.resx">
+      <DependentUpon>201712041107089_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

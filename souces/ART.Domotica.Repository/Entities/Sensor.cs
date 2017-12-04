@@ -44,7 +44,7 @@
             get; set;
         }
 
-        public SensorChartLimiter SensorChartLimiter
+        public SensorUnitMeasurementScale SensorUnitMeasurementScale
         {
             get; set;
         }

@@ -48,7 +48,7 @@ namespace ART.Domotica.Domain.Services
             return await _sensorRepository.GetAll(applicationId);
         }
 
-        public async Task<Sensor> SetAlarmOn(Guid sensorId, SensorChartLimiterPositionEnum position, bool alarmOn)
+        public async Task<Sensor> SetAlarmOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmOn)
         {
             var entity = await _sensorRepository.GetById(sensorId);
 
@@ -59,13 +59,13 @@ namespace ART.Domotica.Domain.Services
 
             var sensorTriggers = await _sensorTriggerRepository.GetSensorId(sensorId);
 
-            if (position == SensorChartLimiterPositionEnum.Max)
+            if (position == SensorUnitMeasurementScalePositionEnum.Max)
             {
                 var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
                 sensorTrigger.TriggerOn = alarmOn;
             }
-            else if (position == SensorChartLimiterPositionEnum.Min)
+            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
             {
                 var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
@@ -77,7 +77,7 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
-        public async Task<Sensor> SetAlarmCelsius(Guid sensorId, SensorChartLimiterPositionEnum position, decimal alarmCelsius)
+        public async Task<Sensor> SetAlarmCelsius(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, decimal alarmCelsius)
         {
             var entity = await _sensorRepository.GetById(sensorId);
 
@@ -88,13 +88,13 @@ namespace ART.Domotica.Domain.Services
 
             var sensorTriggers = await _sensorTriggerRepository.GetSensorId(sensorId);
 
-            if (position == SensorChartLimiterPositionEnum.Max)
+            if (position == SensorUnitMeasurementScalePositionEnum.Max)
             {
                 var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
                 sensorTrigger.TriggerValue = alarmCelsius.ToString();
             }
-            else if (position == SensorChartLimiterPositionEnum.Min)
+            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
             {
                 var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
@@ -106,7 +106,7 @@ namespace ART.Domotica.Domain.Services
             return entity;
         }
 
-        public async Task<Sensor> SetAlarmBuzzerOn(Guid sensorId, SensorChartLimiterPositionEnum position, bool alarmBuzzerOn)
+        public async Task<Sensor> SetAlarmBuzzerOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmBuzzerOn)
         {
             var entity = await _sensorRepository.GetById(sensorId);
 
@@ -117,13 +117,13 @@ namespace ART.Domotica.Domain.Services
 
             var sensorTriggers = await _sensorTriggerRepository.GetSensorId(sensorId);
 
-            if (position == SensorChartLimiterPositionEnum.Max)
+            if (position == SensorUnitMeasurementScalePositionEnum.Max)
             {
                 var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
                 sensorTrigger.BuzzerOn = alarmBuzzerOn;
             }
-            else if (position == SensorChartLimiterPositionEnum.Min)
+            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
             {
                 var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
                 var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);

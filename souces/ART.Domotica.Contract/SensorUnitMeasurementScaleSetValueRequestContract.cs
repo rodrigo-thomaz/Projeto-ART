@@ -4,16 +4,16 @@
 
     using ART.Domotica.Enums;
 
-    public class SensorChartLimiterSetValueRequestContract
+    public class SensorUnitMeasurementScaleSetValueRequestContract
     {
         #region Properties
 
-        public SensorChartLimiterPositionEnum Position
+        public SensorUnitMeasurementScalePositionEnum Position
         {
             get; set;
         }
 
-        public Guid SensorChartLimiterId
+        public Guid SensorUnitMeasurementScaleId
         {
             get; set;
         }

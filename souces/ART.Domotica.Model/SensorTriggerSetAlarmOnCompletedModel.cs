@@ -23,7 +23,7 @@
             get; set;
         }
 
-        public SensorChartLimiterPositionEnum Position
+        public SensorUnitMeasurementScalePositionEnum Position
         {
             get; set;
         }

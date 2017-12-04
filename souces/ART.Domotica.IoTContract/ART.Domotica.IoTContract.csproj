@@ -43,7 +43,7 @@
     <Compile Include="SensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract.cs" />
     <Compile Include="DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract.cs" />
-    <Compile Include="SensorChartLimiterSetValueRequestIoTContract.cs" />
+    <Compile Include="SensorUnitMeasurementScaleSetValueRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetAlarmOnRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetAlarmCelsiusRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetAlarmBuzzerOnRequestIoTContract.cs" />

@@ -73,7 +73,7 @@
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DSFamilyTempSensorProfile());
                 x.AddProfile(new ESPDeviceProfile());
-                x.AddProfile(new SensorChartLimiterProfile());
+                x.AddProfile(new SensorUnitMeasurementScaleProfile());
                 x.AddProfile(new SensorDatasheetProfile());
                 x.AddProfile(new SensorProfile());
                 x.AddProfile(new SensorTriggerProfile());

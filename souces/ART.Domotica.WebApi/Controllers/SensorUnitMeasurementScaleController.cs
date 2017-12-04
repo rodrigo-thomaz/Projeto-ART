@@ -7,20 +7,20 @@ using ART.Domotica.Producer.Interfaces;
 namespace ART.Domotica.WebApi.Controllers
 {
     [Authorize]
-    [RoutePrefix("api/sensorChartLimiter")]    
-    public class SensorChartLimiterController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/sensorUnitMeasurementScale")]    
+    public class SensorUnitMeasurementScaleController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields
 
-        protected readonly ISensorChartLimiterProducer _sensorChartLimiterProducer;
+        protected readonly ISensorUnitMeasurementScaleProducer _sensorUnitMeasurementScaleProducer;
 
         #endregion
 
         #region constructors
 
-        public SensorChartLimiterController(ISensorChartLimiterProducer sensorChartLimiterProducer) 
+        public SensorUnitMeasurementScaleController(ISensorUnitMeasurementScaleProducer sensorUnitMeasurementScaleProducer) 
         {
-            _sensorChartLimiterProducer = sensorChartLimiterProducer;
+            _sensorUnitMeasurementScaleProducer = sensorUnitMeasurementScaleProducer;
         }
 
         #endregion
@@ -39,9 +39,9 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setValue")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetValue(SensorChartLimiterSetValueRequestContract contract)
+        public async Task<IHttpActionResult> SetValue(SensorUnitMeasurementScaleSetValueRequestContract contract)
         {
-            await _sensorChartLimiterProducer.SetValue(CreateMessage(contract));
+            await _sensorUnitMeasurementScaleProducer.SetValue(CreateMessage(contract));
             return Ok();
         }
 
