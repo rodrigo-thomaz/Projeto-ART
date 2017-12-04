@@ -45,18 +45,9 @@
             return await _espDeviceRepository.GetAll();
         }
 
-        public async Task<List<ESPDevice>> GetListInApplication(Guid applicationId)
+        public async Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId)
         {
-            var application = await _applicationRepository.GetById(applicationId);
-
-            if (application == null)
-            {
-                throw new Exception("Application not found");
-            }
-
-            var data = await _espDeviceRepository.GetListInApplication(applicationId);            
-
-            return data;
+            return await _espDeviceRepository.GetAllByApplicationId(applicationId);
         }
 
         public async Task<ESPDevice> GetByPin(string pin)

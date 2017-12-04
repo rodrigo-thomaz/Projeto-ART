@@ -27,7 +27,7 @@
         #region Fields
 
         private readonly EventingBasicConsumer _getAllConsumer;
-        private readonly EventingBasicConsumer _getListInApplicationConsumer;        
+        private readonly EventingBasicConsumer _getAllByApplicationIdConsumer;        
         private readonly EventingBasicConsumer _getByPinConsumer;
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
@@ -49,7 +49,7 @@
             : base(connection)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
-            _getListInApplicationConsumer = new EventingBasicConsumer(_model);
+            _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getByPinConsumer = new EventingBasicConsumer(_model);
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
@@ -87,7 +87,7 @@
                , arguments: null);
 
             _model.QueueDeclare(
-                 queue: ESPDeviceConstants.GetListInApplicationQueueName
+                 queue: ESPDeviceConstants.GetAllByApplicationIdQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
@@ -129,7 +129,7 @@
                , arguments: null); 
 
             _getAllConsumer.Received += GetAllReceived;
-            _getListInApplicationConsumer.Received += GetListInApplicationReceived;
+            _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;
             _getByPinConsumer.Received += GetByPinReceived;
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
@@ -137,7 +137,7 @@
             _setLabelConsumer.Received += SetLabelReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
-            _model.BasicConsume(ESPDeviceConstants.GetListInApplicationQueueName, false, _getListInApplicationConsumer);
+            _model.BasicConsume(ESPDeviceConstants.GetAllByApplicationIdQueueName, false, _getAllByApplicationIdConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetByPinQueueName, false, _getByPinConsumer);
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
@@ -177,11 +177,11 @@
             _logger.DebugLeave();
         }
 
-        public void GetListInApplicationReceived(object sender, BasicDeliverEventArgs e)
+        public void GetAllByApplicationIdReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetListInApplicationReceivedAsync(sender, e));
+            Task.WaitAll(GetAllByApplicationIdReceivedAsync(sender, e));
         }
-        public async Task GetListInApplicationReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task GetAllByApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
@@ -192,7 +192,7 @@
             var applicationUser = await applicationUserDomain.GetById(message.ApplicationUserId);
 
             var espDevicedomain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await espDevicedomain.GetListInApplication(applicationUser.ApplicationId);
+            var data = await espDevicedomain.GetAllByApplicationId(applicationUser.ApplicationId);
 
             var exchange = "amq.topic";
 
@@ -202,7 +202,7 @@
             //Enviando para View
             var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceDetailModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetListInApplicationViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetAllByApplicationIdViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

@@ -18,7 +18,7 @@
 
         Task<ESPDevice> GetConfigurations(int chipId, int flashChipId, string macAddress);
 
-        Task<List<ESPDevice>> GetListInApplication(Guid applicationId);
+        Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId);
 
         Task<ESPDevice> InsertInApplication(string pin, Guid createByApplicationUserId);
 

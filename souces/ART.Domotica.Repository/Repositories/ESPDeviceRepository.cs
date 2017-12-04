@@ -75,7 +75,7 @@
             return data;
         }
 
-        public async Task<List<ESPDevice>> GetListInApplication(Guid applicationId)
+        public async Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId)
         {
             var data = await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)

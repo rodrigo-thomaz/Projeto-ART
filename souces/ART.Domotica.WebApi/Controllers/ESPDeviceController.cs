@@ -131,11 +131,11 @@
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("getListInApplication")]
+        [Route("getAllByApplicationId")]
         [HttpPost]
-        public async Task<IHttpActionResult> GetListInApplication()
+        public async Task<IHttpActionResult> GetAllByApplicationId()
         {
-            await _espDeviceProducer.GetListInApplication(CreateMessage());
+            await _espDeviceProducer.GetAllByApplicationId(CreateMessage());
             return Ok();
         }
 

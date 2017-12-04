@@ -41,12 +41,12 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task GetListInApplication(AuthenticatedMessageContract message)
+        public async Task GetAllByApplicationId(AuthenticatedMessageContract message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ESPDeviceConstants.GetListInApplicationQueueName, null, payload);
+                _model.BasicPublish("", ESPDeviceConstants.GetAllByApplicationIdQueueName, null, payload);
             });
         }        
 
@@ -117,7 +117,7 @@ namespace ART.Domotica.Producer.Services
         private void Initialize()
         {
             _model.QueueDeclare(
-                  queue: ESPDeviceConstants.GetListInApplicationQueueName
+                  queue: ESPDeviceConstants.GetAllByApplicationIdQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
