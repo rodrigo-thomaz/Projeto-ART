@@ -13,7 +13,17 @@
 
         public SensorUnitMeasurementScaleProfile()
         {
-            CreateMap<SensorUnitMeasurementScale, SensorUnitMeasurementScaleGetModel>();
+            CreateMap<SensorUnitMeasurementScale, SensorUnitMeasurementScaleGetModel>()
+                .ForMember(vm => vm.SensorUnitMeasurementScaleId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId))
+                .ForMember(vm => vm.UnitMeasurementTypeId, m => m.MapFrom(x => x.UnitMeasurementTypeId))
+                .ForMember(vm => vm.NumericalScalePrefixId, m => m.MapFrom(x => x.NumericalScalePrefixId))
+                .ForMember(vm => vm.NumericalScaleTypeId, m => m.MapFrom(x => x.NumericalScaleTypeId))
+                .ForMember(vm => vm.RangeMax, m => m.MapFrom(x => x.RangeMax))
+                .ForMember(vm => vm.RangeMin, m => m.MapFrom(x => x.RangeMin))
+                .ForMember(vm => vm.ChartLimiterMax, m => m.MapFrom(x => x.ChartLimiterMax))
+                .ForMember(vm => vm.ChartLimiterMin, m => m.MapFrom(x => x.ChartLimiterMin));
+
             CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>();
             CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueModel>();
         }
