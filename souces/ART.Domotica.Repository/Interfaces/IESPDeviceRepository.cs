@@ -13,13 +13,13 @@
 
         Task<List<ESPDevice>> GetAll();
 
+        Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId);
+
         Task<ESPDevice> GetByPin(string pin);
 
         Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 
         Task<List<string>> GetExistingPins();
-
-        Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId);
 
         Task<List<ESPDevice>> GetListNotInApplication();
 

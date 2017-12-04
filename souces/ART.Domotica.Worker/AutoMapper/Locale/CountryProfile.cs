@@ -11,7 +11,7 @@
 
         public CountryProfile()
         {
-            CreateMap<Country, CountryDetailModel>()
+            CreateMap<Country, CountryGetModel>()
                 .ForMember(vm => vm.CountryId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name))
                 .ForMember(vm => vm.ContinentId, m => m.MapFrom(x => x.ContinentId));

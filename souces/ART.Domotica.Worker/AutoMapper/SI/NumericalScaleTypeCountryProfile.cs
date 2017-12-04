@@ -11,7 +11,7 @@
 
         public NumericalScaleTypeCountryProfile()
         {
-            CreateMap<NumericalScaleTypeCountry, NumericalScaleTypeCountryDetailModel>()
+            CreateMap<NumericalScaleTypeCountry, NumericalScaleTypeCountryGetModel>()
                 .ForMember(vm => vm.NumericalScaleTypeId, m => m.MapFrom(x => x.NumericalScaleTypeId))
                 .ForMember(vm => vm.CountryId, m => m.MapFrom(x => x.CountryId));
         }

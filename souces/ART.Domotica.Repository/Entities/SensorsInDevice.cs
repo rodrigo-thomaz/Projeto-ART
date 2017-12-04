@@ -16,17 +16,17 @@
             get; set;
         }
 
+        public short Ordination
+        {
+            get; set;
+        }
+
         public Sensor Sensor
         {
             get; set;
         }
 
         public Guid SensorId
-        {
-            get; set;
-        }
-
-        public short Ordination
         {
             get; set;
         }

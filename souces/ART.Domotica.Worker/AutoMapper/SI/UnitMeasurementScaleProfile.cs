@@ -11,7 +11,7 @@
 
         public UnitMeasurementScaleProfile()
         {
-            CreateMap<UnitMeasurementScale, UnitMeasurementScaleDetailModel>()
+            CreateMap<UnitMeasurementScale, UnitMeasurementScaleGetModel>()
                 .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId))
                 .ForMember(vm => vm.UnitMeasurementTypeId, m => m.MapFrom(x => x.UnitMeasurementTypeId))
                 .ForMember(vm => vm.NumericalScalePrefixId, m => m.MapFrom(x => x.NumericalScalePrefixId))

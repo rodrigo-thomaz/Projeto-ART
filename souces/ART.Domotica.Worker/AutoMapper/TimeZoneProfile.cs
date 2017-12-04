@@ -11,7 +11,7 @@
 
         public TimeZoneProfile()
         {
-            CreateMap<TimeZone, TimeZoneDetailModel>();
+            CreateMap<TimeZone, TimeZoneGetModel>();
         }
 
         #endregion Constructors

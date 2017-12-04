@@ -11,7 +11,7 @@
 
         public NumericalScalePrefixProfile()
         {
-            CreateMap<NumericalScalePrefix, NumericalScalePrefixDetailModel>()
+            CreateMap<NumericalScalePrefix, NumericalScalePrefixGetModel>()
                 .ForMember(vm => vm.NumericalScalePrefixId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name))
                 .ForMember(vm => vm.Symbol, m => m.MapFrom(x => x.Symbol));

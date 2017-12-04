@@ -13,11 +13,11 @@
 
         Task GetAll(AuthenticatedMessageContract message);
 
+        Task GetAllByApplicationId(AuthenticatedMessageContract message);
+
         Task GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message);
 
         Task<ESPDeviceGetConfigurationsRPCResponseContract> GetConfigurationsRPC(ESPDeviceGetConfigurationsRPCRequestContract contract);
-
-        Task GetAllByApplicationId(AuthenticatedMessageContract message);
 
         Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 

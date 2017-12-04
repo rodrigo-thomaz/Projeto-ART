@@ -11,7 +11,7 @@
 
         public ContinentProfile()
         {
-            CreateMap<Continent, ContinentDetailModel>()
+            CreateMap<Continent, ContinentGetModel>()
                 .ForMember(vm => vm.ContinentId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name));
         }

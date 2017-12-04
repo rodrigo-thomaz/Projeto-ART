@@ -13,9 +13,9 @@
 
         public SensorUnitMeasurementScaleProfile()
         {
-            CreateMap<SensorUnitMeasurementScale, SensorUnitMeasurementScaleDetailModel>();
+            CreateMap<SensorUnitMeasurementScale, SensorUnitMeasurementScaleGetModel>();
             CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>();
-            CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueCompletedModel>();
+            CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueModel>();
         }
 
         #endregion Constructors

@@ -19,16 +19,16 @@
             CreateMap<SensorSetUnitMeasurementRequestContract, SensorSetUnitMeasurementRequestIoTContract>();
             CreateMap<SensorTempDSFamilySetResolutionRequestContract, SensorTempDSFamilySetResolutionRequestIoTContract>();
 
-            CreateMap<SensorSetLabelRequestContract, SensorSetLabelCompletedModel>();
+            CreateMap<SensorSetLabelRequestContract, SensorSetLabelModel>();
 
-            CreateMap<SensorTempDSFamily, SensorTempDSFamilySetResolutionCompletedModel>()
+            CreateMap<SensorTempDSFamily, SensorTempDSFamilySetResolutionModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Sensor.SensorsInDevice.Single().DeviceSensorsId))
                 .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.SensorTempDSFamilyResolutionId));
 
-            CreateMap<SensorTempDSFamilyResolution, SensorTempDSFamilyResolutionDetailModel>();
+            CreateMap<SensorTempDSFamilyResolution, SensorTempDSFamilyResolutionGetModel>();
 
-            CreateMap<SensorsInDevice, SensorTempDSFamilyDetailModel>()
+            CreateMap<SensorsInDevice, SensorTempDSFamilyGetModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.SensorId))
                 .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolutionId))
                 .ForMember(vm => vm.SensorUnitMeasurementScale, m => m.MapFrom(x => x.Sensor.SensorUnitMeasurementScale))

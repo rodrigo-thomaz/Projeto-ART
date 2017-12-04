@@ -17,7 +17,7 @@
 
         public ESPDeviceProfile()
         {
-            CreateMap<ESPDevice, ESPDeviceDetailModel>()
+            CreateMap<ESPDevice, ESPDeviceGetModel>()
                 .ForMember(vm => vm.DeviceInApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
@@ -45,12 +45,12 @@
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));
 
-            CreateMap<ESPDevice, ESPDeviceAdminDetailModel>()
+            CreateMap<ESPDevice, ESPDeviceAdminGetModel>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
                 .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));
 
-            CreateMap<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelCompletedModel>();
+            CreateMap<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelModel>();
         }
 
         #endregion Constructors

@@ -4,14 +4,18 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class InitialCreate1 : DbMigration
     {
-        public override void Up()
-        {
-            AddColumn("dbo.SensorsInDevice", "Order", c => c.Short(nullable: false));
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropColumn("dbo.SensorsInDevice", "Order");
         }
+
+        public override void Up()
+        {
+            AddColumn("dbo.SensorsInDevice", "Order", c => c.Short(nullable: false));
+        }
+
+        #endregion Methods
     }
 }

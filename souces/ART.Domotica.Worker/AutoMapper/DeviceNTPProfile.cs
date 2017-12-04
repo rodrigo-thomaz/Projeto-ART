@@ -13,7 +13,7 @@
 
         public DeviceNTPProfile()
         {
-            CreateMap<DeviceNTP, DeviceNTPDetailModel>();
+            CreateMap<DeviceNTP, DeviceNTPGetModel>();
 
             CreateMap<DeviceNTP, DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract>()
                 .ForMember(vm => vm.UtcTimeOffsetInSecond, m => m.MapFrom(x => x.TimeZone.UtcTimeOffsetInSecond));
@@ -24,8 +24,8 @@
 
             CreateMap<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract, DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract>();
 
-            CreateMap<DeviceNTPSetTimeZoneRequestContract, DeviceNTPSetTimeZoneCompletedModel>();
-            CreateMap<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract, DeviceNTPSetUpdateIntervalInMilliSecondCompletedModel>();
+            CreateMap<DeviceNTPSetTimeZoneRequestContract, DeviceNTPSetTimeZoneModel>();
+            CreateMap<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract, DeviceNTPSetUpdateIntervalInMilliSecondModel>();
         }
 
         #endregion Constructors

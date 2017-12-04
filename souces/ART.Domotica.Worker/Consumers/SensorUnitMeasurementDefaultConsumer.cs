@@ -86,7 +86,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<SensorUnitMeasurementDefault>, List<SensorUnitMeasurementDefaultDetailModel>>(data);
+            var viewModel = Mapper.Map<List<SensorUnitMeasurementDefault>, List<SensorUnitMeasurementDefaultGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorUnitMeasurementDefaultConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

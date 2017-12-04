@@ -100,7 +100,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<SensorTempDSFamilyResolution>, List<SensorTempDSFamilyResolutionDetailModel>>(data);
+            var viewModel = Mapper.Map<List<SensorTempDSFamilyResolution>, List<SensorTempDSFamilyResolutionGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorTempDSFamilyConstants.GetAllResolutionsViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -132,7 +132,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorTempDSFamily, SensorTempDSFamilySetResolutionCompletedModel>(data);
+            var viewModel = Mapper.Map<SensorTempDSFamily, SensorTempDSFamilySetResolutionModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTempDSFamilyConstants.SetResolutionViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

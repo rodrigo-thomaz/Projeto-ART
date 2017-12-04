@@ -112,7 +112,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await domain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnCompletedModel>(message.Contract);
+            var viewModel = Mapper.Map<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceSensorsId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmOnViewCompletedQueueName);
@@ -154,7 +154,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await domain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusCompletedModel>(message.Contract);
+            var viewModel = Mapper.Map<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceSensorsId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmCelsiusViewCompletedQueueName);
@@ -196,7 +196,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await domain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnCompletedModel>(message.Contract);
+            var viewModel = Mapper.Map<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnModel>(message.Contract);
             viewModel.DeviceId = data.SensorsInDevice.Single().DeviceSensorsId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmBuzzerOnViewCompletedQueueName);

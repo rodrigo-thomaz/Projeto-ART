@@ -11,7 +11,7 @@
 
         public SensorUnitMeasurementDefaultProfile()
         {
-            CreateMap<SensorUnitMeasurementDefault, SensorUnitMeasurementDefaultDetailModel>()
+            CreateMap<SensorUnitMeasurementDefault, SensorUnitMeasurementDefaultGetModel>()
                 .ForMember(vm => vm.SensorUnitMeasurementDefaultId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId))

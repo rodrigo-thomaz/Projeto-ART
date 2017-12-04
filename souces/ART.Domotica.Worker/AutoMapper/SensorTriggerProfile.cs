@@ -15,7 +15,7 @@
 
         public SensorTriggerProfile()
         {
-            CreateMap<SensorTrigger, SensorTriggerDetailModel>()
+            CreateMap<SensorTrigger, SensorTriggerGetModel>()
                 .ForMember(vm => vm.AlarmOn, m => m.MapFrom(x => x.TriggerOn))
                 .ForMember(vm => vm.AlarmCelsius, m => m.MapFrom(x => Convert.ToDecimal(x.TriggerValue)))
                 .ForMember(vm => vm.AlarmBuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
@@ -29,9 +29,9 @@
             CreateMap<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusRequestIoTContract>();
             CreateMap<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnRequestIoTContract>();
 
-            CreateMap<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnCompletedModel>();
-            CreateMap<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusCompletedModel>();
-            CreateMap<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnCompletedModel>();
+            CreateMap<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnModel>();
+            CreateMap<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusModel>();
+            CreateMap<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnModel>();
         }
 
         #endregion Constructors

@@ -11,7 +11,7 @@
 
         public SensorDatasheetProfile()
         {
-            CreateMap<SensorDatasheet, SensorDatasheetDetailModel>()
+            CreateMap<SensorDatasheet, SensorDatasheetGetModel>()
                 .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId));
         }

@@ -11,7 +11,7 @@
 
         public SensorTypeProfile()
         {
-            CreateMap<SensorType, SensorTypeDetailModel>()
+            CreateMap<SensorType, SensorTypeGetModel>()
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name));
         }

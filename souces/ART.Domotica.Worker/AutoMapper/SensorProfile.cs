@@ -14,10 +14,10 @@
 
         public SensorProfile()
         {
-            CreateMap<Sensor, SensorDetailModel>()
+            CreateMap<Sensor, SensorGetModel>()
                 .ForMember(vm => vm.SensorUnitMeasurementScale, m => m.MapFrom(x => x.SensorUnitMeasurementScale));
 
-            CreateMap<Sensor, SensorSetUnitMeasurementCompletedModel>()
+            CreateMap<Sensor, SensorSetUnitMeasurementModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceSensorsId));
                 //.ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId));

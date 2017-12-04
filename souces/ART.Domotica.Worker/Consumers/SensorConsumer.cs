@@ -131,7 +131,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<Sensor>, List<SensorDetailModel>>(data);
+            var viewModel = Mapper.Map<List<Sensor>, List<SensorGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorConstants.GetAllByApplicationIdCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -194,7 +194,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await domain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<Sensor, SensorSetUnitMeasurementCompletedModel>(data);
+            var viewModel = Mapper.Map<Sensor, SensorSetUnitMeasurementModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.SetUnitMeasurementViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -235,7 +235,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await sensorDomain.GetDeviceFromSensor(message.Contract.SensorTempDSFamilyId);
 
             //Enviando para View
-            var viewModel = new SensorSetLabelCompletedModel { DeviceId = device.DeviceSensorsId };
+            var viewModel = new SensorSetLabelModel { DeviceId = device.DeviceSensorsId };
             Mapper.Map(data, viewModel);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.SetLabelViewCompletedQueueName);

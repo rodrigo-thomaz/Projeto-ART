@@ -87,7 +87,7 @@ namespace ART.Domotica.Worker.Consumers.SI
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<NumericalScaleTypeCountry>, List<NumericalScaleTypeCountryDetailModel>>(data);
+            var viewModel = Mapper.Map<List<NumericalScaleTypeCountry>, List<NumericalScaleTypeCountryGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, NumericalScaleTypeCountryConstants.GetAllCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

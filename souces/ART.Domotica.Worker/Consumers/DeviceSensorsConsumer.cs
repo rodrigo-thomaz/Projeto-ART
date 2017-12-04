@@ -90,7 +90,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<DeviceSensors>, List<DeviceSensorsDetailModel>>(data);
+            var viewModel = Mapper.Map<List<DeviceSensors>, List<DeviceSensorsGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, DeviceSensorsConstants.GetAllByApplicationIdCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

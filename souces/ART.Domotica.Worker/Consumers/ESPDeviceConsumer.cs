@@ -169,7 +169,7 @@
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceAdminDetailModel>>(data);
+            var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceAdminGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetAllViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -200,7 +200,7 @@
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceDetailModel>>(data);
+            var viewModel = Mapper.Map<List<ESPDevice>, List<ESPDeviceGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetAllByApplicationIdViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -257,7 +257,7 @@
 
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
-            var viewModel = Mapper.Map<ESPDevice, ESPDeviceDetailModel>(data);
+            var viewModel = Mapper.Map<ESPDevice, ESPDeviceGetModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
@@ -429,7 +429,7 @@
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelCompletedModel>(message.Contract);
+            var viewModel = Mapper.Map<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelModel>(message.Contract);
             viewModel.DeviceId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetLabelViewCompletedQueueName);

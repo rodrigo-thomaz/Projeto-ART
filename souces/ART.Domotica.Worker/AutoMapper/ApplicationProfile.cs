@@ -11,7 +11,7 @@
 
         public ApplicationProfile()
         {
-            CreateMap<Application, ApplicationDetailModel>()
+            CreateMap<Application, ApplicationGetModel>()
                 .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.Id));
         }
 

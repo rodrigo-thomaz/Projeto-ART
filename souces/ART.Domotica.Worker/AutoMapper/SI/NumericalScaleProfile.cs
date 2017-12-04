@@ -11,7 +11,7 @@
 
         public NumericalScaleProfile()
         {
-            CreateMap<NumericalScale, NumericalScaleDetailModel>()
+            CreateMap<NumericalScale, NumericalScaleGetModel>()
                 .ForMember(vm => vm.NumericalScalePrefixId, m => m.MapFrom(x => x.NumericalScalePrefixId))
                 .ForMember(vm => vm.NumericalScaleTypeId, m => m.MapFrom(x => x.NumericalScaleTypeId))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name))

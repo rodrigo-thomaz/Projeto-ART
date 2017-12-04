@@ -12,7 +12,7 @@
 
         public UnitMeasurementProfile()
         {
-            CreateMap<UnitMeasurement, UnitMeasurementDetailModel>()
+            CreateMap<UnitMeasurement, UnitMeasurementGetModel>()
                 .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.UnitMeasurementTypeId, m => m.MapFrom(x => x.UnitMeasurementTypeId))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name))

@@ -14,11 +14,11 @@
 
         Task<List<ESPDevice>> GetAll();
 
+        Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId);
+
         Task<ESPDevice> GetByPin(string pin);
 
         Task<ESPDevice> GetConfigurations(int chipId, int flashChipId, string macAddress);
-
-        Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId);
 
         Task<ESPDevice> InsertInApplication(string pin, Guid createByApplicationUserId);
 

@@ -1,10 +1,10 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
-    using System.Collections.Generic;
 
     public interface ISensorsInDeviceDomain
     {

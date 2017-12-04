@@ -11,7 +11,7 @@
 
         public NumericalScaleTypeProfile()
         {
-            CreateMap<NumericalScaleType, NumericalScaleTypeDetailModel>()
+            CreateMap<NumericalScaleType, NumericalScaleTypeGetModel>()
                 .ForMember(vm => vm.NumericalScaleTypeId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name));
         }

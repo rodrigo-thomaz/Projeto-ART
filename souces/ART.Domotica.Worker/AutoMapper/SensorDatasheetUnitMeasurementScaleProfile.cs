@@ -11,7 +11,7 @@
 
         public SensorDatasheetUnitMeasurementScaleProfile()
         {
-            CreateMap<SensorDatasheetUnitMeasurementScale, SensorDatasheetUnitMeasurementScaleDetailModel>()
+            CreateMap<SensorDatasheetUnitMeasurementScale, SensorDatasheetUnitMeasurementScaleGetModel>()
                 .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId))
