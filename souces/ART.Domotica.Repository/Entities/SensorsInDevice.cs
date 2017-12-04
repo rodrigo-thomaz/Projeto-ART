@@ -6,12 +6,12 @@
     {
         #region Properties
 
-        public DeviceBase DeviceBase
+        public DeviceSensors DeviceSensors
         {
             get; set;
         }
 
-        public Guid DeviceBaseId
+        public Guid DeviceSensorsId
         {
             get; set;
         }

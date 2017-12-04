@@ -19,7 +19,7 @@
 
             CreateMap<Sensor, SensorSetUnitMeasurementCompletedModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceBaseId));
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceSensorsId));
                 //.ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId));
 
             CreateMap<Sensor, SensorGetAllByDeviceInApplicationIdResponseIoTContract>()

@@ -37,7 +37,7 @@ namespace ART.Domotica.Repository.Repositories
             return await _context.Sensor
                 .Include(x => x.SensorTempDSFamily.SensorTempDSFamilyResolution)
                 .Include(x => x.SensorUnitMeasurementScale)
-                .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceBaseId == deviceId) != null)
+                .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceSensors.Id == deviceId) != null)
                 .ToListAsync();
         }
     }

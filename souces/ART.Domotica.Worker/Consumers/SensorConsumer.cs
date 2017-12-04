@@ -235,7 +235,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await sensorDomain.GetDeviceFromSensor(message.Contract.SensorTempDSFamilyId);
 
             //Enviando para View
-            var viewModel = new SensorSetLabelCompletedModel { DeviceId = device.DeviceBaseId };
+            var viewModel = new SensorSetLabelCompletedModel { DeviceId = device.DeviceSensorsId };
             Mapper.Map(data, viewModel);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.SetLabelViewCompletedQueueName);

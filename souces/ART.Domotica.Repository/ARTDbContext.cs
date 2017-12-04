@@ -29,11 +29,6 @@
             get; set;
         }
 
-        public DbSet<DeviceSensors> DeviceSensors
-        {
-            get; set;
-        }
-
         public DbSet<Application> Application
         {
             get; set;
@@ -70,6 +65,11 @@
         }
 
         public DbSet<DeviceNTP> DeviceNTP
+        {
+            get; set;
+        }
+
+        public DbSet<DeviceSensors> DeviceSensors
         {
             get; set;
         }

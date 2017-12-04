@@ -525,6 +525,7 @@
             var espDevice1 = context.ESPDevice
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
+                .Include(x => x.DeviceSensors)
                 .SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
 
             if (espDevice1 == null)
@@ -550,6 +551,10 @@
                     {
                         TimeZoneId = timeZoneBrasilia.Id, // Cada hora são 3600 segundos
                         UpdateIntervalInMilliSecond = 60000,
+                    },
+                    DeviceSensors = new DeviceSensors
+                    {
+                        PublishIntervalInSeconds = 5,
                     },
                 };
 
@@ -579,6 +584,13 @@
                         UpdateIntervalInMilliSecond = 60000,
                     };
                 }
+                if (espDevice1.DeviceSensors == null)
+                {
+                    espDevice1.DeviceSensors = new DeviceSensors
+                    {
+                        PublishIntervalInSeconds = 5,
+                    };
+                }
             }
 
             context.SaveChanges();
@@ -590,9 +602,7 @@
             var sensorsInDevice_2_1 = new SensorsInDevice
             {
                 SensorId = sensor_2_1.Id,
-                Sensor = sensor_2_1,
-                DeviceBaseId = espDevice1.Id,
-                DeviceBase = espDevice1,
+                DeviceSensorsId = espDevice1.DeviceSensors.Id,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_1);
@@ -600,9 +610,7 @@
             var sensorsInDevice_2_2 = new SensorsInDevice
             {
                 SensorId = sensor_2_2.Id,
-                Sensor = sensor_2_2,
-                DeviceBaseId = espDevice1.Id,
-                DeviceBase = espDevice1,
+                DeviceSensorsId = espDevice1.DeviceSensors.Id,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_2);
@@ -610,9 +618,7 @@
             var sensorsInDevice_3_1 = new SensorsInDevice
             {
                 SensorId = sensor_3_1.Id,
-                Sensor = sensor_3_1,
-                DeviceBaseId = espDevice1.Id,
-                DeviceBase = espDevice1,
+                DeviceSensorsId = espDevice1.DeviceSensors.Id,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_1);
@@ -620,9 +626,7 @@
             var sensorsInDevice_3_2 = new SensorsInDevice
             {
                 SensorId = sensor_3_2.Id,
-                Sensor = sensor_3_2,
-                DeviceBaseId = espDevice1.Id,
-                DeviceBase = espDevice1,
+                DeviceSensorsId = espDevice1.DeviceSensors.Id,
             };
 
             context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_2);

@@ -27,7 +27,7 @@
             //PublishIntervalInSeconds
             Property(x => x.PublishIntervalInSeconds)
                 .HasColumnOrder(1)
-                .IsRequired();            
+                .IsRequired();
         }
 
         #endregion Constructors

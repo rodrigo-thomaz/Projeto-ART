@@ -91,7 +91,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueCompletedModel>(message.Contract);
-            viewModel.DeviceId = device.DeviceBaseId;
+            viewModel.DeviceId = device.DeviceSensorsId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetValueViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

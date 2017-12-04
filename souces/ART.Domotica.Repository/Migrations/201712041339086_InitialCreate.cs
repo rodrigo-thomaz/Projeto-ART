@@ -19,6 +19,8 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.DeviceInApplication", "DeviceBaseId", "dbo.DeviceBase");
             DropForeignKey("dbo.SensorsInDevice", "SensorId", "dbo.Sensor");
             DropForeignKey("dbo.SensorTrigger", "SensorId", "dbo.Sensor");
+            DropForeignKey("dbo.SensorTempDSFamily", "SensorTempDSFamilyResolutionId", "dbo.SensorTempDSFamilyResolution");
+            DropForeignKey("dbo.SensorTempDSFamily", "Id", "dbo.Sensor");
             DropForeignKey("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
             DropForeignKey("dbo.SensorDatasheet", "SensorTypeId", "dbo.SensorType");
             DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
@@ -35,9 +37,8 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("Locale.Country", "ContinentId", "Locale.Continent");
             DropForeignKey("SI.NumericalScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
             DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("dbo.DSFamilyTempSensor", "Id", "dbo.Sensor");
-            DropForeignKey("dbo.DSFamilyTempSensor", "DSFamilyTempSensorResolutionId", "dbo.DSFamilyTempSensorResolution");
-            DropForeignKey("dbo.SensorsInDevice", "DeviceBaseId", "dbo.DeviceBase");
+            DropForeignKey("dbo.SensorsInDevice", "DeviceSensorsId", "dbo.DeviceSensors");
+            DropForeignKey("dbo.DeviceSensors", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceNTP", "TimeZoneId", "dbo.TimeZone");
             DropForeignKey("dbo.DeviceNTP", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceMQ", "Id", "dbo.DeviceBase");
@@ -59,6 +60,11 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.HardwaresInProject", new[] { "CreateByApplicationUserId" });
             DropIndex("dbo.HardwaresInProject", "IX_Unique_DeviceInApplicationId_ProjectId");
             DropIndex("dbo.SensorTrigger", new[] { "SensorId" });
+            DropIndex("dbo.SensorTempDSFamilyResolution", new[] { "Bits" });
+            DropIndex("dbo.SensorTempDSFamilyResolution", new[] { "Name" });
+            DropIndex("dbo.SensorTempDSFamily", new[] { "SensorTempDSFamilyResolutionId" });
+            DropIndex("dbo.SensorTempDSFamily", new[] { "DeviceAddress" });
+            DropIndex("dbo.SensorTempDSFamily", new[] { "Id" });
             DropIndex("dbo.SensorType", new[] { "Name" });
             DropIndex("SI.UnitMeasurementType", new[] { "Name" });
             DropIndex("SI.UnitMeasurement", new[] { "Symbol" });
@@ -82,14 +88,10 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
             DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
             DropIndex("dbo.SensorDatasheet", new[] { "SensorTypeId" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Bits" });
-            DropIndex("dbo.DSFamilyTempSensorResolution", new[] { "Name" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "DSFamilyTempSensorResolutionId" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "DeviceAddress" });
-            DropIndex("dbo.DSFamilyTempSensor", new[] { "Id" });
             DropIndex("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" });
-            DropIndex("dbo.SensorsInDevice", new[] { "DeviceBaseId" });
             DropIndex("dbo.SensorsInDevice", new[] { "SensorId" });
+            DropIndex("dbo.SensorsInDevice", new[] { "DeviceSensorsId" });
+            DropIndex("dbo.DeviceSensors", new[] { "Id" });
             DropIndex("dbo.DeviceNTP", new[] { "TimeZoneId" });
             DropIndex("dbo.DeviceNTP", new[] { "Id" });
             DropIndex("dbo.DeviceMQ", new[] { "Topic" });
@@ -110,6 +112,8 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.Project");
             DropTable("dbo.HardwaresInProject");
             DropTable("dbo.SensorTrigger");
+            DropTable("dbo.SensorTempDSFamilyResolution");
+            DropTable("dbo.SensorTempDSFamily");
             DropTable("dbo.SensorType");
             DropTable("SI.UnitMeasurementType");
             DropTable("SI.UnitMeasurement");
@@ -124,10 +128,9 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("SI.UnitMeasurementScale");
             DropTable("dbo.SensorDatasheetUnitMeasurementScale");
             DropTable("dbo.SensorDatasheet");
-            DropTable("dbo.DSFamilyTempSensorResolution");
-            DropTable("dbo.DSFamilyTempSensor");
             DropTable("dbo.Sensor");
             DropTable("dbo.SensorsInDevice");
+            DropTable("dbo.DeviceSensors");
             DropTable("dbo.TimeZone");
             DropTable("dbo.DeviceNTP");
             DropTable("dbo.DeviceMQ");
@@ -258,17 +261,28 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id);
 
             CreateTable(
+                "dbo.DeviceSensors",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        PublishIntervalInSeconds = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeviceBase", t => t.Id)
+                .Index(t => t.Id);
+
+            CreateTable(
                 "dbo.SensorsInDevice",
                 c => new
                     {
+                        DeviceSensorsId = c.Guid(nullable: false),
                         SensorId = c.Guid(nullable: false),
-                        DeviceBaseId = c.Guid(nullable: false),
                     })
-                .PrimaryKey(t => new { t.SensorId, t.DeviceBaseId })
-                .ForeignKey("dbo.DeviceBase", t => t.DeviceBaseId)
+                .PrimaryKey(t => new { t.DeviceSensorsId, t.SensorId })
+                .ForeignKey("dbo.DeviceSensors", t => t.DeviceSensorsId)
                 .ForeignKey("dbo.Sensor", t => t.SensorId)
-                .Index(t => t.SensorId, unique: true)
-                .Index(t => t.DeviceBaseId);
+                .Index(t => t.DeviceSensorsId)
+                .Index(t => t.SensorId, unique: true);
 
             CreateTable(
                 "dbo.Sensor",
@@ -283,38 +297,6 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
                 .Index(t => new { t.SensorDatasheetId, t.SensorTypeId });
-
-            CreateTable(
-                "dbo.DSFamilyTempSensor",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        DeviceAddress = c.String(nullable: false, maxLength: 32),
-                        Family = c.String(nullable: false, maxLength: 10),
-                        DSFamilyTempSensorResolutionId = c.Byte(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DSFamilyTempSensorResolution", t => t.DSFamilyTempSensorResolutionId)
-                .ForeignKey("dbo.Sensor", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.DeviceAddress, unique: true)
-                .Index(t => t.DSFamilyTempSensorResolutionId);
-
-            CreateTable(
-                "dbo.DSFamilyTempSensorResolution",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Bits = c.Byte(nullable: false),
-                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
-                        DecimalPlaces = c.Byte(nullable: false),
-                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.Bits, unique: true);
 
             CreateTable(
                 "dbo.SensorDatasheet",
@@ -506,6 +488,38 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
+
+            CreateTable(
+                "dbo.SensorTempDSFamily",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        DeviceAddress = c.String(nullable: false, maxLength: 32),
+                        Family = c.String(nullable: false, maxLength: 10),
+                        SensorTempDSFamilyResolutionId = c.Byte(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sensor", t => t.Id)
+                .ForeignKey("dbo.SensorTempDSFamilyResolution", t => t.SensorTempDSFamilyResolutionId)
+                .Index(t => t.Id)
+                .Index(t => t.DeviceAddress, unique: true)
+                .Index(t => t.SensorTempDSFamilyResolutionId);
+
+            CreateTable(
+                "dbo.SensorTempDSFamilyResolution",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Bits = c.Byte(nullable: false),
+                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
+                        DecimalPlaces = c.Byte(nullable: false),
+                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.Bits, unique: true);
 
             CreateTable(
                 "dbo.SensorTrigger",
