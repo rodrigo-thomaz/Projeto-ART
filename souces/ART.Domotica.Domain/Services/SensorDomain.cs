@@ -175,7 +175,7 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("UnitMeasurement not found");
             }
 
-            dsFamilyTempSensorEntity.UnitMeasurementId = unitMeasurementEntity.Id;
+            //dsFamilyTempSensorEntity.UnitMeasurementId = unitMeasurementEntity.Id;
 
             await _sensorRepository.Update(dsFamilyTempSensorEntity);
 

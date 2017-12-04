@@ -22,12 +22,7 @@
         public string Name
         {
             get; set;
-        }
-
-        public ICollection<Sensor> Sensors
-        {
-            get; set;
-        }
+        }        
 
         public string Symbol
         {

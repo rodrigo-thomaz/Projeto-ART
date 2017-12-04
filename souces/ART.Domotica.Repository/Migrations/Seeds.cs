@@ -121,8 +121,7 @@
             if (sensor_1 == null)
             {
                 sensor_1 = new Sensor
-                {
-                    UnitMeasurementId = UnitMeasurementEnum.Celsius,
+                {                    
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {
                         DeviceAddress = sensor_1_Address,
@@ -193,8 +192,6 @@
             {
                 sensor_2_1 = new Sensor
                 {
-
-                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {
                         DeviceAddress = sensor_2_1_Address,
@@ -264,7 +261,6 @@
             {
                 sensor_2_2 = new Sensor
                 {
-                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {
                         DeviceAddress = sensor_2_2_Address,
@@ -334,7 +330,6 @@
             {
                 sensor_3_1 = new Sensor
                 {
-                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     Label = "Sensor 3",
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {
@@ -404,7 +399,6 @@
             {
                 sensor_3_2 = new Sensor
                 {
-                    UnitMeasurementId = UnitMeasurementEnum.Fahrenheit,
                     DSFamilyTempSensor = new DSFamilyTempSensor
                     {
                         DeviceAddress = sensor_3_2_Address,

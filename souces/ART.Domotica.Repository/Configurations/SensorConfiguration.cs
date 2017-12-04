@@ -26,27 +26,9 @@
                 .HasMaxLength(50)
                 .IsRequired();
 
-            //UnitMeasurement
-            HasRequired(x => x.UnitMeasurement)
-                .WithMany(x => x.Sensors)
-                .HasForeignKey(x => new
-                {
-                    x.UnitMeasurementId,
-                    x.UnitMeasurementTypeId,
-                })
-                .WillCascadeOnDelete(false);
-
-            //UnitMeasurementId
-            Property(x => x.UnitMeasurementId)
-                .HasColumnOrder(2);
-
-            //UnitMeasurementTypeId
-            Property(x => x.UnitMeasurementTypeId)
-                .HasColumnOrder(3);
-
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(5)
+                .HasColumnOrder(2)
                 .IsRequired();
         }
 

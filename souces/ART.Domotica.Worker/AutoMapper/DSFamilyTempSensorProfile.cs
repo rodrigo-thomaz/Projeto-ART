@@ -32,7 +32,7 @@
                 .ForMember(vm => vm.DSFamilyTempSensorId, m => m.MapFrom(x => x.SensorId))
                 .ForMember(vm => vm.DSFamilyTempSensorResolutionId, m => m.MapFrom(x => x.Sensor.DSFamilyTempSensor.DSFamilyTempSensorResolutionId))
                 .ForMember(vm => vm.SensorChartLimiter, m => m.MapFrom(x => x.Sensor.SensorChartLimiter))
-                .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.Sensor.UnitMeasurementId))
+                //.ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.Sensor.UnitMeasurementId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Sensor.Label))
                 .ForMember(vm => vm.HighAlarm, m => m.ResolveUsing(src => {
                     if (src.Sensor.SensorTriggers == null) return null;
