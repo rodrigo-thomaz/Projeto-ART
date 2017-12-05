@@ -33,7 +33,7 @@
             get; set;
         }
 
-        public DeviceInApplication DeviceInApplication
+        public HardwareInApplication HardwareInApplication
         {
             get; set;
         }

@@ -23,7 +23,7 @@ namespace ART.Domotica.Worker.Consumers
         #region private fields
 
         private readonly EventingBasicConsumer _getAllByApplicationIdConsumer;
-        private readonly EventingBasicConsumer _getAllByDeviceInApplicationIdConsumer;
+        private readonly EventingBasicConsumer _getAllByHardwareInApplicationIdConsumer;
         private readonly EventingBasicConsumer _setUnitMeasurementConsumer;
         private readonly EventingBasicConsumer _setLabelConsumer;
 
@@ -38,7 +38,7 @@ namespace ART.Domotica.Worker.Consumers
         public SensorConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
             _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
-            _getAllByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);
+            _getAllByHardwareInApplicationIdConsumer = new EventingBasicConsumer(_model);
             _setUnitMeasurementConsumer = new EventingBasicConsumer(_model);
             _setLabelConsumer = new EventingBasicConsumer(_model);
 
@@ -84,25 +84,25 @@ namespace ART.Domotica.Worker.Consumers
                 , arguments: null);
 
             _model.QueueDeclare(
-                queue: SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
+                queue: SensorConstants.GetAllByHardwareInApplicationIdIoTQueueName
               , durable: false
               , exclusive: false
               , autoDelete: false
               , arguments: null);
 
             _model.QueueBind(
-                  queue: SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
+                  queue: SensorConstants.GetAllByHardwareInApplicationIdIoTQueueName
                 , exchange: "amq.topic"
-                , routingKey: GetApplicationRoutingKeyForAllIoT(SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName)
+                , routingKey: GetApplicationRoutingKeyForAllIoT(SensorConstants.GetAllByHardwareInApplicationIdIoTQueueName)
                 , arguments: null);
 
             _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;
-            _getAllByDeviceInApplicationIdConsumer.Received += GetAllByDeviceInApplicationIdReceived;
+            _getAllByHardwareInApplicationIdConsumer.Received += GetAllByHardwareInApplicationIdReceived;
             _setUnitMeasurementConsumer.Received += SetUnitMeasurementReceived;
             _setLabelConsumer.Received += SetLabelReceived;
 
             _model.BasicConsume(SensorConstants.GetAllByApplicationIdQueueName, false, _getAllByApplicationIdConsumer);
-            _model.BasicConsume(SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName, false, _getAllByDeviceInApplicationIdConsumer);
+            _model.BasicConsume(SensorConstants.GetAllByHardwareInApplicationIdIoTQueueName, false, _getAllByHardwareInApplicationIdConsumer);
             _model.BasicConsume(SensorConstants.SetLabelQueueName, false, _setLabelConsumer);
             _model.BasicConsume(SensorConstants.SetUnitMeasurementQueueName, false, _setUnitMeasurementConsumer);
         }
@@ -140,12 +140,12 @@ namespace ART.Domotica.Worker.Consumers
         }
 
 
-        private void GetAllByDeviceInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
+        private void GetAllByHardwareInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetAllByDeviceInApplicationIdReceivedAsync(sender, e));
+            Task.WaitAll(GetAllByHardwareInApplicationIdReceivedAsync(sender, e));
         }
 
-        private async Task GetAllByDeviceInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetAllByHardwareInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
@@ -156,7 +156,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByHardwareId(requestContract.DeviceId);
 
             var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.GetAllByDeviceInApplicationId(applicationMQ.Id, requestContract.DeviceId);
+            var data = await domain.GetAllByHardwareInApplicationId(applicationMQ.Id, requestContract.DeviceId);
                         
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId);
@@ -164,10 +164,10 @@ namespace ART.Domotica.Worker.Consumers
             var exchange = "amq.topic";
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<List<Sensor>, List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
-            var deviceMessage = new MessageIoTContract<List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
+            var iotContract = Mapper.Map<List<Sensor>, List<SensorGetAllByHardwareInApplicationIdResponseIoTContract>>(data);
+            var deviceMessage = new MessageIoTContract<List<SensorGetAllByHardwareInApplicationIdResponseIoTContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorConstants.GetAllByHardwareInApplicationIdCompletedIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

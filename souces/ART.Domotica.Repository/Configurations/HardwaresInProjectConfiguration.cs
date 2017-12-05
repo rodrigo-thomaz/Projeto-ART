@@ -30,7 +30,7 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("IX_Unique_DeviceInApplication_ProjectId", 0) { IsUnique = true },
+                        new IndexAttribute("IX_Unique_HardwareInApplication_ProjectId", 0) { IsUnique = true },
                     }));
 
             //DeviceId
@@ -41,7 +41,7 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("IX_Unique_DeviceInApplication_ProjectId", 1) { IsUnique = true },
+                        new IndexAttribute("IX_Unique_HardwareInApplication_ProjectId", 1) { IsUnique = true },
                     }));
 
             //ProjectId
@@ -52,11 +52,11 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("IX_Unique_DeviceInApplication_ProjectId", 2) { IsUnique = true },
+                        new IndexAttribute("IX_Unique_HardwareInApplication_ProjectId", 2) { IsUnique = true },
                     }));
 
-            //DeviceInApplication
-            HasRequired(x => x.DeviceInApplication)
+            //HardwareInApplication
+            HasRequired(x => x.HardwareInApplication)
                 .WithMany(x => x.HardwaresInProject)
                 .HasForeignKey(x => new
                 {

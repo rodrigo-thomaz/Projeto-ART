@@ -18,7 +18,7 @@
         #region Fields
 
         private readonly IESPDeviceRepository _espDeviceRepository;
-        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
+        private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
 
@@ -33,7 +33,7 @@
             _espDeviceRepository = new ESPDeviceRepository(context);
             _applicationRepository = new ApplicationRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
-            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
+            _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
         }
 
         #endregion Constructors
@@ -78,7 +78,7 @@
                 throw new Exception("ApplicationUser not found");
             }            
 
-            await _deviceInApplicationRepository.Insert(new DeviceInApplication
+            await _hardwareInApplicationRepository.Insert(new HardwareInApplication
             {
                 ApplicationId = applicationUserEntity.ApplicationId,
                 HardwareId = hardwareEntity.Id,
@@ -91,16 +91,16 @@
 
         public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId)
         {
-            DeviceInApplication deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId);
+            HardwareInApplication hardwareInApplicationEntity = await _hardwareInApplicationRepository.GetByKey(applicationId, deviceId);
             
-            if (deviceInApplicationEntity == null)
+            if (hardwareInApplicationEntity == null)
             {
-                throw new Exception("DeviceInApplication not found");
+                throw new Exception("HardwareInApplication not found");
             }
 
-            await _deviceInApplicationRepository.Delete(deviceInApplicationEntity);
+            await _hardwareInApplicationRepository.Delete(hardwareInApplicationEntity);
 
-            var hardwareEntity = await _espDeviceRepository.GetByKey(deviceInApplicationEntity.HardwareId);
+            var hardwareEntity = await _espDeviceRepository.GetByKey(hardwareInApplicationEntity.HardwareId);
 
             return hardwareEntity;
         }
@@ -131,7 +131,7 @@
 
         public async Task<ESPDevice> GetConfigurations(int chipId, int flashChipId, string macAddress)
         {
-            var data = await _espDeviceRepository.GetDeviceInApplication(chipId, flashChipId, macAddress);            
+            var data = await _espDeviceRepository.GetHardwareInApplication(chipId, flashChipId, macAddress);            
 
             if (data == null)
             {

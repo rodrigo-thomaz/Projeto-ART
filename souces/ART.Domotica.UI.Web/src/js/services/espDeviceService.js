@@ -79,9 +79,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         });
     };     
 
-    var deleteFromApplication = function (deviceInApplicationId) {
+    var deleteFromApplication = function (hardwareInApplicationId) {
         var data = {
-            deviceInApplicationId: deviceInApplicationId
+            hardwareInApplicationId: hardwareInApplicationId
         };
         return $http.post(serviceBase + deleteFromApplicationApiUri, data).then(function (results) {
             //alert('envio bem sucedido');
@@ -103,7 +103,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < serviceFactory.devices.length; i++) {
             var device = serviceFactory.devices[i];
-            if (device.deviceInApplicationId === data.deviceInApplicationId) {
+            if (device.hardwareInApplicationId === data.hardwareInApplicationId) {
                 device.epochTimeUtc = data.epochTimeUtc;
                 device.wifiQuality = data.wifiQuality;
                 device.localIPAddress = data.localIPAddress;
@@ -202,7 +202,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < contextScope.devices.length; i++) {
-            if (contextScope.devices[i].deviceInApplicationId === data.deviceInApplicationId) {
+            if (contextScope.devices[i].hardwareInApplicationId === data.hardwareInApplicationId) {
                 contextScope.devices.splice(i, 1);
                 $rootScope.$emit(deleteFromApplicationCompletedEventName);
                 break;

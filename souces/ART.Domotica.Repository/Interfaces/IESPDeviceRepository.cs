@@ -17,9 +17,9 @@
 
         Task<ESPDevice> GetByPin(string pin);
 
-        Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
-
         Task<List<string>> GetExistingPins();
+
+        Task<ESPDevice> GetHardwareInApplication(int chipId, int flashChipId, string macAddress);
 
         Task<List<ESPDevice>> GetListNotInApplication();
 

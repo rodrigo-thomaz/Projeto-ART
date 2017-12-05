@@ -2,7 +2,7 @@
 app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$modal', 'uiGridConstants', '$rootScope', 'toaster', 'espDeviceService', function ($scope, $timeout, $log, $modal, uiGridConstants, $rootScope, toaster, espDeviceService) {    
         
     var onDeleteFromApplicationClick = function (espDevice) {
-        espDeviceService.deleteFromApplication(espDevice.deviceInApplicationId);
+        espDeviceService.deleteFromApplication(espDevice.hardwareInApplicationId);
     }
 
     var onDeleteFromApplicationCompleted = function () {
@@ -22,7 +22,7 @@ app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$mo
         rowHeight: 36,
         data: [],
         columnDefs: [
-            { name: 'DeviceInApplicationId', field: 'deviceInApplicationId', width: 270 },
+            { name: 'HardwareInApplicationId', field: 'hardwareInApplicationId', width: 270 },
             { name: 'DeviceId', field: 'deviceId', width: 270 },
             { name: 'ChipId', field: 'chipId', width: 100 },
             { name: 'FlashChipId', field: 'flashChipId', width: 120 },

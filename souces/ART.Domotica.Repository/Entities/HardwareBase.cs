@@ -14,7 +14,7 @@
             get; set;
         }
 
-        public ICollection<DeviceInApplication> DevicesInApplication
+        public ICollection<HardwareInApplication> DevicesInApplication
         {
             get; set;
         }

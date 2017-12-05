@@ -6,11 +6,11 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IDeviceInApplicationRepository : IRepository<ARTDbContext, DeviceInApplication>
+    public interface IHardwareInApplicationRepository : IRepository<ARTDbContext, HardwareInApplication>
     {
         #region Methods
 
-        Task<DeviceInApplication> GetByKey(Guid applicationId, Guid deviceId);
+        Task<HardwareInApplication> GetByKey(Guid applicationId, Guid deviceId);
 
         #endregion Methods
     }

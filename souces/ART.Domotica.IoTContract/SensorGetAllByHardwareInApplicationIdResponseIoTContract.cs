@@ -4,7 +4,7 @@
 
     using ART.Domotica.Enums.SI;
 
-    public class SensorGetAllByDeviceInApplicationIdResponseIoTContract
+    public class SensorGetAllByHardwareInApplicationIdResponseIoTContract
     {
         #region Properties
 

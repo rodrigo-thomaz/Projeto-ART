@@ -23,7 +23,7 @@ namespace ART.Domotica.Domain.Services
         private readonly ISensorRepository _sensorRepository;
         private readonly ISensorTriggerRepository _sensorTriggerRepository;
         private readonly IUnitMeasurementRepository _unitMeasurementRepository;
-        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
+        private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
 
         #endregion
 
@@ -36,7 +36,7 @@ namespace ART.Domotica.Domain.Services
             _sensorRepository = new SensorRepository(context);
             _sensorTriggerRepository = new SensorTriggerRepository(context);
             _unitMeasurementRepository = new UnitMeasurementRepository(context);
-            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
+            _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
         }
 
         #endregion
@@ -182,16 +182,16 @@ namespace ART.Domotica.Domain.Services
             return sensorTempDSFamilyEntity;
         }
 
-        public async Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId)
+        public async Task<List<Sensor>> GetAllByHardwareInApplicationId(Guid applicationId, Guid deviceId)
         {
-            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId);
+            var hardwareInApplication = await _hardwareInApplicationRepository.GetByKey(applicationId, deviceId);
 
-            if (deviceInApplication == null)
+            if (hardwareInApplication == null)
             {
-                throw new Exception("DeviceInApplication not found");
+                throw new Exception("HardwareInApplication not found");
             }
 
-            return await _sensorRepository.GetAllByDeviceId(deviceInApplication.HardwareId);
+            return await _sensorRepository.GetAllByDeviceId(hardwareInApplication.HardwareId);
         }
 
         #endregion
