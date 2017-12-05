@@ -158,21 +158,9 @@
     <Compile Include="Interfaces\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201712051034518_InitialCreate.cs" />
-    <Compile Include="Migrations\201712051034518_InitialCreate.Designer.cs">
-      <DependentUpon>201712051034518_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712051115409_InitialCreate1.cs" />
-    <Compile Include="Migrations\201712051115409_InitialCreate1.Designer.cs">
-      <DependentUpon>201712051115409_InitialCreate1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712051243092_InitialCreate2.cs" />
-    <Compile Include="Migrations\201712051243092_InitialCreate2.Designer.cs">
-      <DependentUpon>201712051243092_InitialCreate2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712051248571_InitialCreate3.cs" />
-    <Compile Include="Migrations\201712051248571_InitialCreate3.Designer.cs">
-      <DependentUpon>201712051248571_InitialCreate3.cs</DependentUpon>
+    <Compile Include="Migrations\201712051305314_InitialCreate.cs" />
+    <Compile Include="Migrations\201712051305314_InitialCreate.Designer.cs">
+      <DependentUpon>201712051305314_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -256,17 +244,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712051034518_InitialCreate.resx">
-      <DependentUpon>201712051034518_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712051115409_InitialCreate1.resx">
-      <DependentUpon>201712051115409_InitialCreate1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712051243092_InitialCreate2.resx">
-      <DependentUpon>201712051243092_InitialCreate2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712051248571_InitialCreate3.resx">
-      <DependentUpon>201712051248571_InitialCreate3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712051305314_InitialCreate.resx">
+      <DependentUpon>201712051305314_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

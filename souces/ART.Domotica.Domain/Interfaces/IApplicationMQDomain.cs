@@ -12,7 +12,7 @@
 
         Task<ApplicationMQ> GetByApplicationUserId(AuthenticatedMessageContract message);
 
-        Task<ApplicationMQ> GetByDeviceId(Guid deviceId);
+        Task<ApplicationMQ> GetByHardwareId(Guid hardwareId);
 
         #endregion Methods
     }

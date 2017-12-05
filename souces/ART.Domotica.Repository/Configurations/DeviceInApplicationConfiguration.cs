@@ -17,7 +17,7 @@
             HasKey(x => new
             {
                 x.ApplicationId,
-                x.DeviceId,
+                x.HardwareId,
             });
 
             //ApplicationId
@@ -32,21 +32,21 @@
                 .HasForeignKey(x => x.ApplicationId)
                 .WillCascadeOnDelete(false);
 
-            //DeviceId
-            Property(x => x.DeviceId)
+            //HardwareId
+            Property(x => x.HardwareId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute ("IX_Unique_DeviceId") { IsUnique = true },
+                        new IndexAttribute ("IX_Unique_HardwareId") { IsUnique = true },
                     }));
 
-            //DeviceBase
-            HasRequired(x => x.DeviceBase)
+            //HardwareBase
+            HasRequired(x => x.HardwareBase)
                 .WithMany(x => x.DevicesInApplication)
-                .HasForeignKey(x => x.DeviceId)
+                .HasForeignKey(x => x.HardwareId)
                 .WillCascadeOnDelete(false);
 
             //CreateDate

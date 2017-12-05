@@ -330,7 +330,7 @@
             if (data.DevicesInApplication != null && data.DevicesInApplication.Any())
             {
                 var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-                var applicationMQ = await applicationMQDomain.GetByDeviceId(data.Id);
+                var applicationMQ = await applicationMQDomain.GetByHardwareId(data.Id);
                 applicationTopic = applicationMQ.Topic;
             }             
 

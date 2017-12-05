@@ -34,12 +34,12 @@
             get; set;
         }
 
-        public DeviceBase DeviceBase
+        public HardwareBase HardwareBase
         {
             get; set;
         }
 
-        public Guid DeviceId
+        public Guid HardwareId
         {
             get; set;
         }

@@ -20,11 +20,11 @@
 
         #endregion Constructors
 
-        public async Task<ApplicationMQ> GetByDeviceId(Guid deviceId)
+        public async Task<ApplicationMQ> GetByHardwareId(Guid hardwareId)
         {
             IQueryable<ApplicationMQ> query = from abs in _context.ApplicationMQ
                                               join dia in _context.DeviceInApplication on abs.Id equals dia.ApplicationId
-                                              where dia.DeviceId == deviceId
+                                              where dia.HardwareId == hardwareId
                                               select abs;
 
             return await query.SingleOrDefaultAsync();

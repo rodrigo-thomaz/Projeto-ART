@@ -191,7 +191,7 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("DeviceInApplication not found");
             }
 
-            return await _sensorRepository.GetAllByDeviceId(deviceInApplication.DeviceId);
+            return await _sensorRepository.GetAllByDeviceId(deviceInApplication.HardwareId);
         }
 
         #endregion

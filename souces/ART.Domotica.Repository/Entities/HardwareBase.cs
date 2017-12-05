@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
+    using System.Collections.Generic;
 
     using ART.Infra.CrossCutting.Repository;
 
@@ -9,6 +10,11 @@
         #region Properties
 
         public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public ICollection<DeviceInApplication> DevicesInApplication
         {
             get; set;
         }

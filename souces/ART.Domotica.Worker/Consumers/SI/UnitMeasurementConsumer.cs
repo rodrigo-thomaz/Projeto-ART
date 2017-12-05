@@ -128,7 +128,7 @@ namespace ART.Domotica.Worker.Consumers.SI
             var data = await unitMeasurementDomain.GetAll();
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
+            var applicationMQ = await applicationMQDomain.GetByHardwareId(requestContract.DeviceId);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId);

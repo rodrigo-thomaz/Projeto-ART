@@ -10,7 +10,7 @@
     {
         #region Methods
 
-        Task<ApplicationMQ> GetByDeviceId(Guid deviceId);
+        Task<ApplicationMQ> GetByHardwareId(Guid hardwareId);
 
         #endregion Methods
     }

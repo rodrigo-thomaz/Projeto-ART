@@ -81,7 +81,7 @@
             await _deviceInApplicationRepository.Insert(new DeviceInApplication
             {
                 ApplicationId = applicationUserEntity.ApplicationId,
-                DeviceId = hardwareEntity.Id,
+                HardwareId = hardwareEntity.Id,
                 CreateByApplicationUserId = applicationUserEntity.Id,
                 CreateDate = DateTime.Now.ToUniversalTime(),
             });
@@ -100,7 +100,7 @@
 
             await _deviceInApplicationRepository.Delete(deviceInApplicationEntity);
 
-            var hardwareEntity = await _espDeviceRepository.GetByKey(deviceInApplicationEntity.DeviceId);
+            var hardwareEntity = await _espDeviceRepository.GetByKey(deviceInApplicationEntity.HardwareId);
 
             return hardwareEntity;
         }

@@ -21,11 +21,6 @@
             get; set;
         }
 
-        public ICollection<DeviceInApplication> DevicesInApplication
-        {
-            get; set;
-        }
-
         #endregion Properties
     }
 }
