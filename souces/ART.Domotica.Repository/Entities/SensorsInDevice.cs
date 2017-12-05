@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using ART.Infra.CrossCutting.Repository;
     using System;
+
+    using ART.Infra.CrossCutting.Repository;
 
     public class SensorsInDevice : IEntity
     {

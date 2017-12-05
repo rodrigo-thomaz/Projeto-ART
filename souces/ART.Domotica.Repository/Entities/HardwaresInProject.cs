@@ -2,7 +2,9 @@
 {
     using System;
 
-    public class HardwaresInProject
+    using ART.Infra.CrossCutting.Repository;
+
+    public class HardwaresInProject : IEntity
     {
         #region Properties
 

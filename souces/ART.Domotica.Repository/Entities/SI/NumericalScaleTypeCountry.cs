@@ -2,8 +2,9 @@
 {
     using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities.Locale;
+    using ART.Infra.CrossCutting.Repository;
 
-    public class NumericalScaleTypeCountry
+    public class NumericalScaleTypeCountry : IEntity
     {
         #region Properties
 

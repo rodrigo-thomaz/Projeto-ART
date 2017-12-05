@@ -3,8 +3,9 @@
     using System.Collections.Generic;
 
     using ART.Domotica.Enums.SI;
+    using ART.Infra.CrossCutting.Repository;
 
-    public class UnitMeasurementScale
+    public class UnitMeasurementScale : IEntity
     {
         #region Properties
 

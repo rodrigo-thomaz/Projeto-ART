@@ -7,6 +7,5 @@
 
     public interface IApplicationRepository : IRepository<ARTDbContext, Application, Guid>
     {
-
     }
 }

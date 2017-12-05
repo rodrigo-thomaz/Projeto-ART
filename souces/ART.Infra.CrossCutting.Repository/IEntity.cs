@@ -2,10 +2,6 @@
 {
     public interface IEntity
     {
-        #region Properties
-
-
-        #endregion Properties
     }
 
     public interface IEntity<TKey> : IEntity
@@ -18,5 +14,5 @@
         }
 
         #endregion Properties
-    }    
+    }
 }

@@ -3,8 +3,9 @@
     using System.Collections.Generic;
 
     using ART.Domotica.Enums.SI;
+    using ART.Infra.CrossCutting.Repository;
 
-    public class NumericalScale
+    public class NumericalScale : IEntity
     {
         #region Properties
 

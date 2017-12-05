@@ -5,8 +5,9 @@
 
     using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities.SI;
+    using ART.Infra.CrossCutting.Repository;
 
-    public interface IUnitMeasurementRepository
+    public interface IUnitMeasurementRepository : IRepository<ARTDbContext, UnitMeasurement>
     {
         #region Methods
 

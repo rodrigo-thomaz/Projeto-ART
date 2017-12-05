@@ -1,18 +1,18 @@
 ﻿using ART.Domotica.Repository.Entities.SI;
 using ART.Domotica.Repository.Interfaces.SI;
+using ART.Infra.CrossCutting.Repository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories.SI
 {
-    public class NumericalScaleRepository : INumericalScaleRepository
+    public class NumericalScaleRepository : RepositoryBase<ARTDbContext, NumericalScale>, INumericalScaleRepository
     {
-        private readonly ARTDbContext _context;
-
         public NumericalScaleRepository(ARTDbContext context)
+              : base(context)
         {
-            _context = context;
+
         }
 
         public async Task<List<NumericalScale>> GetAll()

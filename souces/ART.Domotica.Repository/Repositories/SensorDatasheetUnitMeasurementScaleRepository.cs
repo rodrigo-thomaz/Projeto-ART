@@ -1,18 +1,18 @@
 ﻿using ART.Domotica.Repository.Entities;
 using ART.Domotica.Repository.Interfaces;
+using ART.Infra.CrossCutting.Repository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories
 {
-    public class SensorDatasheetUnitMeasurementScaleRepository : ISensorDatasheetUnitMeasurementScaleRepository
+    public class SensorDatasheetUnitMeasurementScaleRepository : RepositoryBase<ARTDbContext, SensorDatasheetUnitMeasurementScale>, ISensorDatasheetUnitMeasurementScaleRepository
     {
-        private readonly ARTDbContext _context;
-
         public SensorDatasheetUnitMeasurementScaleRepository(ARTDbContext context)
+            : base(context)
         {
-            _context = context;
+            
         }
 
         public async Task<List<SensorDatasheetUnitMeasurementScale>> GetAll()

@@ -4,8 +4,9 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities.SI;
+    using ART.Infra.CrossCutting.Repository;
 
-    public interface IUnitMeasurementScaleRepository
+    public interface IUnitMeasurementScaleRepository : IRepository<ARTDbContext, UnitMeasurementScale>
     {
         #region Methods
 

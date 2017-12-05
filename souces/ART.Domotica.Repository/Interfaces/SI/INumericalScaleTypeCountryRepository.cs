@@ -4,8 +4,9 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities.SI;
+    using ART.Infra.CrossCutting.Repository;
 
-    public interface INumericalScaleTypeCountryRepository
+    public interface INumericalScaleTypeCountryRepository : IRepository<ARTDbContext, NumericalScaleTypeCountry>
     {
         #region Methods
 
