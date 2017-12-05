@@ -100,6 +100,17 @@ angular.module('app')
                   resolve: load([
                       'ui.grid',
                       'toaster',
+
+                      //Locale
+                      'js/services/locale/localeContext.js',
+                      'js/services/locale/localeMapper.js',
+
+                      //SI
+                      'js/services/si/siContext.js',
+                      'js/services/si/siMapper.js',
+
+                      'js/services/contextScope.js',
+
                       'js/services/espDeviceService.js',
                       'js/controllers/espDeviceJoinController.js',
                       'js/controllers/espDeviceManagerController.js',

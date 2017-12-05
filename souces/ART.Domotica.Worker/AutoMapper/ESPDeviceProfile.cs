@@ -27,7 +27,8 @@
             CreateMap<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>()
                 .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().ApplicationId));
 
-            CreateMap<ESPDevice, ESPDeviceGetByPinModel>();
+            CreateMap<ESPDevice, ESPDeviceGetByPinModel>()
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))                ;
 
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
                 .ForMember(vm => vm.ApplicationId, m => m.ResolveUsing(src => {

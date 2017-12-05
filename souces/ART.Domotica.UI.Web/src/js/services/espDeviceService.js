@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', 'contextScope', 'unitMeasurementService', 'unitMeasurementConverter', function ($http, $log, ngAuthSettings, $rootScope, stompService, siContext, contextScope, unitMeasurementService, unitMeasurementConverter) {
+app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, $log, ngAuthSettings, $rootScope, stompService, contextScope) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -124,7 +124,7 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
                     //Temp
                     oldSensors[i].tempCelsius = newSensors[j].tempCelsius;                    
-                    oldSensors[i].tempConverted = unitMeasurementConverter.convertFromCelsius(oldSensors[i].unitMeasurementId, oldSensors[i].tempCelsius);
+                    //oldSensors[i].tempConverted = unitMeasurementConverter.convertFromCelsius(oldSensors[i].unitMeasurementId, oldSensors[i].tempCelsius);
 
                     //Chart
 
@@ -267,6 +267,12 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     serviceFactory.deleteFromApplication = deleteFromApplication;
     serviceFactory.setLabel = setLabel;       
 
+    serviceFactory.getAllByApplicationIdCompletedEventName = getAllByApplicationIdCompletedEventName;
+    serviceFactory.insertInApplicationCompletedEventName = insertInApplicationCompletedEventName;
+    serviceFactory.deleteFromApplicationCompletedEventName = deleteFromApplicationCompletedEventName;
+    serviceFactory.getByPinCompletedEventName = getByPinCompletedEventName;
+    serviceFactory.setLabelCompletedEventName = setLabelCompletedEventName;
+    
     return serviceFactory;
 
 }]);

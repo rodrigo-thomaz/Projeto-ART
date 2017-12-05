@@ -33,8 +33,8 @@ app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootS
         clearOnInsertInApplicationCompleted();
     });
 
-    var clearOnGetByPinCompleted = $rootScope.$on('espDeviceService_onGetByPinCompleted', onGetByPinCompleted);        
-    var clearOnInsertInApplicationCompleted = $rootScope.$on('espDeviceService_onInsertInApplicationCompleted', onInsertInApplicationCompleted);        
+    var clearOnGetByPinCompleted = $rootScope.$on(espDeviceService.getByPinCompletedEventName, onGetByPinCompleted);        
+    var clearOnInsertInApplicationCompleted = $rootScope.$on(espDeviceService.insertInApplicationCompletedEventName, onInsertInApplicationCompleted);        
     
     $scope.pin = "";
     $scope.espDevice = null;
