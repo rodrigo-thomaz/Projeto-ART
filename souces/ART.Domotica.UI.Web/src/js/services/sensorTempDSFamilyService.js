@@ -7,8 +7,8 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var serviceFactory = {};   
 
-    var getByKey = function (deviceBaseId, sensorTempDSFamilyId) {
-        var device = espDeviceService.getDeviceById(deviceBaseId);
+    var getByKey = function (deviceId, sensorTempDSFamilyId) {
+        var device = espDeviceService.getDeviceById(deviceId);
         for (var i = 0; i < device.sensors.length; i++) {
             var sensor = device.sensors[i];
             if (sensor.sensorTempDSFamilyId === sensorTempDSFamilyId) {

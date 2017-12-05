@@ -2,11 +2,16 @@
 {
     using System;
     using System.Threading.Tasks;
+
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
     public interface IDeviceInApplicationRepository : IRepository<ARTDbContext, DeviceInApplication>
     {
-        Task<DeviceInApplication> GetByKey(Guid applicationId, Guid deviceBaseId);
+        #region Methods
+
+        Task<DeviceInApplication> GetByKey(Guid applicationId, Guid deviceId);
+
+        #endregion Methods
     }
 }

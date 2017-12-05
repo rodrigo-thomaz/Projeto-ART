@@ -19,7 +19,7 @@
                 x.SensorId,
             });
 
-            //DeviceBaseId
+            //DeviceId
             Property(x => x.DeviceSensorsId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)

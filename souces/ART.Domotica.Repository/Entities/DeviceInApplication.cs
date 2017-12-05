@@ -39,7 +39,7 @@
             get; set;
         }
 
-        public Guid DeviceBaseId
+        public Guid DeviceId
         {
             get; set;
         }

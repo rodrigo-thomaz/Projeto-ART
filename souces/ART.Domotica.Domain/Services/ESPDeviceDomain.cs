@@ -81,7 +81,7 @@
             await _deviceInApplicationRepository.Insert(new DeviceInApplication
             {
                 ApplicationId = applicationUserEntity.ApplicationId,
-                DeviceBaseId = hardwareEntity.Id,
+                DeviceId = hardwareEntity.Id,
                 CreateByApplicationUserId = applicationUserEntity.Id,
                 CreateDate = DateTime.Now.ToUniversalTime(),
             });
@@ -89,9 +89,9 @@
             return hardwareEntity;
         }
 
-        public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceBaseId)
+        public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId)
         {
-            DeviceInApplication deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(applicationId, deviceBaseId);
+            DeviceInApplication deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId);
             
             if (deviceInApplicationEntity == null)
             {
@@ -100,7 +100,7 @@
 
             await _deviceInApplicationRepository.Delete(deviceInApplicationEntity);
 
-            var hardwareEntity = await _espDeviceRepository.GetByKey(deviceInApplicationEntity.DeviceBaseId);
+            var hardwareEntity = await _espDeviceRepository.GetByKey(deviceInApplicationEntity.DeviceId);
 
             return hardwareEntity;
         }

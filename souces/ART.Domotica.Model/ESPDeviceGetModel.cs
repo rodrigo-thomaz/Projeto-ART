@@ -6,6 +6,11 @@
     {
         #region Properties
 
+        public Guid ApplicationId
+        {
+            get; set;
+        }
+
         public int ChipId
         {
             get; set;
@@ -16,12 +21,7 @@
             get; set;
         }
 
-        public Guid DeviceBaseId
-        {
-            get; set;
-        }
-
-        public Guid ApplicationId
+        public Guid DeviceId
         {
             get; set;
         }

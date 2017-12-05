@@ -19,7 +19,7 @@
         {
             CreateMap<ESPDevice, ESPDeviceGetModel>()
                 .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().ApplicationId))
-                .ForMember(vm => vm.DeviceBaseId, m => m.MapFrom(x => x.DevicesInApplication.Single().DeviceBaseId))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DevicesInApplication.Single().DeviceId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
@@ -37,7 +37,7 @@
                     }
                     return (Guid?)null;
                 }))
-                .ForMember(vm => vm.DeviceBaseId, m => m.MapFrom(x => x.DevicesInApplication.Single().DeviceBaseId))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DevicesInApplication.Single().DeviceId))
                 .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP));
 

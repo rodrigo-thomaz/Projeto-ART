@@ -14,7 +14,7 @@
 
         Task<List<Sensor>> GetAllByApplicationId(Guid applicationId);
 
-        Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceBaseId);
+        Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId);
 
         Task<Sensor> GetByKey(Guid sensorId);
 

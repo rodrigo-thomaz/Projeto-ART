@@ -15,9 +15,9 @@
         {
         }
 
-        public async Task<DeviceInApplication> GetByKey(Guid applicationId, Guid deviceBaseId)
+        public async Task<DeviceInApplication> GetByKey(Guid applicationId, Guid deviceId)
         {
-            return await _context.DeviceInApplication.FindAsync(applicationId, deviceBaseId);
+            return await _context.DeviceInApplication.FindAsync(applicationId, deviceId);
         }
 
         #endregion Constructors

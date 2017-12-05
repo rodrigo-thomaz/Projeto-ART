@@ -33,8 +33,8 @@
                         new IndexAttribute("IX_Unique_DeviceInApplication_ProjectId", 0) { IsUnique = true },
                     }));
 
-            //DeviceBaseId
-            Property(x => x.DeviceBaseId)
+            //DeviceId
+            Property(x => x.DeviceId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
@@ -61,7 +61,7 @@
                 .HasForeignKey(x => new
                 {
                     x.ApplicationId,
-                    x.DeviceBaseId,
+                    x.DeviceId,
                 })
                 .WillCascadeOnDelete(false);
 

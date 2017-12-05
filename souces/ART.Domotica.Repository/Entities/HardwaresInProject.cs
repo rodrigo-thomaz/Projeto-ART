@@ -8,6 +8,11 @@
     {
         #region Properties
 
+        public Guid ApplicationId
+        {
+            get; set;
+        }
+
         public ApplicationUser CreateByApplicationUser
         {
             get; set;
@@ -23,17 +28,12 @@
             get; set;
         }
 
+        public Guid DeviceId
+        {
+            get; set;
+        }
+
         public DeviceInApplication DeviceInApplication
-        {
-            get; set;
-        }
-
-        public Guid ApplicationId
-        {
-            get; set;
-        }
-
-        public Guid DeviceBaseId
         {
             get; set;
         }

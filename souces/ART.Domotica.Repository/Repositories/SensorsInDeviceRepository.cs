@@ -24,7 +24,7 @@ namespace ART.Domotica.Repository.Repositories
         public async Task<List<SensorsInDevice>> GetAllByApplicationId(Guid applicationId)
         {
             IQueryable<SensorsInDevice> query = from sid in _context.SensorsInDevice
-                                                join dia in _context.DeviceInApplication on sid.DeviceSensorsId equals dia.DeviceBaseId
+                                                join dia in _context.DeviceInApplication on sid.DeviceSensorsId equals dia.DeviceId
                                                 where dia.ApplicationId == applicationId
                                                 select sid;
 

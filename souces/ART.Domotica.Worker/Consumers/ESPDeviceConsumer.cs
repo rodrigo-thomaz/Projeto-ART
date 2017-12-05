@@ -288,7 +288,7 @@
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.DeleteFromApplication(applicationMQ.Id, message.Contract.DeviceBaseId);
+            var data = await domain.DeleteFromApplication(applicationMQ.Id, message.Contract.DeviceId);
 
             var exchange = "amq.topic";
             
@@ -299,7 +299,7 @@
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
             var viewModel = new ESPDeviceDeleteFromApplicationModel
             {
-                DeviceBaseId = data.Id,
+                DeviceId = data.Id,
             };
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);                        
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

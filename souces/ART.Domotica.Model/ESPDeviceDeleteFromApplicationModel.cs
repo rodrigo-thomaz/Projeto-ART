@@ -6,7 +6,7 @@
     {
         #region Properties
 
-        public Guid DeviceBaseId
+        public Guid DeviceId
         {
             get; set;
         }
