@@ -5,8 +5,9 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Repository.Entities;
+    using ART.Infra.CrossCutting.Repository;
 
-    public interface ISensorsInDeviceRepository
+    public interface ISensorsInDeviceRepository : IRepository<ARTDbContext, SensorsInDevice>
     {
         #region Methods
 

@@ -1,5 +1,6 @@
 ﻿using ART.Domotica.Repository.Entities;
 using ART.Domotica.Repository.Interfaces;
+using ART.Infra.CrossCutting.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,15 +9,14 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories
 {
-    public class SensorsInDeviceRepository : ISensorsInDeviceRepository
+    public class SensorsInDeviceRepository : RepositoryBase<ARTDbContext, SensorsInDevice>, ISensorsInDeviceRepository
     {
-        private readonly ARTDbContext _context;
-
         #region Constructors
 
-        public SensorsInDeviceRepository(ARTDbContext context)            
+        public SensorsInDeviceRepository(ARTDbContext context)
+              : base(context)
         {
-            _context = context;
+
         }
 
         #endregion Constructors

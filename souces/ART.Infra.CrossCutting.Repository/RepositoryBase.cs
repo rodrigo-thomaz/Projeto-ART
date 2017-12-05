@@ -7,24 +7,22 @@ using System.Threading.Tasks;
 
 namespace ART.Infra.CrossCutting.Repository
 {
-    public abstract class RepositoryBase<TDbContext, TEntity, TKey>
-        : IRepository<TDbContext, TEntity, TKey>
+    public abstract class RepositoryBase<TDbContext, TEntity>
+        : IRepository<TDbContext, TEntity>
 
         where TDbContext : DbContext
-        where TEntity : class, IEntity<TKey>//, new()
-        where TKey : struct
-
+        where TEntity : class, IEntity//, new()
     {
         protected TDbContext _context;
-        
+
         public RepositoryBase(TDbContext context)
         {
             _context = context;
-        }        
+        }
 
-        public async Task<TEntity> GetByKey(TKey key)
+        public async Task<TEntity> GetByKey(params object[] keyValues)
         {
-            var entity = await _context.Set<TEntity>().FindAsync(key);
+            var entity = await _context.Set<TEntity>().FindAsync(keyValues);
             return entity;
         }
 
@@ -39,7 +37,7 @@ namespace ART.Infra.CrossCutting.Repository
             foreach (var entity in entities)
             {
                 _context.Set<TEntity>().Add(entity);
-            }            
+            }
             await _context.SaveChangesAsync();
         }
 
@@ -54,7 +52,7 @@ namespace ART.Infra.CrossCutting.Repository
             foreach (var entity in entities)
             {
                 _context.Entry(entity).State = EntityState.Modified;
-            }            
+            }
             await _context.SaveChangesAsync();
         }
 
@@ -76,6 +74,24 @@ namespace ART.Infra.CrossCutting.Repository
         public IQueryable<TEntity> SearchFor(Expression<Func<TEntity, bool>> predicate)
         {
             return _context.Set<TEntity>().Where(predicate);
+        }
+    }
+
+    public abstract class RepositoryBase<TDbContext, TEntity, TKey> : RepositoryBase<TDbContext, TEntity>, IRepository<TDbContext, TEntity, TKey>
+        where TDbContext : DbContext
+        where TEntity : class, IEntity<TKey>//, new()
+        where TKey : struct
+
+    {
+        public RepositoryBase(TDbContext context) : base(context)
+        {
+            _context = context;
+        }        
+        
+        public async Task<TEntity> GetByKey(TKey key)
+        {
+            var entity = await _context.Set<TEntity>().FindAsync(key);
+            return entity;
         }
     }
 }

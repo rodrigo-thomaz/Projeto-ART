@@ -1,8 +1,9 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using ART.Infra.CrossCutting.Repository;
     using System;
 
-    public class SensorsInDevice
+    public class SensorsInDevice : IEntity
     {
         #region Properties
 

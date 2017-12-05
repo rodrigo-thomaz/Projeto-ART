@@ -7,18 +7,15 @@
     using System.Linq.Expressions;
     using System.Threading.Tasks;
 
-    public interface IRepository<TDbContext, TEntity, TKey>
+    public interface IRepository<TDbContext, TEntity>
         where TDbContext : DbContext
-        where TEntity : IEntity<TKey>
-        where TKey : struct
+        where TEntity : IEntity
     {
         #region Methods
 
         Task Delete(TEntity entity);
 
         Task Delete(List<TEntity> entities);
-
-        Task<TEntity> GetByKey(TKey key);
 
         Task Insert(TEntity entity);
 
@@ -29,6 +26,18 @@
         Task Update(TEntity entity);
 
         Task Update(List<TEntity> entities);
+
+        #endregion Methods
+    }
+
+    public interface IRepository<TDbContext, TEntity, TKey> : IRepository<TDbContext, TEntity>
+        where TDbContext : DbContext
+        where TEntity : IEntity<TKey>
+        where TKey : struct
+    {
+        #region Methods
+
+        Task<TEntity> GetByKey(TKey key);
 
         #endregion Methods
     }
