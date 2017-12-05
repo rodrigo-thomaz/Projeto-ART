@@ -1,14 +1,487 @@
 namespace ART.Domotica.Repository.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
-
+    
     public partial class InitialCreate : DbMigration
     {
-        #region Methods
-
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.ActuatorType",
+                c => new
+                    {
+                        Id = c.Short(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 50),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
+            
+            CreateTable(
+                "dbo.Application",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ApplicationMQ",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        User = c.String(nullable: false, maxLength: 12),
+                        Password = c.String(nullable: false, maxLength: 12),
+                        Topic = c.String(nullable: false, maxLength: 32),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Application", t => t.Id)
+                .Index(t => t.Id)
+                .Index(t => t.Topic, unique: true);
+            
+            CreateTable(
+                "dbo.ApplicationUser",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        ApplicationId = c.Guid(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Application", t => t.ApplicationId)
+                .Index(t => t.ApplicationId);
+            
+            CreateTable(
+                "dbo.DeviceInApplication",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        ApplicationId = c.Guid(nullable: false),
+                        DeviceBaseId = c.Guid(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                        CreateByApplicationUserId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Application", t => t.ApplicationId)
+                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
+                .ForeignKey("dbo.DeviceBase", t => t.DeviceBaseId)
+                .Index(t => new { t.ApplicationId, t.DeviceBaseId }, unique: true, name: "IX_Unique_ApplicationId_DeviceBaseId")
+                .Index(t => t.DeviceBaseId, unique: true, name: "IX_Unique_DeviceBaseId")
+                .Index(t => t.CreateByApplicationUserId);
+            
+            CreateTable(
+                "dbo.HardwareBase",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        Label = c.String(nullable: false, maxLength: 50),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.DeviceMQ",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        User = c.String(nullable: false, maxLength: 12),
+                        Password = c.String(nullable: false, maxLength: 12),
+                        ClientId = c.String(nullable: false, maxLength: 32),
+                        Topic = c.String(nullable: false, maxLength: 32),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeviceBase", t => t.Id)
+                .Index(t => t.Id)
+                .Index(t => t.User, unique: true)
+                .Index(t => t.Password, unique: true)
+                .Index(t => t.ClientId, unique: true)
+                .Index(t => t.Topic, unique: true);
+            
+            CreateTable(
+                "dbo.DeviceNTP",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        TimeZoneId = c.Byte(nullable: false),
+                        UpdateIntervalInMilliSecond = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeviceBase", t => t.Id)
+                .ForeignKey("dbo.TimeZone", t => t.TimeZoneId)
+                .Index(t => t.Id)
+                .Index(t => t.TimeZoneId);
+            
+            CreateTable(
+                "dbo.TimeZone",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false, identity: true),
+                        DisplayName = c.String(nullable: false, maxLength: 100),
+                        SupportsDaylightSavingTime = c.Boolean(nullable: false),
+                        UtcTimeOffsetInSecond = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.DeviceSensors",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        PublishIntervalInSeconds = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeviceBase", t => t.Id)
+                .Index(t => t.Id);
+            
+            CreateTable(
+                "dbo.SensorsInDevice",
+                c => new
+                    {
+                        DeviceSensorsId = c.Guid(nullable: false),
+                        SensorId = c.Guid(nullable: false),
+                        Ordination = c.Short(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.DeviceSensorsId, t.SensorId })
+                .ForeignKey("dbo.DeviceSensors", t => t.DeviceSensorsId)
+                .ForeignKey("dbo.Sensor", t => t.SensorId)
+                .Index(t => t.DeviceSensorsId)
+                .Index(t => t.SensorId, unique: true);
+            
+            CreateTable(
+                "dbo.SensorDatasheet",
+                c => new
+                    {
+                        Id = c.Short(nullable: false),
+                        SensorTypeId = c.Short(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Id, t.SensorTypeId })
+                .ForeignKey("dbo.SensorType", t => t.SensorTypeId)
+                .Index(t => t.SensorTypeId);
+            
+            CreateTable(
+                "dbo.SensorDatasheetUnitMeasurementScale",
+                c => new
+                    {
+                        SensorDatasheetId = c.Short(nullable: false),
+                        SensorTypeId = c.Short(nullable: false),
+                        UnitMeasurementId = c.Short(nullable: false),
+                        UnitMeasurementTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
+                        NumericalScaleTypeId = c.Byte(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.SensorDatasheetId, t.SensorTypeId, t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
+                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .Index(t => new { t.SensorDatasheetId, t.SensorTypeId })
+                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
+            
+            CreateTable(
+                "SI.UnitMeasurementScale",
+                c => new
+                    {
+                        UnitMeasurementId = c.Short(nullable: false),
+                        UnitMeasurementTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
+                        NumericalScaleTypeId = c.Byte(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .ForeignKey("SI.NumericalScale", t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .ForeignKey("SI.UnitMeasurement", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId })
+                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId })
+                .Index(t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId });
+            
+            CreateTable(
+                "SI.NumericalScale",
+                c => new
+                    {
+                        NumericalScalePrefixId = c.Int(nullable: false),
+                        NumericalScaleTypeId = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 30),
+                        ScientificNotationBase = c.Decimal(nullable: false, precision: 24, scale: 12),
+                        ScientificNotationExponent = c.Decimal(nullable: false, precision: 24, scale: 12),
+                    })
+                .PrimaryKey(t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .ForeignKey("SI.NumericalScalePrefix", t => t.NumericalScalePrefixId)
+                .ForeignKey("SI.NumericalScaleType", t => t.NumericalScaleTypeId)
+                .Index(t => t.NumericalScalePrefixId)
+                .Index(t => t.NumericalScaleTypeId);
+            
+            CreateTable(
+                "SI.NumericalScalePrefix",
+                c => new
+                    {
+                        Id = c.Int(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 15),
+                        Symbol = c.String(maxLength: 2),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
+            
+            CreateTable(
+                "SI.NumericalScaleType",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 10),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
+            
+            CreateTable(
+                "SI.NumericalScaleTypeCountry",
+                c => new
+                    {
+                        NumericalScaleTypeId = c.Byte(nullable: false),
+                        CountryId = c.Short(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.NumericalScaleTypeId, t.CountryId })
+                .ForeignKey("Locale.Country", t => t.CountryId)
+                .ForeignKey("SI.NumericalScaleType", t => t.NumericalScaleTypeId)
+                .Index(t => t.NumericalScaleTypeId)
+                .Index(t => t.CountryId);
+            
+            CreateTable(
+                "Locale.Country",
+                c => new
+                    {
+                        Id = c.Short(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 50),
+                        ContinentId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("Locale.Continent", t => t.ContinentId)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.ContinentId);
+            
+            CreateTable(
+                "Locale.Continent",
+                c => new
+                    {
+                        Id = c.Int(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 16),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
+            
+            CreateTable(
+                "dbo.SensorUnitMeasurementDefault",
+                c => new
+                    {
+                        Id = c.Short(nullable: false),
+                        SensorTypeId = c.Short(nullable: false),
+                        UnitMeasurementId = c.Short(nullable: false),
+                        UnitMeasurementTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
+                        NumericalScaleTypeId = c.Byte(nullable: false),
+                        Min = c.Decimal(nullable: false, precision: 9, scale: 4),
+                        Max = c.Decimal(nullable: false, precision: 9, scale: 4),
+                    })
+                .PrimaryKey(t => new { t.Id, t.SensorTypeId })
+                .ForeignKey("dbo.SensorDatasheet", t => new { t.Id, t.SensorTypeId })
+                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .Index(t => new { t.Id, t.SensorTypeId })
+                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
+            
+            CreateTable(
+                "dbo.SensorUnitMeasurementScale",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        UnitMeasurementId = c.Short(nullable: false),
+                        UnitMeasurementTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
+                        NumericalScaleTypeId = c.Byte(nullable: false),
+                        RangeMax = c.Decimal(nullable: false, precision: 7, scale: 4),
+                        RangeMin = c.Decimal(nullable: false, precision: 7, scale: 4),
+                        ChartLimiterMax = c.Decimal(nullable: false, precision: 7, scale: 4),
+                        ChartLimiterMin = c.Decimal(nullable: false, precision: 7, scale: 4),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sensor", t => t.Id)
+                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .Index(t => t.Id)
+                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
+            
+            CreateTable(
+                "SI.UnitMeasurement",
+                c => new
+                    {
+                        Id = c.Short(nullable: false),
+                        UnitMeasurementTypeId = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Symbol = c.String(nullable: false, maxLength: 2, fixedLength: true),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => new { t.Id, t.UnitMeasurementTypeId })
+                .ForeignKey("SI.UnitMeasurementType", t => t.UnitMeasurementTypeId)
+                .Index(t => t.UnitMeasurementTypeId)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.Symbol, unique: true);
+            
+            CreateTable(
+                "SI.UnitMeasurementType",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 25),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
+            
+            CreateTable(
+                "dbo.SensorType",
+                c => new
+                    {
+                        Id = c.Short(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 50),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true);
+            
+            CreateTable(
+                "dbo.SensorTempDSFamily",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        DeviceAddress = c.String(nullable: false, maxLength: 32),
+                        Family = c.String(nullable: false, maxLength: 10),
+                        SensorTempDSFamilyResolutionId = c.Byte(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sensor", t => t.Id)
+                .ForeignKey("dbo.SensorTempDSFamilyResolution", t => t.SensorTempDSFamilyResolutionId)
+                .Index(t => t.Id)
+                .Index(t => t.DeviceAddress, unique: true)
+                .Index(t => t.SensorTempDSFamilyResolutionId);
+            
+            CreateTable(
+                "dbo.SensorTempDSFamilyResolution",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Bits = c.Byte(nullable: false),
+                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
+                        DecimalPlaces = c.Byte(nullable: false),
+                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
+                        Description = c.String(),
+                    })
+                .PrimaryKey(t => t.Id)
+                .Index(t => t.Name, unique: true)
+                .Index(t => t.Bits, unique: true);
+            
+            CreateTable(
+                "dbo.SensorTrigger",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        SensorId = c.Guid(nullable: false),
+                        TriggerOn = c.Boolean(nullable: false),
+                        BuzzerOn = c.Boolean(nullable: false),
+                        TriggerValue = c.String(nullable: false, maxLength: 50),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Sensor", t => t.SensorId)
+                .Index(t => t.SensorId);
+            
+            CreateTable(
+                "dbo.HardwaresInProject",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        DeviceInApplicationId = c.Guid(nullable: false),
+                        ProjectId = c.Guid(nullable: false),
+                        CreateByApplicationUserId = c.Guid(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId, cascadeDelete: true)
+                .ForeignKey("dbo.DeviceInApplication", t => t.DeviceInApplicationId)
+                .ForeignKey("dbo.Project", t => t.ProjectId)
+                .Index(t => new { t.DeviceInApplicationId, t.ProjectId }, unique: true, name: "IX_Unique_DeviceInApplicationId_ProjectId")
+                .Index(t => t.CreateByApplicationUserId);
+            
+            CreateTable(
+                "dbo.Project",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        Name = c.String(nullable: false, maxLength: 255),
+                        Description = c.String(),
+                        ApplicationId = c.Guid(nullable: false),
+                        CreateDate = c.DateTime(nullable: false),
+                        CreateByApplicationUserId = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Application", t => t.ApplicationId)
+                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
+                .Index(t => t.ApplicationId)
+                .Index(t => t.CreateByApplicationUserId);
+            
+            CreateTable(
+                "dbo.DeviceBase",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.HardwareBase", t => t.Id)
+                .Index(t => t.Id);
+            
+            CreateTable(
+                "dbo.ESPDevice",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        ChipId = c.Int(nullable: false),
+                        FlashChipId = c.Int(nullable: false),
+                        MacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                        Pin = c.String(nullable: false, maxLength: 4, fixedLength: true),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeviceBase", t => t.Id)
+                .Index(t => t.Id)
+                .Index(t => t.ChipId)
+                .Index(t => t.FlashChipId, unique: true)
+                .Index(t => t.MacAddress, unique: true)
+                .Index(t => t.Pin, unique: true);
+            
+            CreateTable(
+                "dbo.Sensor",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        SensorDatasheetId = c.Short(nullable: false),
+                        SensorTypeId = c.Short(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.HardwareBase", t => t.Id)
+                .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
+                .Index(t => t.Id)
+                .Index(t => new { t.SensorDatasheetId, t.SensorTypeId });
+            
+            CreateTable(
+                "dbo.RaspberryDevice",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        LanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                        WLanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.DeviceBase", t => t.Id)
+                .Index(t => t.Id)
+                .Index(t => t.LanMacAddress, unique: true)
+                .Index(t => t.WLanMacAddress, unique: true);
+            
+        }
+        
         public override void Down()
         {
             DropForeignKey("dbo.RaspberryDevice", "Id", "dbo.DeviceBase");
+            DropForeignKey("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
+            DropForeignKey("dbo.Sensor", "Id", "dbo.HardwareBase");
             DropForeignKey("dbo.ESPDevice", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
             DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
@@ -21,7 +494,6 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.SensorTrigger", "SensorId", "dbo.Sensor");
             DropForeignKey("dbo.SensorTempDSFamily", "SensorTempDSFamilyResolutionId", "dbo.SensorTempDSFamilyResolution");
             DropForeignKey("dbo.SensorTempDSFamily", "Id", "dbo.Sensor");
-            DropForeignKey("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
             DropForeignKey("dbo.SensorDatasheet", "SensorTypeId", "dbo.SensorType");
             DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
             DropForeignKey("SI.UnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" }, "SI.UnitMeasurement");
@@ -49,6 +521,8 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.RaspberryDevice", new[] { "WLanMacAddress" });
             DropIndex("dbo.RaspberryDevice", new[] { "LanMacAddress" });
             DropIndex("dbo.RaspberryDevice", new[] { "Id" });
+            DropIndex("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" });
+            DropIndex("dbo.Sensor", new[] { "Id" });
             DropIndex("dbo.ESPDevice", new[] { "Pin" });
             DropIndex("dbo.ESPDevice", new[] { "MacAddress" });
             DropIndex("dbo.ESPDevice", new[] { "FlashChipId" });
@@ -88,7 +562,6 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
             DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
             DropIndex("dbo.SensorDatasheet", new[] { "SensorTypeId" });
-            DropIndex("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" });
             DropIndex("dbo.SensorsInDevice", new[] { "SensorId" });
             DropIndex("dbo.SensorsInDevice", new[] { "DeviceSensorsId" });
             DropIndex("dbo.DeviceSensors", new[] { "Id" });
@@ -107,6 +580,7 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.ApplicationMQ", new[] { "Id" });
             DropIndex("dbo.ActuatorType", new[] { "Name" });
             DropTable("dbo.RaspberryDevice");
+            DropTable("dbo.Sensor");
             DropTable("dbo.ESPDevice");
             DropTable("dbo.DeviceBase");
             DropTable("dbo.Project");
@@ -128,7 +602,6 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("SI.UnitMeasurementScale");
             DropTable("dbo.SensorDatasheetUnitMeasurementScale");
             DropTable("dbo.SensorDatasheet");
-            DropTable("dbo.Sensor");
             DropTable("dbo.SensorsInDevice");
             DropTable("dbo.DeviceSensors");
             DropTable("dbo.TimeZone");
@@ -141,477 +614,5 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.Application");
             DropTable("dbo.ActuatorType");
         }
-
-        public override void Up()
-        {
-            CreateTable(
-                "dbo.ActuatorType",
-                c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 50),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true);
-
-            CreateTable(
-                "dbo.Application",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        CreateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-
-            CreateTable(
-                "dbo.ApplicationMQ",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        User = c.String(nullable: false, maxLength: 12),
-                        Password = c.String(nullable: false, maxLength: 12),
-                        Topic = c.String(nullable: false, maxLength: 32),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Application", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.Topic, unique: true);
-
-            CreateTable(
-                "dbo.ApplicationUser",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        ApplicationId = c.Guid(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Application", t => t.ApplicationId)
-                .Index(t => t.ApplicationId);
-
-            CreateTable(
-                "dbo.DeviceInApplication",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        ApplicationId = c.Guid(nullable: false),
-                        DeviceBaseId = c.Guid(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        CreateByApplicationUserId = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Application", t => t.ApplicationId)
-                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
-                .ForeignKey("dbo.DeviceBase", t => t.DeviceBaseId)
-                .Index(t => new { t.ApplicationId, t.DeviceBaseId }, unique: true, name: "IX_Unique_ApplicationId_DeviceBaseId")
-                .Index(t => t.DeviceBaseId, unique: true, name: "IX_Unique_DeviceBaseId")
-                .Index(t => t.CreateByApplicationUserId);
-
-            CreateTable(
-                "dbo.HardwareBase",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        Label = c.String(nullable: false, maxLength: 50),
-                        CreateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-
-            CreateTable(
-                "dbo.DeviceMQ",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        User = c.String(nullable: false, maxLength: 12),
-                        Password = c.String(nullable: false, maxLength: 12),
-                        ClientId = c.String(nullable: false, maxLength: 32),
-                        Topic = c.String(nullable: false, maxLength: 32),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.User, unique: true)
-                .Index(t => t.Password, unique: true)
-                .Index(t => t.ClientId, unique: true)
-                .Index(t => t.Topic, unique: true);
-
-            CreateTable(
-                "dbo.DeviceNTP",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        TimeZoneId = c.Byte(nullable: false),
-                        UpdateIntervalInMilliSecond = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .ForeignKey("dbo.TimeZone", t => t.TimeZoneId)
-                .Index(t => t.Id)
-                .Index(t => t.TimeZoneId);
-
-            CreateTable(
-                "dbo.TimeZone",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false, identity: true),
-                        DisplayName = c.String(nullable: false, maxLength: 100),
-                        SupportsDaylightSavingTime = c.Boolean(nullable: false),
-                        UtcTimeOffsetInSecond = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-
-            CreateTable(
-                "dbo.DeviceSensors",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        PublishIntervalInSeconds = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .Index(t => t.Id);
-
-            CreateTable(
-                "dbo.SensorsInDevice",
-                c => new
-                    {
-                        DeviceSensorsId = c.Guid(nullable: false),
-                        SensorId = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.DeviceSensorsId, t.SensorId })
-                .ForeignKey("dbo.DeviceSensors", t => t.DeviceSensorsId)
-                .ForeignKey("dbo.Sensor", t => t.SensorId)
-                .Index(t => t.DeviceSensorsId)
-                .Index(t => t.SensorId, unique: true);
-
-            CreateTable(
-                "dbo.Sensor",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        Label = c.String(nullable: false, maxLength: 50),
-                        CreateDate = c.DateTime(nullable: false),
-                        SensorDatasheetId = c.Short(nullable: false),
-                        SensorTypeId = c.Short(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
-                .Index(t => new { t.SensorDatasheetId, t.SensorTypeId });
-
-            CreateTable(
-                "dbo.SensorDatasheet",
-                c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        SensorTypeId = c.Short(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Id, t.SensorTypeId })
-                .ForeignKey("dbo.SensorType", t => t.SensorTypeId)
-                .Index(t => t.SensorTypeId);
-
-            CreateTable(
-                "dbo.SensorDatasheetUnitMeasurementScale",
-                c => new
-                    {
-                        SensorDatasheetId = c.Short(nullable: false),
-                        SensorTypeId = c.Short(nullable: false),
-                        UnitMeasurementId = c.Short(nullable: false),
-                        UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
-                        NumericalScaleTypeId = c.Byte(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.SensorDatasheetId, t.SensorTypeId, t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
-                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .Index(t => new { t.SensorDatasheetId, t.SensorTypeId })
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-
-            CreateTable(
-                "SI.UnitMeasurementScale",
-                c => new
-                    {
-                        UnitMeasurementId = c.Short(nullable: false),
-                        UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
-                        NumericalScaleTypeId = c.Byte(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .ForeignKey("SI.NumericalScale", t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .ForeignKey("SI.UnitMeasurement", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId })
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId })
-                .Index(t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-
-            CreateTable(
-                "SI.NumericalScale",
-                c => new
-                    {
-                        NumericalScalePrefixId = c.Int(nullable: false),
-                        NumericalScaleTypeId = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 30),
-                        ScientificNotationBase = c.Decimal(nullable: false, precision: 24, scale: 12),
-                        ScientificNotationExponent = c.Decimal(nullable: false, precision: 24, scale: 12),
-                    })
-                .PrimaryKey(t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .ForeignKey("SI.NumericalScalePrefix", t => t.NumericalScalePrefixId)
-                .ForeignKey("SI.NumericalScaleType", t => t.NumericalScaleTypeId)
-                .Index(t => t.NumericalScalePrefixId)
-                .Index(t => t.NumericalScaleTypeId);
-
-            CreateTable(
-                "SI.NumericalScalePrefix",
-                c => new
-                    {
-                        Id = c.Int(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 15),
-                        Symbol = c.String(maxLength: 2),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true);
-
-            CreateTable(
-                "SI.NumericalScaleType",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 10),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true);
-
-            CreateTable(
-                "SI.NumericalScaleTypeCountry",
-                c => new
-                    {
-                        NumericalScaleTypeId = c.Byte(nullable: false),
-                        CountryId = c.Short(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.NumericalScaleTypeId, t.CountryId })
-                .ForeignKey("Locale.Country", t => t.CountryId)
-                .ForeignKey("SI.NumericalScaleType", t => t.NumericalScaleTypeId)
-                .Index(t => t.NumericalScaleTypeId)
-                .Index(t => t.CountryId);
-
-            CreateTable(
-                "Locale.Country",
-                c => new
-                    {
-                        Id = c.Short(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 50),
-                        ContinentId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("Locale.Continent", t => t.ContinentId)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.ContinentId);
-
-            CreateTable(
-                "Locale.Continent",
-                c => new
-                    {
-                        Id = c.Int(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 16),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true);
-
-            CreateTable(
-                "dbo.SensorUnitMeasurementDefault",
-                c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        SensorTypeId = c.Short(nullable: false),
-                        UnitMeasurementId = c.Short(nullable: false),
-                        UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
-                        NumericalScaleTypeId = c.Byte(nullable: false),
-                        Min = c.Decimal(nullable: false, precision: 9, scale: 4),
-                        Max = c.Decimal(nullable: false, precision: 9, scale: 4),
-                    })
-                .PrimaryKey(t => new { t.Id, t.SensorTypeId })
-                .ForeignKey("dbo.SensorDatasheet", t => new { t.Id, t.SensorTypeId })
-                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .Index(t => new { t.Id, t.SensorTypeId })
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-
-            CreateTable(
-                "dbo.SensorUnitMeasurementScale",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        UnitMeasurementId = c.Short(nullable: false),
-                        UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
-                        NumericalScaleTypeId = c.Byte(nullable: false),
-                        RangeMax = c.Decimal(nullable: false, precision: 7, scale: 4),
-                        RangeMin = c.Decimal(nullable: false, precision: 7, scale: 4),
-                        ChartLimiterMax = c.Decimal(nullable: false, precision: 7, scale: 4),
-                        ChartLimiterMin = c.Decimal(nullable: false, precision: 7, scale: 4),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Sensor", t => t.Id)
-                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .Index(t => t.Id)
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-
-            CreateTable(
-                "SI.UnitMeasurement",
-                c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        UnitMeasurementTypeId = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Symbol = c.String(nullable: false, maxLength: 2, fixedLength: true),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => new { t.Id, t.UnitMeasurementTypeId })
-                .ForeignKey("SI.UnitMeasurementType", t => t.UnitMeasurementTypeId)
-                .Index(t => t.UnitMeasurementTypeId)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.Symbol, unique: true);
-
-            CreateTable(
-                "SI.UnitMeasurementType",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 25),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true);
-
-            CreateTable(
-                "dbo.SensorType",
-                c => new
-                    {
-                        Id = c.Short(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 50),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true);
-
-            CreateTable(
-                "dbo.SensorTempDSFamily",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        DeviceAddress = c.String(nullable: false, maxLength: 32),
-                        Family = c.String(nullable: false, maxLength: 10),
-                        SensorTempDSFamilyResolutionId = c.Byte(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Sensor", t => t.Id)
-                .ForeignKey("dbo.SensorTempDSFamilyResolution", t => t.SensorTempDSFamilyResolutionId)
-                .Index(t => t.Id)
-                .Index(t => t.DeviceAddress, unique: true)
-                .Index(t => t.SensorTempDSFamilyResolutionId);
-
-            CreateTable(
-                "dbo.SensorTempDSFamilyResolution",
-                c => new
-                    {
-                        Id = c.Byte(nullable: false),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Bits = c.Byte(nullable: false),
-                        Resolution = c.Decimal(nullable: false, precision: 5, scale: 4),
-                        DecimalPlaces = c.Byte(nullable: false),
-                        ConversionTime = c.Decimal(nullable: false, precision: 5, scale: 2),
-                        Description = c.String(),
-                    })
-                .PrimaryKey(t => t.Id)
-                .Index(t => t.Name, unique: true)
-                .Index(t => t.Bits, unique: true);
-
-            CreateTable(
-                "dbo.SensorTrigger",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        SensorId = c.Guid(nullable: false),
-                        TriggerOn = c.Boolean(nullable: false),
-                        TriggerValue = c.String(nullable: false, maxLength: 50),
-                        BuzzerOn = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Sensor", t => t.SensorId)
-                .Index(t => t.SensorId);
-
-            CreateTable(
-                "dbo.HardwaresInProject",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        DeviceInApplicationId = c.Guid(nullable: false),
-                        ProjectId = c.Guid(nullable: false),
-                        CreateByApplicationUserId = c.Guid(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId, cascadeDelete: true)
-                .ForeignKey("dbo.DeviceInApplication", t => t.DeviceInApplicationId)
-                .ForeignKey("dbo.Project", t => t.ProjectId)
-                .Index(t => new { t.DeviceInApplicationId, t.ProjectId }, unique: true, name: "IX_Unique_DeviceInApplicationId_ProjectId")
-                .Index(t => t.CreateByApplicationUserId);
-
-            CreateTable(
-                "dbo.Project",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false, identity: true),
-                        Name = c.String(nullable: false, maxLength: 255),
-                        Description = c.String(),
-                        ApplicationId = c.Guid(nullable: false),
-                        CreateDate = c.DateTime(nullable: false),
-                        CreateByApplicationUserId = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Application", t => t.ApplicationId)
-                .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
-                .Index(t => t.ApplicationId)
-                .Index(t => t.CreateByApplicationUserId);
-
-            CreateTable(
-                "dbo.DeviceBase",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.HardwareBase", t => t.Id)
-                .Index(t => t.Id);
-
-            CreateTable(
-                "dbo.ESPDevice",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        ChipId = c.Int(nullable: false),
-                        FlashChipId = c.Int(nullable: false),
-                        MacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
-                        Pin = c.String(nullable: false, maxLength: 4, fixedLength: true),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.ChipId)
-                .Index(t => t.FlashChipId, unique: true)
-                .Index(t => t.MacAddress, unique: true)
-                .Index(t => t.Pin, unique: true);
-
-            CreateTable(
-                "dbo.RaspberryDevice",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        LanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
-                        WLanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .Index(t => t.Id)
-                .Index(t => t.LanMacAddress, unique: true)
-                .Index(t => t.WLanMacAddress, unique: true);
-        }
-
-        #endregion Methods
     }
 }

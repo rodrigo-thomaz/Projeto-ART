@@ -1,29 +1,12 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using System;
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
-    using ART.Infra.CrossCutting.Repository;
 
-    public class Sensor : IEntity<Guid>
+    public class Sensor :  HardwareBase
     {
-        #region Properties
-
-        public DateTime CreateDate
-        {
-            get; set;
-        }
-
-        public Guid Id
-        {
-            get; set;
-        }
-
-        public string Label
-        {
-            get; set;
-        }
+        #region Properties        
 
         public SensorDatasheet SensorDatasheet
         {
