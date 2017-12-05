@@ -22,7 +22,6 @@ app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$mo
         rowHeight: 36,
         data: [],
         columnDefs: [
-            { name: 'HardwareInApplicationId', field: 'hardwareInApplicationId', width: 270 },
             { name: 'DeviceId', field: 'deviceId', width: 270 },
             { name: 'ChipId', field: 'chipId', width: 100 },
             { name: 'FlashChipId', field: 'flashChipId', width: 120 },
