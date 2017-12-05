@@ -11,7 +11,7 @@ app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', '$rootScop
         return $http.post(serviceBase + 'api/application/get').then(function (results) {
             applicationContext.application = results.data;
             applicationContext.applicationMQ = results.data.applicationMQ;
-            applicationContext.applicationMQ.application = results.data;
+            delete applicationContext.application.applicationMQ; 
             applicationContext.applicationLoaded = true;
             $rootScope.$emit(initializedEventName);
         });
