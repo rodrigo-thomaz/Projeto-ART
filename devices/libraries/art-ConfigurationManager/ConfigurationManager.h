@@ -62,18 +62,18 @@ class DeviceNTP {
 class DeviceInApplication {
   public:
 
-    DeviceInApplication(String deviceId, String deviceInApplicationId);
+    DeviceInApplication(String deviceId, String applicationId);
 
     String								getDeviceId();	
 	
-	String								getDeviceInApplicationId();	
+	String								getApplicationId();	
 		
   private:
     
 	String								_deviceId;
-	String								_deviceInApplicationId;
+	String								_applicationId;
 
-	void								setDeviceInApplicationId(String value);	
+	void								setApplicationId(String value);	
 	
     friend class ConfigurationManager;
 };

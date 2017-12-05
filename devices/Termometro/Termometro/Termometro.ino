@@ -121,7 +121,7 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
 {
   Serial.println("[MQQT::mqtt_ConnectedCallback] initializing ...");
 
-  if(configurationManager.getDeviceInApplication()->getDeviceInApplicationId() == ""){
+  if(configurationManager.getDeviceInApplication()->getApplicationId() == ""){
     subscribeNotInApplication();
   }
   else{
@@ -272,7 +272,7 @@ void loop() {
 
   DeviceInApplication* deviceInApplication = configurationManager.getDeviceInApplication();
   
-  if(deviceInApplication != NULL && deviceInApplication->getDeviceInApplicationId() == ""){
+  if(deviceInApplication != NULL && deviceInApplication->getApplicationId() == ""){
     displayAccessManager.loop();
     //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
   }    
@@ -321,7 +321,7 @@ void loopInApplication()
       StaticJsonBuffer<2048> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
 
-      root["deviceInApplicationId"] = configurationManager.getDeviceInApplication()->getDeviceInApplicationId();
+      root["applicationId"] = configurationManager.getDeviceInApplication()->getApplicationId();
       root["wifiQuality"] = wifiManager.getQuality();
       root["epochTimeUtc"] = ntpManager.getEpochTimeUTC();    
       root["localIPAddress"] = wifiManager.getLocalIPAddress();    

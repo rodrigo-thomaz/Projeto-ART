@@ -93,9 +93,9 @@ void DeviceNTP::setUpdateIntervalInMilliSecond(int value)
 
 // DeviceInApplication
 
-DeviceInApplication::DeviceInApplication(String deviceId, String deviceInApplicationId) {	
+DeviceInApplication::DeviceInApplication(String deviceId, String applicationId) {	
   _deviceId = deviceId;
-  _deviceInApplicationId = deviceInApplicationId == "null" ? "" : deviceInApplicationId;				
+  _applicationId = applicationId == "null" ? "" : applicationId;				
 }
 
 String DeviceInApplication::getDeviceId()
@@ -103,14 +103,14 @@ String DeviceInApplication::getDeviceId()
 	return this->_deviceId;
 }
 
-String DeviceInApplication::getDeviceInApplicationId()
+String DeviceInApplication::getApplicationId()
 {	
-	return this->_deviceInApplicationId;
+	return this->_applicationId;
 }
 
-void DeviceInApplication::setDeviceInApplicationId(String value)
+void DeviceInApplication::setApplicationId(String value)
 {	
-	this->_deviceInApplicationId = value;
+	this->_applicationId = value;
 }
 
 // ConfigurationManager
@@ -226,7 +226,7 @@ void ConfigurationManager::autoInitialize()
 			
 			this->_deviceInApplication = new DeviceInApplication(
 				jsonObjectResponse["deviceId"], 
-				jsonObjectResponse["deviceInApplicationId"]);					
+				jsonObjectResponse["applicationId"]);					
 			
 			int publishMessageInterval = jsonObjectResponse["publishMessageInterval"];	
 			this->_publishMessageInterval = publishMessageInterval;
@@ -259,8 +259,8 @@ void ConfigurationManager::autoInitialize()
 			
 			Serial.print("DeviceId: ");
 			Serial.println(this->_deviceInApplication->getDeviceId());
-			Serial.print("DeviceInApplicationId: ");
-			Serial.println(this->_deviceInApplication->getDeviceInApplicationId());
+			Serial.print("ApplicationId: ");
+			Serial.println(this->_deviceInApplication->getApplicationId());
 			
 			Serial.print("PublishMessageInterval: ");
 			Serial.println(this->_publishMessageInterval);
@@ -287,22 +287,22 @@ void ConfigurationManager::insertInApplication(String json)
 		return;
 	}	
 
-	String deviceInApplicationId = root["deviceInApplicationId"];
+	String applicationId = root["applicationId"];
 	String brokerApplicationTopic = root["brokerApplicationTopic"];	
 	
-	this->_deviceInApplication->setDeviceInApplicationId(deviceInApplicationId);
+	this->_deviceInApplication->setApplicationId(applicationId);
 	this->_deviceMQ->setApplicationTopic(brokerApplicationTopic);
 	
 	Serial.println("[ConfigurationManager::insertInApplication] ");
-	Serial.print("deviceInApplicationId: ");
-	Serial.println(deviceInApplicationId);
+	Serial.print("applicationId: ");
+	Serial.println(applicationId);
 	Serial.print("brokerApplicationTopic: ");
 	Serial.println(brokerApplicationTopic);
 }
 
 void ConfigurationManager::deleteFromApplication()
 {	
-	this->_deviceInApplication->setDeviceInApplicationId("");	
+	this->_deviceInApplication->setApplicationId("");	
 	this->_deviceMQ->setApplicationTopic("");
 	
 	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
