@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public Guid DeviceInApplicationId
+        public Guid ApplicationId
         {
             get; set;
         }

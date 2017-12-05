@@ -182,9 +182,9 @@ namespace ART.Domotica.Domain.Services
             return sensorTempDSFamilyEntity;
         }
 
-        public async Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
+        public async Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceBaseId)
         {
-            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(deviceInApplicationId);
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceBaseId);
 
             if (deviceInApplication == null)
             {

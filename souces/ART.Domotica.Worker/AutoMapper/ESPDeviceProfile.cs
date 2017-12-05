@@ -18,26 +18,26 @@
         public ESPDeviceProfile()
         {
             CreateMap<ESPDevice, ESPDeviceGetModel>()
-                .ForMember(vm => vm.DeviceInApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().Id))
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().ApplicationId))
+                .ForMember(vm => vm.DeviceBaseId, m => m.MapFrom(x => x.DevicesInApplication.Single().DeviceBaseId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)));
 
             CreateMap<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>()
-                .ForMember(vm => vm.DeviceInApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().Id));
+                .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().ApplicationId));
 
             CreateMap<ESPDevice, ESPDeviceGetByPinModel>();
 
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
-                .ForMember(vm => vm.DeviceInApplicationId, m => m.ResolveUsing(src => {
+                .ForMember(vm => vm.ApplicationId, m => m.ResolveUsing(src => {
                     if (src.DevicesInApplication != null && src.DevicesInApplication.Any())
                     {
-                        return src.DevicesInApplication.Single().Id;
+                        return src.DevicesInApplication.Single().ApplicationId;
                     }
                     return (Guid?)null;
                 }))
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceBaseId, m => m.MapFrom(x => x.DevicesInApplication.Single().DeviceBaseId))
                 .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP));
 

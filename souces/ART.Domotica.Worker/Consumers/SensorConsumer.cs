@@ -151,11 +151,13 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
-            var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.GetAllByDeviceInApplicationId(requestContract.DeviceInApplicationId);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
+
+            var domain = _componentContext.Resolve<ISensorDomain>();
+            var data = await domain.GetAllByDeviceInApplicationId(applicationMQ.Id, requestContract.DeviceId);
+                        
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId);
 

@@ -22,32 +22,47 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
 
-            //DeviceInApplicationId
-            Property(x => x.DeviceInApplicationId)
+            //ApplicationId
+            Property(x => x.ApplicationId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("IX_Unique_DeviceInApplicationId_ProjectId", 0) { IsUnique = true },
+                        new IndexAttribute("IX_Unique_DeviceInApplication_ProjectId", 0) { IsUnique = true },
                     }));
 
-            //ProjectId
-            Property(x => x.ProjectId)
+            //DeviceBaseId
+            Property(x => x.DeviceBaseId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("IX_Unique_DeviceInApplicationId_ProjectId", 1) { IsUnique = true },
+                        new IndexAttribute("IX_Unique_DeviceInApplication_ProjectId", 1) { IsUnique = true },
+                    }));
+
+            //ProjectId
+            Property(x => x.ProjectId)
+                .HasColumnOrder(3)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new List<IndexAttribute>
+                    {
+                        new IndexAttribute("IX_Unique_DeviceInApplication_ProjectId", 2) { IsUnique = true },
                     }));
 
             //DeviceInApplication
             HasRequired(x => x.DeviceInApplication)
                 .WithMany(x => x.HardwaresInProject)
-                .HasForeignKey(x => x.DeviceInApplicationId)
+                .HasForeignKey(x => new
+                {
+                    x.ApplicationId,
+                    x.DeviceBaseId,
+                })
                 .WillCascadeOnDelete(false);
 
             //Project

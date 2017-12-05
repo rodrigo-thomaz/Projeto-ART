@@ -16,12 +16,12 @@
             get; set;
         }
 
-        public Guid DeviceId
+        public Guid DeviceBaseId
         {
             get; set;
         }
 
-        public Guid DeviceInApplicationId
+        public Guid ApplicationId
         {
             get; set;
         }

@@ -283,14 +283,15 @@
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.DeleteFromApplication(message.Contract.DeviceInApplicationId);
-
-            var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.DeleteFromApplication(applicationMQ.Id, message.Contract.DeviceBaseId);
+
+            var exchange = "amq.topic";
+            
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id);
 
@@ -298,8 +299,7 @@
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
             var viewModel = new ESPDeviceDeleteFromApplicationModel
             {
-                DeviceId = data.Id,
-                DeviceInApplicationId = message.Contract.DeviceInApplicationId
+                DeviceBaseId = data.Id,
             };
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);                        
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

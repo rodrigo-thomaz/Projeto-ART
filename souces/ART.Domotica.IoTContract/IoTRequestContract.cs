@@ -11,11 +11,6 @@
             get; set;
         }
 
-        public Guid DeviceInApplicationId
-        {
-            get; set;
-        }
-
         #endregion Properties
     }
 }

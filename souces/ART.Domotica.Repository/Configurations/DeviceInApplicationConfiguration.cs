@@ -14,24 +14,17 @@
         public DeviceInApplicationConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
-
-            //Id
-            Property(x => x.Id)
-                .HasColumnOrder(0)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
-                .IsRequired();
+            HasKey(x => new
+            {
+                x.ApplicationId,
+                x.DeviceBaseId,
+            });           
 
             //ApplicationId
             Property(x => x.ApplicationId)
-                .HasColumnOrder(1)
+                .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired()
-                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new List<IndexAttribute>
-                    {
-                        new IndexAttribute("IX_Unique_ApplicationId_DeviceBaseId", 0) { IsUnique = true },
-                    }));
+                .IsRequired();
 
             //Application
             HasRequired(x => x.Application)
@@ -41,14 +34,13 @@
 
             //DeviceBaseId
             Property(x => x.DeviceBaseId)
-                .HasColumnOrder(2)
+                .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
                         new IndexAttribute ("IX_Unique_DeviceBaseId") { IsUnique = true },
-                        new IndexAttribute("IX_Unique_ApplicationId_DeviceBaseId", 1) { IsUnique = true },
                     }));
 
             //DeviceBase
@@ -59,12 +51,12 @@
 
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(3)
+                .HasColumnOrder(2)
                 .IsRequired();
 
             //CreateByApplicationUserId
             Property(x => x.CreateByApplicationUserId)
-                .HasColumnOrder(4);
+                .HasColumnOrder(3);
 
             //CreateByApplicationUser
             HasRequired(x => x.CreateByApplicationUser)

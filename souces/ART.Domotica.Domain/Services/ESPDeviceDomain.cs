@@ -89,9 +89,9 @@
             return hardwareEntity;
         }
 
-        public async Task<ESPDevice> DeleteFromApplication(Guid deviceInApplicationId)
+        public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceBaseId)
         {
-            var deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(deviceInApplicationId);
+            DeviceInApplication deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(applicationId, deviceBaseId);
             
             if (deviceInApplicationEntity == null)
             {

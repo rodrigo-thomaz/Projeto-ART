@@ -5,7 +5,7 @@
 
     using ART.Infra.CrossCutting.Repository;
 
-    public class DeviceInApplication : IEntity<Guid>
+    public class DeviceInApplication : IEntity
     {
         #region Properties
 
@@ -45,11 +45,6 @@
         }
 
         public ICollection<HardwaresInProject> HardwaresInProject
-        {
-            get; set;
-        }
-
-        public Guid Id
         {
             get; set;
         }
