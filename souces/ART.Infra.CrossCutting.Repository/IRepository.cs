@@ -24,11 +24,11 @@
 
         Task Insert(List<TEntity> entities);
 
+        IQueryable<TEntity> SearchFor(Expression<Func<TEntity, bool>> predicate);
+
         Task Update(TEntity entity);
 
         Task Update(List<TEntity> entities);
-
-        IQueryable<TEntity> SearchFor(Expression<Func<TEntity, bool>> predicate);
 
         #endregion Methods
     }

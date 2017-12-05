@@ -1,18 +1,15 @@
 ﻿namespace ART.Domotica.Repository
 {
+    using System;
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration;
     using System.Data.Entity.ModelConfiguration.Conventions;
+    using System.Linq;
+    using System.Reflection;
 
-    using ART.Domotica.Repository.Configurations;
-    using ART.Domotica.Repository.Configurations.Locale;
-    using ART.Domotica.Repository.Configurations.SI;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Entities.Locale;
     using ART.Domotica.Repository.Entities.SI;
-    using System.Reflection;
-    using System.Linq;
-    using System;
-    using System.Data.Entity.ModelConfiguration;
 
     public class ARTDbContext : DbContext
     {
@@ -193,7 +190,7 @@
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            //Configurations            
+            //Configurations
 
             var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
                 .Where(type => !String.IsNullOrEmpty(type.Namespace))
@@ -204,7 +201,6 @@
                 dynamic configurationInstance = Activator.CreateInstance(type);
                 modelBuilder.Configurations.Add(configurationInstance);
             }
-
 
             base.OnModelCreating(modelBuilder);
         }
