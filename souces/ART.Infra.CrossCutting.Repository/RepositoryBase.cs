@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ART.Infra.CrossCutting.Repository
@@ -68,6 +71,11 @@ namespace ART.Infra.CrossCutting.Repository
                 _context.Entry(entity).State = EntityState.Deleted;
             }
             await _context.SaveChangesAsync();
+        }
+
+        public IQueryable<TEntity> SearchFor(Expression<Func<TEntity, bool>> predicate)
+        {
+            return _context.Set<TEntity>().Where(predicate);
         }
     }
 }
