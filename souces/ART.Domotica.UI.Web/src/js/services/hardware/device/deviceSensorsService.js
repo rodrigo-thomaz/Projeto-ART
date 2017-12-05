@@ -20,7 +20,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         if (!_initializing && !_initialized) {
             _initializing = true;
-            getAllByApplicationId();
+            //getAllByApplicationId();
         }
     }   
 
