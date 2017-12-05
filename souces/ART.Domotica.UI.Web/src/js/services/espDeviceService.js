@@ -101,9 +101,9 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var onReadReceived = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        for (var i = 0; i < serviceFactory.devices.length; i++) {
-            var device = serviceFactory.devices[i];
-            if (device.hardwareInApplicationId === data.hardwareInApplicationId) {
+        for (var i = 0; i < contextScope.devices.length; i++) {
+            var device = contextScope.devices[i];
+            if (device.hardwareId === data.hardwareId) {
                 device.epochTimeUtc = data.epochTimeUtc;
                 device.wifiQuality = data.wifiQuality;
                 device.localIPAddress = data.localIPAddress;
