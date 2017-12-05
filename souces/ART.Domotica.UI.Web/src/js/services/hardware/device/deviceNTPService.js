@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'espDeviceService', function ($http, $log, ngAuthSettings, $rootScope, stompService, espDeviceService) {
+app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceService', function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceService) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -34,16 +34,16 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
     var onSetTimeZoneCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var device = espDeviceService.getDeviceById(result.deviceId);
+        var device = deviceService.getDeviceById(result.deviceId);
         device.deviceNTP.timeZoneId = result.timeZoneId;
-        $rootScope.$emit('espDeviceService_onSetTimeZoneCompleted_Id_' + result.deviceId, result);
+        $rootScope.$emit('deviceService_onSetTimeZoneCompleted_Id_' + result.deviceId, result);
     };
 
     var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var device = espDeviceService.getDeviceById(result.deviceId);
+        var device = deviceService.getDeviceById(result.deviceId);
         device.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
-        $rootScope.$emit('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + result.deviceId, result);
+        $rootScope.$emit('deviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + result.deviceId, result);
     }
     
     $rootScope.$on('$destroy', function () {

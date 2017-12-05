@@ -1,9 +1,9 @@
 ﻿'use strict';
-app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootScope', 'toaster', 'espDeviceService', function ($scope, $timeout, $log, $rootScope, toaster, espDeviceService) {    
+app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootScope', 'toaster', 'deviceService', function ($scope, $timeout, $log, $rootScope, toaster, deviceService) {    
 
     var onGetByPinClick = function () {    
         $scope.searchingPin = true;
-        espDeviceService.getByPin($scope.pin).then(function successCallback(response) {
+        deviceService.getByPin($scope.pin).then(function successCallback(response) {
 
             }, function errorCallback(response) {
                 $scope.searchingPin = false;
@@ -21,7 +21,7 @@ app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootS
     }
 
     var onInsertInApplicationClick = function () {
-        espDeviceService.insertInApplication($scope.pin);
+        deviceService.insertInApplication($scope.pin);
     }
 
     var onInsertInApplicationCompleted = function (payload) {
@@ -33,8 +33,8 @@ app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootS
         clearOnInsertInApplicationCompleted();
     });
 
-    var clearOnGetByPinCompleted = $rootScope.$on(espDeviceService.getByPinCompletedEventName, onGetByPinCompleted);        
-    var clearOnInsertInApplicationCompleted = $rootScope.$on(espDeviceService.insertInApplicationCompletedEventName, onInsertInApplicationCompleted);        
+    var clearOnGetByPinCompleted = $rootScope.$on(deviceService.getByPinCompletedEventName, onGetByPinCompleted);        
+    var clearOnInsertInApplicationCompleted = $rootScope.$on(deviceService.insertInApplicationCompletedEventName, onInsertInApplicationCompleted);        
     
     $scope.pin = "";
     $scope.espDevice = null;

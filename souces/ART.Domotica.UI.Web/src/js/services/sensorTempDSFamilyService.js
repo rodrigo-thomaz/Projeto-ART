@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitMeasurementService', 'unitMeasurementConverter', 'espDeviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitMeasurementService, unitMeasurementConverter, espDeviceService) {
+app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitMeasurementService', 'unitMeasurementConverter', 'deviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitMeasurementService, unitMeasurementConverter, deviceService) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -8,7 +8,7 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
     var serviceFactory = {};   
 
     var getByKey = function (deviceId, sensorTempDSFamilyId) {
-        var device = espDeviceService.getDeviceById(deviceId);
+        var device = deviceService.getDeviceById(deviceId);
         for (var i = 0; i < device.sensors.length; i++) {
             var sensor = device.sensors[i];
             if (sensor.sensorTempDSFamilyId === sensorTempDSFamilyId) {

@@ -218,14 +218,16 @@
     <Content Include="src\js\directives\ui-uppercased.js" />
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />
     <Content Include="src\js\services\contextScope.js" />
-    <Content Include="src\js\services\sensorsInDeviceService.js" />
+    <Content Include="src\js\services\hardware\device\deviceContext.js" />
+    <Content Include="src\js\services\hardware\device\deviceMapper.js" />
+    <Content Include="src\js\services\hardware\device\sensorsInDeviceService.js" />
     <Content Include="src\js\services\sensorTempDSFamilyResolutionService.js" />
-    <Content Include="src\js\services\deviceNTPService.js" />
+    <Content Include="src\js\services\hardware\device\deviceNTPService.js" />
     <Content Include="src\js\services\locale\localeMapper.js" />
     <Content Include="src\js\services\locale\localeContext.js" />
     <Content Include="src\js\services\sensorTriggerService.js" />
     <Content Include="src\js\services\sensorUnitMeasurementScaleService.js" />
-    <Content Include="src\js\services\espDeviceService.js" />
+    <Content Include="src\js\services\hardware\device\deviceService.js" />
     <Content Include="src\js\services\application\applicationUserService.js" />
     <Content Include="src\js\services\authInterceptorService.js" />
     <Content Include="src\js\services\authService.js" />
@@ -244,7 +246,7 @@
     <Content Include="src\js\services\si\numericalScaleTypeCountryService.js" />
     <Content Include="src\js\services\si\unitMeasurementScaleService.js" />
     <Content Include="src\js\services\si\unitMeasurementTypeService.js" />
-    <Content Include="src\js\services\deviceSensorsService.js" />
+    <Content Include="src\js\services\hardware\device\deviceSensorsService.js" />
     <Content Include="src\js\services\timeZoneService.js" />
     <Content Include="src\js\services\si\unitMeasurementService.js" />
     <Content Include="src\js\services\sensorTempDSFamilyService.js" />
@@ -511,7 +513,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="src\js\services\hardware\sensor\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

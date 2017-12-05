@@ -69,6 +69,17 @@ angular.module('app')
                       'js/services/si/unitMeasurementService.js',
                       'js/services/si/unitMeasurementConverter.js',
 
+                      //*** Hardware ***
+
+                      //Device
+
+                      'js/services/hardware/device/deviceContext.js',
+                      'js/services/hardware/device/deviceMapper.js',
+                      'js/services/hardware/device/deviceNTPService.js',
+                      'js/services/hardware/device/deviceSensorsService.js',
+                      'js/services/hardware/device/sensorsInDeviceService.js',
+                      'js/services/hardware/device/deviceService.js',                     
+
                       //
                       'js/services/sensorTypeService.js',                      
                       'js/services/sensorDatasheetService.js',                      
@@ -80,13 +91,7 @@ angular.module('app')
                       'js/services/sensorTriggerService.js',
 
                       'js/services/sensorTempDSFamilyResolutionService.js',
-                      'js/services/sensorTempDSFamilyService.js',
-
-                      'js/services/deviceNTPService.js',                      
-                      'js/services/espDeviceService.js',
-
-                      'js/services/deviceSensorsService.js',
-                      'js/services/sensorsInDeviceService.js',
+                      'js/services/sensorTempDSFamilyService.js',                      
 
                       'js/controllers/sensorUnitMeasurementScaleController.js',
                       'js/controllers/sensorTriggerController.js',                      
@@ -111,7 +116,17 @@ angular.module('app')
 
                       'js/services/contextScope.js',
 
-                      'js/services/espDeviceService.js',
+                      //*** Hardware ***
+
+                      //Device
+
+                      'js/services/hardware/device/deviceContext.js',
+                      'js/services/hardware/device/deviceMapper.js',
+                      'js/services/hardware/device/deviceNTPService.js',
+                      'js/services/hardware/device/deviceSensorsService.js',
+                      'js/services/hardware/device/sensorsInDeviceService.js',
+                      'js/services/hardware/device/deviceService.js',            
+
                       'js/controllers/espDeviceJoinController.js',
                       'js/controllers/espDeviceManagerController.js',
                   ])

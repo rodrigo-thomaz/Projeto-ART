@@ -3,7 +3,7 @@ app.controller('espDeviceListController', [
     '$scope',
     '$timeout',
     '$log',
-    'espDeviceService',
+    'deviceService',
     'continentService',
     'countryService',
     'numericalScaleService',
@@ -21,13 +21,13 @@ app.controller('espDeviceListController', [
     'deviceSensorsService',
     'sensorsInDeviceService',
     'sensorService',
-    function ($scope, $timeout, $log, espDeviceService) {    
+    function ($scope, $timeout, $log, deviceService) {    
    
-    $scope.devices = espDeviceService.devices;    
+    $scope.devices = deviceService.devices;    
 
 }]);
 
-app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'timeZoneService', 'espDeviceService', 'deviceNTPService', function ($scope, $rootScope, $timeout, $log, toaster, timeZoneService, espDeviceService, deviceNTPService) {
+app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'timeZoneService', 'deviceService', 'deviceNTPService', function ($scope, $rootScope, $timeout, $log, toaster, timeZoneService, deviceService, deviceNTPService) {
 
     $scope.device = {};
 
@@ -39,7 +39,7 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
         $scope.labelView = device.label;
 
-        clearOnSetLabelCompleted = $rootScope.$on('espDeviceService_onSetLabelCompleted_Id_' + $scope.device.deviceId, onSetLabelCompleted);        
+        clearOnSetLabelCompleted = $rootScope.$on('deviceService_onSetLabelCompleted_Id_' + $scope.device.deviceId, onSetLabelCompleted);        
 
         initialized = true;
     }
@@ -57,7 +57,7 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
     $scope.changeLabel = function () {
         if (!initialized || !$scope.labelView) return;
-        espDeviceService.setLabel($scope.device.deviceId, $scope.labelView);
+        deviceService.setLabel($scope.device.deviceId, $scope.labelView);
     };
 
 }]);
@@ -82,8 +82,8 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
         else
             clearOnTimeZoneServiceInitialized = $rootScope.$on('timeZoneService_Initialized', setSelectedTimeZone);
 
-        clearOnSetTimeZoneCompleted = $rootScope.$on('espDeviceService_onSetTimeZoneCompleted_Id_' + $scope.deviceId, onSetTimeZoneCompleted);
-        clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('espDeviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.deviceId, onSetUpdateIntervalInMilliSecondCompleted);
+        clearOnSetTimeZoneCompleted = $rootScope.$on('deviceService_onSetTimeZoneCompleted_Id_' + $scope.deviceId, onSetTimeZoneCompleted);
+        clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('deviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.deviceId, onSetUpdateIntervalInMilliSecondCompleted);
 
         initialized = true;
     }
@@ -129,7 +129,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
 }]);
 
-app.controller('sensorTempDSFamilyItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'espDeviceService', 'sensorTempDSFamilyResolutionService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorUnitMeasurementScaleService', 'sensorTriggerService', 'sensorTempDSFamilyService', 'siContext', function ($scope, $rootScope, $timeout, $log, toaster, espDeviceService, sensorTempDSFamilyResolutionService, unitMeasurementConverter, unitMeasurementTypeService, unitMeasurementService, sensorUnitMeasurementScaleService, sensorTriggerService, sensorTempDSFamilyService, siContext) {
+app.controller('sensorTempDSFamilyItemController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'deviceService', 'sensorTempDSFamilyResolutionService', 'unitMeasurementConverter', 'unitMeasurementTypeService', 'unitMeasurementService', 'sensorUnitMeasurementScaleService', 'sensorTriggerService', 'sensorTempDSFamilyService', 'siContext', function ($scope, $rootScope, $timeout, $log, toaster, deviceService, sensorTempDSFamilyResolutionService, unitMeasurementConverter, unitMeasurementTypeService, unitMeasurementService, sensorUnitMeasurementScaleService, sensorTriggerService, sensorTempDSFamilyService, siContext) {
 
     $scope.sensor = {};           
 

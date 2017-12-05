@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, $log, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, $log, ngAuthSettings, $rootScope, stompService, contextScope) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -11,29 +11,29 @@ app.factory('espDeviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     var getAllByApplicationIdApiUri = 'api/espDevice/getAllByApplicationId';
     var getAllByApplicationIdCompletedTopic = 'ESPDevice.GetAllByApplicationIdViewCompleted';
     var getAllByApplicationIdCompletedSubscription = null;
-    var getAllByApplicationIdCompletedEventName = 'espDeviceService.onGetAllByApplicationIdCompleted_Id_';
+    var getAllByApplicationIdCompletedEventName = 'deviceService.onGetAllByApplicationIdCompleted_Id_';
 
     var insertInApplicationApiUri = 'api/espDevice/insertInApplication';
     var insertInApplicationCompletedTopic = 'ESPDevice.InsertInApplicationViewCompleted';
     var insertInApplicationCompletedSubscription = null;
-    var insertInApplicationCompletedEventName = 'espDeviceService.onInsertInApplicationCompleted';
+    var insertInApplicationCompletedEventName = 'deviceService.onInsertInApplicationCompleted';
 
     var deleteFromApplicationApiUri = 'api/espDevice/deleteFromApplication';
     var deleteFromApplicationCompletedTopic = 'ESPDevice.DeleteFromApplicationViewCompleted';
     var deleteFromApplicationCompletedSubscription = null;
-    var deleteFromApplicationCompletedEventName = 'espDeviceService.onDeleteFromApplicationCompleted';
+    var deleteFromApplicationCompletedEventName = 'deviceService.onDeleteFromApplicationCompleted';
 
     var getByPinApiUri = 'api/espDevice/getByPin';
     var getByPinCompletedTopic = 'ESPDevice.GetByPinViewCompleted';
     var getByPinCompletedSubscription = null;
-    var getByPinCompletedEventName = 'espDeviceService.onGetByPinCompleted';
+    var getByPinCompletedEventName = 'deviceService.onGetByPinCompleted';
 
     var setLabelApiUri = 'api/espDevice/setLabel';
     var setLabelCompletedTopic = 'ESPDevice.SetLabelViewCompleted';
     var setLabelCompletedSubscription = null;
-    var setLabelCompletedEventName = 'espDeviceService.onSetLabelCompleted_Id_';
+    var setLabelCompletedEventName = 'deviceService.onSetLabelCompleted_Id_';
 
-    var initializedEventName = 'espDeviceService.onInitialized';
+    var initializedEventName = 'deviceService.onInitialized';
 
     var onConnected = function () {
 
