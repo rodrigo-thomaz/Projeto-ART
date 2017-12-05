@@ -112,7 +112,7 @@
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DeviceNTP, DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract>(data);
@@ -151,7 +151,7 @@
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract, DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract>(message.Contract);

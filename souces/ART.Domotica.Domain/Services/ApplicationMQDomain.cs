@@ -37,8 +37,8 @@
 
         public async Task<ApplicationMQ> GetByApplicationUserId(AuthenticatedMessageContract message)
         {
-            var applicationUserEntity = await _applicationUserRepository.GetById(message.ApplicationUserId);
-            return await _applicationMQRepository.GetById(applicationUserEntity.ApplicationId);
+            var applicationUserEntity = await _applicationUserRepository.GetByKey(message.ApplicationUserId);
+            return await _applicationMQRepository.GetByKey(applicationUserEntity.ApplicationId);
         }
 
         public async Task<ApplicationMQ> GetByDeviceId(Guid deviceId)

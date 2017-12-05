@@ -89,7 +89,7 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
     var onSetUnitMeasurementCompleted = function (payload) {
 
         var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.sensorTempDSFamilyId);
+        var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
 
         //unitMeasurement
         sensor.unitMeasurementId = result.unitMeasurementId;
@@ -111,7 +111,7 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
 
     var onSetLabelCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.sensorTempDSFamilyId);
+        var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
         sensor.label = result.label;
         $rootScope.$emit(setLabelCompletedEventName + result.sensorTempDSFamilyId, result);
     }   

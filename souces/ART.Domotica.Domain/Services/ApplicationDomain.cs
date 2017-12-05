@@ -34,9 +34,9 @@
 
         #region Methods
 
-        public async Task<Application> GetById(Guid applicationId)
+        public async Task<Application> GetByKey(Guid applicationId)
         {
-            var data =  await _applicationRepository.GetById(applicationId);
+            var data =  await _applicationRepository.GetByKey(applicationId);
 
             if (data == null)
             {

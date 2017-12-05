@@ -35,14 +35,14 @@
 
         public async Task<DeviceNTP> SetTimeZone(Guid deviceNTPId, byte timeZoneId)
         {
-            var entity = await _deviceNTPRepository.GetById(deviceNTPId);
+            var entity = await _deviceNTPRepository.GetByKey(deviceNTPId);
 
             if (entity == null)
             {
                 throw new Exception("DeviceNTP not found");
             }
 
-            var timeZone = await _timeZoneRepository.GetById(timeZoneId);
+            var timeZone = await _timeZoneRepository.GetByKey(timeZoneId);
 
             if (timeZone == null)
             {
@@ -58,7 +58,7 @@
 
         public async Task<DeviceNTP> SetUpdateIntervalInMilliSecond(Guid deviceNTPId, int updateIntervalInMilliSecond)
         {
-            var entity = await _deviceNTPRepository.GetById(deviceNTPId);
+            var entity = await _deviceNTPRepository.GetByKey(deviceNTPId);
 
             if (entity == null)
             {

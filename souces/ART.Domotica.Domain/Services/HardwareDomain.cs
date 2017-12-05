@@ -33,7 +33,7 @@
         
         public async Task<HardwareBase> SetLabel(Guid deviceId, string label)
         {
-            var entity = await _hardwareRepository.GetById(deviceId);
+            var entity = await _hardwareRepository.GetByKey(deviceId);
 
             if (entity == null)
             {

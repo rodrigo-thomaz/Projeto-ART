@@ -29,7 +29,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
     var onSetValueCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = sensorTempDSFamilyService.getById(result.deviceId, result.sensorUnitMeasurementScaleId);
+        var sensor = sensorTempDSFamilyService.getByKey(result.deviceId, result.sensorUnitMeasurementScaleId);
         if (result.position === 'Max') {
             sensor.sensorUnitMeasurementScale.max = result.value;
             sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);            

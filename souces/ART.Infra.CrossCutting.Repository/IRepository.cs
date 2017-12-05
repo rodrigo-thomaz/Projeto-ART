@@ -15,7 +15,7 @@
 
         Task Delete(List<TEntity> entities);
 
-        Task<TEntity> GetById(TKey key);
+        Task<TEntity> GetByKey(TKey key);
 
         Task Insert(TEntity entity);
 

@@ -34,9 +34,9 @@
             _settingsManager = settingsManager;
         }
 
-        public async Task<ApplicationUser> GetById(Guid applicationUserId)
+        public async Task<ApplicationUser> GetByKey(Guid applicationUserId)
         {
-            var data = await _applicationUserRepository.GetById(applicationUserId);
+            var data = await _applicationUserRepository.GetByKey(applicationUserId);
 
             if (data == null)
             {

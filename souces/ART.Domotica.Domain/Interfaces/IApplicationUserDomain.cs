@@ -9,7 +9,7 @@
     {
         #region Methods
 
-        Task<ApplicationUser> GetById(Guid applicationUserId);
+        Task<ApplicationUser> GetByKey(Guid applicationUserId);
 
         Task RegisterUser(ApplicationUser entity);
 

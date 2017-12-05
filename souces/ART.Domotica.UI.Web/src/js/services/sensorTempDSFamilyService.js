@@ -7,7 +7,7 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var serviceFactory = {};   
 
-    var getById = function (deviceBaseId, sensorTempDSFamilyId) {
+    var getByKey = function (deviceBaseId, sensorTempDSFamilyId) {
         var device = espDeviceService.getDeviceById(deviceBaseId);
         for (var i = 0; i < device.sensors.length; i++) {
             var sensor = device.sensors[i];
@@ -38,7 +38,7 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var onSetResolutionCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getById(result.deviceId, result.sensorTempDSFamilyId);
+        var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
         sensor.sensorTempDSFamilyResolutionId = result.sensorTempDSFamilyResolutionId;
         $rootScope.$emit('sensorTempDSFamilyService_onSetResolutionCompleted_Id_' + result.sensorTempDSFamilyId, result);
     }     
@@ -54,7 +54,7 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
 
     // serviceFactory
 
-    serviceFactory.getById = getById;
+    serviceFactory.getByKey = getByKey;
     serviceFactory.setResolution = setResolution;
     
     return serviceFactory;

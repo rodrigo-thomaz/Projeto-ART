@@ -19,7 +19,7 @@ namespace ART.Infra.CrossCutting.Repository
             _context = context;
         }        
 
-        public async Task<TEntity> GetById(TKey key)
+        public async Task<TEntity> GetByKey(TKey key)
         {
             var entity = await _context.Set<TEntity>().FindAsync(key);
             return entity;

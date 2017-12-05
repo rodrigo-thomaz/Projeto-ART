@@ -31,9 +31,9 @@
 
         #region Methods
         
-        public async Task<DeviceMQ> GetById(Guid deviceMQId)
+        public async Task<DeviceMQ> GetByKey(Guid deviceMQId)
         {
-            var data = await _deviceMQRepository.GetById(deviceMQId);
+            var data = await _deviceMQRepository.GetByKey(deviceMQId);
 
             if (data == null)
             {

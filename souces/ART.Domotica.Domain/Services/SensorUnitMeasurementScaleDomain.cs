@@ -33,7 +33,7 @@
 
         public async Task<SensorUnitMeasurementScale> SetValue(Guid sensorUnitMeasurementScaleId, SensorUnitMeasurementScalePositionEnum position, decimal value)
         {
-            var entity = await _sensorUnitMeasurementScaleRepository.GetById(sensorUnitMeasurementScaleId);
+            var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId);
 
             if (entity == null)
             {

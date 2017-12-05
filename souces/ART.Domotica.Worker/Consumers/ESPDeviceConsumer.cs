@@ -189,7 +189,7 @@
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
 
             var applicationUserDomain = _componentContext.Resolve<IApplicationUserDomain>();
-            var applicationUser = await applicationUserDomain.GetById(message.ApplicationUserId);
+            var applicationUser = await applicationUserDomain.GetByKey(message.ApplicationUserId);
 
             var espDevicedomain = _componentContext.Resolve<IESPDeviceDomain>();
             var data = await espDevicedomain.GetAllByApplicationId(applicationUser.ApplicationId);
@@ -292,7 +292,7 @@
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(data.Id);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.Id);
 
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);

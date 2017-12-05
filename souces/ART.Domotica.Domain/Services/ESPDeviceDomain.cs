@@ -71,7 +71,7 @@
                 throw new Exception("Pin not found");
             }
 
-            var applicationUserEntity = await _applicationUserRepository.GetById(createByApplicationUserId);
+            var applicationUserEntity = await _applicationUserRepository.GetByKey(createByApplicationUserId);
 
             if (applicationUserEntity == null)
             {
@@ -91,7 +91,7 @@
 
         public async Task<ESPDevice> DeleteFromApplication(Guid deviceInApplicationId)
         {
-            var deviceInApplicationEntity = await _deviceInApplicationRepository.GetById(deviceInApplicationId);
+            var deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(deviceInApplicationId);
             
             if (deviceInApplicationEntity == null)
             {
@@ -100,7 +100,7 @@
 
             await _deviceInApplicationRepository.Delete(deviceInApplicationEntity);
 
-            var hardwareEntity = await _espDeviceRepository.GetById(deviceInApplicationEntity.DeviceBaseId);
+            var hardwareEntity = await _espDeviceRepository.GetByKey(deviceInApplicationEntity.DeviceBaseId);
 
             return hardwareEntity;
         }

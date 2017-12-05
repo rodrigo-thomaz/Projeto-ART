@@ -120,7 +120,7 @@ namespace ART.Domotica.Worker.Consumers
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
 
             var applicationUserDomain = _componentContext.Resolve<IApplicationUserDomain>();
-            var applicationUser = await applicationUserDomain.GetById(message.ApplicationUserId);
+            var applicationUser = await applicationUserDomain.GetByKey(message.ApplicationUserId);
 
             var domain = _componentContext.Resolve<ISensorDomain>();
             var data = await domain.GetAllByApplicationId(applicationUser.ApplicationId);
@@ -157,7 +157,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(requestContract.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId);
 
             var exchange = "amq.topic";
 
@@ -200,7 +200,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetById(viewModel.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorSetUnitMeasurementRequestContract, SensorSetUnitMeasurementRequestIoTContract>(message.Contract);

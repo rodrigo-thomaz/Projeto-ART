@@ -73,10 +73,10 @@ namespace ART.Domotica.Worker.Consumers
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             
             var applicationUserDomain = _componentContext.Resolve<IApplicationUserDomain>();
-            var applicationUser = await applicationUserDomain.GetById(message.ApplicationUserId);
+            var applicationUser = await applicationUserDomain.GetByKey(message.ApplicationUserId);
 
             var applicationDomain = _componentContext.Resolve<IApplicationDomain>();
-            var application = await applicationDomain.GetById(applicationUser.ApplicationId);
+            var application = await applicationDomain.GetByKey(applicationUser.ApplicationId);
 
             var exchange = "amq.topic";
 

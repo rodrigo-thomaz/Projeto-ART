@@ -9,7 +9,7 @@
     {
         #region Methods
 
-        Task<Application> GetById(Guid applicationId);
+        Task<Application> GetByKey(Guid applicationId);
 
         #endregion Methods
     }

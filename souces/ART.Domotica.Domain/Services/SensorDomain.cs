@@ -50,7 +50,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<Sensor> SetAlarmOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmOn)
         {
-            var entity = await _sensorRepository.GetById(sensorId);
+            var entity = await _sensorRepository.GetByKey(sensorId);
 
             if (entity == null)
             {
@@ -79,7 +79,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<Sensor> SetAlarmCelsius(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, decimal alarmCelsius)
         {
-            var entity = await _sensorRepository.GetById(sensorId);
+            var entity = await _sensorRepository.GetByKey(sensorId);
 
             if (entity == null)
             {
@@ -108,7 +108,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<Sensor> SetAlarmBuzzerOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmBuzzerOn)
         {
-            var entity = await _sensorRepository.GetById(sensorId);
+            var entity = await _sensorRepository.GetByKey(sensorId);
 
             if (entity == null)
             {
@@ -147,9 +147,9 @@ namespace ART.Domotica.Domain.Services
             return data;
         }
 
-        public async Task<Sensor> GetById(Guid sensorId)
+        public async Task<Sensor> GetByKey(Guid sensorId)
         {
-            var data = await _sensorRepository.GetById(sensorId);
+            var data = await _sensorRepository.GetByKey(sensorId);
 
             if (data == null)
             {
@@ -161,7 +161,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<Sensor> SetUnitMeasurement(Guid sensorId, UnitMeasurementEnum unitMeasurementId)
         {
-            var sensorTempDSFamilyEntity = await _sensorRepository.GetById(sensorId);
+            var sensorTempDSFamilyEntity = await _sensorRepository.GetByKey(sensorId);
 
             if (sensorTempDSFamilyEntity == null)
             {
@@ -184,7 +184,7 @@ namespace ART.Domotica.Domain.Services
 
         public async Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid deviceInApplicationId)
         {
-            var deviceInApplication = await _deviceInApplicationRepository.GetById(deviceInApplicationId);
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(deviceInApplicationId);
 
             if (deviceInApplication == null)
             {

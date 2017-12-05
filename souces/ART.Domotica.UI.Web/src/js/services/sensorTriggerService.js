@@ -53,7 +53,7 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
     var onSetAlarmOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = sensorTempDSFamilyService.getById(result.deviceId, result.sensorTempDSFamilyId);
+        var sensor = sensorTempDSFamilyService.getByKey(result.deviceId, result.sensorTempDSFamilyId);
         if (result.position === 'Low')
             sensor.lowAlarm.alarmOn = result.alarmOn;
         else if (result.position === 'High')
@@ -63,7 +63,7 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
     var onSetAlarmCelsiusCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = sensorTempDSFamilyService.getById(result.deviceId, result.sensorTempDSFamilyId);
+        var sensor = sensorTempDSFamilyService.getByKey(result.deviceId, result.sensorTempDSFamilyId);
         if (result.position === 'Low')
             sensor.lowAlarm.alarmCelsius = result.alarmCelsius;
         else if (result.position === 'High')
@@ -73,7 +73,7 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
     var onSetAlarmBuzzerOnCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = sensorTempDSFamilyService.getById(result.deviceId, result.sensorTempDSFamilyId);
+        var sensor = sensorTempDSFamilyService.getByKey(result.deviceId, result.sensorTempDSFamilyId);
         if (result.position === 'Low')
             sensor.lowAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
         else if (result.position === 'High')

@@ -41,14 +41,14 @@ namespace ART.Domotica.Domain.Services
         
         public async Task<SensorTempDSFamily> SetResolution(Guid sensorTempDSFamilyId, byte sensorTempDSFamilyResolutionId)
         {
-            var sensorTempDSFamilyEntity = await _sensorTempDSFamilyRepository.GetById(sensorTempDSFamilyId);
+            var sensorTempDSFamilyEntity = await _sensorTempDSFamilyRepository.GetByKey(sensorTempDSFamilyId);
 
             if (sensorTempDSFamilyEntity == null)
             {
                 throw new Exception("SensorTempDSFamily not found");
             }
 
-            var sensorTempDSFamilyResolutionEntity = await _sensorTempDSFamilyResolutionRepository.GetById(sensorTempDSFamilyResolutionId);
+            var sensorTempDSFamilyResolutionEntity = await _sensorTempDSFamilyResolutionRepository.GetByKey(sensorTempDSFamilyResolutionId);
 
             if (sensorTempDSFamilyResolutionEntity == null)
             {

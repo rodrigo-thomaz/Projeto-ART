@@ -4,9 +4,9 @@
 
     using ART.Domotica.Enums;
 
-    public class Sensor :  HardwareBase
+    public class Sensor : HardwareBase
     {
-        #region Properties        
+        #region Properties
 
         public SensorDatasheet SensorDatasheet
         {
