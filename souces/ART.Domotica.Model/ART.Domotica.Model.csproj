@@ -75,7 +75,6 @@
     <Compile Include="SensorsInDeviceGetModel.cs" />
     <Compile Include="TimeZoneGetModel.cs" />
     <Compile Include="SI\UnitMeasurementGetModel.cs" />
-    <Compile Include="ApplicationGetModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorTriggerGetModel.cs" />
   </ItemGroup>

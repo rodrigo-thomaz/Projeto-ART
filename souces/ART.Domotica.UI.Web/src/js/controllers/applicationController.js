@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.controller('applicationController', ['$scope', '$translate', '$localStorage', '$window', '$location', 'authService', '$timeout', '$log', 'applicationService', 'applicationMQService',
-    function ($scope, $translate, $localStorage, $window, $location, authService, $timeout, $log, applicationService, applicationMQService) {    
+app.controller('applicationController', ['$scope', '$translate', '$localStorage', '$window', '$location', 'authService', '$timeout', '$log', 'applicationService', 
+    function ($scope, $translate, $localStorage, $window, $location, authService, $timeout, $log, applicationService) {    
         
         $scope.application = applicationService.application;
 

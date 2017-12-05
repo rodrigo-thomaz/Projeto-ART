@@ -10,6 +10,7 @@
         #region Methods
 
         Task<Application> GetByKey(Guid applicationId);
+        Task<Application> GetFullByKey(Guid applicationId);
 
         #endregion Methods
     }

@@ -4,8 +4,7 @@
     {
         #region Fields
 
-        public static readonly string GetQueueName = "Application.Get";
-        public static readonly string GetViewCompletedQueueName = "Application.GetViewCompleted";
+        public static readonly string GetRPCQueueName = "Application.GetRPC";
 
         #endregion Fields
     }

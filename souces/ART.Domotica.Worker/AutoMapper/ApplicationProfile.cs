@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
-    using ART.Domotica.Model;
+    using ART.Domotica.Contract;
     using ART.Domotica.Repository.Entities;
 
     using global::AutoMapper;
@@ -11,8 +11,9 @@
 
         public ApplicationProfile()
         {
-            CreateMap<Application, ApplicationGetModel>()
-                .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.Id));
+            CreateMap<Application, ApplicationGetRPCResponseContract>()
+                .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.ApplicationMQ, m => m.MapFrom(x => x.ApplicationMQ));
         }
 
         #endregion Constructors

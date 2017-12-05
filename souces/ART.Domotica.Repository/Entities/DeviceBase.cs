@@ -1,7 +1,5 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using System.Collections.Generic;
-
     public abstract class DeviceBase : HardwareBase
     {
         #region Properties

@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationGetRPCResponseContract.cs" />
     <Compile Include="ApplicationMQGetRPCResponseContract.cs" />
     <Compile Include="DeviceNTPDetailResponseContract.cs" />
     <Compile Include="DeviceMQDetailResponseContract.cs" />

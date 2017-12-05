@@ -217,7 +217,6 @@
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />
-    <Content Include="src\js\services\applicationMQService.js" />
     <Content Include="src\js\services\contextScope.js" />
     <Content Include="src\js\services\sensorsInDeviceService.js" />
     <Content Include="src\js\services\sensorTempDSFamilyResolutionService.js" />
@@ -235,6 +234,7 @@
     <Content Include="src\js\services\sensorDatasheetService.js" />
     <Content Include="src\js\services\sensorTypeService.js" />
     <Content Include="src\js\services\sensorService.js" />
+    <Content Include="src\js\services\mainContext.js" />
     <Content Include="src\js\services\si\siMapper.js" />
     <Content Include="src\js\services\si\siContext.js" />
     <Content Include="src\js\services\si\unitMeasurementConverter.js" />

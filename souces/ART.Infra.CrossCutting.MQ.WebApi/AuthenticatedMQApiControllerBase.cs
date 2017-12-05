@@ -13,8 +13,12 @@
         {
             get
             {
-                var values = Request.Headers.GetValues("webUITopic");
-                var value = values.SingleOrDefault();
+                var value = string.Empty;
+                if (Request.Headers.Contains("webUITopic"))
+                {
+                    var values = Request.Headers.GetValues("webUITopic");
+                    value = values.SingleOrDefault();
+                }
                 return value;
             }
         }

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicationMQ', function ($log, ngAuthSettings, $rootScope, applicationMQ) {
+app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'mainContext', function ($log, ngAuthSettings, $rootScope, mainContext) {
 
     var serviceFactory = {};    
 
@@ -29,27 +29,25 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
 
     var generateStringTopic = function (topic) {
         //https://rabbitmq.docs.pivotal.io/36/rabbit-web-docs/stomp.html        
-        //return '/exchange/amq.topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + applicationMQ.webUITopic + '.' + topic;
-        return '/topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + applicationMQ.webUITopic + '.' + topic;
+        //return '/exchange/amq.topic/ART.Application.' + mainContext.applicationMQ.applicationTopic + '.WebUI.' + mainContext.applicationMQ.webUITopic + '.' + topic;
+        return '/topic/ART.Application.' + mainContext.applicationMQ.applicationTopic + '.WebUI.' + mainContext.applicationMQ.webUITopic + '.' + topic;
     }
 
     var generateStringTopicAllViews = function (topic) {
         //https://rabbitmq.docs.pivotal.io/36/rabbit-web-docs/stomp.html        
-        //return '/exchange/amq.topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + topic;
-        return '/topic/ART.Application.' + applicationMQ.applicationTopic + '.WebUI.' + topic;
+        //return '/exchange/amq.topic/ART.Application.' + mainContext.applicationMQ.applicationTopic + '.WebUI.' + topic;
+        return '/topic/ART.Application.' + mainContext.applicationMQ.applicationTopic + '.WebUI.' + topic;
     }
 
     var connected = function () {
         return client.connected;
     };
 
-    var onApplicationMQInitialized = function (event, data) {
-
-        clearOnApplicationMQInitialized();
+    var connect = function (event, data) {
 
         var headers = {
-            login: applicationMQ.user,
-            passcode: applicationMQ.password,
+            login: mainContext.applicationMQ.user,
+            passcode: mainContext.applicationMQ.password,
             // additional header
             //'client-id': 'my-client-id'
         };
@@ -59,11 +57,7 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         serviceFactory.client = client;         
 
         client.connect(headers, onConnected, onError);    
-    };    
-
-    $rootScope.$on('$destroy', function () {
-        clearOnApplicationMQInitialized();        
-    });
+    };  
 
     var wsBrokerHostName = ngAuthSettings.wsBrokerHostName;
     var wsBrokerPort = ngAuthSettings.wsBrokerPort;       
@@ -72,8 +66,8 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
 
     var client = Stomp.client(url);
 
-    var clearOnApplicationMQInitialized = $rootScope.$on('applicationMQServiceInitialized', onApplicationMQInitialized);        
-    
+    connect();
+        
     // serviceFactory    
 
     serviceFactory.connectedEventName = connectedEventName;

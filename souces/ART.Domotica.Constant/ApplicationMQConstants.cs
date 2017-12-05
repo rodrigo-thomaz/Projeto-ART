@@ -4,7 +4,6 @@
     {
         #region Fields
 
-        public static readonly string GetRPCQueueName = "ApplicationMQ.GetRPC";
 
         #endregion Fields
     }

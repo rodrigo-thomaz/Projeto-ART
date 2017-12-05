@@ -45,7 +45,18 @@
 
             return data;
         }
+        
+        public async Task<Application> GetFullByKey(Guid applicationId)
+        {
+            var data = await _applicationRepository.GetFullByKey(applicationId);
 
+            if (data == null)
+            {
+                throw new Exception("Application not found");
+            }
+
+            return data;
+        }
         #endregion Methods
     }
 }
