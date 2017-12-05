@@ -20,14 +20,8 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     context.sensorsLoaded = false;
     context.sensors = [];    
 
-    context.deviceSensorsLoaded = false;
-    context.deviceSensors = [];    
-
     context.sensorsInDeviceLoaded = false;
     context.sensorsInDevice = [];    
-
-    context.deviceLoaded = false;
-    context.devices = [];   
 
     // *** Finders ***        
     
@@ -66,33 +60,6 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
             }
         }
     };    
-
-    var getDeviceSensorsByKey = function (deviceSensorsId) {
-        for (var i = 0; i < context.deviceSensors.length; i++) {
-            var item = context.deviceSensors[i];
-            if (item.deviceSensorsId === deviceSensorsId) {
-                return item;
-            }
-        }
-    }; 
-
-    var getSensorsInDeviceByKey = function (deviceSensorsId, sensorId) {
-        for (var i = 0; i < context.sensorsInDevice.length; i++) {
-            var item = context.sensorsInDevice[i];
-            if (item.deviceSensorsId === deviceSensorsId && item.sensorId === sensorId) {
-                return item;
-            }
-        }
-    }; 
-
-    var getDeviceByKey = function (deviceId) {
-        for (var i = 0; i < context.devices.length; i++) {
-            var item = context.devices[i];
-            if (item.deviceId === deviceId) {
-                return item;
-            }
-        }
-    }; 
 
     // *** Navigation Properties Mappers ***   
 
@@ -175,27 +142,12 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
         
     });
 
-    context.$watch('sensorsInDeviceLoaded', function (newValue, oldValue) {
-
-    });
-
-    context.$watch('deviceSensorsLoaded', function (newValue, oldValue) {
-
-    });    
-
-    context.$watch('deviceLoaded', function (newValue, oldValue) {
-
-    }); 
-
     // *** Public Methods ***
     
     context.getSensorTypeByKey = getSensorTypeByKey;
     context.getSensorDatasheetByKey = getSensorDatasheetByKey;
     context.getSensorUnitMeasurementDefaultByKey = getSensorUnitMeasurementDefaultByKey;
     context.getSensorByKey = getSensorByKey;
-    context.getDeviceSensorsByKey = getDeviceSensorsByKey;
-    context.getSensorsInDeviceByKey = getSensorsInDeviceByKey;
-    context.getDeviceByKey = getDeviceByKey;
 
     return context;
 
