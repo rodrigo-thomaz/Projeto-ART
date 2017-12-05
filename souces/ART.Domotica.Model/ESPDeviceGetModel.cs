@@ -31,6 +31,11 @@
             get; set;
         }
 
+        public DeviceSensorsGetModel DeviceSensors
+        {
+            get; set;
+        }
+
         public int FlashChipId
         {
             get; set;

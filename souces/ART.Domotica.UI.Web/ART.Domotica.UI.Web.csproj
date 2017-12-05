@@ -514,6 +514,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="src\js\services\hardware\sensorDatasheet\" />
     <Folder Include="src\js\services\hardware\sensor\" />
   </ItemGroup>
   <PropertyGroup>

@@ -17,6 +17,9 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     context.sensorUnitMeasurementScaleLoaded = false;
     context.sensorUnitMeasurementScales = [];
 
+    context.sensorDatasheetUnitMeasurementScaleLoaded = false;
+    context.sensorDatasheetUnitMeasurementScales = [];
+
     context.sensorsLoaded = false;
     context.sensors = [];    
 

@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Model
 {
     using System;
+    using System.Collections.Generic;
 
     public class DeviceSensorsGetModel
     {
@@ -12,6 +13,11 @@
         }
 
         public int PublishIntervalInSeconds
+        {
+            get; set;
+        }
+
+        public List<SensorsInDeviceGetModel> SensorsInDevice
         {
             get; set;
         }
