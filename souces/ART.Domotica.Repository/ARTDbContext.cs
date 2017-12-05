@@ -9,6 +9,10 @@
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Entities.Locale;
     using ART.Domotica.Repository.Entities.SI;
+    using System.Reflection;
+    using System.Linq;
+    using System;
+    using System.Data.Entity.ModelConfiguration;
 
     public class ARTDbContext : DbContext
     {
@@ -159,7 +163,7 @@
             get; set;
         }
 
-        public DbSet<TimeZone> TimeZone
+        public DbSet<Entities.TimeZone> TimeZone
         {
             get; set;
         }
@@ -189,44 +193,18 @@
 
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
-            //Configurations
+            //Configurations            
 
-            //SI
-            modelBuilder.Configurations.Add(new NumericalScaleTypeConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScaleTypeCountryConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScalePrefixConfiguration());
-            modelBuilder.Configurations.Add(new NumericalScaleConfiguration());
-            modelBuilder.Configurations.Add(new UnitMeasurementConfiguration());
-            modelBuilder.Configurations.Add(new UnitMeasurementScaleConfiguration());
-            modelBuilder.Configurations.Add(new UnitMeasurementTypeConfiguration());
+            var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
+                .Where(type => !String.IsNullOrEmpty(type.Namespace))
+                .Where(type => type.BaseType != null && type.BaseType.IsGenericType && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
 
-            modelBuilder.Configurations.Add(new ActuatorTypeConfiguration());
-            modelBuilder.Configurations.Add(new ApplicationConfiguration());
-            modelBuilder.Configurations.Add(new ApplicationMQConfiguration());
-            modelBuilder.Configurations.Add(new ApplicationUserConfiguration());
-            modelBuilder.Configurations.Add(new ContinentConfiguration());
-            modelBuilder.Configurations.Add(new CountryConfiguration());
-            modelBuilder.Configurations.Add(new DeviceBaseConfiguration());
-            modelBuilder.Configurations.Add(new DeviceSensorsConfiguration());
-            modelBuilder.Configurations.Add(new DeviceInApplicationConfiguration());
-            modelBuilder.Configurations.Add(new DeviceMQConfiguration());
-            modelBuilder.Configurations.Add(new DeviceNTPConfiguration());
-            modelBuilder.Configurations.Add(new SensorTempDSFamilyConfiguration());
-            modelBuilder.Configurations.Add(new SensorTempDSFamilyResolutionConfiguration());
-            modelBuilder.Configurations.Add(new ESPDeviceConfiguration());
-            modelBuilder.Configurations.Add(new HardwareBaseConfiguration());
-            modelBuilder.Configurations.Add(new HardwaresInProjectConfiguration());
-            modelBuilder.Configurations.Add(new ProjectConfiguration());
-            modelBuilder.Configurations.Add(new RaspberryDeviceConfiguration());
-            modelBuilder.Configurations.Add(new SensorUnitMeasurementScaleConfiguration());
-            modelBuilder.Configurations.Add(new SensorConfiguration());
-            modelBuilder.Configurations.Add(new SensorDatasheetConfiguration());
-            modelBuilder.Configurations.Add(new SensorsInDeviceConfiguration());
-            modelBuilder.Configurations.Add(new SensorTriggerConfiguration());
-            modelBuilder.Configurations.Add(new SensorTypeConfiguration());
-            modelBuilder.Configurations.Add(new SensorUnitMeasurementDefaultConfiguration());
-            modelBuilder.Configurations.Add(new SensorDatasheetUnitMeasurementScaleConfiguration());
-            modelBuilder.Configurations.Add(new TimeZoneConfiguration());
+            foreach (var type in typesToRegister)
+            {
+                dynamic configurationInstance = Activator.CreateInstance(type);
+                modelBuilder.Configurations.Add(configurationInstance);
+            }
+
 
             base.OnModelCreating(modelBuilder);
         }
