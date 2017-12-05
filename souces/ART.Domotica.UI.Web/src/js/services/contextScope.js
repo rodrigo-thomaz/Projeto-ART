@@ -14,14 +14,11 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     context.sensorUnitMeasurementDefaultLoaded = false;
     context.sensorUnitMeasurementDefaults = [];
 
-    context.sensorDatasheetUnitMeasurementScaleLoaded = false;
-    context.sensorDatasheetUnitMeasurementScales = [];
+    context.sensorUnitMeasurementScaleLoaded = false;
+    context.sensorUnitMeasurementScales = [];
 
     context.sensorsLoaded = false;
     context.sensors = [];    
-
-    context.sensorsInDeviceLoaded = false;
-    context.sensorsInDevice = [];    
 
     // *** Finders ***        
     
@@ -50,7 +47,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
                 return item;
             }
         }
-    };
+    };    
 
     var getSensorByKey = function (sensorId) {
         for (var i = 0; i < context.sensors.length; i++) {
