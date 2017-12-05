@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, $log, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceContext) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -101,8 +101,8 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
     var onReadReceived = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        for (var i = 0; i < contextScope.devices.length; i++) {
-            var device = contextScope.devices[i];
+        for (var i = 0; i < deviceContext.devices.length; i++) {
+            var device = deviceContext.devices[i];
             if (device.hardwareId === data.hardwareId) {
                 device.epochTimeUtc = data.epochTimeUtc;
                 device.wifiQuality = data.wifiQuality;
@@ -177,7 +177,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         _initializing = false;
         _initialized = true;
 
-        contextScope.deviceLoaded = true;
+        deviceContext.deviceLoaded = true;
         clearOnConnected();
 
         getAllByApplicationIdCompletedSubscription.unsubscribe();
@@ -201,9 +201,9 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
     var onDeleteFromApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        for (var i = 0; i < contextScope.devices.length; i++) {
-            if (contextScope.devices[i].hardwareInApplicationId === data.hardwareInApplicationId) {
-                contextScope.devices.splice(i, 1);
+        for (var i = 0; i < deviceContext.devices.length; i++) {
+            if (deviceContext.devices[i].hardwareInApplicationId === data.hardwareInApplicationId) {
+                deviceContext.devices.splice(i, 1);
                 $rootScope.$emit(deleteFromApplicationCompletedEventName);
                 break;
             }
@@ -212,14 +212,14 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
        
     var onSetLabelCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var device = contextScope.getDeviceById(result.deviceId);
+        var device = deviceContext.getDeviceById(result.deviceId);
         device.label = result.label;
         $rootScope.$emit(setLabelCompletedEventName + result.deviceId, result);
     }
 
     var insertDeviceInCollection = function (device) {
         device.createDate = new Date(device.createDate * 1000).toLocaleString();
-        contextScope.devices.push(device);
+        deviceContext.devices.push(device);
         //for (var i = 0; i < device.sensors.length; i++) {
 
             //var sensor = device.sensors[i];
