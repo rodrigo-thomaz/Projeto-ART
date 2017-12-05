@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'mainContext', function ($http, $log, ngAuthSettings, $rootScope, mainContext) {
+app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'applicationContext', function ($http, $log, ngAuthSettings, $rootScope, applicationContext) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -9,10 +9,10 @@ app.factory('applicationService', ['$http', '$log', 'ngAuthSettings', '$rootScop
 
     var get = function () {
         return $http.post(serviceBase + 'api/application/get').then(function (results) {
-            mainContext.application = results.data;
-            mainContext.applicationMQ = results.data.applicationMQ;
-            mainContext.applicationMQ.application = results.data;
-            mainContext.applicationLoaded = true;
+            applicationContext.application = results.data;
+            applicationContext.applicationMQ = results.data.applicationMQ;
+            applicationContext.applicationMQ.application = results.data;
+            applicationContext.applicationLoaded = true;
             $rootScope.$emit(initializedEventName);
         });
     };

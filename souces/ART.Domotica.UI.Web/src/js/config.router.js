@@ -44,8 +44,6 @@ angular.module('app')
                       'ui.select',   
                       'toaster',
 
-                      'js/services/mainContext.js',
-
                       'js/services/timeZoneService.js',                      
 
                       'js/services/contextScope.js',
@@ -102,8 +100,6 @@ angular.module('app')
                   resolve: load([
                       'ui.grid',
                       'toaster',
-
-                      'js/services/mainContext.js',
 
                       //Locale
                       'js/services/locale/localeContext.js',

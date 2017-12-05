@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'mainContext', function ($log, ngAuthSettings, $rootScope, mainContext) {
+app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicationContext', function ($log, ngAuthSettings, $rootScope, applicationContext) {
 
     var serviceFactory = {};    
 
@@ -29,14 +29,14 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'mainContex
 
     var generateStringTopic = function (topic) {
         //https://rabbitmq.docs.pivotal.io/36/rabbit-web-docs/stomp.html        
-        //return '/exchange/amq.topic/ART.Application.' + mainContext.applicationMQ.applicationTopic + '.WebUI.' + mainContext.applicationMQ.webUITopic + '.' + topic;
-        return '/topic/ART.Application.' + mainContext.applicationMQ.applicationTopic + '.WebUI.' + mainContext.applicationMQ.webUITopic + '.' + topic;
+        //return '/exchange/amq.topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.WebUI.' + applicationContext.applicationMQ.webUITopic + '.' + topic;
+        return '/topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.WebUI.' + applicationContext.applicationMQ.webUITopic + '.' + topic;
     }
 
     var generateStringTopicAllViews = function (topic) {
         //https://rabbitmq.docs.pivotal.io/36/rabbit-web-docs/stomp.html        
-        //return '/exchange/amq.topic/ART.Application.' + mainContext.applicationMQ.applicationTopic + '.WebUI.' + topic;
-        return '/topic/ART.Application.' + mainContext.applicationMQ.applicationTopic + '.WebUI.' + topic;
+        //return '/exchange/amq.topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.WebUI.' + topic;
+        return '/topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.WebUI.' + topic;
     }
 
     var connected = function () {
@@ -46,8 +46,8 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'mainContex
     var connect = function (event, data) {
 
         var headers = {
-            login: mainContext.applicationMQ.user,
-            passcode: mainContext.applicationMQ.password,
+            login: applicationContext.applicationMQ.user,
+            passcode: applicationContext.applicationMQ.password,
             // additional header
             //'client-id': 'my-client-id'
         };

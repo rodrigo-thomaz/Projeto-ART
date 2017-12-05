@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('mainContext', ['$rootScope', function ($rootScope) {
+app.factory('applicationContext', ['$rootScope', function ($rootScope) {
 
     var context = $rootScope.$new();
 

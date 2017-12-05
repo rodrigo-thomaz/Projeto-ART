@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localStorage', 'mainContext', function ($q, $injector, $location, $localStorage, mainContext) {
+app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localStorage', 'applicationContext', function ($q, $injector, $location, $localStorage, applicationContext) {
 
     var authInterceptorServiceFactory = {};
 
@@ -7,8 +7,8 @@ app.factory('authInterceptorService', ['$q', '$injector', '$location', '$localSt
 
         config.headers = config.headers || {};
 
-        if (mainContext.applicationLoaded)
-            config.headers.webUITopic = mainContext.applicationMQ.webUITopic;
+        if (applicationContext.applicationLoaded)
+            config.headers.webUITopic = applicationContext.applicationMQ.webUITopic;
         
         var authData = $localStorage.authorizationData;
         if (authData) {
