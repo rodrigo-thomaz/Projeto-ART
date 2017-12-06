@@ -1,12 +1,4 @@
 ﻿'use strict';
-
-app.constant('continentConstant', {
-    getAllApiUri: 'api/locale/continent/getAll',
-    getAllCompletedTopic: 'Locale.Continent.GetAllViewCompleted',
-    initializedEventName: 'continentService.onInitialized',
-});
-
-
 app.factory('continentService', ['$http', 'ngAuthSettings', 'continentConstant', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, continentConstant, $rootScope, stompService, localeContext) {
 
     var serviceFactory = {};    

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, $rootScope, stompService, localeContext) {
+app.factory('countryService', ['$http', 'ngAuthSettings', 'countryConstant', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, countryConstant, $rootScope, stompService, localeContext) {
 
     var serviceFactory = {};    
 
@@ -8,15 +8,11 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/locale/country/getAll';
-    var getAllCompletedTopic = 'Locale.Country.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
-
-    var initializedEventName = 'countryService.onInitialized';
 
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(countryConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -29,7 +25,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + countryConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
@@ -51,7 +47,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(countryConstant.initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -66,7 +62,6 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 

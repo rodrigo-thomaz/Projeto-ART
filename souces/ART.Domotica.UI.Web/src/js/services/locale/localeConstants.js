@@ -4,3 +4,9 @@ app.constant('continentConstant', {
     getAllCompletedTopic: 'Locale.Continent.GetAllViewCompleted',
     initializedEventName: 'continentService.onInitialized',
 });
+
+app.constant('countryConstant', {
+    getAllApiUri: 'api/locale/country/getAll',
+    getAllCompletedTopic: 'Locale.Country.GetAllViewCompleted',
+    initializedEventName: 'countryService.onInitialized',
+});
