@@ -2,41 +2,41 @@
 app.constant('numericalScalePrefixConstant', {
     getAllApiUri: 'api/si/numericalScalePrefix/getAll',
     getAllCompletedTopic: 'SI.NumericalScalePrefix.GetAllViewCompleted',
-    initializedEventName: 'numericalScalePrefixService.onInitialized',
+    getAllCompletedEventName: 'numericalScalePrefixService.GetAllCompleted',
 });
 
 app.constant('numericalScaleConstant', {
     getAllApiUri: 'api/si/numericalScale/getAll',
     getAllCompletedTopic: 'SI.NumericalScale.GetAllViewCompleted',
-    initializedEventName: 'numericalScaleService.onInitialized',
+    getAllCompletedEventName: 'numericalScaleService.GetAllCompleted',
 });
 
 app.constant('numericalScaleTypeCountryConstant', {
     getAllApiUri: 'api/si/numericalScaleTypeCountry/getAll',
     getAllCompletedTopic: 'SI.NumericalScaleTypeCountry.GetAllViewCompleted',
-    initializedEventName: 'numericalScaleTypeCountryService.onInitialized',
+    getAllCompletedEventName: 'numericalScaleTypeCountryService.GetAllCompleted',
 });
 
 app.constant('numericalScaleTypeConstant', {
     getAllApiUri: 'api/si/numericalScaleType/getAll',
     getAllCompletedTopic: 'SI.NumericalScaleType.GetAllViewCompleted',
-    initializedEventName: 'numericalScaleTypeService.onInitialized',
+    getAllCompletedEventName: 'numericalScaleTypeService.GetAllCompleted',
 });
 
 app.constant('unitMeasurementScaleConstant', {
     getAllApiUri: 'api/si/unitMeasurementScale/getAll',
     getAllCompletedTopic: 'SI.UnitMeasurementScale.GetAllViewCompleted',
-    initializedEventName: 'unitMeasurementScaleService.onInitialized',
+    getAllCompletedEventName: 'unitMeasurementScaleService.GetAllCompleted',
 });
 
 app.constant('unitMeasurementConstant', {
     getAllApiUri: 'api/si/unitMeasurement/getAll',
     getAllCompletedTopic: 'SI.UnitMeasurement.GetAllViewCompleted',
-    initializedEventName: 'unitMeasurementService.onInitialized',
+    getAllCompletedEventName: 'unitMeasurementService.GetAllCompleted',
 });
 
 app.constant('unitMeasurementTypeConstant', {
     getAllApiUri: 'api/si/unitMeasurementType/getAll',
     getAllCompletedTopic: 'SI.UnitMeasurementType.GetAllViewCompleted',
-    initializedEventName: 'unitMeasurementTypeService.onInitialized',
+    getAllCompletedEventName: 'unitMeasurementTypeService.GetAllCompleted',
 });

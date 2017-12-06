@@ -47,7 +47,7 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', 'numericalS
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(numericalScaleTypeConstant.initializedEventName);
+        $rootScope.$emit(numericalScaleTypeConstant.getAllCompletedEventName);
     }
 
     $rootScope.$on('$destroy', function () {

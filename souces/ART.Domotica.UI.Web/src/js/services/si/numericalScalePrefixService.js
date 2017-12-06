@@ -49,7 +49,7 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', 'numerica
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(numericalScalePrefixConstant.initializedEventName);
+        $rootScope.$emit(numericalScalePrefixConstant.getAllCompletedEventName);
     }
 
     $rootScope.$on('$destroy', function () {

@@ -47,7 +47,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', 'unitMeasu
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(unitMeasurementTypeConstant.initializedEventName);
+        $rootScope.$emit(unitMeasurementTypeConstant.getAllCompletedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
