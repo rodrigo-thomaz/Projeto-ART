@@ -42,7 +42,6 @@ app.factory('continentService', ['$http', 'ngAuthSettings', 'continentConstant',
         _initializing = false;
         _initialized = true;
 
-        localeContext.continentLoaded = true;
         clearOnConnected();
 
         getAllCompletedSubscription.unsubscribe();

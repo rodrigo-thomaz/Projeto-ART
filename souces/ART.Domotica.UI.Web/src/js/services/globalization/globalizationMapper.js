@@ -7,7 +7,7 @@ app.factory('globalizationMapper', ['$rootScope', 'globalizationContext', 'globa
 
     
 
-    // *** Watches ***    
+    // *** Navigation Properties Mappers ***
 
 
     // *** Events Subscriptions

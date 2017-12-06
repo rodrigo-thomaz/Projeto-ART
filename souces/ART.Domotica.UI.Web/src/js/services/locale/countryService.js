@@ -42,7 +42,6 @@ app.factory('countryService', ['$http', 'ngAuthSettings', 'countryConstant', '$r
         _initializing = false;
         _initialized = true;
 
-        localeContext.countryLoaded = true;        
         clearOnConnected();
 
         getAllCompletedSubscription.unsubscribe();
