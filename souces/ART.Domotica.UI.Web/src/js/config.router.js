@@ -50,9 +50,10 @@ angular.module('app')
 
                       //Locale
                       'js/services/locale/localeContext.js',
+                      'js/services/locale/localeConstants.js',
                       'js/services/locale/localeFinder.js',
                       'js/services/locale/localeMapper.js',
-
+                      
                       'js/services/locale/continentService.js',
                       'js/services/locale/countryService.js',
 
@@ -109,9 +110,14 @@ angular.module('app')
                       'toaster',
 
                       //Locale
+
                       'js/services/locale/localeContext.js',
+                      'js/services/locale/localeConstants.js',
                       'js/services/locale/localeFinder.js',
                       'js/services/locale/localeMapper.js',
+
+                      'js/services/locale/continentService.js',
+                      'js/services/locale/countryService.js',
 
                       //SI
                       'js/services/si/siContext.js',

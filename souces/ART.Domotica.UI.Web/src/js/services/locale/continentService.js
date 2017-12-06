@@ -1,5 +1,13 @@
 ﻿'use strict';
-app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, $rootScope, stompService, localeContext) {
+
+app.constant('continentConstant', {
+    getAllApiUri: 'api/locale/continent/getAll',
+    getAllCompletedTopic: 'Locale.Continent.GetAllViewCompleted',
+    initializedEventName: 'continentService.onInitialized',
+});
+
+
+app.factory('continentService', ['$http', 'ngAuthSettings', 'continentConstant', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, continentConstant, $rootScope, stompService, localeContext) {
 
     var serviceFactory = {};    
 
@@ -8,15 +16,11 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/locale/continent/getAll';
-    var getAllCompletedTopic = 'Locale.Continent.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
-
-    var initializedEventName = 'continentService.onInitialized';
     
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(continentConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -29,7 +33,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + continentConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
@@ -51,7 +55,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(continentConstant.initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -66,7 +70,6 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', 'stomp
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 
