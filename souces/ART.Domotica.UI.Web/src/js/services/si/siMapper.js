@@ -118,41 +118,53 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var onNumericalScalePrefixGetAllCompleted = function (event, data) {
         numericalScalePrefixGetAllCompletedSubscription();
         siContext.numericalScalePrefixLoaded = true;
+        mapper_NumericalScale_NumericalScalePrefix();
     }
 
     var onNumericalScaleGetAllCompleted = function (event, data) {
         numericalScaleGetAllCompletedSubscription();
         siContext.numericalScaleLoaded = true;
+        mapper_NumericalScale_NumericalScalePrefix();
+        mapper_NumericalScale_NumericalScaleType();
+        mapper_UnitMeasurementScale_NumericalScale();
     }
 
     var onNumericalScaleTypeCountryGetAllCompleted = function (event, data) {
         numericalScaleTypeCountryGetAllCompletedSubscription();
         siContext.numericalScaleTypeCountryLoaded = true;
+        mapper_NumericalScaleTypeCountry();
     }
 
     var onNumericalScaleTypeGetAllCompleted = function (event, data) {
         numericalScaleTypeGetAllCompletedSubscription();
         siContext.numericalScaleTypeLoaded = true;
+        mapper_NumericalScaleTypeCountry();
+        mapper_NumericalScale_NumericalScaleType();
     }
 
     var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
         unitMeasurementScaleGetAllCompletedSubscription();
         siContext.unitMeasurementScaleLoaded = true;
+        mapper_UnitMeasurementScale_UnitMeasurement();
+        mapper_UnitMeasurementScale_NumericalScale();
     }
 
     var onUnitMeasurementGetAllCompleted = function (event, data) {
         unitMeasurementGetAllCompletedSubscription();
         siContext.unitMeasurementLoaded = true;
+        mapper_UnitMeasurement_UnitMeasurementType();
+        mapper_UnitMeasurementScale_UnitMeasurement();
     }
 
     var onUnitMeasurementTypeGetAllCompleted = function (event, data) {
         unitMeasurementTypeGetAllCompletedSubscription();
         siContext.unitMeasurementTypeLoaded = true;
+        mapper_UnitMeasurement_UnitMeasurementType();
     }
 
     var onCountryGetAllCompleted = function (event, data) {
         countryGetAllCompletedSubscription();
-
+        mapper_NumericalScaleTypeCountry();
     }
 
     var numericalScalePrefixGetAllCompletedSubscription = $rootScope.$on(numericalScalePrefixConstant.getAllCompletedEventName, onNumericalScalePrefixGetAllCompleted);
@@ -177,59 +189,6 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
 
     // *** Events Subscriptions
 
-
-
-
-
-
-
-
-
-
-
-
-    // *** Watches ***
-
-    // Locale   
-
-    localeContext.$watch('countryLoaded', function (newValue, oldValue) {
-        mapper_NumericalScaleTypeCountry();
-    });
-
-    // SI
-
-    siContext.$watch('numericalScaleLoaded', function (newValue, oldValue) {
-        mapper_NumericalScale_NumericalScalePrefix();
-        mapper_NumericalScale_NumericalScaleType();
-        mapper_UnitMeasurementScale_NumericalScale();
-    });
-
-    siContext.$watch('numericalScalePrefixLoaded', function (newValue, oldValue) {
-        mapper_NumericalScale_NumericalScalePrefix();
-    });
-
-    siContext.$watch('numericalScaleTypeLoaded', function (newValue, oldValue) {
-        mapper_NumericalScaleTypeCountry();
-        mapper_NumericalScale_NumericalScaleType();
-    });
-
-    siContext.$watch('numericalScaleTypeCountryLoaded', function (newValue, oldValue) {
-        mapper_NumericalScaleTypeCountry();
-    });
-
-    siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
-        mapper_UnitMeasurementScale_UnitMeasurement();
-        mapper_UnitMeasurementScale_NumericalScale();
-    });     
-
-    siContext.$watch('unitMeasurementTypeLoaded', function (newValue, oldValue) {
-        mapper_UnitMeasurement_UnitMeasurementType();
-    });
-
-    siContext.$watch('unitMeasurementLoaded', function (newValue, oldValue) {
-        mapper_UnitMeasurement_UnitMeasurementType();
-        mapper_UnitMeasurementScale_UnitMeasurement();
-    });    
 
     return serviceFactory;
 
