@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'localeFinder', 'numericalScalePrefixConstant', 'numericalScaleConstant', 'numericalScaleTypeCountryConstant', 'numericalScaleTypeConstant', 'unitMeasurementScaleConstant', 'unitMeasurementConstant', 'unitMeasurementTypeConstant',
-    function ($rootScope, siContext, siFinder, localeContext, localeFinder, numericalScalePrefixConstant, numericalScaleConstant, numericalScaleTypeCountryConstant, numericalScaleTypeConstant, unitMeasurementScaleConstant, unitMeasurementConstant, unitMeasurementTypeConstant) {
+app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'localeFinder', 'numericalScalePrefixConstant', 'numericalScaleConstant', 'numericalScaleTypeCountryConstant', 'numericalScaleTypeConstant', 'unitMeasurementScaleConstant', 'unitMeasurementConstant', 'unitMeasurementTypeConstant', 'countryConstant',
+    function ($rootScope, siContext, siFinder, localeContext, localeFinder, numericalScalePrefixConstant, numericalScaleConstant, numericalScaleTypeCountryConstant, numericalScaleTypeConstant, unitMeasurementScaleConstant, unitMeasurementConstant, unitMeasurementTypeConstant, countryConstant) {
 
     var serviceFactory = {};    
 
@@ -113,7 +113,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     // *** Navigation Properties Mappers ***
 
 
-    // *** Events Subscriptions
+    // *** Events Subscriptions    
 
     var onNumericalScalePrefixGetAllCompleted = function (event, data) {
         numericalScalePrefixGetAllCompletedSubscription();
@@ -150,6 +150,11 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
         siContext.unitMeasurementTypeLoaded = true;
     }
 
+    var onCountryGetAllCompleted = function (event, data) {
+        countryGetAllCompletedSubscription();
+
+    }
+
     var numericalScalePrefixGetAllCompletedSubscription = $rootScope.$on(numericalScalePrefixConstant.getAllCompletedEventName, onNumericalScalePrefixGetAllCompleted);
     var numericalScaleGetAllCompletedSubscription = $rootScope.$on(numericalScaleConstant.getAllCompletedEventName, onNumericalScaleGetAllCompleted);
     var numericalScaleTypeCountryGetAllCompletedSubscription = $rootScope.$on(numericalScaleTypeCountryConstant.getAllCompletedEventName, onNumericalScaleTypeCountryGetAllCompleted);
@@ -157,8 +162,9 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var unitMeasurementScaleGetAllCompletedSubscription = $rootScope.$on(unitMeasurementScaleConstant.getAllCompletedEventName, onUnitMeasurementScaleGetAllCompleted);
     var unitMeasurementGetAllCompletedSubscription = $rootScope.$on(unitMeasurementConstant.getAllCompletedEventName, onUnitMeasurementGetAllCompleted);
     var unitMeasurementTypeGetAllCompletedSubscription = $rootScope.$on(unitMeasurementTypeConstant.getAllCompletedEventName, onUnitMeasurementTypeGetAllCompleted);
+    var countryGetAllCompletedSubscription = $rootScope.$on(countryConstant.getAllCompletedEventName, onCountryGetAllCompleted);
 
-    $rootScope.$on('$destroy', function () {
+    $rootScope.$on('$destroy', function () {        
         numericalScalePrefixGetAllCompletedSubscription();
         numericalScaleGetAllCompletedSubscription();
         numericalScaleTypeCountryGetAllCompletedSubscription();
@@ -166,6 +172,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
         unitMeasurementScaleGetAllCompletedSubscription();
         unitMeasurementGetAllCompletedSubscription();
         unitMeasurementTypeGetAllCompletedSubscription();
+        countryGetAllCompletedSubscription();
     });
 
     // *** Events Subscriptions
