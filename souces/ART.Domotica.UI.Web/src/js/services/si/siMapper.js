@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('siMapper', ['$rootScope', 'siContext', 'localeContext', function ($rootScope, siContext, localeContext) {
+app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'localeFinder', function ($rootScope, siContext, siFinder, localeContext, localeFinder) {
 
     var serviceFactory = {};    
 
@@ -11,8 +11,8 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'localeContext', function ($
             mapper_NumericalScaleTypeCountry_Init = true;
             for (var i = 0; i < siContext.numericalScaleTypeCountries.length; i++) {
                 var numericalScaleTypeCountry = siContext.numericalScaleTypeCountries[i];
-                var numericalScaleType = siContext.getNumericalScaleTypeByKey(numericalScaleTypeCountry.numericalScaleTypeId);
-                var country = localeContext.getCountryByKey(numericalScaleTypeCountry.countryId);
+                var numericalScaleType = siFinder.getNumericalScaleTypeByKey(numericalScaleTypeCountry.numericalScaleTypeId);
+                var country = localeFinder.getCountryByKey(numericalScaleTypeCountry.countryId);
                 //Atach in numericalScaleType
                 if (numericalScaleType.countries === undefined) {
                     numericalScaleType.countries = [];
@@ -35,7 +35,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'localeContext', function ($
             mapper_NumericalScale_NumericalScalePrefix_Init = true;
             for (var i = 0; i < siContext.numericalScales.length; i++) {
                 var numericalScale = siContext.numericalScales[i];
-                var numericalScalePrefix = siContext.getNumericalScalePrefixByKey(numericalScale.numericalScalePrefixId);
+                var numericalScalePrefix = siFinder.getNumericalScalePrefixByKey(numericalScale.numericalScalePrefixId);
                 numericalScale.numericalScalePrefix = numericalScalePrefix;
                 if (numericalScalePrefix.numericalScales === undefined) {
                     numericalScalePrefix.numericalScales = [];
@@ -51,7 +51,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'localeContext', function ($
             mapper_NumericalScale_NumericalScaleType_Init = true;
             for (var i = 0; i < siContext.numericalScales.length; i++) {
                 var numericalScale = siContext.numericalScales[i];
-                var numericalScaleType = siContext.getNumericalScaleTypeByKey(numericalScale.numericalScaleTypeId);
+                var numericalScaleType = siFinder.getNumericalScaleTypeByKey(numericalScale.numericalScaleTypeId);
                 numericalScale.numericalScaleType = numericalScaleType;
                 if (numericalScaleType.numericalScales === undefined) {
                     numericalScaleType.numericalScales = [];
@@ -67,7 +67,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'localeContext', function ($
             mapper_UnitMeasurement_UnitMeasurementType_Init = true;
             for (var i = 0; i < siContext.unitMeasurements.length; i++) {
                 var unitMeasurement = siContext.unitMeasurements[i];
-                var unitMeasurementType = siContext.getUnitMeasurementTypeByKey(unitMeasurement.unitMeasurementTypeId);
+                var unitMeasurementType = siFinder.getUnitMeasurementTypeByKey(unitMeasurement.unitMeasurementTypeId);
                 unitMeasurement.unitMeasurementType = unitMeasurementType;
                 if (unitMeasurementType.unitMeasurements === undefined) {
                     unitMeasurementType.unitMeasurements = [];
@@ -83,7 +83,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'localeContext', function ($
             mapper_UnitMeasurementScale_UnitMeasurement_Init = true;
             for (var i = 0; i < siContext.unitMeasurementScales.length; i++) {
                 var unitMeasurementScale = siContext.unitMeasurementScales[i];
-                var unitMeasurement = siContext.getUnitMeasurementByKey(unitMeasurementScale.unitMeasurementId, unitMeasurementScale.unitMeasurementTypeId);
+                var unitMeasurement = siFinder.getUnitMeasurementByKey(unitMeasurementScale.unitMeasurementId, unitMeasurementScale.unitMeasurementTypeId);
                 unitMeasurementScale.unitMeasurement = unitMeasurement;
                 if (unitMeasurement.unitMeasurementScales === undefined) {
                     unitMeasurement.unitMeasurementScales = [];
@@ -99,7 +99,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'localeContext', function ($
             mapper_UnitMeasurementScale_NumericalScale_Init = true;
             for (var i = 0; i < siContext.unitMeasurementScales.length; i++) {
                 var unitMeasurementScale = siContext.unitMeasurementScales[i];
-                var numericalScale = siContext.getNumericalScaleByKey(unitMeasurementScale.numericalScalePrefixId, unitMeasurementScale.numericalScaleTypeId);
+                var numericalScale = siFinder.getNumericalScaleByKey(unitMeasurementScale.numericalScalePrefixId, unitMeasurementScale.numericalScaleTypeId);
                 unitMeasurementScale.numericalScale = numericalScale;
                 if (numericalScale.unitMeasurementScales === undefined) {
                     numericalScale.unitMeasurementScales = [];

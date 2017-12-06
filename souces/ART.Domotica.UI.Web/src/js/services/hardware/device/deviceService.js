@@ -171,7 +171,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         var data = JSON.parse(dataUTF8);        
 
         for (var i = 0; i < data.length; i++) {
-            insertDeviceInCollection(data[i]);
+            deviceContext.device.push(data[i]);
         }
 
         _initializing = false;
@@ -218,8 +218,8 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
     }
 
     var insertDeviceInCollection = function (device) {
-        device.createDate = new Date(device.createDate * 1000).toLocaleString();
-        deviceContext.devices.push(device);
+        //device.createDate = new Date(device.createDate * 1000).toLocaleString();
+        //deviceContext.device.push(device);
         //for (var i = 0; i < device.sensors.length; i++) {
 
             //var sensor = device.sensors[i];

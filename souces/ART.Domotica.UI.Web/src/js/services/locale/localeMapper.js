@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('localeMapper', ['$rootScope', 'localeContext', function ($rootScope, localeContext) {
+app.factory('localeMapper', ['$rootScope', 'localeContext', 'localeFinder', function ($rootScope, localeContext, localeFinder) {
 
     var serviceFactory = {};    
 
@@ -11,7 +11,7 @@ app.factory('localeMapper', ['$rootScope', 'localeContext', function ($rootScope
             mapper_Country_Continent_Init = true;
             for (var i = 0; i < localeContext.countries.length; i++) {
                 var country = localeContext.countries[i];
-                var continent = localeContext.getContinentByKey(country.continentId);
+                var continent = localeFinder.getContinentByKey(country.continentId);
                 country.continent = continent;
                 delete country.continentId; // removendo a foreing key
                 if (continent.countries === undefined) {

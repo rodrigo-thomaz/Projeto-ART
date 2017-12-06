@@ -51,7 +51,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSe
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit('countryService_Initialized');
+        $rootScope.$emit(initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {

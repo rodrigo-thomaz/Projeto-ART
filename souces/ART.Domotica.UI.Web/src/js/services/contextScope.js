@@ -1,5 +1,13 @@
 ﻿'use strict';
-app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siContext', 'siMapper', function ($rootScope, localeContext, localeMapper, siContext, siMapper) {
+app.factory('contextScope', ['$rootScope',
+    'localeContext',
+    'localeMapper',
+    'siContext',
+    'siMapper',
+    'siFinder',
+    'deviceContext',
+    'deviceMapper',
+    function ($rootScope, localeContext, localeMapper, siContext, siMapper, siFinder) {
 
     var context = $rootScope.$new();
 
@@ -24,7 +32,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     context.sensors = [];    
 
     // *** Finders ***        
-    
+
     var getSensorTypeByKey = function (sensorTypeId) {
         for (var i = 0; i < context.sensorTypes.length; i++) {
             var item = context.sensorTypes[i];
@@ -85,7 +93,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
             mapper_SensorUnitMeasurementDefault_UnitMeasurementScale_Init = true;
             for (var i = 0; i < context.sensorUnitMeasurementDefaults.length; i++) {
                 var sensorUnitMeasurementDefault = context.sensorUnitMeasurementDefaults[i];
-                var unitMeasurementScale = siContext.getUnitMeasurementScaleByKey(sensorUnitMeasurementDefault.unitMeasurementId, sensorUnitMeasurementDefault.unitMeasurementTypeId, sensorUnitMeasurementDefault.numericalScalePrefixId, sensorUnitMeasurementDefault.numericalScaleTypeId);
+                var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementDefault.unitMeasurementId, sensorUnitMeasurementDefault.unitMeasurementTypeId, sensorUnitMeasurementDefault.numericalScalePrefixId, sensorUnitMeasurementDefault.numericalScaleTypeId);
                 sensorUnitMeasurementDefault.unitMeasurementScale = unitMeasurementScale;
                 if (unitMeasurementScale.sensorUnitMeasurementDefaults === undefined) {
                     unitMeasurementScale.sensorUnitMeasurementDefaults = [];
@@ -143,7 +151,7 @@ app.factory('contextScope', ['$rootScope', 'localeContext', 'localeMapper', 'siC
     });
 
     // *** Public Methods ***
-    
+
     context.getSensorTypeByKey = getSensorTypeByKey;
     context.getSensorDatasheetByKey = getSensorDatasheetByKey;
     context.getSensorUnitMeasurementDefaultByKey = getSensorUnitMeasurementDefaultByKey;

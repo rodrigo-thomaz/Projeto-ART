@@ -50,6 +50,7 @@ angular.module('app')
 
                       //Locale
                       'js/services/locale/localeContext.js',
+                      'js/services/locale/localeFinder.js',
                       'js/services/locale/localeMapper.js',
 
                       'js/services/locale/continentService.js',
@@ -57,6 +58,7 @@ angular.module('app')
 
                       //SI
                       'js/services/si/siContext.js',
+                      'js/services/si/siFinder.js',
                       'js/services/si/siMapper.js',
 
                       'js/services/si/numericalScaleService.js',
@@ -108,10 +110,12 @@ angular.module('app')
 
                       //Locale
                       'js/services/locale/localeContext.js',
+                      'js/services/locale/localeFinder.js',
                       'js/services/locale/localeMapper.js',
 
                       //SI
                       'js/services/si/siContext.js',
+                      'js/services/si/siFinder.js',
                       'js/services/si/siMapper.js',
 
                       'js/services/contextScope.js',

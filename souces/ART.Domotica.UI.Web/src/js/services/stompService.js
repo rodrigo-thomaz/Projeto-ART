@@ -45,6 +45,8 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
 
     var connect = function (event, data) {
 
+        if (clearOnApplicationLoaded != null) clearOnApplicationLoaded();
+
         var headers = {
             login: applicationContext.applicationMQ.user,
             passcode: applicationContext.applicationMQ.password,
@@ -66,7 +68,18 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
 
     var client = Stomp.client(url);
 
-    connect();
+    var clearOnApplicationLoaded = null
+    
+    if (applicationContext.applicationLoaded) {
+        connect();
+    }
+    else {
+        clearOnApplicationLoaded = $rootScope.$on('applicationService.onInitialized', connect);       
+    }
+
+    $rootScope.$on('$destroy', function () {
+        clearOnApplicationLoaded();
+    });
         
     // serviceFactory    
 
