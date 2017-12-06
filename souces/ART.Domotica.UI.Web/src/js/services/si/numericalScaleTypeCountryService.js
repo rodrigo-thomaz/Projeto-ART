@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
+app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', 'numericalScaleTypeCountryConstant', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, numericalScaleTypeCountryConstant, $rootScope, stompService, siContext) {
 
     var serviceFactory = {};    
 
@@ -8,15 +8,11 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/si/numericalScaleTypeCountry/getAll';
-    var getAllCompletedTopic = 'SI.NumericalScaleTypeCountry.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
-
-    var initializedEventName = 'numericalScaleTypeCountryService.onInitialized';
 
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(numericalScaleTypeCountryConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -29,7 +25,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + numericalScaleTypeCountryConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
@@ -51,7 +47,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(numericalScaleTypeCountryConstant.initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -66,8 +62,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', '$ro
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
-
+    
     return serviceFactory;
 
 }]);

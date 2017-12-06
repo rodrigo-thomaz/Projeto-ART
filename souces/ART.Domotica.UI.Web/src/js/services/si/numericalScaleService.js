@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
+app.factory('numericalScaleService', ['$http', 'ngAuthSettings', 'numericalScaleConstant', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, numericalScaleConstant, $rootScope, stompService, siContext) {
 
     var serviceFactory = {};    
 
@@ -8,15 +8,13 @@ app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', '
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/si/numericalScale/getAll';
-    var getAllCompletedTopic = 'SI.NumericalScale.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
     var initializedEventName = 'numericalScaleService.onInitialized';
 
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(numericalScaleConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -29,7 +27,7 @@ app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', '
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + numericalScaleConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
@@ -51,7 +49,7 @@ app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', '
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(numericalScaleConstant.initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -66,7 +64,6 @@ app.factory('numericalScaleService', ['$http', 'ngAuthSettings', '$rootScope', '
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 

@@ -4,3 +4,21 @@ app.constant('numericalScalePrefixConstant', {
     getAllCompletedTopic: 'SI.NumericalScalePrefix.GetAllViewCompleted',
     initializedEventName: 'numericalScalePrefixService.onInitialized',
 });
+
+app.constant('numericalScaleConstant', {
+    getAllApiUri: 'api/si/numericalScale/getAll',
+    getAllCompletedTopic: 'SI.NumericalScale.GetAllViewCompleted',
+    initializedEventName: 'numericalScaleService.onInitialized',
+});
+
+app.constant('numericalScaleTypeCountryConstant', {
+    getAllApiUri: 'api/si/numericalScaleTypeCountry/getAll',
+    getAllCompletedTopic: 'SI.NumericalScaleTypeCountry.GetAllViewCompleted',
+    initializedEventName: 'numericalScaleTypeCountryService.onInitialized',
+});
+
+app.constant('numericalScaleTypeConstant', {
+    getAllApiUri: 'api/si/numericalScaleType/getAll',
+    getAllCompletedTopic: 'SI.NumericalScaleType.GetAllViewCompleted',
+    initializedEventName: 'numericalScaleTypeService.onInitialized',
+});
