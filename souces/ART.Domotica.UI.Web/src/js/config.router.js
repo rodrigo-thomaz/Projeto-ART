@@ -56,6 +56,7 @@ angular.module('app')
                       'js/services/globalization/timeZoneService.js',
 
                       //Locale
+
                       'js/services/locale/localeContext.js',
                       'js/services/locale/localeConstants.js',
                       'js/services/locale/localeFinder.js',
@@ -65,6 +66,7 @@ angular.module('app')
                       'js/services/locale/countryService.js',
 
                       //SI
+
                       'js/services/si/siContext.js',
                       'js/services/si/siConstants.js',
                       'js/services/si/siFinder.js',
@@ -86,13 +88,16 @@ angular.module('app')
 
                       'js/services/hardware/device/deviceContext.js',
                       'js/services/hardware/device/deviceConstants.js',
+                      'js/services/hardware/device/deviceFinder.js',
                       'js/services/hardware/device/deviceMapper.js',
+
                       'js/services/hardware/device/deviceNTPService.js',
                       'js/services/hardware/device/deviceSensorsService.js',
                       'js/services/hardware/device/sensorsInDeviceService.js',
                       'js/services/hardware/device/deviceService.js',                     
 
                       //
+
                       'js/services/sensorTypeService.js',                      
                       'js/services/sensorDatasheetService.js',                      
                       'js/services/sensorDatasheetUnitMeasurementScaleService.js',
@@ -118,6 +123,8 @@ angular.module('app')
                       'ui.grid',
                       'toaster',
 
+                      'js/services/contextScope.js',
+
                       //Globalization
 
                       'js/services/globalization/globalizationContext.js',
@@ -138,12 +145,11 @@ angular.module('app')
                       'js/services/locale/countryService.js',
 
                       //SI
+
                       'js/services/si/siContext.js',
                       'js/services/si/siConstants.js',
                       'js/services/si/siFinder.js',
-                      'js/services/si/siMapper.js',
-
-                      'js/services/contextScope.js',
+                      'js/services/si/siMapper.js',                      
 
                       //*** Hardware ***
 
@@ -151,7 +157,9 @@ angular.module('app')
 
                       'js/services/hardware/device/deviceContext.js',
                       'js/services/hardware/device/deviceConstants.js',
+                      'js/services/hardware/device/deviceFinder.js',
                       'js/services/hardware/device/deviceMapper.js',
+
                       'js/services/hardware/device/deviceNTPService.js',
                       'js/services/hardware/device/deviceSensorsService.js',
                       'js/services/hardware/device/sensorsInDeviceService.js',
