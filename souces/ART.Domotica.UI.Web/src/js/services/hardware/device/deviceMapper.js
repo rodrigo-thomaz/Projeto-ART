@@ -5,6 +5,26 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 't
 
     // *** Navigation Properties Mappers ***
 
+    var loadAll = function () {
+        for (var i = 0; i < deviceContext.device.length; i++) {
+
+            var deviceNTP = deviceContext.device[i].deviceNTP;
+            deviceContext.deviceNTP.push(deviceNTP);
+
+            var deviceSensors = deviceContext.device[i].deviceSensors;
+            deviceContext.deviceSensors.push(deviceSensors);
+
+            for (var j = 0; j < deviceSensors.sensorsInDevice.length; j++) {
+                var sensorsInDevice = deviceSensors.sensorsInDevice[j];
+                deviceContext.sensorsInDevice.push(sensorsInDevice);
+            }
+        }
+        deviceContext.deviceLoaded = true;
+        deviceContext.deviceNTPLoaded = true;
+        deviceContext.deviceSensorsLoaded = true;
+        deviceContext.sensorsInDeviceLoaded = true;
+    }
+
     var mapper_DeviceNTP_TimeZone_Init = false;
     //var mapper_DeviceNTP_TimeZone = function () {
     //    if (!mapper_DeviceNTP_TimeZone_Init && deviceContext.deviceLoaded && deviceContext.timeZoneLoaded) {
@@ -21,30 +41,8 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 't
         delete deviceNTP.timeZoneId; // removendo a foreing key
     }
 
-    // *** Loads
+    // *** Navigation Properties Mappers ***
 
-    var loadAll = function () {
-        for (var i = 0; i < deviceContext.device.length; i++) {
-
-            var deviceNTP = deviceContext.device[i].deviceNTP;
-            deviceContext.deviceNTP.push(deviceNTP);
-            
-            var deviceSensors = deviceContext.device[i].deviceSensors;
-            deviceContext.deviceSensors.push(deviceSensors);
-
-            for (var j = 0; j < deviceSensors.sensorsInDevice.length; j++) {
-                var sensorsInDevice = deviceSensors.sensorsInDevice[j];
-                deviceContext.sensorsInDevice.push(sensorsInDevice);
-            }
-        }
-        deviceContext.deviceLoaded = true;
-        deviceContext.deviceNTPLoaded = true;
-        deviceContext.deviceSensorsLoaded = true;
-        deviceContext.sensorsInDeviceLoaded = true;
-    }
-
-    // *** Loads
-    
 
     // *** Events Subscriptions
 
