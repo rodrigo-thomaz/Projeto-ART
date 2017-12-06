@@ -1,16 +1,18 @@
 ﻿'use strict';
 app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', 'sensorDatasheetUnitMeasurementScaleConstant', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext, sensorDatasheetUnitMeasurementScaleConstant) {
 
+    var serviceFactory = {};    
+
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var _initializing = false;
     var _initialized  = false;
 
-    var serviceFactory = {};    
+    var getAllCompletedSubscription = null;
 
     var onConnected = function () {
 
-        stompService.subscribe('SensorDatasheetUnitMeasurementScale.GetAllViewCompleted', onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -23,21 +25,28 @@ app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSetti
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/sensorDatasheetUnitMeasurementScale/getAll').then(function (results) {
+        return $http.post(serviceBase + sensorDatasheetUnitMeasurementScaleConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
 
     var onGetAllCompleted = function (payload) {
+
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
+
         for (var i = 0; i < data.length; i++) {
             sensorDatasheetContext.sensorDatasheetUnitMeasurementScale.push(data[i]);
         }
-        sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded = true;
+                
         _initializing = false;
         _initialized = true;
-        $rootScope.$emit('sensorDatasheetUnitMeasurementScaleService_Initialized');
+
+        clearOnConnected();
+
+        getAllCompletedSubscription.unsubscribe();
+
+        $rootScope.$emit(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedEventName);
     }
 
     $rootScope.$on('$destroy', function () {

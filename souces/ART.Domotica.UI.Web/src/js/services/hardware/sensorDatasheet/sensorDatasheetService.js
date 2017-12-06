@@ -1,16 +1,18 @@
 ﻿'use strict';
 app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', 'sensorDatasheetConstant', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext, sensorDatasheetConstant) {
 
+    var serviceFactory = {};    
+
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var _initializing = false;
     var _initialized  = false;
 
-    var serviceFactory = {};    
+    var getAllCompletedSubscription = null;
 
     var onConnected = function () {
 
-        stompService.subscribe('SensorDatasheet.GetAllViewCompleted', onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(sensorDatasheetConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -23,21 +25,28 @@ app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + 'api/sensorDatasheet/getAll').then(function (results) {
+        return $http.post(serviceBase + sensorDatasheetConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };     
     
     var onGetAllCompleted = function (payload) {
+
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
+
         for (var i = 0; i < data.length; i++) {
             sensorDatasheetContext.sensorDatasheet.push(data[i]);
         }
-        sensorDatasheetContext.sensorDatasheetLoaded = true;
+                
         _initializing = false;
         _initialized = true;
-        $rootScope.$emit('sensorDatasheetService_Initialized');
+
+        clearOnConnected();
+
+        getAllCompletedSubscription.unsubscribe();
+
+        $rootScope.$emit(sensorDatasheetConstant.getAllCompletedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
