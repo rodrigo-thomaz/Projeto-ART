@@ -44,6 +44,8 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
                 
         clearOnConnected();
 
+        getAllCompletedSubscription.unsubscribe();
+
         $rootScope.$emit(timeZoneConstant.getAllCompletedEventName);
     }
 
