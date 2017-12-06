@@ -50,54 +50,15 @@ app.factory('contextScope', [
 
     var context = $rootScope.$new();
 
-    // *** Public Properties ***       
-
-    context.sensorTypeLoaded = false;
-    context.sensorTypes = [];
-
-    context.sensorDatasheetLoaded = false;
-    context.sensorDatasheets = [];
-
-    context.sensorUnitMeasurementDefaultLoaded = false;
-    context.sensorUnitMeasurementDefaults = [];
+    // *** Public Properties ***           
 
     context.sensorUnitMeasurementScaleLoaded = false;
-    context.sensorUnitMeasurementScales = [];
-
-    context.sensorDatasheetUnitMeasurementScaleLoaded = false;
-    context.sensorDatasheetUnitMeasurementScales = [];
+    context.sensorUnitMeasurementScales = [];    
 
     context.sensorsLoaded = false;
     context.sensors = [];    
 
-    // *** Finders ***        
-
-    var getSensorTypeByKey = function (sensorTypeId) {
-        for (var i = 0; i < context.sensorTypes.length; i++) {
-            var item = context.sensorTypes[i];
-            if (item.sensorTypeId === sensorTypeId) {
-                return item;
-            }
-        }
-    }
-
-    var getSensorDatasheetByKey = function (sensorDatasheetId, sensorTypeId) {
-        for (var i = 0; i < context.sensorDatasheets.length; i++) {
-            var item = context.sensorDatasheets[i];
-            if (item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId) {
-                return item;
-            }
-        }
-    }
-
-    var getSensorUnitMeasurementDefaultByKey = function (sensorUnitMeasurementDefaultId, sensorTypeId) {
-        for (var i = 0; i < context.sensorUnitMeasurementDefaults.length; i++) {
-            var item = context.sensorUnitMeasurementDefaults[i];
-            if (item.sensorUnitMeasurementDefaultId === sensorUnitMeasurementDefaultId && item.sensorTypeId === sensorTypeId) {
-                return item;
-            }
-        }
-    };    
+    // *** Finders ***      
 
     var getSensorByKey = function (sensorId) {
         for (var i = 0; i < context.sensors.length; i++) {
