@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', function ($http, ngAuthSettings, $rootScope, stompService, deviceContext) {
+app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'timeZoneConstant', 'deviceContext', function ($http, ngAuthSettings, $rootScope, stompService, timeZoneConstant, deviceContext) {
 
     var serviceFactory = {};    
 
@@ -8,15 +8,11 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/globalization/timeZone/getAll';
-    var getAllCompletedTopic = 'Globalization.TimeZone.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
-
-    var initializedEventName = 'timeZoneService.onInitialized';
 
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(timeZoneConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -29,7 +25,7 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + timeZoneConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     }; 
@@ -49,7 +45,7 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
         deviceContext.timeZoneLoaded = true;
         clearOnConnected();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(timeZoneConstant.getAllCompletedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -64,7 +60,6 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
     // serviceFactory
     
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 

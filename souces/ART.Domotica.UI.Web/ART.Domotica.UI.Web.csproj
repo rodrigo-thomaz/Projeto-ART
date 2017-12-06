@@ -218,6 +218,10 @@
     <Content Include="src\js\directives\ui-uppercased.js" />
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />
     <Content Include="src\js\services\contextScope.js" />
+    <Content Include="src\js\services\globalization\globalizationConstants.js" />
+    <Content Include="src\js\services\globalization\globalizationContext.js" />
+    <Content Include="src\js\services\globalization\globalizationFinder.js" />
+    <Content Include="src\js\services\globalization\globalizationMapper.js" />
     <Content Include="src\js\services\hardware\device\deviceContext.js" />
     <Content Include="src\js\services\hardware\device\deviceMapper.js" />
     <Content Include="src\js\services\hardware\device\deviceConstants.js" />

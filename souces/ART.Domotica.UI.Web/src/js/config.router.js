@@ -47,7 +47,13 @@ angular.module('app')
                       'js/services/contextScope.js',
 
                       //Globalization
-                      'js/services/globalization/timeZoneService.js',                      
+
+                      'js/services/globalization/globalizationContext.js',
+                      'js/services/globalization/globalizationConstants.js',
+                      'js/services/globalization/globalizationFinder.js',
+                      'js/services/globalization/globalizationMapper.js',
+
+                      'js/services/globalization/timeZoneService.js',
 
                       //Locale
                       'js/services/locale/localeContext.js',
@@ -113,6 +119,12 @@ angular.module('app')
                       'toaster',
 
                       //Globalization
+
+                      'js/services/globalization/globalizationContext.js',
+                      'js/services/globalization/globalizationConstants.js',
+                      'js/services/globalization/globalizationFinder.js',
+                      'js/services/globalization/globalizationMapper.js',
+
                       'js/services/globalization/timeZoneService.js',                      
 
                       //Locale

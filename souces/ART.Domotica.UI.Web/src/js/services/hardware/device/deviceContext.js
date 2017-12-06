@@ -10,10 +10,7 @@ app.factory('deviceContext', ['$rootScope', function ($rootScope) {
     context.device = [];   
     context.deviceNTP = [];   
     context.deviceSensors = [];   
-    context.sensorsInDevice = [];   
-
-    context.timeZoneLoaded = false;
-    context.timeZone = [];
+    context.sensorsInDevice = []; 
         
     // *** Finders ***        
 
@@ -34,8 +31,7 @@ app.factory('deviceContext', ['$rootScope', function ($rootScope) {
             }
         }
     }; 
-
-
+    
     var getDeviceSensorsByKey = function (deviceSensorsId) {
         for (var i = 0; i < context.deviceSensors.length; i++) {
             var item = context.deviceSensors[i];
@@ -52,16 +48,7 @@ app.factory('deviceContext', ['$rootScope', function ($rootScope) {
                 return item;
             }
         }
-    };     
-
-    var getTimeZoneByKey = function (timeZoneId) {
-        for (var i = 0; i < context.timeZone.length; i++) {
-            var item = context.timeZone[i];
-            if (item.timeZoneId === timeZoneId) {
-                return item;
-            }
-        }
-    }
+    }; 
 
     // *** Public Methods ***
 
@@ -69,8 +56,6 @@ app.factory('deviceContext', ['$rootScope', function ($rootScope) {
     context.getDeviceNTPByKey = getDeviceNTPByKey;
     context.getDeviceSensorsByKey = getDeviceSensorsByKey;
     context.getDeviceSensorsByKey = getDeviceSensorsByKey;
-
-    context.getTimeZoneByKey = getTimeZoneByKey;
 
     return context;
 
