@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('deviceMapper', ['$rootScope', 'deviceContext', function ($rootScope, deviceContext) {
+app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', function ($rootScope, deviceContext, deviceConstant) {
 
     var serviceFactory = {};    
 
@@ -20,7 +20,31 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', function ($rootScope
         deviceNTP.timeZone = timeZone;
         delete deviceNTP.timeZoneId; // removendo a foreing key
     }
-    
+
+    // *** Events Subscriptions
+
+    var onDeviceGetAllByApplicationIdCompleted = function (event, data) {
+        deviceGetAllByApplicationIdCompletedSubscription();
+        deviceContext.deviceLoaded = true;
+    }      
+
+    var deviceGetAllByApplicationIdCompletedSubscription = $rootScope.$on(deviceConstant.getAllByApplicationIdCompletedEventName, onDeviceGetAllByApplicationIdCompleted);
+        
+    $rootScope.$on('$destroy', function () {
+        deviceGetAllByApplicationIdCompletedSubscription();        
+    });
+
+    // *** Events Subscriptions
+
+
+
+
+
+
+
+
+
+
 
     // *** Watches ***    
 

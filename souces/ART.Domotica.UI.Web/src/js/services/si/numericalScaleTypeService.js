@@ -42,7 +42,6 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', 'numericalS
         _initializing = false;
         _initialized = true;
 
-        siContext.numericalScaleTypeLoaded = true;
         clearOnConnected();
 
         getAllCompletedSubscription.unsubscribe();

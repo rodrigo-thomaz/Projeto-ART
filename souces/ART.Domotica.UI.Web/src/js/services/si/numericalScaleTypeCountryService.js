@@ -42,7 +42,6 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', 'num
         _initializing = false;
         _initialized = true;
 
-        siContext.numericalScaleTypeCountryLoaded = true;
         clearOnConnected();
 
         getAllCompletedSubscription.unsubscribe();

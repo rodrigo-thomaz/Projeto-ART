@@ -44,7 +44,6 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', 'numerica
         _initializing = false;
         _initialized = true;
 
-        siContext.numericalScalePrefixLoaded = true;
         clearOnConnected();
 
         getAllCompletedSubscription.unsubscribe();

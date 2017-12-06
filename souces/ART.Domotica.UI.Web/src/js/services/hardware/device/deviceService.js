@@ -156,7 +156,6 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         _initializing = false;
         _initialized = true;
 
-        deviceContext.deviceLoaded = true;
         clearOnConnected();
 
         getAllByApplicationIdCompletedSubscription.unsubscribe();

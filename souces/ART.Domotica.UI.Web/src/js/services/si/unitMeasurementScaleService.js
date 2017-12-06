@@ -42,7 +42,6 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', 'unitMeas
         _initializing = false;
         _initialized = true;
 
-        siContext.unitMeasurementScaleLoaded = true;
         clearOnConnected();
 
         getAllCompletedSubscription.unsubscribe();
