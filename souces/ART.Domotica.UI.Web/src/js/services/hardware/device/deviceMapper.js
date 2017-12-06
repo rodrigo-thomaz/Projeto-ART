@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', function ($rootScope, deviceContext, deviceConstant) {
+app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'timeZoneConstant', function ($rootScope, deviceContext, deviceConstant, timeZoneConstant) {
 
     var serviceFactory = {};    
 
@@ -28,10 +28,16 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', fu
         deviceContext.deviceLoaded = true;
     }      
 
+    var onTimeZoneGetAllCompleted = function (event, data) {
+        timeZoneGetAllCompletedSubscription();
+    }  
+
     var deviceGetAllByApplicationIdCompletedSubscription = $rootScope.$on(deviceConstant.getAllByApplicationIdCompletedEventName, onDeviceGetAllByApplicationIdCompleted);
+    var timeZoneGetAllCompletedSubscription = $rootScope.$on(timeZoneConstant.getAllCompletedEventName, onTimeZoneGetAllCompleted);
         
     $rootScope.$on('$destroy', function () {
-        deviceGetAllByApplicationIdCompletedSubscription();        
+        deviceGetAllByApplicationIdCompletedSubscription();  
+        timeZoneGetAllCompletedSubscription();
     });
 
     // *** Events Subscriptions
