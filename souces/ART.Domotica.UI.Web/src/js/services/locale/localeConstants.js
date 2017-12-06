@@ -2,11 +2,11 @@
 app.constant('continentConstant', {
     getAllApiUri: 'api/locale/continent/getAll',
     getAllCompletedTopic: 'Locale.Continent.GetAllViewCompleted',
-    initializedEventName: 'continentService.onInitialized',
+    getAllCompletedEventName: 'continentService.GetAllCompleted',
 });
 
 app.constant('countryConstant', {
     getAllApiUri: 'api/locale/country/getAll',
     getAllCompletedTopic: 'Locale.Country.GetAllViewCompleted',
-    initializedEventName: 'countryService.onInitialized',
+    getAllCompletedEventName: 'countryService.GetAllCompleted',
 });

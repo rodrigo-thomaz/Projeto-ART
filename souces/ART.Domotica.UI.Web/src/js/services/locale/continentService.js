@@ -47,7 +47,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', 'continentConstant',
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(continentConstant.initializedEventName);
+        $rootScope.$emit(continentConstant.getAllCompletedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
