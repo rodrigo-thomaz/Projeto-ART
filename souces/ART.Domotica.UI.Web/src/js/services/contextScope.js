@@ -1,31 +1,40 @@
 ﻿'use strict';
 app.factory('contextScope', [
     '$rootScope',
+
     'localeContext',
     'localeFinder',
     'localeMapper',    
+
     'siContext',
     'siFinder',
     'siMapper',
+
     'globalizationContext',
     'globalizationFinder',
     'globalizationMapper',
     'timeZoneService',
+
     'deviceContext',
     'deviceFinder',
     'deviceMapper',
+
     function (
         $rootScope,
+
         localeContext,
         localeFinder,
         localeMapper,
+
         siContext,
         siFinder,
         siMapper,
+
         globalizationContext,
         globalizationFinder,
         globalizationMapper,
         timeZoneService,
+
         deviceContext,
         deviceFinder,
         deviceMapper
