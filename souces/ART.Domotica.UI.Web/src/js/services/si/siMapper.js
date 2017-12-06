@@ -1,5 +1,6 @@
 ﻿'use strict';
-app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'localeFinder', function ($rootScope, siContext, siFinder, localeContext, localeFinder) {
+app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'localeFinder', 'numericalScalePrefixConstant', 'numericalScaleConstant', 'numericalScaleTypeCountryConstant', 'numericalScaleTypeConstant', 'unitMeasurementScaleConstant', 'unitMeasurementConstant', 'unitMeasurementTypeConstant',
+    function ($rootScope, siContext, siFinder, localeContext, localeFinder, numericalScalePrefixConstant, numericalScaleConstant, numericalScaleTypeCountryConstant, numericalScaleTypeConstant, unitMeasurementScaleConstant, unitMeasurementConstant, unitMeasurementTypeConstant) {
 
     var serviceFactory = {};    
 
@@ -108,6 +109,77 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
             }
         }
     }; 
+
+    // *** Navigation Properties Mappers ***
+
+
+    // *** Events Subscriptions
+
+    var onNumericalScalePrefixGetAllCompleted = function (event, data) {
+        numericalScalePrefixGetAllCompletedSubscription();
+        siContext.numericalScalePrefixLoaded = true;
+    }
+
+    var onNumericalScaleGetAllCompleted = function (event, data) {
+        numericalScaleGetAllCompletedSubscription();
+        siContext.numericalScaleLoaded = true;
+    }
+
+    var onNumericalScaleTypeCountryGetAllCompleted = function (event, data) {
+        numericalScaleTypeCountryGetAllCompletedSubscription();
+        siContext.numericalScaleTypeCountryLoaded = true;
+    }
+
+    var onNumericalScaleTypeGetAllCompleted = function (event, data) {
+        numericalScaleTypeGetAllCompletedSubscription();
+        siContext.numericalScaleTypeLoaded = true;
+    }
+
+    var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
+        unitMeasurementScaleGetAllCompletedSubscription();
+        siContext.unitMeasurementScaleLoaded = true;
+    }
+
+    var onUnitMeasurementGetAllCompleted = function (event, data) {
+        unitMeasurementGetAllCompletedSubscription();
+        siContext.unitMeasurementLoaded = true;
+    }
+
+    var onUnitMeasurementTypeGetAllCompleted = function (event, data) {
+        unitMeasurementTypeGetAllCompletedSubscription();
+        siContext.unitMeasurementTypeLoaded = true;
+    }
+
+    var numericalScalePrefixGetAllCompletedSubscription = $rootScope.$on(numericalScalePrefixConstant.getAllCompletedEventName, onNumericalScalePrefixGetAllCompleted);
+    var numericalScaleGetAllCompletedSubscription = $rootScope.$on(numericalScaleConstant.getAllCompletedEventName, onNumericalScaleGetAllCompleted);
+    var numericalScaleTypeCountryGetAllCompletedSubscription = $rootScope.$on(numericalScaleTypeCountryConstant.getAllCompletedEventName, onNumericalScaleTypeCountryGetAllCompleted);
+    var numericalScaleTypeGetAllCompletedSubscription = $rootScope.$on(numericalScaleTypeConstant.getAllCompletedEventName, onNumericalScaleTypeGetAllCompleted);
+    var unitMeasurementScaleGetAllCompletedSubscription = $rootScope.$on(unitMeasurementScaleConstant.getAllCompletedEventName, onUnitMeasurementScaleGetAllCompleted);
+    var unitMeasurementGetAllCompletedSubscription = $rootScope.$on(unitMeasurementConstant.getAllCompletedEventName, onUnitMeasurementGetAllCompleted);
+    var unitMeasurementTypeGetAllCompletedSubscription = $rootScope.$on(unitMeasurementTypeConstant.getAllCompletedEventName, onUnitMeasurementTypeGetAllCompleted);
+
+    $rootScope.$on('$destroy', function () {
+        numericalScalePrefixGetAllCompletedSubscription();
+        numericalScaleGetAllCompletedSubscription();
+        numericalScaleTypeCountryGetAllCompletedSubscription();
+        numericalScaleTypeGetAllCompletedSubscription();
+        unitMeasurementScaleGetAllCompletedSubscription();
+        unitMeasurementGetAllCompletedSubscription();
+        unitMeasurementTypeGetAllCompletedSubscription();
+    });
+
+    // *** Events Subscriptions
+
+
+
+
+
+
+
+
+
+
+
 
     // *** Watches ***
 
