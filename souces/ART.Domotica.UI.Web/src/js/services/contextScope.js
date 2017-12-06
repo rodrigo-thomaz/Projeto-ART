@@ -15,6 +15,10 @@ app.factory('contextScope', [
     'globalizationMapper',
     'timeZoneService',
 
+    'sensorDatasheetContext',
+    'sensorDatasheetFinder',
+    'sensorDatasheetMapper',
+
     'deviceContext',
     'deviceFinder',
     'deviceMapper',
@@ -34,6 +38,10 @@ app.factory('contextScope', [
         globalizationFinder,
         globalizationMapper,
         timeZoneService,
+
+        sensorDatasheetContext,
+        sensorDatasheetFinder,
+        sensorDatasheetMapper,
 
         deviceContext,
         deviceFinder,

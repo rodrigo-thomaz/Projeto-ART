@@ -227,6 +227,10 @@
     <Content Include="src\js\services\hardware\device\deviceConstants.js" />
     <Content Include="src\js\services\hardware\device\deviceFinder.js" />
     <Content Include="src\js\services\hardware\device\sensorsInDeviceService.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetConstants.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetContext.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetFinder.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetMapper.js" />
     <Content Include="src\js\services\locale\localeConstants.js" />
     <Content Include="src\js\services\locale\localeFinder.js" />
     <Content Include="src\js\services\sensorTempDSFamilyResolutionService.js" />
@@ -240,9 +244,9 @@
     <Content Include="src\js\services\authInterceptorService.js" />
     <Content Include="src\js\services\authService.js" />
     <Content Include="src\js\services\application\applicationService.js" />
-    <Content Include="src\js\services\sensorUnitMeasurementDefaultService.js" />
-    <Content Include="src\js\services\sensorDatasheetService.js" />
-    <Content Include="src\js\services\sensorTypeService.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorUnitMeasurementDefaultService.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetService.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorTypeService.js" />
     <Content Include="src\js\services\sensorService.js" />
     <Content Include="src\js\services\application\applicationContext.js" />
     <Content Include="src\js\services\si\siConstants.js" />
@@ -264,7 +268,7 @@
     <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\js\services\locale\continentService.js" />
     <Content Include="src\js\services\locale\countryService.js" />
-    <Content Include="src\js\services\sensorDatasheetUnitMeasurementScaleService.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetUnitMeasurementScaleService.js" />
     <Content Include="src\l10n\pt.js" />
     <Content Include="src\psd\ui.zip" />
     <Content Include="src\js\config.interceptor.js" />
@@ -524,7 +528,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="src\js\services\hardware\sensorDatasheet\" />
     <Folder Include="src\js\services\hardware\sensor\" />
   </ItemGroup>
   <PropertyGroup>

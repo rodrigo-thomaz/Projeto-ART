@@ -84,7 +84,19 @@ angular.module('app')
 
                       //*** Hardware ***
 
-                      //Device
+                      // Sensor Datasheet
+
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetContext.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetConstants.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetFinder.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetMapper.js',
+
+                      'js/services/hardware/sensorDatasheet/sensorTypeService.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetService.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
+                      'js/services/hardware/sensorDatasheet/sensorUnitMeasurementDefaultService.js',
+
+                      // Device
 
                       'js/services/hardware/device/deviceContext.js',
                       'js/services/hardware/device/deviceConstants.js',
@@ -96,12 +108,8 @@ angular.module('app')
                       'js/services/hardware/device/sensorsInDeviceService.js',
                       'js/services/hardware/device/deviceService.js',                     
 
-                      //
+                      //                      
 
-                      'js/services/sensorTypeService.js',                      
-                      'js/services/sensorDatasheetService.js',                      
-                      'js/services/sensorDatasheetUnitMeasurementScaleService.js',
-                      'js/services/sensorUnitMeasurementDefaultService.js',
                       'js/services/sensorService.js',
                                             
                       'js/services/sensorUnitMeasurementScaleService.js',
@@ -152,6 +160,18 @@ angular.module('app')
                       'js/services/si/siMapper.js',                      
 
                       //*** Hardware ***
+
+                      // Sensor Datasheet
+
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetContext.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetConstants.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetFinder.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetMapper.js',
+
+                      'js/services/hardware/sensorDatasheet/sensorTypeService.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetService.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
+                      'js/services/hardware/sensorDatasheet/sensorUnitMeasurementDefaultService.js',
 
                       //Device
 
