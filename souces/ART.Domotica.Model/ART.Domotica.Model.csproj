@@ -61,7 +61,7 @@
     <Compile Include="SensorDatasheetGetModel.cs" />
     <Compile Include="SensorTypeGetModel.cs" />
     <Compile Include="SensorGetModel.cs" />
-    <Compile Include="SensorUnitMeasurementDefaultGetModel.cs" />
+    <Compile Include="SensorDatasheetUnitMeasurementDefaultGetModel.cs" />
     <Compile Include="SI\NumericalScalePrefixGetModel.cs" />
     <Compile Include="SI\NumericalScaleTypeGetModel.cs" />
     <Compile Include="SI\NumericalScaleTypeCountryGetModel.cs" />

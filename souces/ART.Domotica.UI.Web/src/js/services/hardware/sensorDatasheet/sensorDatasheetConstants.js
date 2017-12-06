@@ -11,10 +11,10 @@ app.constant('sensorDatasheetConstant', {
     getAllCompletedEventName: 'sensorDatasheetService.GetAllCompleted',
 });
 
-app.constant('sensorUnitMeasurementDefaultConstant', {
-    getAllApiUri: 'api/sensorUnitMeasurementDefault/getAll',
-    getAllCompletedTopic: 'SensorUnitMeasurementDefault.GetAllViewCompleted',
-    getAllCompletedEventName: 'sensorUnitMeasurementDefaultService.GetAllCompleted',
+app.constant('sensorDatasheetUnitMeasurementDefaultConstant', {
+    getAllApiUri: 'api/sensorDatasheetUnitMeasurementDefault/getAll',
+    getAllCompletedTopic: 'SensorDatasheetUnitMeasurementDefault.GetAllViewCompleted',
+    getAllCompletedEventName: 'sensorDatasheetUnitMeasurementDefaultService.GetAllCompleted',
 });
 
 app.constant('sensorDatasheetUnitMeasurementScaleConstant', {

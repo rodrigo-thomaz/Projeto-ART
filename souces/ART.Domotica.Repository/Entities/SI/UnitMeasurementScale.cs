@@ -24,12 +24,12 @@
             get; set;
         }
 
-        public ICollection<SensorDatasheetUnitMeasurementScale> SensorDatasheetUnitMeasurementScales
+        public ICollection<SensorDatasheetUnitMeasurementDefault> SensorDatasheetUnitMeasurementDefaults
         {
             get; set;
         }
 
-        public ICollection<SensorUnitMeasurementDefault> SensorUnitMeasurementDefaults
+        public ICollection<SensorDatasheetUnitMeasurementScale> SensorDatasheetUnitMeasurementScales
         {
             get; set;
         }

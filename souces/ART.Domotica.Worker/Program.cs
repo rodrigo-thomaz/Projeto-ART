@@ -81,7 +81,7 @@
                 x.AddProfile(new SensorsInDeviceProfile());
                 x.AddProfile(new SensorTriggerProfile());
                 x.AddProfile(new SensorTypeProfile());
-                x.AddProfile(new SensorUnitMeasurementDefaultProfile());
+                x.AddProfile(new SensorDatasheetUnitMeasurementDefaultProfile());
                 x.AddProfile(new SensorDatasheetUnitMeasurementScaleProfile());
                 x.AddProfile(new TimeZoneProfile());
             });

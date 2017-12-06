@@ -7,11 +7,11 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface ISensorUnitMeasurementDefaultRepository : IRepository<ARTDbContext, SensorUnitMeasurementDefault, SensorDatasheetEnum>
+    public interface ISensorDatasheetUnitMeasurementDefaultRepository : IRepository<ARTDbContext, SensorDatasheetUnitMeasurementDefault, SensorDatasheetEnum>
     {
         #region Methods
 
-        Task<List<SensorUnitMeasurementDefault>> GetAll();
+        Task<List<SensorDatasheetUnitMeasurementDefault>> GetAll();
 
         #endregion Methods
     }

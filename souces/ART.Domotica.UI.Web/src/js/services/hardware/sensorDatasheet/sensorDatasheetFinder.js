@@ -23,10 +23,10 @@ app.factory('sensorDatasheetFinder', ['$rootScope', 'sensorDatasheetContext', fu
         }
     }
 
-    var getSensorUnitMeasurementDefaultByKey = function (sensorUnitMeasurementDefaultId, sensorTypeId) {
-        for (var i = 0; i < context.sensorUnitMeasurementDefault.length; i++) {
-            var item = context.sensorUnitMeasurementDefault[i];
-            if (item.sensorUnitMeasurementDefaultId === sensorUnitMeasurementDefaultId && item.sensorTypeId === sensorTypeId) {
+    var getSensorDatasheetUnitMeasurementDefaultByKey = function (sensorDatasheetUnitMeasurementDefaultId, sensorTypeId) {
+        for (var i = 0; i < context.sensorDatasheetUnitMeasurementDefault.length; i++) {
+            var item = context.sensorDatasheetUnitMeasurementDefault[i];
+            if (item.sensorDatasheetUnitMeasurementDefaultId === sensorDatasheetUnitMeasurementDefaultId && item.sensorTypeId === sensorTypeId) {
                 return item;
             }
         }
@@ -45,7 +45,7 @@ app.factory('sensorDatasheetFinder', ['$rootScope', 'sensorDatasheetContext', fu
 
     serviceFactory.getSensorTypeByKey = getSensorTypeByKey;
     serviceFactory.getSensorDatasheetByKey = getSensorDatasheetByKey;
-    serviceFactory.getSensorUnitMeasurementDefaultByKey = getSensorUnitMeasurementDefaultByKey;
+    serviceFactory.getSensorDatasheetUnitMeasurementDefaultByKey = getSensorDatasheetUnitMeasurementDefaultByKey;
     serviceFactory.getSensorDatasheetUnitMeasurementScaleByKey = getSensorDatasheetUnitMeasurementScaleByKey;
 
     return serviceFactory;

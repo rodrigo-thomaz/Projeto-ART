@@ -244,7 +244,7 @@
     <Content Include="src\js\services\authInterceptorService.js" />
     <Content Include="src\js\services\authService.js" />
     <Content Include="src\js\services\application\applicationService.js" />
-    <Content Include="src\js\services\hardware\sensorDatasheet\sensorUnitMeasurementDefaultService.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetUnitMeasurementDefaultService.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetService.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorTypeService.js" />
     <Content Include="src\js\services\sensorService.js" />

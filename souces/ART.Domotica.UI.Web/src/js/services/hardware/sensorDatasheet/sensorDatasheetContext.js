@@ -9,8 +9,8 @@ app.factory('sensorDatasheetContext', ['$rootScope', function ($rootScope) {
     context.sensorDatasheetLoaded = false;
     context.sensorDatasheet = [];
 
-    context.sensorUnitMeasurementDefaultLoaded = false;
-    context.sensorUnitMeasurementDefault = [];
+    context.sensorDatasheetUnitMeasurementDefaultLoaded = false;
+    context.sensorDatasheetUnitMeasurementDefault = [];
 
     context.sensorDatasheetUnitMeasurementScaleLoaded = false;
     context.sensorDatasheetUnitMeasurementScale = [];

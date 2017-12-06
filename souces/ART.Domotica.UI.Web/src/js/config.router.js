@@ -94,7 +94,7 @@ angular.module('app')
                       'js/services/hardware/sensorDatasheet/sensorTypeService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
-                      'js/services/hardware/sensorDatasheet/sensorUnitMeasurementDefaultService.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
 
                       // Device
 
@@ -171,7 +171,7 @@ angular.module('app')
                       'js/services/hardware/sensorDatasheet/sensorTypeService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
-                      'js/services/hardware/sensorDatasheet/sensorUnitMeasurementDefaultService.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
 
                       //Device
 

@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public interface ISensorUnitMeasurementDefaultDomain
+    public interface ISensorDatasheetUnitMeasurementDefaultDomain
     {
         #region Methods
 
-        Task<List<SensorUnitMeasurementDefault>> GetAll();
+        Task<List<SensorDatasheetUnitMeasurementDefault>> GetAll();
 
         #endregion Methods
     }

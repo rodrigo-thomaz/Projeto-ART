@@ -120,6 +120,11 @@
             get; set;
         }
 
+        public DbSet<SensorDatasheetUnitMeasurementDefault> SensorDatasheetUnitMeasurementDefault
+        {
+            get; set;
+        }
+
         public DbSet<SensorDatasheetUnitMeasurementScale> SensorDatasheetUnitMeasurementScale
         {
             get; set;
@@ -146,11 +151,6 @@
         }
 
         public DbSet<SensorType> SensorType
-        {
-            get; set;
-        }
-
-        public DbSet<SensorUnitMeasurementDefault> SensorUnitMeasurementDefault
         {
             get; set;
         }

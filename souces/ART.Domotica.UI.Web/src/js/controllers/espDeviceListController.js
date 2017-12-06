@@ -17,7 +17,7 @@ app.controller('espDeviceListController', [
     'sensorTypeService',
     'sensorDatasheetService',
     'sensorDatasheetUnitMeasurementScaleService',
-    'sensorUnitMeasurementDefaultService',
+    'sensorDatasheetUnitMeasurementDefaultService',
     'deviceSensorsService',
     'sensorsInDeviceService',
     'sensorService',

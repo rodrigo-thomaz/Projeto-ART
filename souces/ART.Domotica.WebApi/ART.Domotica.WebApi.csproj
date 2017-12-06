@@ -145,7 +145,7 @@
     <Compile Include="Controllers\SensorUnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\ESPDeviceController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
-    <Compile Include="Controllers\SensorUnitMeasurementDefaultController.cs" />
+    <Compile Include="Controllers\SensorDatasheetUnitMeasurementDefaultController.cs" />
     <Compile Include="Controllers\SensorDatasheetController.cs" />
     <Compile Include="Controllers\SensorTypeController.cs" />
     <Compile Include="Controllers\SensorController.cs" />

@@ -80,7 +80,7 @@
     <Compile Include="Interfaces\ISensorDatasheetDomain.cs" />
     <Compile Include="Interfaces\Locale\IContinentDomain.cs" />
     <Compile Include="Interfaces\Globalization\ITimeZoneDomain.cs" />
-    <Compile Include="Interfaces\ISensorUnitMeasurementDefaultDomain.cs" />
+    <Compile Include="Interfaces\ISensorDatasheetUnitMeasurementDefaultDomain.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleDomain.cs" />
     <Compile Include="Interfaces\SI\INumericalScalePrefixDomain.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleTypeDomain.cs" />
@@ -105,7 +105,7 @@
     <Compile Include="Services\SensorTypeDomain.cs" />
     <Compile Include="Services\SensorTriggerDomain.cs" />
     <Compile Include="Services\SensorDatasheetDomain.cs" />
-    <Compile Include="Services\SensorUnitMeasurementDefaultDomain.cs" />
+    <Compile Include="Services\SensorDatasheetUnitMeasurementDefaultDomain.cs" />
     <Compile Include="Services\SI\NumericalScaleDomain.cs" />
     <Compile Include="Services\SI\NumericalScalePrefixDomain.cs" />
     <Compile Include="Services\SI\NumericalScaleTypeDomain.cs" />

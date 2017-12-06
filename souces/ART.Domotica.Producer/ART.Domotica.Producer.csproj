@@ -69,7 +69,7 @@
     <Compile Include="Interfaces\IApplicationUserProducer.cs" />
     <Compile Include="Interfaces\IDashboardProducer.cs" />
     <Compile Include="Interfaces\ISensorTempDSFamilyProducer.cs" />
-    <Compile Include="Interfaces\ISensorUnitMeasurementDefaultProducer.cs" />
+    <Compile Include="Interfaces\ISensorDatasheetUnitMeasurementDefaultProducer.cs" />
     <Compile Include="Interfaces\ISensorDatasheetProducer.cs" />
     <Compile Include="Interfaces\ISensorTypeProducer.cs" />
     <Compile Include="Interfaces\ISensorProducer.cs" />
@@ -97,7 +97,7 @@
     <Compile Include="Services\ApplicationUserProducer.cs" />
     <Compile Include="Services\DashboardProducer.cs" />
     <Compile Include="Services\SensorTempDSFamilyProducer.cs" />
-    <Compile Include="Services\SensorUnitMeasurementDefaultProducer.cs" />
+    <Compile Include="Services\SensorDatasheetUnitMeasurementDefaultProducer.cs" />
     <Compile Include="Services\SensorDatasheetProducer.cs" />
     <Compile Include="Services\SensorTypeProducer.cs" />
     <Compile Include="Services\SensorProducer.cs" />

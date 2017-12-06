@@ -38,7 +38,7 @@
             ExecuteSensorType(context);
             ExecuteActuatorType(context);
             ExecuteSensorDatasheet(context);
-            ExecuteSensorUnitMeasurementDefault(context);
+            ExecuteSensorDatasheetUnitMeasurementDefault(context);
             ExecuteSensorDatasheetUnitMeasurementScale(context);
 
             #region SensorTempDSFamilyResolutions
@@ -790,6 +790,48 @@
             }
         }
 
+        private static void ExecuteSensorDatasheetUnitMeasurementDefault(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("SensorDatasheetUnitMeasurementDefault.csv");
+
+            foreach (var line in lines)
+            {
+                var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
+                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
+                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[2]);
+                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[3]);
+                var numericalScalePrefixId = (NumericalScalePrefixEnum)Enum.Parse(typeof(NumericalScalePrefixEnum), line[4]);
+                var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[5]);
+
+                var max = Convert.ToDecimal(line[6]);
+                var min = Convert.ToDecimal(line[7]);
+
+                var entity = context.SensorDatasheetUnitMeasurementDefault
+                    .Where(x => x.Id == sensorDatasheetId)
+                    .Where(x => x.SensorTypeId == sensorTypeId)
+                    .SingleOrDefault();
+
+                if (entity == null)
+                {
+                    entity = new SensorDatasheetUnitMeasurementDefault
+                    {
+                        Id = sensorDatasheetId,
+                        SensorTypeId = sensorTypeId,
+                    };
+                    context.SensorDatasheetUnitMeasurementDefault.Add(entity);
+                }
+
+                entity.UnitMeasurementId = unitMeasurementId;
+                entity.UnitMeasurementTypeId = unitMeasurementTypeId;
+                entity.NumericalScalePrefixId = numericalScalePrefixId;
+                entity.NumericalScaleTypeId = numericalScaleTypeId;
+                entity.Max = max;
+                entity.Min = min;
+
+                context.SaveChanges();
+            }
+        }
+
         private static void ExecuteSensorDatasheetUnitMeasurementScale(ARTDbContext context)
         {
             var lines = GetMatrixFromFile("SensorDatasheetUnitMeasurementScale.csv");
@@ -852,48 +894,6 @@
                     context.SensorType.Add(entity);
                 }
                 entity.Name = name;
-
-                context.SaveChanges();
-            }
-        }
-
-        private static void ExecuteSensorUnitMeasurementDefault(ARTDbContext context)
-        {
-            var lines = GetMatrixFromFile("SensorUnitMeasurementDefault.csv");
-
-            foreach (var line in lines)
-            {
-                var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
-                var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
-                var unitMeasurementId = (UnitMeasurementEnum)Enum.Parse(typeof(UnitMeasurementEnum), line[2]);
-                var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[3]);
-                var numericalScalePrefixId = (NumericalScalePrefixEnum)Enum.Parse(typeof(NumericalScalePrefixEnum), line[4]);
-                var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[5]);
-
-                var max = Convert.ToDecimal(line[6]);
-                var min = Convert.ToDecimal(line[7]);
-
-                var entity = context.SensorUnitMeasurementDefault
-                    .Where(x => x.Id == sensorDatasheetId)
-                    .Where(x => x.SensorTypeId == sensorTypeId)
-                    .SingleOrDefault();
-
-                if (entity == null)
-                {
-                    entity = new SensorUnitMeasurementDefault
-                    {
-                        Id = sensorDatasheetId,
-                        SensorTypeId = sensorTypeId,
-                    };
-                    context.SensorUnitMeasurementDefault.Add(entity);
-                }
-
-                entity.UnitMeasurementId = unitMeasurementId;
-                entity.UnitMeasurementTypeId = unitMeasurementTypeId;
-                entity.NumericalScalePrefixId = numericalScalePrefixId;
-                entity.NumericalScaleTypeId = numericalScaleTypeId;
-                entity.Max = max;
-                entity.Min = min;
 
                 context.SaveChanges();
             }

@@ -14,6 +14,11 @@
             get; set;
         }
 
+        public SensorDatasheetUnitMeasurementDefault SensorDatasheetUnitMeasurementDefault
+        {
+            get; set;
+        }
+
         public ICollection<SensorDatasheetUnitMeasurementScale> SensorDatasheetUnitMeasurementScales
         {
             get; set;
@@ -30,11 +35,6 @@
         }
 
         public SensorTypeEnum SensorTypeId
-        {
-            get; set;
-        }
-
-        public SensorUnitMeasurementDefault SensorUnitMeasurementDefault
         {
             get; set;
         }

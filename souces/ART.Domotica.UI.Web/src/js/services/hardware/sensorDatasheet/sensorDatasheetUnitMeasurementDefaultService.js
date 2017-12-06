@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorUnitMeasurementDefaultService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', 'sensorUnitMeasurementDefaultConstant', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext, sensorUnitMeasurementDefaultConstant) {
+app.factory('sensorDatasheetUnitMeasurementDefaultService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', 'sensorDatasheetUnitMeasurementDefaultConstant', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext, sensorDatasheetUnitMeasurementDefaultConstant) {
 
     var serviceFactory = {};    
 
@@ -12,7 +12,7 @@ app.factory('sensorUnitMeasurementDefaultService', ['$http', 'ngAuthSettings', '
 
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe(sensorUnitMeasurementDefaultConstant.getAllCompletedTopic, onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(sensorDatasheetUnitMeasurementDefaultConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -25,7 +25,7 @@ app.factory('sensorUnitMeasurementDefaultService', ['$http', 'ngAuthSettings', '
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + sensorUnitMeasurementDefaultConstant.getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + sensorDatasheetUnitMeasurementDefaultConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };     
@@ -36,7 +36,7 @@ app.factory('sensorUnitMeasurementDefaultService', ['$http', 'ngAuthSettings', '
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            sensorDatasheetContext.sensorUnitMeasurementDefault.push(data[i]);
+            sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault.push(data[i]);
         }
                 
         _initializing = false;
@@ -46,7 +46,7 @@ app.factory('sensorUnitMeasurementDefaultService', ['$http', 'ngAuthSettings', '
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(sensorUnitMeasurementDefaultConstant.getAllCompletedEventName);
+        $rootScope.$emit(sensorDatasheetUnitMeasurementDefaultConstant.getAllCompletedEventName);
     }
 
     $rootScope.$on('$destroy', function () {

@@ -41,7 +41,7 @@
             builder.RegisterType<SensorDatasheetConsumer>().As<ISensorDatasheetConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTriggerConsumer>().As<ISensorTriggerConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTypeConsumer>().As<ISensorTypeConsumer>().SingleInstance().AutoActivate();
-            builder.RegisterType<SensorUnitMeasurementDefaultConsumer>().As<ISensorUnitMeasurementDefaultConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<SensorDatasheetUnitMeasurementDefaultConsumer>().As<ISensorDatasheetUnitMeasurementDefaultConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorDatasheetUnitMeasurementScaleConsumer>().As<ISensorDatasheetUnitMeasurementScaleConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<TimeZoneConsumer>().As<ITimeZoneConsumer>().SingleInstance().AutoActivate();
 

@@ -49,7 +49,7 @@
     <Compile Include="ApplicationConstants.cs" />
     <Compile Include="SensorTempDSFamilyConstants.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SensorUnitMeasurementDefaultConstants.cs" />
+    <Compile Include="SensorDatasheetUnitMeasurementDefaultConstants.cs" />
     <Compile Include="SensorDatasheetConstants.cs" />
     <Compile Include="SensorTypeConstants.cs" />
     <Compile Include="SensorConstants.cs" />

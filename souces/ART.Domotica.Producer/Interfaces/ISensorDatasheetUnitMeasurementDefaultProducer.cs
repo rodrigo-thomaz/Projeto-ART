@@ -4,7 +4,7 @@
 
     using ART.Infra.CrossCutting.MQ.Contract;
 
-    public interface ISensorUnitMeasurementDefaultProducer
+    public interface ISensorDatasheetUnitMeasurementDefaultProducer
     {
         #region Methods
 
