@@ -1,23 +1,23 @@
 ﻿'use strict';
-app.constant('sensorTypeConstants', {
+app.constant('sensorTypeConstant', {
     getAllApiUri: 'api/sensorType/getAll',
     getAllCompletedTopic: 'SensorType.GetAllViewCompleted',
     getAllCompletedEventName: 'sensorTypeService.GetAllCompleted',
 });
 
-app.constant('sensorDatasheetConstants', {
+app.constant('sensorDatasheetConstant', {
     getAllApiUri: 'api/sensorDatasheet/getAll',
     getAllCompletedTopic: 'SensorDatasheet.GetAllViewCompleted',
     getAllCompletedEventName: 'sensorDatasheetService.GetAllCompleted',
 });
 
-app.constant('sensorUnitMeasurementDefaultConstants', {
+app.constant('sensorUnitMeasurementDefaultConstant', {
     getAllApiUri: 'api/sensorUnitMeasurementDefault/getAll',
     getAllCompletedTopic: 'SensorUnitMeasurementDefault.GetAllViewCompleted',
     getAllCompletedEventName: 'sensorUnitMeasurementDefaultService.GetAllCompleted',
 });
 
-app.constant('sensorDatasheetUnitMeasurementScaleConstants', {
+app.constant('sensorDatasheetUnitMeasurementScaleConstant', {
     getAllApiUri: 'api/sensorDatasheetUnitMeasurementScale/getAll',
     getAllCompletedTopic: 'SensorDatasheetUnitMeasurementScale.GetAllViewCompleted',
     getAllCompletedEventName: 'sensorDatasheetUnitMeasurementScaleService.GetAllCompleted',

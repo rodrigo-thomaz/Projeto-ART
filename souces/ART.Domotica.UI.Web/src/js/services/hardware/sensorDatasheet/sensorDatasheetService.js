@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext) {
+app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', 'sensorDatasheetConstant', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext, sensorDatasheetConstant) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
