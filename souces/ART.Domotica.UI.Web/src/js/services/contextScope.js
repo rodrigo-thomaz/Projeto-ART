@@ -1,13 +1,35 @@
 ﻿'use strict';
-app.factory('contextScope', ['$rootScope',
+app.factory('contextScope', [
+    '$rootScope',
     'localeContext',
-    'localeMapper',
+    'localeFinder',
+    'localeMapper',    
     'siContext',
-    'siMapper',
     'siFinder',
+    'siMapper',
+    'globalizationContext',
+    'globalizationFinder',
+    'globalizationMapper',
+    'timeZoneService',
     'deviceContext',
+    'deviceFinder',
     'deviceMapper',
-    function ($rootScope, localeContext, localeMapper, siContext, siMapper, siFinder) {
+    function (
+        $rootScope,
+        localeContext,
+        localeFinder,
+        localeMapper,
+        siContext,
+        siFinder,
+        siMapper,
+        globalizationContext,
+        globalizationFinder,
+        globalizationMapper,
+        timeZoneService,
+        deviceContext,
+        deviceFinder,
+        deviceMapper
+    ) {
 
     var context = $rootScope.$new();
 

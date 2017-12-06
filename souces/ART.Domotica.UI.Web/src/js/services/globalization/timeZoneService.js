@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'timeZoneConstant', 'deviceContext', function ($http, ngAuthSettings, $rootScope, stompService, timeZoneConstant, deviceContext) {
+app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'timeZoneConstant', 'globalizationContext', function ($http, ngAuthSettings, $rootScope, stompService, timeZoneConstant, globalizationContext) {
 
     var serviceFactory = {};    
 
@@ -36,13 +36,12 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            deviceContext.timeZone.push(data[i]);
+            globalizationContext.timeZone.push(data[i]);
         }
 
         _initializing = false;
         _initialized = true;
-
-        deviceContext.timeZoneLoaded = true;
+                
         clearOnConnected();
 
         $rootScope.$emit(timeZoneConstant.getAllCompletedEventName);

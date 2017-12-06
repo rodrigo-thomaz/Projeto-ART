@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('globalizationMapper', ['$rootScope', 'globalizationContext', 'globalizationFinder', function ($rootScope, globalizationContext, globalizationFinder) {
+app.factory('globalizationMapper', ['$rootScope', 'globalizationContext', 'globalizationFinder', 'timeZoneConstant', function ($rootScope, globalizationContext, globalizationFinder, timeZoneConstant) {
 
     var serviceFactory = {};    
 
@@ -7,10 +7,25 @@ app.factory('globalizationMapper', ['$rootScope', 'globalizationContext', 'globa
 
     
 
-    // *** Watches ***
+    // *** Watches ***    
 
-    
-    
+
+    // *** Events Subscriptions
+        
+    var onTimeZoneGetAllCompleted = function (event, data) {
+        timeZoneGetAllCompletedSubscription();
+        globalizationContext.timeZoneLoaded = true;
+    }
+
+    var timeZoneGetAllCompletedSubscription = $rootScope.$on(timeZoneConstant.getAllCompletedEventName, onTimeZoneGetAllCompleted);
+
+    $rootScope.$on('$destroy', function () {
+        timeZoneGetAllCompletedSubscription();
+    });
+
+    // *** Events Subscriptions
+
+
     return serviceFactory;
 
 }]);
