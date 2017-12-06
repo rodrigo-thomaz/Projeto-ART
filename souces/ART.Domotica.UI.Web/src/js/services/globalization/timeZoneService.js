@@ -8,8 +8,8 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompS
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/timeZone/getAll';
-    var getAllCompletedTopic = 'TimeZone.GetAllViewCompleted';
+    var getAllApiUri = 'api/globalization/timeZone/getAll';
+    var getAllCompletedTopic = 'Globalization.TimeZone.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
     var initializedEventName = 'timeZoneService.onInitialized';

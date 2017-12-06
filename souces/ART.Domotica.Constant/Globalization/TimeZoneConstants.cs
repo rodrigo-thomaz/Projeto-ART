@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string GetAllCompletedQueueName = "TimeZone.GetAllViewCompleted";
-        public static readonly string GetAllQueueName = "TimeZone.GetAll";
+        public static readonly string GetAllCompletedQueueName = "Globalization.TimeZone.GetAllViewCompleted";
+        public static readonly string GetAllQueueName = "Globalization.TimeZone.GetAll";
 
         #endregion Fields
     }
