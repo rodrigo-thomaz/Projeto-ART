@@ -38,6 +38,22 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
         }
     }; 
 
+    var mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init = false;
+    var mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet = function () {
+        if (!mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init && sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded && sensorDatasheetContext.sensorDatasheetLoaded) {
+            mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init = true;
+            for (var i = 0; i < sensorDatasheetContext.sensorDatasheetUnitMeasurementScale.length; i++) {
+                var sensorDatasheetUnitMeasurementScale = sensorDatasheetContext.sensorDatasheetUnitMeasurementScale[i];
+                var sensorDatasheet = sensorDatasheetFinder.getSensorDatasheetByKey(sensorDatasheetUnitMeasurementScale.sensorDatasheetId, sensorDatasheetUnitMeasurementScale.sensorTypeId);
+                sensorDatasheetUnitMeasurementScale.sensorDatasheet = sensorDatasheet;
+                if (sensorDatasheet.sensorDatasheetUnitMeasurementScales === undefined) {
+                    sensorDatasheet.sensorDatasheetUnitMeasurementScales = [];
+                }
+                sensorDatasheet.sensorDatasheetUnitMeasurementScales.push(sensorDatasheetUnitMeasurementScale);
+            }
+        }
+    };
+
     // *** Navigation Properties Mappers ***
 
 
@@ -53,6 +69,7 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
         sensorDatasheetGetAllCompletedSubscription();
         sensorDatasheetContext.sensorDatasheetLoaded = true;
         mapper_SensorDatasheet_SensorTypeType();
+        mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();
     }  
 
     var onSensorUnitMeasurementDefaultGetAllCompleted = function (event, data) {
@@ -64,6 +81,7 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
     var onSensorDatasheetUnitMeasurementScaleGetAllCompleted = function (event, data) {
         sensorDatasheetUnitMeasurementScaleGetAllCompletedSubscription();
         sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded = true;
+        mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();
     }  
 
     var onUnitMeasurementScaleGetAllCompleted = function (event, data) {

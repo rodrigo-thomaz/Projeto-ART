@@ -69,50 +69,11 @@ app.factory('contextScope', [
         }
     };    
 
-    // *** Navigation Properties Mappers ***  
+    // *** Navigation Properties Mappers ***      
     
-    var mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init = false;
-    var mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet = function () {
-        if (!mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init && context.sensorDatasheetUnitMeasurementScaleLoaded && context.sensorDatasheetLoaded) {
-            mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init = true;
-            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScales.length; i++) {
-                var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScales[i];
-                var sensorDatasheet = getSensorDatasheetByKey(sensorDatasheetUnitMeasurementScale.sensorDatasheetId, sensorDatasheetUnitMeasurementScale.sensorTypeId);
-                sensorDatasheetUnitMeasurementScale.sensorDatasheet = sensorDatasheet;
-                if (sensorDatasheet.sensorDatasheetUnitMeasurementScales === undefined) {
-                    sensorDatasheet.sensorDatasheetUnitMeasurementScales = [];
-                }
-                sensorDatasheet.sensorDatasheetUnitMeasurementScales.push(sensorDatasheetUnitMeasurementScale);
-            }
-        }
-    };
 
     // *** Watches ***
-
-    // SI
-
-    siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
-        //mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
-    }); 
-
-    //
-
-    context.$watch('sensorDatasheetUnitMeasurementScaleLoaded', function (newValue, oldValue) {
-        mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();        
-    });    
-
-    context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
-        //mapper_SensorDatasheet_SensorTypeType();
-    });
-
-    context.$watch('sensorDatasheetLoaded', function (newValue, oldValue) {
-        //mapper_SensorDatasheet_SensorTypeType();
-        mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();
-    });
-
-    context.$watch('sensorUnitMeasurementDefaultLoaded', function (newValue, oldValue) {
-        //mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
-    });
+    
 
     context.$watch('sensorsLoaded', function (newValue, oldValue) {
         
