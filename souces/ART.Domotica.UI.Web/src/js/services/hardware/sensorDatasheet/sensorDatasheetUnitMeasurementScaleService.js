@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -32,9 +32,9 @@ app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSetti
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.sensorDatasheetUnitMeasurementScales.push(data[i]);
+            sensorDatasheetContext.sensorDatasheetUnitMeasurementScale.push(data[i]);
         }
-        contextScope.sensorDatasheetUnitMeasurementScaleLoaded = true;
+        sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded = true;
         _initializing = false;
         _initialized = true;
         $rootScope.$emit('sensorDatasheetUnitMeasurementScaleService_Initialized');

@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('sensorTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -32,9 +32,9 @@ app.factory('sensorTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stom
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         for (var i = 0; i < data.length; i++) {
-            contextScope.sensorTypes.push(data[i]);
+            sensorDatasheetContext.sensorType.push(data[i]);
         }
-        contextScope.sensorTypeLoaded = true;
+        sensorDatasheetContext.sensorTypeLoaded = true;
         _initializing = false;
         _initialized = true;
         $rootScope.$emit('sensorTypeService_Initialized');

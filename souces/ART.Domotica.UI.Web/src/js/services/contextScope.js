@@ -152,9 +152,6 @@ app.factory('contextScope', [
 
     // *** Public Methods ***
 
-    context.getSensorTypeByKey = getSensorTypeByKey;
-    context.getSensorDatasheetByKey = getSensorDatasheetByKey;
-    context.getSensorUnitMeasurementDefaultByKey = getSensorUnitMeasurementDefaultByKey;
     context.getSensorByKey = getSensorByKey;
 
     return context;
