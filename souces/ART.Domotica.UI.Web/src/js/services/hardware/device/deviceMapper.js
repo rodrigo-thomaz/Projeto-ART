@@ -21,11 +21,36 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 't
         delete deviceNTP.timeZoneId; // removendo a foreing key
     }
 
+    // *** Loads
+
+    var loadAll = function () {
+        for (var i = 0; i < deviceContext.device.length; i++) {
+
+            var deviceNTP = deviceContext.device[i].deviceNTP;
+            deviceContext.deviceNTP.push(deviceNTP);
+            
+            var deviceSensors = deviceContext.device[i].deviceSensors;
+            deviceContext.deviceSensors.push(deviceSensors);
+
+            for (var j = 0; j < deviceSensors.sensorsInDevice.length; j++) {
+                var sensorsInDevice = deviceSensors.sensorsInDevice[j];
+                deviceContext.sensorsInDevice.push(sensorsInDevice);
+            }
+        }
+        deviceContext.deviceLoaded = true;
+        deviceContext.deviceNTPLoaded = true;
+        deviceContext.deviceSensorsLoaded = true;
+        deviceContext.sensorsInDeviceLoaded = true;
+    }
+
+    // *** Loads
+    
+
     // *** Events Subscriptions
 
     var onDeviceGetAllByApplicationIdCompleted = function (event, data) {
         deviceGetAllByApplicationIdCompletedSubscription();
-        deviceContext.deviceLoaded = true;
+        loadAll();        
     }      
 
     var onTimeZoneGetAllCompleted = function (event, data) {
@@ -41,58 +66,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 't
     });
 
     // *** Events Subscriptions
-
-
-
-
-
-
-
-
-
-
-
-    // *** Watches ***    
-
-    //deviceContext.$watchCollection('device', function (newValues, oldValues) {
-    //    for (var i = 0; i < newValues.length; i++) {
-    //        var device = newValues[i];
-    //        deviceContext.deviceNTP.device = device;
-    //        deviceContext.deviceNTP.push(device.deviceNTP);
-    //        deviceContext.deviceSensors.device = device;            
-    //        deviceContext.deviceSensors.push(device.deviceSensors);
-    //    }
-    //});
-
-    //deviceContext.$watchCollection('deviceNTP', function (newValues, oldValues) {
-    //    for (var i = 0; i < newValues.length; i++) {
-    //        var deviceNTP = newValues[i];
-    //        if (deviceContext.timeZoneLoaded) {
-    //            applyTimeZoneInDeviceNTP(deviceNTP);
-    //        }
-    //    }
-    //});
-
-    //deviceContext.$watchCollection('deviceSensors', function (newValues, oldValues) {
-    //    for (var i = 0; i < newValues.length; i++) {
-    //        var deviceSensors = newValues[i];
-    //        deviceContext.deviceSensors.push(deviceSensors);
-    //    }
-    //});
-
-    //deviceContext.$watchCollection('sensorsInDevice', function (newValues, oldValues) {
-    //    for (var i = 0; i < newValues.length; i++) {
-    //        var sensorsInDevice = newValues[i];
-    //    }
-    //});
-
-    deviceContext.$watch('deviceLoaded', function (newValue, oldValue) {
-        //mapper_DeviceNTP_TimeZone();
-    });
-
-    deviceContext.$watch('timeZoneLoaded', function (newValue, oldValue) {
-        //mapper_DeviceNTP_TimeZone();
-    });
+    
     
     return serviceFactory;
 
