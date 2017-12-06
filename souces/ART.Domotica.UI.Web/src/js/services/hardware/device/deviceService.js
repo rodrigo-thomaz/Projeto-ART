@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceContext) {
+app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceConstant', 'deviceContext', function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceConstant, deviceContext) {
     
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -7,41 +7,20 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
     var _initializing = false;
     var _initialized = false;
-    
-    var getAllByApplicationIdApiUri = 'api/espDevice/getAllByApplicationId';
-    var getAllByApplicationIdCompletedTopic = 'ESPDevice.GetAllByApplicationIdViewCompleted';
+
     var getAllByApplicationIdCompletedSubscription = null;
-    var getAllByApplicationIdCompletedEventName = 'deviceService.onGetAllByApplicationIdCompleted_Id_';
-
-    var insertInApplicationApiUri = 'api/espDevice/insertInApplication';
-    var insertInApplicationCompletedTopic = 'ESPDevice.InsertInApplicationViewCompleted';
     var insertInApplicationCompletedSubscription = null;
-    var insertInApplicationCompletedEventName = 'deviceService.onInsertInApplicationCompleted';
-
-    var deleteFromApplicationApiUri = 'api/espDevice/deleteFromApplication';
-    var deleteFromApplicationCompletedTopic = 'ESPDevice.DeleteFromApplicationViewCompleted';
     var deleteFromApplicationCompletedSubscription = null;
-    var deleteFromApplicationCompletedEventName = 'deviceService.onDeleteFromApplicationCompleted';
-
-    var getByPinApiUri = 'api/espDevice/getByPin';
-    var getByPinCompletedTopic = 'ESPDevice.GetByPinViewCompleted';
     var getByPinCompletedSubscription = null;
-    var getByPinCompletedEventName = 'deviceService.onGetByPinCompleted';
-
-    var setLabelApiUri = 'api/espDevice/setLabel';
-    var setLabelCompletedTopic = 'ESPDevice.SetLabelViewCompleted';
     var setLabelCompletedSubscription = null;
-    var setLabelCompletedEventName = 'deviceService.onSetLabelCompleted_Id_';
-
-    var initializedEventName = 'deviceService.onInitialized';
 
     var onConnected = function () {
 
-        getAllByApplicationIdCompletedSubscription = stompService.subscribe(getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
-        insertInApplicationCompletedSubscription = stompService.subscribeAllViews(insertInApplicationCompletedTopic, onInsertInApplicationCompleted);
-        deleteFromApplicationCompletedSubscription = stompService.subscribeAllViews(deleteFromApplicationCompletedTopic, onDeleteFromApplicationCompleted);
-        getByPinCompletedSubscription = stompService.subscribe(getByPinCompletedTopic, onGetByPinCompleted);
-        setLabelCompletedSubscription = stompService.subscribeAllViews(setLabelCompletedTopic, onSetLabelCompleted);
+        getAllByApplicationIdCompletedSubscription = stompService.subscribe(deviceConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
+        insertInApplicationCompletedSubscription = stompService.subscribeAllViews(deviceConstant.insertInApplicationCompletedTopic, onInsertInApplicationCompleted);
+        deleteFromApplicationCompletedSubscription = stompService.subscribeAllViews(deviceConstant.deleteFromApplicationCompletedTopic, onDeleteFromApplicationCompleted);
+        getByPinCompletedSubscription = stompService.subscribe(deviceConstant.getByPinCompletedTopic, onGetByPinCompleted);
+        setLabelCompletedSubscription = stompService.subscribeAllViews(deviceConstant.setLabelCompletedTopic, onSetLabelCompleted);
 
         stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
 
@@ -56,7 +35,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
     };
 
     var getAllByApplicationId = function () {
-        return $http.post(serviceBase + getAllByApplicationIdApiUri).then(function (results) {
+        return $http.post(serviceBase + deviceConstant.getAllByApplicationIdApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };
@@ -65,7 +44,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         var data = {
             pin: pin
         };
-        return $http.post(serviceBase + getByPinApiUri, data).then(function successCallback(response) {
+        return $http.post(serviceBase + deviceConstant.getByPinApiUri, data).then(function successCallback(response) {
             //alert('envio bem sucedido');
         });
     };  
@@ -74,7 +53,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         var data = {
             pin: pin
         };
-        return $http.post(serviceBase + insertInApplicationApiUri, data).then(function successCallback(response) {
+        return $http.post(serviceBase + deviceConstant.insertInApplicationApiUri, data).then(function successCallback(response) {
             //alert('envio bem sucedido');
         });
     };     
@@ -83,7 +62,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         var data = {
             hardwareInApplicationId: hardwareInApplicationId
         };
-        return $http.post(serviceBase + deleteFromApplicationApiUri, data).then(function (results) {
+        return $http.post(serviceBase + deviceConstant.deleteFromApplicationApiUri, data).then(function (results) {
             //alert('envio bem sucedido');
         });
     };
@@ -93,7 +72,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             deviceId: deviceId,
             label: label,
         }
-        return $http.post(serviceBase + setLabelApiUri, data).then(function (results) {
+        return $http.post(serviceBase + deviceConstant.setLabelApiUri, data).then(function (results) {
             return results;
         });
     };
@@ -182,20 +161,20 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
         getAllByApplicationIdCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(deviceConstant.getAllByApplicationIdCompletedEventName);
     }
 
     var onGetByPinCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
-        $rootScope.$emit(getByPinCompletedEventName, data);
+        $rootScope.$emit(deviceConstant.getByPinCompletedEventName, data);
     }
 
     var onInsertInApplicationCompleted = function (payload) {
         var dataUTF8 = decodeURIComponent(escape(payload.body));
         var data = JSON.parse(dataUTF8);
         insertDeviceInCollection(data);
-        $rootScope.$emit(insertInApplicationCompletedEventName);
+        $rootScope.$emit(deviceConstant.insertInApplicationCompletedEventName);
     }  
 
     var onDeleteFromApplicationCompleted = function (payload) {
@@ -204,7 +183,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         for (var i = 0; i < deviceContext.devices.length; i++) {
             if (deviceContext.devices[i].hardwareInApplicationId === data.hardwareInApplicationId) {
                 deviceContext.devices.splice(i, 1);
-                $rootScope.$emit(deleteFromApplicationCompletedEventName);
+                $rootScope.$emit(deviceConstant.deleteFromApplicationCompletedEventName);
                 break;
             }
         }       
@@ -214,7 +193,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         var result = JSON.parse(payload.body);
         var device = deviceContext.getDeviceById(result.deviceId);
         device.label = result.label;
-        $rootScope.$emit(setLabelCompletedEventName + result.deviceId, result);
+        $rootScope.$emit(deviceConstant.setLabelCompletedEventName + result.deviceId, result);
     }
 
     var insertDeviceInCollection = function (device) {
@@ -260,18 +239,11 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
 
     serviceFactory.getByPin = getByPin;
     serviceFactory.insertInApplication = insertInApplication;    
     serviceFactory.deleteFromApplication = deleteFromApplication;
-    serviceFactory.setLabel = setLabel;       
-
-    serviceFactory.getAllByApplicationIdCompletedEventName = getAllByApplicationIdCompletedEventName;
-    serviceFactory.insertInApplicationCompletedEventName = insertInApplicationCompletedEventName;
-    serviceFactory.deleteFromApplicationCompletedEventName = deleteFromApplicationCompletedEventName;
-    serviceFactory.getByPinCompletedEventName = getByPinCompletedEventName;
-    serviceFactory.setLabelCompletedEventName = setLabelCompletedEventName;
+    serviceFactory.setLabel = setLabel;    
     
     return serviceFactory;
 

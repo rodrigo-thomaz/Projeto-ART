@@ -78,6 +78,7 @@ angular.module('app')
                       //Device
 
                       'js/services/hardware/device/deviceContext.js',
+                      'js/services/hardware/device/deviceConstants.js',
                       'js/services/hardware/device/deviceMapper.js',
                       'js/services/hardware/device/deviceNTPService.js',
                       'js/services/hardware/device/deviceSensorsService.js',
@@ -133,6 +134,7 @@ angular.module('app')
                       //Device
 
                       'js/services/hardware/device/deviceContext.js',
+                      'js/services/hardware/device/deviceConstants.js',
                       'js/services/hardware/device/deviceMapper.js',
                       'js/services/hardware/device/deviceNTPService.js',
                       'js/services/hardware/device/deviceSensorsService.js',

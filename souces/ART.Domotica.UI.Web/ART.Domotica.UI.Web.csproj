@@ -220,6 +220,7 @@
     <Content Include="src\js\services\contextScope.js" />
     <Content Include="src\js\services\hardware\device\deviceContext.js" />
     <Content Include="src\js\services\hardware\device\deviceMapper.js" />
+    <Content Include="src\js\services\hardware\device\deviceConstants.js" />
     <Content Include="src\js\services\hardware\device\sensorsInDeviceService.js" />
     <Content Include="src\js\services\locale\localeConstants.js" />
     <Content Include="src\js\services\locale\localeFinder.js" />
