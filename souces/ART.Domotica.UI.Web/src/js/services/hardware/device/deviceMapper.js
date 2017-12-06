@@ -36,6 +36,10 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 var timeZone = globalizationFinder.getTimeZoneByKey(deviceNTP.timeZoneId);
                 deviceNTP.timeZone = timeZone;
                 delete deviceNTP.timeZoneId; // removendo a foreing key
+                if (timeZone.devicesNTP === undefined) {
+                    timeZone.devicesNTP = [];
+                }
+                timeZone.devicesNTP.push(deviceNTP);
             }
         }
     };  
