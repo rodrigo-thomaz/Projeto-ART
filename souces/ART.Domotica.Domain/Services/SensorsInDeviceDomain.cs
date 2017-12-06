@@ -1,37 +1,24 @@
-﻿using ART.Domotica.Domain.Interfaces;
-using ART.Domotica.Repository.Entities;
-using ART.Domotica.Repository.Interfaces;
-using ART.Infra.CrossCutting.Domain;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace ART.Domotica.Domain.Services
+﻿namespace ART.Domotica.Domain.Services
 {
+    using ART.Domotica.Domain.Interfaces;
+    using ART.Domotica.Repository.Interfaces;
+    using ART.Infra.CrossCutting.Domain;
+
     public class SensorsInDeviceDomain : DomainBase, ISensorsInDeviceDomain
     {
-        #region private readonly fields
+        #region Fields
 
         private readonly ISensorsInDeviceRepository _sensorsInDeviceRepository;
 
-        #endregion
+        #endregion Fields
 
-        #region constructors
+        #region Constructors
 
         public SensorsInDeviceDomain(ISensorsInDeviceRepository sensorsInDeviceRepository)
         {
             _sensorsInDeviceRepository = sensorsInDeviceRepository;
         }
 
-        #endregion
-
-        #region public voids
-
-        public async Task<List<SensorsInDevice>> GetAllByApplicationId(Guid applicationId)
-        {
-            return await _sensorsInDeviceRepository.GetAllByApplicationId(applicationId);
-        }
-
-        #endregion
+        #endregion Constructors
     }
 }

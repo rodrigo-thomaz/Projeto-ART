@@ -1,49 +1,36 @@
-﻿using ART.Domotica.Domain.Interfaces;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-using System.Threading.Tasks;
-using ART.Domotica.Constant;
-using ART.Infra.CrossCutting.MQ.Contract;
-using ART.Infra.CrossCutting.MQ.Worker;
-using ART.Infra.CrossCutting.Utils;
-using ART.Domotica.Worker.IConsumers;
-using System.Collections.Generic;
-using Autofac;
-using AutoMapper;
-using ART.Domotica.Repository.Entities;
-using ART.Domotica.Model;
-using ART.Infra.CrossCutting.Logging;
-
-namespace ART.Domotica.Worker.Consumers
+﻿namespace ART.Domotica.Worker.Consumers
 {
+    using ART.Domotica.Worker.IConsumers;
+    using ART.Infra.CrossCutting.Logging;
+    using ART.Infra.CrossCutting.MQ.Worker;
+
+    using Autofac;
+
+    using RabbitMQ.Client;
+
     public class SensorsInDeviceConsumer : ConsumerBase, ISensorsInDeviceConsumer
     {
-        #region private fields
-
-        private readonly EventingBasicConsumer _getAllByApplicationIdConsumer;
+        #region Fields
 
         private readonly IComponentContext _componentContext;
-
         private readonly ILogger _logger;
 
-        #endregion
+        #endregion Fields
 
-        #region constructors
+        #region Constructors
 
-        public SensorsInDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public SensorsInDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext)
+            : base(connection)
         {
-            _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
-
             _componentContext = componentContext;
-
             _logger = logger;
 
             Initialize();
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region private voids
+        #region Methods
 
         private void Initialize()
         {
@@ -53,51 +40,8 @@ namespace ART.Domotica.Worker.Consumers
                 , durable: true
                 , autoDelete: false
                 , arguments: null);
-
-            _model.QueueDeclare(
-                  queue: SensorsInDeviceConstants.GetAllByApplicationIdQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: null);                       
-
-            _getAllByApplicationIdConsumer.Received += GetAllReceived;
-
-            _model.BasicConsume(SensorsInDeviceConstants.GetAllByApplicationIdQueueName, false, _getAllByApplicationIdConsumer);
         }
 
-        public void GetAllReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(GetAllReceivedAsync(sender, e));
-        }
-
-        public async Task GetAllReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
-
-            var applicationUserDomain = _componentContext.Resolve<IApplicationUserDomain>();
-            var applicationUser = await applicationUserDomain.GetByKey(message.ApplicationUserId);
-
-            var domain = _componentContext.Resolve<ISensorsInDeviceDomain>();
-            var data = await domain.GetAllByApplicationId(applicationUser.ApplicationId);
-
-            var exchange = "amq.topic";
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            //Enviando para View
-            var viewModel = Mapper.Map<List<SensorsInDevice>, List<SensorsInDeviceGetModel>>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorsInDeviceConstants.GetAllByApplicationIdCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
-
-            _logger.DebugLeave();
-        }
-
-        #endregion
+        #endregion Methods
     }
 }
