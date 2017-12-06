@@ -69,40 +69,8 @@ app.factory('contextScope', [
         }
     };    
 
-    // *** Navigation Properties Mappers ***   
-
-    var mapper_SensorDatasheet_SensorTypeType_Init = false;
-    var mapper_SensorDatasheet_SensorTypeType = function () {
-        if (!mapper_SensorDatasheet_SensorTypeType_Init && context.sensorDatasheetLoaded && context.sensorTypeLoaded) {
-            mapper_SensorDatasheet_SensorTypeType_Init = true;
-            for (var i = 0; i < context.sensorDatasheets.length; i++) {
-                var sensorDatasheet = context.sensorDatasheets[i];
-                var sensorType = getSensorTypeByKey(sensorDatasheet.sensorTypeId);
-                sensorDatasheet.sensorType = sensorType;
-                if (sensorType.sensorDatasheets === undefined) {
-                    sensorType.sensorDatasheets = [];
-                }
-                sensorType.sensorDatasheets.push(sensorDatasheet);
-            }
-        }
-    };
-
-    var mapper_SensorUnitMeasurementDefault_UnitMeasurementScale_Init = false;
-    var mapper_SensorUnitMeasurementDefault_UnitMeasurementScale = function () {
-        if (!mapper_SensorUnitMeasurementDefault_UnitMeasurementScale_Init && context.sensorUnitMeasurementDefaultLoaded && siContext.unitMeasurementScaleLoaded) {
-            mapper_SensorUnitMeasurementDefault_UnitMeasurementScale_Init = true;
-            for (var i = 0; i < context.sensorUnitMeasurementDefaults.length; i++) {
-                var sensorUnitMeasurementDefault = context.sensorUnitMeasurementDefaults[i];
-                var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementDefault.unitMeasurementId, sensorUnitMeasurementDefault.unitMeasurementTypeId, sensorUnitMeasurementDefault.numericalScalePrefixId, sensorUnitMeasurementDefault.numericalScaleTypeId);
-                sensorUnitMeasurementDefault.unitMeasurementScale = unitMeasurementScale;
-                if (unitMeasurementScale.sensorUnitMeasurementDefaults === undefined) {
-                    unitMeasurementScale.sensorUnitMeasurementDefaults = [];
-                }
-                unitMeasurementScale.sensorUnitMeasurementDefaults.push(sensorUnitMeasurementDefault);
-            }
-        }
-    };    
-
+    // *** Navigation Properties Mappers ***  
+    
     var mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init = false;
     var mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet = function () {
         if (!mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init && context.sensorDatasheetUnitMeasurementScaleLoaded && context.sensorDatasheetLoaded) {
@@ -124,7 +92,7 @@ app.factory('contextScope', [
     // SI
 
     siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
-        mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
+        //mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
     }); 
 
     //
@@ -134,16 +102,16 @@ app.factory('contextScope', [
     });    
 
     context.$watch('sensorTypeLoaded', function (newValue, oldValue) {
-        mapper_SensorDatasheet_SensorTypeType();
+        //mapper_SensorDatasheet_SensorTypeType();
     });
 
     context.$watch('sensorDatasheetLoaded', function (newValue, oldValue) {
-        mapper_SensorDatasheet_SensorTypeType();
+        //mapper_SensorDatasheet_SensorTypeType();
         mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();
     });
 
     context.$watch('sensorUnitMeasurementDefaultLoaded', function (newValue, oldValue) {
-        mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
+        //mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
     });
 
     context.$watch('sensorsLoaded', function (newValue, oldValue) {
