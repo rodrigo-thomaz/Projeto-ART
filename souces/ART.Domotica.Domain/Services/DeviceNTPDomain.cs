@@ -9,6 +9,8 @@
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
+    using ART.Domotica.Repository.Interfaces.Globalization;
+    using ART.Domotica.Repository.Repositories.Globalization;
 
     public class DeviceNTPDomain : DomainBase, IDeviceNTPDomain
     {

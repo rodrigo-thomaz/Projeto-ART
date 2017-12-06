@@ -1,9 +1,9 @@
-﻿namespace ART.Domotica.Domain.Interfaces
+﻿namespace ART.Domotica.Domain.Interfaces.Globalization
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Entities.Globalization;
 
     public interface ITimeZoneDomain
     {

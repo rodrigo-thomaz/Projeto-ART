@@ -1,7 +1,7 @@
-﻿namespace ART.Domotica.Worker.AutoMapper
+﻿namespace ART.Domotica.Worker.AutoMapper.Globalization
 {
-    using ART.Domotica.Model;
-    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Model.Globalization;
+    using ART.Domotica.Repository.Entities.Globalization;
 
     using global::AutoMapper;
 

@@ -43,10 +43,11 @@ angular.module('app')
                       'vr.directives.slider',
                       'ui.select',   
                       'toaster',
-
-                      'js/services/timeZoneService.js',                      
-
+                      
                       'js/services/contextScope.js',
+
+                      //Globalization
+                      'js/services/globalization/timeZoneService.js',                      
 
                       //Locale
                       'js/services/locale/localeContext.js',
@@ -110,6 +111,9 @@ angular.module('app')
                   resolve: load([
                       'ui.grid',
                       'toaster',
+
+                      //Globalization
+                      'js/services/globalization/timeZoneService.js',                      
 
                       //Locale
 

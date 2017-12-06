@@ -4,7 +4,7 @@
 
     public class ESPDeviceGetModel
     {
-        #region Properties         
+        #region Properties
 
         public Guid DeviceId
         {
@@ -19,7 +19,7 @@
         public DeviceSensorsGetModel DeviceSensors
         {
             get; set;
-        }       
+        }
 
         public string Label
         {

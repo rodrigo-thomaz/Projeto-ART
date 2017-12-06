@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using ART.Domotica.Domain.Interfaces;
-using ART.Domotica.Repository.Interfaces;
-using ART.Domotica.Repository.Entities;
 using System.Collections.Generic;
 using ART.Infra.CrossCutting.Domain;
+using ART.Domotica.Repository.Interfaces.Globalization;
+using ART.Domotica.Repository.Entities.Globalization;
+using ART.Domotica.Domain.Interfaces.Globalization;
 
-namespace ART.Domotica.Domain.Services
+namespace ART.Domotica.Domain.Services.Globalization
 {
     public class TimeZoneDomain : DomainBase, ITimeZoneDomain
     {

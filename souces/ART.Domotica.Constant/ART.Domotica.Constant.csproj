@@ -64,7 +64,7 @@
     <Compile Include="SensorDatasheetUnitMeasurementScaleConstants.cs" />
     <Compile Include="DeviceSensorsConstants.cs" />
     <Compile Include="SensorsInDeviceConstants.cs" />
-    <Compile Include="TimeZoneConstants.cs" />
+    <Compile Include="Globalization\TimeZoneConstants.cs" />
     <Compile Include="SI\UnitMeasurementConstants.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

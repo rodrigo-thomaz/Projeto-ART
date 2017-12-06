@@ -1,32 +1,28 @@
-﻿using RabbitMQ.Client;
-using ART.Infra.CrossCutting.MQ.Producer;
-using ART.Domotica.Producer.Interfaces;
-
-namespace ART.Domotica.Producer.Services
+﻿namespace ART.Domotica.Producer.Services
 {
-    public class ApplicationMQProducer : ProducerBase, IApplicationMQProducer
-    {       
-        #region constructors
+    using ART.Domotica.Producer.Interfaces;
+    using ART.Infra.CrossCutting.MQ.Producer;
 
-        public ApplicationMQProducer(IConnection connection) : base(connection)
+    using RabbitMQ.Client;
+
+    public class ApplicationMQProducer : ProducerBase, IApplicationMQProducer
+    {
+        #region Constructors
+
+        public ApplicationMQProducer(IConnection connection)
+            : base(connection)
         {
             Initialize();
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region public voids
-                
-
-        #endregion
-
-        #region private voids
+        #region Methods
 
         private void Initialize()
         {
-
         }
 
-        #endregion
+        #endregion Methods
     }
 }

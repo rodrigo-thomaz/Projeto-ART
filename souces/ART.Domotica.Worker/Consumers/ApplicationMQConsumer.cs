@@ -1,42 +1,43 @@
-﻿using ART.Domotica.Worker.IConsumers;
-using ART.Infra.CrossCutting.Logging;
-using ART.Infra.CrossCutting.MQ.Worker;
-using Autofac;
-using RabbitMQ.Client;
-using RabbitMQ.Client.Events;
-
-namespace ART.Domotica.Worker.Consumers
+﻿namespace ART.Domotica.Worker.Consumers
 {
+    using ART.Domotica.Worker.IConsumers;
+    using ART.Infra.CrossCutting.Logging;
+    using ART.Infra.CrossCutting.MQ.Worker;
+
+    using Autofac;
+
+    using RabbitMQ.Client;
+    using RabbitMQ.Client.Events;
+
     public class ApplicationMQConsumer : ConsumerBase, IApplicationMQConsumer
     {
-        #region private fields
+        #region Fields
 
-        private readonly EventingBasicConsumer _getRPCConsumer;
         private readonly IComponentContext _componentContext;
+        private readonly EventingBasicConsumer _getRPCConsumer;
         private readonly ILogger _logger;
-        
-        #endregion
 
-        #region constructors
+        #endregion Fields
 
-        public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        #region Constructors
+
+        public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext)
+            : base(connection)
         {
             _componentContext = componentContext;
             _logger = logger;
-            
+
             Initialize();
         }
 
-        #endregion
+        #endregion Constructors
 
-        #region private voids
+        #region Methods
 
         private void Initialize()
         {
-           
         }
-        
 
-        #endregion
+        #endregion Methods
     }
 }

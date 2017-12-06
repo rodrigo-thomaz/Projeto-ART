@@ -973,7 +973,7 @@
 
                 foreach (var item in systemTimeZones)
                 {
-                    context.TimeZone.Add(new Entities.TimeZone
+                    context.TimeZone.Add(new Entities.Globalization.TimeZone
                     {
                         DisplayName = item.DisplayName,
                         SupportsDaylightSavingTime = item.SupportsDaylightSavingTime,

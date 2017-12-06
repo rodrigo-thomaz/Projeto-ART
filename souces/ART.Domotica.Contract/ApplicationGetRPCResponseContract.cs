@@ -1,17 +1,17 @@
-﻿using System;
-
-namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Contract
 {
+    using System;
+
     public class ApplicationGetRPCResponseContract
     {
         #region Properties
 
-        public ApplicationMQGetRPCResponseContract ApplicationMQ
+        public Guid ApplicationId
         {
             get; set;
         }
 
-        public Guid ApplicationId
+        public ApplicationMQGetRPCResponseContract ApplicationMQ
         {
             get; set;
         }

@@ -1,9 +1,9 @@
-﻿namespace ART.Domotica.Repository.Configurations
+﻿namespace ART.Domotica.Repository.Configurations.Globalization
 {
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.ModelConfiguration;
 
-    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Entities.Globalization;
 
     public class TimeZoneConfiguration : EntityTypeConfiguration<TimeZone>
     {
@@ -11,6 +11,8 @@
 
         public TimeZoneConfiguration()
         {
+            ToTable("TimeZone", "Globalization");
+
             //Primary Keys
             HasKey(x => x.Id);
 

@@ -252,7 +252,7 @@
     <Content Include="src\js\services\si\unitMeasurementScaleService.js" />
     <Content Include="src\js\services\si\unitMeasurementTypeService.js" />
     <Content Include="src\js\services\hardware\device\deviceSensorsService.js" />
-    <Content Include="src\js\services\timeZoneService.js" />
+    <Content Include="src\js\services\globalization\timeZoneService.js" />
     <Content Include="src\js\services\si\unitMeasurementService.js" />
     <Content Include="src\js\services\sensorTempDSFamilyService.js" />
     <Content Include="src\js\services\stompService.js" />

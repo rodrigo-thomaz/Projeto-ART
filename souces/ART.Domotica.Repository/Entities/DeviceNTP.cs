@@ -18,7 +18,7 @@
             get; set;
         }
 
-        public TimeZone TimeZone
+        public Entities.Globalization.TimeZone TimeZone
         {
             get; set;
         }

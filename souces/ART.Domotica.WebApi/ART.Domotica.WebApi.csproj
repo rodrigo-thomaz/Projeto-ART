@@ -159,7 +159,7 @@
     <Compile Include="Controllers\SI\UnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementTypeController.cs" />
     <Compile Include="Controllers\DeviceSensorsController.cs" />
-    <Compile Include="Controllers\TimeZoneController.cs" />
+    <Compile Include="Controllers\Globalization\TimeZoneController.cs" />
     <Compile Include="Controllers\SI\UnitMeasurementController.cs" />
     <Compile Include="Modules\ControllerModule.cs" />
     <Compile Include="Controllers\SensorTempDSFamilyController.cs" />

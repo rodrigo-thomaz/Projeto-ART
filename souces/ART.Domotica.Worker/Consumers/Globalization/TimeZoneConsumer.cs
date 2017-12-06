@@ -2,19 +2,20 @@
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Threading.Tasks;
-using ART.Domotica.Constant;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
-using ART.Domotica.Worker.IConsumers;
 using System.Collections.Generic;
 using Autofac;
 using AutoMapper;
-using ART.Domotica.Repository.Entities;
-using ART.Domotica.Model;
 using ART.Infra.CrossCutting.Logging;
+using ART.Domotica.Repository.Entities.Globalization;
+using ART.Domotica.Domain.Interfaces.Globalization;
+using ART.Domotica.Constant.Globalization;
+using ART.Domotica.Model.Globalization;
+using ART.Domotica.Worker.IConsumers.Globalization;
 
-namespace ART.Domotica.Worker.Consumers
+namespace ART.Domotica.Worker.Consumers.Globalization
 {
     public class TimeZoneConsumer : ConsumerBase, ITimeZoneConsumer
     {

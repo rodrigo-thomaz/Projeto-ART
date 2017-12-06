@@ -1,12 +1,12 @@
 ﻿using System.Web.Http;
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.WebApi;
-using ART.Domotica.Producer.Interfaces;
+using ART.Domotica.Producer.Interfaces.Globalization;
 
-namespace ART.Domotica.WebApi.Controllers
+namespace ART.Domotica.WebApi.Controllers.Globalization
 {
     [Authorize]
-    [RoutePrefix("api/timeZone")]    
+    [RoutePrefix("api/globalization/timeZone")]    
     public class TimeZoneController : AuthenticatedMQApiControllerBase
     {
         #region private readonly fields

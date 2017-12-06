@@ -160,7 +160,7 @@
             get; set;
         }
 
-        public DbSet<Entities.TimeZone> TimeZone
+        public DbSet<Entities.Globalization.TimeZone> TimeZone
         {
             get; set;
         }

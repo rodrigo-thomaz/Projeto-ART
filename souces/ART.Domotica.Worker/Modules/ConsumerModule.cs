@@ -1,9 +1,11 @@
 ﻿namespace ART.Domotica.Worker.Modules
 {
     using ART.Domotica.Worker.Consumers;
+    using ART.Domotica.Worker.Consumers.Globalization;
     using ART.Domotica.Worker.Consumers.Locale;
     using ART.Domotica.Worker.Consumers.SI;
     using ART.Domotica.Worker.IConsumers;
+    using ART.Domotica.Worker.IConsumers.Globalization;
     using ART.Domotica.Worker.IConsumers.Locale;
     using ART.Domotica.Worker.IConsumers.SI;
 

@@ -2,8 +2,5 @@
 {
     public interface IApplicationMQProducer
     {
-        #region Methods
-        
-        #endregion Methods
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Producer.Interfaces
+﻿namespace ART.Domotica.Producer.Interfaces.Globalization
 {
     using System.Threading.Tasks;
 

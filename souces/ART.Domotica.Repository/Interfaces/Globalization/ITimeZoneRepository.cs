@@ -1,9 +1,9 @@
-﻿namespace ART.Domotica.Repository.Interfaces
+﻿namespace ART.Domotica.Repository.Interfaces.Globalization
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Entities.Globalization;
     using ART.Infra.CrossCutting.Repository;
 
     public interface ITimeZoneRepository : IRepository<ARTDbContext, TimeZone, byte>

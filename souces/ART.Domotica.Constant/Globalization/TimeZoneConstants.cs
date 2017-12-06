@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Constant
+﻿namespace ART.Domotica.Constant.Globalization
 {
     public static class TimeZoneConstants
     {

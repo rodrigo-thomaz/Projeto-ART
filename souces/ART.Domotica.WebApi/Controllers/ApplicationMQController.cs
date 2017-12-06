@@ -1,8 +1,9 @@
 ﻿namespace ART.Domotica.WebApi.Controllers
 {
     using System.Web.Http;
-    using ART.Infra.CrossCutting.MQ.WebApi;
+
     using ART.Domotica.Producer.Interfaces;
+    using ART.Infra.CrossCutting.MQ.WebApi;
 
     [Authorize]
     [RoutePrefix("api/applicationMQ")]
@@ -23,10 +24,5 @@
         }
 
         #endregion Constructors
-
-        #region public voids
-      
-
-        #endregion
     }
 }

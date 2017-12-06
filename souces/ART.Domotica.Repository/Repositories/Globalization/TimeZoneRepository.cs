@@ -1,11 +1,11 @@
-﻿using ART.Domotica.Repository.Entities;
-using ART.Domotica.Repository.Interfaces;
+﻿using ART.Domotica.Repository.Entities.Globalization;
+using ART.Domotica.Repository.Interfaces.Globalization;
 using ART.Infra.CrossCutting.Repository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
 
-namespace ART.Domotica.Repository.Repositories
+namespace ART.Domotica.Repository.Repositories.Globalization
 {
     public class TimeZoneRepository : RepositoryBase<ARTDbContext, TimeZone, byte>, ITimeZoneRepository
     {

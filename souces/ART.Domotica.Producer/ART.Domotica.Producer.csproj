@@ -83,7 +83,7 @@
     <Compile Include="Interfaces\SI\INumericalScaleTypeCountryProducer.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementScaleProducer.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeProducer.cs" />
-    <Compile Include="Interfaces\ITimeZoneProducer.cs" />
+    <Compile Include="Interfaces\Globalization\ITimeZoneProducer.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementProducer.cs" />
     <Compile Include="ProducerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -111,7 +111,7 @@
     <Compile Include="Services\Locale\CountryProducer.cs" />
     <Compile Include="Services\SensorDatasheetUnitMeasurementScaleProducer.cs" />
     <Compile Include="Services\DeviceSensorsProducer.cs" />
-    <Compile Include="Services\TimeZoneProducer.cs" />
+    <Compile Include="Services\Globalization\TimeZoneProducer.cs" />
     <Compile Include="Services\SI\UnitMeasurementProducer.cs" />
   </ItemGroup>
   <ItemGroup>

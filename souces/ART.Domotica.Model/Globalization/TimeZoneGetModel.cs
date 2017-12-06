@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Model.Globalization
 {
     public class TimeZoneGetModel
     {

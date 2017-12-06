@@ -123,7 +123,7 @@
     <Compile Include="AutoMapper\SensorDatasheetUnitMeasurementScaleProfile.cs" />
     <Compile Include="AutoMapper\DeviceSensorsProfile.cs" />
     <Compile Include="AutoMapper\SensorsInDeviceProfile.cs" />
-    <Compile Include="AutoMapper\TimeZoneProfile.cs" />
+    <Compile Include="AutoMapper\Globalization\TimeZoneProfile.cs" />
     <Compile Include="AutoMapper\SI\UnitMeasurementProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
@@ -144,7 +144,7 @@
     <Compile Include="Consumers\SI\NumericalScaleConsumer.cs" />
     <Compile Include="Consumers\SI\UnitMeasurementTypeConsumer.cs" />
     <Compile Include="Consumers\DeviceSensorsConsumer.cs" />
-    <Compile Include="Consumers\TimeZoneConsumer.cs" />
+    <Compile Include="Consumers\Globalization\TimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IApplicationMQConsumer.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
     <Compile Include="IConsumers\ISensorTempDSFamilyConsumer.cs" />
@@ -167,7 +167,7 @@
     <Compile Include="IConsumers\SI\INumericalScaleTypeConsumer.cs" />
     <Compile Include="IConsumers\SI\IUnitMeasurementScaleConsumer.cs" />
     <Compile Include="IConsumers\SI\IUnitMeasurementTypeConsumer.cs" />
-    <Compile Include="IConsumers\ITimeZoneConsumer.cs" />
+    <Compile Include="IConsumers\Globalization\ITimeZoneConsumer.cs" />
     <Compile Include="IConsumers\SI\IUnitMeasurementConsumer.cs" />
     <Compile Include="IConsumers\IApplicationConsumer.cs" />
     <Compile Include="Consumers\ESPDeviceConsumer.cs" />

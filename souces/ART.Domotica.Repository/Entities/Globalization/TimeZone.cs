@@ -1,4 +1,4 @@
-﻿namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities.Globalization
 {
     using System.Collections.Generic;
 

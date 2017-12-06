@@ -94,7 +94,7 @@
     <Compile Include="Configurations\SI\NumericalScaleConfiguration.cs" />
     <Compile Include="Configurations\SI\UnitMeasurementScaleConfiguration.cs" />
     <Compile Include="Configurations\SI\UnitMeasurementTypeConfiguration.cs" />
-    <Compile Include="Configurations\TimeZoneConfiguration.cs" />
+    <Compile Include="Configurations\Globalization\TimeZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
     <Compile Include="Entities\Locale\Continent.cs" />
     <Compile Include="Entities\Locale\Country.cs" />
@@ -123,7 +123,7 @@
     <Compile Include="Entities\SensorUnitMeasurementDefault.cs" />
     <Compile Include="Entities\SI\UnitMeasurement.cs" />
     <Compile Include="Entities\ApplicationUser.cs" />
-    <Compile Include="Entities\TimeZone.cs" />
+    <Compile Include="Entities\Globalization\TimeZone.cs" />
     <Compile Include="Entities\SI\NumericalScalePrefix.cs" />
     <Compile Include="Entities\SI\NumericalScale.cs" />
     <Compile Include="Entities\SensorDatasheetUnitMeasurementScale.cs" />
@@ -155,7 +155,7 @@
     <Compile Include="Interfaces\ISensorTypeRepository.cs" />
     <Compile Include="Interfaces\ISensorRepository.cs" />
     <Compile Include="Interfaces\Locale\IContinentRepository.cs" />
-    <Compile Include="Interfaces\ITimeZoneRepository.cs" />
+    <Compile Include="Interfaces\Globalization\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
     <Compile Include="Migrations\201712051305314_InitialCreate.cs" />
@@ -194,7 +194,7 @@
     <Compile Include="Repositories\SensorUnitMeasurementDefaultRepository.cs" />
     <Compile Include="Repositories\Locale\ContinentRepository.cs" />
     <Compile Include="Repositories\SI\NumericalScalePrefixRepository.cs" />
-    <Compile Include="Repositories\TimeZoneRepository.cs" />
+    <Compile Include="Repositories\Globalization\TimeZoneRepository.cs" />
     <Compile Include="Repositories\SI\UnitMeasurementRepository.cs" />
     <Compile Include="Repositories\ApplicationUserRepository.cs" />
     <Compile Include="Repositories\SI\UnitMeasurementTypeRepository.cs" />
