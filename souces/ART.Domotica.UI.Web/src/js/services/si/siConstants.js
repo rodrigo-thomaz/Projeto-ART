@@ -22,3 +22,9 @@ app.constant('numericalScaleTypeConstant', {
     getAllCompletedTopic: 'SI.NumericalScaleType.GetAllViewCompleted',
     initializedEventName: 'numericalScaleTypeService.onInitialized',
 });
+
+app.constant('unitMeasurementScaleConstant', {
+    getAllApiUri: 'api/si/unitMeasurementScale/getAll',
+    getAllCompletedTopic: 'SI.UnitMeasurementScale.GetAllViewCompleted',
+    initializedEventName: 'unitMeasurementScaleService.onInitialized',
+});

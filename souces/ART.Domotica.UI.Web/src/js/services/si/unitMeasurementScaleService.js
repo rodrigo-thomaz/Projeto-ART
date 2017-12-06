@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
+app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', 'unitMeasurementScaleConstant', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, unitMeasurementScaleConstant, $rootScope, stompService, siContext) {
 
     var serviceFactory = {};    
 
@@ -8,15 +8,11 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootSco
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/si/unitMeasurementScale/getAll';
-    var getAllCompletedTopic = 'Locale.Country.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
-
-    var initializedEventName = 'unitMeasurementScaleService.onInitialized';
 
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe('SI.UnitMeasurementScale.GetAllViewCompleted', onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(unitMeasurementScaleConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -29,7 +25,7 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootSco
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + unitMeasurementScaleConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
@@ -51,7 +47,7 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootSco
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(unitMeasurementScaleConstant.initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -66,8 +62,7 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootSco
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
-
+    
     return serviceFactory;
 
 }]);
