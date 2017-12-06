@@ -9,8 +9,8 @@ app.factory('localeMapper', ['$rootScope', 'localeContext', 'localeFinder', func
     var mapper_Country_Continent = function () {
         if (!mapper_Country_Continent_Init && localeContext.countryLoaded && localeContext.continentLoaded) {
             mapper_Country_Continent_Init = true;
-            for (var i = 0; i < localeContext.countries.length; i++) {
-                var country = localeContext.countries[i];
+            for (var i = 0; i < localeContext.country.length; i++) {
+                var country = localeContext.country[i];
                 var continent = localeFinder.getContinentByKey(country.continentId);
                 country.continent = continent;
                 delete country.continentId; // removendo a foreing key

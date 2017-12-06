@@ -9,8 +9,8 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var mapper_NumericalScaleTypeCountry = function () {
         if (!mapper_NumericalScaleTypeCountry_Init && siContext.numericalScaleTypeCountryLoaded && localeContext.countryLoaded) {
             mapper_NumericalScaleTypeCountry_Init = true;
-            for (var i = 0; i < siContext.numericalScaleTypeCountries.length; i++) {
-                var numericalScaleTypeCountry = siContext.numericalScaleTypeCountries[i];
+            for (var i = 0; i < siContext.numericalScaleTypeCountry.length; i++) {
+                var numericalScaleTypeCountry = siContext.numericalScaleTypeCountry[i];
                 var numericalScaleType = siFinder.getNumericalScaleTypeByKey(numericalScaleTypeCountry.numericalScaleTypeId);
                 var country = localeFinder.getCountryByKey(numericalScaleTypeCountry.countryId);
                 //Atach in numericalScaleType
@@ -24,7 +24,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
                 }
                 country.numericalScaleTypes.push(numericalScaleType);
             }
-            delete siContext.numericalScaleTypeCountries;
+            delete siContext.numericalScaleTypeCountry;
             delete siContext.numericalScaleTypeCountryLoaded;
         }
     };
@@ -33,8 +33,8 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var mapper_NumericalScale_NumericalScalePrefix = function () {
         if (!mapper_NumericalScale_NumericalScalePrefix_Init && siContext.numericalScaleLoaded && siContext.numericalScalePrefixLoaded) {
             mapper_NumericalScale_NumericalScalePrefix_Init = true;
-            for (var i = 0; i < siContext.numericalScales.length; i++) {
-                var numericalScale = siContext.numericalScales[i];
+            for (var i = 0; i < siContext.numericalScale.length; i++) {
+                var numericalScale = siContext.numericalScale[i];
                 var numericalScalePrefix = siFinder.getNumericalScalePrefixByKey(numericalScale.numericalScalePrefixId);
                 numericalScale.numericalScalePrefix = numericalScalePrefix;
                 if (numericalScalePrefix.numericalScales === undefined) {
@@ -49,8 +49,8 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var mapper_NumericalScale_NumericalScaleType = function () {
         if (!mapper_NumericalScale_NumericalScaleType_Init && siContext.numericalScaleLoaded && siContext.numericalScaleTypeLoaded) {
             mapper_NumericalScale_NumericalScaleType_Init = true;
-            for (var i = 0; i < siContext.numericalScales.length; i++) {
-                var numericalScale = siContext.numericalScales[i];
+            for (var i = 0; i < siContext.numericalScale.length; i++) {
+                var numericalScale = siContext.numericalScale[i];
                 var numericalScaleType = siFinder.getNumericalScaleTypeByKey(numericalScale.numericalScaleTypeId);
                 numericalScale.numericalScaleType = numericalScaleType;
                 if (numericalScaleType.numericalScales === undefined) {
@@ -65,8 +65,8 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var mapper_UnitMeasurement_UnitMeasurementType = function () {
         if (!mapper_UnitMeasurement_UnitMeasurementType_Init && siContext.unitMeasurementTypeLoaded && siContext.unitMeasurementLoaded) {
             mapper_UnitMeasurement_UnitMeasurementType_Init = true;
-            for (var i = 0; i < siContext.unitMeasurements.length; i++) {
-                var unitMeasurement = siContext.unitMeasurements[i];
+            for (var i = 0; i < siContext.unitMeasurement.length; i++) {
+                var unitMeasurement = siContext.unitMeasurement[i];
                 var unitMeasurementType = siFinder.getUnitMeasurementTypeByKey(unitMeasurement.unitMeasurementTypeId);
                 unitMeasurement.unitMeasurementType = unitMeasurementType;
                 if (unitMeasurementType.unitMeasurements === undefined) {
@@ -81,8 +81,8 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var mapper_UnitMeasurementScale_UnitMeasurement = function () {
         if (!mapper_UnitMeasurementScale_UnitMeasurement_Init && siContext.unitMeasurementScaleLoaded && siContext.unitMeasurementLoaded) {
             mapper_UnitMeasurementScale_UnitMeasurement_Init = true;
-            for (var i = 0; i < siContext.unitMeasurementScales.length; i++) {
-                var unitMeasurementScale = siContext.unitMeasurementScales[i];
+            for (var i = 0; i < siContext.unitMeasurementScale.length; i++) {
+                var unitMeasurementScale = siContext.unitMeasurementScale[i];
                 var unitMeasurement = siFinder.getUnitMeasurementByKey(unitMeasurementScale.unitMeasurementId, unitMeasurementScale.unitMeasurementTypeId);
                 unitMeasurementScale.unitMeasurement = unitMeasurement;
                 if (unitMeasurement.unitMeasurementScales === undefined) {
@@ -97,8 +97,8 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var mapper_UnitMeasurementScale_NumericalScale = function () {
         if (!mapper_UnitMeasurementScale_NumericalScale_Init && siContext.unitMeasurementScaleLoaded && siContext.numericalScaleLoaded) {
             mapper_UnitMeasurementScale_NumericalScale_Init = true;
-            for (var i = 0; i < siContext.unitMeasurementScales.length; i++) {
-                var unitMeasurementScale = siContext.unitMeasurementScales[i];
+            for (var i = 0; i < siContext.unitMeasurementScale.length; i++) {
+                var unitMeasurementScale = siContext.unitMeasurementScale[i];
                 var numericalScale = siFinder.getNumericalScaleByKey(unitMeasurementScale.numericalScalePrefixId, unitMeasurementScale.numericalScaleTypeId);
                 unitMeasurementScale.numericalScale = numericalScale;
                 if (numericalScale.unitMeasurementScales === undefined) {

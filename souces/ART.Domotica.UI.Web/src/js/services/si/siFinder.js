@@ -6,8 +6,8 @@ app.factory('siFinder', ['$rootScope', 'siContext', function ($rootScope, siCont
     var serviceFactory = {};    
 
     var getNumericalScaleTypeByKey = function (numericalScaleTypeId) {
-        for (var i = 0; i < context.numericalScaleTypes.length; i++) {
-            var item = context.numericalScaleTypes[i];
+        for (var i = 0; i < context.numericalScaleType.length; i++) {
+            var item = context.numericalScaleType[i];
             if (item.numericalScaleTypeId === numericalScaleTypeId) {
                 return item;
             }
@@ -15,8 +15,8 @@ app.factory('siFinder', ['$rootScope', 'siContext', function ($rootScope, siCont
     }
 
     var getNumericalScalePrefixByKey = function (numericalScalePrefixId) {
-        for (var i = 0; i < context.numericalScalePrefixes.length; i++) {
-            var item = context.numericalScalePrefixes[i];
+        for (var i = 0; i < context.numericalScalePrefix.length; i++) {
+            var item = context.numericalScalePrefix[i];
             if (item.numericalScalePrefixId === numericalScalePrefixId) {
                 return item;
             }
@@ -24,8 +24,8 @@ app.factory('siFinder', ['$rootScope', 'siContext', function ($rootScope, siCont
     }
 
     var getNumericalScaleByKey = function (numericalScalePrefixId, numericalScaleTypeId) {
-        for (var i = 0; i < context.numericalScales.length; i++) {
-            var item = context.numericalScales[i];
+        for (var i = 0; i < context.numericalScale.length; i++) {
+            var item = context.numericalScale[i];
             if (item.numericalScalePrefixId === numericalScalePrefixId && item.numericalScaleTypeId === numericalScaleTypeId) {
                 return item;
             }
@@ -33,8 +33,8 @@ app.factory('siFinder', ['$rootScope', 'siContext', function ($rootScope, siCont
     }
 
     var getUnitMeasurementTypeByKey = function (unitMeasurementTypeId) {
-        for (var i = 0; i < context.unitMeasurementTypes.length; i++) {
-            var item = context.unitMeasurementTypes[i];
+        for (var i = 0; i < context.unitMeasurementType.length; i++) {
+            var item = context.unitMeasurementType[i];
             if (item.unitMeasurementTypeId === unitMeasurementTypeId) {
                 return item;
             }
@@ -42,8 +42,8 @@ app.factory('siFinder', ['$rootScope', 'siContext', function ($rootScope, siCont
     }
 
     var getUnitMeasurementByKey = function (unitMeasurementId, unitMeasurementTypeId) {
-        for (var i = 0; i < context.unitMeasurements.length; i++) {
-            var item = context.unitMeasurements[i];
+        for (var i = 0; i < context.unitMeasurement.length; i++) {
+            var item = context.unitMeasurement[i];
             if (item.unitMeasurementId === unitMeasurementId && item.unitMeasurementTypeId === unitMeasurementTypeId) {
                 return item;
             }
@@ -51,8 +51,8 @@ app.factory('siFinder', ['$rootScope', 'siContext', function ($rootScope, siCont
     }
 
     var getUnitMeasurementScaleByKey = function (unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
-        for (var i = 0; i < context.unitMeasurementScales.length; i++) {
-            var item = context.unitMeasurementScales[i];
+        for (var i = 0; i < context.unitMeasurementScale.length; i++) {
+            var item = context.unitMeasurementScale[i];
             if (item.unitMeasurementId === unitMeasurementId && item.unitMeasurementTypeId === unitMeasurementTypeId && item.numericalScalePrefixId === numericalScalePrefixId && item.numericalScaleTypeId === numericalScaleTypeId) {
                 return item;
             }

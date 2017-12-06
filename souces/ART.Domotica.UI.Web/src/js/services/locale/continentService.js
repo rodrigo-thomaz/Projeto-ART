@@ -36,7 +36,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', 'continentConstant',
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            localeContext.continents.push(data[i]);
+            localeContext.continent.push(data[i]);
         }
         
         _initializing = false;

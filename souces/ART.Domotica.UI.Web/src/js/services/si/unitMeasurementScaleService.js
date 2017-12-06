@@ -36,7 +36,7 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', 'unitMeas
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            siContext.unitMeasurementScales.push(data[i]);
+            siContext.unitMeasurementScale.push(data[i]);
         }
         
         _initializing = false;

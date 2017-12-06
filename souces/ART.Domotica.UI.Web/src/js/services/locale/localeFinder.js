@@ -6,8 +6,8 @@ app.factory('localeFinder', ['$rootScope', 'localeContext', function ($rootScope
     var serviceFactory = {};    
 
     var getContinentByKey = function (continentId) {
-        for (var i = 0; i < context.continents.length; i++) {
-            var item = context.continents[i];
+        for (var i = 0; i < context.continent.length; i++) {
+            var item = context.continent[i];
             if (item.continentId === continentId) {
                 return item;
             }
@@ -15,8 +15,8 @@ app.factory('localeFinder', ['$rootScope', 'localeContext', function ($rootScope
     }
 
     var getCountryByKey = function (countryId) {
-        for (var i = 0; i < context.countries.length; i++) {
-            var item = context.countries[i];
+        for (var i = 0; i < context.country.length; i++) {
+            var item = context.country[i];
             if (item.countryId === countryId) {
                 return item;
             }

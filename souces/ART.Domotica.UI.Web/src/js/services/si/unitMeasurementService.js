@@ -36,7 +36,7 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', 'unitMeasureme
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            siContext.unitMeasurements.push(data[i]);
+            siContext.unitMeasurement.push(data[i]);
         }
         
         _initializing = false;

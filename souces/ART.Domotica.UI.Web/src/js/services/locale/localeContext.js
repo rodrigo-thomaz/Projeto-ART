@@ -3,10 +3,10 @@ app.factory('localeContext', ['$rootScope', function ($rootScope) {
 
     var context = $rootScope.$new();
 
-    context.continents = [];    
+    context.continent = [];    
     context.continentLoaded = false;    
 
-    context.countries = [];    
+    context.country = [];    
     context.countryLoaded = false;            
 
     return context;

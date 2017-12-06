@@ -38,7 +38,7 @@ app.factory('numericalScaleService', ['$http', 'ngAuthSettings', 'numericalScale
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            siContext.numericalScales.push(data[i]);
+            siContext.numericalScale.push(data[i]);
         }
         
         _initializing = false;

@@ -36,7 +36,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', 'countryConstant', '$r
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            localeContext.countries.push(data[i]);
+            localeContext.country.push(data[i]);
         }
 
         _initializing = false;

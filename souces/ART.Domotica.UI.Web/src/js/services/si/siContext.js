@@ -3,25 +3,25 @@ app.factory('siContext', ['$rootScope', function ($rootScope) {
 
     var context = $rootScope.$new();
 
-    context.numericalScales = [];
+    context.numericalScale = [];
     context.numericalScaleLoaded = false;
 
-    context.numericalScalePrefixes = [];
+    context.numericalScalePrefix = [];
     context.numericalScalePrefixLoaded = false;
 
-    context.numericalScaleTypes = [];
+    context.numericalScaleType = [];
     context.numericalScaleTypeLoaded = false;
 
-    context.numericalScaleTypeCountries = [];
+    context.numericalScaleTypeCountry = [];
     context.numericalScaleTypeCountryLoaded = false;
 
-    context.unitMeasurementScales = [];
+    context.unitMeasurementScale = [];
     context.unitMeasurementScaleLoaded = false;
 
-    context.unitMeasurementTypes = [];
+    context.unitMeasurementType = [];
     context.unitMeasurementTypeLoaded = false;
 
-    context.unitMeasurements = [];
+    context.unitMeasurement = [];
     context.unitMeasurementLoaded = false;
         
     return context;

@@ -38,7 +38,7 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', 'numerica
         var data = JSON.parse(dataUTF8);
 
         for (var i = 0; i < data.length; i++) {
-            siContext.numericalScalePrefixes.push(data[i]);
+            siContext.numericalScalePrefix.push(data[i]);
         }
         
         _initializing = false;
