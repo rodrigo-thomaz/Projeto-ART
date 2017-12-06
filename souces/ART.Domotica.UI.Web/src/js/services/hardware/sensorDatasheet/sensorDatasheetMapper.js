@@ -54,6 +54,19 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
         }
     };
 
+    var mapper_SensorDatasheet_SensorUnitMeasurementDefault_Init = false;
+    var mapper_SensorDatasheet_SensorUnitMeasurementDefault = function () {
+        if (!mapper_SensorDatasheet_SensorUnitMeasurementDefault_Init && sensorDatasheetContext.sensorDatasheetLoaded && sensorDatasheetContext.sensorUnitMeasurementDefaultLoaded) {
+            mapper_SensorDatasheet_SensorUnitMeasurementDefault_Init = true;
+            for (var i = 0; i < sensorDatasheetContext.sensorDatasheet.length; i++) {
+                var sensorDatasheet = sensorDatasheetContext.sensorDatasheet[i];
+                var sensorUnitMeasurementDefault = sensorDatasheetFinder.getSensorUnitMeasurementDefaultByKey(sensorDatasheet.sensorDatasheetId, sensorDatasheet.sensorTypeId);
+                sensorDatasheet.sensorUnitMeasurementDefault = sensorUnitMeasurementDefault;
+                sensorUnitMeasurementDefault.sensorDatasheet = sensorDatasheet;
+            }
+        }
+    };
+
     // *** Navigation Properties Mappers ***
 
 
@@ -68,6 +81,7 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
     var onSensorDatasheetGetAllCompleted = function (event, data) {
         sensorDatasheetGetAllCompletedSubscription();
         sensorDatasheetContext.sensorDatasheetLoaded = true;
+        mapper_SensorDatasheet_SensorUnitMeasurementDefault();
         mapper_SensorDatasheet_SensorTypeType();
         mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();
     }  
@@ -75,6 +89,7 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
     var onSensorUnitMeasurementDefaultGetAllCompleted = function (event, data) {
         sensorUnitMeasurementDefaultGetAllCompletedSubscription();
         sensorDatasheetContext.sensorUnitMeasurementDefaultLoaded = true;
+        mapper_SensorDatasheet_SensorUnitMeasurementDefault();
         mapper_SensorUnitMeasurementDefault_UnitMeasurementScale();
     }  
 
