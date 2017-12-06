@@ -9,12 +9,12 @@
             get; set;
         }
 
-        public byte TimeZoneId
+        public bool SupportsDaylightSavingTime
         {
             get; set;
         }
 
-        public bool SupportsDaylightSavingTime
+        public byte TimeZoneId
         {
             get; set;
         }

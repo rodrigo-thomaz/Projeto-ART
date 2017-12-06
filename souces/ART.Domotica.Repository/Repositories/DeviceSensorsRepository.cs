@@ -1,14 +1,11 @@
-﻿using ART.Domotica.Repository.Entities;
-using ART.Domotica.Repository.Interfaces;
-using ART.Infra.CrossCutting.Repository;
-using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace ART.Domotica.Repository.Repositories
+﻿namespace ART.Domotica.Repository.Repositories
 {
+    using System;
+
+    using ART.Domotica.Repository.Entities;
+    using ART.Domotica.Repository.Interfaces;
+    using ART.Infra.CrossCutting.Repository;
+
     public class DeviceSensorsRepository : RepositoryBase<ARTDbContext, DeviceSensors, Guid>, IDeviceSensorsRepository
     {
         #region Constructors
@@ -18,16 +15,6 @@ namespace ART.Domotica.Repository.Repositories
         {
         }
 
-        #endregion Constructors    
-
-        public async Task<List<DeviceSensors>> GetAllByApplicationId(Guid applicationId)
-        {
-            IQueryable<DeviceSensors> query = from ds in _context.DeviceSensors
-                                                join dia in _context.HardwareInApplication on ds.Id equals dia.HardwareId
-                                                where dia.ApplicationId == applicationId
-                                                select ds;
-
-            return await query.ToListAsync();
-        }
+        #endregion Constructors
     }
 }
