@@ -28,3 +28,15 @@ app.constant('unitMeasurementScaleConstant', {
     getAllCompletedTopic: 'SI.UnitMeasurementScale.GetAllViewCompleted',
     initializedEventName: 'unitMeasurementScaleService.onInitialized',
 });
+
+app.constant('unitMeasurementConstant', {
+    getAllApiUri: 'api/si/unitMeasurement/getAll',
+    getAllCompletedTopic: 'SI.UnitMeasurement.GetAllViewCompleted',
+    initializedEventName: 'unitMeasurementService.onInitialized',
+});
+
+app.constant('unitMeasurementTypeConstant', {
+    getAllApiUri: 'api/si/unitMeasurementType/getAll',
+    getAllCompletedTopic: 'SI.UnitMeasurementType.GetAllViewCompleted',
+    initializedEventName: 'unitMeasurementTypeService.onInitialized',
+});

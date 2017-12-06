@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
+app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', 'unitMeasurementTypeConstant', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, unitMeasurementTypeConstant, $rootScope, stompService, siContext) {
 
     var serviceFactory = {};    
 
@@ -8,15 +8,11 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/si/unitMeasurementType/getAll';
-    var getAllCompletedTopic = 'SI.UnitMeasurementType.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
-
-    var initializedEventName = 'unitMeasurementTypeService.onInitialized';
 
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(unitMeasurementTypeConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -29,7 +25,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + unitMeasurementTypeConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
@@ -51,7 +47,7 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(unitMeasurementTypeConstant.initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -66,7 +62,6 @@ app.factory('unitMeasurementTypeService', ['$http', 'ngAuthSettings', '$rootScop
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 
