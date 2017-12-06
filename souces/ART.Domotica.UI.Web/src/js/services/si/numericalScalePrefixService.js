@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, $rootScope, stompService, siContext) {
+app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', 'numericalScalePrefixConstant', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, numericalScalePrefixConstant, $rootScope, stompService, siContext) {
 
     var serviceFactory = {};    
 
@@ -8,15 +8,13 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllApiUri = 'api/si/numericalScalePrefix/getAll';
-    var getAllCompletedTopic = 'SI.NumericalScalePrefix.GetAllViewCompleted';
     var getAllCompletedSubscription = null;
 
     var initializedEventName = 'numericalScalePrefixService.onInitialized';
     
     var onConnected = function () {
 
-        getAllCompletedSubscription = stompService.subscribe(getAllCompletedTopic, onGetAllCompleted);
+        getAllCompletedSubscription = stompService.subscribe(numericalScalePrefixConstant.getAllCompletedTopic, onGetAllCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -29,7 +27,7 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
     };
 
     var getAll = function () {
-        return $http.post(serviceBase + getAllApiUri).then(function (results) {
+        return $http.post(serviceBase + numericalScalePrefixConstant.getAllApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };       
@@ -51,7 +49,7 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
 
         getAllCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(numericalScalePrefixConstant.initializedEventName);
     }
 
     $rootScope.$on('$destroy', function () {
@@ -66,7 +64,6 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', '$rootSco
     // serviceFactory
 
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
 
     return serviceFactory;
 

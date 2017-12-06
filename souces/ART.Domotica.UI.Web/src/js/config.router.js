@@ -59,6 +59,7 @@ angular.module('app')
 
                       //SI
                       'js/services/si/siContext.js',
+                      'js/services/si/siConstants.js',
                       'js/services/si/siFinder.js',
                       'js/services/si/siMapper.js',
 
@@ -121,6 +122,7 @@ angular.module('app')
 
                       //SI
                       'js/services/si/siContext.js',
+                      'js/services/si/siConstants.js',
                       'js/services/si/siFinder.js',
                       'js/services/si/siMapper.js',
 
