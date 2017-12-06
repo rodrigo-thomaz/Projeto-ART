@@ -9,14 +9,19 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
 
         for (var i = 0; i < deviceContext.device.length; i++) {
 
-            var deviceNTP = deviceContext.device[i].deviceNTP;
+            var device = deviceContext.device[i];
+
+            var deviceNTP = device.deviceNTP;
+            deviceNTP.device = device;
             deviceContext.deviceNTP.push(deviceNTP);
 
-            var deviceSensors = deviceContext.device[i].deviceSensors;
+            var deviceSensors = device.deviceSensors;
+            deviceSensors.device = device;
             deviceContext.deviceSensors.push(deviceSensors);
 
             for (var j = 0; j < deviceSensors.sensorsInDevice.length; j++) {
                 var sensorsInDevice = deviceSensors.sensorsInDevice[j];
+                sensorsInDevice.deviceSensors = deviceSensors;
                 deviceContext.sensorsInDevice.push(sensorsInDevice);
             }
         }
