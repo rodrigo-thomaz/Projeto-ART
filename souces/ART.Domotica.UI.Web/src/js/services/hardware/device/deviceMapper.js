@@ -6,6 +6,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 't
     // *** Navigation Properties Mappers ***
 
     var loadAll = function () {
+
         for (var i = 0; i < deviceContext.device.length; i++) {
 
             var deviceNTP = deviceContext.device[i].deviceNTP;
@@ -19,6 +20,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 't
                 deviceContext.sensorsInDevice.push(sensorsInDevice);
             }
         }
+
         deviceContext.deviceLoaded = true;
         deviceContext.deviceNTPLoaded = true;
         deviceContext.deviceSensorsLoaded = true;
