@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'timeZoneConstant', function ($rootScope, deviceContext, deviceConstant, timeZoneConstant) {
+app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'globalizationContext', 'globalizationFinder', 'timeZoneConstant', function ($rootScope, deviceContext, deviceConstant, globalizationContext, globalizationFinder, timeZoneConstant) {
 
     var serviceFactory = {};    
 
@@ -28,20 +28,17 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 't
     }
 
     var mapper_DeviceNTP_TimeZone_Init = false;
-    //var mapper_DeviceNTP_TimeZone = function () {
-    //    if (!mapper_DeviceNTP_TimeZone_Init && deviceContext.deviceLoaded && deviceContext.timeZoneLoaded) {
-    //        mapper_DeviceNTP_TimeZone_Init = true;
-    //        for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
-    //            applyTimeZoneInDeviceNTP(deviceContext.deviceNTP[i]);
-    //        }
-    //    }
-    //};   
-
-    var applyTimeZoneInDeviceNTP = function (deviceNTP) {
-        var timeZone = deviceContext.getTimeZoneByKey(deviceNTP.timeZoneId);
-        deviceNTP.timeZone = timeZone;
-        delete deviceNTP.timeZoneId; // removendo a foreing key
-    }
+    var mapper_DeviceNTP_TimeZone = function () {
+        if (!mapper_DeviceNTP_TimeZone_Init && deviceContext.deviceLoaded && globalizationContext.timeZoneLoaded) {
+            mapper_DeviceNTP_TimeZone_Init = true;
+            for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
+                var deviceNTP = deviceContext.deviceNTP[i];
+                var timeZone = globalizationFinder.getTimeZoneByKey(deviceNTP.timeZoneId);
+                deviceNTP.timeZone = timeZone;
+                delete deviceNTP.timeZoneId; // removendo a foreing key
+            }
+        }
+    };  
 
     // *** Navigation Properties Mappers ***
 
@@ -50,11 +47,13 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 't
 
     var onDeviceGetAllByApplicationIdCompleted = function (event, data) {
         deviceGetAllByApplicationIdCompletedSubscription();
-        loadAll();        
+        loadAll(); 
+        mapper_DeviceNTP_TimeZone();
     }      
 
     var onTimeZoneGetAllCompleted = function (event, data) {
         timeZoneGetAllCompletedSubscription();
+        mapper_DeviceNTP_TimeZone();
     }  
 
     var deviceGetAllByApplicationIdCompletedSubscription = $rootScope.$on(deviceConstant.getAllByApplicationIdCompletedEventName, onDeviceGetAllByApplicationIdCompleted);

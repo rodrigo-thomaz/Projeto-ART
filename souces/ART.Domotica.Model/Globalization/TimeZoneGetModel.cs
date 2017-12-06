@@ -9,7 +9,7 @@
             get; set;
         }
 
-        public byte Id
+        public byte TimeZoneId
         {
             get; set;
         }
