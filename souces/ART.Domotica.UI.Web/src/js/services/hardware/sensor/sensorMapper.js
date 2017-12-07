@@ -40,6 +40,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
     var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution = function () {
         if (!mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init && sensorContext.sensorTempDSFamilyLoaded && sensorContext.sensorTempDSFamilyResolutionLoaded) {
             mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = true;
+            sensorTempDSFamilyResolutionLoadedUnbinding();
             for (var i = 0; i < sensorContext.sensorTempDSFamily.length; i++) {
                 var sensorTempDSFamily = sensorContext.sensorTempDSFamily[i];
                 var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolutionId);
@@ -57,6 +58,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
     var mapper_SensorUnitMeasurementScale_UnitMeasurementScale = function () {
         if (!mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init && sensorContext.sensorUnitMeasurementScaleLoaded && siContext.unitMeasurementScaleLoaded) {
             mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init = true;
+            unitMeasurementScaleLoadedUnbinding();
             for (var i = 0; i < sensorContext.sensorUnitMeasurementScale.length; i++) {
                 var sensorUnitMeasurementScale = sensorContext.sensorUnitMeasurementScale[i];
                 var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
@@ -95,11 +97,11 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
 
     // *** Watches
             
-    sensorContext.$watch('sensorTempDSFamilyResolutionLoaded', function (newValue, oldValue) {
+    var sensorTempDSFamilyResolutionLoadedUnbinding = sensorContext.$watch('sensorTempDSFamilyResolutionLoaded', function (newValue, oldValue) {
         mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
     })
 
-    siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
+    var unitMeasurementScaleLoadedUnbinding = siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
         mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
     })
 
