@@ -1,15 +1,19 @@
 ﻿'use strict';
 app.factory('sensorTempDSFamilyResolutionService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorContext', 'sensorTempDSFamilyResolutionConstant', function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorContext, sensorTempDSFamilyResolutionConstant) {
 
+    var serviceFactory = {};
+
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
     var _initializing = false;
-    var _initialized = false;
+    var _initialized = false;    
 
-    var serviceFactory = {};
+    var getAllCompletedSubscription = null;
 
     var onConnected = function () {
-        stompService.subscribe(sensorTempDSFamilyResolutionConstant.getAllCompletedTopic, onGetAllCompleted);
+
+        getAllCompletedSubscription = stompService.subscribe(sensorTempDSFamilyResolutionConstant.getAllCompletedTopic, onGetAllCompleted);
+
         if (!_initializing && !_initialized) {
             _initializing = true;
             getAll();
@@ -37,6 +41,10 @@ app.factory('sensorTempDSFamilyResolutionService', ['$http', '$log', '$rootScope
 
         _initializing = false;
         _initialized = true;
+
+        clearOnConnected();
+
+        getAllCompletedSubscription.unsubscribe();
 
         $rootScope.$emit(sensorTempDSFamilyResolutionConstant.getAllCompletedEventName);
     }

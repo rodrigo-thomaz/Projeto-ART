@@ -46,7 +46,7 @@ app.controller('espDeviceItemController', ['$scope', '$rootScope', '$timeout', '
 
 }]);
 
-app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'timeZoneService', 'deviceNTPService', function ($scope, $rootScope, $timeout, $log, toaster, timeZoneService, deviceNTPService) {
+app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'globalizationContext', 'globalizationFinder', 'deviceNTPService', function ($scope, $rootScope, $timeout, $log, toaster, globalizationContext, globalizationFinder, deviceNTPService) {
 
     $scope.deviceId = null;
     $scope.deviceNTP = {};
@@ -61,7 +61,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
         $scope.updateIntervalInMilliSecondView = deviceNTP.updateIntervalInMilliSecond;
 
         // Time Zone
-        if (timeZoneService.initialized())
+        if (globalizationContext.timeZoneLoaded)
             setSelectedTimeZone();
         else
             clearOnTimeZoneServiceInitialized = $rootScope.$on('timeZoneService_Initialized', setSelectedTimeZone);
@@ -83,7 +83,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
     });
 
     var setSelectedTimeZone = function () {
-        $scope.timeZone.selectedTimeZone = timeZoneService.getTimeZoneById($scope.deviceNTP.timeZoneId);
+        $scope.timeZone.selectedTimeZone = globalizationFinder.getTimeZoneByKey($scope.deviceNTP.timeZoneId);
     };
 
     var onSetTimeZoneCompleted = function (event, data) {
@@ -97,7 +97,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
     };   
 
     $scope.timeZone = {
-        availableTimeZones: timeZoneService.timeZones,
+        availableTimeZones: globalizationContext.timeZone,
         selectedTimeZone: {},
     };
 
