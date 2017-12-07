@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'localeFinder', 'numericalScalePrefixConstant', 'numericalScaleConstant', 'numericalScaleTypeCountryConstant', 'numericalScaleTypeConstant', 'unitMeasurementScaleConstant', 'unitMeasurementConstant', 'unitMeasurementTypeConstant', 'countryConstant',
-    function ($rootScope, siContext, siFinder, localeContext, localeFinder, numericalScalePrefixConstant, numericalScaleConstant, numericalScaleTypeCountryConstant, numericalScaleTypeConstant, unitMeasurementScaleConstant, unitMeasurementConstant, unitMeasurementTypeConstant, countryConstant) {
+app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'localeFinder', 'numericalScalePrefixConstant', 'numericalScaleConstant', 'numericalScaleTypeCountryConstant', 'numericalScaleTypeConstant', 'unitMeasurementScaleConstant', 'unitMeasurementConstant', 'unitMeasurementTypeConstant',
+    function ($rootScope, siContext, siFinder, localeContext, localeFinder, numericalScalePrefixConstant, numericalScaleConstant, numericalScaleTypeCountryConstant, numericalScaleTypeConstant, unitMeasurementScaleConstant, unitMeasurementConstant, unitMeasurementTypeConstant) {
 
     var serviceFactory = {};    
 

@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 'siContext', 'sensorDatasheetFinder', 'siFinder', 'sensorTypeConstant', 'sensorDatasheetConstant', 'sensorDatasheetUnitMeasurementDefaultConstant', 'sensorDatasheetUnitMeasurementScaleConstant', 'unitMeasurementScaleConstant',
-    function ($rootScope, sensorDatasheetContext, siContext, sensorDatasheetFinder, siFinder, sensorTypeConstant, sensorDatasheetConstant, sensorDatasheetUnitMeasurementDefaultConstant, sensorDatasheetUnitMeasurementScaleConstant, unitMeasurementScaleConstant) {
+app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 'siContext', 'sensorDatasheetFinder', 'siFinder', 'sensorTypeConstant', 'sensorDatasheetConstant', 'sensorDatasheetUnitMeasurementDefaultConstant', 'sensorDatasheetUnitMeasurementScaleConstant', 
+    function ($rootScope, sensorDatasheetContext, siContext, sensorDatasheetFinder, siFinder, sensorTypeConstant, sensorDatasheetConstant, sensorDatasheetUnitMeasurementDefaultConstant, sensorDatasheetUnitMeasurementScaleConstant) {
 
     var serviceFactory = {};    
 
@@ -26,6 +26,7 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
     var mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale = function () {
         if (!mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale_Init && sensorDatasheetContext.sensorDatasheetUnitMeasurementDefaultLoaded && siContext.unitMeasurementScaleLoaded) {
             mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale_Init = true;
+            unitMeasurementScaleLoadedUnbinding();
             for (var i = 0; i < sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault.length; i++) {
                 var sensorDatasheetUnitMeasurementDefault = sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault[i];
                 var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorDatasheetUnitMeasurementDefault.unitMeasurementId, sensorDatasheetUnitMeasurementDefault.unitMeasurementTypeId, sensorDatasheetUnitMeasurementDefault.numericalScalePrefixId, sensorDatasheetUnitMeasurementDefault.numericalScaleTypeId);
@@ -99,27 +100,28 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
         mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();
     }  
 
-    var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
-        unitMeasurementScaleGetAllCompletedSubscription();   
-        mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale();
-    }
-
     var sensorTypeGetAllCompletedSubscription = $rootScope.$on(sensorTypeConstant.getAllCompletedEventName, onSensorTypeGetAllCompleted);
     var sensorDatasheetGetAllCompletedSubscription = $rootScope.$on(sensorDatasheetConstant.getAllCompletedEventName, onSensorDatasheetGetAllCompleted);
     var sensorDatasheetUnitMeasurementDefaultGetAllCompletedSubscription = $rootScope.$on(sensorDatasheetUnitMeasurementDefaultConstant.getAllCompletedEventName, onSensorDatasheetUnitMeasurementDefaultGetAllCompleted);
     var sensorDatasheetUnitMeasurementScaleGetAllCompletedSubscription = $rootScope.$on(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedEventName, onSensorDatasheetUnitMeasurementScaleGetAllCompleted);
-    var unitMeasurementScaleGetAllCompletedSubscription = $rootScope.$on(unitMeasurementScaleConstant.getAllCompletedEventName, onUnitMeasurementScaleGetAllCompleted);
 
     $rootScope.$on('$destroy', function () {
         sensorTypeGetAllCompletedSubscription();        
         sensorDatasheetGetAllCompletedSubscription();        
         sensorDatasheetUnitMeasurementDefaultGetAllCompletedSubscription();        
         sensorDatasheetUnitMeasurementScaleGetAllCompletedSubscription();   
-        unitMeasurementScaleGetAllCompletedSubscription();
     });
 
     // *** Events Subscriptions
-    
+
+    // *** Watches
+
+    var unitMeasurementScaleLoadedUnbinding = siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
+        mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale();
+    })
+
+    // *** Watches
+
     
     return serviceFactory;
 
