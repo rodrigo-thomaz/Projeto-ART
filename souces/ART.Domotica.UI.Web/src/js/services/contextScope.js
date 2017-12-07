@@ -3,22 +3,35 @@ app.factory('contextScope', [
 
     '$rootScope',
 
-    'localeContext',
-    'localeFinder',
-    'localeMapper',    
-
-    'siContext',
-    'siFinder',
-    'siMapper',
-
     'globalizationContext',
     'globalizationFinder',
     'globalizationMapper',
     'timeZoneService',
 
+    'localeContext',
+    'localeFinder',
+    'localeMapper', 
+    'continentService',
+    'countryService',
+
+    'siContext',
+    'siFinder',
+    'siMapper',   
+    'numericalScalePrefixService',
+    'numericalScaleService',
+    'numericalScaleTypeCountryService',
+    'numericalScaleTypeService',
+    'unitMeasurementScaleService',
+    'unitMeasurementService',
+    'unitMeasurementTypeService',
+
     'sensorDatasheetContext',
     'sensorDatasheetFinder',
     'sensorDatasheetMapper',
+    'sensorDatasheetService',
+    'sensorDatasheetUnitMeasurementDefaultService',
+    'sensorDatasheetUnitMeasurementScaleService',
+    'sensorTypeService',
 
     'deviceContext',
     'deviceFinder',
@@ -40,22 +53,35 @@ app.factory('contextScope', [
 
         $rootScope,
 
-        localeContext,
-        localeFinder,
-        localeMapper,
-
-        siContext,
-        siFinder,
-        siMapper,
-
         globalizationContext,
         globalizationFinder,
         globalizationMapper,
         timeZoneService,
 
+        localeContext,
+        localeFinder,
+        localeMapper,
+        continentService,
+        countryService,
+
+        siContext,
+        siFinder,
+        siMapper,        
+        numericalScalePrefixService,
+        numericalScaleService,
+        numericalScaleTypeCountryService,
+        numericalScaleTypeService,
+        unitMeasurementScaleService,
+        unitMeasurementService,
+        unitMeasurementTypeService,
+
         sensorDatasheetContext,
         sensorDatasheetFinder,
         sensorDatasheetMapper,
+        sensorDatasheetService,
+        sensorDatasheetUnitMeasurementDefaultService,
+        sensorDatasheetUnitMeasurementScaleService,
+        sensorTypeService,
 
         deviceContext,
         deviceFinder,

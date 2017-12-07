@@ -10,8 +10,6 @@ app.factory('numericalScaleService', ['$http', 'ngAuthSettings', 'numericalScale
 
     var getAllCompletedSubscription = null;
 
-    var initializedEventName = 'numericalScaleService.onInitialized';
-
     var onConnected = function () {
 
         getAllCompletedSubscription = stompService.subscribe(numericalScaleConstant.getAllCompletedTopic, onGetAllCompleted);
