@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'sensorTempDSFamilyResolutionConstant', 'siContext', 'siFinder',
-    function ($rootScope, sensorContext, sensorConstant, sensorFinder, sensorTempDSFamilyResolutionConstant, siContext, siFinder) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'sensorTempDSFamilyResolutionConstant', 'siContext', 'siFinder', 'unitMeasurementScaleConstant',
+    function ($rootScope, sensorContext, sensorConstant, sensorFinder, sensorTempDSFamilyResolutionConstant, siContext, siFinder, unitMeasurementScaleConstant) {
 
     var serviceFactory = {};    
 
@@ -61,7 +61,10 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
                 var sensorUnitMeasurementScale = sensorContext.sensorUnitMeasurementScale[i];
                 var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
                 sensorUnitMeasurementScale.unitMeasurementScale = unitMeasurementScale;
-                delete sensorUnitMeasurementScale.unitMeasurementScaleId; // removendo a foreing key
+                delete sensorUnitMeasurementScale.unitMeasurementId; // removendo a foreing key
+                delete sensorUnitMeasurementScale.unitMeasurementTypeId; // removendo a foreing key
+                delete sensorUnitMeasurementScale.numericalScalePrefixId; // removendo a foreing key
+                delete sensorUnitMeasurementScale.numericalScaleTypeId; // removendo a foreing key
                 if (unitMeasurementScale.sensorUnitMeasurementScales === undefined) {
                     unitMeasurementScale.sensorUnitMeasurementScales = [];
                 }
@@ -79,18 +82,25 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
         sensorGetAllByApplicationIdCompletedSubscription();
         loadAll();
         mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
+        mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
     }   
 
     var onSensorTempDSFamilyResolutionGetAllCompleted = function (event, data) {
         mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
     } 
 
+    var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
+        mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
+    } 
+
     var sensorGetAllByApplicationIdCompletedSubscription = $rootScope.$on(sensorConstant.getAllByApplicationIdCompletedEventName, onSensorGetAllByApplicationIdCompleted);
     var sensorTempDSFamilyResolutionGetAllCompletedSubscription = $rootScope.$on(sensorTempDSFamilyResolutionConstant.getAllCompletedEventName, onSensorTempDSFamilyResolutionGetAllCompleted);
+    var unitMeasurementScaleGetAllCompletedSubscription = $rootScope.$on(unitMeasurementScaleConstant.getAllCompletedEventName, onUnitMeasurementScaleGetAllCompleted);
 
     $rootScope.$on('$destroy', function () {
         sensorTypeGetAllByApplicationIdCompletedSubscription();      
         sensorTempDSFamilyResolutionGetAllCompletedSubscription();
+        sensorUnitMeasurementScaleGetAllCompletedSubscription();
     });
 
     // *** Events Subscriptions
