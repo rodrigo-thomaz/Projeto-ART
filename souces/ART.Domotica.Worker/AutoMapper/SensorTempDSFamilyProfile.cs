@@ -20,7 +20,13 @@
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Sensor.SensorInDevice.Single().DeviceSensorsId))
                 .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.SensorTempDSFamilyResolutionId));
 
-            CreateMap<SensorTempDSFamilyResolution, SensorTempDSFamilyResolutionGetModel>();
+            CreateMap<SensorTempDSFamilyResolution, SensorTempDSFamilyResolutionGetModel>()
+                .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name))
+                .ForMember(vm => vm.Bits, m => m.MapFrom(x => x.Bits))
+                .ForMember(vm => vm.DecimalPlaces, m => m.MapFrom(x => x.DecimalPlaces))
+                .ForMember(vm => vm.ConversionTime, m => m.MapFrom(x => x.ConversionTime))
+                .ForMember(vm => vm.Description, m => m.MapFrom(x => x.Description));
 
             CreateMap<SensorTempDSFamilySetResolutionRequestContract, SensorTempDSFamilySetResolutionRequestIoTContract>();
 

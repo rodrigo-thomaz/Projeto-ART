@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant',
-    function ($rootScope, sensorContext, sensorConstant) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'sensorTempDSFamilyResolutionConstant',
+    function ($rootScope, sensorContext, sensorConstant, sensorFinder, sensorTempDSFamilyResolutionConstant) {
 
     var serviceFactory = {};    
 
@@ -61,12 +61,19 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant',
     var onSensorGetAllByApplicationIdCompleted = function (event, data) {
         sensorGetAllByApplicationIdCompletedSubscription();
         loadAll();
+        mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
     }   
 
+    var onSensorTempDSFamilyResolutionGetAllCompleted = function (event, data) {
+        mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
+    } 
+
     var sensorGetAllByApplicationIdCompletedSubscription = $rootScope.$on(sensorConstant.getAllByApplicationIdCompletedEventName, onSensorGetAllByApplicationIdCompleted);
+    var sensorTempDSFamilyResolutionGetAllCompletedSubscription = $rootScope.$on(sensorTempDSFamilyResolutionConstant.getAllCompletedEventName, onSensorTempDSFamilyResolutionGetAllCompleted);
 
     $rootScope.$on('$destroy', function () {
-        sensorTypeGetAllByApplicationIdCompletedSubscription();        
+        sensorTypeGetAllByApplicationIdCompletedSubscription();      
+        sensorTempDSFamilyResolutionGetAllCompletedSubscription();
     });
 
     // *** Events Subscriptions
