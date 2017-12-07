@@ -46,7 +46,7 @@ angular.module('app')
                       
                       'js/services/contextScope.js',
 
-                      //Globalization
+                      // Globalization
 
                       'js/services/globalization/globalizationContext.js',
                       'js/services/globalization/globalizationConstants.js',
@@ -55,7 +55,7 @@ angular.module('app')
 
                       'js/services/globalization/timeZoneService.js',
 
-                      //Locale
+                      // Locale
 
                       'js/services/locale/localeContext.js',
                       'js/services/locale/localeConstants.js',
@@ -65,7 +65,7 @@ angular.module('app')
                       'js/services/locale/continentService.js',
                       'js/services/locale/countryService.js',
 
-                      //SI
+                      // SI
 
                       'js/services/si/siContext.js',
                       'js/services/si/siConstants.js',
@@ -108,15 +108,18 @@ angular.module('app')
                       'js/services/hardware/device/sensorsInDeviceService.js',
                       'js/services/hardware/device/deviceService.js',                     
 
-                      //                      
+                      // Sensor                     
 
-                      'js/services/sensorService.js',
-                                            
-                      'js/services/sensorUnitMeasurementScaleService.js',
-                      'js/services/sensorTriggerService.js',
+                      'js/services/hardware/sensor/sensorContext.js',
+                      'js/services/hardware/sensor/sensorConstants.js',
+                      'js/services/hardware/sensor/sensorFinder.js',
+                      'js/services/hardware/sensor/sensorMapper.js',
 
-                      'js/services/sensorTempDSFamilyResolutionService.js',
-                      'js/services/sensorTempDSFamilyService.js',                      
+                      'js/services/hardware/sensor/sensorService.js',                                            
+                      'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
+                      'js/services/hardware/sensor/sensorTriggerService.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',                      
 
                       'js/controllers/sensorUnitMeasurementScaleController.js',
                       'js/controllers/sensorTriggerController.js',                      
@@ -133,7 +136,7 @@ angular.module('app')
 
                       'js/services/contextScope.js',
 
-                      //Globalization
+                      // Globalization
 
                       'js/services/globalization/globalizationContext.js',
                       'js/services/globalization/globalizationConstants.js',
@@ -142,7 +145,7 @@ angular.module('app')
 
                       'js/services/globalization/timeZoneService.js',                      
 
-                      //Locale
+                      // Locale
 
                       'js/services/locale/localeContext.js',
                       'js/services/locale/localeConstants.js',
@@ -152,7 +155,7 @@ angular.module('app')
                       'js/services/locale/continentService.js',
                       'js/services/locale/countryService.js',
 
-                      //SI
+                      // SI
 
                       'js/services/si/siContext.js',
                       'js/services/si/siConstants.js',
@@ -173,7 +176,7 @@ angular.module('app')
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
 
-                      //Device
+                      // Device
 
                       'js/services/hardware/device/deviceContext.js',
                       'js/services/hardware/device/deviceConstants.js',
@@ -187,6 +190,18 @@ angular.module('app')
 
                       'js/controllers/espDeviceJoinController.js',
                       'js/controllers/espDeviceManagerController.js',
+
+                      // Sensor
+                      'js/services/hardware/sensor/sensorContext.js',
+                      'js/services/hardware/sensor/sensorConstants.js',
+                      'js/services/hardware/sensor/sensorFinder.js',
+                      'js/services/hardware/sensor/sensorMapper.js',
+
+                      'js/services/hardware/sensor/sensorService.js',
+                      'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
+                      'js/services/hardware/sensor/sensorTriggerService.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',               
                   ])
               })
 

@@ -231,14 +231,18 @@
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetContext.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetFinder.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetMapper.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorConstants.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorContext.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorFinder.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorMapper.js" />
     <Content Include="src\js\services\locale\localeConstants.js" />
     <Content Include="src\js\services\locale\localeFinder.js" />
-    <Content Include="src\js\services\sensorTempDSFamilyResolutionService.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorTempDSFamilyResolutionService.js" />
     <Content Include="src\js\services\hardware\device\deviceNTPService.js" />
     <Content Include="src\js\services\locale\localeMapper.js" />
     <Content Include="src\js\services\locale\localeContext.js" />
-    <Content Include="src\js\services\sensorTriggerService.js" />
-    <Content Include="src\js\services\sensorUnitMeasurementScaleService.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorTriggerService.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorUnitMeasurementScaleService.js" />
     <Content Include="src\js\services\hardware\device\deviceService.js" />
     <Content Include="src\js\services\application\applicationUserService.js" />
     <Content Include="src\js\services\authInterceptorService.js" />
@@ -247,7 +251,7 @@
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetUnitMeasurementDefaultService.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetService.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorTypeService.js" />
-    <Content Include="src\js\services\sensorService.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorService.js" />
     <Content Include="src\js\services\application\applicationContext.js" />
     <Content Include="src\js\services\si\siConstants.js" />
     <Content Include="src\js\services\si\siContext.js" />
@@ -263,7 +267,7 @@
     <Content Include="src\js\services\hardware\device\deviceSensorsService.js" />
     <Content Include="src\js\services\globalization\timeZoneService.js" />
     <Content Include="src\js\services\si\unitMeasurementService.js" />
-    <Content Include="src\js\services\sensorTempDSFamilyService.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorTempDSFamilyService.js" />
     <Content Include="src\js\services\stompService.js" />
     <Content Include="src\js\services\dashboardService.js" />
     <Content Include="src\js\services\locale\continentService.js" />
@@ -527,9 +531,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="src\js\services\hardware\sensor\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

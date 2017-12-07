@@ -23,6 +23,10 @@ app.factory('contextScope', [
     'deviceFinder',
     'deviceMapper',
 
+    'sensorContext',
+    'sensorFinder',
+    'sensorMapper',
+
     function (
         $rootScope,
 
@@ -45,7 +49,11 @@ app.factory('contextScope', [
 
         deviceContext,
         deviceFinder,
-        deviceMapper
+        deviceMapper,
+
+        sensorContext,
+        sensorFinder,
+        sensorMapper
     ) {
 
     var context = $rootScope.$new();

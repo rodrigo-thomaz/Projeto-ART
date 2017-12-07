@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', function ($http, ngAuthSettings, $rootScope, stompService, contextScope) {
+app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'contextScope', 'sensorConstant', function ($http, ngAuthSettings, $rootScope, stompService, contextScope, sensorConstant) {
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -8,27 +8,15 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
     var _initializing = false;
     var _initialized  = false;
 
-    var getAllByApplicationIdApiUri = 'api/Sensor/getAllByApplicationId';
-    var getAllByApplicationIdCompletedTopic = 'Sensor.GetAllByApplicationIdViewCompleted';
     var getAllByApplicationIdCompletedSubscription = null;
-
-    var setUnitMeasurementApiUri = 'api/sensor/setUnitMeasurement';
-    var setUnitMeasurementCompletedTopic = 'Sensor.SetUnitMeasurementViewCompleted';
-    var setUnitMeasurementCompletedSubscription = null;
-    var setUnitMeasurementCompletedEventName = 'sensorService.onSetUnitMeasurementCompleted_Id_';
-
-    var setLabelApiUri = 'api/sensor/setLabel';
-    var setLabelCompletedTopic = 'Sensor.SetLabelViewCompleted';
+    var setSensorUnitMeasurementScaleCompletedSubscription = null;
     var setLabelCompletedSubscription = null;
-    var setLabelCompletedEventName = 'sensorService.onSetLabelCompleted_Id_';
-
-    var initializedEventName = 'sensorService.onInitialized';
 
     var onConnected = function () {
 
-        getAllByApplicationIdCompletedSubscription = stompService.subscribe(getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
-        setUnitMeasurementCompletedSubscription = stompService.subscribeAllViews(setUnitMeasurementCompletedTopic, onSetUnitMeasurementCompleted);
-        setLabelCompletedSubscription = stompService.subscribeAllViews(setLabelCompletedTopic, onSetLabelCompleted);
+        getAllByApplicationIdCompletedSubscription = stompService.subscribe(sensorConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
+        setSensorUnitMeasurementScaleCompletedSubscription = stompService.subscribeAllViews(sensorConstant.setSensorUnitMeasurementScaleCompletedTopic, onSetSensorUnitMeasurementScaleCompleted);
+        setLabelCompletedSubscription = stompService.subscribeAllViews(sensorConstant.setLabelCompletedTopic, onSetLabelCompleted);
 
         if (!_initializing && !_initialized) {
             _initializing = true;
@@ -41,17 +29,17 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
     };
 
     var getAllByApplicationId = function () {
-        return $http.post(serviceBase + getAllByApplicationIdApiUri).then(function (results) {
+        return $http.post(serviceBase + sensorConstant.getAllByApplicationIdApiUri).then(function (results) {
             //alert('envio bem sucedido');
         });
     };     
 
-    var setUnitMeasurement = function (sensorTempDSFamilyId, unitMeasurementId) {
+    var setSensorUnitMeasurementScale = function (sensorTempDSFamilyId, unitMeasurementId) {
         var data = {
             sensorTempDSFamilyId: sensorTempDSFamilyId,
             unitMeasurementId: unitMeasurementId,
         }
-        return $http.post(serviceBase + setUnitMeasurementApiUri, data).then(function (results) {
+        return $http.post(serviceBase + sensorConstant.setUnitMeasurementApiUri, data).then(function (results) {
             return results;
         });
     };
@@ -61,7 +49,7 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
             sensorTempDSFamilyId: sensorTempDSFamilyId,
             label: label,
         }
-        return $http.post(serviceBase + setLabelApiUri, data).then(function (results) {
+        return $http.post(serviceBase + sensorConstant.setLabelApiUri, data).then(function (results) {
             return results;
         });
     };  
@@ -83,10 +71,10 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
 
         getAllByApplicationIdCompletedSubscription.unsubscribe();
 
-        $rootScope.$emit(initializedEventName);
+        $rootScope.$emit(sensorConstant.getAllByApplicationIdCompletedEventName);
     }
 
-    var onSetUnitMeasurementCompleted = function (payload) {
+    var onSetSensorUnitMeasurementScaleCompleted = function (payload) {
 
         var result = JSON.parse(payload.body);
         var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
@@ -106,14 +94,14 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
         sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
         sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
 
-        $rootScope.$emit(setUnitMeasurementCompletedEventName + result.sensorTempDSFamilyId, result);
+        $rootScope.$emit(sensorConstant.setSensorUnitMeasurementScaleCompletedEventName + result.sensorTempDSFamilyId, result);
     }    
 
     var onSetLabelCompleted = function (payload) {
         var result = JSON.parse(payload.body);
         var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
         sensor.label = result.label;
-        $rootScope.$emit(setLabelCompletedEventName + result.sensorTempDSFamilyId, result);
+        $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.sensorTempDSFamilyId, result);
     }   
 
     $rootScope.$on('$destroy', function () {
@@ -128,13 +116,10 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
     // serviceFactory
         
     serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;    
         
     serviceFactory.setLabel = setLabel;   
-    serviceFactory.setLabelCompletedEventName = setLabelCompletedEventName;
 
-    serviceFactory.setUnitMeasurement = setUnitMeasurement;
-    serviceFactory.setUnitMeasurementCompletedEventName = setUnitMeasurementCompletedEventName;
+    serviceFactory.setSensorUnitMeasurementScale = setSensorUnitMeasurementScale;
 
     return serviceFactory;
 
