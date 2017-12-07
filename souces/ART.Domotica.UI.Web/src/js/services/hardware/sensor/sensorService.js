@@ -1,88 +1,89 @@
 ﻿'use strict';
-app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorContext', 'sensorConstant', function ($http, ngAuthSettings, $rootScope, stompService, sensorContext, sensorConstant) {
+app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorContext', 'sensorConstant',
+    function ($http, ngAuthSettings, $rootScope, stompService, sensorContext, sensorConstant) {
 
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+        var serviceFactory = {};
 
-    var serviceFactory = {};    
+        var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var _initializing = false;
-    var _initialized  = false;
+        var _initializing = false;
+        var _initialized = false;
 
-    var getAllByApplicationIdCompletedSubscription = null;
-    var setLabelCompletedSubscription = null;
+        var getAllByApplicationIdCompletedSubscription = null;
+        var setLabelCompletedSubscription = null;
 
-    var onConnected = function () {
+        var onConnected = function () {
 
-        getAllByApplicationIdCompletedSubscription = stompService.subscribe(sensorConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
-        setLabelCompletedSubscription = stompService.subscribeAllViews(sensorConstant.setLabelCompletedTopic, onSetLabelCompleted);
+            getAllByApplicationIdCompletedSubscription = stompService.subscribe(sensorConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
+            setLabelCompletedSubscription = stompService.subscribeAllViews(sensorConstant.setLabelCompletedTopic, onSetLabelCompleted);
 
-        if (!_initializing && !_initialized) {
-            _initializing = true;
-            getAllByApplicationId();
+            if (!_initializing && !_initialized) {
+                _initializing = true;
+                getAllByApplicationId();
+            }
         }
-    }   
 
-    var initialized = function () {
-        return _initialized;
-    };
+        var initialized = function () {
+            return _initialized;
+        };
 
-    var getAllByApplicationId = function () {
-        return $http.post(serviceBase + sensorConstant.getAllByApplicationIdApiUri).then(function (results) {
-            //alert('envio bem sucedido');
+        var getAllByApplicationId = function () {
+            return $http.post(serviceBase + sensorConstant.getAllByApplicationIdApiUri).then(function (results) {
+                //alert('envio bem sucedido');
+            });
+        };
+
+        var setLabel = function (sensorTempDSFamilyId, label) {
+            var data = {
+                sensorTempDSFamilyId: sensorTempDSFamilyId,
+                label: label,
+            }
+            return $http.post(serviceBase + sensorConstant.setLabelApiUri, data).then(function (results) {
+                return results;
+            });
+        };
+
+        var onGetAllByApplicationIdCompleted = function (payload) {
+
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
+            var data = JSON.parse(dataUTF8);
+
+            for (var i = 0; i < data.length; i++) {
+                sensorContext.sensor.push(data[i]);
+            }
+
+            _initializing = false;
+            _initialized = true;
+
+            clearOnConnected();
+
+            getAllByApplicationIdCompletedSubscription.unsubscribe();
+
+            $rootScope.$emit(sensorConstant.getAllByApplicationIdCompletedEventName);
+        }
+
+        var onSetLabelCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
+            sensor.label = result.label;
+            $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.sensorTempDSFamilyId, result);
+        }
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
+            setLabelCompletedSubscription.unsubscribe();
         });
-    };     
 
-    var setLabel = function (sensorTempDSFamilyId, label) {
-        var data = {
-            sensorTempDSFamilyId: sensorTempDSFamilyId,
-            label: label,
-        }
-        return $http.post(serviceBase + sensorConstant.setLabelApiUri, data).then(function (results) {
-            return results;
-        });
-    };  
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
 
-    var onGetAllByApplicationIdCompleted = function (payload) {
+        // stompService
+        if (stompService.connected()) onConnected();
 
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
+        // serviceFactory
 
-        for (var i = 0; i < data.length; i++) {
-            sensorContext.sensor.push(data[i]);
-        }
+        serviceFactory.initialized = initialized;
+        serviceFactory.setLabel = setLabel;
 
-        _initializing = false;
-        _initialized = true;
+        return serviceFactory;
 
-        sensorContext.sensorsLoaded = true;
-        clearOnConnected();
-
-        getAllByApplicationIdCompletedSubscription.unsubscribe();
-
-        $rootScope.$emit(sensorConstant.getAllByApplicationIdCompletedEventName);
-    }    
-
-    var onSetLabelCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
-        sensor.label = result.label;
-        $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.sensorTempDSFamilyId, result);
-    }   
-
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-    });
-
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
-
-    // stompService
-    if (stompService.connected()) onConnected();
-
-    // serviceFactory
-        
-    serviceFactory.initialized = initialized;        
-    serviceFactory.setLabel = setLabel;   
-
-    return serviceFactory;
-
-}]);
+    }]);
