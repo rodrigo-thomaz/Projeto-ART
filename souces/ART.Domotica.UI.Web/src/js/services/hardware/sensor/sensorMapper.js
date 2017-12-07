@@ -28,7 +28,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
                 }
             }
 
-            sensorContext.deviceLoaded = true;
+            sensorContext.sensorLoaded = true;
             sensorContext.sensorTriggerLoaded = true;
             sensorContext.sensorUnitMeasurementScaleLoaded = true;
             sensorContext.sensorTempDSFamilyLoaded = true;

@@ -60,11 +60,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                     var sensorInDevice = deviceContext.sensorInDevice[i];
                     var sensor = sensorFinder.getSensorByKey(sensorInDevice.sensorId);
                     sensorInDevice.sensor = sensor;
-                    delete sensorInDevice.sensorId; // removendo a foreing key
-                    if (sensor.sensorsInDevice === undefined) {
-                        sensor.sensorsInDevice = [];
-                    }
-                    sensor.sensorsInDevice.push(sensorInDevice);
+                    sensor.sensorInDevice = sensorInDevice;
                 }
             }
         };
