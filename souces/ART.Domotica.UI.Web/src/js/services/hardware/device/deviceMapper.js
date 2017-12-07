@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'globalizationContext', 'globalizationFinder', 'sensorContext',
-    function ($rootScope, deviceContext, deviceConstant, globalizationContext, globalizationFinder, sensorContext) {
+app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'globalizationContext', 'globalizationFinder', 'sensorContext', 'sensorFinder',
+    function ($rootScope, deviceContext, deviceConstant, globalizationContext, globalizationFinder, sensorContext, sensorFinder) {
 
         var serviceFactory = {};
 
@@ -51,6 +51,24 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             }
         };
 
+        var mapper_SensorInDevice_Sensor_Init = false;
+        var mapper_SensorInDevice_Sensor = function () {
+            if (!mapper_SensorInDevice_Sensor_Init && deviceContext.sensorInDeviceLoaded && sensorContext.sensorLoaded) {
+                mapper_SensorInDevice_Sensor_Init = true;
+                sensorLoadedUnbinding();
+                for (var i = 0; i < deviceContext.sensorInDevice.length; i++) {
+                    var sensorInDevice = deviceContext.sensorInDevice[i];
+                    var sensor = sensorFinder.getSensorByKey(sensorInDevice.sensorId);
+                    sensorInDevice.sensor = sensor;
+                    delete sensorInDevice.sensorId; // removendo a foreing key
+                    if (sensor.sensorsInDevice === undefined) {
+                        sensor.sensorsInDevice = [];
+                    }
+                    sensor.sensorsInDevice.push(sensorInDevice);
+                }
+            }
+        };
+
         // *** Navigation Properties Mappers ***
 
 
@@ -60,6 +78,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             deviceGetAllByApplicationIdCompletedSubscription();
             loadAll();
             mapper_DeviceNTP_TimeZone();
+            mapper_SensorInDevice_Sensor();
         }
 
         var deviceGetAllByApplicationIdCompletedSubscription = $rootScope.$on(deviceConstant.getAllByApplicationIdCompletedEventName, onDeviceGetAllByApplicationIdCompleted);
@@ -78,7 +97,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
         })
 
         var sensorLoadedUnbinding = sensorContext.$watch('sensorLoaded', function (newValue, oldValue) {
-
+            mapper_SensorInDevice_Sensor();
         })
 
         // *** Watches
