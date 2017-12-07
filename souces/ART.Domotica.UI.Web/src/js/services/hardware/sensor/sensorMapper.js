@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'siContext', 'siFinder', 'unitMeasurementScaleConstant',
-    function ($rootScope, sensorContext, sensorConstant, sensorFinder, siContext, siFinder, unitMeasurementScaleConstant) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'siContext', 'siFinder',
+    function ($rootScope, sensorContext, sensorConstant, sensorFinder, siContext, siFinder) {
 
     var serviceFactory = {};    
 
