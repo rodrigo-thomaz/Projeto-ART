@@ -48,6 +48,7 @@ app.factory('contextScope', [
     'sensorTempDSFamilyService',
     'sensorUnitMeasurementScaleService',
     'sensorTriggerService',
+    'sensorService',
 
     function (
 
@@ -97,7 +98,8 @@ app.factory('contextScope', [
         sensorTempDSFamilyResolutionService,
         sensorTempDSFamilyService,
         sensorUnitMeasurementScaleService,
-        sensorTriggerService
+        sensorTriggerService,
+        sensorService
     ) {
 
     var context = $rootScope.$new();
