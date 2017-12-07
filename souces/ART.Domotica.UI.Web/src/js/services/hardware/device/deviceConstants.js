@@ -22,3 +22,15 @@ app.constant('deviceConstant', {
     setLabelCompletedEventName: 'deviceService.onSetLabelCompleted_Id_',
 
 });
+
+app.constant('deviceNTPConstant', {
+
+    setTimeZoneApiUri: 'api/deviceNTP/setTimeZone',
+    setTimeZoneCompletedTopic: 'DeviceNTP.SetTimeZoneViewCompleted',
+    setTimeZoneCompletedEventName: 'deviceService.onSetTimeZoneCompleted_Id_',
+
+    setUpdateIntervalInMilliSecondApiUri: 'api/deviceNTP/setUpdateIntervalInMilliSecond',
+    setUpdateIntervalInMilliSecondCompletedTopic: 'DeviceNTP.SetUpdateIntervalInMilliSecondViewCompleted',
+    setUpdateIntervalInMilliSecondCompletedEventName: 'deviceService.onSetUpdateIntervalInMilliSecondCompleted_Id_',   
+
+});

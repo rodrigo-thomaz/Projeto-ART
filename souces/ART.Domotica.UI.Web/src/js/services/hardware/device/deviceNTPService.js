@@ -1,70 +1,69 @@
 ﻿'use strict';
-app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceService', function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceService) {
-    
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceFinder', 'deviceNTPConstant',
+    function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceFinder, deviceNTPConstant) {
 
-    var initialized = false;
+        var serviceFactory = {};
 
-    var serviceFactory = {};    
+        var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var setTimeZoneCompletedSubscription = null;
-    var setUpdateIntervalInMilliSecondCompletedSubscription = null;
+        var setTimeZoneCompletedSubscription = null;
+        var setUpdateIntervalInMilliSecondCompletedSubscription = null;
 
-    var setTimeZone = function (deviceId, timeZoneId) {
-        var data = {
-            deviceId: deviceId,
-            timeZoneId: timeZoneId,
+        var setTimeZone = function (deviceId, timeZoneId) {
+            var data = {
+                deviceId: deviceId,
+                timeZoneId: timeZoneId,
+            }
+            return $http.post(serviceBase + deviceNTPConstant.setTimeZoneApiUri, data).then(function (results) {
+                return results;
+            });
+        };
+
+        var setUpdateIntervalInMilliSecond = function (deviceId, updateIntervalInMilliSecond) {
+            var data = {
+                deviceId: deviceId,
+                updateIntervalInMilliSecond: updateIntervalInMilliSecond,
+            }
+            return $http.post(serviceBase + deviceNTPConstant.setUpdateIntervalInMilliSecondApiUri, data).then(function (results) {
+                return results;
+            });
+        };
+
+        var onConnected = function () {
+            setTimeZoneCompletedSubscription = stompService.subscribeAllViews(deviceNTPConstant.setTimeZoneCompletedTopic, onSetTimeZoneCompleted);
+            setUpdateIntervalInMilliSecondCompletedSubscription = stompService.subscribeAllViews(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedTopic, onSetUpdateIntervalInMilliSecondCompleted);
         }
-        return $http.post(serviceBase + 'api/deviceNTP/setTimeZone', data).then(function (results) {
-            return results;
-        });
-    };
 
-    var setUpdateIntervalInMilliSecond = function (deviceId, updateIntervalInMilliSecond) {
-        var data = {
-            deviceId: deviceId,
-            updateIntervalInMilliSecond: updateIntervalInMilliSecond,
+        var onSetTimeZoneCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var device = deviceFinder.getDeviceByKey(result.deviceId);
+            device.deviceNTP.timeZoneId = result.timeZoneId;
+            $rootScope.$emit(deviceNTPConstant.setTimeZoneCompletedEventName + result.deviceId, result);
+        };
+
+        var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var device = deviceFinder.getDeviceByKey(result.deviceId);
+            device.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
+            $rootScope.$emit(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + result.deviceId, result);
         }
-        return $http.post(serviceBase + 'api/deviceNTP/setUpdateIntervalInMilliSecond', data).then(function (results) {
-            return results;
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
+            setTimeZoneCompletedSubscription.unsubscribe();
+            setUpdateIntervalInMilliSecondCompletedSubscription.unsubscribe();
         });
-    };
 
-    var onConnected = function () {
-        setTimeZoneCompletedSubscription = stompService.subscribeAllViews('DeviceNTP.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
-        setUpdateIntervalInMilliSecondCompletedSubscription = stompService.subscribeAllViews('DeviceNTP.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
-    }
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
 
-    var onSetTimeZoneCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var device = deviceService.getDeviceById(result.deviceId);
-        device.deviceNTP.timeZoneId = result.timeZoneId;
-        $rootScope.$emit('deviceService_onSetTimeZoneCompleted_Id_' + result.deviceId, result);
-    };
+        // stompService
+        if (stompService.connected()) onConnected();
 
-    var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var device = deviceService.getDeviceById(result.deviceId);
-        device.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
-        $rootScope.$emit('deviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + result.deviceId, result);
-    }
-    
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-        setTimeZoneCompletedSubscription.unsubscribe();
-        setUpdateIntervalInMilliSecondCompletedSubscription.unsubscribe();
-    });
+        // serviceFactory    
 
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
+        serviceFactory.setTimeZone = setTimeZone;
+        serviceFactory.setUpdateIntervalInMilliSecond = setUpdateIntervalInMilliSecond;
 
-    // stompService
-    if (stompService.connected()) onConnected();
+        return serviceFactory;
 
-    // serviceFactory    
-
-    serviceFactory.setTimeZone = setTimeZone;
-    serviceFactory.setUpdateIntervalInMilliSecond = setUpdateIntervalInMilliSecond;
-
-    return serviceFactory;
-
-}]);
+    }]);
