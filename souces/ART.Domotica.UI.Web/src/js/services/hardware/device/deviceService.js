@@ -87,7 +87,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
                     device.epochTimeUtc = data.epochTimeUtc;
                     device.wifiQuality = data.wifiQuality;
                     device.localIPAddress = data.localIPAddress;
-                    updateSensors(device, data.sensorTempDSFamilys);
+                    updateSensors(device, data.sensorTempDSFamilies);
                     break;
                 }
             }

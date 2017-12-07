@@ -41,7 +41,7 @@
 
             //SensorTempDSFamilyResolution
             HasRequired(x => x.SensorTempDSFamilyResolution)
-                .WithMany(x => x.SensorTempDSFamilys)
+                .WithMany(x => x.SensorTempDSFamilies)
                 .HasForeignKey(x => x.SensorTempDSFamilyResolutionId)
                 .WillCascadeOnDelete(false);
 

@@ -35,6 +35,24 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant',
         sensorContext.sensorTempDSFamilyResolutionLoaded = true;
     }
 
+
+    var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = false;
+    var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution = function () {
+        if (!mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init && sensorContext.sensorTempDSFamilyLoaded && sensorContext.sensorTempDSFamilyResolutionLoaded) {
+            mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = true;
+            for (var i = 0; i < sensorContext.sensorTempDSFamily.length; i++) {
+                var sensorTempDSFamily = sensorContext.sensorTempDSFamily[i];
+                var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolutionId);
+                sensorTempDSFamily.sensorTempDSFamilyResolution = sensorTempDSFamilyResolution;
+                delete sensorTempDSFamily.sensorTempDSFamilyResolutionId; // removendo a foreing key
+                if (sensorTempDSFamilyResolution.sensorTempDSFamilies === undefined) {
+                    sensorTempDSFamilyResolution.sensorTempDSFamilies = [];
+                }
+                sensorTempDSFamilyResolution.sensorTempDSFamilies.push(sensorTempDSFamily);
+            }
+        }
+    };  
+
     // *** Navigation Properties Mappers ***
 
 

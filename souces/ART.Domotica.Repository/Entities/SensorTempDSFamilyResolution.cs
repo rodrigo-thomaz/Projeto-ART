@@ -43,7 +43,7 @@
             get; set;
         }
 
-        public ICollection<SensorTempDSFamily> SensorTempDSFamilys
+        public ICollection<SensorTempDSFamily> SensorTempDSFamilies
         {
             get; set;
         }
