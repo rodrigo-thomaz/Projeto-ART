@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'globalizationContext', 'globalizationFinder', 'timeZoneConstant', 'sensorConstant',
-    function ($rootScope, deviceContext, deviceConstant, globalizationContext, globalizationFinder, timeZoneConstant, sensorConstant) {
+app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'globalizationContext', 'globalizationFinder', 'sensorContext',
+    function ($rootScope, deviceContext, deviceConstant, globalizationContext, globalizationFinder, sensorContext) {
 
         var serviceFactory = {};
 
@@ -37,6 +37,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
         var mapper_DeviceNTP_TimeZone = function () {
             if (!mapper_DeviceNTP_TimeZone_Init && deviceContext.deviceLoaded && globalizationContext.timeZoneLoaded) {
                 mapper_DeviceNTP_TimeZone_Init = true;
+                timeZoneLoadedUnbinding();
                 for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
                     var deviceNTP = deviceContext.deviceNTP[i];
                     var timeZone = globalizationFinder.getTimeZoneByKey(deviceNTP.timeZoneId);
@@ -61,27 +62,26 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             mapper_DeviceNTP_TimeZone();
         }
 
-        var onTimeZoneGetAllCompleted = function (event, data) {
-            timeZoneGetAllCompletedSubscription();
-            mapper_DeviceNTP_TimeZone();
-        }
-
-        var onSensorGetAllByApplicationIdCompleted = function (event, data) {
-
-        }
-
         var deviceGetAllByApplicationIdCompletedSubscription = $rootScope.$on(deviceConstant.getAllByApplicationIdCompletedEventName, onDeviceGetAllByApplicationIdCompleted);
-        var timeZoneGetAllCompletedSubscription = $rootScope.$on(timeZoneConstant.getAllCompletedEventName, onTimeZoneGetAllCompleted);
-        var sensorGetAllByApplicationIdCompletedSubscription = $rootScope.$on(sensorConstant.getAllByApplicationIdCompletedEventName, onSensorGetAllByApplicationIdCompleted);
-
+        
         $rootScope.$on('$destroy', function () {
             deviceGetAllByApplicationIdCompletedSubscription();
-            timeZoneGetAllCompletedSubscription();
-            sensorGetAllByApplicationIdCompletedSubscription();
         });
 
         // *** Events Subscriptions
 
+
+        // *** Watches
+
+        var timeZoneLoadedUnbinding = globalizationContext.$watch('timeZoneLoaded', function (newValue, oldValue) {
+            mapper_DeviceNTP_TimeZone();
+        })
+
+        var sensorLoadedUnbinding = sensorContext.$watch('sensorLoaded', function (newValue, oldValue) {
+
+        })
+
+        // *** Watches
 
         return serviceFactory;
 
