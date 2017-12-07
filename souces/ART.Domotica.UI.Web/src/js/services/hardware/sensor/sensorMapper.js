@@ -23,6 +23,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant',
             for (var j = 0; j < sensor.sensorTriggers.length; j++) {
                 var sensorTrigger = sensor.sensorTriggers[j];
                 sensorTrigger.sensor = sensor;
+                delete sensorTrigger.sensorId; // removendo a foreing key
                 sensorContext.sensorTrigger.push(sensorTrigger);
             }
         }
