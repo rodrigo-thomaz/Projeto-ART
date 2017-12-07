@@ -1,8 +1,6 @@
 ﻿'use strict';
 app.factory('contextScope', [
 
-    '$rootScope',
-
     'globalizationContext',
     'globalizationFinder',
     'globalizationMapper',
@@ -10,13 +8,13 @@ app.factory('contextScope', [
 
     'localeContext',
     'localeFinder',
-    'localeMapper', 
+    'localeMapper',
     'continentService',
     'countryService',
 
     'siContext',
     'siFinder',
-    'siMapper',   
+    'siMapper',
     'numericalScalePrefixService',
     'numericalScaleService',
     'numericalScaleTypeCountryService',
@@ -52,8 +50,6 @@ app.factory('contextScope', [
 
     function (
 
-        $rootScope,
-
         globalizationContext,
         globalizationFinder,
         globalizationMapper,
@@ -67,7 +63,7 @@ app.factory('contextScope', [
 
         siContext,
         siFinder,
-        siMapper,        
+        siMapper,
         numericalScalePrefixService,
         numericalScaleService,
         numericalScaleTypeCountryService,
@@ -102,8 +98,8 @@ app.factory('contextScope', [
         sensorService
     ) {
 
-    var context = $rootScope.$new();
-        
-    return context;
+        var result = {};
 
-}]);
+        return result;
+
+    }]);
