@@ -18,9 +18,11 @@ namespace ART.Domotica.Repository.Repositories
 
         public async Task<List<Sensor>> GetAllByApplicationId(Guid applicationId)
         {
-            // Arrumar depois da Refatoração !!!
-            return await _context.Set<Sensor>()
+            return await _context.Sensor
                 .Include(x => x.SensorUnitMeasurementScale)
+                .Include(x => x.SensorTriggers)
+                .Include(x => x.SensorTempDSFamily)
+                //.Where(x => x.DevicesInApplication.All(y => y.ApplicationId == applicationId))
                 .ToListAsync();
         }
 
