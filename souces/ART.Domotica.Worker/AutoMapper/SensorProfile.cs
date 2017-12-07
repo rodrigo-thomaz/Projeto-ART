@@ -1,7 +1,5 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
-    using System.Linq;
-
     using ART.Domotica.Contract;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
@@ -39,13 +37,7 @@
                 .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMax))
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id));
 
-            CreateMap<SensorSetUnitMeasurementRequestContract, SensorSetUnitMeasurementRequestIoTContract>();
             CreateMap<SensorSetLabelRequestContract, SensorSetLabelModel>();
-
-            CreateMap<Sensor, SensorSetUnitMeasurementModel>()
-                .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.SensorsInDevice.Single().DeviceSensorsId));
-                //.ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId));
         }
 
         #endregion Constructors

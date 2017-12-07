@@ -1,11 +1,9 @@
 ﻿'use strict';
-app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorFinder', 'sensorTempDSFamilyConstant', 'unitMeasurementService', 'unitMeasurementConverter', 'deviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorFinder, sensorTempDSFamilyConstant, unitMeasurementService, unitMeasurementConverter, deviceService) {
+app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorFinder', 'sensorTempDSFamilyConstant', function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorFinder, sensorTempDSFamilyConstant) {
 
     var serviceFactory = {};   
 
     var serviceBase = ngAuthSettings.distributedServicesUri;
-
-    var initialized = false;    
 
     var setResolutionCompletedSubscription = null;
 
@@ -20,12 +18,7 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
     };
 
     var onConnected = function () {
-
         setResolutionCompletedSubscription = stompService.subscribeAllViews(sensorTempDSFamilyConstant.setResolutionCompletedTopic, onSetResolutionCompleted);
-                
-        if (!initialized) {
-            initialized = true;            
-        }
     }      
 
     var onSetResolutionCompleted = function (payload) {
@@ -37,7 +30,6 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
 
     $rootScope.$on('$destroy', function () {
         clearOnConnected();
-
         setResolutionCompletedSubscription();
     });
 

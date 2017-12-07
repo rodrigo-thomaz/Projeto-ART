@@ -28,6 +28,8 @@ app.factory('contextScope', [
     'sensorFinder',
     'sensorMapper',
     'sensorTempDSFamilyResolutionService',
+    'sensorTempDSFamilyService',
+    'sensorUnitMeasurementScaleService',
 
     function (
 
@@ -57,7 +59,9 @@ app.factory('contextScope', [
         sensorContext,
         sensorFinder,
         sensorMapper,
-        sensorTempDSFamilyResolutionService
+        sensorTempDSFamilyResolutionService,
+        sensorTempDSFamilyService,
+        sensorUnitMeasurementScaleService
     ) {
 
     var context = $rootScope.$new();

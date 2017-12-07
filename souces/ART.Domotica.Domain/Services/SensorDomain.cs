@@ -10,7 +10,6 @@ using ART.Domotica.Repository.Repositories;
 using System.Linq;
 using Autofac;
 using ART.Domotica.Repository;
-using ART.Domotica.Enums.SI;
 using ART.Domotica.Repository.Interfaces.SI;
 using ART.Domotica.Repository.Repositories.SI;
 
@@ -157,30 +156,7 @@ namespace ART.Domotica.Domain.Services
             }
 
             return data;
-        }
-
-        public async Task<Sensor> SetUnitMeasurement(Guid sensorId, UnitMeasurementEnum unitMeasurementId)
-        {
-            var sensorTempDSFamilyEntity = await _sensorRepository.GetByKey(sensorId);
-
-            if (sensorTempDSFamilyEntity == null)
-            {
-                throw new Exception("Sensor not found");
-            }
-
-            var unitMeasurementEntity = await _unitMeasurementRepository.GetByKey(unitMeasurementId, UnitMeasurementTypeEnum.Temperature);
-
-            if (unitMeasurementEntity == null)
-            {
-                throw new Exception("UnitMeasurement not found");
-            }
-
-            //sensorTempDSFamilyEntity.UnitMeasurementId = unitMeasurementEntity.Id;
-
-            await _sensorRepository.Update(sensorTempDSFamilyEntity);
-
-            return sensorTempDSFamilyEntity;
-        }
+        }       
 
         public async Task<List<Sensor>> GetAllByHardwareInApplicationId(Guid applicationId, Guid deviceId)
         {

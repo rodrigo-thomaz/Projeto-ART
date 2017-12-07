@@ -29,16 +29,7 @@ namespace ART.Domotica.Producer.Services
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
                 _model.BasicPublish("", SensorConstants.GetAllByApplicationIdQueueName, null, payload);
             });            
-        }
-
-        public async Task SetUnitMeasurement(AuthenticatedMessageContract<SensorSetUnitMeasurementRequestContract> message)
-        {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorConstants.SetUnitMeasurementQueueName, null, payload);
-            });
-        }
+        }      
 
         public async Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message)
         {
@@ -61,13 +52,6 @@ namespace ART.Domotica.Producer.Services
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
-
-            _model.QueueDeclare(
-                 queue: SensorConstants.SetUnitMeasurementQueueName
-               , durable: true
-               , exclusive: false
-               , autoDelete: false
-               , arguments: null);
 
             _model.QueueDeclare(
                  queue: SensorConstants.SetLabelQueueName

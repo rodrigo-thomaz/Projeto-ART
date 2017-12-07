@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
 
     using ART.Domotica.Enums;
-    using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities;
 
     public interface ISensorDomain
@@ -25,8 +24,6 @@
         Task<Sensor> SetAlarmCelsius(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, decimal alarmCelsius);
 
         Task<Sensor> SetAlarmOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmOn);
-
-        Task<Sensor> SetUnitMeasurement(Guid sensorId, UnitMeasurementEnum unitMeasurementId);
 
         #endregion Methods
     }

@@ -13,8 +13,6 @@
 
         Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message);
 
-        Task SetUnitMeasurement(AuthenticatedMessageContract<SensorSetUnitMeasurementRequestContract> message);
-
         #endregion Methods
     }
 }
