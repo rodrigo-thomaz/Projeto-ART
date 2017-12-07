@@ -30,7 +30,7 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
 
     $rootScope.$on('$destroy', function () {
         clearOnConnected();
-        setResolutionCompletedSubscription();
+        setResolutionCompletedSubscription.unsubscribe();
     });
 
     var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected); 

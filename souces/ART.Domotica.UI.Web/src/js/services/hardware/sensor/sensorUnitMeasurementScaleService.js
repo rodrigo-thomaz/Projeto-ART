@@ -62,7 +62,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
-            setValueSubscription();
+            setValueSubscription.unsubscribe();
         });
 
         var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       

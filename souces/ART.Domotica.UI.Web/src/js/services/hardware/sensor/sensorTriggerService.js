@@ -81,9 +81,9 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
-            setAlarmOnCompletedSubscription();
-            setAlarmCelsiusCompletedSubscription();
-            setAlarmBuzzerOnCompletedSubscription();
+            setAlarmOnCompletedSubscription.unsubscribe();
+            setAlarmCelsiusCompletedSubscription.unsubscribe();
+            setAlarmBuzzerOnCompletedSubscription.unsubscribe();
         });
 
         var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected); 

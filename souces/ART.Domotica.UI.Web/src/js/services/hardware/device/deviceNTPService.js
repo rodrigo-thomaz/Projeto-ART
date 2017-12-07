@@ -7,6 +7,9 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
     var serviceFactory = {};    
 
+    var setTimeZoneCompletedSubscription = null;
+    var setUpdateIntervalInMilliSecondCompletedSubscription = null;
+
     var setTimeZone = function (deviceId, timeZoneId) {
         var data = {
             deviceId: deviceId,
@@ -28,8 +31,8 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     };
 
     var onConnected = function () {
-        stompService.subscribeAllViews('DeviceNTP.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
-        stompService.subscribeAllViews('DeviceNTP.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
+        setTimeZoneCompletedSubscription = stompService.subscribeAllViews('DeviceNTP.SetTimeZoneViewCompleted', onSetTimeZoneCompleted);
+        setUpdateIntervalInMilliSecondCompletedSubscription = stompService.subscribeAllViews('DeviceNTP.SetUpdateIntervalInMilliSecondViewCompleted', onSetUpdateIntervalInMilliSecondCompleted);
     }
 
     var onSetTimeZoneCompleted = function (payload) {
@@ -48,9 +51,11 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
     
     $rootScope.$on('$destroy', function () {
         clearOnConnected();
+        setTimeZoneCompletedSubscription.unsubscribe();
+        setUpdateIntervalInMilliSecondCompletedSubscription.unsubscribe();
     });
 
-    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
+    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
 
     // stompService
     if (stompService.connected()) onConnected();
