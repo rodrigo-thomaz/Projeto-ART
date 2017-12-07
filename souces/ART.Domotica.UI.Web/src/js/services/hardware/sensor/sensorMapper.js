@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'sensorTempDSFamilyResolutionConstant',
-    function ($rootScope, sensorContext, sensorConstant, sensorFinder, sensorTempDSFamilyResolutionConstant) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'sensorTempDSFamilyResolutionConstant', 'siContext', 'siFinder',
+    function ($rootScope, sensorContext, sensorConstant, sensorFinder, sensorTempDSFamilyResolutionConstant, siContext, siFinder) {
 
     var serviceFactory = {};    
 
@@ -49,6 +49,23 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
                     sensorTempDSFamilyResolution.sensorTempDSFamilies = [];
                 }
                 sensorTempDSFamilyResolution.sensorTempDSFamilies.push(sensorTempDSFamily);
+            }
+        }
+    };  
+
+    var mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init = false;
+    var mapper_SensorUnitMeasurementScale_UnitMeasurementScale = function () {
+        if (!mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init && sensorContext.sensorUnitMeasurementScaleLoaded && siContext.unitMeasurementScaleLoaded) {
+            mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init = true;
+            for (var i = 0; i < sensorContext.sensorUnitMeasurementScale.length; i++) {
+                var sensorUnitMeasurementScale = sensorContext.sensorUnitMeasurementScale[i];
+                var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
+                sensorUnitMeasurementScale.unitMeasurementScale = unitMeasurementScale;
+                delete sensorUnitMeasurementScale.unitMeasurementScaleId; // removendo a foreing key
+                if (unitMeasurementScale.sensorUnitMeasurementScales === undefined) {
+                    unitMeasurementScale.sensorUnitMeasurementScales = [];
+                }
+                unitMeasurementScale.sensorUnitMeasurementScales.push(sensorUnitMeasurementScale);
             }
         }
     };  
