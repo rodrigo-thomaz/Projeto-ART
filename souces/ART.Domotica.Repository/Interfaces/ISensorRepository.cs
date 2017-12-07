@@ -15,7 +15,7 @@
 
         Task<List<Sensor>> GetAllByDeviceId(Guid deviceId);
 
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid sensorId);
+        Task<SensorInDevice> GetDeviceFromSensor(Guid sensorId);
 
         #endregion Methods
     }

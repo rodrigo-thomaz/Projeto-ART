@@ -19,17 +19,17 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             deviceSensors.device = device;
             deviceContext.deviceSensors.push(deviceSensors);
 
-            for (var j = 0; j < deviceSensors.sensorsInDevice.length; j++) {
-                var sensorsInDevice = deviceSensors.sensorsInDevice[j];
-                sensorsInDevice.deviceSensors = deviceSensors;
-                deviceContext.sensorsInDevice.push(sensorsInDevice);
+            for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
+                var sensorInDevice = deviceSensors.sensorInDevice[j];
+                sensorInDevice.deviceSensors = deviceSensors;
+                deviceContext.sensorInDevice.push(sensorInDevice);
             }
         }
 
         deviceContext.deviceLoaded = true;
         deviceContext.deviceNTPLoaded = true;
         deviceContext.deviceSensorsLoaded = true;
-        deviceContext.sensorsInDeviceLoaded = true;
+        deviceContext.sensorInDeviceLoaded = true;
     }
 
     var mapper_DeviceNTP_TimeZone_Init = false;

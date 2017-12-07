@@ -1,10 +1,17 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
 
-    public class SensorsInDeviceGetModel
+    using ART.Infra.CrossCutting.Repository;
+
+    public class SensorInDevice : IEntity
     {
         #region Properties
+
+        public DeviceSensors DeviceSensors
+        {
+            get; set;
+        }
 
         public Guid DeviceSensorsId
         {
@@ -12,6 +19,11 @@
         }
 
         public short Ordination
+        {
+            get; set;
+        }
+
+        public Sensor Sensor
         {
             get; set;
         }

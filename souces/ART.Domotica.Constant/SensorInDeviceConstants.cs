@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Constant
 {
-    public static class SensorsInDeviceConstants
+    public static class SensorInDeviceConstants
     {
     }
 }

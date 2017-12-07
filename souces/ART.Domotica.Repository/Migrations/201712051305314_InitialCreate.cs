@@ -19,7 +19,7 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.HardwaresInProject", new[] { "ApplicationId", "DeviceId" }, "dbo.DeviceInApplication");
             DropForeignKey("dbo.HardwaresInProject", "CreateByApplicationUserId", "dbo.ApplicationUser");
             DropForeignKey("dbo.DeviceInApplication", "HardwareId", "dbo.HardwareBase");
-            DropForeignKey("dbo.SensorsInDevice", "SensorId", "dbo.Sensor");
+            DropForeignKey("dbo.SensorInDevice", "SensorId", "dbo.Sensor");
             DropForeignKey("dbo.SensorTrigger", "SensorId", "dbo.Sensor");
             DropForeignKey("dbo.SensorTempDSFamily", "SensorTempDSFamilyResolutionId", "dbo.SensorTempDSFamilyResolution");
             DropForeignKey("dbo.SensorTempDSFamily", "Id", "dbo.Sensor");
@@ -38,7 +38,7 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("Locale.Country", "ContinentId", "Locale.Continent");
             DropForeignKey("SI.NumericalScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
             DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("dbo.SensorsInDevice", "DeviceSensorsId", "dbo.DeviceSensors");
+            DropForeignKey("dbo.SensorInDevice", "DeviceSensorsId", "dbo.DeviceSensors");
             DropForeignKey("dbo.DeviceSensors", "Id", "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceNTP", "TimeZoneId", "dbo.TimeZone");
             DropForeignKey("dbo.DeviceNTP", "Id", "dbo.DeviceBase");
@@ -91,8 +91,8 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
             DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
             DropIndex("dbo.SensorDatasheet", new[] { "SensorTypeId" });
-            DropIndex("dbo.SensorsInDevice", new[] { "SensorId" });
-            DropIndex("dbo.SensorsInDevice", new[] { "DeviceSensorsId" });
+            DropIndex("dbo.SensorInDevice", new[] { "SensorId" });
+            DropIndex("dbo.SensorInDevice", new[] { "DeviceSensorsId" });
             DropIndex("dbo.DeviceSensors", new[] { "Id" });
             DropIndex("dbo.DeviceNTP", new[] { "TimeZoneId" });
             DropIndex("dbo.DeviceNTP", new[] { "Id" });
@@ -131,7 +131,7 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("SI.UnitMeasurementScale");
             DropTable("dbo.SensorDatasheetUnitMeasurementScale");
             DropTable("dbo.SensorDatasheet");
-            DropTable("dbo.SensorsInDevice");
+            DropTable("dbo.SensorInDevice");
             DropTable("dbo.DeviceSensors");
             DropTable("dbo.TimeZone");
             DropTable("dbo.DeviceNTP");
@@ -273,7 +273,7 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.Id);
 
             CreateTable(
-                "dbo.SensorsInDevice",
+                "dbo.SensorInDevice",
                 c => new
                     {
                         DeviceSensorsId = c.Guid(nullable: false),

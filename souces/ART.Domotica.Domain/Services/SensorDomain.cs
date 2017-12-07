@@ -5,9 +5,7 @@ using ART.Domotica.Repository.Entities;
 using System.Collections.Generic;
 using ART.Infra.CrossCutting.Domain;
 using System;
-using ART.Domotica.Enums;
 using ART.Domotica.Repository.Repositories;
-using System.Linq;
 using Autofac;
 using ART.Domotica.Repository;
 using ART.Domotica.Repository.Interfaces.SI;
@@ -47,7 +45,7 @@ namespace ART.Domotica.Domain.Services
             return await _sensorRepository.GetAllByApplicationId(applicationId);
         }        
 
-        public async Task<SensorsInDevice> GetDeviceFromSensor(Guid sensorId)
+        public async Task<SensorInDevice> GetDeviceFromSensor(Guid sensorId)
         {
             var data = await _sensorRepository.GetDeviceFromSensor(sensorId);
 

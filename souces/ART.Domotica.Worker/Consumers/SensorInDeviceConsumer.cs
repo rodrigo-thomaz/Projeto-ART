@@ -8,7 +8,7 @@
 
     using RabbitMQ.Client;
 
-    public class SensorsInDeviceConsumer : ConsumerBase, ISensorsInDeviceConsumer
+    public class SensorInDeviceConsumer : ConsumerBase, ISensorInDeviceConsumer
     {
         #region Fields
 
@@ -19,7 +19,7 @@
 
         #region Constructors
 
-        public SensorsInDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext)
+        public SensorInDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext)
             : base(connection)
         {
             _componentContext = componentContext;

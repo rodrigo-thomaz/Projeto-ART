@@ -105,7 +105,7 @@ angular.module('app')
 
                       'js/services/hardware/device/deviceNTPService.js',
                       'js/services/hardware/device/deviceSensorsService.js',
-                      'js/services/hardware/device/sensorsInDeviceService.js',
+                      'js/services/hardware/device/sensorInDeviceService.js',
                       'js/services/hardware/device/deviceService.js',                     
 
                       // Sensor                     
@@ -185,7 +185,7 @@ angular.module('app')
 
                       'js/services/hardware/device/deviceNTPService.js',
                       'js/services/hardware/device/deviceSensorsService.js',
-                      'js/services/hardware/device/sensorsInDeviceService.js',
+                      'js/services/hardware/device/sensorInDeviceService.js',
                       'js/services/hardware/device/deviceService.js',            
 
                       'js/controllers/espDeviceJoinController.js',

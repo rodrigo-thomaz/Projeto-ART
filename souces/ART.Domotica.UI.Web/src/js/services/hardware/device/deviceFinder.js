@@ -32,10 +32,10 @@ app.factory('deviceFinder', ['$rootScope', 'deviceContext', function ($rootScope
         }
     };
 
-    var getDeviceSensorsByKey = function (sensorsInDeviceId) {
-        for (var i = 0; i < context.sensorsInDevices.length; i++) {
-            var item = context.sensorsInDevices[i];
-            if (item.sensorsInDeviceId === sensorsInDeviceId) {
+    var getDeviceSensorsByKey = function (sensorInDeviceId) {
+        for (var i = 0; i < context.sensorInDevices.length; i++) {
+            var item = context.sensorInDevices[i];
+            if (item.sensorInDeviceId === sensorInDeviceId) {
                 return item;
             }
         }

@@ -537,43 +537,43 @@
 
             #endregion
 
-            #region SensorsInDevice
+            #region SensorInDevice
 
-            var sensorsInDevice_2_1 = new SensorsInDevice
+            var sensorInDevice_2_1 = new SensorInDevice
             {
                 SensorId = sensor_2_1.Id,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 Ordination = 0,
             };
 
-            context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_1);
+            context.SensorInDevice.AddOrUpdate(sensorInDevice_2_1);
 
-            var sensorsInDevice_2_2 = new SensorsInDevice
+            var sensorInDevice_2_2 = new SensorInDevice
             {
                 SensorId = sensor_2_2.Id,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 Ordination = 1,
             };
 
-            context.SensorsInDevice.AddOrUpdate(sensorsInDevice_2_2);
+            context.SensorInDevice.AddOrUpdate(sensorInDevice_2_2);
 
-            var sensorsInDevice_3_1 = new SensorsInDevice
+            var sensorInDevice_3_1 = new SensorInDevice
             {
                 SensorId = sensor_3_1.Id,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 Ordination = 2,
             };
 
-            context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_1);
+            context.SensorInDevice.AddOrUpdate(sensorInDevice_3_1);
 
-            var sensorsInDevice_3_2 = new SensorsInDevice
+            var sensorInDevice_3_2 = new SensorInDevice
             {
                 SensorId = sensor_3_2.Id,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 Ordination = 3,
             };
 
-            context.SensorsInDevice.AddOrUpdate(sensorsInDevice_3_2);
+            context.SensorInDevice.AddOrUpdate(sensorInDevice_3_2);
 
             context.SaveChanges();
 

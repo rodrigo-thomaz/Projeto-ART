@@ -4,19 +4,19 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Domain;
 
-    public class SensorsInDeviceDomain : DomainBase, ISensorsInDeviceDomain
+    public class SensorInDeviceDomain : DomainBase, ISensorInDeviceDomain
     {
         #region Fields
 
-        private readonly ISensorsInDeviceRepository _sensorsInDeviceRepository;
+        private readonly ISensorInDeviceRepository _sensorInDeviceRepository;
 
         #endregion Fields
 
         #region Constructors
 
-        public SensorsInDeviceDomain(ISensorsInDeviceRepository sensorsInDeviceRepository)
+        public SensorInDeviceDomain(ISensorInDeviceRepository sensorInDeviceRepository)
         {
-            _sensorsInDeviceRepository = sensorsInDeviceRepository;
+            _sensorInDeviceRepository = sensorInDeviceRepository;
         }
 
         #endregion Constructors

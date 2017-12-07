@@ -4,11 +4,11 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
 
-    public class SensorsInDeviceRepository : RepositoryBase<ARTDbContext, SensorsInDevice>, ISensorsInDeviceRepository
+    public class SensorInDeviceRepository : RepositoryBase<ARTDbContext, SensorInDevice>, ISensorInDeviceRepository
     {
         #region Constructors
 
-        public SensorsInDeviceRepository(ARTDbContext context)
+        public SensorInDeviceRepository(ARTDbContext context)
             : base(context)
         {
         }

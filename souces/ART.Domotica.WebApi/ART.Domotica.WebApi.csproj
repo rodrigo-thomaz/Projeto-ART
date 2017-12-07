@@ -140,7 +140,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApplicationMQController.cs" />
     <Compile Include="Controllers\DeviceNTPController.cs" />
-    <Compile Include="Controllers\SensorsInDeviceController.cs" />
+    <Compile Include="Controllers\SensorInDeviceController.cs" />
     <Compile Include="Controllers\SensorTriggerController.cs" />
     <Compile Include="Controllers\SensorUnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\ESPDeviceController.cs" />

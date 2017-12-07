@@ -78,7 +78,7 @@
                 x.AddProfile(new SensorUnitMeasurementScaleProfile());
                 x.AddProfile(new SensorDatasheetProfile());
                 x.AddProfile(new SensorProfile());
-                x.AddProfile(new SensorsInDeviceProfile());
+                x.AddProfile(new SensorInDeviceProfile());
                 x.AddProfile(new SensorTriggerProfile());
                 x.AddProfile(new SensorTypeProfile());
                 x.AddProfile(new SensorDatasheetUnitMeasurementDefaultProfile());

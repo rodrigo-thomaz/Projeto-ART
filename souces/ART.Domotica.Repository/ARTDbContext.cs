@@ -130,7 +130,7 @@
             get; set;
         }
 
-        public DbSet<SensorsInDevice> SensorsInDevice
+        public DbSet<SensorInDevice> SensorInDevice
         {
             get; set;
         }

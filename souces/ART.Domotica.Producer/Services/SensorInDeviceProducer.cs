@@ -5,11 +5,11 @@
 
     using RabbitMQ.Client;
 
-    public class SensorsInDeviceProducer : ProducerBase, ISensorsInDeviceProducer
+    public class SensorInDeviceProducer : ProducerBase, ISensorInDeviceProducer
     {
         #region Constructors
 
-        public SensorsInDeviceProducer(IConnection connection)
+        public SensorInDeviceProducer(IConnection connection)
             : base(connection)
         {
             Initialize();

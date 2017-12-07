@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Worker.IConsumers
 {
-    public interface ISensorsInDeviceConsumer
+    public interface ISensorInDeviceConsumer
     {
     }
 }

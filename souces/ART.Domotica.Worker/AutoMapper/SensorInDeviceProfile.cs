@@ -5,13 +5,13 @@
 
     using global::AutoMapper;
 
-    public class SensorsInDeviceProfile : Profile
+    public class SensorInDeviceProfile : Profile
     {
         #region Constructors
 
-        public SensorsInDeviceProfile()
+        public SensorInDeviceProfile()
         {
-            CreateMap<SensorsInDevice, SensorsInDeviceGetModel>()
+            CreateMap<SensorInDevice, SensorInDeviceGetModel>()
                 .ForMember(vm => vm.DeviceSensorsId, m => m.MapFrom(x => x.DeviceSensorsId))
                 .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
                 .ForMember(vm => vm.Ordination, m => m.MapFrom(x => x.Ordination));

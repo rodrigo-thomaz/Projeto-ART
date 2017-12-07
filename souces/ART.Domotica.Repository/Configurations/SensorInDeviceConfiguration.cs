@@ -6,11 +6,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class SensorsInDeviceConfiguration : EntityTypeConfiguration<SensorsInDevice>
+    public class SensorInDeviceConfiguration : EntityTypeConfiguration<SensorInDevice>
     {
         #region Constructors
 
-        public SensorsInDeviceConfiguration()
+        public SensorInDeviceConfiguration()
         {
             //Primary Keys
             HasKey(x => new
@@ -35,13 +35,13 @@
 
             //DeviceSensors
             HasRequired(x => x.DeviceSensors)
-                .WithMany(x => x.SensorsInDevice)
+                .WithMany(x => x.SensorInDevice)
                 .HasForeignKey(x => x.DeviceSensorsId)
                 .WillCascadeOnDelete(false);
 
             //Sensor
             HasRequired(x => x.Sensor)
-                .WithMany(x => x.SensorsInDevice)
+                .WithMany(x => x.SensorInDevice)
                 .HasForeignKey(x => x.SensorId)
                 .WillCascadeOnDelete(false);
 

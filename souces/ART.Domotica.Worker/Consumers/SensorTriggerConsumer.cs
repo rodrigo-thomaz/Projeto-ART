@@ -114,7 +114,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnModel>(message.Contract);
-            viewModel.DeviceId = data.SensorsInDevice.Single().DeviceSensorsId;
+            viewModel.DeviceId = data.SensorInDevice.Single().DeviceSensorsId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -157,7 +157,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusModel>(message.Contract);
-            viewModel.DeviceId = data.SensorsInDevice.Single().DeviceSensorsId;
+            viewModel.DeviceId = data.SensorInDevice.Single().DeviceSensorsId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmCelsiusViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
@@ -200,7 +200,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnModel>(message.Contract);
-            viewModel.DeviceId = data.SensorsInDevice.Single().DeviceSensorsId;
+            viewModel.DeviceId = data.SensorInDevice.Single().DeviceSensorsId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmBuzzerOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

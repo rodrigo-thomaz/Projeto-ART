@@ -1,6 +1,6 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
-    public interface ISensorsInDeviceDomain
+    public interface ISensorInDeviceDomain
     {
     }
 }

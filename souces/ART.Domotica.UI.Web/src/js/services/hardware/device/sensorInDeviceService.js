@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('sensorsInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 
+app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 
     function ($http, ngAuthSettings, $rootScope, stompService) {
 
         var serviceFactory = {};

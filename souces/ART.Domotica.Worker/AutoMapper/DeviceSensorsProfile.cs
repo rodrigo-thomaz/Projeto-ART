@@ -14,7 +14,7 @@
             CreateMap<DeviceSensors, DeviceSensorsGetModel>()
                 .ForMember(vm => vm.DeviceSensorsId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.PublishIntervalInSeconds, m => m.MapFrom(x => x.PublishIntervalInSeconds))
-                .ForMember(vm => vm.SensorsInDevice, m => m.MapFrom(x => x.SensorsInDevice));
+                .ForMember(vm => vm.SensorInDevice, m => m.MapFrom(x => x.SensorInDevice));
         }
 
         #endregion Constructors

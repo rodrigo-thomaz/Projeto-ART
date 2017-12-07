@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
 
     public interface ISensorDomain
@@ -17,7 +16,7 @@
 
         Task<Sensor> GetByKey(Guid sensorId);
 
-        Task<SensorsInDevice> GetDeviceFromSensor(Guid sensorId);
+        Task<SensorInDevice> GetDeviceFromSensor(Guid sensorId);
 
         #endregion Methods
     }

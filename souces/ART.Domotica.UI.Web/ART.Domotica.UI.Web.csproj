@@ -226,7 +226,7 @@
     <Content Include="src\js\services\hardware\device\deviceMapper.js" />
     <Content Include="src\js\services\hardware\device\deviceConstants.js" />
     <Content Include="src\js\services\hardware\device\deviceFinder.js" />
-    <Content Include="src\js\services\hardware\device\sensorsInDeviceService.js" />
+    <Content Include="src\js\services\hardware\device\sensorInDeviceService.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetConstants.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetContext.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetFinder.js" />

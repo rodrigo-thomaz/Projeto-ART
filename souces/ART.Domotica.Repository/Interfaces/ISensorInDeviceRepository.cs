@@ -3,7 +3,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface ISensorsInDeviceRepository : IRepository<ARTDbContext, SensorsInDevice>
+    public interface ISensorInDeviceRepository : IRepository<ARTDbContext, SensorInDevice>
     {
     }
 }

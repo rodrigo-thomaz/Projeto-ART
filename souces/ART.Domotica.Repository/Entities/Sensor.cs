@@ -18,7 +18,7 @@
             get; set;
         }
 
-        public ICollection<SensorsInDevice> SensorsInDevice
+        public ICollection<SensorInDevice> SensorInDevice
         {
             get; set;
         }

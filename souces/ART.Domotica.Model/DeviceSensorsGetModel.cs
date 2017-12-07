@@ -17,7 +17,7 @@
             get; set;
         }
 
-        public List<SensorsInDeviceGetModel> SensorsInDevice
+        public List<SensorInDeviceGetModel> SensorInDevice
         {
             get; set;
         }

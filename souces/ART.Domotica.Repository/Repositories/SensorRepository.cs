@@ -26,9 +26,9 @@ namespace ART.Domotica.Repository.Repositories
                 .ToListAsync();
         }
 
-        public async Task<SensorsInDevice> GetDeviceFromSensor(Guid sensorId)
+        public async Task<SensorInDevice> GetDeviceFromSensor(Guid sensorId)
         {
-            var entity = await _context.SensorsInDevice
+            var entity = await _context.SensorInDevice
                 .SingleOrDefaultAsync(x => x.SensorId == sensorId);
 
             return entity;
@@ -39,7 +39,7 @@ namespace ART.Domotica.Repository.Repositories
             return await _context.Sensor
                 .Include(x => x.SensorTempDSFamily.SensorTempDSFamilyResolution)
                 .Include(x => x.SensorUnitMeasurementScale)
-                .Where(x => x.SensorsInDevice.FirstOrDefault(y => y.DeviceSensors.Id == deviceId) != null)
+                .Where(x => x.SensorInDevice.FirstOrDefault(y => y.DeviceSensors.Id == deviceId) != null)
                 .ToListAsync();
         }
     }
