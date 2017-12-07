@@ -15,7 +15,7 @@ app.constant('sensorTempDSFamilyConstant', {
         
     setResolutionApiUri: 'api/sensorTempDSFamily/setResolution',
     setResolutionCompletedTopic: 'SensorTempDSFamily.SetResolutionViewCompleted',
-    setResolutionCompletedEventName: 'sensorTempDSFamilyService_onSetResolutionCompleted_Id_',
+    setResolutionCompletedEventName: 'sensorTempDSFamilyService.onSetResolutionCompleted_Id_',
 
 });
 
@@ -31,6 +31,22 @@ app.constant('sensorUnitMeasurementScaleConstant', {
 
     setValueApiUri: 'api/sensorUnitMeasurementScale/setValue',
     setValueCompletedTopic: 'SensorUnitMeasurementScale.SetValueViewCompleted',
-    setValueCompletedEventName: 'sensorUnitMeasurementScaleService_SetValueCompleted_Id_',
+    setValueCompletedEventName: 'sensorUnitMeasurementScaleService.SetValueCompleted_Id_',
+
+});
+
+app.constant('sensorTriggerConstant', {
+
+    setAlarmOnApiUri: 'api/sensorTrigger/setAlarmOn',
+    setAlarmOnCompletedTopic: 'SensorTrigger.SetAlarmOnViewCompleted',
+    setAlarmOnCompletedEventName: 'sensorTriggerService.onSetAlarmOnCompleted_Id_',
+
+    setAlarmCelsiusApiUri: 'api/sensorTrigger/setAlarmCelsius',
+    setAlarmCelsiusCompletedTopic: 'SensorTrigger.SetAlarmCelsiusViewCompleted',
+    setAlarmCelsiusCompletedEventName: 'sensorTriggerService.onSetAlarmCelsiusCompleted_Id_',
+
+    setAlarmBuzzerOnApiUri: 'api/sensorTrigger/setAlarmBuzzerOn',
+    setAlarmBuzzerOnCompletedTopic: 'SensorTrigger.SetAlarmBuzzerOnViewCompleted',
+    setAlarmBuzzerOnCompletedEventName: 'sensorTriggerService.SetAlarmBuzzerOnCompleted_Id_',
 
 });
