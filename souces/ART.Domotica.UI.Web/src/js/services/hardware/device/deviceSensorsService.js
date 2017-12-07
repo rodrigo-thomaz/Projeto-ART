@@ -1,73 +1,26 @@
 ﻿'use strict';
-app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', function ($http, ngAuthSettings, $rootScope, stompService, deviceContext) {
+app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 
+    function ($http, ngAuthSettings, $rootScope, stompService) {
 
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+        var serviceFactory = {};
 
-    var serviceFactory = {};    
+        var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var _initializing = false;
-    var _initialized  = false;
-        
-    var getAllByApplicationIdApiUri = 'api/deviceSensors/getAllByApplicationId';
-    var getAllByApplicationIdCompletedTopic = 'DeviceSensors.GetAllByApplicationIdViewCompleted';
-    var getAllByApplicationIdCompletedSubscription = null;
+        var onConnected = function () {
 
-    var initializedEventName = 'deviceSensorsService.onInitialized';
-
-    var onConnected = function () {
-
-        getAllByApplicationIdCompletedSubscription = stompService.subscribe(getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
-
-        if (!_initializing && !_initialized) {
-            _initializing = true;
-            //getAllByApplicationId();
         }
-    }   
 
-    var initialized = function () {
-        return _initialized;
-    };
-
-    var getAllByApplicationId = function () {
-        return $http.post(serviceBase + getAllByApplicationIdApiUri).then(function (results) {
-            //alert('envio bem sucedido');
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
         });
-    };       
 
-    var onGetAllByApplicationIdCompleted = function (payload) {
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
 
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
+        // stompService
+        if (stompService.connected()) onConnected();
 
-        for (var i = 0; i < data.length; i++) {
-            deviceContext.deviceSensors.push(data[i]);
-        }
+        // serviceFactory
 
-        _initializing = false;
-        _initialized = true;
+        return serviceFactory;
 
-        deviceContext.deviceSensorsLoaded = true;
-        clearOnConnected();
-
-        getAllByApplicationIdCompletedSubscription.unsubscribe();
-
-        $rootScope.$emit(initializedEventName);
-    }
-
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-    });
-
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
-
-    // stompService
-    if (stompService.connected()) onConnected();
-
-    // serviceFactory
-        
-    serviceFactory.initialized = initialized;
-    serviceFactory.initializedEventName = initializedEventName;
-
-    return serviceFactory;
-
-}]);
+    }]);
