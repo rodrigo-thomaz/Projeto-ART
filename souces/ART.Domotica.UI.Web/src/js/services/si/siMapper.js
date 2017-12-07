@@ -8,8 +8,9 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
 
     var mapper_NumericalScaleTypeCountry_Init = false;
     var mapper_NumericalScaleTypeCountry = function () {
-        if (!mapper_NumericalScaleTypeCountry_Init && siContext.numericalScaleTypeCountryLoaded && localeContext.countryLoaded) {
+        if (!mapper_NumericalScaleTypeCountry_Init && siContext.numericalScaleTypeCountryLoaded && siContext.numericalScaleTypeLoaded && localeContext.countryLoaded) {
             mapper_NumericalScaleTypeCountry_Init = true;
+            countryLoadedUnbinding();
             for (var i = 0; i < siContext.numericalScaleTypeCountry.length; i++) {
                 var numericalScaleTypeCountry = siContext.numericalScaleTypeCountry[i];
                 var numericalScaleType = siFinder.getNumericalScaleTypeByKey(numericalScaleTypeCountry.numericalScaleTypeId);
@@ -140,6 +141,7 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
         siContext.numericalScaleTypeLoaded = true;
         mapper_NumericalScaleTypeCountry();
         mapper_NumericalScale_NumericalScaleType();
+        mapper_NumericalScaleTypeCountry();
     }
 
     var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
@@ -162,11 +164,6 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
         mapper_UnitMeasurement_UnitMeasurementType();
     }
 
-    var onCountryGetAllCompleted = function (event, data) {
-        countryGetAllCompletedSubscription();
-        mapper_NumericalScaleTypeCountry();
-    }
-
     var numericalScalePrefixGetAllCompletedSubscription = $rootScope.$on(numericalScalePrefixConstant.getAllCompletedEventName, onNumericalScalePrefixGetAllCompleted);
     var numericalScaleGetAllCompletedSubscription = $rootScope.$on(numericalScaleConstant.getAllCompletedEventName, onNumericalScaleGetAllCompleted);
     var numericalScaleTypeCountryGetAllCompletedSubscription = $rootScope.$on(numericalScaleTypeCountryConstant.getAllCompletedEventName, onNumericalScaleTypeCountryGetAllCompleted);
@@ -174,7 +171,6 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
     var unitMeasurementScaleGetAllCompletedSubscription = $rootScope.$on(unitMeasurementScaleConstant.getAllCompletedEventName, onUnitMeasurementScaleGetAllCompleted);
     var unitMeasurementGetAllCompletedSubscription = $rootScope.$on(unitMeasurementConstant.getAllCompletedEventName, onUnitMeasurementGetAllCompleted);
     var unitMeasurementTypeGetAllCompletedSubscription = $rootScope.$on(unitMeasurementTypeConstant.getAllCompletedEventName, onUnitMeasurementTypeGetAllCompleted);
-    var countryGetAllCompletedSubscription = $rootScope.$on(countryConstant.getAllCompletedEventName, onCountryGetAllCompleted);
 
     $rootScope.$on('$destroy', function () {        
         numericalScalePrefixGetAllCompletedSubscription();
@@ -184,11 +180,17 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
         unitMeasurementScaleGetAllCompletedSubscription();
         unitMeasurementGetAllCompletedSubscription();
         unitMeasurementTypeGetAllCompletedSubscription();
-        countryGetAllCompletedSubscription();
     });
 
     // *** Events Subscriptions
 
+    // *** Watches
+
+    var countryLoadedUnbinding = localeContext.$watch('countryLoaded', function (newValue, oldValue) {
+        mapper_NumericalScaleTypeCountry();
+    })
+
+    // *** Watches
 
     return serviceFactory;
 
