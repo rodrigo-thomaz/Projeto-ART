@@ -34,46 +34,46 @@
             HasRequired(x => x.SensorDatasheet)
                .WithRequiredDependent(x => x.SensorDatasheetUnitMeasurementDefault);
 
-            //UnitMeasurementTypeId
-            Property(x => x.UnitMeasurementTypeId)
+            //UnitMeasurementId
+            Property(x => x.UnitMeasurementId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //UnitMeasurementId
-            Property(x => x.UnitMeasurementId)
+            //UnitMeasurementTypeId
+            Property(x => x.UnitMeasurementTypeId)
                 .HasColumnOrder(3)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
-
-            //NumericalScaleTypeId
-            Property(x => x.NumericalScaleTypeId)
-                .HasColumnOrder(4)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //NumericalScalePrefixId
             Property(x => x.NumericalScalePrefixId)
+                .HasColumnOrder(4)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //NumericalScaleTypeId
+            Property(x => x.NumericalScaleTypeId)
                 .HasColumnOrder(5)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();            
+                .IsRequired();
 
             //UnitMeasurementScale
             HasRequired(x => x.UnitMeasurementScale)
                 .WithMany(x => x.SensorDatasheetUnitMeasurementDefaults)
                 .HasForeignKey(x => new
                 {
-                    x.UnitMeasurementTypeId,
                     x.UnitMeasurementId,
+                    x.UnitMeasurementTypeId,
+                    x.NumericalScalePrefixId,
                     x.NumericalScaleTypeId,
-                    x.NumericalScalePrefixId,                    
                 })
                 .WillCascadeOnDelete(false);
 
             //Min
             Property(x => x.Min)
                 .HasColumnOrder(6)
-                .HasPrecision(9,4)
+                .HasPrecision(9, 4)
                 .IsRequired();
 
             //Max

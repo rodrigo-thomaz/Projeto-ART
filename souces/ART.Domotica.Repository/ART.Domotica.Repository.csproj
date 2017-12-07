@@ -158,9 +158,9 @@
     <Compile Include="Interfaces\Globalization\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201712072216507_Create.cs" />
-    <Compile Include="Migrations\201712072216507_Create.Designer.cs">
-      <DependentUpon>201712072216507_Create.cs</DependentUpon>
+    <Compile Include="Migrations\201712072257056_InitialCreate.cs" />
+    <Compile Include="Migrations\201712072257056_InitialCreate.Designer.cs">
+      <DependentUpon>201712072257056_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -244,8 +244,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712072216507_Create.resx">
-      <DependentUpon>201712072216507_Create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712072257056_InitialCreate.resx">
+      <DependentUpon>201712072257056_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
