@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'sensorTempDSFamilyResolutionConstant', 'siContext', 'siFinder', 'unitMeasurementScaleConstant',
-    function ($rootScope, sensorContext, sensorConstant, sensorFinder, sensorTempDSFamilyResolutionConstant, siContext, siFinder, unitMeasurementScaleConstant) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'siContext', 'siFinder', 'unitMeasurementScaleConstant',
+    function ($rootScope, sensorContext, sensorConstant, sensorFinder, siContext, siFinder, unitMeasurementScaleConstant) {
 
     var serviceFactory = {};    
 
@@ -83,29 +83,28 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
         loadAll();
         mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
         mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
-    }   
-
-    var onSensorTempDSFamilyResolutionGetAllCompleted = function (event, data) {
-        mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
-    } 
-
-    var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
-        mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
     } 
 
     var sensorGetAllByApplicationIdCompletedSubscription = $rootScope.$on(sensorConstant.getAllByApplicationIdCompletedEventName, onSensorGetAllByApplicationIdCompleted);
-    var sensorTempDSFamilyResolutionGetAllCompletedSubscription = $rootScope.$on(sensorTempDSFamilyResolutionConstant.getAllCompletedEventName, onSensorTempDSFamilyResolutionGetAllCompleted);
-    var unitMeasurementScaleGetAllCompletedSubscription = $rootScope.$on(unitMeasurementScaleConstant.getAllCompletedEventName, onUnitMeasurementScaleGetAllCompleted);
 
     $rootScope.$on('$destroy', function () {
         sensorTypeGetAllByApplicationIdCompletedSubscription();      
-        sensorTempDSFamilyResolutionGetAllCompletedSubscription();
-        sensorUnitMeasurementScaleGetAllCompletedSubscription();
     });
 
     // *** Events Subscriptions
-    
-    
+
+    // *** Watches
+            
+    sensorContext.$watch('sensorTempDSFamilyResolutionLoaded', function (newValue, oldValue) {
+        mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
+    })
+
+    siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
+        mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
+    })
+
+    // *** Watches
+
     return serviceFactory;
 
 }]);
