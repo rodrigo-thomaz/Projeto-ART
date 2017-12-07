@@ -3,27 +3,11 @@ app.controller('espDeviceListController', [
     '$scope',
     '$timeout',
     '$log',
-    'deviceService',
-    'continentService',
-    'countryService',
-    'numericalScaleService',
-    'numericalScalePrefixService',
-    'numericalScaleTypeService',
-    'numericalScaleTypeCountryService',
-    'unitMeasurementScaleService',
-    'unitMeasurementConverter',
-    'unitMeasurementTypeService',
-    'unitMeasurementService',
-    'sensorTypeService',
-    'sensorDatasheetService',
-    'sensorDatasheetUnitMeasurementScaleService',
-    'sensorDatasheetUnitMeasurementDefaultService',
-    'deviceSensorsService',
-    'sensorsInDeviceService',
-    'sensorService',
-    function ($scope, $timeout, $log, deviceService) {    
+    'deviceContext',
+    'contextScope',
+    function ($scope, $timeout, $log, deviceContext, contextScope) {    
    
-    $scope.devices = deviceService.devices;    
+        $scope.devices = deviceContext.device;    
 
 }]);
 

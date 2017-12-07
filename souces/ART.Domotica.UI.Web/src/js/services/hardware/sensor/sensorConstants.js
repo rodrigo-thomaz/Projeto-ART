@@ -14,3 +14,19 @@ app.constant('sensorConstant', {
     setSensorUnitMeasurementScaleCompletedEventName: 'sensorService.onSetSensorUnitMeasurementScaleCompleted_Id_',
 
 });
+
+app.constant('sensorTempDSFamilyConstant', {
+        
+    setResolutionApiUri: 'api/sensorTempDSFamily/setResolution',
+    setResolutionCompletedTopic: 'SensorTempDSFamily.SetResolutionViewCompleted',
+    setResolutionCompletedEventName: 'sensorTempDSFamilyService_onSetResolutionCompleted_Id_',
+
+});
+
+app.constant('sensorTempDSFamilyResolutionConstant', {
+
+    getAllApiUri: 'api/sensorTempDSFamily/getAllResolutions',
+    getAllCompletedTopic: 'SensorTempDSFamily.GetAllResolutionsViewCompleted',
+    getAllCompletedEventName: 'sensorTempDSFamilyResolutionService.onGetAllCompleted',
+
+});

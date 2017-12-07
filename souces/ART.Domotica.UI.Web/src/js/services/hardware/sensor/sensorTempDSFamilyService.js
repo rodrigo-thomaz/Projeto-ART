@@ -1,35 +1,27 @@
 ﻿'use strict';
-app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitMeasurementService', 'unitMeasurementConverter', 'deviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, unitMeasurementService, unitMeasurementConverter, deviceService) {
-
-    var serviceBase = ngAuthSettings.distributedServicesUri;
-
-    var initialized = false;
+app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorFinder', 'sensorTempDSFamilyConstant', 'unitMeasurementService', 'unitMeasurementConverter', 'deviceService', function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorFinder, sensorTempDSFamilyConstant, unitMeasurementService, unitMeasurementConverter, deviceService) {
 
     var serviceFactory = {};   
 
-    var getByKey = function (deviceId, sensorTempDSFamilyId) {
-        var device = deviceService.getDeviceById(deviceId);
-        for (var i = 0; i < device.sensors.length; i++) {
-            var sensor = device.sensors[i];
-            if (sensor.sensorTempDSFamilyId === sensorTempDSFamilyId) {
-                return sensor;
-            }
-        }
-    };
+    var serviceBase = ngAuthSettings.distributedServicesUri;
+
+    var initialized = false;    
+
+    var setResolutionCompletedSubscription = null;
 
     var setResolution = function (sensorTempDSFamilyId, sensorTempDSFamilyResolutionId) {
         var data = {
             sensorTempDSFamilyId: sensorTempDSFamilyId,
             sensorTempDSFamilyResolutionId: sensorTempDSFamilyResolutionId,
         }
-        return $http.post(serviceBase + 'api/sensorTempDSFamily/setResolution', data).then(function (results) {
+        return $http.post(serviceBase + sensorTempDSFamilyConstant.setResolutionApiUri, data).then(function (results) {
             return results;
         });
     };
 
     var onConnected = function () {
 
-        stompService.subscribeAllViews('SensorTempDSFamily.SetResolutionViewCompleted', onSetResolutionCompleted);
+        setResolutionCompletedSubscription = stompService.subscribeAllViews(sensorTempDSFamilyConstant.setResolutionCompletedTopic, onSetResolutionCompleted);
                 
         if (!initialized) {
             initialized = true;            
@@ -38,23 +30,24 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var onSetResolutionCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
+        var sensor = sensorFinder.getSensorByKey(result.sensorTempDSFamilyId);
         sensor.sensorTempDSFamilyResolutionId = result.sensorTempDSFamilyResolutionId;
-        $rootScope.$emit('sensorTempDSFamilyService_onSetResolutionCompleted_Id_' + result.sensorTempDSFamilyId, result);
+        $rootScope.$emit(sensorTempDSFamilyConstant.setResolutionCompletedEventName + result.sensorTempDSFamilyId, result);
     }     
 
     $rootScope.$on('$destroy', function () {
         clearOnConnected();
+
+        setResolutionCompletedSubscription();
     });
 
-    var clearOnConnected = $rootScope.$on('stompService_onConnected', onConnected); 
+    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected); 
 
     // stompService
     if (stompService.connected()) onConnected();
 
     // serviceFactory
 
-    serviceFactory.getByKey = getByKey;
     serviceFactory.setResolution = setResolution;
     
     return serviceFactory;
