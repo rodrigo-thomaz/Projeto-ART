@@ -27,6 +27,10 @@
             CreateMap<SensorInDevice, SensorTempDSFamilyGetModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.SensorId))
                 .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolutionId));
+
+            CreateMap<SensorTempDSFamily, SensorTempDSFamilyGetModel>()
+                .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolutionId));
         }
 
         #endregion Constructors

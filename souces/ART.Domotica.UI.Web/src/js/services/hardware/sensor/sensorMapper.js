@@ -23,7 +23,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant',
             for (var j = 0; j < sensor.sensorTriggers.length; j++) {
                 var sensorTrigger = sensor.sensorTriggers[j];
                 sensorTrigger.sensor = sensor;
-                deviceContext.sensorTrigger.push(sensorTrigger);
+                sensorContext.sensorTrigger.push(sensorTrigger);
             }
         }
 
