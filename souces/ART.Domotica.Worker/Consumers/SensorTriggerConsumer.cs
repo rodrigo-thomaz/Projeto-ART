@@ -100,8 +100,8 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmOnRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.SetAlarmOn(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmOn);
+            var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
+            var data = await sensorTriggerDomain.SetAlarmOn(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmOn);
 
             var exchange = "amq.topic";
 
@@ -109,7 +109,8 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Load device into context
-            var device = await domain.GetDeviceFromSensor(data.Id);
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnModel>(message.Contract);
@@ -142,8 +143,8 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmCelsiusRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.SetAlarmCelsius(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmCelsius);
+            var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
+            var data = await sensorTriggerDomain.SetAlarmCelsius(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmCelsius);
 
             var exchange = "amq.topic";
 
@@ -151,7 +152,8 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Load device into context
-            var device = await domain.GetDeviceFromSensor(data.Id);
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusModel>(message.Contract);
@@ -184,8 +186,8 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmBuzzerOnRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.SetAlarmBuzzerOn(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmBuzzerOn);
+            var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
+            var data = await sensorTriggerDomain.SetAlarmBuzzerOn(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmBuzzerOn);
 
             var exchange = "amq.topic";
 
@@ -193,7 +195,8 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Load device into context
-            var device = await domain.GetDeviceFromSensor(data.Id);
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnModel>(message.Contract);

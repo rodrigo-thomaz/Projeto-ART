@@ -19,12 +19,6 @@
 
         Task<SensorsInDevice> GetDeviceFromSensor(Guid sensorId);
 
-        Task<Sensor> SetAlarmBuzzerOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmBuzzerOn);
-
-        Task<Sensor> SetAlarmCelsius(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, decimal alarmCelsius);
-
-        Task<Sensor> SetAlarmOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmOn);
-
         #endregion Methods
     }
 }
