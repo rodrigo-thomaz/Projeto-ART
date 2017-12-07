@@ -17,21 +17,21 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
                 x.UnitMeasurementTypeId,
+                x.Id,                
             });
 
-            //Id
-            Property(x => x.Id)
+            //UnitMeasurementTypeId
+            Property(x => x.UnitMeasurementTypeId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //UnitMeasurementTypeId
-            Property(x => x.UnitMeasurementTypeId)
+            //Id
+            Property(x => x.Id)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
+                .IsRequired();           
 
             //UnitMeasurementType
             HasRequired(x => x.UnitMeasurementType)

@@ -16,53 +16,53 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.UnitMeasurementId,
                 x.UnitMeasurementTypeId,
-                x.NumericalScalePrefixId,
+                x.UnitMeasurementId,
                 x.NumericalScaleTypeId,
+                x.NumericalScalePrefixId,                
             });
 
-            //UnitMeasurementId
-            Property(x => x.UnitMeasurementId)
+            //UnitMeasurementTypeId
+            Property(x => x.UnitMeasurementTypeId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //UnitMeasurementTypeId
-            Property(x => x.UnitMeasurementTypeId)
+            //UnitMeasurementId
+            Property(x => x.UnitMeasurementId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
+                .IsRequired();            
 
             //UnitMeasurement
             HasRequired(x => x.UnitMeasurement)
                 .WithMany(x => x.UnitMeasurementScales)
                 .HasForeignKey(x => new
                 {
-                    x.UnitMeasurementId,
                     x.UnitMeasurementTypeId,
+                    x.UnitMeasurementId,                    
                 })
                 .WillCascadeOnDelete(false);
 
-            //NumericalScalePrefixId
-            Property(x => x.NumericalScalePrefixId)
+            //NumericalScaleTypeId
+            Property(x => x.NumericalScaleTypeId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //NumericalScaleTypeId
-            Property(x => x.NumericalScaleTypeId)
+            //NumericalScalePrefixId
+            Property(x => x.NumericalScalePrefixId)
                 .HasColumnOrder(3)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
+                .IsRequired();            
 
             //NumericalScale
             HasRequired(x => x.NumericalScale)
                 .WithMany(x => x.UnitMeasurementScales)
                 .HasForeignKey(x => new
                 {
-                    x.NumericalScalePrefixId,
                     x.NumericalScaleTypeId,
+                    x.NumericalScalePrefixId,                    
                 })
                 .WillCascadeOnDelete(false);
         }

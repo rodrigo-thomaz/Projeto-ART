@@ -1,149 +1,10 @@
 namespace ART.Domotica.Repository.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
-
-    public partial class InitialCreate : DbMigration
+    
+    public partial class Create : DbMigration
     {
-        #region Methods
-
-        public override void Down()
-        {
-            DropForeignKey("dbo.RaspberryDevice", "Id", "dbo.DeviceBase");
-            DropForeignKey("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("dbo.Sensor", "Id", "dbo.HardwareBase");
-            DropForeignKey("dbo.ESPDevice", "Id", "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
-            DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
-            DropForeignKey("dbo.Project", "CreateByApplicationUserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.Project", "ApplicationId", "dbo.Application");
-            DropForeignKey("dbo.HardwaresInProject", new[] { "ApplicationId", "DeviceId" }, "dbo.DeviceInApplication");
-            DropForeignKey("dbo.HardwaresInProject", "CreateByApplicationUserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.DeviceInApplication", "HardwareId", "dbo.HardwareBase");
-            DropForeignKey("dbo.SensorInDevice", "SensorId", "dbo.Sensor");
-            DropForeignKey("dbo.SensorTrigger", "SensorId", "dbo.Sensor");
-            DropForeignKey("dbo.SensorTempDSFamily", "SensorTempDSFamilyResolutionId", "dbo.SensorTempDSFamilyResolution");
-            DropForeignKey("dbo.SensorTempDSFamily", "Id", "dbo.Sensor");
-            DropForeignKey("dbo.SensorDatasheet", "SensorTypeId", "dbo.SensorType");
-            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
-            DropForeignKey("SI.UnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" }, "SI.UnitMeasurement");
-            DropForeignKey("SI.UnitMeasurement", "UnitMeasurementTypeId", "SI.UnitMeasurementType");
-            DropForeignKey("dbo.SensorUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
-            DropForeignKey("dbo.SensorUnitMeasurementScale", "Id", "dbo.Sensor");
-            DropForeignKey("dbo.SensorUnitMeasurementDefault", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.UnitMeasurementScale");
-            DropForeignKey("dbo.SensorUnitMeasurementDefault", new[] { "Id", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("SI.UnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" }, "SI.NumericalScale");
-            DropForeignKey("SI.NumericalScale", "NumericalScaleTypeId", "SI.NumericalScaleType");
-            DropForeignKey("SI.NumericalScaleTypeCountry", "NumericalScaleTypeId", "SI.NumericalScaleType");
-            DropForeignKey("SI.NumericalScaleTypeCountry", "CountryId", "Locale.Country");
-            DropForeignKey("Locale.Country", "ContinentId", "Locale.Continent");
-            DropForeignKey("SI.NumericalScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
-            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("dbo.SensorInDevice", "DeviceSensorsId", "dbo.DeviceSensors");
-            DropForeignKey("dbo.DeviceSensors", "Id", "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceNTP", "TimeZoneId", "dbo.TimeZone");
-            DropForeignKey("dbo.DeviceNTP", "Id", "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceMQ", "Id", "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceInApplication", "CreateByApplicationUserId", "dbo.ApplicationUser");
-            DropForeignKey("dbo.DeviceInApplication", "ApplicationId", "dbo.Application");
-            DropForeignKey("dbo.ApplicationUser", "ApplicationId", "dbo.Application");
-            DropForeignKey("dbo.ApplicationMQ", "Id", "dbo.Application");
-            DropIndex("dbo.RaspberryDevice", new[] { "WLanMacAddress" });
-            DropIndex("dbo.RaspberryDevice", new[] { "LanMacAddress" });
-            DropIndex("dbo.RaspberryDevice", new[] { "Id" });
-            DropIndex("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" });
-            DropIndex("dbo.Sensor", new[] { "Id" });
-            DropIndex("dbo.ESPDevice", new[] { "Pin" });
-            DropIndex("dbo.ESPDevice", new[] { "MacAddress" });
-            DropIndex("dbo.ESPDevice", new[] { "FlashChipId" });
-            DropIndex("dbo.ESPDevice", new[] { "ChipId" });
-            DropIndex("dbo.ESPDevice", new[] { "Id" });
-            DropIndex("dbo.DeviceBase", new[] { "Id" });
-            DropIndex("dbo.Project", new[] { "CreateByApplicationUserId" });
-            DropIndex("dbo.Project", new[] { "ApplicationId" });
-            DropIndex("dbo.HardwaresInProject", new[] { "CreateByApplicationUserId" });
-            DropIndex("dbo.HardwaresInProject", "IX_Unique_DeviceInApplication_ProjectId");
-            DropIndex("dbo.SensorTrigger", new[] { "SensorId" });
-            DropIndex("dbo.SensorTempDSFamilyResolution", new[] { "Bits" });
-            DropIndex("dbo.SensorTempDSFamilyResolution", new[] { "Name" });
-            DropIndex("dbo.SensorTempDSFamily", new[] { "SensorTempDSFamilyResolutionId" });
-            DropIndex("dbo.SensorTempDSFamily", new[] { "DeviceAddress" });
-            DropIndex("dbo.SensorTempDSFamily", new[] { "Id" });
-            DropIndex("dbo.SensorType", new[] { "Name" });
-            DropIndex("SI.UnitMeasurementType", new[] { "Name" });
-            DropIndex("SI.UnitMeasurement", new[] { "Symbol" });
-            DropIndex("SI.UnitMeasurement", new[] { "Name" });
-            DropIndex("SI.UnitMeasurement", new[] { "UnitMeasurementTypeId" });
-            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
-            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "Id" });
-            DropIndex("dbo.SensorUnitMeasurementDefault", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
-            DropIndex("dbo.SensorUnitMeasurementDefault", new[] { "Id", "SensorTypeId" });
-            DropIndex("Locale.Continent", new[] { "Name" });
-            DropIndex("Locale.Country", new[] { "ContinentId" });
-            DropIndex("Locale.Country", new[] { "Name" });
-            DropIndex("SI.NumericalScaleTypeCountry", new[] { "CountryId" });
-            DropIndex("SI.NumericalScaleTypeCountry", new[] { "NumericalScaleTypeId" });
-            DropIndex("SI.NumericalScaleType", new[] { "Name" });
-            DropIndex("SI.NumericalScalePrefix", new[] { "Name" });
-            DropIndex("SI.NumericalScale", new[] { "NumericalScaleTypeId" });
-            DropIndex("SI.NumericalScale", new[] { "NumericalScalePrefixId" });
-            DropIndex("SI.UnitMeasurementScale", new[] { "NumericalScalePrefixId", "NumericalScaleTypeId" });
-            DropIndex("SI.UnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId" });
-            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementId", "UnitMeasurementTypeId", "NumericalScalePrefixId", "NumericalScaleTypeId" });
-            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
-            DropIndex("dbo.SensorDatasheet", new[] { "SensorTypeId" });
-            DropIndex("dbo.SensorInDevice", new[] { "SensorId" });
-            DropIndex("dbo.SensorInDevice", new[] { "DeviceSensorsId" });
-            DropIndex("dbo.DeviceSensors", new[] { "Id" });
-            DropIndex("dbo.DeviceNTP", new[] { "TimeZoneId" });
-            DropIndex("dbo.DeviceNTP", new[] { "Id" });
-            DropIndex("dbo.DeviceMQ", new[] { "Topic" });
-            DropIndex("dbo.DeviceMQ", new[] { "ClientId" });
-            DropIndex("dbo.DeviceMQ", new[] { "Password" });
-            DropIndex("dbo.DeviceMQ", new[] { "User" });
-            DropIndex("dbo.DeviceMQ", new[] { "Id" });
-            DropIndex("dbo.DeviceInApplication", new[] { "CreateByApplicationUserId" });
-            DropIndex("dbo.DeviceInApplication", "IX_Unique_HardwareId");
-            DropIndex("dbo.DeviceInApplication", new[] { "ApplicationId" });
-            DropIndex("dbo.ApplicationUser", new[] { "ApplicationId" });
-            DropIndex("dbo.ApplicationMQ", new[] { "Topic" });
-            DropIndex("dbo.ApplicationMQ", new[] { "Id" });
-            DropIndex("dbo.ActuatorType", new[] { "Name" });
-            DropTable("dbo.RaspberryDevice");
-            DropTable("dbo.Sensor");
-            DropTable("dbo.ESPDevice");
-            DropTable("dbo.DeviceBase");
-            DropTable("dbo.Project");
-            DropTable("dbo.HardwaresInProject");
-            DropTable("dbo.SensorTrigger");
-            DropTable("dbo.SensorTempDSFamilyResolution");
-            DropTable("dbo.SensorTempDSFamily");
-            DropTable("dbo.SensorType");
-            DropTable("SI.UnitMeasurementType");
-            DropTable("SI.UnitMeasurement");
-            DropTable("dbo.SensorUnitMeasurementScale");
-            DropTable("dbo.SensorUnitMeasurementDefault");
-            DropTable("Locale.Continent");
-            DropTable("Locale.Country");
-            DropTable("SI.NumericalScaleTypeCountry");
-            DropTable("SI.NumericalScaleType");
-            DropTable("SI.NumericalScalePrefix");
-            DropTable("SI.NumericalScale");
-            DropTable("SI.UnitMeasurementScale");
-            DropTable("dbo.SensorDatasheetUnitMeasurementScale");
-            DropTable("dbo.SensorDatasheet");
-            DropTable("dbo.SensorInDevice");
-            DropTable("dbo.DeviceSensors");
-            DropTable("dbo.TimeZone");
-            DropTable("dbo.DeviceNTP");
-            DropTable("dbo.DeviceMQ");
-            DropTable("dbo.HardwareBase");
-            DropTable("dbo.DeviceInApplication");
-            DropTable("dbo.ApplicationUser");
-            DropTable("dbo.ApplicationMQ");
-            DropTable("dbo.Application");
-            DropTable("dbo.ActuatorType");
-        }
-
         public override void Up()
         {
             CreateTable(
@@ -155,7 +16,7 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
-
+            
             CreateTable(
                 "dbo.Application",
                 c => new
@@ -164,7 +25,7 @@ namespace ART.Domotica.Repository.Migrations
                         CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbo.ApplicationMQ",
                 c => new
@@ -178,7 +39,7 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.Application", t => t.Id)
                 .Index(t => t.Id)
                 .Index(t => t.Topic, unique: true);
-
+            
             CreateTable(
                 "dbo.ApplicationUser",
                 c => new
@@ -190,9 +51,9 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Application", t => t.ApplicationId)
                 .Index(t => t.ApplicationId);
-
+            
             CreateTable(
-                "dbo.DeviceInApplication",
+                "dbo.HardwareInApplication",
                 c => new
                     {
                         ApplicationId = c.Guid(nullable: false),
@@ -207,7 +68,7 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.ApplicationId)
                 .Index(t => t.HardwareId, unique: true, name: "IX_Unique_HardwareId")
                 .Index(t => t.CreateByApplicationUserId);
-
+            
             CreateTable(
                 "dbo.HardwareBase",
                 c => new
@@ -217,7 +78,7 @@ namespace ART.Domotica.Repository.Migrations
                         CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbo.DeviceMQ",
                 c => new
@@ -235,7 +96,7 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.Password, unique: true)
                 .Index(t => t.ClientId, unique: true)
                 .Index(t => t.Topic, unique: true);
-
+            
             CreateTable(
                 "dbo.DeviceNTP",
                 c => new
@@ -246,12 +107,12 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DeviceBase", t => t.Id)
-                .ForeignKey("dbo.TimeZone", t => t.TimeZoneId)
+                .ForeignKey("Globalization.TimeZone", t => t.TimeZoneId)
                 .Index(t => t.Id)
                 .Index(t => t.TimeZoneId);
-
+            
             CreateTable(
-                "dbo.TimeZone",
+                "Globalization.TimeZone",
                 c => new
                     {
                         Id = c.Byte(nullable: false, identity: true),
@@ -260,7 +121,7 @@ namespace ART.Domotica.Repository.Migrations
                         UtcTimeOffsetInSecond = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-
+            
             CreateTable(
                 "dbo.DeviceSensors",
                 c => new
@@ -271,7 +132,7 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DeviceBase", t => t.Id)
                 .Index(t => t.Id);
-
+            
             CreateTable(
                 "dbo.SensorInDevice",
                 c => new
@@ -285,7 +146,7 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.Sensor", t => t.SensorId)
                 .Index(t => t.DeviceSensorsId)
                 .Index(t => t.SensorId, unique: true);
-
+            
             CreateTable(
                 "dbo.SensorDatasheet",
                 c => new
@@ -296,55 +157,57 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => new { t.Id, t.SensorTypeId })
                 .ForeignKey("dbo.SensorType", t => t.SensorTypeId)
                 .Index(t => t.SensorTypeId);
-
+            
             CreateTable(
-                "dbo.SensorDatasheetUnitMeasurementScale",
+                "dbo.SensorDatasheetUnitMeasurementDefault",
                 c => new
                     {
-                        SensorDatasheetId = c.Short(nullable: false),
+                        Id = c.Short(nullable: false),
                         SensorTypeId = c.Short(nullable: false),
-                        UnitMeasurementId = c.Short(nullable: false),
                         UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
+                        UnitMeasurementId = c.Short(nullable: false),
                         NumericalScaleTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
+                        Min = c.Decimal(nullable: false, precision: 9, scale: 4),
+                        Max = c.Decimal(nullable: false, precision: 9, scale: 4),
                     })
-                .PrimaryKey(t => new { t.SensorDatasheetId, t.SensorTypeId, t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
-                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .Index(t => new { t.SensorDatasheetId, t.SensorTypeId })
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-
+                .PrimaryKey(t => new { t.Id, t.SensorTypeId })
+                .ForeignKey("dbo.SensorDatasheet", t => new { t.Id, t.SensorTypeId })
+                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId, t.NumericalScaleTypeId, t.NumericalScalePrefixId })
+                .Index(t => new { t.Id, t.SensorTypeId })
+                .Index(t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId, t.NumericalScaleTypeId, t.NumericalScalePrefixId });
+            
             CreateTable(
                 "SI.UnitMeasurementScale",
                 c => new
                     {
-                        UnitMeasurementId = c.Short(nullable: false),
                         UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
+                        UnitMeasurementId = c.Short(nullable: false),
                         NumericalScaleTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .ForeignKey("SI.NumericalScale", t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .ForeignKey("SI.UnitMeasurement", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId })
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId })
-                .Index(t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-
+                .PrimaryKey(t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId, t.NumericalScaleTypeId, t.NumericalScalePrefixId })
+                .ForeignKey("SI.NumericalScale", t => new { t.NumericalScaleTypeId, t.NumericalScalePrefixId })
+                .ForeignKey("SI.UnitMeasurement", t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId })
+                .Index(t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId })
+                .Index(t => new { t.NumericalScaleTypeId, t.NumericalScalePrefixId });
+            
             CreateTable(
                 "SI.NumericalScale",
                 c => new
                     {
-                        NumericalScalePrefixId = c.Int(nullable: false),
                         NumericalScaleTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
                         Name = c.String(nullable: false, maxLength: 30),
                         ScientificNotationBase = c.Decimal(nullable: false, precision: 24, scale: 12),
                         ScientificNotationExponent = c.Decimal(nullable: false, precision: 24, scale: 12),
                     })
-                .PrimaryKey(t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .PrimaryKey(t => new { t.NumericalScaleTypeId, t.NumericalScalePrefixId })
                 .ForeignKey("SI.NumericalScalePrefix", t => t.NumericalScalePrefixId)
                 .ForeignKey("SI.NumericalScaleType", t => t.NumericalScaleTypeId)
-                .Index(t => t.NumericalScalePrefixId)
-                .Index(t => t.NumericalScaleTypeId);
-
+                .Index(t => t.NumericalScaleTypeId)
+                .Index(t => t.NumericalScalePrefixId);
+            
             CreateTable(
                 "SI.NumericalScalePrefix",
                 c => new
@@ -355,7 +218,7 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
-
+            
             CreateTable(
                 "SI.NumericalScaleType",
                 c => new
@@ -365,7 +228,7 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
-
+            
             CreateTable(
                 "SI.NumericalScaleTypeCountry",
                 c => new
@@ -378,7 +241,7 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("SI.NumericalScaleType", t => t.NumericalScaleTypeId)
                 .Index(t => t.NumericalScaleTypeId)
                 .Index(t => t.CountryId);
-
+            
             CreateTable(
                 "Locale.Country",
                 c => new
@@ -391,7 +254,7 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("Locale.Continent", t => t.ContinentId)
                 .Index(t => t.Name, unique: true)
                 .Index(t => t.ContinentId);
-
+            
             CreateTable(
                 "Locale.Continent",
                 c => new
@@ -401,35 +264,33 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
-
+            
             CreateTable(
-                "dbo.SensorUnitMeasurementDefault",
+                "dbo.SensorDatasheetUnitMeasurementScale",
                 c => new
                     {
-                        Id = c.Short(nullable: false),
+                        SensorDatasheetId = c.Short(nullable: false),
                         SensorTypeId = c.Short(nullable: false),
-                        UnitMeasurementId = c.Short(nullable: false),
                         UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
+                        UnitMeasurementId = c.Short(nullable: false),
                         NumericalScaleTypeId = c.Byte(nullable: false),
-                        Min = c.Decimal(nullable: false, precision: 9, scale: 4),
-                        Max = c.Decimal(nullable: false, precision: 9, scale: 4),
+                        NumericalScalePrefixId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.SensorTypeId })
-                .ForeignKey("dbo.SensorDatasheet", t => new { t.Id, t.SensorTypeId })
-                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
-                .Index(t => new { t.Id, t.SensorTypeId })
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-
+                .PrimaryKey(t => new { t.SensorDatasheetId, t.SensorTypeId, t.UnitMeasurementTypeId, t.UnitMeasurementId, t.NumericalScaleTypeId, t.NumericalScalePrefixId })
+                .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
+                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId, t.NumericalScaleTypeId, t.NumericalScalePrefixId })
+                .Index(t => new { t.SensorDatasheetId, t.SensorTypeId })
+                .Index(t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId, t.NumericalScaleTypeId, t.NumericalScalePrefixId });
+            
             CreateTable(
                 "dbo.SensorUnitMeasurementScale",
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        UnitMeasurementId = c.Short(nullable: false),
                         UnitMeasurementTypeId = c.Byte(nullable: false),
-                        NumericalScalePrefixId = c.Int(nullable: false),
+                        UnitMeasurementId = c.Short(nullable: false),
                         NumericalScaleTypeId = c.Byte(nullable: false),
+                        NumericalScalePrefixId = c.Int(nullable: false),
                         RangeMax = c.Decimal(nullable: false, precision: 7, scale: 4),
                         RangeMin = c.Decimal(nullable: false, precision: 7, scale: 4),
                         ChartLimiterMax = c.Decimal(nullable: false, precision: 7, scale: 4),
@@ -437,26 +298,26 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Sensor", t => t.Id)
-                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
+                .ForeignKey("SI.UnitMeasurementScale", t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId, t.NumericalScaleTypeId, t.NumericalScalePrefixId })
                 .Index(t => t.Id)
-                .Index(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId });
-
+                .Index(t => new { t.UnitMeasurementTypeId, t.UnitMeasurementId, t.NumericalScaleTypeId, t.NumericalScalePrefixId });
+            
             CreateTable(
                 "SI.UnitMeasurement",
                 c => new
                     {
-                        Id = c.Short(nullable: false),
                         UnitMeasurementTypeId = c.Byte(nullable: false),
+                        Id = c.Short(nullable: false),
                         Name = c.String(nullable: false, maxLength: 255),
                         Symbol = c.String(nullable: false, maxLength: 2, fixedLength: true),
                         Description = c.String(),
                     })
-                .PrimaryKey(t => new { t.Id, t.UnitMeasurementTypeId })
+                .PrimaryKey(t => new { t.UnitMeasurementTypeId, t.Id })
                 .ForeignKey("SI.UnitMeasurementType", t => t.UnitMeasurementTypeId)
                 .Index(t => t.UnitMeasurementTypeId)
                 .Index(t => t.Name, unique: true)
                 .Index(t => t.Symbol, unique: true);
-
+            
             CreateTable(
                 "SI.UnitMeasurementType",
                 c => new
@@ -466,7 +327,7 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
-
+            
             CreateTable(
                 "dbo.SensorType",
                 c => new
@@ -476,7 +337,7 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true);
-
+            
             CreateTable(
                 "dbo.SensorTempDSFamily",
                 c => new
@@ -492,7 +353,7 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.Id)
                 .Index(t => t.DeviceAddress, unique: true)
                 .Index(t => t.SensorTempDSFamilyResolutionId);
-
+            
             CreateTable(
                 "dbo.SensorTempDSFamilyResolution",
                 c => new
@@ -508,7 +369,7 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true)
                 .Index(t => t.Bits, unique: true);
-
+            
             CreateTable(
                 "dbo.SensorTrigger",
                 c => new
@@ -522,7 +383,7 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Sensor", t => t.SensorId)
                 .Index(t => t.SensorId);
-
+            
             CreateTable(
                 "dbo.HardwaresInProject",
                 c => new
@@ -536,11 +397,11 @@ namespace ART.Domotica.Repository.Migrations
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId, cascadeDelete: true)
-                .ForeignKey("dbo.DeviceInApplication", t => new { t.ApplicationId, t.DeviceId })
+                .ForeignKey("dbo.HardwareInApplication", t => new { t.ApplicationId, t.DeviceId })
                 .ForeignKey("dbo.Project", t => t.ProjectId)
-                .Index(t => new { t.ApplicationId, t.DeviceId, t.ProjectId }, unique: true, name: "IX_Unique_DeviceInApplication_ProjectId")
+                .Index(t => new { t.ApplicationId, t.DeviceId, t.ProjectId }, unique: true, name: "IX_Unique_HardwareInApplication_ProjectId")
                 .Index(t => t.CreateByApplicationUserId);
-
+            
             CreateTable(
                 "dbo.Project",
                 c => new
@@ -557,7 +418,7 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
                 .Index(t => t.ApplicationId)
                 .Index(t => t.CreateByApplicationUserId);
-
+            
             CreateTable(
                 "dbo.DeviceBase",
                 c => new
@@ -567,7 +428,7 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.HardwareBase", t => t.Id)
                 .Index(t => t.Id);
-
+            
             CreateTable(
                 "dbo.ESPDevice",
                 c => new
@@ -585,7 +446,7 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.FlashChipId, unique: true)
                 .Index(t => t.MacAddress, unique: true)
                 .Index(t => t.Pin, unique: true);
-
+            
             CreateTable(
                 "dbo.Sensor",
                 c => new
@@ -599,7 +460,7 @@ namespace ART.Domotica.Repository.Migrations
                 .ForeignKey("dbo.SensorDatasheet", t => new { t.SensorDatasheetId, t.SensorTypeId })
                 .Index(t => t.Id)
                 .Index(t => new { t.SensorDatasheetId, t.SensorTypeId });
-
+            
             CreateTable(
                 "dbo.RaspberryDevice",
                 c => new
@@ -613,8 +474,145 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => t.Id)
                 .Index(t => t.LanMacAddress, unique: true)
                 .Index(t => t.WLanMacAddress, unique: true);
+            
         }
-
-        #endregion Methods
+        
+        public override void Down()
+        {
+            DropForeignKey("dbo.RaspberryDevice", "Id", "dbo.DeviceBase");
+            DropForeignKey("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
+            DropForeignKey("dbo.Sensor", "Id", "dbo.HardwareBase");
+            DropForeignKey("dbo.ESPDevice", "Id", "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceBase", "Id", "dbo.HardwareBase");
+            DropForeignKey("dbo.HardwaresInProject", "ProjectId", "dbo.Project");
+            DropForeignKey("dbo.Project", "CreateByApplicationUserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.Project", "ApplicationId", "dbo.Application");
+            DropForeignKey("dbo.HardwaresInProject", new[] { "ApplicationId", "DeviceId" }, "dbo.HardwareInApplication");
+            DropForeignKey("dbo.HardwaresInProject", "CreateByApplicationUserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.HardwareInApplication", "HardwareId", "dbo.HardwareBase");
+            DropForeignKey("dbo.SensorInDevice", "SensorId", "dbo.Sensor");
+            DropForeignKey("dbo.SensorTrigger", "SensorId", "dbo.Sensor");
+            DropForeignKey("dbo.SensorTempDSFamily", "SensorTempDSFamilyResolutionId", "dbo.SensorTempDSFamilyResolution");
+            DropForeignKey("dbo.SensorTempDSFamily", "Id", "dbo.Sensor");
+            DropForeignKey("dbo.SensorDatasheet", "SensorTypeId", "dbo.SensorType");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementDefault", new[] { "UnitMeasurementTypeId", "UnitMeasurementId", "NumericalScaleTypeId", "NumericalScalePrefixId" }, "SI.UnitMeasurementScale");
+            DropForeignKey("SI.UnitMeasurementScale", new[] { "UnitMeasurementTypeId", "UnitMeasurementId" }, "SI.UnitMeasurement");
+            DropForeignKey("SI.UnitMeasurement", "UnitMeasurementTypeId", "SI.UnitMeasurementType");
+            DropForeignKey("dbo.SensorUnitMeasurementScale", new[] { "UnitMeasurementTypeId", "UnitMeasurementId", "NumericalScaleTypeId", "NumericalScalePrefixId" }, "SI.UnitMeasurementScale");
+            DropForeignKey("dbo.SensorUnitMeasurementScale", "Id", "dbo.Sensor");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementTypeId", "UnitMeasurementId", "NumericalScaleTypeId", "NumericalScalePrefixId" }, "SI.UnitMeasurementScale");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" }, "dbo.SensorDatasheet");
+            DropForeignKey("SI.UnitMeasurementScale", new[] { "NumericalScaleTypeId", "NumericalScalePrefixId" }, "SI.NumericalScale");
+            DropForeignKey("SI.NumericalScale", "NumericalScaleTypeId", "SI.NumericalScaleType");
+            DropForeignKey("SI.NumericalScaleTypeCountry", "NumericalScaleTypeId", "SI.NumericalScaleType");
+            DropForeignKey("SI.NumericalScaleTypeCountry", "CountryId", "Locale.Country");
+            DropForeignKey("Locale.Country", "ContinentId", "Locale.Continent");
+            DropForeignKey("SI.NumericalScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
+            DropForeignKey("dbo.SensorDatasheetUnitMeasurementDefault", new[] { "Id", "SensorTypeId" }, "dbo.SensorDatasheet");
+            DropForeignKey("dbo.SensorInDevice", "DeviceSensorsId", "dbo.DeviceSensors");
+            DropForeignKey("dbo.DeviceSensors", "Id", "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceNTP", "TimeZoneId", "Globalization.TimeZone");
+            DropForeignKey("dbo.DeviceNTP", "Id", "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceMQ", "Id", "dbo.DeviceBase");
+            DropForeignKey("dbo.HardwareInApplication", "CreateByApplicationUserId", "dbo.ApplicationUser");
+            DropForeignKey("dbo.HardwareInApplication", "ApplicationId", "dbo.Application");
+            DropForeignKey("dbo.ApplicationUser", "ApplicationId", "dbo.Application");
+            DropForeignKey("dbo.ApplicationMQ", "Id", "dbo.Application");
+            DropIndex("dbo.RaspberryDevice", new[] { "WLanMacAddress" });
+            DropIndex("dbo.RaspberryDevice", new[] { "LanMacAddress" });
+            DropIndex("dbo.RaspberryDevice", new[] { "Id" });
+            DropIndex("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" });
+            DropIndex("dbo.Sensor", new[] { "Id" });
+            DropIndex("dbo.ESPDevice", new[] { "Pin" });
+            DropIndex("dbo.ESPDevice", new[] { "MacAddress" });
+            DropIndex("dbo.ESPDevice", new[] { "FlashChipId" });
+            DropIndex("dbo.ESPDevice", new[] { "ChipId" });
+            DropIndex("dbo.ESPDevice", new[] { "Id" });
+            DropIndex("dbo.DeviceBase", new[] { "Id" });
+            DropIndex("dbo.Project", new[] { "CreateByApplicationUserId" });
+            DropIndex("dbo.Project", new[] { "ApplicationId" });
+            DropIndex("dbo.HardwaresInProject", new[] { "CreateByApplicationUserId" });
+            DropIndex("dbo.HardwaresInProject", "IX_Unique_HardwareInApplication_ProjectId");
+            DropIndex("dbo.SensorTrigger", new[] { "SensorId" });
+            DropIndex("dbo.SensorTempDSFamilyResolution", new[] { "Bits" });
+            DropIndex("dbo.SensorTempDSFamilyResolution", new[] { "Name" });
+            DropIndex("dbo.SensorTempDSFamily", new[] { "SensorTempDSFamilyResolutionId" });
+            DropIndex("dbo.SensorTempDSFamily", new[] { "DeviceAddress" });
+            DropIndex("dbo.SensorTempDSFamily", new[] { "Id" });
+            DropIndex("dbo.SensorType", new[] { "Name" });
+            DropIndex("SI.UnitMeasurementType", new[] { "Name" });
+            DropIndex("SI.UnitMeasurement", new[] { "Symbol" });
+            DropIndex("SI.UnitMeasurement", new[] { "Name" });
+            DropIndex("SI.UnitMeasurement", new[] { "UnitMeasurementTypeId" });
+            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "UnitMeasurementTypeId", "UnitMeasurementId", "NumericalScaleTypeId", "NumericalScalePrefixId" });
+            DropIndex("dbo.SensorUnitMeasurementScale", new[] { "Id" });
+            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "UnitMeasurementTypeId", "UnitMeasurementId", "NumericalScaleTypeId", "NumericalScalePrefixId" });
+            DropIndex("dbo.SensorDatasheetUnitMeasurementScale", new[] { "SensorDatasheetId", "SensorTypeId" });
+            DropIndex("Locale.Continent", new[] { "Name" });
+            DropIndex("Locale.Country", new[] { "ContinentId" });
+            DropIndex("Locale.Country", new[] { "Name" });
+            DropIndex("SI.NumericalScaleTypeCountry", new[] { "CountryId" });
+            DropIndex("SI.NumericalScaleTypeCountry", new[] { "NumericalScaleTypeId" });
+            DropIndex("SI.NumericalScaleType", new[] { "Name" });
+            DropIndex("SI.NumericalScalePrefix", new[] { "Name" });
+            DropIndex("SI.NumericalScale", new[] { "NumericalScalePrefixId" });
+            DropIndex("SI.NumericalScale", new[] { "NumericalScaleTypeId" });
+            DropIndex("SI.UnitMeasurementScale", new[] { "NumericalScaleTypeId", "NumericalScalePrefixId" });
+            DropIndex("SI.UnitMeasurementScale", new[] { "UnitMeasurementTypeId", "UnitMeasurementId" });
+            DropIndex("dbo.SensorDatasheetUnitMeasurementDefault", new[] { "UnitMeasurementTypeId", "UnitMeasurementId", "NumericalScaleTypeId", "NumericalScalePrefixId" });
+            DropIndex("dbo.SensorDatasheetUnitMeasurementDefault", new[] { "Id", "SensorTypeId" });
+            DropIndex("dbo.SensorDatasheet", new[] { "SensorTypeId" });
+            DropIndex("dbo.SensorInDevice", new[] { "SensorId" });
+            DropIndex("dbo.SensorInDevice", new[] { "DeviceSensorsId" });
+            DropIndex("dbo.DeviceSensors", new[] { "Id" });
+            DropIndex("dbo.DeviceNTP", new[] { "TimeZoneId" });
+            DropIndex("dbo.DeviceNTP", new[] { "Id" });
+            DropIndex("dbo.DeviceMQ", new[] { "Topic" });
+            DropIndex("dbo.DeviceMQ", new[] { "ClientId" });
+            DropIndex("dbo.DeviceMQ", new[] { "Password" });
+            DropIndex("dbo.DeviceMQ", new[] { "User" });
+            DropIndex("dbo.DeviceMQ", new[] { "Id" });
+            DropIndex("dbo.HardwareInApplication", new[] { "CreateByApplicationUserId" });
+            DropIndex("dbo.HardwareInApplication", "IX_Unique_HardwareId");
+            DropIndex("dbo.HardwareInApplication", new[] { "ApplicationId" });
+            DropIndex("dbo.ApplicationUser", new[] { "ApplicationId" });
+            DropIndex("dbo.ApplicationMQ", new[] { "Topic" });
+            DropIndex("dbo.ApplicationMQ", new[] { "Id" });
+            DropIndex("dbo.ActuatorType", new[] { "Name" });
+            DropTable("dbo.RaspberryDevice");
+            DropTable("dbo.Sensor");
+            DropTable("dbo.ESPDevice");
+            DropTable("dbo.DeviceBase");
+            DropTable("dbo.Project");
+            DropTable("dbo.HardwaresInProject");
+            DropTable("dbo.SensorTrigger");
+            DropTable("dbo.SensorTempDSFamilyResolution");
+            DropTable("dbo.SensorTempDSFamily");
+            DropTable("dbo.SensorType");
+            DropTable("SI.UnitMeasurementType");
+            DropTable("SI.UnitMeasurement");
+            DropTable("dbo.SensorUnitMeasurementScale");
+            DropTable("dbo.SensorDatasheetUnitMeasurementScale");
+            DropTable("Locale.Continent");
+            DropTable("Locale.Country");
+            DropTable("SI.NumericalScaleTypeCountry");
+            DropTable("SI.NumericalScaleType");
+            DropTable("SI.NumericalScalePrefix");
+            DropTable("SI.NumericalScale");
+            DropTable("SI.UnitMeasurementScale");
+            DropTable("dbo.SensorDatasheetUnitMeasurementDefault");
+            DropTable("dbo.SensorDatasheet");
+            DropTable("dbo.SensorInDevice");
+            DropTable("dbo.DeviceSensors");
+            DropTable("Globalization.TimeZone");
+            DropTable("dbo.DeviceNTP");
+            DropTable("dbo.DeviceMQ");
+            DropTable("dbo.HardwareBase");
+            DropTable("dbo.HardwareInApplication");
+            DropTable("dbo.ApplicationUser");
+            DropTable("dbo.ApplicationMQ");
+            DropTable("dbo.Application");
+            DropTable("dbo.ActuatorType");
+        }
     }
 }

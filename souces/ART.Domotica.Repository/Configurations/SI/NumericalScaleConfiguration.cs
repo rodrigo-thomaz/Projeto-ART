@@ -16,25 +16,13 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.NumericalScalePrefixId,
                 x.NumericalScaleTypeId,
+                x.NumericalScalePrefixId,                
             });
-
-            //NumericalScalePrefixId
-            Property(x => x.NumericalScalePrefixId)
-                .HasColumnOrder(0)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
-
-            //NumericalScalePrefix
-            HasRequired(x => x.NumericalScalePrefix)
-                .WithMany(x => x.NumericalScales)
-                .HasForeignKey(x => x.NumericalScalePrefixId)
-                .WillCascadeOnDelete(false);
 
             //NumericalScaleTypeId
             Property(x => x.NumericalScaleTypeId)
-                .HasColumnOrder(1)
+                .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
@@ -43,6 +31,18 @@
                 .WithMany(x => x.NumericalScales)
                 .HasForeignKey(x => x.NumericalScaleTypeId)
                 .WillCascadeOnDelete(false);
+
+            //NumericalScalePrefixId
+            Property(x => x.NumericalScalePrefixId)
+                .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //NumericalScalePrefix
+            HasRequired(x => x.NumericalScalePrefix)
+                .WithMany(x => x.NumericalScales)
+                .HasForeignKey(x => x.NumericalScalePrefixId)
+                .WillCascadeOnDelete(false);           
 
             //Name
             Property(x => x.Name)

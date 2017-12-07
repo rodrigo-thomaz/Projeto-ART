@@ -34,39 +34,39 @@
             HasRequired(x => x.SensorDatasheet)
                .WithRequiredDependent(x => x.SensorDatasheetUnitMeasurementDefault);
 
-            //UnitMeasurementId
-            Property(x => x.UnitMeasurementId)
+            //UnitMeasurementTypeId
+            Property(x => x.UnitMeasurementTypeId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //UnitMeasurementTypeId
-            Property(x => x.UnitMeasurementTypeId)
+            //UnitMeasurementId
+            Property(x => x.UnitMeasurementId)
                 .HasColumnOrder(3)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
-
-            //NumericalScalePrefixId
-            Property(x => x.NumericalScalePrefixId)
-                .HasColumnOrder(4)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //NumericalScaleTypeId
             Property(x => x.NumericalScaleTypeId)
-                .HasColumnOrder(5)
+                .HasColumnOrder(4)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
+
+            //NumericalScalePrefixId
+            Property(x => x.NumericalScalePrefixId)
+                .HasColumnOrder(5)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();            
 
             //UnitMeasurementScale
             HasRequired(x => x.UnitMeasurementScale)
                 .WithMany(x => x.SensorDatasheetUnitMeasurementDefaults)
                 .HasForeignKey(x => new
                 {
-                    x.UnitMeasurementId,
                     x.UnitMeasurementTypeId,
-                    x.NumericalScalePrefixId,
+                    x.UnitMeasurementId,
                     x.NumericalScaleTypeId,
+                    x.NumericalScalePrefixId,                    
                 })
                 .WillCascadeOnDelete(false);
 

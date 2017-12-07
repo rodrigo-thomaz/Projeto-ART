@@ -24,26 +24,26 @@
             HasRequired(x => x.Sensor)
                .WithRequiredDependent(x => x.SensorUnitMeasurementScale);
 
-            //UnitMeasurementId
-            Property(x => x.UnitMeasurementId)
+            //UnitMeasurementTypeId
+            Property(x => x.UnitMeasurementTypeId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //UnitMeasurementTypeId
-            Property(x => x.UnitMeasurementTypeId)
+            //UnitMeasurementId
+            Property(x => x.UnitMeasurementId)
                 .HasColumnOrder(2)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
-                .IsRequired();
-
-            //NumericalScalePrefixId
-            Property(x => x.NumericalScalePrefixId)
-                .HasColumnOrder(3)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //NumericalScaleTypeId
             Property(x => x.NumericalScaleTypeId)
+                .HasColumnOrder(3)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //NumericalScalePrefixId
+            Property(x => x.NumericalScalePrefixId)
                 .HasColumnOrder(4)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
@@ -53,10 +53,10 @@
                 .WithMany(x => x.SensorUnitMeasurementScales)
                 .HasForeignKey(x => new
                 {
-                    x.UnitMeasurementId,
                     x.UnitMeasurementTypeId,
-                    x.NumericalScalePrefixId,
+                    x.UnitMeasurementId,                                        
                     x.NumericalScaleTypeId,
+                    x.NumericalScalePrefixId,
                 })
                 .WillCascadeOnDelete(false);
 
