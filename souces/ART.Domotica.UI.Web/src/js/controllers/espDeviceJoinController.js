@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootScope', 'toaster', 'deviceService', function ($scope, $timeout, $log, $rootScope, toaster, deviceService) {    
+app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootScope', 'toaster', 'deviceConstant', 'deviceService', function ($scope, $timeout, $log, $rootScope, toaster, deviceConstant, deviceService) {    
 
     var onGetByPinClick = function () {    
         $scope.searchingPin = true;
@@ -33,8 +33,8 @@ app.controller('espDeviceJoinController', ['$scope', '$timeout', '$log', '$rootS
         clearOnInsertInApplicationCompleted();
     });
 
-    var clearOnGetByPinCompleted = $rootScope.$on(deviceService.getByPinCompletedEventName, onGetByPinCompleted);        
-    var clearOnInsertInApplicationCompleted = $rootScope.$on(deviceService.insertInApplicationCompletedEventName, onInsertInApplicationCompleted);        
+    var clearOnGetByPinCompleted = $rootScope.$on(deviceConstant.getByPinCompletedEventName, onGetByPinCompleted);        
+    var clearOnInsertInApplicationCompleted = $rootScope.$on(deviceConstant.insertInApplicationCompletedEventName, onInsertInApplicationCompleted);        
     
     $scope.pin = "";
     $scope.espDevice = null;

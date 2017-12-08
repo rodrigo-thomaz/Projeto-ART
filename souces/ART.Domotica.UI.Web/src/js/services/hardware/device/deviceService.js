@@ -81,13 +81,13 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         var onReadReceived = function (payload) {
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
-            for (var i = 0; i < deviceContext.devices.length; i++) {
-                var device = deviceContext.devices[i];
+            for (var i = 0; i < deviceContext.device.length; i++) {
+                var device = deviceContext.device[i];
                 if (device.hardwareId === data.hardwareId) {
                     device.epochTimeUtc = data.epochTimeUtc;
                     device.wifiQuality = data.wifiQuality;
                     device.localIPAddress = data.localIPAddress;
-                    updateSensors(device, data.sensorTempDSFamilies);
+                    //updateSensors(device, data.sensorTempDSFamilies);
                     break;
                 }
             }
