@@ -143,7 +143,7 @@ angular.module('app')
                       'js/services/globalization/globalizationFinder.js',
                       'js/services/globalization/globalizationMapper.js',
 
-                      'js/services/globalization/timeZoneService.js',                      
+                      'js/services/globalization/timeZoneService.js',
 
                       // Locale
 
@@ -160,7 +160,17 @@ angular.module('app')
                       'js/services/si/siContext.js',
                       'js/services/si/siConstants.js',
                       'js/services/si/siFinder.js',
-                      'js/services/si/siMapper.js',                      
+                      'js/services/si/siMapper.js',
+
+                      'js/services/si/numericalScaleService.js',
+                      'js/services/si/numericalScalePrefixService.js',
+                      'js/services/si/numericalScaleTypeService.js',
+                      'js/services/si/numericalScaleTypeCountryService.js',
+
+                      'js/services/si/unitMeasurementScaleService.js',
+                      'js/services/si/unitMeasurementTypeService.js',
+                      'js/services/si/unitMeasurementService.js',
+                      'js/services/si/unitMeasurementConverter.js',                   
 
                       //*** Hardware ***
 
