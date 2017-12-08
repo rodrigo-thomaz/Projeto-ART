@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceConstant', 'deviceContext',
-    function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceConstant, deviceContext) {
+app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceConstant', 'deviceContext', 'deviceMapper',
+    function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceConstant, deviceContext, deviceMapper) {
 
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -173,16 +173,16 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         var onInsertInApplicationCompleted = function (payload) {
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
-            insertDeviceInCollection(data);
+            deviceMapper.addDevice(data);
             $rootScope.$emit(deviceConstant.insertInApplicationCompletedEventName);
         }
 
         var onDeleteFromApplicationCompleted = function (payload) {
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
-            for (var i = 0; i < deviceContext.devices.length; i++) {
-                if (deviceContext.devices[i].hardwareInApplicationId === data.hardwareInApplicationId) {
-                    deviceContext.devices.splice(i, 1);
+            for (var i = 0; i < deviceContext.device.length; i++) {
+                if (deviceContext.device[i].deviceId === data.deviceId) {
+                    deviceContext.device.splice(i, 1);
                     $rootScope.$emit(deviceConstant.deleteFromApplicationCompletedEventName);
                     break;
                 }

@@ -4,27 +4,26 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
 
         var serviceFactory = {};
 
-        // *** Navigation Properties Mappers ***
+        var addDevice = function (device) {
+            var deviceNTP = device.deviceNTP;
+            deviceNTP.device = device;
+            deviceContext.deviceNTP.push(deviceNTP);
+
+            var deviceSensors = device.deviceSensors;
+            deviceSensors.device = device;
+            deviceContext.deviceSensors.push(deviceSensors);
+
+            for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
+                var sensorInDevice = deviceSensors.sensorInDevice[j];
+                sensorInDevice.deviceSensors = deviceSensors;
+                deviceContext.sensorInDevice.push(sensorInDevice);
+            }
+        }
 
         var loadAll = function () {
 
             for (var i = 0; i < deviceContext.device.length; i++) {
-
-                var device = deviceContext.device[i];
-
-                var deviceNTP = device.deviceNTP;
-                deviceNTP.device = device;
-                deviceContext.deviceNTP.push(deviceNTP);
-
-                var deviceSensors = device.deviceSensors;
-                deviceSensors.device = device;
-                deviceContext.deviceSensors.push(deviceSensors);
-
-                for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
-                    var sensorInDevice = deviceSensors.sensorInDevice[j];
-                    sensorInDevice.deviceSensors = deviceSensors;
-                    deviceContext.sensorInDevice.push(sensorInDevice);
-                }
+                addDevice(deviceContext.device[i]);
             }
 
             deviceContext.deviceLoaded = true;
@@ -32,6 +31,8 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             deviceContext.deviceSensorsLoaded = true;
             deviceContext.sensorInDeviceLoaded = true;
         }
+
+        // *** Navigation Properties Mappers ***        
 
         var mapper_DeviceNTP_TimeZone_Init = false;
         var mapper_DeviceNTP_TimeZone = function () {
@@ -97,6 +98,8 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
         })
 
         // *** Watches
+
+        serviceFactory.addDevice = addDevice;
 
         return serviceFactory;
 
