@@ -41,7 +41,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 var deviceSensors = newValues[i];        
                 //sensorInDevice
                 for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
-                    var sensorInDevice = deviceSensors.sensorInDevice[i];
+                    var sensorInDevice = deviceSensors.sensorInDevice[j];
                     sensorInDevice.deviceSensors = deviceSensors;
                     deviceContext.sensorInDevice.push(sensorInDevice);
                 }
@@ -51,7 +51,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 var deviceSensors = oldValues[i];
                 //sensorInDevice
                 for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
-                    var sensorInDevice = deviceSensors.sensorInDevice[i];
+                    var sensorInDevice = deviceSensors.sensorInDevice[j];
                     for (var k = 0; k < deviceContext.sensorInDevice.length; k++) {
                         if (sensorInDevice === deviceContext.sensorInDevice[k]) {
                             deviceContext.sensorInDevice.splice(k, 1);
@@ -82,7 +82,29 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 }
             }
         });
-        
+
+        deviceContext.$watchCollection('sensorInDevice', function (newValues, oldValues) {
+            //inserindo
+            for (var i = 0; i < newValues.length; i++) {
+                var sensorInDevice = newValues[i];
+                //sensor
+                if (sensorContext.sensorLoaded) {
+                    setSensorInDeviceInSensor(sensorInDevice);
+                }
+            }
+            //removendo
+            //for (var i = 0; i < oldValues.length; i++) {
+            //    var sensorInDevice = oldValues[i];
+            //    //timeZone
+            //    var timeZone = globalizationFinder.getTimeZoneByKey(sensorInDevice.timeZone.timeZoneId);
+            //    for (var j = 0; j < timeZone.sensorsInDevice.length; j++) {
+            //        if (sensorInDevice === timeZone.sensorsInDevice[j]) {
+            //            timeZone.sensorsInDevice.splice(j, 1);
+            //        }
+            //    }
+            //}
+        });
+
         var setTimeZoneInDeviceNTP = function (deviceNTP) {
             if (deviceNTP.timeZone) return;
             var timeZone = globalizationFinder.getTimeZoneByKey(deviceNTP.timeZoneId);
@@ -92,6 +114,13 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 timeZone.devicesNTP = [];
             }
             timeZone.devicesNTP.push(deviceNTP);
+        }
+
+        var setSensorInDeviceInSensor = function (sensorInDevice) {
+            if (sensorInDevice.sensor) return;
+            var sensor = sensorFinder.getSensorByKey(sensorInDevice.sensorId);
+            sensorInDevice.sensor = sensor;
+            sensor.sensorInDevice = sensorInDevice;            
         }
 
         // *** Navigation Properties Mappers ***        
@@ -113,10 +142,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 mapper_SensorInDevice_Sensor_Init = true;
                 sensorLoadedUnbinding();
                 for (var i = 0; i < deviceContext.sensorInDevice.length; i++) {
-                    var sensorInDevice = deviceContext.sensorInDevice[i];
-                    var sensor = sensorFinder.getSensorByKey(sensorInDevice.sensorId);
-                    sensorInDevice.sensor = sensor;
-                    sensor.sensorInDevice = sensorInDevice;
+                    setSensorInDeviceInSensor(deviceContext.sensorInDevice[i]);
                 }
             }
         };
