@@ -4,33 +4,63 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
 
         var serviceFactory = {};
 
-        var addDevice = function (device) {
-            var deviceNTP = device.deviceNTP;
-            deviceNTP.device = device;
-            deviceContext.deviceNTP.push(deviceNTP);
-
-            var deviceSensors = device.deviceSensors;
-            deviceSensors.device = device;
-            deviceContext.deviceSensors.push(deviceSensors);
-
-            for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
-                var sensorInDevice = deviceSensors.sensorInDevice[j];
-                sensorInDevice.deviceSensors = deviceSensors;
-                deviceContext.sensorInDevice.push(sensorInDevice);
+        deviceContext.$watchCollection('device', function (newValues, oldValues) {
+            //inserindo
+            for (var i = 0; i < newValues.length; i++) {
+                var device = newValues[i];
+                //deviceNTP
+                var deviceNTP = device.deviceNTP;
+                deviceNTP.device = device;
+                deviceContext.deviceNTP.push(deviceNTP);
+                //deviceSensors
+                var deviceSensors = device.deviceSensors;
+                deviceSensors.device = device;
+                deviceContext.deviceSensors.push(deviceSensors);
             }
-        }
-
-        var loadAll = function () {
-
-            for (var i = 0; i < deviceContext.device.length; i++) {
-                addDevice(deviceContext.device[i]);
+            //removendo
+            for (var i = 0; i < oldValues.length; i++) {
+                var device = oldValues[i];
+                //deviceNTP
+                for (var j = 0; j < deviceContext.deviceNTP.length; j++) {
+                    if (device.deviceNTP === deviceContext.deviceNTP[j]) {
+                        deviceContext.deviceNTP.splice(j, 1);
+                    }
+                }
+                //deviceSensors
+                for (var j = 0; j < deviceContext.deviceSensors.length; j++) {
+                    if (device.deviceSensors === deviceContext.deviceSensors[j]) {
+                        deviceContext.deviceSensors.splice(j, 1);
+                    }
+                }
             }
+        });
 
-            deviceContext.deviceLoaded = true;
-            deviceContext.deviceNTPLoaded = true;
-            deviceContext.deviceSensorsLoaded = true;
-            deviceContext.sensorInDeviceLoaded = true;
-        }
+        deviceContext.$watchCollection('deviceSensors', function (newValues, oldValues) {
+            //inserindo
+            for (var i = 0; i < newValues.length; i++) {
+                var deviceSensors = newValues[i];        
+                //sensorInDevice
+                for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
+                    var sensorInDevice = deviceSensors.sensorInDevice[i];
+                    sensorInDevice.deviceSensors = deviceSensors;
+                    deviceContext.sensorInDevice.push(sensorInDevice);
+                }
+            }
+            //removendo
+            for (var i = 0; i < oldValues.length; i++) {
+                var deviceSensors = oldValues[i];
+                //sensorInDevice
+                for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
+                    var sensorInDevice = deviceSensors.sensorInDevice[i];
+                    for (var k = 0; k < deviceContext.sensorInDevice.length; k++) {
+                        if (sensorInDevice === deviceContext.sensorInDevice[k]) {
+                            deviceContext.sensorInDevice.splice(k, 1);
+                        }
+                    }
+                }
+            }
+        });
+        
 
         // *** Navigation Properties Mappers ***        
 
@@ -72,8 +102,14 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
         // *** Events Subscriptions
 
         var onDeviceGetAllByApplicationIdCompleted = function (event, data) {
+
             deviceGetAllByApplicationIdCompletedSubscription();
-            loadAll();
+
+            deviceContext.deviceLoaded = true;
+            deviceContext.deviceNTPLoaded = true;
+            deviceContext.deviceSensorsLoaded = true;
+            deviceContext.sensorInDeviceLoaded = true;
+
             mapper_DeviceNTP_TimeZone();
             mapper_SensorInDevice_Sensor();
         }
@@ -98,8 +134,6 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
         })
 
         // *** Watches
-
-        serviceFactory.addDevice = addDevice;
 
         return serviceFactory;
 

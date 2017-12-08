@@ -154,6 +154,8 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
                 deviceContext.device.push(data[i]);
             }
 
+            deviceContext.$digest();
+
             _initializing = false;
             _initialized = true;
 
@@ -174,7 +176,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
             deviceContext.device.push(data);
-            deviceMapper.addDevice(data);
+            deviceContext.$digest();
             $rootScope.$emit(deviceConstant.insertInApplicationCompletedEventName);
         }
 
@@ -184,6 +186,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             for (var i = 0; i < deviceContext.device.length; i++) {
                 if (deviceContext.device[i].deviceId === data.deviceId) {
                     deviceContext.device.splice(i, 1);
+                    deviceContext.$digest();
                     $rootScope.$emit(deviceConstant.deleteFromApplicationCompletedEventName);
                     break;
                 }
