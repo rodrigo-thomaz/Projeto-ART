@@ -4,6 +4,19 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', 'unitMeasureme
 
         var serviceFactory = {};
 
+        // Local cache        
+
+        if ($localStorage.unitMeasurementData) {
+            var data = JSON.parse($localStorage.unitMeasurementData);
+            for (var i = 0; i < data.length; i++) {
+                siContext.unitMeasurement.push(data[i]);
+            }
+            $rootScope.$emit(unitMeasurementConstant.getAllCompletedEventName);
+            return serviceFactory;
+        }
+
+        // Get from Server
+
         var _initialized = false;
         var _initializing = false;
 
@@ -31,6 +44,8 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', 'unitMeasureme
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
+            $localStorage.unitMeasurementData = dataUTF8;
+            $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);
 

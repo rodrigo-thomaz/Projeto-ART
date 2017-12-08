@@ -45,6 +45,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', '$loca
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
             $localStorage.continentData = dataUTF8;
+            $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);
 

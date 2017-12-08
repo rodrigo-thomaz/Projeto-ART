@@ -45,6 +45,7 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', '$local
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
             $localStorage.timeZoneData = dataUTF8;
+            $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);
 

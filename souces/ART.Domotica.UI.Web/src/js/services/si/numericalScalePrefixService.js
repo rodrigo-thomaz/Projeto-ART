@@ -3,7 +3,20 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', 'numerica
     function ($http, ngAuthSettings, numericalScalePrefixConstant, $rootScope, $localStorage, stompService, siContext) {
 
         var serviceFactory = {};
-        
+
+        // Local cache        
+
+        if ($localStorage.numericalScalePrefixData) {
+            var data = JSON.parse($localStorage.numericalScalePrefixData);
+            for (var i = 0; i < data.length; i++) {
+                siContext.numericalScalePrefix.push(data[i]);
+            }
+            $rootScope.$emit(numericalScalePrefixConstant.getAllCompletedEventName);
+            return serviceFactory;
+        }
+
+        // Get from Server
+
         var _initialized = false;
         var _initializing = false;
 
@@ -31,6 +44,8 @@ app.factory('numericalScalePrefixService', ['$http', 'ngAuthSettings', 'numerica
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
+            $localStorage.numericalScalePrefixData = dataUTF8;
+            $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);
 

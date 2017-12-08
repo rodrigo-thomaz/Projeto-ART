@@ -4,6 +4,19 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', 'numericalS
 
         var serviceFactory = {};
 
+        // Local cache        
+
+        if ($localStorage.numericalScaleTypeData) {
+            var data = JSON.parse($localStorage.numericalScaleTypeData);
+            for (var i = 0; i < data.length; i++) {
+                siContext.numericalScaleType.push(data[i]);
+            }
+            $rootScope.$emit(numericalScaleTypeConstant.getAllCompletedEventName);
+            return serviceFactory;
+        }
+
+        // Get from Server
+
         var _initialized = false;
         var _initializing = false;
 
@@ -31,6 +44,8 @@ app.factory('numericalScaleTypeService', ['$http', 'ngAuthSettings', 'numericalS
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
+            $localStorage.numericalScaleTypeData = dataUTF8;
+            $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);
 

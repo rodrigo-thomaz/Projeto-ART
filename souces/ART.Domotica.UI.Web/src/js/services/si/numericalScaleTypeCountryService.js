@@ -4,6 +4,19 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', 'num
 
         var serviceFactory = {};
 
+        // Local cache        
+
+        if ($localStorage.numericalScaleTypeCountryData) {
+            var data = JSON.parse($localStorage.numericalScaleTypeCountryData);
+            for (var i = 0; i < data.length; i++) {
+                siContext.numericalScaleTypeCountry.push(data[i]);
+            }
+            $rootScope.$emit(numericalScaleTypeCountryConstant.getAllCompletedEventName);
+            return serviceFactory;
+        }
+
+        // Get from Server
+
         var _initialized = false;
         var _initializing = false;
 
@@ -31,6 +44,8 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', 'num
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
+            $localStorage.numericalScaleTypeCountryData = dataUTF8;
+            $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);
 
