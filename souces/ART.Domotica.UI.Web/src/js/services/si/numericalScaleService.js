@@ -1,67 +1,63 @@
 ﻿'use strict';
-app.factory('numericalScaleService', ['$http', 'ngAuthSettings', 'numericalScaleConstant', '$rootScope', 'stompService', 'siContext', function ($http, ngAuthSettings, numericalScaleConstant, $rootScope, stompService, siContext) {
+app.factory('numericalScaleService', ['$http', 'ngAuthSettings', 'numericalScaleConstant', '$rootScope', 'stompService', 'siContext',
+    function ($http, ngAuthSettings, numericalScaleConstant, $rootScope, stompService, siContext) {
 
-    var serviceFactory = {};    
-
-    var serviceBase = ngAuthSettings.distributedServicesUri;
-
-    var _initializing = false;
-    var _initialized  = false;
-
-    var getAllCompletedSubscription = null;
-
-    var onConnected = function () {
-
-        getAllCompletedSubscription = stompService.subscribe(numericalScaleConstant.getAllCompletedTopic, onGetAllCompleted);
-
-        if (!_initializing && !_initialized) {
-            _initializing = true;
-            getAll();
-        }
-    }   
-
-    var initialized = function () {
-        return _initialized;
-    };
-
-    var getAll = function () {
-        return $http.post(serviceBase + numericalScaleConstant.getAllApiUri).then(function (results) {
-            //alert('envio bem sucedido');
-        });
-    };       
-
-    var onGetAllCompleted = function (payload) {
-
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
-
-        for (var i = 0; i < data.length; i++) {
-            siContext.numericalScale.push(data[i]);
-        }
+        var serviceFactory = {};
         
-        _initializing = false;
-        _initialized = true;
+        var _initialized = false;
+        var _initializing = false;
 
-        clearOnConnected();
+        var serviceBase = ngAuthSettings.distributedServicesUri;
 
-        getAllCompletedSubscription.unsubscribe();
+        var getAllCompletedSubscription = null;
 
-        $rootScope.$emit(numericalScaleConstant.getAllCompletedEventName);
-    }
+        var onConnected = function () {
 
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-    });
+            getAllCompletedSubscription = stompService.subscribe(numericalScaleConstant.getAllCompletedTopic, onGetAllCompleted);
 
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
+            if (!_initializing && !_initialized) {
+                _initializing = true;
+                getAll();
+            }
+        }
 
-    // stompService
-    if (stompService.connected()) onConnected();
+        var getAll = function () {
+            return $http.post(serviceBase + numericalScaleConstant.getAllApiUri).then(function (results) {
+                //alert('envio bem sucedido');
+            });
+        };
 
-    // serviceFactory
+        var onGetAllCompleted = function (payload) {
 
-    serviceFactory.initialized = initialized;
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
 
-    return serviceFactory;
 
-}]);
+            var data = JSON.parse(dataUTF8);
+
+            for (var i = 0; i < data.length; i++) {
+                siContext.numericalScale.push(data[i]);
+            }
+
+            _initializing = false;
+            _initialized = true;
+
+            clearOnConnected();
+
+            getAllCompletedSubscription.unsubscribe();
+
+            $rootScope.$emit(numericalScaleConstant.getAllCompletedEventName);
+        }
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
+        });
+
+        // stompService
+
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
+
+        if (stompService.connected()) onConnected();
+
+        return serviceFactory;
+
+    }]);
