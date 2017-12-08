@@ -173,6 +173,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
         var onInsertInApplicationCompleted = function (payload) {
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
+            deviceContext.device.push(data);
             deviceMapper.addDevice(data);
             $rootScope.$emit(deviceConstant.insertInApplicationCompletedEventName);
         }
