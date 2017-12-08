@@ -1,67 +1,77 @@
 ﻿'use strict';
-app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'timeZoneConstant', 'globalizationContext', function ($http, ngAuthSettings, $rootScope, stompService, timeZoneConstant, globalizationContext) {
+app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', '$localStorage', 'stompService', 'globalizationContext', 'timeZoneConstant',
+    function ($http, ngAuthSettings, $rootScope, $localStorage, stompService, globalizationContext, timeZoneConstant) {
 
-    var serviceFactory = {};    
+        var serviceFactory = {};
 
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+        // Local cache        
 
-    var _initializing = false;
-    var _initialized  = false;
-
-    var getAllCompletedSubscription = null;
-
-    var onConnected = function () {
-
-        getAllCompletedSubscription = stompService.subscribe(timeZoneConstant.getAllCompletedTopic, onGetAllCompleted);
-
-        if (!_initializing && !_initialized) {
-            _initializing = true;
-            getAll();
+        if ($localStorage.timeZoneData) {
+            var data = JSON.parse($localStorage.timeZoneData);
+            for (var i = 0; i < data.length; i++) {
+                globalizationContext.timeZone.push(data[i]);
+            }
+            $rootScope.$emit(timeZoneConstant.getAllCompletedEventName);
+            return serviceFactory;
         }
-    }   
 
-    var initialized = function () {
-        return _initialized;
-    };
+        // Get from Server
 
-    var getAll = function () {
-        return $http.post(serviceBase + timeZoneConstant.getAllApiUri).then(function (results) {
-            //alert('envio bem sucedido');
+        var _initialized = false;
+        var _initializing = false;
+
+        var serviceBase = ngAuthSettings.distributedServicesUri;
+
+        var getAllCompletedSubscription = null;
+
+        var onConnected = function () {
+
+            getAllCompletedSubscription = stompService.subscribe(timeZoneConstant.getAllCompletedTopic, onGetAllCompleted);
+
+            if (!_initializing && !_initialized) {
+                _initializing = true;
+                getAll();
+            }
+        }
+
+        var getAll = function () {
+            return $http.post(serviceBase + timeZoneConstant.getAllApiUri).then(function (results) {
+                //alert('envio bem sucedido');
+            });
+        };
+
+        var onGetAllCompleted = function (payload) {
+
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
+
+            $localStorage.timeZoneData = dataUTF8;
+
+            var data = JSON.parse(dataUTF8);
+
+            for (var i = 0; i < data.length; i++) {
+                globalizationContext.timeZone.push(data[i]);
+            }
+
+            _initializing = false;
+            _initialized = true;
+
+            clearOnConnected();
+
+            getAllCompletedSubscription.unsubscribe();
+
+            $rootScope.$emit(timeZoneConstant.getAllCompletedEventName);
+        }
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
         });
-    }; 
 
-    var onGetAllCompleted = function (payload) {
+        // stompService
 
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
 
-        for (var i = 0; i < data.length; i++) {
-            globalizationContext.timeZone.push(data[i]);
-        }
+        if (stompService.connected()) onConnected();
 
-        _initializing = false;
-        _initialized = true;
-                
-        clearOnConnected();
+        return serviceFactory;
 
-        getAllCompletedSubscription.unsubscribe();
-
-        $rootScope.$emit(timeZoneConstant.getAllCompletedEventName);
-    }
-
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-    });
-
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
-
-    // stompService
-    if (stompService.connected()) onConnected();
-
-    // serviceFactory
-    
-    serviceFactory.initialized = initialized;
-
-    return serviceFactory;
-
-}]);
+    }]);

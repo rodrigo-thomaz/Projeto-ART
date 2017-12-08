@@ -19,8 +19,8 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', '$loca
 
         var _initialized = false;
         var _initializing = false;
-        
-        var serviceBase = ngAuthSettings.distributedServicesUri;        
+
+        var serviceBase = ngAuthSettings.distributedServicesUri;
 
         var getAllCompletedSubscription = null;
 
@@ -69,8 +69,8 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', '$loca
         // stompService
 
         var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
-        
-        if (stompService.connected()) onConnected();       
+
+        if (stompService.connected()) onConnected();
 
         return serviceFactory;
 
