@@ -35,7 +35,7 @@ app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$mo
 
     $scope.deleteFromApplicationClick = onDeleteFromApplicationClick;
 
-    $scope.gridOptions.data = deviceContext.devices;
+    $scope.gridOptions.data = deviceContext.device;
 
     // Join
 
