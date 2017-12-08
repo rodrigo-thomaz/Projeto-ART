@@ -17,6 +17,8 @@
 
         Task<SensorInDevice> GetDeviceFromSensor(Guid sensorId);
 
+        Task<List<HardwareInApplication>> GetHardwareInApplicationByDeviceId(Guid applicationId, Guid deviceId);
+
         #endregion Methods
     }
 }

@@ -59,9 +59,9 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             });
         };
 
-        var deleteFromApplication = function (hardwareInApplicationId) {
+        var deleteFromApplication = function (deviceId) {
             var data = {
-                hardwareInApplicationId: hardwareInApplicationId
+                deviceId: deviceId
             };
             return $http.post(serviceBase + deviceConstant.deleteFromApplicationApiUri, data).then(function (results) {
                 //alert('envio bem sucedido');

@@ -24,17 +24,17 @@
             get; set;
         }
 
-        public byte SensorTempDSFamilyResolutionId
-        {
-            get; set;
-        }
-
         public string Name
         {
             get; set;
         }
 
         public decimal Resolution
+        {
+            get; set;
+        }
+
+        public byte SensorTempDSFamilyResolutionId
         {
             get; set;
         }

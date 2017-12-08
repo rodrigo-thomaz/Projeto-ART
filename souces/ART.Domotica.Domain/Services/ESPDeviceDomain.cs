@@ -21,6 +21,7 @@
         private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
+        private readonly ISensorRepository _sensorRepository;
 
         #endregion Fields
 
@@ -34,6 +35,7 @@
             _applicationRepository = new ApplicationRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
             _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
+            _sensorRepository = new SensorRepository(context);
         }
 
         #endregion Constructors
@@ -62,11 +64,18 @@
             return data;
         }
 
-        public async Task<ESPDevice> InsertInApplication(string pin, Guid createByApplicationUserId)
+        public async Task<ESPDevice> InsertInApplication(Guid applicationId, Guid createByApplicationUserId, string pin)
         {
-            var hardwareEntity = await _espDeviceRepository.GetByPin(pin);
+            var applicationEntity = await _applicationRepository.GetByKey(applicationId);
 
-            if (hardwareEntity == null)
+            if (applicationEntity == null)
+            {
+                throw new Exception("Application not found");
+            }
+
+            var deviceEntity = await _espDeviceRepository.GetByPin(pin);
+
+            if (deviceEntity == null)
             {
                 throw new Exception("Pin not found");
             }
@@ -76,33 +85,57 @@
             if (applicationUserEntity == null)
             {
                 throw new Exception("ApplicationUser not found");
-            }            
+            }
 
-            await _hardwareInApplicationRepository.Insert(new HardwareInApplication
+            var sensors = await _sensorRepository.GetAllByDeviceId(deviceEntity.Id);
+
+            var hardwaresInApplication = new List<HardwareInApplication> { new HardwareInApplication
             {
-                ApplicationId = applicationUserEntity.ApplicationId,
-                HardwareId = hardwareEntity.Id,
+                ApplicationId = applicationEntity.Id,
+                HardwareId = deviceEntity.Id,
                 CreateByApplicationUserId = applicationUserEntity.Id,
                 CreateDate = DateTime.Now.ToUniversalTime(),
-            });
+            }};
 
-            return hardwareEntity;
+            foreach (var item in sensors)
+            {
+                hardwaresInApplication.Add(new HardwareInApplication
+                {
+                    ApplicationId = applicationEntity.Id,
+                    HardwareId = item.Id,
+                    CreateByApplicationUserId = applicationUserEntity.Id,
+                    CreateDate = DateTime.Now.ToUniversalTime(),
+                });
+            }
+
+            await _hardwareInApplicationRepository.Insert(hardwaresInApplication);
+
+            return deviceEntity;
         }
 
         public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId)
         {
-            HardwareInApplication hardwareInApplicationEntity = await _hardwareInApplicationRepository.GetByKey(applicationId, deviceId);
+            HardwareInApplication deviceHardwareInApplicationEntity = await _hardwareInApplicationRepository.GetByKey(applicationId, deviceId);
             
-            if (hardwareInApplicationEntity == null)
+            if (deviceHardwareInApplicationEntity == null)
             {
                 throw new Exception("HardwareInApplication not found");
             }
 
-            await _hardwareInApplicationRepository.Delete(hardwareInApplicationEntity);
+            var hardwareInApplicationToDelete = new List<HardwareInApplication>
+            {
+                deviceHardwareInApplicationEntity
+            };
 
-            var hardwareEntity = await _espDeviceRepository.GetByKey(hardwareInApplicationEntity.HardwareId);
+            var sensorsHardwareInApplication = await _sensorRepository.GetHardwareInApplicationByDeviceId(applicationId, deviceId);           
 
-            return hardwareEntity;
+            hardwareInApplicationToDelete.AddRange(sensorsHardwareInApplication);
+
+            await _hardwareInApplicationRepository.Delete(hardwareInApplicationToDelete);
+
+            var deviceEntity = await _espDeviceRepository.GetByKey(deviceHardwareInApplicationEntity.HardwareId);
+
+            return deviceEntity;
         }
 
         public async Task<List<ESPDevice>> UpdatePins()

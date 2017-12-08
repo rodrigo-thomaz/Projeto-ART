@@ -42,5 +42,17 @@ namespace ART.Domotica.Repository.Repositories
                 .Where(x => x.SensorInDevice.FirstOrDefault(y => y.DeviceSensors.Id == deviceId) != null)
                 .ToListAsync();
         }
+
+        public async Task<List<HardwareInApplication>> GetHardwareInApplicationByDeviceId(Guid applicationId, Guid deviceId)
+        {
+            var query = from s in _context.Sensor
+                        join hia in _context.HardwareInApplication on s.Id equals hia.HardwareId
+                        join sid in _context.SensorInDevice on s.Id equals sid.SensorId
+                        where hia.ApplicationId == applicationId
+                        where sid.DeviceSensorsId == deviceId
+                        select hia;
+
+            return await query.ToListAsync();
+        }
     }
 }

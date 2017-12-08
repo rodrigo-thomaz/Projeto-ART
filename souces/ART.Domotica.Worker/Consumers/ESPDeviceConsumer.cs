@@ -247,13 +247,14 @@
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.InsertInApplication(message.Contract.Pin, message.ApplicationUserId);
-
-            var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.InsertInApplication(applicationMQ.Id, message.ApplicationUserId, message.Contract.Pin);
+
+            var exchange = "amq.topic";
 
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
