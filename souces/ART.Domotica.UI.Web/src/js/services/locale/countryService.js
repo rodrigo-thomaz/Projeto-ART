@@ -1,67 +1,77 @@
 ﻿'use strict';
-app.factory('countryService', ['$http', 'ngAuthSettings', 'countryConstant', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, countryConstant, $rootScope, stompService, localeContext) {
+app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', '$localStorage', 'stompService', 'localeContext', 'countryConstant',
+    function ($http, ngAuthSettings, $rootScope, $localStorage, stompService, localeContext, countryConstant) {
 
-    var serviceFactory = {};    
+        var serviceFactory = {};
 
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+        // Local cache        
 
-    var _initializing = false;
-    var _initialized  = false;
-
-    var getAllCompletedSubscription = null;
-
-    var onConnected = function () {
-
-        getAllCompletedSubscription = stompService.subscribe(countryConstant.getAllCompletedTopic, onGetAllCompleted);
-
-        if (!_initializing && !_initialized) {
-            _initializing = true;
-            getAll();
+        if ($localStorage.countryData) {
+            var data = JSON.parse($localStorage.countryData);
+            for (var i = 0; i < data.length; i++) {
+                localeContext.country.push(data[i]);
+            }
+            $rootScope.$emit(countryConstant.getAllCompletedEventName);
+            return serviceFactory;
         }
-    }   
 
-    var initialized = function () {
-        return _initialized;
-    };
+        // Get from Server
 
-    var getAll = function () {
-        return $http.post(serviceBase + countryConstant.getAllApiUri).then(function (results) {
-            //alert('envio bem sucedido');
+        var _initialized = false;
+        var _initializing = false;
+
+        var serviceBase = ngAuthSettings.distributedServicesUri;
+
+        var getAllCompletedSubscription = null;
+
+        var onConnected = function () {
+
+            getAllCompletedSubscription = stompService.subscribe(countryConstant.getAllCompletedTopic, onGetAllCompleted);
+
+            if (!_initializing && !_initialized) {
+                _initializing = true;
+                getAll();
+            }
+        }
+
+        var getAll = function () {
+            return $http.post(serviceBase + countryConstant.getAllApiUri).then(function (results) {
+                //alert('envio bem sucedido');
+            });
+        };
+
+        var onGetAllCompleted = function (payload) {
+
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
+
+            $localStorage.countryData = dataUTF8;
+
+            var data = JSON.parse(dataUTF8);
+
+            for (var i = 0; i < data.length; i++) {
+                localeContext.country.push(data[i]);
+            }
+
+            _initializing = false;
+            _initialized = true;
+
+            clearOnConnected();
+
+            getAllCompletedSubscription.unsubscribe();
+
+            $rootScope.$emit(countryConstant.getAllCompletedEventName);
+        }
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
         });
-    };       
 
-    var onGetAllCompleted = function (payload) {
+        // stompService
 
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
 
-        for (var i = 0; i < data.length; i++) {
-            localeContext.country.push(data[i]);
-        }
+        if (stompService.connected()) onConnected();
 
-        _initializing = false;
-        _initialized = true;
+        return serviceFactory;
 
-        clearOnConnected();
-
-        getAllCompletedSubscription.unsubscribe();
-
-        $rootScope.$emit(countryConstant.getAllCompletedEventName);
-    }
-
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-    });
-
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
-
-    // stompService
-    if (stompService.connected()) onConnected();
-
-    // serviceFactory
-
-    serviceFactory.initialized = initialized;
-
-    return serviceFactory;
-
-}]);
+    }]);

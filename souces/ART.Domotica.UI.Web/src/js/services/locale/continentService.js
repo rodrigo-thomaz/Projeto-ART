@@ -1,67 +1,77 @@
 ﻿'use strict';
-app.factory('continentService', ['$http', 'ngAuthSettings', 'continentConstant', '$rootScope', 'stompService', 'localeContext', function ($http, ngAuthSettings, continentConstant, $rootScope, stompService, localeContext) {
+app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', '$localStorage', 'stompService', 'localeContext', 'continentConstant',
+    function ($http, ngAuthSettings, $rootScope, $localStorage, stompService, localeContext, continentConstant) {
 
-    var serviceFactory = {};    
+        var serviceFactory = {};
 
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+        // Local cache        
 
-    var _initializing = false;
-    var _initialized  = false;
-
-    var getAllCompletedSubscription = null;
-    
-    var onConnected = function () {
-
-        getAllCompletedSubscription = stompService.subscribe(continentConstant.getAllCompletedTopic, onGetAllCompleted);
-
-        if (!_initializing && !_initialized) {
-            _initializing = true;
-            getAll();
+        if ($localStorage.continentData) {
+            var data = JSON.parse($localStorage.continentData);
+            for (var i = 0; i < data.length; i++) {
+                localeContext.continent.push(data[i]);
+            }
+            $rootScope.$emit(continentConstant.getAllCompletedEventName);
+            return serviceFactory;
         }
-    }   
 
-    var initialized = function () {
-        return _initialized;
-    };
+        // Get from Server
 
-    var getAll = function () {
-        return $http.post(serviceBase + continentConstant.getAllApiUri).then(function (results) {
-            //alert('envio bem sucedido');
-        });
-    };       
-
-    var onGetAllCompleted = function (payload) {
-
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
-
-        for (var i = 0; i < data.length; i++) {
-            localeContext.continent.push(data[i]);
-        }
+        var _initialized = false;
+        var _initializing = false;
         
-        _initializing = false;
-        _initialized = true;
+        var serviceBase = ngAuthSettings.distributedServicesUri;        
 
-        clearOnConnected();
+        var getAllCompletedSubscription = null;
 
-        getAllCompletedSubscription.unsubscribe();
+        var onConnected = function () {
 
-        $rootScope.$emit(continentConstant.getAllCompletedEventName);
-    }
+            getAllCompletedSubscription = stompService.subscribe(continentConstant.getAllCompletedTopic, onGetAllCompleted);
 
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-    });
+            if (!_initializing && !_initialized) {
+                _initializing = true;
+                getAll();
+            }
+        }
 
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
+        var getAll = function () {
+            return $http.post(serviceBase + continentConstant.getAllApiUri).then(function (results) {
+                //alert('envio bem sucedido');
+            });
+        };
 
-    // stompService
-    if (stompService.connected()) onConnected();
+        var onGetAllCompleted = function (payload) {
 
-    // serviceFactory
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
 
-    serviceFactory.initialized = initialized;
+            $localStorage.continentData = dataUTF8;
 
-    return serviceFactory;
+            var data = JSON.parse(dataUTF8);
 
-}]);
+            for (var i = 0; i < data.length; i++) {
+                localeContext.continent.push(data[i]);
+            }
+
+            _initializing = false;
+            _initialized = true;
+
+            clearOnConnected();
+
+            getAllCompletedSubscription.unsubscribe();
+
+            $rootScope.$emit(continentConstant.getAllCompletedEventName);
+        }
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
+        });
+
+        // stompService
+
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
+        
+        if (stompService.connected()) onConnected();       
+
+        return serviceFactory;
+
+    }]);
