@@ -9,6 +9,9 @@ app.constant('sensorConstant', {
     setLabelCompletedTopic: 'Sensor.SetLabelViewCompleted',
     setLabelCompletedEventName: 'sensorService.onSetLabelCompleted_Id_',
 
+    insertInApplicationCompletedTopic: 'Sensor.InsertInApplicationViewCompleted',
+    insertInApplicationCompletedEventName: 'sensorService.onInsertInApplicationCompleted',
+
 });
 
 app.constant('sensorTempDSFamilyConstant', {

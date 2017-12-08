@@ -11,11 +11,13 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
 
         var getAllByApplicationIdCompletedSubscription = null;
         var setLabelCompletedSubscription = null;
+        var insertInApplicationCompletedSubscription = null;
 
         var onConnected = function () {
 
             getAllByApplicationIdCompletedSubscription = stompService.subscribe(sensorConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
             setLabelCompletedSubscription = stompService.subscribeAllViews(sensorConstant.setLabelCompletedTopic, onSetLabelCompleted);
+            insertInApplicationCompletedSubscription = stompService.subscribeAllViews(sensorConstant.insertInApplicationCompletedTopic, onInsertInApplicationCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;
@@ -67,6 +69,16 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
             var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
             sensor.label = result.label;
             $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.sensorTempDSFamilyId, result);
+        }
+
+        var onInsertInApplicationCompleted = function (payload) {
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
+            var data = JSON.parse(dataUTF8);
+            for (var i = 0; i < data.length; i++) {
+                sensorContext.sensor.push(data[i]);
+            }            
+            sensorContext.$digest();
+            $rootScope.$emit(sensorConstant.insertInApplicationCompletedEventName);
         }
 
         $rootScope.$on('$destroy', function () {
