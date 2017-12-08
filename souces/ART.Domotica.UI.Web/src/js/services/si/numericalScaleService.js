@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('numericalScaleService', ['$http', 'ngAuthSettings', 'numericalScaleConstant', '$rootScope', 'stompService', 'siContext',
-    function ($http, ngAuthSettings, numericalScaleConstant, $rootScope, stompService, siContext) {
+app.factory('numericalScaleService', ['$http', 'ngAuthSettings', 'numericalScaleConstant', '$rootScope', '$localStorage', 'stompService', 'siContext',
+    function ($http, ngAuthSettings, numericalScaleConstant, $rootScope, $localStorage, stompService, siContext) {
 
         var serviceFactory = {};
         

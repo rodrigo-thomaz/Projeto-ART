@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', 'unitMeasurementConstant', '$rootScope', 'stompService', 'siContext',
-    function ($http, ngAuthSettings, unitMeasurementConstant, $rootScope, stompService, siContext) {
+app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', 'unitMeasurementConstant', '$rootScope', '$localStorage', 'stompService', 'siContext',
+    function ($http, ngAuthSettings, unitMeasurementConstant, $rootScope, $localStorage, stompService, siContext) {
 
         var serviceFactory = {};
 
