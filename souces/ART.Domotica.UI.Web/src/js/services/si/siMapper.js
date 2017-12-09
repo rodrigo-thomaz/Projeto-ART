@@ -52,23 +52,14 @@ app.factory('siMapper', [
             }
         });
 
-        // *** Navigation Properties Mappers ***       
-
-        var mapper_NumericalScale_NumericalScalePrefix_Init = false;
-        var mapper_NumericalScale_NumericalScalePrefix = function () {
-            if (!mapper_NumericalScale_NumericalScalePrefix_Init && siContext.numericalScaleLoaded && siContext.numericalScalePrefixLoaded) {
-                mapper_NumericalScale_NumericalScalePrefix_Init = true;
-                for (var i = 0; i < siContext.numericalScale.length; i++) {
-                    var numericalScale = siContext.numericalScale[i];
-                    var numericalScalePrefix = numericalScalePrefixFinder.getByKey(numericalScale.numericalScalePrefixId);
-                    numericalScale.numericalScalePrefix = numericalScalePrefix;
-                    if (numericalScalePrefix.numericalScales === undefined) {
-                        numericalScalePrefix.numericalScales = [];
-                    }
-                    numericalScalePrefix.numericalScales.push(numericalScale);
-                }
+        siContext.$watchCollection('numericalScalePrefix', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var numericalScalePrefix = newValues[i];
+                numericalScalePrefix.numericalScales = function () { return numericalScaleFinder.getByNumericalScalePrefixKey(this.numericalScalePrefixId); }
             }
-        };       
+        });
+
+        // *** Navigation Properties Mappers ***               
 
         var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
         var mapper_UnitMeasurement_UnitMeasurementType = function () {
@@ -126,13 +117,11 @@ app.factory('siMapper', [
         var onNumericalScalePrefixGetAllCompleted = function (event, data) {
             numericalScalePrefixGetAllCompletedSubscription();
             siContext.numericalScalePrefixLoaded = true;
-            mapper_NumericalScale_NumericalScalePrefix();
         }
 
         var onNumericalScaleGetAllCompleted = function (event, data) {
             numericalScaleGetAllCompletedSubscription();
             siContext.numericalScaleLoaded = true;
-            mapper_NumericalScale_NumericalScalePrefix();
             mapper_UnitMeasurementScale_NumericalScale();
         }
 
