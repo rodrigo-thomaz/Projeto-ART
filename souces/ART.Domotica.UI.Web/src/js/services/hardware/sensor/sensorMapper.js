@@ -77,16 +77,16 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
                 setUnitMeasurementScaleInSensorUnitMeasurementScale(newValues[i]);
             }
             //removendo
-            //for (var i = 0; i < oldValues.length; i++) {
-            //    var sensorTempDSFamily = oldValues[i];
-            //    var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolution.sensorTempDSFamilyResolutionId);
-            //    for (var j = 0; j < sensorTempDSFamilyResolution.sensorTempDSFamilies.length; j++) {
-            //        if (sensorTempDSFamily === sensorTempDSFamilyResolution.sensorTempDSFamilies[j]) {
-            //            sensorTempDSFamilyResolution.sensorTempDSFamilies.splice(j, 1);
-            //            break;
-            //        }
-            //    }
-            //}
+            for (var i = 0; i < oldValues.length; i++) {
+                var sensorUnitMeasurementScale = oldValues[i];
+                var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementScale.unitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.unitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.unitMeasurementScale.numericalScaleTypeId);
+                for (var j = 0; j < unitMeasurementScale.sensorUnitMeasurementScales.length; j++) {
+                    if (sensorUnitMeasurementScale === unitMeasurementScale.sensorUnitMeasurementScales[j]) {
+                        unitMeasurementScale.sensorUnitMeasurementScales.splice(j, 1);
+                        break;
+                    }
+                }
+            }
         });
 
         var setSensorTempDSFamilyResolutionInSensorTempDSFamily = function (sensorTempDSFamily) {
