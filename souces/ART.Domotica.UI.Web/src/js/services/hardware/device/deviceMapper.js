@@ -88,9 +88,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             for (var i = 0; i < newValues.length; i++) {
                 var sensorInDevice = newValues[i];
                 //sensor
-                if (sensorContext.sensorLoaded) {
-                    setSensorInDeviceInSensor(sensorInDevice);
-                }
+                setSensorInDeviceInSensor(sensorInDevice);
             }
             //removendo
             //for (var i = 0; i < oldValues.length; i++) {
@@ -105,6 +103,21 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             //}
         });
 
+        sensorContext.$watchCollection('sensor', function (newValues, oldValues) {
+            //inserindo
+            for (var i = 0; i < newValues.length; i++) {
+                var sensor = newValues[i];
+                for (var j = 0; j < deviceContext.sensorInDevice.length; j++) {
+                    var sensorInDevice = deviceContext.sensorInDevice[j];
+                    if (sensor.sensorId === sensorInDevice.sensorId) {
+                        if (!sensor.sensorInDevice) sensor.sensorInDevice = sensorInDevice;
+                        if (!sensorInDevice.sensor) sensorInDevice.sensor = sensor;
+                        break;
+                    }
+                }
+            }
+        });
+
         var setTimeZoneInDeviceNTP = function (deviceNTP) {
             if (deviceNTP.timeZone) return;
             var timeZone = globalizationFinder.getTimeZoneByKey(deviceNTP.timeZoneId);
@@ -117,10 +130,12 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
         }
 
         var setSensorInDeviceInSensor = function (sensorInDevice) {
-            if (sensorInDevice.sensor) return;
+            if (sensorInDevice.sensor || !sensorContext.sensorLoaded) return;
             var sensor = sensorFinder.getSensorByKey(sensorInDevice.sensorId);
-            sensorInDevice.sensor = sensor;
-            sensor.sensorInDevice = sensorInDevice;            
+            if (sensor) {
+                sensorInDevice.sensor = sensor;
+                sensor.sensorInDevice = sensorInDevice;
+            }
         }
 
         // *** Navigation Properties Mappers ***        
