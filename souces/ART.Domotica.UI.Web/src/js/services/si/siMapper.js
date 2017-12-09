@@ -38,10 +38,10 @@ app.factory('siMapper', [
 
         var serviceFactory = {};
 
-        siContext.$watchCollection('numericalScaleTypeCountry', function (newValues, oldValues) {
+        siContext.$watchCollection('numericalScaleType', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
-                var numericalScaleTypeCountry = newValues[i];
-                numericalScaleTypeCountry.country = function () { return countryFinder.getByKey(this.countryId); }
+                var numericalScaleType = newValues[i];
+                numericalScaleType.countries = function () { return countryFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
             }
         });
 
@@ -52,32 +52,7 @@ app.factory('siMapper', [
             }
         });
 
-        // *** Navigation Properties Mappers ***
-
-        var mapper_NumericalScaleTypeCountry_Init = false;
-        var mapper_NumericalScaleTypeCountry = function () {
-            if (!mapper_NumericalScaleTypeCountry_Init && siContext.numericalScaleTypeCountryLoaded && siContext.numericalScaleTypeLoaded && localeContext.countryLoaded) {
-                mapper_NumericalScaleTypeCountry_Init = true;
-                countryLoadedUnbinding();
-                for (var i = 0; i < siContext.numericalScaleTypeCountry.length; i++) {
-                    var numericalScaleTypeCountry = siContext.numericalScaleTypeCountry[i];
-                    var numericalScaleType = numericalScaleTypeFinder.getByKey(numericalScaleTypeCountry.numericalScaleTypeId);
-                    var country = countryFinder.getByKey(numericalScaleTypeCountry.countryId);
-                    //Atach in numericalScaleType
-                    if (numericalScaleType.countries === undefined) {
-                        numericalScaleType.countries = [];
-                    }
-                    numericalScaleType.countries.push(country);
-                    //Atach in country
-                    //if (country.numericalScaleTypes === undefined) {
-                    //    country.numericalScaleTypes = [];
-                    //}
-                    //country.numericalScaleTypes.push(numericalScaleType);
-                }
-                //delete siContext.numericalScaleTypeCountry;
-                //delete siContext.numericalScaleTypeCountryLoaded;
-            }
-        };
+        // *** Navigation Properties Mappers ***       
 
         var mapper_NumericalScale_NumericalScalePrefix_Init = false;
         var mapper_NumericalScale_NumericalScalePrefix = function () {
@@ -181,15 +156,12 @@ app.factory('siMapper', [
         var onNumericalScaleTypeCountryGetAllCompleted = function (event, data) {
             numericalScaleTypeCountryGetAllCompletedSubscription();
             siContext.numericalScaleTypeCountryLoaded = true;
-            mapper_NumericalScaleTypeCountry();
         }
 
         var onNumericalScaleTypeGetAllCompleted = function (event, data) {
             numericalScaleTypeGetAllCompletedSubscription();
             siContext.numericalScaleTypeLoaded = true;
-            mapper_NumericalScaleTypeCountry();
             mapper_NumericalScale_NumericalScaleType();
-            mapper_NumericalScaleTypeCountry();
         }
 
         var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
@@ -230,15 +202,7 @@ app.factory('siMapper', [
             unitMeasurementTypeGetAllCompletedSubscription();
         });
 
-        // *** Events Subscriptions
-
-        // *** Watches
-
-        var countryLoadedUnbinding = localeContext.$watch('countryLoaded', function (newValue, oldValue) {
-            mapper_NumericalScaleTypeCountry();
-        })
-
-        // *** Watches
+        // *** Events Subscriptions        
 
         return serviceFactory;
 

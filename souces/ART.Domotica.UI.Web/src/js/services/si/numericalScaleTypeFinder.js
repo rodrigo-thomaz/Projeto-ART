@@ -17,7 +17,7 @@ app.factory('numericalScaleTypeFinder', ['$rootScope', 'siContext', function ($r
     var getByCountryKey = function (countryId) {
         var result = [];
         for (var i = 0; i < context.numericalScaleTypeCountry.length; i++) {
-            if (context.numericalScaleTypeCountry[i].countryId === this.countryId) {
+            if (context.numericalScaleTypeCountry[i].countryId === countryId) {
                 var numericalScaleType = getByKey(context.numericalScaleTypeCountry[i].numericalScaleTypeId);
                 result.push(numericalScaleType);
             }

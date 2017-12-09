@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.factory('countryFinder', ['$rootScope', 'localeContext', function ($rootScope, localeContext) {
+app.factory('countryFinder', ['$rootScope', 'localeContext', 'siContext', 'numericalScaleTypeFinder', function ($rootScope, localeContext, siContext, numericalScaleTypeFinder) {
 
     var context = localeContext;
 
@@ -24,10 +24,22 @@ app.factory('countryFinder', ['$rootScope', 'localeContext', function ($rootScop
         return result;
     }  
 
+    var getByNumericalScaleTypeKey = function (numericalScaleTypeId) {
+        var result = [];
+        for (var i = 0; i < siContext.numericalScaleTypeCountry.length; i++) {
+            if (siContext.numericalScaleTypeCountry[i].numericalScaleTypeId === numericalScaleTypeId) {
+                var country = getByKey(siContext.numericalScaleTypeCountry[i].countryId);
+                result.push(country);
+            }
+        }
+        return result;
+    } 
+
     // *** Public Methods ***
 
     serviceFactory.getByKey = getByKey;
     serviceFactory.getByContinentKey = getByContinentKey;
+    serviceFactory.getByNumericalScaleTypeKey = getByNumericalScaleTypeKey;
 
     return serviceFactory;
 
