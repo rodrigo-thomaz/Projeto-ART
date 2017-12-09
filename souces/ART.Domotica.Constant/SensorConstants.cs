@@ -12,6 +12,7 @@
         public static readonly string SetLabelQueueName = "Sensor.SetLabel";
         public static readonly string SetLabelViewCompletedQueueName = "Sensor.SetLabelViewCompleted";
         public static readonly string InsertInApplicationViewCompletedQueueName = "Sensor.InsertInApplicationViewCompleted";
+        public static readonly string DeleteFromApplicationViewCompletedQueueName = "Sensor.DeleteFromApplicationViewCompleted";
 
         #endregion Fields
     }

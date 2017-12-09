@@ -23,6 +23,8 @@
 
         Task<List<ESPDevice>> GetListNotInApplication();
 
+        Task<ESPDevice> GetFullByKey(Guid deviceId);
+
         #endregion Methods
     }
 }

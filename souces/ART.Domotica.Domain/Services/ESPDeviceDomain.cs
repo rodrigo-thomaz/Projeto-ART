@@ -133,7 +133,7 @@
 
             await _hardwareInApplicationRepository.Delete(hardwareInApplicationToDelete);
 
-            var deviceEntity = await _espDeviceRepository.GetByKey(deviceHardwareInApplicationEntity.HardwareId);
+            var deviceEntity = await _espDeviceRepository.GetFullByKey(deviceHardwareInApplicationEntity.HardwareId);
 
             return deviceEntity;
         }

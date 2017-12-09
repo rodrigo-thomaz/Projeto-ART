@@ -12,6 +12,8 @@ app.constant('sensorConstant', {
     insertInApplicationCompletedTopic: 'Sensor.InsertInApplicationViewCompleted',
     insertInApplicationCompletedEventName: 'sensorService.onInsertInApplicationCompleted',
 
+    deleteFromApplicationCompletedTopic: 'Sensor.DeleteFromApplicationViewCompleted',
+    deleteFromApplicationCompletedEventName: 'sensorService.onDeleteFromApplicationCompleted',
 });
 
 app.constant('sensorTempDSFamilyConstant', {

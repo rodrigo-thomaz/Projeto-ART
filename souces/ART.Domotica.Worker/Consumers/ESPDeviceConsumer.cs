@@ -311,6 +311,12 @@
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);                        
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
+            //Enviando sensores para View
+            var sensorRountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.DeleteFromApplicationViewCompletedQueueName);
+            var sensorViewModel = Mapper.Map<IEnumerable<Sensor>, IEnumerable<SensorGetModel>>(data.DeviceSensors.SensorInDevice.Select(x => x.Sensor));
+            var sensorViewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(sensorViewModel, true);
+            _model.BasicPublish(exchange, sensorRountingKey, null, sensorViewBuffer);
+
             //Enviando para o IoT
             var deviceMessage = new MessageIoTContract<string>(string.Empty);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);

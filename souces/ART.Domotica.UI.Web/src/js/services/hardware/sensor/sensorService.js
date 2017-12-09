@@ -12,12 +12,14 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
         var getAllByApplicationIdCompletedSubscription = null;
         var setLabelCompletedSubscription = null;
         var insertInApplicationCompletedSubscription = null;
+        var deleteFromApplicationCompletedSubscription = null;
 
         var onConnected = function () {
 
             getAllByApplicationIdCompletedSubscription = stompService.subscribe(sensorConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
             setLabelCompletedSubscription = stompService.subscribeAllViews(sensorConstant.setLabelCompletedTopic, onSetLabelCompleted);
             insertInApplicationCompletedSubscription = stompService.subscribeAllViews(sensorConstant.insertInApplicationCompletedTopic, onInsertInApplicationCompleted);
+            deleteFromApplicationCompletedSubscription = stompService.subscribeAllViews(sensorConstant.deleteFromApplicationCompletedTopic, onDeleteFromApplicationCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;
@@ -81,9 +83,26 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
             $rootScope.$emit(sensorConstant.insertInApplicationCompletedEventName);
         }
 
+        var onDeleteFromApplicationCompleted = function (payload) {
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
+            var data = JSON.parse(dataUTF8);
+            for (var i = 0; i < data.length; i++) {
+                for (var j = 0; j < sensorContext.sensor.length; j++) {
+                    if (data[i].sensorId === sensorContext.sensor[j].sensorId) {
+                        sensorContext.sensor.splice(j, 1);
+                        break;
+                    }
+                }
+            }
+            sensorContext.$digest();
+            $rootScope.$emit(sensorConstant.deleteFromApplicationCompletedEventName);
+        }
+
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
             setLabelCompletedSubscription.unsubscribe();
+            insertInApplicationCompletedSubscription.unsubscribe();
+            deleteFromApplicationCompletedSubscription.unsubscribe();
         });
 
         var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);

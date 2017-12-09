@@ -44,6 +44,20 @@
             return data;
         }
 
+        public async Task<ESPDevice> GetFullByKey(Guid deviceId)
+        {
+            var data = await _context.ESPDevice
+               .Include(x => x.DeviceNTP)
+               .Include(x => x.DeviceMQ)
+               .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTriggers))
+               .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
+               .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily))
+               .Where(x => x.Id == deviceId)
+               .FirstOrDefaultAsync();
+
+            return data;
+        }
+
         public async Task<List<string>> GetExistingPins()
         {
             var data = await _context.ESPDevice
