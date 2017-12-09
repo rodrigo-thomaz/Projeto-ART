@@ -53,6 +53,8 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', 'unitMeasureme
                 siContext.unitMeasurement.push(data[i]);
             }
 
+            siContext.$digest();
+
             _initializing = false;
             _initialized = true;
 

@@ -53,6 +53,8 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', '$local
                 globalizationContext.timeZone.push(data[i]);
             }
 
+            globalizationContext.$digest();
+
             _initializing = false;
             _initialized = true;
 

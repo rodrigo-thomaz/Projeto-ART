@@ -38,7 +38,9 @@ app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSetti
         for (var i = 0; i < data.length; i++) {
             sensorDatasheetContext.sensorDatasheetUnitMeasurementScale.push(data[i]);
         }
-                
+
+        sensorDatasheetContext.$digest();
+
         _initializing = false;
         _initialized = true;
 

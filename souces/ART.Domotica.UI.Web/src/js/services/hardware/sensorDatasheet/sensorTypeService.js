@@ -38,7 +38,9 @@ app.factory('sensorTypeService', ['$http', 'ngAuthSettings', '$rootScope', 'stom
         for (var i = 0; i < data.length; i++) {
             sensorDatasheetContext.sensorType.push(data[i]);
         }
-                
+
+        sensorDatasheetContext.$digest();
+
         _initializing = false;
         _initialized = true;
 

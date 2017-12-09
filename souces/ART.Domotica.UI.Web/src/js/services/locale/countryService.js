@@ -53,6 +53,8 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', '$localS
                 localeContext.country.push(data[i]);
             }
 
+            localeContext.$digest();
+
             _initializing = false;
             _initialized = true;
 

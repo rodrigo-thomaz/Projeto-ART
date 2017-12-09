@@ -53,6 +53,8 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', '$loca
                 localeContext.continent.push(data[i]);
             }
 
+            localeContext.$digest();
+
             _initializing = false;
             _initialized = true;
 

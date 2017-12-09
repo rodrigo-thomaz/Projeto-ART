@@ -53,6 +53,8 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', 'num
                 siContext.numericalScaleTypeCountry.push(data[i]);
             }
 
+            siContext.$digest();
+
             _initializing = false;
             _initialized = true;
 
