@@ -53,6 +53,25 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             }
         });
 
+        sensorContext.$watchCollection('sensorTempDSFamily', function (newValues, oldValues) {
+            //inserindo
+            for (var i = 0; i < newValues.length; i++) {
+                var sensorTempDSFamily = newValues[i];
+                setSensorTempDSFamilyResolutionInSensorTempDSFamily(sensorTempDSFamily);                
+            }
+        });
+
+        var setSensorTempDSFamilyResolutionInSensorTempDSFamily = function (sensorTempDSFamily) {
+            if (sensorTempDSFamily.sensorTempDSFamilyResolution) return;
+            var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolutionId);
+            sensorTempDSFamily.sensorTempDSFamilyResolution = sensorTempDSFamilyResolution;
+            delete sensorTempDSFamily.sensorTempDSFamilyResolutionId; // removendo a foreing key
+            if (sensorTempDSFamilyResolution.sensorTempDSFamilies === undefined) {
+                sensorTempDSFamilyResolution.sensorTempDSFamilies = [];
+            }
+            sensorTempDSFamilyResolution.sensorTempDSFamilies.push(sensorTempDSFamily);
+        }
+
         // *** Navigation Properties Mappers ***
         
         var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = false;
@@ -61,14 +80,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
                 mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = true;
                 sensorTempDSFamilyResolutionLoadedUnbinding();
                 for (var i = 0; i < sensorContext.sensorTempDSFamily.length; i++) {
-                    var sensorTempDSFamily = sensorContext.sensorTempDSFamily[i];
-                    var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolutionId);
-                    sensorTempDSFamily.sensorTempDSFamilyResolution = sensorTempDSFamilyResolution;
-                    delete sensorTempDSFamily.sensorTempDSFamilyResolutionId; // removendo a foreing key
-                    if (sensorTempDSFamilyResolution.sensorTempDSFamilies === undefined) {
-                        sensorTempDSFamilyResolution.sensorTempDSFamilies = [];
-                    }
-                    sensorTempDSFamilyResolution.sensorTempDSFamilies.push(sensorTempDSFamily);
+                    setSensorTempDSFamilyResolutionInSensorTempDSFamily(sensorContext.sensorTempDSFamily[i]);
                 }
             }
         };
