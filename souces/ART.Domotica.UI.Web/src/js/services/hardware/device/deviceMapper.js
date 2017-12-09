@@ -91,16 +91,13 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 setSensorInDeviceInSensor(sensorInDevice);
             }
             //removendo
-            //for (var i = 0; i < oldValues.length; i++) {
-            //    var sensorInDevice = oldValues[i];
-            //    //timeZone
-            //    var timeZone = globalizationFinder.getTimeZoneByKey(sensorInDevice.timeZone.timeZoneId);
-            //    for (var j = 0; j < timeZone.sensorsInDevice.length; j++) {
-            //        if (sensorInDevice === timeZone.sensorsInDevice[j]) {
-            //            timeZone.sensorsInDevice.splice(j, 1);
-            //        }
-            //    }
-            //}
+            for (var i = 0; i < oldValues.length; i++) {
+                var sensorInDevice = oldValues[i];
+                //sensor
+                var sensor = sensorInDevice.sensor;
+                delete sensorInDevice.sensor;
+                delete sensor.sensorInDevice;
+            }
         });
 
         sensorContext.$watchCollection('sensor', function (newValues, oldValues) {
@@ -116,6 +113,8 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                     }
                 }
             }
+            //removendo
+
         });
 
         var setTimeZoneInDeviceNTP = function (deviceNTP) {
