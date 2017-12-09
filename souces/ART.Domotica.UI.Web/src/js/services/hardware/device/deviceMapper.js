@@ -133,8 +133,8 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             if (sensorInDevice.sensor || !sensorContext.sensorLoaded) return;
             var sensor = sensorFinder.getSensorByKey(sensorInDevice.sensorId);
             if (sensor) {
-                sensorInDevice.sensor = sensor;
-                sensor.sensorInDevice = sensorInDevice;
+                if (!sensor.sensorInDevice) sensor.sensorInDevice = sensorInDevice;
+                if (!sensorInDevice.sensor) sensorInDevice.sensor = sensor;    
             }
         }
 
