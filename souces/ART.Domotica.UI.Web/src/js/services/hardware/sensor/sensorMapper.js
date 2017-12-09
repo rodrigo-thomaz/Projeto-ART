@@ -56,8 +56,18 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
         sensorContext.$watchCollection('sensorTempDSFamily', function (newValues, oldValues) {
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
-                var sensorTempDSFamily = newValues[i];
-                setSensorTempDSFamilyResolutionInSensorTempDSFamily(sensorTempDSFamily);                
+                setSensorTempDSFamilyResolutionInSensorTempDSFamily(newValues[i]);                
+            }
+            //removendo
+            for (var i = 0; i < oldValues.length; i++) {
+                var sensorTempDSFamily = oldValues[i];
+                var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolution.sensorTempDSFamilyResolutionId);
+                for (var j = 0; j < sensorTempDSFamilyResolution.sensorTempDSFamilies.length; j++) {
+                    if (sensorTempDSFamily === sensorTempDSFamilyResolution.sensorTempDSFamilies[j]){
+                        sensorTempDSFamilyResolution.sensorTempDSFamilies.splice(j, 1);
+                        break;
+                    }
+                }
             }
         });
 
