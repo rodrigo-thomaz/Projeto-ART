@@ -17,7 +17,7 @@ app.constant('sensorConstant', {
 });
 
 app.constant('sensorTempDSFamilyConstant', {
-        
+
     setResolutionApiUri: 'api/sensorTempDSFamily/setResolution',
     setResolutionCompletedTopic: 'SensorTempDSFamily.SetResolutionViewCompleted',
     setResolutionCompletedEventName: 'sensorTempDSFamilyService.onSetResolutionCompleted_Id_',
