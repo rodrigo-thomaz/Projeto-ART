@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'siContext', 'siFinder',
-    function ($rootScope, sensorContext, sensorConstant, sensorFinder, siContext, siFinder) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'siContext', 'siFinder', 'sensorDatasheetContext', 'sensorDatasheetFinder',
+    function ($rootScope, sensorContext, sensorConstant, sensorFinder, siContext, siFinder, sensorDatasheetContext, sensorDatasheetFinder) {
 
         var serviceFactory = {};
 
@@ -8,6 +8,8 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
                 var sensor = newValues[i];
+                //sensorDatasheet
+                setSensorDatasheetInSensor(sensor);
                 //sensorTempDSFamily
                 var sensorTempDSFamily = sensor.sensorTempDSFamily;
                 sensorTempDSFamily.sensor = sensor;
@@ -114,6 +116,18 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             unitMeasurementScale.sensorUnitMeasurementScales.push(sensorUnitMeasurementScale);
         }
 
+        var setSensorDatasheetInSensor = function (sensor) {
+            if (sensor.sensorDatasheet) return;
+            var sensorDatasheet = sensorDatasheetFinder.getSensorDatasheetByKey(sensor.sensorDatasheetId, sensor.sensorTypeId);
+            sensor.sensorDatasheet = sensorDatasheet;
+            delete sensor.sensorDatasheetId; // removendo a foreing key
+            delete sensor.sensorTypeId; // removendo a foreing key
+            if (sensorDatasheet.sensors === undefined) {
+                sensorDatasheet.sensors = [];
+            }
+            sensorDatasheet.sensors.push(sensor);
+        }
+
         // *** Navigation Properties Mappers ***
         
         var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = false;
@@ -138,6 +152,17 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             }
         };
 
+        var mapper_Sensor_SensorDatasheet_Init = false;
+        var mapper_Sensor_SensorDatasheet = function () {
+            if (!mapper_Sensor_SensorDatasheet_Init && sensorContext.sensorLoaded && sensorDatasheetContext.sensorDatasheetLoaded) {
+                mapper_Sensor_SensorDatasheet_Init = true;
+                sensorDatasheetLoadedUnbinding();
+                for (var i = 0; i < sensorContext.sensor.length; i++) {
+                    setSensorDatasheetInSensor(sensorContext.sensor[i]);
+                }
+            }
+        };
+
         // *** Navigation Properties Mappers ***
 
 
@@ -151,9 +176,6 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             sensorContext.sensorUnitMeasurementScaleLoaded = true;
             sensorContext.sensorTempDSFamilyLoaded = true;
             sensorContext.sensorTempDSFamilyResolutionLoaded = true;
-
-            mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
-            mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
         }
 
         var sensorGetAllByApplicationIdCompletedSubscription = $rootScope.$on(sensorConstant.getAllByApplicationIdCompletedEventName, onSensorGetAllByApplicationIdCompleted);
@@ -173,6 +195,10 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
 
         var unitMeasurementScaleLoadedUnbinding = siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
             mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
+        })
+
+        var sensorDatasheetLoadedUnbinding = sensorDatasheetContext.$watch('sensorDatasheetLoaded', function (newValue, oldValue) {
+            mapper_Sensor_SensorDatasheet();
         })
 
         // *** Watches

@@ -160,9 +160,6 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             deviceContext.deviceNTPLoaded = true;
             deviceContext.deviceSensorsLoaded = true;
             deviceContext.sensorInDeviceLoaded = true;
-
-            mapper_DeviceNTP_TimeZone();
-            mapper_SensorInDevice_Sensor();
         }
 
         var deviceGetAllByApplicationIdCompletedSubscription = $rootScope.$on(deviceConstant.getAllByApplicationIdCompletedEventName, onDeviceGetAllByApplicationIdCompleted);
