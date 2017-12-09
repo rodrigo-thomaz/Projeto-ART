@@ -7,7 +7,7 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', '$local
         // Local cache        
 
         if ($localStorage.timeZoneData) {
-            var data = JSON.parse($localStorage.timeZoneData);
+            var data = JSON.parse(Base64.decode($localStorage.timeZoneData));
             for (var i = 0; i < data.length; i++) {
                 globalizationContext.timeZone.push(data[i]);
             }
@@ -41,14 +41,14 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', '$local
         };
 
         var onGetAllCompleted = function (payload) {
+            
+            var dataUTF8 = decodeURIComponent(escape(payload.body));            
 
-            var dataUTF8 = decodeURIComponent(escape(payload.body));
-
-            $localStorage.timeZoneData = dataUTF8;
+            $localStorage.timeZoneData = Base64.encode(dataUTF8);
             $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);
-
+            
             for (var i = 0; i < data.length; i++) {
                 globalizationContext.timeZone.push(data[i]);
             }

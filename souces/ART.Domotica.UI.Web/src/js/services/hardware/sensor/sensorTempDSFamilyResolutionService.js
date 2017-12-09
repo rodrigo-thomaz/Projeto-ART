@@ -7,7 +7,7 @@ app.factory('sensorTempDSFamilyResolutionService', ['$http', '$log', '$rootScope
         // Local cache        
 
         if ($localStorage.sensorTempDSFamilyResolutionData) {
-            var data = JSON.parse($localStorage.sensorTempDSFamilyResolutionData);
+            var data = JSON.parse(Base64.decode($localStorage.sensorTempDSFamilyResolutionData));
             for (var i = 0; i < data.length; i++) {
                 sensorContext.sensorTempDSFamilyResolution.push(data[i]);
             }
@@ -44,7 +44,7 @@ app.factory('sensorTempDSFamilyResolutionService', ['$http', '$log', '$rootScope
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
-            $localStorage.sensorTempDSFamilyResolutionData = dataUTF8;
+            $localStorage.sensorTempDSFamilyResolutionData = Base64.encode(dataUTF8);
             $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);

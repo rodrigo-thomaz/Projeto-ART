@@ -7,7 +7,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', '$loca
         // Local cache        
 
         if ($localStorage.continentData) {
-            var data = JSON.parse($localStorage.continentData);
+            var data = JSON.parse(Base64.decode($localStorage.continentData));
             for (var i = 0; i < data.length; i++) {
                 localeContext.continent.push(data[i]);
             }
@@ -44,7 +44,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', '$loca
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
-            $localStorage.continentData = dataUTF8;
+            $localStorage.continentData = Base64.encode(dataUTF8);
             $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);

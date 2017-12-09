@@ -7,7 +7,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', 'num
         // Local cache        
 
         if ($localStorage.numericalScaleTypeCountryData) {
-            var data = JSON.parse($localStorage.numericalScaleTypeCountryData);
+            var data = JSON.parse(Base64.decode($localStorage.numericalScaleTypeCountryData));
             for (var i = 0; i < data.length; i++) {
                 siContext.numericalScaleTypeCountry.push(data[i]);
             }
@@ -44,7 +44,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', 'num
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
-            $localStorage.numericalScaleTypeCountryData = dataUTF8;
+            $localStorage.numericalScaleTypeCountryData = Base64.encode(dataUTF8);
             $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);

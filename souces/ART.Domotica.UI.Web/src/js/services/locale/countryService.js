@@ -7,7 +7,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', '$localS
         // Local cache        
 
         if ($localStorage.countryData) {
-            var data = JSON.parse($localStorage.countryData);
+            var data = JSON.parse(Base64.decode($localStorage.countryData));
             for (var i = 0; i < data.length; i++) {
                 localeContext.country.push(data[i]);
             }
@@ -44,7 +44,7 @@ app.factory('countryService', ['$http', 'ngAuthSettings', '$rootScope', '$localS
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
-            $localStorage.countryData = dataUTF8;
+            $localStorage.countryData = Base64.encode(dataUTF8);
             $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);

@@ -7,7 +7,7 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', 'unitMeasureme
         // Local cache        
 
         if ($localStorage.unitMeasurementData) {
-            var data = JSON.parse($localStorage.unitMeasurementData);
+            var data = JSON.parse(Base64.decode($localStorage.unitMeasurementData));
             for (var i = 0; i < data.length; i++) {
                 siContext.unitMeasurement.push(data[i]);
             }
@@ -44,7 +44,7 @@ app.factory('unitMeasurementService', ['$http', 'ngAuthSettings', 'unitMeasureme
 
             var dataUTF8 = decodeURIComponent(escape(payload.body));
 
-            $localStorage.unitMeasurementData = dataUTF8;
+            $localStorage.unitMeasurementData = Base64.encode(dataUTF8);
             $localStorage.$save();
 
             var data = JSON.parse(dataUTF8);

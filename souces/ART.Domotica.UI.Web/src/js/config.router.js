@@ -44,6 +44,7 @@ angular.module('app')
                       'ui.select',   
                       'toaster',
                       
+                      'js/base64Helper.js',
                       'js/services/contextScope.js',
 
                       // Globalization
@@ -134,6 +135,7 @@ angular.module('app')
                       'ui.grid',
                       'toaster',
 
+                      'js/base64Helper.js',
                       'js/services/contextScope.js',
 
                       // Globalization

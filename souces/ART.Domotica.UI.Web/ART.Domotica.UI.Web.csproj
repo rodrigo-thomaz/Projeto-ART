@@ -203,6 +203,7 @@
     <Content Include="src\js\app\contact\contacts.json" />
     <Content Include="src\js\app\mail\mails.json" />
     <Content Include="src\js\app\note\notes.json" />
+    <Content Include="src\js\base64Helper.js" />
     <Content Include="src\js\config.settings.js" />
     <Content Include="src\js\controllers\admin\espDeviceAdminController.js" />
     <Content Include="src\js\controllers\espDeviceJoinController.js" />
