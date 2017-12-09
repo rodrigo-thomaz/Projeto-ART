@@ -68,23 +68,14 @@ app.factory('siMapper', [
             }
         });
 
-        // *** Navigation Properties Mappers ***                      
-
-        var mapper_UnitMeasurementScale_UnitMeasurement_Init = false;
-        var mapper_UnitMeasurementScale_UnitMeasurement = function () {
-            if (!mapper_UnitMeasurementScale_UnitMeasurement_Init && siContext.unitMeasurementScaleLoaded && siContext.unitMeasurementLoaded) {
-                mapper_UnitMeasurementScale_UnitMeasurement_Init = true;
-                for (var i = 0; i < siContext.unitMeasurementScale.length; i++) {
-                    var unitMeasurementScale = siContext.unitMeasurementScale[i];
-                    var unitMeasurement = unitMeasurementFinder.getByKey(unitMeasurementScale.unitMeasurementId, unitMeasurementScale.unitMeasurementTypeId);
-                    //unitMeasurementScale.unitMeasurement = unitMeasurement;
-                    if (unitMeasurement.unitMeasurementScales === undefined) {
-                        unitMeasurement.unitMeasurementScales = [];
-                    }
-                    unitMeasurement.unitMeasurementScales.push(unitMeasurementScale);
-                }
+        siContext.$watchCollection('unitMeasurement', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var unitMeasurement = newValues[i];
+                unitMeasurement.unitMeasurementScales = function () { return unitMeasurementScaleFinder.getByUnitMeasurementKey(this.unitMeasurementId, this.unitMeasurementTypeId); }
             }
-        };       
+        });
+
+        // *** Navigation Properties Mappers ***                      
 
         var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
         var mapper_UnitMeasurement_UnitMeasurementType = function () {
@@ -130,14 +121,12 @@ app.factory('siMapper', [
         var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
             unitMeasurementScaleGetAllCompletedSubscription();
             siContext.unitMeasurementScaleLoaded = true;
-            mapper_UnitMeasurementScale_UnitMeasurement();
         }
 
         var onUnitMeasurementGetAllCompleted = function (event, data) {
             unitMeasurementGetAllCompletedSubscription();
             siContext.unitMeasurementLoaded = true;
             mapper_UnitMeasurement_UnitMeasurementType();
-            mapper_UnitMeasurementScale_UnitMeasurement();
         }
 
         var onUnitMeasurementTypeGetAllCompleted = function (event, data) {
