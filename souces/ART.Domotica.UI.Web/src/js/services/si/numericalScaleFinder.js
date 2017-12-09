@@ -13,10 +13,21 @@ app.factory('numericalScaleFinder', ['$rootScope', 'siContext', function ($rootS
             }
         }
     }
-       
+
+    var getByNumericalScaleTypeKey = function (numericalScaleTypeId) {
+        var result = [];
+        for (var i = 0; i < context.numericalScale.length; i++) {
+            if (context.numericalScale[i].numericalScaleTypeId === numericalScaleTypeId) {
+                result.push(context.numericalScale[i]);
+            }
+        }
+        return result;
+    }
+
     // *** Public Methods ***
 
     serviceFactory.getByKey = getByKey;
+    serviceFactory.getByNumericalScaleTypeKey = getByNumericalScaleTypeKey;
 
     return serviceFactory;
 

@@ -40,6 +40,14 @@ app.factory('siMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var numericalScaleType = newValues[i];
                 numericalScaleType.countries = function () { return countryFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
+                numericalScaleType.numericalScales = function () { return numericalScaleFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
+            }
+        });
+
+        siContext.$watchCollection('numericalScale', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var numericalScale = newValues[i];
+                numericalScale.numericalScaleType = function () { return numericalScaleTypeFinder.getByKey(this.numericalScaleTypeId); }
             }
         });
 
@@ -59,23 +67,7 @@ app.factory('siMapper', [
                     numericalScalePrefix.numericalScales.push(numericalScale);
                 }
             }
-        };
-
-        var mapper_NumericalScale_NumericalScaleType_Init = false;
-        var mapper_NumericalScale_NumericalScaleType = function () {
-            if (!mapper_NumericalScale_NumericalScaleType_Init && siContext.numericalScaleLoaded && siContext.numericalScaleTypeLoaded) {
-                mapper_NumericalScale_NumericalScaleType_Init = true;
-                for (var i = 0; i < siContext.numericalScale.length; i++) {
-                    var numericalScale = siContext.numericalScale[i];
-                    var numericalScaleType = numericalScaleTypeFinder.getByKey(numericalScale.numericalScaleTypeId);
-                    numericalScale.numericalScaleType = numericalScaleType;
-                    if (numericalScaleType.numericalScales === undefined) {
-                        numericalScaleType.numericalScales = [];
-                    }
-                    numericalScaleType.numericalScales.push(numericalScale);
-                }
-            }
-        };
+        };       
 
         var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
         var mapper_UnitMeasurement_UnitMeasurementType = function () {
@@ -140,7 +132,6 @@ app.factory('siMapper', [
             numericalScaleGetAllCompletedSubscription();
             siContext.numericalScaleLoaded = true;
             mapper_NumericalScale_NumericalScalePrefix();
-            mapper_NumericalScale_NumericalScaleType();
             mapper_UnitMeasurementScale_NumericalScale();
         }
 
@@ -152,7 +143,6 @@ app.factory('siMapper', [
         var onNumericalScaleTypeGetAllCompleted = function (event, data) {
             numericalScaleTypeGetAllCompletedSubscription();
             siContext.numericalScaleTypeLoaded = true;
-            mapper_NumericalScale_NumericalScaleType();
         }
 
         var onUnitMeasurementScaleGetAllCompleted = function (event, data) {
