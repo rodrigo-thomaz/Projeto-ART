@@ -49,6 +49,7 @@ app.factory('siMapper', [
                 var numericalScale = newValues[i];
                 numericalScale.numericalScaleType = function () { return numericalScaleTypeFinder.getByKey(this.numericalScaleTypeId); }
                 numericalScale.numericalScalePrefix = function () { return numericalScalePrefixFinder.getByKey(this.numericalScalePrefixId); }
+                numericalScale.unitMeasurementScales = function () { return unitMeasurementScaleFinder.getByNumericalScaleKey(this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
         });
 
@@ -60,6 +61,22 @@ app.factory('siMapper', [
         });
 
         // *** Navigation Properties Mappers ***               
+
+        var mapper_UnitMeasurementScale_NumericalScale_Init = false;
+        var mapper_UnitMeasurementScale_NumericalScale = function () {
+            if (!mapper_UnitMeasurementScale_NumericalScale_Init && siContext.unitMeasurementScaleLoaded && siContext.numericalScaleLoaded) {
+                mapper_UnitMeasurementScale_NumericalScale_Init = true;
+                for (var i = 0; i < siContext.unitMeasurementScale.length; i++) {
+                    var unitMeasurementScale = siContext.unitMeasurementScale[i];
+                    var numericalScale = numericalScaleFinder.getByKey(unitMeasurementScale.numericalScalePrefixId, unitMeasurementScale.numericalScaleTypeId);
+                    unitMeasurementScale.numericalScale = numericalScale;
+                    //if (numericalScale.unitMeasurementScales === undefined) {
+                    //    numericalScale.unitMeasurementScales = [];
+                    //}
+                    //numericalScale.unitMeasurementScales.push(unitMeasurementScale);
+                }
+            }
+        };
 
         var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
         var mapper_UnitMeasurement_UnitMeasurementType = function () {
@@ -91,23 +108,7 @@ app.factory('siMapper', [
                     unitMeasurement.unitMeasurementScales.push(unitMeasurementScale);
                 }
             }
-        };
-
-        var mapper_UnitMeasurementScale_NumericalScale_Init = false;
-        var mapper_UnitMeasurementScale_NumericalScale = function () {
-            if (!mapper_UnitMeasurementScale_NumericalScale_Init && siContext.unitMeasurementScaleLoaded && siContext.numericalScaleLoaded) {
-                mapper_UnitMeasurementScale_NumericalScale_Init = true;
-                for (var i = 0; i < siContext.unitMeasurementScale.length; i++) {
-                    var unitMeasurementScale = siContext.unitMeasurementScale[i];
-                    var numericalScale = numericalScaleFinder.getByKey(unitMeasurementScale.numericalScalePrefixId, unitMeasurementScale.numericalScaleTypeId);
-                    unitMeasurementScale.numericalScale = numericalScale;
-                    if (numericalScale.unitMeasurementScales === undefined) {
-                        numericalScale.unitMeasurementScales = [];
-                    }
-                    numericalScale.unitMeasurementScales.push(unitMeasurementScale);
-                }
-            }
-        };
+        };        
 
         // *** Navigation Properties Mappers ***
 

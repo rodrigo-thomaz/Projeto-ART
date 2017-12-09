@@ -17,7 +17,7 @@ app.factory('countryFinder', ['$rootScope', 'localeContext', 'siContext', 'numer
     var getByContinentKey = function (continentId) {
         var result = [];
         for (var i = 0; i < context.country.length; i++) {
-            if (context.country[i].continentId === this.continentId) {
+            if (context.country[i].continentId === continentId) {
                 result.push(context.country[i]);
             }
         }
