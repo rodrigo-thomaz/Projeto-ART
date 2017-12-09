@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorTempDSFamilyResolutionConstant', 'sensorFinder', 'siContext', 'siFinder', 'sensorDatasheetContext', 'sensorDatasheetFinder',
-    function ($rootScope, sensorContext, sensorConstant, sensorTempDSFamilyResolutionConstant, sensorFinder, siContext, siFinder, sensorDatasheetContext, sensorDatasheetFinder) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorTempDSFamilyResolutionConstant', 'sensorFinder', 'siContext', 'unitMeasurementScaleFinder', 'sensorDatasheetContext', 'sensorDatasheetFinder',
+    function ($rootScope, sensorContext, sensorConstant, sensorTempDSFamilyResolutionConstant, sensorFinder, siContext, unitMeasurementScaleFinder, sensorDatasheetContext, sensorDatasheetFinder) {
 
         var serviceFactory = {};
 
@@ -88,7 +88,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             //removendo
             for (var i = 0; i < oldValues.length; i++) {
                 var sensorUnitMeasurementScale = oldValues[i];
-                var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementScale.unitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.unitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.unitMeasurementScale.numericalScaleTypeId);
+                var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(sensorUnitMeasurementScale.unitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.unitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.unitMeasurementScale.numericalScaleTypeId);
                 for (var j = 0; j < unitMeasurementScale.sensorUnitMeasurementScales.length; j++) {
                     if (sensorUnitMeasurementScale === unitMeasurementScale.sensorUnitMeasurementScales[j]) {
                         unitMeasurementScale.sensorUnitMeasurementScales.splice(j, 1);
@@ -111,7 +111,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
 
         var setUnitMeasurementScaleInSensorUnitMeasurementScale = function (sensorUnitMeasurementScale) {
             if (sensorUnitMeasurementScale.unitMeasurementScale) return;
-            var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
+            var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
             sensorUnitMeasurementScale.unitMeasurementScale = unitMeasurementScale;
             delete sensorUnitMeasurementScale.unitMeasurementId; // removendo a foreing key
             delete sensorUnitMeasurementScale.unitMeasurementTypeId; // removendo a foreing key

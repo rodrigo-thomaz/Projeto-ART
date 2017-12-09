@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 'siContext', 'sensorDatasheetFinder', 'siFinder', 'sensorTypeConstant', 'sensorDatasheetConstant', 'sensorDatasheetUnitMeasurementDefaultConstant', 'sensorDatasheetUnitMeasurementScaleConstant', 
-    function ($rootScope, sensorDatasheetContext, siContext, sensorDatasheetFinder, siFinder, sensorTypeConstant, sensorDatasheetConstant, sensorDatasheetUnitMeasurementDefaultConstant, sensorDatasheetUnitMeasurementScaleConstant) {
+app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 'siContext', 'sensorDatasheetFinder', 'unitMeasurementScaleFinder', 'sensorTypeConstant', 'sensorDatasheetConstant', 'sensorDatasheetUnitMeasurementDefaultConstant', 'sensorDatasheetUnitMeasurementScaleConstant', 
+    function ($rootScope, sensorDatasheetContext, siContext, sensorDatasheetFinder, unitMeasurementScaleFinder, sensorTypeConstant, sensorDatasheetConstant, sensorDatasheetUnitMeasurementDefaultConstant, sensorDatasheetUnitMeasurementScaleConstant) {
 
     var serviceFactory = {};    
 
@@ -29,7 +29,7 @@ app.factory('sensorDatasheetMapper', ['$rootScope', 'sensorDatasheetContext', 's
             unitMeasurementScaleLoadedUnbinding();
             for (var i = 0; i < sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault.length; i++) {
                 var sensorDatasheetUnitMeasurementDefault = sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault[i];
-                var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorDatasheetUnitMeasurementDefault.unitMeasurementId, sensorDatasheetUnitMeasurementDefault.unitMeasurementTypeId, sensorDatasheetUnitMeasurementDefault.numericalScalePrefixId, sensorDatasheetUnitMeasurementDefault.numericalScaleTypeId);
+                var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(sensorDatasheetUnitMeasurementDefault.unitMeasurementId, sensorDatasheetUnitMeasurementDefault.unitMeasurementTypeId, sensorDatasheetUnitMeasurementDefault.numericalScalePrefixId, sensorDatasheetUnitMeasurementDefault.numericalScaleTypeId);
                 sensorDatasheetUnitMeasurementDefault.unitMeasurementScale = unitMeasurementScale;
                 if (unitMeasurementScale.sensorDatasheetUnitMeasurementDefaults === undefined) {
                     unitMeasurementScale.sensorDatasheetUnitMeasurementDefaults = [];

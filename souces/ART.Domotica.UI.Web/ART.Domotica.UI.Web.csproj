@@ -258,8 +258,13 @@
     <Content Include="src\js\services\application\applicationContext.js" />
     <Content Include="src\js\services\si\siConstants.js" />
     <Content Include="src\js\services\si\siContext.js" />
+    <Content Include="src\js\services\si\numericalScalePrefixFinder.js" />
+    <Content Include="src\js\services\si\numericalScaleFinder.js" />
+    <Content Include="src\js\services\si\numericalScaleTypeFinder.js" />
+    <Content Include="src\js\services\si\unitMeasurementScaleFinder.js" />
+    <Content Include="src\js\services\si\unitMeasurementFinder.js" />
     <Content Include="src\js\services\si\siMapper.js" />
-    <Content Include="src\js\services\si\siFinder.js" />
+    <Content Include="src\js\services\si\unitMeasurementTypeFinder.js" />
     <Content Include="src\js\services\si\unitMeasurementConverter.js" />
     <Content Include="src\js\services\si\numericalScaleService.js" />
     <Content Include="src\js\services\si\numericalScalePrefixService.js" />

@@ -71,11 +71,18 @@ angular.module('app')
 
                       'js/services/si/siContext.js',
                       'js/services/si/siConstants.js',
-                      'js/services/si/siFinder.js',
                       'js/services/si/siMapper.js',
 
-                      'js/services/si/numericalScaleService.js',
-                      'js/services/si/numericalScalePrefixService.js',
+                      'js/services/si/numericalScaleFinder.js',
+                      'js/services/si/numericalScalePrefixFinder.js',
+                      'js/services/si/numericalScaleTypeFinder.js',
+
+                      'js/services/si/unitMeasurementScaleFinder.js',
+                      'js/services/si/unitMeasurementTypeFinder.js',
+                      'js/services/si/unitMeasurementFinder.js',
+
+                      'js/services/si/numericalScaleService.js',                      
+                      'js/services/si/numericalScalePrefixService.js',                      
                       'js/services/si/numericalScaleTypeService.js',
                       'js/services/si/numericalScaleTypeCountryService.js',
 
@@ -165,8 +172,15 @@ angular.module('app')
 
                       'js/services/si/siContext.js',
                       'js/services/si/siConstants.js',
-                      'js/services/si/siFinder.js',
                       'js/services/si/siMapper.js',
+
+                      'js/services/si/numericalScaleFinder.js',
+                      'js/services/si/numericalScalePrefixFinder.js',
+                      'js/services/si/numericalScaleTypeFinder.js',
+
+                      'js/services/si/unitMeasurementScaleFinder.js',
+                      'js/services/si/unitMeasurementTypeFinder.js',
+                      'js/services/si/unitMeasurementFinder.js',
 
                       'js/services/si/numericalScaleService.js',
                       'js/services/si/numericalScalePrefixService.js',

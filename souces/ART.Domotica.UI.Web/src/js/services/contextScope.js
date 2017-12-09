@@ -14,7 +14,14 @@ app.factory('contextScope', [
     'countryService',
 
     'siContext',
-    'siFinder',
+
+    'numericalScaleFinder',    
+    'numericalScalePrefixFinder',
+    'numericalScaleTypeFinder',
+    'unitMeasurementScaleFinder',
+    'unitMeasurementFinder',
+    'unitMeasurementTypeFinder',
+
     'siMapper',
     'numericalScalePrefixService',
     'numericalScaleService',
@@ -64,7 +71,14 @@ app.factory('contextScope', [
         countryService,
 
         siContext,
-        siFinder,
+
+        numericalScaleFinder,
+        numericalScalePrefixFinder,
+        numericalScaleTypeFinder,
+        unitMeasurementScaleFinder,
+        unitMeasurementFinder,
+        unitMeasurementTypeFinder,
+
         siMapper,
         numericalScalePrefixService,
         numericalScaleService,
