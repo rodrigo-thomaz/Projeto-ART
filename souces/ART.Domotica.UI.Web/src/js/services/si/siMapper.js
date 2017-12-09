@@ -48,6 +48,7 @@ app.factory('siMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var numericalScale = newValues[i];
                 numericalScale.numericalScaleType = function () { return numericalScaleTypeFinder.getByKey(this.numericalScaleTypeId); }
+                numericalScale.numericalScalePrefix = function () { return numericalScalePrefixFinder.getByKey(this.numericalScalePrefixId); }
             }
         });
 
