@@ -48,15 +48,7 @@ app.factory('siMapper', [
         localeContext.$watchCollection('country', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var country = newValues[i];
-                country.numericalScaleTypes = function () {
-                    var result = [];
-                    for (var i = 0; i < siContext.numericalScaleTypeCountry.length; i++) {
-                        if (siContext.numericalScaleTypeCountry[i].countryId === this.countryId) {
-                            result.push(siContext.numericalScaleTypeCountry[i]);
-                        }
-                    }
-                    return result;
-                }
+                country.numericalScaleTypes = function () { return numericalScaleTypeFinder.getByCountryKey(this.countryId); }
             }
         });
 
