@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorFinder', 'siContext', 'siFinder', 'sensorDatasheetContext', 'sensorDatasheetFinder',
-    function ($rootScope, sensorContext, sensorConstant, sensorFinder, siContext, siFinder, sensorDatasheetContext, sensorDatasheetFinder) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorTempDSFamilyResolutionConstant', 'sensorFinder', 'siContext', 'siFinder', 'sensorDatasheetContext', 'sensorDatasheetFinder',
+    function ($rootScope, sensorContext, sensorConstant, sensorTempDSFamilyResolutionConstant, sensorFinder, siContext, siFinder, sensorDatasheetContext, sensorDatasheetFinder) {
 
         var serviceFactory = {};
 
@@ -177,18 +177,23 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
 
         var onSensorGetAllByApplicationIdCompleted = function (event, data) {
             sensorGetAllByApplicationIdCompletedSubscription();
-
             sensorContext.sensorLoaded = true;
             sensorContext.sensorTriggerLoaded = true;
             sensorContext.sensorUnitMeasurementScaleLoaded = true;
             sensorContext.sensorTempDSFamilyLoaded = true;
+        }
+
+        var onSensorTempDSFamilyResolutionGetAllCompleted = function (event, data) {
+            sensorTempDSFamilyResolutionGetAllCompletedSubscription();     
             sensorContext.sensorTempDSFamilyResolutionLoaded = true;
         }
 
         var sensorGetAllByApplicationIdCompletedSubscription = $rootScope.$on(sensorConstant.getAllByApplicationIdCompletedEventName, onSensorGetAllByApplicationIdCompleted);
+        var sensorTempDSFamilyResolutionGetAllCompletedSubscription = $rootScope.$on(sensorTempDSFamilyResolutionConstant.getAllCompletedEventName, onSensorTempDSFamilyResolutionGetAllCompleted);
 
         $rootScope.$on('$destroy', function () {
             sensorTypeGetAllByApplicationIdCompletedSubscription();
+            sensorTempDSFamilyResolutionGetAllCompletedSubscription();
         });
 
         // *** Events Subscriptions
