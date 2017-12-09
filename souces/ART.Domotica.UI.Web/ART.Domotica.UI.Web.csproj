@@ -212,6 +212,7 @@
     <Content Include="src\js\controllers\applicationUserController.js" />
     <Content Include="src\js\controllers\dashboardController.js" />
     <Content Include="src\js\controllers\applicationController.js" />
+    <Content Include="src\js\controllers\hardware\device\deviceNTPController.js" />
     <Content Include="src\js\controllers\sensorUnitMeasurementScaleController.js" />
     <Content Include="src\js\controllers\sensorTriggerController.js" />
     <Content Include="src\js\controllers\tab.js" />

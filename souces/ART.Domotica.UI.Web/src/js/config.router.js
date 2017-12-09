@@ -109,6 +109,8 @@ angular.module('app')
                       'js/services/hardware/device/sensorInDeviceService.js',
                       'js/services/hardware/device/deviceService.js',                     
 
+                      'js/controllers/hardware/device/deviceNTPController.js',
+
                       // Sensor                     
 
                       'js/services/hardware/sensor/sensorContext.js',

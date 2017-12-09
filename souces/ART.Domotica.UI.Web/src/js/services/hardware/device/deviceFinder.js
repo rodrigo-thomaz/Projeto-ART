@@ -6,8 +6,8 @@ app.factory('deviceFinder', ['$rootScope', 'deviceContext', function ($rootScope
     var serviceFactory = {};    
 
     var getDeviceByKey = function (deviceId) {
-        for (var i = 0; i < context.devices.length; i++) {
-            var item = context.devices[i];
+        for (var i = 0; i < context.device.length; i++) {
+            var item = context.device[i];
             if (item.deviceId === deviceId) {
                 return item;
             }
@@ -15,8 +15,8 @@ app.factory('deviceFinder', ['$rootScope', 'deviceContext', function ($rootScope
     };
 
     var getDeviceNTPByKey = function (deviceNTPId) {
-        for (var i = 0; i < context.deviceNTPs.length; i++) {
-            var item = context.deviceNTPs[i];
+        for (var i = 0; i < context.deviceNTP.length; i++) {
+            var item = context.deviceNTP[i];
             if (item.deviceNTPId === deviceNTPId) {
                 return item;
             }
@@ -33,8 +33,8 @@ app.factory('deviceFinder', ['$rootScope', 'deviceContext', function ($rootScope
     };
 
     var getDeviceSensorsByKey = function (sensorInDeviceId) {
-        for (var i = 0; i < context.sensorInDevices.length; i++) {
-            var item = context.sensorInDevices[i];
+        for (var i = 0; i < context.sensorInDevice.length; i++) {
+            var item = context.sensorInDevice[i];
             if (item.sensorInDeviceId === sensorInDeviceId) {
                 return item;
             }

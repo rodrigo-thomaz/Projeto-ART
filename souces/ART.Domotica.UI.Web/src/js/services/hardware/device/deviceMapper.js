@@ -126,15 +126,28 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             }
         });
 
+        //TODO:Rodrigo
         var setTimeZoneInDeviceNTP = function (deviceNTP) {
-            if (deviceNTP.timeZone) return;
+
+            if (deviceNTP.timeZone) return;            
+
+            deviceNTP.timeZone = function () {
+                return globalizationFinder.getTimeZoneByKey(this.timeZoneId);
+            };
+
             var timeZone = globalizationFinder.getTimeZoneByKey(deviceNTP.timeZoneId);
-            deviceNTP.timeZone = timeZone;
-            delete deviceNTP.timeZoneId; // removendo a foreing key
-            if (timeZone.devicesNTP === undefined) {
-                timeZone.devicesNTP = [];
+
+            if (!timeZone.devicesNTP) {
+                timeZone.devicesNTP = function () {
+                    var result = [];
+                    for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
+                        if (deviceContext.deviceNTP[i].timeZoneId === this.timeZoneId) {
+                            result.push(deviceContext.deviceNTP[i]);
+                        }
+                    }
+                    return result;
+                };
             }
-            timeZone.devicesNTP.push(deviceNTP);
         }
 
         var setSensorInDeviceInSensor = function (sensorInDevice) {

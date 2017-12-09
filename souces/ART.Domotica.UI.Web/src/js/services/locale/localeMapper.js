@@ -1,54 +1,57 @@
 ﻿'use strict';
-app.factory('localeMapper', ['$rootScope', 'localeContext', 'localeFinder', 'continentConstant', 'countryConstant', function ($rootScope, localeContext, localeFinder, continentConstant, countryConstant) {
+app.factory('localeMapper', ['$rootScope', 'localeContext', 'localeFinder', 'continentConstant', 'countryConstant',
+    function ($rootScope, localeContext, localeFinder, continentConstant, countryConstant) {
 
-    var serviceFactory = {};    
+        var serviceFactory = {};
 
-    // *** Navigation Properties Mappers ***
-
-    var mapper_Country_Continent_Init = false;
-    var mapper_Country_Continent = function () {
-        if (!mapper_Country_Continent_Init && localeContext.countryLoaded && localeContext.continentLoaded) {
-            mapper_Country_Continent_Init = true;
-            for (var i = 0; i < localeContext.country.length; i++) {
-                var country = localeContext.country[i];
-                var continent = localeFinder.getContinentByKey(country.continentId);
-                country.continent = continent;
-                delete country.continentId; // removendo a foreing key
-                if (continent.countries === undefined) {
-                    continent.countries = [];
+        localeContext.$watchCollection('continent', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var continent = newValues[i];
+                //countries
+                continent.countries = function () {
+                    var result = [];
+                    for (var i = 0; i < localeContext.country.length; i++) {
+                        if (localeContext.country[i].continentId === this.continentId) {
+                            result.push(localeContext.country[i]);
+                        }
+                    }
+                    return result;
                 }
-                continent.countries.push(country);
             }
+        });
+
+        localeContext.$watchCollection('country', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var country = newValues[i];
+                //continent
+                country.continent = function () {
+                    return localeFinder.getContinentByKey(this.continentId);
+                }
+            }
+        });
+
+        // *** Events Subscriptions
+
+        var onContinentGetAllCompleted = function (event, data) {
+            continentGetAllCompletedSubscription();
+            localeContext.continentLoaded = true;
         }
-    };   
 
-    // *** Navigation Properties Mappers ***
+        var onCountryGetAllCompleted = function (event, data) {
+            countryGetAllCompletedSubscription();
+            localeContext.countryLoaded = true;
+        }
 
+        var continentGetAllCompletedSubscription = $rootScope.$on(continentConstant.getAllCompletedEventName, onContinentGetAllCompleted);
+        var countryGetAllCompletedSubscription = $rootScope.$on(countryConstant.getAllCompletedEventName, onCountryGetAllCompleted);
 
-    // *** Events Subscriptions
+        $rootScope.$on('$destroy', function () {
+            continentGetAllCompletedSubscription();
+            countryGetAllCompletedSubscription();
+        });
 
-    var onContinentGetAllCompleted = function (event, data) {
-        continentGetAllCompletedSubscription();
-        localeContext.continentLoaded = true;
-        mapper_Country_Continent();
-    }
+        // *** Events Subscriptions
 
-    var onCountryGetAllCompleted = function (event, data) {
-        countryGetAllCompletedSubscription();
-        localeContext.countryLoaded = true;
-        mapper_Country_Continent();
-    }
+        return serviceFactory;
 
-    var continentGetAllCompletedSubscription = $rootScope.$on(continentConstant.getAllCompletedEventName, onContinentGetAllCompleted);
-    var countryGetAllCompletedSubscription = $rootScope.$on(countryConstant.getAllCompletedEventName, onCountryGetAllCompleted);
-
-    $rootScope.$on('$destroy', function () {
-        continentGetAllCompletedSubscription();
-        countryGetAllCompletedSubscription();
-    });
-
-    // *** Events Subscriptions
-
-    return serviceFactory;
-
-}]);
+    }]);

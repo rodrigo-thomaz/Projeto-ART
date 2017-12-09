@@ -21,7 +21,7 @@ app.factory('localeFinder', ['$rootScope', 'localeContext', function ($rootScope
                 return item;
             }
         }
-    }       
+    }  
 
     // *** Public Methods ***
 

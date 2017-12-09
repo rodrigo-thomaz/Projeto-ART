@@ -61,12 +61,12 @@
                                 </div>
                                 <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                                <fieldset ng-controller="deviceNTPController" ng-init="init(device.deviceId, device.deviceNTP)">
+                                <fieldset ng-controller="deviceNTPController" ng-init="init(device.deviceNTP)">
                                     <div class="form-group">
                                         <label class="col-lg-4 control-label">Fuso horário</label>
                                         <div class="col-lg-8">
                                             <select class="form-control m-b"
-                                                    ng-options="item.displayName for item in timeZone.availableTimeZones track by item.id"
+                                                    ng-options="item.displayName for item in timeZone.availableTimeZones track by item.timeZoneId"
                                                     ng-model="timeZone.selectedTimeZone"
                                                     ng-change="changeTimeZone()"></select>
                                         </div>
