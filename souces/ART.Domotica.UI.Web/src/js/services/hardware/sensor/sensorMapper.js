@@ -29,6 +29,13 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             //removendo
             for (var i = 0; i < oldValues.length; i++) {
                 var sensor = oldValues[i];
+                //sensorDatasheet                
+                for (var j = 0; j < sensor.sensorDatasheet.sensors.length; j++) {
+                    if (sensor === sensor.sensorDatasheet.sensors[j]) {
+                        sensor.sensorDatasheet.sensors.splice(j, 1);
+                        break;
+                    }
+                }
                 //sensorTempDSFamily
                 for (var j = 0; j < sensorContext.sensorTempDSFamily.length; j++) {
                     if (sensor.sensorTempDSFamily === sensorContext.sensorTempDSFamily[j]) {
