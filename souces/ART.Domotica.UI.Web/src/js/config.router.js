@@ -60,10 +60,11 @@ angular.module('app')
 
                       'js/services/locale/localeContext.js',
                       'js/services/locale/localeConstants.js',
-                      'js/services/locale/localeFinder.js',
                       'js/services/locale/localeMapper.js',
-                      
+
+                      'js/services/locale/continentFinder.js',
                       'js/services/locale/continentService.js',
+                      'js/services/locale/countryFinder.js',
                       'js/services/locale/countryService.js',
 
                       // SI
@@ -153,10 +154,11 @@ angular.module('app')
 
                       'js/services/locale/localeContext.js',
                       'js/services/locale/localeConstants.js',
-                      'js/services/locale/localeFinder.js',
                       'js/services/locale/localeMapper.js',
 
+                      'js/services/locale/continentFinder.js',
                       'js/services/locale/continentService.js',
+                      'js/services/locale/countryFinder.js',
                       'js/services/locale/countryService.js',
 
                       // SI

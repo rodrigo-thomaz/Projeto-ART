@@ -1,32 +1,20 @@
 ﻿'use strict';
-app.factory('localeMapper', ['$rootScope', 'localeContext', 'localeFinder', 'continentConstant', 'countryConstant',
-    function ($rootScope, localeContext, localeFinder, continentConstant, countryConstant) {
+app.factory('localeMapper', ['$rootScope', 'localeContext', 'continentFinder', 'countryFinder', 'continentConstant', 'countryConstant',
+    function ($rootScope, localeContext, continentFinder, countryFinder, continentConstant, countryConstant) {
 
         var serviceFactory = {};
 
         localeContext.$watchCollection('continent', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var continent = newValues[i];
-                //countries
-                continent.countries = function () {
-                    var result = [];
-                    for (var i = 0; i < localeContext.country.length; i++) {
-                        if (localeContext.country[i].continentId === this.continentId) {
-                            result.push(localeContext.country[i]);
-                        }
-                    }
-                    return result;
-                }
+                continent.countries = function () { return countryFinder.getByContinentKey(this.continentId); }
             }
         });
 
         localeContext.$watchCollection('country', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var country = newValues[i];
-                //continent
-                country.continent = function () {
-                    return localeFinder.getContinentByKey(this.continentId);
-                }
+                country.continent = function () { return continentFinder.getByKey(this.continentId); }
             }
         });
 

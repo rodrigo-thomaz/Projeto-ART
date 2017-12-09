@@ -238,7 +238,8 @@
     <Content Include="src\js\services\hardware\sensor\sensorFinder.js" />
     <Content Include="src\js\services\hardware\sensor\sensorMapper.js" />
     <Content Include="src\js\services\locale\localeConstants.js" />
-    <Content Include="src\js\services\locale\localeFinder.js" />
+    <Content Include="src\js\services\locale\continentFinder.js" />
+    <Content Include="src\js\services\locale\countryFinder.js" />
     <Content Include="src\js\services\hardware\sensor\sensorTempDSFamilyResolutionService.js" />
     <Content Include="src\js\services\hardware\device\deviceNTPService.js" />
     <Content Include="src\js\services\locale\localeMapper.js" />

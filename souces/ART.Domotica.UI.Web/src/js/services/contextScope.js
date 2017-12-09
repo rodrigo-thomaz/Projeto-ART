@@ -7,7 +7,8 @@ app.factory('contextScope', [
     'timeZoneService',
 
     'localeContext',
-    'localeFinder',
+    'continentFinder',
+    'countryFinder',
     'localeMapper',
     'continentService',
     'countryService',
@@ -56,7 +57,8 @@ app.factory('contextScope', [
         timeZoneService,
 
         localeContext,
-        localeFinder,
+        continentFinder,
+        countryFinder,
         localeMapper,
         continentService,
         countryService,

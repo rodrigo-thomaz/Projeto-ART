@@ -1,8 +1,30 @@
 ﻿'use strict';
-app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'localeFinder', 'numericalScalePrefixConstant', 'numericalScaleConstant', 'numericalScaleTypeCountryConstant', 'numericalScaleTypeConstant', 'unitMeasurementScaleConstant', 'unitMeasurementConstant', 'unitMeasurementTypeConstant',
-    function ($rootScope, siContext, siFinder, localeContext, localeFinder, numericalScalePrefixConstant, numericalScaleConstant, numericalScaleTypeCountryConstant, numericalScaleTypeConstant, unitMeasurementScaleConstant, unitMeasurementConstant, unitMeasurementTypeConstant) {
+app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext', 'countryFinder', 'numericalScalePrefixConstant', 'numericalScaleConstant', 'numericalScaleTypeCountryConstant', 'numericalScaleTypeConstant', 'unitMeasurementScaleConstant', 'unitMeasurementConstant', 'unitMeasurementTypeConstant',
+    function ($rootScope, siContext, siFinder, localeContext, countryFinder, numericalScalePrefixConstant, numericalScaleConstant, numericalScaleTypeCountryConstant, numericalScaleTypeConstant, unitMeasurementScaleConstant, unitMeasurementConstant, unitMeasurementTypeConstant) {
 
     var serviceFactory = {};    
+
+    siContext.$watchCollection('numericalScaleTypeCountry', function (newValues, oldValues) {
+        for (var i = 0; i < newValues.length; i++) {
+            var numericalScaleTypeCountry = newValues[i];
+            numericalScaleTypeCountry.country = function () { return countryFinder.getByKey(this.countryId); }
+        }
+    });
+
+    localeContext.$watchCollection('country', function (newValues, oldValues) {
+        for (var i = 0; i < newValues.length; i++) {
+            var country = newValues[i];
+            country.numericalScaleTypes = function () {
+                var result = [];
+                for (var i = 0; i < siContext.numericalScaleTypeCountry.length; i++) {
+                    if (siContext.numericalScaleTypeCountry[i].countryId === this.countryId) {
+                        result.push(siContext.numericalScaleTypeCountry[i]);
+                    }
+                }
+                return result;
+            }
+        }
+    });
 
     // *** Navigation Properties Mappers ***
 
@@ -14,20 +36,20 @@ app.factory('siMapper', ['$rootScope', 'siContext', 'siFinder', 'localeContext',
             for (var i = 0; i < siContext.numericalScaleTypeCountry.length; i++) {
                 var numericalScaleTypeCountry = siContext.numericalScaleTypeCountry[i];
                 var numericalScaleType = siFinder.getNumericalScaleTypeByKey(numericalScaleTypeCountry.numericalScaleTypeId);
-                var country = localeFinder.getCountryByKey(numericalScaleTypeCountry.countryId);
+                var country = countryFinder.getByKey(numericalScaleTypeCountry.countryId);
                 //Atach in numericalScaleType
                 if (numericalScaleType.countries === undefined) {
                     numericalScaleType.countries = [];
                 }
                 numericalScaleType.countries.push(country);
                 //Atach in country
-                if (country.numericalScaleTypes === undefined) {
-                    country.numericalScaleTypes = [];
-                }
-                country.numericalScaleTypes.push(numericalScaleType);
+                //if (country.numericalScaleTypes === undefined) {
+                //    country.numericalScaleTypes = [];
+                //}
+                //country.numericalScaleTypes.push(numericalScaleType);
             }
-            delete siContext.numericalScaleTypeCountry;
-            delete siContext.numericalScaleTypeCountryLoaded;
+            //delete siContext.numericalScaleTypeCountry;
+            //delete siContext.numericalScaleTypeCountryLoaded;
         }
     };
 
