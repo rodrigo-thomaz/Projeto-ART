@@ -14,9 +14,21 @@ app.factory('unitMeasurementFinder', ['$rootScope', 'siContext', function ($root
         }
     }
 
+    var getByUnitMeasurementTypeKey = function (unitMeasurementTypeId) {
+        var result = [];
+        for (var i = 0; i < context.unitMeasurement.length; i++) {
+            var unitMeasurement = context.unitMeasurement[i];
+            if (unitMeasurement.unitMeasurementTypeId === unitMeasurementTypeId) {
+                result.push(context.unitMeasurement[i]);
+            }
+        }
+        return result;
+    }  
+
     // *** Public Methods ***
 
     serviceFactory.getByKey = getByKey;
+    serviceFactory.getByUnitMeasurementTypeKey = getByUnitMeasurementTypeKey;
 
     return serviceFactory;
 
