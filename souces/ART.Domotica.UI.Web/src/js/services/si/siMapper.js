@@ -71,6 +71,7 @@ app.factory('siMapper', [
         siContext.$watchCollection('unitMeasurement', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var unitMeasurement = newValues[i];
+                unitMeasurement.unitMeasurementType = function () { return unitMeasurementTypeFinder.getByKey(this.unitMeasurementTypeId); }
                 unitMeasurement.unitMeasurementScales = function () { return unitMeasurementScaleFinder.getByUnitMeasurementKey(this.unitMeasurementId, this.unitMeasurementTypeId); }
             }
         });
@@ -84,7 +85,7 @@ app.factory('siMapper', [
                 for (var i = 0; i < siContext.unitMeasurement.length; i++) {
                     var unitMeasurement = siContext.unitMeasurement[i];
                     var unitMeasurementType = unitMeasurementTypeFinder.getByKey(unitMeasurement.unitMeasurementTypeId);
-                    unitMeasurement.unitMeasurementType = unitMeasurementType;
+                    //unitMeasurement.unitMeasurementType = unitMeasurementType;
                     if (unitMeasurementType.unitMeasurements === undefined) {
                         unitMeasurementType.unitMeasurements = [];
                     }
