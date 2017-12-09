@@ -38,7 +38,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
         deviceContext.$watchCollection('deviceSensors', function (newValues, oldValues) {
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
-                var deviceSensors = newValues[i];        
+                var deviceSensors = newValues[i];
                 //sensorInDevice
                 for (var j = 0; j < deviceSensors.sensorInDevice.length; j++) {
                     var sensorInDevice = deviceSensors.sensorInDevice[j];
@@ -66,7 +66,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             for (var i = 0; i < newValues.length; i++) {
                 var deviceNTP = newValues[i];
                 //timeZone
-                if (globalizationContext.timeZoneLoaded) {                    
+                if (globalizationContext.timeZoneLoaded) {
                     setTimeZoneInDeviceNTP(deviceNTP);
                 }
             }
@@ -94,9 +94,11 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             for (var i = 0; i < oldValues.length; i++) {
                 var sensorInDevice = oldValues[i];
                 //sensor
-                var sensor = sensorInDevice.sensor;
-                delete sensorInDevice.sensor;
-                delete sensor.sensorInDevice;
+                if (sensorInDevice.sensor) {
+                    var sensor = sensorInDevice.sensor;
+                    delete sensorInDevice.sensor;
+                    delete sensor.sensorInDevice;
+                }
             }
         });
 
@@ -114,7 +116,14 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 }
             }
             //removendo
-
+            for (var i = 0; i < oldValues.length; i++) {
+                var sensor = oldValues[i];
+                if (sensor.sensorInDevice) {
+                    var sensorInDevice = sensor.sensorInDevice;
+                    delete sensorInDevice.sensor;
+                    delete sensor.sensorInDevice;
+                }
+            }
         });
 
         var setTimeZoneInDeviceNTP = function (deviceNTP) {
@@ -133,7 +142,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
             var sensor = sensorFinder.getSensorByKey(sensorInDevice.sensorId);
             if (sensor) {
                 if (!sensor.sensorInDevice) sensor.sensorInDevice = sensorInDevice;
-                if (!sensorInDevice.sensor) sensorInDevice.sensor = sensor;    
+                if (!sensorInDevice.sensor) sensorInDevice.sensor = sensor;
             }
         }
 
@@ -145,7 +154,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
                 mapper_DeviceNTP_TimeZone_Init = true;
                 timeZoneLoadedUnbinding();
                 for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
-                    setTimeZoneInDeviceNTP(deviceContext.deviceNTP[i]);                                  
+                    setTimeZoneInDeviceNTP(deviceContext.deviceNTP[i]);
                 }
             }
         };
@@ -177,7 +186,7 @@ app.factory('deviceMapper', ['$rootScope', 'deviceContext', 'deviceConstant', 'g
         }
 
         var deviceGetAllByApplicationIdCompletedSubscription = $rootScope.$on(deviceConstant.getAllByApplicationIdCompletedEventName, onDeviceGetAllByApplicationIdCompleted);
-        
+
         $rootScope.$on('$destroy', function () {
             deviceGetAllByApplicationIdCompletedSubscription();
         });
