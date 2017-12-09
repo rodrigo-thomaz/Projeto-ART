@@ -8,7 +8,6 @@ app.factory('siMapper', [
     'unitMeasurementScaleFinder',
     'unitMeasurementFinder',
     'unitMeasurementTypeFinder',
-    'localeContext',
     'countryFinder',
     'numericalScalePrefixConstant',
     'numericalScaleConstant',
@@ -26,7 +25,6 @@ app.factory('siMapper', [
         unitMeasurementScaleFinder,
         unitMeasurementFinder,
         unitMeasurementTypeFinder,
-        localeContext,
         countryFinder,
         numericalScalePrefixConstant,
         numericalScaleConstant,
@@ -42,13 +40,6 @@ app.factory('siMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var numericalScaleType = newValues[i];
                 numericalScaleType.countries = function () { return countryFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
-            }
-        });
-
-        localeContext.$watchCollection('country', function (newValues, oldValues) {
-            for (var i = 0; i < newValues.length; i++) {
-                var country = newValues[i];
-                country.numericalScaleTypes = function () { return numericalScaleTypeFinder.getByCountryKey(this.countryId); }
             }
         });
 
