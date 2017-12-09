@@ -60,23 +60,14 @@ app.factory('siMapper', [
             }
         });
 
-        // *** Navigation Properties Mappers ***               
-
-        var mapper_UnitMeasurementScale_NumericalScale_Init = false;
-        var mapper_UnitMeasurementScale_NumericalScale = function () {
-            if (!mapper_UnitMeasurementScale_NumericalScale_Init && siContext.unitMeasurementScaleLoaded && siContext.numericalScaleLoaded) {
-                mapper_UnitMeasurementScale_NumericalScale_Init = true;
-                for (var i = 0; i < siContext.unitMeasurementScale.length; i++) {
-                    var unitMeasurementScale = siContext.unitMeasurementScale[i];
-                    var numericalScale = numericalScaleFinder.getByKey(unitMeasurementScale.numericalScalePrefixId, unitMeasurementScale.numericalScaleTypeId);
-                    unitMeasurementScale.numericalScale = numericalScale;
-                    //if (numericalScale.unitMeasurementScales === undefined) {
-                    //    numericalScale.unitMeasurementScales = [];
-                    //}
-                    //numericalScale.unitMeasurementScales.push(unitMeasurementScale);
-                }
+        siContext.$watchCollection('unitMeasurementScale', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var unitMeasurementScale = newValues[i];
+                unitMeasurementScale.numericalScale = function () { return numericalScaleFinder.getByKey(this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
-        };
+        });
+
+        // *** Navigation Properties Mappers ***                      
 
         var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
         var mapper_UnitMeasurement_UnitMeasurementType = function () {
@@ -123,7 +114,6 @@ app.factory('siMapper', [
         var onNumericalScaleGetAllCompleted = function (event, data) {
             numericalScaleGetAllCompletedSubscription();
             siContext.numericalScaleLoaded = true;
-            mapper_UnitMeasurementScale_NumericalScale();
         }
 
         var onNumericalScaleTypeCountryGetAllCompleted = function (event, data) {
@@ -140,7 +130,6 @@ app.factory('siMapper', [
             unitMeasurementScaleGetAllCompletedSubscription();
             siContext.unitMeasurementScaleLoaded = true;
             mapper_UnitMeasurementScale_UnitMeasurement();
-            mapper_UnitMeasurementScale_NumericalScale();
         }
 
         var onUnitMeasurementGetAllCompleted = function (event, data) {
