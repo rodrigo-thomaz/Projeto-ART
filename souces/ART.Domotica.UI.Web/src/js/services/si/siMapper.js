@@ -64,10 +64,27 @@ app.factory('siMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var unitMeasurementScale = newValues[i];
                 unitMeasurementScale.numericalScale = function () { return numericalScaleFinder.getByKey(this.numericalScalePrefixId, this.numericalScaleTypeId); }
+                unitMeasurementScale.unitMeasurement = function () { return unitMeasurementFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId); }
             }
         });
 
         // *** Navigation Properties Mappers ***                      
+
+        var mapper_UnitMeasurementScale_UnitMeasurement_Init = false;
+        var mapper_UnitMeasurementScale_UnitMeasurement = function () {
+            if (!mapper_UnitMeasurementScale_UnitMeasurement_Init && siContext.unitMeasurementScaleLoaded && siContext.unitMeasurementLoaded) {
+                mapper_UnitMeasurementScale_UnitMeasurement_Init = true;
+                for (var i = 0; i < siContext.unitMeasurementScale.length; i++) {
+                    var unitMeasurementScale = siContext.unitMeasurementScale[i];
+                    var unitMeasurement = unitMeasurementFinder.getByKey(unitMeasurementScale.unitMeasurementId, unitMeasurementScale.unitMeasurementTypeId);
+                    //unitMeasurementScale.unitMeasurement = unitMeasurement;
+                    if (unitMeasurement.unitMeasurementScales === undefined) {
+                        unitMeasurement.unitMeasurementScales = [];
+                    }
+                    unitMeasurement.unitMeasurementScales.push(unitMeasurementScale);
+                }
+            }
+        };       
 
         var mapper_UnitMeasurement_UnitMeasurementType_Init = false;
         var mapper_UnitMeasurement_UnitMeasurementType = function () {
@@ -84,23 +101,7 @@ app.factory('siMapper', [
                 }
             }
         };
-
-        var mapper_UnitMeasurementScale_UnitMeasurement_Init = false;
-        var mapper_UnitMeasurementScale_UnitMeasurement = function () {
-            if (!mapper_UnitMeasurementScale_UnitMeasurement_Init && siContext.unitMeasurementScaleLoaded && siContext.unitMeasurementLoaded) {
-                mapper_UnitMeasurementScale_UnitMeasurement_Init = true;
-                for (var i = 0; i < siContext.unitMeasurementScale.length; i++) {
-                    var unitMeasurementScale = siContext.unitMeasurementScale[i];
-                    var unitMeasurement = unitMeasurementFinder.getByKey(unitMeasurementScale.unitMeasurementId, unitMeasurementScale.unitMeasurementTypeId);
-                    unitMeasurementScale.unitMeasurement = unitMeasurement;
-                    if (unitMeasurement.unitMeasurementScales === undefined) {
-                        unitMeasurement.unitMeasurementScales = [];
-                    }
-                    unitMeasurement.unitMeasurementScales.push(unitMeasurementScale);
-                }
-            }
-        };        
-
+        
         // *** Navigation Properties Mappers ***
 
 
