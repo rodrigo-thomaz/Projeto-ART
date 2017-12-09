@@ -185,12 +185,12 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             var data = JSON.parse(dataUTF8);
             for (var i = 0; i < deviceContext.device.length; i++) {
                 if (deviceContext.device[i].deviceId === data.deviceId) {
-                    deviceContext.device.splice(i, 1);
-                    deviceContext.$digest();
-                    $rootScope.$emit(deviceConstant.deleteFromApplicationCompletedEventName);
+                    deviceContext.device.splice(i, 1);                   
                     break;
                 }
             }
+            deviceContext.$digest();
+            $rootScope.$emit(deviceConstant.deleteFromApplicationCompletedEventName);
         }
 
         var onSetLabelCompleted = function (payload) {
