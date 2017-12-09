@@ -71,6 +71,24 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             }
         });
 
+        sensorContext.$watchCollection('sensorUnitMeasurementScale', function (newValues, oldValues) {
+            //inserindo
+            for (var i = 0; i < newValues.length; i++) {
+                setUnitMeasurementScaleInSensorUnitMeasurementScale(newValues[i]);
+            }
+            //removendo
+            //for (var i = 0; i < oldValues.length; i++) {
+            //    var sensorTempDSFamily = oldValues[i];
+            //    var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolution.sensorTempDSFamilyResolutionId);
+            //    for (var j = 0; j < sensorTempDSFamilyResolution.sensorTempDSFamilies.length; j++) {
+            //        if (sensorTempDSFamily === sensorTempDSFamilyResolution.sensorTempDSFamilies[j]) {
+            //            sensorTempDSFamilyResolution.sensorTempDSFamilies.splice(j, 1);
+            //            break;
+            //        }
+            //    }
+            //}
+        });
+
         var setSensorTempDSFamilyResolutionInSensorTempDSFamily = function (sensorTempDSFamily) {
             if (sensorTempDSFamily.sensorTempDSFamilyResolution) return;
             var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolutionId);
@@ -80,6 +98,20 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
                 sensorTempDSFamilyResolution.sensorTempDSFamilies = [];
             }
             sensorTempDSFamilyResolution.sensorTempDSFamilies.push(sensorTempDSFamily);
+        }
+
+        var setUnitMeasurementScaleInSensorUnitMeasurementScale = function (sensorUnitMeasurementScale) {
+            if (sensorUnitMeasurementScale.unitMeasurementScale) return;
+            var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
+            sensorUnitMeasurementScale.unitMeasurementScale = unitMeasurementScale;
+            delete sensorUnitMeasurementScale.unitMeasurementId; // removendo a foreing key
+            delete sensorUnitMeasurementScale.unitMeasurementTypeId; // removendo a foreing key
+            delete sensorUnitMeasurementScale.numericalScalePrefixId; // removendo a foreing key
+            delete sensorUnitMeasurementScale.numericalScaleTypeId; // removendo a foreing key
+            if (unitMeasurementScale.sensorUnitMeasurementScales === undefined) {
+                unitMeasurementScale.sensorUnitMeasurementScales = [];
+            }
+            unitMeasurementScale.sensorUnitMeasurementScales.push(sensorUnitMeasurementScale);
         }
 
         // *** Navigation Properties Mappers ***
@@ -101,17 +133,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
                 mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init = true;
                 unitMeasurementScaleLoadedUnbinding();
                 for (var i = 0; i < sensorContext.sensorUnitMeasurementScale.length; i++) {
-                    var sensorUnitMeasurementScale = sensorContext.sensorUnitMeasurementScale[i];
-                    var unitMeasurementScale = siFinder.getUnitMeasurementScaleByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
-                    sensorUnitMeasurementScale.unitMeasurementScale = unitMeasurementScale;
-                    delete sensorUnitMeasurementScale.unitMeasurementId; // removendo a foreing key
-                    delete sensorUnitMeasurementScale.unitMeasurementTypeId; // removendo a foreing key
-                    delete sensorUnitMeasurementScale.numericalScalePrefixId; // removendo a foreing key
-                    delete sensorUnitMeasurementScale.numericalScaleTypeId; // removendo a foreing key
-                    if (unitMeasurementScale.sensorUnitMeasurementScales === undefined) {
-                        unitMeasurementScale.sensorUnitMeasurementScales = [];
-                    }
-                    unitMeasurementScale.sensorUnitMeasurementScales.push(sensorUnitMeasurementScale);
+                    setUnitMeasurementScaleInSensorUnitMeasurementScale(sensorContext.sensorUnitMeasurementScale[i]);
                 }
             }
         };
