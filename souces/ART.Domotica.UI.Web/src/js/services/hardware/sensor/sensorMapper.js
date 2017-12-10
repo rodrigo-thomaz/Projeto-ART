@@ -95,7 +95,8 @@ app.factory('sensorMapper', [
         sensorContext.$watchCollection('sensorUnitMeasurementScale', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var sensorUnitMeasurementScale = newValues[i];
-                //setUnitMeasurementScaleInSensorUnitMeasurementScale(newValues[i]);
+                sensorUnitMeasurementScale.sensor = function () { return sensorFinder.getByKey(this.sensorUnitMeasurementScaleId); }
+                
             }
         });               
 
