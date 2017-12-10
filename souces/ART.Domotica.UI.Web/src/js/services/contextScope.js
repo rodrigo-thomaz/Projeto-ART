@@ -45,7 +45,12 @@ app.factory('contextScope', [
     'sensorTypeService',
 
     'deviceContext',
+
+    'deviceSensorsFinder',
+    'deviceNTPFinder',
+    'sensorInDeviceFinder',
     'deviceFinder',
+
     'deviceMapper',
     'deviceSensorsService',
     'deviceNTPService',
@@ -113,7 +118,12 @@ app.factory('contextScope', [
         sensorTypeService,
 
         deviceContext,
+
+        deviceSensorsFinder,
+        deviceNTPFinder,
+        sensorInDeviceFinder,
         deviceFinder,
+
         deviceMapper,
         deviceSensorsService,
         deviceNTPService,
