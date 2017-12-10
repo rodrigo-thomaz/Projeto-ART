@@ -52,7 +52,7 @@ app.factory('contextScope', [
     'sensorInDeviceService',
     'deviceService',
 
-    'sensorContext',
+    'sensorContext',    
     'sensorFinder',
     'sensorMapper',
     'sensorTempDSFamilyResolutionService',
@@ -114,7 +114,7 @@ app.factory('contextScope', [
         sensorInDeviceService,
         deviceService,
 
-        sensorContext,
+        sensorContext,        
         sensorFinder,
         sensorMapper,
         sensorTempDSFamilyResolutionService,

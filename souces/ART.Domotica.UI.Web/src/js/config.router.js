@@ -109,6 +109,29 @@ angular.module('app')
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
 
+                      // Sensor                     
+
+                      'js/services/hardware/sensor/sensorContext.js',
+                      'js/services/hardware/sensor/sensorConstants.js',
+                      'js/services/hardware/sensor/sensorMapper.js',
+
+                      'js/services/hardware/sensor/sensorFinder.js',
+                      'js/services/hardware/sensor/sensorUnitMeasurementScaleFinder.js',
+                      'js/services/hardware/sensor/sensorTriggerFinder.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionFinder.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyFinder.js',                 
+
+                      'js/services/hardware/sensor/sensorService.js',
+                      'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
+                      'js/services/hardware/sensor/sensorTriggerService.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',
+
+                      'js/controllers/sensorUnitMeasurementScaleController.js',
+                      'js/controllers/sensorTriggerController.js',
+
+                      'js/controllers/espDeviceListController.js',            
+
                       // Device
 
                       'js/services/hardware/device/deviceContext.js',
@@ -121,25 +144,7 @@ angular.module('app')
                       'js/services/hardware/device/sensorInDeviceService.js',
                       'js/services/hardware/device/deviceService.js',                     
 
-                      'js/controllers/hardware/device/deviceNTPController.js',
-
-                      // Sensor                     
-
-                      'js/services/hardware/sensor/sensorContext.js',
-                      'js/services/hardware/sensor/sensorConstants.js',
-                      'js/services/hardware/sensor/sensorFinder.js',
-                      'js/services/hardware/sensor/sensorMapper.js',
-
-                      'js/services/hardware/sensor/sensorService.js',                                            
-                      'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
-                      'js/services/hardware/sensor/sensorTriggerService.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',                      
-
-                      'js/controllers/sensorUnitMeasurementScaleController.js',
-                      'js/controllers/sensorTriggerController.js',                      
-
-                      'js/controllers/espDeviceListController.js',                      
+                      'js/controllers/hardware/device/deviceNTPController.js',                                
                   ])
               })
               .state('app.espDeviceManager', {
@@ -214,6 +219,23 @@ angular.module('app')
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
 
+                      // Sensor
+                      'js/services/hardware/sensor/sensorContext.js',
+                      'js/services/hardware/sensor/sensorConstants.js',                      
+                      'js/services/hardware/sensor/sensorMapper.js',
+
+                      'js/services/hardware/sensor/sensorFinder.js',
+                      'js/services/hardware/sensor/sensorUnitMeasurementScaleFinder.js',
+                      'js/services/hardware/sensor/sensorTriggerFinder.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionFinder.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyFinder.js',                 
+
+                      'js/services/hardware/sensor/sensorService.js',
+                      'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
+                      'js/services/hardware/sensor/sensorTriggerService.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
+                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',               
+
                       // Device
 
                       'js/services/hardware/device/deviceContext.js',
@@ -227,19 +249,7 @@ angular.module('app')
                       'js/services/hardware/device/deviceService.js',            
 
                       'js/controllers/espDeviceJoinController.js',
-                      'js/controllers/espDeviceManagerController.js',
-
-                      // Sensor
-                      'js/services/hardware/sensor/sensorContext.js',
-                      'js/services/hardware/sensor/sensorConstants.js',
-                      'js/services/hardware/sensor/sensorFinder.js',
-                      'js/services/hardware/sensor/sensorMapper.js',
-
-                      'js/services/hardware/sensor/sensorService.js',
-                      'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
-                      'js/services/hardware/sensor/sensorTriggerService.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',               
+                      'js/controllers/espDeviceManagerController.js',                     
                   ])
               })
 
