@@ -16,6 +16,8 @@ app.factory('siMapper', [
     'unitMeasurementScaleConstant',
     'unitMeasurementConstant',
     'unitMeasurementTypeConstant',
+    'sensorDatasheetUnitMeasurementDefaultFinder',
+    'sensorDatasheetUnitMeasurementScaleFinder',
     function (
         $rootScope,
         siContext,
@@ -32,7 +34,9 @@ app.factory('siMapper', [
         numericalScaleTypeConstant,
         unitMeasurementScaleConstant,
         unitMeasurementConstant,
-        unitMeasurementTypeConstant) {
+        unitMeasurementTypeConstant,
+        sensorDatasheetUnitMeasurementDefaultFinder,
+        sensorDatasheetUnitMeasurementScaleFinder) {
 
         var serviceFactory = {};
 
@@ -65,6 +69,9 @@ app.factory('siMapper', [
                 var unitMeasurementScale = newValues[i];
                 unitMeasurementScale.numericalScale = function () { return numericalScaleFinder.getByKey(this.numericalScalePrefixId, this.numericalScaleTypeId); }
                 unitMeasurementScale.unitMeasurement = function () { return unitMeasurementFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId); }
+                unitMeasurementScale.sensorDatasheetUnitMeasurementDefaults = function () { return sensorDatasheetUnitMeasurementDefaultFinder.getByUnitMeasurementScaleKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
+                unitMeasurementScale.sensorDatasheetUnitMeasurementScales = function () { return sensorDatasheetUnitMeasurementScaleFinder.getByUnitMeasurementScaleKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
+                //unitMeasurementScale.sensorUnitMeasurementScales = function () { return sensorUnitMeasurementScaleFinder.getByUnitMeasurementScaleKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
         });
 
