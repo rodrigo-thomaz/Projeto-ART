@@ -14,9 +14,19 @@ app.factory('sensorDatasheetFinder', ['$rootScope', 'sensorDatasheetContext', fu
         }
     }
 
+    var getBySensorTypeKey = function (sensorTypeId) {
+        for (var i = 0; i < context.sensorDatasheet.length; i++) {
+            var item = context.sensorDatasheet[i];
+            if (item.sensorTypeId === sensorTypeId) {
+                return item;
+            }
+        }
+    }
+
     // *** Public Methods ***
 
     serviceFactory.getByKey = getByKey;
+    serviceFactory.getBySensorTypeKey = getBySensorTypeKey;
 
     return serviceFactory;
 

@@ -28,100 +28,57 @@ app.factory('sensorDatasheetMapper', [
 
         var serviceFactory = {};
 
-        // *** Navigation Properties Mappers ***
-
-        var mapper_SensorDatasheet_SensorTypeType_Init = false;
-        var mapper_SensorDatasheet_SensorTypeType = function () {
-            if (!mapper_SensorDatasheet_SensorTypeType_Init && sensorDatasheetContext.sensorDatasheetLoaded && sensorDatasheetContext.sensorTypeLoaded) {
-                mapper_SensorDatasheet_SensorTypeType_Init = true;
-                for (var i = 0; i < sensorDatasheetContext.sensorDatasheet.length; i++) {
-                    var sensorDatasheet = sensorDatasheetContext.sensorDatasheet[i];
-                    var sensorType = sensorTypeFinder.getByKey(sensorDatasheet.sensorTypeId);
-                    sensorDatasheet.sensorType = sensorType;
-                    if (sensorType.sensorDatasheets === undefined) {
-                        sensorType.sensorDatasheets = [];
-                    }
-                    sensorType.sensorDatasheets.push(sensorDatasheet);
-                }
+        sensorDatasheetContext.$watchCollection('sensorType', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var sensorType = newValues[i];
+                sensorType.sensorDatasheets = function () { return sensorDatasheetFinder.getBySensorTypeKey(this.sensorTypeId); }
             }
-        };
+        });
 
-        var mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale_Init = false;
-        var mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale = function () {
-            if (!mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale_Init && sensorDatasheetContext.sensorDatasheetUnitMeasurementDefaultLoaded && siContext.unitMeasurementScaleLoaded) {
-                mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale_Init = true;
-                unitMeasurementScaleLoadedUnbinding();
-                for (var i = 0; i < sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault.length; i++) {
-                    var sensorDatasheetUnitMeasurementDefault = sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault[i];
-                    var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(sensorDatasheetUnitMeasurementDefault.unitMeasurementId, sensorDatasheetUnitMeasurementDefault.unitMeasurementTypeId, sensorDatasheetUnitMeasurementDefault.numericalScalePrefixId, sensorDatasheetUnitMeasurementDefault.numericalScaleTypeId);
-                    sensorDatasheetUnitMeasurementDefault.unitMeasurementScale = unitMeasurementScale;
-                    if (unitMeasurementScale.sensorDatasheetUnitMeasurementDefaults === undefined) {
-                        unitMeasurementScale.sensorDatasheetUnitMeasurementDefaults = [];
-                    }
-                    unitMeasurementScale.sensorDatasheetUnitMeasurementDefaults.push(sensorDatasheetUnitMeasurementDefault);
-                }
+        sensorDatasheetContext.$watchCollection('sensorDatasheet', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var sensorDatasheet = newValues[i];
+                sensorDatasheet.sensorType = function () { return sensorTypeFinder.getByKey(this.sensorTypeId); }
+                sensorDatasheet.sensorDatasheetUnitMeasurementDefault = function () { return sensorDatasheetUnitMeasurementDefaultFinder.getByKey(this.sensorDatasheetId, this.sensorTypeId); }
+                sensorDatasheet.sensorDatasheetUnitMeasurementScales = function () { return sensorDatasheetUnitMeasurementScaleFinder.getBySensorDatasheetKey(this.sensorDatasheetId, this.sensorTypeId); }
+                //sensorDatasheet.sensors = function () { return sensorFinder.getBySensorDatasheetKey(this.sensorDatasheetId, this.sensorTypeId); }
             }
-        };
+        });
 
-        var mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init = false;
-        var mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet = function () {
-            if (!mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init && sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded && sensorDatasheetContext.sensorDatasheetLoaded) {
-                mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet_Init = true;
-                for (var i = 0; i < sensorDatasheetContext.sensorDatasheetUnitMeasurementScale.length; i++) {
-                    var sensorDatasheetUnitMeasurementScale = sensorDatasheetContext.sensorDatasheetUnitMeasurementScale[i];
-                    var sensorDatasheet = sensorDatasheetFinder.getByKey(sensorDatasheetUnitMeasurementScale.sensorDatasheetId, sensorDatasheetUnitMeasurementScale.sensorTypeId);
-                    sensorDatasheetUnitMeasurementScale.sensorDatasheet = sensorDatasheet;
-                    if (sensorDatasheet.sensorDatasheetUnitMeasurementScales === undefined) {
-                        sensorDatasheet.sensorDatasheetUnitMeasurementScales = [];
-                    }
-                    sensorDatasheet.sensorDatasheetUnitMeasurementScales.push(sensorDatasheetUnitMeasurementScale);
-                }
+        sensorDatasheetContext.$watchCollection('sensorDatasheetUnitMeasurementDefault', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var sensorDatasheetUnitMeasurementDefault = newValues[i];
+                sensorDatasheetUnitMeasurementDefault.unitMeasurementScale = function () { return unitMeasurementScaleFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
-        };
+        });
 
-        var mapper_SensorDatasheet_SensorDatasheetUnitMeasurementDefault_Init = false;
-        var mapper_SensorDatasheet_SensorDatasheetUnitMeasurementDefault = function () {
-            if (!mapper_SensorDatasheet_SensorDatasheetUnitMeasurementDefault_Init && sensorDatasheetContext.sensorDatasheetLoaded && sensorDatasheetContext.sensorDatasheetUnitMeasurementDefaultLoaded) {
-                mapper_SensorDatasheet_SensorDatasheetUnitMeasurementDefault_Init = true;
-                for (var i = 0; i < sensorDatasheetContext.sensorDatasheet.length; i++) {
-                    var sensorDatasheet = sensorDatasheetContext.sensorDatasheet[i];
-                    var sensorDatasheetUnitMeasurementDefault = sensorDatasheetUnitMeasurementDefaultFinder.getByKey(sensorDatasheet.sensorDatasheetId, sensorDatasheet.sensorTypeId);
-                    sensorDatasheet.sensorDatasheetUnitMeasurementDefault = sensorDatasheetUnitMeasurementDefault;
-                    sensorDatasheetUnitMeasurementDefault.sensorDatasheet = sensorDatasheet;
-                }
+        sensorDatasheetContext.$watchCollection('sensorDatasheetUnitMeasurementScale', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var sensorDatasheetUnitMeasurementScale = newValues[i];
+                sensorDatasheetUnitMeasurementScale.unitMeasurementScale = function () { return unitMeasurementScaleFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
-        };
-
-        // *** Navigation Properties Mappers ***
-
+        });
 
         // *** Events Subscriptions
 
         var onSensorTypeGetAllCompleted = function (event, data) {
             sensorTypeGetAllCompletedSubscription();
             sensorDatasheetContext.sensorTypeLoaded = true;
-            mapper_SensorDatasheet_SensorTypeType();
         }
 
         var onSensorDatasheetGetAllCompleted = function (event, data) {
             sensorDatasheetGetAllCompletedSubscription();
             sensorDatasheetContext.sensorDatasheetLoaded = true;
-            mapper_SensorDatasheet_SensorDatasheetUnitMeasurementDefault();
-            mapper_SensorDatasheet_SensorTypeType();
-            mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();
         }
 
         var onSensorDatasheetUnitMeasurementDefaultGetAllCompleted = function (event, data) {
             sensorDatasheetUnitMeasurementDefaultGetAllCompletedSubscription();
             sensorDatasheetContext.sensorDatasheetUnitMeasurementDefaultLoaded = true;
-            mapper_SensorDatasheet_SensorDatasheetUnitMeasurementDefault();
-            mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale();
         }
 
         var onSensorDatasheetUnitMeasurementScaleGetAllCompleted = function (event, data) {
             sensorDatasheetUnitMeasurementScaleGetAllCompletedSubscription();
             sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded = true;
-            mapper_SensorDatasheetUnitMeasurementScale_SensorDatasheet();
         }
 
         var sensorTypeGetAllCompletedSubscription = $rootScope.$on(sensorTypeConstant.getAllCompletedEventName, onSensorTypeGetAllCompleted);
@@ -137,14 +94,6 @@ app.factory('sensorDatasheetMapper', [
         });
 
         // *** Events Subscriptions
-
-        // *** Watches
-
-        var unitMeasurementScaleLoadedUnbinding = siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
-            mapper_SensorDatasheetUnitMeasurementDefault_UnitMeasurementScale();
-        })
-
-        // *** Watches
 
 
         return serviceFactory;
