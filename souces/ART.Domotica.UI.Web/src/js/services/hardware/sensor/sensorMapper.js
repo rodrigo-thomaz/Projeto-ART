@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorTempDSFamilyResolutionConstant', 'sensorFinder', 'siContext', 'unitMeasurementScaleFinder', 'sensorDatasheetContext', 'sensorDatasheetFinder',
-    function ($rootScope, sensorContext, sensorConstant, sensorTempDSFamilyResolutionConstant, sensorFinder, siContext, unitMeasurementScaleFinder, sensorDatasheetContext, sensorDatasheetFinder) {
+app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorTempDSFamilyResolutionConstant', 'sensorFinder', 'siContext', 'unitMeasurementScaleFinder', 'sensorDatasheetContext', 'sensorDatasheetFinder', 'sensorTempDSFamilyResolutionFinder',
+    function ($rootScope, sensorContext, sensorConstant, sensorTempDSFamilyResolutionConstant, sensorFinder, siContext, unitMeasurementScaleFinder, sensorDatasheetContext, sensorDatasheetFinder, sensorTempDSFamilyResolutionFinder) {
 
         var serviceFactory = {};
 
@@ -70,7 +70,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
             //removendo
             for (var i = 0; i < oldValues.length; i++) {
                 var sensorTempDSFamily = oldValues[i];
-                var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolution.sensorTempDSFamilyResolutionId);
+                var sensorTempDSFamilyResolution = sensorTempDSFamilyResolutionFinder.getByKey(sensorTempDSFamily.sensorTempDSFamilyResolution.sensorTempDSFamilyResolutionId);
                 for (var j = 0; j < sensorTempDSFamilyResolution.sensorTempDSFamilies.length; j++) {
                     if (sensorTempDSFamily === sensorTempDSFamilyResolution.sensorTempDSFamilies[j]){
                         sensorTempDSFamilyResolution.sensorTempDSFamilies.splice(j, 1);
@@ -100,7 +100,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
 
         var setSensorTempDSFamilyResolutionInSensorTempDSFamily = function (sensorTempDSFamily) {
             if (sensorTempDSFamily.sensorTempDSFamilyResolution) return;
-            var sensorTempDSFamilyResolution = sensorFinder.getSensorTempDSFamilyResolutionByKey(sensorTempDSFamily.sensorTempDSFamilyResolutionId);
+            var sensorTempDSFamilyResolution = sensorTempDSFamilyResolutionFinder.getByKey(sensorTempDSFamily.sensorTempDSFamilyResolutionId);
             sensorTempDSFamily.sensorTempDSFamilyResolution = sensorTempDSFamilyResolution;
             delete sensorTempDSFamily.sensorTempDSFamilyResolutionId; // removendo a foreing key
             if (sensorTempDSFamilyResolution.sensorTempDSFamilies === undefined) {
