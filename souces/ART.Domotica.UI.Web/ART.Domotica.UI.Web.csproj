@@ -238,6 +238,10 @@
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetMapper.js" />
     <Content Include="src\js\services\hardware\sensor\sensorConstants.js" />
     <Content Include="src\js\services\hardware\sensor\sensorContext.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorTriggerFinder.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorUnitMeasurementScaleFinder.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorTempDSFamilyFinder.js" />
+    <Content Include="src\js\services\hardware\sensor\sensorTempDSFamilyResolutionFinder.js" />
     <Content Include="src\js\services\hardware\sensor\sensorFinder.js" />
     <Content Include="src\js\services\hardware\sensor\sensorMapper.js" />
     <Content Include="src\js\services\locale\localeConstants.js" />
