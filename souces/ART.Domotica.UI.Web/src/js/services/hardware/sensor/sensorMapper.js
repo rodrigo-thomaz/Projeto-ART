@@ -93,53 +93,13 @@ app.factory('sensorMapper', [
         });
 
         sensorContext.$watchCollection('sensorUnitMeasurementScale', function (newValues, oldValues) {
-            //inserindo
             for (var i = 0; i < newValues.length; i++) {
-                setUnitMeasurementScaleInSensorUnitMeasurementScale(newValues[i]);
+                var sensorUnitMeasurementScale = newValues[i];
+                //setUnitMeasurementScaleInSensorUnitMeasurementScale(newValues[i]);
             }
-            //removendo
-            for (var i = 0; i < oldValues.length; i++) {
-                var sensorUnitMeasurementScale = oldValues[i];
-                var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(sensorUnitMeasurementScale.unitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.unitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.unitMeasurementScale.numericalScaleTypeId);
-                for (var j = 0; j < unitMeasurementScale.sensorUnitMeasurementScales.length; j++) {
-                    if (sensorUnitMeasurementScale === unitMeasurementScale.sensorUnitMeasurementScales[j]) {
-                        unitMeasurementScale.sensorUnitMeasurementScales.splice(j, 1);
-                        break;
-                    }
-                }
-            }
-        });        
+        });               
 
-        var setUnitMeasurementScaleInSensorUnitMeasurementScale = function (sensorUnitMeasurementScale) {
-            if (sensorUnitMeasurementScale.unitMeasurementScale) return;
-            var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
-            sensorUnitMeasurementScale.unitMeasurementScale = unitMeasurementScale;
-            delete sensorUnitMeasurementScale.unitMeasurementId; // removendo a foreing key
-            delete sensorUnitMeasurementScale.unitMeasurementTypeId; // removendo a foreing key
-            delete sensorUnitMeasurementScale.numericalScalePrefixId; // removendo a foreing key
-            delete sensorUnitMeasurementScale.numericalScaleTypeId; // removendo a foreing key
-            if (unitMeasurementScale.sensorUnitMeasurementScales === undefined) {
-                unitMeasurementScale.sensorUnitMeasurementScales = [];
-            }
-            unitMeasurementScale.sensorUnitMeasurementScales.push(sensorUnitMeasurementScale);
-        }
-
-        // *** Navigation Properties Mappers ***       
-
-        var mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init = false;
-        var mapper_SensorUnitMeasurementScale_UnitMeasurementScale = function () {
-            if (!mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init && sensorContext.sensorUnitMeasurementScaleLoaded && siContext.unitMeasurementScaleLoaded) {
-                mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init = true;
-                unitMeasurementScaleLoadedUnbinding();
-                for (var i = 0; i < sensorContext.sensorUnitMeasurementScale.length; i++) {
-                    setUnitMeasurementScaleInSensorUnitMeasurementScale(sensorContext.sensorUnitMeasurementScale[i]);
-                }
-            }
-        };        
-
-        // *** Navigation Properties Mappers ***
-
-
+        
         // *** Events Subscriptions
 
         var onSensorGetAllByApplicationIdCompleted = function (event, data) {
@@ -164,16 +124,7 @@ app.factory('sensorMapper', [
         });
 
         // *** Events Subscriptions
-
-
-        // *** Watches       
-
-        var unitMeasurementScaleLoadedUnbinding = siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
-            mapper_SensorUnitMeasurementScale_UnitMeasurementScale();
-        })
-
-        // *** Watches
-
+        
         return serviceFactory;
 
     }]);
