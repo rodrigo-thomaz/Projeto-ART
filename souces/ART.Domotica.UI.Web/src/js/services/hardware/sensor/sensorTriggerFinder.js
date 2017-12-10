@@ -14,9 +14,21 @@ app.factory('sensorTriggerFinder', ['$rootScope', 'sensorContext', function ($ro
         }
     }
 
+    var getBySensorKey = function (sensorId) {
+        var result = [];
+        for (var i = 0; i < context.sensorTrigger.length; i++) {
+            var sensorTrigger = context.sensorTrigger[i];
+            if (sensorTrigger.sensorId === sensorId) {
+                result.push(sensorTrigger);
+            }
+        }
+        return result;
+    }
+
     // *** Public Methods ***
 
     serviceFactory.getByKey = getByKey;
+    serviceFactory.getBySensorKey = getBySensorKey;
 
     return serviceFactory;
 

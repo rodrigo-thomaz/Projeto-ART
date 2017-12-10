@@ -67,23 +67,13 @@ app.factory('sensorMapper', [
                 var sensor = newValues[i];
                 addSensorAggregates(sensor);
                 sensor.sensorDatasheet = function () { return sensorDatasheetFinder.getByKey(this.sensorDatasheetId, this.sensorTypeId); }
-                                
-                //sensorTempDSFamily
-                var sensorTempDSFamily = sensor.sensorTempDSFamily;
-                sensorTempDSFamily.sensor = sensor;
-                //sensorUnitMeasurementScale
-                var sensorUnitMeasurementScale = sensor.sensorUnitMeasurementScale;
-                sensorUnitMeasurementScale.sensor = sensor;
-                //sensorTriggers
-                for (var j = 0; j < sensor.sensorTriggers.length; j++) {
-                    var sensorTrigger = sensor.sensorTriggers[j];
-                    sensorTrigger.sensor = sensor;
-                }
+                sensor.sensorTempDSFamily = function () { return sensorTempDSFamilyFinder.getByKey(this.sensorId); }
+                sensor.sensorUnitMeasurementScale = function () { return sensorUnitMeasurementScaleFinder.getByKey(this.sensorId); }
+                sensor.sensorTriggers = function () { return sensorTriggerFinder.getBySensorKey(this.sensorId); }
             }
             //removendo
             for (var i = 0; i < oldValues.length; i++) {
-                var sensor = oldValues[i];
-                removeSensorAggregates(sensor);                
+                removeSensorAggregates(oldValues[i]);                
             }
         });
 
