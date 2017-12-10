@@ -96,7 +96,7 @@ app.factory('sensorMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var sensorUnitMeasurementScale = newValues[i];
                 sensorUnitMeasurementScale.sensor = function () { return sensorFinder.getByKey(this.sensorUnitMeasurementScaleId); }
-                
+                sensorUnitMeasurementScale.unitMeasurementScale = function () { return unitMeasurementScaleFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
         });               
 

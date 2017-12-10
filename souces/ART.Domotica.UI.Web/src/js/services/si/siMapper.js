@@ -71,7 +71,7 @@ app.factory('siMapper', [
                 unitMeasurementScale.unitMeasurement = function () { return unitMeasurementFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId); }
                 unitMeasurementScale.sensorDatasheetUnitMeasurementDefaults = function () { return sensorDatasheetUnitMeasurementDefaultFinder.getByUnitMeasurementScaleKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
                 unitMeasurementScale.sensorDatasheetUnitMeasurementScales = function () { return sensorDatasheetUnitMeasurementScaleFinder.getByUnitMeasurementScaleKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
-                //unitMeasurementScale.sensorUnitMeasurementScales = function () { return sensorUnitMeasurementScaleFinder.getByUnitMeasurementScaleKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
+                unitMeasurementScale.sensorUnitMeasurementScales = function () { return sensorUnitMeasurementScaleFinder.getByUnitMeasurementScaleKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
         });
 
