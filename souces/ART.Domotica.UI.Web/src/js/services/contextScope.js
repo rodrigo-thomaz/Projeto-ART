@@ -53,7 +53,13 @@ app.factory('contextScope', [
     'deviceService',
 
     'sensorContext',    
+
     'sensorFinder',
+    'sensorUnitMeasurementScaleFinder',
+    'sensorTriggerFinder',
+    'sensorTempDSFamilyResolutionFinder',
+    'sensorTempDSFamilyFinder', 
+
     'sensorMapper',
     'sensorTempDSFamilyResolutionService',
     'sensorTempDSFamilyService',
@@ -115,7 +121,13 @@ app.factory('contextScope', [
         deviceService,
 
         sensorContext,        
+
         sensorFinder,
+        sensorUnitMeasurementScaleFinder,
+        sensorTriggerFinder,
+        sensorTempDSFamilyResolutionFinder,
+        sensorTempDSFamilyFinder, 
+
         sensorMapper,
         sensorTempDSFamilyResolutionService,
         sensorTempDSFamilyService,
