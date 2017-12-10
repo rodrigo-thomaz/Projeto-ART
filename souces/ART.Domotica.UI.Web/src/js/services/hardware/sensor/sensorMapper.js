@@ -125,7 +125,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
 
         var setSensorDatasheetInSensor = function (sensor) {
             if (sensor.sensorDatasheet) return;
-            var sensorDatasheet = sensorDatasheetFinder.getSensorDatasheetByKey(sensor.sensorDatasheetId, sensor.sensorTypeId);
+            var sensorDatasheet = sensorDatasheetFinder.getByKey(sensor.sensorDatasheetId, sensor.sensorTypeId);
             sensor.sensorDatasheet = sensorDatasheet;
             delete sensor.sensorDatasheetId; // removendo a foreing key
             delete sensor.sensorTypeId; // removendo a foreing key

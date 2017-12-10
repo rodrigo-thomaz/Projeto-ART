@@ -231,6 +231,9 @@
     <Content Include="src\js\services\hardware\device\sensorInDeviceService.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetConstants.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetContext.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorTypeFinder.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetUnitMeasurementDefaultFinder.js" />
+    <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetUnitMeasurementScaleFinder.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetFinder.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetMapper.js" />
     <Content Include="src\js\services\hardware\sensor\sensorConstants.js" />

@@ -97,8 +97,12 @@ angular.module('app')
 
                       'js/services/hardware/sensorDatasheet/sensorDatasheetContext.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetConstants.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetFinder.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetMapper.js',
+
+                      'js/services/hardware/sensorDatasheet/sensorTypeFinder.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetFinder.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleFinder.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultFinder.js',
 
                       'js/services/hardware/sensorDatasheet/sensorTypeService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetService.js',
@@ -198,8 +202,12 @@ angular.module('app')
 
                       'js/services/hardware/sensorDatasheet/sensorDatasheetContext.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetConstants.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetFinder.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetMapper.js',
+
+                      'js/services/hardware/sensorDatasheet/sensorTypeFinder.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetFinder.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleFinder.js',
+                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultFinder.js',
 
                       'js/services/hardware/sensorDatasheet/sensorTypeService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetService.js',

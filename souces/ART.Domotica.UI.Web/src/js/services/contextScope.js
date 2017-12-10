@@ -32,8 +32,13 @@ app.factory('contextScope', [
     'unitMeasurementTypeService',
 
     'sensorDatasheetContext',
-    'sensorDatasheetFinder',
     'sensorDatasheetMapper',
+
+    'sensorDatasheetFinder',
+    'sensorDatasheetUnitMeasurementDefaultFinder',
+    'sensorDatasheetUnitMeasurementScaleFinder',
+    'sensorTypeFinder',
+
     'sensorDatasheetService',
     'sensorDatasheetUnitMeasurementDefaultService',
     'sensorDatasheetUnitMeasurementScaleService',
@@ -88,9 +93,14 @@ app.factory('contextScope', [
         unitMeasurementService,
         unitMeasurementTypeService,
 
-        sensorDatasheetContext,
-        sensorDatasheetFinder,
+        sensorDatasheetContext,        
         sensorDatasheetMapper,
+
+        sensorDatasheetFinder,
+        sensorDatasheetUnitMeasurementDefaultFinder,
+        sensorDatasheetUnitMeasurementScaleFinder,
+        sensorTypeFinder,
+
         sensorDatasheetService,
         sensorDatasheetUnitMeasurementDefaultService,
         sensorDatasheetUnitMeasurementScaleService,
