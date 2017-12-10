@@ -36,14 +36,14 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
         var onSetTimeZoneCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var device = deviceFinder.getDeviceByKey(result.deviceId);
+            var device = deviceFinder.getByKey(result.deviceId);
             device.deviceNTP.timeZoneId = result.timeZoneId;
             $rootScope.$emit(deviceNTPConstant.setTimeZoneCompletedEventName + result.deviceId, result);
         };
 
         var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var device = deviceFinder.getDeviceByKey(result.deviceId);
+            var device = deviceFinder.getByKey(result.deviceId);
             device.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
             $rootScope.$emit(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + result.deviceId, result);
         }

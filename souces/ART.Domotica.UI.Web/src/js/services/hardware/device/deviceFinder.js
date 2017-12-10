@@ -5,7 +5,7 @@ app.factory('deviceFinder', ['$rootScope', 'deviceContext', function ($rootScope
 
     var serviceFactory = {};    
 
-    var getDeviceByKey = function (deviceId) {
+    var getByKey = function (deviceId) {
         for (var i = 0; i < context.device.length; i++) {
             var item = context.device[i];
             if (item.deviceId === deviceId) {
@@ -14,29 +14,9 @@ app.factory('deviceFinder', ['$rootScope', 'deviceContext', function ($rootScope
         }
     };
 
-    var getDeviceNTPByKey = function (deviceNTPId) {
-        for (var i = 0; i < context.deviceNTP.length; i++) {
-            var item = context.deviceNTP[i];
-            if (item.deviceNTPId === deviceNTPId) {
-                return item;
-            }
-        }
-    };
-
-    var getDeviceSensorsByKey = function (deviceSensorsId) {
-        for (var i = 0; i < context.deviceSensors.length; i++) {
-            var item = context.deviceSensors[i];
-            if (item.deviceSensorsId === deviceSensorsId) {
-                return item;
-            }
-        }
-    };
-
     // *** Public Methods ***
 
-    serviceFactory.getDeviceByKey = getDeviceByKey;
-    serviceFactory.getDeviceNTPByKey = getDeviceNTPByKey;
-    serviceFactory.getDeviceSensorsByKey = getDeviceSensorsByKey;
+    serviceFactory.getByKey = getByKey;
 
     return serviceFactory;
 
