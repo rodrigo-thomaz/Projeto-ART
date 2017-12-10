@@ -225,6 +225,9 @@
     <Content Include="src\js\services\globalization\globalizationFinder.js" />
     <Content Include="src\js\services\globalization\globalizationMapper.js" />
     <Content Include="src\js\services\hardware\device\deviceContext.js" />
+    <Content Include="src\js\services\hardware\device\deviceNTPFinder.js" />
+    <Content Include="src\js\services\hardware\device\deviceSensorsFinder.js" />
+    <Content Include="src\js\services\hardware\device\sensorInDeviceFinder.js" />
     <Content Include="src\js\services\hardware\device\deviceMapper.js" />
     <Content Include="src\js\services\hardware\device\deviceConstants.js" />
     <Content Include="src\js\services\hardware\device\deviceFinder.js" />

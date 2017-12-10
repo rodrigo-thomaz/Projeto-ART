@@ -32,7 +32,7 @@ app.factory('deviceFinder', ['$rootScope', 'deviceContext', function ($rootScope
         }
     };
 
-    var getDeviceSensorsByKey = function (sensorInDeviceId) {
+    var getSensorInDeviceByKey = function (sensorInDeviceId) {
         for (var i = 0; i < context.sensorInDevice.length; i++) {
             var item = context.sensorInDevice[i];
             if (item.sensorInDeviceId === sensorInDeviceId) {
@@ -46,7 +46,7 @@ app.factory('deviceFinder', ['$rootScope', 'deviceContext', function ($rootScope
     serviceFactory.getDeviceByKey = getDeviceByKey;
     serviceFactory.getDeviceNTPByKey = getDeviceNTPByKey;
     serviceFactory.getDeviceSensorsByKey = getDeviceSensorsByKey;
-    serviceFactory.getDeviceSensorsByKey = getDeviceSensorsByKey;
+    serviceFactory.getSensorInDeviceByKey = getSensorInDeviceByKey;
 
     return serviceFactory;
 
