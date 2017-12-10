@@ -78,20 +78,17 @@ app.factory('sensorMapper', [
         });
 
         sensorContext.$watchCollection('sensorTempDSFamily', function (newValues, oldValues) {
-            //inserindo
             for (var i = 0; i < newValues.length; i++) {
-                setSensorTempDSFamilyResolutionInSensorTempDSFamily(newValues[i]);
+                var sensorTempDSFamily = newValues[i];
+                sensorTempDSFamily.sensor = function () { return sensorFinder.getByKey(this.sensorTempDSFamilyId); }
+                sensorTempDSFamily.sensorTempDSFamilyResolution = function () { return sensorTempDSFamilyResolutionFinder.getByKey(this.sensorTempDSFamilyResolutionId); }
             }
-            //removendo
-            for (var i = 0; i < oldValues.length; i++) {
-                var sensorTempDSFamily = oldValues[i];
-                var sensorTempDSFamilyResolution = sensorTempDSFamilyResolutionFinder.getByKey(sensorTempDSFamily.sensorTempDSFamilyResolution.sensorTempDSFamilyResolutionId);
-                for (var j = 0; j < sensorTempDSFamilyResolution.sensorTempDSFamilies.length; j++) {
-                    if (sensorTempDSFamily === sensorTempDSFamilyResolution.sensorTempDSFamilies[j]) {
-                        sensorTempDSFamilyResolution.sensorTempDSFamilies.splice(j, 1);
-                        break;
-                    }
-                }
+        });
+
+        sensorContext.$watchCollection('sensorTempDSFamilyResolution', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var sensorTempDSFamilyResolution = newValues[i];
+                sensorTempDSFamilyResolution.sensorsTempDSFamily = function () { return sensorTempDSFamilyFinder.getBySensorTempDSFamilyResolutionKey(this.sensorTempDSFamilyResolutionId); }
             }
         });
 
@@ -111,18 +108,7 @@ app.factory('sensorMapper', [
                     }
                 }
             }
-        });
-
-        var setSensorTempDSFamilyResolutionInSensorTempDSFamily = function (sensorTempDSFamily) {
-            if (sensorTempDSFamily.sensorTempDSFamilyResolution) return;
-            var sensorTempDSFamilyResolution = sensorTempDSFamilyResolutionFinder.getByKey(sensorTempDSFamily.sensorTempDSFamilyResolutionId);
-            sensorTempDSFamily.sensorTempDSFamilyResolution = sensorTempDSFamilyResolution;
-            delete sensorTempDSFamily.sensorTempDSFamilyResolutionId; // removendo a foreing key
-            if (sensorTempDSFamilyResolution.sensorTempDSFamilies === undefined) {
-                sensorTempDSFamilyResolution.sensorTempDSFamilies = [];
-            }
-            sensorTempDSFamilyResolution.sensorTempDSFamilies.push(sensorTempDSFamily);
-        }
+        });        
 
         var setUnitMeasurementScaleInSensorUnitMeasurementScale = function (sensorUnitMeasurementScale) {
             if (sensorUnitMeasurementScale.unitMeasurementScale) return;
@@ -138,18 +124,7 @@ app.factory('sensorMapper', [
             unitMeasurementScale.sensorUnitMeasurementScales.push(sensorUnitMeasurementScale);
         }
 
-        // *** Navigation Properties Mappers ***
-
-        var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = false;
-        var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution = function () {
-            if (!mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init && sensorContext.sensorTempDSFamilyLoaded && sensorContext.sensorTempDSFamilyResolutionLoaded) {
-                mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = true;
-                sensorTempDSFamilyResolutionLoadedUnbinding();
-                for (var i = 0; i < sensorContext.sensorTempDSFamily.length; i++) {
-                    setSensorTempDSFamilyResolutionInSensorTempDSFamily(sensorContext.sensorTempDSFamily[i]);
-                }
-            }
-        };
+        // *** Navigation Properties Mappers ***       
 
         var mapper_SensorUnitMeasurementScale_UnitMeasurementScale_Init = false;
         var mapper_SensorUnitMeasurementScale_UnitMeasurementScale = function () {
@@ -191,11 +166,7 @@ app.factory('sensorMapper', [
         // *** Events Subscriptions
 
 
-        // *** Watches
-
-        var sensorTempDSFamilyResolutionLoadedUnbinding = sensorContext.$watch('sensorTempDSFamilyResolutionLoaded', function (newValue, oldValue) {
-            mapper_SensorTempDSFamily_SensorTempDSFamilyResolution();
-        })
+        // *** Watches       
 
         var unitMeasurementScaleLoadedUnbinding = siContext.$watch('unitMeasurementScaleLoaded', function (newValue, oldValue) {
             mapper_SensorUnitMeasurementScale_UnitMeasurementScale();

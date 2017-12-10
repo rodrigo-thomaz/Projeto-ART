@@ -14,9 +14,21 @@ app.factory('sensorTempDSFamilyFinder', ['$rootScope', 'sensorContext', function
         }
     }
 
+    var getBySensorTempDSFamilyResolutionKey = function (sensorTempDSFamilyResolutionId) {
+        var result = [];
+        for (var i = 0; i < context.sensorTempDSFamily.length; i++) {
+            var sensorTempDSFamily = context.sensorTempDSFamily[i];
+            if (sensorTempDSFamily.sensorTempDSFamilyResolutionId === sensorTempDSFamilyResolutionId) {
+                result.push(sensorTempDSFamily);
+            }
+        }
+        return result;
+    }
+
     // *** Public Methods ***
 
     serviceFactory.getByKey = getByKey;
+    serviceFactory.getBySensorTempDSFamilyResolutionKey = getBySensorTempDSFamilyResolutionKey;
 
     return serviceFactory;
 
