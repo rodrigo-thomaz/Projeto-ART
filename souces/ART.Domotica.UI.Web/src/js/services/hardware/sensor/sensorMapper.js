@@ -1,34 +1,93 @@
 ﻿'use strict';
-app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 'sensorTempDSFamilyResolutionConstant', 'sensorFinder', 'siContext', 'unitMeasurementScaleFinder', 'sensorDatasheetContext', 'sensorDatasheetFinder', 'sensorTempDSFamilyResolutionFinder',
-    function ($rootScope, sensorContext, sensorConstant, sensorTempDSFamilyResolutionConstant, sensorFinder, siContext, unitMeasurementScaleFinder, sensorDatasheetContext, sensorDatasheetFinder, sensorTempDSFamilyResolutionFinder) {
+app.factory('sensorMapper', [
+    '$rootScope',
+    'sensorContext',
+    'sensorConstant',
+    'sensorTempDSFamilyResolutionConstant',
+    'sensorFinder',
+    'siContext',
+    'unitMeasurementScaleFinder',
+    'sensorDatasheetContext',
+    'sensorDatasheetFinder',
+    'sensorTempDSFamilyResolutionFinder',
+    function (
+        $rootScope,
+        sensorContext,
+        sensorConstant,
+        sensorTempDSFamilyResolutionConstant,
+        sensorFinder,
+        siContext,
+        unitMeasurementScaleFinder,
+        sensorDatasheetContext,
+        sensorDatasheetFinder,
+        sensorTempDSFamilyResolutionFinder) {
 
         var serviceFactory = {};
+
+        var addSensorAggregates = function (sensor) {
+            //sensorTempDSFamily
+            sensorContext.sensorTempDSFamily.push(sensor.sensorTempDSFamily);
+            //sensorUnitMeasurementScale
+            sensorContext.sensorUnitMeasurementScale.push(sensor.sensorUnitMeasurementScale);
+            //sensorTrigger
+            for (var i = 0; i < sensor.sensorTriggers.length; i++) {
+                sensorContext.sensorTrigger.push(sensor.sensorTriggers[i]);
+            }
+        }
+
+        var removeSensorAggregates = function (sensor) {
+            //sensorTempDSFamily
+            for (var i = 0; i < sensorContext.sensorTempDSFamily.length; i++) {
+                if (sensor.sensorTempDSFamily === sensorContext.sensorTempDSFamily[i]) {
+                    sensorContext.sensorTempDSFamily.splice(i, 1);
+                    break;
+                }
+            }
+            //sensorUnitMeasurementScale
+            for (var i = 0; i < sensorContext.sensorUnitMeasurementScale.length; i++) {
+                if (sensor.sensorUnitMeasurementScale === sensorContext.sensorUnitMeasurementScale[i]) {
+                    sensorContext.sensorUnitMeasurementScale.splice(i, 1);
+                    break;
+                }
+            }
+            //sensorTrigger
+            for (var i = 0; i < sensor.sensorTriggers.length; i++) {
+                for (var j = 0; j < sensorContext.sensorTrigger.length; j++) {
+                    if (sensor.sensorTriggers[i] === sensorContext.sensorTrigger[j]) {
+                        sensorContext.sensorTrigger.splice(j, 1);
+                        break;
+                    }
+                }
+            }
+        }
 
         sensorContext.$watchCollection('sensor', function (newValues, oldValues) {
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
                 var sensor = newValues[i];
+
+                addSensorAggregates(sensor);
+
                 //sensorDatasheet
                 setSensorDatasheetInSensor(sensor);
                 //sensorTempDSFamily
                 var sensorTempDSFamily = sensor.sensorTempDSFamily;
                 sensorTempDSFamily.sensor = sensor;
-                sensorContext.sensorTempDSFamily.push(sensorTempDSFamily);
                 //sensorUnitMeasurementScale
                 var sensorUnitMeasurementScale = sensor.sensorUnitMeasurementScale;
                 sensorUnitMeasurementScale.sensor = sensor;
-                sensorContext.sensorUnitMeasurementScale.push(sensorUnitMeasurementScale);
                 //sensorTriggers
                 for (var j = 0; j < sensor.sensorTriggers.length; j++) {
                     var sensorTrigger = sensor.sensorTriggers[j];
                     sensorTrigger.sensor = sensor;
-                    delete sensorTrigger.sensorId; // removendo a foreing key
-                    sensorContext.sensorTrigger.push(sensorTrigger);
                 }
             }
             //removendo
             for (var i = 0; i < oldValues.length; i++) {
                 var sensor = oldValues[i];
+
+                removeSensorAggregates(sensor);
+
                 //sensorDatasheet                
                 for (var j = 0; j < sensor.sensorDatasheet.sensors.length; j++) {
                     if (sensor === sensor.sensorDatasheet.sensors[j]) {
@@ -65,14 +124,14 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
         sensorContext.$watchCollection('sensorTempDSFamily', function (newValues, oldValues) {
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
-                setSensorTempDSFamilyResolutionInSensorTempDSFamily(newValues[i]);                
+                setSensorTempDSFamilyResolutionInSensorTempDSFamily(newValues[i]);
             }
             //removendo
             for (var i = 0; i < oldValues.length; i++) {
                 var sensorTempDSFamily = oldValues[i];
                 var sensorTempDSFamilyResolution = sensorTempDSFamilyResolutionFinder.getByKey(sensorTempDSFamily.sensorTempDSFamilyResolution.sensorTempDSFamilyResolutionId);
                 for (var j = 0; j < sensorTempDSFamilyResolution.sensorTempDSFamilies.length; j++) {
-                    if (sensorTempDSFamily === sensorTempDSFamilyResolution.sensorTempDSFamilies[j]){
+                    if (sensorTempDSFamily === sensorTempDSFamilyResolution.sensorTempDSFamilies[j]) {
                         sensorTempDSFamilyResolution.sensorTempDSFamilies.splice(j, 1);
                         break;
                     }
@@ -136,7 +195,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
         }
 
         // *** Navigation Properties Mappers ***
-        
+
         var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init = false;
         var mapper_SensorTempDSFamily_SensorTempDSFamilyResolution = function () {
             if (!mapper_SensorTempDSFamily_SensorTempDSFamilyResolution_Init && sensorContext.sensorTempDSFamilyLoaded && sensorContext.sensorTempDSFamilyResolutionLoaded) {
@@ -184,7 +243,7 @@ app.factory('sensorMapper', ['$rootScope', 'sensorContext', 'sensorConstant', 's
         }
 
         var onSensorTempDSFamilyResolutionGetAllCompleted = function (event, data) {
-            sensorTempDSFamilyResolutionGetAllCompletedSubscription();     
+            sensorTempDSFamilyResolutionGetAllCompletedSubscription();
             sensorContext.sensorTempDSFamilyResolutionLoaded = true;
         }
 
