@@ -41,7 +41,7 @@ app.factory('sensorDatasheetMapper', [
                 sensorDatasheet.sensorType = function () { return sensorTypeFinder.getByKey(this.sensorTypeId); }
                 sensorDatasheet.sensorDatasheetUnitMeasurementDefault = function () { return sensorDatasheetUnitMeasurementDefaultFinder.getByKey(this.sensorDatasheetId, this.sensorTypeId); }
                 sensorDatasheet.sensorDatasheetUnitMeasurementScales = function () { return sensorDatasheetUnitMeasurementScaleFinder.getBySensorDatasheetKey(this.sensorDatasheetId, this.sensorTypeId); }
-                //sensorDatasheet.sensors = function () { return sensorFinder.getBySensorDatasheetKey(this.sensorDatasheetId, this.sensorTypeId); }
+                sensorDatasheet.sensors = function () { return sensorFinder.getBySensorDatasheetKey(this.sensorDatasheetId, this.sensorTypeId); }
             }
         });
 
