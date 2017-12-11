@@ -2,7 +2,7 @@
 app.factory('contextScope', [
 
     'globalizationContext',
-    'globalizationFinder',
+    'timeZoneFinder',
     'globalizationMapper',
     'timeZoneService',
 
@@ -75,7 +75,7 @@ app.factory('contextScope', [
     function (
 
         globalizationContext,
-        globalizationFinder,
+        timeZoneFinder,
         globalizationMapper,
         timeZoneService,
 

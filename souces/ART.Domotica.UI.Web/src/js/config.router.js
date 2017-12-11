@@ -51,7 +51,7 @@ angular.module('app')
 
                       'js/services/globalization/globalizationContext.js',
                       'js/services/globalization/globalizationConstants.js',
-                      'js/services/globalization/globalizationFinder.js',
+                      'js/services/globalization/timeZoneFinder.js',
                       'js/services/globalization/globalizationMapper.js',
 
                       'js/services/globalization/timeZoneService.js',
@@ -166,7 +166,7 @@ angular.module('app')
 
                       'js/services/globalization/globalizationContext.js',
                       'js/services/globalization/globalizationConstants.js',
-                      'js/services/globalization/globalizationFinder.js',
+                      'js/services/globalization/timeZoneFinder.js',
                       'js/services/globalization/globalizationMapper.js',
 
                       'js/services/globalization/timeZoneService.js',

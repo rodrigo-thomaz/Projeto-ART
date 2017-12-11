@@ -1,14 +1,15 @@
 ﻿'use strict';
-app.factory('globalizationMapper', ['$rootScope', 'globalizationContext', 'globalizationFinder', 'timeZoneConstant', function ($rootScope, globalizationContext, globalizationFinder, timeZoneConstant) {
+app.factory('globalizationMapper', ['$rootScope', 'globalizationContext', 'timeZoneFinder', 'timeZoneConstant', 'deviceNTPFinder',
+    function ($rootScope, globalizationContext, timeZoneFinder, timeZoneConstant, deviceNTPFinder) {
 
     var serviceFactory = {};    
 
-    // *** Navigation Properties Mappers ***
-
-    
-
-    // *** Navigation Properties Mappers ***
-
+    globalizationContext.$watchCollection('timeZone', function (newValues, oldValues) {
+        for (var i = 0; i < newValues.length; i++) {
+            var timeZone = newValues[i];
+            timeZone.devicesNTP = function () { return deviceNTPFinder.getByTimeZoneKey(this.timeZoneId); }
+        }
+    });
 
     // *** Events Subscriptions
         
