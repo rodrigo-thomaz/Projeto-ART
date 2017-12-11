@@ -6,7 +6,10 @@ app.factory('deviceMapper', [
     'globalizationContext',
     'timeZoneFinder',
     'sensorContext',
+    'deviceFinder',
     'sensorFinder',
+    'deviceNTPFinder',
+    'sensorInDeviceFinder',
     function (
         $rootScope,
         deviceContext,
@@ -14,7 +17,10 @@ app.factory('deviceMapper', [
         globalizationContext,
         timeZoneFinder,
         sensorContext,
-        sensorFinder) {
+        deviceFinder,
+        sensorFinder,
+        deviceNTPFinder,
+        sensorInDeviceFinder) {
 
         var serviceFactory = {};
 
@@ -58,7 +64,10 @@ app.factory('deviceMapper', [
         deviceContext.$watchCollection('device', function (newValues, oldValues) {
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
-                addDeviceAggregates(newValues[i]);
+                var device = newValues[i];
+                addDeviceAggregates(device);
+                device.deviceNTP = function () { return deviceNTPFinder.getByKey(this.deviceId); }
+                device.deviceSensors = function () { return deviceSensorFinder.getByKey(this.deviceId); }
             }
             //removendo
             for (var i = 0; i < oldValues.length; i++) {
@@ -70,20 +79,23 @@ app.factory('deviceMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var deviceNTP = newValues[i];
                 deviceNTP.timeZone = function () { return timeZoneFinder.getByKey(this.timeZoneId); }
+                deviceNTP.device = function () { return deviceFinder.getByKey(this.deviceNTPId); }
             }
         });
 
         deviceContext.$watchCollection('deviceSensors', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceSensors = newValues[i];
-
+                deviceSensors.device = function () { return deviceFinder.getByKey(this.deviceSensorsId); }
+                deviceSensors.sensorsInDevice = function () { return sensorInDeviceFinder.getByDeviceSensorsKey(this.deviceSensorsId); }
             }
         });        
 
         deviceContext.$watchCollection('sensorInDevice', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var sensorInDevice = newValues[i];
-
+                sensorInDevice.deviceSensors = function () { return deviceSensorFinder.getByKey(this.deviceSensorsId); }
+                sensorInDevice.sensor = function () { return sensorFinder.getByKey(this.sensorId); }
             }
         });
 

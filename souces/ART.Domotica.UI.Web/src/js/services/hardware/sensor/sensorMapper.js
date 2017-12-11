@@ -10,6 +10,7 @@ app.factory('sensorMapper', [
     'sensorDatasheetContext',
     'sensorDatasheetFinder',
     'sensorTempDSFamilyResolutionFinder',
+    'sensorInDeviceFinder',
     function (
         $rootScope,
         sensorContext,
@@ -20,7 +21,8 @@ app.factory('sensorMapper', [
         unitMeasurementScaleFinder,
         sensorDatasheetContext,
         sensorDatasheetFinder,
-        sensorTempDSFamilyResolutionFinder) {
+        sensorTempDSFamilyResolutionFinder,
+        sensorInDeviceFinder) {
 
         var serviceFactory = {};
 
@@ -70,6 +72,7 @@ app.factory('sensorMapper', [
                 sensor.sensorTempDSFamily = function () { return sensorTempDSFamilyFinder.getByKey(this.sensorId); }
                 sensor.sensorUnitMeasurementScale = function () { return sensorUnitMeasurementScaleFinder.getByKey(this.sensorId); }
                 sensor.sensorTriggers = function () { return sensorTriggerFinder.getBySensorKey(this.sensorId); }
+                sensor.sensorInDevice = function () { return sensorInDeviceFinder.getBySensorKey(this.sensorId); }
             }
             //removendo
             for (var i = 0; i < oldValues.length; i++) {

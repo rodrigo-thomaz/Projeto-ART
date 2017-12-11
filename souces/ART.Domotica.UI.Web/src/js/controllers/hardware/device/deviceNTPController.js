@@ -18,8 +18,8 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
             else
                 clearOnTimeZoneServiceInitialized = $rootScope.$on('timeZoneService_Initialized', setSelectedTimeZone);
 
-            clearOnSetTimeZoneCompleted = $rootScope.$on('deviceService_onSetTimeZoneCompleted_Id_' + $scope.deviceNTP.device.deviceId, onSetTimeZoneCompleted);
-            clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('deviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.deviceNTP.device.deviceId, onSetUpdateIntervalInMilliSecondCompleted);
+            clearOnSetTimeZoneCompleted = $rootScope.$on('deviceService_onSetTimeZoneCompleted_Id_' + $scope.deviceNTP.device().deviceId, onSetTimeZoneCompleted);
+            clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('deviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.deviceNTP.device().deviceId, onSetUpdateIntervalInMilliSecondCompleted);
 
             initialized = true;
         }
@@ -55,12 +55,12 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
         $scope.changeTimeZone = function () {
             if (!initialized) return;
-            deviceNTPService.setTimeZone($scope.deviceNTP.device.deviceId, $scope.timeZone.selectedTimeZone.timeZoneId);
+            deviceNTPService.setTimeZone($scope.deviceNTP.device().deviceId, $scope.timeZone.selectedTimeZone.timeZoneId);
         };
 
         $scope.changeUpdateIntervalInMilliSecond = function () {
             if (!initialized || !$scope.updateIntervalInMilliSecondView) return;
-            deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceNTP.device.deviceId, $scope.updateIntervalInMilliSecondView);
+            deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceNTP.device().deviceId, $scope.updateIntervalInMilliSecondView);
         };
 
     }]);
