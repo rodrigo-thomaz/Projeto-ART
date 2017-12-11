@@ -13,19 +13,23 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
             // Time Zone
             if (globalizationContext.timeZoneLoaded)
                 setSelectedTimeZone();
-            else
-                clearOnTimeZoneGetAllCompleted = $rootScope.$on(timeZoneConstant.getAllCompletedEventName, setSelectedTimeZone);
+            else {
+                var timeZoneLoadedWatch = globalizationContext.$watch('timeZoneLoaded', function (newValue) {
+                    if (newValue) {
+                        timeZoneLoadedWatch();
+                        setSelectedTimeZone();
+                    }
+                })
+            }                
 
             clearOnSetTimeZoneCompleted = $rootScope.$on(deviceNTPConstant.setTimeZoneCompletedEventName + $scope.deviceNTP.deviceNTPId, onSetTimeZoneCompleted);
             clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + $scope.deviceNTP.deviceNTPId, onSetUpdateIntervalInMilliSecondCompleted);
         }
 
-        var clearOnTimeZoneGetAllCompleted = null;
         var clearOnSetTimeZoneCompleted = null;
         var clearOnSetUpdateIntervalInMilliSecondCompleted = null;
 
         $scope.$on('$destroy', function () {
-            if (clearOnTimeZoneGetAllCompleted !== null) clearOnTimeZoneGetAllCompleted();
             clearOnSetTimeZoneCompleted();
             clearOnSetUpdateIntervalInMilliSecondCompleted();
         });
