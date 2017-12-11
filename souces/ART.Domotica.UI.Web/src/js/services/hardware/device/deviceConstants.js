@@ -34,3 +34,11 @@ app.constant('deviceNTPConstant', {
     setUpdateIntervalInMilliSecondCompletedEventName: 'deviceService.onSetUpdateIntervalInMilliSecondCompleted_Id_',   
 
 });
+
+app.constant('deviceSensorsConstant', {
+
+    setPublishIntervalInSecondsApiUri: 'api/deviceSensors/setPublishIntervalInSeconds',
+    setPublishIntervalInSecondsCompletedTopic: 'DeviceSensors.SetPublishIntervalInSecondsViewCompleted',
+    setPublishIntervalInSecondsCompletedEventName: 'deviceSensorsService.onSetPublishIntervalInSecondsCompleted_Id_',    
+
+});

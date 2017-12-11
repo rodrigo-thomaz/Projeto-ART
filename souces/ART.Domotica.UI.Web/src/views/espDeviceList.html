@@ -84,6 +84,20 @@
                                 
                             </form>
 
+                            <form name="formDeviceSensors" class="form-horizontal form-validation" ng-controller="deviceSensorsController" ng-init="init(deviceItem.deviceSensors())">
+                                
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">Publish interval in seconds</label>
+                                    <div class="col-lg-8">
+                                        <input name="inputPublishIntervalInSeconds" type="number" ng-model="publishIntervalInSecondsView" ng-model-options="{ debounce: 1000 }" ng-change="changePublishIntervalInSeconds()" min="5" required class="form-control">
+                                    </div>
+                                    <span ng-show="formDeviceSensors.publishIntervalInSecondsView.$touched && formDeviceSensors.publishIntervalInSecondsView.$invalid">
+                                        Publish Interval In Seconds deve ser maior que 5
+                                    </span>
+                                </div>                               
+
+                            </form>
+
                             <tabset justified="true" class="tab-container">
                                 <tab heading="{{sensorItem.label}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
                                     <div ng-controller="sensorTempDSFamilyItemController" ng-init="init(sensorItem)">

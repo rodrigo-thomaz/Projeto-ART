@@ -15,6 +15,10 @@
                 .ForMember(vm => vm.DeviceSensorsId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.PublishIntervalInSeconds, m => m.MapFrom(x => x.PublishIntervalInSeconds))
                 .ForMember(vm => vm.SensorInDevice, m => m.MapFrom(x => x.SensorInDevice));
+
+            CreateMap<DeviceSensors, DeviceSensorsSetPublishIntervalInSecondsModel>()
+                .ForMember(vm => vm.DeviceSensorsId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.PublishIntervalInSeconds, m => m.MapFrom(x => x.PublishIntervalInSeconds));
         }
 
         #endregion Constructors

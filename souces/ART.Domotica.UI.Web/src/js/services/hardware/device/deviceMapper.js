@@ -10,6 +10,7 @@ app.factory('deviceMapper', [
     'sensorFinder',
     'deviceNTPFinder',
     'sensorInDeviceFinder',
+    'deviceSensorsFinder',
     function (
         $rootScope,
         deviceContext,
@@ -20,7 +21,8 @@ app.factory('deviceMapper', [
         deviceFinder,
         sensorFinder,
         deviceNTPFinder,
-        sensorInDeviceFinder) {
+        sensorInDeviceFinder,
+        deviceSensorsFinder) {
 
         var serviceFactory = {};
 
@@ -67,7 +69,7 @@ app.factory('deviceMapper', [
                 var device = newValues[i];
                 addDeviceAggregates(device);
                 device.deviceNTP = function () { return deviceNTPFinder.getByKey(this.deviceId); }
-                device.deviceSensors = function () { return deviceSensorFinder.getByKey(this.deviceId); }
+                device.deviceSensors = function () { return deviceSensorsFinder.getByKey(this.deviceId); }
             }
             //removendo
             for (var i = 0; i < oldValues.length; i++) {

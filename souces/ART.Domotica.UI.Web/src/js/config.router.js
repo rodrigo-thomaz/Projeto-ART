@@ -150,6 +150,7 @@ angular.module('app')
                       'js/services/hardware/device/deviceService.js',                     
 
                       'js/controllers/hardware/device/deviceController.js', 
+                      'js/controllers/hardware/device/deviceSensorsController.js', 
                       'js/controllers/hardware/device/deviceNTPController.js',                                
                   ])
               })

@@ -1,6 +1,9 @@
 ﻿namespace ART.Domotica.Domain.Services
 {
+    using System;
+    using System.Threading.Tasks;
     using ART.Domotica.Domain.Interfaces;
+    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Domain;
 
@@ -20,5 +23,21 @@
         }
 
         #endregion Constructors
+
+        public async Task<DeviceSensors> SetPublishIntervalInSeconds(Guid deviceSensorsId, int publishIntervalInSeconds)
+        {
+            var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceSensors not found");
+            }
+
+            entity.PublishIntervalInSeconds = publishIntervalInSeconds;
+
+            await _deviceSensorsRepository.Update(entity);
+
+            return entity;
+        }
     }
 }

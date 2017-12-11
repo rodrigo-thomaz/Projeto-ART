@@ -4,6 +4,8 @@
 
     using ART.Domotica.Producer.Interfaces;
     using ART.Infra.CrossCutting.MQ.WebApi;
+    using System.Threading.Tasks;
+    using ART.Domotica.Contract;
 
     [Authorize]
     [RoutePrefix("api/deviceSensors")]
@@ -23,5 +25,23 @@
         }
 
         #endregion Constructors
+
+        /// <summary>
+        /// Altera o PublishIntervalInSeconds de um device
+        /// </summary>
+        /// <remarks>
+        /// Altera o PublishIntervalInSeconds de um device
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setPublishIntervalInSeconds")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetPublishIntervalInSeconds(DeviceSensorsSetPublishIntervalInSecondsRequestContract contract)
+        {
+            await _deviceSensorsProducer.SetPublishIntervalInSeconds(CreateMessage(contract));
+            return Ok();
+        }
     }
 }
