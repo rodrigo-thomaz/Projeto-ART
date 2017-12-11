@@ -6,12 +6,12 @@
         <h1 class="m-n font-thin h3">Devices</h1>
     </div>
     <div class="wrapper-md">
-        
+
         <div ng-controller="espDeviceListController">
 
             <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
 
-            <div class="row" ng-repeat="(deviceKey, deviceItem) in devices">                
+            <div class="row" ng-repeat="(deviceKey, deviceItem) in devices">
 
                 <div class="col-md-6" ng-controller="deviceController" ng-init="init(deviceItem)">
 
@@ -30,7 +30,7 @@
                                             <input type="text" class="form-control" readonly value="{{device.isConnected ? 'On-line' : 'Off-line'}}">
                                         </div>
                                     </div>
-                                </div>                                
+                                </div>
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label">Última atualização</label>
                                     <div class="col-lg-8">
@@ -80,12 +80,11 @@
                                             Update Interval In MilliSecond deve ser maior que 5000
                                         </span>
                                     </div>
-                                </fieldset> 
-                                
+                                </fieldset>
+
                             </form>
 
                             <form name="formDeviceSensors" class="form-horizontal form-validation" ng-controller="deviceSensorsController" ng-init="init(deviceItem.deviceSensors())">
-                                
                                 <div class="form-group">
                                     <label class="col-lg-4 control-label">Publish interval in seconds</label>
                                     <div class="col-lg-8">
@@ -94,12 +93,26 @@
                                     <span ng-show="formDeviceSensors.publishIntervalInSecondsView.$touched && formDeviceSensors.publishIntervalInSecondsView.$invalid">
                                         Publish Interval In Seconds deve ser maior que 5
                                     </span>
-                                </div>                               
-
+                                </div>
                             </form>
 
+                            <div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors().sensorsInDevice())">
+                                <tabset justified="true" class="tab-container">
+                                    <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorsInDevice">
+                                        <div ng-controller="sensorController" ng-init="init(sensorInDeviceItem.sensor())">
+
+                                        </div>
+                                    </tab>
+                                </tabset>
+                            </div>
+
+
+
+
+
+
                             <tabset justified="true" class="tab-container">
-                                <tab heading="{{sensorItem.label}}" ng-repeat="(sensorKey, sensorItem) in device.sensors">
+                                <tab heading="{{sensorItem.label}}" ng-repeat="(sensorKey, sensorItem) in deviceItem.sensors">
                                     <div ng-controller="sensorTempDSFamilyItemController" ng-init="init(sensorItem)">
                                         <div style="height:240px">
                                             <nvd3 options="options" data="sensor.chart"></nvd3>
@@ -145,7 +158,7 @@
                                                 <div class="col-lg-8">
                                                     <select class="form-control m-b" ng-options="item.name for item in resolution.availableResolutions track by item.id" ng-model="resolution.selectedResolution" ng-change="changeResolution()"></select>
                                                 </div>
-                                            </div>                                            
+                                            </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Tem alarme alto</label>
@@ -235,7 +248,7 @@
                                                                ng-model-options="{ debounce: 1000 }"
                                                                ng-change="changeValue('Max', maxView)"
                                                                max="{{sensorItem.sensorRange.maxConverted}}"
-                                                               min="{{sensorItem.sensorRange.minConverted}}"                                                               
+                                                               min="{{sensorItem.sensorRange.minConverted}}"
                                                                required
                                                                class="form-control">
                                                         <span ng-show="formSensor.inputSensorUnitMeasurementScaleMax.$touched && formSensor.inputSensorUnitMeasurementScaleMax.$invalid">
@@ -252,7 +265,7 @@
                                                                ng-model-options="{ debounce: 1000 }"
                                                                ng-change="changeValue('Min', minView)"
                                                                max="{{sensorItem.sensorRange.maxConverted}}"
-                                                               min="{{sensorItem.sensorRange.minConverted}}"                                                               
+                                                               min="{{sensorItem.sensorRange.minConverted}}"
                                                                required
                                                                class="form-control">
                                                         <span ng-show="formSensor.inputSensorUnitMeasurementScaleMin.$touched && formSensor.inputSensorUnitMeasurementScaleMin.$invalid">
@@ -262,7 +275,7 @@
                                                 </div>
                                             </fieldset>
                                         </form>
-                                    </div>                                
+                                    </div>
                                 </tab>
                             </tabset>
 
@@ -271,6 +284,6 @@
 
                 </div>
             </div>
-        </div>                
+        </div>
     </div>
 </div>

@@ -127,6 +127,8 @@ angular.module('app')
                       'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
                       'js/services/hardware/sensor/sensorTempDSFamilyService.js',
 
+                      'js/controllers/hardware/sensor/sensorController.js',
+
                       'js/controllers/sensorUnitMeasurementScaleController.js',
                       'js/controllers/sensorTriggerController.js',
 
@@ -150,8 +152,10 @@ angular.module('app')
                       'js/services/hardware/device/deviceService.js',                     
 
                       'js/controllers/hardware/device/deviceController.js', 
-                      'js/controllers/hardware/device/deviceSensorsController.js', 
                       'js/controllers/hardware/device/deviceNTPController.js',                                
+                      'js/controllers/hardware/device/deviceSensorsController.js', 
+                      'js/controllers/hardware/device/sensorInDeviceController.js', 
+                      
                   ])
               })
               .state('app.espDeviceManager', {

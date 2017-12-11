@@ -91,6 +91,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
                     break;
                 }
             }
+            deviceContext.$digest();
             $rootScope.$emit('ESPDeviceService_onReadReceived');
         }
 
