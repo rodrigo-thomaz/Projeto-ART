@@ -31,6 +31,7 @@
             builder.RegisterType<ApplicationUserConsumer>().As<IApplicationUserConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ContinentConsumer>().As<IContinentConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<CountryConsumer>().As<ICountryConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<HardwareConsumer>().As<IHardwareConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceNTPConsumer>().As<IDeviceNTPConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceSensorsConsumer>().As<IDeviceSensorsConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTempDSFamilyConsumer>().As<ISensorTempDSFamilyConsumer>().SingleInstance().AutoActivate();

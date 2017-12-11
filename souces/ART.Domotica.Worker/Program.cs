@@ -75,6 +75,7 @@
                 x.AddProfile(new DeviceSensorsProfile());
                 x.AddProfile(new SensorTempDSFamilyProfile());
                 x.AddProfile(new ESPDeviceProfile());
+                x.AddProfile(new HardwareProfile());
                 x.AddProfile(new SensorUnitMeasurementScaleProfile());
                 x.AddProfile(new SensorDatasheetProfile());
                 x.AddProfile(new SensorProfile());

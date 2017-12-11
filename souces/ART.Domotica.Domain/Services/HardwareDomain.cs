@@ -31,9 +31,9 @@
 
         #region Methods
         
-        public async Task<HardwareBase> SetLabel(Guid deviceId, string label)
+        public async Task<HardwareBase> SetLabel(Guid hardwareId, string label)
         {
-            var entity = await _hardwareRepository.GetByKey(deviceId);
+            var entity = await _hardwareRepository.GetByKey(hardwareId);
 
             if (entity == null)
             {

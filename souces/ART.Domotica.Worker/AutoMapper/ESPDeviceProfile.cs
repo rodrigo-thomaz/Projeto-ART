@@ -48,8 +48,6 @@
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
                 .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));
-
-            CreateMap<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelModel>();
         }
 
         #endregion Constructors

@@ -2,16 +2,16 @@
 {
     using System;
 
-    public class SensorSetLabelRequestContract
+    public class HardwareSetLabelRequestContract
     {
         #region Properties
 
-        public string Label
+        public Guid HardwareId
         {
             get; set;
         }
 
-        public Guid SensorTempDSFamilyId
+        public string Label
         {
             get; set;
         }

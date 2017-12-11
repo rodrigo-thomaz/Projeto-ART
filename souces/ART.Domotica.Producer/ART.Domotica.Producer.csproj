@@ -62,6 +62,7 @@
     <Compile Include="Interfaces\IApplicationMQProducer.cs" />
     <Compile Include="Interfaces\IDeviceNTPProducer.cs" />
     <Compile Include="Interfaces\ISensorInDeviceProducer.cs" />
+    <Compile Include="Interfaces\IHardwareProducer.cs" />
     <Compile Include="Interfaces\ISensorTriggerProducer.cs" />
     <Compile Include="Interfaces\ISensorUnitMeasurementScaleProducer.cs" />
     <Compile Include="Interfaces\IESPDeviceProducer.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Services\ApplicationMQProducer.cs" />
     <Compile Include="Services\DeviceNTPProducer.cs" />
     <Compile Include="Services\SensorInDeviceProducer.cs" />
+    <Compile Include="Services\HardwareProducer.cs" />
     <Compile Include="Services\SensorTriggerProducer.cs" />
     <Compile Include="Services\SensorUnitMeasurementScaleProducer.cs" />
     <Compile Include="Services\ESPDeviceProducer.cs" />

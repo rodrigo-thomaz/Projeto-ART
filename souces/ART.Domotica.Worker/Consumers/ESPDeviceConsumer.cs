@@ -32,7 +32,6 @@
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
-        private readonly EventingBasicConsumer _setLabelConsumer;
 
         private readonly ISettingManager _settingsManager;
         private readonly IMQSettings _mqSettings;
@@ -54,7 +53,6 @@
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
-            _setLabelConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -115,13 +113,6 @@
                , arguments: null);
 
             _model.QueueDeclare(
-                queue: ESPDeviceConstants.SetLabelQueueName
-              , durable: false
-              , exclusive: false
-              , autoDelete: true
-              , arguments: null);
-
-            _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetConfigurationsRPCQueueName
                , durable: false
                , exclusive: false
@@ -134,7 +125,6 @@
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
-            _setLabelConsumer.Received += SetLabelReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetAllByApplicationIdQueueName, false, _getAllByApplicationIdConsumer);
@@ -142,7 +132,6 @@
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
-            _model.BasicConsume(ESPDeviceConstants.SetLabelQueueName, false, _setLabelConsumer);
         }
 
         #endregion Methods
@@ -420,36 +409,7 @@
             }
 
             _logger.DebugLeave();
-        }       
-
-        public void SetLabelReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(SetLabelReceivedAsync(sender, e));
-        }
-
-        public async Task SetLabelReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceSetLabelRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IHardwareDomain>();
-            var data = await domain.SetLabel(message.Contract.DeviceId, message.Contract.Label);
-
-            var exchange = "amq.topic";
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            //Enviando para View
-            var viewModel = Mapper.Map<ESPDeviceSetLabelRequestContract, ESPDeviceSetLabelModel>(message.Contract);
-            viewModel.DeviceId = data.Id;
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetLabelViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
-
-            _logger.DebugLeave();
-        }
+        }  
 
         #endregion Other
     }

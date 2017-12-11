@@ -17,8 +17,6 @@
         public static readonly string InsertInApplicationIoTQueueName = "ESPDevice.InsertInApplicationIoT";
         public static readonly string InsertInApplicationQueueName = "ESPDevice.InsertInApplication";
         public static readonly string InsertInApplicationViewCompletedQueueName = "ESPDevice.InsertInApplicationViewCompleted";
-        public static readonly string SetLabelQueueName = "ESPDevice.SetLabel";
-        public static readonly string SetLabelViewCompletedQueueName = "ESPDevice.SetLabelViewCompleted";
         public static readonly string UpdatePinIoTQueueName = "ESPDevice.UpdatePinIoT";
 
         #endregion Fields

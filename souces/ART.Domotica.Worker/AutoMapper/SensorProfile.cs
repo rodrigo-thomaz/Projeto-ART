@@ -37,7 +37,7 @@
                 .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMax))
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id));
 
-            CreateMap<SensorSetLabelRequestContract, SensorSetLabelModel>();
+            CreateMap<HardwareSetLabelRequestContract, HardwareSetLabelModel>();
         }
 
         #endregion Constructors

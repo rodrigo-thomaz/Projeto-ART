@@ -1,6 +1,5 @@
 ﻿using System.Web.Http;
 using System.Threading.Tasks;
-using ART.Domotica.Contract;
 using ART.Infra.CrossCutting.MQ.WebApi;
 using ART.Domotica.Producer.Interfaces;
 
@@ -42,24 +41,6 @@ namespace ART.Domotica.WebApi.Controllers
         public async Task<IHttpActionResult> GetAllByApplicationId()
         {           
             await _sensorProducer.GetAllByApplicationId(CreateMessage());
-            return Ok();
-        }
-
-        /// <summary>
-        /// Altera o rótulo de um sensor
-        /// </summary>
-        /// <remarks>
-        /// Altera o rótulo de um sensor
-        /// </remarks>
-        /// <param name="contract">contrato do request</param>
-        /// <response code="400">Bad Request</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal Server Error</response>
-        [Route("setLabel")]
-        [HttpPost]
-        public async Task<IHttpActionResult> SetLabel(SensorSetLabelRequestContract contract)
-        {
-            await _sensorProducer.SetLabel(CreateMessage(contract));
             return Ok();
         }
 

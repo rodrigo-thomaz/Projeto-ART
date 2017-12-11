@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class ESPDeviceSetLabelModel
+    public class HardwareSetLabelModel
     {
         #region Properties
 
-        public Guid DeviceId
+        public Guid HardwareId
         {
             get; set;
         }

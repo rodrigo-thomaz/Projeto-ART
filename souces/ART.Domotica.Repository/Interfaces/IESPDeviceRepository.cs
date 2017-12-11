@@ -19,11 +19,11 @@
 
         Task<List<string>> GetExistingPins();
 
+        Task<ESPDevice> GetFullByKey(Guid deviceId);
+
         Task<ESPDevice> GetHardwareInApplication(int chipId, int flashChipId, string macAddress);
 
         Task<List<ESPDevice>> GetListNotInApplication();
-
-        Task<ESPDevice> GetFullByKey(Guid deviceId);
 
         #endregion Methods
     }

@@ -21,8 +21,6 @@
 
         Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
-        Task SetLabel(AuthenticatedMessageContract<ESPDeviceSetLabelRequestContract> message);
-
         #endregion Methods
     }
 }
