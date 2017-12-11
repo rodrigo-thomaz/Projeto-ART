@@ -48,7 +48,7 @@ namespace ART.Domotica.Producer.Services
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
                 _model.BasicPublish("", ESPDeviceConstants.GetAllByApplicationIdQueueName, null, payload);
             });
-        }        
+        }
 
         public async Task GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
@@ -98,7 +98,16 @@ namespace ART.Domotica.Producer.Services
                 rpcClient.Close();
                 var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCResponseContract>(bufferResult);
                 return result;
-            });            
+            });
+        }
+
+        public async Task SetLabel(AuthenticatedMessageContract<HardwareSetLabelRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", ESPDeviceConstants.SetLabelQueueName, null, payload);
+            });
         }
 
         #endregion
@@ -134,7 +143,14 @@ namespace ART.Domotica.Producer.Services
                , exclusive: false
                , autoDelete: true
                , arguments: null);
-        }        
+
+            _model.QueueDeclare(
+               queue: ESPDeviceConstants.SetLabelQueueName
+             , durable: false
+             , exclusive: false
+             , autoDelete: true
+             , arguments: null);
+        }
 
         #endregion
     }

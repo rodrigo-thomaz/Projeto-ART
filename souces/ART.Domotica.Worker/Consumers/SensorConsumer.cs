@@ -13,6 +13,7 @@ using AutoMapper;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Model;
 using ART.Infra.CrossCutting.Logging;
+using ART.Domotica.Contract;
 using ART.Domotica.IoTContract;
 
 namespace ART.Domotica.Worker.Consumers
@@ -23,6 +24,7 @@ namespace ART.Domotica.Worker.Consumers
 
         private readonly EventingBasicConsumer _getAllByApplicationIdConsumer;
         private readonly EventingBasicConsumer _getAllByHardwareInApplicationIdConsumer;
+        private readonly EventingBasicConsumer _setLabelConsumer;
 
         private readonly IComponentContext _componentContext;
 
@@ -36,6 +38,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllByHardwareInApplicationIdConsumer = new EventingBasicConsumer(_model);
+            _setLabelConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -65,6 +68,13 @@ namespace ART.Domotica.Worker.Consumers
                 , arguments: null);
 
             _model.QueueDeclare(
+                  queue: SensorConstants.SetLabelQueueName
+                , durable: true
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueDeclare(
                 queue: SensorConstants.GetAllByHardwareInApplicationIdIoTQueueName
               , durable: false
               , exclusive: false
@@ -79,9 +89,11 @@ namespace ART.Domotica.Worker.Consumers
 
             _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;
             _getAllByHardwareInApplicationIdConsumer.Received += GetAllByHardwareInApplicationIdReceived;
+            _setLabelConsumer.Received += SetLabelReceived;
 
             _model.BasicConsume(SensorConstants.GetAllByApplicationIdQueueName, false, _getAllByApplicationIdConsumer);
             _model.BasicConsume(SensorConstants.GetAllByHardwareInApplicationIdIoTQueueName, false, _getAllByHardwareInApplicationIdConsumer);
+            _model.BasicConsume(SensorConstants.SetLabelQueueName, false, _setLabelConsumer);
         }
 
         public void GetAllByApplicationIdReceived(object sender, BasicDeliverEventArgs e)
@@ -109,7 +121,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<List<Sensor>, List<SensorGetModel>>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorConstants.GetAllByApplicationIdCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
@@ -134,7 +146,7 @@ namespace ART.Domotica.Worker.Consumers
 
             var domain = _componentContext.Resolve<ISensorDomain>();
             var data = await domain.GetAllByHardwareInApplicationId(applicationMQ.Id, requestContract.DeviceId);
-                        
+
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId);
 
@@ -148,7 +160,35 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
-        }        
+        }
+
+        public void SetLabelReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetLabelReceivedAsync(sender, e));
+        }
+
+        public async Task SetLabelReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwareSetLabelRequestContract>>(e.Body);
+            var hardwareDomain = _componentContext.Resolve<IHardwareDomain>();
+            var data = await hardwareDomain.SetLabel(message.Contract.HardwareId, message.Contract.Label);
+
+            var exchange = "amq.topic";
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<HardwareBase, HardwareSetLabelModel>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.SetLabelViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
+        }
 
         #endregion
     }

@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using ART.Domotica.Contract;
+using RabbitMQ.Client;
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
@@ -27,8 +28,17 @@ namespace ART.Domotica.Producer.Services
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
                 _model.BasicPublish("", SensorConstants.GetAllByApplicationIdQueueName, null, payload);
-            });            
-        }  
+            });
+        }
+
+        public async Task SetLabel(AuthenticatedMessageContract<HardwareSetLabelRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", SensorConstants.SetLabelQueueName, null, payload);
+            });
+        }
 
         #endregion
 
@@ -42,6 +52,13 @@ namespace ART.Domotica.Producer.Services
                 , exclusive: false
                 , autoDelete: true
                 , arguments: null);
+
+            _model.QueueDeclare(
+                 queue: SensorConstants.SetLabelQueueName
+               , durable: true
+               , exclusive: false
+               , autoDelete: false
+               , arguments: null);
         }
 
         #endregion

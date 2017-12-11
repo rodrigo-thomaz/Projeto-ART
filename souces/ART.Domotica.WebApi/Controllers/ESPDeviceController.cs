@@ -13,7 +13,7 @@
     {
         #region Fields
 
-        protected readonly IESPDeviceProducer _espDeviceProducer;        
+        protected readonly IESPDeviceProducer _espDeviceProducer;
 
         #endregion Fields
 
@@ -21,7 +21,7 @@
 
         public ESPDeviceController(IESPDeviceProducer espDeviceProducer)
         {
-            _espDeviceProducer = espDeviceProducer;            
+            _espDeviceProducer = espDeviceProducer;
         }
 
         #endregion Constructors
@@ -63,7 +63,7 @@
         [ResponseType(typeof(ESPDeviceGetConfigurationsRPCResponseContract))]
         public async Task<IHttpActionResult> GetConfigurations(ESPDeviceGetConfigurationsRPCRequestContract contract)
         {
-            var result = await _espDeviceProducer.GetConfigurationsRPC(contract);  
+            var result = await _espDeviceProducer.GetConfigurationsRPC(contract);
             return Ok(result);
         }
 
@@ -136,6 +136,24 @@
         public async Task<IHttpActionResult> GetAllByApplicationId()
         {
             await _espDeviceProducer.GetAllByApplicationId(CreateMessage());
+            return Ok();
+        }
+
+        /// <summary>
+        /// Altera o Label de um device
+        /// </summary>
+        /// <remarks>
+        /// Altera o Label de um device
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setLabel")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetLabel(HardwareSetLabelRequestContract contract)
+        {
+            await _espDeviceProducer.SetLabel(CreateMessage(contract));
             return Ok();
         }
 

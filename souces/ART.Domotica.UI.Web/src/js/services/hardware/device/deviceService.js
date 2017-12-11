@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceConstant', 'deviceContext', 'deviceMapper',
-    function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceConstant, deviceContext, deviceMapper) {
+app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceConstant', 'deviceContext', 'deviceMapper', 'deviceFinder',
+    function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceConstant, deviceContext, deviceMapper, deviceFinder) {
 
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
@@ -70,7 +70,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
         var setLabel = function (deviceId, label) {
             var data = {
-                deviceId: deviceId,
+                hardwareId: deviceId,
                 label: label,
             }
             return $http.post(serviceBase + deviceConstant.setLabelApiUri, data).then(function (results) {
@@ -195,9 +195,10 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
         var onSetLabelCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var device = deviceContext.getDeviceById(result.deviceId);
+            var device = deviceFinder.getByKey(result.hardwareId);
             device.label = result.label;
-            $rootScope.$emit(deviceConstant.setLabelCompletedEventName + result.deviceId, result);
+            deviceContext.$digest();
+            $rootScope.$emit(deviceConstant.setLabelCompletedEventName + result.hardwareId, result);
         }
 
         var insertDeviceInCollection = function (device) {

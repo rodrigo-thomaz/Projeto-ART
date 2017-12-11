@@ -27,11 +27,12 @@
         #region Fields
 
         private readonly EventingBasicConsumer _getAllConsumer;
-        private readonly EventingBasicConsumer _getAllByApplicationIdConsumer;        
+        private readonly EventingBasicConsumer _getAllByApplicationIdConsumer;
         private readonly EventingBasicConsumer _getByPinConsumer;
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
+        private readonly EventingBasicConsumer _setLabelConsumer;
 
         private readonly ISettingManager _settingsManager;
         private readonly IMQSettings _mqSettings;
@@ -53,6 +54,7 @@
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
+            _setLabelConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -61,7 +63,7 @@
             _settingsManager = settingsManager;
             _mqSettings = mqSettings;
 
-            Initialize();            
+            Initialize();
         }
 
         #endregion Constructors
@@ -113,11 +115,18 @@
                , arguments: null);
 
             _model.QueueDeclare(
+                queue: ESPDeviceConstants.SetLabelQueueName
+              , durable: false
+              , exclusive: false
+              , autoDelete: true
+              , arguments: null);
+
+            _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetConfigurationsRPCQueueName
                , durable: false
                , exclusive: false
                , autoDelete: false
-               , arguments: null); 
+               , arguments: null);
 
             _getAllConsumer.Received += GetAllReceived;
             _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;
@@ -125,6 +134,7 @@
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
+            _setLabelConsumer.Received += SetLabelReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetAllByApplicationIdQueueName, false, _getAllByApplicationIdConsumer);
@@ -132,6 +142,7 @@
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
+            _model.BasicConsume(ESPDeviceConstants.SetLabelQueueName, false, _setLabelConsumer);
         }
 
         #endregion Methods
@@ -219,7 +230,7 @@
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ESPDeviceConstants.GetByPinViewCompletedQueueName);
             var viewModel = Mapper.Map<ESPDevice, ESPDeviceGetByPinModel>(data);
-            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             _model.BasicPublish(exchange, rountingKey, null, buffer);
 
             _logger.DebugLeave();
@@ -251,7 +262,7 @@
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
-             //Enviando sensores para View
+            //Enviando sensores para View
             var sensorRountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.InsertInApplicationViewCompletedQueueName);
             var sensorViewModel = Mapper.Map<IEnumerable<Sensor>, IEnumerable<SensorGetModel>>(data.DeviceSensors.SensorInDevice.Select(x => x.Sensor));
             var sensorViewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(sensorViewModel, true);
@@ -287,7 +298,7 @@
             var data = await domain.DeleteFromApplication(applicationMQ.Id, message.Contract.DeviceId);
 
             var exchange = "amq.topic";
-            
+
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id);
 
@@ -297,7 +308,7 @@
             {
                 DeviceId = data.Id,
             };
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);                        
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             //Enviando sensores para View
@@ -334,7 +345,7 @@
                 var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
                 var applicationMQ = await applicationMQDomain.GetByHardwareId(data.Id);
                 applicationTopic = applicationMQ.Topic;
-            }             
+            }
 
             var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
             var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
@@ -348,12 +359,12 @@
                     Host = _mqSettings.BrokerHost,
                     Port = _mqSettings.BrokerPort,
                     ApplicationTopic = applicationTopic,
-                },  
+                },
                 DeviceNTP = new DeviceNTPDetailResponseContract
                 {
                     Host = ntpHost,
                     Port = ntpPort,
-                },                
+                },
                 PublishMessageInterval = publishMessageInterval,
             };
 
@@ -372,9 +383,9 @@
             replyProps.CorrelationId = props.CorrelationId;
 
             _model.BasicPublish(
-                exchange: "", 
+                exchange: "",
                 routingKey: props.ReplyTo,
-                basicProperties: replyProps, 
+                basicProperties: replyProps,
                 body: buffer);
 
             _model.BasicAck(e.DeliveryTag, false);
@@ -401,7 +412,7 @@
                 //Enviando para o IoT
                 var contract = Mapper.Map<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>(item);
                 var nextFireTimeInSeconds = nextFireTimeUtc.Subtract(DateTimeOffset.Now).TotalSeconds;
-                contract.NextFireTimeInSeconds = nextFireTimeInSeconds;                
+                contract.NextFireTimeInSeconds = nextFireTimeInSeconds;
                 var deviceMessage = new MessageIoTContract<ESPDeviceUpdatePinsResponseIoTContract>(contract);
                 var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
                 var routingKey = GetDeviceRoutingKeyForIoT(item.DeviceMQ.Topic, ESPDeviceConstants.UpdatePinIoTQueueName);
@@ -409,7 +420,35 @@
             }
 
             _logger.DebugLeave();
-        }  
+        }
+
+        public void SetLabelReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetLabelReceivedAsync(sender, e));
+        }
+
+        public async Task SetLabelReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwareSetLabelRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IHardwareDomain>();
+            var data = await domain.SetLabel(message.Contract.HardwareId, message.Contract.Label);
+
+            var exchange = "amq.topic";
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<HardwareBase, HardwareSetLabelModel>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetLabelViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
+        }
 
         #endregion Other
     }

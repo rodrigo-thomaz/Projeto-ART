@@ -29,13 +29,7 @@ app.factory('contextScope', [
     'numericalScaleTypeService',
     'unitMeasurementScaleService',
     'unitMeasurementService',
-    'unitMeasurementTypeService',
-
-    'hardwareConstant',
-    'hardwareContext',
-    'hardwareFinder',
-    'hardwareMapper',
-    'hardwareService',
+    'unitMeasurementTypeService',    
 
     'sensorDatasheetContext',
     'sensorDatasheetMapper',
@@ -109,13 +103,7 @@ app.factory('contextScope', [
         unitMeasurementScaleService,
         unitMeasurementService,
         unitMeasurementTypeService,
-
-        hardwareConstant,
-        hardwareContext,
-        hardwareFinder,
-        hardwareMapper,
-        hardwareService,
-
+               
         sensorDatasheetContext,        
         sensorDatasheetMapper,
 

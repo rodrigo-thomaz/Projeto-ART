@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="ApplicationMQConstants.cs" />
     <Compile Include="DeviceNTPConstants.cs" />
-    <Compile Include="HardwareConstants.cs" />
     <Compile Include="SensorTriggerConstants.cs" />
     <Compile Include="SensorUnitMeasurementScaleConstants.cs" />
     <Compile Include="SettingsConstants.cs" />

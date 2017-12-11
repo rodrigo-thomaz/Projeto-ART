@@ -213,6 +213,7 @@
     <Content Include="src\js\controllers\dashboardController.js" />
     <Content Include="src\js\controllers\applicationController.js" />
     <Content Include="src\js\controllers\hardware\device\deviceNTPController.js" />
+    <Content Include="src\js\controllers\hardware\device\deviceController.js" />
     <Content Include="src\js\controllers\sensorUnitMeasurementScaleController.js" />
     <Content Include="src\js\controllers\sensorTriggerController.js" />
     <Content Include="src\js\controllers\tab.js" />
@@ -232,8 +233,6 @@
     <Content Include="src\js\services\hardware\device\deviceConstants.js" />
     <Content Include="src\js\services\hardware\device\deviceFinder.js" />
     <Content Include="src\js\services\hardware\device\sensorInDeviceService.js" />
-    <Content Include="src\js\services\hardware\hardwareConstants.js" />
-    <Content Include="src\js\services\hardware\hardwareContext.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetConstants.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetContext.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorTypeFinder.js" />
@@ -241,9 +240,6 @@
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetUnitMeasurementScaleFinder.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetFinder.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetMapper.js" />
-    <Content Include="src\js\services\hardware\hardwareFinder.js" />
-    <Content Include="src\js\services\hardware\hardwareMapper.js" />
-    <Content Include="src\js\services\hardware\hardwareService.js" />
     <Content Include="src\js\services\hardware\sensor\sensorConstants.js" />
     <Content Include="src\js\services\hardware\sensor\sensorContext.js" />
     <Content Include="src\js\services\hardware\sensor\sensorTriggerFinder.js" />

@@ -128,7 +128,6 @@
     <Compile Include="AutoMapper\SI\UnitMeasurementProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
-    <Compile Include="Consumers\HardwareConsumer.cs" />
     <Compile Include="Consumers\SensorInDeviceConsumer.cs" />
     <Compile Include="Consumers\Locale\ContinentConsumer.cs" />
     <Compile Include="Consumers\Locale\CountryConsumer.cs" />
@@ -149,7 +148,6 @@
     <Compile Include="Consumers\Globalization\TimeZoneConsumer.cs" />
     <Compile Include="IConsumers\IApplicationMQConsumer.cs" />
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
-    <Compile Include="IConsumers\IHardwareConsumer.cs" />
     <Compile Include="IConsumers\ISensorTempDSFamilyConsumer.cs" />
     <Compile Include="IConsumers\IDeviceNTPConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />
