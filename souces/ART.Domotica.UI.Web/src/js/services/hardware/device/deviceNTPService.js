@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceFinder', 'deviceNTPConstant',
-    function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceFinder, deviceNTPConstant) {
+app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', 'deviceNTPFinder', 'deviceNTPConstant',
+    function ($http, $log, ngAuthSettings, $rootScope, stompService, deviceContext, deviceNTPFinder, deviceNTPConstant) {
 
         var serviceFactory = {};
 
@@ -9,9 +9,9 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var setTimeZoneCompletedSubscription = null;
         var setUpdateIntervalInMilliSecondCompletedSubscription = null;
 
-        var setTimeZone = function (deviceId, timeZoneId) {
+        var setTimeZone = function (deviceNTPId, timeZoneId) {
             var data = {
-                deviceId: deviceId,
+                deviceNTPId: deviceNTPId,
                 timeZoneId: timeZoneId,
             }
             return $http.post(serviceBase + deviceNTPConstant.setTimeZoneApiUri, data).then(function (results) {
@@ -19,9 +19,9 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             });
         };
 
-        var setUpdateIntervalInMilliSecond = function (deviceId, updateIntervalInMilliSecond) {
+        var setUpdateIntervalInMilliSecond = function (deviceNTPId, updateIntervalInMilliSecond) {
             var data = {
-                deviceId: deviceId,
+                deviceNTPId: deviceNTPId,
                 updateIntervalInMilliSecond: updateIntervalInMilliSecond,
             }
             return $http.post(serviceBase + deviceNTPConstant.setUpdateIntervalInMilliSecondApiUri, data).then(function (results) {
@@ -36,16 +36,18 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
 
         var onSetTimeZoneCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var device = deviceFinder.getByKey(result.deviceId);
-            device.deviceNTP.timeZoneId = result.timeZoneId;
-            $rootScope.$emit(deviceNTPConstant.setTimeZoneCompletedEventName + result.deviceId, result);
+            var deviceNTP = deviceNTPFinder.getByKey(result.deviceNTPId);
+            deviceNTP.timeZoneId = result.timeZoneId;
+            deviceContext.$digest();
+            $rootScope.$emit(deviceNTPConstant.setTimeZoneCompletedEventName + result.deviceNTPId, result);
         };
 
         var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var device = deviceFinder.getByKey(result.deviceId);
-            device.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
-            $rootScope.$emit(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + result.deviceId, result);
+            var deviceNTP = deviceNTPFinder.getByKey(result.deviceNTPId);
+            deviceNTP.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
+            deviceContext.$digest();
+            $rootScope.$emit(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + result.deviceNTPId, result);
         }
 
         $rootScope.$on('$destroy', function () {

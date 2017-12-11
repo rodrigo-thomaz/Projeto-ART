@@ -1,10 +1,8 @@
 ﻿'use strict';
-app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'globalizationContext', 'deviceNTPService',
-    function ($scope, $rootScope, $timeout, $log, toaster, globalizationContext, deviceNTPService) {
+app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'globalizationContext', 'deviceNTPService', 'deviceNTPConstant', 'timeZoneConstant',
+    function ($scope, $rootScope, $timeout, $log, toaster, globalizationContext, deviceNTPService, deviceNTPConstant, timeZoneConstant) {
 
-        $scope.deviceNTP = {};
-
-        var initialized = false;
+        $scope.deviceNTP = null;
 
         $scope.init = function (deviceNTP) {
 
@@ -16,20 +14,18 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
             if (globalizationContext.timeZoneLoaded)
                 setSelectedTimeZone();
             else
-                clearOnTimeZoneServiceInitialized = $rootScope.$on('timeZoneService_Initialized', setSelectedTimeZone);
+                clearOnTimeZoneGetAllCompleted = $rootScope.$on(timeZoneConstant.getAllCompletedEventName, setSelectedTimeZone);
 
-            clearOnSetTimeZoneCompleted = $rootScope.$on('deviceService_onSetTimeZoneCompleted_Id_' + $scope.deviceNTP.device().deviceId, onSetTimeZoneCompleted);
-            clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on('deviceService_onSetUpdateIntervalInMilliSecondCompleted_Id_' + $scope.deviceNTP.device().deviceId, onSetUpdateIntervalInMilliSecondCompleted);
-
-            initialized = true;
+            clearOnSetTimeZoneCompleted = $rootScope.$on(deviceNTPConstant.setTimeZoneCompletedEventName + $scope.deviceNTP.deviceNTPId, onSetTimeZoneCompleted);
+            clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + $scope.deviceNTP.deviceNTPId, onSetUpdateIntervalInMilliSecondCompleted);
         }
 
-        var clearOnTimeZoneServiceInitialized = null;
+        var clearOnTimeZoneGetAllCompleted = null;
         var clearOnSetTimeZoneCompleted = null;
         var clearOnSetUpdateIntervalInMilliSecondCompleted = null;
 
         $scope.$on('$destroy', function () {
-            if (clearOnTimeZoneServiceInitialized !== null) clearOnTimeZoneServiceInitialized();
+            if (clearOnTimeZoneGetAllCompleted !== null) clearOnTimeZoneGetAllCompleted();
             clearOnSetTimeZoneCompleted();
             clearOnSetUpdateIntervalInMilliSecondCompleted();
         });
@@ -40,11 +36,13 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
         var onSetTimeZoneCompleted = function (event, data) {
             setSelectedTimeZone();
+            $scope.$apply();
             toaster.pop('success', 'Sucesso', 'Fuso horário alterado');
         };
 
         var onSetUpdateIntervalInMilliSecondCompleted = function (event, data) {
             $scope.updateIntervalInMilliSecondView = data.updateIntervalInMilliSecond;
+            $scope.$apply();
             toaster.pop('success', 'Sucesso', 'UpdateIntervalInMilliSecond alterado');
         };
 
@@ -54,13 +52,13 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
         };
 
         $scope.changeTimeZone = function () {
-            if (!initialized) return;
-            deviceNTPService.setTimeZone($scope.deviceNTP.device().deviceId, $scope.timeZone.selectedTimeZone.timeZoneId);
+            if (!$scope.deviceNTP) return;
+            deviceNTPService.setTimeZone($scope.deviceNTP.deviceNTPId, $scope.timeZone.selectedTimeZone.timeZoneId);
         };
 
         $scope.changeUpdateIntervalInMilliSecond = function () {
-            if (!initialized || !$scope.updateIntervalInMilliSecondView) return;
-            deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceNTP.device().deviceId, $scope.updateIntervalInMilliSecondView);
+            if (!$scope.deviceNTP || !$scope.updateIntervalInMilliSecondView) return;
+            deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceNTP.deviceNTPId, $scope.updateIntervalInMilliSecondView);
         };
 
     }]);
