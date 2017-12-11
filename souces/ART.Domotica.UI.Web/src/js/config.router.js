@@ -93,6 +93,12 @@ angular.module('app')
 
                       //*** Hardware ***
 
+                      'js/services/hardware/hardwareConstants.js',
+                      'js/services/hardware/hardwareContext.js',
+                      'js/services/hardware/hardwareFinder.js',
+                      'js/services/hardware/hardwareMapper.js',
+                      'js/services/hardware/hardwareService.js',
+
                       // Sensor Datasheet
 
                       'js/services/hardware/sensorDatasheet/sensorDatasheetContext.js',
@@ -207,6 +213,12 @@ angular.module('app')
                       'js/services/si/unitMeasurementConverter.js',                   
 
                       //*** Hardware ***
+
+                      'js/services/hardware/hardwareConstants.js',
+                      'js/services/hardware/hardwareContext.js',
+                      'js/services/hardware/hardwareFinder.js',
+                      'js/services/hardware/hardwareMapper.js',
+                      'js/services/hardware/hardwareService.js',
 
                       // Sensor Datasheet
 
