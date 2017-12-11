@@ -41,7 +41,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
         };
 
         var onSetUpdateIntervalInMilliSecondCompleted = function (event, data) {
-            $scope.updateIntervalInMilliSecondView = data.updateIntervalInMilliSecond;
+            $scope.updateIntervalInMilliSecondView = $scope.deviceNTP.updateIntervalInMilliSecond;
             $scope.$apply();
             toaster.pop('success', 'Sucesso', 'UpdateIntervalInMilliSecond alterado');
         };
