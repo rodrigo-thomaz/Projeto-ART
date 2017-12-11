@@ -100,7 +100,16 @@
                                 <tabset justified="true" class="tab-container">
                                     <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorsInDevice">
                                         <div ng-controller="sensorController" ng-init="init(sensorInDeviceItem.sensor())">
-
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Rótulo</label>
+                                                <div class="col-lg-8">
+                                                    <input name="inputSensorLabel" type="text" class="form-control" ng-model="sensorLabel" ng-model-options="{ debounce: 1000 }" ng-change="changeSensorLabel()" required>
+                                                    <span ng-show="formSensor.inputSensorLabel.$touched && formSensor.inputSensorLabel.$invalid">
+                                                        Rótulo é requerido
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
                                         </div>
                                     </tab>
                                 </tabset>
@@ -135,17 +144,7 @@
                                                     <input type="text" class="form-control" readonly value="{{sensor.tempCelsius == null ? '' : convertTemperature(sensor.tempCelsius) | number : resolution.selectedResolution.decimalPlaces}} {{unitMeasurement.selectedUnitMeasurement.symbol}}">
                                                 </div>
                                             </div>
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
-                                            <div class="form-group">
-                                                <label class="col-lg-4 control-label">Rótulo</label>
-                                                <div class="col-lg-8">
-                                                    <input name="inputLabel" type="text" class="form-control" ng-model="labelView" ng-model-options="{ debounce: 1000 }" ng-change="changeLabel()" required>
-                                                    <span ng-show="formSensor.inputLabel.$touched && formSensor.inputLabel.$invalid">
-                                                        Rótulo é requerido
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>                                            
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Escalas</label>
                                                 <div class="col-lg-8">

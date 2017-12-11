@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorContext', 'sensorConstant',
-    function ($http, ngAuthSettings, $rootScope, stompService, sensorContext, sensorConstant) {
+app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorContext', 'sensorConstant', 'sensorFinder',
+    function ($http, ngAuthSettings, $rootScope, stompService, sensorContext, sensorConstant, sensorFinder) {
 
         var serviceFactory = {};
 
@@ -37,9 +37,9 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
             });
         };
 
-        var setLabel = function (sensorTempDSFamilyId, label) {
+        var setLabel = function (sensorId, label) {
             var data = {
-                sensorTempDSFamilyId: sensorTempDSFamilyId,
+                hardwareId: sensorId,
                 label: label,
             }
             return $http.post(serviceBase + sensorConstant.setLabelApiUri, data).then(function (results) {
@@ -68,9 +68,10 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
 
         var onSetLabelCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
+            var sensor = sensorFinder.getByKey(result.hardwareId);
             sensor.label = result.label;
-            $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.sensorTempDSFamilyId, result);
+            sensorContext.$digest();
+            $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.hardwareId, result);
         }
 
         var onInsertInApplicationCompleted = function (payload) {
