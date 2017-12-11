@@ -27,7 +27,7 @@
 #define D9    3
 #define D10   1
 
-#define HOST  "192.168.1.12"
+#define HOST  "192.168.1.24"
 #define PORT  80
 #define URI   "/ART.Domotica.WebApi/"
 
