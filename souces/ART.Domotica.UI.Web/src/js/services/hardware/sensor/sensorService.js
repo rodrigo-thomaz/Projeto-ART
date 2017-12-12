@@ -39,7 +39,7 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
 
         var setLabel = function (sensorId, label) {
             var data = {
-                hardwareId: sensorId,
+                sensorId: sensorId,
                 label: label,
             }
             return $http.post(serviceBase + sensorConstant.setLabelApiUri, data).then(function (results) {
@@ -68,10 +68,10 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
 
         var onSetLabelCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var sensor = sensorFinder.getByKey(result.hardwareId);
+            var sensor = sensorFinder.getByKey(result.sensorId);
             sensor.label = result.label;
             sensorContext.$digest();
-            $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.hardwareId, result);
+            $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.sensorId, result);
         }
 
         var onInsertInApplicationCompleted = function (payload) {
