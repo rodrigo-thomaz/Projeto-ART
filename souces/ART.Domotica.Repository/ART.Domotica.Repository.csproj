@@ -67,6 +67,7 @@
     <Compile Include="Configurations\DeviceMQConfiguration.cs" />
     <Compile Include="Configurations\DeviceBaseConfiguration.cs" />
     <Compile Include="Configurations\DeviceSensorsConfiguration.cs" />
+    <Compile Include="Configurations\SensorInApplicationConfiguration.cs" />
     <Compile Include="Configurations\SensorTempDSFamilyConfiguration.cs" />
     <Compile Include="Configurations\SensorTempDSFamilyResolutionConfiguration.cs" />
     <Compile Include="Configurations\ESPDeviceConfiguration.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Entities\DeviceMQ.cs" />
     <Compile Include="Entities\DeviceBase.cs" />
     <Compile Include="Entities\DeviceSensors.cs" />
+    <Compile Include="Entities\SensorInApplication.cs" />
     <Compile Include="Entities\SensorTempDSFamily.cs" />
     <Compile Include="Entities\SensorTempDSFamilyResolution.cs" />
     <Compile Include="Entities\ESPDevice.cs" />
@@ -130,6 +132,7 @@
     <Compile Include="Entities\SI\UnitMeasurementScale.cs" />
     <Compile Include="Entities\SI\UnitMeasurementType.cs" />
     <Compile Include="Interfaces\IDeviceSensorsRepository.cs" />
+    <Compile Include="Interfaces\ISensorInApplicationRepository.cs" />
     <Compile Include="Interfaces\ISensorInDeviceRepository.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleRepository.cs" />
     <Compile Include="Interfaces\SI\INumericalScalePrefixRepository.cs" />
@@ -162,11 +165,16 @@
     <Compile Include="Migrations\201712072257056_InitialCreate.Designer.cs">
       <DependentUpon>201712072257056_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712121422348_Initial.cs" />
+    <Compile Include="Migrations\201712121422348_Initial.Designer.cs">
+      <DependentUpon>201712121422348_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Repositories\DeviceSensorsRepository.cs" />
+    <Compile Include="Repositories\SensorInApplicationRepository.cs" />
     <Compile Include="Repositories\SensorDatasheetUnitMeasurementScaleRepository.cs" />
     <Compile Include="Repositories\SensorInDeviceRepository.cs" />
     <Compile Include="Repositories\SI\UnitMeasurementScaleRepository.cs" />
@@ -246,6 +254,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712072257056_InitialCreate.resx">
       <DependentUpon>201712072257056_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712121422348_Initial.resx">
+      <DependentUpon>201712121422348_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

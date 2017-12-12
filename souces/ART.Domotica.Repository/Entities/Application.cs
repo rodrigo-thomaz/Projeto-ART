@@ -29,6 +29,11 @@
             get; set;
         }
 
+        public ICollection<SensorInApplication> SensorInApplication
+        {
+            get; set;
+        }
+
         public Guid Id
         {
             get; set;

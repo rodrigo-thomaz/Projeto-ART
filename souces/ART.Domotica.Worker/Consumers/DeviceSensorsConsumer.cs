@@ -1,6 +1,5 @@
 ﻿namespace ART.Domotica.Worker.Consumers
 {
-    using System;
     using ART.Domotica.Constant;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;

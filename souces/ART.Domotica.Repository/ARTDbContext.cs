@@ -80,6 +80,11 @@
             get; set;
         }
 
+        public DbSet<SensorInApplication> SensorInApplication
+        {
+            get; set;
+        }
+
         public DbSet<HardwaresInProject> HardwaresInProject
         {
             get; set;

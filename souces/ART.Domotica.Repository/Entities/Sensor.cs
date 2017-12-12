@@ -23,6 +23,11 @@
             get; set;
         }
 
+        public ICollection<SensorInApplication> SensorInApplication
+        {
+            get; set;
+        }
+
         public SensorTempDSFamily SensorTempDSFamily
         {
             get; set;
