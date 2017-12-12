@@ -115,7 +115,10 @@
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Escala da unidade de medida</label>
                                                 <div class="col-lg-8">
-                                                    
+                                                    <select class="form-control m-b"
+                                                            ng-options="item.displayName for item in timeZone.availableTimeZones track by item.timeZoneId"
+                                                            ng-model="timeZone.selectedTimeZone"
+                                                            ng-change="changeTimeZone()"></select>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
