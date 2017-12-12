@@ -11,6 +11,7 @@ app.factory('sensorMapper', [
     'sensorDatasheetFinder',
     'sensorTempDSFamilyResolutionFinder',
     'sensorInDeviceFinder',
+    'sensorUnitMeasurementScaleFinder',
     function (
         $rootScope,
         sensorContext,
@@ -22,7 +23,8 @@ app.factory('sensorMapper', [
         sensorDatasheetContext,
         sensorDatasheetFinder,
         sensorTempDSFamilyResolutionFinder,
-        sensorInDeviceFinder) {
+        sensorInDeviceFinder,
+        sensorUnitMeasurementScaleFinder) {
 
         var serviceFactory = {};
 
