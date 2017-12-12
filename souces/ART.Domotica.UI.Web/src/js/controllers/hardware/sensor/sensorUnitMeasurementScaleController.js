@@ -1,5 +1,5 @@
-﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext',
-    function ($scope, $rootScope, $timeout, $log, toaster, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext) {
+﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext',
+    function ($scope, $rootScope, $timeout, $log, toaster, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext) {
 
         $scope.sensorUnitMeasurementScale = null;
 
@@ -7,7 +7,7 @@
 
             $scope.sensorUnitMeasurementScale = sensorUnitMeasurementScale;
 
-            // Time Zone
+            // sensorDatasheetUnitMeasurementScale
             if (sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded)
                 setSelectedSensorDatasheetUnitMeasurementScale();
             else {
@@ -24,6 +24,11 @@
 
         $scope.sensorDatasheetUnitMeasurementScaleView = {
             availables: sensorDatasheetContext.sensorDatasheetUnitMeasurementScale,
+            selected: {},
+        };
+
+        $scope.countryView = {
+            availables: localeContext.country,
             selected: {},
         };
 

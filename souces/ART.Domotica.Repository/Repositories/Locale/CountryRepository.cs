@@ -4,6 +4,7 @@ using ART.Infra.CrossCutting.Repository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace ART.Domotica.Repository.Repositories.Locale
 {
@@ -17,6 +18,7 @@ namespace ART.Domotica.Repository.Repositories.Locale
         public async Task<List<Country>> GetAll()
         {
             return await _context.Country
+                .OrderBy(x => x.Name)             
                 .ToListAsync();
         }
     }
