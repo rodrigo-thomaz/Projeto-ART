@@ -81,6 +81,22 @@ namespace ART.Domotica.Domain.Services
             return await _sensorRepository.GetAllByDeviceId(hardwareInApplication.HardwareId);
         }
 
+        public async Task<Sensor> SetLabel(Guid sensorId, string label)
+        {
+            var entity = await _sensorRepository.GetByKey(sensorId);
+
+            if (entity == null)
+            {
+                throw new Exception("Sensor not found");
+            }
+
+            entity.Label = label;
+
+            await _sensorRepository.Update(entity);
+
+            return entity;
+        }
+
         #endregion
     }
 }

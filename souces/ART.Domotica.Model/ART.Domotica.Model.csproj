@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="DeviceNTPGetModel.cs" />
     <Compile Include="DeviceSensorsSetPublishIntervalInSecondsModel.cs" />
+    <Compile Include="SensorSetLabelModel.cs" />
     <Compile Include="SensorUnitMeasurementScaleGetModel.cs" />
     <Compile Include="SensorTempDSFamilyGetModel.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondModel.cs" />

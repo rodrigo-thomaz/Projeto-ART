@@ -11,7 +11,7 @@
 
         Task GetAllByApplicationId(AuthenticatedMessageContract message);
 
-        Task SetLabel(AuthenticatedMessageContract<HardwareSetLabelRequestContract> message);
+        Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message);
 
         #endregion Methods
     }

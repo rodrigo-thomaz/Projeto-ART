@@ -31,7 +31,7 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
-        public async Task SetLabel(AuthenticatedMessageContract<HardwareSetLabelRequestContract> message)
+        public async Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message)
         {
             await Task.Run(() =>
             {

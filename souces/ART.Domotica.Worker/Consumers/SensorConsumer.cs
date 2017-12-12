@@ -172,9 +172,9 @@ namespace ART.Domotica.Worker.Consumers
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwareSetLabelRequestContract>>(e.Body);
-            var hardwareDomain = _componentContext.Resolve<IHardwareDomain>();
-            var data = await hardwareDomain.SetLabel(message.Contract.HardwareId, message.Contract.Label);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorSetLabelRequestContract>>(e.Body);
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var data = await sensorDomain.SetLabel(message.Contract.SensorId, message.Contract.Label);
 
             var exchange = "amq.topic";
 
@@ -182,7 +182,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<HardwareBase, HardwareSetLabelModel>(data);
+            var viewModel = Mapper.Map<Sensor, SensorSetLabelModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.SetLabelViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

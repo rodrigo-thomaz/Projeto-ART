@@ -19,6 +19,7 @@
 
         private readonly IESPDeviceRepository _espDeviceRepository;
         private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
+        private readonly ISensorInApplicationRepository _sensorInApplicationRepository;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly ISensorRepository _sensorRepository;
@@ -35,6 +36,7 @@
             _applicationRepository = new ApplicationRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
             _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
+            _sensorInApplicationRepository = new SensorInApplicationRepository(context);
             _sensorRepository = new SensorRepository(context);
         }
 
@@ -87,53 +89,54 @@
                 throw new Exception("ApplicationUser not found");
             }
 
-            var sensors = await _sensorRepository.GetAllByDeviceId(deviceEntity.Id);
-
-            var hardwaresInApplication = new List<HardwareInApplication> { new HardwareInApplication
+            await _hardwareInApplicationRepository.Insert(new HardwareInApplication
             {
                 ApplicationId = applicationEntity.Id,
                 HardwareId = deviceEntity.Id,
                 CreateByApplicationUserId = applicationUserEntity.Id,
                 CreateDate = DateTime.Now.ToUniversalTime(),
-            }};
+            });
+
+            var sensors = await _sensorRepository.GetAllByDeviceId(deviceEntity.Id);
+
+            var sensorsInApplication = new List<SensorInApplication>();
 
             foreach (var item in sensors)
             {
-                hardwaresInApplication.Add(new HardwareInApplication
+                sensorsInApplication.Add(new SensorInApplication
                 {
                     ApplicationId = applicationEntity.Id,
-                    HardwareId = item.Id,
+                    SensorId = item.Id,
                     CreateByApplicationUserId = applicationUserEntity.Id,
                     CreateDate = DateTime.Now.ToUniversalTime(),
                 });
             }
 
-            await _hardwareInApplicationRepository.Insert(hardwaresInApplication);
+            await _sensorInApplicationRepository.Insert(sensorsInApplication);
 
             return deviceEntity;
         }
 
         public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId)
         {
-            HardwareInApplication deviceHardwareInApplicationEntity = await _hardwareInApplicationRepository.GetByKey(applicationId, deviceId);
+            // Device 
+
+            HardwareInApplication hardwareInApplicationEntity = await _hardwareInApplicationRepository.GetByKey(applicationId, deviceId);
             
-            if (deviceHardwareInApplicationEntity == null)
+            if (hardwareInApplicationEntity == null)
             {
                 throw new Exception("HardwareInApplication not found");
             }
 
-            var hardwareInApplicationToDelete = new List<HardwareInApplication>
-            {
-                deviceHardwareInApplicationEntity
-            };
+            await _hardwareInApplicationRepository.Delete(hardwareInApplicationEntity);
 
-            var sensorsHardwareInApplication = await _sensorRepository.GetHardwareInApplicationByDeviceId(applicationId, deviceId);           
+            // Sensors
 
-            hardwareInApplicationToDelete.AddRange(sensorsHardwareInApplication);
+            var sensorsInApplication = await _sensorRepository.GetSensorsInApplicationByDeviceId(applicationId, deviceId);           
 
-            await _hardwareInApplicationRepository.Delete(hardwareInApplicationToDelete);
+            await _sensorInApplicationRepository.Delete(sensorsInApplication);
 
-            var deviceEntity = await _espDeviceRepository.GetFullByKey(deviceHardwareInApplicationEntity.HardwareId);
+            var deviceEntity = await _espDeviceRepository.GetFullByKey(hardwareInApplicationEntity.HardwareId);
 
             return deviceEntity;
         }

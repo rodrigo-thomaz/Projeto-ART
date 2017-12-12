@@ -18,6 +18,8 @@
 
         Task<SensorInDevice> GetDeviceFromSensor(Guid sensorId);
 
+        Task<Sensor> SetLabel(Guid sensorId, string label);
+
         #endregion Methods
     }
 }

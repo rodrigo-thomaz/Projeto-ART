@@ -57,7 +57,7 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="500">Internal Server Error</response>
         [Route("setLabel")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetLabel(HardwareSetLabelRequestContract contract)
+        public async Task<IHttpActionResult> SetLabel(SensorSetLabelRequestContract contract)
         {
             await _sensorProducer.SetLabel(CreateMessage(contract));
             return Ok();

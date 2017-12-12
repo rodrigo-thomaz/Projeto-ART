@@ -43,10 +43,10 @@ namespace ART.Domotica.Repository.Repositories
                 .ToListAsync();
         }
 
-        public async Task<List<HardwareInApplication>> GetHardwareInApplicationByDeviceId(Guid applicationId, Guid deviceId)
+        public async Task<List<SensorInApplication>> GetSensorsInApplicationByDeviceId(Guid applicationId, Guid deviceId)
         {
             var query = from s in _context.Sensor
-                        join hia in _context.HardwareInApplication on s.Id equals hia.HardwareId
+                        join hia in _context.SensorInApplication on s.Id equals hia.SensorId
                         join sid in _context.SensorInDevice on s.Id equals sid.SensorId
                         where hia.ApplicationId == applicationId
                         where sid.DeviceSensorsId == deviceId
