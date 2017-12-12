@@ -1,5 +1,5 @@
-﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'siContext',
-    function ($scope, $rootScope, $timeout, $log, toaster, unitMeasurementConverter, sensorUnitMeasurementScaleService, siContext) {
+﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext',
+    function ($scope, $rootScope, $timeout, $log, toaster, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext) {
 
         $scope.sensorUnitMeasurementScale = null;
 
@@ -8,13 +8,13 @@
             $scope.sensorUnitMeasurementScale = sensorUnitMeasurementScale;
 
             // Time Zone
-            if (siContext.unitMeasurementScaleLoaded)
-                setSelectedSensorUnitMeasurementScale();
+            if (sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded)
+                setSelectedSensorDatasheetUnitMeasurementScale();
             else {
-                var unitMeasurementScaleLoadedWatch = siContext.$watch('unitMeasurementScaleLoaded', function (newValue) {
+                var sensorDatasheetUnitMeasurementScaleLoadedWatch = sensorDatasheetContext.$watch('sensorDatasheetUnitMeasurementScaleLoaded', function (newValue) {
                     if (newValue) {
-                        unitMeasurementScaleLoadedWatch();
-                        setSelectedSensorUnitMeasurementScale();
+                        sensorDatasheetUnitMeasurementScaleLoadedWatch();
+                        setSelectedSensorDatasheetUnitMeasurementScale();
                     }
                 })
             }
@@ -22,13 +22,13 @@
             //clearOnSetValueCompleted = $rootScope.$on('sensorUnitMeasurementScaleService_SetValueCompleted_Id_' + sensor.sensorUnitMeasurementScale.id, onSetValueCompleted);
         };
 
-        $scope.sensorUnitMeasurementScaleView = {
-            availableSensorUnitMeasurementScale: siContext.unitMeasurementScale,
-            selectedSensorUnitMeasurementScale: {},
+        $scope.sensorDatasheetUnitMeasurementScaleView = {
+            availables: sensorDatasheetContext.sensorDatasheetUnitMeasurementScale,
+            selected: {},
         };
 
-        var setSelectedSensorUnitMeasurementScale = function () {
-            $scope.sensorUnitMeasurementScaleView.selectedSensorUnitMeasurementScale = $scope.sensorUnitMeasurementScale.unitMeasurementScale();
+        var setSelectedSensorDatasheetUnitMeasurementScale = function () {
+            $scope.sensorDatasheetUnitMeasurementScaleView.selected = $scope.sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale();
         };
 
         //var clearOnSetValueCompleted = null;

@@ -3,6 +3,7 @@
     using System;
 
     using ART.Domotica.Enums.SI;
+    using ART.Domotica.Enums;
 
     public class SensorUnitMeasurementScaleGetModel
     {
@@ -49,6 +50,16 @@
         }
 
         public UnitMeasurementTypeEnum UnitMeasurementTypeId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
+        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
