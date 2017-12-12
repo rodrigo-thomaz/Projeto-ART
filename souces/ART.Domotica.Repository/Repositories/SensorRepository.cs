@@ -22,7 +22,7 @@ namespace ART.Domotica.Repository.Repositories
                 .Include(x => x.SensorUnitMeasurementScale)
                 .Include(x => x.SensorTriggers)
                 .Include(x => x.SensorTempDSFamily)
-                .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
+                .Where(x => x.SensorInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();
         }
 

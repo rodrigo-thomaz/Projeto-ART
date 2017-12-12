@@ -3,6 +3,7 @@
     using System.Data.Entity.ModelConfiguration;
 
     using ART.Domotica.Repository.Entities;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class SensorConfiguration : EntityTypeConfiguration<Sensor>
     {
@@ -10,19 +11,24 @@
 
         public SensorConfiguration()
         {
-            ToTable("Sensor");
-
             //Primary Keys
             HasKey(x => x.Id);
 
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
+
+            //Label
+            Property(x => x.Label)
+                .HasColumnOrder(1)
+                .HasMaxLength(50)
+                .IsRequired();            
 
             //SensorDatasheetId
             Property(x => x.Id)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .IsRequired();
 
             //SensorDatasheet
@@ -34,6 +40,11 @@
                     x.SensorTypeId,
                 })
                 .WillCascadeOnDelete(false);
+
+            //CreateDate
+            Property(x => x.CreateDate)
+                .HasColumnOrder(3)
+                .IsRequired();
         }
 
         #endregion Constructors
