@@ -128,8 +128,8 @@ angular.module('app')
                       'js/services/hardware/sensor/sensorTempDSFamilyService.js',
 
                       'js/controllers/hardware/sensor/sensorController.js',
-
-                      'js/controllers/sensorUnitMeasurementScaleController.js',
+                      'js/controllers/hardware/sensor/sensorUnitMeasurementScaleController.js',
+                      
                       'js/controllers/sensorTriggerController.js',
 
                       'js/controllers/espDeviceListController.js',            

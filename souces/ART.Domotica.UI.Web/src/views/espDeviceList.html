@@ -99,18 +99,18 @@
                             <div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors().sensorsInDevice())">
                                 <tabset justified="true" class="tab-container">
                                     <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorsInDevice">
-                                        <div ng-controller="sensorController" ng-init="init(sensorInDeviceItem.sensor())">
+                                        <form name="formsensorInDevice" class="form-horizontal form-validation" ng-controller="sensorController" ng-init="init(sensorInDeviceItem.sensor())">
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Rótulo</label>
                                                 <div class="col-lg-8">
                                                     <input name="inputSensorLabel" type="text" class="form-control" ng-model="sensorLabel" ng-model-options="{ debounce: 1000 }" ng-change="changeSensorLabel()" required>
-                                                    <span ng-show="formSensor.inputSensorLabel.$touched && formSensor.inputSensorLabel.$invalid">
+                                                    <span ng-show="formsensorInDevice.inputSensorLabel.$touched && formsensorInDevice.inputSensorLabel.$invalid">
                                                         Rótulo é requerido
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
-                                        </div>
+                                        </form>
                                     </tab>
                                 </tabset>
                             </div>
@@ -144,7 +144,7 @@
                                                     <input type="text" class="form-control" readonly value="{{sensor.tempCelsius == null ? '' : convertTemperature(sensor.tempCelsius) | number : resolution.selectedResolution.decimalPlaces}} {{unitMeasurement.selectedUnitMeasurement.symbol}}">
                                                 </div>
                                             </div>
-                                            <div class="line line-dashed b-b line-lg pull-in"></div>                                            
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Escalas</label>
                                                 <div class="col-lg-8">
