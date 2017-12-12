@@ -97,7 +97,7 @@ app.factory('deviceMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var sensorInDevice = newValues[i];
                 sensorInDevice.deviceSensors = function () { return deviceSensorFinder.getByKey(this.deviceSensorsId); }
-                sensorInDevice.sensor = function () { return sensorFinder.getByKey(this.sensorId); }
+                sensorInDevice.sensor = function () { return sensorFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
             }
         });
 

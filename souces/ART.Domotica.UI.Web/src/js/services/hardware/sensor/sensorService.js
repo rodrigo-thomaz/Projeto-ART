@@ -68,7 +68,7 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
 
         var onSetLabelCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var sensor = sensorFinder.getByKey(result.sensorId);
+            var sensor = sensorFinder.getByKey(result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
             sensor.label = result.label;
             sensorContext.$digest();
             $rootScope.$emit(sensorConstant.setLabelCompletedEventName + result.sensorId, result);

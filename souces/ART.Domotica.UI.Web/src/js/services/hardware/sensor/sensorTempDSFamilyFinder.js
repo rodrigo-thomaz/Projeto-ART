@@ -5,10 +5,10 @@ app.factory('sensorTempDSFamilyFinder', ['$rootScope', 'sensorContext', function
 
     var serviceFactory = {};
 
-    var getByKey = function (sensorTempDSFamilyId) {
+    var getByKey = function (sensorTempDSFamilyId, sensorDatasheetId, sensorTypeId) {
         for (var i = 0; i < context.sensorTempDSFamily.length; i++) {
             var item = context.sensorTempDSFamily[i];
-            if (item.sensorTempDSFamilyId === sensorTempDSFamilyId) {
+            if (item.sensorTempDSFamilyId === sensorTempDSFamilyId && item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId) {
                 return item;
             }
         }

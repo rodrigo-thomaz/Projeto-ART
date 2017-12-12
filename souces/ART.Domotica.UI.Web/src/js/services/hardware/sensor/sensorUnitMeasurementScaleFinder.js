@@ -5,10 +5,10 @@ app.factory('sensorUnitMeasurementScaleFinder', ['$rootScope', 'sensorContext', 
 
     var serviceFactory = {};
 
-    var getByKey = function (sensorUnitMeasurementScaleId) {
+    var getByKey = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId) {
         for (var i = 0; i < context.sensorUnitMeasurementScale.length; i++) {
             var item = context.sensorUnitMeasurementScale[i];
-            if (item.sensorUnitMeasurementScaleId === sensorUnitMeasurementScaleId) {
+            if (item.sensorUnitMeasurementScaleId === sensorUnitMeasurementScaleId && item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId) {
                 return item;
             }
         }

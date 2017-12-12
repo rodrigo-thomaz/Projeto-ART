@@ -14,11 +14,11 @@ app.factory('sensorTriggerFinder', ['$rootScope', 'sensorContext', function ($ro
         }
     }
 
-    var getBySensorKey = function (sensorId) {
+    var getBySensorKey = function (sensorId, sensorDatasheetId, sensorTypeId) {
         var result = [];
         for (var i = 0; i < context.sensorTrigger.length; i++) {
             var sensorTrigger = context.sensorTrigger[i];
-            if (sensorTrigger.sensorId === sensorId) {
+            if (sensorTrigger.sensorId === sensorId && sensorTrigger.sensorDatasheetId === sensorDatasheetId && sensorTrigger.sensorTypeId === sensorTypeId) {
                 result.push(sensorTrigger);
             }
         }

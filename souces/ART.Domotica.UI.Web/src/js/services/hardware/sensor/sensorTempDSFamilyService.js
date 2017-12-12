@@ -23,7 +23,7 @@ app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuth
 
     var onSetResolutionCompleted = function (payload) {
         var result = JSON.parse(payload.body);
-        var sensor = sensorFinder.getByKey(result.sensorTempDSFamilyId);
+        var sensor = sensorFinder.getByKey(result.sensorTempDSFamilyId, result.sensorDatasheetId, result.sensorTypeId);
         sensor.sensorTempDSFamilyResolutionId = result.sensorTempDSFamilyResolutionId;
         $rootScope.$emit(sensorTempDSFamilyConstant.setResolutionCompletedEventName + result.sensorTempDSFamilyId, result);
     }     

@@ -71,10 +71,10 @@ app.factory('sensorMapper', [
                 var sensor = newValues[i];
                 addSensorAggregates(sensor);
                 sensor.sensorDatasheet = function () { return sensorDatasheetFinder.getByKey(this.sensorDatasheetId, this.sensorTypeId); }
-                sensor.sensorTempDSFamily = function () { return sensorTempDSFamilyFinder.getByKey(this.sensorId); }
-                sensor.sensorUnitMeasurementScale = function () { return sensorUnitMeasurementScaleFinder.getByKey(this.sensorId); }
-                sensor.sensorTriggers = function () { return sensorTriggerFinder.getBySensorKey(this.sensorId); }
-                sensor.sensorInDevice = function () { return sensorInDeviceFinder.getBySensorKey(this.sensorId); }
+                sensor.sensorTempDSFamily = function () { return sensorTempDSFamilyFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
+                sensor.sensorUnitMeasurementScale = function () { return sensorUnitMeasurementScaleFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
+                sensor.sensorTriggers = function () { return sensorTriggerFinder.getBySensorKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
+                sensor.sensorInDevice = function () { return sensorInDeviceFinder.getBySensorKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
             }
             //removendo
             for (var i = 0; i < oldValues.length; i++) {
@@ -85,7 +85,7 @@ app.factory('sensorMapper', [
         sensorContext.$watchCollection('sensorTempDSFamily', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var sensorTempDSFamily = newValues[i];
-                sensorTempDSFamily.sensor = function () { return sensorFinder.getByKey(this.sensorTempDSFamilyId); }
+                sensorTempDSFamily.sensor = function () { return sensorFinder.getByKey(this.sensorTempDSFamilyId, this.sensorDatasheetId, this.sensorTypeId); }
                 sensorTempDSFamily.sensorTempDSFamilyResolution = function () { return sensorTempDSFamilyResolutionFinder.getByKey(this.sensorTempDSFamilyResolutionId); }
             }
         });
@@ -100,7 +100,7 @@ app.factory('sensorMapper', [
         sensorContext.$watchCollection('sensorUnitMeasurementScale', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var sensorUnitMeasurementScale = newValues[i];
-                sensorUnitMeasurementScale.sensor = function () { return sensorFinder.getByKey(this.sensorUnitMeasurementScaleId); }
+                sensorUnitMeasurementScale.sensor = function () { return sensorFinder.getByKey(this.sensorUnitMeasurementScaleId, this.sensorDatasheetId, this.sensorTypeId); }
                 sensorUnitMeasurementScale.unitMeasurementScale = function () { return unitMeasurementScaleFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
         });               
