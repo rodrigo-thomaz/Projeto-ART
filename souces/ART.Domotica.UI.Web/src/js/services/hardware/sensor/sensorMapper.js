@@ -6,7 +6,7 @@ app.factory('sensorMapper', [
     'sensorTempDSFamilyResolutionConstant',
     'sensorFinder',
     'siContext',
-    'unitMeasurementScaleFinder',
+    'sensorDatasheetUnitMeasurementScaleFinder',
     'sensorDatasheetContext',
     'sensorDatasheetFinder',
     'sensorTempDSFamilyResolutionFinder',
@@ -19,7 +19,7 @@ app.factory('sensorMapper', [
         sensorTempDSFamilyResolutionConstant,
         sensorFinder,
         siContext,
-        unitMeasurementScaleFinder,
+        sensorDatasheetUnitMeasurementScaleFinder,
         sensorDatasheetContext,
         sensorDatasheetFinder,
         sensorTempDSFamilyResolutionFinder,
@@ -101,7 +101,7 @@ app.factory('sensorMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var sensorUnitMeasurementScale = newValues[i];
                 sensorUnitMeasurementScale.sensor = function () { return sensorFinder.getByKey(this.sensorUnitMeasurementScaleId, this.sensorDatasheetId, this.sensorTypeId); }
-                sensorUnitMeasurementScale.unitMeasurementScale = function () { return unitMeasurementScaleFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
+                sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale = function () { return sensorDatasheetUnitMeasurementScaleFinder.getByKey(this.sensorDatasheetId, this.sensorTypeId, this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
         });               
 

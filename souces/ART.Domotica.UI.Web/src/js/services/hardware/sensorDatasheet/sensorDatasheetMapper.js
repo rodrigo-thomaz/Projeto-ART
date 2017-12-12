@@ -12,6 +12,7 @@ app.factory('sensorDatasheetMapper', [
     'sensorDatasheetConstant',
     'sensorDatasheetUnitMeasurementDefaultConstant',
     'sensorDatasheetUnitMeasurementScaleConstant',
+    'sensorUnitMeasurementScaleFinder',
     function (
         $rootScope,
         sensorDatasheetContext,
@@ -24,7 +25,8 @@ app.factory('sensorDatasheetMapper', [
         sensorTypeConstant,
         sensorDatasheetConstant,
         sensorDatasheetUnitMeasurementDefaultConstant,
-        sensorDatasheetUnitMeasurementScaleConstant) {
+        sensorDatasheetUnitMeasurementScaleConstant,
+        sensorUnitMeasurementScaleFinder) {
 
         var serviceFactory = {};
 
@@ -56,6 +58,7 @@ app.factory('sensorDatasheetMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var sensorDatasheetUnitMeasurementScale = newValues[i];
                 sensorDatasheetUnitMeasurementScale.unitMeasurementScale = function () { return unitMeasurementScaleFinder.getByKey(this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
+                sensorDatasheetUnitMeasurementScale.sensorUnitMeasurementScales = function () { return sensorUnitMeasurementScaleFinder.getBySensorUnitMeasurementScaleKey(this.sensorDatasheetId, this.sensorTypeId, this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
         });
 

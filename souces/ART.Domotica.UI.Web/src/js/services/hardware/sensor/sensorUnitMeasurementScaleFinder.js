@@ -14,11 +14,11 @@ app.factory('sensorUnitMeasurementScaleFinder', ['$rootScope', 'sensorContext', 
         }
     }
 
-    var getByUnitMeasurementScaleKey = function (unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
+    var getBySensorUnitMeasurementScaleKey = function (sensorDatasheetId, sensorTypeId, unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
         var result = [];
         for (var i = 0; i < context.sensorUnitMeasurementScale.length; i++) {
             var sensorUnitMeasurementScale = context.sensorUnitMeasurementScale[i];
-            if (sensorUnitMeasurementScale.unitMeasurementId === unitMeasurementId && sensorUnitMeasurementScale.unitMeasurementTypeId === unitMeasurementTypeId && sensorUnitMeasurementScale.numericalScalePrefixId === numericalScalePrefixId && sensorUnitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
+            if (sensorUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorUnitMeasurementScale.sensorTypeId === sensorTypeId && sensorUnitMeasurementScale.unitMeasurementId === unitMeasurementId && sensorUnitMeasurementScale.unitMeasurementTypeId === unitMeasurementTypeId && sensorUnitMeasurementScale.numericalScalePrefixId === numericalScalePrefixId && sensorUnitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
                 result.push(sensorUnitMeasurementScale);
             }
         }
@@ -28,7 +28,7 @@ app.factory('sensorUnitMeasurementScaleFinder', ['$rootScope', 'sensorContext', 
     // *** Public Methods ***
 
     serviceFactory.getByKey = getByKey;
-    serviceFactory.getByUnitMeasurementScaleKey = getByUnitMeasurementScaleKey;
+    serviceFactory.getBySensorUnitMeasurementScaleKey = getBySensorUnitMeasurementScaleKey;
 
     return serviceFactory;
 
