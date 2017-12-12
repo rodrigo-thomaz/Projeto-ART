@@ -1,9 +1,9 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using System;
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
-    using System;
     using ART.Infra.CrossCutting.Repository;
 
     public class Sensor : IEntity<Guid>
@@ -25,7 +25,6 @@
             get; set;
         }
 
-
         public SensorDatasheet SensorDatasheet
         {
             get; set;
@@ -36,12 +35,12 @@
             get; set;
         }
 
-        public ICollection<SensorInDevice> SensorInDevice
+        public ICollection<SensorInApplication> SensorInApplication
         {
             get; set;
         }
 
-        public ICollection<SensorInApplication> SensorInApplication
+        public ICollection<SensorInDevice> SensorInDevice
         {
             get; set;
         }

@@ -101,7 +101,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmOnRequestContract>>(e.Body);
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
-            var data = await sensorTriggerDomain.SetAlarmOn(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmOn);
+            var data = await sensorTriggerDomain.SetAlarmOn(message.Contract.SensorTempDSFamilyId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.AlarmOn);
 
             var exchange = "amq.topic";
 
@@ -144,7 +144,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmCelsiusRequestContract>>(e.Body);
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
-            var data = await sensorTriggerDomain.SetAlarmCelsius(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmCelsius);
+            var data = await sensorTriggerDomain.SetAlarmCelsius(message.Contract.SensorTempDSFamilyId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.AlarmCelsius);
 
             var exchange = "amq.topic";
 
@@ -187,7 +187,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmBuzzerOnRequestContract>>(e.Body);
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
-            var data = await sensorTriggerDomain.SetAlarmBuzzerOn(message.Contract.SensorTempDSFamilyId, message.Contract.Position, message.Contract.AlarmBuzzerOn);
+            var data = await sensorTriggerDomain.SetAlarmBuzzerOn(message.Contract.SensorTempDSFamilyId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.AlarmBuzzerOn);
 
             var exchange = "amq.topic";
 

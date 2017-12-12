@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using ART.Domotica.Enums;
 
 namespace ART.Domotica.Repository.Repositories
 {
@@ -53,6 +54,12 @@ namespace ART.Domotica.Repository.Repositories
                         select hia;
 
             return await query.ToListAsync();
+        }
+
+        public async Task<Sensor> GetByKey(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
+        {
+            return await _context.Sensor
+                .FindAsync(sensorId, sensorDatasheetId, sensorTypeId);
         }
     }
 }

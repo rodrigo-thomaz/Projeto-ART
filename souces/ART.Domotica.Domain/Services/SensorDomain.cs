@@ -10,6 +10,7 @@ using Autofac;
 using ART.Domotica.Repository;
 using ART.Domotica.Repository.Interfaces.SI;
 using ART.Domotica.Repository.Repositories.SI;
+using ART.Domotica.Enums;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -57,9 +58,9 @@ namespace ART.Domotica.Domain.Services
             return data;
         }
 
-        public async Task<Sensor> GetByKey(Guid sensorId)
+        public async Task<Sensor> GetByKey(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
         {
-            var data = await _sensorRepository.GetByKey(sensorId);
+            var data = await _sensorRepository.GetByKey(sensorId, sensorDatasheetId, sensorTypeId);
 
             if (data == null)
             {
@@ -81,9 +82,9 @@ namespace ART.Domotica.Domain.Services
             return await _sensorRepository.GetAllByDeviceId(hardwareInApplication.HardwareId);
         }
 
-        public async Task<Sensor> SetLabel(Guid sensorId, string label)
+        public async Task<Sensor> SetLabel(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, string label)
         {
-            var entity = await _sensorRepository.GetByKey(sensorId);
+            var entity = await _sensorRepository.GetByKey(sensorId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {

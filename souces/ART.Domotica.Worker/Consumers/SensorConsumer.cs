@@ -174,7 +174,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorSetLabelRequestContract>>(e.Body);
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
-            var data = await sensorDomain.SetLabel(message.Contract.SensorId, message.Contract.Label);
+            var data = await sensorDomain.SetLabel(message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Label);
 
             var exchange = "amq.topic";
 

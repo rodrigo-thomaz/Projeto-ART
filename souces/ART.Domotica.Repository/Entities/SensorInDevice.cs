@@ -2,8 +2,8 @@
 {
     using System;
 
-    using ART.Infra.CrossCutting.Repository;
     using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
 
     public class SensorInDevice : IEntity
     {
@@ -29,12 +29,12 @@
             get; set;
         }
 
-        public Guid SensorId
+        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
 
-        public SensorDatasheetEnum SensorDatasheetId
+        public Guid SensorId
         {
             get; set;
         }

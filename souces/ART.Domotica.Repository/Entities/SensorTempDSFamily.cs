@@ -2,8 +2,8 @@
 {
     using System;
 
-    using ART.Infra.CrossCutting.Repository;
     using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
 
     public class SensorTempDSFamily : IEntity<Guid>
     {
@@ -29,17 +29,17 @@
             get; set;
         }
 
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
         public SensorTempDSFamilyResolution SensorTempDSFamilyResolution
         {
             get; set;
         }
 
         public byte SensorTempDSFamilyResolutionId
-        {
-            get; set;
-        }
-
-        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }

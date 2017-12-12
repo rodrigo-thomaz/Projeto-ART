@@ -80,11 +80,6 @@
             get; set;
         }
 
-        public DbSet<SensorInApplication> SensorInApplication
-        {
-            get; set;
-        }
-
         public DbSet<HardwaresInProject> HardwaresInProject
         {
             get; set;
@@ -131,6 +126,11 @@
         }
 
         public DbSet<SensorDatasheetUnitMeasurementScale> SensorDatasheetUnitMeasurementScale
+        {
+            get; set;
+        }
+
+        public DbSet<SensorInApplication> SensorInApplication
         {
             get; set;
         }

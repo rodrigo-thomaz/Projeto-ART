@@ -38,6 +38,8 @@
 
             CreateMap<Sensor, SensorSetLabelModel>()
                 .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label));
         }
 

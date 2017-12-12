@@ -2,8 +2,8 @@
 {
     using System;
 
-    using ART.Infra.CrossCutting.Repository;
     using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
 
     public class SensorTrigger : IEntity<Guid>
     {
@@ -24,7 +24,17 @@
             get; set;
         }
 
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
         public Guid SensorId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }
@@ -35,16 +45,6 @@
         }
 
         public string TriggerValue
-        {
-            get; set;
-        }
-
-        public SensorDatasheetEnum SensorDatasheetId
-        {
-            get; set;
-        }
-
-        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }

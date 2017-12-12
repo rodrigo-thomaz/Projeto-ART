@@ -1,9 +1,10 @@
-﻿using ART.Domotica.Enums;
-using ART.Infra.CrossCutting.Repository;
-using System;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using System;
+
+    using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
+
     public class SensorInApplication : IEntity
     {
         #region Properties
@@ -38,12 +39,12 @@ namespace ART.Domotica.Repository.Entities
             get; set;
         }
 
-        public Guid SensorId
+        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
 
-        public SensorDatasheetEnum SensorDatasheetId
+        public Guid SensorId
         {
             get; set;
         }

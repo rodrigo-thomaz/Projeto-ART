@@ -2,10 +2,10 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities.SI;
     using ART.Infra.CrossCutting.Repository;
-    using ART.Domotica.Enums;
 
     public class SensorUnitMeasurementScale : IEntity<Guid>
     {
@@ -51,6 +51,16 @@
             get; set;
         }
 
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
         public UnitMeasurementEnum UnitMeasurementId
         {
             get; set;
@@ -62,16 +72,6 @@
         }
 
         public UnitMeasurementTypeEnum UnitMeasurementTypeId
-        {
-            get; set;
-        }
-
-        public SensorDatasheetEnum SensorDatasheetId
-        {
-            get; set;
-        }
-
-        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }

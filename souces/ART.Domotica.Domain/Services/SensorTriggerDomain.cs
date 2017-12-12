@@ -34,9 +34,9 @@
 
         #endregion Constructors
 
-        public async Task<Sensor> SetAlarmOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmOn)
+        public async Task<Sensor> SetAlarmOn(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, bool alarmOn)
         {
-            var entity = await _sensorRepository.GetByKey(sensorId);
+            var entity = await _sensorRepository.GetByKey(sensorId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {
@@ -63,9 +63,9 @@
             return entity;
         }
 
-        public async Task<Sensor> SetAlarmCelsius(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, decimal alarmCelsius)
+        public async Task<Sensor> SetAlarmCelsius(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal alarmCelsius)
         {
-            var entity = await _sensorRepository.GetByKey(sensorId);
+            var entity = await _sensorRepository.GetByKey(sensorId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {
@@ -92,9 +92,9 @@
             return entity;
         }
 
-        public async Task<Sensor> SetAlarmBuzzerOn(Guid sensorId, SensorUnitMeasurementScalePositionEnum position, bool alarmBuzzerOn)
+        public async Task<Sensor> SetAlarmBuzzerOn(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, bool alarmBuzzerOn)
         {
-            var entity = await _sensorRepository.GetByKey(sensorId);
+            var entity = await _sensorRepository.GetByKey(sensorId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {
