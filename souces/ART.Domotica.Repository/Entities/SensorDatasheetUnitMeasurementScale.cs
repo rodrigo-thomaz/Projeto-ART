@@ -1,5 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using System.Collections.Generic;
+
     using ART.Domotica.Enums;
     using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities.SI;
@@ -30,6 +32,11 @@
         }
 
         public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
+        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
         {
             get; set;
         }

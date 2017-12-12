@@ -66,10 +66,12 @@
                 .IsRequired();
 
             //UnitMeasurementScale
-            HasRequired(x => x.UnitMeasurementScale)
+            HasRequired(x => x.SensorDatasheetUnitMeasurementScale)
                 .WithMany(x => x.SensorUnitMeasurementScales)
                 .HasForeignKey(x => new
                 {
+                    x.SensorDatasheetId,
+                    x.SensorTypeId,
                     x.UnitMeasurementId,
                     x.UnitMeasurementTypeId,
                     x.NumericalScalePrefixId,

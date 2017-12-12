@@ -56,17 +56,17 @@
             get; set;
         }
 
+        public SensorDatasheetUnitMeasurementScale SensorDatasheetUnitMeasurementScale
+        {
+            get; set;
+        }
+
         public SensorTypeEnum SensorTypeId
         {
             get; set;
         }
 
         public UnitMeasurementEnum UnitMeasurementId
-        {
-            get; set;
-        }
-
-        public UnitMeasurementScale UnitMeasurementScale
         {
             get; set;
         }

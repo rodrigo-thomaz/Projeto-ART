@@ -165,6 +165,10 @@
     <Compile Include="Migrations\201712121614014_Create1.Designer.cs">
       <DependentUpon>201712121614014_Create1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712121913197_Create11.cs" />
+    <Compile Include="Migrations\201712121913197_Create11.Designer.cs">
+      <DependentUpon>201712121913197_Create11.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -250,6 +254,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201712121614014_Create1.resx">
       <DependentUpon>201712121614014_Create1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712121913197_Create11.resx">
+      <DependentUpon>201712121913197_Create11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
