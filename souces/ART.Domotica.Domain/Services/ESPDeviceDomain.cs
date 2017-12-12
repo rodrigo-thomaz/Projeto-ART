@@ -107,6 +107,8 @@
                 {
                     ApplicationId = applicationEntity.Id,
                     SensorId = item.Id,
+                    SensorDatasheetId = item.SensorDatasheetId,
+                    SensorTypeId = item.SensorTypeId,
                     CreateByApplicationUserId = applicationUserEntity.Id,
                     CreateDate = DateTime.Now.ToUniversalTime(),
                 });

@@ -96,9 +96,9 @@
                                 </div>
                             </form>
 
-                            <div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors().sensorsInDevice())">
+                            <div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors().sensorInDevice())">
                                 <tabset justified="true" class="tab-container">
-                                    <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorsInDevice">
+                                    <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
                                         <form name="formSensorInDevice" class="form-horizontal form-validation" ng-controller="sensorController" ng-init="init(sensorInDeviceItem.sensor())">
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Rótulo</label>

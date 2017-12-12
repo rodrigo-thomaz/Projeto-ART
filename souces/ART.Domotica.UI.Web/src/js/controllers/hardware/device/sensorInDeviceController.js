@@ -2,16 +2,16 @@
 app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'sensorInDeviceService',
     function ($scope, $rootScope, $timeout, $log, toaster, sensorInDeviceService) {
 
-        $scope.sensorsInDevice = [];
+        $scope.sensorInDevice = [];
 
-    $scope.init = function (sensorsInDevice) {
+        $scope.init = function (sensorInDevice) {
 
-        $scope.sensorsInDevice = sensorsInDevice; 
-     
-    }
+            $scope.sensorInDevice = sensorInDevice;
 
-    $scope.$on('$destroy', function () {
-        
-    });
+        }
 
-}]);
+        $scope.$on('$destroy', function () {
+
+        });
+
+    }]);
