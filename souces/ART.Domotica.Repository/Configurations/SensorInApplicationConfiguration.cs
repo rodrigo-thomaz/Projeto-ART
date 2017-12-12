@@ -17,6 +17,8 @@ namespace ART.Domotica.Repository.Configurations
             {
                 x.ApplicationId,
                 x.SensorId,
+                x.SensorDatasheetId,
+                x.SensorTypeId,
             });
 
             //ApplicationId
@@ -39,23 +41,50 @@ namespace ART.Domotica.Repository.Configurations
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute ("IX_Unique_SensorId") { IsUnique = true },
+                        new IndexAttribute ("IX_Unique_SensorInApplication", 0) { IsUnique = true },
+                    }));
+
+            //SensorDatasheetId
+            Property(x => x.SensorDatasheetId)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new List<IndexAttribute>
+                    {
+                        new IndexAttribute ("IX_Unique_SensorInApplication", 1) { IsUnique = true },
+                    }));
+
+            //SensorTypeId
+            Property(x => x.SensorTypeId)
+                .HasColumnOrder(3)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new List<IndexAttribute>
+                    {
+                        new IndexAttribute ("IX_Unique_SensorInApplication", 2) { IsUnique = true },
                     }));
 
             //Sensor
             HasRequired(x => x.Sensor)
                 .WithMany(x => x.SensorInApplication)
-                .HasForeignKey(x => x.SensorId)
+                .HasForeignKey(x => new
+                {
+                    x.SensorId,
+                    x.SensorDatasheetId,
+                    x.SensorTypeId,
+                })
                 .WillCascadeOnDelete(false);
 
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(2)
+                .HasColumnOrder(4)
                 .IsRequired();
 
             //CreateByApplicationUserId
             Property(x => x.CreateByApplicationUserId)
-                .HasColumnOrder(3);
+                .HasColumnOrder(5);
 
             //CreateByApplicationUser
             HasRequired(x => x.CreateByApplicationUser)

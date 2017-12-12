@@ -104,7 +104,7 @@
 
             #endregion
 
-            #region SensorTempDSFamily
+            #region Sensors
 
             var sensor_1_Address = "28fff62293165b0";
             var sensor_2_1_Address = "40:255:231:109:162:22:3:211";
@@ -542,6 +542,8 @@
             var sensorInDevice_2_1 = new SensorInDevice
             {
                 SensorId = sensor_2_1.Id,
+                SensorDatasheetId = sensor_2_1.SensorDatasheetId,
+                SensorTypeId = sensor_2_1.SensorTypeId,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 Ordination = 0,
             };
@@ -551,6 +553,8 @@
             var sensorInDevice_2_2 = new SensorInDevice
             {
                 SensorId = sensor_2_2.Id,
+                SensorDatasheetId = sensor_2_2.SensorDatasheetId,
+                SensorTypeId = sensor_2_2.SensorTypeId,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 Ordination = 1,
             };
@@ -560,6 +564,8 @@
             var sensorInDevice_3_1 = new SensorInDevice
             {
                 SensorId = sensor_3_1.Id,
+                SensorDatasheetId = sensor_3_1.SensorDatasheetId,
+                SensorTypeId = sensor_3_1.SensorTypeId,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 Ordination = 2,
             };
@@ -569,6 +575,8 @@
             var sensorInDevice_3_2 = new SensorInDevice
             {
                 SensorId = sensor_3_2.Id,
+                SensorDatasheetId = sensor_3_2.SensorDatasheetId,
+                SensorTypeId = sensor_3_2.SensorTypeId,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 Ordination = 3,
             };

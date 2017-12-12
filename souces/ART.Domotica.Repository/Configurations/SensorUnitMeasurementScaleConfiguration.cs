@@ -12,11 +12,28 @@
         public SensorUnitMeasurementScaleConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.SensorDatasheetId,
+                x.SensorTypeId,
+            });
 
-            //Id
+            // Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //SensorDatasheetId
+            Property(x => x.SensorDatasheetId)
+                .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //SensorTypeId
+            Property(x => x.SensorTypeId)
+                .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
@@ -26,25 +43,25 @@
 
             //UnitMeasurementId
             Property(x => x.UnitMeasurementId)
-                .HasColumnOrder(1)
+                .HasColumnOrder(3)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //UnitMeasurementTypeId
             Property(x => x.UnitMeasurementTypeId)
-                .HasColumnOrder(2)
+                .HasColumnOrder(4)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //NumericalScalePrefixId
             Property(x => x.NumericalScalePrefixId)
-                .HasColumnOrder(3)
+                .HasColumnOrder(5)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //NumericalScaleTypeId
             Property(x => x.NumericalScaleTypeId)
-                .HasColumnOrder(4)
+                .HasColumnOrder(6)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
@@ -62,25 +79,25 @@
 
             //RangeMax
             Property(x => x.RangeMax)
-                .HasColumnOrder(5)
+                .HasColumnOrder(7)
                 .HasPrecision(7, 4)
                 .IsRequired();
 
             //RangeMin
             Property(x => x.RangeMin)
-                .HasColumnOrder(6)
+                .HasColumnOrder(8)
                 .HasPrecision(7, 4)
                 .IsRequired();
 
             //ChartLimiterMax
             Property(x => x.ChartLimiterMax)
-                .HasColumnOrder(7)
+                .HasColumnOrder(9)
                 .HasPrecision(7, 4)
                 .IsRequired();
 
             //ChartLimiterMin
             Property(x => x.ChartLimiterMin)
-                .HasColumnOrder(8)
+                .HasColumnOrder(10)
                 .HasPrecision(7, 4)
                 .IsRequired();
         }

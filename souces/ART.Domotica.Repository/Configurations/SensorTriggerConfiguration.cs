@@ -23,27 +23,45 @@
             //SensorId
             Property(x => x.SensorId)
                 .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //SensorDatasheetId
+            Property(x => x.SensorDatasheetId)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //SensorTypeId
+            Property(x => x.SensorTypeId)
+                .HasColumnOrder(3)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //Sensor
             HasRequired(x => x.Sensor)
                 .WithMany(x => x.SensorTriggers)
-                .HasForeignKey(x => x.SensorId)
+                .HasForeignKey(x => new
+                {
+                    x.SensorId,
+                    x.SensorDatasheetId,
+                    x.SensorTypeId,
+                })
                 .WillCascadeOnDelete(false);
 
             //TriggerOn
             Property(x => x.TriggerOn)
-                .HasColumnOrder(2)
+                .HasColumnOrder(4)
                 .IsRequired();
 
             //BuzzerOn
             Property(x => x.BuzzerOn)
-                .HasColumnOrder(3)
+                .HasColumnOrder(5)
                 .IsRequired();
 
             //TriggerValue
             Property(x => x.TriggerValue)
-                .HasColumnOrder(4)
+                .HasColumnOrder(6)
                 .HasMaxLength(50)
                 .IsRequired();
         }

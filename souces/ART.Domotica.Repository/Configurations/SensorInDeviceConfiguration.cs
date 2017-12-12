@@ -17,6 +17,8 @@
             {
                 x.DeviceSensorsId,
                 x.SensorId,
+                x.SensorDatasheetId,
+                x.SensorTypeId,
             });
 
             //DeviceId
@@ -31,7 +33,23 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+                    new IndexAnnotation(new IndexAttribute ("IX_Unique_SensorInDevice", 0) { IsUnique = true }));
+
+            //SensorDatasheetId
+            Property(x => x.SensorDatasheetId)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute("IX_Unique_SensorInDevice", 1) { IsUnique = true }));
+
+            //SensorTypeId
+            Property(x => x.SensorTypeId)
+                .HasColumnOrder(3)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute("IX_Unique_SensorInDevice", 2) { IsUnique = true }));
 
             //DeviceSensors
             HasRequired(x => x.DeviceSensors)
@@ -42,12 +60,17 @@
             //Sensor
             HasRequired(x => x.Sensor)
                 .WithMany(x => x.SensorInDevice)
-                .HasForeignKey(x => x.SensorId)
+                .HasForeignKey(x => new
+                {
+                    x.SensorId,
+                    x.SensorDatasheetId,
+                    x.SensorTypeId,
+                })
                 .WillCascadeOnDelete(false);
 
             //Ordination
             Property(x => x.Ordination)
-                .HasColumnOrder(2)
+                .HasColumnOrder(4)
                 .IsRequired();
         }
 

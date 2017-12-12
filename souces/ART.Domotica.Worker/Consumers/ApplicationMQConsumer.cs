@@ -7,14 +7,12 @@
     using Autofac;
 
     using RabbitMQ.Client;
-    using RabbitMQ.Client.Events;
 
     public class ApplicationMQConsumer : ConsumerBase, IApplicationMQConsumer
     {
         #region Fields
 
         private readonly IComponentContext _componentContext;
-        private readonly EventingBasicConsumer _getRPCConsumer;
         private readonly ILogger _logger;
 
         #endregion Fields

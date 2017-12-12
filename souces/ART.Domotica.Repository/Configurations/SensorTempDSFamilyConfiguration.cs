@@ -13,11 +13,28 @@
         public SensorTempDSFamilyConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.SensorDatasheetId,
+                x.SensorTypeId,
+            });
 
             // Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //SensorDatasheetId
+            Property(x => x.SensorDatasheetId)
+                .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //SensorTypeId
+            Property(x => x.SensorTypeId)
+                .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
@@ -27,7 +44,7 @@
 
             //DeviceAddress
             Property(x => x.DeviceAddress)
-                .HasColumnOrder(1)
+                .HasColumnOrder(3)
                 .HasMaxLength(32)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -35,7 +52,7 @@
 
             //Family
             Property(x => x.Family)
-                .HasColumnOrder(2)
+                .HasColumnOrder(4)
                 .HasMaxLength(10)
                 .IsRequired();
 
@@ -47,7 +64,7 @@
 
             //SensorTempDSFamilyResolutionId
             Property(x => x.SensorTempDSFamilyResolutionId)
-                .HasColumnOrder(3);
+                .HasColumnOrder(5);
         }
 
         #endregion Constructors

@@ -12,23 +12,29 @@
         public SensorConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.SensorDatasheetId,
+                x.SensorTypeId,
+            });
 
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
-                .IsRequired();
-
-            //Label
-            Property(x => x.Label)
-                .HasColumnOrder(1)
-                .HasMaxLength(50)
-                .IsRequired();            
+                .IsRequired();                
 
             //SensorDatasheetId
-            Property(x => x.Id)
+            Property(x => x.SensorDatasheetId)
+                .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //SensorTypeId
+            Property(x => x.SensorTypeId)
                 .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //SensorDatasheet
@@ -41,9 +47,15 @@
                 })
                 .WillCascadeOnDelete(false);
 
+            //Label
+            Property(x => x.Label)
+                .HasColumnOrder(3)
+                .HasMaxLength(50)
+                .IsRequired();
+
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .IsRequired();
         }
 
