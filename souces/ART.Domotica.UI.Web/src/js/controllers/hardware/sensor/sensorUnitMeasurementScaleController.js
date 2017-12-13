@@ -1,5 +1,5 @@
-﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext',
-    function ($scope, $rootScope, $timeout, $log, toaster, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext) {
+﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext', 'sensorDatasheetUnitMeasurementScaleFinder',
+    function ($scope, $rootScope, $timeout, $log, toaster, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext, sensorDatasheetUnitMeasurementScaleFinder) {
 
         $scope.sensorUnitMeasurementScale = null;
 
@@ -50,13 +50,14 @@
 
         $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
             if (newValue) {
-                $scope.numericalScalePrefixView.availables = newValue.numericalScaleType().numericalScales();
+                var numericalScalePrefixes = sensorDatasheetUnitMeasurementScaleFinder.getNumericalScalePrefixes($scope.sensorUnitMeasurementScale.sensorDatasheetId, $scope.sensorUnitMeasurementScale.sensorTypeId, newValue.numericalScaleTypeId);
+                $scope.numericalScalePrefixView.availables = numericalScalePrefixes;
             }
         });
 
         $scope.$watch('numericalScalePrefixView.selected', function (newValue) {
-            if (newValue) {
-                $scope.unitMeasurementView.availables = newValue.unitMeasurementScales();
+            if (newValue) {                
+                //$scope.unitMeasurementView.availables = newValue.unitMeasurementScales();
             }
         });
 
