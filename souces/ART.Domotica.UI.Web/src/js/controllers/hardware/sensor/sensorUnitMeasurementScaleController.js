@@ -53,15 +53,24 @@
         });  
 
         $scope.$watch('countryView.selected', function (newValue) {
+            applyNumericalScaleTypeView();
+        });           
+
+        $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
+            applyUnitMeasurementScaleView();
+        });    
+
+        var applyNumericalScaleTypeView = function () {
 
             var selectNumericalScaleType = $scope.form.selectNumericalScaleType;
             var selectedNumericalScaleType = null;
 
-            if (newValue) {
-                $scope.numericalScaleTypeView.availables = newValue.numericalScaleTypeCountries();
+            if ($scope.countryView.selected) {
+                var country = $scope.countryView.selected;
+                $scope.numericalScaleTypeView.availables = country.numericalScaleTypeCountries();
                 if ($scope.numericalScaleTypeView.availables.length == 1) {
                     selectedNumericalScaleType = $scope.numericalScaleTypeView.availables[0];
-                }                
+                }
             }
 
             $scope.numericalScaleTypeView.selected = selectedNumericalScaleType;
@@ -70,11 +79,7 @@
             selectNumericalScaleType.$commitViewValue();
             selectNumericalScaleType.$render();
 
-        });           
-
-        $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
-            applyUnitMeasurementScaleView();
-        });    
+        };
 
         var applyUnitMeasurementScaleView = function () {
 
