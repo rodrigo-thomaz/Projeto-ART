@@ -59,6 +59,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="libs\angular\angular-debounce\angular-debounce.min.js" />
     <Content Include="src\img\favicon.ico" />
     <Content Include="libs\angular\angular-locales\angular-locale_pt-br.js" />
     <Content Include="libs\angular\angular-nvd3\angular-nvd3.min.js" />
