@@ -125,17 +125,26 @@
                                                 <label class="col-lg-4 control-label">Tipo de escala numérica</label>
                                                 <div class="col-lg-8">
                                                     <select class="form-control m-b"
-                                                            ng-options="item.numericalScaleType().name for item in numericalScaleTypeCountryView.availables track by item.numericalScaleTypeId"
-                                                            ng-model="numericalScaleTypeCountryView.selected"></select>
+                                                            ng-options="item.numericalScaleType().name for item in numericalScaleTypeView.availables track by item.numericalScaleTypeId"
+                                                            ng-model="numericalScaleTypeView.selected"></select>
                                                 </div>
                                             </div>                                            
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Prefixos</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control m-b"
+                                                            ng-options="item.numericalScalePrefix().name for item in numericalScalePrefixView.availables track by item.numericalScalePrefixId"
+                                                            ng-model="numericalScalePrefixView.selected"></select>
+                                                </div>
+                                            </div>   
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Escala numérica</label>
                                                 <div class="col-lg-8">
                                                     <select class="form-control m-b"
-                                                            ng-options="item.sensorDatasheetId for item in sensorDatasheetUnitMeasurementScaleView.availables track by item.sensorDatasheetId"
-                                                            ng-model="sensorDatasheetUnitMeasurementScaleView.selected"></select>
+                                                            ng-options="item.unitMeasurement().name for item in unitMeasurementView.availables track by item.unitMeasurementId"
+                                                            ng-model="unitMeasurementView.selected"></select>
                                                     <!--ng-change="changeTimeZone()"-->
                                                 </div>
                                             </div>      
