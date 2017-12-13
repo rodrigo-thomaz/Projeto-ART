@@ -61,21 +61,28 @@
         });           
 
         $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
+
+            var selectUnitMeasurementScale = $scope.form.selectUnitMeasurementScale;
+            var selectedUnitMeasurementScale = null;
+
             if (newValue) {
                 var unitMeasurement = $scope.unitMeasurementView.selected;
                 var unitMeasurementScales = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, newValue.numericalScaleTypeId);
-                $scope.unitMeasurementScaleView.availables = unitMeasurementScales;
+                $scope.unitMeasurementScaleView.availables = unitMeasurementScales;                
                 if ($scope.unitMeasurementScaleView.availables.length == 1) {
-                    $scope.unitMeasurementScaleView.selected = $scope.unitMeasurementScaleView.availables[0];
+                    selectedUnitMeasurementScale = $scope.unitMeasurementScaleView.availables[0];
                 }
-                else {
-                    $scope.unitMeasurementScaleView.selected = null;
-                }                
             }
             else {
                 $scope.unitMeasurementScaleView.availables = null;
-                $scope.unitMeasurementScaleView.selected = null;
             }
+
+            $scope.unitMeasurementScaleView.selected = selectedUnitMeasurementScale;
+            selectUnitMeasurementScale.$setViewValue(selectedUnitMeasurementScale);
+            selectUnitMeasurementScale.$commitViewValue();
+            selectUnitMeasurementScale.$render();
+
+            var teste = $scope.unitMeasurementScaleView.selected;
         });    
 
         var setSelectedSensorDatasheetUnitMeasurementScale = function () {

@@ -99,6 +99,7 @@
                             <div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors().sensorInDevice())">
                                 <tabset justified="true" class="tab-container">
                                     <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
+                                        
                                         <form name="formSensorInDevice" class="form-horizontal form-validation" ng-controller="sensorController" ng-init="init(sensorInDeviceItem.sensor())">
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Rótulo</label>
@@ -111,14 +112,15 @@
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                         </form>
-                                        <form name="formSensorUnitMeasurementScale" class="form-horizontal form-validation" ng-controller="sensorUnitMeasurementScaleController" ng-init="init(sensorInDeviceItem.sensor().sensorUnitMeasurementScale())">                                            
+
+                                        <form name="form" class="form-horizontal form-validation" ng-controller="sensorUnitMeasurementScaleController" ng-init="init(sensorInDeviceItem.sensor().sensorUnitMeasurementScale())">                                            
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Unidade de medida</label>
                                                 <div class="col-lg-8">
                                                     <select class="form-control m-b"
                                                             ng-options="item.name for item in unitMeasurementView.availables track by item.unitMeasurementId"
-                                                            ng-model="unitMeasurementView.selected"></select>
-                                                    <!--ng-change="changeTimeZone()"-->
+                                                            ng-model="unitMeasurementView.selected">
+                                                    </select>
                                                 </div>
                                             </div>     
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
@@ -127,28 +129,42 @@
                                                 <div class="col-lg-8">
                                                     <select class="form-control m-b"
                                                             ng-options="item.name for item in countryView.availables track by item.countryId"
-                                                            ng-model="countryView.selected"></select>                                                    
+                                                            ng-model="countryView.selected">
+                                                    </select>                                                    
                                                 </div>
                                             </div>
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Tipo de escala numérica</label>
                                                 <div class="col-lg-8">
-                                                    <select class="form-control m-b"
+                                                    <select name="selectNumericalScaleType"
+                                                            class="form-control m-b"
                                                             ng-options="item.numericalScaleType().name for item in numericalScaleTypeView.availables track by item.numericalScaleTypeId"
-                                                            ng-model="numericalScaleTypeView.selected"></select>
+                                                            ng-model="numericalScaleTypeView.selected"
+                                                            required>
+                                                    </select>
+                                                    <span ng-show="form.selectNumericalScaleType.$touched && form.selectNumericalScaleType.$invalid">
+                                                        Tipo de escala numérica é requerido
+                                                    </span>
                                                 </div>
                                             </div>                                              
                                             <div class="line line-dashed b-b line-lg pull-in"></div>
                                             <div class="form-group">
                                                 <label class="col-lg-4 control-label">Escala</label>
                                                 <div class="col-lg-8">
-                                                    <select class="form-control m-b"
+                                                    <select name="selectUnitMeasurementScale"
+                                                            class="form-control m-b"
                                                             ng-options="item.numericalScale().name for item in unitMeasurementScaleView.availables track by item.UnitMeasurementId"
-                                                            ng-model="numericalScalePrefixView.selected"></select>
+                                                            ng-model="numericalScalePrefixView.selected"
+                                                            required>
+                                                    </select>
+                                                    <span ng-show="form.selectUnitMeasurementScale.$error.required">
+                                                        Escala é requerido
+                                                    </span>
                                                 </div>
                                             </div>  
                                         </form>
+
                                     </tab>
                                 </tabset>
                             </div>
