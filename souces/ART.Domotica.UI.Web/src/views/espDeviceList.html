@@ -143,7 +143,7 @@
                                                             ng-model="numericalScaleTypeView.selected"
                                                             required>
                                                     </select>
-                                                    <span ng-show="form.selectNumericalScaleType.$touched && form.selectNumericalScaleType.$invalid">
+                                                    <span ng-show="form.selectNumericalScaleType.$error.required">
                                                         Tipo de escala numérica é requerido
                                                     </span>
                                                 </div>
