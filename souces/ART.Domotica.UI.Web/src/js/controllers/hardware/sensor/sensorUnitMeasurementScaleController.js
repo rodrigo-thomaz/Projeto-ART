@@ -39,7 +39,7 @@
 
         $scope.$watch('countryView.selected', function (newValue) {
             if (newValue) {
-                $scope.sensorDatasheetUnitMeasurementScaleView.availables = newValue.numericalScaleTypeCountries();
+                $scope.numericalScaleTypeCountryView.availables = newValue.numericalScaleTypeCountries();
             }
         });
         
