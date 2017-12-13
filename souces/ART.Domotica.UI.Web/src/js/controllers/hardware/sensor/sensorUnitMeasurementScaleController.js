@@ -6,17 +6,19 @@
         $scope.$watch('sensorUnitMeasurementScale', function (newValue) {
             if (newValue) {
                 //unitMeasurement
-                var unitMeasurement = unitMeasurementFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId);
                 $scope.unitMeasurementView.availables = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementsBySensorDatasheetKey(newValue.sensorDatasheetId, newValue.sensorTypeId);
-                $scope.unitMeasurementView.selected = unitMeasurement;
+                $scope.unitMeasurementView.selected = unitMeasurementFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId);
                 //country
                 var country = countryFinder.getByKey(newValue.countryId);
                 $scope.countryView.availables = localeContext.country;
                 $scope.countryView.selected = country;
                 //numericalScaleType
-                var numericalScaleType = numericalScaleTypeCountryFinder.getByKey(newValue.numericalScaleTypeId, newValue.countryId);
                 $scope.numericalScaleTypeView.availables = country.numericalScaleTypeCountries();
-                $scope.numericalScaleTypeView.selected = numericalScaleType;
+                $scope.numericalScaleTypeView.selected = numericalScaleTypeCountryFinder.getByKey(newValue.numericalScaleTypeId, newValue.countryId);
+                //unitMeasurementScale
+                var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId, newValue.numericalScalePrefixId, newValue.numericalScaleTypeId);
+                $scope.unitMeasurementScaleView.availables = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(newValue.unitMeasurementId, newValue.unitMeasurementTypeId, newValue.numericalScaleTypeId);
+                $scope.unitMeasurementScaleView.selected = unitMeasurementScale;
 
                 //watches
                 initializeWatches();
@@ -125,7 +127,7 @@
                 }
             }
             else {
-                $scope.unitMeasurementScaleView.availables = null;
+                $scope.unitMeasurementScaleView.availables = [];
             }
 
             $scope.unitMeasurementScaleView.selected = selectedUnitMeasurementScale;
