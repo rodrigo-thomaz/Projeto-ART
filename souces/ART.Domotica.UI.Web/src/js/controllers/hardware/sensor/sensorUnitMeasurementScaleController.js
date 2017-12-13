@@ -5,21 +5,25 @@
 
         $scope.$watch('sensorUnitMeasurementScale', function (newValue) {
             if (newValue) {
+
                 //unitMeasurement
                 $scope.unitMeasurementView.availables = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementsBySensorDatasheetKey(newValue.sensorDatasheetId, newValue.sensorTypeId);
                 $scope.unitMeasurementView.selected = unitMeasurementFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId);
+
                 //country
                 var country = countryFinder.getByKey(newValue.countryId);
                 $scope.countryView.availables = localeContext.country;
                 $scope.countryView.selected = country;
+
                 //numericalScaleType
                 $scope.numericalScaleTypeView.availables = country.numericalScaleTypeCountries();
                 $scope.numericalScaleTypeView.selected = numericalScaleTypeCountryFinder.getByKey(newValue.numericalScaleTypeId, newValue.countryId);
+
                 //unitMeasurementScale
                 var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId, newValue.numericalScalePrefixId, newValue.numericalScaleTypeId);
                 $scope.unitMeasurementScaleView.availables = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(newValue.unitMeasurementId, newValue.unitMeasurementTypeId, newValue.numericalScaleTypeId);
                 $scope.unitMeasurementScaleView.selected = unitMeasurementScale;
-
+                               
                 //watches
                 initializeWatches();
             }
@@ -80,8 +84,7 @@
         };
 
         var applyNumericalScaleTypeView = function () {
-
-            var selectNumericalScaleType = $scope.form.selectNumericalScaleType;
+                        
             var selectedNumericalScaleType = null;
 
             if ($scope.countryView.selected) {
@@ -94,6 +97,8 @@
 
             $scope.numericalScaleTypeView.selected = selectedNumericalScaleType;
 
+            var selectNumericalScaleType = $scope.form.selectNumericalScaleType;
+
             selectNumericalScaleType.$setViewValue(selectedNumericalScaleType);
             selectNumericalScaleType.$commitViewValue();
             selectNumericalScaleType.$render();
@@ -102,7 +107,6 @@
 
         var applyUnitMeasurementScaleView = function () {
 
-            var selectUnitMeasurementScale = $scope.form.selectUnitMeasurementScale;
             var selectedUnitMeasurementScale = null;
 
             if ($scope.numericalScaleTypeView.selected && $scope.unitMeasurementView.selected) {
@@ -119,6 +123,8 @@
             }
 
             $scope.unitMeasurementScaleView.selected = selectedUnitMeasurementScale;
+
+            var selectUnitMeasurementScale = $scope.form.selectUnitMeasurementScale;
 
             selectUnitMeasurementScale.$setViewValue(selectedUnitMeasurementScale);
             selectUnitMeasurementScale.$commitViewValue();
