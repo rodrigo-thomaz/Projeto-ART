@@ -27,19 +27,7 @@
 
         $scope.init = function (sensorUnitMeasurementScale) {
 
-            $scope.sensorUnitMeasurementScale = sensorUnitMeasurementScale;
-
-            // sensorDatasheetUnitMeasurementScale
-            if (sensorDatasheetContext.sensorDatasheetUnitMeasurementScaleLoaded)
-                setSelectedSensorDatasheetUnitMeasurementScale();
-            else {
-                var sensorDatasheetUnitMeasurementScaleLoadedWatch = sensorDatasheetContext.$watch('sensorDatasheetUnitMeasurementScaleLoaded', function (newValue) {
-                    if (newValue) {
-                        sensorDatasheetUnitMeasurementScaleLoadedWatch();
-                        setSelectedSensorDatasheetUnitMeasurementScale();
-                    }
-                })
-            }
+            $scope.sensorUnitMeasurementScale = sensorUnitMeasurementScale;            
 
             //clearOnSetValueCompleted = $rootScope.$on('sensorUnitMeasurementScaleService_SetValueCompleted_Id_' + sensor.sensorUnitMeasurementScale.id, onSetValueCompleted);
         };
@@ -150,10 +138,6 @@
             }
 
         });
-
-        var setSelectedSensorDatasheetUnitMeasurementScale = function () {
-            //$scope.sensorDatasheetUnitMeasurementScaleView.selected = $scope.sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale();
-        };
 
         //var clearOnSetValueCompleted = null;
 
