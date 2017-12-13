@@ -40,7 +40,7 @@ app.factory('unitMeasurementScaleFinder', ['$rootScope', 'siContext', function (
         var result = [];
         for (var i = 0; i < context.unitMeasurementScale.length; i++) {
             var unitMeasurementScale = context.unitMeasurementScale[i];
-            if (unitMeasurementScale.unitMeasurementId === unitMeasurementId && unitMeasurementScale.unitMeasurementTypeId === unitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
+            if (unitMeasurementScale.unitMeasurementId === unitMeasurementId && unitMeasurementScale.unitMeasurementTypeId === unitMeasurementTypeId && unitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
                 result.push(context.unitMeasurementScale[i]);
             }
         }
