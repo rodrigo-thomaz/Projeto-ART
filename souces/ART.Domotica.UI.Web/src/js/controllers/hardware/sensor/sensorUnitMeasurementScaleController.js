@@ -20,18 +20,29 @@
             }
 
             //clearOnSetValueCompleted = $rootScope.$on('sensorUnitMeasurementScaleService_SetValueCompleted_Id_' + sensor.sensorUnitMeasurementScale.id, onSetValueCompleted);
-        };
-
-        $scope.sensorDatasheetUnitMeasurementScaleView = {
-            availables: sensorDatasheetContext.sensorDatasheetUnitMeasurementScale,
-            selected: {},
-        };
+        };        
 
         $scope.countryView = {
             availables: localeContext.country,
-            selected: {},
+            selected: null,
         };
 
+        $scope.numericalScaleTypeCountryView = {
+            availables: [],
+            selected: null,
+        };
+
+        $scope.sensorDatasheetUnitMeasurementScaleView = {
+            availables: [],
+            selected: null,
+        };
+
+        $scope.$watch('countryView.selected', function (newValue) {
+            if (newValue) {
+                $scope.sensorDatasheetUnitMeasurementScaleView.availables = newValue.numericalScaleTypeCountries();
+            }
+        });
+        
         var setSelectedSensorDatasheetUnitMeasurementScale = function () {
             $scope.sensorDatasheetUnitMeasurementScaleView.selected = $scope.sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale();
         };

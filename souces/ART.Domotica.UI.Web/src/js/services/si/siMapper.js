@@ -18,6 +18,7 @@ app.factory('siMapper', [
     'unitMeasurementTypeConstant',
     'sensorDatasheetUnitMeasurementDefaultFinder',
     'sensorDatasheetUnitMeasurementScaleFinder',
+    'countryFinder',
     function (
         $rootScope,
         siContext,
@@ -36,7 +37,8 @@ app.factory('siMapper', [
         unitMeasurementConstant,
         unitMeasurementTypeConstant,
         sensorDatasheetUnitMeasurementDefaultFinder,
-        sensorDatasheetUnitMeasurementScaleFinder) {
+        sensorDatasheetUnitMeasurementScaleFinder,
+        countryFinder) {
 
         var serviceFactory = {};
 
@@ -45,6 +47,14 @@ app.factory('siMapper', [
                 var numericalScaleType = newValues[i];
                 numericalScaleType.numericalScaleTypeCountries = function () { return numericalScaleTypeCountryFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
                 numericalScaleType.numericalScales = function () { return numericalScaleFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
+            }
+        });
+
+        siContext.$watchCollection('numericalScaleTypeCountry', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var numericalScaleTypeCountry = newValues[i];
+                numericalScaleTypeCountry.numericalScaleType = function () { return numericalScaleTypeFinder.getByKey(this.numericalScaleTypeId); }
+                numericalScaleTypeCountry.country = function () { return countryFinder.getByKey(this.countryId); }
             }
         });
 
