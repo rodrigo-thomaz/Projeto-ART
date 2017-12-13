@@ -65,6 +65,16 @@
                 var unitMeasurement = $scope.unitMeasurementView.selected;
                 var unitMeasurementScales = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, newValue.numericalScaleTypeId);
                 $scope.unitMeasurementScaleView.availables = unitMeasurementScales;
+                if ($scope.unitMeasurementScaleView.availables.length == 1) {
+                    $scope.unitMeasurementScaleView.selected = $scope.unitMeasurementScaleView.availables[0];
+                }
+                else {
+                    $scope.unitMeasurementScaleView.selected = null;
+                }                
+            }
+            else {
+                $scope.unitMeasurementScaleView.availables = null;
+                $scope.unitMeasurementScaleView.selected = null;
             }
         });    
 
