@@ -6,8 +6,9 @@
         $scope.$watch('sensorUnitMeasurementScale', function (newValue) {
             if (newValue) {
                 //unitMeasurement
+                var unitMeasurement = unitMeasurementFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId);
                 $scope.unitMeasurementView.availables = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementsBySensorDatasheetKey(newValue.sensorDatasheetId, newValue.sensorTypeId);
-                $scope.unitMeasurementView.selected = unitMeasurementFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId);
+                $scope.unitMeasurementView.selected = unitMeasurement;
                 //country
                 var country = countryFinder.getByKey(newValue.countryId);
                 $scope.countryView.availables = localeContext.country;
