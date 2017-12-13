@@ -126,7 +126,7 @@
             }
         };
 
-        var fn = debounce(200, function () {
+        var fn = debounce(500, function () {
             alert('change!');
         });
 
