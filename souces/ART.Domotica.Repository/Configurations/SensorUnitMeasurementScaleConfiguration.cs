@@ -102,6 +102,22 @@
                 .HasColumnOrder(10)
                 .HasPrecision(7, 4)
                 .IsRequired();
+
+            //CountryId
+            Property(x => x.CountryId)
+                .HasColumnOrder(11)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //UnitMeasurementScale
+            HasRequired(x => x.NumericalScaleTypeCountry)
+                .WithMany(x => x.SensorUnitMeasurementScales)
+                .HasForeignKey(x => new
+                {
+                    x.NumericalScaleTypeId,
+                    x.CountryId,
+                })
+                .WillCascadeOnDelete(false);
         }
 
         #endregion Constructors

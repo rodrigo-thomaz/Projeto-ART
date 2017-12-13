@@ -161,13 +161,9 @@
     <Compile Include="Interfaces\Globalization\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201712121614014_Create1.cs" />
-    <Compile Include="Migrations\201712121614014_Create1.Designer.cs">
-      <DependentUpon>201712121614014_Create1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712121913197_Create11.cs" />
-    <Compile Include="Migrations\201712121913197_Create11.Designer.cs">
-      <DependentUpon>201712121913197_Create11.cs</DependentUpon>
+    <Compile Include="Migrations\201712130845418_InitialCreate.cs" />
+    <Compile Include="Migrations\201712130845418_InitialCreate.Designer.cs">
+      <DependentUpon>201712130845418_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -252,11 +248,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712121614014_Create1.resx">
-      <DependentUpon>201712121614014_Create1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712121913197_Create11.resx">
-      <DependentUpon>201712121913197_Create11.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712130845418_InitialCreate.resx">
+      <DependentUpon>201712130845418_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

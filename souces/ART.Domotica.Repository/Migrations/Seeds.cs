@@ -143,6 +143,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -175,6 +176,7 @@
                 {
                     sensor_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -211,6 +213,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -243,6 +246,7 @@
                 {
                     sensor_2_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -278,6 +282,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -310,6 +315,7 @@
                 {
                     sensor_2_2.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -345,6 +351,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -377,6 +384,7 @@
                 {
                     sensor_3_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -412,6 +420,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -444,6 +453,7 @@
                 {
                     sensor_3_2.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
+                        CountryId = 1,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,

@@ -76,6 +76,16 @@
             get; set;
         }
 
+        public short CountryId
+        {
+            get; set;
+        }
+
+        public NumericalScaleTypeCountry NumericalScaleTypeCountry
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }
