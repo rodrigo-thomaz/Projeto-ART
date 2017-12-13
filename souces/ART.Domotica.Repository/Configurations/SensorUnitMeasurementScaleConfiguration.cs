@@ -79,33 +79,9 @@
                 })
                 .WillCascadeOnDelete(false);
 
-            //RangeMax
-            Property(x => x.RangeMax)
-                .HasColumnOrder(7)
-                .HasPrecision(7, 4)
-                .IsRequired();
-
-            //RangeMin
-            Property(x => x.RangeMin)
-                .HasColumnOrder(8)
-                .HasPrecision(7, 4)
-                .IsRequired();
-
-            //ChartLimiterMax
-            Property(x => x.ChartLimiterMax)
-                .HasColumnOrder(9)
-                .HasPrecision(7, 4)
-                .IsRequired();
-
-            //ChartLimiterMin
-            Property(x => x.ChartLimiterMin)
-                .HasColumnOrder(10)
-                .HasPrecision(7, 4)
-                .IsRequired();
-
             //CountryId
             Property(x => x.CountryId)
-                .HasColumnOrder(11)
+                .HasColumnOrder(7)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
@@ -118,6 +94,30 @@
                     x.CountryId,
                 })
                 .WillCascadeOnDelete(false);
+
+            //RangeMax
+            Property(x => x.RangeMax)
+                .HasColumnOrder(8)
+                .HasPrecision(7, 4)
+                .IsRequired();
+
+            //RangeMin
+            Property(x => x.RangeMin)
+                .HasColumnOrder(9)
+                .HasPrecision(7, 4)
+                .IsRequired();
+
+            //ChartLimiterMax
+            Property(x => x.ChartLimiterMax)
+                .HasColumnOrder(10)
+                .HasPrecision(7, 4)
+                .IsRequired();
+
+            //ChartLimiterMin
+            Property(x => x.ChartLimiterMin)
+                .HasColumnOrder(11)
+                .HasPrecision(7, 4)
+                .IsRequired();            
         }
 
         #endregion Constructors
