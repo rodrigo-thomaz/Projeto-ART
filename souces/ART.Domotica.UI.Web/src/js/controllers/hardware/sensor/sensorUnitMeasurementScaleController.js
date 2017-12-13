@@ -69,6 +69,7 @@
             selectNumericalScaleType.$setViewValue(selectedNumericalScaleType);
             selectNumericalScaleType.$commitViewValue();
             selectNumericalScaleType.$render();
+
         });           
 
         $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
