@@ -5,10 +5,10 @@ app.factory('siMapper', [
     'numericalScaleFinder',
     'numericalScalePrefixFinder',
     'numericalScaleTypeFinder',
+    'numericalScaleTypeCountryFinder',
     'unitMeasurementScaleFinder',
     'unitMeasurementFinder',
-    'unitMeasurementTypeFinder',
-    'countryFinder',
+    'unitMeasurementTypeFinder',    
     'numericalScalePrefixConstant',
     'numericalScaleConstant',
     'numericalScaleTypeCountryConstant',
@@ -24,10 +24,10 @@ app.factory('siMapper', [
         numericalScaleFinder,
         numericalScalePrefixFinder,
         numericalScaleTypeFinder,
+        numericalScaleTypeCountryFinder,
         unitMeasurementScaleFinder,
         unitMeasurementFinder,
-        unitMeasurementTypeFinder,
-        countryFinder,
+        unitMeasurementTypeFinder,        
         numericalScalePrefixConstant,
         numericalScaleConstant,
         numericalScaleTypeCountryConstant,
@@ -43,7 +43,7 @@ app.factory('siMapper', [
         siContext.$watchCollection('numericalScaleType', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var numericalScaleType = newValues[i];
-                numericalScaleType.countries = function () { return countryFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
+                numericalScaleType.numericalScaleTypeCountries = function () { return numericalScaleTypeCountryFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
                 numericalScaleType.numericalScales = function () { return numericalScaleFinder.getByNumericalScaleTypeKey(this.numericalScaleTypeId); }
             }
         });

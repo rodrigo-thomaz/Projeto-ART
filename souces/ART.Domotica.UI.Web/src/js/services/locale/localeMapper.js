@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('localeMapper', ['$rootScope', 'localeContext', 'continentFinder', 'countryFinder', 'numericalScaleTypeFinder', 'continentConstant', 'countryConstant',
-    function ($rootScope, localeContext, continentFinder, countryFinder, numericalScaleTypeFinder, continentConstant, countryConstant) {
+app.factory('localeMapper', ['$rootScope', 'localeContext', 'continentFinder', 'countryFinder', 'numericalScaleTypeCountryFinder', 'continentConstant', 'countryConstant',
+    function ($rootScope, localeContext, continentFinder, countryFinder, numericalScaleTypeCountryFinder, continentConstant, countryConstant) {
 
         var serviceFactory = {};
 
@@ -15,7 +15,7 @@ app.factory('localeMapper', ['$rootScope', 'localeContext', 'continentFinder', '
             for (var i = 0; i < newValues.length; i++) {
                 var country = newValues[i];
                 country.continent = function () { return continentFinder.getByKey(this.continentId); }
-                country.numericalScaleTypes = function () { return numericalScaleTypeFinder.getByCountryKey(this.countryId); }
+                country.numericalScaleTypeCountries = function () { return numericalScaleTypeCountryFinder.getByCountryKey(this.countryId); }
             }
         });
 

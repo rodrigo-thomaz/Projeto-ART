@@ -23,24 +23,12 @@ app.factory('countryFinder', ['$rootScope', 'localeContext', 'siContext', 'numer
                 }
             }
             return result;
-        }
-
-        var getByNumericalScaleTypeKey = function (numericalScaleTypeId) {
-            var result = [];
-            for (var i = 0; i < siContext.numericalScaleTypeCountry.length; i++) {
-                if (siContext.numericalScaleTypeCountry[i].numericalScaleTypeId === numericalScaleTypeId) {
-                    var country = getByKey(siContext.numericalScaleTypeCountry[i].countryId);
-                    result.push(country);
-                }
-            }
-            return result;
-        }
+        }        
 
         // *** Public Methods ***
 
         serviceFactory.getByKey = getByKey;
         serviceFactory.getByContinentKey = getByContinentKey;
-        serviceFactory.getByNumericalScaleTypeKey = getByNumericalScaleTypeKey;
 
         return serviceFactory;
 
