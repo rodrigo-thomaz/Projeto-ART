@@ -21,6 +21,7 @@
                 .ForMember(vm => vm.UnitMeasurementTypeId, m => m.MapFrom(x => x.UnitMeasurementTypeId))
                 .ForMember(vm => vm.NumericalScalePrefixId, m => m.MapFrom(x => x.NumericalScalePrefixId))
                 .ForMember(vm => vm.NumericalScaleTypeId, m => m.MapFrom(x => x.NumericalScaleTypeId))
+                .ForMember(vm => vm.CountryId, m => m.MapFrom(x => x.CountryId))
                 .ForMember(vm => vm.RangeMax, m => m.MapFrom(x => x.RangeMax))
                 .ForMember(vm => vm.RangeMin, m => m.MapFrom(x => x.RangeMin))
                 .ForMember(vm => vm.ChartLimiterMax, m => m.MapFrom(x => x.ChartLimiterMax))

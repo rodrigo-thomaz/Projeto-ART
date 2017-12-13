@@ -64,6 +64,8 @@
             get; set;
         }
 
+        public short CountryId { get; set; }
+
         #endregion Properties
     }
 }
