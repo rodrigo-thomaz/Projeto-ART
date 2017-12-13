@@ -48,6 +48,10 @@
             selected: null,
         };                 
 
+        $scope.$watch('unitMeasurementView.selected', function (newValue) {
+            applyUnitMeasurementScaleView();
+        });  
+
         $scope.$watch('countryView.selected', function (newValue) {
 
             var selectNumericalScaleType = $scope.form.selectNumericalScaleType;
@@ -68,14 +72,19 @@
         });           
 
         $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
+            applyUnitMeasurementScaleView();
+        });    
+
+        var applyUnitMeasurementScaleView = function () {
 
             var selectUnitMeasurementScale = $scope.form.selectUnitMeasurementScale;
             var selectedUnitMeasurementScale = null;
 
-            if (newValue) {
+            if ($scope.numericalScaleTypeView.selected && $scope.unitMeasurementView.selected) {
+                var numericalScaleType = $scope.numericalScaleTypeView.selected;
                 var unitMeasurement = $scope.unitMeasurementView.selected;
-                var unitMeasurementScales = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, newValue.numericalScaleTypeId);
-                $scope.unitMeasurementScaleView.availables = unitMeasurementScales;                
+                var unitMeasurementScales = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, numericalScaleType.numericalScaleTypeId);
+                $scope.unitMeasurementScaleView.availables = unitMeasurementScales;
                 if ($scope.unitMeasurementScaleView.availables.length == 1) {
                     selectedUnitMeasurementScale = $scope.unitMeasurementScaleView.availables[0];
                 }
@@ -89,7 +98,8 @@
             selectUnitMeasurementScale.$setViewValue(selectedUnitMeasurementScale);
             selectUnitMeasurementScale.$commitViewValue();
             selectUnitMeasurementScale.$render();
-        });    
+
+        };
 
         var setSelectedSensorDatasheetUnitMeasurementScale = function () {
             //$scope.sensorDatasheetUnitMeasurementScaleView.selected = $scope.sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale();
