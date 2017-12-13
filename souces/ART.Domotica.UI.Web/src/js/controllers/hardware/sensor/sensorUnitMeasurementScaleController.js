@@ -26,14 +26,13 @@
                                
                 //watches
                 initializeWatches();
+
+                //clearOnSetValueCompleted = $rootScope.$on('sensorUnitMeasurementScaleService_SetValueCompleted_Id_' + sensor.sensorUnitMeasurementScale.id, onSetValueCompleted);
             }
         });
 
         $scope.init = function (sensorUnitMeasurementScale) {
-
-            $scope.sensorUnitMeasurementScale = sensorUnitMeasurementScale;            
-
-            //clearOnSetValueCompleted = $rootScope.$on('sensorUnitMeasurementScaleService_SetValueCompleted_Id_' + sensor.sensorUnitMeasurementScale.id, onSetValueCompleted);
+            $scope.sensorUnitMeasurementScale = sensorUnitMeasurementScale;
         };
 
         $scope.unitMeasurementView = {

@@ -4,6 +4,7 @@ using ART.Infra.CrossCutting.Repository;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using ART.Domotica.Enums.SI;
 
 namespace ART.Domotica.Repository.Repositories.SI
 {
@@ -19,6 +20,12 @@ namespace ART.Domotica.Repository.Repositories.SI
         {
             return await _context.NumericalScaleTypeCountry
                 .ToListAsync();
+        }
+
+        public async Task<NumericalScaleTypeCountry> GetByKey(UnitMeasurementTypeEnum unitMeasurementTypeId, short countryId)
+        {
+            return await _context.NumericalScaleTypeCountry
+                .FindAsync(unitMeasurementTypeId, countryId);
         }
     }
 }

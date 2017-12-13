@@ -1,9 +1,10 @@
 ﻿namespace ART.Domotica.Repository.Entities.SI
 {
+    using System.Collections.Generic;
+
     using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities.Locale;
     using ART.Infra.CrossCutting.Repository;
-    using System.Collections.Generic;
 
     public class NumericalScaleTypeCountry : IEntity
     {
@@ -29,7 +30,10 @@
             get; set;
         }
 
-        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales { get; set; }
+        public ICollection<SensorUnitMeasurementScale> SensorUnitMeasurementScales
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

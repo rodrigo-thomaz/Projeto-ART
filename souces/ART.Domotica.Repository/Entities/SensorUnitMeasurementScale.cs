@@ -21,12 +21,22 @@
             get; set;
         }
 
+        public short CountryId
+        {
+            get; set;
+        }
+
         public Guid Id
         {
             get; set;
         }
 
         public NumericalScalePrefixEnum NumericalScalePrefixId
+        {
+            get; set;
+        }
+
+        public NumericalScaleTypeCountry NumericalScaleTypeCountry
         {
             get; set;
         }
@@ -72,16 +82,6 @@
         }
 
         public UnitMeasurementTypeEnum UnitMeasurementTypeId
-        {
-            get; set;
-        }
-
-        public short CountryId
-        {
-            get; set;
-        }
-
-        public NumericalScaleTypeCountry NumericalScaleTypeCountry
         {
             get; set;
         }

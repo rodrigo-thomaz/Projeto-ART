@@ -2,8 +2,8 @@
 {
     using System;
 
-    using ART.Domotica.Enums.SI;
     using ART.Domotica.Enums;
+    using ART.Domotica.Enums.SI;
 
     public class SensorUnitMeasurementScaleGetModel
     {
@@ -15,6 +15,11 @@
         }
 
         public decimal ChartLimiterMin
+        {
+            get; set;
+        }
+
+        public short CountryId
         {
             get; set;
         }
@@ -39,6 +44,16 @@
             get; set;
         }
 
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
         public Guid SensorUnitMeasurementScaleId
         {
             get; set;
@@ -53,18 +68,6 @@
         {
             get; set;
         }
-
-        public SensorTypeEnum SensorTypeId
-        {
-            get; set;
-        }
-
-        public SensorDatasheetEnum SensorDatasheetId
-        {
-            get; set;
-        }
-
-        public short CountryId { get; set; }
 
         #endregion Properties
     }

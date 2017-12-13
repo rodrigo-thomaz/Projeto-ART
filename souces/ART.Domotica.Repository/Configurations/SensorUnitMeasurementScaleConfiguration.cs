@@ -117,7 +117,7 @@
             Property(x => x.ChartLimiterMin)
                 .HasColumnOrder(11)
                 .HasPrecision(7, 4)
-                .IsRequired();            
+                .IsRequired();
         }
 
         #endregion Constructors

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums.SI;
     using ART.Domotica.Repository.Entities.SI;
     using ART.Infra.CrossCutting.Repository;
 
@@ -11,6 +12,8 @@
         #region Methods
 
         Task<List<NumericalScaleTypeCountry>> GetAll();
+
+        Task<NumericalScaleTypeCountry> GetByKey(UnitMeasurementTypeEnum unitMeasurementTypeId, short countryId);
 
         #endregion Methods
     }
