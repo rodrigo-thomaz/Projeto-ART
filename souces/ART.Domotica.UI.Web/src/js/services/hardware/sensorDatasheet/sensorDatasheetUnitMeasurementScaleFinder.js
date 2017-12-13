@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorDatasheetContext', 'numericalScalePrefixFinder', 'unitMeasurementFinder',
-    function ($rootScope, sensorDatasheetContext, numericalScalePrefixFinder, unitMeasurementFinder) {
+app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorDatasheetContext', 'unitMeasurementFinder',
+    function ($rootScope, sensorDatasheetContext, unitMeasurementFinder) {
 
         var context = sensorDatasheetContext;
 
@@ -52,25 +52,12 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorD
             return result;
         }
 
-        var getNumericalScalePrefixes = function (sensorDatasheetId, sensorTypeId, numericalScaleTypeId) {
-            var result = [];
-            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
-                var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
-                if (sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId && sensorDatasheetUnitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
-                    var numericalScalePrefix = numericalScalePrefixFinder.getByKey(sensorDatasheetUnitMeasurementScale.numericalScalePrefixId);
-                    result.push(numericalScalePrefix);
-                }
-            }
-            return result;
-        }
-
         // *** Public Methods ***
 
         serviceFactory.getByKey = getByKey;
         serviceFactory.getBySensorDatasheetKey = getBySensorDatasheetKey;
         serviceFactory.getByUnitMeasurementScaleKey = getByUnitMeasurementScaleKey;
         serviceFactory.getUnitMeasurementsBySensorDatasheetKey = getUnitMeasurementsBySensorDatasheetKey;
-        serviceFactory.getNumericalScalePrefixes = getNumericalScalePrefixes;
 
         return serviceFactory;
 
