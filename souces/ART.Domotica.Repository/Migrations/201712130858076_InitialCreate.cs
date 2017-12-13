@@ -292,11 +292,11 @@ namespace ART.Domotica.Repository.Migrations
                         UnitMeasurementTypeId = c.Byte(nullable: false),
                         NumericalScalePrefixId = c.Int(nullable: false),
                         NumericalScaleTypeId = c.Byte(nullable: false),
+                        CountryId = c.Short(nullable: false),
                         RangeMax = c.Decimal(nullable: false, precision: 7, scale: 4),
                         RangeMin = c.Decimal(nullable: false, precision: 7, scale: 4),
                         ChartLimiterMax = c.Decimal(nullable: false, precision: 7, scale: 4),
                         ChartLimiterMin = c.Decimal(nullable: false, precision: 7, scale: 4),
-                        CountryId = c.Short(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Id, t.SensorDatasheetId, t.SensorTypeId })
                 .ForeignKey("SI.NumericalScaleTypeCountry", t => new { t.NumericalScaleTypeId, t.CountryId })
