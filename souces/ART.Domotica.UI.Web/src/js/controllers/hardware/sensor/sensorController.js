@@ -4,14 +4,17 @@ app.controller('sensorController', ['$scope', '$rootScope', '$timeout', '$log', 
 
         $scope.sensor = null;
 
+        $scope.$watch('sensor', function (newValue) {
+            if (newValue) {
+                $scope.sensorLabel = newValue.label;    
+                clearOnSetLabelCompleted = $rootScope.$on(sensorConstant.setLabelCompletedEventName + newValue.sensorId, onSetSensorLabelCompleted);
+            }
+        });
+
         $scope.sensorLabel = "";  
 
         $scope.init = function (sensor) {
-
             $scope.sensor = sensor;
-            $scope.sensorLabel = sensor.label;
-
-            clearOnSetLabelCompleted = $rootScope.$on(sensorConstant.setLabelCompletedEventName + $scope.sensor.sensorId, onSetSensorLabelCompleted);
         }
 
         $scope.changeSensorLabel = function () {

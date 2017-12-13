@@ -1,5 +1,5 @@
-﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'debounce', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext', 'sensorDatasheetUnitMeasurementScaleFinder', 'unitMeasurementFinder', 'unitMeasurementScaleFinder', 'countryFinder',
-    function ($scope, $rootScope, $timeout, $log, toaster, debounce, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext, sensorDatasheetUnitMeasurementScaleFinder, unitMeasurementFinder, unitMeasurementScaleFinder, countryFinder) {
+﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'debounce', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext', 'sensorDatasheetUnitMeasurementScaleFinder', 'unitMeasurementFinder', 'unitMeasurementScaleFinder', 'countryFinder', 'numericalScaleTypeCountryFinder',
+    function ($scope, $rootScope, $timeout, $log, toaster, debounce, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext, sensorDatasheetUnitMeasurementScaleFinder, unitMeasurementFinder, unitMeasurementScaleFinder, countryFinder, numericalScaleTypeCountryFinder) {
 
         $scope.sensorUnitMeasurementScale = null;
 
@@ -9,7 +9,16 @@
                 $scope.unitMeasurementView.availables = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementsBySensorDatasheetKey(newValue.sensorDatasheetId, newValue.sensorTypeId);
                 $scope.unitMeasurementView.selected = unitMeasurementFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId);
                 //country
-                $scope.countryView.selected = countryFinder.getByKey(newValue.countryId);
+                var country = countryFinder.getByKey(newValue.countryId);
+                $scope.countryView.availables = localeContext.country;
+                $scope.countryView.selected = country;
+                //numericalScaleType
+                var numericalScaleType = numericalScaleTypeCountryFinder.getByKey(newValue.numericalScaleTypeId, newValue.countryId);
+                $scope.numericalScaleTypeView.availables = country.numericalScaleTypeCountries();
+                $scope.numericalScaleTypeView.selected = numericalScaleType;
+
+                //watches
+                initializeWatches();
             }
         });
 
@@ -30,15 +39,15 @@
             }
 
             //clearOnSetValueCompleted = $rootScope.$on('sensorUnitMeasurementScaleService_SetValueCompleted_Id_' + sensor.sensorUnitMeasurementScale.id, onSetValueCompleted);
-        };               
+        };
 
         $scope.unitMeasurementView = {
             availables: [],
             selected: null,
-        };    
+        };
 
         $scope.countryView = {
-            availables: localeContext.country,
+            availables: [],
             selected: null,
         };
 
@@ -50,26 +59,34 @@
         $scope.unitMeasurementScaleView = {
             availables: [],
             selected: null,
-        };                 
+        };
 
-        $scope.$watch('unitMeasurementView.selected', function (newValue) {
-            applyUnitMeasurementScaleView();
-            changeUnitMeasurementScale();
-        });  
+        var initializeWatches = function () {
 
-        $scope.$watch('countryView.selected', function (newValue) {
-            applyNumericalScaleTypeView();
-            changeUnitMeasurementScale();
-        });           
+            $scope.$watch('unitMeasurementView.selected', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                applyUnitMeasurementScaleView();
+                changeUnitMeasurementScale();
+            });
 
-        $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
-            applyUnitMeasurementScaleView();
-            changeUnitMeasurementScale();
-        });    
+            $scope.$watch('countryView.selected', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                applyNumericalScaleTypeView();
+                changeUnitMeasurementScale();
+            });
 
-        $scope.$watch('unitMeasurementScaleView.selected', function (newValue) {
-            changeUnitMeasurementScale();
-        }); 
+            $scope.$watch('numericalScaleTypeView.selected', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                applyUnitMeasurementScaleView();
+                changeUnitMeasurementScale();
+            });
+
+            $scope.$watch('unitMeasurementScaleView.selected', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                changeUnitMeasurementScale();
+            });
+
+        };
 
         var applyNumericalScaleTypeView = function () {
 
@@ -128,7 +145,7 @@
             if (unitMeasurement && country && numericalScaleType && unitMeasurementScale) {
                 alert('change!');
             }
-            
+
         });
 
         var setSelectedSensorDatasheetUnitMeasurementScale = function () {
