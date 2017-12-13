@@ -1,60 +1,77 @@
 ﻿'use strict';
-app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorDatasheetContext', 'numericalScalePrefixFinder', function ($rootScope, sensorDatasheetContext, numericalScalePrefixFinder) {
+app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorDatasheetContext', 'numericalScalePrefixFinder', 'unitMeasurementFinder',
+    function ($rootScope, sensorDatasheetContext, numericalScalePrefixFinder, unitMeasurementFinder) {
 
-    var context = sensorDatasheetContext;
+        var context = sensorDatasheetContext;
 
-    var serviceFactory = {};     
+        var serviceFactory = {};
 
-    var getByKey = function (sensorDatasheetId, sensorTypeId, unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
-        for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
-            var item = context.sensorDatasheetUnitMeasurementScale[i];
-            if (item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId && item.unitMeasurementId === unitMeasurementId && item.unitMeasurementTypeId === unitMeasurementTypeId && item.numericalScalePrefixId === numericalScalePrefixId && item.numericalScaleTypeId === numericalScaleTypeId) {
-                return item;
+        var getByKey = function (sensorDatasheetId, sensorTypeId, unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
+            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
+                var item = context.sensorDatasheetUnitMeasurementScale[i];
+                if (item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId && item.unitMeasurementId === unitMeasurementId && item.unitMeasurementTypeId === unitMeasurementTypeId && item.numericalScalePrefixId === numericalScalePrefixId && item.numericalScaleTypeId === numericalScaleTypeId) {
+                    return item;
+                }
             }
-        }
-    };  
+        };
 
-    var getBySensorDatasheetKey = function (sensorDatasheetId, sensorTypeId) {
-        var result = [];
-        for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
-            var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
-            if (sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId) {
-                result.push(sensorDatasheetUnitMeasurementScale);
+        var getBySensorDatasheetKey = function (sensorDatasheetId, sensorTypeId) {
+            var result = [];
+            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
+                var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
+                if (sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId) {
+                    result.push(sensorDatasheetUnitMeasurementScale);
+                }
             }
-        }
-        return result;
-    }; 
+            return result;
+        };
 
-    var getByUnitMeasurementScaleKey = function (unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
-        var result = [];
-        for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
-            var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
-            if (sensorDatasheetUnitMeasurementScale.unitMeasurementId === unitMeasurementId && sensorDatasheetUnitMeasurementScale.unitMeasurementTypeId === unitMeasurementTypeId && sensorDatasheetUnitMeasurementScale.numericalScalePrefixId === numericalScalePrefixId && sensorDatasheetUnitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
-                result.push(sensorDatasheetUnitMeasurementScale);
+        var getByUnitMeasurementScaleKey = function (unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
+            var result = [];
+            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
+                var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
+                if (sensorDatasheetUnitMeasurementScale.unitMeasurementId === unitMeasurementId && sensorDatasheetUnitMeasurementScale.unitMeasurementTypeId === unitMeasurementTypeId && sensorDatasheetUnitMeasurementScale.numericalScalePrefixId === numericalScalePrefixId && sensorDatasheetUnitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
+                    result.push(sensorDatasheetUnitMeasurementScale);
+                }
             }
-        }
-        return result;
-    }; 
+            return result;
+        };
 
-    var getNumericalScalePrefixes = function (sensorDatasheetId, sensorTypeId, numericalScaleTypeId) {
-        var result = [];
-        for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
-            var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
-            if (sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId && sensorDatasheetUnitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
-                var numericalScalePrefix = numericalScalePrefixFinder.getByKey(sensorDatasheetUnitMeasurementScale.numericalScalePrefixId);
-                result.push(numericalScalePrefix);
+        var getUnitMeasurementsBySensorDatasheetKey = function (sensorDatasheetId, sensorTypeId) {
+            var result = [];
+            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
+                var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
+                if (sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId) {
+                    var unitMeasurement = unitMeasurementFinder.getByKey(sensorDatasheetUnitMeasurementScale.unitMeasurementId, sensorDatasheetUnitMeasurementScale.unitMeasurementTypeId);
+                    for (var j = 0; j < result.length; j++) {
+                        if (result[j] === unitMeasurement) break;
+                    }
+                    result.push(unitMeasurement);
+                }
             }
+            return result;
         }
-        return result;
-    }
 
-    // *** Public Methods ***
-        
-    serviceFactory.getByKey = getByKey;
-    serviceFactory.getBySensorDatasheetKey = getBySensorDatasheetKey;
-    serviceFactory.getByUnitMeasurementScaleKey = getByUnitMeasurementScaleKey;
-    serviceFactory.getNumericalScalePrefixes = getNumericalScalePrefixes;
+        var getNumericalScalePrefixes = function (sensorDatasheetId, sensorTypeId, numericalScaleTypeId) {
+            var result = [];
+            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
+                var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
+                if (sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId && sensorDatasheetUnitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
+                    var numericalScalePrefix = numericalScalePrefixFinder.getByKey(sensorDatasheetUnitMeasurementScale.numericalScalePrefixId);
+                    result.push(numericalScalePrefix);
+                }
+            }
+            return result;
+        }
 
-    return serviceFactory;
+        // *** Public Methods ***
 
-}]);
+        serviceFactory.getByKey = getByKey;
+        serviceFactory.getBySensorDatasheetKey = getBySensorDatasheetKey;
+        serviceFactory.getByUnitMeasurementScaleKey = getByUnitMeasurementScaleKey;
+        serviceFactory.getUnitMeasurementsBySensorDatasheetKey = getUnitMeasurementsBySensorDatasheetKey;
+        serviceFactory.getNumericalScalePrefixes = getNumericalScalePrefixes;
+
+        return serviceFactory;
+
+    }]);

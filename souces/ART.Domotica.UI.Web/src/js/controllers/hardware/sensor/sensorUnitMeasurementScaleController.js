@@ -3,6 +3,12 @@
 
         $scope.sensorUnitMeasurementScale = null;
 
+        $scope.$watch('sensorUnitMeasurementScale', function (newValue) {
+            if (newValue) {
+                $scope.unitMeasurementView.availables = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementsBySensorDatasheetKey(newValue.sensorDatasheetId, newValue.sensorTypeId);
+            }
+        });
+
         $scope.init = function (sensorUnitMeasurementScale) {
 
             $scope.sensorUnitMeasurementScale = sensorUnitMeasurementScale;
@@ -32,15 +38,15 @@
             selected: null,
         };
 
-        $scope.numericalScalePrefixView = {
-            availables: [],
-            selected: null,
-        };
-
         $scope.unitMeasurementView = {
             availables: [],
             selected: null,
         };
+
+        $scope.numericalScalePrefixView = {
+            availables: [],
+            selected: null,
+        };        
 
         $scope.$watch('countryView.selected', function (newValue) {
             if (newValue) {
@@ -50,17 +56,15 @@
 
         $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
             if (newValue) {
+                //numericalScalePrefixes
                 var numericalScalePrefixes = sensorDatasheetUnitMeasurementScaleFinder.getNumericalScalePrefixes($scope.sensorUnitMeasurementScale.sensorDatasheetId, $scope.sensorUnitMeasurementScale.sensorTypeId, newValue.numericalScaleTypeId);
                 $scope.numericalScalePrefixView.availables = numericalScalePrefixes;
+                //unitMeasurementScales
+                var unitMeasurementScales = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementScales($scope.sensorUnitMeasurementScale.sensorDatasheetId, $scope.sensorUnitMeasurementScale.sensorTypeId, newValue.numericalScaleTypeId);
+                $scope.unitMeasurementView.availables = newValue.unitMeasurementScales();
             }
         });
-
-        $scope.$watch('numericalScalePrefixView.selected', function (newValue) {
-            if (newValue) {                
-                //$scope.unitMeasurementView.availables = newValue.unitMeasurementScales();
-            }
-        });
-
+                
         var setSelectedSensorDatasheetUnitMeasurementScale = function () {
             //$scope.sensorDatasheetUnitMeasurementScaleView.selected = $scope.sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale();
         };
