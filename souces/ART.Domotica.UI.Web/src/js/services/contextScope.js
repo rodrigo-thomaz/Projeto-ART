@@ -45,6 +45,21 @@ app.factory('contextScope', [
     'sensorDatasheetUnitMeasurementScaleService',
     'sensorTypeService',
 
+    'sensorContext',
+
+    'sensorFinder',
+    'sensorUnitMeasurementScaleFinder',
+    'sensorTriggerFinder',
+    'sensorTempDSFamilyResolutionFinder',
+    'sensorTempDSFamilyFinder',
+
+    'sensorMapper',
+    'sensorTempDSFamilyResolutionService',
+    'sensorTempDSFamilyService',
+    'sensorUnitMeasurementScaleService',
+    'sensorTriggerService',
+    'sensorService',
+
     'deviceContext',
 
     'deviceSensorsFinder',
@@ -57,21 +72,6 @@ app.factory('contextScope', [
     'deviceNTPService',
     'sensorInDeviceService',
     'deviceService',
-
-    'sensorContext',    
-
-    'sensorFinder',
-    'sensorUnitMeasurementScaleFinder',
-    'sensorTriggerFinder',
-    'sensorTempDSFamilyResolutionFinder',
-    'sensorTempDSFamilyFinder', 
-
-    'sensorMapper',
-    'sensorTempDSFamilyResolutionService',
-    'sensorTempDSFamilyService',
-    'sensorUnitMeasurementScaleService',
-    'sensorTriggerService',
-    'sensorService',
 
     function (
 
@@ -119,6 +119,21 @@ app.factory('contextScope', [
         sensorDatasheetUnitMeasurementScaleService,
         sensorTypeService,
 
+        sensorContext,
+
+        sensorFinder,
+        sensorUnitMeasurementScaleFinder,
+        sensorTriggerFinder,
+        sensorTempDSFamilyResolutionFinder,
+        sensorTempDSFamilyFinder,
+
+        sensorMapper,
+        sensorTempDSFamilyResolutionService,
+        sensorTempDSFamilyService,
+        sensorUnitMeasurementScaleService,
+        sensorTriggerService,
+        sensorService,
+
         deviceContext,
 
         deviceSensorsFinder,
@@ -130,22 +145,8 @@ app.factory('contextScope', [
         deviceSensorsService,
         deviceNTPService,
         sensorInDeviceService,
-        deviceService,
-
-        sensorContext,        
-
-        sensorFinder,
-        sensorUnitMeasurementScaleFinder,
-        sensorTriggerFinder,
-        sensorTempDSFamilyResolutionFinder,
-        sensorTempDSFamilyFinder, 
-
-        sensorMapper,
-        sensorTempDSFamilyResolutionService,
-        sensorTempDSFamilyService,
-        sensorUnitMeasurementScaleService,
-        sensorTriggerService,
-        sensorService
+        deviceService
+        
     ) {
 
         var result = {};
