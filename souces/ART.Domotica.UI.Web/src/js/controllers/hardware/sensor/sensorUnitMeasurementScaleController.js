@@ -51,6 +51,12 @@
         $scope.$watch('countryView.selected', function (newValue) {
             if (newValue) {
                 $scope.numericalScaleTypeView.availables = newValue.numericalScaleTypeCountries();
+                if ($scope.numericalScaleTypeView.availables.length == 1) {
+                    $scope.numericalScaleTypeView.selected = $scope.numericalScaleTypeView.availables[0];
+                }
+                else {
+                    $scope.numericalScaleTypeView.selected = null;
+                }                
             }
         });           
 
