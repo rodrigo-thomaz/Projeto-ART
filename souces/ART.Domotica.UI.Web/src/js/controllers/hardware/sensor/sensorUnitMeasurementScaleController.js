@@ -49,15 +49,22 @@
         };                 
 
         $scope.$watch('countryView.selected', function (newValue) {
+
+            var selectNumericalScaleType = $scope.form.selectNumericalScaleType;
+            var selectedNumericalScaleType = null;
+
             if (newValue) {
                 $scope.numericalScaleTypeView.availables = newValue.numericalScaleTypeCountries();
                 if ($scope.numericalScaleTypeView.availables.length == 1) {
-                    $scope.numericalScaleTypeView.selected = $scope.numericalScaleTypeView.availables[0];
-                }
-                else {
-                    $scope.numericalScaleTypeView.selected = null;
+                    selectedNumericalScaleType = $scope.numericalScaleTypeView.availables[0];
                 }                
             }
+
+            $scope.numericalScaleTypeView.selected = selectedNumericalScaleType;
+
+            selectNumericalScaleType.$setViewValue(selectedNumericalScaleType);
+            selectNumericalScaleType.$commitViewValue();
+            selectNumericalScaleType.$render();
         });           
 
         $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
@@ -78,11 +85,10 @@
             }
 
             $scope.unitMeasurementScaleView.selected = selectedUnitMeasurementScale;
+
             selectUnitMeasurementScale.$setViewValue(selectedUnitMeasurementScale);
             selectUnitMeasurementScale.$commitViewValue();
             selectUnitMeasurementScale.$render();
-
-            var teste = $scope.unitMeasurementScaleView.selected;
         });    
 
         var setSelectedSensorDatasheetUnitMeasurementScale = function () {
