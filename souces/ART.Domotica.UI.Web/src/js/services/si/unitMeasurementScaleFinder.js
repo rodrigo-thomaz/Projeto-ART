@@ -36,11 +36,24 @@ app.factory('unitMeasurementScaleFinder', ['$rootScope', 'siContext', function (
         return result;
     }  
 
+    var getUnitMeasurementScalePrefixes = function (unitMeasurementId, unitMeasurementTypeId, numericalScaleTypeId) {
+        var result = [];
+        for (var i = 0; i < context.unitMeasurementScale.length; i++) {
+            var unitMeasurementScale = context.unitMeasurementScale[i];
+            if (unitMeasurementScale.unitMeasurementId === unitMeasurementId && unitMeasurementScale.unitMeasurementTypeId === unitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
+                result.push(context.unitMeasurementScale[i]);
+            }
+        }
+        return result;
+    } 
+
+
     // *** Public Methods ***
 
     serviceFactory.getByKey = getByKey;
     serviceFactory.getByNumericalScaleKey = getByNumericalScaleKey;
     serviceFactory.getByUnitMeasurementKey = getByUnitMeasurementKey;
+    serviceFactory.getUnitMeasurementScalePrefixes = getUnitMeasurementScalePrefixes;
 
     return serviceFactory;
 

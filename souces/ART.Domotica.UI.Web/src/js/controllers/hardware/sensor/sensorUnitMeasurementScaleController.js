@@ -46,21 +46,22 @@
         $scope.unitMeasurementScaleView = {
             availables: [],
             selected: null,
-        };        
-
-        $scope.$watch('unitMeasurementView.selected', function (newValue) {
-            if (newValue) {
-                var unitMeasurementScales = unitMeasurementScaleFinder.getByUnitMeasurementKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId);
-                $scope.unitMeasurementScaleView.availables = unitMeasurementScales;
-            }
-        });     
+        };                 
 
         $scope.$watch('countryView.selected', function (newValue) {
             if (newValue) {
                 $scope.numericalScaleTypeView.availables = newValue.numericalScaleTypeCountries();
             }
         });           
-                
+
+        $scope.$watch('numericalScaleTypeView.selected', function (newValue) {
+            if (newValue) {
+                var unitMeasurement = $scope.unitMeasurementView.selected;
+                var unitMeasurementScales = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, newValue.numericalScaleTypeId);
+                $scope.unitMeasurementScaleView.availables = unitMeasurementScales;
+            }
+        });    
+
         var setSelectedSensorDatasheetUnitMeasurementScale = function () {
             //$scope.sensorDatasheetUnitMeasurementScaleView.selected = $scope.sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale();
         };
