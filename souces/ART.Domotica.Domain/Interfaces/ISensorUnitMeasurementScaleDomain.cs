@@ -13,7 +13,7 @@
 
         Task<SensorUnitMeasurementScale> SetUnitMeasurementNumericalScaleTypeCountry(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, UnitMeasurementEnum unitMeasurementId, UnitMeasurementTypeEnum unitMeasurementTypeId, NumericalScalePrefixEnum numericalScalePrefixId, NumericalScaleTypeEnum numericalScaleTypeId, short countryId);
 
-        Task<SensorUnitMeasurementScale> SetValue(Guid sensorUnitMeasurementScaleId, SensorUnitMeasurementScalePositionEnum position, decimal value);
+        Task<SensorUnitMeasurementScale> SetValue(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal value);
 
         #endregion Methods
     }

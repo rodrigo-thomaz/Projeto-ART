@@ -38,9 +38,9 @@
 
         #endregion Constructors
 
-        public async Task<SensorUnitMeasurementScale> SetValue(Guid sensorUnitMeasurementScaleId, SensorUnitMeasurementScalePositionEnum position, decimal value)
+        public async Task<SensorUnitMeasurementScale> SetValue(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal value)
         {
-            var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId);
+            var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {
@@ -73,7 +73,7 @@
                 throw new Exception("NumericalScaleTypeCountry not found");
             }
 
-            var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId);
+            var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {

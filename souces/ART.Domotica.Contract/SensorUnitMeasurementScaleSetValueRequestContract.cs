@@ -13,6 +13,16 @@
             get; set;
         }
 
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
         public Guid SensorUnitMeasurementScaleId
         {
             get; set;

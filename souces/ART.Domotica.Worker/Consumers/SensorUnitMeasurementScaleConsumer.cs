@@ -78,7 +78,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract>>(e.Body);
             var sensorUnitMeasurementScaleDomain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
-            await sensorUnitMeasurementScaleDomain.SetValue(message.Contract.SensorUnitMeasurementScaleId, message.Contract.Position, message.Contract.Value);
+            await sensorUnitMeasurementScaleDomain.SetValue(message.Contract.SensorUnitMeasurementScaleId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.Value);
 
             var exchange = "amq.topic";
 
