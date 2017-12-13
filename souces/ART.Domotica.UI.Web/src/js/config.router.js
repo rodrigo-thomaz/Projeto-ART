@@ -76,6 +76,7 @@ angular.module('app')
                       'js/services/si/numericalScaleFinder.js',
                       'js/services/si/numericalScalePrefixFinder.js',
                       'js/services/si/numericalScaleTypeFinder.js',
+                      'js/services/si/numericalScaleTypeCountryFinder.js',
 
                       'js/services/si/unitMeasurementScaleFinder.js',
                       'js/services/si/unitMeasurementTypeFinder.js',
@@ -197,6 +198,7 @@ angular.module('app')
                       'js/services/si/numericalScaleFinder.js',
                       'js/services/si/numericalScalePrefixFinder.js',
                       'js/services/si/numericalScaleTypeFinder.js',
+                      'js/services/si/numericalScaleTypeCountryFinder.js',
 
                       'js/services/si/unitMeasurementScaleFinder.js',
                       'js/services/si/unitMeasurementTypeFinder.js',

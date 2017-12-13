@@ -270,6 +270,7 @@
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorTypeService.js" />
     <Content Include="src\js\services\hardware\sensor\sensorService.js" />
     <Content Include="src\js\services\application\applicationContext.js" />
+    <Content Include="src\js\services\si\numericalScaleTypeCountryFinder.js" />
     <Content Include="src\js\services\si\siConstants.js" />
     <Content Include="src\js\services\si\siContext.js" />
     <Content Include="src\js\services\si\numericalScalePrefixFinder.js" />
