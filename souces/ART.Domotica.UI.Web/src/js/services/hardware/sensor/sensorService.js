@@ -37,9 +37,11 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
             });
         };
 
-        var setLabel = function (sensorId, label) {
+        var setLabel = function (sensorId, sensorDatasheetId, sensorTypeId, label) {
             var data = {
                 sensorId: sensorId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,
                 label: label,
             }
             return $http.post(serviceBase + sensorConstant.setLabelApiUri, data).then(function (results) {

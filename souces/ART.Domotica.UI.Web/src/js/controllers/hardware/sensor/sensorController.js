@@ -16,7 +16,7 @@ app.controller('sensorController', ['$scope', '$rootScope', '$timeout', '$log', 
 
         $scope.changeSensorLabel = function () {
             if (!$scope.sensor || !$scope.sensorLabel) return;
-            sensorService.setLabel($scope.sensor.sensorId, $scope.sensorLabel);
+            sensorService.setLabel($scope.sensor.sensorId, $scope.sensor.sensorDatasheetId, $scope.sensor.sensorTypeId, $scope.sensorLabel);
         };
 
         var clearOnSetLabelCompleted = null;
