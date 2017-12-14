@@ -27,6 +27,7 @@
                 //watches
                 initializeWatches();
 
+                clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetUnitMeasurementNumericalScaleTypeCountryCompleted);
                 //clearOnSetValueCompleted = $rootScope.$on('sensorUnitMeasurementScaleService_SetValueCompleted_Id_' + sensor.sensorUnitMeasurementScale.id, onSetValueCompleted);
             }
         });
@@ -156,11 +157,19 @@
 
         });
 
+        var clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted = null;
         //var clearOnSetValueCompleted = null;
 
         $scope.$on('$destroy', function () {
+            clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted();
             //clearOnSetValueCompleted();
         });
+
+        var onSetUnitMeasurementNumericalScaleTypeCountryCompleted = function (event, data) {
+            //$scope.sensorLabel = data.label;
+            $scope.$apply();
+            toaster.pop('success', 'Sucesso', 'UnitMeasurementNumericalScaleTypeCountry alterado');
+        };
 
         //$scope.changeValue = function (position, value) {
         //    if (!initialized || value === undefined) return;
