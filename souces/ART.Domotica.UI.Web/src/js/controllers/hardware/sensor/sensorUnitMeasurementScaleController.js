@@ -10,8 +10,15 @@
 
                 initializeSelectedWatches();
 
+                $scope.rangeMaxView = newValue.rangeMax;
+                $scope.rangeMinView = newValue.rangeMin;
+
+                $scope.chartLimiterMaxView = newValue.chartLimiterMax;
+                $scope.chartLimiterMinView = newValue.chartLimiterMin;
+
                 clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetUnitMeasurementNumericalScaleTypeCountryCompleted);
-                //clearOnSetValueCompleted = $rootScope.$on('sensorUnitMeasurementScaleService_SetValueCompleted_Id_' + sensor.sensorUnitMeasurementScale.id, onSetValueCompleted);
+                clearOnSetRangeCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setRangeCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetRangeCompleted);
+                clearOnSetChartLimiterCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setChartLimiterCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetChartLimiterCompleted);
             }
         });        
 
@@ -38,6 +45,12 @@
             availables: [],
             selected: null,
         };
+
+        $scope.rangeMaxView = null;
+        $scope.rangeMaxView = null;
+
+        $scope.chartLimiterMaxView = null;
+        $scope.chartLimiterMaxView = null;
 
         var unitMeasurementViewSelectedWatch = null;
         var countryViewSelectedWatch = null;
@@ -176,11 +189,13 @@
         });
 
         var clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted = null;
-        //var clearOnSetValueCompleted = null;
+        var clearOnSetRangeCompleted = null;
+        var clearOnSetChartLimiterCompleted = null;
 
         $scope.$on('$destroy', function () {
             clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted();
-            //clearOnSetValueCompleted();
+            clearOnSetRangeCompleted();
+            clearOnSetChartLimiterCompleted();
         });
 
         var onSetUnitMeasurementNumericalScaleTypeCountryCompleted = function (event, data) {

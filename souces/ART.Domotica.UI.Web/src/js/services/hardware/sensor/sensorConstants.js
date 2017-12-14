@@ -38,9 +38,13 @@ app.constant('sensorUnitMeasurementScaleConstant', {
     setUnitMeasurementNumericalScaleTypeCountryCompletedTopic: 'SensorUnitMeasurementScale.SetUnitMeasurementNumericalScaleTypeCountryViewCompleted',
     setUnitMeasurementNumericalScaleTypeCountryCompletedEventName: 'sensorUnitMeasurementScaleService.SetUnitMeasurementNumericalScaleTypeCountryCompleted_Id_',
 
-    setValueApiUri: 'api/sensorUnitMeasurementScale/setValue',
-    setValueCompletedTopic: 'SensorUnitMeasurementScale.SetValueViewCompleted',
-    setValueCompletedEventName: 'sensorUnitMeasurementScaleService.SetValueCompleted_Id_',
+    setRangeApiUri: 'api/sensorUnitMeasurementScale/setRange',
+    setRangeCompletedTopic: 'SensorUnitMeasurementScale.SetRangeViewCompleted',
+    setRangeCompletedEventName: 'sensorUnitMeasurementScaleService.SetRangeCompleted_Id_',
+
+    setChartLimiterApiUri: 'api/sensorUnitMeasurementScale/setChartLimiter',
+    setChartLimiterCompletedTopic: 'SensorUnitMeasurementScale.SetChartLimiterViewCompleted',
+    setChartLimiterCompletedEventName: 'sensorUnitMeasurementScaleService.SetChartLimiterCompleted_Id_',
 
 });
 
