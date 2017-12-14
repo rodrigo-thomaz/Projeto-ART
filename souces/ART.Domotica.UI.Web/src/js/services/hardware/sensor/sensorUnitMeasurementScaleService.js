@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleConstant', 'sensorTempDSFamilyFinder',
-    function ($http, $log, $rootScope, ngAuthSettings, stompService, unitMeasurementConverter, sensorUnitMeasurementScaleConstant, sensorTempDSFamilyFinder) {
+app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorContext', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleConstant', 'sensorUnitMeasurementScaleFinder', 'sensorTempDSFamilyFinder',
+    function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorContext, unitMeasurementConverter, sensorUnitMeasurementScaleConstant, sensorUnitMeasurementScaleFinder, sensorTempDSFamilyFinder) {
 
         var serviceFactory = {};
 
@@ -42,17 +42,17 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
         };        
 
         var onSetUnitMeasurementNumericalScaleTypeCountryCompleted = function (payload) {
-            //var result = JSON.parse(payload.body);
-            //var sensor = sensorTempDSFamilyFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
-            //if (result.position === 'Max') {
-            //    sensor.sensorUnitMeasurementScale.max = result.value;
-            //    sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
-            //}
-            //else if (result.position === 'Min') {
-            //    sensor.sensorUnitMeasurementScale.min = result.value;
-            //    sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
-            //}
-            //$rootScope.$emit(sensorUnitMeasurementScaleConstant.setValueCompletedEventName + result.sensorUnitMeasurementScaleId, result);
+            var result = JSON.parse(payload.body);
+            var sensor = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
+
+            sensor.unitMeasurementId = result.unitMeasurementId;
+            sensor.unitMeasurementTypeId = result.unitMeasurementTypeId;
+            sensor.numericalScalePrefixId = result.numericalScalePrefixId;
+            sensor.numericalScaleTypeId = result.numericalScaleTypeId;
+            sensor.countryId = result.countryId;
+
+            sensorContext.$digest();
+            $rootScope.$emit(sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryCompletedEventName + result.sensorUnitMeasurementScaleId, result);
         }
 
         var onSetValueCompleted = function (payload) {
