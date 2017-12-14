@@ -77,11 +77,9 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
             var sensorUnitMeasurementScale = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
             if (result.position === 'Max') {
                 sensorUnitMeasurementScale.rangeMax = result.value;
-                //sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
             }
             else if (result.position === 'Min') {
                 sensorUnitMeasurementScale.rangeMin = result.value;
-                //sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
             }
             sensorContext.$digest();
             $rootScope.$emit(sensorUnitMeasurementScaleConstant.setRangeCompletedEventName + result.sensorUnitMeasurementScaleId, result);
@@ -92,38 +90,13 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
             var sensorUnitMeasurementScale = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
             if (result.position === 'Max') {
                 sensorUnitMeasurementScale.chartLimiterMax = result.value;
-                //sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
             }
             else if (result.position === 'Min') {
                 sensorUnitMeasurementScale.chartLimiterMin = result.value;
-                //sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
             }
             sensorContext.$digest();
             $rootScope.$emit(sensorUnitMeasurementScaleConstant.setChartLimiterCompletedEventName + result.sensorUnitMeasurementScaleId, result);
         }
-
-        //var onSetSensorUnitMeasurementScaleCompleted = function (payload) {
-
-        //    var result = JSON.parse(payload.body);
-        //    var sensor = getByKey(result.deviceId, result.sensorTempDSFamilyId);
-
-        //    //unitMeasurement
-        //    sensor.unitMeasurementId = result.unitMeasurementId;
-        //    sensor.unitMeasurement = unitMeasurementService.getByKey(sensor.unitMeasurementId);
-
-        //    //temp
-        //    sensor.tempConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.tempCelsius);
-
-        //    //sensorUnitMeasurementScale
-        //    sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
-        //    sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
-
-        //    //alarms
-        //    sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
-        //    sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
-
-        //    $rootScope.$emit(sensorConstant.setSensorUnitMeasurementScaleCompletedEventName + result.sensorTempDSFamilyId, result);
-        //}    
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();

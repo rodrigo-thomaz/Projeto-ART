@@ -304,20 +304,4 @@
             }
         };
 
-        //$scope.changeValue = function (position, value) {
-        //    if (!initialized || value === undefined) return;
-        //    var valueConverted = unitMeasurementConverter.convertToCelsius($scope.sensor.unitMeasurementId, value);
-        //    sensorUnitMeasurementScaleService.setValue($scope.sensor.sensorUnitMeasurementScale.id, valueConverted, position);
-        //};
-
-        //$scope.$watch('sensor.sensorUnitMeasurementScale.maxConverted', function (newValue, oldValue) {
-        //    $scope.maxView = $scope.sensor.sensorUnitMeasurementScale.maxConverted;
-        //});
-
-        //$scope.$watch('sensor.sensorUnitMeasurementScale.minConverted', function (newValue, oldValue) {
-        //    $scope.minView = $scope.sensor.sensorUnitMeasurementScale.minConverted
-        //});
-
-        
-
     }]);
