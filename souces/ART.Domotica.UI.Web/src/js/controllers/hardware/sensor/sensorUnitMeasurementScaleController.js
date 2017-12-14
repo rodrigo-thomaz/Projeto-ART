@@ -206,6 +206,24 @@
             toaster.pop('success', 'Sucesso', 'UnitMeasurementNumericalScaleTypeCountry alterado');
         };
 
+        var onSetRangeCompleted = function (event, data) {
+            if (data.position === 'Max') {
+                toaster.pop('success', 'Sucesso', 'Range alto alterado');
+            }
+            else if (data.position === 'Min') {
+                toaster.pop('success', 'Sucesso', 'Range baixo alterado');
+            }
+        };
+
+        var onSetChartLimiterCompleted = function (event, data) {
+            if (data.position === 'Max') {
+                toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
+            }
+            else if (data.position === 'Min') {
+                toaster.pop('success', 'Sucesso', 'Limite baixo do gráfico alterado');
+            }
+        };
+
         //$scope.changeValue = function (position, value) {
         //    if (!initialized || value === undefined) return;
         //    var valueConverted = unitMeasurementConverter.convertToCelsius($scope.sensor.unitMeasurementId, value);
@@ -220,13 +238,6 @@
         //    $scope.minView = $scope.sensor.sensorUnitMeasurementScale.minConverted
         //});
 
-        //var onSetValueCompleted = function (event, data) {
-        //    if (data.position === 'Max') {
-        //        toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
-        //    }
-        //    else if (data.position === 'Min') {
-        //        toaster.pop('success', 'Sucesso', 'Limite baixo do gráfico alterado');
-        //    }
-        //};
+        
 
     }]);
