@@ -22,12 +22,21 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids          
 
-        public async Task SetValue(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract> message)
+        public async Task SetRange(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.SetValueQueueName, null, payload);
+                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.SetRangeQueueName, null, payload);
+            });
+        }
+
+        public async Task SetChartLimiter(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName, null, payload);
             });
         }
 
@@ -47,7 +56,14 @@ namespace ART.Domotica.Producer.Services
         private void Initialize()
         {
             _model.QueueDeclare(
-                 queue: SensorUnitMeasurementScaleConstants.SetValueQueueName
+                 queue: SensorUnitMeasurementScaleConstants.SetRangeQueueName
+               , durable: true
+               , exclusive: false
+               , autoDelete: false
+               , arguments: null);
+
+            _model.QueueDeclare(
+                 queue: SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName
                , durable: true
                , exclusive: false
                , autoDelete: false

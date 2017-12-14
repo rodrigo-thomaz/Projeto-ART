@@ -8,12 +8,17 @@
     {
         #region Properties
 
-        public Guid DeviceId
+        public SensorUnitMeasurementScalePositionEnum Position
         {
             get; set;
         }
 
-        public SensorUnitMeasurementScalePositionEnum Position
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }

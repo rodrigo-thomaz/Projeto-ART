@@ -38,7 +38,26 @@
 
         #endregion Constructors
 
-        public async Task<SensorUnitMeasurementScale> SetValue(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal value)
+        public async Task<SensorUnitMeasurementScale> SetRange(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal value)
+        {
+            var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId);
+
+            if (entity == null)
+            {
+                throw new Exception("SensorUnitMeasurementScale not found");
+            }
+
+            if (position == SensorUnitMeasurementScalePositionEnum.Max)
+                entity.RangeMax = value;
+            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
+                entity.RangeMin = value;
+
+            await _sensorUnitMeasurementScaleRepository.Update(entity);
+
+            return entity;
+        }
+
+        public async Task<SensorUnitMeasurementScale> SetChartLimiter(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal value)
         {
             var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId);
 

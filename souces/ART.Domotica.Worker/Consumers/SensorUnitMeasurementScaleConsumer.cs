@@ -21,7 +21,8 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _setValueConsumer;
+        private readonly EventingBasicConsumer _setRangeConsumer;
+        private readonly EventingBasicConsumer _setChartLimiterConsumer;
         private readonly EventingBasicConsumer _setUnitMeasurementNumericalScaleTypeCountryConsumer;
 
         private readonly IComponentContext _componentContext;
@@ -34,7 +35,8 @@ namespace ART.Domotica.Worker.Consumers
 
         public SensorUnitMeasurementScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
-            _setValueConsumer = new EventingBasicConsumer(_model);
+            _setRangeConsumer = new EventingBasicConsumer(_model);
+            _setChartLimiterConsumer = new EventingBasicConsumer(_model);
             _setUnitMeasurementNumericalScaleTypeCountryConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
@@ -58,7 +60,14 @@ namespace ART.Domotica.Worker.Consumers
                , arguments: null);           
 
             _model.QueueDeclare(
-                  queue: SensorUnitMeasurementScaleConstants.SetValueQueueName
+                  queue: SensorUnitMeasurementScaleConstants.SetRangeQueueName
+                , durable: true
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueDeclare(
+                  queue: SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
@@ -71,26 +80,28 @@ namespace ART.Domotica.Worker.Consumers
                , autoDelete: false
                , arguments: null);
 
-            _setValueConsumer.Received += SetValueReceived;
+            _setRangeConsumer.Received += SetRangeReceived;
+            _setChartLimiterConsumer.Received += SetChartLimiterReceived;
             _setUnitMeasurementNumericalScaleTypeCountryConsumer.Received += SetUnitMeasurementNumericalScaleTypeCountryReceived;
 
-            _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetValueQueueName, false, _setValueConsumer);
+            _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetRangeQueueName, false, _setRangeConsumer);
+            _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName, false, _setChartLimiterConsumer);
             _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName, false, _setUnitMeasurementNumericalScaleTypeCountryConsumer);
         }
 
-        public void SetValueReceived(object sender, BasicDeliverEventArgs e)
+        public void SetRangeReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetValueReceivedAsync(sender, e));
+            Task.WaitAll(SetRangeReceivedAsync(sender, e));
         }
 
-        public async Task SetValueReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetRangeReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract>>(e.Body);
             var sensorUnitMeasurementScaleDomain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
-            await sensorUnitMeasurementScaleDomain.SetValue(message.Contract.SensorUnitMeasurementScaleId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.Value);
+            await sensorUnitMeasurementScaleDomain.SetRange(message.Contract.SensorUnitMeasurementScaleId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.Value);
 
             var exchange = "amq.topic";
 
@@ -103,19 +114,60 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueModel>(message.Contract);
-            viewModel.DeviceId = device.DeviceSensorsId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetValueViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetRangeViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);
             var deviceMessage = new MessageIoTContract<SensorUnitMeasurementScaleSetValueRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetValueIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetRangeIoTQueueName);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetChartLimiterReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetChartLimiterReceivedAsync(sender, e));
+        }
+
+        public async Task SetChartLimiterReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract>>(e.Body);
+            var sensorUnitMeasurementScaleDomain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
+            await sensorUnitMeasurementScaleDomain.SetChartLimiter(message.Contract.SensorUnitMeasurementScaleId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.Value);
+
+            var exchange = "amq.topic";
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Load device into context
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.SensorUnitMeasurementScaleId);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueModel>(message.Contract);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetChartLimiterViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<SensorUnitMeasurementScaleSetValueRequestIoTContract>(iotContract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetChartLimiterIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

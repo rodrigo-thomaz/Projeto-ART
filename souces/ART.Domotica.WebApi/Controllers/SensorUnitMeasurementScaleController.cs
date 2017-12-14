@@ -28,6 +28,24 @@ namespace ART.Domotica.WebApi.Controllers
         #region public voids       
 
         /// <summary>
+        /// Altera o valor do range de um sensor
+        /// </summary>
+        /// <remarks>
+        /// Altera o valor do limite do gráfico de um sensor
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setRange")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetRange(SensorUnitMeasurementScaleSetValueRequestContract contract)
+        {
+            await _sensorUnitMeasurementScaleProducer.SetRange(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
         /// Altera o valor do limite do gráfico de um sensor
         /// </summary>
         /// <remarks>
@@ -37,11 +55,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("setValue")]
+        [Route("setChartLimiter")]
         [HttpPost]
         public async Task<IHttpActionResult> SetValue(SensorUnitMeasurementScaleSetValueRequestContract contract)
         {
-            await _sensorUnitMeasurementScaleProducer.SetValue(CreateMessage(contract));
+            await _sensorUnitMeasurementScaleProducer.SetChartLimiter(CreateMessage(contract));
             return Ok();
         }
 

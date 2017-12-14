@@ -37,8 +37,17 @@
                 .ForMember(vm => vm.NumericalScaleTypeId, m => m.MapFrom(x => x.NumericalScaleTypeId))
                 .ForMember(vm => vm.CountryId, m => m.MapFrom(x => x.CountryId));
 
-            CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>();
-            CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueModel>();
+            CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>()
+                .ForMember(vm => vm.SensorUnitMeasurementScaleId, m => m.MapFrom(x => x.SensorUnitMeasurementScaleId))
+                .ForMember(vm => vm.Position, m => m.MapFrom(x => x.Position))
+                .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
+
+            CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueModel>()
+                .ForMember(vm => vm.SensorUnitMeasurementScaleId, m => m.MapFrom(x => x.SensorUnitMeasurementScaleId))
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
+                .ForMember(vm => vm.Position, m => m.MapFrom(x => x.Position))
+                .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
         }
 
         #endregion Constructors
