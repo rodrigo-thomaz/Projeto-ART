@@ -16,6 +16,11 @@
                 $scope.chartLimiterMaxView = newValue.chartLimiterMax;
                 $scope.chartLimiterMinView = newValue.chartLimiterMin;
 
+                initializeRangeMaxViewWatch();
+                initializeRangeMinViewWatch();
+                initializeChartLimiterMaxViewWatch();
+                initializeChartLimiterMinViewWatch();
+
                 clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetUnitMeasurementNumericalScaleTypeCountryCompleted);
                 clearOnSetRangeCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setRangeCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetRangeCompleted);
                 clearOnSetChartLimiterCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setChartLimiterCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetChartLimiterCompleted);
@@ -47,15 +52,21 @@
         };
 
         $scope.rangeMaxView = null;
-        $scope.rangeMaxView = null;
+        $scope.rangeMinView = null;
 
         $scope.chartLimiterMaxView = null;
-        $scope.chartLimiterMaxView = null;
+        $scope.chartLimiterMinView = null;
 
         var unitMeasurementViewSelectedWatch = null;
         var countryViewSelectedWatch = null;
         var numericalScaleTypeViewSelectedWatch = null;
         var unitMeasurementScaleViewSelectedWatch = null;
+
+        var rangeMaxViewWatch = null;
+        var rangeMinViewWatch = null;
+
+        var chartLimiterMaxViewWatch = null;
+        var chartLimiterMinViewWatch = null;
 
         var initializeSelectedWatches = function () {            
 
@@ -89,6 +100,58 @@
             if (countryViewSelectedWatch) countryViewSelectedWatch();
             if (numericalScaleTypeViewSelectedWatch) numericalScaleTypeViewSelectedWatch();
             if (unitMeasurementScaleViewSelectedWatch) unitMeasurementScaleViewSelectedWatch();
+        };        
+
+        var initializeRangeMaxViewWatch = function () {
+            rangeMaxViewWatch = $scope.$watch('rangeMaxView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                sensorUnitMeasurementScaleService.setRange(
+                    $scope.sensorUnitMeasurementScale.sensorUnitMeasurementScaleId,
+                    $scope.sensorUnitMeasurementScale.sensorDatasheetId,
+                    $scope.sensorUnitMeasurementScale.sensorTypeId,
+                    'Max',
+                    newValue
+                );
+            });
+        };        
+
+        var initializeRangeMinViewWatch = function () {
+            rangeMinViewWatch = $scope.$watch('rangeMinView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                sensorUnitMeasurementScaleService.setRange(
+                    $scope.sensorUnitMeasurementScale.sensorUnitMeasurementScaleId,
+                    $scope.sensorUnitMeasurementScale.sensorDatasheetId,
+                    $scope.sensorUnitMeasurementScale.sensorTypeId,
+                    'Min',
+                    newValue
+                );
+            });
+        };
+
+        var initializeChartLimiterMaxViewWatch = function () {
+            chartLimiterMaxViewWatch = $scope.$watch('chartLimiterMaxView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                sensorUnitMeasurementScaleService.setChartLimiter(
+                    $scope.sensorUnitMeasurementScale.sensorUnitMeasurementScaleId,
+                    $scope.sensorUnitMeasurementScale.sensorDatasheetId,
+                    $scope.sensorUnitMeasurementScale.sensorTypeId,
+                    'Max',
+                    newValue
+                );
+            });
+        };
+
+        var initializeChartLimiterMinViewWatch = function () {
+            chartLimiterMinViewWatch = $scope.$watch('chartLimiterMinView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                sensorUnitMeasurementScaleService.setChartLimiter(
+                    $scope.sensorUnitMeasurementScale.sensorUnitMeasurementScaleId,
+                    $scope.sensorUnitMeasurementScale.sensorDatasheetId,
+                    $scope.sensorUnitMeasurementScale.sensorTypeId,
+                    'Min',
+                    newValue
+                );
+            });
         };
 
         var applySelectsWithContext = function () {
@@ -193,6 +256,7 @@
         var clearOnSetChartLimiterCompleted = null;
 
         $scope.$on('$destroy', function () {
+            finalizeSelectedWatches();
             clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted();
             clearOnSetRangeCompleted();
             clearOnSetChartLimiterCompleted();
@@ -208,18 +272,34 @@
 
         var onSetRangeCompleted = function (event, data) {
             if (data.position === 'Max') {
+                rangeMaxViewWatch();
+                $scope.rangeMaxView = data.value;
+                $scope.$apply();
+                initializeRangeMaxViewWatch();
                 toaster.pop('success', 'Sucesso', 'Range alto alterado');
             }
             else if (data.position === 'Min') {
+                rangeMinViewWatch();
+                $scope.rangeMinView = data.value;
+                $scope.$apply();
+                initializeRangeMinViewWatch();
                 toaster.pop('success', 'Sucesso', 'Range baixo alterado');
             }
         };
 
         var onSetChartLimiterCompleted = function (event, data) {
             if (data.position === 'Max') {
+                chartLimiterMaxViewWatch();
+                $scope.chartLimiterMaxView = data.value;
+                $scope.$apply();
+                initializeChartLimiterMaxViewWatch();
                 toaster.pop('success', 'Sucesso', 'Limite alto do gráfico alterado');
             }
             else if (data.position === 'Min') {
+                chartLimiterMinViewWatch();
+                $scope.chartLimiterMinView = data.value;
+                $scope.$apply();
+                initializeChartLimiterMinViewWatch();
                 toaster.pop('success', 'Sucesso', 'Limite baixo do gráfico alterado');
             }
         };

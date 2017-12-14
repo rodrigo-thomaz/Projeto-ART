@@ -32,7 +32,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
             });
         };    
 
-        var setRange = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId, value, position) {
+        var setRange = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId, position, value) {
             var data = {
                 sensorUnitMeasurementScaleId: sensorUnitMeasurementScaleId,
                 sensorDatasheetId: sensorDatasheetId,
@@ -45,7 +45,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
             });
         };        
 
-        var setChartLimiter = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId, value, position) {
+        var setChartLimiter = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId, position, value) {
             var data = {
                 sensorUnitMeasurementScaleId: sensorUnitMeasurementScaleId,
                 sensorDatasheetId: sensorDatasheetId,
@@ -74,13 +74,13 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         var onSetRangeCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var sensor = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
+            var sensorUnitMeasurementScale = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
             if (result.position === 'Max') {
-                sensor.sensorUnitMeasurementScale.rangeMax = result.value;
+                sensorUnitMeasurementScale.rangeMax = result.value;
                 //sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
             }
             else if (result.position === 'Min') {
-                sensor.sensorUnitMeasurementScale.rangeMin = result.value;
+                sensorUnitMeasurementScale.rangeMin = result.value;
                 //sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
             }
             sensorContext.$digest();
@@ -89,13 +89,13 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         var onSetChartLimiterCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var sensor = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
+            var sensorUnitMeasurementScale = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
             if (result.position === 'Max') {
-                sensor.sensorUnitMeasurementScale.chartLimiterMax = result.value;
+                sensorUnitMeasurementScale.chartLimiterMax = result.value;
                 //sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
             }
             else if (result.position === 'Min') {
-                sensor.sensorUnitMeasurementScale.chartLimiterMin = result.value;
+                sensorUnitMeasurementScale.chartLimiterMin = result.value;
                 //sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
             }
             sensorContext.$digest();
