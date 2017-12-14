@@ -22,10 +22,10 @@ namespace ART.Domotica.Repository.Repositories.SI
                 .ToListAsync();
         }
 
-        public async Task<NumericalScaleTypeCountry> GetByKey(UnitMeasurementTypeEnum unitMeasurementTypeId, short countryId)
+        public async Task<NumericalScaleTypeCountry> GetByKey(NumericalScaleTypeEnum numericalScaleTypeId, short countryId)
         {
             return await _context.NumericalScaleTypeCountry
-                .FindAsync(unitMeasurementTypeId, countryId);
+                .FindAsync(numericalScaleTypeId, countryId);
         }
     }
 }

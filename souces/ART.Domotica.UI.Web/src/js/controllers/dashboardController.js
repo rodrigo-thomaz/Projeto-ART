@@ -4,7 +4,7 @@
 
 app
     // Flot Chart controller 
-    .controller('dashboardController', ['$scope', 'dashboardService', function ($scope, dashboardService) {
+    .controller('dashboardController', ['$scope', 'dashboardService', 'contextScope', function ($scope, dashboardService, contextScope) {
 
         // Test
         $scope.lista = [];

@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorDatasheetContext', 'unitMeasurementFinder',
-    function ($rootScope, sensorDatasheetContext, unitMeasurementFinder) {
+app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorDatasheetContext', 'unitMeasurementFinder', 'numericalScaleTypeFinder', 'numericalScaleTypeCountryFinder',
+    function ($rootScope, sensorDatasheetContext, unitMeasurementFinder, numericalScaleTypeFinder, numericalScaleTypeCountryFinder) {
 
         var context = sensorDatasheetContext;
 
@@ -37,6 +37,32 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorD
             return result;
         };
 
+        var containInNumericalScaleTypeCountries = function (numericalScaleTypeCountries, numericalScaleTypeId) {
+            for (var i = 0; i < numericalScaleTypeCountries.length; i++) {
+                if (numericalScaleTypeCountries[i].numericalScaleTypeId === numericalScaleTypeId) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        var getNumericalScaleTypesBySensorDatasheetCountryKey = function (sensorDatasheetId, sensorTypeId, countryId) {
+            var result = [];
+            var numericalScaleTypeCountries = numericalScaleTypeCountryFinder.getByCountryKey(countryId);
+            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
+                var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
+                var containInNumericalScaleTypeCountries = serviceFactory.containInNumericalScaleTypeCountries(numericalScaleTypeCountries, sensorDatasheetUnitMeasurementScale.numericalScaleTypeId);
+                if (containInNumericalScaleTypeCountries && sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId) {
+                    var numericalScaleType = numericalScaleTypeFinder.getByKey(sensorDatasheetUnitMeasurementScale.numericalScaleTypeId);
+                    for (var j = 0; j < result.length; j++) {
+                        if (result[j] === numericalScaleType) break;
+                    }
+                    result.push(numericalScaleType);
+                }
+            }
+            return result;
+        }
+
         var getUnitMeasurementsBySensorDatasheetKey = function (sensorDatasheetId, sensorTypeId) {
             var result = [];
             for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
@@ -57,7 +83,9 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorD
         serviceFactory.getByKey = getByKey;
         serviceFactory.getBySensorDatasheetKey = getBySensorDatasheetKey;
         serviceFactory.getByUnitMeasurementScaleKey = getByUnitMeasurementScaleKey;
+        serviceFactory.getNumericalScaleTypesBySensorDatasheetCountryKey = getNumericalScaleTypesBySensorDatasheetCountryKey;
         serviceFactory.getUnitMeasurementsBySensorDatasheetKey = getUnitMeasurementsBySensorDatasheetKey;
+        serviceFactory.containInNumericalScaleTypeCountries = containInNumericalScaleTypeCountries;
 
         return serviceFactory;
 

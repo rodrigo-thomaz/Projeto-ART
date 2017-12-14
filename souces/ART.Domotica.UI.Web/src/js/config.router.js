@@ -25,147 +25,9 @@ angular.module('app')
               .state('app', {
                   abstract: true,
                   url: '/app',
-                  templateUrl: layout
-              })              
-              .state('app.dashboard', {
-                  url: '/dashboard',
-                  templateUrl: 'views/dashboard.html',
+                  templateUrl: layout,
                   resolve: load([
-                      'js/services/dashboardService.js',
-                      'js/controllers/dashboardController.js',
-                  ])
-              })
-
-              .state('app.espDeviceList', {
-                  url: '/espDeviceList',
-                  templateUrl: 'views/espDeviceList.html',
-                  resolve: load([
-                      'vr.directives.slider',
-                      'ui.select',   
-                      'toaster',
                       
-                      'js/base64Helper.js',
-                      'js/services/contextScope.js',
-
-                      // Globalization
-
-                      'js/services/globalization/globalizationContext.js',
-                      'js/services/globalization/globalizationConstants.js',
-                      'js/services/globalization/timeZoneFinder.js',
-                      'js/services/globalization/globalizationMapper.js',
-
-                      'js/services/globalization/timeZoneService.js',
-
-                      // Locale
-
-                      'js/services/locale/localeContext.js',
-                      'js/services/locale/localeConstants.js',
-                      'js/services/locale/localeMapper.js',
-
-                      'js/services/locale/continentFinder.js',
-                      'js/services/locale/continentService.js',
-                      'js/services/locale/countryFinder.js',
-                      'js/services/locale/countryService.js',
-
-                      // SI
-
-                      'js/services/si/siContext.js',
-                      'js/services/si/siConstants.js',
-                      'js/services/si/siMapper.js',
-
-                      'js/services/si/numericalScaleFinder.js',
-                      'js/services/si/numericalScalePrefixFinder.js',
-                      'js/services/si/numericalScaleTypeFinder.js',
-                      'js/services/si/numericalScaleTypeCountryFinder.js',
-
-                      'js/services/si/unitMeasurementScaleFinder.js',
-                      'js/services/si/unitMeasurementTypeFinder.js',
-                      'js/services/si/unitMeasurementFinder.js',
-
-                      'js/services/si/numericalScaleService.js',                      
-                      'js/services/si/numericalScalePrefixService.js',                      
-                      'js/services/si/numericalScaleTypeService.js',
-                      'js/services/si/numericalScaleTypeCountryService.js',
-
-                      'js/services/si/unitMeasurementScaleService.js',
-                      'js/services/si/unitMeasurementTypeService.js',
-                      'js/services/si/unitMeasurementService.js',
-                      'js/services/si/unitMeasurementConverter.js',
-
-                      //*** Hardware ***
-
-                      // Sensor Datasheet
-
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetContext.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetConstants.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetMapper.js',
-
-                      'js/services/hardware/sensorDatasheet/sensorTypeFinder.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetFinder.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleFinder.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultFinder.js',
-
-                      'js/services/hardware/sensorDatasheet/sensorTypeService.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetService.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
-                      'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
-
-                      // Sensor                     
-
-                      'js/services/hardware/sensor/sensorContext.js',
-                      'js/services/hardware/sensor/sensorConstants.js',
-                      'js/services/hardware/sensor/sensorMapper.js',
-
-                      'js/services/hardware/sensor/sensorFinder.js',
-                      'js/services/hardware/sensor/sensorUnitMeasurementScaleFinder.js',
-                      'js/services/hardware/sensor/sensorTriggerFinder.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionFinder.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyFinder.js',                 
-
-                      'js/services/hardware/sensor/sensorService.js',
-                      'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
-                      'js/services/hardware/sensor/sensorTriggerService.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',
-
-                      'js/controllers/hardware/sensor/sensorController.js',
-                      'js/controllers/hardware/sensor/sensorUnitMeasurementScaleController.js',
-                      
-                      'js/controllers/sensorTriggerController.js',
-
-                      'js/controllers/espDeviceListController.js',            
-
-                      // Device
-
-                      'js/services/hardware/device/deviceContext.js',
-                      'js/services/hardware/device/deviceConstants.js',
-
-                      'js/services/hardware/device/deviceNTPFinder.js',
-                      'js/services/hardware/device/deviceSensorsFinder.js',
-                      'js/services/hardware/device/sensorInDeviceFinder.js',
-                      'js/services/hardware/device/deviceFinder.js',                     
-
-                      'js/services/hardware/device/deviceMapper.js',
-
-                      'js/services/hardware/device/deviceNTPService.js',
-                      'js/services/hardware/device/deviceSensorsService.js',
-                      'js/services/hardware/device/sensorInDeviceService.js',
-                      'js/services/hardware/device/deviceService.js',                     
-
-                      'js/controllers/hardware/device/deviceController.js', 
-                      'js/controllers/hardware/device/deviceNTPController.js',                                
-                      'js/controllers/hardware/device/deviceSensorsController.js', 
-                      'js/controllers/hardware/device/sensorInDeviceController.js', 
-                      
-                  ])
-              })
-              .state('app.espDeviceManager', {
-                  url: '/espDeviceManager',
-                  templateUrl: 'views/espDeviceManager.html',
-                  resolve: load([
-                      'ui.grid',
-                      'toaster',
-
                       'js/base64Helper.js',
                       'js/services/contextScope.js',
 
@@ -212,10 +74,10 @@ angular.module('app')
                       'js/services/si/unitMeasurementScaleService.js',
                       'js/services/si/unitMeasurementTypeService.js',
                       'js/services/si/unitMeasurementService.js',
-                      'js/services/si/unitMeasurementConverter.js',                   
+                      'js/services/si/unitMeasurementConverter.js',
 
                       //*** Hardware ***
-                      
+
                       // Sensor Datasheet
 
                       'js/services/hardware/sensorDatasheet/sensorDatasheetContext.js',
@@ -232,22 +94,23 @@ angular.module('app')
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
                       'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
 
-                      // Sensor
+                      // Sensor                     
+
                       'js/services/hardware/sensor/sensorContext.js',
-                      'js/services/hardware/sensor/sensorConstants.js',                      
+                      'js/services/hardware/sensor/sensorConstants.js',
                       'js/services/hardware/sensor/sensorMapper.js',
 
                       'js/services/hardware/sensor/sensorFinder.js',
                       'js/services/hardware/sensor/sensorUnitMeasurementScaleFinder.js',
                       'js/services/hardware/sensor/sensorTriggerFinder.js',
                       'js/services/hardware/sensor/sensorTempDSFamilyResolutionFinder.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyFinder.js',                 
+                      'js/services/hardware/sensor/sensorTempDSFamilyFinder.js',
 
                       'js/services/hardware/sensor/sensorService.js',
                       'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
                       'js/services/hardware/sensor/sensorTriggerService.js',
                       'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
-                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',               
+                      'js/services/hardware/sensor/sensorTempDSFamilyService.js',
 
                       // Device
 
@@ -257,14 +120,59 @@ angular.module('app')
                       'js/services/hardware/device/deviceNTPFinder.js',
                       'js/services/hardware/device/deviceSensorsFinder.js',
                       'js/services/hardware/device/sensorInDeviceFinder.js',
-                      'js/services/hardware/device/deviceFinder.js',                     
+                      'js/services/hardware/device/deviceFinder.js',
 
                       'js/services/hardware/device/deviceMapper.js',
 
                       'js/services/hardware/device/deviceNTPService.js',
                       'js/services/hardware/device/deviceSensorsService.js',
                       'js/services/hardware/device/sensorInDeviceService.js',
-                      'js/services/hardware/device/deviceService.js',            
+                      'js/services/hardware/device/deviceService.js',
+                    ])
+              })              
+              .state('app.dashboard', {
+                  url: '/dashboard',
+                  templateUrl: 'views/dashboard.html',
+                  resolve: load([
+                      'js/services/dashboardService.js',
+                      'js/controllers/dashboardController.js',
+                  ])
+              })
+
+              .state('app.espDeviceList', {
+                  url: '/espDeviceList',
+                  templateUrl: 'views/espDeviceList.html',
+                  resolve: load([
+                      'vr.directives.slider',
+                      'ui.select',   
+                      'toaster',
+                      
+                      //*** Hardware ***                      
+
+                      // Sensor                       
+
+                      'js/controllers/hardware/sensor/sensorController.js',
+                      'js/controllers/hardware/sensor/sensorUnitMeasurementScaleController.js',
+                      
+                      'js/controllers/sensorTriggerController.js',
+
+                      'js/controllers/espDeviceListController.js',            
+
+                      // Device
+                                           
+                      'js/controllers/hardware/device/deviceController.js', 
+                      'js/controllers/hardware/device/deviceNTPController.js',                                
+                      'js/controllers/hardware/device/deviceSensorsController.js', 
+                      'js/controllers/hardware/device/sensorInDeviceController.js', 
+                      
+                  ])
+              })
+              .state('app.espDeviceManager', {
+                  url: '/espDeviceManager',
+                  templateUrl: 'views/espDeviceManager.html',
+                  resolve: load([
+                      'ui.grid',
+                      'toaster',
 
                       'js/controllers/espDeviceJoinController.js',
                       'js/controllers/espDeviceManagerController.js',                     

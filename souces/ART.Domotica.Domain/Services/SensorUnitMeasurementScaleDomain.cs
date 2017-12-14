@@ -66,7 +66,7 @@
                 throw new Exception("SensorDatasheetUnitMeasurementScale not found");
             }
 
-            var numericalScaleTypeCountry = await _numericalScaleTypeCountryRepository.GetByKey(unitMeasurementTypeId, countryId);
+            var numericalScaleTypeCountry = await _numericalScaleTypeCountryRepository.GetByKey(numericalScaleTypeId, countryId);
 
             if (numericalScaleTypeCountry == null)
             {

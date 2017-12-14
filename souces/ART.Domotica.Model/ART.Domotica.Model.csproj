@@ -48,6 +48,7 @@
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondModel.cs" />
     <Compile Include="DeviceNTPSetTimeZoneModel.cs" />
     <Compile Include="HardwareSetLabelModel.cs" />
+    <Compile Include="SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryModel.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetValueModel.cs" />
     <Compile Include="SensorTriggerSetAlarmOnModel.cs" />
     <Compile Include="SensorTriggerSetAlarmCelsiusModel.cs" />

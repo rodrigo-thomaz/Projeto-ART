@@ -6,7 +6,29 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
+        var setUnitMeasurementNumericalScaleTypeCountrySubscription = null;
         var setValueSubscription = null;
+
+        var onConnected = function () {
+            setUnitMeasurementNumericalScaleTypeCountrySubscription = stompService.subscribeAllViews(sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryCompletedTopic, onSetUnitMeasurementNumericalScaleTypeCountryCompleted);
+            setValueSubscription = stompService.subscribeAllViews(sensorUnitMeasurementScaleConstant.setValueCompletedTopic, onSetValueCompleted);
+        }
+
+        var setUnitMeasurementNumericalScaleTypeCountry = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId, unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId, countryId) {
+            var data = {
+                sensorUnitMeasurementScaleId: sensorUnitMeasurementScaleId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,
+                unitMeasurementId: unitMeasurementId,
+                unitMeasurementTypeId: unitMeasurementTypeId,
+                numericalScalePrefixId: numericalScalePrefixId,
+                numericalScaleTypeId: numericalScaleTypeId,
+                countryId: countryId,
+            }
+            return $http.post(serviceBase + sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryApiUri, data).then(function (results) {
+                return results;
+            });
+        };    
 
         var setValue = function (sensorUnitMeasurementScaleId, value, position) {
             var data = {
@@ -17,10 +39,20 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
             return $http.post(serviceBase + sensorUnitMeasurementScaleConstant.setValueApiUri, data).then(function (results) {
                 return results;
             });
-        };
+        };        
 
-        var onConnected = function () {
-            setValueSubscription = stompService.subscribeAllViews(sensorUnitMeasurementScaleConstant.setValueCompletedTopic, onSetValueCompleted);
+        var onSetUnitMeasurementNumericalScaleTypeCountryCompleted = function (payload) {
+            //var result = JSON.parse(payload.body);
+            //var sensor = sensorTempDSFamilyFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
+            //if (result.position === 'Max') {
+            //    sensor.sensorUnitMeasurementScale.max = result.value;
+            //    sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
+            //}
+            //else if (result.position === 'Min') {
+            //    sensor.sensorUnitMeasurementScale.min = result.value;
+            //    sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
+            //}
+            //$rootScope.$emit(sensorUnitMeasurementScaleConstant.setValueCompletedEventName + result.sensorUnitMeasurementScaleId, result);
         }
 
         var onSetValueCompleted = function (payload) {
@@ -62,6 +94,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
+            setUnitMeasurementNumericalScaleTypeCountrySubscription.unsubscribe();
             setValueSubscription.unsubscribe();
         });
 
@@ -72,6 +105,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         // serviceFactory
 
+        serviceFactory.setUnitMeasurementNumericalScaleTypeCountry = setUnitMeasurementNumericalScaleTypeCountry;
         serviceFactory.setValue = setValue;
 
         return serviceFactory;

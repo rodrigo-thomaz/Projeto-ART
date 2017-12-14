@@ -34,6 +34,10 @@ app.constant('sensorTempDSFamilyResolutionConstant', {
 
 app.constant('sensorUnitMeasurementScaleConstant', {
 
+    setUnitMeasurementNumericalScaleTypeCountryApiUri: 'api/sensorUnitMeasurementScale/setUnitMeasurementNumericalScaleTypeCountry',
+    setUnitMeasurementNumericalScaleTypeCountryCompletedTopic: 'SensorUnitMeasurementScale.SetUnitMeasurementNumericalScaleTypeCountryViewCompleted',
+    setUnitMeasurementNumericalScaleTypeCountryCompletedEventName: 'sensorUnitMeasurementScaleService.SetUnitMeasurementNumericalScaleTypeCountryCompleted_Id_',
+
     setValueApiUri: 'api/sensorUnitMeasurementScale/setValue',
     setValueCompletedTopic: 'SensorUnitMeasurementScale.SetValueViewCompleted',
     setValueCompletedEventName: 'sensorUnitMeasurementScaleService.SetValueCompleted_Id_',

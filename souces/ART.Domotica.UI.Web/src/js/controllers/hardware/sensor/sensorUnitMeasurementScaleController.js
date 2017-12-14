@@ -1,5 +1,5 @@
-﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'debounce', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext', 'sensorDatasheetUnitMeasurementScaleFinder', 'unitMeasurementFinder', 'unitMeasurementScaleFinder', 'countryFinder', 'numericalScaleTypeCountryFinder',
-    function ($scope, $rootScope, $timeout, $log, toaster, debounce, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext, sensorDatasheetUnitMeasurementScaleFinder, unitMeasurementFinder, unitMeasurementScaleFinder, countryFinder, numericalScaleTypeCountryFinder) {
+﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'debounce', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext', 'sensorDatasheetUnitMeasurementScaleFinder', 'unitMeasurementFinder', 'unitMeasurementScaleFinder', 'countryFinder', 'numericalScaleTypeFinder', 'sensorUnitMeasurementScaleConstant',
+    function ($scope, $rootScope, $timeout, $log, toaster, debounce, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext, sensorDatasheetUnitMeasurementScaleFinder, unitMeasurementFinder, unitMeasurementScaleFinder, countryFinder, numericalScaleTypeFinder, sensorUnitMeasurementScaleConstant) {
 
         $scope.sensorUnitMeasurementScale = null;
 
@@ -16,8 +16,8 @@
                 $scope.countryView.selected = country;
 
                 //numericalScaleType
-                $scope.numericalScaleTypeView.availables = country.numericalScaleTypeCountries();
-                $scope.numericalScaleTypeView.selected = numericalScaleTypeCountryFinder.getByKey(newValue.numericalScaleTypeId, newValue.countryId);
+                $scope.numericalScaleTypeView.availables = sensorDatasheetUnitMeasurementScaleFinder.getNumericalScaleTypesBySensorDatasheetCountryKey(newValue.sensorDatasheetId, newValue.sensorTypeId, newValue.countryId);
+                $scope.numericalScaleTypeView.selected = numericalScaleTypeFinder.getByKey(newValue.numericalScaleTypeId);
 
                 //unitMeasurementScale
                 var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(newValue.unitMeasurementId, newValue.unitMeasurementTypeId, newValue.numericalScalePrefixId, newValue.numericalScaleTypeId);
@@ -88,7 +88,9 @@
 
             if ($scope.countryView.selected) {
                 var country = $scope.countryView.selected;
-                $scope.numericalScaleTypeView.availables = country.numericalScaleTypeCountries();
+
+                $scope.numericalScaleTypeView.availables = sensorDatasheetUnitMeasurementScaleFinder.getNumericalScaleTypesBySensorDatasheetCountryKey($scope.sensorUnitMeasurementScale.sensorDatasheetId, $scope.sensorUnitMeasurementScale.sensorTypeId, country.countryId);
+                                                
                 if ($scope.numericalScaleTypeView.availables.length == 1) {
                     selectedNumericalScaleType = $scope.numericalScaleTypeView.availables[0];
                 }
@@ -138,8 +140,18 @@
             var numericalScaleType = $scope.numericalScaleTypeView.selected;
             var unitMeasurementScale = $scope.unitMeasurementScaleView.selected;
 
-            if (unitMeasurement && country && numericalScaleType && unitMeasurementScale) {
-                alert('change!');
+            if (unitMeasurement && country && numericalScaleType && unitMeasurementScale) {                
+
+                sensorUnitMeasurementScaleService.setUnitMeasurementNumericalScaleTypeCountry(
+                    $scope.sensorUnitMeasurementScale.sensorUnitMeasurementScaleId,
+                    $scope.sensorUnitMeasurementScale.sensorDatasheetId,
+                    $scope.sensorUnitMeasurementScale.sensorTypeId,
+                    unitMeasurementScale.unitMeasurementId,
+                    unitMeasurementScale.unitMeasurementTypeId,
+                    unitMeasurementScale.numericalScalePrefixId,
+                    unitMeasurementScale.numericalScaleTypeId,
+                    country.countryId
+                );
             }
 
         });

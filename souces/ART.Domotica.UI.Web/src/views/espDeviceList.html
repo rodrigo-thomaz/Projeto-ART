@@ -139,7 +139,7 @@
                                                 <div class="col-lg-8">
                                                     <select name="selectNumericalScaleType"
                                                             class="form-control m-b"
-                                                            ng-options="item.numericalScaleType().name for item in numericalScaleTypeView.availables track by item"
+                                                            ng-options="item.name for item in numericalScaleTypeView.availables track by item.numericalScaleTypeId"
                                                             ng-model="numericalScaleTypeView.selected"
                                                             required>
                                                     </select>

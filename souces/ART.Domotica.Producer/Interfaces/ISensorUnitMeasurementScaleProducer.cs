@@ -11,6 +11,8 @@
 
         Task SetValue(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract> message);
 
+        Task SetUnitMeasurementNumericalScaleTypeCountry(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryRequestContract> message);
+
         #endregion Methods
     }
 }

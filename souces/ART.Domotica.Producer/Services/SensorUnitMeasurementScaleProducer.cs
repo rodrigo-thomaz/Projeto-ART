@@ -31,6 +31,15 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
+        public async Task SetUnitMeasurementNumericalScaleTypeCountry(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName, null, payload);
+            });
+        }
+
         #endregion
 
         #region private voids
@@ -39,6 +48,13 @@ namespace ART.Domotica.Producer.Services
         {
             _model.QueueDeclare(
                  queue: SensorUnitMeasurementScaleConstants.SetValueQueueName
+               , durable: true
+               , exclusive: false
+               , autoDelete: false
+               , arguments: null);
+
+            _model.QueueDeclare(
+                 queue: SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName
                , durable: true
                , exclusive: false
                , autoDelete: false

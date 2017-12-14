@@ -13,7 +13,7 @@
 
         Task<List<NumericalScaleTypeCountry>> GetAll();
 
-        Task<NumericalScaleTypeCountry> GetByKey(UnitMeasurementTypeEnum unitMeasurementTypeId, short countryId);
+        Task<NumericalScaleTypeCountry> GetByKey(NumericalScaleTypeEnum numericalScaleTypeId, short countryId);
 
         #endregion Methods
     }
