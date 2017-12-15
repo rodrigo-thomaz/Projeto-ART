@@ -54,7 +54,9 @@
             {
                 if (i == ordination)
                 {
-                    sensorInDevice.Ordination = ordination;
+                    sensorInDevice.Ordination = counter;
+                    counter++;
+                    orderedExceptCurrent[i].Ordination = counter;
                 }
                 else
                 {
