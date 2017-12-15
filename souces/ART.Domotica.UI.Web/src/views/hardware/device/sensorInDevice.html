@@ -1,8 +1,8 @@
 ﻿<div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors.sensorInDevice)">
-
-    <!--Teste de Ordenação no Device-->
+    
+    <!--Teste de Ordenação no Scope do Controller-->
     <div>
-        <ul data-as-sortable="board.dragControlListeners" data-ng-model="sensorInDevice">
+        <ul data-as-sortable="dragControlListeners" data-ng-model="sensorInDevice">
             <li data-ng-repeat="item in sensorInDevice" data-as-sortable-item>
                 <div as-sortable-item-handle>
                     <div class="row">
