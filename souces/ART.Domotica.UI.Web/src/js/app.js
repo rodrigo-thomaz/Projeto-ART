@@ -19,4 +19,5 @@ angular.module('app', [
     'pascalprecht.translate',
     'nvd3',
     'rt.debounce',
+    'as.sortable',
 ]);

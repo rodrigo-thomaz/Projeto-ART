@@ -12,6 +12,14 @@
 
             <toaster-container toaster-options="{'position-class': 'toast-bottom-right', 'close-button':true}"></toaster-container>
 
+            <div>
+                <ul data-as-sortable="board.dragControlListeners" data-ng-model="devices">
+                    <li data-ng-repeat="item in devices" data-as-sortable-item>
+                        <div data-as-sortable-item-handle></div>
+                    </li>
+                </ul>
+            </div>
+
             <div class="row" ng-repeat="(deviceKey, deviceItem) in devices">
 
                 <div class="col-md-6">
@@ -37,7 +45,8 @@
                         </div>
                     </div>
 
-                </div>
+                </div>                
+
             </div>
         </div>
     </div>
