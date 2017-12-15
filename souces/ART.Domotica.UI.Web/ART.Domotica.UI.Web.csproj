@@ -549,6 +549,7 @@
     <Content Include="src\tpl\page_profile.html" />
     <Content Include="src\views\admin\espDeviceAdmin.html" />
     <Content Include="src\views\espDeviceJoin.html" />
+    <Content Include="src\views\espDeviceList_____Old.html" />
     <Content Include="src\views\espDeviceManager.html" />
     <Content Include="src\views\espDeviceList.html" />
     <Content Include="src\views\hardware\device\device.html" />
