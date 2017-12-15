@@ -77,9 +77,6 @@ app.factory('sensorMapper', [
                 var sensor = newValues[i];
                 addSensorAggregates(sensor);
                 sensor.sensorDatasheet = function () { return sensorDatasheetFinder.getByKey(this.sensorDatasheetId, this.sensorTypeId); }
-                sensor.sensorTempDSFamily = function () { return sensorTempDSFamilyFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
-                sensor.sensorUnitMeasurementScale = function () { return sensorUnitMeasurementScaleFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
-                sensor.sensorTriggers = function () { return sensorTriggerFinder.getBySensorKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
                 sensor.sensorInDevice = function () { return sensorInDeviceFinder.getBySensorKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
             }            
         });
