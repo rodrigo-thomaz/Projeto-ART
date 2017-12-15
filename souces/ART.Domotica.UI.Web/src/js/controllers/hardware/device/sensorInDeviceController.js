@@ -20,7 +20,6 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
         });
 
         var onSetOrdinationCompleted = function (event, data) {
-            //setSelectedTimeZone();
             $scope.$apply();
             toaster.pop('success', 'Sucesso', 'Ordem dos sensores alterada');
         };
