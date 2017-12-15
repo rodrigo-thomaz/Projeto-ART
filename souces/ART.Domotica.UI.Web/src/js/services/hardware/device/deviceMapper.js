@@ -29,75 +29,49 @@ app.factory('deviceMapper', [
         var addDeviceAggregates = function (device) {
 
             //deviceNTP
-            var deviceNTP = null;
-            if (angular.isObject(device.deviceNTP))
-                deviceNTP = device.deviceNTP;
-            else if (angular.isFunction(device.deviceNTP)) 
-                deviceNTP = device.deviceNTP();
-            if (angular.isDefined(deviceNTP)) {
-                deviceContext.deviceNTP.push(deviceNTP);
-            }
+            var deviceNTP = device.deviceNTP;
+            deviceContext.deviceNTP.push(deviceNTP);
 
             //deviceSensors
-            var deviceSensors = null;
-            if (angular.isObject(device.deviceSensors)) {
-                deviceSensors = device.deviceSensors;
-            }
-            else if (angular.isFunction(device.deviceSensors)) {
-                deviceSensors = device.deviceSensors();
-            }
-            if (angular.isDefined(deviceSensors)) {
+            var deviceSensors = device.deviceSensors;
+            deviceContext.deviceSensors.push(deviceSensors);
 
-                deviceContext.deviceSensors.push(deviceSensors);
-
-                //sensorInDevice
-                var sensorInDevice = null;
-                if (angular.isObject(deviceSensors.sensorInDevice))
-                    sensorInDevice = deviceSensors.sensorInDevice;
-                else if (angular.isFunction(deviceSensors.sensorInDevice))
-                    sensorInDevice = deviceSensors.sensorInDevice();
-                if (angular.isArray(sensorInDevice)) {
-                    for (var i = 0; i < sensorInDevice.length; i++) {
-                        deviceContext.sensorInDevice.push(sensorInDevice[i]);
-                    }
-                }
-            }                        
+            //sensorInDevice
+            var sensorInDevice = deviceSensors.sensorInDevice;            
+            for (var i = 0; i < sensorInDevice.length; i++) {
+                deviceContext.sensorInDevice.push(sensorInDevice[i]);
+            }
         }
 
         var removeDeviceAggregates = function (device) {
             //deviceNTP
-            var deviceNTP = device.deviceNTP();
-            if (angular.isDefined(deviceNTP)){
-                for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
-                    if (deviceNTP === deviceContext.deviceNTP[i]) {
-                        deviceContext.deviceNTP.splice(i, 1);
+            var deviceNTP = device.deviceNTP;
+            for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
+                if (deviceNTP === deviceContext.deviceNTP[i]) {
+                    deviceContext.deviceNTP.splice(i, 1);
+                    break;
+                }
+            }
+            //deviceSensors
+            var deviceSensors = device.deviceSensors;
+            for (var i = 0; i < deviceContext.deviceSensors.length; i++) {
+                if (deviceSensors === deviceContext.deviceSensors[i]) {
+                    deviceContext.deviceSensors.splice(i, 1);
+                    break;
+                }
+            }
+
+            //sensorInDevice
+            var sensorsInDevices = deviceSensors.sensorInDevice;
+            for (var i = 0; i < sensorsInDevices.length; i++) {
+                var sensorInDevice = sensorsInDevices[i];
+                for (var j = 0; j < deviceContext.sensorInDevice.length; j++) {
+                    if (sensorInDevice === deviceContext.sensorInDevice[j]) {
+                        deviceContext.sensorInDevice.splice(j, 1);
                         break;
                     }
                 }
             }
-            //deviceSensors
-            var deviceSensors = device.deviceSensors();
-            if (angular.isDefined(deviceSensors)) {
-                for (var i = 0; i < deviceContext.deviceSensors.length; i++) {
-                    if (deviceSensors === deviceContext.deviceSensors[i]) {
-                        deviceContext.deviceSensors.splice(i, 1);
-                        break;
-                    }
-                }
-
-                //sensorInDevice
-                var sensorsInDevices = deviceSensors.sensorInDevice();
-                if (angular.isArray(sensorsInDevices)) {
-                    for (var i = 0; i < sensorsInDevices.length; i++) {
-                        var sensorInDevice = sensorsInDevices[i];
-                        for (var j = 0; j < deviceContext.sensorInDevice.length; j++) {
-                            if (sensorInDevice === deviceContext.sensorInDevice[j]) {
-                                deviceContext.sensorInDevice.splice(j, 1);
-                            }
-                        }
-                    }
-                }
-            }            
         }
 
         deviceContext.$watchCollection('device', function (newValues, oldValues) {
@@ -109,8 +83,6 @@ app.factory('deviceMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var device = newValues[i];
                 addDeviceAggregates(device);
-                device.deviceNTP = function () { return deviceNTPFinder.getByKey(this.deviceId); }
-                device.deviceSensors = function () { return deviceSensorsFinder.getByKey(this.deviceId); }
             }            
         });
 
@@ -126,7 +98,6 @@ app.factory('deviceMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var deviceSensors = newValues[i];
                 deviceSensors.device = function () { return deviceFinder.getByKey(this.deviceSensorsId); }
-                deviceSensors.sensorInDevice = function () { return sensorInDeviceFinder.getByDeviceSensorsKey(this.deviceSensorsId); }
             }
         });        
 
