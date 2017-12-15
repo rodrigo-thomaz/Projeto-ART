@@ -56,9 +56,9 @@
 
             _model.QueueDeclare(
                   queue: SensorInDeviceConstants.SetOrdinationQueueName
-                , durable: true
+                , durable: false
                 , exclusive: false
-                , autoDelete: false
+                , autoDelete: true
                 , arguments: null);
 
             _setOrdinationConsumer.Received += SetOrdinationReceived;

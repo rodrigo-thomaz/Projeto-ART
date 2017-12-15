@@ -8,13 +8,15 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
 
             $scope.sensorInDevice = sensorInDevice;
 
-            clearOnSetOrdinationCompleted = $rootScope.$on(sensorInDeviceConstant.setOrdinationCompletedEventName + $scope.sensorInDevice[0].deviceSensorsId, onSetOrdinationCompleted);
+            if ($scope.sensorInDevice.length > 0){
+                clearOnSetOrdinationCompleted = $rootScope.$on(sensorInDeviceConstant.setOrdinationCompletedEventName + $scope.sensorInDevice[0].deviceSensorsId, onSetOrdinationCompleted);
+            }
         }
 
         var clearOnSetOrdinationCompleted = null;        
 
         $scope.$on('$destroy', function () {
-            clearOnSetOrdinationCompleted();
+            if (clearOnSetOrdinationCompleted) clearOnSetOrdinationCompleted();
         });
 
         var onSetOrdinationCompleted = function (event, data) {
@@ -31,7 +33,7 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
                 //Do what you want
             },
             orderChanged: function (event) {
-                var sensorInDevice = event.data;
+                var sensorInDevice = event.source.itemScope.item;
                 sensorInDeviceService.setOrdination(sensorInDevice.deviceSensorsId, sensorInDevice.sensorId, sensorInDevice.sensorDatasheetId, sensorInDevice.sensorTypeId, sensorInDevice.ordination);
             },
             //containment: '#board', //optional param.
