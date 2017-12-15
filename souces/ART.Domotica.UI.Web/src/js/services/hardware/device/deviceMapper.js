@@ -44,6 +44,7 @@ app.factory('deviceMapper', [
         }
 
         var removeDeviceAggregates = function (device) {
+
             //deviceNTP
             var deviceNTP = device.deviceNTP;
             for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
@@ -52,6 +53,7 @@ app.factory('deviceMapper', [
                     break;
                 }
             }
+
             //deviceSensors
             var deviceSensors = device.deviceSensors;
             for (var i = 0; i < deviceContext.deviceSensors.length; i++) {
