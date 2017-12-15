@@ -1,5 +1,20 @@
 ﻿<div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors().sensorInDevice())">
 
+    <!--Teste de Ordenação no Device-->
+    <div>
+        <ul data-as-sortable="board.dragControlListeners" data-ng-model="sensorInDevice">
+            <li data-ng-repeat="item in sensorInDevice" data-as-sortable-item>
+                <div as-sortable-item-handle>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <span class="card-title">{{item.sensor().label}}</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
     <tabset justified="true" class="tab-container">
 
         <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">

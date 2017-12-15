@@ -68,6 +68,10 @@ app.factory('sensorMapper', [
         }
 
         sensorContext.$watchCollection('sensor', function (newValues, oldValues) {
+            //removendo
+            for (var i = 0; i < oldValues.length; i++) {
+                removeSensorAggregates(oldValues[i]);
+            }
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
                 var sensor = newValues[i];
@@ -77,11 +81,7 @@ app.factory('sensorMapper', [
                 sensor.sensorUnitMeasurementScale = function () { return sensorUnitMeasurementScaleFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
                 sensor.sensorTriggers = function () { return sensorTriggerFinder.getBySensorKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
                 sensor.sensorInDevice = function () { return sensorInDeviceFinder.getBySensorKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
-            }
-            //removendo
-            for (var i = 0; i < oldValues.length; i++) {
-                removeSensorAggregates(oldValues[i]);                
-            }
+            }            
         });
 
         sensorContext.$watchCollection('sensorTempDSFamily', function (newValues, oldValues) {
