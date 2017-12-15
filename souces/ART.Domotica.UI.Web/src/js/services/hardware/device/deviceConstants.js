@@ -42,3 +42,11 @@ app.constant('deviceSensorsConstant', {
     setPublishIntervalInSecondsCompletedEventName: 'deviceSensorsService.onSetPublishIntervalInSecondsCompleted_Id_',    
 
 });
+
+app.constant('sensorInDeviceConstant', {
+
+    setOrdinationApiUri: 'api/sensorInDevice/setOrdination',
+    setOrdinationCompletedTopic: 'SensorInDevice.SetOrdinationViewCompleted',
+    setOrdinationCompletedEventName: 'sensorInDeviceService.onSetOrdinationCompleted_Id_',
+
+});

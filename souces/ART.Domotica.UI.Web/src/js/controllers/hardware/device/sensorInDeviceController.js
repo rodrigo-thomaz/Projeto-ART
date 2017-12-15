@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'sensorInDeviceService',
-    function ($scope, $rootScope, $timeout, $log, toaster, sensorInDeviceService) {
+app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'sensorInDeviceService', 'sensorInDeviceConstant',
+    function ($scope, $rootScope, $timeout, $log, toaster, sensorInDeviceService, sensorInDeviceConstant) {
 
         $scope.sensorInDevice = [];
 
@@ -8,15 +8,20 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
 
             $scope.sensorInDevice = sensorInDevice;
 
+            clearOnSetOrdinationCompleted = $rootScope.$on(sensorInDeviceConstant.setOrdinationCompletedEventName + $scope.sensorInDevice[0].deviceSensorsId, onSetOrdinationCompleted);
         }
 
-        $scope.$watchCollection('sensorInDevice', function (newValues, oldValues) {
-
-        });
+        var clearOnSetOrdinationCompleted = null;        
 
         $scope.$on('$destroy', function () {
-
+            clearOnSetOrdinationCompleted();
         });
+
+        var onSetOrdinationCompleted = function (event, data) {
+            //setSelectedTimeZone();
+            $scope.$apply();
+            toaster.pop('success', 'Sucesso', 'Ordem dos sensores alterada');
+        };
 
         $scope.dragControlListeners = {
             accept: function (sourceItemHandleScope, destSortableScope) { //override to determine drag is allowed or not. default is true.
@@ -26,12 +31,16 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
                 //Do what you want
             },
             orderChanged: function (event) {
-                //Do what you want
+                var sensorInDevice = event.data;
+                sensorInDeviceService.setOrdination(sensorInDevice.deviceSensorsId, sensorInDevice.sensorId, sensorInDevice.sensorDatasheetId, sensorInDevice.sensorTypeId, sensorInDevice.ordination);
             },
             //containment: '#board', //optional param.
             clone: false,//optional param for clone feature.
             allowDuplicates: false, //optional param allows duplicates to be dropped.
         };
 
+        $scope.$watchCollection('sensorInDevice', function (newValues, oldValues) {
+
+        });
 
     }]);
