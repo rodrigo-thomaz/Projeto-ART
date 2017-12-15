@@ -1,11 +1,17 @@
 ﻿namespace ART.Domotica.Contract
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class SensorTempDSFamilySetResolutionRequestContract
     {
         #region Properties
+
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
 
         public Guid SensorTempDSFamilyId
         {
@@ -13,11 +19,6 @@
         }
 
         public byte SensorTempDSFamilyResolutionId
-        {
-            get; set;
-        }
-
-        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }

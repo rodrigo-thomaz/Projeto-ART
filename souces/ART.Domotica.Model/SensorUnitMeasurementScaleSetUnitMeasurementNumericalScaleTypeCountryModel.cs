@@ -9,21 +9,6 @@
     {
         #region Properties
 
-        public SensorDatasheetEnum SensorDatasheetId
-        {
-            get; set;
-        }
-
-        public SensorTypeEnum SensorTypeId
-        {
-            get; set;
-        }
-
-        public Guid SensorUnitMeasurementScaleId
-        {
-            get; set;
-        }
-
         public short CountryId
         {
             get; set;
@@ -35,6 +20,21 @@
         }
 
         public NumericalScaleTypeEnum NumericalScaleTypeId
+        {
+            get; set;
+        }
+
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
+        public Guid SensorUnitMeasurementScaleId
         {
             get; set;
         }

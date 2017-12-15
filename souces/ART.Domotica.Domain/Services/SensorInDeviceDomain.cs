@@ -6,6 +6,7 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Domain;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -28,7 +29,7 @@
 
         public async Task<SensorInDevice> SetOrdination(Guid deviceSensorsId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination)
         {
-            var entities = await _sensorInDeviceRepository.GetByDeviceSensorsKey(deviceSensorsId);            
+            var entities = await _sensorInDeviceRepository.GetByDeviceSensorsKey(deviceSensorsId);
 
             var sensorInDevice = entities
                 .Where(x => x.DeviceSensorsId == deviceSensorsId)
@@ -37,27 +38,29 @@
                 .Where(x => x.SensorTypeId == sensorTypeId)
                 .FirstOrDefault();
 
-            if(sensorInDevice == null)
+            if (sensorInDevice == null)
             {
                 throw new Exception("SensorInDevice not found");
             }
 
-            var ordered = entities.OrderBy(x => x.Ordination).ToList();
+            var orderedExceptCurrent = entities
+                .Except(new List<SensorInDevice> { sensorInDevice })
+                .OrderBy(x => x.Ordination)
+                .ToList();
 
-            for (int i = 0; i < ordered.Count(); i++)
+            short counter = 0;
+
+            for (short i = 0; i < orderedExceptCurrent.Count(); i++)
             {
-                if (sensorInDevice == ordered[i])
+                if (i == ordination)
                 {
-
+                    sensorInDevice.Ordination = ordination;
                 }
-            }
-
-            foreach (var item in ordered)
-            {
-                if(item == sensorInDevice)
+                else
                 {
-
+                    orderedExceptCurrent[i].Ordination = counter;
                 }
+                counter++;
             }
 
             await _sensorInDeviceRepository.Update(entities);

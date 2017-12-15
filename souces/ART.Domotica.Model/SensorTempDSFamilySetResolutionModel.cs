@@ -1,28 +1,29 @@
 ﻿namespace ART.Domotica.Model
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class SensorTempDSFamilySetResolutionModel
     {
         #region Properties
-
-        public Guid SensorTempDSFamilyId
-        {
-            get; set;
-        }
 
         public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
 
-        public SensorTypeEnum SensorTypeId
+        public Guid SensorTempDSFamilyId
         {
             get; set;
         }
 
         public byte SensorTempDSFamilyResolutionId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }

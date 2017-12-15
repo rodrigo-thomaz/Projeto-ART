@@ -34,7 +34,8 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
             },
             orderChanged: function (event) {
                 var sensorInDevice = event.source.itemScope.item;
-                sensorInDeviceService.setOrdination(sensorInDevice.deviceSensorsId, sensorInDevice.sensorId, sensorInDevice.sensorDatasheetId, sensorInDevice.sensorTypeId, sensorInDevice.ordination);
+                var ordination = event.dest.index;
+                sensorInDeviceService.setOrdination(sensorInDevice.deviceSensorsId, sensorInDevice.sensorId, sensorInDevice.sensorDatasheetId, sensorInDevice.sensorTypeId, ordination);
             },
             //containment: '#board', //optional param.
             clone: false,//optional param for clone feature.

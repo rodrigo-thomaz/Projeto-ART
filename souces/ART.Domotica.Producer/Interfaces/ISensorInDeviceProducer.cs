@@ -1,11 +1,16 @@
-﻿using ART.Domotica.Contract;
-using ART.Infra.CrossCutting.MQ.Contract;
-using System.Threading.Tasks;
-
-namespace ART.Domotica.Producer.Interfaces
+﻿namespace ART.Domotica.Producer.Interfaces
 {
+    using System.Threading.Tasks;
+
+    using ART.Domotica.Contract;
+    using ART.Infra.CrossCutting.MQ.Contract;
+
     public interface ISensorInDeviceProducer
     {
+        #region Methods
+
         Task SetOrdination(AuthenticatedMessageContract<SensorInDeviceSetOrdinationRequestContract> message);
+
+        #endregion Methods
     }
 }

@@ -7,22 +7,7 @@
 
     public class SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryRequestContract
     {
-        #region Properties        
-
-        public SensorDatasheetEnum SensorDatasheetId
-        {
-            get; set;
-        }
-
-        public SensorTypeEnum SensorTypeId
-        {
-            get; set;
-        }
-
-        public Guid SensorUnitMeasurementScaleId
-        {
-            get; set;
-        }
+        #region Properties
 
         public short CountryId
         {
@@ -35,6 +20,21 @@
         }
 
         public NumericalScaleTypeEnum NumericalScaleTypeId
+        {
+            get; set;
+        }
+
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
+        public Guid SensorUnitMeasurementScaleId
         {
             get; set;
         }
