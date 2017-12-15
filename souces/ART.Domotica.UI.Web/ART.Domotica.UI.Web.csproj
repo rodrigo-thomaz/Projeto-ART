@@ -553,7 +553,7 @@
     <Content Include="src\views\espDeviceList.html" />
     <Content Include="src\views\hardware\device\device.html" />
     <Content Include="src\views\hardware\device\deviceNTP.html" />
-    <Content Include="src\views\hardware\device\DeviceSensors.html" />
+    <Content Include="src\views\hardware\device\deviceSensors.html" />
     <Content Include="src\views\hardware\device\sensorInDevice.html" />
     <Content Include="src\views\hardware\sensor\sensor.html" />
     <Content Include="src\views\hardware\sensor\sensorTempDSFamily.html" />

@@ -1,1 +1,21 @@
-﻿
+﻿<div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors().sensorInDevice())">
+
+    <tabset justified="true" class="tab-container">
+
+        <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
+
+            <div data-ng-include=" 'views/hardware/sensor/sensor.html' "></div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div data-ng-include=" 'views/hardware/sensor/sensorUnitMeasurementScale.html' "></div>
+
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+
+            <div data-ng-include=" 'views/hardware/sensor/sensorTempDSFamily.html' "></div>
+
+        </tab>
+
+    </tabset>
+
+</div>

@@ -84,37 +84,21 @@
 
                             </form>
 
-                            <form name="formDeviceSensors" class="form-horizontal form-validation" ng-controller="deviceSensorsController" ng-init="init(deviceItem.deviceSensors())">
-                                <div class="form-group">
-                                    <label class="col-lg-4 control-label">Publish interval in seconds</label>
-                                    <div class="col-lg-8">
-                                        <input name="inputPublishIntervalInSeconds" type="number" ng-model="publishIntervalInSecondsView" ng-model-options="{ debounce: 1000 }" ng-change="changePublishIntervalInSeconds()" min="5" required class="form-control">
-                                    </div>
-                                    <span ng-show="formDeviceSensors.publishIntervalInSecondsView.$touched && formDeviceSensors.publishIntervalInSecondsView.$invalid">
-                                        Publish Interval In Seconds deve ser maior que 5
-                                    </span>
-                                </div>
-                            </form>
+                            <div class="line line-dashed b-b line-lg pull-in"></div>
 
-                            <div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors().sensorInDevice())">
-                                <tabset justified="true" class="tab-container">
-                                    
-                                    <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
+                            <div data-ng-include=" 'views/hardware/device/deviceSensors.html' "></div>
 
-                                        <div data-ng-include=" 'views/hardware/sensor/sensor.html' "></div>
+                            <div data-ng-include=" 'views/hardware/device/sensorInDevice.html' "></div>
 
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>                                        
 
-                                        <div data-ng-include=" 'views/hardware/sensor/sensorUnitMeasurementScale.html' "></div>
 
-                                        <div class="line line-dashed b-b line-lg pull-in"></div>                                        
 
-                                        <div data-ng-include=" 'views/hardware/sensor/sensorTempDSFamily.html' "></div>
 
-                                    </tab>
 
-                                </tabset>
-                            </div>
+
+
+
+
 
 
 
