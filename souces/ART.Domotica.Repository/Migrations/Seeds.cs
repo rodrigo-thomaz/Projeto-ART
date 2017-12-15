@@ -468,7 +468,7 @@
 
             #endregion
 
-            #region ESPDevice
+            #region ESPDevice1
 
             var espDevice1MacAddress = "A0:20:A6:17:83:25";
 
@@ -592,6 +592,88 @@
             };
 
             context.SensorInDevice.AddOrUpdate(sensorInDevice_3_2);
+
+            context.SaveChanges();
+
+            #endregion
+
+            #region ESPDevice2
+
+            var espDevice2MacAddress = "5C:CF:7F:4C:81:F8";
+
+            //Soft AP MAC 5E:CF:7F:4C:81:F8
+            //Station MAC 5C:CF:7F:4C:81:F8
+
+               var espDevice2 = context.ESPDevice
+                .Include(x => x.DeviceMQ)
+                .Include(x => x.DeviceNTP)
+                .Include(x => x.DeviceSensors)
+                .SingleOrDefault(x => x.MacAddress.ToLower() == espDevice2MacAddress.ToLower());
+
+            if (espDevice2 == null)
+            {
+                var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
+
+                espDevice2 = new ESPDevice
+                {
+                    ChipId = 5014008,
+                    FlashChipId = 1458415,
+                    MacAddress = espDevice2MacAddress,
+                    Pin = RandonHelper.RandomString(4),
+                    Label = "Device 2",
+                    CreateDate = DateTime.Now,
+                    DeviceMQ = new DeviceMQ
+                    {
+                        User = "test2",
+                        Password = "test2",
+                        ClientId = RandonHelper.RandomString(10),
+                        Topic = RandonHelper.RandomString(10),
+                    },
+                    DeviceNTP = new DeviceNTP
+                    {
+                        TimeZoneId = timeZoneBrasilia.Id, // Cada hora são 3600 segundos
+                        UpdateIntervalInMilliSecond = 80000,
+                    },
+                    DeviceSensors = new DeviceSensors
+                    {
+                        PublishIntervalInSeconds = 9,
+                    },
+                };
+
+                context.ESPDevice.Add(espDevice2);
+            }
+            else
+            {
+                espDevice2.ChipId = 5014008;
+                espDevice2.FlashChipId = 1458415;
+                if (espDevice2.DeviceMQ == null)
+                {
+                    espDevice2.DeviceMQ = new DeviceMQ
+                    {
+                        User = "test",
+                        Password = "test",
+                        ClientId = RandonHelper.RandomString(10),
+                        Topic = RandonHelper.RandomString(10),
+                    };
+                }
+                if (espDevice2.DeviceNTP == null)
+                {
+                    var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
+
+                    espDevice2.DeviceNTP = new DeviceNTP
+                    {
+                        TimeZoneId = timeZoneBrasilia.Id, // Cada hora são 3600 segundos
+                        UpdateIntervalInMilliSecond = 80000,
+                    };
+                }
+                if (espDevice2.DeviceSensors == null)
+                {
+                    espDevice2.DeviceSensors = new DeviceSensors
+                    {
+                        PublishIntervalInSeconds = 9,
+                    };
+                }
+            }
 
             context.SaveChanges();
 
