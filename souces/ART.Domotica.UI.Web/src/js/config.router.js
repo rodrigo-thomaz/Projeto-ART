@@ -153,6 +153,7 @@ angular.module('app')
 
                       'js/controllers/hardware/sensor/sensorController.js',
                       'js/controllers/hardware/sensor/sensorUnitMeasurementScaleController.js',
+                      'js/controllers/hardware/sensor/sensorTempDSFamilyController.js',
                       
                       'js/controllers/sensorTriggerController.js',
 

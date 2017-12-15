@@ -1,47 +1,51 @@
 ﻿'use strict';
-app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorFinder', 'sensorTempDSFamilyConstant', function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorFinder, sensorTempDSFamilyConstant) {
+app.factory('sensorTempDSFamilyService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorContext', 'sensorTempDSFamilyFinder', 'sensorTempDSFamilyConstant',
+    function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorContext, sensorTempDSFamilyFinder, sensorTempDSFamilyConstant) {
 
-    var serviceFactory = {};   
+        var serviceFactory = {};
 
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+        var serviceBase = ngAuthSettings.distributedServicesUri;
 
-    var setResolutionCompletedSubscription = null;
+        var setResolutionCompletedSubscription = null;
 
-    var setResolution = function (sensorTempDSFamilyId, sensorTempDSFamilyResolutionId) {
-        var data = {
-            sensorTempDSFamilyId: sensorTempDSFamilyId,
-            sensorTempDSFamilyResolutionId: sensorTempDSFamilyResolutionId,
+        var onConnected = function () {
+            setResolutionCompletedSubscription = stompService.subscribeAllViews(sensorTempDSFamilyConstant.setResolutionCompletedTopic, onSetResolutionCompleted);
         }
-        return $http.post(serviceBase + sensorTempDSFamilyConstant.setResolutionApiUri, data).then(function (results) {
-            return results;
+
+        var setResolution = function (sensorTempDSFamilyId, sensorDatasheetId, sensorTypeId, sensorTempDSFamilyResolutionId) {
+            var data = {
+                sensorTempDSFamilyId: sensorTempDSFamilyId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,
+                sensorTempDSFamilyResolutionId: sensorTempDSFamilyResolutionId,
+            }
+            return $http.post(serviceBase + sensorTempDSFamilyConstant.setResolutionApiUri, data).then(function (results) {
+                return results;
+            });
+        };        
+
+        var onSetResolutionCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var sensorTempDSFamily = sensorTempDSFamilyFinder.getByKey(result.sensorTempDSFamilyId, result.sensorDatasheetId, result.sensorTypeId);
+            sensorTempDSFamily.sensorTempDSFamilyResolutionId = result.sensorTempDSFamilyResolutionId;
+            sensorContext.$digest();
+            $rootScope.$emit(sensorTempDSFamilyConstant.setResolutionCompletedEventName + result.sensorTempDSFamilyId, result);
+        }
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
+            setResolutionCompletedSubscription.unsubscribe();
         });
-    };
 
-    var onConnected = function () {
-        setResolutionCompletedSubscription = stompService.subscribeAllViews(sensorTempDSFamilyConstant.setResolutionCompletedTopic, onSetResolutionCompleted);
-    }      
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
 
-    var onSetResolutionCompleted = function (payload) {
-        var result = JSON.parse(payload.body);
-        var sensor = sensorFinder.getByKey(result.sensorTempDSFamilyId, result.sensorDatasheetId, result.sensorTypeId);
-        sensor.sensorTempDSFamilyResolutionId = result.sensorTempDSFamilyResolutionId;
-        $rootScope.$emit(sensorTempDSFamilyConstant.setResolutionCompletedEventName + result.sensorTempDSFamilyId, result);
-    }     
+        // stompService
+        if (stompService.connected()) onConnected();
 
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-        setResolutionCompletedSubscription.unsubscribe();
-    });
+        // serviceFactory
 
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected); 
+        serviceFactory.setResolution = setResolution;
 
-    // stompService
-    if (stompService.connected()) onConnected();
+        return serviceFactory;
 
-    // serviceFactory
-
-    serviceFactory.setResolution = setResolution;
-    
-    return serviceFactory;
-
-}]);
+    }]);

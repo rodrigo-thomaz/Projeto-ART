@@ -8,6 +8,7 @@ using ART.Infra.CrossCutting.Domain;
 using Autofac;
 using ART.Domotica.Repository;
 using ART.Domotica.Repository.Repositories;
+using ART.Domotica.Enums;
 
 namespace ART.Domotica.Domain.Services
 {
@@ -39,9 +40,9 @@ namespace ART.Domotica.Domain.Services
             return await _sensorTempDSFamilyResolutionRepository.GetAll();
         }
         
-        public async Task<SensorTempDSFamily> SetResolution(Guid sensorTempDSFamilyId, byte sensorTempDSFamilyResolutionId)
+        public async Task<SensorTempDSFamily> SetResolution(Guid sensorTempDSFamilyId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, byte sensorTempDSFamilyResolutionId)
         {
-            var sensorTempDSFamilyEntity = await _sensorTempDSFamilyRepository.GetByKey(sensorTempDSFamilyId);
+            var sensorTempDSFamilyEntity = await _sensorTempDSFamilyRepository.GetByKey(sensorTempDSFamilyId, sensorDatasheetId, sensorTypeId);
 
             if (sensorTempDSFamilyEntity == null)
             {

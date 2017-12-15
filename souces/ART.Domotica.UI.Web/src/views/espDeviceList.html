@@ -208,6 +208,19 @@
 
                                         </form>
 
+                                        <form name="form" class="form-horizontal form-validation" ng-controller="sensorTempDSFamilyController" ng-init="init(sensorInDeviceItem.sensor().sensorTempDSFamily())">
+                                            <div class="form-group">
+                                                <label class="col-lg-4 control-label">Resolução</label>
+                                                <div class="col-lg-8">
+                                                    <select class="form-control m-b" 
+                                                            ng-options="item.name for item in sensorTempDSFamilyResolutionView.availables track by item.sensorTempDSFamilyResolutionId" 
+                                                            ng-model="sensorTempDSFamilyResolutionView.selected">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="line line-dashed b-b line-lg pull-in"></div>
+                                        </form>
+
                                     </tab>
                                 </tabset>
                             </div>

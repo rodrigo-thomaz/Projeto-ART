@@ -120,7 +120,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTempDSFamilySetResolutionRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<ISensorTempDSFamilyDomain>();
-            var data = await domain.SetResolution(message.Contract.SensorTempDSFamilyId, message.Contract.SensorTempDSFamilyResolutionId);
+            var data = await domain.SetResolution(message.Contract.SensorTempDSFamilyId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.SensorTempDSFamilyResolutionId);
 
             var exchange = "amq.topic";
 
@@ -138,7 +138,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorTempDSFamilySetResolutionRequestContract, SensorTempDSFamilySetResolutionRequestIoTContract>(message.Contract);

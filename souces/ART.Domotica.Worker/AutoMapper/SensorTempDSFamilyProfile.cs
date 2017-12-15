@@ -17,7 +17,8 @@
         {
             CreateMap<SensorTempDSFamily, SensorTempDSFamilySetResolutionModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Sensor.SensorInDevice.Single().DeviceSensorsId))
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.SensorTempDSFamilyResolutionId));
 
             CreateMap<SensorTempDSFamilyResolution, SensorTempDSFamilyResolutionGetModel>()
@@ -32,10 +33,14 @@
 
             CreateMap<SensorInDevice, SensorTempDSFamilyGetModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolutionId));
 
             CreateMap<SensorTempDSFamily, SensorTempDSFamilyGetModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolutionId));
         }
 
