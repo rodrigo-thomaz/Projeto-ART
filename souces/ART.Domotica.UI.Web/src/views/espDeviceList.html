@@ -15,7 +15,13 @@
             <div>
                 <ul data-as-sortable="board.dragControlListeners" data-ng-model="devices">
                     <li data-ng-repeat="item in devices" data-as-sortable-item>
-                        <div data-as-sortable-item-handle></div>
+                        <div as-sortable-item-handle>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <span class="card-title">{{item.label}}</span>
+                                </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </div>

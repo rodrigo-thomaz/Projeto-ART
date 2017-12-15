@@ -28,12 +28,27 @@ app.factory('deviceMapper', [
 
         var addDeviceAggregates = function (device) {
             //deviceNTP
-            deviceContext.deviceNTP.push(device.deviceNTP);
+            var deviceNTP = null;
+            if (angular.isObject(device.deviceNTP))
+                deviceNTP = device.deviceNTP;
+            else if (angular.isFunction(device.deviceNTP)) 
+                deviceNTP = device.deviceNTP();
+            deviceContext.deviceNTP.push(deviceNTP);
             //deviceSensors
-            deviceContext.deviceSensors.push(device.deviceSensors);
+            var deviceSensors = null;
+            if (angular.isObject(device.deviceSensors))
+                deviceSensors = device.deviceSensors;
+            else if (angular.isFunction(device.deviceSensors))
+                deviceSensors = device.deviceSensors();
+            deviceContext.deviceSensors.push(deviceSensors);
             //sensorInDevice
-            for (var i = 0; i < device.deviceSensors.sensorInDevice.length; i++) {
-                deviceContext.sensorInDevice.push(device.deviceSensors.sensorInDevice[i]);
+            var sensorInDevice = null;
+            if (angular.isObject(deviceSensors.sensorInDevice))
+                sensorInDevice = deviceSensors.sensorInDevice;
+            else if (angular.isFunction(deviceSensors.sensorInDevice))
+                sensorInDevice = deviceSensors.sensorInDevice();
+            for (var i = 0; i < sensorInDevice.length; i++) {
+                deviceContext.sensorInDevice.push(sensorInDevice[i]);
             }
         }
 
@@ -44,7 +59,7 @@ app.factory('deviceMapper', [
                     deviceContext.deviceNTP.splice(i, 1);
                     break;
                 }
-            }
+            }            
             //deviceSensors
             for (var i = 0; i < deviceContext.deviceSensors.length; i++) {
                 if (device.deviceSensors === deviceContext.deviceSensors[i]) {
@@ -53,8 +68,9 @@ app.factory('deviceMapper', [
                 }
             }
             //sensorInDevice
-            for (var i = 0; i < device.deviceSensors.sensorInDevice.length; i++) {
-                var sensorInDevice = device.deviceSensors.sensorInDevice[i];
+            var sensorsInDevices = device.deviceSensors().sensorInDevice();
+            for (var i = 0; i < sensorsInDevices.length; i++) {
+                var sensorInDevice = sensorsInDevices[i];
                 for (var j = 0; j < deviceContext.sensorInDevice.length; j++) {
                     if (sensorInDevice === deviceContext.sensorInDevice[j]) {
                         deviceContext.sensorInDevice.splice(j, 1);
@@ -64,17 +80,17 @@ app.factory('deviceMapper', [
         }
 
         deviceContext.$watchCollection('device', function (newValues, oldValues) {
+            //removendo
+            for (var i = 0; i < oldValues.length; i++) {
+                removeDeviceAggregates(oldValues[i]);
+            }
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
                 var device = newValues[i];
                 addDeviceAggregates(device);
                 device.deviceNTP = function () { return deviceNTPFinder.getByKey(this.deviceId); }
                 device.deviceSensors = function () { return deviceSensorsFinder.getByKey(this.deviceId); }
-            }
-            //removendo
-            for (var i = 0; i < oldValues.length; i++) {
-                removeDeviceAggregates(oldValues[i]);
-            }
+            }            
         });
 
         deviceContext.$watchCollection('deviceNTP', function (newValues, oldValues) {
