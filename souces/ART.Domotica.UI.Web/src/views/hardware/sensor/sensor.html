@@ -1,0 +1,11 @@
+﻿<form name="form" class="form-horizontal form-validation" ng-controller="sensorController" ng-init="init(sensorInDeviceItem.sensor())">
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Rótulo</label>
+        <div class="col-lg-8">
+            <input name="inputSensorLabel" type="text" class="form-control" ng-model="sensorLabel" ng-model-options="{ debounce: 1000 }" ng-change="changeSensorLabel()" required>
+            <span ng-show="form.inputSensorLabel.$touched && form.inputSensorLabel.$invalid">
+                Rótulo é requerido
+            </span>
+        </div>
+    </div>
+</form>
