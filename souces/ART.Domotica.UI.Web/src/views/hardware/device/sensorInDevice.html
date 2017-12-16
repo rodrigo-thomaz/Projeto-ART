@@ -15,9 +15,9 @@
         </ul>
     </div>
 
-    <tabset justified="true" class="tab-container">
-
-        <tab heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
+    <accordion close-others="true"> 
+        
+        <accordion-group heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
 
             <div data-ng-include=" 'views/hardware/sensor/sensor.html' "></div>
 
@@ -29,8 +29,8 @@
 
             <div data-ng-include=" 'views/hardware/sensor/sensorTempDSFamily.html' "></div>
 
-        </tab>
+        </accordion-group>
 
-    </tabset>
+    </accordion>   
 
 </div>
