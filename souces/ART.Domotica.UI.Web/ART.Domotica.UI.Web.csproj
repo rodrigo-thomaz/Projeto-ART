@@ -360,6 +360,7 @@
     <Content Include="src\js\services\locale\countryService.js" />
     <Content Include="src\js\services\hardware\sensorDatasheet\sensorDatasheetUnitMeasurementScaleService.js" />
     <Content Include="src\l10n\pt.js" />
+    <Content Include="src\js\prototypes.js" />
     <Content Include="src\psd\ui.zip" />
     <Content Include="src\js\config.interceptor.js" />
     <None Include="Web.Debug.config">

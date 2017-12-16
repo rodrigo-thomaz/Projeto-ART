@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', 'sensorInDeviceConstant', 'sensorInDeviceFinder',
-    function ($http, ngAuthSettings, $rootScope, stompService, deviceContext, sensorInDeviceConstant, sensorInDeviceFinder) {
+app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', 'sensorInDeviceConstant', 'deviceSensorsFinder', 'sensorInDeviceFinder',
+    function ($http, ngAuthSettings, $rootScope, stompService, deviceContext, sensorInDeviceConstant, deviceSensorsFinder, sensorInDeviceFinder) {
 
         var serviceFactory = {};
 
@@ -27,8 +27,15 @@ app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', '
 
         var onSetOrdinationCompleted = function (payload) {
             var result = JSON.parse(payload.body);
+            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId);
             var sensorInDevice = sensorInDeviceFinder.getByKey(result.deviceSensorsId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
-            sensorInDevice.ordination = result.ordination;
+            for (var i = 0; i < deviceSensors.sensorInDevice.length; i++) {
+                if (sensorInDevice === deviceSensors.sensorInDevice[i]) {
+                    deviceSensors.sensorInDevice.splice(i, 1);
+                    break;
+                }
+            }
+            deviceSensors.sensorInDevice.insert(result.ordination, sensorInDevice);
             deviceContext.$digest();
             $rootScope.$emit(sensorInDeviceConstant.setOrdinationCompletedEventName + result.deviceSensorsId, result);
         };
@@ -50,3 +57,4 @@ app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', '
         return serviceFactory;
 
     }]);
+

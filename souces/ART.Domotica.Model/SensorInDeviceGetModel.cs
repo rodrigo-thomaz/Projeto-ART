@@ -13,11 +13,6 @@
             get; set;
         }
 
-        public short Ordination
-        {
-            get; set;
-        }
-
         public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
