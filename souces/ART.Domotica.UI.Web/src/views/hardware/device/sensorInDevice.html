@@ -17,7 +17,11 @@
 
     <accordion close-others="true"> 
         
-        <accordion-group heading="{{sensorInDeviceItem.sensor().label}}" ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
+        <accordion-group data-ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
+
+            <accordion-heading>
+                {{sensorInDeviceItem.sensor().label}}
+            </accordion-heading>
 
             <div data-ng-include=" 'views/hardware/sensor/sensor.html' "></div>
 
