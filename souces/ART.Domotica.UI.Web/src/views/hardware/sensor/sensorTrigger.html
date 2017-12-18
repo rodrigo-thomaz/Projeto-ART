@@ -14,12 +14,13 @@
             <tr>
                 <th width="100px">Trigger On</th>
                 <th width="100px">Buzzer On</th>
-                <th>Range</th>                
+                <th>Min</th>
+                <th>Max</th>                
                 <th width="50px"></th>
             </tr>
         </thead>
-        <tbody>
-            <tr data-ng-repeat="(sensorTriggerKey, sensorTriggerItem) in sensorTriggers">
+        <tbody data-ng-repeat="(sensorTriggerKey, sensorTriggerItem) in sensorTriggers">
+            <tr>
                 <td>
                     <div class="checkbox">
                         <label class="i-checks">
@@ -35,12 +36,11 @@
                     </div>
                 </td>
                 <td>
-                    <slider ng-model="sensorTriggerItem.min"
-                            ng-model-range="sensorTriggerItem.max"
-                            floor="1"
-                            ceiling="100">
-                    </slider>
-                </td>                
+                    <input type="number" ng-model="sensorTriggerItem.min" />
+                </td>
+                <td>
+                    <input type="number" ng-model="sensorTriggerItem.max" />                    
+                </td>
                 <td>
                     <div class="text-center">
                         <a class="btn btn-danger" href="" aria-label="Delete">
@@ -48,6 +48,15 @@
                         </a>
                     </div>
                 </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+                    <slider ng-model="sensorTriggerItem.min"
+                            ng-model-range="sensorTriggerItem.max"
+                            floor="-55"
+                            ceiling="125">
+                    </slider>
+                </td>                                
             </tr>
         </tbody>
     </table>

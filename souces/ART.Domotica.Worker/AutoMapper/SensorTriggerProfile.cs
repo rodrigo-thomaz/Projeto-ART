@@ -22,11 +22,12 @@
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn))
                 .ForMember(vm => vm.TriggerOn, m => m.MapFrom(x => x.TriggerOn))
-                .ForMember(vm => vm.TriggerValue, m => m.MapFrom(x => x.TriggerValue));
+                .ForMember(vm => vm.Max, m => m.MapFrom(x => x.Max))
+                .ForMember(vm => vm.Min, m => m.MapFrom(x => x.Min));
 
             CreateMap<SensorTrigger, SensorTriggerGetResponseIoTContract>()
                 .ForMember(vm => vm.AlarmOn, m => m.MapFrom(x => x.TriggerOn))
-                .ForMember(vm => vm.AlarmCelsius, m => m.MapFrom(x => Convert.ToDecimal(x.TriggerValue)))
+                .ForMember(vm => vm.AlarmCelsius, m => m.MapFrom(x => Convert.ToDecimal(x.Max)))
                 .ForMember(vm => vm.AlarmBuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
 
             CreateMap<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnRequestIoTContract>();

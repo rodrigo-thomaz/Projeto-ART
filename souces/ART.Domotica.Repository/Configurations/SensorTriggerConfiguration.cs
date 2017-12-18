@@ -65,10 +65,16 @@
                 .HasColumnOrder(5)
                 .IsRequired();
 
-            //TriggerValue
-            Property(x => x.TriggerValue)
+            //Max
+            Property(x => x.Max)
                 .HasColumnOrder(6)
-                .HasMaxLength(50)
+                .HasPrecision(7, 4)
+                .IsRequired();
+
+            //Min
+            Property(x => x.Min)
+                .HasColumnOrder(7)
+                .HasPrecision(7, 4)
                 .IsRequired();
         }
 

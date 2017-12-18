@@ -38,7 +38,12 @@
             get; set;
         }
 
-        public string TriggerValue
+        public decimal Max
+        {
+            get; set;
+        }
+
+        public decimal Min
         {
             get; set;
         }

@@ -47,14 +47,14 @@
 
             if (position == SensorUnitMeasurementScalePositionEnum.Max)
             {
-                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
+                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.Max));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Max) == maxValue);
                 sensorTrigger.TriggerOn = alarmOn;
             }
             else if (position == SensorUnitMeasurementScalePositionEnum.Min)
             {
-                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
+                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.Min));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Min) == minValue);
                 sensorTrigger.TriggerOn = alarmOn;
             }
 
@@ -76,15 +76,15 @@
 
             if (position == SensorUnitMeasurementScalePositionEnum.Max)
             {
-                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
-                sensorTrigger.TriggerValue = alarmCelsius.ToString();
+                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.Max));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Max) == maxValue);
+                sensorTrigger.Max = alarmCelsius;
             }
             else if (position == SensorUnitMeasurementScalePositionEnum.Min)
             {
-                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
-                sensorTrigger.TriggerValue = alarmCelsius.ToString();
+                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.Min));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Min) == minValue);
+                sensorTrigger.Min = alarmCelsius;
             }
 
             await _sensorTriggerRepository.Update(sensorTriggers);
@@ -105,14 +105,14 @@
 
             if (position == SensorUnitMeasurementScalePositionEnum.Max)
             {
-                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.TriggerValue));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == maxValue);
+                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.Max));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Max) == maxValue);
                 sensorTrigger.BuzzerOn = alarmBuzzerOn;
             }
             else if (position == SensorUnitMeasurementScalePositionEnum.Min)
             {
-                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.TriggerValue));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.TriggerValue) == minValue);
+                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.Min));
+                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Min) == minValue);
                 sensorTrigger.BuzzerOn = alarmBuzzerOn;
             }
 

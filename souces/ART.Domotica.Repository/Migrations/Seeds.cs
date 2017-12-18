@@ -137,7 +137,8 @@
                         new SensorTrigger
                         {
                             TriggerOn = true,
-                            TriggerValue = "<min>-55</min><max>125</max>",
+                            Max = 26,
+                            Min = 22,
                             BuzzerOn = true,
                         },
                     },
@@ -167,7 +168,8 @@
                     sensor_1.SensorTriggers.Add(new SensorTrigger
                     {
                         TriggerOn = true,
-                        TriggerValue = "<min>-55</min><max>125</max>",
+                        Max = 26,
+                        Min = 22,
                         BuzzerOn = true,
                     });
                 }
@@ -207,7 +209,8 @@
                         new SensorTrigger
                         {
                             TriggerOn = true,
-                            TriggerValue = "<min>-55</min><max>125</max>",
+                            Max = 26,
+                            Min = 22,
                             BuzzerOn = true,
                         },
                     },
@@ -237,7 +240,8 @@
                     sensor_2_1.SensorTriggers.Add(new SensorTrigger
                     {
                         TriggerOn = true,
-                        TriggerValue = "<min>-55</min><max>125</max>",
+                        Max = 26,
+                        Min = 22,
                         BuzzerOn = true,
                     });
                 }
@@ -276,7 +280,8 @@
                         new SensorTrigger
                         {
                             TriggerOn = true,
-                            TriggerValue = "<min>-55</min><max>125</max>",
+                            Max = 26,
+                            Min = 22,
                             BuzzerOn = true,
                         },
                     },
@@ -306,7 +311,8 @@
                     sensor_2_2.SensorTriggers.Add(new SensorTrigger
                     {
                         TriggerOn = true,
-                        TriggerValue = "<min>-55</min><max>125</max>",
+                        Max = 26,
+                        Min = 22,
                         BuzzerOn = true,
                     });
                 }
@@ -345,7 +351,8 @@
                         new SensorTrigger
                         {
                             TriggerOn = true,
-                            TriggerValue = "<min>-55</min><max>125</max>",
+                            Max = 26,
+                            Min = 22,
                             BuzzerOn = true,
                         },
                     },
@@ -375,7 +382,8 @@
                     sensor_3_1.SensorTriggers.Add(new SensorTrigger
                     {
                         TriggerOn = true,
-                        TriggerValue = "<min>-55</min><max>125</max>",
+                        Max = 26,
+                        Min = 22,
                         BuzzerOn = true,
                     });
                 }
@@ -414,7 +422,8 @@
                         new SensorTrigger
                         {
                             TriggerOn = true,
-                            TriggerValue = "<min>-55</min><max>125</max>",
+                            Max = 26,
+                            Min = 22,
                             BuzzerOn = true,
                         },
                     },
@@ -444,7 +453,8 @@
                     sensor_3_2.SensorTriggers.Add(new SensorTrigger
                     {
                         TriggerOn = true,
-                        TriggerValue = "<min>-55</min><max>125</max>",
+                        Max = 26,
+                        Min = 22,
                         BuzzerOn = true,
                     });
                 }
