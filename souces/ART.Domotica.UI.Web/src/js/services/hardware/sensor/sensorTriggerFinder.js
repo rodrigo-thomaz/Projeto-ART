@@ -5,10 +5,10 @@ app.factory('sensorTriggerFinder', ['$rootScope', 'sensorContext', function ($ro
 
     var serviceFactory = {};
 
-    var getByKey = function (sensorTriggerId) {
+    var getByKey = function (sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId) {
         for (var i = 0; i < context.sensorTrigger.length; i++) {
             var item = context.sensorTrigger[i];
-            if (item.sensorTriggerId === sensorTriggerId) {
+            if (item.sensorTriggerId === sensorTriggerId && item.sensorId === sensorId && item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId) {
                 return item;
             }
         }
