@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorContext', 'sensorTriggerFinder', 'sensorTriggerConstant',
-    function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorContext, sensorTriggerFinder, sensorTriggerConstant) {
+app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorContext', 'sensorFinder', 'sensorTriggerFinder', 'sensorTriggerConstant',
+    function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorContext, sensorFinder, sensorTriggerFinder, sensorTriggerConstant) {
 
         var serviceFactory = {};
 
@@ -88,7 +88,9 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
         }
 
         var onInsertCompleted = function (payload) {
-            var result = JSON.parse(payload.body);
+            var result = JSON.parse(payload.body);            
+            var sensor = sensorFinder.getByKey(result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
+            sensor.sensorTriggers.push(result);
             sensorContext.sensorTrigger.push(result);
             sensorContext.$digest();
             $rootScope.$emit(sensorTriggerConstant.insertCompletedEventName + result.sensorTriggerId, result);

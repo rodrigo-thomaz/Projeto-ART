@@ -103,6 +103,13 @@ app.factory('sensorMapper', [
                 sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale = function () { return sensorDatasheetUnitMeasurementScaleFinder.getByKey(this.sensorDatasheetId, this.sensorTypeId, this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
         });                        
+
+        sensorContext.$watchCollection('sensorTrigger', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var sensorTrigger = newValues[i];
+                sensorTrigger.sensor = function () { return sensorFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
+            }
+        }); 
         
         // *** Events Subscriptions
 
