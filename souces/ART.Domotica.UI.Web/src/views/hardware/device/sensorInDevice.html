@@ -2,18 +2,20 @@
     
     <!--Teste de Ordenação no Scope do Controller-->
     <div>
-        <ul data-as-sortable="dragControlListeners" data-ng-model="sensorInDevice">
-            <li data-ng-repeat="item in sensorInDevice" data-as-sortable-item>
-                <div as-sortable-item-handle>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <span class="card-title">{{item.sensor().label}}</span>
-                        </div>
-                    </div>
+        <ul data-as-sortable="dragControlListeners" data-ng-model="sensorInDevice" class="sortable-custom-ul panel-group">
+            <li data-ng-repeat="item in sensorInDevice" data-as-sortable-item class="panel panel-default">
+                <div as-sortable-item-handle class="panel-heading">
+                    <h4 class="panel-title">
+                        <!--<a href="" class="accordion-toggle">
+                            <span>{{item.sensor().label}}</span>
+                        </a>-->
+                        <span style="font-size:14px;">{{item.sensor().label}}</span>
+                    </h4>
                 </div>
             </li>
         </ul>
     </div>
+
 
     <accordion close-others="true"> 
         

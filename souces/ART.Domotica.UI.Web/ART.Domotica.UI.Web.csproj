@@ -113,6 +113,7 @@
     <Content Include="libs\angular\ng-sortable\source\sortable.js" />
     <Content Include="libs\angular\ng-sortable\test\runner.html" />
     <Content Include="libs\angular\ng-sortable\test\sortable.spec.js" />
+    <Content Include="src\css\custom-sortable.css" />
     <Content Include="src\img\favicon.ico" />
     <Content Include="libs\angular\angular-locales\angular-locale_pt-br.js" />
     <Content Include="libs\angular\angular-nvd3\angular-nvd3.min.js" />
