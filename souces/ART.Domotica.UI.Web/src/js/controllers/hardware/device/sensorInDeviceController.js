@@ -32,7 +32,7 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
                 //Do what you want
             },
             orderChanged: function (event) {
-                var sensorInDevice = event.source.itemScope.item;
+                var sensorInDevice = event.source.itemScope.itemData();
                 var ordination = event.dest.index;
                 sensorInDeviceService.setOrdination(sensorInDevice.deviceSensorsId, sensorInDevice.sensorId, sensorInDevice.sensorDatasheetId, sensorInDevice.sensorTypeId, ordination);
             },
