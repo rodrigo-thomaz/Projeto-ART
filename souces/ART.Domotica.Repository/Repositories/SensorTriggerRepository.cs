@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories
 {
-    public class SensorTriggerRepository : RepositoryBase<ARTDbContext, SensorTrigger, Guid>, ISensorTriggerRepository
+    public class SensorTriggerRepository : RepositoryBase<ARTDbContext, SensorTrigger>, ISensorTriggerRepository
     {
         public SensorTriggerRepository(ARTDbContext context) : base(context)
         {

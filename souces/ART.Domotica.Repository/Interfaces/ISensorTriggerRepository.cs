@@ -7,7 +7,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface ISensorTriggerRepository : IRepository<ARTDbContext, SensorTrigger, Guid>
+    public interface ISensorTriggerRepository : IRepository<ARTDbContext, SensorTrigger>
     {
         #region Methods
 

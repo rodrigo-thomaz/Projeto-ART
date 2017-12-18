@@ -12,7 +12,13 @@
         public SensorTriggerConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.SensorId,
+                x.SensorDatasheetId,
+                x.SensorTypeId,
+            });
 
             //Id
             Property(x => x.Id)
