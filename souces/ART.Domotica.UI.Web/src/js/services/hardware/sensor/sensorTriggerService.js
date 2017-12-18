@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorTriggerFinder', 'sensorTriggerConstant',
-    function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorTriggerFinder, sensorTriggerConstant) {
+app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorContext', 'sensorTriggerFinder', 'sensorTriggerConstant',
+    function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorContext, sensorTriggerFinder, sensorTriggerConstant) {
 
         var serviceFactory = {};
 
@@ -89,15 +89,21 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
         var onInsertCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
-
+            sensorContext.sensorTrigger.push(result);
+            sensorContext.$digest();
             $rootScope.$emit(sensorTriggerConstant.insertCompletedEventName + result.sensorTriggerId, result);
         }
 
         var onDeleteCompleted = function (payload) {
             var result = JSON.parse(payload.body);
             var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
-
+            for (var i = 0; i < sensorContext.sensorTrigger.length; i++) {
+                if (sensorTrigger === sensorContext.sensorTrigger[i]) {
+                    sensorContext.sensorTrigger.splice(i, 1);
+                    sensorContext.$digest();
+                    break;
+                }
+            }
             $rootScope.$emit(sensorTriggerConstant.deleteCompletedEventName + result.sensorTriggerId, result);
         }
 
