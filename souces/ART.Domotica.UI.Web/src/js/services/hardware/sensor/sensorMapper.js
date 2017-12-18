@@ -102,8 +102,7 @@ app.factory('sensorMapper', [
                 sensorUnitMeasurementScale.sensor = function () { return sensorFinder.getByKey(this.sensorUnitMeasurementScaleId, this.sensorDatasheetId, this.sensorTypeId); }
                 sensorUnitMeasurementScale.sensorDatasheetUnitMeasurementScale = function () { return sensorDatasheetUnitMeasurementScaleFinder.getByKey(this.sensorDatasheetId, this.sensorTypeId, this.unitMeasurementId, this.unitMeasurementTypeId, this.numericalScalePrefixId, this.numericalScaleTypeId); }
             }
-        });               
-
+        });                        
         
         // *** Events Subscriptions
 
