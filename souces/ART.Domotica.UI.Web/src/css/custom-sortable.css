@@ -36,3 +36,13 @@
 
 .as-sortable-hidden {
 }
+
+/*animations*/
+
+.sortable-body-show-hide {
+    transition: all linear 0.5s;
+}
+
+    .sortable-body-show-hide.ng-hide {
+        opacity: 0;
+    }
