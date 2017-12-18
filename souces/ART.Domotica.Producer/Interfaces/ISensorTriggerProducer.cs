@@ -9,6 +9,10 @@
     {
         #region Methods
 
+        Task Delete(AuthenticatedMessageContract<SensorTriggerDeleteRequestContract> message);
+
+        Task Insert(AuthenticatedMessageContract<SensorTriggerInsertRequestContract> message);
+
         Task SetBuzzerOn(AuthenticatedMessageContract<SensorTriggerSetBuzzerOnRequestContract> message);
 
         Task SetTriggerOn(AuthenticatedMessageContract<SensorTriggerSetTriggerOnRequestContract> message);

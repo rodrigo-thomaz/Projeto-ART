@@ -4,6 +4,12 @@
     {
         #region Fields
 
+        public static readonly string DeleteIoTQueueName = "SensorTrigger.DeleteIoT";
+        public static readonly string DeleteQueueName = "SensorTrigger.Delete";
+        public static readonly string DeleteViewCompletedQueueName = "SensorTrigger.DeleteViewCompleted";
+        public static readonly string InsertIoTQueueName = "SensorTrigger.InsertIoT";
+        public static readonly string InsertQueueName = "SensorTrigger.Insert";
+        public static readonly string InsertViewCompletedQueueName = "SensorTrigger.InsertViewCompleted";
         public static readonly string SetBuzzerOnIoTQueueName = "SensorTrigger.SetBuzzerOnIoT";
         public static readonly string SetBuzzerOnQueueName = "SensorTrigger.SetBuzzerOn";
         public static readonly string SetBuzzerOnViewCompletedQueueName = "SensorTrigger.SetBuzzerOnViewCompleted";

@@ -44,6 +44,7 @@
     <Compile Include="DeviceSensorsSetPublishIntervalInSecondsModel.cs" />
     <Compile Include="SensorInDeviceSetOrdinationModel.cs" />
     <Compile Include="SensorSetLabelModel.cs" />
+    <Compile Include="SensorTriggerDeleteModel.cs" />
     <Compile Include="SensorUnitMeasurementScaleGetModel.cs" />
     <Compile Include="SensorTempDSFamilyGetModel.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondModel.cs" />

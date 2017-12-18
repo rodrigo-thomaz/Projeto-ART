@@ -28,6 +28,42 @@ namespace ART.Domotica.WebApi.Controllers
         #region public voids 
 
         /// <summary>
+        /// adiciona uma trigger no sensor
+        /// </summary>
+        /// <remarks>
+        /// adiciona uma trigger no sensor
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("insert")]
+        [HttpPost]
+        public async Task<IHttpActionResult> Insert(SensorTriggerInsertRequestContract contract)
+        {
+            await _sensorTriggerProducer.Insert(CreateMessage(contract));
+            return Ok();
+        }
+        
+        /// <summary>
+        /// remove uma trigger do sensor
+        /// </summary>
+        /// <remarks>
+        /// remove uma trigger do sensor
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("delete")]
+        [HttpPost]
+        public async Task<IHttpActionResult> Delete(SensorTriggerDeleteRequestContract contract)
+        {
+            await _sensorTriggerProducer.Delete(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
         /// Liga/Desliga o alarme de um sensor
         /// </summary>
         /// <remarks>

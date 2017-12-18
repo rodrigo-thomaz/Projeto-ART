@@ -22,6 +22,24 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids          
 
+        public async Task Insert(AuthenticatedMessageContract<SensorTriggerInsertRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", SensorTriggerConstants.InsertQueueName, null, payload);
+            });
+        }
+
+        public async Task Delete(AuthenticatedMessageContract<SensorTriggerDeleteRequestContract> message)
+        {
+            await Task.Run(() =>
+            {
+                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                _model.BasicPublish("", SensorTriggerConstants.DeleteQueueName, null, payload);
+            });
+        }
+
         public async Task SetTriggerOn(AuthenticatedMessageContract<SensorTriggerSetTriggerOnRequestContract> message)
         {
             await Task.Run(() =>
@@ -54,7 +72,21 @@ namespace ART.Domotica.Producer.Services
         #region private voids
 
         private void Initialize()
-        {            
+        {
+            _model.QueueDeclare(
+                 queue: SensorTriggerConstants.InsertQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: true
+               , arguments: null);
+
+            _model.QueueDeclare(
+                 queue: SensorTriggerConstants.DeleteQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: true
+               , arguments: null);
+
             _model.QueueDeclare(
                   queue: SensorTriggerConstants.SetTriggerOnQueueName
                 , durable: true

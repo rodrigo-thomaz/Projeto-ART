@@ -20,10 +20,13 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
+        private readonly EventingBasicConsumer _insertConsumer;
+        private readonly EventingBasicConsumer _deleteConsumer;
+
         private readonly EventingBasicConsumer _setTriggerOnConsumer;
         private readonly EventingBasicConsumer _setTriggerValueConsumer;
-        private readonly EventingBasicConsumer _setBuzzerOnConsumer;
-        
+        private readonly EventingBasicConsumer _setBuzzerOnConsumer;        
+
         private readonly IComponentContext _componentContext;
 
         private readonly ILogger _logger;
@@ -34,9 +37,12 @@ namespace ART.Domotica.Worker.Consumers
 
         public SensorTriggerConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
+            _insertConsumer = new EventingBasicConsumer(_model);
+            _deleteConsumer = new EventingBasicConsumer(_model);
+
             _setTriggerOnConsumer = new EventingBasicConsumer(_model);
             _setTriggerValueConsumer = new EventingBasicConsumer(_model);
-            _setBuzzerOnConsumer = new EventingBasicConsumer(_model);
+            _setBuzzerOnConsumer = new EventingBasicConsumer(_model);            
 
             _componentContext = componentContext;
 
@@ -59,6 +65,20 @@ namespace ART.Domotica.Worker.Consumers
                , arguments: null);
 
             _model.QueueDeclare(
+                  queue: SensorTriggerConstants.InsertQueueName
+                , durable: true
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueDeclare(
+                  queue: SensorTriggerConstants.DeleteQueueName
+                , durable: true
+                , exclusive: false
+                , autoDelete: false
+                , arguments: null);
+
+            _model.QueueDeclare(
                   queue: SensorTriggerConstants.SetTriggerOnQueueName
                 , durable: true
                 , exclusive: false
@@ -79,14 +99,102 @@ namespace ART.Domotica.Worker.Consumers
                 , autoDelete: false
                 , arguments: null);
 
+            _insertConsumer.Received += InsertReceived;
+            _deleteConsumer.Received += DeleteReceived;
+
             _setTriggerOnConsumer.Received += SetTriggerOnReceived;
             _setTriggerValueConsumer.Received += SetTriggerValueReceived;
             _setBuzzerOnConsumer.Received += SetBuzzerOnReceived;
 
+            _model.BasicConsume(SensorTriggerConstants.InsertQueueName, false, _insertConsumer);
+            _model.BasicConsume(SensorTriggerConstants.DeleteQueueName, false, _deleteConsumer);
+
             _model.BasicConsume(SensorTriggerConstants.SetTriggerOnQueueName, false, _setTriggerOnConsumer);
             _model.BasicConsume(SensorTriggerConstants.SetTriggerValueQueueName, false, _setTriggerValueConsumer);
             _model.BasicConsume(SensorTriggerConstants.SetBuzzerOnQueueName, false, _setBuzzerOnConsumer);
-        }       
+        }
+
+        public void InsertReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(InsertReceivedAsync(sender, e));
+        }
+
+        public async Task InsertReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerInsertRequestContract>>(e.Body);
+            var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
+            var data = await sensorTriggerDomain.Insert(message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.TriggerOn, message.Contract.BuzzerOn, message.Contract.Max, message.Contract.Min);
+
+            var exchange = "amq.topic";
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(data.SensorId);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<SensorTriggerInsertRequestContract, SensorTriggerGetModel>(message.Contract);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.InsertViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<SensorTriggerInsertRequestContract, SensorTriggerGetResponseIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<SensorTriggerGetResponseIoTContract>(iotContract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.InsertIoTQueueName);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void DeleteReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(DeleteReceivedAsync(sender, e));
+        }
+
+        public async Task DeleteReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerDeleteRequestContract>>(e.Body);
+            var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
+            var data = await sensorTriggerDomain.Delete(message.Contract.SensorTriggerId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId);
+
+            var exchange = "amq.topic";
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(data.SensorId);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<SensorTriggerDeleteRequestContract, SensorTriggerDeleteModel>(message.Contract);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.DeleteViewCompletedQueueName);
+            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<SensorTriggerDeleteRequestContract, SensorTriggerGetResponseIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<SensorTriggerGetResponseIoTContract>(iotContract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.DeleteIoTQueueName);
+            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
 
         public void SetTriggerOnReceived(object sender, BasicDeliverEventArgs e)
         {

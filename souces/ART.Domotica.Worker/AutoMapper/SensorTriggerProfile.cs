@@ -57,6 +57,24 @@
                 .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
+
+            CreateMap<SensorTriggerInsertRequestContract, SensorTriggerGetModel>()
+               .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+               .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+               .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
+               .ForMember(vm => vm.TriggerOn, m => m.MapFrom(x => x.TriggerOn))
+               .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn))
+               .ForMember(vm => vm.Max, m => m.MapFrom(x => x.Max))
+               .ForMember(vm => vm.Min, m => m.MapFrom(x => x.Min));
+
+            CreateMap<SensorTriggerInsertRequestContract, SensorTriggerGetResponseIoTContract>();
+
+            CreateMap<SensorTriggerDeleteRequestContract, SensorTriggerDeleteModel>()
+               .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+               .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+               .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId));
+
+            CreateMap<SensorTriggerDeleteRequestContract, SensorTriggerGetResponseIoTContract>();
         }
 
         #endregion Constructors
