@@ -6,10 +6,7 @@
             <li data-ng-repeat="item in sensorInDevice" data-as-sortable-item class="panel panel-default">
                 <div as-sortable-item-handle class="panel-heading">
                     <h4 class="panel-title">
-                        <!--<a href="" class="accordion-toggle">
-                            <span>{{item.sensor().label}}</span>
-                        </a>-->
-                        <span style="font-size:14px;">{{item.sensor().label}}</span>
+                        <span class="sortable-custom-title">{{item.sensor().label}}</span>
                     </h4>
                 </div>
             </li>
