@@ -50,6 +50,14 @@ app.constant('sensorUnitMeasurementScaleConstant', {
 
 app.constant('sensorTriggerConstant', {
 
+    insertApiUri: 'api/sensorTrigger/insertTrigger',
+    insertCompletedTopic: 'SensorTrigger.InsertViewCompleted',
+    insertCompletedEventName: 'sensorTriggerService.onInsertCompleted_Id_',
+
+    deleteApiUri: 'api/sensorTrigger/deleteTrigger',
+    deleteCompletedTopic: 'SensorTrigger.DeleteViewCompleted',
+    deleteCompletedEventName: 'sensorTriggerService.onDeleteCompleted_Id_',
+
     setAlarmOnApiUri: 'api/sensorTrigger/setAlarmOn',
     setAlarmOnCompletedTopic: 'SensorTrigger.SetAlarmOnViewCompleted',
     setAlarmOnCompletedEventName: 'sensorTriggerService.onSetAlarmOnCompleted_Id_',

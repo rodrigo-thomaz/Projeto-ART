@@ -11,23 +11,43 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
             $scope.sensorTriggers = sensor.sensorTriggers;
         };
 
-        $scope.add = function () {
-            var sensorTrigger = {
-                sensorId: _sensor.sensorId,
-                sensorDatasheetId: _sensor.sensorDatasheetId,
-                sensorTypeId: _sensor.sensorTypeId,
-                triggerOn: false,
-                buzzerOn: false,
-                max: 125,
-                min: -55,
-            };
-            $scope.sensorTriggers.push(sensorTrigger);
+        var triggerOnDefault = false;
+        var buzzerOnDefault = false;
+        var maxDefault = 125;
+        var minDefault = -55;
+
+        $scope.insert = function () {
+            
+            sensorTriggerService.insertTrigger(
+                _sensor.sensorId,
+                _sensor.sensorDatasheetId,
+                _sensor.sensorTypeId,
+                triggerOnDefault,
+                buzzerOnDefault,
+                maxDefault,
+                minDefault);
+
+            //$scope.sensorTriggers.push({
+            //    sensorId: _sensor.sensorId,
+            //    sensorDatasheetId: _sensor.sensorDatasheetId,
+            //    sensorTypeId: _sensor.sensorTypeId,
+            //    triggerOn: triggerOnDefault,
+            //    buzzerOn: buzzerOnDefault,
+            //    max: maxDefault,
+            //    min: minDefault,
+            //});
+
         }
 
         $scope.remove = function (sensorTrigger) {
             for (var i = 0; i < $scope.sensorTriggers.length; i++) {
                 if (sensorTrigger === $scope.sensorTriggers[i]) {
-                    $scope.sensorTriggers.splice(i, 1);
+                    sensorTriggerService.deleteTrigger(
+                        sensorTrigger.sensorTriggerId,
+                        sensorTrigger.sensorId,
+                        sensorTrigger.sensorDatasheetId,
+                        sensorTrigger.sensorTypeId);
+                    //$scope.sensorTriggers.splice(i, 1);
                     break;
                 }
             }

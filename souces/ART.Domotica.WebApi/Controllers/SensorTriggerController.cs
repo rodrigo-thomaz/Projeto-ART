@@ -37,7 +37,7 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("insert")]
+        [Route("insertTrigger")]
         [HttpPost]
         public async Task<IHttpActionResult> Insert(SensorTriggerInsertRequestContract contract)
         {
@@ -55,7 +55,7 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("delete")]
+        [Route("deleteTrigger")]
         [HttpPost]
         public async Task<IHttpActionResult> Delete(SensorTriggerDeleteRequestContract contract)
         {

@@ -1,89 +1,143 @@
 ﻿'use strict';
-app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorFinder', 'sensorTriggerConstant',
-    function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorFinder, sensorTriggerConstant) {
+app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSettings', 'stompService', 'sensorTriggerFinder', 'sensorTriggerConstant',
+    function ($http, $log, $rootScope, ngAuthSettings, stompService, sensorTriggerFinder, sensorTriggerConstant) {
 
         var serviceFactory = {};
 
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
-        var setAlarmOnCompletedSubscription = null;
-        var setAlarmCelsiusCompletedSubscription = null;
-        var setAlarmBuzzerOnCompletedSubscription = null;
+        var insertCompletedSubscription = null;
+        var deleteCompletedSubscription = null;
+        var setTriggerOnCompletedSubscription = null;
+        var setTriggerValueCompletedSubscription = null;
+        var setBuzzerOnCompletedSubscription = null;
 
-        var setAlarmOn = function (sensorTempDSFamilyId, alarmOn, position) {
+        var insertTrigger = function (sensorId, sensorDatasheetId, sensorTypeId, triggerOn, buzzerOn, max, min) {
             var data = {
-                sensorTempDSFamilyId: sensorTempDSFamilyId,
-                alarmOn: alarmOn,
-                position: position,
+                sensorId: sensorId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,
+                triggerOn: triggerOn,
+                buzzerOn: buzzerOn,
+                max: max,
+                min: min,
             }
-            return $http.post(serviceBase + sensorTriggerConstant.setAlarmOnApiUri, data).then(function (results) {
+            return $http.post(serviceBase + sensorTriggerConstant.insertApiUri, data).then(function (results) {
                 return results;
             });
         };
 
-        var setAlarmCelsius = function (sensorTempDSFamilyId, alarmCelsius, position) {
+        var deleteTrigger = function (sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId) {
             var data = {
-                sensorTempDSFamilyId: sensorTempDSFamilyId,
-                alarmCelsius: alarmCelsius,
-                position: position,
+                sensorTriggerId: sensorTriggerId,
+                sensorId: sensorId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,
             }
-            return $http.post(serviceBase + sensorTriggerConstant.setAlarmCelsiusApiUri, data).then(function (results) {
+            return $http.post(serviceBase + sensorTriggerConstant.deleteApiUri, data).then(function (results) {
                 return results;
             });
         };
 
-        var setAlarmBuzzerOn = function (sensorTempDSFamilyId, alarmBuzzerOn, position) {
+        var setTriggerOn = function (sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId, triggerOn) {
             var data = {
-                sensorTempDSFamilyId: sensorTempDSFamilyId,
-                alarmBuzzerOn: alarmBuzzerOn,
-                position: position,
+                sensorTriggerId: sensorTriggerId,
+                sensorId: sensorId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,
+                triggerOn: triggerOn,
             }
-            return $http.post(serviceBase + sensorTriggerConstant.setAlarmBuzzerOnApiUri, data).then(function (results) {
+            return $http.post(serviceBase + sensorTriggerConstant.setTriggerOnApiUri, data).then(function (results) {
+                return results;
+            });
+        };
+
+        var setTriggerValue = function (sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId, position, triggerValue) {
+            var data = {
+                sensorTriggerId: sensorTriggerId,
+                sensorId: sensorId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,                
+                position: position,
+                triggerValue: triggerValue,
+            }
+            return $http.post(serviceBase + sensorTriggerConstant.setTriggerValueApiUri, data).then(function (results) {
+                return results;
+            });
+        };
+
+        var setBuzzerOn = function (sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId, buzzerOn) {
+            var data = {
+                sensorTriggerId: sensorTriggerId,
+                sensorId: sensorId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,
+                buzzerOn: buzzerOn,
+            }
+            return $http.post(serviceBase + sensorTriggerConstant.setBuzzerOnApiUri, data).then(function (results) {
                 return results;
             });
         };
 
         var onConnected = function () {
-            setAlarmOnCompletedSubscription = stompService.subscribeAllViews(sensorTriggerConstant.setAlarmOnCompletedTopic, onSetAlarmOnCompleted);
-            setAlarmCelsiusCompletedSubscription = stompService.subscribeAllViews(sensorTriggerConstant.setAlarmCelsiusCompletedTopic, onSetAlarmCelsiusCompleted);
-            setAlarmBuzzerOnCompletedSubscription = stompService.subscribeAllViews(sensorTriggerConstant.setAlarmBuzzerOnCompletedTopic, onSetAlarmBuzzerOnCompleted);            
+            insertCompletedSubscription = stompService.subscribeAllViews(sensorTriggerConstant.insertCompletedTopic, onInsertCompleted);
+            deleteCompletedSubscription = stompService.subscribeAllViews(sensorTriggerConstant.deleteCompletedTopic, onDeleteCompleted);
+            setTriggerOnCompletedSubscription = stompService.subscribeAllViews(sensorTriggerConstant.setTriggerOnCompletedTopic, onSetTriggerOnCompleted);
+            setTriggerValueCompletedSubscription = stompService.subscribeAllViews(sensorTriggerConstant.setTriggerValueCompletedTopic, onSetTriggerValueCompleted);
+            setBuzzerOnCompletedSubscription = stompService.subscribeAllViews(sensorTriggerConstant.setBuzzerOnCompletedTopic, onSetBuzzerOnCompleted);            
         }
 
-        var onSetAlarmOnCompleted = function (payload) {
+        var onInsertCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
+
+            $rootScope.$emit(sensorTriggerConstant.insertCompletedEventName + result.sensorTriggerId, result);
+        }
+
+        var onDeleteCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
+
+            $rootScope.$emit(sensorTriggerConstant.deleteCompletedEventName + result.sensorTriggerId, result);
+        }
+
+        var onSetTriggerOnCompleted = function (payload) {
             var result = JSON.parse(payload.body);
             var sensor = sensorFinder.getSensorDSTempFamilyByKey(result.sensorTempDSFamilyId);
             if (result.position === 'Low')
                 sensor.lowAlarm.alarmOn = result.alarmOn;
             else if (result.position === 'High')
                 sensor.highAlarm.alarmOn = result.alarmOn;
-            $rootScope.$emit(sensorTriggerConstant.setAlarmOnCompletedEventNamesetAlarmOnCompletedEventName + result.sensorTempDSFamilyId, result);
+            $rootScope.$emit(sensorTriggerConstant.setTriggerOnCompletedEventName + result.sensorTempDSFamilyId, result);
         }
 
-        var onSetAlarmCelsiusCompleted = function (payload) {
+        var onSetTriggerValueCompleted = function (payload) {
             var result = JSON.parse(payload.body);
             var sensor = sensorFinder.getSensorDSTempFamilyByKey(result.sensorTempDSFamilyId);
             if (result.position === 'Low')
                 sensor.lowAlarm.alarmCelsius = result.alarmCelsius;
             else if (result.position === 'High')
                 sensor.highAlarm.alarmCelsius = result.alarmCelsius;
-            $rootScope.$emit(sensorTriggerConstant.setAlarmCelsiusCompletedEventName + result.sensorTempDSFamilyId, result);
+            $rootScope.$emit(sensorTriggerConstant.setTriggerValueCompletedEventName + result.sensorTempDSFamilyId, result);
         }
 
-        var onSetAlarmBuzzerOnCompleted = function (payload) {
+        var onSetBuzzerOnCompleted = function (payload) {
             var result = JSON.parse(payload.body);
             var sensor = sensorFinder.getSensorDSTempFamilyByKey(result.sensorTempDSFamilyId);
             if (result.position === 'Low')
                 sensor.lowAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
             else if (result.position === 'High')
                 sensor.highAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
-            $rootScope.$emit(sensorTriggerConstant.setAlarmBuzzerOnCompletedEventName + result.sensorTempDSFamilyId, result);
+            $rootScope.$emit(sensorTriggerConstant.setBuzzerOnCompletedEventName + result.sensorTempDSFamilyId, result);
         }
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
-            setAlarmOnCompletedSubscription.unsubscribe();
-            setAlarmCelsiusCompletedSubscription.unsubscribe();
-            setAlarmBuzzerOnCompletedSubscription.unsubscribe();
+            insertCompletedSubscription.unsubscribe();
+            deleteCompletedSubscription.unsubscribe();
+            setTriggerOnCompletedSubscription.unsubscribe();
+            setTriggerValueCompletedSubscription.unsubscribe();
+            setBuzzerOnCompletedSubscription.unsubscribe();
         });
 
         var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected); 
@@ -93,9 +147,11 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
         // serviceFactory
 
-        serviceFactory.setAlarmOn = setAlarmOn;
-        serviceFactory.setAlarmCelsius = setAlarmCelsius;
-        serviceFactory.setAlarmBuzzerOn = setAlarmBuzzerOn;
+        serviceFactory.insertTrigger = insertTrigger;
+        serviceFactory.deleteTrigger = deleteTrigger;
+        serviceFactory.setTriggerOn = setTriggerOn;
+        serviceFactory.setTriggerValue = setTriggerValue;
+        serviceFactory.setBuzzerOn = setBuzzerOn;
 
         return serviceFactory;
 

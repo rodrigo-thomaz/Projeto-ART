@@ -13,6 +13,7 @@ using Autofac;
 using ART.Infra.CrossCutting.Logging;
 using AutoMapper;
 using ART.Domotica.Model;
+using ART.Domotica.Repository.Entities;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -66,16 +67,16 @@ namespace ART.Domotica.Worker.Consumers
 
             _model.QueueDeclare(
                   queue: SensorTriggerConstants.InsertQueueName
-                , durable: true
+                , durable: false
                 , exclusive: false
-                , autoDelete: false
+                , autoDelete: true
                 , arguments: null);
 
             _model.QueueDeclare(
                   queue: SensorTriggerConstants.DeleteQueueName
-                , durable: true
+                , durable: false
                 , exclusive: false
-                , autoDelete: false
+                , autoDelete: true
                 , arguments: null);
 
             _model.QueueDeclare(
@@ -137,7 +138,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await sensorDomain.GetDeviceFromSensor(data.SensorId);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorTriggerInsertRequestContract, SensorTriggerGetModel>(message.Contract);
+            var viewModel = Mapper.Map<SensorTrigger, SensorTriggerGetModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.InsertViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
