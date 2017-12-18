@@ -1,21 +1,28 @@
 ﻿<div ng-controller="sensorInDeviceController" ng-init="init(deviceItem.deviceSensors.sensorInDevice)">
-    
+
     <!--Teste de Ordenação no Scope do Controller-->
     <div>
         <ul data-as-sortable="dragControlListeners" data-ng-model="sensorInDevice" class="sortable-custom-ul panel-group">
             <li data-ng-repeat="item in sensorInDevice" data-as-sortable-item class="panel panel-default">
-                <div as-sortable-item-handle class="panel-heading">
+                <div as-sortable-item-handle class="panel-heading" ng-init="item.isOpen = false">
                     <h4 class="panel-title">
                         <span class="sortable-custom-title">{{item.sensor().label}}</span>
+                        <a ng-click="item.isOpen = !item.isOpen">
+                            <i class="pull-right fa ng-scope fa-angle-right" ng-class="{'fa-angle-down': item.isOpen, 'fa-angle-right': !item.isOpen}"></i>
+                        </a>
                     </h4>
+                </div>
+                <div id="replyForm" ng-show="item.isOpen">
+                    Oi gente
+                    tudo bem?
                 </div>
             </li>
         </ul>
     </div>
 
 
-    <accordion close-others="true"> 
-        
+    <accordion close-others="true">
+
         <accordion-group data-ng-repeat="(sensorInDeviceKey, sensorInDeviceItem) in sensorInDevice">
 
             <accordion-heading>
@@ -34,6 +41,6 @@
 
         </accordion-group>
 
-    </accordion>   
+    </accordion>
 
 </div>

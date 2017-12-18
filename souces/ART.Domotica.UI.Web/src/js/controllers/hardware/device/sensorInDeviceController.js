@@ -42,7 +42,7 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
         };
 
         $scope.$watchCollection('sensorInDevice', function (newValues, oldValues) {
-
+            
         });
 
     }]);
