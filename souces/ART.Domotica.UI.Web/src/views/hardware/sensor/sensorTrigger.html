@@ -2,36 +2,52 @@
     <div class="form-group">
         <label class="col-lg-4 control-label">Gatilhos</label>
         <div class="col-lg-8">
+            <button class="btn btn-success">Adicionar</button>
         </div>
     </div>
 </form>
 
 <div ng-controller="sensorTriggerController" ng-init="init(sensorInDeviceItem.sensor().sensorTriggers)">
-    
-    <table class="table" ui-jq="footable" ui-options='{
-        "paging": {
-          "enabled": false
-        },
-        "filtering": {
-          "enabled": false
-        },
-        "sorting": {
-          "enabled": false
-        }}'>
+
+    <table class="table">
         <thead>
             <tr>
-                <th>Trigger On</th>
-                <th data-breakpoints="xs">Buzzer On</th>
-                <th data-breakpoints="xs sm">Min</th>
-                <th data-breakpoints="xs sm md" data-title="DOB">Max</th>
+                <th width="100px">Trigger On</th>
+                <th width="100px">Buzzer On</th>
+                <th>Range</th>                
+                <th width="50px"></th>
             </tr>
         </thead>
         <tbody>
-            <tr data-expanded="true" data-ng-repeat="(sensorTriggerKey, sensorTriggerItem) in sensorTriggers">
-                <td>{{sensorTriggerItem.triggerOn}}</td>
-                <td>{{sensorTriggerItem.buzzerOn}}</td>
-                <td>{{sensorTriggerItem.triggerValue}}</td>
-                <td>{{sensorTriggerItem.triggerValue}}</td>
+            <tr data-ng-repeat="(sensorTriggerKey, sensorTriggerItem) in sensorTriggers">
+                <td>
+                    <div class="checkbox">
+                        <label class="i-checks">
+                            <input type="checkbox" ng-model="sensorTriggerItem.triggerOn"><i></i>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <div class="checkbox">
+                        <label class="i-checks">
+                            <input type="checkbox" ng-model="sensorTriggerItem.buzzerOn"><i></i>
+                        </label>
+                    </div>
+                </td>
+                <td>
+                    <slider ng-model="sensorTriggerItem.min"
+                            ng-model-range="sensorTriggerItem.max"
+                            floor="1"
+                            ceiling="100">
+                    </slider>
+                </td>                
+                <td>
+                    <div class="text-center">
+                        <a class="btn btn-danger" href="" aria-label="Delete">
+                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

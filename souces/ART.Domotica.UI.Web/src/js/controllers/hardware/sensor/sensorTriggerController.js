@@ -12,5 +12,14 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
             
         });        
 
+        $scope.$watchCollection('sensorTriggers', function (newValues, oldValues) {
+            if (newValues) {
+                for (var i = 0; i < newValues.length; i++) {
+                    newValues[i].max = 60;
+                    newValues[i].min = 30;
+                }
+            }
+        });
+
     }]);
 
