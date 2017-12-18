@@ -9,11 +9,11 @@
     {
         #region Methods
 
-        Task SetAlarmBuzzerOn(AuthenticatedMessageContract<SensorTriggerSetAlarmBuzzerOnRequestContract> message);
+        Task SetBuzzerOn(AuthenticatedMessageContract<SensorTriggerSetBuzzerOnRequestContract> message);
 
-        Task SetAlarmCelsius(AuthenticatedMessageContract<SensorTriggerSetAlarmCelsiusRequestContract> message);
+        Task SetTriggerOn(AuthenticatedMessageContract<SensorTriggerSetTriggerOnRequestContract> message);
 
-        Task SetAlarmOn(AuthenticatedMessageContract<SensorTriggerSetAlarmOnRequestContract> message);
+        Task SetTriggerValue(AuthenticatedMessageContract<SensorTriggerSetTriggerValueRequestContract> message);
 
         #endregion Methods
     }

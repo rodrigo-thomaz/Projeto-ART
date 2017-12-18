@@ -22,30 +22,30 @@ namespace ART.Domotica.Producer.Services
 
         #region public voids          
 
-        public async Task SetAlarmOn(AuthenticatedMessageContract<SensorTriggerSetAlarmOnRequestContract> message)
+        public async Task SetTriggerOn(AuthenticatedMessageContract<SensorTriggerSetTriggerOnRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTriggerConstants.SetAlarmOnQueueName, null, payload);
+                _model.BasicPublish("", SensorTriggerConstants.SetTriggerOnQueueName, null, payload);
             });
         }
 
-        public async Task SetAlarmCelsius(AuthenticatedMessageContract<SensorTriggerSetAlarmCelsiusRequestContract> message)
+        public async Task SetTriggerValue(AuthenticatedMessageContract<SensorTriggerSetTriggerValueRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTriggerConstants.SetAlarmCelsiusQueueName, null, payload);
+                _model.BasicPublish("", SensorTriggerConstants.SetTriggerValueQueueName, null, payload);
             });
         }
 
-        public async Task SetAlarmBuzzerOn(AuthenticatedMessageContract<SensorTriggerSetAlarmBuzzerOnRequestContract> message)
+        public async Task SetBuzzerOn(AuthenticatedMessageContract<SensorTriggerSetBuzzerOnRequestContract> message)
         {
             await Task.Run(() =>
             {
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTriggerConstants.SetAlarmBuzzerOnQueueName, null, payload);
+                _model.BasicPublish("", SensorTriggerConstants.SetBuzzerOnQueueName, null, payload);
             });                        
         }
 
@@ -56,21 +56,21 @@ namespace ART.Domotica.Producer.Services
         private void Initialize()
         {            
             _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetAlarmOnQueueName
+                  queue: SensorTriggerConstants.SetTriggerOnQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetAlarmCelsiusQueueName
+                  queue: SensorTriggerConstants.SetTriggerValueQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetAlarmBuzzerOnQueueName
+                  queue: SensorTriggerConstants.SetBuzzerOnQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false

@@ -37,11 +37,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("setAlarmOn")]
+        [Route("setTriggerOn")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetAlarmOn(SensorTriggerSetAlarmOnRequestContract contract)
+        public async Task<IHttpActionResult> SetTriggerOn(SensorTriggerSetTriggerOnRequestContract contract)
         {
-            await _sensorTriggerProducer.SetAlarmOn(CreateMessage(contract));
+            await _sensorTriggerProducer.SetTriggerOn(CreateMessage(contract));
             return Ok();
         }
 
@@ -55,11 +55,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("setAlarmCelsius")]
+        [Route("setTriggerValue")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetAlarmCelsius(SensorTriggerSetAlarmCelsiusRequestContract contract)
+        public async Task<IHttpActionResult> SetTriggerValue(SensorTriggerSetTriggerValueRequestContract contract)
         {
-            await _sensorTriggerProducer.SetAlarmCelsius(CreateMessage(contract));
+            await _sensorTriggerProducer.SetTriggerValue(CreateMessage(contract));
             return Ok();
         }
 
@@ -73,11 +73,11 @@ namespace ART.Domotica.WebApi.Controllers
         /// <response code="400">Bad Request</response>
         /// <response code="403">Forbidden</response>
         /// <response code="500">Internal Server Error</response>
-        [Route("setAlarmBuzzerOn")]
+        [Route("setBuzzerOn")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetAlarmBuzzerOn(SensorTriggerSetAlarmBuzzerOnRequestContract contract)
+        public async Task<IHttpActionResult> SetBuzzerOn(SensorTriggerSetBuzzerOnRequestContract contract)
         {
-            await _sensorTriggerProducer.SetAlarmBuzzerOn(CreateMessage(contract));
+            await _sensorTriggerProducer.SetBuzzerOn(CreateMessage(contract));
             return Ok();
         }
 

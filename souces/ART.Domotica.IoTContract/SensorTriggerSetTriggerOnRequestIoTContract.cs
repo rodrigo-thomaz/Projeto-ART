@@ -1,19 +1,14 @@
-﻿namespace ART.Domotica.Model
+﻿namespace ART.Domotica.IoTContract
 {
     using System;
 
     using ART.Domotica.Enums;
 
-    public class SensorTriggerSetAlarmBuzzerOnModel
+    public class SensorTriggerSetTriggerOnRequestIoTContract
     {
         #region Properties
 
-        public bool AlarmBuzzerOn
-        {
-            get; set;
-        }
-
-        public Guid DeviceId
+        public bool AlarmOn
         {
             get; set;
         }

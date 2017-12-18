@@ -1,10 +1,11 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
+    using System.Linq;
+
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 
     using global::AutoMapper;
-    using System.Linq;
 
     public class DeviceSensorsProfile : Profile
     {

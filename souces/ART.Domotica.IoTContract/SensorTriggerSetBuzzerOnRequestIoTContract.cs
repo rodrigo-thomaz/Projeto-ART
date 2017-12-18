@@ -4,7 +4,7 @@
 
     using ART.Domotica.Enums;
 
-    public class SensorTriggerSetAlarmBuzzerOnRequestIoTContract
+    public class SensorTriggerSetBuzzerOnRequestIoTContract
     {
         #region Properties
 

@@ -4,26 +4,31 @@
 
     using ART.Domotica.Enums;
 
-    public class SensorTriggerSetAlarmCelsiusModel
+    public class SensorTriggerSetTriggerOnModel
     {
         #region Properties
 
-        public decimal AlarmCelsius
+        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
 
-        public Guid DeviceId
+        public Guid SensorId
         {
             get; set;
         }
 
-        public SensorUnitMeasurementScalePositionEnum Position
+        public Guid SensorTriggerId
         {
             get; set;
         }
 
-        public Guid SensorTempDSFamilyId
+        public SensorTypeEnum SensorTypeId
+        {
+            get; set;
+        }
+
+        public bool TriggerOn
         {
             get; set;
         }

@@ -4,21 +4,11 @@
 
     using ART.Domotica.Enums;
 
-    public class SensorTriggerGetModel
+    public class SensorTriggerSetTriggerValueModel
     {
         #region Properties
 
-        public bool BuzzerOn
-        {
-            get; set;
-        }
-
-        public decimal Max
-        {
-            get; set;
-        }
-
-        public decimal Min
+        public SensorUnitMeasurementScalePositionEnum Position
         {
             get; set;
         }
@@ -43,7 +33,7 @@
             get; set;
         }
 
-        public bool TriggerOn
+        public decimal TriggerValue
         {
             get; set;
         }

@@ -4,16 +4,11 @@
 
     using ART.Domotica.Enums;
 
-    public class SensorTriggerSetAlarmBuzzerOnRequestContract
+    public class SensorTriggerSetBuzzerOnRequestContract
     {
         #region Properties
 
-        public bool AlarmBuzzerOn
-        {
-            get; set;
-        }
-
-        public SensorUnitMeasurementScalePositionEnum Position
+        public bool BuzzerOn
         {
             get; set;
         }
@@ -23,7 +18,12 @@
             get; set;
         }
 
-        public Guid SensorTempDSFamilyId
+        public Guid SensorId
+        {
+            get; set;
+        }
+
+        public Guid SensorTriggerId
         {
             get; set;
         }

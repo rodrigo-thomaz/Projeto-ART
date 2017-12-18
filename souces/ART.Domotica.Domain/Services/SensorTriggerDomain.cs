@@ -10,7 +10,6 @@
 
     using Autofac;
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
 
     public class SensorTriggerDomain : DomainBase, ISensorTriggerDomain
@@ -34,89 +33,90 @@
 
         #endregion Constructors
 
-        public async Task<Sensor> SetAlarmOn(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, bool alarmOn)
+        public async Task<SensorTrigger> SetTriggerOn(Guid sensorTriggerId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, bool triggerOn)
         {
-            var entity = await _sensorRepository.GetByKey(sensorId, sensorDatasheetId, sensorTypeId);
+            var entity = await _sensorTriggerRepository.GetByKey(sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {
-                throw new Exception("Sensor not found");
+                throw new Exception("SensorTrigger not found");
             }
 
-            var sensorTriggers = await _sensorTriggerRepository.GetSensorId(sensorId);
+            entity.TriggerOn = triggerOn;
 
-            if (position == SensorUnitMeasurementScalePositionEnum.Max)
-            {
-                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.Max));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Max) == maxValue);
-                sensorTrigger.TriggerOn = alarmOn;
-            }
-            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
-            {
-                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.Min));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Min) == minValue);
-                sensorTrigger.TriggerOn = alarmOn;
-            }
-
-            await _sensorTriggerRepository.Update(sensorTriggers);
+            await _sensorTriggerRepository.Update(entity);
 
             return entity;
         }
 
-        public async Task<Sensor> SetAlarmCelsius(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal alarmCelsius)
+        public async Task<SensorTrigger> SetBuzzerOn(Guid sensorTriggerId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, bool buzzerOn)
         {
-            var entity = await _sensorRepository.GetByKey(sensorId, sensorDatasheetId, sensorTypeId);
+            var entity = await _sensorTriggerRepository.GetByKey(sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {
-                throw new Exception("Sensor not found");
+                throw new Exception("SensorTrigger not found");
             }
 
-            var sensorTriggers = await _sensorTriggerRepository.GetSensorId(sensorId);
+            entity.BuzzerOn = buzzerOn;
 
-            if (position == SensorUnitMeasurementScalePositionEnum.Max)
-            {
-                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.Max));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Max) == maxValue);
-                sensorTrigger.Max = alarmCelsius;
-            }
-            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
-            {
-                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.Min));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Min) == minValue);
-                sensorTrigger.Min = alarmCelsius;
-            }
-
-            await _sensorTriggerRepository.Update(sensorTriggers);
+            await _sensorTriggerRepository.Update(entity);
 
             return entity;
         }
 
-        public async Task<Sensor> SetAlarmBuzzerOn(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, bool alarmBuzzerOn)
+
+        public async Task<SensorTrigger> SetTriggerValue(Guid sensorTriggerId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal triggerValue)
         {
-            var entity = await _sensorRepository.GetByKey(sensorId, sensorDatasheetId, sensorTypeId);
+            var entity = await _sensorTriggerRepository.GetByKey(sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId);
 
             if (entity == null)
             {
-                throw new Exception("Sensor not found");
+                throw new Exception("SensorTrigger not found");
             }
 
-            var sensorTriggers = await _sensorTriggerRepository.GetSensorId(sensorId);
-
             if (position == SensorUnitMeasurementScalePositionEnum.Max)
-            {
-                var maxValue = sensorTriggers.Max(x => Convert.ToDecimal(x.Max));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Max) == maxValue);
-                sensorTrigger.BuzzerOn = alarmBuzzerOn;
+            {                
+                entity.Max = triggerValue;
             }
             else if (position == SensorUnitMeasurementScalePositionEnum.Min)
             {
-                var minValue = sensorTriggers.Min(x => Convert.ToDecimal(x.Min));
-                var sensorTrigger = sensorTriggers.First(x => Convert.ToDecimal(x.Min) == minValue);
-                sensorTrigger.BuzzerOn = alarmBuzzerOn;
+                entity.Min = triggerValue;
             }
 
-            await _sensorTriggerRepository.Update(sensorTriggers);
+            await _sensorTriggerRepository.Update(entity);
+
+            return entity;
+        }
+
+        public async Task<SensorTrigger> Insert(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, bool triggerOn, bool buzzerOn, decimal max, decimal min)
+        {
+            var entity = new SensorTrigger
+            {
+                SensorId = sensorId,
+                SensorDatasheetId = sensorDatasheetId,
+                SensorTypeId = sensorTypeId,
+                TriggerOn = triggerOn,
+                BuzzerOn = buzzerOn,
+                Max = max,
+                Min = min,
+            };
+
+            await _sensorTriggerRepository.Insert(entity);
+
+            return entity;
+        }
+
+        public async Task<SensorTrigger> Delete(Guid sensorTriggerId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
+        {
+            var entity = await _sensorTriggerRepository.GetByKey(sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId);
+
+            if (entity == null)
+            {
+                throw new Exception("SensorTrigger not found");
+            }
+
+            await _sensorTriggerRepository.Delete(entity);
 
             return entity;
         }

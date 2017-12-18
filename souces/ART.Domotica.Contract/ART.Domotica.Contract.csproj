@@ -52,9 +52,9 @@
     <Compile Include="HardwareSetLabelRequestContract.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryRequestContract.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetValueRequestContract.cs" />
-    <Compile Include="SensorTriggerSetAlarmOnRequestContract.cs" />
-    <Compile Include="SensorTriggerSetAlarmCelsiusRequestContract.cs" />
-    <Compile Include="SensorTriggerSetAlarmBuzzerOnRequestContract.cs" />
+    <Compile Include="SensorTriggerSetTriggerOnRequestContract.cs" />
+    <Compile Include="SensorTriggerSetTriggerValueRequestContract.cs" />
+    <Compile Include="SensorTriggerSetBuzzerOnRequestContract.cs" />
     <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCResponseContract.cs" />

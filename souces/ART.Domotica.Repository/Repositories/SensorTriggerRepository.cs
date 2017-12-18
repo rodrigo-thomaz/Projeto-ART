@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ART.Domotica.Enums;
 
 namespace ART.Domotica.Repository.Repositories
 {
@@ -14,6 +15,12 @@ namespace ART.Domotica.Repository.Repositories
         public SensorTriggerRepository(ARTDbContext context) : base(context)
         {
 
+        }
+
+        public Task<SensorTrigger> GetByKey(Guid sensorTriggerId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
+        {
+            return _context.SensorTrigger
+                .FindAsync(sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId);
         }
 
         public async Task<List<SensorTrigger>> GetSensorId(Guid sensorId)

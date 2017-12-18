@@ -13,7 +13,6 @@ using Autofac;
 using ART.Infra.CrossCutting.Logging;
 using AutoMapper;
 using ART.Domotica.Model;
-using System.Linq;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -21,9 +20,9 @@ namespace ART.Domotica.Worker.Consumers
     {
         #region private fields
 
-        private readonly EventingBasicConsumer _setAlarmOnConsumer;
-        private readonly EventingBasicConsumer _setAlarmCelsiusConsumer;
-        private readonly EventingBasicConsumer _setAlarmBuzzerOnConsumer;
+        private readonly EventingBasicConsumer _setTriggerOnConsumer;
+        private readonly EventingBasicConsumer _setTriggerValueConsumer;
+        private readonly EventingBasicConsumer _setBuzzerOnConsumer;
         
         private readonly IComponentContext _componentContext;
 
@@ -35,9 +34,9 @@ namespace ART.Domotica.Worker.Consumers
 
         public SensorTriggerConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
         {
-            _setAlarmOnConsumer = new EventingBasicConsumer(_model);
-            _setAlarmCelsiusConsumer = new EventingBasicConsumer(_model);
-            _setAlarmBuzzerOnConsumer = new EventingBasicConsumer(_model);
+            _setTriggerOnConsumer = new EventingBasicConsumer(_model);
+            _setTriggerValueConsumer = new EventingBasicConsumer(_model);
+            _setBuzzerOnConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
 
@@ -60,159 +59,153 @@ namespace ART.Domotica.Worker.Consumers
                , arguments: null);
 
             _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetAlarmOnQueueName
+                  queue: SensorTriggerConstants.SetTriggerOnQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetAlarmCelsiusQueueName
+                  queue: SensorTriggerConstants.SetTriggerValueQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
             _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetAlarmBuzzerOnQueueName
+                  queue: SensorTriggerConstants.SetBuzzerOnQueueName
                 , durable: true
                 , exclusive: false
                 , autoDelete: false
                 , arguments: null);
 
-            _setAlarmOnConsumer.Received += SetAlarmOnReceived;
-            _setAlarmCelsiusConsumer.Received += SetAlarmCelsiusReceived;
-            _setAlarmBuzzerOnConsumer.Received += SetAlarmBuzzerOnReceived;
+            _setTriggerOnConsumer.Received += SetTriggerOnReceived;
+            _setTriggerValueConsumer.Received += SetTriggerValueReceived;
+            _setBuzzerOnConsumer.Received += SetBuzzerOnReceived;
 
-            _model.BasicConsume(SensorTriggerConstants.SetAlarmOnQueueName, false, _setAlarmOnConsumer);
-            _model.BasicConsume(SensorTriggerConstants.SetAlarmCelsiusQueueName, false, _setAlarmCelsiusConsumer);
-            _model.BasicConsume(SensorTriggerConstants.SetAlarmBuzzerOnQueueName, false, _setAlarmBuzzerOnConsumer);
+            _model.BasicConsume(SensorTriggerConstants.SetTriggerOnQueueName, false, _setTriggerOnConsumer);
+            _model.BasicConsume(SensorTriggerConstants.SetTriggerValueQueueName, false, _setTriggerValueConsumer);
+            _model.BasicConsume(SensorTriggerConstants.SetBuzzerOnQueueName, false, _setBuzzerOnConsumer);
         }       
 
-        public void SetAlarmOnReceived(object sender, BasicDeliverEventArgs e)
+        public void SetTriggerOnReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetAlarmOnReceivedAsync(sender, e));
+            Task.WaitAll(SetTriggerOnReceivedAsync(sender, e));
         }
 
-        public async Task SetAlarmOnReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetTriggerOnReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmOnRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetTriggerOnRequestContract>>(e.Body);
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
-            var data = await sensorTriggerDomain.SetAlarmOn(message.Contract.SensorTempDSFamilyId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.AlarmOn);
+            var data = await sensorTriggerDomain.SetTriggerOn(message.Contract.SensorTriggerId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.TriggerOn);
 
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
-            //Load device into context
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
-            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
+            var device = await sensorDomain.GetDeviceFromSensor(data.SensorId);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnModel>(message.Contract);
-            viewModel.DeviceId = data.SensorInDevice.Single().DeviceSensorsId;
+            var viewModel = Mapper.Map<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmOnViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetTriggerOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTriggerSetAlarmOnRequestIoTContract>(iotContract);
+            var iotContract = Mapper.Map<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<SensorTriggerSetTriggerOnRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetAlarmOnIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetTriggerOnIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
 
-        public void SetAlarmCelsiusReceived(object sender, BasicDeliverEventArgs e)
+        public void SetTriggerValueReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetAlarmCelsiusReceivedAsync(sender, e));
+            Task.WaitAll(SetTriggerValueReceivedAsync(sender, e));
         }
 
-        public async Task SetAlarmCelsiusReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetTriggerValueReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmCelsiusRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetTriggerValueRequestContract>>(e.Body);
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
-            var data = await sensorTriggerDomain.SetAlarmCelsius(message.Contract.SensorTempDSFamilyId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.AlarmCelsius);
+            var data = await sensorTriggerDomain.SetTriggerValue(message.Contract.SensorTriggerId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.TriggerValue);
 
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
-            //Load device into context
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
             var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusModel>(message.Contract);
-            viewModel.DeviceId = data.SensorInDevice.Single().DeviceSensorsId;
+            var viewModel = Mapper.Map<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmCelsiusViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetTriggerValueViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTriggerSetAlarmCelsiusRequestIoTContract>(iotContract);
+            var iotContract = Mapper.Map<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<SensorTriggerSetTriggerValueRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetAlarmCelsiusIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetTriggerValueIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
 
-        public void SetAlarmBuzzerOnReceived(object sender, BasicDeliverEventArgs e)
+        public void SetBuzzerOnReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetAlarmBuzzerOnReceivedAsync(sender, e));
+            Task.WaitAll(SetBuzzerOnReceivedAsync(sender, e));
         }
 
-        public async Task SetAlarmBuzzerOnReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetBuzzerOnReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetAlarmBuzzerOnRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorTriggerSetBuzzerOnRequestContract>>(e.Body);
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
-            var data = await sensorTriggerDomain.SetAlarmBuzzerOn(message.Contract.SensorTempDSFamilyId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.AlarmBuzzerOn);
+            var data = await sensorTriggerDomain.SetBuzzerOn(message.Contract.SensorTriggerId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.BuzzerOn);
 
             var exchange = "amq.topic";
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
-            //Load device into context
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
             var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             //Enviando para View
-            var viewModel = Mapper.Map<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnModel>(message.Contract);
-            viewModel.DeviceId = data.SensorInDevice.Single().DeviceSensorsId;
+            var viewModel = Mapper.Map<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetAlarmBuzzerOnViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetBuzzerOnViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTriggerSetAlarmBuzzerOnRequestIoTContract>(iotContract);
+            var iotContract = Mapper.Map<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnRequestIoTContract>(message.Contract);
+            var deviceMessage = new MessageIoTContract<SensorTriggerSetBuzzerOnRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetAlarmBuzzerOnIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetBuzzerOnIoTQueueName);
             _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

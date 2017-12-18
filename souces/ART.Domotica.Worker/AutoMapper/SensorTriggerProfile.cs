@@ -30,13 +30,33 @@
                 .ForMember(vm => vm.AlarmCelsius, m => m.MapFrom(x => Convert.ToDecimal(x.Max)))
                 .ForMember(vm => vm.AlarmBuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
 
-            CreateMap<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnRequestIoTContract>();
-            CreateMap<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusRequestIoTContract>();
-            CreateMap<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnRequestIoTContract>();
+            CreateMap<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnRequestIoTContract>();
 
-            CreateMap<SensorTriggerSetAlarmOnRequestContract, SensorTriggerSetAlarmOnModel>();
-            CreateMap<SensorTriggerSetAlarmCelsiusRequestContract, SensorTriggerSetAlarmCelsiusModel>();
-            CreateMap<SensorTriggerSetAlarmBuzzerOnRequestContract, SensorTriggerSetAlarmBuzzerOnModel>();
+            CreateMap<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueRequestIoTContract>();
+
+            CreateMap<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnRequestIoTContract>();
+
+            CreateMap<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnModel>()
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
+                .ForMember(vm => vm.TriggerOn, m => m.MapFrom(x => x.TriggerOn));
+
+            CreateMap<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueModel>()
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
+                .ForMember(vm => vm.TriggerValue, m => m.MapFrom(x => x.TriggerValue))
+                .ForMember(vm => vm.Position, m => m.MapFrom(x => x.Position));
+
+            CreateMap<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnModel>()
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
+                .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
         }
 
         #endregion Constructors

@@ -19,6 +19,16 @@
             get; set;
         }
 
+        public decimal Max
+        {
+            get; set;
+        }
+
+        public decimal Min
+        {
+            get; set;
+        }
+
         public Sensor Sensor
         {
             get; set;
@@ -40,16 +50,6 @@
         }
 
         public bool TriggerOn
-        {
-            get; set;
-        }
-
-        public decimal Max
-        {
-            get; set;
-        }
-
-        public decimal Min
         {
             get; set;
         }
