@@ -153,11 +153,8 @@ angular.module('app')
 
                       'js/controllers/hardware/sensor/sensorController.js',
                       'js/controllers/hardware/sensor/sensorUnitMeasurementScaleController.js',
-                      'js/controllers/hardware/sensor/sensorTempDSFamilyController.js',
-                      
-                      'js/controllers/sensorTriggerController.js',
-
-                      'js/controllers/espDeviceListController.js',            
+                      'js/controllers/hardware/sensor/sensorTempDSFamilyController.js',                      
+                      'js/controllers/hardware/sensor/sensorTriggerController.js',                      
 
                       // Device
                                            
@@ -165,6 +162,8 @@ angular.module('app')
                       'js/controllers/hardware/device/deviceNTPController.js',                                
                       'js/controllers/hardware/device/deviceSensorsController.js', 
                       'js/controllers/hardware/device/sensorInDeviceController.js', 
+
+                      'js/controllers/espDeviceListController.js',            
                       
                   ])
               })

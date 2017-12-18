@@ -282,7 +282,7 @@
     <Content Include="src\js\controllers\hardware\device\deviceController.js" />
     <Content Include="src\js\controllers\hardware\sensor\sensorTempDSFamilyController.js" />
     <Content Include="src\js\controllers\hardware\sensor\sensorUnitMeasurementScaleController.js" />
-    <Content Include="src\js\controllers\sensorTriggerController.js" />
+    <Content Include="src\js\controllers\hardware\sensor\sensorTriggerController.js" />
     <Content Include="src\js\controllers\tab.js" />
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
@@ -621,6 +621,7 @@
     <Content Include="src\views\hardware\device\sensorInDevice.html" />
     <Content Include="src\views\hardware\sensor\sensor.html" />
     <Content Include="src\views\hardware\sensor\sensorTempDSFamily.html" />
+    <Content Include="src\views\hardware\sensor\sensorTrigger.html" />
     <Content Include="src\views\hardware\sensor\sensorUnitMeasurementScale.html" />
     <Content Include="Web.config" />
   </ItemGroup>
