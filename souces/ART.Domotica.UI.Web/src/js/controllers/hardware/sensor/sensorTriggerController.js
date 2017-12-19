@@ -2,59 +2,124 @@
 app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'sensorContext', 'sensorTriggerService', 'sensorTriggerFinder', 'sensorTriggerConstant',
     function ($scope, $rootScope, $timeout, $log, toaster, sensorContext, sensorTriggerService, sensorTriggerFinder, sensorTriggerConstant) {
 
-        var _sensor = null;
+        $scope.sensorTrigger = null;
 
-        $scope.sensorTriggers = null;
+        $scope.triggerOnView = null;
+        $scope.buzzerOnView = null;
+        $scope.maxView = null;
+        $scope.minView = null;
 
-        var triggerOnDefault = false;
-        var buzzerOnDefault = false;
-        var maxDefault = 125;
-        var minDefault = -55;
+        $scope.init = function (sensorTrigger) {
 
-        $scope.init = function (sensor) {
-            _sensor = sensor;
+            $scope.sensorTrigger = sensorTrigger;
 
-            $scope.sensorTriggers = sensor.sensorTriggers;
+            $scope.triggerOnView = sensorTrigger.triggerOn;
+            $scope.buzzerOnView = sensorTrigger.buzzerOn;
+            $scope.maxView = sensorTrigger.max;
+            $scope.minView = sensorTrigger.min;
 
-            clearOnInsertCompleted = $rootScope.$on(sensorTriggerConstant.insertCompletedEventName + _sensor.sensorId, onInsertCompleted);                
-            clearOnDeleteCompleted = $rootScope.$on(sensorTriggerConstant.deleteCompletedEventName + _sensor.sensorId, onDeleteCompleted);                
+            initializeTriggerOnViewWatch();
+            initializeBuzzerOnViewWatch();
+            initializeMaxViewWatch();
+            initializeMinViewWatch();
+
+            clearOnSetTriggerOnCompleted = $rootScope.$on(sensorTriggerConstant.setTriggerOnCompletedEventName + sensorTrigger.sensorTriggerId, onSetTriggerOnCompleted);
+            clearOnSetBuzzerOnCompleted = $rootScope.$on(sensorTriggerConstant.setBuzzerOnCompletedEventName + sensorTrigger.sensorTriggerId, onSetBuzzerOnCompleted);
+            clearOnSetTriggerValueCompleted = $rootScope.$on(sensorTriggerConstant.setTriggerValueCompletedEventName + sensorTrigger.sensorTriggerId, onSetTriggerValueCompleted);
         };
 
-        $scope.insert = function () {            
-            sensorTriggerService.insertTrigger(
-                _sensor.sensorId,
-                _sensor.sensorDatasheetId,
-                _sensor.sensorTypeId,
-                triggerOnDefault,
-                buzzerOnDefault,
-                maxDefault,
-                minDefault);
+        var triggerOnViewWatch = null;
+        var buzzerOnViewWatch = null;
+        var maxViewWatch = null;
+        var minViewWatch = null;
+
+        var initializeTriggerOnViewWatch = function () {
+            triggerOnViewWatch = $scope.$watch('triggerOnView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                sensorTriggerService.setTriggerOn(
+                    $scope.sensorTrigger.sensorTriggerId,
+                    $scope.sensorTrigger.sensorId,
+                    $scope.sensorTrigger.sensorDatasheetId,
+                    $scope.sensorTrigger.sensorTypeId,
+                    newValue);
+            });
         }
 
-        $scope.remove = function (sensorTrigger) {
-            sensorTriggerService.deleteTrigger(
-                sensorTrigger.sensorTriggerId,
-                sensorTrigger.sensorId,
-                sensorTrigger.sensorDatasheetId,
-                sensorTrigger.sensorTypeId);            
+        var initializeBuzzerOnViewWatch = function () {
+            buzzerOnViewWatch = $scope.$watch('buzzerOnView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                sensorTriggerService.setBuzzerOn(
+                    $scope.sensorTrigger.sensorTriggerId,
+                    $scope.sensorTrigger.sensorId,
+                    $scope.sensorTrigger.sensorDatasheetId,
+                    $scope.sensorTrigger.sensorTypeId,
+                    newValue);
+            });
         }
 
-        var clearOnInsertCompleted = null;
-        var clearOnDeleteCompleted = null;
+        var initializeMaxViewWatch = function () {
+            maxViewWatch = $scope.$watch('maxView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                sensorTriggerService.setTriggerValue(
+                    $scope.sensorTrigger.sensorTriggerId,
+                    $scope.sensorTrigger.sensorId,
+                    $scope.sensorTrigger.sensorDatasheetId,
+                    $scope.sensorTrigger.sensorTypeId,
+                    'High',
+                    newValue);
+            });
+        }
+
+        var initializeMinViewWatch = function () {
+            minViewWatch = $scope.$watch('minView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                sensorTriggerService.setTriggerValue(
+                    newValue.sensorTriggerId,
+                    newValue.sensorId,
+                    newValue.sensorDatasheetId,
+                    newValue.sensorTypeId,
+                    'Low',
+                    newValue.triggerValue);
+            });
+        }
+
+        var clearOnSetTriggerOnCompleted = null;
+        var clearOnSetBuzzerOnCompleted = null;
+        var clearOnSetTriggerValueCompleted = null;
 
         $scope.$on('$destroy', function () {
-            clearOnInsertCompleted();
-            clearOnDeleteCompleted();
+
+            clearOnSetTriggerOnCompleted();
+            clearOnSetBuzzerOnCompleted();
+            clearOnSetTriggerValueCompleted();
+
+            triggerOnViewWatch();
+            buzzerOnViewWatch();
+            maxViewWatch();
+            minViewWatch();
+
         });
 
-        var onInsertCompleted = function (event, data) {
+        var onSetTriggerOnCompleted = function (event, data) {
+            $scope.triggerOnView = data.triggerOn;
             $scope.$apply();
             toaster.pop('success', 'Sucesso', 'gatilho adicionado');
         };
 
-        var onDeleteCompleted = function (event, data) {
+        var onSetBuzzerOnCompleted = function (event, data) {
+            $scope.buzzerOnView = data.buzzerOn;
             $scope.$apply();
             toaster.pop('success', 'Sucesso', 'gatilho excluído');
         };
+
+        var onSetTriggerValueCompleted = function (event, data) {
+            if (position === 'High')
+                $scope.maxView = data.max;
+            else if (position === 'Low')
+                $scope.minView = data.min;
+            $scope.$apply();
+            toaster.pop('success', 'Sucesso', 'gatilho excluído');
+        };
+
     }]);
 

@@ -258,7 +258,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
-            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
+            var device = await sensorDomain.GetDeviceFromSensor(data.SensorId);
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueModel>(message.Contract);
@@ -299,7 +299,7 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
-            var device = await sensorDomain.GetDeviceFromSensor(data.Id);
+            var device = await sensorDomain.GetDeviceFromSensor(data.SensorId);
 
             //Enviando para View
             var viewModel = Mapper.Map<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnModel>(message.Contract);

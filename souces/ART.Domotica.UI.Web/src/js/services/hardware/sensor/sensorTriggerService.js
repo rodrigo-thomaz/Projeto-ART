@@ -120,32 +120,29 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
 
         var onSetTriggerOnCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var sensor = sensorFinder.getSensorDSTempFamilyByKey(result.sensorTempDSFamilyId);
-            if (result.position === 'Low')
-                sensor.lowAlarm.alarmOn = result.alarmOn;
-            else if (result.position === 'High')
-                sensor.highAlarm.alarmOn = result.alarmOn;
-            $rootScope.$emit(sensorTriggerConstant.setTriggerOnCompletedEventName + result.sensorTempDSFamilyId, result);
-        }
-
-        var onSetTriggerValueCompleted = function (payload) {
-            var result = JSON.parse(payload.body);
-            var sensor = sensorFinder.getSensorDSTempFamilyByKey(result.sensorTempDSFamilyId);
-            if (result.position === 'Low')
-                sensor.lowAlarm.alarmCelsius = result.alarmCelsius;
-            else if (result.position === 'High')
-                sensor.highAlarm.alarmCelsius = result.alarmCelsius;
-            $rootScope.$emit(sensorTriggerConstant.setTriggerValueCompletedEventName + result.sensorTempDSFamilyId, result);
+            var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
+            sensorTrigger.triggerOn = result.triggerOn;
+            sensorContext.$digest();
+            $rootScope.$emit(sensorTriggerConstant.setTriggerOnCompletedEventName + result.sensorTriggerId, result);
         }
 
         var onSetBuzzerOnCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var sensor = sensorFinder.getSensorDSTempFamilyByKey(result.sensorTempDSFamilyId);
-            if (result.position === 'Low')
-                sensor.lowAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
-            else if (result.position === 'High')
-                sensor.highAlarm.alarmBuzzerOn = result.alarmBuzzerOn;
-            $rootScope.$emit(sensorTriggerConstant.setBuzzerOnCompletedEventName + result.sensorTempDSFamilyId, result);
+            var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
+            sensorTrigger.buzzerOn = result.buzzerOn;
+            sensorContext.$digest();
+            $rootScope.$emit(sensorTriggerConstant.setBuzzerOnCompletedEventName + result.sensorTriggerId, result);
+        }
+
+        var onSetTriggerValueCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);            
+            if (result.position === 'High')
+                sensorTrigger.max = result.max;
+            else if (result.position === 'Low')
+                sensorTrigger.min = result.min;
+            sensorContext.$digest();
+            $rootScope.$emit(sensorTriggerConstant.setTriggerValueCompletedEventName + result.sensorTriggerId, result);
         }
 
         $rootScope.$on('$destroy', function () {

@@ -58,16 +58,16 @@ app.constant('sensorTriggerConstant', {
     deleteCompletedTopic: 'SensorTrigger.DeleteViewCompleted',
     deleteCompletedEventName: 'sensorTriggerService.onDeleteCompleted_Id_',
 
-    setAlarmOnApiUri: 'api/sensorTrigger/setAlarmOn',
-    setAlarmOnCompletedTopic: 'SensorTrigger.SetAlarmOnViewCompleted',
-    setAlarmOnCompletedEventName: 'sensorTriggerService.onSetAlarmOnCompleted_Id_',
+    setTriggerOnApiUri: 'api/sensorTrigger/setTriggerOn',
+    setTriggerOnCompletedTopic: 'SensorTrigger.SetTriggerOnViewCompleted',
+    setTriggerOnCompletedEventName: 'sensorTriggerService.onSetTriggerOnCompleted_Id_',
 
-    setAlarmCelsiusApiUri: 'api/sensorTrigger/setAlarmCelsius',
-    setAlarmCelsiusCompletedTopic: 'SensorTrigger.SetAlarmCelsiusViewCompleted',
-    setAlarmCelsiusCompletedEventName: 'sensorTriggerService.onSetAlarmCelsiusCompleted_Id_',
+    setBuzzerOnApiUri: 'api/sensorTrigger/setBuzzerOn',
+    setBuzzerOnCompletedTopic: 'SensorTrigger.SetBuzzerOnViewCompleted',
+    setBuzzerOnCompletedEventName: 'sensorTriggerService.SetBuzzerOnCompleted_Id_',
 
-    setAlarmBuzzerOnApiUri: 'api/sensorTrigger/setAlarmBuzzerOn',
-    setAlarmBuzzerOnCompletedTopic: 'SensorTrigger.SetAlarmBuzzerOnViewCompleted',
-    setAlarmBuzzerOnCompletedEventName: 'sensorTriggerService.SetAlarmBuzzerOnCompleted_Id_',
+    setTriggerValueApiUri: 'api/sensorTrigger/setTriggerValue',
+    setTriggerValueCompletedTopic: 'SensorTrigger.SetTriggerValueViewCompleted',
+    setTriggerValueCompletedEventName: 'sensorTriggerService.onSetTriggerValueCompleted_Id_',
 
 });

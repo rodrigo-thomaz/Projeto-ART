@@ -18,27 +18,27 @@
                         <th width="50px"></th>
                     </tr>
                 </thead>
-                <tbody data-ng-repeat="(sensorTriggerKey, sensorTriggerItem) in sensorTriggers">
+                <tbody data-ng-repeat="(sensorTriggerKey, sensorTriggerItem) in sensorTriggers" ng-controller="sensorTriggerController" ng-init="init(sensorTriggerItem)">
                     <tr>
                         <td>
                             <div class="checkbox">
                                 <label class="i-checks">
-                                    <input type="checkbox" ng-model="sensorTriggerItem.triggerOn"><i></i>
+                                    <input type="checkbox" ng-model="triggerOnView" ng-model-options="{ debounce: 1000 }"><i></i>
                                 </label>
                             </div>
                         </td>
                         <td>
                             <div class="checkbox">
                                 <label class="i-checks">
-                                    <input type="checkbox" ng-model="sensorTriggerItem.buzzerOn"><i></i>
+                                    <input type="checkbox" ng-model="buzzerOnView" ng-model-options="{ debounce: 1000 }"><i></i>
                                 </label>
                             </div>
                         </td>
                         <td>
-                            <input type="number" ng-model="sensorTriggerItem.min" />
+                            <input type="number" ng-model="minView" ng-model-options="{ debounce: 1000 }"/>
                         </td>
                         <td>
-                            <input type="number" ng-model="sensorTriggerItem.max" />
+                            <input type="number" ng-model="maxView" ng-model-options="{ debounce: 1000 }"/>
                         </td>
                         <td>
                             <div class="text-center">
@@ -50,8 +50,9 @@
                     </tr>
                     <tr>
                         <td colspan="5">
-                            <slider ng-model="sensorTriggerItem.min"
-                                    ng-model-range="sensorTriggerItem.max"
+                            <slider ng-model="minView"
+                                    ng-model-range="maxView"
+                                    ng-model-options="{ debounce: 1000 }"
                                     floor="-55"
                                     ceiling="125">
                             </slider>
