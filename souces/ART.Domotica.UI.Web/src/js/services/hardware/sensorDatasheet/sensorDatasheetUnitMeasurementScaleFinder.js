@@ -54,10 +54,14 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorD
                 var containInNumericalScaleTypeCountries = serviceFactory.containInNumericalScaleTypeCountries(numericalScaleTypeCountries, sensorDatasheetUnitMeasurementScale.numericalScaleTypeId);
                 if (containInNumericalScaleTypeCountries && sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId) {
                     var numericalScaleType = numericalScaleTypeFinder.getByKey(sensorDatasheetUnitMeasurementScale.numericalScaleTypeId);
+                    var contain = false;
                     for (var j = 0; j < result.length; j++) {
-                        if (result[j] === numericalScaleType) break;
+                        if (result[j] === numericalScaleType) {
+                            contain = true;
+                            break;
+                        }
                     }
-                    result.push(numericalScaleType);
+                    if (!contain) result.push(numericalScaleType);
                 }
             }
             return result;
