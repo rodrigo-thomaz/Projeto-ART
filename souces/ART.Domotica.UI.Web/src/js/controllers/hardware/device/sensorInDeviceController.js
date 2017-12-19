@@ -41,8 +41,4 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
             allowDuplicates: false, //optional param allows duplicates to be dropped.
         };
 
-        $scope.$watchCollection('sensorInDevice', function (newValues, oldValues) {
-            
-        });
-
     }]);
