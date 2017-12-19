@@ -64,7 +64,6 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'orderBy
                     if (!contain) result.push(numericalScaleType);
                 }
             }
-            //return result;
             return orderBy(result, 'name', false);
         }
 
@@ -84,7 +83,6 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'orderBy
                     if (!contain) result.push(unitMeasurement);
                 }
             }
-            //return result;
             return orderBy(result, 'name', false);
         }
 
