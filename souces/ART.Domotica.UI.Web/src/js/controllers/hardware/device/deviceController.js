@@ -4,11 +4,13 @@ app.controller('deviceController', ['$scope', '$rootScope', '$timeout', '$log', 
 
     $scope.device = null;
 
+    $scope.deviceLabel = null;
+
     $scope.init = function (device) {
 
         $scope.device = device; 
 
-        $scope.labelView = device.label;
+        $scope.deviceLabel = device.label;
 
         clearOnSetLabelCompleted = $rootScope.$on(deviceConstant.setLabelCompletedEventName + $scope.device.deviceId, onSetLabelCompleted);        
     }
@@ -20,14 +22,14 @@ app.controller('deviceController', ['$scope', '$rootScope', '$timeout', '$log', 
     });
 
     var onSetLabelCompleted = function (event, data) {
-        $scope.labelView = data.label;
+        $scope.deviceLabel = data.label;
         $scope.$apply();
         toaster.pop('success', 'Sucesso', 'Label alterado');
     };    
 
     $scope.changeLabel = function () {
-        if (!$scope.device || !$scope.labelView) return;
-        deviceService.setLabel($scope.device.deviceId, $scope.labelView);
+        if (!$scope.device || !$scope.deviceLabel) return;
+        deviceService.setLabel($scope.device.deviceId, $scope.deviceLabel);
     };
 
 }]);

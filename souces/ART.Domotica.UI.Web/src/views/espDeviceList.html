@@ -16,26 +16,7 @@
 
                 <div class="col-md-6">
 
-                    <div class="panel panel-default" ng-controller="deviceController" ng-init="init(deviceItem)">
-                        
-                        <div class="panel-heading font-bold">Device - {{deviceItem.label}}</div>
-                        
-                        <div class="panel-body">
-
-                            <div data-ng-include=" 'views/hardware/device/device.html' "></div>
-
-                            <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                            <div data-ng-include=" 'views/hardware/device/deviceNTP.html' "></div>
-
-                            <div class="line line-dashed b-b line-lg pull-in"></div>
-
-                            <div data-ng-include=" 'views/hardware/device/deviceSensors.html' "></div>
-
-                            <div data-ng-include=" 'views/hardware/device/sensorInDevice.html' "></div>
-
-                        </div>
-                    </div>
+                    <div data-ng-include=" 'views/hardware/device/device.html' "></div>                    
 
                 </div>                
 

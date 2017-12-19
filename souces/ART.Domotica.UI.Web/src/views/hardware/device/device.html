@@ -1,41 +1,61 @@
-﻿<form name="form" class="form-horizontal form-validation">
-    <div class="form-group">
-        <label class="col-lg-4 control-label">Status</label>
-        <div class="col-lg-8">
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <i ng-class="device.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
-                </span>
-                <input type="text" class="form-control" readonly value="{{device.isConnected ? 'On-line' : 'Off-line'}}">
+﻿<div class="panel panel-default" ng-controller="deviceController" ng-init="init(deviceItem)">
+
+    <div class="panel-heading font-bold" ng-bind="device.label"></div>
+
+    <div class="panel-body">
+
+        <form name="form" class="form-horizontal form-validation">
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Status</label>
+                <div class="col-lg-8">
+                    <div class="input-group">
+                        <span class="input-group-addon">
+                            <i ng-class="device.isConnected ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
+                        </span>
+                        <input type="text" class="form-control" readonly value="{{device.isConnected ? 'On-line' : 'Off-line'}}">
+                    </div>
+                </div>
             </div>
-        </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Última atualização</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" readonly value="{{device.epochTimeUtc == null ? '' : device.epochTimeUtc * 1000 | date:'dd/MM/yyyy HH:mm:ss Z'}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Wifi Quality</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" readonly uppercased ng-model="device.wifiQuality">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Local IP Address</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" readonly uppercased ng-model="device.localIPAddress">
+                </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+                <label class="col-lg-4 control-label">Rótulo</label>
+                <div class="col-lg-8">
+                    <input name="inputLabel" type="text" class="form-control" ng-model="deviceLabel" ng-model-options="{ debounce: 1000 }" ng-change="changeLabel()" required>
+                    <span ng-show="form.inputLabel.$touched && form.inputLabel.$invalid">
+                        Rótulo é requerido
+                    </span>
+                </div>
+            </div>
+        </form>
+
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+        <div data-ng-include=" 'views/hardware/device/deviceNTP.html' "></div>
+
+        <div class="line line-dashed b-b line-lg pull-in"></div>
+
+        <div data-ng-include=" 'views/hardware/device/deviceSensors.html' "></div>
+
+        <div data-ng-include=" 'views/hardware/device/sensorInDevice.html' "></div>
+
     </div>
-    <div class="form-group">
-        <label class="col-lg-4 control-label">Última atualização</label>
-        <div class="col-lg-8">
-            <input type="text" class="form-control" readonly value="{{device.epochTimeUtc == null ? '' : device.epochTimeUtc * 1000 | date:'dd/MM/yyyy HH:mm:ss Z'}}">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-lg-4 control-label">Wifi Quality</label>
-        <div class="col-lg-8">
-            <input type="text" class="form-control" readonly uppercased ng-model="device.wifiQuality">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-lg-4 control-label">Local IP Address</label>
-        <div class="col-lg-8">
-            <input type="text" class="form-control" readonly uppercased ng-model="device.localIPAddress">
-        </div>
-    </div>
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-    <div class="form-group">
-        <label class="col-lg-4 control-label">Rótulo</label>
-        <div class="col-lg-8">
-            <input name="inputLabel" type="text" class="form-control" ng-model="labelView" ng-model-options="{ debounce: 1000 }" ng-change="changeLabel()" required>
-            <span ng-show="form.inputLabel.$touched && form.inputLabel.$invalid">
-                Rótulo é requerido
-            </span>
-        </div>
-    </div>
-</form>
+</div>
+
