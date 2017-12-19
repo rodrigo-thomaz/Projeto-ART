@@ -281,8 +281,9 @@
     <Content Include="src\js\controllers\hardware\device\deviceNTPController.js" />
     <Content Include="src\js\controllers\hardware\device\deviceController.js" />
     <Content Include="src\js\controllers\hardware\sensor\sensorTempDSFamilyController.js" />
-    <Content Include="src\js\controllers\hardware\sensor\sensorUnitMeasurementScaleController.js" />
     <Content Include="src\js\controllers\hardware\sensor\sensorTriggerController.js" />
+    <Content Include="src\js\controllers\hardware\sensor\sensorUnitMeasurementScaleController.js" />
+    <Content Include="src\js\controllers\hardware\sensor\sensorTriggersController.js" />
     <Content Include="src\js\controllers\tab.js" />
     <Content Include="src\js\controllers\vectormap.js" />
     <Content Include="src\js\directives\ui-uppercased.js" />
