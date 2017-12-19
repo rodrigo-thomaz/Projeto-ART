@@ -71,8 +71,6 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
             });
         }
 
-        var setTriggerOn
-
         var setTriggerValue = debounce(1000, function (position, triggerValue) {
             sensorTriggerService.setTriggerValue(
                 $scope.sensorTrigger.sensorTriggerId,
