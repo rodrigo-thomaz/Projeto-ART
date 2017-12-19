@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('numericalScaleTypeCountryFinder', ['$rootScope', 'siContext',
-    function ($rootScope, siContext) {
+app.factory('numericalScaleTypeCountryFinder', ['$rootScope', 'siContext', 'orderByFilter',
+    function ($rootScope, siContext, orderBy) {
 
         var context = siContext;
 
@@ -48,7 +48,7 @@ app.factory('numericalScaleTypeCountryFinder', ['$rootScope', 'siContext',
                 }
                 if (!contains) result.push(country);
             }
-            return result;
+            return orderBy(result, 'name', false);
         }
 
         // *** Public Methods ***
