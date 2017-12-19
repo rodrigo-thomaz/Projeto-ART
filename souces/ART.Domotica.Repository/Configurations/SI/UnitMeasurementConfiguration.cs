@@ -50,8 +50,7 @@
             //Symbol
             Property(x => x.Symbol)
                 .HasColumnOrder(3)
-                .HasMaxLength(2)
-                .IsFixedLength()
+                .HasMaxLength(5)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));

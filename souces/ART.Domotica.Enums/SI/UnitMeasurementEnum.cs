@@ -13,6 +13,12 @@
 
         Celsius = 11001,
         Fahrenheit = 11002,
+        Kelvin = 11003,
+        Rankine = 11004,
+        Romer = 11005,
+        Newton = 11006,
+        Delisle = 11007,
+        Reaumur = 11008,
     }
 
     #endregion Enumerations
