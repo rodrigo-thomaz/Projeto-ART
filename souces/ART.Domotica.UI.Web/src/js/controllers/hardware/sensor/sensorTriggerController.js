@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'sensorContext', 'sensorTriggerService', 'sensorTriggerFinder', 'sensorTriggerConstant',
-    function ($scope, $rootScope, $timeout, $log, toaster, sensorContext, sensorTriggerService, sensorTriggerFinder, sensorTriggerConstant) {
+app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'debounce', 'sensorContext', 'sensorTriggerService', 'sensorTriggerFinder', 'sensorTriggerConstant',
+    function ($scope, $rootScope, $timeout, $log, toaster, debounce, sensorContext, sensorTriggerService, sensorTriggerFinder, sensorTriggerConstant) {
 
         $scope.sensorTrigger = null;
 
@@ -60,28 +60,28 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
         var initializeMaxViewWatch = function () {
             maxViewWatch = $scope.$watch('maxView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
-                sensorTriggerService.setTriggerValue(
-                    $scope.sensorTrigger.sensorTriggerId,
-                    $scope.sensorTrigger.sensorId,
-                    $scope.sensorTrigger.sensorDatasheetId,
-                    $scope.sensorTrigger.sensorTypeId,
-                    'Max',
-                    newValue);
+                setTriggerValue('Max', newValue);
             });
         }
 
         var initializeMinViewWatch = function () {
             minViewWatch = $scope.$watch('minView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
-                sensorTriggerService.setTriggerValue(
-                    $scope.sensorTrigger.sensorTriggerId,
-                    $scope.sensorTrigger.sensorId,
-                    $scope.sensorTrigger.sensorDatasheetId,
-                    $scope.sensorTrigger.sensorTypeId,
-                    'Min',
-                    newValue);
+                setTriggerValue('Min', newValue);
             });
         }
+
+        var setTriggerOn
+
+        var setTriggerValue = debounce(1000, function (position, triggerValue) {
+            sensorTriggerService.setTriggerValue(
+                $scope.sensorTrigger.sensorTriggerId,
+                $scope.sensorTrigger.sensorId,
+                $scope.sensorTrigger.sensorDatasheetId,
+                $scope.sensorTrigger.sensorTypeId,
+                position,
+                triggerValue);
+        });
 
         var clearOnSetTriggerOnCompleted = null;
         var clearOnSetBuzzerOnCompleted = null;
