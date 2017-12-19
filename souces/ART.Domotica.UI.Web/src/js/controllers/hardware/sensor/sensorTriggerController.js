@@ -6,6 +6,11 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
 
         $scope.sensorTriggers = null;
 
+        var triggerOnDefault = false;
+        var buzzerOnDefault = false;
+        var maxDefault = 125;
+        var minDefault = -55;
+
         $scope.init = function (sensor) {
             _sensor = sensor;
 
@@ -14,11 +19,6 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
             clearOnInsertCompleted = $rootScope.$on(sensorTriggerConstant.insertCompletedEventName + _sensor.sensorId, onInsertCompleted);                
             clearOnDeleteCompleted = $rootScope.$on(sensorTriggerConstant.deleteCompletedEventName + _sensor.sensorId, onDeleteCompleted);                
         };
-
-        var triggerOnDefault = false;
-        var buzzerOnDefault = false;
-        var maxDefault = 125;
-        var minDefault = -55;
 
         $scope.insert = function () {            
             sensorTriggerService.insertTrigger(
