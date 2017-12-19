@@ -99,13 +99,22 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
         var onDeleteCompleted = function (payload) {
             var result = JSON.parse(payload.body);
             var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
-            for (var i = 0; i < sensorContext.sensorTrigger.length; i++) {
-                if (sensorTrigger === sensorContext.sensorTrigger[i]) {
-                    sensorContext.sensorTrigger.splice(i, 1);
-                    sensorContext.$digest();
+            var sensor = sensorFinder.getByKey(result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
+            //Remove from sensor
+            for (var i = 0; i < sensor.sensorTriggers.length; i++) {
+                if (sensorTrigger === sensor.sensorTriggers[i]){
+                    sensor.sensorTriggers.splice(i, 1);
                     break;
                 }
             }
+            //Remove from context
+            for (var i = 0; i < sensorContext.sensorTrigger.length; i++) {
+                if (sensorTrigger === sensorContext.sensorTrigger[i]) {
+                    sensorContext.sensorTrigger.splice(i, 1);                    
+                    break;
+                }
+            }
+            sensorContext.$digest();
             $rootScope.$emit(sensorTriggerConstant.deleteCompletedEventName + result.sensorTriggerId, result);
         }
 
