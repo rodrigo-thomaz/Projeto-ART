@@ -35,11 +35,28 @@ app.factory('numericalScaleTypeCountryFinder', ['$rootScope', 'siContext',
             return result;
         }
 
+        var getCountries = function () {
+            var result = [];
+            for (var i = 0; i < context.numericalScaleTypeCountry.length; i++) {
+                var country = context.numericalScaleTypeCountry[i].country();
+                var contains = false;
+                for (var j = 0; j < result.length; j++) {
+                    if (result[j] === country) {
+                        contains = true;
+                        break;
+                    }   
+                }
+                if (!contains) result.push(country);
+            }
+            return result;
+        }
+
         // *** Public Methods ***
 
         serviceFactory.getByKey = getByKey;
         serviceFactory.getByNumericalScaleTypeKey = getByNumericalScaleTypeKey;
         serviceFactory.getByCountryKey = getByCountryKey;
+        serviceFactory.getCountries = getCountries;
 
         return serviceFactory;
 

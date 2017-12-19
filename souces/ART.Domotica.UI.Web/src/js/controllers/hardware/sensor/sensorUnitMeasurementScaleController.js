@@ -1,5 +1,5 @@
-﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'debounce', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext', 'sensorDatasheetUnitMeasurementScaleFinder', 'unitMeasurementFinder', 'unitMeasurementScaleFinder', 'countryFinder', 'numericalScaleTypeFinder', 'sensorUnitMeasurementScaleConstant',
-    function ($scope, $rootScope, $timeout, $log, toaster, debounce, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext, sensorDatasheetUnitMeasurementScaleFinder, unitMeasurementFinder, unitMeasurementScaleFinder, countryFinder, numericalScaleTypeFinder, sensorUnitMeasurementScaleConstant) {
+﻿app.controller('sensorUnitMeasurementScaleController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'debounce', 'unitMeasurementConverter', 'sensorUnitMeasurementScaleService', 'sensorDatasheetContext', 'localeContext', 'sensorDatasheetUnitMeasurementScaleFinder', 'unitMeasurementFinder', 'unitMeasurementScaleFinder', 'countryFinder', 'numericalScaleTypeFinder', 'sensorUnitMeasurementScaleConstant', 'numericalScaleTypeCountryFinder',
+    function ($scope, $rootScope, $timeout, $log, toaster, debounce, unitMeasurementConverter, sensorUnitMeasurementScaleService, sensorDatasheetContext, localeContext, sensorDatasheetUnitMeasurementScaleFinder, unitMeasurementFinder, unitMeasurementScaleFinder, countryFinder, numericalScaleTypeFinder, sensorUnitMeasurementScaleConstant, numericalScaleTypeCountryFinder) {
 
         $scope.sensorUnitMeasurementScale = null;
 
@@ -164,7 +164,7 @@
 
             //country
             var country = countryFinder.getByKey(sensorUnitMeasurementScale.countryId);
-            $scope.countryView.availables = localeContext.country;
+            $scope.countryView.availables = numericalScaleTypeCountryFinder.getCountries();
             $scope.countryView.selected = country;
 
             //numericalScaleType
