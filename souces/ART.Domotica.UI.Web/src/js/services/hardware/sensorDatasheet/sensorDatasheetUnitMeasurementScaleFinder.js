@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorDatasheetContext', 'unitMeasurementFinder', 'numericalScaleTypeFinder', 'numericalScaleTypeCountryFinder',
-    function ($rootScope, sensorDatasheetContext, unitMeasurementFinder, numericalScaleTypeFinder, numericalScaleTypeCountryFinder) {
+app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'orderByFilter', 'sensorDatasheetContext', 'unitMeasurementFinder', 'numericalScaleTypeFinder', 'numericalScaleTypeCountryFinder',
+    function ($rootScope, orderBy, sensorDatasheetContext, unitMeasurementFinder, numericalScaleTypeFinder, numericalScaleTypeCountryFinder) {
 
         var context = sensorDatasheetContext;
 
@@ -64,7 +64,8 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorD
                     if (!contain) result.push(numericalScaleType);
                 }
             }
-            return result;
+            //return result;
+            return orderBy(result, 'name', false);
         }
 
         var getUnitMeasurementsBySensorDatasheetKey = function (sensorDatasheetId, sensorTypeId) {
@@ -73,13 +74,18 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'sensorD
                 var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
                 if (sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId) {
                     var unitMeasurement = unitMeasurementFinder.getByKey(sensorDatasheetUnitMeasurementScale.unitMeasurementId, sensorDatasheetUnitMeasurementScale.unitMeasurementTypeId);
+                    var contain = false;
                     for (var j = 0; j < result.length; j++) {
-                        if (result[j] === unitMeasurement) break;
+                        if (result[j] === unitMeasurement) {
+                            contain = true;
+                            break;
+                        }
                     }
-                    result.push(unitMeasurement);
+                    if (!contain) result.push(unitMeasurement);
                 }
             }
-            return result;
+            //return result;
+            return orderBy(result, 'name', false);
         }
 
         // *** Public Methods ***
