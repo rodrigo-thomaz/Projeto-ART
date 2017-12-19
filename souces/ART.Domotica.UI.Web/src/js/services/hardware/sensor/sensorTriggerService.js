@@ -137,10 +137,10 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
         var onSetTriggerValueCompleted = function (payload) {
             var result = JSON.parse(payload.body);
             var sensorTrigger = sensorTriggerFinder.getByKey(result.sensorTriggerId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);            
-            if (result.position === 'High')
-                sensorTrigger.max = result.max;
-            else if (result.position === 'Low')
-                sensorTrigger.min = result.min;
+            if (result.position === 'Max')
+                sensorTrigger.max = result.triggerValue;
+            else if (result.position === 'Min')
+                sensorTrigger.min = result.triggerValue;
             sensorContext.$digest();
             $rootScope.$emit(sensorTriggerConstant.setTriggerValueCompletedEventName + result.sensorTriggerId, result);
         }

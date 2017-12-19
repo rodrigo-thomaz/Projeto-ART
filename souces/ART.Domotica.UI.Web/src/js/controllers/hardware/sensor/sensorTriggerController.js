@@ -65,7 +65,7 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
                     $scope.sensorTrigger.sensorId,
                     $scope.sensorTrigger.sensorDatasheetId,
                     $scope.sensorTrigger.sensorTypeId,
-                    'High',
+                    'Max',
                     newValue);
             });
         }
@@ -74,12 +74,12 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
             minViewWatch = $scope.$watch('minView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 sensorTriggerService.setTriggerValue(
-                    newValue.sensorTriggerId,
-                    newValue.sensorId,
-                    newValue.sensorDatasheetId,
-                    newValue.sensorTypeId,
-                    'Low',
-                    newValue.triggerValue);
+                    $scope.sensorTrigger.sensorTriggerId,
+                    $scope.sensorTrigger.sensorId,
+                    $scope.sensorTrigger.sensorDatasheetId,
+                    $scope.sensorTrigger.sensorTypeId,
+                    'Min',
+                    newValue);
             });
         }
 
@@ -101,24 +101,35 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
         });
 
         var onSetTriggerOnCompleted = function (event, data) {
+            triggerOnViewWatch();
             $scope.triggerOnView = data.triggerOn;
-            $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'gatilho adicionado');
+            $scope.$apply();            
+            initializeTriggerOnViewWatch();
+            toaster.pop('success', 'Sucesso', 'Trigger On alterada');
         };
 
         var onSetBuzzerOnCompleted = function (event, data) {
+            buzzerOnViewWatch();
             $scope.buzzerOnView = data.buzzerOn;
             $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'gatilho excluído');
+            initializeBuzzerOnViewWatch();
+            toaster.pop('success', 'Sucesso', 'Buzzer On alterado');
         };
 
         var onSetTriggerValueCompleted = function (event, data) {
-            if (position === 'High')
-                $scope.maxView = data.max;
-            else if (position === 'Low')
-                $scope.minView = data.min;
-            $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'gatilho excluído');
+            if (data.position === 'Max') {
+                maxViewWatch();
+                $scope.maxView = data.triggerValue;
+                $scope.$apply();
+                initializeMaxViewWatch();
+            }
+            else if (data.position === 'Min') {
+                minViewWatch();
+                $scope.minView = data.triggerValue;
+                $scope.$apply();
+                initializeMinViewWatch();
+            }            
+            toaster.pop('success', 'Sucesso', 'Trigger value alterado');
         };
 
     }]);
