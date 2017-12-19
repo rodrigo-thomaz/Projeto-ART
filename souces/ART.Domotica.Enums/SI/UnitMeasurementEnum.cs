@@ -8,6 +8,10 @@
 
         Meter = 3001,
         Inch = 3002,
+        Foot = 3003,
+        Yard = 3004,
+        Mile = 3005,
+        League = 3006,
 
         // UnitMeasurementTypeEnum.Temperature = 11
 
