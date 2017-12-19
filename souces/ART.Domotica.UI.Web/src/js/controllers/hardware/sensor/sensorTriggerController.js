@@ -8,7 +8,11 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
 
         $scope.init = function (sensor) {
             _sensor = sensor;
+
             $scope.sensorTriggers = sensor.sensorTriggers;
+
+            clearOnInsertCompleted = $rootScope.$on(sensorTriggerConstant.insertCompletedEventName + _sensor.sensorId, onInsertCompleted);                
+            clearOnDeleteCompleted = $rootScope.$on(sensorTriggerConstant.deleteCompletedEventName + _sensor.sensorId, onDeleteCompleted);                
         };
 
         var triggerOnDefault = false;
@@ -16,8 +20,7 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
         var maxDefault = 125;
         var minDefault = -55;
 
-        $scope.insert = function () {
-            
+        $scope.insert = function () {            
             sensorTriggerService.insertTrigger(
                 _sensor.sensorId,
                 _sensor.sensorDatasheetId,
@@ -26,36 +29,32 @@ app.controller('sensorTriggerController', ['$scope', '$rootScope', '$timeout', '
                 buzzerOnDefault,
                 maxDefault,
                 minDefault);
-
-            //$scope.sensorTriggers.push({
-            //    sensorId: _sensor.sensorId,
-            //    sensorDatasheetId: _sensor.sensorDatasheetId,
-            //    sensorTypeId: _sensor.sensorTypeId,
-            //    triggerOn: triggerOnDefault,
-            //    buzzerOn: buzzerOnDefault,
-            //    max: maxDefault,
-            //    min: minDefault,
-            //});
-
         }
 
         $scope.remove = function (sensorTrigger) {
-            for (var i = 0; i < $scope.sensorTriggers.length; i++) {
-                if (sensorTrigger === $scope.sensorTriggers[i]) {
-                    sensorTriggerService.deleteTrigger(
-                        sensorTrigger.sensorTriggerId,
-                        sensorTrigger.sensorId,
-                        sensorTrigger.sensorDatasheetId,
-                        sensorTrigger.sensorTypeId);
-                    //$scope.sensorTriggers.splice(i, 1);
-                    break;
-                }
-            }
+            sensorTriggerService.deleteTrigger(
+                sensorTrigger.sensorTriggerId,
+                sensorTrigger.sensorId,
+                sensorTrigger.sensorDatasheetId,
+                sensorTrigger.sensorTypeId);            
         }
 
-        $scope.$on('$destroy', function () {
+        var clearOnInsertCompleted = null;
+        var clearOnDeleteCompleted = null;
 
+        $scope.$on('$destroy', function () {
+            clearOnInsertCompleted();
+            clearOnDeleteCompleted();
         });
 
+        var onInsertCompleted = function (event, data) {
+            $scope.$apply();
+            toaster.pop('success', 'Sucesso', 'gatilho adicionado');
+        };
+
+        var onDeleteCompleted = function (event, data) {
+            $scope.$apply();
+            toaster.pop('success', 'Sucesso', 'gatilho excluído');
+        };
     }]);
 

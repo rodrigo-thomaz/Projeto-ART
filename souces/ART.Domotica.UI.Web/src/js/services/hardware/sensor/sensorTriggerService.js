@@ -93,7 +93,7 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
             sensor.sensorTriggers.push(result);
             sensorContext.sensorTrigger.push(result);
             sensorContext.$digest();
-            $rootScope.$emit(sensorTriggerConstant.insertCompletedEventName + result.sensorTriggerId, result);
+            $rootScope.$emit(sensorTriggerConstant.insertCompletedEventName + result.sensorId, result);
         }
 
         var onDeleteCompleted = function (payload) {
@@ -115,7 +115,7 @@ app.factory('sensorTriggerService', ['$http', '$log', '$rootScope', 'ngAuthSetti
                 }
             }
             sensorContext.$digest();
-            $rootScope.$emit(sensorTriggerConstant.deleteCompletedEventName + result.sensorTriggerId, result);
+            $rootScope.$emit(sensorTriggerConstant.deleteCompletedEventName + result.sensorId, result);
         }
 
         var onSetTriggerOnCompleted = function (payload) {
