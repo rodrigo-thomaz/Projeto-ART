@@ -40,7 +40,7 @@
             ExecuteSensorDatasheet(context);
             ExecuteSensorDatasheetUnitMeasurementDefault(context);
             ExecuteSensorDatasheetUnitMeasurementScale(context);
-
+            
             #region SensorTempDSFamilyResolutions
 
             var sensorTempDSFamilyResolution9 = context.SensorTempDSFamilyResolution.SingleOrDefault(x => x.Id == 9);
@@ -103,7 +103,7 @@
             context.SaveChanges();
 
             #endregion
-
+            
             #region Sensors
 
             var sensor_1_Address = "28fff62293165b0";
@@ -144,7 +144,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -178,7 +178,7 @@
                 {
                     sensor_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -216,7 +216,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -250,7 +250,7 @@
                 {
                     sensor_2_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -287,7 +287,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -321,7 +321,7 @@
                 {
                     sensor_2_2.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -358,7 +358,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -392,7 +392,7 @@
                 {
                     sensor_3_1.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -429,7 +429,7 @@
                     },
                     SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -463,7 +463,7 @@
                 {
                     sensor_3_2.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
                     {
-                        CountryId = 1,
+                        CountryId = 2,
                         UnitMeasurementId = UnitMeasurementEnum.Celsius,
                         UnitMeasurementTypeId = UnitMeasurementTypeEnum.Temperature,
                         NumericalScalePrefixId = NumericalScalePrefixEnum.None,
@@ -477,7 +477,7 @@
             context.SaveChanges();
 
             #endregion
-
+            
             #region ESPDevice1
 
             var espDevice1MacAddress = "A0:20:A6:17:83:25";
@@ -765,18 +765,36 @@
 
                 context.Country.Add(entity);
 
-                var numericalScaleTypes = line[2].Split(',');
-
-                foreach (var item in numericalScaleTypes)
+                if (!String.IsNullOrEmpty(line[2].Trim()))
                 {
-                    var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), item);
-
-                    context.NumericalScaleTypeCountry.Add(new NumericalScaleTypeCountry
+                    if (line[2].Contains(","))
                     {
-                        CountryId = entity.Id,
-                        NumericalScaleTypeId = numericalScaleTypeId,
-                    });
-                }
+                        var numericalScaleTypes = line[2].Split(',');
+
+                        foreach (var item in numericalScaleTypes)
+                        {
+                            var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), item);
+
+                            context.NumericalScaleTypeCountry.Add(new NumericalScaleTypeCountry
+                            {
+                                CountryId = entity.Id,
+                                NumericalScaleTypeId = numericalScaleTypeId,
+                            });
+                        }
+                    }
+                    else
+                    {
+                        var numericalScaleType = line[2].Trim();
+
+                        var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), numericalScaleType);
+
+                        context.NumericalScaleTypeCountry.Add(new NumericalScaleTypeCountry
+                        {
+                            CountryId = entity.Id,
+                            NumericalScaleTypeId = numericalScaleTypeId,
+                        });
+                    }
+                }                
 
                 context.SaveChanges();
             }

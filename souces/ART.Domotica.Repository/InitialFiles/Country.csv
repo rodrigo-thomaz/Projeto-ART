@@ -1,197 +1,197 @@
-Algeria;Africa;Long,Short
-Angola;Africa;Long,Short
-Benin;Africa;Long,Short
-Botswana;Africa;Long,Short
-Burkina Faso;Africa;Long,Short
-Burundi;Africa;Long,Short
-Cameroon;Africa;Long,Short
-Cape Verde;Africa;Long,Short
-Central African Republic;Africa;Long,Short
-Chad;Africa;Long,Short
-Comoros;Africa;Long,Short
-Democratic Republic of Congo;Africa;Long,Short
-Djibouti;Africa;Long,Short
-Egypt;Africa;Long,Short
-Equatorial Guinea;Africa;Long,Short
-Eritrea;Africa;Long,Short
-Ethiopia;Africa;Long,Short
-Gabon;Africa;Long,Short
-Gambia;Africa;Long,Short
-Ghana;Africa;Long,Short
-Guinea;Africa;Long,Short
-Guinea-Bissau;Africa;Long,Short
-Ivory Coast;Africa;Long,Short
-Kenya;Africa;Long,Short
-Lesotho;Africa;Long,Short
-Liberia;Africa;Long,Short
-Libya;Africa;Long,Short
-Madagascar;Africa;Long,Short
-Malawi;Africa;Long,Short
-Mali;Africa;Long,Short
-Mauritania;Africa;Long,Short
+Algeria;Africa;Short
+Angola;Africa;Long
+Benin;Africa;Long
+Botswana;Africa;Short
+Burkina Faso;Africa;Long
+Burundi;Africa;
+Cameroon;Africa;Short
+Cape Verde;Africa;Long
+Central African Republic;Africa;Long
+Chad;Africa;Short
+Comoros;Africa;Short
+Democratic Republic of Congo;Africa;Long
+Djibouti;Africa;Short
+Egypt;Africa;Short
+Equatorial Guinea;Africa;Long
+Eritrea;Africa;Short
+Ethiopia;Africa;Short
+Gabon;Africa;Long
+Gambia;Africa;Short
+Ghana;Africa;Short
+Guinea;Africa;Long
+Guinea-Bissau;Africa;Long
+Ivory Coast;Africa;Long
+Kenya;Africa;Short
+Lesotho;Africa;Short
+Liberia;Africa;Short
+Libya;Africa;Short
+Madagascar;Africa;Long
+Malawi;Africa;Short
+Mali;Africa;Long
+Mauritania;Africa;Short
 Mauritius;Africa;Long,Short
-Morocco;Africa;Long,Short
-Mozambique;Africa;Long,Short
+Morocco;Africa;Short
+Mozambique;Africa;Long
 Namibia;Africa;Long,Short
-Niger;Africa;Long,Short
-Nigeria;Africa;Long,Short
-Republic of the Congo;Africa;Long,Short
-Rwanda;Africa;Long,Short
-São Tomé and Príncipe;Africa;Long,Short
-Senegal;Africa;Long,Short
+Niger;Africa;Long
+Nigeria;Africa;Short
+Republic of the Congo;Africa;Long
+Rwanda;Africa;Short
+São Tomé and Príncipe;Africa;Long
+Senegal;Africa;Long
 Seychelles;Africa;Long,Short
-Sierra Leone;Africa;Long,Short
-Somalia;Africa;Long,Short
+Sierra Leone;Africa;Short
+Somalia;Africa;Short
 South Africa;Africa;Long,Short
-South Sudan;Africa;Long,Short
-Sudan;Africa;Long,Short
-Swaziland;Africa;Long,Short
-Tanzania;Africa;Long,Short
-Togo;Africa;Long,Short
-Tunisia;Africa;Long,Short
-Uganda;Africa;Long,Short
-Zambia;Africa;Long,Short
-Zimbabwe;Africa;Long,Short
-Antigua and Barbuda;America;Long,Short
-Argentina;America;Long,Short
-Bahamas;America;Long,Short
-Barbados;America;Long,Short
-Belize;America;Long,Short
-Bolivia;America;Long,Short
-Brazil;America;Long,Short
+South Sudan;Africa;Short
+Sudan;Africa;Short
+Swaziland;Africa;Short
+Tanzania;Africa;Short
+Togo;Africa;Long
+Tunisia;Africa;Short
+Uganda;Africa;Short
+Zambia;Africa;Short
+Zimbabwe;Africa;Short
+Antigua and Barbuda;America;Short
+Argentina;America;Long
+Bahamas;America;Short
+Barbados;America;Short
+Belize;America;Short
+Bolivia;America;Long
+Brazil;America;Short
 Canada;America;Long,Short
-Chile;America;Long,Short
-Colombia;America;Long,Short
-Costa Rica;America;Long,Short
-Cuba;America;Long,Short
-Dominica;America;Long,Short
-Dominican Republic;America;Long,Short
-Ecuador;America;Long,Short
-El Salvador;America;Long,Short
-Grenada;America;Long,Short
-Guatemala;America;Long,Short
-Guyana;America;Long,Short
-Haiti;America;Long,Short
-Honduras;America;Long,Short
-Jamaica;America;Long,Short
-Mexico;America;Long,Short
-Nicaragua;America;Long,Short
-Panama;America;Long,Short
-Paraguay;America;Long,Short
-Peru;America;Long,Short
-Saint Kitts and Nevis;America;Long,Short
-Saint Lucia;America;Long,Short
-Saint Vincent and the Grenadines;America;Long,Short
-Suriname;America;Long,Short
-Trinidad and Tobago;America;Long,Short
-United States;America;Long,Short
-Uruguay;America;Long,Short
-Venezuela;America;Long,Short
-Afghanistan;Asia;Long,Short
-Armenia;Asia;Long,Short
-Azerbaijan;Asia;Long,Short
-Bahrain;Asia;Long,Short
-Bangladesh;Asia;Long,Short
-Bhutan;Asia;Long,Short
-Brunei;Asia;Long,Short
-Cambodia;Asia;Long,Short
-China;Asia;Long,Short
-Georgia;Asia;Long,Short
-India;Asia;Long,Short
-Indonesia;Asia;Long,Short
-Iran;Asia;Long,Short
-Iraq;Asia;Long,Short
-Israel;Asia;Long,Short
-Japan;Asia;Long,Short
-Jordan;Asia;Long,Short
-Kazakhstan;Asia;Long,Short
-Korea, North;Asia;Long,Short
-Korea, South;Asia;Long,Short
-Kuwait;Asia;Long,Short
-Kyrgyzstan;Asia;Long,Short
-Laos;Asia;Long,Short
-Lebanon;Asia;Long,Short
-Malaysia;Asia;Long,Short
-Maldives;Asia;Long,Short
-Mongolia;Asia;Long,Short
-Myanmar;Asia;Long,Short
-Nepal;Asia;Long,Short
-Oman;Asia;Long,Short
-Pakistan;Asia;Long,Short
-Palestine;Asia;Long,Short
-Philippines;Asia;Long,Short
-Qatar;Asia;Long,Short
-Saudi Arabia;Asia;Long,Short
-Singapore;Asia;Long,Short
-Sri Lanka;Asia;Long,Short
-Syria;Asia;Long,Short
-Taiwan;Asia;Long,Short
-Tajikistan;Asia;Long,Short
-Thailand;Asia;Long,Short
-Turkey;Asia;Long,Short
-Turkmenistan;Asia;Long,Short
-United Arab Emirates;Asia;Long,Short
-Uzbekistan;Asia;Long,Short
-Vietnam;Asia;Long,Short
-Yemen;Asia;Long,Short
-Albania;Europe;Long,Short
-Andorra;Europe;Long,Short
-Austria;Europe;Long,Short
-Belarus;Europe;Long,Short
-Belgium;Europe;Long,Short
-Bosnia and Herzegovina;Europe;Long,Short
-Bulgaria;Europe;Long,Short
-Croatia;Europe;Long,Short
-Cyprus;Europe;Long,Short
-Czech Republic;Europe;Long,Short
-Denmark;Europe;Long,Short
-Estonia;Europe;Long,Short
-Finland;Europe;Long,Short
-France;Europe;Long,Short
-Germany;Europe;Long,Short
-Greece;Europe;Long,Short
-Hungary;Europe;Long,Short
-Iceland;Europe;Long,Short
-Ireland;Europe;Long,Short
-Italy;Europe;Long,Short
-Kosovo;Europe;Long,Short
-Latvia;Europe;Long,Short
-Liechtenstein;Europe;Long,Short
-Lithuania;Europe;Long,Short
-Luxembourg;Europe;Long,Short
-Macedonia;Europe;Long,Short
-Malta;Europe;Long,Short
-Moldova;Europe;Long,Short
-Monaco;Europe;Long,Short
-Montenegro;Europe;Long,Short
-Netherlands;Europe;Long,Short
-Norway;Europe;Long,Short
-Poland;Europe;Long,Short
-Portugal;Europe;Long,Short
-Romania;Europe;Long,Short
-Russia;Europe;Long,Short
-San Marino;Europe;Long,Short
-Serbia;Europe;Long,Short
-Slovakia;Europe;Long,Short
-Slovenia;Europe;Long,Short
-Spain;Europe;Long,Short
-Sweden;Europe;Long,Short
-Switzerland;Europe;Long,Short
-Ukraine;Europe;Long,Short
-United Kingdom;Europe;Long,Short
-Vatican City;Europe;Long,Short
-Australia;Oceania;Long,Short
-East Timor;Oceania;Long,Short
-Fiji;Oceania;Long,Short
-Kiribati;Oceania;Long,Short
-Marshall Islands;Oceania;Long,Short
-Micronesia;Oceania;Long,Short
-Nauru;Oceania;Long,Short
-New Zealand;Oceania;Long,Short
-Palau;Oceania;Long,Short
-Papua New Guinea;Oceania;Long,Short
-Samoa;Oceania;Long,Short
-Solomon Islands;Oceania;Long,Short
-Tonga;Oceania;Long,Short
-Tuvalu;Oceania;Long,Short
+Chile;America;Long
+Colombia;America;Long
+Costa Rica;America;Long
+Cuba;America;Long
+Dominica;America;Short
+Dominican Republic;America;Long
+Ecuador;America;Long
+El Salvador;America;Long
+Grenada;America;Short
+Guatemala;America;Long
+Guyana;America;Short
+Haiti;America;Long
+Honduras;America;Long
+Jamaica;America;Short
+Mexico;America;Long
+Nicaragua;America;Long
+Panama;America;Long
+Paraguay;America;Long
+Peru;America;Long
+Saint Kitts and Nevis;America;Short
+Saint Lucia;America;Short
+Saint Vincent and the Grenadines;America;Short
+Suriname;America;Long
+Trinidad and Tobago;America;Short
+United States;America;Short
+Uruguay;America;Long
+Venezuela;America;Long
+Afghanistan;Asia;Short
+Armenia;Asia;Short
+Azerbaijan;Asia;Short
+Bahrain;Asia;Short
+Bangladesh;Asia;
+Bhutan;Asia;
+Brunei;Asia;Short
+Cambodia;Asia;
+China;Asia;
+Georgia;Asia;Short
+India;Asia;
+Indonesia;Asia;Short
+Iran;Asia;Long
+Iraq;Asia;Short
+Israel;Asia;Short
+Japan;Asia;
+Jordan;Asia;Short
+Kazakhstan;Asia;Short
+Korea, North;Asia;
+Korea, South;Asia;
+Kuwait;Asia;Short
+Kyrgyzstan;Asia;Short
+Laos;Asia;
+Lebanon;Asia;Short
+Malaysia;Asia;Short
+Maldives;Asia;
+Mongolia;Asia;
+Myanmar;Asia;Short
+Nepal;Asia;
+Oman;Asia;Short
+Pakistan;Asia;
+Palestine;Asia;Short
+Philippines;Asia;Short
+Qatar;Asia;Short
+Saudi Arabia;Asia;Short
+Singapore;Asia;Short
+Sri Lanka;Asia;
+Syria;Asia;Short
+Taiwan;Asia;
+Tajikistan;Asia;Short
+Thailand;Asia;
+Turkey;Asia;Short
+Turkmenistan;Asia;Short
+United Arab Emirates;Asia;Short
+Uzbekistan;Asia;Short
+Vietnam;Asia;
+Yemen;Asia;Short
+Albania;Europe;Short
+Andorra;Europe;Long
+Austria;Europe;Long
+Belarus;Europe;Short
+Belgium;Europe;Long
+Bosnia and Herzegovina;Europe;Long
+Bulgaria;Europe;Short
+Croatia;Europe;Long
+Cyprus;Europe;Short
+Czech Republic;Europe;Long
+Denmark;Europe;Long
+Estonia;Europe;Short
+Finland;Europe;Long
+France;Europe;Long
+Germany;Europe;Long
+Greece;Europe;
+Hungary;Europe;Long
+Iceland;Europe;Long
+Ireland;Europe;Short
+Italy;Europe;Long
+Kosovo;Europe;
+Latvia;Europe;Short
+Liechtenstein;Europe;Long
+Lithuania;Europe;Short
+Luxembourg;Europe;Long
+Macedonia;Europe;Long
+Malta;Europe;Short
+Moldova;Europe;Short
+Monaco;Europe;Long
+Montenegro;Europe;Long
+Netherlands;Europe;Long
+Norway;Europe;Long
+Poland;Europe;Long
+Portugal;Europe;Long
+Romania;Europe;Long
+Russia;Europe;Short
+San Marino;Europe;Long
+Serbia;Europe;Long
+Slovakia;Europe;Long
+Slovenia;Europe;Long
+Spain;Europe;Long
+Sweden;Europe;Long
+Switzerland;Europe;Long
+Ukraine;Europe;Short
+United Kingdom;Europe;Short
+Vatican City;Europe;Long
+Australia;Oceania;Short
+East Timor;Oceania;Long
+Fiji;Oceania;Short
+Kiribati;Oceania;Short
+Marshall Islands;Oceania;Short
+Micronesia;Oceania;Short
+Nauru;Oceania;Short
+New Zealand;Oceania;Short
+Palau;Oceania;Short
+Papua New Guinea;Oceania;Short
+Samoa;Oceania;Short
+Solomon Islands;Oceania;Short
+Tonga;Oceania;Short
+Tuvalu;Oceania;Short
 Vanuatu;Oceania;Long,Short
