@@ -27,8 +27,8 @@ app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', '
 
         var onSetOrdinationCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId);
-            var sensorInDevice = sensorInDeviceFinder.getByKey(result.deviceSensorsId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
+            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId, result.deviceDatasheetId);
+            var sensorInDevice = sensorInDeviceFinder.getByKey(result.deviceSensorsId, result.deviceDatasheetId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
             for (var i = 0; i < deviceSensors.sensorInDevice.length; i++) {
                 if (sensorInDevice === deviceSensors.sensorInDevice[i]) {
                     deviceSensors.sensorInDevice.splice(i, 1);

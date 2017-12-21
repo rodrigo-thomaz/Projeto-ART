@@ -86,14 +86,14 @@ app.factory('deviceMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var deviceNTP = newValues[i];
                 deviceNTP.timeZone = function () { return timeZoneFinder.getByKey(this.timeZoneId); }
-                deviceNTP.device = function () { return deviceFinder.getByKey(this.deviceNTPId); }
+                deviceNTP.device = function () { return deviceFinder.getByKey(this.deviceNTPId, this.deviceDatasheetId); }
             }
         });
 
         deviceContext.$watchCollection('deviceSensors', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceSensors = newValues[i];
-                deviceSensors.device = function () { return deviceFinder.getByKey(this.deviceSensorsId); }
+                deviceSensors.device = function () { return deviceFinder.getByKey(this.deviceSensorsId, this.deviceDatasheetId); }
             }
         });        
 

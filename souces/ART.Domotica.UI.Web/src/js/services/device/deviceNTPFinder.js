@@ -5,10 +5,10 @@ app.factory('deviceNTPFinder', ['$rootScope', 'deviceContext', function ($rootSc
 
     var serviceFactory = {};      
 
-    var getByKey = function (deviceNTPId) {
+    var getByKey = function (deviceNTPId, deviceDatasheetId) {
         for (var i = 0; i < context.deviceNTP.length; i++) {
             var item = context.deviceNTP[i];
-            if (item.deviceNTPId === deviceNTPId) {
+            if (item.deviceNTPId === deviceNTPId && item.deviceDatasheetId === deviceDatasheetId) {
                 return item;
             }
         }

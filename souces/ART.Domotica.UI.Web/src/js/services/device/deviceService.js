@@ -196,7 +196,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
         var onSetLabelCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var device = deviceFinder.getByKey(result.deviceId);
+            var device = deviceFinder.getByKey(result.deviceId, result.deviceDatasheetId);
             device.label = result.label;
             deviceContext.$digest();
             $rootScope.$emit(deviceConstant.setLabelCompletedEventName + result.deviceId, result);

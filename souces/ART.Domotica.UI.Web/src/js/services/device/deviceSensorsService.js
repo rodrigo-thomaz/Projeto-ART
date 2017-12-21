@@ -24,7 +24,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var onSetPublishIntervalInSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId);
+            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId, result.deviceDatasheetId);
             deviceSensors.publishIntervalInSeconds = result.publishIntervalInSeconds;
             deviceContext.$digest();
             $rootScope.$emit(deviceSensorsConstant.setPublishIntervalInSecondsCompletedEventName + result.deviceSensorsId, result);
