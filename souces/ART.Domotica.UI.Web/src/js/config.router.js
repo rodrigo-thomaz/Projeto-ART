@@ -94,6 +94,14 @@ angular.module('app')
                         'js/services/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
                         'js/services/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
 
+                        // Device Datasheet
+
+                        'js/services/deviceDatasheet/deviceDatasheetContext.js',
+                        'js/services/deviceDatasheet/deviceDatasheetConstants.js',
+                        'js/services/deviceDatasheet/deviceDatasheetMapper.js',
+                        'js/services/deviceDatasheet/deviceDatasheetFinder.js',                        
+                        'js/services/deviceDatasheet/deviceDatasheetService.js',
+                        
                         // Sensor                     
 
                         'js/services/sensor/sensorContext.js',

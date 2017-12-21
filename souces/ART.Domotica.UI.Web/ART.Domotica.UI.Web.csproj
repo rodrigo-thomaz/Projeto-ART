@@ -289,6 +289,11 @@
     <Content Include="src\js\directives\ui-uppercased.js" />
     <Content Include="src\js\services\admin\espDeviceAdminService.js" />
     <Content Include="src\js\services\contextScope.js" />
+    <Content Include="src\js\services\deviceDatasheet\deviceDatasheetConstants.js" />
+    <Content Include="src\js\services\deviceDatasheet\deviceDatasheetContext.js" />
+    <Content Include="src\js\services\deviceDatasheet\deviceDatasheetFinder.js" />
+    <Content Include="src\js\services\deviceDatasheet\deviceDatasheetMapper.js" />
+    <Content Include="src\js\services\deviceDatasheet\deviceDatasheetService.js" />
     <Content Include="src\js\services\globalization\globalizationConstants.js" />
     <Content Include="src\js\services\globalization\globalizationContext.js" />
     <Content Include="src\js\services\globalization\timeZoneFinder.js" />
