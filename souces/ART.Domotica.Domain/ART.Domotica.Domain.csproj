@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DomainModule.cs" />
+    <Compile Include="Interfaces\IDeviceDatasheetDomain.cs" />
     <Compile Include="Interfaces\ISensorInDeviceDomain.cs" />
     <Compile Include="Interfaces\IDeviceSensorsDomain.cs" />
     <Compile Include="Interfaces\IApplicationMQDomain.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Services\ApplicationMQDomain.cs" />
     <Compile Include="Services\DeviceNTPDomain.cs" />
     <Compile Include="Services\DeviceMQDomain.cs" />
+    <Compile Include="Services\DeviceDatasheetDomain.cs" />
     <Compile Include="Services\SensorInDeviceDomain.cs" />
     <Compile Include="Services\DeviceSensorsDomain.cs" />
     <Compile Include="Services\DeviceBaseDomain.cs" />

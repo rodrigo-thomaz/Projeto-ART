@@ -70,6 +70,7 @@
                 x.AddProfile(new ApplicationUserProfile());
                 x.AddProfile(new ContinentProfile());
                 x.AddProfile(new CountryProfile());
+                x.AddProfile(new DeviceDatasheetProfile());
                 x.AddProfile(new DeviceMQProfile());
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DeviceSensorsProfile());
