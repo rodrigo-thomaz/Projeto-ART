@@ -235,6 +235,10 @@ bool DSFamilyTempSensorManager::initialized()
 	root["deviceId"] = deviceId;
 	root["applicationId"] = applicationId;
 
+	Serial.println();
+	Serial.println("Aqui !!!!!!!!!!!!!!!!");
+	Serial.println(deviceId);
+	
 	// device addresses prepare	
 	uint8_t deviceCount = _dallas.getDeviceCount();		
 	if(deviceCount > 0) {	
