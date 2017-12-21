@@ -94,8 +94,10 @@
             {
                 ApplicationId = applicationEntity.Id,
                 DeviceId = deviceEntity.Id,
+                DeviceDatasheetId = deviceEntity.DeviceDatasheetId,
                 CreateByApplicationUserId = applicationUserEntity.Id,
                 CreateDate = DateTime.Now.ToUniversalTime(),
+                
             });
 
             var sensors = await _sensorRepository.GetAllByDeviceId(deviceEntity.Id);

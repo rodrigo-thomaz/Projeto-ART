@@ -4,12 +4,7 @@
 
     public class RaspberryDevice : DeviceBase
     {
-        #region Properties
-
-        public DeviceDatasheetEnum DeviceDatasheetId
-        {
-            get; set;
-        }
+        #region Properties        
 
         public string LanMacAddress
         {

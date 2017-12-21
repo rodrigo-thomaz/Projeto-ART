@@ -11,11 +11,6 @@
             get; set;
         }
 
-        public DeviceDatasheetEnum DeviceDatasheetId
-        {
-            get; set;
-        }
-
         public int FlashChipId
         {
             get; set;
