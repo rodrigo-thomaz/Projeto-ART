@@ -177,6 +177,14 @@
     <Compile Include="Migrations\201712192142052_initial.Designer.cs">
       <DependentUpon>201712192142052_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712211340180_CreateNameInDataSheet.cs" />
+    <Compile Include="Migrations\201712211340180_CreateNameInDataSheet.Designer.cs">
+      <DependentUpon>201712211340180_CreateNameInDataSheet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712211435470_CreateNameInDataSheet1.cs" />
+    <Compile Include="Migrations\201712211435470_CreateNameInDataSheet1.Designer.cs">
+      <DependentUpon>201712211435470_CreateNameInDataSheet1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -271,6 +279,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712192142052_initial.resx">
       <DependentUpon>201712192142052_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211340180_CreateNameInDataSheet.resx">
+      <DependentUpon>201712211340180_CreateNameInDataSheet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211435470_CreateNameInDataSheet1.resx">
+      <DependentUpon>201712211435470_CreateNameInDataSheet1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,7 +13,8 @@
         {
             CreateMap<SensorDatasheet, SensorDatasheetGetModel>()
                 .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId));
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
+                .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name));
         }
 
         #endregion Constructors

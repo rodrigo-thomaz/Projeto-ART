@@ -1,2 +1,2 @@
-Ultrasonic_HCSR04;ProximityDistance
-Temperature_DS18B20;Temperature
+Ultrasonic_HCSR04;ProximityDistance;Sensor de proximidade Zóio de Lula
+Temperature_DS18B20;Temperature;Sensor Temperatura a prova d'água

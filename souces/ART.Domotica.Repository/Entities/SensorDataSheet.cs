@@ -14,6 +14,11 @@
             get; set;
         }
 
+        public string Name
+        {
+            get; set;
+        }
+
         public SensorDatasheetUnitMeasurementDefault SensorDatasheetUnitMeasurementDefault
         {
             get; set;

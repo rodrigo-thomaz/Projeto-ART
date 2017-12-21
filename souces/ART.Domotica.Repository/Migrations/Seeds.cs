@@ -40,7 +40,7 @@
             ExecuteSensorDatasheet(context);
             ExecuteSensorDatasheetUnitMeasurementDefault(context);
             ExecuteSensorDatasheetUnitMeasurementScale(context);
-            
+
             #region SensorTempDSFamilyResolutions
 
             var sensorTempDSFamilyResolution9 = context.SensorTempDSFamilyResolution.SingleOrDefault(x => x.Id == 9);
@@ -103,7 +103,7 @@
             context.SaveChanges();
 
             #endregion
-            
+
             #region Sensors
 
             var sensor_1_Address = "28fff62293165b0";
@@ -477,7 +477,7 @@
             context.SaveChanges();
 
             #endregion
-            
+
             #region ESPDevice1
 
             var espDevice1MacAddress = "A0:20:A6:17:83:25";
@@ -794,7 +794,7 @@
                             NumericalScaleTypeId = numericalScaleTypeId,
                         });
                     }
-                }                
+                }
 
                 context.SaveChanges();
             }
@@ -898,6 +898,7 @@
             {
                 var sensorDatasheetId = (SensorDatasheetEnum)Enum.Parse(typeof(SensorDatasheetEnum), line[0]);
                 var sensorTypeId = (SensorTypeEnum)Enum.Parse(typeof(SensorTypeEnum), line[1]);
+                var name = line[2];
 
                 var entity = context.SensorDatasheet
                     .Where(x => x.Id == sensorDatasheetId)
@@ -910,8 +911,13 @@
                     {
                         Id = sensorDatasheetId,
                         SensorTypeId = sensorTypeId,
+                        Name = name,
                     };
                     context.SensorDatasheet.Add(entity);
+                }
+                else
+                {
+                    entity.Name = name;
                 }
 
                 context.SaveChanges();
