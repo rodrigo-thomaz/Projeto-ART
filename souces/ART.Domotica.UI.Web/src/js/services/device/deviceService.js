@@ -70,7 +70,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
         var setLabel = function (deviceId, label) {
             var data = {
-                hardwareId: deviceId,
+                deviceId: deviceId,
                 label: label,
             }
             return $http.post(serviceBase + deviceConstant.setLabelApiUri, data).then(function (results) {
@@ -83,7 +83,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             var data = JSON.parse(dataUTF8);
             for (var i = 0; i < deviceContext.device.length; i++) {
                 var device = deviceContext.device[i];
-                if (device.hardwareId === data.hardwareId) {
+                if (device.deviceId === data.deviceId) {
                     device.epochTimeUtc = data.epochTimeUtc;
                     device.wifiQuality = data.wifiQuality;
                     device.localIPAddress = data.localIPAddress;
@@ -196,10 +196,10 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
         var onSetLabelCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var device = deviceFinder.getByKey(result.hardwareId);
+            var device = deviceFinder.getByKey(result.deviceId);
             device.label = result.label;
             deviceContext.$digest();
-            $rootScope.$emit(deviceConstant.setLabelCompletedEventName + result.hardwareId, result);
+            $rootScope.$emit(deviceConstant.setLabelCompletedEventName + result.deviceId, result);
         }
 
         var insertDeviceInCollection = function (device) {

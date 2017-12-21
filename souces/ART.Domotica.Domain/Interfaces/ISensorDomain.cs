@@ -13,7 +13,7 @@
 
         Task<List<Sensor>> GetAllByApplicationId(Guid applicationId);
 
-        Task<List<Sensor>> GetAllByHardwareInApplicationId(Guid applicationId, Guid deviceId);
+        Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId);
 
         Task<Sensor> GetByKey(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);
 

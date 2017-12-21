@@ -343,7 +343,7 @@
             if (data.DevicesInApplication != null && data.DevicesInApplication.Any())
             {
                 var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-                var applicationMQ = await applicationMQDomain.GetByHardwareId(data.Id);
+                var applicationMQ = await applicationMQDomain.GetByDeviceId(data.Id);
                 applicationTopic = applicationMQ.Topic;
             }
 
@@ -432,9 +432,9 @@
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwareSetLabelRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSetLabelRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceBaseDomain>();
-            var data = await domain.SetLabel(message.Contract.HardwareId, message.Contract.Label);
+            var data = await domain.SetLabel(message.Contract.DeviceId, message.Contract.Label);
 
             var exchange = "amq.topic";
 

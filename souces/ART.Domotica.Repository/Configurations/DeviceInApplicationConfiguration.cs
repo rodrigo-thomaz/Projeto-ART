@@ -7,11 +7,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class HardwareInApplicationConfiguration : EntityTypeConfiguration<HardwareInApplication>
+    public class DeviceInApplicationConfiguration : EntityTypeConfiguration<DeviceInApplication>
     {
         #region Constructors
 
-        public HardwareInApplicationConfiguration()
+        public DeviceInApplicationConfiguration()
         {
             //Primary Keys
             HasKey(x => new
@@ -32,7 +32,7 @@
                 .HasForeignKey(x => x.ApplicationId)
                 .WillCascadeOnDelete(false);
 
-            //HardwareId
+            //DeviceId
             Property(x => x.DeviceId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
@@ -40,10 +40,10 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute ("IX_Unique_HardwareId") { IsUnique = true },
+                        new IndexAttribute ("IX_Unique_DeviceId") { IsUnique = true },
                     }));
 
-            //HardwareBase
+            //DeviceBase
             HasRequired(x => x.DeviceBase)
                 .WithMany(x => x.DevicesInApplication)
                 .HasForeignKey(x => x.DeviceId)

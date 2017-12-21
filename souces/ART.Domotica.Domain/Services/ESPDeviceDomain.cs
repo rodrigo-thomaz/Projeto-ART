@@ -18,7 +18,7 @@
         #region Fields
 
         private readonly IESPDeviceRepository _espDeviceRepository;
-        private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
+        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
         private readonly ISensorInApplicationRepository _sensorInApplicationRepository;
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
@@ -35,7 +35,7 @@
             _espDeviceRepository = new ESPDeviceRepository(context);
             _applicationRepository = new ApplicationRepository(context);
             _applicationUserRepository = new ApplicationUserRepository(context);
-            _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
+            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _sensorInApplicationRepository = new SensorInApplicationRepository(context);
             _sensorRepository = new SensorRepository(context);
         }
@@ -89,7 +89,7 @@
                 throw new Exception("ApplicationUser not found");
             }
 
-            await _hardwareInApplicationRepository.Insert(new HardwareInApplication
+            await _deviceInApplicationRepository.Insert(new DeviceInApplication
             {
                 ApplicationId = applicationEntity.Id,
                 DeviceId = deviceEntity.Id,
@@ -123,14 +123,14 @@
         {
             // Device 
 
-            HardwareInApplication hardwareInApplicationEntity = await _hardwareInApplicationRepository.GetByKey(applicationId, deviceId);
+            DeviceInApplication deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId);
             
-            if (hardwareInApplicationEntity == null)
+            if (deviceInApplicationEntity == null)
             {
-                throw new Exception("HardwareInApplication not found");
+                throw new Exception("DeviceInApplication not found");
             }
 
-            await _hardwareInApplicationRepository.Delete(hardwareInApplicationEntity);
+            await _deviceInApplicationRepository.Delete(deviceInApplicationEntity);
 
             // Sensors
 
@@ -138,7 +138,7 @@
 
             await _sensorInApplicationRepository.Delete(sensorsInApplication);
 
-            var deviceEntity = await _espDeviceRepository.GetFullByKey(hardwareInApplicationEntity.DeviceId);
+            var deviceEntity = await _espDeviceRepository.GetFullByKey(deviceInApplicationEntity.DeviceId);
 
             return deviceEntity;
         }
@@ -169,7 +169,7 @@
 
         public async Task<ESPDevice> GetConfigurations(int chipId, int flashChipId, string macAddress)
         {
-            var data = await _espDeviceRepository.GetHardwareInApplication(chipId, flashChipId, macAddress);            
+            var data = await _espDeviceRepository.GetDeviceInApplication(chipId, flashChipId, macAddress);            
 
             if (data == null)
             {

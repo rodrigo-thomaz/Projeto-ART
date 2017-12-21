@@ -80,54 +80,54 @@ angular.module('app')
 
                         // Sensor Datasheet
 
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetContext.js',
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetConstants.js',
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetMapper.js',
+                        'js/services/sensorDatasheet/sensorDatasheetContext.js',
+                        'js/services/sensorDatasheet/sensorDatasheetConstants.js',
+                        'js/services/sensorDatasheet/sensorDatasheetMapper.js',
 
-                        'js/services/hardware/sensorDatasheet/sensorTypeFinder.js',
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetFinder.js',
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleFinder.js',
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultFinder.js',
+                        'js/services/sensorDatasheet/sensorTypeFinder.js',
+                        'js/services/sensorDatasheet/sensorDatasheetFinder.js',
+                        'js/services/sensorDatasheet/sensorDatasheetUnitMeasurementScaleFinder.js',
+                        'js/services/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultFinder.js',
 
-                        'js/services/hardware/sensorDatasheet/sensorTypeService.js',
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetService.js',
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
-                        'js/services/hardware/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
+                        'js/services/sensorDatasheet/sensorTypeService.js',
+                        'js/services/sensorDatasheet/sensorDatasheetService.js',
+                        'js/services/sensorDatasheet/sensorDatasheetUnitMeasurementScaleService.js',
+                        'js/services/sensorDatasheet/sensorDatasheetUnitMeasurementDefaultService.js',
 
                         // Sensor                     
 
-                        'js/services/hardware/sensor/sensorContext.js',
-                        'js/services/hardware/sensor/sensorConstants.js',
-                        'js/services/hardware/sensor/sensorMapper.js',
+                        'js/services/sensor/sensorContext.js',
+                        'js/services/sensor/sensorConstants.js',
+                        'js/services/sensor/sensorMapper.js',
 
-                        'js/services/hardware/sensor/sensorFinder.js',
-                        'js/services/hardware/sensor/sensorUnitMeasurementScaleFinder.js',
-                        'js/services/hardware/sensor/sensorTriggerFinder.js',
-                        'js/services/hardware/sensor/sensorTempDSFamilyResolutionFinder.js',
-                        'js/services/hardware/sensor/sensorTempDSFamilyFinder.js',
+                        'js/services/sensor/sensorFinder.js',
+                        'js/services/sensor/sensorUnitMeasurementScaleFinder.js',
+                        'js/services/sensor/sensorTriggerFinder.js',
+                        'js/services/sensor/sensorTempDSFamilyResolutionFinder.js',
+                        'js/services/sensor/sensorTempDSFamilyFinder.js',
 
-                        'js/services/hardware/sensor/sensorService.js',
-                        'js/services/hardware/sensor/sensorUnitMeasurementScaleService.js',
-                        'js/services/hardware/sensor/sensorTriggerService.js',
-                        'js/services/hardware/sensor/sensorTempDSFamilyResolutionService.js',
-                        'js/services/hardware/sensor/sensorTempDSFamilyService.js',
+                        'js/services/sensor/sensorService.js',
+                        'js/services/sensor/sensorUnitMeasurementScaleService.js',
+                        'js/services/sensor/sensorTriggerService.js',
+                        'js/services/sensor/sensorTempDSFamilyResolutionService.js',
+                        'js/services/sensor/sensorTempDSFamilyService.js',
 
                         // Device
 
-                        'js/services/hardware/device/deviceContext.js',
-                        'js/services/hardware/device/deviceConstants.js',
+                        'js/services/device/deviceContext.js',
+                        'js/services/device/deviceConstants.js',
 
-                        'js/services/hardware/device/deviceNTPFinder.js',
-                        'js/services/hardware/device/deviceSensorsFinder.js',
-                        'js/services/hardware/device/sensorInDeviceFinder.js',
-                        'js/services/hardware/device/deviceFinder.js',
+                        'js/services/device/deviceNTPFinder.js',
+                        'js/services/device/deviceSensorsFinder.js',
+                        'js/services/device/sensorInDeviceFinder.js',
+                        'js/services/device/deviceFinder.js',
 
-                        'js/services/hardware/device/deviceMapper.js',
+                        'js/services/device/deviceMapper.js',
 
-                        'js/services/hardware/device/deviceNTPService.js',
-                        'js/services/hardware/device/deviceSensorsService.js',
-                        'js/services/hardware/device/sensorInDeviceService.js',
-                        'js/services/hardware/device/deviceService.js',
+                        'js/services/device/deviceNTPService.js',
+                        'js/services/device/deviceSensorsService.js',
+                        'js/services/device/sensorInDeviceService.js',
+                        'js/services/device/deviceService.js',
                     ])
                 })
                 .state('app.dashboard', {
@@ -151,18 +151,18 @@ angular.module('app')
 
                         // Sensor                       
 
-                        'js/controllers/hardware/sensor/sensorController.js',
-                        'js/controllers/hardware/sensor/sensorUnitMeasurementScaleController.js',
-                        'js/controllers/hardware/sensor/sensorTempDSFamilyController.js',
-                        'js/controllers/hardware/sensor/sensorTriggersController.js',
-                        'js/controllers/hardware/sensor/sensorTriggerController.js',
+                        'js/controllers/sensor/sensorController.js',
+                        'js/controllers/sensor/sensorUnitMeasurementScaleController.js',
+                        'js/controllers/sensor/sensorTempDSFamilyController.js',
+                        'js/controllers/sensor/sensorTriggersController.js',
+                        'js/controllers/sensor/sensorTriggerController.js',
 
                         // Device
 
-                        'js/controllers/hardware/device/deviceController.js',
-                        'js/controllers/hardware/device/deviceNTPController.js',
-                        'js/controllers/hardware/device/deviceSensorsController.js',
-                        'js/controllers/hardware/device/sensorInDeviceController.js',
+                        'js/controllers/device/deviceController.js',
+                        'js/controllers/device/deviceNTPController.js',
+                        'js/controllers/device/deviceSensorsController.js',
+                        'js/controllers/device/sensorInDeviceController.js',
 
                         'js/controllers/espDeviceListController.js',
 

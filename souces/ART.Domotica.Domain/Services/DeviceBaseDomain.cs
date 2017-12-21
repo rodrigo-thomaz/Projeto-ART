@@ -37,7 +37,7 @@
 
             if (entity == null)
             {
-                throw new Exception("Hardware not found");
+                throw new Exception("Device not found");
             }
 
             entity.Label = label;

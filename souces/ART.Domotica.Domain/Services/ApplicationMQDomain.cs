@@ -41,9 +41,9 @@
             return await _applicationMQRepository.GetByKey(applicationUserEntity.ApplicationId);
         }
 
-        public async Task<ApplicationMQ> GetByHardwareId(Guid hardwareId)
+        public async Task<ApplicationMQ> GetByDeviceId(Guid deviceId)
         {
-            return await _applicationMQRepository.GetByHardwareId(hardwareId);
+            return await _applicationMQRepository.GetByDeviceId(deviceId);
         }
 
         #endregion Methods

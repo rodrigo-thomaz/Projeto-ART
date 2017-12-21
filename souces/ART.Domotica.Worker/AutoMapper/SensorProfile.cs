@@ -21,7 +21,7 @@
                 .ForMember(vm => vm.SensorTempDSFamily, m => m.MapFrom(x => x.SensorTempDSFamily))
                 .ForMember(vm => vm.SensorUnitMeasurementScale, m => m.MapFrom(x => x.SensorUnitMeasurementScale));
 
-            CreateMap<Sensor, SensorGetAllByHardwareInApplicationIdResponseIoTContract>()
+            CreateMap<Sensor, SensorGetAllByDeviceInApplicationIdResponseIoTContract>()
                 .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
                     var split = src.SensorTempDSFamily.DeviceAddress.Split(':');
                     var result = new short[8];

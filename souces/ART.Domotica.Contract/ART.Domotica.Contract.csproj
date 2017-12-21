@@ -49,7 +49,7 @@
     <Compile Include="DeviceSensorsSetPublishIntervalInSecondsRequestContract.cs" />
     <Compile Include="SensorInDeviceSetOrdinationRequestContract.cs" />
     <Compile Include="SensorSetLabelRequestContract.cs" />
-    <Compile Include="HardwareSetLabelRequestContract.cs" />
+    <Compile Include="DeviceSetLabelRequestContract.cs" />
     <Compile Include="SensorTriggerDeleteRequestContract.cs" />
     <Compile Include="SensorTriggerInsertRequestContract.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryRequestContract.cs" />

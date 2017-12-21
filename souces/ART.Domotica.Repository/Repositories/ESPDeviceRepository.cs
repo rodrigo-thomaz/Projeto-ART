@@ -77,7 +77,7 @@
             return data;
         }
 
-        public async Task<ESPDevice> GetHardwareInApplication(int chipId, int flashChipId, string macAddress)
+        public async Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress)
         {
             var data = await _context.ESPDevice
                .Include(x => x.DevicesInApplication)

@@ -21,7 +21,7 @@ namespace ART.Domotica.Domain.Services
         private readonly ISensorRepository _sensorRepository;
         private readonly ISensorTriggerRepository _sensorTriggerRepository;
         private readonly IUnitMeasurementRepository _unitMeasurementRepository;
-        private readonly IHardwareInApplicationRepository _hardwareInApplicationRepository;
+        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace ART.Domotica.Domain.Services
             _sensorRepository = new SensorRepository(context);
             _sensorTriggerRepository = new SensorTriggerRepository(context);
             _unitMeasurementRepository = new UnitMeasurementRepository(context);
-            _hardwareInApplicationRepository = new HardwareInApplicationRepository(context);
+            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
         }
 
         #endregion
@@ -70,16 +70,16 @@ namespace ART.Domotica.Domain.Services
             return data;
         }       
 
-        public async Task<List<Sensor>> GetAllByHardwareInApplicationId(Guid applicationId, Guid deviceId)
+        public async Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId)
         {
-            var hardwareInApplication = await _hardwareInApplicationRepository.GetByKey(applicationId, deviceId);
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId);
 
-            if (hardwareInApplication == null)
+            if (deviceInApplication == null)
             {
-                throw new Exception("HardwareInApplication not found");
+                throw new Exception("DeviceInApplication not found");
             }
 
-            return await _sensorRepository.GetAllByDeviceId(hardwareInApplication.DeviceId);
+            return await _sensorRepository.GetAllByDeviceId(deviceInApplication.DeviceId);
         }
 
         public async Task<Sensor> SetLabel(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, string label)

@@ -75,7 +75,7 @@
             get; set;
         }
 
-        public DbSet<HardwareInApplication> HardwareInApplication
+        public DbSet<DeviceInApplication> DeviceInApplication
         {
             get; set;
         }

@@ -151,7 +151,7 @@
         /// <response code="500">Internal Server Error</response>
         [Route("setLabel")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetLabel(HardwareSetLabelRequestContract contract)
+        public async Task<IHttpActionResult> SetLabel(DeviceSetLabelRequestContract contract)
         {
             await _espDeviceProducer.SetLabel(CreateMessage(contract));
             return Ok();
