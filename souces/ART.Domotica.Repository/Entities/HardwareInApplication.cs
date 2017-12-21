@@ -34,17 +34,12 @@
             get; set;
         }
 
-        public HardwareBase HardwareBase
+        public DeviceBase DeviceBase
         {
             get; set;
         }
 
-        public Guid HardwareId
-        {
-            get; set;
-        }
-
-        public ICollection<HardwaresInProject> HardwaresInProject
+        public Guid DeviceId
         {
             get; set;
         }

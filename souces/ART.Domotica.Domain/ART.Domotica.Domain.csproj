@@ -71,7 +71,7 @@
     <Compile Include="Interfaces\Locale\ICountryDomain.cs" />
     <Compile Include="Interfaces\IDeviceNTPDomain.cs" />
     <Compile Include="Interfaces\IDeviceMQDomain.cs" />
-    <Compile Include="Interfaces\IHardwareDomain.cs" />
+    <Compile Include="Interfaces\IDeviceBaseDomain.cs" />
     <Compile Include="Interfaces\IESPDeviceDomain.cs" />
     <Compile Include="Interfaces\ISensorUnitMeasurementScaleDomain.cs" />
     <Compile Include="Interfaces\ISensorDomain.cs" />
@@ -93,7 +93,7 @@
     <Compile Include="Services\DeviceMQDomain.cs" />
     <Compile Include="Services\SensorInDeviceDomain.cs" />
     <Compile Include="Services\DeviceSensorsDomain.cs" />
-    <Compile Include="Services\HardwareDomain.cs" />
+    <Compile Include="Services\DeviceBaseDomain.cs" />
     <Compile Include="Services\ESPDeviceDomain.cs" />
     <Compile Include="Services\ApplicationDomain.cs" />
     <Compile Include="Services\ApplicationUserDomain.cs" />

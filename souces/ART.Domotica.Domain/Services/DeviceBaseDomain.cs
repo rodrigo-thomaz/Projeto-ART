@@ -10,30 +10,30 @@
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
 
-    public class HardwareDomain : DomainBase, IHardwareDomain
+    public class DeviceBaseDomain : DomainBase, IDeviceBaseDomain
     {
         #region Fields
 
-        private readonly IHardwareRepository _hardwareRepository;
+        private readonly IDeviceBaseRepository _deviceBaseRepository;
 
         #endregion Fields
 
         #region Constructors
 
-        public HardwareDomain(IComponentContext componentContext)
+        public DeviceBaseDomain(IComponentContext componentContext)
         {
             var context = componentContext.Resolve<ARTDbContext>();
 
-            _hardwareRepository = new HardwareRepository(context);
+            _deviceBaseRepository = new DeviceBaseRepository(context);
         }
 
         #endregion Constructors
 
         #region Methods
         
-        public async Task<HardwareBase> SetLabel(Guid hardwareId, string label)
+        public async Task<DeviceBase> SetLabel(Guid deviceId, string label)
         {
-            var entity = await _hardwareRepository.GetByKey(hardwareId);
+            var entity = await _deviceBaseRepository.GetByKey(deviceId);
 
             if (entity == null)
             {
@@ -42,7 +42,7 @@
 
             entity.Label = label;
 
-            await _hardwareRepository.Update(entity);
+            await _deviceBaseRepository.Update(entity);
 
             return entity;
         }

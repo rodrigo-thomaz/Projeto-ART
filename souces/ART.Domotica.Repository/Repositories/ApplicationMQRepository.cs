@@ -24,7 +24,7 @@
         {
             IQueryable<ApplicationMQ> query = from abs in _context.ApplicationMQ
                                               join dia in _context.HardwareInApplication on abs.Id equals dia.ApplicationId
-                                              where dia.HardwareId == hardwareId
+                                              where dia.DeviceId == hardwareId
                                               select abs;
 
             return await query.SingleOrDefaultAsync();

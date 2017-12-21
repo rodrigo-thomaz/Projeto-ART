@@ -103,7 +103,7 @@
     <Compile Include="AutoMapper\ApplicationProfile.cs" />
     <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\DeviceNTPProfile.cs" />
-    <Compile Include="AutoMapper\HardwareProfile.cs" />
+    <Compile Include="AutoMapper\DeviceBaseProfile.cs" />
     <Compile Include="AutoMapper\SensorTriggerProfile.cs" />
     <Compile Include="AutoMapper\SensorUnitMeasurementScaleProfile.cs" />
     <Compile Include="AutoMapper\SensorTempDSFamilyProfile.cs" />

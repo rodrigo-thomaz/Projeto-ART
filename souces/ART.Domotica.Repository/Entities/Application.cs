@@ -34,11 +34,6 @@
             get; set;
         }
 
-        public ICollection<Project> Projects
-        {
-            get; set;
-        }
-
         public ICollection<SensorInApplication> SensorInApplication
         {
             get; set;

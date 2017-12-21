@@ -79,7 +79,7 @@ namespace ART.Domotica.Domain.Services
                 throw new Exception("HardwareInApplication not found");
             }
 
-            return await _sensorRepository.GetAllByDeviceId(hardwareInApplication.HardwareId);
+            return await _sensorRepository.GetAllByDeviceId(hardwareInApplication.DeviceId);
         }
 
         public async Task<Sensor> SetLabel(Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, string label)

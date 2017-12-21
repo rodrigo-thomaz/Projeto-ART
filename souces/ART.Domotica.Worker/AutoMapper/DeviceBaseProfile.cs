@@ -5,14 +5,14 @@
 
     using global::AutoMapper;
 
-    public class HardwareProfile : Profile
+    public class DeviceBaseProfile : Profile
     {
         #region Constructors
 
-        public HardwareProfile()
+        public DeviceBaseProfile()
         {
-            CreateMap<HardwareBase, HardwareSetLabelModel>()
-                .ForMember(vm => vm.HardwareId, m => m.MapFrom(x => x.Id))
+            CreateMap<DeviceBase, DeviceSetLabelModel>()
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label));
         }
 

@@ -17,7 +17,7 @@
             HasKey(x => new
             {
                 x.ApplicationId,
-                x.HardwareId,
+                x.DeviceId,
             });
 
             //ApplicationId
@@ -33,7 +33,7 @@
                 .WillCascadeOnDelete(false);
 
             //HardwareId
-            Property(x => x.HardwareId)
+            Property(x => x.DeviceId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
@@ -44,9 +44,9 @@
                     }));
 
             //HardwareBase
-            HasRequired(x => x.HardwareBase)
+            HasRequired(x => x.DeviceBase)
                 .WithMany(x => x.DevicesInApplication)
-                .HasForeignKey(x => x.HardwareId)
+                .HasForeignKey(x => x.DeviceId)
                 .WillCascadeOnDelete(false);
 
             //CreateDate

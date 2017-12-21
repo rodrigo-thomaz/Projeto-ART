@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public interface IHardwareDomain
+    public interface IDeviceBaseDomain
     {
         #region Methods
 
-        Task<HardwareBase> SetLabel(Guid hardwareId, string label);
+        Task<DeviceBase> SetLabel(Guid deviceId, string label);
 
         #endregion Methods
     }

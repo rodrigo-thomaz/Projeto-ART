@@ -433,7 +433,7 @@
 
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<HardwareSetLabelRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IHardwareDomain>();
+            var domain = _componentContext.Resolve<IDeviceBaseDomain>();
             var data = await domain.SetLabel(message.Contract.HardwareId, message.Contract.Label);
 
             var exchange = "amq.topic";
@@ -442,7 +442,7 @@
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<HardwareBase, HardwareSetLabelModel>(data);
+            var viewModel = Mapper.Map<DeviceBase, DeviceSetLabelModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetLabelViewCompletedQueueName);
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);

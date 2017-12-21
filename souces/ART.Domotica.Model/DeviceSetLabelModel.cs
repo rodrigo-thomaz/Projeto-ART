@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class HardwareSetLabelModel
+    public class DeviceSetLabelModel
     {
         #region Properties
 
-        public Guid HardwareId
+        public Guid DeviceId
         {
             get; set;
         }

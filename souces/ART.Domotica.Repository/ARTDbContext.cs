@@ -80,11 +80,6 @@
             get; set;
         }
 
-        public DbSet<HardwaresInProject> HardwaresInProject
-        {
-            get; set;
-        }
-
         public DbSet<NumericalScale> NumericalScale
         {
             get; set;
@@ -101,11 +96,6 @@
         }
 
         public DbSet<NumericalScaleTypeCountry> NumericalScaleTypeCountry
-        {
-            get; set;
-        }
-
-        public DbSet<Project> Project
         {
             get; set;
         }

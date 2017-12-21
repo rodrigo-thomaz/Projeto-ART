@@ -7,13 +7,13 @@ namespace ART.Domotica.Repository.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreateNameInDataSheet1 : IMigrationMetadata
+    public sealed partial class CreateNameInDataSheet : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateNameInDataSheet1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateNameInDataSheet));
         
         string IMigrationMetadata.Id
         {
-            get { return "201712211435470_CreateNameInDataSheet1"; }
+            get { return "201712211550125_CreateNameInDataSheet"; }
         }
         
         string IMigrationMetadata.Source
