@@ -1,69 +1,80 @@
 ﻿'use strict';
-app.factory('sensorDatasheetUnitMeasurementDefaultService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', 'sensorDatasheetUnitMeasurementDefaultConstant', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext, sensorDatasheetUnitMeasurementDefaultConstant) {
+app.factory('sensorDatasheetUnitMeasurementDefaultService', ['$http', 'ngAuthSettings', '$rootScope', '$localStorage', 'stompService', 'sensorDatasheetContext', 'sensorDatasheetUnitMeasurementDefaultConstant',
+    function ($http, ngAuthSettings, $rootScope, $localStorage, stompService, sensorDatasheetContext, sensorDatasheetUnitMeasurementDefaultConstant) {
 
-    var serviceFactory = {};    
+        var serviceFactory = {};
 
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+        // Local cache        
 
-    var _initializing = false;
-    var _initialized  = false;
-
-    var getAllCompletedSubscription = null;
-
-    var onConnected = function () {
-
-        getAllCompletedSubscription = stompService.subscribe(sensorDatasheetUnitMeasurementDefaultConstant.getAllCompletedTopic, onGetAllCompleted);
-
-        if (!_initializing && !_initialized) {
-            _initializing = true;
-            getAll();
-        }
-    }   
-
-    var initialized = function () {
-        return _initialized;
-    };
-
-    var getAll = function () {
-        return $http.post(serviceBase + sensorDatasheetUnitMeasurementDefaultConstant.getAllApiUri).then(function (results) {
-            //alert('envio bem sucedido');
-        });
-    };     
-    
-    var onGetAllCompleted = function (payload) {
-
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
-
-        for (var i = 0; i < data.length; i++) {
-            sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault.push(data[i]);
+        if ($localStorage.sensorDatasheetUnitMeasurementDefaultData) {
+            var data = JSON.parse(Base64.decode($localStorage.sensorDatasheetUnitMeasurementDefaultData));
+            for (var i = 0; i < data.length; i++) {
+                sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault.push(data[i]);
+            }
+            $rootScope.$emit(sensorDatasheetUnitMeasurementDefaultConstant.getAllCompletedEventName);
+            return serviceFactory;
         }
 
-        sensorDatasheetContext.$digest();
-
-        _initializing = false;
-        _initialized = true;
-
-        clearOnConnected();
-
-        getAllCompletedSubscription.unsubscribe();
-
-        $rootScope.$emit(sensorDatasheetUnitMeasurementDefaultConstant.getAllCompletedEventName);
-    }
-
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-    });
-
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
-
-    // stompService
-    if (stompService.connected()) onConnected();
-
-    // serviceFactory
+        // Get from Server
         
-    serviceFactory.initialized = initialized;
+        var _initializing = false;
+        var _initialized = false;
 
-    return serviceFactory;
+        var serviceBase = ngAuthSettings.distributedServicesUri;
 
-}]);
+        var getAllCompletedSubscription = null;
+
+        var onConnected = function () {
+
+            getAllCompletedSubscription = stompService.subscribe(sensorDatasheetUnitMeasurementDefaultConstant.getAllCompletedTopic, onGetAllCompleted);
+
+            if (!_initializing && !_initialized) {
+                _initializing = true;
+                getAll();
+            }
+        }
+
+        var getAll = function () {
+            return $http.post(serviceBase + sensorDatasheetUnitMeasurementDefaultConstant.getAllApiUri).then(function (results) {
+                //alert('envio bem sucedido');
+            });
+        };
+
+        var onGetAllCompleted = function (payload) {
+
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
+
+            $localStorage.sensorDatasheetUnitMeasurementDefaultData = Base64.encode(dataUTF8);
+            $localStorage.$save();
+
+            var data = JSON.parse(dataUTF8);
+
+            for (var i = 0; i < data.length; i++) {
+                sensorDatasheetContext.sensorDatasheetUnitMeasurementDefault.push(data[i]);
+            }
+
+            sensorDatasheetContext.$digest();
+
+            _initializing = false;
+            _initialized = true;
+
+            clearOnConnected();
+
+            getAllCompletedSubscription.unsubscribe();
+
+            $rootScope.$emit(sensorDatasheetUnitMeasurementDefaultConstant.getAllCompletedEventName);
+        }
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
+        });
+
+        // stompService
+
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
+
+        if (stompService.connected()) onConnected();
+
+        return serviceFactory;
+
+    }]);

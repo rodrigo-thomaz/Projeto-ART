@@ -1,69 +1,80 @@
 ﻿'use strict';
-app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'sensorDatasheetContext', 'sensorDatasheetUnitMeasurementScaleConstant', function ($http, ngAuthSettings, $rootScope, stompService, sensorDatasheetContext, sensorDatasheetUnitMeasurementScaleConstant) {
+app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSettings', '$rootScope', '$localStorage', 'stompService', 'sensorDatasheetContext', 'sensorDatasheetUnitMeasurementScaleConstant',
+    function ($http, ngAuthSettings, $rootScope, $localStorage, stompService, sensorDatasheetContext, sensorDatasheetUnitMeasurementScaleConstant) {
 
-    var serviceFactory = {};    
+        var serviceFactory = {};
 
-    var serviceBase = ngAuthSettings.distributedServicesUri;
+        // Local cache        
 
-    var _initializing = false;
-    var _initialized  = false;
-
-    var getAllCompletedSubscription = null;
-
-    var onConnected = function () {
-
-        getAllCompletedSubscription = stompService.subscribe(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedTopic, onGetAllCompleted);
-
-        if (!_initializing && !_initialized) {
-            _initializing = true;
-            getAll();
+        if ($localStorage.sensorDatasheetUnitMeasurementScaleData) {
+            var data = JSON.parse(Base64.decode($localStorage.sensorDatasheetUnitMeasurementScaleData));
+            for (var i = 0; i < data.length; i++) {
+                sensorDatasheetContext.sensorDatasheetUnitMeasurementScale.push(data[i]);
+            }
+            $rootScope.$emit(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedEventName);
+            return serviceFactory;
         }
-    }   
 
-    var initialized = function () {
-        return _initialized;
-    };
+        // Get from Server        
 
-    var getAll = function () {
-        return $http.post(serviceBase + sensorDatasheetUnitMeasurementScaleConstant.getAllApiUri).then(function (results) {
-            //alert('envio bem sucedido');
+        var _initializing = false;
+        var _initialized = false;
+
+        var serviceBase = ngAuthSettings.distributedServicesUri;
+
+        var getAllCompletedSubscription = null;
+
+        var onConnected = function () {
+
+            getAllCompletedSubscription = stompService.subscribe(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedTopic, onGetAllCompleted);
+
+            if (!_initializing && !_initialized) {
+                _initializing = true;
+                getAll();
+            }
+        }
+
+        var getAll = function () {
+            return $http.post(serviceBase + sensorDatasheetUnitMeasurementScaleConstant.getAllApiUri).then(function (results) {
+                //alert('envio bem sucedido');
+            });
+        };
+
+        var onGetAllCompleted = function (payload) {
+
+            var dataUTF8 = decodeURIComponent(escape(payload.body));
+
+            $localStorage.sensorDatasheetUnitMeasurementScaleData = Base64.encode(dataUTF8);
+            $localStorage.$save();
+
+            var data = JSON.parse(dataUTF8);
+
+            for (var i = 0; i < data.length; i++) {
+                sensorDatasheetContext.sensorDatasheetUnitMeasurementScale.push(data[i]);
+            }
+
+            sensorDatasheetContext.$digest();
+
+            _initializing = false;
+            _initialized = true;
+
+            clearOnConnected();
+
+            getAllCompletedSubscription.unsubscribe();
+
+            $rootScope.$emit(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedEventName);
+        }
+
+        $rootScope.$on('$destroy', function () {
+            clearOnConnected();
         });
-    };       
 
-    var onGetAllCompleted = function (payload) {
+        // stompService
 
-        var dataUTF8 = decodeURIComponent(escape(payload.body));
-        var data = JSON.parse(dataUTF8);
+        var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
 
-        for (var i = 0; i < data.length; i++) {
-            sensorDatasheetContext.sensorDatasheetUnitMeasurementScale.push(data[i]);
-        }
+        if (stompService.connected()) onConnected();
 
-        sensorDatasheetContext.$digest();
+        return serviceFactory;
 
-        _initializing = false;
-        _initialized = true;
-
-        clearOnConnected();
-
-        getAllCompletedSubscription.unsubscribe();
-
-        $rootScope.$emit(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedEventName);
-    }
-
-    $rootScope.$on('$destroy', function () {
-        clearOnConnected();
-    });
-
-    var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);       
-
-    // stompService
-    if (stompService.connected()) onConnected();
-
-    // serviceFactory
-
-    serviceFactory.initialized = initialized;
-
-    return serviceFactory;
-
-}]);
+    }]);
