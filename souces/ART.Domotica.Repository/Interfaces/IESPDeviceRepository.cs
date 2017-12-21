@@ -17,11 +17,11 @@
 
         Task<ESPDevice> GetByPin(string pin);
 
+        Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
+
         Task<List<string>> GetExistingPins();
 
         Task<ESPDevice> GetFullByKey(Guid deviceId);
-
-        Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
 
         Task<List<ESPDevice>> GetListNotInApplication();
 

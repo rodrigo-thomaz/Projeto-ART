@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Locale\ContinentEnum.cs" />
+    <Compile Include="DeviceDatasheetEnum.cs" />
     <Compile Include="SI\NumericalScaleTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorUnitMeasurementScalePositionEnum.cs" />

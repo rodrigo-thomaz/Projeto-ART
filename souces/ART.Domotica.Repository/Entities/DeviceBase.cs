@@ -1,12 +1,18 @@
-﻿using ART.Infra.CrossCutting.Repository;
-using System;
-using System.Collections.Generic;
-
-namespace ART.Domotica.Repository.Entities
+﻿namespace ART.Domotica.Repository.Entities
 {
+    using System;
+    using System.Collections.Generic;
+
+    using ART.Infra.CrossCutting.Repository;
+
     public abstract class DeviceBase : IEntity<Guid>
     {
         #region Properties
+
+        public DateTime CreateDate
+        {
+            get; set;
+        }
 
         public DeviceMQ DeviceMQ
         {
@@ -19,23 +25,6 @@ namespace ART.Domotica.Repository.Entities
         }
 
         public DeviceSensors DeviceSensors
-        {
-            get; set;
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public DateTime CreateDate
         {
             get; set;
         }
@@ -54,7 +43,6 @@ namespace ART.Domotica.Repository.Entities
         {
             get; set;
         }
-
 
         #endregion Properties
     }

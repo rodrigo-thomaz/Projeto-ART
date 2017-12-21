@@ -55,6 +55,16 @@
             get; set;
         }
 
+        public DbSet<DeviceDatasheet> DeviceDatasheet
+        {
+            get; set;
+        }
+
+        public DbSet<DeviceInApplication> DeviceInApplication
+        {
+            get; set;
+        }
+
         public DbSet<DeviceMQ> DeviceMQ
         {
             get; set;
@@ -71,11 +81,6 @@
         }
 
         public DbSet<ESPDevice> ESPDevice
-        {
-            get; set;
-        }
-
-        public DbSet<DeviceInApplication> DeviceInApplication
         {
             get; set;
         }

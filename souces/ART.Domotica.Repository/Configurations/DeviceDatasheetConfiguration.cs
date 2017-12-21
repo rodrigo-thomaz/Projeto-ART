@@ -1,15 +1,16 @@
 ﻿namespace ART.Domotica.Repository.Configurations
 {
     using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Infrastructure.Annotations;
     using System.Data.Entity.ModelConfiguration;
 
     using ART.Domotica.Repository.Entities;
 
-    public class DeviceBaseConfiguration : EntityTypeConfiguration<DeviceBase>
+    public class DeviceDatasheetConfiguration : EntityTypeConfiguration<DeviceDatasheet>
     {
         #region Constructors
 
-        public DeviceBaseConfiguration()
+        public DeviceDatasheetConfiguration()
         {
             //Primary Keys
             HasKey(x => x.Id);
@@ -17,19 +18,16 @@
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //Label
-            Property(x => x.Label)
+            //Name
+            Property(x => x.Name)
                 .HasColumnOrder(1)
                 .HasMaxLength(50)
-                .IsRequired();
-
-            //CreateDate
-            Property(x => x.CreateDate)
-                .HasColumnOrder(2)
-                .IsRequired();
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute { IsUnique = true }));
         }
 
         #endregion Constructors
