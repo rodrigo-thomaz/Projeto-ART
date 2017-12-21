@@ -2,9 +2,16 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
+
     public class IoTRequestContract
     {
         #region Properties
+
+        public DeviceDatasheetEnum DeviceDatasheetId
+        {
+            get; set;
+        }
 
         public Guid DeviceId
         {

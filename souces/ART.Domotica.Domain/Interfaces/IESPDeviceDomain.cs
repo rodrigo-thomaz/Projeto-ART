@@ -4,13 +4,14 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
 
     public interface IESPDeviceDomain
     {
         #region Methods
 
-        Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId);
+        Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
 
         Task<List<ESPDevice>> GetAll();
 

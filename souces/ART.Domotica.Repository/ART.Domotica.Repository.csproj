@@ -128,6 +128,7 @@
     <Compile Include="Entities\SI\UnitMeasurementScale.cs" />
     <Compile Include="Entities\SI\UnitMeasurementType.cs" />
     <Compile Include="Interfaces\IDeviceSensorsRepository.cs" />
+    <Compile Include="Interfaces\IDeviceDatasheetRepository.cs" />
     <Compile Include="Interfaces\ISensorInApplicationRepository.cs" />
     <Compile Include="Interfaces\ISensorInDeviceRepository.cs" />
     <Compile Include="Interfaces\SI\INumericalScaleRepository.cs" />
@@ -157,27 +158,16 @@
     <Compile Include="Interfaces\Globalization\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201712211550125_CreateNameInDataSheet.cs" />
-    <Compile Include="Migrations\201712211550125_CreateNameInDataSheet.Designer.cs">
-      <DependentUpon>201712211550125_CreateNameInDataSheet.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712211554144_CreateNameInDataSheet1.cs" />
-    <Compile Include="Migrations\201712211554144_CreateNameInDataSheet1.Designer.cs">
-      <DependentUpon>201712211554144_CreateNameInDataSheet1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712211610187_CreateNameInDataSheet2.cs" />
-    <Compile Include="Migrations\201712211610187_CreateNameInDataSheet2.Designer.cs">
-      <DependentUpon>201712211610187_CreateNameInDataSheet2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201712211834506_CreateNameInDataSheet3.cs" />
-    <Compile Include="Migrations\201712211834506_CreateNameInDataSheet3.Designer.cs">
-      <DependentUpon>201712211834506_CreateNameInDataSheet3.cs</DependentUpon>
+    <Compile Include="Migrations\201712211920360_InitialCreate.cs" />
+    <Compile Include="Migrations\201712211920360_InitialCreate.Designer.cs">
+      <DependentUpon>201712211920360_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ApplicationRepository.cs" />
     <Compile Include="Repositories\DeviceSensorsRepository.cs" />
+    <Compile Include="Repositories\DeviceDatasheetRepository.cs" />
     <Compile Include="Repositories\SensorInApplicationRepository.cs" />
     <Compile Include="Repositories\SensorDatasheetUnitMeasurementScaleRepository.cs" />
     <Compile Include="Repositories\SensorInDeviceRepository.cs" />
@@ -211,6 +201,7 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="InitialFiles\ActuatorType.csv" />
+    <None Include="InitialFiles\DeviceDatasheet.csv" />
     <None Include="InitialFiles\SensorDatasheetUnitMeasurementScale.csv" />
     <None Include="InitialFiles\UnitMeasurementScale.csv" />
     <None Include="InitialFiles\SensorDatasheetUnitMeasurementDefault.csv" />
@@ -256,17 +247,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201712211550125_CreateNameInDataSheet.resx">
-      <DependentUpon>201712211550125_CreateNameInDataSheet.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712211554144_CreateNameInDataSheet1.resx">
-      <DependentUpon>201712211554144_CreateNameInDataSheet1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712211610187_CreateNameInDataSheet2.resx">
-      <DependentUpon>201712211610187_CreateNameInDataSheet2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201712211834506_CreateNameInDataSheet3.resx">
-      <DependentUpon>201712211834506_CreateNameInDataSheet3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201712211920360_InitialCreate.resx">
+      <DependentUpon>201712211920360_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

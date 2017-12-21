@@ -9,6 +9,7 @@
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
+    using ART.Domotica.Enums;
 
     public class DeviceBaseDomain : DomainBase, IDeviceBaseDomain
     {
@@ -31,9 +32,9 @@
 
         #region Methods
         
-        public async Task<DeviceBase> SetLabel(Guid deviceId, string label)
+        public async Task<DeviceBase> SetLabel(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId, string label)
         {
-            var entity = await _deviceBaseRepository.GetByKey(deviceId);
+            var entity = await _deviceBaseRepository.GetByKey(deviceId, deviceDatasheetId);
 
             if (entity == null)
             {

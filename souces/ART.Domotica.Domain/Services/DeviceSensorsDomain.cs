@@ -6,6 +6,7 @@
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Domain;
+    using ART.Domotica.Enums;
 
     public class DeviceSensorsDomain : DomainBase, IDeviceSensorsDomain
     {
@@ -24,9 +25,9 @@
 
         #endregion Constructors
 
-        public async Task<DeviceSensors> SetPublishIntervalInSeconds(Guid deviceSensorsId, int publishIntervalInSeconds)
+        public async Task<DeviceSensors> SetPublishIntervalInSeconds(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInSeconds)
         {
-            var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId);
+            var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId, deviceDatasheetId);
 
             if (entity == null)
             {

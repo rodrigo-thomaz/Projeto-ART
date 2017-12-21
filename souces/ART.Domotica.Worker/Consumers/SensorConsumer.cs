@@ -145,10 +145,10 @@ namespace ART.Domotica.Worker.Consumers
             var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
 
             var domain = _componentContext.Resolve<ISensorDomain>();
-            var data = await domain.GetAllByDeviceInApplicationId(applicationMQ.Id, requestContract.DeviceId);
+            var data = await domain.GetAllByDeviceInApplicationId(applicationMQ.Id, requestContract.DeviceId, requestContract.DeviceDatasheetId);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId);
+            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId, requestContract.DeviceDatasheetId);
 
             var exchange = "amq.topic";
 

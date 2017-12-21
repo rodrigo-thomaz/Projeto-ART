@@ -9,8 +9,9 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using ART.Domotica.Enums;
 
-    public class ESPDeviceRepository : RepositoryBase<ARTDbContext, ESPDevice, Guid>, IESPDeviceRepository
+    public class ESPDeviceRepository : RepositoryBase<ARTDbContext, ESPDevice>, IESPDeviceRepository
     {
         #region Constructors
 
@@ -44,7 +45,7 @@
             return data;
         }
 
-        public async Task<ESPDevice> GetFullByKey(Guid deviceId)
+        public async Task<ESPDevice> GetFullByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
         {
             var data = await _context.ESPDevice
                .Include(x => x.DeviceNTP)
@@ -53,6 +54,7 @@
                .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
                .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily))
                .Where(x => x.Id == deviceId)
+               .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
                .FirstOrDefaultAsync();
 
             return data;
@@ -101,7 +103,12 @@
                 .ToListAsync();           
 
             return data;
-        } 
+        }
+
+        public async Task<ESPDevice> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        {
+            return await _context.ESPDevice.FindAsync(deviceId, deviceDatasheetId);
+        }
 
         #endregion Methods
     }

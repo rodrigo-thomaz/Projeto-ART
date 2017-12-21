@@ -119,7 +119,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);
@@ -161,7 +161,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);

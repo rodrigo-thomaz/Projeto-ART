@@ -27,9 +27,9 @@
 
         #endregion Constructors
 
-        public async Task<SensorInDevice> SetOrdination(Guid deviceSensorsId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination)
+        public async Task<SensorInDevice> SetOrdination(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination)
         {
-            var entities = await _sensorInDeviceRepository.GetByDeviceSensorsKey(deviceSensorsId);
+            var entities = await _sensorInDeviceRepository.GetByDeviceSensorsKey(deviceSensorsId, deviceDatasheetId);
 
             var sensorInDevice = entities
                 .Where(x => x.DeviceSensorsId == deviceSensorsId)

@@ -12,7 +12,11 @@
         public DeviceBaseConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.DeviceDatasheetId,
+            });
 
             //Id
             Property(x => x.Id)
@@ -20,15 +24,27 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired();
 
+            //DeviceDatasheetId
+            Property(x => x.DeviceDatasheetId)
+                .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //DeviceDatasheet
+            HasRequired(x => x.DeviceDatasheet)
+                .WithMany(x => x.DevicesBase)
+                .HasForeignKey(x => x.DeviceDatasheetId)
+                .WillCascadeOnDelete(false);
+
             //Label
             Property(x => x.Label)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .HasMaxLength(50)
                 .IsRequired();
 
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired();
         }
 

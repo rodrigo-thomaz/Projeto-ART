@@ -8,6 +8,11 @@
     {
         #region Properties
 
+        public DeviceDatasheetEnum DeviceDatasheetId
+        {
+            get; set;
+        }
+
         public Guid DeviceSensorsId
         {
             get; set;

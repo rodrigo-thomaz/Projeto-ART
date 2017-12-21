@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
     public abstract class DeviceBase : IEntity<Guid>
@@ -10,6 +11,16 @@
         #region Properties
 
         public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public DeviceDatasheet DeviceDatasheet
+        {
+            get; set;
+        }
+
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }

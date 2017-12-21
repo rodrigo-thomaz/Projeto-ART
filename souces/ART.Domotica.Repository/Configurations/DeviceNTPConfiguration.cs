@@ -12,12 +12,21 @@
         public DeviceNTPConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.DeviceDatasheetId,
+            });
 
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //DeviceDatasheetId
+            Property(x => x.DeviceDatasheetId)
+                .HasColumnOrder(1)
                 .IsRequired();
 
             //DeviceBase
@@ -26,7 +35,7 @@
 
             //TimeZoneId
             Property(x => x.TimeZoneId)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .IsRequired();
 
             //TimeZone
@@ -37,7 +46,7 @@
 
             //UpdateIntervalInMilliSecond
             Property(x => x.UpdateIntervalInMilliSecond)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired();
         }
 

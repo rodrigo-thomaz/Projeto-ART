@@ -2,6 +2,7 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
     public class DeviceMQ : IEntity<Guid>
@@ -14,6 +15,11 @@
         }
 
         public DeviceBase DeviceBase
+        {
+            get; set;
+        }
+
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }

@@ -70,9 +70,9 @@ namespace ART.Domotica.Domain.Services
             return data;
         }       
 
-        public async Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId)
+        public async Task<List<Sensor>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
         {
-            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId);
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId, deviceDatasheetId);
 
             if (deviceInApplication == null)
             {

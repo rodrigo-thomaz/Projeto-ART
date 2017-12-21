@@ -13,12 +13,21 @@
         public DeviceMQConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.DeviceDatasheetId,
+            });
 
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //DeviceDatasheetId
+            Property(x => x.DeviceDatasheetId)
+                .HasColumnOrder(1)
                 .IsRequired();
 
             //DeviceBase
@@ -27,7 +36,7 @@
 
             //User
             Property(x => x.User)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .HasMaxLength(12)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -35,7 +44,7 @@
 
             //Password
             Property(x => x.Password)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .HasMaxLength(12)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -43,7 +52,7 @@
 
             //ClientId
             Property(x => x.ClientId)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .HasMaxLength(32)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -51,7 +60,7 @@
 
             //Topic
             Property(x => x.Topic)
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .HasMaxLength(32)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,

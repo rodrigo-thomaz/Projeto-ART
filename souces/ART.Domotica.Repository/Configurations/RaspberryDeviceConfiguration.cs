@@ -15,16 +15,25 @@
             ToTable("RaspberryDevice");
 
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.DeviceDatasheetId,
+            });
 
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .IsRequired();
 
+            //DeviceDatasheetId
+            Property(x => x.DeviceDatasheetId)
+                .HasColumnOrder(1)
+                .IsRequired();
+
             //LanMacAddress
             Property(x => x.LanMacAddress)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()
@@ -33,7 +42,7 @@
 
             //WLanMacAddress
             Property(x => x.WLanMacAddress)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()

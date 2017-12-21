@@ -9,6 +9,11 @@
     {
         #region Properties
 
+        public DeviceDatasheetEnum DeviceDatasheetId
+        {
+            get; set;
+        }
+
         public DeviceSensors DeviceSensors
         {
             get; set;

@@ -12,6 +12,7 @@
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
+    using ART.Domotica.Enums;
 
     public class ESPDeviceDomain : DomainBase, IESPDeviceDomain
     {
@@ -119,11 +120,11 @@
             return deviceEntity;
         }
 
-        public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId)
+        public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
         {
             // Device 
 
-            DeviceInApplication deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId);
+            DeviceInApplication deviceInApplicationEntity = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId, deviceDatasheetId);
             
             if (deviceInApplicationEntity == null)
             {
@@ -138,7 +139,7 @@
 
             await _sensorInApplicationRepository.Delete(sensorsInApplication);
 
-            var deviceEntity = await _espDeviceRepository.GetFullByKey(deviceInApplicationEntity.DeviceId);
+            var deviceEntity = await _espDeviceRepository.GetFullByKey(deviceInApplicationEntity.DeviceId, deviceInApplicationEntity.DeviceDatasheetId);
 
             return deviceEntity;
         }

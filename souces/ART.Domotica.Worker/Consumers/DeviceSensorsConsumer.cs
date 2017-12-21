@@ -78,7 +78,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSensorsSetPublishIntervalInSecondsRequestContract>>(e.Body);
             var deviceSensorsDomain = _componentContext.Resolve<IDeviceSensorsDomain>();
-            var data = await deviceSensorsDomain.SetPublishIntervalInSeconds(message.Contract.DeviceSensorsId, message.Contract.PublishIntervalInSeconds);
+            var data = await deviceSensorsDomain.SetPublishIntervalInSeconds(message.Contract.DeviceSensorsId, message.Contract.DeviceDatasheetId, message.Contract.PublishIntervalInSeconds);
 
             var exchange = "amq.topic";
 

@@ -21,16 +21,17 @@
 
         #endregion Constructors
 
-        public async Task<SensorInDevice> GetByKey(Guid deviceSensorsId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
+        public async Task<SensorInDevice> GetByKey(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
         {
             return await _context.SensorInDevice
-                .FindAsync(deviceSensorsId, sensorId, sensorDatasheetId, sensorTypeId);
+                .FindAsync(deviceSensorsId, deviceDatasheetId, sensorId, sensorDatasheetId, sensorTypeId);
         }
 
-        public async Task<List<SensorInDevice>> GetByDeviceSensorsKey(Guid deviceSensorsId)
+        public async Task<List<SensorInDevice>> GetByDeviceSensorsKey(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId)
         {
             return await _context.SensorInDevice
                 .Where(x => x.DeviceSensorsId == deviceSensorsId)
+                .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
                 .ToListAsync();
         }
     }

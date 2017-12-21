@@ -15,16 +15,25 @@
             ToTable("ESPDevice");
 
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.DeviceDatasheetId,
+            });
 
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .IsRequired();
 
+            //DeviceDatasheetId
+            Property(x => x.DeviceDatasheetId)
+                .HasColumnOrder(1)
+                .IsRequired();
+
             //ChipId
             Property(x => x.ChipId)
-                .HasColumnOrder(1)
+                .HasColumnOrder(2)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new []{
@@ -33,7 +42,7 @@
 
             //FlashChipId
             Property(x => x.FlashChipId)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new[]{
@@ -42,7 +51,7 @@
 
             //MacAddress
             Property(x => x.MacAddress)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()
@@ -53,7 +62,7 @@
 
             //Pin
             Property(x => x.Pin)
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .HasMaxLength(4)
                 .IsFixedLength()
                 .IsRequired()

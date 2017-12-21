@@ -1,10 +1,17 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using ART.Domotica.Enums;
+
     public class ESPDevice : DeviceBase
     {
         #region Properties
 
         public int ChipId
+        {
+            get; set;
+        }
+
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }

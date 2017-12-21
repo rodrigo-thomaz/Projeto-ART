@@ -78,7 +78,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorInDeviceSetOrdinationRequestContract>>(e.Body);
             var sensorInDeviceDomain = _componentContext.Resolve<ISensorInDeviceDomain>();
-            var data = await sensorInDeviceDomain.SetOrdination(message.Contract.DeviceSensorsId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Ordination);
+            var data = await sensorInDeviceDomain.SetOrdination(message.Contract.DeviceSensorsId, message.Contract.DeviceDatasheetId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Ordination);
 
             var exchange = "amq.topic";
 

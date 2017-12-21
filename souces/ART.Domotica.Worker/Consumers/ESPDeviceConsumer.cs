@@ -295,12 +295,12 @@
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.DeleteFromApplication(applicationMQ.Id, message.Contract.DeviceId);
+            var data = await domain.DeleteFromApplication(applicationMQ.Id, message.Contract.DeviceId, message.Contract.DeviceDatasheetId);
 
             var exchange = "amq.topic";
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.Id);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
@@ -434,7 +434,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSetLabelRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceBaseDomain>();
-            var data = await domain.SetLabel(message.Contract.DeviceId, message.Contract.Label);
+            var data = await domain.SetLabel(message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.Label);
 
             var exchange = "amq.topic";
 

@@ -18,6 +18,7 @@
             {
                 x.ApplicationId,
                 x.DeviceId,
+                x.DeviceDatasheetId,
             });
 
             //ApplicationId
@@ -40,23 +41,38 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute ("IX_Unique_DeviceId") { IsUnique = true },
+                        new IndexAttribute ("IX_Unique_DeviceId", 0) { IsUnique = true },
+                    }));
+
+            //DeviceDatasheetId
+            Property(x => x.DeviceDatasheetId)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new List<IndexAttribute>
+                    {
+                        new IndexAttribute ("IX_Unique_DeviceId", 1) { IsUnique = true },
                     }));
 
             //DeviceBase
             HasRequired(x => x.DeviceBase)
                 .WithMany(x => x.DevicesInApplication)
-                .HasForeignKey(x => x.DeviceId)
+                .HasForeignKey(x => new
+                {
+                    x.DeviceId,
+                    x.DeviceDatasheetId,
+                })
                 .WillCascadeOnDelete(false);
 
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired();
 
             //CreateByApplicationUserId
             Property(x => x.CreateByApplicationUserId)
-                .HasColumnOrder(3);
+                .HasColumnOrder(4);
 
             //CreateByApplicationUser
             HasRequired(x => x.CreateByApplicationUser)

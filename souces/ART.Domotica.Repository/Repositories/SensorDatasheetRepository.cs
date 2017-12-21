@@ -1,5 +1,4 @@
-﻿using ART.Domotica.Enums;
-using ART.Domotica.Repository.Entities;
+﻿using ART.Domotica.Repository.Entities;
 using ART.Domotica.Repository.Interfaces;
 using ART.Infra.CrossCutting.Repository;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ART.Domotica.Repository.Repositories
 {
-    public class SensorDatasheetRepository : RepositoryBase<ARTDbContext, SensorDatasheet, SensorDatasheetEnum>, ISensorDatasheetRepository
+    public class SensorDatasheetRepository : RepositoryBase<ARTDbContext, SensorDatasheet>, ISensorDatasheetRepository
     {
         public SensorDatasheetRepository(ARTDbContext context) : base(context)
         {

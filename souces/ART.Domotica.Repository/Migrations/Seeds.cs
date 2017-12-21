@@ -40,6 +40,7 @@
             ExecuteSensorDatasheet(context);
             ExecuteSensorDatasheetUnitMeasurementDefault(context);
             ExecuteSensorDatasheetUnitMeasurementScale(context);
+            ExecuteDeviceDatasheet(context);
 
             #region SensorTempDSFamilyResolutions
 
@@ -486,14 +487,20 @@
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceSensors)
-                .SingleOrDefault(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower());
+                .Where(x => x.MacAddress.ToLower() == espDevice1MacAddress.ToLower())
+                .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Temperature_OneWire_2Way)
+                .SingleOrDefault();
 
             if (espDevice1 == null)
             {
                 var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
 
+                var deviceDataSheet1 = context.DeviceDatasheet.Find(DeviceDatasheetEnum.Temperature_OneWire_2Way);
+
                 espDevice1 = new ESPDevice
                 {
+                    DeviceDatasheet = deviceDataSheet1,
+                    DeviceDatasheetId = DeviceDatasheetEnum.Temperature_OneWire_2Way,
                     ChipId = 1540901,
                     FlashChipId = 1458400,
                     MacAddress = espDevice1MacAddress,
@@ -565,6 +572,7 @@
                 SensorDatasheetId = sensor_2_1.SensorDatasheetId,
                 SensorTypeId = sensor_2_1.SensorTypeId,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
                 Ordination = 0,
             };
 
@@ -576,6 +584,7 @@
                 SensorDatasheetId = sensor_2_2.SensorDatasheetId,
                 SensorTypeId = sensor_2_2.SensorTypeId,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
                 Ordination = 1,
             };
 
@@ -587,6 +596,7 @@
                 SensorDatasheetId = sensor_3_1.SensorDatasheetId,
                 SensorTypeId = sensor_3_1.SensorTypeId,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
                 Ordination = 2,
             };
 
@@ -598,6 +608,7 @@
                 SensorDatasheetId = sensor_3_2.SensorDatasheetId,
                 SensorTypeId = sensor_3_2.SensorTypeId,
                 DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
                 Ordination = 3,
             };
 
@@ -618,14 +629,20 @@
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceSensors)
-                .SingleOrDefault(x => x.MacAddress.ToLower() == espDevice2MacAddress.ToLower());
+                .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Ultrasonic_1Way)
+                .Where(x => x.MacAddress.ToLower() == espDevice2MacAddress.ToLower())
+                .SingleOrDefault();
 
             if (espDevice2 == null)
             {
                 var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
 
+                var deviceDataSheet2 = context.DeviceDatasheet.Find(DeviceDatasheetEnum.Ultrasonic_1Way);
+
                 espDevice2 = new ESPDevice
                 {
+                    DeviceDatasheet = deviceDataSheet2,
+                    DeviceDatasheetId = DeviceDatasheetEnum.Ultrasonic_1Way,
                     ChipId = 5014008,
                     FlashChipId = 1458415,
                     MacAddress = espDevice2MacAddress,
@@ -794,6 +811,37 @@
                             NumericalScaleTypeId = numericalScaleTypeId,
                         });
                     }
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void ExecuteDeviceDatasheet(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("DeviceDatasheet.csv");
+
+            foreach (var line in lines)
+            {
+                var deviceDatasheetId = (DeviceDatasheetEnum)Enum.Parse(typeof(DeviceDatasheetEnum), line[0]);
+                var name = line[1];
+
+                var entity = context.DeviceDatasheet
+                    .Where(x => x.Id == deviceDatasheetId)
+                    .SingleOrDefault();
+
+                if (entity == null)
+                {
+                    entity = new DeviceDatasheet
+                    {
+                        Id = deviceDatasheetId,
+                        Name = name,
+                    };
+                    context.DeviceDatasheet.Add(entity);
+                }
+                else
+                {
+                    entity.Name = name;
                 }
 
                 context.SaveChanges();

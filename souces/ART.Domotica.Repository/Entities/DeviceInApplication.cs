@@ -2,6 +2,7 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
     public class DeviceInApplication : IEntity
@@ -34,6 +35,11 @@
         }
 
         public DeviceBase DeviceBase
+        {
+            get; set;
+        }
+
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }
