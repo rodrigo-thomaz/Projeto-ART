@@ -62,15 +62,16 @@ class DeviceNTP {
 class DeviceInApplication {
   public:
 
-    DeviceInApplication(String deviceId, String applicationId);
+    DeviceInApplication(String deviceId, short deviceDatasheetId, String applicationId);
 
     String								getDeviceId();	
-	
+	short								getDeviceDatasheetId();		
 	String								getApplicationId();	
 		
   private:
     
 	String								_deviceId;
+	short								_deviceDatasheetId;
 	String								_applicationId;
 
 	void								setApplicationId(String value);	

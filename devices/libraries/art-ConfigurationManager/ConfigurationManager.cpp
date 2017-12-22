@@ -93,14 +93,20 @@ void DeviceNTP::setUpdateIntervalInMilliSecond(int value)
 
 // DeviceInApplication
 
-DeviceInApplication::DeviceInApplication(String deviceId, String applicationId) {	
+DeviceInApplication::DeviceInApplication(String deviceId, short deviceDatasheetId, String applicationId) {	
   _deviceId = deviceId;
+  _deviceDatasheetId = deviceDatasheetId;
   _applicationId = applicationId == "null" ? "" : applicationId;				
 }
 
 String DeviceInApplication::getDeviceId()
 {	
 	return this->_deviceId;
+}
+
+short DeviceInApplication::getDeviceDatasheetId()
+{	
+	return this->_deviceDatasheetId;
 }
 
 String DeviceInApplication::getApplicationId()
@@ -226,6 +232,7 @@ void ConfigurationManager::autoInitialize()
 			
 			this->_deviceInApplication = new DeviceInApplication(
 				jsonObjectResponse["deviceId"], 
+				jsonObjectResponse["deviceDatasheetId"], 
 				jsonObjectResponse["applicationId"]);					
 			
 			int publishMessageInterval = jsonObjectResponse["publishMessageInterval"];	
@@ -259,6 +266,8 @@ void ConfigurationManager::autoInitialize()
 			
 			Serial.print("DeviceId: ");
 			Serial.println(this->_deviceInApplication->getDeviceId());
+			Serial.print("DeviceDatasheetId: ");
+			Serial.println(this->_deviceInApplication->getDeviceDatasheetId());
 			Serial.print("ApplicationId: ");
 			Serial.println(this->_deviceInApplication->getApplicationId());
 			

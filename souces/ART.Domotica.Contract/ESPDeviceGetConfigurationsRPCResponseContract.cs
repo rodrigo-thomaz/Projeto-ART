@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Contract
 {
+    using ART.Domotica.Enums;
     using System;
 
     public class ESPDeviceGetConfigurationsRPCResponseContract
@@ -12,6 +13,11 @@
         }
 
         public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }
