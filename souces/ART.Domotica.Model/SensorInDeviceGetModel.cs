@@ -13,6 +13,11 @@
             get; set;
         }
 
+        public DeviceDatasheetEnum DeviceDatasheetId
+        {
+            get; set;
+        }
+
         public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;

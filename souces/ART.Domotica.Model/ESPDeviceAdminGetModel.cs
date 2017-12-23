@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Model
 {
+    using ART.Domotica.Enums;
     using System;
 
     public class ESPDeviceAdminGetModel
@@ -17,6 +18,11 @@
         }
 
         public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }

@@ -19,6 +19,7 @@
         {
             CreateMap<ESPDevice, ESPDeviceGetModel>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DevicesInApplication.Single().DeviceId))
+                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP))
                 .ForMember(vm => vm.DeviceSensors, m => m.MapFrom(x => x.DeviceSensors));
@@ -27,7 +28,8 @@
                 .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().ApplicationId));
 
             CreateMap<ESPDevice, ESPDeviceGetByPinModel>()
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))                ;
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId));
 
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()//
                 .ForMember(vm => vm.ApplicationId, m => m.ResolveUsing(src => {
@@ -43,10 +45,12 @@
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP));
 
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId));
 
             CreateMap<ESPDevice, ESPDeviceAdminGetModel>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
                 .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));
         }
