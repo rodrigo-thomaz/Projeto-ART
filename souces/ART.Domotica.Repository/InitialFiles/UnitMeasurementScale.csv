@@ -24,7 +24,7 @@ Meter;Length;Mega;Long;megametro
 Meter;Length;Quilo;Long;quilômetro
 Meter;Length;Hecto;Long;hectômetro
 Meter;Length;Deca;Long;decâmetro
-Meter;Length;None;Long;nenhum
+Meter;Length;None;Long;metro
 Meter;Length;Deci;Long;decímetro
 Meter;Length;Centi;Long;centímetro
 Meter;Length;Mili;Long;milímetro
@@ -45,7 +45,7 @@ Meter;Length;Mega;Short;megametro
 Meter;Length;Quilo;Short;quilômetro
 Meter;Length;Hecto;Short;hectômetro
 Meter;Length;Deca;Short;decâmetro
-Meter;Length;None;Short;nenhum
+Meter;Length;None;Short;metro
 Meter;Length;Deci;Short;decímetro
 Meter;Length;Centi;Short;centímetro
 Meter;Length;Mili;Short;milímetro

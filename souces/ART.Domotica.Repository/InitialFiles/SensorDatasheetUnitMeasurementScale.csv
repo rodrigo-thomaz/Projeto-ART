@@ -14,5 +14,13 @@ Temperature_DS18B20;Temperature;Delisle;Temperature;None;Short
 Temperature_DS18B20;Temperature;Delisle;Temperature;None;Long
 Temperature_DS18B20;Temperature;Reaumur;Temperature;None;Short
 Temperature_DS18B20;Temperature;Reaumur;Temperature;None;Long
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;None;Short
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;None;Long
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;Deci;Short
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;Deci;Long
 Ultrasonic_HCSR04;ProximityDistance;Meter;Length;Centi;Short
 Ultrasonic_HCSR04;ProximityDistance;Meter;Length;Centi;Long
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;Mili;Short
+Ultrasonic_HCSR04;ProximityDistance;Meter;Length;Mili;Long
+Ultrasonic_HCSR04;ProximityDistance;Inch;Length;None;Short
+Ultrasonic_HCSR04;ProximityDistance;Inch;Length;None;Long
