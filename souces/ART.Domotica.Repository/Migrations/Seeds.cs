@@ -1301,6 +1301,7 @@
                 var unitMeasurementTypeId = (UnitMeasurementTypeEnum)Enum.Parse(typeof(UnitMeasurementTypeEnum), line[1]);
                 var numericalScalePrefixId = (NumericalScalePrefixEnum)Enum.Parse(typeof(NumericalScalePrefixEnum), line[2]);
                 var numericalScaleTypeId = (NumericalScaleTypeEnum)Enum.Parse(typeof(NumericalScaleTypeEnum), line[3]);
+                var name = line[4];
 
                 var entity = context.UnitMeasurementScale
                     .Where(x => x.UnitMeasurementId == unitMeasurementId)
@@ -1317,9 +1318,14 @@
                         UnitMeasurementTypeId = unitMeasurementTypeId,
                         NumericalScalePrefixId = numericalScalePrefixId,
                         NumericalScaleTypeId = numericalScaleTypeId,
+                        Name = name,
                     };
 
                     context.UnitMeasurementScale.Add(entity);
+                }
+                else
+                {
+                    entity.Name = name;
                 }
 
                 context.SaveChanges();
