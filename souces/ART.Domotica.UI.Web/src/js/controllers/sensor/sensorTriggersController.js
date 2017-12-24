@@ -12,9 +12,15 @@ app.controller('sensorTriggersController', ['$scope', '$rootScope', '$timeout', 
         var minDefault = -55;
 
         $scope.init = function (sensor) {
-            _sensor = sensor;
 
-            $scope.sensorTriggers = sensor.sensorTriggers;
+            _sensor = sensor;
+            
+            if (angular.isArray(sensor.sensorTriggers)) {
+                $scope.sensorTriggers = sensor.sensorTriggers;
+            }
+            else {
+                $scope.sensorTriggers = [];
+            }
 
             clearOnInsertCompleted = $rootScope.$on(sensorTriggerConstant.insertCompletedEventName + _sensor.sensorId, onInsertCompleted);                
             clearOnDeleteCompleted = $rootScope.$on(sensorTriggerConstant.deleteCompletedEventName + _sensor.sensorId, onDeleteCompleted);                

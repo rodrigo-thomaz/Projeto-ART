@@ -32,9 +32,13 @@ app.factory('sensorMapper', [
 
         var addSensorAggregates = function (sensor) {
             //sensorTempDSFamily
-            sensorContext.sensorTempDSFamily.push(sensor.sensorTempDSFamily);
-            //sensorUnitMeasurementScale
-            sensorContext.sensorUnitMeasurementScale.push(sensor.sensorUnitMeasurementScale);
+            if (angular.isObject(sensor.sensorTempDSFamily)) {
+                sensorContext.sensorTempDSFamily.push(sensor.sensorTempDSFamily);
+            }
+            //sensorUnitMeasurementScale            
+            if (angular.isObject(sensor.sensorUnitMeasurementScale)) {
+                sensorContext.sensorUnitMeasurementScale.push(sensor.sensorUnitMeasurementScale);
+            }
             //sensorTrigger
             for (var i = 0; i < sensor.sensorTriggers.length; i++) {
                 sensorContext.sensorTrigger.push(sensor.sensorTriggers[i]);

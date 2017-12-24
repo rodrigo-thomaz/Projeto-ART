@@ -2,7 +2,7 @@
 app.controller('espDeviceManagerController', ['$scope', '$timeout', '$log', '$modal', 'uiGridConstants', '$rootScope', 'toaster', 'contextScope', 'deviceContext', 'deviceService', function ($scope, $timeout, $log, $modal, uiGridConstants, $rootScope, toaster, contextScope, deviceContext, deviceService) {    
         
     var onDeleteFromApplicationClick = function (espDevice) {
-        deviceService.deleteFromApplication(espDevice.deviceId);
+        deviceService.deleteFromApplication(espDevice.deviceId, espDevice.deviceDatasheetId);
     }
 
     var onDeleteFromApplicationCompleted = function () {
