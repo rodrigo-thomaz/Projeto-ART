@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'orderByFilter', 'sensorDatasheetContext', 'unitMeasurementFinder', 'numericalScaleTypeFinder', 'numericalScaleTypeCountryFinder',
-    function ($rootScope, orderBy, sensorDatasheetContext, unitMeasurementFinder, numericalScaleTypeFinder, numericalScaleTypeCountryFinder) {
+app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'orderByFilter', 'sensorDatasheetContext', 'unitMeasurementFinder', 'numericalScaleTypeFinder', 'numericalScaleTypeCountryFinder', 'unitMeasurementScaleFinder',
+    function ($rootScope, orderBy, sensorDatasheetContext, unitMeasurementFinder, numericalScaleTypeFinder, numericalScaleTypeCountryFinder, unitMeasurementScaleFinder) {
 
         var context = sensorDatasheetContext;
 
@@ -86,6 +86,25 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'orderBy
             return orderBy(result, 'name', false);
         }
 
+        var getUnitMeasurementScales = function (sensorDatasheetId, sensorTypeId, unitMeasurementId, unitMeasurementTypeId, numericalScaleTypeId) {
+            var result = [];
+            for (var i = 0; i < context.sensorDatasheetUnitMeasurementScale.length; i++) {
+                var sensorDatasheetUnitMeasurementScale = context.sensorDatasheetUnitMeasurementScale[i];
+                if (sensorDatasheetUnitMeasurementScale.sensorDatasheetId === sensorDatasheetId && sensorDatasheetUnitMeasurementScale.sensorTypeId === sensorTypeId && sensorDatasheetUnitMeasurementScale.unitMeasurementId === unitMeasurementId && sensorDatasheetUnitMeasurementScale.unitMeasurementTypeId === unitMeasurementTypeId && sensorDatasheetUnitMeasurementScale.numericalScaleTypeId === numericalScaleTypeId) {
+                    var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(sensorDatasheetUnitMeasurementScale.unitMeasurementId, sensorDatasheetUnitMeasurementScale.unitMeasurementTypeId, sensorDatasheetUnitMeasurementScale.numericalScalePrefixId, sensorDatasheetUnitMeasurementScale.numericalScaleTypeId);
+                    var contain = false;
+                    for (var j = 0; j < result.length; j++) {
+                        if (result[j] === unitMeasurementScale) {
+                            contain = true;
+                            break;
+                        }
+                    }
+                    if (!contain) result.push(unitMeasurementScale);
+                }
+            }
+            return result;
+        } 
+
         // *** Public Methods ***
 
         serviceFactory.getByKey = getByKey;
@@ -94,6 +113,7 @@ app.factory('sensorDatasheetUnitMeasurementScaleFinder', ['$rootScope', 'orderBy
         serviceFactory.getNumericalScaleTypesBySensorDatasheetCountryKey = getNumericalScaleTypesBySensorDatasheetCountryKey;
         serviceFactory.getUnitMeasurementsBySensorDatasheetKey = getUnitMeasurementsBySensorDatasheetKey;
         serviceFactory.containInNumericalScaleTypeCountries = containInNumericalScaleTypeCountries;
+        serviceFactory.getUnitMeasurementScales = getUnitMeasurementScales;
 
         return serviceFactory;
 

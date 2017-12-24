@@ -173,7 +173,7 @@
 
             //unitMeasurementScale
             var unitMeasurementScale = unitMeasurementScaleFinder.getByKey(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScalePrefixId, sensorUnitMeasurementScale.numericalScaleTypeId);
-            $scope.unitMeasurementScaleView.availables = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScaleTypeId);
+            $scope.unitMeasurementScaleView.availables = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementScales(sensorUnitMeasurementScale.sensorDatasheetId, sensorUnitMeasurementScale.sensorTypeId, sensorUnitMeasurementScale.unitMeasurementId, sensorUnitMeasurementScale.unitMeasurementTypeId, sensorUnitMeasurementScale.numericalScaleTypeId);
             $scope.unitMeasurementScaleView.selected = unitMeasurementScale;
         }
 
@@ -208,7 +208,7 @@
             if ($scope.numericalScaleTypeView.selected && $scope.unitMeasurementView.selected) {
                 var numericalScaleType = $scope.numericalScaleTypeView.selected;
                 var unitMeasurement = $scope.unitMeasurementView.selected;
-                var unitMeasurementScales = unitMeasurementScaleFinder.getUnitMeasurementScalePrefixes(unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, numericalScaleType.numericalScaleTypeId);
+                var unitMeasurementScales = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementScales(unitMeasurement.sensorDatasheetId, unitMeasurement.sensorTypeId, unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, numericalScaleType.numericalScaleTypeId);
                 $scope.unitMeasurementScaleView.availables = unitMeasurementScales;
                 if ($scope.unitMeasurementScaleView.availables.length == 1) {
                     selectedUnitMeasurementScale = $scope.unitMeasurementScaleView.availables[0];
