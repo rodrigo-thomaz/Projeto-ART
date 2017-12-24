@@ -65,6 +65,11 @@
                     x.NumericalScaleTypeId,
                 })
                 .WillCascadeOnDelete(false);
+
+            //Name
+            Property(x => x.Name)
+                .HasColumnOrder(4)
+                .IsRequired();
         }
 
         #endregion Constructors
