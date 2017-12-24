@@ -208,7 +208,7 @@
             if ($scope.numericalScaleTypeView.selected && $scope.unitMeasurementView.selected) {
                 var numericalScaleType = $scope.numericalScaleTypeView.selected;
                 var unitMeasurement = $scope.unitMeasurementView.selected;
-                var unitMeasurementScales = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementScales(unitMeasurement.sensorDatasheetId, unitMeasurement.sensorTypeId, unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, numericalScaleType.numericalScaleTypeId);
+                var unitMeasurementScales = sensorDatasheetUnitMeasurementScaleFinder.getUnitMeasurementScales($scope.sensorUnitMeasurementScale.sensorDatasheetId, $scope.sensorUnitMeasurementScale.sensorTypeId, unitMeasurement.unitMeasurementId, unitMeasurement.unitMeasurementTypeId, numericalScaleType.numericalScaleTypeId);
                 $scope.unitMeasurementScaleView.availables = unitMeasurementScales;
                 if ($scope.unitMeasurementScaleView.availables.length == 1) {
                     selectedUnitMeasurementScale = $scope.unitMeasurementScaleView.availables[0];
