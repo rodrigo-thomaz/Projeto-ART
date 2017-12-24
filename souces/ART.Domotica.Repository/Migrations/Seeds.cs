@@ -564,7 +564,7 @@
 
             #endregion
 
-            #region SensorInDevice
+            #region Sensors Temp DSFamily In ESPDevice 1
 
             var sensorInDevice_2_1 = new SensorInDevice
             {
@@ -773,6 +773,24 @@
                     };
                 }
             }
+
+            context.SaveChanges();
+
+            #endregion
+
+            #region Sensors Ultrassonic In ESPDevice 2
+
+            var sensorUltrassonicInDevice2 = new SensorInDevice
+            {
+                SensorId = sensor_Ultrassomic.Id,
+                SensorDatasheetId = sensor_Ultrassomic.SensorDatasheetId,
+                SensorTypeId = sensor_Ultrassomic.SensorTypeId,
+                DeviceSensorsId = espDevice2.DeviceSensors.Id,
+                DeviceDatasheetId = espDevice2.DeviceSensors.DeviceDatasheetId,
+                Ordination = 0,
+            };
+
+            context.SensorInDevice.AddOrUpdate(sensorUltrassonicInDevice2);         
 
             context.SaveChanges();
 
