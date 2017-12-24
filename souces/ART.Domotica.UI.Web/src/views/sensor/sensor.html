@@ -21,3 +21,19 @@
         </div>
     </div>
 </form>
+
+<div class="line line-dashed b-b line-lg pull-in"></div>
+
+<div data-ng-include=" 'views/sensor/sensorUnitMeasurementScale.html' "></div>
+
+<div ng-show="sensorInDeviceItem.sensor().sensorTempDSFamily">
+
+    <div class="line line-dashed b-b line-lg pull-in"></div>
+
+    <div data-ng-include=" 'views/sensor/sensorTempDSFamily.html' "></div>
+    
+</div>
+
+<div class="line line-dashed b-b line-lg pull-in"></div>
+
+<div data-ng-include=" 'views/sensor/sensorTrigger.html' "></div>

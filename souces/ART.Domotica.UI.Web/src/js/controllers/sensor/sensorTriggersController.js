@@ -14,7 +14,7 @@ app.controller('sensorTriggersController', ['$scope', '$rootScope', '$timeout', 
         $scope.init = function (sensor) {
 
             _sensor = sensor;
-            
+
             if (angular.isArray(sensor.sensorTriggers)) {
                 $scope.sensorTriggers = sensor.sensorTriggers;
             }
