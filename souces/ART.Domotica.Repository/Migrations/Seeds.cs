@@ -105,7 +105,7 @@
 
             #endregion
 
-            #region Sensors
+            #region Sensors Temp DSFamily
 
             var sensor_1_Address = "28fff62293165b0";
             var sensor_2_1_Address = "40:255:231:109:162:22:3:211";
@@ -615,6 +615,78 @@
             context.SensorInDevice.AddOrUpdate(sensorInDevice_3_2);
 
             context.SaveChanges();
+
+            #endregion
+
+            #region Sensors Ultrassonic
+
+            var sensor_Ultrassomic = context.Sensor
+                .Include(x => x.SensorUnitMeasurementScale)
+                .Include(x => x.SensorTriggers)
+                .Where(x => x.SensorDatasheetId == SensorDatasheetEnum.Ultrasonic_HCSR04)
+                .Where(x => x.SensorTypeId == SensorTypeEnum.ProximityDistance)
+                .SingleOrDefault();
+
+            if (sensor_Ultrassomic == null)
+            {
+                sensor_Ultrassomic = new Sensor
+                {
+                    SensorDatasheetId = SensorDatasheetEnum.Ultrasonic_HCSR04,
+                    SensorTypeId = SensorTypeEnum.ProximityDistance,
+                    Label = "Sensor 1",
+                    SensorTriggers = new List<SensorTrigger>
+                    {
+                        new SensorTrigger
+                        {
+                            TriggerOn = true,
+                            Max = 26,
+                            Min = 22,
+                            BuzzerOn = true,
+                        },
+                    },
+                    SensorUnitMeasurementScale = new SensorUnitMeasurementScale
+                    {
+                        CountryId = 1,
+                        UnitMeasurementId = UnitMeasurementEnum.Meter,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.Centi,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Short,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
+                    },
+                    CreateDate = DateTime.Now,
+                };
+                context.Sensor.Add(sensor_Ultrassomic);
+            }
+            else
+            {
+                if (!sensor_Ultrassomic.SensorTriggers.Any())
+                {
+                    sensor_Ultrassomic.SensorTriggers = new List<SensorTrigger>();
+
+                    sensor_Ultrassomic.SensorTriggers.Add(new SensorTrigger
+                    {
+                        TriggerOn = true,
+                        Max = 26,
+                        Min = 22,
+                        BuzzerOn = true,
+                    });
+                }
+
+                if (sensor_Ultrassomic.SensorUnitMeasurementScale == null)
+                {
+                    sensor_Ultrassomic.SensorUnitMeasurementScale = new SensorUnitMeasurementScale
+                    {
+                        CountryId = 1,
+                        UnitMeasurementId = UnitMeasurementEnum.Meter,
+                        UnitMeasurementTypeId = UnitMeasurementTypeEnum.Length,
+                        NumericalScalePrefixId = NumericalScalePrefixEnum.Centi,
+                        NumericalScaleTypeId = NumericalScaleTypeEnum.Short,
+                        ChartLimiterMin = 20,
+                        ChartLimiterMax = 30,
+                    };
+                }
+            }
 
             #endregion
 
