@@ -31,14 +31,19 @@ namespace ART.Domotica.Repository.Configurations
                 .HasForeignKey(x => x.DeviceDatasheetId)
                 .WillCascadeOnDelete(false);
 
+            //Version
+            Property(x => x.Version)
+                .HasColumnOrder(2)
+                .IsRequired();
+
             //Binary
             Property(x => x.Binary)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired();
 
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .IsRequired();
         }
 

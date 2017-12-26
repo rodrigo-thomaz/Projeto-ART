@@ -30,6 +30,8 @@ namespace ART.Domotica.Repository.Entities
 
         public byte[] Binary { get; set; }
 
+        public string Version { get; set; }
+
         #endregion Properties
     }
 }
