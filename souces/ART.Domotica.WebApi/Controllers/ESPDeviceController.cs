@@ -100,24 +100,21 @@
 
             var data = await _espDeviceProducer.CheckForUpdates(contract);
 
-            HttpResponseMessage result = null;
+            if(data.Buffer == null)
+            {
+                return ResponseMessage(new HttpResponseMessage(HttpStatusCode.NotModified));
+            }
 
-            if(data == null)
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                result = new HttpResponseMessage(HttpStatusCode.NotModified);
-            }
-            else
+                Content = new ByteArrayContent(data.Buffer)
+            };
+
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                result = new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ByteArrayContent(data.Buffer)
-                };
-                result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = data.FileName
-                };
-            }
-            
+                FileName = data.FileName
+            };
+
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
             var response = ResponseMessage(result);
