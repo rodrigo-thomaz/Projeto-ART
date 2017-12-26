@@ -12,7 +12,7 @@ void DisplayAccessManager::updatePin(String payloadContract)
 {	
 	Serial.println("******************** Update PIN ********************");
 
-	StaticJsonBuffer<200> jsonBuffer;
+	StaticJsonBuffer<300> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(payloadContract);
 
@@ -21,7 +21,8 @@ void DisplayAccessManager::updatePin(String payloadContract)
 		return;
 	}
 
-	String hardwareId = root["hardwareId"];
+	String deviceId = root["deviceId"];
+	String deviceDatasheetId = root["deviceDatasheetId"];
 	String flashChipId = root["flashChipId"];
 	
 	String pin = root["pin"];	
