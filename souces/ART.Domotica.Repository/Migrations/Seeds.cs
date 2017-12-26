@@ -873,6 +873,8 @@
                 };
             }
 
+            context.SaveChanges();
+
             #endregion
 
             ExecuteSettings();
