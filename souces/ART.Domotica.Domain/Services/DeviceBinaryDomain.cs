@@ -6,6 +6,8 @@
     using ART.Domotica.Repository;
     using Autofac;
     using ART.Domotica.Repository.Repositories;
+    using ART.Domotica.Repository.Entities;
+    using System.Threading.Tasks;
 
     public class DeviceBinaryDomain : DomainBase, IDeviceBinaryDomain
     {
@@ -26,6 +28,9 @@
 
         #endregion Constructors
 
-        
+        public async Task<DeviceBinary> CheckForUpdates()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

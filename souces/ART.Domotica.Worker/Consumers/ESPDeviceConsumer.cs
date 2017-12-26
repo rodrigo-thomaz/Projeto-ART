@@ -415,8 +415,8 @@
             _logger.DebugEnter();
 
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceCheckForUpdatesRPCRequestContract>(e.Body);
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.GetAll();
+            var domain = _componentContext.Resolve<IDeviceBinaryDomain>();
+            var data = await domain.CheckForUpdates();
 
             var responseContract = new ESPDeviceCheckForUpdatesRPCResponseContract
             {
