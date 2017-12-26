@@ -1,10 +1,10 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
+    using System.Collections.Generic;
 
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
-    using System.Collections.Generic;
 
     public class DeviceDatasheetBinary : IEntity
     {
@@ -16,6 +16,11 @@
         }
 
         public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public ICollection<DeviceBinary> DeviceBinaries
         {
             get; set;
         }
@@ -36,11 +41,6 @@
         }
 
         public string Version
-        {
-            get; set;
-        }
-
-        public ICollection<DeviceBinary> DeviceBinaries
         {
             get; set;
         }

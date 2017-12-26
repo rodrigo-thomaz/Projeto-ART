@@ -15,6 +15,11 @@
             get; set;
         }
 
+        public DeviceBinary DeviceBinary
+        {
+            get; set;
+        }
+
         public DeviceDatasheet DeviceDatasheet
         {
             get; set;
@@ -41,11 +46,6 @@
         }
 
         public ICollection<DeviceInApplication> DevicesInApplication
-        {
-            get; set;
-        }
-
-        public DeviceBinary DeviceBinary
         {
             get; set;
         }

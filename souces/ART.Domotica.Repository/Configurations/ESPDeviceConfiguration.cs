@@ -36,7 +36,7 @@
                 .HasColumnOrder(2)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new []{
+                    new IndexAnnotation(new[]{
                         new IndexAttribute { IsUnique = false }, // ChipId não é único pois repete por lote http://bbs.espressif.com/viewtopic.php?t=1303
                     }));
 
@@ -49,8 +49,8 @@
                         new IndexAttribute { IsUnique = true }, // FlashId é único e imutável via código
                     }));
 
-            //MacAddress
-            Property(x => x.MacAddress)
+            //StationMacAddress
+            Property(x => x.StationMacAddress)
                 .HasColumnOrder(4)
                 .HasMaxLength(17)
                 .IsFixedLength()
@@ -60,9 +60,31 @@
                         new IndexAttribute { IsUnique = true }, // MacAddress é único mas mutável via código
                     }));
 
+            //SoftAPMacAddress
+            Property(x => x.SoftAPMacAddress)
+                .HasColumnOrder(5)
+                .HasMaxLength(17)
+                .IsFixedLength()
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new[]{
+                        new IndexAttribute { IsUnique = true }, // MacAddress é único mas mutável via código
+                    }));
+
+            //SDKVersion
+            Property(x => x.SDKVersion)
+                .HasColumnOrder(6)
+                .HasMaxLength(50)
+                .IsRequired();
+
+            //ChipSize
+            Property(x => x.ChipSize)
+                .HasColumnOrder(7)
+                .IsRequired();
+
             //Pin
             Property(x => x.Pin)
-                .HasColumnOrder(5)
+                .HasColumnOrder(8)
                 .HasMaxLength(4)
                 .IsFixedLength()
                 .IsRequired()

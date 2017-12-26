@@ -30,11 +30,6 @@
             get; set;
         }
 
-        public DbSet<DeviceBinary> DeviceBinary
-        {
-            get; set;
-        }
-
         public DbSet<Application> Application
         {
             get; set;
@@ -56,6 +51,11 @@
         }
 
         public DbSet<Country> Country
+        {
+            get; set;
+        }
+
+        public DbSet<DeviceBinary> DeviceBinary
         {
             get; set;
         }

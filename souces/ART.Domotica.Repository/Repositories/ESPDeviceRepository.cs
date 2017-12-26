@@ -87,7 +87,7 @@
                .Include(x => x.DeviceNTP.TimeZone)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)
-               .Where(x => x.MacAddress == macAddress)               
+               .Where(x => x.StationMacAddress == macAddress)               
                .SingleOrDefaultAsync();
 
             return data;

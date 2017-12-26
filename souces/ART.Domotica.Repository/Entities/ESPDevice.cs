@@ -9,17 +9,32 @@
             get; set;
         }
 
+        public long ChipSize
+        {
+            get; set;
+        }
+
         public int FlashChipId
         {
             get; set;
         }
 
-        public string MacAddress
+        public string Pin
         {
             get; set;
         }
 
-        public string Pin
+        public string SDKVersion
+        {
+            get; set;
+        }
+
+        public string SoftAPMacAddress
+        {
+            get; set;
+        }
+
+        public string StationMacAddress
         {
             get; set;
         }

@@ -36,12 +36,12 @@
             //DeviceDatasheetId
             Property(x => x.DeviceDatasheetId)
                 .HasColumnOrder(2)
-                .IsRequired();            
+                .IsRequired();
 
             //UpdateDate
             Property(x => x.UpdateDate)
                 .HasColumnOrder(3)
-                .IsRequired();           
+                .IsRequired();
 
             //DeviceDatasheetBinary
             HasRequired(x => x.DeviceDatasheetBinary)
@@ -52,8 +52,6 @@
                     x.DeviceDatasheetId,
                 })
                 .WillCascadeOnDelete(false);
-
-           
         }
 
         #endregion Constructors

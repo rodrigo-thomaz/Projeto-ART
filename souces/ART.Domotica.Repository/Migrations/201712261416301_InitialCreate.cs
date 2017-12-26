@@ -1,5 +1,6 @@
 namespace ART.Domotica.Repository.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
 
     public partial class InitialCreate : DbMigration
@@ -41,6 +42,9 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.DeviceNTP", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceMQ", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceBase", "DeviceDatasheetId", "dbo.DeviceDatasheet");
+            DropForeignKey("dbo.DeviceBinary", new[] { "DeviceDatasheetBinaryId", "DeviceDatasheetId" }, "dbo.DeviceDatasheetBinary");
+            DropForeignKey("dbo.DeviceDatasheetBinary", "DeviceDatasheetId", "dbo.DeviceDatasheet");
+            DropForeignKey("dbo.DeviceBinary", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceInApplication", "CreateByApplicationUserId", "dbo.ApplicationUser");
             DropForeignKey("dbo.DeviceInApplication", "ApplicationId", "dbo.Application");
             DropForeignKey("dbo.ApplicationUser", "ApplicationId", "dbo.Application");
@@ -49,7 +53,8 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.RaspberryDevice", new[] { "LanMacAddress" });
             DropIndex("dbo.RaspberryDevice", new[] { "Id", "DeviceDatasheetId" });
             DropIndex("dbo.ESPDevice", new[] { "Pin" });
-            DropIndex("dbo.ESPDevice", new[] { "MacAddress" });
+            DropIndex("dbo.ESPDevice", new[] { "SoftAPMacAddress" });
+            DropIndex("dbo.ESPDevice", new[] { "StationMacAddress" });
             DropIndex("dbo.ESPDevice", new[] { "FlashChipId" });
             DropIndex("dbo.ESPDevice", new[] { "ChipId" });
             DropIndex("dbo.ESPDevice", new[] { "Id", "DeviceDatasheetId" });
@@ -99,6 +104,9 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.DeviceMQ", new[] { "User" });
             DropIndex("dbo.DeviceMQ", new[] { "Id", "DeviceDatasheetId" });
             DropIndex("dbo.DeviceDatasheet", new[] { "Name" });
+            DropIndex("dbo.DeviceDatasheetBinary", new[] { "DeviceDatasheetId" });
+            DropIndex("dbo.DeviceBinary", new[] { "DeviceDatasheetBinaryId", "DeviceDatasheetId" });
+            DropIndex("dbo.DeviceBinary", new[] { "Id", "DeviceDatasheetId" });
             DropIndex("dbo.DeviceBase", new[] { "DeviceDatasheetId" });
             DropIndex("dbo.DeviceInApplication", new[] { "CreateByApplicationUserId" });
             DropIndex("dbo.DeviceInApplication", "IX_Unique_DeviceId");
@@ -134,6 +142,8 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.DeviceNTP");
             DropTable("dbo.DeviceMQ");
             DropTable("dbo.DeviceDatasheet");
+            DropTable("dbo.DeviceDatasheetBinary");
+            DropTable("dbo.DeviceBinary");
             DropTable("dbo.DeviceBase");
             DropTable("dbo.DeviceInApplication");
             DropTable("dbo.ApplicationUser");
@@ -214,6 +224,35 @@ namespace ART.Domotica.Repository.Migrations
                         Id = c.Guid(nullable: false, identity: true),
                         DeviceDatasheetId = c.Short(nullable: false),
                         Label = c.String(nullable: false, maxLength: 50),
+                        CreateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
+                .ForeignKey("dbo.DeviceDatasheet", t => t.DeviceDatasheetId)
+                .Index(t => t.DeviceDatasheetId);
+
+            CreateTable(
+                "dbo.DeviceBinary",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        DeviceDatasheetBinaryId = c.Guid(nullable: false),
+                        DeviceDatasheetId = c.Short(nullable: false),
+                        UpdateDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
+                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
+                .ForeignKey("dbo.DeviceDatasheetBinary", t => new { t.DeviceDatasheetBinaryId, t.DeviceDatasheetId })
+                .Index(t => new { t.Id, t.DeviceDatasheetId })
+                .Index(t => new { t.DeviceDatasheetBinaryId, t.DeviceDatasheetId });
+
+            CreateTable(
+                "dbo.DeviceDatasheetBinary",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false, identity: true),
+                        DeviceDatasheetId = c.Short(nullable: false),
+                        Version = c.String(nullable: false),
+                        Binary = c.Binary(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
@@ -358,6 +397,7 @@ namespace ART.Domotica.Repository.Migrations
                         UnitMeasurementTypeId = c.Byte(nullable: false),
                         NumericalScalePrefixId = c.Int(nullable: false),
                         NumericalScaleTypeId = c.Byte(nullable: false),
+                        Name = c.String(nullable: false),
                     })
                 .PrimaryKey(t => new { t.UnitMeasurementId, t.UnitMeasurementTypeId, t.NumericalScalePrefixId, t.NumericalScaleTypeId })
                 .ForeignKey("SI.NumericalScale", t => new { t.NumericalScalePrefixId, t.NumericalScaleTypeId })
@@ -594,7 +634,10 @@ namespace ART.Domotica.Repository.Migrations
                         DeviceDatasheetId = c.Short(nullable: false),
                         ChipId = c.Int(nullable: false),
                         FlashChipId = c.Int(nullable: false),
-                        MacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                        StationMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                        SoftAPMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
+                        SDKVersion = c.String(nullable: false, maxLength: 50),
+                        ChipSize = c.Long(nullable: false),
                         Pin = c.String(nullable: false, maxLength: 4, fixedLength: true),
                     })
                 .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
@@ -602,7 +645,8 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => new { t.Id, t.DeviceDatasheetId })
                 .Index(t => t.ChipId)
                 .Index(t => t.FlashChipId, unique: true)
-                .Index(t => t.MacAddress, unique: true)
+                .Index(t => t.StationMacAddress, unique: true)
+                .Index(t => t.SoftAPMacAddress, unique: true)
                 .Index(t => t.Pin, unique: true);
 
             CreateTable(
