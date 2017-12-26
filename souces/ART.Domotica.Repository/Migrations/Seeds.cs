@@ -482,7 +482,7 @@
             #region ESPDevice1
 
             var espDevice1StationMacAddress = "A0:20:A6:17:83:25";
-            var espDevice1SoftAPMacAddress = "";
+            var espDevice1SoftAPMacAddress = "A2:20:A6:17:83:25";
             var espDevice1ChipId = 1540901;
             var espDevice1FlashChipId = 1458400;
             var espDevice1ChipSize = 4194304;
