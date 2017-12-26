@@ -7,6 +7,9 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Domain;
     using ART.Domotica.Enums;
+    using ART.Domotica.Repository.Repositories;
+    using ART.Domotica.Repository;
+    using Autofac;
 
     public class DeviceSensorsDomain : DomainBase, IDeviceSensorsDomain
     {
@@ -18,9 +21,11 @@
 
         #region Constructors
 
-        public DeviceSensorsDomain(IDeviceSensorsRepository deviceSensorsRepository)
+        public DeviceSensorsDomain(IComponentContext componentContext)
         {
-            _deviceSensorsRepository = deviceSensorsRepository;
+            var context = componentContext.Resolve<ARTDbContext>();
+
+            _deviceSensorsRepository = new DeviceSensorsRepository(context);
         }
 
         #endregion Constructors
