@@ -39,11 +39,6 @@
             get; set;
         }
 
-        public string Version
-        {
-            get; set;
-        }
-
         #endregion Properties
     }
 }

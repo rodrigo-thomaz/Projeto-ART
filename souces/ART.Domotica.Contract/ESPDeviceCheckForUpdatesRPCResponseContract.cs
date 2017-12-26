@@ -9,11 +9,6 @@
             get; set;
         }
 
-        public string FileName
-        {
-            get; set;
-        }
-
         #endregion Properties
     }
 }

@@ -420,7 +420,6 @@
             var responseContract = new ESPDeviceCheckForUpdatesRPCResponseContract
             {
                 Buffer = binaryBuffer,
-                FileName = "Termometro.ino.nodemcu.bin",
             };
 
             //Mapper.Map(data, responseContract);

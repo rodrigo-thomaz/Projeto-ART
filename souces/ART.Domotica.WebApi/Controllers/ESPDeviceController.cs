@@ -96,7 +96,6 @@
             contract.ChipSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-CHIP-SIZE");
             contract.SDKVersion = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-SDK-VERSION");
             contract.Mode = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-MODE");
-            contract.Version = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-VERSION");
 
             var data = await _espDeviceProducer.CheckForUpdates(contract);
 
@@ -110,10 +109,7 @@
                 Content = new ByteArrayContent(data.Buffer)
             };
 
-            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-            {
-                FileName = data.FileName
-            };
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
 
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 
