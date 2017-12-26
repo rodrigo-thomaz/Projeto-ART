@@ -421,9 +421,7 @@
             {
                 Buffer = binaryBuffer,
             };
-
-            //Mapper.Map(data, responseContract);
-
+            
             //Enviando para o Producer
 
             var buffer = SerializationHelpers.SerializeToJsonBufferAsync(responseContract);
