@@ -19,6 +19,7 @@
     using RabbitMQ.Client.Events;
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -32,6 +33,7 @@
         private readonly EventingBasicConsumer _insertInApplicationConsumer;
         private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
+        private readonly EventingBasicConsumer _checkForUpdatesRPCConsumer;
         private readonly EventingBasicConsumer _setLabelConsumer;
 
         private readonly ISettingManager _settingsManager;
@@ -54,6 +56,7 @@
             _insertInApplicationConsumer = new EventingBasicConsumer(_model);
             _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
+            _checkForUpdatesRPCConsumer = new EventingBasicConsumer(_model);
             _setLabelConsumer = new EventingBasicConsumer(_model);
 
             _componentContext = componentContext;
@@ -128,12 +131,20 @@
                , autoDelete: false
                , arguments: null);
 
+            _model.QueueDeclare(
+                 queue: ESPDeviceConstants.CheckForUpdatesRPCQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: false
+               , arguments: null);
+
             _getAllConsumer.Received += GetAllReceived;
             _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;
             _getByPinConsumer.Received += GetByPinReceived;
             _insertInApplicationConsumer.Received += InsertInApplicationReceived;
             _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
+            _checkForUpdatesRPCConsumer.Received += CheckForUpdatesRPCReceived;
             _setLabelConsumer.Received += SetLabelReceived;
 
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
@@ -142,6 +153,7 @@
             _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
+            _model.BasicConsume(ESPDeviceConstants.CheckForUpdatesRPCQueueName, false, _checkForUpdatesRPCConsumer);
             _model.BasicConsume(ESPDeviceConstants.SetLabelQueueName, false, _setLabelConsumer);
         }
 
@@ -369,6 +381,50 @@
             };
 
             Mapper.Map(data, responseContract);
+
+            //Enviando para o Producer
+
+            var buffer = SerializationHelpers.SerializeToJsonBufferAsync(responseContract);
+
+            _model.BasicQos(0, 1, false);
+
+            var props = e.BasicProperties;
+
+            var replyProps = _model.CreateBasicProperties();
+
+            replyProps.CorrelationId = props.CorrelationId;
+
+            _model.BasicPublish(
+                exchange: "",
+                routingKey: props.ReplyTo,
+                basicProperties: replyProps,
+                body: buffer);
+
+            _model.BasicAck(e.DeliveryTag, false);
+
+            _logger.DebugLeave();
+        }
+
+        public void CheckForUpdatesRPCReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(CheckForUpdatesRPCReceivedAsync(sender, e));
+        }
+
+        public async Task CheckForUpdatesRPCReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceCheckForUpdatesRPCRequestContract>(e.Body);
+            var domain = _componentContext.Resolve<IESPDeviceDomain>();
+            var data = await domain.GetAll();
+
+            var responseContract = new ESPDeviceCheckForUpdatesRPCResponseContract
+            {
+                Buffer = File.ReadAllBytes(@"C:\Projeto-ART\devices\Termometro\Termometro\Termometro.ino.nodemcu.bin"),
+                FileName = "Termometro.ino.nodemcu.bin",
+            };
+
+            //Mapper.Map(data, responseContract);
 
             //Enviando para o Producer
 

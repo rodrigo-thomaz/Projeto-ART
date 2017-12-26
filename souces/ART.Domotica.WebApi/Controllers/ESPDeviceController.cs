@@ -87,25 +87,28 @@
         [Route("checkForUpdates")]
         [HttpGet]
         [AllowAnonymous]
-        public IHttpActionResult CheckForUpdates()
+        [ResponseType(typeof(ESPDeviceCheckForUpdatesRPCResponseContract))]
+        public async Task<IHttpActionResult> CheckForUpdates()
         {
-            var esp8266_STA_MAC = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-STA-MAC");
-            var esp8266_AP_MAC = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-AP-MAC");
-            var esp8266_FREE_SPACE = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-FREE-SPACE");
-            var esp8266_SKETCH_SIZE = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-SKETCH-SIZE");
-            var esp8266_CHIP_SIZE = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-CHIP-SIZE");
-            var esp8266_SDK_VERSION = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-SDK-VERSION");
-            var esp8266_MODE = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-MODE");
+            var contract = new ESPDeviceCheckForUpdatesRPCRequestContract();
 
-            var buffer = File.ReadAllBytes(@"C:\Projeto-ART\devices\Termometro\Termometro\Termometro.ino.nodemcu.bin");
+            contract.STAMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-STA-MAC");
+            contract.APMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-AP-MAC");
+            contract.FreeSpace = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-FREE-SPACE");
+            contract.SketchSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-SKETCH-SIZE");
+            contract.ChipSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-CHIP-SIZE");
+            contract.SDKVersion = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-SDK-VERSION");
+            contract.Mode = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-MODE");
+            
+            var data = await _espDeviceProducer.CheckForUpdates(contract);
 
             var result = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new ByteArrayContent(buffer)
+                Content = new ByteArrayContent(data.Buffer)
             };
             result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
             {
-                FileName = "Termometro.ino.nodemcu.bin"
+                FileName = data.FileName
             };
             result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
 

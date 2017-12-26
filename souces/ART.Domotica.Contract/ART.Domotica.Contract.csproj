@@ -47,6 +47,8 @@
     <Compile Include="DeviceNTPSetTimeZoneRequestContract.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondRequestContract.cs" />
     <Compile Include="DeviceSensorsSetPublishIntervalInSecondsRequestContract.cs" />
+    <Compile Include="ESPDeviceCheckForUpdatesRPCResponseContract.cs" />
+    <Compile Include="ESPDeviceCheckForUpdatesRPCRequestContract.cs" />
     <Compile Include="SensorInDeviceSetOrdinationRequestContract.cs" />
     <Compile Include="SensorSetLabelRequestContract.cs" />
     <Compile Include="DeviceSetLabelRequestContract.cs" />

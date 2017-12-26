@@ -101,6 +101,30 @@ namespace ART.Domotica.Producer.Services
             });
         }
 
+        public async Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdates(ESPDeviceCheckForUpdatesRPCRequestContract message)
+        {
+            return await Task.Run(() =>
+            {
+                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.CheckForUpdatesRPCQueueName);
+                rpcClient.TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds;
+                var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+                rpcClient.TimedOut += (sender, e) =>
+                {
+                    throw new TimeoutException("Worker time out");
+                };
+                rpcClient.Disconnected += (sender, e) =>
+                {
+                    rpcClient.Close();
+                    throw new Exception("Worker disconected");
+                };
+
+                var bufferResult = rpcClient.Call(body);
+                rpcClient.Close();
+                var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceCheckForUpdatesRPCResponseContract>(bufferResult);
+                return result;
+            });
+        }
+
         public async Task SetLabel(AuthenticatedMessageContract<DeviceSetLabelRequestContract> message)
         {
             await Task.Run(() =>
@@ -150,7 +174,7 @@ namespace ART.Domotica.Producer.Services
              , exclusive: false
              , autoDelete: true
              , arguments: null);
-        }
+        }        
 
         #endregion
     }

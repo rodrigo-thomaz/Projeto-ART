@@ -23,6 +23,8 @@
 
         Task SetLabel(AuthenticatedMessageContract<DeviceSetLabelRequestContract> message);
 
+        Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdates(ESPDeviceCheckForUpdatesRPCRequestContract message);
+
         #endregion Methods
     }
 }
