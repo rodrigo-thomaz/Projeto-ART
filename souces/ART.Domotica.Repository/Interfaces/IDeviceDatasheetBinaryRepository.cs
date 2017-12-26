@@ -13,6 +13,8 @@
 
         Task<DeviceDatasheetBinary> GetByKey(Guid deviceDatasheetBinaryId, DeviceDatasheetEnum deviceDatasheetId);
 
+        Task<DeviceDatasheetBinary> GetLastVersioByDatasheetKey(DeviceDatasheetEnum deviceDatasheetId);
+
         #endregion Methods
     }
 }

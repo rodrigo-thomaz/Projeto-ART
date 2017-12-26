@@ -7,13 +7,11 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IDeviceBinaryRepository : IRepository<ARTDbContext, DeviceBinary>
+    public interface IDeviceDatasheetBinaryBufferRepository : IRepository<ARTDbContext, DeviceDatasheetBinaryBuffer>
     {
         #region Methods
 
-        Task<DeviceBinary> GetByDeviceMacAdresses(string stationMacAddress, string softAPMacAddress);
-
-        Task<DeviceBinary> GetByKey(Guid deviceBinaryId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<DeviceDatasheetBinaryBuffer> GetByKey(Guid deviceDatasheetBinaryBufferId, DeviceDatasheetEnum deviceDatasheetId);
 
         #endregion Methods
     }

@@ -4,11 +4,6 @@
     {
         #region Properties
 
-        public string APMacAddress
-        {
-            get; set;
-        }
-
         public long ChipSize
         {
             get; set;
@@ -34,7 +29,12 @@
             get; set;
         }
 
-        public string STAMacAddress
+        public string SoftAPMacAddress
+        {
+            get; set;
+        }
+
+        public string StationMacAddress
         {
             get; set;
         }

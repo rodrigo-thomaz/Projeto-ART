@@ -2,13 +2,11 @@
 {
     using System.Threading.Tasks;
 
-    using ART.Domotica.Repository.Entities;
-
     public interface IDeviceBinaryDomain
     {
         #region Methods
 
-        Task<DeviceBinary> CheckForUpdates();
+        Task<byte[]> CheckForUpdates(string stationMacAddress, string softAPMacAddress);
 
         #endregion Methods
     }

@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class DeviceDatasheetBinaryConfiguration : EntityTypeConfiguration<DeviceDatasheetBinary>
+    public class DeviceDatasheetBinaryBufferConfiguration : EntityTypeConfiguration<DeviceDatasheetBinaryBuffer>
     {
         #region Constructors
 
-        public DeviceDatasheetBinaryConfiguration()
+        public DeviceDatasheetBinaryBufferConfiguration()
         {
             //Primary Keys
             HasKey(x => new
@@ -21,7 +21,7 @@
             //Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //DeviceDatasheetId
@@ -30,20 +30,13 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //DeviceDatasheet
-            HasRequired(x => x.DeviceDatasheet)
-                .WithMany(x => x.DeviceDatasheetBinaries)
-                .HasForeignKey(x => x.DeviceDatasheetId)
-                .WillCascadeOnDelete(false);
+            //DeviceBase
+            HasRequired(x => x.DeviceDatasheetBinary)
+               .WithRequiredDependent(x => x.DeviceDatasheetBinaryBuffer);
 
-            //Version
-            Property(x => x.Version)
+            //Binary
+            Property(x => x.Buffer)
                 .HasColumnOrder(2)
-                .IsRequired();
-
-            //CreateDate
-            Property(x => x.CreateDate)
-                .HasColumnOrder(4)
                 .IsRequired();
         }
 

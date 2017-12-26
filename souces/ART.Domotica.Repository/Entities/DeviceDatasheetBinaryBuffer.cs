@@ -1,31 +1,20 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
-    using System.Collections.Generic;
 
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public class DeviceDatasheetBinary : IEntity
+    public class DeviceDatasheetBinaryBuffer : IEntity
     {
         #region Properties
 
-        public DateTime CreateDate
+        public byte[] Buffer
         {
             get; set;
         }
 
-        public ICollection<DeviceBinary> DeviceBinaries
-        {
-            get; set;
-        }
-
-        public DeviceDatasheet DeviceDatasheet
-        {
-            get; set;
-        }
-
-        public DeviceDatasheetBinaryBuffer DeviceDatasheetBinaryBuffer
+        public DeviceDatasheetBinary DeviceDatasheetBinary
         {
             get; set;
         }
@@ -36,11 +25,6 @@
         }
 
         public Guid Id
-        {
-            get; set;
-        }
-
-        public string Version
         {
             get; set;
         }

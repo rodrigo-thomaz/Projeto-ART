@@ -19,7 +19,6 @@
     using RabbitMQ.Client.Events;
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -416,11 +415,11 @@
 
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceCheckForUpdatesRPCRequestContract>(e.Body);
             var domain = _componentContext.Resolve<IDeviceBinaryDomain>();
-            var data = await domain.CheckForUpdates();
+            var binaryBuffer = await domain.CheckForUpdates(requestContract.StationMacAddress, requestContract.SoftAPMacAddress);
 
             var responseContract = new ESPDeviceCheckForUpdatesRPCResponseContract
             {
-                Buffer = File.ReadAllBytes(@"C:\Projeto-ART\devices\Termometro\Termometro\Termometro.ino.nodemcu.bin"),
+                Buffer = binaryBuffer,
                 FileName = "Termometro.ino.nodemcu.bin",
             };
 

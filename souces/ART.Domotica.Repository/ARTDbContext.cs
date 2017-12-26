@@ -70,6 +70,11 @@
             get; set;
         }
 
+        public DbSet<DeviceDatasheetBinaryBuffer> DeviceDatasheetBinaryBuffer
+        {
+            get; set;
+        }
+
         public DbSet<DeviceInApplication> DeviceInApplication
         {
             get; set;

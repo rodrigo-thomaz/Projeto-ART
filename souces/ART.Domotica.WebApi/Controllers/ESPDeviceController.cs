@@ -89,8 +89,8 @@
         {
             var contract = new ESPDeviceCheckForUpdatesRPCRequestContract();
 
-            contract.STAMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-STA-MAC");
-            contract.APMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-AP-MAC");
+            contract.StationMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-STA-MAC");
+            contract.SoftAPMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-AP-MAC");
             contract.FreeSpace = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-FREE-SPACE");
             contract.SketchSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-SKETCH-SIZE");
             contract.ChipSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-CHIP-SIZE");
