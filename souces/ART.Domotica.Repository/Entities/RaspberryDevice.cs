@@ -1,7 +1,5 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
-    using ART.Domotica.Enums;
-
     public class RaspberryDevice : DeviceBase
     {
         #region Properties        

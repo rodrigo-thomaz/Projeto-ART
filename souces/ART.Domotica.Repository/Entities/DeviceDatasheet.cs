@@ -24,6 +24,8 @@
             get; set;
         }
 
+        public ICollection<DeviceBinary> DeviceBinaries { get; set; }
+
         #endregion Properties
     }
 }

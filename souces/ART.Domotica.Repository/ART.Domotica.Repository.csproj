@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="ARTDbContext.cs" />
     <Compile Include="Configurations\ApplicationMQConfiguration.cs" />
+    <Compile Include="Configurations\DeviceBinaryConfiguration.cs" />
     <Compile Include="Configurations\DeviceDatasheetConfiguration.cs" />
     <Compile Include="Configurations\Locale\ContinentConfiguration.cs" />
     <Compile Include="Configurations\DeviceNTPConfiguration.cs" />
@@ -95,6 +96,7 @@
     <Compile Include="Configurations\SI\UnitMeasurementTypeConfiguration.cs" />
     <Compile Include="Configurations\Globalization\TimeZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
+    <Compile Include="Entities\DeviceBinary.cs" />
     <Compile Include="Entities\DeviceDatasheet.cs" />
     <Compile Include="Entities\Locale\Continent.cs" />
     <Compile Include="Entities\Locale\Country.cs" />
@@ -165,6 +167,10 @@
     <Compile Include="Migrations\201712241459549_InitialCreate1.cs" />
     <Compile Include="Migrations\201712241459549_InitialCreate1.Designer.cs">
       <DependentUpon>201712241459549_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712260952596_InitialCreate2.cs" />
+    <Compile Include="Migrations\201712260952596_InitialCreate2.Designer.cs">
+      <DependentUpon>201712260952596_InitialCreate2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712241459549_InitialCreate1.resx">
       <DependentUpon>201712241459549_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712260952596_InitialCreate2.resx">
+      <DependentUpon>201712260952596_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
