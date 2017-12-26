@@ -29,7 +29,7 @@
         {
             return await _context.DeviceDatasheetBinary
                 .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
-                .OrderByDescending(x => x.CreateDate)                
+                .OrderBy(x => x.CreateDate)                
                 .FirstOrDefaultAsync();
         }
     }
