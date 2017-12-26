@@ -5,6 +5,7 @@
 #include "NTPManager.h"
 #include "DisplayManager.h"
 #include "WiFiManager.h"
+#include "UpdateManager.h"
 #include "BuzzerManager.h"
 #include "DisplayAccessManager.h"
 #include "DisplayWiFiManager.h"
@@ -60,6 +61,7 @@ uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
 WiFiManager wifiManager(D5, debugManager);
+UpdateManager updateManager(debugManager, wifiManager, HOST, PORT, URI);
 ConfigurationManager configurationManager(debugManager, wifiManager, HOST, PORT, URI);
 NTPManager ntpManager(debugManager, configurationManager);
 MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
@@ -269,6 +271,8 @@ void loop() {
   wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
   configurationManager.autoInitialize(); 
   mqqtManager.autoConnect(); //se não há conexão com o Broker, a conexão é refeita
+
+  updateManager.loop();
 
   DeviceInApplication* deviceInApplication = configurationManager.getDeviceInApplication();
   
