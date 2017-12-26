@@ -18,25 +18,42 @@
                 x.DeviceDatasheetId,
             });
 
+            //DeviceBase
+            HasRequired(x => x.DeviceBase)
+               .WithRequiredDependent(x => x.DeviceBinary);
+
             // Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //DeviceDatasheetId
-            Property(x => x.DeviceDatasheetId)
+            //DeviceDatasheetBinaryId
+            Property(x => x.DeviceDatasheetBinaryId)
                 .HasColumnOrder(1)
                 .IsRequired();
 
-            //DeviceBase
-            HasRequired(x => x.DeviceBase)
-               .WithRequiredDependent(x => x.DeviceBinary);
+            //DeviceDatasheetId
+            Property(x => x.DeviceDatasheetId)
+                .HasColumnOrder(2)
+                .IsRequired();            
 
             //UpdateDate
             Property(x => x.UpdateDate)
-                .HasColumnOrder(2)
-                .IsRequired();
+                .HasColumnOrder(3)
+                .IsRequired();           
+
+            //DeviceDatasheetBinary
+            HasRequired(x => x.DeviceDatasheetBinary)
+                .WithMany(x => x.DeviceBinaries)
+                .HasForeignKey(x => new
+                {
+                    x.DeviceDatasheetBinaryId,
+                    x.DeviceDatasheetId,
+                })
+                .WillCascadeOnDelete(false);
+
+           
         }
 
         #endregion Constructors

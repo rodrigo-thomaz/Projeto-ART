@@ -4,6 +4,7 @@
 
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
+    using System.Collections.Generic;
 
     public class DeviceDatasheetBinary : IEntity
     {
@@ -35,6 +36,11 @@
         }
 
         public string Version
+        {
+            get; set;
+        }
+
+        public ICollection<DeviceBinary> DeviceBinaries
         {
             get; set;
         }

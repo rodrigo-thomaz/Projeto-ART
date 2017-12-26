@@ -25,5 +25,15 @@ namespace ART.Domotica.Repository.Entities
         {
             get; set;
         }
+
+        public Guid DeviceDatasheetBinaryId
+        {
+            get; set;
+        }
+
+        public DeviceDatasheetBinary DeviceDatasheetBinary
+        {
+            get; set;
+        }
     }
 }
