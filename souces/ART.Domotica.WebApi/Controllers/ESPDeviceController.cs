@@ -7,10 +7,7 @@
     using ART.Domotica.Contract;
     using System.Web.Http.Description;
     using System.Net.Http;
-    using System.Collections.Generic;
-    using System.Linq;
     using ART.Infra.CrossCutting.WebApi;
-    using System.IO;
     using System.Net;
     using System.Net.Http.Headers;
 

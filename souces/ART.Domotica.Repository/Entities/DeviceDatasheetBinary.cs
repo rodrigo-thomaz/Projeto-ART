@@ -1,14 +1,25 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
 
     using ART.Domotica.Enums;
+    using ART.Infra.CrossCutting.Repository;
 
-    public class ESPDeviceGetConfigurationsRPCResponseContract
+    public class DeviceDatasheetBinary : IEntity
     {
         #region Properties
 
-        public Guid? ApplicationId
+        public byte[] Binary
+        {
+            get; set;
+        }
+
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public DeviceDatasheet DeviceDatasheet
         {
             get; set;
         }
@@ -18,22 +29,12 @@
             get; set;
         }
 
-        public Guid DeviceId
+        public Guid Id
         {
             get; set;
         }
 
-        public DeviceMQDetailResponseContract DeviceMQ
-        {
-            get; set;
-        }
-
-        public DeviceNTPDetailResponseContract DeviceNTP
-        {
-            get; set;
-        }
-
-        public int PublishMessageInterval
+        public string Version
         {
             get; set;
         }

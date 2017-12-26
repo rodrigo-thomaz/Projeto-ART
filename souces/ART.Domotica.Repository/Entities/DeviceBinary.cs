@@ -4,21 +4,9 @@ using System;
 
 namespace ART.Domotica.Repository.Entities
 {
-    public class DeviceBinary : IEntity<Guid>
+    public class DeviceBinary : IEntity
     {
-        #region Properties
-
-        public Guid Id
-        {
-            get; set;
-        }
-
-        public DateTime CreateDate
-        {
-            get; set;
-        }
-
-        public DeviceDatasheet DeviceDatasheet
+        public DeviceBase DeviceBase
         {
             get; set;
         }
@@ -28,10 +16,14 @@ namespace ART.Domotica.Repository.Entities
             get; set;
         }
 
-        public byte[] Binary { get; set; }
+        public Guid Id
+        {
+            get; set;
+        }
 
-        public string Version { get; set; }
-
-        #endregion Properties
+        public DateTime UpdateDate
+        {
+            get; set;
+        }
     }
 }

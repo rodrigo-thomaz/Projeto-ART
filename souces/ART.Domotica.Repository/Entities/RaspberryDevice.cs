@@ -2,7 +2,7 @@
 {
     public class RaspberryDevice : DeviceBase
     {
-        #region Properties        
+        #region Properties
 
         public string LanMacAddress
         {

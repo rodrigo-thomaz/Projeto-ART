@@ -4,14 +4,18 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class InitialCreate1 : DbMigration
     {
-        public override void Up()
-        {
-            AddColumn("SI.UnitMeasurementScale", "Name", c => c.String(nullable: false));
-        }
-        
+        #region Methods
+
         public override void Down()
         {
             DropColumn("SI.UnitMeasurementScale", "Name");
         }
+
+        public override void Up()
+        {
+            AddColumn("SI.UnitMeasurementScale", "Name", c => c.String(nullable: false));
+        }
+
+        #endregion Methods
     }
 }

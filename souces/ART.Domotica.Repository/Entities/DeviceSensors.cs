@@ -6,7 +6,7 @@
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public class DeviceSensors : IEntity<Guid>
+    public class DeviceSensors : IEntity
     {
         #region Properties
 

@@ -9,6 +9,8 @@
     {
         #region Methods
 
+        Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdates(ESPDeviceCheckForUpdatesRPCRequestContract message);
+
         Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
 
         Task GetAll(AuthenticatedMessageContract message);
@@ -22,8 +24,6 @@
         Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message);
 
         Task SetLabel(AuthenticatedMessageContract<DeviceSetLabelRequestContract> message);
-
-        Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdates(ESPDeviceCheckForUpdatesRPCRequestContract message);
 
         #endregion Methods
     }

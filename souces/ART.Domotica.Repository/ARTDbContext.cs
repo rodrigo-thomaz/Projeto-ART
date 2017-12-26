@@ -25,12 +25,12 @@
 
         #region Properties
 
-        public DbSet<DeviceBinary> DeviceBinary
+        public DbSet<ActuatorType> ActuatorType
         {
             get; set;
         }
 
-        public DbSet<ActuatorType> ActuatorType
+        public DbSet<DeviceBinary> DeviceBinary
         {
             get; set;
         }
@@ -61,6 +61,11 @@
         }
 
         public DbSet<DeviceDatasheet> DeviceDatasheet
+        {
+            get; set;
+        }
+
+        public DbSet<DeviceDatasheetBinary> DeviceDatasheetBinary
         {
             get; set;
         }

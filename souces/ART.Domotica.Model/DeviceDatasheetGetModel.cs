@@ -6,12 +6,12 @@
     {
         #region Properties
 
-        public string Name
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }
 
-        public DeviceDatasheetEnum DeviceDatasheetId
+        public string Name
         {
             get; set;
         }

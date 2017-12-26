@@ -1,11 +1,17 @@
 ﻿namespace ART.Domotica.Model
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class ESPDeviceGetModel
     {
         #region Properties
+
+        public DeviceDatasheetEnum DeviceDatasheetId
+        {
+            get; set;
+        }
 
         public Guid DeviceId
         {
@@ -23,11 +29,6 @@
         }
 
         public string Label
-        {
-            get; set;
-        }
-
-        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }

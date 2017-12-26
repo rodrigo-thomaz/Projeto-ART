@@ -1,18 +1,19 @@
 ﻿namespace ART.Domotica.IoTContract
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class ESPDeviceUpdatePinsResponseIoTContract
     {
         #region Properties
 
-        public Guid DeviceId
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }
 
-        public DeviceDatasheetEnum DeviceDatasheetId
+        public Guid DeviceId
         {
             get; set;
         }

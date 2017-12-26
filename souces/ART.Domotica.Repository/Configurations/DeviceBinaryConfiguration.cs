@@ -1,9 +1,10 @@
-﻿using ART.Domotica.Repository.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.ModelConfiguration;
-
-namespace ART.Domotica.Repository.Configurations
+﻿namespace ART.Domotica.Repository.Configurations
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.ModelConfiguration;
+
+    using ART.Domotica.Repository.Entities;
+
     public class DeviceBinaryConfiguration : EntityTypeConfiguration<DeviceBinary>
     {
         #region Constructors
@@ -11,39 +12,30 @@ namespace ART.Domotica.Repository.Configurations
         public DeviceBinaryConfiguration()
         {
             //Primary Keys
-            HasKey(x => x.Id);
+            HasKey(x => new
+            {
+                x.Id,
+                x.DeviceDatasheetId,
+            });
 
-            //Id
+            // Id
             Property(x => x.Id)
                 .HasColumnOrder(0)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //DeviceDatasheetId
             Property(x => x.DeviceDatasheetId)
                 .HasColumnOrder(1)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //DeviceDatasheet
-            HasRequired(x => x.DeviceDatasheet)
-                .WithMany(x => x.DeviceBinaries)
-                .HasForeignKey(x => x.DeviceDatasheetId)
-                .WillCascadeOnDelete(false);
+            //DeviceBase
+            HasRequired(x => x.DeviceBase)
+               .WithRequiredDependent(x => x.DeviceBinary);
 
-            //Version
-            Property(x => x.Version)
+            //UpdateDate
+            Property(x => x.UpdateDate)
                 .HasColumnOrder(2)
-                .IsRequired();
-
-            //Binary
-            Property(x => x.Binary)
-                .HasColumnOrder(3)
-                .IsRequired();
-
-            //CreateDate
-            Property(x => x.CreateDate)
-                .HasColumnOrder(4)
                 .IsRequired();
         }
 

@@ -9,6 +9,11 @@
     {
         #region Properties
 
+        public ICollection<DeviceDatasheetBinary> DeviceDatasheetBinaries
+        {
+            get; set;
+        }
+
         public ICollection<DeviceBase> DevicesBase
         {
             get; set;
@@ -23,8 +28,6 @@
         {
             get; set;
         }
-
-        public ICollection<DeviceBinary> DeviceBinaries { get; set; }
 
         #endregion Properties
     }

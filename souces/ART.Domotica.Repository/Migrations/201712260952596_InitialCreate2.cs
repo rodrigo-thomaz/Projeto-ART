@@ -4,6 +4,15 @@ namespace ART.Domotica.Repository.Migrations
 
     public partial class InitialCreate2 : DbMigration
     {
+        #region Methods
+
+        public override void Down()
+        {
+            DropForeignKey("dbo.DeviceBinary", "DeviceDatasheetId", "dbo.DeviceDatasheet");
+            DropIndex("dbo.DeviceBinary", new[] { "DeviceDatasheetId" });
+            DropTable("dbo.DeviceBinary");
+        }
+
         public override void Up()
         {
             CreateTable(
@@ -18,14 +27,8 @@ namespace ART.Domotica.Repository.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.DeviceDatasheet", t => t.DeviceDatasheetId)
                 .Index(t => t.DeviceDatasheetId);
-            
         }
-        
-        public override void Down()
-        {
-            DropForeignKey("dbo.DeviceBinary", "DeviceDatasheetId", "dbo.DeviceDatasheet");
-            DropIndex("dbo.DeviceBinary", new[] { "DeviceDatasheetId" });
-            DropTable("dbo.DeviceBinary");
-        }
+
+        #endregion Methods
     }
 }

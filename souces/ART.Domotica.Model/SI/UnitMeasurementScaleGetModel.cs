@@ -6,6 +6,11 @@
     {
         #region Properties
 
+        public string Name
+        {
+            get; set;
+        }
+
         public NumericalScalePrefixEnum NumericalScalePrefixId
         {
             get; set;
@@ -22,11 +27,6 @@
         }
 
         public UnitMeasurementTypeEnum UnitMeasurementTypeId
-        {
-            get; set;
-        }
-
-        public string Name
         {
             get; set;
         }

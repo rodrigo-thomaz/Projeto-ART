@@ -4,22 +4,7 @@
     {
         #region Properties
 
-        public string STAMacAddress
-        {
-            get; set;
-        }
-
         public string APMacAddress
-        {
-            get; set;
-        }
-
-        public long FreeSpace
-        {
-            get; set;
-        }
-
-        public long SketchSize
         {
             get; set;
         }
@@ -29,12 +14,27 @@
             get; set;
         }
 
-        public string SDKVersion
+        public long FreeSpace
         {
             get; set;
         }
 
         public string Mode
+        {
+            get; set;
+        }
+
+        public string SDKVersion
+        {
+            get; set;
+        }
+
+        public long SketchSize
+        {
+            get; set;
+        }
+
+        public string STAMacAddress
         {
             get; set;
         }

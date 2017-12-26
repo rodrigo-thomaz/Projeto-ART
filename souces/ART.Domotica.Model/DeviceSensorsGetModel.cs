@@ -1,12 +1,18 @@
 ﻿namespace ART.Domotica.Model
 {
-    using ART.Domotica.Enums;
     using System;
     using System.Collections.Generic;
+
+    using ART.Domotica.Enums;
 
     public class DeviceSensorsGetModel
     {
         #region Properties
+
+        public DeviceDatasheetEnum DeviceDatasheetId
+        {
+            get; set;
+        }
 
         public Guid DeviceSensorsId
         {
@@ -19,11 +25,6 @@
         }
 
         public List<SensorInDeviceGetModel> SensorInDevice
-        {
-            get; set;
-        }
-
-        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }

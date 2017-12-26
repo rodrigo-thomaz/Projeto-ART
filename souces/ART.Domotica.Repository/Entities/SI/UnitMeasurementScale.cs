@@ -9,6 +9,11 @@
     {
         #region Properties
 
+        public string Name
+        {
+            get; set;
+        }
+
         public NumericalScale NumericalScale
         {
             get; set;
@@ -45,11 +50,6 @@
         }
 
         public UnitMeasurementTypeEnum UnitMeasurementTypeId
-        {
-            get; set;
-        }
-        
-        public string Name
         {
             get; set;
         }

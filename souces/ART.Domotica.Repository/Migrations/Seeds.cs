@@ -790,7 +790,7 @@
                 Ordination = 0,
             };
 
-            context.SensorInDevice.AddOrUpdate(sensorUltrassonicInDevice2);         
+            context.SensorInDevice.AddOrUpdate(sensorUltrassonicInDevice2);
 
             context.SaveChanges();
 

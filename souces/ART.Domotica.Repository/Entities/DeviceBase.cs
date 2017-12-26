@@ -45,6 +45,11 @@
             get; set;
         }
 
+        public DeviceBinary DeviceBinary
+        {
+            get; set;
+        }
+
         public Guid Id
         {
             get; set;

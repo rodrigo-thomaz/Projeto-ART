@@ -1,12 +1,14 @@
 ﻿namespace ART.Infra.CrossCutting.WebApi
 {
-    using System.Net.Http;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System;
+    using System.Net.Http;
 
     public static class HttpRequestMessageExtensions
     {
+        #region Methods
+
         public static T GetFirstHeaderValueOrDefault<T>(
             this HttpRequestMessage request,
             string headerKey)
@@ -26,5 +28,7 @@
 
             return toReturn;
         }
+
+        #endregion Methods
     }
 }

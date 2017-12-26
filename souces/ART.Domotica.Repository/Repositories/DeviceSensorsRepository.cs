@@ -7,7 +7,7 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
 
-    public class DeviceSensorsRepository : RepositoryBase<ARTDbContext, DeviceSensors, Guid>, IDeviceSensorsRepository
+    public class DeviceSensorsRepository : RepositoryBase<ARTDbContext, DeviceSensors>, IDeviceSensorsRepository
     {
         #region Constructors
 

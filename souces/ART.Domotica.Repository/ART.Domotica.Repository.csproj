@@ -62,8 +62,9 @@
   <ItemGroup>
     <Compile Include="ARTDbContext.cs" />
     <Compile Include="Configurations\ApplicationMQConfiguration.cs" />
-    <Compile Include="Configurations\DeviceBinaryConfiguration.cs" />
+    <Compile Include="Configurations\DeviceDatasheetBinaryConfiguration.cs" />
     <Compile Include="Configurations\DeviceDatasheetConfiguration.cs" />
+    <Compile Include="Configurations\DeviceBinaryConfiguration.cs" />
     <Compile Include="Configurations\Locale\ContinentConfiguration.cs" />
     <Compile Include="Configurations\DeviceNTPConfiguration.cs" />
     <Compile Include="Configurations\DeviceMQConfiguration.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Configurations\Globalization\TimeZoneConfiguration.cs" />
     <Compile Include="Entities\ApplicationMQ.cs" />
     <Compile Include="Entities\DeviceBinary.cs" />
+    <Compile Include="Entities\DeviceDatasheetBinary.cs" />
     <Compile Include="Entities\DeviceDatasheet.cs" />
     <Compile Include="Entities\Locale\Continent.cs" />
     <Compile Include="Entities\Locale\Country.cs" />
@@ -175,6 +177,22 @@
     <Compile Include="Migrations\201712261229149_InitialCreate3.cs" />
     <Compile Include="Migrations\201712261229149_InitialCreate3.Designer.cs">
       <DependentUpon>201712261229149_InitialCreate3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712261237262_InitialCreate4.cs" />
+    <Compile Include="Migrations\201712261237262_InitialCreate4.Designer.cs">
+      <DependentUpon>201712261237262_InitialCreate4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712261241578_InitialCreate5.cs" />
+    <Compile Include="Migrations\201712261241578_InitialCreate5.Designer.cs">
+      <DependentUpon>201712261241578_InitialCreate5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712261254421_InitialCreate6.cs" />
+    <Compile Include="Migrations\201712261254421_InitialCreate6.Designer.cs">
+      <DependentUpon>201712261254421_InitialCreate6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712261258252_InitialCreate7.cs" />
+    <Compile Include="Migrations\201712261258252_InitialCreate7.Designer.cs">
+      <DependentUpon>201712261258252_InitialCreate7.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -272,6 +290,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712261229149_InitialCreate3.resx">
       <DependentUpon>201712261229149_InitialCreate3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712261237262_InitialCreate4.resx">
+      <DependentUpon>201712261237262_InitialCreate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712261241578_InitialCreate5.resx">
+      <DependentUpon>201712261241578_InitialCreate5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712261254421_InitialCreate6.resx">
+      <DependentUpon>201712261254421_InitialCreate6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712261258252_InitialCreate7.resx">
+      <DependentUpon>201712261258252_InitialCreate7.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
