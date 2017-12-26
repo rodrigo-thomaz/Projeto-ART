@@ -6,6 +6,13 @@
     using ART.Domotica.Producer.Interfaces;
     using ART.Domotica.Contract;
     using System.Web.Http.Description;
+    using System.Net.Http;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ART.Infra.CrossCutting.WebApi;
+    using System.IO;
+    using System.Net;
+    using System.Net.Http.Headers;
 
     [Authorize]
     [RoutePrefix("api/espDevice")]
@@ -65,6 +72,46 @@
         {
             var result = await _espDeviceProducer.GetConfigurationsRPC(contract);
             return Ok(result);
+        }
+
+        /// <summary>
+        /// Atualiza o código do ESP Device
+        /// </summary>        
+        /// <remarks>
+        /// Atualiza o código do ESP Device
+        /// </remarks>
+        /// <response code="200">OK</response>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("checkForUpdates")]
+        [HttpGet]
+        [AllowAnonymous]
+        public IHttpActionResult CheckForUpdates()
+        {
+            var esp8266_STA_MAC = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-STA-MAC");
+            var esp8266_AP_MAC = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-AP-MAC");
+            var esp8266_FREE_SPACE = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-FREE-SPACE");
+            var esp8266_SKETCH_SIZE = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-SKETCH-SIZE");
+            var esp8266_CHIP_SIZE = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-CHIP-SIZE");
+            var esp8266_SDK_VERSION = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-SDK-VERSION");
+            var esp8266_MODE = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-MODE");
+
+            var buffer = File.ReadAllBytes(@"C:\Projeto-ART\devices\Termometro\Termometro\Termometro.ino.nodemcu.bin");
+
+            var result = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new ByteArrayContent(buffer)
+            };
+            result.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+            {
+                FileName = "Termometro.ino.nodemcu.bin"
+            };
+            result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+
+            var response = ResponseMessage(result);
+
+            return response;
         }
 
         /// <summary>

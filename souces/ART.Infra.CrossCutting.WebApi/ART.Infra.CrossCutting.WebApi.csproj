@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AuthenticatedApiControllerBase.cs" />
     <Compile Include="ExpressionHelper.cs" />
+    <Compile Include="HttpRequestMessageExtensions.cs" />
     <Compile Include="MasterList\IMasterListFilterColumn.cs" />
     <Compile Include="MasterList\IMasterListSortColumn.cs" />
     <Compile Include="MasterListDTO\MasterListDTOFilterCollection.cs" />
