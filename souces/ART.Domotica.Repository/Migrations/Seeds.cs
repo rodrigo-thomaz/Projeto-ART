@@ -492,6 +492,7 @@
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceSensors)
+                .Include(x => x.DeviceBinary)
                 .Where(x => x.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
                 .Where(x => x.SoftAPMacAddress.ToLower() == espDevice1SoftAPMacAddress.ToLower())
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Temperature_OneWire_2Way)
@@ -715,6 +716,7 @@
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceSensors)
+                .Include(x => x.DeviceBinary)
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Ultrasonic_1Way)
                 .Where(x => x.StationMacAddress.ToLower() == espDevice2StationMacAddress.ToLower())
                 .Where(x => x.SoftAPMacAddress.ToLower() == espDevice2SoftAPMacAddress.ToLower())
@@ -816,6 +818,60 @@
             context.SensorInDevice.AddOrUpdate(sensorUltrassonicInDevice2);
 
             context.SaveChanges();
+
+            #endregion
+
+            #region DeviceDatasheetBinaryBuffer
+
+            var binaryBuffer = File.ReadAllBytes(@"C:\Projeto-ART\devices\Termometro\Termometro\Termometro.ino.nodemcu.bin");
+
+            var datashetts = context.DeviceDatasheet.ToList();
+
+            var deviceDatasheetBinaries = new List<DeviceDatasheetBinary>();
+
+            foreach (var item in datashetts)
+            {
+                deviceDatasheetBinaries.Add(new DeviceDatasheetBinary
+                {
+                    DeviceDatasheetId = item.Id,
+                    Version = RandonHelper.RandomString(5),
+                    DeviceDatasheetBinaryBuffer = new DeviceDatasheetBinaryBuffer
+                    {
+                        Buffer = binaryBuffer,
+                    },
+                    CreateDate = DateTime.Now,
+                });
+            }
+
+            context.DeviceDatasheetBinary.AddRange(deviceDatasheetBinaries);
+
+            context.SaveChanges();
+
+            if(espDevice1.DeviceBinary == null)
+            {
+                var deviceDatasheetBinary = deviceDatasheetBinaries.First(x => x.DeviceDatasheetId == espDevice1.DeviceDatasheetId);
+
+                espDevice1.DeviceBinary = new DeviceBinary
+                {
+                    DeviceDatasheetBinaryId = deviceDatasheetBinary.Id,
+                    UpdateDate = DateTime.Now,
+                    DeviceDatasheetId = espDevice1.DeviceDatasheetId,
+                    Id = espDevice1.Id,
+                };
+            }
+
+            if (espDevice2.DeviceBinary == null)
+            {
+                var deviceDatasheetBinary = deviceDatasheetBinaries.First(x => x.DeviceDatasheetId == espDevice2.DeviceDatasheetId);
+
+                espDevice2.DeviceBinary = new DeviceBinary
+                {
+                    DeviceDatasheetBinaryId = deviceDatasheetBinary.Id,
+                    UpdateDate = DateTime.Now,
+                    DeviceDatasheetId = espDevice2.DeviceDatasheetId,
+                    Id = espDevice2.Id,
+                };
+            }
 
             #endregion
 
