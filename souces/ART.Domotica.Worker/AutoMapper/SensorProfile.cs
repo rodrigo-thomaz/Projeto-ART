@@ -23,6 +23,11 @@
 
             CreateMap<Sensor, SensorGetAllByDeviceInApplicationIdResponseIoTContract>()
                 .ForMember(vm => vm.DeviceAddress, m => m.ResolveUsing(src => {
+                    if (src.SensorTempDSFamily == null)
+                    {
+                        return new short[0];
+                    }
+
                     var split = src.SensorTempDSFamily.DeviceAddress.Split(':');
                     var result = new short[8];
                     for (int i = 0; i < 8; i++)
