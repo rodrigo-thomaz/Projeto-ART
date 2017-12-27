@@ -36,8 +36,10 @@ namespace ART.Domotica.Producer.Services
         {
             return await Task.Run(() =>
             {
-                var rpcClient = new SimpleRpcClient(_model, ApplicationConstants.GetRPCQueueName);
-                rpcClient.TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds;
+                var rpcClient = new SimpleRpcClient(_model, ApplicationConstants.GetRPCQueueName)
+                {
+                    TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds
+                };
                 var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
                 rpcClient.TimedOut += (sender, e) =>
                 {

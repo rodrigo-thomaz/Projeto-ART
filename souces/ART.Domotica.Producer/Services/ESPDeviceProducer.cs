@@ -9,6 +9,7 @@ using ART.Domotica.Contract;
 using System;
 using RabbitMQ.Client.MessagePatterns;
 using ART.Infra.CrossCutting.MQ;
+using System.Collections.Generic;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -81,13 +82,18 @@ namespace ART.Domotica.Producer.Services
         {
             return await Task.Run(() =>
             {
-                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsRPCQueueName);
-                rpcClient.TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds;
+                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsRPCQueueName)
+                {
+                    TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds
+                };
+
                 var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+
                 rpcClient.TimedOut += (sender, e) =>
                 {
                     throw new TimeoutException("Worker time out");
                 };
+
                 rpcClient.Disconnected += (sender, e) =>
                 {
                     rpcClient.Close();
@@ -95,8 +101,11 @@ namespace ART.Domotica.Producer.Services
                 };
 
                 var bufferResult = rpcClient.Call(body);
+
                 rpcClient.Close();
+
                 var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCResponseContract>(bufferResult);
+
                 return result;
             });
         }
@@ -105,13 +114,18 @@ namespace ART.Domotica.Producer.Services
         {
             return await Task.Run(() =>
             {
-                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.CheckForUpdatesRPCQueueName);
-                rpcClient.TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds;
+                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.CheckForUpdatesRPCQueueName)
+                {
+                    TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds
+                };
+
                 var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+
                 rpcClient.TimedOut += (sender, e) =>
                 {
                     throw new TimeoutException("Worker time out");
                 };
+
                 rpcClient.Disconnected += (sender, e) =>
                 {
                     rpcClient.Close();
@@ -119,8 +133,11 @@ namespace ART.Domotica.Producer.Services
                 };
 
                 var bufferResult = rpcClient.Call(body);
+
                 rpcClient.Close();
+
                 var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceCheckForUpdatesRPCResponseContract>(bufferResult);
+
                 return result;
             });
         }
@@ -140,40 +157,44 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
+            var arguments = new Dictionary<string, object>();
+
+            arguments.Add("x-expires", 6000);
+
             _model.QueueDeclare(
                   queue: ESPDeviceConstants.GetAllByApplicationIdQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);
+                , arguments: arguments);
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetByPinQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: null);
+               , arguments: arguments);
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.InsertInApplicationQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: null);
+               , arguments: arguments);
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.DeleteFromApplicationQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: null);
+               , arguments: arguments);
 
             _model.QueueDeclare(
                queue: ESPDeviceConstants.SetLabelQueueName
              , durable: false
              , exclusive: false
              , autoDelete: true
-             , arguments: null);
+             , arguments: arguments);
         }        
 
         #endregion

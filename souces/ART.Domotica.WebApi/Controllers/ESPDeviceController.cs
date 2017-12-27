@@ -87,15 +87,16 @@
         [ResponseType(typeof(ESPDeviceCheckForUpdatesRPCResponseContract))]
         public async Task<IHttpActionResult> CheckForUpdates()
         {
-            var contract = new ESPDeviceCheckForUpdatesRPCRequestContract();
-
-            contract.StationMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-STA-MAC");
-            contract.SoftAPMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-AP-MAC");
-            contract.FreeSpace = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-FREE-SPACE");
-            contract.SketchSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-SKETCH-SIZE");
-            contract.ChipSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-CHIP-SIZE");
-            contract.SDKVersion = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-SDK-VERSION");
-            contract.Mode = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-MODE");
+            var contract = new ESPDeviceCheckForUpdatesRPCRequestContract
+            {
+                StationMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-STA-MAC"),
+                SoftAPMacAddress = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-AP-MAC"),
+                FreeSpace = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-FREE-SPACE"),
+                SketchSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-SKETCH-SIZE"),
+                ChipSize = Request.GetFirstHeaderValueOrDefault<long>("x-ESP8266-CHIP-SIZE"),
+                SDKVersion = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-SDK-VERSION"),
+                Mode = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-MODE")
+            };
 
             var data = await _espDeviceProducer.CheckForUpdates(contract);
 
