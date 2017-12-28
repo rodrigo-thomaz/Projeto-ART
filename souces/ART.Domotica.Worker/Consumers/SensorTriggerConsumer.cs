@@ -85,8 +85,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
             var data = await sensorTriggerDomain.Insert(message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.TriggerOn, message.Contract.BuzzerOn, message.Contract.Max, message.Contract.Min);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -97,7 +95,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorTrigger, SensorTriggerGetModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.InsertViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
@@ -107,7 +105,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<SensorTriggerGetResponseIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.InsertIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -126,8 +124,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
             var data = await sensorTriggerDomain.Delete(message.Contract.SensorTriggerId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -138,7 +134,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorTriggerDeleteRequestContract, SensorTriggerDeleteModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.DeleteViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
@@ -148,7 +144,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<SensorTriggerGetResponseIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.DeleteIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -167,8 +163,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
             var data = await sensorTriggerDomain.SetTriggerOn(message.Contract.SensorTriggerId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.TriggerOn);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -179,7 +173,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetTriggerOnViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
@@ -189,7 +183,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<SensorTriggerSetTriggerOnRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetTriggerOnIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -208,8 +202,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
             var data = await sensorTriggerDomain.SetTriggerValue(message.Contract.SensorTriggerId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.TriggerValue);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -220,7 +212,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetTriggerValueViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
@@ -230,7 +222,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<SensorTriggerSetTriggerValueRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetTriggerValueIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -249,8 +241,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorTriggerDomain = _componentContext.Resolve<ISensorTriggerDomain>();
             var data = await sensorTriggerDomain.SetBuzzerOn(message.Contract.SensorTriggerId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.BuzzerOn);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -261,7 +251,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTriggerConstants.SetBuzzerOnViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
@@ -271,7 +261,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<SensorTriggerSetBuzzerOnRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetBuzzerOnIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }

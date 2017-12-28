@@ -64,8 +64,6 @@
             var deviceSensorsDomain = _componentContext.Resolve<IDeviceSensorsDomain>();
             var data = await deviceSensorsDomain.SetPublishIntervalInSeconds(message.Contract.DeviceSensorsId, message.Contract.DeviceDatasheetId, message.Contract.PublishIntervalInSeconds);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -73,7 +71,7 @@
             var viewModel = Mapper.Map<DeviceSensors, DeviceSensorsSetPublishIntervalInSecondsModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceSensorsConstants.SetPublishIntervalInSecondsViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

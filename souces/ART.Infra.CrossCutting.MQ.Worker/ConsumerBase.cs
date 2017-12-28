@@ -13,6 +13,8 @@
         protected readonly IComponentContext _componentContext;
         protected readonly ILogger _logger;
 
+        protected const string defaultExchangeTopic = "amq.topic";
+
         #endregion Fields
 
         #region Constructors

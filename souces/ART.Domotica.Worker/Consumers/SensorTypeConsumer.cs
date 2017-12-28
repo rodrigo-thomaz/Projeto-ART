@@ -62,8 +62,6 @@ namespace ART.Domotica.Worker.Consumers
             var domain = _componentContext.Resolve<ISensorTypeDomain>();
             var data = await domain.GetAll();
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -71,7 +69,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<List<SensorType>, List<SensorTypeGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorTypeConstants.GetAllCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

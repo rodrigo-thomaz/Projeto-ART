@@ -63,8 +63,6 @@ namespace ART.Domotica.Worker.Consumers.Locale
             var domain = _componentContext.Resolve<IContinentDomain>();
             var data = await domain.GetAll();
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -72,7 +70,7 @@ namespace ART.Domotica.Worker.Consumers.Locale
             var viewModel = Mapper.Map<List<Continent>, List<ContinentGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, ContinentConstants.GetAllCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

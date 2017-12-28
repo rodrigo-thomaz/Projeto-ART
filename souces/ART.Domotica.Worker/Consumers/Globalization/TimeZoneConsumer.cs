@@ -62,9 +62,7 @@ namespace ART.Domotica.Worker.Consumers.Globalization
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract>(e.Body);
             var domain = _componentContext.Resolve<ITimeZoneDomain>();
             var data = await domain.GetAll();
-
-            var exchange = "amq.topic";
-
+            
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -72,7 +70,7 @@ namespace ART.Domotica.Worker.Consumers.Globalization
             var viewModel = Mapper.Map<List<TimeZone>, List<TimeZoneGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, TimeZoneConstants.GetAllCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

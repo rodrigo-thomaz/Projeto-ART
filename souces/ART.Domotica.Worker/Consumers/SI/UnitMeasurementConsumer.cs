@@ -75,8 +75,6 @@ namespace ART.Domotica.Worker.Consumers.SI
             var domain = _componentContext.Resolve<IUnitMeasurementDomain>();
             var data = await domain.GetAll();
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -84,7 +82,7 @@ namespace ART.Domotica.Worker.Consumers.SI
             var viewModel = Mapper.Map<List<UnitMeasurement>, List<UnitMeasurementGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, UnitMeasurementConstants.GetAllCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }
@@ -109,14 +107,12 @@ namespace ART.Domotica.Worker.Consumers.SI
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId, requestContract.DeviceDatasheetId);
 
-            var exchange = "amq.topic";
-
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<UnitMeasurement>, List<UnitMeasurementGetAllForIoTResponseContract>>(data);
             var deviceMessage = new MessageIoTContract<List<UnitMeasurementGetAllForIoTResponseContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, UnitMeasurementConstants.GetAllForIoTCompletedQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }

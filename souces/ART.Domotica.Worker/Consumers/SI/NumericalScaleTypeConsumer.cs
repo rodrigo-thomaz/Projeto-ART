@@ -63,8 +63,6 @@ namespace ART.Domotica.Worker.Consumers.SI
             var domain = _componentContext.Resolve<INumericalScaleTypeDomain>();
             var data = await domain.GetAll();
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -72,7 +70,7 @@ namespace ART.Domotica.Worker.Consumers.SI
             var viewModel = Mapper.Map<List<NumericalScaleType>, List<NumericalScaleTypeGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, NumericalScaleTypeConstants.GetAllCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

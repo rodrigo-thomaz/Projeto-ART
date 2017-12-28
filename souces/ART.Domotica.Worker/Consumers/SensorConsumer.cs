@@ -84,8 +84,6 @@ namespace ART.Domotica.Worker.Consumers
             var domain = _componentContext.Resolve<ISensorDomain>();
             var data = await domain.GetAllByApplicationId(applicationUser.ApplicationId);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -93,7 +91,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<List<Sensor>, List<SensorGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorConstants.GetAllByApplicationIdCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }
@@ -120,14 +118,12 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId, requestContract.DeviceDatasheetId);
 
-            var exchange = "amq.topic";
-
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<Sensor>, List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(data);
             var deviceMessage = new MessageIoTContract<List<SensorGetAllByDeviceInApplicationIdResponseIoTContract>>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -146,8 +142,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorDomain = _componentContext.Resolve<ISensorDomain>();
             var data = await sensorDomain.SetLabel(message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Label);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -155,7 +149,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<Sensor, SensorSetLabelModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.SetLabelViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }

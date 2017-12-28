@@ -69,8 +69,6 @@ namespace ART.Domotica.Worker.Consumers
             var domain = _componentContext.Resolve<ISensorTempDSFamilyDomain>();
             var data = await domain.GetAllResolutions();
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -78,7 +76,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<List<SensorTempDSFamilyResolution>, List<SensorTempDSFamilyResolutionGetModel>>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForView(applicationMQ.Topic, message.WebUITopic, SensorTempDSFamilyConstants.GetAllResolutionsViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }
@@ -97,8 +95,6 @@ namespace ART.Domotica.Worker.Consumers
             var domain = _componentContext.Resolve<ISensorTempDSFamilyDomain>();
             var data = await domain.SetResolution(message.Contract.SensorTempDSFamilyId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.SensorTempDSFamilyResolutionId);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -110,7 +106,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorTempDSFamily, SensorTempDSFamilySetResolutionModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorTempDSFamilyConstants.SetResolutionViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
@@ -121,7 +117,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTempDSFamilyConstants.SetResolutionIoTQueueName);
 
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }

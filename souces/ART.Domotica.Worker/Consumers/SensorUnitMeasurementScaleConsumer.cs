@@ -73,8 +73,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorUnitMeasurementScaleDomain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
             await sensorUnitMeasurementScaleDomain.SetRange(message.Contract.SensorUnitMeasurementScaleId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.Value);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -86,7 +84,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);            
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetRangeViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
@@ -96,7 +94,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<SensorUnitMeasurementScaleSetValueRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetRangeIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -115,8 +113,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorUnitMeasurementScaleDomain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
             await sensorUnitMeasurementScaleDomain.SetChartLimiter(message.Contract.SensorUnitMeasurementScaleId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Position, message.Contract.Value);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -128,7 +124,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueModel>(message.Contract);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetChartLimiterViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
@@ -138,7 +134,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMessage = new MessageIoTContract<SensorUnitMeasurementScaleSetValueRequestIoTContract>(iotContract);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetChartLimiterIoTQueueName);
-            _model.BasicPublish(exchange, routingKey, null, deviceBuffer);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }
@@ -157,8 +153,6 @@ namespace ART.Domotica.Worker.Consumers
             var sensorUnitMeasurementScaleDomain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
             var data = await sensorUnitMeasurementScaleDomain.SetUnitMeasurementNumericalScaleTypeCountry(message.Contract.SensorUnitMeasurementScaleId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.UnitMeasurementId, message.Contract.UnitMeasurementTypeId, message.Contract.NumericalScalePrefixId, message.Contract.NumericalScaleTypeId, message.Contract.CountryId);
 
-            var exchange = "amq.topic";
-
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
@@ -170,7 +164,7 @@ namespace ART.Domotica.Worker.Consumers
             var viewModel = Mapper.Map<SensorUnitMeasurementScale, SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryViewCompletedQueueName);
-            _model.BasicPublish(exchange, rountingKey, null, viewBuffer);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();
         }
