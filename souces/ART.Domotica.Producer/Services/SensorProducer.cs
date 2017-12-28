@@ -5,7 +5,6 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
 using ART.Domotica.Constant;
-using ART.Infra.CrossCutting.Utils;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -24,20 +23,12 @@ namespace ART.Domotica.Producer.Services
 
         public async Task GetAllByApplicationId(AuthenticatedMessageContract message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorConstants.GetAllByApplicationIdQueueName, null, payload);
-            });
+            await BasicPublish(SensorConstants.GetAllByApplicationIdQueueName, message);
         }
 
         public async Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorConstants.SetLabelQueueName, null, payload);
-            });
+            await BasicPublish(SensorConstants.SetLabelQueueName, message);
         }
 
         #endregion

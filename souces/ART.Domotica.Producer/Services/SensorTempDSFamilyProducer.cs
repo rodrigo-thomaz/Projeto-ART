@@ -5,7 +5,6 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
 using ART.Domotica.Constant;
-using ART.Infra.CrossCutting.Utils;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -24,20 +23,12 @@ namespace ART.Domotica.Producer.Services
 
         public async Task GetAllResolutions(AuthenticatedMessageContract message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTempDSFamilyConstants.GetAllResolutionsQueueName, null, payload);
-            });            
+            await BasicPublish(SensorTempDSFamilyConstants.GetAllResolutionsQueueName, message);
         }
 
         public async Task SetResolution(AuthenticatedMessageContract<SensorTempDSFamilySetResolutionRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTempDSFamilyConstants.SetResolutionQueueName, null, payload);
-            });
+            await BasicPublish(SensorTempDSFamilyConstants.SetResolutionQueueName, message);
         }        
 
         #endregion

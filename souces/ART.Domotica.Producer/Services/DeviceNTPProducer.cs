@@ -4,7 +4,6 @@ using ART.Domotica.Producer.Interfaces;
 using ART.Infra.CrossCutting.MQ.Contract;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;
-using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Contract;
 
 namespace ART.Domotica.Producer.Services
@@ -24,20 +23,12 @@ namespace ART.Domotica.Producer.Services
 
         public async Task SetTimeZone(AuthenticatedMessageContract<DeviceNTPSetTimeZoneRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DeviceNTPConstants.SetTimeZoneQueueName, null, payload);
-            });
+            await BasicPublish(DeviceNTPConstants.SetTimeZoneQueueName, message);
         }
 
         public async Task SetUpdateIntervalInMilliSecond(AuthenticatedMessageContract<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", DeviceNTPConstants.SetUpdateIntervalInMilliSecondQueueName, null, payload);
-            });
+            await BasicPublish(DeviceNTPConstants.SetUpdateIntervalInMilliSecondQueueName, message);
         }
 
         #endregion

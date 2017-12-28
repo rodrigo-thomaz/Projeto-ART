@@ -7,7 +7,6 @@
     using ART.Infra.CrossCutting.MQ.Producer;
 
     using RabbitMQ.Client;
-    using ART.Infra.CrossCutting.Utils;
     using ART.Domotica.Constant;
 
     public class SensorInDeviceProducer : ProducerBase, ISensorInDeviceProducer
@@ -26,11 +25,7 @@
 
         public async Task SetOrdination(AuthenticatedMessageContract<SensorInDeviceSetOrdinationRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorInDeviceConstants.SetOrdinationQueueName, null, payload);
-            });
+            await BasicPublish(SensorInDeviceConstants.SetOrdinationQueueName, message);
         }
 
         #endregion Methods

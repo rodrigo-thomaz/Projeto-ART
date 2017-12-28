@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
-using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Constant.Globalization;
 using ART.Domotica.Producer.Interfaces.Globalization;
 
@@ -23,11 +22,7 @@ namespace ART.Domotica.Producer.Services.Globalization
 
         public async Task GetAll(AuthenticatedMessageContract message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", TimeZoneConstants.GetAllQueueName, null, payload);
-            });            
+            await BasicPublish(TimeZoneConstants.GetAllQueueName, message);
         }
 
         #endregion

@@ -34,47 +34,27 @@ namespace ART.Domotica.Producer.Services
 
         public async Task GetAll(AuthenticatedMessageContract message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ESPDeviceConstants.GetAllQueueName, null, payload);
-            });
+            await BasicPublish(ESPDeviceConstants.GetAllQueueName, message);
         }
 
         public async Task GetAllByApplicationId(AuthenticatedMessageContract message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ESPDeviceConstants.GetAllByApplicationIdQueueName, null, payload);
-            });
+            await BasicPublish(ESPDeviceConstants.GetAllByApplicationIdQueueName, message);
         }
 
         public async Task GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ESPDeviceConstants.GetByPinQueueName, null, payload);
-            });
+            await BasicPublish(ESPDeviceConstants.GetByPinQueueName, message);
         }
 
         public async Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ESPDeviceConstants.InsertInApplicationQueueName, null, payload);
-            });
+            await BasicPublish(ESPDeviceConstants.InsertInApplicationQueueName, message);
         }
 
         public async Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ESPDeviceConstants.DeleteFromApplicationQueueName, null, payload);
-            });
+            await BasicPublish(ESPDeviceConstants.DeleteFromApplicationQueueName, message);
         }
 
         public async Task<ESPDeviceGetConfigurationsRPCResponseContract> GetConfigurationsRPC(ESPDeviceGetConfigurationsRPCRequestContract message)
@@ -143,11 +123,7 @@ namespace ART.Domotica.Producer.Services
 
         public async Task SetLabel(AuthenticatedMessageContract<DeviceSetLabelRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ESPDeviceConstants.SetLabelQueueName, null, payload);
-            });
+            await BasicPublish(ESPDeviceConstants.SetLabelQueueName, message);
         }
 
         #endregion

@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
-using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Producer.Interfaces.Locale;
 using ART.Domotica.Constant.Locale;
 
@@ -23,11 +22,7 @@ namespace ART.Domotica.Producer.Services.Locale
 
         public async Task GetAll(AuthenticatedMessageContract message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", ContinentConstants.GetAllQueueName, null, payload);
-            });            
+            await BasicPublish(ContinentConstants.GetAllQueueName, message);
         }
 
         #endregion

@@ -5,7 +5,6 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
 using ART.Domotica.Constant;
-using ART.Infra.CrossCutting.Utils;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -24,47 +23,27 @@ namespace ART.Domotica.Producer.Services
 
         public async Task Insert(AuthenticatedMessageContract<SensorTriggerInsertRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTriggerConstants.InsertQueueName, null, payload);
-            });
+            await BasicPublish(SensorTriggerConstants.InsertQueueName, message);
         }
 
         public async Task Delete(AuthenticatedMessageContract<SensorTriggerDeleteRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTriggerConstants.DeleteQueueName, null, payload);
-            });
+            await BasicPublish(SensorTriggerConstants.DeleteQueueName, message);
         }
 
         public async Task SetTriggerOn(AuthenticatedMessageContract<SensorTriggerSetTriggerOnRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTriggerConstants.SetTriggerOnQueueName, null, payload);
-            });
+            await BasicPublish(SensorTriggerConstants.SetTriggerOnQueueName, message);
         }
 
         public async Task SetTriggerValue(AuthenticatedMessageContract<SensorTriggerSetTriggerValueRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTriggerConstants.SetTriggerValueQueueName, null, payload);
-            });
+            await BasicPublish(SensorTriggerConstants.SetTriggerValueQueueName, message);
         }
 
         public async Task SetBuzzerOn(AuthenticatedMessageContract<SensorTriggerSetBuzzerOnRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorTriggerConstants.SetBuzzerOnQueueName, null, payload);
-            });                        
+            await BasicPublish(SensorTriggerConstants.SetBuzzerOnQueueName, message);
         }
 
         #endregion

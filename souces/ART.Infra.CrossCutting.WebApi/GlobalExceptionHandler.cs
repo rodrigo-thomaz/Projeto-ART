@@ -6,6 +6,8 @@
     using System.Web.Http.ExceptionHandling;
     using System.Web.Http.Results;
 
+    using ART.Infra.CrossCutting.MQ;
+
     public class GlobalExceptionHandler : ExceptionHandler
     {
         #region Constructors
@@ -29,10 +31,10 @@
             {
                 responseMessage = context.Request.CreateErrorResponse(HttpStatusCode.Forbidden, context.Exception);
             }
-            //else if (context.Exception is RecordNotFoundException)
-            //{
-            //    responseMessage = context.Request.CreateErrorResponse(HttpStatusCode.NotFound, context.Exception);
-            //}
+            else if (context.Exception is NoConsumersFoundException)
+            {
+                responseMessage = context.Request.CreateErrorResponse(HttpStatusCode.ServiceUnavailable, context.Exception);
+            }
             else if (context.Exception.GetBaseException() is ArgumentException)
             {
                 responseMessage = context.Request.CreateErrorResponse(HttpStatusCode.BadRequest, context.Exception);

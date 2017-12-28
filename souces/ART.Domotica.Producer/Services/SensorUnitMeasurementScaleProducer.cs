@@ -5,7 +5,6 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
 using ART.Domotica.Constant;
-using ART.Infra.CrossCutting.Utils;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -24,29 +23,17 @@ namespace ART.Domotica.Producer.Services
 
         public async Task SetRange(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.SetRangeQueueName, null, payload);
-            });
+            await BasicPublish(SensorUnitMeasurementScaleConstants.SetRangeQueueName, message);
         }
 
         public async Task SetChartLimiter(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetValueRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName, null, payload);
-            });
+            await BasicPublish(SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName, message);
         }
 
         public async Task SetUnitMeasurementNumericalScaleTypeCountry(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryRequestContract> message)
         {
-            await Task.Run(() =>
-            {
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-                _model.BasicPublish("", SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName, null, payload);
-            });
+            await BasicPublish(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName, message);
         }
 
         #endregion

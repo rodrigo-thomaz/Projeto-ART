@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ART.Infra.CrossCutting.Utils">
+      <HintPath>..\ART.Infra.CrossCutting.Utils\bin\Debug\ART.Infra.CrossCutting.Utils.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Diagnostics.Tracing.EventSource, Version=1.1.28.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Diagnostics.Tracing.EventSource.Redist.1.1.28\lib\net46\Microsoft.Diagnostics.Tracing.EventSource.dll</HintPath>
     </Reference>
@@ -51,6 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{eb5e2271-76a2-4cf1-942e-f04fb9d1056b}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
