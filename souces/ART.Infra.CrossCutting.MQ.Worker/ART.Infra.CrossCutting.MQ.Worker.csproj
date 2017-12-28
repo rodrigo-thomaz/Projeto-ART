@@ -55,5 +55,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
+      <Project>{eb5e2271-76a2-4cf1-942e-f04fb9d1056b}</Project>
+      <Name>ART.Infra.CrossCutting.MQ</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

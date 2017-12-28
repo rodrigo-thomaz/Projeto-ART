@@ -2,6 +2,7 @@
 {
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;
+    using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.MQ.Worker;
 
     using Autofac;
@@ -19,8 +20,8 @@
 
         #region Constructors
 
-        public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext)
-            : base(connection)
+        public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _componentContext = componentContext;
             _logger = logger;

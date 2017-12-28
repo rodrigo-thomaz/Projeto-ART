@@ -13,7 +13,7 @@
 
         protected readonly IConnection _connection;
         protected readonly IModel _model;
-        private readonly IMQSettings _mqSettings;
+        protected readonly IMQSettings _mqSettings;
 
         #endregion Fields
 

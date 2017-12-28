@@ -15,6 +15,7 @@ using ART.Infra.CrossCutting.Logging;
 using AutoMapper;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Model;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -33,7 +34,8 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public SensorTempDSFamilyConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public SensorTempDSFamilyConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);

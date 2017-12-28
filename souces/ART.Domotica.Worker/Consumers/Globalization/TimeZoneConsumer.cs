@@ -14,6 +14,7 @@ using ART.Domotica.Domain.Interfaces.Globalization;
 using ART.Domotica.Constant.Globalization;
 using ART.Domotica.Model.Globalization;
 using ART.Domotica.Worker.IConsumers.Globalization;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Worker.Consumers.Globalization
 {
@@ -31,7 +32,8 @@ namespace ART.Domotica.Worker.Consumers.Globalization
 
         #region constructors
 
-        public TimeZoneConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public TimeZoneConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
 

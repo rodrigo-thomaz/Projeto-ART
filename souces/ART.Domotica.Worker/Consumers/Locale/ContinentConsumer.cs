@@ -14,6 +14,7 @@ using ART.Domotica.Model.Locale;
 using ART.Domotica.Worker.IConsumers.Locale;
 using ART.Domotica.Domain.Interfaces.Locale;
 using ART.Domotica.Repository.Entities.Locale;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Worker.Consumers.Locale
 {
@@ -31,7 +32,8 @@ namespace ART.Domotica.Worker.Consumers.Locale
 
         #region constructors
 
-        public ContinentConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public ContinentConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
 

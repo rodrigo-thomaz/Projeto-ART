@@ -2,6 +2,7 @@
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Worker.IConsumers;
 using ART.Infra.CrossCutting.Logging;
+using ART.Infra.CrossCutting.MQ;
 using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Worker;
 using ART.Infra.CrossCutting.Utils;
@@ -29,7 +30,8 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public ApplicationUserConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public ApplicationUserConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _registerUserConsumer = new EventingBasicConsumer(_model);
 

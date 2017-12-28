@@ -35,7 +35,7 @@
         #region Constructors
 
         public DeviceNTPConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
-            : base(connection)
+            : base(connection, mqSettings)
         {
             _setTimeZoneConsumer = new EventingBasicConsumer(_model);
             _setUpdateIntervalInMilliSecondConsumer = new EventingBasicConsumer(_model);

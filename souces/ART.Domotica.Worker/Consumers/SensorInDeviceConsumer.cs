@@ -17,6 +17,7 @@
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
     using global::AutoMapper;
+    using ART.Infra.CrossCutting.MQ;
 
     public class SensorInDeviceConsumer : ConsumerBase, ISensorInDeviceConsumer
     {
@@ -30,8 +31,8 @@
 
         #region Constructors
 
-        public SensorInDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext)
-            : base(connection)
+        public SensorInDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _componentContext = componentContext;
             _logger = logger;

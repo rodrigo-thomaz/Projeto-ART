@@ -36,7 +36,6 @@
         private readonly EventingBasicConsumer _setLabelConsumer;
 
         private readonly ISettingManager _settingsManager;
-        private readonly IMQSettings _mqSettings;
 
         private readonly IComponentContext _componentContext;
 
@@ -47,7 +46,7 @@
         #region Constructors
 
         public ESPDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
-            : base(connection)
+            : base(connection, mqSettings)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
             _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
@@ -63,7 +62,6 @@
             _logger = logger;
 
             _settingsManager = settingsManager;
-            _mqSettings = mqSettings;
 
             Initialize();
         }

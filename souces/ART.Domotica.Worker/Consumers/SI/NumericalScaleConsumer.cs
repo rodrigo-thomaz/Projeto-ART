@@ -14,6 +14,7 @@ using ART.Domotica.Constant.SI;
 using ART.Domotica.Domain.Interfaces.SI;
 using ART.Domotica.Repository.Entities.SI;
 using ART.Domotica.Model.SI;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Worker.Consumers.SI
 {
@@ -31,7 +32,8 @@ namespace ART.Domotica.Worker.Consumers.SI
 
         #region constructors
 
-        public NumericalScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public NumericalScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
 

@@ -15,6 +15,7 @@ using ART.Domotica.Model;
 using ART.Infra.CrossCutting.Logging;
 using ART.Domotica.Contract;
 using ART.Domotica.IoTContract;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -34,7 +35,8 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public SensorConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public SensorConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);

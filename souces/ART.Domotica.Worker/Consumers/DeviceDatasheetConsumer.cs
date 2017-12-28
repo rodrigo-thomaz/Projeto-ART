@@ -13,6 +13,7 @@ using AutoMapper;
 using ART.Domotica.Repository.Entities;
 using ART.Domotica.Model;
 using ART.Infra.CrossCutting.Logging;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -30,7 +31,8 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public DeviceDatasheetConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public DeviceDatasheetConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
 

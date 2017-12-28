@@ -14,6 +14,7 @@ using ART.Infra.CrossCutting.Logging;
 using AutoMapper;
 using ART.Domotica.Model;
 using ART.Domotica.Repository.Entities;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Worker.Consumers
 {
@@ -33,7 +34,8 @@ namespace ART.Domotica.Worker.Consumers
 
         #region constructors
 
-        public SensorUnitMeasurementScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public SensorUnitMeasurementScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _setRangeConsumer = new EventingBasicConsumer(_model);
             _setChartLimiterConsumer = new EventingBasicConsumer(_model);

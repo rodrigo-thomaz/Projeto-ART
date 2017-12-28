@@ -15,6 +15,7 @@ using ART.Domotica.Domain.Interfaces.SI;
 using ART.Domotica.Constant.SI;
 using ART.Domotica.Model.SI;
 using ART.Domotica.Worker.IConsumers.SI;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Worker.Consumers.SI
 {
@@ -33,7 +34,8 @@ namespace ART.Domotica.Worker.Consumers.SI
 
         #region constructors
 
-        public UnitMeasurementConsumer(IConnection connection, ILogger logger, IComponentContext componentContext) : base(connection)
+        public UnitMeasurementConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
             _getAllForIoTConsumer = new EventingBasicConsumer(_model);

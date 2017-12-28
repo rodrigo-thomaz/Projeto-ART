@@ -10,15 +10,17 @@
 
         protected readonly IConnection _connection;
         protected readonly IModel _model;
+        protected readonly IMQSettings _mqSettings;
 
         #endregion Fields
 
         #region Constructors
 
-        public ConsumerBase(IConnection connection)
+        public ConsumerBase(IConnection connection, IMQSettings mqSettings)
         {
             _connection = connection;
             _model = _connection.CreateModel();
+            _mqSettings = mqSettings;
         }
 
         #endregion Constructors
@@ -29,7 +31,7 @@
         {
             var arguments = new Dictionary<string, object>();
 
-            arguments.Add("x-expires", 6000);
+            arguments.Add("x-expires", _mqSettings.QueueExpiresMilliSecondsSettingsKey);
 
             return arguments;
         }
