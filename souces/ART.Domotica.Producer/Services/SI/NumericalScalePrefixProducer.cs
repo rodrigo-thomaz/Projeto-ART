@@ -33,12 +33,7 @@ namespace ART.Domotica.Producer.Services.SI
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: NumericalScalePrefixConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());            
+            BasicQueueDeclare(NumericalScalePrefixConstants.GetAllQueueName);
         }
 
         #endregion

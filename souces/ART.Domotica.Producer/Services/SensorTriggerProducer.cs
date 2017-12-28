@@ -54,40 +54,11 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                 queue: SensorTriggerConstants.InsertQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: SensorTriggerConstants.DeleteQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetTriggerOnQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetTriggerValueQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetBuzzerOnQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
+            BasicQueueDeclare(SensorTriggerConstants.InsertQueueName);
+            BasicQueueDeclare(SensorTriggerConstants.DeleteQueueName);
+            BasicQueueDeclare(SensorTriggerConstants.SetTriggerOnQueueName);
+            BasicQueueDeclare(SensorTriggerConstants.SetTriggerValueQueueName);
+            BasicQueueDeclare(SensorTriggerConstants.SetBuzzerOnQueueName);
         }
 
         #endregion

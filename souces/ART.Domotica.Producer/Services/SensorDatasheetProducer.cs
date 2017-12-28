@@ -33,12 +33,7 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: SensorDatasheetConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());            
+            BasicQueueDeclare(SensorDatasheetConstants.GetAllQueueName);
         }
 
         #endregion

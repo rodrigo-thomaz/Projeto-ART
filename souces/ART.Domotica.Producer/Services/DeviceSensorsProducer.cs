@@ -35,12 +35,7 @@
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: DeviceSensorsConstants.SetPublishIntervalInSecondsQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
+            BasicQueueDeclare(DeviceSensorsConstants.SetPublishIntervalInSecondsQueueName);
         }
 
         #endregion Methods

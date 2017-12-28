@@ -33,12 +33,7 @@ namespace ART.Domotica.Producer.Services.Globalization
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: TimeZoneConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());            
+            BasicQueueDeclare(TimeZoneConstants.GetAllQueueName);
         }
 
         #endregion

@@ -44,26 +44,9 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                 queue: SensorUnitMeasurementScaleConstants.SetRangeQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
+            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetRangeQueueName);
+            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName);
+            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName);
         }
 
         #endregion

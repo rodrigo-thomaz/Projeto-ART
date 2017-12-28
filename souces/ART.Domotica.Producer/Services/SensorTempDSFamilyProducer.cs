@@ -39,19 +39,8 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                  queue: SensorTempDSFamilyConstants.GetAllResolutionsQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorTempDSFamilyConstants.SetResolutionQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
+            BasicQueueDeclare(SensorTempDSFamilyConstants.GetAllResolutionsQueueName);
+            BasicQueueDeclare(SensorTempDSFamilyConstants.SetResolutionQueueName);
         }
 
         #endregion

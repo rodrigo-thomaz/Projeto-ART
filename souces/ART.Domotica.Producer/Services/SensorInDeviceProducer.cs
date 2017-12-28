@@ -35,12 +35,7 @@
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-              queue: SensorInDeviceConstants.SetOrdinationQueueName
-            , durable: false
-            , exclusive: false
-            , autoDelete: true
-            , arguments: CreateBasicArguments());
+            BasicQueueDeclare(SensorInDeviceConstants.SetOrdinationQueueName);
         }
 
         #endregion

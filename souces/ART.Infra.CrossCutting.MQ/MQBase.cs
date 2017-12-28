@@ -36,6 +36,16 @@
             return arguments;
         }
 
+        protected QueueDeclareOk BasicQueueDeclare(string queueName)
+        {
+            return _model.QueueDeclare(
+                  queue: queueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
+        }
+
         #endregion Methods
     }
 }

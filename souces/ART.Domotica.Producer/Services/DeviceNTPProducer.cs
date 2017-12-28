@@ -39,19 +39,8 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            _model.QueueDeclare(
-                queue: DeviceNTPConstants.SetTimeZoneQueueName
-              , durable: false
-              , exclusive: false
-              , autoDelete: true
-              , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                queue: DeviceNTPConstants.SetUpdateIntervalInMilliSecondQueueName
-              , durable: false
-              , exclusive: false
-              , autoDelete: true
-              , arguments: CreateBasicArguments());
+            BasicQueueDeclare(DeviceNTPConstants.SetTimeZoneQueueName);
+            BasicQueueDeclare(DeviceNTPConstants.SetUpdateIntervalInMilliSecondQueueName);
         }        
 
         #endregion
