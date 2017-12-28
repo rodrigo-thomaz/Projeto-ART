@@ -23,8 +23,6 @@
     {
         #region Fields
 
-        private readonly IComponentContext _componentContext;
-        private readonly ILogger _logger;
         private readonly EventingBasicConsumer _setOrdinationConsumer;
 
         #endregion Fields
@@ -32,11 +30,8 @@
         #region Constructors
 
         public SensorInDeviceConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
-            _componentContext = componentContext;
-            _logger = logger;
-
             _setOrdinationConsumer = new EventingBasicConsumer(_model);
 
             Initialize();

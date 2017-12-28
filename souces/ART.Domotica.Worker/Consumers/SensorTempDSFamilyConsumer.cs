@@ -26,23 +26,15 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _getAllResolutionsConsumer;
         private readonly EventingBasicConsumer _setResolutionConsumer;        
         
-        private readonly IComponentContext _componentContext;
-
-        private readonly ILogger _logger;
-
         #endregion
 
         #region constructors
 
         public SensorTempDSFamilyConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
             _getAllResolutionsConsumer = new EventingBasicConsumer(_model);
             _setResolutionConsumer = new EventingBasicConsumer(_model);
-            
-            _componentContext = componentContext;
-
-            _logger = logger;
 
             Initialize();
         }
@@ -60,8 +52,7 @@ namespace ART.Domotica.Worker.Consumers
             _setResolutionConsumer.Received += SetResolutionReceived;
                         
             _model.BasicConsume(SensorTempDSFamilyConstants.SetResolutionQueueName, false, _setResolutionConsumer);
-            _model.BasicConsume(SensorTempDSFamilyConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);
-            
+            _model.BasicConsume(SensorTempDSFamilyConstants.GetAllResolutionsQueueName, false, _getAllResolutionsConsumer);            
         }
 
         public void GetAllResolutionsReceived(object sender, BasicDeliverEventArgs e)

@@ -22,9 +22,7 @@
     public class DeviceSensorsConsumer : ConsumerBase, IDeviceSensorsConsumer
     {
         #region Fields
-
-        private readonly IComponentContext _componentContext;
-        private readonly ILogger _logger;
+        
         private readonly EventingBasicConsumer _setPublishIntervalInSecondsConsumer;
 
         #endregion Fields
@@ -32,11 +30,8 @@
         #region Constructors
 
         public DeviceSensorsConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
-            : base(connection, mqSettings)
-        {
-            _componentContext = componentContext;
-            _logger = logger;
-
+            : base(connection, mqSettings, logger, componentContext)
+        {            
             _setPublishIntervalInSecondsConsumer = new EventingBasicConsumer(_model);
 
             Initialize();

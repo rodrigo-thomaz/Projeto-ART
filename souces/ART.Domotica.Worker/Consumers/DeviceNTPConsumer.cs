@@ -26,23 +26,15 @@
         private readonly EventingBasicConsumer _setTimeZoneConsumer;
         private readonly EventingBasicConsumer _setUpdateIntervalInMilliSecondConsumer;
 
-        private readonly IComponentContext _componentContext;
-
-        private readonly ILogger _logger;
-
         #endregion Fields
 
         #region Constructors
 
         public DeviceNTPConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
             _setTimeZoneConsumer = new EventingBasicConsumer(_model);
             _setUpdateIntervalInMilliSecondConsumer = new EventingBasicConsumer(_model);
-
-            _componentContext = componentContext;
-
-            _logger = logger;
 
             Initialize();            
         }

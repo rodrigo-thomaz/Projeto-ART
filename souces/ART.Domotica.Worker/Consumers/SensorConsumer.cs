@@ -27,24 +27,16 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _getAllByDeviceInApplicationIdConsumer;
         private readonly EventingBasicConsumer _setLabelConsumer;
 
-        private readonly IComponentContext _componentContext;
-
-        private readonly ILogger _logger;
-
         #endregion
 
         #region constructors
 
         public SensorConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
             _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getAllByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);
             _setLabelConsumer = new EventingBasicConsumer(_model);
-
-            _componentContext = componentContext;
-
-            _logger = logger;
 
             Initialize();
         }

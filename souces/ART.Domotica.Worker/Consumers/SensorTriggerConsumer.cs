@@ -29,27 +29,19 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _setTriggerValueConsumer;
         private readonly EventingBasicConsumer _setBuzzerOnConsumer;        
 
-        private readonly IComponentContext _componentContext;
-
-        private readonly ILogger _logger;
-
         #endregion
 
         #region constructors
 
         public SensorTriggerConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
             _insertConsumer = new EventingBasicConsumer(_model);
             _deleteConsumer = new EventingBasicConsumer(_model);
 
             _setTriggerOnConsumer = new EventingBasicConsumer(_model);
             _setTriggerValueConsumer = new EventingBasicConsumer(_model);
-            _setBuzzerOnConsumer = new EventingBasicConsumer(_model);            
-
-            _componentContext = componentContext;
-
-            _logger = logger;
+            _setBuzzerOnConsumer = new EventingBasicConsumer(_model);
 
             Initialize();
         }

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.2.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.2\lib\net45\Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -41,6 +44,10 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +63,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ART.Infra.CrossCutting.Logging\ART.Infra.CrossCutting.Logging.csproj">
+      <Project>{8CA05FE6-15FE-4C6E-A10A-3360509F4F8C}</Project>
+      <Name>ART.Infra.CrossCutting.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ART.Infra.CrossCutting.MQ\ART.Infra.CrossCutting.MQ.csproj">
       <Project>{eb5e2271-76a2-4cf1-942e-f04fb9d1056b}</Project>
       <Name>ART.Infra.CrossCutting.MQ</Name>

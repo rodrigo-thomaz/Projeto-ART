@@ -24,23 +24,15 @@ namespace ART.Domotica.Worker.Consumers.Globalization
 
         private readonly EventingBasicConsumer _getAllConsumer;
 
-        private readonly IComponentContext _componentContext;
-
-        private readonly ILogger _logger;
-
         #endregion
 
         #region constructors
 
         public TimeZoneConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
             _getAllConsumer = new EventingBasicConsumer(_model);
-
-            _componentContext = componentContext;
-
-            _logger = logger;
-
+            
             Initialize();
         }
 

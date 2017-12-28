@@ -21,20 +21,15 @@ namespace ART.Domotica.Worker.Consumers
         #region private fields
 
         private readonly EventingBasicConsumer _getRPCConsumer;
-        private readonly IComponentContext _componentContext;
-        private readonly ILogger _logger;
 
         #endregion
 
         #region constructors
 
         public ApplicationConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings) 
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
             _getRPCConsumer = new EventingBasicConsumer(_model);
-
-            _componentContext = componentContext;
-            _logger = logger;
 
             Initialize();
         }

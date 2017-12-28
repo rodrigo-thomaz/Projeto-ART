@@ -26,24 +26,16 @@ namespace ART.Domotica.Worker.Consumers
         private readonly EventingBasicConsumer _setChartLimiterConsumer;
         private readonly EventingBasicConsumer _setUnitMeasurementNumericalScaleTypeCountryConsumer;
 
-        private readonly IComponentContext _componentContext;
-
-        private readonly ILogger _logger;
-
         #endregion
 
         #region constructors
 
         public SensorUnitMeasurementScaleConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
             _setRangeConsumer = new EventingBasicConsumer(_model);
             _setChartLimiterConsumer = new EventingBasicConsumer(_model);
             _setUnitMeasurementNumericalScaleTypeCountryConsumer = new EventingBasicConsumer(_model);
-
-            _componentContext = componentContext;
-
-            _logger = logger;
 
             Initialize();
         }

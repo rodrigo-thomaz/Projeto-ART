@@ -11,21 +11,11 @@
 
     public class ApplicationMQConsumer : ConsumerBase, IApplicationMQConsumer
     {
-        #region Fields
-
-        private readonly IComponentContext _componentContext;
-        private readonly ILogger _logger;
-
-        #endregion Fields
-
         #region Constructors
 
         public ApplicationMQConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
-            : base(connection, mqSettings)
+            : base(connection, mqSettings, logger, componentContext)
         {
-            _componentContext = componentContext;
-            _logger = logger;
-
             Initialize();
         }
 
