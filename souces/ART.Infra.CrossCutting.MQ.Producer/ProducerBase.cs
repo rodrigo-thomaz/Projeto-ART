@@ -1,29 +1,19 @@
 ﻿namespace ART.Infra.CrossCutting.MQ.Producer
 {
-    using System.Collections.Generic;
 
     using RabbitMQ.Client;
     using System.Threading.Tasks;
     using ART.Infra.CrossCutting.Utils;
     using RabbitMQ.Client.MessagePatterns;
 
-    public abstract class ProducerBase
+    public abstract class ProducerBase : MQBase
     {
-        #region Fields
-
-        protected readonly IConnection _connection;
-        protected readonly IModel _model;
-        protected readonly IMQSettings _mqSettings;
-
-        #endregion Fields
-
         #region Constructors
 
         public ProducerBase(IConnection connection, IMQSettings mqSettings)
+            :base(connection, mqSettings)
         {
-            _connection = connection;
-            _model = _connection.CreateModel();
-            _mqSettings = mqSettings;
+
         }
 
         #endregion Constructors
@@ -76,15 +66,6 @@
 
                 return result;
             });
-        }
-
-        protected Dictionary<string, object> CreateBasicArguments()
-        {
-            var arguments = new Dictionary<string, object>();
-
-            arguments.Add("x-expires", _mqSettings.QueueExpiresMilliSecondsSettingsKey);
-
-            return arguments;
         }
 
         #endregion Methods

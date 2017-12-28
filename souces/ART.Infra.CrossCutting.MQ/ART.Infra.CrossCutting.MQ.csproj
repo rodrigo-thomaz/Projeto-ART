@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IMQSettings.cs" />
+    <Compile Include="MQBase.cs" />
     <Compile Include="MQModule.cs" />
     <Compile Include="MQSettings.cs" />
     <Compile Include="RPCTimeoutException.cs" />
