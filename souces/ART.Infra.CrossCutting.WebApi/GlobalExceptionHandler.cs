@@ -35,6 +35,10 @@
             {
                 responseMessage = context.Request.CreateErrorResponse(HttpStatusCode.ServiceUnavailable, context.Exception);
             }
+            else if (context.Exception is RPCTimeoutException)
+            {
+                responseMessage = context.Request.CreateErrorResponse(HttpStatusCode.RequestTimeout, context.Exception);
+            }
             else if (context.Exception.GetBaseException() is ArgumentException)
             {
                 responseMessage = context.Request.CreateErrorResponse(HttpStatusCode.BadRequest, context.Exception);

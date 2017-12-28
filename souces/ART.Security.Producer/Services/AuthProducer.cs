@@ -1,4 +1,5 @@
-﻿using ART.Infra.CrossCutting.MQ.Contract;
+﻿using ART.Infra.CrossCutting.MQ;
+using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Infra.CrossCutting.Utils;
 using ART.Security.Constant;
@@ -13,7 +14,8 @@ namespace ART.Security.Producer.Services
     {
         #region constructors
 
-        public AuthProducer(IConnection connection) : base(connection)
+        public AuthProducer(IConnection connection, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             Initialize();
         }

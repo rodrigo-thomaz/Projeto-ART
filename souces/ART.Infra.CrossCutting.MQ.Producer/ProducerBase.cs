@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using ART.Infra.CrossCutting.Utils;
     using RabbitMQ.Client.MessagePatterns;
-    using System;
 
     public abstract class ProducerBase
     {
@@ -69,13 +68,7 @@
 
                 rpcClient.TimedOut += (sender, e) =>
                 {
-                    throw new TimeoutException("Worker time out");
-                };
-
-                rpcClient.Disconnected += (sender, e) =>
-                {
-                    rpcClient.Close();
-                    throw new Exception("Worker disconected");
+                    throw new RPCTimeoutException();
                 };
 
                 var bufferResult = rpcClient.Call(body);
