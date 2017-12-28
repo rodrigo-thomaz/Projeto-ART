@@ -9,11 +9,22 @@
         public ConsumerBase(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
+            Initialize();
         }
 
         #endregion Constructors
 
         #region Methods
+
+        private void Initialize()
+        {
+            _model.ExchangeDeclare(
+                  exchange: "amq.topic"
+                , type: ExchangeType.Topic
+                , durable: true
+                , autoDelete: false
+                , arguments: null);            
+        }
 
         protected string GetApplicationRoutingKeyForAllIoT(string topic)
         {

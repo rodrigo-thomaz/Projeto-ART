@@ -55,13 +55,6 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            _model.ExchangeDeclare(
-                  exchange: "amq.topic"
-                , type: ExchangeType.Topic
-                , durable: true
-                , autoDelete: false
-                , arguments: null);
-
             BasicQueueDeclare(SensorConstants.GetAllByApplicationIdQueueName);
             BasicQueueDeclare(SensorConstants.SetLabelQueueName);
             BasicQueueDeclare(SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName);            

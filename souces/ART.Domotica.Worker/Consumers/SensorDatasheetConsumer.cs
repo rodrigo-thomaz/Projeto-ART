@@ -49,13 +49,6 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            _model.ExchangeDeclare(
-                  exchange: "amq.topic"
-                , type: ExchangeType.Topic
-                , durable: true
-                , autoDelete: false
-                , arguments: null);
-
             BasicQueueDeclare(SensorDatasheetConstants.GetAllQueueName);
 
             _getAllConsumer.Received += GetAllReceived;
