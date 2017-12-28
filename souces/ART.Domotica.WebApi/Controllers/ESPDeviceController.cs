@@ -98,7 +98,7 @@
                 Mode = Request.GetFirstHeaderValueOrDefault<string>("x-ESP8266-MODE")
             };
 
-            var data = await _espDeviceProducer.CheckForUpdates(contract);
+            var data = await _espDeviceProducer.CheckForUpdatesRPC(contract);
 
             if(data.Buffer == null)
             {

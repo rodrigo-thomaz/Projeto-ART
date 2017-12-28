@@ -9,7 +9,7 @@
     {
         #region Methods
 
-        Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdates(ESPDeviceCheckForUpdatesRPCRequestContract message);
+        Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdatesRPC(ESPDeviceCheckForUpdatesRPCRequestContract message);
 
         Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message);
 

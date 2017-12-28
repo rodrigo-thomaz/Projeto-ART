@@ -4,6 +4,7 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces.Locale;
 using ART.Domotica.Constant.Locale;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Producer.Services.Locale
 {
@@ -11,7 +12,8 @@ namespace ART.Domotica.Producer.Services.Locale
     {
         #region constructors
 
-        public CountryProducer(IConnection connection) : base(connection)
+        public CountryProducer(IConnection connection, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             Initialize();
         }

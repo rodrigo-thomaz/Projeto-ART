@@ -5,6 +5,8 @@
     using RabbitMQ.Client;
     using System.Threading.Tasks;
     using ART.Infra.CrossCutting.Utils;
+    using RabbitMQ.Client.MessagePatterns;
+    using System;
 
     public abstract class ProducerBase
     {
@@ -12,15 +14,17 @@
 
         protected readonly IConnection _connection;
         protected readonly IModel _model;
+        private readonly IMQSettings _mqSettings;
 
         #endregion Fields
 
         #region Constructors
 
-        public ProducerBase(IConnection connection)
+        public ProducerBase(IConnection connection, IMQSettings mqSettings)
         {
             _connection = connection;
             _model = _connection.CreateModel();
+            _mqSettings = mqSettings;
         }
 
         #endregion Constructors
@@ -41,6 +45,46 @@
                 var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
 
                 _model.BasicPublish("", queueName, null, payload);
+            });
+        }
+
+        protected async Task<T> BasicRPCPublish<T>(string queueName, object message)
+            where T : class
+        {
+            return await Task.Run(() =>
+            {
+                var consumerCount = _model.ConsumerCount(queueName);
+
+                if (consumerCount == 0)
+                {
+                    throw new NoConsumersFoundException();
+                }
+
+                var rpcClient = new SimpleRpcClient(_model, queueName)
+                {
+                    TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds
+                };
+
+                var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+
+                rpcClient.TimedOut += (sender, e) =>
+                {
+                    throw new TimeoutException("Worker time out");
+                };
+
+                rpcClient.Disconnected += (sender, e) =>
+                {
+                    rpcClient.Close();
+                    throw new Exception("Worker disconected");
+                };
+
+                var bufferResult = rpcClient.Call(body);
+
+                rpcClient.Close();
+
+                var result = SerializationHelpers.DeserializeJsonBufferToType<T>(bufferResult);
+
+                return result;
             });
         }
 

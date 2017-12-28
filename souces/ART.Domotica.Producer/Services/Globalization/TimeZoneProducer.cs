@@ -4,6 +4,7 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Constant.Globalization;
 using ART.Domotica.Producer.Interfaces.Globalization;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Producer.Services.Globalization
 {
@@ -11,7 +12,8 @@ namespace ART.Domotica.Producer.Services.Globalization
     {
         #region constructors
 
-        public TimeZoneProducer(IConnection connection) : base(connection)
+        public TimeZoneProducer(IConnection connection, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             Initialize();
         }

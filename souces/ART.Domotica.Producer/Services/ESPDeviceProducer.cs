@@ -4,27 +4,18 @@ using ART.Domotica.Producer.Interfaces;
 using ART.Infra.CrossCutting.MQ.Contract;
 using System.Threading.Tasks;
 using ART.Domotica.Constant;
-using ART.Infra.CrossCutting.Utils;
 using ART.Domotica.Contract;
-using System;
-using RabbitMQ.Client.MessagePatterns;
 using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Producer.Services
 {
     public class ESPDeviceProducer : ProducerBase, IESPDeviceProducer
     {
-        #region Fields
-
-        private readonly IMQSettings _mqSettings;
-
-        #endregion Fields
-
         #region constructors
 
-        public ESPDeviceProducer(IConnection connection, IMQSettings mqSettings) : base(connection)
+        public ESPDeviceProducer(IConnection connection, IMQSettings mqSettings) 
+            : base(connection, mqSettings)
         {
-            _mqSettings = mqSettings;
             Initialize();
         }
 
@@ -57,74 +48,20 @@ namespace ART.Domotica.Producer.Services
             await BasicPublish(ESPDeviceConstants.DeleteFromApplicationQueueName, message);
         }
 
-        public async Task<ESPDeviceGetConfigurationsRPCResponseContract> GetConfigurationsRPC(ESPDeviceGetConfigurationsRPCRequestContract message)
-        {
-            return await Task.Run(() =>
-            {
-                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.GetConfigurationsRPCQueueName)
-                {
-                    TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds
-                };
-
-                var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
-
-                rpcClient.TimedOut += (sender, e) =>
-                {
-                    throw new TimeoutException("Worker time out");
-                };
-
-                rpcClient.Disconnected += (sender, e) =>
-                {
-                    rpcClient.Close();
-                    throw new Exception("Worker disconected");
-                };
-
-                var bufferResult = rpcClient.Call(body);
-
-                rpcClient.Close();
-
-                var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCResponseContract>(bufferResult);
-
-                return result;
-            });
-        }
-
-        public async Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdates(ESPDeviceCheckForUpdatesRPCRequestContract message)
-        {
-            return await Task.Run(() =>
-            {
-                var rpcClient = new SimpleRpcClient(_model, ESPDeviceConstants.CheckForUpdatesRPCQueueName)
-                {
-                    TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds
-                };
-
-                var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
-
-                rpcClient.TimedOut += (sender, e) =>
-                {
-                    throw new TimeoutException("Worker time out");
-                };
-
-                rpcClient.Disconnected += (sender, e) =>
-                {
-                    rpcClient.Close();
-                    throw new Exception("Worker disconected");
-                };
-
-                var bufferResult = rpcClient.Call(body);
-
-                rpcClient.Close();
-
-                var result = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceCheckForUpdatesRPCResponseContract>(bufferResult);
-
-                return result;
-            });
-        }
-
         public async Task SetLabel(AuthenticatedMessageContract<DeviceSetLabelRequestContract> message)
         {
             await BasicPublish(ESPDeviceConstants.SetLabelQueueName, message);
         }
+
+        public async Task<ESPDeviceGetConfigurationsRPCResponseContract> GetConfigurationsRPC(ESPDeviceGetConfigurationsRPCRequestContract message)
+        {
+            return await BasicRPCPublish<ESPDeviceGetConfigurationsRPCResponseContract>(ESPDeviceConstants.GetConfigurationsRPCQueueName, message);
+        }
+
+        public async Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdatesRPC(ESPDeviceCheckForUpdatesRPCRequestContract message)
+        {
+            return await BasicRPCPublish<ESPDeviceCheckForUpdatesRPCResponseContract>(ESPDeviceConstants.CheckForUpdatesRPCQueueName, message);            
+        }        
 
         #endregion
 
@@ -166,6 +103,20 @@ namespace ART.Domotica.Producer.Services
              , exclusive: false
              , autoDelete: true
              , arguments: CreateBasicArguments());
+
+            _model.QueueDeclare(
+                queue: ESPDeviceConstants.GetConfigurationsRPCQueueName
+              , durable: false
+              , exclusive: false
+              , autoDelete: true
+              , arguments: CreateBasicArguments());
+
+            _model.QueueDeclare(
+                 queue: ESPDeviceConstants.CheckForUpdatesRPCQueueName
+               , durable: false
+               , exclusive: false
+               , autoDelete: true
+               , arguments: CreateBasicArguments());
         }        
 
         #endregion

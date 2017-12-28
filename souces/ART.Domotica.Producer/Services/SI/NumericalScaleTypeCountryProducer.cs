@@ -4,6 +4,7 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Constant.SI;
 using ART.Domotica.Producer.Interfaces.SI;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Producer.Services.SI
 {
@@ -11,7 +12,8 @@ namespace ART.Domotica.Producer.Services.SI
     {
         #region constructors
 
-        public NumericalScaleTypeCountryProducer(IConnection connection) : base(connection)
+        public NumericalScaleTypeCountryProducer(IConnection connection, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             Initialize();
         }

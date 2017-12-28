@@ -8,13 +8,14 @@
 
     using RabbitMQ.Client;
     using ART.Domotica.Constant;
+    using ART.Infra.CrossCutting.MQ;
 
     public class SensorInDeviceProducer : ProducerBase, ISensorInDeviceProducer
     {
         #region Constructors
 
-        public SensorInDeviceProducer(IConnection connection)
-            : base(connection)
+        public SensorInDeviceProducer(IConnection connection, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             Initialize();
         }        

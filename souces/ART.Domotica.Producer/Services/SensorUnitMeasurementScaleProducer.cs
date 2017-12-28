@@ -5,6 +5,7 @@ using ART.Infra.CrossCutting.MQ.Contract;
 using ART.Infra.CrossCutting.MQ.Producer;
 using ART.Domotica.Producer.Interfaces;
 using ART.Domotica.Constant;
+using ART.Infra.CrossCutting.MQ;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -12,7 +13,8 @@ namespace ART.Domotica.Producer.Services
     {
         #region constructors
 
-        public SensorUnitMeasurementScaleProducer(IConnection connection) : base(connection)
+        public SensorUnitMeasurementScaleProducer(IConnection connection, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             Initialize();
         }

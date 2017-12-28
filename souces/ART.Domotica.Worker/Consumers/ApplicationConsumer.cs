@@ -46,10 +46,8 @@ namespace ART.Domotica.Worker.Consumers
 
         private void Initialize()
         {
-            var queueName = ApplicationConstants.GetRPCQueueName;
-
             _model.QueueDeclare(
-                 queue: queueName
+                 queue: ApplicationConstants.GetRPCQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
@@ -57,7 +55,7 @@ namespace ART.Domotica.Worker.Consumers
 
             _getRPCConsumer.Received += GetRPCReceived;
 
-            _model.BasicConsume(queueName, false, _getRPCConsumer);
+            _model.BasicConsume(ApplicationConstants.GetRPCQueueName, false, _getRPCConsumer);
         }
 
         private void GetRPCReceived(object sender, BasicDeliverEventArgs e)

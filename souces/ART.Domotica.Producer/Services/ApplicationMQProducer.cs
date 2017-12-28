@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Producer.Services
 {
     using ART.Domotica.Producer.Interfaces;
+    using ART.Infra.CrossCutting.MQ;
     using ART.Infra.CrossCutting.MQ.Producer;
 
     using RabbitMQ.Client;
@@ -9,8 +10,8 @@
     {
         #region Constructors
 
-        public ApplicationMQProducer(IConnection connection)
-            : base(connection)
+        public ApplicationMQProducer(IConnection connection, IMQSettings mqSettings)
+            : base(connection, mqSettings)
         {
             Initialize();
         }
