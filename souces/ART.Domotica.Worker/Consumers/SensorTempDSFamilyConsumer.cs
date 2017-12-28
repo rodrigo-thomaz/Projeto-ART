@@ -60,19 +60,8 @@ namespace ART.Domotica.Worker.Consumers
                , autoDelete: false
                , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: SensorTempDSFamilyConstants.GetAllResolutionsQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: SensorTempDSFamilyConstants.SetResolutionQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
+            BasicQueueDeclare(SensorTempDSFamilyConstants.GetAllResolutionsQueueName);
+            BasicQueueDeclare(SensorTempDSFamilyConstants.SetResolutionQueueName);
 
             _getAllResolutionsConsumer.Received += GetAllResolutionsReceived;
             _setResolutionConsumer.Received += SetResolutionReceived;

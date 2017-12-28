@@ -57,12 +57,7 @@ namespace ART.Domotica.Worker.Consumers.Globalization
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: TimeZoneConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());                       
+            BasicQueueDeclare(TimeZoneConstants.GetAllQueueName);          
 
             _getAllConsumer.Received += GetAllReceived;
 

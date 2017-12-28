@@ -67,51 +67,20 @@ namespace ART.Domotica.Worker.Consumers
                , autoDelete: false
                , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: SensorTriggerConstants.InsertQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorTriggerConstants.DeleteQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetTriggerOnQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetTriggerValueQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorTriggerConstants.SetBuzzerOnQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
+            BasicQueueDeclare(SensorTriggerConstants.InsertQueueName);
+            BasicQueueDeclare(SensorTriggerConstants.DeleteQueueName);
+            BasicQueueDeclare(SensorTriggerConstants.SetTriggerOnQueueName);
+            BasicQueueDeclare(SensorTriggerConstants.SetTriggerValueQueueName);
+            BasicQueueDeclare(SensorTriggerConstants.SetBuzzerOnQueueName);           
 
             _insertConsumer.Received += InsertReceived;
             _deleteConsumer.Received += DeleteReceived;
-
             _setTriggerOnConsumer.Received += SetTriggerOnReceived;
             _setTriggerValueConsumer.Received += SetTriggerValueReceived;
             _setBuzzerOnConsumer.Received += SetBuzzerOnReceived;
 
             _model.BasicConsume(SensorTriggerConstants.InsertQueueName, false, _insertConsumer);
             _model.BasicConsume(SensorTriggerConstants.DeleteQueueName, false, _deleteConsumer);
-
             _model.BasicConsume(SensorTriggerConstants.SetTriggerOnQueueName, false, _setTriggerOnConsumer);
             _model.BasicConsume(SensorTriggerConstants.SetTriggerValueQueueName, false, _setTriggerValueConsumer);
             _model.BasicConsume(SensorTriggerConstants.SetBuzzerOnQueueName, false, _setBuzzerOnConsumer);

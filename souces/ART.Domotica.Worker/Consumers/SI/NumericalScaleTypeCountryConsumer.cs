@@ -57,12 +57,7 @@ namespace ART.Domotica.Worker.Consumers.SI
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: NumericalScaleTypeCountryConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());                       
+            BasicQueueDeclare(NumericalScaleTypeCountryConstants.GetAllQueueName);
 
             _getAllConsumer.Received += GetAllReceived;
 

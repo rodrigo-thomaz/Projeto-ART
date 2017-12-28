@@ -56,12 +56,7 @@ namespace ART.Domotica.Worker.Consumers
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: SensorTypeConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());                       
+            BasicQueueDeclare(SensorTypeConstants.GetAllQueueName);       
 
             _getAllConsumer.Received += GetAllReceived;
 

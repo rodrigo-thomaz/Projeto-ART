@@ -59,29 +59,12 @@ namespace ART.Domotica.Worker.Consumers
                , type: ExchangeType.Topic
                , durable: true
                , autoDelete: false
-               , arguments: null);           
+               , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: SensorUnitMeasurementScaleConstants.SetRangeQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
+            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetRangeQueueName);
+            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName);
+            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName);
+            
             _setRangeConsumer.Received += SetRangeReceived;
             _setChartLimiterConsumer.Received += SetChartLimiterReceived;
             _setUnitMeasurementNumericalScaleTypeCountryConsumer.Received += SetUnitMeasurementNumericalScaleTypeCountryReceived;

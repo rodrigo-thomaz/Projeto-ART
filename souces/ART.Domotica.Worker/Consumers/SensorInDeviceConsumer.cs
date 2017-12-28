@@ -55,12 +55,7 @@
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: SensorInDeviceConstants.SetOrdinationQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
+            BasicQueueDeclare(SensorInDeviceConstants.SetOrdinationQueueName);
 
             _setOrdinationConsumer.Received += SetOrdinationReceived;
 

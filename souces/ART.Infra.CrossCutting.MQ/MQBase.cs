@@ -27,15 +27,6 @@
 
         #region Methods
 
-        protected Dictionary<string, object> CreateBasicArguments()
-        {
-            var arguments = new Dictionary<string, object>();
-
-            arguments.Add("x-expires", _mqSettings.QueueExpiresMilliSecondsSettingsKey);
-
-            return arguments;
-        }
-
         protected QueueDeclareOk BasicQueueDeclare(string queueName)
         {
             return _model.QueueDeclare(
@@ -44,6 +35,15 @@
                 , exclusive: false
                 , autoDelete: true
                 , arguments: CreateBasicArguments());
+        }
+
+        protected Dictionary<string, object> CreateBasicArguments()
+        {
+            var arguments = new Dictionary<string, object>();
+
+            arguments.Add("x-expires", _mqSettings.QueueExpiresMilliSecondsSettingsKey);
+
+            return arguments;
         }
 
         #endregion Methods

@@ -62,26 +62,9 @@ namespace ART.Domotica.Worker.Consumers
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: SensorConstants.GetAllByApplicationIdQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                  queue: SensorConstants.SetLabelQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                queue: SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
-              , durable: false
-              , exclusive: false
-              , autoDelete: true
-              , arguments: CreateBasicArguments());
+            BasicQueueDeclare(SensorConstants.GetAllByApplicationIdQueueName);
+            BasicQueueDeclare(SensorConstants.SetLabelQueueName);
+            BasicQueueDeclare(SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName);            
 
             _model.QueueBind(
                   queue: SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName

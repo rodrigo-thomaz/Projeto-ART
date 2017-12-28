@@ -57,12 +57,7 @@ namespace ART.Domotica.Worker.Consumers.Locale
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: CountryConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());                       
+            BasicQueueDeclare(CountryConstants.GetAllQueueName);           
 
             _getAllConsumer.Received += GetAllReceived;
 

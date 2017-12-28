@@ -79,61 +79,14 @@
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                 queue: ESPDeviceConstants.GetAllQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: ESPDeviceConstants.GetAllByApplicationIdQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: ESPDeviceConstants.GetByPinQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: ESPDeviceConstants.InsertInApplicationQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: ESPDeviceConstants.DeleteFromApplicationQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                queue: ESPDeviceConstants.SetLabelQueueName
-              , durable: false
-              , exclusive: false
-              , autoDelete: true
-              , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: ESPDeviceConstants.GetConfigurationsRPCQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
-
-            _model.QueueDeclare(
-                 queue: ESPDeviceConstants.CheckForUpdatesRPCQueueName
-               , durable: false
-               , exclusive: false
-               , autoDelete: true
-               , arguments: CreateBasicArguments());
+            BasicQueueDeclare(ESPDeviceConstants.GetAllQueueName);
+            BasicQueueDeclare(ESPDeviceConstants.GetAllByApplicationIdQueueName);
+            BasicQueueDeclare(ESPDeviceConstants.GetByPinQueueName);
+            BasicQueueDeclare(ESPDeviceConstants.InsertInApplicationQueueName);
+            BasicQueueDeclare(ESPDeviceConstants.DeleteFromApplicationQueueName);
+            BasicQueueDeclare(ESPDeviceConstants.SetLabelQueueName);
+            BasicQueueDeclare(ESPDeviceConstants.GetConfigurationsRPCQueueName);
+            BasicQueueDeclare(ESPDeviceConstants.CheckForUpdatesRPCQueueName);
 
             _getAllConsumer.Received += GetAllReceived;
             _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;

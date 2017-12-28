@@ -60,19 +60,8 @@ namespace ART.Domotica.Worker.Consumers.SI
                 , autoDelete: false
                 , arguments: null);
 
-            _model.QueueDeclare(
-                  queue: UnitMeasurementConstants.GetAllQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());            
-
-            _model.QueueDeclare(
-                  queue: UnitMeasurementConstants.GetAllForIoTQueueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
+            BasicQueueDeclare(UnitMeasurementConstants.GetAllQueueName);
+            BasicQueueDeclare(UnitMeasurementConstants.GetAllForIoTQueueName);
 
             _model.QueueBind(
                   queue: UnitMeasurementConstants.GetAllForIoTQueueName
