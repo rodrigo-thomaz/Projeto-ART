@@ -59,10 +59,7 @@
                     throw new NoConsumersFoundException();
                 }
 
-                var rpcClient = new SimpleRpcClient(_model, queueName)
-                {
-                    TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds
-                };
+                var rpcClient = new SimpleRpcClient(_model, queueName);
 
                 var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
 
@@ -85,7 +82,7 @@
         {
             var arguments = new Dictionary<string, object>();
 
-            arguments.Add("x-expires", 6000);
+            arguments.Add("x-expires", _mqSettings.QueueExpiresMilliSecondsSettingsKey);
 
             return arguments;
         }

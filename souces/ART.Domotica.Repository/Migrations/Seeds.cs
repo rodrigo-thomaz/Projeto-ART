@@ -1293,10 +1293,10 @@
                 settingManager.Insert(MQSettingsConstants.BrokerPwdSettingsKey, "test");
             }
 
-            // RpcClientTimeOutMilliSeconds
-            if (!settingManager.Exist(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey))
+            // QueueExpiresMilliSecondsSettingsKey
+            if (!settingManager.Exist(MQSettingsConstants.QueueExpiresMilliSecondsSettingsKey))
             {
-                settingManager.Insert(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey, 5000);
+                settingManager.Insert(MQSettingsConstants.QueueExpiresMilliSecondsSettingsKey, 5000);
             }
 
             // NTPHost

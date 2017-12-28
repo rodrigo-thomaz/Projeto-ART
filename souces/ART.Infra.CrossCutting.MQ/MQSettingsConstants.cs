@@ -9,7 +9,7 @@
         public static readonly string BrokerPwdSettingsKey = "BrokerPwd";
         public static readonly string BrokerUserSettingsKey = "BrokerUser";
         public static readonly string BrokerVirtualHostSettingsKey = "BrokerVirtualHost";
-        public static readonly string RpcClientTimeOutMilliSecondsSettingsKey = "RpcClientTimeOutMilliSeconds";
+        public static readonly string QueueExpiresMilliSecondsSettingsKey = "QueueExpiresMilliSeconds";
 
         #endregion Fields
     }

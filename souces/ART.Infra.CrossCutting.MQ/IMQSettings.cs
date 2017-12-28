@@ -29,7 +29,7 @@
             get;
         }
 
-        int RpcClientTimeOutMilliSeconds
+        int QueueExpiresMilliSecondsSettingsKey
         {
             get;
         }

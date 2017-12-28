@@ -13,7 +13,7 @@
         private string _brokerPwd;
         private string _brokerUser;
         private string _brokerVirtualHost;
-        private int _rpcClientTimeOutMilliSeconds;
+        private int _queueExpiresMilliSecondsSettingsKey;
 
         #endregion Fields
 
@@ -53,9 +53,9 @@
             get { return _brokerVirtualHost; }
         }
 
-        public int RpcClientTimeOutMilliSeconds
+        public int QueueExpiresMilliSecondsSettingsKey
         {
-            get { return _rpcClientTimeOutMilliSeconds; }
+            get { return _queueExpiresMilliSecondsSettingsKey; }
         }
 
         #endregion Properties
@@ -70,7 +70,7 @@
             _brokerUser = _settingsManager.GetValue<string>(MQSettingsConstants.BrokerUserSettingsKey);
             _brokerPwd = _settingsManager.GetValue<string>(MQSettingsConstants.BrokerPwdSettingsKey);
 
-            _rpcClientTimeOutMilliSeconds = _settingsManager.GetValue<int>(MQSettingsConstants.RpcClientTimeOutMilliSecondsSettingsKey);
+            _queueExpiresMilliSecondsSettingsKey = _settingsManager.GetValue<int>(MQSettingsConstants.QueueExpiresMilliSecondsSettingsKey);
         }
 
         #endregion Methods
