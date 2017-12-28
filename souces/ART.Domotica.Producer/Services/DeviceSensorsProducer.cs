@@ -44,7 +44,7 @@
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);
+                , arguments: CreateBasicArguments());
         }
 
         #endregion Methods

@@ -60,7 +60,7 @@ namespace ART.Domotica.Worker.Consumers.Locale
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);                       
+                , arguments: CreateBasicArguments());                       
 
             _getAllConsumer.Received += GetAllReceived;
 

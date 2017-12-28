@@ -1,5 +1,7 @@
 ﻿namespace ART.Infra.CrossCutting.MQ.Producer
 {
+    using System.Collections.Generic;
+
     using RabbitMQ.Client;
 
     public abstract class ProducerBase
@@ -20,5 +22,18 @@
         }
 
         #endregion Constructors
+
+        #region Methods
+
+        protected Dictionary<string, object> CreateBasicArguments()
+        {
+            var arguments = new Dictionary<string, object>();
+
+            arguments.Add("x-expires", 6000);
+
+            return arguments;
+        }
+
+        #endregion Methods
     }
 }

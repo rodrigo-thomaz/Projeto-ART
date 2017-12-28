@@ -51,14 +51,14 @@ namespace ART.Domotica.Producer.Services
               , durable: false
               , exclusive: false
               , autoDelete: true
-              , arguments: null);
+              , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                 queue: DeviceNTPConstants.SetUpdateIntervalInMilliSecondQueueName
               , durable: false
               , exclusive: false
               , autoDelete: true
-              , arguments: null);
+              , arguments: CreateBasicArguments());
         }        
 
         #endregion

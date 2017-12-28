@@ -40,11 +40,14 @@ namespace ART.Domotica.Producer.Services
                 {
                     TimeoutMilliseconds = _mqSettings.RpcClientTimeOutMilliSeconds
                 };
+
                 var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+
                 rpcClient.TimedOut += (sender, e) =>
                 {
                     throw new TimeoutException("Worker time out");
                 };
+
                 rpcClient.Disconnected += (sender, e) =>
                 {
                     rpcClient.Close();
@@ -52,8 +55,11 @@ namespace ART.Domotica.Producer.Services
                 };
 
                 var bufferResult = rpcClient.Call(body);
+
                 rpcClient.Close();
+
                 var result = SerializationHelpers.DeserializeJsonBufferToType<ApplicationGetRPCResponseContract>(bufferResult);
+
                 return result;
             });
         }

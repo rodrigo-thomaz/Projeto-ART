@@ -63,20 +63,20 @@ namespace ART.Domotica.Worker.Consumers.SI
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);            
+                , arguments: CreateBasicArguments());            
 
             _model.QueueDeclare(
                   queue: UnitMeasurementConstants.GetAllForIoTQueueName
                 , durable: false
                 , exclusive: false
-                , autoDelete: false
-                , arguments: null);
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
 
             _model.QueueBind(
                   queue: UnitMeasurementConstants.GetAllForIoTQueueName
                 , exchange: "amq.topic"
                 , routingKey: GetApplicationRoutingKeyForAllIoT(UnitMeasurementConstants.GetAllForIoTQueueName)
-                , arguments: null);
+                , arguments: CreateBasicArguments());
 
             _getAllConsumer.Received += GetAllReceived;
             _getAllForIoTConsumer.Received += GetAllForIoTReceived;

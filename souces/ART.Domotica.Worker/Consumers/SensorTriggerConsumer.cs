@@ -70,35 +70,35 @@ namespace ART.Domotica.Worker.Consumers
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);
+                , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                   queue: SensorTriggerConstants.DeleteQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);
+                , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                   queue: SensorTriggerConstants.SetTriggerOnQueueName
-                , durable: true
+                , durable: false
                 , exclusive: false
-                , autoDelete: false
-                , arguments: null);
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                   queue: SensorTriggerConstants.SetTriggerValueQueueName
-                , durable: true
+                , durable: false
                 , exclusive: false
-                , autoDelete: false
-                , arguments: null);
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                   queue: SensorTriggerConstants.SetBuzzerOnQueueName
-                , durable: true
+                , durable: false
                 , exclusive: false
-                , autoDelete: false
-                , arguments: null);
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
 
             _insertConsumer.Received += InsertReceived;
             _deleteConsumer.Received += DeleteReceived;

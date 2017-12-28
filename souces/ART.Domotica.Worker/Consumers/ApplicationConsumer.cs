@@ -52,8 +52,8 @@ namespace ART.Domotica.Worker.Consumers
                  queue: queueName
                , durable: false
                , exclusive: false
-               , autoDelete: false
-               , arguments: null);
+               , autoDelete: true
+               , arguments: CreateBasicArguments());
 
             _getRPCConsumer.Received += GetRPCReceived;
 

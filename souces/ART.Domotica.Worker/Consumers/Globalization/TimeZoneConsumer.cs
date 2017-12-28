@@ -60,7 +60,7 @@ namespace ART.Domotica.Worker.Consumers.Globalization
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);                       
+                , arguments: CreateBasicArguments());                       
 
             _getAllConsumer.Received += GetAllReceived;
 

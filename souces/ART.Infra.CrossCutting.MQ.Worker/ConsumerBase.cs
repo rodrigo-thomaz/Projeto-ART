@@ -1,5 +1,7 @@
 ﻿namespace ART.Infra.CrossCutting.MQ.Worker
 {
+    using System.Collections.Generic;
+
     using RabbitMQ.Client;
 
     public abstract class ConsumerBase
@@ -22,6 +24,15 @@
         #endregion Constructors
 
         #region Methods
+
+        protected Dictionary<string, object> CreateBasicArguments()
+        {
+            var arguments = new Dictionary<string, object>();
+
+            arguments.Add("x-expires", 6000);
+
+            return arguments;
+        }
 
         protected string GetApplicationRoutingKeyForAllIoT(string topic)
         {

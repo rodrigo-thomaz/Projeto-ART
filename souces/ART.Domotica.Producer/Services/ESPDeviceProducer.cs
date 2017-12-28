@@ -9,7 +9,6 @@ using ART.Domotica.Contract;
 using System;
 using RabbitMQ.Client.MessagePatterns;
 using ART.Infra.CrossCutting.MQ;
-using System.Collections.Generic;
 
 namespace ART.Domotica.Producer.Services
 {
@@ -157,44 +156,40 @@ namespace ART.Domotica.Producer.Services
 
         private void Initialize()
         {
-            var arguments = new Dictionary<string, object>();
-
-            arguments.Add("x-expires", 6000);
-
             _model.QueueDeclare(
                   queue: ESPDeviceConstants.GetAllByApplicationIdQueueName
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: arguments);
+                , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetByPinQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.InsertInApplicationQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.DeleteFromApplicationQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                queue: ESPDeviceConstants.SetLabelQueueName
              , durable: false
              , exclusive: false
              , autoDelete: true
-             , arguments: arguments);
+             , arguments: CreateBasicArguments());
         }        
 
         #endregion

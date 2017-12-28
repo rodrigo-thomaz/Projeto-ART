@@ -41,7 +41,7 @@ namespace ART.Domotica.Producer.Services.SI
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);            
+                , arguments: CreateBasicArguments());            
         }
 
         #endregion

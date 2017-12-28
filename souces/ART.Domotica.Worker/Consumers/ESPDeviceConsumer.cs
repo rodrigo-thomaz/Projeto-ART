@@ -74,72 +74,68 @@
 
         private void Initialize()
         {
-            var arguments = new Dictionary<string, object>();
-
-            arguments.Add("x-expires", 6000);
-
             _model.ExchangeDeclare(
                   exchange: "amq.topic"
                 , type: ExchangeType.Topic
                 , durable: true
                 , autoDelete: false
-                , arguments: arguments);
+                , arguments: null);
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetAllQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetAllByApplicationIdQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetByPinQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.InsertInApplicationQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.DeleteFromApplicationQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                 queue: ESPDeviceConstants.SetLabelQueueName
               , durable: false
               , exclusive: false
               , autoDelete: true
-              , arguments: arguments);
+              , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.GetConfigurationsRPCQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                  queue: ESPDeviceConstants.CheckForUpdatesRPCQueueName
                , durable: false
                , exclusive: false
                , autoDelete: true
-               , arguments: arguments);
+               , arguments: CreateBasicArguments());
 
             _getAllConsumer.Received += GetAllReceived;
             _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;

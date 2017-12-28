@@ -65,27 +65,27 @@ namespace ART.Domotica.Worker.Consumers
                 , durable: false
                 , exclusive: false
                 , autoDelete: true
-                , arguments: null);
+                , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                   queue: SensorConstants.SetLabelQueueName
-                , durable: true
+                , durable: false
                 , exclusive: false
-                , autoDelete: false
-                , arguments: null);
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
 
             _model.QueueDeclare(
                 queue: SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
               , durable: false
               , exclusive: false
-              , autoDelete: false
-              , arguments: null);
+              , autoDelete: true
+              , arguments: CreateBasicArguments());
 
             _model.QueueBind(
                   queue: SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName
                 , exchange: "amq.topic"
                 , routingKey: GetApplicationRoutingKeyForAllIoT(SensorConstants.GetAllByDeviceInApplicationIdIoTQueueName)
-                , arguments: null);
+                , arguments: CreateBasicArguments());
 
             _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;
             _getAllByDeviceInApplicationIdConsumer.Received += GetAllByDeviceInApplicationIdReceived;
