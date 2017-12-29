@@ -133,6 +133,8 @@ ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManag
 	this->_deviceMQ = NULL;
 	this->_deviceNTP = NULL;
 	this->_deviceInApplication = NULL;
+	
+	this->_espDevice = NULL;
 }
 
 void ConfigurationManager::begin()
@@ -162,6 +164,11 @@ DeviceNTP* ConfigurationManager::getDeviceNTP()
 DeviceInApplication* ConfigurationManager::getDeviceInApplication()
 {	
 	return this->_deviceInApplication;
+}
+
+ESPDevice* ConfigurationManager::getESPDevice()
+{	
+	return this->_espDevice;
 }
 
 int ConfigurationManager::getPublishMessageInterval()

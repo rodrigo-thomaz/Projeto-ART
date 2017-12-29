@@ -7,6 +7,8 @@
 #include "WiFiManager.h"
 #include "ESP8266HTTPClient.h"
 
+#include "ESPDevice.h"
+
 class DeviceMQ {
   public:
 
@@ -95,6 +97,8 @@ class ConfigurationManager
 	DeviceNTP*							getDeviceNTP();
 	DeviceInApplication*				getDeviceInApplication();
 	
+	ESPDevice*							getESPDevice();
+	
 	int									getPublishMessageInterval();
 
 	void								insertInApplication(String json);
@@ -121,6 +125,8 @@ class ConfigurationManager
 	DeviceMQ*							_deviceMQ;
 	DeviceNTP*							_deviceNTP;	
 	DeviceInApplication*				_deviceInApplication;	
+	
+	ESPDevice*							_espDevice;	
 	
 	int									_publishMessageInterval;
 	
