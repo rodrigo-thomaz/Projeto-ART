@@ -23,17 +23,7 @@
 
         #endregion Constructors
 
-        #region Methods
-
-        protected QueueDeclareOk BasicQueueDeclare(IModel model, string queueName)
-        {
-            return model.QueueDeclare(
-                  queue: queueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
-        }
+        #region Methods        
 
         protected Dictionary<string, object> CreateBasicArguments()
         {

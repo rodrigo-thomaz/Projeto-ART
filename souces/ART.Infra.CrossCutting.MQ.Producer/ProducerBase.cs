@@ -77,6 +77,16 @@
             });
         }
 
+        private QueueDeclareOk BasicQueueDeclare(IModel model, string queueName)
+        {
+            return model.QueueDeclare(
+                  queue: queueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
+        }
+
         #endregion Methods
     }
 }
