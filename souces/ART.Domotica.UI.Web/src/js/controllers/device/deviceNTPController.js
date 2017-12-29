@@ -62,7 +62,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
         $scope.changeUpdateIntervalInMilliSecond = function () {
             if (!$scope.deviceNTP || !$scope.updateIntervalInMilliSecondView) return;
-            deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceNTP.deviceNTPId, $scope.updateIntervalInMilliSecondView);
+            deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceNTP.deviceNTPId, $scope.deviceNTP.deviceDatasheetId, $scope.updateIntervalInMilliSecondView);
         };
 
     }]);

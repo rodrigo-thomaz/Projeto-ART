@@ -20,9 +20,10 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             });
         };
 
-        var setUpdateIntervalInMilliSecond = function (deviceNTPId, updateIntervalInMilliSecond) {
+        var setUpdateIntervalInMilliSecond = function (deviceNTPId, deviceDatasheetId, updateIntervalInMilliSecond) {
             var data = {
                 deviceNTPId: deviceNTPId,
+                deviceDatasheetId: deviceDatasheetId,
                 updateIntervalInMilliSecond: updateIntervalInMilliSecond,
             }
             return $http.post(serviceBase + deviceNTPConstant.setUpdateIntervalInMilliSecondApiUri, data).then(function (results) {
