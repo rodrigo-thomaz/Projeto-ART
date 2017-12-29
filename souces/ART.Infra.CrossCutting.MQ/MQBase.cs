@@ -17,7 +17,7 @@
 
         public MQBase(IConnection connection, IMQSettings mqSettings)
         {
-            _connection = connection;            
+            _connection = connection;
             _mqSettings = mqSettings;
         }
 

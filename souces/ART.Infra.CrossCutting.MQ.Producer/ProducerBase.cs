@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using ART.Infra.CrossCutting.Utils;
     using RabbitMQ.Client.MessagePatterns;
-    using System.Collections.Generic;
 
     public abstract class ProducerBase : MQBase
     {

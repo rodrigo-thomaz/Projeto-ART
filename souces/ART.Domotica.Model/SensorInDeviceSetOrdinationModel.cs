@@ -8,12 +8,12 @@
     {
         #region Properties
 
-        public Guid DeviceSensorsId
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }
 
-        public DeviceDatasheetEnum DeviceDatasheetId
+        public Guid DeviceSensorsId
         {
             get; set;
         }

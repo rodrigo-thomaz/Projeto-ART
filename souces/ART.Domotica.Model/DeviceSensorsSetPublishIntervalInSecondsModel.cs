@@ -1,18 +1,19 @@
 ﻿namespace ART.Domotica.Model
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class DeviceSensorsSetPublishIntervalInSecondsModel
     {
         #region Properties
 
-        public Guid DeviceSensorsId
+        public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }
 
-        public DeviceDatasheetEnum DeviceDatasheetId
+        public Guid DeviceSensorsId
         {
             get; set;
         }

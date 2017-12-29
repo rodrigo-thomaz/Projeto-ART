@@ -10,11 +10,11 @@
     {
         #region Fields
 
+        protected const string defaultExchangeTopic = "amq.topic";
+
         protected readonly IComponentContext _componentContext;
         protected readonly ILogger _logger;
         protected readonly IModel _model;
-
-        protected const string defaultExchangeTopic = "amq.topic";
 
         #endregion Fields
 
@@ -33,6 +33,16 @@
         #endregion Constructors
 
         #region Methods
+
+        protected QueueDeclareOk BasicQueueDeclare(string queueName)
+        {
+            return _model.QueueDeclare(
+                  queue: queueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
+        }
 
         protected string GetApplicationRoutingKeyForAllIoT(string topic)
         {
@@ -78,16 +88,6 @@
                 , durable: true
                 , autoDelete: false
                 , arguments: null);
-        }
-
-        protected QueueDeclareOk BasicQueueDeclare(string queueName)
-        {
-            return _model.QueueDeclare(
-                  queue: queueName
-                , durable: false
-                , exclusive: false
-                , autoDelete: true
-                , arguments: CreateBasicArguments());
         }
 
         #endregion Methods
