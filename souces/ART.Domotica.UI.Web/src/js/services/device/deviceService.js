@@ -69,9 +69,10 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             });
         };
 
-        var setLabel = function (deviceId, label) {
+        var setLabel = function (deviceId, deviceDatasheetId, label) {
             var data = {
                 deviceId: deviceId,
+                deviceDatasheetId: deviceDatasheetId,
                 label: label,
             }
             return $http.post(serviceBase + deviceConstant.setLabelApiUri, data).then(function (results) {

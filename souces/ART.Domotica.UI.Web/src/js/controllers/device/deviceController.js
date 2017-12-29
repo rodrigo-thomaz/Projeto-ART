@@ -29,7 +29,7 @@ app.controller('deviceController', ['$scope', '$rootScope', '$timeout', '$log', 
 
     $scope.changeLabel = function () {
         if (!$scope.device || !$scope.deviceLabel) return;
-        deviceService.setLabel($scope.device.deviceId, $scope.deviceLabel);
+        deviceService.setLabel($scope.device.deviceId, $scope.device.deviceDatasheetId, $scope.deviceLabel);
     };
 
 }]);
