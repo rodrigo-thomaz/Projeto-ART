@@ -8,9 +8,10 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var setPublishIntervalInSecondsCompletedSubscription = null;
 
-        var setPublishIntervalInSeconds = function (deviceSensorsId, publishIntervalInSeconds) {
+        var setPublishIntervalInSeconds = function (deviceSensorsId, deviceDatasheetId, publishIntervalInSeconds) {
             var data = {
                 deviceSensorsId: deviceSensorsId,
+                deviceDatasheetId: deviceDatasheetId,
                 publishIntervalInSeconds: publishIntervalInSeconds,
             }
             return $http.post(serviceBase + deviceSensorsConstant.setPublishIntervalInSecondsApiUri, data).then(function (results) {

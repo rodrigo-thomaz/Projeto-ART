@@ -27,7 +27,7 @@ app.controller('deviceSensorsController', ['$scope', '$rootScope', '$timeout', '
 
     $scope.changePublishIntervalInSeconds = function () {
         if (!$scope.deviceSensors || !$scope.publishIntervalInSecondsView) return;
-        deviceSensorsService.setPublishIntervalInSeconds($scope.deviceSensors.deviceSensorsId, $scope.publishIntervalInSecondsView);
+        deviceSensorsService.setPublishIntervalInSeconds($scope.deviceSensors.deviceSensorsId, $scope.deviceSensors.deviceDatasheetId, $scope.publishIntervalInSecondsView);
     };
 
 }]);
