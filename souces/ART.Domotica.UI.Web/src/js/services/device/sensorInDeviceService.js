@@ -8,9 +8,10 @@ app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', '
 
         var setOrdinationCompletedSubscription = null;
 
-        var setOrdination = function (deviceSensorsId, sensorId, sensorDatasheetId, sensorTypeId, ordination) {
+        var setOrdination = function (deviceSensorsId, deviceDatasheetId, sensorId, sensorDatasheetId, sensorTypeId, ordination) {
             var data = {
                 deviceSensorsId: deviceSensorsId,
+                deviceDatasheetId: deviceDatasheetId,
                 sensorId: sensorId,
                 sensorDatasheetId: sensorDatasheetId,
                 sensorTypeId: sensorTypeId,
