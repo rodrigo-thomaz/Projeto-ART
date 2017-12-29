@@ -9,9 +9,10 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
         var setTimeZoneCompletedSubscription = null;
         var setUpdateIntervalInMilliSecondCompletedSubscription = null;
 
-        var setTimeZone = function (deviceNTPId, timeZoneId) {
+        var setTimeZone = function (deviceNTPId, deviceDatasheetId, timeZoneId) {
             var data = {
                 deviceNTPId: deviceNTPId,
+                deviceDatasheetId: deviceDatasheetId,
                 timeZoneId: timeZoneId,
             }
             return $http.post(serviceBase + deviceNTPConstant.setTimeZoneApiUri, data).then(function (results) {

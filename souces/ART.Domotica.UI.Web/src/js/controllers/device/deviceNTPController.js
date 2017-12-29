@@ -57,7 +57,7 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
         $scope.changeTimeZone = function () {
             if (!$scope.deviceNTP) return;
-            deviceNTPService.setTimeZone($scope.deviceNTP.deviceNTPId, $scope.timeZone.selectedTimeZone.timeZoneId);
+            deviceNTPService.setTimeZone($scope.deviceNTP.deviceNTPId, $scope.deviceNTP.deviceDatasheetId, $scope.timeZone.selectedTimeZone.timeZoneId);
         };
 
         $scope.changeUpdateIntervalInMilliSecond = function () {
