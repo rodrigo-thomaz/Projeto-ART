@@ -4,15 +4,21 @@
 #include "Arduino.h"
 #include "DeviceSensors.h"
 
+class DeviceSensors;
+
 class ESPDevice
 {
 	public:
 		
-		ESPDevice(String espDeviceId, short deviceDatasheetId, String label);
+		ESPDevice();
 		~ESPDevice();
 		
 		String						getESPDeviceId();
+		void 						setESPDeviceId(String value);
+		
 		short						getDeviceDatasheetId();
+		void						setDeviceDatasheetId(short value);
+		
 		int							getChipId();
 		int							getFlashChipId();
 		String						getStationMacAddress();

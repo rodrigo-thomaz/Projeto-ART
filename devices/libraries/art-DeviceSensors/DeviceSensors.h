@@ -2,21 +2,27 @@
 #define DeviceSensors_h
 
 #include "Arduino.h"
-//#include "ESPDevice.h"
+
+class ESPDevice;
 
 class DeviceSensors
 {
 
 public:
 
-	DeviceSensors();
+	DeviceSensors(ESPDevice& espDevice);
 	~DeviceSensors();
 	
-	//ESPDevice*          				getESPDevice();	
+	ESPDevice*          				getESPDevice();	
+	
+	int									getPublishIntervalInSeconds();
+	void								setPublishIntervalInSeconds(int value);
 	
 private:	
 
-	//ESPDevice*          				_espDevice;	
+	ESPDevice*          				_espDevice;	
+	
+	int									_publishIntervalInSeconds;
 	
 };
 
