@@ -16,7 +16,7 @@ namespace ART.Domotica.Producer.Services
         public DeviceNTPProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -32,16 +32,6 @@ namespace ART.Domotica.Producer.Services
         {
             await BasicPublish(DeviceNTPConstants.SetUpdateIntervalInMilliSecondQueueName, message);
         }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(DeviceNTPConstants.SetTimeZoneQueueName);
-            BasicQueueDeclare(DeviceNTPConstants.SetUpdateIntervalInMilliSecondQueueName);
-        }        
 
         #endregion
     }

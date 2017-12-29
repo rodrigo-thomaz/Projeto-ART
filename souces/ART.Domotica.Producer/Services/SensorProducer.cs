@@ -16,7 +16,7 @@ namespace ART.Domotica.Producer.Services
         public SensorProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -31,16 +31,6 @@ namespace ART.Domotica.Producer.Services
         public async Task SetLabel(AuthenticatedMessageContract<SensorSetLabelRequestContract> message)
         {
             await BasicPublish(SensorConstants.SetLabelQueueName, message);
-        }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(SensorConstants.GetAllByApplicationIdQueueName);
-            BasicQueueDeclare(SensorConstants.SetLabelQueueName);
         }
 
         #endregion

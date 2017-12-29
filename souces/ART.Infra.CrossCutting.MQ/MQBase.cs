@@ -9,7 +9,6 @@
         #region Fields
 
         protected readonly IConnection _connection;
-        protected readonly IModel _model;
         protected readonly IMQSettings _mqSettings;
 
         #endregion Fields
@@ -18,8 +17,7 @@
 
         public MQBase(IConnection connection, IMQSettings mqSettings)
         {
-            _connection = connection;
-            _model = _connection.CreateModel();
+            _connection = connection;            
             _mqSettings = mqSettings;
         }
 
@@ -27,9 +25,9 @@
 
         #region Methods
 
-        protected QueueDeclareOk BasicQueueDeclare(string queueName)
+        protected QueueDeclareOk BasicQueueDeclare(IModel model, string queueName)
         {
-            return _model.QueueDeclare(
+            return model.QueueDeclare(
                   queue: queueName
                 , durable: false
                 , exclusive: false

@@ -15,7 +15,7 @@ namespace ART.Domotica.Producer.Services.Locale
         public CountryProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -25,15 +25,6 @@ namespace ART.Domotica.Producer.Services.Locale
         public async Task GetAll(AuthenticatedMessageContract message)
         {
             await BasicPublish(CountryConstants.GetAllQueueName, message);
-        }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(CountryConstants.GetAllQueueName);
         }
 
         #endregion

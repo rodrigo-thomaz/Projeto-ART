@@ -16,7 +16,7 @@ namespace ART.Domotica.Producer.Services
         public SensorTriggerProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -46,19 +46,6 @@ namespace ART.Domotica.Producer.Services
         public async Task SetBuzzerOn(AuthenticatedMessageContract<SensorTriggerSetBuzzerOnRequestContract> message)
         {
             await BasicPublish(SensorTriggerConstants.SetBuzzerOnQueueName, message);
-        }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(SensorTriggerConstants.InsertQueueName);
-            BasicQueueDeclare(SensorTriggerConstants.DeleteQueueName);
-            BasicQueueDeclare(SensorTriggerConstants.SetTriggerOnQueueName);
-            BasicQueueDeclare(SensorTriggerConstants.SetTriggerValueQueueName);
-            BasicQueueDeclare(SensorTriggerConstants.SetBuzzerOnQueueName);
         }
 
         #endregion

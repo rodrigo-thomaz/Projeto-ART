@@ -16,7 +16,7 @@ namespace ART.Domotica.Producer.Services
         public SensorUnitMeasurementScaleProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -36,17 +36,6 @@ namespace ART.Domotica.Producer.Services
         public async Task SetUnitMeasurementNumericalScaleTypeCountry(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryRequestContract> message)
         {
             await BasicPublish(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName, message);
-        }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetRangeQueueName);
-            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName);
-            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName);
         }
 
         #endregion

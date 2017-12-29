@@ -15,7 +15,7 @@ namespace ART.Domotica.Producer.Services.Globalization
         public TimeZoneProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -25,15 +25,6 @@ namespace ART.Domotica.Producer.Services.Globalization
         public async Task GetAll(AuthenticatedMessageContract message)
         {
             await BasicPublish(TimeZoneConstants.GetAllQueueName, message);
-        }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(TimeZoneConstants.GetAllQueueName);
         }
 
         #endregion

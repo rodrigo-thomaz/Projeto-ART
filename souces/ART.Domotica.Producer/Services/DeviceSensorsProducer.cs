@@ -17,7 +17,7 @@
         public DeviceSensorsProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion Constructors
@@ -30,14 +30,5 @@
         }
 
         #endregion
-
-        #region Methods
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(DeviceSensorsConstants.SetPublishIntervalInSecondsQueueName);
-        }
-
-        #endregion Methods
     }
 }

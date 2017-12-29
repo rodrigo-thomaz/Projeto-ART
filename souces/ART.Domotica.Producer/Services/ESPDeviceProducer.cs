@@ -16,7 +16,7 @@ namespace ART.Domotica.Producer.Services
         public ESPDeviceProducer(IConnection connection, IMQSettings mqSettings) 
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -61,22 +61,6 @@ namespace ART.Domotica.Producer.Services
         public async Task<ESPDeviceCheckForUpdatesRPCResponseContract> CheckForUpdatesRPC(ESPDeviceCheckForUpdatesRPCRequestContract message)
         {
             return await BasicRPCPublish<ESPDeviceCheckForUpdatesRPCResponseContract>(ESPDeviceConstants.CheckForUpdatesRPCQueueName, message);            
-        }        
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(ESPDeviceConstants.GetAllQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.GetAllByApplicationIdQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.GetByPinQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.InsertInApplicationQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.DeleteFromApplicationQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.SetLabelQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.GetConfigurationsRPCQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.CheckForUpdatesRPCQueueName);
         }        
 
         #endregion

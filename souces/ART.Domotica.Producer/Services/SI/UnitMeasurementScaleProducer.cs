@@ -15,7 +15,7 @@ namespace ART.Domotica.Producer.Services.SI
         public UnitMeasurementScaleProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -25,15 +25,6 @@ namespace ART.Domotica.Producer.Services.SI
         public async Task GetAll(AuthenticatedMessageContract message)
         {
             await BasicPublish(UnitMeasurementScaleConstants.GetAllQueueName, message);
-        }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(UnitMeasurementScaleConstants.GetAllQueueName);
         }
 
         #endregion

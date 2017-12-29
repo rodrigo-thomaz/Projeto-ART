@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using ART.Infra.CrossCutting.Utils;
     using RabbitMQ.Client.MessagePatterns;
+    using System.Collections.Generic;
 
     public abstract class ProducerBase : MQBase
     {
@@ -24,16 +25,19 @@
         {
             await Task.Run(() =>
             {
-                var consumerCount = _model.ConsumerCount(queueName);
-
-                if (consumerCount == 0)
+                using (var model = _connection.CreateModel())
                 {
-                    throw new NoConsumersFoundException();
+                    var queueDeclare = BasicQueueDeclare(model, queueName);
+
+                    if (queueDeclare.ConsumerCount == 0)
+                    {
+                        throw new NoConsumersFoundException();
+                    }
+
+                    var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
+
+                    model.BasicPublish("", queueName, null, payload);
                 }
-
-                var payload = SerializationHelpers.SerializeToJsonBufferAsync(message);
-
-                _model.BasicPublish("", queueName, null, payload);
             });
         }
 
@@ -42,29 +46,35 @@
         {
             return await Task.Run(() =>
             {
-                var consumerCount = _model.ConsumerCount(queueName);
+                byte[] bufferResult;
 
-                if (consumerCount == 0)
+                using (var model = _connection.CreateModel())
                 {
-                    throw new NoConsumersFoundException();
+                    var queueDeclare = BasicQueueDeclare(model, queueName);
+
+                    if (queueDeclare.ConsumerCount == 0)
+                    {
+                        throw new NoConsumersFoundException();
+                    }
+
+                    var rpcClient = new SimpleRpcClient(model, queueName);
+
+                    var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
+
+                    rpcClient.TimedOut += (sender, e) =>
+                    {
+                        throw new RPCTimeoutException();
+                    };
+
+                    bufferResult = rpcClient.Call(body);
+
+                    rpcClient.Close();                    
                 }
-
-                var rpcClient = new SimpleRpcClient(_model, queueName);
-
-                var body = SerializationHelpers.SerializeToJsonBufferAsync(message);
-
-                rpcClient.TimedOut += (sender, e) =>
-                {
-                    throw new RPCTimeoutException();
-                };
-
-                var bufferResult = rpcClient.Call(body);
-
-                rpcClient.Close();
 
                 var result = SerializationHelpers.DeserializeJsonBufferToType<T>(bufferResult);
 
                 return result;
+
             });
         }
 

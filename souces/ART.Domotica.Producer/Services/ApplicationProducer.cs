@@ -16,7 +16,7 @@ namespace ART.Domotica.Producer.Services
         public ApplicationProducer(IConnection connection, IMQSettings mqSettings) 
             : base(connection, mqSettings)
         {            
-            Initialize();
+            
         }
 
         #endregion
@@ -26,15 +26,6 @@ namespace ART.Domotica.Producer.Services
         public async Task<ApplicationGetRPCResponseContract> GetRPC(AuthenticatedMessageContract message)
         {
             return await BasicRPCPublish<ApplicationGetRPCResponseContract>(ApplicationConstants.GetRPCQueueName, message);
-        }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(ApplicationConstants.GetRPCQueueName);
         }
 
         #endregion

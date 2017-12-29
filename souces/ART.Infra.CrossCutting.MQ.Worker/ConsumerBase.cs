@@ -12,6 +12,7 @@
 
         protected readonly IComponentContext _componentContext;
         protected readonly ILogger _logger;
+        protected readonly IModel _model;
 
         protected const string defaultExchangeTopic = "amq.topic";
 
@@ -22,6 +23,7 @@
         public ConsumerBase(IConnection connection, IMQSettings mqSettings, ILogger logger, IComponentContext componentContext)
             : base(connection, mqSettings)
         {
+            _model = _connection.CreateModel();
             _componentContext = componentContext;
             _logger = logger;
 
@@ -76,6 +78,16 @@
                 , durable: true
                 , autoDelete: false
                 , arguments: null);
+        }
+
+        protected QueueDeclareOk BasicQueueDeclare(string queueName)
+        {
+            return _model.QueueDeclare(
+                  queue: queueName
+                , durable: false
+                , exclusive: false
+                , autoDelete: true
+                , arguments: CreateBasicArguments());
         }
 
         #endregion Methods

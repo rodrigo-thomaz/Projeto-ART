@@ -16,7 +16,7 @@ namespace ART.Domotica.Producer.Services
         public SensorTempDSFamilyProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -32,16 +32,6 @@ namespace ART.Domotica.Producer.Services
         {
             await BasicPublish(SensorTempDSFamilyConstants.SetResolutionQueueName, message);
         }        
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(SensorTempDSFamilyConstants.GetAllResolutionsQueueName);
-            BasicQueueDeclare(SensorTempDSFamilyConstants.SetResolutionQueueName);
-        }
 
         #endregion
     }

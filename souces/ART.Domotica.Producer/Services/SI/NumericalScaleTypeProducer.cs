@@ -15,7 +15,7 @@ namespace ART.Domotica.Producer.Services.SI
         public NumericalScaleTypeProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
-            Initialize();
+            
         }
 
         #endregion
@@ -25,15 +25,6 @@ namespace ART.Domotica.Producer.Services.SI
         public async Task GetAll(AuthenticatedMessageContract message)
         {
             await BasicPublish(NumericalScaleTypeConstants.GetAllQueueName, message);
-        }
-
-        #endregion
-
-        #region private voids
-
-        private void Initialize()
-        {
-            BasicQueueDeclare(NumericalScaleTypeConstants.GetAllQueueName);
         }
 
         #endregion
