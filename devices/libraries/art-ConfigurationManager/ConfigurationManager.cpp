@@ -218,8 +218,8 @@ void ConfigurationManager::autoInitialize()
 			short deviceDatasheetId = jsonObjectResponse["deviceDatasheetId"];
 			int chipId = this->_chipId;
 			int flashChipId = this->_flashChipId;
-			char* stationMacAddress = strdup(_macAddress.c_str());
-			char* softAPMacAddress = "SoftMac";
+			char* stationMacAddress = strdup(WiFi.macAddress().c_str());
+			char* softAPMacAddress = strdup(WiFi.softAPmacAddress().c_str());
 			char* sdkVersion = "SDK 123";
 			long chipSize = 123456789;
 			char* label = "Sensor 1";
