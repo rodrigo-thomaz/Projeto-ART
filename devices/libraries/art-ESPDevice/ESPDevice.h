@@ -10,7 +10,7 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice(char* espDeviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, char* sdkVersion, long chipSize, char* label);
+		ESPDevice(char* espDeviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, char* sdkVersion, long chipSize, char* label, int publishIntervalInSeconds);
 		~ESPDevice();
 		
 		char *						getESPDeviceId();
