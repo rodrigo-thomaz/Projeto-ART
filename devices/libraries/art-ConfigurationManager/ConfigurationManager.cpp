@@ -216,12 +216,12 @@ void ConfigurationManager::autoInitialize()
 			
 			char* espDeviceId = strdup(jsonObjectResponse["deviceId"]);
 			short deviceDatasheetId = jsonObjectResponse["deviceDatasheetId"];
-			int chipId = this->_chipId;
-			int flashChipId = this->_flashChipId;
+			int chipId = ESP.getChipId();
+			int flashChipId = ESP.getFlashChipId();
 			char* stationMacAddress = strdup(WiFi.macAddress().c_str());
 			char* softAPMacAddress = strdup(WiFi.softAPmacAddress().c_str());
 			char* sdkVersion = "SDK 123";
-			long chipSize = 123456789;
+			long chipSize = ESP.getFlashChipSize();
 			char* label = "Sensor 1";
 			int publishIntervalInSeconds = jsonObjectResponse["publishMessageInterval"];
 			
