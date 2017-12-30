@@ -1,83 +1,94 @@
 #include "ESPDevice.h"
 
-ESPDevice::ESPDevice()
+ESPDevice::ESPDevice(char* espDeviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, char* sdkVersion, long chipSize, char* label)
 {
-	// this->_espDeviceId 			= NULL;
-	// this->_deviceDatasheetId 	= NULL;
-	// this->_chipId				= NULL;
-	// this->_flashChipId			= NULL;	
-	// this->_stationMacAddress	= NULL;
-	// this->_softAPMacAddress		= NULL;	
-    // this->_sdkVersion			= NULL;
-    // this->_chipSize				= NULL;	
-	// this->_label 				= NULL;	
-	this->_deviceSensors		= NULL;
+	_espDeviceId 					= new char(sizeof(strlen(espDeviceId)));
+	_espDeviceId 					= espDeviceId;
+	
+	_deviceDatasheetId 				= deviceDatasheetId;	
+	
+	_chipId							= chipId;
+	
+	_flashChipId					= flashChipId;
+	
+	_stationMacAddress				= new char(sizeof(strlen(stationMacAddress)));
+	_stationMacAddress 				= stationMacAddress;
+	
+	_softAPMacAddress				= new char(sizeof(strlen(softAPMacAddress)));	
+	_softAPMacAddress				= softAPMacAddress;
+	
+    _sdkVersion						= new char(sizeof(strlen(sdkVersion)));
+	_sdkVersion						= sdkVersion;
+	
+    _chipSize						= chipSize;	
+	
+	_label 							= new char(sizeof(strlen(label)));
+	_label 							= label;
+	
+	DeviceSensors::createDeviceSensors(_deviceSensors, this);		
 }
 
 ESPDevice::~ESPDevice()
 {
+	delete (_espDeviceId);
+	delete (_stationMacAddress);
+	delete (_sdkVersion);
+	delete (_label);
+	delete (_deviceSensors);
 }
 
-String ESPDevice::getESPDeviceId()
+char* ESPDevice::getESPDeviceId()
 {	
-	return this->_espDeviceId;
-}
-
-void ESPDevice::setESPDeviceId(String value)
-{	
-	this->_espDeviceId = value;
+	return _espDeviceId;
 }
 
 short ESPDevice::getDeviceDatasheetId()
 {	
-	return this->_deviceDatasheetId;
-}
-
-void ESPDevice::setDeviceDatasheetId(short value)
-{	
-	this->_deviceDatasheetId = value;
+	return _deviceDatasheetId;
 }
 
 int	ESPDevice::getChipId()
 {	
-	return this->_chipId;
+	return _chipId;
 }
+
 int ESPDevice::getFlashChipId()
 {	
-	return this->_flashChipId;
+	return _flashChipId;
 }
 
-String ESPDevice::getStationMacAddress()
+char* ESPDevice::getStationMacAddress()
 {	
-	return this->_stationMacAddress;
+	return _stationMacAddress;
 }
 
-String ESPDevice::getSoftAPMacAddress()
+char* ESPDevice::getSoftAPMacAddress()
 {	
-	return this->_softAPMacAddress;
+	return _softAPMacAddress;
 }
 
-String ESPDevice::getSDKVersion()
+char* ESPDevice::getSDKVersion()
 {	
-	return this->_sdkVersion;
+	return _sdkVersion;
 }
 
 long ESPDevice::getChipSize()
 {	
-	return this->_chipSize;
+	return _chipSize;
 }
 
-String ESPDevice::getLabel()
+char* ESPDevice::getLabel()
 {	
-	return this->_label;
+	return _label;
 }
 
-void ESPDevice::setLabel(String value)
+void ESPDevice::setLabel(char* value)
 {	
-	this->_label = value;
+	_label = new char(sizeof(strlen(value)));
+	_label = value;
 }
 		
 DeviceSensors* ESPDevice::getDeviceSensors()
 {	
-	return this->_deviceSensors;
+	return _deviceSensors;
 }

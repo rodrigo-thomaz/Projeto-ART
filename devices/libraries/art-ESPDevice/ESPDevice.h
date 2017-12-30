@@ -10,38 +10,34 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice();
+		ESPDevice(char* espDeviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, char* sdkVersion, long chipSize, char* label);
 		~ESPDevice();
 		
-		String						getESPDeviceId();
-		void 						setESPDeviceId(String value);
-		
+		char *						getESPDeviceId();
 		short						getDeviceDatasheetId();
-		void						setDeviceDatasheetId(short value);
-		
 		int							getChipId();
 		int							getFlashChipId();
-		String						getStationMacAddress();
-		String						getSoftAPMacAddress();
-		String						getSDKVersion();
+		char *						getStationMacAddress();
+		char *						getSoftAPMacAddress();
+		char *						getSDKVersion();
 		long						getChipSize();
 
-		String						getLabel();
-		void						setLabel(String value);
+		char *						getLabel();
+		void						setLabel(char * value);
 		
 		DeviceSensors*				getDeviceSensors();
 	
 	private:	
 
-		String						_espDeviceId;
+		char *						_espDeviceId;
 		short						_deviceDatasheetId;
 		int							_chipId;
 		int							_flashChipId;
-		String						_stationMacAddress;
-		String						_softAPMacAddress;
-		String						_sdkVersion;
+		char *						_stationMacAddress;
+		char *						_softAPMacAddress;
+		char *						_sdkVersion;
 		long						_chipSize;
-		String						_label;
+		char *						_label;
 		
 		DeviceSensors*				_deviceSensors;
 		
