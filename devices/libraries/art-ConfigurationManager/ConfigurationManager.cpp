@@ -220,12 +220,11 @@ void ConfigurationManager::autoInitialize()
 			int flashChipId = ESP.getFlashChipId();
 			char* stationMacAddress = strdup(WiFi.macAddress().c_str());
 			char* softAPMacAddress = strdup(WiFi.softAPmacAddress().c_str());
-			char* sdkVersion = "SDK 123";
 			long chipSize = ESP.getFlashChipSize();
 			char* label = "Sensor 1";
 			int publishIntervalInSeconds = jsonObjectResponse["publishMessageInterval"];
 			
-			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, chipId, flashChipId, stationMacAddress, softAPMacAddress, sdkVersion, chipSize, label, publishIntervalInSeconds);
+			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, chipId, flashChipId, stationMacAddress, softAPMacAddress, chipSize, label, publishIntervalInSeconds);
 			
 			//////////////////////
 			
