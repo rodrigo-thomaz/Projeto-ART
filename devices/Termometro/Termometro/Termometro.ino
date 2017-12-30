@@ -346,7 +346,7 @@ void loopInApplication()
     }
 
     // Sensor
-    displayTemperatureSensorManager.printSensors();  
+    displayTemperatureSensorManager.printSensors();     
   }       
 
   // Wifi

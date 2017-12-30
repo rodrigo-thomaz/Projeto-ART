@@ -222,6 +222,28 @@ void ConfigurationManager::autoInitialize()
 			JsonObject& deviceMQ = jsonObjectResponse["deviceMQ"];
 			JsonObject& deviceNTP = jsonObjectResponse["deviceNTP"];
 			
+			
+			//////////////////////
+			
+			
+			char* espDeviceId = strdup(jsonObjectResponse["deviceId"]);
+			short deviceDatasheetId = jsonObjectResponse["deviceDatasheetId"];
+			int chipId = this->_chipId;
+			int flashChipId = this->_flashChipId;
+			char* stationMacAddress = strdup(_macAddress.c_str());
+			char* softAPMacAddress = "SoftMac";
+			char* sdkVersion = "SDK 123";
+			long chipSize = 123456789;
+			char* label = "Sensor 1";
+			int publishIntervalInSeconds = jsonObjectResponse["publishMessageInterval"];
+			
+			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, chipId, flashChipId, stationMacAddress, softAPMacAddress, sdkVersion, chipSize, label, publishIntervalInSeconds);
+			
+			//////////////////////
+			
+			
+			
+			
 			this->_deviceMQ = new DeviceMQ(
 				deviceMQ["host"], 
 				deviceMQ["port"], 
