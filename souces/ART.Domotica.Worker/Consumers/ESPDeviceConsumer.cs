@@ -287,8 +287,6 @@
             var ntpHost = await _settingsManager.GetValueAsync<string>(SettingsConstants.NTPHostSettingsKey);
             var ntpPort = await _settingsManager.GetValueAsync<int>(SettingsConstants.NTPPortSettingsKey);
 
-            var publishMessageInterval = await _settingsManager.GetValueAsync<int>(SettingsConstants.PublishMessageIntervalSettingsKey);
-
             var responseContract = new ESPDeviceGetConfigurationsRPCResponseContract
             {
                 DeviceMQ = new DeviceMQDetailResponseContract
@@ -302,7 +300,6 @@
                     Host = ntpHost,
                     Port = ntpPort,
                 },
-                PublishMessageInterval = publishMessageInterval,
             };
 
             Mapper.Map(data, responseContract);

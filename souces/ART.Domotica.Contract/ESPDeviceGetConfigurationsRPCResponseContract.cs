@@ -33,7 +33,7 @@
             get; set;
         }
 
-        public int PublishMessageInterval
+        public DeviceSensorsDetailResponseContract DeviceSensors
         {
             get; set;
         }

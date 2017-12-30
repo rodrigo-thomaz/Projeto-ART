@@ -1310,12 +1310,6 @@
             {
                 settingManager.Insert(SettingsConstants.NTPPortSettingsKey, 1337);
             }
-
-            // PublishMessageInterval
-            if (!settingManager.Exist(SettingsConstants.PublishMessageIntervalSettingsKey))
-            {
-                settingManager.Insert(SettingsConstants.PublishMessageIntervalSettingsKey, 4000);
-            }
         }
 
         private static void ExecuteTimeZone(ARTDbContext context)

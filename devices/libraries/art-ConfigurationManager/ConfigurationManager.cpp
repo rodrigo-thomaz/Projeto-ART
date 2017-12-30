@@ -209,7 +209,7 @@ void ConfigurationManager::autoInitialize()
 			
 			JsonObject& deviceMQ = jsonObjectResponse["deviceMQ"];
 			JsonObject& deviceNTP = jsonObjectResponse["deviceNTP"];
-			
+			JsonObject& deviceSensors = jsonObjectResponse["deviceSensors"];
 			
 			//////////////////////
 			
@@ -221,7 +221,8 @@ void ConfigurationManager::autoInitialize()
 			char* softAPMacAddress = strdup(WiFi.softAPmacAddress().c_str());
 			long chipSize = ESP.getFlashChipSize();
 			char* label = strdup(jsonObjectResponse["label"]);
-			int publishIntervalInSeconds = jsonObjectResponse["publishMessageInterval"];
+			
+			int publishIntervalInSeconds = deviceSensors["publishIntervalInSeconds"];
 			
 			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, chipId, flashChipId, stationMacAddress, softAPMacAddress, chipSize, label, publishIntervalInSeconds);
 			
@@ -247,7 +248,7 @@ void ConfigurationManager::autoInitialize()
 			
 			this->_deviceInApplication = new DeviceInApplication(jsonObjectResponse["applicationId"].as<String>());					
 			
-			int publishMessageInterval = jsonObjectResponse["publishMessageInterval"];	
+			int publishMessageInterval = deviceSensors["publishIntervalInSeconds"];	
 			this->_publishMessageInterval = publishMessageInterval;
 			
 			Serial.println("ConfigurationManager initialized with success !");

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ApplicationGetRPCResponseContract.cs" />
     <Compile Include="ApplicationMQGetRPCResponseContract.cs" />
+    <Compile Include="DeviceSensorsDetailResponseContract.cs" />
     <Compile Include="DeviceNTPDetailResponseContract.cs" />
     <Compile Include="DeviceMQDetailResponseContract.cs" />
     <Compile Include="DeviceNTPSetTimeZoneRequestContract.cs" />

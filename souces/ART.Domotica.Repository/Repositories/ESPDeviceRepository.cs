@@ -85,6 +85,7 @@
                .Include(x => x.DevicesInApplication)
                .Include(x => x.DeviceMQ)
                .Include(x => x.DeviceNTP.TimeZone)
+               .Include(x => x.DeviceSensors)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)
                .Where(x => x.StationMacAddress == macAddress)               
