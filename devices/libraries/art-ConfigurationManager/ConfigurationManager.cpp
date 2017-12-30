@@ -93,20 +93,8 @@ void DeviceNTP::setUpdateIntervalInMilliSecond(int value)
 
 // DeviceInApplication
 
-DeviceInApplication::DeviceInApplication(String deviceId, short deviceDatasheetId, String applicationId) {	
-  _deviceId = deviceId;
-  _deviceDatasheetId = deviceDatasheetId;
+DeviceInApplication::DeviceInApplication(String applicationId) {	
   _applicationId = applicationId == "null" ? "" : applicationId;				
-}
-
-String DeviceInApplication::getDeviceId()
-{	
-	return this->_deviceId;
-}
-
-short DeviceInApplication::getDeviceDatasheetId()
-{	
-	return this->_deviceDatasheetId;
 }
 
 String DeviceInApplication::getApplicationId()
@@ -259,15 +247,17 @@ void ConfigurationManager::autoInitialize()
 				deviceNTP["utcTimeOffsetInSecond"],
 				deviceNTP["updateIntervalInMilliSecond"]);			
 			
-			this->_deviceInApplication = new DeviceInApplication(
-				jsonObjectResponse["deviceId"], 
-				jsonObjectResponse["deviceDatasheetId"], 
-				jsonObjectResponse["applicationId"]);					
+			this->_deviceInApplication = new DeviceInApplication(jsonObjectResponse["applicationId"].as<String>());					
 			
 			int publishMessageInterval = jsonObjectResponse["publishMessageInterval"];	
 			this->_publishMessageInterval = publishMessageInterval;
 			
 			Serial.println("ConfigurationManager initialized with success !");
+			
+			Serial.print("DeviceId: ");
+			Serial.println(this->_espDevice->getDeviceId());
+			Serial.print("DeviceDatasheetId: ");
+			Serial.println(this->_espDevice->getDeviceDatasheetId());
 			
 			Serial.print("DeviceMQ Host: ");
 			Serial.println(this->_deviceMQ->getHost());
@@ -293,10 +283,6 @@ void ConfigurationManager::autoInitialize()
 			Serial.print("DeviceNTP Update Interval: ");
 			Serial.println(this->_deviceNTP->getUpdateIntervalInMilliSecond());
 			
-			Serial.print("DeviceId: ");
-			Serial.println(this->_deviceInApplication->getDeviceId());
-			Serial.print("DeviceDatasheetId: ");
-			Serial.println(this->_deviceInApplication->getDeviceDatasheetId());
 			Serial.print("ApplicationId: ");
 			Serial.println(this->_deviceInApplication->getApplicationId());
 			

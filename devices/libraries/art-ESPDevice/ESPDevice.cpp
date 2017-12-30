@@ -1,9 +1,9 @@
 #include "ESPDevice.h"
 
-ESPDevice::ESPDevice(char* espDeviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, char* sdkVersion, long chipSize, char* label, int publishIntervalInSeconds)
+ESPDevice::ESPDevice(char* deviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, char* sdkVersion, long chipSize, char* label, int publishIntervalInSeconds)
 {
-	_espDeviceId 					= new char(sizeof(strlen(espDeviceId)));
-	_espDeviceId 					= espDeviceId;
+	_deviceId 						= new char(sizeof(strlen(deviceId)));
+	_deviceId 						= deviceId;
 	
 	_deviceDatasheetId 				= deviceDatasheetId;	
 	
@@ -30,16 +30,16 @@ ESPDevice::ESPDevice(char* espDeviceId, short deviceDatasheetId, int chipId, int
 
 ESPDevice::~ESPDevice()
 {
-	delete (_espDeviceId);
+	delete (_deviceId);
 	delete (_stationMacAddress);
 	delete (_sdkVersion);
 	delete (_label);
 	delete (_deviceSensors);
 }
 
-char* ESPDevice::getESPDeviceId()
+char* ESPDevice::getDeviceId()
 {	
-	return _espDeviceId;
+	return _deviceId;
 }
 
 short ESPDevice::getDeviceDatasheetId()
