@@ -2,12 +2,13 @@
 
 DeviceSensors::DeviceSensors(ESPDevice* espDevice, int publishIntervalInSeconds)
 {
-	_espDevice = espDevice;
-	_publishIntervalInSeconds = publishIntervalInSeconds;
+	_espDevice = espDevice;	
+	_publishIntervalInSeconds = publishIntervalInSeconds;	
 }
 
 DeviceSensors::~DeviceSensors()
 {
+	delete (_espDevice);
 }
 
 ESPDevice* DeviceSensors::getESPDevice()

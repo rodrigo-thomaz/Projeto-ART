@@ -1,8 +1,10 @@
 #ifndef ESPDevice_h
 #define ESPDevice_h
 
-#include "Arduino.h"
 #include "DeviceSensors.h"
+
+#include "Arduino.h"
+#include "ArduinoJson.h"
 
 class DeviceSensors;
 
@@ -10,7 +12,7 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice(char* deviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, long chipSize, char* label, int publishIntervalInSeconds);
+		ESPDevice(char* deviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, long chipSize, char* label, JsonObject& jsonObject);
 		~ESPDevice();
 		
 		char *						getDeviceId();

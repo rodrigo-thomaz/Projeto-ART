@@ -217,9 +217,7 @@ void ConfigurationManager::autoInitialize()
 			long chipSize = ESP.getFlashChipSize();
 			char* label = strdup(jsonObjectResponse["label"]);
 			
-			int publishIntervalInSeconds = deviceSensors["publishIntervalInSeconds"];
-			
-			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, chipId, flashChipId, stationMacAddress, softAPMacAddress, chipSize, label, publishIntervalInSeconds);
+			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, chipId, flashChipId, stationMacAddress, softAPMacAddress, chipSize, label, deviceSensors);
 			
 			//////////////////////
 			

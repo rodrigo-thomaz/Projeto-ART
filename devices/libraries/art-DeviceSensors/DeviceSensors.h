@@ -2,6 +2,7 @@
 #define DeviceSensors_h
 
 #include "Arduino.h"
+#include "ArduinoJson.h"
 
 class ESPDevice;
 
@@ -18,9 +19,11 @@ public:
 	int									getPublishIntervalInSeconds();
 	void								setPublishIntervalInSeconds(int value);
 	
-	static void createDeviceSensors(DeviceSensors* (&deviceSensors), ESPDevice* espDevice, int publishIntervalInSeconds)
+	static void createDeviceSensors(DeviceSensors* (&deviceSensors), ESPDevice* espDevice, JsonObject& jsonObject)
     {
-      deviceSensors = new DeviceSensors(espDevice, publishIntervalInSeconds); 
+		int publishIntervalInSeconds = jsonObject["publishIntervalInSeconds"];
+		
+		deviceSensors = new DeviceSensors(espDevice, publishIntervalInSeconds); 
     }
 	
 private:	
