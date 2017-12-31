@@ -94,8 +94,6 @@ class ConfigurationManager
 	DeviceInApplication*				getDeviceInApplication();
 	
 	ESPDevice*							getESPDevice();
-	
-	int									getPublishMessageInterval();
 
 	void								insertInApplication(String json);
 	void								deleteFromApplication();		
@@ -122,10 +120,7 @@ class ConfigurationManager
 	DeviceNTP*							_deviceNTP;	
 	DeviceInApplication*				_deviceInApplication;	
 	
-	ESPDevice*							_espDevice;	
-	
-	int									_publishMessageInterval;
-	
+	ESPDevice*							_espDevice;		
 };
 
 #endif

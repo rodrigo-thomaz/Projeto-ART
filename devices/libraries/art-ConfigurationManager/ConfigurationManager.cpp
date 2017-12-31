@@ -136,51 +136,46 @@ void ConfigurationManager::begin()
 
 bool ConfigurationManager::initialized()
 {	
-	return this->_initialized;
+	return _initialized;
 }
 
 DeviceMQ* ConfigurationManager::getDeviceMQ()
 {	
-	return this->_deviceMQ;
+	return _deviceMQ;
 }
 
 DeviceNTP* ConfigurationManager::getDeviceNTP()
 {	
-	return this->_deviceNTP;
+	return _deviceNTP;
 }
 
 DeviceInApplication* ConfigurationManager::getDeviceInApplication()
 {	
-	return this->_deviceInApplication;
+	return _deviceInApplication;
 }
 
 ESPDevice* ConfigurationManager::getESPDevice()
 {	
-	return this->_espDevice;
-}
-
-int ConfigurationManager::getPublishMessageInterval()
-{	
-	return this->_publishMessageInterval;
+	return _espDevice;
 }
 
 void ConfigurationManager::autoInitialize()
 {	
-	if(!this->_wifiManager->isConnected() || this->_initialized){
+	if(!_wifiManager->isConnected() || _initialized){
 		return;
 	}
 	
 	HTTPClient http; 
 
-	String apiUri = this->_uri + "api/espDevice/getConfigurations";
-	http.begin(this->_host, this->_port, apiUri); 
+	String apiUri = _uri + "api/espDevice/getConfigurations";
+	http.begin(_host, _port, apiUri); 
 
 	StaticJsonBuffer<200> jsonBufferRequest;
 	JsonObject& jsonObjectRequest = jsonBufferRequest.createObject();
 	
-	jsonObjectRequest["chipId"] = this->_chipId;
-	jsonObjectRequest["flashChipId"] = this->_flashChipId;
-	jsonObjectRequest["macAddress"] = this->_macAddress;
+	jsonObjectRequest["chipId"] = _chipId;
+	jsonObjectRequest["flashChipId"] = _flashChipId;
+	jsonObjectRequest["macAddress"] = _macAddress;
 
 	int lenRequest = jsonObjectRequest.measureLength();
 	char dataRequest[lenRequest + 1];
@@ -231,7 +226,7 @@ void ConfigurationManager::autoInitialize()
 			
 			
 			
-			this->_deviceMQ = new DeviceMQ(
+			_deviceMQ = new DeviceMQ(
 				deviceMQ["host"], 
 				deviceMQ["port"], 
 				deviceMQ["user"], 
@@ -240,55 +235,52 @@ void ConfigurationManager::autoInitialize()
 				deviceMQ["applicationTopic"],
 				deviceMQ["deviceTopic"]);
 			
-			this->_deviceNTP = new DeviceNTP(
+			_deviceNTP = new DeviceNTP(
 				deviceNTP["host"], 
 				deviceNTP["port"], 
 				deviceNTP["utcTimeOffsetInSecond"],
 				deviceNTP["updateIntervalInMilliSecond"]);			
 			
-			this->_deviceInApplication = new DeviceInApplication(jsonObjectResponse["applicationId"].as<String>());					
-			
-			int publishMessageInterval = deviceSensors["publishIntervalInSeconds"];	
-			this->_publishMessageInterval = publishMessageInterval;
+			_deviceInApplication = new DeviceInApplication(jsonObjectResponse["applicationId"].as<String>());					
 			
 			Serial.println("ConfigurationManager initialized with success !");
 			
 			Serial.print("DeviceId: ");
-			Serial.println(this->_espDevice->getDeviceId());
+			Serial.println(_espDevice->getDeviceId());
 			Serial.print("DeviceDatasheetId: ");
-			Serial.println(this->_espDevice->getDeviceDatasheetId());
+			Serial.println(_espDevice->getDeviceDatasheetId());
 			
 			Serial.print("DeviceMQ Host: ");
-			Serial.println(this->_deviceMQ->getHost());
+			Serial.println(_deviceMQ->getHost());
 			Serial.print("DeviceMQ Port: ");
-			Serial.println(this->_deviceMQ->getPort());
+			Serial.println(_deviceMQ->getPort());
 			Serial.print("DeviceMQ User: ");
-			Serial.println(this->_deviceMQ->getUser());
+			Serial.println(_deviceMQ->getUser());
 			Serial.print("DeviceMQ Password: ");
-			Serial.println(this->_deviceMQ->getPassword());
+			Serial.println(_deviceMQ->getPassword());
 			Serial.print("DeviceMQ ClientId: ");
-			Serial.println(this->_deviceMQ->getClientId());
+			Serial.println(_deviceMQ->getClientId());
 			Serial.print("DeviceMQ Application Topic: ");
-			Serial.println(this->_deviceMQ->getApplicationTopic());
+			Serial.println(_deviceMQ->getApplicationTopic());
 			Serial.print("DeviceMQ Device Topic: ");
-			Serial.println(this->_deviceMQ->getDeviceTopic());
+			Serial.println(_deviceMQ->getDeviceTopic());
 			
 			Serial.print("DeviceNTP Host: ");
-			Serial.println(this->_deviceNTP->getHost());
+			Serial.println(_deviceNTP->getHost());
 			Serial.print("DeviceNTP Port: ");
-			Serial.println(this->_deviceNTP->getPort());			
+			Serial.println(_deviceNTP->getPort());			
 			Serial.print("DeviceNTP Utc Time Offset in second: ");
-			Serial.println(this->_deviceNTP->getUtcTimeOffsetInSecond());
+			Serial.println(_deviceNTP->getUtcTimeOffsetInSecond());
 			Serial.print("DeviceNTP Update Interval: ");
-			Serial.println(this->_deviceNTP->getUpdateIntervalInMilliSecond());
+			Serial.println(_deviceNTP->getUpdateIntervalInMilliSecond());
 			
 			Serial.print("ApplicationId: ");
-			Serial.println(this->_deviceInApplication->getApplicationId());
+			Serial.println(_deviceInApplication->getApplicationId());
 			
-			Serial.print("PublishMessageInterval: ");
-			Serial.println(this->_publishMessageInterval);
+			Serial.print("PublishIntervalInSeconds: ");
+			Serial.println(_espDevice->getDeviceSensors()->getPublishIntervalInSeconds());
 			
-			this->_initialized = true;
+			_initialized = true;
 		}
 	} else {
 		Serial.print("[HTTP] GET... failed, error: ");
