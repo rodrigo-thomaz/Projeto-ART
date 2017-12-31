@@ -13,7 +13,7 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice(char* deviceId, short deviceDatasheetId, char* label, JsonObject& jsonObject);
+		ESPDevice(String json);
 		~ESPDevice();
 		
 		char *						getDeviceId();

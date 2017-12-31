@@ -199,25 +199,15 @@ void ConfigurationManager::autoInitialize()
 			
 			String payload = http.getString();
 			
+			
+			_espDevice = new ESPDevice(payload);
+			
+			
 			DynamicJsonBuffer jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);			
 			
 			JsonObject& deviceMQ = jsonObjectResponse["deviceMQ"];
 			JsonObject& deviceNTP = jsonObjectResponse["deviceNTP"];
-			JsonObject& deviceSensors = jsonObjectResponse["deviceSensors"];
-			
-			//////////////////////
-			
-			char* espDeviceId = strdup(jsonObjectResponse["deviceId"]);
-			short deviceDatasheetId = jsonObjectResponse["deviceDatasheetId"];
-			char* label = strdup(jsonObjectResponse["label"]);
-			
-			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, label, deviceSensors);
-			
-			//////////////////////
-			
-			
-			
 			
 			_deviceMQ = new DeviceMQ(
 				deviceMQ["host"], 

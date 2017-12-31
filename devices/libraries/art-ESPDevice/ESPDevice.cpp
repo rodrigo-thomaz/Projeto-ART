@@ -1,11 +1,12 @@
 #include "ESPDevice.h"
 
-ESPDevice::ESPDevice(char* deviceId, short deviceDatasheetId, char* label, JsonObject& jsonObject)
+ESPDevice::ESPDevice(String json)
 {
-	_deviceId 						= new char(sizeof(strlen(deviceId)));
-	_deviceId 						= deviceId;
-	
-	_deviceDatasheetId 				= deviceDatasheetId;	
+	DynamicJsonBuffer 				  jsonBuffer;
+	JsonObject& jsonObject 			= jsonBuffer.parseObject(json);		
+			
+	_deviceId 						= strdup(jsonObject["deviceId"]);	
+	_deviceDatasheetId 				= jsonObject["deviceDatasheetId"];	
 	
 	_chipId							= ESP.getChipId();	
 	_flashChipId					= ESP.getFlashChipId();	
@@ -13,11 +14,10 @@ ESPDevice::ESPDevice(char* deviceId, short deviceDatasheetId, char* label, JsonO
 		
 	_stationMacAddress 				= strdup(WiFi.macAddress().c_str());	
 	_softAPMacAddress				= strdup(WiFi.softAPmacAddress().c_str());			
+
+	_label 							= strdup(jsonObject["label"]);
 	
-	_label 							= new char(sizeof(strlen(label)));
-	_label 							= label;
-	
-	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject);		
+	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);		
 }
 
 ESPDevice::~ESPDevice()
