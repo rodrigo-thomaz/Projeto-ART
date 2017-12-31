@@ -1,12 +1,14 @@
 #ifndef ESPDevice_h
 #define ESPDevice_h
 
+#include "DeviceMQ.h"
 #include "DeviceSensors.h"
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include <ESP8266WiFi.h>
 
+class DeviceMQ;
 class DeviceSensors;
 
 class ESPDevice
@@ -29,6 +31,7 @@ class ESPDevice
 		char *						getLabel();
 		void						setLabel(char * value);
 		
+		DeviceMQ*					getDeviceMQ();
 		DeviceSensors*				getDeviceSensors();
 	
 	private:	
@@ -45,6 +48,7 @@ class ESPDevice
 		
 		char *						_label;
 		
+		DeviceMQ*					_deviceMQ;
 		DeviceSensors*				_deviceSensors;
 		
 };

@@ -22,9 +22,9 @@ bool MQQTManager::begin()
 	
 	if(this->_wifiManager->isConnected() && this->_configurationManager->initialized()){
 
-		DeviceMQ* deviceMQ = this->_configurationManager->getDeviceMQ();
+		DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
 
-		char* const host = strdup(deviceMQ->getHost().c_str());
+		char* const host = deviceMQ->getHost();
 		int port = deviceMQ->getPort();
 
 		this->_mqqt->setServer(host, port);         //informa qual broker e porta deve ser conectado			
@@ -56,12 +56,12 @@ bool MQQTManager::autoConnect()
     }
 	else {
 		
-		DeviceMQ* deviceMQ = this->_configurationManager->getDeviceMQ();        
+		DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
       
-        char* const host 		= strdup(deviceMQ->getHost().c_str());
-        char* const user 		= strdup(deviceMQ->getUser().c_str());
-        char* const password  	= strdup(deviceMQ->getPassword().c_str());
-		char* const clientId  	= strdup(deviceMQ->getClientId().c_str());
+        char* const host 		= deviceMQ->getHost();
+        char* const user 		= deviceMQ->getUser();
+        char* const password  	= deviceMQ->getPassword();
+		char* const clientId  	= deviceMQ->getClientId();
         		
         Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
         Serial.println(host);
@@ -185,14 +185,12 @@ String MQQTManager::getTopicKey(char* routingKey)
 
 String MQQTManager::getApplicationRoutingKey(const char* topic)
 {
-	DeviceMQ* deviceMQ = this->_configurationManager->getDeviceMQ();        
-	String applicationTopic = deviceMQ->getApplicationTopic();
-	String deviceTopic = deviceMQ->getDeviceTopic();
+	DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
 	
 	String routingKey = String("ART/Application/");
-	routingKey.concat(applicationTopic);
+	routingKey.concat(deviceMQ->getApplicationTopic());
 	routingKey.concat("/Device/");
-	routingKey.concat(deviceTopic);
+	routingKey.concat(deviceMQ->getDeviceTopic());
 	routingKey.concat("/");
 	routingKey.concat(topic);
 	
@@ -201,11 +199,10 @@ String MQQTManager::getApplicationRoutingKey(const char* topic)
 
 String MQQTManager::getDeviceRoutingKey(const char* topic)
 {
-	DeviceMQ* deviceMQ = this->_configurationManager->getDeviceMQ();        
-	String deviceTopic = deviceMQ->getDeviceTopic();
+	DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
 	
 	String routingKey = String("ART/Device/");
-	routingKey.concat(deviceTopic);
+	routingKey.concat(deviceMQ->getDeviceTopic());
 	routingKey.concat("/");
 	routingKey.concat(topic);
 	

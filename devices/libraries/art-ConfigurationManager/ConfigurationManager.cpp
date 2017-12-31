@@ -1,57 +1,5 @@
 #include "ConfigurationManager.h"
 
-// DeviceMQ
-
-DeviceMQ::DeviceMQ(String host, int port, String user, String password, String clientId, String applicationTopic, String deviceTopic) {
-  _host = host;
-  _port = port;
-  _user = user;
-  _password = password;
-  _clientId = clientId;
-  _applicationTopic = applicationTopic;
-  _deviceTopic = deviceTopic;
-}
-
-String DeviceMQ::getHost()
-{	
-	return this->_host;
-}
-
-int DeviceMQ::getPort()
-{	
-	return this->_port;
-}
-
-String DeviceMQ::getUser()
-{	
-	return this->_user;
-}
-
-String DeviceMQ::getPassword()
-{	
-	return this->_password;
-}
-
-String DeviceMQ::getClientId()
-{	
-	return this->_clientId;
-}
-
-String DeviceMQ::getApplicationTopic()
-{	
-	return this->_applicationTopic;
-}
-
-void DeviceMQ::setApplicationTopic(String value)
-{	
-	this->_applicationTopic = value;
-}
-
-String DeviceMQ::getDeviceTopic()
-{	
-	return this->_deviceTopic;
-}
-
 // DeviceNTP
 
 DeviceNTP::DeviceNTP(String host, int port, int utcTimeOffsetInSecond, int updateIntervalInMilliSecond) {
@@ -118,7 +66,6 @@ ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManag
 	this->_port = port;
 	this->_uri = uri;
 	
-	this->_deviceMQ = NULL;
 	this->_deviceNTP = NULL;
 	this->_deviceInApplication = NULL;
 	
@@ -137,11 +84,6 @@ void ConfigurationManager::begin()
 bool ConfigurationManager::initialized()
 {	
 	return _initialized;
-}
-
-DeviceMQ* ConfigurationManager::getDeviceMQ()
-{	
-	return _deviceMQ;
 }
 
 DeviceNTP* ConfigurationManager::getDeviceNTP()
@@ -206,17 +148,7 @@ void ConfigurationManager::autoInitialize()
 			DynamicJsonBuffer jsonBufferResponse;
 			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);			
 			
-			JsonObject& deviceMQ = jsonObjectResponse["deviceMQ"];
 			JsonObject& deviceNTP = jsonObjectResponse["deviceNTP"];
-			
-			_deviceMQ = new DeviceMQ(
-				deviceMQ["host"], 
-				deviceMQ["port"], 
-				deviceMQ["user"], 
-				deviceMQ["password"],
-				deviceMQ["clientId"],
-				deviceMQ["applicationTopic"],
-				deviceMQ["deviceTopic"]);
 			
 			_deviceNTP = new DeviceNTP(
 				deviceNTP["host"], 
@@ -234,19 +166,19 @@ void ConfigurationManager::autoInitialize()
 			Serial.println(_espDevice->getDeviceDatasheetId());
 			
 			Serial.print("DeviceMQ Host: ");
-			Serial.println(_deviceMQ->getHost());
+			Serial.println(_espDevice->getDeviceMQ()->getHost());
 			Serial.print("DeviceMQ Port: ");
-			Serial.println(_deviceMQ->getPort());
+			Serial.println(_espDevice->getDeviceMQ()->getPort());
 			Serial.print("DeviceMQ User: ");
-			Serial.println(_deviceMQ->getUser());
+			Serial.println(_espDevice->getDeviceMQ()->getUser());
 			Serial.print("DeviceMQ Password: ");
-			Serial.println(_deviceMQ->getPassword());
+			Serial.println(_espDevice->getDeviceMQ()->getPassword());
 			Serial.print("DeviceMQ ClientId: ");
-			Serial.println(_deviceMQ->getClientId());
+			Serial.println(_espDevice->getDeviceMQ()->getClientId());
 			Serial.print("DeviceMQ Application Topic: ");
-			Serial.println(_deviceMQ->getApplicationTopic());
+			Serial.println(_espDevice->getDeviceMQ()->getApplicationTopic());
 			Serial.print("DeviceMQ Device Topic: ");
-			Serial.println(_deviceMQ->getDeviceTopic());
+			Serial.println(_espDevice->getDeviceMQ()->getDeviceTopic());
 			
 			Serial.print("DeviceNTP Host: ");
 			Serial.println(_deviceNTP->getHost());
@@ -286,10 +218,10 @@ void ConfigurationManager::insertInApplication(String json)
 	}	
 
 	String applicationId = root["applicationId"];
-	String brokerApplicationTopic = root["brokerApplicationTopic"];	
+	char* brokerApplicationTopic = strdup(root["brokerApplicationTopic"]);	
 	
 	this->_deviceInApplication->setApplicationId(applicationId);
-	this->_deviceMQ->setApplicationTopic(brokerApplicationTopic);
+	_espDevice->getDeviceMQ()->setApplicationTopic(brokerApplicationTopic);
 	
 	Serial.println("[ConfigurationManager::insertInApplication] ");
 	Serial.print("applicationId: ");
@@ -301,7 +233,7 @@ void ConfigurationManager::insertInApplication(String json)
 void ConfigurationManager::deleteFromApplication()
 {	
 	this->_deviceInApplication->setApplicationId("");	
-	this->_deviceMQ->setApplicationTopic("");
+	_espDevice->getDeviceMQ()->setApplicationTopic("");
 	
 	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
 }

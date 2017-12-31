@@ -9,35 +9,6 @@
 
 #include "ESPDevice.h"
 
-class DeviceMQ {
-  public:
-
-    DeviceMQ(String host, int port, String user, String password, String clientId, String applicationTopic, String deviceTopic);
-
-    String								getHost();
-	int									getPort();
-	String								getUser();
-	String								getPassword();	
-	String								getClientId();	
-	
-	String								getApplicationTopic();			
-	String								getDeviceTopic();	
-	
-  private:
-    
-	String								_host;
-	int									_port;
-	String								_user;
-	String								_password;
-	String								_clientId;
-	String								_applicationTopic;
-	String								_deviceTopic;
-
-	void								setApplicationTopic(String value);	
-	
-    friend class ConfigurationManager;
-};
-
 class DeviceNTP {
   public:
 
@@ -89,7 +60,6 @@ class ConfigurationManager
 	
 	bool								initialized();
 	
-	DeviceMQ*							getDeviceMQ();
 	DeviceNTP*							getDeviceNTP();
 	DeviceInApplication*				getDeviceInApplication();
 	
@@ -116,7 +86,6 @@ class ConfigurationManager
 	int									_flashChipId;
 	String								_macAddress;
 
-	DeviceMQ*							_deviceMQ;
 	DeviceNTP*							_deviceNTP;	
 	DeviceInApplication*				_deviceInApplication;	
 	
