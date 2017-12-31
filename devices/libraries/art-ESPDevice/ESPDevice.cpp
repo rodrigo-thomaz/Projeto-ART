@@ -1,23 +1,21 @@
 #include "ESPDevice.h"
 
-ESPDevice::ESPDevice(char* deviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, long chipSize, char* label, JsonObject& jsonObject)
+ESPDevice::ESPDevice(char* deviceId, short deviceDatasheetId, char* stationMacAddress, char* softAPMacAddress, char* label, JsonObject& jsonObject)
 {
 	_deviceId 						= new char(sizeof(strlen(deviceId)));
 	_deviceId 						= deviceId;
 	
 	_deviceDatasheetId 				= deviceDatasheetId;	
 	
-	_chipId							= chipId;
-	
-	_flashChipId					= flashChipId;
+	_chipId							= ESP.getChipId();	
+	_flashChipId					= ESP.getFlashChipId();	
+	_chipSize						= ESP.getFlashChipSize();	
 	
 	_stationMacAddress				= new char(sizeof(strlen(stationMacAddress)));
 	_stationMacAddress 				= stationMacAddress;
 	
 	_softAPMacAddress				= new char(sizeof(strlen(softAPMacAddress)));	
-	_softAPMacAddress				= softAPMacAddress;
-	
-    _chipSize						= chipSize;	
+	_softAPMacAddress				= softAPMacAddress;    
 	
 	_label 							= new char(sizeof(strlen(label)));
 	_label 							= label;
@@ -53,6 +51,11 @@ int ESPDevice::getFlashChipId()
 	return _flashChipId;
 }
 
+long ESPDevice::getChipSize()
+{	
+	return _chipSize;
+}
+
 char* ESPDevice::getStationMacAddress()
 {	
 	return _stationMacAddress;
@@ -61,11 +64,6 @@ char* ESPDevice::getStationMacAddress()
 char* ESPDevice::getSoftAPMacAddress()
 {	
 	return _softAPMacAddress;
-}
-
-long ESPDevice::getChipSize()
-{	
-	return _chipSize;
 }
 
 char* ESPDevice::getLabel()

@@ -12,16 +12,18 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice(char* deviceId, short deviceDatasheetId, int chipId, int flashChipId, char* stationMacAddress, char* softAPMacAddress, long chipSize, char* label, JsonObject& jsonObject);
+		ESPDevice(char* deviceId, short deviceDatasheetId, char* stationMacAddress, char* softAPMacAddress, char* label, JsonObject& jsonObject);
 		~ESPDevice();
 		
 		char *						getDeviceId();
 		short						getDeviceDatasheetId();
+		
 		int							getChipId();
 		int							getFlashChipId();
-		char *						getStationMacAddress();
-		char *						getSoftAPMacAddress();
 		long						getChipSize();
+		
+		char *						getStationMacAddress();
+		char *						getSoftAPMacAddress();		
 
 		char *						getLabel();
 		void						setLabel(char * value);
@@ -32,11 +34,14 @@ class ESPDevice
 
 		char *						_deviceId;
 		short						_deviceDatasheetId;
+		
 		int							_chipId;
 		int							_flashChipId;
-		char *						_stationMacAddress;
-		char *						_softAPMacAddress;
 		long						_chipSize;
+		
+		char *						_stationMacAddress;
+		char *						_softAPMacAddress;		
+		
 		char *						_label;
 		
 		DeviceSensors*				_deviceSensors;
