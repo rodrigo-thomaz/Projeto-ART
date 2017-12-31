@@ -18,6 +18,7 @@ ESPDevice::ESPDevice(String json)
 	_label 							= strdup(jsonObject["label"]);
 	
 	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);		
+	DeviceNTP::createDeviceNTP(_deviceNTP, this, jsonObject["deviceNTP"]);		
 	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);		
 }
 
@@ -28,6 +29,7 @@ ESPDevice::~ESPDevice()
 	delete (_label);
 	
 	delete (_deviceMQ);
+	delete (_deviceNTP);
 	delete (_deviceSensors);
 }
 
@@ -80,6 +82,11 @@ void ESPDevice::setLabel(char* value)
 DeviceMQ* ESPDevice::getDeviceMQ()
 {	
 	return _deviceMQ;
+}
+
+DeviceNTP* ESPDevice::getDeviceNTP()
+{	
+	return _deviceNTP;
 }
 		
 DeviceSensors* ESPDevice::getDeviceSensors()

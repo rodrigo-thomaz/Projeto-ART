@@ -25,7 +25,7 @@ public:
 	int									getUpdateIntervalInMilliSecond();	
 	void								setUpdateIntervalInMilliSecond(int value);		
 		
-	static void createDeviceMQ(DeviceNTP* (&deviceNTP), ESPDevice* espDevice, JsonObject& jsonObject)
+	static void createDeviceNTP(DeviceNTP* (&deviceNTP), ESPDevice* espDevice, JsonObject& jsonObject)
     {
 		deviceNTP = new DeviceNTP(
 			espDevice,

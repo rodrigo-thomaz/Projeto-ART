@@ -2,6 +2,7 @@
 #define ESPDevice_h
 
 #include "DeviceMQ.h"
+#include "DeviceNTP.h"
 #include "DeviceSensors.h"
 
 #include "Arduino.h"
@@ -9,6 +10,7 @@
 #include <ESP8266WiFi.h>
 
 class DeviceMQ;
+class DeviceNTP;
 class DeviceSensors;
 
 class ESPDevice
@@ -32,6 +34,7 @@ class ESPDevice
 		void						setLabel(char * value);
 		
 		DeviceMQ*					getDeviceMQ();
+		DeviceNTP*					getDeviceNTP();
 		DeviceSensors*				getDeviceSensors();
 	
 	private:	
@@ -49,6 +52,7 @@ class ESPDevice
 		char *						_label;
 		
 		DeviceMQ*					_deviceMQ;
+		DeviceNTP*					_deviceNTP;
 		DeviceSensors*				_deviceSensors;
 		
 };

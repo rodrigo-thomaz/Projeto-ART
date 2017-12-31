@@ -9,29 +9,6 @@
 
 #include "ESPDevice.h"
 
-class DeviceNTP {
-  public:
-
-    DeviceNTP(String host, int port, int utcTimeOffsetInSecond, int updateIntervalInMilliSecond);
-
-    String								getHost();
-	int									getPort();
-	int									getUtcTimeOffsetInSecond();
-	int									getUpdateIntervalInMilliSecond();	
-	
-  private:
-    
-	String								_host;
-	int									_port;
-	int									_utcTimeOffsetInSecond;
-	int									_updateIntervalInMilliSecond;	
-
-	void								setUtcTimeOffsetInSecond(int value);
-	void								setUpdateIntervalInMilliSecond(int value);	
-	
-    friend class ConfigurationManager;
-};
-
 class DeviceInApplication {
   public:
 
@@ -60,7 +37,6 @@ class ConfigurationManager
 	
 	bool								initialized();
 	
-	DeviceNTP*							getDeviceNTP();
 	DeviceInApplication*				getDeviceInApplication();
 	
 	ESPDevice*							getESPDevice();
@@ -86,7 +62,6 @@ class ConfigurationManager
 	int									_flashChipId;
 	String								_macAddress;
 
-	DeviceNTP*							_deviceNTP;	
 	DeviceInApplication*				_deviceInApplication;	
 	
 	ESPDevice*							_espDevice;		
