@@ -5,6 +5,7 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
+#include <ESP8266WiFi.h>
 
 class DeviceSensors;
 
@@ -12,7 +13,7 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice(char* deviceId, short deviceDatasheetId, char* stationMacAddress, char* softAPMacAddress, char* label, JsonObject& jsonObject);
+		ESPDevice(char* deviceId, short deviceDatasheetId, char* label, JsonObject& jsonObject);
 		~ESPDevice();
 		
 		char *						getDeviceId();

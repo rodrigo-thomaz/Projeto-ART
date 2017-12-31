@@ -210,13 +210,9 @@ void ConfigurationManager::autoInitialize()
 			
 			char* espDeviceId = strdup(jsonObjectResponse["deviceId"]);
 			short deviceDatasheetId = jsonObjectResponse["deviceDatasheetId"];
-
-			char* stationMacAddress = strdup(WiFi.macAddress().c_str());
-			char* softAPMacAddress = strdup(WiFi.softAPmacAddress().c_str());			
-
 			char* label = strdup(jsonObjectResponse["label"]);
 			
-			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, stationMacAddress, softAPMacAddress, label, deviceSensors);
+			_espDevice = new ESPDevice(espDeviceId, deviceDatasheetId, label, deviceSensors);
 			
 			//////////////////////
 			

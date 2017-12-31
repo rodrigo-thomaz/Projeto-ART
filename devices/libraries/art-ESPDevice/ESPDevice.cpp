@@ -1,6 +1,6 @@
 #include "ESPDevice.h"
 
-ESPDevice::ESPDevice(char* deviceId, short deviceDatasheetId, char* stationMacAddress, char* softAPMacAddress, char* label, JsonObject& jsonObject)
+ESPDevice::ESPDevice(char* deviceId, short deviceDatasheetId, char* label, JsonObject& jsonObject)
 {
 	_deviceId 						= new char(sizeof(strlen(deviceId)));
 	_deviceId 						= deviceId;
@@ -10,12 +10,9 @@ ESPDevice::ESPDevice(char* deviceId, short deviceDatasheetId, char* stationMacAd
 	_chipId							= ESP.getChipId();	
 	_flashChipId					= ESP.getFlashChipId();	
 	_chipSize						= ESP.getFlashChipSize();	
-	
-	_stationMacAddress				= new char(sizeof(strlen(stationMacAddress)));
-	_stationMacAddress 				= stationMacAddress;
-	
-	_softAPMacAddress				= new char(sizeof(strlen(softAPMacAddress)));	
-	_softAPMacAddress				= softAPMacAddress;    
+		
+	_stationMacAddress 				= strdup(WiFi.macAddress().c_str());	
+	_softAPMacAddress				= strdup(WiFi.softAPmacAddress().c_str());			
 	
 	_label 							= new char(sizeof(strlen(label)));
 	_label 							= label;
