@@ -113,8 +113,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorTempDSFamilySetResolutionRequestContract, SensorTempDSFamilySetResolutionRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTempDSFamilySetResolutionRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTempDSFamilyConstants.SetResolutionIoTQueueName);
 
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);

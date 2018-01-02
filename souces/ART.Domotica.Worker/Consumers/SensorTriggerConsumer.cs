@@ -102,8 +102,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorTriggerInsertRequestContract, SensorTriggerGetResponseIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTriggerGetResponseIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.InsertIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
@@ -141,8 +140,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorTriggerDeleteRequestContract, SensorTriggerGetResponseIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTriggerGetResponseIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.DeleteIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
@@ -180,8 +178,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTriggerSetTriggerOnRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetTriggerOnIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
@@ -219,8 +216,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTriggerSetTriggerValueRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetTriggerValueIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
@@ -258,8 +254,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorTriggerSetBuzzerOnRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.SetBuzzerOnIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 

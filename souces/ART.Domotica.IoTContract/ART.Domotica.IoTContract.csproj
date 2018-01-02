@@ -51,7 +51,6 @@
     <Compile Include="ESPDeviceInsertInApplicationResponseIoTContract.cs" />
     <Compile Include="ESPDeviceUpdatePinsResponseIoTContract.cs" />
     <Compile Include="IoTRequestContract.cs" />
-    <Compile Include="MessageIoTContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitMeasurementGetAllForIoTResponseContract.cs" />
     <Compile Include="SensorTriggerGetResponseIoTContract.cs" />

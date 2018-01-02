@@ -88,8 +88,7 @@
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DeviceNTP, DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract>(data);
-            var deviceMessage = new MessageIoTContract<DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceNTPConstants.SetUtcTimeOffsetInSecondIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
@@ -126,8 +125,7 @@
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract, DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceNTPConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 

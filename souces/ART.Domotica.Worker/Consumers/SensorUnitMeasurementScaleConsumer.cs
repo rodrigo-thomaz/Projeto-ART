@@ -91,8 +91,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorUnitMeasurementScaleSetValueRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);            
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);            
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetRangeIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
@@ -131,8 +130,7 @@ namespace ART.Domotica.Worker.Consumers
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);
-            var deviceMessage = new MessageIoTContract<SensorUnitMeasurementScaleSetValueRequestIoTContract>(iotContract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(deviceMessage);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetChartLimiterIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 

@@ -205,29 +205,28 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
        json += c;
     }    
 
-    //StaticJsonBuffer<3000> jsonBuffer;
-    DynamicJsonBuffer jsonBuffer;
+    //DynamicJsonBuffer jsonBuffer;
     
-    JsonObject& root = jsonBuffer.parseObject(json);
+    //JsonObject& root = jsonBuffer.parseObject(json);
   
-    if (!root.success()) {
-      Serial.print("parse payload failed: ");
-      Serial.println(json);
-      return;
-    }
+    //if (!root.success()) {
+    //  Serial.print("parse payload failed: ");
+    //  Serial.println(json);
+    //  return;
+    //}
 
     String topicKey = mqqtManager.getTopicKey(topic);
-    String payloadContract = root["contract"];
+    //String payloadContract = root["contract"];
 
     Serial.print("topicKey: ");
     Serial.println(topicKey);
 
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_UPDATE_PIN)){
-      displayAccessManager.updatePin(payloadContract);
+      displayAccessManager.updatePin(json);
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION)){
       unSubscribeNotInApplication();
-      configurationManager.insertInApplication(payloadContract);          
+      configurationManager.insertInApplication(json);          
       subscribeInApplication();  
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)){
@@ -236,31 +235,31 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       subscribeNotInApplication();
     }    
     if(topicKey == String(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND)){
-      configurationManager.setUtcTimeOffsetInSecond(payloadContract);
+      configurationManager.setUtcTimeOffsetInSecond(json);
     }
     if(topicKey == String(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND)){
-      configurationManager.setUpdateIntervalInMilliSecond(payloadContract);
+      configurationManager.setUpdateIntervalInMilliSecond(json);
     }    
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
-      dsFamilyTempSensorManager.setSensorsByMQQTCallback(payloadContract);      
+      dsFamilyTempSensorManager.setSensorsByMQQTCallback(json);      
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT)){
-      dsFamilyTempSensorManager.SetUnitOfMeasurement(payloadContract);
+      dsFamilyTempSensorManager.SetUnitOfMeasurement(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION)){
-      dsFamilyTempSensorManager.setResolution(payloadContract);
+      dsFamilyTempSensorManager.setResolution(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)){
-      dsFamilyTempSensorManager.setAlarmOn(payloadContract);
+      dsFamilyTempSensorManager.setAlarmOn(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS)){
-      dsFamilyTempSensorManager.setAlarmCelsius(payloadContract);
+      dsFamilyTempSensorManager.setAlarmCelsius(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON)){
-      dsFamilyTempSensorManager.setAlarmBuzzerOn(payloadContract);
+      dsFamilyTempSensorManager.setAlarmBuzzerOn(json);
     }
     if(topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)){
-      dsFamilyTempSensorManager.setChartLimiterCelsius(payloadContract);
+      dsFamilyTempSensorManager.setChartLimiterCelsius(json);
     }        
 }
 
