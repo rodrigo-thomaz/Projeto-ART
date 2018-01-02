@@ -3,9 +3,8 @@
 
 // MQQTManager
 
-MQQTManager::MQQTManager(DebugManager& debugManager, ConfigurationManager& configurationManager, WiFiManager& wifiManager)
+MQQTManager::MQQTManager(ConfigurationManager& configurationManager, WiFiManager& wifiManager)
 { 
-	this->_debugManager = &debugManager;
 	this->_configurationManager = &configurationManager;
 	this->_wifiManager = &wifiManager;
 	

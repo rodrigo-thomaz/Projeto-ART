@@ -64,7 +64,7 @@ WiFiManager wifiManager(D5, debugManager);
 UpdateManager updateManager(debugManager, wifiManager, HOST, PORT, URI);
 ConfigurationManager configurationManager(debugManager, wifiManager, HOST, PORT, URI);
 NTPManager ntpManager(debugManager, configurationManager);
-MQQTManager mqqtManager(debugManager, configurationManager, wifiManager);
+MQQTManager mqqtManager(configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, configurationManager, mqqtManager, buzzerManager);
@@ -203,20 +203,9 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     {
        char c = (char)payload[i];
        json += c;
-    }    
-
-    //DynamicJsonBuffer jsonBuffer;
-    
-    //JsonObject& root = jsonBuffer.parseObject(json);
-  
-    //if (!root.success()) {
-    //  Serial.print("parse payload failed: ");
-    //  Serial.println(json);
-    //  return;
-    //}
+    }   
 
     String topicKey = mqqtManager.getTopicKey(topic);
-    //String payloadContract = root["contract"];
 
     Serial.print("topicKey: ");
     Serial.println(topicKey);

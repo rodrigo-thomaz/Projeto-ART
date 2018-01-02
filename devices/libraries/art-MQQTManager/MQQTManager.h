@@ -15,7 +15,7 @@ class MQQTManager
 {
   public:
   
-    MQQTManager(DebugManager& debugManager, ConfigurationManager& configurationManager, WiFiManager& wifiManager);
+    MQQTManager(ConfigurationManager& configurationManager, WiFiManager& wifiManager);
 	
 	bool												begin();
 	
@@ -39,7 +39,6 @@ class MQQTManager
 	
   private:			
 			
-	DebugManager*          								_debugManager;	
 	ConfigurationManager*          						_configurationManager;	
 	WiFiManager* 										_wifiManager;
 	
