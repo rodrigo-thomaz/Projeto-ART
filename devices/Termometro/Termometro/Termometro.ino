@@ -15,6 +15,16 @@
 #include "EEPROMManager.h"
 #include "MQQTManager.h"
 
+#include <ESP8266WiFi.h>
+#include <DNSServer.h>
+#include <ESP8266mDNS.h>
+
+#include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
+
+RemoteDebug Debug;
+
+#define HOST_NAME "remotedebug-sample"
+
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
 #define D1    5
@@ -112,6 +122,22 @@ void setup() {
   mqqtManager.begin();
 
   ntpManager.begin();  
+
+  String hostNameWifi = HOST_NAME;
+  hostNameWifi.concat(".local");
+
+  WiFi.hostname(hostNameWifi);
+
+  if (MDNS.begin(HOST_NAME)) {
+      Serial.print("* MDNS responder started. Hostname -> ");
+      Serial.println(HOST_NAME);
+  }
+
+  MDNS.addService("telnet", "tcp", 23);
+
+  Debug.begin(HOST_NAME); // Initiaze the telnet server
+
+  Debug.setResetCmdEnabled(true); // Enable the reset command
 }
 
 void initConfiguration()
@@ -274,7 +300,16 @@ void loop() {
     
   //keep-alive da comunicação com broker MQTT
   mqqtManager.getMQQT()->loop();  
-  
+
+
+  // Remote debug over telnet
+
+    Debug.handle();
+
+    // Give a time for ESP8266
+
+    yield();
+    
 }
 
 void loopInApplication()
