@@ -74,7 +74,7 @@ DebugManager debugManager(D6);
 ESPDevice espDevice;
 WiFiManager wifiManager(D5, debugManager);
 UpdateManager updateManager(debugManager, wifiManager, HOST, PORT, URI);
-ConfigurationManager configurationManager(debugManager, wifiManager, espDevice, HOST, PORT, URI);
+ConfigurationManager configurationManager(wifiManager, espDevice, HOST, PORT, URI);
 NTPManager ntpManager(debugManager, configurationManager);
 MQQTManager mqqtManager(configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);

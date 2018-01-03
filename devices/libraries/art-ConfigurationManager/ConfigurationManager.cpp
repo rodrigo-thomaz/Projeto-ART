@@ -18,9 +18,8 @@ void DeviceInApplication::setApplicationId(String value)
 
 // ConfigurationManager
 
-ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManager& wifiManager, ESPDevice& espDevice, String host, uint16_t port, String uri)
+ConfigurationManager::ConfigurationManager(WiFiManager& wifiManager, ESPDevice& espDevice, String host, uint16_t port, String uri)
 { 
-	this->_debugManager = &debugManager;
 	this->_wifiManager = &wifiManager;
 	this->_espDevice = &espDevice;
 	
