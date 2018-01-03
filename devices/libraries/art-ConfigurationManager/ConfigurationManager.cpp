@@ -18,18 +18,17 @@ void DeviceInApplication::setApplicationId(String value)
 
 // ConfigurationManager
 
-ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
+ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManager& wifiManager, ESPDevice& espDevice, String host, uint16_t port, String uri)
 { 
 	this->_debugManager = &debugManager;
 	this->_wifiManager = &wifiManager;
+	this->_espDevice = &espDevice;
 	
 	this->_host = host;
 	this->_port = port;
 	this->_uri = uri;
 	
 	this->_deviceInApplication = NULL;
-	
-	this->_espDevice = NULL;
 }
 
 void ConfigurationManager::begin()
@@ -94,10 +93,8 @@ void ConfigurationManager::autoInitialize()
 		// file found at server
 		if(httpCode == HTTP_CODE_OK) {
 			
-			String payload = http.getString();
+			String payload = http.getString();			
 			
-			
-			_espDevice = new ESPDevice();
 			_espDevice->load(payload);
 			
 			

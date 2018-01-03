@@ -1,4 +1,5 @@
 #include "DebugManager.h"
+#include "ESPDevice.h"
 #include "ConfigurationManager.h"
 #include "DSFamilyTempSensorManager.h"
 #include "UnitOfMeasurementConverter.h"
@@ -70,9 +71,10 @@ uint64_t publishMessageTimestamp = 0;
 uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
+ESPDevice espDevice;
 WiFiManager wifiManager(D5, debugManager);
 UpdateManager updateManager(debugManager, wifiManager, HOST, PORT, URI);
-ConfigurationManager configurationManager(debugManager, wifiManager, HOST, PORT, URI);
+ConfigurationManager configurationManager(debugManager, wifiManager, espDevice, HOST, PORT, URI);
 NTPManager ntpManager(debugManager, configurationManager);
 MQQTManager mqqtManager(configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
