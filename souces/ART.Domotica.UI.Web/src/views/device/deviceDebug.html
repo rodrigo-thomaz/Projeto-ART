@@ -1,0 +1,8 @@
+﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceDebugController" ng-init="init(device.deviceDebug)">    
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Debug Active</label>
+        <div class="col-lg-8">
+            <input type="checkbox" ng-model="activeView" ng-model-options="{ debounce: 1000 }" ng-change="changeActive()" class="form-control">
+        </div>
+    </div>
+</form>

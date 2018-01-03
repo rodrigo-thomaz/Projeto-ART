@@ -7,7 +7,6 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
         var setHostNameCompletedSubscription = null;
-        var setUpdateIntervalInMilliSecondCompletedSubscription = null;
 
         var setHostName = function (deviceWiFiId, deviceDatasheetId, hostName) {
             var data = {

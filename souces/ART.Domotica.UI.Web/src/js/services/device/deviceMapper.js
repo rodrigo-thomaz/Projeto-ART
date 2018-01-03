@@ -9,6 +9,7 @@ app.factory('deviceMapper', [
     'deviceFinder',
     'sensorFinder',
     'deviceWiFiFinder',
+    'deviceDebugFinder',
     'deviceNTPFinder',
     'sensorInDeviceFinder',
     'deviceSensorsFinder',
@@ -23,6 +24,7 @@ app.factory('deviceMapper', [
         deviceFinder,
         sensorFinder,
         deviceWiFiFinder,
+        deviceDebugFinder,
         deviceNTPFinder,
         sensorInDeviceFinder,
         deviceSensorsFinder,
@@ -37,6 +39,9 @@ app.factory('deviceMapper', [
             //deviceNTP
             var deviceNTP = device.deviceNTP;
             deviceContext.deviceNTP.push(deviceNTP);
+            //deviceDebug
+            var deviceDebug = device.deviceDebug;
+            deviceContext.deviceDebug.push(deviceDebug);
             //deviceSensors
             var deviceSensors = device.deviceSensors;
             deviceContext.deviceSensors.push(deviceSensors);
@@ -61,6 +66,14 @@ app.factory('deviceMapper', [
             for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
                 if (deviceNTP === deviceContext.deviceNTP[i]) {
                     deviceContext.deviceNTP.splice(i, 1);
+                    break;
+                }
+            }
+            //deviceDebug
+            var deviceDebug = device.deviceDebug;
+            for (var i = 0; i < deviceContext.deviceDebug.length; i++) {
+                if (deviceDebug === deviceContext.deviceDebug[i]) {
+                    deviceContext.deviceDebug.splice(i, 1);
                     break;
                 }
             }
@@ -113,6 +126,13 @@ app.factory('deviceMapper', [
             }
         });
 
+        deviceContext.$watchCollection('deviceDebug', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var deviceDebug = newValues[i];
+                deviceDebug.device = function () { return deviceFinder.getByKey(this.deviceDebugId, this.deviceDatasheetId); }
+            }
+        });
+
         deviceContext.$watchCollection('deviceSensors', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceSensors = newValues[i];
@@ -138,6 +158,7 @@ app.factory('deviceMapper', [
             deviceContext.deviceLoaded = true;
             deviceContext.deviceWiFiLoaded = true;
             deviceContext.deviceNTPLoaded = true;
+            deviceContext.deviceDebugLoaded = true;
             deviceContext.deviceSensorsLoaded = true;
             deviceContext.sensorInDeviceLoaded = true;
         }

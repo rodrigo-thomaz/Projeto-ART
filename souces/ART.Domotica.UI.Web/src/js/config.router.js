@@ -127,6 +127,7 @@ angular.module('app')
 
                         'js/services/device/deviceWiFiFinder.js',
                         'js/services/device/deviceNTPFinder.js',
+                        'js/services/device/deviceDebugFinder.js',
                         'js/services/device/deviceSensorsFinder.js',
                         'js/services/device/sensorInDeviceFinder.js',
                         'js/services/device/deviceFinder.js',
@@ -135,6 +136,7 @@ angular.module('app')
 
                         'js/services/device/deviceWiFiService.js',
                         'js/services/device/deviceNTPService.js',
+                        'js/services/device/deviceDebugService.js',
                         'js/services/device/deviceSensorsService.js',
                         'js/services/device/sensorInDeviceService.js',
                         'js/services/device/deviceService.js',
@@ -172,6 +174,7 @@ angular.module('app')
                         'js/controllers/device/deviceController.js',
                         'js/controllers/device/deviceWiFiController.js',
                         'js/controllers/device/deviceNTPController.js',
+                        'js/controllers/device/deviceDebugController.js',
                         'js/controllers/device/deviceSensorsController.js',
                         'js/controllers/device/sensorInDeviceController.js',
 

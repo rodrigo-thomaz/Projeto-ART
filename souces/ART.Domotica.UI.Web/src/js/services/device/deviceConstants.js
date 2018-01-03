@@ -43,6 +43,14 @@ app.constant('deviceWiFiConstant', {
 
 });
 
+app.constant('deviceDebugConstant', {
+
+    setActiveApiUri: 'api/deviceDebug/setActive',
+    setActiveCompletedTopic: 'DeviceDebug.SetActiveViewCompleted',
+    setActiveCompletedEventName: 'deviceDebugService.onSetActiveCompleted_Id_',
+
+});
+
 app.constant('deviceSensorsConstant', {
 
     setPublishIntervalInSecondsApiUri: 'api/deviceSensors/setPublishIntervalInSeconds',
