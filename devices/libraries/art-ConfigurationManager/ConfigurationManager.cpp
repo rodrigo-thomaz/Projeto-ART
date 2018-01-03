@@ -32,11 +32,7 @@ ConfigurationManager::ConfigurationManager(DebugManager& debugManager, WiFiManag
 }
 
 void ConfigurationManager::begin()
-{	
-	this->_chipId = ESP.getChipId();
-	this->_flashChipId = ESP.getFlashChipId();
-	this->_macAddress = WiFi.macAddress();
-	
+{		
 	this->autoInitialize();
 }
 
@@ -69,9 +65,9 @@ void ConfigurationManager::autoInitialize()
 	StaticJsonBuffer<200> jsonBufferRequest;
 	JsonObject& jsonObjectRequest = jsonBufferRequest.createObject();
 	
-	jsonObjectRequest["chipId"] = _chipId;
-	jsonObjectRequest["flashChipId"] = _flashChipId;
-	jsonObjectRequest["macAddress"] = _macAddress;
+	jsonObjectRequest["chipId"] = _espDevice->getChipId();
+	jsonObjectRequest["flashChipId"] = _espDevice->getFlashChipId();
+	jsonObjectRequest["macAddress"] = _espDevice->getStationMacAddress();
 
 	int lenRequest = jsonObjectRequest.measureLength();
 	char dataRequest[lenRequest + 1];

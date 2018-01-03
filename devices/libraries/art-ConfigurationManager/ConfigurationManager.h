@@ -57,10 +57,6 @@ class ConfigurationManager
 	String 								_host;
 	uint16_t 							_port;
 	String 								_uri;
-	
-	int									_chipId;
-	int									_flashChipId;
-	String								_macAddress;
 
 	DeviceInApplication*				_deviceInApplication;	
 	
