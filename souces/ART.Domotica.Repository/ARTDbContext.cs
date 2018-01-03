@@ -75,6 +75,11 @@
             get; set;
         }
 
+        public DbSet<DeviceDebug> DeviceDebug
+        {
+            get; set;
+        }
+
         public DbSet<DeviceInApplication> DeviceInApplication
         {
             get; set;

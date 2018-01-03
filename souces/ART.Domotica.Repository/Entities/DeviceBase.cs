@@ -30,6 +30,11 @@
             get; set;
         }
 
+        public DeviceDebug DeviceDebug
+        {
+            get; set;
+        }
+
         public DeviceMQ DeviceMQ
         {
             get; set;

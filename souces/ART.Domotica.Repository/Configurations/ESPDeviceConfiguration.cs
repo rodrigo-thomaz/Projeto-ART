@@ -47,7 +47,7 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new[]{
                         new IndexAttribute { IsUnique = true }, // FlashId é único e imutável via código
-                    }));            
+                    }));
 
             //SDKVersion
             Property(x => x.SDKVersion)

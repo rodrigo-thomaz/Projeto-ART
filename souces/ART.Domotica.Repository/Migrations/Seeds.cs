@@ -492,6 +492,7 @@
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceWiFi)
+                .Include(x => x.DeviceDebug)
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
                 .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
@@ -512,7 +513,7 @@
                     ChipId = espDevice1ChipId,
                     FlashChipId = espDevice1FlashChipId,
                     ChipSize = espDevice1ChipSize,
-                    SDKVersion = espDevice1SDKVersion,                    
+                    SDKVersion = espDevice1SDKVersion,
                     Pin = RandonHelper.RandomString(4),
                     Label = "Device 1",
                     CreateDate = DateTime.Now,
@@ -533,6 +534,10 @@
                     {
                         TimeZoneId = timeZoneBrasilia.Id, // Cada hora são 3600 segundos
                         UpdateIntervalInMilliSecond = 60000,
+                    },
+                    DeviceDebug = new DeviceDebug
+                    {
+                        Active = true,
                     },
                     DeviceSensors = new DeviceSensors
                     {
@@ -567,7 +572,7 @@
                         ClientId = RandonHelper.RandomString(10),
                         Topic = RandonHelper.RandomString(10),
                     };
-                }                
+                }
                 if (espDevice1.DeviceNTP == null)
                 {
                     var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
@@ -576,6 +581,13 @@
                     {
                         TimeZoneId = timeZoneBrasilia.Id, // Cada hora são 3600 segundos
                         UpdateIntervalInMilliSecond = 60000,
+                    };
+                }
+                if (espDevice1.DeviceDebug == null)
+                {
+                    espDevice1.DeviceDebug = new DeviceDebug
+                    {
+                        Active = true,
                     };
                 }
                 if (espDevice1.DeviceSensors == null)
@@ -730,6 +742,7 @@
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceWiFi)
+                .Include(x => x.DeviceDebug)
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Ultrasonic_1Way)
@@ -750,7 +763,7 @@
                     ChipId = espDevice2ChipId,
                     FlashChipId = espDevice2FlashChipId,
                     ChipSize = espDevice2ChipSize,
-                    SDKVersion = espDevice2SDKVersion,                    
+                    SDKVersion = espDevice2SDKVersion,
                     Pin = RandonHelper.RandomString(4),
                     Label = "Device 2",
                     CreateDate = DateTime.Now,
@@ -771,6 +784,10 @@
                     {
                         TimeZoneId = timeZoneBrasilia.Id, // Cada hora são 3600 segundos
                         UpdateIntervalInMilliSecond = 80000,
+                    },
+                    DeviceDebug = new DeviceDebug
+                    {
+                        Active = true,
                     },
                     DeviceSensors = new DeviceSensors
                     {
@@ -824,6 +841,13 @@
                     espDevice2.DeviceSensors = new DeviceSensors
                     {
                         PublishIntervalInSeconds = 9,
+                    };
+                }
+                if (espDevice2.DeviceDebug == null)
+                {
+                    espDevice2.DeviceDebug = new DeviceDebug
+                    {
+                        Active = true,
                     };
                 }
             }

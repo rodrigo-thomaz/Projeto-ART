@@ -70,6 +70,7 @@
     <Compile Include="Configurations\DeviceDatasheetBinaryConfiguration.cs" />
     <Compile Include="Configurations\DeviceDatasheetConfiguration.cs" />
     <Compile Include="Configurations\DeviceBinaryConfiguration.cs" />
+    <Compile Include="Configurations\DeviceDebugConfiguration.cs" />
     <Compile Include="Configurations\DeviceWiFiConfiguration.cs" />
     <Compile Include="Configurations\Locale\ContinentConfiguration.cs" />
     <Compile Include="Configurations\DeviceNTPConfiguration.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Entities\DeviceDatasheetBinaryBuffer.cs" />
     <Compile Include="Entities\DeviceDatasheetBinary.cs" />
     <Compile Include="Entities\DeviceDatasheet.cs" />
+    <Compile Include="Entities\DeviceDebug.cs" />
     <Compile Include="Entities\DeviceWiFi.cs" />
     <Compile Include="Entities\Locale\Continent.cs" />
     <Compile Include="Entities\Locale\Country.cs" />
@@ -177,6 +179,10 @@
     <Compile Include="Migrations\201801031701147_Initial.cs" />
     <Compile Include="Migrations\201801031701147_Initial.Designer.cs">
       <DependentUpon>201801031701147_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801031758156_Initia2.cs" />
+    <Compile Include="Migrations\201801031758156_Initia2.Designer.cs">
+      <DependentUpon>201801031758156_Initia2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -269,6 +275,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801031701147_Initial.resx">
       <DependentUpon>201801031701147_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801031758156_Initia2.resx">
+      <DependentUpon>201801031758156_Initia2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
