@@ -8,6 +8,7 @@ app.factory('deviceMapper', [
     'sensorContext',
     'deviceFinder',
     'sensorFinder',
+    'deviceWiFiFinder',
     'deviceNTPFinder',
     'sensorInDeviceFinder',
     'deviceSensorsFinder',
@@ -21,6 +22,7 @@ app.factory('deviceMapper', [
         sensorContext,
         deviceFinder,
         sensorFinder,
+        deviceWiFiFinder,
         deviceNTPFinder,
         sensorInDeviceFinder,
         deviceSensorsFinder,
@@ -29,6 +31,9 @@ app.factory('deviceMapper', [
         var serviceFactory = {};
 
         var addDeviceAggregates = function (device) {
+            //deviceWiFi
+            var deviceWiFi = device.deviceWiFi;
+            deviceContext.deviceWiFi.push(deviceWiFi);
             //deviceNTP
             var deviceNTP = device.deviceNTP;
             deviceContext.deviceNTP.push(deviceNTP);
@@ -43,6 +48,14 @@ app.factory('deviceMapper', [
         }
 
         var removeDeviceAggregates = function (device) {
+            //deviceWiFi
+            var deviceWiFi = device.deviceWiFi;
+            for (var i = 0; i < deviceContext.deviceWiFi.length; i++) {
+                if (deviceWiFi === deviceContext.deviceWiFi[i]) {
+                    deviceContext.deviceWiFi.splice(i, 1);
+                    break;
+                }
+            }
             //deviceNTP
             var deviceNTP = device.deviceNTP;
             for (var i = 0; i < deviceContext.deviceNTP.length; i++) {
@@ -85,6 +98,13 @@ app.factory('deviceMapper', [
             }            
         });
 
+        deviceContext.$watchCollection('deviceWiFi', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var deviceWiFi = newValues[i];
+                deviceWiFi.device = function () { return deviceFinder.getByKey(this.deviceWiFiId, this.deviceDatasheetId); }
+            }
+        });
+
         deviceContext.$watchCollection('deviceNTP', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceNTP = newValues[i];
@@ -116,6 +136,7 @@ app.factory('deviceMapper', [
             deviceGetAllByApplicationIdCompletedSubscription();
 
             deviceContext.deviceLoaded = true;
+            deviceContext.deviceWiFiLoaded = true;
             deviceContext.deviceNTPLoaded = true;
             deviceContext.deviceSensorsLoaded = true;
             deviceContext.sensorInDeviceLoaded = true;

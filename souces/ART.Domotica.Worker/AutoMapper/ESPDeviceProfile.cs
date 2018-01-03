@@ -22,6 +22,7 @@
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP))
+                .ForMember(vm => vm.DeviceWiFi, m => m.MapFrom(x => x.DeviceWiFi))
                 .ForMember(vm => vm.DeviceSensors, m => m.MapFrom(x => x.DeviceSensors));
 
             CreateMap<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>()

@@ -6,6 +6,9 @@ app.factory('deviceContext', ['$rootScope', function ($rootScope) {
     context.device = [];   
     context.deviceLoaded = false;
         
+    context.deviceWiFi = [];   
+    context.deviceWiFiLoaded = false;
+
     context.deviceNTP = [];   
     context.deviceNTPLoaded = false;
 

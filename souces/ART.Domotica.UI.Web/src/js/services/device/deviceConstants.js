@@ -31,7 +31,15 @@ app.constant('deviceNTPConstant', {
 
     setUpdateIntervalInMilliSecondApiUri: 'api/deviceNTP/setUpdateIntervalInMilliSecond',
     setUpdateIntervalInMilliSecondCompletedTopic: 'DeviceNTP.SetUpdateIntervalInMilliSecondViewCompleted',
-    setUpdateIntervalInMilliSecondCompletedEventName: 'deviceService.onSetUpdateIntervalInMilliSecondCompleted_Id_',   
+    setUpdateIntervalInMilliSecondCompletedEventName: 'deviceNTPService.onSetUpdateIntervalInMilliSecondCompleted_Id_',   
+
+});
+
+app.constant('deviceWiFiConstant', {
+
+    setHostNameApiUri: 'api/deviceWiFi/setHostName',
+    setHostNameCompletedTopic: 'DeviceWiFi.SetHostNameViewCompleted',
+    setHostNameCompletedEventName: 'deviceWiFiService.onSetHostNameCompleted_Id_',
 
 });
 

@@ -93,3 +93,8 @@ DeviceSensors* ESPDevice::getDeviceSensors()
 {	
 	return _deviceSensors;
 }
+
+RemoteDebug* ESPDevice::getDebug()
+{	
+	return _debug;
+}

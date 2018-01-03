@@ -269,6 +269,7 @@
     <Content Include="src\js\base64Helper.js" />
     <Content Include="src\js\config.settings.js" />
     <Content Include="src\js\controllers\admin\espDeviceAdminController.js" />
+    <Content Include="src\js\controllers\device\deviceWiFiController.js" />
     <Content Include="src\js\controllers\espDeviceJoinController.js" />
     <Content Include="src\js\controllers\espDeviceListController.js" />
     <Content Include="src\js\controllers\espDeviceManagerController.js" />
@@ -294,6 +295,8 @@
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetFinder.js" />
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetMapper.js" />
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetService.js" />
+    <Content Include="src\js\services\device\deviceWiFiFinder.js" />
+    <Content Include="src\js\services\device\deviceWiFiService.js" />
     <Content Include="src\js\services\globalization\globalizationConstants.js" />
     <Content Include="src\js\services\globalization\globalizationContext.js" />
     <Content Include="src\js\services\globalization\timeZoneFinder.js" />
@@ -617,6 +620,7 @@
     <Content Include="src\tpl\layout_mobile.html" />
     <Content Include="src\tpl\page_profile.html" />
     <Content Include="src\views\admin\espDeviceAdmin.html" />
+    <Content Include="src\views\device\deviceWiFi.html" />
     <Content Include="src\views\espDeviceJoin.html" />
     <Content Include="src\views\espDeviceList_____Old.html" />
     <Content Include="src\views\espDeviceManager.html" />

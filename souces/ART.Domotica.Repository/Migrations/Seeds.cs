@@ -491,6 +491,7 @@
             var espDevice1 = context.ESPDevice
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
+                .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
                 .Where(x => x.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
@@ -517,6 +518,10 @@
                     Pin = RandonHelper.RandomString(4),
                     Label = "Device 1",
                     CreateDate = DateTime.Now,
+                    DeviceWiFi = new DeviceWiFi
+                    {
+                        HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
+                    },
                     DeviceMQ = new DeviceMQ
                     {
                         User = "test",
@@ -552,6 +557,13 @@
                         Password = "test",
                         ClientId = RandonHelper.RandomString(10),
                         Topic = RandonHelper.RandomString(10),
+                    };
+                }
+                if (espDevice1.DeviceWiFi == null)
+                {
+                    espDevice1.DeviceWiFi = new DeviceWiFi
+                    {
+                        HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
                     };
                 }
                 if (espDevice1.DeviceNTP == null)
@@ -715,6 +727,7 @@
             var espDevice2 = context.ESPDevice
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP)
+                .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Ultrasonic_1Way)
@@ -741,6 +754,10 @@
                     Pin = RandonHelper.RandomString(4),
                     Label = "Device 2",
                     CreateDate = DateTime.Now,
+                    DeviceWiFi = new DeviceWiFi
+                    {
+                        HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
+                    },
                     DeviceMQ = new DeviceMQ
                     {
                         User = "test2",
@@ -767,6 +784,14 @@
                 espDevice2.FlashChipId = espDevice2FlashChipId;
                 espDevice2.ChipSize = espDevice2ChipSize;
                 espDevice2.SDKVersion = espDevice2SDKVersion;
+
+                if (espDevice2.DeviceWiFi == null)
+                {
+                    espDevice2.DeviceWiFi = new DeviceWiFi
+                    {
+                        HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
+                    };
+                }
 
                 if (espDevice2.DeviceMQ == null)
                 {

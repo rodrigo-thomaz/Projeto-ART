@@ -8,6 +8,7 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include <ESP8266WiFi.h>
+#include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
 
 class DeviceMQ;
 class DeviceNTP;
@@ -36,6 +37,8 @@ class ESPDevice
 		DeviceMQ*					getDeviceMQ();
 		DeviceNTP*					getDeviceNTP();
 		DeviceSensors*				getDeviceSensors();
+		
+		RemoteDebug*				getDebug();
 	
 	private:	
 
@@ -54,6 +57,8 @@ class ESPDevice
 		DeviceMQ*					_deviceMQ;
 		DeviceNTP*					_deviceNTP;
 		DeviceSensors*				_deviceSensors;
+		
+		RemoteDebug* 				_debug;
 		
 };
 

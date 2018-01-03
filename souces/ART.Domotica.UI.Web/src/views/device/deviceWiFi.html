@@ -1,0 +1,11 @@
+﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceWiFiController" ng-init="init(device.deviceWiFi)">    
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Host Name</label>
+        <div class="col-lg-8">
+            <input name="inputHostName" type="text" ng-model="hostNameView" ng-model-options="{ debounce: 1000 }" ng-change="changeHostName()" required class="form-control">
+        </div>
+        <span ng-show="form.inputHostName.$touched && form.inputHostName.$invalid">
+            Host name requerido
+        </span>
+    </div>
+</form>

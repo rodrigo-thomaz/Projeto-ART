@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceWiFiGetModel.cs" />
     <Compile Include="DeviceNTPGetModel.cs" />
+    <Compile Include="DeviceWiFiSetHostNameModel.cs" />
     <Compile Include="DeviceSensorsSetPublishIntervalInSecondsModel.cs" />
     <Compile Include="DeviceDatasheetGetModel.cs" />
     <Compile Include="SensorInDeviceSetOrdinationModel.cs" />

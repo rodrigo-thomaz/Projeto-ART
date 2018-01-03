@@ -99,6 +99,7 @@
             var data = await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)
                 .Include(x => x.DeviceNTP)
+                .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceSensors.SensorInDevice)
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();           

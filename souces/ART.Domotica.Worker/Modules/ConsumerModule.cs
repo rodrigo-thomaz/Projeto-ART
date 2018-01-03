@@ -33,6 +33,7 @@
             builder.RegisterType<CountryConsumer>().As<ICountryConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceDatasheetConsumer>().As<IDeviceDatasheetConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceNTPConsumer>().As<IDeviceNTPConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<DeviceWiFiConsumer>().As<IDeviceWiFiConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceSensorsConsumer>().As<IDeviceSensorsConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTempDSFamilyConsumer>().As<ISensorTempDSFamilyConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ESPDeviceConsumer>().As<IESPDeviceConsumer>().SingleInstance().AutoActivate();

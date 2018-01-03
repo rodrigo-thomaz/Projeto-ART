@@ -90,6 +90,11 @@
             get; set;
         }
 
+        public DbSet<DeviceWiFi> DeviceWiFi
+        {
+            get; set;
+        }
+
         public DbSet<DeviceSensors> DeviceSensors
         {
             get; set;

@@ -70,6 +70,7 @@
     <Compile Include="Configurations\DeviceDatasheetBinaryConfiguration.cs" />
     <Compile Include="Configurations\DeviceDatasheetConfiguration.cs" />
     <Compile Include="Configurations\DeviceBinaryConfiguration.cs" />
+    <Compile Include="Configurations\DeviceWiFiConfiguration.cs" />
     <Compile Include="Configurations\Locale\ContinentConfiguration.cs" />
     <Compile Include="Configurations\DeviceNTPConfiguration.cs" />
     <Compile Include="Configurations\DeviceMQConfiguration.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Entities\DeviceDatasheetBinaryBuffer.cs" />
     <Compile Include="Entities\DeviceDatasheetBinary.cs" />
     <Compile Include="Entities\DeviceDatasheet.cs" />
+    <Compile Include="Entities\DeviceWiFi.cs" />
     <Compile Include="Entities\Locale\Continent.cs" />
     <Compile Include="Entities\Locale\Country.cs" />
     <Compile Include="Entities\DeviceNTP.cs" />
@@ -140,6 +142,7 @@
     <Compile Include="Interfaces\IDeviceDatasheetBinaryBufferRepository.cs" />
     <Compile Include="Interfaces\IDeviceDatasheetBinaryRepository.cs" />
     <Compile Include="Interfaces\IDeviceBinaryRepository.cs" />
+    <Compile Include="Interfaces\IDeviceWiFiRepository.cs" />
     <Compile Include="Interfaces\IDeviceSensorsRepository.cs" />
     <Compile Include="Interfaces\IDeviceDatasheetRepository.cs" />
     <Compile Include="Interfaces\ISensorInApplicationRepository.cs" />
@@ -179,6 +182,10 @@
     <Compile Include="Migrations\201712261519533_InitialCreate1.Designer.cs">
       <DependentUpon>201712261519533_InitialCreate1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801031509432_Initial6.cs" />
+    <Compile Include="Migrations\201801031509432_Initial6.Designer.cs">
+      <DependentUpon>201801031509432_Initial6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,6 +193,7 @@
     <Compile Include="Repositories\DeviceDatasheetBinaryBufferRepository.cs" />
     <Compile Include="Repositories\DeviceDatasheetBinaryRepository.cs" />
     <Compile Include="Repositories\DeviceBinaryRepository.cs" />
+    <Compile Include="Repositories\DeviceWiFiRepository.cs" />
     <Compile Include="Repositories\DeviceSensorsRepository.cs" />
     <Compile Include="Repositories\DeviceDatasheetRepository.cs" />
     <Compile Include="Repositories\SensorInApplicationRepository.cs" />
@@ -272,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712261519533_InitialCreate1.resx">
       <DependentUpon>201712261519533_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801031509432_Initial6.resx">
+      <DependentUpon>201801031509432_Initial6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
