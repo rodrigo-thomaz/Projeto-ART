@@ -47,44 +47,22 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new[]{
                         new IndexAttribute { IsUnique = true }, // FlashId é único e imutável via código
-                    }));
-
-            //StationMacAddress
-            Property(x => x.StationMacAddress)
-                .HasColumnOrder(4)
-                .HasMaxLength(17)
-                .IsFixedLength()
-                .IsRequired()
-                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new[]{
-                        new IndexAttribute { IsUnique = true }, // MacAddress é único mas mutável via código
-                    }));
-
-            //SoftAPMacAddress
-            Property(x => x.SoftAPMacAddress)
-                .HasColumnOrder(5)
-                .HasMaxLength(17)
-                .IsFixedLength()
-                .IsRequired()
-                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new[]{
-                        new IndexAttribute { IsUnique = true }, // MacAddress é único mas mutável via código
-                    }));
+                    }));            
 
             //SDKVersion
             Property(x => x.SDKVersion)
-                .HasColumnOrder(6)
+                .HasColumnOrder(4)
                 .HasMaxLength(50)
                 .IsRequired();
 
             //ChipSize
             Property(x => x.ChipSize)
-                .HasColumnOrder(7)
+                .HasColumnOrder(5)
                 .IsRequired();
 
             //Pin
             Property(x => x.Pin)
-                .HasColumnOrder(8)
+                .HasColumnOrder(6)
                 .HasMaxLength(4)
                 .IsFixedLength()
                 .IsRequired()

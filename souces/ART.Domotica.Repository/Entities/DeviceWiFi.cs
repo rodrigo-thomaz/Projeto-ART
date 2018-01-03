@@ -19,12 +19,25 @@
             get; set;
         }
 
+        public string HostName
+        {
+            get; set;
+        }
+
         public Guid Id
         {
             get; set;
         }
 
-        public string HostName { get; set; }
+        public string SoftAPMacAddress
+        {
+            get; set;
+        }
+
+        public string StationMacAddress
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

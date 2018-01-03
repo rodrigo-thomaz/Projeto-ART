@@ -494,8 +494,8 @@
                 .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
-                .Where(x => x.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
-                .Where(x => x.SoftAPMacAddress.ToLower() == espDevice1SoftAPMacAddress.ToLower())
+                .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
+                .Where(x => x.DeviceWiFi.SoftAPMacAddress.ToLower() == espDevice1SoftAPMacAddress.ToLower())
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Temperature_OneWire_2Way)
                 .SingleOrDefault();
 
@@ -512,14 +512,14 @@
                     ChipId = espDevice1ChipId,
                     FlashChipId = espDevice1FlashChipId,
                     ChipSize = espDevice1ChipSize,
-                    SDKVersion = espDevice1SDKVersion,
-                    StationMacAddress = espDevice1StationMacAddress,
-                    SoftAPMacAddress = espDevice1SoftAPMacAddress,
+                    SDKVersion = espDevice1SDKVersion,                    
                     Pin = RandonHelper.RandomString(4),
                     Label = "Device 1",
                     CreateDate = DateTime.Now,
                     DeviceWiFi = new DeviceWiFi
                     {
+                        StationMacAddress = espDevice1StationMacAddress,
+                        SoftAPMacAddress = espDevice1SoftAPMacAddress,
                         HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
                     },
                     DeviceMQ = new DeviceMQ
@@ -549,6 +549,15 @@
                 espDevice1.ChipSize = espDevice1ChipSize;
                 espDevice1.SDKVersion = espDevice1SDKVersion;
 
+                if (espDevice1.DeviceWiFi == null)
+                {
+                    espDevice1.DeviceWiFi = new DeviceWiFi
+                    {
+                        StationMacAddress = espDevice1StationMacAddress,
+                        SoftAPMacAddress = espDevice1SoftAPMacAddress,
+                        HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
+                    };
+                }
                 if (espDevice1.DeviceMQ == null)
                 {
                     espDevice1.DeviceMQ = new DeviceMQ
@@ -558,14 +567,7 @@
                         ClientId = RandonHelper.RandomString(10),
                         Topic = RandonHelper.RandomString(10),
                     };
-                }
-                if (espDevice1.DeviceWiFi == null)
-                {
-                    espDevice1.DeviceWiFi = new DeviceWiFi
-                    {
-                        HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
-                    };
-                }
+                }                
                 if (espDevice1.DeviceNTP == null)
                 {
                     var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
@@ -731,8 +733,8 @@
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Ultrasonic_1Way)
-                .Where(x => x.StationMacAddress.ToLower() == espDevice2StationMacAddress.ToLower())
-                .Where(x => x.SoftAPMacAddress.ToLower() == espDevice2SoftAPMacAddress.ToLower())
+                .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice2StationMacAddress.ToLower())
+                .Where(x => x.DeviceWiFi.SoftAPMacAddress.ToLower() == espDevice2SoftAPMacAddress.ToLower())
                 .SingleOrDefault();
 
             if (espDevice2 == null)
@@ -748,14 +750,14 @@
                     ChipId = espDevice2ChipId,
                     FlashChipId = espDevice2FlashChipId,
                     ChipSize = espDevice2ChipSize,
-                    SDKVersion = espDevice2SDKVersion,
-                    StationMacAddress = espDevice2StationMacAddress,
-                    SoftAPMacAddress = espDevice2SoftAPMacAddress,
+                    SDKVersion = espDevice2SDKVersion,                    
                     Pin = RandonHelper.RandomString(4),
                     Label = "Device 2",
                     CreateDate = DateTime.Now,
                     DeviceWiFi = new DeviceWiFi
                     {
+                        StationMacAddress = espDevice2StationMacAddress,
+                        SoftAPMacAddress = espDevice2SoftAPMacAddress,
                         HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
                     },
                     DeviceMQ = new DeviceMQ
@@ -789,6 +791,8 @@
                 {
                     espDevice2.DeviceWiFi = new DeviceWiFi
                     {
+                        StationMacAddress = espDevice2StationMacAddress,
+                        SoftAPMacAddress = espDevice2SoftAPMacAddress,
                         HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
                     };
                 }

@@ -88,7 +88,7 @@
                .Include(x => x.DeviceSensors)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)
-               .Where(x => x.StationMacAddress == macAddress)               
+               .Where(x => x.DeviceWiFi.StationMacAddress == macAddress)               
                .SingleOrDefaultAsync();
 
             return data;

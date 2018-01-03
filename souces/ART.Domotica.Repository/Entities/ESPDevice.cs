@@ -29,16 +29,6 @@
             get; set;
         }
 
-        public string SoftAPMacAddress
-        {
-            get; set;
-        }
-
-        public string StationMacAddress
-        {
-            get; set;
-        }
-
         #endregion Properties
     }
 }

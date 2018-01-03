@@ -40,17 +40,17 @@
             get; set;
         }
 
-        public DeviceWiFi DeviceWiFi
-        {
-            get; set;
-        }
-
         public DeviceSensors DeviceSensors
         {
             get; set;
         }
 
         public ICollection<DeviceInApplication> DevicesInApplication
+        {
+            get; set;
+        }
+
+        public DeviceWiFi DeviceWiFi
         {
             get; set;
         }

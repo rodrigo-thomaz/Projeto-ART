@@ -2,7 +2,7 @@
 {
     public class DeviceSensorsDetailResponseContract
     {
-        #region Properties        
+        #region Properties
 
         public int PublishIntervalInSeconds
         {

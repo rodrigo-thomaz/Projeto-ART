@@ -23,12 +23,12 @@
             get; set;
         }
 
-        public DeviceWiFiGetModel DeviceWiFi
+        public DeviceSensorsGetModel DeviceSensors
         {
             get; set;
         }
 
-        public DeviceSensorsGetModel DeviceSensors
+        public DeviceWiFiGetModel DeviceWiFi
         {
             get; set;
         }

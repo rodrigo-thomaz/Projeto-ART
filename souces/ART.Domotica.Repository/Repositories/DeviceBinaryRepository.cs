@@ -28,8 +28,8 @@
         public async Task<DeviceBinary> GetByDeviceMacAdresses(string stationMacAddress, string softAPMacAddress)
         {
             return await _context.ESPDevice
-                .Where(x => x.StationMacAddress == stationMacAddress)
-                .Where(x => x.SoftAPMacAddress == softAPMacAddress)
+                .Where(x => x.DeviceWiFi.StationMacAddress == stationMacAddress)
+                .Where(x => x.DeviceWiFi.SoftAPMacAddress == softAPMacAddress)
                 .Select(x => x.DeviceBinary)
                 .FirstOrDefaultAsync();
         }

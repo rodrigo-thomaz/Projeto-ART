@@ -3,6 +3,7 @@
     using ART.Domotica.Contract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
+
     using global::AutoMapper;
 
     public class DeviceWiFiProfile : Profile

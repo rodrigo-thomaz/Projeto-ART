@@ -23,7 +23,7 @@
 
         #endregion Constructors
 
-        #region Methods        
+        #region Methods
 
         protected Dictionary<string, object> CreateBasicArguments()
         {
