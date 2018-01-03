@@ -142,6 +142,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ApplicationMQController.cs" />
+    <Compile Include="Controllers\DeviceDebugController.cs" />
     <Compile Include="Controllers\DeviceWiFiController.cs" />
     <Compile Include="Controllers\DeviceNTPController.cs" />
     <Compile Include="Controllers\DeviceDatasheetController.cs" />

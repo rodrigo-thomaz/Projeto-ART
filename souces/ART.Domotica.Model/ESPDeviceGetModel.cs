@@ -13,6 +13,11 @@
             get; set;
         }
 
+        public DeviceDebugGetModel DeviceDebug
+        {
+            get; set;
+        }
+
         public Guid DeviceId
         {
             get; set;

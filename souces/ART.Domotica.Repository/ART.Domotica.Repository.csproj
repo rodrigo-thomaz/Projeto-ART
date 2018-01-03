@@ -144,6 +144,7 @@
     <Compile Include="Interfaces\IDeviceDatasheetBinaryBufferRepository.cs" />
     <Compile Include="Interfaces\IDeviceDatasheetBinaryRepository.cs" />
     <Compile Include="Interfaces\IDeviceBinaryRepository.cs" />
+    <Compile Include="Interfaces\IDeviceDebugRepository.cs" />
     <Compile Include="Interfaces\IDeviceWiFiRepository.cs" />
     <Compile Include="Interfaces\IDeviceSensorsRepository.cs" />
     <Compile Include="Interfaces\IDeviceDatasheetRepository.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Repositories\DeviceDatasheetBinaryBufferRepository.cs" />
     <Compile Include="Repositories\DeviceDatasheetBinaryRepository.cs" />
     <Compile Include="Repositories\DeviceBinaryRepository.cs" />
+    <Compile Include="Repositories\DeviceDebugRepository.cs" />
     <Compile Include="Repositories\DeviceWiFiRepository.cs" />
     <Compile Include="Repositories\DeviceSensorsRepository.cs" />
     <Compile Include="Repositories\DeviceDatasheetRepository.cs" />
