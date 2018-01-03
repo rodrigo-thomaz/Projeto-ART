@@ -97,7 +97,8 @@ void ConfigurationManager::autoInitialize()
 			String payload = http.getString();
 			
 			
-			_espDevice = new ESPDevice(payload);
+			_espDevice = new ESPDevice();
+			_espDevice->load(payload);
 			
 			
 			DynamicJsonBuffer jsonBufferResponse;

@@ -18,8 +18,10 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice(String json);
+		ESPDevice();
 		~ESPDevice();
+		
+		void						load(String json);
 		
 		char *						getDeviceId();
 		short						getDeviceDatasheetId();
@@ -38,7 +40,7 @@ class ESPDevice
 		DeviceNTP*					getDeviceNTP();
 		DeviceSensors*				getDeviceSensors();
 		
-		RemoteDebug*				getDebug();
+		RemoteDebug*				getDebug();			
 	
 	private:	
 

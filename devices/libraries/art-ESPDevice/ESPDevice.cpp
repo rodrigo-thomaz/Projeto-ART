@@ -1,25 +1,13 @@
 #include "ESPDevice.h"
 
-ESPDevice::ESPDevice(String json)
+ESPDevice::ESPDevice()
 {
-	DynamicJsonBuffer 				  jsonBuffer;
-	JsonObject& jsonObject 			= jsonBuffer.parseObject(json);		
-			
-	_deviceId 						= strdup(jsonObject["deviceId"]);	
-	_deviceDatasheetId 				= jsonObject["deviceDatasheetId"];	
-	
 	_chipId							= ESP.getChipId();	
 	_flashChipId					= ESP.getFlashChipId();	
 	_chipSize						= ESP.getFlashChipSize();	
 		
 	_stationMacAddress 				= strdup(WiFi.macAddress().c_str());	
-	_softAPMacAddress				= strdup(WiFi.softAPmacAddress().c_str());			
-
-	_label 							= strdup(jsonObject["label"]);
-	
-	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);		
-	DeviceNTP::createDeviceNTP(_deviceNTP, this, jsonObject["deviceNTP"]);		
-	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);		
+	_softAPMacAddress				= strdup(WiFi.softAPmacAddress().c_str());				
 }
 
 ESPDevice::~ESPDevice()
@@ -31,6 +19,21 @@ ESPDevice::~ESPDevice()
 	delete (_deviceMQ);
 	delete (_deviceNTP);
 	delete (_deviceSensors);
+}
+
+void ESPDevice::load(String json)
+{	
+	DynamicJsonBuffer 				  jsonBuffer;
+	JsonObject& jsonObject 			= jsonBuffer.parseObject(json);		
+			
+	_deviceId 						= strdup(jsonObject["deviceId"]);	
+	_deviceDatasheetId 				= jsonObject["deviceDatasheetId"];	
+	
+	_label 							= strdup(jsonObject["label"]);
+	
+	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);		
+	DeviceNTP::createDeviceNTP(_deviceNTP, this, jsonObject["deviceNTP"]);		
+	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);		
 }
 
 char* ESPDevice::getDeviceId()
