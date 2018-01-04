@@ -18,6 +18,8 @@ ESPDevice::ESPDevice(WiFiManager& wifiManager, char* webApiHost, uint16_t webApi
 	
 	_webApiUri 						= new char(sizeof(strlen(webApiUri)));
 	_webApiUri 						= webApiUri;	
+	
+	_debug							= new RemoteDebug();
 }
 
 ESPDevice::~ESPDevice()
@@ -33,6 +35,10 @@ ESPDevice::~ESPDevice()
 
 void ESPDevice::begin()
 {		
+	_debug->begin("remotedebug-sample"); // Initiaze the telnet server
+	_debug->setResetCmdEnabled(true); // Enable the reset command	
+	_debug->setSerialEnabled(true); // Setup after Debug.begin - All messages too send to serial too, and can be see in serial monitor
+	
 	autoLoad();
 }
 
@@ -175,50 +181,38 @@ void ESPDevice::autoLoad()
 			
 			load(payload);			
 			
-			Serial.println("ESPDevice initialized with success !");
+			if (_debug->isActive(_debug->DEBUG)) { 
 			
-			Serial.print("ESPDevice DeviceId: ");
-			Serial.println(getDeviceId());
-			Serial.print("ESPDevice DeviceDatasheetId: ");
-			Serial.println(getDeviceDatasheetId());
-			
-			Serial.print("DeviceMQ Host: ");
-			Serial.println(getDeviceMQ()->getHost());
-			Serial.print("DeviceMQ Port: ");
-			Serial.println(getDeviceMQ()->getPort());
-			Serial.print("DeviceMQ User: ");
-			Serial.println(getDeviceMQ()->getUser());
-			Serial.print("DeviceMQ Password: ");
-			Serial.println(getDeviceMQ()->getPassword());
-			Serial.print("DeviceMQ ClientId: ");
-			Serial.println(getDeviceMQ()->getClientId());			
-			Serial.print("DeviceMQ Device Topic: ");
-			Serial.println(getDeviceMQ()->getDeviceTopic());
-			
-			Serial.print("DeviceNTP Host: ");
-			Serial.println(getDeviceNTP()->getHost());
-			Serial.print("DeviceNTP Port: ");
-			Serial.println(getDeviceNTP()->getPort());			
-			Serial.print("DeviceNTP Utc Time Offset in second: ");
-			Serial.println(getDeviceNTP()->getUtcTimeOffsetInSecond());
-			Serial.print("DeviceNTP Update Interval: ");
-			Serial.println(getDeviceNTP()->getUpdateIntervalInMilliSecond());
-			
-			Serial.print("DeviceInApplication ApplicationId: ");
-			Serial.println(getDeviceInApplication()->getApplicationId());
-			Serial.print("DeviceInApplication Application Topic: ");
-			Serial.println(getDeviceInApplication()->getApplicationTopic());
-			
-			Serial.print("DeviceSensors PublishIntervalInSeconds: ");
-			Serial.println(getDeviceSensors()->getPublishIntervalInSeconds());			
-			
+				 _debug->printf("ESPDevice initialized with success !\n"); 
+				
+				_debug->printf("ESPDevice DeviceId: %s\n", _deviceId);
+				_debug->printf("ESPDevice DeviceDatasheetId: %d\n", _deviceDatasheetId);
+				
+				_debug->printf("DeviceMQ Host: %s\n", getDeviceMQ()->getHost());
+				_debug->printf("DeviceMQ Port: %d\n", getDeviceMQ()->getPort());
+				_debug->printf("DeviceMQ User: %s\n", getDeviceMQ()->getUser());
+				_debug->printf("DeviceMQ Password: %s\n", getDeviceMQ()->getPassword());
+				_debug->printf("DeviceMQ ClientId: %s\n", getDeviceMQ()->getClientId());
+				_debug->printf("DeviceMQ Device Topic: %s\n", getDeviceMQ()->getDeviceTopic());			
+				
+				_debug->printf("DeviceNTP Host: %s\n", getDeviceNTP()->getHost());
+				_debug->printf("DeviceNTP Port: %d\n", getDeviceNTP()->getPort());
+				_debug->printf("DeviceNTP UtcTimeOffsetInSecond: %d\n", getDeviceNTP()->getUtcTimeOffsetInSecond());
+				_debug->printf("DeviceNTP UpdateIntervalInMilliSecond: %d\n", getDeviceNTP()->getUpdateIntervalInMilliSecond());
+				
+				_debug->printf("DeviceInApplication ApplicationId: %s\n", getDeviceInApplication()->getApplicationId());
+				_debug->printf("DeviceInApplication ApplicationTopic: %s\n", getDeviceInApplication()->getApplicationTopic());
+				
+				_debug->printf("DeviceSensors PublishIntervalInSeconds: %d\n", getDeviceSensors()->getPublishIntervalInSeconds());		
+			}		
 		}
 	} else {
 		Serial.print("[HTTP] GET... failed, error: ");
 		Serial.println(http.errorToString(httpCode).c_str());		
 	}
-  
+
   http.end();
+
 }
 
 void ESPDevice::load(String json)
@@ -230,11 +224,11 @@ void ESPDevice::load(String json)
 	_deviceDatasheetId 				= jsonObject["deviceDatasheetId"];	
 	
 	_label 							= strdup(jsonObject["label"]);
-			
+	
 	DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);		
 	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);		
 	DeviceNTP::createDeviceNTP(_deviceNTP, this, jsonObject["deviceNTP"]);		
 	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);	
-
+	
 	_loaded = true;	
 }

@@ -138,6 +138,10 @@ void setup() {
   Debug.begin(HOST_NAME); // Initiaze the telnet server
 
   Debug.setResetCmdEnabled(true); // Enable the reset command
+
+  // Setup after Debug.begin
+  Debug.setSerialEnabled(true);
+  // All messages too send to serial too, and can be see in serial monitor
 }
 
 void initConfiguration()
