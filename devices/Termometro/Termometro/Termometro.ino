@@ -252,10 +252,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       subscribeNotInApplication();
     }    
     if(topicKey == String(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND)){
-      configurationManager.setUtcTimeOffsetInSecond(json);
+      espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(json);
     }
     if(topicKey == String(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND)){
-      configurationManager.setUpdateIntervalInMilliSecond(json);
+      espDevice.getDeviceNTP()->setUpdateIntervalInMilliSecond(json);
     }    
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
       dsFamilyTempSensorManager.setSensorsByMQQTCallback(json);      

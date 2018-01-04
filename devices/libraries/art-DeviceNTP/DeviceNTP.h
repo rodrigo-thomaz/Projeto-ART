@@ -20,10 +20,10 @@ public:
 	int									getPort();
 
 	int									getUtcTimeOffsetInSecond();
-	void								setUtcTimeOffsetInSecond(int value);
+	void								setUtcTimeOffsetInSecond(String json);
 	
 	int									getUpdateIntervalInMilliSecond();	
-	void								setUpdateIntervalInMilliSecond(int value);		
+	void								setUpdateIntervalInMilliSecond(String json);		
 		
 	static void createDeviceNTP(DeviceNTP* (&deviceNTP), ESPDevice* espDevice, JsonObject& jsonObject)
     {

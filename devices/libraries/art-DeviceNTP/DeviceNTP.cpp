@@ -39,9 +39,23 @@ int DeviceNTP::getUtcTimeOffsetInSecond()
 	return _utcTimeOffsetInSecond;
 }
 
-void DeviceNTP::setUtcTimeOffsetInSecond(int value)
+void DeviceNTP::setUtcTimeOffsetInSecond(String json)
 {	
-	_utcTimeOffsetInSecond = value;
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		Serial.print("[ConfigurationManager::setUtcTimeOffsetInSecond] parse failed: ");
+		Serial.println(json);
+		return;
+	}	
+
+	_utcTimeOffsetInSecond = root["utcTimeOffsetInSecond"];
+	
+	Serial.println("[ConfigurationManager::setUtcTimeOffsetInSecond] ");
+	Serial.print("utcTimeOffsetInSecond: ");
+	Serial.println(_utcTimeOffsetInSecond);	
 }
 
 int DeviceNTP::getUpdateIntervalInMilliSecond()
@@ -49,7 +63,21 @@ int DeviceNTP::getUpdateIntervalInMilliSecond()
 	return _updateIntervalInMilliSecond;
 }
 
-void DeviceNTP::setUpdateIntervalInMilliSecond(int value)
+void DeviceNTP::setUpdateIntervalInMilliSecond(String json)
 {	
-	_updateIntervalInMilliSecond = value;
+	StaticJsonBuffer<200> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		Serial.print("[ConfigurationManager::setUpdateIntervalInMilliSecond] parse failed: ");
+		Serial.println(json);
+		return;
+	}	
+
+	_updateIntervalInMilliSecond = root["updateIntervalInMilliSecond"];
+	
+	Serial.println("[ConfigurationManager::setUpdateIntervalInMilliSecond] ");
+	Serial.print("updateIntervalInMilliSecond: ");
+	Serial.println(_updateIntervalInMilliSecond);
 }
