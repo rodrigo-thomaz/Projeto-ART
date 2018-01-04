@@ -39,9 +39,9 @@ RemoteDebug Debug;
 #define D9    3
 #define D10   1
 
-#define HOST  "192.168.1.12"
-#define PORT  80
-#define URI   "/ART.Domotica.WebApi/"
+#define WEBAPI_HOST  "192.168.1.12"
+#define WEBAPI_PORT  80
+#define WEBAPI_URI   "/ART.Domotica.WebApi/"
 
 struct config_t
 {
@@ -71,10 +71,10 @@ uint64_t publishMessageTimestamp = 0;
 uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
-ESPDevice espDevice;
+ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 WiFiManager wifiManager(D5, debugManager);
-UpdateManager updateManager(debugManager, wifiManager, HOST, PORT, URI);
-ConfigurationManager configurationManager(wifiManager, espDevice, HOST, PORT, URI);
+UpdateManager updateManager(debugManager, wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
+ConfigurationManager configurationManager(wifiManager, espDevice);
 NTPManager ntpManager(debugManager, configurationManager);
 MQQTManager mqqtManager(configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);

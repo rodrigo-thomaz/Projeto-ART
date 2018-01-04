@@ -1,13 +1,21 @@
 #include "ESPDevice.h"
 
-ESPDevice::ESPDevice()
+ESPDevice::ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri)
 {
 	_chipId							= ESP.getChipId();	
 	_flashChipId					= ESP.getFlashChipId();	
 	_chipSize						= ESP.getFlashChipSize();	
 		
 	_stationMacAddress 				= strdup(WiFi.macAddress().c_str());	
-	_softAPMacAddress				= strdup(WiFi.softAPmacAddress().c_str());				
+	_softAPMacAddress				= strdup(WiFi.softAPmacAddress().c_str());		
+
+	_webApiHost = new char(sizeof(strlen(webApiHost)));
+	_webApiHost = webApiHost;
+	
+	_webApiPort = webApiPort;
+	
+	_webApiUri = new char(sizeof(strlen(webApiUri)));
+	_webApiUri = webApiUri;	
 }
 
 ESPDevice::~ESPDevice()
@@ -83,6 +91,21 @@ void ESPDevice::setLabel(char* value)
 	_label = value;
 }
 
+char* ESPDevice::getWebApiHost()
+{
+	return _webApiHost;
+}
+
+uint16_t ESPDevice::getWebApiPort()
+{
+	return _webApiPort;
+}
+
+char* ESPDevice::getWebApiUri()
+{
+	return _webApiUri;
+}		
+		
 DeviceInApplication* ESPDevice::getDeviceInApplication()
 {	
 	return _deviceInApplication;

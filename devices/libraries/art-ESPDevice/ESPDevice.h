@@ -19,7 +19,7 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice();
+		ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
 		~ESPDevice();
 		
 		void						load(String json);
@@ -36,6 +36,10 @@ class ESPDevice
 
 		char *						getLabel();
 		void						setLabel(char * value);
+		
+		char *						getWebApiHost();
+		uint16_t					getWebApiPort();
+		char * 						getWebApiUri();
 		
 		DeviceInApplication*		getDeviceInApplication();
 		DeviceMQ*					getDeviceMQ();
@@ -58,6 +62,10 @@ class ESPDevice
 		
 		char *						_label;
 		
+		char *						_webApiHost;
+		uint16_t					_webApiPort;
+		char * 						_webApiUri;
+	
 		DeviceInApplication*		_deviceInApplication;
 		DeviceMQ*					_deviceMQ;
 		DeviceNTP*					_deviceNTP;

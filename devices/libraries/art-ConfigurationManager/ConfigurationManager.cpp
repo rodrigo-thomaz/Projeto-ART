@@ -2,14 +2,10 @@
 
 // ConfigurationManager
 
-ConfigurationManager::ConfigurationManager(WiFiManager& wifiManager, ESPDevice& espDevice, String host, uint16_t port, String uri)
+ConfigurationManager::ConfigurationManager(WiFiManager& wifiManager, ESPDevice& espDevice)
 { 
 	this->_wifiManager = &wifiManager;
 	this->_espDevice = &espDevice;
-	
-	this->_host = host;
-	this->_port = port;
-	this->_uri = uri;
 }
 
 void ConfigurationManager::begin()
@@ -35,8 +31,8 @@ void ConfigurationManager::autoInitialize()
 	
 	HTTPClient http; 
 
-	String apiUri = _uri + "api/espDevice/getConfigurations";
-	http.begin(_host, _port, apiUri); 
+	String apiUri = String(_espDevice->getWebApiUri()) + "api/espDevice/getConfigurations";
+	http.begin(_espDevice->getWebApiHost(), _espDevice->getWebApiPort(), apiUri); 
 
 	StaticJsonBuffer<200> jsonBufferRequest;
 	JsonObject& jsonObjectRequest = jsonBufferRequest.createObject();

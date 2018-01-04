@@ -13,7 +13,7 @@ class ConfigurationManager
 {
   public:
   
-    ConfigurationManager(WiFiManager& wifiManager, ESPDevice& espDevice, String host, uint16_t port, String uri = "/");
+    ConfigurationManager(WiFiManager& wifiManager, ESPDevice& espDevice);
 		
 	void								begin();
 	
@@ -34,10 +34,6 @@ class ConfigurationManager
 	WiFiManager*          				_wifiManager;
 
 	bool 								_initialized = false;
-	
-	String 								_host;
-	uint16_t 							_port;
-	String 								_uri;
 	
 	ESPDevice*							_espDevice;		
 };
