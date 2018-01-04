@@ -11,7 +11,7 @@
             get; set;
         }
 
-        public string BrokerApplicationTopic
+        public string ApplicationTopic
         {
             get; set;
         }

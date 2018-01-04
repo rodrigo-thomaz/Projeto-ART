@@ -209,7 +209,7 @@
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>(data);
-            iotContract.BrokerApplicationTopic = applicationMQ.Topic;
+            iotContract.ApplicationTopic = applicationMQ.Topic;
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceMQ.Topic, ESPDeviceConstants.InsertInApplicationIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
@@ -286,11 +286,14 @@
 
             var responseContract = new ESPDeviceGetConfigurationsRPCResponseContract
             {
+                DeviceInApplication = new DeviceInApplicationDetailResponseContract
+                {
+                    ApplicationTopic = applicationTopic,
+                },
                 DeviceMQ = new DeviceMQDetailResponseContract
                 {
                     Host = _mqSettings.BrokerHost,
-                    Port = _mqSettings.BrokerPort,
-                    ApplicationTopic = applicationTopic,
+                    Port = _mqSettings.BrokerPort,                    
                 },
                 DeviceNTP = new DeviceNTPDetailResponseContract
                 {

@@ -125,16 +125,16 @@ void ConfigurationManager::insertInApplication(String json)
 	}	
 
 	char* applicationId = strdup(root["applicationId"]);	
-	char* brokerApplicationTopic = strdup(root["brokerApplicationTopic"]);	
+	char* applicationTopic = strdup(root["applicationTopic"]);	
 	
 	_espDevice->getDeviceInApplication()->setApplicationId(applicationId);
-	_espDevice->getDeviceInApplication()->setApplicationTopic(brokerApplicationTopic);
+	_espDevice->getDeviceInApplication()->setApplicationTopic(applicationTopic);
 	
 	Serial.println("[ConfigurationManager::insertInApplication] ");
 	Serial.print("applicationId: ");
 	Serial.println(applicationId);
-	Serial.print("brokerApplicationTopic: ");
-	Serial.println(brokerApplicationTopic);
+	Serial.print("applicationTopic: ");
+	Serial.println(applicationTopic);
 }
 
 void ConfigurationManager::deleteFromApplication()

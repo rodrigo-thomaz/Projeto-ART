@@ -11,6 +11,11 @@ namespace ART.Domotica.Contract
             get; set;
         }
 
+        public string ApplicationTopic
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }
