@@ -43,3 +43,36 @@ void DeviceInApplication::setApplicationTopic(char* value)
 	_applicationTopic = new char(sizeof(strlen(value)));
 	_applicationTopic = value;
 }
+
+void DeviceInApplication::insertInApplication(String json)
+{	
+	StaticJsonBuffer<300> jsonBuffer;
+
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		Serial.print("[DeviceInApplication::insertInApplication] parse failed: ");
+		Serial.println(json);
+		return;
+	}	
+
+	char* applicationId = strdup(root["applicationId"]);	
+	char* applicationTopic = strdup(root["applicationTopic"]);	
+	
+	setApplicationId(applicationId);
+	setApplicationTopic(applicationTopic);
+	
+	Serial.println("[DeviceInApplication::insertInApplication] ");
+	Serial.print("applicationId: ");
+	Serial.println(applicationId);
+	Serial.print("applicationTopic: ");
+	Serial.println(applicationTopic);
+}
+
+void DeviceInApplication::deleteFromApplication()
+{	
+	setApplicationId("");	
+	setApplicationTopic("");
+	
+	Serial.println("[DeviceInApplication::deleteFromApplication] delete from Application with success !");
+}

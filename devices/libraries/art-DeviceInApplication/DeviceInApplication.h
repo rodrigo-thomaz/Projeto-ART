@@ -14,6 +14,9 @@ public:
 	DeviceInApplication(ESPDevice* espDevice, char* applicationId, char* applicationTopic);
 	~DeviceInApplication();
 	
+	void								insertInApplication(String json);
+	void								deleteFromApplication();		
+	
 	char*								getApplicationId();
 	void								setApplicationId(char* value);		
 	

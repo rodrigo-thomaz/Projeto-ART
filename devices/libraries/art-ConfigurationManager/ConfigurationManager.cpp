@@ -111,36 +111,3 @@ void ConfigurationManager::autoInitialize()
   
   http.end();
 }
-
-void ConfigurationManager::insertInApplication(String json)
-{	
-	StaticJsonBuffer<300> jsonBuffer;
-
-	JsonObject& root = jsonBuffer.parseObject(json);
-	
-	if (!root.success()) {
-		Serial.print("[ConfigurationManager::insertInApplication] parse failed: ");
-		Serial.println(json);
-		return;
-	}	
-
-	char* applicationId = strdup(root["applicationId"]);	
-	char* applicationTopic = strdup(root["applicationTopic"]);	
-	
-	_espDevice->getDeviceInApplication()->setApplicationId(applicationId);
-	_espDevice->getDeviceInApplication()->setApplicationTopic(applicationTopic);
-	
-	Serial.println("[ConfigurationManager::insertInApplication] ");
-	Serial.print("applicationId: ");
-	Serial.println(applicationId);
-	Serial.print("applicationTopic: ");
-	Serial.println(applicationTopic);
-}
-
-void ConfigurationManager::deleteFromApplication()
-{	
-	_espDevice->getDeviceInApplication()->setApplicationId("");	
-	_espDevice->getDeviceInApplication()->setApplicationTopic("");
-	
-	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
-}

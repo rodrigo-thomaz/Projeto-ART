@@ -21,10 +21,7 @@ class ConfigurationManager
 	
 	bool								initialized();
 	
-	ESPDevice*							getESPDevice();
-
-	void								insertInApplication(String json);
-	void								deleteFromApplication();		
+	ESPDevice*							getESPDevice();	
 	
   private:			
 			

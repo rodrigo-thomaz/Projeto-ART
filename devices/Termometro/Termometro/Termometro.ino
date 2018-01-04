@@ -243,12 +243,12 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION)){
       unSubscribeNotInApplication();
-      configurationManager.insertInApplication(json);          
+      espDevice.getDeviceInApplication()->insertInApplication(json);          
       subscribeInApplication();  
     }
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)){
       unSubscribeInApplication();
-      configurationManager.deleteFromApplication();            
+      espDevice.getDeviceInApplication()->deleteFromApplication();            
       subscribeNotInApplication();
     }    
     if(topicKey == String(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND)){
