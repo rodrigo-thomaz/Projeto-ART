@@ -11,13 +11,13 @@ ESPDevice::ESPDevice(WiFiManager& wifiManager, char* webApiHost, uint16_t webApi
 	_stationMacAddress 				= strdup(WiFi.macAddress().c_str());	
 	_softAPMacAddress				= strdup(WiFi.softAPmacAddress().c_str());		
 
-	_webApiHost = new char(sizeof(strlen(webApiHost)));
-	_webApiHost = webApiHost;
+	_webApiHost 					= new char(sizeof(strlen(webApiHost)));
+	_webApiHost 					= webApiHost;
 	
-	_webApiPort = webApiPort;
+	_webApiPort 					= webApiPort;
 	
-	_webApiUri = new char(sizeof(strlen(webApiUri)));
-	_webApiUri = webApiUri;	
+	_webApiUri 						= new char(sizeof(strlen(webApiUri)));
+	_webApiUri 						= webApiUri;	
 }
 
 ESPDevice::~ESPDevice()
