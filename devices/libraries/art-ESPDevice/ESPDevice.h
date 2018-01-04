@@ -2,6 +2,7 @@
 #define ESPDevice_h
 
 #include "DeviceInApplication.h"
+#include "DeviceDebug.h"
 #include "DeviceMQ.h"
 #include "DeviceNTP.h"
 #include "DeviceSensors.h"
@@ -13,10 +14,6 @@
 #include <ESP8266WiFi.h>
 #include "ESP8266HTTPClient.h"
 #include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
-
-class DeviceMQ;
-class DeviceNTP;
-class DeviceSensors;
 
 class ESPDevice
 {
@@ -48,6 +45,7 @@ class ESPDevice
 		char * 						getWebApiUri();
 		
 		DeviceInApplication*		getDeviceInApplication();
+		DeviceDebug*				getDeviceDebug();
 		DeviceMQ*					getDeviceMQ();
 		DeviceNTP*					getDeviceNTP();
 		DeviceSensors*				getDeviceSensors();
@@ -73,6 +71,7 @@ class ESPDevice
 		char * 						_webApiUri;
 	
 		DeviceInApplication*		_deviceInApplication;
+		DeviceDebug*				_deviceDebug;
 		DeviceMQ*					_deviceMQ;
 		DeviceNTP*					_deviceNTP;
 		DeviceSensors*				_deviceSensors;

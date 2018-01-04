@@ -14,12 +14,12 @@
             get; set;
         }
 
-        public string StationMacAddress
+        public string SoftAPMacAddress
         {
             get; set;
         }
 
-        public string SoftAPMacAddress
+        public string StationMacAddress
         {
             get; set;
         }

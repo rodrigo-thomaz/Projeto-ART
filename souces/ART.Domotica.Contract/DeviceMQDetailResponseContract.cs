@@ -2,7 +2,7 @@
 {
     public class DeviceMQDetailResponseContract
     {
-        #region Properties        
+        #region Properties
 
         public string ClientId
         {

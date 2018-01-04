@@ -43,6 +43,7 @@
     <Compile Include="ApplicationGetRPCResponseContract.cs" />
     <Compile Include="ApplicationMQGetRPCResponseContract.cs" />
     <Compile Include="DeviceDebugSetActiveRequestContract.cs" />
+    <Compile Include="DeviceDebugDetailResponseContract.cs" />
     <Compile Include="DeviceInApplicationDetailResponseContract.cs" />
     <Compile Include="DeviceWiFiSetHostNameRequestContract.cs" />
     <Compile Include="DeviceSensorsDetailResponseContract.cs" />

@@ -10,7 +10,7 @@
         #region Constructors
 
         public DeviceInApplicationProfile()
-        {            
+        {
             CreateMap<DeviceInApplication, DeviceInApplicationDetailResponseContract>()
                 .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.ApplicationId));
         }

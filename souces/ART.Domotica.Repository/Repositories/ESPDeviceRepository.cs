@@ -83,6 +83,7 @@
         {
             var data = await _context.ESPDevice
                .Include(x => x.DevicesInApplication)
+               .Include(x => x.DeviceDebug)
                .Include(x => x.DeviceMQ)
                .Include(x => x.DeviceNTP.TimeZone)
                .Include(x => x.DeviceSensors)

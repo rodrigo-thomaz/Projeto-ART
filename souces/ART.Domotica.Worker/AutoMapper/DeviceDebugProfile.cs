@@ -21,6 +21,9 @@
                 .ForMember(vm => vm.DeviceDebugId, m => m.MapFrom(x => x.DeviceDebugId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.Active, m => m.MapFrom(x => x.Active));
+
+            CreateMap<DeviceDebug, DeviceDebugDetailResponseContract>()
+                .ForMember(vm => vm.Active, m => m.MapFrom(x => x.Active));
         }
 
         #endregion Constructors

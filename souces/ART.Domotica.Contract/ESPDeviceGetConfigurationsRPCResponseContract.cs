@@ -8,17 +8,22 @@
     {
         #region Properties
 
-        public DeviceInApplicationDetailResponseContract DeviceInApplication
-        {
-            get; set;
-        }
-
         public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
         }
 
+        public DeviceDebugDetailResponseContract DeviceDebug
+        {
+            get; set;
+        }
+
         public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public DeviceInApplicationDetailResponseContract DeviceInApplication
         {
             get; set;
         }

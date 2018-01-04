@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Contract
 {
+    using System;
+
     public class DeviceInApplicationDetailResponseContract
     {
         #region Properties

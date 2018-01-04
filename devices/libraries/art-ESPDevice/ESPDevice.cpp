@@ -28,6 +28,8 @@ ESPDevice::~ESPDevice()
 	delete (_stationMacAddress);
 	delete (_label);
 	
+	delete (_deviceInApplication);
+	delete (_deviceDebug);
 	delete (_deviceMQ);
 	delete (_deviceNTP);
 	delete (_deviceSensors);
@@ -118,6 +120,11 @@ DeviceInApplication* ESPDevice::getDeviceInApplication()
 	return _deviceInApplication;
 }
 
+DeviceDebug* ESPDevice::getDeviceDebug()
+{	
+	return _deviceDebug;
+}
+
 DeviceMQ* ESPDevice::getDeviceMQ()
 {	
 	return _deviceMQ;
@@ -193,6 +200,8 @@ void ESPDevice::autoLoad()
 				_debug->printf("ESPDevice DeviceId: %s\n", _deviceId);
 				_debug->printf("ESPDevice DeviceDatasheetId: %d\n", _deviceDatasheetId);
 				
+				_debug->printf("DeviceDebug Active: %s\n", getDeviceDebug()->getActive() ? "true" : "false");
+				
 				_debug->printf("DeviceMQ Host: %s\n", getDeviceMQ()->getHost());
 				_debug->printf("DeviceMQ Port: %d\n", getDeviceMQ()->getPort());
 				_debug->printf("DeviceMQ User: %s\n", getDeviceMQ()->getUser());
@@ -231,6 +240,7 @@ void ESPDevice::load(String json)
 	_label 							= strdup(jsonObject["label"]);
 	
 	DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);		
+	DeviceDebug::createDeviceDebug(_deviceDebug, this, jsonObject["deviceDebug"]);		
 	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);		
 	DeviceNTP::createDeviceNTP(_deviceNTP, this, jsonObject["deviceNTP"]);		
 	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);	
