@@ -1,20 +1,43 @@
 #include "DeviceDebug.h"
 
-DeviceDebug::DeviceDebug(ESPDevice* espDevice, bool active)
+DeviceDebug::DeviceDebug(ESPDevice* espDevice)
 {
-	_espDevice = espDevice;	
+	_espDevice 		= espDevice;	
 	
-	_active = active;
+	_debug			= new RemoteDebug();
 }
 
 DeviceDebug::~DeviceDebug()
 {
 	delete (_espDevice);
+	delete (_debug);
+}
+
+void DeviceDebug::begin()
+{		
+	_debug->begin("remotedebug-sample"); // Initiaze the telnet server
+	_debug->setResetCmdEnabled(true); // Enable the reset command	
+	_debug->setSerialEnabled(true); // Setup after Debug.begin - All messages too send to serial too, and can be see in serial monitor
+}
+
+void DeviceDebug::loop()
+{	
+    _debug->handle();
+}
+
+void DeviceDebug::load(JsonObject& jsonObject)
+{	
+	_active = jsonObject["active"];
 }
 
 ESPDevice* DeviceDebug::getESPDevice()
 {	
 	return _espDevice;
+}
+
+RemoteDebug* DeviceDebug::getDebug()
+{	
+	return _debug;
 }
 
 bool DeviceDebug::getActive()

@@ -13,7 +13,6 @@
 #include "ArduinoJson.h"
 #include <ESP8266WiFi.h>
 #include "ESP8266HTTPClient.h"
-#include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
 
 class ESPDevice
 {
@@ -49,8 +48,6 @@ class ESPDevice
 		DeviceMQ*					getDeviceMQ();
 		DeviceNTP*					getDeviceNTP();
 		DeviceSensors*				getDeviceSensors();
-		
-		RemoteDebug*				getDebug();			
 	
 	private:	
 
@@ -74,9 +71,7 @@ class ESPDevice
 		DeviceDebug*				_deviceDebug;
 		DeviceMQ*					_deviceMQ;
 		DeviceNTP*					_deviceNTP;
-		DeviceSensors*				_deviceSensors;
-		
-		RemoteDebug* 				_debug;
+		DeviceSensors*				_deviceSensors;		
 		
 		void						autoLoad();
 		void						load(String json);

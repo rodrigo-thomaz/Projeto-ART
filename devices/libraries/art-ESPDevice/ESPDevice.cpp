@@ -19,7 +19,7 @@ ESPDevice::ESPDevice(WiFiManager& wifiManager, char* webApiHost, uint16_t webApi
 	_webApiUri 						= new char(sizeof(strlen(webApiUri)));
 	_webApiUri 						= webApiUri;	
 	
-	_debug							= new RemoteDebug();
+	DeviceDebug::createDeviceDebug(_deviceDebug, this);		
 }
 
 ESPDevice::~ESPDevice()
@@ -37,9 +37,7 @@ ESPDevice::~ESPDevice()
 
 void ESPDevice::begin()
 {		
-	_debug->begin("remotedebug-sample"); // Initiaze the telnet server
-	_debug->setResetCmdEnabled(true); // Enable the reset command	
-	_debug->setSerialEnabled(true); // Setup after Debug.begin - All messages too send to serial too, and can be see in serial monitor
+	_deviceDebug->begin();
 	
 	autoLoad();
 }
@@ -48,8 +46,8 @@ void ESPDevice::loop()
 {	
 	autoLoad();
 	
-	// Remote debug over telnet
-    _debug->handle();
+	_deviceDebug->loop();
+	
     // Give a time for ESP8266
     yield();
 }
@@ -140,11 +138,6 @@ DeviceSensors* ESPDevice::getDeviceSensors()
 	return _deviceSensors;
 }
 
-RemoteDebug* ESPDevice::getDebug()
-{	
-	return _debug;
-}
-
 bool ESPDevice::loaded()
 {	
 	return _loaded;
@@ -193,31 +186,31 @@ void ESPDevice::autoLoad()
 			
 			load(payload);			
 			
-			if (_debug->isActive(_debug->DEBUG)) { 
+			if (_deviceDebug->getDebug()->isActive(_deviceDebug->getDebug()->DEBUG)) { 
 			
-				 _debug->printf("ESPDevice initialized with success !\n"); 
+				 _deviceDebug->getDebug()->printf("ESPDevice initialized with success !\n"); 
 				
-				_debug->printf("ESPDevice DeviceId: %s\n", _deviceId);
-				_debug->printf("ESPDevice DeviceDatasheetId: %d\n", _deviceDatasheetId);
+				_deviceDebug->getDebug()->printf("ESPDevice DeviceId: %s\n", _deviceId);
+				_deviceDebug->getDebug()->printf("ESPDevice DeviceDatasheetId: %d\n", _deviceDatasheetId);
 				
-				_debug->printf("DeviceDebug Active: %s\n", getDeviceDebug()->getActive() ? "true" : "false");
+				_deviceDebug->getDebug()->printf("DeviceDebug Active: %s\n", getDeviceDebug()->getActive() ? "true" : "false");
 				
-				_debug->printf("DeviceMQ Host: %s\n", getDeviceMQ()->getHost());
-				_debug->printf("DeviceMQ Port: %d\n", getDeviceMQ()->getPort());
-				_debug->printf("DeviceMQ User: %s\n", getDeviceMQ()->getUser());
-				_debug->printf("DeviceMQ Password: %s\n", getDeviceMQ()->getPassword());
-				_debug->printf("DeviceMQ ClientId: %s\n", getDeviceMQ()->getClientId());
-				_debug->printf("DeviceMQ Device Topic: %s\n", getDeviceMQ()->getDeviceTopic());			
+				_deviceDebug->getDebug()->printf("DeviceMQ Host: %s\n", getDeviceMQ()->getHost());
+				_deviceDebug->getDebug()->printf("DeviceMQ Port: %d\n", getDeviceMQ()->getPort());
+				_deviceDebug->getDebug()->printf("DeviceMQ User: %s\n", getDeviceMQ()->getUser());
+				_deviceDebug->getDebug()->printf("DeviceMQ Password: %s\n", getDeviceMQ()->getPassword());
+				_deviceDebug->getDebug()->printf("DeviceMQ ClientId: %s\n", getDeviceMQ()->getClientId());
+				_deviceDebug->getDebug()->printf("DeviceMQ Device Topic: %s\n", getDeviceMQ()->getDeviceTopic());			
 				
-				_debug->printf("DeviceNTP Host: %s\n", getDeviceNTP()->getHost());
-				_debug->printf("DeviceNTP Port: %d\n", getDeviceNTP()->getPort());
-				_debug->printf("DeviceNTP UtcTimeOffsetInSecond: %d\n", getDeviceNTP()->getUtcTimeOffsetInSecond());
-				_debug->printf("DeviceNTP UpdateIntervalInMilliSecond: %d\n", getDeviceNTP()->getUpdateIntervalInMilliSecond());
+				_deviceDebug->getDebug()->printf("DeviceNTP Host: %s\n", getDeviceNTP()->getHost());
+				_deviceDebug->getDebug()->printf("DeviceNTP Port: %d\n", getDeviceNTP()->getPort());
+				_deviceDebug->getDebug()->printf("DeviceNTP UtcTimeOffsetInSecond: %d\n", getDeviceNTP()->getUtcTimeOffsetInSecond());
+				_deviceDebug->getDebug()->printf("DeviceNTP UpdateIntervalInMilliSecond: %d\n", getDeviceNTP()->getUpdateIntervalInMilliSecond());
 				
-				_debug->printf("DeviceInApplication ApplicationId: %s\n", getDeviceInApplication()->getApplicationId());
-				_debug->printf("DeviceInApplication ApplicationTopic: %s\n", getDeviceInApplication()->getApplicationTopic());
+				_deviceDebug->getDebug()->printf("DeviceInApplication ApplicationId: %s\n", getDeviceInApplication()->getApplicationId());
+				_deviceDebug->getDebug()->printf("DeviceInApplication ApplicationTopic: %s\n", getDeviceInApplication()->getApplicationTopic());
 				
-				_debug->printf("DeviceSensors PublishIntervalInSeconds: %d\n", getDeviceSensors()->getPublishIntervalInSeconds());		
+				_deviceDebug->getDebug()->printf("DeviceSensors PublishIntervalInSeconds: %d\n", getDeviceSensors()->getPublishIntervalInSeconds());		
 			}		
 		}
 	} else {
@@ -239,8 +232,9 @@ void ESPDevice::load(String json)
 	
 	_label 							= strdup(jsonObject["label"]);
 	
-	DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);		
-	DeviceDebug::createDeviceDebug(_deviceDebug, this, jsonObject["deviceDebug"]);		
+	_deviceDebug->load(jsonObject["deviceDebug"]);		
+	
+	DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);			
 	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);		
 	DeviceNTP::createDeviceNTP(_deviceNTP, this, jsonObject["deviceNTP"]);		
 	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);	
