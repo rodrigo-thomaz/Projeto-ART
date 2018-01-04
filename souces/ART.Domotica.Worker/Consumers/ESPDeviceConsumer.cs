@@ -271,7 +271,7 @@
 
             var requestContract = SerializationHelpers.DeserializeJsonBufferToType<ESPDeviceGetConfigurationsRPCRequestContract>(e.Body);
             var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.GetConfigurations(requestContract.ChipId, requestContract.FlashChipId, requestContract.MacAddress);
+            var data = await domain.GetConfigurations(requestContract.ChipId, requestContract.FlashChipId, requestContract.StationMacAddress, requestContract.SoftAPMacAddress);
 
             var applicationTopic = string.Empty;
             if (data.DevicesInApplication != null && data.DevicesInApplication.Any())

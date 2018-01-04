@@ -39,7 +39,8 @@ void ConfigurationManager::autoInitialize()
 	
 	jsonObjectRequest["chipId"] = _espDevice->getChipId();
 	jsonObjectRequest["flashChipId"] = _espDevice->getFlashChipId();
-	jsonObjectRequest["macAddress"] = _espDevice->getStationMacAddress();
+	jsonObjectRequest["stationMacAddress"] = _espDevice->getStationMacAddress();
+	jsonObjectRequest["softAPMacAddress"] = _espDevice->getSoftAPMacAddress();
 
 	int lenRequest = jsonObjectRequest.measureLength();
 	char dataRequest[lenRequest + 1];

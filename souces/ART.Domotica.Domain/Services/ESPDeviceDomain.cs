@@ -170,9 +170,9 @@
             return entities;
         }
 
-        public async Task<ESPDevice> GetConfigurations(int chipId, int flashChipId, string macAddress)
+        public async Task<ESPDevice> GetConfigurations(int chipId, int flashChipId, string stationMacAddress, string softAPMacAddress)
         {
-            var data = await _espDeviceRepository.GetDeviceInApplication(chipId, flashChipId, macAddress);            
+            var data = await _espDeviceRepository.GetDeviceInApplication(chipId, flashChipId, stationMacAddress, softAPMacAddress);            
 
             if (data == null)
             {

@@ -79,7 +79,7 @@
             return data;
         }
 
-        public async Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress)
+        public async Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string stationMacAddress, string softAPMacAddress)
         {
             var data = await _context.ESPDevice
                .Include(x => x.DevicesInApplication)
@@ -88,7 +88,8 @@
                .Include(x => x.DeviceSensors)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)
-               .Where(x => x.DeviceWiFi.StationMacAddress == macAddress)               
+               .Where(x => x.DeviceWiFi.StationMacAddress == stationMacAddress)
+               .Where(x => x.DeviceWiFi.SoftAPMacAddress == softAPMacAddress)
                .SingleOrDefaultAsync();
 
             return data;

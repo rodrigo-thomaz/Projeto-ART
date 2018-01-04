@@ -20,7 +20,7 @@
 
         Task<ESPDevice> GetByPin(string pin);
 
-        Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string macAddress);
+        Task<ESPDevice> GetDeviceInApplication(int chipId, int flashChipId, string stationMacAddress, string softAPMacAddress);
 
         Task<List<string>> GetExistingPins();
 
