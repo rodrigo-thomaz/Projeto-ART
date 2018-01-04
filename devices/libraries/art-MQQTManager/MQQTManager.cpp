@@ -184,10 +184,11 @@ String MQQTManager::getTopicKey(char* routingKey)
 
 String MQQTManager::getApplicationRoutingKey(const char* topic)
 {
+	DeviceInApplication* deviceInApplication = this->_configurationManager->getESPDevice()->getDeviceInApplication();
 	DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
 	
 	String routingKey = String("ART/Application/");
-	routingKey.concat(deviceMQ->getApplicationTopic());
+	routingKey.concat(deviceInApplication->getApplicationTopic());
 	routingKey.concat("/Device/");
 	routingKey.concat(deviceMQ->getDeviceTopic());
 	routingKey.concat("/");

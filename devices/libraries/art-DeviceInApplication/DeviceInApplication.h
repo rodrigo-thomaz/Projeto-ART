@@ -11,17 +11,21 @@ class DeviceInApplication
 
 public:
 
-	DeviceInApplication(ESPDevice* espDevice, char* applicationId);
+	DeviceInApplication(ESPDevice* espDevice, char* applicationId, char* applicationTopic);
 	~DeviceInApplication();
 	
 	char*								getApplicationId();
 	void								setApplicationId(char* value);		
 	
+	char*								getApplicationTopic();
+	void								setApplicationTopic(char* value);		
+	
 	static void createDeviceInApplication(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice, JsonObject& jsonObject)
     {
 		deviceInApplication = new DeviceInApplication(
 			espDevice,
-			strdup(jsonObject["applicationId"]));
+			strdup(jsonObject["applicationId"]),
+			strdup(jsonObject["applicationTopic"]));
     }
 	
 private:	
@@ -29,6 +33,7 @@ private:
 	ESPDevice*          				_espDevice;	
 	
 	char*								_applicationId;
+	char*								_applicationTopic;
 	
 };
 

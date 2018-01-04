@@ -11,7 +11,7 @@ class DeviceMQ
 
 public:
 
-	DeviceMQ(ESPDevice* espDevice, char* host, int port, char* user, char* password, char* clientId, char* applicationTopic, char* deviceTopic);
+	DeviceMQ(ESPDevice* espDevice, char* host, int port, char* user, char* password, char* clientId, char* deviceTopic);
 	~DeviceMQ();
 	
 	ESPDevice*          				getESPDevice();	
@@ -21,10 +21,6 @@ public:
 	char*								getUser();
 	char*								getPassword();	
 	char*								getClientId();	
-	
-	char*								getApplicationTopic();
-	void								setApplicationTopic(char* value);		
-	
 	char*								getDeviceTopic();	
 	
 	static void createDeviceMQ(DeviceMQ* (&deviceMQ), ESPDevice* espDevice, JsonObject& jsonObject)
@@ -35,8 +31,7 @@ public:
 			jsonObject["port"], 
 			strdup(jsonObject["user"]), 
 			strdup(jsonObject["password"]),
-			strdup(jsonObject["clientId"]),
-			strdup(jsonObject["applicationTopic"]),
+			strdup(jsonObject["clientId"]),			
 			strdup(jsonObject["deviceTopic"]));
     }
 	
@@ -49,7 +44,6 @@ private:
 	char*								_user;
 	char*								_password;
 	char*								_clientId;
-	char*								_applicationTopic;
 	char*								_deviceTopic;
 	
 };

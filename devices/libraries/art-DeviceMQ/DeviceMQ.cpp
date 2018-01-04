@@ -1,6 +1,6 @@
 #include "DeviceMQ.h"
 
-DeviceMQ::DeviceMQ(ESPDevice* espDevice, char* host, int port, char* user, char* password, char* clientId, char* applicationTopic, char* deviceTopic)
+DeviceMQ::DeviceMQ(ESPDevice* espDevice, char* host, int port, char* user, char* password, char* clientId, char* deviceTopic)
 {
 	_espDevice = espDevice;	
 	
@@ -18,9 +18,6 @@ DeviceMQ::DeviceMQ(ESPDevice* espDevice, char* host, int port, char* user, char*
 	_clientId = new char(sizeof(strlen(clientId)));
 	_clientId = clientId;
 	
-	_applicationTopic = new char(sizeof(strlen(applicationTopic)));
-	_applicationTopic = applicationTopic;
-	
 	_deviceTopic = new char(sizeof(strlen(deviceTopic)));
 	_deviceTopic = deviceTopic;
 }
@@ -31,8 +28,7 @@ DeviceMQ::~DeviceMQ()
 	delete (_host);
 	delete (_user);
 	delete (_password);
-	delete (_clientId);
-	delete (_applicationTopic);
+	delete (_clientId);	
 	delete (_deviceTopic);
 }
 
@@ -64,17 +60,6 @@ char* DeviceMQ::getPassword()
 char* DeviceMQ::getClientId()
 {	
 	return _clientId;
-}
-
-char* DeviceMQ::getApplicationTopic()
-{	
-	return _applicationTopic;
-}
-
-void DeviceMQ::setApplicationTopic(char* value)
-{	
-	_applicationTopic = new char(sizeof(strlen(value)));
-	_applicationTopic = value;
 }
 
 char* DeviceMQ::getDeviceTopic()

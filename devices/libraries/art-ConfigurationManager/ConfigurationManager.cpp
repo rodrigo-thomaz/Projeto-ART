@@ -67,9 +67,9 @@ void ConfigurationManager::autoInitialize()
 			
 			Serial.println("ConfigurationManager initialized with success !");
 			
-			Serial.print("DeviceId: ");
+			Serial.print("ESPDevice DeviceId: ");
 			Serial.println(_espDevice->getDeviceId());
-			Serial.print("DeviceDatasheetId: ");
+			Serial.print("ESPDevice DeviceDatasheetId: ");
 			Serial.println(_espDevice->getDeviceDatasheetId());
 			
 			Serial.print("DeviceMQ Host: ");
@@ -81,9 +81,7 @@ void ConfigurationManager::autoInitialize()
 			Serial.print("DeviceMQ Password: ");
 			Serial.println(_espDevice->getDeviceMQ()->getPassword());
 			Serial.print("DeviceMQ ClientId: ");
-			Serial.println(_espDevice->getDeviceMQ()->getClientId());
-			Serial.print("DeviceMQ Application Topic: ");
-			Serial.println(_espDevice->getDeviceMQ()->getApplicationTopic());
+			Serial.println(_espDevice->getDeviceMQ()->getClientId());			
 			Serial.print("DeviceMQ Device Topic: ");
 			Serial.println(_espDevice->getDeviceMQ()->getDeviceTopic());
 			
@@ -96,10 +94,12 @@ void ConfigurationManager::autoInitialize()
 			Serial.print("DeviceNTP Update Interval: ");
 			Serial.println(_espDevice->getDeviceNTP()->getUpdateIntervalInMilliSecond());
 			
-			Serial.print("ApplicationId: ");
+			Serial.print("DeviceInApplication ApplicationId: ");
 			Serial.println(_espDevice->getDeviceInApplication()->getApplicationId());
+			Serial.print("DeviceInApplication Application Topic: ");
+			Serial.println(_espDevice->getDeviceInApplication()->getApplicationTopic());
 			
-			Serial.print("PublishIntervalInSeconds: ");
+			Serial.print("DeviceSensors PublishIntervalInSeconds: ");
 			Serial.println(_espDevice->getDeviceSensors()->getPublishIntervalInSeconds());
 			
 			_initialized = true;
@@ -128,7 +128,7 @@ void ConfigurationManager::insertInApplication(String json)
 	char* brokerApplicationTopic = strdup(root["brokerApplicationTopic"]);	
 	
 	_espDevice->getDeviceInApplication()->setApplicationId(applicationId);
-	_espDevice->getDeviceMQ()->setApplicationTopic(brokerApplicationTopic);
+	_espDevice->getDeviceInApplication()->setApplicationTopic(brokerApplicationTopic);
 	
 	Serial.println("[ConfigurationManager::insertInApplication] ");
 	Serial.print("applicationId: ");
@@ -140,7 +140,7 @@ void ConfigurationManager::insertInApplication(String json)
 void ConfigurationManager::deleteFromApplication()
 {	
 	_espDevice->getDeviceInApplication()->setApplicationId("");	
-	_espDevice->getDeviceMQ()->setApplicationTopic("");
+	_espDevice->getDeviceInApplication()->setApplicationTopic("");
 	
 	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
 }
