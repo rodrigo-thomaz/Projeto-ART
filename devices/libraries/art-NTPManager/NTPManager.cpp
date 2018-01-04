@@ -41,8 +41,8 @@ bool NTPManager::begin() {
       return true;;
     }
 	
-	if(!this->_configurationManager->initialized()){
-	  Serial.println("[NTP Manager] Not initialized !");
+	if(!this->_configurationManager->loaded()){
+	  Serial.println("[ESPDevice] Not loaded !");
       return false;
     }
 	

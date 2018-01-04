@@ -212,7 +212,7 @@ bool DSFamilyTempSensorManager::initialized()
 {
 	if(this->_initialized) return true;	
 
-	if(!this->_configurationManager->initialized()) return false;	
+	if(!this->_configurationManager->loaded()) return false;	
 	
 	if(this->_initializing) return false;	
 	

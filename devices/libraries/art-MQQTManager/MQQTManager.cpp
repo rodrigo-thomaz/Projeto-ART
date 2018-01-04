@@ -19,7 +19,7 @@ bool MQQTManager::begin()
 { 
 	if(this->_begin) return true;
 	
-	if(this->_wifiManager->isConnected() && this->_configurationManager->initialized()){
+	if(this->_wifiManager->isConnected() && this->_configurationManager->loaded()){
 
 		DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
 
@@ -42,7 +42,7 @@ bool MQQTManager::begin()
 
 bool MQQTManager::autoConnect()
 { 
-	if(!this->_wifiManager->isConnected() || !this->_configurationManager->initialized()){
+	if(!this->_wifiManager->isConnected() || !this->_configurationManager->loaded()){
       return false;
     }
     

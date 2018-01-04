@@ -71,10 +71,10 @@ uint64_t publishMessageTimestamp = 0;
 uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
-ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 WiFiManager wifiManager(D5, debugManager);
+ESPDevice espDevice(wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(debugManager, wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
-ConfigurationManager configurationManager(wifiManager, espDevice);
+ConfigurationManager configurationManager(espDevice);
 NTPManager ntpManager(debugManager, configurationManager);
 MQQTManager mqqtManager(configurationManager, wifiManager);
 DisplayManager displayManager(debugManager);
@@ -117,7 +117,7 @@ void setup() {
 
   initConfiguration();
 
-  configurationManager.begin();  
+  espDevice.begin();  
 
   mqqtManager.setConnectedCallback(mqtt_ConnectedCallback);
   mqqtManager.setSubCallback(mqtt_SubCallback);  
@@ -285,7 +285,7 @@ void loop() {
   debugManager.update();      
 
   wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
-  configurationManager.autoInitialize(); 
+  espDevice.loop(); 
   mqqtManager.autoConnect(); //se não há conexão com o Broker, a conexão é refeita
 
   updateManager.loop();

@@ -6,9 +6,12 @@
 #include "DeviceNTP.h"
 #include "DeviceSensors.h"
 
+#include "WiFiManager.h"
+
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include <ESP8266WiFi.h>
+#include "ESP8266HTTPClient.h"
 #include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
 
 class DeviceMQ;
@@ -19,10 +22,13 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
+		ESPDevice(WiFiManager& wifiManager, char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
 		~ESPDevice();
 		
-		void						load(String json);
+		void						begin();
+		void						loop();
+				
+		bool						loaded();
 		
 		char *						getDeviceId();
 		short						getDeviceDatasheetId();
@@ -73,6 +79,11 @@ class ESPDevice
 		
 		RemoteDebug* 				_debug;
 		
+		void						autoLoad();
+		void						load(String json);
+		bool 						_loaded = false;
+		
+		WiFiManager*          		_wifiManager;		
 };
 
 #endif
