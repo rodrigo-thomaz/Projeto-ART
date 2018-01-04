@@ -228,7 +228,7 @@ bool DSFamilyTempSensorManager::initialized()
 	
 	char* deviceId = this->_configurationManager->getESPDevice()->getDeviceId();      
 	short deviceDatasheetId = this->_configurationManager->getESPDevice()->getDeviceDatasheetId();      
-	String applicationId = this->_configurationManager->getDeviceInApplication()->getApplicationId();      
+	char* applicationId = this->_configurationManager->getESPDevice()->getDeviceInApplication()->getApplicationId();      
 
 	StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
 	JsonObject& root = JSONbuffer.createObject();

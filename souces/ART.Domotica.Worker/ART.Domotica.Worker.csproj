@@ -107,6 +107,7 @@
     <Compile Include="AutoMapper\ApplicationProfile.cs" />
     <Compile Include="AutoMapper\ApplicationUserProfile.cs" />
     <Compile Include="AutoMapper\DeviceDebugProfile.cs" />
+    <Compile Include="AutoMapper\DeviceInApplicationProfile.cs" />
     <Compile Include="AutoMapper\DeviceWiFiProfile.cs" />
     <Compile Include="AutoMapper\DeviceNTPProfile.cs" />
     <Compile Include="AutoMapper\DeviceBaseProfile.cs" />

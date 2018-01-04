@@ -30,7 +30,8 @@ void ESPDevice::load(String json)
 	_deviceDatasheetId 				= jsonObject["deviceDatasheetId"];	
 	
 	_label 							= strdup(jsonObject["label"]);
-	
+			
+	DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);		
 	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);		
 	DeviceNTP::createDeviceNTP(_deviceNTP, this, jsonObject["deviceNTP"]);		
 	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);		
@@ -80,6 +81,11 @@ void ESPDevice::setLabel(char* value)
 {	
 	_label = new char(sizeof(strlen(value)));
 	_label = value;
+}
+
+DeviceInApplication* ESPDevice::getDeviceInApplication()
+{	
+	return _deviceInApplication;
 }
 
 DeviceMQ* ESPDevice::getDeviceMQ()

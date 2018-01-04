@@ -33,14 +33,8 @@
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId));
 
-            CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()
-                .ForMember(vm => vm.ApplicationId, m => m.ResolveUsing(src => {
-                    if (src.DevicesInApplication != null && src.DevicesInApplication.Any())
-                    {
-                        return src.DevicesInApplication.Single().ApplicationId;
-                    }
-                    return (Guid?)null;
-                }))
+            CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()                
+                .ForMember(vm => vm.DeviceInApplication, m => m.MapFrom(x => x.DevicesInApplication.FirstOrDefault()))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))

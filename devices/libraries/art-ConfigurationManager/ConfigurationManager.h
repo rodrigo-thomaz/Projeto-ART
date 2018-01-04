@@ -9,22 +9,6 @@
 
 #include "ESPDevice.h"
 
-class DeviceInApplication {
-  public:
-
-    DeviceInApplication					(String applicationId);
-
-	String								getApplicationId();	
-		
-  private:
-    
-	String								_applicationId;
-
-	void								setApplicationId(String value);	
-	
-    friend class ConfigurationManager;
-};
-
 class ConfigurationManager
 {
   public:
@@ -36,8 +20,6 @@ class ConfigurationManager
 	void								autoInitialize();
 	
 	bool								initialized();
-	
-	DeviceInApplication*				getDeviceInApplication();
 	
 	ESPDevice*							getESPDevice();
 
@@ -56,8 +38,6 @@ class ConfigurationManager
 	String 								_host;
 	uint16_t 							_port;
 	String 								_uri;
-
-	DeviceInApplication*				_deviceInApplication;	
 	
 	ESPDevice*							_espDevice;		
 };

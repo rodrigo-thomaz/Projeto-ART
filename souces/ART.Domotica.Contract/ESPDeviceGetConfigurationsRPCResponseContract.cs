@@ -8,7 +8,7 @@
     {
         #region Properties
 
-        public Guid? ApplicationId
+        public DeviceInApplicationDetailResponseContract DeviceInApplication
         {
             get; set;
         }

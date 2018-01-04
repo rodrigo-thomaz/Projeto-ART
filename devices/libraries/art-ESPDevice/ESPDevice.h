@@ -1,6 +1,7 @@
 #ifndef ESPDevice_h
 #define ESPDevice_h
 
+#include "DeviceInApplication.h"
 #include "DeviceMQ.h"
 #include "DeviceNTP.h"
 #include "DeviceSensors.h"
@@ -36,6 +37,7 @@ class ESPDevice
 		char *						getLabel();
 		void						setLabel(char * value);
 		
+		DeviceInApplication*		getDeviceInApplication();
 		DeviceMQ*					getDeviceMQ();
 		DeviceNTP*					getDeviceNTP();
 		DeviceSensors*				getDeviceSensors();
@@ -56,6 +58,7 @@ class ESPDevice
 		
 		char *						_label;
 		
+		DeviceInApplication*		_deviceInApplication;
 		DeviceMQ*					_deviceMQ;
 		DeviceNTP*					_deviceNTP;
 		DeviceSensors*				_deviceSensors;

@@ -1,21 +1,5 @@
 #include "ConfigurationManager.h"
 
-// DeviceInApplication
-
-DeviceInApplication::DeviceInApplication(String applicationId) {	
-  _applicationId = applicationId == "null" ? "" : applicationId;				
-}
-
-String DeviceInApplication::getApplicationId()
-{	
-	return this->_applicationId;
-}
-
-void DeviceInApplication::setApplicationId(String value)
-{	
-	this->_applicationId = value;
-}
-
 // ConfigurationManager
 
 ConfigurationManager::ConfigurationManager(WiFiManager& wifiManager, ESPDevice& espDevice, String host, uint16_t port, String uri)
@@ -26,8 +10,6 @@ ConfigurationManager::ConfigurationManager(WiFiManager& wifiManager, ESPDevice& 
 	this->_host = host;
 	this->_port = port;
 	this->_uri = uri;
-	
-	this->_deviceInApplication = NULL;
 }
 
 void ConfigurationManager::begin()
@@ -38,11 +20,6 @@ void ConfigurationManager::begin()
 bool ConfigurationManager::initialized()
 {	
 	return _initialized;
-}
-
-DeviceInApplication* ConfigurationManager::getDeviceInApplication()
-{	
-	return _deviceInApplication;
 }
 
 ESPDevice* ConfigurationManager::getESPDevice()
@@ -92,12 +69,6 @@ void ConfigurationManager::autoInitialize()
 			
 			_espDevice->load(payload);
 			
-			
-			DynamicJsonBuffer jsonBufferResponse;
-			JsonObject& jsonObjectResponse = jsonBufferResponse.parseObject(payload);			
-			
-			_deviceInApplication = new DeviceInApplication(jsonObjectResponse["applicationId"].as<String>());					
-			
 			Serial.println("ConfigurationManager initialized with success !");
 			
 			Serial.print("DeviceId: ");
@@ -130,7 +101,7 @@ void ConfigurationManager::autoInitialize()
 			Serial.println(_espDevice->getDeviceNTP()->getUpdateIntervalInMilliSecond());
 			
 			Serial.print("ApplicationId: ");
-			Serial.println(_deviceInApplication->getApplicationId());
+			Serial.println(_espDevice->getDeviceInApplication()->getApplicationId());
 			
 			Serial.print("PublishIntervalInSeconds: ");
 			Serial.println(_espDevice->getDeviceSensors()->getPublishIntervalInSeconds());
@@ -157,10 +128,10 @@ void ConfigurationManager::insertInApplication(String json)
 		return;
 	}	
 
-	String applicationId = root["applicationId"];
+	char* applicationId = strdup(root["applicationId"]);	
 	char* brokerApplicationTopic = strdup(root["brokerApplicationTopic"]);	
 	
-	_deviceInApplication->setApplicationId(applicationId);
+	_espDevice->getDeviceInApplication()->setApplicationId(applicationId);
 	_espDevice->getDeviceMQ()->setApplicationTopic(brokerApplicationTopic);
 	
 	Serial.println("[ConfigurationManager::insertInApplication] ");
@@ -172,7 +143,7 @@ void ConfigurationManager::insertInApplication(String json)
 
 void ConfigurationManager::deleteFromApplication()
 {	
-	_deviceInApplication->setApplicationId("");	
+	_espDevice->getDeviceInApplication()->setApplicationId("");	
 	_espDevice->getDeviceMQ()->setApplicationTopic("");
 	
 	Serial.println("[ConfigurationManager::deleteFromApplication] delete from Application with success !");
