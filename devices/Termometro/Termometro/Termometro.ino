@@ -21,8 +21,6 @@
 
 #include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
 
-RemoteDebug Debug;
-
 #define HOST_NAME "remotedebug-sample"
 
 //defines - mapeamento de pinos do NodeMCU
@@ -134,14 +132,6 @@ void setup() {
   }
 
   MDNS.addService("telnet", "tcp", 23);
-
-  Debug.begin(HOST_NAME); // Initiaze the telnet server
-
-  Debug.setResetCmdEnabled(true); // Enable the reset command
-
-  // Setup after Debug.begin
-  Debug.setSerialEnabled(true);
-  // All messages too send to serial too, and can be see in serial monitor
 }
 
 void initConfiguration()
@@ -304,15 +294,6 @@ void loop() {
     
   //keep-alive da comunicação com broker MQTT
   mqqtManager.getMQQT()->loop();  
-
-
-  // Remote debug over telnet
-
-    Debug.handle();
-
-    // Give a time for ESP8266
-
-    yield();
     
 }
 

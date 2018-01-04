@@ -45,6 +45,11 @@ void ESPDevice::begin()
 void ESPDevice::loop()
 {	
 	autoLoad();
+	
+	// Remote debug over telnet
+    _debug->handle();
+    // Give a time for ESP8266
+    yield();
 }
 
 char* ESPDevice::getDeviceId()
