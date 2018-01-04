@@ -1,6 +1,5 @@
 #include "DebugManager.h"
 #include "ESPDevice.h"
-#include "ConfigurationManager.h"
 #include "DSFamilyTempSensorManager.h"
 #include "UnitOfMeasurementConverter.h"
 #include "NTPManager.h"
@@ -74,12 +73,11 @@ DebugManager debugManager(D6);
 WiFiManager wifiManager(D5, debugManager);
 ESPDevice espDevice(wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(debugManager, wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
-ConfigurationManager configurationManager(espDevice);
-NTPManager ntpManager(debugManager, configurationManager);
-MQQTManager mqqtManager(configurationManager, wifiManager);
+NTPManager ntpManager(debugManager, espDevice);
+MQQTManager mqqtManager(espDevice, wifiManager);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
-DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, configurationManager, mqqtManager, buzzerManager);
+DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, espDevice, mqqtManager, buzzerManager);
 UnitOfMeasurementConverter unitOfMeasurementConverter(debugManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
@@ -151,7 +149,7 @@ void mqtt_ConnectedCallback(PubSubClient* mqqt)
 {
   Serial.println("[MQQT::mqtt_ConnectedCallback] initializing ...");
 
-  if(configurationManager.getESPDevice()->getDeviceInApplication()->getApplicationId() == ""){
+  if(espDevice.getDeviceInApplication()->getApplicationId() == ""){
     subscribeNotInApplication();
   }
   else{
@@ -290,7 +288,7 @@ void loop() {
 
   updateManager.loop();
 
-  DeviceInApplication* deviceInApplication = configurationManager.getESPDevice()->getDeviceInApplication();
+  DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
   
   if(deviceInApplication != NULL && deviceInApplication->getApplicationId() == ""){
     displayAccessManager.loop();
@@ -341,7 +339,7 @@ void loopInApplication()
     displayMQTTManager.printConnected();  
     displayMQTTManager.printReceived(false);
 
-    int publishIntervalInSeconds = configurationManager.getESPDevice()->getDeviceSensors()->getPublishIntervalInSeconds();
+    int publishIntervalInSeconds = espDevice.getDeviceSensors()->getPublishIntervalInSeconds();
     
     if(now - publishMessageTimestamp > publishIntervalInSeconds) {
       publishMessageTimestamp = now;
@@ -350,7 +348,7 @@ void loopInApplication()
       StaticJsonBuffer<2048> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
 
-      root["applicationId"] = configurationManager.getESPDevice()->getDeviceInApplication()->getApplicationId();
+      root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
       root["wifiQuality"] = wifiManager.getQuality();
       root["epochTimeUtc"] = ntpManager.getEpochTimeUTC();    
       root["localIPAddress"] = wifiManager.getLocalIPAddress();    

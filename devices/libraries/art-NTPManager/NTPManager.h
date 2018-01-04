@@ -2,7 +2,7 @@
 
 #include "Arduino.h"
 #include "DebugManager.h"
-#include "ConfigurationManager.h"
+#include "ESPDevice.h"
 
 #include <Udp.h>
 
@@ -30,11 +30,11 @@ class NTPManager {
 	bool 											_initialized = false;
 				
 	DebugManager*          							_debugManager;
-	ConfigurationManager*  							_configurationManager;
+	ESPDevice*  									_espDevice;
 	
   public:
   
-	NTPManager(DebugManager& debugManager, ConfigurationManager& configurationManager);
+	NTPManager(DebugManager& debugManager, ESPDevice& espDevice);
     NTPManager(UDP& udp);
 
     /**

@@ -21,12 +21,11 @@
 
 #include "NTPManager.h"
 #include "WiFiUdp.h"
-#include "DebugManager.h"
 
-NTPManager::NTPManager(DebugManager& debugManager, ConfigurationManager& configurationManager) {
+NTPManager::NTPManager(DebugManager& debugManager, ESPDevice& espDevice) {
   
   this->_debugManager = &debugManager;
-  this->_configurationManager = &configurationManager;  
+  this->_espDevice = &espDevice;  
   
   this->_udp            = new WiFiUDP();  
 }
@@ -41,12 +40,12 @@ bool NTPManager::begin() {
       return true;;
     }
 	
-	if(!this->_configurationManager->loaded()){
+	if(!this->_espDevice->loaded()){
 	  Serial.println("[ESPDevice] Not loaded !");
       return false;
     }
 	
-	DeviceNTP* deviceNTP = this->_configurationManager->getESPDevice()->getDeviceNTP();
+	DeviceNTP* deviceNTP = this->_espDevice->getDeviceNTP();
   
 	int port = deviceNTP->getPort();
 	
@@ -98,7 +97,7 @@ bool NTPManager::update() {
       return false;
     }
 	
-	DeviceNTP* deviceNTP = this->_configurationManager->getESPDevice()->getDeviceNTP();
+	DeviceNTP* deviceNTP = this->_espDevice->getDeviceNTP();
   
 	int updateInterval = deviceNTP->getUpdateIntervalInMilliSecond();
   
@@ -124,7 +123,7 @@ bool NTPManager::update() {
 
 unsigned long NTPManager::getEpochTime() {	
 
-	DeviceNTP* deviceNTP = this->_configurationManager->getESPDevice()->getDeviceNTP();
+	DeviceNTP* deviceNTP = this->_espDevice->getDeviceNTP();
   
 	int timeOffset = deviceNTP->getUtcTimeOffsetInSecond();
 	
@@ -202,7 +201,7 @@ void NTPManager::sendNTPPacket() {
   // all NTP fields have been given values, now
   // you can send a packet requesting a timestamp:
   
-  DeviceNTP* deviceNTP = this->_configurationManager->getESPDevice()->getDeviceNTP();
+  DeviceNTP* deviceNTP = this->_espDevice->getDeviceNTP();
   
   this->_udp->beginPacket(deviceNTP->getHost(), 123); // Erro quando usa deviceNTP->getPort()
   this->_udp->write(this->_packetBuffer, NTP_PACKET_SIZE);

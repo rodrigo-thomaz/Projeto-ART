@@ -7,7 +7,7 @@
 #include "DebugManager.h"
 #include "NTPManager.h"
 #include "BuzzerManager.h"
-#include "ConfigurationManager.h"
+#include "ESPDevice.h"
 #include "MQQTManager.h"
 #include "OneWire.h"
 #include "DallasTemperature.h"
@@ -126,7 +126,7 @@ class DSFamilyTempSensorManager
 {
   public:
   
-    DSFamilyTempSensorManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager, BuzzerManager& buzzerManager);
+    DSFamilyTempSensorManager(DebugManager& debugManager, ESPDevice& espDevice, MQQTManager& mqqtManager, BuzzerManager& buzzerManager);
 	
 	void 								begin();
 				
@@ -150,7 +150,7 @@ class DSFamilyTempSensorManager
   private:			
 			
 	DebugManager*          				_debugManager;
-	ConfigurationManager*				_configurationManager;	
+	ESPDevice*							_espDevice;	
 	MQQTManager* 		                _mqqtManager;				
 	BuzzerManager* 		                _buzzerManager;				
 	

@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "DebugManager.h"
-#include "ConfigurationManager.h"
+#include "ESPDevice.h"
 #include "WiFiManager.h"
 #include "PubSubClient.h"
 
@@ -15,7 +15,7 @@ class MQQTManager
 {
   public:
   
-    MQQTManager(ConfigurationManager& configurationManager, WiFiManager& wifiManager);
+    MQQTManager(ESPDevice& espDevice, WiFiManager& wifiManager);
 	
 	bool												begin();
 	
@@ -39,7 +39,7 @@ class MQQTManager
 	
   private:			
 			
-	ConfigurationManager*          						_configurationManager;	
+	ESPDevice*          								_espDevice;	
 	WiFiManager* 										_wifiManager;
 	
 	bool												_begin;

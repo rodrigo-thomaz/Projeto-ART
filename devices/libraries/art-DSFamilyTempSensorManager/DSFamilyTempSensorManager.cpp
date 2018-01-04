@@ -194,10 +194,10 @@ void DSFamilyTempSensor::setHighChartLimiterCelsius(float value)
 
 // DSFamilyTempSensorManager
 
-DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, ConfigurationManager& configurationManager, MQQTManager& mqqtManager, BuzzerManager& buzzerManager)
+DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, ESPDevice& espDevice, MQQTManager& mqqtManager, BuzzerManager& buzzerManager)
 { 
 	this->_debugManager = &debugManager;
-	this->_configurationManager = &configurationManager;
+	this->_espDevice = &espDevice;
 	this->_mqqtManager = &mqqtManager;
 	this->_buzzerManager = &buzzerManager;
 }
@@ -212,7 +212,7 @@ bool DSFamilyTempSensorManager::initialized()
 {
 	if(this->_initialized) return true;	
 
-	if(!this->_configurationManager->loaded()) return false;	
+	if(!this->_espDevice->loaded()) return false;	
 	
 	if(this->_initializing) return false;	
 	
@@ -226,9 +226,9 @@ bool DSFamilyTempSensorManager::initialized()
 	
 	Serial.println("[DSFamilyTempSensorManager::initialized] initializing...]");
 	
-	char* deviceId = this->_configurationManager->getESPDevice()->getDeviceId();      
-	short deviceDatasheetId = this->_configurationManager->getESPDevice()->getDeviceDatasheetId();      
-	char* applicationId = this->_configurationManager->getESPDevice()->getDeviceInApplication()->getApplicationId();      
+	char* deviceId = this->_espDevice->getDeviceId();      
+	short deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();      
+	char* applicationId = this->_espDevice->getDeviceInApplication()->getApplicationId();      
 
 	StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
 	JsonObject& root = JSONbuffer.createObject();
@@ -292,7 +292,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		String 			dsFamilyTempSensorId 	= deviceJsonObject["dsFamilyTempSensorId"];
 		String 			family 					= deviceJsonObject["family"];		
 		int 			resolution 				= int(deviceJsonObject["resolutionBits"]);				
-		byte 			unitOfMeasurementId 		= byte(deviceJsonObject["unitOfMeasurementId"]);		
+		byte 			unitOfMeasurementId 	= byte(deviceJsonObject["unitOfMeasurementId"]);		
 		
 		float 			lowChartLimiterCelsius	= float(deviceJsonObject["lowChartLimiterCelsius"]);
 		float 			highChartLimiterCelsius	= float(deviceJsonObject["highChartLimiterCelsius"]);

@@ -3,9 +3,9 @@
 
 // MQQTManager
 
-MQQTManager::MQQTManager(ConfigurationManager& configurationManager, WiFiManager& wifiManager)
+MQQTManager::MQQTManager(ESPDevice& espDevice, WiFiManager& wifiManager)
 { 
-	this->_configurationManager = &configurationManager;
+	this->_espDevice = &espDevice;
 	this->_wifiManager = &wifiManager;
 	
 	this->_mqqt = new PubSubClient(this->_espClient);
@@ -19,9 +19,9 @@ bool MQQTManager::begin()
 { 
 	if(this->_begin) return true;
 	
-	if(this->_wifiManager->isConnected() && this->_configurationManager->loaded()){
+	if(this->_wifiManager->isConnected() && this->_espDevice->loaded()){
 
-		DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
+		DeviceMQ* deviceMQ = this->_espDevice->getDeviceMQ();
 
 		char* const host = deviceMQ->getHost();
 		int port = deviceMQ->getPort();
@@ -42,7 +42,7 @@ bool MQQTManager::begin()
 
 bool MQQTManager::autoConnect()
 { 
-	if(!this->_wifiManager->isConnected() || !this->_configurationManager->loaded()){
+	if(!this->_wifiManager->isConnected() || !this->_espDevice->loaded()){
       return false;
     }
     
@@ -55,7 +55,7 @@ bool MQQTManager::autoConnect()
     }
 	else {
 		
-		DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
+		DeviceMQ* deviceMQ = this->_espDevice->getDeviceMQ();
       
         char* const host 		= deviceMQ->getHost();
         char* const user 		= deviceMQ->getUser();
@@ -184,8 +184,8 @@ String MQQTManager::getTopicKey(char* routingKey)
 
 String MQQTManager::getApplicationRoutingKey(const char* topic)
 {
-	DeviceInApplication* deviceInApplication = this->_configurationManager->getESPDevice()->getDeviceInApplication();
-	DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
+	DeviceInApplication* deviceInApplication = this->_espDevice->getDeviceInApplication();
+	DeviceMQ* deviceMQ = this->_espDevice->getDeviceMQ();
 	
 	String routingKey = String("ART/Application/");
 	routingKey.concat(deviceInApplication->getApplicationTopic());
@@ -199,7 +199,7 @@ String MQQTManager::getApplicationRoutingKey(const char* topic)
 
 String MQQTManager::getDeviceRoutingKey(const char* topic)
 {
-	DeviceMQ* deviceMQ = this->_configurationManager->getESPDevice()->getDeviceMQ();
+	DeviceMQ* deviceMQ = this->_espDevice->getDeviceMQ();
 	
 	String routingKey = String("ART/Device/");
 	routingKey.concat(deviceMQ->getDeviceTopic());
