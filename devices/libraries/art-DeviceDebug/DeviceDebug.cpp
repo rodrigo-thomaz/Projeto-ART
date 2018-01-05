@@ -61,8 +61,8 @@ void DeviceDebug::setRemoteEnabled(char* json)
 		_debug->printf("DeviceDebug::setRemoteEnabled] parse failed: %s\n", json);
 		return;
 	}	
-
-	_remoteEnabled = root["remoteEnabled"];
+	
+	_remoteEnabled = root["value"];
 	
 	_debug->printf("DeviceDebug::setRemoteEnabled] RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
 }
@@ -83,7 +83,7 @@ void DeviceDebug::setResetCmdEnabled(char* json)
 		return;
 	}	
 
-	_resetCmdEnabled = root["resetCmdEnabled"];
+	_resetCmdEnabled = root["value"];
 	_debug->setResetCmdEnabled(_resetCmdEnabled);
 	
 	_debug->printf("DeviceDebug::setResetCmdEnabled] ResetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");
@@ -105,7 +105,7 @@ void DeviceDebug::setSerialEnabled(char* json)
 		return;
 	}	
 
-	_serialEnabled = root["serialEnabled"];
+	_serialEnabled = root["value"];
 	_debug->setSerialEnabled(_serialEnabled);
 	
 	_debug->printf("DeviceDebug::setSerialEnabled] SerialEnabled: %s\n", _serialEnabled ? "true" : "false");
@@ -127,7 +127,7 @@ void DeviceDebug::setShowColors(char* json)
 		return;
 	}	
 
-	_showColors = root["showColors"];
+	_showColors = root["value"];
 	_debug->showColors(_showColors);
 	
 	_debug->printf("DeviceDebug::setShowColors] ShowColors: %s\n", _showColors ? "true" : "false");
@@ -149,7 +149,7 @@ void DeviceDebug::setShowDebugLevel(char* json)
 		return;
 	}	
 
-	_showDebugLevel = root["showDebugLevel"];
+	_showDebugLevel = root["value"];
 	_debug->showDebugLevel(_showDebugLevel);
 	
 	_debug->printf("DeviceDebug::setShowDebugLevel] ShowDebugLevel: %s\n", _showDebugLevel ? "true" : "false");
@@ -171,7 +171,7 @@ void DeviceDebug::setShowProfiler(char* json)
 		return;
 	}	
 
-	_showProfiler = root["showProfiler"];
+	_showProfiler = root["value"];
 	_debug->showProfiler(_showProfiler);
 	
 	_debug->printf("DeviceDebug::setShowProfiler] ShowProfiler: %s\n", _showProfiler ? "true" : "false");
@@ -193,7 +193,7 @@ void DeviceDebug::setShowTime(char* json)
 		return;
 	}	
 
-	_showTime = root["showTime"];
+	_showTime = root["value"];
 	_debug->showTime(_showTime);
 	
 	_debug->printf("DeviceDebug::setShowTime] ShowTime: %s\n", _showTime ? "true" : "false");
