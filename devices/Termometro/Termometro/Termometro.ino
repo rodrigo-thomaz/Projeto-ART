@@ -60,6 +60,14 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
 #define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorChartLimiter/SetValueIoT"
 
+#define TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED "DeviceDebug/SetRemoteEnabledIoT"
+#define TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED "DeviceDebug/SetResetCmdEnabledIoT"
+#define TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED "DeviceDebug/SetSerialEnabledIoT"
+#define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS "DeviceDebug/SetShowColorsIoT"
+#define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL "DeviceDebug/SetShowDebugLevelIoT"
+#define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER "DeviceDebug/SetShowProfilerIoT"
+#define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME "DeviceDebug/SetShowTimeIoT"
+
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
 uint64_t publishMessageTimestamp = 0;
@@ -188,6 +196,14 @@ void subscribeInApplication()
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
   mqqtManager.subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
 
+  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
+  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
+  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
+  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS);
+  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
+  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
+  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+
   Serial.println("[MQQT::subscribeInApplication] Initialized with success !");
 }
 
@@ -205,6 +221,14 @@ void unSubscribeInApplication()
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
+  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
   
   Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
@@ -269,6 +293,27 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)){
       dsFamilyTempSensorManager.setChartLimiterCelsius(json);
     }        
+    if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED)){
+      espDevice.getDeviceDebug()->setRemoteEnabled(strdup(json.c_str()));
+    }            
+    if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED)){
+      espDevice.getDeviceDebug()->setResetCmdEnabled(strdup(json.c_str()));
+    }
+    if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED)){
+      espDevice.getDeviceDebug()->setSerialEnabled(strdup(json.c_str()));
+    }
+    if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS)){
+      espDevice.getDeviceDebug()->setShowColors(strdup(json.c_str()));
+    }
+    if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL)){
+      espDevice.getDeviceDebug()->setShowDebugLevel(strdup(json.c_str()));
+    }
+    if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER)){
+      espDevice.getDeviceDebug()->setShowProfiler(strdup(json.c_str()));
+    }
+    if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME)){
+      espDevice.getDeviceDebug()->setShowTime(strdup(json.c_str()));
+    }
 }
 
 void loop() {	  

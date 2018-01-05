@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
     using ART.Domotica.Contract;
+    using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 
@@ -22,6 +23,9 @@
                 .ForMember(vm => vm.ShowTime, m => m.MapFrom(x => x.ShowTime))
                 .ForMember(vm => vm.ShowProfiler, m => m.MapFrom(x => x.ShowProfiler))
                 .ForMember(vm => vm.ShowColors, m => m.MapFrom(x => x.ShowColors));
+
+            CreateMap<DeviceDebugSetValueRequestContract, DeviceDebugSetValueRequestIoTContract>()
+                .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
 
             CreateMap<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>()
                 .ForMember(vm => vm.DeviceDebugId, m => m.MapFrom(x => x.DeviceDebugId))
