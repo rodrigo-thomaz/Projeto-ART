@@ -193,7 +193,13 @@ void ESPDevice::autoLoad()
 				_deviceDebug->getDebug()->printf("ESPDevice DeviceId: %s\n", _deviceId);
 				_deviceDebug->getDebug()->printf("ESPDevice DeviceDatasheetId: %d\n", _deviceDatasheetId);
 				
-				_deviceDebug->getDebug()->printf("DeviceDebug Active: %s\n", getDeviceDebug()->getActive() ? "true" : "false");
+				_deviceDebug->getDebug()->printf("DeviceDebug RemoteEnabled: %s\n", getDeviceDebug()->getRemoteEnabled() ? "true" : "false");
+				_deviceDebug->getDebug()->printf("DeviceDebug ResetCmdEnabled: %s\n", getDeviceDebug()->getResetCmdEnabled() ? "true" : "false");
+				_deviceDebug->getDebug()->printf("DeviceDebug SerialEnabled: %s\n", getDeviceDebug()->getSerialEnabled() ? "true" : "false");
+				_deviceDebug->getDebug()->printf("DeviceDebug ShowColors: %s\n", getDeviceDebug()->getShowColors() ? "true" : "false");
+				_deviceDebug->getDebug()->printf("DeviceDebug ShowDebugLevel: %s\n", getDeviceDebug()->getShowDebugLevel() ? "true" : "false");
+				_deviceDebug->getDebug()->printf("DeviceDebug ShowProfiler: %s\n", getDeviceDebug()->getShowProfiler() ? "true" : "false");
+				_deviceDebug->getDebug()->printf("DeviceDebug ShowTime: %s\n", getDeviceDebug()->getShowTime() ? "true" : "false");
 				
 				_deviceDebug->getDebug()->printf("DeviceMQ Host: %s\n", getDeviceMQ()->getHost());
 				_deviceDebug->getDebug()->printf("DeviceMQ Port: %d\n", getDeviceMQ()->getPort());
