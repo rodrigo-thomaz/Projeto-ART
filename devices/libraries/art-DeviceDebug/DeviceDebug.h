@@ -23,25 +23,25 @@ public:
 	void								load(JsonObject& jsonObject);
 	
 	bool								getRemoteEnabled();
-	void								setRemoteEnabled(String json);
+	void								setRemoteEnabled(char* json);
 	
 	bool								getResetCmdEnabled();
-	void								setResetCmdEnabled(String json);
+	void								setResetCmdEnabled(char* json);
 	
 	bool								getSerialEnabled();
-	void								setSerialEnabled(String json);
+	void								setSerialEnabled(char* json);
 	
 	bool								getShowColors();
-	void								setShowColors(String json);
+	void								setShowColors(char* json);
 	
 	bool								getShowDebugLevel();
-	void								setShowDebugLevel(String json);
+	void								setShowDebugLevel(char* json);
 	
 	bool								getShowProfiler();
-	void								setShowProfiler(String json);
+	void								setShowProfiler(char* json);
 	
 	bool								getShowTime();
-	void								setShowTime(String json);
+	void								setShowTime(char* json);
 		
 	static void createDeviceDebug(DeviceDebug* (&deviceDebug), ESPDevice* espDevice)
     {
