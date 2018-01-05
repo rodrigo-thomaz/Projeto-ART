@@ -1,12 +1,72 @@
-﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceDebugController" ng-init="init(device.deviceDebug)">    
+﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceDebugController" ng-init="init(device.deviceDebug)">
     <div class="form-group">
-        <label class="col-lg-4 control-label">Debug Active</label>
+        <label class="col-lg-4 control-label">Remote enabled</label>
         <div class="col-lg-8">
             <div class="checkbox">
                 <label class="i-checks">
-                    <input type="checkbox" ng-model="activeView" ng-model-options="{ debounce: 1000 }"><i></i>
+                    <input type="checkbox" ng-model="remoteEnabledView" ng-model-options="{ debounce: 1000 }"><i></i>
                 </label>
-            </div>            
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Serial enabled</label>
+        <div class="col-lg-8">
+            <div class="checkbox">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="serialEnabledView" ng-model-options="{ debounce: 1000 }"><i></i>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Reset command enabled</label>
+        <div class="col-lg-8">
+            <div class="checkbox">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="resetCmdEnabledView" ng-model-options="{ debounce: 1000 }"><i></i>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Show colors</label>
+        <div class="col-lg-8">
+            <div class="checkbox">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="showColorsView" ng-model-options="{ debounce: 1000 }"><i></i>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Show debug level</label>
+        <div class="col-lg-8">
+            <div class="checkbox">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="showDebugLevelView" ng-model-options="{ debounce: 1000 }"><i></i>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Show profiler</label>
+        <div class="col-lg-8">
+            <div class="checkbox">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="showProfilerView" ng-model-options="{ debounce: 1000 }"><i></i>
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Show time</label>
+        <div class="col-lg-8">
+            <div class="checkbox">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="showTimeView" ng-model-options="{ debounce: 1000 }"><i></i>
+                </label>
+            </div>
         </div>
     </div>
 </form>

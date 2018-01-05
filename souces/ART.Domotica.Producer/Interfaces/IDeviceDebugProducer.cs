@@ -9,7 +9,19 @@
     {
         #region Methods
 
-        Task SetActive(AuthenticatedMessageContract<DeviceDebugSetActiveRequestContract> message);
+        Task SetRemoteEnabled(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message);
+
+        Task SetResetCmdEnabled(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message);
+
+        Task SetSerialEnabled(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message);
+
+        Task SetShowColors(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message);
+
+        Task SetShowDebugLevel(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message);
+
+        Task SetShowProfiler(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message);
+
+        Task SetShowTime(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message);
 
         #endregion Methods
     }

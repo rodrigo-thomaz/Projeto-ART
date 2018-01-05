@@ -4,14 +4,9 @@
 
     using ART.Domotica.Enums;
 
-    public class DeviceDebugSetActiveModel
+    public class DeviceDebugSetValueModel
     {
         #region Properties
-
-        public bool Active
-        {
-            get; set;
-        }
 
         public DeviceDatasheetEnum DeviceDatasheetId
         {
@@ -19,6 +14,11 @@
         }
 
         public Guid DeviceDebugId
+        {
+            get; set;
+        }
+
+        public bool Value
         {
             get; set;
         }

@@ -43,7 +43,7 @@
     <Compile Include="DeviceDebugGetModel.cs" />
     <Compile Include="DeviceWiFiGetModel.cs" />
     <Compile Include="DeviceNTPGetModel.cs" />
-    <Compile Include="DeviceDebugSetActiveModel.cs" />
+    <Compile Include="DeviceDebugSetValueModel.cs" />
     <Compile Include="DeviceWiFiSetHostNameModel.cs" />
     <Compile Include="DeviceSensorsSetPublishIntervalInSecondsModel.cs" />
     <Compile Include="DeviceDatasheetGetModel.cs" />

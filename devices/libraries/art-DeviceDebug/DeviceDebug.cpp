@@ -18,6 +18,13 @@ void DeviceDebug::begin()
 	_debug->begin("remotedebug-sample"); // Initiaze the telnet server
 	_debug->setResetCmdEnabled(true); // Enable the reset command	
 	_debug->setSerialEnabled(true); // Setup after Debug.begin - All messages too send to serial too, and can be see in serial monitor
+	//_debug->showDebugLevel(false); // To not show debug levels
+	//_debug->showTime(true); // To show time
+	//_debug->showProfiler(true); // To show profiler - time between messages of Debug
+	// Good to "begin ...." and "end ...." messages
+
+	_debug->showProfiler(true); // Profiler
+	_debug->showColors(true); // Colors
 }
 
 void DeviceDebug::loop()

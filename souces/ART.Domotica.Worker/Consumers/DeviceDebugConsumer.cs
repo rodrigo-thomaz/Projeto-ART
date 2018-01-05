@@ -15,13 +15,20 @@
     using global::AutoMapper;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
+    using System;
     using System.Threading.Tasks;
 
     public class DeviceDebugConsumer : ConsumerBase, IDeviceDebugConsumer
     {
         #region Fields
 
-        private readonly EventingBasicConsumer _setActiveConsumer;
+        private readonly EventingBasicConsumer _setRemoteEnabledConsumer;
+        private readonly EventingBasicConsumer _setSerialEnabledConsumer;
+        private readonly EventingBasicConsumer _setResetCmdEnabledConsumer;
+        private readonly EventingBasicConsumer _setShowDebugLevelConsumer;
+        private readonly EventingBasicConsumer _setShowTimeConsumer;
+        private readonly EventingBasicConsumer _setShowProfilerConsumer;
+        private readonly EventingBasicConsumer _setShowColorsConsumer;
 
         #endregion Fields
 
@@ -30,7 +37,13 @@
         public DeviceDebugConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
             : base(connection, mqSettings, logger, componentContext)
         {
-            _setActiveConsumer = new EventingBasicConsumer(_model);
+            _setRemoteEnabledConsumer = new EventingBasicConsumer(_model);
+            _setSerialEnabledConsumer = new EventingBasicConsumer(_model);
+            _setResetCmdEnabledConsumer = new EventingBasicConsumer(_model);
+            _setShowDebugLevelConsumer = new EventingBasicConsumer(_model);
+            _setShowTimeConsumer = new EventingBasicConsumer(_model);
+            _setShowProfilerConsumer = new EventingBasicConsumer(_model);
+            _setShowColorsConsumer = new EventingBasicConsumer(_model);
 
             Initialize();            
         }
@@ -41,39 +54,219 @@
 
         private void Initialize()
         {
-            BasicQueueDeclare(DeviceDebugConstants.SetActiveQueueName);
+            BasicQueueDeclare(DeviceDebugConstants.SetRemoteEnabledQueueName);
+            BasicQueueDeclare(DeviceDebugConstants.SetSerialEnabledQueueName);
+            BasicQueueDeclare(DeviceDebugConstants.SetResetCmdEnabledQueueName);
+            BasicQueueDeclare(DeviceDebugConstants.SetShowDebugLevelQueueName);
+            BasicQueueDeclare(DeviceDebugConstants.SetShowTimeQueueName);
+            BasicQueueDeclare(DeviceDebugConstants.SetShowProfilerQueueName);
+            BasicQueueDeclare(DeviceDebugConstants.SetShowColorsQueueName);
 
-            _setActiveConsumer.Received += SetActiveReceived;
+            _setRemoteEnabledConsumer.Received += SetRemoteEnabledReceived;
+            _setSerialEnabledConsumer.Received += SetSerialEnabledReceived;
+            _setResetCmdEnabledConsumer.Received += SetResetCmdEnabledReceived;
+            _setShowDebugLevelConsumer.Received += SetShowDebugLevelReceived;
+            _setShowTimeConsumer.Received += SetShowTimeReceived;
+            _setShowProfilerConsumer.Received += SetShowProfilerReceived;
+            _setShowColorsConsumer.Received += SetShowColorsReceived;
 
-            _model.BasicConsume(DeviceDebugConstants.SetActiveQueueName, false, _setActiveConsumer);
+            _model.BasicConsume(DeviceDebugConstants.SetRemoteEnabledQueueName, false, _setRemoteEnabledConsumer);
+            _model.BasicConsume(DeviceDebugConstants.SetSerialEnabledQueueName, false, _setSerialEnabledConsumer);
+            _model.BasicConsume(DeviceDebugConstants.SetResetCmdEnabledQueueName, false, _setResetCmdEnabledConsumer);
+            _model.BasicConsume(DeviceDebugConstants.SetShowDebugLevelQueueName, false, _setShowDebugLevelConsumer);
+            _model.BasicConsume(DeviceDebugConstants.SetShowTimeQueueName, false, _setShowTimeConsumer);
+            _model.BasicConsume(DeviceDebugConstants.SetShowProfilerQueueName, false, _setShowProfilerConsumer);
+            _model.BasicConsume(DeviceDebugConstants.SetShowColorsQueueName, false, _setShowColorsConsumer);
         }
 
         #endregion Methods
 
         #region private voids        
 
-        public void SetActiveReceived(object sender, BasicDeliverEventArgs e)
+        public void SetRemoteEnabledReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetActiveReceivedAsync(sender, e));
+            Task.WaitAll(SetRemoteEnabledReceivedAsync(sender, e));
         }
 
-        public async Task SetActiveReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetRemoteEnabledReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetActiveRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetValueRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceDebugDomain>();
-            var data = await domain.SetActive(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Active);
+            var data = await domain.SetRemoteEnabled(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Value);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DeviceDebugSetActiveRequestContract, DeviceDebugSetActiveModel>(message.Contract);
+            var viewModel = Mapper.Map<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>(message.Contract);
             viewModel.DeviceDebugId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetActiveViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetRemoteEnabledViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetSerialEnabledReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetSerialEnabledReceivedAsync(sender, e));
+        }
+
+        public async Task SetSerialEnabledReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetValueRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IDeviceDebugDomain>();
+            var data = await domain.SetSerialEnabled(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Value);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>(message.Contract);
+            viewModel.DeviceDebugId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetSerialEnabledViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetResetCmdEnabledReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetResetCmdEnabledReceivedAsync(sender, e));
+        }
+
+        public async Task SetResetCmdEnabledReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetValueRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IDeviceDebugDomain>();
+            var data = await domain.SetResetCmdEnabled(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Value);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>(message.Contract);
+            viewModel.DeviceDebugId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetResetCmdEnabledViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetShowDebugLevelReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetShowDebugLevelReceivedAsync(sender, e));
+        }
+
+        public async Task SetShowDebugLevelReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetValueRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IDeviceDebugDomain>();
+            var data = await domain.SetShowDebugLevel(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Value);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>(message.Contract);
+            viewModel.DeviceDebugId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetShowDebugLevelViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetShowTimeReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetShowTimeReceivedAsync(sender, e));
+        }
+
+        public async Task SetShowTimeReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetValueRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IDeviceDebugDomain>();
+            var data = await domain.SetShowTime(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Value);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>(message.Contract);
+            viewModel.DeviceDebugId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetShowTimeViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetShowProfilerReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetShowProfilerReceivedAsync(sender, e));
+        }
+
+        public async Task SetShowProfilerReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetValueRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IDeviceDebugDomain>();
+            var data = await domain.SetShowProfiler(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Value);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>(message.Contract);
+            viewModel.DeviceDebugId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetShowProfilerViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetShowColorsReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetShowColorsReceivedAsync(sender, e));
+        }
+
+        public async Task SetShowColorsReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetValueRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IDeviceDebugDomain>();
+            var data = await domain.SetShowColors(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Value);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>(message.Contract);
+            viewModel.DeviceDebugId = data.Id;
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetShowColorsViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

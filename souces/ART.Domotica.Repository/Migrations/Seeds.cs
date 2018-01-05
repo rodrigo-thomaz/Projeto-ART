@@ -537,7 +537,13 @@
                     },
                     DeviceDebug = new DeviceDebug
                     {
-                        Active = true,
+                        RemoteEnabled = true,
+                        SerialEnabled = true,
+                        ResetCmdEnabled = true,
+                        ShowDebugLevel = true,
+                        ShowTime = false,
+                        ShowProfiler = false,
+                        ShowColors = true,
                     },
                     DeviceSensors = new DeviceSensors
                     {
@@ -587,7 +593,13 @@
                 {
                     espDevice1.DeviceDebug = new DeviceDebug
                     {
-                        Active = true,
+                        RemoteEnabled = true,
+                        SerialEnabled = true,
+                        ResetCmdEnabled = true,
+                        ShowDebugLevel = true,
+                        ShowTime = false,
+                        ShowProfiler = false,
+                        ShowColors = true,
                     };
                 }
                 if (espDevice1.DeviceSensors == null)
@@ -787,7 +799,13 @@
                     },
                     DeviceDebug = new DeviceDebug
                     {
-                        Active = true,
+                        RemoteEnabled = true,
+                        SerialEnabled = true,
+                        ResetCmdEnabled = true,
+                        ShowDebugLevel = true,
+                        ShowTime = false,
+                        ShowProfiler = false,
+                        ShowColors = true,
                     },
                     DeviceSensors = new DeviceSensors
                     {
@@ -847,7 +865,13 @@
                 {
                     espDevice2.DeviceDebug = new DeviceDebug
                     {
-                        Active = true,
+                        RemoteEnabled = true,
+                        SerialEnabled = true,
+                        ResetCmdEnabled = true,
+                        ShowDebugLevel = true,
+                        ShowTime = false,
+                        ShowProfiler = false,
+                        ShowColors = true,
                     };
                 }
             }

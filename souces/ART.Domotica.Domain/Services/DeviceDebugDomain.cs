@@ -32,7 +32,7 @@
 
         #region Methods
 
-        public async Task<DeviceDebug> SetActive(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool active)
+        public async Task<DeviceDebug> SetRemoteEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
 
@@ -41,7 +41,103 @@
                 throw new Exception("DeviceDebug not found");
             }
 
-            entity.Active = active;
+            entity.RemoteEnabled = value;
+
+            await _deviceDebugRepository.Update(entity);
+
+            return entity;
+        }        
+
+        public async Task<DeviceDebug> SetSerialEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        {
+            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceDebug not found");
+            }
+
+            entity.SerialEnabled = value;
+
+            await _deviceDebugRepository.Update(entity);
+
+            return entity;
+        }
+
+        public async Task<DeviceDebug> SetResetCmdEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        {
+            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceDebug not found");
+            }
+
+            entity.ResetCmdEnabled = value;
+
+            await _deviceDebugRepository.Update(entity);
+
+            return entity;
+        }        
+
+        public async Task<DeviceDebug> SetShowColors(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        {
+            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceDebug not found");
+            }
+
+            entity.ShowColors = value;
+
+            await _deviceDebugRepository.Update(entity);
+
+            return entity;
+        }
+
+        public async Task<DeviceDebug> SetShowDebugLevel(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        {
+            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceDebug not found");
+            }
+
+            entity.ShowDebugLevel = value;
+
+            await _deviceDebugRepository.Update(entity);
+
+            return entity;
+        }
+
+        public async Task<DeviceDebug> SetShowProfiler(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        {
+            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceDebug not found");
+            }
+
+            entity.ShowProfiler = value;
+
+            await _deviceDebugRepository.Update(entity);
+
+            return entity;
+        }
+
+        public async Task<DeviceDebug> SetShowTime(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        {
+            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceDebug not found");
+            }
+
+            entity.ShowTime = value;
 
             await _deviceDebugRepository.Update(entity);
 

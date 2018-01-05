@@ -45,9 +45,33 @@ app.constant('deviceWiFiConstant', {
 
 app.constant('deviceDebugConstant', {
 
-    setActiveApiUri: 'api/deviceDebug/setActive',
-    setActiveCompletedTopic: 'DeviceDebug.SetActiveViewCompleted',
-    setActiveCompletedEventName: 'deviceDebugService.onSetActiveCompleted_Id_',
+    setRemoteEnabledApiUri: 'api/deviceDebug/setRemoteEnabled',
+    setRemoteEnabledCompletedTopic: 'DeviceDebug.SetRemoteEnabledViewCompleted',
+    setRemoteEnabledCompletedEventName: 'deviceDebugService.onSetRemoteEnabledCompleted_Id_',
+
+    setResetCmdEnabledApiUri: 'api/deviceDebug/setResetCmdEnabled',
+    setResetCmdEnabledCompletedTopic: 'DeviceDebug.SetResetCmdEnabledViewCompleted',
+    setResetCmdEnabledCompletedEventName: 'deviceDebugService.onSetResetCmdEnabledCompleted_Id_',
+
+    setSerialEnabledApiUri: 'api/deviceDebug/setSerialEnabled',
+    setSerialEnabledCompletedTopic: 'DeviceDebug.SetSerialEnabledViewCompleted',
+    setSerialEnabledCompletedEventName: 'deviceDebugService.onSetSerialEnabledCompleted_Id_',
+
+    setShowColorsApiUri: 'api/deviceDebug/setShowColors',
+    setShowColorsCompletedTopic: 'DeviceDebug.SetShowColorsViewCompleted',
+    setShowColorsCompletedEventName: 'deviceDebugService.onSetShowColorsCompleted_Id_',
+
+    setShowDebugLevelApiUri: 'api/deviceDebug/setShowDebugLevel',
+    setShowDebugLevelCompletedTopic: 'DeviceDebug.SetShowDebugLevelViewCompleted',
+    setShowDebugLevelCompletedEventName: 'deviceDebugService.onSetShowDebugLevelCompleted_Id_',
+
+    setShowProfilerApiUri: 'api/deviceDebug/setShowProfiler',
+    setShowProfilerCompletedTopic: 'DeviceDebug.SetShowProfilerViewCompleted',
+    setShowProfilerCompletedEventName: 'deviceDebugService.onSetShowProfilerCompleted_Id_',
+
+    setShowTimeApiUri: 'api/deviceDebug/setShowTime',
+    setShowTimeCompletedTopic: 'DeviceDebug.SetShowTimeViewCompleted',
+    setShowTimeCompletedEventName: 'deviceDebugService.onSetShowTimeCompleted_Id_',
 
 });
 

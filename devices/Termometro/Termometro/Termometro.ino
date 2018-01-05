@@ -211,8 +211,12 @@ void unSubscribeInApplication()
 
 void mqtt_SubCallback(char* topic, byte* payload, unsigned int length) 
 {
-    Serial.print("[MQQT::mqtt_SubCallback] Topic: ");
-    Serial.println(topic);
+    RemoteDebug* debug = espDevice.getDeviceDebug()->getDebug();
+
+    debug->printf("[MQQT::mqtt_SubCallback] Topic: %s\n", topic);
+    
+    String topicKey = mqqtManager.getTopicKey(topic);
+    debug->printf("[MQQT::mqtt_SubCallback] Topic Key: %s\n", topicKey.c_str());
     
     displayMQTTManager.printReceived(true);
     
@@ -223,12 +227,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     {
        char c = (char)payload[i];
        json += c;
-    }   
-
-    String topicKey = mqqtManager.getTopicKey(topic);
-
-    Serial.print("topicKey: ");
-    Serial.println(topicKey);
+    }       
 
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_UPDATE_PIN)){
       displayAccessManager.updatePin(json);

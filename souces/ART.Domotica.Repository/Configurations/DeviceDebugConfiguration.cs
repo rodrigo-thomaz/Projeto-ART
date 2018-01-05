@@ -33,9 +33,39 @@
             HasRequired(x => x.DeviceBase)
                .WithRequiredDependent(x => x.DeviceDebug);
 
-            //Active
-            Property(x => x.Active)
+            //RemoteEnabled
+            Property(x => x.RemoteEnabled)
                 .HasColumnOrder(2)
+                .IsRequired();
+
+            //SerialEnabled
+            Property(x => x.SerialEnabled)
+                .HasColumnOrder(3)
+                .IsRequired();
+
+            //ResetCmdEnabled
+            Property(x => x.ResetCmdEnabled)
+                .HasColumnOrder(4)
+                .IsRequired();
+
+            //ShowDebugLevel
+            Property(x => x.ShowDebugLevel)
+                .HasColumnOrder(5)
+                .IsRequired();
+
+            //ShowTime
+            Property(x => x.ShowTime)
+                .HasColumnOrder(6)
+                .IsRequired();
+
+            //ShowProfiler
+            Property(x => x.ShowProfiler)
+                .HasColumnOrder(7)
+                .IsRequired();
+
+            //ShowColors
+            Property(x => x.ShowColors)
+                .HasColumnOrder(8)
                 .IsRequired();
         }
 
