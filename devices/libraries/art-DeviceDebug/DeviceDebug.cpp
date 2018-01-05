@@ -91,14 +91,14 @@ void DeviceDebug::setResetCmdEnabled(char* json)
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		_debug->printf("DeviceDebug::setResetCmdEnabled] parse failed: %s\n", json);
+		printf("DeviceDebug", "setResetCmdEnabled", "Parse failed: %s\n", json);
 		return;
 	}	
 
 	_resetCmdEnabled = root["value"];
 	_debug->setResetCmdEnabled(_resetCmdEnabled);
 	
-	_debug->printf("DeviceDebug::setResetCmdEnabled] ResetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");
+	printf("DeviceDebug", "setRemoteEnabled", "ResetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");
 }
 
 bool DeviceDebug::getSerialEnabled()
@@ -113,14 +113,14 @@ void DeviceDebug::setSerialEnabled(char* json)
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		_debug->printf("DeviceDebug::setSerialEnabled] parse failed: %s\n", json);
+		printf("DeviceDebug", "setSerialEnabled", "Parse failed: %s\n", json);
 		return;
 	}	
 
 	_serialEnabled = root["value"];
 	_debug->setSerialEnabled(_serialEnabled);
 	
-	_debug->printf("DeviceDebug::setSerialEnabled] SerialEnabled: %s\n", _serialEnabled ? "true" : "false");
+	printf("DeviceDebug", "setRemoteEnabled", "SerialEnabled: %s\n", _serialEnabled ? "true" : "false");
 }
 
 bool DeviceDebug::getShowColors()
@@ -135,14 +135,14 @@ void DeviceDebug::setShowColors(char* json)
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		_debug->printf("DeviceDebug::setShowColors] parse failed: %s\n", json);
+		printf("DeviceDebug", "setShowColors", "Parse failed: %s\n", json);
 		return;
 	}	
 
 	_showColors = root["value"];
 	_debug->showColors(_showColors);
 	
-	_debug->printf("DeviceDebug::setShowColors] ShowColors: %s\n", _showColors ? "true" : "false");
+	printf("DeviceDebug", "setRemoteEnabled", "ShowColors: %s\n", _showColors ? "true" : "false");
 }
 
 bool DeviceDebug::getShowDebugLevel()
@@ -157,14 +157,14 @@ void DeviceDebug::setShowDebugLevel(char* json)
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		_debug->printf("DeviceDebug::setShowDebugLevel] parse failed: %s\n", json);
+		printf("DeviceDebug", "setShowDebugLevel", "Parse failed: %s\n", json);
 		return;
 	}	
 
 	_showDebugLevel = root["value"];
 	_debug->showDebugLevel(_showDebugLevel);
 	
-	_debug->printf("DeviceDebug::setShowDebugLevel] ShowDebugLevel: %s\n", _showDebugLevel ? "true" : "false");
+	printf("DeviceDebug", "setRemoteEnabled", "ShowDebugLevel: %s\n", _showDebugLevel ? "true" : "false");
 }
 
 bool DeviceDebug::getShowProfiler()
@@ -179,14 +179,14 @@ void DeviceDebug::setShowProfiler(char* json)
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		_debug->printf("DeviceDebug::setShowProfiler] parse failed: %s\n", json);
+		printf("DeviceDebug", "setShowProfiler", "Parse failed: %s\n", json);
 		return;
 	}	
 
 	_showProfiler = root["value"];
 	_debug->showProfiler(_showProfiler);
 	
-	_debug->printf("DeviceDebug::setShowProfiler] ShowProfiler: %s\n", _showProfiler ? "true" : "false");
+	printf("DeviceDebug", "setRemoteEnabled", "ShowProfiler: %s\n", _showProfiler ? "true" : "false");
 }
 
 bool DeviceDebug::getShowTime()
@@ -201,12 +201,12 @@ void DeviceDebug::setShowTime(char* json)
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		_debug->printf("DeviceDebug::setShowTime] parse failed: %s\n", json);
+		printf("DeviceDebug", "setShowTime", "Parse failed: %s\n", json);
 		return;
 	}	
 
 	_showTime = root["value"];
 	_debug->showTime(_showTime);
 	
-	_debug->printf("DeviceDebug::setShowTime] ShowTime: %s\n", _showTime ? "true" : "false");
+	printf("DeviceDebug", "setRemoteEnabled", "ShowTime: %s\n", _showTime ? "true" : "false");
 }
