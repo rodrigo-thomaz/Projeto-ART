@@ -1,6 +1,8 @@
 #ifndef DeviceDebug_h
 #define DeviceDebug_h
 
+// #include <stdio.h>
+// #include <string.h>
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
@@ -19,6 +21,8 @@ public:
 	void								loop();
 		
 	RemoteDebug*						getDebug();		
+	
+	template<typename... Args> int		printf(const char* className, const char* caller, const char* format, Args... args);
 
 	void								load(JsonObject& jsonObject);
 	

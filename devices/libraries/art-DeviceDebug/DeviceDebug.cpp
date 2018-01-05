@@ -41,6 +41,18 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	_debug->showTime(_showTime);
 }
 
+template<typename... Args> int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
+{
+	int lenfullFormat = strlen(className) + strlen(caller) + strlen(format) + 2;		
+	char fullFormat[lenfullFormat];	
+	strcpy(fullFormat, className);
+	strcat(fullFormat, " ");
+	strcat(fullFormat, caller);
+	strcat(fullFormat, " ");
+	strcat(fullFormat, format);	
+	return _debug->printf(fullFormat, args...);
+}
+
 RemoteDebug* DeviceDebug::getDebug()
 {	
 	return _debug;
@@ -58,13 +70,13 @@ void DeviceDebug::setRemoteEnabled(char* json)
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		_debug->printf("DeviceDebug::setRemoteEnabled] parse failed: %s\n", json);
+		printf("DeviceDebug", "setRemoteEnabled", "Parse failed: %s\n", json);
 		return;
 	}	
 	
 	_remoteEnabled = root["value"];
 	
-	_debug->printf("DeviceDebug::setRemoteEnabled] RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
+	printf("DeviceDebug", "setRemoteEnabled", "RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
 }
 
 bool DeviceDebug::getResetCmdEnabled()
