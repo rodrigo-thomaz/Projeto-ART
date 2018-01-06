@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
-#include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
+#include "RemoteDebug.h" 
 
 class ESPDevice;
 
@@ -36,16 +36,14 @@ public:
 		deviceDebug = new DeviceDebug(
 			espDevice);
     }
-	
-	// Debug levels
 
-	static const uint8_t PROFILER = 0; 	// Used for show time of execution of pieces of code(profiler)
-	static const uint8_t VERBOSE = 1; 	// Used for show verboses messages
-	static const uint8_t DEBUG = 2;   	// Used for show debug messages
-	static const uint8_t INFO = 3;		// Used for show info messages
-	static const uint8_t WARNING = 4;	// Used for show warning messages
-	static const uint8_t ERROR = 5;		// Used for show error messages
-	static const uint8_t ANY = 6;		// Used for show always messages, for any current debug level
+	static const uint8_t PROFILER = 0;
+	static const uint8_t VERBOSE = 1;
+	static const uint8_t DEBUG = 2;
+	static const uint8_t INFO = 3;
+	static const uint8_t WARNING = 4;
+	static const uint8_t ERROR = 5;
+	static const uint8_t ANY = 6;
 	
 private:	
 
