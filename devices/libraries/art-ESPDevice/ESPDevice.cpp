@@ -189,24 +189,24 @@ void ESPDevice::autoLoad()
 				_deviceDebug->print("ESPDevice", "autoLoad", "Initialized with success !\n"); 
 				
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceId: %s\n", _deviceId);
-				//_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceDatasheetId: %d\n", _deviceDatasheetId);
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceDatasheetId: %d\n", (char*)_deviceDatasheetId);
 				
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Host: %s\n", getDeviceMQ()->getHost());
-				// _deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Port: %d\n", getDeviceMQ()->getPort());
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Port: %d\n", (char*)getDeviceMQ()->getPort());
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ User: %s\n", getDeviceMQ()->getUser());
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Password: %s\n", getDeviceMQ()->getPassword());
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ ClientId: %s\n", getDeviceMQ()->getClientId());
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Device Topic: %s\n", getDeviceMQ()->getDeviceTopic());			
 				
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP Host: %s\n", getDeviceNTP()->getHost());
-				// _deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP Port: %d\n", getDeviceNTP()->getPort());
-				// _deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP UtcTimeOffsetInSecond: %d\n", getDeviceNTP()->getUtcTimeOffsetInSecond());
-				// _deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP UpdateIntervalInMilliSecond: %d\n", getDeviceNTP()->getUpdateIntervalInMilliSecond());
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP Port: %d\n", (char*)getDeviceNTP()->getPort());
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP UtcTimeOffsetInSecond: %d\n", (char*)getDeviceNTP()->getUtcTimeOffsetInSecond());
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP UpdateIntervalInMilliSecond: %d\n", (char*)getDeviceNTP()->getUpdateIntervalInMilliSecond());
 				
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationId: %s\n", getDeviceInApplication()->getApplicationId());
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationTopic: %s\n", getDeviceInApplication()->getApplicationTopic());
 				
-				// _deviceDebug->printf("ESPDevice", "autoLoad", "DeviceSensors PublishIntervalInSeconds: %d\n", getDeviceSensors()->getPublishIntervalInSeconds());		
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceSensors PublishIntervalInSeconds: %d\n", (char*)getDeviceSensors()->getPublishIntervalInSeconds());		
 			}		
 		}
 	} else {
