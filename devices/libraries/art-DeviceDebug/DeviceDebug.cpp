@@ -31,9 +31,6 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	if(_remoteEnabled){
 		_debug->begin("remotedebug-sample");
 	}
-	else{
-		_debug->stop(); 
-	}	
 	
 	_debug->setSerialEnabled(_serialEnabled);
 	_debug->setResetCmdEnabled(_resetCmdEnabled);
@@ -56,28 +53,25 @@ bool DeviceDebug::isActive(uint8_t debugLevel)
 	return _debug->isActive(debugLevel);
 }
 
-int DeviceDebug::printf(const char* className, const char* caller, const char* message)
+int DeviceDebug::print(const char* className, const char* caller, const char* message)
 {
-	char* expression = createExpression(className, caller, message);	
-	return _debug->printf(expression);
+	return _debug->printf(createExpression(className, caller, message).c_str());
 }
 
 template<typename... Args> int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
-{
-	char* expression = createExpression(className, caller, format);
-	return _debug->printf(expression, args...);
+{	
+	return _debug->printf(createExpression(className, caller, format).c_str(), args...);
 }
 
-char* DeviceDebug::createExpression(const char* className, const char* caller, const char* expression)
+std::string DeviceDebug::createExpression(const char* className, const char* caller, const char* expression)
 {
-	int len = strlen(className) + strlen(caller) + strlen(expression) + 2;		
-	char message[len];	
-	strcpy(message, className);
-	strcat(message, " ");
-	strcat(message, caller);
-	strcat(message, " ");
-	strcat(message, expression);	
-	return message;
+	std::string str;
+	str.append(className);
+	str.append(" ");
+	str.append(caller);
+	str.append(" ");
+	str.append(expression);
+	return str.c_str();
 }
 
 void DeviceDebug::setRemoteEnabled(char* json)
@@ -98,7 +92,7 @@ void DeviceDebug::setRemoteEnabled(char* json)
 	}
 	else{
 		_debug->stop(); 
-	}
+	}	
 	
 	printf("DeviceDebug", "setRemoteEnabled", "RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
 }
