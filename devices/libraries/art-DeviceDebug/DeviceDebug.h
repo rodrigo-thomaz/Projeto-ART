@@ -17,9 +17,8 @@ public:
 	
 	void								begin();
 	void								loop();
-		
-	RemoteDebug*						getDebug();		
 	
+	bool 								isActive(uint8_t debugLevel);
 	template<typename... Args> int		printf(const char* className, const char* caller, const char* format, Args... args);
 
 	void								load(JsonObject& jsonObject);
@@ -37,6 +36,16 @@ public:
 		deviceDebug = new DeviceDebug(
 			espDevice);
     }
+	
+	// Debug levels
+
+	static const uint8_t PROFILER = 0; 	// Used for show time of execution of pieces of code(profiler)
+	static const uint8_t VERBOSE = 1; 	// Used for show verboses messages
+	static const uint8_t DEBUG = 2;   	// Used for show debug messages
+	static const uint8_t INFO = 3;		// Used for show info messages
+	static const uint8_t WARNING = 4;	// Used for show warning messages
+	static const uint8_t ERROR = 5;		// Used for show error messages
+	static const uint8_t ANY = 6;		// Used for show always messages, for any current debug level
 	
 private:	
 

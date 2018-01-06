@@ -49,6 +49,11 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	printf("DeviceDebug", "load", "showTime: %s\n", _showTime ? "true" : "false");
 }
 
+bool DeviceDebug::isActive(uint8_t debugLevel) 
+{
+	return _debug->isActive(debugLevel);
+}
+
 template<typename... Args> int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
 {
 	int lenfullFormat = strlen(className) + strlen(caller) + strlen(format) + 2;		
@@ -59,11 +64,6 @@ template<typename... Args> int DeviceDebug::printf(const char* className, const 
 	strcat(fullFormat, " ");
 	strcat(fullFormat, format);	
 	return _debug->printf(fullFormat, args...);
-}
-
-RemoteDebug* DeviceDebug::getDebug()
-{	
-	return _debug;
 }
 
 void DeviceDebug::setRemoteEnabled(char* json)

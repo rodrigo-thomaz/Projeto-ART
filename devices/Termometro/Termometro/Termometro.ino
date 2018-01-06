@@ -235,12 +235,10 @@ void unSubscribeInApplication()
 
 void mqtt_SubCallback(char* topic, byte* payload, unsigned int length) 
 {
-    RemoteDebug* debug = espDevice.getDeviceDebug()->getDebug();
-
-    debug->printf("[MQQT::mqtt_SubCallback] Topic: %s\n", topic);
+    espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic: %s\n", topic);
     
     String topicKey = mqqtManager.getTopicKey(topic);
-    debug->printf("[MQQT::mqtt_SubCallback] Topic Key: %s\n", topicKey.c_str());
+    espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey.c_str());
     
     displayMQTTManager.printReceived(true);
     
