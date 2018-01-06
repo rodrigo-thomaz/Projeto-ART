@@ -39,6 +39,14 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	_debug->showDebugLevel(_showDebugLevel);
 	_debug->showProfiler(_showProfiler);
 	_debug->showTime(_showTime);
+	
+	printf("DeviceDebug", "load", "RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
+	printf("DeviceDebug", "load", "serialEnabled: %s\n", _serialEnabled ? "true" : "false");
+	printf("DeviceDebug", "load", "resetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");
+	printf("DeviceDebug", "load", "showColors: %s\n", _showColors ? "true" : "false");
+	printf("DeviceDebug", "load", "showDebugLevel: %s\n", _showDebugLevel ? "true" : "false");
+	printf("DeviceDebug", "load", "showProfiler: %s\n", _showProfiler ? "true" : "false");
+	printf("DeviceDebug", "load", "showTime: %s\n", _showTime ? "true" : "false");
 }
 
 template<typename... Args> int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
@@ -58,11 +66,6 @@ RemoteDebug* DeviceDebug::getDebug()
 	return _debug;
 }
 
-bool DeviceDebug::getRemoteEnabled()
-{	
-	return _remoteEnabled;
-}
-
 void DeviceDebug::setRemoteEnabled(char* json)
 {	
 	StaticJsonBuffer<200> jsonBuffer;
@@ -77,11 +80,6 @@ void DeviceDebug::setRemoteEnabled(char* json)
 	_remoteEnabled = root["value"];
 	
 	printf("DeviceDebug", "setRemoteEnabled", "RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
-}
-
-bool DeviceDebug::getResetCmdEnabled()
-{	
-	return _resetCmdEnabled;
 }
 
 void DeviceDebug::setResetCmdEnabled(char* json)
@@ -101,11 +99,6 @@ void DeviceDebug::setResetCmdEnabled(char* json)
 	printf("DeviceDebug", "setRemoteEnabled", "ResetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");
 }
 
-bool DeviceDebug::getSerialEnabled()
-{	
-	return _serialEnabled;
-}
-
 void DeviceDebug::setSerialEnabled(char* json)
 {	
 	StaticJsonBuffer<200> jsonBuffer;
@@ -121,11 +114,6 @@ void DeviceDebug::setSerialEnabled(char* json)
 	_debug->setSerialEnabled(_serialEnabled);
 	
 	printf("DeviceDebug", "setRemoteEnabled", "SerialEnabled: %s\n", _serialEnabled ? "true" : "false");
-}
-
-bool DeviceDebug::getShowColors()
-{	
-	return _showColors;
 }
 
 void DeviceDebug::setShowColors(char* json)
@@ -145,11 +133,6 @@ void DeviceDebug::setShowColors(char* json)
 	printf("DeviceDebug", "setRemoteEnabled", "ShowColors: %s\n", _showColors ? "true" : "false");
 }
 
-bool DeviceDebug::getShowDebugLevel()
-{	
-	return _showDebugLevel;
-}
-
 void DeviceDebug::setShowDebugLevel(char* json)
 {	
 	StaticJsonBuffer<200> jsonBuffer;
@@ -167,11 +150,6 @@ void DeviceDebug::setShowDebugLevel(char* json)
 	printf("DeviceDebug", "setRemoteEnabled", "ShowDebugLevel: %s\n", _showDebugLevel ? "true" : "false");
 }
 
-bool DeviceDebug::getShowProfiler()
-{	
-	return _showProfiler;
-}
-
 void DeviceDebug::setShowProfiler(char* json)
 {	
 	StaticJsonBuffer<200> jsonBuffer;
@@ -187,11 +165,6 @@ void DeviceDebug::setShowProfiler(char* json)
 	_debug->showProfiler(_showProfiler);
 	
 	printf("DeviceDebug", "setRemoteEnabled", "ShowProfiler: %s\n", _showProfiler ? "true" : "false");
-}
-
-bool DeviceDebug::getShowTime()
-{	
-	return _showTime;
 }
 
 void DeviceDebug::setShowTime(char* json)

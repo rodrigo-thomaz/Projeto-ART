@@ -1,8 +1,6 @@
 #ifndef DeviceDebug_h
 #define DeviceDebug_h
 
-// #include <stdio.h>
-// #include <string.h>
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
@@ -26,25 +24,12 @@ public:
 
 	void								load(JsonObject& jsonObject);
 	
-	bool								getRemoteEnabled();
-	void								setRemoteEnabled(char* json);
-	
-	bool								getResetCmdEnabled();
-	void								setResetCmdEnabled(char* json);
-	
-	bool								getSerialEnabled();
-	void								setSerialEnabled(char* json);
-	
-	bool								getShowColors();
-	void								setShowColors(char* json);
-	
-	bool								getShowDebugLevel();
-	void								setShowDebugLevel(char* json);
-	
-	bool								getShowProfiler();
+	void								setRemoteEnabled(char* json);	
+	void								setResetCmdEnabled(char* json);	
+	void								setSerialEnabled(char* json);	
+	void								setShowColors(char* json);	
+	void								setShowDebugLevel(char* json);	
 	void								setShowProfiler(char* json);
-	
-	bool								getShowTime();
 	void								setShowTime(char* json);
 		
 	static void createDeviceDebug(DeviceDebug* (&deviceDebug), ESPDevice* espDevice)
