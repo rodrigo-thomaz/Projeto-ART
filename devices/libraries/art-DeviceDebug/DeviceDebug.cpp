@@ -13,11 +13,6 @@ DeviceDebug::~DeviceDebug()
 	delete (_debug);
 }
 
-void DeviceDebug::begin()
-{		
-	_debug->begin("remotedebug-sample"); // Initiaze the telnet server
-}
-
 void DeviceDebug::loop()
 {	
     _debug->handle();
@@ -32,6 +27,13 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	_showDebugLevel = jsonObject["showDebugLevel"];
 	_showProfiler = jsonObject["showProfiler"];
 	_showTime = jsonObject["showTime"];
+	
+	if(_remoteEnabled){
+		_debug->begin("remotedebug-sample");
+	}
+	else{
+		_debug->stop(); 
+	}	
 	
 	_debug->setSerialEnabled(_serialEnabled);
 	_debug->setResetCmdEnabled(_resetCmdEnabled);
@@ -90,6 +92,13 @@ void DeviceDebug::setRemoteEnabled(char* json)
 	}	
 	
 	_remoteEnabled = root["value"];
+	
+	if(_remoteEnabled){
+		_debug->begin("remotedebug-sample");
+	}
+	else{
+		_debug->stop(); 
+	}
 	
 	printf("DeviceDebug", "setRemoteEnabled", "RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
 }

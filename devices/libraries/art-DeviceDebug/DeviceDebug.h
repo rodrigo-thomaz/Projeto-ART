@@ -15,7 +15,6 @@ public:
 	DeviceDebug(ESPDevice* espDevice);
 	~DeviceDebug();
 	
-	void								begin();
 	void								loop();
 	
 	bool 								isActive(uint8_t debugLevel = DEBUG);
