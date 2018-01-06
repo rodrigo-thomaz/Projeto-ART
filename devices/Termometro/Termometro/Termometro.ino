@@ -19,7 +19,7 @@
 #include <DNSServer.h>
 #include <ESP8266mDNS.h>
 
-#include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
+//#include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
 
 #define HOST_NAME "remotedebug-sample"
 

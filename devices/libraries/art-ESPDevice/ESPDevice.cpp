@@ -184,7 +184,7 @@ void ESPDevice::autoLoad()
 			
 			load(payload);			
 			
-			if (_deviceDebug->isActive(_deviceDebug->DEBUG)) { 
+			if (_deviceDebug->isActive(DeviceDebug::DEBUG)) { 
 			
 				_deviceDebug->print("ESPDevice", "autoLoad", "Initialized with success !\n"); 
 				
