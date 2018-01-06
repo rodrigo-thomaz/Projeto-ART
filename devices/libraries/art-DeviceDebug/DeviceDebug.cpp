@@ -54,6 +54,18 @@ bool DeviceDebug::isActive(uint8_t debugLevel)
 	return _debug->isActive(debugLevel);
 }
 
+int DeviceDebug::printf(const char* className, const char* caller, const char* message)
+{
+	int lenfullFormat = strlen(className) + strlen(caller) + strlen(message) + 2;		
+	char fullFormat[lenfullFormat];	
+	strcpy(fullFormat, className);
+	strcat(fullFormat, " ");
+	strcat(fullFormat, caller);
+	strcat(fullFormat, " ");
+	strcat(fullFormat, message);	
+	return _debug->printf(fullFormat);
+}
+
 template<typename... Args> int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
 {
 	int lenfullFormat = strlen(className) + strlen(caller) + strlen(format) + 2;		

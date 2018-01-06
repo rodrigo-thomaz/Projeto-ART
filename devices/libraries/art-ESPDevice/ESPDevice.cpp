@@ -188,7 +188,7 @@ void ESPDevice::autoLoad()
 			
 			if (_deviceDebug->isActive(_deviceDebug->DEBUG)) { 
 			
-				//_deviceDebug->printf("ESPDevice", "autoLoad", "Initialized with success !\n"); 
+				_deviceDebug->printf("ESPDevice", "autoLoad", "Initialized with success !\n"); 
 				
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceId: %s\n", _deviceId);
 				//_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceDatasheetId: %d\n", _deviceDatasheetId);
