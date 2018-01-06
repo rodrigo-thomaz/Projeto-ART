@@ -17,9 +17,6 @@
 
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
-#include <ESP8266mDNS.h>
-
-//#include "RemoteDebug.h"        //https://github.com/JoaoLopesF/RemoteDebug
 
 #define HOST_NAME "remotedebug-sample"
 
@@ -132,14 +129,7 @@ void setup() {
   String hostNameWifi = HOST_NAME;
   hostNameWifi.concat(".local");
 
-  WiFi.hostname(hostNameWifi);
-
-  if (MDNS.begin(HOST_NAME)) {
-      Serial.print("* MDNS responder started. Hostname -> ");
-      Serial.println(HOST_NAME);
-  }
-
-  MDNS.addService("telnet", "tcp", 23);
+  WiFi.hostname(hostNameWifi);  
 }
 
 void initConfiguration()

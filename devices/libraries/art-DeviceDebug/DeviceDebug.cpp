@@ -13,6 +13,16 @@ DeviceDebug::~DeviceDebug()
 	delete (_debug);
 }
 
+void DeviceDebug::begin()
+{	
+	if (MDNS.begin("remotedebug-sample")) {
+		Serial.print("* MDNS responder started. Hostname -> ");
+		Serial.println("remotedebug-sample");
+	}
+
+	MDNS.addService("telnet", "tcp", 23);
+}
+
 void DeviceDebug::loop()
 {	
     _debug->handle();

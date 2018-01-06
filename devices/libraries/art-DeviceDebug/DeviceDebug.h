@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
+#include "ESP8266mDNS.h"
 #include "RemoteDebug.h" 
 
 class ESPDevice;
@@ -14,6 +15,8 @@ public:
 
 	DeviceDebug(ESPDevice* espDevice);
 	~DeviceDebug();
+	
+	void								begin();
 	
 	void								loop();
 	
