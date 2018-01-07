@@ -35,7 +35,6 @@ ESPDevice::~ESPDevice()
 
 void ESPDevice::begin()
 {		
-	_deviceDebug->begin();
 	autoLoad();
 }
 

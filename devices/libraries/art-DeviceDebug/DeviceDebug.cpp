@@ -14,11 +14,6 @@ DeviceDebug::~DeviceDebug()
 	delete (_debug);
 }
 
-void DeviceDebug::begin()
-{		
-	
-}
-
 void DeviceDebug::loop()
 {	
     _debug->handle();
