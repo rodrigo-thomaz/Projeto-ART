@@ -26,6 +26,7 @@ public:
 
 	void								load(JsonObject& jsonObject);
 	
+	void								setTelnetTCPPort(char* json);	
 	void								setRemoteEnabled(char* json);	
 	void								setResetCmdEnabled(char* json);	
 	void								setSerialEnabled(char* json);	
@@ -54,6 +55,7 @@ private:
 	
 	RemoteDebug* 						_debug;
 	
+	int									_telnetTCPPort;
 	bool								_remoteEnabled;
 	bool								_resetCmdEnabled;
 	bool								_serialEnabled;

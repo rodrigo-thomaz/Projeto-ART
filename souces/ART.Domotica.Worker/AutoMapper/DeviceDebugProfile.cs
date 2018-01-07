@@ -42,6 +42,7 @@
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
 
             CreateMap<DeviceDebug, DeviceDebugDetailResponseContract>()
+                .ForMember(vm => vm.TelnetTCPPort, m => m.MapFrom(x => x.TelnetTCPPort))
                 .ForMember(vm => vm.RemoteEnabled, m => m.MapFrom(x => x.RemoteEnabled))
                 .ForMember(vm => vm.SerialEnabled, m => m.MapFrom(x => x.SerialEnabled))
                 .ForMember(vm => vm.ResetCmdEnabled, m => m.MapFrom(x => x.ResetCmdEnabled))

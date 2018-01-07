@@ -36,6 +36,7 @@ void DeviceDebug::load(JsonObject& jsonObject)
 {	
 	JsonObject& deviceDebugJO = jsonObject["deviceDebug"];
 	
+	_telnetTCPPort = deviceDebugJO["telnetTCPPort"];
 	_remoteEnabled = deviceDebugJO["remoteEnabled"];
 	_serialEnabled = deviceDebugJO["serialEnabled"];
 	_resetCmdEnabled = deviceDebugJO["resetCmdEnabled"];	
@@ -57,6 +58,7 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	_debug->showProfiler(_showProfiler);
 	_debug->showTime(_showTime);
 	
+	printf("DeviceDebug", "load", "TelnetTCPPort: %d\n", (char*)_telnetTCPPort);
 	printf("DeviceDebug", "load", "RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
 	printf("DeviceDebug", "load", "serialEnabled: %s\n", _serialEnabled ? "true" : "false");
 	printf("DeviceDebug", "load", "resetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");
@@ -90,6 +92,22 @@ std::string DeviceDebug::createExpression(const char* className, const char* cal
 	str.append(" ");
 	str.append(expression);
 	return str.c_str();
+}
+
+void DeviceDebug::setTelnetTCPPort(char* json)
+{	
+	StaticJsonBuffer<200> jsonBuffer;
+	
+	JsonObject& root = jsonBuffer.parseObject(json);
+	
+	if (!root.success()) {
+		printf("DeviceDebug", "setTelnetTCPPort", "Parse failed: %s\n", json);
+		return;
+	}	
+	
+	_telnetTCPPort = root["value"];
+	
+	printf("DeviceDebug", "setTelnetTCPPort", "TelnetTCPPort: %d\n", (char*)_telnetTCPPort);
 }
 
 void DeviceDebug::setRemoteEnabled(char* json)
