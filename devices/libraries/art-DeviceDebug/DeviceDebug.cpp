@@ -21,7 +21,9 @@ void DeviceDebug::loop()
 void DeviceDebug::load(JsonObject& jsonObject)
 {	
 	JsonObject& deviceDebugJO = jsonObject["deviceDebug"];
+	JsonObject& deviceWiFiJO = jsonObject["deviceWiFi"];
 	
+	setHostName(strdup(deviceWiFiJO["hostName"]));
 	setRemoteEnabled(deviceDebugJO["remoteEnabled"].as<bool>());
 	setSerialEnabled(deviceDebugJO["serialEnabled"].as<bool>());
 	setResetCmdEnabled(deviceDebugJO["resetCmdEnabled"].as<bool>());	
@@ -29,16 +31,6 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	setShowDebugLevel(deviceDebugJO["showDebugLevel"].as<bool>());
 	setShowProfiler(deviceDebugJO["showProfiler"].as<bool>());
 	setShowTime(deviceDebugJO["showTime"].as<bool>());
-	
-	if(_remoteEnabled){
-		
-		initTelnetServer();
-		
-		JsonObject& deviceWiFiJO = jsonObject["deviceWiFi"];
-		char* hostName = strdup(deviceWiFiJO["hostName"]);
-		
-		_debug->begin(hostName);		
-	}
 }
 
 bool DeviceDebug::isActive(uint8_t debugLevel) 
@@ -69,28 +61,13 @@ std::string DeviceDebug::createExpression(const char* className, const char* cal
 
 void DeviceDebug::setRemoteEnabled(char* json)
 {	
-	StaticJsonBuffer<200> jsonBuffer;
-	
-	JsonObject& root = jsonBuffer.parseObject(json);
-	
+	StaticJsonBuffer<200> jsonBuffer;	
+	JsonObject& root = jsonBuffer.parseObject(json);	
 	if (!root.success()) {
 		printf("DeviceDebug", "setRemoteEnabled", "Parse failed: %s\n", json);
 		return;
-	}	
-	
+	}		
 	setRemoteEnabled(root["value"].as<bool>());
-	
-	if(_remoteEnabled){		
-			
-		initTelnetServer();
-			
-		char* hostName = _espDevice->getDeviceWiFi()->getHostName();		
-		
-		_debug->begin(hostName);
-	}
-	else{
-		_debug->stop(); 
-	}	
 }
 
 void DeviceDebug::setResetCmdEnabled(char* json)
@@ -167,50 +144,64 @@ void DeviceDebug::initTelnetServer()
 	}
 }
 
+void DeviceDebug::setHostName(char* value)
+{	
+	_hostName = new char(sizeof(strlen(value)));
+	_hostName = value;	
+	printf("DeviceDebug", "setHostName", "hostName: %s\n", _hostName);	
+}
+
 void DeviceDebug::setRemoteEnabled(bool value)
 {	
 	_remoteEnabled = value;	
-	printf("DeviceDebug", "load", "remoteEnabled: %s\n", _remoteEnabled ? "true" : "false");	
+	if(_remoteEnabled){					
+		initTelnetServer();
+		_debug->begin(_hostName);
+	}
+	else{
+		_debug->stop(); 
+	}
+	printf("DeviceDebug", "setRemoteEnabled", "remoteEnabled: %s\n", _remoteEnabled ? "true" : "false");	
 }
 
 void DeviceDebug::setResetCmdEnabled(bool value)
 {	
 	_resetCmdEnabled = value;
 	_debug->setResetCmdEnabled(_resetCmdEnabled);	
-	printf("DeviceDebug", "load", "resetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");	
+	printf("DeviceDebug", "setResetCmdEnabled", "resetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");	
 }
 
 void DeviceDebug::setSerialEnabled(bool value)
 {	
 	_serialEnabled = value;
 	_debug->setSerialEnabled(_serialEnabled);
-	printf("DeviceDebug", "load", "serialEnabled: %s\n", _serialEnabled ? "true" : "false");
+	printf("DeviceDebug", "setSerialEnabled", "serialEnabled: %s\n", _serialEnabled ? "true" : "false");
 }
 
 void DeviceDebug::setShowColors(bool value)
 {	
 	_showColors = value;
 	_debug->showColors(_showColors);
-	printf("DeviceDebug", "load", "showColors: %s\n", _showColors ? "true" : "false");	
+	printf("DeviceDebug", "setShowColors", "showColors: %s\n", _showColors ? "true" : "false");	
 }
 
 void DeviceDebug::setShowDebugLevel(bool value)
 {	
 	_showDebugLevel = value;
 	_debug->showDebugLevel(_showDebugLevel);
-	printf("DeviceDebug", "load", "showDebugLevel: %s\n", _showDebugLevel ? "true" : "false");	
+	printf("DeviceDebug", "setShowDebugLevel", "showDebugLevel: %s\n", _showDebugLevel ? "true" : "false");	
 }
 
 void DeviceDebug::setShowProfiler(bool value)
 {	
 	_showProfiler = value;
 	_debug->showProfiler(_showProfiler);
-	printf("DeviceDebug", "load", "showProfiler: %s\n", _showProfiler ? "true" : "false");	
+	printf("DeviceDebug", "setShowProfiler", "showProfiler: %s\n", _showProfiler ? "true" : "false");	
 }
 
 void DeviceDebug::setShowTime(bool value)
 {	
 	_showTime = value;
 	_debug->showTime(_showTime);
-	printf("DeviceDebug", "load", "showTime: %s\n", _showTime ? "true" : "false");
+	printf("DeviceDebug", "setShowTime", "showTime: %s\n", _showTime ? "true" : "false");
 }

@@ -51,6 +51,7 @@ private:
 	
 	RemoteDebug* 						_debug;
 	
+	void								setHostName(char* value);	
 	void								setRemoteEnabled(bool value);	
 	void								setResetCmdEnabled(bool value);	
 	void								setSerialEnabled(bool value);	
@@ -59,6 +60,7 @@ private:
 	void								setShowProfiler(bool value);
 	void								setShowTime(bool value);
 	
+	char*								_hostName;
 	bool								_remoteEnabled;
 	bool								_resetCmdEnabled;
 	bool								_serialEnabled;
