@@ -34,16 +34,20 @@ void DeviceDebug::loop()
 
 void DeviceDebug::load(JsonObject& jsonObject)
 {	
-	_remoteEnabled = jsonObject["remoteEnabled"];
-	_serialEnabled = jsonObject["serialEnabled"];
-	_resetCmdEnabled = jsonObject["resetCmdEnabled"];	
-	_showColors = jsonObject["showColors"];
-	_showDebugLevel = jsonObject["showDebugLevel"];
-	_showProfiler = jsonObject["showProfiler"];
-	_showTime = jsonObject["showTime"];
+	JsonObject& deviceDebugJO = jsonObject["deviceDebug"];
+	
+	_remoteEnabled = deviceDebugJO["remoteEnabled"];
+	_serialEnabled = deviceDebugJO["serialEnabled"];
+	_resetCmdEnabled = deviceDebugJO["resetCmdEnabled"];	
+	_showColors = deviceDebugJO["showColors"];
+	_showDebugLevel = deviceDebugJO["showDebugLevel"];
+	_showProfiler = deviceDebugJO["showProfiler"];
+	_showTime = deviceDebugJO["showTime"];
 	
 	if(_remoteEnabled){
-		_debug->begin("remotedebug-sample");
+		JsonObject& deviceWiFiJO = jsonObject["deviceWiFi"];
+		char* hostName = strdup(deviceWiFiJO["hostName"]);
+		_debug->begin(hostName);
 	}
 	
 	_debug->setSerialEnabled(_serialEnabled);

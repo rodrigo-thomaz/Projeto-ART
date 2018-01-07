@@ -61,7 +61,7 @@ private:
 	bool								_showDebugLevel;
 	bool								_showProfiler;
 	bool								_showTime;
-	
+
 	std::string							createExpression(const char* className, const char* caller, const char* expression);
 };
 

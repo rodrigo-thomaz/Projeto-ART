@@ -226,7 +226,7 @@ void ESPDevice::load(String json)
 	
 	_label 							= strdup(jsonObject["label"]);
 	
-	_deviceDebug->load(jsonObject["deviceDebug"]);		
+	_deviceDebug->load(jsonObject);		
 	_deviceWiFi->load(jsonObject["deviceWiFi"]);		
 	
 	DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);			
