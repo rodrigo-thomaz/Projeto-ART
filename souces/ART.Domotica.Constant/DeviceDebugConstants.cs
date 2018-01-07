@@ -25,6 +25,9 @@
         public static readonly string SetShowTimeIoTQueueName = "DeviceDebug.SetShowTimeIoT";
         public static readonly string SetShowTimeQueueName = "DeviceDebug.SetShowTime";
         public static readonly string SetShowTimeViewCompletedQueueName = "DeviceDebug.SetShowTimeViewCompleted";
+        public static readonly string SetTelnetTCPPortIoTQueueName = "DeviceDebug.SetTelnetTCPPortIoT";
+        public static readonly string SetTelnetTCPPortQueueName = "DeviceDebug.SetTelnetTCPPort";
+        public static readonly string SetTelnetTCPPortViewCompletedQueueName = "DeviceDebug.SetTelnetTCPPortViewCompleted";
 
         #endregion Fields
     }

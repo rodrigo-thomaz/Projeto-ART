@@ -537,6 +537,7 @@
                     },
                     DeviceDebug = new DeviceDebug
                     {
+                        TelnetTCPPort = 23,
                         RemoteEnabled = true,
                         SerialEnabled = true,
                         ResetCmdEnabled = true,
@@ -593,6 +594,7 @@
                 {
                     espDevice1.DeviceDebug = new DeviceDebug
                     {
+                        TelnetTCPPort = 23,
                         RemoteEnabled = true,
                         SerialEnabled = true,
                         ResetCmdEnabled = true,
@@ -799,6 +801,7 @@
                     },
                     DeviceDebug = new DeviceDebug
                     {
+                        TelnetTCPPort = 23,
                         RemoteEnabled = true,
                         SerialEnabled = true,
                         ResetCmdEnabled = true,
@@ -865,6 +868,7 @@
                 {
                     espDevice2.DeviceDebug = new DeviceDebug
                     {
+                        TelnetTCPPort = 23,
                         RemoteEnabled = true,
                         SerialEnabled = true,
                         ResetCmdEnabled = true,

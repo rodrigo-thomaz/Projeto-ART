@@ -6,6 +6,7 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
 
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
+        var setTelnetTCPPortCompletedSubscription = null;
         var setRemoteEnabledCompletedSubscription = null;
         var setResetCmdEnabledCompletedSubscription = null;
         var setSerialEnabledCompletedSubscription = null;
@@ -13,6 +14,17 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
         var setShowDebugLevelCompletedSubscription = null;
         var setShowProfilerCompletedSubscription = null;
         var setShowTimeCompletedSubscription = null;
+
+        var setTelnetTCPPort = function (deviceDebugId, deviceDatasheetId, value) {
+            var data = {
+                deviceDebugId: deviceDebugId,
+                deviceDatasheetId: deviceDatasheetId,
+                value: value,
+            }
+            return $http.post(serviceBase + deviceDebugConstant.setTelnetTCPPortApiUri, data).then(function (results) {
+                return results;
+            });
+        };
 
         var setRemoteEnabled = function (deviceDebugId, deviceDatasheetId, value) {
             var data = {
@@ -92,6 +104,7 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
         };
 
         var onConnected = function () {
+            setTelnetTCPPortCompletedSubscription = stompService.subscribeAllViews(deviceDebugConstant.setTelnetTCPPortCompletedTopic, onSetTelnetTCPPortCompleted);
             setRemoteEnabledCompletedSubscription = stompService.subscribeAllViews(deviceDebugConstant.setRemoteEnabledCompletedTopic, onSetRemoteEnabledCompleted);
             setResetCmdEnabledCompletedSubscription = stompService.subscribeAllViews(deviceDebugConstant.setResetCmdEnabledCompletedTopic, onSetResetCmdEnabledCompleted);
             setSerialEnabledCompletedSubscription = stompService.subscribeAllViews(deviceDebugConstant.setSerialEnabledCompletedTopic, onSetSerialEnabledCompleted);
@@ -100,6 +113,14 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
             setShowProfilerCompletedSubscription = stompService.subscribeAllViews(deviceDebugConstant.setShowProfilerCompletedTopic, onSetShowProfilerCompleted);
             setShowTimeCompletedSubscription = stompService.subscribeAllViews(deviceDebugConstant.setShowTimeCompletedTopic, onSetShowTimeCompleted);
         }
+
+        var onSetTelnetTCPPortCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var deviceDebug = deviceDebugFinder.getByKey(result.deviceDebugId, result.deviceDatasheetId);
+            deviceDebug.telnetTCPPort = result.value;
+            deviceContext.$digest();
+            $rootScope.$emit(deviceDebugConstant.setTelnetTCPPortCompletedEventName + result.deviceDebugId, result);
+        };
 
         var onSetRemoteEnabledCompleted = function (payload) {
             var result = JSON.parse(payload.body);
@@ -159,6 +180,7 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
+            setTelnetTCPPortCompletedSubscription.unsubscribe();
             setRemoteEnabledCompletedSubscription.unsubscribe();
             setResetCmdEnabledCompletedSubscription.unsubscribe();
             setSerialEnabledCompletedSubscription.unsubscribe();
@@ -175,6 +197,7 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
 
         // serviceFactory    
 
+        serviceFactory.setTelnetTCPPort = setTelnetTCPPort;
         serviceFactory.setRemoteEnabled = setRemoteEnabled;
         serviceFactory.setResetCmdEnabled = setResetCmdEnabled;
         serviceFactory.setSerialEnabled = setSerialEnabled;

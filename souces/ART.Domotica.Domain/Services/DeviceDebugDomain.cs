@@ -32,6 +32,22 @@
 
         #region Methods
 
+        public async Task<DeviceDebug> SetTelnetTCPPort(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, int value)
+        {
+            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceDebug not found");
+            }
+
+            entity.TelnetTCPPort = value;
+
+            await _deviceDebugRepository.Update(entity);
+
+            return entity;
+        }
+
         public async Task<DeviceDebug> SetRemoteEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);

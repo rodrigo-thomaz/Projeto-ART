@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceDebugSetTelnetTCPPortRequestIoTContract.cs" />
     <Compile Include="DeviceDebugSetValueRequestIoTContract.cs" />
     <Compile Include="SensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract.cs" />

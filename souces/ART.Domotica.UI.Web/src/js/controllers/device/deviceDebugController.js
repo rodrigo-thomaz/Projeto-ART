@@ -4,6 +4,7 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
 
         $scope.deviceDebug = null;
 
+        $scope.telnetTCPPortView = null;
         $scope.remoteEnabledView = null;
         $scope.resetCmdEnabledView = null;
         $scope.serialEnabledView = null;
@@ -16,6 +17,7 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
 
             $scope.deviceDebug = deviceDebug;
 
+            $scope.telnetTCPPortView = deviceDebug.telnetTCPPort;
             $scope.remoteEnabledView = deviceDebug.remoteEnabled;
             $scope.resetCmdEnabledView = deviceDebug.resetCmdEnabled;
             $scope.serialEnabledView = deviceDebug.serialEnabled;
@@ -24,6 +26,7 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             $scope.showProfilerView = deviceDebug.showProfiler;
             $scope.showTimeView = deviceDebug.showTime;
 
+            initializeTelnetTCPPortViewWatch();
             initializeRemoteEnabledViewWatch();
             initializeResetCmdEnabledViewWatch();
             initializeSerialEnabledViewWatch();
@@ -32,6 +35,7 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             initializeShowProfilerViewWatch();
             initializeShowTimeViewWatch();
 
+            clearOnSetTelnetTCPPortCompleted = $rootScope.$on(deviceDebugConstant.setTelnetTCPPortCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetTelnetTCPPortCompleted);
             clearOnSetRemoteEnabledCompleted = $rootScope.$on(deviceDebugConstant.setRemoteEnabledCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetRemoteEnabledCompleted);
             clearOnSetResetCmdEnabledCompleted = $rootScope.$on(deviceDebugConstant.setResetCmdEnabledCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetResetCmdEnabledCompleted);
             clearOnSetSerialEnabledCompleted = $rootScope.$on(deviceDebugConstant.setSerialEnabledCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetSerialEnabledCompleted);
@@ -41,6 +45,7 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             clearOnSetShowTimeCompleted = $rootScope.$on(deviceDebugConstant.setShowTimeCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetShowTimeCompleted);
         }
 
+        var telnetTCPPortViewWatch = null;
         var remoteEnabledViewWatch = null;
         var resetCmdEnabledViewWatch = null;
         var serialEnabledViewWatch = null;
@@ -48,6 +53,16 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
         var showDebugLevelViewWatch = null;
         var showProfilerViewWatch = null;
         var showTimeViewWatch = null;
+
+        var initializeTelnetTCPPortViewWatch = function () {
+            telnetTCPPortViewWatch = $scope.$watch('telnetTCPPortView', function (newValue, oldValue) {
+                if (newValue === oldValue) return;
+                deviceDebugService.setTelnetTCPPort(
+                    $scope.deviceDebug.deviceDebugId, 
+                    $scope.deviceDebug.deviceDatasheetId, 
+                    newValue);
+            });
+        };
 
         var initializeRemoteEnabledViewWatch = function () {
             remoteEnabledViewWatch = $scope.$watch('remoteEnabledView', function (newValue, oldValue) {
@@ -119,6 +134,7 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             });
         };
 
+        var clearOnSetTelnetTCPPortCompleted = null;
         var clearOnSetRemoteEnabledCompleted = null;
         var clearOnSetResetCmdEnabledCompleted = null;
         var clearOnSetSerialEnabledCompleted = null;
@@ -128,6 +144,7 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
         var clearOnSetShowTimeCompleted = null;
 
         $scope.$on('$destroy', function () {
+            clearOnSetTelnetTCPPortCompleted();
             clearOnSetRemoteEnabledCompleted();
             clearOnSetResetCmdEnabledCompleted();
             clearOnSetSerialEnabledCompleted();
@@ -136,6 +153,7 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             clearOnSetShowProfilerCompleted();
             clearOnSetShowTimeCompleted();
 
+            telnetTCPPortViewWatch();
             remoteEnabledViewWatch();
             resetCmdEnabledViewWatch();
             serialEnabledViewWatch();
@@ -145,46 +163,52 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             showTimeViewWatch();
         });
 
+        var onSetTelnetTCPPortCompleted = function (event, data) {
+            $scope.telnetTCPPortView = $scope.deviceDebug.telnetTCPPort;
+            $scope.$apply();
+            toaster.pop('success', 'Sucesso', 'Debug TelnetTCPPort alterado');
+        };
+
         var onSetRemoteEnabledCompleted = function (event, data) {
             $scope.remoteEnabledView = $scope.deviceDebug.remoteEnabled;
             $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'Debug remoteEnabled alterado');
+            toaster.pop('success', 'Sucesso', 'Debug RemoteEnabled alterado');
         };
 
         var onSetResetCmdEnabledCompleted = function (event, data) {
             $scope.resetCmdEnabledView = $scope.deviceDebug.resetCmdEnabled;
             $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'Debug resetCmdEnabled alterado');
+            toaster.pop('success', 'Sucesso', 'Debug ResetCmdEnabled alterado');
         };
 
         var onSetSerialEnabledCompleted = function (event, data) {
             $scope.serialEnabledView = $scope.deviceDebug.serialEnabled;
             $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'Debug serialEnabled alterado');
+            toaster.pop('success', 'Sucesso', 'Debug SerialEnabled alterado');
         };
 
         var onSetShowColorsCompleted = function (event, data) {
             $scope.showColorsView = $scope.deviceDebug.showColors;
             $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'Debug showColors alterado');
+            toaster.pop('success', 'Sucesso', 'Debug ShowColors alterado');
         };
 
         var onSetShowDebugLevelCompleted = function (event, data) {
             $scope.showDebugLevelView = $scope.deviceDebug.showDebugLevel;
             $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'Debug showDebugLevel alterado');
+            toaster.pop('success', 'Sucesso', 'Debug ShowDebugLevel alterado');
         };
         
         var onSetShowProfilerCompleted = function (event, data) {
             $scope.showProfilerView = $scope.deviceDebug.showProfiler;
             $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'Debug showProfiler alterado');
+            toaster.pop('success', 'Sucesso', 'Debug ShowProfiler alterado');
         };
 
         var onSetShowTimeCompleted = function (event, data) {
             $scope.showTimeView = $scope.deviceDebug.showTime;
             $scope.$apply();
-            toaster.pop('success', 'Sucesso', 'Debug showTime alterado');
+            toaster.pop('success', 'Sucesso', 'Debug ShowTime alterado');
         };
 
     }]);

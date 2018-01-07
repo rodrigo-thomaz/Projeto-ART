@@ -45,6 +45,10 @@ app.constant('deviceWiFiConstant', {
 
 app.constant('deviceDebugConstant', {
 
+    setTelnetTCPPortApiUri: 'api/deviceDebug/setTelnetTCPPort',
+    setTelnetTCPPortCompletedTopic: 'DeviceDebug.SetTelnetTCPPortViewCompleted',
+    setTelnetTCPPortCompletedEventName: 'deviceDebugService.onSetTelnetTCPPortCompleted_Id_',
+
     setRemoteEnabledApiUri: 'api/deviceDebug/setRemoteEnabled',
     setRemoteEnabledCompletedTopic: 'DeviceDebug.SetRemoteEnabledViewCompleted',
     setRemoteEnabledCompletedEventName: 'deviceDebugService.onSetRemoteEnabledCompleted_Id_',
