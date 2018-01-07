@@ -37,6 +37,7 @@
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceInApplication, m => m.MapFrom(x => x.DevicesInApplication.FirstOrDefault()))
                 .ForMember(vm => vm.DeviceDebug, m => m.MapFrom(x => x.DeviceDebug))
+                .ForMember(vm => vm.DeviceWiFi, m => m.MapFrom(x => x.DeviceWiFi))
                 .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))

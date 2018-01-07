@@ -21,6 +21,9 @@
                 .ForMember(vm => vm.DeviceWiFiId, m => m.MapFrom(x => x.DeviceWiFiId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.HostName, m => m.MapFrom(x => x.HostName));
+
+            CreateMap<DeviceWiFi, DeviceWiFiDetailResponseContract>()
+                .ForMember(vm => vm.HostName, m => m.MapFrom(x => x.HostName));
         }
 
         #endregion Constructors

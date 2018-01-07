@@ -3,6 +3,7 @@
 
 #include "DeviceInApplication.h"
 #include "DeviceDebug.h"
+#include "DeviceWiFi.h"
 #include "DeviceMQ.h"
 #include "DeviceNTP.h"
 #include "DeviceSensors.h"
@@ -11,7 +12,6 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
-#include <ESP8266WiFi.h>
 #include "ESP8266HTTPClient.h"
 
 class ESPDevice
@@ -32,9 +32,6 @@ class ESPDevice
 		int							getChipId();
 		int							getFlashChipId();
 		long						getChipSize();
-		
-		char *						getStationMacAddress();
-		char *						getSoftAPMacAddress();		
 
 		char *						getLabel();
 		void						setLabel(char * value);
@@ -45,6 +42,7 @@ class ESPDevice
 		
 		DeviceInApplication*		getDeviceInApplication();
 		DeviceDebug*				getDeviceDebug();
+		DeviceWiFi*					getDeviceWiFi();
 		DeviceMQ*					getDeviceMQ();
 		DeviceNTP*					getDeviceNTP();
 		DeviceSensors*				getDeviceSensors();
@@ -58,9 +56,6 @@ class ESPDevice
 		int							_flashChipId;
 		long						_chipSize;
 		
-		char *						_stationMacAddress;
-		char *						_softAPMacAddress;		
-		
 		char *						_label;
 		
 		char *						_webApiHost;
@@ -69,6 +64,7 @@ class ESPDevice
 	
 		DeviceInApplication*		_deviceInApplication;
 		DeviceDebug*				_deviceDebug;
+		DeviceWiFi*					_deviceWiFi;
 		DeviceMQ*					_deviceMQ;
 		DeviceNTP*					_deviceNTP;
 		DeviceSensors*				_deviceSensors;		

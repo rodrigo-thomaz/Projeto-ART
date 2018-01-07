@@ -15,6 +15,10 @@ DeviceDebug::~DeviceDebug()
 
 void DeviceDebug::begin()
 {	
+	//char* hostName = _espDevice->getDeviceWiFi().getHostName();
+	//Serial.println("HostBName::: ");
+	//Serial.println(hostName);
+	
 	if (MDNS.begin("remotedebug-sample")) {
 		Serial.print("* MDNS responder started. Hostname -> ");
 		Serial.println("remotedebug-sample");

@@ -7,9 +7,6 @@ ESPDevice::ESPDevice(WiFiManager& wifiManager, char* webApiHost, uint16_t webApi
 	_chipId							= ESP.getChipId();	
 	_flashChipId					= ESP.getFlashChipId();	
 	_chipSize						= ESP.getFlashChipSize();	
-		
-	_stationMacAddress 				= strdup(WiFi.macAddress().c_str());	
-	_softAPMacAddress				= strdup(WiFi.softAPmacAddress().c_str());		
 
 	_webApiHost 					= new char(sizeof(strlen(webApiHost)));
 	_webApiHost 					= webApiHost;
@@ -20,16 +17,17 @@ ESPDevice::ESPDevice(WiFiManager& wifiManager, char* webApiHost, uint16_t webApi
 	_webApiUri 						= webApiUri;	
 	
 	DeviceDebug::createDeviceDebug(_deviceDebug, this);		
+	DeviceWiFi::createDeviceWiFi(_deviceWiFi, this);		
 }
 
 ESPDevice::~ESPDevice()
 {
-	delete (_deviceId);
-	delete (_stationMacAddress);
+	delete (_deviceId);	
 	delete (_label);
 	
 	delete (_deviceInApplication);
 	delete (_deviceDebug);
+	delete (_deviceWiFi);
 	delete (_deviceMQ);
 	delete (_deviceNTP);
 	delete (_deviceSensors);
@@ -76,16 +74,6 @@ long ESPDevice::getChipSize()
 	return _chipSize;
 }
 
-char* ESPDevice::getStationMacAddress()
-{	
-	return _stationMacAddress;
-}
-
-char* ESPDevice::getSoftAPMacAddress()
-{	
-	return _softAPMacAddress;
-}
-
 char* ESPDevice::getLabel()
 {	
 	return _label;
@@ -120,6 +108,11 @@ DeviceInApplication* ESPDevice::getDeviceInApplication()
 DeviceDebug* ESPDevice::getDeviceDebug()
 {	
 	return _deviceDebug;
+}
+
+DeviceWiFi* ESPDevice::getDeviceWiFi()
+{	
+	return _deviceWiFi;
 }
 
 DeviceMQ* ESPDevice::getDeviceMQ()
@@ -158,8 +151,8 @@ void ESPDevice::autoLoad()
 	
 	jsonObjectRequest["chipId"] = _chipId;
 	jsonObjectRequest["flashChipId"] = _flashChipId;
-	jsonObjectRequest["stationMacAddress"] = _stationMacAddress;
-	jsonObjectRequest["softAPMacAddress"] = _softAPMacAddress;
+	jsonObjectRequest["stationMacAddress"] = _deviceWiFi->getStationMacAddress();
+	jsonObjectRequest["softAPMacAddress"] = _deviceWiFi->getSoftAPMacAddress();
 
 	int lenRequest = jsonObjectRequest.measureLength();
 	char dataRequest[lenRequest + 1];
@@ -191,6 +184,10 @@ void ESPDevice::autoLoad()
 				
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceId: %s\n", _deviceId);
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceDatasheetId: %d\n", (char*)_deviceDatasheetId);
+				
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceWiFi HostName: %s\n", getDeviceWiFi()->getHostName());
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceWiFi StationMacAddress: %s\n", getDeviceWiFi()->getStationMacAddress());
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceWiFi SoftAPMacAddress: %s\n", getDeviceWiFi()->getSoftAPMacAddress());
 				
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Host: %s\n", getDeviceMQ()->getHost());
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Port: %d\n", (char*)getDeviceMQ()->getPort());
@@ -230,6 +227,7 @@ void ESPDevice::load(String json)
 	_label 							= strdup(jsonObject["label"]);
 	
 	_deviceDebug->load(jsonObject["deviceDebug"]);		
+	_deviceWiFi->load(jsonObject["deviceWiFi"]);		
 	
 	DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);			
 	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);		

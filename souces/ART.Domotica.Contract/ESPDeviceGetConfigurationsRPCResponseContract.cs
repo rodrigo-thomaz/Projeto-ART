@@ -43,6 +43,11 @@
             get; set;
         }
 
+        public DeviceWiFiDetailResponseContract DeviceWiFi
+        {
+            get; set;
+        }
+
         public string Label
         {
             get; set;
