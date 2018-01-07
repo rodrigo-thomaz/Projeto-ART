@@ -51,6 +51,14 @@ private:
 	
 	RemoteDebug* 						_debug;
 	
+	void								setRemoteEnabled(bool value);	
+	void								setResetCmdEnabled(bool value);	
+	void								setSerialEnabled(bool value);	
+	void								setShowColors(bool value);	
+	void								setShowDebugLevel(bool value);	
+	void								setShowProfiler(bool value);
+	void								setShowTime(bool value);
+	
 	bool								_remoteEnabled;
 	bool								_resetCmdEnabled;
 	bool								_serialEnabled;
