@@ -1,4 +1,5 @@
 #include "DeviceInApplication.h"
+#include "ESPDevice.h"
 
 DeviceInApplication::DeviceInApplication(ESPDevice* espDevice, char* applicationId, char* applicationTopic)
 {

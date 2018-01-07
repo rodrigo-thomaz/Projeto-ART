@@ -1,4 +1,5 @@
 #include "DeviceMQ.h"
+#include "ESPDevice.h"
 
 DeviceMQ::DeviceMQ(ESPDevice* espDevice, char* host, int port, char* user, char* password, char* clientId, char* deviceTopic)
 {

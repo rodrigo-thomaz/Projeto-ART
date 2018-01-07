@@ -1,4 +1,5 @@
 #include "DeviceSensors.h"
+#include "ESPDevice.h"
 
 DeviceSensors::DeviceSensors(ESPDevice* espDevice, int publishIntervalInSeconds)
 {

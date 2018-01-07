@@ -1,4 +1,5 @@
 #include "DeviceWiFi.h"
+#include "ESPDevice.h"
 
 DeviceWiFi::DeviceWiFi(ESPDevice* espDevice)
 {

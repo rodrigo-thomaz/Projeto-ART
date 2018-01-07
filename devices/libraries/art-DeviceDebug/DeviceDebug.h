@@ -34,8 +34,7 @@ public:
 		
 	static void createDeviceDebug(DeviceDebug* (&deviceDebug), ESPDevice* espDevice)
     {
-		deviceDebug = new DeviceDebug(
-			espDevice);
+		deviceDebug = new DeviceDebug(espDevice);
     }
 
 	static const uint8_t PROFILER = 0;

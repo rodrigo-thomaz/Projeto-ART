@@ -1,4 +1,5 @@
 #include "DeviceNTP.h"
+#include "ESPDevice.h"
 
 DeviceNTP::DeviceNTP(ESPDevice* espDevice, char* host, int port, int utcTimeOffsetInSecond, int updateIntervalInMilliSecond)
 {
