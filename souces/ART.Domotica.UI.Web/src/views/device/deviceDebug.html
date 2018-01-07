@@ -1,13 +1,4 @@
-﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceDebugController" ng-init="init(device.deviceDebug)">
-    <div class="form-group">
-        <label class="col-lg-4 control-label">Telnet TCP Port</label>
-        <div class="col-lg-8">
-            <input name="inputTelnetTCPPort" type="number" ng-model="telnetTCPPortView" ng-model-options="{ debounce: 1000 }" min="0" required class="form-control">
-        </div>
-        <span ng-show="form.inputTelnetTCPPort.$touched && form.inputTelnetTCPPort.$invalid">
-            Telnet TCP Port deve ser maior que 0
-        </span>
-    </div>
+﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceDebugController" ng-init="init(device.deviceDebug)">    
     <div class="form-group">
         <label class="col-lg-4 control-label">Remote enabled</label>
         <div class="col-lg-8">

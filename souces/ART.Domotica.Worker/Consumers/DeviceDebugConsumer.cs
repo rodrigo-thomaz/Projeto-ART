@@ -22,7 +22,6 @@
     {
         #region Fields
 
-        private readonly EventingBasicConsumer _setTelnetTCPPortConsumer;
         private readonly EventingBasicConsumer _setRemoteEnabledConsumer;
         private readonly EventingBasicConsumer _setSerialEnabledConsumer;
         private readonly EventingBasicConsumer _setResetCmdEnabledConsumer;
@@ -38,7 +37,6 @@
         public DeviceDebugConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
             : base(connection, mqSettings, logger, componentContext)
         {
-            _setTelnetTCPPortConsumer = new EventingBasicConsumer(_model);
             _setRemoteEnabledConsumer = new EventingBasicConsumer(_model);
             _setSerialEnabledConsumer = new EventingBasicConsumer(_model);
             _setResetCmdEnabledConsumer = new EventingBasicConsumer(_model);
@@ -56,7 +54,6 @@
 
         private void Initialize()
         {
-            BasicQueueDeclare(DeviceDebugConstants.SetTelnetTCPPortQueueName);
             BasicQueueDeclare(DeviceDebugConstants.SetRemoteEnabledQueueName);
             BasicQueueDeclare(DeviceDebugConstants.SetSerialEnabledQueueName);
             BasicQueueDeclare(DeviceDebugConstants.SetResetCmdEnabledQueueName);
@@ -65,7 +62,6 @@
             BasicQueueDeclare(DeviceDebugConstants.SetShowProfilerQueueName);
             BasicQueueDeclare(DeviceDebugConstants.SetShowColorsQueueName);
 
-            _setTelnetTCPPortConsumer.Received += SetTelnetTCPPortReceived;
             _setRemoteEnabledConsumer.Received += SetRemoteEnabledReceived;
             _setSerialEnabledConsumer.Received += SetSerialEnabledReceived;
             _setResetCmdEnabledConsumer.Received += SetResetCmdEnabledReceived;
@@ -74,7 +70,6 @@
             _setShowProfilerConsumer.Received += SetShowProfilerReceived;
             _setShowColorsConsumer.Received += SetShowColorsReceived;
 
-            _model.BasicConsume(DeviceDebugConstants.SetTelnetTCPPortQueueName, false, _setTelnetTCPPortConsumer);
             _model.BasicConsume(DeviceDebugConstants.SetRemoteEnabledQueueName, false, _setRemoteEnabledConsumer);
             _model.BasicConsume(DeviceDebugConstants.SetSerialEnabledQueueName, false, _setSerialEnabledConsumer);
             _model.BasicConsume(DeviceDebugConstants.SetResetCmdEnabledQueueName, false, _setResetCmdEnabledConsumer);
@@ -86,44 +81,7 @@
 
         #endregion Methods
 
-        #region private voids        
-
-        public void SetTelnetTCPPortReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(SetTelnetTCPPortReceivedAsync(sender, e));
-        }
-
-        public async Task SetTelnetTCPPortReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceDebugSetTelnetTCPPortRequestContract>>(e.Body);
-            var domain = _componentContext.Resolve<IDeviceDebugDomain>();
-            var data = await domain.SetTelnetTCPPort(message.Contract.DeviceDebugId, message.Contract.DeviceDatasheetId, message.Contract.Value);
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            //Enviando para View
-            var viewModel = Mapper.Map<DeviceDebugSetTelnetTCPPortRequestContract, DeviceDebugSetTelnetTCPPortModel>(message.Contract);
-            viewModel.DeviceDebugId = data.Id;
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceDebugConstants.SetTelnetTCPPortViewCompletedQueueName);
-            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
-
-            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
-
-            //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceDebugSetTelnetTCPPortRequestContract, DeviceDebugSetTelnetTCPPortRequestIoTContract>(message.Contract);
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.SetTelnetTCPPortIoTQueueName);
-
-            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
-
-            _logger.DebugLeave();
-        }
+        #region private voids 
 
         public void SetRemoteEnabledReceived(object sender, BasicDeliverEventArgs e)
         {

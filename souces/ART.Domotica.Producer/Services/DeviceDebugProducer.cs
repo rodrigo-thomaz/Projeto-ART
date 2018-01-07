@@ -21,12 +21,7 @@ namespace ART.Domotica.Producer.Services
 
         #endregion
 
-        #region public voids        
-
-        public async Task SetTelnetTCPPort(AuthenticatedMessageContract<DeviceDebugSetTelnetTCPPortRequestContract> message)
-        {
-            await BasicPublish(DeviceDebugConstants.SetTelnetTCPPortQueueName, message);
-        }
+        #region public voids    
 
         public async Task SetRemoteEnabled(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message)
         {

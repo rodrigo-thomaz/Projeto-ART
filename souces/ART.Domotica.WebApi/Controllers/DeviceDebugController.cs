@@ -26,25 +26,7 @@
         #endregion Constructors
 
         #region public voids      
-
-        /// <summary>
-        /// Altera o TelnetTCPPort do Debug de um device
-        /// </summary>
-        /// <remarks>
-        /// Altera o TelnetTCPPort do Debug de um device
-        /// </remarks>
-        /// <param name="contract">contrato do request</param>
-        /// <response code="400">Bad Request</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal Server Error</response>
-        [Route("setTelnetTCPPort")]
-        [HttpPost]
-        public async Task<IHttpActionResult> SetTelnetTCPPort(DeviceDebugSetTelnetTCPPortRequestContract contract)
-        {
-            await _deviceDebugProducer.SetTelnetTCPPort(CreateMessage(contract));
-            return Ok();
-        }
-
+        
         /// <summary>
         /// Altera o RemoteEnabled do Debug de um device
         /// </summary>

@@ -2,8 +2,8 @@
 #define DeviceDebug_h
 
 #include "ArduinoJson.h"
-#include "ESP8266mDNS.h"
 #include "RemoteDebug.h" 
+#include "ESP8266mDNS.h"
 
 class ESPDevice;
 
@@ -26,7 +26,6 @@ public:
 
 	void								load(JsonObject& jsonObject);
 	
-	void								setTelnetTCPPort(char* json);	
 	void								setRemoteEnabled(char* json);	
 	void								setResetCmdEnabled(char* json);	
 	void								setSerialEnabled(char* json);	
@@ -55,7 +54,6 @@ private:
 	
 	RemoteDebug* 						_debug;
 	
-	int									_telnetTCPPort;
 	bool								_remoteEnabled;
 	bool								_resetCmdEnabled;
 	bool								_serialEnabled;

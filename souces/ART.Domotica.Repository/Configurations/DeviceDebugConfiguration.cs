@@ -33,44 +33,39 @@
             HasRequired(x => x.DeviceBase)
                .WithRequiredDependent(x => x.DeviceDebug);
 
-            //TelnetTCPPort
-            Property(x => x.TelnetTCPPort)
-                .HasColumnOrder(2)
-                .IsRequired();
-
             //RemoteEnabled
             Property(x => x.RemoteEnabled)
-                .HasColumnOrder(3)
+                .HasColumnOrder(2)
                 .IsRequired();
 
             //SerialEnabled
             Property(x => x.SerialEnabled)
-                .HasColumnOrder(4)
+                .HasColumnOrder(3)
                 .IsRequired();
 
             //ResetCmdEnabled
             Property(x => x.ResetCmdEnabled)
-                .HasColumnOrder(5)
+                .HasColumnOrder(4)
                 .IsRequired();
 
             //ShowDebugLevel
             Property(x => x.ShowDebugLevel)
-                .HasColumnOrder(6)
+                .HasColumnOrder(5)
                 .IsRequired();
 
             //ShowTime
             Property(x => x.ShowTime)
-                .HasColumnOrder(7)
+                .HasColumnOrder(6)
                 .IsRequired();
 
             //ShowProfiler
             Property(x => x.ShowProfiler)
-                .HasColumnOrder(8)
+                .HasColumnOrder(7)
                 .IsRequired();
 
             //ShowColors
             Property(x => x.ShowColors)
-                .HasColumnOrder(9)
+                .HasColumnOrder(8)
                 .IsRequired();
         }
 

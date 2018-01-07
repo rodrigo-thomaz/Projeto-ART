@@ -193,6 +193,10 @@
     <Compile Include="Migrations\201801071547318_Initia4.Designer.cs">
       <DependentUpon>201801071547318_Initia4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801071904024_Initia5.cs" />
+    <Compile Include="Migrations\201801071904024_Initia5.Designer.cs">
+      <DependentUpon>201801071904024_Initia5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -294,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801071547318_Initia4.resx">
       <DependentUpon>201801071547318_Initia4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801071904024_Initia5.resx">
+      <DependentUpon>201801071904024_Initia5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

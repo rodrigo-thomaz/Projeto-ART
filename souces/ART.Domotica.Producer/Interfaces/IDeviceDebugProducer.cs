@@ -23,8 +23,6 @@
 
         Task SetShowTime(AuthenticatedMessageContract<DeviceDebugSetValueRequestContract> message);
 
-        Task SetTelnetTCPPort(AuthenticatedMessageContract<DeviceDebugSetTelnetTCPPortRequestContract> message);
-
         #endregion Methods
     }
 }

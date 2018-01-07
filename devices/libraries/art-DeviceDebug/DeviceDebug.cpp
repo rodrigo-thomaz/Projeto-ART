@@ -1,4 +1,5 @@
 #include "DeviceDebug.h"
+#include "ESPDevice.h"
 
 DeviceDebug::DeviceDebug(ESPDevice* espDevice)
 {
@@ -14,17 +15,8 @@ DeviceDebug::~DeviceDebug()
 }
 
 void DeviceDebug::begin()
-{	
-	//char* hostName = _espDevice->getDeviceWiFi().getHostName();
-	//Serial.println("HostBName::: ");
-	//Serial.println(hostName);
-	
-	if (MDNS.begin("remotedebug-sample")) {
-		Serial.print("* MDNS responder started. Hostname -> ");
-		Serial.println("remotedebug-sample");
-	}
-
-	MDNS.addService("telnet", "tcp", 23);
+{		
+	MDNS.addService("telnet", "tcp", TELNET_PORT);
 }
 
 void DeviceDebug::loop()
@@ -36,7 +28,6 @@ void DeviceDebug::load(JsonObject& jsonObject)
 {	
 	JsonObject& deviceDebugJO = jsonObject["deviceDebug"];
 	
-	_telnetTCPPort = deviceDebugJO["telnetTCPPort"];
 	_remoteEnabled = deviceDebugJO["remoteEnabled"];
 	_serialEnabled = deviceDebugJO["serialEnabled"];
 	_resetCmdEnabled = deviceDebugJO["resetCmdEnabled"];	
@@ -46,9 +37,11 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	_showTime = deviceDebugJO["showTime"];
 	
 	if(_remoteEnabled){
+		
 		JsonObject& deviceWiFiJO = jsonObject["deviceWiFi"];
 		char* hostName = strdup(deviceWiFiJO["hostName"]);
-		_debug->begin(hostName);
+		
+		_debug->begin(hostName);		
 	}
 	
 	_debug->setSerialEnabled(_serialEnabled);
@@ -58,7 +51,6 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	_debug->showProfiler(_showProfiler);
 	_debug->showTime(_showTime);
 	
-	printf("DeviceDebug", "load", "TelnetTCPPort: %d\n", (char*)_telnetTCPPort);
 	printf("DeviceDebug", "load", "RemoteEnabled: %s\n", _remoteEnabled ? "true" : "false");
 	printf("DeviceDebug", "load", "serialEnabled: %s\n", _serialEnabled ? "true" : "false");
 	printf("DeviceDebug", "load", "resetCmdEnabled: %s\n", _resetCmdEnabled ? "true" : "false");
@@ -94,22 +86,6 @@ std::string DeviceDebug::createExpression(const char* className, const char* cal
 	return str.c_str();
 }
 
-void DeviceDebug::setTelnetTCPPort(char* json)
-{	
-	StaticJsonBuffer<200> jsonBuffer;
-	
-	JsonObject& root = jsonBuffer.parseObject(json);
-	
-	if (!root.success()) {
-		printf("DeviceDebug", "setTelnetTCPPort", "Parse failed: %s\n", json);
-		return;
-	}	
-	
-	_telnetTCPPort = root["value"];
-	
-	printf("DeviceDebug", "setTelnetTCPPort", "TelnetTCPPort: %d\n", (char*)_telnetTCPPort);
-}
-
 void DeviceDebug::setRemoteEnabled(char* json)
 {	
 	StaticJsonBuffer<200> jsonBuffer;
@@ -123,8 +99,11 @@ void DeviceDebug::setRemoteEnabled(char* json)
 	
 	_remoteEnabled = root["value"];
 	
-	if(_remoteEnabled){
-		_debug->begin("remotedebug-sample");
+	if(_remoteEnabled){		
+			
+		char* hostName = _espDevice->getDeviceWiFi()->getHostName();		
+		
+		_debug->begin(hostName);
 	}
 	else{
 		_debug->stop(); 

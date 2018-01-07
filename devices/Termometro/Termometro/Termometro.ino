@@ -17,6 +17,7 @@
 
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
+#include "ESP8266mDNS.h"
 
 #define HOST_NAME "remotedebug-sample"
 
@@ -57,7 +58,6 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
 #define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorChartLimiter/SetValueIoT"
 
-#define TOPIC_SUB_DEVICEDEBUG_SET_TELNET_TCP_PORT "DeviceDebug/SetTelnetTCPPortIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED "DeviceDebug/SetRemoteEnabledIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED "DeviceDebug/SetResetCmdEnabledIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED "DeviceDebug/SetSerialEnabledIoT"
@@ -130,6 +130,11 @@ void setup() {
   String hostNameWifi = HOST_NAME;
   hostNameWifi.concat(".local");
 
+  if (MDNS.begin(HOST_NAME)) {
+    Serial.print("* MDNS responder started. Hostname -> ");
+    Serial.println(HOST_NAME);
+  }
+  
   WiFi.hostname(hostNameWifi);  
 }
 
@@ -187,7 +192,6 @@ void subscribeInApplication()
   mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
   mqqtManager.subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
 
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_TELNET_TCP_PORT);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
   mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
@@ -214,7 +218,6 @@ void unSubscribeInApplication()
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
 
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_TELNET_TCP_PORT);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
   mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
@@ -284,10 +287,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)){
       dsFamilyTempSensorManager.setChartLimiterCelsius(json);
     }        
-    
-    if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_TELNET_TCP_PORT)){
-      espDevice.getDeviceDebug()->setTelnetTCPPort(strdup(json.c_str()));
-    }            
+               
     if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED)){
       espDevice.getDeviceDebug()->setRemoteEnabled(strdup(json.c_str()));
     }   

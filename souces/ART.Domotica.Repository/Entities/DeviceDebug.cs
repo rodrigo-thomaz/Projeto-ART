@@ -59,11 +59,6 @@
             get; set;
         }
 
-        public int TelnetTCPPort
-        {
-            get; set;
-        }
-
         #endregion Properties
     }
 }

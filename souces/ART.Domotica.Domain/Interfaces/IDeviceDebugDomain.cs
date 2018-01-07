@@ -24,8 +24,6 @@
 
         Task<DeviceDebug> SetShowTime(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value);
 
-        Task<DeviceDebug> SetTelnetTCPPort(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, int value);
-
         #endregion Methods
     }
 }
