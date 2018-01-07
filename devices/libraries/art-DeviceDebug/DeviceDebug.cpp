@@ -16,7 +16,7 @@ DeviceDebug::~DeviceDebug()
 
 void DeviceDebug::begin()
 {		
-	MDNS.addService("telnet", "tcp", TELNET_PORT);
+	
 }
 
 void DeviceDebug::loop()
@@ -37,6 +37,8 @@ void DeviceDebug::load(JsonObject& jsonObject)
 	_showTime = deviceDebugJO["showTime"];
 	
 	if(_remoteEnabled){
+		
+		initTelnetServer();
 		
 		JsonObject& deviceWiFiJO = jsonObject["deviceWiFi"];
 		char* hostName = strdup(deviceWiFiJO["hostName"]);
@@ -100,6 +102,8 @@ void DeviceDebug::setRemoteEnabled(char* json)
 	_remoteEnabled = root["value"];
 	
 	if(_remoteEnabled){		
+			
+		initTelnetServer();
 			
 		char* hostName = _espDevice->getDeviceWiFi()->getHostName();		
 		
@@ -212,4 +216,12 @@ void DeviceDebug::setShowTime(char* json)
 	_debug->showTime(_showTime);
 	
 	printf("DeviceDebug", "setRemoteEnabled", "ShowTime: %s\n", _showTime ? "true" : "false");
+}
+
+void DeviceDebug::initTelnetServer()
+{
+	if(!_telnetServer){
+		_telnetServer = true;
+		MDNS.addService("telnet", "tcp", TELNET_PORT);
+	}
 }

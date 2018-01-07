@@ -61,6 +61,9 @@ private:
 	bool								_showDebugLevel;
 	bool								_showProfiler;
 	bool								_showTime;
+	
+	void								initTelnetServer();
+	bool								_telnetServer;
 
 	std::string							createExpression(const char* className, const char* caller, const char* expression);
 };
