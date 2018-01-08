@@ -77,7 +77,7 @@ ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(espDevice, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 NTPManager ntpManager(espDevice);
 MQQTManager mqqtManager(espDevice);
-DisplayManager displayManager(debugManager);
+DisplayManager displayManager;
 BuzzerManager buzzerManager(D7, debugManager);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, espDevice, mqqtManager, buzzerManager);
 UnitOfMeasurementConverter unitOfMeasurementConverter(debugManager);

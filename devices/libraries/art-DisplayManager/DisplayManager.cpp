@@ -4,7 +4,6 @@
 #include "Wire.h"
 #include "Adafruit_GFX.h"
 #include "Adafruit_SSD1306.h"
-#include "DebugManager.h"
 
 #define OLED_RESET 0
 Adafruit_SSD1306 display(OLED_RESET);
@@ -83,9 +82,9 @@ static const unsigned char PROGMEM logo16_glcd_bmp[] =
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
 #endif
 
-DisplayManager::DisplayManager(DebugManager& debugManager)
+DisplayManager::DisplayManager()
 {
-	this->_debugManager = &debugManager;
+
 }
 
 void DisplayManager::begin()
