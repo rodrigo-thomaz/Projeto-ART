@@ -4,7 +4,6 @@
 #include "UnitOfMeasurementConverter.h"
 #include "NTPManager.h"
 #include "DisplayManager.h"
-#include "WiFiManager.h"
 #include "UpdateManager.h"
 #include "BuzzerManager.h"
 #include "DisplayAccessManager.h"
@@ -74,18 +73,17 @@ uint64_t publishMessageTimestamp = 0;
 uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
-WiFiManager wifiManager;
-ESPDevice espDevice(wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
-UpdateManager updateManager(debugManager, wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
+ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
+UpdateManager updateManager(espDevice, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 NTPManager ntpManager(debugManager, espDevice);
-MQQTManager mqqtManager(espDevice, wifiManager);
+MQQTManager mqqtManager(espDevice);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, espDevice, mqqtManager, buzzerManager);
 UnitOfMeasurementConverter unitOfMeasurementConverter(debugManager);
 
 DisplayAccessManager displayAccessManager(debugManager, displayManager);
-DisplayWiFiManager displayWiFiManager(displayManager, wifiManager, debugManager);
+DisplayWiFiManager displayWiFiManager(displayManager, espDevice);
 DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
 DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager, unitOfMeasurementConverter);
@@ -115,7 +113,7 @@ void setup() {
 	displayManager.display.setCursor(0, 0);	
 	displayManager.display.display();
   
-  wifiManager.autoConnect();
+  espDevice.getDeviceWiFi()->autoConnect();
 
   initConfiguration();
 
@@ -315,7 +313,7 @@ void loop() {
 
   debugManager.update();      
 
-  wifiManager.autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
+  espDevice.getDeviceWiFi()->autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
   espDevice.loop(); 
   mqqtManager.autoConnect(); //se não há conexão com o Broker, a conexão é refeita
 
@@ -373,9 +371,9 @@ void loopInApplication()
       JsonObject& root = jsonBuffer.createObject();
 
       root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
-      root["wifiQuality"] = wifiManager.getQuality();
+      root["wifiQuality"] = espDevice.getDeviceWiFi()->getQuality();
       root["epochTimeUtc"] = ntpManager.getEpochTimeUTC();    
-      root["localIPAddress"] = wifiManager.getLocalIPAddress();    
+      root["localIPAddress"] = espDevice.getDeviceWiFi()->getLocalIPAddress();    
       
       dsFamilyTempSensorManager.createSensorsJsonNestedArray(root);
 

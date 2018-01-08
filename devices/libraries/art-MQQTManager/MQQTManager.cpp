@@ -3,10 +3,9 @@
 
 // MQQTManager
 
-MQQTManager::MQQTManager(ESPDevice& espDevice, WiFiManager& wifiManager)
+MQQTManager::MQQTManager(ESPDevice& espDevice)
 { 
 	this->_espDevice = &espDevice;
-	this->_wifiManager = &wifiManager;
 	
 	this->_mqqt = new PubSubClient(this->_espClient);
 	
@@ -19,7 +18,7 @@ bool MQQTManager::begin()
 { 
 	if(this->_begin) return true;
 	
-	if(this->_wifiManager->isConnected() && this->_espDevice->loaded()){
+	if(this->_espDevice->getDeviceWiFi()->isConnected() && this->_espDevice->loaded()){
 
 		DeviceMQ* deviceMQ = this->_espDevice->getDeviceMQ();
 
@@ -42,7 +41,7 @@ bool MQQTManager::begin()
 
 bool MQQTManager::autoConnect()
 { 
-	if(!this->_wifiManager->isConnected() || !this->_espDevice->loaded()){
+	if(!this->_espDevice->getDeviceWiFi()->isConnected() || !this->_espDevice->loaded()){
       return false;
     }
     

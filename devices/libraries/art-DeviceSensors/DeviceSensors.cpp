@@ -12,11 +12,6 @@ DeviceSensors::~DeviceSensors()
 	delete (_espDevice);
 }
 
-ESPDevice* DeviceSensors::getESPDevice()
-{	
-	return _espDevice;
-}
-
 int DeviceSensors::getPublishIntervalInSeconds()
 {	
 	return _publishIntervalInSeconds;

@@ -2,8 +2,7 @@
 #define UpdateManager_h
 
 #include "Arduino.h"
-#include "DebugManager.h"
-#include "WiFiManager.h"
+#include "ESPDevice.h"
 
 #include <ESP8266HTTPClient.h>
 #include <ESP8266httpUpdate.h>
@@ -13,15 +12,14 @@
 class UpdateManager
 {
 public:
-	UpdateManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri = "/");
+	UpdateManager(ESPDevice& espDevice, String host, uint16_t port, String uri = "/");
 	~UpdateManager();
 	
 	void 						loop();
 	
 private:	
 
-	DebugManager*          		_debugManager;	
-	WiFiManager*          		_wifiManager;
+	ESPDevice*          		_espDevice;	
 	
 	String 						_host;
 	uint16_t 					_port;

@@ -1,9 +1,7 @@
 #include "ESPDevice.h"
 
-ESPDevice::ESPDevice(WiFiManager& wifiManager, char* webApiHost, uint16_t webApiPort, char* webApiUri)
-{
-	_wifiManager = &wifiManager;
-	
+ESPDevice::ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri)
+{	
 	_chipId							= ESP.getChipId();	
 	_flashChipId					= ESP.getFlashChipId();	
 	_chipSize						= ESP.getFlashChipSize();	
@@ -136,7 +134,7 @@ bool ESPDevice::loaded()
 
 void ESPDevice::autoLoad()
 {	
-	if(!_wifiManager->isConnected() || _loaded){
+	if(!_deviceWiFi->isConnected() || _loaded){
 		return;
 	}
 	

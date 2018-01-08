@@ -5,7 +5,6 @@
 #include "ArduinoJson.h"
 #include "DebugManager.h"
 #include "ESPDevice.h"
-#include "WiFiManager.h"
 #include "PubSubClient.h"
 
 #define MQTTMANAGER_SUB_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
@@ -15,7 +14,7 @@ class MQQTManager
 {
   public:
   
-    MQQTManager(ESPDevice& espDevice, WiFiManager& wifiManager);
+    MQQTManager(ESPDevice& espDevice);
 	
 	bool												begin();
 	
@@ -40,7 +39,6 @@ class MQQTManager
   private:			
 			
 	ESPDevice*          								_espDevice;	
-	WiFiManager* 										_wifiManager;
 	
 	bool												_begin;
 	

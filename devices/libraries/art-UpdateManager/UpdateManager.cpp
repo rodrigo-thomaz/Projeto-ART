@@ -1,9 +1,8 @@
 #include "UpdateManager.h"
 
-UpdateManager::UpdateManager(DebugManager& debugManager, WiFiManager& wifiManager, String host, uint16_t port, String uri)
+UpdateManager::UpdateManager(ESPDevice& espDevice, String host, uint16_t port, String uri)
 {
-	this->_debugManager = &debugManager;
-	this->_wifiManager = &wifiManager;
+	this->_espDevice = &espDevice;
 	
 	this->_host = host;
 	this->_port = port;
@@ -16,7 +15,7 @@ UpdateManager::~UpdateManager()
 
 void UpdateManager::loop()
 {
-	if(!this->_wifiManager->isConnected()){
+	if(!this->_espDevice->getDeviceWiFi()->isConnected()){
 		return;
 	}	
 	
@@ -30,21 +29,21 @@ void UpdateManager::loop()
 
 void UpdateManager::update()
 {	
-	 t_httpUpdate_return ret = ESPhttpUpdate.update(this->_host, this->_port, this->_uri + "api/espDevice/checkForUpdates");
+	t_httpUpdate_return ret = ESPhttpUpdate.update(this->_host, this->_port, this->_uri + "api/espDevice/checkForUpdates");
 
-        switch(ret) {
-            case HTTP_UPDATE_FAILED:
-                Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
-                break;
+	switch(ret) {
+		case HTTP_UPDATE_FAILED:
+			Serial.printf("HTTP_UPDATE_FAILD Error (%d): %s", ESPhttpUpdate.getLastError(), ESPhttpUpdate.getLastErrorString().c_str());
+			break;
 
-            case HTTP_UPDATE_NO_UPDATES:
-                Serial.println("HTTP_UPDATE_NO_UPDATES");
-                break;
+		case HTTP_UPDATE_NO_UPDATES:
+			Serial.println("HTTP_UPDATE_NO_UPDATES");
+			break;
 
-            case HTTP_UPDATE_OK:
-                Serial.println("HTTP_UPDATE_OK");
-                break;
-        }
+		case HTTP_UPDATE_OK:
+			Serial.println("HTTP_UPDATE_OK");
+			break;
+	}
 
-        Serial.println();
+	Serial.println();
 }

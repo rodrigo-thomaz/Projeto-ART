@@ -33,11 +33,6 @@ DeviceMQ::~DeviceMQ()
 	delete (_deviceTopic);
 }
 
-ESPDevice* DeviceMQ::getESPDevice()
-{	
-	return _espDevice;
-}
-
 char* DeviceMQ::getHost()
 {	
 	return _host;

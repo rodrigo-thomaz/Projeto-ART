@@ -8,8 +8,6 @@
 #include "DeviceNTP.h"
 #include "DeviceSensors.h"
 
-#include "WiFiManager.h"
-
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "ESP8266HTTPClient.h"
@@ -18,7 +16,7 @@ class ESPDevice
 {
 	public:
 		
-		ESPDevice(WiFiManager& wifiManager, char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
+		ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
 		~ESPDevice();
 		
 		void						begin();
@@ -71,9 +69,7 @@ class ESPDevice
 		
 		void						autoLoad();
 		void						load(String json);
-		bool 						_loaded = false;
-		
-		WiFiManager*          		_wifiManager;		
+		bool 						_loaded = false;	
 };
 
 #endif

@@ -20,11 +20,6 @@ DeviceNTP::~DeviceNTP()
 	delete (_host);
 }
 
-ESPDevice* DeviceNTP::getESPDevice()
-{	
-	return _espDevice;
-}
-
 char* DeviceNTP::getHost()
 {	
 	return _host;

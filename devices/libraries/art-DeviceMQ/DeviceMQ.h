@@ -14,8 +14,6 @@ public:
 	DeviceMQ(ESPDevice* espDevice, char* host, int port, char* user, char* password, char* clientId, char* deviceTopic);
 	~DeviceMQ();
 	
-	ESPDevice*          				getESPDevice();	
-	
 	char*								getHost();
 	int									getPort();
 	char*								getUser();

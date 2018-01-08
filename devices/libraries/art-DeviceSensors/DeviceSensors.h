@@ -14,8 +14,6 @@ public:
 	DeviceSensors(ESPDevice* espDevice, int publishIntervalInSeconds);
 	~DeviceSensors();
 	
-	ESPDevice*          				getESPDevice();	
-	
 	int									getPublishIntervalInSeconds();
 	void								setPublishIntervalInSeconds(int value);
 	

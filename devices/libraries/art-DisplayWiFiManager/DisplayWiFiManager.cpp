@@ -1,10 +1,9 @@
 #include "DisplayWiFiManager.h"
 
-DisplayWiFiManager::DisplayWiFiManager(DisplayManager& displayManager, WiFiManager& wifiManager, DebugManager& debugManager)
+DisplayWiFiManager::DisplayWiFiManager(DisplayManager& displayManager, ESPDevice& espDevice)
 {
 	this->_displayManager = &displayManager;
-	this->_wifiManager = &wifiManager;
-	this->_debugManager = &debugManager;
+	this->_espDevice = &espDevice;
 	
 	this->_startConfigPortalCallback = std::bind(&DisplayWiFiManager::startConfigPortalCallback, this);	
 	this->_captivePortalCallback = [=](String ip) { this->captivePortalCallback(ip); };		
@@ -12,11 +11,11 @@ DisplayWiFiManager::DisplayWiFiManager(DisplayManager& displayManager, WiFiManag
 	this->_failedConfigPortalCallback = [=](int connectionResult) { this->failedConfigPortalCallback(connectionResult); };		
 	this->_connectingConfigPortalCallback = std::bind(&DisplayWiFiManager::connectingConfigPortalCallback, this);
 		
-	this->_wifiManager->setStartConfigPortalCallback(this->_startConfigPortalCallback);
-	this->_wifiManager->setCaptivePortalCallback(this->_captivePortalCallback);
-	this->_wifiManager->setSuccessConfigPortalCallback(this->_successConfigPortalCallback);    
-	this->_wifiManager->setFailedConfigPortalCallback(this->_failedConfigPortalCallback);    
-	this->_wifiManager->setConnectingConfigPortalCallback(this->_connectingConfigPortalCallback); 
+	this->_espDevice->getDeviceWiFi()->setStartConfigPortalCallback(this->_startConfigPortalCallback);
+	this->_espDevice->getDeviceWiFi()->setCaptivePortalCallback(this->_captivePortalCallback);
+	this->_espDevice->getDeviceWiFi()->setSuccessConfigPortalCallback(this->_successConfigPortalCallback);    
+	this->_espDevice->getDeviceWiFi()->setFailedConfigPortalCallback(this->_failedConfigPortalCallback);    
+	this->_espDevice->getDeviceWiFi()->setConnectingConfigPortalCallback(this->_connectingConfigPortalCallback); 
 }
 
 DisplayWiFiManager::~DisplayWiFiManager()
@@ -25,10 +24,10 @@ DisplayWiFiManager::~DisplayWiFiManager()
 
 void DisplayWiFiManager::printSignal(){
 	
-	int quality = this->_wifiManager->getQuality();
-    int barSignal = this->_wifiManager->convertQualitytToBarsSignal(quality);
+	int quality = this->_espDevice->getDeviceWiFi()->getQuality();
+    int barSignal = this->_espDevice->getDeviceWiFi()->convertQualitytToBarsSignal(quality);
 	
-    if(this->_wifiManager->isConnected())
+    if(this->_espDevice->getDeviceWiFi()->isConnected())
       this->printConnectedSignal(106, 0, 4, 2, barSignal);
     else
       this->printNoConnectedSignal(106, 0, 4, 2);  
@@ -124,8 +123,8 @@ void DisplayWiFiManager::showEnteringSetup()
 
 void DisplayWiFiManager::showWiFiConect()
 {
-	String configPortalSSID = this->_wifiManager->getConfigPortalSSID();
-	String configPortalPwd = this->_wifiManager->getConfigPortalPwd();
+	String configPortalSSID = this->_espDevice->getDeviceWiFi()->getConfigPortalSSID();
+	String configPortalPwd = this->_espDevice->getDeviceWiFi()->getConfigPortalPwd();
 
 	this->_displayManager->display.clearDisplay();
 
@@ -180,7 +179,7 @@ void DisplayWiFiManager::successConfigPortalCallback () {
 
 	this->_displayManager->display.stopscroll();
 
-	String ssid = this->_wifiManager->getSSID();
+	String ssid = this->_espDevice->getDeviceWiFi()->getSSID();
 
 	this->_displayManager->display.clearDisplay();
 
@@ -236,7 +235,7 @@ void DisplayWiFiManager::connectingConfigPortalCallback () {
 
 	this->_displayManager->display.stopscroll();
 
-	String ssid = this->_wifiManager->getSSID();
+	String ssid = this->_espDevice->getDeviceWiFi()->getSSID();
 
 	this->_displayManager->display.clearDisplay();
 

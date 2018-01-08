@@ -14,8 +14,6 @@ public:
 	DeviceNTP(ESPDevice* espDevice, char* host, int port, int utcTimeOffsetInSecond, int updateIntervalInMilliSecond);
 	~DeviceNTP();
 	
-	ESPDevice*          				getESPDevice();	
-	
 	char*								getHost();
 	int									getPort();
 

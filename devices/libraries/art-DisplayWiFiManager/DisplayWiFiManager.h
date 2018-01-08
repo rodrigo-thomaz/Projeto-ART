@@ -2,9 +2,8 @@
 #define DisplayWiFiManager_h
 
 #include "Arduino.h"
-#include "DebugManager.h"
 #include "DisplayManager.h"
-#include "WiFiManager.h"
+#include "ESPDevice.h"
 
 #include "Fonts/FreeSans9pt7b.h"
 #include "Fonts/FreeSansBold9pt7b.h"
@@ -12,7 +11,7 @@
 class DisplayWiFiManager
 {
 public:
-	DisplayWiFiManager(DisplayManager& displayManager, WiFiManager& wifiManager, DebugManager& debugManager);
+	DisplayWiFiManager(DisplayManager& displayManager, ESPDevice& espDevice);
 	~DisplayWiFiManager();	
 
 	void 															printSignal ();
@@ -20,8 +19,7 @@ public:
 private:								
 								
 	DisplayManager*       											_displayManager;	
-	WiFiManager*          											_wifiManager;
-	DebugManager*         											_debugManager;
+	ESPDevice*          											_espDevice;
 											
 	bool 															_firstTimecaptivePortalCallback = true;
 											
@@ -38,11 +36,11 @@ private:
 	void 															failedConfigPortalCallback (int connectionResult);
 	void 															connectingConfigPortalCallback ();
 	
-	WIFI_MANAGER_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE 		_startConfigPortalCallback;
-	WIFI_MANAGER_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE				_captivePortalCallback;
-	WIFI_MANAGER_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE 		_successConfigPortalCallback;
-	WIFI_MANAGER_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE		_failedConfigPortalCallback;
-	WIFI_MANAGER_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE 	_connectingConfigPortalCallback;
+	DEVICE_WIFI_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE 			_startConfigPortalCallback;
+	DEVICE_WIFI_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE				_captivePortalCallback;
+	DEVICE_WIFI_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE 		_successConfigPortalCallback;
+	DEVICE_WIFI_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE			_failedConfigPortalCallback;
+	DEVICE_WIFI_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE 	_connectingConfigPortalCallback;
 	
 };
 
