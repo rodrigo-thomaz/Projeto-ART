@@ -4,6 +4,7 @@
 #include "Arduino.h"
 #include "ESPDevice.h"
 #include "Udp.h"
+#include "WiFiUdp.h"
 
 #define SEVENZYYEARS 2208988800UL
 #define NTP_PACKET_SIZE 48
@@ -15,7 +16,6 @@ class NTPManager {
   public:
   
 	NTPManager(ESPDevice& espDevice);
-    NTPManager(UDP& udp);
 
     /**
      * Starts the underlying UDP client with the default local port

@@ -20,17 +20,12 @@
  */
 
 #include "NTPManager.h"
-#include "WiFiUdp.h"
 
 NTPManager::NTPManager(ESPDevice& espDevice) {
   
   this->_espDevice = &espDevice;  
   
   this->_udp            = new WiFiUDP();  
-}
-
-NTPManager::NTPManager(UDP& udp) {
-  this->_udp            = &udp;
 }
 
 bool NTPManager::begin() {
