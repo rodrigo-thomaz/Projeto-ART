@@ -1,26 +1,9 @@
 #include "DeviceMQ.h"
 #include "ESPDevice.h"
 
-DeviceMQ::DeviceMQ(ESPDevice* espDevice, char* host, int port, char* user, char* password, char* clientId, char* deviceTopic)
+DeviceMQ::DeviceMQ(ESPDevice* espDevice)
 {
-	_espDevice = espDevice;	
-	
-	_host = new char(sizeof(strlen(host)));
-	_host = host;
-	
-	_port = port;
-
-	_user = new char(sizeof(strlen(user)));
-	_user = user;
-
-	_password = new char(sizeof(strlen(password)));
-	_password = password;	
-	
-	_clientId = new char(sizeof(strlen(clientId)));
-	_clientId = clientId;
-	
-	_deviceTopic = new char(sizeof(strlen(deviceTopic)));
-	_deviceTopic = deviceTopic;
+	_espDevice = espDevice;
 }
 
 DeviceMQ::~DeviceMQ()
@@ -31,6 +14,31 @@ DeviceMQ::~DeviceMQ()
 	delete (_password);
 	delete (_clientId);	
 	delete (_deviceTopic);
+}
+
+void DeviceMQ::load(JsonObject& jsonObject)
+{			
+	char* host = strdup(jsonObject["host"]);
+	_host = new char(sizeof(strlen(host)));
+	_host = host;
+	
+	_port = jsonObject["port"];
+	
+	char* user = strdup(jsonObject["user"]);
+	_user = new char(sizeof(strlen(user)));
+	_user = user;
+
+	char* password = strdup(jsonObject["password"]);
+	_password = new char(sizeof(strlen(password)));
+	_password = password;	
+	
+	char* clientId = strdup(jsonObject["clientId"]);
+	_clientId = new char(sizeof(strlen(clientId)));
+	_clientId = clientId;
+	
+	char* deviceTopic = strdup(jsonObject["deviceTopic"]);
+	_deviceTopic = new char(sizeof(strlen(deviceTopic)));
+	_deviceTopic = deviceTopic;
 }
 
 char* DeviceMQ::getHost()

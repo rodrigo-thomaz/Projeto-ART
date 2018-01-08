@@ -73,11 +73,12 @@ uint64_t readTempTimestamp = 0;
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(espDevice, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 MQQTManager mqqtManager(espDevice);
-DisplayManager displayManager;
+
 BuzzerManager buzzerManager(D7);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice, mqqtManager, buzzerManager);
 UnitOfMeasurementConverter unitOfMeasurementConverter;
 
+DisplayManager displayManager;
 DisplayAccessManager displayAccessManager(displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, espDevice);
 DisplayMQTTManager displayMQTTManager(displayManager);

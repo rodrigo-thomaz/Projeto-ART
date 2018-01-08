@@ -17,6 +17,7 @@ ESPDevice::ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri)
 	DeviceDebug::createDeviceDebug(_deviceDebug, this);		
 	DeviceWiFi::createDeviceWiFi(_deviceWiFi, this);		
 	DeviceNTP::createDeviceNTP(_deviceNTP, this);		
+	DeviceMQ::createDeviceMQ(_deviceMQ, this);		
 }
 
 ESPDevice::~ESPDevice()
@@ -231,9 +232,9 @@ void ESPDevice::load(String json)
 	_deviceDebug->load(jsonObject);		
 	_deviceWiFi->load(jsonObject["deviceWiFi"]);
 	_deviceNTP->load(jsonObject["deviceNTP"]);
+	_deviceMQ->load(jsonObject["deviceMQ"]);
 	
 	DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);			
-	DeviceMQ::createDeviceMQ(_deviceMQ, this, jsonObject["deviceMQ"]);			
 	DeviceSensors::createDeviceSensors(_deviceSensors, this, jsonObject["deviceSensors"]);	
 	
 	_loaded = true;	
