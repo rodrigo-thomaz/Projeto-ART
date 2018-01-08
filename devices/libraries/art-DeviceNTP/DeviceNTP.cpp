@@ -1,23 +1,27 @@
 #include "DeviceNTP.h"
 #include "ESPDevice.h"
 
-DeviceNTP::DeviceNTP(ESPDevice* espDevice, char* host, int port, int utcTimeOffsetInSecond, int updateIntervalInMilliSecond)
+DeviceNTP::DeviceNTP(ESPDevice* espDevice)
 {
 	_espDevice = espDevice;	
-	
-	_host = new char(sizeof(strlen(host)));
-	_host = host;
-	
-	_port = port;
-	
-	_utcTimeOffsetInSecond = utcTimeOffsetInSecond;
-	_updateIntervalInMilliSecond = updateIntervalInMilliSecond;	
 }
 
 DeviceNTP::~DeviceNTP()
 {
 	delete (_espDevice);
 	delete (_host);
+}
+
+void DeviceNTP::load(JsonObject& jsonObject)
+{	
+	char* host = strdup(jsonObject["host"]);
+	_host = new char(sizeof(strlen(host)));
+	_host = host;
+	
+	_port = jsonObject["port"];
+	
+	_utcTimeOffsetInSecond = jsonObject["utcTimeOffsetInSecond"];
+	_updateIntervalInMilliSecond = jsonObject["updateIntervalInMilliSecond"];	
 }
 
 char* DeviceNTP::getHost()
