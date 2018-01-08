@@ -75,7 +75,7 @@ uint64_t readTempTimestamp = 0;
 DebugManager debugManager(D6);
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(espDevice, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
-NTPManager ntpManager(debugManager, espDevice);
+NTPManager ntpManager(espDevice);
 MQQTManager mqqtManager(espDevice);
 DisplayManager displayManager(debugManager);
 BuzzerManager buzzerManager(D7, debugManager);

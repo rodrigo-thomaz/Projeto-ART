@@ -22,9 +22,8 @@
 #include "NTPManager.h"
 #include "WiFiUdp.h"
 
-NTPManager::NTPManager(DebugManager& debugManager, ESPDevice& espDevice) {
+NTPManager::NTPManager(ESPDevice& espDevice) {
   
-  this->_debugManager = &debugManager;
   this->_espDevice = &espDevice;  
   
   this->_udp            = new WiFiUDP();  

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Arduino.h"
-#include "DebugManager.h"
 #include "ESPDevice.h"
 
 #include <Udp.h>
@@ -29,12 +28,11 @@ class NTPManager {
 	
 	bool 											_initialized = false;
 				
-	DebugManager*          							_debugManager;
 	ESPDevice*  									_espDevice;
 	
   public:
   
-	NTPManager(DebugManager& debugManager, ESPDevice& espDevice);
+	NTPManager(ESPDevice& espDevice);
     NTPManager(UDP& udp);
 
     /**
