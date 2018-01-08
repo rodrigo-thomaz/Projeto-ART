@@ -18,6 +18,7 @@ ESPDevice::ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri)
 	DeviceWiFi::createDeviceWiFi(_deviceWiFi, this);		
 	DeviceNTP::createDeviceNTP(_deviceNTP, this);		
 	DeviceMQ::createDeviceMQ(_deviceMQ, this);		
+	DeviceBinary::createDeviceBinary(_deviceBinary, this);		
 }
 
 ESPDevice::~ESPDevice()
@@ -30,6 +31,7 @@ ESPDevice::~ESPDevice()
 	delete (_deviceWiFi);
 	delete (_deviceNTP);
 	delete (_deviceMQ);	
+	delete (_deviceBinary);	
 	delete (_deviceSensors);
 }
 
@@ -126,6 +128,11 @@ DeviceMQ* ESPDevice::getDeviceMQ()
 DeviceNTP* ESPDevice::getDeviceNTP()
 {	
 	return _deviceNTP;
+}
+
+DeviceBinary* ESPDevice::getDeviceBinary()
+{	
+	return _deviceBinary;
 }
 		
 DeviceSensors* ESPDevice::getDeviceSensors()

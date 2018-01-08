@@ -1,29 +1,30 @@
-#include "UpdateManager.h"
+#include "DeviceBinary.h"
+#include "ESPDevice.h"
 
-UpdateManager::UpdateManager(ESPDevice& espDevice)
+DeviceBinary::DeviceBinary(ESPDevice* espDevice)
 {
-	this->_espDevice = &espDevice;
+	_espDevice = espDevice;
 }
 
-UpdateManager::~UpdateManager()
+DeviceBinary::~DeviceBinary()
 {
 }
 
-void UpdateManager::loop()
+void DeviceBinary::loop()
 {
-	if(!this->_espDevice->getDeviceWiFi()->isConnected()){
+	if(!_espDevice->getDeviceWiFi()->isConnected()){
 		return;
 	}	
 	
 	 uint64_t now = millis();   
 	 
-	 if(now - this->_checkForUpdatesTimestamp > CHECKFORUPDATES_INTERVAL) {
-      this->_checkForUpdatesTimestamp = now;
-      this->update();
+	 if(now - _checkForUpdatesTimestamp > CHECKFORUPDATES_INTERVAL) {
+      _checkForUpdatesTimestamp = now;
+      update();
     }   
 }
 
-void UpdateManager::update()
+void DeviceBinary::update()
 {	
 	std::string uri;
 	uri.append(_espDevice->getWebApiUri());

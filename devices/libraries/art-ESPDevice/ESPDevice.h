@@ -6,6 +6,7 @@
 #include "DeviceWiFi.h"
 #include "DeviceMQ.h"
 #include "DeviceNTP.h"
+#include "DeviceBinary.h"
 #include "DeviceSensors.h"
 
 #include "Arduino.h"
@@ -43,6 +44,7 @@ class ESPDevice
 		DeviceWiFi*					getDeviceWiFi();
 		DeviceMQ*					getDeviceMQ();
 		DeviceNTP*					getDeviceNTP();
+		DeviceBinary*				getDeviceBinary();
 		DeviceSensors*				getDeviceSensors();
 	
 	private:	
@@ -65,6 +67,7 @@ class ESPDevice
 		DeviceWiFi*					_deviceWiFi;
 		DeviceMQ*					_deviceMQ;
 		DeviceNTP*					_deviceNTP;
+		DeviceBinary*				_deviceBinary;
 		DeviceSensors*				_deviceSensors;		
 		
 		void						autoLoad();

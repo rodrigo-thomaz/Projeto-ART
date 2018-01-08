@@ -2,7 +2,6 @@
 #include "DSFamilyTempSensorManager.h"
 #include "UnitOfMeasurementConverter.h"
 #include "DisplayManager.h"
-#include "UpdateManager.h"
 #include "BuzzerManager.h"
 #include "DisplayAccessManager.h"
 #include "DisplayWiFiManager.h"
@@ -70,7 +69,6 @@ uint64_t publishMessageTimestamp = 0;
 uint64_t readTempTimestamp = 0;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
-UpdateManager updateManager(espDevice);
 
 BuzzerManager buzzerManager(D7);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice, buzzerManager);
@@ -304,7 +302,7 @@ void loop() {
   
   espDevice.getDeviceMQ()->autoConnect(); //se não há conexão com o Broker, a conexão é refeita
 
-  updateManager.loop();
+  espDevice.getDeviceBinary()->loop();
 
   DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
   
