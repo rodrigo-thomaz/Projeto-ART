@@ -1,14 +1,9 @@
 #include "DisplayTemperatureSensorManager.h"
-#include "Arduino.h"
-#include "DebugManager.h"
-#include "DisplayManager.h"
-#include "DSFamilyTempSensorManager.h"
 
-DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, DebugManager& debugManager, UnitOfMeasurementConverter& unitOfMeasurementConverter)
+DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, UnitOfMeasurementConverter& unitOfMeasurementConverter)
 {
 	this->_displayManager = &displayManager;
 	this->_dsFamilyTempSensorManager = &dsFamilyTempSensorManager;
-	this->_debugManager = &debugManager;
 	this->_unitOfMeasurementConverter = &unitOfMeasurementConverter;
 }
 

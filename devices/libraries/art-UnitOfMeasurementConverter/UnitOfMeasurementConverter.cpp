@@ -1,8 +1,8 @@
 #include "UnitOfMeasurementConverter.h"
 
-UnitOfMeasurementConverter::UnitOfMeasurementConverter(DebugManager& debugManager)
+UnitOfMeasurementConverter::UnitOfMeasurementConverter()
 { 
-	this->_debugManager = &debugManager;
+	
 }
 
 float UnitOfMeasurementConverter::convertFromCelsius(int unitOfMeasurementId, float celsius)

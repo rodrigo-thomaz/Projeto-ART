@@ -2,20 +2,17 @@
 #define UnitOfMeasurementConverter_h
 
 #include "Arduino.h"
-#include "DebugManager.h"
 
 class UnitOfMeasurementConverter
 {
   public:
   
-    UnitOfMeasurementConverter(DebugManager& debugManager);
+    UnitOfMeasurementConverter();
 	
 	float																	convertFromCelsius(int unitOfMeasurementId, float celsius);
 	float																	convertCelsiusToFahrenheit(float celsius);
 										
   private:												
-												
-	DebugManager*          													_debugManager;	
 	
 };
 

@@ -1,11 +1,8 @@
 #include "BuzzerManager.h"
-#include "Arduino.h"
-#include "DebugManager.h"
 
-BuzzerManager::BuzzerManager(int pin, DebugManager& debugManager)
+BuzzerManager::BuzzerManager(int pin)
 {
 	this->_pin = pin;
-	this->_debugManager = &debugManager;
 }
 
 BuzzerManager::~BuzzerManager()

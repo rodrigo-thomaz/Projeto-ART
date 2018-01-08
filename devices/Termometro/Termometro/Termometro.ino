@@ -78,15 +78,15 @@ UpdateManager updateManager(espDevice, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 NTPManager ntpManager(espDevice);
 MQQTManager mqqtManager(espDevice);
 DisplayManager displayManager;
-BuzzerManager buzzerManager(D7, debugManager);
+BuzzerManager buzzerManager(D7);
 DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, espDevice, mqqtManager, buzzerManager);
-UnitOfMeasurementConverter unitOfMeasurementConverter(debugManager);
+UnitOfMeasurementConverter unitOfMeasurementConverter;
 
-DisplayAccessManager displayAccessManager(debugManager, displayManager);
+DisplayAccessManager displayAccessManager(displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, espDevice);
-DisplayMQTTManager displayMQTTManager(displayManager, debugManager);
-DisplayNTPManager displayNTPManager(displayManager, ntpManager, debugManager);
-DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, debugManager, unitOfMeasurementConverter);
+DisplayMQTTManager displayMQTTManager(displayManager);
+DisplayNTPManager displayNTPManager(displayManager, ntpManager);
+DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, unitOfMeasurementConverter);
 
 void setup() {
 		

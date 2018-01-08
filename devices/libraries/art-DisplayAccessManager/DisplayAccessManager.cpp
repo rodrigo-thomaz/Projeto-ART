@@ -1,10 +1,7 @@
 #include "DisplayAccessManager.h"
-#include "Arduino.h"
-#include "DebugManager.h"
 
-DisplayAccessManager::DisplayAccessManager(DebugManager& debugManager, DisplayManager& displayManager)
+DisplayAccessManager::DisplayAccessManager(DisplayManager& displayManager)
 { 
-	this->_debugManager = &debugManager;
 	this->_displayManager = &displayManager;
 }
 

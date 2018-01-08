@@ -1,12 +1,8 @@
 #include "DisplayMQTTManager.h"
-#include "Arduino.h"
-#include "DebugManager.h"
-#include "DisplayManager.h"
 
-DisplayMQTTManager::DisplayMQTTManager(DisplayManager& displayManager, DebugManager& debugManager)
+DisplayMQTTManager::DisplayMQTTManager(DisplayManager& displayManager)
 {
 	this->_displayManager = &displayManager;
-	this->_debugManager = &debugManager;
 	
 	this->_x = 80;
 	this->_y = 0;

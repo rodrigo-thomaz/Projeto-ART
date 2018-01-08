@@ -1,14 +1,9 @@
 #include "DisplayNTPManager.h"
-#include "Arduino.h"
-#include "DebugManager.h"
-#include "DisplayManager.h"
-#include "NTPManager.h"
 
-DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, NTPManager& ntpManager, DebugManager& debugManager)
+DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, NTPManager& ntpManager)
 {
 	this->_displayManager = &displayManager;
 	this->_ntpManager = &ntpManager;
-	this->_debugManager = &debugManager;
 
 	this->_updateCallback = [=](bool update, bool forceUpdate) { this->updateCallback(update, forceUpdate); };	
 	this->_ntpManager->setUpdateCallback(this->_updateCallback);	

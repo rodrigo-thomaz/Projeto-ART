@@ -2,12 +2,11 @@
 #define BuzzerManager_h
 
 #include "Arduino.h"
-#include "DebugManager.h"
 
 class BuzzerManager
 {
 public:
-	BuzzerManager(int pin, DebugManager& debugManager);
+	BuzzerManager(int pin);
 	~BuzzerManager();	
 	
 	void					test();
@@ -15,7 +14,6 @@ public:
 private:
 
 	int 					_pin;
-	DebugManager*         	_debugManager;
 
 };
 

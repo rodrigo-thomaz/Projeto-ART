@@ -2,13 +2,12 @@
 #define DisplayMQTTManager_h
 
 #include "Arduino.h"
-#include "DebugManager.h"
 #include "DisplayManager.h"
 
 class DisplayMQTTManager
 {
 public:
-	DisplayMQTTManager(DisplayManager& displayManager, DebugManager& debugManager);
+	DisplayMQTTManager(DisplayManager& displayManager);
 	~DisplayMQTTManager();	
 	
 	void					printConnected();	
@@ -18,7 +17,6 @@ public:
 private:
 
 	DisplayManager*       	_displayManager;
-	DebugManager*         	_debugManager;
 	
 	int			         	_x;
 	int			         	_y;
