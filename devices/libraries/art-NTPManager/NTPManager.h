@@ -1,9 +1,9 @@
-#pragma once
+#ifndef NTPManager_h
+#define NTPManager_h
 
 #include "Arduino.h"
 #include "ESPDevice.h"
-
-#include <Udp.h>
+#include "Udp.h"
 
 #define SEVENZYYEARS 2208988800UL
 #define NTP_PACKET_SIZE 48
@@ -11,24 +11,6 @@
 #define NTP_MANAGER_SET_UPDATE_CALLBACK_SIGNATURE std::function<void(bool, bool)>
 
 class NTPManager {
-  
-  private:
-  
-    UDP*          									_udp;
-    bool          									_udpSetup       = false;
-									
-    unsigned long 									_currentEpoc    = 0;      // In s
-    unsigned long 									_lastUpdate     = 0;      // In ms
-									
-    byte          									_packetBuffer[NTP_PACKET_SIZE];
-									
-    void          									sendNTPPacket();
-
-	NTP_MANAGER_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
-	
-	bool 											_initialized = false;
-				
-	ESPDevice*  									_espDevice;
 	
   public:
   
@@ -79,4 +61,25 @@ class NTPManager {
     void end();
 	
 	NTPManager& setUpdateCallback(NTP_MANAGER_SET_UPDATE_CALLBACK_SIGNATURE callback);
+	
+private:
+  
+    UDP*          									_udp;
+    bool          									_udpSetup       = false;
+									
+    unsigned long 									_currentEpoc    = 0;      // In s
+    unsigned long 									_lastUpdate     = 0;      // In ms
+									
+    byte          									_packetBuffer[NTP_PACKET_SIZE];
+									
+    void          									sendNTPPacket();
+
+	NTP_MANAGER_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
+	
+	bool 											_initialized = false;
+				
+	ESPDevice*  									_espDevice;
+	
 };
+
+#endif
