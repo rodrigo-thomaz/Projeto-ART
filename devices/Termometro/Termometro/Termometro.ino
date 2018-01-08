@@ -74,7 +74,7 @@ uint64_t publishMessageTimestamp = 0;
 uint64_t readTempTimestamp = 0;
 
 DebugManager debugManager(D6);
-WiFiManager wifiManager(D5);
+WiFiManager wifiManager;
 ESPDevice espDevice(wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(debugManager, wifiManager, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 NTPManager ntpManager(debugManager, espDevice);

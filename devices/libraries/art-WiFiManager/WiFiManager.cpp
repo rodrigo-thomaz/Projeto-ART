@@ -12,7 +12,7 @@
 
 #include "WiFiManager.h"
 
-WiFiManagerParameter::WiFiManagerParameter(const char *custom) {
+DeviceWiFiParameter::DeviceWiFiParameter(const char *custom) {
   _id = NULL;
   _placeholder = NULL;
   _length = 0;
@@ -21,15 +21,15 @@ WiFiManagerParameter::WiFiManagerParameter(const char *custom) {
   _customHTML = custom;
 }
 
-WiFiManagerParameter::WiFiManagerParameter(const char *id, const char *placeholder, const char *defaultValue, int length) {
+DeviceWiFiParameter::DeviceWiFiParameter(const char *id, const char *placeholder, const char *defaultValue, int length) {
   init(id, placeholder, defaultValue, length, "");
 }
 
-WiFiManagerParameter::WiFiManagerParameter(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom) {
+DeviceWiFiParameter::DeviceWiFiParameter(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom) {
   init(id, placeholder, defaultValue, length, custom);
 }
 
-void WiFiManagerParameter::init(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom) {
+void DeviceWiFiParameter::init(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom) {
   _id = id;
   _placeholder = placeholder;
   _length = length;
@@ -44,19 +44,19 @@ void WiFiManagerParameter::init(const char *id, const char *placeholder, const c
   _customHTML = custom;
 }
 
-const char* WiFiManagerParameter::getValue() {
+const char* DeviceWiFiParameter::getValue() {
   return _value;
 }
-const char* WiFiManagerParameter::getID() {
+const char* DeviceWiFiParameter::getID() {
   return _id;
 }
-const char* WiFiManagerParameter::getPlaceholder() {
+const char* DeviceWiFiParameter::getPlaceholder() {
   return _placeholder;
 }
-int WiFiManagerParameter::getValueLength() {
+int DeviceWiFiParameter::getValueLength() {
   return _length;
 }
-const char* WiFiManagerParameter::getCustomHTML() {
+const char* DeviceWiFiParameter::getCustomHTML() {
   return _customHTML;
 }
 
@@ -65,12 +65,12 @@ const char* WiFiManagerParameter::getCustomHTML() {
 
 
 
-WiFiManager::WiFiManager(int pin) {
-	_pin = pin;
+WiFiManager::WiFiManager() {
+	_pin = 14;
 	setAPStaticIPConfig(IPAddress(10,0,0,1), IPAddress(10,0,0,1), IPAddress(255,255,255,0));	
 }
 
-void WiFiManager::addParameter(WiFiManagerParameter *p) {
+void WiFiManager::addParameter(DeviceWiFiParameter *p) {
   if(_paramsCount + 1 > WIFI_MANAGER_MAX_PARAMS)
   {
     //Max parameters exceeded!

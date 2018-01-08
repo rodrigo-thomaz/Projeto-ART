@@ -43,11 +43,11 @@ const char HTTP_END[] PROGMEM             = "</div></body></html>";
 #define WIFI_MANAGER_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void(int)>
 #define WIFI_MANAGER_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void()>
 
-class WiFiManagerParameter {
+class DeviceWiFiParameter {
   public:
-    WiFiManagerParameter(const char *custom);
-    WiFiManagerParameter(const char *id, const char *placeholder, const char *defaultValue, int length);
-    WiFiManagerParameter(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom);
+    DeviceWiFiParameter(const char *custom);
+    DeviceWiFiParameter(const char *id, const char *placeholder, const char *defaultValue, int length);
+    DeviceWiFiParameter(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom);
 
     const char *getID();
     const char *getValue();
@@ -70,7 +70,7 @@ class WiFiManagerParameter {
 class WiFiManager
 {
   public:
-    WiFiManager(int pin);
+    WiFiManager();
 
     //boolean       autoConnect();
 	void          autoConnect();
@@ -110,7 +110,7 @@ class WiFiManager
 	WiFiManager&  setConnectingConfigPortalCallback(WIFI_MANAGER_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
 		
     //adds a custom parameter
-    void          addParameter(WiFiManagerParameter *p);
+    void          addParameter(DeviceWiFiParameter *p);
     //if this is set, it will exit after config, even if connection is unsuccessful.
     //if this is set, try WPS setup when starting (this will delay config portal for up to 2 mins)
     //TODO
@@ -201,7 +201,7 @@ class WiFiManager
 	WIFI_MANAGER_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE		_failedConfigPortalCallback;
 	WIFI_MANAGER_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE	_connectingConfigPortalCallback;
 
-    WiFiManagerParameter* _params[WIFI_MANAGER_MAX_PARAMS];
+    DeviceWiFiParameter* _params[WIFI_MANAGER_MAX_PARAMS];
 
     template <typename Generic>
     void          DEBUG_WM(Generic text);
