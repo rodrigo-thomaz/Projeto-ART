@@ -65,11 +65,8 @@ const char* WiFiManagerParameter::getCustomHTML() {
 
 
 
-WiFiManager::WiFiManager(int pin, DebugManager& debugManager) {
+WiFiManager::WiFiManager(int pin) {
 	_pin = pin;
-	
-	this->_debugManager = &debugManager;
-
 	setAPStaticIPConfig(IPAddress(10,0,0,1), IPAddress(10,0,0,1), IPAddress(255,255,255,0));	
 }
 
@@ -805,10 +802,8 @@ void WiFiManager::setRemoveDuplicateAPs(boolean removeDuplicates) {
 
 template <typename Generic>
 void WiFiManager::DEBUG_WM(Generic text) {
-	if (this->_debugManager->isDebug()) {
-		Serial.print("*WM: ");
-		Serial.println(text);
-	}
+	Serial.print("*WM: ");
+	Serial.println(text);
 }
 
 int WiFiManager::getRSSIasQuality(int rssi) {

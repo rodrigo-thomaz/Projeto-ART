@@ -43,7 +43,8 @@ int DeviceDebug::print(const char* className, const char* caller, const char* me
 	return _debug->printf(createExpression(className, caller, message).c_str());
 }
 
-template<typename... Args> int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
+template<typename... Args> 
+int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
 {	
 	return _debug->printf(createExpression(className, caller, format).c_str(), args...);
 }

@@ -17,7 +17,6 @@
 #include <ESP8266WebServer.h>
 #include <DNSServer.h>
 #include <memory>
-#include "DebugManager.h"
 
 extern "C" {
   #include "user_interface.h"
@@ -71,7 +70,7 @@ class WiFiManagerParameter {
 class WiFiManager
 {
   public:
-    WiFiManager(int pin, DebugManager& debugManager);
+    WiFiManager(int pin);
 
     //boolean       autoConnect();
 	void          autoConnect();
@@ -192,8 +191,6 @@ class WiFiManager
 	const char*   generatePassword(const int len);
 	
 	bool		  firstAutoConnect = true;
-	
-	DebugManager* _debugManager;
 	
     boolean       connect;
     boolean       _debug = true;
