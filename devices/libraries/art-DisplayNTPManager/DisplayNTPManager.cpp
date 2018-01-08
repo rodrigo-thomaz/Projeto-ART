@@ -1,12 +1,12 @@
 #include "DisplayNTPManager.h"
 
-DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, NTPManager& ntpManager)
+DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, ESPDevice& espDevice)
 {
 	this->_displayManager = &displayManager;
-	this->_ntpManager = &ntpManager;
+	this->_espDevice = &espDevice;
 
 	this->_updateCallback = [=](bool update, bool forceUpdate) { this->updateCallback(update, forceUpdate); };	
-	this->_ntpManager->setUpdateCallback(this->_updateCallback);	
+	_espDevice->getDeviceNTP()->setUpdateCallback(this->_updateCallback);	
 }
 
 DisplayNTPManager::~DisplayNTPManager()
@@ -27,7 +27,7 @@ void DisplayNTPManager::printTime()
 	this->_displayManager->display.setTextSize(2);
 	this->_displayManager->display.setTextColor(WHITE);
 	this->_displayManager->display.setCursor(0, 1);       
-	String formattedTime = this->_ntpManager->getFormattedTime();
+	String formattedTime = _espDevice->getDeviceNTP()->getFormattedTime();
 	this->_displayManager->display.println(formattedTime);	
 }
 

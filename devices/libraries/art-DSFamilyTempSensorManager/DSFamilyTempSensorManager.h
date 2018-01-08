@@ -4,7 +4,6 @@
 #include "Arduino.h"
 #include "vector"
 #include "ArduinoJson.h"
-#include "NTPManager.h"
 #include "BuzzerManager.h"
 #include "ESPDevice.h"
 #include "MQQTManager.h"

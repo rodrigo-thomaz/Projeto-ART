@@ -1,7 +1,6 @@
 #include "ESPDevice.h"
 #include "DSFamilyTempSensorManager.h"
 #include "UnitOfMeasurementConverter.h"
-#include "NTPManager.h"
 #include "DisplayManager.h"
 #include "UpdateManager.h"
 #include "BuzzerManager.h"
@@ -73,7 +72,6 @@ uint64_t readTempTimestamp = 0;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(espDevice, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
-NTPManager ntpManager(espDevice);
 MQQTManager mqqtManager(espDevice);
 DisplayManager displayManager;
 BuzzerManager buzzerManager(D7);
@@ -83,7 +81,7 @@ UnitOfMeasurementConverter unitOfMeasurementConverter;
 DisplayAccessManager displayAccessManager(displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, espDevice);
 DisplayMQTTManager displayMQTTManager(displayManager);
-DisplayNTPManager displayNTPManager(displayManager, ntpManager);
+DisplayNTPManager displayNTPManager(displayManager, espDevice);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, unitOfMeasurementConverter);
 
 void setup() {
@@ -108,8 +106,6 @@ void setup() {
 	displayManager.display.setTextColor(WHITE);
 	displayManager.display.setCursor(0, 0);	
 	displayManager.display.display();
-  
-  espDevice.getDeviceWiFi()->autoConnect();
 
   initConfiguration();
 
@@ -117,9 +113,7 @@ void setup() {
 
   mqqtManager.setConnectedCallback(mqtt_ConnectedCallback);
   mqqtManager.setSubCallback(mqtt_SubCallback);  
-  mqqtManager.begin();
-
-  ntpManager.begin();  
+  mqqtManager.begin();  
 
   String hostNameWifi = HOST_NAME;
   hostNameWifi.concat(".local");
@@ -305,10 +299,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     }
 }
 
-void loop() {	  
-
-  espDevice.getDeviceWiFi()->autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
+void loop() {	 
+  
   espDevice.loop(); 
+  
   mqqtManager.autoConnect(); //se não há conexão com o Broker, a conexão é refeita
 
   updateManager.loop();
@@ -331,8 +325,8 @@ void loop() {
 void loopInApplication()
 {
   displayManager.display.clearDisplay();
-  
-  ntpManager.update();
+
+  espDevice.getDeviceNTP()->update();
   
   uint64_t now = millis();   
 
@@ -366,7 +360,7 @@ void loopInApplication()
 
       root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
       root["wifiQuality"] = espDevice.getDeviceWiFi()->getQuality();
-      root["epochTimeUtc"] = ntpManager.getEpochTimeUTC();    
+      root["epochTimeUtc"] = espDevice.getDeviceNTP()->getEpochTimeUTC();    
       root["localIPAddress"] = espDevice.getDeviceWiFi()->getLocalIPAddress();    
       
       dsFamilyTempSensorManager.createSensorsJsonNestedArray(root);

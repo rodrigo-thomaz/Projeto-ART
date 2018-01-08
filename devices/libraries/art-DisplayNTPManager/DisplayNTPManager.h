@@ -3,25 +3,25 @@
 
 #include "Arduino.h"
 #include "DisplayManager.h"
-#include "NTPManager.h"
+#include "ESPDevice.h"
 
 class DisplayNTPManager
 {
 public:
-	DisplayNTPManager(DisplayManager& displayManager, NTPManager& ntpManager);
+	DisplayNTPManager(DisplayManager& displayManager, ESPDevice& espDevice);
 	~DisplayNTPManager();
 	
 private:
 
 	DisplayManager*       							_displayManager;	
-	NTPManager*          							_ntpManager;
+	ESPDevice*          							_espDevice;
 						
 	void											printTime();
 	void											printUpdate(bool on);
 							
 	void											updateCallback(bool update, bool forceUpdate);	
 	
-	NTP_MANAGER_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
+	DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
 	
 };
 

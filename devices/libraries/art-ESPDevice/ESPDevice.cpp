@@ -33,12 +33,16 @@ ESPDevice::~ESPDevice()
 }
 
 void ESPDevice::begin()
-{		
+{	
+	_deviceWiFi->autoConnect();  
 	autoLoad();
+	_deviceNTP->begin();  
 }
 
 void ESPDevice::loop()
 {	
+	_deviceWiFi->autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
+	
 	autoLoad();
 	
 	_deviceDebug->loop();
