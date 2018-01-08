@@ -194,10 +194,9 @@ void DSFamilyTempSensor::setHighChartLimiterCelsius(float value)
 
 // DSFamilyTempSensorManager
 
-DSFamilyTempSensorManager::DSFamilyTempSensorManager(ESPDevice& espDevice, MQQTManager& mqqtManager, BuzzerManager& buzzerManager)
+DSFamilyTempSensorManager::DSFamilyTempSensorManager(ESPDevice& espDevice, BuzzerManager& buzzerManager)
 { 
 	this->_espDevice = &espDevice;
-	this->_mqqtManager = &mqqtManager;
 	this->_buzzerManager = &buzzerManager;
 }
 
@@ -215,7 +214,7 @@ bool DSFamilyTempSensorManager::initialized()
 	
 	if(this->_initializing) return false;	
 	
-	PubSubClient* mqqt = this->_mqqtManager->getMQQT();
+	PubSubClient* mqqt = _espDevice->getDeviceMQ()->getMQQT();
  
 	if(!mqqt->connected()) return false;	
 	
@@ -257,7 +256,7 @@ bool DSFamilyTempSensorManager::initialized()
 	char result[len + 1]; 
 	root.printTo(result, sizeof(result));
 	
-	this->_mqqtManager->publish(TOPIC_PUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID, result); 
+	_espDevice->getDeviceMQ()->publish(TOPIC_PUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID, result); 
 	
 	return true;
 }

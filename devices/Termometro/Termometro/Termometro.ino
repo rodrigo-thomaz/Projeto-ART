@@ -10,7 +10,6 @@
 #include "DisplayNTPManager.h"
 #include "DisplayTemperatureSensorManager.h"
 #include "EEPROMManager.h"
-#include "MQQTManager.h"
 
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
@@ -72,10 +71,9 @@ uint64_t readTempTimestamp = 0;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(espDevice, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
-MQQTManager mqqtManager(espDevice);
 
 BuzzerManager buzzerManager(D7);
-DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice, mqqtManager, buzzerManager);
+DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice, buzzerManager);
 UnitOfMeasurementConverter unitOfMeasurementConverter;
 
 DisplayManager displayManager;
@@ -112,9 +110,9 @@ void setup() {
 
   espDevice.begin();  
 
-  mqqtManager.setConnectedCallback(mqtt_ConnectedCallback);
-  mqqtManager.setSubCallback(mqtt_SubCallback);  
-  mqqtManager.begin();  
+  espDevice.getDeviceMQ()->setConnectedCallback(mqtt_ConnectedCallback);
+  espDevice.getDeviceMQ()->setSubCallback(mqtt_SubCallback);  
+  espDevice.getDeviceMQ()->begin();  
 
   String hostNameWifi = HOST_NAME;
   hostNameWifi.concat(".local");
@@ -150,8 +148,8 @@ void subscribeNotInApplication()
 {
   Serial.println("[MQQT::subscribeNotInApplication] initializing ...");
   
-  mqqtManager.subscribeInDevice(TOPIC_SUB_ESPDEVICE_UPDATE_PIN);
-  mqqtManager.subscribeInDevice(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION);
+  espDevice.getDeviceMQ()->subscribeInDevice(TOPIC_SUB_ESPDEVICE_UPDATE_PIN);
+  espDevice.getDeviceMQ()->subscribeInDevice(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION);
 
   Serial.println("[MQQT::subscribeNotInApplication] Initialized with success !");
 }
@@ -160,8 +158,8 @@ void unSubscribeNotInApplication()
 {
   Serial.println("[MQQT::unSubscribeNotInApplication] initializing ...");
 
-  mqqtManager.unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_UPDATE_PIN);
-  mqqtManager.unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION);
+  espDevice.getDeviceMQ()->unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_UPDATE_PIN);
+  espDevice.getDeviceMQ()->unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION);
   
   Serial.println("[MQQT::unSubscribeNotInApplication] Initialized with success !");
 }
@@ -170,24 +168,24 @@ void subscribeInApplication()
 {
   Serial.println("[MQQT::subscribeInApplication] initializing ...");
 
-  mqqtManager.subscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+  espDevice.getDeviceMQ()->subscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
 
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
-  mqqtManager.subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
 
   Serial.println("[MQQT::subscribeInApplication] Initialized with success !");
 }
@@ -196,24 +194,24 @@ void unSubscribeInApplication()
 {
   Serial.println("[MQQT::unSubscribeInApplication] initializing ...");  
 
-  mqqtManager.unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+  espDevice.getDeviceMQ()->unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
 
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
-  mqqtManager.unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
   
   Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
@@ -222,7 +220,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 {
     espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic: %s\n", topic);
     
-    String topicKey = mqqtManager.getTopicKey(topic);
+    String topicKey = espDevice.getDeviceMQ()->getTopicKey(topic);
     espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey.c_str());
     
     displayMQTTManager.printReceived(true);
@@ -304,7 +302,7 @@ void loop() {
   
   espDevice.loop(); 
   
-  mqqtManager.autoConnect(); //se não há conexão com o Broker, a conexão é refeita
+  espDevice.getDeviceMQ()->autoConnect(); //se não há conexão com o Broker, a conexão é refeita
 
   updateManager.loop();
 
@@ -319,7 +317,7 @@ void loop() {
   }  
     
   //keep-alive da comunicação com broker MQTT
-  mqqtManager.getMQQT()->loop();  
+  espDevice.getDeviceMQ()->getMQQT()->loop();  
     
 }
 
@@ -343,7 +341,7 @@ void loopInApplication()
   }  
   
   // MQTT
-  PubSubClient* mqqt = mqqtManager.getMQQT();
+  PubSubClient* mqqt = espDevice.getDeviceMQ()->getMQQT();
   
   if(mqqt->connected() && dsFamilyTempSensorManager.initialized()){
     
