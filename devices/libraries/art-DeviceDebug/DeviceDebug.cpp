@@ -57,7 +57,7 @@ std::string DeviceDebug::createExpression(const char* className, const char* cal
 	str.append(caller);
 	str.append(" ");
 	str.append(expression);
-	return str.c_str();
+	return str;
 }
 
 void DeviceDebug::setRemoteEnabled(char* json)

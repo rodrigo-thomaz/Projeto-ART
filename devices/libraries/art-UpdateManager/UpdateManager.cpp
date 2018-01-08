@@ -1,12 +1,8 @@
 #include "UpdateManager.h"
 
-UpdateManager::UpdateManager(ESPDevice& espDevice, String host, uint16_t port, String uri)
+UpdateManager::UpdateManager(ESPDevice& espDevice)
 {
 	this->_espDevice = &espDevice;
-	
-	this->_host = host;
-	this->_port = port;
-	this->_uri = uri;
 }
 
 UpdateManager::~UpdateManager()
@@ -29,7 +25,11 @@ void UpdateManager::loop()
 
 void UpdateManager::update()
 {	
-	t_httpUpdate_return ret = ESPhttpUpdate.update(this->_host, this->_port, this->_uri + "api/espDevice/checkForUpdates");
+	std::string uri;
+	uri.append(_espDevice->getWebApiUri());
+	uri.append("api/espDevice/checkForUpdates");
+	
+	t_httpUpdate_return ret = ESPhttpUpdate.update(_espDevice->getWebApiHost(), _espDevice->getWebApiPort(), uri.c_str());
 
 	switch(ret) {
 		case HTTP_UPDATE_FAILED:

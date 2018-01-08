@@ -12,7 +12,7 @@
 class UpdateManager
 {
 public:
-	UpdateManager(ESPDevice& espDevice, String host, uint16_t port, String uri = "/");
+	UpdateManager(ESPDevice& espDevice);
 	~UpdateManager();
 	
 	void 						loop();
@@ -20,10 +20,6 @@ public:
 private:	
 
 	ESPDevice*          		_espDevice;	
-	
-	String 						_host;
-	uint16_t 					_port;
-	String 						_uri;
 
 	uint64_t 					_checkForUpdatesTimestamp = 0;
 	
