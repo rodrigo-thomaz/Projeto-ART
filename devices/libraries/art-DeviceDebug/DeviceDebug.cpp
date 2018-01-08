@@ -47,7 +47,7 @@ template<typename... Args> int DeviceDebug::printf(const char* className, const 
 {	
 	return _debug->printf(createExpression(className, caller, format).c_str(), args...);
 }
-
+			
 std::string DeviceDebug::createExpression(const char* className, const char* caller, const char* expression)
 {
 	std::string str;
