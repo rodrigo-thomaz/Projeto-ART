@@ -33,6 +33,51 @@ public:
 	int												getUpdateIntervalInMilliSecond();	
 	void											setUpdateIntervalInMilliSecond(String json);		
 		
+	/**
+     * Starts the underlying UDP client with the default local port
+     */
+    bool begin();
+	
+    /**
+     * This should be called in the main loop of your application. By default an update from the NTP Server is only
+     * made every 60 seconds. This can be configured in the DeviceNTP constructor.
+     *
+     * @return true on success, false on failure
+     */
+    bool update();
+
+    /**
+     * This will force the update from the NTP Server.
+     *
+     * @return true on success, false on failure
+     */
+    bool forceUpdate();
+
+    int getDay();
+    int getHours();
+    int getMinutes();
+    int getSeconds();   
+
+    /**
+     * @return time formatted like `hh:mm:ss`
+     */
+    String getFormattedTimeOld();
+	
+	String getFormattedTime();
+
+    /**
+     * @return time in seconds since Jan. 1, 1970
+     */
+    unsigned long getEpochTime();
+	unsigned long getEpochTimeUTC();
+
+    /**
+     * Stops the underlying UDP client
+     */
+    void end();
+	
+	DeviceNTP& setUpdateCallback(DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE callback);
+	
 	static void createDeviceNTP(DeviceNTP* (&deviceNTP), ESPDevice* espDevice)
     {
 		deviceNTP = new DeviceNTP(espDevice);
