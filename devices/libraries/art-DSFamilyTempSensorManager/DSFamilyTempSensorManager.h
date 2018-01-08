@@ -4,7 +4,6 @@
 #include "Arduino.h"
 #include "vector"
 #include "ArduinoJson.h"
-#include "DebugManager.h"
 #include "NTPManager.h"
 #include "BuzzerManager.h"
 #include "ESPDevice.h"
@@ -126,7 +125,7 @@ class DSFamilyTempSensorManager
 {
   public:
   
-    DSFamilyTempSensorManager(DebugManager& debugManager, ESPDevice& espDevice, MQQTManager& mqqtManager, BuzzerManager& buzzerManager);
+    DSFamilyTempSensorManager(ESPDevice& espDevice, MQQTManager& mqqtManager, BuzzerManager& buzzerManager);
 	
 	void 								begin();
 				
@@ -149,7 +148,6 @@ class DSFamilyTempSensorManager
 				
   private:			
 			
-	DebugManager*          				_debugManager;
 	ESPDevice*							_espDevice;	
 	MQQTManager* 		                _mqqtManager;				
 	BuzzerManager* 		                _buzzerManager;				

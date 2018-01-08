@@ -1,4 +1,3 @@
-#include "DebugManager.h"
 #include "ESPDevice.h"
 #include "DSFamilyTempSensorManager.h"
 #include "UnitOfMeasurementConverter.h"
@@ -26,8 +25,8 @@
 #define D2    4
 #define D3    0
 #define D4    2
-#define D5    14
-#define D6    12
+#define D5    14 // WiFi Reset Button
+#define D6    12 // Antigo DebugManager
 #define D7    13
 #define D8    15
 #define D9    3
@@ -72,14 +71,13 @@ uint64_t publishMessageTimestamp = 0;
 #define READTEMP_INTERVAL 2000
 uint64_t readTempTimestamp = 0;
 
-DebugManager debugManager(D6);
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UpdateManager updateManager(espDevice, WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 NTPManager ntpManager(espDevice);
 MQQTManager mqqtManager(espDevice);
 DisplayManager displayManager;
 BuzzerManager buzzerManager(D7);
-DSFamilyTempSensorManager dsFamilyTempSensorManager(debugManager, espDevice, mqqtManager, buzzerManager);
+DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice, mqqtManager, buzzerManager);
 UnitOfMeasurementConverter unitOfMeasurementConverter;
 
 DisplayAccessManager displayAccessManager(displayManager);
@@ -98,13 +96,11 @@ void setup() {
   pinMode(D4, INPUT);
   pinMode(D5, INPUT);  
 
-	debugManager.update();  
-
 	displayManager.begin();
 
 	dsFamilyTempSensorManager.begin();
 
-	if (debugManager.isDebug()) Serial.println("Iniciando...");
+	Serial.println("Iniciando...");
 
 	// text display tests
 	displayManager.display.clearDisplay();
@@ -310,8 +306,6 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 }
 
 void loop() {	  
-
-  debugManager.update();      
 
   espDevice.getDeviceWiFi()->autoConnect(); //se não há conexão com o WiFI, a conexão é refeita
   espDevice.loop(); 

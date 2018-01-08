@@ -3,7 +3,6 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
-#include "DebugManager.h"
 #include "ESPDevice.h"
 #include "PubSubClient.h"
 

@@ -194,9 +194,8 @@ void DSFamilyTempSensor::setHighChartLimiterCelsius(float value)
 
 // DSFamilyTempSensorManager
 
-DSFamilyTempSensorManager::DSFamilyTempSensorManager(DebugManager& debugManager, ESPDevice& espDevice, MQQTManager& mqqtManager, BuzzerManager& buzzerManager)
+DSFamilyTempSensorManager::DSFamilyTempSensorManager(ESPDevice& espDevice, MQQTManager& mqqtManager, BuzzerManager& buzzerManager)
 { 
-	this->_debugManager = &debugManager;
 	this->_espDevice = &espDevice;
 	this->_mqqtManager = &mqqtManager;
 	this->_buzzerManager = &buzzerManager;
