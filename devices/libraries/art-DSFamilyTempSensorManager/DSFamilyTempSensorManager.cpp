@@ -73,12 +73,14 @@ void TempSensorAlarm::setTempCelsius(float value)
 
 // Sensor
 
-Sensor::Sensor(char* sensorId, DeviceAddress deviceAddress, String family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
+Sensor::Sensor(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
 {
 	_sensorId = new char(sizeof(strlen(sensorId)));
 	_sensorId = sensorId;	
+	
+	_family = new char(sizeof(strlen(family)));
+	_family = family;
 
-	this->_family = family;
 	this->_validFamily = true;
 	
 	_label = new char(sizeof(strlen(label)));
@@ -102,17 +104,17 @@ char* Sensor::getSensorId()
 
 const uint8_t* Sensor::getDeviceAddress()
 {
-	return this->_deviceAddress.data();
+	return _deviceAddress.data();
 }
 
-String Sensor::getFamily()
+char* Sensor::getFamily()
 {
-	return this->_family;
+	return _family;
 }
 
 bool Sensor::getValidFamily()
 {
-	return this->_validFamily;
+	return _validFamily;
 }
 
 char* Sensor::getLabel()
@@ -128,84 +130,84 @@ void Sensor::setLabel(char* value)
 
 int Sensor::getResolution()
 {
-	return this->_resolution;
+	return _resolution;
 }
 
 void Sensor::setResolution(int value)
 {
-	this->_resolution = value;
+	_resolution = value;
 }
 
 byte Sensor::getUnitOfMeasurementId()
 {
-	return this->_unitOfMeasurementId;
+	return _unitOfMeasurementId;
 }
 
 void Sensor::setUnitOfMeasurementId(int value)
 {
-	this->_unitOfMeasurementId = value;
+	_unitOfMeasurementId = value;
 }
 
 TempSensorAlarm& Sensor::getLowAlarm()
 {
-	return this->_alarms[0];
+	return _alarms[0];
 }
 
 TempSensorAlarm& Sensor::getHighAlarm()
 {
-	return this->_alarms[1];
+	return _alarms[1];
 }
 
 bool Sensor::getConnected()
 {
-	return this->_connected;
+	return _connected;
 }
 
 void Sensor::setConnected(bool value)
 {
-	this->_connected = value;
+	_connected = value;
 }
 
 float Sensor::getTempCelsius()
 {
-	return this->_tempCelsius;
+	return _tempCelsius;
 }
 
 void Sensor::setTempCelsius(float value)
 {
-	this->_tempCelsius = value;
-	this->_alarms[0].setTempCelsius(value);
-	this->_alarms[1].setTempCelsius(value);	
+	_tempCelsius = value;
+	_alarms[0].setTempCelsius(value);
+	_alarms[1].setTempCelsius(value);	
 }
 
 bool Sensor::hasAlarm()
 {
-	return this->_alarms[0].hasAlarm() || this->_alarms[1].hasAlarm();
+	return _alarms[0].hasAlarm() || _alarms[1].hasAlarm();
 }
 
 bool Sensor::hasAlarmBuzzer()
 {
-	return this->_alarms[0].hasAlarmBuzzer() || this->_alarms[1].hasAlarmBuzzer();
+	return _alarms[0].hasAlarmBuzzer() || _alarms[1].hasAlarmBuzzer();
 }
 
 float Sensor::getLowChartLimiterCelsius()
 {
-	return this->_lowChartLimiterCelsius;
+	return _lowChartLimiterCelsius;
 }
 
 void Sensor::setLowChartLimiterCelsius(float value)
 {
-	this->_lowChartLimiterCelsius = value;
+	_lowChartLimiterCelsius = value;
 }
 
 float Sensor::getHighChartLimiterCelsius()
 {
-	return this->_highChartLimiterCelsius;
+	return _highChartLimiterCelsius;
 }
 
 void Sensor::setHighChartLimiterCelsius(float value)
 {
-	this->_highChartLimiterCelsius = value;
+	_highChartLimiterCelsius = value;
 }
 
 
@@ -305,7 +307,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = sensorJsonObject["deviceAddress"][i];
 		
 		char* 			sensorId 				= strdup(sensorJsonObject["sensorId"]);	
-		String 			family 					= sensorJsonObject["family"];				
+		char* 			family 					= strdup(sensorJsonObject["family"]);	
 		char* 			label 					= strdup(sensorJsonObject["label"]);				
 		int 			resolution 				= int(sensorJsonObject["resolutionBits"]);				
 		byte 			unitOfMeasurementId 	= byte(sensorJsonObject["unitOfMeasurementId"]);		

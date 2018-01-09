@@ -58,13 +58,13 @@ class Sensor
 	
   public:
   
-	Sensor(char* sensorId, DeviceAddress deviceAddress, String family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
+	Sensor(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
 
     char*								getSensorId();		
 	
 	const uint8_t*		 				getDeviceAddress();	
 	
-	String								getFamily();
+	char*								getFamily();
 	bool								getValidFamily();	
 		
 	char* 								getLabel();
@@ -100,7 +100,7 @@ class Sensor
 	
 	std::vector<uint8_t> 				_deviceAddress;
 	
-	String 								_family;
+	char* 								_family;
 	bool 								_validFamily;
 	
 	char* 								_label;
