@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "vector"
 #include "ArduinoJson.h"
-#include "BuzzerManager.h"
+#include "DeviceBuzzer.h"
 #include "ESPDevice.h"
 #include "OneWire.h"
 #include "DallasTemperature.h"
@@ -128,7 +128,7 @@ class DSFamilyTempSensorManager
 {
   public:
   
-    DSFamilyTempSensorManager(ESPDevice& espDevice, BuzzerManager& buzzerManager);
+    DSFamilyTempSensorManager(ESPDevice& espDevice, DeviceBuzzer& deviceBuzzer);
 	
 	void 								begin();
 				
@@ -153,7 +153,7 @@ class DSFamilyTempSensorManager
   private:			
 			
 	ESPDevice*							_espDevice;	
-	BuzzerManager* 		                _buzzerManager;				
+	DeviceBuzzer* 		                _deviceBuzzer;				
 	
 	bool								_initialized;
 	bool								_initializing;					

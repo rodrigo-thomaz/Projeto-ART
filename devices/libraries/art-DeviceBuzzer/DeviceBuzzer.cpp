@@ -1,15 +1,15 @@
-#include "BuzzerManager.h"
+#include "DeviceBuzzer.h"
 
-BuzzerManager::BuzzerManager(int pin)
+DeviceBuzzer::DeviceBuzzer(int pin)
 {
 	this->_pin = pin;
 }
 
-BuzzerManager::~BuzzerManager()
+DeviceBuzzer::~DeviceBuzzer()
 {
 }
 
-void BuzzerManager::test()
+void DeviceBuzzer::test()
 {	
   tone(this->_pin,900,300); //aqui sai o som   
   /*   

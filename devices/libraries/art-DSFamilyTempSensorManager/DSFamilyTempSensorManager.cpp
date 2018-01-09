@@ -213,16 +213,16 @@ void Sensor::setHighChartLimiterCelsius(float value)
 
 // DSFamilyTempSensorManager
 
-DSFamilyTempSensorManager::DSFamilyTempSensorManager(ESPDevice& espDevice, BuzzerManager& buzzerManager)
+DSFamilyTempSensorManager::DSFamilyTempSensorManager(ESPDevice& espDevice, DeviceBuzzer& deviceBuzzer)
 { 
-	this->_espDevice = &espDevice;
-	this->_buzzerManager = &buzzerManager;
+	_espDevice = &espDevice;
+	_deviceBuzzer = &deviceBuzzer;
 }
 
 void DSFamilyTempSensorManager::begin()
 {	
 	_dallas.begin();  	
-	this->initialized();
+	initialized();
 }
 	
 bool DSFamilyTempSensorManager::initialized()
@@ -363,7 +363,7 @@ void DSFamilyTempSensorManager::refresh()
 		if(this->_sensors[i].hasAlarmBuzzer()) 	hasAlarmBuzzer 	= true;
 	}
 	if(hasAlarmBuzzer){
-		this->_buzzerManager->test();
+		this->_deviceBuzzer->test();
 	}
 }
 

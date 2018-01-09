@@ -2,7 +2,7 @@
 #include "DSFamilyTempSensorManager.h"
 #include "UnitOfMeasurementConverter.h"
 #include "DisplayManager.h"
-#include "BuzzerManager.h"
+#include "DeviceBuzzer.h"
 #include "DisplayAccessManager.h"
 #include "DisplayWiFiManager.h"
 #include "DisplayMQTTManager.h"
@@ -81,8 +81,8 @@ uint64_t readTempTimestamp = 0;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
-BuzzerManager buzzerManager(D7);
-DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice, buzzerManager);
+DeviceBuzzer deviceBuzzer(D7);
+DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice, deviceBuzzer);
 UnitOfMeasurementConverter unitOfMeasurementConverter;
 
 DisplayManager displayManager;
@@ -432,7 +432,7 @@ void loopInApplication()
   displayWiFiManager.printSignal();
   
   // Buzzer
-  //buzzerManager.test();
+  //deviceBuzzer.test();
 
   displayManager.display.display();
 }
