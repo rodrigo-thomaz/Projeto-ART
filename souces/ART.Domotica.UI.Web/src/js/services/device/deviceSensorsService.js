@@ -6,34 +6,34 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
-        var setPublishIntervalInSecondsCompletedSubscription = null;
+        var setPublishIntervalInMilliSecondsCompletedSubscription = null;
 
-        var setPublishIntervalInSeconds = function (deviceSensorsId, deviceDatasheetId, publishIntervalInSeconds) {
+        var setPublishIntervalInMilliSeconds = function (deviceSensorsId, deviceDatasheetId, publishIntervalInMilliSeconds) {
             var data = {
                 deviceSensorsId: deviceSensorsId,
                 deviceDatasheetId: deviceDatasheetId,
-                publishIntervalInSeconds: publishIntervalInSeconds,
+                publishIntervalInMilliSeconds: publishIntervalInMilliSeconds,
             }
-            return $http.post(serviceBase + deviceSensorsConstant.setPublishIntervalInSecondsApiUri, data).then(function (results) {
+            return $http.post(serviceBase + deviceSensorsConstant.setPublishIntervalInMilliSecondsApiUri, data).then(function (results) {
                 return results;
             });
         };
 
         var onConnected = function () {
-            setPublishIntervalInSecondsCompletedSubscription = stompService.subscribeAllViews(deviceSensorsConstant.setPublishIntervalInSecondsCompletedTopic, onSetPublishIntervalInSecondsCompleted);
+            setPublishIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedTopic, onSetPublishIntervalInMilliSecondsCompleted);
         }
 
-        var onSetPublishIntervalInSecondsCompleted = function (payload) {
+        var onSetPublishIntervalInMilliSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
             var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId, result.deviceDatasheetId);
-            deviceSensors.publishIntervalInSeconds = result.publishIntervalInSeconds;
+            deviceSensors.publishIntervalInMilliSeconds = result.publishIntervalInMilliSeconds;
             deviceContext.$digest();
-            $rootScope.$emit(deviceSensorsConstant.setPublishIntervalInSecondsCompletedEventName + result.deviceSensorsId, result);
+            $rootScope.$emit(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceSensorsId, result);
         };
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
-            setPublishIntervalInSecondsCompletedSubscription.unsubscribe();
+            setPublishIntervalInMilliSecondsCompletedSubscription.unsubscribe();
         });
 
         var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
@@ -43,7 +43,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         // serviceFactory
 
-        serviceFactory.setPublishIntervalInSeconds = setPublishIntervalInSeconds;
+        serviceFactory.setPublishIntervalInMilliSeconds = setPublishIntervalInMilliSeconds;
 
         return serviceFactory;
 

@@ -23,7 +23,7 @@
     {
         #region Fields
         
-        private readonly EventingBasicConsumer _setPublishIntervalInSecondsConsumer;
+        private readonly EventingBasicConsumer _setPublishIntervalInMilliSecondsConsumer;
 
         #endregion Fields
 
@@ -32,7 +32,7 @@
         public DeviceSensorsConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
             : base(connection, mqSettings, logger, componentContext)
         {            
-            _setPublishIntervalInSecondsConsumer = new EventingBasicConsumer(_model);
+            _setPublishIntervalInMilliSecondsConsumer = new EventingBasicConsumer(_model);
 
             Initialize();
         }
@@ -43,34 +43,34 @@
 
         private void Initialize()
         {
-            BasicQueueDeclare(DeviceSensorsConstants.SetPublishIntervalInSecondsQueueName);
+            BasicQueueDeclare(DeviceSensorsConstants.SetPublishIntervalInMilliSecondsQueueName);
 
-            _setPublishIntervalInSecondsConsumer.Received += SetPublishIntervalInSecondsReceived;
+            _setPublishIntervalInMilliSecondsConsumer.Received += SetPublishIntervalInMilliSecondsReceived;
 
-            _model.BasicConsume(DeviceSensorsConstants.SetPublishIntervalInSecondsQueueName, false, _setPublishIntervalInSecondsConsumer);
+            _model.BasicConsume(DeviceSensorsConstants.SetPublishIntervalInMilliSecondsQueueName, false, _setPublishIntervalInMilliSecondsConsumer);
         }
 
-        private void SetPublishIntervalInSecondsReceived(object sender, BasicDeliverEventArgs e)
+        private void SetPublishIntervalInMilliSecondsReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(SetPublishIntervalInSecondsReceivedAsync(sender, e));
+            Task.WaitAll(SetPublishIntervalInMilliSecondsReceivedAsync(sender, e));
         }
 
-        public async Task SetPublishIntervalInSecondsReceivedAsync(object sender, BasicDeliverEventArgs e)
+        public async Task SetPublishIntervalInMilliSecondsReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSensorsSetPublishIntervalInSecondsRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSensorsSetPublishIntervalInMilliSecondsRequestContract>>(e.Body);
             var deviceSensorsDomain = _componentContext.Resolve<IDeviceSensorsDomain>();
-            var data = await deviceSensorsDomain.SetPublishIntervalInSeconds(message.Contract.DeviceSensorsId, message.Contract.DeviceDatasheetId, message.Contract.PublishIntervalInSeconds);
+            var data = await deviceSensorsDomain.SetPublishIntervalInMilliSeconds(message.Contract.DeviceSensorsId, message.Contract.DeviceDatasheetId, message.Contract.PublishIntervalInMilliSeconds);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DeviceSensors, DeviceSensorsSetPublishIntervalInSecondsModel>(data);
+            var viewModel = Mapper.Map<DeviceSensors, DeviceSensorsSetPublishIntervalInMilliSecondsModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceSensorsConstants.SetPublishIntervalInSecondsViewCompletedQueueName);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceSensorsConstants.SetPublishIntervalInMilliSecondsViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             _logger.DebugLeave();

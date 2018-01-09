@@ -221,7 +221,7 @@ void ESPDevice::autoLoad()
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationId: %s\n", getDeviceInApplication()->getApplicationId());
 				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationTopic: %s\n", getDeviceInApplication()->getApplicationTopic());
 				
-				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceSensors PublishIntervalInSeconds: %d\n", (char*)getDeviceSensors()->getPublishIntervalInSeconds());		
+				_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceSensors PublishIntervalInMilliSeconds: %d\n", (char*)getDeviceSensors()->getPublishIntervalInMilliSeconds());		
 			}		
 		}
 	} else {

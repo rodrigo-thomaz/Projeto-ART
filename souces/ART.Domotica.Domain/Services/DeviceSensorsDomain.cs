@@ -30,7 +30,7 @@
 
         #endregion Constructors
 
-        public async Task<DeviceSensors> SetPublishIntervalInSeconds(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInSeconds)
+        public async Task<DeviceSensors> SetPublishIntervalInMilliSeconds(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInMilliSeconds)
         {
             var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId, deviceDatasheetId);
 
@@ -39,7 +39,7 @@
                 throw new Exception("DeviceSensors not found");
             }
 
-            entity.PublishIntervalInSeconds = publishIntervalInSeconds;
+            entity.PublishIntervalInMilliSeconds = publishIntervalInMilliSeconds;
 
             await _deviceSensorsRepository.Update(entity);
 

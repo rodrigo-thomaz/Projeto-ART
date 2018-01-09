@@ -8,26 +8,26 @@ app.controller('deviceSensorsController', ['$scope', '$rootScope', '$timeout', '
         
         $scope.deviceSensors = deviceSensors; 
 
-        $scope.publishIntervalInSecondsView = deviceSensors.publishIntervalInSeconds;
+        $scope.publishIntervalInMilliSecondsView = deviceSensors.publishIntervalInMilliSeconds;
 
-        clearOnSetPublishIntervalInSecondsCompleted = $rootScope.$on(deviceSensorsConstant.setPublishIntervalInSecondsCompletedEventName + $scope.deviceSensors.deviceSensorsId, onSetPublishIntervalInSecondsCompleted);        
+        clearOnSetPublishIntervalInMilliSecondsCompleted = $rootScope.$on(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedEventName + $scope.deviceSensors.deviceSensorsId, onSetPublishIntervalInMilliSecondsCompleted);        
     }
 
-    var clearOnSetPublishIntervalInSecondsCompleted = null;
+    var clearOnSetPublishIntervalInMilliSecondsCompleted = null;
 
     $scope.$on('$destroy', function () {
-        clearOnSetPublishIntervalInSecondsCompleted();
+        clearOnSetPublishIntervalInMilliSecondsCompleted();
     });
 
-    var onSetPublishIntervalInSecondsCompleted = function (event, data) {
-        $scope.publishIntervalInSecondsView = data.publishIntervalInSeconds;
+    var onSetPublishIntervalInMilliSecondsCompleted = function (event, data) {
+        $scope.publishIntervalInMilliSecondsView = data.publishIntervalInMilliSeconds;
         $scope.$apply();
-        toaster.pop('success', 'Sucesso', 'PublishIntervalInSeconds alterado');
+        toaster.pop('success', 'Sucesso', 'PublishIntervalInMilliSeconds alterado');
     };    
 
-    $scope.changePublishIntervalInSeconds = function () {
-        if (!$scope.deviceSensors || !$scope.publishIntervalInSecondsView) return;
-        deviceSensorsService.setPublishIntervalInSeconds($scope.deviceSensors.deviceSensorsId, $scope.deviceSensors.deviceDatasheetId, $scope.publishIntervalInSecondsView);
+    $scope.changePublishIntervalInMilliSeconds = function () {
+        if (!$scope.deviceSensors || !$scope.publishIntervalInMilliSecondsView) return;
+        deviceSensorsService.setPublishIntervalInMilliSeconds($scope.deviceSensors.deviceSensorsId, $scope.deviceSensors.deviceDatasheetId, $scope.publishIntervalInMilliSecondsView);
     };
 
 }]);

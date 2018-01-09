@@ -11,24 +11,24 @@ class DeviceSensors
 
 public:
 
-	DeviceSensors(ESPDevice* espDevice, int publishIntervalInSeconds);
+	DeviceSensors(ESPDevice* espDevice, int publishIntervalInMilliSeconds);
 	~DeviceSensors();
 	
-	int									getPublishIntervalInSeconds();
-	void								setPublishIntervalInSeconds(int value);
+	int									getPublishIntervalInMilliSeconds();
+	void								setPublishIntervalInMilliSeconds(int value);
 	
 	static void createDeviceSensors(DeviceSensors* (&deviceSensors), ESPDevice* espDevice, JsonObject& jsonObject)
     {
-		int publishIntervalInSeconds = jsonObject["publishIntervalInSeconds"];
+		int publishIntervalInMilliSeconds = jsonObject["publishIntervalInMilliSeconds"];
 		
-		deviceSensors = new DeviceSensors(espDevice, publishIntervalInSeconds); 
+		deviceSensors = new DeviceSensors(espDevice, publishIntervalInMilliSeconds); 
     }
 	
 private:	
 
 	ESPDevice*          				_espDevice;	
 	
-	int									_publishIntervalInSeconds;
+	int									_publishIntervalInMilliSeconds;
 	
 };
 

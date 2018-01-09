@@ -33,8 +33,8 @@
             HasRequired(x => x.DeviceBase)
                .WithRequiredDependent(x => x.DeviceSensors);
 
-            //PublishIntervalInSeconds
-            Property(x => x.PublishIntervalInSeconds)
+            //PublishIntervalInMilliSeconds
+            Property(x => x.PublishIntervalInMilliSeconds)
                 .HasColumnOrder(2)
                 .IsRequired();
         }

@@ -4,7 +4,7 @@
     {
         #region Properties
 
-        public int PublishIntervalInSeconds
+        public int PublishIntervalInMilliSeconds
         {
             get; set;
         }

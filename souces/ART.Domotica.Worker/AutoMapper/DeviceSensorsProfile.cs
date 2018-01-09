@@ -16,16 +16,16 @@
         {
             CreateMap<DeviceSensors, DeviceSensorsGetModel>()
                 .ForMember(vm => vm.DeviceSensorsId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.PublishIntervalInSeconds, m => m.MapFrom(x => x.PublishIntervalInSeconds))
+                .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds))
                 .ForMember(vm => vm.SensorInDevice, m => m.MapFrom(x => x.SensorInDevice.OrderBy(y => y.Ordination)));
 
-            CreateMap<DeviceSensors, DeviceSensorsSetPublishIntervalInSecondsModel>()
+            CreateMap<DeviceSensors, DeviceSensorsSetPublishIntervalInMilliSecondsModel>()
                 .ForMember(vm => vm.DeviceSensorsId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
-                .ForMember(vm => vm.PublishIntervalInSeconds, m => m.MapFrom(x => x.PublishIntervalInSeconds));
+                .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
 
             CreateMap<DeviceSensors, DeviceSensorsDetailResponseContract>()
-                .ForMember(vm => vm.PublishIntervalInSeconds, m => m.MapFrom(x => x.PublishIntervalInSeconds));
+                .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
         }
 
         #endregion Constructors

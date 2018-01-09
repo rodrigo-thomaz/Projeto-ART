@@ -1,10 +1,10 @@
 #include "DeviceSensors.h"
 #include "ESPDevice.h"
 
-DeviceSensors::DeviceSensors(ESPDevice* espDevice, int publishIntervalInSeconds)
+DeviceSensors::DeviceSensors(ESPDevice* espDevice, int publishIntervalInMilliSeconds)
 {
 	_espDevice = espDevice;	
-	_publishIntervalInSeconds = publishIntervalInSeconds;	
+	_publishIntervalInMilliSeconds = publishIntervalInMilliSeconds;	
 }
 
 DeviceSensors::~DeviceSensors()
@@ -12,13 +12,13 @@ DeviceSensors::~DeviceSensors()
 	delete (_espDevice);
 }
 
-int DeviceSensors::getPublishIntervalInSeconds()
+int DeviceSensors::getPublishIntervalInMilliSeconds()
 {	
-	return _publishIntervalInSeconds;
+	return _publishIntervalInMilliSeconds;
 }
 
-void DeviceSensors::setPublishIntervalInSeconds(int value)
+void DeviceSensors::setPublishIntervalInMilliSeconds(int value)
 {	
-	_publishIntervalInSeconds = value;
+	_publishIntervalInMilliSeconds = value;
 }
 

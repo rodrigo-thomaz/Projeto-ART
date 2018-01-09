@@ -374,9 +374,9 @@ void loopInApplication()
     displayMQTTManager.printConnected();  
     displayMQTTManager.printReceived(false);
 
-    int publishIntervalInSeconds = espDevice.getDeviceSensors()->getPublishIntervalInSeconds();
+    int publishIntervalInMilliSeconds = espDevice.getDeviceSensors()->getPublishIntervalInMilliSeconds();
     
-    if(now - publishMessageTimestamp > publishIntervalInSeconds) {
+    if(now - publishMessageTimestamp > publishIntervalInMilliSeconds) {
       publishMessageTimestamp = now;
       displayMQTTManager.printSent(true);
 

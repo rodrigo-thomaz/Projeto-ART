@@ -24,9 +24,9 @@
 
         #region public voids
 
-        public async Task SetPublishIntervalInSeconds(AuthenticatedMessageContract<DeviceSensorsSetPublishIntervalInSecondsRequestContract> message)
+        public async Task SetPublishIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSensorsSetPublishIntervalInMilliSecondsRequestContract> message)
         {
-            await BasicPublish(DeviceSensorsConstants.SetPublishIntervalInSecondsQueueName, message);
+            await BasicPublish(DeviceSensorsConstants.SetPublishIntervalInMilliSecondsQueueName, message);
         }
 
         #endregion

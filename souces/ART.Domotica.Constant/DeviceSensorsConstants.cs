@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string SetPublishIntervalInSecondsQueueName = "DeviceSensors.SetPublishIntervalInSeconds";
-        public static readonly string SetPublishIntervalInSecondsViewCompletedQueueName = "DeviceSensors.SetPublishIntervalInSecondsViewCompleted";
+        public static readonly string SetPublishIntervalInMilliSecondsQueueName = "DeviceSensors.SetPublishIntervalInMilliSeconds";
+        public static readonly string SetPublishIntervalInMilliSecondsViewCompletedQueueName = "DeviceSensors.SetPublishIntervalInMilliSecondsViewCompleted";
 
         #endregion Fields
     }

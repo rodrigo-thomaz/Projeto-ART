@@ -4,7 +4,7 @@
 
     using ART.Domotica.Enums;
 
-    public class DeviceSensorsSetPublishIntervalInSecondsModel
+    public class DeviceSensorsSetPublishIntervalInMilliSecondsModel
     {
         #region Properties
 
@@ -18,7 +18,7 @@
             get; set;
         }
 
-        public int PublishIntervalInSeconds
+        public int PublishIntervalInMilliSeconds
         {
             get; set;
         }
