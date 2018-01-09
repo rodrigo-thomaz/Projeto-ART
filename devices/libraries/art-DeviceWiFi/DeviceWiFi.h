@@ -82,6 +82,7 @@ public:
 	char *						getStationMacAddress();
 	char *						getSoftAPMacAddress();		
 	char *						getHostName();		
+	void						setHostName(char* json);		
 		
 	static void createDeviceWiFi(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice)
     {
@@ -143,14 +144,14 @@ public:
 	
 private:	
 
-	ESPDevice*          		_espDevice;	
+	ESPDevice*          				_espDevice;	
 	
-	char *						_stationMacAddress;
-	char *						_softAPMacAddress;		
-	char *						_hostName;	
+	char *								_stationMacAddress;
+	char *								_softAPMacAddress;		
+	char *								_hostName;	
 
-std::unique_ptr<DNSServer>        dnsServer;
-    std::unique_ptr<ESP8266WebServer> server;
+	std::unique_ptr<DNSServer>        	dnsServer;
+    std::unique_ptr<ESP8266WebServer> 	server;
 
     //const int     WM_DONE                 = 0;
     //const int     WM_WAIT                 = 10;

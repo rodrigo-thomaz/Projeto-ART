@@ -45,14 +45,11 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION "ESPDevice/InsertInApplicationIoT"
 #define TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION "ESPDevice/DeleteFromApplicationIoT"
 #define TOPIC_SUB_ESPDEVICE_SET_LABEL "ESPDevice/SetLabelIoT"
+
 #define TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND "DeviceNTP/SetUtcTimeOffsetInSecondIoT"
 #define TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND "DeviceNTP/SetUpdateIntervalInMilliSecondIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT "DSFamilyTempSensor/SetUnitOfMeasurementIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION "DSFamilyTempSensor/SetResolutionIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON "DSFamilyTempSensor/SetAlarmOnIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor/SetAlarmCelsiusIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
-#define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorChartLimiter/SetValueIoT"
+
+#define TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME "DeviceWiFi/SetHostNameIoT"
 
 #define TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED "DeviceDebug/SetRemoteEnabledIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED "DeviceDebug/SetResetCmdEnabledIoT"
@@ -61,6 +58,14 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL "DeviceDebug/SetShowDebugLevelIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER "DeviceDebug/SetShowProfilerIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME "DeviceDebug/SetShowTimeIoT"
+
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT "DSFamilyTempSensor/SetUnitOfMeasurementIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION "DSFamilyTempSensor/SetResolutionIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON "DSFamilyTempSensor/SetAlarmOnIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor/SetAlarmCelsiusIoT"
+#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
+
+#define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorChartLimiter/SetValueIoT"
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
 
@@ -169,15 +174,11 @@ void subscribeInApplication()
 
   espDevice.getDeviceMQ()->subscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_LABEL);
+  
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME);
 
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
@@ -186,6 +187,15 @@ void subscribeInApplication()
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+  
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
+  
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);  
 
   Serial.println("[MQQT::subscribeInApplication] Initialized with success !");
 }
@@ -196,15 +206,11 @@ void unSubscribeInApplication()
 
   espDevice.getDeviceMQ()->unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_LABEL);
+  
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME);
 
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
@@ -213,6 +219,15 @@ void unSubscribeInApplication()
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+  
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
+  
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);  
   
   Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
@@ -247,7 +262,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       unSubscribeInApplication();
       espDevice.getDeviceInApplication()->deleteFromApplication();            
       subscribeNotInApplication();
-    }    
+    }        
     if(topicKey == String(TOPIC_SUB_ESPDEVICE_SET_LABEL)){
       espDevice.setLabel(strdup(json.c_str()));
     }
@@ -258,28 +273,11 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(topicKey == String(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND)){
       espDevice.getDeviceNTP()->setUpdateIntervalInMilliSecond(json);
     }    
-    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
-      dsFamilyTempSensorManager.setSensorsByMQQTCallback(json);      
-    }
-    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT)){
-      dsFamilyTempSensorManager.SetUnitOfMeasurement(json);
-    }
-    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION)){
-      dsFamilyTempSensorManager.setResolution(json);
-    }
-    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)){
-      dsFamilyTempSensorManager.setAlarmOn(json);
-    }
-    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS)){
-      dsFamilyTempSensorManager.setAlarmCelsius(json);
-    }
-    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON)){
-      dsFamilyTempSensorManager.setAlarmBuzzerOn(json);
-    }
-    if(topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)){
-      dsFamilyTempSensorManager.setChartLimiterCelsius(json);
-    }        
-               
+
+    if(topicKey == String(TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME)){
+      espDevice.getDeviceWiFi()->setHostName(strdup(json.c_str()));
+    } 
+
     if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED)){
       espDevice.getDeviceDebug()->setRemoteEnabled(strdup(json.c_str()));
     }   
@@ -301,6 +299,29 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME)){
       espDevice.getDeviceDebug()->setShowTime(strdup(json.c_str()));
     }
+    
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
+      dsFamilyTempSensorManager.setSensorsByMQQTCallback(json);      
+    }
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT)){
+      dsFamilyTempSensorManager.SetUnitOfMeasurement(json);
+    }
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION)){
+      dsFamilyTempSensorManager.setResolution(json);
+    }
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)){
+      dsFamilyTempSensorManager.setAlarmOn(json);
+    }
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS)){
+      dsFamilyTempSensorManager.setAlarmCelsius(json);
+    }
+    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON)){
+      dsFamilyTempSensorManager.setAlarmBuzzerOn(json);
+    }
+    
+    if(topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)){
+      dsFamilyTempSensorManager.setChartLimiterCelsius(json);
+    }        
 }
 
 void loop() {	 

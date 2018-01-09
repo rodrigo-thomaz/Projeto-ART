@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
     using ART.Domotica.Contract;
+    using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 
@@ -24,6 +25,9 @@
 
             CreateMap<DeviceWiFi, DeviceWiFiDetailResponseContract>()
                 .ForMember(vm => vm.HostName, m => m.MapFrom(x => x.HostName));
+
+            CreateMap<DeviceWiFi, SetValueRequestIoTContract<string>>()
+                .ForMember(vm => vm.Value, m => m.MapFrom(x => x.HostName));
         }
 
         #endregion Constructors

@@ -108,6 +108,19 @@ char* DeviceWiFi::getHostName()
 	return _hostName;
 }
 
+void DeviceWiFi::setHostName(char* json)
+{	
+	StaticJsonBuffer<200> jsonBuffer;	
+	JsonObject& root = jsonBuffer.parseObject(json);	
+	if (!root.success()) {
+		printf("DeviceWiFi", "setHostName", "Parse failed: %s\n", json);
+		return;
+	}
+	char* value = strdup(root["value"]);	
+	_hostName = new char(sizeof(strlen(value)));
+	_hostName = value;
+}
+
 void DeviceWiFi::addParameter(DeviceWiFiParameter *p) {
   if(_paramsCount + 1 > DEVICE_WIFI_MAX_PARAMS)
   {

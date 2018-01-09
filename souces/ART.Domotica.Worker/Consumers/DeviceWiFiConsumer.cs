@@ -3,7 +3,9 @@
     using ART.Domotica.Constant;
     using ART.Domotica.Contract;
     using ART.Domotica.Domain.Interfaces;
+    using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
+    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
@@ -75,6 +77,16 @@
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceWiFiConstants.SetHostNameViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<DeviceWiFi, SetValueRequestIoTContract<string>>(data);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceWiFiConstants.SetHostNameIoTQueueName);
+
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }

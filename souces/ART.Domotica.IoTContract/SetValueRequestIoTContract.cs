@@ -1,10 +1,10 @@
 ﻿namespace ART.Domotica.IoTContract
 {
-    public class DeviceSetLabelRequestIoTContract
+    public class SetValueRequestIoTContract<T>
     {
         #region Properties
 
-        public string Value
+        public T Value
         {
             get; set;
         }

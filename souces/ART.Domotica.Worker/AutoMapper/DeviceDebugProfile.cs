@@ -24,7 +24,7 @@
                 .ForMember(vm => vm.ShowProfiler, m => m.MapFrom(x => x.ShowProfiler))
                 .ForMember(vm => vm.ShowColors, m => m.MapFrom(x => x.ShowColors));
 
-            CreateMap<DeviceDebugSetValueRequestContract, DeviceDebugSetValueRequestIoTContract>()
+            CreateMap<DeviceDebugSetValueRequestContract, SetValueRequestIoTContract<bool>>()
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
 
             CreateMap<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>()
