@@ -2,16 +2,16 @@
 {
     using System;
 
-    public class SensorTempDSFamilySetResolutionRequestIoTContract
+    public class SensorSetLabelRequestIoTContract
     {
         #region Properties
 
-        public Guid SensorId
+        public string Label
         {
             get; set;
         }
 
-        public byte SensorTempDSFamilyResolutionId
+        public Guid SensorId
         {
             get; set;
         }

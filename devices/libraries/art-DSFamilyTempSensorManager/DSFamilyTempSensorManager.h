@@ -58,15 +58,18 @@ class Sensor
 	
   public:
   
-	Sensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
+	Sensor(char* sensorId, DeviceAddress deviceAddress, String family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
 
-    String								getDSFamilyTempSensorId();		
+    char*								getSensorId();		
 	
 	const uint8_t*		 				getDeviceAddress();	
 	
 	String								getFamily();
 	bool								getValidFamily();	
 		
+	char* 								getLabel();
+	void 								setLabel(char* value);
+	
 	int 								getResolution();
 	void 								setResolution(int value);
 	
@@ -93,12 +96,14 @@ class Sensor
 	
   private:	
 	
-	String 								_dsFamilyTempSensorId;	
+	char* 								_sensorId;	
 	
 	std::vector<uint8_t> 				_deviceAddress;
 	
 	String 								_family;
 	bool 								_validFamily;
+	
+	char* 								_label;
 	
 	int 								_resolution;
 	
@@ -136,6 +141,7 @@ class DSFamilyTempSensorManager
 	
 	void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 				
+	void 								setLabel(char* json);
 	void 								setUnitOfMeasurement(String json);
 	void 								setResolution(String json);
 	
@@ -152,7 +158,7 @@ class DSFamilyTempSensorManager
 	bool								_initialized;
 	bool								_initializing;					
 				
-	Sensor&								getSensorById(String sensorId);
+	Sensor&								getSensorById(char* sensorId);
 	String 								getFamily(byte deviceAddress[8]);
 	void								createSensorJsonNestedObject(Sensor sensor, JsonArray& root);
 	String 								convertDeviceAddressToString(const uint8_t* deviceAddress);

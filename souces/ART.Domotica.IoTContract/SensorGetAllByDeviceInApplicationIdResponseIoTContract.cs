@@ -28,6 +28,11 @@
             get; set;
         }
 
+        public string Label
+        {
+            get; set;
+        }
+
         public SensorTriggerGetResponseIoTContract LowAlarm
         {
             get; set;
@@ -43,7 +48,7 @@
             get; set;
         }
 
-        public Guid SensorTempDSFamilyId
+        public Guid SensorId
         {
             get; set;
         }

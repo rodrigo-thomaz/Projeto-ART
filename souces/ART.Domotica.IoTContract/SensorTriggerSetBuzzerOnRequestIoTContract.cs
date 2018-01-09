@@ -18,7 +18,7 @@
             get; set;
         }
 
-        public Guid SensorTempDSFamilyId
+        public Guid SensorId
         {
             get; set;
         }

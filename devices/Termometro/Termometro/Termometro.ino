@@ -61,8 +61,11 @@ int configurationEEPROMAddr = 0;
 
 #define TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
 
+#define TOPIC_SUB_SENSOR_SET_LABEL "Sensor/SetLabelIoT"
+
+#define TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION "SensorTempDSFamily/SetResolutionIoT"
+
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT "DSFamilyTempSensor/SetUnitOfMeasurementIoT"
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION "DSFamilyTempSensor/SetResolutionIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON "DSFamilyTempSensor/SetAlarmOnIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor/SetAlarmCelsiusIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
@@ -191,10 +194,12 @@ void subscribeInApplication()
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
 
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
+
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
   
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
@@ -225,10 +230,12 @@ void unSubscribeInApplication()
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
 
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
+
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
   
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
@@ -309,6 +316,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(topicKey == String(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS)){
       espDevice.getDeviceSensors()->setPublishIntervalInMilliSeconds(strdup(json.c_str()));
     }
+
+    if(topicKey == String(TOPIC_SUB_SENSOR_SET_LABEL)){
+      dsFamilyTempSensorManager.setLabel(strdup(json.c_str()));
+    }
     
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
       dsFamilyTempSensorManager.setSensorsByMQQTCallback(json);      
@@ -316,7 +327,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT)){
       dsFamilyTempSensorManager.setUnitOfMeasurement(json);
     }
-    if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION)){
+    if(topicKey == String(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION)){
       dsFamilyTempSensorManager.setResolution(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)){

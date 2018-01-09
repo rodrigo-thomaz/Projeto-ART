@@ -37,14 +37,19 @@
                     return result;
                 }))
                 .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.SensorTempDSFamily.SensorTempDSFamilyResolution.Bits))
+                .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
                 .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMin))
                 .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMax))
-                .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.Id));
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.Id));
 
             CreateMap<Sensor, SensorSetLabelModel>()
                 .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
+                .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label));
+
+            CreateMap<Sensor, SensorSetLabelRequestIoTContract>()
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label));
         }
 
