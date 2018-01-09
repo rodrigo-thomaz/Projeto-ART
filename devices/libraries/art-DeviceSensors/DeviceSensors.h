@@ -15,7 +15,7 @@ public:
 	~DeviceSensors();
 	
 	int									getPublishIntervalInMilliSeconds();
-	void								setPublishIntervalInMilliSeconds(int value);
+	void								setPublishIntervalInMilliSeconds(char* json);
 	
 	static void createDeviceSensors(DeviceSensors* (&deviceSensors), ESPDevice* espDevice, JsonObject& jsonObject)
     {

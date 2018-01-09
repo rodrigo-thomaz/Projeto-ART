@@ -18,6 +18,7 @@
     using ART.Domotica.Model;
     using ART.Domotica.Contract;
     using ART.Infra.CrossCutting.MQ;
+    using ART.Domotica.IoTContract;
 
     public class DeviceSensorsConsumer : ConsumerBase, IDeviceSensorsConsumer
     {
@@ -72,6 +73,16 @@
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceSensorsConstants.SetPublishIntervalInMilliSecondsViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<DeviceSensors, SetValueRequestIoTContract<int>>(data);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceSensorsConstants.SetPublishIntervalInMilliSecondsIoTQueueName);
+
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();
         }

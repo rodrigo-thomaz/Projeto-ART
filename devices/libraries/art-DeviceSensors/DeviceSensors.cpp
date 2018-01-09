@@ -17,8 +17,14 @@ int DeviceSensors::getPublishIntervalInMilliSeconds()
 	return _publishIntervalInMilliSeconds;
 }
 
-void DeviceSensors::setPublishIntervalInMilliSeconds(int value)
+void DeviceSensors::setPublishIntervalInMilliSeconds(char* json)
 {	
-	_publishIntervalInMilliSeconds = value;
+	StaticJsonBuffer<200> jsonBuffer;	
+	JsonObject& root = jsonBuffer.parseObject(json);	
+	if (!root.success()) {
+		printf("DeviceSensors", "setPublishIntervalInMilliSeconds", "Parse failed: %s\n", json);
+		return;
+	}		
+	_publishIntervalInMilliSeconds = root["value"].as<int>();
 }
 

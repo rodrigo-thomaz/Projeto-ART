@@ -59,6 +59,8 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER "DeviceDebug/SetShowProfilerIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME "DeviceDebug/SetShowTimeIoT"
 
+#define TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
+
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT "DSFamilyTempSensor/SetUnitOfMeasurementIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION "DSFamilyTempSensor/SetResolutionIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON "DSFamilyTempSensor/SetAlarmOnIoT"
@@ -187,6 +189,8 @@ void subscribeInApplication()
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
   
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
@@ -219,6 +223,8 @@ void unSubscribeInApplication()
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
   
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
@@ -298,6 +304,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     }
     if(topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME)){
       espDevice.getDeviceDebug()->setShowTime(strdup(json.c_str()));
+    }
+
+    if(topicKey == String(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS)){
+      espDevice.getDeviceSensors()->setPublishIntervalInMilliSeconds(strdup(json.c_str()));
     }
     
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){

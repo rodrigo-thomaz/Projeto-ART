@@ -3,6 +3,7 @@
     using System.Linq;
 
     using ART.Domotica.Contract;
+    using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 
@@ -26,6 +27,9 @@
 
             CreateMap<DeviceSensors, DeviceSensorsDetailResponseContract>()
                 .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
+
+            CreateMap<DeviceSensors, SetValueRequestIoTContract<int>>()
+                .ForMember(vm => vm.Value, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
         }
 
         #endregion Constructors
