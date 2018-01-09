@@ -1,4 +1,4 @@
-﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceWiFiController" ng-init="init(device.deviceWiFi)">    
+﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceWiFiController" ng-init="init(device.deviceWiFi)">
     <div class="form-group">
         <label class="col-lg-4 control-label">Host Name</label>
         <div class="col-lg-8">
@@ -7,5 +7,17 @@
         <span ng-show="form.inputHostName.$touched && form.inputHostName.$invalid">
             Host name requerido
         </span>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Local IP Address</label>
+        <div class="col-lg-8">
+            <input type="text" class="form-control" readonly uppercased ng-model="device.localIPAddress">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Wifi Quality</label>
+        <div class="col-lg-8">
+            <input type="text" class="form-control" readonly uppercased ng-model="device.wifiQuality">
+        </div>
     </div>
 </form>
