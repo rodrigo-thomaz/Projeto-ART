@@ -417,6 +417,16 @@
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.SetLabelViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<DeviceBase, DeviceSetLabelRequestIoTContract>(data);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetLabelIoTQueueName);
+
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
+
             _logger.DebugLeave();
         }
 

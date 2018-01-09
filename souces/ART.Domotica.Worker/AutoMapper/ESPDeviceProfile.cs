@@ -54,6 +54,9 @@
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.CreateDate, m => m.MapFrom(x => DateTimeConverter.ToUniversalTimestamp(x.CreateDate)))
                 .ForMember(vm => vm.InApplication, m => m.MapFrom(x => x.DevicesInApplication.Any()));
+
+            CreateMap<DeviceBase, DeviceSetLabelRequestIoTContract>()
+                .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Label));
         }
 
         #endregion Constructors
