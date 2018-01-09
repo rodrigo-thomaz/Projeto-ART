@@ -52,19 +52,17 @@
             </div>
         </form>
 
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-        <div data-ng-include=" 'views/device/deviceWiFi.html' "></div>
-
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-        <div data-ng-include=" 'views/device/deviceNTP.html' "></div>
-
-        <div class="line line-dashed b-b line-lg pull-in"></div>
-
-        <div data-ng-include=" 'views/device/deviceDebug.html' "></div>
-
-        <div class="line line-dashed b-b line-lg pull-in"></div>
+        <tabset class="tab-container">
+            <tab heading="WiFi">
+                <div data-ng-include=" 'views/device/deviceWiFi.html' "></div>
+            </tab>
+            <tab heading="NTP">
+                <div data-ng-include=" 'views/device/deviceNTP.html' "></div>
+            </tab>
+            <tab heading="Debug">
+                <div data-ng-include=" 'views/device/deviceDebug.html' "></div>
+            </tab>
+        </tabset>
 
         <div data-ng-include=" 'views/device/deviceSensors.html' "></div>
 
