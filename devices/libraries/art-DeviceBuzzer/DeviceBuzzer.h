@@ -2,18 +2,29 @@
 #define DeviceBuzzer_h
 
 #include "Arduino.h"
+#include "ArduinoJson.h"
+
+#define BUZZER_PIN    13 // D7 => 13
+
+class ESPDevice;
 
 class DeviceBuzzer
 {
+	
 public:
-	DeviceBuzzer(int pin);
+	DeviceBuzzer(ESPDevice* espDevice);
 	~DeviceBuzzer();	
 	
 	void					test();
 	
+	static void createDeviceBuzzer(DeviceBuzzer* (&deviceBuzzer), ESPDevice* espDevice)
+    {
+		deviceBuzzer = new DeviceBuzzer(espDevice); 
+    }
+	
 private:
 
-	int 					_pin;
+	ESPDevice*          	_espDevice;	
 
 };
 

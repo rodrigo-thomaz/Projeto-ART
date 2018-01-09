@@ -81,8 +81,7 @@ uint64_t readTempTimestamp = 0;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
-DeviceBuzzer deviceBuzzer(D7);
-DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice, deviceBuzzer);
+DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice);
 UnitOfMeasurementConverter unitOfMeasurementConverter;
 
 DisplayManager displayManager;
@@ -429,10 +428,7 @@ void loopInApplication()
   }       
 
   // Wifi
-  displayWiFiManager.printSignal();
-  
-  // Buzzer
-  //deviceBuzzer.test();
+  displayWiFiManager.printSignal();  
 
   displayManager.display.display();
 }
