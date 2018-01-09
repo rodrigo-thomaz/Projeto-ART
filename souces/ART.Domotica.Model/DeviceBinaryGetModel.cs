@@ -4,11 +4,16 @@
 
     using ART.Domotica.Enums;
 
-    public class DeviceMQGetModel
+    public class DeviceBinaryGetModel
     {
         #region Properties
 
-        public string ClientId
+        public DateTime CreateDate
+        {
+            get; set;
+        }
+
+        public Guid DeviceBinaryId
         {
             get; set;
         }
@@ -18,17 +23,12 @@
             get; set;
         }
 
-        public Guid DeviceMQId
+        public DateTime UpdateDate
         {
             get; set;
         }
 
-        public string Topic
-        {
-            get; set;
-        }
-
-        public string User
+        public string Version
         {
             get; set;
         }

@@ -175,6 +175,7 @@ angular.module('app')
                         'js/controllers/device/deviceWiFiController.js',
                         'js/controllers/device/deviceNTPController.js',
                         'js/controllers/device/deviceMQController.js',
+                        'js/controllers/device/deviceBinaryController.js',
                         'js/controllers/device/deviceDebugController.js',
                         'js/controllers/device/deviceSensorsController.js',
                         'js/controllers/device/sensorInDeviceController.js',

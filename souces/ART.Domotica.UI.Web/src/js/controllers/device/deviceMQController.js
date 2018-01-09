@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.controller('deviceMQController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'globalizationContext',
-    function ($scope, $rootScope, $timeout, $log, toaster, globalizationContext) {
+app.controller('deviceMQController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 
+    function ($scope, $rootScope, $timeout, $log, toaster) {
 
         $scope.deviceMQ = null;
 

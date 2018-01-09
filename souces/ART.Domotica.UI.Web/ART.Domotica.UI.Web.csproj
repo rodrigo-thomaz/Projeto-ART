@@ -270,6 +270,7 @@
     <Content Include="src\js\config.settings.js" />
     <Content Include="src\js\controllers\admin\espDeviceAdminController.js" />
     <Content Include="src\js\controllers\device\deviceDebugController.js" />
+    <Content Include="src\js\controllers\device\deviceBinaryController.js" />
     <Content Include="src\js\controllers\device\deviceMQController.js" />
     <Content Include="src\js\controllers\device\deviceWiFiController.js" />
     <Content Include="src\js\controllers\espDeviceJoinController.js" />
@@ -625,6 +626,7 @@
     <Content Include="src\tpl\page_profile.html" />
     <Content Include="src\views\admin\espDeviceAdmin.html" />
     <Content Include="src\views\device\deviceDebug.html" />
+    <Content Include="src\views\device\deviceBinary.html" />
     <Content Include="src\views\device\deviceMQ.html" />
     <Content Include="src\views\device\deviceWiFi.html" />
     <Content Include="src\views\espDeviceJoin.html" />

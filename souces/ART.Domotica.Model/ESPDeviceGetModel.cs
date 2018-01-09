@@ -8,6 +8,11 @@
     {
         #region Properties
 
+        public DeviceBinaryGetModel DeviceBinary
+        {
+            get; set;
+        }
+
         public DeviceDatasheetEnum DeviceDatasheetId
         {
             get; set;
@@ -23,12 +28,15 @@
             get; set;
         }
 
-        public DeviceNTPGetModel DeviceNTP
+        public DeviceMQGetModel DeviceMQ
         {
             get; set;
         }
 
-        public DeviceMQGetModel DeviceMQ { get; set; }
+        public DeviceNTPGetModel DeviceNTP
+        {
+            get; set;
+        }
 
         public DeviceSensorsGetModel DeviceSensors
         {
