@@ -51,7 +51,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	int screenWidth = screenX2 - screenX1;
 	int screenHeight = screenY2 - screenY1;	
  
-	DSFamilyTempSensor* sensors = this->_dsFamilyTempSensorManager->getSensors();
+	Sensor* sensors = this->_dsFamilyTempSensorManager->getSensors();
 	
 	int sensorsCount = sizeof(sensors);
     
@@ -66,7 +66,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	}	
 }
 
-void DisplayTemperatureSensorManager::printBar(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
+void DisplayTemperatureSensorManager::printBar(Sensor& sensor, int x, int y, int width, int height)
 {
 	int barMarginTop = 10;
 	int barMarginLeft = 5;
@@ -87,16 +87,16 @@ void DisplayTemperatureSensorManager::printBar(DSFamilyTempSensor& dsFamilyTempS
 	// Bar
 	this->_displayManager->display.drawRect(barX1, barY1, barWidth, barHeight, WHITE);	
 	/// Bar Value
-	this->printBarValue(dsFamilyTempSensor, barX1, barY1, barWidth, barHeight);	        
+	this->printBarValue(sensor, barX1, barY1, barWidth, barHeight);	        
 }
 
-void DisplayTemperatureSensorManager::printBarValue(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height)
+void DisplayTemperatureSensorManager::printBarValue(Sensor& sensor, int x, int y, int width, int height)
 {	
-	float highChartLimiterCelsius = dsFamilyTempSensor.getHighChartLimiterCelsius();
-	float lowChartLimiterCelsius = dsFamilyTempSensor.getLowChartLimiterCelsius();	
+	float highChartLimiterCelsius = sensor.getHighChartLimiterCelsius();
+	float lowChartLimiterCelsius = sensor.getLowChartLimiterCelsius();	
  
 	float range = highChartLimiterCelsius - lowChartLimiterCelsius;
-	float value = dsFamilyTempSensor.getTempCelsius() - lowChartLimiterCelsius;
+	float value = sensor.getTempCelsius() - lowChartLimiterCelsius;
 	float percent = (value * 100) / range;
 	
 	int tempHeight = round((height * percent) / 100);
@@ -109,11 +109,11 @@ void DisplayTemperatureSensorManager::printBarValue(DSFamilyTempSensor& dsFamily
 	this->_displayManager->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
 }
 
-void DisplayTemperatureSensorManager::printText(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y)
+void DisplayTemperatureSensorManager::printText(Sensor& sensor, int x, int y)
 {
-	int unitOfMeasurementId = dsFamilyTempSensor.getUnitOfMeasurementId();
+	int unitOfMeasurementId = sensor.getUnitOfMeasurementId();
 	
-	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitOfMeasurementId, dsFamilyTempSensor.getTempCelsius());	
+	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitOfMeasurementId, sensor.getTempCelsius());	
 
     //Temporario
 	String symbol = "C";

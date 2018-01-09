@@ -22,9 +22,9 @@ private:
 	DSFamilyTempSensorManager*  	_dsFamilyTempSensorManager;
 	UnitOfMeasurementConverter*  	_unitOfMeasurementConverter;
 
-	void							printBar(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height);
-	void							printBarValue(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y, int width, int height);
-	void							printText(DSFamilyTempSensor& dsFamilyTempSensor, int x, int y);
+	void							printBar(Sensor& sensor, int x, int y, int width, int height);
+	void							printBarValue(Sensor& sensor, int x, int y, int width, int height);
+	void							printText(Sensor& sensor, int x, int y);
 };
 
 #endif

@@ -53,12 +53,12 @@ class TempSensorAlarm
 		float 								_tempCelsius;
 };
 
-class DSFamilyTempSensor
+class Sensor
 {
 	
   public:
   
-	DSFamilyTempSensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
+	Sensor(String dsFamilyTempSensorId, DeviceAddress deviceAddress, String family, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
 
     String								getDSFamilyTempSensorId();		
 	
@@ -132,7 +132,7 @@ class DSFamilyTempSensorManager
 	
 	void 								refresh();	
 			
-	DSFamilyTempSensor 					*getSensors();
+	Sensor 								*getSensors();
 	
 	void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 				
@@ -152,12 +152,12 @@ class DSFamilyTempSensorManager
 	bool								_initialized;
 	bool								_initializing;					
 				
-	DSFamilyTempSensor&					getDSFamilyTempSensorById(String deviceAddress);
+	Sensor&								getSensorById(String sensorId);
 	String 								getFamily(byte deviceAddress[8]);
-	void								createSensorJsonNestedObject(DSFamilyTempSensor dsFamilyTempSensor, JsonArray& root);
+	void								createSensorJsonNestedObject(Sensor sensor, JsonArray& root);
 	String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 	
-	std::vector<DSFamilyTempSensor> 	_sensors;
+	std::vector<Sensor> 	_sensors;
 };
 
 #endif
