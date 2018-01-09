@@ -84,8 +84,15 @@ char* ESPDevice::getLabel()
 	return _label;
 }
 
-void ESPDevice::setLabel(char* value)
+void ESPDevice::setLabel(char* json)
 {	
+	StaticJsonBuffer<200> jsonBuffer;	
+	JsonObject& root = jsonBuffer.parseObject(json);	
+	if (!root.success()) {
+		printf("ESPDevice", "setLabel", "Parse failed: %s\n", json);
+		return;
+	}
+	char* value = strdup(root["value"]);	
 	_label = new char(sizeof(strlen(value)));
 	_label = value;
 }

@@ -33,7 +33,7 @@ class ESPDevice
 		long						getChipSize();
 
 		char *						getLabel();
-		void						setLabel(char * value);
+		void						setLabel(char* json);
 		
 		char *						getWebApiHost();
 		uint16_t					getWebApiPort();

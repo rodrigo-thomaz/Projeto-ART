@@ -44,6 +44,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_ESPDEVICE_UPDATE_PIN "ESPDevice/UpdatePinIoT"
 #define TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION "ESPDevice/InsertInApplicationIoT"
 #define TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION "ESPDevice/DeleteFromApplicationIoT"
+#define TOPIC_SUB_ESPDEVICE_SET_LABEL "ESPDevice/SetLabelIoT"
 #define TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND "DeviceNTP/SetUtcTimeOffsetInSecondIoT"
 #define TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND "DeviceNTP/SetUpdateIntervalInMilliSecondIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT "DSFamilyTempSensor/SetUnitOfMeasurementIoT"
@@ -167,6 +168,7 @@ void subscribeInApplication()
   Serial.println("[MQQT::subscribeInApplication] initializing ...");
 
   espDevice.getDeviceMQ()->subscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_LABEL);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
@@ -193,6 +195,7 @@ void unSubscribeInApplication()
   Serial.println("[MQQT::unSubscribeInApplication] initializing ...");  
 
   espDevice.getDeviceMQ()->unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_LABEL);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
@@ -245,6 +248,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       espDevice.getDeviceInApplication()->deleteFromApplication();            
       subscribeNotInApplication();
     }    
+    if(topicKey == String(TOPIC_SUB_ESPDEVICE_SET_LABEL)){
+      espDevice.setLabel(strdup(json.c_str()));
+    }
+    
     if(topicKey == String(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND)){
       espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(json);
     }
