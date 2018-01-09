@@ -4,7 +4,7 @@
 
     using ART.Domotica.Enums;
 
-    public class ESPDeviceGetModel
+    public class DeviceMQGetModel
     {
         #region Properties
 
@@ -13,34 +13,22 @@
             get; set;
         }
 
-        public DeviceDebugGetModel DeviceDebug
+        public Guid DeviceMQId
         {
             get; set;
         }
 
-        public Guid DeviceId
+        public string User
         {
             get; set;
         }
 
-        public DeviceNTPGetModel DeviceNTP
+        public string ClientId
         {
             get; set;
         }
 
-        public DeviceMQGetModel DeviceMQ { get; set; }
-
-        public DeviceSensorsGetModel DeviceSensors
-        {
-            get; set;
-        }
-
-        public DeviceWiFiGetModel DeviceWiFi
-        {
-            get; set;
-        }
-
-        public string Label
+        public string Topic
         {
             get; set;
         }

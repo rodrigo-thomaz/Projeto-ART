@@ -104,6 +104,7 @@
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceDebug)
+                .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceSensors.SensorInDevice)
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();           
