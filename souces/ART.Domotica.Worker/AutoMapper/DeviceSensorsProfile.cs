@@ -27,9 +27,6 @@
 
             CreateMap<DeviceSensors, DeviceSensorsDetailResponseContract>()
                 .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
-
-            CreateMap<DeviceSensors, SetValueRequestIoTContract<int>>()
-                .ForMember(vm => vm.Value, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
         }
 
         #endregion Constructors

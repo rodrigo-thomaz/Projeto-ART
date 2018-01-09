@@ -421,7 +421,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceBase, SetValueRequestIoTContract<string>>(data);
+            var iotContract = new SetValueRequestIoTContract<string>(data.Label);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, ESPDeviceConstants.SetLabelIoTQueueName);
 

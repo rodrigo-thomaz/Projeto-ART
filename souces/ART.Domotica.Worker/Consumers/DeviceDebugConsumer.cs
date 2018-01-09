@@ -111,7 +111,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceDebugSetValueRequestContract, SetValueRequestIoTContract<bool>>(message.Contract);
+            var iotContract = new SetValueRequestIoTContract<bool>(data.RemoteEnabled);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.SetRemoteEnabledIoTQueueName);
 
@@ -148,7 +148,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceDebugSetValueRequestContract, SetValueRequestIoTContract<bool>>(message.Contract);
+            var iotContract = new SetValueRequestIoTContract<bool>(data.SerialEnabled);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.SetSerialEnabledIoTQueueName);
 
@@ -185,7 +185,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceDebugSetValueRequestContract, SetValueRequestIoTContract<bool>>(message.Contract);
+            var iotContract = new SetValueRequestIoTContract<bool>(data.ResetCmdEnabled);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.SetResetCmdEnabledIoTQueueName);
 
@@ -222,7 +222,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceDebugSetValueRequestContract, SetValueRequestIoTContract<bool>>(message.Contract);
+            var iotContract = new SetValueRequestIoTContract<bool>(data.ShowDebugLevel);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.SetShowDebugLevelIoTQueueName);
 
@@ -259,7 +259,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceDebugSetValueRequestContract, SetValueRequestIoTContract<bool>>(message.Contract);
+            var iotContract = new SetValueRequestIoTContract<bool>(data.ShowTime);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.SetShowTimeIoTQueueName);
 
@@ -296,7 +296,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceDebugSetValueRequestContract, SetValueRequestIoTContract<bool>>(message.Contract);
+            var iotContract = new SetValueRequestIoTContract<bool>(data.ShowProfiler);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.SetShowProfilerIoTQueueName);
 
@@ -333,7 +333,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceDebugSetValueRequestContract, SetValueRequestIoTContract<bool>>(message.Contract);
+            var iotContract = new SetValueRequestIoTContract<bool>(data.ShowColors);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.SetShowColorsIoTQueueName);
 

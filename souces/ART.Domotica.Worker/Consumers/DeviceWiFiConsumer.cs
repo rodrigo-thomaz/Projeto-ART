@@ -82,7 +82,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceWiFi, SetValueRequestIoTContract<string>>(data);
+            var iotContract = new SetValueRequestIoTContract<string>(data.HostName);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceWiFiConstants.SetHostNameIoTQueueName);
 
