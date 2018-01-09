@@ -5,7 +5,6 @@
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
-    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;

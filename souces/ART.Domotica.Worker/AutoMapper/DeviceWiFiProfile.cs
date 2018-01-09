@@ -1,7 +1,6 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
     using ART.Domotica.Contract;
-    using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 

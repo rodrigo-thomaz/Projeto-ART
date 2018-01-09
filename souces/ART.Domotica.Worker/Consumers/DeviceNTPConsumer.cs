@@ -5,7 +5,6 @@
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
-    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
@@ -87,7 +86,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceNTPId, viewModel.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceNTP, DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract>(data);
+            var iotContract = new SetValueRequestIoTContract<int>(data.TimeZone.UtcTimeOffsetInSecond);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceNTPConstants.SetUtcTimeOffsetInSecondIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
@@ -124,7 +123,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceNTPId, viewModel.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract, DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract>(message.Contract);
+            var iotContract = new SetValueRequestIoTContract<int>(data.UpdateIntervalInMilliSecond);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceNTPConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);

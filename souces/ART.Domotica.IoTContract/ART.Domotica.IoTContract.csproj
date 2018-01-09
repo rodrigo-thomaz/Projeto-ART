@@ -42,8 +42,6 @@
   <ItemGroup>
     <Compile Include="SetValueRequestIoTContract.cs" />
     <Compile Include="SensorGetAllByDeviceInApplicationIdResponseIoTContract.cs" />
-    <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondRequestIoTContract.cs" />
-    <Compile Include="DeviceNTPSetUtcTimeOffsetInSecondRequestIoTContract.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetValueRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetTriggerOnRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetTriggerValueRequestIoTContract.cs" />
