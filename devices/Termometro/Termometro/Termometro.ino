@@ -314,7 +314,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
       dsFamilyTempSensorManager.setSensorsByMQQTCallback(json);      
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT)){
-      dsFamilyTempSensorManager.SetUnitOfMeasurement(json);
+      dsFamilyTempSensorManager.setUnitOfMeasurement(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_RESOLUTION)){
       dsFamilyTempSensorManager.setResolution(json);

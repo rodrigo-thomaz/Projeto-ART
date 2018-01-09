@@ -136,7 +136,7 @@ class DSFamilyTempSensorManager
 	
 	void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 				
-	void 								SetUnitOfMeasurement(String json);
+	void 								setUnitOfMeasurement(String json);
 	void 								setResolution(String json);
 	
 	void 								setAlarmOn(String json);
@@ -157,7 +157,7 @@ class DSFamilyTempSensorManager
 	void								createSensorJsonNestedObject(Sensor sensor, JsonArray& root);
 	String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 	
-	std::vector<Sensor> 	_sensors;
+	std::vector<Sensor> 				_sensors;
 };
 
 #endif

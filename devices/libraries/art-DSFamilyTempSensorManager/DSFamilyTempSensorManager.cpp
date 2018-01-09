@@ -360,14 +360,14 @@ void DSFamilyTempSensorManager::createSensorsJsonNestedArray(JsonObject& jsonObj
 	}	
 }
 
-void DSFamilyTempSensorManager::SetUnitOfMeasurement(String json)
+void DSFamilyTempSensorManager::setUnitOfMeasurement(String json)
 {
 	StaticJsonBuffer<200> jsonBuffer;
 
 	JsonObject& root = jsonBuffer.parseObject(json);
 	
 	if (!root.success()) {
-		Serial.print("parse SetUnitOfMeasurement failed: ");
+		Serial.print("parse setUnitOfMeasurement failed: ");
 		Serial.println(json);
 		return;
 	}	
@@ -378,7 +378,7 @@ void DSFamilyTempSensorManager::SetUnitOfMeasurement(String json)
 	Sensor& sensor 	= getSensorById(sensorId);
 	sensor.setUnitOfMeasurementId(value);
 
-	Serial.print("SetUnitOfMeasurement=");
+	Serial.print("setUnitOfMeasurement=");
 	Serial.println(json);
 }
 
