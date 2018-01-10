@@ -81,7 +81,7 @@ uint64_t readTempTimestamp = 0;
 
 using namespace ART; 
 
-ART::ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
+ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
 DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice);
 UnitOfMeasurementConverter unitOfMeasurementConverter;
@@ -354,7 +354,7 @@ void loop() {
 
   espDevice.getDeviceBinary()->loop();
 
-  ART::DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
+  DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
   
   if(deviceInApplication != NULL && deviceInApplication->getApplicationId() == ""){
     displayAccessManager.loop();

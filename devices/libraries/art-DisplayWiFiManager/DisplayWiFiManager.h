@@ -8,10 +8,12 @@
 #include "Fonts/FreeSans9pt7b.h"
 #include "Fonts/FreeSansBold9pt7b.h"
 
+using namespace ART; 
+
 class DisplayWiFiManager
 {
 public:
-	DisplayWiFiManager(DisplayManager& displayManager, ART::ESPDevice& espDevice);
+	DisplayWiFiManager(DisplayManager& displayManager, ESPDevice& espDevice);
 	~DisplayWiFiManager();	
 
 	void 															printSignal ();
@@ -19,7 +21,7 @@ public:
 private:								
 								
 	DisplayManager*       											_displayManager;	
-	ART::ESPDevice*          										_espDevice;
+	ESPDevice*          											_espDevice;
 											
 	bool 															_firstTimecaptivePortalCallback = true;
 											

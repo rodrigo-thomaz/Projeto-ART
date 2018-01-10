@@ -1,6 +1,8 @@
 #include "DisplayWiFiManager.h"
 
-DisplayWiFiManager::DisplayWiFiManager(DisplayManager& displayManager, ART::ESPDevice& espDevice)
+using namespace ART;
+
+DisplayWiFiManager::DisplayWiFiManager(DisplayManager& displayManager, ESPDevice& espDevice)
 {
 	this->_displayManager = &displayManager;
 	this->_espDevice = &espDevice;

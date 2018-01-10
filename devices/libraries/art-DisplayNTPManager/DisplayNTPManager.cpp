@@ -1,6 +1,8 @@
 #include "DisplayNTPManager.h"
 
-DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, ART::ESPDevice& espDevice)
+using namespace ART;
+
+DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, ESPDevice& espDevice)
 {
 	this->_displayManager = &displayManager;
 	this->_espDevice = &espDevice;

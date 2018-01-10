@@ -5,17 +5,19 @@
 #include "DisplayManager.h"
 #include "ESPDevice.h"
 
+using namespace ART;
+
 class DisplayNTPManager
 {
 public:
-	DisplayNTPManager(DisplayManager& displayManager, ART::ESPDevice& espDevice);
+	DisplayNTPManager(DisplayManager& displayManager, ESPDevice& espDevice);
 	~DisplayNTPManager();
 	
 private:
 
 	DisplayManager*       							_displayManager;	
-	ART::ESPDevice*          						_espDevice;
-						
+	ESPDevice*          							_espDevice;
+
 	void											printTime();
 	void											printUpdate(bool on);
 							
