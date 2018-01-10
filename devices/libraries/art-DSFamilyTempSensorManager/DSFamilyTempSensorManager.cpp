@@ -4,11 +4,11 @@
 // Data wire is plugged into port 0
 #define ONE_WIRE_BUS 0
 
-// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-OneWire oneWire(ONE_WIRE_BUS);
+// Setup a oneWireOld instance to communicate with any oneWireOld devices (not just Maxim/Dallas temperature ICs)
+OneWire oneWireOld(ONE_WIRE_BUS);
 
-// Pass our oneWire reference to Dallas Temperature. 
-DallasTemperature _dallas(&oneWire);
+// Pass our oneWireOld reference to Dallas Temperature. 
+DallasTemperature _dallasOld(&oneWireOld);
 
 using namespace ART;
 
@@ -21,7 +21,7 @@ DSFamilyTempSensorManager::DSFamilyTempSensorManager(ESPDevice& espDevice)
 
 void DSFamilyTempSensorManager::begin()
 {	
-	_dallas.begin();  	
+	_dallasOld.begin();  	
 	initialized();
 }
 	
@@ -55,12 +55,12 @@ bool DSFamilyTempSensorManager::initialized()
 	root["applicationId"] = applicationId;
 	
 	// device addresses prepare	
-	uint8_t deviceCount = _dallas.getDeviceCount();		
+	uint8_t deviceCount = _dallasOld.getDeviceCount();		
 	if(deviceCount > 0) {	
 		JsonArray& deviceAddressJsonArray = root.createNestedArray("deviceAddresses");
 		for(int i = 0; i < deviceCount; ++i){		
 			DeviceAddress deviceAddress;		
-			if (_dallas.getAddress(deviceAddress, i))
+			if (_dallasOld.getAddress(deviceAddress, i))
 			{ 	
 				deviceAddressJsonArray.add(this->convertDeviceAddressToString(deviceAddress));				
 			}
@@ -141,8 +141,8 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 				lowChartLimiterCelsius,
 				highChartLimiterCelsius));
 				
-		_dallas.setResolution(deviceAddress, resolution);		
-		_dallas.resetAlarmSearch();		
+		_dallasOld.setResolution(deviceAddress, resolution);		
+		_dallasOld.resetAlarmSearch();		
 	}
 				
 	Serial.println("[DSFamilyTempSensorManager::setSensorsByMQQTCallback] initialized with success !");
@@ -153,11 +153,11 @@ void DSFamilyTempSensorManager::refresh()
 	bool hasAlarm = false;
 	bool hasAlarmBuzzer = false;
 	
-	_dallas.requestTemperatures();
+	_dallasOld.requestTemperatures();
 	for(int i = 0; i < this->_sensors.size(); ++i){		
-		this->_sensors[i].setConnected(_dallas.isConnected(this->_sensors[i].getDeviceAddress()));
-		this->_sensors[i].setResolution(_dallas.getResolution(this->_sensors[i].getDeviceAddress()));
-		this->_sensors[i].setTempCelsius(_dallas.getTempC(this->_sensors[i].getDeviceAddress()));
+		this->_sensors[i].setConnected(_dallasOld.isConnected(this->_sensors[i].getDeviceAddress()));
+		this->_sensors[i].setResolution(_dallasOld.getResolution(this->_sensors[i].getDeviceAddress()));
+		this->_sensors[i].setTempCelsius(_dallasOld.getTempC(this->_sensors[i].getDeviceAddress()));
 		
 		if(this->_sensors[i].hasAlarm()) 		hasAlarm 		= true;
 		if(this->_sensors[i].hasAlarmBuzzer()) 	hasAlarmBuzzer 	= true;
@@ -241,7 +241,7 @@ void DSFamilyTempSensorManager::setResolution(String json)
 
 	Sensor& sensor = getSensorById(sensorId);
 	sensor.setResolution(value);
-	_dallas.setResolution(sensor.getDeviceAddress(), value);
+	_dallasOld.setResolution(sensor.getDeviceAddress(), value);
 
 	Serial.print("setResolution=");
 	Serial.println(json);
