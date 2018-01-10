@@ -6,22 +6,59 @@
 
 class ESPDevice;
 
+enum TempSensorAlarmPosition 
+{ 
+	Max  = 0, 
+	Min  = 1, 
+};
+
+class TempSensorAlarm
+{	
+	public:
+	
+		TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, TempSensorAlarmPosition alarmPosition);
+		
+		bool 								getAlarmOn();	
+		void 								setAlarmOn(bool value);
+		
+		float 								getAlarmCelsius();
+		void 								setAlarmCelsius(float value);
+		
+		bool 								getAlarmBuzzerOn();	
+		void 								setAlarmBuzzerOn(bool value);
+		
+		bool 								hasAlarm();
+		
+		bool 								hasAlarmBuzzer();
+		
+		void 								setTempCelsius(float value);
+	
+	private:
+	
+		bool 								_alarmOn;		
+		float 								_alarmCelsius;
+		bool 								_alarmBuzzerOn;
+		TempSensorAlarmPosition				_alarmPosition;
+		
+		float 								_tempCelsius;
+};
+
 class DeviceSensors
 {
 
 public:
 
-	DeviceSensors(ESPDevice* espDevice, int publishIntervalInMilliSeconds);
+	DeviceSensors(ESPDevice* espDevice);
 	~DeviceSensors();
+	
+	void								load(JsonObject& jsonObject);
 	
 	int									getPublishIntervalInMilliSeconds();
 	void								setPublishIntervalInMilliSeconds(char* json);
 	
-	static void createDeviceSensors(DeviceSensors* (&deviceSensors), ESPDevice* espDevice, JsonObject& jsonObject)
+	static void createDeviceSensors(DeviceSensors* (&deviceSensors), ESPDevice* espDevice)
     {
-		int publishIntervalInMilliSeconds = jsonObject["publishIntervalInMilliSeconds"];
-		
-		deviceSensors = new DeviceSensors(espDevice, publishIntervalInMilliSeconds); 
+		deviceSensors = new DeviceSensors(espDevice); 
     }
 	
 private:	

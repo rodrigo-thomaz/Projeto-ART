@@ -1,4 +1,5 @@
 #include "DSFamilyTempSensorManager.h"
+#include "DeviceSensors.h"
 
 // Data wire is plugged into port 0
 #define ONE_WIRE_BUS 0
@@ -8,68 +9,6 @@ OneWire oneWire(ONE_WIRE_BUS);
 
 // Pass our oneWire reference to Dallas Temperature. 
 DallasTemperature _dallas(&oneWire);
-
-
-// TempSensorAlarm
-
-TempSensorAlarm::TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, TempSensorAlarmPosition alarmPosition)
-{
-	this->_alarmOn = alarmOn;
-	this->_alarmCelsius = alarmCelsius;
-	this->_alarmBuzzerOn = alarmBuzzerOn;
-	this->_alarmPosition = alarmPosition;
-}
-
-bool TempSensorAlarm::getAlarmOn()	
-{
-	return this->_alarmOn;
-}
-
-void TempSensorAlarm::setAlarmOn(bool value)
-{
-	this->_alarmOn = value;
-}
-
-float TempSensorAlarm::getAlarmCelsius()
-{
-	return this->_alarmCelsius;
-}
-
-void TempSensorAlarm::setAlarmCelsius(float value)
-{
-	this->_alarmCelsius = value;
-}
-
-bool TempSensorAlarm::getAlarmBuzzerOn()
-{
-	return this->_alarmBuzzerOn;
-}
-
-void TempSensorAlarm::setAlarmBuzzerOn(bool value)
-{
-	this->_alarmBuzzerOn = value;
-}
-
-bool TempSensorAlarm::hasAlarm()
-{
-	if(!this->_alarmOn) return false;
-		
-	switch(this->_alarmPosition)
-	{
-		case Max : return this->_tempCelsius > this->_alarmCelsius;
-		case Min : return this->_tempCelsius < this->_alarmCelsius;		
-	}
-}
-
-bool TempSensorAlarm::hasAlarmBuzzer()
-{
-	return this->hasAlarm() && this->_alarmBuzzerOn;
-}
-
-void TempSensorAlarm::setTempCelsius(float value)
-{
-	this->_tempCelsius = value;
-}
 
 // Sensor
 
@@ -288,15 +227,15 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 
 	DynamicJsonBuffer jsonBuffer;
 	//StaticJsonBuffer<DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
-
+	
 	JsonArray& jsonArray = jsonBuffer.parseArray(json);
-
+	
 	if (!jsonArray.success()) {
 		Serial.print("[DSFamilyTempSensorManager::setSensorsByMQQTCallback] parse failed: ");
 		Serial.println(json);
 		return;
 	}			
-
+	
 	for(JsonArray::iterator it=jsonArray.begin(); it!=jsonArray.end(); ++it) 
 	{
 		JsonObject& sensorJsonObject = it->as<JsonObject>();		
@@ -306,7 +245,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = sensorJsonObject["deviceAddress"][i];
 		
 		char* 			sensorId 				= strdup(sensorJsonObject["sensorId"]);	
-		char* 			family 					= strdup(sensorJsonObject["family"]);	
+		char* 			family 					= strdup(getFamily(deviceAddress).c_str());	
 		char* 			label 					= strdup(sensorJsonObject["label"]);				
 		int 			resolution 				= int(sensorJsonObject["resolutionBits"]);				
 		byte 			unitOfMeasurementId 	= byte(sensorJsonObject["unitOfMeasurementId"]);		
@@ -316,7 +255,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		
 		JsonObject& 	lowAlarmJsonObject 		= sensorJsonObject["lowAlarm"].as<JsonObject>();	
 		JsonObject& 	highAlarmJsonObject 	= sensorJsonObject["highAlarm"].as<JsonObject>();	
-						
+
 		bool 			lowAlarmOn 				= bool(lowAlarmJsonObject["alarmOn"]);
 		float 			lowAlarmCelsius			= float(lowAlarmJsonObject["alarmCelsius"]);
 		bool 			lowAlarmBuzzerOn 		= bool(lowAlarmJsonObject["buzzerOn"]);
@@ -324,7 +263,7 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		bool 			highAlarmOn 			= bool(highAlarmJsonObject["alarmOn"]);
 		float 			highAlarmCelsius		= float(highAlarmJsonObject["alarmCelsius"]);
 		bool 			highAlarmBuzzerOn 		= bool(highAlarmJsonObject["alarmBuzzerOn"]);
-				
+		
 		TempSensorAlarm highAlarm 				= TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, Max);				
 		TempSensorAlarm lowAlarm 				= TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, Min);		
 		
