@@ -7,6 +7,8 @@
 #include "OneWire.h"
 #include "DallasTemperature.h"
 
+#include "SensorInDevice.h"
+
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
 
@@ -176,6 +178,7 @@ namespace ART
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 
 		std::vector<Sensor> 				_sensors;
+		std::vector<SensorInDevice>			_sensorsInDevice;
 
 		int									_publishIntervalInMilliSeconds;
 

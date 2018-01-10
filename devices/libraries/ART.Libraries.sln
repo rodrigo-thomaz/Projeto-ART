@@ -53,6 +53,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RemoteDebug", "RemoteDebug\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ultrasonic", "Ultrasonic\Ultrasonic.vcxitems", "{1AF0FDF4-8AFA-4072-998F-08C6C17E113F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorInDevice", "SensorInDevice\SensorInDevice.vcxitems", "{3DB056E4-1850-498E-8679-905AE18DCB0C}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

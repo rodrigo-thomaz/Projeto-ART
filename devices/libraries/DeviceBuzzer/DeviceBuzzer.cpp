@@ -5,7 +5,7 @@ namespace ART
 {
 	DeviceBuzzer::DeviceBuzzer(ESPDevice* espDevice)
 	{
-
+		_espDevice = espDevice;
 	}
 
 	DeviceBuzzer::~DeviceBuzzer()
