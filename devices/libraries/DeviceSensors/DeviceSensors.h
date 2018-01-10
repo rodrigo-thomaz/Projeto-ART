@@ -65,10 +65,10 @@ namespace ART
 
 		const uint8_t*		 				getDeviceAddress();
 
-		char*								getFamily();
+		char*								getFamily() const;
 		bool								getValidFamily();
 
-		char* 								getLabel();
+		char* 								getLabel() const;
 		void 								setLabel(char* value);
 
 		int 								getResolution();

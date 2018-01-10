@@ -109,9 +109,9 @@ namespace ART
 		return _deviceAddress.data();
 	}
 
-	char* Sensor::getFamily()
+	char * Sensor::getFamily() const
 	{
-		return _family;
+		return (_family);
 	}
 
 	bool Sensor::getValidFamily()
@@ -119,9 +119,9 @@ namespace ART
 		return _validFamily;
 	}
 
-	char* Sensor::getLabel()
+	char * Sensor::getLabel() const
 	{
-		return _label;
+		return (_label);
 	}
 
 	void Sensor::setLabel(char* value)

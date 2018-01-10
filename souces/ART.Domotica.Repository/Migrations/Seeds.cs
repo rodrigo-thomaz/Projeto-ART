@@ -900,7 +900,8 @@
 
             #region DeviceDatasheetBinaryBuffer
 
-            var binaryBuffer = File.ReadAllBytes(@"C:\Projeto-ART\devices\Termometro\Termometro\Termometro.ino.nodemcu.bin");
+            //var binaryBuffer = File.ReadAllBytes(@"C:\Projeto-ART\devices\Termometro\Termometro\Termometro.ino.nodemcu.bin");
+            var binaryBuffer = File.ReadAllBytes(@"C:\Projeto-ART\devices\ESPDeviceTemp\Debug\ESPDeviceTemp.ino.bin");
 
             var datashetts = context.DeviceDatasheet.ToList();
 

@@ -19,10 +19,10 @@ namespace ART
 		void								insertInApplication(String json);
 		void								deleteFromApplication();
 
-		char*								getApplicationId();
+		char*								getApplicationId() const;
 		void								setApplicationId(char* value);
 
-		char*								getApplicationTopic();
+		char*								getApplicationTopic()  const;
 		void								setApplicationTopic(char* value);
 
 		static void createDeviceInApplication(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice, JsonObject& jsonObject)

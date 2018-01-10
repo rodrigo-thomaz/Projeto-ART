@@ -25,9 +25,9 @@ namespace ART
 		delete (_applicationTopic);
 	}
 
-	char* DeviceInApplication::getApplicationId()
+	char* DeviceInApplication::getApplicationId() const
 	{
-		return _applicationId;
+		return (_applicationId);
 	}
 
 	void DeviceInApplication::setApplicationId(char* value)
@@ -36,9 +36,9 @@ namespace ART
 		_applicationId = value;
 	}
 
-	char* DeviceInApplication::getApplicationTopic()
+	char* DeviceInApplication::getApplicationTopic() const
 	{
-		return _applicationTopic;
+		return (_applicationTopic);
 	}
 
 	void DeviceInApplication::setApplicationTopic(char* value)
