@@ -5,15 +5,15 @@
 
 class UnitOfMeasurementConverter
 {
-  public:
-  
-    UnitOfMeasurementConverter();
-	
+public:
+
+	UnitOfMeasurementConverter();
+
 	float																	convertFromCelsius(int unitOfMeasurementId, float celsius);
 	float																	convertCelsiusToFahrenheit(float celsius);
-										
-  private:												
-	
+
+private:
+
 };
 
 #endif

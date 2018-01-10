@@ -39,6 +39,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adafruit-GFX-Library", "Ada
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DallasTemperature", "DallasTemperature\DallasTemperature.vcxitems", "{83892C15-B1AA-4D4E-916F-850785D46041}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitOfMeasurementConverter", "UnitOfMeasurementConverter\UnitOfMeasurementConverter.vcxitems", "{6D7DA896-AF78-4A2D-8B65-2571141A6825}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EEPROMManager", "EEPROMManager\EEPROMManager.vcxitems", "{AF493238-5F46-4F95-BC89-C2B33956A178}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
