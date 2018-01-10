@@ -14,8 +14,9 @@
 #define DeviceWiFi_h
 
 #include "ArduinoJson.h"
+#include "WiFiClient.h"
 #include "ESP8266WiFi.h"
-#include <ESP8266WebServer.h>
+#include "ESP8266WebServer.h"
 #include <DNSServer.h>
 #include <memory>
 
@@ -44,200 +45,203 @@ const char HTTP_END[] PROGMEM             = "</div></body></html>";
 #define DEVICE_WIFI_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void(int)>
 #define DEVICE_WIFI_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void()>
 
-class ESPDevice;
-
-class DeviceWiFiParameter {
-  public:
-    DeviceWiFiParameter(const char *custom);
-    DeviceWiFiParameter(const char *id, const char *placeholder, const char *defaultValue, int length);
-    DeviceWiFiParameter(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom);
-
-    const char *getID();
-    const char *getValue();
-    const char *getPlaceholder();
-    int         getValueLength();
-    const char *getCustomHTML();
-  private:
-    const char *_id;
-    const char *_placeholder;
-    char       *_value;
-    int         _length;
-    const char *_customHTML;
-
-    void init(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom);
-
-    friend class DeviceWiFi;
-};
-
-class DeviceWiFi
+namespace ART
 {
+	class ESPDevice;
 
-public:
+	class DeviceWiFiParameter {
+	  public:
+		DeviceWiFiParameter(const char *custom);
+		DeviceWiFiParameter(const char *id, const char *placeholder, const char *defaultValue, int length);
+		DeviceWiFiParameter(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom);
 
-	DeviceWiFi(ESPDevice* espDevice);
-	~DeviceWiFi();
-	
-	void						load(JsonObject& jsonObject);
-	
-	char *						getStationMacAddress();
-	char *						getSoftAPMacAddress();		
-	char *						getHostName();		
-	void						setHostName(char* json);		
+		const char *getID();
+		const char *getValue();
+		const char *getPlaceholder();
+		int         getValueLength();
+		const char *getCustomHTML();
+	  private:
+		const char *_id;
+		const char *_placeholder;
+		char       *_value;
+		int         _length;
+		const char *_customHTML;
+
+		void init(const char *id, const char *placeholder, const char *defaultValue, int length, const char *custom);
+
+		friend class DeviceWiFi;
+	};
+
+	class DeviceWiFi
+	{
+
+	public:
+
+		DeviceWiFi(ESPDevice* espDevice);
+		~DeviceWiFi();
 		
-	static void createDeviceWiFi(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice)
-    {
-		deviceWiFi = new DeviceWiFi(espDevice);
-    }
-	
-	 //boolean       autoConnect();
-	void          autoConnect();
-    //boolean       autoConnect(char const *apName, char const *apPassword = NULL);	
-	
-    //if you want to always start the config portal, without trying to connect first
-    boolean       startConfigPortal();
-    boolean       startConfigPortal(char const *apName, char const *apPassword = NULL);
-
-    // get the AP name of the config portal, so it can be used in the callback
-    String        getConfigPortalSSID();
-	String        getConfigPortalPwd();
-
-    void          resetSettings();
-
-    //sets timeout before webserver loop ends and exits even if there has been no setup.
-    //useful for devices that failed to connect at some point and got stuck in a webserver loop
-    //in seconds setConfigPortalTimeout is a new name for setTimeout
-    void          setConfigPortalTimeout(unsigned long seconds);
-    void          setTimeout(unsigned long seconds);
-
-    //sets timeout for which to attempt connecting, useful if you get a lot of failed connects
-    void          setConnectTimeout(unsigned long seconds);
-
-
-    //defaults to not showing anything under 8% signal quality if called
-    void          setMinimumSignalQuality(int quality = 8);
-    //sets a custom ip /gateway /subnet configuration
-    void          setAPStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);
-    //sets config for a static IP
-    void          setSTAStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);	
-    
-    DeviceWiFi&  setStartConfigPortalCallback(DEVICE_WIFI_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);	
-    DeviceWiFi&  setCaptivePortalCallback(DEVICE_WIFI_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE callback);	
-	DeviceWiFi&  setSuccessConfigPortalCallback(DEVICE_WIFI_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
-	DeviceWiFi&  setFailedConfigPortalCallback(DEVICE_WIFI_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
-	DeviceWiFi&  setConnectingConfigPortalCallback(DEVICE_WIFI_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
+		void						load(JsonObject& jsonObject);
 		
-    //adds a custom parameter
-    void          addParameter(DeviceWiFiParameter *p);
-    //if this is set, it will exit after config, even if connection is unsuccessful.
-    //if this is set, try WPS setup when starting (this will delay config portal for up to 2 mins)
-    //TODO
-    //if this is set, customise style
-    void          setCustomHeadElement(const char* element);
-    //if this is true, remove duplicated Access Points - defaut true
-    void          setRemoveDuplicateAPs(boolean removeDuplicates);	
-	
-	String        getSSID();		
-	int           getQuality();	
-	bool          isConnected();	
-	int			  convertQualitytToBarsSignal(int quality);
-	String		  getLocalIPAddress();
-	
-private:	
+		char *						getStationMacAddress();
+		char *						getSoftAPMacAddress();		
+		char *						getHostName();		
+		void						setHostName(char* json);		
+			
+		static void createDeviceWiFi(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice)
+		{
+			deviceWiFi = new DeviceWiFi(espDevice);
+		}
+		
+		 //boolean       autoConnect();
+		void          autoConnect();
+		//boolean       autoConnect(char const *apName, char const *apPassword = NULL);	
+		
+		//if you want to always start the config portal, without trying to connect first
+		boolean       startConfigPortal();
+		boolean       startConfigPortal(char const *apName, char const *apPassword = NULL);
 
-	ESPDevice*          				_espDevice;	
-	
-	char *								_stationMacAddress;
-	char *								_softAPMacAddress;		
-	char *								_hostName;	
+		// get the AP name of the config portal, so it can be used in the callback
+		String        getConfigPortalSSID();
+		String        getConfigPortalPwd();
 
-	std::unique_ptr<DNSServer>        	dnsServer;
-    std::unique_ptr<ESP8266WebServer> 	server;
+		void          resetSettings();
 
-    //const int     WM_DONE                 = 0;
-    //const int     WM_WAIT                 = 10;
+		//sets timeout before webserver loop ends and exits even if there has been no setup.
+		//useful for devices that failed to connect at some point and got stuck in a webserver loop
+		//in seconds setConfigPortalTimeout is a new name for setTimeout
+		void          setConfigPortalTimeout(unsigned long seconds);
+		void          setTimeout(unsigned long seconds);
 
-    //const String  HTTP_HEAD = "<!DOCTYPE html><html lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><title>{v}</title>";
-	
-	int 		  _pin	    			  = 0;
+		//sets timeout for which to attempt connecting, useful if you get a lot of failed connects
+		void          setConnectTimeout(unsigned long seconds);
 
-    void          setupConfigPortal();
-    void          startWPS();
 
-    const char*   _apName                 = "no-net";
-    const char*   _apPassword             = NULL;
-    String        _ssid                   = "";
-    String        _pass                   = "";
-    unsigned long _configPortalTimeout    = 0;
-    unsigned long _connectTimeout         = 0;
-    unsigned long _configPortalStart      = 0;
+		//defaults to not showing anything under 8% signal quality if called
+		void          setMinimumSignalQuality(int quality = 8);
+		//sets a custom ip /gateway /subnet configuration
+		void          setAPStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);
+		//sets config for a static IP
+		void          setSTAStaticIPConfig(IPAddress ip, IPAddress gw, IPAddress sn);	
+		
+		DeviceWiFi&  setStartConfigPortalCallback(DEVICE_WIFI_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);	
+		DeviceWiFi&  setCaptivePortalCallback(DEVICE_WIFI_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE callback);	
+		DeviceWiFi&  setSuccessConfigPortalCallback(DEVICE_WIFI_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
+		DeviceWiFi&  setFailedConfigPortalCallback(DEVICE_WIFI_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
+		DeviceWiFi&  setConnectingConfigPortalCallback(DEVICE_WIFI_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE callback);
+			
+		//adds a custom parameter
+		void          addParameter(DeviceWiFiParameter *p);
+		//if this is set, it will exit after config, even if connection is unsuccessful.
+		//if this is set, try WPS setup when starting (this will delay config portal for up to 2 mins)
+		//TODO
+		//if this is set, customise style
+		void          setCustomHeadElement(const char* element);
+		//if this is true, remove duplicated Access Points - defaut true
+		void          setRemoveDuplicateAPs(boolean removeDuplicates);	
+		
+		String        getSSID();		
+		int           getQuality();	
+		bool          isConnected();	
+		int			  convertQualitytToBarsSignal(int quality);
+		String		  getLocalIPAddress();
+		
+	private:	
 
-    IPAddress     _ap_static_ip;
-    IPAddress     _ap_static_gw;
-    IPAddress     _ap_static_sn;
-    IPAddress     _sta_static_ip;
-    IPAddress     _sta_static_gw;
-    IPAddress     _sta_static_sn;
+		ESPDevice*          				_espDevice;	
+		
+		char *								_stationMacAddress;
+		char *								_softAPMacAddress;		
+		char *								_hostName;	
 
-    int           _paramsCount            = 0;
-    int           _minimumQuality         = -1;
-    boolean       _removeDuplicateAPs     = true;
-    boolean       _tryWPS                 = false;
+		std::unique_ptr<DNSServer>        	dnsServer;
+		std::unique_ptr<ESP8266WebServer> 	server;
 
-    const char*   _customHeadElement      = "";
+		//const int     WM_DONE                 = 0;
+		//const int     WM_WAIT                 = 10;
 
-    //String        getEEPROMString(int start, int len);
-    //void          setEEPROMString(int start, int len, String string);
+		//const String  HTTP_HEAD = "<!DOCTYPE html><html lang=\"en\"><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/><title>{v}</title>";
+		
+		int 		  _pin	    			  = 0;
 
-    int           status = WL_IDLE_STATUS;    
-    uint8_t       waitForConnectResult();
+		void          setupConfigPortal();
+		void          startWPS();
 
-    void          handleRoot();
-    void          handleWifi(boolean scan);
-    void          handleWifiSave();
-    void          handleInfo();
-    void          handleReset();
-    void          handleNotFound();
-    void          handle204();
-    boolean       captivePortal();
-    boolean       configPortalHasTimeout();
+		const char*   _apName                 = "no-net";
+		const char*   _apPassword             = NULL;
+		String        _ssid                   = "";
+		String        _pass                   = "";
+		unsigned long _configPortalTimeout    = 0;
+		unsigned long _connectTimeout         = 0;
+		unsigned long _configPortalStart      = 0;
 
-	int           connectWifi(String ssid, String pass);
-	
-    // DNS server
-    const byte    DNS_PORT = 53;
+		IPAddress     _ap_static_ip;
+		IPAddress     _ap_static_gw;
+		IPAddress     _ap_static_sn;
+		IPAddress     _sta_static_ip;
+		IPAddress     _sta_static_gw;
+		IPAddress     _sta_static_sn;
 
-    //helpers
-	String        getPassword();	
-    int           getRSSIasQuality(int rssi);
-    boolean       isIp(String str);
-    String        toStringIp(IPAddress ip);
+		int           _paramsCount            = 0;
+		int           _minimumQuality         = -1;
+		boolean       _removeDuplicateAPs     = true;
+		boolean       _tryWPS                 = false;
 
-	const char*   generatePassword(const int len);
-	
-	bool		  firstAutoConnect = true;
-	
-    boolean       connect;
-    boolean       _debug = true;
-	
-	DEVICE_WIFI_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE			_startConfigPortalCallback;
-	DEVICE_WIFI_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE				_captivePortalCallback;
-	DEVICE_WIFI_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE		_successConfigPortalCallback;
-	DEVICE_WIFI_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE		_failedConfigPortalCallback;
-	DEVICE_WIFI_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE	_connectingConfigPortalCallback;
+		const char*   _customHeadElement      = "";
 
-    DeviceWiFiParameter* _params[DEVICE_WIFI_MAX_PARAMS];
+		//String        getEEPROMString(int start, int len);
+		//void          setEEPROMString(int start, int len, String string);
 
-    template <typename Generic>
-    void          DEBUG_WM(Generic text);
+		int           status = WL_IDLE_STATUS;    
+		uint8_t       waitForConnectResult();
 
-    template <class T>
-    auto optionalIPFromString(T *obj, const char *s) -> decltype(  obj->fromString(s)  ) {
-      return  obj->fromString(s);
-    }
-    auto optionalIPFromString(...) -> bool {
-      DEBUG_WM("NO fromString METHOD ON IPAddress, you need ESP8266 core 2.1.0 or newer for Custom IP configuration to work.");
-      return false;
-    }	
-};
+		void          handleRoot();
+		void          handleWifi(boolean scan);
+		void          handleWifiSave();
+		void          handleInfo();
+		void          handleReset();
+		void          handleNotFound();
+		void          handle204();
+		boolean       captivePortal();
+		boolean       configPortalHasTimeout();
+
+		int           connectWifi(String ssid, String pass);
+		
+		// DNS server
+		const byte    DNS_PORT = 53;
+
+		//helpers
+		String        getPassword();	
+		int           getRSSIasQuality(int rssi);
+		boolean       isIp(String str);
+		String        toStringIp(IPAddress ip);
+
+		const char*   generatePassword(const int len);
+		
+		bool		  firstAutoConnect = true;
+		
+		boolean       connect;
+		boolean       _debug = true;
+		
+		DEVICE_WIFI_SET_START_CONFIG_PORTAL_CALLBACK_SIGNATURE			_startConfigPortalCallback;
+		DEVICE_WIFI_SET_CAPTIVE_PORTAL_CALLBACK_SIGNATURE				_captivePortalCallback;
+		DEVICE_WIFI_SET_SUCCESS_CONFIG_PORTAL_CALLBACK_SIGNATURE		_successConfigPortalCallback;
+		DEVICE_WIFI_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE		_failedConfigPortalCallback;
+		DEVICE_WIFI_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE	_connectingConfigPortalCallback;
+
+		DeviceWiFiParameter* _params[DEVICE_WIFI_MAX_PARAMS];
+
+		template <typename Generic>
+		void          DEBUG_WM(Generic text);
+
+		template <class T>
+		auto optionalIPFromString(T *obj, const char *s) -> decltype(  obj->fromString(s)  ) {
+		  return  obj->fromString(s);
+		}
+		auto optionalIPFromString(...) -> bool {
+		  DEBUG_WM("NO fromString METHOD ON IPAddress, you need ESP8266 core 2.1.0 or newer for Custom IP configuration to work.");
+		  return false;
+		}	
+	};
+}
 
 #endif

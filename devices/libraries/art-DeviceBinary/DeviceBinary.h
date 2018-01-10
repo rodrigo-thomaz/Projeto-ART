@@ -8,30 +8,33 @@
 
 #define CHECKFORUPDATES_INTERVAL 10000
 
-class ESPDevice;
-
-class DeviceBinary
+namespace ART
 {
-	
-public:
+	class ESPDevice;
 
-	DeviceBinary(ESPDevice* espDevice);
-	~DeviceBinary();
-	
-	void 						loop();
-	
-	static void createDeviceBinary(DeviceBinary* (&deviceBinary), ESPDevice* espDevice)
-    {
-		deviceBinary = new DeviceBinary(espDevice);
-    }
-	
-private:	
+	class DeviceBinary
+	{
+		
+	public:
 
-	ESPDevice*          		_espDevice;	
+		DeviceBinary(ESPDevice* espDevice);
+		~DeviceBinary();
+		
+		void 						loop();
+		
+		static void createDeviceBinary(DeviceBinary* (&deviceBinary), ESPDevice* espDevice)
+		{
+			deviceBinary = new DeviceBinary(espDevice);
+		}
+		
+	private:	
 
-	uint64_t 					_checkForUpdatesTimestamp = 0;
-	
-	void 						update();
-};
+		ESPDevice*          		_espDevice;	
+
+		uint64_t 					_checkForUpdatesTimestamp = 0;
+		
+		void 						update();
+	};
+}
 
 #endif

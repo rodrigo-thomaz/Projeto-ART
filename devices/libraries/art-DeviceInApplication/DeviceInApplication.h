@@ -4,40 +4,43 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
-class ESPDevice;
-
-class DeviceInApplication
+namespace ART
 {
+	class ESPDevice;
 
-public:
+	class DeviceInApplication
+	{
 
-	DeviceInApplication(ESPDevice* espDevice, char* applicationId, char* applicationTopic);
-	~DeviceInApplication();
-	
-	void								insertInApplication(String json);
-	void								deleteFromApplication();		
-	
-	char*								getApplicationId();
-	void								setApplicationId(char* value);		
-	
-	char*								getApplicationTopic();
-	void								setApplicationTopic(char* value);		
-	
-	static void createDeviceInApplication(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice, JsonObject& jsonObject)
-    {
-		deviceInApplication = new DeviceInApplication(
-			espDevice,
-			strdup(jsonObject["applicationId"]),
-			strdup(jsonObject["applicationTopic"]));
-    }
-	
-private:	
+	public:
 
-	ESPDevice*          				_espDevice;	
-	
-	char*								_applicationId;
-	char*								_applicationTopic;
-	
-};
+		DeviceInApplication(ESPDevice* espDevice, char* applicationId, char* applicationTopic);
+		~DeviceInApplication();
+		
+		void								insertInApplication(String json);
+		void								deleteFromApplication();		
+		
+		char*								getApplicationId();
+		void								setApplicationId(char* value);		
+		
+		char*								getApplicationTopic();
+		void								setApplicationTopic(char* value);		
+		
+		static void createDeviceInApplication(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice, JsonObject& jsonObject)
+		{
+			deviceInApplication = new DeviceInApplication(
+				espDevice,
+				strdup(jsonObject["applicationId"]),
+				strdup(jsonObject["applicationTopic"]));
+		}
+		
+	private:	
+
+		ESPDevice*          				_espDevice;	
+		
+		char*								_applicationId;
+		char*								_applicationTopic;
+		
+	};
+}
 
 #endif

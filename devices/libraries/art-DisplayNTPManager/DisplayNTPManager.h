@@ -8,13 +8,13 @@
 class DisplayNTPManager
 {
 public:
-	DisplayNTPManager(DisplayManager& displayManager, ESPDevice& espDevice);
+	DisplayNTPManager(DisplayManager& displayManager, ART::ESPDevice& espDevice);
 	~DisplayNTPManager();
 	
 private:
 
 	DisplayManager*       							_displayManager;	
-	ESPDevice*          							_espDevice;
+	ART::ESPDevice*          						_espDevice;
 						
 	void											printTime();
 	void											printUpdate(bool on);

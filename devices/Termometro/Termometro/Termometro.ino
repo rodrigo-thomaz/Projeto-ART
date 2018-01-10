@@ -79,7 +79,9 @@ uint64_t publishMessageTimestamp = 0;
 #define READTEMP_INTERVAL 2000
 uint64_t readTempTimestamp = 0;
 
-ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
+using namespace ART; 
+
+ART::ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
 DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice);
 UnitOfMeasurementConverter unitOfMeasurementConverter;
@@ -352,7 +354,7 @@ void loop() {
 
   espDevice.getDeviceBinary()->loop();
 
-  DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
+  ART::DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
   
   if(deviceInApplication != NULL && deviceInApplication->getApplicationId() == ""){
     displayAccessManager.loop();

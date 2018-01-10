@@ -12,6 +12,8 @@ DallasTemperature _dallas(&oneWire);
 
 // Sensor
 
+using namespace ART; 
+
 Sensor::Sensor(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
 {
 	_sensorId = new char(sizeof(strlen(sensorId)));
@@ -149,7 +151,6 @@ void Sensor::setHighChartLimiterCelsius(float value)
 	_highChartLimiterCelsius = value;
 }
 
-
 // DSFamilyTempSensorManager
 
 DSFamilyTempSensorManager::DSFamilyTempSensorManager(ESPDevice& espDevice)
@@ -264,8 +265,8 @@ void DSFamilyTempSensorManager::setSensorsByMQQTCallback(String json)
 		float 			highAlarmCelsius		= float(highAlarmJsonObject["alarmCelsius"]);
 		bool 			highAlarmBuzzerOn 		= bool(highAlarmJsonObject["alarmBuzzerOn"]);
 		
-		TempSensorAlarm highAlarm 				= TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, Max);				
-		TempSensorAlarm lowAlarm 				= TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, Min);		
+		TempSensorAlarm highAlarm 				= TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, TempSensorAlarmPosition::Max);				
+		TempSensorAlarm lowAlarm 				= TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, TempSensorAlarmPosition::Min);		
 		
 		this->_sensors.push_back(Sensor(
 				sensorId,

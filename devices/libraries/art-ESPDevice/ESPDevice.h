@@ -14,68 +14,71 @@
 #include "ArduinoJson.h"
 #include "ESP8266HTTPClient.h"
 
-class ESPDevice
+namespace ART
 {
-	public:
-		
-		ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
-		~ESPDevice();
-		
-		void						begin();
-		void						loop();
-				
-		bool						loaded();
-		
-		char *						getDeviceId();
-		short						getDeviceDatasheetId();
-		
-		int							getChipId();
-		int							getFlashChipId();
-		long						getChipSize();
+	class ESPDevice
+	{
+		public:
+			
+			ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
+			~ESPDevice();
+			
+			void						begin();
+			void						loop();
+					
+			bool						loaded();
+			
+			char *						getDeviceId();
+			short						getDeviceDatasheetId();
+			
+			int							getChipId();
+			int							getFlashChipId();
+			long						getChipSize();
 
-		char *						getLabel();
-		void						setLabel(char* json);
+			char *						getLabel();
+			void						setLabel(char* json);
+			
+			char *						getWebApiHost();
+			uint16_t					getWebApiPort();
+			char * 						getWebApiUri();
+			
+			DeviceInApplication*		getDeviceInApplication();
+			DeviceDebug*				getDeviceDebug();
+			DeviceWiFi*					getDeviceWiFi();
+			DeviceMQ*					getDeviceMQ();
+			DeviceNTP*					getDeviceNTP();
+			DeviceBinary*				getDeviceBinary();
+			DeviceBuzzer*				getDeviceBuzzer();
+			DeviceSensors*				getDeviceSensors();
 		
-		char *						getWebApiHost();
-		uint16_t					getWebApiPort();
-		char * 						getWebApiUri();
-		
-		DeviceInApplication*		getDeviceInApplication();
-		DeviceDebug*				getDeviceDebug();
-		DeviceWiFi*					getDeviceWiFi();
-		DeviceMQ*					getDeviceMQ();
-		DeviceNTP*					getDeviceNTP();
-		DeviceBinary*				getDeviceBinary();
-		DeviceBuzzer*				getDeviceBuzzer();
-		DeviceSensors*				getDeviceSensors();
-	
-	private:	
+		private:	
 
-		char *						_deviceId;
-		short						_deviceDatasheetId;
+			char *						_deviceId;
+			short						_deviceDatasheetId;
+			
+			int							_chipId;
+			int							_flashChipId;
+			long						_chipSize;
+			
+			char *						_label;
+			
+			char *						_webApiHost;
+			uint16_t					_webApiPort;
+			char * 						_webApiUri;
 		
-		int							_chipId;
-		int							_flashChipId;
-		long						_chipSize;
-		
-		char *						_label;
-		
-		char *						_webApiHost;
-		uint16_t					_webApiPort;
-		char * 						_webApiUri;
-	
-		DeviceInApplication*		_deviceInApplication;
-		DeviceDebug*				_deviceDebug;
-		DeviceWiFi*					_deviceWiFi;
-		DeviceMQ*					_deviceMQ;
-		DeviceNTP*					_deviceNTP;
-		DeviceBinary*				_deviceBinary;
-		DeviceBuzzer*				_deviceBuzzer;
-		DeviceSensors*				_deviceSensors;		
-		
-		void						autoLoad();
-		void						load(String json);
-		bool 						_loaded = false;	
-};
+			DeviceInApplication*		_deviceInApplication;
+			DeviceDebug*				_deviceDebug;
+			DeviceWiFi*					_deviceWiFi;
+			DeviceMQ*					_deviceMQ;
+			DeviceNTP*					_deviceNTP;
+			DeviceBinary*				_deviceBinary;
+			DeviceBuzzer*				_deviceBuzzer;
+			DeviceSensors*				_deviceSensors;		
+			
+			void						autoLoad();
+			void						load(String json);
+			bool 						_loaded = false;	
+	};
+}
 
 #endif

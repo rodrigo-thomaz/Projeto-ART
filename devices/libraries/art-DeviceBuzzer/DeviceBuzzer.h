@@ -6,26 +6,29 @@
 
 #define BUZZER_PIN    13 // D7 => 13
 
-class ESPDevice;
-
-class DeviceBuzzer
+namespace ART
 {
-	
-public:
-	DeviceBuzzer(ESPDevice* espDevice);
-	~DeviceBuzzer();	
-	
-	void					test();
-	
-	static void createDeviceBuzzer(DeviceBuzzer* (&deviceBuzzer), ESPDevice* espDevice)
-    {
-		deviceBuzzer = new DeviceBuzzer(espDevice); 
-    }
-	
-private:
+	class ESPDevice;
 
-	ESPDevice*          	_espDevice;	
+	class DeviceBuzzer
+	{
+		
+	public:
+		DeviceBuzzer(ESPDevice* espDevice);
+		~DeviceBuzzer();	
+		
+		void					test();
+		
+		static void createDeviceBuzzer(DeviceBuzzer* (&deviceBuzzer), ESPDevice* espDevice)
+		{
+			deviceBuzzer = new DeviceBuzzer(espDevice); 
+		}
+		
+	private:
 
-};
+		ESPDevice*          	_espDevice;	
+
+	};
+}
 
 #endif

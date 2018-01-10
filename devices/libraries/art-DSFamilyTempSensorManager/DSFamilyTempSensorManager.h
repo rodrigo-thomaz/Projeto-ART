@@ -15,6 +15,8 @@
 #define TOPIC_PUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID   					"Sensor/GetAllByDeviceInApplicationIdIoT" 
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED		   	"Sensor/GetAllByDeviceInApplicationIdCompletedIoT"
 
+using namespace ART; 
+
 class Sensor
 {
 	
@@ -82,7 +84,7 @@ class Sensor
 	float 								_lowChartLimiterCelsius;
 	float 								_highChartLimiterCelsius;
 	
-	friend class 						DSFamilyTempSensorManager;
+	//friend class 						DSFamilyTempSensorManager;
 	
 };
 

@@ -11,7 +11,7 @@
 class DisplayWiFiManager
 {
 public:
-	DisplayWiFiManager(DisplayManager& displayManager, ESPDevice& espDevice);
+	DisplayWiFiManager(DisplayManager& displayManager, ART::ESPDevice& espDevice);
 	~DisplayWiFiManager();	
 
 	void 															printSignal ();
@@ -19,7 +19,7 @@ public:
 private:								
 								
 	DisplayManager*       											_displayManager;	
-	ESPDevice*          											_espDevice;
+	ART::ESPDevice*          										_espDevice;
 											
 	bool 															_firstTimecaptivePortalCallback = true;
 											
