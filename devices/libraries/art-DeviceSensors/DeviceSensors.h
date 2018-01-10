@@ -3,7 +3,10 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
-#include "RemoteDebug.h"
+#include "vector"
+#include "WiFiClient.h"
+#include "OneWire.h"
+#include "DallasTemperature.h"
 
 namespace ART
 {
@@ -17,33 +20,104 @@ namespace ART
 
 	class TempSensorAlarm
 	{	
-		public:
+	public:
+	
+		TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, TempSensorAlarmPosition alarmPosition);
 		
-			TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, TempSensorAlarmPosition alarmPosition);
-			
-			bool 								getAlarmOn();	
-			void 								setAlarmOn(bool value);
-			
-			float 								getAlarmCelsius();
-			void 								setAlarmCelsius(float value);
-			
-			bool 								getAlarmBuzzerOn();	
-			void 								setAlarmBuzzerOn(bool value);
-			
-			bool 								hasAlarm();
-			
-			bool 								hasAlarmBuzzer();
-			
-			void 								setTempCelsius(float value);
+		bool 								getAlarmOn();	
+		void 								setAlarmOn(bool value);
 		
-		private:
+		float 								getAlarmCelsius();
+		void 								setAlarmCelsius(float value);
 		
-			bool 								_alarmOn;		
-			float 								_alarmCelsius;
-			bool 								_alarmBuzzerOn;
-			TempSensorAlarmPosition		_alarmPosition;
+		bool 								getAlarmBuzzerOn();	
+		void 								setAlarmBuzzerOn(bool value);
+		
+		bool 								hasAlarm();
+		
+		bool 								hasAlarmBuzzer();
+		
+		void 								setTempCelsius(float value);
+	
+	private:
+	
+		bool 								_alarmOn;		
+		float 								_alarmCelsius;
+		bool 								_alarmBuzzerOn;
+		TempSensorAlarmPosition				_alarmPosition;
+		
+		float 								_tempCelsius;
+	};
+		
+	class Sensor
+	{
+		
+	public:
+
+		Sensor(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
+
+		char*								getSensorId();		
+
+		const uint8_t*		 				getDeviceAddress();	
+
+		char*								getFamily();
+		bool								getValidFamily();	
 			
-			float 								_tempCelsius;
+		char* 								getLabel();
+		void 								setLabel(char* value);
+
+		int 								getResolution();
+		void 								setResolution(int value);
+
+		byte 								getUnitOfMeasurementId();
+		void 								setUnitOfMeasurementId(int value);
+
+		TempSensorAlarm& 					getLowAlarm();	
+		TempSensorAlarm& 					getHighAlarm();	
+		 
+		bool 								getConnected();	
+		void 								setConnected(bool value);
+
+		float 								getTempCelsius();
+		void 								setTempCelsius(float value);
+
+		bool 								hasAlarm();	
+		bool 								hasAlarmBuzzer();	
+
+		float 								getLowChartLimiterCelsius();
+		void 								setLowChartLimiterCelsius(float value);
+
+		float 								getHighChartLimiterCelsius();
+		void 								setHighChartLimiterCelsius(float value);
+
+	private:	
+
+		char* 								_sensorId;	
+
+		std::vector<uint8_t> 				_deviceAddress;
+
+		char* 								_family;
+		bool 								_validFamily;
+
+		char* 								_label;
+
+		int 								_resolution;
+
+		byte								_unitOfMeasurementId;
+			
+		std::vector<TempSensorAlarm> 		_alarms; 
+
+		bool 								_connected;	
+
+		float 								_tempCelsius;	
+
+		long 								_epochTimeUtc;	
+
+		float 								_lowChartLimiterCelsius;
+		float 								_highChartLimiterCelsius;
+
+		//friend class 						DSFamilyTempSensorManager;
+		
 	};
 		
 	class DeviceSensors

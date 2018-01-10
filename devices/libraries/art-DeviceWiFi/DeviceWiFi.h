@@ -14,11 +14,12 @@
 #define DeviceWiFi_h
 
 #include "ArduinoJson.h"
+#include "vector"
 #include "WiFiClient.h"
 #include "ESP8266WiFi.h"
 #include "ESP8266WebServer.h"
-#include <DNSServer.h>
-#include <memory>
+#include "DNSServer.h"
+#include "memory"
 
 extern "C" {
   #include "user_interface.h"
