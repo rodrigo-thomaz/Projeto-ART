@@ -158,7 +158,7 @@ namespace ART
 		int									getPublishIntervalInMilliSeconds();
 		void								setPublishIntervalInMilliSeconds(char* json);
 
-		static void createDeviceSensors(DeviceSensors* (&deviceSensors), ESPDevice* espDevice)
+		static void create(DeviceSensors* (&deviceSensors), ESPDevice* espDevice)
 		{
 			deviceSensors = new DeviceSensors(espDevice);
 		}

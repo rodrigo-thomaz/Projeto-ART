@@ -88,7 +88,7 @@ namespace ART
 		char *						getHostName();
 		void						setHostName(char* json);
 
-		static void createDeviceWiFi(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice)
+		static void create(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice)
 		{
 			deviceWiFi = new DeviceWiFi(espDevice);
 		}

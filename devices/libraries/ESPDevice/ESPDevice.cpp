@@ -16,13 +16,13 @@ namespace ART
 		_webApiUri = new char(sizeof(strlen(webApiUri)));
 		_webApiUri = webApiUri;
 
-		DeviceDebug::createDeviceDebug(_deviceDebug, this);
-		DeviceWiFi::createDeviceWiFi(_deviceWiFi, this);
-		DeviceNTP::createDeviceNTP(_deviceNTP, this);
-		DeviceMQ::createDeviceMQ(_deviceMQ, this);
-		DeviceBinary::createDeviceBinary(_deviceBinary, this);
-		DeviceBuzzer::createDeviceBuzzer(_deviceBuzzer, this);
-		DeviceSensors::createDeviceSensors(_deviceSensors, this);
+		DeviceDebug::create(_deviceDebug, this);
+		DeviceWiFi::create(_deviceWiFi, this);
+		DeviceNTP::create(_deviceNTP, this);
+		DeviceMQ::create(_deviceMQ, this);
+		DeviceBinary::create(_deviceBinary, this);
+		DeviceBuzzer::create(_deviceBuzzer, this);
+		DeviceSensors::create(_deviceSensors, this);
 	}
 
 	ESPDevice::~ESPDevice()
@@ -59,9 +59,9 @@ namespace ART
 		yield();
 	}
 
-	char* ESPDevice::getDeviceId()
+	char* ESPDevice::getDeviceId() const
 	{
-		return _deviceId;
+		return (_deviceId);
 	}
 
 	short ESPDevice::getDeviceDatasheetId()
@@ -84,9 +84,9 @@ namespace ART
 		return _chipSize;
 	}
 
-	char* ESPDevice::getLabel()
+	char* ESPDevice::getLabel() const
 	{
-		return _label;
+		return (_label);
 	}
 
 	void ESPDevice::setLabel(char* json)
@@ -102,9 +102,9 @@ namespace ART
 		_label = value;
 	}
 
-	char* ESPDevice::getWebApiHost()
+	char* ESPDevice::getWebApiHost() const
 	{
-		return _webApiHost;
+		return (_webApiHost);
 	}
 
 	uint16_t ESPDevice::getWebApiPort()
@@ -112,9 +112,9 @@ namespace ART
 		return _webApiPort;
 	}
 
-	char* ESPDevice::getWebApiUri()
+	char* ESPDevice::getWebApiUri() const
 	{
-		return _webApiUri;
+		return (_webApiUri);
 	}
 
 	DeviceInApplication* ESPDevice::getDeviceInApplication()
@@ -260,7 +260,7 @@ namespace ART
 		_deviceMQ->load(jsonObject["deviceMQ"]);
 		_deviceSensors->load(jsonObject["deviceSensors"]);
 
-		DeviceInApplication::createDeviceInApplication(_deviceInApplication, this, jsonObject["deviceInApplication"]);
+		DeviceInApplication::create(_deviceInApplication, this, jsonObject["deviceInApplication"]);
 
 		_loaded = true;
 	}

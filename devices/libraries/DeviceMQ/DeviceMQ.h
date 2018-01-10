@@ -48,7 +48,7 @@ namespace ART
 
 		String 												getTopicKey(char* routingKey);
 
-		static void createDeviceMQ(DeviceMQ* (&deviceMQ), ESPDevice* espDevice)
+		static void create(DeviceMQ* (&deviceMQ), ESPDevice* espDevice)
 		{
 			deviceMQ = new DeviceMQ(espDevice);
 		}

@@ -25,7 +25,7 @@ namespace ART
 		char*								getApplicationTopic()  const;
 		void								setApplicationTopic(char* value);
 
-		static void createDeviceInApplication(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice, JsonObject& jsonObject)
+		static void create(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice, JsonObject& jsonObject)
 		{
 			deviceInApplication = new DeviceInApplication(
 				espDevice,

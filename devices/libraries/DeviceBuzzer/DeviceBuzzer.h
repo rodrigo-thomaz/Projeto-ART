@@ -19,7 +19,7 @@ namespace ART
 
 		void					test();
 
-		static void createDeviceBuzzer(DeviceBuzzer* (&deviceBuzzer), ESPDevice* espDevice)
+		static void create(DeviceBuzzer* (&deviceBuzzer), ESPDevice* espDevice)
 		{
 			deviceBuzzer = new DeviceBuzzer(espDevice);
 		}

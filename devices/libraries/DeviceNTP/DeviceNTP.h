@@ -80,7 +80,7 @@ namespace ART
 
 		DeviceNTP& setUpdateCallback(DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE callback);
 
-		static void createDeviceNTP(DeviceNTP* (&deviceNTP), ESPDevice* espDevice)
+		static void create(DeviceNTP* (&deviceNTP), ESPDevice* espDevice)
 		{
 			deviceNTP = new DeviceNTP(espDevice);
 		}

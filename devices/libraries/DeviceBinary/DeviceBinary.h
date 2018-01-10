@@ -22,7 +22,7 @@ namespace ART
 
 		void 						loop();
 
-		static void createDeviceBinary(DeviceBinary* (&deviceBinary), ESPDevice* espDevice)
+		static void create(DeviceBinary* (&deviceBinary), ESPDevice* espDevice)
 		{
 			deviceBinary = new DeviceBinary(espDevice);
 		}

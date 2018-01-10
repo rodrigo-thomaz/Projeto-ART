@@ -28,19 +28,19 @@ namespace ART
 
 		bool						loaded();
 
-		char *						getDeviceId();
+		char *						getDeviceId() const;
 		short						getDeviceDatasheetId();
 
 		int							getChipId();
 		int							getFlashChipId();
 		long						getChipSize();
 
-		char *						getLabel();
+		char *						getLabel() const;
 		void						setLabel(char* json);
 
-		char *						getWebApiHost();
+		char *						getWebApiHost() const;
 		uint16_t					getWebApiPort();
-		char * 						getWebApiUri();
+		char * 						getWebApiUri() const;
 
 		DeviceInApplication*		getDeviceInApplication();
 		DeviceDebug*				getDeviceDebug();

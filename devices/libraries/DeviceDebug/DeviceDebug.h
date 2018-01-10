@@ -36,7 +36,7 @@ namespace ART
 		void								setShowProfiler(char* json);
 		void								setShowTime(char* json);
 
-		static void createDeviceDebug(DeviceDebug* (&deviceDebug), ESPDevice* espDevice)
+		static void create(DeviceDebug* (&deviceDebug), ESPDevice* espDevice)
 		{
 			deviceDebug = new DeviceDebug(espDevice);
 		}
