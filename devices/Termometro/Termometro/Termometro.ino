@@ -1,5 +1,4 @@
 #include "ESPDevice.h"
-#include "DSFamilyTempSensorManager.h"
 #include "UnitOfMeasurementConverter.h"
 #include "DisplayManager.h"
 #include "DeviceBuzzer.h"
@@ -83,7 +82,6 @@ using namespace ART;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
-DSFamilyTempSensorManager dsFamilyTempSensorManager(espDevice);
 UnitOfMeasurementConverter unitOfMeasurementConverter;
 
 DisplayManager displayManager;
@@ -103,9 +101,7 @@ void setup() {
   pinMode(D4, INPUT);
   pinMode(D5, INPUT);  
 
-	displayManager.begin();
-
-	dsFamilyTempSensorManager.begin();
+	displayManager.begin();	
 
 	Serial.println("Iniciando...");
 
@@ -119,6 +115,8 @@ void setup() {
   initConfiguration();
 
   espDevice.begin();  
+
+  espDevice.getDeviceSensors()->begin();
 
   espDevice.getDeviceMQ()->setConnectedCallback(mqtt_ConnectedCallback);
   espDevice.getDeviceMQ()->setSubCallback(mqtt_SubCallback);  
@@ -319,30 +317,30 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     }
 
     if(topicKey == String(TOPIC_SUB_SENSOR_SET_LABEL)){
-      dsFamilyTempSensorManager.setLabel(strdup(json.c_str()));
+      espDevice.getDeviceSensors()->setLabel(strdup(json.c_str()));
     }
     
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)){
-      dsFamilyTempSensorManager.setSensorsByMQQTCallback(json);      
+      espDevice.getDeviceSensors()->setSensorsByMQQTCallback(json);      
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT)){
-      dsFamilyTempSensorManager.setUnitOfMeasurement(json);
+      espDevice.getDeviceSensors()->setUnitOfMeasurement(json);
     }
     if(topicKey == String(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION)){
-      dsFamilyTempSensorManager.setResolution(json);
+      espDevice.getDeviceSensors()->setResolution(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)){
-      dsFamilyTempSensorManager.setAlarmOn(json);
+      espDevice.getDeviceSensors()->setAlarmOn(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS)){
-      dsFamilyTempSensorManager.setAlarmCelsius(json);
+      espDevice.getDeviceSensors()->setAlarmCelsius(json);
     }
     if(topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON)){
-      dsFamilyTempSensorManager.setAlarmBuzzerOn(json);
+      espDevice.getDeviceSensors()->setAlarmBuzzerOn(json);
     }
     
     if(topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)){
-      dsFamilyTempSensorManager.setChartLimiterCelsius(json);
+      espDevice.getDeviceSensors()->setChartLimiterCelsius(json);
     }        
 }
 
@@ -377,11 +375,11 @@ void loopInApplication()
   
   uint64_t now = millis();   
 
-  if(dsFamilyTempSensorManager.initialized()) {
+  if(espDevice.getDeviceSensors()->initialized()) {
     if(now - readTempTimestamp > READTEMP_INTERVAL) {
       readTempTimestamp = now;
       displayTemperatureSensorManager.printUpdate(true);
-      dsFamilyTempSensorManager.refresh();
+      espDevice.getDeviceSensors()->refresh();
     }  
     else{
       displayTemperatureSensorManager.printUpdate(false);
@@ -391,7 +389,7 @@ void loopInApplication()
   // MQTT
   PubSubClient* mqqt = espDevice.getDeviceMQ()->getMQQT();
   
-  if(mqqt->connected() && dsFamilyTempSensorManager.initialized()){
+  if(mqqt->connected() && espDevice.getDeviceSensors()->initialized()){
     
     displayMQTTManager.printConnected();  
     displayMQTTManager.printReceived(false);
@@ -410,7 +408,7 @@ void loopInApplication()
       root["epochTimeUtc"] = espDevice.getDeviceNTP()->getEpochTimeUTC();    
       root["localIPAddress"] = espDevice.getDeviceWiFi()->getLocalIPAddress();    
       
-      dsFamilyTempSensorManager.createSensorsJsonNestedArray(root);
+      espDevice.getDeviceSensors()->createSensorsJsonNestedArray(root);
 
       int sensorsJsonLen = root.measureLength();
       char sensorsJson[sensorsJsonLen + 1];
