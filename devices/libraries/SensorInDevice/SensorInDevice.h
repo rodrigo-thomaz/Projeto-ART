@@ -12,6 +12,9 @@ namespace ART
 		SensorInDevice(DeviceSensors* deviceSensors);
 		~SensorInDevice();
 
+		short								getOrdination();
+		void								setOrdination(short value);
+
 		static void create(SensorInDevice* (&sensorInDevice), DeviceSensors* deviceSensors)
 		{
 			sensorInDevice = new SensorInDevice(deviceSensors);
@@ -19,8 +22,9 @@ namespace ART
 
 	private:
 
-		DeviceSensors * _deviceSensors;
+		DeviceSensors *						_deviceSensors;
 
+		short 								_ordination;
 	};
 }
 

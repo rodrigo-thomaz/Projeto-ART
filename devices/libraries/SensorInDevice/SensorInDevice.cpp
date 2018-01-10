@@ -12,4 +12,14 @@ namespace ART
 	{
 		delete (_deviceSensors);
 	}
+
+	short SensorInDevice::getOrdination()
+	{
+		return _ordination;
+	}
+
+	void SensorInDevice::setOrdination(short value)
+	{
+		_ordination = value;
+	}	
 }
