@@ -16,6 +16,8 @@
 
         Task<SensorInDevice> GetByKey(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);
 
+        Task<List<SensorInDevice>> GetAllByDeviceId(Guid deviceId);
+
         #endregion Methods
     }
 }

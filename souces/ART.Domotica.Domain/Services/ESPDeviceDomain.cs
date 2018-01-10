@@ -24,6 +24,7 @@
         private readonly IApplicationRepository _applicationRepository;
         private readonly IApplicationUserRepository _applicationUserRepository;
         private readonly ISensorRepository _sensorRepository;
+        private readonly ISensorInDeviceRepository _sensorInDeviceRepository;
 
         #endregion Fields
 
@@ -39,6 +40,7 @@
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
             _sensorInApplicationRepository = new SensorInApplicationRepository(context);
             _sensorRepository = new SensorRepository(context);
+            _sensorInDeviceRepository = new SensorInDeviceRepository(context);
         }
 
         #endregion Constructors
@@ -100,16 +102,16 @@
                 
             });
 
-            var sensors = await _sensorRepository.GetAllByDeviceId(deviceEntity.Id);
+            var sensorsInDevice = await _sensorInDeviceRepository.GetAllByDeviceId(deviceEntity.Id);
 
             var sensorsInApplication = new List<SensorInApplication>();
 
-            foreach (var item in sensors)
+            foreach (var item in sensorsInDevice)
             {
                 sensorsInApplication.Add(new SensorInApplication
                 {
                     ApplicationId = applicationEntity.Id,
-                    SensorId = item.Id,
+                    SensorId = item.Sensor.Id,
                     SensorDatasheetId = item.SensorDatasheetId,
                     SensorTypeId = item.SensorTypeId,
                     CreateByApplicationUserId = applicationUserEntity.Id,

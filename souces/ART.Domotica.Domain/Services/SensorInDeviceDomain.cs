@@ -2,9 +2,12 @@
 {
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.Enums;
+    using ART.Domotica.Repository;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
+    using ART.Domotica.Repository.Repositories;
     using ART.Infra.CrossCutting.Domain;
+    using Autofac;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -15,14 +18,18 @@
         #region Fields
 
         private readonly ISensorInDeviceRepository _sensorInDeviceRepository;
+        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
 
         #endregion Fields
 
         #region Constructors
 
-        public SensorInDeviceDomain(ISensorInDeviceRepository sensorInDeviceRepository)
+        public SensorInDeviceDomain(IComponentContext componentContext)
         {
-            _sensorInDeviceRepository = sensorInDeviceRepository;
+            var context = componentContext.Resolve<ARTDbContext>();
+
+            _sensorInDeviceRepository = new SensorInDeviceRepository(context);
+            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
         }
 
         #endregion Constructors
@@ -73,6 +80,18 @@
             await _sensorInDeviceRepository.Update(entities);
 
             return sensorInDevice;
+        }
+
+        public async Task<List<SensorInDevice>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        {
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId, deviceDatasheetId);
+
+            if (deviceInApplication == null)
+            {
+                throw new Exception("DeviceInApplication not found");
+            }
+
+            return await _sensorInDeviceRepository.GetAllByDeviceId(deviceInApplication.DeviceId);
         }
     }
 }

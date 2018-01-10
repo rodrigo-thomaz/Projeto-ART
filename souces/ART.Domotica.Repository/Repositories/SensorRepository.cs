@@ -33,16 +33,7 @@ namespace ART.Domotica.Repository.Repositories
                 .SingleOrDefaultAsync(x => x.SensorId == sensorId);
 
             return entity;
-        }
-
-        public async Task<List<Sensor>> GetAllByDeviceId(Guid deviceId)
-        {
-            return await _context.Sensor
-                .Include(x => x.SensorTempDSFamily.SensorTempDSFamilyResolution)
-                .Include(x => x.SensorUnitMeasurementScale)
-                .Where(x => x.SensorInDevice.FirstOrDefault(y => y.DeviceSensors.Id == deviceId) != null)
-                .ToListAsync();
-        }
+        }        
 
         public async Task<List<SensorInApplication>> GetSensorsInApplicationByDeviceId(Guid applicationId, Guid deviceId)
         {
