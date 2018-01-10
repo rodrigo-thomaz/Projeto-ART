@@ -91,7 +91,7 @@ DisplayAccessManager displayAccessManager(displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, espDevice);
 DisplayMQTTManager displayMQTTManager(displayManager);
 DisplayNTPManager displayNTPManager(displayManager, espDevice);
-DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, dsFamilyTempSensorManager, unitOfMeasurementConverter);
+DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, espDevice, unitOfMeasurementConverter);
 
 void setup() {
 		

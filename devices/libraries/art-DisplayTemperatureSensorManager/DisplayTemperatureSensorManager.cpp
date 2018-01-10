@@ -1,9 +1,9 @@
 #include "DisplayTemperatureSensorManager.h"
 
-DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, DSFamilyTempSensorManager& dsFamilyTempSensorManager, UnitOfMeasurementConverter& unitOfMeasurementConverter)
+DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, ESPDevice& espDevice, UnitOfMeasurementConverter& unitOfMeasurementConverter)
 {
 	this->_displayManager = &displayManager;
-	this->_dsFamilyTempSensorManager = &dsFamilyTempSensorManager;
+	this->_espDevice = &espDevice;
 	this->_unitOfMeasurementConverter = &unitOfMeasurementConverter;
 }
 
@@ -51,7 +51,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	int screenWidth = screenX2 - screenX1;
 	int screenHeight = screenY2 - screenY1;	
  
-	Sensor* sensors = this->_dsFamilyTempSensorManager->getSensors();
+	Sensor* sensors = _espDevice->getDeviceSensors()->getSensors();
 	
 	int sensorsCount = sizeof(sensors);
     

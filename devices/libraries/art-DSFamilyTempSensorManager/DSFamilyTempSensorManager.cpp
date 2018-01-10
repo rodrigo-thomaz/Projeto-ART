@@ -10,8 +10,6 @@ OneWire oneWireOld(ONE_WIRE_BUS);
 // Pass our oneWireOld reference to Dallas Temperature. 
 DallasTemperature _dallasOld(&oneWireOld);
 
-using namespace ART;
-
 // DSFamilyTempSensorManager
 
 DSFamilyTempSensorManager::DSFamilyTempSensorManager(ESPDevice& espDevice)
