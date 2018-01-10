@@ -1,6 +1,6 @@
 #include "DeviceMQ.h"
 
-#include "../ESPDevice/ESPDevice.h"
+#include "ESPDevice.h"
 #include <cstddef>         // std::size_t
 
 namespace ART
