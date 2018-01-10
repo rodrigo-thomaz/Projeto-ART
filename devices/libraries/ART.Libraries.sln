@@ -43,6 +43,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitOfMeasurementConverter"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EEPROMManager", "EEPROMManager\EEPROMManager.vcxitems", "{AF493238-5F46-4F95-BC89-C2B33956A178}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventManager", "EventManager\EventManager.vcxitems", "{181C8113-E024-47C8-934F-1395AF3B33F9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OneWire", "OneWire\OneWire.vcxitems", "{7DC6AC62-AA6E-4CFA-8627-6F843F77BADB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "pubsubclient", "pubsubclient\pubsubclient.vcxitems", "{0736728B-BEF0-451F-BAA6-91342BFE399D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RemoteDebug", "RemoteDebug\RemoteDebug.vcxitems", "{9DF484FC-C03F-4CA6-8FDE-F0A0DBB6E932}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ultrasonic", "Ultrasonic\Ultrasonic.vcxitems", "{1AF0FDF4-8AFA-4072-998F-08C6C17E113F}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
