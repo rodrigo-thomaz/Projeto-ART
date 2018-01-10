@@ -4,7 +4,6 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "vector"
-#include "WiFiClient.h"
 #include "OneWire.h"
 #include "DallasTemperature.h"
 
