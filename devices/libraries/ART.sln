@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ESPDevice", "ESPDevice\ESPDevice.vcxitems", "{7F9385C1-9676-4CA2-B703-B960B4AD4268}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceMQ", "DeviceMQ\DeviceMQ.vcxitems", "{8AC6C4B2-F7BA-4571-A996-7887AF8EF163}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceInApplication", "DeviceInApplication\DeviceInApplication.vcxitems", "{4D6638DE-1E08-4A58-AA7E-9763DE25AD19}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceDebug", "DeviceDebug\DeviceDebug.vcxitems", "{0758EE44-CADA-4660-A370-8F20AB3E4EE0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceNTP", "DeviceNTP\DeviceNTP.vcxitems", "{16273AC7-F812-429D-B20A-402958D85B2D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceBinary", "DeviceBinary\DeviceBinary.vcxitems", "{6319E07C-43BB-4422-9276-387AEDD49435}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceBuzzer", "DeviceBuzzer\DeviceBuzzer.vcxitems", "{2FFE1ED8-8B20-462F-AC88-B3791A8EC914}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceWiFi", "DeviceWiFi\DeviceWiFi.vcxitems", "{6A5BF7AD-8D0C-4920-A000-CBE32C2C4035}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceSensors", "DeviceSensors\DeviceSensors.vcxitems", "{64C662A2-4C50-42EC-94A2-D2B7980FEA06}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayAccessManager", "DisplayAccessManager\DisplayAccessManager.vcxitems", "{F3854DF9-425C-4755-9532-28946CB51BCB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayManager", "DisplayManager\DisplayManager.vcxitems", "{91703FBC-50C6-4142-A590-4274F7F650DC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayMQTTManager", "DisplayMQTTManager\DisplayMQTTManager.vcxitems", "{895A67BA-6499-46A0-A687-08D015D91609}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayNTPManager", "DisplayNTPManager\DisplayNTPManager.vcxitems", "{13D2C506-07F1-4B26-98AF-C8CECF1792AB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayTemperatureSensorManager", "DisplayTemperatureSensorManager\DisplayTemperatureSensorManager.vcxitems", "{A2623348-0630-41B4-85F0-19BEFABD93CF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayWiFiManager", "DisplayWiFiManager\DisplayWiFiManager.vcxitems", "{0635AE6B-2E63-4DE0-98DD-FCA600E58C60}"
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7325D46F-FC29-498A-8CDF-F207E94F9EBD}
+	EndGlobalSection
+EndGlobal
