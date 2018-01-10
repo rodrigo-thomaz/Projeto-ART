@@ -5,7 +5,73 @@ VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ESPDeviceTemp", "ESPDeviceTemp\ESPDeviceTemp.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ESPDevice", "libraries\ESPDevice\ESPDevice.vcxitems", "{7F9385C1-9676-4CA2-B703-B960B4AD4268}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceBinary", "libraries\DeviceBinary\DeviceBinary.vcxitems", "{6319E07C-43BB-4422-9276-387AEDD49435}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceBuzzer", "libraries\DeviceBuzzer\DeviceBuzzer.vcxitems", "{2FFE1ED8-8B20-462F-AC88-B3791A8EC914}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceDebug", "libraries\DeviceDebug\DeviceDebug.vcxitems", "{0758EE44-CADA-4660-A370-8F20AB3E4EE0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceInApplication", "libraries\DeviceInApplication\DeviceInApplication.vcxitems", "{4D6638DE-1E08-4A58-AA7E-9763DE25AD19}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceMQ", "libraries\DeviceMQ\DeviceMQ.vcxitems", "{8AC6C4B2-F7BA-4571-A996-7887AF8EF163}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceNTP", "libraries\DeviceNTP\DeviceNTP.vcxitems", "{16273AC7-F812-429D-B20A-402958D85B2D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceSensors", "libraries\DeviceSensors\DeviceSensors.vcxitems", "{64C662A2-4C50-42EC-94A2-D2B7980FEA06}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceWiFi", "libraries\DeviceWiFi\DeviceWiFi.vcxitems", "{6A5BF7AD-8D0C-4920-A000-CBE32C2C4035}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayAccessManager", "libraries\DisplayAccessManager\DisplayAccessManager.vcxitems", "{F3854DF9-425C-4755-9532-28946CB51BCB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayManager", "libraries\DisplayManager\DisplayManager.vcxitems", "{91703FBC-50C6-4142-A590-4274F7F650DC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayMQTTManager", "libraries\DisplayMQTTManager\DisplayMQTTManager.vcxitems", "{895A67BA-6499-46A0-A687-08D015D91609}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayNTPManager", "libraries\DisplayNTPManager\DisplayNTPManager.vcxitems", "{13D2C506-07F1-4B26-98AF-C8CECF1792AB}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayTemperatureSensorManager", "libraries\DisplayTemperatureSensorManager\DisplayTemperatureSensorManager.vcxitems", "{A2623348-0630-41B4-85F0-19BEFABD93CF}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayWiFiManager", "libraries\DisplayWiFiManager\DisplayWiFiManager.vcxitems", "{0635AE6B-2E63-4DE0-98DD-FCA600E58C60}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitOfMeasurementConverter", "libraries\UnitOfMeasurementConverter\UnitOfMeasurementConverter.vcxitems", "{6D7DA896-AF78-4A2D-8B65-2571141A6825}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		libraries\DisplayWiFiManager\DisplayWiFiManager.vcxitems*{0635ae6b-2e63-4de0-98dd-fca600e58c60}*SharedItemsImports = 9
+		libraries\DeviceDebug\DeviceDebug.vcxitems*{0758ee44-cada-4660-a370-8f20ab3e4ee0}*SharedItemsImports = 9
+		libraries\DisplayNTPManager\DisplayNTPManager.vcxitems*{13d2c506-07f1-4b26-98af-c8cecf1792ab}*SharedItemsImports = 9
+		libraries\DeviceNTP\DeviceNTP.vcxitems*{16273ac7-f812-429d-b20a-402958d85b2d}*SharedItemsImports = 9
+		libraries\DeviceBuzzer\DeviceBuzzer.vcxitems*{2ffe1ed8-8b20-462f-ac88-b3791a8ec914}*SharedItemsImports = 9
+		libraries\DeviceInApplication\DeviceInApplication.vcxitems*{4d6638de-1e08-4a58-aa7e-9763de25ad19}*SharedItemsImports = 9
+		libraries\DeviceBinary\DeviceBinary.vcxitems*{6319e07c-43bb-4422-9276-387aedd49435}*SharedItemsImports = 9
+		libraries\DeviceSensors\DeviceSensors.vcxitems*{64c662a2-4c50-42ec-94a2-d2b7980fea06}*SharedItemsImports = 9
+		libraries\DeviceWiFi\DeviceWiFi.vcxitems*{6a5bf7ad-8d0c-4920-a000-cbe32c2c4035}*SharedItemsImports = 9
+		libraries\UnitOfMeasurementConverter\UnitOfMeasurementConverter.vcxitems*{6d7da896-af78-4a2d-8b65-2571141a6825}*SharedItemsImports = 9
+		libraries\ESPDevice\ESPDevice.vcxitems*{7f9385c1-9676-4ca2-b703-b960b4ad4268}*SharedItemsImports = 9
+		libraries\DisplayMQTTManager\DisplayMQTTManager.vcxitems*{895a67ba-6499-46a0-a687-08d015d91609}*SharedItemsImports = 9
+		libraries\DeviceMQ\DeviceMQ.vcxitems*{8ac6c4b2-f7ba-4571-a996-7887af8ef163}*SharedItemsImports = 9
+		libraries\DisplayManager\DisplayManager.vcxitems*{91703fbc-50c6-4142-a590-4274f7f650dc}*SharedItemsImports = 9
+		libraries\DisplayTemperatureSensorManager\DisplayTemperatureSensorManager.vcxitems*{a2623348-0630-41b4-85f0-19befabd93cf}*SharedItemsImports = 9
+		libraries\DeviceBinary\DeviceBinary.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DeviceBuzzer\DeviceBuzzer.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DeviceDebug\DeviceDebug.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DeviceInApplication\DeviceInApplication.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DeviceMQ\DeviceMQ.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DeviceNTP\DeviceNTP.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DeviceSensors\DeviceSensors.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DeviceWiFi\DeviceWiFi.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DisplayAccessManager\DisplayAccessManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DisplayManager\DisplayManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DisplayMQTTManager\DisplayMQTTManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DisplayNTPManager\DisplayNTPManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DisplayTemperatureSensorManager\DisplayTemperatureSensorManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DisplayWiFiManager\DisplayWiFiManager.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\ESPDevice\ESPDevice.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\UnitOfMeasurementConverter\UnitOfMeasurementConverter.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+		libraries\DisplayAccessManager\DisplayAccessManager.vcxitems*{f3854df9-425c-4755-9532-28946cb51bcb}*SharedItemsImports = 9
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86

@@ -34,6 +34,24 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
   </ImportGroup>
+  <ImportGroup Label="Shared">
+    <Import Project="..\libraries\ESPDevice\ESPDevice.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DeviceBinary\DeviceBinary.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DeviceBuzzer\DeviceBuzzer.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DeviceDebug\DeviceDebug.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DeviceInApplication\DeviceInApplication.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DeviceMQ\DeviceMQ.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DeviceNTP\DeviceNTP.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DeviceSensors\DeviceSensors.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DeviceWiFi\DeviceWiFi.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DisplayAccessManager\DisplayAccessManager.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DisplayManager\DisplayManager.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DisplayMQTTManager\DisplayMQTTManager.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DisplayNTPManager\DisplayNTPManager.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DisplayTemperatureSensorManager\DisplayTemperatureSensorManager.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\DisplayWiFiManager\DisplayWiFiManager.vcxitems" Label="Shared" />
+    <Import Project="..\libraries\UnitOfMeasurementConverter\UnitOfMeasurementConverter.vcxitems" Label="Shared" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
