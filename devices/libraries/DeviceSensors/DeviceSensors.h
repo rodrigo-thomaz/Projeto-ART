@@ -18,79 +18,7 @@
 
 namespace ART
 {
-	class ESPDevice;	
-
-	class SensorOld
-	{
-
-	public:
-
-		SensorOld(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
-		~SensorOld();
-
-		char*								getSensorId();
-
-		const uint8_t*		 				getDeviceAddress();
-
-		char*								getFamily() const;
-		bool								getValidFamily();
-
-		char* 								getLabel() const;
-		void 								setLabel(char* value);
-
-		int 								getResolution();
-		void 								setResolution(int value);
-
-		byte 								getUnitOfMeasurementId();
-		void 								setUnitOfMeasurementId(int value);
-
-		TempSensorAlarm& 					getLowAlarm();
-		TempSensorAlarm& 					getHighAlarm();
-
-		bool 								getConnected();
-		void 								setConnected(bool value);
-
-		float 								getTempCelsius();
-		void 								setTempCelsius(float value);
-
-		bool 								hasAlarm();
-		bool 								hasAlarmBuzzer();
-
-		float 								getLowChartLimiterCelsius();
-		void 								setLowChartLimiterCelsius(float value);
-
-		float 								getHighChartLimiterCelsius();
-		void 								setHighChartLimiterCelsius(float value);
-
-	private:
-
-		char* 								_sensorId;
-
-		std::vector<uint8_t> 				_deviceAddress;
-
-		char* 								_family;
-		bool 								_validFamily;
-
-		char* 								_label;
-
-		int 								_resolution;
-
-		byte								_unitOfMeasurementId;
-
-		std::vector<TempSensorAlarm> 		_alarms;
-
-		bool 								_connected;
-
-		float 								_tempCelsius;
-
-		long 								_epochTimeUtc;
-
-		float 								_lowChartLimiterCelsius;
-		float 								_highChartLimiterCelsius;
-
-		//friend class 						DeviceSensors;
-
-	};
+	class ESPDevice;		
 
 	class DeviceSensors
 	{
@@ -141,7 +69,6 @@ namespace ART
 		void								createSensorJsonNestedObject(Sensor* sensor, JsonArray& root);
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 
-		std::vector<SensorOld> 				_sensors;
 		std::vector<SensorInDevice>			_sensorsInDevice;
 
 		int									_publishIntervalInMilliSeconds;
