@@ -51,7 +51,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	int screenWidth = screenX2 - screenX1;
 	int screenHeight = screenY2 - screenY1;
 
-	Sensor* sensors = _espDevice->getDeviceSensors()->getSensors();
+	SensorOld* sensors = _espDevice->getDeviceSensors()->getSensors();
 
 	int sensorsCount = sizeof(sensors);
 
@@ -66,7 +66,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	}
 }
 
-void DisplayTemperatureSensorManager::printBar(Sensor& sensor, int x, int y, int width, int height)
+void DisplayTemperatureSensorManager::printBar(SensorOld& sensor, int x, int y, int width, int height)
 {
 	int barMarginTop = 10;
 	int barMarginLeft = 5;
@@ -90,7 +90,7 @@ void DisplayTemperatureSensorManager::printBar(Sensor& sensor, int x, int y, int
 	this->printBarValue(sensor, barX1, barY1, barWidth, barHeight);
 }
 
-void DisplayTemperatureSensorManager::printBarValue(Sensor& sensor, int x, int y, int width, int height)
+void DisplayTemperatureSensorManager::printBarValue(SensorOld& sensor, int x, int y, int width, int height)
 {
 	float highChartLimiterCelsius = sensor.getHighChartLimiterCelsius();
 	float lowChartLimiterCelsius = sensor.getLowChartLimiterCelsius();
@@ -109,7 +109,7 @@ void DisplayTemperatureSensorManager::printBarValue(Sensor& sensor, int x, int y
 	this->_displayManager->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
 }
 
-void DisplayTemperatureSensorManager::printText(Sensor& sensor, int x, int y)
+void DisplayTemperatureSensorManager::printText(SensorOld& sensor, int x, int y)
 {
 	int unitOfMeasurementId = sensor.getUnitOfMeasurementId();
 

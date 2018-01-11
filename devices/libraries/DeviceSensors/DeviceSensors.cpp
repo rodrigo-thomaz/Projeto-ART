@@ -73,11 +73,11 @@ namespace ART
 		this->_tempCelsius = value;
 	}
 
-	// Sensor 
+	// SensorOld 
 
-	Sensor::Sensor(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
+	SensorOld::SensorOld(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
 	{
-		Serial.println("[Sensor constructor]");
+		Serial.println("[SensorOld constructor]");
 
 		_sensorId = new char(sizeof(strlen(sensorId)));
 		_sensorId = sensorId;
@@ -101,120 +101,120 @@ namespace ART
 		_alarms.push_back(highAlarm);
 	}
 
-	Sensor::~Sensor()
+	SensorOld::~SensorOld()
 	{
-		Serial.println("[Sensor destructor]");
+		Serial.println("[SensorOld destructor]");
 	}
 
-	char* Sensor::getSensorId()
+	char* SensorOld::getSensorId()
 	{
 		return _sensorId;
 	}
 
-	const uint8_t* Sensor::getDeviceAddress()
+	const uint8_t* SensorOld::getDeviceAddress()
 	{
 		return _deviceAddress.data();
 	}
 
-	char * Sensor::getFamily() const
+	char * SensorOld::getFamily() const
 	{
 		return (_family);
 	}
 
-	bool Sensor::getValidFamily()
+	bool SensorOld::getValidFamily()
 	{
 		return _validFamily;
 	}
 
-	char * Sensor::getLabel() const
+	char * SensorOld::getLabel() const
 	{
 		return (_label);
 	}
 
-	void Sensor::setLabel(char* value)
+	void SensorOld::setLabel(char* value)
 	{
 		_label = new char(sizeof(strlen(value)));
 		_label = value;
 	}
 
-	int Sensor::getResolution()
+	int SensorOld::getResolution()
 	{
 		return _resolution;
 	}
 
-	void Sensor::setResolution(int value)
+	void SensorOld::setResolution(int value)
 	{
 		_resolution = value;
 	}
 
-	byte Sensor::getUnitOfMeasurementId()
+	byte SensorOld::getUnitOfMeasurementId()
 	{
 		return _unitOfMeasurementId;
 	}
 
-	void Sensor::setUnitOfMeasurementId(int value)
+	void SensorOld::setUnitOfMeasurementId(int value)
 	{
 		_unitOfMeasurementId = value;
 	}
 
-	TempSensorAlarm& Sensor::getLowAlarm()
+	TempSensorAlarm& SensorOld::getLowAlarm()
 	{
 		return _alarms[0];
 	}
 
-	TempSensorAlarm& Sensor::getHighAlarm()
+	TempSensorAlarm& SensorOld::getHighAlarm()
 	{
 		return _alarms[1];
 	}
 
-	bool Sensor::getConnected()
+	bool SensorOld::getConnected()
 	{
 		return _connected;
 	}
 
-	void Sensor::setConnected(bool value)
+	void SensorOld::setConnected(bool value)
 	{
 		_connected = value;
 	}
 
-	float Sensor::getTempCelsius()
+	float SensorOld::getTempCelsius()
 	{
 		return _tempCelsius;
 	}
 
-	void Sensor::setTempCelsius(float value)
+	void SensorOld::setTempCelsius(float value)
 	{
 		_tempCelsius = value;
 		_alarms[0].setTempCelsius(value);
 		_alarms[1].setTempCelsius(value);
 	}
 
-	bool Sensor::hasAlarm()
+	bool SensorOld::hasAlarm()
 	{
 		return _alarms[0].hasAlarm() || _alarms[1].hasAlarm();
 	}
 
-	bool Sensor::hasAlarmBuzzer()
+	bool SensorOld::hasAlarmBuzzer()
 	{
 		return _alarms[0].hasAlarmBuzzer() || _alarms[1].hasAlarmBuzzer();
 	}
 
-	float Sensor::getLowChartLimiterCelsius()
+	float SensorOld::getLowChartLimiterCelsius()
 	{
 		return _lowChartLimiterCelsius;
 	}
 
-	void Sensor::setLowChartLimiterCelsius(float value)
+	void SensorOld::setLowChartLimiterCelsius(float value)
 	{
 		_lowChartLimiterCelsius = value;
 	}
 
-	float Sensor::getHighChartLimiterCelsius()
+	float SensorOld::getHighChartLimiterCelsius()
 	{
 		return _highChartLimiterCelsius;
 	}
 
-	void Sensor::setHighChartLimiterCelsius(float value)
+	void SensorOld::setHighChartLimiterCelsius(float value)
 	{
 		_highChartLimiterCelsius = value;
 	}
@@ -317,7 +317,7 @@ namespace ART
 
 		for (JsonArray::iterator it = jsonArray.begin(); it != jsonArray.end(); ++it)
 		{
-			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  Sensor foreach begin");
+			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  SensorInDevice foreach begin");
 
 			JsonObject& sensorInDeviceJsonObject = it->as<JsonObject>();
 			JsonObject& sensorJsonObject = sensorInDeviceJsonObject["sensor"].as<JsonObject>();			
@@ -353,7 +353,7 @@ namespace ART
 			TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, TempSensorAlarmPosition::Max);
 			TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, TempSensorAlarmPosition::Min);
 
-			this->_sensors.push_back(Sensor(
+			this->_sensors.push_back(SensorOld(
 				sensorId,
 				deviceAddress,
 				family,
@@ -368,7 +368,7 @@ namespace ART
 			_dallas.setResolution(deviceAddress, resolution);
 			_dallas.resetAlarmSearch();
 
-			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  Sensor foreach end");
+			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  SensorInDevice foreach end");
 		}
 
 		Serial.println("[DeviceSensors::setSensorsByMQQTCallback] initialized with success !");
@@ -393,9 +393,9 @@ namespace ART
 		}
 	}
 
-	Sensor *DeviceSensors::getSensors()
+	SensorOld *DeviceSensors::getSensors()
 	{
-		Sensor* array = this->_sensors.data();
+		SensorOld* array = this->_sensors.data();
 		return array;
 	}
 
@@ -421,7 +421,7 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		char* label = strdup(root["label"]);
 
-		Sensor& sensor = this->getSensorById(sensorId);
+		SensorOld& sensor = this->getSensorById(sensorId);
 		sensor.setLabel(label);
 
 		Serial.print("setLabel=");
@@ -443,7 +443,7 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		int value = root["unitOfMeasurementId"];
 
-		Sensor& sensor = getSensorById(sensorId);
+		SensorOld& sensor = getSensorById(sensorId);
 		sensor.setUnitOfMeasurementId(value);
 
 		Serial.print("setUnitOfMeasurement=");
@@ -465,7 +465,7 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		int value = root["dsFamilyTempSensorResolutionId"];
 
-		Sensor& sensor = getSensorById(sensorId);
+		SensorOld& sensor = getSensorById(sensorId);
 		sensor.setResolution(value);
 		_dallas.setResolution(sensor.getDeviceAddress(), value);
 
@@ -488,7 +488,7 @@ namespace ART
 		bool alarmOn = root["alarmOn"];
 		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
 
-		Sensor& sensor = getSensorById(sensorId);
+		SensorOld& sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor.getHighAlarm().setAlarmOn(alarmOn);
@@ -514,7 +514,7 @@ namespace ART
 		float alarmCelsius = root["alarmCelsius"];
 		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
 
-		Sensor& sensor = getSensorById(sensorId);
+		SensorOld& sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor.getHighAlarm().setAlarmCelsius(alarmCelsius);
@@ -540,7 +540,7 @@ namespace ART
 		bool alarmBuzzerOn = root["alarmBuzzerOn"];
 		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
 
-		Sensor& sensor = getSensorById(sensorId);
+		SensorOld& sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor.getHighAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
@@ -566,7 +566,7 @@ namespace ART
 		float chartLimiterCelsius = root["value"];
 		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
 
-		Sensor& sensor = getSensorById(sensorId);
+		SensorOld& sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor.setHighChartLimiterCelsius(chartLimiterCelsius);
@@ -577,7 +577,7 @@ namespace ART
 		Serial.println(json);
 	}
 
-	Sensor& DeviceSensors::getSensorById(char* sensorId) {
+	SensorOld& DeviceSensors::getSensorById(char* sensorId) {
 		for (int i = 0; i < this->_sensors.size(); ++i) {
 			if (this->_sensors[i].getSensorId() == sensorId) {
 				return this->_sensors[i];
@@ -602,7 +602,7 @@ namespace ART
 		}
 	}
 
-	void DeviceSensors::createSensorJsonNestedObject(Sensor sensor, JsonArray& root)
+	void DeviceSensors::createSensorJsonNestedObject(SensorOld sensor, JsonArray& root)
 	{
 		JsonObject& JSONencoder = root.createNestedObject();
 

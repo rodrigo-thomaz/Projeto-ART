@@ -56,13 +56,13 @@ namespace ART
 		float 								_tempCelsius;
 	};
 
-	class Sensor
+	class SensorOld
 	{
 
 	public:
 
-		Sensor(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
-		~Sensor();
+		SensorOld(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
+		~SensorOld();
 
 		char*								getSensorId();
 
@@ -145,7 +145,7 @@ namespace ART
 
 		void 								refresh();
 
-		Sensor 								*getSensors();
+		SensorOld 							*getSensors();
 
 		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);
 
@@ -173,12 +173,12 @@ namespace ART
 		bool								_initialized;
 		bool								_initializing;
 
-		Sensor&								getSensorById(char* sensorId);
+		SensorOld&							getSensorById(char* sensorId);
 		String 								getFamily(byte deviceAddress[8]);
-		void								createSensorJsonNestedObject(Sensor sensor, JsonArray& root);
+		void								createSensorJsonNestedObject(SensorOld sensor, JsonArray& root);
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 
-		std::vector<Sensor> 				_sensors;
+		std::vector<SensorOld> 				_sensors;
 		std::vector<SensorInDevice>			_sensorsInDevice;
 
 		int									_publishIntervalInMilliSeconds;
