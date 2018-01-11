@@ -8,6 +8,7 @@
 #include "DallasTemperature.h"
 
 #include "SensorInDevice.h"
+#include "Sensor.h" // Temp
 
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
@@ -17,44 +18,7 @@
 
 namespace ART
 {
-	class ESPDevice;
-
-	enum TempSensorAlarmPosition
-	{
-		Max = 0,
-		Min = 1,
-	};
-
-	class TempSensorAlarm
-	{
-	public:
-
-		TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, TempSensorAlarmPosition alarmPosition);
-
-		bool 								getAlarmOn();
-		void 								setAlarmOn(bool value);
-
-		float 								getAlarmCelsius();
-		void 								setAlarmCelsius(float value);
-
-		bool 								getAlarmBuzzerOn();
-		void 								setAlarmBuzzerOn(bool value);
-
-		bool 								hasAlarm();
-
-		bool 								hasAlarmBuzzer();
-
-		void 								setTempCelsius(float value);
-
-	private:
-
-		bool 								_alarmOn;
-		float 								_alarmCelsius;
-		bool 								_alarmBuzzerOn;
-		TempSensorAlarmPosition				_alarmPosition;
-
-		float 								_tempCelsius;
-	};
+	class ESPDevice;	
 
 	class SensorOld
 	{
