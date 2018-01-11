@@ -332,9 +332,9 @@ namespace ART
 		}
 	}
 
-	SensorOld *DeviceSensors::getSensors()
+	SensorInDevice *DeviceSensors::getSensorsInDevice()
 	{
-		SensorOld* array = this->_sensors.data();
+		SensorInDevice* array = this->_sensorsInDevice.data();
 		return array;
 	}
 

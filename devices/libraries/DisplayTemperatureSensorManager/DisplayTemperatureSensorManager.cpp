@@ -51,22 +51,23 @@ void DisplayTemperatureSensorManager::printSensors()
 	int screenWidth = screenX2 - screenX1;
 	int screenHeight = screenY2 - screenY1;
 
-	SensorOld* sensors = _espDevice->getDeviceSensors()->getSensors();
+	SensorInDevice* sensorsInDevice = _espDevice->getDeviceSensors()->getSensorsInDevice();	
 
-	int sensorsCount = sizeof(sensors);
+	int sensorsCount = sizeof(sensorsInDevice);
 
 	int boxChunk = round(screenWidth / sensorsCount);
 
 	//this->_displayManager->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
 
 	for (int i = 0; i < sensorsCount; ++i) {
+		Sensor* sensor = sensorsInDevice[i].getSensor();
 		int boxX = screenX1 + (boxChunk * i);
-		this->printBar(sensors[i], boxX, screenY1, boxChunk, screenHeight);
-		this->printText(sensors[i], boxX, screenY1);
+		this->printBar(sensor, boxX, screenY1, boxChunk, screenHeight);
+		this->printText(sensor, boxX, screenY1);
 	}
 }
 
-void DisplayTemperatureSensorManager::printBar(SensorOld& sensor, int x, int y, int width, int height)
+void DisplayTemperatureSensorManager::printBar(Sensor* sensor, int x, int y, int width, int height)
 {
 	int barMarginTop = 10;
 	int barMarginLeft = 5;
@@ -90,13 +91,13 @@ void DisplayTemperatureSensorManager::printBar(SensorOld& sensor, int x, int y, 
 	this->printBarValue(sensor, barX1, barY1, barWidth, barHeight);
 }
 
-void DisplayTemperatureSensorManager::printBarValue(SensorOld& sensor, int x, int y, int width, int height)
+void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y, int width, int height)
 {
-	float highChartLimiterCelsius = sensor.getHighChartLimiterCelsius();
-	float lowChartLimiterCelsius = sensor.getLowChartLimiterCelsius();
+	float highChartLimiterCelsius = sensor->getHighChartLimiterCelsius();
+	float lowChartLimiterCelsius = sensor->getLowChartLimiterCelsius();
 
 	float range = highChartLimiterCelsius - lowChartLimiterCelsius;
-	float value = sensor.getTempCelsius() - lowChartLimiterCelsius;
+	float value = sensor->getTempCelsius() - lowChartLimiterCelsius;
 	float percent = (value * 100) / range;
 
 	int tempHeight = round((height * percent) / 100);
@@ -109,11 +110,11 @@ void DisplayTemperatureSensorManager::printBarValue(SensorOld& sensor, int x, in
 	this->_displayManager->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
 }
 
-void DisplayTemperatureSensorManager::printText(SensorOld& sensor, int x, int y)
+void DisplayTemperatureSensorManager::printText(Sensor* sensor, int x, int y)
 {
-	int unitOfMeasurementId = sensor.getUnitOfMeasurementId();
+	int unitOfMeasurementId = sensor->getUnitOfMeasurementId();
 
-	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitOfMeasurementId, sensor.getTempCelsius());
+	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitOfMeasurementId, sensor->getTempCelsius());
 
 	//Temporario
 	String symbol = "C";

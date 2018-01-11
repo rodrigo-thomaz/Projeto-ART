@@ -24,9 +24,9 @@ private:
 	ESPDevice*  					_espDevice;
 	UnitOfMeasurementConverter*  	_unitOfMeasurementConverter;
 
-	void							printBar(SensorOld& sensor, int x, int y, int width, int height);
-	void							printBarValue(SensorOld& sensor, int x, int y, int width, int height);
-	void							printText(SensorOld& sensor, int x, int y);
+	void							printBar(Sensor* sensor, int x, int y, int width, int height);
+	void							printBarValue(Sensor* sensor, int x, int y, int width, int height);
+	void							printText(Sensor* sensor, int x, int y);
 };
 
 #endif

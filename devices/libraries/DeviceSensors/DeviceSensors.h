@@ -109,7 +109,7 @@ namespace ART
 
 		void 								refresh();
 
-		SensorOld 							*getSensors();
+		SensorInDevice						*getSensorsInDevice();
 
 		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);
 
