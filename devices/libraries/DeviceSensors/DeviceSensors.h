@@ -138,7 +138,7 @@ namespace ART
 		bool								_initializing;
 
 		SensorInDevice&						getSensorInDeviceById(char* sensorId);
-		void								createSensorJsonNestedObject(SensorOld sensor, JsonArray& root);
+		void								createSensorJsonNestedObject(Sensor* sensor, JsonArray& root);
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 
 		std::vector<SensorOld> 				_sensors;

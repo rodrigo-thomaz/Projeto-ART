@@ -319,13 +319,14 @@ namespace ART
 		bool hasAlarmBuzzer = false;
 
 		_dallas.requestTemperatures();
-		for (int i = 0; i < this->_sensors.size(); ++i) {
-			this->_sensors[i].setConnected(_dallas.isConnected(this->_sensors[i].getDeviceAddress()));
-			this->_sensors[i].setResolution(_dallas.getResolution(this->_sensors[i].getDeviceAddress()));
-			this->_sensors[i].setTempCelsius(_dallas.getTempC(this->_sensors[i].getDeviceAddress()));
+		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
+			Sensor* sensor = _sensorsInDevice[i].getSensor();
+			sensor->setConnected(_dallas.isConnected(sensor->getDeviceAddress()));
+			sensor->setResolution(_dallas.getResolution(sensor->getDeviceAddress()));
+			sensor->setTempCelsius(_dallas.getTempC(sensor->getDeviceAddress()));
 
-			if (this->_sensors[i].hasAlarm()) 		hasAlarm = true;
-			if (this->_sensors[i].hasAlarmBuzzer()) 	hasAlarmBuzzer = true;
+			if (sensor->hasAlarm()) 		hasAlarm = true;
+			if (sensor->hasAlarmBuzzer()) 	hasAlarmBuzzer = true;
 		}
 		if (hasAlarmBuzzer) {
 			_espDevice->getDeviceBuzzer()->test();
@@ -341,8 +342,8 @@ namespace ART
 	void DeviceSensors::createSensorsJsonNestedArray(JsonObject& jsonObject)
 	{
 		JsonArray& jsonArray = jsonObject.createNestedArray("dsFamilyTempSensors");
-		for (int i = 0; i < this->_sensors.size(); ++i) {
-			createSensorJsonNestedObject(this->_sensors[i], jsonArray);
+		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
+			createSensorJsonNestedObject(_sensorsInDevice[i].getSensor(), jsonArray);
 		}
 	}
 
@@ -527,14 +528,14 @@ namespace ART
 		}
 	}	
 
-	void DeviceSensors::createSensorJsonNestedObject(SensorOld sensor, JsonArray& root)
+	void DeviceSensors::createSensorJsonNestedObject(Sensor* sensor, JsonArray& root)
 	{
 		JsonObject& JSONencoder = root.createNestedObject();
 
-		JSONencoder["sensorId"] = sensor.getSensorId();
-		JSONencoder["isConnected"] = sensor.getConnected();
-		JSONencoder["resolution"] = sensor.getResolution();
-		JSONencoder["tempCelsius"] = sensor.getTempCelsius();
+		JSONencoder["sensorId"] = sensor->getSensorId();
+		JSONencoder["isConnected"] = sensor->getConnected();
+		JSONencoder["resolution"] = sensor->getResolution();
+		JSONencoder["tempCelsius"] = sensor->getTempCelsius();
 	}
 
 	String DeviceSensors::convertDeviceAddressToString(const uint8_t* deviceAddress)
