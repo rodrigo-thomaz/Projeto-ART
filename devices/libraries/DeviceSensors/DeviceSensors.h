@@ -137,7 +137,7 @@ namespace ART
 		bool								_initialized;
 		bool								_initializing;
 
-		SensorOld&							getSensorById(char* sensorId);
+		SensorInDevice&						getSensorInDeviceById(char* sensorId);
 		void								createSensorJsonNestedObject(SensorOld sensor, JsonArray& root);
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 

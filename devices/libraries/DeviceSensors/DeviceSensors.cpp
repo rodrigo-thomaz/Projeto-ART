@@ -360,8 +360,9 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		char* label = strdup(root["label"]);
 
-		SensorOld& sensor = this->getSensorById(sensorId);
-		sensor.setLabel(label);
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
+
+		sensor->setLabel(label);
 
 		Serial.print("setLabel=");
 		Serial.println(label);
@@ -382,8 +383,9 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		int value = root["unitOfMeasurementId"];
 
-		SensorOld& sensor = getSensorById(sensorId);
-		sensor.setUnitOfMeasurementId(value);
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
+
+		sensor->setUnitOfMeasurementId(value);
 
 		Serial.print("setUnitOfMeasurement=");
 		Serial.println(json);
@@ -404,9 +406,10 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		int value = root["dsFamilyTempSensorResolutionId"];
 
-		SensorOld& sensor = getSensorById(sensorId);
-		sensor.setResolution(value);
-		_dallas.setResolution(sensor.getDeviceAddress(), value);
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
+
+		sensor->setResolution(value);
+		_dallas.setResolution(sensor->getDeviceAddress(), value);
 
 		Serial.print("setResolution=");
 		Serial.println(json);
@@ -427,12 +430,12 @@ namespace ART
 		bool alarmOn = root["alarmOn"];
 		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
 
-		SensorOld& sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
 		if (position == Max)
-			sensor.getHighAlarm().setAlarmOn(alarmOn);
+			sensor->getHighAlarm().setAlarmOn(alarmOn);
 		else if (position == Min)
-			sensor.getLowAlarm().setAlarmOn(alarmOn);
+			sensor->getLowAlarm().setAlarmOn(alarmOn);
 
 		Serial.print("[DeviceSensors::setAlarmOn] ");
 		Serial.println(json);
@@ -453,12 +456,12 @@ namespace ART
 		float alarmCelsius = root["alarmCelsius"];
 		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
 
-		SensorOld& sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
 		if (position == Max)
-			sensor.getHighAlarm().setAlarmCelsius(alarmCelsius);
+			sensor->getHighAlarm().setAlarmCelsius(alarmCelsius);
 		else if (position == Min)
-			sensor.getLowAlarm().setAlarmCelsius(alarmCelsius);
+			sensor->getLowAlarm().setAlarmCelsius(alarmCelsius);
 
 		Serial.print("[DeviceSensors::setAlarmCelsius] ");
 		Serial.println(json);
@@ -479,12 +482,12 @@ namespace ART
 		bool alarmBuzzerOn = root["alarmBuzzerOn"];
 		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
 
-		SensorOld& sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
 		if (position == Max)
-			sensor.getHighAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
+			sensor->getHighAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
 		else if (position == Min)
-			sensor.getLowAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
+			sensor->getLowAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
 
 		Serial.print("[DeviceSensors::setAlarmBuzzerOn] ");
 		Serial.println(json);
@@ -505,21 +508,21 @@ namespace ART
 		float chartLimiterCelsius = root["value"];
 		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
 
-		SensorOld& sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
 		if (position == Max)
-			sensor.setHighChartLimiterCelsius(chartLimiterCelsius);
+			sensor->setHighChartLimiterCelsius(chartLimiterCelsius);
 		else if (position == Min)
-			sensor.setLowChartLimiterCelsius(chartLimiterCelsius);
+			sensor->setLowChartLimiterCelsius(chartLimiterCelsius);
 
 		Serial.print("[DeviceSensors::setChartLimiterCelsius] ");
 		Serial.println(json);
 	}
 
-	SensorOld& DeviceSensors::getSensorById(char* sensorId) {
-		for (int i = 0; i < this->_sensors.size(); ++i) {
-			if (this->_sensors[i].getSensorId() == sensorId) {
-				return this->_sensors[i];
+	SensorInDevice& DeviceSensors::getSensorInDeviceById(char* sensorId) {
+		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
+			if (this->_sensorsInDevice[i].getSensor()->getSensorId() == sensorId) {
+				return this->_sensorsInDevice[i];
 			}
 		}
 	}	
