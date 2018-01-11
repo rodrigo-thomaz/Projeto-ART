@@ -310,11 +310,14 @@ namespace ART
 
 		for (JsonArray::iterator it = jsonArray.begin(); it != jsonArray.end(); ++it)
 		{
-			JsonObject& sensorJsonObject = it->as<JsonObject>();
+			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  Sensor foreach begin");
+
+			JsonObject& sensorInDeviceJsonObject = it->as<JsonObject>();
+			JsonObject& sensorJsonObject = sensorInDeviceJsonObject["sensor"].as<JsonObject>();			
 
 			// DeviceAddress
 			DeviceAddress 	deviceAddress;
-			for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = sensorJsonObject["deviceAddress"][i];
+			for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = sensorJsonObject["deviceAddress"][i];			
 
 			char* 			sensorId = strdup(sensorJsonObject["sensorId"]);
 			char* 			family = strdup(getFamily(deviceAddress).c_str());
@@ -353,6 +356,8 @@ namespace ART
 
 			_dallas.setResolution(deviceAddress, resolution);
 			_dallas.resetAlarmSearch();
+
+			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  Sensor foreach end");
 		}
 
 		Serial.println("[DeviceSensors::setSensorsByMQQTCallback] initialized with success !");
