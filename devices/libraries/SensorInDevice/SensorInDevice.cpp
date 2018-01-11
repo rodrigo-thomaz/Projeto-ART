@@ -18,6 +18,11 @@ namespace ART
 		Serial.println("[SensorInDevice destructor]");
 	}
 
+	Sensor * SensorInDevice::getSensor()
+	{
+		return _sensor;
+	}
+
 	short SensorInDevice::getOrdination()
 	{
 		return _ordination;
