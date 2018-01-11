@@ -57,6 +57,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorInDevice", "SensorInD
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sensor", "Sensor\Sensor.vcxitems", "{AF11E741-3F7B-4C79-B6A1-D4C7A650E40F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorTempDSFamily", "SensorTempDSFamily\SensorTempDSFamily.vcxitems", "{A2E38722-5D06-4649-8481-4DA48E41E970}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

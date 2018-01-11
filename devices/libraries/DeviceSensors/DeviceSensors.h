@@ -8,7 +8,6 @@
 #include "DallasTemperature.h"
 
 #include "SensorInDevice.h"
-#include "Sensor.h" // Temp
 
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
