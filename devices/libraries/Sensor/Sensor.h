@@ -53,7 +53,7 @@ namespace ART
 	{
 
 	public:
-		Sensor(SensorInDevice* sensorInDevice, char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
+		Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject);
 		~Sensor();		
 
 		static String getFamily(byte deviceAddress[8]) {
@@ -74,46 +74,8 @@ namespace ART
 		}
 
 		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, JsonObject& jsonObject)
-		{
-			// DeviceAddress
-			DeviceAddress 	deviceAddress;
-			for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = jsonObject["deviceAddress"][i];
-
-			char* 			sensorId = strdup(jsonObject["sensorId"]);
-			char* 			family = strdup(getFamily(deviceAddress).c_str());
-			char* 			label = strdup(jsonObject["label"]);
-			int 			resolution = int(jsonObject["resolutionBits"]);
-			byte 			unitOfMeasurementId = byte(jsonObject["unitOfMeasurementId"]);
-
-			float 			lowChartLimiterCelsius = float(jsonObject["lowChartLimiterCelsius"]);
-			float 			highChartLimiterCelsius = float(jsonObject["highChartLimiterCelsius"]);
-
-			JsonObject& 	lowAlarmJsonObject = jsonObject["lowAlarm"].as<JsonObject>();
-			JsonObject& 	highAlarmJsonObject = jsonObject["highAlarm"].as<JsonObject>();
-
-			bool 			lowAlarmOn = bool(lowAlarmJsonObject["alarmOn"]);
-			float 			lowAlarmCelsius = float(lowAlarmJsonObject["alarmCelsius"]);
-			bool 			lowAlarmBuzzerOn = bool(lowAlarmJsonObject["buzzerOn"]);
-
-			bool 			highAlarmOn = bool(highAlarmJsonObject["alarmOn"]);
-			float 			highAlarmCelsius = float(highAlarmJsonObject["alarmCelsius"]);
-			bool 			highAlarmBuzzerOn = bool(highAlarmJsonObject["alarmBuzzerOn"]);
-
-			TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, TempSensorAlarmPosition::Max);
-			TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, TempSensorAlarmPosition::Min);
-			
-			sensor = new Sensor(
-				sensorInDevice,
-				sensorId,
-				deviceAddress,
-				family,
-				label,
-				resolution,
-				unitOfMeasurementId,
-				lowAlarm,
-				highAlarm,
-				lowChartLimiterCelsius,
-				highChartLimiterCelsius);
+		{			
+			sensor = new Sensor(sensorInDevice, jsonObject);
 		}
 
 		char*								getSensorId();

@@ -66,29 +66,54 @@ namespace ART
 
 	// Sensor 
 
-	Sensor::Sensor(SensorInDevice* sensorInDevice, char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
+	Sensor::Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject)
 	{
 		Serial.println("[Sensor constructor]");
 
-		_sensorInDevice = sensorInDevice;
+		_sensorInDevice = sensorInDevice;	
 
+		DeviceAddress 	deviceAddress;
+		for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = jsonObject["deviceAddress"][i];
+		for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back(deviceAddress[i]);
+
+		char* sensorId = strdup(jsonObject["sensorId"]);
 		_sensorId = new char(sizeof(strlen(sensorId)));
 		_sensorId = sensorId;
 
+		char* family = strdup(getFamily(deviceAddress).c_str());
 		_family = new char(sizeof(strlen(family)));
 		_family = family;
 
-		this->_validFamily = true;
+		_validFamily = true;
 
+		char* label = strdup(jsonObject["label"]);
 		_label = new char(sizeof(strlen(label)));
 		_label = label;
 
-		this->_resolution = resolution;
-		this->_unitOfMeasurementId = unitOfMeasurementId;
-		this->_lowChartLimiterCelsius = lowChartLimiterCelsius;
-		this->_highChartLimiterCelsius = highChartLimiterCelsius;
+		int resolution = int(jsonObject["resolutionBits"]);
+		_resolution = resolution;
 
-		for (uint8_t i = 0; i < 8; i++) this->_deviceAddress.push_back(deviceAddress[i]);
+		byte unitOfMeasurementId = byte(jsonObject["unitOfMeasurementId"]);
+		_unitOfMeasurementId = unitOfMeasurementId;
+
+		_lowChartLimiterCelsius = float(jsonObject["lowChartLimiterCelsius"]);
+		_highChartLimiterCelsius = float(jsonObject["highChartLimiterCelsius"]);
+		
+		// Alarms
+
+		JsonObject& 	lowAlarmJsonObject = jsonObject["lowAlarm"].as<JsonObject>();
+		JsonObject& 	highAlarmJsonObject = jsonObject["highAlarm"].as<JsonObject>();
+
+		bool 			lowAlarmOn = bool(lowAlarmJsonObject["alarmOn"]);
+		float 			lowAlarmCelsius = float(lowAlarmJsonObject["alarmCelsius"]);
+		bool 			lowAlarmBuzzerOn = bool(lowAlarmJsonObject["buzzerOn"]);
+
+		bool 			highAlarmOn = bool(highAlarmJsonObject["alarmOn"]);
+		float 			highAlarmCelsius = float(highAlarmJsonObject["alarmCelsius"]);
+		bool 			highAlarmBuzzerOn = bool(highAlarmJsonObject["alarmBuzzerOn"]);
+
+		TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, TempSensorAlarmPosition::Max);
+		TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, TempSensorAlarmPosition::Min);
 
 		_alarms.push_back(lowAlarm);
 		_alarms.push_back(highAlarm);
