@@ -73,7 +73,7 @@ namespace ART
 			}
 		}
 
-		static Sensor create(SensorInDevice* sensorInDevice, JsonObject& jsonObject)
+		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, JsonObject& jsonObject)
 		{
 			// DeviceAddress
 			DeviceAddress 	deviceAddress;
@@ -102,7 +102,7 @@ namespace ART
 			TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, TempSensorAlarmPosition::Max);
 			TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, TempSensorAlarmPosition::Min);
 			
-			return Sensor(
+			sensor = new Sensor(
 				sensorInDevice,
 				sensorId,
 				deviceAddress,

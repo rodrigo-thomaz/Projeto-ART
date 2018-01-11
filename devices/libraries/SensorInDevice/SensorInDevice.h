@@ -2,6 +2,7 @@
 #define SensorInDevice_h
 
 #include "ArduinoJson.h"
+#include "Sensor.h"
 
 namespace ART
 {
@@ -11,7 +12,7 @@ namespace ART
 	{
 
 	public:
-		SensorInDevice(DeviceSensors* deviceSensors, short ordination);
+		SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject);
 		~SensorInDevice();
 
 		short								getOrdination();
@@ -19,14 +20,13 @@ namespace ART
 
 		static SensorInDevice create(DeviceSensors* deviceSensors, JsonObject& jsonObject)
 		{
-			return SensorInDevice(
-				deviceSensors,
-				jsonObject["ordination"]);
+			return SensorInDevice(deviceSensors, jsonObject);
 		}
 
 	private:
 
 		DeviceSensors *						_deviceSensors;
+		Sensor *							_sensor;
 
 		short 								_ordination;
 	};

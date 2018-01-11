@@ -3,12 +3,12 @@
 
 namespace ART
 {
-	SensorInDevice::SensorInDevice(DeviceSensors* deviceSensors, short ordination)
+	SensorInDevice::SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject)
 	{
 		Serial.println("[SensorInDevice constructor]");
 
 		_deviceSensors = deviceSensors;
-		_ordination = ordination;
+		_ordination = jsonObject["ordination"];
 	}
 
 	SensorInDevice::~SensorInDevice()
