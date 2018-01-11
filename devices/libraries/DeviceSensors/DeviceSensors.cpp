@@ -270,7 +270,7 @@ namespace ART
 			for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = sensorJsonObject["deviceAddress"][i];			
 
 			char* 			sensorId = strdup(sensorJsonObject["sensorId"]);
-			char* 			family = strdup(getFamily(deviceAddress).c_str());
+			char* 			family = strdup(Sensor::getFamily(deviceAddress).c_str());
 			char* 			label = strdup(sensorJsonObject["label"]);
 			int 			resolution = int(sensorJsonObject["resolutionBits"]);
 			byte 			unitOfMeasurementId = byte(sensorJsonObject["unitOfMeasurementId"]);
@@ -522,24 +522,7 @@ namespace ART
 				return this->_sensors[i];
 			}
 		}
-	}
-
-	String DeviceSensors::getFamily(byte deviceAddress[8]) {
-		switch (deviceAddress[0]) {
-		case DS18S20MODEL:
-			return "DS18S20";
-		case DS18B20MODEL:
-			return "DS18B20";
-		case DS1822MODEL:
-			return "DS1822";
-		case DS1825MODEL:
-			return "DS1825";
-		case DS28EA00MODEL:
-			return "DS28EA00";
-		default:
-			return "";
-		}
-	}
+	}	
 
 	void DeviceSensors::createSensorJsonNestedObject(SensorOld sensor, JsonArray& root)
 	{
