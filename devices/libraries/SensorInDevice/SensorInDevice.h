@@ -17,12 +17,12 @@ namespace ART
 		short								getOrdination();
 		void								setOrdination(short value);
 
-		//static SensorInDevice create(DeviceSensors* deviceSensors, JsonObject& jsonObject)
-		//{
-		//	return SensorInDevice(
-		//		deviceSensors,
-		//		jsonObject["ordination"]);
-		//}
+		static SensorInDevice create(DeviceSensors* deviceSensors, JsonObject& jsonObject)
+		{
+			return SensorInDevice(
+				deviceSensors,
+				jsonObject["ordination"]);
+		}
 
 	private:
 

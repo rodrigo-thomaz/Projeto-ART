@@ -62,6 +62,7 @@ namespace ART
 	public:
 
 		Sensor(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius);
+		~Sensor();
 
 		char*								getSensorId();
 

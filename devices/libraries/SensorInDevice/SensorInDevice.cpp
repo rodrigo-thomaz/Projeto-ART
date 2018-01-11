@@ -5,6 +5,8 @@ namespace ART
 {
 	SensorInDevice::SensorInDevice(DeviceSensors* deviceSensors, short ordination)
 	{
+		Serial.println("[SensorInDevice constructor]");
+
 		_deviceSensors = deviceSensors;
 		_ordination = ordination;
 	}
@@ -12,7 +14,6 @@ namespace ART
 	SensorInDevice::~SensorInDevice()
 	{
 		Serial.println("[SensorInDevice destructor]");
-		//delete (_deviceSensors);
 	}
 
 	short SensorInDevice::getOrdination()

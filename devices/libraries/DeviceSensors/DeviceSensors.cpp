@@ -77,6 +77,8 @@ namespace ART
 
 	Sensor::Sensor(char* sensorId, DeviceAddress deviceAddress, char* family, char* label, int resolution, byte unitOfMeasurementId, TempSensorAlarm lowAlarm, TempSensorAlarm highAlarm, float lowChartLimiterCelsius, float highChartLimiterCelsius)
 	{
+		Serial.println("[Sensor constructor]");
+
 		_sensorId = new char(sizeof(strlen(sensorId)));
 		_sensorId = sensorId;
 
@@ -97,6 +99,11 @@ namespace ART
 
 		_alarms.push_back(lowAlarm);
 		_alarms.push_back(highAlarm);
+	}
+
+	Sensor::~Sensor()
+	{
+		Serial.println("[Sensor destructor]");
 	}
 
 	char* Sensor::getSensorId()
@@ -314,6 +321,10 @@ namespace ART
 
 			JsonObject& sensorInDeviceJsonObject = it->as<JsonObject>();
 			JsonObject& sensorJsonObject = sensorInDeviceJsonObject["sensor"].as<JsonObject>();			
+
+			// SensorInDevice
+			_sensorsInDevice.push_back(SensorInDevice::create(this, sensorInDeviceJsonObject));
+			Serial.println("[DeviceSensors::setSensorsByMQQTCallback] SensorInDevice created");
 
 			// DeviceAddress
 			DeviceAddress 	deviceAddress;
