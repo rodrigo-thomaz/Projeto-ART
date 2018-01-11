@@ -1,19 +1,29 @@
-/*
- Name:		SensorTempDSFamily.h
- Created:	11/01/2018 19:59:07
- Author:	rodrigo
- Editor:	http://www.visualmicro.com
-*/
+#ifndef SensorTempDSFamily_h
+#define SensorTempDSFamily_h
 
-#ifndef _SensorTempDSFamily_h
-#define _SensorTempDSFamily_h
+#include "ArduinoJson.h"
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
+namespace ART
+{
+	class Sensor;
+
+	class SensorTempDSFamily
+	{
+
+	public:
+		SensorTempDSFamily(Sensor* sensor, JsonObject& jsonObject);
+		~SensorTempDSFamily();
+
+		static void create(SensorTempDSFamily* (&sensorTempDSFamily), Sensor* sensor, JsonObject& jsonObject)
+		{
+			sensorTempDSFamily = new SensorTempDSFamily(sensor, jsonObject);
+		}
+
+	private:
+
+		Sensor *							_sensor;
+
+	};
+}
+
 #endif
-
-
-#endif
-

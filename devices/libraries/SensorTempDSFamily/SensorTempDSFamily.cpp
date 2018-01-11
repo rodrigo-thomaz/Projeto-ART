@@ -1,10 +1,17 @@
-/*
- Name:		SensorTempDSFamily.cpp
- Created:	11/01/2018 19:59:07
- Author:	rodrigo
- Editor:	http://www.visualmicro.com
-*/
-
 #include "SensorTempDSFamily.h"
+#include "Sensor.h"
 
+namespace ART
+{	
+	SensorTempDSFamily::SensorTempDSFamily(Sensor* sensor, JsonObject& jsonObject)
+	{
+		Serial.println("[SensorTempDSFamily constructor]");
 
+		_sensor = sensor;
+	}
+
+	SensorTempDSFamily::~SensorTempDSFamily()
+	{
+		Serial.println("[SensorTempDSFamily destructor]");
+	}	
+}

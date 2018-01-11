@@ -7,6 +7,7 @@
 #include "vector"
 #include "OneWire.h"
 #include "DallasTemperature.h"
+#include "SensorTempDSFamily.h"
 
 namespace ART
 {
@@ -116,6 +117,8 @@ namespace ART
 	private:
 
 		SensorInDevice *					_sensorInDevice;
+
+		SensorTempDSFamily *				_sensorTempDSFamily;
 
 		char* 								_sensorId;
 
