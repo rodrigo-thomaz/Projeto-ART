@@ -9,6 +9,8 @@ namespace ART
 
 		_deviceSensors = deviceSensors;
 		_ordination = jsonObject["ordination"];
+
+		Sensor::create(_sensor, this, jsonObject["sensor"]);
 	}
 
 	SensorInDevice::~SensorInDevice()
