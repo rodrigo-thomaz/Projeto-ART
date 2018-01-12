@@ -8,6 +8,7 @@
 #include "OneWire.h"
 #include "DallasTemperature.h"
 #include "SensorTempDSFamily.h"
+#include "SensorUnitMeasurementScale.h"
 
 namespace ART
 {
@@ -119,6 +120,7 @@ namespace ART
 		SensorInDevice *					_sensorInDevice;
 
 		SensorTempDSFamily *				_sensorTempDSFamily;
+		SensorUnitMeasurementScale *		_sensorUnitMeasurementScale;
 
 		char* 								_sensorId;
 
