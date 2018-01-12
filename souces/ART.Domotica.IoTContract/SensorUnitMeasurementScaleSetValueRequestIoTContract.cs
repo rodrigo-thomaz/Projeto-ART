@@ -13,7 +13,7 @@
             get; set;
         }
 
-        public Guid SensorUnitMeasurementScaleId
+        public Guid SensorId
         {
             get; set;
         }

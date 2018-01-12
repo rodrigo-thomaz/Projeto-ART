@@ -38,7 +38,7 @@
                 .ForMember(vm => vm.CountryId, m => m.MapFrom(x => x.CountryId));
 
             CreateMap<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>()
-                .ForMember(vm => vm.SensorUnitMeasurementScaleId, m => m.MapFrom(x => x.SensorUnitMeasurementScaleId))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorUnitMeasurementScaleId))
                 .ForMember(vm => vm.Position, m => m.MapFrom(x => x.Position))
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
 
