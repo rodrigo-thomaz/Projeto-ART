@@ -2,7 +2,7 @@
     <div class="form-group">
         <label class="col-lg-4 control-label">Tipo</label>
         <div class="col-lg-8">
-            <input type="text" class="form-control" ng-model="sensorInDeviceItem.sensor().sensorDatasheet().sensorType().name" readonly>            
+            <input type="text" class="form-control" ng-model="sensorInDeviceItem.sensor().sensorDatasheet().sensorType().name" readonly>
         </div>
     </div>
     <div class="form-group">
@@ -22,18 +22,16 @@
     </div>
 </form>
 
-<div class="line line-dashed b-b line-lg pull-in"></div>
-
-<div data-ng-include=" 'views/sensor/sensorUnitMeasurementScale.html' "></div>
-
-<div ng-show="sensorInDeviceItem.sensor().sensorTempDSFamily">
-
-    <div class="line line-dashed b-b line-lg pull-in"></div>
-
-    <div data-ng-include=" 'views/sensor/sensorTempDSFamily.html' "></div>
-    
-</div>
-
-<div class="line line-dashed b-b line-lg pull-in"></div>
-
-<div data-ng-include=" 'views/sensor/sensorTrigger.html' "></div>
+<tabset class="tab-container">
+    <tab heading="Unidade de medida">
+        <div data-ng-include=" 'views/sensor/sensorUnitMeasurementScale.html' "></div>
+    </tab>
+    <tab heading="DS Family">
+        <div ng-show="sensorInDeviceItem.sensor().sensorTempDSFamily">
+            <div data-ng-include=" 'views/sensor/sensorTempDSFamily.html' "></div>
+        </div>        
+    </tab>
+    <tab heading="Triggers">
+        <div data-ng-include=" 'views/sensor/sensorTrigger.html' "></div>
+    </tab>    
+</tabset>
