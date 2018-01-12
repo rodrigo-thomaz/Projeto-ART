@@ -69,8 +69,8 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor/SetAlarmCelsiusIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
 
-#define TOPIC_SUB_SENSOR_RANGE_SET_VALUE "SensorUnitMeasurementScale/setRangeIoT"
-#define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorUnitMeasurementScale/setChartLimiterIoT"
+#define TOPIC_SUB_SENSOR_RANGE_SET_VALUE "SensorUnitMeasurementScale/SetRangeIoT"
+#define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorUnitMeasurementScale/SetChartLimiterIoT"
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //t�pico MQTT de envio de informa��es para Broker
 
