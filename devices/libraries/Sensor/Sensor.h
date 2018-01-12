@@ -71,10 +71,7 @@ namespace ART
 		bool								getValidFamily();
 
 		char* 								getLabel() const;
-		void 								setLabel(char* value);
-
-		int 								getResolution();
-		void 								setResolution(int value);
+		void 								setLabel(char* value);		
 
 		byte 								getUnitOfMeasurementId();
 		void 								setUnitOfMeasurementId(int value);
@@ -97,6 +94,8 @@ namespace ART
 		float 								getHighChartLimiterCelsius();
 		void 								setHighChartLimiterCelsius(float value);
 
+		SensorTempDSFamily *				getSensorTempDSFamily();
+		SensorUnitMeasurementScale *		getSensorUnitMeasurementScale();
 
 	private:
 
@@ -112,9 +111,7 @@ namespace ART
 		char* 								_family;
 		bool 								_validFamily;
 
-		char* 								_label;
-
-		int 								_resolution;
+		char* 								_label;		
 
 		byte								_unitOfMeasurementId;
 

@@ -90,9 +90,6 @@ namespace ART
 		_label = new char(sizeof(strlen(label)));
 		_label = label;
 
-		int resolution = int(jsonObject["resolutionBits"]);
-		_resolution = resolution;
-
 		byte unitOfMeasurementId = byte(jsonObject["unitOfMeasurementId"]);
 		_unitOfMeasurementId = unitOfMeasurementId;
 
@@ -117,6 +114,8 @@ namespace ART
 
 		_alarms.push_back(lowAlarm);
 		_alarms.push_back(highAlarm);
+
+		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
 	}
 
 	Sensor::~Sensor()
@@ -153,17 +152,7 @@ namespace ART
 	{
 		_label = new char(sizeof(strlen(value)));
 		_label = value;
-	}
-
-	int Sensor::getResolution()
-	{
-		return _resolution;
-	}
-
-	void Sensor::setResolution(int value)
-	{
-		_resolution = value;
-	}
+	}	
 
 	byte Sensor::getUnitOfMeasurementId()
 	{
@@ -235,5 +224,15 @@ namespace ART
 	void Sensor::setHighChartLimiterCelsius(float value)
 	{
 		_highChartLimiterCelsius = value;
+	}
+
+	SensorTempDSFamily * Sensor::getSensorTempDSFamily()
+	{
+		return _sensorTempDSFamily;
+	}
+
+	SensorUnitMeasurementScale * Sensor::getSensorUnitMeasurementScale()
+	{
+		return _sensorUnitMeasurementScale;
 	}
 }

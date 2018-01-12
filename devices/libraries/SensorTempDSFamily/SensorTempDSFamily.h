@@ -16,6 +16,9 @@ namespace ART
 		SensorTempDSFamily(Sensor* sensor, JsonObject& jsonObject);
 		~SensorTempDSFamily();
 
+		int 								getResolution();
+		void 								setResolution(int value);
+
 		static void create(SensorTempDSFamily* (&sensorTempDSFamily), Sensor* sensor, JsonObject& jsonObject)
 		{
 			sensorTempDSFamily = new SensorTempDSFamily(sensor, jsonObject);
@@ -41,8 +44,9 @@ namespace ART
 
 	private:
 
-		Sensor * _sensor;
+		Sensor *							_sensor;
 
+		int 								_resolution;
 	};
 }
 

@@ -141,7 +141,7 @@ namespace ART
 		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
 			Sensor* sensor = _sensorsInDevice[i].getSensor();
 			sensor->setConnected(_dallas.isConnected(sensor->getDeviceAddress()));
-			sensor->setResolution(_dallas.getResolution(sensor->getDeviceAddress()));
+			sensor->getSensorTempDSFamily()->setResolution(_dallas.getResolution(sensor->getDeviceAddress()));
 			sensor->setTempCelsius(_dallas.getTempC(sensor->getDeviceAddress()));
 
 			if (sensor->hasAlarm()) 		hasAlarm = true;
@@ -228,7 +228,7 @@ namespace ART
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
-		sensor->setResolution(value);
+		sensor->getSensorTempDSFamily()->setResolution(value);
 		_dallas.setResolution(sensor->getDeviceAddress(), value);
 
 		Serial.print("setResolution=");
@@ -353,7 +353,7 @@ namespace ART
 
 		JSONencoder["sensorId"] = sensor->getSensorId();
 		JSONencoder["isConnected"] = sensor->getConnected();
-		JSONencoder["resolution"] = sensor->getResolution();
+		JSONencoder["resolution"] = sensor->getSensorTempDSFamily()->getResolution();
 		JSONencoder["tempCelsius"] = sensor->getTempCelsius();
 	}
 

@@ -43,12 +43,12 @@
             get; set;
         }
 
-        public byte ResolutionBits
+        public Guid SensorId
         {
             get; set;
         }
 
-        public Guid SensorId
+        public SensorTempDSFamilyGetResponseIoTContract SensorTempDSFamily
         {
             get; set;
         }
