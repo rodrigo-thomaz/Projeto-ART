@@ -80,7 +80,7 @@ namespace ART
 		_sensorId = new char(sizeof(strlen(sensorId)));
 		_sensorId = sensorId;
 
-		char* family = strdup(getFamily(deviceAddress).c_str());
+		char* family = strdup(SensorTempDSFamily::getFamily(deviceAddress).c_str());
 		_family = new char(sizeof(strlen(family)));
 		_family = family;
 

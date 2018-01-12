@@ -56,27 +56,10 @@ namespace ART
 
 	public:
 		Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject);
-		~Sensor();		
-
-		static String getFamily(byte deviceAddress[8]) {
-			switch (deviceAddress[0]) {
-			case DS18S20MODEL:
-				return "DS18S20";
-			case DS18B20MODEL:
-				return "DS18B20";
-			case DS1822MODEL:
-				return "DS1822";
-			case DS1825MODEL:
-				return "DS1825";
-			case DS28EA00MODEL:
-				return "DS28EA00";
-			default:
-				return "";
-			}
-		}
+		~Sensor();
 
 		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, JsonObject& jsonObject)
-		{			
+		{
 			sensor = new Sensor(sensorInDevice, jsonObject);
 		}
 
@@ -117,7 +100,7 @@ namespace ART
 
 	private:
 
-		SensorInDevice *					_sensorInDevice;
+		SensorInDevice * _sensorInDevice;
 
 		SensorTempDSFamily *				_sensorTempDSFamily;
 		SensorUnitMeasurementScale *		_sensorUnitMeasurementScale;
