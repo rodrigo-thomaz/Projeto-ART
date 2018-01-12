@@ -73,9 +73,6 @@ namespace ART
 		char* 								getLabel() const;
 		void 								setLabel(char* value);		
 
-		byte 								getUnitOfMeasurementId();
-		void 								setUnitOfMeasurementId(int value);
-
 		TempSensorAlarm& 					getLowAlarm();
 		TempSensorAlarm& 					getHighAlarm();
 
@@ -86,13 +83,7 @@ namespace ART
 		void 								setTempCelsius(float value);
 
 		bool 								hasAlarm();
-		bool 								hasAlarmBuzzer();
-
-		float 								getLowChartLimiterCelsius();
-		void 								setLowChartLimiterCelsius(float value);
-
-		float 								getHighChartLimiterCelsius();
-		void 								setHighChartLimiterCelsius(float value);
+		bool 								hasAlarmBuzzer();		
 
 		SensorTempDSFamily *				getSensorTempDSFamily();
 		SensorUnitMeasurementScale *		getSensorUnitMeasurementScale();
@@ -111,9 +102,7 @@ namespace ART
 		char* 								_family;
 		bool 								_validFamily;
 
-		char* 								_label;		
-
-		byte								_unitOfMeasurementId;
+		char* 								_label;	
 
 		std::vector<TempSensorAlarm> 		_alarms;
 
@@ -121,10 +110,7 @@ namespace ART
 
 		float 								_tempCelsius;
 
-		long 								_epochTimeUtc;
-
-		float 								_lowChartLimiterCelsius;
-		float 								_highChartLimiterCelsius;
+		long 								_epochTimeUtc;		
 	};
 }
 

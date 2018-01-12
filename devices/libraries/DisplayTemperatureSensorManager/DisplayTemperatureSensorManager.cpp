@@ -93,8 +93,8 @@ void DisplayTemperatureSensorManager::printBar(Sensor* sensor, int x, int y, int
 
 void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y, int width, int height)
 {
-	float highChartLimiterCelsius = sensor->getHighChartLimiterCelsius();
-	float lowChartLimiterCelsius = sensor->getLowChartLimiterCelsius();
+	float highChartLimiterCelsius = sensor->getSensorUnitMeasurementScale()->getHighChartLimiterCelsius();
+	float lowChartLimiterCelsius = sensor->getSensorUnitMeasurementScale()->getLowChartLimiterCelsius();
 
 	float range = highChartLimiterCelsius - lowChartLimiterCelsius;
 	float value = sensor->getTempCelsius() - lowChartLimiterCelsius;
@@ -112,7 +112,7 @@ void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y
 
 void DisplayTemperatureSensorManager::printText(Sensor* sensor, int x, int y)
 {
-	int unitOfMeasurementId = sensor->getUnitOfMeasurementId();
+	int unitOfMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitOfMeasurementId();
 
 	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitOfMeasurementId, sensor->getTempCelsius());
 

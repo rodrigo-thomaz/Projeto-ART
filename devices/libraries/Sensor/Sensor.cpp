@@ -88,13 +88,7 @@ namespace ART
 
 		char* label = strdup(jsonObject["label"]);
 		_label = new char(sizeof(strlen(label)));
-		_label = label;
-
-		byte unitOfMeasurementId = byte(jsonObject["unitOfMeasurementId"]);
-		_unitOfMeasurementId = unitOfMeasurementId;
-
-		_lowChartLimiterCelsius = float(jsonObject["lowChartLimiterCelsius"]);
-		_highChartLimiterCelsius = float(jsonObject["highChartLimiterCelsius"]);
+		_label = label;		
 		
 		// Alarms
 
@@ -116,6 +110,7 @@ namespace ART
 		_alarms.push_back(highAlarm);
 
 		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
+		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);
 	}
 
 	Sensor::~Sensor()
@@ -153,16 +148,6 @@ namespace ART
 		_label = new char(sizeof(strlen(value)));
 		_label = value;
 	}	
-
-	byte Sensor::getUnitOfMeasurementId()
-	{
-		return _unitOfMeasurementId;
-	}
-
-	void Sensor::setUnitOfMeasurementId(int value)
-	{
-		_unitOfMeasurementId = value;
-	}
 
 	TempSensorAlarm& Sensor::getLowAlarm()
 	{
@@ -204,27 +189,7 @@ namespace ART
 	bool Sensor::hasAlarmBuzzer()
 	{
 		return _alarms[0].hasAlarmBuzzer() || _alarms[1].hasAlarmBuzzer();
-	}
-
-	float Sensor::getLowChartLimiterCelsius()
-	{
-		return _lowChartLimiterCelsius;
-	}
-
-	void Sensor::setLowChartLimiterCelsius(float value)
-	{
-		_lowChartLimiterCelsius = value;
-	}
-
-	float Sensor::getHighChartLimiterCelsius()
-	{
-		return _highChartLimiterCelsius;
-	}
-
-	void Sensor::setHighChartLimiterCelsius(float value)
-	{
-		_highChartLimiterCelsius = value;
-	}
+	}	
 
 	SensorTempDSFamily * Sensor::getSensorTempDSFamily()
 	{

@@ -2,8 +2,6 @@
 {
     using System;
 
-    using ART.Domotica.Enums.SI;
-
     public class SensorGetResponseIoTContract
     {
         #region Properties
@@ -23,22 +21,12 @@
             get; set;
         }
 
-        public decimal HighChartLimiterCelsius
-        {
-            get; set;
-        }
-
         public string Label
         {
             get; set;
         }
 
         public SensorTriggerGetResponseIoTContract LowAlarm
-        {
-            get; set;
-        }
-
-        public decimal LowChartLimiterCelsius
         {
             get; set;
         }
@@ -53,7 +41,7 @@
             get; set;
         }
 
-        public UnitMeasurementEnum UnitMeasurementId
+        public SensorUnitMeasurementScaleGetResponseIoTContract SensorUnitMeasurementScale
         {
             get; set;
         }

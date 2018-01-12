@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SensorUnitMeasurementScaleGetResponseIoTContract.cs" />
     <Compile Include="SensorTempDSFamilyGetResponseIoTContract.cs" />
     <Compile Include="SensorGetResponseIoTContract.cs" />
     <Compile Include="SensorSetLabelRequestIoTContract.cs" />

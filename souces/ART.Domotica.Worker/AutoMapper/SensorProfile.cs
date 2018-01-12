@@ -47,9 +47,8 @@
                     return result;
                 }))
                 .ForMember(vm => vm.SensorTempDSFamily, m => m.MapFrom(x => x.SensorTempDSFamily))
+                .ForMember(vm => vm.SensorUnitMeasurementScale, m => m.MapFrom(x => x.SensorUnitMeasurementScale))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
-                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMin))
-                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.SensorUnitMeasurementScale.ChartLimiterMax))
                 .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.Id));
         }
 

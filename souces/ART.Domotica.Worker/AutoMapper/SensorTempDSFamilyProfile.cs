@@ -41,7 +41,7 @@
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolutionId));
 
-            CreateMap<SensorTempDSFamily, SensorTempDSFamilyGetResponseIoTContract>()                
+            CreateMap<SensorTempDSFamily, SensorTempDSFamilyGetResponseIoTContract>()
                 .ForMember(vm => vm.ResolutionBits, m => m.MapFrom(x => x.SensorTempDSFamilyResolution.Bits));
         }
 

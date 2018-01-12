@@ -205,7 +205,7 @@ namespace ART
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
-		sensor->setUnitOfMeasurementId(value);
+		sensor->getSensorUnitMeasurementScale()->setUnitOfMeasurementId(value);
 
 		Serial.print("setUnitOfMeasurement=");
 		Serial.println(json);
@@ -331,9 +331,9 @@ namespace ART
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
 		if (position == Max)
-			sensor->setHighChartLimiterCelsius(chartLimiterCelsius);
+			sensor->getSensorUnitMeasurementScale()->setHighChartLimiterCelsius(chartLimiterCelsius);
 		else if (position == Min)
-			sensor->setLowChartLimiterCelsius(chartLimiterCelsius);
+			sensor->getSensorUnitMeasurementScale()->setLowChartLimiterCelsius(chartLimiterCelsius);
 
 		Serial.print("[DeviceSensors::setChartLimiterCelsius] ");
 		Serial.println(json);
