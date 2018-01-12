@@ -93,11 +93,11 @@ void DisplayTemperatureSensorManager::printBar(Sensor* sensor, int x, int y, int
 
 void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y, int width, int height)
 {
-	float highChartLimiterCelsius = sensor->getSensorUnitMeasurementScale()->getHighChartLimiterCelsius();
-	float lowChartLimiterCelsius = sensor->getSensorUnitMeasurementScale()->getLowChartLimiterCelsius();
+	float chartLimiterMax = sensor->getSensorUnitMeasurementScale()->getChartLimiterMax();
+	float chartLimiterMin = sensor->getSensorUnitMeasurementScale()->getChartLimiterMin();
 
-	float range = highChartLimiterCelsius - lowChartLimiterCelsius;
-	float value = sensor->getTempCelsius() - lowChartLimiterCelsius;
+	float range = chartLimiterMax - chartLimiterMin;
+	float value = sensor->getTempCelsius() - chartLimiterMin;
 	float percent = (value * 100) / range;
 
 	int tempHeight = round((height * percent) / 100);

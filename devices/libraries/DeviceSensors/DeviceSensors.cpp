@@ -313,14 +313,14 @@ namespace ART
 		Serial.println(json);
 	}
 
-	void DeviceSensors::setChartLimiterCelsius(String json)
+	void DeviceSensors::setRange(String json)
 	{
 		StaticJsonBuffer<300> jsonBuffer;
 
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {
-			Serial.println("parse setChartLimiterCelsius failed");
+			Serial.println("parse setRange failed");
 			return;
 		}
 
@@ -331,11 +331,37 @@ namespace ART
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
 		if (position == Max)
-			sensor->getSensorUnitMeasurementScale()->setHighChartLimiterCelsius(chartLimiterCelsius);
+			sensor->getSensorUnitMeasurementScale()->setRangeMax(chartLimiterCelsius);
 		else if (position == Min)
-			sensor->getSensorUnitMeasurementScale()->setLowChartLimiterCelsius(chartLimiterCelsius);
+			sensor->getSensorUnitMeasurementScale()->setRangeMin(chartLimiterCelsius);
 
-		Serial.print("[DeviceSensors::setChartLimiterCelsius] ");
+		Serial.print("[DeviceSensors::setRange] ");
+		Serial.println(json);
+	}
+
+	void DeviceSensors::setChartLimiter(String json)
+	{
+		StaticJsonBuffer<300> jsonBuffer;
+
+		JsonObject& root = jsonBuffer.parseObject(json);
+
+		if (!root.success()) {
+			Serial.println("parse setChartLimiter failed");
+			return;
+		}
+
+		char* sensorId = strdup(root["sensorId"]);
+		float chartLimiterCelsius = root["value"];
+		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
+
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
+
+		if (position == Max)
+			sensor->getSensorUnitMeasurementScale()->setChartLimiterMax(chartLimiterCelsius);
+		else if (position == Min)
+			sensor->getSensorUnitMeasurementScale()->setChartLimiterMin(chartLimiterCelsius);
+
+		Serial.print("[DeviceSensors::setChartLimiter] ");
 		Serial.println(json);
 	}
 

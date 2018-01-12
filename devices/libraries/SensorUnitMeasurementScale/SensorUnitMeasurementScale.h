@@ -23,11 +23,17 @@ namespace ART
 		byte 								getUnitOfMeasurementId();
 		void 								setUnitOfMeasurementId(int value);
 
-		float 								getLowChartLimiterCelsius();
-		void 								setLowChartLimiterCelsius(float value);
+		float 								getRangeMax();
+		void 								setRangeMax(float value);
 
-		float 								getHighChartLimiterCelsius();
-		void 								setHighChartLimiterCelsius(float value);
+		float 								getRangeMin();
+		void 								setRangeMin(float value);
+
+		float 								getChartLimiterMax();
+		void 								setChartLimiterMax(float value);
+
+		float 								getChartLimiterMin();
+		void 								setChartLimiterMin(float value);
 
 	private:
 
@@ -35,8 +41,11 @@ namespace ART
 
 		byte								_unitOfMeasurementId;
 
-		float 								_lowChartLimiterCelsius;
-		float 								_highChartLimiterCelsius;
+		float 								_rangeMax;
+		float 								_rangeMin;
+
+		float 								_chartLimiterMax;
+		float 								_chartLimiterMin;
 	};
 }
 

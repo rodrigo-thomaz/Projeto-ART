@@ -41,13 +41,16 @@ namespace ART
 		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);
 
 		void 								setLabel(char* json);
+
 		void 								setUnitOfMeasurement(String json);
 		void 								setResolution(String json);
 
 		void 								setAlarmOn(String json);
 		void 								setAlarmCelsius(String json);
 		void 								setAlarmBuzzerOn(String json);
-		void 								setChartLimiterCelsius(String json);
+
+		void 								setRange(String json);
+		void 								setChartLimiter(String json);
 
 		int									getPublishIntervalInMilliSeconds();
 		void								setPublishIntervalInMilliSeconds(char* json);

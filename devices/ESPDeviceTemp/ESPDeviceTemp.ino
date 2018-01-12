@@ -69,9 +69,10 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor/SetAlarmCelsiusIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
 
-#define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorChartLimiter/SetValueIoT"
+#define TOPIC_SUB_SENSOR_RANGE_SET_VALUE "SensorUnitMeasurementScale/setRangeIoT"
+#define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorUnitMeasurementScale/setChartLimiterIoT"
 
-#define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tópico MQTT de envio de informações para Broker
+#define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //tï¿½pico MQTT de envio de informaï¿½ï¿½es para Broker
 
 uint64_t publishMessageTimestamp = 0;
 
@@ -203,7 +204,8 @@ void subscribeInApplication()
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
 
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_RANGE_SET_VALUE);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
 
 	Serial.println("[MQQT::subscribeInApplication] Initialized with success !");
 }
@@ -239,7 +241,8 @@ void unSubscribeInApplication()
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
 
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_RANGE_SET_VALUE);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
 
 	Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
@@ -339,16 +342,19 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 		espDevice.getDeviceSensors()->setAlarmBuzzerOn(json);
 	}
 
-	if (topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)) {
-		espDevice.getDeviceSensors()->setChartLimiterCelsius(json);
+	if (topicKey == String(TOPIC_SUB_SENSOR_RANGE_SET_VALUE)) {
+		espDevice.getDeviceSensors()->setRange(json);
 	}
+  if (topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)) {
+    espDevice.getDeviceSensors()->setChartLimiter(json);
+  } 
 }
 
 void loop() {
 
 	espDevice.loop();
 
-	espDevice.getDeviceMQ()->autoConnect(); //se não há conexão com o Broker, a conexão é refeita
+	espDevice.getDeviceMQ()->autoConnect(); //se nï¿½o hï¿½ conexï¿½o com o Broker, a conexï¿½o ï¿½ refeita
 
 	espDevice.getDeviceBinary()->loop();
 
@@ -362,7 +368,7 @@ void loop() {
 		loopInApplication();
 	}
 
-	//keep-alive da comunicação com broker MQTT
+	//keep-alive da comunicaï¿½ï¿½o com broker MQTT
 	espDevice.getDeviceMQ()->getMQQT()->loop();
 
 }

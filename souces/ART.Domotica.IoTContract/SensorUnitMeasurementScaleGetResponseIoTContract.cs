@@ -6,12 +6,22 @@
     {
         #region Properties
 
-        public decimal HighChartLimiterCelsius
+        public decimal ChartLimiterMax
         {
             get; set;
         }
 
-        public decimal LowChartLimiterCelsius
+        public decimal ChartLimiterMin
+        {
+            get; set;
+        }
+
+        public decimal RangeMax
+        {
+            get; set;
+        }
+
+        public decimal RangeMin
         {
             get; set;
         }

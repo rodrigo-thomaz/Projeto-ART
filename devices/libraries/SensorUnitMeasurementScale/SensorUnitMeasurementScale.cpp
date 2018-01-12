@@ -10,8 +10,12 @@ namespace ART
 		_sensor = sensor;
 
 		_unitOfMeasurementId = byte(jsonObject["unitOfMeasurementId"]);
-		_lowChartLimiterCelsius = float(jsonObject["lowChartLimiterCelsius"]);
-		_highChartLimiterCelsius = float(jsonObject["highChartLimiterCelsius"]);
+
+		_rangeMax = float(jsonObject["rangeMax"]);
+		_rangeMin = float(jsonObject["rangeMin"]);
+
+		_chartLimiterMax = float(jsonObject["chartLimiterMax"]);
+		_chartLimiterMin = float(jsonObject["chartLimiterMin"]);
 	}
 
 	SensorUnitMeasurementScale::~SensorUnitMeasurementScale()
@@ -29,23 +33,43 @@ namespace ART
 		_unitOfMeasurementId = value;
 	}
 
-	float SensorUnitMeasurementScale::getLowChartLimiterCelsius()
+	float SensorUnitMeasurementScale::getRangeMax()
 	{
-		return _lowChartLimiterCelsius;
+		return _rangeMax;
 	}
 
-	void SensorUnitMeasurementScale::setLowChartLimiterCelsius(float value)
+	void SensorUnitMeasurementScale::setRangeMax(float value)
 	{
-		_lowChartLimiterCelsius = value;
+		_rangeMax = value;
 	}
 
-	float SensorUnitMeasurementScale::getHighChartLimiterCelsius()
+	float SensorUnitMeasurementScale::getRangeMin()
 	{
-		return _highChartLimiterCelsius;
+		return _rangeMin;
 	}
 
-	void SensorUnitMeasurementScale::setHighChartLimiterCelsius(float value)
+	void SensorUnitMeasurementScale::setRangeMin(float value)
 	{
-		_highChartLimiterCelsius = value;
+		_rangeMin = value;
+	}
+
+	float SensorUnitMeasurementScale::getChartLimiterMax()
+	{
+		return _chartLimiterMax;
+	}
+
+	void SensorUnitMeasurementScale::setChartLimiterMax(float value)
+	{
+		_chartLimiterMax = value;
+	}
+
+	float SensorUnitMeasurementScale::getChartLimiterMin()
+	{
+		return _chartLimiterMin;
+	}
+
+	void SensorUnitMeasurementScale::setChartLimiterMin(float value)
+	{
+		_chartLimiterMin = value;
 	}
 }

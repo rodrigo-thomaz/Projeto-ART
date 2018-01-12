@@ -50,8 +50,10 @@
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
 
             CreateMap<SensorUnitMeasurementScale, SensorUnitMeasurementScaleGetResponseIoTContract>()
-                .ForMember(vm => vm.LowChartLimiterCelsius, m => m.MapFrom(x => x.ChartLimiterMin))
-                .ForMember(vm => vm.HighChartLimiterCelsius, m => m.MapFrom(x => x.ChartLimiterMax))
+                .ForMember(vm => vm.ChartLimiterMax, m => m.MapFrom(x => x.ChartLimiterMax))
+                .ForMember(vm => vm.ChartLimiterMin, m => m.MapFrom(x => x.ChartLimiterMin))
+                .ForMember(vm => vm.RangeMax, m => m.MapFrom(x => x.RangeMax))
+                .ForMember(vm => vm.RangeMin, m => m.MapFrom(x => x.RangeMin))
                 .ForMember(vm => vm.UnitMeasurementId, m => m.MapFrom(x => x.UnitMeasurementId));
         }
 
