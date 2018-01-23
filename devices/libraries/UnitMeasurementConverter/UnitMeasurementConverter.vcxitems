@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{6d7da896-af78-4a2d-8b65-2571141a6825}</ItemsProjectGuid>
+    <ItemsProjectGuid>{e30bbaf9-343b-415d-8d29-72473dc00f08}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -16,12 +16,12 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
 	<Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  	<Text Include="$(MSBuildThisFileDirectory)UnitOfMeasurementConverter.h" />
+  	<Text Include="$(MSBuildThisFileDirectory)UnitMeasurementConverter.h" />
   </ItemGroup>
  <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)UnitOfMeasurementConverter.h" /> -->
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)UnitMeasurementConverter.h" /> -->
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)UnitOfMeasurementConverter.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)UnitMeasurementConverter.cpp" />
   </ItemGroup>
   </Project>

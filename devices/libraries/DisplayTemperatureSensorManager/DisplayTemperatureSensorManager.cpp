@@ -1,10 +1,10 @@
 #include "DisplayTemperatureSensorManager.h"
 
-DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, ESPDevice& espDevice, UnitOfMeasurementConverter& unitOfMeasurementConverter)
+DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter)
 {
 	this->_displayManager = &displayManager;
 	this->_espDevice = &espDevice;
-	this->_unitOfMeasurementConverter = &unitOfMeasurementConverter;
+	this->_unitMeasurementConverter = &unitMeasurementConverter;
 }
 
 DisplayTemperatureSensorManager::~DisplayTemperatureSensorManager()
@@ -112,9 +112,9 @@ void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y
 
 void DisplayTemperatureSensorManager::printText(Sensor* sensor, int x, int y)
 {
-	int unitMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId();
+	UnitMeasurementEnum unitMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId();
 
-	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitMeasurementId, sensor->getTempCelsius());
+	float tempConverted = this->_unitMeasurementConverter->convertFromCelsius(unitMeasurementId, sensor->getTempCelsius());
 
 	//Temporario
 	String symbol = "C";

@@ -39,8 +39,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adafruit-GFX-Library", "Ada
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DallasTemperature", "DallasTemperature\DallasTemperature.vcxitems", "{83892C15-B1AA-4D4E-916F-850785D46041}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitOfMeasurementConverter", "UnitOfMeasurementConverter\UnitOfMeasurementConverter.vcxitems", "{6D7DA896-AF78-4A2D-8B65-2571141A6825}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EEPROMManager", "EEPROMManager\EEPROMManager.vcxitems", "{AF493238-5F46-4F95-BC89-C2B33956A178}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventManager", "EventManager\EventManager.vcxitems", "{181C8113-E024-47C8-934F-1395AF3B33F9}"
@@ -60,6 +58,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorTempDSFamily", "SensorTempDSFamily\SensorTempDSFamily.vcxitems", "{A2E38722-5D06-4649-8481-4DA48E41E970}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorUnitMeasurementScale", "SensorUnitMeasurementScale\SensorUnitMeasurementScale.vcxitems", "{CE268AF1-D789-4417-B194-B2606E2A45FE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurementConverter", "UnitMeasurementConverter\UnitMeasurementConverter.vcxitems", "{E30BBAF9-343B-415D-8D29-72473DC00F08}"
 EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution

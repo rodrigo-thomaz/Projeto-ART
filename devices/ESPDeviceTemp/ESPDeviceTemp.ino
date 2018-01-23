@@ -1,5 +1,5 @@
 #include "ESPDevice.h"
-#include "UnitOfMeasurementConverter.h"
+#include "UnitMeasurementConverter.h"
 #include "DisplayManager.h"
 #include "DeviceBuzzer.h"
 #include "DisplayAccessManager.h"
@@ -83,14 +83,14 @@ using namespace ART;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
-UnitOfMeasurementConverter unitOfMeasurementConverter;
+UnitMeasurementConverter unitMeasurementConverter;
 
 DisplayManager displayManager;
 DisplayAccessManager displayAccessManager(displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, espDevice);
 DisplayMQTTManager displayMQTTManager(displayManager);
 DisplayNTPManager displayNTPManager(displayManager, espDevice);
-DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, espDevice, unitOfMeasurementConverter);
+DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, espDevice, unitMeasurementConverter);
 
 void setup() {
 

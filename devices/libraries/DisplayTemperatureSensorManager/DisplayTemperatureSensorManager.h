@@ -4,7 +4,7 @@
 #include "Arduino.h"
 #include "DisplayManager.h"
 #include "ESPDevice.h"
-#include "UnitOfMeasurementConverter.h"
+#include "UnitMeasurementConverter.h"
 
 using namespace ART;
 
@@ -12,7 +12,7 @@ class DisplayTemperatureSensorManager
 {
 
 public:
-	DisplayTemperatureSensorManager(DisplayManager& displayManager, ESPDevice& espDevice, UnitOfMeasurementConverter& unitOfMeasurementConverter);
+	DisplayTemperatureSensorManager(DisplayManager& displayManager, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
 	~DisplayTemperatureSensorManager();
 
 	void							printUpdate(bool on);
@@ -22,7 +22,7 @@ private:
 
 	DisplayManager * _displayManager;
 	ESPDevice*  					_espDevice;
-	UnitOfMeasurementConverter*  	_unitOfMeasurementConverter;
+	UnitMeasurementConverter*  		_unitMeasurementConverter;
 
 	void							printBar(Sensor* sensor, int x, int y, int width, int height);
 	void							printBarValue(Sensor* sensor, int x, int y, int width, int height);
