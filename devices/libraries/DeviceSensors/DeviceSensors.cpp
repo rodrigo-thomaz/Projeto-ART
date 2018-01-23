@@ -188,27 +188,24 @@ namespace ART
 		Serial.println(label);
 	}
 
-	void DeviceSensors::setUnitOfMeasurement(String json)
+	void DeviceSensors::setDatasheetUnitMeasurementScale(char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
-
 		if (!root.success()) {
-			Serial.print("parse setUnitOfMeasurement failed: ");
-			Serial.println(json);
+			printf("DeviceSensors", "setDatasheetUnitMeasurementScale", "Parse failed: %s\n", json);
 			return;
 		}
 
 		char* sensorId = strdup(root["sensorId"]);
-		int value = root["unitOfMeasurementId"];
+		UnitMeasurementEnum value = static_cast<UnitMeasurementEnum>(root["unitMeasurementId"].as<int>());
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
-		sensor->getSensorUnitMeasurementScale()->setUnitOfMeasurementId(value);
+		sensor->getSensorUnitMeasurementScale()->setUnitMeasurementId(value);
 
 		Serial.print("setUnitOfMeasurement=");
-		Serial.println(json);
+		Serial.println(value);
 	}
 
 	void DeviceSensors::setResolution(String json)

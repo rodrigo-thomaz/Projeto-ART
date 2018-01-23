@@ -38,6 +38,11 @@ namespace ART.Domotica.Producer.Services
             await BasicPublish(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName, message);
         }
 
+        public async Task SetDatasheetUnitMeasurementScale(AuthenticatedMessageContract<SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleRequestContract> message)
+        {
+            await BasicPublish(SensorUnitMeasurementScaleConstants.SetDatasheetUnitMeasurementScaleQueueName, message);
+        }
+
         #endregion
     }
 }

@@ -21,6 +21,7 @@
                 initializeChartLimiterMaxViewWatch();
                 initializeChartLimiterMinViewWatch();
 
+                clearOnSetDatasheetUnitMeasurementScaleCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setDatasheetUnitMeasurementScaleCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetDatasheetUnitMeasurementScaleCompleted);
                 clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetUnitMeasurementNumericalScaleTypeCountryCompleted);
                 clearOnSetRangeCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setRangeCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetRangeCompleted);
                 clearOnSetChartLimiterCompleted = $rootScope.$on(sensorUnitMeasurementScaleConstant.setChartLimiterCompletedEventName + newValue.sensorUnitMeasurementScaleId, onSetChartLimiterCompleted);
@@ -73,7 +74,7 @@
             unitMeasurementViewSelectedWatch = $scope.$watch('unitMeasurementView.selected', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 applyUnitMeasurementScaleView();
-                changeUnitMeasurementScale();
+                changeDatasheetUnitMeasurementScale();
             });
 
             countryViewSelectedWatch = $scope.$watch('countryView.selected', function (newValue, oldValue) {
@@ -85,11 +86,13 @@
             numericalScaleTypeViewSelectedWatch = $scope.$watch('numericalScaleTypeView.selected', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 applyUnitMeasurementScaleView();
+                changeDatasheetUnitMeasurementScale();
                 changeUnitMeasurementScale();
             });
 
             unitMeasurementScaleViewSelectedWatch = $scope.$watch('unitMeasurementScaleView.selected', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
+                changeDatasheetUnitMeasurementScale();
                 changeUnitMeasurementScale();
             });
 
@@ -228,6 +231,27 @@
 
         };
 
+        var changeDatasheetUnitMeasurementScale = debounce(500, function () {
+
+            var unitMeasurement = $scope.unitMeasurementView.selected;
+            var numericalScaleType = $scope.numericalScaleTypeView.selected;
+            var unitMeasurementScale = $scope.unitMeasurementScaleView.selected;
+
+            if (unitMeasurement && numericalScaleType && unitMeasurementScale) {                
+
+                sensorUnitMeasurementScaleService.setDatasheetUnitMeasurementScale(
+                    $scope.sensorUnitMeasurementScale.sensorUnitMeasurementScaleId,
+                    $scope.sensorUnitMeasurementScale.sensorDatasheetId,
+                    $scope.sensorUnitMeasurementScale.sensorTypeId,
+                    unitMeasurementScale.unitMeasurementId,
+                    unitMeasurementScale.unitMeasurementTypeId,
+                    unitMeasurementScale.numericalScalePrefixId,
+                    unitMeasurementScale.numericalScaleTypeId
+                );
+            }
+
+        });
+
         var changeUnitMeasurementScale = debounce(500, function () {
 
             var unitMeasurement = $scope.unitMeasurementView.selected;
@@ -251,16 +275,26 @@
 
         });
 
+        var clearOnSetDatasheetUnitMeasurementScaleCompleted = null;
         var clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted = null;
         var clearOnSetRangeCompleted = null;
         var clearOnSetChartLimiterCompleted = null;
 
         $scope.$on('$destroy', function () {
             finalizeSelectedWatches();
+            clearOnSetDatasheetUnitMeasurementScaleCompleted();
             clearOnSetUnitMeasurementNumericalScaleTypeCountryCompleted();
             clearOnSetRangeCompleted();
             clearOnSetChartLimiterCompleted();
         });
+
+        var onSetDatasheetUnitMeasurementScaleCompleted = function (event, data) {
+            finalizeSelectedWatches();
+            applySelectsWithContext();
+            initializeSelectedWatches();
+            $scope.$apply();
+            toaster.pop('success', 'Sucesso', 'DatasheetUnitMeasurementScale alterado');
+        };
 
         var onSetUnitMeasurementNumericalScaleTypeCountryCompleted = function (event, data) {
             finalizeSelectedWatches();

@@ -6,15 +6,32 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
+        var setDatasheetUnitMeasurementScaleSubscription = null;
         var setUnitMeasurementNumericalScaleTypeCountrySubscription = null;
         var setRangeSubscription = null;
         var setChartLimiterSubscription = null;
 
         var onConnected = function () {
+            setDatasheetUnitMeasurementScaleSubscription = stompService.subscribeAllViews(sensorUnitMeasurementScaleConstant.setDatasheetUnitMeasurementScaleCompletedTopic, onSetDatasheetUnitMeasurementScaleCompleted);
             setUnitMeasurementNumericalScaleTypeCountrySubscription = stompService.subscribeAllViews(sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryCompletedTopic, onSetUnitMeasurementNumericalScaleTypeCountryCompleted);
             setRangeSubscription = stompService.subscribeAllViews(sensorUnitMeasurementScaleConstant.setRangeCompletedTopic, onSetRangeCompleted);
             setChartLimiterSubscription = stompService.subscribeAllViews(sensorUnitMeasurementScaleConstant.setChartLimiterCompletedTopic, onSetChartLimiterCompleted);
         }
+
+        var setDatasheetUnitMeasurementScale = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId, unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId) {
+            var data = {
+                sensorUnitMeasurementScaleId: sensorUnitMeasurementScaleId,
+                sensorDatasheetId: sensorDatasheetId,
+                sensorTypeId: sensorTypeId,
+                unitMeasurementId: unitMeasurementId,
+                unitMeasurementTypeId: unitMeasurementTypeId,
+                numericalScalePrefixId: numericalScalePrefixId,
+                numericalScaleTypeId: numericalScaleTypeId,
+            }
+            return $http.post(serviceBase + sensorUnitMeasurementScaleConstant.setDatasheetUnitMeasurementScaleApiUri, data).then(function (results) {
+                return results;
+            });
+        };    
 
         var setUnitMeasurementNumericalScaleTypeCountry = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId, unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId, countryId) {
             var data = {
@@ -30,7 +47,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
             return $http.post(serviceBase + sensorUnitMeasurementScaleConstant.setUnitMeasurementNumericalScaleTypeCountryApiUri, data).then(function (results) {
                 return results;
             });
-        };    
+        }; 
 
         var setRange = function (sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId, position, value) {
             var data = {
@@ -58,6 +75,19 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
             });
         };     
         
+        var onSetDatasheetUnitMeasurementScaleCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var sensorUnitMeasurementScale = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
+
+            sensorUnitMeasurementScale.unitMeasurementId = result.unitMeasurementId;
+            sensorUnitMeasurementScale.unitMeasurementTypeId = result.unitMeasurementTypeId;
+            sensorUnitMeasurementScale.numericalScalePrefixId = result.numericalScalePrefixId;
+            sensorUnitMeasurementScale.numericalScaleTypeId = result.numericalScaleTypeId;
+
+            sensorContext.$digest();
+            $rootScope.$emit(sensorUnitMeasurementScaleConstant.setDatasheetUnitMeasurementScaleCompletedEventName + result.sensorUnitMeasurementScaleId, result);
+        }
+
         var onSetUnitMeasurementNumericalScaleTypeCountryCompleted = function (payload) {
             var result = JSON.parse(payload.body);
             var sensorUnitMeasurementScale = sensorUnitMeasurementScaleFinder.getByKey(result.sensorUnitMeasurementScaleId, result.sensorDatasheetId, result.sensorTypeId);
@@ -100,6 +130,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
+            setDatasheetUnitMeasurementScaleSubscription.unsubscribe();
             setUnitMeasurementNumericalScaleTypeCountrySubscription.unsubscribe();
             setRangeSubscription.unsubscribe();
             setChartLimiterSubscription.unsubscribe();
@@ -112,6 +143,7 @@ app.factory('sensorUnitMeasurementScaleService', ['$http', '$log', '$rootScope',
 
         // serviceFactory
 
+        serviceFactory.setDatasheetUnitMeasurementScale = setDatasheetUnitMeasurementScale;
         serviceFactory.setUnitMeasurementNumericalScaleTypeCountry = setUnitMeasurementNumericalScaleTypeCountry;
         serviceFactory.setRange = setRange;
         serviceFactory.setChartLimiter = setChartLimiter;

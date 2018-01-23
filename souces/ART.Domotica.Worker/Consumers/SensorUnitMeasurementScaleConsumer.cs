@@ -24,7 +24,8 @@ namespace ART.Domotica.Worker.Consumers
 
         private readonly EventingBasicConsumer _setRangeConsumer;
         private readonly EventingBasicConsumer _setChartLimiterConsumer;
-        private readonly EventingBasicConsumer _setUnitMeasurementNumericalScaleTypeCountryConsumer;
+        private readonly EventingBasicConsumer _setDatasheetUnitMeasurementScaleConsumer;
+        private readonly EventingBasicConsumer _setUnitMeasurementNumericalScaleTypeCountryConsumer;        
 
         #endregion
 
@@ -35,6 +36,7 @@ namespace ART.Domotica.Worker.Consumers
         {
             _setRangeConsumer = new EventingBasicConsumer(_model);
             _setChartLimiterConsumer = new EventingBasicConsumer(_model);
+            _setDatasheetUnitMeasurementScaleConsumer = new EventingBasicConsumer(_model);
             _setUnitMeasurementNumericalScaleTypeCountryConsumer = new EventingBasicConsumer(_model);
 
             Initialize();
@@ -48,14 +50,17 @@ namespace ART.Domotica.Worker.Consumers
         {
             BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetRangeQueueName);
             BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName);
+            BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetDatasheetUnitMeasurementScaleQueueName);
             BasicQueueDeclare(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName);
-            
+
             _setRangeConsumer.Received += SetRangeReceived;
             _setChartLimiterConsumer.Received += SetChartLimiterReceived;
+            _setDatasheetUnitMeasurementScaleConsumer.Received += SetDatasheetUnitMeasurementScaleReceived;
             _setUnitMeasurementNumericalScaleTypeCountryConsumer.Received += SetUnitMeasurementNumericalScaleTypeCountryReceived;
 
             _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetRangeQueueName, false, _setRangeConsumer);
             _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetChartLimiterQueueName, false, _setChartLimiterConsumer);
+            _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetDatasheetUnitMeasurementScaleQueueName, false, _setDatasheetUnitMeasurementScaleConsumer);
             _model.BasicConsume(SensorUnitMeasurementScaleConstants.SetUnitMeasurementNumericalScaleTypeCountryQueueName, false, _setUnitMeasurementNumericalScaleTypeCountryConsumer);
         }
 
@@ -166,7 +171,45 @@ namespace ART.Domotica.Worker.Consumers
 
             _logger.DebugLeave();
         }
+        
+        public void SetDatasheetUnitMeasurementScaleReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetDatasheetUnitMeasurementScaleReceivedAsync(sender, e));
+        }
 
+        public async Task SetDatasheetUnitMeasurementScaleReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleRequestContract>>(e.Body);
+            var sensorUnitMeasurementScaleDomain = _componentContext.Resolve<ISensorUnitMeasurementScaleDomain>();
+            var data = await sensorUnitMeasurementScaleDomain.SetDatasheetUnitMeasurementScale(message.Contract.SensorUnitMeasurementScaleId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.UnitMeasurementId, message.Contract.UnitMeasurementTypeId, message.Contract.NumericalScalePrefixId, message.Contract.NumericalScaleTypeId);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Load device into context
+            var sensorDomain = _componentContext.Resolve<ISensorDomain>();
+            var device = await sensorDomain.GetDeviceFromSensor(message.Contract.SensorUnitMeasurementScaleId);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<SensorUnitMeasurementScale, SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleModel>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorUnitMeasurementScaleConstants.SetDatasheetUnitMeasurementScaleViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleRequestContract, SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleRequestIoTContract>(message.Contract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorUnitMeasurementScaleConstants.SetDatasheetUnitMeasurementScaleIoTQueueName);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
         #endregion
     }
 }

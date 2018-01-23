@@ -9,7 +9,7 @@ namespace ART
 
 		_sensor = sensor;
 
-		_unitOfMeasurementId = byte(jsonObject["unitOfMeasurementId"]);
+		_unitMeasurementId = static_cast<UnitMeasurementEnum>(jsonObject["unitMeasurementId"].as<int>());
 
 		_rangeMax = float(jsonObject["rangeMax"]);
 		_rangeMin = float(jsonObject["rangeMin"]);
@@ -23,14 +23,14 @@ namespace ART
 		Serial.println("[SensorUnitMeasurementScale destructor]");
 	}
 
-	byte SensorUnitMeasurementScale::getUnitOfMeasurementId()
+	UnitMeasurementEnum SensorUnitMeasurementScale::getUnitMeasurementId()
 	{
-		return _unitOfMeasurementId;
+		return _unitMeasurementId;
 	}
 
-	void SensorUnitMeasurementScale::setUnitOfMeasurementId(int value)
+	void SensorUnitMeasurementScale::setUnitMeasurementId(UnitMeasurementEnum value)
 	{
-		_unitOfMeasurementId = value;
+		_unitMeasurementId = value;
 	}
 
 	float SensorUnitMeasurementScale::getRangeMax()

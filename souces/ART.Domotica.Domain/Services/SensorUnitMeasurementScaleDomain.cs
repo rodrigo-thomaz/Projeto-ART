@@ -109,5 +109,31 @@
 
             return entity;
         }
+
+        public async Task<SensorUnitMeasurementScale> SetDatasheetUnitMeasurementScale(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, UnitMeasurementEnum unitMeasurementId, UnitMeasurementTypeEnum unitMeasurementTypeId, NumericalScalePrefixEnum numericalScalePrefixId, NumericalScaleTypeEnum numericalScaleTypeId)
+        {
+            var sensorDatasheetUnitMeasurementScale = await _sensorDatasheetUnitMeasurementScaleRepository.GetByKey(sensorDatasheetId, sensorTypeId, unitMeasurementId, unitMeasurementTypeId, numericalScalePrefixId, numericalScaleTypeId);
+
+            if (sensorDatasheetUnitMeasurementScale == null)
+            {
+                throw new Exception("SensorDatasheetUnitMeasurementScale not found");
+            }            
+
+            var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId);
+
+            if (entity == null)
+            {
+                throw new Exception("SensorUnitMeasurementScale not found");
+            }
+
+            entity.UnitMeasurementId = unitMeasurementId;
+            entity.UnitMeasurementTypeId = unitMeasurementTypeId;
+            entity.NumericalScalePrefixId = numericalScalePrefixId;
+            entity.NumericalScaleTypeId = numericalScaleTypeId;
+
+            await _sensorUnitMeasurementScaleRepository.Update(entity);
+
+            return entity;
+        }
     }
 }

@@ -60,6 +60,7 @@
     <Compile Include="DeviceSetLabelRequestContract.cs" />
     <Compile Include="SensorTriggerDeleteRequestContract.cs" />
     <Compile Include="SensorTriggerInsertRequestContract.cs" />
+    <Compile Include="SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleRequestContract.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryRequestContract.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetValueRequestContract.cs" />
     <Compile Include="SensorTriggerSetTriggerOnRequestContract.cs" />

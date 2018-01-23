@@ -57,6 +57,7 @@
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondModel.cs" />
     <Compile Include="DeviceNTPSetTimeZoneModel.cs" />
     <Compile Include="DeviceSetLabelModel.cs" />
+    <Compile Include="SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleModel.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetUnitMeasurementNumericalScaleTypeCountryModel.cs" />
     <Compile Include="SensorUnitMeasurementScaleSetValueModel.cs" />
     <Compile Include="SensorTriggerSetTriggerOnModel.cs" />

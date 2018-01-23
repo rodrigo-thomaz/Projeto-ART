@@ -64,13 +64,13 @@ int configurationEEPROMAddr = 0;
 
 #define TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION "SensorTempDSFamily/SetResolutionIoT"
 
-#define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT "DSFamilyTempSensor/SetUnitOfMeasurementIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON "DSFamilyTempSensor/SetAlarmOnIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS "DSFamilyTempSensor/SetAlarmCelsiusIoT"
 #define TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON "DSFamilyTempSensor/SetAlarmBuzzerOnIoT"
 
-#define TOPIC_SUB_SENSOR_RANGE_SET_VALUE "SensorUnitMeasurementScale/SetRangeIoT"
-#define TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE "SensorUnitMeasurementScale/SetChartLimiterIoT"
+#define TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE "SensorUnitMeasurementScale/SetDatasheetUnitMeasurementScaleIoT"
+#define TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE "SensorUnitMeasurementScale/SetRangeIoT"
+#define TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE "SensorUnitMeasurementScale/SetChartLimiterIoT"
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //t�pico MQTT de envio de informa��es para Broker
 
@@ -197,15 +197,15 @@ void subscribeInApplication()
 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
 
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);	
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION);
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
 
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_RANGE_SET_VALUE);
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE);
 
 	Serial.println("[MQQT::subscribeInApplication] Initialized with success !");
 }
@@ -235,14 +235,14 @@ void unSubscribeInApplication()
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
 
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON);
 
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_RANGE_SET_VALUE);
-  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE);
 
 	Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
@@ -326,9 +326,6 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 	if (topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)) {
 		espDevice.getDeviceSensors()->setSensorsByMQQTCallback(json);
 	}
-	if (topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_UNITOFMEASUREMENT)) {
-		espDevice.getDeviceSensors()->setUnitOfMeasurement(json);
-	}
 	if (topicKey == String(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION)) {
 		espDevice.getDeviceSensors()->setResolution(json);
 	}
@@ -342,10 +339,13 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 		espDevice.getDeviceSensors()->setAlarmBuzzerOn(json);
 	}
 
-	if (topicKey == String(TOPIC_SUB_SENSOR_RANGE_SET_VALUE)) {
+  if (topicKey == String(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE)) {
+    espDevice.getDeviceSensors()->setDatasheetUnitMeasurementScale(strdup(json.c_str()));
+  }
+	if (topicKey == String(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE)) {
 		espDevice.getDeviceSensors()->setRange(json);
 	}
-  if (topicKey == String(TOPIC_SUB_SENSOR_CHART_LIMITER_SET_VALUE)) {
+  if (topicKey == String(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE)) {
     espDevice.getDeviceSensors()->setChartLimiter(json);
   } 
 }
@@ -368,7 +368,7 @@ void loop() {
 		loopInApplication();
 	}
 
-	//keep-alive da comunica��o com broker MQTT
+	//keep-alive da comunicação com broker MQTT
 	espDevice.getDeviceMQ()->getMQQT()->loop();
 
 }

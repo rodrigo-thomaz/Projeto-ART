@@ -8,6 +8,29 @@ namespace ART
 {
 	class Sensor;
 
+	enum UnitMeasurementEnum
+	{
+		// UnitMeasurementTypeEnum.Length = 3
+
+		Meter = 3001,
+		Inch = 3002,
+		Foot = 3003,
+		Yard = 3004,
+		Mile = 3005,
+		League = 3006,
+
+		// UnitMeasurementTypeEnum.Temperature = 11
+
+		Celsius = 11001,
+		Fahrenheit = 11002,
+		Kelvin = 11003,
+		Rankine = 11004,
+		Romer = 11005,
+		Newton = 11006,
+		Delisle = 11007,
+		Reaumur = 11008,
+	};
+
 	class SensorUnitMeasurementScale
 	{
 
@@ -20,8 +43,8 @@ namespace ART
 			sensorUnitMeasurementScale = new SensorUnitMeasurementScale(sensor, jsonObject);
 		}
 
-		byte 								getUnitOfMeasurementId();
-		void 								setUnitOfMeasurementId(int value);
+		UnitMeasurementEnum					getUnitMeasurementId();
+		void 								setUnitMeasurementId(UnitMeasurementEnum value);
 
 		float 								getRangeMax();
 		void 								setRangeMax(float value);
@@ -39,7 +62,7 @@ namespace ART
 
 		Sensor * _sensor;
 
-		byte								_unitOfMeasurementId;
+		UnitMeasurementEnum					_unitMeasurementId;
 
 		float 								_rangeMax;
 		float 								_rangeMin;

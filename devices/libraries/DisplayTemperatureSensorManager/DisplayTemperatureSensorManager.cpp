@@ -112,9 +112,9 @@ void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y
 
 void DisplayTemperatureSensorManager::printText(Sensor* sensor, int x, int y)
 {
-	int unitOfMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitOfMeasurementId();
+	int unitMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId();
 
-	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitOfMeasurementId, sensor->getTempCelsius());
+	float tempConverted = this->_unitOfMeasurementConverter->convertFromCelsius(unitMeasurementId, sensor->getTempCelsius());
 
 	//Temporario
 	String symbol = "C";
