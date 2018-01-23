@@ -27,7 +27,9 @@
                 .ForMember(vm => vm.ConversionTime, m => m.MapFrom(x => x.ConversionTime))
                 .ForMember(vm => vm.Description, m => m.MapFrom(x => x.Description));
 
-            CreateMap<SensorTempDSFamilySetResolutionRequestContract, SensorTempDSFamilySetResolutionRequestIoTContract>();
+            CreateMap<SensorTempDSFamilySetResolutionRequestContract, SensorTempDSFamilySetResolutionRequestIoTContract>()
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorTempDSFamilyId))
+                .ForMember(vm => vm.SensorTempDSFamilyResolutionId, m => m.MapFrom(x => x.SensorTempDSFamilyResolutionId));
 
             CreateMap<SensorInDevice, SensorTempDSFamilyGetModel>()
                 .ForMember(vm => vm.SensorTempDSFamilyId, m => m.MapFrom(x => x.SensorId))
