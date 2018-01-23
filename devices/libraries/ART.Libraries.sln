@@ -61,6 +61,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorUnitMeasurementScale"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurementConverter", "UnitMeasurementConverter\UnitMeasurementConverter.vcxitems", "{E30BBAF9-343B-415D-8D29-72473DC00F08}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorDatasheetManager", "SensorDatasheetManager\SensorDatasheetManager.vcxitems", "{28822C4B-2EF1-4E72-BAE3-81047AD32D23}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

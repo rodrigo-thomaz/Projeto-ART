@@ -7,6 +7,7 @@
 #include "OneWire.h"
 #include "DallasTemperature.h"
 
+#include "SensorDatasheetManager.h"
 #include "SensorInDevice.h"
 
 #define DS_FAMILY_TEMP_SENSOR_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
