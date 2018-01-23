@@ -3,7 +3,6 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
-#include "ArduinoJson.h"
 #include "vector"
 #include "OneWire.h"
 #include "DallasTemperature.h"
