@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{28822c4b-2ef1-4e72-bae3-81047ad32d23}</ItemsProjectGuid>
+    <ItemsProjectGuid>{704d980a-58f1-4cc2-9b1f-6b47927f5018}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -16,16 +16,15 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.h" /> -->
-    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheet.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetEnum.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)SensorTypeEnum.h" />
+    <Text Include="$(MSBuildThisFileDirectory)SensorDatasheet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheet.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetEnum.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorTypeEnum.h" />
   </ItemGroup>
 </Project>

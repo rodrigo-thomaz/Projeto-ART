@@ -11,28 +11,28 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheet.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+    <Text Include="$(MSBuildThisFileDirectory)SensorDatasheet.h">
+      <Filter>Header Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Projeto-ART\devices\libraries\SensorDatasheetManager\SensorTypeEnum.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheet.h">
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorTypeEnum.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -29,7 +29,7 @@ namespace ART
 
 	private:
 
-		DeviceSensors *						_deviceSensors;
+		DeviceSensors * _deviceSensors;
 
 		SensorTypeEnum						_sensorTypeId;
 		SensorDatasheetEnum					_sensorDatasheetId;
