@@ -9,19 +9,19 @@
 
 namespace ART
 {
-	class SensorDatasheetManager;
+	class DeviceSensors;
 
 	class SensorDatasheet
 	{
 
 	public:
 
-		SensorDatasheet(SensorDatasheetManager* sensorDatasheetManager, JsonObject& jsonObject);
+		SensorDatasheet(DeviceSensors* deviceSensors, JsonObject& jsonObject);
 		~SensorDatasheet();
 
-		static void create(SensorDatasheet* (&sensorDatasheet), SensorDatasheetManager* sensorDatasheetManager, JsonObject& jsonObject)
+		static void create(SensorDatasheet* (&sensorDatasheet), DeviceSensors* deviceSensors, JsonObject& jsonObject)
 		{
-			sensorDatasheet = new SensorDatasheet(sensorDatasheetManager, jsonObject);
+			sensorDatasheet = new SensorDatasheet(deviceSensors, jsonObject);
 		}
 
 		SensorTypeEnum						getSensorTypeId();
@@ -29,7 +29,7 @@ namespace ART
 
 	private:
 
-		SensorDatasheetManager *			_sensorDatasheetManager;
+		DeviceSensors *						_deviceSensors;
 
 		SensorTypeEnum						_sensorTypeId;
 		SensorDatasheetEnum					_sensorDatasheetId;

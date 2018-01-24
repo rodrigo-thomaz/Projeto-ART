@@ -7,13 +7,13 @@
 #include "OneWire.h"
 #include "DallasTemperature.h"
 
-#include "SensorDatasheetManager.h"
+#include "SensorDatasheet.h"
 #include "SensorInDevice.h"
 
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
 
-#define TOPIC_PUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID   					"DeviceSensors/GetFullByDeviceInApplicationIdIoT" 
+#define TOPIC_PUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID   				"DeviceSensors/GetFullByDeviceInApplicationIdIoT" 
 #define TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED		   	"DeviceSensors/GetFullByDeviceInApplicationIdCompletedIoT"
 
 namespace ART

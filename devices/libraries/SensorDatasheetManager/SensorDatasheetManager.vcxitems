@@ -16,7 +16,6 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
-    <Text Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.h" /> -->
@@ -27,7 +26,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheet.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.cpp" />
   </ItemGroup>
 </Project>

@@ -1,13 +1,13 @@
 #include "SensorDatasheet.h"
-#include "SensorDatasheetManager.h"
+#include "DeviceSensors.h"
 
 namespace ART
 {
-	SensorDatasheet::SensorDatasheet(SensorDatasheetManager* sensorDatasheetManager, JsonObject& jsonObject)
+	SensorDatasheet::SensorDatasheet(DeviceSensors* deviceSensors, JsonObject& jsonObject)
 	{
 		Serial.println("[SensorDatasheet constructor]");
 
-		_sensorDatasheetManager = sensorDatasheetManager;
+		_deviceSensors = deviceSensors;
 			
 		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
 		_sensorDatasheetId = static_cast<SensorDatasheetEnum>(jsonObject["sensorDatasheetId"].as<short>());
