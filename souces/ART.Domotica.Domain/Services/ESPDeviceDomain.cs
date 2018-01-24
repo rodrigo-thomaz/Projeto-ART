@@ -102,11 +102,11 @@
                 
             });
 
-            var sensorsInDevice = await _deviceSensorsRepository.GetAllByDeviceId(deviceEntity.Id);
+            var deviceSensors = await _deviceSensorsRepository.GetFullByDeviceId(deviceEntity.Id);
 
             var sensorsInApplication = new List<SensorInApplication>();
 
-            foreach (var item in sensorsInDevice)
+            foreach (var item in deviceSensors.SensorInDevice)
             {
                 sensorsInApplication.Add(new SensorInApplication
                 {

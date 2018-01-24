@@ -2,7 +2,6 @@
 {
     using System;
     using System.Data.Entity;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
@@ -26,13 +25,13 @@
             return await _context.DeviceSensors.FindAsync(deviceId, deviceDatasheetId);
         }
 
-        public async Task<List<SensorInDevice>> GetAllByDeviceId(Guid deviceId)
+        public async Task<DeviceSensors> GetFullByDeviceId(Guid deviceId)
         {
-            return await _context.SensorInDevice
-                .Include(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolution)
-                .Include(x => x.Sensor.SensorUnitMeasurementScale)
-                .Where(x => x.Sensor.SensorInDevice.FirstOrDefault(y => y.DeviceSensors.Id == deviceId) != null)
-                .ToListAsync();
+            return await _context.DeviceSensors
+                .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolution))
+                .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
+                .Where(x => x.Id == deviceId)
+                .FirstOrDefaultAsync();
         }
     }
 }

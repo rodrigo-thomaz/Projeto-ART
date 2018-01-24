@@ -10,7 +10,6 @@
     using ART.Domotica.Repository.Repositories;
     using ART.Domotica.Repository;
     using Autofac;
-    using System.Collections.Generic;
 
     public class DeviceSensorsDomain : DomainBase, IDeviceSensorsDomain
     {
@@ -49,7 +48,7 @@
             return entity;
         }
 
-        public async Task<List<SensorInDevice>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceSensors> GetFullByDeviceInApplicationId(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
         {
             var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId, deviceDatasheetId);
 
@@ -58,7 +57,7 @@
                 throw new Exception("DeviceInApplication not found");
             }
 
-            return await _deviceSensorsRepository.GetAllByDeviceId(deviceInApplication.DeviceId);
+            return await _deviceSensorsRepository.GetFullByDeviceId(deviceInApplication.DeviceId);
         }
     }
 }
