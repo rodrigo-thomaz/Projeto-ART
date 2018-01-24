@@ -19,7 +19,6 @@
     using ART.Domotica.Contract;
     using ART.Infra.CrossCutting.MQ;
     using ART.Domotica.IoTContract;
-    using System.Collections.Generic;
 
     public class DeviceSensorsConsumer : ConsumerBase, IDeviceSensorsConsumer
     {

@@ -28,8 +28,9 @@
         public async Task<DeviceSensors> GetFullByDeviceId(Guid deviceId)
         {
             return await _context.DeviceSensors
-                .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolution))
+                .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorDatasheet))
                 .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
+                .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolution))                
                 .Where(x => x.Id == deviceId)
                 .FirstOrDefaultAsync();
         }

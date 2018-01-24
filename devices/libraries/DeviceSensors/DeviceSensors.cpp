@@ -101,7 +101,7 @@ namespace ART
 			return;
 		}
 
-		JsonArray& jsonArray = sensorInDeviceJO["sensorInDevice"];
+		JsonArray& jsonArray = sensorInDeviceJO["sensorsInDevice"];
 
 		_publishIntervalInMilliSeconds = sensorInDeviceJO["publishIntervalInMilliSeconds"];
 
