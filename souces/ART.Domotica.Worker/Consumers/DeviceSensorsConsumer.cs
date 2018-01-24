@@ -26,7 +26,7 @@
         #region Fields
         
         private readonly EventingBasicConsumer _setPublishIntervalInMilliSecondsConsumer;
-        private readonly EventingBasicConsumer _getAllByDeviceInApplicationIdConsumer;
+        private readonly EventingBasicConsumer _getFullByDeviceInApplicationIdConsumer;
 
         #endregion Fields
 
@@ -36,7 +36,7 @@
             : base(connection, mqSettings, logger, componentContext)
         {            
             _setPublishIntervalInMilliSecondsConsumer = new EventingBasicConsumer(_model);
-            _getAllByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);
+            _getFullByDeviceInApplicationIdConsumer = new EventingBasicConsumer(_model);
 
             Initialize();
         }
@@ -48,19 +48,19 @@
         private void Initialize()
         {
             BasicQueueDeclare(DeviceSensorsConstants.SetPublishIntervalInMilliSecondsQueueName);
-            BasicQueueDeclare(DeviceSensorsConstants.GetAllByDeviceInApplicationIdIoTQueueName);
+            BasicQueueDeclare(DeviceSensorsConstants.GetFullByDeviceInApplicationIdIoTQueueName);
 
             _model.QueueBind(
-                  queue: DeviceSensorsConstants.GetAllByDeviceInApplicationIdIoTQueueName
+                  queue: DeviceSensorsConstants.GetFullByDeviceInApplicationIdIoTQueueName
                 , exchange: "amq.topic"
-                , routingKey: GetApplicationRoutingKeyForAllIoT(DeviceSensorsConstants.GetAllByDeviceInApplicationIdIoTQueueName)
+                , routingKey: GetApplicationRoutingKeyForAllIoT(DeviceSensorsConstants.GetFullByDeviceInApplicationIdIoTQueueName)
                 , arguments: CreateBasicArguments());
 
             _setPublishIntervalInMilliSecondsConsumer.Received += SetPublishIntervalInMilliSecondsReceived;
-            _getAllByDeviceInApplicationIdConsumer.Received += GetAllByDeviceInApplicationIdReceived;
+            _getFullByDeviceInApplicationIdConsumer.Received += GetFullByDeviceInApplicationIdReceived;
 
             _model.BasicConsume(DeviceSensorsConstants.SetPublishIntervalInMilliSecondsQueueName, false, _setPublishIntervalInMilliSecondsConsumer);
-            _model.BasicConsume(DeviceSensorsConstants.GetAllByDeviceInApplicationIdIoTQueueName, false, _getAllByDeviceInApplicationIdConsumer);
+            _model.BasicConsume(DeviceSensorsConstants.GetFullByDeviceInApplicationIdIoTQueueName, false, _getFullByDeviceInApplicationIdConsumer);
         }
 
         private void SetPublishIntervalInMilliSecondsReceived(object sender, BasicDeliverEventArgs e)
@@ -99,12 +99,12 @@
             _logger.DebugLeave();
         }
 
-        private void GetAllByDeviceInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
+        private void GetFullByDeviceInApplicationIdReceived(object sender, BasicDeliverEventArgs e)
         {
-            Task.WaitAll(GetAllByDeviceInApplicationIdReceivedAsync(sender, e));
+            Task.WaitAll(GetFullByDeviceInApplicationIdReceivedAsync(sender, e));
         }
 
-        private async Task GetAllByDeviceInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
+        private async Task GetFullByDeviceInApplicationIdReceivedAsync(object sender, BasicDeliverEventArgs e)
         {
             _logger.DebugEnter();
 
@@ -123,7 +123,7 @@
             //Enviando para o Iot
             var iotContract = Mapper.Map<DeviceSensors, DeviceSensorsGetResponseIoTContract>(data);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
-            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceSensorsConstants.GetAllByDeviceInApplicationIdCompletedIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceSensorsConstants.GetFullByDeviceInApplicationIdCompletedIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

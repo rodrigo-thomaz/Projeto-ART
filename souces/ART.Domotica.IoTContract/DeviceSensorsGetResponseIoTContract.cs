@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-
-namespace ART.Domotica.IoTContract
+﻿namespace ART.Domotica.IoTContract
 {
+    using System.Collections.Generic;
+
     public class DeviceSensorsGetResponseIoTContract
     {
         #region Properties
 
-        public List<SensorInDeviceGetResponseIoTContract> SensorInDevice
+        public int PublishIntervalInMilliSeconds
         {
             get; set;
         }
 
-        public int PublishIntervalInMilliSeconds
+        public List<SensorInDeviceGetResponseIoTContract> SensorInDevice
         {
             get; set;
         }

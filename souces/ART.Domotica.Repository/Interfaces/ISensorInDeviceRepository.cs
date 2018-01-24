@@ -10,7 +10,7 @@
 
     public interface ISensorInDeviceRepository : IRepository<ARTDbContext, SensorInDevice>
     {
-        #region Methods        
+        #region Methods
 
         Task<List<SensorInDevice>> GetByDeviceSensorsKey(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId);
 

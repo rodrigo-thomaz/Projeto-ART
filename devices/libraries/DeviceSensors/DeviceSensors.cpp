@@ -55,7 +55,7 @@ namespace ART
 		short deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();
 		char* applicationId = this->_espDevice->getDeviceInApplication()->getApplicationId();
 
-		StaticJsonBuffer<DEVICE_SENSORS_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
+		StaticJsonBuffer<DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
 		JsonObject& root = JSONbuffer.createObject();
 
 		root["deviceId"] = deviceId;
@@ -83,7 +83,7 @@ namespace ART
 		char result[len + 1];
 		root.printTo(result, sizeof(result));
 
-		_espDevice->getDeviceMQ()->publish(TOPIC_PUB_DEVICE_SENSORS_GET_ALL_BY_DEVICE_IN_APPLICATION_ID, result);
+		_espDevice->getDeviceMQ()->publish(TOPIC_PUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID, result);
 
 		return true;
 	}
@@ -96,7 +96,7 @@ namespace ART
 		this->_initializing = false;
 
 		DynamicJsonBuffer jsonBuffer;
-		//StaticJsonBuffer<DEVICE_SENSORS_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
+		//StaticJsonBuffer<DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
 
 		JsonObject& sensorInDeviceJO = jsonBuffer.parseObject(json);
 

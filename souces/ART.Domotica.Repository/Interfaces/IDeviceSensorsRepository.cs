@@ -11,9 +11,9 @@
     {
         #region Methods
 
-        Task<DeviceSensors> GetFullByDeviceId(Guid deviceId);
-
         Task<DeviceSensors> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
+
+        Task<DeviceSensors> GetFullByDeviceId(Guid deviceId);
 
         #endregion Methods
     }

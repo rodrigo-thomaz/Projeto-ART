@@ -193,7 +193,7 @@ void subscribeInApplication()
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
 
-  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED); 
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED); 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
@@ -230,7 +230,7 @@ void unSubscribeInApplication()
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
 
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
   
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
@@ -315,7 +315,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 		espDevice.getDeviceDebug()->setShowTime(strdup(json.c_str()));
 	}
 
-  if (topicKey == String(TOPIC_SUB_DEVICE_SENSORS_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)) {
+  if (topicKey == String(TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)) {
     espDevice.getDeviceSensors()->setSensorsByMQQTCallback(json);
   }
 	if (topicKey == String(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS)) {

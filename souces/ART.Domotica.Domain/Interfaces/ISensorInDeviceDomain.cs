@@ -8,7 +8,7 @@
 
     public interface ISensorInDeviceDomain
     {
-        #region Methods        
+        #region Methods
 
         Task<SensorInDevice> SetOrdination(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination);
 
