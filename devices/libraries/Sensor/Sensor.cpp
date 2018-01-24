@@ -118,7 +118,7 @@ namespace ART
 		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);		
 
 		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
-		deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
+		_sensorDatasheet = &deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
 	}
 
 	Sensor::~Sensor()
