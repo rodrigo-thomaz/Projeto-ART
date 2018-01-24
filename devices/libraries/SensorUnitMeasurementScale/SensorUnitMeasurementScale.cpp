@@ -9,7 +9,7 @@ namespace ART
 
 		_sensor = sensor;
 
-		_unitMeasurementId = static_cast<UnitMeasurementEnum>(jsonObject["unitMeasurementId"].as<int>());
+		_unitMeasurementId = static_cast<UnitMeasurementEnum>(jsonObject["unitMeasurementId"].as<short>());
 
 		_rangeMax = float(jsonObject["rangeMax"]);
 		_rangeMin = float(jsonObject["rangeMin"]);

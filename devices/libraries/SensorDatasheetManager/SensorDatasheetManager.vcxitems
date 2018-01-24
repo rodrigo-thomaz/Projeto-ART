@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -15,13 +15,19 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
-	<Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  	<Text Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.h" />
-  </ItemGroup>
- <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.h" /> -->
+    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+    <Text Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.cpp" />
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.h" /> -->
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheet.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetEnum.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorTypeEnum.h" />
   </ItemGroup>
-  </Project>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheet.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.cpp" />
+  </ItemGroup>
+</Project>

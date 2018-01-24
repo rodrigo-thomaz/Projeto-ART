@@ -4,6 +4,8 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
+#include "SensorDatasheet.h"
+
 namespace ART
 {
 	class SensorDatasheetManager
