@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
+    using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 
@@ -15,6 +16,10 @@
                 .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name));
+
+            CreateMap<SensorDatasheet, SensorDatasheetGetResponseIoTContract>()
+                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId));
         }
 
         #endregion Constructors

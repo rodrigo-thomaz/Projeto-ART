@@ -98,6 +98,8 @@ namespace ART
 		SensorUnitMeasurementScale *		_sensorUnitMeasurementScale;
 
 		char* 								_sensorId;
+		SensorTypeEnum						_sensorTypeId;
+		SensorDatasheetEnum					_sensorDatasheetId;
 
 		std::vector<uint8_t> 				_deviceAddress;
 

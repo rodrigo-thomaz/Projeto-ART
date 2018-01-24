@@ -16,6 +16,7 @@ namespace ART
 		~SensorInDevice();
 
 		Sensor*								getSensor();
+		DeviceSensors*						getDeviceSensors();
 
 		short								getOrdination();
 		void								setOrdination(short value);

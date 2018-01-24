@@ -172,6 +172,16 @@ namespace ART
 		return array;
 	}
 
+	SensorDatasheet& DeviceSensors::getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
+	{
+		for (int i = 0; i < _sensorDatasheets.size(); ++i) {
+
+			if (_sensorDatasheets[i].getSensorDatasheetId() == sensorDatasheetId && _sensorDatasheets[i].getSensorTypeId() == sensorTypeId) {
+				return _sensorDatasheets[i];
+			}
+		}
+	}
+
 	void DeviceSensors::createSensorsJsonNestedArray(JsonObject& jsonObject)
 	{
 		JsonArray& jsonArray = jsonObject.createNestedArray("dsFamilyTempSensors");

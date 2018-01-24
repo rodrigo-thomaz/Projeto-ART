@@ -80,6 +80,9 @@ namespace ART
 		_sensorId = new char(sizeof(strlen(sensorId)));
 		_sensorId = sensorId;
 
+		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
+		_sensorDatasheetId = static_cast<SensorDatasheetEnum>(jsonObject["sensorDatasheetId"].as<short>());
+
 		char* family = strdup(SensorTempDSFamily::getFamily(deviceAddress).c_str());
 		_family = new char(sizeof(strlen(family)));
 		_family = family;
@@ -113,7 +116,8 @@ namespace ART
 		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);
 
 		//SensorDatasheet
-
+		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
+		//SensorDatasheet* sensorDatasheets = deviceSensors->getSensorDatasheets();
 	}
 
 	Sensor::~Sensor()

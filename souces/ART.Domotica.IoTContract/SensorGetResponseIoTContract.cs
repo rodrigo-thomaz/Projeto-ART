@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.IoTContract
 {
+    using ART.Domotica.Enums;
     using System;
 
     public class SensorGetResponseIoTContract
@@ -7,11 +8,6 @@
         #region Properties
 
         public short[] DeviceAddress
-        {
-            get; set;
-        }
-
-        public string Family
         {
             get; set;
         }
@@ -32,6 +28,16 @@
         }
 
         public Guid SensorId
+        {
+            get; set;
+        }
+
+        public SensorDatasheetEnum SensorDatasheetId
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }

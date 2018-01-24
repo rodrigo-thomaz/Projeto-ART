@@ -23,6 +23,11 @@ namespace ART
 		return _sensor;
 	}
 
+	DeviceSensors * SensorInDevice::getDeviceSensors()
+	{
+		return _deviceSensors;
+	}
+
 	short SensorInDevice::getOrdination()
 	{
 		return _ordination;

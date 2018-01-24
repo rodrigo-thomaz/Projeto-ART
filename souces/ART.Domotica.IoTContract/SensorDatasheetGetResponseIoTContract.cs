@@ -6,7 +6,7 @@
     {
         #region Properties
 
-        public SensorDatasheetEnum Id
+        public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
