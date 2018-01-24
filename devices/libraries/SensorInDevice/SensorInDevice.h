@@ -3,6 +3,7 @@
 
 #include "ArduinoJson.h"
 #include "Sensor.h"
+#include "SensorDatasheet.h"
 
 namespace ART
 {
@@ -12,7 +13,7 @@ namespace ART
 	{
 
 	public:
-		SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject);
+		SensorInDevice(DeviceSensors* deviceSensors, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject);
 		~SensorInDevice();
 
 		Sensor*								getSensor();
@@ -21,9 +22,9 @@ namespace ART
 		short								getOrdination();
 		void								setOrdination(short value);
 
-		static SensorInDevice create(DeviceSensors* deviceSensors, JsonObject& jsonObject)
+		static SensorInDevice create(DeviceSensors* deviceSensors, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject)
 		{
-			return SensorInDevice(deviceSensors, jsonObject);
+			return SensorInDevice(deviceSensors, sensorDatasheet, jsonObject);
 		}
 
 	private:

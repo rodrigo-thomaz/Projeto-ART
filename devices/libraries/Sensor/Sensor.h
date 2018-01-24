@@ -56,12 +56,12 @@ namespace ART
 	{
 
 	public:
-		Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject);
+		Sensor(SensorInDevice* sensorInDevice, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject);
 		~Sensor();
 
-		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, JsonObject& jsonObject)
+		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject)
 		{
-			sensor = new Sensor(sensorInDevice, jsonObject);
+			sensor = new Sensor(sensorInDevice, sensorDatasheet, jsonObject);
 		}
 
 		char*								getSensorId();
@@ -91,9 +91,9 @@ namespace ART
 
 	private:
 
-		SensorInDevice * _sensorInDevice;
-
+		SensorInDevice *					_sensorInDevice;
 		SensorDatasheet *					_sensorDatasheet;
+
 		SensorTempDSFamily *				_sensorTempDSFamily;
 		SensorUnitMeasurementScale *		_sensorUnitMeasurementScale;
 

@@ -66,11 +66,12 @@ namespace ART
 
 	// Sensor 
 
-	Sensor::Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject)
+	Sensor::Sensor(SensorInDevice* sensorInDevice, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject)
 	{
 		Serial.println("[Sensor constructor]");
 
 		_sensorInDevice = sensorInDevice;	
+		_sensorDatasheet = &sensorDatasheet;
 
 		DeviceAddress 	deviceAddress;
 		for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = jsonObject["deviceAddress"][i];
@@ -80,9 +81,9 @@ namespace ART
 		_sensorId = new char(sizeof(strlen(sensorId)));
 		_sensorId = sensorId;
 
-		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
 		_sensorDatasheetId = static_cast<SensorDatasheetEnum>(jsonObject["sensorDatasheetId"].as<short>());
-
+		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
+		
 		char* family = strdup(SensorTempDSFamily::getFamily(deviceAddress).c_str());
 		_family = new char(sizeof(strlen(family)));
 		_family = family;
@@ -113,11 +114,7 @@ namespace ART
 		_alarms.push_back(highAlarm);
 
 		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
-		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);
-
-		//SensorDatasheet
-		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
-		//SensorDatasheet* sensorDatasheets = deviceSensors->getSensorDatasheets();
+		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);		
 	}
 
 	Sensor::~Sensor()

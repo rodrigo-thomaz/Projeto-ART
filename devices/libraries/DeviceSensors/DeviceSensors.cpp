@@ -127,8 +127,13 @@ namespace ART
 			JsonObject& sensorInDeviceJsonObject = it->as<JsonObject>();
 			JsonObject& sensorJsonObject = sensorInDeviceJsonObject["sensor"].as<JsonObject>();			
 
+			//SensorDatasheet	
+			SensorTypeEnum sensorTypeId = static_cast<SensorTypeEnum>(sensorJsonObject["sensorTypeId"].as<short>());
+			SensorDatasheetEnum sensorDatasheetId = static_cast<SensorDatasheetEnum>(sensorJsonObject["sensorDatasheetId"].as<short>());
+			SensorDatasheet& sensorDatasheet = getSensorDatasheetByKey(sensorDatasheetId, sensorTypeId);
+
 			// SensorInDevice
-			_sensorsInDevice.push_back(SensorInDevice::create(this, sensorInDeviceJsonObject));
+			_sensorsInDevice.push_back(SensorInDevice::create(this, sensorDatasheet, sensorInDeviceJsonObject));
 			Serial.println("[DeviceSensors::setSensorsByMQQTCallback] SensorInDevice created");
 
 			// DeviceAddress
