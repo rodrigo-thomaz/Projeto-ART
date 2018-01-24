@@ -19,7 +19,8 @@
 
             CreateMap<SensorDatasheet, SensorDatasheetGetResponseIoTContract>()
                 .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId));
+                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
+                .ForMember(vm => vm.SensorDatasheetUnitMeasurementDefault, m => m.MapFrom(x => x.SensorDatasheetUnitMeasurementDefault));
         }
 
         #endregion Constructors

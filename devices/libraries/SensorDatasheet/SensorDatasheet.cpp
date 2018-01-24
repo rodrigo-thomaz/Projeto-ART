@@ -11,6 +11,8 @@ namespace ART
 
 		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
 		_sensorDatasheetId = static_cast<SensorDatasheetEnum>(jsonObject["sensorDatasheetId"].as<short>());
+
+		SensorDatasheetUnitMeasurementDefault::create(_sensorDatasheetUnitMeasurementDefault, this, jsonObject["sensorDatasheetUnitMeasurementDefault"]);
 	}
 
 	SensorDatasheet::~SensorDatasheet()

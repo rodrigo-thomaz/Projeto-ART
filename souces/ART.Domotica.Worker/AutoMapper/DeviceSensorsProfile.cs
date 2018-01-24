@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
     using System.Linq;
+
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;

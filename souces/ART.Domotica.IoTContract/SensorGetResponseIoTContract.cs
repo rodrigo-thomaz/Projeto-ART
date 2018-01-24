@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.IoTContract
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class SensorGetResponseIoTContract
     {
@@ -27,22 +28,22 @@
             get; set;
         }
 
-        public Guid SensorId
-        {
-            get; set;
-        }
-
         public SensorDatasheetEnum SensorDatasheetId
         {
             get; set;
         }
 
-        public SensorTypeEnum SensorTypeId
+        public Guid SensorId
         {
             get; set;
         }
 
         public SensorTempDSFamilyGetResponseIoTContract SensorTempDSFamily
+        {
+            get; set;
+        }
+
+        public SensorTypeEnum SensorTypeId
         {
             get; set;
         }

@@ -2,16 +2,11 @@
 {
     using ART.Domotica.Enums;
 
-    public class SensorDatasheetGetResponseIoTContract
+    public class SensorDatasheetUnitMeasurementDefaultGetResponseIoTContract
     {
         #region Properties
 
         public SensorDatasheetEnum SensorDatasheetId
-        {
-            get; set;
-        }
-
-        public SensorDatasheetUnitMeasurementDefaultGetResponseIoTContract SensorDatasheetUnitMeasurementDefault
         {
             get; set;
         }

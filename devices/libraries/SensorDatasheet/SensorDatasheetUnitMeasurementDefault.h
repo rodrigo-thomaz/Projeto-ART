@@ -16,6 +16,11 @@ namespace ART
 		SensorDatasheetUnitMeasurementDefault(SensorDatasheet* sensorDatasheet, JsonObject& jsonObject);
 		~SensorDatasheetUnitMeasurementDefault();
 
+		static void create(SensorDatasheetUnitMeasurementDefault* (&sensorDatasheetUnitMeasurementDefault), SensorDatasheet* sensorDatasheet, JsonObject& jsonObject)
+		{
+			sensorDatasheetUnitMeasurementDefault = new SensorDatasheetUnitMeasurementDefault(sensorDatasheet, jsonObject);
+		}
+
 	private:
 
 		SensorDatasheet * _sensorDatasheet;

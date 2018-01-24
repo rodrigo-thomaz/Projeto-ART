@@ -11,12 +11,12 @@
             get; set;
         }
 
-        public List<SensorInDeviceGetResponseIoTContract> SensorsInDevice
+        public List<SensorDatasheetGetResponseIoTContract> SensorDatasheets
         {
             get; set;
         }
 
-        public List<SensorDatasheetGetResponseIoTContract> SensorDatasheets
+        public List<SensorInDeviceGetResponseIoTContract> SensorsInDevice
         {
             get; set;
         }
