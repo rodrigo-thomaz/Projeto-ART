@@ -33,15 +33,6 @@
                 .Where(x => x.DeviceSensorsId == deviceSensorsId)
                 .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
                 .ToListAsync();
-        }
-
-        public async Task<List<SensorInDevice>> GetAllByDeviceId(Guid deviceId)
-        {
-            return await _context.SensorInDevice
-                .Include(x => x.Sensor.SensorTempDSFamily.SensorTempDSFamilyResolution)
-                .Include(x => x.Sensor.SensorUnitMeasurementScale)
-                .Where(x => x.Sensor.SensorInDevice.FirstOrDefault(y => y.DeviceSensors.Id == deviceId) != null)
-                .ToListAsync();
-        }
+        }        
     }
 }

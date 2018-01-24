@@ -10,12 +10,14 @@
     using ART.Domotica.Repository.Repositories;
     using ART.Domotica.Repository;
     using Autofac;
+    using System.Collections.Generic;
 
     public class DeviceSensorsDomain : DomainBase, IDeviceSensorsDomain
     {
         #region Fields
 
         private readonly IDeviceSensorsRepository _deviceSensorsRepository;
+        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
 
         #endregion Fields
 
@@ -26,6 +28,7 @@
             var context = componentContext.Resolve<ARTDbContext>();
 
             _deviceSensorsRepository = new DeviceSensorsRepository(context);
+            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
         }
 
         #endregion Constructors
@@ -44,6 +47,18 @@
             await _deviceSensorsRepository.Update(entity);
 
             return entity;
+        }
+
+        public async Task<List<SensorInDevice>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        {
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId, deviceDatasheetId);
+
+            if (deviceInApplication == null)
+            {
+                throw new Exception("DeviceInApplication not found");
+            }
+
+            return await _deviceSensorsRepository.GetAllByDeviceId(deviceInApplication.DeviceId);
         }
     }
 }

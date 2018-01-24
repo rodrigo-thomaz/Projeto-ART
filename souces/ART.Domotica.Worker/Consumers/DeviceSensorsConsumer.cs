@@ -114,7 +114,7 @@
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
 
-            var domain = _componentContext.Resolve<ISensorInDeviceDomain>();
+            var domain = _componentContext.Resolve<IDeviceSensorsDomain>();
             var data = await domain.GetAllByDeviceInApplicationId(applicationMQ.Id, requestContract.DeviceId, requestContract.DeviceDatasheetId);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();

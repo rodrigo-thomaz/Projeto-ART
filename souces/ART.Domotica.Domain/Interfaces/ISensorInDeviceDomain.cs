@@ -9,9 +9,7 @@
 
     public interface ISensorInDeviceDomain
     {
-        #region Methods
-
-        Task<List<SensorInDevice>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
+        #region Methods        
 
         Task<SensorInDevice> SetOrdination(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination);
 

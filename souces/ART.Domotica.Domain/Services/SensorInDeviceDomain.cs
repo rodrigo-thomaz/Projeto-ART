@@ -17,8 +17,7 @@
     {
         #region Fields
 
-        private readonly ISensorInDeviceRepository _sensorInDeviceRepository;
-        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
+        private readonly ISensorInDeviceRepository _sensorInDeviceRepository;        
 
         #endregion Fields
 
@@ -28,8 +27,7 @@
         {
             var context = componentContext.Resolve<ARTDbContext>();
 
-            _sensorInDeviceRepository = new SensorInDeviceRepository(context);
-            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
+            _sensorInDeviceRepository = new SensorInDeviceRepository(context);            
         }
 
         #endregion Constructors
@@ -80,18 +78,6 @@
             await _sensorInDeviceRepository.Update(entities);
 
             return sensorInDevice;
-        }
-
-        public async Task<List<SensorInDevice>> GetAllByDeviceInApplicationId(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
-        {
-            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId, deviceDatasheetId);
-
-            if (deviceInApplication == null)
-            {
-                throw new Exception("DeviceInApplication not found");
-            }
-
-            return await _sensorInDeviceRepository.GetAllByDeviceId(deviceInApplication.DeviceId);
-        }
+        }        
     }
 }

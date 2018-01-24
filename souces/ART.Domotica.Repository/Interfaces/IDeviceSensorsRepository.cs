@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Interfaces
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ART.Domotica.Enums;
@@ -10,6 +11,8 @@
     public interface IDeviceSensorsRepository : IRepository<ARTDbContext, DeviceSensors>
     {
         #region Methods
+
+        Task<List<SensorInDevice>> GetAllByDeviceId(Guid deviceId);
 
         Task<DeviceSensors> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
 
