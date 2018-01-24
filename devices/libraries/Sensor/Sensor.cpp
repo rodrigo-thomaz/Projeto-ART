@@ -67,12 +67,11 @@ namespace ART
 
 	// Sensor 
 
-	Sensor::Sensor(SensorInDevice* sensorInDevice, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject)
+	Sensor::Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject)
 	{
 		Serial.println("[Sensor constructor]");
 
 		_sensorInDevice = sensorInDevice;	
-		_sensorDatasheet = &sensorDatasheet;
 
 		DeviceAddress 	deviceAddress;
 		for (uint8_t i = 0; i < 8; i++) deviceAddress[i] = jsonObject["deviceAddress"][i];

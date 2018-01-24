@@ -13,7 +13,7 @@ namespace ART
 	{
 
 	public:
-		SensorInDevice(DeviceSensors* deviceSensors, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject);
+		SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject);
 		~SensorInDevice();
 
 		Sensor*								getSensor();
@@ -22,9 +22,9 @@ namespace ART
 		short								getOrdination();
 		void								setOrdination(short value);
 
-		static SensorInDevice create(DeviceSensors* deviceSensors, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject)
+		static SensorInDevice create(DeviceSensors* deviceSensors, JsonObject& jsonObject)
 		{
-			return SensorInDevice(deviceSensors, sensorDatasheet, jsonObject);
+			return SensorInDevice(deviceSensors, jsonObject);
 		}
 
 	private:

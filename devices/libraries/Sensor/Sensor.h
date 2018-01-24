@@ -56,12 +56,12 @@ namespace ART
 	{
 
 	public:
-		Sensor(SensorInDevice* sensorInDevice, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject);
+		Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject);
 		~Sensor();
 
-		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, SensorDatasheet& sensorDatasheet, JsonObject& jsonObject)
+		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, JsonObject& jsonObject)
 		{
-			sensor = new Sensor(sensorInDevice, sensorDatasheet, jsonObject);
+			sensor = new Sensor(sensorInDevice, jsonObject);
 		}
 
 		char*								getSensorId();
