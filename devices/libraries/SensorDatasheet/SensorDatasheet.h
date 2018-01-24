@@ -6,6 +6,7 @@
 
 #include "SensorTypeEnum.h"
 #include "SensorDatasheetEnum.h"
+#include "SensorDatasheetUnitMeasurementDefault.h"
 
 namespace ART
 {
@@ -24,15 +25,17 @@ namespace ART
 			return SensorDatasheet(deviceSensors, jsonObject);
 		}
 
-		SensorTypeEnum						getSensorTypeId();
-		SensorDatasheetEnum					getSensorDatasheetId();
+		SensorTypeEnum								getSensorTypeId();
+		SensorDatasheetEnum							getSensorDatasheetId();
 
 	private:
 
-		DeviceSensors * _deviceSensors;
+		DeviceSensors *								_deviceSensors;
 
-		SensorTypeEnum						_sensorTypeId;
-		SensorDatasheetEnum					_sensorDatasheetId;
+		SensorTypeEnum								_sensorTypeId;
+		SensorDatasheetEnum							_sensorDatasheetId;
+
+		SensorDatasheetUnitMeasurementDefault *		_sensorDatasheetUnitMeasurementDefault;
 	};
 }
 

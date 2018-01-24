@@ -60,7 +60,7 @@ namespace ART
 
 	private:
 
-		Sensor * _sensor;
+		Sensor *							_sensor;
 
 		UnitMeasurementEnum					_unitMeasurementId;
 

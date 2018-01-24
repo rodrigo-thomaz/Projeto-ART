@@ -6,13 +6,21 @@
 
 namespace ART
 {
+	class SensorDatasheet;
+
 	class SensorDatasheetUnitMeasurementDefault
 	{
-	public:
-		SensorDatasheetUnitMeasurementDefault();
-		~SensorDatasheetUnitMeasurementDefault();
-	};
 
+	public:
+
+		SensorDatasheetUnitMeasurementDefault(SensorDatasheet* sensorDatasheet, JsonObject& jsonObject);
+		~SensorDatasheetUnitMeasurementDefault();
+
+	private:
+
+		SensorDatasheet * _sensorDatasheet;
+
+	};
 }
 
 #endif
