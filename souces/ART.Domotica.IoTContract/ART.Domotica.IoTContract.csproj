@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SensorDatasheetGetResponseIoTContract.cs" />
+    <Compile Include="DeviceSensorsGetResponseIoTContract.cs" />
     <Compile Include="SensorUnitMeasurementScaleGetResponseIoTContract.cs" />
     <Compile Include="SensorTempDSFamilyGetResponseIoTContract.cs" />
     <Compile Include="SensorGetResponseIoTContract.cs" />

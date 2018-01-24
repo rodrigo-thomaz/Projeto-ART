@@ -98,7 +98,9 @@ namespace ART
 		DynamicJsonBuffer jsonBuffer;
 		//StaticJsonBuffer<DEVICE_SENSORS_GET_ALL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
 
-		JsonArray& jsonArray = jsonBuffer.parseArray(json);
+		JsonObject& sensorInDeviceJO = jsonBuffer.parseObject(json);
+
+		JsonArray& jsonArray = sensorInDeviceJO["sensorInDevice"];
 
 		if (!jsonArray.success()) {
 			Serial.print("[DeviceSensors::setSensorsByMQQTCallback] parse failed: ");
