@@ -4,6 +4,8 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
+#include "UnitMeasurementEnum.h"
+
 namespace ART
 {
 	class SensorDatasheet;
@@ -16,6 +18,11 @@ namespace ART
 		SensorDatasheetUnitMeasurementDefault(SensorDatasheet* sensorDatasheet, JsonObject& jsonObject);
 		~SensorDatasheetUnitMeasurementDefault();
 
+		UnitMeasurementEnum					getUnitMeasurementId();
+
+		float 								getMax();
+		float 								getMin();
+
 		static void create(SensorDatasheetUnitMeasurementDefault* (&sensorDatasheetUnitMeasurementDefault), SensorDatasheet* sensorDatasheet, JsonObject& jsonObject)
 		{
 			sensorDatasheetUnitMeasurementDefault = new SensorDatasheetUnitMeasurementDefault(sensorDatasheet, jsonObject);
@@ -23,7 +30,12 @@ namespace ART
 
 	private:
 
-		SensorDatasheet * _sensorDatasheet;
+		SensorDatasheet *					_sensorDatasheet;
+
+		UnitMeasurementEnum					_unitMeasurementId;
+
+		float 								_max;
+		float 								_min;
 
 	};
 }

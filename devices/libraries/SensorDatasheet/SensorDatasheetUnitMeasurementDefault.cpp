@@ -8,10 +8,30 @@ namespace ART
 		Serial.println("[SensorDatasheetUnitMeasurementDefault constructor]");
 
 		_sensorDatasheet = sensorDatasheet;
+
+		_unitMeasurementId = static_cast<UnitMeasurementEnum>(jsonObject["unitMeasurementId"].as<short>());
+
+		_max = float(jsonObject["max"]);
+		_min = float(jsonObject["min"]);
 	}
 
 	SensorDatasheetUnitMeasurementDefault::~SensorDatasheetUnitMeasurementDefault()
 	{
 		Serial.println("[SensorDatasheetUnitMeasurementDefault destructor]");
+	}
+
+	UnitMeasurementEnum SensorDatasheetUnitMeasurementDefault::getUnitMeasurementId()
+	{
+		return _unitMeasurementId;
+	}
+
+	float SensorDatasheetUnitMeasurementDefault::getMax()
+	{
+		return _max;
+	}
+
+	float SensorDatasheetUnitMeasurementDefault::getMin()
+	{
+		return _min;
 	}
 }
