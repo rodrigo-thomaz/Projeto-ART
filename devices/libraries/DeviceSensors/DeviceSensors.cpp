@@ -226,11 +226,16 @@ namespace ART
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
+		Serial.println("setUnitOfMeasurement");
+
+		Serial.print("old unitMeasurementId= ");
+		Serial.println(sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId());
+
 		sensor->getSensorUnitMeasurementScale()->setUnitMeasurementId(unitMeasurementId);
 
-		Serial.print("setUnitOfMeasurement: sensorId= ");
+		Serial.print("sensorId= ");
 		Serial.print(sensorId);
-		Serial.print(" unitMeasurementId= ");
+		Serial.print(" new unitMeasurementId= ");
 		Serial.println(unitMeasurementId);
 	}
 
