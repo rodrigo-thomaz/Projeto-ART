@@ -54,6 +54,8 @@ namespace ART
 		int									getPublishIntervalInMilliSeconds();
 		void								setPublishIntervalInMilliSeconds(char* json);
 
+		SensorDatasheet&					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);
+
 		static void create(DeviceSensors* (&deviceSensors), ESPDevice* espDevice)
 		{
 			deviceSensors = new DeviceSensors(espDevice);
@@ -67,7 +69,7 @@ namespace ART
 		bool								_initializing;
 		
 		SensorInDevice&						getSensorInDeviceById(char* sensorId);
-		SensorDatasheet&					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);
+		//SensorDatasheet&					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);
 
 		void								createSensorJsonNestedObject(Sensor* sensor, JsonArray& root);
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);

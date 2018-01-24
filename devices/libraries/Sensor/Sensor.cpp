@@ -1,5 +1,6 @@
 #include "Sensor.h"
 #include "SensorInDevice.h"
+#include "DeviceSensors.h"
 
 namespace ART
 {
@@ -115,6 +116,9 @@ namespace ART
 
 		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
 		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);		
+
+		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
+		deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
 	}
 
 	Sensor::~Sensor()
