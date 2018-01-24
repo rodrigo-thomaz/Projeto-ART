@@ -6,6 +6,8 @@
 #include "vector"
 #include "OneWire.h"
 #include "DallasTemperature.h"
+
+#include "SensorDatasheet.h"
 #include "SensorTempDSFamily.h"
 #include "SensorUnitMeasurementScale.h"
 
@@ -91,6 +93,7 @@ namespace ART
 
 		SensorInDevice * _sensorInDevice;
 
+		SensorDatasheet *					_sensorDatasheet;
 		SensorTempDSFamily *				_sensorTempDSFamily;
 		SensorUnitMeasurementScale *		_sensorUnitMeasurementScale;
 
