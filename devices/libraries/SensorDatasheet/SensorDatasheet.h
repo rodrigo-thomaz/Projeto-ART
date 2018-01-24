@@ -19,9 +19,9 @@ namespace ART
 		SensorDatasheet(DeviceSensors* deviceSensors, JsonObject& jsonObject);
 		~SensorDatasheet();
 
-		static void create(SensorDatasheet* (&sensorDatasheet), DeviceSensors* deviceSensors, JsonObject& jsonObject)
+		static SensorDatasheet create(DeviceSensors* deviceSensors, JsonObject& jsonObject)
 		{
-			sensorDatasheet = new SensorDatasheet(deviceSensors, jsonObject);
+			return SensorDatasheet(deviceSensors, jsonObject);
 		}
 
 		SensorTypeEnum						getSensorTypeId();

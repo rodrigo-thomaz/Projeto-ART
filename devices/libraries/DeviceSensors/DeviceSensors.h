@@ -70,6 +70,7 @@ namespace ART
 		void								createSensorJsonNestedObject(Sensor* sensor, JsonArray& root);
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 
+		std::vector<SensorDatasheet>		_sensorDatasheets;
 		std::vector<SensorInDevice>			_sensorsInDevice;
 
 		int									_publishIntervalInMilliSeconds;

@@ -101,11 +101,26 @@ namespace ART
 			return;
 		}
 
-		JsonArray& jsonArray = sensorInDeviceJO["sensorsInDevice"];
+		JsonArray& sensorDatasheetsJA = sensorInDeviceJO["sensorDatasheets"];
+		JsonArray& sensorsInDeviceJA = sensorInDeviceJO["sensorsInDevice"];
 
 		_publishIntervalInMilliSeconds = sensorInDeviceJO["publishIntervalInMilliSeconds"];
 
-		for (JsonArray::iterator it = jsonArray.begin(); it != jsonArray.end(); ++it)
+		// sensorDatasheets
+
+		for (JsonArray::iterator it = sensorDatasheetsJA.begin(); it != sensorDatasheetsJA.end(); ++it)
+		{
+			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  sensorDatasheets foreach begin");
+
+			JsonObject& sensorDatasheetJO = it->as<JsonObject>();
+
+			_sensorDatasheets.push_back(SensorDatasheet::create(this, sensorDatasheetJO));
+			Serial.println("[DeviceSensors::setSensorsByMQQTCallback] sensorDatasheets created");
+		}
+
+		//sensorsInDevice
+
+		for (JsonArray::iterator it = sensorsInDeviceJA.begin(); it != sensorsInDeviceJA.end(); ++it)
 		{
 			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  SensorInDevice foreach begin");
 
