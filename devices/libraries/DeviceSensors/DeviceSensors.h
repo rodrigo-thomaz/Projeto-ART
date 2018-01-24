@@ -28,8 +28,6 @@ namespace ART
 		DeviceSensors(ESPDevice* espDevice);
 		~DeviceSensors();
 
-		void								load(JsonObject& jsonObject);
-
 		void 								begin();
 
 		bool								initialized();

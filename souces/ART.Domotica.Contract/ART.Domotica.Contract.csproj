@@ -47,7 +47,6 @@
     <Compile Include="DeviceDebugDetailResponseContract.cs" />
     <Compile Include="DeviceInApplicationDetailResponseContract.cs" />
     <Compile Include="DeviceWiFiSetHostNameRequestContract.cs" />
-    <Compile Include="DeviceSensorsDetailResponseContract.cs" />
     <Compile Include="DeviceNTPDetailResponseContract.cs" />
     <Compile Include="DeviceMQDetailResponseContract.cs" />
     <Compile Include="DeviceNTPSetTimeZoneRequestContract.cs" />

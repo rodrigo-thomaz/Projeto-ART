@@ -38,11 +38,6 @@
             get; set;
         }
 
-        public DeviceSensorsDetailResponseContract DeviceSensors
-        {
-            get; set;
-        }
-
         public DeviceWiFiDetailResponseContract DeviceWiFi
         {
             get; set;

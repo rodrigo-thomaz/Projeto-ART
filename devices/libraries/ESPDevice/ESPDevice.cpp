@@ -230,8 +230,6 @@ namespace ART
 
 					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationId: %s\n", getDeviceInApplication()->getApplicationId());
 					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationTopic: %s\n", getDeviceInApplication()->getApplicationTopic());
-
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceSensors PublishIntervalInMilliSeconds: %d\n", (char*)getDeviceSensors()->getPublishIntervalInMilliSeconds());
 				}
 			}
 		}
@@ -258,7 +256,6 @@ namespace ART
 		_deviceWiFi->load(jsonObject["deviceWiFi"]);
 		_deviceNTP->load(jsonObject["deviceNTP"]);
 		_deviceMQ->load(jsonObject["deviceMQ"]);
-		_deviceSensors->load(jsonObject["deviceSensors"]);
 
 		DeviceInApplication::create(_deviceInApplication, this, jsonObject["deviceInApplication"]);
 

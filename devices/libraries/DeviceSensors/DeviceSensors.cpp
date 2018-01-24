@@ -22,11 +22,6 @@ namespace ART
 		delete (_espDevice);
 	}
 
-	void DeviceSensors::load(JsonObject& jsonObject)
-	{
-		_publishIntervalInMilliSeconds = jsonObject["publishIntervalInMilliSeconds"];
-	}
-
 	void DeviceSensors::begin()
 	{
 		_dallas.begin();
@@ -99,14 +94,16 @@ namespace ART
 		//StaticJsonBuffer<DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
 
 		JsonObject& sensorInDeviceJO = jsonBuffer.parseObject(json);
-
-		JsonArray& jsonArray = sensorInDeviceJO["sensorInDevice"];
-
-		if (!jsonArray.success()) {
+		
+		if (!sensorInDeviceJO.success()) {
 			Serial.print("[DeviceSensors::setSensorsByMQQTCallback] parse failed: ");
 			Serial.println(json);
 			return;
 		}
+
+		JsonArray& jsonArray = sensorInDeviceJO["sensorInDevice"];
+
+		_publishIntervalInMilliSeconds = sensorInDeviceJO["publishIntervalInMilliSeconds"];
 
 		for (JsonArray::iterator it = jsonArray.begin(); it != jsonArray.end(); ++it)
 		{
