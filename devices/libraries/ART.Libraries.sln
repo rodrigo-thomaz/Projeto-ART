@@ -63,6 +63,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurementConverter", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorDatasheet", "SensorDatasheet\SensorDatasheet.vcxitems", "{704D980A-58F1-4CC2-9B1F-6B47927F5018}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurement", "UnitMeasurement\UnitMeasurement.vcxitems", "{6AE9BF75-C15B-4525-B398-7C5174126300}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
