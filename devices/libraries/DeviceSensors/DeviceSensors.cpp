@@ -222,14 +222,16 @@ namespace ART
 		}
 
 		char* sensorId = strdup(root["sensorId"]);
-		UnitMeasurementEnum value = static_cast<UnitMeasurementEnum>(root["unitMeasurementId"].as<int>());
+		UnitMeasurementEnum unitMeasurementId = static_cast<UnitMeasurementEnum>(root["unitMeasurementId"].as<int>());
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
-		sensor->getSensorUnitMeasurementScale()->setUnitMeasurementId(value);
+		sensor->getSensorUnitMeasurementScale()->setUnitMeasurementId(unitMeasurementId);
 
-		Serial.print("setUnitOfMeasurement=");
-		Serial.println(value);
+		Serial.print("setUnitOfMeasurement: sensorId= ");
+		Serial.print(sensorId);
+		Serial.print(" unitMeasurementId= ");
+		Serial.println(unitMeasurementId);
 	}
 
 	void DeviceSensors::setResolution(String json)
