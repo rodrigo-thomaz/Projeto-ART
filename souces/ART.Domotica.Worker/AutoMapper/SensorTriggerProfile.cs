@@ -30,11 +30,20 @@
                 .ForMember(vm => vm.Max, m => m.MapFrom(x => x.Max))
                 .ForMember(vm => vm.Min, m => m.MapFrom(x => x.Min));
 
-            CreateMap<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnRequestIoTContract>();
+            CreateMap<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnRequestIoTContract>()
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.TriggerOn, m => m.MapFrom(x => x.TriggerOn));
 
-            CreateMap<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueRequestIoTContract>();
+            CreateMap<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnRequestIoTContract>()
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
 
-            CreateMap<SensorTriggerSetBuzzerOnRequestContract, SensorTriggerSetBuzzerOnRequestIoTContract>();
+            CreateMap<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueRequestIoTContract>()
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.TriggerValue, m => m.MapFrom(x => x.TriggerValue));
 
             CreateMap<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnModel>()
                 .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))

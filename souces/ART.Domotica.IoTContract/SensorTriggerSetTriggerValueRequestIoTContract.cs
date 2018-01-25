@@ -8,17 +8,17 @@
     {
         #region Properties
 
-        public decimal AlarmCelsius
-        {
-            get; set;
-        }
-
-        public SensorUnitMeasurementScalePositionEnum Position
-        {
-            get; set;
-        }
-
         public Guid SensorId
+        {
+            get; set;
+        }
+
+        public Guid SensorTriggerId
+        {
+            get; set;
+        }
+
+        public decimal TriggerValue
         {
             get; set;
         }

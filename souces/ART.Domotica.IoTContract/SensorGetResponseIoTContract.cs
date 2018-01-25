@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+
     using ART.Domotica.Enums;
 
     public class SensorGetResponseIoTContract
