@@ -111,26 +111,19 @@ namespace ART
 
 		for (JsonArray::iterator it = sensorDatasheetsJA.begin(); it != sensorDatasheetsJA.end(); ++it)
 		{
-			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  sensorDatasheets foreach begin");
-
 			JsonObject& sensorDatasheetJO = it->as<JsonObject>();
-
 			_sensorDatasheets.push_back(SensorDatasheet::create(this, sensorDatasheetJO));
-			Serial.println("[DeviceSensors::setSensorsByMQQTCallback] sensorDatasheets created");
 		}
 
 		//sensorsInDevice
 
 		for (JsonArray::iterator it = sensorsInDeviceJA.begin(); it != sensorsInDeviceJA.end(); ++it)
 		{
-			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  SensorInDevice foreach begin");
-
 			JsonObject& sensorInDeviceJsonObject = it->as<JsonObject>();
 			JsonObject& sensorJsonObject = sensorInDeviceJsonObject["sensor"].as<JsonObject>();			
 
 			// SensorInDevice
 			_sensorsInDevice.push_back(SensorInDevice::create(this, sensorInDeviceJsonObject));
-			Serial.println("[DeviceSensors::setSensorsByMQQTCallback] SensorInDevice created");
 
 			// DeviceAddress
 			DeviceAddress 	deviceAddress;
@@ -140,11 +133,7 @@ namespace ART
 
 			_dallas.setResolution(deviceAddress, resolution);
 			_dallas.resetAlarmSearch();
-
-			Serial.println("[DeviceSensors::setSensorsByMQQTCallback]  SensorInDevice foreach end");
 		}
-
-		Serial.println("[DeviceSensors::setSensorsByMQQTCallback] initialized with success !");
 	}
 
 	void DeviceSensors::refresh()

@@ -112,13 +112,13 @@ namespace ART
 
 		// Alarms
 
-		bool 			lowAlarmOn = true;
+		bool 			lowAlarmOn = false;
 		float 			lowAlarmCelsius = 0;
-		bool 			lowAlarmBuzzerOn = true;
+		bool 			lowAlarmBuzzerOn = false;
 
-		bool 			highAlarmOn = true;
+		bool 			highAlarmOn = false;
 		float 			highAlarmCelsius = 0;
-		bool 			highAlarmBuzzerOn = true;
+		bool 			highAlarmBuzzerOn = false;
 
 		TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, SensorUnitMeasurementScalePositionEnum::Max);
 		TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, SensorUnitMeasurementScalePositionEnum::Min);
