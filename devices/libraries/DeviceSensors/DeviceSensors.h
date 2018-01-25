@@ -70,6 +70,7 @@ namespace ART
 		
 		SensorInDevice&						getSensorInDeviceBySensorId(char* sensorId);
 		Sensor*								getSensorById(char* sensorId);
+		SensorTrigger&						getSensorTriggerByKey(char* sensorId, char* sensorTriggerId);
 
 		void								createSensorJsonNestedObject(Sensor* sensor, JsonArray& root);
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);

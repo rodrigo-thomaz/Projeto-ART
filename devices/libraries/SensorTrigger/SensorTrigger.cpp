@@ -9,6 +9,10 @@ namespace ART
 
 		_sensor = sensor;	
 
+		char* sensorTriggerId = strdup(jsonObject["sensorTriggerId"]);
+		_sensorTriggerId = new char(sizeof(strlen(sensorTriggerId)));
+		_sensorTriggerId = sensorTriggerId;
+
 		_triggerOn = bool(jsonObject["triggerOn"]);
 		_buzzerOn = bool(jsonObject["buzzerOn"]);
 		_max = float(jsonObject["max"]);
@@ -18,6 +22,11 @@ namespace ART
 	SensorTrigger::~SensorTrigger()
 	{
 		Serial.println("[SensorTrigger destructor]");
+	}
+
+	char * SensorTrigger::getSensorTriggerId()
+	{
+		return _sensorTriggerId;
 	}
 
 	bool SensorTrigger::getTriggerOn()

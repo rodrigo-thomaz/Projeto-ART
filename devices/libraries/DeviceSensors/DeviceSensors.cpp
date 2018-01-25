@@ -165,7 +165,6 @@ namespace ART
 	SensorDatasheet& DeviceSensors::getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
 	{
 		for (int i = 0; i < _sensorDatasheets.size(); ++i) {
-
 			if (_sensorDatasheets[i].getSensorDatasheetId() == sensorDatasheetId && _sensorDatasheets[i].getSensorTypeId() == sensorTypeId) {
 				return _sensorDatasheets[i];
 			}
@@ -369,6 +368,17 @@ namespace ART
 	Sensor * DeviceSensors::getSensorById(char * sensorId)
 	{
 		return getSensorInDeviceBySensorId(sensorId).getSensor();
+	}
+
+	SensorTrigger& DeviceSensors::getSensorTriggerByKey(char * sensorId, char * sensorTriggerId)
+	{
+		SensorTrigger* sensorTriggers = getSensorById(sensorId)->getSensorTriggers();
+		int count = sizeof(SensorTrigger);
+		for (int i = 0; i < count; ++i) {
+			if (stricmp(sensorTriggers[i].getSensorTriggerId(), sensorTriggerId) == 0) {
+				return sensorTriggers[i];
+			}
+		}
 	}
 
 	void DeviceSensors::createSensorJsonNestedObject(Sensor* sensor, JsonArray& root)

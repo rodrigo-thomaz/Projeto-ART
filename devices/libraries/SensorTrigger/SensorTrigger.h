@@ -20,6 +20,8 @@ namespace ART
 			return SensorTrigger(sensor, jsonObject);
 		}		
 
+		char* 								getSensorTriggerId();
+
 		bool 								getTriggerOn();
 		void 								setTriggerOn(bool value);
 
@@ -36,6 +38,7 @@ namespace ART
 
 		Sensor *							_sensor;
 		
+		char* 								_sensorTriggerId;
 		bool 								_triggerOn;
 		bool 								_buzzerOn;
 		float 								_max;

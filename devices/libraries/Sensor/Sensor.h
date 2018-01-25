@@ -86,6 +86,7 @@ namespace ART
 
 		SensorTempDSFamily *				getSensorTempDSFamily();
 		SensorUnitMeasurementScale *		getSensorUnitMeasurementScale();
+		SensorTrigger *						getSensorTriggers();
 
 	private:
 

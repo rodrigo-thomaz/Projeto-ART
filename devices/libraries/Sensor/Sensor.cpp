@@ -224,4 +224,10 @@ namespace ART
 	{
 		return _sensorUnitMeasurementScale;
 	}
+
+	SensorTrigger * Sensor::getSensorTriggers()
+	{
+		SensorTrigger* array = this->_sensorTriggers.data();
+		return array;
+	}
 }
