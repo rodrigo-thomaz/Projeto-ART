@@ -100,6 +100,16 @@ namespace ART
 		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
 		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);				
 
+		//SensorTriggers
+		
+		JsonArray& sensorTriggersJA = jsonObject["sensorTriggers"];
+
+		for (JsonArray::iterator it = sensorTriggersJA.begin(); it != sensorTriggersJA.end(); ++it)
+		{
+			JsonObject& sensorTriggerJO = it->as<JsonObject>();
+			_sensorTriggers.push_back(SensorTrigger::create(this, sensorTriggerJO));
+		}
+
 		// Alarms
 
 		bool 			lowAlarmOn = true;

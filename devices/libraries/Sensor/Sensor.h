@@ -104,6 +104,7 @@ namespace ART
 
 		char* 								_label;	
 
+		std::vector<SensorTrigger> 			_sensorTriggers;
 		std::vector<TempSensorAlarm> 		_alarms;
 
 		bool 								_connected;
