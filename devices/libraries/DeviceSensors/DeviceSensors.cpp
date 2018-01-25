@@ -233,15 +233,15 @@ namespace ART
 		sensorUnitMeasurementScale->setUnitMeasurementId(unitMeasurementId);		
 	}
 
-	void DeviceSensors::setResolution(String json)
+	void DeviceSensors::setResolution(char* json)
 	{
+		Serial.println("[DeviceSensors] setResolution");
+		Serial.println(json);
+
 		StaticJsonBuffer<200> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
-
 		if (!root.success()) {
-			Serial.print("parse setResolution failed: ");
-			Serial.println(json);
+			printf("DeviceSensors", "setResolution", "Parse failed: %s\n", json);
 			return;
 		}
 
@@ -251,10 +251,7 @@ namespace ART
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
 		sensor->getSensorTempDSFamily()->setResolution(value);
-		_dallas.setResolution(sensor->getDeviceAddress(), value);
-
-		Serial.print("setResolution=");
-		Serial.println(json);
+		_dallas.setResolution(sensor->getDeviceAddress(), value);		
 	}
 
 	void DeviceSensors::setAlarmOn(String json)

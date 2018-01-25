@@ -327,7 +327,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 	}
 	
 	if (topicKey == String(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION)) {
-		espDevice.getDeviceSensors()->setResolution(json);
+		espDevice.getDeviceSensors()->setResolution(strdup(json.c_str()));
 	}
 	if (topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)) {
 		espDevice.getDeviceSensors()->setAlarmOn(json);

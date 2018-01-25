@@ -42,7 +42,7 @@ namespace ART
 		void 								setLabel(char* json);
 
 		void 								setDatasheetUnitMeasurementScale(char* json);
-		void 								setResolution(String json);
+		void 								setResolution(char* json);
 
 		void 								setAlarmOn(String json);
 		void 								setAlarmCelsius(String json);
