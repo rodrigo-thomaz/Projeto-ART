@@ -17,37 +17,6 @@ namespace ART
 {
 	class SensorInDevice;	
 
-	class TempSensorAlarm
-	{
-	public:
-
-		TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, PositionEnum alarmPosition);
-
-		bool 								getAlarmOn();
-		void 								setAlarmOn(bool value);
-
-		float 								getAlarmCelsius();
-		void 								setAlarmCelsius(float value);
-
-		bool 								getAlarmBuzzerOn();
-		void 								setAlarmBuzzerOn(bool value);
-
-		bool 								hasAlarm();
-
-		bool 								hasAlarmBuzzer();
-
-		void 								setTempCelsius(float value);
-
-	private:
-
-		bool 								_alarmOn;
-		float 								_alarmCelsius;
-		bool 								_alarmBuzzerOn;
-		PositionEnum						_alarmPosition;
-
-		float 								_tempCelsius;
-	};
-
 	class Sensor
 	{
 
@@ -105,7 +74,6 @@ namespace ART
 		char* 								_label;	
 
 		std::vector<SensorTrigger> 			_sensorTriggers;
-		std::vector<TempSensorAlarm> 		_alarms;
 
 		bool 								_connected;
 

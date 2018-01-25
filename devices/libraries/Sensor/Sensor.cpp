@@ -4,69 +4,6 @@
 
 namespace ART
 {
-	// TempSensorAlarm
-
-	TempSensorAlarm::TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, PositionEnum alarmPosition)
-	{
-		this->_alarmOn = alarmOn;
-		this->_alarmCelsius = alarmCelsius;
-		this->_alarmBuzzerOn = alarmBuzzerOn;
-		this->_alarmPosition = alarmPosition;
-	}
-
-	bool TempSensorAlarm::getAlarmOn()
-	{
-		return this->_alarmOn;
-	}
-
-	void TempSensorAlarm::setAlarmOn(bool value)
-	{
-		this->_alarmOn = value;
-	}
-
-	float TempSensorAlarm::getAlarmCelsius()
-	{
-		return this->_alarmCelsius;
-	}
-
-	void TempSensorAlarm::setAlarmCelsius(float value)
-	{
-		this->_alarmCelsius = value;
-	}
-
-	bool TempSensorAlarm::getAlarmBuzzerOn()
-	{
-		return this->_alarmBuzzerOn;
-	}
-
-	void TempSensorAlarm::setAlarmBuzzerOn(bool value)
-	{
-		this->_alarmBuzzerOn = value;
-	}
-
-	bool TempSensorAlarm::hasAlarm()
-	{
-		if (!this->_alarmOn) return false;
-
-		switch (this->_alarmPosition)
-		{
-		case Max: return this->_tempCelsius > this->_alarmCelsius;
-		case Min: return this->_tempCelsius < this->_alarmCelsius;
-		}
-	}
-
-	bool TempSensorAlarm::hasAlarmBuzzer()
-	{
-		return this->hasAlarm() && this->_alarmBuzzerOn;
-	}
-
-	void TempSensorAlarm::setTempCelsius(float value)
-	{
-		this->_tempCelsius = value;
-	}
-
-	// Sensor 
-
 	Sensor::Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject)
 	{
 		Serial.println("[Sensor constructor]");
@@ -109,22 +46,6 @@ namespace ART
 			JsonObject& sensorTriggerJO = it->as<JsonObject>();
 			_sensorTriggers.push_back(SensorTrigger::create(this, sensorTriggerJO));
 		}
-
-		// Alarms
-
-		bool 			lowAlarmOn = false;
-		float 			lowAlarmCelsius = 0;
-		bool 			lowAlarmBuzzerOn = false;
-
-		bool 			highAlarmOn = false;
-		float 			highAlarmCelsius = 0;
-		bool 			highAlarmBuzzerOn = false;
-
-		TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, PositionEnum::Max);
-		TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, PositionEnum::Min);
-
-		_alarms.push_back(lowAlarm);
-		_alarms.push_back(highAlarm);
 	}
 
 	Sensor::~Sensor()
