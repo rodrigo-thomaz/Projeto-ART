@@ -61,6 +61,8 @@ namespace ART
 		}
 
 		char*								getSensorId();
+		SensorTypeEnum						getSensorTypeId();
+		SensorDatasheetEnum					getSensorDatasheetId();
 
 		const uint8_t*		 				getDeviceAddress();
 

@@ -137,6 +137,16 @@ namespace ART
 		return _sensorId;
 	}
 
+	SensorTypeEnum Sensor::getSensorTypeId()
+	{
+		return _sensorTypeId;
+	}
+
+	SensorDatasheetEnum Sensor::getSensorDatasheetId()
+	{
+		return _sensorDatasheetId;
+	}
+
 	const uint8_t* Sensor::getDeviceAddress()
 	{
 		return _deviceAddress.data();
