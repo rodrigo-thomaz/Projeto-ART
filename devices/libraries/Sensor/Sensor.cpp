@@ -93,31 +93,28 @@ namespace ART
 		char* label = strdup(jsonObject["label"]);
 		_label = new char(sizeof(strlen(label)));
 		_label = label;		
-		
+
+		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
+		_sensorDatasheet = &deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
+
+		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
+		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);				
+
 		// Alarms
 
-		JsonObject& 	lowAlarmJsonObject = jsonObject["lowAlarm"].as<JsonObject>();
-		JsonObject& 	highAlarmJsonObject = jsonObject["highAlarm"].as<JsonObject>();
+		bool 			lowAlarmOn = true;
+		float 			lowAlarmCelsius = 0;
+		bool 			lowAlarmBuzzerOn = true;
 
-		bool 			lowAlarmOn = bool(lowAlarmJsonObject["alarmOn"]);
-		float 			lowAlarmCelsius = float(lowAlarmJsonObject["alarmCelsius"]);
-		bool 			lowAlarmBuzzerOn = bool(lowAlarmJsonObject["buzzerOn"]);
-
-		bool 			highAlarmOn = bool(highAlarmJsonObject["alarmOn"]);
-		float 			highAlarmCelsius = float(highAlarmJsonObject["alarmCelsius"]);
-		bool 			highAlarmBuzzerOn = bool(highAlarmJsonObject["alarmBuzzerOn"]);
+		bool 			highAlarmOn = true;
+		float 			highAlarmCelsius = 0;
+		bool 			highAlarmBuzzerOn = true;
 
 		TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, SensorUnitMeasurementScalePositionEnum::Max);
 		TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, SensorUnitMeasurementScalePositionEnum::Min);
 
 		_alarms.push_back(lowAlarm);
 		_alarms.push_back(highAlarm);
-
-		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
-		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);		
-
-		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
-		_sensorDatasheet = &deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
 	}
 
 	Sensor::~Sensor()

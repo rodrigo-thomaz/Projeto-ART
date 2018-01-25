@@ -48,6 +48,7 @@
                 }))
                 .ForMember(vm => vm.SensorTempDSFamily, m => m.MapFrom(x => x.SensorTempDSFamily))
                 .ForMember(vm => vm.SensorUnitMeasurementScale, m => m.MapFrom(x => x.SensorUnitMeasurementScale))
+                .ForMember(vm => vm.SensorTriggers, m => m.MapFrom(x => x.SensorTriggers))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
                 .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))

@@ -1,7 +1,7 @@
 ﻿namespace ART.Domotica.IoTContract
 {
     using System;
-
+    using System.Collections.Generic;
     using ART.Domotica.Enums;
 
     public class SensorGetResponseIoTContract
@@ -13,17 +13,7 @@
             get; set;
         }
 
-        public SensorTriggerGetResponseIoTContract HighAlarm
-        {
-            get; set;
-        }
-
         public string Label
-        {
-            get; set;
-        }
-
-        public SensorTriggerGetResponseIoTContract LowAlarm
         {
             get; set;
         }
@@ -39,6 +29,11 @@
         }
 
         public SensorTempDSFamilyGetResponseIoTContract SensorTempDSFamily
+        {
+            get; set;
+        }
+
+        public List<SensorTriggerGetResponseIoTContract> SensorTriggers
         {
             get; set;
         }

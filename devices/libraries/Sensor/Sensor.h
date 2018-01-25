@@ -11,6 +11,7 @@
 #include "SensorTempDSFamily.h"
 #include "SensorUnitMeasurementScale.h"
 #include "SensorUnitMeasurementScalePositionEnum.h"
+#include "SensorTrigger.h"
 
 namespace ART
 {

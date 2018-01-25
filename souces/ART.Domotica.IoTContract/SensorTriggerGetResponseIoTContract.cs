@@ -1,20 +1,32 @@
 ﻿namespace ART.Domotica.IoTContract
 {
+    using System;
+
     public class SensorTriggerGetResponseIoTContract
     {
         #region Properties
 
-        public bool AlarmBuzzerOn
+        public bool BuzzerOn
         {
             get; set;
         }
 
-        public decimal AlarmCelsius
+        public decimal Max
         {
             get; set;
         }
 
-        public bool AlarmOn
+        public decimal Min
+        {
+            get; set;
+        }
+
+        public Guid SensorTriggerId
+        {
+            get; set;
+        }
+
+        public bool TriggerOn
         {
             get; set;
         }

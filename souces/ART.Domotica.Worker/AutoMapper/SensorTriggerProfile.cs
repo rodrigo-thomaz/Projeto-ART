@@ -1,7 +1,5 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
-    using System;
-
     using ART.Domotica.Contract;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
@@ -26,9 +24,11 @@
                 .ForMember(vm => vm.Min, m => m.MapFrom(x => x.Min));
 
             CreateMap<SensorTrigger, SensorTriggerGetResponseIoTContract>()
-                .ForMember(vm => vm.AlarmOn, m => m.MapFrom(x => x.TriggerOn))
-                .ForMember(vm => vm.AlarmCelsius, m => m.MapFrom(x => Convert.ToDecimal(x.Max)))
-                .ForMember(vm => vm.AlarmBuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.TriggerOn, m => m.MapFrom(x => x.TriggerOn))
+                .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn))
+                .ForMember(vm => vm.Max, m => m.MapFrom(x => x.Max))
+                .ForMember(vm => vm.Min, m => m.MapFrom(x => x.Min));
 
             CreateMap<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnRequestIoTContract>();
 
