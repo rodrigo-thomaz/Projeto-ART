@@ -68,4 +68,14 @@ namespace ART
 	{
 		_min = value;
 	}
+
+	bool SensorTrigger::hasAlarm()
+	{
+		return false;
+	}
+
+	bool SensorTrigger::hasAlarmBuzzer()
+	{
+		return false;
+	}
 }

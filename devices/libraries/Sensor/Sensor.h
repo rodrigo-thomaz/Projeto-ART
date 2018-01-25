@@ -43,7 +43,7 @@ namespace ART
 		bool 								_alarmOn;
 		float 								_alarmCelsius;
 		bool 								_alarmBuzzerOn;
-		PositionEnum				_alarmPosition;
+		PositionEnum						_alarmPosition;
 
 		float 								_tempCelsius;
 	};

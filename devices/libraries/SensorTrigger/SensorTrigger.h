@@ -34,6 +34,9 @@ namespace ART
 		float 								getMin();
 		void 								setMin(float value);
 
+		bool 								hasAlarm();
+		bool 								hasAlarmBuzzer();
+
 	private:
 
 		Sensor *							_sensor;

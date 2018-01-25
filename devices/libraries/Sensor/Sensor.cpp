@@ -191,18 +191,26 @@ namespace ART
 	void Sensor::setTempCelsius(float value)
 	{
 		_tempCelsius = value;
-		_alarms[0].setTempCelsius(value);
-		_alarms[1].setTempCelsius(value);
 	}
 
 	bool Sensor::hasAlarm()
 	{
-		return _alarms[0].hasAlarm() || _alarms[1].hasAlarm();
+		for (int i = 0; i < _sensorTriggers.size(); ++i) {
+			if (_sensorTriggers[i].hasAlarm()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	bool Sensor::hasAlarmBuzzer()
 	{
-		return _alarms[0].hasAlarmBuzzer() || _alarms[1].hasAlarmBuzzer();
+		for (int i = 0; i < _sensorTriggers.size(); ++i) {
+			if (_sensorTriggers[i].hasAlarmBuzzer()) {
+				return true;
+			}
+		}
+		return false;
 	}	
 
 	SensorTempDSFamily * Sensor::getSensorTempDSFamily()
