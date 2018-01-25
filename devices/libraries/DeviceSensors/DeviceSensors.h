@@ -48,8 +48,8 @@ namespace ART
 		void 								setAlarmCelsius(String json);
 		void 								setAlarmBuzzerOn(String json);
 
-		void 								setRange(String json);
-		void 								setChartLimiter(String json);
+		void 								setRange(char* json);
+		void 								setChartLimiter(char* json);
 
 		int									getPublishIntervalInMilliSeconds();
 		void								setPublishIntervalInMilliSeconds(char* json);

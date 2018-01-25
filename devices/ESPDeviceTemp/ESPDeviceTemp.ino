@@ -343,10 +343,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
     espDevice.getDeviceSensors()->setDatasheetUnitMeasurementScale(strdup(json.c_str()));
   }
 	if (topicKey == String(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE)) {
-		espDevice.getDeviceSensors()->setRange(json);
+		espDevice.getDeviceSensors()->setRange(strdup(json.c_str()));
 	}
   if (topicKey == String(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE)) {
-    espDevice.getDeviceSensors()->setChartLimiter(json);
+    espDevice.getDeviceSensors()->setChartLimiter(strdup(json.c_str()));
   } 
 }
 

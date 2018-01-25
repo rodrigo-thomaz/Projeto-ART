@@ -321,14 +321,14 @@ namespace ART
 		Serial.println(json);
 	}
 
-	void DeviceSensors::setRange(String json)
+	void DeviceSensors::setRange(char* json)
 	{
+		Serial.print("[DeviceSensors::setRange] ");
+
 		StaticJsonBuffer<300> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
-
 		if (!root.success()) {
-			Serial.println("parse setRange failed");
+			printf("DeviceSensors", "setRange", "Parse failed: %s\n", json);
 			return;
 		}
 
@@ -342,19 +342,16 @@ namespace ART
 			sensor->getSensorUnitMeasurementScale()->setRangeMax(chartLimiterCelsius);
 		else if (position == Min)
 			sensor->getSensorUnitMeasurementScale()->setRangeMin(chartLimiterCelsius);
-
-		Serial.print("[DeviceSensors::setRange] ");
-		Serial.println(json);
 	}
 
-	void DeviceSensors::setChartLimiter(String json)
+	void DeviceSensors::setChartLimiter(char* json)
 	{
+		Serial.print("[DeviceSensors::setChartLimiter] ");
+
 		StaticJsonBuffer<300> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
-
 		if (!root.success()) {
-			Serial.println("parse setChartLimiter failed");
+			printf("DeviceSensors", "setChartLimiter", "Parse failed: %s\n", json);
 			return;
 		}
 
@@ -368,9 +365,6 @@ namespace ART
 			sensor->getSensorUnitMeasurementScale()->setChartLimiterMax(chartLimiterCelsius);
 		else if (position == Min)
 			sensor->getSensorUnitMeasurementScale()->setChartLimiterMin(chartLimiterCelsius);
-
-		Serial.print("[DeviceSensors::setChartLimiter] ");
-		Serial.println(json);
 	}	
 
 	SensorInDevice& DeviceSensors::getSensorInDeviceById(char* sensorId) {
