@@ -214,29 +214,22 @@ namespace ART
 
 	void DeviceSensors::setDatasheetUnitMeasurementScale(char* json)
 	{
+		Serial.println("[DeviceSensors] setUnitOfMeasurement");
+
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
 		if (!root.success()) {
 			printf("DeviceSensors", "setDatasheetUnitMeasurementScale", "Parse failed: %s\n", json);
 			return;
-		}
+		}		
 
 		char* sensorId = strdup(root["sensorId"]);
 		UnitMeasurementEnum unitMeasurementId = static_cast<UnitMeasurementEnum>(root["unitMeasurementId"].as<int>());
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
+		SensorUnitMeasurementScale* sensorUnitMeasurementScale = sensor->getSensorUnitMeasurementScale();
 
-		Serial.println("setUnitOfMeasurement");
-
-		Serial.print("old unitMeasurementId= ");
-		Serial.println(sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId());
-
-		sensor->getSensorUnitMeasurementScale()->setUnitMeasurementId(unitMeasurementId);
-
-		Serial.print("sensorId= ");
-		Serial.print(sensorId);
-		Serial.print(" new unitMeasurementId= ");
-		Serial.println(unitMeasurementId);
+		sensorUnitMeasurementScale->setUnitMeasurementId(unitMeasurementId);		
 	}
 
 	void DeviceSensors::setResolution(String json)
@@ -391,12 +384,12 @@ namespace ART
 
 		Serial.print("[DeviceSensors::setChartLimiter] ");
 		Serial.println(json);
-	}
+	}	
 
 	SensorInDevice& DeviceSensors::getSensorInDeviceById(char* sensorId) {
-		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
-			if (this->_sensorsInDevice[i].getSensor()->getSensorId() == sensorId) {
-				return this->_sensorsInDevice[i];
+		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
+			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) == 0) {
+				return _sensorsInDevice[i];
 			}
 		}
 	}	
