@@ -194,7 +194,7 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		char* label = strdup(root["label"]);
 
-		Sensor* sensor = getSensorInDeviceBySensorKey(sensorId).getSensor();
+		Sensor* sensor = getSensorById(sensorId);
 
 		sensor->setLabel(label);
 
@@ -216,7 +216,7 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		UnitMeasurementEnum unitMeasurementId = static_cast<UnitMeasurementEnum>(root["unitMeasurementId"].as<int>());
 
-		Sensor* sensor = getSensorInDeviceBySensorKey(sensorId).getSensor();
+		Sensor* sensor = getSensorById(sensorId);
 		SensorUnitMeasurementScale* sensorUnitMeasurementScale = sensor->getSensorUnitMeasurementScale();
 
 		sensorUnitMeasurementScale->setUnitMeasurementId(unitMeasurementId);		
@@ -237,7 +237,7 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		int value = root["dsFamilyTempSensorResolutionId"];
 
-		Sensor* sensor = getSensorInDeviceBySensorKey(sensorId).getSensor();
+		Sensor* sensor = getSensorById(sensorId);
 
 		sensor->getSensorTempDSFamily()->setResolution(value);
 		_dallas.setResolution(sensor->getDeviceAddress(), value);		
@@ -258,7 +258,7 @@ namespace ART
 		bool alarmOn = root["alarmOn"];
 		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
-		Sensor* sensor = getSensorInDeviceBySensorKey(sensorId).getSensor();
+		Sensor* sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor->getHighAlarm().setAlarmOn(alarmOn);
@@ -281,7 +281,7 @@ namespace ART
 		bool alarmBuzzerOn = root["alarmBuzzerOn"];
 		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
-		Sensor* sensor = getSensorInDeviceBySensorKey(sensorId).getSensor();
+		Sensor* sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor->getHighAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
@@ -304,7 +304,7 @@ namespace ART
 		float alarmCelsius = root["alarmCelsius"];
 		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
-		Sensor* sensor = getSensorInDeviceBySensorKey(sensorId).getSensor();
+		Sensor* sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor->getHighAlarm().setAlarmCelsius(alarmCelsius);
@@ -327,7 +327,7 @@ namespace ART
 		float chartLimiterCelsius = root["value"];
 		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
-		Sensor* sensor = getSensorInDeviceBySensorKey(sensorId).getSensor();
+		Sensor* sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor->getSensorUnitMeasurementScale()->setRangeMax(chartLimiterCelsius);
@@ -350,7 +350,7 @@ namespace ART
 		float chartLimiterCelsius = root["value"];
 		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
-		Sensor* sensor = getSensorInDeviceBySensorKey(sensorId).getSensor();
+		Sensor* sensor = getSensorById(sensorId);
 
 		if (position == Max)
 			sensor->getSensorUnitMeasurementScale()->setChartLimiterMax(chartLimiterCelsius);
@@ -358,13 +358,18 @@ namespace ART
 			sensor->getSensorUnitMeasurementScale()->setChartLimiterMin(chartLimiterCelsius);
 	}	
 
-	SensorInDevice& DeviceSensors::getSensorInDeviceBySensorKey(char* sensorId) {
+	SensorInDevice& DeviceSensors::getSensorInDeviceBySensorId(char* sensorId) {
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
 			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) == 0) {
 				return _sensorsInDevice[i];
 			}
 		}
-	}	
+	}
+
+	Sensor * DeviceSensors::getSensorById(char * sensorId)
+	{
+		return getSensorInDeviceBySensorId(sensorId).getSensor();
+	}
 
 	void DeviceSensors::createSensorJsonNestedObject(Sensor* sensor, JsonArray& root)
 	{
