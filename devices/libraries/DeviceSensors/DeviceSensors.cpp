@@ -1,5 +1,6 @@
 #include "DeviceSensors.h"
 #include "ESPDevice.h"
+#include "SensorUnitMeasurementScalePositionEnum.h"
 
 // Data wire is plugged into port 0
 #define ONE_WIRE_BUS 0
@@ -269,7 +270,7 @@ namespace ART
 
 		char* sensorId = strdup(root["sensorId"]);
 		bool alarmOn = root["alarmOn"];
-		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
+		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
@@ -295,7 +296,7 @@ namespace ART
 
 		char* sensorId = strdup(root["sensorId"]);
 		float alarmCelsius = root["alarmCelsius"];
-		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
+		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
@@ -321,7 +322,7 @@ namespace ART
 
 		char* sensorId = strdup(root["sensorId"]);
 		bool alarmBuzzerOn = root["alarmBuzzerOn"];
-		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
+		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
@@ -347,7 +348,7 @@ namespace ART
 
 		char* sensorId = strdup(root["sensorId"]);
 		float chartLimiterCelsius = root["value"];
-		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
+		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
@@ -373,7 +374,7 @@ namespace ART
 
 		char* sensorId = strdup(root["sensorId"]);
 		float chartLimiterCelsius = root["value"];
-		TempSensorAlarmPosition position = static_cast<TempSensorAlarmPosition>(root["position"].as<int>());
+		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
 
 		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
 
