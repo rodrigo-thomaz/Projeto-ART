@@ -10,7 +10,7 @@
 #include "SensorDatasheet.h"
 #include "SensorTempDSFamily.h"
 #include "SensorUnitMeasurementScale.h"
-#include "SensorUnitMeasurementScalePositionEnum.h"
+#include "PositionEnum.h"
 #include "SensorTrigger.h"
 
 namespace ART
@@ -21,7 +21,7 @@ namespace ART
 	{
 	public:
 
-		TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, SensorUnitMeasurementScalePositionEnum alarmPosition);
+		TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, PositionEnum alarmPosition);
 
 		bool 								getAlarmOn();
 		void 								setAlarmOn(bool value);
@@ -43,7 +43,7 @@ namespace ART
 		bool 								_alarmOn;
 		float 								_alarmCelsius;
 		bool 								_alarmBuzzerOn;
-		SensorUnitMeasurementScalePositionEnum				_alarmPosition;
+		PositionEnum				_alarmPosition;
 
 		float 								_tempCelsius;
 	};

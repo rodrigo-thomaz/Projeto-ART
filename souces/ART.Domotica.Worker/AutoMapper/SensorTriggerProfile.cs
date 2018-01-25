@@ -43,7 +43,8 @@
             CreateMap<SensorTriggerSetTriggerValueRequestContract, SensorTriggerSetTriggerValueRequestIoTContract>()
                 .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))
                 .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
-                .ForMember(vm => vm.TriggerValue, m => m.MapFrom(x => x.TriggerValue));
+                .ForMember(vm => vm.TriggerValue, m => m.MapFrom(x => x.TriggerValue))
+                .ForMember(vm => vm.Position, m => m.MapFrom(x => x.Position));
 
             CreateMap<SensorTriggerSetTriggerOnRequestContract, SensorTriggerSetTriggerOnModel>()
                 .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.SensorTriggerId))

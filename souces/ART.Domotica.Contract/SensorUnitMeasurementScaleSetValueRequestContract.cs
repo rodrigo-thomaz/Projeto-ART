@@ -8,7 +8,7 @@
     {
         #region Properties
 
-        public SensorUnitMeasurementScalePositionEnum Position
+        public PositionEnum Position
         {
             get; set;
         }

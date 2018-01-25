@@ -1,6 +1,6 @@
 #include "DeviceSensors.h"
 #include "ESPDevice.h"
-#include "SensorUnitMeasurementScalePositionEnum.h"
+#include "PositionEnum.h"
 
 // Data wire is plugged into port 0
 #define ONE_WIRE_BUS 0
@@ -244,7 +244,7 @@ namespace ART
 
 	void DeviceSensors::setTriggerOn(char* json)
 	{
-		Serial.print("[DeviceSensors::setAlarmOn] ");
+		Serial.print("[DeviceSensors::setTriggerOn] ");
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -253,21 +253,20 @@ namespace ART
 			return;
 		}
 
+		root.printTo(Serial);
+
 		char* sensorId = strdup(root["sensorId"]);
-		bool alarmOn = root["alarmOn"];
-		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
+		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
+		bool triggerOn = root["triggerOn"];
 
-		Sensor* sensor = getSensorById(sensorId);
+		SensorTrigger& sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
 
-		if (position == Max)
-			sensor->getHighAlarm().setAlarmOn(alarmOn);
-		else if (position == Min)
-			sensor->getLowAlarm().setAlarmOn(alarmOn);
+		sensorTrigger.setTriggerOn(triggerOn);
 	}
 
 	void DeviceSensors::setBuzzerOn(char* json)
 	{
-		Serial.print("[DeviceSensors::setAlarmBuzzerOn] ");
+		Serial.print("[DeviceSensors::setBuzzerOn] ");
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -276,21 +275,20 @@ namespace ART
 			return;
 		}
 
+		root.printTo(Serial);
+
 		char* sensorId = strdup(root["sensorId"]);
-		bool alarmBuzzerOn = root["alarmBuzzerOn"];
-		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
+		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
+		bool buzzerOn = root["buzzerOn"];
 
-		Sensor* sensor = getSensorById(sensorId);
+		SensorTrigger& sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
 
-		if (position == Max)
-			sensor->getHighAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
-		else if (position == Min)
-			sensor->getLowAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
+		sensorTrigger.setBuzzerOn(buzzerOn);
 	}
 
 	void DeviceSensors::setTriggerValue(char* json)
 	{
-		Serial.print("[DeviceSensors::setAlarmCelsius] ");
+		Serial.print("[DeviceSensors::setTriggerValue] ");
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -299,16 +297,19 @@ namespace ART
 			return;
 		}
 
-		char* sensorId = strdup(root["sensorId"]);
-		float alarmCelsius = root["alarmCelsius"];
-		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
+		root.printTo(Serial);
 
-		Sensor* sensor = getSensorById(sensorId);
+		char* sensorId = strdup(root["sensorId"]);
+		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
+		float triggerValue = root["triggerValue"];
+		PositionEnum position = static_cast<PositionEnum>(root["position"].as<int>());
+
+		SensorTrigger& sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
 
 		if (position == Max)
-			sensor->getHighAlarm().setAlarmCelsius(alarmCelsius);
+			sensorTrigger.setMax(triggerValue);
 		else if (position == Min)
-			sensor->getLowAlarm().setAlarmCelsius(alarmCelsius);
+			sensorTrigger.setMin(triggerValue);
 	}	
 
 	void DeviceSensors::setRange(char* json)
@@ -324,7 +325,7 @@ namespace ART
 
 		char* sensorId = strdup(root["sensorId"]);
 		float chartLimiterCelsius = root["value"];
-		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
+		PositionEnum position = static_cast<PositionEnum>(root["position"].as<int>());
 
 		Sensor* sensor = getSensorById(sensorId);
 
@@ -347,7 +348,7 @@ namespace ART
 
 		char* sensorId = strdup(root["sensorId"]);
 		float chartLimiterCelsius = root["value"];
-		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
+		PositionEnum position = static_cast<PositionEnum>(root["position"].as<int>());
 
 		Sensor* sensor = getSensorById(sensorId);
 

@@ -8,6 +8,11 @@
     {
         #region Properties
 
+        public PositionEnum Position
+        {
+            get; set;
+        }
+
         public Guid SensorId
         {
             get; set;

@@ -19,10 +19,6 @@
     <Text Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.h" />
   </ItemGroup>
   <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.h" /> -->
-    <ClInclude Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScalePositionEnum.h" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.cpp" />
   </ItemGroup>
 </Project>

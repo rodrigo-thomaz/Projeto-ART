@@ -2,7 +2,7 @@
 {
     #region Enumerations
 
-    public enum SensorUnitMeasurementScalePositionEnum
+    public enum PositionEnum
     {
         Max = 0,
         Min = 1,

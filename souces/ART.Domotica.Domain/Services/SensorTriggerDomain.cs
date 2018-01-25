@@ -66,7 +66,7 @@
         }
 
 
-        public async Task<SensorTrigger> SetTriggerValue(Guid sensorTriggerId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal triggerValue)
+        public async Task<SensorTrigger> SetTriggerValue(Guid sensorTriggerId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, PositionEnum position, decimal triggerValue)
         {
             var entity = await _sensorTriggerRepository.GetByKey(sensorTriggerId, sensorId, sensorDatasheetId, sensorTypeId);
 
@@ -75,11 +75,11 @@
                 throw new Exception("SensorTrigger not found");
             }
 
-            if (position == SensorUnitMeasurementScalePositionEnum.Max)
+            if (position == PositionEnum.Max)
             {                
                 entity.Max = triggerValue;
             }
-            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
+            else if (position == PositionEnum.Min)
             {
                 entity.Min = triggerValue;
             }

@@ -38,7 +38,7 @@
 
         #endregion Constructors
 
-        public async Task<SensorUnitMeasurementScale> SetRange(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal value)
+        public async Task<SensorUnitMeasurementScale> SetRange(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, PositionEnum position, decimal value)
         {
             var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId);
 
@@ -47,9 +47,9 @@
                 throw new Exception("SensorUnitMeasurementScale not found");
             }
 
-            if (position == SensorUnitMeasurementScalePositionEnum.Max)
+            if (position == PositionEnum.Max)
                 entity.RangeMax = value;
-            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
+            else if (position == PositionEnum.Min)
                 entity.RangeMin = value;
 
             await _sensorUnitMeasurementScaleRepository.Update(entity);
@@ -57,7 +57,7 @@
             return entity;
         }
 
-        public async Task<SensorUnitMeasurementScale> SetChartLimiter(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, SensorUnitMeasurementScalePositionEnum position, decimal value)
+        public async Task<SensorUnitMeasurementScale> SetChartLimiter(Guid sensorUnitMeasurementScaleId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, PositionEnum position, decimal value)
         {
             var entity = await _sensorUnitMeasurementScaleRepository.GetByKey(sensorUnitMeasurementScaleId, sensorDatasheetId, sensorTypeId);
 
@@ -66,9 +66,9 @@
                 throw new Exception("SensorUnitMeasurementScale not found");
             }
 
-            if (position == SensorUnitMeasurementScalePositionEnum.Max)
+            if (position == PositionEnum.Max)
                 entity.ChartLimiterMax = value;
-            else if (position == SensorUnitMeasurementScalePositionEnum.Min)
+            else if (position == PositionEnum.Min)
                 entity.ChartLimiterMin = value;
 
             await _sensorUnitMeasurementScaleRepository.Update(entity);

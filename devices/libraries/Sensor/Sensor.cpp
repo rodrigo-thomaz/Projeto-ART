@@ -6,7 +6,7 @@ namespace ART
 {
 	// TempSensorAlarm
 
-	TempSensorAlarm::TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, SensorUnitMeasurementScalePositionEnum alarmPosition)
+	TempSensorAlarm::TempSensorAlarm(bool alarmOn, float alarmCelsius, bool alarmBuzzerOn, PositionEnum alarmPosition)
 	{
 		this->_alarmOn = alarmOn;
 		this->_alarmCelsius = alarmCelsius;
@@ -120,8 +120,8 @@ namespace ART
 		float 			highAlarmCelsius = 0;
 		bool 			highAlarmBuzzerOn = false;
 
-		TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, SensorUnitMeasurementScalePositionEnum::Max);
-		TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, SensorUnitMeasurementScalePositionEnum::Min);
+		TempSensorAlarm highAlarm = TempSensorAlarm(highAlarmOn, highAlarmCelsius, highAlarmBuzzerOn, PositionEnum::Max);
+		TempSensorAlarm lowAlarm = TempSensorAlarm(lowAlarmOn, lowAlarmCelsius, lowAlarmBuzzerOn, PositionEnum::Min);
 
 		_alarms.push_back(lowAlarm);
 		_alarms.push_back(highAlarm);
