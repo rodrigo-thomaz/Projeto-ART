@@ -173,16 +173,6 @@ namespace ART
 		_label = value;
 	}	
 
-	TempSensorAlarm& Sensor::getLowAlarm()
-	{
-		return _alarms[0];
-	}
-
-	TempSensorAlarm& Sensor::getHighAlarm()
-	{
-		return _alarms[1];
-	}
-
 	bool Sensor::getConnected()
 	{
 		return _connected;

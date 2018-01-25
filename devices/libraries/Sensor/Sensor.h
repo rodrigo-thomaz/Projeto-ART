@@ -70,10 +70,7 @@ namespace ART
 		bool								getValidFamily();
 
 		char* 								getLabel() const;
-		void 								setLabel(char* value);		
-
-		TempSensorAlarm& 					getLowAlarm();
-		TempSensorAlarm& 					getHighAlarm();
+		void 								setLabel(char* value);	
 
 		bool 								getConnected();
 		void 								setConnected(bool value);
