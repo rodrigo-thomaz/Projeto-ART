@@ -243,14 +243,14 @@ namespace ART
 		_dallas.setResolution(sensor->getDeviceAddress(), value);		
 	}
 
-	void DeviceSensors::setAlarmOn(String json)
+	void DeviceSensors::setTriggerOn(char* json)
 	{
+		Serial.print("[DeviceSensors::setAlarmOn] ");
+
 		StaticJsonBuffer<300> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
-
 		if (!root.success()) {
-			Serial.println("parse setAlarmOn failed");
+			printf("DeviceSensors", "setTriggerOn", "Parse failed: %s\n", json);
 			return;
 		}
 
@@ -264,45 +264,16 @@ namespace ART
 			sensor->getHighAlarm().setAlarmOn(alarmOn);
 		else if (position == Min)
 			sensor->getLowAlarm().setAlarmOn(alarmOn);
-
-		Serial.print("[DeviceSensors::setAlarmOn] ");
-		Serial.println(json);
 	}
 
-	void DeviceSensors::setAlarmCelsius(String json)
+	void DeviceSensors::setBuzzerOn(char* json)
 	{
+		Serial.print("[DeviceSensors::setAlarmBuzzerOn] ");
+
 		StaticJsonBuffer<300> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
-
 		if (!root.success()) {
-			Serial.println("parse setAlarmCelsius failed");
-			return;
-		}
-
-		char* sensorId = strdup(root["sensorId"]);
-		float alarmCelsius = root["alarmCelsius"];
-		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
-
-		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
-
-		if (position == Max)
-			sensor->getHighAlarm().setAlarmCelsius(alarmCelsius);
-		else if (position == Min)
-			sensor->getLowAlarm().setAlarmCelsius(alarmCelsius);
-
-		Serial.print("[DeviceSensors::setAlarmCelsius] ");
-		Serial.println(json);
-	}
-
-	void DeviceSensors::setAlarmBuzzerOn(String json)
-	{
-		StaticJsonBuffer<300> jsonBuffer;
-
-		JsonObject& root = jsonBuffer.parseObject(json);
-
-		if (!root.success()) {
-			Serial.println("parse setAlarmBuzzerOn failed");
+			printf("DeviceSensors", "setBuzzerOn", "Parse failed: %s\n", json);
 			return;
 		}
 
@@ -316,10 +287,30 @@ namespace ART
 			sensor->getHighAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
 		else if (position == Min)
 			sensor->getLowAlarm().setAlarmBuzzerOn(alarmBuzzerOn);
-
-		Serial.print("[DeviceSensors::setAlarmBuzzerOn] ");
-		Serial.println(json);
 	}
+
+	void DeviceSensors::setTriggerValue(char* json)
+	{
+		Serial.print("[DeviceSensors::setAlarmCelsius] ");
+
+		StaticJsonBuffer<300> jsonBuffer;
+		JsonObject& root = jsonBuffer.parseObject(json);
+		if (!root.success()) {
+			printf("DeviceSensors", "setTriggerValue", "Parse failed: %s\n", json);
+			return;
+		}
+
+		char* sensorId = strdup(root["sensorId"]);
+		float alarmCelsius = root["alarmCelsius"];
+		SensorUnitMeasurementScalePositionEnum position = static_cast<SensorUnitMeasurementScalePositionEnum>(root["position"].as<int>());
+
+		Sensor* sensor = getSensorInDeviceById(sensorId).getSensor();
+
+		if (position == Max)
+			sensor->getHighAlarm().setAlarmCelsius(alarmCelsius);
+		else if (position == Min)
+			sensor->getLowAlarm().setAlarmCelsius(alarmCelsius);
+	}	
 
 	void DeviceSensors::setRange(char* json)
 	{

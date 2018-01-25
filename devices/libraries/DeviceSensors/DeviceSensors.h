@@ -44,9 +44,9 @@ namespace ART
 		void 								setDatasheetUnitMeasurementScale(char* json);
 		void 								setResolution(char* json);
 
-		void 								setAlarmOn(String json);
-		void 								setAlarmCelsius(String json);
-		void 								setAlarmBuzzerOn(String json);
+		void 								setTriggerOn(char* json);
+		void 								setBuzzerOn(char* json);
+		void 								setTriggerValue(char* json);
 
 		void 								setRange(char* json);
 		void 								setChartLimiter(char* json);

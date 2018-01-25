@@ -329,16 +329,17 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 	if (topicKey == String(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION)) {
 		espDevice.getDeviceSensors()->setResolution(strdup(json.c_str()));
 	}
+ 
 	if (topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_ON)) {
-		espDevice.getDeviceSensors()->setAlarmOn(json);
-	}
-	if (topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS)) {
-		espDevice.getDeviceSensors()->setAlarmCelsius(json);
-	}
+		espDevice.getDeviceSensors()->setTriggerOn(strdup(json.c_str()));
+	}	
 	if (topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_BUZZER_ON)) {
-		espDevice.getDeviceSensors()->setAlarmBuzzerOn(json);
+		espDevice.getDeviceSensors()->setBuzzerOn(strdup(json.c_str()));
 	}
-
+  if (topicKey == String(TOPIC_SUB_DS_FAMILY_TEMP_SENSOR_SET_ALARM_CELSIUS)) {
+    espDevice.getDeviceSensors()->setTriggerValue(strdup(json.c_str()));
+  }
+  
   if (topicKey == String(TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE)) {
     espDevice.getDeviceSensors()->setDatasheetUnitMeasurementScale(strdup(json.c_str()));
   }
