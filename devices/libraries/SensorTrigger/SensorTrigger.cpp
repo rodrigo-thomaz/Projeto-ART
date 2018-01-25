@@ -71,11 +71,12 @@ namespace ART
 
 	bool SensorTrigger::hasAlarm()
 	{
-		return false;
+		float temp = _sensor->getTempCelsius();
+		return temp >= _min && temp <= _max;
 	}
 
 	bool SensorTrigger::hasAlarmBuzzer()
 	{
-		return false;
+		return hasAlarm() && _buzzerOn;
 	}
 }

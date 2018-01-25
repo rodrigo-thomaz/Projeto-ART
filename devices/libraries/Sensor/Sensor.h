@@ -10,8 +10,8 @@
 #include "SensorDatasheet.h"
 #include "SensorTempDSFamily.h"
 #include "SensorUnitMeasurementScale.h"
-#include "PositionEnum.h"
 #include "SensorTrigger.h"
+#include "PositionEnum.h"
 
 namespace ART
 {
