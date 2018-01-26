@@ -1,5 +1,14 @@
 ﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceSensorsController" ng-init="init(deviceItem.deviceSensors)">
     <div class="form-group">
+        <label class="col-lg-4 control-label">Read interval in milli seconds</label>
+        <div class="col-lg-8">
+            <input name="inputReadIntervalInMilliSeconds" type="number" ng-model="readIntervalInMilliSecondsView" ng-model-options="{ debounce: 1000 }" ng-change="changeReadIntervalInMilliSeconds()" min="0" required class="form-control">
+        </div>
+        <span ng-show="form.readIntervalInMilliSecondsView.$touched && form.readIntervalInMilliSecondsView.$invalid">
+            Read Interval In Seconds deve ser maior que 0
+        </span>
+    </div>
+    <div class="form-group">
         <label class="col-lg-4 control-label">Publish interval in milli seconds</label>
         <div class="col-lg-8">
             <input name="inputPublishIntervalInMilliSeconds" type="number" ng-model="publishIntervalInMilliSecondsView" ng-model-options="{ debounce: 1000 }" ng-change="changePublishIntervalInMilliSeconds()" min="5" required class="form-control">

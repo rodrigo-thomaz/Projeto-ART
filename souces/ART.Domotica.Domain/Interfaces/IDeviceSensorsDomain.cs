@@ -14,6 +14,8 @@
 
         Task<DeviceSensors> SetPublishIntervalInMilliSeconds(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInMilliSeconds);
 
+        Task<DeviceSensors> SetReadIntervalInMilliSeconds(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, int readIntervalInMilliSeconds);
+
         #endregion Methods
     }
 }

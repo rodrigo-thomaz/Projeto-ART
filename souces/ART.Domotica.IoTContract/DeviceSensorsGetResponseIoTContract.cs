@@ -11,6 +11,11 @@
             get; set;
         }
 
+        public int ReadIntervalInMilliSeconds
+        {
+            get; set;
+        }
+
         public List<SensorDatasheetGetResponseIoTContract> SensorDatasheets
         {
             get; set;

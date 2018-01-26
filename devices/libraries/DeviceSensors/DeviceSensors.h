@@ -51,6 +51,9 @@ namespace ART
 		void 								setRange(char* json);
 		void 								setChartLimiter(char* json);
 
+		int									getReadIntervalInMilliSeconds();
+		void								setReadIntervalInMilliSeconds(char* json);
+
 		int									getPublishIntervalInMilliSeconds();
 		void								setPublishIntervalInMilliSeconds(char* json);
 
@@ -78,6 +81,7 @@ namespace ART
 		std::vector<SensorDatasheet>		_sensorDatasheets;
 		std::vector<SensorInDevice>			_sensorsInDevice;
 
+		int									_readIntervalInMilliSeconds;
 		int									_publishIntervalInMilliSeconds;
 
 	};

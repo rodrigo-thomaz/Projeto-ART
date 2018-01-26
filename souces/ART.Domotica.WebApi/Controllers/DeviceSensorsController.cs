@@ -27,6 +27,24 @@
         #endregion Constructors
 
         /// <summary>
+        /// Altera o ReadIntervalInMilliSeconds de um device
+        /// </summary>
+        /// <remarks>
+        /// Altera o ReadIntervalInMilliSeconds de um device
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setReadIntervalInMilliSeconds")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetReadIntervalInMilliSeconds(DeviceSensorsSetIntervalInMilliSecondsRequestContract contract)
+        {
+            await _deviceSensorsProducer.SetReadIntervalInMilliSeconds(CreateMessage(contract));
+            return Ok();
+        }
+
+        /// <summary>
         /// Altera o PublishIntervalInMilliSeconds de um device
         /// </summary>
         /// <remarks>
@@ -38,7 +56,7 @@
         /// <response code="500">Internal Server Error</response>
         [Route("setPublishIntervalInMilliSeconds")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetPublishIntervalInMilliSeconds(DeviceSensorsSetPublishIntervalInMilliSecondsRequestContract contract)
+        public async Task<IHttpActionResult> SetPublishIntervalInMilliSeconds(DeviceSensorsSetIntervalInMilliSecondsRequestContract contract)
         {
             await _deviceSensorsProducer.SetPublishIntervalInMilliSeconds(CreateMessage(contract));
             return Ok();

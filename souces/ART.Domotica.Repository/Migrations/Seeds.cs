@@ -547,7 +547,8 @@
                     },
                     DeviceSensors = new DeviceSensors
                     {
-                        PublishIntervalInMilliSeconds = 5,
+                        ReadIntervalInMilliSeconds = 2000,
+                        PublishIntervalInMilliSeconds = 10000,
                     },
                 };
 
@@ -606,7 +607,8 @@
                 {
                     espDevice1.DeviceSensors = new DeviceSensors
                     {
-                        PublishIntervalInMilliSeconds = 5,
+                        ReadIntervalInMilliSeconds = 2000,
+                        PublishIntervalInMilliSeconds = 10000,
                     };
                 }
             }
@@ -809,7 +811,8 @@
                     },
                     DeviceSensors = new DeviceSensors
                     {
-                        PublishIntervalInMilliSeconds = 9,
+                        ReadIntervalInMilliSeconds = 2000,
+                        PublishIntervalInMilliSeconds = 10000,
                     },
                 };
 
@@ -858,7 +861,8 @@
                 {
                     espDevice2.DeviceSensors = new DeviceSensors
                     {
-                        PublishIntervalInMilliSeconds = 9,
+                        ReadIntervalInMilliSeconds = 2000,
+                        PublishIntervalInMilliSeconds = 10000,
                     };
                 }
                 if (espDevice2.DeviceDebug == null)

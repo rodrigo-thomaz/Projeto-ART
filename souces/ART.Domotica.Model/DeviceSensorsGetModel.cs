@@ -24,6 +24,11 @@
             get; set;
         }
 
+        public int ReadIntervalInMilliSeconds
+        {
+            get; set;
+        }
+
         public List<SensorInDeviceGetModel> SensorInDevice
         {
             get; set;

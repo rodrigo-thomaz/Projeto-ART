@@ -58,6 +58,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER "DeviceDebug/SetShowProfilerIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME "DeviceDebug/SetShowTimeIoT"
 
+#define TOPIC_SUB_DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS "DeviceSensors/SetReadIntervalInMilliSecondsIoT"
 #define TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
 
 #define TOPIC_SUB_SENSOR_SET_LABEL "Sensor/SetLabelIoT"
@@ -74,10 +75,8 @@ int configurationEEPROMAddr = 0;
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //t�pico MQTT de envio de informa��es para Broker
 
-uint64_t publishMessageTimestamp = 0;
-
-#define READTEMP_INTERVAL 2000
 uint64_t readTempTimestamp = 0;
+uint64_t publishMessageTimestamp = 0;
 
 using namespace ART;
 
@@ -194,7 +193,8 @@ void subscribeInApplication()
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
 
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED); 
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
 
@@ -232,7 +232,8 @@ void unSubscribeInApplication()
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
 
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS);
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
   
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
 	
@@ -320,9 +321,12 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
   if (topicKey == String(TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED)) {
     espDevice.getDeviceSensors()->setSensorsByMQQTCallback(json);
   }
-	if (topicKey == String(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS)) {
-		espDevice.getDeviceSensors()->setPublishIntervalInMilliSeconds(strdup(json.c_str()));
+	if (topicKey == String(TOPIC_SUB_DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS)) {
+		espDevice.getDeviceSensors()->setReadIntervalInMilliSeconds(strdup(json.c_str()));
 	}
+ if (topicKey == String(TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS)) {
+   espDevice.getDeviceSensors()->setPublishIntervalInMilliSeconds(strdup(json.c_str()));
+  }
 
 	if (topicKey == String(TOPIC_SUB_SENSOR_SET_LABEL)) {
 		espDevice.getDeviceSensors()->setLabel(strdup(json.c_str()));
@@ -384,11 +388,13 @@ void loopInApplication()
 
 	uint64_t now = millis();
 
-	if (espDevice.getDeviceSensors()->initialized()) {
-		if (now - readTempTimestamp > READTEMP_INTERVAL) {
+  DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
+  
+	if (deviceSensors->initialized()) {
+		if (now - readTempTimestamp > deviceSensors->getReadIntervalInMilliSeconds()) {
 			readTempTimestamp = now;
 			displayTemperatureSensorManager.printUpdate(true);
-			espDevice.getDeviceSensors()->refresh();
+			deviceSensors->refresh();
 		}
 		else {
 			displayTemperatureSensorManager.printUpdate(false);
@@ -398,12 +404,12 @@ void loopInApplication()
 	// MQTT
 	PubSubClient* mqqt = espDevice.getDeviceMQ()->getMQQT();
 
-	if (mqqt->connected() && espDevice.getDeviceSensors()->initialized()) {
+	if (mqqt->connected() && deviceSensors->initialized()) {
 
 		displayMQTTManager.printConnected();
 		displayMQTTManager.printReceived(false);
 
-		int publishIntervalInMilliSeconds = espDevice.getDeviceSensors()->getPublishIntervalInMilliSeconds();
+		int publishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
 
 		if (now - publishMessageTimestamp > publishIntervalInMilliSeconds) {
 			publishMessageTimestamp = now;

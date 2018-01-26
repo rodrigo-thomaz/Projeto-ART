@@ -9,7 +9,9 @@
     {
         #region Methods
 
-        Task SetPublishIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSensorsSetPublishIntervalInMilliSecondsRequestContract> message);
+        Task SetPublishIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSensorsSetIntervalInMilliSecondsRequestContract> message);
+
+        Task SetReadIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSensorsSetIntervalInMilliSecondsRequestContract> message);
 
         #endregion Methods
     }

@@ -32,6 +32,22 @@
 
         #endregion Constructors
 
+        public async Task<DeviceSensors> SetReadIntervalInMilliSeconds(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, int readIntervalInMilliSeconds)
+        {
+            var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceSensors not found");
+            }
+
+            entity.ReadIntervalInMilliSeconds = readIntervalInMilliSeconds;
+
+            await _deviceSensorsRepository.Update(entity);
+
+            return entity;
+        }
+
         public async Task<DeviceSensors> SetPublishIntervalInMilliSeconds(Guid deviceSensorsId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInMilliSeconds)
         {
             var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId, deviceDatasheetId);

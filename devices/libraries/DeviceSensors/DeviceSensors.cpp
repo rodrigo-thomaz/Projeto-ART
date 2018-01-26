@@ -105,6 +105,7 @@ namespace ART
 		JsonArray& sensorDatasheetsJA = sensorInDeviceJO["sensorDatasheets"];
 		JsonArray& sensorsInDeviceJA = sensorInDeviceJO["sensorsInDevice"];
 
+		_readIntervalInMilliSeconds = sensorInDeviceJO["readIntervalInMilliSeconds"];
 		_publishIntervalInMilliSeconds = sensorInDeviceJO["publishIntervalInMilliSeconds"];
 
 		// sensorDatasheets
@@ -417,5 +418,21 @@ namespace ART
 			return;
 		}
 		_publishIntervalInMilliSeconds = root["value"].as<int>();
+	}
+
+	int DeviceSensors::getReadIntervalInMilliSeconds()
+	{
+		return _readIntervalInMilliSeconds;
+	}
+
+	void DeviceSensors::setReadIntervalInMilliSeconds(char* json)
+	{
+		StaticJsonBuffer<200> jsonBuffer;
+		JsonObject& root = jsonBuffer.parseObject(json);
+		if (!root.success()) {
+			printf("DeviceSensors", "setReadIntervalInMilliSeconds", "Parse failed: %s\n", json);
+			return;
+		}
+		_readIntervalInMilliSeconds = root["value"].as<int>();
 	}
 }

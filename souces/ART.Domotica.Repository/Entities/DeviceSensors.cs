@@ -30,6 +30,11 @@
             get; set;
         }
 
+        public int ReadIntervalInMilliSeconds
+        {
+            get; set;
+        }
+
         public ICollection<SensorInDevice> SensorInDevice
         {
             get; set;

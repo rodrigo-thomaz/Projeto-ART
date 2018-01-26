@@ -1,10 +1,10 @@
-﻿namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Model
 {
     using System;
 
     using ART.Domotica.Enums;
 
-    public class DeviceSensorsSetPublishIntervalInMilliSecondsRequestContract
+    public class DeviceSensorsSetReadIntervalInMilliSecondsModel
     {
         #region Properties
 
@@ -18,7 +18,7 @@
             get; set;
         }
 
-        public int PublishIntervalInMilliSeconds
+        public int ReadIntervalInMilliSeconds
         {
             get; set;
         }

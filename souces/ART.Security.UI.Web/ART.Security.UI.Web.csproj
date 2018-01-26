@@ -100,6 +100,7 @@
     <None Include="Properties\PublishProfiles\ngauthenticationweb.pubxml" />
     <Content Include="scripts\angular-event-dispatcher\angular-event-dispatcher.js" />
     <Content Include="scripts\angular-event-dispatcher\angular-event-dispatcher.min.js" />
+    <Content Include="scripts\angular\angular.js" />
     <Content Include="scripts\sockjs-client\.bower.json" />
     <Content Include="scripts\sockjs-client\bower.json" />
     <Content Include="scripts\sockjs-client\Changelog.md" />

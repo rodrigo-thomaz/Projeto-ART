@@ -43,6 +43,7 @@
     <Compile Include="DeviceDebugGetModel.cs" />
     <Compile Include="DeviceBinaryGetModel.cs" />
     <Compile Include="DeviceMQGetModel.cs" />
+    <Compile Include="DeviceSensorsSetReadIntervalInMilliSecondsModel.cs" />
     <Compile Include="DeviceWiFiGetModel.cs" />
     <Compile Include="DeviceNTPGetModel.cs" />
     <Compile Include="DeviceDebugSetValueModel.cs" />

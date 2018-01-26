@@ -77,6 +77,10 @@ app.constant('deviceDebugConstant', {
 
 app.constant('deviceSensorsConstant', {
 
+    setReadIntervalInMilliSecondsApiUri: 'api/deviceSensors/setReadIntervalInMilliSeconds',
+    setReadIntervalInMilliSecondsCompletedTopic: 'DeviceSensors.SetReadIntervalInMilliSecondsViewCompleted',
+    setReadIntervalInMilliSecondsCompletedEventName: 'deviceSensorsService.onSetReadIntervalInMilliSecondsCompleted_Id_',    
+
     setPublishIntervalInMilliSecondsApiUri: 'api/deviceSensors/setPublishIntervalInMilliSeconds',
     setPublishIntervalInMilliSecondsCompletedTopic: 'DeviceSensors.SetPublishIntervalInMilliSecondsViewCompleted',
     setPublishIntervalInMilliSecondsCompletedEventName: 'deviceSensorsService.onSetPublishIntervalInMilliSecondsCompleted_Id_',    
