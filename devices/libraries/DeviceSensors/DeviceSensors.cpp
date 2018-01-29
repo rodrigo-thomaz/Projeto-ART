@@ -16,6 +16,7 @@ namespace ART
 	DeviceSensors::DeviceSensors(ESPDevice* espDevice)
 	{
 		_espDevice = espDevice;
+		_readIntervalTimestamp = 0;
 	}
 
 	DeviceSensors::~DeviceSensors()
@@ -135,6 +136,11 @@ namespace ART
 			_dallas.setResolution(deviceAddress, resolution);
 			_dallas.resetAlarmSearch();
 		}
+	}
+
+	void DeviceSensors::loop()
+	{
+
 	}
 
 	void DeviceSensors::refresh()

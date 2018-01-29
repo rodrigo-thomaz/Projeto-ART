@@ -33,6 +33,7 @@ namespace ART
 		bool								initialized();
 		void 								setSensorsByMQQTCallback(String json);
 
+		void								loop();
 		void 								refresh();
 
 		SensorInDevice						*getSensorsInDevice();		
@@ -81,6 +82,7 @@ namespace ART
 		std::vector<SensorDatasheet>		_sensorDatasheets;
 		std::vector<SensorInDevice>			_sensorsInDevice;
 
+		uint64_t							_readIntervalTimestamp;
 		int									_readIntervalInMilliSeconds;
 		int									_publishIntervalInMilliSeconds;
 
