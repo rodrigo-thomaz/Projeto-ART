@@ -54,6 +54,9 @@ namespace ART
 		autoLoad();
 
 		_deviceDebug->loop();
+		_deviceMQ->autoConnect(); //se não há conexão com o Broker, a conexão é refeita
+
+		_deviceBinary->loop();
 
 		// Give a time for ESP8266
 		yield();

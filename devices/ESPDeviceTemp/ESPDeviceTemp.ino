@@ -359,11 +359,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 
 void loop() {
 
-	espDevice.loop();
-
-	espDevice.getDeviceMQ()->autoConnect(); //se n�o h� conex�o com o Broker, a conex�o � refeita
-
-	espDevice.getDeviceBinary()->loop();
+	espDevice.loop();	
 
 	DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
 
