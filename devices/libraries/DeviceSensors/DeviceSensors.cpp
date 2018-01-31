@@ -249,6 +249,27 @@ namespace ART
 		_dallas.setResolution(sensor->getDeviceAddress(), value);		
 	}
 
+	void DeviceSensors::setOrdination(char * json)
+	{
+		Serial.print("[DeviceSensors::setOrdination] ");
+
+		StaticJsonBuffer<300> jsonBuffer;
+		JsonObject& root = jsonBuffer.parseObject(json);
+		if (!root.success()) {
+			printf("DeviceSensors", "setOrdination", "Parse failed: %s\n", json);
+			return;
+		}
+
+		root.printTo(Serial);
+
+		char* sensorId = strdup(root["sensorId"]);
+		short ordination = root["ordination"];
+
+		//SensorTrigger& sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
+
+		//sensorTrigger.setTriggerOn(triggerOn);
+	}
+
 	void DeviceSensors::setTriggerOn(char* json)
 	{
 		Serial.print("[DeviceSensors::setTriggerOn] ");
@@ -408,6 +429,11 @@ namespace ART
 			if (i < 7) result += ":";
 		}
 		return result;
+	}
+
+	bool DeviceSensors::sensorsInDeviceComparer(SensorInDevice a, SensorInDevice b)
+	{
+		return a.getOrdination() < b.getOrdination();
 	}
 
 	int DeviceSensors::getPublishIntervalInMilliSeconds()

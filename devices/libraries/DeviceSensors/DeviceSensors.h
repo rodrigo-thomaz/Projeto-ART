@@ -45,6 +45,8 @@ namespace ART
 		void 								setDatasheetUnitMeasurementScale(char* json);
 		void 								setResolution(char* json);
 
+		void 								setOrdination(char* json);
+
 		void 								setTriggerOn(char* json);
 		void 								setBuzzerOn(char* json);
 		void 								setTriggerValue(char* json);
@@ -81,6 +83,8 @@ namespace ART
 
 		std::vector<SensorDatasheet>		_sensorDatasheets;
 		std::vector<SensorInDevice>			_sensorsInDevice;
+
+		bool								sensorsInDeviceComparer(SensorInDevice a, SensorInDevice b);
 
 		uint64_t							_readIntervalTimestamp;
 		int									_readIntervalInMilliSeconds;

@@ -30,6 +30,10 @@
             CreateMap<SensorInDevice, SensorInDeviceGetResponseIoTContract>()
                 .ForMember(vm => vm.Sensor, m => m.MapFrom(x => x.Sensor))
                 .ForMember(vm => vm.Ordination, m => m.MapFrom(x => x.Ordination));
+
+            CreateMap<SensorInDevice, SetOrdinationRequestIoTContract>().ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.Ordination, m => m.MapFrom(x => x.Ordination));
         }
 
         #endregion Constructors
