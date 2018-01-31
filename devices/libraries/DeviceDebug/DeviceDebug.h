@@ -21,6 +21,10 @@ namespace ART
 
 		bool 								isActive(uint8_t debugLevel = DEBUG);
 
+		int									println();
+		int									println(const char* className, const char* caller);
+		int									println(const char* className, const char* caller, const char* message);
+
 		int									print(const char* className, const char* caller, const char* message);
 
 		template<typename... Args>

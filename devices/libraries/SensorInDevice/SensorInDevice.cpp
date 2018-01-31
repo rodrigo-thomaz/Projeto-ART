@@ -1,21 +1,26 @@
 #include "SensorInDevice.h"
 #include "DeviceSensors.h"
+#include "ESPDevice.h"
 
 namespace ART
 {
 	SensorInDevice::SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject)
 	{
-		Serial.println("[SensorInDevice constructor]");
-
 		_deviceSensors = deviceSensors;
+		_deviceDebug = _deviceSensors->getESPDevice()->getDeviceDebug();
+
+		_deviceDebug->println("SensorInDevice", "constructor", "begin");
+		
 		_ordination = jsonObject["ordination"];
 
 		Sensor::create(_sensor, this, jsonObject["sensor"]);
+
+		_deviceDebug->println("SensorInDevice", "constructor", "end");
 	}
 
 	SensorInDevice::~SensorInDevice()
 	{
-		Serial.println("[SensorInDevice destructor]");
+		_deviceDebug->println("SensorInDevice", "destructor");
 	}
 
 	SensorInDevice SensorInDevice::create(DeviceSensors * deviceSensors, JsonObject & jsonObject)

@@ -169,6 +169,11 @@ namespace ART
 		}
 	}
 
+	ESPDevice * DeviceSensors::getESPDevice()
+	{
+		return _espDevice;
+	}
+
 	SensorInDevice *DeviceSensors::getSensorsInDevice()
 	{
 		SensorInDevice* array = this->_sensorsInDevice.data();

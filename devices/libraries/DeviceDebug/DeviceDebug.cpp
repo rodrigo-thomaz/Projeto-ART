@@ -40,6 +40,21 @@ namespace ART
 		return _debug->isActive(debugLevel);
 	}
 
+	int DeviceDebug::println()
+	{
+		return _debug->println();
+	}
+
+	int DeviceDebug::println(const char * className, const char * caller)
+	{
+		return println(className, caller, "");
+	}
+
+	int DeviceDebug::println(const char * className, const char * caller, const char* message)
+	{
+		return _debug->println(createExpression(className, caller, message).c_str());
+	}
+
 	int DeviceDebug::print(const char* className, const char* caller, const char* message)
 	{
 		return _debug->printf(createExpression(className, caller, message).c_str());

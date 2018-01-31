@@ -38,6 +38,8 @@ namespace ART
 		void								loop();
 		void 								refresh();
 
+		ESPDevice *							getESPDevice();
+
 		SensorInDevice						*getSensorsInDevice();		
 
 		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);
@@ -66,7 +68,7 @@ namespace ART
 
 	private:
 
-		ESPDevice * _espDevice;
+		ESPDevice *							_espDevice;
 
 		bool								_initialized;
 		bool								_initializing;
