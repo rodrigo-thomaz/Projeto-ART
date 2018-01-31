@@ -18,6 +18,11 @@ namespace ART
 		Serial.println("[SensorInDevice destructor]");
 	}
 
+	SensorInDevice SensorInDevice::create(DeviceSensors * deviceSensors, JsonObject & jsonObject)
+	{
+		return SensorInDevice(deviceSensors, jsonObject);
+	}
+
 	Sensor * SensorInDevice::getSensor()
 	{
 		return _sensor;
@@ -36,11 +41,6 @@ namespace ART
 	void SensorInDevice::setOrdination(short value)
 	{
 		_ordination = value;
-	}
-
-	SensorInDevice SensorInDevice::create(DeviceSensors * deviceSensors, JsonObject & jsonObject)
-	{
-		return SensorInDevice(deviceSensors, jsonObject);
 	}
 
 	bool SensorInDevice::operator<(const SensorInDevice & val) const

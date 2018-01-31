@@ -28,6 +28,8 @@ namespace ART
 		DeviceSensors(ESPDevice* espDevice);
 		~DeviceSensors();
 
+		static void							create(DeviceSensors* (&deviceSensors), ESPDevice* espDevice);
+
 		void 								begin();
 
 		bool								initialized();
@@ -60,12 +62,7 @@ namespace ART
 		int									getPublishIntervalInMilliSeconds();
 		void								setPublishIntervalInMilliSeconds(char* json);
 
-		SensorDatasheet&					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);
-
-		static void create(DeviceSensors* (&deviceSensors), ESPDevice* espDevice)
-		{
-			deviceSensors = new DeviceSensors(espDevice);
-		}
+		SensorDatasheet&					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);		
 
 	private:
 

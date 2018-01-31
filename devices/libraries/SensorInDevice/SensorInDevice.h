@@ -16,15 +16,15 @@ namespace ART
 		SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject);
 		~SensorInDevice();
 
+		static SensorInDevice				create(DeviceSensors* deviceSensors, JsonObject& jsonObject);
+
 		Sensor*								getSensor();
 		DeviceSensors*						getDeviceSensors();
 
 		short								getOrdination();
-		void								setOrdination(short value);
+		void								setOrdination(short value);		
 
-		static SensorInDevice create(DeviceSensors* deviceSensors, JsonObject& jsonObject);
-
-		bool operator<(const SensorInDevice& val) const;
+		bool								operator<(const SensorInDevice& val) const;
 
 	private:
 
