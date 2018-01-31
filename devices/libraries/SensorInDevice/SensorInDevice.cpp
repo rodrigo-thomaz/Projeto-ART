@@ -38,6 +38,11 @@ namespace ART
 		_ordination = value;
 	}
 
+	SensorInDevice SensorInDevice::create(DeviceSensors * deviceSensors, JsonObject & jsonObject)
+	{
+		return SensorInDevice(deviceSensors, jsonObject);
+	}
+
 	bool SensorInDevice::operator<(const SensorInDevice & val) const
 	{
 		return _ordination < val._ordination;

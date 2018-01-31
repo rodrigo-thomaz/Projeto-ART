@@ -22,10 +22,7 @@ namespace ART
 		short								getOrdination();
 		void								setOrdination(short value);
 
-		static SensorInDevice create(DeviceSensors* deviceSensors, JsonObject& jsonObject)
-		{
-			return SensorInDevice(deviceSensors, jsonObject);
-		}
+		static SensorInDevice create(DeviceSensors* deviceSensors, JsonObject& jsonObject);
 
 		bool operator<(const SensorInDevice& val) const;
 
