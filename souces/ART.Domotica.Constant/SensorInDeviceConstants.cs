@@ -4,9 +4,9 @@
     {
         #region Fields
 
+        public static readonly string SetOrdinationIoTQueueName = "SensorInDevice.SetOrdinationIoT";
         public static readonly string SetOrdinationQueueName = "SensorInDevice.SetOrdination";
         public static readonly string SetOrdinationViewCompletedQueueName = "SensorInDevice.SetOrdinationViewCompleted";
-        public static readonly string SetOrdinationIoTQueueName = "SensorInDevice.SetOrdinationIoT";
 
         #endregion Fields
     }

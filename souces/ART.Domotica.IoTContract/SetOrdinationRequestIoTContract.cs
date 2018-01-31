@@ -6,12 +6,12 @@
     {
         #region Properties
 
-        public Guid SensorId
+        public short Ordination
         {
             get; set;
         }
 
-        public short Ordination
+        public Guid SensorId
         {
             get; set;
         }
