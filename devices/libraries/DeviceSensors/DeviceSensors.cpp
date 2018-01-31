@@ -293,12 +293,37 @@ namespace ART
 		Serial.println(orderedExceptCurrent.size());
 
 		for (short i = 0; i < orderedExceptCurrent.size(); ++i) {
+
+			Serial.print("i = ");
+			Serial.println(i);
+
 			if (i == ordination) {
-				counter++;				
+				
+				Serial.print("i == ordination");
+				Serial.println(i);
+
+				counter++;		
+
+				Serial.print("counter = ");
+				Serial.println(counter);
 			}
+			
+			Serial.print("Except setOrdination sensorId = ");
+			Serial.print(orderedExceptCurrent[i].getSensor()->getSensorId());
+			Serial.print(" Ordination = ");
+			Serial.println(counter);
+
 			orderedExceptCurrent[i].setOrdination(counter);
 			counter++;
+
+			Serial.print("counter = ");
+			Serial.println(counter);
 		}
+
+		Serial.print("Current setOrdination sensorId = ");
+		Serial.println(sensorInDevice.getSensor()->getSensorId());
+		Serial.print(" Ordination = ");
+		Serial.println(ordination);
 
 		sensorInDevice.setOrdination(ordination);
 
