@@ -65,14 +65,7 @@
                 counter++;
             }
 
-            if(ordination == orderedExceptCurrent.Count)
-            {
-                sensorInDevice.Ordination = counter;
-            }
-            else
-            {
-                sensorInDevice.Ordination = ordination;
-            }
+            sensorInDevice.Ordination = ordination;            
 
             await _sensorInDeviceRepository.Update(entities);
 

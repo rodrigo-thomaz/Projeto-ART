@@ -270,31 +270,32 @@ namespace ART
 
 		std::vector<SensorInDevice> orderedExceptCurrent;
 
+		Serial.print("_sensorsInDevice.size() = ");
+		Serial.println(_sensorsInDevice.size());
+
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
-			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) == 0) {
-				//_sensorsInDevice[i].setOrdination(ordination);
-			}
-			else {
+			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) != 0) {
+				Serial.println("diferente");
 				orderedExceptCurrent.push_back(_sensorsInDevice[i]);
 			}
 		}
 
+		std::sort(orderedExceptCurrent.begin(), orderedExceptCurrent.end());
+
 		short counter = 0;
+
+		Serial.print("orderedExceptCurrent.size() = ");
+		Serial.println(orderedExceptCurrent.size());
 
 		for (short i = 0; i < orderedExceptCurrent.size(); ++i) {
 			if (i == ordination) {
-				counter++;
-				orderedExceptCurrent[i].setOrdination(counter);
-				counter++;
+				counter++;				
 			}
+			orderedExceptCurrent[i].setOrdination(counter);
+			counter++;
 		}
 
-		if (ordination == orderedExceptCurrent.size()) {
-			sensorInDevice.setOrdination(counter);
-		}
-		else {
-			sensorInDevice.setOrdination(ordination);
-		}
+		sensorInDevice.setOrdination(ordination);
 
 		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
 	}
@@ -458,11 +459,6 @@ namespace ART
 			if (i < 7) result += ":";
 		}
 		return result;
-	}
-
-	bool DeviceSensors::sensorsInDeviceComparer(SensorInDevice a, SensorInDevice b)
-	{
-		return a.getOrdination() < b.getOrdination();
 	}
 
 	int DeviceSensors::getPublishIntervalInMilliSeconds()

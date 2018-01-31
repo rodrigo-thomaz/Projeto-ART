@@ -84,8 +84,6 @@ namespace ART
 		std::vector<SensorDatasheet>		_sensorDatasheets;
 		std::vector<SensorInDevice>			_sensorsInDevice;
 
-		bool								sensorsInDeviceComparer(SensorInDevice a, SensorInDevice b);
-
 		uint64_t							_readIntervalTimestamp;
 		int									_readIntervalInMilliSeconds;
 		int									_publishIntervalInMilliSeconds;
