@@ -36,5 +36,10 @@ namespace ART
 	void SensorInDevice::setOrdination(short value)
 	{
 		_ordination = value;
-	}	
+	}
+
+	bool SensorInDevice::operator<(const SensorInDevice & val) const
+	{
+		return _ordination < val._ordination;
+	}
 }

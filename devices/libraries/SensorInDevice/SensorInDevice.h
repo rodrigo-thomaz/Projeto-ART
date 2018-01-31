@@ -27,9 +27,7 @@ namespace ART
 			return SensorInDevice(deviceSensors, jsonObject);
 		}
 
-		bool operator<(const SensorInDevice& val) const {
-			return _ordination < val._ordination;
-		}
+		bool operator<(const SensorInDevice& val) const;
 
 	private:
 
