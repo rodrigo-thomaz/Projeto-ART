@@ -31,7 +31,7 @@
                 .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
 
             CreateMap<DeviceSensors, DeviceSensorsGetResponseIoTContract>()
-                .ForMember(vm => vm.SensorsInDevice, m => m.MapFrom(x => x.SensorInDevice))
+                .ForMember(vm => vm.SensorsInDevice, m => m.MapFrom(x => x.SensorInDevice.OrderBy(y => y.Ordination)))
                 .ForMember(vm => vm.ReadIntervalInMilliSeconds, m => m.MapFrom(x => x.ReadIntervalInMilliSeconds))
                 .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds))
                 .ForMember(vm => vm.SensorDatasheets, m => m.MapFrom(x => x.SensorInDevice.Select(y => y.Sensor.SensorDatasheet).Distinct()));
