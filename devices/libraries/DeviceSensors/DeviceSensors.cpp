@@ -1,6 +1,7 @@
 #include "DeviceSensors.h"
 #include "ESPDevice.h"
 #include "PositionEnum.h"
+#include <algorithm>    // std::sort
 
 // Data wire is plugged into port 0
 #define ONE_WIRE_BUS 0
@@ -265,9 +266,37 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		short ordination = root["ordination"];
 
-		//SensorTrigger& sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
+		SensorInDevice& sensorInDevice = getSensorInDeviceBySensorId(sensorId);
 
-		//sensorTrigger.setTriggerOn(triggerOn);
+		std::vector<SensorInDevice> orderedExceptCurrent;
+
+		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
+			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) == 0) {
+				//_sensorsInDevice[i].setOrdination(ordination);
+			}
+			else {
+				orderedExceptCurrent.push_back(_sensorsInDevice[i]);
+			}
+		}
+
+		short counter = 0;
+
+		for (short i = 0; i < orderedExceptCurrent.size(); ++i) {
+			if (i == ordination) {
+				counter++;
+				orderedExceptCurrent[i].setOrdination(counter);
+				counter++;
+			}
+		}
+
+		if (ordination == orderedExceptCurrent.size()) {
+			sensorInDevice.setOrdination(counter);
+		}
+		else {
+			sensorInDevice.setOrdination(ordination);
+		}
+
+		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
 	}
 
 	void DeviceSensors::setTriggerOn(char* json)

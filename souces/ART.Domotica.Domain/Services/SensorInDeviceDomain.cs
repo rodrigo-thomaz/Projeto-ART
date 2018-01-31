@@ -46,7 +46,7 @@
             if (sensorInDevice == null)
             {
                 throw new Exception("SensorInDevice not found");
-            }
+            }            
 
             var orderedExceptCurrent = entities
                 .Except(new List<SensorInDevice> { sensorInDevice })
@@ -59,20 +59,19 @@
             {
                 if (i == ordination)
                 {
-                    sensorInDevice.Ordination = counter;
                     counter++;
-                    orderedExceptCurrent[i].Ordination = counter;
                 }
-                else
-                {
-                    orderedExceptCurrent[i].Ordination = counter;
-                }
+                orderedExceptCurrent[i].Ordination = counter;
                 counter++;
             }
 
             if(ordination == orderedExceptCurrent.Count)
             {
                 sensorInDevice.Ordination = counter;
+            }
+            else
+            {
+                sensorInDevice.Ordination = ordination;
             }
 
             await _sensorInDeviceRepository.Update(entities);
