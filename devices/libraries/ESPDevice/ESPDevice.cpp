@@ -207,18 +207,7 @@ namespace ART
 			if (httpCode == HTTP_CODE_OK) {
 
 				Serial.println("[HTTP_CODE_OK] !!! ");
-
-				char* payload = strdup(http.getString().c_str());
-
-				load(payload);
-
-				if (_deviceDebug->isActive(DeviceDebug::DEBUG)) {
-
-					_deviceDebug->print("ESPDevice", "autoLoad", "Initialized with success !\n");					
-
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationId: %s\n", getDeviceInApplication()->getApplicationId());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationTopic: %s\n", getDeviceInApplication()->getApplicationTopic());
-				}
+				load(http.getString());
 			}
 		}
 		else {
@@ -230,8 +219,10 @@ namespace ART
 
 	}
 
-	void ESPDevice::load(char* json)
+	void ESPDevice::load(String json)
 	{
+		// TODO: O DeviceDebug começa a funcionar aqui
+
 		_deviceDebug->print("ESPDevice", "load", "begin\n");
 
 		DynamicJsonBuffer jsonBuffer;

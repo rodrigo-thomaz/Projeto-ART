@@ -287,7 +287,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 	}
 	if (topicKey == String(TOPIC_SUB_ESPDEVICE_INSERT_IN_APPLICATION)) {
 		unSubscribeNotInApplication();
-		espDevice.getDeviceInApplication()->insertInApplication(json);
+		espDevice.getDeviceInApplication()->insertInApplication(strdup(json.c_str()));
 		subscribeInApplication();
 	}
 	if (topicKey == String(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION)) {

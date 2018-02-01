@@ -76,7 +76,7 @@ namespace ART
 		DeviceSensors*				_deviceSensors;
 
 		void						autoLoad();
-		void						load(char* json);
+		void						load(String json);
 		bool 						_loaded = false;
 	};
 }

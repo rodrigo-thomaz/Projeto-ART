@@ -15,6 +15,11 @@ namespace ART
 		delete (_applicationTopic);
 	}
 
+	void DeviceInApplication::create(DeviceInApplication *(&deviceInApplication), ESPDevice * espDevice)
+	{
+		deviceInApplication = new DeviceInApplication(espDevice);
+	}
+
 	void DeviceInApplication::load(JsonObject & jsonObject)
 	{
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
@@ -28,6 +33,14 @@ namespace ART
 		char* applicationTopic = strdup(jsonObject["applicationTopic"]);
 		_applicationTopic = new char(sizeof(strlen(applicationTopic)));
 		_applicationTopic = applicationTopic;
+
+		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
+
+			deviceDebug->printf("DeviceInApplication", "load", "applicationId: %s\n", _applicationId);
+			deviceDebug->printf("DeviceInApplication", "load", "applicationTopic: %s\n", _applicationTopic);
+
+			deviceDebug->print("DeviceInApplication", "load", "end\n");
+		}
 	}
 
 	char* DeviceInApplication::getApplicationId() const
@@ -52,10 +65,9 @@ namespace ART
 		_applicationTopic = value;
 	}
 
-	void DeviceInApplication::insertInApplication(String json)
+	void DeviceInApplication::insertInApplication(char* json)
 	{
 		StaticJsonBuffer<300> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {
