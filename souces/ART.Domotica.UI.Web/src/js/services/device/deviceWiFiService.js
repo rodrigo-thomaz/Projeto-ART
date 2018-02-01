@@ -35,7 +35,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
             setHostNameCompletedSubscription = stompService.subscribeAllViews(deviceWiFiConstant.setHostNameCompletedTopic, onSetHostNameCompleted);
             setPublishIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedTopic, onSetPublishIntervalInMilliSecondsCompleted);
 
-            stompService.client.subscribe(deviceWiFiConstant.topicMessageIoT, onMessageIoTReceived);
+            stompService.client.subscribe(deviceWiFiConstant.messageIoTTopic, onMessageIoTReceived);
         }
 
         var onMessageIoTReceived = function (payload) {
@@ -46,7 +46,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
             deviceWiFi.wifiQuality = data.wifiQuality;
             deviceWiFi.localIPAddress = data.localIPAddress;
             deviceContext.$digest();
-            $rootScope.$emit('deviceWiFiService_onMessageIoTReceived');
+            $rootScope.$emit(deviceWiFiConstant.messageIoTEventName + data.deviceId, data);
         }
 
         var onSetHostNameCompleted = function (payload) {
