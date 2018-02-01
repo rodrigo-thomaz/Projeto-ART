@@ -3,19 +3,9 @@
 
 namespace ART
 {
-	DeviceInApplication::DeviceInApplication(ESPDevice* espDevice, char* applicationId, char* applicationTopic)
+	DeviceInApplication::DeviceInApplication(ESPDevice* espDevice)
 	{
-		_espDevice = espDevice;
-
-		if (applicationId != "null") {
-			_applicationId = new char(sizeof(strlen(applicationId)));
-			_applicationId = applicationId;
-		}
-
-		if (applicationTopic != "null") {
-			_applicationTopic = new char(sizeof(strlen(applicationTopic)));
-			_applicationTopic = applicationTopic;
-		}
+		_espDevice = espDevice;		
 	}
 
 	DeviceInApplication::~DeviceInApplication()
@@ -23,6 +13,21 @@ namespace ART
 		delete (_espDevice);
 		delete (_applicationId);
 		delete (_applicationTopic);
+	}
+
+	void DeviceInApplication::load(JsonObject & jsonObject)
+	{
+		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
+
+		deviceDebug->print("DeviceInApplication", "load", "begin\n");
+
+		char* applicationId = strdup(jsonObject["applicationId"]);
+		_applicationId = new char(sizeof(strlen(applicationId)));
+		_applicationId = applicationId;
+
+		char* applicationTopic = strdup(jsonObject["applicationTopic"]);
+		_applicationTopic = new char(sizeof(strlen(applicationTopic)));
+		_applicationTopic = applicationTopic;
 	}
 
 	char* DeviceInApplication::getApplicationId() const

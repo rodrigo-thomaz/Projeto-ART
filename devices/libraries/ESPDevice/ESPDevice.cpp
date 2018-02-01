@@ -23,6 +23,7 @@ namespace ART
 		DeviceBinary::create(_deviceBinary, this);
 		DeviceBuzzer::create(_deviceBuzzer, this);
 		DeviceSensors::create(_deviceSensors, this);
+		DeviceInApplication::create(_deviceInApplication, this);
 	}
 
 	ESPDevice::~ESPDevice()
@@ -246,11 +247,11 @@ namespace ART
 		_deviceNTP->load(jsonObject["deviceNTP"]);
 		_deviceMQ->load(jsonObject["deviceMQ"]);
 
-		Serial.println("Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		JsonObject& insertInApplicationJO = jsonObject["deviceInApplication"];
 
-		DeviceInApplication::create(_deviceInApplication, this, jsonObject["deviceInApplication"]);
-
-		Serial.println("Aqui 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		if (insertInApplicationJO.success()) {
+			_deviceInApplication->load(insertInApplicationJO);
+		}		
 
 		_loaded = true;
 

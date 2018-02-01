@@ -13,8 +13,10 @@ namespace ART
 
 	public:
 
-		DeviceInApplication(ESPDevice* espDevice, char* applicationId, char* applicationTopic);
+		DeviceInApplication(ESPDevice* espDevice);
 		~DeviceInApplication();
+
+		void								load(JsonObject& jsonObject);
 
 		void								insertInApplication(String json);
 		void								deleteFromApplication();
@@ -25,12 +27,9 @@ namespace ART
 		char*								getApplicationTopic()  const;
 		void								setApplicationTopic(char* value);
 
-		static void create(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice, JsonObject& jsonObject)
+		static void create(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice)
 		{
-			deviceInApplication = new DeviceInApplication(
-				espDevice,
-				strdup(jsonObject["applicationId"]),
-				strdup(jsonObject["applicationTopic"]));
+			deviceInApplication = new DeviceInApplication(espDevice);
 		}
 
 	private:
