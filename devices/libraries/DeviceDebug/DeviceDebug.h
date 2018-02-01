@@ -28,8 +28,14 @@ namespace ART
 		int									print(const char* className, const char* caller, const char* message);
 
 		template<typename... Args>
-		int									printf(const char* className, const char* caller, const char* format, Args... args);
+		int									printf(const char* className, const char* caller, const char* format, Args... args);	
 
+		int									printlnLevel(uint8_t debugLevel);
+		int									printlnLevel(uint8_t debugLevel, const char* className, const char* caller);
+		int									printlnLevel(uint8_t debugLevel, const char* className, const char* caller, const char* message);
+
+		int									printLevel(uint8_t debugLevel, const char* className, const char* caller, const char* message);		
+				
 		void								load(JsonObject& jsonObject);
 
 		void								setRemoteEnabled(char* json);

@@ -58,12 +58,32 @@ namespace ART
 	int DeviceDebug::print(const char* className, const char* caller, const char* message)
 	{
 		return _debug->printf(createExpression(className, caller, message).c_str());
-	}
+	}	
 
 	template<typename... Args>
 	int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
 	{
 		return _debug->printf(createExpression(className, caller, format).c_str(), args...);
+	}
+
+	int DeviceDebug::printlnLevel(uint8_t debugLevel)
+	{
+		return _debug->isActive(debugLevel) ? println() : 0;
+	}
+
+	int DeviceDebug::printlnLevel(uint8_t debugLevel, const char * className, const char * caller)
+	{
+		return _debug->isActive(debugLevel) ? println(className, caller) : 0;
+	}
+
+	int DeviceDebug::printlnLevel(uint8_t debugLevel, const char * className, const char * caller, const char* message)
+	{
+		return _debug->isActive(debugLevel) ? println(className, caller, message) : 0;
+	}
+
+	int DeviceDebug::printLevel(uint8_t debugLevel, const char* className, const char* caller, const char* message)
+	{
+		return _debug->isActive(debugLevel) ? print(className, caller, message) : 0;
 	}
 
 	std::string DeviceDebug::createExpression(const char* className, const char* caller, const char* expression)
