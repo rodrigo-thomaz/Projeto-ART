@@ -287,8 +287,6 @@ namespace ART
 			}
 		}
 
-		std::sort(orderedExceptCurrent.begin(), orderedExceptCurrent.end());
-
 		short counter = 0;
 
 		for (short i = 0; i < orderedExceptCurrent.size(); ++i) {			
