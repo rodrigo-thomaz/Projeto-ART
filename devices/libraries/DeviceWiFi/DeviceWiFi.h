@@ -85,8 +85,12 @@ namespace ART
 
 		char *						getStationMacAddress();
 		char *						getSoftAPMacAddress();
+
 		char *						getHostName();
 		void						setHostName(char* json);
+
+		int							getPublishIntervalInMilliSeconds();
+		void						setPublishIntervalInMilliSeconds(char* json);
 
 		static void create(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice)
 		{
@@ -153,6 +157,7 @@ namespace ART
 		char *								_stationMacAddress;
 		char *								_softAPMacAddress;
 		char *								_hostName;
+		int									_publishIntervalInMilliSeconds;
 
 		std::unique_ptr<DNSServer>        	dnsServer;
 		std::unique_ptr<ESP8266WebServer> 	server;

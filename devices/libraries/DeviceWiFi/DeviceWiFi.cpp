@@ -91,6 +91,8 @@ namespace ART
 		_hostName = new char(sizeof(strlen(hostName)));
 		_hostName = hostName;
 
+		_publishIntervalInMilliSeconds = jsonObject["publishIntervalInMilliSeconds"];
+
 		printf("DeviceWiFi", "load", "HostName: %s\n", _hostName);
 	}
 
@@ -120,6 +122,22 @@ namespace ART
 		char* value = strdup(root["value"]);
 		_hostName = new char(sizeof(strlen(value)));
 		_hostName = value;
+	}
+
+	int DeviceWiFi::getPublishIntervalInMilliSeconds()
+	{
+		return _publishIntervalInMilliSeconds;
+	}
+
+	void DeviceWiFi::setPublishIntervalInMilliSeconds(char* json)
+	{
+		StaticJsonBuffer<200> jsonBuffer;
+		JsonObject& root = jsonBuffer.parseObject(json);
+		if (!root.success()) {
+			printf("DeviceWiFi", "setPublishIntervalInMilliSeconds", "Parse failed: %s\n", json);
+			return;
+		}
+		_publishIntervalInMilliSeconds = root["value"].as<int>();
 	}
 
 	void DeviceWiFi::addParameter(DeviceWiFiParameter *p) {

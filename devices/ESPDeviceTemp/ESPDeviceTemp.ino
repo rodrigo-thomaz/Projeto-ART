@@ -49,6 +49,7 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND "DeviceNTP/SetUpdateIntervalInMilliSecondIoT"
 
 #define TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME "DeviceWiFi/SetHostNameIoT"
+#define TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceWiFi/SetPublishIntervalInMilliSecondsIoT"
 
 #define TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED "DeviceDebug/SetRemoteEnabledIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED "DeviceDebug/SetResetCmdEnabledIoT"
@@ -185,6 +186,7 @@ void subscribeInApplication()
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME);
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
@@ -226,7 +228,8 @@ void unSubscribeInApplication()
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
 
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME);
-
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
+  
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
@@ -303,6 +306,9 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 	if (topicKey == String(TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME)) {
 		espDevice.getDeviceWiFi()->setHostName(strdup(json.c_str()));
 	}
+  if (topicKey == String(TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS)) {
+   espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(strdup(json.c_str()));
+  }
 
 	if (topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED)) {
 		espDevice.getDeviceDebug()->setRemoteEnabled(strdup(json.c_str()));
