@@ -276,24 +276,29 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		short ordination = root["ordination"];
 
-		std::vector<SensorInDevice> orderedExceptCurrent;
+		short orderedExceptCurrentSize = _sensorsInDevice.size() - 1;
+
+		SensorInDevice** orderedExceptCurrent = new SensorInDevice*[orderedExceptCurrentSize];
+
+		short index = 0;
 
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
 			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) == 0) {
 				_sensorsInDevice[i].setOrdination(ordination);
 			}
 			else {
-				orderedExceptCurrent.push_back(_sensorsInDevice[i]);
+				orderedExceptCurrent[index] = &_sensorsInDevice[i];
+				index++;
 			}
 		}
 
 		short counter = 0;
 
-		for (short i = 0; i < orderedExceptCurrent.size(); ++i) {			
+		for (short i = 0; i < orderedExceptCurrentSize; ++i) {
 			if (i == ordination) {				
 				counter++;		
 			}
-			getSensorInDeviceBySensorId(orderedExceptCurrent[i].getSensor()->getSensorId()).setOrdination(counter);
+			orderedExceptCurrent[i]->setOrdination(counter);
 			counter++;
 		}		
 
