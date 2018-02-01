@@ -28,6 +28,7 @@ namespace ART
 	ESPDevice::~ESPDevice()
 	{
 		delete (_deviceId);
+		delete (_deviceDatasheetId);
 		delete (_label);
 
 		delete (_deviceInApplication);
@@ -67,7 +68,7 @@ namespace ART
 		return (_deviceId);
 	}
 
-	short ESPDevice::getDeviceDatasheetId()
+	char* ESPDevice::getDeviceDatasheetId() const
 	{
 		return _deviceDatasheetId;
 	}
@@ -204,32 +205,15 @@ namespace ART
 			// file found at server
 			if (httpCode == HTTP_CODE_OK) {
 
-				String payload = http.getString();
+				Serial.println("[HTTP_CODE_OK] !!! ");
+
+				char* payload = strdup(http.getString().c_str());
 
 				load(payload);
 
 				if (_deviceDebug->isActive(DeviceDebug::DEBUG)) {
 
-					_deviceDebug->print("ESPDevice", "autoLoad", "Initialized with success !\n");
-
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceId: %s\n", _deviceId);
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceDatasheetId: %d\n", (char*)_deviceDatasheetId);
-
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceWiFi HostName: %s\n", getDeviceWiFi()->getHostName());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceWiFi StationMacAddress: %s\n", getDeviceWiFi()->getStationMacAddress());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceWiFi SoftAPMacAddress: %s\n", getDeviceWiFi()->getSoftAPMacAddress());
-
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Host: %s\n", getDeviceMQ()->getHost());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Port: %d\n", (char*)getDeviceMQ()->getPort());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ User: %s\n", getDeviceMQ()->getUser());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Password: %s\n", getDeviceMQ()->getPassword());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ ClientId: %s\n", getDeviceMQ()->getClientId());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceMQ Device Topic: %s\n", getDeviceMQ()->getDeviceTopic());
-
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP Host: %s\n", getDeviceNTP()->getHost());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP Port: %d\n", (char*)getDeviceNTP()->getPort());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP UtcTimeOffsetInSecond: %d\n", (char*)getDeviceNTP()->getUtcTimeOffsetInSecond());
-					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceNTP UpdateIntervalInMilliSecond: %d\n", (char*)getDeviceNTP()->getUpdateIntervalInMilliSecond());
+					_deviceDebug->print("ESPDevice", "autoLoad", "Initialized with success !\n");					
 
 					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationId: %s\n", getDeviceInApplication()->getApplicationId());
 					_deviceDebug->printf("ESPDevice", "autoLoad", "DeviceInApplication ApplicationTopic: %s\n", getDeviceInApplication()->getApplicationTopic());
@@ -245,13 +229,15 @@ namespace ART
 
 	}
 
-	void ESPDevice::load(String json)
+	void ESPDevice::load(char* json)
 	{
-		DynamicJsonBuffer 				  jsonBuffer;
+		_deviceDebug->print("ESPDevice", "load", "begin\n");
+
+		DynamicJsonBuffer jsonBuffer;
 		JsonObject& jsonObject = jsonBuffer.parseObject(json);
 
 		_deviceId = strdup(jsonObject["deviceId"]);
-		_deviceDatasheetId = jsonObject["deviceDatasheetId"];
+		_deviceDatasheetId = strdup(jsonObject["deviceDatasheetId"]);
 
 		_label = strdup(jsonObject["label"]);
 
@@ -260,8 +246,21 @@ namespace ART
 		_deviceNTP->load(jsonObject["deviceNTP"]);
 		_deviceMQ->load(jsonObject["deviceMQ"]);
 
+		Serial.println("Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 		DeviceInApplication::create(_deviceInApplication, this, jsonObject["deviceInApplication"]);
 
+		Serial.println("Aqui 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 		_loaded = true;
+
+		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) {
+
+			_deviceDebug->printf("ESPDevice", "load", "deviceId: %s\n", _deviceId);
+			_deviceDebug->printf("ESPDevice", "load", "deviceDatasheetId: %s\n", _deviceDatasheetId);
+			_deviceDebug->printf("ESPDevice", "load", "label: %s\n", _label);
+
+			_deviceDebug->print("ESPDevice", "load", "end\n");
+		}
 	}
 }

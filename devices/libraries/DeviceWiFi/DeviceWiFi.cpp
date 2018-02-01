@@ -79,6 +79,8 @@ namespace ART
 
 	DeviceWiFi::~DeviceWiFi()
 	{
+		_espDevice->getDeviceDebug()->printlnLevel(DeviceDebug::DEBUG, "DeviceWiFi", "destructor");
+
 		delete (_espDevice);
 		delete (_stationMacAddress);
 		delete (_softAPMacAddress);
@@ -87,13 +89,25 @@ namespace ART
 
 	void DeviceWiFi::load(JsonObject& jsonObject)
 	{
+		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
+
+		deviceDebug->print("DeviceWiFi", "load", "begin\n");
+
 		char* hostName = strdup(jsonObject["hostName"]);
 		_hostName = new char(sizeof(strlen(hostName)));
 		_hostName = hostName;
 
 		_publishIntervalInMilliSeconds = jsonObject["publishIntervalInMilliSeconds"];
 
-		printf("DeviceWiFi", "load", "HostName: %s\n", _hostName);
+		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
+
+			deviceDebug->printf("DeviceWiFi", "load", "hostName: %s\n", _hostName);
+			deviceDebug->printf("DeviceWiFi", "load", "stationMacAddress: %s\n", _stationMacAddress);
+			deviceDebug->printf("DeviceWiFi", "load", "softAPMacAddress: %s\n", _softAPMacAddress);
+			deviceDebug->printf("DeviceWiFi", "load", "publishIntervalInMilliSeconds: %d\n", (char*)_publishIntervalInMilliSeconds);
+
+			deviceDebug->print("DeviceWiFi", "load", "end\n");
+		}		
 	}
 
 	char* DeviceWiFi::getStationMacAddress()

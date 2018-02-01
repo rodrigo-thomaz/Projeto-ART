@@ -28,6 +28,10 @@ namespace ART
 
 	void DeviceMQ::load(JsonObject& jsonObject)
 	{
+		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
+
+		deviceDebug->print("DeviceMQ", "load", "begin\n");
+
 		char* host = strdup(jsonObject["host"]);
 		_host = new char(sizeof(strlen(host)));
 		_host = host;
@@ -49,6 +53,16 @@ namespace ART
 		char* deviceTopic = strdup(jsonObject["deviceTopic"]);
 		_deviceTopic = new char(sizeof(strlen(deviceTopic)));
 		_deviceTopic = deviceTopic;
+
+		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
+
+			deviceDebug->printf("DeviceMQ", "load", "user: %s\n", _user);
+			deviceDebug->printf("DeviceMQ", "load", "password: %s\n", _password);
+			deviceDebug->printf("DeviceMQ", "load", "clientId: %s\n", _clientId);
+			deviceDebug->printf("DeviceMQ", "load", "deviceTopic: %s\n", _deviceTopic);
+
+			deviceDebug->print("DeviceMQ", "load", "end\n");
+		}
 	}
 
 	char* DeviceMQ::getHost()

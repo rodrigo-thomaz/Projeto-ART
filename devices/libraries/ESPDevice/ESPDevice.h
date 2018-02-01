@@ -29,7 +29,7 @@ namespace ART
 		bool						loaded();
 
 		char *						getDeviceId() const;
-		short						getDeviceDatasheetId();
+		char *						getDeviceDatasheetId() const;
 
 		int							getChipId();
 		int							getFlashChipId();
@@ -54,7 +54,7 @@ namespace ART
 	private:
 
 		char *						_deviceId;
-		short						_deviceDatasheetId;
+		char *						_deviceDatasheetId;
 
 		int							_chipId;
 		int							_flashChipId;
@@ -76,7 +76,7 @@ namespace ART
 		DeviceSensors*				_deviceSensors;
 
 		void						autoLoad();
-		void						load(String json);
+		void						load(char* json);
 		bool 						_loaded = false;
 	};
 }

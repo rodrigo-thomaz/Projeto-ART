@@ -55,7 +55,7 @@ namespace ART
 		Serial.println("[DeviceSensors::initialized] initializing...]");
 
 		char* deviceId = this->_espDevice->getDeviceId();
-		short deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();
+		char* deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();
 		char* applicationId = this->_espDevice->getDeviceInApplication()->getApplicationId();
 
 		StaticJsonBuffer<DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;

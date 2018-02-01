@@ -17,6 +17,10 @@ namespace ART
 
 	void DeviceNTP::load(JsonObject& jsonObject)
 	{
+		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
+
+		deviceDebug->print("DeviceNTP", "load", "begin\n");
+
 		char* host = strdup(jsonObject["host"]);
 		_host = new char(sizeof(strlen(host)));
 		_host = host;
@@ -25,6 +29,16 @@ namespace ART
 
 		_utcTimeOffsetInSecond = jsonObject["utcTimeOffsetInSecond"];
 		_updateIntervalInMilliSecond = jsonObject["updateIntervalInMilliSecond"];
+
+		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
+
+			deviceDebug->printf("DeviceNTP", "load", "host: %s\n", _host);
+			deviceDebug->printf("DeviceNTP", "load", "port: %d\n", (char*)_port);
+			deviceDebug->printf("DeviceNTP", "load", "utcTimeOffsetInSecond: %d\n", (char*)_utcTimeOffsetInSecond);
+			deviceDebug->printf("DeviceNTP", "load", "updateIntervalInMilliSecond: %d\n", (char*)_updateIntervalInMilliSecond);
+
+			deviceDebug->print("DeviceNTP", "load", "end\n");
+		}
 	}
 
 	bool DeviceNTP::begin() {
