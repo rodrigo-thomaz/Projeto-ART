@@ -405,6 +405,7 @@ void loopInApplication()
 	uint64_t now = millis();
 
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
+  DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
   
 	if (deviceSensors->initialized()) {
 		if (now - deviceSensorsReadTempTimestamp > deviceSensors->getReadIntervalInMilliSeconds()) {
@@ -418,8 +419,15 @@ void loopInApplication()
 	}
 
 	// MQTT
+
+  if(espDevice.getDeviceMQ()->getMQQT()->connected()){
+    loopMQQTConnected();
+  }
+ 
 	PubSubClient* mqqt = espDevice.getDeviceMQ()->getMQQT();
 
+  bool mqqtPrintSent = false;
+  
 	if (mqqt->connected() && deviceSensors->initialized()) {
 
 		displayMQTTManager.printConnected();
@@ -461,5 +469,41 @@ void loopInApplication()
 	// Wifi
 	displayWiFiManager.printSignal();
 
+ if (mqqt->connected()) {   
+
+    int deviceWiFiPublishIntervalInMilliSeconds = deviceWiFi->getPublishIntervalInMilliSeconds();
+
+    if (now - deviceWiFiPublishMessageTimestamp > deviceWiFiPublishIntervalInMilliSeconds) {
+      deviceWiFiPublishMessageTimestamp = now;
+      displayMQTTManager.printSent(true);
+
+      StaticJsonBuffer<2048> jsonBuffer;
+      JsonObject& root = jsonBuffer.createObject();
+
+      root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
+      root["wifiQuality"] = espDevice.getDeviceWiFi()->getQuality();
+      root["epochTimeUtc"] = espDevice.getDeviceNTP()->getEpochTimeUTC();
+      root["localIPAddress"] = espDevice.getDeviceWiFi()->getLocalIPAddress();
+
+      int messageJsonLen = root.measureLength();
+      char messageJson[messageJsonLen + 1];
+      root.printTo(messageJson, sizeof(messageJson));
+
+      Serial.print("DeviceWiFi enviando para o servidor (Char Len)=> ");
+      Serial.println(messageJsonLen);
+
+      mqqt->publish(TOPIC_PUB_TEMP, messageJson);
+    }
+    else {
+      displayMQTTManager.printSent(false);
+    }
+  }
+  
 	displayManager.display.display();
 }
+
+void loopMQQTConnected()
+{
+
+}
+
