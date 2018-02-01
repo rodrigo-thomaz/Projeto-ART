@@ -280,9 +280,6 @@ namespace ART
 
 		std::vector<SensorInDevice> orderedExceptCurrent;
 
-		Serial.print("_sensorsInDevice.size() = ");
-		Serial.println(_sensorsInDevice.size());
-
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
 			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) != 0) {
 				Serial.println("diferente");
@@ -294,57 +291,26 @@ namespace ART
 
 		short counter = 0;
 
-		Serial.print("orderedExceptCurrent.size() = ");
-		Serial.println(orderedExceptCurrent.size());
-
-		for (short i = 0; i < orderedExceptCurrent.size(); ++i) {
-
-			Serial.print("i = ");
-			Serial.println(i);
-
-			if (i == ordination) {
-				
-				Serial.print("i == ordination");
-				Serial.println(i);
-
+		for (short i = 0; i < orderedExceptCurrent.size(); ++i) {			
+			if (i == ordination) {				
 				counter++;		
-
-				Serial.print("counter = ");
-				Serial.println(counter);
 			}
-			
-			Serial.print("Except setOrdination sensorId = ");
-			Serial.print(orderedExceptCurrent[i].getSensor()->getSensorId());
-			Serial.print(" Ordination = ");
-			Serial.println(counter);
-
 			getSensorInDeviceBySensorId(orderedExceptCurrent[i].getSensor()->getSensorId()).setOrdination(counter);
-			//orderedExceptCurrent[i].setOrdination(counter);
 			counter++;
-
-			Serial.print("counter = ");
-			Serial.println(counter);
 		}
-
-		Serial.print("Current setOrdination sensorId = ");
-		Serial.println(sensorInDevice.getSensor()->getSensorId());
-		Serial.print(" Ordination = ");
-		Serial.println(ordination);
 
 		sensorInDevice.setOrdination(ordination);
 
+		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
+
+		//Temp
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
-
 		Serial.println("Agora !!!!!!!!!!!!!!!!!!!!!!");
-
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
 			deviceDebug->printf("DeviceSensors", "setOrdination", "label     : %s\n", _sensorsInDevice[i].getSensor()->getLabel());
 			deviceDebug->printf("DeviceSensors", "setOrdination", "ordination: %d\n", (char*)_sensorsInDevice[i].getOrdination());
-
 			yield();
-		}
-
-		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
+		}		
 	}
 
 	void DeviceSensors::setTriggerOn(char* json)

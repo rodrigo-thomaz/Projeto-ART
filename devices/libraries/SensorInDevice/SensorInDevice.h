@@ -4,7 +4,6 @@
 #include "ArduinoJson.h"
 #include "Sensor.h"
 #include "SensorDatasheet.h"
-#include "DeviceDebug.h"
 
 namespace ART
 {
@@ -33,8 +32,6 @@ namespace ART
 		Sensor *							_sensor;		
 
 		short 								_ordination;
-
-		DeviceDebug *						_deviceDebug;
 	};
 }
 
