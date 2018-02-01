@@ -456,9 +456,7 @@ void loopMQQTConnected(uint64_t now)
       JsonObject& root = jsonBuffer.createObject();
 
       root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
-      root["wifiQuality"] = espDevice.getDeviceWiFi()->getQuality();
       root["epochTimeUtc"] = espDevice.getDeviceNTP()->getEpochTimeUTC();
-      root["localIPAddress"] = espDevice.getDeviceWiFi()->getLocalIPAddress();
 
       espDevice.getDeviceSensors()->createSensorsJsonNestedArray(root);
 
@@ -488,7 +486,6 @@ void loopMQQTConnected(uint64_t now)
       StaticJsonBuffer<2048> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
 
-      root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
       root["deviceId"] = espDevice.getDeviceId();
       root["deviceDatasheetId"] = espDevice.getDeviceDatasheetId();
       root["wifiQuality"] = espDevice.getDeviceWiFi()->getQuality();
