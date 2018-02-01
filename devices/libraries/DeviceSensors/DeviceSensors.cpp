@@ -276,13 +276,13 @@ namespace ART
 		char* sensorId = strdup(root["sensorId"]);
 		short ordination = root["ordination"];
 
-		SensorInDevice& sensorInDevice = getSensorInDeviceBySensorId(sensorId);
-
 		std::vector<SensorInDevice> orderedExceptCurrent;
 
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
-			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) != 0) {
-				Serial.println("diferente");
+			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) == 0) {
+				_sensorsInDevice[i].setOrdination(ordination);
+			}
+			else {
 				orderedExceptCurrent.push_back(_sensorsInDevice[i]);
 			}
 		}
@@ -299,18 +299,7 @@ namespace ART
 			counter++;
 		}
 
-		sensorInDevice.setOrdination(ordination);
-
 		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
-
-		//Temp
-		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
-		Serial.println("Agora !!!!!!!!!!!!!!!!!!!!!!");
-		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
-			deviceDebug->printf("DeviceSensors", "setOrdination", "label     : %s\n", _sensorsInDevice[i].getSensor()->getLabel());
-			deviceDebug->printf("DeviceSensors", "setOrdination", "ordination: %d\n", (char*)_sensorsInDevice[i].getOrdination());
-			yield();
-		}		
 	}
 
 	void DeviceSensors::setTriggerOn(char* json)

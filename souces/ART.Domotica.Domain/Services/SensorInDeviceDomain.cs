@@ -46,7 +46,7 @@
             if (sensorInDevice == null)
             {
                 throw new Exception("SensorInDevice not found");
-            }            
+            }
 
             var orderedExceptCurrent = entities
                 .Except(new List<SensorInDevice> { sensorInDevice })
