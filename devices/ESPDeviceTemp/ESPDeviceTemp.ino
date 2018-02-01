@@ -447,8 +447,10 @@ void loopMQQTConnected(uint64_t now)
     int deviceSensorsPublishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
 
     if (now - deviceSensorsPublishMessageTimestamp > deviceSensorsPublishIntervalInMilliSeconds) {
+      
       deviceSensorsPublishMessageTimestamp = now;
-      displayMQTTManager.printSent(true);
+      
+      mqqtPrintSent = true;
 
       StaticJsonBuffer<2048> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
@@ -469,9 +471,6 @@ void loopMQQTConnected(uint64_t now)
 
       mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);
     }
-    else {
-      displayMQTTManager.printSent(false);
-    }
 
     // Sensor
     displayTemperatureSensorManager.printSensors();
@@ -481,8 +480,10 @@ void loopMQQTConnected(uint64_t now)
     int deviceWiFiPublishIntervalInMilliSeconds = deviceWiFi->getPublishIntervalInMilliSeconds();
 
     if (now - deviceWiFiPublishMessageTimestamp > deviceWiFiPublishIntervalInMilliSeconds) {
+      
       deviceWiFiPublishMessageTimestamp = now;
-      displayMQTTManager.printSent(true);
+      
+      mqqtPrintSent = true;
 
       StaticJsonBuffer<2048> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
@@ -503,9 +504,8 @@ void loopMQQTConnected(uint64_t now)
 
       mqqt->publish(TOPIC_PUB_DEVICE_WIFI_MESSAGE, messageJson);
     }
-    else {
-      displayMQTTManager.printSent(false);
-    }
+
+    displayMQTTManager.printSent(mqqtPrintSent);
   }
   
 }
