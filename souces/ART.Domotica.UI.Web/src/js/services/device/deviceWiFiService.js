@@ -41,16 +41,10 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
         var onMessageIoTReceived = function (payload) {
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
-            //for (var i = 0; i < deviceContext.device.length; i++) {
-            //    var device = deviceContext.device[i];
-            //    if (device.deviceId === data.deviceId) {
-            //        device.epochTimeUtc = data.epochTimeUtc;
-            //        device.wifiQuality = data.wifiQuality;
-            //        device.localIPAddress = data.localIPAddress;
-                    //updateSensors(device, data.sensorTempDSFamilies);
-            //        break;
-            //    }
-            //}
+            var deviceWiFi = deviceWiFiFinder.getByKey(data.deviceId, data.deviceDatasheetId);
+            deviceWiFi.epochTimeUtc = data.epochTimeUtc;
+            deviceWiFi.wifiQuality = data.wifiQuality;
+            deviceWiFi.localIPAddress = data.localIPAddress;
             deviceContext.$digest();
             $rootScope.$emit('deviceWiFiService_onMessageIoTReceived');
         }
