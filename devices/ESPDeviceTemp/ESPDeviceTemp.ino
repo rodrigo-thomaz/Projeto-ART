@@ -78,8 +78,10 @@ int configurationEEPROMAddr = 0;
 
 #define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //t�pico MQTT de envio de informa��es para Broker
 
-uint64_t readTempTimestamp = 0;
-uint64_t publishMessageTimestamp = 0;
+uint64_t deviceSensorsReadTempTimestamp = 0;
+uint64_t deviceSensorsPublishMessageTimestamp = 0;
+
+uint64_t deviceWiFiPublishMessageTimestamp = 0;
 
 using namespace ART;
 
@@ -405,8 +407,8 @@ void loopInApplication()
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
   
 	if (deviceSensors->initialized()) {
-		if (now - readTempTimestamp > deviceSensors->getReadIntervalInMilliSeconds()) {
-			readTempTimestamp = now;
+		if (now - deviceSensorsReadTempTimestamp > deviceSensors->getReadIntervalInMilliSeconds()) {
+			deviceSensorsReadTempTimestamp = now;
 			displayTemperatureSensorManager.printUpdate(true);
 			deviceSensors->refresh();
 		}
@@ -423,10 +425,10 @@ void loopInApplication()
 		displayMQTTManager.printConnected();
 		displayMQTTManager.printReceived(false);
 
-		int publishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
+		int deviceSensorsPublishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
 
-		if (now - publishMessageTimestamp > publishIntervalInMilliSeconds) {
-			publishMessageTimestamp = now;
+		if (now - deviceSensorsPublishMessageTimestamp > deviceSensorsPublishIntervalInMilliSeconds) {
+			deviceSensorsPublishMessageTimestamp = now;
 			displayMQTTManager.printSent(true);
 
 			StaticJsonBuffer<2048> jsonBuffer;
