@@ -11,6 +11,7 @@ app.controller('deviceWiFiController', ['$scope', '$rootScope', '$timeout', '$lo
             $scope.hostNameView = deviceWiFi.hostName;
             $scope.localIPAddressView = deviceWiFi.localIPAddress;
             $scope.wifiQualityView = deviceWiFi.wifiQuality;
+            $scope.epochTimeUtcView = deviceWiFi.epochTimeUtc;
             $scope.publishIntervalInMilliSecondsView = deviceWiFi.publishIntervalInMilliSeconds;
 
             clearOnMessageIoTReceived = $rootScope.$on(deviceWiFiConstant.messageIoTEventName + $scope.deviceWiFi.deviceWiFiId, onMessageIoTReceived);
@@ -31,6 +32,7 @@ app.controller('deviceWiFiController', ['$scope', '$rootScope', '$timeout', '$lo
         var onMessageIoTReceived = function (event, data) {
             $scope.localIPAddressView = $scope.deviceWiFi.localIPAddress;
             $scope.wifiQualityView = $scope.deviceWiFi.wifiQuality;
+            $scope.epochTimeUtcView = $scope.deviceWiFi.epochTimeUtc;
             $scope.$apply();
         };
 

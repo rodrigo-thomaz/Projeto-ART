@@ -42,6 +42,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
             var deviceWiFi = deviceWiFiFinder.getByKey(data.deviceId, data.deviceDatasheetId);
+            if(angular.isUndefined(deviceWiFi)) return;
             deviceWiFi.epochTimeUtc = data.epochTimeUtc;
             deviceWiFi.wifiQuality = data.wifiQuality;
             deviceWiFi.localIPAddress = data.localIPAddress;

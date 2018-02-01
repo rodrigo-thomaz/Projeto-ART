@@ -29,4 +29,10 @@
             Publish Interval In Seconds deve ser maior que 5
         </span>
     </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Última atualização</label>
+        <div class="col-lg-8">
+            <input type="text" class="form-control" readonly value="{{epochTimeUtcView == null ? '' : epochTimeUtcView * 1000 | date:'dd/MM/yyyy HH:mm:ss Z'}}">
+        </div>
+    </div>
 </form>
