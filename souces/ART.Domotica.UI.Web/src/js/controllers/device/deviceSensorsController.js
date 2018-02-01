@@ -2,7 +2,7 @@
 app.controller('deviceSensorsController', ['$scope', '$rootScope', '$timeout', '$log', 'toaster', 'deviceSensorsConstant', 'deviceSensorsService',
     function ($scope, $rootScope, $timeout, $log, toaster, deviceSensorsConstant, deviceSensorsService) {
 
-    $scope.device = null;
+    $scope.deviceSensors = null;
 
     $scope.init = function (deviceSensors) {
         
@@ -32,7 +32,7 @@ app.controller('deviceSensorsController', ['$scope', '$rootScope', '$timeout', '
     var onSetPublishIntervalInMilliSecondsCompleted = function (event, data) {
         $scope.publishIntervalInMilliSecondsView = data.publishIntervalInMilliSeconds;
         $scope.$apply();
-        toaster.pop('success', 'Sucesso', 'PublishIntervalInMilliSeconds alterado');
+        toaster.pop('success', 'Sucesso', 'Sensors PublishIntervalInMilliSeconds alterado');
     };    
 
     $scope.changeReadIntervalInMilliSeconds = function () {

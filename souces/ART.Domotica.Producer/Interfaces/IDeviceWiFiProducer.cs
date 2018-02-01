@@ -11,6 +11,8 @@
 
         Task SetHostName(AuthenticatedMessageContract<DeviceWiFiSetHostNameRequestContract> message);
 
+        Task SetPublishIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract> message);
+
         #endregion Methods
     }
 }

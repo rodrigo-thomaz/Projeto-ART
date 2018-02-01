@@ -77,15 +77,15 @@
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSensorsSetIntervalInMilliSecondsRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract>>(e.Body);
             var deviceSensorsDomain = _componentContext.Resolve<IDeviceSensorsDomain>();
-            var data = await deviceSensorsDomain.SetPublishIntervalInMilliSeconds(message.Contract.DeviceSensorsId, message.Contract.DeviceDatasheetId, message.Contract.IntervalInMilliSeconds);
+            var data = await deviceSensorsDomain.SetPublishIntervalInMilliSeconds(message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.IntervalInMilliSeconds);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
-            var viewModel = Mapper.Map<DeviceSensors, DeviceSensorsSetPublishIntervalInMilliSecondsModel>(data);
+            var viewModel = Mapper.Map<DeviceSensors, DeviceSetPublishIntervalInMilliSecondsModel>(data);
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceSensorsConstants.SetPublishIntervalInMilliSecondsViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
@@ -113,9 +113,9 @@
             _logger.DebugEnter();
 
             _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSensorsSetIntervalInMilliSecondsRequestContract>>(e.Body);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract>>(e.Body);
             var deviceSensorsDomain = _componentContext.Resolve<IDeviceSensorsDomain>();
-            var data = await deviceSensorsDomain.SetReadIntervalInMilliSeconds(message.Contract.DeviceSensorsId, message.Contract.DeviceDatasheetId, message.Contract.IntervalInMilliSeconds);
+            var data = await deviceSensorsDomain.SetReadIntervalInMilliSeconds(message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.IntervalInMilliSeconds);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);

@@ -48,6 +48,22 @@
             return entity;
         }
 
+        public async Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInMilliSeconds)
+        {
+            var entity = await _deviceWiFiRepository.GetByKey(deviceWiFiId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceWiFi not found");
+            }
+
+            entity.PublishIntervalInMilliSeconds = publishIntervalInMilliSeconds;
+
+            await _deviceWiFiRepository.Update(entity);
+
+            return entity;
+        }
+
         #endregion Methods
     }
 }

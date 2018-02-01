@@ -5,6 +5,7 @@
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
+    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
@@ -23,6 +24,7 @@
         #region Fields
 
         private readonly EventingBasicConsumer _setHostNameConsumer;
+        private readonly EventingBasicConsumer _setPublishIntervalInMilliSecondsConsumer;
 
         #endregion Fields
 
@@ -32,6 +34,7 @@
             : base(connection, mqSettings, logger, componentContext)
         {
             _setHostNameConsumer = new EventingBasicConsumer(_model);
+            _setPublishIntervalInMilliSecondsConsumer = new EventingBasicConsumer(_model);
 
             Initialize();            
         }
@@ -43,10 +46,13 @@
         private void Initialize()
         {
             BasicQueueDeclare(DeviceWiFiConstants.SetHostNameQueueName);
+            BasicQueueDeclare(DeviceWiFiConstants.SetPublishIntervalInMilliSecondsQueueName);
 
             _setHostNameConsumer.Received += SetHostNameReceived;
+            _setPublishIntervalInMilliSecondsConsumer.Received += SetPublishIntervalInMilliSecondsReceived;
 
             _model.BasicConsume(DeviceWiFiConstants.SetHostNameQueueName, false, _setHostNameConsumer);
+            _model.BasicConsume(DeviceWiFiConstants.SetPublishIntervalInMilliSecondsQueueName, false, _setPublishIntervalInMilliSecondsConsumer);
         }
 
         #endregion Methods
@@ -84,6 +90,42 @@
             var iotContract = new SetValueRequestIoTContract<string>(data.HostName);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceWiFiConstants.SetHostNameIoTQueueName);
+
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        private void SetPublishIntervalInMilliSecondsReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetPublishIntervalInMilliSecondsReceivedAsync(sender, e));
+        }
+
+        public async Task SetPublishIntervalInMilliSecondsReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract>>(e.Body);
+            var deviceWiFiDomain = _componentContext.Resolve<IDeviceWiFiDomain>();
+            var data = await deviceWiFiDomain.SetPublishIntervalInMilliSeconds(message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.IntervalInMilliSeconds);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DeviceWiFi, DeviceSetPublishIntervalInMilliSecondsModel>(data);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceWiFiConstants.SetPublishIntervalInMilliSecondsViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
+
+            //Enviando para o Iot
+            var iotContract = new SetValueRequestIoTContract<int>(data.PublishIntervalInMilliSeconds);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceWiFiConstants.SetPublishIntervalInMilliSecondsIoTQueueName);
 
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 

@@ -12,6 +12,8 @@
 
         Task<DeviceWiFi> SetHostName(Guid deviceWiFiId, DeviceDatasheetEnum deviceDatasheetId, string hostName);
 
+        Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInMilliSeconds);
+
         #endregion Methods
     }
 }

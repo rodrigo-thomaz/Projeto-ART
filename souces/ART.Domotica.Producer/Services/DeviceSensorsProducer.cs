@@ -24,12 +24,12 @@
 
         #region public voids
 
-        public async Task SetReadIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSensorsSetIntervalInMilliSecondsRequestContract> message)
+        public async Task SetReadIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract> message)
         {
             await BasicPublish(DeviceSensorsConstants.SetReadIntervalInMilliSecondsQueueName, message);
         }
 
-        public async Task SetPublishIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSensorsSetIntervalInMilliSecondsRequestContract> message)
+        public async Task SetPublishIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract> message)
         {
             await BasicPublish(DeviceSensorsConstants.SetPublishIntervalInMilliSecondsQueueName, message);
         }

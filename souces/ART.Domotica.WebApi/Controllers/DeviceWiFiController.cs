@@ -44,7 +44,25 @@
             await _deviceWiFiProducer.SetHostName(CreateMessage(contract));
             return Ok();
         }
-        
+
+        /// <summary>
+        /// Altera o PublishIntervalInMilliSeconds de um DeviceWiFi
+        /// </summary>
+        /// <remarks>
+        /// Altera o PublishIntervalInMilliSeconds de um DeviceWiFi
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setPublishIntervalInMilliSeconds")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetPublishIntervalInMilliSeconds(DeviceSetIntervalInMilliSecondsRequestContract contract)
+        {
+            await _deviceWiFiProducer.SetPublishIntervalInMilliSeconds(CreateMessage(contract));
+            return Ok();
+        }
+
         #endregion
     }
 }

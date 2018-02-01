@@ -7,6 +7,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
         var setHostNameCompletedSubscription = null;
+        var setPublishIntervalInMilliSecondsCompletedSubscription = null;
 
         var setHostName = function (deviceWiFiId, deviceDatasheetId, hostName) {
             var data = {
@@ -19,8 +20,20 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
             });
         };
 
+        var setPublishIntervalInMilliSeconds = function (deviceWiFiId, deviceDatasheetId, publishIntervalInMilliSeconds) {
+            var data = {
+                deviceId: deviceWiFiId,
+                deviceDatasheetId: deviceDatasheetId,
+                intervalInMilliSeconds: publishIntervalInMilliSeconds,
+            }
+            return $http.post(serviceBase + deviceWiFiConstant.setPublishIntervalInMilliSecondsApiUri, data).then(function (results) {
+                return results;
+            });
+        };
+
         var onConnected = function () {
             setHostNameCompletedSubscription = stompService.subscribeAllViews(deviceWiFiConstant.setHostNameCompletedTopic, onSetHostNameCompleted);
+            setPublishIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedTopic, onSetPublishIntervalInMilliSecondsCompleted);
         }
 
         var onSetHostNameCompleted = function (payload) {
@@ -31,9 +44,18 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
             $rootScope.$emit(deviceWiFiConstant.setHostNameCompletedEventName + result.deviceWiFiId, result);
         };
 
+        var onSetPublishIntervalInMilliSecondsCompleted = function (payload) {
+            var result = JSON.parse(payload.body);
+            var deviceWiFi = deviceWiFiFinder.getByKey(result.deviceId, result.deviceDatasheetId);
+            deviceWiFi.publishIntervalInMilliSeconds = result.publishIntervalInMilliSeconds;
+            deviceContext.$digest();
+            $rootScope.$emit(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceId, result);
+        };
+
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
             setHostNameCompletedSubscription.unsubscribe();
+            setPublishIntervalInMilliSecondsCompletedSubscription.unsubscribe();
         });
 
         var clearOnConnected = $rootScope.$on(stompService.connectedEventName, onConnected);
@@ -44,6 +66,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
         // serviceFactory    
 
         serviceFactory.setHostName = setHostName;
+        serviceFactory.setPublishIntervalInMilliSeconds = setPublishIntervalInMilliSeconds;
 
         return serviceFactory;
 

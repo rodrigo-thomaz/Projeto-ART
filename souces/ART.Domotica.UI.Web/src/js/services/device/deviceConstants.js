@@ -41,6 +41,10 @@ app.constant('deviceWiFiConstant', {
     setHostNameCompletedTopic: 'DeviceWiFi.SetHostNameViewCompleted',
     setHostNameCompletedEventName: 'deviceWiFiService.onSetHostNameCompleted_Id_',
 
+    setPublishIntervalInMilliSecondsApiUri: 'api/deviceWiFi/setPublishIntervalInMilliSeconds',
+    setPublishIntervalInMilliSecondsCompletedTopic: 'DeviceWiFi.SetPublishIntervalInMilliSecondsViewCompleted',
+    setPublishIntervalInMilliSecondsCompletedEventName: 'deviceWiFiService.onSetPublishIntervalInMilliSecondsCompleted_Id_',    
+
 });
 
 app.constant('deviceDebugConstant', {

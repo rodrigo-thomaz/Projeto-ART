@@ -51,7 +51,7 @@
     <Compile Include="DeviceMQDetailResponseContract.cs" />
     <Compile Include="DeviceNTPSetTimeZoneRequestContract.cs" />
     <Compile Include="DeviceNTPSetUpdateIntervalInMilliSecondRequestContract.cs" />
-    <Compile Include="DeviceSensorsSetIntervalInMilliSecondsRequestContract.cs" />
+    <Compile Include="DeviceSetIntervalInMilliSecondsRequestContract.cs" />
     <Compile Include="ESPDeviceCheckForUpdatesRPCResponseContract.cs" />
     <Compile Include="ESPDeviceCheckForUpdatesRPCRequestContract.cs" />
     <Compile Include="SensorInDeviceSetOrdinationRequestContract.cs" />

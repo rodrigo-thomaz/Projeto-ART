@@ -28,6 +28,11 @@ namespace ART.Domotica.Producer.Services
             await BasicPublish(DeviceWiFiConstants.SetHostNameQueueName, message);
         }
 
+        public async Task SetPublishIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract> message)
+        {
+            await BasicPublish(DeviceWiFiConstants.SetPublishIntervalInMilliSecondsQueueName, message);
+        }
+
         #endregion
     }
 }

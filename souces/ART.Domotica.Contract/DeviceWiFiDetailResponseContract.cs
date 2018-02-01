@@ -9,6 +9,11 @@
             get; set;
         }
 
+        public int PublishIntervalInMilliSeconds
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }

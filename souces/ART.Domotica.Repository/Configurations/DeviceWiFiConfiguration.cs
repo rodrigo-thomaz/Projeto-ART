@@ -61,6 +61,11 @@
                 .HasColumnOrder(4)
                 .HasMaxLength(255)
                 .IsRequired();
+
+            //PublishIntervalInMilliSeconds
+            Property(x => x.PublishIntervalInMilliSeconds)
+                .HasColumnOrder(5)
+                .IsRequired();
         }
 
         #endregion Constructors

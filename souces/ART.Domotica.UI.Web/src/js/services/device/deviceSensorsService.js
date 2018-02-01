@@ -22,7 +22,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var setPublishIntervalInMilliSeconds = function (deviceSensorsId, deviceDatasheetId, publishIntervalInMilliSeconds) {
             var data = {
-                deviceSensorsId: deviceSensorsId,
+                deviceId: deviceSensorsId,
                 deviceDatasheetId: deviceDatasheetId,
                 intervalInMilliSeconds: publishIntervalInMilliSeconds,
             }
@@ -46,10 +46,10 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var onSetPublishIntervalInMilliSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId, result.deviceDatasheetId);
+            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceId, result.deviceDatasheetId);
             deviceSensors.publishIntervalInMilliSeconds = result.publishIntervalInMilliSeconds;
             deviceContext.$digest();
-            $rootScope.$emit(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceSensorsId, result);
+            $rootScope.$emit(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceId, result);
         };
 
         $rootScope.$on('$destroy', function () {

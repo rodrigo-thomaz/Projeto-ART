@@ -29,6 +29,11 @@
             get; set;
         }
 
+        public int PublishIntervalInMilliSeconds
+        {
+            get; set;
+        }
+
         public string SoftAPMacAddress
         {
             get; set;

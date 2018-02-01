@@ -522,6 +522,7 @@
                         StationMacAddress = espDevice1StationMacAddress,
                         SoftAPMacAddress = espDevice1SoftAPMacAddress,
                         HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
+                        PublishIntervalInMilliSeconds = 5000,
                     },
                     DeviceMQ = new DeviceMQ
                     {
@@ -568,6 +569,7 @@
                         StationMacAddress = espDevice1StationMacAddress,
                         SoftAPMacAddress = espDevice1SoftAPMacAddress,
                         HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
+                        PublishIntervalInMilliSeconds = 5000,
                     };
                 }
                 if (espDevice1.DeviceMQ == null)
@@ -786,6 +788,7 @@
                         StationMacAddress = espDevice2StationMacAddress,
                         SoftAPMacAddress = espDevice2SoftAPMacAddress,
                         HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
+                        PublishIntervalInMilliSeconds = 5000,
                     },
                     DeviceMQ = new DeviceMQ
                     {
@@ -832,6 +835,7 @@
                         StationMacAddress = espDevice2StationMacAddress,
                         SoftAPMacAddress = espDevice2SoftAPMacAddress,
                         HostName = string.Format("device-{0}", RandonHelper.RandomString(4)),
+                        PublishIntervalInMilliSeconds = 5000,
                     };
                 }
 

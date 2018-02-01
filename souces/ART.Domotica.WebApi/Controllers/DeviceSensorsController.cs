@@ -38,7 +38,7 @@
         /// <response code="500">Internal Server Error</response>
         [Route("setReadIntervalInMilliSeconds")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetReadIntervalInMilliSeconds(DeviceSensorsSetIntervalInMilliSecondsRequestContract contract)
+        public async Task<IHttpActionResult> SetReadIntervalInMilliSeconds(DeviceSetIntervalInMilliSecondsRequestContract contract)
         {
             await _deviceSensorsProducer.SetReadIntervalInMilliSeconds(CreateMessage(contract));
             return Ok();
@@ -56,7 +56,7 @@
         /// <response code="500">Internal Server Error</response>
         [Route("setPublishIntervalInMilliSeconds")]
         [HttpPost]
-        public async Task<IHttpActionResult> SetPublishIntervalInMilliSeconds(DeviceSensorsSetIntervalInMilliSecondsRequestContract contract)
+        public async Task<IHttpActionResult> SetPublishIntervalInMilliSeconds(DeviceSetIntervalInMilliSecondsRequestContract contract)
         {
             await _deviceSensorsProducer.SetPublishIntervalInMilliSeconds(CreateMessage(contract));
             return Ok();

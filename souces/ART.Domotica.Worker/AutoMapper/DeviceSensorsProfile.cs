@@ -25,8 +25,8 @@
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.ReadIntervalInMilliSeconds, m => m.MapFrom(x => x.ReadIntervalInMilliSeconds));
 
-            CreateMap<DeviceSensors, DeviceSensorsSetPublishIntervalInMilliSecondsModel>()
-                .ForMember(vm => vm.DeviceSensorsId, m => m.MapFrom(x => x.Id))
+            CreateMap<DeviceSensors, DeviceSetPublishIntervalInMilliSecondsModel>()
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
 
