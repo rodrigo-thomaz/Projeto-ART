@@ -295,7 +295,7 @@ namespace ART
 			}
 			getSensorInDeviceBySensorId(orderedExceptCurrent[i].getSensor()->getSensorId()).setOrdination(counter);
 			counter++;
-		}
+		}		
 
 		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
 	}
