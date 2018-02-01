@@ -50,8 +50,7 @@ int configurationEEPROMAddr = 0;
 
 #define TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME "DeviceWiFi/SetHostNameIoT"
 #define TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceWiFi/SetPublishIntervalInMilliSecondsIoT"
-//#define TOPIC_PUB_DEVICE_WIFI_MESSAGE "DeviceWiFi.MessageIoT" 
-#define TOPIC_PUB_DEVICE_WIFI_MESSAGE "DeviceWiFiMessageIoT" 
+#define TOPIC_PUB_DEVICE_WIFI_MESSAGE "DeviceWiFi/MessageIoT" 
 
 #define TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED "DeviceDebug/SetRemoteEnabledIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED "DeviceDebug/SetResetCmdEnabledIoT"

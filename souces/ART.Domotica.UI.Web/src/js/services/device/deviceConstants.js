@@ -46,7 +46,7 @@ app.constant('deviceWiFiConstant', {
     setPublishIntervalInMilliSecondsCompletedEventName: 'deviceWiFiService.onSetPublishIntervalInMilliSecondsCompleted_Id_',    
 
     //topicMessageIoT: '/topic/DeviceWiFi/MessageIoT',    
-    topicMessageIoT: '/topic/DeviceWiFiMessageIoT',    
+    topicMessageIoT: '/topic/DeviceWiFi.MessageIoT',    
 
 });
 
