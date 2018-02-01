@@ -50,6 +50,8 @@ int configurationEEPROMAddr = 0;
 
 #define TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME "DeviceWiFi/SetHostNameIoT"
 #define TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceWiFi/SetPublishIntervalInMilliSecondsIoT"
+//#define TOPIC_PUB_DEVICE_WIFI_MESSAGE "DeviceWiFi.MessageIoT" 
+#define TOPIC_PUB_DEVICE_WIFI_MESSAGE "DeviceWiFiMessageIoT" 
 
 #define TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED "DeviceDebug/SetRemoteEnabledIoT"
 #define TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED "DeviceDebug/SetResetCmdEnabledIoT"
@@ -419,58 +421,64 @@ void loopInApplication()
 	}
 
 	// MQTT
-
   if(espDevice.getDeviceMQ()->getMQQT()->connected()){
-    loopMQQTConnected();
+    loopMQQTConnected(now);
   }
- 
-	PubSubClient* mqqt = espDevice.getDeviceMQ()->getMQQT();
-
-  bool mqqtPrintSent = false;
-  
-	if (mqqt->connected() && deviceSensors->initialized()) {
-
-		displayMQTTManager.printConnected();
-		displayMQTTManager.printReceived(false);
-
-		int deviceSensorsPublishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
-
-		if (now - deviceSensorsPublishMessageTimestamp > deviceSensorsPublishIntervalInMilliSeconds) {
-			deviceSensorsPublishMessageTimestamp = now;
-			displayMQTTManager.printSent(true);
-
-			StaticJsonBuffer<2048> jsonBuffer;
-			JsonObject& root = jsonBuffer.createObject();
-
-			root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
-			root["wifiQuality"] = espDevice.getDeviceWiFi()->getQuality();
-			root["epochTimeUtc"] = espDevice.getDeviceNTP()->getEpochTimeUTC();
-			root["localIPAddress"] = espDevice.getDeviceWiFi()->getLocalIPAddress();
-
-			espDevice.getDeviceSensors()->createSensorsJsonNestedArray(root);
-
-			int sensorsJsonLen = root.measureLength();
-			char sensorsJson[sensorsJsonLen + 1];
-			root.printTo(sensorsJson, sizeof(sensorsJson));
-
-			Serial.print("enviando para o servidor (Char Len)=> ");
-			Serial.println(sensorsJsonLen);
-
-			mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);
-		}
-		else {
-			displayMQTTManager.printSent(false);
-		}
-
-		// Sensor
-		displayTemperatureSensorManager.printSensors();
-	}
 
 	// Wifi
 	displayWiFiManager.printSignal();
+  
+	displayManager.display.display();
+}
 
- if (mqqt->connected()) {   
+void loopMQQTConnected(uint64_t now)
+{
+  PubSubClient* mqqt = espDevice.getDeviceMQ()->getMQQT();
 
+  DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
+  DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
+  
+  bool mqqtPrintSent = false;
+  
+  if (deviceSensors->initialized()) {
+
+    displayMQTTManager.printConnected();
+    displayMQTTManager.printReceived(false);
+
+    int deviceSensorsPublishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
+
+    if (now - deviceSensorsPublishMessageTimestamp > deviceSensorsPublishIntervalInMilliSeconds) {
+      deviceSensorsPublishMessageTimestamp = now;
+      displayMQTTManager.printSent(true);
+
+      StaticJsonBuffer<2048> jsonBuffer;
+      JsonObject& root = jsonBuffer.createObject();
+
+      root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
+      root["wifiQuality"] = espDevice.getDeviceWiFi()->getQuality();
+      root["epochTimeUtc"] = espDevice.getDeviceNTP()->getEpochTimeUTC();
+      root["localIPAddress"] = espDevice.getDeviceWiFi()->getLocalIPAddress();
+
+      espDevice.getDeviceSensors()->createSensorsJsonNestedArray(root);
+
+      int sensorsJsonLen = root.measureLength();
+      char sensorsJson[sensorsJsonLen + 1];
+      root.printTo(sensorsJson, sizeof(sensorsJson));
+
+      Serial.print("enviando para o servidor (Char Len)=> ");
+      Serial.println(sensorsJsonLen);
+
+      mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);
+    }
+    else {
+      displayMQTTManager.printSent(false);
+    }
+
+    // Sensor
+    displayTemperatureSensorManager.printSensors();
+
+    // Wifi
+    
     int deviceWiFiPublishIntervalInMilliSeconds = deviceWiFi->getPublishIntervalInMilliSeconds();
 
     if (now - deviceWiFiPublishMessageTimestamp > deviceWiFiPublishIntervalInMilliSeconds) {
@@ -492,18 +500,12 @@ void loopInApplication()
       Serial.print("DeviceWiFi enviando para o servidor (Char Len)=> ");
       Serial.println(messageJsonLen);
 
-      mqqt->publish(TOPIC_PUB_TEMP, messageJson);
+      mqqt->publish(TOPIC_PUB_DEVICE_WIFI_MESSAGE, messageJson);
     }
     else {
       displayMQTTManager.printSent(false);
     }
   }
   
-	displayManager.display.display();
-}
-
-void loopMQQTConnected()
-{
-
 }
 
