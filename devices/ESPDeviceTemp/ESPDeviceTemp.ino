@@ -146,14 +146,14 @@ void initConfiguration()
 
 void mqtt_ConnectedCallback(PubSubClient* mqqt)
 {
-	Serial.println("[MQQT::mqtt_ConnectedCallback] initializing ...");
+  Serial.println("[MQQT::mqtt_ConnectedCallback] initializing ...");
 
-	if (espDevice.getDeviceInApplication()->getApplicationId() == "") {
-		subscribeNotInApplication();
-	}
-	else {
-		subscribeInApplication();
-	}
+  if(espDevice.getDeviceInApplication()->getApplicationId() == NULL){
+    subscribeNotInApplication();
+  }
+  else {
+    subscribeInApplication();
+  }
 
 	Serial.println("[MQQT::mqtt_ConnectedCallback] Initialized with success !");
 }
@@ -384,7 +384,7 @@ void loop() {
 
 	DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
 
-	if (deviceInApplication != NULL && deviceInApplication->getApplicationId() == "") {
+	if (deviceInApplication != NULL && deviceInApplication->getApplicationId() == NULL) {
 		displayAccessManager.loop();
 		//EEPROM_writeAnything(configurationEEPROMAddr, configuration);
 	}
