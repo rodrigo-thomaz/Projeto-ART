@@ -45,7 +45,7 @@
             return data;
         }
 
-        public async Task<ESPDevice> GetFullByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<ESPDevice> GetFullByKey(Guid deviceId, Guid deviceDatasheetId)
         {
             var data = await _context.ESPDevice
                .Include(x => x.DeviceNTP)
@@ -112,7 +112,7 @@
             return data;
         }
 
-        public async Task<ESPDevice> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<ESPDevice> GetByKey(Guid deviceId, Guid deviceDatasheetId)
         {
             return await _context.ESPDevice.FindAsync(deviceId, deviceDatasheetId);
         }

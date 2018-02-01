@@ -1,8 +1,9 @@
 namespace ART.Domotica.Repository.Migrations
 {
+    using System;
     using System.Data.Entity.Migrations;
 
-    public partial class Initial : DbMigration
+    public partial class InitialCreate01 : DbMigration
     {
         #region Methods
 
@@ -41,6 +42,7 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("dbo.DeviceNTP", "TimeZoneId", "Globalization.TimeZone");
             DropForeignKey("dbo.DeviceNTP", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceMQ", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceDebug", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceBase", "DeviceDatasheetId", "dbo.DeviceDatasheet");
             DropForeignKey("dbo.DeviceBinary", new[] { "DeviceDatasheetBinaryId", "DeviceDatasheetId" }, "dbo.DeviceDatasheetBinary");
             DropForeignKey("dbo.DeviceDatasheetBinaryBuffer", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceDatasheetBinary");
@@ -105,6 +107,7 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.DeviceMQ", new[] { "Password" });
             DropIndex("dbo.DeviceMQ", new[] { "User" });
             DropIndex("dbo.DeviceMQ", new[] { "Id", "DeviceDatasheetId" });
+            DropIndex("dbo.DeviceDebug", new[] { "Id", "DeviceDatasheetId" });
             DropIndex("dbo.DeviceDatasheetBinaryBuffer", new[] { "Id", "DeviceDatasheetId" });
             DropIndex("dbo.DeviceDatasheet", new[] { "Name" });
             DropIndex("dbo.DeviceDatasheetBinary", new[] { "DeviceDatasheetId" });
@@ -145,6 +148,7 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("Globalization.TimeZone");
             DropTable("dbo.DeviceNTP");
             DropTable("dbo.DeviceMQ");
+            DropTable("dbo.DeviceDebug");
             DropTable("dbo.DeviceDatasheetBinaryBuffer");
             DropTable("dbo.DeviceDatasheet");
             DropTable("dbo.DeviceDatasheetBinary");
@@ -210,7 +214,7 @@ namespace ART.Domotica.Repository.Migrations
                     {
                         ApplicationId = c.Guid(nullable: false),
                         DeviceId = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                         CreateByApplicationUserId = c.Guid(nullable: false),
                     })
@@ -227,7 +231,7 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         Label = c.String(nullable: false, maxLength: 50),
                         CreateDate = c.DateTime(nullable: false),
                     })
@@ -241,7 +245,7 @@ namespace ART.Domotica.Repository.Migrations
                     {
                         Id = c.Guid(nullable: false),
                         DeviceDatasheetBinaryId = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         UpdateDate = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
@@ -255,7 +259,7 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false, identity: true),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         Version = c.String(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                     })
@@ -267,7 +271,7 @@ namespace ART.Domotica.Repository.Migrations
                 "dbo.DeviceDatasheet",
                 c => new
                     {
-                        Id = c.Short(nullable: false),
+                        Id = c.Guid(nullable: false),
                         Name = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Id)
@@ -278,7 +282,7 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         Buffer = c.Binary(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
@@ -286,11 +290,29 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => new { t.Id, t.DeviceDatasheetId });
 
             CreateTable(
+                "dbo.DeviceDebug",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
+                        RemoteEnabled = c.Boolean(nullable: false),
+                        SerialEnabled = c.Boolean(nullable: false),
+                        ResetCmdEnabled = c.Boolean(nullable: false),
+                        ShowDebugLevel = c.Boolean(nullable: false),
+                        ShowTime = c.Boolean(nullable: false),
+                        ShowProfiler = c.Boolean(nullable: false),
+                        ShowColors = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
+                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
+                .Index(t => new { t.Id, t.DeviceDatasheetId });
+
+            CreateTable(
                 "dbo.DeviceMQ",
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         User = c.String(nullable: false, maxLength: 12),
                         Password = c.String(nullable: false, maxLength: 12),
                         ClientId = c.String(nullable: false, maxLength: 32),
@@ -309,7 +331,7 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         TimeZoneId = c.Byte(nullable: false),
                         UpdateIntervalInMilliSecond = c.Int(nullable: false),
                     })
@@ -335,8 +357,9 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
-                        PublishIntervalInSeconds = c.Int(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
+                        ReadIntervalInMilliSeconds = c.Int(nullable: false),
+                        PublishIntervalInMilliSeconds = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
                 .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
@@ -347,7 +370,7 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         DeviceSensorsId = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         SensorId = c.Guid(nullable: false),
                         SensorDatasheetId = c.Short(nullable: false),
                         SensorTypeId = c.Short(nullable: false),
@@ -647,10 +670,11 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         StationMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                         SoftAPMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                         HostName = c.String(nullable: false, maxLength: 255),
+                        PublishIntervalInMilliSeconds = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
                 .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
@@ -663,7 +687,7 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         ChipId = c.Int(nullable: false),
                         FlashChipId = c.Int(nullable: false),
                         SDKVersion = c.String(nullable: false, maxLength: 50),
@@ -682,7 +706,7 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        DeviceDatasheetId = c.Short(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
                         LanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                         WLanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                     })

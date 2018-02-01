@@ -32,7 +32,7 @@
 
         #region Methods
         
-        public async Task<DeviceMQ> GetByKey(Guid deviceMQId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceMQ> GetByKey(Guid deviceMQId, Guid deviceDatasheetId)
         {
             var data = await _deviceMQRepository.GetByKey(deviceMQId, deviceDatasheetId);
 

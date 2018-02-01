@@ -1,11 +1,12 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
+    using System;
     using System.Collections.Generic;
 
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
-    public class DeviceDatasheet : IEntity<DeviceDatasheetEnum>
+    public class DeviceDatasheet : IEntity<Guid>
     {
         #region Properties
 
@@ -19,7 +20,7 @@
             get; set;
         }
 
-        public DeviceDatasheetEnum Id
+        public Guid Id
         {
             get; set;
         }

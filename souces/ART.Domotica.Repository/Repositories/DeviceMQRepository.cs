@@ -18,7 +18,7 @@
 
         #endregion Constructors
 
-        public async Task<DeviceMQ> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceMQ> GetByKey(Guid deviceId, Guid deviceDatasheetId)
         {
             return await _context.DeviceMQ.FindAsync(deviceId, deviceDatasheetId);
         }

@@ -16,7 +16,7 @@
         {
         }
 
-        public async Task<DeviceInApplication> GetByKey(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceInApplication> GetByKey(Guid applicationId, Guid deviceId, Guid deviceDatasheetId)
         {
             return await _context.DeviceInApplication.FindAsync(applicationId, deviceId, deviceDatasheetId);
         }

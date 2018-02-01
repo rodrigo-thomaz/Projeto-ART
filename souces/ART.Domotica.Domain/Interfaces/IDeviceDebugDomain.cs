@@ -10,19 +10,19 @@
     {
         #region Methods
 
-        Task<DeviceDebug> SetRemoteEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetRemoteEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
 
-        Task<DeviceDebug> SetResetCmdEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetResetCmdEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
 
-        Task<DeviceDebug> SetSerialEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetSerialEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
 
-        Task<DeviceDebug> SetShowColors(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetShowColors(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
 
-        Task<DeviceDebug> SetShowDebugLevel(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetShowDebugLevel(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
 
-        Task<DeviceDebug> SetShowProfiler(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetShowProfiler(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
 
-        Task<DeviceDebug> SetShowTime(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetShowTime(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
 
         #endregion Methods
     }

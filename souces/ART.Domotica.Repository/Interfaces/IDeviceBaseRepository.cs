@@ -11,7 +11,7 @@
     {
         #region Methods
 
-        Task<DeviceBase> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<DeviceBase> GetByKey(Guid deviceId, Guid deviceDatasheetId);
 
         #endregion Methods
     }

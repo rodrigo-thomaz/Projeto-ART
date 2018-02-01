@@ -10,9 +10,9 @@
     {
         #region Methods
 
-        Task<DeviceWiFi> SetHostName(Guid deviceWiFiId, DeviceDatasheetEnum deviceDatasheetId, string hostName);
+        Task<DeviceWiFi> SetHostName(Guid deviceWiFiId, Guid deviceDatasheetId, string hostName);
 
-        Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInMilliSeconds);
+        Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, Guid deviceDatasheetId, int publishIntervalInMilliSeconds);
 
         #endregion Methods
     }

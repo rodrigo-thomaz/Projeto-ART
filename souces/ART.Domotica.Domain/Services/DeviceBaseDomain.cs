@@ -32,7 +32,7 @@
 
         #region Methods
         
-        public async Task<DeviceBase> SetLabel(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId, string label)
+        public async Task<DeviceBase> SetLabel(Guid deviceId, Guid deviceDatasheetId, string label)
         {
             var entity = await _deviceBaseRepository.GetByKey(deviceId, deviceDatasheetId);
 

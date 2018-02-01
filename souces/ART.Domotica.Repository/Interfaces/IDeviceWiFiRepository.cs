@@ -11,7 +11,7 @@
     {
         #region Methods
 
-        Task<DeviceWiFi> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<DeviceWiFi> GetByKey(Guid deviceId, Guid deviceDatasheetId);
 
         #endregion Methods
     }

@@ -32,7 +32,7 @@
 
         #region Methods        
 
-        public async Task<DeviceDebug> SetRemoteEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetRemoteEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
 
@@ -48,7 +48,7 @@
             return entity;
         }        
 
-        public async Task<DeviceDebug> SetSerialEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetSerialEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
 
@@ -64,7 +64,7 @@
             return entity;
         }
 
-        public async Task<DeviceDebug> SetResetCmdEnabled(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetResetCmdEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
 
@@ -80,7 +80,7 @@
             return entity;
         }        
 
-        public async Task<DeviceDebug> SetShowColors(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetShowColors(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
 
@@ -96,7 +96,7 @@
             return entity;
         }
 
-        public async Task<DeviceDebug> SetShowDebugLevel(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetShowDebugLevel(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
 
@@ -112,7 +112,7 @@
             return entity;
         }
 
-        public async Task<DeviceDebug> SetShowProfiler(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetShowProfiler(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
 
@@ -128,7 +128,7 @@
             return entity;
         }
 
-        public async Task<DeviceDebug> SetShowTime(Guid deviceDebugId, DeviceDatasheetEnum deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetShowTime(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
         {
             var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
 

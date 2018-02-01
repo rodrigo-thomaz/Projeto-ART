@@ -30,7 +30,7 @@
             get; set;
         }
 
-        public DeviceDatasheetEnum DeviceDatasheetId
+        public Guid DeviceDatasheetId
         {
             get; set;
         }

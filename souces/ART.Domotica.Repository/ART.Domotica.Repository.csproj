@@ -177,37 +177,9 @@
     <Compile Include="Interfaces\Globalization\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201801031701147_Initial.cs" />
-    <Compile Include="Migrations\201801031701147_Initial.Designer.cs">
-      <DependentUpon>201801031701147_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801031758156_Initia2.cs" />
-    <Compile Include="Migrations\201801031758156_Initia2.Designer.cs">
-      <DependentUpon>201801031758156_Initia2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801051537116_Initia3.cs" />
-    <Compile Include="Migrations\201801051537116_Initia3.Designer.cs">
-      <DependentUpon>201801051537116_Initia3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801071547318_Initia4.cs" />
-    <Compile Include="Migrations\201801071547318_Initia4.Designer.cs">
-      <DependentUpon>201801071547318_Initia4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801071904024_Initia5.cs" />
-    <Compile Include="Migrations\201801071904024_Initia5.Designer.cs">
-      <DependentUpon>201801071904024_Initia5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801091105208_Initia6.cs" />
-    <Compile Include="Migrations\201801091105208_Initia6.Designer.cs">
-      <DependentUpon>201801091105208_Initia6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801261533105_InitialCreate05.cs" />
-    <Compile Include="Migrations\201801261533105_InitialCreate05.Designer.cs">
-      <DependentUpon>201801261533105_InitialCreate05.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802011047253_Initial06.cs" />
-    <Compile Include="Migrations\201802011047253_Initial06.Designer.cs">
-      <DependentUpon>201802011047253_Initial06.cs</DependentUpon>
+    <Compile Include="Migrations\201802011449159_InitialCreate01.cs" />
+    <Compile Include="Migrations\201802011449159_InitialCreate01.Designer.cs">
+      <DependentUpon>201802011449159_InitialCreate01.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -299,29 +271,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801031701147_Initial.resx">
-      <DependentUpon>201801031701147_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801031758156_Initia2.resx">
-      <DependentUpon>201801031758156_Initia2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801051537116_Initia3.resx">
-      <DependentUpon>201801051537116_Initia3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801071547318_Initia4.resx">
-      <DependentUpon>201801071547318_Initia4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801071904024_Initia5.resx">
-      <DependentUpon>201801071904024_Initia5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801091105208_Initia6.resx">
-      <DependentUpon>201801091105208_Initia6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801261533105_InitialCreate05.resx">
-      <DependentUpon>201801261533105_InitialCreate05.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802011047253_Initial06.resx">
-      <DependentUpon>201802011047253_Initial06.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802011449159_InitialCreate01.resx">
+      <DependentUpon>201802011449159_InitialCreate01.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

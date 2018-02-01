@@ -36,7 +36,7 @@
 
         #region Methods
 
-        public async Task<DeviceNTP> SetTimeZone(Guid deviceNTPId, DeviceDatasheetEnum deviceDatasheetId, byte timeZoneId)
+        public async Task<DeviceNTP> SetTimeZone(Guid deviceNTPId, Guid deviceDatasheetId, byte timeZoneId)
         {
             var entity = await _deviceNTPRepository.GetByKey(deviceNTPId, deviceDatasheetId);
 
@@ -59,7 +59,7 @@
             return entity;
         }
 
-        public async Task<DeviceNTP> SetUpdateIntervalInMilliSecond(Guid deviceNTPId, DeviceDatasheetEnum deviceDatasheetId, int updateIntervalInMilliSecond)
+        public async Task<DeviceNTP> SetUpdateIntervalInMilliSecond(Guid deviceNTPId, Guid deviceDatasheetId, int updateIntervalInMilliSecond)
         {
             var entity = await _deviceNTPRepository.GetByKey(deviceNTPId, deviceDatasheetId);
 

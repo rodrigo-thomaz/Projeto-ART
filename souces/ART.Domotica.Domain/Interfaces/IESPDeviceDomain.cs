@@ -11,7 +11,7 @@
     {
         #region Methods
 
-        Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId, Guid deviceDatasheetId);
 
         Task<List<ESPDevice>> GetAll();
 

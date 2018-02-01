@@ -124,7 +124,7 @@
             return deviceEntity;
         }
 
-        public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId, Guid deviceDatasheetId)
         {
             // Device 
 

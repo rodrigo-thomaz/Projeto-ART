@@ -7,13 +7,13 @@ namespace ART.Domotica.Repository.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialCreate05 : IMigrationMetadata
+    public sealed partial class InitialCreate01 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate05));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate01));
         
         string IMigrationMetadata.Id
         {
-            get { return "201801261533105_InitialCreate05"; }
+            get { return "201802011449159_InitialCreate01"; }
         }
         
         string IMigrationMetadata.Source

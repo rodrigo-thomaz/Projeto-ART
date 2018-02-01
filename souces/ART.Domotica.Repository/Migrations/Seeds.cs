@@ -42,6 +42,9 @@
             ExecuteSensorDatasheetUnitMeasurementScale(context);
             ExecuteDeviceDatasheet(context);
 
+            Guid DeviceDatasheetId_OneWire2Way = Guid.Parse("1DD1D68F-EE1F-4DA0-8F20-5232F1428B4D");
+            Guid DeviceDatasheetId_Ultrasonic_1Way = Guid.Parse("6545998B-F25C-4E26-8D3E-1955E19742A8");
+
             #region SensorTempDSFamilyResolutions
 
             var sensorTempDSFamilyResolution9 = context.SensorTempDSFamilyResolution.SingleOrDefault(x => x.Id == 9);
@@ -497,19 +500,19 @@
                 .Include(x => x.DeviceBinary)
                 .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
                 .Where(x => x.DeviceWiFi.SoftAPMacAddress.ToLower() == espDevice1SoftAPMacAddress.ToLower())
-                .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Temperature_OneWire_2Way)
+                .Where(x => x.DeviceDatasheetId == DeviceDatasheetId_OneWire2Way)
                 .SingleOrDefault();
 
             if (espDevice1 == null)
             {
                 var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
 
-                var deviceDataSheet1 = context.DeviceDatasheet.Find(DeviceDatasheetEnum.Temperature_OneWire_2Way);
+                var deviceDataSheet1 = context.DeviceDatasheet.Find(DeviceDatasheetId_OneWire2Way);
 
                 espDevice1 = new ESPDevice
                 {
                     DeviceDatasheet = deviceDataSheet1,
-                    DeviceDatasheetId = DeviceDatasheetEnum.Temperature_OneWire_2Way,
+                    DeviceDatasheetId = DeviceDatasheetId_OneWire2Way,
                     ChipId = espDevice1ChipId,
                     FlashChipId = espDevice1FlashChipId,
                     ChipSize = espDevice1ChipSize,
@@ -761,7 +764,7 @@
                 .Include(x => x.DeviceDebug)
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
-                .Where(x => x.DeviceDatasheetId == DeviceDatasheetEnum.Ultrasonic_1Way)
+                .Where(x => x.DeviceDatasheetId == DeviceDatasheetId_Ultrasonic_1Way)
                 .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice2StationMacAddress.ToLower())
                 .Where(x => x.DeviceWiFi.SoftAPMacAddress.ToLower() == espDevice2SoftAPMacAddress.ToLower())
                 .SingleOrDefault();
@@ -770,12 +773,12 @@
             {
                 var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
 
-                var deviceDataSheet2 = context.DeviceDatasheet.Find(DeviceDatasheetEnum.Ultrasonic_1Way);
+                var deviceDataSheet2 = context.DeviceDatasheet.Find(DeviceDatasheetId_Ultrasonic_1Way);
 
                 espDevice2 = new ESPDevice
                 {
                     DeviceDatasheet = deviceDataSheet2,
-                    DeviceDatasheetId = DeviceDatasheetEnum.Ultrasonic_1Way,
+                    DeviceDatasheetId = DeviceDatasheetId_Ultrasonic_1Way,
                     ChipId = espDevice2ChipId,
                     FlashChipId = espDevice2FlashChipId,
                     ChipSize = espDevice2ChipSize,
@@ -1080,7 +1083,7 @@
 
             foreach (var line in lines)
             {
-                var deviceDatasheetId = (DeviceDatasheetEnum)Enum.Parse(typeof(DeviceDatasheetEnum), line[0]);
+                var deviceDatasheetId = Guid.Parse(line[0]);
                 var name = line[1];
 
                 var entity = context.DeviceDatasheet

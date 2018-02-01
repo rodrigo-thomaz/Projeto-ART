@@ -1,12 +1,14 @@
 ﻿namespace ART.Domotica.Model
 {
+    using System;
+
     using ART.Domotica.Enums;
 
     public class DeviceDatasheetGetModel
     {
         #region Properties
 
-        public DeviceDatasheetEnum DeviceDatasheetId
+        public Guid DeviceDatasheetId
         {
             get; set;
         }

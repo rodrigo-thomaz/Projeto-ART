@@ -18,7 +18,7 @@
 
         #endregion Constructors
 
-        public async Task<DeviceDatasheetBinaryBuffer> GetByKey(Guid deviceDatasheetBinaryBufferId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceDatasheetBinaryBuffer> GetByKey(Guid deviceDatasheetBinaryBufferId, Guid deviceDatasheetId)
         {
             return await _context.DeviceDatasheetBinaryBuffer.FindAsync(deviceDatasheetBinaryBufferId, deviceDatasheetId);
         }

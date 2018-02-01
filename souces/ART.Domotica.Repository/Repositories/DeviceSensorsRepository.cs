@@ -20,7 +20,7 @@
 
         #endregion Constructors
 
-        public async Task<DeviceSensors> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceSensors> GetByKey(Guid deviceId, Guid deviceDatasheetId)
         {
             return await _context.DeviceSensors.FindAsync(deviceId, deviceDatasheetId);
         }

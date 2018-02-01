@@ -20,12 +20,12 @@
 
         #endregion Constructors
 
-        public async Task<DeviceDatasheetBinary> GetByKey(Guid deviceDatasheetBinaryId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceDatasheetBinary> GetByKey(Guid deviceDatasheetBinaryId, Guid deviceDatasheetId)
         {
             return await _context.DeviceDatasheetBinary.FindAsync(deviceDatasheetBinaryId, deviceDatasheetId);
         }
 
-        public async Task<DeviceDatasheetBinary> GetLastVersioByDatasheetKey(DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceDatasheetBinary> GetLastVersioByDatasheetKey(Guid deviceDatasheetId)
         {
             return await _context.DeviceDatasheetBinary
                 .Where(x => x.DeviceDatasheetId == deviceDatasheetId)

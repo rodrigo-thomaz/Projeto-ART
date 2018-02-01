@@ -10,7 +10,7 @@
     {
         #region Methods
 
-        Task<DeviceBase> SetLabel(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId, string label);
+        Task<DeviceBase> SetLabel(Guid deviceId, Guid deviceDatasheetId, string label);
 
         #endregion Methods
     }

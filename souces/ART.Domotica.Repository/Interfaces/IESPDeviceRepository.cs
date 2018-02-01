@@ -16,7 +16,7 @@
 
         Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId);
 
-        Task<ESPDevice> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<ESPDevice> GetByKey(Guid deviceId, Guid deviceDatasheetId);
 
         Task<ESPDevice> GetByPin(string pin);
 
@@ -24,7 +24,7 @@
 
         Task<List<string>> GetExistingPins();
 
-        Task<ESPDevice> GetFullByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<ESPDevice> GetFullByKey(Guid deviceId, Guid deviceDatasheetId);
 
         Task<List<ESPDevice>> GetListNotInApplication();
 

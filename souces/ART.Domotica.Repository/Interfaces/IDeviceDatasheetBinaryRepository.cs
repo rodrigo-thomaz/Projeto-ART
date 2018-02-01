@@ -11,9 +11,9 @@
     {
         #region Methods
 
-        Task<DeviceDatasheetBinary> GetByKey(Guid deviceDatasheetBinaryId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<DeviceDatasheetBinary> GetByKey(Guid deviceDatasheetBinaryId, Guid deviceDatasheetId);
 
-        Task<DeviceDatasheetBinary> GetLastVersioByDatasheetKey(DeviceDatasheetEnum deviceDatasheetId);
+        Task<DeviceDatasheetBinary> GetLastVersioByDatasheetKey(Guid deviceDatasheetId);
 
         #endregion Methods
     }

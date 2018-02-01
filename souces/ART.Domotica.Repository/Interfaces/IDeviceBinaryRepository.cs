@@ -13,7 +13,7 @@
 
         Task<DeviceBinary> GetByDeviceMacAdresses(string stationMacAddress, string softAPMacAddress);
 
-        Task<DeviceBinary> GetByKey(Guid deviceBinaryId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<DeviceBinary> GetByKey(Guid deviceBinaryId, Guid deviceDatasheetId);
 
         #endregion Methods
     }

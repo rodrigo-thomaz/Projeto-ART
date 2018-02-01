@@ -11,7 +11,7 @@
     {
         #region Methods
 
-        Task<DeviceDatasheetBinaryBuffer> GetByKey(Guid deviceDatasheetBinaryBufferId, DeviceDatasheetEnum deviceDatasheetId);
+        Task<DeviceDatasheetBinaryBuffer> GetByKey(Guid deviceDatasheetBinaryBufferId, Guid deviceDatasheetId);
 
         #endregion Methods
     }

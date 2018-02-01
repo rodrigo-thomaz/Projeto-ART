@@ -32,7 +32,7 @@
 
         #region Methods
 
-        public async Task<DeviceWiFi> SetHostName(Guid deviceWiFiId, DeviceDatasheetEnum deviceDatasheetId, string hostName)
+        public async Task<DeviceWiFi> SetHostName(Guid deviceWiFiId, Guid deviceDatasheetId, string hostName)
         {
             var entity = await _deviceWiFiRepository.GetByKey(deviceWiFiId, deviceDatasheetId);
 
@@ -48,7 +48,7 @@
             return entity;
         }
 
-        public async Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, DeviceDatasheetEnum deviceDatasheetId, int publishIntervalInMilliSeconds)
+        public async Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, Guid deviceDatasheetId, int publishIntervalInMilliSeconds)
         {
             var entity = await _deviceWiFiRepository.GetByKey(deviceWiFiId, deviceDatasheetId);
 

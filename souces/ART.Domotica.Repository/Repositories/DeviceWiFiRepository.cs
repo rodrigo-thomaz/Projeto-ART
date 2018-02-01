@@ -18,7 +18,7 @@
 
         #endregion Constructors
 
-        public async Task<DeviceWiFi> GetByKey(Guid deviceId, DeviceDatasheetEnum deviceDatasheetId)
+        public async Task<DeviceWiFi> GetByKey(Guid deviceId, Guid deviceDatasheetId)
         {
             return await _context.DeviceWiFi.FindAsync(deviceId, deviceDatasheetId);
         }
