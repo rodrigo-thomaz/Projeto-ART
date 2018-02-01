@@ -318,7 +318,8 @@ namespace ART
 			Serial.print(" Ordination = ");
 			Serial.println(counter);
 
-			orderedExceptCurrent[i].setOrdination(counter);
+			getSensorInDeviceBySensorId(orderedExceptCurrent[i].getSensor()->getSensorId()).setOrdination(counter);
+			//orderedExceptCurrent[i].setOrdination(counter);
 			counter++;
 
 			Serial.print("counter = ");
@@ -331,6 +332,17 @@ namespace ART
 		Serial.println(ordination);
 
 		sensorInDevice.setOrdination(ordination);
+
+		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
+
+		Serial.println("Agora !!!!!!!!!!!!!!!!!!!!!!");
+
+		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
+			deviceDebug->printf("DeviceSensors", "setOrdination", "label     : %s\n", _sensorsInDevice[i].getSensor()->getLabel());
+			deviceDebug->printf("DeviceSensors", "setOrdination", "ordination: %d\n", (char*)_sensorsInDevice[i].getOrdination());
+
+			yield();
+		}
 
 		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
 	}
