@@ -101,7 +101,7 @@ namespace ART.Domotica.Worker.Consumers
             var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceSensorsId, device.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = Mapper.Map<SensorTriggerInsertRequestContract, SensorTriggerGetResponseIoTContract>(message.Contract);
+            var iotContract = Mapper.Map<SensorTrigger, SensorTriggerInsertResponseIoTContract>(data);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, SensorTriggerConstants.InsertIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);

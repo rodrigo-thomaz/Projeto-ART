@@ -24,10 +24,7 @@ namespace ART
 		Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject);
 		~Sensor();
 
-		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, JsonObject& jsonObject)
-		{
-			sensor = new Sensor(sensorInDevice, jsonObject);
-		}
+		static void create(Sensor* (&sensor), SensorInDevice* sensorInDevice, JsonObject& jsonObject);
 
 		char*								getSensorId();
 		SensorTypeEnum						getSensorTypeId();
@@ -49,6 +46,9 @@ namespace ART
 
 		bool 								hasAlarm();
 		bool 								hasAlarmBuzzer();		
+
+		void								insertTrigger(JsonObject& root);
+		void								deleteTrigger();
 
 		SensorTempDSFamily *				getSensorTempDSFamily();
 		SensorUnitMeasurementScale *		getSensorUnitMeasurementScale();

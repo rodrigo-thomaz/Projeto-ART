@@ -53,6 +53,11 @@ namespace ART
 		Serial.println("[Sensor destructor]");
 	}
 
+	void Sensor::create(Sensor *(&sensor), SensorInDevice * sensorInDevice, JsonObject & jsonObject)
+	{
+		sensor = new Sensor(sensorInDevice, jsonObject);
+	}
+
 	char* Sensor::getSensorId()
 	{
 		return _sensorId;
@@ -132,7 +137,17 @@ namespace ART
 			}
 		}
 		return false;
-	}	
+	}
+
+	void Sensor::insertTrigger(JsonObject& root)
+	{
+		Serial.print("[Sensor::insertTrigger] ");
+		_sensorTriggers.push_back(SensorTrigger::create(this, root));
+	}
+
+	void Sensor::deleteTrigger()
+	{
+	}
 
 	SensorTempDSFamily * Sensor::getSensorTempDSFamily()
 	{

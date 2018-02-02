@@ -51,6 +51,8 @@ namespace ART
 
 		void 								setOrdination(char* json);
 
+		void 								insertTrigger(char* json);
+		void 								deleteTrigger(char* json);
 		void 								setTriggerOn(char* json);
 		void 								setBuzzerOn(char* json);
 		void 								setTriggerValue(char* json);

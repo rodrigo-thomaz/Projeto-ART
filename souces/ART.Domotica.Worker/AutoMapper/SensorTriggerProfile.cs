@@ -68,7 +68,13 @@
                 .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId))
                 .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn));
 
-            CreateMap<SensorTriggerInsertRequestContract, SensorTriggerGetResponseIoTContract>();
+            CreateMap<SensorTrigger, SensorTriggerInsertResponseIoTContract>()
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))
+                .ForMember(vm => vm.TriggerOn, m => m.MapFrom(x => x.TriggerOn))
+                .ForMember(vm => vm.BuzzerOn, m => m.MapFrom(x => x.BuzzerOn))
+                .ForMember(vm => vm.Max, m => m.MapFrom(x => x.Max))
+                .ForMember(vm => vm.Min, m => m.MapFrom(x => x.Min));
 
             CreateMap<SensorTriggerDeleteRequestContract, SensorTriggerDeleteModel>()
                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId))

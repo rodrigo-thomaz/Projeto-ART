@@ -305,6 +305,38 @@ namespace ART
 		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
 	}
 
+	void DeviceSensors::insertTrigger(char * json)
+	{
+		Serial.print("[DeviceSensors::insertTrigger] ");
+
+		StaticJsonBuffer<300> jsonBuffer;
+		JsonObject& root = jsonBuffer.parseObject(json);
+		if (!root.success()) {
+			printf("DeviceSensors", "insertTrigger", "Parse failed: %s\n", json);
+			return;
+		}
+
+		char* sensorId = strdup(root["sensorId"]);
+		Sensor* sensor = getSensorById(sensorId);
+		sensor->insertTrigger(root);
+	}
+
+	void DeviceSensors::deleteTrigger(char * json)
+	{
+		Serial.print("[DeviceSensors::deleteTrigger] ");
+
+		StaticJsonBuffer<300> jsonBuffer;
+		JsonObject& root = jsonBuffer.parseObject(json);
+		if (!root.success()) {
+			printf("DeviceSensors", "deleteTrigger", "Parse failed: %s\n", json);
+			return;
+		}
+
+		char* sensorId = strdup(root["sensorId"]);
+		Sensor* sensor = getSensorById(sensorId);
+		sensor->deleteTrigger();
+	}
+
 	void DeviceSensors::setTriggerOn(char* json)
 	{
 		Serial.print("[DeviceSensors::setTriggerOn] ");

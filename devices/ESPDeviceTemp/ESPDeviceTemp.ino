@@ -70,6 +70,8 @@ int configurationEEPROMAddr = 0;
 
 #define TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION "SensorTempDSFamily/SetResolutionIoT"
 
+#define TOPIC_SUB_SENSOR_TRIGGER_INSERT "SensorTrigger/InsertIoT"
+#define TOPIC_SUB_SENSOR_TRIGGER_DELETE "SensorTrigger/DeleteIoT"
 #define TOPIC_SUB_SENSOR_TRIGGER_SET_TRIGGER_ON "SensorTrigger/SetTriggerOnIoT"
 #define TOPIC_SUB_SENSOR_TRIGGER_SET_BUZZER_ON "SensorTrigger/SetBuzzerOnIoT"
 #define TOPIC_SUB_SENSOR_TRIGGER_SET_TRIGGER_VALUE "SensorTrigger/SetTriggerValueIoT"
@@ -208,6 +210,8 @@ void subscribeInApplication()
 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION);
   
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_INSERT);  
+  espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_DELETE);  
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_SET_TRIGGER_ON);	
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_SET_BUZZER_ON);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_SET_TRIGGER_VALUE);
@@ -249,7 +253,9 @@ void unSubscribeInApplication()
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_SET_LABEL);
 	
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION);
-  
+
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_INSERT);  
+  espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_DELETE);  
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_SET_TRIGGER_ON);	
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_SET_BUZZER_ON);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_SENSOR_TRIGGER_SET_TRIGGER_VALUE);
@@ -356,6 +362,12 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 		espDevice.getDeviceSensors()->setResolution(strdup(json.c_str()));
 	}
  
+  if (topicKey == String(TOPIC_SUB_SENSOR_TRIGGER_INSERT)) {
+   espDevice.getDeviceSensors()->insertTrigger(strdup(json.c_str()));
+  } 
+  if (topicKey == String(TOPIC_SUB_SENSOR_TRIGGER_DELETE)) {
+    espDevice.getDeviceSensors()->deleteTrigger(strdup(json.c_str()));
+  } 
 	if (topicKey == String(TOPIC_SUB_SENSOR_TRIGGER_SET_TRIGGER_ON)) {
 		espDevice.getDeviceSensors()->setTriggerOn(strdup(json.c_str()));
 	}	
