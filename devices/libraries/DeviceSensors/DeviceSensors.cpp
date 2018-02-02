@@ -86,7 +86,7 @@ namespace ART
 		char result[len + 1];
 		root.printTo(result, sizeof(result));
 
-		_espDevice->getDeviceMQ()->publish(TOPIC_PUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID, result);
+		_espDevice->getDeviceMQ()->publishInApplication(TOPIC_PUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID, result);
 
 		return true;
 	}

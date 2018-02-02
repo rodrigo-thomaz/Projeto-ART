@@ -190,9 +190,11 @@ namespace ART
 		return this->_mqqt;
 	}
 
-	void DeviceMQ::publish(const char* topic, const char* payload)
+	void DeviceMQ::publishInApplication(const char* topic, const char* payload)
 	{
 		String routingKey = this->getApplicationRoutingKey(topic);
+		Serial.print("[DeviceMQ::publishInApplication] routingKey: ");
+		Serial.println(routingKey);
 		this->_mqqt->publish(routingKey.c_str(), payload);
 	}
 

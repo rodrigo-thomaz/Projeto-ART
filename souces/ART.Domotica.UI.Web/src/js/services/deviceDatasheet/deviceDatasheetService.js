@@ -26,7 +26,7 @@ app.factory('deviceDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 
 
         var onConnected = function () {
 
-            getAllCompletedSubscription = stompService.subscribe(deviceDatasheetConstant.getAllCompletedTopic, onGetAllCompleted);
+            getAllCompletedSubscription = stompService.subscribeView(deviceDatasheetConstant.getAllCompletedTopic, onGetAllCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;

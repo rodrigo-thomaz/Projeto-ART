@@ -26,7 +26,7 @@ app.factory('timeZoneService', ['$http', 'ngAuthSettings', '$rootScope', '$local
 
         var onConnected = function () {
 
-            getAllCompletedSubscription = stompService.subscribe(timeZoneConstant.getAllCompletedTopic, onGetAllCompleted);
+            getAllCompletedSubscription = stompService.subscribeView(timeZoneConstant.getAllCompletedTopic, onGetAllCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;

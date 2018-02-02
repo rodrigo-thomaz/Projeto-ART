@@ -26,7 +26,7 @@ app.factory('sensorTempDSFamilyResolutionService', ['$http', '$log', '$rootScope
 
         var onConnected = function () {
 
-            getAllCompletedSubscription = stompService.subscribe(sensorTempDSFamilyResolutionConstant.getAllCompletedTopic, onGetAllCompleted);
+            getAllCompletedSubscription = stompService.subscribeView(sensorTempDSFamilyResolutionConstant.getAllCompletedTopic, onGetAllCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;

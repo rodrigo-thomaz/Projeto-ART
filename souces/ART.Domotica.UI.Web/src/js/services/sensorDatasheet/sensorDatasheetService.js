@@ -26,7 +26,7 @@ app.factory('sensorDatasheetService', ['$http', 'ngAuthSettings', '$rootScope', 
 
         var onConnected = function () {
 
-            getAllCompletedSubscription = stompService.subscribe(sensorDatasheetConstant.getAllCompletedTopic, onGetAllCompleted);
+            getAllCompletedSubscription = stompService.subscribeView(sensorDatasheetConstant.getAllCompletedTopic, onGetAllCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;

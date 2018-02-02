@@ -26,7 +26,7 @@ app.factory('unitMeasurementScaleService', ['$http', 'ngAuthSettings', 'unitMeas
 
         var onConnected = function () {
 
-            getAllCompletedSubscription = stompService.subscribe(unitMeasurementScaleConstant.getAllCompletedTopic, onGetAllCompleted);
+            getAllCompletedSubscription = stompService.subscribeView(unitMeasurementScaleConstant.getAllCompletedTopic, onGetAllCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;

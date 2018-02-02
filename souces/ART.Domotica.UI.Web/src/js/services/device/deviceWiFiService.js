@@ -6,6 +6,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
 
         var serviceBase = ngAuthSettings.distributedServicesUri;
 
+        var messageIoTReceivedSubscription = null;
         var setHostNameCompletedSubscription = null;
         var setPublishIntervalInMilliSecondsCompletedSubscription = null;
 
@@ -32,10 +33,9 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
         };
 
         var onConnected = function () {
+            messageIoTReceivedSubscription = stompService.subscribeDevice(deviceWiFiConstant.messageIoTTopic, onMessageIoTReceived);            
             setHostNameCompletedSubscription = stompService.subscribeAllViews(deviceWiFiConstant.setHostNameCompletedTopic, onSetHostNameCompleted);
-            setPublishIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedTopic, onSetPublishIntervalInMilliSecondsCompleted);
-
-            stompService.client.subscribe(deviceWiFiConstant.messageIoTTopic, onMessageIoTReceived);
+            setPublishIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedTopic, onSetPublishIntervalInMilliSecondsCompleted);            
         }
 
         var onMessageIoTReceived = function (payload) {
@@ -68,6 +68,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();
+            messageIoTReceivedSubscription.unsubscribe();
             setHostNameCompletedSubscription.unsubscribe();
             setPublishIntervalInMilliSecondsCompletedSubscription.unsubscribe();
         });

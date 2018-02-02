@@ -26,7 +26,7 @@ app.factory('numericalScaleTypeCountryService', ['$http', 'ngAuthSettings', 'num
 
         var onConnected = function () {
 
-            getAllCompletedSubscription = stompService.subscribe(numericalScaleTypeCountryConstant.getAllCompletedTopic, onGetAllCompleted);
+            getAllCompletedSubscription = stompService.subscribeView(numericalScaleTypeCountryConstant.getAllCompletedTopic, onGetAllCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;

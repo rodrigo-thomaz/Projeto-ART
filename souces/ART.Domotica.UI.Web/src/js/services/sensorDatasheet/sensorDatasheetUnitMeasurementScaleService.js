@@ -26,7 +26,7 @@ app.factory('sensorDatasheetUnitMeasurementScaleService', ['$http', 'ngAuthSetti
 
         var onConnected = function () {
 
-            getAllCompletedSubscription = stompService.subscribe(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedTopic, onGetAllCompleted);
+            getAllCompletedSubscription = stompService.subscribeView(sensorDatasheetUnitMeasurementScaleConstant.getAllCompletedTopic, onGetAllCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;

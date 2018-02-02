@@ -26,7 +26,7 @@ app.factory('continentService', ['$http', 'ngAuthSettings', '$rootScope', '$loca
 
         var onConnected = function () {
 
-            getAllCompletedSubscription = stompService.subscribe(continentConstant.getAllCompletedTopic, onGetAllCompleted);
+            getAllCompletedSubscription = stompService.subscribeView(continentConstant.getAllCompletedTopic, onGetAllCompleted);
 
             if (!_initializing && !_initialized) {
                 _initializing = true;

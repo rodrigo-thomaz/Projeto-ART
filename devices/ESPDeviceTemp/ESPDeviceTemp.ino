@@ -432,10 +432,11 @@ void loopInApplication()
 
 void loopMQQTConnected(uint64_t now)
 {
-  PubSubClient* mqqt = espDevice.getDeviceMQ()->getMQQT();
-
+  DeviceMQ* deviceMQ = espDevice.getDeviceMQ();
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
   DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
+
+  PubSubClient* mqqt = deviceMQ->getMQQT();
   
   bool mqqtPrintSent = false;
   
@@ -499,7 +500,7 @@ void loopMQQTConnected(uint64_t now)
       Serial.print("DeviceWiFi enviando para o servidor (Char Len)=> ");
       Serial.println(messageJsonLen);
 
-      mqqt->publish(TOPIC_PUB_DEVICE_WIFI_MESSAGE, messageJson);
+      deviceMQ->publishInApplication(TOPIC_PUB_DEVICE_WIFI_MESSAGE, messageJson);
     }
 
     displayMQTTManager.printSent(mqqtPrintSent);

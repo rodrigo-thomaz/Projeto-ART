@@ -38,7 +38,7 @@ namespace ART
 
 		PubSubClient*										getMQQT();
 
-		void												publish(const char* topic, const char* payload);
+		void												publishInApplication(const char* topic, const char* payload);
 
 		void												subscribeInApplication(const char* topic);
 		void												subscribeInDevice(const char* topic);

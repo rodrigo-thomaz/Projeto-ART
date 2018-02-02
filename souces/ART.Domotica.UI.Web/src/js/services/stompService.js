@@ -14,20 +14,24 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         $rootScope.$emit(errorEventName, frame);
     }
 
-    var subscribe = function (topic, callback) {
-        //return client.subscribe(generateStringTopic(topic), callback);
-        return client.subscribe(generateStringTopic(topic), callback, { id: topic });
+    var subscribeView = function (topic, callback) {
+        //return client.subscribe(generateStringTopicView(topic), callback);
+        return client.subscribe(generateStringTopicView(topic), callback, { id: topic });
     };
 
     var subscribeAllViews = function (topic, callback) {
         return client.subscribe(generateStringTopicAllViews(topic), callback, { id: topic });
     };
 
+    var subscribeDevice = function (topic, callback) {
+        return client.subscribe(generateStringTopicDevice(topic), callback, { id: topic });
+    };
+
     var unsubscribe = function (subscriptionId) {
         return client.unsubscribe(subscriptionId);
     };    
 
-    var generateStringTopic = function (topic) {
+    var generateStringTopicView = function (topic) {
         //https://rabbitmq.docs.pivotal.io/36/rabbit-web-docs/stomp.html        
         //return '/exchange/amq.topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.WebUI.' + applicationContext.applicationMQ.webUITopic + '.' + topic;
         return '/topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.WebUI.' + applicationContext.applicationMQ.webUITopic + '.' + topic;
@@ -37,6 +41,10 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
         //https://rabbitmq.docs.pivotal.io/36/rabbit-web-docs/stomp.html        
         //return '/exchange/amq.topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.WebUI.' + topic;
         return '/topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.WebUI.' + topic;
+    }
+
+    var generateStringTopicDevice = function (topic) {
+        return '/topic/ART.Application.' + applicationContext.applicationMQ.applicationTopic + '.Device.*.' + topic;
     }
 
     var connected = function () {
@@ -86,8 +94,9 @@ app.factory('stompService', ['$log', 'ngAuthSettings', '$rootScope', 'applicatio
     serviceFactory.connectedEventName = connectedEventName;
     serviceFactory.errorEventName = errorEventName;
 
-    serviceFactory.subscribe = subscribe;
+    serviceFactory.subscribeView = subscribeView;
     serviceFactory.subscribeAllViews = subscribeAllViews;
+    serviceFactory.subscribeDevice = subscribeDevice;
     serviceFactory.unsubscribe = unsubscribe;
     serviceFactory.connected = connected;
     

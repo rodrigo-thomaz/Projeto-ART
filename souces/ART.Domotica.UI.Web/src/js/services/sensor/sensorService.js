@@ -16,7 +16,7 @@ app.factory('sensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompSer
 
         var onConnected = function () {
 
-            getAllByApplicationIdCompletedSubscription = stompService.subscribe(sensorConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
+            getAllByApplicationIdCompletedSubscription = stompService.subscribeView(sensorConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
             setLabelCompletedSubscription = stompService.subscribeAllViews(sensorConstant.setLabelCompletedTopic, onSetLabelCompleted);
             insertInApplicationCompletedSubscription = stompService.subscribeAllViews(sensorConstant.insertInApplicationCompletedTopic, onInsertInApplicationCompleted);
             deleteFromApplicationCompletedSubscription = stompService.subscribeAllViews(sensorConstant.deleteFromApplicationCompletedTopic, onDeleteFromApplicationCompleted);

@@ -17,10 +17,10 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
         var onConnected = function () {
 
-            getAllByApplicationIdCompletedSubscription = stompService.subscribe(deviceConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
+            getAllByApplicationIdCompletedSubscription = stompService.subscribeView(deviceConstant.getAllByApplicationIdCompletedTopic, onGetAllByApplicationIdCompleted);
             insertInApplicationCompletedSubscription = stompService.subscribeAllViews(deviceConstant.insertInApplicationCompletedTopic, onInsertInApplicationCompleted);
             deleteFromApplicationCompletedSubscription = stompService.subscribeAllViews(deviceConstant.deleteFromApplicationCompletedTopic, onDeleteFromApplicationCompleted);
-            getByPinCompletedSubscription = stompService.subscribe(deviceConstant.getByPinCompletedTopic, onGetByPinCompleted);
+            getByPinCompletedSubscription = stompService.subscribeView(deviceConstant.getByPinCompletedTopic, onGetByPinCompleted);
             setLabelCompletedSubscription = stompService.subscribeAllViews(deviceConstant.setLabelCompletedTopic, onSetLabelCompleted);
 
             stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
