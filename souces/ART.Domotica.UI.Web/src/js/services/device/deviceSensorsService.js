@@ -11,7 +11,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var setReadIntervalInMilliSeconds = function (deviceSensorsId, deviceDatasheetId, readIntervalInMilliSeconds) {
             var data = {
-                deviceSensorsId: deviceSensorsId,
+                deviceId: deviceSensorsId,
                 deviceDatasheetId: deviceDatasheetId,
                 intervalInMilliSeconds: readIntervalInMilliSeconds,
             }
