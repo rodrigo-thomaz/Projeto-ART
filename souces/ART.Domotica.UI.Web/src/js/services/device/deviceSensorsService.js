@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', 'deviceSensorsConstant', 'deviceSensorsFinder',
-    function ($http, ngAuthSettings, $rootScope, stompService, deviceContext, deviceSensorsConstant, deviceSensorsFinder) {
+app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', 'deviceSensorsConstant', 'deviceSensorsFinder', 'sensorConstant',
+    function ($http, ngAuthSettings, $rootScope, stompService, deviceContext, deviceSensorsConstant, deviceSensorsFinder, sensorConstant) {
 
         var serviceFactory = {};
 
@@ -54,8 +54,9 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
                 for (var j = 0; j < newValues.length; j++) {
                     if (oldValues[i].sensorId === newValues[j].sensorId) {
                         oldValues[i].isConnected = newValues[j].isConnected;
-                        oldValues[i].sensor.value = newValues[j].value;
+                        oldValues[i].sensor().value = newValues[j].value;
                         //oldValues[i].tempConverted = unitMeasurementConverter.convertFromCelsius(oldSensors[i].unitMeasurementId, oldSensors[i].tempCelsius);                        
+                        $rootScope.$emit(sensorConstant.messageIoTEventName + oldValues[i].sensorId);
                         break;
                     }
                 }

@@ -20,6 +20,23 @@
             </span>
         </div>
     </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Status</label>
+        <div class="col-lg-8">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <i ng-class="isConnectedView ? 'text-success-dker' : 'text-danger-dker'" class="glyphicon glyphicon-off icon"></i>
+                </span>
+                <input type="text" class="form-control" readonly value="{{isConnectedView ? 'On-line' : 'Off-line'}}">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Temperatura</label>
+        <div class="col-lg-8">
+            <input type="text" class="form-control" readonly value="{{valueView == null ? '' : valueView}}">
+        </div>
+    </div>
 </form>
 
 <tabset class="tab-container">

@@ -14,6 +14,10 @@ app.constant('sensorConstant', {
 
     deleteFromApplicationCompletedTopic: 'Sensor.DeleteFromApplicationViewCompleted',
     deleteFromApplicationCompletedEventName: 'sensorService.onDeleteFromApplicationCompleted',
+
+    messageIoTTopic: 'Sensor.MessageIoT',    
+    messageIoTEventName: 'sensorService.onMessageIoTReceived',    
+
 });
 
 app.constant('sensorTempDSFamilyConstant', {
