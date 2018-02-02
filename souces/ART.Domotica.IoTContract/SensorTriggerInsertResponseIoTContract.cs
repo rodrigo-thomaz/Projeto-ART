@@ -21,12 +21,12 @@
             get; set;
         }
 
-        public Guid SensorTriggerId
+        public Guid SensorId
         {
             get; set;
         }
 
-        public Guid SensorId
+        public Guid SensorTriggerId
         {
             get; set;
         }

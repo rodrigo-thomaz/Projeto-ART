@@ -81,7 +81,9 @@
                .ForMember(vm => vm.SensorDatasheetId, m => m.MapFrom(x => x.SensorDatasheetId))
                .ForMember(vm => vm.SensorTypeId, m => m.MapFrom(x => x.SensorTypeId));
 
-            CreateMap<SensorTriggerDeleteRequestContract, SensorTriggerGetResponseIoTContract>();
+            CreateMap<SensorTrigger, SensorTriggerDeleteResponseIoTContract>()
+                .ForMember(vm => vm.SensorTriggerId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.SensorId, m => m.MapFrom(x => x.SensorId));
         }
 
         #endregion Constructors
