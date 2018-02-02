@@ -141,12 +141,20 @@ namespace ART
 
 	void Sensor::insertTrigger(JsonObject& root)
 	{
-		Serial.print("[Sensor::insertTrigger] ");
+		Serial.println("[Sensor::insertTrigger] ");
 		_sensorTriggers.push_back(SensorTrigger::create(this, root));
 	}
 
-	void Sensor::deleteTrigger()
+	void Sensor::deleteTrigger(char* sensorTriggerId)
 	{
+		Serial.println("[Sensor::deleteTrigger] begin");
+		for (int i = 0; i < _sensorTriggers.size(); ++i) {			
+			if (strcmp(_sensorTriggers[i].getSensorTriggerId(), sensorTriggerId) == 0) {
+				_sensorTriggers.erase(_sensorTriggers.begin() + i);
+				Serial.println("[Sensor::deleteTrigger] deleted");
+				return;
+			}
+		}		
 	}
 
 	SensorTempDSFamily * Sensor::getSensorTempDSFamily()

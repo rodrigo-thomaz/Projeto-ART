@@ -307,7 +307,7 @@ namespace ART
 
 	void DeviceSensors::insertTrigger(char * json)
 	{
-		Serial.print("[DeviceSensors::insertTrigger] ");
+		Serial.println("[DeviceSensors::insertTrigger] ");
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -323,7 +323,7 @@ namespace ART
 
 	void DeviceSensors::deleteTrigger(char * json)
 	{
-		Serial.print("[DeviceSensors::deleteTrigger] ");
+		Serial.println("[DeviceSensors::deleteTrigger] ");
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -333,13 +333,16 @@ namespace ART
 		}
 
 		char* sensorId = strdup(root["sensorId"]);
+		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
+
 		Sensor* sensor = getSensorById(sensorId);
-		sensor->deleteTrigger();
+
+		sensor->deleteTrigger(sensorTriggerId);
 	}
 
 	void DeviceSensors::setTriggerOn(char* json)
 	{
-		Serial.print("[DeviceSensors::setTriggerOn] ");
+		Serial.println("[DeviceSensors::setTriggerOn] ");
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);

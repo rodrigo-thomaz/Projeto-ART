@@ -48,7 +48,7 @@ namespace ART
 		bool 								hasAlarmBuzzer();		
 
 		void								insertTrigger(JsonObject& root);
-		void								deleteTrigger();
+		void								deleteTrigger(char* sensorTriggerId);
 
 		SensorTempDSFamily *				getSensorTempDSFamily();
 		SensorUnitMeasurementScale *		getSensorUnitMeasurementScale();
