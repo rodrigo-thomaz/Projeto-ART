@@ -53,10 +53,10 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
             for (var i = 0; i < oldValues.length; i++) {
                 for (var j = 0; j < newValues.length; j++) {
                     if (oldValues[i].sensorId === newValues[j].sensorId) {
-                        oldValues[i].isConnected = newValues[j].isConnected;
-                        oldValues[i].sensor().value = newValues[j].value;
-                        //oldValues[i].tempConverted = unitMeasurementConverter.convertFromCelsius(oldSensors[i].unitMeasurementId, oldSensors[i].tempCelsius);                        
-                        $rootScope.$emit(sensorConstant.messageIoTEventName + oldValues[i].sensorId);
+                        var sensor = oldValues[i].sensor();
+                        sensor.isConnected = newValues[j].isConnected;
+                        sensor.value = newValues[j].value;
+                        $rootScope.$emit(sensorConstant.messageIoTEventName + sensor.sensorId);
                         break;
                     }
                 }
