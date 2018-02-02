@@ -45,20 +45,20 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION "ESPDevice/DeleteFromApplicationIoT"
 #define TOPIC_SUB_ESPDEVICE_SET_LABEL "ESPDevice/SetLabelIoT"
 
-#define TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND "DeviceNTP/SetUtcTimeOffsetInSecondIoT"
-#define TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND "DeviceNTP/SetUpdateIntervalInMilliSecondIoT"
+#define TOPIC_SUB_DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND "DeviceNTP/SetUtcTimeOffsetInSecondIoT"
+#define TOPIC_SUB_DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND "DeviceNTP/SetUpdateIntervalInMilliSecondIoT"
 
 #define TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME "DeviceWiFi/SetHostNameIoT"
 #define TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceWiFi/SetPublishIntervalInMilliSecondsIoT"
 #define TOPIC_PUB_DEVICE_WIFI_MESSAGE "DeviceWiFi/MessageIoT" 
 
-#define TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED "DeviceDebug/SetRemoteEnabledIoT"
-#define TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED "DeviceDebug/SetResetCmdEnabledIoT"
-#define TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED "DeviceDebug/SetSerialEnabledIoT"
-#define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS "DeviceDebug/SetShowColorsIoT"
-#define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL "DeviceDebug/SetShowDebugLevelIoT"
-#define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER "DeviceDebug/SetShowProfilerIoT"
-#define TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME "DeviceDebug/SetShowTimeIoT"
+#define TOPIC_SUB_DEVICE_DEBUG_SET_REMOTE_ENABLED "DeviceDebug/SetRemoteEnabledIoT"
+#define TOPIC_SUB_DEVICE_DEBUG_SET_RESET_CMD_ENABLED "DeviceDebug/SetResetCmdEnabledIoT"
+#define TOPIC_SUB_DEVICE_DEBUG_SET_SERIAL_ENABLED "DeviceDebug/SetSerialEnabledIoT"
+#define TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_COLORS "DeviceDebug/SetShowColorsIoT"
+#define TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL "DeviceDebug/SetShowDebugLevelIoT"
+#define TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_PROFILER "DeviceDebug/SetShowProfilerIoT"
+#define TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_TIME "DeviceDebug/SetShowTimeIoT"
 
 #define TOPIC_SUB_DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS "DeviceSensors/SetReadIntervalInMilliSecondsIoT"
 #define TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
@@ -186,19 +186,19 @@ void subscribeInApplication()
 	espDevice.getDeviceMQ()->subscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_LABEL);
 
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME);
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
 
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS);
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
-	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_REMOTE_ENABLED);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_RESET_CMD_ENABLED);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SERIAL_ENABLED);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_COLORS);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_PROFILER);
+	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_TIME);
 
   espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED); 
 	espDevice.getDeviceMQ()->subscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS);
@@ -230,19 +230,19 @@ void unSubscribeInApplication()
 	espDevice.getDeviceMQ()->unSubscribeInDevice(TOPIC_SUB_ESPDEVICE_DELETE_FROM_APPLICATION);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_ESPDEVICE_SET_LABEL);
 
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND);
 
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_HOST_NAME);
   espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS);
   
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_REMOTE_ENABLED);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_RESET_CMD_ENABLED);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SERIAL_ENABLED);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_COLORS);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_PROFILER);
+	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_TIME);
 
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(TOPIC_SUB_DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS);
@@ -304,10 +304,10 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 		espDevice.setLabel(strdup(json.c_str()));
 	}
 
-	if (topicKey == String(TOPIC_SUB_DEVICENTP_SET_UTC_TIME_OFF_SET_IN_SECOND)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND)) {
 		espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(json);
 	}
-	if (topicKey == String(TOPIC_SUB_DEVICENTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND)) {
 		espDevice.getDeviceNTP()->setUpdateIntervalInMilliSecond(json);
 	}
 
@@ -318,25 +318,25 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
    espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(strdup(json.c_str()));
   }
 
-	if (topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_REMOTE_ENABLED)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_DEBUG_SET_REMOTE_ENABLED)) {
 		espDevice.getDeviceDebug()->setRemoteEnabled(strdup(json.c_str()));
 	}
-	if (topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_RESET_CMD_ENABLED)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_DEBUG_SET_RESET_CMD_ENABLED)) {
 		espDevice.getDeviceDebug()->setResetCmdEnabled(strdup(json.c_str()));
 	}
-	if (topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SERIAL_ENABLED)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_DEBUG_SET_SERIAL_ENABLED)) {
 		espDevice.getDeviceDebug()->setSerialEnabled(strdup(json.c_str()));
 	}
-	if (topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_COLORS)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_COLORS)) {
 		espDevice.getDeviceDebug()->setShowColors(strdup(json.c_str()));
 	}
-	if (topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_DEBUG_LEVEL)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL)) {
 		espDevice.getDeviceDebug()->setShowDebugLevel(strdup(json.c_str()));
 	}
-	if (topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_PROFILER)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_PROFILER)) {
 		espDevice.getDeviceDebug()->setShowProfiler(strdup(json.c_str()));
 	}
-	if (topicKey == String(TOPIC_SUB_DEVICEDEBUG_SET_SHOW_TIME)) {
+	if (topicKey == String(TOPIC_SUB_DEVICE_DEBUG_SET_SHOW_TIME)) {
 		espDevice.getDeviceDebug()->setShowTime(strdup(json.c_str()));
 	}
 
