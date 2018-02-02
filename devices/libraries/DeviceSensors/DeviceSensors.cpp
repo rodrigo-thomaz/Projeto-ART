@@ -191,7 +191,7 @@ namespace ART
 
 	void DeviceSensors::createSensorsJsonNestedArray(JsonObject& jsonObject)
 	{
-		JsonArray& jsonArray = jsonObject.createNestedArray("dsFamilyTempSensors");
+		JsonArray& jsonArray = jsonObject.createNestedArray("sensorsInDevice");
 		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
 			createSensorJsonNestedObject(_sensorsInDevice[i].getSensor(), jsonArray);
 		}
@@ -452,7 +452,7 @@ namespace ART
 		JSONencoder["sensorId"] = sensor->getSensorId();
 		JSONencoder["isConnected"] = sensor->getConnected();
 		JSONencoder["resolution"] = sensor->getSensorTempDSFamily()->getResolution();
-		JSONencoder["tempCelsius"] = sensor->getTempCelsius();
+		JSONencoder["value"] = sensor->getTempCelsius();
 	}
 
 	String DeviceSensors::convertDeviceAddressToString(const uint8_t* deviceAddress)

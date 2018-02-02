@@ -43,9 +43,23 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
             var data = JSON.parse(dataUTF8);
             var deviceSensors = deviceSensorsFinder.getByKey(data.deviceId, data.deviceDatasheetId);
             if(angular.isUndefined(deviceSensors)) return;
-            deviceSensors.epochTimeUtc = data.epochTimeUtc;            
+            deviceSensors.epochTimeUtc = data.epochTimeUtc;   
+            updateSensorsInDevice(deviceSensors.sensorInDevice, data.sensorsInDevice);
             deviceContext.$digest();
             $rootScope.$emit(deviceSensorsConstant.messageIoTEventName + data.deviceId, data);
+        }
+
+        var updateSensorsInDevice = function (oldValues, newValues) {
+            for (var i = 0; i < oldValues.length; i++) {
+                for (var j = 0; j < newValues.length; j++) {
+                    if (oldValues[i].sensorId === newValues[j].sensorId) {
+                        oldValues[i].isConnected = newValues[j].isConnected;
+                        oldValues[i].sensor.value = newValues[j].value;
+                        //oldValues[i].tempConverted = unitMeasurementConverter.convertFromCelsius(oldSensors[i].unitMeasurementId, oldSensors[i].tempCelsius);                        
+                        break;
+                    }
+                }
+            }
         }
 
         var onSetReadIntervalInMilliSecondsCompleted = function (payload) {
@@ -83,7 +97,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         return serviceFactory;
 
-        var updateSensors = function (device, newSensors) {
+        var updateSensors1 = function (device, newSensors) {
             var oldSensors = device.sensors;
             for (var i = 0; i < oldSensors.length; i++) {
                 for (var j = 0; j < newSensors.length; j++) {
