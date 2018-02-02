@@ -23,8 +23,6 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             getByPinCompletedSubscription = stompService.subscribeView(deviceConstant.getByPinCompletedTopic, onGetByPinCompleted);
             setLabelCompletedSubscription = stompService.subscribeAllViews(deviceConstant.setLabelCompletedTopic, onSetLabelCompleted);
 
-            stompService.client.subscribe('/topic/ARTPUBTEMP', onReadReceived);
-
             if (!_initializing && !_initialized) {
                 _initializing = true;
                 getAllByApplicationId();
@@ -78,75 +76,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             return $http.post(serviceBase + deviceConstant.setLabelApiUri, data).then(function (results) {
                 return results;
             });
-        };
-
-        var onReadReceived = function (payload) {
-            var dataUTF8 = decodeURIComponent(escape(payload.body));
-            var data = JSON.parse(dataUTF8);
-            for (var i = 0; i < deviceContext.device.length; i++) {
-                var device = deviceContext.device[i];
-                if (device.deviceId === data.deviceId) {
-                    device.epochTimeUtc = data.epochTimeUtc;
-                    device.wifiQuality = data.wifiQuality;
-                    device.localIPAddress = data.localIPAddress;
-                    //updateSensors(device, data.sensorTempDSFamilies);
-                    break;
-                }
-            }
-            deviceContext.$digest();
-            $rootScope.$emit('ESPDeviceService_onReadReceived');
-        }
-
-        var updateSensors = function (device, newSensors) {
-            var oldSensors = device.sensors;
-            for (var i = 0; i < oldSensors.length; i++) {
-                for (var j = 0; j < newSensors.length; j++) {
-                    if (oldSensors[i].sensorTempDSFamilyId === newSensors[j].sensorTempDSFamilyId) {
-
-                        oldSensors[i].isConnected = newSensors[j].isConnected;
-
-                        //Temp
-                        oldSensors[i].tempCelsius = newSensors[j].tempCelsius;
-                        //oldSensors[i].tempConverted = unitMeasurementConverter.convertFromCelsius(oldSensors[i].unitMeasurementId, oldSensors[i].tempCelsius);
-
-                        //Chart
-
-                        oldSensors[i].chart[1].key = 'Temperatura ' + oldSensors[i].tempCelsius + ' °C';
-
-                        oldSensors[i].chart[0].values.push({
-                            epochTime: device.epochTimeUtc,
-                            temperature: oldSensors[i].highAlarm.alarmCelsius,
-                        });
-
-                        oldSensors[i].chart[1].values.push({
-                            epochTime: device.epochTimeUtc,
-                            temperature: oldSensors[i].tempCelsius,
-                        });
-
-                        oldSensors[i].chart[2].values.push({
-                            epochTime: device.epochTimeUtc,
-                            temperature: oldSensors[i].lowAlarm.alarmCelsius,
-                        });
-
-                        if (oldSensors[i].chart[0].values.length > 60)
-                            oldSensors[i].chart[0].values.shift();
-
-                        if (oldSensors[i].chart[1].values.length > 60)
-                            oldSensors[i].chart[1].values.shift();
-
-                        if (oldSensors[i].chart[2].values.length > 60)
-                            oldSensors[i].chart[2].values.shift();
-
-                        break;
-                    }
-                }
-            }
-        }
-
-        var chartLine = function (key) {
-            this.key = key;
-            this.values = [];
-        }
+        };                
 
         var onGetAllByApplicationIdCompleted = function (payload) {
 
@@ -202,38 +132,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             device.label = result.label;
             deviceContext.$digest();
             $rootScope.$emit(deviceConstant.setLabelCompletedEventName + result.deviceId, result);
-        }
-
-        var insertDeviceInCollection = function (device) {
-            //device.createDate = new Date(device.createDate * 1000).toLocaleString();
-            //deviceContext.device.push(device);
-            //for (var i = 0; i < device.sensors.length; i++) {
-
-            //var sensor = device.sensors[i];
-
-            //temp
-            //sensor.tempConverted = null;
-
-            //unitMeasurement
-
-            // Arrumar aqui !!!
-            //sensor.unitMeasurement = siContext.getUnitMeasurementScaleByKey(sensor.unitMeasurementId);
-
-            //sensorUnitMeasurementScale
-            //sensor.sensorUnitMeasurementScale.maxConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.max);
-            //sensor.sensorUnitMeasurementScale.minConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.sensorUnitMeasurementScale.min);
-
-            //alarms
-            //sensor.highAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.highAlarm.alarmCelsius);
-            //sensor.lowAlarm.alarmConverted = unitMeasurementConverter.convertFromCelsius(sensor.unitMeasurementId, sensor.lowAlarm.alarmCelsius);
-
-            //Chart
-            //sensor.chart = [];
-            //sensor.chart.push(new chartLine("Máximo"));
-            //sensor.chart.push(new chartLine("Temperatura"));
-            //sensor.chart.push(new chartLine("Mínimo"));
-            //}
-        }
+        }        
 
         $rootScope.$on('$destroy', function () {
             clearOnConnected();

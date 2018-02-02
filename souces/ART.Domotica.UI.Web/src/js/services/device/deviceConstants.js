@@ -92,6 +92,8 @@ app.constant('deviceSensorsConstant', {
     setPublishIntervalInMilliSecondsCompletedTopic: 'DeviceSensors.SetPublishIntervalInMilliSecondsViewCompleted',
     setPublishIntervalInMilliSecondsCompletedEventName: 'deviceSensorsService.onSetPublishIntervalInMilliSecondsCompleted_Id_',    
 
+    messageIoTTopic: 'DeviceSensors.MessageIoT',    
+    messageIoTEventName: 'deviceSensorsService.onMessageIoTReceived',  
 });
 
 app.constant('sensorInDeviceConstant', {

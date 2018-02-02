@@ -62,6 +62,7 @@ int configurationEEPROMAddr = 0;
 
 #define TOPIC_SUB_DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS "DeviceSensors/SetReadIntervalInMilliSecondsIoT"
 #define TOPIC_SUB_DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS "DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
+#define TOPIC_PUB_DEVICE_SENSORS_MESSAGE "DeviceSensors/MessageIoT"
 
 #define TOPIC_SUB_SENSOR_IN_DEVICE_SET_ORDINATION "SensorInDevice/SetOrdinationIoT"
 
@@ -76,8 +77,6 @@ int configurationEEPROMAddr = 0;
 #define TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE "SensorUnitMeasurementScale/SetDatasheetUnitMeasurementScaleIoT"
 #define TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE "SensorUnitMeasurementScale/SetRangeIoT"
 #define TOPIC_SUB_SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE "SensorUnitMeasurementScale/SetChartLimiterIoT"
-
-#define TOPIC_PUB_TEMP   "ARTPUBTEMP"    //t�pico MQTT de envio de informa��es para Broker
 
 uint64_t deviceSensorsReadTempTimestamp = 0;
 uint64_t deviceSensorsPublishMessageTimestamp = 0;
@@ -435,8 +434,6 @@ void loopMQQTConnected(uint64_t now)
   DeviceMQ* deviceMQ = espDevice.getDeviceMQ();
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
   DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
-
-  PubSubClient* mqqt = deviceMQ->getMQQT();
   
   bool mqqtPrintSent = false;
   
@@ -456,19 +453,20 @@ void loopMQQTConnected(uint64_t now)
       StaticJsonBuffer<2048> jsonBuffer;
       JsonObject& root = jsonBuffer.createObject();
 
-      root["applicationId"] = espDevice.getDeviceInApplication()->getApplicationId();
+      root["deviceId"] = espDevice.getDeviceId();
+      root["deviceDatasheetId"] = espDevice.getDeviceDatasheetId();
       root["epochTimeUtc"] = espDevice.getDeviceNTP()->getEpochTimeUTC();
 
       espDevice.getDeviceSensors()->createSensorsJsonNestedArray(root);
 
-      int sensorsJsonLen = root.measureLength();
-      char sensorsJson[sensorsJsonLen + 1];
-      root.printTo(sensorsJson, sizeof(sensorsJson));
+      int messageJsonLen = root.measureLength();
+      char messageJson[messageJsonLen + 1];
+      root.printTo(messageJson, sizeof(messageJson));
 
-      Serial.print("enviando para o servidor (Char Len)=> ");
-      Serial.println(sensorsJsonLen);
+      Serial.print("DeviceSensors enviando para o servidor (Char Len)=> ");
+      Serial.println(messageJsonLen);
 
-      mqqt->publish(TOPIC_PUB_TEMP, sensorsJson);
+      deviceMQ->publishInApplication(TOPIC_PUB_DEVICE_SENSORS_MESSAGE, messageJson);
     }
 
     // Sensor

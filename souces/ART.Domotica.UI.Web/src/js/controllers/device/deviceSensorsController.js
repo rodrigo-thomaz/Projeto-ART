@@ -10,18 +10,27 @@ app.controller('deviceSensorsController', ['$scope', '$rootScope', '$timeout', '
 
         $scope.readIntervalInMilliSecondsView = deviceSensors.readIntervalInMilliSeconds;
         $scope.publishIntervalInMilliSecondsView = deviceSensors.publishIntervalInMilliSeconds;
+        $scope.epochTimeUtcView = deviceSensors.epochTimeUtc;
 
+        clearOnMessageIoTReceived = $rootScope.$on(deviceSensorsConstant.messageIoTEventName + $scope.deviceSensors.deviceSensorsId, onMessageIoTReceived);
         clearOnSetReadIntervalInMilliSecondsCompleted = $rootScope.$on(deviceSensorsConstant.setReadIntervalInMilliSecondsCompletedEventName + $scope.deviceSensors.deviceSensorsId, onSetReadIntervalInMilliSecondsCompleted);        
         clearOnSetPublishIntervalInMilliSecondsCompleted = $rootScope.$on(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedEventName + $scope.deviceSensors.deviceSensorsId, onSetPublishIntervalInMilliSecondsCompleted);        
     }
 
+    var clearOnMessageIoTReceived = null;
     var clearOnSetReadIntervalInMilliSecondsCompleted = null;
     var clearOnSetPublishIntervalInMilliSecondsCompleted = null;
 
     $scope.$on('$destroy', function () {
+        clearOnMessageIoTReceived();
         clearOnSetReadIntervalInMilliSecondsCompleted();
         clearOnSetPublishIntervalInMilliSecondsCompleted();
     });
+
+    var onMessageIoTReceived = function (event, data) {
+        $scope.epochTimeUtcView = $scope.deviceSensors.epochTimeUtc;
+        $scope.$apply();
+    };
 
     var onSetReadIntervalInMilliSecondsCompleted = function (event, data) {
         $scope.readIntervalInMilliSecondsView = data.readIntervalInMilliSeconds;
