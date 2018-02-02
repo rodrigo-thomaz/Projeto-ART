@@ -41,8 +41,8 @@ namespace ART
 		bool 								getConnected();
 		void 								setConnected(bool value);
 
-		float 								getTempCelsius();
-		void 								setTempCelsius(float value);
+		float 								getValue();
+		void 								setValue(float value);
 
 		bool 								hasAlarm();
 		bool 								hasAlarmBuzzer();		
@@ -77,7 +77,7 @@ namespace ART
 
 		bool 								_connected;
 
-		float 								_tempCelsius;
+		float 								_value;
 
 		long 								_epochTimeUtc;		
 	};

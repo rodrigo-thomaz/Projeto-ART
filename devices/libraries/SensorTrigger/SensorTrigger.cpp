@@ -76,7 +76,7 @@ namespace ART
 
 	bool SensorTrigger::hasAlarm()
 	{
-		float temp = _sensor->getTempCelsius();
+		float temp = _sensor->getValue();
 		return temp >= _min && temp <= _max;
 	}
 

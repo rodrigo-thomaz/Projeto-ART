@@ -159,7 +159,7 @@ namespace ART
 			Sensor* sensor = _sensorsInDevice[i].getSensor();
 			sensor->setConnected(_dallas.isConnected(sensor->getDeviceAddress()));
 			sensor->getSensorTempDSFamily()->setResolution(_dallas.getResolution(sensor->getDeviceAddress()));
-			sensor->setTempCelsius(_dallas.getTempC(sensor->getDeviceAddress()));
+			sensor->setValue(_dallas.getTempC(sensor->getDeviceAddress()));
 
 			if (sensor->hasAlarm()) 		hasAlarm = true;
 			if (sensor->hasAlarmBuzzer()) 	hasAlarmBuzzer = true;
@@ -487,7 +487,7 @@ namespace ART
 		JSONencoder["sensorId"] = sensor->getSensorId();
 		JSONencoder["isConnected"] = sensor->getConnected();
 		JSONencoder["resolution"] = sensor->getSensorTempDSFamily()->getResolution();
-		JSONencoder["value"] = sensor->getTempCelsius();
+		JSONencoder["value"] = sensor->getValue();
 	}
 
 	String DeviceSensors::convertDeviceAddressToString(const uint8_t* deviceAddress)

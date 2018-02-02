@@ -97,7 +97,7 @@ void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y
 	float chartLimiterMin = sensor->getSensorUnitMeasurementScale()->getChartLimiterMin();
 
 	float range = chartLimiterMax - chartLimiterMin;
-	float value = sensor->getTempCelsius() - chartLimiterMin;
+	float value = sensor->getValue() - chartLimiterMin;
 	float percent = (value * 100) / range;
 
 	int tempHeight = round((height * percent) / 100);
@@ -114,7 +114,7 @@ void DisplayTemperatureSensorManager::printText(Sensor* sensor, int x, int y)
 {
 	UnitMeasurementEnum unitMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId();
 
-	float tempConverted = this->_unitMeasurementConverter->convertFromCelsius(unitMeasurementId, sensor->getTempCelsius());
+	float tempConverted = this->_unitMeasurementConverter->convertFromCelsius(unitMeasurementId, sensor->getValue());
 
 	//Temporario
 	String symbol = "C";

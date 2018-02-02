@@ -109,14 +109,14 @@ namespace ART
 		_connected = value;
 	}
 
-	float Sensor::getTempCelsius()
+	float Sensor::getValue()
 	{
-		return _tempCelsius;
+		return _value;
 	}
 
-	void Sensor::setTempCelsius(float value)
+	void Sensor::setValue(float value)
 	{
-		_tempCelsius = value;
+		_value = value;
 	}
 
 	bool Sensor::hasAlarm()
