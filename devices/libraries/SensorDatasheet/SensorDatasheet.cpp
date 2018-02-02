@@ -20,6 +20,11 @@ namespace ART
 		Serial.println("[SensorDatasheet destructor]");
 	}
 
+	SensorDatasheet SensorDatasheet::create(DeviceSensors * deviceSensors, JsonObject & jsonObject)
+	{
+		return SensorDatasheet(deviceSensors, jsonObject);
+	}
+
 	SensorTypeEnum SensorDatasheet::getSensorTypeId()
 	{
 		return _sensorTypeId;

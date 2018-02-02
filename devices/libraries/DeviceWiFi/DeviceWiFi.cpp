@@ -87,6 +87,11 @@ namespace ART
 		delete (_hostName);
 	}
 
+	void DeviceWiFi::create(DeviceWiFi *(&deviceWiFi), ESPDevice * espDevice)
+	{
+		deviceWiFi = new DeviceWiFi(espDevice);
+	}
+
 	void DeviceWiFi::load(JsonObject& jsonObject)
 	{
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();

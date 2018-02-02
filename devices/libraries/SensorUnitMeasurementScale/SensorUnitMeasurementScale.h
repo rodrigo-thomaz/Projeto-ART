@@ -16,10 +16,7 @@ namespace ART
 		SensorUnitMeasurementScale(Sensor* sensor, JsonObject& jsonObject);
 		~SensorUnitMeasurementScale();
 
-		static void create(SensorUnitMeasurementScale* (&sensorUnitMeasurementScale), Sensor* sensor, JsonObject& jsonObject)
-		{
-			sensorUnitMeasurementScale = new SensorUnitMeasurementScale(sensor, jsonObject);
-		}
+		static void							create(SensorUnitMeasurementScale* (&sensorUnitMeasurementScale), Sensor* sensor, JsonObject& jsonObject);
 
 		UnitMeasurementEnum					getUnitMeasurementId();
 		void 								setUnitMeasurementId(UnitMeasurementEnum value);

@@ -16,13 +16,10 @@ namespace ART
 		SensorTempDSFamily(Sensor* sensor, JsonObject& jsonObject);
 		~SensorTempDSFamily();
 
-		int 								getResolution();
-		void 								setResolution(int value);
+		static void							create(SensorTempDSFamily* (&sensorTempDSFamily), Sensor* sensor, JsonObject& jsonObject);
 
-		static void create(SensorTempDSFamily* (&sensorTempDSFamily), Sensor* sensor, JsonObject& jsonObject)
-		{
-			sensorTempDSFamily = new SensorTempDSFamily(sensor, jsonObject);
-		}
+		int 								getResolution();
+		void 								setResolution(int value);		
 
 		static String getFamily(byte deviceAddress[8])
 		{

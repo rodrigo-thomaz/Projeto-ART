@@ -20,6 +20,11 @@ namespace ART
 		Serial.println("[SensorDatasheetUnitMeasurementDefault destructor]");
 	}
 
+	void SensorDatasheetUnitMeasurementDefault::create(SensorDatasheetUnitMeasurementDefault *(&sensorDatasheetUnitMeasurementDefault), SensorDatasheet * sensorDatasheet, JsonObject & jsonObject)
+	{
+		sensorDatasheetUnitMeasurementDefault = new SensorDatasheetUnitMeasurementDefault(sensorDatasheet, jsonObject);
+	}
+
 	UnitMeasurementEnum SensorDatasheetUnitMeasurementDefault::getUnitMeasurementId()
 	{
 		return _unitMeasurementId;

@@ -15,6 +15,11 @@ namespace ART
 		delete (_debug);
 	}
 
+	void DeviceDebug::create(DeviceDebug *(&deviceDebug), ESPDevice * espDevice)
+	{
+		deviceDebug = new DeviceDebug(espDevice);
+	}
+
 	void DeviceDebug::loop()
 	{
 		_debug->handle();

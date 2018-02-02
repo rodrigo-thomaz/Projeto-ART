@@ -81,6 +81,8 @@ namespace ART
 		DeviceWiFi(ESPDevice* espDevice);
 		~DeviceWiFi();
 
+		static void					create(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice);
+
 		void						load(JsonObject& jsonObject);
 
 		char *						getStationMacAddress();
@@ -90,12 +92,7 @@ namespace ART
 		void						setHostName(char* json);
 
 		int							getPublishIntervalInMilliSeconds();
-		void						setPublishIntervalInMilliSeconds(char* json);
-
-		static void create(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice)
-		{
-			deviceWiFi = new DeviceWiFi(espDevice);
-		}
+		void						setPublishIntervalInMilliSeconds(char* json);		
 
 		//boolean       autoConnect();
 		void          autoConnect();

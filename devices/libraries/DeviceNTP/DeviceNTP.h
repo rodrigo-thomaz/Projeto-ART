@@ -24,6 +24,8 @@ namespace ART
 		DeviceNTP(ESPDevice* espDevice);
 		~DeviceNTP();
 
+		static void										create(DeviceNTP* (&deviceNTP), ESPDevice* espDevice);
+
 		void											load(JsonObject& jsonObject);
 
 		char*											getHost();
@@ -78,12 +80,7 @@ namespace ART
 		*/
 		void end();
 
-		DeviceNTP& setUpdateCallback(DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE callback);
-
-		static void create(DeviceNTP* (&deviceNTP), ESPDevice* espDevice)
-		{
-			deviceNTP = new DeviceNTP(espDevice);
-		}
+		DeviceNTP& setUpdateCallback(DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE callback);		
 
 	private:
 

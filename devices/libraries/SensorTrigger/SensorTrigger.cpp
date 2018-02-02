@@ -24,6 +24,11 @@ namespace ART
 		Serial.println("[SensorTrigger destructor]");
 	}
 
+	SensorTrigger SensorTrigger::create(Sensor * sensor, JsonObject & jsonObject)
+	{
+		return SensorTrigger(sensor, jsonObject);
+	}
+
 	char * SensorTrigger::getSensorTriggerId()
 	{
 		return _sensorTriggerId;

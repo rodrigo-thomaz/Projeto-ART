@@ -12,6 +12,11 @@ namespace ART
 	{
 	}
 
+	void DeviceBinary::create(DeviceBinary *(&deviceBinary), ESPDevice * espDevice)
+	{
+		deviceBinary = new DeviceBinary(espDevice);
+	}
+
 	void DeviceBinary::loop()
 	{
 		if (!_espDevice->getDeviceWiFi()->isConnected()) {

@@ -15,10 +15,7 @@ namespace ART
 		SensorTrigger(Sensor* sensor, JsonObject& jsonObject);
 		~SensorTrigger();
 		
-		static SensorTrigger create(Sensor* sensor, JsonObject& jsonObject)
-		{
-			return SensorTrigger(sensor, jsonObject);
-		}		
+		static SensorTrigger				create(Sensor* sensor, JsonObject& jsonObject);
 
 		char* 								getSensorTriggerId();
 

@@ -18,15 +18,12 @@ namespace ART
 		SensorDatasheetUnitMeasurementDefault(SensorDatasheet* sensorDatasheet, JsonObject& jsonObject);
 		~SensorDatasheetUnitMeasurementDefault();
 
+		static void							create(SensorDatasheetUnitMeasurementDefault* (&sensorDatasheetUnitMeasurementDefault), SensorDatasheet* sensorDatasheet, JsonObject& jsonObject);
+
 		UnitMeasurementEnum					getUnitMeasurementId();
 
 		float 								getMax();
-		float 								getMin();
-
-		static void create(SensorDatasheetUnitMeasurementDefault* (&sensorDatasheetUnitMeasurementDefault), SensorDatasheet* sensorDatasheet, JsonObject& jsonObject)
-		{
-			sensorDatasheetUnitMeasurementDefault = new SensorDatasheetUnitMeasurementDefault(sensorDatasheet, jsonObject);
-		}
+		float 								getMin();		
 
 	private:
 

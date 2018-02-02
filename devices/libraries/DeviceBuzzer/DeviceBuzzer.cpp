@@ -13,6 +13,11 @@ namespace ART
 		delete (_espDevice);
 	}
 
+	void DeviceBuzzer::create(DeviceBuzzer *(&deviceBuzzer), ESPDevice * espDevice)
+	{
+		deviceBuzzer = new DeviceBuzzer(espDevice);
+	}
+
 	void DeviceBuzzer::test()
 	{
 		tone(BUZZER_PIN, 900, 300); //aqui sai o som   

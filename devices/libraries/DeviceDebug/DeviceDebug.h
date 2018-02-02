@@ -17,6 +17,8 @@ namespace ART
 		DeviceDebug(ESPDevice* espDevice);
 		~DeviceDebug();
 
+		static void							create(DeviceDebug* (&deviceDebug), ESPDevice* espDevice);
+
 		void								loop();
 
 		bool 								isActive(uint8_t debugLevel = DEBUG);
@@ -44,12 +46,7 @@ namespace ART
 		void								setShowColors(char* json);
 		void								setShowDebugLevel(char* json);
 		void								setShowProfiler(char* json);
-		void								setShowTime(char* json);
-
-		static void create(DeviceDebug* (&deviceDebug), ESPDevice* espDevice)
-		{
-			deviceDebug = new DeviceDebug(espDevice);
-		}
+		void								setShowTime(char* json);		
 
 		static const uint8_t PROFILER = 0;
 		static const uint8_t VERBOSE = 1;
