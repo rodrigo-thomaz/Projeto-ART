@@ -29,9 +29,9 @@ namespace ART
 		return SensorTrigger(sensor, jsonObject);
 	}
 
-	char * SensorTrigger::getSensorTriggerId()
+	char * SensorTrigger::getSensorTriggerId() const
 	{
-		return _sensorTriggerId;
+		return (_sensorTriggerId);
 	}
 
 	bool SensorTrigger::getTriggerOn()

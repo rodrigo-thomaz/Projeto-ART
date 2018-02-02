@@ -115,19 +115,19 @@ namespace ART
 		}		
 	}
 
-	char* DeviceWiFi::getStationMacAddress()
+	char* DeviceWiFi::getStationMacAddress() const
 	{
-		return _stationMacAddress;
+		return (_stationMacAddress);
 	}
 
-	char* DeviceWiFi::getSoftAPMacAddress()
+	char* DeviceWiFi::getSoftAPMacAddress() const
 	{
-		return _softAPMacAddress;
+		return (_softAPMacAddress);
 	}
 
-	char* DeviceWiFi::getHostName()
+	char* DeviceWiFi::getHostName() const
 	{
-		return _hostName;
+		return (_hostName);
 	}
 
 	void DeviceWiFi::setHostName(char* json)

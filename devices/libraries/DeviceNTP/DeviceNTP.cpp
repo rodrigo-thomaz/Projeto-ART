@@ -67,9 +67,9 @@ namespace ART
 		return true;
 	}
 
-	char* DeviceNTP::getHost()
+	char* DeviceNTP::getHost() const
 	{
-		return _host;
+		return (_host);
 	}
 
 	int DeviceNTP::getPort()

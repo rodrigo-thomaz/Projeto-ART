@@ -17,7 +17,7 @@ namespace ART
 		
 		static SensorTrigger				create(Sensor* sensor, JsonObject& jsonObject);
 
-		char* 								getSensorTriggerId();
+		char* 								getSensorTriggerId() const;
 
 		bool 								getTriggerOn();
 		void 								setTriggerOn(bool value);

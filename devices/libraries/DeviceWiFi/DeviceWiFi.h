@@ -85,10 +85,10 @@ namespace ART
 
 		void						load(JsonObject& jsonObject);
 
-		char *						getStationMacAddress();
-		char *						getSoftAPMacAddress();
+		char *						getStationMacAddress() const;
+		char *						getSoftAPMacAddress() const;
 
-		char *						getHostName();
+		char *						getHostName() const;
 		void						setHostName(char* json);
 
 		int							getPublishIntervalInMilliSeconds();

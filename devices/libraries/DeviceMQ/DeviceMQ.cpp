@@ -65,9 +65,9 @@ namespace ART
 		}
 	}
 
-	char* DeviceMQ::getHost()
+	char* DeviceMQ::getHost() const
 	{
-		return _host;
+		return (_host);
 	}
 
 	int DeviceMQ::getPort()
@@ -75,24 +75,24 @@ namespace ART
 		return _port;
 	}
 
-	char* DeviceMQ::getUser()
+	char* DeviceMQ::getUser() const
 	{
-		return _user;
+		return (_user);
 	}
 
-	char* DeviceMQ::getPassword()
+	char* DeviceMQ::getPassword() const
 	{
-		return _password;
+		return (_password);
 	}
 
-	char* DeviceMQ::getClientId()
+	char* DeviceMQ::getClientId() const
 	{
-		return _clientId;
+		return (_clientId);
 	}
 
-	char* DeviceMQ::getDeviceTopic()
+	char* DeviceMQ::getDeviceTopic() const
 	{
-		return _deviceTopic;
+		return (_deviceTopic);
 	}
 
 	bool DeviceMQ::begin()

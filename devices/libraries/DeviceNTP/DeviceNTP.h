@@ -28,7 +28,7 @@ namespace ART
 
 		void											load(JsonObject& jsonObject);
 
-		char*											getHost();
+		char*											getHost() const;
 		int												getPort();
 
 		int												getUtcTimeOffsetInSecond();

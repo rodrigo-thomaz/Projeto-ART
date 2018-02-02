@@ -22,12 +22,12 @@ namespace ART
 
 		void												load(JsonObject& jsonObject);
 
-		char*												getHost();
+		char*												getHost() const;
 		int													getPort();
-		char*												getUser();
-		char*												getPassword();
-		char*												getClientId();
-		char*												getDeviceTopic();
+		char*												getUser() const;
+		char*												getPassword() const;
+		char*												getClientId() const;
+		char*												getDeviceTopic() const;
 
 		bool												begin();
 
