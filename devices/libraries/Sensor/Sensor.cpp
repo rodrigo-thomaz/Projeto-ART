@@ -58,9 +58,9 @@ namespace ART
 		sensor = new Sensor(sensorInDevice, jsonObject);
 	}
 
-	char* Sensor::getSensorId()
+	char* Sensor::getSensorId() const
 	{
-		return _sensorId;
+		return (_sensorId);
 	}
 
 	SensorTypeEnum Sensor::getSensorTypeId()

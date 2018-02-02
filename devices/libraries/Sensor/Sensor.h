@@ -26,7 +26,7 @@ namespace ART
 
 		static void							create(Sensor* (&sensor), SensorInDevice* sensorInDevice, JsonObject& jsonObject);
 
-		char*								getSensorId();
+		char*								getSensorId() const;
 		SensorTypeEnum						getSensorTypeId();
 		SensorDatasheetEnum					getSensorDatasheetId();
 
