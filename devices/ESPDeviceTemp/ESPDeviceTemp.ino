@@ -391,7 +391,7 @@ void loopInApplication()
 	}
 
 	// MQTT
-  if(espDevice.getDeviceMQ()->getMQQT()->connected()){
+  if(espDevice.getDeviceMQ()->connected()){
     loopMQQTConnected(now);
   }
 

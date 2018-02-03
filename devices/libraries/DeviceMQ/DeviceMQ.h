@@ -20,6 +20,8 @@ namespace ART
 		DeviceMQ(ESPDevice* espDevice);
 		~DeviceMQ();
 
+		static void											create(DeviceMQ* (&deviceMQ), ESPDevice* espDevice);
+
 		void												load(JsonObject& jsonObject);
 
 		char*												getHost() const;
@@ -38,6 +40,8 @@ namespace ART
 
 		PubSubClient*										getMQQT();
 
+		bool												connected();
+
 		void												publishInApplication(const char* topic, const char* payload);
 
 		void												subscribeInApplication(const char* topic);
@@ -46,12 +50,7 @@ namespace ART
 		void												unSubscribeInApplication(const char* topic);
 		void												unSubscribeInDevice(const char* topic);
 
-		String 												getTopicKey(char* routingKey);
-
-		static void create(DeviceMQ* (&deviceMQ), ESPDevice* espDevice)
-		{
-			deviceMQ = new DeviceMQ(espDevice);
-		}
+		String 												getTopicKey(char* routingKey);		
 
 	private:
 

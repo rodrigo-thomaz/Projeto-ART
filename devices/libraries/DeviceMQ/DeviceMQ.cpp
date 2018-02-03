@@ -26,6 +26,11 @@ namespace ART
 		delete (_deviceTopic);
 	}
 
+	void DeviceMQ::create(DeviceMQ *(&deviceMQ), ESPDevice * espDevice)
+	{
+		deviceMQ = new DeviceMQ(espDevice);
+	}
+
 	void DeviceMQ::load(JsonObject& jsonObject)
 	{
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
@@ -188,6 +193,11 @@ namespace ART
 
 	PubSubClient* DeviceMQ::getMQQT() {
 		return this->_mqqt;
+	}
+
+	bool DeviceMQ::connected()
+	{
+		return _mqqt->connected();
 	}
 
 	void DeviceMQ::publishInApplication(const char* topic, const char* payload)

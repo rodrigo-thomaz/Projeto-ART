@@ -44,9 +44,7 @@ namespace ART
 
 		if (this->_initializing) return false;
 
-		PubSubClient* mqqt = _espDevice->getDeviceMQ()->getMQQT();
-
-		if (!mqqt->connected()) return false;
+		if (_espDevice->getDeviceMQ()->connected()) return false;
 
 		// initializing
 
