@@ -14,7 +14,9 @@
 #include "ESP8266mDNS.h"
 
 //Test
+#include "functional"
 #include "Listener.h"
+#include "Listener1.h"
 //Test
 
 //defines - mapeamento de pinos do NodeMCU
@@ -86,6 +88,20 @@ void voidTest3(void* params)
   Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
+void voidTest11(char* topic, byte* payload, unsigned int length)
+{
+  Serial.print("[voidTest11] params: ");
+  Serial.print(topic);
+  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+}
+
+void voidTest12(char* topic, byte* payload, unsigned int length)
+{
+  Serial.print("[voidTest12] params: ");
+  Serial.print(topic);
+  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+}
+
 void setup() {
 
 	Serial.begin(9600);
@@ -122,6 +138,12 @@ void setup() {
   Listener listener2;
   Listener listener3;
 
+  //Listener1<int> listener11;
+  //Listener1<char*, unsigned char*, unsigned int> listener12;
+
+  //listener11.setCallback(voidTest11);
+  //listener12.setCallback(voidTest12);
+  
   listener.setCallback(voidTest1);
   listener2.setCallback(voidTest2);
   listener3.setCallback(voidTest3);
@@ -129,6 +151,9 @@ void setup() {
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener3);
+
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener11);
+ // espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener12);
 
   char event[] = "EVENT throwed\n";
   char event2[] = "EVENT2 throwed\n";
@@ -138,11 +163,19 @@ void setup() {
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
 
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event);
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event3);
+
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
+
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->removeListener(&listener12);
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
+
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event11);
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
   
   //Test
   
