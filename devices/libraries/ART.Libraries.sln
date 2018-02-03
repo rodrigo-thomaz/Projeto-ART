@@ -67,6 +67,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurement", "UnitMeas
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorTrigger", "SensorTrigger\SensorTrigger.vcxitems", "{69FB1953-8F6C-4362-9DE2-9E8C6E32DFF2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EventDispatcher", "EventDispatcher\EventDispatcher.vcxitems", "{170AFDB7-90BB-4834-89A9-59F176925B3D}"
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

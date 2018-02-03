@@ -11,6 +11,8 @@ namespace ART
 
 		this->_mqqt = new PubSubClient(this->_espClient);
 
+		_callbackEventDispatcher = new EventDispatcher;
+
 		_onSubCallback = [=](char* topic, byte* payload, unsigned int length) {
 			this->onSubCallback(topic, payload, length);
 		};
@@ -261,6 +263,11 @@ namespace ART
 		String result = routingKeyStr.substring(restLastIndexOf + 1, restSize);
 
 		return result;
+	}
+
+	EventDispatcher * DeviceMQ::getCallbackEventDispatcher()
+	{
+		return _callbackEventDispatcher;
 	}
 
 	String DeviceMQ::getApplicationRoutingKey(const char* topic)

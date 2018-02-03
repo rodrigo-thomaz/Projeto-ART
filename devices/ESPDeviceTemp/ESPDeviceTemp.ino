@@ -13,6 +13,13 @@
 #include <DNSServer.h>
 #include "ESP8266mDNS.h"
 
+//Test
+#include "SimpleListener.h"
+#define EVENT 1
+#define EVENT_2 2
+#define ANOTHER_EVENT 3
+//Test
+
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
 #define D1    5
@@ -87,6 +94,36 @@ void setup() {
 
 	espDevice.getDeviceMQ()->setConnectedCallback(mqtt_ConnectedCallback);
 	espDevice.getDeviceMQ()->setSubCallback(mqtt_SubCallback);
+
+  // Test
+  
+  SimpleListener listener;
+  SimpleListener listener2;
+  SimpleListener listener3;
+  
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(EVENT,&listener);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(EVENT,&listener2);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(EVENT,&listener3);
+  
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(EVENT_2,&listener2);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(ANOTHER_EVENT,&listener3);
+
+  char event[] = "EVENT throwed\n";
+  char event2[] = "EVENT2 throwed\n";
+  char event3[] = "ANOTHER_EVENT throwed\n";
+
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(EVENT,event2);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(EVENT_2,event);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(ANOTHER_EVENT,event3);
+
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
+
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(EVENT_2,event2);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(EVENT,event);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(ANOTHER_EVENT,event3);
+  
+  //Test
+  
 	espDevice.getDeviceMQ()->begin();
 
 	String hostNameWifi = HOST_NAME;

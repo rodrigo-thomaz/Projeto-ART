@@ -5,6 +5,8 @@
 #include "RemoteDebug.h"
 #include "PubSubClient.h"
 
+#include "EventDispatcher.h"
+
 #define DEVICE_MQ_SUB_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
 #define DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE std::function<void(PubSubClient*)>
 
@@ -52,6 +54,8 @@ namespace ART
 
 		String 												getTopicKey(char* routingKey);		
 
+		EventDispatcher*									getCallbackEventDispatcher();
+
 	private:
 
 		ESPDevice * _espDevice;
@@ -67,6 +71,8 @@ namespace ART
 
 		WiFiClient	 										_espClient;
 		PubSubClient* 										_mqqt;
+
+		EventDispatcher*									_callbackEventDispatcher;
 
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_subCallback;
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_onSubCallback;
