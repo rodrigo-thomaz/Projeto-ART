@@ -364,7 +364,7 @@ void loop() {
 	}
 
 	//keep-alive da comunicação com broker MQTT
-	espDevice.getDeviceMQ()->getMQQT()->loop();
+	espDevice.getDeviceMQ()->loop();
 
 }
 

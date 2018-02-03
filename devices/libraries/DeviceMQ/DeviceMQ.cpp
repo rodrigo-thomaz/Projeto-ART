@@ -70,6 +70,11 @@ namespace ART
 		}
 	}
 
+	void DeviceMQ::loop()
+	{
+		_mqqt->loop();
+	}
+
 	char* DeviceMQ::getHost() const
 	{
 		return (_host);
@@ -189,10 +194,6 @@ namespace ART
 	DeviceMQ& DeviceMQ::setConnectedCallback(DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE callback) {
 		this->_connectedCallback = callback;
 		return *this;
-	}
-
-	PubSubClient* DeviceMQ::getMQQT() {
-		return this->_mqqt;
 	}
 
 	bool DeviceMQ::connected()

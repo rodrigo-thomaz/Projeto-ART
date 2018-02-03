@@ -24,6 +24,8 @@ namespace ART
 
 		void												load(JsonObject& jsonObject);
 
+		void												loop();
+
 		char*												getHost() const;
 		int													getPort();
 		char*												getUser() const;
@@ -37,8 +39,6 @@ namespace ART
 		DeviceMQ& 											setConnectedCallback(DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE callback);
 
 		bool												autoConnect();
-
-		PubSubClient*										getMQQT();
 
 		bool												connected();
 
