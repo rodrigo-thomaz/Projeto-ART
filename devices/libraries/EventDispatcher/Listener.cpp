@@ -1,7 +1,5 @@
 #include "Listener.h"
 
-#include <cstddef>         // std::size_t
-
 namespace ART
 {
 	Listener::Listener()
