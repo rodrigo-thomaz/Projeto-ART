@@ -56,6 +56,7 @@ namespace ART
 		String 												getTopicKey(char* routingKey);		
 
 		EventDispatcher*									getCallbackEventDispatcher();
+		EventDispatcher1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE>*	getCallbackEventDispatcher1();
 
 	private:
 
@@ -75,7 +76,7 @@ namespace ART
 
 		EventDispatcher*									_callbackEventDispatcher;
 
-		EventDispatcher1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE>*								_callbackEventDispatcher1;
+		EventDispatcher1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE>*	_callbackEventDispatcher1;
 
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_subCallback;
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_onSubCallback;
