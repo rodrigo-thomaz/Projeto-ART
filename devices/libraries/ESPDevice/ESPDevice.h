@@ -14,6 +14,11 @@
 #include "ArduinoJson.h"
 #include "ESP8266HTTPClient.h"
 
+#define ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB "ESPDevice/InsertInApplicationIoT"
+#define ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB "ESPDevice/DeleteFromApplicationIoT"
+#define ESP_DEVICE_UPDATE_PIN_TOPIC_SUB "ESPDevice/UpdatePinIoT"
+#define ESP_DEVICE_SET_LABEL_TOPIC_SUB "ESPDevice/SetLabelIoT"
+
 namespace ART
 {
 	class ESPDevice

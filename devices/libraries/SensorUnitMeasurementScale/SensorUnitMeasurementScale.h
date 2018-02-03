@@ -5,6 +5,10 @@
 #include "ArduinoJson.h"
 #include "UnitMeasurementEnum.h"
 
+#define SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB "SensorUnitMeasurementScale/SetDatasheetUnitMeasurementScaleIoT"
+#define SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB "SensorUnitMeasurementScale/SetRangeIoT"
+#define SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB "SensorUnitMeasurementScale/SetChartLimiterIoT"
+
 namespace ART
 {
 	class Sensor;	

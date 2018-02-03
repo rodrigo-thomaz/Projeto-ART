@@ -5,6 +5,14 @@
 #include "RemoteDebug.h" 
 #include "ESP8266mDNS.h"
 
+#define DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB "DeviceDebug/SetRemoteEnabledIoT"
+#define DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB "DeviceDebug/SetResetCmdEnabledIoT"
+#define DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB "DeviceDebug/SetSerialEnabledIoT"
+#define DEVICE_DEBUG_SET_SHOW_COLORS_TOPIC_SUB "DeviceDebug/SetShowColorsIoT"
+#define DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL_TOPIC_SUB "DeviceDebug/SetShowDebugLevelIoT"
+#define DEVICE_DEBUG_SET_SHOW_PROFILER_TOPIC_SUB "DeviceDebug/SetShowProfilerIoT"
+#define DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB "DeviceDebug/SetShowTimeIoT"
+
 namespace ART
 {
 	class ESPDevice;

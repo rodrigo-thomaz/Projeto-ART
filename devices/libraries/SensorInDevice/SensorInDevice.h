@@ -5,6 +5,8 @@
 #include "Sensor.h"
 #include "SensorDatasheet.h"
 
+#define SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB "SensorInDevice/SetOrdinationIoT"
+
 namespace ART
 {
 	class DeviceSensors;

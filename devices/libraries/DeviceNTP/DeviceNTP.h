@@ -12,6 +12,9 @@
 
 #define DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE std::function<void(bool, bool)>
 
+#define DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB "DeviceNTP/SetUtcTimeOffsetInSecondIoT"
+#define DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB "DeviceNTP/SetUpdateIntervalInMilliSecondIoT"
+
 namespace ART
 {
 	class ESPDevice;

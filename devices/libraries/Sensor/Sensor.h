@@ -13,6 +13,8 @@
 #include "SensorTrigger.h"
 #include "PositionEnum.h"
 
+#define SENSOR_SET_LABEL_TOPIC_SUB "Sensor/SetLabelIoT"
+
 namespace ART
 {
 	class SensorInDevice;	

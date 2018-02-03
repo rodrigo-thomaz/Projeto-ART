@@ -40,46 +40,6 @@ struct config_t
 
 int configurationEEPROMAddr = 0;
 
-#define ESP_DEVICE_UPDATE_PIN_TOPIC_SUB "ESPDevice/UpdatePinIoT"
-#define ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB "ESPDevice/InsertInApplicationIoT"
-#define ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB "ESPDevice/DeleteFromApplicationIoT"
-#define ESP_DEVICE_SET_LABEL_TOPIC_SUB "ESPDevice/SetLabelIoT"
-
-#define DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB "DeviceNTP/SetUtcTimeOffsetInSecondIoT"
-#define DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB "DeviceNTP/SetUpdateIntervalInMilliSecondIoT"
-
-#define DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB "DeviceWiFi/SetHostNameIoT"
-#define DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB "DeviceWiFi/SetPublishIntervalInMilliSecondsIoT"
-#define DEVICE_WIFI_MESSAGE_TOPIC_PUB "DeviceWiFi/MessageIoT" 
-
-#define DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB "DeviceDebug/SetRemoteEnabledIoT"
-#define DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB "DeviceDebug/SetResetCmdEnabledIoT"
-#define DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB "DeviceDebug/SetSerialEnabledIoT"
-#define DEVICE_DEBUG_SET_SHOW_COLORS_TOPIC_SUB "DeviceDebug/SetShowColorsIoT"
-#define DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL_TOPIC_SUB "DeviceDebug/SetShowDebugLevelIoT"
-#define DEVICE_DEBUG_SET_SHOW_PROFILER_TOPIC_SUB "DeviceDebug/SetShowProfilerIoT"
-#define DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB "DeviceDebug/SetShowTimeIoT"
-
-#define DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB "DeviceSensors/SetReadIntervalInMilliSecondsIoT"
-#define DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB "DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
-#define DEVICE_SENSORS_MESSAGE_TOPIC_PUB "DeviceSensors/MessageIoT"
-
-#define SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB "SensorInDevice/SetOrdinationIoT"
-
-#define SENSOR_SET_LABEL_TOPIC_SUB "Sensor/SetLabelIoT"
-
-#define SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB "SensorTempDSFamily/SetResolutionIoT"
-
-#define SENSOR_TRIGGER_INSERT_TOPIC_SUB "SensorTrigger/InsertIoT"
-#define SENSOR_TRIGGER_DELETE_TOPIC_SUB "SensorTrigger/DeleteIoT"
-#define SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB "SensorTrigger/SetTriggerOnIoT"
-#define SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB "SensorTrigger/SetBuzzerOnIoT"
-#define SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB "SensorTrigger/SetTriggerValueIoT"
-
-#define SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB "SensorUnitMeasurementScale/SetDatasheetUnitMeasurementScaleIoT"
-#define SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB "SensorUnitMeasurementScale/SetRangeIoT"
-#define SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB "SensorUnitMeasurementScale/SetChartLimiterIoT"
-
 uint64_t deviceSensorsReadTempTimestamp = 0;
 uint64_t deviceSensorsPublishMessageTimestamp = 0;
 
