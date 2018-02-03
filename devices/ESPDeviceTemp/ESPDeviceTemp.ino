@@ -62,6 +62,21 @@ DisplayMQTTManager displayMQTTManager(displayManager);
 DisplayNTPManager displayNTPManager(displayManager, espDevice);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, espDevice, unitMeasurementConverter);
 
+void voidTest1(void* params)
+{
+  Serial.println("voidTest1 !!!!!!!!!!!!!!!!!!!!!");
+}
+
+void voidTest2(void* params)
+{
+  Serial.println("voidTest2 !!!!!!!!!!!!!!!!!!!!!");
+}
+
+void voidTest3(void* params)
+{
+  Serial.println("voidTest3 !!!!!!!!!!!!!!!!!!!!!");
+}
+
 void setup() {
 
 	Serial.begin(9600);
@@ -97,6 +112,10 @@ void setup() {
   SimpleListener listener;
   SimpleListener listener2;
   SimpleListener listener3;
+
+  listener.setCallback(voidTest1);
+  listener2.setCallback(voidTest2);
+  listener3.setCallback(voidTest3);
   
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener2);

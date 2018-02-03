@@ -25,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)EventDispatcher.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Listener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SimpleListener.cpp" />
   </ItemGroup>
 </Project>
