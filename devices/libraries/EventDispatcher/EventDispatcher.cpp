@@ -4,44 +4,32 @@ namespace ART
 {
 	EventDispatcher::EventDispatcher()
 	{
-		for (int i = 0; i < LISTENER_LIST_SIZE; i++)
-		{
-			events[i] = 0;
-			listeners[i] = 0;
-		}
+		
 	}
 
-	EventDispatcher::~EventDispatcher() {}
+	EventDispatcher::~EventDispatcher() {}	
 
-	bool EventDispatcher::addListener(char event, Listener* listener)
+	void EventDispatcher::addListener(Listener *listener)
 	{
-		for (int i = 0; i < LISTENER_LIST_SIZE; i++)
-			if (events[i] == 0)
-			{
-				events[i] = event;
-				listeners[i] = listener;
-				break;
-			}
+		_listeners.push_back(listener);
 	}
 
 	bool EventDispatcher::removeListener(Listener* listener)
 	{
-		for (int i = 0; i < LISTENER_LIST_SIZE; i++)
-			if (listeners[i] == listener)
+		for (int i = 0; i < this->_listeners.size(); ++i) {
+			if (_listeners[i] == listener)
 			{
-				events[i] = 0;
-				listeners[i] = 0;
+				_listeners.erase(_listeners.begin() + i);
+				return true;
 			}
+		}
+		return false;
 	}
 
-	bool EventDispatcher::throwEvent(char event, void* params)
+	bool EventDispatcher::throwEvent(void* params)
 	{
-
-		for (int i = 0; i < LISTENER_LIST_SIZE; i++)
-		{
-			if (events[i] != 0)
-				if (events[i] == event)
-					listeners[i]->onEvent(event, params);
+		for (int i = 0; i < this->_listeners.size(); ++i) {
+			_listeners[i]->onEvent(params);
 		}
 	}
 }

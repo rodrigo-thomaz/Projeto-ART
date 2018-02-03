@@ -2,13 +2,11 @@
 
 namespace ART
 {
-	void SimpleListener::onEvent(char event, void* params)
+	void SimpleListener::onEvent(void* params)
 	{		
 		char* p = (char*)params;  // cast it to an int
 
-		Serial.print("[onEvent] event: ");
-		Serial.print((uint8_t)event);
-		Serial.print(" params: ");
+		Serial.print("[onEvent] params: ");
 		Serial.print(p);
 
 		Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");

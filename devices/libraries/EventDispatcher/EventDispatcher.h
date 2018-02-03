@@ -5,6 +5,8 @@
 #define LISTENER_LIST_SIZE 30
 #endif
 
+#include "vector"
+
 #include "Listener.h"
 
 namespace ART
@@ -16,16 +18,17 @@ namespace ART
 
 		EventDispatcher();
 		~EventDispatcher();
-
-		bool addListener(char event, Listener* listener);
-		bool removeListener(Listener* listener);
-		bool throwEvent(char event, void* params);		
+				
+		void							addListener(Listener* listener);
+		bool							removeListener(Listener* listener);
+		bool							throwEvent(void* params);		
 
 	private:
 
-		char events[LISTENER_LIST_SIZE];
-		Listener *listeners[LISTENER_LIST_SIZE];
 		EventDispatcher(EventDispatcher const&);
+
+		std::vector<Listener*>			_listeners;
+				
 		void operator=(EventDispatcher const&);
 
 	};

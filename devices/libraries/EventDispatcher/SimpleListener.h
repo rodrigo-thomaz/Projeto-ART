@@ -12,7 +12,7 @@ namespace ART
 
 	public:
 
-		void onEvent(char event, void* params);
+		void onEvent(void* params);
 
 	};
 }

@@ -10,7 +10,7 @@ namespace ART
 
 		Listener() {}
 		virtual ~Listener() {}
-		virtual void onEvent(char event, void* params) = 0;
+		virtual void onEvent(void* params) = 0;
 	};
 }
 

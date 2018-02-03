@@ -15,9 +15,6 @@
 
 //Test
 #include "SimpleListener.h"
-#define EVENT 1
-#define EVENT_2 2
-#define ANOTHER_EVENT 3
 //Test
 
 //defines - mapeamento de pinos do NodeMCU
@@ -101,26 +98,23 @@ void setup() {
   SimpleListener listener2;
   SimpleListener listener3;
   
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(EVENT,&listener);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(EVENT,&listener2);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(EVENT,&listener3);
-  
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(EVENT_2,&listener2);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(ANOTHER_EVENT,&listener3);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener2);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener3);
 
   char event[] = "EVENT throwed\n";
   char event2[] = "EVENT2 throwed\n";
   char event3[] = "ANOTHER_EVENT throwed\n";
 
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(EVENT,event2);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(EVENT_2,event);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(ANOTHER_EVENT,event3);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
 
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(EVENT_2,event2);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(EVENT,event);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(ANOTHER_EVENT,event3);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
   
   //Test
   
