@@ -1,10 +1,6 @@
 #ifndef EventDispatcher_h
 #define EventDispatcher_h
 
-#ifndef LISTENER_LIST_SIZE
-#define LISTENER_LIST_SIZE 30
-#endif
-
 #include "vector"
 
 #include "Listener.h"
@@ -25,11 +21,7 @@ namespace ART
 
 	private:
 
-		EventDispatcher(EventDispatcher const&);
-
 		std::vector<Listener*>			_listeners;
-				
-		void operator=(EventDispatcher const&);
 
 	};
 }
