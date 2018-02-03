@@ -16,7 +16,6 @@ namespace ART
 
 		Listener();
 		~Listener();
-		virtual void									onEvent(void* params) = 0;
 
 		Listener& 										setCallback(LISTENER_CALLBACK_SIGNATURE callback);
 

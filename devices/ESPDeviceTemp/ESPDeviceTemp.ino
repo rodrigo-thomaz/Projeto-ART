@@ -14,7 +14,7 @@
 #include "ESP8266mDNS.h"
 
 //Test
-#include "SimpleListener.h"
+#include "Listener.h"
 //Test
 
 //defines - mapeamento de pinos do NodeMCU
@@ -64,17 +64,26 @@ DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, 
 
 void voidTest1(void* params)
 {
-  Serial.println("voidTest1 !!!!!!!!!!!!!!!!!!!!!");
+  char* p = (char*)params;
+  Serial.print("[voidTest1] params: ");
+  Serial.print(p);
+  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 void voidTest2(void* params)
 {
-  Serial.println("voidTest2 !!!!!!!!!!!!!!!!!!!!!");
+  char* p = (char*)params;
+  Serial.print("[voidTest2] params: ");
+  Serial.print(p);
+  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 void voidTest3(void* params)
 {
-  Serial.println("voidTest3 !!!!!!!!!!!!!!!!!!!!!");
+  char* p = (char*)params;
+  Serial.print("[voidTest3] params: ");
+  Serial.print(p);
+  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
 void setup() {
@@ -109,9 +118,9 @@ void setup() {
 
   // Test
   
-  SimpleListener listener;
-  SimpleListener listener2;
-  SimpleListener listener3;
+  Listener listener;
+  Listener listener2;
+  Listener listener3;
 
   listener.setCallback(voidTest1);
   listener2.setCallback(voidTest2);

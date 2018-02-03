@@ -29,9 +29,6 @@ namespace ART
 	bool EventDispatcher::throwEvent(void* params)
 	{
 		for (int i = 0; i < this->_listeners.size(); ++i) {
-			
-			_listeners[i]->onEvent(params);
-			
 			if (_listeners[i]->_callback) {
 				_listeners[i]->_callback(params);
 			}
