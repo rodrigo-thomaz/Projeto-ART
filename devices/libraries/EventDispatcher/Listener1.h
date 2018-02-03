@@ -3,13 +3,13 @@
 
 #include "functional"
 
-#define LISTENER_CALLBACK_SIGNATURE std::function<void(void* params)>
+//#define LISTENER_CALLBACK_SIGNATURE std::function<void(void* params)>
 
 namespace ART
-{
+{	
+	//typedef std::function<void(void* params)> callbackSignature;
 	
-	typedef std::function<void(void* params)> callbackSignature;
-	
+	template<typename T>
 	class Listener1
 	{
 
@@ -18,15 +18,15 @@ namespace ART
 	public:
 
 		Listener1();
-		~Listener1();
-				
-		Listener1& 								setCallback(callbackSignature callback);
+		~Listener1();				
+		
+		Listener1<T>& 			setCallback(T callback);
 
 	private:
 
-		callbackSignature						_callback;
+		T						_callback;
 
-	};
+	};	
 }
 
 #endif

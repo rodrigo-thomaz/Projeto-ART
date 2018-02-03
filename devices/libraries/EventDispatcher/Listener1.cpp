@@ -2,18 +2,21 @@
 
 namespace ART
 {
-	Listener1::Listener1()
+	template<typename T>
+	Listener1<T>::Listener1()
 	{
 	}
 
-	Listener1::~Listener1()
+	template<typename T>
+	Listener1<T>::~Listener1()
 	{
 	}
 
-	Listener1 & Listener1::setCallback(callbackSignature callback)
+	template<typename T>
+	Listener1<T> & Listener1<T>::setCallback(T callback)
 	{
-		// TODO: inserir instrução de retorno aqui
+		_callback = callback;
+		return *this;
 	}
-
 
 }

@@ -20,11 +20,13 @@
   </ItemGroup>
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)EventDispatcher.h" /> -->
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventDispatcher1.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Listener.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Listener1.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)EventDispatcher.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)EventDispatcher1.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Listener.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Listener1.cpp" />
   </ItemGroup>
