@@ -13,8 +13,6 @@
 #include <DNSServer.h>
 #include "ESP8266mDNS.h"
 
-#define HOST_NAME "remotedebug-sample"
-
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
 #define D1    5
@@ -27,6 +25,8 @@
 #define D8    15
 #define D9    3
 #define D10   1
+
+#define HOST_NAME "remotedebug-sample"
 
 #define WEBAPI_HOST  "192.168.1.12"
 #define WEBAPI_PORT  80

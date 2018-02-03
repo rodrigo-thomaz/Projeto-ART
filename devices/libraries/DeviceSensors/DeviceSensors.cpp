@@ -44,7 +44,7 @@ namespace ART
 
 		if (this->_initializing) return false;
 
-		if (_espDevice->getDeviceMQ()->connected()) return false;
+		if (!_espDevice->getDeviceMQ()->connected()) return false;
 
 		// initializing
 
