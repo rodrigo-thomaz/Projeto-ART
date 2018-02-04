@@ -13,21 +13,47 @@ namespace ART
 
 	public:
 
-		EventDispatcher1();
-		~EventDispatcher1();
-				
-		void							addListener(Listener1<T>* listener);
-		bool							removeListener(Listener1<T>* listener);
-		bool							throwEvent(void* params);		
+		EventDispatcher1()
+		{
+
+		}
+
+		~EventDispatcher1()
+		{
+
+		}
+
+		void addListener(Listener1<T>* listener)
+		{
+			_listeners.push_back(listener);
+		}
+
+		bool removeListener(Listener1<T>* listener)
+		{
+			for (int i = 0; i < this->_listeners.size(); ++i) {
+				if (_listeners[i] == listener)
+				{
+					_listeners.erase(_listeners.begin() + i);
+					return true;
+				}
+			}
+			return false;
+		}
+
+		bool throwEvent(void* params)
+		{
+			for (int i = 0; i < this->_listeners.size(); ++i) {
+				//if (_listeners[i]->_callback) {
+				//	_listeners[i]->_callback(params);
+				//}
+			}
+		}
 
 	private:
 
-		std::vector<Listener1<T>*>		_listeners;
+		std::vector<Listener1<T>*> _listeners;
 
-	};
-
-	template class EventDispatcher1<std::function<void(char*, unsigned char*, unsigned int)>>;
-	template class EventDispatcher1<Listener1<std::function<void(char*, unsigned char*, unsigned int)>>>;
+	};	
 }
 
 #endif

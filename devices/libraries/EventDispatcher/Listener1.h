@@ -17,10 +17,19 @@ namespace ART
 
 	public:
 
-		Listener1();
-		~Listener1();				
+		Listener1()
+		{
+		}
+
+		~Listener1()
+		{
+		}
 		
-		Listener1<T>& 			setCallback(T callback);
+		Listener1<T>& setCallback(T callback)
+		{
+			_callback = callback;
+			return *this;
+		}
 
 	private:
 

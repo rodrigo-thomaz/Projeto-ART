@@ -155,7 +155,7 @@ void setup() {
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener3);
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener11);
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener12);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener12);
 
   char event[] = "EVENT throwed\n";
   char event2[] = "EVENT2 throwed\n";
@@ -173,14 +173,14 @@ void setup() {
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
 
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->removeListener(&listener12);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->removeListener(&listener12);
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
 
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event11);
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event11);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
   
   //Test
   
