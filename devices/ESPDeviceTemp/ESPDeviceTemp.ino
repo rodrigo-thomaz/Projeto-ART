@@ -85,7 +85,7 @@ void setup() {
 
 	espDevice.getDeviceSensors()->begin();
 
-	espDevice.getDeviceMQ()->setSubCallback(mqtt_SubCallback);
+	espDevice.getDeviceMQ()->addsubscriptionCallback(mqtt_SubCallback);
   espDevice.getDeviceMQ()->addConnectedNotInApplicationCallback(subscribeNotInApplication);
   espDevice.getDeviceMQ()->addConnectedInApplicationCallback(subscribeInApplication);
 
@@ -105,20 +105,6 @@ void setup() {
 void initConfiguration()
 {
 	EEPROM_readAnything(0, configuration);
-}
-
-void mqtt_ConnectedCallback(PubSubClient* mqqt)
-{
-  Serial.println("[MQQT::mqtt_ConnectedCallback] initializing ...");
-
-  if(espDevice.getDeviceInApplication()->getApplicationId() == NULL){
-    subscribeNotInApplication();
-  }
-  else {
-    subscribeInApplication();
-  }
-
-	Serial.println("[MQQT::mqtt_ConnectedCallback] Initialized with success !");
 }
 
 void subscribeNotInApplication()

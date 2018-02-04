@@ -64,32 +64,40 @@ namespace ART
 			_connectedInApplicationCallbacks.push_back(std::forward<Function>(fn));
 		}
 
+		template<typename Function>
+		void												addsubscriptionCallback(Function && fn)
+		{
+			_subscriptionCallbacks.push_back(std::forward<Function>(fn));
+		}
+
 	private:
 
 		ESPDevice * _espDevice;
 
-		char*												_host;
-		int													_port;
-		char*												_user;
-		char*												_password;
-		char*												_clientId;
-		char*												_deviceTopic;
+		char*																_host;
+		int																	_port;
+		char*																_user;
+		char*																_password;
+		char*																_clientId;
+		char*																_deviceTopic;
 
-		bool												_begin;
+		bool																_begin;
 
-		WiFiClient	 										_espClient;
-		PubSubClient* 										_mqqt;
+		WiFiClient	 														_espClient;
+		PubSubClient* 														_mqqt;
 
-		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_subCallback;
-		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_onSubCallback;
+		DEVICE_MQ_SUB_CALLBACK_SIGNATURE									_subCallback;
+		DEVICE_MQ_SUB_CALLBACK_SIGNATURE									_onSubCallback;
 
-		void												onSubCallback(char* topic, byte* payload, unsigned int length);
+		void																onSubCallback(char* topic, byte* payload, unsigned int length);
 
-		String 												getApplicationRoutingKey(const char* topic);
-		String 												getDeviceRoutingKey(const char* topic);
+		String 																getApplicationRoutingKey(const char* topic);
+		String 																getDeviceRoutingKey(const char* topic);
 
-		std::vector<std::function<void()>>					_connectedNotInApplicationCallbacks;
-		std::vector<std::function<void()>>					_connectedInApplicationCallbacks;
+		std::vector<std::function<void()>>									_connectedNotInApplicationCallbacks;
+		std::vector<std::function<void()>>									_connectedInApplicationCallbacks;
+
+		std::vector<DEVICE_MQ_SUB_CALLBACK_SIGNATURE>						_subscriptionCallbacks;
 
 	};
 }

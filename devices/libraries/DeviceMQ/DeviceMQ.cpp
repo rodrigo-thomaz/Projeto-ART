@@ -191,9 +191,8 @@ namespace ART
 
 	void DeviceMQ::onSubCallback(char* topic, byte* payload, unsigned int length)
 	{
-		if (this->_subCallback) {
-			this->_subCallback(topic, payload, length);
-		}
+		for (auto && fn : _subscriptionCallbacks)
+			fn(topic, payload, length);
 	}
 
 	bool DeviceMQ::connected()
