@@ -61,7 +61,7 @@ namespace ART
 		}
 
 		template<typename Function>
-		void														addsubscriptionCallback(Function && fn)
+		void														addSubscriptionCallback(Function && fn)
 		{
 			_subscriptionCallbacks.push_back(std::forward<Function>(fn));
 		}		
