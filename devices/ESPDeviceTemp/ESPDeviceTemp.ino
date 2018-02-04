@@ -15,7 +15,7 @@
 
 //Test
 #include "functional"
-//#include "EventDispatcher.h"
+//#include "EventDispatcher1.h"
 #include "Listener.h"
 //Test
 
@@ -88,6 +88,12 @@ void voidTest3(void* params)
   Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
+void voidTest0()
+{
+  Serial.print("[voidTest0]");
+  Serial.println(" *******************************");
+}
+
 void setup() {
 
 	Serial.begin(9600);
@@ -132,31 +138,29 @@ void setup() {
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener3);
 
+  //std::function<void(void* params)> teste(voidTest0);  
+
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(teste);
+
   // = std::function<void("teste", payload, 1);
 
+  EventDispatcher1 a;
+  a.addListener(voidTest0);
+  a.invoke_all();
+    
   uint8_t *payload  = new uint8_t[10];
-
-  void *arr = malloc(3 * sizeof(void *));
-  arr[0] = strdup("Some string"); /* is a pointer already */
-  arr[1] = malloc(sizeof(int));
-  *((int *)(arr[1])) = 5;
-  arr[2] = malloc(sizeof(double));
-  *((double *)(arr[2])) = 27.3;
-
-
-
-  void* event1 = malloc(3 * sizeof(void *));
   
-  event1[0] = strdup("teste");
-  //event1[1] = payload;
-  //event1[2] = 1;
-  
+  char event1[] = "EVENT1 throwed\n";
   char event2[] = "EVENT2 throwed\n";
   char event3[] = "ANOTHER_EVENT throwed\n";
+
+  char event0[] = "EVENT0 throwed\n";
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event1);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);  
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
+
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event0);
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
 

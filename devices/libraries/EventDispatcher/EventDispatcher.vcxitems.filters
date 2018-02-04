@@ -29,5 +29,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Listener.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)EventDispatcher1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
