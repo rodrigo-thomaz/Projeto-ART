@@ -270,11 +270,6 @@ namespace ART
 		return _callbackEventDispatcher;
 	}
 
-	EventDispatcher1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE>* DeviceMQ::getCallbackEventDispatcher1()
-	{
-		return _callbackEventDispatcher1;
-	}
-
 	String DeviceMQ::getApplicationRoutingKey(const char* topic)
 	{
 		DeviceInApplication* deviceInApplication = this->_espDevice->getDeviceInApplication();

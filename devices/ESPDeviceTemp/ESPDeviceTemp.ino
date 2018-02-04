@@ -16,9 +16,7 @@
 //Test
 #include "functional"
 //#include "EventDispatcher.h"
-//#include "EventDispatcher1.h"
 #include "Listener.h"
-#include "Listener1.h"
 //Test
 
 //defines - mapeamento de pinos do NodeMCU
@@ -90,20 +88,6 @@ void voidTest3(void* params)
   Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 }
 
-void voidTest11(char* topic, byte* payload, unsigned int length)
-{
-  Serial.print("[voidTest11] params: ");
-  Serial.print(topic);
-  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-}
-
-void voidTest12(char* topic, byte* payload, unsigned int length)
-{
-  Serial.print("[voidTest12] params: ");
-  Serial.print(topic);
-  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-}
-
 void setup() {
 
 	Serial.begin(9600);
@@ -136,76 +120,49 @@ void setup() {
 
   // Test
 
-  Serial.println("Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  
   Listener listener;
   Listener listener2;
-  Listener listener3;
-
-  Serial.println("Aqui 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  
-  Listener1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE> listener11;
-
-  Serial.println("Aqui 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  
-  Listener1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE> listener12;
-
-  Serial.println("Aqui 3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  
-  listener11.setCallback(voidTest11);
-
-  Serial.println("Aqui 4 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-  
-  listener12.setCallback(voidTest12);
-
-  Serial.println("Aqui 5 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  Listener listener3; 
   
   listener.setCallback(voidTest1);
   listener2.setCallback(voidTest2);
   listener3.setCallback(voidTest3);
-
-  Serial.println("Aqui 6 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener3);
 
-  Serial.println("Aqui 7 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  // = std::function<void("teste", payload, 1);
 
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener11);
+  uint8_t *payload  = new uint8_t[10];
 
-  Serial.println("Aqui 8 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  void *arr = malloc(3 * sizeof(void *));
+  arr[0] = strdup("Some string"); /* is a pointer already */
+  arr[1] = malloc(sizeof(int));
+  *((int *)(arr[1])) = 5;
+  arr[2] = malloc(sizeof(double));
+  *((double *)(arr[2])) = 27.3;
+
+
+
+  void* event1 = malloc(3 * sizeof(void *));
   
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener12);
-
-  Serial.println("Aqui 9 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-
-  char event[] = "EVENT throwed\n";
+  event1[0] = strdup("teste");
+  //event1[1] = payload;
+  //event1[2] = 1;
+  
   char event2[] = "EVENT2 throwed\n";
   char event3[] = "ANOTHER_EVENT throwed\n";
 
-  uint8_t *payload  = new uint8_t[10];
-  
-  DEVICE_MQ_SUB_CALLBACK_SIGNATURE event11;// = std::function<void("teste", payload, 1);
-  //char event12[] = "EVENT 12 throwed\n";
-
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event1);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);  
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
-
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent("teste", payload, 1);
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
 
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->removeListener(&listener12);
-
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event1);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);  
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
-
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event11);
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
   
   //Test
   

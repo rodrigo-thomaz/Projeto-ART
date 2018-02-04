@@ -6,7 +6,6 @@
 #include "PubSubClient.h"
 
 #include "EventDispatcher.h"
-#include "EventDispatcher1.h"
 
 #define DEVICE_MQ_SUB_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
 #define DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE std::function<void(PubSubClient*)>
@@ -56,7 +55,6 @@ namespace ART
 		String 												getTopicKey(char* routingKey);		
 
 		EventDispatcher*									getCallbackEventDispatcher();
-		EventDispatcher1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE>*	getCallbackEventDispatcher1();
 
 	private:
 
@@ -75,8 +73,6 @@ namespace ART
 		PubSubClient* 										_mqqt;
 
 		EventDispatcher*									_callbackEventDispatcher;
-
-		EventDispatcher1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE>*	_callbackEventDispatcher1;
 
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_subCallback;
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_onSubCallback;
