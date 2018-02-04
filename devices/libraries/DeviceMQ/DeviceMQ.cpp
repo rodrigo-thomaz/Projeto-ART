@@ -11,8 +11,6 @@ namespace ART
 
 		this->_mqqt = new PubSubClient(this->_espClient);
 
-		_callbackEventDispatcher = new EventDispatcher;
-
 		_onSubCallback = [=](char* topic, byte* payload, unsigned int length) {
 			this->onSubCallback(topic, payload, length);
 		};
@@ -173,10 +171,6 @@ namespace ART
 						fn();
 				}
 
-				if (this->_connectedCallback) {
-					this->_connectedCallback(this->_mqqt);
-				}
-
 				return true;
 			}
 			else
@@ -200,11 +194,6 @@ namespace ART
 		if (this->_subCallback) {
 			this->_subCallback(topic, payload, length);
 		}
-	}
-
-	DeviceMQ& DeviceMQ::setConnectedCallback(DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE callback) {
-		this->_connectedCallback = callback;
-		return *this;
 	}
 
 	bool DeviceMQ::connected()

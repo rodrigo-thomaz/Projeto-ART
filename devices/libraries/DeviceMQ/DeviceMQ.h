@@ -8,7 +8,6 @@
 #include "PubSubClient.h"
 
 #define DEVICE_MQ_SUB_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
-#define DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE std::function<void(PubSubClient*)>
 
 namespace ART
 {
@@ -38,7 +37,6 @@ namespace ART
 		bool												begin();
 
 		DeviceMQ& 											setSubCallback(DEVICE_MQ_SUB_CALLBACK_SIGNATURE callback);
-		DeviceMQ& 											setConnectedCallback(DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE callback);
 
 		bool												autoConnect();
 
@@ -84,8 +82,6 @@ namespace ART
 
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_subCallback;
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_onSubCallback;
-
-		DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE				_connectedCallback;
 
 		void												onSubCallback(char* topic, byte* payload, unsigned int length);
 
