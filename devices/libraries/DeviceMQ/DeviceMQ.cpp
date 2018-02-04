@@ -11,8 +11,8 @@ namespace ART
 
 		this->_mqqt = new PubSubClient(this->_espClient);
 
-		_onSubCallback = [=](char* topic, byte* payload, unsigned int length) {
-			this->onSubCallback(topic, payload, length);
+		_mqqtCallback = [=](char* topic, uint8_t* payload, unsigned int length) {
+			this->mqqtCallback(topic, payload, length);
 		};
 	}
 
@@ -111,8 +111,8 @@ namespace ART
 
 		if (this->_espDevice->getDeviceWiFi()->isConnected() && this->_espDevice->loaded()) {
 
-			this->_mqqt->setServer(_host, _port);         //informa qual broker e porta deve ser conectado			
-			this->_mqqt->setCallback(_onSubCallback);   //atribui função de callback (função chamada quando qualquer informação de um dos tópicos subescritos chega) 
+			this->_mqqt->setServer(_host, _port);   
+			this->_mqqt->setCallback(_mqqtCallback);
 
 			this->_begin = true;
 
@@ -186,7 +186,7 @@ namespace ART
 		}
 	}
 
-	void DeviceMQ::onSubCallback(char* topic, byte* payload, unsigned int length)
+	void DeviceMQ::mqqtCallback(char* topic, uint8_t* payload, unsigned int length)
 	{
 		for (auto && fn : _subscriptionCallbacks)
 			fn(topic, payload, length);

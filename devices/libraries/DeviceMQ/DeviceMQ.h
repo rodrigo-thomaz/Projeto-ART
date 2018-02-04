@@ -68,6 +68,8 @@ namespace ART
 			_subscriptionCallbacks.push_back(std::forward<Function>(fn));
 		}
 
+		typedef std::function<void(char*, uint8_t*, unsigned int)> subscriptionSignature;
+
 	private:
 
 		ESPDevice * _espDevice;
@@ -84,9 +86,9 @@ namespace ART
 		WiFiClient	 														_espClient;
 		PubSubClient* 														_mqqt;
 
-		DEVICE_MQ_SUB_CALLBACK_SIGNATURE									_onSubCallback;
+		DEVICE_MQ_SUB_CALLBACK_SIGNATURE									_mqqtCallback;
 
-		void																onSubCallback(char* topic, byte* payload, unsigned int length);
+		void																mqqtCallback(char* topic, uint8_t* payload, unsigned int length);
 
 		String 																getApplicationRoutingKey(const char* topic);
 		String 																getDeviceRoutingKey(const char* topic);
