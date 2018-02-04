@@ -3,7 +3,7 @@
 
 #include "functional"
 
-//#define LISTENER_CALLBACK_SIGNATURE std::function<void(void* params)>
+//#define LISTENER_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
 
 namespace ART
 {	
@@ -13,7 +13,8 @@ namespace ART
 	class Listener1
 	{
 
-	//friend class EventDispatcher1;
+	/*template<class T>
+	friend class EventDispatcher1<T>; */
 
 	public:
 
@@ -31,9 +32,11 @@ namespace ART
 			return *this;
 		}
 
+		T _callback;
+
 	private:
 
-		T _callback;
+		//T _callback;
 
 	};	
 }

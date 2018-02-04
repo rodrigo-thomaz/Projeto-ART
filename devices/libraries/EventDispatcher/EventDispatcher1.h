@@ -25,7 +25,9 @@ namespace ART
 
 		void addListener(Listener1<T>* listener)
 		{
+			Serial.println("Aqui addListener begin !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			_listeners.push_back(listener);
+			Serial.println("Aqui addListener end !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		}
 
 		bool removeListener(Listener1<T>* listener)
@@ -40,12 +42,12 @@ namespace ART
 			return false;
 		}
 
-		bool throwEvent(void* params)
+		bool throwEvent(char* topic, byte* payload, unsigned int length)
 		{
 			for (int i = 0; i < this->_listeners.size(); ++i) {
-				//if (_listeners[i]->_callback) {
-				//	_listeners[i]->_callback(params);
-				//}
+				if (_listeners[i]->_callback) {
+					_listeners[i]->_callback(topic, payload, length);
+				}
 			}
 		}
 

@@ -135,40 +135,65 @@ void setup() {
 	espDevice.getDeviceMQ()->setSubCallback(mqtt_SubCallback);
 
   // Test
+
+  Serial.println("Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   
   Listener listener;
   Listener listener2;
   Listener listener3;
 
+  Serial.println("Aqui 1 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  
   Listener1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE> listener11;
+
+  Serial.println("Aqui 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  
   Listener1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE> listener12;
 
+  Serial.println("Aqui 3 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  
   listener11.setCallback(voidTest11);
+
+  Serial.println("Aqui 4 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  
   listener12.setCallback(voidTest12);
+
+  Serial.println("Aqui 5 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   
   listener.setCallback(voidTest1);
   listener2.setCallback(voidTest2);
   listener3.setCallback(voidTest3);
+
+  Serial.println("Aqui 6 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
   
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener3);
 
+  Serial.println("Aqui 7 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
   espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener11);
+
+  Serial.println("Aqui 8 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+  
   espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener12);
+
+  Serial.println("Aqui 9 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
   char event[] = "EVENT throwed\n";
   char event2[] = "EVENT2 throwed\n";
   char event3[] = "ANOTHER_EVENT throwed\n";
 
-  char event11[] = "EVENT 11 throwed\n";
-  char event12[] = "EVENT 12 throwed\n";
+  uint8_t *payload  = new uint8_t[10];
+  
+  DEVICE_MQ_SUB_CALLBACK_SIGNATURE event11;// = std::function<void("teste", payload, 1);
+  //char event12[] = "EVENT 12 throwed\n";
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
 
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event11);
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent("teste", payload, 1);
   //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
@@ -179,8 +204,8 @@ void setup() {
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
 
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event11);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event11);
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
   
   //Test
   
