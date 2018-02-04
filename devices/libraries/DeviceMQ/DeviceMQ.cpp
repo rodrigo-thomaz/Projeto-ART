@@ -163,10 +163,12 @@ namespace ART
 				Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 
 				if (_espDevice->getDeviceInApplication()->getApplicationId() == NULL) {
+					Serial.println("[DeviceMQ] Raise ConnectedNotInApplicationCallbacks");
 					for (auto && fn : _connectedNotInApplicationCallbacks)
 						fn();
 				}
 				else {
+					Serial.println("[DeviceMQ] Raise ConnectedInApplicationCallbacks");
 					for (auto && fn : _connectedInApplicationCallbacks)
 						fn();
 				}
@@ -182,11 +184,6 @@ namespace ART
 				return false;
 			}
 		}
-	}
-
-	DeviceMQ& DeviceMQ::setSubCallback(DEVICE_MQ_SUB_CALLBACK_SIGNATURE callback) {
-		this->_subCallback = callback;
-		return *this;
 	}
 
 	void DeviceMQ::onSubCallback(char* topic, byte* payload, unsigned int length)

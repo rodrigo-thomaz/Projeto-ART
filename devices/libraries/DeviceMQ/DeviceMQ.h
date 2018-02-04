@@ -36,8 +36,6 @@ namespace ART
 
 		bool												begin();
 
-		DeviceMQ& 											setSubCallback(DEVICE_MQ_SUB_CALLBACK_SIGNATURE callback);
-
 		bool												autoConnect();
 
 		bool												connected();
@@ -86,7 +84,6 @@ namespace ART
 		WiFiClient	 														_espClient;
 		PubSubClient* 														_mqqt;
 
-		DEVICE_MQ_SUB_CALLBACK_SIGNATURE									_subCallback;
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE									_onSubCallback;
 
 		void																onSubCallback(char* topic, byte* payload, unsigned int length);
