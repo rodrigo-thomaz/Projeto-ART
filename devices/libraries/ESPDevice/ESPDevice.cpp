@@ -24,6 +24,9 @@ namespace ART
 		DeviceBuzzer::create(_deviceBuzzer, this);
 		DeviceSensors::create(_deviceSensors, this);
 		DeviceInApplication::create(_deviceInApplication, this);
+
+		_deviceMQ->addConnectedNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
+		_deviceMQ->addConnectedInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
 	}
 
 	ESPDevice::~ESPDevice()
@@ -254,5 +257,15 @@ namespace ART
 
 			_deviceDebug->print("ESPDevice", "load", "end\n");
 		}
+	}
+
+	void ESPDevice::onDeviceMQSubscribeNotInApplication()
+	{
+		Serial.println("onDeviceMQSubscribeNotInApplication !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	}
+
+	void ESPDevice::onDeviceMQSubscribeInApplication()
+	{
+		Serial.println("onDeviceMQSubscribeInApplication !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 }

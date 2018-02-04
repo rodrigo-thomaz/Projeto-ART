@@ -88,9 +88,7 @@ namespace ART
 		typedef std::function<void()>								connectedSignature;
 		typedef std::function<void(char*, uint8_t*, unsigned int)>	subscriptionSignature;
 
-		subscriptionSignature										_mqqtCallback;
-
-		void														mqqtCallback(char* topic, uint8_t* payload, unsigned int length);
+		void														onMQQTCallback(char* topic, uint8_t* payload, unsigned int length);
 
 		std::vector<connectedSignature>								_connectedNotInApplicationCallbacks;
 		std::vector<connectedSignature>								_connectedInApplicationCallbacks;

@@ -83,6 +83,9 @@ namespace ART
 		void						autoLoad();
 		void						load(String json);
 		bool 						_loaded = false;
+
+		void						onDeviceMQSubscribeNotInApplication();
+		void						onDeviceMQSubscribeInApplication();
 	};
 }
 

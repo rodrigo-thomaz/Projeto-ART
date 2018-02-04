@@ -10,10 +10,6 @@ namespace ART
 		_espDevice = espDevice;
 
 		this->_mqqt = new PubSubClient(this->_espClient);
-
-		_mqqtCallback = [=](char* topic, uint8_t* payload, unsigned int length) {
-			this->mqqtCallback(topic, payload, length);
-		};
 	}
 
 	DeviceMQ::~DeviceMQ()
@@ -112,7 +108,10 @@ namespace ART
 		if (this->_espDevice->getDeviceWiFi()->isConnected() && this->_espDevice->loaded()) {
 
 			this->_mqqt->setServer(_host, _port);   
-			this->_mqqt->setCallback(_mqqtCallback);
+			
+			this->_mqqt->setCallback([=](char* topic, uint8_t* payload, unsigned int length) {
+				return this->onMQQTCallback(topic, payload, length);
+			});
 
 			this->_begin = true;
 
@@ -140,16 +139,16 @@ namespace ART
 		}
 		else {
 
-			Serial.print("[MQQT] Tentando se conectar ao Broker MQTT: ");
+			Serial.print("[DeviceMQ] Tentando se conectar ao Broker MQTT: ");
 			Serial.println(_host);
 
-			Serial.print("[MQQT] ClientId: ");
+			Serial.print("[DeviceMQ] ClientId: ");
 			Serial.println(_clientId);
 
-			Serial.print("[MQQT] User: ");
+			Serial.print("[DeviceMQ] User: ");
 			Serial.println(_user);
 
-			Serial.print("[MQQT] Password: ");
+			Serial.print("[DeviceMQ] Password: ");
 			Serial.println(_password);
 
 			byte willQoS = 0;
@@ -157,28 +156,28 @@ namespace ART
 			const char* willMessage = "My Will Message";
 			boolean willRetain = false;
 
-			if (this->_mqqt->connect(_clientId, _user, _password))
-				//if (this->_mqqt->connect(clientId, user, password, willTopic, willQoS, willRetain, willMessage)) 
+			//if (this->_mqqt->connect(clientId, user, password, willTopic, willQoS, willRetain, willMessage)) 
+			if (this->_mqqt->connect(_clientId, _user, _password))				
 			{
-				Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
+				Serial.println("[DeviceMQ] Conectado com sucesso ao broker MQTT!");
 
 				if (_espDevice->getDeviceInApplication()->getApplicationId() == NULL) {
-					Serial.println("[DeviceMQ] Raise ConnectedNotInApplicationCallbacks");
-					for (auto && fn : _connectedNotInApplicationCallbacks)
-						fn();
+					Serial.println("[DeviceMQ] Begin ConnectedNotInApplicationCallbacks");
+					for (auto && fn : _connectedNotInApplicationCallbacks) fn();
+					Serial.println("[DeviceMQ] End ConnectedNotInApplicationCallbacks");
 				}
 				else {
-					Serial.println("[DeviceMQ] Raise ConnectedInApplicationCallbacks");
-					for (auto && fn : _connectedInApplicationCallbacks)
-						fn();
+					Serial.println("[DeviceMQ] Begin ConnectedInApplicationCallbacks");
+					for (auto && fn : _connectedInApplicationCallbacks) fn();
+					Serial.println("[DeviceMQ] End ConnectedInApplicationCallbacks");
 				}
 
 				return true;
 			}
 			else
 			{
-				Serial.println("[MQQT] Falha ao reconectar no broker.");
-				Serial.println("[MQQT] Haverá nova tentatica de conexao em 2s");
+				Serial.println("[DeviceMQ] Falha ao reconectar no broker.");
+				Serial.println("[DeviceMQ] Haverá nova tentatica de conexao em 2s");
 				delay(2000);
 
 				return false;
@@ -186,7 +185,7 @@ namespace ART
 		}
 	}
 
-	void DeviceMQ::mqqtCallback(char* topic, uint8_t* payload, unsigned int length)
+	void DeviceMQ::onMQQTCallback(char* topic, uint8_t* payload, unsigned int length)
 	{
 		for (auto && fn : _subscriptionCallbacks)
 			fn(topic, payload, length);
