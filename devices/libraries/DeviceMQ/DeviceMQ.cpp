@@ -164,6 +164,15 @@ namespace ART
 			{
 				Serial.println("[MQQT] Conectado com sucesso ao broker MQTT!");
 
+				if (_espDevice->getDeviceInApplication()->getApplicationId() == NULL) {
+					for (auto && fn : _connectedNotInApplicationCallbacks)
+						fn();
+				}
+				else {
+					for (auto && fn : _connectedInApplicationCallbacks)
+						fn();
+				}
+
 				if (this->_connectedCallback) {
 					this->_connectedCallback(this->_mqqt);
 				}
@@ -263,16 +272,6 @@ namespace ART
 		String result = routingKeyStr.substring(restLastIndexOf + 1, restSize);
 
 		return result;
-	}
-
-	EventDispatcher * DeviceMQ::getCallbackEventDispatcher()
-	{
-		return _callbackEventDispatcher;
-	}
-
-	EventDispatcher1 * DeviceMQ::getCallbackEventDispatcher1()
-	{
-		return _callbackEventDispatcher1;
 	}
 
 	String DeviceMQ::getApplicationRoutingKey(const char* topic)

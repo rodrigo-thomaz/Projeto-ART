@@ -13,12 +13,6 @@
 #include <DNSServer.h>
 #include "ESP8266mDNS.h"
 
-//Test
-#include "functional"
-//#include "EventDispatcher1.h"
-#include "Listener.h"
-//Test
-
 //defines - mapeamento de pinos do NodeMCU
 #define D0    16
 #define D1    5
@@ -64,36 +58,6 @@ DisplayMQTTManager displayMQTTManager(displayManager);
 DisplayNTPManager displayNTPManager(displayManager, espDevice);
 DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, espDevice, unitMeasurementConverter);
 
-void voidTest1(void* params)
-{
-  char* p = (char*)params;
-  Serial.print("[voidTest1] params: ");
-  Serial.print(p);
-  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-}
-
-void voidTest2(void* params)
-{
-  char* p = (char*)params;
-  Serial.print("[voidTest2] params: ");
-  Serial.print(p);
-  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-}
-
-void voidTest3(void* params)
-{
-  char* p = (char*)params;
-  Serial.print("[voidTest3] params: ");
-  Serial.print(p);
-  Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-}
-
-void voidTest0()
-{
-  Serial.print("[voidTest0]");
-  Serial.println(" *******************************");
-}
-
 void setup() {
 
 	Serial.begin(9600);
@@ -121,56 +85,11 @@ void setup() {
 
 	espDevice.getDeviceSensors()->begin();
 
-	espDevice.getDeviceMQ()->setConnectedCallback(mqtt_ConnectedCallback);
 	espDevice.getDeviceMQ()->setSubCallback(mqtt_SubCallback);
+  espDevice.getDeviceMQ()->addConnectedNotInApplicationCallback(subscribeNotInApplication);
+  espDevice.getDeviceMQ()->addConnectedInApplicationCallback(subscribeInApplication);
 
-  // Test
-
-  Listener listener;
-  Listener listener2;
-  Listener listener3; 
-  
-  listener.setCallback(voidTest1);
-  listener2.setCallback(voidTest2);
-  listener3.setCallback(voidTest3);
-  
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener2);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener3);
-
-  //std::function<void(void* params)> teste(voidTest0);  
-
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(teste);
-
-  // = std::function<void("teste", payload, 1);
-
-  EventDispatcher1 a;
-  a.addListener(voidTest0);
-  a.invoke_all();
-    
-  uint8_t *payload  = new uint8_t[10];
-  
-  char event1[] = "EVENT1 throwed\n";
-  char event2[] = "EVENT2 throwed\n";
-  char event3[] = "ANOTHER_EVENT throwed\n";
-
-  char event0[] = "EVENT0 throwed\n";
-
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event1);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);  
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
-
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event0);
-
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
-
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event1);
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);  
-  espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
-  
-  //Test
-  
-	espDevice.getDeviceMQ()->begin();
+  espDevice.getDeviceMQ()->begin();
 
 	String hostNameWifi = HOST_NAME;
 	hostNameWifi.concat(".local");

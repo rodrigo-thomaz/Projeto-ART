@@ -1,12 +1,11 @@
 #ifndef DeviceMQ_h
 #define DeviceMQ_h
 
+#include "functional"
+#include "vector"
 #include "ArduinoJson.h"
 #include "RemoteDebug.h"
 #include "PubSubClient.h"
-
-#include "EventDispatcher.h"
-#include "EventDispatcher1.h"
 
 #define DEVICE_MQ_SUB_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
 #define DEVICE_MQ_CONNECTED_CALLBACK_SIGNATURE std::function<void(PubSubClient*)>
@@ -55,8 +54,17 @@ namespace ART
 
 		String 												getTopicKey(char* routingKey);		
 
-		EventDispatcher*									getCallbackEventDispatcher();
-		EventDispatcher1*									getCallbackEventDispatcher1();
+		template<typename Function>
+		void												addConnectedNotInApplicationCallback(Function && fn)
+		{
+			_connectedNotInApplicationCallbacks.push_back(std::forward<Function>(fn));
+		}
+
+		template<typename Function>
+		void												addConnectedInApplicationCallback(Function && fn)
+		{
+			_connectedInApplicationCallbacks.push_back(std::forward<Function>(fn));
+		}
 
 	private:
 
@@ -74,9 +82,6 @@ namespace ART
 		WiFiClient	 										_espClient;
 		PubSubClient* 										_mqqt;
 
-		EventDispatcher*									_callbackEventDispatcher;
-		EventDispatcher1*									_callbackEventDispatcher1;
-
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_subCallback;
 		DEVICE_MQ_SUB_CALLBACK_SIGNATURE					_onSubCallback;
 
@@ -86,6 +91,9 @@ namespace ART
 
 		String 												getApplicationRoutingKey(const char* topic);
 		String 												getDeviceRoutingKey(const char* topic);
+
+		std::vector<std::function<void()>>					_connectedNotInApplicationCallbacks;
+		std::vector<std::function<void()>>					_connectedInApplicationCallbacks;
 
 	};
 }
