@@ -19,82 +19,83 @@ namespace ART
 		DeviceMQ(ESPDevice* espDevice);
 		~DeviceMQ();
 
-		static void											create(DeviceMQ* (&deviceMQ), ESPDevice* espDevice);
+		static void													create(DeviceMQ* (&deviceMQ), ESPDevice* espDevice);
 
-		void												load(JsonObject& jsonObject);
+		void														load(JsonObject& jsonObject);
 
-		void												loop();
+		void														loop();
 
-		char*												getHost() const;
-		int													getPort();
-		char*												getUser() const;
-		char*												getPassword() const;
-		char*												getClientId() const;
-		char*												getDeviceTopic() const;
+		char*														getHost() const;
+		int															getPort();
+		char*														getUser() const;
+		char*														getPassword() const;
+		char*														getClientId() const;
+		char*														getDeviceTopic() const;
 
-		bool												begin();
+		bool														begin();
 
-		bool												autoConnect();
+		bool														autoConnect();
 
-		bool												connected();
+		bool														connected();
 
-		void												publishInApplication(const char* topic, const char* payload);
+		void														publishInApplication(const char* topic, const char* payload);
 
-		void												subscribeInApplication(const char* topic);
-		void												subscribeInDevice(const char* topic);
+		void														subscribeInApplication(const char* topic);
+		void														subscribeInDevice(const char* topic);
 
-		void												unSubscribeInApplication(const char* topic);
-		void												unSubscribeInDevice(const char* topic);
+		void														unSubscribeInApplication(const char* topic);
+		void														unSubscribeInDevice(const char* topic);
 
-		String 												getTopicKey(char* routingKey);		
+		String 														getTopicKey(char* routingKey);		
 
 		template<typename Function>
-		void												addConnectedNotInApplicationCallback(Function && fn)
+		void														addConnectedNotInApplicationCallback(Function && fn)
 		{
 			_connectedNotInApplicationCallbacks.push_back(std::forward<Function>(fn));
 		}
 
 		template<typename Function>
-		void												addConnectedInApplicationCallback(Function && fn)
+		void														addConnectedInApplicationCallback(Function && fn)
 		{
 			_connectedInApplicationCallbacks.push_back(std::forward<Function>(fn));
 		}
 
 		template<typename Function>
-		void												addsubscriptionCallback(Function && fn)
+		void														addsubscriptionCallback(Function && fn)
 		{
 			_subscriptionCallbacks.push_back(std::forward<Function>(fn));
-		}
-
-		typedef std::function<void(char*, uint8_t*, unsigned int)> subscriptionSignature;
+		}		
 
 	private:
 
-		ESPDevice * _espDevice;
+		ESPDevice *													_espDevice;
 
-		char*																_host;
-		int																	_port;
-		char*																_user;
-		char*																_password;
-		char*																_clientId;
-		char*																_deviceTopic;
+		char*														_host;
+		int															_port;
+		char*														_user;
+		char*														_password;
+		char*														_clientId;
+		char*														_deviceTopic;
 
-		bool																_begin;
+		bool														_begin;
 
-		WiFiClient	 														_espClient;
-		PubSubClient* 														_mqqt;
+		WiFiClient	 												_espClient;
+		PubSubClient* 												_mqqt;		
 
-		subscriptionSignature												_mqqtCallback;
+		String 														getApplicationRoutingKey(const char* topic);
+		String 														getDeviceRoutingKey(const char* topic);
 
-		void																mqqtCallback(char* topic, uint8_t* payload, unsigned int length);
+		typedef std::function<void()>								connectedSignature;
+		typedef std::function<void(char*, uint8_t*, unsigned int)>	subscriptionSignature;
 
-		String 																getApplicationRoutingKey(const char* topic);
-		String 																getDeviceRoutingKey(const char* topic);
+		subscriptionSignature										_mqqtCallback;
 
-		std::vector<std::function<void()>>									_connectedNotInApplicationCallbacks;
-		std::vector<std::function<void()>>									_connectedInApplicationCallbacks;
+		void														mqqtCallback(char* topic, uint8_t* payload, unsigned int length);
 
-		std::vector<subscriptionSignature>									_subscriptionCallbacks;
+		std::vector<connectedSignature>								_connectedNotInApplicationCallbacks;
+		std::vector<connectedSignature>								_connectedInApplicationCallbacks;
+			
+		std::vector<subscriptionSignature>							_subscriptionCallbacks;
 
 	};
 }
