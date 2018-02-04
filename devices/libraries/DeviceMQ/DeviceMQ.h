@@ -7,8 +7,6 @@
 #include "RemoteDebug.h"
 #include "PubSubClient.h"
 
-#define DEVICE_MQ_SUB_CALLBACK_SIGNATURE std::function<void(char*, uint8_t*, unsigned int)>
-
 namespace ART
 {
 	class ESPDevice;
@@ -86,7 +84,7 @@ namespace ART
 		WiFiClient	 														_espClient;
 		PubSubClient* 														_mqqt;
 
-		DEVICE_MQ_SUB_CALLBACK_SIGNATURE									_mqqtCallback;
+		subscriptionSignature												_mqqtCallback;
 
 		void																mqqtCallback(char* topic, uint8_t* payload, unsigned int length);
 
@@ -96,7 +94,7 @@ namespace ART
 		std::vector<std::function<void()>>									_connectedNotInApplicationCallbacks;
 		std::vector<std::function<void()>>									_connectedInApplicationCallbacks;
 
-		std::vector<DEVICE_MQ_SUB_CALLBACK_SIGNATURE>						_subscriptionCallbacks;
+		std::vector<subscriptionSignature>									_subscriptionCallbacks;
 
 	};
 }
