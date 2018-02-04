@@ -9,11 +9,11 @@ namespace ART
 {	
 	//typedef std::function<void(void* params)> callbackSignature;
 	
-	template<typename T>
+	template<class T>
 	class Listener1
 	{
 
-	friend class EventDispatcher;
+	//friend class EventDispatcher1;
 
 	public:
 

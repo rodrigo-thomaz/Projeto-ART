@@ -7,7 +7,7 @@
 
 namespace ART
 {
-	template<typename T>
+	template<class T>
 	class EventDispatcher1
 	{
 
@@ -22,9 +22,12 @@ namespace ART
 
 	private:
 
-		std::vector<Listener1<T>*>			_listeners;
+		std::vector<Listener1<T>*>		_listeners;
 
 	};
+
+	template class EventDispatcher1<std::function<void(char*, unsigned char*, unsigned int)>>;
+	template class EventDispatcher1<Listener1<std::function<void(char*, unsigned char*, unsigned int)>>>;
 }
 
 #endif

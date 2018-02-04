@@ -297,5 +297,6 @@ namespace ART
 		routingKey.concat(topic);
 
 		return routingKey;
-	}
+	}	
 }
+

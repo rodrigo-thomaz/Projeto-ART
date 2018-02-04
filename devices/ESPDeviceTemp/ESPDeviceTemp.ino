@@ -15,6 +15,8 @@
 
 //Test
 #include "functional"
+//#include "EventDispatcher.h"
+//#include "EventDispatcher1.h"
 #include "Listener.h"
 #include "Listener1.h"
 //Test
@@ -138,11 +140,11 @@ void setup() {
   Listener listener2;
   Listener listener3;
 
-  //Listener1<int> listener11;
-  //Listener1<char*, unsigned char*, unsigned int> listener12;
+  Listener1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE> listener11;
+  Listener1<DEVICE_MQ_SUB_CALLBACK_SIGNATURE> listener12;
 
-  //listener11.setCallback(voidTest11);
-  //listener12.setCallback(voidTest12);
+  listener11.setCallback(voidTest11);
+  listener12.setCallback(voidTest12);
   
   listener.setCallback(voidTest1);
   listener2.setCallback(voidTest2);
@@ -152,19 +154,22 @@ void setup() {
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->addListener(&listener3);
 
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener11);
- // espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener12);
+  espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener11);
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->addListener(&listener12);
 
   char event[] = "EVENT throwed\n";
   char event2[] = "EVENT2 throwed\n";
   char event3[] = "ANOTHER_EVENT throwed\n";
 
+  char event11[] = "EVENT 11 throwed\n";
+  char event12[] = "EVENT 12 throwed\n";
+
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event2);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event);
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->throwEvent(event3);
 
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event);
-  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event3);
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event11);
+  //espDevice.getDeviceMQ()->getCallbackEventDispatcher1()->throwEvent(event12);
 
   espDevice.getDeviceMQ()->getCallbackEventDispatcher()->removeListener(&listener3);
 
