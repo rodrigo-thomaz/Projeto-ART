@@ -33,7 +33,7 @@ namespace ART
 
 	private:
 
-		T						_callback;
+		T _callback;
 
 	};	
 }
