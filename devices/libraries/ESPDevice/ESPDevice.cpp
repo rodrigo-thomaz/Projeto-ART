@@ -262,8 +262,6 @@ namespace ART
 
 			_deviceDebug->print("ESPDevice", "load", "end\n");
 		}
-
-		for (auto && fn : _loadedCallbacks) fn();
 	}	
 
 	void ESPDevice::onDeviceMQSubscribeDevice()

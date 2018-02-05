@@ -55,12 +55,6 @@ namespace ART
 		DeviceBuzzer*						getDeviceBuzzer();
 		DeviceSensors*						getDeviceSensors();
 
-		template<typename Function>
-		void								addLoadedCallback(Function && fn)
-		{
-			_loadedCallbacks.push_back(std::forward<Function>(fn));
-		}
-
 	private:
 
 		char *								_deviceId;
@@ -90,8 +84,6 @@ namespace ART
 		bool 								_loaded = false;
 
 		void								setLabel(char* json);
-
-		std::vector<std::function<void()>>	_loadedCallbacks;
 
 		void								onDeviceMQSubscribeDevice();
 		void								onDeviceMQUnSubscribeDevice();
