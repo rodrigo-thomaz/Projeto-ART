@@ -44,9 +44,7 @@ namespace ART
 		void														subscribeInDevice(const char* topic);
 
 		void														unSubscribeInApplication(const char* topic);
-		void														unSubscribeInDevice(const char* topic);
-
-		String 														getTopicKey(char* routingKey);		
+		void														unSubscribeInDevice(const char* topic);		
 
 		template<typename Function>
 		void														addConnectedNotInApplicationCallback(Function && fn)
@@ -84,9 +82,10 @@ namespace ART
 
 		String 														getApplicationRoutingKey(const char* topic);
 		String 														getDeviceRoutingKey(const char* topic);
+		char* 														getTopicKey(char* routingKey);
 
 		typedef std::function<void()>								connectedSignature;
-		typedef std::function<void(String, char*)>					subscriptionSignature;
+		typedef std::function<void(char*, char*)>					subscriptionSignature;
 
 		void														onMQQTCallback(char* topic, uint8_t* payload, unsigned int length);
 
