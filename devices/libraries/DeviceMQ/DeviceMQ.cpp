@@ -169,7 +169,7 @@ namespace ART
 			{
 				Serial.println("[DeviceMQ] Conectado com sucesso ao broker MQTT!");
 
-				if (_espDevice->getDeviceInApplication()->getApplicationId() == NULL) {
+				if (_espDevice->getDeviceInApplication()->getApplicationId() == NULL || _espDevice->getDeviceInApplication()->getApplicationId() == "") {
 					Serial.println("[DeviceMQ] Begin subscribeDeviceCallbacks");
 					for (auto && fn : _subscribeDeviceCallbacks) fn();
 					Serial.println("[DeviceMQ] End subscribeDeviceCallbacks");

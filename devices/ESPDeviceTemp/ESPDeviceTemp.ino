@@ -293,7 +293,7 @@ void loop() {
 
 	DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
 
-	if (deviceInApplication != NULL && deviceInApplication->getApplicationId() == NULL) {
+	if (deviceInApplication != NULL && (deviceInApplication->getApplicationId() == NULL || deviceInApplication->getApplicationId() == "")) {
 		displayAccessManager.loop();
 		//EEPROM_writeAnything(configurationEEPROMAddr, configuration);
 	}
