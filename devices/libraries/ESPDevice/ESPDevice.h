@@ -41,8 +41,7 @@ namespace ART
 		long						getChipSize();
 
 		char *						getLabel() const;
-		void						setLabel(char* json);
-
+		
 		char *						getWebApiHost() const;
 		uint16_t					getWebApiPort();
 		char * 						getWebApiUri() const;
@@ -84,8 +83,11 @@ namespace ART
 		void						load(String json);
 		bool 						_loaded = false;
 
-		void						onDeviceMQSubscribeNotInApplication();
-		void						onDeviceMQSubscribeInApplication();
+		void						setLabel(char* json);
+
+		void						onDeviceMQConnectedNotInApplication();
+		void						onDeviceMQConnectedInApplication();
+		void						onDeviceMQSubscription(char* topicKey, char* json);
 	};
 }
 

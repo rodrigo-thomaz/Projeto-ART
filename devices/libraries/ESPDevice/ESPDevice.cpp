@@ -25,8 +25,9 @@ namespace ART
 		DeviceSensors::create(_deviceSensors, this);
 		DeviceInApplication::create(_deviceInApplication, this);
 
-		_deviceMQ->addConnectedNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
-		_deviceMQ->addConnectedInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
+		_deviceMQ->addConnectedNotInApplicationCallback([=]() { return this->onDeviceMQConnectedNotInApplication(); });
+		_deviceMQ->addConnectedInApplicationCallback([=]() { return this->onDeviceMQConnectedInApplication(); });
+		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
 	}
 
 	ESPDevice::~ESPDevice()
@@ -259,14 +260,21 @@ namespace ART
 		}
 	}
 
-	void ESPDevice::onDeviceMQSubscribeNotInApplication()
+	void ESPDevice::onDeviceMQConnectedNotInApplication()
 	{
 		_deviceMQ->subscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
 		_deviceMQ->subscribeInDevice(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB);
 	}
 
-	void ESPDevice::onDeviceMQSubscribeInApplication()
+	void ESPDevice::onDeviceMQConnectedInApplication()
 	{
-		Serial.println("onDeviceMQSubscribeInApplication !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		Serial.println("[ESPDevice::onDeviceMQConnectedInApplication] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+	}
+
+	void ESPDevice::onDeviceMQSubscription(char* topicKey, char* json)
+	{
+		if (strcmp(topicKey, ESP_DEVICE_SET_LABEL_TOPIC_SUB) == 0) {
+			setLabel(json);
+		}
 	}
 }

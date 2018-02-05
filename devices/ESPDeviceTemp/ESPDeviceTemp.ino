@@ -225,10 +225,7 @@ void mqtt_SubCallback(char* topicKey, char* json)
 		espDevice.getDeviceInApplication()->deleteFromApplication();
 		//TODO:voltar subscribeNotInApplication();
 	}
-	if (strcmp(topicKey, ESP_DEVICE_SET_LABEL_TOPIC_SUB) == 0) {
-		espDevice.setLabel(json);
-	}
-
+	
 	if (strcmp(topicKey, DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB) == 0) {
 		espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(json);
 	}
