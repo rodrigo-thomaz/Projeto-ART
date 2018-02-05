@@ -56,17 +56,17 @@ namespace ART
 		void								setShowProfiler(char* json);
 		void								setShowTime(char* json);		
 
-		static const uint8_t PROFILER = 0;
-		static const uint8_t VERBOSE = 1;
-		static const uint8_t DEBUG = 2;
-		static const uint8_t INFO = 3;
-		static const uint8_t WARNING = 4;
-		static const uint8_t ERROR = 5;
-		static const uint8_t ANY = 6;
+		static const uint8_t				PROFILER = 0;
+		static const uint8_t				VERBOSE = 1;
+		static const uint8_t				DEBUG = 2;
+		static const uint8_t				INFO = 3;
+		static const uint8_t				WARNING = 4;
+		static const uint8_t				ERROR = 5;
+		static const uint8_t				ANY = 6;
 
 	private:
 
-		ESPDevice * _espDevice;
+		ESPDevice *							_espDevice;
 
 		RemoteDebug* 						_debug;
 
