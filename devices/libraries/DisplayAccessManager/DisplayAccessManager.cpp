@@ -5,16 +5,16 @@ DisplayAccessManager::DisplayAccessManager(DisplayManager& displayManager)
 	this->_displayManager = &displayManager;
 }
 
-void DisplayAccessManager::updatePin(String payloadContract)
+void DisplayAccessManager::updatePin(char* json)
 {
 	Serial.println("******************** Update PIN ********************");
 
 	StaticJsonBuffer<300> jsonBuffer;
-
-	JsonObject& root = jsonBuffer.parseObject(payloadContract);
+	JsonObject& root = jsonBuffer.parseObject(json);
 
 	if (!root.success()) {
-		Serial.println("parse updatePin failed");
+		Serial.print("parse updatePin failed: ");
+		Serial.println(json);
 		return;
 	}
 

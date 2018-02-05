@@ -37,7 +37,7 @@ namespace ART
 		void 								begin();
 
 		bool								initialized();
-		void 								setSensorsByMQQTCallback(String json);
+		void 								setSensorsByMQQTCallback(char* json);
 
 		void								loop();
 		void 								refresh();

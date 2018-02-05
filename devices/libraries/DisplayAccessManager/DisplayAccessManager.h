@@ -13,7 +13,7 @@ public:
 
 	DisplayAccessManager(DisplayManager& displayManager);
 
-	void								updatePin(String payloadContract);
+	void								updatePin(char* json);
 	void								loop();
 
 private:

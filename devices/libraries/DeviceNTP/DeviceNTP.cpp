@@ -82,10 +82,9 @@ namespace ART
 		return _utcTimeOffsetInSecond;
 	}
 
-	void DeviceNTP::setUtcTimeOffsetInSecond(String json)
+	void DeviceNTP::setUtcTimeOffsetInSecond(char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {
@@ -106,10 +105,9 @@ namespace ART
 		return _updateIntervalInMilliSecond;
 	}
 
-	void DeviceNTP::setUpdateIntervalInMilliSecond(String json)
+	void DeviceNTP::setUpdateIntervalInMilliSecond(char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
-
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {

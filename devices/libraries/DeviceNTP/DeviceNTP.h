@@ -35,10 +35,10 @@ namespace ART
 		int												getPort();
 
 		int												getUtcTimeOffsetInSecond();
-		void											setUtcTimeOffsetInSecond(String json);
+		void											setUtcTimeOffsetInSecond(char* json);
 
 		int												getUpdateIntervalInMilliSecond();
-		void											setUpdateIntervalInMilliSecond(String json);
+		void											setUpdateIntervalInMilliSecond(char* json);
 
 		/**
 		* Starts the underlying UDP client with the default local port

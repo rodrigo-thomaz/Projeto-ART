@@ -213,7 +213,7 @@ void mqtt_SubCallback(String topicKey, String json)
 	displayMQTTManager.printReceived(true);
 
 	if (topicKey == String(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB)) {
-		displayAccessManager.updatePin(json);
+		displayAccessManager.updatePin(strdup(json.c_str()));
 	}
 	if (topicKey == String(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB)) {
 		unSubscribeNotInApplication();
@@ -230,10 +230,10 @@ void mqtt_SubCallback(String topicKey, String json)
 	}
 
 	if (topicKey == String(DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB)) {
-		espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(json);
+		espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(strdup(json.c_str()));
 	}
 	if (topicKey == String(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB)) {
-		espDevice.getDeviceNTP()->setUpdateIntervalInMilliSecond(json);
+		espDevice.getDeviceNTP()->setUpdateIntervalInMilliSecond(strdup(json.c_str()));
 	}
 
 	if (topicKey == String(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB)) {
@@ -266,7 +266,7 @@ void mqtt_SubCallback(String topicKey, String json)
 	}
 
   if (topicKey == String(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB)) {
-    espDevice.getDeviceSensors()->setSensorsByMQQTCallback(json);
+    espDevice.getDeviceSensors()->setSensorsByMQQTCallback(strdup(json.c_str()));
   }
 	if (topicKey == String(DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB)) {
 		espDevice.getDeviceSensors()->setReadIntervalInMilliSeconds(strdup(json.c_str()));
