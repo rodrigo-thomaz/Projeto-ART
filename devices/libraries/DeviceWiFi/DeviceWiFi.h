@@ -98,7 +98,7 @@ namespace ART
 		void						setHostName(char* json);
 
 		int							getPublishIntervalInMilliSeconds();
-		void						setPublishIntervalInMilliSeconds(char* json);		
+		void						setPublishIntervalInMilliSeconds(char* json);			
 
 		//boolean       autoConnect();
 		void          autoConnect();
@@ -161,6 +161,10 @@ namespace ART
 		char *								_softAPMacAddress;
 		char *								_hostName;
 		int									_publishIntervalInMilliSeconds;
+
+		void								onDeviceMQSubscribeDeviceInApplication();
+		void								onDeviceMQUnSubscribeDeviceInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
 
 		std::unique_ptr<DNSServer>        	dnsServer;
 		std::unique_ptr<ESP8266WebServer> 	server;
@@ -249,11 +253,7 @@ namespace ART
 		auto optionalIPFromString(...) -> bool {
 			DEBUG_WM("NO fromString METHOD ON IPAddress, you need ESP8266 core 2.1.0 or newer for Custom IP configuration to work.");
 			return false;
-		}
-
-		void								onDeviceMQSubscribeDeviceInApplication();
-		void								onDeviceMQUnSubscribeDeviceInApplication();
-		void								onDeviceMQSubscription(char* topicKey, char* json);
+		}		
 	};
 }
 
