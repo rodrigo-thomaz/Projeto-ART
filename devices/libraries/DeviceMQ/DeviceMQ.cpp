@@ -124,6 +124,12 @@ namespace ART
 		}
 	}
 
+	void DeviceMQ::beginNew()
+	{
+		_espDevice->getDeviceInApplication()->addInsertCallback([=]() { return this->onDeviceInApplicationInsert(); });
+		_espDevice->getDeviceInApplication()->addRemoveCallback([=]() { return this->onDeviceInApplicationRemove(); });
+	}
+
 	bool DeviceMQ::autoConnect()
 	{
 		if (!this->_espDevice->getDeviceWiFi()->isConnected() || !this->_espDevice->loaded()) {
@@ -283,5 +289,17 @@ namespace ART
 
 		return routingKey;
 	}	
+
+	void DeviceMQ::onDeviceInApplicationInsert()
+	{
+		for (auto && fn : _unSubscribeNotInApplicationCallbacks) fn();
+		for (auto && fn : _subscribeInApplicationCallbacks) fn();
+	}
+
+	void DeviceMQ::onDeviceInApplicationRemove()
+	{
+		for (auto && fn : _unSubscribeInApplicationCallbacks) fn();
+		for (auto && fn : _subscribeNotInApplicationCallbacks) fn();
+	}
 }
 

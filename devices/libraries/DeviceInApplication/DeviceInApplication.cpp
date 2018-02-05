@@ -131,14 +131,10 @@ namespace ART
 		if (strcmp(topicKey, DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB) == 0) {			
 			insert(json);
 			for (auto && fn : _insertCallbacks) fn();
-			//TODO:voltar unSubscribeNotInApplication();
-			//TODO:voltar subscribeInApplication();
 		}
 		if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {			
 			remove();
 			for (auto && fn : _removeCallbacks) fn();
-			//TODO:voltar unSubscribeInApplication();
-			//TODO:voltar subscribeNotInApplication();
 		}
 	}
 }

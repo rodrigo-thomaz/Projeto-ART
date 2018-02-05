@@ -33,6 +33,7 @@ namespace ART
 		char*														getDeviceTopic() const;
 
 		bool														begin();
+		void														beginNew();
 
 		bool														autoConnect();
 
@@ -108,6 +109,9 @@ namespace ART
 		std::vector<registerSignature>								_unSubscribeInApplicationCallbacks;
 			
 		std::vector<subscriptionSignature>							_subscriptionCallbacks;
+
+		void														onDeviceInApplicationInsert();
+		void														onDeviceInApplicationRemove();
 
 	};
 }

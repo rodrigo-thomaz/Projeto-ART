@@ -23,7 +23,7 @@ namespace ART
 		DeviceBinary::create(_deviceBinary, this);
 		DeviceBuzzer::create(_deviceBuzzer, this);
 		DeviceSensors::create(_deviceSensors, this);
-		DeviceInApplication::create(_deviceInApplication, this);
+		DeviceInApplication::create(_deviceInApplication, this);		
 
 		_deviceMQ->addSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
 		_deviceMQ->addSubscribeInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
@@ -51,6 +51,7 @@ namespace ART
 	void ESPDevice::begin()
 	{
 		_deviceInApplication->begin();
+		_deviceMQ->beginNew();
 		_deviceWiFi->autoConnect();
 		autoLoad();
 		_deviceNTP->begin();
@@ -112,7 +113,7 @@ namespace ART
 		char* value = strdup(root["value"]);
 		_label = new char(sizeof(strlen(value)));
 		_label = value;
-	}
+	}	
 
 	char* ESPDevice::getWebApiHost() const
 	{
@@ -261,7 +262,7 @@ namespace ART
 
 			_deviceDebug->print("ESPDevice", "load", "end\n");
 		}
-	}
+	}	
 
 	void ESPDevice::onDeviceMQSubscribeNotInApplication()
 	{
