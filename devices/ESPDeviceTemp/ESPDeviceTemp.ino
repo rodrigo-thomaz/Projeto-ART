@@ -204,7 +204,7 @@ void unSubscribeInApplication()
 	Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
 
-void mqtt_SubCallback(String topicKey, String json)
+void mqtt_SubCallback(String topicKey, char* json)
 {
   if (espDevice.getDeviceDebug()->isActive(DeviceDebug::DEBUG)) {
 	  espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey.c_str());
@@ -213,11 +213,11 @@ void mqtt_SubCallback(String topicKey, String json)
 	displayMQTTManager.printReceived(true);
 
 	if (topicKey == String(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB)) {
-		displayAccessManager.updatePin(strdup(json.c_str()));
+		displayAccessManager.updatePin(json);
 	}
 	if (topicKey == String(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB)) {
 		unSubscribeNotInApplication();
-		espDevice.getDeviceInApplication()->insertInApplication(strdup(json.c_str()));
+		espDevice.getDeviceInApplication()->insertInApplication(json);
 		subscribeInApplication();
 	}
 	if (topicKey == String(ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB)) {
@@ -226,91 +226,91 @@ void mqtt_SubCallback(String topicKey, String json)
 		//TODO:voltar subscribeNotInApplication();
 	}
 	if (topicKey == String(ESP_DEVICE_SET_LABEL_TOPIC_SUB)) {
-		espDevice.setLabel(strdup(json.c_str()));
+		espDevice.setLabel(json);
 	}
 
 	if (topicKey == String(DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB)) {
-		espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(strdup(json.c_str()));
+		espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(json);
 	}
 	if (topicKey == String(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB)) {
-		espDevice.getDeviceNTP()->setUpdateIntervalInMilliSecond(strdup(json.c_str()));
+		espDevice.getDeviceNTP()->setUpdateIntervalInMilliSecond(json);
 	}
 
 	if (topicKey == String(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB)) {
-		espDevice.getDeviceWiFi()->setHostName(strdup(json.c_str()));
+		espDevice.getDeviceWiFi()->setHostName(json);
 	}
   if (topicKey == String(DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB)) {
-   espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(strdup(json.c_str()));
+   espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(json);
   }
 
 	if (topicKey == String(DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB)) {
-		espDevice.getDeviceDebug()->setRemoteEnabled(strdup(json.c_str()));
+		espDevice.getDeviceDebug()->setRemoteEnabled(json);
 	}
 	if (topicKey == String(DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB)) {
-		espDevice.getDeviceDebug()->setResetCmdEnabled(strdup(json.c_str()));
+		espDevice.getDeviceDebug()->setResetCmdEnabled(json);
 	}
 	if (topicKey == String(DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB)) {
-		espDevice.getDeviceDebug()->setSerialEnabled(strdup(json.c_str()));
+		espDevice.getDeviceDebug()->setSerialEnabled(json);
 	}
 	if (topicKey == String(DEVICE_DEBUG_SET_SHOW_COLORS_TOPIC_SUB)) {
-		espDevice.getDeviceDebug()->setShowColors(strdup(json.c_str()));
+		espDevice.getDeviceDebug()->setShowColors(json);
 	}
 	if (topicKey == String(DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL_TOPIC_SUB)) {
-		espDevice.getDeviceDebug()->setShowDebugLevel(strdup(json.c_str()));
+		espDevice.getDeviceDebug()->setShowDebugLevel(json);
 	}
 	if (topicKey == String(DEVICE_DEBUG_SET_SHOW_PROFILER_TOPIC_SUB)) {
-		espDevice.getDeviceDebug()->setShowProfiler(strdup(json.c_str()));
+		espDevice.getDeviceDebug()->setShowProfiler(json);
 	}
 	if (topicKey == String(DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB)) {
-		espDevice.getDeviceDebug()->setShowTime(strdup(json.c_str()));
+		espDevice.getDeviceDebug()->setShowTime(json);
 	}
 
   if (topicKey == String(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB)) {
-    espDevice.getDeviceSensors()->setSensorsByMQQTCallback(strdup(json.c_str()));
+    espDevice.getDeviceSensors()->setSensorsByMQQTCallback(json);
   }
 	if (topicKey == String(DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB)) {
-		espDevice.getDeviceSensors()->setReadIntervalInMilliSeconds(strdup(json.c_str()));
+		espDevice.getDeviceSensors()->setReadIntervalInMilliSeconds(json);
 	}
   if (topicKey == String(DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB)) {
-   espDevice.getDeviceSensors()->setPublishIntervalInMilliSeconds(strdup(json.c_str()));
+   espDevice.getDeviceSensors()->setPublishIntervalInMilliSeconds(json);
   }
 
   if (topicKey == String(SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB)) {
-   espDevice.getDeviceSensors()->setOrdination(strdup(json.c_str()));
+   espDevice.getDeviceSensors()->setOrdination(json);
   }
 
 	if (topicKey == String(SENSOR_SET_LABEL_TOPIC_SUB)) {
-		espDevice.getDeviceSensors()->setLabel(strdup(json.c_str()));
+		espDevice.getDeviceSensors()->setLabel(json);
 	}
 	
 	if (topicKey == String(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB)) {
-		espDevice.getDeviceSensors()->setResolution(strdup(json.c_str()));
+		espDevice.getDeviceSensors()->setResolution(json);
 	}
  
   if (topicKey == String(SENSOR_TRIGGER_INSERT_TOPIC_SUB)) {
-   espDevice.getDeviceSensors()->insertTrigger(strdup(json.c_str()));
+   espDevice.getDeviceSensors()->insertTrigger(json);
   } 
   if (topicKey == String(SENSOR_TRIGGER_DELETE_TOPIC_SUB)) {
-    espDevice.getDeviceSensors()->deleteTrigger(strdup(json.c_str()));
+    espDevice.getDeviceSensors()->deleteTrigger(json);
   } 
 	if (topicKey == String(SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB)) {
-		espDevice.getDeviceSensors()->setTriggerOn(strdup(json.c_str()));
+		espDevice.getDeviceSensors()->setTriggerOn(json);
 	}	
 	if (topicKey == String(SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB)) {
-		espDevice.getDeviceSensors()->setBuzzerOn(strdup(json.c_str()));
+		espDevice.getDeviceSensors()->setBuzzerOn(json);
 	}
   if (topicKey == String(SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB)) {
-    espDevice.getDeviceSensors()->setTriggerValue(strdup(json.c_str()));
+    espDevice.getDeviceSensors()->setTriggerValue(json);
   }
   
   if (topicKey == String(SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB)) {
-    espDevice.getDeviceSensors()->setDatasheetUnitMeasurementScale(strdup(json.c_str()));
+    espDevice.getDeviceSensors()->setDatasheetUnitMeasurementScale(json);
   }
 	if (topicKey == String(SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB)) {
-		espDevice.getDeviceSensors()->setRange(strdup(json.c_str()));
+		espDevice.getDeviceSensors()->setRange(json);
 	}
   if (topicKey == String(SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB)) {
-    espDevice.getDeviceSensors()->setChartLimiter(strdup(json.c_str()));
+    espDevice.getDeviceSensors()->setChartLimiter(json);
   } 
 }
 

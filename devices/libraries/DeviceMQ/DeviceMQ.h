@@ -86,7 +86,7 @@ namespace ART
 		String 														getDeviceRoutingKey(const char* topic);
 
 		typedef std::function<void()>								connectedSignature;
-		typedef std::function<void(String, String)>					subscriptionSignature;
+		typedef std::function<void(String, char*)>					subscriptionSignature;
 
 		void														onMQQTCallback(char* topic, uint8_t* payload, unsigned int length);
 

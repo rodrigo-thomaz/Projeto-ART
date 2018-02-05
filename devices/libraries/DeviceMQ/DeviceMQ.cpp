@@ -189,15 +189,8 @@ namespace ART
 	{
 		String topicKey = getTopicKey(topic);
 
-		String json;
-
-		//obtem a string do payload recebido
-		for (int i = 0; i < length; i++)
-		{
-			char c = (char)payload[i];
-			json += c;
-		}
-
+		char* json = reinterpret_cast<char*>(payload);
+		
 		for (auto && fn : _subscriptionCallbacks) fn(topicKey, json);
 	}
 
