@@ -85,12 +85,13 @@ void setup() {
 
 	espDevice.getDeviceSensors()->begin();
 
-	espDevice.getDeviceMQ()->addSubscriptionCallback(mqtt_SubCallback);
   espDevice.getDeviceMQ()->addSubscribeInApplicationCallback(subscribeInApplication);
   espDevice.getDeviceMQ()->addSubscribeNotInApplicationCallback(subscribeInApplication);
   espDevice.getDeviceMQ()->addUnSubscribeInApplicationCallback(subscribeInApplication);
   espDevice.getDeviceMQ()->addUnSubscribeNotInApplicationCallback(subscribeInApplication);
-
+  
+	espDevice.getDeviceMQ()->addSubscriptionCallback(mqtt_SubCallback);
+ 
   espDevice.getDeviceMQ()->begin();
 
 	String hostNameWifi = HOST_NAME;
