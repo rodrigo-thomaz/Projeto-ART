@@ -39,27 +39,15 @@ namespace ART
 		bool								inApplication();
 
 		template<typename Function>
-		void								addInsertingCallback(Function && fn)
+		void								addInsertCallback(Function && fn)
 		{
-			_insertingCallbacks.push_back(std::forward<Function>(fn));
+			_insertCallbacks.push_back(std::forward<Function>(fn));
 		}
 
 		template<typename Function>
-		void								addInsertedCallback(Function && fn)
+		void								addRemoveCallback(Function && fn)
 		{
-			_insertedCallbacks.push_back(std::forward<Function>(fn));
-		}
-
-		template<typename Function>
-		void								addRemovingCallback(Function && fn)
-		{
-			_removingCallbacks.push_back(std::forward<Function>(fn));
-		}
-
-		template<typename Function>
-		void								addRemovedCallback(Function && fn)
-		{
-			_removedCallbacks.push_back(std::forward<Function>(fn));
+			_removeCallbacks.push_back(std::forward<Function>(fn));
 		}
 
 	private:
@@ -71,10 +59,8 @@ namespace ART
 
 		typedef std::function<void()>		callbackSignature;
 
-		std::vector<callbackSignature>		_insertingCallbacks;
-		std::vector<callbackSignature>		_insertedCallbacks;
-		std::vector<callbackSignature>		_removingCallbacks;		
-		std::vector<callbackSignature>		_removedCallbacks;
+		std::vector<callbackSignature>		_insertCallbacks;
+		std::vector<callbackSignature>		_removeCallbacks;
 
 		void								onDeviceMQSubscribeDevice();
 		void								onDeviceMQSubscribeDeviceInApplication();

@@ -111,10 +111,8 @@ namespace ART
 
 	void DeviceMQ::begin()
 	{
-		_espDevice->getDeviceInApplication()->addInsertingCallback([=]() { return onDeviceInApplicationInserting(); });
-		_espDevice->getDeviceInApplication()->addInsertedCallback([=]() { return onDeviceInApplicationInserted(); });
-		_espDevice->getDeviceInApplication()->addRemovingCallback([=]() { return onDeviceInApplicationRemoving(); });
-		_espDevice->getDeviceInApplication()->addRemovedCallback([=]() { return onDeviceInApplicationRemoved(); });		
+		_espDevice->getDeviceInApplication()->addInsertCallback([=]() { return onDeviceInApplicationInsert(); });
+		_espDevice->getDeviceInApplication()->addRemoveCallback([=]() { return onDeviceInApplicationRemove(); });		
 	}
 
 	bool DeviceMQ::autoConnect()
@@ -285,23 +283,15 @@ namespace ART
 		return routingKey;
 	}	
 
-	void DeviceMQ::onDeviceInApplicationInserting()
-	{
-		for (auto && fn : _unSubscribeDeviceCallbacks) fn();
-	}
-
-	void DeviceMQ::onDeviceInApplicationInserted()
+	void DeviceMQ::onDeviceInApplicationInsert()
 	{		
+		for (auto && fn : _unSubscribeDeviceCallbacks) fn();
 		for (auto && fn : _subscribeDeviceInApplicationCallbacks) fn();
 	}
 
-	void DeviceMQ::onDeviceInApplicationRemoving()
+	void DeviceMQ::onDeviceInApplicationRemove()
 	{
-		for (auto && fn : _unSubscribeDeviceInApplicationCallbacks) fn();		
-	}
-
-	void DeviceMQ::onDeviceInApplicationRemoved()
-	{
+		for (auto && fn : _unSubscribeDeviceInApplicationCallbacks) fn();
 		for (auto && fn : _subscribeDeviceCallbacks) fn();
 	}
 }

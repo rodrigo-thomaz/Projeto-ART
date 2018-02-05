@@ -136,14 +136,12 @@ namespace ART
 	void DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
 	{
 		if (strcmp(topicKey, DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB) == 0) {			
-			for (auto && fn : _insertingCallbacks) fn();
 			insert(json);
-			for (auto && fn : _insertedCallbacks) fn();
+			for (auto && fn : _insertCallbacks) fn();
 		}
 		if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {			
-			for (auto && fn : _removingCallbacks) fn();
 			remove();
-			for (auto && fn : _removedCallbacks) fn();
+			for (auto && fn : _removeCallbacks) fn();
 		}
 	}
 }
