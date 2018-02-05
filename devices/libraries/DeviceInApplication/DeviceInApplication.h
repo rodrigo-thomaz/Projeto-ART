@@ -1,6 +1,8 @@
 #ifndef DeviceInApplication_h
 #define DeviceInApplication_h
 
+#include "functional"
+#include "vector"
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
@@ -21,6 +23,8 @@ namespace ART
 
 		static void							create(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice);
 
+		void								begin();
+
 		void								load(JsonObject& jsonObject);
 
 		void								insert(char* json);
@@ -32,12 +36,29 @@ namespace ART
 		char*								getApplicationTopic()  const;
 		void								setApplicationTopic(char* value);
 
+		template<typename Function>
+		void								addInsertCallback(Function && fn)
+		{
+			_insertCallbacks.push_back(std::forward<Function>(fn));
+		}
+
+		template<typename Function>
+		void								addRemoveCallback(Function && fn)
+		{
+			_removeCallbacks.push_back(std::forward<Function>(fn));
+		}
+
 	private:
 
 		ESPDevice * _espDevice;
 
 		char*								_applicationId;
 		char*								_applicationTopic;
+
+		typedef std::function<void()>		callbackSignature;
+
+		std::vector<callbackSignature>		_insertCallbacks;
+		std::vector<callbackSignature>		_removeCallbacks;
 
 		void								onDeviceMQSubscribeNotInApplication();
 		void								onDeviceMQSubscribeInApplication();

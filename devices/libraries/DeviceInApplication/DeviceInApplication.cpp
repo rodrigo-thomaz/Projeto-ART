@@ -5,13 +5,7 @@ namespace ART
 {
 	DeviceInApplication::DeviceInApplication(ESPDevice* espDevice)
 	{
-		_espDevice = espDevice;
-
-		_espDevice->getDeviceMQ()->addSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
-		_espDevice->getDeviceMQ()->addSubscribeInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
-		_espDevice->getDeviceMQ()->addUnSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeNotInApplication(); });
-		_espDevice->getDeviceMQ()->addUnSubscribeInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeInApplication(); });
-		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
+		_espDevice = espDevice;		
 	}
 
 	DeviceInApplication::~DeviceInApplication()
@@ -24,6 +18,15 @@ namespace ART
 	void DeviceInApplication::create(DeviceInApplication *(&deviceInApplication), ESPDevice * espDevice)
 	{
 		deviceInApplication = new DeviceInApplication(espDevice);
+	}
+
+	void DeviceInApplication::begin()
+	{
+		_espDevice->getDeviceMQ()->addSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
+		_espDevice->getDeviceMQ()->addSubscribeInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
+		_espDevice->getDeviceMQ()->addUnSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeNotInApplication(); });
+		_espDevice->getDeviceMQ()->addUnSubscribeInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeInApplication(); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
 	}
 
 	void DeviceInApplication::load(JsonObject & jsonObject)
@@ -125,14 +128,16 @@ namespace ART
 
 	void DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
 	{
-		if (strcmp(topicKey, DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB) == 0) {
-			//TODO:voltar unSubscribeNotInApplication();
+		if (strcmp(topicKey, DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB) == 0) {			
 			insert(json);
+			for (auto && fn : _insertCallbacks) fn();
+			//TODO:voltar unSubscribeNotInApplication();
 			//TODO:voltar subscribeInApplication();
 		}
-		if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {
-			//TODO:voltar unSubscribeInApplication();
+		if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {			
 			remove();
+			for (auto && fn : _removeCallbacks) fn();
+			//TODO:voltar unSubscribeInApplication();
 			//TODO:voltar subscribeNotInApplication();
 		}
 	}
