@@ -32,7 +32,7 @@ namespace ART
 
 	void DeviceSensors::begin()
 	{
-		//_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
 		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 		
@@ -551,6 +551,14 @@ namespace ART
 
 	void DeviceSensors::onDeviceMQSubscription(char* topicKey, char* json)
 	{
-		
+		if (strcmp(topicKey, DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB) == 0) {
+			setSensorsByMQQTCallback(json);
+		}
+		if (strcmp(topicKey, DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
+			setReadIntervalInMilliSeconds(json);
+		}
+		if (strcmp(topicKey, DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
+			setPublishIntervalInMilliSeconds(json);
+		}
 	}
 }
