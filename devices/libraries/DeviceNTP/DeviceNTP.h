@@ -107,6 +107,8 @@ namespace ART
 		DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
 
 		bool 											_initialized = false;
+
+		void											onDeviceMQSubscription(char* topicKey, char* json);
 	};
 }
 

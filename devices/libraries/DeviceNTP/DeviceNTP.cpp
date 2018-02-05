@@ -6,7 +6,7 @@ namespace ART
 	DeviceNTP::DeviceNTP(ESPDevice* espDevice)
 	{
 		_espDevice = espDevice;
-		_udp = new WiFiUDP();
+		_udp = new WiFiUDP();		
 	}
 
 	DeviceNTP::~DeviceNTP()
@@ -47,6 +47,8 @@ namespace ART
 	}
 
 	bool DeviceNTP::begin() {
+
+		//_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
 
 		if (_initialized) {
 			return true;;
@@ -264,5 +266,10 @@ namespace ART
 	DeviceNTP& DeviceNTP::setUpdateCallback(DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE callback) {
 		this->_updateCallback = callback;
 		return *this;
+	}
+
+	void DeviceNTP::onDeviceMQSubscription(char* topicKey, char* json)
+	{
+		
 	}
 }
