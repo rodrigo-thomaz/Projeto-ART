@@ -63,8 +63,8 @@ namespace ART
 		std::vector<callbackSignature>		_removeCallbacks;
 
 		void								onDeviceMQSubscribeDevice();
-		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDevice();
+		void								onDeviceMQSubscribeDeviceInApplication();		
 		void								onDeviceMQUnSubscribeDeviceInApplication();
 		void								onDeviceMQSubscription(char* topicKey, char* json);
 

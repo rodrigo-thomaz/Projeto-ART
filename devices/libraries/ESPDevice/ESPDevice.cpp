@@ -52,6 +52,7 @@ namespace ART
 
 		_deviceInApplication->begin();
 		_deviceMQ->begin();
+		_deviceWiFi->begin();
 		_deviceWiFi->autoConnect();
 		autoLoad();
 		_deviceNTP->begin();

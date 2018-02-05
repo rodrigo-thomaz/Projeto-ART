@@ -92,6 +92,13 @@ namespace ART
 		deviceWiFi = new DeviceWiFi(espDevice);
 	}
 
+	void DeviceWiFi::begin()
+	{
+		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
+		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
+		//_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+	}
+
 	void DeviceWiFi::load(JsonObject& jsonObject)
 	{
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
@@ -981,5 +988,22 @@ namespace ART
 		}
 		res += String(((ip >> 8 * 3)) & 0xFF);
 		return res;
+	}
+
+	void DeviceWiFi::onDeviceMQSubscribeDeviceInApplication()
+	{
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
+	}
+
+	void DeviceWiFi::onDeviceMQUnSubscribeDeviceInApplication()
+	{
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
+	}
+
+	void DeviceWiFi::onDeviceMQSubscription(char* topicKey, char* json)
+	{
+		
 	}
 }
