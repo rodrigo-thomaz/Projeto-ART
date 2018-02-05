@@ -25,8 +25,8 @@ namespace ART
 		DeviceSensors::create(_deviceSensors, this);
 		DeviceInApplication::create(_deviceInApplication, this);
 
-		_deviceMQ->addConnectedNotInApplicationCallback([=]() { return this->onDeviceMQConnectedNotInApplication(); });
-		_deviceMQ->addConnectedInApplicationCallback([=]() { return this->onDeviceMQConnectedInApplication(); });
+		_deviceMQ->addSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
+		_deviceMQ->addSubscribeInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
 		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
 	}
 
@@ -260,15 +260,15 @@ namespace ART
 		}
 	}
 
-	void ESPDevice::onDeviceMQConnectedNotInApplication()
+	void ESPDevice::onDeviceMQSubscribeNotInApplication()
 	{
 		_deviceMQ->subscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
 		_deviceMQ->subscribeInDevice(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB);
 	}
 
-	void ESPDevice::onDeviceMQConnectedInApplication()
+	void ESPDevice::onDeviceMQSubscribeInApplication()
 	{
-		Serial.println("[ESPDevice::onDeviceMQConnectedInApplication] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		Serial.println("[ESPDevice::onDeviceMQSubscribeInApplication] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 
 	void ESPDevice::onDeviceMQSubscription(char* topicKey, char* json)
