@@ -27,6 +27,8 @@ namespace ART
 
 		_deviceMQ->addSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
 		_deviceMQ->addSubscribeInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
+		_deviceMQ->addUnSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeNotInApplication(); });
+		_deviceMQ->addUnSubscribeInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeInApplication(); });
 		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
 	}
 
@@ -268,7 +270,20 @@ namespace ART
 
 	void ESPDevice::onDeviceMQSubscribeInApplication()
 	{
-		Serial.println("[ESPDevice::onDeviceMQSubscribeInApplication] !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		_deviceMQ->subscribeInDevice(ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB);
+		_deviceMQ->subscribeInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
+	}
+
+	void ESPDevice::onDeviceMQUnSubscribeNotInApplication()
+	{
+		_deviceMQ->unSubscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
+		_deviceMQ->unSubscribeInDevice(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB);
+	}
+
+	void ESPDevice::onDeviceMQUnSubscribeInApplication()
+	{
+		_deviceMQ->unSubscribeInDevice(ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB);
+		_deviceMQ->unSubscribeInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
 	}
 
 	void ESPDevice::onDeviceMQSubscription(char* topicKey, char* json)

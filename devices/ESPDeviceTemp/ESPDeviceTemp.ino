@@ -106,22 +106,9 @@ void initConfiguration()
 	EEPROM_readAnything(0, configuration);
 }
 
-void unSubscribeNotInApplication()
-{
-	Serial.println("[MQQT::unSubscribeNotInApplication] initializing ...");
-
-	espDevice.getDeviceMQ()->unSubscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
-	espDevice.getDeviceMQ()->unSubscribeInDevice(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB);
-
-	Serial.println("[MQQT::unSubscribeNotInApplication] Initialized with success !");
-}
-
 void subscribeInApplication()
 {
-	Serial.println("[MQQT::subscribeInApplication] initializing ...");
-
-	espDevice.getDeviceMQ()->subscribeInDevice(ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB);
-	espDevice.getDeviceMQ()->subscribeInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
+	Serial.println("[MQQT::subscribeInApplication] initializing ...");	
 
 	espDevice.getDeviceMQ()->subscribeInApplication(DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB);
 	espDevice.getDeviceMQ()->subscribeInApplication(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB);
@@ -162,10 +149,7 @@ void subscribeInApplication()
 
 void unSubscribeInApplication()
 {
-	Serial.println("[MQQT::unSubscribeInApplication] initializing ...");
-
-	espDevice.getDeviceMQ()->unSubscribeInDevice(ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB);
-	espDevice.getDeviceMQ()->unSubscribeInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
+	Serial.println("[MQQT::unSubscribeInApplication] initializing ...");	
 
 	espDevice.getDeviceMQ()->unSubscribeInApplication(DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB);
 	espDevice.getDeviceMQ()->unSubscribeInApplication(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB);
@@ -216,7 +200,7 @@ void mqtt_SubCallback(char* topicKey, char* json)
 		displayAccessManager.updatePin(json);
 	}
 	if (strcmp(topicKey, ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB) == 0) {
-		unSubscribeNotInApplication();
+		//TODO:voltar unSubscribeNotInApplication();
 		espDevice.getDeviceInApplication()->insertInApplication(json);
 		subscribeInApplication();
 	}

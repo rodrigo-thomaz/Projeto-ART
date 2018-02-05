@@ -87,6 +87,8 @@ namespace ART
 
 		void						onDeviceMQSubscribeNotInApplication();
 		void						onDeviceMQSubscribeInApplication();
+		void						onDeviceMQUnSubscribeNotInApplication();
+		void						onDeviceMQUnSubscribeInApplication();
 		void						onDeviceMQSubscription(char* topicKey, char* json);
 	};
 }
