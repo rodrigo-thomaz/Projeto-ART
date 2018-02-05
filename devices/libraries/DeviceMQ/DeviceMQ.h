@@ -32,8 +32,7 @@ namespace ART
 		char*														getClientId() const;
 		char*														getDeviceTopic() const;
 
-		bool														begin();
-		void														beginNew();
+		void														begin();
 
 		bool														autoConnect();
 
@@ -88,7 +87,7 @@ namespace ART
 		char*														_clientId;
 		char*														_deviceTopic;
 
-		bool														_begin;
+		bool														_loaded;
 
 		WiFiClient	 												_espClient;
 		PubSubClient* 												_mqqt;		

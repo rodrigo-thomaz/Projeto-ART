@@ -101,50 +101,28 @@ namespace ART
 		return (_deviceTopic);
 	}
 
-	bool DeviceMQ::begin()
+	void DeviceMQ::begin()
 	{
-		if (this->_begin) return true;
+		_espDevice->addLoadedCallback([=]() { return onESPDeviceLoaded(); });
 
-		if (this->_espDevice->getDeviceWiFi()->isConnected() && this->_espDevice->loaded()) {
-
-			/*this->_mqqt->setServer(_host, _port);   
-			
-			this->_mqqt->setCallback([=](char* topic, uint8_t* payload, unsigned int length) {
-				return onMQQTCallback(topic, payload, length);
-			});
-
-			this->_begin = true;
-
-			Serial.println("[MQQT] Initialized with success !");*/
-		}
-		else {
-			this->_begin = false;
-
-			Serial.println("[MQQT] Not initialized !");
-		}
-	}
-
-	void DeviceMQ::beginNew()
-	{
 		_espDevice->getDeviceInApplication()->addInsertingCallback([=]() { return onDeviceInApplicationInserting(); });
 		_espDevice->getDeviceInApplication()->addInsertedCallback([=]() { return onDeviceInApplicationInserted(); });
 		_espDevice->getDeviceInApplication()->addRemovingCallback([=]() { return onDeviceInApplicationRemoving(); });
-		_espDevice->getDeviceInApplication()->addRemovedCallback([=]() { return onDeviceInApplicationRemoved(); });
-
-		_espDevice->addLoadedCallback([=]() { return onESPDeviceLoaded(); });
+		_espDevice->getDeviceInApplication()->addRemovedCallback([=]() { return onDeviceInApplicationRemoved(); });		
 	}
 
 	bool DeviceMQ::autoConnect()
 	{
-		if (!this->_espDevice->getDeviceWiFi()->isConnected() || !this->_espDevice->loaded()) {
+		if (!_espDevice->getDeviceWiFi()->isConnected() || !_espDevice->loaded()) {
 			return false;
 		}
 
-		if (!this->begin()) {
+		if (!_loaded) {
+			Serial.println("[DeviceMQ::autoConnect] Not initialized !");
 			return false;
 		}
 
-		if (this->_mqqt->connected()) {
+		if (_mqqt->connected()) {
 			return true;
 		}
 		else {
@@ -167,7 +145,7 @@ namespace ART
 			boolean willRetain = false;
 
 			//if (this->_mqqt->connect(clientId, user, password, willTopic, willQoS, willRetain, willMessage)) 
-			if (this->_mqqt->connect(_clientId, _user, _password))				
+			if (_mqqt->connect(_clientId, _user, _password))				
 			{
 				Serial.println("[DeviceMQ] Conectado com sucesso ao broker MQTT!");
 
@@ -217,17 +195,17 @@ namespace ART
 
 	void DeviceMQ::publishInApplication(const char* topic, const char* payload)
 	{
-		String routingKey = this->getApplicationRoutingKey(topic);
+		String routingKey = getApplicationRoutingKey(topic);
 		Serial.print("[DeviceMQ::publishInApplication] routingKey: ");
 		Serial.println(routingKey);
-		this->_mqqt->publish(routingKey.c_str(), payload);
+		_mqqt->publish(routingKey.c_str(), payload);
 	}
 
 	void DeviceMQ::subscribeDeviceInApplication(const char* topic)
 	{
-		String routingKey = this->getApplicationRoutingKey(topic);
-		this->_mqqt->subscribe(routingKey.c_str());
-		this->_mqqt->loop();
+		String routingKey = getApplicationRoutingKey(topic);
+		_mqqt->subscribe(routingKey.c_str());
+		_mqqt->loop();
 
 		Serial.print("[DeviceMQ::subscribeDeviceInApplication] Subscribe device in application with success routingKey: ");
 		Serial.println(routingKey);
@@ -235,9 +213,9 @@ namespace ART
 
 	void DeviceMQ::unSubscribeDeviceInApplication(const char* topic)
 	{
-		String routingKey = this->getApplicationRoutingKey(topic);
-		this->_mqqt->unsubscribe(routingKey.c_str());
-		this->_mqqt->loop();
+		String routingKey = getApplicationRoutingKey(topic);
+		_mqqt->unsubscribe(routingKey.c_str());
+		_mqqt->loop();
 
 		Serial.print("[DeviceMQ::unSubscribeDeviceInApplication] UnSubscribe device in application with success routingKey: ");
 		Serial.println(routingKey);
@@ -245,9 +223,9 @@ namespace ART
 
 	void DeviceMQ::subscribeDevice(const char* topic)
 	{
-		String routingKey = this->getDeviceRoutingKey(topic);
-		this->_mqqt->subscribe(routingKey.c_str());
-		this->_mqqt->loop();
+		String routingKey = getDeviceRoutingKey(topic);
+		_mqqt->subscribe(routingKey.c_str());
+		_mqqt->loop();
 
 		Serial.print("[DeviceMQ::subscribeDevice] Subscribe device with success routingKey: ");
 		Serial.println(routingKey);
@@ -255,9 +233,9 @@ namespace ART
 
 	void DeviceMQ::unSubscribeDevice(const char* topic)
 	{
-		String routingKey = this->getDeviceRoutingKey(topic);
-		this->_mqqt->unsubscribe(routingKey.c_str());
-		this->_mqqt->loop();
+		String routingKey = getDeviceRoutingKey(topic);
+		_mqqt->unsubscribe(routingKey.c_str());
+		_mqqt->loop();
 
 		Serial.print("[DeviceMQ::unSubscribeDevice] UnSubscribe device with success routingKey: ");
 		Serial.println(routingKey);
@@ -279,7 +257,7 @@ namespace ART
 
 	String DeviceMQ::getApplicationRoutingKey(const char* topic)
 	{
-		DeviceInApplication* deviceInApplication = this->_espDevice->getDeviceInApplication();
+		DeviceInApplication* deviceInApplication = _espDevice->getDeviceInApplication();
 
 		String routingKey = String("ART/Application/");
 		routingKey.concat(deviceInApplication->getApplicationTopic());
@@ -331,7 +309,7 @@ namespace ART
 			return onMQQTCallback(topic, payload, length);
 		});
 
-		_begin = true;
+		_loaded = true;
 
 		Serial.println("[DeviceMQ::onESPDeviceLoaded] Loaded");
 	}

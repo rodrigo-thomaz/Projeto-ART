@@ -89,8 +89,6 @@ void setup() {
   espDevice.getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback(unSubscribeDeviceInApplication);
   
 	espDevice.getDeviceMQ()->addSubscriptionCallback(mqtt_SubCallback);
- 
-  espDevice.getDeviceMQ()->begin();
 
 	String hostNameWifi = HOST_NAME;
 	hostNameWifi.concat(".local");

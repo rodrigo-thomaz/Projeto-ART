@@ -51,7 +51,7 @@ namespace ART
 	void ESPDevice::begin()
 	{
 		_deviceInApplication->begin();
-		_deviceMQ->beginNew();
+		_deviceMQ->begin();
 		_deviceWiFi->autoConnect();
 		autoLoad();
 		_deviceNTP->begin();
