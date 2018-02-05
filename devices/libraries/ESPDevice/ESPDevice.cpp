@@ -55,6 +55,7 @@ namespace ART
 		_deviceWiFi->autoConnect();
 		autoLoad();
 		_deviceNTP->begin();
+		_deviceDebug->begin();
 	}
 
 	void ESPDevice::loop()
@@ -269,15 +270,15 @@ namespace ART
 		_deviceMQ->subscribeDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
 	}
 
-	void ESPDevice::onDeviceMQSubscribeDeviceInApplication()
-	{
-		_deviceMQ->subscribeDeviceInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
-	}
-
 	void ESPDevice::onDeviceMQUnSubscribeDevice()
 	{
 		_deviceMQ->unSubscribeDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
 	}
+
+	void ESPDevice::onDeviceMQSubscribeDeviceInApplication()
+	{
+		_deviceMQ->subscribeDeviceInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
+	}	
 
 	void ESPDevice::onDeviceMQUnSubscribeDeviceInApplication()
 	{

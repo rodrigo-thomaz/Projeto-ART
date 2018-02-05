@@ -20,6 +20,13 @@ namespace ART
 		deviceDebug = new DeviceDebug(espDevice);
 	}
 
+	void DeviceDebug::begin()
+	{
+		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
+		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+	}
+
 	void DeviceDebug::loop()
 	{
 		_debug->handle();
@@ -247,5 +254,52 @@ namespace ART
 		_showTime = value;
 		_debug->showTime(_showTime);
 		printf("DeviceDebug", "setShowTime", "showTime: %s\n", _showTime ? "true" : "false");
+	}
+
+	void DeviceDebug::onDeviceMQSubscribeDeviceInApplication()
+	{
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_COLORS_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_PROFILER_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB);
+	}
+
+	void DeviceDebug::onDeviceMQUnSubscribeDeviceInApplication()
+	{
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_COLORS_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_PROFILER_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB);
+	}
+
+	void DeviceDebug::onDeviceMQSubscription(char* topicKey, char* json)
+	{
+		if (strcmp(topicKey, DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB) == 0) {
+			setRemoteEnabled(json);
+		}
+		if (strcmp(topicKey, DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB) == 0) {
+			setResetCmdEnabled(json);
+		}
+		if (strcmp(topicKey, DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB) == 0) {
+			setSerialEnabled(json);
+		}
+		if (strcmp(topicKey, DEVICE_DEBUG_SET_SHOW_COLORS_TOPIC_SUB) == 0) {
+			setShowColors(json);
+		}
+		if (strcmp(topicKey, DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL_TOPIC_SUB) == 0) {
+			setShowDebugLevel(json);
+		}
+		if (strcmp(topicKey, DEVICE_DEBUG_SET_SHOW_PROFILER_TOPIC_SUB) == 0) {
+			setShowProfiler(json);
+		}
+		if (strcmp(topicKey, DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB) == 0) {
+			setShowTime(json);
+		}
 	}
 }

@@ -27,6 +27,8 @@ namespace ART
 
 		static void							create(DeviceDebug* (&deviceDebug), ESPDevice* espDevice);
 
+		void								begin();
+
 		void								loop();
 
 		bool 								isActive(uint8_t debugLevel = DEBUG);
@@ -48,14 +50,6 @@ namespace ART
 				
 		void								load(JsonObject& jsonObject);
 
-		void								setRemoteEnabled(char* json);
-		void								setResetCmdEnabled(char* json);
-		void								setSerialEnabled(char* json);
-		void								setShowColors(char* json);
-		void								setShowDebugLevel(char* json);
-		void								setShowProfiler(char* json);
-		void								setShowTime(char* json);		
-
 		static const uint8_t				PROFILER = 0;
 		static const uint8_t				VERBOSE = 1;
 		static const uint8_t				DEBUG = 2;
@@ -69,6 +63,14 @@ namespace ART
 		ESPDevice *							_espDevice;
 
 		RemoteDebug* 						_debug;
+
+		void								setRemoteEnabled(char* json);
+		void								setResetCmdEnabled(char* json);
+		void								setSerialEnabled(char* json);
+		void								setShowColors(char* json);
+		void								setShowDebugLevel(char* json);
+		void								setShowProfiler(char* json);
+		void								setShowTime(char* json);
 
 		void								setHostName(char* value);
 		void								setRemoteEnabled(bool value);
@@ -92,6 +94,10 @@ namespace ART
 		bool								_telnetServer;
 
 		std::string							createExpression(const char* className, const char* caller, const char* expression);
+
+		void								onDeviceMQSubscribeDeviceInApplication();
+		void								onDeviceMQUnSubscribeDeviceInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
 	};
 }
 
