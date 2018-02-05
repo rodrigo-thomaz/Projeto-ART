@@ -81,9 +81,7 @@ void setup() {
 
   initConfiguration();
 
-  espDevice.begin();
-
-  espDevice.getDeviceSensors()->begin();
+  espDevice.begin();  
 
   espDevice.getDeviceMQ()->addSubscribeDeviceInApplicationCallback(subscribeDeviceInApplication);
   espDevice.getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback(unSubscribeDeviceInApplication);

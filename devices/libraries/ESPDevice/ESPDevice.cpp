@@ -57,6 +57,7 @@ namespace ART
 		autoLoad();
 		_deviceNTP->begin();
 		_deviceDebug->begin();
+		_deviceSensors->begin();
 	}
 
 	void ESPDevice::loop()
