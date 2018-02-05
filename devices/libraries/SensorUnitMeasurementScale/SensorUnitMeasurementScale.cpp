@@ -77,4 +77,19 @@ namespace ART
 	{
 		_chartLimiterMin = value;
 	}
+
+	void SensorUnitMeasurementScale::onDeviceMQSubscribeDeviceInApplication()
+	{
+
+	}
+
+	void SensorUnitMeasurementScale::onDeviceMQUnSubscribeDeviceInApplication()
+	{
+
+	}
+
+	void SensorUnitMeasurementScale::onDeviceMQSubscription(char* topicKey, char* json)
+	{
+
+	}
 }

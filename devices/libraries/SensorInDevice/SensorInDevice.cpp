@@ -53,4 +53,19 @@ namespace ART
 	{
 		return _ordination < val._ordination;
 	}
+
+	void SensorInDevice::onDeviceMQSubscribeDeviceInApplication()
+	{
+
+	}
+
+	void SensorInDevice::onDeviceMQUnSubscribeDeviceInApplication()
+	{
+
+	}
+
+	void SensorInDevice::onDeviceMQSubscription(char* topicKey, char* json)
+	{
+
+	}
 }

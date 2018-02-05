@@ -34,6 +34,11 @@ namespace ART
 		Sensor *							_sensor;		
 
 		short 								_ordination;
+
+		void								onDeviceMQSubscribeDeviceInApplication();
+		void								onDeviceMQUnSubscribeDeviceInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
+
 	};
 }
 

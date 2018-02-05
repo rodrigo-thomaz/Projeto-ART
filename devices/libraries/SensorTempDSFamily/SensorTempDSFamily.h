@@ -46,6 +46,11 @@ namespace ART
 		Sensor *							_sensor;
 
 		int 								_resolution;
+
+		void								onDeviceMQSubscribeDeviceInApplication();
+		void								onDeviceMQUnSubscribeDeviceInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
+
 	};
 }
 

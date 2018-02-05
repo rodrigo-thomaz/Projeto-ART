@@ -530,4 +530,19 @@ namespace ART
 		}
 		_readIntervalInMilliSeconds = root["value"].as<int>();
 	}
+
+	void DeviceSensors::onDeviceMQSubscribeDeviceInApplication()
+	{
+		
+	}
+
+	void DeviceSensors::onDeviceMQUnSubscribeDeviceInApplication()
+	{
+		
+	}
+
+	void DeviceSensors::onDeviceMQSubscription(char* topicKey, char* json)
+	{
+		
+	}
 }

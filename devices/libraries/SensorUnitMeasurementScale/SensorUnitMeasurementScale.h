@@ -48,6 +48,11 @@ namespace ART
 
 		float 								_chartLimiterMax;
 		float 								_chartLimiterMin;
+
+		void								onDeviceMQSubscribeDeviceInApplication();
+		void								onDeviceMQUnSubscribeDeviceInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
+
 	};
 }
 

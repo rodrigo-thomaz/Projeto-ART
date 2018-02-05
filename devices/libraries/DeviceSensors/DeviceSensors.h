@@ -93,6 +93,9 @@ namespace ART
 		int									_readIntervalInMilliSeconds;
 		int									_publishIntervalInMilliSeconds;
 
+		void								onDeviceMQSubscribeDeviceInApplication();
+		void								onDeviceMQUnSubscribeDeviceInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
 	};
 }
 

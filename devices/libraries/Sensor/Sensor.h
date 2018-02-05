@@ -81,7 +81,12 @@ namespace ART
 
 		float 								_value;
 
-		long 								_epochTimeUtc;		
+		long 								_epochTimeUtc;	
+
+		void								onDeviceMQSubscribeDeviceInApplication();
+		void								onDeviceMQUnSubscribeDeviceInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
+
 	};
 }
 
