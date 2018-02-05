@@ -34,8 +34,8 @@
 
 struct config_t
 {
-	String hardwaresInApplicationId;
-	String hardwareId;
+  String hardwaresInApplicationId;
+  String hardwareId;
 } configuration;
 
 int configurationEEPROMAddr = 0;
@@ -60,127 +60,127 @@ DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, 
 
 void setup() {
 
-	Serial.begin(9600);
+  Serial.begin(9600);
 
-	// Buzzer
-	pinMode(D6, OUTPUT);
+  // Buzzer
+  pinMode(D6, OUTPUT);
 
-	pinMode(D4, INPUT);
-	pinMode(D5, INPUT);
+  pinMode(D4, INPUT);
+  pinMode(D5, INPUT);
 
-	displayManager.begin();
+  displayManager.begin();
 
-	Serial.println("Iniciando...");
+  Serial.println("Iniciando...");
 
-	// text display tests
-	displayManager.display.clearDisplay();
-	displayManager.display.setTextSize(1);
-	displayManager.display.setTextColor(WHITE);
-	displayManager.display.setCursor(0, 0);
-	displayManager.display.display();
+  // text display tests
+  displayManager.display.clearDisplay();
+  displayManager.display.setTextSize(1);
+  displayManager.display.setTextColor(WHITE);
+  displayManager.display.setCursor(0, 0);
+  displayManager.display.display();
 
-	initConfiguration();
+  initConfiguration();
 
-	espDevice.begin();
+  espDevice.begin();
 
-	espDevice.getDeviceSensors()->begin();
+  espDevice.getDeviceSensors()->begin();
 
   espDevice.getDeviceMQ()->addSubscribeDeviceInApplicationCallback(subscribeDeviceInApplication);
   espDevice.getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback(unSubscribeDeviceInApplication);
   
-	espDevice.getDeviceMQ()->addSubscriptionCallback(mqtt_SubCallback);
+  espDevice.getDeviceMQ()->addSubscriptionCallback(mqtt_SubCallback);
 
-	String hostNameWifi = HOST_NAME;
-	hostNameWifi.concat(".local");
+  String hostNameWifi = HOST_NAME;
+  hostNameWifi.concat(".local");
 
-	if (MDNS.begin(HOST_NAME)) {
-		Serial.print("* MDNS responder started. Hostname -> ");
-		Serial.println(HOST_NAME);
-	}
+  if (MDNS.begin(HOST_NAME)) {
+    Serial.print("* MDNS responder started. Hostname -> ");
+    Serial.println(HOST_NAME);
+  }
 
-	WiFi.hostname(hostNameWifi);
+  WiFi.hostname(hostNameWifi);
 }
 
 void initConfiguration()
 {
-	EEPROM_readAnything(0, configuration);
+  EEPROM_readAnything(0, configuration);
 }
 
 void subscribeDeviceInApplication()
 {
-	Serial.println("[MQQT::subscribeDeviceInApplication] initializing ...");		
+  Serial.println("[MQQT::subscribeDeviceInApplication] initializing ...");    
 
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB);
+  espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB);
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
 
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB); 
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
+  espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
 
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB);
 
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_SET_LABEL_TOPIC_SUB);
+  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_SET_LABEL_TOPIC_SUB);
 
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB);
+  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB);
   
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_INSERT_TOPIC_SUB);  
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_DELETE_TOPIC_SUB);  
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB);	
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB);
+  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB); 
+  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB);
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB);
 
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB);
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB);
+  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB);
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB);
 
-	Serial.println("[MQQT::subscribeDeviceInApplication] Initialized with success !");
+  Serial.println("[MQQT::subscribeDeviceInApplication] Initialized with success !");
 }
 
 void unSubscribeDeviceInApplication()
 {
-	Serial.println("[MQQT::unSubscribeDeviceInApplication] initializing ...");		
+  Serial.println("[MQQT::unSubscribeDeviceInApplication] initializing ...");    
 
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB);
+  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB);
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
 
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB);
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
+  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB);
+  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
 
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB);
   
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_SET_LABEL_TOPIC_SUB);
-	
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB);
+  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_SET_LABEL_TOPIC_SUB);
+  
+  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB);
 
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_INSERT_TOPIC_SUB);  
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_DELETE_TOPIC_SUB);  
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB);	
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB);
+  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB); 
+  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB);
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB);
 
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB);
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB);
+  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB);
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB);
 
-	Serial.println("[MQQT::unSubscribeDeviceInApplication] Initialized with success !");
+  Serial.println("[MQQT::unSubscribeDeviceInApplication] Initialized with success !");
 }
 
 void mqtt_SubCallback(char* topicKey, char* json)
 {
   if (espDevice.getDeviceDebug()->isActive(DeviceDebug::DEBUG)) {
-	  espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey);
+    espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey);
   }
   
-	displayMQTTManager.printReceived(true);
+  displayMQTTManager.printReceived(true);
 
-	if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
-		displayAccessManager.updatePin(json);
-	}
+  if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
+    displayAccessManager.updatePin(json);
+  }
 
-	if (strcmp(topicKey, DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB) == 0) {
-		espDevice.getDeviceWiFi()->setHostName(json);
-	}
+  if (strcmp(topicKey, DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB) == 0) {
+    espDevice.getDeviceWiFi()->setHostName(json);
+  }
   if (strcmp(topicKey, DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
    espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(json);
   }
@@ -188,9 +188,9 @@ void mqtt_SubCallback(char* topicKey, char* json)
   if (strcmp(topicKey, DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB) == 0) {
     espDevice.getDeviceSensors()->setSensorsByMQQTCallback(json);
   }
-	if (strcmp(topicKey, DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
-		espDevice.getDeviceSensors()->setReadIntervalInMilliSeconds(json);
-	}
+  if (strcmp(topicKey, DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
+    espDevice.getDeviceSensors()->setReadIntervalInMilliSeconds(json);
+  }
   if (strcmp(topicKey, DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
    espDevice.getDeviceSensors()->setPublishIntervalInMilliSeconds(json);
   }
@@ -199,13 +199,13 @@ void mqtt_SubCallback(char* topicKey, char* json)
    espDevice.getDeviceSensors()->setOrdination(json);
   }
 
-	if (strcmp(topicKey, SENSOR_SET_LABEL_TOPIC_SUB) == 0) {
-		espDevice.getDeviceSensors()->setLabel(json);
-	}
-	
-	if (strcmp(topicKey, SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB) == 0) {
-		espDevice.getDeviceSensors()->setResolution(json);
-	}
+  if (strcmp(topicKey, SENSOR_SET_LABEL_TOPIC_SUB) == 0) {
+    espDevice.getDeviceSensors()->setLabel(json);
+  }
+  
+  if (strcmp(topicKey, SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB) == 0) {
+    espDevice.getDeviceSensors()->setResolution(json);
+  }
  
   if (strcmp(topicKey, SENSOR_TRIGGER_INSERT_TOPIC_SUB) == 0) {
    espDevice.getDeviceSensors()->insertTrigger(json);
@@ -213,12 +213,12 @@ void mqtt_SubCallback(char* topicKey, char* json)
   if (strcmp(topicKey, SENSOR_TRIGGER_DELETE_TOPIC_SUB) == 0) {
     espDevice.getDeviceSensors()->deleteTrigger(json);
   } 
-	if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB) == 0) {
-		espDevice.getDeviceSensors()->setTriggerOn(json);
-	}	
-	if (strcmp(topicKey, SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB) == 0) { 
-		espDevice.getDeviceSensors()->setBuzzerOn(json);
-	}
+  if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB) == 0) {
+    espDevice.getDeviceSensors()->setTriggerOn(json);
+  } 
+  if (strcmp(topicKey, SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB) == 0) { 
+    espDevice.getDeviceSensors()->setBuzzerOn(json);
+  }
   if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB) == 0) {
     espDevice.getDeviceSensors()->setTriggerValue(json);
   }
@@ -226,9 +226,9 @@ void mqtt_SubCallback(char* topicKey, char* json)
   if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB) == 0) {
     espDevice.getDeviceSensors()->setDatasheetUnitMeasurementScale(json);
   }
-	if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB) == 0) {
-		espDevice.getDeviceSensors()->setRange(json);
-	}
+  if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB) == 0) {
+    espDevice.getDeviceSensors()->setRange(json);
+  }
   if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB) == 0) {
     espDevice.getDeviceSensors()->setChartLimiter(json);
   } 
@@ -236,9 +236,9 @@ void mqtt_SubCallback(char* topicKey, char* json)
 
 void loop() {
 
-	espDevice.loop();	
+  espDevice.loop(); 
 
-	DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
+  DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
 
   if (deviceInApplication->inApplication()) {
       loopInApplication();
@@ -248,42 +248,42 @@ void loop() {
     //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
   }
 
-	//keep-alive da comunicação com broker MQTT
-	espDevice.getDeviceMQ()->loop();
+  //keep-alive da comunicação com broker MQTT
+  espDevice.getDeviceMQ()->loop();
 
 }
 
 void loopInApplication()
 {
-	displayManager.display.clearDisplay();
+  displayManager.display.clearDisplay();
 
-	espDevice.getDeviceNTP()->update();
+  espDevice.getDeviceNTP()->update();
 
-	uint64_t now = millis();
+  uint64_t now = millis();
 
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
   DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
   
-	if (deviceSensors->initialized()) {
-		if (now - deviceSensorsReadTempTimestamp > deviceSensors->getReadIntervalInMilliSeconds()) {
-			deviceSensorsReadTempTimestamp = now;
-			displayTemperatureSensorManager.printUpdate(true);
-			deviceSensors->refresh();
-		}
-		else {
-			displayTemperatureSensorManager.printUpdate(false);
-		}
-	}
+  if (deviceSensors->initialized()) {
+    if (now - deviceSensorsReadTempTimestamp > deviceSensors->getReadIntervalInMilliSeconds()) {
+      deviceSensorsReadTempTimestamp = now;
+      displayTemperatureSensorManager.printUpdate(true);
+      deviceSensors->refresh();
+    }
+    else {
+      displayTemperatureSensorManager.printUpdate(false);
+    }
+  }
 
-	// MQTT
+  // MQTT
   if(espDevice.getDeviceMQ()->connected()){
     loopMQQTConnected(now);
   }
 
-	// Wifi
-	displayWiFiManager.printSignal();
+  // Wifi
+  displayWiFiManager.printSignal();
   
-	displayManager.display.display();
+  displayManager.display.display();
 }
 
 void loopMQQTConnected(uint64_t now)
@@ -362,4 +362,5 @@ void loopMQQTConnected(uint64_t now)
   }
   
 }
+
 
