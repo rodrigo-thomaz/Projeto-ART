@@ -139,7 +139,7 @@ namespace ART
 			insert(json);
 			for (auto && fn : _insertCallbacks) fn();
 		}
-		if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {			
+		else if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {
 			remove();
 			for (auto && fn : _removeCallbacks) fn();
 		}
