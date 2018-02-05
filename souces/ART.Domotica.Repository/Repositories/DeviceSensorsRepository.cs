@@ -3,7 +3,6 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
-    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;

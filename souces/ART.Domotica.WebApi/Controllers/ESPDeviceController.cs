@@ -135,43 +135,7 @@
         {
             await _espDeviceProducer.GetByPin(CreateMessage(contract));
             return Ok();
-        }
-
-        /// <summary>
-        /// Adiciona um ESP Device pelo pin
-        /// </summary>        
-        /// <remarks>
-        /// Adiciona um ESP Device pelo pin
-        /// </remarks>
-        /// <response code="200">OK</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal Server Error</response>
-        [Route("insertInApplication")]
-        [HttpPost]
-        public async Task<IHttpActionResult> InsertInApplication(ESPDeviceInsertInApplicationRequestContract contract)
-        {
-            await _espDeviceProducer.InsertInApplication(CreateMessage(contract));
-            return Ok();
-        }
-
-        /// <summary>
-        /// Remove um ESP Device pelo id
-        /// </summary>        
-        /// <remarks>
-        /// Remove um ESP Device pelo id
-        /// </remarks>
-        /// <response code="200">OK</response>
-        /// <response code="400">Bad Request</response>
-        /// <response code="403">Forbidden</response>
-        /// <response code="500">Internal Server Error</response>
-        [Route("deleteFromApplication")]
-        [HttpPost]
-        public async Task<IHttpActionResult> DeleteFromApplication(ESPDeviceDeleteFromApplicationRequestContract contract)
-        {
-            await _espDeviceProducer.DeleteFromApplication(CreateMessage(contract));
-            return Ok();
-        }
+        }        
 
         /// <summary>
         /// Retornar uma lista de ESP Devices da aplicação

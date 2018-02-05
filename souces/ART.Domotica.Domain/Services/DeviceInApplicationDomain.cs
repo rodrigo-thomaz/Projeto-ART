@@ -7,13 +7,11 @@
     using ART.Domotica.Repository.Entities;
     using System;
     using ART.Infra.CrossCutting.Domain;
-    using ART.Infra.CrossCutting.Utils;
-    using System.Transactions;
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
 
-    public class ESPDeviceDomain : DomainBase, IESPDeviceDomain
+    public class DeviceInApplicationDomain : DomainBase, IDeviceInApplicationDomain
     {
         #region Fields
 
@@ -29,7 +27,7 @@
 
         #region Constructors
 
-        public ESPDeviceDomain(IComponentContext componentContext)
+        public DeviceInApplicationDomain(IComponentContext componentContext)
         {
             var context = componentContext.Resolve<ARTDbContext>();
 
@@ -44,31 +42,9 @@
 
         #endregion Constructors
 
-        #region Methods
+        #region Methods       
 
-        public async Task<List<ESPDevice>> GetAll()
-        {
-            return await _espDeviceRepository.GetAll();
-        }
-
-        public async Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId)
-        {
-            return await _espDeviceRepository.GetAllByApplicationId(applicationId);
-        }
-
-        public async Task<ESPDevice> GetByPin(string pin)
-        {
-            var data = await _espDeviceRepository.GetByPin(pin);
-
-            if (data == null)
-            {
-                throw new Exception("Pin not found");
-            }
-
-            return data;
-        }
-
-        public async Task<ESPDevice> InsertInApplication(Guid applicationId, Guid createByApplicationUserId, string pin)
+        public async Task<ESPDevice> Insert(Guid applicationId, Guid createByApplicationUserId, string pin)
         {
             var applicationEntity = await _applicationRepository.GetByKey(applicationId);
 
@@ -91,15 +67,17 @@
                 throw new Exception("ApplicationUser not found");
             }
 
-            await _deviceInApplicationRepository.Insert(new DeviceInApplication
+            var deviceInApplication = new DeviceInApplication
             {
                 ApplicationId = applicationEntity.Id,
                 DeviceId = deviceEntity.Id,
                 DeviceDatasheetId = deviceEntity.DeviceDatasheetId,
                 CreateByApplicationUserId = applicationUserEntity.Id,
                 CreateDate = DateTime.Now.ToUniversalTime(),
-                
-            });
+
+            };
+
+            await _deviceInApplicationRepository.Insert(deviceInApplication);
 
             var deviceSensors = await _deviceSensorsRepository.GetFullByDeviceId(deviceEntity.Id);
 
@@ -123,7 +101,7 @@
             return deviceEntity;
         }
 
-        public async Task<ESPDevice> DeleteFromApplication(Guid applicationId, Guid deviceId, Guid deviceDatasheetId)
+        public async Task<DeviceBase> Remove(Guid applicationId, Guid deviceId, Guid deviceDatasheetId)
         {
             // Device 
 
@@ -145,42 +123,6 @@
             var deviceEntity = await _espDeviceRepository.GetFullByKey(deviceInApplicationEntity.DeviceId, deviceInApplicationEntity.DeviceDatasheetId);
 
             return deviceEntity;
-        }
-
-        public async Task<List<ESPDevice>> UpdatePins()
-        {
-            var existingPins = await _espDeviceRepository.GetExistingPins();
-            var entities = await _espDeviceRepository.GetListNotInApplication();
-
-            foreach (var item in entities)
-            {
-                var pin = RandonHelper.RandomString(4);
-                while (existingPins.Contains(pin))
-                {
-                    pin = RandonHelper.RandomString(4);
-                }
-                item.Pin = pin;
-            }
-
-            using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
-                await _espDeviceRepository.Update(entities);
-                scope.Complete();
-            }
-
-            return entities;
-        }
-
-        public async Task<ESPDevice> GetConfigurations(int chipId, int flashChipId, string stationMacAddress, string softAPMacAddress)
-        {
-            var data = await _espDeviceRepository.GetDeviceInApplication(chipId, flashChipId, stationMacAddress, softAPMacAddress);            
-
-            if (data == null)
-            {
-                throw new Exception("ESP Device not found");
-            }
-
-            return data;
         }
 
         #endregion Methods

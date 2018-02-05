@@ -29,8 +29,6 @@
         private readonly EventingBasicConsumer _getAllConsumer;
         private readonly EventingBasicConsumer _getAllByApplicationIdConsumer;
         private readonly EventingBasicConsumer _getByPinConsumer;
-        private readonly EventingBasicConsumer _insertInApplicationConsumer;
-        private readonly EventingBasicConsumer _deleteFromApplicationConsumer;
         private readonly EventingBasicConsumer _getConfigurationsRPCConsumer;
         private readonly EventingBasicConsumer _checkForUpdatesRPCConsumer;
         private readonly EventingBasicConsumer _setLabelConsumer;
@@ -47,8 +45,6 @@
             _getAllConsumer = new EventingBasicConsumer(_model);
             _getAllByApplicationIdConsumer = new EventingBasicConsumer(_model);
             _getByPinConsumer = new EventingBasicConsumer(_model);
-            _insertInApplicationConsumer = new EventingBasicConsumer(_model);
-            _deleteFromApplicationConsumer = new EventingBasicConsumer(_model);
             _getConfigurationsRPCConsumer = new EventingBasicConsumer(_model);
             _checkForUpdatesRPCConsumer = new EventingBasicConsumer(_model);
             _setLabelConsumer = new EventingBasicConsumer(_model);
@@ -67,8 +63,6 @@
             BasicQueueDeclare(ESPDeviceConstants.GetAllQueueName);
             BasicQueueDeclare(ESPDeviceConstants.GetAllByApplicationIdQueueName);
             BasicQueueDeclare(ESPDeviceConstants.GetByPinQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.InsertInApplicationQueueName);
-            BasicQueueDeclare(ESPDeviceConstants.DeleteFromApplicationQueueName);
             BasicQueueDeclare(ESPDeviceConstants.SetLabelQueueName);
             BasicQueueDeclare(ESPDeviceConstants.GetConfigurationsRPCQueueName);
             BasicQueueDeclare(ESPDeviceConstants.CheckForUpdatesRPCQueueName);
@@ -76,8 +70,6 @@
             _getAllConsumer.Received += GetAllReceived;
             _getAllByApplicationIdConsumer.Received += GetAllByApplicationIdReceived;
             _getByPinConsumer.Received += GetByPinReceived;
-            _insertInApplicationConsumer.Received += InsertInApplicationReceived;
-            _deleteFromApplicationConsumer.Received += DeleteFromApplicationReceived;
             _getConfigurationsRPCConsumer.Received += GetConfigurationsRPCReceived;
             _checkForUpdatesRPCConsumer.Received += CheckForUpdatesRPCReceived;
             _setLabelConsumer.Received += SetLabelReceived;
@@ -85,8 +77,6 @@
             _model.BasicConsume(ESPDeviceConstants.GetAllQueueName, false, _getAllConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetAllByApplicationIdQueueName, false, _getAllByApplicationIdConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetByPinQueueName, false, _getByPinConsumer);
-            _model.BasicConsume(ESPDeviceConstants.InsertInApplicationQueueName, false, _insertInApplicationConsumer);
-            _model.BasicConsume(ESPDeviceConstants.DeleteFromApplicationQueueName, false, _deleteFromApplicationConsumer);
             _model.BasicConsume(ESPDeviceConstants.GetConfigurationsRPCQueueName, false, _getConfigurationsRPCConsumer);
             _model.BasicConsume(ESPDeviceConstants.CheckForUpdatesRPCQueueName, false, _checkForUpdatesRPCConsumer);
             _model.BasicConsume(ESPDeviceConstants.SetLabelQueueName, false, _setLabelConsumer);
@@ -175,90 +165,7 @@
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, buffer);
 
             _logger.DebugLeave();
-        }
-
-        public void InsertInApplicationReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(InsertInApplicationReceivedAsync(sender, e));
-        }
-
-        public async Task InsertInApplicationReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract>>(e.Body);
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.InsertInApplication(applicationMQ.Id, message.ApplicationUserId, message.Contract.Pin);
-
-            //Enviando para View
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.InsertInApplicationViewCompletedQueueName);
-            var viewModel = Mapper.Map<ESPDevice, ESPDeviceGetModel>(data);
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
-
-            //Enviando sensores para View
-            var sensorRountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.InsertInApplicationViewCompletedQueueName);
-            var sensorViewModel = Mapper.Map<IEnumerable<Sensor>, IEnumerable<SensorGetModel>>(data.DeviceSensors.SensorInDevice.Select(x => x.Sensor));
-            var sensorViewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(sensorViewModel, true);
-            _model.BasicPublish(defaultExchangeTopic, sensorRountingKey, null, sensorViewBuffer);
-
-            //Enviando para o Iot
-            var iotContract = Mapper.Map<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>(data);
-            iotContract.ApplicationTopic = applicationMQ.Topic;
-            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
-            var routingKey = GetDeviceRoutingKeyForIoT(data.DeviceMQ.Topic, ESPDeviceConstants.InsertInApplicationIoTQueueName);
-            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
-
-            _logger.DebugLeave();
-        }
-
-        public void DeleteFromApplicationReceived(object sender, BasicDeliverEventArgs e)
-        {
-            Task.WaitAll(DeleteFromApplicationReceivedAsync(sender, e));
-        }
-
-        public async Task DeleteFromApplicationReceivedAsync(object sender, BasicDeliverEventArgs e)
-        {
-            _logger.DebugEnter();
-
-            _model.BasicAck(e.DeliveryTag, false);
-            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract>>(e.Body);
-
-            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
-            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
-
-            var domain = _componentContext.Resolve<IESPDeviceDomain>();
-            var data = await domain.DeleteFromApplication(applicationMQ.Id, message.Contract.DeviceId, message.Contract.DeviceDatasheetId);
-
-            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
-
-            //Enviando para View
-            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, ESPDeviceConstants.DeleteFromApplicationViewCompletedQueueName);
-            var viewModel = new ESPDeviceDeleteFromApplicationModel
-            {
-                DeviceId = data.Id,
-            };
-            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
-            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
-
-            //Enviando sensores para View
-            var sensorRountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.DeleteFromApplicationViewCompletedQueueName);
-            var sensorViewModel = Mapper.Map<IEnumerable<Sensor>, IEnumerable<SensorGetModel>>(data.DeviceSensors.SensorInDevice.Select(x => x.Sensor));
-            var sensorViewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(sensorViewModel, true);
-            _model.BasicPublish(defaultExchangeTopic, sensorRountingKey, null, sensorViewBuffer);
-
-            //Enviando para o IoT
-            var routingKey = GetDeviceRoutingKeyForIoT(deviceMQ.Topic, ESPDeviceConstants.DeleteFromApplicationIoTQueueName);
-            _model.BasicPublish(defaultExchangeTopic, routingKey, null, null);
-
-            _logger.DebugLeave();
-        }
+        }        
 
         public void GetConfigurationsRPCReceived(object sender, BasicDeliverEventArgs e)
         {

@@ -299,6 +299,7 @@
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetMapper.js" />
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetService.js" />
     <Content Include="src\js\services\device\deviceDebugFinder.js" />
+    <Content Include="src\js\services\device\deviceInApplicationService.js" />
     <Content Include="src\js\services\device\deviceWiFiFinder.js" />
     <Content Include="src\js\services\device\deviceDebugService.js" />
     <Content Include="src\js\services\device\deviceWiFiService.js" />

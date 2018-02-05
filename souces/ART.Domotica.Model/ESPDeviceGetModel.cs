@@ -2,8 +2,6 @@
 {
     using System;
 
-    using ART.Domotica.Enums;
-
     public class ESPDeviceGetModel
     {
         #region Properties

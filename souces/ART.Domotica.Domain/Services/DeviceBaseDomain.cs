@@ -9,7 +9,6 @@
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
-    using ART.Domotica.Enums;
 
     public class DeviceBaseDomain : DomainBase, IDeviceBaseDomain
     {

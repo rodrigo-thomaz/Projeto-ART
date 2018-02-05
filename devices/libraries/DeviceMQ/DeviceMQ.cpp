@@ -228,7 +228,7 @@ namespace ART
 		this->_mqqt->unsubscribe(routingKey.c_str());
 		this->_mqqt->loop();
 
-		Serial.print("[DeviceMQ::unSubscribeInApplication] UnSubscribeInApplication in application with success routingKey: ");
+		Serial.print("[DeviceMQ::unSubscribeInApplication] UnSubscribe in application with success routingKey: ");
 		Serial.println(routingKey);
 	}
 
@@ -238,7 +238,7 @@ namespace ART
 		this->_mqqt->subscribe(routingKey.c_str());
 		this->_mqqt->loop();
 
-		Serial.print("[DeviceMQ::subscribe] Subscribe in application with success routingKey: ");
+		Serial.print("[DeviceMQ::subscribe] Subscribe in device with success routingKey: ");
 		Serial.println(routingKey);
 	}
 
@@ -248,7 +248,7 @@ namespace ART
 		this->_mqqt->unsubscribe(routingKey.c_str());
 		this->_mqqt->loop();
 
-		Serial.print("[DeviceMQ::unSubscribeInDevice] UnSubscribeInDevice in application with success routingKey: ");
+		Serial.print("[DeviceMQ::unSubscribeInDevice] UnSubscribe in device with success routingKey: ");
 		Serial.println(routingKey);
 	}
 

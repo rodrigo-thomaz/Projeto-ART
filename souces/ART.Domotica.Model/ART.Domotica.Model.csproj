@@ -63,7 +63,7 @@
     <Compile Include="SensorUnitMeasurementScaleSetValueModel.cs" />
     <Compile Include="SensorTriggerSetTriggerOnModel.cs" />
     <Compile Include="SensorTriggerSetTriggerValueModel.cs" />
-    <Compile Include="ESPDeviceDeleteFromApplicationModel.cs" />
+    <Compile Include="DeviceInApplicationRemoveModel.cs" />
     <Compile Include="ESPDeviceAdminGetModel.cs" />
     <Compile Include="ESPDeviceGetByPinModel.cs" />
     <Compile Include="ESPDeviceGetModel.cs" />

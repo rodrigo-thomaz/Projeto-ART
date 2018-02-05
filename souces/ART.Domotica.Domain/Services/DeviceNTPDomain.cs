@@ -11,7 +11,6 @@
     using ART.Domotica.Repository.Repositories;
     using ART.Domotica.Repository.Interfaces.Globalization;
     using ART.Domotica.Repository.Repositories.Globalization;
-    using ART.Domotica.Enums;
 
     public class DeviceNTPDomain : DomainBase, IDeviceNTPDomain
     {

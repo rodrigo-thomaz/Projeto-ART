@@ -27,9 +27,6 @@
                 .ForMember(vm => vm.DeviceDebug, m => m.MapFrom(x => x.DeviceDebug))
                 .ForMember(vm => vm.DeviceSensors, m => m.MapFrom(x => x.DeviceSensors));
 
-            CreateMap<ESPDevice, ESPDeviceInsertInApplicationResponseIoTContract>()
-                .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().ApplicationId));
-
             CreateMap<ESPDevice, ESPDeviceGetByPinModel>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId));

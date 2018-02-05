@@ -6,8 +6,8 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
-#define DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB "ESPDevice/InsertInApplicationIoT"
-#define DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB "ESPDevice/DeleteFromApplicationIoT"
+#define DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB "DeviceInApplication/InsertIoT"
+#define DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB "DeviceInApplication/RemoveIoT"
 
 namespace ART
 {

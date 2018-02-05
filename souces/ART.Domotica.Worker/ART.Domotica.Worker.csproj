@@ -140,6 +140,7 @@
     <Compile Include="Consumers\DeviceWiFiConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
     <Compile Include="Consumers\DeviceDatasheetConsumer.cs" />
+    <Compile Include="Consumers\DeviceInApplicationConsumer.cs" />
     <Compile Include="Consumers\SensorInDeviceConsumer.cs" />
     <Compile Include="Consumers\Locale\ContinentConsumer.cs" />
     <Compile Include="Consumers\Locale\CountryConsumer.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="IConsumers\IDeviceDatasheetConsumer.cs" />
     <Compile Include="IConsumers\IDeviceDebugConsumer.cs" />
     <Compile Include="IConsumers\IDeviceWiFiConsumer.cs" />
+    <Compile Include="IConsumers\IDeviceInApplicationConsumer.cs" />
     <Compile Include="IConsumers\ISensorTempDSFamilyConsumer.cs" />
     <Compile Include="IConsumers\IDeviceNTPConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />

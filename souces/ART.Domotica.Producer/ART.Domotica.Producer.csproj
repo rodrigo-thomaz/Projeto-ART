@@ -68,6 +68,7 @@
     <Compile Include="Interfaces\IDeviceWiFiProducer.cs" />
     <Compile Include="Interfaces\IDeviceNTPProducer.cs" />
     <Compile Include="Interfaces\IDeviceDatasheetProducer.cs" />
+    <Compile Include="Interfaces\IDeviceInApplicationProducer.cs" />
     <Compile Include="Interfaces\ISensorInDeviceProducer.cs" />
     <Compile Include="Interfaces\ISensorTriggerProducer.cs" />
     <Compile Include="Interfaces\ISensorUnitMeasurementScaleProducer.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Services\DeviceWiFiProducer.cs" />
     <Compile Include="Services\DeviceNTPProducer.cs" />
     <Compile Include="Services\DeviceDatasheetProducer.cs" />
+    <Compile Include="Services\DeviceInApplicationProducer.cs" />
     <Compile Include="Services\SensorInDeviceProducer.cs" />
     <Compile Include="Services\SensorTriggerProducer.cs" />
     <Compile Include="Services\SensorUnitMeasurementScaleProducer.cs" />

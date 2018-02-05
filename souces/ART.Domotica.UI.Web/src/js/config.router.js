@@ -139,6 +139,7 @@ angular.module('app')
                         'js/services/device/deviceDebugService.js',
                         'js/services/device/deviceSensorsService.js',
                         'js/services/device/sensorInDeviceService.js',
+                        'js/services/device/deviceInApplicationService.js',
                         'js/services/device/deviceService.js',
                     ])
                 })

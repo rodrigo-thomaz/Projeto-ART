@@ -58,7 +58,7 @@
     <Compile Include="SensorTriggerSetTriggerValueRequestIoTContract.cs" />
     <Compile Include="SensorTriggerSetBuzzerOnRequestIoTContract.cs" />
     <Compile Include="SensorTempDSFamilySetResolutionRequestIoTContract.cs" />
-    <Compile Include="ESPDeviceInsertInApplicationResponseIoTContract.cs" />
+    <Compile Include="DeviceInApplicationInsertResponseIoTContract.cs" />
     <Compile Include="ESPDeviceUpdatePinsResponseIoTContract.cs" />
     <Compile Include="IoTRequestContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

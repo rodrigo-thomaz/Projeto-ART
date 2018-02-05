@@ -5,7 +5,6 @@
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
-    using ART.Domotica.Enums;
 
     public class DeviceInApplicationRepository : RepositoryBase<ARTDbContext, DeviceInApplication>, IDeviceInApplicationRepository
     {

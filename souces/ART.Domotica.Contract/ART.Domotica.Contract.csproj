@@ -65,10 +65,10 @@
     <Compile Include="SensorTriggerSetTriggerOnRequestContract.cs" />
     <Compile Include="SensorTriggerSetTriggerValueRequestContract.cs" />
     <Compile Include="SensorTriggerSetBuzzerOnRequestContract.cs" />
-    <Compile Include="ESPDeviceDeleteFromApplicationRequestContract.cs" />
+    <Compile Include="DeviceInApplicationRemoveRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCRequestContract.cs" />
     <Compile Include="ESPDeviceGetConfigurationsRPCResponseContract.cs" />
-    <Compile Include="ESPDeviceInsertInApplicationRequestContract.cs" />
+    <Compile Include="DeviceInApplicationInsertRequestContract.cs" />
     <Compile Include="ESPDeviceGetByPinRequestContract.cs" />
     <Compile Include="SensorTempDSFamilySetResolutionRequestContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

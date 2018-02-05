@@ -37,6 +37,7 @@
             builder.RegisterType<DeviceDebugConsumer>().As<IDeviceDebugConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceSensorsConsumer>().As<IDeviceSensorsConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTempDSFamilyConsumer>().As<ISensorTempDSFamilyConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<DeviceInApplicationConsumer>().As<IDeviceInApplicationConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<ESPDeviceConsumer>().As<IESPDeviceConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorUnitMeasurementScaleConsumer>().As<ISensorUnitMeasurementScaleConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorInDeviceConsumer>().As<ISensorInDeviceConsumer>().SingleInstance().AutoActivate();

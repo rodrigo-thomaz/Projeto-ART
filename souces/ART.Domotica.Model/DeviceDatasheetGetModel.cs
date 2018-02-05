@@ -2,8 +2,6 @@
 {
     using System;
 
-    using ART.Domotica.Enums;
-
     public class DeviceDatasheetGetModel
     {
         #region Properties

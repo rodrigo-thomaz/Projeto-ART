@@ -2,7 +2,6 @@
 {
     using System;
 
-    using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
     public class DeviceMQ : IEntity<Guid>

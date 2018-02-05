@@ -146,6 +146,7 @@
     <Compile Include="Controllers\DeviceWiFiController.cs" />
     <Compile Include="Controllers\DeviceNTPController.cs" />
     <Compile Include="Controllers\DeviceDatasheetController.cs" />
+    <Compile Include="Controllers\DeviceInApplicationController.cs" />
     <Compile Include="Controllers\SensorInDeviceController.cs" />
     <Compile Include="Controllers\SensorTriggerController.cs" />
     <Compile Include="Controllers\SensorUnitMeasurementScaleController.cs" />

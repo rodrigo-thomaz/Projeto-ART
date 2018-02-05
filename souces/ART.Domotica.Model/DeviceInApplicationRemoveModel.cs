@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ESPDeviceDeleteFromApplicationModel
+    public class DeviceInApplicationRemoveModel
     {
         #region Properties
 

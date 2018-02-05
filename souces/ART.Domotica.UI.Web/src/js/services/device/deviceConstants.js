@@ -3,15 +3,7 @@ app.constant('deviceConstant', {
 
     getAllByApplicationIdApiUri: 'api/espDevice/getAllByApplicationId',
     getAllByApplicationIdCompletedTopic: 'ESPDevice.GetAllByApplicationIdViewCompleted',
-    getAllByApplicationIdCompletedEventName: 'deviceService.onGetAllByApplicationIdCompleted_Id_',
-
-    insertInApplicationApiUri: 'api/espDevice/insertInApplication',
-    insertInApplicationCompletedTopic: 'ESPDevice.InsertInApplicationViewCompleted',
-    insertInApplicationCompletedEventName: 'deviceService.onInsertInApplicationCompleted',
-
-    deleteFromApplicationApiUri: 'api/espDevice/deleteFromApplication',
-    deleteFromApplicationCompletedTopic: 'ESPDevice.DeleteFromApplicationViewCompleted',
-    deleteFromApplicationCompletedEventName: 'deviceService.onDeleteFromApplicationCompleted',
+    getAllByApplicationIdCompletedEventName: 'deviceService.onGetAllByApplicationIdCompleted_Id_',    
 
     getByPinApiUri: 'api/espDevice/getByPin',
     getByPinCompletedTopic: 'ESPDevice.GetByPinViewCompleted',
@@ -20,6 +12,18 @@ app.constant('deviceConstant', {
     setLabelApiUri: 'api/espDevice/setLabel',
     setLabelCompletedTopic: 'ESPDevice.SetLabelViewCompleted',
     setLabelCompletedEventName: 'deviceService.onSetLabelCompleted_Id_',
+
+});
+
+app.constant('deviceInApplicationConstant', {
+
+    insertApiUri: 'api/deviceInApplication/insert',
+    insertCompletedTopic: 'DeviceInApplication.InsertViewCompleted',
+    insertCompletedEventName: 'deviceInApplicationService.onInsertCompleted',
+
+    removeApiUri: 'api/deviceInApplication/remove',
+    removeCompletedTopic: 'DeviceInApplication.RemoveViewCompleted',
+    removeCompletedEventName: 'deviceInApplicationService.onRemoveCompleted',
 
 });
 

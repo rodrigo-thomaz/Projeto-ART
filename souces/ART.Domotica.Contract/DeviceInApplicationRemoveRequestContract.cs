@@ -2,9 +2,7 @@
 {
     using System;
 
-    using ART.Domotica.Enums;
-
-    public class ESPDeviceDeleteFromApplicationRequestContract
+    public class DeviceInApplicationRemoveRequestContract
     {
         #region Properties
 

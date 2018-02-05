@@ -36,17 +36,7 @@ namespace ART.Domotica.Producer.Services
         public async Task GetByPin(AuthenticatedMessageContract<ESPDeviceGetByPinRequestContract> message)
         {
             await BasicPublish(ESPDeviceConstants.GetByPinQueueName, message);
-        }
-
-        public async Task InsertInApplication(AuthenticatedMessageContract<ESPDeviceInsertInApplicationRequestContract> message)
-        {
-            await BasicPublish(ESPDeviceConstants.InsertInApplicationQueueName, message);
-        }
-
-        public async Task DeleteFromApplication(AuthenticatedMessageContract<ESPDeviceDeleteFromApplicationRequestContract> message)
-        {
-            await BasicPublish(ESPDeviceConstants.DeleteFromApplicationQueueName, message);
-        }
+        }        
 
         public async Task SetLabel(AuthenticatedMessageContract<DeviceSetLabelRequestContract> message)
         {

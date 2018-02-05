@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ESPDeviceInsertInApplicationResponseIoTContract
+    public class DeviceInApplicationInsertResponseIoTContract
     {
         #region Properties
 

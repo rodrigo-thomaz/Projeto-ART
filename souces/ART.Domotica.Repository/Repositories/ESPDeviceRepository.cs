@@ -9,7 +9,6 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
-    using ART.Domotica.Enums;
 
     public class ESPDeviceRepository : RepositoryBase<ARTDbContext, ESPDevice>, IESPDeviceRepository
     {
@@ -34,8 +33,11 @@
         public async Task<ESPDevice> GetByPin(string pin)
         {
             var data = await _context.ESPDevice
-                .Include(x => x.DeviceNTP)
+                .Include(x => x.DevicesInApplication)
+                .Include(x => x.DeviceDebug)
+                .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceMQ)
+                .Include(x => x.DeviceNTP.TimeZone)
                 .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTriggers))
                 .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
                 .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily))                

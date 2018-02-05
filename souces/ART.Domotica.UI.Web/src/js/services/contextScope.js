@@ -80,6 +80,7 @@ app.factory('contextScope', [
     'deviceNTPService',
     'deviceDebugService',
     'sensorInDeviceService',
+    'deviceInApplicationService',
     'deviceService',
 
     function (
@@ -163,6 +164,7 @@ app.factory('contextScope', [
         deviceNTPService,
         deviceDebugService,
         sensorInDeviceService,
+        deviceInApplicationService,
         deviceService
         
     ) {
