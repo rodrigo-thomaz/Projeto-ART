@@ -74,6 +74,11 @@ namespace ART
 		_applicationTopic = value;
 	}
 
+	bool DeviceInApplication::inApplication()
+	{
+		return !(_applicationId == NULL || _applicationId == "");
+	}
+
 	void DeviceInApplication::insert(char* json)
 	{
 		StaticJsonBuffer<300> jsonBuffer;		

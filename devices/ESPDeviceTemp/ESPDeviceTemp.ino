@@ -293,13 +293,13 @@ void loop() {
 
 	DeviceInApplication* deviceInApplication = espDevice.getDeviceInApplication();
 
-	if (deviceInApplication != NULL && (deviceInApplication->getApplicationId() == NULL || deviceInApplication->getApplicationId() == "")) {
-		displayAccessManager.loop();
-		//EEPROM_writeAnything(configurationEEPROMAddr, configuration);
-	}
-	else {
-		loopInApplication();
-	}
+  if (deviceInApplication->inApplication()) {
+      loopInApplication();
+  }
+  else{
+    displayAccessManager.loop();
+    //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
+  }
 
 	//keep-alive da comunicação com broker MQTT
 	espDevice.getDeviceMQ()->loop();

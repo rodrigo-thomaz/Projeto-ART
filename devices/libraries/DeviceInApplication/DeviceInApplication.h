@@ -36,6 +36,8 @@ namespace ART
 		char*								getApplicationTopic()  const;
 		void								setApplicationTopic(char* value);
 
+		bool								inApplication();
+
 		template<typename Function>
 		void								addInsertingCallback(Function && fn)
 		{
