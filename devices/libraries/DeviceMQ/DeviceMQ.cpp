@@ -110,7 +110,7 @@ namespace ART
 			this->_mqqt->setServer(_host, _port);   
 			
 			this->_mqqt->setCallback([=](char* topic, uint8_t* payload, unsigned int length) {
-				return this->onMQQTCallback(topic, payload, length);
+				return onMQQTCallback(topic, payload, length);
 			});
 
 			this->_begin = true;

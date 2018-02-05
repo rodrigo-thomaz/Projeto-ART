@@ -10,6 +10,8 @@
 #include "DeviceBuzzer.h"
 #include "DeviceSensors.h"
 
+#include "functional"
+#include "vector"
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "ESP8266HTTPClient.h"
@@ -26,68 +28,76 @@ namespace ART
 		ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
 		~ESPDevice();
 
-		void						begin();
-		void						loop();
+		void								begin();
+		void								loop();
 
-		bool						loaded();
+		bool								loaded();
 
-		char *						getDeviceId() const;
-		char *						getDeviceDatasheetId() const;
+		char *								getDeviceId() const;
+		char *								getDeviceDatasheetId() const;
 
-		int							getChipId();
-		int							getFlashChipId();
-		long						getChipSize();
+		int									getChipId();
+		int									getFlashChipId();
+		long								getChipSize();
 
-		char *						getLabel() const;
+		char *								getLabel() const;
 		
-		char *						getWebApiHost() const;
-		uint16_t					getWebApiPort();
-		char * 						getWebApiUri() const;
+		char *								getWebApiHost() const;
+		uint16_t							getWebApiPort();
+		char * 								getWebApiUri() const;
 
-		DeviceInApplication*		getDeviceInApplication();
-		DeviceDebug*				getDeviceDebug();
-		DeviceWiFi*					getDeviceWiFi();
-		DeviceMQ*					getDeviceMQ();
-		DeviceNTP*					getDeviceNTP();
-		DeviceBinary*				getDeviceBinary();
-		DeviceBuzzer*				getDeviceBuzzer();
-		DeviceSensors*				getDeviceSensors();
+		DeviceInApplication*				getDeviceInApplication();
+		DeviceDebug*						getDeviceDebug();
+		DeviceWiFi*							getDeviceWiFi();
+		DeviceMQ*							getDeviceMQ();
+		DeviceNTP*							getDeviceNTP();
+		DeviceBinary*						getDeviceBinary();
+		DeviceBuzzer*						getDeviceBuzzer();
+		DeviceSensors*						getDeviceSensors();
+
+		template<typename Function>
+		void								addLoadedCallback(Function && fn)
+		{
+			_loadedCallbacks.push_back(std::forward<Function>(fn));
+		}
 
 	private:
 
-		char *						_deviceId;
-		char *						_deviceDatasheetId;
+		char *								_deviceId;
+		char *								_deviceDatasheetId;
 
-		int							_chipId;
-		int							_flashChipId;
-		long						_chipSize;
+		int									_chipId;
+		int									_flashChipId;
+		long								_chipSize;
 
-		char *						_label;
+		char *								_label;
 
-		char *						_webApiHost;
-		uint16_t					_webApiPort;
-		char * 						_webApiUri;
+		char *								_webApiHost;
+		uint16_t							_webApiPort;
+		char * 								_webApiUri;
 
-		DeviceInApplication*		_deviceInApplication;
-		DeviceDebug*				_deviceDebug;
-		DeviceWiFi*					_deviceWiFi;
-		DeviceMQ*					_deviceMQ;
-		DeviceNTP*					_deviceNTP;
-		DeviceBinary*				_deviceBinary;
-		DeviceBuzzer*				_deviceBuzzer;
-		DeviceSensors*				_deviceSensors;
+		DeviceInApplication*				_deviceInApplication;
+		DeviceDebug*						_deviceDebug;
+		DeviceWiFi*							_deviceWiFi;
+		DeviceMQ*							_deviceMQ;
+		DeviceNTP*							_deviceNTP;
+		DeviceBinary*						_deviceBinary;
+		DeviceBuzzer*						_deviceBuzzer;
+		DeviceSensors*						_deviceSensors;
 
-		void						autoLoad();
-		void						load(String json);
-		bool 						_loaded = false;
+		void								autoLoad();
+		void								load(String json);
+		bool 								_loaded = false;
 
-		void						setLabel(char* json);
+		void								setLabel(char* json);
 
-		void						onDeviceMQSubscribeDevice();
-		void						onDeviceMQSubscribeDeviceInApplication();
-		void						onDeviceMQUnSubscribeDevice();
-		void						onDeviceMQUnSubscribeDeviceInApplication();
-		void						onDeviceMQSubscription(char* topicKey, char* json);
+		std::vector<std::function<void()>>	_loadedCallbacks;
+
+		void								onDeviceMQSubscribeDevice();
+		void								onDeviceMQSubscribeDeviceInApplication();
+		void								onDeviceMQUnSubscribeDevice();
+		void								onDeviceMQUnSubscribeDeviceInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
 	};
 }
 
