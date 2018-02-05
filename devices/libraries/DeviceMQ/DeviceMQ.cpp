@@ -31,7 +31,7 @@ namespace ART
 	{
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
 
-		deviceDebug->print("DeviceMQ", "load", "begin\n");
+		deviceDebug->print("DeviceMQ", "load", "begin...\n");
 
 		char* host = strdup(jsonObject["host"]);
 		_host = new char(sizeof(strlen(host)));
@@ -54,6 +54,14 @@ namespace ART
 		char* deviceTopic = strdup(jsonObject["deviceTopic"]);
 		_deviceTopic = new char(sizeof(strlen(deviceTopic)));
 		_deviceTopic = deviceTopic;
+
+		_mqqt->setServer(_host, _port);
+
+		_mqqt->setCallback([=](char* topic, uint8_t* payload, unsigned int length) {
+			return onMQQTCallback(topic, payload, length);
+		});
+
+		_loaded = true;
 
 		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
 
@@ -103,8 +111,6 @@ namespace ART
 
 	void DeviceMQ::begin()
 	{
-		_espDevice->addLoadedCallback([=]() { return onESPDeviceLoaded(); });
-
 		_espDevice->getDeviceInApplication()->addInsertingCallback([=]() { return onDeviceInApplicationInserting(); });
 		_espDevice->getDeviceInApplication()->addInsertedCallback([=]() { return onDeviceInApplicationInserted(); });
 		_espDevice->getDeviceInApplication()->addRemovingCallback([=]() { return onDeviceInApplicationRemoving(); });
@@ -113,7 +119,7 @@ namespace ART
 
 	bool DeviceMQ::autoConnect()
 	{
-		if (!_espDevice->getDeviceWiFi()->isConnected() || !_espDevice->loaded()) {
+		if (!_espDevice->getDeviceWiFi()->isConnected()) {
 			return false;
 		}
 
@@ -297,21 +303,6 @@ namespace ART
 	void DeviceMQ::onDeviceInApplicationRemoved()
 	{
 		for (auto && fn : _subscribeDeviceCallbacks) fn();
-	}
-
-	void DeviceMQ::onESPDeviceLoaded()
-	{
-		Serial.println("[DeviceMQ::onESPDeviceLoaded] Loading...");
-
-		_mqqt->setServer(_host, _port);
-
-		_mqqt->setCallback([=](char* topic, uint8_t* payload, unsigned int length) {
-			return onMQQTCallback(topic, payload, length);
-		});
-
-		_loaded = true;
-
-		Serial.println("[DeviceMQ::onESPDeviceLoaded] Loaded");
 	}
 }
 
