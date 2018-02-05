@@ -20,6 +20,8 @@ namespace ART
 
 		static SensorInDevice				create(DeviceSensors* deviceSensors, JsonObject& jsonObject);
 
+		void								begin();
+
 		Sensor*								getSensor();
 		DeviceSensors*						getDeviceSensors();
 

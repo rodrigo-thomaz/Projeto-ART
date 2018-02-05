@@ -108,11 +108,7 @@ void initConfiguration()
 
 void subscribeDeviceInApplication()
 {
-  Serial.println("[MQQT::subscribeDeviceInApplication] initializing ...");    
-
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB); 
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
+  Serial.println("[MQQT::subscribeDeviceInApplication] initializing ...");      
 
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB);
 
@@ -135,11 +131,7 @@ void subscribeDeviceInApplication()
 
 void unSubscribeDeviceInApplication()
 {
-  Serial.println("[MQQT::unSubscribeDeviceInApplication] initializing ...");    
-
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB);
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
+  Serial.println("[MQQT::unSubscribeDeviceInApplication] initializing ...");      
 
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB);
   
