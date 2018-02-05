@@ -43,7 +43,7 @@ namespace ART
 		/**
 		* Starts the underlying UDP client with the default local port
 		*/
-		bool begin();
+		void											begin();
 
 		/**
 		* This should be called in the main loop of your application. By default an update from the NTP Server is only
@@ -106,7 +106,7 @@ namespace ART
 
 		DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
 
-		bool 											_initialized = false;
+		bool 											_loaded = false;
 
 		void											onDeviceMQSubscription(char* topicKey, char* json);
 	};

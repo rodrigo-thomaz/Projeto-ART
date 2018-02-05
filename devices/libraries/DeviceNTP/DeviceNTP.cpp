@@ -35,6 +35,11 @@ namespace ART
 		_utcTimeOffsetInSecond = jsonObject["utcTimeOffsetInSecond"];
 		_updateIntervalInMilliSecond = jsonObject["updateIntervalInMilliSecond"];
 
+		_udp->begin(_port);
+		_udpSetup = true;
+
+		_loaded = true;
+
 		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
 
 			deviceDebug->printf("DeviceNTP", "load", "host: %s\n", _host);
@@ -46,27 +51,8 @@ namespace ART
 		}
 	}
 
-	bool DeviceNTP::begin() {
-
-		//_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
-
-		if (_initialized) {
-			return true;;
-		}
-
-		if (!_espDevice->loaded()) {
-			Serial.println("[ESPDevice] Not loaded !");
-			return false;
-		}
-
-		_udp->begin(_port);
-		_udpSetup = true;
-
-		_initialized = true;
-
-		Serial.println("[DeviceNTP] Initialized with success !");
-
-		return true;
+	void DeviceNTP::begin() {
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
 	char* DeviceNTP::getHost() const
@@ -159,13 +145,13 @@ namespace ART
 
 	bool DeviceNTP::update() {
 
-		if (!this->begin()) {
+		if (!_loaded) {
 			return false;
 		}
 
 		if ((millis() - this->_lastUpdate >= _updateIntervalInMilliSecond)     		// Update after _updateInterval
 			|| this->_lastUpdate == 0) {                                // Update if there was no update yet.
-			if (!this->_udpSetup) this->begin();                        // setup the UDP client if needed
+			//if (!this->_udpSetup) this->begin();                        // setup the UDP client if needed
 																		//notify
 			bool result = this->forceUpdate();
 			if (_updateCallback != NULL) {
