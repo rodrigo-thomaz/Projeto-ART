@@ -4,6 +4,9 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
+#define DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB "ESPDevice/InsertInApplicationIoT"
+#define DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB "ESPDevice/DeleteFromApplicationIoT"
+
 namespace ART
 {
 	class ESPDevice;
@@ -35,6 +38,12 @@ namespace ART
 
 		char*								_applicationId;
 		char*								_applicationTopic;
+
+		void								onDeviceMQSubscribeNotInApplication();
+		void								onDeviceMQSubscribeInApplication();
+		void								onDeviceMQUnSubscribeNotInApplication();
+		void								onDeviceMQUnSubscribeInApplication();
+		void								onDeviceMQSubscription(char* topicKey, char* json);
 
 	};
 }

@@ -5,7 +5,13 @@ namespace ART
 {
 	DeviceInApplication::DeviceInApplication(ESPDevice* espDevice)
 	{
-		_espDevice = espDevice;		
+		_espDevice = espDevice;
+
+		_espDevice->getDeviceMQ()->addSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
+		_espDevice->getDeviceMQ()->addSubscribeInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
+		_espDevice->getDeviceMQ()->addUnSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeNotInApplication(); });
+		_espDevice->getDeviceMQ()->addUnSubscribeInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeInApplication(); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
 	}
 
 	DeviceInApplication::~DeviceInApplication()
@@ -95,5 +101,39 @@ namespace ART
 		setApplicationTopic("");
 
 		Serial.println("[DeviceInApplication::remove] remove from Application with success !");
+	}
+
+	void DeviceInApplication::onDeviceMQSubscribeNotInApplication()
+	{
+		_espDevice->getDeviceMQ()->subscribeInDevice(DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB);
+	}
+
+	void DeviceInApplication::onDeviceMQSubscribeInApplication()
+	{
+		_espDevice->getDeviceMQ()->subscribeInDevice(DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB);
+	}
+
+	void DeviceInApplication::onDeviceMQUnSubscribeNotInApplication()
+	{
+		_espDevice->getDeviceMQ()->unSubscribeInDevice(DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB);
+	}
+
+	void DeviceInApplication::onDeviceMQUnSubscribeInApplication()
+	{
+		_espDevice->getDeviceMQ()->unSubscribeInDevice(DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB);
+	}
+
+	void DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
+	{
+		if (strcmp(topicKey, DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB) == 0) {
+			//TODO:voltar unSubscribeNotInApplication();
+			insert(json);
+			//TODO:voltar subscribeInApplication();
+		}
+		if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {
+			//TODO:voltar unSubscribeInApplication();
+			remove();
+			//TODO:voltar subscribeNotInApplication();
+		}
 	}
 }

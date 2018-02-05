@@ -199,17 +199,7 @@ void mqtt_SubCallback(char* topicKey, char* json)
 	if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
 		displayAccessManager.updatePin(json);
 	}
-	if (strcmp(topicKey, ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB) == 0) {
-		//TODO:voltar unSubscribeNotInApplication();
-		espDevice.getDeviceInApplication()->insert(json);
-		subscribeInApplication();
-	}
-	if (strcmp(topicKey, ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB) == 0) {
-		unSubscribeInApplication();
-		espDevice.getDeviceInApplication()->remove();
-		//TODO:voltar subscribeNotInApplication();
-	}
-	
+		
 	if (strcmp(topicKey, DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB) == 0) {
 		espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(json);
 	}

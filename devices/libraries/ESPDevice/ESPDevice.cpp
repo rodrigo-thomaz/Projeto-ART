@@ -265,24 +265,20 @@ namespace ART
 	void ESPDevice::onDeviceMQSubscribeNotInApplication()
 	{
 		_deviceMQ->subscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
-		_deviceMQ->subscribeInDevice(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB);
 	}
 
 	void ESPDevice::onDeviceMQSubscribeInApplication()
 	{
-		_deviceMQ->subscribeInDevice(ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB);
 		_deviceMQ->subscribeInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
 	}
 
 	void ESPDevice::onDeviceMQUnSubscribeNotInApplication()
 	{
 		_deviceMQ->unSubscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
-		_deviceMQ->unSubscribeInDevice(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB);
 	}
 
 	void ESPDevice::onDeviceMQUnSubscribeInApplication()
 	{
-		_deviceMQ->unSubscribeInDevice(ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB);
 		_deviceMQ->unSubscribeInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
 	}
 
