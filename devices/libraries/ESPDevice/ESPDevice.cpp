@@ -261,7 +261,8 @@ namespace ART
 
 	void ESPDevice::onDeviceMQSubscribeNotInApplication()
 	{
-		Serial.println("onDeviceMQSubscribeNotInApplication !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		_deviceMQ->subscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
+		_deviceMQ->subscribeInDevice(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB);
 	}
 
 	void ESPDevice::onDeviceMQSubscribeInApplication()

@@ -187,8 +187,18 @@ namespace ART
 
 	void DeviceMQ::onMQQTCallback(char* topic, uint8_t* payload, unsigned int length)
 	{
-		for (auto && fn : _subscriptionCallbacks)
-			fn(topic, payload, length);
+		String topicKey = getTopicKey(topic);
+
+		String json;
+
+		//obtem a string do payload recebido
+		for (int i = 0; i < length; i++)
+		{
+			char c = (char)payload[i];
+			json += c;
+		}
+
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey, json);
 	}
 
 	bool DeviceMQ::connected()

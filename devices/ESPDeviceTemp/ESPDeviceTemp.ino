@@ -86,7 +86,6 @@ void setup() {
 	espDevice.getDeviceSensors()->begin();
 
 	espDevice.getDeviceMQ()->addSubscriptionCallback(mqtt_SubCallback);
-  espDevice.getDeviceMQ()->addConnectedNotInApplicationCallback(subscribeNotInApplication);
   espDevice.getDeviceMQ()->addConnectedInApplicationCallback(subscribeInApplication);
 
   espDevice.getDeviceMQ()->begin();
@@ -105,16 +104,6 @@ void setup() {
 void initConfiguration()
 {
 	EEPROM_readAnything(0, configuration);
-}
-
-void subscribeNotInApplication()
-{
-	Serial.println("[MQQT::subscribeNotInApplication] initializing ...");
-
-	espDevice.getDeviceMQ()->subscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
-	espDevice.getDeviceMQ()->subscribeInDevice(ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB);
-
-	Serial.println("[MQQT::subscribeNotInApplication] Initialized with success !");
 }
 
 void unSubscribeNotInApplication()
@@ -215,25 +204,13 @@ void unSubscribeInApplication()
 	Serial.println("[MQQT::unSubscribeInApplication] Initialized with success !");
 }
 
-void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
+void mqtt_SubCallback(String topicKey, String json)
 {
-  String topicKey = espDevice.getDeviceMQ()->getTopicKey(topic);
-
   if (espDevice.getDeviceDebug()->isActive(DeviceDebug::DEBUG)) {
-	  espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic: %s\n", topic);	
 	  espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey.c_str());
   }
   
 	displayMQTTManager.printReceived(true);
-
-	String json;
-
-	//obtem a string do payload recebido
-	for (int i = 0; i < length; i++)
-	{
-		char c = (char)payload[i];
-		json += c;
-	}
 
 	if (topicKey == String(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB)) {
 		displayAccessManager.updatePin(json);
@@ -246,7 +223,7 @@ void mqtt_SubCallback(char* topic, byte* payload, unsigned int length)
 	if (topicKey == String(ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB)) {
 		unSubscribeInApplication();
 		espDevice.getDeviceInApplication()->deleteFromApplication();
-		subscribeNotInApplication();
+		//TODO:voltar subscribeNotInApplication();
 	}
 	if (topicKey == String(ESP_DEVICE_SET_LABEL_TOPIC_SUB)) {
 		espDevice.setLabel(strdup(json.c_str()));
