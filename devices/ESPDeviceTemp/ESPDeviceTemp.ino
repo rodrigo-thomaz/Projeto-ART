@@ -108,10 +108,7 @@ void initConfiguration()
 
 void subscribeDeviceInApplication()
 {
-	Serial.println("[MQQT::subscribeDeviceInApplication] initializing ...");	
-
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB);
-	espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB);
+	Serial.println("[MQQT::subscribeDeviceInApplication] initializing ...");		
 
 	espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB);
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
@@ -149,10 +146,7 @@ void subscribeDeviceInApplication()
 
 void unSubscribeDeviceInApplication()
 {
-	Serial.println("[MQQT::unSubscribeDeviceInApplication] initializing ...");	
-
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB);
-	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB);
+	Serial.println("[MQQT::unSubscribeDeviceInApplication] initializing ...");		
 
 	espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB);
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB);
@@ -198,13 +192,6 @@ void mqtt_SubCallback(char* topicKey, char* json)
 
 	if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
 		displayAccessManager.updatePin(json);
-	}
-		
-	if (strcmp(topicKey, DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB) == 0) {
-		espDevice.getDeviceNTP()->setUtcTimeOffsetInSecond(json);
-	}
-	if (strcmp(topicKey, DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB) == 0) {
-		espDevice.getDeviceNTP()->setUpdateIntervalInMilliSecond(json);
 	}
 
 	if (strcmp(topicKey, DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB) == 0) {

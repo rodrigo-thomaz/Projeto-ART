@@ -94,8 +94,8 @@ namespace ART
 		std::vector<std::function<void()>>	_loadedCallbacks;
 
 		void								onDeviceMQSubscribeDevice();
-		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDevice();
+		void								onDeviceMQSubscribeDeviceInApplication();		
 		void								onDeviceMQUnSubscribeDeviceInApplication();
 		void								onDeviceMQSubscription(char* topicKey, char* json);
 	};

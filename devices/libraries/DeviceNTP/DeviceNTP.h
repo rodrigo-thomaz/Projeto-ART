@@ -34,11 +34,9 @@ namespace ART
 		char*											getHost() const;
 		int												getPort();
 
-		int												getUtcTimeOffsetInSecond();
-		void											setUtcTimeOffsetInSecond(char* json);
+		int												getUtcTimeOffsetInSecond();		
 
-		int												getUpdateIntervalInMilliSecond();
-		void											setUpdateIntervalInMilliSecond(char* json);
+		int												getUpdateIntervalInMilliSecond();		
 
 		/**
 		* Starts the underlying UDP client with the default local port
@@ -108,6 +106,11 @@ namespace ART
 
 		bool 											_loaded = false;
 
+		void											setUtcTimeOffsetInSecond(char* json);
+		void											setUpdateIntervalInMilliSecond(char* json);
+
+		void											onDeviceMQSubscribeDeviceInApplication();
+		void											onDeviceMQUnSubscribeDeviceInApplication();
 		void											onDeviceMQSubscription(char* topicKey, char* json);
 	};
 }
