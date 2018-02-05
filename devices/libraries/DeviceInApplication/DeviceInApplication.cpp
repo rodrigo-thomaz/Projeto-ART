@@ -65,13 +65,13 @@ namespace ART
 		_applicationTopic = value;
 	}
 
-	void DeviceInApplication::insertInApplication(char* json)
+	void DeviceInApplication::insert(char* json)
 	{
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {
-			Serial.print("[DeviceInApplication::insertInApplication] parse failed: ");
+			Serial.print("[DeviceInApplication::insert] parse failed: ");
 			Serial.println(json);
 			return;
 		}
@@ -82,18 +82,18 @@ namespace ART
 		setApplicationId(applicationId);
 		setApplicationTopic(applicationTopic);
 
-		Serial.println("[DeviceInApplication::insertInApplication] ");
+		Serial.println("[DeviceInApplication::insert] ");
 		Serial.print("applicationId: ");
 		Serial.println(applicationId);
 		Serial.print("applicationTopic: ");
 		Serial.println(applicationTopic);
 	}
 
-	void DeviceInApplication::deleteFromApplication()
+	void DeviceInApplication::remove()
 	{
 		setApplicationId("");
 		setApplicationTopic("");
 
-		Serial.println("[DeviceInApplication::deleteFromApplication] delete from Application with success !");
+		Serial.println("[DeviceInApplication::remove] remove from Application with success !");
 	}
 }

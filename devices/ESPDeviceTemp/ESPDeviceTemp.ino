@@ -201,12 +201,12 @@ void mqtt_SubCallback(char* topicKey, char* json)
 	}
 	if (strcmp(topicKey, ESP_DEVICE_INSERT_IN_APPLICATION_TOPIC_SUB) == 0) {
 		//TODO:voltar unSubscribeNotInApplication();
-		espDevice.getDeviceInApplication()->insertInApplication(json);
+		espDevice.getDeviceInApplication()->insert(json);
 		subscribeInApplication();
 	}
 	if (strcmp(topicKey, ESP_DEVICE_DELETE_FROM_APPLICATION_TOPIC_SUB) == 0) {
 		unSubscribeInApplication();
-		espDevice.getDeviceInApplication()->deleteFromApplication();
+		espDevice.getDeviceInApplication()->remove();
 		//TODO:voltar subscribeNotInApplication();
 	}
 	

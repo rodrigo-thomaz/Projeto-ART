@@ -20,8 +20,8 @@ namespace ART
 
 		void								load(JsonObject& jsonObject);
 
-		void								insertInApplication(char* json);
-		void								deleteFromApplication();
+		void								insert(char* json);
+		void								remove();
 
 		char*								getApplicationId() const;
 		void								setApplicationId(char* value);
