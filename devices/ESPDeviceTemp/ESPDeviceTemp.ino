@@ -269,7 +269,7 @@ void mqtt_SubCallback(char* topicKey, char* json)
 	if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB) == 0) {
 		espDevice.getDeviceSensors()->setTriggerOn(json);
 	}	
-	if (strcmp(topicKey, SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB) == 0) {
+	if (strcmp(topicKey, SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB) == 0) { 
 		espDevice.getDeviceSensors()->setBuzzerOn(json);
 	}
   if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB) == 0) {

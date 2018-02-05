@@ -126,8 +126,10 @@ namespace ART
 
 	void DeviceMQ::beginNew()
 	{
-		_espDevice->getDeviceInApplication()->addInsertCallback([=]() { return onDeviceInApplicationInsert(); });
-		_espDevice->getDeviceInApplication()->addRemoveCallback([=]() { return onDeviceInApplicationRemove(); });
+		_espDevice->getDeviceInApplication()->addInsertingCallback([=]() { return onDeviceInApplicationInserting(); });
+		_espDevice->getDeviceInApplication()->addInsertedCallback([=]() { return onDeviceInApplicationInserted(); });
+		_espDevice->getDeviceInApplication()->addRemovingCallback([=]() { return onDeviceInApplicationRemoving(); });
+		_espDevice->getDeviceInApplication()->addRemovedCallback([=]() { return onDeviceInApplicationRemoved(); });
 	}
 
 	bool DeviceMQ::autoConnect()
@@ -194,9 +196,16 @@ namespace ART
 	void DeviceMQ::onMQQTCallback(char* topic, uint8_t* payload, unsigned int length)
 	{
 		char* topicKey = getTopicKey(topic);
-		char* json = reinterpret_cast<char*>(payload);
 		
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey, json);
+		String json;
+
+		for (int i = 0; i < length; i++)
+		{
+			char c = (char)payload[i];
+			json += c;
+		}
+		
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey, strdup(json.c_str()));
 	}
 
 	bool DeviceMQ::connected()
@@ -290,15 +299,23 @@ namespace ART
 		return routingKey;
 	}	
 
-	void DeviceMQ::onDeviceInApplicationInsert()
+	void DeviceMQ::onDeviceInApplicationInserting()
 	{
 		for (auto && fn : _unSubscribeDeviceCallbacks) fn();
+	}
+
+	void DeviceMQ::onDeviceInApplicationInserted()
+	{		
 		for (auto && fn : _subscribeDeviceInApplicationCallbacks) fn();
 	}
 
-	void DeviceMQ::onDeviceInApplicationRemove()
+	void DeviceMQ::onDeviceInApplicationRemoving()
 	{
-		for (auto && fn : _unSubscribeDeviceInApplicationCallbacks) fn();
+		for (auto && fn : _unSubscribeDeviceInApplicationCallbacks) fn();		
+	}
+
+	void DeviceMQ::onDeviceInApplicationRemoved()
+	{
 		for (auto && fn : _subscribeDeviceCallbacks) fn();
 	}
 }

@@ -76,14 +76,16 @@ namespace ART
 
 	void DeviceInApplication::insert(char* json)
 	{
-		StaticJsonBuffer<300> jsonBuffer;
-		JsonObject& root = jsonBuffer.parseObject(json);
+		StaticJsonBuffer<300> jsonBuffer;		
+		JsonObject& root = jsonBuffer.parseObject(json);		
 
 		if (!root.success()) {
 			Serial.print("[DeviceInApplication::insert] parse failed: ");
 			Serial.println(json);
 			return;
 		}
+
+		root.printTo(Serial);
 
 		char* applicationId = strdup(root["applicationId"]);
 		char* applicationTopic = strdup(root["applicationTopic"]);
@@ -129,12 +131,14 @@ namespace ART
 	void DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
 	{
 		if (strcmp(topicKey, DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB) == 0) {			
+			for (auto && fn : _insertingCallbacks) fn();
 			insert(json);
-			for (auto && fn : _insertCallbacks) fn();
+			for (auto && fn : _insertedCallbacks) fn();
 		}
 		if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {			
+			for (auto && fn : _removingCallbacks) fn();
 			remove();
-			for (auto && fn : _removeCallbacks) fn();
+			for (auto && fn : _removedCallbacks) fn();
 		}
 	}
 }

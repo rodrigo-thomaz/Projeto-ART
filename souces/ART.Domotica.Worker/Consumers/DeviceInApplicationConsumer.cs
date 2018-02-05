@@ -134,7 +134,7 @@
             _model.BasicPublish(defaultExchangeTopic, sensorRountingKey, null, sensorViewBuffer);
 
             //Enviando para o IoT
-            var routingKey = GetDeviceRoutingKeyForIoT(deviceMQ.Topic, DeviceInApplicationConstants.RemoveIoTQueueName);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceInApplicationConstants.RemoveIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, null);
 
             _logger.DebugLeave();

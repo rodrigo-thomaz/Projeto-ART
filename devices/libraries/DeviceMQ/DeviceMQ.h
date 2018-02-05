@@ -110,8 +110,10 @@ namespace ART
 			
 		std::vector<subscriptionSignature>							_subscriptionCallbacks;
 
-		void														onDeviceInApplicationInsert();
-		void														onDeviceInApplicationRemove();
+		void														onDeviceInApplicationInserting();
+		void														onDeviceInApplicationInserted();
+		void														onDeviceInApplicationRemoving();
+		void														onDeviceInApplicationRemoved();
 
 	};
 }
