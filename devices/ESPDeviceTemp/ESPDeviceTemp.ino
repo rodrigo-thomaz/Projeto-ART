@@ -83,9 +83,6 @@ void setup() {
 
   espDevice.begin();  
 
-  espDevice.getDeviceMQ()->addSubscribeDeviceInApplicationCallback(subscribeDeviceInApplication);
-  espDevice.getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback(unSubscribeDeviceInApplication);
-  
   espDevice.getDeviceMQ()->addSubscriptionCallback(mqtt_SubCallback);
 
   String hostNameWifi = HOST_NAME;
@@ -102,44 +99,6 @@ void setup() {
 void initConfiguration()
 {
   EEPROM_readAnything(0, configuration);
-}
-
-void subscribeDeviceInApplication()
-{
-  Serial.println("[MQQT::subscribeDeviceInApplication] initializing ...");      
-
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB);
-  
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_INSERT_TOPIC_SUB);  
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_DELETE_TOPIC_SUB);  
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB); 
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB);
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB);
-
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB);
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB);
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB);
-
-  Serial.println("[MQQT::subscribeDeviceInApplication] Initialized with success !");
-}
-
-void unSubscribeDeviceInApplication()
-{
-  Serial.println("[MQQT::unSubscribeDeviceInApplication] initializing ...");      
-
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB);
-
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_INSERT_TOPIC_SUB);  
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_DELETE_TOPIC_SUB);  
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB); 
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB);
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB);
-
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB);
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB);
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB);
-
-  Serial.println("[MQQT::unSubscribeDeviceInApplication] Initialized with success !");
 }
 
 void mqtt_SubCallback(char* topicKey, char* json)
@@ -160,36 +119,6 @@ void mqtt_SubCallback(char* topicKey, char* json)
   if (strcmp(topicKey, DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
    espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(json);
   }
-
-  if (strcmp(topicKey, SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB) == 0) {
-    espDevice.getDeviceSensors()->setResolution(json);
-  }
- 
-  if (strcmp(topicKey, SENSOR_TRIGGER_INSERT_TOPIC_SUB) == 0) {
-   espDevice.getDeviceSensors()->insertTrigger(json);
-  } 
-  if (strcmp(topicKey, SENSOR_TRIGGER_DELETE_TOPIC_SUB) == 0) {
-    espDevice.getDeviceSensors()->deleteTrigger(json);
-  } 
-  if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB) == 0) {
-    espDevice.getDeviceSensors()->setTriggerOn(json);
-  } 
-  if (strcmp(topicKey, SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB) == 0) { 
-    espDevice.getDeviceSensors()->setBuzzerOn(json);
-  }
-  if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB) == 0) {
-    espDevice.getDeviceSensors()->setTriggerValue(json);
-  }
-  
-  if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB) == 0) {
-    espDevice.getDeviceSensors()->setDatasheetUnitMeasurementScale(json);
-  }
-  if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB) == 0) {
-    espDevice.getDeviceSensors()->setRange(json);
-  }
-  if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB) == 0) {
-    espDevice.getDeviceSensors()->setChartLimiter(json);
-  } 
 }
 
 void loop() {
@@ -320,5 +249,3 @@ void loopMQQTConnected(uint64_t now)
   }
   
 }
-
-

@@ -5,8 +5,6 @@
 #include "ArduinoJson.h"
 #include "DallasTemperature.h"
 
-#define SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB "SensorTempDSFamily/SetResolutionIoT"
-
 namespace ART
 {
 	class Sensor;

@@ -4,12 +4,6 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 
-#define SENSOR_TRIGGER_INSERT_TOPIC_SUB "SensorTrigger/InsertIoT"
-#define SENSOR_TRIGGER_DELETE_TOPIC_SUB "SensorTrigger/DeleteIoT"
-#define SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB "SensorTrigger/SetTriggerOnIoT"
-#define SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB "SensorTrigger/SetBuzzerOnIoT"
-#define SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB "SensorTrigger/SetTriggerValueIoT"
-
 namespace ART
 {
 	class Sensor;
