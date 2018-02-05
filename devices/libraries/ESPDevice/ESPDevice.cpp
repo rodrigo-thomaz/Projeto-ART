@@ -23,13 +23,7 @@ namespace ART
 		DeviceBinary::create(_deviceBinary, this);
 		DeviceBuzzer::create(_deviceBuzzer, this);
 		DeviceSensors::create(_deviceSensors, this);
-		DeviceInApplication::create(_deviceInApplication, this);		
-
-		_deviceMQ->addSubscribeDeviceCallback([=]() { return onDeviceMQSubscribeDevice(); });
-		_deviceMQ->addUnSubscribeDeviceCallback([=]() { return onDeviceMQUnSubscribeDevice(); });
-		_deviceMQ->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });		
-		_deviceMQ->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
-		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		DeviceInApplication::create(_deviceInApplication, this);				
 	}
 
 	ESPDevice::~ESPDevice()
@@ -50,6 +44,12 @@ namespace ART
 
 	void ESPDevice::begin()
 	{
+		_deviceMQ->addSubscribeDeviceCallback([=]() { return onDeviceMQSubscribeDevice(); });
+		_deviceMQ->addUnSubscribeDeviceCallback([=]() { return onDeviceMQUnSubscribeDevice(); });
+		_deviceMQ->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
+		_deviceMQ->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
+		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+
 		_deviceInApplication->begin();
 		_deviceMQ->begin();
 		_deviceWiFi->autoConnect();
