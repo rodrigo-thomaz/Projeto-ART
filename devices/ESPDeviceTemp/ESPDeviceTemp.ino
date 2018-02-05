@@ -108,10 +108,6 @@ void subscribeDeviceInApplication()
 {
   Serial.println("[MQQT::subscribeDeviceInApplication] initializing ...");      
 
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB);
-
-  espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_SET_LABEL_TOPIC_SUB);
-
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB);
   
   espDevice.getDeviceMQ()->subscribeDeviceInApplication(SENSOR_TRIGGER_INSERT_TOPIC_SUB);  
@@ -131,10 +127,6 @@ void unSubscribeDeviceInApplication()
 {
   Serial.println("[MQQT::unSubscribeDeviceInApplication] initializing ...");      
 
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB);
-  
-  espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_SET_LABEL_TOPIC_SUB);
-  
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB);
 
   espDevice.getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_TRIGGER_INSERT_TOPIC_SUB);  
@@ -169,14 +161,6 @@ void mqtt_SubCallback(char* topicKey, char* json)
    espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(json);
   }
 
-  if (strcmp(topicKey, SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB) == 0) {
-   espDevice.getDeviceSensors()->setOrdination(json);
-  }
-
-  if (strcmp(topicKey, SENSOR_SET_LABEL_TOPIC_SUB) == 0) {
-    espDevice.getDeviceSensors()->setLabel(json);
-  }
-  
   if (strcmp(topicKey, SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB) == 0) {
     espDevice.getDeviceSensors()->setResolution(json);
   }

@@ -20,6 +20,10 @@
 #define DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB "DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
 #define DEVICE_SENSORS_MESSAGE_TOPIC_PUB "DeviceSensors/MessageIoT"
 
+#define SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB "SensorInDevice/SetOrdinationIoT"
+
+#define SENSOR_SET_LABEL_TOPIC_SUB "Sensor/SetLabelIoT"
+
 namespace ART
 {
 	class ESPDevice;		
