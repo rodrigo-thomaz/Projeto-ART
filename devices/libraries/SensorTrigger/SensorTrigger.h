@@ -50,10 +50,6 @@ namespace ART
 		float 								_max;
 		float 								_min;
 
-		void								onDeviceMQSubscribeDeviceInApplication();
-		void								onDeviceMQUnSubscribeDeviceInApplication();
-		void								onDeviceMQSubscription(char* topicKey, char* json);
-
 	};
 }
 

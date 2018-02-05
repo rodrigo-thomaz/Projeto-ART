@@ -29,13 +29,6 @@ namespace ART
 		return SensorInDevice(deviceSensors, jsonObject);
 	}
 
-	void SensorInDevice::begin()
-	{
-		_deviceSensors->getESPDevice()->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
-		_deviceSensors->getESPDevice()->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
-		//_deviceSensors->getESPDevice()->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
-	}
-
 	Sensor * SensorInDevice::getSensor()
 	{
 		return _sensor;
@@ -59,20 +52,5 @@ namespace ART
 	bool SensorInDevice::operator<(const SensorInDevice & val) const
 	{
 		return _ordination < val._ordination;
-	}
-
-	void SensorInDevice::onDeviceMQSubscribeDeviceInApplication()
-	{
-
-	}
-
-	void SensorInDevice::onDeviceMQUnSubscribeDeviceInApplication()
-	{
-
-	}
-
-	void SensorInDevice::onDeviceMQSubscription(char* topicKey, char* json)
-	{
-
 	}
 }

@@ -84,19 +84,4 @@ namespace ART
 	{
 		return hasAlarm() && _buzzerOn;
 	}
-
-	void SensorTrigger::onDeviceMQSubscribeDeviceInApplication()
-	{
-
-	}
-
-	void SensorTrigger::onDeviceMQUnSubscribeDeviceInApplication()
-	{
-
-	}
-
-	void SensorTrigger::onDeviceMQSubscription(char* topicKey, char* json)
-	{
-
-	}
 }

@@ -31,19 +31,4 @@ namespace ART
 	{
 		_resolution = value;
 	}
-
-	void SensorTempDSFamily::onDeviceMQSubscribeDeviceInApplication()
-	{
-
-	}
-
-	void SensorTempDSFamily::onDeviceMQUnSubscribeDeviceInApplication()
-	{
-
-	}
-
-	void SensorTempDSFamily::onDeviceMQSubscription(char* topicKey, char* json)
-	{
-
-	}
 }
