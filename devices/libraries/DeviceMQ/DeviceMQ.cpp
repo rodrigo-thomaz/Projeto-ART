@@ -126,8 +126,8 @@ namespace ART
 
 	void DeviceMQ::beginNew()
 	{
-		_espDevice->getDeviceInApplication()->addInsertCallback([=]() { return this->onDeviceInApplicationInsert(); });
-		_espDevice->getDeviceInApplication()->addRemoveCallback([=]() { return this->onDeviceInApplicationRemove(); });
+		_espDevice->getDeviceInApplication()->addInsertCallback([=]() { return onDeviceInApplicationInsert(); });
+		_espDevice->getDeviceInApplication()->addRemoveCallback([=]() { return onDeviceInApplicationRemove(); });
 	}
 
 	bool DeviceMQ::autoConnect()
@@ -168,14 +168,14 @@ namespace ART
 				Serial.println("[DeviceMQ] Conectado com sucesso ao broker MQTT!");
 
 				if (_espDevice->getDeviceInApplication()->getApplicationId() == NULL) {
-					Serial.println("[DeviceMQ] Begin subscribeNotInApplicationCallbacks");
-					for (auto && fn : _subscribeNotInApplicationCallbacks) fn();
-					Serial.println("[DeviceMQ] End subscribeNotInApplicationCallbacks");
+					Serial.println("[DeviceMQ] Begin subscribeDeviceCallbacks");
+					for (auto && fn : _subscribeDeviceCallbacks) fn();
+					Serial.println("[DeviceMQ] End subscribeDeviceCallbacks");
 				}
 				else {
-					Serial.println("[DeviceMQ] Begin subscribeInApplicationCallbacks");
-					for (auto && fn : _subscribeInApplicationCallbacks) fn();
-					Serial.println("[DeviceMQ] End subscribeInApplicationCallbacks");
+					Serial.println("[DeviceMQ] Begin subscribeDeviceInApplicationCallbacks");
+					for (auto && fn : _subscribeDeviceInApplicationCallbacks) fn();
+					Serial.println("[DeviceMQ] End subscribeDeviceInApplicationCallbacks");
 				}
 
 				return true;
@@ -212,43 +212,43 @@ namespace ART
 		this->_mqqt->publish(routingKey.c_str(), payload);
 	}
 
-	void DeviceMQ::subscribeInApplication(const char* topic)
+	void DeviceMQ::subscribeDeviceInApplication(const char* topic)
 	{
 		String routingKey = this->getApplicationRoutingKey(topic);
 		this->_mqqt->subscribe(routingKey.c_str());
 		this->_mqqt->loop();
 
-		Serial.print("[DeviceMQ::subscribe] Subscribe in application with success routingKey: ");
+		Serial.print("[DeviceMQ::subscribeDeviceInApplication] Subscribe device in application with success routingKey: ");
 		Serial.println(routingKey);
 	}
 
-	void DeviceMQ::unSubscribeInApplication(const char* topic)
+	void DeviceMQ::unSubscribeDeviceInApplication(const char* topic)
 	{
 		String routingKey = this->getApplicationRoutingKey(topic);
 		this->_mqqt->unsubscribe(routingKey.c_str());
 		this->_mqqt->loop();
 
-		Serial.print("[DeviceMQ::unSubscribeInApplication] UnSubscribe in application with success routingKey: ");
+		Serial.print("[DeviceMQ::unSubscribeDeviceInApplication] UnSubscribe device in application with success routingKey: ");
 		Serial.println(routingKey);
 	}
 
-	void DeviceMQ::subscribeInDevice(const char* topic)
+	void DeviceMQ::subscribeDevice(const char* topic)
 	{
 		String routingKey = this->getDeviceRoutingKey(topic);
 		this->_mqqt->subscribe(routingKey.c_str());
 		this->_mqqt->loop();
 
-		Serial.print("[DeviceMQ::subscribe] Subscribe in device with success routingKey: ");
+		Serial.print("[DeviceMQ::subscribeDevice] Subscribe device with success routingKey: ");
 		Serial.println(routingKey);
 	}
 
-	void DeviceMQ::unSubscribeInDevice(const char* topic)
+	void DeviceMQ::unSubscribeDevice(const char* topic)
 	{
 		String routingKey = this->getDeviceRoutingKey(topic);
 		this->_mqqt->unsubscribe(routingKey.c_str());
 		this->_mqqt->loop();
 
-		Serial.print("[DeviceMQ::unSubscribeInDevice] UnSubscribe in device with success routingKey: ");
+		Serial.print("[DeviceMQ::unSubscribeDevice] UnSubscribe device with success routingKey: ");
 		Serial.println(routingKey);
 	}
 
@@ -292,14 +292,14 @@ namespace ART
 
 	void DeviceMQ::onDeviceInApplicationInsert()
 	{
-		for (auto && fn : _unSubscribeNotInApplicationCallbacks) fn();
-		for (auto && fn : _subscribeInApplicationCallbacks) fn();
+		for (auto && fn : _unSubscribeDeviceCallbacks) fn();
+		for (auto && fn : _subscribeDeviceInApplicationCallbacks) fn();
 	}
 
 	void DeviceMQ::onDeviceInApplicationRemove()
 	{
-		for (auto && fn : _unSubscribeInApplicationCallbacks) fn();
-		for (auto && fn : _subscribeNotInApplicationCallbacks) fn();
+		for (auto && fn : _unSubscribeDeviceInApplicationCallbacks) fn();
+		for (auto && fn : _subscribeDeviceCallbacks) fn();
 	}
 }
 

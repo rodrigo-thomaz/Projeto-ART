@@ -25,11 +25,11 @@ namespace ART
 		DeviceSensors::create(_deviceSensors, this);
 		DeviceInApplication::create(_deviceInApplication, this);		
 
-		_deviceMQ->addSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
-		_deviceMQ->addSubscribeInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
-		_deviceMQ->addUnSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeNotInApplication(); });
-		_deviceMQ->addUnSubscribeInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeInApplication(); });
-		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
+		_deviceMQ->addSubscribeDeviceCallback([=]() { return onDeviceMQSubscribeDevice(); });
+		_deviceMQ->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
+		_deviceMQ->addUnSubscribeDeviceCallback([=]() { return onDeviceMQUnSubscribeDevice(); });
+		_deviceMQ->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
+		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
 	ESPDevice::~ESPDevice()
@@ -264,24 +264,24 @@ namespace ART
 		}
 	}	
 
-	void ESPDevice::onDeviceMQSubscribeNotInApplication()
+	void ESPDevice::onDeviceMQSubscribeDevice()
 	{
-		_deviceMQ->subscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
+		_deviceMQ->subscribeDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
 	}
 
-	void ESPDevice::onDeviceMQSubscribeInApplication()
+	void ESPDevice::onDeviceMQSubscribeDeviceInApplication()
 	{
-		_deviceMQ->subscribeInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
+		_deviceMQ->subscribeDeviceInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
 	}
 
-	void ESPDevice::onDeviceMQUnSubscribeNotInApplication()
+	void ESPDevice::onDeviceMQUnSubscribeDevice()
 	{
-		_deviceMQ->unSubscribeInDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
+		_deviceMQ->unSubscribeDevice(ESP_DEVICE_UPDATE_PIN_TOPIC_SUB);
 	}
 
-	void ESPDevice::onDeviceMQUnSubscribeInApplication()
+	void ESPDevice::onDeviceMQUnSubscribeDeviceInApplication()
 	{
-		_deviceMQ->unSubscribeInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
+		_deviceMQ->unSubscribeDeviceInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
 	}
 
 	void ESPDevice::onDeviceMQSubscription(char* topicKey, char* json)

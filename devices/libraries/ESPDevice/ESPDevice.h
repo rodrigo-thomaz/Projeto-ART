@@ -83,10 +83,10 @@ namespace ART
 
 		void						setLabel(char* json);
 
-		void						onDeviceMQSubscribeNotInApplication();
-		void						onDeviceMQSubscribeInApplication();
-		void						onDeviceMQUnSubscribeNotInApplication();
-		void						onDeviceMQUnSubscribeInApplication();
+		void						onDeviceMQSubscribeDevice();
+		void						onDeviceMQSubscribeDeviceInApplication();
+		void						onDeviceMQUnSubscribeDevice();
+		void						onDeviceMQUnSubscribeDeviceInApplication();
 		void						onDeviceMQSubscription(char* topicKey, char* json);
 	};
 }

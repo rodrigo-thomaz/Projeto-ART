@@ -41,34 +41,34 @@ namespace ART
 
 		void														publishInApplication(const char* topic, const char* payload);
 
-		void														subscribeInApplication(const char* topic);
-		void														subscribeInDevice(const char* topic);
+		void														subscribeDeviceInApplication(const char* topic);
+		void														subscribeDevice(const char* topic);
 
-		void														unSubscribeInApplication(const char* topic);
-		void														unSubscribeInDevice(const char* topic);		
+		void														unSubscribeDeviceInApplication(const char* topic);
+		void														unSubscribeDevice(const char* topic);		
 
 		template<typename Function>
-		void														addSubscribeNotInApplicationCallback(Function && fn)
+		void														addSubscribeDeviceCallback(Function && fn)
 		{
-			_subscribeNotInApplicationCallbacks.push_back(std::forward<Function>(fn));
+			_subscribeDeviceCallbacks.push_back(std::forward<Function>(fn));
 		}
 
 		template<typename Function>
-		void														addSubscribeInApplicationCallback(Function && fn)
+		void														addSubscribeDeviceInApplicationCallback(Function && fn)
 		{
-			_subscribeInApplicationCallbacks.push_back(std::forward<Function>(fn));
+			_subscribeDeviceInApplicationCallbacks.push_back(std::forward<Function>(fn));
 		}
 
 		template<typename Function>
-		void														addUnSubscribeNotInApplicationCallback(Function && fn)
+		void														addUnSubscribeDeviceCallback(Function && fn)
 		{
-			_unSubscribeNotInApplicationCallbacks.push_back(std::forward<Function>(fn));
+			_unSubscribeDeviceCallbacks.push_back(std::forward<Function>(fn));
 		}
 
 		template<typename Function>
-		void														addUnSubscribeInApplicationCallback(Function && fn)
+		void														addUnSubscribeDeviceInApplicationCallback(Function && fn)
 		{
-			_unSubscribeInApplicationCallbacks.push_back(std::forward<Function>(fn));
+			_unSubscribeDeviceInApplicationCallbacks.push_back(std::forward<Function>(fn));
 		}
 
 		template<typename Function>
@@ -97,16 +97,16 @@ namespace ART
 		String 														getDeviceRoutingKey(const char* topic);
 		char* 														getTopicKey(char* routingKey);
 
-		typedef std::function<void()>								registerSignature;
+		typedef std::function<void()>								subscribeSignature;
 		typedef std::function<void(char*, char*)>					subscriptionSignature;
 
 		void														onMQQTCallback(char* topic, uint8_t* payload, unsigned int length);
 
-		std::vector<registerSignature>								_subscribeNotInApplicationCallbacks;
-		std::vector<registerSignature>								_subscribeInApplicationCallbacks;
+		std::vector<subscribeSignature>								_subscribeDeviceCallbacks;
+		std::vector<subscribeSignature>								_subscribeDeviceInApplicationCallbacks;
 
-		std::vector<registerSignature>								_unSubscribeNotInApplicationCallbacks;
-		std::vector<registerSignature>								_unSubscribeInApplicationCallbacks;
+		std::vector<subscribeSignature>								_unSubscribeDeviceCallbacks;
+		std::vector<subscribeSignature>								_unSubscribeDeviceInApplicationCallbacks;
 			
 		std::vector<subscriptionSignature>							_subscriptionCallbacks;
 

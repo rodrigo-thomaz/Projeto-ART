@@ -22,11 +22,11 @@ namespace ART
 
 	void DeviceInApplication::begin()
 	{
-		_espDevice->getDeviceMQ()->addSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQSubscribeNotInApplication(); });
-		_espDevice->getDeviceMQ()->addSubscribeInApplicationCallback([=]() { return this->onDeviceMQSubscribeInApplication(); });
-		_espDevice->getDeviceMQ()->addUnSubscribeNotInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeNotInApplication(); });
-		_espDevice->getDeviceMQ()->addUnSubscribeInApplicationCallback([=]() { return this->onDeviceMQUnSubscribeInApplication(); });
-		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return this->onDeviceMQSubscription(topicKey, json); });
+		_espDevice->getDeviceMQ()->addSubscribeDeviceCallback([=]() { return onDeviceMQSubscribeDevice(); });
+		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
+		_espDevice->getDeviceMQ()->addUnSubscribeDeviceCallback([=]() { return onDeviceMQUnSubscribeDevice(); });
+		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
 	void DeviceInApplication::load(JsonObject & jsonObject)
@@ -106,24 +106,24 @@ namespace ART
 		Serial.println("[DeviceInApplication::remove] remove from Application with success !");
 	}
 
-	void DeviceInApplication::onDeviceMQSubscribeNotInApplication()
+	void DeviceInApplication::onDeviceMQSubscribeDevice()
 	{
-		_espDevice->getDeviceMQ()->subscribeInDevice(DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDevice(DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB);
 	}
 
-	void DeviceInApplication::onDeviceMQSubscribeInApplication()
+	void DeviceInApplication::onDeviceMQSubscribeDeviceInApplication()
 	{
-		_espDevice->getDeviceMQ()->subscribeInDevice(DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB);
 	}
 
-	void DeviceInApplication::onDeviceMQUnSubscribeNotInApplication()
+	void DeviceInApplication::onDeviceMQUnSubscribeDevice()
 	{
-		_espDevice->getDeviceMQ()->unSubscribeInDevice(DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDevice(DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB);
 	}
 
-	void DeviceInApplication::onDeviceMQUnSubscribeInApplication()
+	void DeviceInApplication::onDeviceMQUnSubscribeDeviceInApplication()
 	{
-		_espDevice->getDeviceMQ()->unSubscribeInDevice(DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB);
 	}
 
 	void DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
