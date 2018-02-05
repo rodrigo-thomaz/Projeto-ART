@@ -115,6 +115,8 @@ namespace ART
 		void														onDeviceInApplicationRemoving();
 		void														onDeviceInApplicationRemoved();
 
+		void														onESPDeviceLoaded();
+
 	};
 }
 

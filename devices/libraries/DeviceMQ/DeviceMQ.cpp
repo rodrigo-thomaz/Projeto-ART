@@ -107,7 +107,7 @@ namespace ART
 
 		if (this->_espDevice->getDeviceWiFi()->isConnected() && this->_espDevice->loaded()) {
 
-			this->_mqqt->setServer(_host, _port);   
+			/*this->_mqqt->setServer(_host, _port);   
 			
 			this->_mqqt->setCallback([=](char* topic, uint8_t* payload, unsigned int length) {
 				return onMQQTCallback(topic, payload, length);
@@ -115,7 +115,7 @@ namespace ART
 
 			this->_begin = true;
 
-			Serial.println("[MQQT] Initialized with success !");
+			Serial.println("[MQQT] Initialized with success !");*/
 		}
 		else {
 			this->_begin = false;
@@ -130,6 +130,8 @@ namespace ART
 		_espDevice->getDeviceInApplication()->addInsertedCallback([=]() { return onDeviceInApplicationInserted(); });
 		_espDevice->getDeviceInApplication()->addRemovingCallback([=]() { return onDeviceInApplicationRemoving(); });
 		_espDevice->getDeviceInApplication()->addRemovedCallback([=]() { return onDeviceInApplicationRemoved(); });
+
+		_espDevice->addLoadedCallback([=]() { return onESPDeviceLoaded(); });
 	}
 
 	bool DeviceMQ::autoConnect()
@@ -317,6 +319,21 @@ namespace ART
 	void DeviceMQ::onDeviceInApplicationRemoved()
 	{
 		for (auto && fn : _subscribeDeviceCallbacks) fn();
+	}
+
+	void DeviceMQ::onESPDeviceLoaded()
+	{
+		Serial.println("[DeviceMQ::onESPDeviceLoaded] Loading...");
+
+		_mqqt->setServer(_host, _port);
+
+		_mqqt->setCallback([=](char* topic, uint8_t* payload, unsigned int length) {
+			return onMQQTCallback(topic, payload, length);
+		});
+
+		_begin = true;
+
+		Serial.println("[DeviceMQ::onESPDeviceLoaded] Loaded");
 	}
 }
 
