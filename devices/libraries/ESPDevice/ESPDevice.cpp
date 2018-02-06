@@ -2,19 +2,19 @@
 
 namespace ART
 {
-	ESPDevice::ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri)
+	ESPDevice::ESPDevice(const char* webApiHost, uint16_t webApiPort, const char* webApiUri)
 	{
 		_chipId = ESP.getChipId();
 		_flashChipId = ESP.getFlashChipId();
 		_chipSize = ESP.getFlashChipSize();
 
 		_webApiHost = new char(sizeof(strlen(webApiHost)));
-		_webApiHost = webApiHost;
+		_webApiHost = (char*)webApiHost;
 
 		_webApiPort = webApiPort;
 
 		_webApiUri = new char(sizeof(strlen(webApiUri)));
-		_webApiUri = webApiUri;
+		_webApiUri = (char*)webApiUri;
 
 		DeviceDebug::create(_deviceDebug, this);
 		DeviceWiFi::create(_deviceWiFi, this);

@@ -25,7 +25,7 @@ namespace ART
 	{
 	public:
 
-		ESPDevice(char* webApiHost, uint16_t webApiPort, char* webApiUri = "/");
+		ESPDevice(const char* webApiHost, uint16_t webApiPort, const char* webApiUri = "/");
 		~ESPDevice();
 
 		void								begin();
