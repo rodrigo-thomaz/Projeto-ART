@@ -44,7 +44,7 @@ namespace ART
 		void														subscribeDevice(const char* topic);
 
 		void														unSubscribeDeviceInApplication(const char* topic);
-		void														unSubscribeDevice(const char* topic);		
+		void														unSubscribeDevice(const char* topic);
 
 		template<typename Function>
 		void														addSubscribeDeviceCallback(Function && fn)
@@ -74,11 +74,11 @@ namespace ART
 		void														addSubscriptionCallback(Function && fn)
 		{
 			_subscriptionCallbacks.push_back(std::forward<Function>(fn));
-		}		
+		}
 
 	private:
 
-		ESPDevice *													_espDevice;
+		ESPDevice * _espDevice;
 
 		char*														_host;
 		int															_port;
@@ -90,7 +90,7 @@ namespace ART
 		bool														_loaded;
 
 		WiFiClient	 												_espClient;
-		PubSubClient* 												_mqqt;		
+		PubSubClient* 												_mqqt;
 
 		String 														getApplicationRoutingKey(const char* topic);
 		String 														getDeviceRoutingKey(const char* topic);
@@ -106,7 +106,7 @@ namespace ART
 
 		std::vector<subscribeSignature>								_unSubscribeDeviceCallbacks;
 		std::vector<subscribeSignature>								_unSubscribeDeviceInApplicationCallbacks;
-			
+
 		std::vector<subscriptionSignature>							_subscriptionCallbacks;
 
 		void														onDeviceInApplicationInsert();

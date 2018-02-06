@@ -111,8 +111,8 @@ namespace ART
 
 	void DeviceMQ::begin()
 	{
-		_espDevice->getDeviceInApplication()->setInsertCallback([=]() { return onDeviceInApplicationInsert(); });
-		_espDevice->getDeviceInApplication()->setRemoveCallback([=]() { return onDeviceInApplicationRemove(); });
+		_espDevice->getDeviceInApplication()->addInsertCallback([=]() { return onDeviceInApplicationInsert(); });
+		_espDevice->getDeviceInApplication()->addRemoveCallback([=]() { return onDeviceInApplicationRemove(); });
 	}
 
 	bool DeviceMQ::autoConnect()
@@ -149,7 +149,7 @@ namespace ART
 			boolean willRetain = false;
 
 			//if (this->_mqqt->connect(clientId, user, password, willTopic, willQoS, willRetain, willMessage)) 
-			if (_mqqt->connect(_clientId, _user, _password))				
+			if (_mqqt->connect(_clientId, _user, _password))
 			{
 				Serial.println("[DeviceMQ] Conectado com sucesso ao broker MQTT!");
 
@@ -180,7 +180,7 @@ namespace ART
 	void DeviceMQ::onMQQTCallback(char* topic, uint8_t* payload, unsigned int length)
 	{
 		char* topicKey = getTopicKey(topic);
-		
+
 		String json;
 
 		for (int i = 0; i < length; i++)
@@ -188,18 +188,18 @@ namespace ART
 			char c = (char)payload[i];
 			json += c;
 		}
-		
+
 		// TODO: Não funcionou !!!?@#$%?
 		/*for (auto && fn : _subscriptionCallbacks) {
-			if (fn(topicKey, strdup(json.c_str()))) {
-				Serial.print("Achou em ");
-				Serial.print(topicKey);
-				Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-				break;
-			}
+		if (fn(topicKey, strdup(json.c_str()))) {
+		Serial.print("Achou em ");
+		Serial.print(topicKey);
+		Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		break;
+		}
 		}*/
 
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey, strdup(json.c_str()));		
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey, strdup(json.c_str()));
 	}
 
 	bool DeviceMQ::connected()
@@ -291,10 +291,10 @@ namespace ART
 		routingKey.concat(topic);
 
 		return routingKey;
-	}	
+	}
 
 	void DeviceMQ::onDeviceInApplicationInsert()
-	{		
+	{
 		for (auto && fn : _unSubscribeDeviceCallbacks) fn();
 		for (auto && fn : _subscribeDeviceInApplicationCallbacks) fn();
 	}

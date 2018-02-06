@@ -19,7 +19,7 @@ namespace ART
 	public:
 
 		DeviceInApplication(ESPDevice* espDevice);
-		~DeviceInApplication();		
+		~DeviceInApplication();
 
 		static void							create(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice);
 
@@ -30,32 +30,41 @@ namespace ART
 		void								insert(char* json);
 		void								remove();
 
-		char*								getApplicationId() const;		
+		char*								getApplicationId() const;
 		char*								getApplicationTopic()  const;		
 
 		bool								inApplication();
 
-		typedef std::function<void()>		callbackSignature;
+		template<typename Function>
+		void								addInsertCallback(Function && fn)
+		{
+			_insertCallbacks.push_back(std::forward<Function>(fn));
+		}
 
-		void								setInsertCallback(callbackSignature callback);
-		void								setRemoveCallback(callbackSignature callback);
+		template<typename Function>
+		void								addRemoveCallback(Function && fn)
+		{
+			_removeCallbacks.push_back(std::forward<Function>(fn));
+		}
 
 	private:
 
-		ESPDevice *							_espDevice;
+		ESPDevice * _espDevice;
 
 		char*								_applicationId;
-		char*								_applicationTopic;		
+		char*								_applicationTopic;
 
-		callbackSignature					_insertCallback;
-		callbackSignature					_removeCallback;
+		typedef std::function<void()>		callbackSignature;
 
-		void								setApplicationId(const char* value);
-		void								setApplicationTopic(const char* value);
+		std::vector<callbackSignature>		_insertCallbacks;
+		std::vector<callbackSignature>		_removeCallbacks;
+
+		void								setApplicationId(char* value);
+		void								setApplicationTopic(char* value);
 
 		void								onDeviceMQSubscribeDevice();
 		void								onDeviceMQUnSubscribeDevice();
-		void								onDeviceMQSubscribeDeviceInApplication();		
+		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDeviceInApplication();
 		bool								onDeviceMQSubscription(char* topicKey, char* json);
 
