@@ -31,10 +31,7 @@ namespace ART
 		void								remove();
 
 		char*								getApplicationId() const;
-		void								setApplicationId(char* value);
-
 		char*								getApplicationTopic()  const;
-		void								setApplicationTopic(char* value);
 
 		bool								inApplication();
 

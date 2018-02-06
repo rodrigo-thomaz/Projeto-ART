@@ -35,13 +35,13 @@ namespace ART
 
 		deviceDebug->print("DeviceInApplication", "load", "begin\n");
 
-		char* applicationId = strdup(jsonObject["applicationId"]);
-		_applicationId = new char(sizeof(strlen(applicationId)));
-		_applicationId = applicationId;
+		//char* applicationId = strdup(jsonObject["applicationId"]);
+		//_applicationId = new char(sizeof(strlen(applicationId)));
+		_applicationId = strdup(jsonObject["applicationId"]);
 
-		char* applicationTopic = strdup(jsonObject["applicationTopic"]);
-		_applicationTopic = new char(sizeof(strlen(applicationTopic)));
-		_applicationTopic = applicationTopic;
+		//char* applicationTopic = strdup(jsonObject["applicationTopic"]);
+		//_applicationTopic = new char(sizeof(strlen(applicationTopic)));
+		_applicationTopic = strdup(jsonObject["applicationTopic"]);
 
 		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
 
@@ -57,21 +57,9 @@ namespace ART
 		return (_applicationId);
 	}
 
-	void DeviceInApplication::setApplicationId(char* value)
-	{
-		_applicationId = new char(sizeof(strlen(value)));
-		_applicationId = value;
-	}
-
 	char* DeviceInApplication::getApplicationTopic() const
 	{
 		return (_applicationTopic);
-	}
-
-	void DeviceInApplication::setApplicationTopic(char* value)
-	{
-		_applicationTopic = new char(sizeof(strlen(value)));
-		_applicationTopic = value;
 	}
 
 	bool DeviceInApplication::inApplication()
@@ -104,23 +92,26 @@ namespace ART
 
 		char* applicationId = strdup(root["applicationId"]);
 		char* applicationTopic = strdup(root["applicationTopic"]);
+				
+		_applicationId = new char(sizeof(strlen(applicationId)));
+		_applicationTopic = new char(sizeof(strlen(applicationTopic)));
 
-		setApplicationId(applicationId);
-		setApplicationTopic(applicationTopic);
+		_applicationId = applicationId;
+		_applicationTopic = applicationTopic;
 
 		_insertCallback();
 
 		Serial.println("[DeviceInApplication::insert] ");
-		Serial.print("applicationId: ");
-		Serial.println(applicationId);
-		Serial.print("applicationTopic: ");
-		Serial.println(applicationTopic);
+		Serial.print("ApplicationId: ");
+		Serial.println(_applicationId);
+		Serial.print("ApplicationTopic: ");
+		Serial.println(_applicationTopic);
 	}
 
 	void DeviceInApplication::remove()
 	{
-		setApplicationId("");
-		setApplicationTopic("");
+		_applicationId = "";
+		_applicationTopic = "";
 
 		_removeCallback();
 
