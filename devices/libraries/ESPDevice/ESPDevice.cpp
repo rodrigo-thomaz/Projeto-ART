@@ -245,10 +245,10 @@ namespace ART
 		_deviceNTP->load(jsonObject["deviceNTP"]);
 		_deviceMQ->load(jsonObject["deviceMQ"]);
 
-		JsonObject& insertInApplicationJO = jsonObject["deviceInApplication"];
+		JsonObject& deviceInApplicationJO = jsonObject["deviceInApplication"];
 
-		if (insertInApplicationJO.success()) {
-			_deviceInApplication->load(insertInApplicationJO);
+		if (deviceInApplicationJO.success()) {
+			_deviceInApplication->load(deviceInApplicationJO);
 		}		
 
 		_loaded = true;

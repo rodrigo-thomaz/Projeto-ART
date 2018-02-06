@@ -45,8 +45,8 @@ namespace ART
 	{
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::load] begin\n");
 
-		setApplicationId(strdup(jsonObject["applicationId"]));
-		setApplicationTopic(strdup(jsonObject["applicationTopic"]));
+		setApplicationId(jsonObject["applicationId"]);
+		setApplicationTopic(jsonObject["applicationTopic"]);
 
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::load] end\n");
 	}
@@ -64,7 +64,7 @@ namespace ART
 	void DeviceInApplication::setApplicationId(const char* value)
 	{
 		_applicationId = new char(sizeof(strlen(value)));
-		_applicationId = (char*)value;
+		_applicationId = strdup(value);
 
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::setApplicationId] applicationId: %s\n", _applicationId);
 	}	
@@ -72,7 +72,7 @@ namespace ART
 	void DeviceInApplication::setApplicationTopic(const char* value)
 	{
 		_applicationTopic = new char(sizeof(strlen(value)));
-		_applicationTopic = (char*)value;
+		_applicationTopic = strdup(value);
 
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::setApplicationTopic] applicationTopic: %s\n", _applicationTopic);
 	}
@@ -91,16 +91,15 @@ namespace ART
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::insert] begin\n");
 
 		StaticJsonBuffer<300> jsonBuffer;
-		JsonObject& jsonObject = jsonBuffer.parseObject(json);
+		JsonObject& jsonObject = jsonBuffer.parseObject(json);		
 
 		if (!jsonObject.success()) {
 			if (_deviceDebug->isActive(DeviceDebug::ERROR)) _deviceDebug->printf("DeviceInApplication::insert] parse failed json: %s\n", json);
 			return;
 		}
 
-		setApplicationId(strdup(jsonObject["applicationId"]));
-		setApplicationTopic(strdup(jsonObject["applicationTopic"]));
-
+		load(jsonObject);
+		
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::insert] start: raise callbacks\n");
 
 		for (auto && fn : _insertCallbacks) fn();
