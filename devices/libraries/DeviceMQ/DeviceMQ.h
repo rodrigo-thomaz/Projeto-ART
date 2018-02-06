@@ -97,7 +97,7 @@ namespace ART
 		char* 														getTopicKey(char* routingKey);
 
 		typedef std::function<void()>								subscribeSignature;
-		typedef std::function<void(char*, char*)>					subscriptionSignature;
+		typedef std::function<bool(char*, char*)>					subscriptionSignature;
 
 		void														onMQQTCallback(char* topic, uint8_t* payload, unsigned int length);
 

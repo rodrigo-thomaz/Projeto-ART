@@ -172,19 +172,4 @@ namespace ART
 		SensorTrigger* array = this->_sensorTriggers.data();
 		return array;
 	}
-
-	void Sensor::onDeviceMQSubscribeDeviceInApplication()
-	{
-
-	}
-
-	void Sensor::onDeviceMQUnSubscribeDeviceInApplication()
-	{
-
-	}
-
-	void Sensor::onDeviceMQSubscription(char* topicKey, char* json)
-	{
-
-	}
 }

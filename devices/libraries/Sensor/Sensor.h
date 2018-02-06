@@ -81,10 +81,6 @@ namespace ART
 
 		long 								_epochTimeUtc;	
 
-		void								onDeviceMQSubscribeDeviceInApplication();
-		void								onDeviceMQUnSubscribeDeviceInApplication();
-		void								onDeviceMQSubscription(char* topicKey, char* json);
-
 	};
 }
 

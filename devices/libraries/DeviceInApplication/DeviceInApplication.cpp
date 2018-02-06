@@ -133,15 +133,20 @@ namespace ART
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB);
 	}
 
-	void DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
+	bool DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
 	{
 		if (strcmp(topicKey, DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB) == 0) {			
 			insert(json);
 			for (auto && fn : _insertCallbacks) fn();
+			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {
 			remove();
 			for (auto && fn : _removeCallbacks) fn();
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }

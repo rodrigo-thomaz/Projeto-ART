@@ -581,54 +581,71 @@ namespace ART
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB);
 	}
 
-	void DeviceSensors::onDeviceMQSubscription(char* topicKey, char* json)
+	bool DeviceSensors::onDeviceMQSubscription(char* topicKey, char* json)
 	{
 		if (strcmp(topicKey, DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB) == 0) {
 			setSensorsByMQQTCallback(json);
+			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
 			setReadIntervalInMilliSeconds(json);
+			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
 			setPublishIntervalInMilliSeconds(json);
+			return true;
 		}
 
 		else if (strcmp(topicKey, SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB) == 0) {
 			setOrdination(json);
+			return true;
 		}
 
 		else if (strcmp(topicKey, SENSOR_SET_LABEL_TOPIC_SUB) == 0) {
 			setLabel(json);
+			return true;
 		}
 
 		else if (strcmp(topicKey, SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB) == 0) {
 			setResolution(json);
+			return true;
 		}
 
 		else if (strcmp(topicKey, SENSOR_TRIGGER_INSERT_TOPIC_SUB) == 0) {
 			insertTrigger(json);
+			return true;
 		}
 		else if (strcmp(topicKey, SENSOR_TRIGGER_DELETE_TOPIC_SUB) == 0) {
 			deleteTrigger(json);
+			return true;
 		}
 		else if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB) == 0) {
 			setTriggerOn(json);
+			return true;
 		}
 		else if (strcmp(topicKey, SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB) == 0) {
 			setBuzzerOn(json);
+			return true;
 		}
 		else if (strcmp(topicKey, SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB) == 0) {
 			setTriggerValue(json);
+			return true;
 		}
 
 		else if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB) == 0) {
 			setDatasheetUnitMeasurementScale(json);
+			return true;
 		}
 		else if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB) == 0) {
 			setRange(json);
+			return true;
 		}
 		else if (strcmp(topicKey, SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB) == 0) {
 			setChartLimiter(json);
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }

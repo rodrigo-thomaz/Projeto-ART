@@ -164,7 +164,7 @@ namespace ART
 
 		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDeviceInApplication();
-		void								onDeviceMQSubscription(char* topicKey, char* json);
+		bool								onDeviceMQSubscription(char* topicKey, char* json);
 
 		std::unique_ptr<DNSServer>        	dnsServer;
 		std::unique_ptr<ESP8266WebServer> 	server;

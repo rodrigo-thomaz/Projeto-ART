@@ -189,7 +189,17 @@ namespace ART
 			json += c;
 		}
 		
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey, strdup(json.c_str()));
+		// TODO: Não funcionou !!!?@#$%?
+		/*for (auto && fn : _subscriptionCallbacks) {
+			if (fn(topicKey, strdup(json.c_str()))) {
+				Serial.print("Achou em ");
+				Serial.print(topicKey);
+				Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+				break;
+			}
+		}*/
+
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey, strdup(json.c_str()));		
 	}
 
 	bool DeviceMQ::connected()

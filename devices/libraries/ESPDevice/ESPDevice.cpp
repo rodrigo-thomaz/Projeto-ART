@@ -287,10 +287,14 @@ namespace ART
 		_deviceMQ->unSubscribeDeviceInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
 	}
 
-	void ESPDevice::onDeviceMQSubscription(char* topicKey, char* json)
+	bool ESPDevice::onDeviceMQSubscription(char* topicKey, char* json)
 	{
 		if (strcmp(topicKey, ESP_DEVICE_SET_LABEL_TOPIC_SUB) == 0) {
 			setLabel(json);
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }

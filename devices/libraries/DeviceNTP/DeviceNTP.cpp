@@ -268,13 +268,18 @@ namespace ART
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB);
 	}
 
-	void DeviceNTP::onDeviceMQSubscription(char* topicKey, char* json)
+	bool DeviceNTP::onDeviceMQSubscription(char* topicKey, char* json)
 	{
 		if (strcmp(topicKey, DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB) == 0) {
 			setUtcTimeOffsetInSecond(json);
+			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB) == 0) {
 			setUpdateIntervalInMilliSecond(json);
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }

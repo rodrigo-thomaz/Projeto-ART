@@ -278,7 +278,7 @@ namespace ART
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB);
 	}
 
-	void DeviceDebug::onDeviceMQSubscription(char* topicKey, char* json)
+	bool DeviceDebug::onDeviceMQSubscription(char* topicKey, char* json)
 	{
 		if (strcmp(topicKey, DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB) == 0) {
 			setRemoteEnabled(json);
