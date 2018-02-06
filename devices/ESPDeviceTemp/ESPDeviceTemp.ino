@@ -200,5 +200,3 @@ void loopMQQTConnected()
   displayMQTTManager.printSent(mqqtPrintSent); 
    
 }
-
-
