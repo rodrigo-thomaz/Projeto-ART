@@ -33,15 +33,13 @@ namespace ART
 	{
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();
 
-		deviceDebug->print("DeviceInApplication", "load", "begin\n");
+		deviceDebug->print("DeviceInApplication", "load", "begin\n");		
 
 		char* applicationId = strdup(jsonObject["applicationId"]);
-		_applicationId = new char(sizeof(strlen(applicationId)));
-		_applicationId = applicationId;
+		setApplicationId(applicationId);
 
 		char* applicationTopic = strdup(jsonObject["applicationTopic"]);
-		_applicationTopic = new char(sizeof(strlen(applicationTopic)));
-		_applicationTopic = applicationTopic;
+		setApplicationTopic(applicationTopic);
 
 		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
 
@@ -57,9 +55,21 @@ namespace ART
 		return (_applicationId);
 	}
 
+	void DeviceInApplication::setApplicationId(char* value)
+	{
+		_applicationId = new char(sizeof(strlen(value)));
+		_applicationId = value;
+	}
+
 	char* DeviceInApplication::getApplicationTopic() const
 	{
 		return (_applicationTopic);
+	}
+
+	void DeviceInApplication::setApplicationTopic(char* value)
+	{
+		_applicationTopic = new char(sizeof(strlen(value)));
+		_applicationTopic = value;
 	}
 
 	bool DeviceInApplication::inApplication()
@@ -89,15 +99,12 @@ namespace ART
 		}
 
 		root.printTo(Serial);
-
+		
 		char* applicationId = strdup(root["applicationId"]);
-		char* applicationTopic = strdup(root["applicationTopic"]);
-				
-		_applicationId = new char(sizeof(strlen(applicationId)));
-		_applicationTopic = new char(sizeof(strlen(applicationTopic)));
+		setApplicationId(applicationId);
 
-		_applicationId = applicationId;
-		_applicationTopic = applicationTopic;
+		char* applicationTopic = strdup(root["applicationTopic"]);
+		setApplicationTopic(applicationTopic);
 
 		_insertCallback();
 
@@ -110,13 +117,8 @@ namespace ART
 
 	void DeviceInApplication::remove()
 	{
-		char* value = strdup("");
-
-		_applicationId = new char(sizeof(strlen(value)));
-		_applicationTopic = new char(sizeof(strlen(value)));
-
-		_applicationId = value;
-		_applicationTopic = value;
+		setApplicationId("");
+		setApplicationTopic("");
 
 		_removeCallback();
 
