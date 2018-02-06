@@ -81,7 +81,7 @@ namespace ART
 	{
 		bool result = !(_applicationId == NULL || _applicationId == "");
 
-		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::inApplication] result: %s\n", result ? "true" : "false");
+		if (_deviceDebug->isActive(DeviceDebug::VERBOSE)) _deviceDebug->printf("DeviceInApplication::inApplication] result: %s\n", result ? "true" : "false");
 
 		return result;
 	}

@@ -149,10 +149,6 @@ void loopInApplication()
 
   espDevice.getDeviceNTP()->update();
 
-  uint64_t now = millis();
-  
-  DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
-
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
   bool deviceSensorsRefreshed = deviceSensors->refresh();
   if (deviceSensors->initialized()) {
@@ -161,7 +157,7 @@ void loopInApplication()
 
   // MQTT
   if(espDevice.getDeviceMQ()->connected()){
-    loopMQQTConnected(now);
+    loopMQQTConnected();
   }
 
   // Wifi
@@ -170,7 +166,7 @@ void loopInApplication()
   displayManager.display.display();
 }
 
-void loopMQQTConnected(uint64_t now)
+void loopMQQTConnected()
 {
   DeviceMQ* deviceMQ = espDevice.getDeviceMQ();
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
@@ -185,6 +181,8 @@ void loopMQQTConnected(uint64_t now)
 
     int deviceSensorsPublishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
 
+    uint64_t now = millis();
+    
     if (now - deviceSensorsPublishMessageTimestamp > deviceSensorsPublishIntervalInMilliSeconds) {
       
       deviceSensorsPublishMessageTimestamp = now;
