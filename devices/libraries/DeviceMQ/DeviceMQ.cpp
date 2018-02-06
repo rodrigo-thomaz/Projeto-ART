@@ -111,8 +111,8 @@ namespace ART
 
 	void DeviceMQ::begin()
 	{
-		_espDevice->getDeviceInApplication()->addInsertCallback([=]() { return onDeviceInApplicationInsert(); });
-		_espDevice->getDeviceInApplication()->addRemoveCallback([=]() { return onDeviceInApplicationRemove(); });		
+		_espDevice->getDeviceInApplication()->setInsertCallback([=]() { return onDeviceInApplicationInsert(); });
+		_espDevice->getDeviceInApplication()->setRemoveCallback([=]() { return onDeviceInApplicationRemove(); });
 	}
 
 	bool DeviceMQ::autoConnect()

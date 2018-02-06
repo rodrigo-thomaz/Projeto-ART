@@ -79,6 +79,16 @@ namespace ART
 		return !(_applicationId == NULL || _applicationId == "");
 	}
 
+	void DeviceInApplication::setInsertCallback(callbackSignature callback)
+	{
+		_insertCallback = callback;
+	}
+
+	void DeviceInApplication::setRemoveCallback(callbackSignature callback)
+	{
+		_removeCallback = callback;
+	}
+
 	void DeviceInApplication::insert(char* json)
 	{
 		StaticJsonBuffer<300> jsonBuffer;		
@@ -98,6 +108,8 @@ namespace ART
 		setApplicationId(applicationId);
 		setApplicationTopic(applicationTopic);
 
+		_insertCallback();
+
 		Serial.println("[DeviceInApplication::insert] ");
 		Serial.print("applicationId: ");
 		Serial.println(applicationId);
@@ -109,6 +121,8 @@ namespace ART
 	{
 		setApplicationId("");
 		setApplicationTopic("");
+
+		_removeCallback();
 
 		Serial.println("[DeviceInApplication::remove] remove from Application with success !");
 	}
@@ -136,13 +150,11 @@ namespace ART
 	bool DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
 	{
 		if (strcmp(topicKey, DEVICE_IN_APPLICATION_INSERT_TOPIC_SUB) == 0) {			
-			insert(json);
-			for (auto && fn : _insertCallbacks) fn();
+			insert(json);			
 			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB) == 0) {
-			remove();
-			for (auto && fn : _removeCallbacks) fn();
+			remove();			
 			return true;
 		}
 		else {

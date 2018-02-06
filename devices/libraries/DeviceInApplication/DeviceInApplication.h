@@ -19,7 +19,7 @@ namespace ART
 	public:
 
 		DeviceInApplication(ESPDevice* espDevice);
-		~DeviceInApplication();
+		~DeviceInApplication();		
 
 		static void							create(DeviceInApplication* (&deviceInApplication), ESPDevice* espDevice);
 
@@ -38,29 +38,20 @@ namespace ART
 
 		bool								inApplication();
 
-		template<typename Function>
-		void								addInsertCallback(Function && fn)
-		{
-			_insertCallbacks.push_back(std::forward<Function>(fn));
-		}
+		typedef std::function<void()>		callbackSignature;
 
-		template<typename Function>
-		void								addRemoveCallback(Function && fn)
-		{
-			_removeCallbacks.push_back(std::forward<Function>(fn));
-		}
+		void								setInsertCallback(callbackSignature callback);
+		void								setRemoveCallback(callbackSignature callback);
 
 	private:
 
-		ESPDevice * _espDevice;
+		ESPDevice *							_espDevice;
 
 		char*								_applicationId;
-		char*								_applicationTopic;
+		char*								_applicationTopic;		
 
-		typedef std::function<void()>		callbackSignature;
-
-		std::vector<callbackSignature>		_insertCallbacks;
-		std::vector<callbackSignature>		_removeCallbacks;
+		callbackSignature					_insertCallback;
+		callbackSignature					_removeCallback;
 
 		void								onDeviceMQSubscribeDevice();
 		void								onDeviceMQUnSubscribeDevice();
