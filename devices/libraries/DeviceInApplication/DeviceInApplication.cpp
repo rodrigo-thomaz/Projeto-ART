@@ -86,7 +86,7 @@ namespace ART
 		return result;
 	}
 
-	void DeviceInApplication::insert(char* json)
+	void DeviceInApplication::insert(const char* json)
 	{
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::insert] begin\n");
 

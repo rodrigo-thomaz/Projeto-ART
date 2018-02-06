@@ -29,9 +29,6 @@ namespace ART
 
 		void								load(JsonObject& jsonObject);
 
-		void								insert(char* json);
-		void								remove();
-
 		char*								getApplicationId() const;
 		char*								getApplicationTopic()  const;		
 
@@ -64,6 +61,9 @@ namespace ART
 
 		void								setApplicationId(const char* value);
 		void								setApplicationTopic(const char* value);
+
+		void								insert(const char* json);
+		void								remove();
 
 		void								onDeviceMQSubscribeDevice();
 		void								onDeviceMQUnSubscribeDevice();
