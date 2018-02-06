@@ -30,11 +30,8 @@ namespace ART
 		void								insert(char* json);
 		void								remove();
 
-		char*								getApplicationId() const;
-		void								setApplicationId(char* value);
-
-		char*								getApplicationTopic()  const;
-		void								setApplicationTopic(char* value);
+		char*								getApplicationId() const;		
+		char*								getApplicationTopic()  const;		
 
 		bool								inApplication();
 
@@ -52,6 +49,9 @@ namespace ART
 
 		callbackSignature					_insertCallback;
 		callbackSignature					_removeCallback;
+
+		void								setApplicationId(const char* value);
+		void								setApplicationTopic(const char* value);
 
 		void								onDeviceMQSubscribeDevice();
 		void								onDeviceMQUnSubscribeDevice();

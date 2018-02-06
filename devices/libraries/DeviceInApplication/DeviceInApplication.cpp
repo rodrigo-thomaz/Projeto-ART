@@ -35,11 +35,8 @@ namespace ART
 
 		deviceDebug->print("DeviceInApplication", "load", "begin\n");		
 
-		char* applicationId = strdup(jsonObject["applicationId"]);
-		setApplicationId(applicationId);
-
-		char* applicationTopic = strdup(jsonObject["applicationTopic"]);
-		setApplicationTopic(applicationTopic);
+		setApplicationId(strdup(jsonObject["applicationId"]));
+		setApplicationTopic(strdup(jsonObject["applicationTopic"]));
 
 		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
 
@@ -55,10 +52,10 @@ namespace ART
 		return (_applicationId);
 	}
 
-	void DeviceInApplication::setApplicationId(char* value)
+	void DeviceInApplication::setApplicationId(const char* value)
 	{
 		_applicationId = new char(sizeof(strlen(value)));
-		_applicationId = value;
+		_applicationId = (char*)value;
 	}
 
 	char* DeviceInApplication::getApplicationTopic() const
@@ -66,10 +63,10 @@ namespace ART
 		return (_applicationTopic);
 	}
 
-	void DeviceInApplication::setApplicationTopic(char* value)
+	void DeviceInApplication::setApplicationTopic(const char* value)
 	{
 		_applicationTopic = new char(sizeof(strlen(value)));
-		_applicationTopic = value;
+		_applicationTopic = (char*)value;
 	}
 
 	bool DeviceInApplication::inApplication()
@@ -100,11 +97,8 @@ namespace ART
 
 		root.printTo(Serial);
 		
-		char* applicationId = strdup(root["applicationId"]);
-		setApplicationId(applicationId);
-
-		char* applicationTopic = strdup(root["applicationTopic"]);
-		setApplicationTopic(applicationTopic);
+		setApplicationId(strdup(root["applicationId"]));
+		setApplicationTopic(strdup(root["applicationTopic"]));
 
 		_insertCallback();
 
@@ -121,6 +115,9 @@ namespace ART
 		setApplicationTopic("");
 
 		_removeCallback();
+
+		/*free(_applicationId);
+		free(_applicationTopic);*/		
 
 		Serial.println("[DeviceInApplication::remove] remove from Application with success !");
 	}
