@@ -8,12 +8,8 @@ namespace ART
 		_flashChipId = ESP.getFlashChipId();
 		_chipSize = ESP.getFlashChipSize();
 
-		_webApiHost = new char(sizeof(strlen(webApiHost)));
 		_webApiHost = (char*)webApiHost;
-
 		_webApiPort = webApiPort;
-
-		_webApiUri = new char(sizeof(strlen(webApiUri)));
 		_webApiUri = (char*)webApiUri;
 
 		DeviceDebug::create(_deviceDebug, this);
