@@ -62,8 +62,8 @@ namespace ART
 		std::vector<callbackSignature>		_insertCallbacks;
 		std::vector<callbackSignature>		_removeCallbacks;
 
-		void								setApplicationId(char* value);
-		void								setApplicationTopic(char* value);
+		void								setApplicationId(const char* value);
+		void								setApplicationTopic(const char* value);
 
 		void								onDeviceMQSubscribeDevice();
 		void								onDeviceMQUnSubscribeDevice();

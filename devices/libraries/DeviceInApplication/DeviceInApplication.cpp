@@ -61,18 +61,18 @@ namespace ART
 		return (_applicationTopic);
 	}
 
-	void DeviceInApplication::setApplicationId(char* value)
+	void DeviceInApplication::setApplicationId(const char* value)
 	{
 		_applicationId = new char(sizeof(strlen(value)));
-		_applicationId = value;
+		_applicationId = (char*)value;
 
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::setApplicationId] applicationId: %s\n", _applicationId);
 	}	
 
-	void DeviceInApplication::setApplicationTopic(char* value)
+	void DeviceInApplication::setApplicationTopic(const char* value)
 	{
 		_applicationTopic = new char(sizeof(strlen(value)));
-		_applicationTopic = value;
+		_applicationTopic = (char*)value;
 
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::setApplicationTopic] applicationTopic: %s\n", _applicationTopic);
 	}
