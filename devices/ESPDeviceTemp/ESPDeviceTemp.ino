@@ -164,32 +164,37 @@ void loopInApplication()
 void loopMQQTConnected()
 { 
   displayMQTTManager.printConnected();
-  displayMQTTManager.printReceived(false);
-
-  DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
+  displayMQTTManager.printReceived(false);  
 
   bool mqqtPrintSent = false;
-     
-  if (deviceSensors->initialized()) {    
 
-    // Sensor
+  // Wifi
+
+  DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
+
+  bool deviceWiFiPublished = deviceWiFi->publish();
+
+  if(deviceWiFiPublished){
+    mqqtPrintSent = true;
+  }  
+  
+  Serial.printf("deviceWiFi->publish: %s\n", deviceWiFiPublished ? "true" : "false");
+
+  // Sensor
+
+  DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
+         
+  if (deviceSensors->initialized()) {        
 
     displayTemperatureSensorManager.printSensors();
 
     bool deviceSensorsPublished = deviceSensors->publish();
-    Serial.printf("deviceSensors->publish: %s\n", deviceSensorsPublished ? "true" : "false");    
 
-    // Wifi
-
-    DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
-
-    bool deviceWiFiPublished = deviceWiFi->publish();
-    Serial.printf("deviceWiFi->publish: %s\n", deviceWiFiPublished ? "true" : "false");
-    
-    if(deviceSensorsPublished || deviceWiFiPublished){
+    if(deviceSensorsPublished){
       mqqtPrintSent = true;
     }  
     
+    Serial.printf("deviceSensors->publish: %s\n", deviceSensorsPublished ? "true" : "false");    
   }
   
   displayMQTTManager.printSent(mqqtPrintSent); 
