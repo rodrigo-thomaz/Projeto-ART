@@ -40,11 +40,6 @@ struct config_t
 
 int configurationEEPROMAddr = 0;
 
-uint64_t deviceSensorsReadTempTimestamp = 0;
-uint64_t deviceSensorsPublishMessageTimestamp = 0;
-
-uint64_t deviceWiFiPublishMessageTimestamp = 0;
-
 using namespace ART;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
