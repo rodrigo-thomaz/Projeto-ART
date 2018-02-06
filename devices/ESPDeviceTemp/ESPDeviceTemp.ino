@@ -94,6 +94,7 @@ void setup() {
 void initConfiguration()
 {
   EEPROM_readAnything(0, configuration);
+  //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
 }
 
 bool mqtt_SubCallback(char* topicKey, char* json)
@@ -130,7 +131,6 @@ void loop() {
   }
   else{
     displayAccessManager.loop();
-    //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
   }
 
   //keep-alive da comunicação com broker MQTT
