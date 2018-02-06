@@ -35,13 +35,13 @@ namespace ART
 
 		deviceDebug->print("DeviceInApplication", "load", "begin\n");
 
-		//char* applicationId = strdup(jsonObject["applicationId"]);
-		//_applicationId = new char(sizeof(strlen(applicationId)));
-		_applicationId = strdup(jsonObject["applicationId"]);
+		char* applicationId = strdup(jsonObject["applicationId"]);
+		_applicationId = new char(sizeof(strlen(applicationId)));
+		_applicationId = applicationId;
 
-		//char* applicationTopic = strdup(jsonObject["applicationTopic"]);
-		//_applicationTopic = new char(sizeof(strlen(applicationTopic)));
-		_applicationTopic = strdup(jsonObject["applicationTopic"]);
+		char* applicationTopic = strdup(jsonObject["applicationTopic"]);
+		_applicationTopic = new char(sizeof(strlen(applicationTopic)));
+		_applicationTopic = applicationTopic;
 
 		if (deviceDebug->isActive(DeviceDebug::DEBUG)) {
 
@@ -110,8 +110,13 @@ namespace ART
 
 	void DeviceInApplication::remove()
 	{
-		_applicationId = "";
-		_applicationTopic = "";
+		char* value = strdup("");
+
+		_applicationId = new char(sizeof(strlen(value)));
+		_applicationTopic = new char(sizeof(strlen(value)));
+
+		_applicationId = value;
+		_applicationTopic = value;
 
 		_removeCallback();
 
