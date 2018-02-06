@@ -150,19 +150,13 @@ void loopInApplication()
   espDevice.getDeviceNTP()->update();
 
   uint64_t now = millis();
+  
+  DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
 
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
-  DeviceWiFi* deviceWiFi = espDevice.getDeviceWiFi();
-  
+  bool deviceSensorsRefreshed = deviceSensors->refresh();
   if (deviceSensors->initialized()) {
-    if (now - deviceSensorsReadTempTimestamp > deviceSensors->getReadIntervalInMilliSeconds()) {
-      deviceSensorsReadTempTimestamp = now;
-      displayTemperatureSensorManager.printUpdate(true);
-      deviceSensors->refresh();
-    }
-    else {
-      displayTemperatureSensorManager.printUpdate(false);
-    }
+    displayTemperatureSensorManager.printUpdate(deviceSensorsRefreshed);
   }
 
   // MQTT
@@ -252,4 +246,5 @@ void loopMQQTConnected(uint64_t now)
   }
   
 }
+
 

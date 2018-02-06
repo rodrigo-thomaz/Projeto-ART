@@ -146,17 +146,24 @@ namespace ART
 		}
 	}
 
-	void DeviceSensors::loop()
+	bool DeviceSensors::refresh()
 	{
+		if (!initialized()) return false;
 
-	}
+		uint64_t now = millis();
 
-	void DeviceSensors::refresh()
-	{
+		if (now - _readIntervalTimestamp > _readIntervalInMilliSeconds) {
+			_readIntervalTimestamp = now;
+		}
+		else {
+			return false;
+		}
+
 		bool hasAlarm = false;
 		bool hasAlarmBuzzer = false;
 
 		_dallas.requestTemperatures();
+
 		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
 			Sensor* sensor = _sensorsInDevice[i].getSensor();
 			sensor->setConnected(_dallas.isConnected(sensor->getDeviceAddress()));
@@ -169,6 +176,8 @@ namespace ART
 		if (hasAlarmBuzzer) {
 			_espDevice->getDeviceBuzzer()->test();
 		}
+
+		return true;
 	}
 
 	ESPDevice * DeviceSensors::getESPDevice()
