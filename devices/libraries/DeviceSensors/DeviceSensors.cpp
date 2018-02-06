@@ -180,6 +180,41 @@ namespace ART
 		return true;
 	}
 
+	bool DeviceSensors::publish()
+	{
+		if (!initialized()) return false;
+
+		uint64_t now = millis();
+
+		if (now - _publishIntervalTimestamp > _publishIntervalInMilliSeconds) {
+			_publishIntervalTimestamp = now;
+		}
+		else {
+			return false;
+		}
+
+		DynamicJsonBuffer jsonBuffer;
+		JsonObject& root = jsonBuffer.createObject();
+
+		root["deviceId"] = _espDevice->getDeviceId();
+		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
+		root["epochTimeUtc"] = _espDevice->getDeviceNTP()->getEpochTimeUTC();
+
+		createSensorsJsonNestedArray(root);
+
+		int messageJsonLen = root.measureLength();
+		char messageJson[messageJsonLen + 1];
+
+		root.printTo(messageJson, sizeof(messageJson));
+
+		Serial.print("DeviceSensors enviando para o servidor (Char Len)=> ");
+		Serial.println(messageJsonLen);
+
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SENSORS_MESSAGE_TOPIC_PUB, messageJson);
+
+		return true;
+	}
+
 	ESPDevice * DeviceSensors::getESPDevice()
 	{
 		return _espDevice;

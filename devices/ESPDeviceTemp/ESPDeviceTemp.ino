@@ -179,35 +179,18 @@ void loopMQQTConnected()
     displayMQTTManager.printConnected();
     displayMQTTManager.printReceived(false);
 
-    int deviceSensorsPublishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
+    bool deviceSensorsPublished = deviceSensors->publish();
+
+    Serial.printf("deviceSensors->publish: %s\n", deviceSensorsPublished ? "true" : "false");
+
+    if(deviceSensorsPublished){
+      mqqtPrintSent = true;
+    }    
+
+    //int deviceSensorsPublishIntervalInMilliSeconds = deviceSensors->getPublishIntervalInMilliSeconds();
 
     uint64_t now = millis();
     
-    if (now - deviceSensorsPublishMessageTimestamp > deviceSensorsPublishIntervalInMilliSeconds) {
-      
-      deviceSensorsPublishMessageTimestamp = now;
-      
-      mqqtPrintSent = true;
-
-      StaticJsonBuffer<2048> jsonBuffer;
-      JsonObject& root = jsonBuffer.createObject();
-
-      root["deviceId"] = espDevice.getDeviceId();
-      root["deviceDatasheetId"] = espDevice.getDeviceDatasheetId();
-      root["epochTimeUtc"] = espDevice.getDeviceNTP()->getEpochTimeUTC();
-
-      espDevice.getDeviceSensors()->createSensorsJsonNestedArray(root);
-
-      int messageJsonLen = root.measureLength();
-      char messageJson[messageJsonLen + 1];
-      root.printTo(messageJson, sizeof(messageJson));
-
-      Serial.print("DeviceSensors enviando para o servidor (Char Len)=> ");
-      Serial.println(messageJsonLen);
-
-      deviceMQ->publishInApplication(DEVICE_SENSORS_MESSAGE_TOPIC_PUB, messageJson);
-    }
-
     // Sensor
     displayTemperatureSensorManager.printSensors();
 

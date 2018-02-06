@@ -56,6 +56,7 @@ namespace ART
 		void 								setSensorsByMQQTCallback(char* json);
 
 		bool 								refresh();
+		bool 								publish();
 
 		ESPDevice *							getESPDevice();
 
@@ -106,6 +107,8 @@ namespace ART
 
 		uint64_t							_readIntervalTimestamp;
 		int									_readIntervalInMilliSeconds;
+
+		uint64_t							_publishIntervalTimestamp;
 		int									_publishIntervalInMilliSeconds;
 
 		void								onDeviceMQSubscribeDeviceInApplication();
