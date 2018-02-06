@@ -100,6 +100,8 @@ namespace ART
 		int							getPublishIntervalInMilliSeconds();
 		void						setPublishIntervalInMilliSeconds(char* json);			
 
+		bool 						publish();
+
 		//boolean       autoConnect();
 		void          autoConnect();
 		//boolean       autoConnect(char const *apName, char const *apPassword = NULL);	
@@ -160,6 +162,8 @@ namespace ART
 		char *								_stationMacAddress;
 		char *								_softAPMacAddress;
 		char *								_hostName;
+
+		uint64_t							_publishIntervalTimestamp;
 		int									_publishIntervalInMilliSeconds;
 
 		void								onDeviceMQSubscribeDeviceInApplication();

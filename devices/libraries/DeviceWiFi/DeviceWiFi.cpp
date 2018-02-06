@@ -166,6 +166,39 @@ namespace ART
 		_publishIntervalInMilliSeconds = root["value"].as<int>();
 	}
 
+	bool DeviceWiFi::publish()
+	{
+		uint64_t now = millis();
+
+		if (now - _publishIntervalTimestamp > _publishIntervalInMilliSeconds) {
+			_publishIntervalTimestamp = now;
+		}
+		else {
+			return false;
+		}
+				
+		DynamicJsonBuffer jsonBuffer;
+		JsonObject& root = jsonBuffer.createObject();
+
+		root["deviceId"] = _espDevice->getDeviceId();
+		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
+		root["wifiQuality"] = _espDevice->getDeviceWiFi()->getQuality();
+		root["epochTimeUtc"] = _espDevice->getDeviceNTP()->getEpochTimeUTC();
+		root["localIPAddress"] = _espDevice->getDeviceWiFi()->getLocalIPAddress();
+
+		int messageJsonLen = root.measureLength();
+		char messageJson[messageJsonLen + 1];
+
+		root.printTo(messageJson, sizeof(messageJson));
+
+		Serial.print("DeviceWiFi enviando para o servidor (Char Len)=> ");
+		Serial.println(messageJsonLen);
+
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_WIFI_MESSAGE_TOPIC_PUB, messageJson);
+
+		return true;
+	}
+
 	void DeviceWiFi::addParameter(DeviceWiFiParameter *p) {
 		if (_paramsCount + 1 > DEVICE_WIFI_MAX_PARAMS)
 		{
