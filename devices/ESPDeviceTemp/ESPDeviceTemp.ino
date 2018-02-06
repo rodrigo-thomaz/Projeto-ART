@@ -162,12 +162,14 @@ void loopInApplication()
 }
 
 void loopMQQTConnected()
-{      
-  DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
-
+{ 
   displayMQTTManager.printConnected();
   displayMQTTManager.printReceived(false);
-    
+
+  DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
+
+  bool mqqtPrintSent = false;
+     
   if (deviceSensors->initialized()) {    
 
     // Sensor
@@ -183,16 +185,15 @@ void loopMQQTConnected()
 
     bool deviceWiFiPublished = deviceWiFi->publish();
     Serial.printf("deviceWiFi->publish: %s\n", deviceWiFiPublished ? "true" : "false");
-
-    bool mqqtPrintSent = false;
     
     if(deviceSensorsPublished || deviceWiFiPublished){
       mqqtPrintSent = true;
     }  
-
-    displayMQTTManager.printSent(mqqtPrintSent);
+    
   }
   
+  displayMQTTManager.printSent(mqqtPrintSent); 
+   
 }
 
 
