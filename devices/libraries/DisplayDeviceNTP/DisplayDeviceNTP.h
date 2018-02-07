@@ -1,21 +1,28 @@
 #ifndef DisplayDeviceNTP_h
 #define DisplayDeviceNTP_h
 
+#include "functional"
+#include "vector"
 #include "Arduino.h"
-#include "DisplayDevice.h"
-#include "ESPDevice.h"
+#include "DeviceNTP.h"
 
 namespace ART
 {
+	class DisplayDevice;
+
 	class DisplayDeviceNTP
 	{
+
 	public:
-		DisplayDeviceNTP(ESPDevice& espDevice);
+
+		DisplayDeviceNTP(DisplayDevice* displayDevice);
 		~DisplayDeviceNTP();
+
+		static void										create(DisplayDeviceNTP* (&displayDeviceNTP), DisplayDevice* displayDevice);
 
 	private:
 
-		ESPDevice*          							_espDevice;
+		DisplayDevice *									_displayDevice;
 
 		void											printTime();
 		void											printUpdate(bool on);

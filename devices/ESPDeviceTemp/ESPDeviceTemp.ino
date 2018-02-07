@@ -3,7 +3,6 @@
 #include "EEPROMManager.h"
 
 #include "DisplayDeviceWiFi.h"
-#include "DisplayDeviceNTP.h"
 #include "DisplayDeviceSensors.h"
 
 #include <ESP8266WiFi.h>
@@ -44,7 +43,6 @@ ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UnitMeasurementConverter unitMeasurementConverter;
 
 DisplayDeviceWiFi displayDeviceWiFi(espDevice);
-DisplayDeviceNTP displayDeviceNTP(espDevice);
 DisplayDeviceSensors displayDeviceSensors(espDevice, unitMeasurementConverter);
 
 void setup() {

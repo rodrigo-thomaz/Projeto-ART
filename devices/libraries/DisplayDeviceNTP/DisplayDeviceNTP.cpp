@@ -1,18 +1,26 @@
 #include "DisplayDeviceNTP.h"
+#include "DisplayDevice.h"
+#include "ESPDevice.h"
+#include "DeviceNTP.h"
 
 namespace ART
 {
-	DisplayDeviceNTP::DisplayDeviceNTP(ESPDevice& espDevice)
+	DisplayDeviceNTP::DisplayDeviceNTP(DisplayDevice* displayDevice)
 	{
-		this->_espDevice = &espDevice;
+		_displayDevice = displayDevice;
 
-		this->_updateCallback = [=](bool update, bool forceUpdate) { this->updateCallback(update, forceUpdate); };
-		_espDevice->getDeviceNTP()->setUpdateCallback(this->_updateCallback);
+		this->_updateCallback = [=](bool update, bool forceUpdate) { this->updateCallback(update, forceUpdate); };		
+		_displayDevice->getESPDevice()->getDeviceNTP()->setUpdateCallback(this->_updateCallback);
 	}
 
 	DisplayDeviceNTP::~DisplayDeviceNTP()
 	{
 
+	}
+
+	void DisplayDeviceNTP::create(DisplayDeviceNTP *(&displayDeviceNTP), DisplayDevice * displayDevice)
+	{
+		displayDeviceNTP = new DisplayDeviceNTP(displayDevice);
 	}
 
 	void DisplayDeviceNTP::updateCallback(bool update, bool forceUpdate)
@@ -25,24 +33,24 @@ namespace ART
 
 	void DisplayDeviceNTP::printTime()
 	{
-		_espDevice->getDisplayDevice()->display.setFont();
-		_espDevice->getDisplayDevice()->display.setTextSize(2);
-		_espDevice->getDisplayDevice()->display.setTextColor(WHITE);
-		_espDevice->getDisplayDevice()->display.setCursor(0, 1);
-		String formattedTime = _espDevice->getDeviceNTP()->getFormattedTime();
-		_espDevice->getDisplayDevice()->display.println(formattedTime);
+		_displayDevice->display.setFont();
+		_displayDevice->display.setTextSize(2);
+		_displayDevice->display.setTextColor(WHITE);
+		_displayDevice->display.setCursor(0, 1);
+		String formattedTime = _displayDevice->getESPDevice()->getDeviceNTP()->getFormattedTime();
+		_displayDevice->display.println(formattedTime);
 	}
 
 	void DisplayDeviceNTP::printUpdate(bool on)
 	{
-		_espDevice->getDisplayDevice()->display.setFont();
-		_espDevice->getDisplayDevice()->display.setTextSize(1);
+		_displayDevice->display.setFont();
+		_displayDevice->display.setTextSize(1);
 		if (on)
-			_espDevice->getDisplayDevice()->display.setTextColor(BLACK, WHITE);
+			_displayDevice->display.setTextColor(BLACK, WHITE);
 		else
-			_espDevice->getDisplayDevice()->display.setTextColor(WHITE, BLACK);
+			_displayDevice->display.setTextColor(WHITE, BLACK);
 
-		_espDevice->getDisplayDevice()->display.setCursor(66, 0);
-		_espDevice->getDisplayDevice()->display.println("T");
+		_displayDevice->display.setCursor(66, 0);
+		_displayDevice->display.println("T");
 	}
 }

@@ -93,6 +93,7 @@ namespace ART
 		DisplayDeviceBinary::create(_displayDeviceBinary, this);
 		DisplayDeviceMQ::create(_displayDeviceMQ, this);
 		DisplayDeviceWiFiAccess::create(_displayDeviceWiFiAccess, this);
+		DisplayDeviceNTP::create(_displayDeviceNTP, this);
 	}
 
 	DisplayDevice::~DisplayDevice()
@@ -148,6 +149,11 @@ namespace ART
 	DisplayDeviceWiFiAccess * DisplayDevice::getDisplayDeviceWiFiAccess()
 	{
 		return _displayDeviceWiFiAccess;
+	}
+
+	DisplayDeviceNTP * DisplayDevice::getDisplayDeviceNTP()
+	{
+		return _displayDeviceNTP;
 	}
 	
 }
