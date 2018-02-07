@@ -2,20 +2,22 @@
 #define DisplayDeviceBinary_h
 
 #include "Arduino.h"
-#include "DisplayDevice.h"
 
 namespace ART
 {
+	class DisplayDevice;
+
 	class DisplayDeviceBinary
 	{
 	public:
-		DisplayDeviceBinary(DisplayDevice& displayDevice);
+		DisplayDeviceBinary(DisplayDevice* displayDevice);
 		~DisplayDeviceBinary();
 
+		static void					create(DisplayDeviceBinary* (&displayDeviceBinary), DisplayDevice* displayDevice);
 
 	private:
 
-		DisplayDevice * _displayDevice;
+		DisplayDevice *				_displayDevice;
 
 	};
 }

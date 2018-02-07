@@ -26,7 +26,7 @@ namespace ART
 
 	private:
 
-		ESPDevice * _espDevice;
+		ESPDevice *					_espDevice;
 
 		uint64_t 					_checkForUpdatesTimestamp = 0;
 

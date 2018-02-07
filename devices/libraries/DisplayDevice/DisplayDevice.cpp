@@ -86,7 +86,12 @@ namespace ART
 {
 	DisplayDevice::DisplayDevice()
 	{
+		DisplayDeviceBinary::create(_displayDeviceBinary, this);
+	}
 
+	DisplayDevice::~DisplayDevice()
+	{
+		delete (_displayDeviceBinary);
 	}
 
 	void DisplayDevice::begin()
@@ -107,4 +112,10 @@ namespace ART
 		// Clear the buffer.
 		display.clearDisplay();
 	}
+
+	DisplayDeviceBinary * DisplayDevice::getDisplayDeviceBinary()
+	{
+		return _displayDeviceBinary;
+	}
+	
 }

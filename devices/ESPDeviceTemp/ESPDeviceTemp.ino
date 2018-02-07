@@ -6,7 +6,7 @@
 #include "DisplayDeviceWiFi.h"
 #include "DisplayDeviceMQ.h"
 #include "DisplayDeviceNTP.h"
-#include "DisplayDeviceBinary.h"
+//#include "DisplayDeviceBinary.h"
 #include "DisplayDeviceSensors.h"
 #include "EEPROMManager.h"
 
@@ -51,7 +51,7 @@ DisplayDevice displayDevice;
 DisplayDeviceWiFiAccess displayDeviceWiFiAccess(displayDevice);
 DisplayDeviceWiFi displayDeviceWiFi(displayDevice, espDevice);
 DisplayDeviceMQ displayDeviceMQ(displayDevice);
-DisplayDeviceBinary displayDeviceBinary(displayDevice);
+//DisplayDeviceBinary displayDeviceBinary(displayDevice);
 DisplayDeviceNTP displayDeviceNTP(displayDevice, espDevice);
 DisplayDeviceSensors displayDeviceSensors(displayDevice, espDevice, unitMeasurementConverter);
 

@@ -1,13 +1,20 @@
 #include "DisplayDeviceBinary.h"
+#include "DisplayDevice.h"
 
 namespace ART
 {
-	DisplayDeviceBinary::DisplayDeviceBinary(DisplayDevice& displayDevice)
+	DisplayDeviceBinary::DisplayDeviceBinary(DisplayDevice* displayDevice)
 	{
-		this->_displayDevice = &displayDevice;
+		this->_displayDevice = displayDevice;
 	}
 
 	DisplayDeviceBinary::~DisplayDeviceBinary()
 	{
+
+	}
+
+	void DisplayDeviceBinary::create(DisplayDeviceBinary *(&displayDeviceBinary), DisplayDevice * displayDevice)
+	{
+		displayDeviceBinary = new DisplayDeviceBinary(displayDevice);
 	}
 }
