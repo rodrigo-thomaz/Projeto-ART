@@ -3,6 +3,7 @@
 
 #include "DisplayDeviceBinary.h"
 #include "DisplayDeviceMQ.h"
+#include "DisplayDeviceWiFiAccess.h"
 
 #include "Arduino.h"
 #include "Adafruit_SSD1306.h"
@@ -21,6 +22,7 @@ namespace ART
 
 		DisplayDeviceBinary*					getDisplayDeviceBinary();
 		DisplayDeviceMQ*						getDisplayDeviceMQ();
+		DisplayDeviceWiFiAccess*				getDisplayDeviceWiFiAccess();
 
 		Adafruit_SSD1306						display;
 
@@ -28,6 +30,7 @@ namespace ART
 
 		DisplayDeviceBinary *					_displayDeviceBinary;
 		DisplayDeviceMQ *						_displayDeviceMQ;
+		DisplayDeviceWiFiAccess *				_displayDeviceWiFiAccess;
 
 	};
 }

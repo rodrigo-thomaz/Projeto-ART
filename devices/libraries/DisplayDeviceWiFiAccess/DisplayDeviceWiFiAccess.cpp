@@ -1,10 +1,21 @@
 #include "DisplayDeviceWiFiAccess.h"
+#include "DisplayDevice.h"
 
 namespace ART
 {
-	DisplayDeviceWiFiAccess::DisplayDeviceWiFiAccess(DisplayDevice& displayDevice)
+	DisplayDeviceWiFiAccess::DisplayDeviceWiFiAccess(DisplayDevice* displayDevice)
 	{
-		this->_displayDevice = &displayDevice;
+		_displayDevice = displayDevice;
+	}
+
+	DisplayDeviceWiFiAccess::~DisplayDeviceWiFiAccess()
+	{
+
+	}
+
+	void DisplayDeviceWiFiAccess::create(DisplayDeviceWiFiAccess *(&displayDeviceWiFiAccess), DisplayDevice * displayDevice)
+	{
+		displayDeviceWiFiAccess = new DisplayDeviceWiFiAccess(displayDevice);
 	}
 
 	void DisplayDeviceWiFiAccess::updatePin(char* json)

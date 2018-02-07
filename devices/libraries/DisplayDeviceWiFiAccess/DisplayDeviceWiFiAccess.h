@@ -3,29 +3,33 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
-#include "DisplayDevice.h"
 
 #define MESSAGE_INTERVAL 1000
 
 namespace ART
 {
+	class DisplayDevice;
+
 	class DisplayDeviceWiFiAccess
 	{
 	public:
 
-		DisplayDeviceWiFiAccess(DisplayDevice& displayDevice);
+		DisplayDeviceWiFiAccess(DisplayDevice* displayDevice);
+		~DisplayDeviceWiFiAccess();
 
-		void								updatePin(char* json);
-		void								loop();
+		static void					create(DisplayDeviceWiFiAccess* (&displayDeviceWiFiAccess), DisplayDevice* displayDevice);
+
+		void						updatePin(char* json);
+		void						loop();
 
 	private:
 
-		DisplayDevice * _displayDevice;
+		DisplayDevice *				_displayDevice;
 
-		String 								_pin;
-		int 								_nextFireTimeInSeconds = -1;
+		String 						_pin;
+		int 						_nextFireTimeInSeconds = -1;
 
-		uint64_t 							_messageTimestamp = 0;
+		uint64_t 					_messageTimestamp = 0;
 	};
 }
 

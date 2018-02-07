@@ -2,7 +2,6 @@
 #include "UnitMeasurementConverter.h"
 #include "DisplayDevice.h"
 #include "DeviceBuzzer.h"
-#include "DisplayDeviceWiFiAccess.h"
 #include "DisplayDeviceWiFi.h"
 #include "DisplayDeviceNTP.h"
 #include "DisplayDeviceSensors.h"
@@ -46,7 +45,6 @@ ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 UnitMeasurementConverter unitMeasurementConverter;
 
 DisplayDevice displayDevice;
-DisplayDeviceWiFiAccess displayDeviceWiFiAccess(displayDevice);
 DisplayDeviceWiFi displayDeviceWiFi(displayDevice, espDevice);
 DisplayDeviceNTP displayDeviceNTP(displayDevice, espDevice);
 DisplayDeviceSensors displayDeviceSensors(displayDevice, espDevice, unitMeasurementConverter);
@@ -104,7 +102,7 @@ bool mqtt_SubCallback(char* topicKey, char* json)
   }  
 
   if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
-    displayDeviceWiFiAccess.updatePin(json);
+    displayDevice.getDisplayDeviceWiFiAccess()->updatePin(json);
     return true;
   }
 
@@ -132,7 +130,7 @@ void loop() {
       loopInApplication();
   }
   else{
-    displayDeviceWiFiAccess.loop();
+    displayDevice.getDisplayDeviceWiFiAccess()->loop();
   }
 
   //keep-alive da comunicação com broker MQTT
