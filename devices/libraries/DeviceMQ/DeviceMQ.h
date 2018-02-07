@@ -78,7 +78,7 @@ namespace ART
 
 	private:
 
-		ESPDevice * _espDevice;
+		ESPDevice *													_espDevice;
 
 		char*														_host;
 		int															_port;
