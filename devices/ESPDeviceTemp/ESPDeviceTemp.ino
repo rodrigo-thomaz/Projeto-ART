@@ -1,5 +1,4 @@
 #include "ESPDevice.h"
-#include "UnitMeasurementConverter.h"
 #include "EEPROMManager.h"
 
 #include "DisplayDeviceSensors.h"
@@ -39,9 +38,7 @@ using namespace ART;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
-UnitMeasurementConverter unitMeasurementConverter;
-
-DisplayDeviceSensors displayDeviceSensors(espDevice, unitMeasurementConverter);
+DisplayDeviceSensors displayDeviceSensors(espDevice);
 
 void setup() {
 

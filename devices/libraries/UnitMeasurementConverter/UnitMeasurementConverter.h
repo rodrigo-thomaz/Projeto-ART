@@ -2,7 +2,7 @@
 #define UnitMeasurementConverter_h
 
 #include "Arduino.h"
-#include "SensorUnitMeasurementScale.h"
+#include "../UnitMeasurement/UnitMeasurementEnum.h"
 
 namespace ART
 {
@@ -10,10 +10,8 @@ namespace ART
 	{
 	public:
 
-		UnitMeasurementConverter();
-
-		float								convertFromCelsius(UnitMeasurementEnum unitMeasurementId, float celsius);
-		float								convertCelsiusToFahrenheit(float celsius);
+		static float						convertFromCelsius(UnitMeasurementEnum unitMeasurementId, float celsius);
+		static float						convertCelsiusToFahrenheit(float celsius);
 
 	private:
 

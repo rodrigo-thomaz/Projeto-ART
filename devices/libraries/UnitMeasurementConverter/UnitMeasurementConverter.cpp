@@ -2,11 +2,6 @@
 
 namespace ART
 {
-	UnitMeasurementConverter::UnitMeasurementConverter()
-	{
-
-	}
-
 	float UnitMeasurementConverter::convertFromCelsius(UnitMeasurementEnum unitMeasurementId, float celsius)
 	{
 		switch (unitMeasurementId)

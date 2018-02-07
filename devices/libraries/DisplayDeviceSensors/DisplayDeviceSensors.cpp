@@ -2,10 +2,9 @@
 
 namespace ART
 {
-	DisplayDeviceSensors::DisplayDeviceSensors(ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter)
+	DisplayDeviceSensors::DisplayDeviceSensors(ESPDevice& espDevice)
 	{
 		this->_espDevice = &espDevice;
-		this->_unitMeasurementConverter = &unitMeasurementConverter;
 	}
 
 	DisplayDeviceSensors::~DisplayDeviceSensors()
@@ -115,7 +114,7 @@ namespace ART
 	{
 		UnitMeasurementEnum unitMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId();
 
-		float tempConverted = this->_unitMeasurementConverter->convertFromCelsius(unitMeasurementId, sensor->getValue());
+		//float tempConverted = UnitMeasurementConverter::convertFromCelsius(unitMeasurementId, sensor->getValue());
 
 		//Temporario
 		String symbol = "C";
@@ -125,7 +124,7 @@ namespace ART
 		_espDevice->getDisplayDevice()->display.setTextColor(WHITE);
 		_espDevice->getDisplayDevice()->display.setCursor(x, y);
 		_espDevice->getDisplayDevice()->display.setTextWrap(false);
-		_espDevice->getDisplayDevice()->display.print(tempConverted, 1);
+		_espDevice->getDisplayDevice()->display.print(sensor->getValue(), 1);
 		_espDevice->getDisplayDevice()->display.println(symbol);
 	}
 }
