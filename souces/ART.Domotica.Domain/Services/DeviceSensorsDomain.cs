@@ -31,7 +31,7 @@
 
         #endregion Constructors
 
-        public async Task<DeviceSensors> SetReadIntervalInMilliSeconds(Guid deviceSensorsId, Guid deviceDatasheetId, int readIntervalInMilliSeconds)
+        public async Task<DeviceSensors> SetReadIntervalInMilliSeconds(Guid deviceSensorsId, Guid deviceDatasheetId, long readIntervalInMilliSeconds)
         {
             var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId, deviceDatasheetId);
 
@@ -47,7 +47,7 @@
             return entity;
         }
 
-        public async Task<DeviceSensors> SetPublishIntervalInMilliSeconds(Guid deviceSensorsId, Guid deviceDatasheetId, int publishIntervalInMilliSeconds)
+        public async Task<DeviceSensors> SetPublishIntervalInMilliSeconds(Guid deviceSensorsId, Guid deviceDatasheetId, long publishIntervalInMilliSeconds)
         {
             var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId, deviceDatasheetId);
 

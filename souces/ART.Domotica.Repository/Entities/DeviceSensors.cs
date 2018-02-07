@@ -24,12 +24,12 @@
             get; set;
         }
 
-        public int PublishIntervalInMilliSeconds
+        public long PublishIntervalInMilliSeconds
         {
             get; set;
         }
 
-        public int ReadIntervalInMilliSeconds
+        public long ReadIntervalInMilliSeconds
         {
             get; set;
         }

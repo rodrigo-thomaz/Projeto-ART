@@ -16,7 +16,7 @@
             get; set;
         }
 
-        public int IntervalInMilliSeconds
+        public long IntervalInMilliSeconds
         {
             get; set;
         }

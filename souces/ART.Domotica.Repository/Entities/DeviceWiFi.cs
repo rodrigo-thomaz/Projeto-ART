@@ -28,7 +28,7 @@
             get; set;
         }
 
-        public int PublishIntervalInMilliSeconds
+        public long PublishIntervalInMilliSeconds
         {
             get; set;
         }

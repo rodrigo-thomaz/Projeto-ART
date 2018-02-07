@@ -94,7 +94,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = new SetValueRequestIoTContract<int>(data.PublishIntervalInMilliSeconds);
+            var iotContract = new SetValueRequestIoTContract<long>(data.PublishIntervalInMilliSeconds);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceSensorsConstants.SetPublishIntervalInMilliSecondsIoTQueueName);
 
@@ -130,7 +130,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = new SetValueRequestIoTContract<int>(data.ReadIntervalInMilliSeconds);
+            var iotContract = new SetValueRequestIoTContract<long>(data.ReadIntervalInMilliSeconds);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceSensorsConstants.SetReadIntervalInMilliSecondsIoTQueueName);
 

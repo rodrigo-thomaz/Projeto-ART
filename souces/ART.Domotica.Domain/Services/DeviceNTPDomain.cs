@@ -58,7 +58,7 @@
             return entity;
         }
 
-        public async Task<DeviceNTP> SetUpdateIntervalInMilliSecond(Guid deviceNTPId, Guid deviceDatasheetId, int updateIntervalInMilliSecond)
+        public async Task<DeviceNTP> SetUpdateIntervalInMilliSecond(Guid deviceNTPId, Guid deviceDatasheetId, long updateIntervalInMilliSecond)
         {
             var entity = await _deviceNTPRepository.GetByKey(deviceNTPId, deviceDatasheetId);
 

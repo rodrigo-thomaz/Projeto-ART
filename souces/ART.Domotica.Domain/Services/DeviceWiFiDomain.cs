@@ -47,7 +47,7 @@
             return entity;
         }
 
-        public async Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, Guid deviceDatasheetId, int publishIntervalInMilliSeconds)
+        public async Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, Guid deviceDatasheetId, long publishIntervalInMilliSeconds)
         {
             var entity = await _deviceWiFiRepository.GetByKey(deviceWiFiId, deviceDatasheetId);
 

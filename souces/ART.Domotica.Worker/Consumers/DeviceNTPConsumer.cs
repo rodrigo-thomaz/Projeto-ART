@@ -123,7 +123,7 @@
             var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceNTPId, viewModel.DeviceDatasheetId);
 
             //Enviando para o Iot
-            var iotContract = new SetValueRequestIoTContract<int>(data.UpdateIntervalInMilliSecond);
+            var iotContract = new SetValueRequestIoTContract<long>(data.UpdateIntervalInMilliSecond);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceNTPConstants.SetUpdateIntervalInMilliSecondIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);

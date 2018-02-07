@@ -33,7 +33,7 @@
             get; set;
         }
 
-        public int UpdateIntervalInMilliSecond
+        public long UpdateIntervalInMilliSecond
         {
             get; set;
         }

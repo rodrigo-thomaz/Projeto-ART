@@ -1,12 +1,13 @@
 ﻿namespace ART.Domotica.Worker.AutoMapper
 {
+    using System.Linq;
+
     using ART.Domotica.Contract;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
     using ART.Domotica.Repository.Entities;
 
     using global::AutoMapper;
-    using System.Linq;
 
     public class DeviceInApplicationProfile : Profile
     {

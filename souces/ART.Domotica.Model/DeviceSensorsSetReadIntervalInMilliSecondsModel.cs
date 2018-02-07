@@ -16,7 +16,7 @@
             get; set;
         }
 
-        public int ReadIntervalInMilliSeconds
+        public long ReadIntervalInMilliSeconds
         {
             get; set;
         }

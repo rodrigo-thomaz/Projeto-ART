@@ -11,7 +11,7 @@
 
         Task<DeviceNTP> SetTimeZone(Guid deviceNTPId, Guid deviceDatasheetId, byte timeZoneId);
 
-        Task<DeviceNTP> SetUpdateIntervalInMilliSecond(Guid deviceNTPId, Guid deviceDatasheetId, int updateIntervalInMilliSecond);
+        Task<DeviceNTP> SetUpdateIntervalInMilliSecond(Guid deviceNTPId, Guid deviceDatasheetId, long updateIntervalInMilliSecond);
 
         #endregion Methods
     }
