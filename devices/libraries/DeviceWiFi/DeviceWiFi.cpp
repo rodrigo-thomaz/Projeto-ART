@@ -1036,12 +1036,17 @@ namespace ART
 	}
 
 	bool DeviceWiFi::onDeviceMQSubscription(char* topicKey, char* json)
-	{
-		/*if (strcmp(topicKey, DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB) == 0) {
+	{/*
+		if (strcmp(topicKey, DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB) == 0) {
 			setHostName(json);
+			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB) == 0) {
 			setPublishIntervalInMilliSeconds(json);
+			return true;
+		}
+		else {
+			return false;
 		}*/
 	}
 }
