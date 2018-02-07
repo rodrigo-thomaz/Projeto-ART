@@ -145,8 +145,8 @@ void loopInApplication()
   espDevice.getDeviceNTP()->update();
 
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
-  bool deviceSensorsRefreshed = deviceSensors->refresh();
-  displayTemperatureSensorManager.printUpdate(deviceSensorsRefreshed);
+  bool deviceSensorsReaded = deviceSensors->read();
+  displayTemperatureSensorManager.printUpdate(deviceSensorsReaded);
 
   // MQTT
   if(espDevice.getDeviceMQ()->connected()){

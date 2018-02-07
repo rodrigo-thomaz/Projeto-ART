@@ -55,7 +55,7 @@ namespace ART
 		bool								initialized();
 		void 								setSensorsByMQQTCallback(char* json);
 
-		bool 								refresh();
+		bool 								read();
 		bool 								publish();
 
 		ESPDevice *							getESPDevice();

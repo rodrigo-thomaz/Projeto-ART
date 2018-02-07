@@ -146,7 +146,7 @@ namespace ART
 		}
 	}
 
-	bool DeviceSensors::refresh()
+	bool DeviceSensors::read()
 	{
 		if (!initialized()) return false;
 
