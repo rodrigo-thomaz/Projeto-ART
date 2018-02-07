@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{a2623348-0630-41b4-85f0-19befabd93cf}</ItemsProjectGuid>
+    <ItemsProjectGuid>{df58ba50-4e2e-4283-b67b-b3c614cbd6bb}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -16,12 +16,12 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
 	<Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  	<Text Include="$(MSBuildThisFileDirectory)DisplayTemperatureSensorManager.h" />
+  	<Text Include="$(MSBuildThisFileDirectory)DisplayDeviceSensors.h" />
   </ItemGroup>
  <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DisplayTemperatureSensorManager.h" /> -->
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DisplayDeviceSensors.h" /> -->
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayTemperatureSensorManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayDeviceSensors.cpp" />
   </ItemGroup>
   </Project>

@@ -1,5 +1,5 @@
-#ifndef DisplayTemperatureSensorManager_h
-#define DisplayTemperatureSensorManager_h
+#ifndef DisplayDeviceSensors_h
+#define DisplayDeviceSensors_h
 
 #include "Arduino.h"
 #include "DisplayManager.h"
@@ -8,12 +8,12 @@
 
 using namespace ART;
 
-class DisplayTemperatureSensorManager
+class DisplayDeviceSensors
 {
 
 public:
-	DisplayTemperatureSensorManager(DisplayManager& displayManager, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
-	~DisplayTemperatureSensorManager();
+	DisplayDeviceSensors(DisplayManager& displayManager, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
+	~DisplayDeviceSensors();
 
 	void							printUpdate(bool on);
 	void							printSensors();

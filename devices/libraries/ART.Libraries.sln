@@ -29,8 +29,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayMQTTManager", "Displ
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayNTPManager", "DisplayNTPManager\DisplayNTPManager.vcxitems", "{13D2C506-07F1-4B26-98AF-C8CECF1792AB}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayTemperatureSensorManager", "DisplayTemperatureSensorManager\DisplayTemperatureSensorManager.vcxitems", "{A2623348-0630-41B4-85F0-19BEFABD93CF}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayWiFiManager", "DisplayWiFiManager\DisplayWiFiManager.vcxitems", "{0635AE6B-2E63-4DE0-98DD-FCA600E58C60}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adafruit_SSD1306", "Adafruit_SSD1306\Adafruit_SSD1306.vcxitems", "{31087439-64A1-4CBD-B6A4-DA31429C4511}"
@@ -65,40 +63,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurement", "UnitMeas
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorTrigger", "SensorTrigger\SensorTrigger.vcxitems", "{69FB1953-8F6C-4362-9DE2-9E8C6E32DFF2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceSensors", "DisplayDeviceSensors\DisplayDeviceSensors.vcxitems", "{DF58BA50-4E2E-4283-B67B-B3C614CBD6BB}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		DisplayWiFiManager\DisplayWiFiManager.vcxitems*{0635ae6b-2e63-4de0-98dd-fca600e58c60}*SharedItemsImports = 9
-		pubsubclient\pubsubclient.vcxitems*{0736728b-bef0-451f-baa6-91342bfe399d}*SharedItemsImports = 9
-		DeviceDebug\DeviceDebug.vcxitems*{0758ee44-cada-4660-a370-8f20ab3e4ee0}*SharedItemsImports = 9
-		DisplayNTPManager\DisplayNTPManager.vcxitems*{13d2c506-07f1-4b26-98af-c8cecf1792ab}*SharedItemsImports = 9
-		DeviceNTP\DeviceNTP.vcxitems*{16273ac7-f812-429d-b20a-402958d85b2d}*SharedItemsImports = 9
-		Ultrasonic\Ultrasonic.vcxitems*{1af0fdf4-8afa-4072-998f-08c6c17e113f}*SharedItemsImports = 9
-		DeviceBuzzer\DeviceBuzzer.vcxitems*{2ffe1ed8-8b20-462f-ac88-b3791a8ec914}*SharedItemsImports = 9
-		Adafruit_SSD1306\Adafruit_SSD1306.vcxitems*{31087439-64a1-4cbd-b6a4-da31429c4511}*SharedItemsImports = 9
-		SensorInDevice\SensorInDevice.vcxitems*{3db056e4-1850-498e-8679-905ae18dcb0c}*SharedItemsImports = 9
-		DeviceInApplication\DeviceInApplication.vcxitems*{4d6638de-1e08-4a58-aa7e-9763de25ad19}*SharedItemsImports = 9
-		DeviceBinary\DeviceBinary.vcxitems*{6319e07c-43bb-4422-9276-387aedd49435}*SharedItemsImports = 9
-		DeviceSensors\DeviceSensors.vcxitems*{64c662a2-4c50-42ec-94a2-d2b7980fea06}*SharedItemsImports = 9
-		Adafruit-GFX-Library\Adafruit-GFX-Library.vcxitems*{64dc3782-acc6-4ead-ae5c-5058244748c5}*SharedItemsImports = 9
-		SensorTrigger\SensorTrigger.vcxitems*{69fb1953-8f6c-4362-9de2-9e8c6e32dff2}*SharedItemsImports = 9
-		DeviceWiFi\DeviceWiFi.vcxitems*{6a5bf7ad-8d0c-4920-a000-cbe32c2c4035}*SharedItemsImports = 9
-		UnitMeasurement\UnitMeasurement.vcxitems*{6ae9bf75-c15b-4525-b398-7c5174126300}*SharedItemsImports = 9
-		SensorDatasheet\SensorDatasheet.vcxitems*{704d980a-58f1-4cc2-9b1f-6b47927f5018}*SharedItemsImports = 9
-		OneWire\OneWire.vcxitems*{7dc6ac62-aa6e-4cfa-8627-6f843f77badb}*SharedItemsImports = 9
-		ESPDevice\ESPDevice.vcxitems*{7f9385c1-9676-4ca2-b703-b960b4ad4268}*SharedItemsImports = 9
-		DallasTemperature\DallasTemperature.vcxitems*{83892c15-b1aa-4d4e-916f-850785d46041}*SharedItemsImports = 9
-		DisplayMQTTManager\DisplayMQTTManager.vcxitems*{895a67ba-6499-46a0-a687-08d015d91609}*SharedItemsImports = 9
-		DeviceMQ\DeviceMQ.vcxitems*{8ac6c4b2-f7ba-4571-a996-7887af8ef163}*SharedItemsImports = 9
-		DisplayManager\DisplayManager.vcxitems*{91703fbc-50c6-4142-a590-4274f7f650dc}*SharedItemsImports = 9
-		RemoteDebug\RemoteDebug.vcxitems*{9df484fc-c03f-4ca6-8fde-f0a0dbb6e932}*SharedItemsImports = 9
-		DisplayTemperatureSensorManager\DisplayTemperatureSensorManager.vcxitems*{a2623348-0630-41b4-85f0-19befabd93cf}*SharedItemsImports = 9
-		SensorTempDSFamily\SensorTempDSFamily.vcxitems*{a2e38722-5d06-4649-8481-4da48e41e970}*SharedItemsImports = 9
-		Sensor\Sensor.vcxitems*{af11e741-3f7b-4c79-b6a1-d4c7a650e40f}*SharedItemsImports = 9
-		EEPROMManager\EEPROMManager.vcxitems*{af493238-5f46-4f95-bc89-c2b33956a178}*SharedItemsImports = 9
-		SensorUnitMeasurementScale\SensorUnitMeasurementScale.vcxitems*{ce268af1-d789-4417-b194-b2606e2a45fe}*SharedItemsImports = 9
-		UnitMeasurementConverter\UnitMeasurementConverter.vcxitems*{e30bbaf9-343b-415d-8d29-72473dc00f08}*SharedItemsImports = 9
-		DisplayAccessManager\DisplayAccessManager.vcxitems*{f3854df9-425c-4755-9532-28946cb51bcb}*SharedItemsImports = 9
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
 		Release|x86 = Release|x86

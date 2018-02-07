@@ -11,14 +11,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayTemperatureSensorManager.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayDeviceSensors.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
-    <Text Include="$(MSBuildThisFileDirectory)DisplayTemperatureSensorManager.h">
+    <Text Include="$(MSBuildThisFileDirectory)DisplayDeviceSensors.h">
       <Filter>Header Files</Filter>
     </Text>
   </ItemGroup>

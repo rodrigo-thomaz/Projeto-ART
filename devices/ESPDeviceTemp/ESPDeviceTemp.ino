@@ -6,7 +6,7 @@
 #include "DisplayWiFiManager.h"
 #include "DisplayMQTTManager.h"
 #include "DisplayNTPManager.h"
-#include "DisplayTemperatureSensorManager.h"
+#include "DisplayDeviceSensors.h"
 #include "EEPROMManager.h"
 
 #include <ESP8266WiFi.h>
@@ -51,7 +51,7 @@ DisplayAccessManager displayAccessManager(displayManager);
 DisplayWiFiManager displayWiFiManager(displayManager, espDevice);
 DisplayMQTTManager displayMQTTManager(displayManager);
 DisplayNTPManager displayNTPManager(displayManager, espDevice);
-DisplayTemperatureSensorManager displayTemperatureSensorManager(displayManager, espDevice, unitMeasurementConverter);
+DisplayDeviceSensors displayDeviceSensors(displayManager, espDevice, unitMeasurementConverter);
 
 void setup() {
 
@@ -150,7 +150,7 @@ void loopInApplication()
 
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
   bool deviceSensorsReaded = deviceSensors->read();
-  displayTemperatureSensorManager.printUpdate(deviceSensorsReaded);
+  displayDeviceSensors.printUpdate(deviceSensorsReaded);
 
   // MQTT
   if(espDevice.getDeviceMQ()->connected()){
@@ -188,7 +188,7 @@ void loopMQQTConnected()
          
   if (deviceSensors->initialized()) {        
 
-    displayTemperatureSensorManager.printSensors();
+    displayDeviceSensors.printSensors();
 
     bool deviceSensorsPublished = deviceSensors->publish();
 

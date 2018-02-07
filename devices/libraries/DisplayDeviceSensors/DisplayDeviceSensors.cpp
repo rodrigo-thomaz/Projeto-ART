@@ -1,17 +1,17 @@
-#include "DisplayTemperatureSensorManager.h"
+#include "DisplayDeviceSensors.h"
 
-DisplayTemperatureSensorManager::DisplayTemperatureSensorManager(DisplayManager& displayManager, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter)
+DisplayDeviceSensors::DisplayDeviceSensors(DisplayManager& displayManager, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter)
 {
 	this->_displayManager = &displayManager;
 	this->_espDevice = &espDevice;
 	this->_unitMeasurementConverter = &unitMeasurementConverter;
 }
 
-DisplayTemperatureSensorManager::~DisplayTemperatureSensorManager()
+DisplayDeviceSensors::~DisplayDeviceSensors()
 {
 }
 
-void DisplayTemperatureSensorManager::printUpdate(bool on)
+void DisplayDeviceSensors::printUpdate(bool on)
 {
 	this->_displayManager->display.setFont();
 	this->_displayManager->display.setTextSize(1);
@@ -26,7 +26,7 @@ void DisplayTemperatureSensorManager::printUpdate(bool on)
 	this->_displayManager->display.println("S");
 }
 
-void DisplayTemperatureSensorManager::printSensors()
+void DisplayDeviceSensors::printSensors()
 {
 	// variáveis
 
@@ -51,7 +51,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	int screenWidth = screenX2 - screenX1;
 	int screenHeight = screenY2 - screenY1;
 
-	SensorInDevice* sensorsInDevice = _espDevice->getDeviceSensors()->getSensorsInDevice();	
+	SensorInDevice* sensorsInDevice = _espDevice->getDeviceSensors()->getSensorsInDevice();
 
 	int sensorsCount = sizeof(sensorsInDevice);
 
@@ -67,7 +67,7 @@ void DisplayTemperatureSensorManager::printSensors()
 	}
 }
 
-void DisplayTemperatureSensorManager::printBar(Sensor* sensor, int x, int y, int width, int height)
+void DisplayDeviceSensors::printBar(Sensor* sensor, int x, int y, int width, int height)
 {
 	int barMarginTop = 10;
 	int barMarginLeft = 5;
@@ -91,7 +91,7 @@ void DisplayTemperatureSensorManager::printBar(Sensor* sensor, int x, int y, int
 	this->printBarValue(sensor, barX1, barY1, barWidth, barHeight);
 }
 
-void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y, int width, int height)
+void DisplayDeviceSensors::printBarValue(Sensor* sensor, int x, int y, int width, int height)
 {
 	float chartLimiterMax = sensor->getSensorUnitMeasurementScale()->getChartLimiterMax();
 	float chartLimiterMin = sensor->getSensorUnitMeasurementScale()->getChartLimiterMin();
@@ -110,7 +110,7 @@ void DisplayTemperatureSensorManager::printBarValue(Sensor* sensor, int x, int y
 	this->_displayManager->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
 }
 
-void DisplayTemperatureSensorManager::printText(Sensor* sensor, int x, int y)
+void DisplayDeviceSensors::printText(Sensor* sensor, int x, int y)
 {
 	UnitMeasurementEnum unitMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId();
 
