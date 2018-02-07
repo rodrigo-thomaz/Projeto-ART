@@ -95,6 +95,7 @@ namespace ART
 		DisplayDeviceWiFiAccess::create(_displayDeviceWiFiAccess, this);
 		DisplayDeviceNTP::create(_displayDeviceNTP, this);
 		DisplayDeviceWiFi::create(_displayDeviceWiFi, this);
+		DisplayDeviceSensors::create(_displayDeviceSensors, this);
 	}
 
 	DisplayDevice::~DisplayDevice()
@@ -160,6 +161,11 @@ namespace ART
 	DisplayDeviceWiFi * DisplayDevice::getDisplayDeviceWiFi()
 	{
 		return _displayDeviceWiFi;
+	}
+
+	DisplayDeviceSensors * DisplayDevice::getDisplayDeviceSensors()
+	{
+		return _displayDeviceSensors;
 	}
 	
 }

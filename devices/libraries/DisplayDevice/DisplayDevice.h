@@ -6,6 +6,7 @@
 #include "DisplayDeviceWiFiAccess.h"
 #include "DisplayDeviceNTP.h"
 #include "DisplayDeviceWiFi.h"
+#include "DisplayDeviceSensors.h"
 
 #include "Arduino.h"
 #include "Adafruit_SSD1306.h"
@@ -33,6 +34,7 @@ namespace ART
 		DisplayDeviceWiFiAccess*				getDisplayDeviceWiFiAccess();
 		DisplayDeviceNTP*						getDisplayDeviceNTP();
 		DisplayDeviceWiFi*						getDisplayDeviceWiFi();
+		DisplayDeviceSensors*					getDisplayDeviceSensors();
 
 		Adafruit_SSD1306						display;
 
@@ -45,6 +47,7 @@ namespace ART
 		DisplayDeviceWiFiAccess *				_displayDeviceWiFiAccess;
 		DisplayDeviceNTP *						_displayDeviceNTP;
 		DisplayDeviceWiFi *						_displayDeviceWiFi;
+		DisplayDeviceSensors *					_displayDeviceSensors;
 
 	};
 }

@@ -1,8 +1,6 @@
 #include "ESPDevice.h"
 #include "EEPROMManager.h"
 
-#include "DisplayDeviceSensors.h"
-
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
 #include "ESP8266mDNS.h"
@@ -37,8 +35,6 @@ int configurationEEPROMAddr = 0;
 using namespace ART;
 
 ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
-
-DisplayDeviceSensors displayDeviceSensors(espDevice);
 
 void setup() {
 
@@ -130,7 +126,7 @@ void loopInApplication()
 
   DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
   bool deviceSensorsReaded = deviceSensors->read();
-  displayDeviceSensors.printUpdate(deviceSensorsReaded);
+  espDevice.getDisplayDevice()->getDisplayDeviceSensors()->printUpdate(deviceSensorsReaded);
 
   // MQTT
   if(espDevice.getDeviceMQ()->connected()){
@@ -168,7 +164,7 @@ void loopMQQTConnected()
          
   if (deviceSensors->initialized()) {        
 
-    displayDeviceSensors.printSensors();
+    espDevice.getDisplayDevice()->getDisplayDeviceSensors()->printSensors();
 
     bool deviceSensorsPublished = deviceSensors->publish();
 

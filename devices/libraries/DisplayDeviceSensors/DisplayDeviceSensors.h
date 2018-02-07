@@ -2,28 +2,28 @@
 #define DisplayDeviceSensors_h
 
 #include "Arduino.h"
-#include "../DisplayDevice/DisplayDevice.h"
-#include "../ESPDevice/ESPDevice.h"
-#include "../Sensor/Sensor.h"
 
-#include "../UnitMeasurement/UnitMeasurementEnum.h"
-#include "../UnitMeasurementConverter/UnitMeasurementConverter.h"
+#include "../Sensor/Sensor.h"
 
 namespace ART
 {
+	class DisplayDevice;
+
 	class DisplayDeviceSensors
 	{
 
 	public:
-		DisplayDeviceSensors(ESPDevice& espDevice);
+		DisplayDeviceSensors(DisplayDevice* displayDevice);
 		~DisplayDeviceSensors();
+
+		static void						create(DisplayDeviceSensors* (&displayDeviceSensors), DisplayDevice* displayDevice);
 
 		void							printUpdate(bool on);
 		void							printSensors();
 
 	private:
 
-		ESPDevice*  					_espDevice;
+		DisplayDevice *					_displayDevice;
 
 		void							printBar(Sensor* sensor, int x, int y, int width, int height);
 		void							printBarValue(Sensor* sensor, int x, int y, int width, int height);
