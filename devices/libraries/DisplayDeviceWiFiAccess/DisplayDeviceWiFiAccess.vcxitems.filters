@@ -11,14 +11,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayAccessManager.cpp">
+    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayDeviceWiFiAccess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
-    <Text Include="$(MSBuildThisFileDirectory)DisplayAccessManager.h">
+    <Text Include="$(MSBuildThisFileDirectory)DisplayDeviceWiFiAccess.h">
       <Filter>Header Files</Filter>
     </Text>
   </ItemGroup>

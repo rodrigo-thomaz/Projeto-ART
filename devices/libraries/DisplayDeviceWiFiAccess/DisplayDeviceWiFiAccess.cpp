@@ -1,11 +1,11 @@
-#include "DisplayAccessManager.h"
+#include "DisplayDeviceWiFiAccess.h"
 
-DisplayAccessManager::DisplayAccessManager(DisplayDevice& displayDevice)
+DisplayDeviceWiFiAccess::DisplayDeviceWiFiAccess(DisplayDevice& displayDevice)
 {
 	this->_displayDevice = &displayDevice;
 }
 
-void DisplayAccessManager::updatePin(char* json)
+void DisplayDeviceWiFiAccess::updatePin(char* json)
 {
 	Serial.println("******************** Update PIN ********************");
 
@@ -29,7 +29,7 @@ void DisplayAccessManager::updatePin(char* json)
 	this->_nextFireTimeInSeconds = trunc(nextFireTimeInSeconds);
 }
 
-void DisplayAccessManager::loop()
+void DisplayDeviceWiFiAccess::loop()
 {
 	uint64_t now = millis();
 

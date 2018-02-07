@@ -1,5 +1,5 @@
-#ifndef DisplayAccessManager_h
-#define DisplayAccessManager_h
+#ifndef DisplayDeviceWiFiAccess_h
+#define DisplayDeviceWiFiAccess_h
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
@@ -7,11 +7,11 @@
 
 #define MESSAGE_INTERVAL 1000
 
-class DisplayAccessManager
+class DisplayDeviceWiFiAccess
 {
 public:
 
-	DisplayAccessManager(DisplayDevice& displayDevice);
+	DisplayDeviceWiFiAccess(DisplayDevice& displayDevice);
 
 	void								updatePin(char* json);
 	void								loop();
