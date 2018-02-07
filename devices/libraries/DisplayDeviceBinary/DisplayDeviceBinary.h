@@ -10,10 +10,10 @@ namespace ART
 	class DisplayDeviceBinary
 	{
 	public:
-		DisplayDeviceBinary(DisplayDevice* displayDevice);
+		DisplayDeviceBinary(DisplayDevice& displayDevice);
 		~DisplayDeviceBinary();
 
-		static void					create(DisplayDeviceBinary* (&displayDeviceBinary), DisplayDevice* displayDevice);
+		static void					create(DisplayDeviceBinary* (&displayDeviceBinary), DisplayDevice& displayDevice);
 
 	private:
 
