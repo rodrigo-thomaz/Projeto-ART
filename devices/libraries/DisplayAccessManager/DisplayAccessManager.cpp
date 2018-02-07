@@ -1,8 +1,8 @@
 #include "DisplayAccessManager.h"
 
-DisplayAccessManager::DisplayAccessManager(DisplayManager& displayManager)
+DisplayAccessManager::DisplayAccessManager(DisplayDevice& displayDevice)
 {
-	this->_displayManager = &displayManager;
+	this->_displayDevice = &displayDevice;
 }
 
 void DisplayAccessManager::updatePin(char* json)
@@ -35,33 +35,33 @@ void DisplayAccessManager::loop()
 
 	if (now - _messageTimestamp > MESSAGE_INTERVAL) {
 
-		this->_displayManager->display.clearDisplay();
-		this->_displayManager->display.setTextSize(2);
-		this->_displayManager->display.setTextColor(WHITE);
-		this->_displayManager->display.setCursor(0, 1);
-		this->_displayManager->display.println("ART Device");
+		this->_displayDevice->display.clearDisplay();
+		this->_displayDevice->display.setTextSize(2);
+		this->_displayDevice->display.setTextColor(WHITE);
+		this->_displayDevice->display.setCursor(0, 1);
+		this->_displayDevice->display.println("ART Device");
 
 		if (this->_nextFireTimeInSeconds >= 0) {
-			this->_displayManager->display.setCursor(0, 16);
-			this->_displayManager->display.print("PIN ");
-			this->_displayManager->display.println(_pin);
-			this->_displayManager->display.print(this->_nextFireTimeInSeconds);
-			this->_displayManager->display.println(" s");
+			this->_displayDevice->display.setCursor(0, 16);
+			this->_displayDevice->display.print("PIN ");
+			this->_displayDevice->display.println(_pin);
+			this->_displayDevice->display.print(this->_nextFireTimeInSeconds);
+			this->_displayDevice->display.println(" s");
 			if (this->_nextFireTimeInSeconds > 0) {
-				this->_displayManager->display.println("restantes");
+				this->_displayDevice->display.println("restantes");
 			}
 			else {
-				this->_displayManager->display.println("restante");
+				this->_displayDevice->display.println("restante");
 			}
 			this->_nextFireTimeInSeconds--;
 		}
 		else {
-			this->_displayManager->display.setCursor(0, 22);
-			this->_displayManager->display.println("aguardando");
-			this->_displayManager->display.println("pin...");
+			this->_displayDevice->display.setCursor(0, 22);
+			this->_displayDevice->display.println("aguardando");
+			this->_displayDevice->display.println("pin...");
 		}
 
-		this->_displayManager->display.display();
+		this->_displayDevice->display.display();
 
 		_messageTimestamp = now;
 	}

@@ -1,4 +1,4 @@
-#include "DisplayManager.h"
+#include "DisplayDevice.h"
 #include "Arduino.h"
 #include "SPI.h"
 #include "Wire.h"
@@ -82,12 +82,12 @@ static const unsigned char PROGMEM logo16_glcd_bmp[] =
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
 #endif
 
-DisplayManager::DisplayManager()
+DisplayDevice::DisplayDevice()
 {
 
 }
 
-void DisplayManager::begin()
+void DisplayDevice::begin()
 {
 	// Display
 	// by default, we'll generate the high voltage from the 3.3v line internally! (neat!)

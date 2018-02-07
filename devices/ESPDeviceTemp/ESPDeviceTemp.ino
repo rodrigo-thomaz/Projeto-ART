@@ -1,6 +1,6 @@
 #include "ESPDevice.h"
 #include "UnitMeasurementConverter.h"
-#include "DisplayManager.h"
+#include "DisplayDevice.h"
 #include "DeviceBuzzer.h"
 #include "DisplayAccessManager.h"
 #include "DisplayDeviceWiFi.h"
@@ -46,12 +46,12 @@ ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
 UnitMeasurementConverter unitMeasurementConverter;
 
-DisplayManager displayManager;
-DisplayAccessManager displayAccessManager(displayManager);
-DisplayDeviceWiFi displayDeviceWiFi(displayManager, espDevice);
-DisplayDeviceMQ displayDeviceMQ(displayManager);
-DisplayDeviceNTP displayDeviceNTP(displayManager, espDevice);
-DisplayDeviceSensors displayDeviceSensors(displayManager, espDevice, unitMeasurementConverter);
+DisplayDevice displayDevice;
+DisplayAccessManager displayAccessManager(displayDevice);
+DisplayDeviceWiFi displayDeviceWiFi(displayDevice, espDevice);
+DisplayDeviceMQ displayDeviceMQ(displayDevice);
+DisplayDeviceNTP displayDeviceNTP(displayDevice, espDevice);
+DisplayDeviceSensors displayDeviceSensors(displayDevice, espDevice, unitMeasurementConverter);
 
 void setup() {
 
@@ -63,16 +63,16 @@ void setup() {
   pinMode(D4, INPUT);
   pinMode(D5, INPUT);
 
-  displayManager.begin();
+  displayDevice.begin();
 
   Serial.println("Iniciando...");
 
   // text display tests
-  displayManager.display.clearDisplay();
-  displayManager.display.setTextSize(1);
-  displayManager.display.setTextColor(WHITE);
-  displayManager.display.setCursor(0, 0);
-  displayManager.display.display();
+  displayDevice.display.clearDisplay();
+  displayDevice.display.setTextSize(1);
+  displayDevice.display.setTextColor(WHITE);
+  displayDevice.display.setCursor(0, 0);
+  displayDevice.display.display();
 
   initConfiguration();
 
@@ -144,7 +144,7 @@ void loop() {
 
 void loopInApplication()
 {
-  displayManager.display.clearDisplay();
+  displayDevice.display.clearDisplay();
 
   espDevice.getDeviceNTP()->update();
 
@@ -160,7 +160,7 @@ void loopInApplication()
   // Wifi
   displayDeviceWiFi.printSignal();
   
-  displayManager.display.display();
+  displayDevice.display.display();
 }
 
 void loopMQQTConnected()

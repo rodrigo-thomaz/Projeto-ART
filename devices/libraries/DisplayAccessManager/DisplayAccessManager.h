@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
-#include "DisplayManager.h"
+#include "DisplayDevice.h"
 
 #define MESSAGE_INTERVAL 1000
 
@@ -11,14 +11,14 @@ class DisplayAccessManager
 {
 public:
 
-	DisplayAccessManager(DisplayManager& displayManager);
+	DisplayAccessManager(DisplayDevice& displayDevice);
 
 	void								updatePin(char* json);
 	void								loop();
 
 private:
 
-	DisplayManager * _displayManager;
+	DisplayDevice * _displayDevice;
 
 	String 								_pin;
 	int 								_nextFireTimeInSeconds = -1;

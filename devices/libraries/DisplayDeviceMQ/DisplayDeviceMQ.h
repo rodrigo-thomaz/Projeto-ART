@@ -2,12 +2,12 @@
 #define DisplayDeviceMQ_h
 
 #include "Arduino.h"
-#include "DisplayManager.h"
+#include "DisplayDevice.h"
 
 class DisplayDeviceMQ
 {
 public:
-	DisplayDeviceMQ(DisplayManager& displayManager);
+	DisplayDeviceMQ(DisplayDevice& displayDevice);
 	~DisplayDeviceMQ();
 
 	void					printConnected();
@@ -16,7 +16,7 @@ public:
 
 private:
 
-	DisplayManager * _displayManager;
+	DisplayDevice * _displayDevice;
 
 	int			         	_x;
 	int			         	_y;

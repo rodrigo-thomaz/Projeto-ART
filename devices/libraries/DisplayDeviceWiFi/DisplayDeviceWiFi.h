@@ -2,7 +2,7 @@
 #define DisplayDeviceWiFi_h
 
 #include "Arduino.h"
-#include "DisplayManager.h"
+#include "DisplayDevice.h"
 #include "ESPDevice.h"
 
 #include "Fonts/FreeSans9pt7b.h"
@@ -13,14 +13,14 @@ using namespace ART;
 class DisplayDeviceWiFi
 {
 public:
-	DisplayDeviceWiFi(DisplayManager& displayManager, ESPDevice& espDevice);
+	DisplayDeviceWiFi(DisplayDevice& displayDevice, ESPDevice& espDevice);
 	~DisplayDeviceWiFi();
 
 	void 															printSignal();
 
 private:
 
-	DisplayManager * _displayManager;
+	DisplayDevice * _displayDevice;
 	ESPDevice*          											_espDevice;
 
 	bool 															_firstTimecaptivePortalCallback = true;

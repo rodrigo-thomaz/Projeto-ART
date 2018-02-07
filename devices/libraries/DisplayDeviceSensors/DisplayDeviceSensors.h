@@ -2,7 +2,7 @@
 #define DisplayDeviceSensors_h
 
 #include "Arduino.h"
-#include "DisplayManager.h"
+#include "DisplayDevice.h"
 #include "ESPDevice.h"
 #include "UnitMeasurementConverter.h"
 
@@ -12,7 +12,7 @@ class DisplayDeviceSensors
 {
 
 public:
-	DisplayDeviceSensors(DisplayManager& displayManager, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
+	DisplayDeviceSensors(DisplayDevice& displayDevice, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
 	~DisplayDeviceSensors();
 
 	void							printUpdate(bool on);
@@ -20,7 +20,7 @@ public:
 
 private:
 
-	DisplayManager * _displayManager;
+	DisplayDevice * _displayDevice;
 	ESPDevice*  					_espDevice;
 	UnitMeasurementConverter*  		_unitMeasurementConverter;
 

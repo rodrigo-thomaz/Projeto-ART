@@ -2,7 +2,7 @@
 #define DisplayDeviceNTP_h
 
 #include "Arduino.h"
-#include "DisplayManager.h"
+#include "DisplayDevice.h"
 #include "ESPDevice.h"
 
 using namespace ART;
@@ -10,12 +10,12 @@ using namespace ART;
 class DisplayDeviceNTP
 {
 public:
-	DisplayDeviceNTP(DisplayManager& displayManager, ESPDevice& espDevice);
+	DisplayDeviceNTP(DisplayDevice& displayDevice, ESPDevice& espDevice);
 	~DisplayDeviceNTP();
 
 private:
 
-	DisplayManager * _displayManager;
+	DisplayDevice * _displayDevice;
 	ESPDevice*          							_espDevice;
 
 	void											printTime();

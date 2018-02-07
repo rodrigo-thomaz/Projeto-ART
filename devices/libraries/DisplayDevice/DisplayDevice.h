@@ -1,13 +1,13 @@
-#ifndef DisplayManager_h
-#define DisplayManager_h
+#ifndef DisplayDevice_h
+#define DisplayDevice_h
 
 #include "Arduino.h"
 #include "Adafruit_SSD1306.h"
 
-class DisplayManager
+class DisplayDevice
 {
 public:
-	DisplayManager();
+	DisplayDevice();
 	void begin();
 	Adafruit_SSD1306 display;
 private:

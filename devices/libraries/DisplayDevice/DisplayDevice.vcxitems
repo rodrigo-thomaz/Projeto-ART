@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{91703fbc-50c6-4142-a590-4274f7f650dc}</ItemsProjectGuid>
+    <ItemsProjectGuid>{a677fce0-6a6e-43b2-abe3-4fef00f59f5d}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -16,12 +16,12 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
 	<Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  	<Text Include="$(MSBuildThisFileDirectory)DisplayManager.h" />
+  	<Text Include="$(MSBuildThisFileDirectory)DisplayDevice.h" />
   </ItemGroup>
  <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DisplayManager.h" /> -->
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DisplayDevice.h" /> -->
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayDevice.cpp" />
   </ItemGroup>
   </Project>
