@@ -48,8 +48,6 @@ void setup() {
 
   Serial.println("Iniciando...");
 
-  espDevice.getDisplayDevice()->begin();   
-
   initConfiguration();
 
   espDevice.begin();  

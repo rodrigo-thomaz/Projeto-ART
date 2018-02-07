@@ -37,6 +37,7 @@ namespace ART
 		delete (_deviceBinary);
 		delete (_deviceBuzzer);
 		delete (_deviceSensors);
+		delete (_displayDevice);
 	}
 
 	void ESPDevice::begin()
@@ -47,6 +48,7 @@ namespace ART
 		_deviceMQ->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
 
+		_displayDevice->begin();
 		_deviceInApplication->begin();
 		_deviceMQ->begin();
 		_deviceWiFi->begin();
