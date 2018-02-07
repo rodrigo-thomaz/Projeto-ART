@@ -1,8 +1,8 @@
-#include "DisplayNTPManager.h"
+#include "DisplayDeviceNTP.h"
 
 using namespace ART;
 
-DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, ESPDevice& espDevice)
+DisplayDeviceNTP::DisplayDeviceNTP(DisplayManager& displayManager, ESPDevice& espDevice)
 {
 	this->_displayManager = &displayManager;
 	this->_espDevice = &espDevice;
@@ -11,11 +11,11 @@ DisplayNTPManager::DisplayNTPManager(DisplayManager& displayManager, ESPDevice& 
 	_espDevice->getDeviceNTP()->setUpdateCallback(this->_updateCallback);
 }
 
-DisplayNTPManager::~DisplayNTPManager()
+DisplayDeviceNTP::~DisplayDeviceNTP()
 {
 }
 
-void DisplayNTPManager::updateCallback(bool update, bool forceUpdate)
+void DisplayDeviceNTP::updateCallback(bool update, bool forceUpdate)
 {
 	if (update) {
 		this->printTime();
@@ -23,7 +23,7 @@ void DisplayNTPManager::updateCallback(bool update, bool forceUpdate)
 	}
 }
 
-void DisplayNTPManager::printTime()
+void DisplayDeviceNTP::printTime()
 {
 	this->_displayManager->display.setFont();
 	this->_displayManager->display.setTextSize(2);
@@ -33,7 +33,7 @@ void DisplayNTPManager::printTime()
 	this->_displayManager->display.println(formattedTime);
 }
 
-void DisplayNTPManager::printUpdate(bool on)
+void DisplayDeviceNTP::printUpdate(bool on)
 {
 	this->_displayManager->display.setFont();
 	this->_displayManager->display.setTextSize(1);

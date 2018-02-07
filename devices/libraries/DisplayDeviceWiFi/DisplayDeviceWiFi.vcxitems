@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{13d2c506-07f1-4b26-98af-c8cecf1792ab}</ItemsProjectGuid>
+    <ItemsProjectGuid>{6cb89044-7c53-43e0-b28a-37e377fdf00d}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -16,12 +16,12 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
 	<Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  	<Text Include="$(MSBuildThisFileDirectory)DisplayNTPManager.h" />
+  	<Text Include="$(MSBuildThisFileDirectory)DisplayDeviceWiFi.h" />
   </ItemGroup>
  <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DisplayNTPManager.h" /> -->
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DisplayDeviceWiFi.h" /> -->
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayNTPManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayDeviceWiFi.cpp" />
   </ItemGroup>
   </Project>

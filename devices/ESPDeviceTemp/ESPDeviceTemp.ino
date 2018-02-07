@@ -3,9 +3,9 @@
 #include "DisplayManager.h"
 #include "DeviceBuzzer.h"
 #include "DisplayAccessManager.h"
-#include "DisplayWiFiManager.h"
+#include "DisplayDeviceWiFi.h"
 #include "DisplayDeviceMQ.h"
-#include "DisplayNTPManager.h"
+#include "DisplayDeviceNTP.h"
 #include "DisplayDeviceSensors.h"
 #include "EEPROMManager.h"
 
@@ -48,9 +48,9 @@ UnitMeasurementConverter unitMeasurementConverter;
 
 DisplayManager displayManager;
 DisplayAccessManager displayAccessManager(displayManager);
-DisplayWiFiManager displayWiFiManager(displayManager, espDevice);
+DisplayDeviceWiFi displayDeviceWiFi(displayManager, espDevice);
 DisplayDeviceMQ displayDeviceMQ(displayManager);
-DisplayNTPManager displayNTPManager(displayManager, espDevice);
+DisplayDeviceNTP displayDeviceNTP(displayManager, espDevice);
 DisplayDeviceSensors displayDeviceSensors(displayManager, espDevice, unitMeasurementConverter);
 
 void setup() {
@@ -158,7 +158,7 @@ void loopInApplication()
   }
 
   // Wifi
-  displayWiFiManager.printSignal();
+  displayDeviceWiFi.printSignal();
   
   displayManager.display.display();
 }

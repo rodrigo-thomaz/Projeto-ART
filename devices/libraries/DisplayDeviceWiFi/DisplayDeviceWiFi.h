@@ -1,5 +1,5 @@
-#ifndef DisplayWiFiManager_h
-#define DisplayWiFiManager_h
+#ifndef DisplayDeviceWiFi_h
+#define DisplayDeviceWiFi_h
 
 #include "Arduino.h"
 #include "DisplayManager.h"
@@ -10,11 +10,11 @@
 
 using namespace ART;
 
-class DisplayWiFiManager
+class DisplayDeviceWiFi
 {
 public:
-	DisplayWiFiManager(DisplayManager& displayManager, ESPDevice& espDevice);
-	~DisplayWiFiManager();
+	DisplayDeviceWiFi(DisplayManager& displayManager, ESPDevice& espDevice);
+	~DisplayDeviceWiFi();
 
 	void 															printSignal();
 

@@ -25,10 +25,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayAccessManager", "Dis
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayManager", "DisplayManager\DisplayManager.vcxitems", "{91703FBC-50C6-4142-A590-4274F7F650DC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayNTPManager", "DisplayNTPManager\DisplayNTPManager.vcxitems", "{13D2C506-07F1-4B26-98AF-C8CECF1792AB}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayWiFiManager", "DisplayWiFiManager\DisplayWiFiManager.vcxitems", "{0635AE6B-2E63-4DE0-98DD-FCA600E58C60}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adafruit_SSD1306", "Adafruit_SSD1306\Adafruit_SSD1306.vcxitems", "{31087439-64A1-4CBD-B6A4-DA31429C4511}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adafruit-GFX-Library", "Adafruit-GFX-Library\Adafruit-GFX-Library.vcxitems", "{64DC3782-ACC6-4EAD-AE5C-5058244748C5}"
@@ -64,6 +60,12 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceSensors", "DisplayDeviceSensors\DisplayDeviceSensors.vcxitems", "{DF58BA50-4E2E-4283-B67B-B3C614CBD6BB}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceMQ", "DisplayDeviceMQ\DisplayDeviceMQ.vcxitems", "{51C2E3EE-A0BC-41C3-8032-FC3D2A9C9E5F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceNTP", "DisplayDeviceNTP\DisplayDeviceNTP.vcxitems", "{348BA743-B5BF-49D1-9E17-A6CBAE1E9F27}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceWiFi", "DisplayDeviceWiFi\DisplayDeviceWiFi.vcxitems", "{6CB89044-7C53-43E0-B28A-37E377FDF00D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceBinary", "DisplayDeviceBinary\DisplayDeviceBinary.vcxitems", "{B7D70C4E-338B-47B8-AE2F-AB576DA682A1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

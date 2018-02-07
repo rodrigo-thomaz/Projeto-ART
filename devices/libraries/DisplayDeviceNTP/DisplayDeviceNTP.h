@@ -1,5 +1,5 @@
-#ifndef DisplayNTPManager_h
-#define DisplayNTPManager_h
+#ifndef DisplayDeviceNTP_h
+#define DisplayDeviceNTP_h
 
 #include "Arduino.h"
 #include "DisplayManager.h"
@@ -7,11 +7,11 @@
 
 using namespace ART;
 
-class DisplayNTPManager
+class DisplayDeviceNTP
 {
 public:
-	DisplayNTPManager(DisplayManager& displayManager, ESPDevice& espDevice);
-	~DisplayNTPManager();
+	DisplayDeviceNTP(DisplayManager& displayManager, ESPDevice& espDevice);
+	~DisplayDeviceNTP();
 
 private:
 
