@@ -93,24 +93,24 @@ namespace ART
 		uint64_t							_publishIntervalTimestamp;
 		long								_publishIntervalInMilliSeconds;
 
-		void 								setLabel(char* json);
+		void 								setLabel(const char* json);
 
-		void 								setDatasheetUnitMeasurementScale(char* json);
-		void 								setResolution(char* json);
+		void 								setDatasheetUnitMeasurementScale(const char* json);
+		void 								setResolution(const char* json);
 
-		void 								setOrdination(char* json);
+		void 								setOrdination(const char* json);
 
-		void 								insertTrigger(char* json);
-		void 								deleteTrigger(char* json);
-		void 								setTriggerOn(char* json);
-		void 								setBuzzerOn(char* json);
-		void 								setTriggerValue(char* json);
+		void 								insertTrigger(const char* json);
+		void 								deleteTrigger(const char* json);
+		void 								setTriggerOn(const char* json);
+		void 								setBuzzerOn(const char* json);
+		void 								setTriggerValue(const char* json);
 
-		void 								setRange(char* json);
-		void 								setChartLimiter(char* json);
+		void 								setRange(const char* json);
+		void 								setChartLimiter(const char* json);
 
-		void								setReadIntervalInMilliSeconds(char* json);
-		void								setPublishIntervalInMilliSeconds(char* json);
+		void								setReadIntervalInMilliSeconds(const char* json);
+		void								setPublishIntervalInMilliSeconds(const char* json);
 
 		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDeviceInApplication();

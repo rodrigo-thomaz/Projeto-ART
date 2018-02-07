@@ -243,7 +243,7 @@ namespace ART
 		}
 	}
 
-	void DeviceSensors::setLabel(char* json)
+	void DeviceSensors::setLabel(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -265,7 +265,7 @@ namespace ART
 		Serial.println(label);
 	}
 
-	void DeviceSensors::setDatasheetUnitMeasurementScale(char* json)
+	void DeviceSensors::setDatasheetUnitMeasurementScale(const char* json)
 	{
 		Serial.println("[DeviceSensors] setUnitOfMeasurement");
 
@@ -285,7 +285,7 @@ namespace ART
 		sensorUnitMeasurementScale->setUnitMeasurementId(unitMeasurementId);		
 	}
 
-	void DeviceSensors::setResolution(char* json)
+	void DeviceSensors::setResolution(const char* json)
 	{
 		Serial.println("[DeviceSensors] setResolution");
 		Serial.println(json);
@@ -306,7 +306,7 @@ namespace ART
 		_dallas.setResolution(sensor->getDeviceAddress(), value);		
 	}
 
-	void DeviceSensors::setOrdination(char * json)
+	void DeviceSensors::setOrdination(const char * json)
 	{
 		Serial.print("[DeviceSensors::setOrdination] ");
 
@@ -351,7 +351,7 @@ namespace ART
 		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
 	}
 
-	void DeviceSensors::insertTrigger(char * json)
+	void DeviceSensors::insertTrigger(const char * json)
 	{
 		Serial.println("[DeviceSensors::insertTrigger] ");
 
@@ -367,7 +367,7 @@ namespace ART
 		sensor->insertTrigger(root);
 	}
 
-	void DeviceSensors::deleteTrigger(char * json)
+	void DeviceSensors::deleteTrigger(const char * json)
 	{
 		Serial.println("[DeviceSensors::deleteTrigger] ");
 
@@ -386,7 +386,7 @@ namespace ART
 		sensor->deleteTrigger(sensorTriggerId);
 	}
 
-	void DeviceSensors::setTriggerOn(char* json)
+	void DeviceSensors::setTriggerOn(const char* json)
 	{
 		Serial.println("[DeviceSensors::setTriggerOn] ");
 
@@ -408,7 +408,7 @@ namespace ART
 		sensorTrigger.setTriggerOn(triggerOn);
 	}
 
-	void DeviceSensors::setBuzzerOn(char* json)
+	void DeviceSensors::setBuzzerOn(const char* json)
 	{
 		Serial.print("[DeviceSensors::setBuzzerOn] ");
 
@@ -430,7 +430,7 @@ namespace ART
 		sensorTrigger.setBuzzerOn(buzzerOn);
 	}
 
-	void DeviceSensors::setTriggerValue(char* json)
+	void DeviceSensors::setTriggerValue(const char* json)
 	{
 		Serial.print("[DeviceSensors::setTriggerValue] ");
 
@@ -456,7 +456,7 @@ namespace ART
 			sensorTrigger.setMin(triggerValue);
 	}	
 
-	void DeviceSensors::setRange(char* json)
+	void DeviceSensors::setRange(const char* json)
 	{
 		Serial.print("[DeviceSensors::setRange] ");
 
@@ -479,7 +479,7 @@ namespace ART
 			sensor->getSensorUnitMeasurementScale()->setRangeMin(chartLimiterCelsius);
 	}
 
-	void DeviceSensors::setChartLimiter(char* json)
+	void DeviceSensors::setChartLimiter(const char* json)
 	{
 		Serial.print("[DeviceSensors::setChartLimiter] ");
 
@@ -552,7 +552,7 @@ namespace ART
 		return _publishIntervalInMilliSeconds;
 	}
 
-	void DeviceSensors::setPublishIntervalInMilliSeconds(char* json)
+	void DeviceSensors::setPublishIntervalInMilliSeconds(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -568,7 +568,7 @@ namespace ART
 		return _readIntervalInMilliSeconds;
 	}
 
-	void DeviceSensors::setReadIntervalInMilliSeconds(char* json)
+	void DeviceSensors::setReadIntervalInMilliSeconds(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
