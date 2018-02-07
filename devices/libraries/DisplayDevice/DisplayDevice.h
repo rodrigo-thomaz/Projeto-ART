@@ -4,14 +4,17 @@
 #include "Arduino.h"
 #include "Adafruit_SSD1306.h"
 
-class DisplayDevice
+namespace ART
 {
-public:
-	DisplayDevice();
-	void begin();
-	Adafruit_SSD1306 display;
-private:
+	class DisplayDevice
+	{
+	public:
+		DisplayDevice();
+		void begin();
+		Adafruit_SSD1306 display;
+	private:
 
-};
+	};
+}
 
 #endif

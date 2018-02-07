@@ -6,27 +6,28 @@
 #include "ESPDevice.h"
 #include "UnitMeasurementConverter.h"
 
-using namespace ART;
-
-class DisplayDeviceSensors
+namespace ART
 {
+	class DisplayDeviceSensors
+	{
 
-public:
-	DisplayDeviceSensors(DisplayDevice& displayDevice, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
-	~DisplayDeviceSensors();
+	public:
+		DisplayDeviceSensors(DisplayDevice& displayDevice, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
+		~DisplayDeviceSensors();
 
-	void							printUpdate(bool on);
-	void							printSensors();
+		void							printUpdate(bool on);
+		void							printSensors();
 
-private:
+	private:
 
-	DisplayDevice * _displayDevice;
-	ESPDevice*  					_espDevice;
-	UnitMeasurementConverter*  		_unitMeasurementConverter;
+		DisplayDevice * _displayDevice;
+		ESPDevice*  					_espDevice;
+		UnitMeasurementConverter*  		_unitMeasurementConverter;
 
-	void							printBar(Sensor* sensor, int x, int y, int width, int height);
-	void							printBarValue(Sensor* sensor, int x, int y, int width, int height);
-	void							printText(Sensor* sensor, int x, int y);
-};
+		void							printBar(Sensor* sensor, int x, int y, int width, int height);
+		void							printBarValue(Sensor* sensor, int x, int y, int width, int height);
+		void							printText(Sensor* sensor, int x, int y);
+	};
+}
 
 #endif

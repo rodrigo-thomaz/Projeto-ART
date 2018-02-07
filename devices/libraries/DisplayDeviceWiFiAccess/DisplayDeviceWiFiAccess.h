@@ -7,23 +7,26 @@
 
 #define MESSAGE_INTERVAL 1000
 
-class DisplayDeviceWiFiAccess
+namespace ART
 {
-public:
+	class DisplayDeviceWiFiAccess
+	{
+	public:
 
-	DisplayDeviceWiFiAccess(DisplayDevice& displayDevice);
+		DisplayDeviceWiFiAccess(DisplayDevice& displayDevice);
 
-	void								updatePin(char* json);
-	void								loop();
+		void								updatePin(char* json);
+		void								loop();
 
-private:
+	private:
 
-	DisplayDevice * _displayDevice;
+		DisplayDevice * _displayDevice;
 
-	String 								_pin;
-	int 								_nextFireTimeInSeconds = -1;
+		String 								_pin;
+		int 								_nextFireTimeInSeconds = -1;
 
-	uint64_t 							_messageTimestamp = 0;
-};
+		uint64_t 							_messageTimestamp = 0;
+	};
+}
 
 #endif

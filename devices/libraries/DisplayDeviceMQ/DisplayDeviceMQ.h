@@ -4,23 +4,26 @@
 #include "Arduino.h"
 #include "DisplayDevice.h"
 
-class DisplayDeviceMQ
+namespace ART
 {
-public:
-	DisplayDeviceMQ(DisplayDevice& displayDevice);
-	~DisplayDeviceMQ();
+	class DisplayDeviceMQ
+	{
+	public:
+		DisplayDeviceMQ(DisplayDevice& displayDevice);
+		~DisplayDeviceMQ();
 
-	void					printConnected();
-	void					printSent(bool on);
-	void					printReceived(bool on);
+		void					printConnected();
+		void					printSent(bool on);
+		void					printReceived(bool on);
 
-private:
+	private:
 
-	DisplayDevice * _displayDevice;
+		DisplayDevice * _displayDevice;
 
-	int			         	_x;
-	int			         	_y;
+		int			         	_x;
+		int			         	_y;
 
-};
+	};
+}
 
 #endif

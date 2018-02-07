@@ -4,17 +4,20 @@
 #include "Arduino.h"
 #include "DisplayDevice.h"
 
-class DisplayDeviceBinary
+namespace ART
 {
-public:
-	DisplayDeviceBinary(DisplayDevice& displayDevice);
-	~DisplayDeviceBinary();
+	class DisplayDeviceBinary
+	{
+	public:
+		DisplayDeviceBinary(DisplayDevice& displayDevice);
+		~DisplayDeviceBinary();
 
 
-private:
+	private:
 
-	DisplayDevice * _displayDevice;
+		DisplayDevice * _displayDevice;
 
-};
+	};
+}
 
 #endif

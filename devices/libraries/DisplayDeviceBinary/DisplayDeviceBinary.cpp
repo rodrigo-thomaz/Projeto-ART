@@ -1,11 +1,13 @@
 #include "DisplayDeviceBinary.h"
 
-DisplayDeviceBinary::DisplayDeviceBinary(DisplayDevice& displayDevice)
+namespace ART
 {
-	this->_displayDevice = &displayDevice;
-}
+	DisplayDeviceBinary::DisplayDeviceBinary(DisplayDevice& displayDevice)
+	{
+		this->_displayDevice = &displayDevice;
+	}
 
-DisplayDeviceBinary::~DisplayDeviceBinary()
-{
+	DisplayDeviceBinary::~DisplayDeviceBinary()
+	{
+	}
 }
-

@@ -82,26 +82,29 @@ static const unsigned char PROGMEM logo16_glcd_bmp[] =
 #error("Height incorrect, please fix Adafruit_SSD1306.h!");
 #endif
 
-DisplayDevice::DisplayDevice()
+namespace ART
 {
+	DisplayDevice::DisplayDevice()
+	{
 
-}
+	}
 
-void DisplayDevice::begin()
-{
-	// Display
-	// by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
-	display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
-												// init done
+	void DisplayDevice::begin()
+	{
+		// Display
+		// by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
+		display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
+													// init done
 
-												// Show image buffer on the display hardware.
-												// Since the buffer is intialized with an Adafruit splashscreen
+													// Show image buffer on the display hardware.
+													// Since the buffer is intialized with an Adafruit splashscreen
 
-	display.clearDisplay();
-	display.drawBitmap(LOGO_GLCD_X, LOGO_GLCD_Y, logo16_glcd_bmp, LOGO_GLCD_WIDTH, LOGO_GLCD_HEIGHT, 1);						// internally, this will display the splashscreen.
-	display.display();
-	delay(3000);
+		display.clearDisplay();
+		display.drawBitmap(LOGO_GLCD_X, LOGO_GLCD_Y, logo16_glcd_bmp, LOGO_GLCD_WIDTH, LOGO_GLCD_HEIGHT, 1);						// internally, this will display the splashscreen.
+		display.display();
+		delay(3000);
 
-	// Clear the buffer.
-	display.clearDisplay();
+		// Clear the buffer.
+		display.clearDisplay();
+	}
 }

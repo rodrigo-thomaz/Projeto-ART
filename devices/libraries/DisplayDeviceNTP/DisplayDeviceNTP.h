@@ -5,26 +5,27 @@
 #include "DisplayDevice.h"
 #include "ESPDevice.h"
 
-using namespace ART;
-
-class DisplayDeviceNTP
+namespace ART
 {
-public:
-	DisplayDeviceNTP(DisplayDevice& displayDevice, ESPDevice& espDevice);
-	~DisplayDeviceNTP();
+	class DisplayDeviceNTP
+	{
+	public:
+		DisplayDeviceNTP(DisplayDevice& displayDevice, ESPDevice& espDevice);
+		~DisplayDeviceNTP();
 
-private:
+	private:
 
-	DisplayDevice * _displayDevice;
-	ESPDevice*          							_espDevice;
+		DisplayDevice * _displayDevice;
+		ESPDevice*          							_espDevice;
 
-	void											printTime();
-	void											printUpdate(bool on);
+		void											printTime();
+		void											printUpdate(bool on);
 
-	void											updateCallback(bool update, bool forceUpdate);
+		void											updateCallback(bool update, bool forceUpdate);
 
-	DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
+		DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE		_updateCallback;
 
-};
+	};
+}
 
 #endif
