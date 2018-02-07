@@ -59,14 +59,7 @@ void setup() {
 
   Serial.println("Iniciando...");
 
-  espDevice.getDisplayDevice()->begin();  
-
-  // text display tests
-  espDevice.getDisplayDevice()->display.clearDisplay();
-  espDevice.getDisplayDevice()->display.setTextSize(1);
-  espDevice.getDisplayDevice()->display.setTextColor(WHITE);
-  espDevice.getDisplayDevice()->display.setCursor(0, 0);
-  espDevice.getDisplayDevice()->display.display();
+  espDevice.getDisplayDevice()->begin();   
 
   initConfiguration();
 
