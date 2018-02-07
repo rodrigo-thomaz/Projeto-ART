@@ -57,9 +57,9 @@ void setup() {
   pinMode(D4, INPUT);
   pinMode(D5, INPUT);
 
-  espDevice.getDisplayDevice()->begin();
-
   Serial.println("Iniciando...");
+
+  espDevice.getDisplayDevice()->begin();  
 
   // text display tests
   espDevice.getDisplayDevice()->display.clearDisplay();
