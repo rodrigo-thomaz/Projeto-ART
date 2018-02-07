@@ -1,26 +1,31 @@
 #ifndef DisplayDeviceWiFi_h
 #define DisplayDeviceWiFi_h
 
+#include "functional"
+#include "vector"
 #include "Arduino.h"
-#include "DisplayDevice.h"
-#include "ESPDevice.h"
+#include "DeviceWiFi.h"
 
-#include "Fonts/FreeSans9pt7b.h"
-#include "Fonts/FreeSansBold9pt7b.h"
+//#include "Fonts/FreeSans9pt7b.h"
+//#include "Fonts/FreeSansBold9pt7b.h"
 
 namespace ART
 {
+	class DisplayDevice;
+
 	class DisplayDeviceWiFi
 	{
 	public:
-		DisplayDeviceWiFi(ESPDevice& espDevice);
+		DisplayDeviceWiFi(DisplayDevice* displayDevice);
 		~DisplayDeviceWiFi();
+
+		static void														create(DisplayDeviceWiFi* (&displayDeviceWiFi), DisplayDevice* displayDevice);
 
 		void 															printSignal();
 
 	private:
 
-		ESPDevice*          											_espDevice;
+		DisplayDevice *													_displayDevice;
 
 		bool 															_firstTimecaptivePortalCallback = true;
 

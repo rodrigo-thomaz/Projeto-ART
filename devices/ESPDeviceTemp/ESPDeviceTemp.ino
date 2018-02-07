@@ -2,7 +2,6 @@
 #include "UnitMeasurementConverter.h"
 #include "EEPROMManager.h"
 
-#include "DisplayDeviceWiFi.h"
 #include "DisplayDeviceSensors.h"
 
 #include <ESP8266WiFi.h>
@@ -42,7 +41,6 @@ ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
 UnitMeasurementConverter unitMeasurementConverter;
 
-DisplayDeviceWiFi displayDeviceWiFi(espDevice);
 DisplayDeviceSensors displayDeviceSensors(espDevice, unitMeasurementConverter);
 
 void setup() {
@@ -143,7 +141,7 @@ void loopInApplication()
   }
 
   // Wifi
-  displayDeviceWiFi.printSignal();
+  espDevice.getDisplayDevice()->getDisplayDeviceWiFi()->printSignal();
   
   espDevice.getDisplayDevice()->display.display();
 }
