@@ -4,9 +4,7 @@
 #include "DeviceBuzzer.h"
 #include "DisplayDeviceWiFiAccess.h"
 #include "DisplayDeviceWiFi.h"
-#include "DisplayDeviceMQ.h"
 #include "DisplayDeviceNTP.h"
-//#include "DisplayDeviceBinary.h"
 #include "DisplayDeviceSensors.h"
 #include "EEPROMManager.h"
 
@@ -50,8 +48,6 @@ UnitMeasurementConverter unitMeasurementConverter;
 DisplayDevice displayDevice;
 DisplayDeviceWiFiAccess displayDeviceWiFiAccess(displayDevice);
 DisplayDeviceWiFi displayDeviceWiFi(displayDevice, espDevice);
-DisplayDeviceMQ displayDeviceMQ(displayDevice);
-//DisplayDeviceBinary displayDeviceBinary(displayDevice);
 DisplayDeviceNTP displayDeviceNTP(displayDevice, espDevice);
 DisplayDeviceSensors displayDeviceSensors(displayDevice, espDevice, unitMeasurementConverter);
 
@@ -101,7 +97,7 @@ void initConfiguration()
 
 bool mqtt_SubCallback(char* topicKey, char* json)
 {
-  displayDeviceMQ.printReceived(true);
+  displayDevice.getDisplayDeviceMQ()->printReceived(true);
   
   if (espDevice.getDeviceDebug()->isActive(DeviceDebug::DEBUG)) {
     espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey);
@@ -167,8 +163,8 @@ void loopInApplication()
 
 void loopMQQTConnected()
 { 
-  displayDeviceMQ.printConnected();
-  displayDeviceMQ.printReceived(false);  
+  displayDevice.getDisplayDeviceMQ()->printConnected();
+  displayDevice.getDisplayDeviceMQ()->printReceived(false);  
 
   bool mqqtPrintSent = false;
 
@@ -201,6 +197,6 @@ void loopMQQTConnected()
     Serial.printf("deviceSensors->publish: %s\n", deviceSensorsPublished ? "true" : "false");    
   }
   
-  displayDeviceMQ.printSent(mqqtPrintSent); 
+  displayDevice.getDisplayDeviceMQ()->printSent(mqqtPrintSent); 
    
 }

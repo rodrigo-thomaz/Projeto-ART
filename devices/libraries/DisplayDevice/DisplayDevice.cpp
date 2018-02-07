@@ -86,7 +86,8 @@ namespace ART
 {
 	DisplayDevice::DisplayDevice()
 	{
-		DisplayDeviceBinary::create(_displayDeviceBinary, *this);
+		DisplayDeviceBinary::create(_displayDeviceBinary, this);
+		DisplayDeviceMQ::create(_displayDeviceMQ, this);
 	}
 
 	DisplayDevice::~DisplayDevice()
@@ -116,6 +117,11 @@ namespace ART
 	DisplayDeviceBinary * DisplayDevice::getDisplayDeviceBinary()
 	{
 		return _displayDeviceBinary;
+	}
+
+	DisplayDeviceMQ * DisplayDevice::getDisplayDeviceMQ()
+	{
+		return _displayDeviceMQ;
 	}
 	
 }

@@ -3,9 +3,9 @@
 
 namespace ART
 {
-	DisplayDeviceBinary::DisplayDeviceBinary(DisplayDevice& displayDevice)
+	DisplayDeviceBinary::DisplayDeviceBinary(DisplayDevice* displayDevice)
 	{
-		_displayDevice = &displayDevice;
+		_displayDevice = displayDevice;
 	}
 
 	DisplayDeviceBinary::~DisplayDeviceBinary()
@@ -13,7 +13,7 @@ namespace ART
 
 	}
 
-	void DisplayDeviceBinary::create(DisplayDeviceBinary* (&displayDeviceBinary), DisplayDevice& displayDevice)
+	void DisplayDeviceBinary::create(DisplayDeviceBinary* (&displayDeviceBinary), DisplayDevice* displayDevice)
 	{
 		displayDeviceBinary = new DisplayDeviceBinary(displayDevice);
 	}

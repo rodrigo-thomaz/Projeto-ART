@@ -2,15 +2,18 @@
 #define DisplayDeviceMQ_h
 
 #include "Arduino.h"
-#include "DisplayDevice.h"
 
 namespace ART
 {
+	class DisplayDevice;
+
 	class DisplayDeviceMQ
 	{
 	public:
-		DisplayDeviceMQ(DisplayDevice& displayDevice);
+		DisplayDeviceMQ(DisplayDevice* displayDevice);
 		~DisplayDeviceMQ();
+
+		static void				create(DisplayDeviceMQ* (&displayDeviceMQ), DisplayDevice* displayDevice);
 
 		void					printConnected();
 		void					printSent(bool on);
@@ -18,7 +21,7 @@ namespace ART
 
 	private:
 
-		DisplayDevice * _displayDevice;
+		DisplayDevice *			_displayDevice;
 
 		int			         	_x;
 		int			         	_y;

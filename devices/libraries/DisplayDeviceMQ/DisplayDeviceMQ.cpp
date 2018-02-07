@@ -1,52 +1,58 @@
 ﻿#include "DisplayDeviceMQ.h"
+#include "DisplayDevice.h"
 
 namespace ART
 {
-	DisplayDeviceMQ::DisplayDeviceMQ(DisplayDevice& displayDevice)
+	DisplayDeviceMQ::DisplayDeviceMQ(DisplayDevice* displayDevice)
 	{
-		this->_displayDevice = &displayDevice;
+		_displayDevice = displayDevice;
 
-		this->_x = 80;
-		this->_y = 0;
+		_x = 80;
+		_y = 0;
 	}
 
 	DisplayDeviceMQ::~DisplayDeviceMQ()
 	{
 	}
 
+	void DisplayDeviceMQ::create(DisplayDeviceMQ *(&displayDeviceMQ), DisplayDevice * displayDevice)
+	{
+		displayDeviceMQ = new DisplayDeviceMQ(displayDevice);
+	}
+
 	void DisplayDeviceMQ::printConnected()
 	{
-		int y = this->_y + 9;
+		int y = _y + 9;
 
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.setTextColor(WHITE, BLACK);
-		this->_displayDevice->display.setCursor(this->_x, y);
-		this->_displayDevice->display.println("ART");
+		_displayDevice->display.setTextSize(1);
+		_displayDevice->display.setTextColor(WHITE, BLACK);
+		_displayDevice->display.setCursor(_x, y);
+		_displayDevice->display.println("ART");
 	}
 
 	void DisplayDeviceMQ::printSent(bool on)
 	{
 		if (on)
-			this->_displayDevice->display.setTextColor(BLACK, WHITE);
+			_displayDevice->display.setTextColor(BLACK, WHITE);
 		else
-			this->_displayDevice->display.setTextColor(WHITE, BLACK);
+			_displayDevice->display.setTextColor(WHITE, BLACK);
 
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.setCursor(this->_x, this->_y);
-		this->_displayDevice->display.write(24); // ↑
+		_displayDevice->display.setTextSize(1);
+		_displayDevice->display.setCursor(_x, _y);
+		_displayDevice->display.write(24); // ↑
 	}
 
 	void DisplayDeviceMQ::printReceived(bool on)
 	{
-		int x = this->_x + 12;
+		int x = _x + 12;
 
 		if (on)
-			this->_displayDevice->display.setTextColor(BLACK, WHITE);
+			_displayDevice->display.setTextColor(BLACK, WHITE);
 		else
-			this->_displayDevice->display.setTextColor(WHITE, BLACK);
+			_displayDevice->display.setTextColor(WHITE, BLACK);
 
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.setCursor(x, this->_y);
-		this->_displayDevice->display.write(25); // ↓
+		_displayDevice->display.setTextSize(1);
+		_displayDevice->display.setCursor(x, _y);
+		_displayDevice->display.write(25); // ↓
 	}
 }
