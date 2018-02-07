@@ -64,13 +64,6 @@ namespace ART
 
 		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);
 
-		void 								setLabel(char* json);
-
-		void 								setDatasheetUnitMeasurementScale(char* json);
-		void 								setResolution(char* json);
-
-		void 								setOrdination(char* json);
-
 		void 								insertTrigger(char* json);
 		void 								deleteTrigger(char* json);
 		void 								setTriggerOn(char* json);
@@ -110,6 +103,13 @@ namespace ART
 
 		uint64_t							_publishIntervalTimestamp;
 		int									_publishIntervalInMilliSeconds;
+
+		void 								setLabel(char* json);
+
+		void 								setDatasheetUnitMeasurementScale(char* json);
+		void 								setResolution(char* json);
+
+		void 								setOrdination(char* json);
 
 		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDeviceInApplication();
