@@ -78,15 +78,15 @@ namespace ART
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {
-			Serial.print("[ConfigurationManager::setUtcTimeOffsetInSecond] parse failed: ");
+			Serial.print(F("[ConfigurationManager::setUtcTimeOffsetInSecond] parse failed: "));
 			Serial.println(json);
 			return;
 		}
 
 		_utcTimeOffsetInSecond = root["utcTimeOffsetInSecond"];
 
-		Serial.println("[ConfigurationManager::setUtcTimeOffsetInSecond] ");
-		Serial.print("utcTimeOffsetInSecond: ");
+		Serial.println(F("[ConfigurationManager::setUtcTimeOffsetInSecond] "));
+		Serial.print(F("utcTimeOffsetInSecond: "));
 		Serial.println(_utcTimeOffsetInSecond);
 	}
 
@@ -101,21 +101,21 @@ namespace ART
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {
-			Serial.print("[ConfigurationManager::setUpdateIntervalInMilliSecond] parse failed: ");
+			Serial.print(F("[ConfigurationManager::setUpdateIntervalInMilliSecond] parse failed: "));
 			Serial.println(json);
 			return;
 		}
 
 		_updateIntervalInMilliSecond = root["updateIntervalInMilliSecond"];
 
-		Serial.println("[ConfigurationManager::setUpdateIntervalInMilliSecond] ");
-		Serial.print("updateIntervalInMilliSecond: ");
+		Serial.println(F("[ConfigurationManager::setUpdateIntervalInMilliSecond] "));
+		Serial.print(F("updateIntervalInMilliSecond: "));
 		Serial.println(_updateIntervalInMilliSecond);
 	}
 
 	bool DeviceNTP::forceUpdate() {
 #ifdef DEBUG_NTPManager
-		Serial.println("Update from NTP Server");
+		Serial.println(F("Update from NTP Server"));
 #endif
 
 		this->sendNTPPacket();

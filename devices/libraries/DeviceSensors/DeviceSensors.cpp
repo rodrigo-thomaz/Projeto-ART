@@ -54,7 +54,7 @@ namespace ART
 
 		this->_initializing = true;
 
-		Serial.println("[DeviceSensors::initialized] initializing...]");
+		Serial.println(F("[DeviceSensors::initialized] initializing...]"));
 
 		char* deviceId = this->_espDevice->getDeviceId();
 		char* deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();
@@ -78,7 +78,7 @@ namespace ART
 					deviceAddressJsonArray.add(this->convertDeviceAddressToString(deviceAddress));
 				}
 				else {
-					Serial.print("Não foi possível encontrar um endereço para o Device: ");
+					Serial.print(F("Não foi possível encontrar um endereço para o Device: "));
 					Serial.println(i);
 				}
 			}
@@ -95,7 +95,7 @@ namespace ART
 
 	void DeviceSensors::setSensorsByMQQTCallback(char* json)
 	{
-		Serial.println("[DeviceSensors::setSensorsByMQQTCallback] Enter");
+		Serial.println(F("[DeviceSensors::setSensorsByMQQTCallback] Enter"));
 
 		this->_initialized = true;
 		this->_initializing = false;
@@ -106,7 +106,7 @@ namespace ART
 		JsonObject& sensorInDeviceJO = jsonBuffer.parseObject(json);
 		
 		if (!sensorInDeviceJO.success()) {
-			Serial.print("[DeviceSensors::setSensorsByMQQTCallback] parse failed: ");
+			Serial.print(F("[DeviceSensors::setSensorsByMQQTCallback] parse failed: "));
 			Serial.println(json);
 			return;
 		}
@@ -207,7 +207,7 @@ namespace ART
 
 		root.printTo(messageJson, sizeof(messageJson));
 
-		Serial.print("DeviceSensors enviando para o servidor (Char Len)=> ");
+		Serial.print(F("DeviceSensors enviando para o servidor (Char Len)=> "));
 		Serial.println(messageJsonLen);
 
 		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SENSORS_MESSAGE_TOPIC_PUB, messageJson);
@@ -249,7 +249,7 @@ namespace ART
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {
-			Serial.print("parse setLabel failed: ");
+			Serial.print(F("parse setLabel failed: "));
 			Serial.println(json);
 			return;
 		}
@@ -261,13 +261,13 @@ namespace ART
 
 		sensor->setLabel(label);
 
-		Serial.print("setLabel=");
+		Serial.print(F("setLabel="));
 		Serial.println(label);
 	}
 
 	void DeviceSensors::setDatasheetUnitMeasurementScale(const char* json)
 	{
-		Serial.println("[DeviceSensors] setUnitOfMeasurement");
+		Serial.println(F("[DeviceSensors] setUnitOfMeasurement"));
 
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -287,7 +287,7 @@ namespace ART
 
 	void DeviceSensors::setResolution(const char* json)
 	{
-		Serial.println("[DeviceSensors] setResolution");
+		Serial.println(F("[DeviceSensors] setResolution"));
 		Serial.println(json);
 
 		StaticJsonBuffer<200> jsonBuffer;
@@ -308,7 +308,7 @@ namespace ART
 
 	void DeviceSensors::setOrdination(const char * json)
 	{
-		Serial.print("[DeviceSensors::setOrdination] ");
+		Serial.print(F("[DeviceSensors::setOrdination] "));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -353,7 +353,7 @@ namespace ART
 
 	void DeviceSensors::insertTrigger(const char * json)
 	{
-		Serial.println("[DeviceSensors::insertTrigger] ");
+		Serial.println(F("[DeviceSensors::insertTrigger] "));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -369,7 +369,7 @@ namespace ART
 
 	void DeviceSensors::deleteTrigger(const char * json)
 	{
-		Serial.println("[DeviceSensors::deleteTrigger] ");
+		Serial.println(F("[DeviceSensors::deleteTrigger] "));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -388,7 +388,7 @@ namespace ART
 
 	void DeviceSensors::setTriggerOn(const char* json)
 	{
-		Serial.println("[DeviceSensors::setTriggerOn] ");
+		Serial.println(F("[DeviceSensors::setTriggerOn] "));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -410,7 +410,7 @@ namespace ART
 
 	void DeviceSensors::setBuzzerOn(const char* json)
 	{
-		Serial.print("[DeviceSensors::setBuzzerOn] ");
+		Serial.print(F("[DeviceSensors::setBuzzerOn] "));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -432,7 +432,7 @@ namespace ART
 
 	void DeviceSensors::setTriggerValue(const char* json)
 	{
-		Serial.print("[DeviceSensors::setTriggerValue] ");
+		Serial.print(F("[DeviceSensors::setTriggerValue] "));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -458,7 +458,7 @@ namespace ART
 
 	void DeviceSensors::setRange(const char* json)
 	{
-		Serial.print("[DeviceSensors::setRange] ");
+		Serial.print(F("[DeviceSensors::setRange] "));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -481,7 +481,7 @@ namespace ART
 
 	void DeviceSensors::setChartLimiter(const char* json)
 	{
-		Serial.print("[DeviceSensors::setChartLimiter] ");
+		Serial.print(F("[DeviceSensors::setChartLimiter] "));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);

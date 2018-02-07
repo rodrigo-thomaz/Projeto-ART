@@ -205,7 +205,7 @@ namespace ART
 		char dataRequest[lenRequest + 1];
 		jsonObjectRequest.printTo(dataRequest, sizeof(dataRequest));
 
-		Serial.print("[ESPDevice] getConfigurations request: ");
+		Serial.print(F("[ESPDevice] getConfigurations request: "));
 		jsonObjectRequest.printTo(Serial);
 		Serial.println();
 
@@ -221,12 +221,12 @@ namespace ART
 			// file found at server
 			if (httpCode == HTTP_CODE_OK) {
 
-				Serial.println("[HTTP_CODE_OK] !!! ");
+				Serial.println(F("[HTTP_CODE_OK] !!! "));
 				load(http.getString());
 			}
 		}
 		else {
-			Serial.print("[HTTP] GET... failed, error: ");
+			Serial.print(F("[HTTP] GET... failed, error: "));
 			Serial.println(http.errorToString(httpCode).c_str());
 		}
 

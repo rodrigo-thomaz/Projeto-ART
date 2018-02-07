@@ -122,7 +122,7 @@ namespace ART
 		}
 
 		if (!_loaded) {
-			Serial.println("[DeviceMQ::autoConnect] Not initialized !");
+			Serial.println(F("[DeviceMQ::autoConnect] Not initialized !"));
 			return false;
 		}
 
@@ -131,16 +131,16 @@ namespace ART
 		}
 		else {
 
-			Serial.print("[DeviceMQ] Tentando se conectar ao Broker MQTT: ");
+			Serial.print(F("[DeviceMQ] Tentando se conectar ao Broker MQTT: "));
 			Serial.println(_host);
 
-			Serial.print("[DeviceMQ] ClientId: ");
+			Serial.print(F("[DeviceMQ] ClientId: "));
 			Serial.println(_clientId);
 
-			Serial.print("[DeviceMQ] User: ");
+			Serial.print(F("[DeviceMQ] User: "));
 			Serial.println(_user);
 
-			Serial.print("[DeviceMQ] Password: ");
+			Serial.print(F("[DeviceMQ] Password: "));
 			Serial.println(_password);
 
 			byte willQoS = 0;
@@ -151,25 +151,25 @@ namespace ART
 			//if (this->_mqqt->connect(clientId, user, password, willTopic, willQoS, willRetain, willMessage)) 
 			if (_mqqt->connect(_clientId, _user, _password))
 			{
-				Serial.println("[DeviceMQ] Conectado com sucesso ao broker MQTT!");
+				Serial.println(F("[DeviceMQ] Conectado com sucesso ao broker MQTT!"));
 
 				if (_espDevice->getDeviceInApplication()->inApplication()) {
-					Serial.println("[DeviceMQ] Begin subscribeDeviceInApplicationCallbacks");
+					Serial.println(F("[DeviceMQ] Begin subscribeDeviceInApplicationCallbacks"));
 					for (auto && fn : _subscribeDeviceInApplicationCallbacks) fn();
-					Serial.println("[DeviceMQ] End subscribeDeviceInApplicationCallbacks");
+					Serial.println(F("[DeviceMQ] End subscribeDeviceInApplicationCallbacks"));
 				}
 				else {
-					Serial.println("[DeviceMQ] Begin subscribeDeviceCallbacks");
+					Serial.println(F("[DeviceMQ] Begin subscribeDeviceCallbacks"));
 					for (auto && fn : _subscribeDeviceCallbacks) fn();
-					Serial.println("[DeviceMQ] End subscribeDeviceCallbacks");
+					Serial.println(F("[DeviceMQ] End subscribeDeviceCallbacks"));
 				}
 
 				return true;
 			}
 			else
 			{
-				Serial.println("[DeviceMQ] Falha ao reconectar no broker.");
-				Serial.println("[DeviceMQ] Haverá nova tentatica de conexao em 2s");
+				Serial.println(F("[DeviceMQ] Falha ao reconectar no broker."));
+				Serial.println(F("[DeviceMQ] Haverá nova tentatica de conexao em 2s"));
 				delay(2000);
 
 				return false;
@@ -194,7 +194,7 @@ namespace ART
 		if (fn(topicKey, strdup(json.c_str()))) {
 		Serial.print("Achou em ");
 		Serial.print(topicKey);
-		Serial.println(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		Serial.println(F(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
 		break;
 		}
 		}*/
@@ -210,7 +210,7 @@ namespace ART
 	void DeviceMQ::publishInApplication(const char* topic, const char* payload)
 	{
 		String routingKey = getApplicationRoutingKey(topic);
-		Serial.print("[DeviceMQ::publishInApplication] routingKey: ");
+		Serial.print(F("[DeviceMQ::publishInApplication] routingKey: "));
 		Serial.println(routingKey);
 		_mqqt->publish(routingKey.c_str(), payload);
 	}
@@ -221,7 +221,7 @@ namespace ART
 		_mqqt->subscribe(routingKey.c_str());
 		_mqqt->loop();
 
-		Serial.print("[DeviceMQ::subscribeDeviceInApplication] Subscribe device in application with success routingKey: ");
+		Serial.print(F("[DeviceMQ::subscribeDeviceInApplication] Subscribe device in application with success routingKey: "));
 		Serial.println(routingKey);
 	}
 
@@ -231,7 +231,7 @@ namespace ART
 		_mqqt->unsubscribe(routingKey.c_str());
 		_mqqt->loop();
 
-		Serial.print("[DeviceMQ::unSubscribeDeviceInApplication] UnSubscribe device in application with success routingKey: ");
+		Serial.print(F("[DeviceMQ::unSubscribeDeviceInApplication] UnSubscribe device in application with success routingKey: "));
 		Serial.println(routingKey);
 	}
 
@@ -241,7 +241,7 @@ namespace ART
 		_mqqt->subscribe(routingKey.c_str());
 		_mqqt->loop();
 
-		Serial.print("[DeviceMQ::subscribeDevice] Subscribe device with success routingKey: ");
+		Serial.print(F("[DeviceMQ::subscribeDevice] Subscribe device with success routingKey: "));
 		Serial.println(routingKey);
 	}
 
@@ -251,7 +251,7 @@ namespace ART
 		_mqqt->unsubscribe(routingKey.c_str());
 		_mqqt->loop();
 
-		Serial.print("[DeviceMQ::unSubscribeDevice] UnSubscribe device with success routingKey: ");
+		Serial.print(F("[DeviceMQ::unSubscribeDevice] UnSubscribe device with success routingKey: "));
 		Serial.println(routingKey);
 	}
 

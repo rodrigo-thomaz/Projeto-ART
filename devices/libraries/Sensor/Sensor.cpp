@@ -6,7 +6,7 @@ namespace ART
 {
 	Sensor::Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject)
 	{
-		Serial.println("[Sensor constructor]");
+		Serial.println(F("[Sensor constructor]"));
 
 		_sensorInDevice = sensorInDevice;	
 
@@ -50,7 +50,7 @@ namespace ART
 
 	Sensor::~Sensor()
 	{
-		Serial.println("[Sensor destructor]");
+		Serial.println(F("[Sensor destructor]"));
 	}
 
 	void Sensor::create(Sensor *(&sensor), SensorInDevice * sensorInDevice, JsonObject & jsonObject)

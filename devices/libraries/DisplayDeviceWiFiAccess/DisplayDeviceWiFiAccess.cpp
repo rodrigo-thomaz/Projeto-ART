@@ -26,7 +26,7 @@ namespace ART
 		JsonObject& root = jsonBuffer.parseObject(json);
 
 		if (!root.success()) {
-			Serial.print("parse updatePin failed: ");
+			Serial.print(F("parse updatePin failed: "));
 			Serial.println(json);
 			return;
 		}
