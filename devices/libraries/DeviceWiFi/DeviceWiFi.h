@@ -94,11 +94,11 @@ namespace ART
 		char *						getStationMacAddress() const;
 		char *						getSoftAPMacAddress() const;
 
-		char *						getHostName() const;
-		void						setHostName(char* json);
+		char *						getHostName() const;		
+		long						getPublishIntervalInMilliSeconds();		
 
-		long						getPublishIntervalInMilliSeconds();
-		void						setPublishIntervalInMilliSeconds(char* json);			
+		void						setHostName(char* json);
+		void						setPublishIntervalInMilliSeconds(char* json);
 
 		bool 						publish();
 
@@ -157,14 +157,14 @@ namespace ART
 
 	private:
 
-		ESPDevice * _espDevice;
+		ESPDevice *							_espDevice;
 
 		char *								_stationMacAddress;
 		char *								_softAPMacAddress;
 		char *								_hostName;
 
 		uint64_t							_publishIntervalTimestamp;
-		long								_publishIntervalInMilliSeconds;
+		long								_publishIntervalInMilliSeconds;		
 
 		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDeviceInApplication();
