@@ -15,6 +15,8 @@ namespace ART
 
 		static void				create(DisplayDeviceMQ* (&displayDeviceMQ), DisplayDevice* displayDevice);
 
+		void					begin();
+
 		void					printConnected();
 		void					printSent(bool on);
 		void					printReceived(bool on);
@@ -25,6 +27,8 @@ namespace ART
 
 		int			         	_x;
 		int			         	_y;
+
+		bool					onDeviceMQSubscription(char* topicKey, char* json);
 
 	};
 }

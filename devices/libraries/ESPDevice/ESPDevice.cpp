@@ -50,7 +50,7 @@ namespace ART
 
 		_displayDevice->begin();
 		_deviceInApplication->begin();
-		_deviceMQ->begin();
+		_deviceMQ->begin();		
 		_deviceWiFi->begin();
 		_deviceWiFi->autoConnect();
 		autoLoad();

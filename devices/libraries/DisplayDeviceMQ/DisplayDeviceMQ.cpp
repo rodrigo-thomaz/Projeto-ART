@@ -1,5 +1,8 @@
 ﻿#include "DisplayDeviceMQ.h"
-#include "DisplayDevice.h"
+
+#include "../DisplayDevice/DisplayDevice.h"
+#include "../ESPDevice/ESPDevice.h"
+#include "../DeviceMQ/DeviceMQ.h"
 
 namespace ART
 {
@@ -8,7 +11,7 @@ namespace ART
 		_displayDevice = displayDevice;
 
 		_x = 80;
-		_y = 0;
+		_y = 0;		
 	}
 
 	DisplayDeviceMQ::~DisplayDeviceMQ()
@@ -18,6 +21,11 @@ namespace ART
 	void DisplayDeviceMQ::create(DisplayDeviceMQ *(&displayDeviceMQ), DisplayDevice * displayDevice)
 	{
 		displayDeviceMQ = new DisplayDeviceMQ(displayDevice);
+	}
+
+	void DisplayDeviceMQ::begin()
+	{
+		//_displayDevice->getESPDevice()->getDeviceMQ()->addSubscriptionCallback([=] (char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
 	void DisplayDeviceMQ::printConnected()
@@ -54,5 +62,12 @@ namespace ART
 		_displayDevice->display.setTextSize(1);
 		_displayDevice->display.setCursor(x, _y);
 		_displayDevice->display.write(25); // ↓
+	}
+
+	bool DisplayDeviceMQ::onDeviceMQSubscription(char * topicKey, char * json)
+	{
+		Serial.println("Print recebido !!!!!!!!!!!!!!");
+		printReceived(true);
+		return false;
 	}
 }

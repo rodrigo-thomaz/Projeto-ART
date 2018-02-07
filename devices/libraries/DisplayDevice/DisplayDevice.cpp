@@ -131,6 +131,8 @@ namespace ART
 		display.setTextColor(WHITE);
 		display.setCursor(0, 0);
 		display.display();
+
+		_displayDeviceMQ->begin();
 	}
 
 	ESPDevice * DisplayDevice::getESPDevice()
