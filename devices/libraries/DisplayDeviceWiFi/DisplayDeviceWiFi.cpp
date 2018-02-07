@@ -1,7 +1,8 @@
 #include "DisplayDeviceWiFi.h"
-#include "DisplayDevice.h"
-#include "ESPDevice.h"
-#include "DeviceWiFi.h"
+
+#include "../DisplayDevice/DisplayDevice.h"
+#include "../ESPDevice/ESPDevice.h"
+#include "../DeviceWiFi/DeviceWiFi.h"
 
 #include "../Adafruit-GFX-Library/Fonts/FreeSans9pt7b.h"
 #include "../Adafruit-GFX-Library/Fonts/FreeSansBold9pt7b.h"

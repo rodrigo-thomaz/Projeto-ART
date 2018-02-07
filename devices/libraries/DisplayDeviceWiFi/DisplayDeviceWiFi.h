@@ -4,10 +4,7 @@
 #include "functional"
 #include "vector"
 #include "Arduino.h"
-#include "DeviceWiFi.h"
-
-//#include "Fonts/FreeSans9pt7b.h"
-//#include "Fonts/FreeSansBold9pt7b.h"
+#include "../DeviceWiFi/DeviceWiFi.h"
 
 namespace ART
 {
