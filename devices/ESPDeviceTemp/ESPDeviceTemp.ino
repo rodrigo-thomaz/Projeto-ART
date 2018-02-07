@@ -1,7 +1,6 @@
 #include "ESPDevice.h"
 #include "UnitMeasurementConverter.h"
 #include "DisplayDevice.h"
-#include "DeviceBuzzer.h"
 #include "DisplayDeviceWiFi.h"
 #include "DisplayDeviceNTP.h"
 #include "DisplayDeviceSensors.h"
