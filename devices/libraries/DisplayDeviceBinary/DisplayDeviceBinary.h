@@ -1,19 +1,20 @@
-/*
- Name:		DisplayDeviceBinary.h
- Created:	07/02/2018 08:45:14
- Author:	rodrigo
- Editor:	http://www.visualmicro.com
-*/
+#ifndef DisplayDeviceBinary_h
+#define DisplayDeviceBinary_h
 
-#ifndef _DisplayDeviceBinary_h
-#define _DisplayDeviceBinary_h
+#include "Arduino.h"
+#include "DisplayDevice.h"
 
-#if defined(ARDUINO) && ARDUINO >= 100
-	#include "arduino.h"
-#else
-	#include "WProgram.h"
+class DisplayDeviceBinary
+{
+public:
+	DisplayDeviceBinary(DisplayDevice& displayDevice);
+	~DisplayDeviceBinary();
+
+
+private:
+
+	DisplayDevice * _displayDevice;
+
+};
+
 #endif
-
-
-#endif
-
