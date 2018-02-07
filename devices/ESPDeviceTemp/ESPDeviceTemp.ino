@@ -118,6 +118,10 @@ bool mqtt_SubCallback(char* topicKey, char* json)
    espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(json);
    return true;
   }
+  
+  else{
+    return false;
+  }
 }
 
 void loop() {
