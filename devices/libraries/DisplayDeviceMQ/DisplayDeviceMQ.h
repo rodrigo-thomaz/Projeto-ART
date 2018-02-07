@@ -1,14 +1,14 @@
-#ifndef DisplayMQTTManager_h
-#define DisplayMQTTManager_h
+#ifndef DisplayDeviceMQ_h
+#define DisplayDeviceMQ_h
 
 #include "Arduino.h"
 #include "DisplayManager.h"
 
-class DisplayMQTTManager
+class DisplayDeviceMQ
 {
 public:
-	DisplayMQTTManager(DisplayManager& displayManager);
-	~DisplayMQTTManager();
+	DisplayDeviceMQ(DisplayManager& displayManager);
+	~DisplayDeviceMQ();
 
 	void					printConnected();
 	void					printSent(bool on);

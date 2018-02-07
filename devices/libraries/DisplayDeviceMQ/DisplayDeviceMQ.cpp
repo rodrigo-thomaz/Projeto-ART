@@ -1,6 +1,6 @@
-﻿#include "DisplayMQTTManager.h"
+﻿#include "DisplayDeviceMQ.h"
 
-DisplayMQTTManager::DisplayMQTTManager(DisplayManager& displayManager)
+DisplayDeviceMQ::DisplayDeviceMQ(DisplayManager& displayManager)
 {
 	this->_displayManager = &displayManager;
 
@@ -8,11 +8,11 @@ DisplayMQTTManager::DisplayMQTTManager(DisplayManager& displayManager)
 	this->_y = 0;
 }
 
-DisplayMQTTManager::~DisplayMQTTManager()
+DisplayDeviceMQ::~DisplayDeviceMQ()
 {
 }
 
-void DisplayMQTTManager::printConnected()
+void DisplayDeviceMQ::printConnected()
 {
 	int y = this->_y + 9;
 
@@ -22,7 +22,7 @@ void DisplayMQTTManager::printConnected()
 	this->_displayManager->display.println("ART");
 }
 
-void DisplayMQTTManager::printSent(bool on)
+void DisplayDeviceMQ::printSent(bool on)
 {
 	if (on)
 		this->_displayManager->display.setTextColor(BLACK, WHITE);
@@ -34,7 +34,7 @@ void DisplayMQTTManager::printSent(bool on)
 	this->_displayManager->display.write(24); // ↑
 }
 
-void DisplayMQTTManager::printReceived(bool on)
+void DisplayDeviceMQ::printReceived(bool on)
 {
 	int x = this->_x + 12;
 
