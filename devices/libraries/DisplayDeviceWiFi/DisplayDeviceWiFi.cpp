@@ -3,14 +3,8 @@
 #include "ESPDevice.h"
 #include "DeviceWiFi.h"
 
-//#include "Fonts/FreeSans9pt7b.h"
-//#include "Fonts/FreeSansBold9pt7b.h"
-
-//#include "../Adafruit-GFX-Library/Fonts/FreeSans9pt7b.h"
-//#include "../Adafruit-GFX-Library/Fonts/FreeSansBold9pt7b.h"
-
-#include "/Projeto-ART/devices/libraries/Adafruit-GFX-Library/Fonts/FreeSans9pt7b.h"
-#include "/Projeto-ART/devices/libraries/Adafruit-GFX-Library/Fonts/FreeSansBold9pt7b.h"
+#include "../Adafruit-GFX-Library/Fonts/FreeSans9pt7b.h"
+#include "../Adafruit-GFX-Library/Fonts/FreeSansBold9pt7b.h"
 
 namespace ART
 {
