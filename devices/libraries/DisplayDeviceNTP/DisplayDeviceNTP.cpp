@@ -13,6 +13,7 @@ namespace ART
 
 	DisplayDeviceNTP::~DisplayDeviceNTP()
 	{
+
 	}
 
 	void DisplayDeviceNTP::updateCallback(bool update, bool forceUpdate)
