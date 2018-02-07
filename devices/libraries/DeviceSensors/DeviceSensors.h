@@ -62,22 +62,11 @@ namespace ART
 
 		SensorInDevice						*getSensorsInDevice();		
 
-		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);
-
-		void 								insertTrigger(char* json);
-		void 								deleteTrigger(char* json);
-		void 								setTriggerOn(char* json);
-		void 								setBuzzerOn(char* json);
-		void 								setTriggerValue(char* json);
-
-		void 								setRange(char* json);
-		void 								setChartLimiter(char* json);
+		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 
 		int									getReadIntervalInMilliSeconds();
-		void								setReadIntervalInMilliSeconds(char* json);
-
+		
 		int									getPublishIntervalInMilliSeconds();
-		void								setPublishIntervalInMilliSeconds(char* json);
 
 		SensorDatasheet&					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);		
 
@@ -110,6 +99,18 @@ namespace ART
 		void 								setResolution(char* json);
 
 		void 								setOrdination(char* json);
+
+		void 								insertTrigger(char* json);
+		void 								deleteTrigger(char* json);
+		void 								setTriggerOn(char* json);
+		void 								setBuzzerOn(char* json);
+		void 								setTriggerValue(char* json);
+
+		void 								setRange(char* json);
+		void 								setChartLimiter(char* json);
+
+		void								setReadIntervalInMilliSeconds(char* json);
+		void								setPublishIntervalInMilliSeconds(char* json);
 
 		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDeviceInApplication();
