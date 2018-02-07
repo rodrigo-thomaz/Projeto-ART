@@ -1,10 +1,11 @@
 #include "ESPDevice.h"
 #include "UnitMeasurementConverter.h"
+#include "EEPROMManager.h"
+
 #include "DisplayDevice.h"
 #include "DisplayDeviceWiFi.h"
 #include "DisplayDeviceNTP.h"
 #include "DisplayDeviceSensors.h"
-#include "EEPROMManager.h"
 
 #include <ESP8266WiFi.h>
 #include <DNSServer.h>
