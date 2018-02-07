@@ -13,14 +13,13 @@ namespace ART
 	class DisplayDeviceWiFi
 	{
 	public:
-		DisplayDeviceWiFi(DisplayDevice& displayDevice, ESPDevice& espDevice);
+		DisplayDeviceWiFi(ESPDevice& espDevice);
 		~DisplayDeviceWiFi();
 
 		void 															printSignal();
 
 	private:
 
-		DisplayDevice * _displayDevice;
 		ESPDevice*          											_espDevice;
 
 		bool 															_firstTimecaptivePortalCallback = true;

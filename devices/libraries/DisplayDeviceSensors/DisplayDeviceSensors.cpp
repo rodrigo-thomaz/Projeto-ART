@@ -2,9 +2,8 @@
 
 namespace ART
 {
-	DisplayDeviceSensors::DisplayDeviceSensors(DisplayDevice& displayDevice, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter)
+	DisplayDeviceSensors::DisplayDeviceSensors(ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter)
 	{
-		this->_displayDevice = &displayDevice;
 		this->_espDevice = &espDevice;
 		this->_unitMeasurementConverter = &unitMeasurementConverter;
 	}
@@ -15,17 +14,17 @@ namespace ART
 
 	void DisplayDeviceSensors::printUpdate(bool on)
 	{
-		this->_displayDevice->display.setFont();
-		this->_displayDevice->display.setTextSize(1);
+		_espDevice->getDisplayDevice()->display.setFont();
+		_espDevice->getDisplayDevice()->display.setTextSize(1);
 		if (on) {
-			this->_displayDevice->display.setTextColor(BLACK, WHITE);
-			this->_displayDevice->display.setCursor(66, 8);
+			_espDevice->getDisplayDevice()->display.setTextColor(BLACK, WHITE);
+			_espDevice->getDisplayDevice()->display.setCursor(66, 8);
 		}
 		else {
-			this->_displayDevice->display.setTextColor(WHITE, BLACK);
-			this->_displayDevice->display.setCursor(66, 9);
+			_espDevice->getDisplayDevice()->display.setTextColor(WHITE, BLACK);
+			_espDevice->getDisplayDevice()->display.setCursor(66, 9);
 		}
-		this->_displayDevice->display.println("S");
+		_espDevice->getDisplayDevice()->display.println("S");
 	}
 
 	void DisplayDeviceSensors::printSensors()
@@ -59,7 +58,7 @@ namespace ART
 
 		int boxChunk = round(screenWidth / sensorsCount);
 
-		//this->_displayDevice->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
+		//_espDevice->getDisplayDevice()->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
 
 		for (int i = 0; i < sensorsCount; ++i) {
 			Sensor* sensor = sensorsInDevice[i].getSensor();
@@ -86,9 +85,9 @@ namespace ART
 		int barHeight = barY2 - barY1;
 
 		// Box
-		//this->_displayDevice->display.drawRect(x, y, width, height, WHITE);	
+		//_espDevice->getDisplayDevice()->display.drawRect(x, y, width, height, WHITE);	
 		// Bar
-		this->_displayDevice->display.drawRect(barX1, barY1, barWidth, barHeight, WHITE);
+		_espDevice->getDisplayDevice()->display.drawRect(barX1, barY1, barWidth, barHeight, WHITE);
 		/// Bar Value
 		this->printBarValue(sensor, barX1, barY1, barWidth, barHeight);
 	}
@@ -109,7 +108,7 @@ namespace ART
 
 		int tempRectY = y + height - tempHeight;
 
-		this->_displayDevice->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
+		_espDevice->getDisplayDevice()->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
 	}
 
 	void DisplayDeviceSensors::printText(Sensor* sensor, int x, int y)
@@ -121,12 +120,12 @@ namespace ART
 		//Temporario
 		String symbol = "C";
 
-		this->_displayDevice->display.setFont();
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.setTextColor(WHITE);
-		this->_displayDevice->display.setCursor(x, y);
-		this->_displayDevice->display.setTextWrap(false);
-		this->_displayDevice->display.print(tempConverted, 1);
-		this->_displayDevice->display.println(symbol);
+		_espDevice->getDisplayDevice()->display.setFont();
+		_espDevice->getDisplayDevice()->display.setTextSize(1);
+		_espDevice->getDisplayDevice()->display.setTextColor(WHITE);
+		_espDevice->getDisplayDevice()->display.setCursor(x, y);
+		_espDevice->getDisplayDevice()->display.setTextWrap(false);
+		_espDevice->getDisplayDevice()->display.print(tempConverted, 1);
+		_espDevice->getDisplayDevice()->display.println(symbol);
 	}
 }

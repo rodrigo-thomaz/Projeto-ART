@@ -20,6 +20,7 @@ namespace ART
 		DeviceBuzzer::create(_deviceBuzzer, this);
 		DeviceSensors::create(_deviceSensors, this);
 		DeviceInApplication::create(_deviceInApplication, this);				
+		DisplayDevice::create(_displayDevice, this);
 	}
 
 	ESPDevice::~ESPDevice()
@@ -167,6 +168,11 @@ namespace ART
 	DeviceSensors* ESPDevice::getDeviceSensors()
 	{
 		return _deviceSensors;
+	}
+
+	DisplayDevice * ESPDevice::getDisplayDevice()
+	{
+		return _displayDevice;
 	}
 
 	bool ESPDevice::loaded()

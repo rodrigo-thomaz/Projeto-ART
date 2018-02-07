@@ -10,12 +10,11 @@ namespace ART
 	class DisplayDeviceNTP
 	{
 	public:
-		DisplayDeviceNTP(DisplayDevice& displayDevice, ESPDevice& espDevice);
+		DisplayDeviceNTP(ESPDevice& espDevice);
 		~DisplayDeviceNTP();
 
 	private:
 
-		DisplayDevice * _displayDevice;
 		ESPDevice*          							_espDevice;
 
 		void											printTime();

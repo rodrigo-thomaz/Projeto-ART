@@ -9,6 +9,7 @@
 #include "DeviceBinary.h"
 #include "DeviceBuzzer.h"
 #include "DeviceSensors.h"
+#include "DisplayDevice.h"
 
 #include "functional"
 #include "vector"
@@ -54,6 +55,7 @@ namespace ART
 		DeviceBinary*						getDeviceBinary();
 		DeviceBuzzer*						getDeviceBuzzer();
 		DeviceSensors*						getDeviceSensors();
+		DisplayDevice*						getDisplayDevice();
 
 	private:
 
@@ -78,6 +80,7 @@ namespace ART
 		DeviceBinary*						_deviceBinary;
 		DeviceBuzzer*						_deviceBuzzer;
 		DeviceSensors*						_deviceSensors;
+		DisplayDevice*						_displayDevice;
 
 		void								autoLoad();
 		void								load(String json);

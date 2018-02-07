@@ -2,9 +2,8 @@
 
 namespace ART
 {
-	DisplayDeviceWiFi::DisplayDeviceWiFi(DisplayDevice& displayDevice, ESPDevice& espDevice)
+	DisplayDeviceWiFi::DisplayDeviceWiFi(ESPDevice& espDevice)
 	{
-		this->_displayDevice = &displayDevice;
 		this->_espDevice = &espDevice;
 
 		this->_startConfigPortalCallback = std::bind(&DisplayDeviceWiFi::startConfigPortalCallback, this);
@@ -50,11 +49,11 @@ namespace ART
 
 			if (barSignal <= i)
 			{
-				this->_displayDevice->display.drawRect(currentX, currentY, barWidth, currentHeight, WHITE);
+				_espDevice->getDisplayDevice()->display.drawRect(currentX, currentY, barWidth, currentHeight, WHITE);
 			}
 			else
 			{
-				this->_displayDevice->display.fillRect(currentX, currentY, barWidth, currentHeight, WHITE);
+				_espDevice->getDisplayDevice()->display.fillRect(currentX, currentY, barWidth, currentHeight, WHITE);
 			}
 		}
 	}
@@ -72,53 +71,53 @@ namespace ART
 
 			currentHeight = barHeight * (i + 1);
 
-			this->_displayDevice->display.drawRect(currentX, currentY, barWidth, currentHeight, WHITE);
+			_espDevice->getDisplayDevice()->display.drawRect(currentX, currentY, barWidth, currentHeight, WHITE);
 		}
 
-		this->_displayDevice->display.setFont();
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.setTextColor(BLACK, WHITE);
-		this->_displayDevice->display.setCursor(x + 15, y + 8);
-		this->_displayDevice->display.setTextWrap(false);
-		this->_displayDevice->display.println("X");
+		_espDevice->getDisplayDevice()->display.setFont();
+		_espDevice->getDisplayDevice()->display.setTextSize(1);
+		_espDevice->getDisplayDevice()->display.setTextColor(BLACK, WHITE);
+		_espDevice->getDisplayDevice()->display.setCursor(x + 15, y + 8);
+		_espDevice->getDisplayDevice()->display.setTextWrap(false);
+		_espDevice->getDisplayDevice()->display.println("X");
 	}
 
 	void DisplayDeviceWiFi::printPortalHeaderInDisplay(String title)
 	{
-		this->_displayDevice->display.setFont();
-		this->_displayDevice->display.setTextSize(2);
-		this->_displayDevice->display.setCursor(0, 0);
-		this->_displayDevice->display.setTextWrap(false);
-		this->_displayDevice->display.setTextColor(BLACK, WHITE);
-		this->_displayDevice->display.println(title);
-		this->_displayDevice->display.display();
-		this->_displayDevice->display.setTextColor(WHITE);
-		this->_displayDevice->display.setTextSize(1);
+		_espDevice->getDisplayDevice()->display.setFont();
+		_espDevice->getDisplayDevice()->display.setTextSize(2);
+		_espDevice->getDisplayDevice()->display.setCursor(0, 0);
+		_espDevice->getDisplayDevice()->display.setTextWrap(false);
+		_espDevice->getDisplayDevice()->display.setTextColor(BLACK, WHITE);
+		_espDevice->getDisplayDevice()->display.println(title);
+		_espDevice->getDisplayDevice()->display.display();
+		_espDevice->getDisplayDevice()->display.setTextColor(WHITE);
+		_espDevice->getDisplayDevice()->display.setTextSize(1);
 	}
 
 	void DisplayDeviceWiFi::showEnteringSetup()
 	{
-		this->_displayDevice->display.stopscroll();
+		_espDevice->getDisplayDevice()->display.stopscroll();
 
-		this->_displayDevice->display.clearDisplay();
-		this->_displayDevice->display.setTextSize(2);
-		this->_displayDevice->display.setTextColor(WHITE);
-		this->_displayDevice->display.setCursor(0, 0);
+		_espDevice->getDisplayDevice()->display.clearDisplay();
+		_espDevice->getDisplayDevice()->display.setTextSize(2);
+		_espDevice->getDisplayDevice()->display.setTextColor(WHITE);
+		_espDevice->getDisplayDevice()->display.setCursor(0, 0);
 
-		this->_displayDevice->display.setFont();
+		_espDevice->getDisplayDevice()->display.setFont();
 
-		this->_displayDevice->display.println(" entrando");
-		this->_displayDevice->display.println(" no setup");
-		this->_displayDevice->display.println(" do  wifi");
+		_espDevice->getDisplayDevice()->display.println(" entrando");
+		_espDevice->getDisplayDevice()->display.println(" no setup");
+		_espDevice->getDisplayDevice()->display.println(" do  wifi");
 
-		this->_displayDevice->display.display();
+		_espDevice->getDisplayDevice()->display.display();
 
 		delay(400);
 
-		this->_displayDevice->display.print(" ");
+		_espDevice->getDisplayDevice()->display.print(" ");
 		for (int i = 0; i <= 6; i++) {
-			this->_displayDevice->display.print(".");
-			this->_displayDevice->display.display();
+			_espDevice->getDisplayDevice()->display.print(".");
+			_espDevice->getDisplayDevice()->display.display();
 			delay(400);
 		}
 	}
@@ -128,21 +127,21 @@ namespace ART
 		String configPortalSSID = this->_espDevice->getDeviceWiFi()->getConfigPortalSSID();
 		String configPortalPwd = this->_espDevice->getDeviceWiFi()->getConfigPortalPwd();
 
-		this->_displayDevice->display.clearDisplay();
+		_espDevice->getDisplayDevice()->display.clearDisplay();
 
 		printPortalHeaderInDisplay("  Conecte  ");
 
-		this->_displayDevice->display.println();
-		this->_displayDevice->display.println();
-		this->_displayDevice->display.setFont(&FreeSansBold9pt7b);
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.print("ssid:  ");
-		this->_displayDevice->display.println(configPortalSSID);
-		this->_displayDevice->display.print("pwd: ");
-		this->_displayDevice->display.setTextWrap(false);
-		this->_displayDevice->display.print(configPortalPwd);
+		_espDevice->getDisplayDevice()->display.println();
+		_espDevice->getDisplayDevice()->display.println();
+		_espDevice->getDisplayDevice()->display.setFont(&FreeSansBold9pt7b);
+		_espDevice->getDisplayDevice()->display.setTextSize(1);
+		_espDevice->getDisplayDevice()->display.print("ssid:  ");
+		_espDevice->getDisplayDevice()->display.println(configPortalSSID);
+		_espDevice->getDisplayDevice()->display.print("pwd: ");
+		_espDevice->getDisplayDevice()->display.setTextWrap(false);
+		_espDevice->getDisplayDevice()->display.print(configPortalPwd);
 
-		this->_displayDevice->display.display();
+		_espDevice->getDisplayDevice()->display.display();
 	}
 
 	void DisplayDeviceWiFi::startConfigPortalCallback() {
@@ -153,7 +152,7 @@ namespace ART
 
 	void DisplayDeviceWiFi::captivePortalCallback(String ip) {
 
-		this->_displayDevice->display.stopscroll();
+		_espDevice->getDisplayDevice()->display.stopscroll();
 
 		if (!this->_firstTimecaptivePortalCallback) {
 			return;
@@ -161,68 +160,68 @@ namespace ART
 
 		this->_firstTimecaptivePortalCallback = false;
 
-		this->_displayDevice->display.clearDisplay();
+		_espDevice->getDisplayDevice()->display.clearDisplay();
 
 		this->printPortalHeaderInDisplay("  Acesse    ");
 
-		this->_displayDevice->display.println();
-		this->_displayDevice->display.println();
-		this->_displayDevice->display.println();
-		this->_displayDevice->display.setFont(&FreeSansBold9pt7b);
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.setTextWrap(false);
-		this->_displayDevice->display.print("  http://");
-		this->_displayDevice->display.println(ip);
+		_espDevice->getDisplayDevice()->display.println();
+		_espDevice->getDisplayDevice()->display.println();
+		_espDevice->getDisplayDevice()->display.println();
+		_espDevice->getDisplayDevice()->display.setFont(&FreeSansBold9pt7b);
+		_espDevice->getDisplayDevice()->display.setTextSize(1);
+		_espDevice->getDisplayDevice()->display.setTextWrap(false);
+		_espDevice->getDisplayDevice()->display.print("  http://");
+		_espDevice->getDisplayDevice()->display.println(ip);
 
-		this->_displayDevice->display.display();
+		_espDevice->getDisplayDevice()->display.display();
 	}
 
 	void DisplayDeviceWiFi::successConfigPortalCallback() {
 
-		this->_displayDevice->display.stopscroll();
+		_espDevice->getDisplayDevice()->display.stopscroll();
 
 		String ssid = this->_espDevice->getDeviceWiFi()->getSSID();
 
-		this->_displayDevice->display.clearDisplay();
+		_espDevice->getDisplayDevice()->display.clearDisplay();
 
 		this->printPortalHeaderInDisplay("  Acesso    ");
 
-		this->_displayDevice->display.println();
-		this->_displayDevice->display.println();
-		this->_displayDevice->display.setFont(&FreeSansBold9pt7b);
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.setTextWrap(false);
-		this->_displayDevice->display.println("Conectado a");
-		this->_displayDevice->display.print(ssid);
-		this->_displayDevice->display.print("!");
-		this->_displayDevice->display.display();
+		_espDevice->getDisplayDevice()->display.println();
+		_espDevice->getDisplayDevice()->display.println();
+		_espDevice->getDisplayDevice()->display.setFont(&FreeSansBold9pt7b);
+		_espDevice->getDisplayDevice()->display.setTextSize(1);
+		_espDevice->getDisplayDevice()->display.setTextWrap(false);
+		_espDevice->getDisplayDevice()->display.println("Conectado a");
+		_espDevice->getDisplayDevice()->display.print(ssid);
+		_espDevice->getDisplayDevice()->display.print("!");
+		_espDevice->getDisplayDevice()->display.display();
 
 		delay(4000);
 	}
 
 	void DisplayDeviceWiFi::failedConfigPortalCallback(int connectionResult) {
 
-		this->_displayDevice->display.stopscroll();
+		_espDevice->getDisplayDevice()->display.stopscroll();
 
-		this->_displayDevice->display.clearDisplay();
+		_espDevice->getDisplayDevice()->display.clearDisplay();
 
 		this->printPortalHeaderInDisplay("  Acesso    ");
 
 		if (connectionResult == WL_CONNECT_FAILED) {
-			this->_displayDevice->display.println();
-			this->_displayDevice->display.println();
-			this->_displayDevice->display.setFont(&FreeSansBold9pt7b);
-			this->_displayDevice->display.setTextSize(1);
-			this->_displayDevice->display.setTextWrap(false);
-			this->_displayDevice->display.println("   Ops! falha");
-			this->_displayDevice->display.println("  na tentativa");
+			_espDevice->getDisplayDevice()->display.println();
+			_espDevice->getDisplayDevice()->display.println();
+			_espDevice->getDisplayDevice()->display.setFont(&FreeSansBold9pt7b);
+			_espDevice->getDisplayDevice()->display.setTextSize(1);
+			_espDevice->getDisplayDevice()->display.setTextWrap(false);
+			_espDevice->getDisplayDevice()->display.println("   Ops! falha");
+			_espDevice->getDisplayDevice()->display.println("  na tentativa");
 		}
 
-		this->_displayDevice->display.display();
+		_espDevice->getDisplayDevice()->display.display();
 
 		bool invertDisplay = false;
 		for (int i = 0; i <= 10; i++) {
-			this->_displayDevice->display.invertDisplay(invertDisplay);
+			_espDevice->getDisplayDevice()->display.invertDisplay(invertDisplay);
 			invertDisplay = !invertDisplay;
 			delay(500);
 		}
@@ -235,31 +234,31 @@ namespace ART
 
 	void DisplayDeviceWiFi::connectingConfigPortalCallback() {
 
-		this->_displayDevice->display.stopscroll();
+		_espDevice->getDisplayDevice()->display.stopscroll();
 
 		String ssid = this->_espDevice->getDeviceWiFi()->getSSID();
 
-		this->_displayDevice->display.clearDisplay();
+		_espDevice->getDisplayDevice()->display.clearDisplay();
 
 		this->printPortalHeaderInDisplay("  Acesso    ");
 
-		this->_displayDevice->display.setCursor(0, 27);
+		_espDevice->getDisplayDevice()->display.setCursor(0, 27);
 
-		this->_displayDevice->display.setFont(&FreeSansBold9pt7b);
-		this->_displayDevice->display.setTextSize(1);
-		this->_displayDevice->display.setTextWrap(false);
-		this->_displayDevice->display.println(" Conectando a");
+		_espDevice->getDisplayDevice()->display.setFont(&FreeSansBold9pt7b);
+		_espDevice->getDisplayDevice()->display.setTextSize(1);
+		_espDevice->getDisplayDevice()->display.setTextWrap(false);
+		_espDevice->getDisplayDevice()->display.println(" Conectando a");
 
-		this->_displayDevice->display.print(" ");
-		this->_displayDevice->display.println(ssid);
+		_espDevice->getDisplayDevice()->display.print(" ");
+		_espDevice->getDisplayDevice()->display.println(ssid);
 
-		this->_displayDevice->display.display();
+		_espDevice->getDisplayDevice()->display.display();
 
 		// progress  
-		this->_displayDevice->display.setCursor(0, 63);
-		this->_displayDevice->display.setTextWrap(false);
-		this->_displayDevice->display.println(".... .... .... .... .... .... .... .... .... .... .... ....");
-		this->_displayDevice->display.display();
-		this->_displayDevice->display.startscrollleft(0x07, 0x0F);
+		_espDevice->getDisplayDevice()->display.setCursor(0, 63);
+		_espDevice->getDisplayDevice()->display.setTextWrap(false);
+		_espDevice->getDisplayDevice()->display.println(".... .... .... .... .... .... .... .... .... .... .... ....");
+		_espDevice->getDisplayDevice()->display.display();
+		_espDevice->getDisplayDevice()->display.startscrollleft(0x07, 0x0F);
 	}
 }

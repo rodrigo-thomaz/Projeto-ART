@@ -1,4 +1,6 @@
 #include "DisplayDevice.h"
+#include "ESPDevice.h"
+
 #include "Arduino.h"
 #include "SPI.h"
 #include "Wire.h"
@@ -84,8 +86,10 @@ static const unsigned char PROGMEM logo16_glcd_bmp[] =
 
 namespace ART
 {
-	DisplayDevice::DisplayDevice()
+	DisplayDevice::DisplayDevice(ESPDevice* espDevice)
 	{
+		_espDevice = espDevice;
+
 		DisplayDeviceBinary::create(_displayDeviceBinary, this);
 		DisplayDeviceMQ::create(_displayDeviceMQ, this);
 		DisplayDeviceWiFiAccess::create(_displayDeviceWiFiAccess, this);
@@ -94,6 +98,11 @@ namespace ART
 	DisplayDevice::~DisplayDevice()
 	{
 		delete (_displayDeviceBinary);
+	}
+
+	void DisplayDevice::create(DisplayDevice *(&displayDevice), ESPDevice * espDevice)
+	{
+		displayDevice = new DisplayDevice(espDevice);
 	}
 
 	void DisplayDevice::begin()
@@ -113,6 +122,11 @@ namespace ART
 
 		// Clear the buffer.
 		display.clearDisplay();
+	}
+
+	ESPDevice * DisplayDevice::getESPDevice()
+	{
+		return _espDevice;
 	}
 
 	DisplayDeviceBinary * DisplayDevice::getDisplayDeviceBinary()

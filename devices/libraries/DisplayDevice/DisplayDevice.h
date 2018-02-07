@@ -10,15 +10,21 @@
 
 namespace ART
 {
+	class ESPDevice;
+
 	class DisplayDevice
 	{
 
 	public:
 
-		DisplayDevice();
+		DisplayDevice(ESPDevice* espDevice);
 		~DisplayDevice();
 
+		static void								create(DisplayDevice* (&displayDevice), ESPDevice* espDevice);
+
 		void									begin();
+
+		ESPDevice *								getESPDevice();
 
 		DisplayDeviceBinary*					getDisplayDeviceBinary();
 		DisplayDeviceMQ*						getDisplayDeviceMQ();
@@ -27,6 +33,8 @@ namespace ART
 		Adafruit_SSD1306						display;
 
 	private:
+
+		ESPDevice *								_espDevice;
 
 		DisplayDeviceBinary *					_displayDeviceBinary;
 		DisplayDeviceMQ *						_displayDeviceMQ;

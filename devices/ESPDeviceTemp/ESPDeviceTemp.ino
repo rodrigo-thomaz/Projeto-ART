@@ -2,7 +2,6 @@
 #include "UnitMeasurementConverter.h"
 #include "EEPROMManager.h"
 
-#include "DisplayDevice.h"
 #include "DisplayDeviceWiFi.h"
 #include "DisplayDeviceNTP.h"
 #include "DisplayDeviceSensors.h"
@@ -44,10 +43,9 @@ ESPDevice espDevice(WEBAPI_HOST, WEBAPI_PORT, WEBAPI_URI);
 
 UnitMeasurementConverter unitMeasurementConverter;
 
-DisplayDevice displayDevice;
-DisplayDeviceWiFi displayDeviceWiFi(displayDevice, espDevice);
-DisplayDeviceNTP displayDeviceNTP(displayDevice, espDevice);
-DisplayDeviceSensors displayDeviceSensors(displayDevice, espDevice, unitMeasurementConverter);
+DisplayDeviceWiFi displayDeviceWiFi(espDevice);
+DisplayDeviceNTP displayDeviceNTP(espDevice);
+DisplayDeviceSensors displayDeviceSensors(espDevice, unitMeasurementConverter);
 
 void setup() {
 
@@ -59,16 +57,16 @@ void setup() {
   pinMode(D4, INPUT);
   pinMode(D5, INPUT);
 
-  displayDevice.begin();
+  espDevice.getDisplayDevice()->begin();
 
   Serial.println("Iniciando...");
 
   // text display tests
-  displayDevice.display.clearDisplay();
-  displayDevice.display.setTextSize(1);
-  displayDevice.display.setTextColor(WHITE);
-  displayDevice.display.setCursor(0, 0);
-  displayDevice.display.display();
+  espDevice.getDisplayDevice()->display.clearDisplay();
+  espDevice.getDisplayDevice()->display.setTextSize(1);
+  espDevice.getDisplayDevice()->display.setTextColor(WHITE);
+  espDevice.getDisplayDevice()->display.setCursor(0, 0);
+  espDevice.getDisplayDevice()->display.display();
 
   initConfiguration();
 
@@ -95,14 +93,14 @@ void initConfiguration()
 
 bool mqtt_SubCallback(char* topicKey, char* json)
 {
-  displayDevice.getDisplayDeviceMQ()->printReceived(true);
+  espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printReceived(true);
   
   if (espDevice.getDeviceDebug()->isActive(DeviceDebug::DEBUG)) {
     espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey);
   }  
 
   if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
-    displayDevice.getDisplayDeviceWiFiAccess()->updatePin(json);
+    espDevice.getDisplayDevice()->getDisplayDeviceWiFiAccess()->updatePin(json);
     return true;
   }
 
@@ -130,7 +128,7 @@ void loop() {
       loopInApplication();
   }
   else{
-    displayDevice.getDisplayDeviceWiFiAccess()->loop();
+    espDevice.getDisplayDevice()->getDisplayDeviceWiFiAccess()->loop();
   }
 
   //keep-alive da comunicação com broker MQTT
@@ -140,7 +138,7 @@ void loop() {
 
 void loopInApplication()
 {
-  displayDevice.display.clearDisplay();
+  espDevice.getDisplayDevice()->display.clearDisplay();
 
   espDevice.getDeviceNTP()->update();
 
@@ -156,13 +154,13 @@ void loopInApplication()
   // Wifi
   displayDeviceWiFi.printSignal();
   
-  displayDevice.display.display();
+  espDevice.getDisplayDevice()->display.display();
 }
 
 void loopMQQTConnected()
 { 
-  displayDevice.getDisplayDeviceMQ()->printConnected();
-  displayDevice.getDisplayDeviceMQ()->printReceived(false);  
+  espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printConnected();
+  espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printReceived(false);  
 
   bool mqqtPrintSent = false;
 
@@ -195,6 +193,6 @@ void loopMQQTConnected()
     Serial.printf("deviceSensors->publish: %s\n", deviceSensorsPublished ? "true" : "false");    
   }
   
-  displayDevice.getDisplayDeviceMQ()->printSent(mqqtPrintSent); 
+  espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printSent(mqqtPrintSent); 
    
 }

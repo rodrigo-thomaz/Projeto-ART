@@ -12,7 +12,7 @@ namespace ART
 	{
 
 	public:
-		DisplayDeviceSensors(DisplayDevice& displayDevice, ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
+		DisplayDeviceSensors(ESPDevice& espDevice, UnitMeasurementConverter& unitMeasurementConverter);
 		~DisplayDeviceSensors();
 
 		void							printUpdate(bool on);
@@ -20,7 +20,6 @@ namespace ART
 
 	private:
 
-		DisplayDevice * _displayDevice;
 		ESPDevice*  					_espDevice;
 		UnitMeasurementConverter*  		_unitMeasurementConverter;
 
