@@ -157,15 +157,15 @@ namespace ART
 																		//notify
 			bool result = this->forceUpdate();
 			if (_updateCallback != NULL) {
-				Serial.print("[NTP Manager] UpdateCallback => update: ");
+				Serial.print(F("[NTP Manager] UpdateCallback => update: "));
 				Serial.print(result);
-				Serial.println(", forceUpdate: true");
+				Serial.println(F(", forceUpdate: true"));
 				_updateCallback(result, true);
 			}
 			return result;
 		}
 		if (_updateCallback != NULL) {
-			Serial.println("[NTP Manager] UpdateCallback => update: true, forceUpdate: false");
+			Serial.println(F("[NTP Manager] UpdateCallback => update: true, forceUpdate: false"));
 			_updateCallback(true, false);
 		}
 		return true;

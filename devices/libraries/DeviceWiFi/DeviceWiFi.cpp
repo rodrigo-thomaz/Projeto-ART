@@ -191,7 +191,7 @@ namespace ART
 
 		root.printTo(messageJson, sizeof(messageJson));
 
-		Serial.print("DeviceWiFi enviando para o servidor (Char Len)=> ");
+		Serial.print(F("DeviceWiFi enviando para o servidor (Char Len)=> "));
 		Serial.println(messageJsonLen);
 
 		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_WIFI_MESSAGE_TOPIC_PUB, messageJson);
@@ -295,7 +295,7 @@ namespace ART
 
 			if (resetWifiSettings) {
 
-				Serial.println("reset mode");
+				Serial.println(F("reset mode"));
 
 				resetSettings();
 

@@ -45,11 +45,11 @@ namespace ART
 			break;
 
 		case HTTP_UPDATE_NO_UPDATES:
-			Serial.println("HTTP_UPDATE_NO_UPDATES");
+			Serial.println(F("HTTP_UPDATE_NO_UPDATES"));
 			break;
 
 		case HTTP_UPDATE_OK:
-			Serial.println("HTTP_UPDATE_OK");
+			Serial.println(F("HTTP_UPDATE_OK"));
 			break;
 		}
 
