@@ -36,7 +36,7 @@ namespace ART
 
 		int												getUtcTimeOffsetInSecond();		
 
-		int												getUpdateIntervalInMilliSecond();		
+		long											getUpdateIntervalInMilliSecond();
 
 		/**
 		* Starts the underlying UDP client with the default local port
@@ -85,12 +85,12 @@ namespace ART
 
 	private:
 
-		ESPDevice * _espDevice;
+		ESPDevice *										_espDevice;
 
 		char*											_host;
 		int												_port;
 		int												_utcTimeOffsetInSecond;
-		int												_updateIntervalInMilliSecond;
+		long											_updateIntervalInMilliSecond;
 
 		UDP*          									_udp;
 		bool          									_udpSetup = false;

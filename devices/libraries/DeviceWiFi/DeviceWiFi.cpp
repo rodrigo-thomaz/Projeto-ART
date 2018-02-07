@@ -150,7 +150,7 @@ namespace ART
 		_hostName = value;
 	}
 
-	int DeviceWiFi::getPublishIntervalInMilliSeconds()
+	long DeviceWiFi::getPublishIntervalInMilliSeconds()
 	{
 		return _publishIntervalInMilliSeconds;
 	}

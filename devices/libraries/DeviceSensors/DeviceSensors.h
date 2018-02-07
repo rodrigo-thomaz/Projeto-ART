@@ -64,9 +64,9 @@ namespace ART
 
 		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 
-		int									getReadIntervalInMilliSeconds();
+		long								getReadIntervalInMilliSeconds();
 		
-		int									getPublishIntervalInMilliSeconds();
+		long								getPublishIntervalInMilliSeconds();
 
 		SensorDatasheet&					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);		
 
@@ -88,10 +88,10 @@ namespace ART
 		std::vector<SensorInDevice>			_sensorsInDevice;
 
 		uint64_t							_readIntervalTimestamp;
-		int									_readIntervalInMilliSeconds;
+		long								_readIntervalInMilliSeconds;
 
 		uint64_t							_publishIntervalTimestamp;
-		int									_publishIntervalInMilliSeconds;
+		long								_publishIntervalInMilliSeconds;
 
 		void 								setLabel(char* json);
 

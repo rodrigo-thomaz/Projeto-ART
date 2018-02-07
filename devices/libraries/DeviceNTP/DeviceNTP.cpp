@@ -90,7 +90,7 @@ namespace ART
 		Serial.println(_utcTimeOffsetInSecond);
 	}
 
-	int DeviceNTP::getUpdateIntervalInMilliSecond()
+	long DeviceNTP::getUpdateIntervalInMilliSecond()
 	{
 		return _updateIntervalInMilliSecond;
 	}

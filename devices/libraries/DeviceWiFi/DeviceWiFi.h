@@ -97,7 +97,7 @@ namespace ART
 		char *						getHostName() const;
 		void						setHostName(char* json);
 
-		int							getPublishIntervalInMilliSeconds();
+		long						getPublishIntervalInMilliSeconds();
 		void						setPublishIntervalInMilliSeconds(char* json);			
 
 		bool 						publish();
@@ -164,7 +164,7 @@ namespace ART
 		char *								_hostName;
 
 		uint64_t							_publishIntervalTimestamp;
-		int									_publishIntervalInMilliSeconds;
+		long								_publishIntervalInMilliSeconds;
 
 		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDeviceInApplication();

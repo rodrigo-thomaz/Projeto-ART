@@ -547,7 +547,7 @@ namespace ART
 		return result;
 	}
 
-	int DeviceSensors::getPublishIntervalInMilliSeconds()
+	long DeviceSensors::getPublishIntervalInMilliSeconds()
 	{
 		return _publishIntervalInMilliSeconds;
 	}
@@ -563,7 +563,7 @@ namespace ART
 		_publishIntervalInMilliSeconds = root["value"].as<int>();
 	}
 
-	int DeviceSensors::getReadIntervalInMilliSeconds()
+	long DeviceSensors::getReadIntervalInMilliSeconds()
 	{
 		return _readIntervalInMilliSeconds;
 	}
