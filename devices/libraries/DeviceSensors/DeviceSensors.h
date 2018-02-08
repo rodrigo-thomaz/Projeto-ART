@@ -60,7 +60,7 @@ namespace ART
 
 		ESPDevice *							getESPDevice();
 
-		SensorInDevice						*getSensorsInDevice();		
+		SensorInDevice **					getSensorsInDevice();		
 
 		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 
@@ -77,7 +77,7 @@ namespace ART
 		bool								_initialized;
 		bool								_initializing;
 		
-		SensorInDevice&						getSensorInDeviceBySensorId(char* sensorId);
+		SensorInDevice*						getSensorInDeviceBySensorId(char* sensorId);
 		Sensor*								getSensorById(char* sensorId);
 		SensorTrigger*						getSensorTriggerByKey(char* sensorId, char* sensorTriggerId);
 
@@ -85,7 +85,7 @@ namespace ART
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 
 		std::vector<SensorDatasheet>		_sensorDatasheets;
-		std::vector<SensorInDevice>			_sensorsInDevice;
+		std::vector<SensorInDevice*>		_sensorsInDevice;
 
 		uint64_t							_readIntervalTimestamp;
 		long								_readIntervalInMilliSeconds;

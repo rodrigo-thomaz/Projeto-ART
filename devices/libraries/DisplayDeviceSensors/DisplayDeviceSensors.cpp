@@ -60,7 +60,7 @@ namespace ART
 		int screenWidth = screenX2 - screenX1;
 		int screenHeight = screenY2 - screenY1;
 
-		SensorInDevice* sensorsInDevice = _displayDevice->getESPDevice()->getDeviceSensors()->getSensorsInDevice();
+		SensorInDevice** sensorsInDevice = _displayDevice->getESPDevice()->getDeviceSensors()->getSensorsInDevice();
 
 		int sensorsCount = sizeof(sensorsInDevice);
 
@@ -69,7 +69,7 @@ namespace ART
 		//_displayDevice->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
 
 		for (int i = 0; i < sensorsCount; ++i) {
-			Sensor* sensor = sensorsInDevice[i].getSensor();
+			Sensor* sensor = sensorsInDevice[i]->getSensor();
 			int boxX = screenX1 + (boxChunk * i);
 			this->printBar(sensor, boxX, screenY1, boxChunk, screenHeight);
 			this->printText(sensor, boxX, screenY1);

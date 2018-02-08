@@ -1,5 +1,7 @@
 #include "DeviceSensors.h"
-#include "ESPDevice.h"
+
+#include "../ESPDevice/ESPDevice.h"
+#include "../SensorInDevice/SensorInDevice.h"
 #include "PositionEnum.h"
 #include <algorithm>    // std::sort
 
@@ -133,7 +135,7 @@ namespace ART
 			JsonObject& sensorJsonObject = sensorInDeviceJsonObject["sensor"].as<JsonObject>();			
 
 			// SensorInDevice
-			_sensorsInDevice.push_back(SensorInDevice::create(this, sensorInDeviceJsonObject));
+			_sensorsInDevice.push_back(new SensorInDevice(this, sensorInDeviceJsonObject));
 
 			// DeviceAddress
 			DeviceAddress 	deviceAddress;
@@ -165,7 +167,7 @@ namespace ART
 		_dallas.requestTemperatures();
 
 		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
-			Sensor* sensor = _sensorsInDevice[i].getSensor();
+			Sensor* sensor = _sensorsInDevice[i]->getSensor();
 			sensor->setConnected(_dallas.isConnected(sensor->getDeviceAddress()));
 			sensor->getSensorTempDSFamily()->setResolution(_dallas.getResolution(sensor->getDeviceAddress()));
 			sensor->setValue(_dallas.getTempC(sensor->getDeviceAddress()));
@@ -220,9 +222,9 @@ namespace ART
 		return _espDevice;
 	}
 
-	SensorInDevice *DeviceSensors::getSensorsInDevice()
+	SensorInDevice ** DeviceSensors::getSensorsInDevice()
 	{
-		SensorInDevice* array = this->_sensorsInDevice.data();
+		SensorInDevice** array = this->_sensorsInDevice.data();
 		return array;
 	}
 
@@ -239,7 +241,7 @@ namespace ART
 	{
 		JsonArray& jsonArray = jsonObject.createNestedArray("sensorsInDevice");
 		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
-			createSensorJsonNestedObject(_sensorsInDevice[i].getSensor(), jsonArray);
+			createSensorJsonNestedObject(_sensorsInDevice[i]->getSensor(), jsonArray);
 		}
 	}
 
@@ -329,11 +331,11 @@ namespace ART
 		short index = 0;
 
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
-			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) == 0) {
-				_sensorsInDevice[i].setOrdination(ordination);
+			if (stricmp(_sensorsInDevice[i]->getSensor()->getSensorId(), sensorId) == 0) {
+				_sensorsInDevice[i]->setOrdination(ordination);
 			}
 			else {
-				orderedExceptCurrent[index] = &_sensorsInDevice[i];
+				orderedExceptCurrent[index] = _sensorsInDevice[i];
 				index++;
 			}
 		}
@@ -502,9 +504,9 @@ namespace ART
 			sensor->getSensorUnitMeasurementScale()->setChartLimiterMin(chartLimiterCelsius);
 	}	
 
-	SensorInDevice& DeviceSensors::getSensorInDeviceBySensorId(char* sensorId) {
+	SensorInDevice* DeviceSensors::getSensorInDeviceBySensorId(char* sensorId) {
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
-			if (stricmp(_sensorsInDevice[i].getSensor()->getSensorId(), sensorId) == 0) {
+			if (stricmp(_sensorsInDevice[i]->getSensor()->getSensorId(), sensorId) == 0) {
 				return _sensorsInDevice[i];
 			}
 		}
@@ -512,7 +514,7 @@ namespace ART
 
 	Sensor * DeviceSensors::getSensorById(char * sensorId)
 	{
-		return getSensorInDeviceBySensorId(sensorId).getSensor();
+		return getSensorInDeviceBySensorId(sensorId)->getSensor();
 	}
 
 	SensorTrigger* DeviceSensors::getSensorTriggerByKey(char * sensorId, char * sensorTriggerId)
