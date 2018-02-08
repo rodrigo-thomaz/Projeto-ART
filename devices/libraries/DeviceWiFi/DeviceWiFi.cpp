@@ -137,7 +137,7 @@ namespace ART
 		return (_hostName);
 	}
 
-	void DeviceWiFi::setHostName(char* json)
+	void DeviceWiFi::setHostName(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -155,7 +155,7 @@ namespace ART
 		return _publishIntervalInMilliSeconds;
 	}
 
-	void DeviceWiFi::setPublishIntervalInMilliSeconds(char* json)
+	void DeviceWiFi::setPublishIntervalInMilliSeconds(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);

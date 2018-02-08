@@ -97,8 +97,8 @@ namespace ART
 		char *						getHostName() const;		
 		long						getPublishIntervalInMilliSeconds();		
 
-		void						setHostName(char* json);
-		void						setPublishIntervalInMilliSeconds(char* json);
+		void						setHostName(const char* json);
+		void						setPublishIntervalInMilliSeconds(const char* json);
 
 		bool 						publish();
 
