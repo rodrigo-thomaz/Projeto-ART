@@ -33,7 +33,7 @@ namespace ART
 		_label = label;		
 
 		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
-		_sensorDatasheet = &deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
+		_sensorDatasheet = deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
 
 		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
 		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);				
@@ -45,9 +45,6 @@ namespace ART
 		for (JsonArray::iterator it = sensorTriggersJA.begin(); it != sensorTriggersJA.end(); ++it)
 		{
 			JsonObject& sensorTriggerJO = it->as<JsonObject>();
-			//SensorTrigger* sensorTrigger;
-			//SensorTrigger::create(sensorTrigger, this, sensorTriggerJO);
-			//_sensorTriggers.push_back(sensorTrigger);
 			_sensorTriggers.push_back(new SensorTrigger(this, sensorTriggerJO));
 		}
 	}

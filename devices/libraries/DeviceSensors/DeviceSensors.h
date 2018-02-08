@@ -7,8 +7,11 @@
 #include "OneWire.h"
 #include "DallasTemperature.h"
 
-#include "../SensorDatasheet/SensorDatasheet.h"
-#include "../SensorInDevice/SensorInDevice.h"
+//#include "../SensorDatasheet/SensorDatasheet.h"
+//#include "../SensorInDevice/SensorInDevice.h"
+
+#include "SensorDatasheet.h"
+#include "SensorInDevice.h"
 
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
@@ -68,7 +71,7 @@ namespace ART
 		
 		long								getPublishIntervalInMilliSeconds();
 
-		SensorDatasheet&					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);		
+		SensorDatasheet *					getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId);		
 
 	private:
 
@@ -77,14 +80,14 @@ namespace ART
 		bool								_initialized;
 		bool								_initializing;
 		
-		SensorInDevice*						getSensorInDeviceBySensorId(char* sensorId);
-		Sensor*								getSensorById(char* sensorId);
-		SensorTrigger*						getSensorTriggerByKey(char* sensorId, char* sensorTriggerId);
+		SensorInDevice *					getSensorInDeviceBySensorId(char* sensorId);
+		Sensor *							getSensorById(char* sensorId);
+		SensorTrigger *						getSensorTriggerByKey(char* sensorId, char* sensorTriggerId);
 
 		void								createSensorJsonNestedObject(Sensor* sensor, JsonArray& root);
 		String 								convertDeviceAddressToString(const uint8_t* deviceAddress);
 
-		std::vector<SensorDatasheet>		_sensorDatasheets;
+		std::vector<SensorDatasheet*>		_sensorDatasheets;
 		std::vector<SensorInDevice*>		_sensorsInDevice;
 
 		uint64_t							_readIntervalTimestamp;

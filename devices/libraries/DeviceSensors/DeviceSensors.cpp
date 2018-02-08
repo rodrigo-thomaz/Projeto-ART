@@ -124,7 +124,7 @@ namespace ART
 		for (JsonArray::iterator it = sensorDatasheetsJA.begin(); it != sensorDatasheetsJA.end(); ++it)
 		{
 			JsonObject& sensorDatasheetJO = it->as<JsonObject>();
-			_sensorDatasheets.push_back(SensorDatasheet::create(this, sensorDatasheetJO));
+			_sensorDatasheets.push_back(new SensorDatasheet(this, sensorDatasheetJO));
 		}
 
 		//sensorsInDevice
@@ -228,10 +228,10 @@ namespace ART
 		return array;
 	}
 
-	SensorDatasheet& DeviceSensors::getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
+	SensorDatasheet * DeviceSensors::getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
 	{
 		for (int i = 0; i < _sensorDatasheets.size(); ++i) {
-			if (_sensorDatasheets[i].getSensorDatasheetId() == sensorDatasheetId && _sensorDatasheets[i].getSensorTypeId() == sensorTypeId) {
+			if (_sensorDatasheets[i]->getSensorDatasheetId() == sensorDatasheetId && _sensorDatasheets[i]->getSensorTypeId() == sensorTypeId) {
 				return _sensorDatasheets[i];
 			}
 		}
