@@ -418,7 +418,7 @@ namespace ART
 		sensor->insertTrigger(root);
 	}
 
-	void DeviceSensors::deleteTrigger(const char * json)
+	bool DeviceSensors::deleteTrigger(const char * json)
 	{
 		Serial.println(F("[DeviceSensors::deleteTrigger] "));
 
@@ -426,7 +426,7 @@ namespace ART
 		JsonObject& root = jsonBuffer.parseObject(json);
 		if (!root.success()) {
 			printf("DeviceSensors", "deleteTrigger", "Parse failed: %s\n", json);
-			return;
+			return false;
 		}
 
 		char* sensorId = strdup(root["sensorId"]);
@@ -434,7 +434,7 @@ namespace ART
 
 		Sensor* sensor = getSensorById(sensorId);
 
-		sensor->deleteTrigger(sensorTriggerId);
+		return sensor->deleteTrigger(sensorTriggerId);
 	}
 
 	void DeviceSensors::setTriggerOn(const char* json)

@@ -105,7 +105,7 @@ namespace ART
 		void 								setOrdination(const char* json);
 
 		void 								insertTrigger(const char* json);
-		void 								deleteTrigger(const char* json);
+		bool 								deleteTrigger(const char* json);
 
 		void 								setTriggerOn(const char* json);
 		void 								setBuzzerOn(const char* json);

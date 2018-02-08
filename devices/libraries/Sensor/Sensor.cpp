@@ -146,16 +146,18 @@ namespace ART
 		_sensorTriggers.push_back(new SensorTrigger(this, root));
 	}
 
-	void Sensor::deleteTrigger(char* sensorTriggerId)
+	bool Sensor::deleteTrigger(const char* sensorTriggerId)
 	{
 		Serial.println(F("[Sensor::deleteTrigger] begin"));
 		for (int i = 0; i < _sensorTriggers.size(); ++i) {			
 			if (strcmp(_sensorTriggers[i]->getSensorTriggerId(), sensorTriggerId) == 0) {
 				_sensorTriggers.erase(_sensorTriggers.begin() + i);
 				Serial.println(F("[Sensor::deleteTrigger] deleted"));
-				return;
+				return true;
 			}
 		}		
+		Serial.println(F("[Sensor::deleteTrigger] not deleted !!!"));
+		return false;
 	}
 
 	SensorTempDSFamily * Sensor::getSensorTempDSFamily()
