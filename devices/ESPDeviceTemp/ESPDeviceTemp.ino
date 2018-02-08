@@ -81,7 +81,7 @@ bool mqtt_SubCallback(char* topicKey, char* json)
     espDevice.getDisplayDevice()->getDisplayDeviceWiFiAccess()->updatePin(json);
     return true;
   }
-
+/*
   else if (strcmp(topicKey, DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB) == 0) {
     espDevice.getDeviceWiFi()->setHostName(json);
     return true;
@@ -90,7 +90,7 @@ bool mqtt_SubCallback(char* topicKey, char* json)
    espDevice.getDeviceWiFi()->setPublishIntervalInMilliSeconds(json);
    return true;
   }
-  
+*/  
   else{
     return false;
   }
