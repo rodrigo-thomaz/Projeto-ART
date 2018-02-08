@@ -133,6 +133,7 @@ namespace ART
 		display.display();
 
 		_displayDeviceMQ->begin();
+		_displayDeviceWiFiAccess->begin();
 	}
 
 	ESPDevice * DisplayDevice::getESPDevice()
@@ -169,5 +170,4 @@ namespace ART
 	{
 		return _displayDeviceSensors;
 	}
-	
 }

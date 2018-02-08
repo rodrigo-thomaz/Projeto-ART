@@ -48,7 +48,6 @@ namespace ART
 		DisplayDeviceNTP *						_displayDeviceNTP;
 		DisplayDeviceWiFi *						_displayDeviceWiFi;
 		DisplayDeviceSensors *					_displayDeviceSensors;
-
 	};
 }
 

@@ -52,8 +52,6 @@ void setup() {
 
   espDevice.begin();  
 
-  espDevice.getDeviceMQ()->addSubscriptionCallback(mqtt_SubCallback);
-
   String hostNameWifi = HOST_NAME;
   hostNameWifi.concat(".local");
 
@@ -69,21 +67,6 @@ void initConfiguration()
 {
   EEPROM_readAnything(0, configuration);
   //EEPROM_writeAnything(configurationEEPROMAddr, configuration);
-}
-
-bool mqtt_SubCallback(char* topicKey, char* json)
-{
-  if (espDevice.getDeviceDebug()->isActive(DeviceDebug::DEBUG)) {
-    espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey);
-  }  
-
-  if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
-    espDevice.getDisplayDevice()->getDisplayDeviceWiFiAccess()->updatePin(json);
-    return true;
-  }
-  else{
-    return false;
-  }
 }
 
 void loop() {

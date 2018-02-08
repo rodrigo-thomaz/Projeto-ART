@@ -19,6 +19,8 @@ namespace ART
 
 		static void					create(DisplayDeviceWiFiAccess* (&displayDeviceWiFiAccess), DisplayDevice* displayDevice);
 
+		void						begin();
+
 		void						updatePin(char* json);
 		void						loop();
 
@@ -30,6 +32,9 @@ namespace ART
 		int 						_nextFireTimeInSeconds = -1;
 
 		uint64_t 					_messageTimestamp = 0;
+
+		bool						onDeviceMQSubscription(char* topicKey, char* json);
+
 	};
 }
 

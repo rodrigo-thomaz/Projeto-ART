@@ -1,5 +1,7 @@
 #include "DisplayDeviceWiFiAccess.h"
 #include "DisplayDevice.h"
+#include "ESPDevice.h"
+#include "DeviceMQ.h"
 
 namespace ART
 {
@@ -16,6 +18,11 @@ namespace ART
 	void DisplayDeviceWiFiAccess::create(DisplayDeviceWiFiAccess *(&displayDeviceWiFiAccess), DisplayDevice * displayDevice)
 	{
 		displayDeviceWiFiAccess = new DisplayDeviceWiFiAccess(displayDevice);
+	}
+
+	void DisplayDeviceWiFiAccess::begin()
+	{
+		_displayDevice->getESPDevice()->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
 	void DisplayDeviceWiFiAccess::updatePin(char* json)
@@ -77,6 +84,17 @@ namespace ART
 			this->_displayDevice->display.display();
 
 			_messageTimestamp = now;
+		}
+	}
+
+	bool DisplayDeviceWiFiAccess::onDeviceMQSubscription(char * topicKey, char * json)
+	{
+		if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
+			updatePin(json);
+			return true;
+		}
+		else {
+			return false;
 		}
 	}
 }
