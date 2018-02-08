@@ -430,11 +430,11 @@ namespace ART
 		}
 
 		char* sensorId = strdup(root["sensorId"]);
-		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
+		//char* sensorTriggerId = strdup(root["sensorTriggerId"]);
 
 		Sensor* sensor = getSensorById(sensorId);
 
-		return sensor->deleteTrigger(sensorTriggerId);
+		return sensor->deleteTrigger(root["sensorTriggerId"]);
 	}
 
 	void DeviceSensors::setTriggerOn(const char* json)
