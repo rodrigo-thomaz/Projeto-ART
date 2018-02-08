@@ -106,8 +106,8 @@ namespace ART
 
 		bool 											_loaded = false;
 
-		void											setUtcTimeOffsetInSecond(char* json);
-		void											setUpdateIntervalInMilliSecond(char* json);
+		void											setUtcTimeOffsetInSecond(const char* json);
+		void											setUpdateIntervalInMilliSecond(const char* json);
 
 		void											onDeviceMQSubscribeDeviceInApplication();
 		void											onDeviceMQUnSubscribeDeviceInApplication();
