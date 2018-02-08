@@ -24,11 +24,6 @@ namespace ART
 		_deviceSensors->getESPDevice()->getDeviceDebug()->printlnLevel(DeviceDebug::DEBUG, "SensorInDevice", "destructor");
 	}
 
-	SensorInDevice SensorInDevice::create(DeviceSensors * deviceSensors, JsonObject & jsonObject)
-	{
-		return SensorInDevice(deviceSensors, jsonObject);
-	}
-
 	Sensor * SensorInDevice::getSensor()
 	{
 		return _sensor;

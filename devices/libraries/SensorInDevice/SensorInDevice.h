@@ -16,8 +16,6 @@ namespace ART
 		SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject);
 		~SensorInDevice();
 
-		static SensorInDevice				create(DeviceSensors* deviceSensors, JsonObject& jsonObject);
-
 		Sensor*								getSensor();
 		DeviceSensors*						getDeviceSensors();
 
