@@ -41,6 +41,11 @@
             get; set;
         }
 
+        public bool HasSensor
+        {
+            get; set;
+        }
+
         public string Label
         {
             get; set;

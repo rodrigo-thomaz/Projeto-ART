@@ -1085,6 +1085,7 @@
             {
                 var deviceDatasheetId = Guid.Parse(line[0]);
                 var name = line[1];
+                var hasSensor = bool.Parse(line[2]);
 
                 var entity = context.DeviceDatasheet
                     .Where(x => x.Id == deviceDatasheetId)
@@ -1096,12 +1097,14 @@
                     {
                         Id = deviceDatasheetId,
                         Name = name,
+                        HasSensor = hasSensor,
                     };
                     context.DeviceDatasheet.Add(entity);
                 }
                 else
                 {
                     entity.Name = name;
+                    entity.HasSensor = hasSensor;
                 }
 
                 context.SaveChanges();

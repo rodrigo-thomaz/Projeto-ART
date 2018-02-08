@@ -19,6 +19,11 @@
             get; set;
         }
 
+        public bool HasSensor
+        {
+            get; set;
+        }
+
         public Guid Id
         {
             get; set;

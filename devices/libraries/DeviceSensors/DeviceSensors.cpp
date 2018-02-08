@@ -54,6 +54,9 @@ namespace ART
 
 		// initializing
 
+		//TODO:TESTE
+		return false;
+
 		this->_initializing = true;
 
 		Serial.println(F("[DeviceSensors::initialized] initializing...]"));

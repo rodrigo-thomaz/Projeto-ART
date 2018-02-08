@@ -28,6 +28,11 @@
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
+
+            //HasSensor
+            Property(x => x.HasSensor)
+                .HasColumnOrder(2)
+                .IsRequired();
         }
 
         #endregion Constructors

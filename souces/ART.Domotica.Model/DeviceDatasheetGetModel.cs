@@ -11,6 +11,11 @@
             get; set;
         }
 
+        public bool HasSensor
+        {
+            get; set;
+        }
+
         public string Name
         {
             get; set;
