@@ -99,38 +99,63 @@ namespace ART
 	{
 		Serial.println(F("[DeviceSensors::setSensorsByMQQTCallback] Enter"));
 
+		Serial.print(F("FreeHeap pre buffer deviceSensorsJO: "));
+		Serial.println(ESP.getFreeHeap());
+
 		this->_initialized = true;
 		this->_initializing = false;
 
 		DynamicJsonBuffer jsonBuffer;
 		//StaticJsonBuffer<DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE> jsonBuffer;
 
-		JsonObject& sensorInDeviceJO = jsonBuffer.parseObject(json);
+		JsonObject& deviceSensorsJO = jsonBuffer.parseObject(json);
 		
-		if (!sensorInDeviceJO.success()) {
+		Serial.print(F("Depois deste ponto o uso de memoria do ArduinoJson permanece o mesmo."));
+		Serial.print(F("FreeHeap pos buffer deviceSensorsJO: "));
+		Serial.println(ESP.getFreeHeap());
+		
+		if (!deviceSensorsJO.success()) {
 			Serial.print(F("[DeviceSensors::setSensorsByMQQTCallback] parse failed: "));
 			Serial.println(json);
 			return;
 		}
 
-		JsonArray& sensorDatasheetsJA = sensorInDeviceJO["sensorDatasheets"];
-		JsonArray& sensorsInDeviceJA = sensorInDeviceJO["sensorsInDevice"];
+		Serial.print(F("FreeHeap pre buffer sensorDatasheetsJA: "));
+		Serial.println(ESP.getFreeHeap());
+		JsonArray& sensorDatasheetsJA = deviceSensorsJO["sensorDatasheets"];
+		Serial.print(F("FreeHeap pos buffer sensorDatasheetsJA: "));
+		Serial.println(ESP.getFreeHeap());
 
-		_readIntervalInMilliSeconds = sensorInDeviceJO["readIntervalInMilliSeconds"];
-		_publishIntervalInMilliSeconds = sensorInDeviceJO["publishIntervalInMilliSeconds"];
+		Serial.print(F("FreeHeap pre buffer sensorsInDeviceJA: "));
+		Serial.println(ESP.getFreeHeap());
+		JsonArray& sensorsInDeviceJA = deviceSensorsJO["sensorsInDevice"];
+		Serial.print(F("FreeHeap pos buffer sensorsInDeviceJA: "));
+		Serial.println(ESP.getFreeHeap());
+
+		_readIntervalInMilliSeconds = deviceSensorsJO["readIntervalInMilliSeconds"];
+		_publishIntervalInMilliSeconds = deviceSensorsJO["publishIntervalInMilliSeconds"];
 
 		// sensorDatasheets
 
 		for (JsonArray::iterator it = sensorDatasheetsJA.begin(); it != sensorDatasheetsJA.end(); ++it)
 		{
+			Serial.print(F("FreeHeap pre _sensorDatasheets.push_back: "));
+			Serial.println(ESP.getFreeHeap());
+
 			JsonObject& sensorDatasheetJO = it->as<JsonObject>();
 			_sensorDatasheets.push_back(new SensorDatasheet(this, sensorDatasheetJO));
+
+			Serial.print(F("FreeHeap pos _sensorDatasheets.push_back: "));
+			Serial.println(ESP.getFreeHeap());
 		}
 
 		//sensorsInDevice
 
 		for (JsonArray::iterator it = sensorsInDeviceJA.begin(); it != sensorsInDeviceJA.end(); ++it)
 		{
+			Serial.print(F("FreeHeap pre _sensorsInDevice.push_back: "));
+			Serial.println(ESP.getFreeHeap());
+
 			JsonObject& sensorInDeviceJsonObject = it->as<JsonObject>();
 			JsonObject& sensorJsonObject = sensorInDeviceJsonObject["sensor"].as<JsonObject>();			
 
@@ -145,7 +170,13 @@ namespace ART
 
 			_dallas.setResolution(deviceAddress, resolution);
 			_dallas.resetAlarmSearch();
+
+			Serial.print(F("FreeHeap pos _sensorsInDevice.push_back: "));
+			Serial.println(ESP.getFreeHeap());
 		}
+
+		Serial.print(F("FreeHeap Final: "));
+		Serial.println(ESP.getFreeHeap());
 	}
 
 	bool DeviceSensors::read()
