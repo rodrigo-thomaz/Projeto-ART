@@ -430,7 +430,6 @@ namespace ART
 		}
 
 		char* sensorId = strdup(root["sensorId"]);
-		//char* sensorTriggerId = strdup(root["sensorTriggerId"]);
 
 		Sensor* sensor = getSensorById(sensorId);
 
