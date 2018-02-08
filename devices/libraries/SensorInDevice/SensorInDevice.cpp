@@ -8,6 +8,7 @@ namespace ART
 	SensorInDevice::SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject)
 	{
 		_deviceSensors = deviceSensors;
+
 		DeviceDebug* deviceDebug = _deviceSensors->getESPDevice()->getDeviceDebug();
 
 		deviceDebug->printlnLevel(DeviceDebug::DEBUG, "SensorInDevice", "constructor", "begin");

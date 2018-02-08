@@ -113,7 +113,7 @@ namespace ART
 		return true;
 	}
 
-	void DeviceSensors::setSensorsByMQQTCallback(char* json)
+	void DeviceSensors::setSensorsByMQQTCallback(const char* json)
 	{
 		Serial.println(F("[DeviceSensors::setSensorsByMQQTCallback] Enter"));
 

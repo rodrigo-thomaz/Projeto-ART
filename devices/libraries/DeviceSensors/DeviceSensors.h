@@ -57,7 +57,7 @@ namespace ART
 		void 								begin();
 
 		bool								initialized();
-		void 								setSensorsByMQQTCallback(char* json);
+		void 								setSensorsByMQQTCallback(const char* json);
 
 		bool 								read();
 		bool 								publish();
