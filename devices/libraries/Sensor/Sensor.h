@@ -36,7 +36,7 @@ namespace ART
 		bool								getValidFamily();
 
 		char* 								getLabel() const;
-		void 								setLabel(char* value);	
+		void 								setLabel(const char* value);	
 
 		bool 								getConnected();
 		void 								setConnected(bool value);

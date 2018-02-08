@@ -296,6 +296,8 @@ namespace ART
 
 	void DeviceSensors::setLabel(const char* json)
 	{
+		Serial.println(F("[DeviceSensors::setLabel] begin"));
+
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
 
@@ -305,20 +307,16 @@ namespace ART
 			return;
 		}
 
-		char* sensorId = strdup(root["sensorId"]);
-		char* label = strdup(root["label"]);
+		Sensor* sensor = getSensorById(root["sensorId"]);
 
-		Sensor* sensor = getSensorById(sensorId);
+		sensor->setLabel(root["label"]);
 
-		sensor->setLabel(label);
-
-		Serial.print(F("setLabel="));
-		Serial.println(label);
+		Serial.println(F("[DeviceSensors::setLabel] end"));
 	}
 
 	void DeviceSensors::setDatasheetUnitMeasurementScale(const char* json)
 	{
-		Serial.println(F("[DeviceSensors] setUnitOfMeasurement"));
+		Serial.println(F("[DeviceSensors::setUnitOfMeasurement] begin"));
 
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -327,19 +325,19 @@ namespace ART
 			return;
 		}		
 
-		char* sensorId = strdup(root["sensorId"]);
 		UnitMeasurementEnum unitMeasurementId = static_cast<UnitMeasurementEnum>(root["unitMeasurementId"].as<int>());
 
-		Sensor* sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorById(root["sensorId"]);
 		SensorUnitMeasurementScale* sensorUnitMeasurementScale = sensor->getSensorUnitMeasurementScale();
 
-		sensorUnitMeasurementScale->setUnitMeasurementId(unitMeasurementId);		
+		sensorUnitMeasurementScale->setUnitMeasurementId(unitMeasurementId);
+
+		Serial.println(F("[DeviceSensors::setUnitOfMeasurement] end"));
 	}
 
 	void DeviceSensors::setResolution(const char* json)
 	{
-		Serial.println(F("[DeviceSensors] setResolution"));
-		Serial.println(json);
+		Serial.println(F("[DeviceSensors::setResolution] begin"));		
 
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -348,18 +346,19 @@ namespace ART
 			return;
 		}
 
-		char* sensorId = strdup(root["sensorId"]);
 		int value = root["dsFamilyTempSensorResolutionId"];
 
-		Sensor* sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorById(root["sensorId"]);
 
 		sensor->getSensorTempDSFamily()->setResolution(value);
-		_dallas.setResolution(sensor->getDeviceAddress(), value);		
+		_dallas.setResolution(sensor->getDeviceAddress(), value);
+
+		Serial.println(F("[DeviceSensors::setResolution] end"));
 	}
 
 	void DeviceSensors::setOrdination(const char * json)
 	{
-		Serial.print(F("[DeviceSensors::setOrdination] "));
+		Serial.print(F("[DeviceSensors::setOrdination] begin"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -368,9 +367,6 @@ namespace ART
 			return;
 		}
 
-		root.printTo(Serial);
-
-		char* sensorId = strdup(root["sensorId"]);
 		short ordination = root["ordination"];
 
 		short orderedExceptCurrentSize = _sensorsInDevice.size() - 1;
@@ -380,7 +376,7 @@ namespace ART
 		short index = 0;
 
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
-			if (stricmp(_sensorsInDevice[i]->getSensor()->getSensorId(), sensorId) == 0) {
+			if (stricmp(_sensorsInDevice[i]->getSensor()->getSensorId(), root["sensorId"]) == 0) {
 				_sensorsInDevice[i]->setOrdination(ordination);
 			}
 			else {
@@ -400,11 +396,13 @@ namespace ART
 		}		
 
 		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
+
+		Serial.print(F("[DeviceSensors::setOrdination] end"));
 	}
 
 	void DeviceSensors::insertTrigger(const char * json)
 	{
-		Serial.println(F("[DeviceSensors::insertTrigger] "));
+		Serial.println(F("[DeviceSensors::insertTrigger] begin"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -413,14 +411,16 @@ namespace ART
 			return;
 		}
 
-		char* sensorId = strdup(root["sensorId"]);
-		Sensor* sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorById(root["sensorId"]);
+
 		sensor->insertTrigger(root);
+
+		Serial.println(F("[DeviceSensors::insertTrigger] end"));
 	}
 
 	bool DeviceSensors::deleteTrigger(const char * json)
 	{
-		Serial.println(F("[DeviceSensors::deleteTrigger] "));
+		Serial.println(F("[DeviceSensors::deleteTrigger] begin"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -429,16 +429,14 @@ namespace ART
 			return false;
 		}
 
-		char* sensorId = strdup(root["sensorId"]);
-
-		Sensor* sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorById(root["sensorId"]);
 
 		return sensor->deleteTrigger(root["sensorTriggerId"]);
 	}
 
 	void DeviceSensors::setTriggerOn(const char* json)
 	{
-		Serial.println(F("[DeviceSensors::setTriggerOn] "));
+		Serial.println(F("[DeviceSensors::setTriggerOn] begin"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -447,20 +445,16 @@ namespace ART
 			return;
 		}
 
-		root.printTo(Serial);
+		SensorTrigger* sensorTrigger = getSensorTriggerByKey(root["sensorId"], root["sensorTriggerId"]);
 
-		char* sensorId = strdup(root["sensorId"]);
-		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
-		bool triggerOn = root["triggerOn"];
+		sensorTrigger->setTriggerOn(root["triggerOn"]);
 
-		SensorTrigger* sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
-
-		sensorTrigger->setTriggerOn(triggerOn);
+		Serial.println(F("[DeviceSensors::setTriggerOn] end"));
 	}
 
 	void DeviceSensors::setBuzzerOn(const char* json)
 	{
-		Serial.print(F("[DeviceSensors::setBuzzerOn] "));
+		Serial.println(F("[DeviceSensors::setBuzzerOn] begin"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -469,15 +463,11 @@ namespace ART
 			return;
 		}
 
-		root.printTo(Serial);
+		SensorTrigger* sensorTrigger = getSensorTriggerByKey(root["sensorId"], root["sensorTriggerId"]);
 
-		char* sensorId = strdup(root["sensorId"]);
-		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
-		bool buzzerOn = root["buzzerOn"];
+		sensorTrigger->setBuzzerOn(root["buzzerOn"]);
 
-		SensorTrigger* sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
-
-		sensorTrigger->setBuzzerOn(buzzerOn);
+		Serial.println(F("[DeviceSensors::setBuzzerOn] end"));
 	}
 
 	void DeviceSensors::setTriggerValue(const char* json)
@@ -492,7 +482,6 @@ namespace ART
 		}
 
 		float triggerValue = root["triggerValue"];
-
 		PositionEnum position = static_cast<PositionEnum>(root["position"].as<int>());
 
 		SensorTrigger* sensorTrigger = getSensorTriggerByKey(root["sensorId"], root["sensorTriggerId"]);
@@ -507,7 +496,7 @@ namespace ART
 
 	void DeviceSensors::setRange(const char* json)
 	{
-		Serial.print(F("[DeviceSensors::setRange] "));
+		Serial.println(F("[DeviceSensors::setRange] begin"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -516,21 +505,22 @@ namespace ART
 			return;
 		}
 
-		char* sensorId = strdup(root["sensorId"]);
 		float chartLimiterCelsius = root["value"];
 		PositionEnum position = static_cast<PositionEnum>(root["position"].as<int>());
 
-		Sensor* sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorById(root["sensorId"]);
 
 		if (position == Max)
 			sensor->getSensorUnitMeasurementScale()->setRangeMax(chartLimiterCelsius);
 		else if (position == Min)
 			sensor->getSensorUnitMeasurementScale()->setRangeMin(chartLimiterCelsius);
+
+		Serial.println(F("[DeviceSensors::setRange] end"));
 	}
 
 	void DeviceSensors::setChartLimiter(const char* json)
 	{
-		Serial.print(F("[DeviceSensors::setChartLimiter] "));
+		Serial.println(F("[DeviceSensors::setChartLimiter] begin"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -539,16 +529,17 @@ namespace ART
 			return;
 		}
 
-		char* sensorId = strdup(root["sensorId"]);
-		float chartLimiterCelsius = root["value"];
+		float value = root["value"];
 		PositionEnum position = static_cast<PositionEnum>(root["position"].as<int>());
 
-		Sensor* sensor = getSensorById(sensorId);
+		Sensor* sensor = getSensorById(root["sensorId"]);
 
 		if (position == Max)
-			sensor->getSensorUnitMeasurementScale()->setChartLimiterMax(chartLimiterCelsius);
+			sensor->getSensorUnitMeasurementScale()->setChartLimiterMax(value);
 		else if (position == Min)
-			sensor->getSensorUnitMeasurementScale()->setChartLimiterMin(chartLimiterCelsius);
+			sensor->getSensorUnitMeasurementScale()->setChartLimiterMin(value);
+
+		Serial.println(F("[DeviceSensors::setChartLimiter] end"));
 	}	
 
 	SensorInDevice* DeviceSensors::getSensorInDeviceBySensorId(const char* sensorId) {
@@ -603,13 +594,18 @@ namespace ART
 
 	void DeviceSensors::setPublishIntervalInMilliSeconds(const char* json)
 	{
+		Serial.println(F("[DeviceSensors::setPublishIntervalInMilliSeconds] begin"));
+
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
 		if (!root.success()) {
 			printf("DeviceSensors", "setPublishIntervalInMilliSeconds", "Parse failed: %s\n", json);
 			return;
 		}
+		
 		_publishIntervalInMilliSeconds = root["value"].as<int>();
+
+		Serial.println(F("[DeviceSensors::setPublishIntervalInMilliSeconds] end"));
 	}
 
 	long DeviceSensors::getReadIntervalInMilliSeconds()
@@ -619,6 +615,8 @@ namespace ART
 
 	void DeviceSensors::setReadIntervalInMilliSeconds(const char* json)
 	{
+		Serial.println(F("[DeviceSensors::setReadIntervalInMilliSeconds] begin"));
+
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
 		if (!root.success()) {
@@ -626,6 +624,8 @@ namespace ART
 			return;
 		}
 		_readIntervalInMilliSeconds = root["value"].as<int>();
+
+		Serial.println(F("[DeviceSensors::setReadIntervalInMilliSeconds] end"));
 	}
 
 	void DeviceSensors::onDeviceMQSubscribeDeviceInApplication()

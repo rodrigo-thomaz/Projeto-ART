@@ -94,10 +94,10 @@ namespace ART
 		return (_label);
 	}
 
-	void Sensor::setLabel(char* value)
+	void Sensor::setLabel(const char* value)
 	{
 		_label = new char(sizeof(strlen(value)));
-		_label = value;
+		_label = strdup(value);
 	}	
 
 	bool Sensor::getConnected()
