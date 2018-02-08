@@ -482,7 +482,7 @@ namespace ART
 
 	void DeviceSensors::setTriggerValue(const char* json)
 	{
-		Serial.print(F("[DeviceSensors::setTriggerValue] "));
+		Serial.println(F("[DeviceSensors::setTriggerValue] begin"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -491,19 +491,18 @@ namespace ART
 			return;
 		}
 
-		root.printTo(Serial);
-
-		char* sensorId = strdup(root["sensorId"]);
-		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
 		float triggerValue = root["triggerValue"];
+
 		PositionEnum position = static_cast<PositionEnum>(root["position"].as<int>());
 
-		SensorTrigger* sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
+		SensorTrigger* sensorTrigger = getSensorTriggerByKey(root["sensorId"], root["sensorTriggerId"]);
 
 		if (position == Max)
 			sensorTrigger->setMax(triggerValue);
 		else if (position == Min)
 			sensorTrigger->setMin(triggerValue);
+
+		Serial.println(F("[DeviceSensors::setTriggerValue] end"));
 	}	
 
 	void DeviceSensors::setRange(const char* json)
@@ -552,7 +551,7 @@ namespace ART
 			sensor->getSensorUnitMeasurementScale()->setChartLimiterMin(chartLimiterCelsius);
 	}	
 
-	SensorInDevice* DeviceSensors::getSensorInDeviceBySensorId(char* sensorId) {
+	SensorInDevice* DeviceSensors::getSensorInDeviceBySensorId(const char* sensorId) {
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
 			if (stricmp(_sensorsInDevice[i]->getSensor()->getSensorId(), sensorId) == 0) {
 				return _sensorsInDevice[i];
@@ -560,12 +559,12 @@ namespace ART
 		}
 	}
 
-	Sensor * DeviceSensors::getSensorById(char * sensorId)
+	Sensor * DeviceSensors::getSensorById(const char * sensorId)
 	{
 		return getSensorInDeviceBySensorId(sensorId)->getSensor();
 	}
 
-	SensorTrigger* DeviceSensors::getSensorTriggerByKey(char * sensorId, char * sensorTriggerId)
+	SensorTrigger* DeviceSensors::getSensorTriggerByKey(const char * sensorId, const char * sensorTriggerId)
 	{
 		SensorTrigger** sensorTriggers = getSensorById(sensorId)->getSensorTriggers();
 		int count = sizeof(SensorTrigger);
