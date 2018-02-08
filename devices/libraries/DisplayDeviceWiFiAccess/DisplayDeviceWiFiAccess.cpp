@@ -20,7 +20,7 @@ namespace ART
 
 	void DisplayDeviceWiFiAccess::updatePin(char* json)
 	{
-		Serial.println("******************** Update PIN ********************");
+		Serial.println(F("******************** Update PIN ********************"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);

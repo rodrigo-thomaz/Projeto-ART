@@ -5,7 +5,7 @@ namespace ART
 {
 	SensorUnitMeasurementScale::SensorUnitMeasurementScale(Sensor* sensor, JsonObject& jsonObject)
 	{
-		Serial.println("[SensorUnitMeasurementScale constructor]");
+		Serial.println(F("[SensorUnitMeasurementScale constructor]"));
 
 		_sensor = sensor;
 
@@ -20,7 +20,7 @@ namespace ART
 
 	SensorUnitMeasurementScale::~SensorUnitMeasurementScale()
 	{
-		Serial.println("[SensorUnitMeasurementScale destructor]");
+		Serial.println(F("[SensorUnitMeasurementScale destructor]"));
 	}
 
 	void SensorUnitMeasurementScale::create(SensorUnitMeasurementScale *(&sensorUnitMeasurementScale), Sensor * sensor, JsonObject & jsonObject)

@@ -5,7 +5,7 @@ namespace ART
 {
 	SensorDatasheet::SensorDatasheet(DeviceSensors* deviceSensors, JsonObject& jsonObject)
 	{
-		Serial.println("[SensorDatasheet constructor]");
+		Serial.println(F("[SensorDatasheet constructor]"));
 
 		_deviceSensors = deviceSensors;
 
@@ -17,7 +17,7 @@ namespace ART
 
 	SensorDatasheet::~SensorDatasheet()
 	{
-		Serial.println("[SensorDatasheet destructor]");
+		Serial.println(F("[SensorDatasheet destructor]"));
 	}
 
 	SensorTypeEnum SensorDatasheet::getSensorTypeId()

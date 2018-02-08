@@ -54,15 +54,19 @@ namespace ART
 
 	bool DeviceSensors::initialized()
 	{
-		Serial.println(F("[DeviceSensors::initialized] begin"));
-
 		if (_initialized) return true;
 
-		if (!_espDevice->loaded()) return false;
+		Serial.println(F("[DeviceSensors::initialized] begin"));
 
-		if (_initializing) return false;
+		Serial.printf("_espDevice->loaded(): %s\n", _espDevice->loaded() ? "true" : "false");		
+		Serial.printf("_espDevice->getDeviceMQ()->connected(): %s\n", _espDevice->getDeviceMQ()->connected() ? "true" : "false");
+		Serial.printf("_initializing: %s\n", _initializing ? "true" : "false");
+
+		if (!_espDevice->loaded()) return false;		
 
 		if (!_espDevice->getDeviceMQ()->connected()) return false;
+
+		if (_initializing) return false;
 
 		// initializing
 

@@ -5,7 +5,7 @@ namespace ART
 {	
 	SensorTempDSFamily::SensorTempDSFamily(Sensor* sensor, JsonObject& jsonObject)
 	{
-		Serial.println("[SensorTempDSFamily constructor]");
+		Serial.println(F("[SensorTempDSFamily constructor]"));
 
 		_sensor = sensor;
 
@@ -14,7 +14,7 @@ namespace ART
 
 	SensorTempDSFamily::~SensorTempDSFamily()
 	{
-		Serial.println("[SensorTempDSFamily destructor]");
+		Serial.println(F("[SensorTempDSFamily destructor]"));
 	}
 
 	void SensorTempDSFamily::create(SensorTempDSFamily *(&sensorTempDSFamily), Sensor * sensor, JsonObject & jsonObject)

@@ -17,7 +17,7 @@ namespace ART
 
 	SensorDatasheetUnitMeasurementDefault::~SensorDatasheetUnitMeasurementDefault()
 	{
-		Serial.println("[SensorDatasheetUnitMeasurementDefault destructor]");
+		Serial.println(F("[SensorDatasheetUnitMeasurementDefault destructor]"));
 	}
 
 	void SensorDatasheetUnitMeasurementDefault::create(SensorDatasheetUnitMeasurementDefault *(&sensorDatasheetUnitMeasurementDefault), SensorDatasheet * sensorDatasheet, JsonObject & jsonObject)
