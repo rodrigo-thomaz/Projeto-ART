@@ -53,9 +53,11 @@ namespace ART
 		DeviceMQ*							getDeviceMQ();
 		DeviceNTP*							getDeviceNTP();
 		DeviceBinary*						getDeviceBinary();
-		DeviceBuzzer*						getDeviceBuzzer();
-		DeviceSensors*						getDeviceSensors();
+		DeviceBuzzer*						getDeviceBuzzer();		
 		DisplayDevice*						getDisplayDevice();
+
+		bool								hasSensor();
+		DeviceSensors*						getDeviceSensors();
 
 	private:
 
@@ -67,6 +69,7 @@ namespace ART
 		long								_chipSize;
 
 		char *								_label;
+		bool 								_hasSensor;
 
 		char *								_webApiHost;
 		uint16_t							_webApiPort;

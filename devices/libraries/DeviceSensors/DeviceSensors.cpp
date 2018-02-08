@@ -18,12 +18,18 @@ namespace ART
 {
 	DeviceSensors::DeviceSensors(ESPDevice* espDevice)
 	{
+		Serial.println(F("[DeviceSensors constructor]"));
+
 		_espDevice = espDevice;
 		_readIntervalTimestamp = 0;
+		_initializing = false;
+		_initialized = false;
 	}
 
 	DeviceSensors::~DeviceSensors()
 	{
+		Serial.println(F("[DeviceSensors destructor]"));
+
 		delete (_espDevice);
 	}
 
@@ -34,30 +40,33 @@ namespace ART
 
 	void DeviceSensors::begin()
 	{
+		Serial.println(F("[DeviceSensors::begin] begin"));
+
 		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
 		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 		
 		_dallas.begin();
 		initialized();
+
+		Serial.println(F("[DeviceSensors::begin] end"));
 	}
 
 	bool DeviceSensors::initialized()
 	{
-		if (this->_initialized) return true;
+		Serial.println(F("[DeviceSensors::initialized] begin"));
 
-		if (!this->_espDevice->loaded()) return false;
+		if (_initialized) return true;
 
-		if (this->_initializing) return false;
+		if (!_espDevice->loaded()) return false;
+
+		if (_initializing) return false;
 
 		if (!_espDevice->getDeviceMQ()->connected()) return false;
 
 		// initializing
 
-		//TODO:TESTE
-		return false;
-
-		this->_initializing = true;
+		_initializing = true;
 
 		Serial.println(F("[DeviceSensors::initialized] initializing...]"));
 
@@ -94,6 +103,8 @@ namespace ART
 		root.printTo(result, sizeof(result));
 
 		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_TOPIC_PUB, result);
+
+		Serial.println(F("[DeviceSensors::initialized] end"));
 
 		return true;
 	}

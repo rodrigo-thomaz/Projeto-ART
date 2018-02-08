@@ -4,6 +4,8 @@ namespace ART
 {
 	ESPDevice::ESPDevice(const char* webApiHost, uint16_t webApiPort, const char* webApiUri)
 	{
+		Serial.println(F("[ESPDevice::ESPDevice]] constructor begin"));
+
 		_chipId = ESP.getChipId();
 		_flashChipId = ESP.getFlashChipId();
 		_chipSize = ESP.getFlashChipSize();
@@ -17,14 +19,17 @@ namespace ART
 		DeviceNTP::create(_deviceNTP, this);
 		DeviceMQ::create(_deviceMQ, this);
 		DeviceBinary::create(_deviceBinary, this);
-		DeviceBuzzer::create(_deviceBuzzer, this);
-		DeviceSensors::create(_deviceSensors, this);
+		DeviceBuzzer::create(_deviceBuzzer, this);		
 		DeviceInApplication::create(_deviceInApplication, this);				
 		DisplayDevice::create(_displayDevice, this);
+
+		Serial.println(F("[ESPDevice::ESPDevice]] constructor end"));
 	}
 
 	ESPDevice::~ESPDevice()
 	{
+		Serial.println(F("[ESPDevice::ESPDevice]] destructor begin"));
+
 		delete (_deviceId);
 		delete (_deviceDatasheetId);
 		delete (_label);
@@ -36,8 +41,12 @@ namespace ART
 		delete (_deviceMQ);
 		delete (_deviceBinary);
 		delete (_deviceBuzzer);
-		delete (_deviceSensors);
+
+		if(_hasSensor) delete (_deviceSensors);
+
 		delete (_displayDevice);
+
+		Serial.println(F("[ESPDevice::ESPDevice]] destructor begin"));
 	}
 
 	void ESPDevice::begin()
@@ -55,8 +64,7 @@ namespace ART
 		_deviceWiFi->autoConnect();
 		autoLoad();
 		_deviceNTP->begin();
-		_deviceDebug->begin();
-		_deviceSensors->begin();
+		_deviceDebug->begin();		
 	}
 
 	void ESPDevice::loop()
@@ -167,6 +175,11 @@ namespace ART
 		return _deviceBuzzer;
 	}
 
+	bool ESPDevice::hasSensor()
+	{
+		return _hasSensor;
+	}
+
 	DeviceSensors* ESPDevice::getDeviceSensors()
 	{
 		return _deviceSensors;
@@ -246,7 +259,11 @@ namespace ART
 		_deviceId = strdup(jsonObject["deviceId"]);
 		_deviceDatasheetId = strdup(jsonObject["deviceDatasheetId"]);
 
-		_label = strdup(jsonObject["label"]);
+		char* label = strdup(jsonObject["label"]);
+		_label = new char(sizeof(strlen(label)));
+		_label = label;
+				
+		_hasSensor = jsonObject["hasSensor"];
 
 		_deviceDebug->load(jsonObject);
 		_deviceWiFi->load(jsonObject["deviceWiFi"]);
@@ -258,6 +275,12 @@ namespace ART
 		if (deviceInApplicationJO.success()) {
 			_deviceInApplication->load(deviceInApplicationJO);
 		}		
+
+		Serial.printf("hasSensor: %s\n", _hasSensor ? "true" : "false");
+		if (_hasSensor) {
+			DeviceSensors::create(_deviceSensors, this);
+			_deviceSensors->begin();
+		}
 
 		_loaded = true;
 
