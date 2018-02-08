@@ -14,7 +14,7 @@ namespace ART
 		_sensorTriggerId = sensorTriggerId;
 
 		/*const char* sensorTriggerId = jsonObject["sensorTriggerId"];
-		_sensorTriggerId = new char(strlen(sensorTriggerId) + 1);
+		_sensorTriggerId = new char(sizeof(strlen(sensorTriggerId)));
 		strcpy(_sensorTriggerId, sensorTriggerId);*/
 
 		_triggerOn = bool(jsonObject["triggerOn"]);
