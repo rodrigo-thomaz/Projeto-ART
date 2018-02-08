@@ -5,13 +5,17 @@ namespace ART
 {
 	SensorTrigger::SensorTrigger(Sensor* sensor, JsonObject& jsonObject)
 	{
-		Serial.println("[SensorTrigger constructor]");
+		Serial.println(F("[SensorTrigger constructor]"));
 
 		_sensor = sensor;	
 
 		char* sensorTriggerId = strdup(jsonObject["sensorTriggerId"]);
 		_sensorTriggerId = new char(sizeof(strlen(sensorTriggerId)));
 		_sensorTriggerId = sensorTriggerId;
+
+		/*const char* sensorTriggerId = jsonObject["sensorTriggerId"];
+		_sensorTriggerId = new char(strlen(sensorTriggerId) + 1);
+		strcpy(_sensorTriggerId, sensorTriggerId);*/
 
 		_triggerOn = bool(jsonObject["triggerOn"]);
 		_buzzerOn = bool(jsonObject["buzzerOn"]);
@@ -21,7 +25,7 @@ namespace ART
 
 	SensorTrigger::~SensorTrigger()
 	{
-		Serial.println("[SensorTrigger destructor]");
+		Serial.println(F("[SensorTrigger destructor]"));
 	}
 
 	SensorTrigger SensorTrigger::create(Sensor * sensor, JsonObject & jsonObject)

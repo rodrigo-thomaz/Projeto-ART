@@ -112,6 +112,27 @@ void loop() {
   //keep-alive da comunicação com broker MQTT
   espDevice.getDeviceMQ()->loop();
 
+
+  //using include ESP8266WiFi.h the following core cmds work for me..
+  /*Serial.print(F("ESP.getBootMode(); "));
+  Serial.println(ESP.getBootMode());
+  Serial.print(F("ESP.getSdkVersion(); "));
+  Serial.println(ESP.getSdkVersion());
+  Serial.print(F("ESP.getBootVersion(); "));
+  Serial.println(ESP.getBootVersion());
+  Serial.print(F("ESP.getChipId(); "));
+  Serial.println(ESP.getChipId());
+  Serial.print(F("ESP.getFlashChipSize(); "));
+  Serial.println(ESP.getFlashChipSize());
+  Serial.print(F("ESP.getFlashChipRealSize(); "));
+  Serial.println(ESP.getFlashChipRealSize());
+  Serial.print(F("ESP.getFlashChipSizeByChipId(); "));
+  Serial.println(ESP.getFlashChipSizeByChipId());
+  Serial.print(F("ESP.getFlashChipId(); "));
+  Serial.println(ESP.getFlashChipId());*/
+  Serial.print(F("ESP.getFreeHeap(); "));
+  Serial.println(ESP.getFreeHeap());
+
 }
 
 void loopInApplication()
@@ -132,7 +153,8 @@ void loopInApplication()
   // Wifi
   espDevice.getDisplayDevice()->getDisplayDeviceWiFi()->printSignal();
   
-  espDevice.getDisplayDevice()->display.display();
+  espDevice.getDisplayDevice()->display.display(); 
+
 }
 
 void loopMQQTConnected()

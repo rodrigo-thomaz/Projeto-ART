@@ -1036,7 +1036,7 @@ namespace ART
 	}
 
 	bool DeviceWiFi::onDeviceMQSubscription(char* topicKey, char* json)
-	{/*
+	{		
 		if (strcmp(topicKey, DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB) == 0) {
 			setHostName(json);
 			return true;
@@ -1047,6 +1047,6 @@ namespace ART
 		}
 		else {
 			return false;
-		}*/
+		}
 	}
 }
