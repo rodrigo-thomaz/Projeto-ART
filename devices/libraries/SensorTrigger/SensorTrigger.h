@@ -18,16 +18,16 @@ namespace ART
 		char* 								getSensorTriggerId() const;
 
 		bool 								getTriggerOn();
-		void 								setTriggerOn(bool value);
+		//void 								setTriggerOn(bool value);
 
 		bool 								getBuzzerOn();
-		void 								setBuzzerOn(bool value);
+		//void 								setBuzzerOn(bool value);
 
 		float 								getMax();
-		void 								setMax(float value);
+		//void 								setMax(float value);
 
 		float 								getMin();
-		void 								setMin(float value);
+		//void 								setMin(float value);
 
 		bool 								hasAlarm();
 		bool 								hasAlarmBuzzer();
@@ -42,6 +42,12 @@ namespace ART
 		float 								_max;
 		float 								_min;
 
+		void 								setTriggerOn(bool value);
+		void 								setBuzzerOn(bool value);
+		void 								setMax(float value);
+		void 								setMin(float value);
+
+		friend class						DeviceSensors;
 	};
 }
 
