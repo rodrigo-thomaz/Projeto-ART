@@ -73,8 +73,6 @@ void initConfiguration()
 
 bool mqtt_SubCallback(char* topicKey, char* json)
 {
-  espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printReceived(true);
-  
   if (espDevice.getDeviceDebug()->isActive(DeviceDebug::DEBUG)) {
     espDevice.getDeviceDebug()->printf("Termometro", "mqtt_SubCallback", "Topic Key: %s\n", topicKey);
   }  
@@ -176,3 +174,4 @@ void loopMQQTConnected()
   espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printSent(mqqtPrintSent); 
    
 }
+
