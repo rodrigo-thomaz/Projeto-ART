@@ -70,12 +70,6 @@ namespace ART
 	int DeviceDebug::print(const char* className, const char* caller, const char* message)
 	{
 		return _debug->printf(createExpression(className, caller, message).c_str());
-	}	
-
-	template<typename... Args>
-	int DeviceDebug::printf(const char* className, const char* caller, const char* format, Args... args)
-	{
-		return _debug->printf(createExpression(className, caller, format).c_str(), args...);
 	}
 
 	int DeviceDebug::printlnLevel(uint8_t debugLevel)
@@ -109,7 +103,7 @@ namespace ART
 		return str;
 	}
 
-	void DeviceDebug::setRemoteEnabled(char* json)
+	void DeviceDebug::setRemoteEnabled(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -120,7 +114,7 @@ namespace ART
 		setRemoteEnabled(root["value"].as<bool>());
 	}
 
-	void DeviceDebug::setResetCmdEnabled(char* json)
+	void DeviceDebug::setResetCmdEnabled(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -131,7 +125,7 @@ namespace ART
 		setResetCmdEnabled(root["value"].as<bool>());
 	}
 
-	void DeviceDebug::setSerialEnabled(char* json)
+	void DeviceDebug::setSerialEnabled(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -142,7 +136,7 @@ namespace ART
 		setSerialEnabled(root["value"].as<bool>());
 	}
 
-	void DeviceDebug::setShowColors(char* json)
+	void DeviceDebug::setShowColors(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -153,7 +147,7 @@ namespace ART
 		setShowColors(root["value"].as<bool>());
 	}
 
-	void DeviceDebug::setShowDebugLevel(char* json)
+	void DeviceDebug::setShowDebugLevel(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -164,7 +158,7 @@ namespace ART
 		setShowDebugLevel(root["value"].as<bool>());
 	}
 
-	void DeviceDebug::setShowProfiler(char* json)
+	void DeviceDebug::setShowProfiler(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -175,7 +169,7 @@ namespace ART
 		setShowProfiler(root["value"].as<bool>());
 	}
 
-	void DeviceDebug::setShowTime(char* json)
+	void DeviceDebug::setShowTime(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -194,10 +188,10 @@ namespace ART
 		}
 	}
 
-	void DeviceDebug::setHostName(char* value)
+	void DeviceDebug::setHostName(const char* value)
 	{
 		_hostName = new char(sizeof(strlen(value)));
-		_hostName = value;
+		_hostName = (char*)value;
 		printf("DeviceDebug", "setHostName", "hostName: %s\n", _hostName);
 	}
 

@@ -40,7 +40,10 @@ namespace ART
 		int									print(const char* className, const char* caller, const char* message);
 
 		template<typename... Args>
-		int									printf(const char* className, const char* caller, const char* format, Args... args);	
+		int									printf(const char* className, const char* caller, const char* format, Args... args)
+		{
+			return _debug->printf(createExpression(className, caller, format).c_str(), args...);
+		}
 
 		template<typename... Args>
 		int									printf(Args... args)
@@ -70,15 +73,15 @@ namespace ART
 
 		RemoteDebug* 						_debug;
 
-		void								setRemoteEnabled(char* json);
-		void								setResetCmdEnabled(char* json);
-		void								setSerialEnabled(char* json);
-		void								setShowColors(char* json);
-		void								setShowDebugLevel(char* json);
-		void								setShowProfiler(char* json);
-		void								setShowTime(char* json);
+		void								setRemoteEnabled(const char* json);
+		void								setResetCmdEnabled(const char* json);
+		void								setSerialEnabled(const char* json);
+		void								setShowColors(const char* json);
+		void								setShowDebugLevel(const char* json);
+		void								setShowProfiler(const char* json);
+		void								setShowTime(const char* json);
 
-		void								setHostName(char* value);
+		void								setHostName(const char* value);
 		void								setRemoteEnabled(bool value);
 		void								setResetCmdEnabled(bool value);
 		void								setSerialEnabled(bool value);
