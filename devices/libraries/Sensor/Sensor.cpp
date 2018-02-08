@@ -45,7 +45,10 @@ namespace ART
 		for (JsonArray::iterator it = sensorTriggersJA.begin(); it != sensorTriggersJA.end(); ++it)
 		{
 			JsonObject& sensorTriggerJO = it->as<JsonObject>();
-			_sensorTriggers.push_back(SensorTrigger::create(this, sensorTriggerJO));
+			//SensorTrigger* sensorTrigger;
+			//SensorTrigger::create(sensorTrigger, this, sensorTriggerJO);
+			//_sensorTriggers.push_back(sensorTrigger);
+			_sensorTriggers.push_back(new SensorTrigger(this, sensorTriggerJO));
 		}
 	}
 
@@ -123,7 +126,7 @@ namespace ART
 	bool Sensor::hasAlarm()
 	{
 		for (int i = 0; i < _sensorTriggers.size(); ++i) {
-			if (_sensorTriggers[i].hasAlarm()) {
+			if (_sensorTriggers[i]->hasAlarm()) {
 				return true;
 			}
 		}
@@ -133,7 +136,7 @@ namespace ART
 	bool Sensor::hasAlarmBuzzer()
 	{
 		for (int i = 0; i < _sensorTriggers.size(); ++i) {
-			if (_sensorTriggers[i].hasAlarmBuzzer()) {
+			if (_sensorTriggers[i]->hasAlarmBuzzer()) {
 				return true;
 			}
 		}
@@ -143,14 +146,14 @@ namespace ART
 	void Sensor::insertTrigger(JsonObject& root)
 	{
 		Serial.println("[Sensor::insertTrigger] ");
-		_sensorTriggers.push_back(SensorTrigger::create(this, root));
+		_sensorTriggers.push_back(new SensorTrigger(this, root));
 	}
 
 	void Sensor::deleteTrigger(char* sensorTriggerId)
 	{
 		Serial.println("[Sensor::deleteTrigger] begin");
 		for (int i = 0; i < _sensorTriggers.size(); ++i) {			
-			if (strcmp(_sensorTriggers[i].getSensorTriggerId(), sensorTriggerId) == 0) {
+			if (strcmp(_sensorTriggers[i]->getSensorTriggerId(), sensorTriggerId) == 0) {
 				_sensorTriggers.erase(_sensorTriggers.begin() + i);
 				Serial.println("[Sensor::deleteTrigger] deleted");
 				return;
@@ -168,9 +171,9 @@ namespace ART
 		return _sensorUnitMeasurementScale;
 	}
 
-	SensorTrigger * Sensor::getSensorTriggers()
+	SensorTrigger ** Sensor::getSensorTriggers()
 	{
-		SensorTrigger* array = this->_sensorTriggers.data();
+		SensorTrigger** array = _sensorTriggers.data();
 		return array;
 	}
 }

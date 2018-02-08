@@ -52,7 +52,7 @@ namespace ART
 
 		SensorTempDSFamily *				getSensorTempDSFamily();
 		SensorUnitMeasurementScale *		getSensorUnitMeasurementScale();
-		SensorTrigger *						getSensorTriggers();
+		SensorTrigger **					getSensorTriggers();
 
 	private:
 
@@ -73,7 +73,7 @@ namespace ART
 
 		char* 								_label;	
 
-		std::vector<SensorTrigger> 			_sensorTriggers;
+		std::vector<SensorTrigger*> 		_sensorTriggers;
 
 		bool 								_connected;
 

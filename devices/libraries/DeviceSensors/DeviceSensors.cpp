@@ -403,9 +403,9 @@ namespace ART
 		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
 		bool triggerOn = root["triggerOn"];
 
-		SensorTrigger& sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
+		SensorTrigger* sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
 
-		sensorTrigger.setTriggerOn(triggerOn);
+		sensorTrigger->setTriggerOn(triggerOn);
 	}
 
 	void DeviceSensors::setBuzzerOn(const char* json)
@@ -425,9 +425,9 @@ namespace ART
 		char* sensorTriggerId = strdup(root["sensorTriggerId"]);
 		bool buzzerOn = root["buzzerOn"];
 
-		SensorTrigger& sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
+		SensorTrigger* sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
 
-		sensorTrigger.setBuzzerOn(buzzerOn);
+		sensorTrigger->setBuzzerOn(buzzerOn);
 	}
 
 	void DeviceSensors::setTriggerValue(const char* json)
@@ -448,12 +448,12 @@ namespace ART
 		float triggerValue = root["triggerValue"];
 		PositionEnum position = static_cast<PositionEnum>(root["position"].as<int>());
 
-		SensorTrigger& sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
+		SensorTrigger* sensorTrigger = getSensorTriggerByKey(sensorId, sensorTriggerId);
 
 		if (position == Max)
-			sensorTrigger.setMax(triggerValue);
+			sensorTrigger->setMax(triggerValue);
 		else if (position == Min)
-			sensorTrigger.setMin(triggerValue);
+			sensorTrigger->setMin(triggerValue);
 	}	
 
 	void DeviceSensors::setRange(const char* json)
@@ -515,12 +515,12 @@ namespace ART
 		return getSensorInDeviceBySensorId(sensorId).getSensor();
 	}
 
-	SensorTrigger& DeviceSensors::getSensorTriggerByKey(char * sensorId, char * sensorTriggerId)
+	SensorTrigger* DeviceSensors::getSensorTriggerByKey(char * sensorId, char * sensorTriggerId)
 	{
-		SensorTrigger* sensorTriggers = getSensorById(sensorId)->getSensorTriggers();
+		SensorTrigger** sensorTriggers = getSensorById(sensorId)->getSensorTriggers();
 		int count = sizeof(SensorTrigger);
 		for (int i = 0; i < count; ++i) {
-			if (stricmp(sensorTriggers[i].getSensorTriggerId(), sensorTriggerId) == 0) {
+			if (stricmp(sensorTriggers[i]->getSensorTriggerId(), sensorTriggerId) == 0) {
 				return sensorTriggers[i];
 			}
 		}
