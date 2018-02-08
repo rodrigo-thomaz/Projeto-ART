@@ -172,13 +172,13 @@ void loopMQQTConnected()
 
   // Sensor
   if(espDevice.hasSensor()){
-
+    
     DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
-
+    
     if (deviceSensors->initialized()) {        
-
+      
       espDevice.getDisplayDevice()->getDisplayDeviceSensors()->printSensors();
-
+      
       bool deviceSensorsPublished = deviceSensors->publish();
 
       if(deviceSensorsPublished){

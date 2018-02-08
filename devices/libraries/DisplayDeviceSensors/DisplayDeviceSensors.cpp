@@ -60,9 +60,10 @@ namespace ART
 		int screenWidth = screenX2 - screenX1;
 		int screenHeight = screenY2 - screenY1;
 
-		SensorInDevice** sensorsInDevice = _displayDevice->getESPDevice()->getDeviceSensors()->getSensorsInDevice();
+		std::tuple<SensorInDevice**, short> tpl = _displayDevice->getESPDevice()->getDeviceSensors()->getSensorsInDevice();
 
-		int sensorsCount = sizeof(sensorsInDevice);
+		SensorInDevice** sensorsInDevice = std::get<0>(tpl);
+		short sensorsCount = std::get<1>(tpl);
 
 		int boxChunk = round(screenWidth / sensorsCount);
 

@@ -76,16 +76,15 @@ namespace ART
 
 		char* deviceId = this->_espDevice->getDeviceId();
 		char* deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();
-		char* applicationId = this->_espDevice->getDeviceInApplication()->getApplicationId();
 
 		StaticJsonBuffer<DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
 		JsonObject& root = JSONbuffer.createObject();
 
 		root["deviceId"] = deviceId;
 		root["deviceDatasheetId"] = deviceDatasheetId;
-		root["applicationId"] = applicationId;
 
-		// device addresses prepare	
+		/*
+		//device addresses prepare	
 		uint8_t deviceCount = _dallas.getDeviceCount();
 		if (deviceCount > 0) {
 			JsonArray& deviceAddressJsonArray = root.createNestedArray("deviceAddresses");
@@ -101,6 +100,7 @@ namespace ART
 				}
 			}
 		}
+		*/
 
 		int len = root.measureLength();
 		char result[len + 1];
@@ -271,10 +271,10 @@ namespace ART
 		return _espDevice;
 	}
 
-	SensorInDevice ** DeviceSensors::getSensorsInDevice()
+	std::tuple<SensorInDevice**, short> DeviceSensors::getSensorsInDevice()
 	{
 		SensorInDevice** array = this->_sensorsInDevice.data();
-		return array;
+		return std::make_tuple(array, 2);
 	}
 
 	SensorDatasheet * DeviceSensors::getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)

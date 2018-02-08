@@ -6,6 +6,7 @@
 #include "vector"
 #include "OneWire.h"
 #include "DallasTemperature.h"
+#include <tuple>
 
 //#include "../SensorDatasheet/SensorDatasheet.h"
 //#include "../SensorInDevice/SensorInDevice.h"
@@ -63,7 +64,7 @@ namespace ART
 
 		ESPDevice *							getESPDevice();
 
-		SensorInDevice **					getSensorsInDevice();		
+		std::tuple<SensorInDevice**, short> getSensorsInDevice();
 
 		void 								createSensorsJsonNestedArray(JsonObject& jsonObject);		
 
