@@ -7,8 +7,8 @@
 #include "OneWire.h"
 #include "DallasTemperature.h"
 
-#include "SensorDatasheet.h"
-#include "SensorInDevice.h"
+#include "../SensorDatasheet/SensorDatasheet.h"
+#include "../SensorInDevice/SensorInDevice.h"
 
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
