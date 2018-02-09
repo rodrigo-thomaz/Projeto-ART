@@ -17,25 +17,25 @@
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_TOPIC_PUB   				"DeviceSensors/GetFullByDeviceInApplicationIdIoT" 
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB		   	"DeviceSensors/GetFullByDeviceInApplicationIdCompletedIoT"
 
-#define DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB "DeviceSensors/SetReadIntervalInMilliSecondsIoT"
-#define DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB "DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
-#define DEVICE_SENSORS_MESSAGE_TOPIC_PUB "DeviceSensors/MessageIoT"
+#define DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB						"DeviceSensors/SetReadIntervalInMilliSecondsIoT"
+#define DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB					"DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
+#define DEVICE_SENSORS_MESSAGE_TOPIC_PUB												"DeviceSensors/MessageIoT"
 
-#define SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB "SensorInDevice/SetOrdinationIoT"
+#define SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB										"SensorInDevice/SetOrdinationIoT"
 
-#define SENSOR_SET_LABEL_TOPIC_SUB "Sensor/SetLabelIoT"
+#define SENSOR_SET_LABEL_TOPIC_SUB														"Sensor/SetLabelIoT"
 
-#define SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB "SensorTempDSFamily/SetResolutionIoT"
+#define SENSOR_TEMP_DS_FAMILY_SET_RESOLUTION_TOPIC_SUB									"SensorTempDSFamily/SetResolutionIoT"
 
-#define SENSOR_TRIGGER_INSERT_TOPIC_SUB "SensorTrigger/InsertIoT"
-#define SENSOR_TRIGGER_DELETE_TOPIC_SUB "SensorTrigger/DeleteIoT"
-#define SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB "SensorTrigger/SetTriggerOnIoT"
-#define SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB "SensorTrigger/SetBuzzerOnIoT"
-#define SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB "SensorTrigger/SetTriggerValueIoT"
+#define SENSOR_TRIGGER_INSERT_TOPIC_SUB													"SensorTrigger/InsertIoT"
+#define SENSOR_TRIGGER_DELETE_TOPIC_SUB													"SensorTrigger/DeleteIoT"
+#define SENSOR_TRIGGER_SET_TRIGGER_ON_TOPIC_SUB											"SensorTrigger/SetTriggerOnIoT"
+#define SENSOR_TRIGGER_SET_BUZZER_ON_TOPIC_SUB											"SensorTrigger/SetBuzzerOnIoT"
+#define SENSOR_TRIGGER_SET_TRIGGER_VALUE_TOPIC_SUB										"SensorTrigger/SetTriggerValueIoT"
 
-#define SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB "SensorUnitMeasurementScale/SetDatasheetUnitMeasurementScaleIoT"
-#define SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB "SensorUnitMeasurementScale/SetRangeIoT"
-#define SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB "SensorUnitMeasurementScale/SetChartLimiterIoT"
+#define SENSOR_UNIT_MEASUREMENT_SCALE_SET_DATASHEET_UNIT_MEASUREMENT_SCALE_TOPIC_SUB	"SensorUnitMeasurementScale/SetDatasheetUnitMeasurementScaleIoT"
+#define SENSOR_UNIT_MEASUREMENT_SCALE_RANGE_SET_VALUE_TOPIC_SUB							"SensorUnitMeasurementScale/SetRangeIoT"
+#define SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB					"SensorUnitMeasurementScale/SetChartLimiterIoT"
 
 namespace ART
 {
