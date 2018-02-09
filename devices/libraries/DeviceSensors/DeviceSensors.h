@@ -10,6 +10,9 @@
 #include "SensorDatasheet.h"
 #include "SensorInDevice.h"
 
+// Data wire is plugged into port 0
+#define ONE_WIRE_BUS 0
+
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE 			200
 #define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
 
@@ -74,6 +77,9 @@ namespace ART
 
 		ESPDevice *							_espDevice;
 
+		OneWire *							_oneWire;
+		DallasTemperature *					_dallas;
+
 		bool								_initialized;
 		bool								_initializing;
 		
@@ -86,7 +92,7 @@ namespace ART
 
 		std::vector<SensorDatasheet*>		_sensorDatasheets;
 		std::vector<SensorInDevice*>		_sensorsInDevice;
-
+		
 		uint64_t							_readIntervalTimestamp;
 		long								_readIntervalInMilliSeconds;
 

@@ -2,21 +2,9 @@
 
 #include "algorithm"    // std::sort
 
-#include "../OneWire/OneWire.h"
-#include "../DallasTemperature/DallasTemperature.h"
-
 #include "../ESPDevice/ESPDevice.h"
 #include "SensorInDevice.h"
 #include "PositionEnum.h"
-
-// Data wire is plugged into port 0
-#define ONE_WIRE_BUS 0
-
-// Setup a oneWire instance to communicate with any OneWire devices (not just Maxim/Dallas temperature ICs)
-OneWire oneWire(ONE_WIRE_BUS);
-
-// Pass our oneWire reference to Dallas Temperature. 
-DallasTemperature _dallas(&oneWire);
 
 namespace ART
 {
@@ -28,6 +16,9 @@ namespace ART
 		_readIntervalTimestamp = 0;
 		_initializing = false;
 		_initialized = false;
+
+		_oneWire = new OneWire(ONE_WIRE_BUS);
+		_dallas = new DallasTemperature(_oneWire);
 	}
 
 	DeviceSensors::~DeviceSensors()
@@ -50,7 +41,7 @@ namespace ART
 		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 		
-		_dallas.begin();
+		_dallas->begin();
 		initialized();
 
 		Serial.println(F("[DeviceSensors::begin] end"));
@@ -89,12 +80,12 @@ namespace ART
 
 		/*
 		//device addresses prepare	
-		uint8_t deviceCount = _dallas.getDeviceCount();
+		uint8_t deviceCount = _dallas->getDeviceCount();
 		if (deviceCount > 0) {
 			JsonArray& deviceAddressJsonArray = root.createNestedArray("deviceAddresses");
 			for (int i = 0; i < deviceCount; ++i) {
 				DeviceAddress deviceAddress;
-				if (_dallas.getAddress(deviceAddress, i))
+				if (_dallas->getAddress(deviceAddress, i))
 				{
 					deviceAddressJsonArray.add(this->convertDeviceAddressToString(deviceAddress));
 				}
@@ -190,8 +181,8 @@ namespace ART
 
 			int resolution = int(sensorJsonObject["resolutionBits"]);			
 
-			_dallas.setResolution(deviceAddress, resolution);
-			_dallas.resetAlarmSearch();
+			_dallas->setResolution(deviceAddress, resolution);
+			_dallas->resetAlarmSearch();
 
 			Serial.print(F("FreeHeap pos _sensorsInDevice.push_back: "));
 			Serial.println(ESP.getFreeHeap());
@@ -217,13 +208,13 @@ namespace ART
 		bool hasAlarm = false;
 		bool hasAlarmBuzzer = false;
 
-		_dallas.requestTemperatures();
+		_dallas->requestTemperatures();
 
 		for (int i = 0; i < this->_sensorsInDevice.size(); ++i) {
 			Sensor* sensor = _sensorsInDevice[i]->getSensor();
-			sensor->setConnected(_dallas.isConnected(sensor->getDeviceAddress()));
-			sensor->getSensorTempDSFamily()->setResolution(_dallas.getResolution(sensor->getDeviceAddress()));
-			sensor->setValue(_dallas.getTempC(sensor->getDeviceAddress()));
+			sensor->setConnected(_dallas->isConnected(sensor->getDeviceAddress()));
+			sensor->getSensorTempDSFamily()->setResolution(_dallas->getResolution(sensor->getDeviceAddress()));
+			sensor->setValue(_dallas->getTempC(sensor->getDeviceAddress()));
 
 			if (sensor->hasAlarm()) 		hasAlarm = true;
 			if (sensor->hasAlarmBuzzer()) 	hasAlarmBuzzer = true;
@@ -355,7 +346,7 @@ namespace ART
 		Sensor* sensor = getSensorById(root["sensorId"]);
 
 		sensor->getSensorTempDSFamily()->setResolution(value);
-		_dallas.setResolution(sensor->getDeviceAddress(), value);
+		_dallas->setResolution(sensor->getDeviceAddress(), value);
 
 		Serial.println(F("[DeviceSensors::setResolution] end"));
 	}
