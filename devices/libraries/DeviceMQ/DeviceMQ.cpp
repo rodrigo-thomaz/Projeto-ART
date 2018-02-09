@@ -182,8 +182,8 @@ namespace ART
 		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceMQ::onMQQTCallback] topic:"));
 		Serial.println(topic);
 
-		//String topicKeyStr = getTopicKeyStr(topic);
-		char* topicKey = strdup(getTopicKey(topic));
+		//String topicKeyStr = getTopicKeyStr(topic); // exemplo 1
+		char* topicKey = strdup(getTopicKey(topic)); // exemplo 2
 
 		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceMQ::onMQQTCallback] topicKey:"));
 		Serial.println(topicKey);
@@ -206,7 +206,8 @@ namespace ART
 		}
 		}*/
 
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey, json.c_str());
+		//for (auto && fn : _subscriptionCallbacks) fn(topicKeyStr.c_str(), json.c_str()); // exemplo 1
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey, json.c_str()); // exemplo 2
 	}
 
 	bool DeviceMQ::connected()
