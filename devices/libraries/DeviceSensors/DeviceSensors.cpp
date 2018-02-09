@@ -1,7 +1,7 @@
 #include "DeviceSensors.h"
 
 #include "../ESPDevice/ESPDevice.h"
-#include "../SensorInDevice/SensorInDevice.h"
+#include "SensorInDevice.h"
 #include "PositionEnum.h"
 #include <algorithm>    // std::sort
 

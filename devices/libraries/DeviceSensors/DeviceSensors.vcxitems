@@ -21,8 +21,24 @@
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DeviceSensors.h" /> -->
     <ClInclude Include="$(MSBuildThisFileDirectory)PositionEnum.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)Sensor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheet.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetEnum.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorInDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorTempDSFamily.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorTrigger.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorTypeEnum.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)DeviceSensors.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)Sensor.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheet.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorInDevice.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorTempDSFamily.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorTrigger.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.cpp" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #include "Sensor.h"
-#include "../SensorInDevice/SensorInDevice.h"
-#include "../DeviceSensors/DeviceSensors.h"
-#include "../SensorTrigger/SensorTrigger.h"
+#include "SensorInDevice.h"
+#include "DeviceSensors.h"
+#include "SensorTrigger.h"
 
 namespace ART
 {

@@ -3,7 +3,7 @@
 
 #include "Arduino.h"
 
-#include "../Sensor/Sensor.h"
+#include "../DeviceSensors/Sensor.h"
 
 namespace ART
 {

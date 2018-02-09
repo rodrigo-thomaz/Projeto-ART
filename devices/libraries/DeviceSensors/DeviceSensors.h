@@ -8,9 +8,6 @@
 #include "DallasTemperature.h"
 #include <tuple>
 
-//#include "../SensorDatasheet/SensorDatasheet.h"
-//#include "../SensorInDevice/SensorInDevice.h"
-
 #include "SensorDatasheet.h"
 #include "SensorInDevice.h"
 

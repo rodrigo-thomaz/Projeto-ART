@@ -1,7 +1,7 @@
 #include "DisplayDeviceSensors.h"
 #include "../DisplayDevice/DisplayDevice.h"
 #include "../ESPDevice/ESPDevice.h"
-#include "../SensorInDevice/SensorInDevice.h"
+#include "../DeviceSensors/SensorInDevice.h"
 #include "../UnitMeasurement/UnitMeasurementEnum.h"
 
 namespace ART
