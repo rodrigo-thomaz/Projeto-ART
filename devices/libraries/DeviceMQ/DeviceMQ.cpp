@@ -187,6 +187,8 @@ namespace ART
 		Serial.print(F("[DeviceMQ::onMQQTCallback] topicKey:"));
 		Serial.println(topicKey);
 		
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey, (char*)payload);
+
 		// TODO: Não funcionou !!!?@#$%?
 		/*for (auto && fn : _subscriptionCallbacks) {
 		if (fn(topicKey, strdup(json.c_str()))) {
@@ -196,8 +198,6 @@ namespace ART
 		break;
 		}
 		}*/
-		
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey, (char*)payload);
 	}
 
 	bool DeviceMQ::connected()
