@@ -1,9 +1,13 @@
 #include "DeviceSensors.h"
 
+#include "algorithm"    // std::sort
+
+#include "../OneWire/OneWire.h"
+#include "../DallasTemperature/DallasTemperature.h"
+
 #include "../ESPDevice/ESPDevice.h"
 #include "SensorInDevice.h"
 #include "PositionEnum.h"
-#include <algorithm>    // std::sort
 
 // Data wire is plugged into port 0
 #define ONE_WIRE_BUS 0

@@ -6,9 +6,6 @@
 
 #include "Arduino.h"
 #include "../ArduinoJson/ArduinoJson.h"
-#include "../OneWire/OneWire.h"
-#include "../DallasTemperature/DallasTemperature.h"
-
 
 #include "SensorDatasheet.h"
 #include "SensorInDevice.h"
