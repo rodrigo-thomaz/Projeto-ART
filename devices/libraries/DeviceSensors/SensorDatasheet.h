@@ -1,7 +1,6 @@
 #ifndef SensorDatasheet_h
 #define SensorDatasheet_h
 
-#include "Arduino.h"
 #include "../ArduinoJson/ArduinoJson.h"
 
 #include "SensorTypeEnum.h"
