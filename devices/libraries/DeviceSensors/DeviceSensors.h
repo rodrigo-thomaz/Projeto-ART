@@ -1,12 +1,14 @@
 #ifndef DeviceSensors_h
 #define DeviceSensors_h
 
+#include "vector"
+#include "tuple"
+
 #include "Arduino.h"
 #include "../ArduinoJson/ArduinoJson.h"
-#include "vector"
-#include "OneWire.h"
-#include "DallasTemperature.h"
-#include <tuple>
+#include "../OneWire/OneWire.h"
+#include "../DallasTemperature/DallasTemperature.h"
+
 
 #include "SensorDatasheet.h"
 #include "SensorInDevice.h"
