@@ -2,6 +2,7 @@
 #define SensorInDevice_h
 
 #include "../ArduinoJson/ArduinoJson.h"
+
 #include "Sensor.h"
 #include "SensorDatasheet.h"
 

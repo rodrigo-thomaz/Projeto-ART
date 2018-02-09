@@ -1,7 +1,8 @@
 #include "SensorInDevice.h"
+
 #include "DeviceSensors.h"
-#include "ESPDevice.h"
-#include "DeviceDebug.h"
+#include "../ESPDevice/ESPDevice.h"
+#include "../DeviceDebug/DeviceDebug.h"
 
 namespace ART
 {
