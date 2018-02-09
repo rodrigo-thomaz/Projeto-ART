@@ -79,7 +79,7 @@ namespace ART
 
 	uint8_t* Sensor::getDeviceAddress() const
 	{
-		return ((uint8_t*)_deviceAddress);
+		return (_deviceAddress);
 	}
 
 	char * Sensor::getFamily() const
