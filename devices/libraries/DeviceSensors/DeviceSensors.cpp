@@ -13,12 +13,18 @@ namespace ART
 		Serial.println(F("[DeviceSensors constructor]"));
 
 		_espDevice = espDevice;
-		_readIntervalTimestamp = 0;
+		
+		_oneWire = new OneWire(ONE_WIRE_BUS);
+		_dallas = new DallasTemperature(_oneWire);
+
 		_initializing = false;
 		_initialized = false;
 
-		_oneWire = new OneWire(ONE_WIRE_BUS);
-		_dallas = new DallasTemperature(_oneWire);
+		_readIntervalTimestamp = 0;
+		_readIntervalInMilliSeconds = 0;
+
+		_publishIntervalTimestamp = 0;
+		_publishIntervalInMilliSeconds = 0;
 	}
 
 	DeviceSensors::~DeviceSensors()
