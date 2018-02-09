@@ -187,17 +187,16 @@ namespace ART
 		Serial.print(F("[DeviceMQ::onMQQTCallback] topicKey:"));
 		Serial.println(topicKey);
 		
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey, (char*)payload);
+		for (auto && fn : _subscriptionCallbacks) {
+			if (fn(topicKey, (char*)payload)) {
+				Serial.print(F("[DeviceMQ::onMQQTCallback] find: "));
+				Serial.println(topicKey);
+				return;
+			}
+		}		
 
-		// TODO: Não funcionou !!!?@#$%?
-		/*for (auto && fn : _subscriptionCallbacks) {
-		if (fn(topicKey, strdup(json.c_str()))) {
-		Serial.print("Achou em ");
-		Serial.print(topicKey);
-		Serial.println(F(" !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
-		break;
-		}
-		}*/
+		Serial.print(F("[DeviceMQ::onMQQTCallback] not find: "));
+		Serial.println(topicKey);
 	}
 
 	bool DeviceMQ::connected()
