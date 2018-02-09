@@ -1,11 +1,10 @@
 #ifndef Sensor_h
 #define Sensor_h
 
-#include "Arduino.h"
 #include "../ArduinoJson/ArduinoJson.h"
 #include "vector"
-#include "OneWire.h"
-#include "DallasTemperature.h"
+#include "../OneWire/OneWire.h"
+#include "../DallasTemperature/DallasTemperature.h"
 
 #include "SensorDatasheet.h"
 #include "SensorTempDSFamily.h"
