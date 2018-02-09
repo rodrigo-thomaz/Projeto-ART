@@ -1,7 +1,7 @@
 #ifndef DeviceDebug_h
 #define DeviceDebug_h
 
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 #include "RemoteDebug.h" 
 #include "ESP8266mDNS.h"
 

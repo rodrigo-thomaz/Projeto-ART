@@ -2,7 +2,7 @@
 #define DeviceBuzzer_h
 
 #include "Arduino.h"
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 
 #define BUZZER_PIN    13 // D7 => 13
 

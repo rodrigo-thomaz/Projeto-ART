@@ -1,7 +1,7 @@
 #ifndef SensorInDevice_h
 #define SensorInDevice_h
 
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 #include "Sensor.h"
 #include "SensorDatasheet.h"
 

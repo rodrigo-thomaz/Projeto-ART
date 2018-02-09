@@ -3,7 +3,7 @@
 
 #include "functional"
 #include "vector"
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 #include "RemoteDebug.h"
 #include "PubSubClient.h"
 

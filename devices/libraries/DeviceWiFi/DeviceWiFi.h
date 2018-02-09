@@ -13,7 +13,7 @@ Licensed under MIT license
 #ifndef DeviceWiFi_h
 #define DeviceWiFi_h
 
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 #include "vector"
 #include "WiFiClient.h"
 #include "ESP8266WiFi.h"

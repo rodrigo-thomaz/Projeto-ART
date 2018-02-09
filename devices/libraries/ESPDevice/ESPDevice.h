@@ -14,7 +14,7 @@
 #include "functional"
 #include "vector"
 #include "Arduino.h"
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 #include "ESP8266HTTPClient.h"
 
 #define ESP_DEVICE_UPDATE_PIN_TOPIC_SUB "ESPDevice/UpdatePinIoT"

@@ -2,7 +2,7 @@
 #define SensorTrigger_h
 
 #include "Arduino.h"
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 
 namespace ART
 {

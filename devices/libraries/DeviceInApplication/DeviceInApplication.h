@@ -4,7 +4,7 @@
 #include "functional"
 #include "vector"
 #include "Arduino.h"
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 
 #include "DeviceDebug.h"
 

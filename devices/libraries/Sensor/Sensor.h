@@ -2,7 +2,7 @@
 #define Sensor_h
 
 #include "Arduino.h"
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 #include "vector"
 #include "OneWire.h"
 #include "DallasTemperature.h"

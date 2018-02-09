@@ -2,7 +2,7 @@
 #define SensorTempDSFamily_h
 
 #include "Arduino.h"
-#include "ArduinoJson.h"
+#include "../ArduinoJson/ArduinoJson.h"
 #include "DallasTemperature.h"
 
 namespace ART
