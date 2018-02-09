@@ -22,10 +22,10 @@ namespace ART
 
 	void DisplayDeviceWiFiAccess::begin()
 	{
-		_displayDevice->getESPDevice()->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		_displayDevice->getESPDevice()->getDeviceMQ()->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
-	void DisplayDeviceWiFiAccess::updatePin(char* json)
+	void DisplayDeviceWiFiAccess::updatePin(const char* json)
 	{
 		Serial.println(F("******************** Update PIN ********************"));
 
@@ -87,7 +87,7 @@ namespace ART
 		}
 	}
 
-	bool DisplayDeviceWiFiAccess::onDeviceMQSubscription(char * topicKey, char * json)
+	bool DisplayDeviceWiFiAccess::onDeviceMQSubscription(const char * topicKey, const char * json)
 	{
 		if (strcmp(topicKey, ESP_DEVICE_UPDATE_PIN_TOPIC_SUB) == 0) {
 			updatePin(json);

@@ -52,7 +52,7 @@ namespace ART
 	}
 
 	void DeviceNTP::begin() {
-		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 	}
@@ -268,7 +268,7 @@ namespace ART
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB);
 	}
 
-	bool DeviceNTP::onDeviceMQSubscription(char* topicKey, char* json)
+	bool DeviceNTP::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
 		if (strcmp(topicKey, DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB) == 0) {
 			setUtcTimeOffsetInSecond(json);

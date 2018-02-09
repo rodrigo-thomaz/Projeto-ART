@@ -89,13 +89,13 @@ namespace ART
 		void								load(String json);
 		bool 								_loaded = false;
 
-		void								setLabel(char* json);
+		void								setLabel(const char* json);
 
 		void								onDeviceMQSubscribeDevice();
 		void								onDeviceMQUnSubscribeDevice();
 		void								onDeviceMQSubscribeDeviceInApplication();		
 		void								onDeviceMQUnSubscribeDeviceInApplication();
-		bool								onDeviceMQSubscription(char* topicKey, char* json);
+		bool								onDeviceMQSubscription(const char* topicKey, const char* json);
 	};
 }
 

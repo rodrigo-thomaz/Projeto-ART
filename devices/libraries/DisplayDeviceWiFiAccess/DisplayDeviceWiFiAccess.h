@@ -21,7 +21,7 @@ namespace ART
 
 		void						begin();
 
-		void						updatePin(char* json);
+		void						updatePin(const char* json);
 		void						loop();
 
 	private:
@@ -33,7 +33,7 @@ namespace ART
 
 		uint64_t 					_messageTimestamp = 0;
 
-		bool						onDeviceMQSubscription(char* topicKey, char* json);
+		bool						onDeviceMQSubscription(const char* topicKey, const char* json);
 
 	};
 }

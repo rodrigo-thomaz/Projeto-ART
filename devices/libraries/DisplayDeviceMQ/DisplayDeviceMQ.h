@@ -28,7 +28,7 @@ namespace ART
 		int			         	_x;
 		int			         	_y;
 
-		bool					onDeviceMQSubscription(char* topicKey, char* json);
+		bool					onDeviceMQSubscription(const char* topicKey, const char* json);
 
 	};
 }

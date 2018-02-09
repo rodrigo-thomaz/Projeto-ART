@@ -69,7 +69,7 @@ namespace ART
 		void								onDeviceMQUnSubscribeDevice();
 		void								onDeviceMQSubscribeDeviceInApplication();
 		void								onDeviceMQUnSubscribeDeviceInApplication();
-		bool								onDeviceMQSubscription(char* topicKey, char* json);
+		bool								onDeviceMQSubscription(const char* topicKey, const char* json);
 
 	};
 }

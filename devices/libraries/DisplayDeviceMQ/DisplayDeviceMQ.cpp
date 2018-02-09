@@ -25,7 +25,7 @@ namespace ART
 
 	void DisplayDeviceMQ::begin()
 	{
-		_displayDevice->getESPDevice()->getDeviceMQ()->addSubscriptionCallback([=] (char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		_displayDevice->getESPDevice()->getDeviceMQ()->addSubscriptionCallback([=] (const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
 	void DisplayDeviceMQ::printConnected()
@@ -64,7 +64,7 @@ namespace ART
 		_displayDevice->display.write(25); // ↓
 	}
 
-	bool DisplayDeviceMQ::onDeviceMQSubscription(char * topicKey, char * json)
+	bool DisplayDeviceMQ::onDeviceMQSubscription(const char * topicKey, const char * json)
 	{
 		Serial.println(F("[DisplayDeviceMQ::onDeviceMQSubscription] printReceived(true)"));
 		printReceived(true);

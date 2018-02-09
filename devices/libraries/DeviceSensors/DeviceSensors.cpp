@@ -43,7 +43,7 @@ namespace ART
 	{
 		Serial.println(F("[DeviceSensors::begin] begin"));
 
-		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 		
@@ -675,7 +675,7 @@ namespace ART
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(SENSOR_UNIT_MEASUREMENT_SCALE_CHART_LIMITER_SET_VALUE_TOPIC_SUB);
 	}
 
-	bool DeviceSensors::onDeviceMQSubscription(char* topicKey, char* json)
+	bool DeviceSensors::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
 		if (strcmp(topicKey, DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB) == 0) {
 			setSensorsByMQQTCallback(json);

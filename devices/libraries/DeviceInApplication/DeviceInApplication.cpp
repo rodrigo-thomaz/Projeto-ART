@@ -36,7 +36,7 @@ namespace ART
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceCallback([=]() { return onDeviceMQUnSubscribeDevice(); });
 		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
-		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::begin] end\n");
 	}
@@ -151,7 +151,7 @@ namespace ART
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_IN_APPLICATION_REMOVE_TOPIC_SUB);
 	}
 
-	bool DeviceInApplication::onDeviceMQSubscription(char* topicKey, char* json)
+	bool DeviceInApplication::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) _deviceDebug->printf("DeviceInApplication::onDeviceMQSubscription] begin\n");
 

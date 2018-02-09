@@ -55,7 +55,7 @@ namespace ART
 		_deviceMQ->addUnSubscribeDeviceCallback([=]() { return onDeviceMQUnSubscribeDevice(); });
 		_deviceMQ->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
 		_deviceMQ->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
-		_deviceMQ->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		_deviceMQ->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 
 		_displayDevice->begin();
 		_deviceInApplication->begin();
@@ -112,7 +112,7 @@ namespace ART
 		return (_label);
 	}
 
-	void ESPDevice::setLabel(char* json)
+	void ESPDevice::setLabel(const char* json)
 	{
 		StaticJsonBuffer<200> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -314,7 +314,7 @@ namespace ART
 		_deviceMQ->unSubscribeDeviceInApplication(ESP_DEVICE_SET_LABEL_TOPIC_SUB);
 	}
 
-	bool ESPDevice::onDeviceMQSubscription(char* topicKey, char* json)
+	bool ESPDevice::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
 		if (strcmp(topicKey, ESP_DEVICE_SET_LABEL_TOPIC_SUB) == 0) {
 			setLabel(json);

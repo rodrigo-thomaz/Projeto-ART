@@ -24,7 +24,7 @@ namespace ART
 	{
 		_espDevice->getDeviceMQ()->addSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQSubscribeDeviceInApplication(); });
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
-		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](char* topicKey, char* json) { return onDeviceMQSubscription(topicKey, json); });
+		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
 	void DeviceDebug::loop()
@@ -272,7 +272,7 @@ namespace ART
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB);
 	}
 
-	bool DeviceDebug::onDeviceMQSubscription(char* topicKey, char* json)
+	bool DeviceDebug::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
 		if (strcmp(topicKey, DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB) == 0) {
 			setRemoteEnabled(json);

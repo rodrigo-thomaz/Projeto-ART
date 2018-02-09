@@ -199,7 +199,7 @@ namespace ART
 		}
 		}*/
 
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey, strdup(json.c_str()));
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey, json.c_str());
 	}
 
 	bool DeviceMQ::connected()
