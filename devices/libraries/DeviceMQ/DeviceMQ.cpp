@@ -277,8 +277,6 @@ namespace ART
 		strncpy(result, pchClass + 1, strlen(pchClass));
 		strcat(result, pchFunc);
 
-		//delete[] restStr;		
-
 		return result;
 	}
 
