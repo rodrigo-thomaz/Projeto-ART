@@ -4,6 +4,9 @@
 #include "vector"
 #include "tuple"
 
+#include "../OneWire/OneWire.h"
+#include "../DallasTemperature/DallasTemperature.h"
+
 #include "Arduino.h"
 #include "../ArduinoJson/ArduinoJson.h"
 

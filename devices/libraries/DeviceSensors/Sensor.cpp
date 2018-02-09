@@ -3,6 +3,8 @@
 #include "DeviceSensors.h"
 #include "SensorTrigger.h"
 
+#include "../DallasTemperature/DallasTemperature.h"
+
 namespace ART
 {
 	Sensor::Sensor(SensorInDevice* sensorInDevice, JsonObject& jsonObject)
