@@ -263,6 +263,26 @@ namespace ART
 
 	String DeviceMQ::getTopicKey(const char* routingKey)
 	{
+		/*
+		const char * pchFunc = strrchr(routingKey, '/');
+		int lastIndexOfFunc = pchFunc - routingKey;
+		
+		char restString1[lastIndexOfFunc];
+		strncpy(restString1, routingKey, lastIndexOfFunc);
+		restString1[lastIndexOfFunc] = '\0';
+
+		const char * pchClass = strrchr(restString1, '/');
+		int lastIndexOfClass = pchClass - restString1 + 1;
+
+		char result1[strlen(pchClass) + strlen(pchFunc) - 1];
+		strncpy(result1, pchClass + 1, strlen(pchClass));
+		strcat(result1, pchFunc);
+
+		delete[] restString1;
+		*/
+
+		//
+
 		String routingKeyStr = String(routingKey);
 		int lastIndexOf = routingKeyStr.lastIndexOf('/');
 
@@ -271,6 +291,17 @@ namespace ART
 		int restSize = sizeof(routingKeyStr) - restLastIndexOf;
 
 		String result = routingKeyStr.substring(restLastIndexOf + 1, restSize);
+
+		return result;
+
+		//
+		
+		/*
+		Serial.print(F("!!!!!!!!!! result1: "));
+		Serial.println(result1);
+		Serial.print(F("!!!!!!!!!! result: "));
+		Serial.println(result);
+		*/
 
 		return result;
 	}
