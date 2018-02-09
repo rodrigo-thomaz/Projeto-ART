@@ -179,7 +179,13 @@ namespace ART
 
 	void DeviceMQ::onMQQTCallback(char* topic, uint8_t* payload, unsigned int length)
 	{
-		char* topicKey = strdup(getTopicKey(topic));
+		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceMQ::onMQQTCallback] topic:"));
+		Serial.println(topic);
+
+		String topicKey = getTopicKey(topic);
+
+		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceMQ::onMQQTCallback] topicKey:"));
+		Serial.println(topicKey);
 
 		String json;
 
@@ -199,7 +205,7 @@ namespace ART
 		}
 		}*/
 
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey, json.c_str());
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey.c_str(), json.c_str());
 	}
 
 	bool DeviceMQ::connected()
@@ -255,7 +261,7 @@ namespace ART
 		Serial.println(routingKey);
 	}
 
-	const char* DeviceMQ::getTopicKey(const char* routingKey)
+	String DeviceMQ::getTopicKey(const char* routingKey)
 	{
 		String routingKeyStr = String(routingKey);
 		int lastIndexOf = routingKeyStr.lastIndexOf('/');
@@ -266,7 +272,7 @@ namespace ART
 
 		String result = routingKeyStr.substring(restLastIndexOf + 1, restSize);
 
-		return result.c_str();
+		return result;
 	}
 
 	String DeviceMQ::getApplicationRoutingKey(const char* topic)

@@ -677,6 +677,9 @@ namespace ART
 
 	bool DeviceSensors::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
+		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceSensors::onDeviceMQSubscription] topicKey:"));
+		Serial.println(topicKey);
+
 		if (strcmp(topicKey, DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB) == 0) {
 			setSensorsByMQQTCallback(json);
 			return true;
