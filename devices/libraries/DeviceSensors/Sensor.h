@@ -4,8 +4,6 @@
 #include "vector"
 
 #include "../ArduinoJson/ArduinoJson.h"
-//#include "../OneWire/OneWire.h"
-//#include "../DallasTemperature/DallasTemperature.h"
 
 #include "SensorDatasheet.h"
 #include "SensorTempDSFamily.h"
