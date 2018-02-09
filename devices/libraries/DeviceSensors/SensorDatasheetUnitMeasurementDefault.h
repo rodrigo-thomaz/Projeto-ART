@@ -1,10 +1,9 @@
 #ifndef SensorDatasheetUnitMeasurementDefault_h
 #define SensorDatasheetUnitMeasurementDefault_h
 
-#include "Arduino.h"
 #include "../ArduinoJson/ArduinoJson.h"
 
-#include "UnitMeasurementEnum.h"
+#include "../UnitMeasurement/UnitMeasurementEnum.h"
 
 namespace ART
 {

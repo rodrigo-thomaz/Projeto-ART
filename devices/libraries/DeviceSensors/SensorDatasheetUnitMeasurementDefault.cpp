@@ -1,6 +1,8 @@
 #include "SensorDatasheetUnitMeasurementDefault.h"
 #include "SensorDatasheet.h"
 
+#include "Arduino.h"
+
 namespace ART
 {
 	SensorDatasheetUnitMeasurementDefault::SensorDatasheetUnitMeasurementDefault(SensorDatasheet* sensorDatasheet, JsonObject& jsonObject)
