@@ -1,5 +1,5 @@
 #include "SensorUnitMeasurementScale.h"
-#include "../Sensor/Sensor.h"
+#include "Sensor.h"
 
 namespace ART
 {

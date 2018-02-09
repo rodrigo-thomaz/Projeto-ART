@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -15,13 +15,14 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
-	<Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  	<Text Include="$(MSBuildThisFileDirectory)Sensor.h" />
-  </ItemGroup>
- <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)Sensor.h" /> -->
+    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+    <Text Include="$(MSBuildThisFileDirectory)Sensor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)Sensor.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.cpp" />
   </ItemGroup>
-  </Project>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.h" />
+  </ItemGroup>
+</Project>

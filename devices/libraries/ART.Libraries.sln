@@ -43,8 +43,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sensor", "Sensor\Sensor.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorTempDSFamily", "SensorTempDSFamily\SensorTempDSFamily.vcxitems", "{A2E38722-5D06-4649-8481-4DA48E41E970}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorUnitMeasurementScale", "SensorUnitMeasurementScale\SensorUnitMeasurementScale.vcxitems", "{CE268AF1-D789-4417-B194-B2606E2A45FE}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurementConverter", "UnitMeasurementConverter\UnitMeasurementConverter.vcxitems", "{E30BBAF9-343B-415D-8D29-72473DC00F08}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SensorDatasheet", "SensorDatasheet\SensorDatasheet.vcxitems", "{704D980A-58F1-4CC2-9B1F-6B47927F5018}"

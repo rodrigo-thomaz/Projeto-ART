@@ -14,6 +14,9 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)Sensor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
@@ -21,5 +24,10 @@
     <Text Include="$(MSBuildThisFileDirectory)Sensor.h">
       <Filter>Header Files</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
