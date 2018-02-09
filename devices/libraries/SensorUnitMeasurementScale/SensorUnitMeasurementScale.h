@@ -1,9 +1,8 @@
 #ifndef SensorUnitMeasurementScale_h
 #define SensorUnitMeasurementScale_h
 
-#include "Arduino.h"
 #include "../ArduinoJson/ArduinoJson.h"
-#include "UnitMeasurementEnum.h"
+#include "../UnitMeasurement/UnitMeasurementEnum.h"
 
 namespace ART
 {
