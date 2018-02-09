@@ -18,16 +18,9 @@ namespace ART
 		char* 								getSensorTriggerId() const;
 
 		bool 								getTriggerOn();
-		//void 								setTriggerOn(bool value);
-
 		bool 								getBuzzerOn();
-		//void 								setBuzzerOn(bool value);
-
 		float 								getMax();
-		//void 								setMax(float value);
-
 		float 								getMin();
-		//void 								setMin(float value);
 
 		bool 								hasAlarm();
 		bool 								hasAlarmBuzzer();
