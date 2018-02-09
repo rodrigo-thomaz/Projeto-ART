@@ -169,11 +169,6 @@ namespace ART
 			result = false;
 		}
 
-		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) {
-			if(result) _deviceDebug->printf("DeviceInApplication::onDeviceMQSubscription] find topic : %s\n", topicKey);
-			_deviceDebug->printf("DeviceInApplication::onDeviceMQSubscription] end return : %s\n", result ? "true" : "false");
-		}
-
 		return result;
 	}
 }

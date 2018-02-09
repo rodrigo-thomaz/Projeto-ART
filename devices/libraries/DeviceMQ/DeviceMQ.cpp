@@ -182,7 +182,8 @@ namespace ART
 		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceMQ::onMQQTCallback] topic:"));
 		Serial.println(topic);
 
-		const char* topicKey = getTopicKey(topic);
+		//String topicKeyStr = getTopicKeyStr(topic);
+		char* topicKey = strdup(getTopicKey(topic));
 
 		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceMQ::onMQQTCallback] topicKey:"));
 		Serial.println(topicKey);
@@ -261,22 +262,39 @@ namespace ART
 		Serial.println(routingKey);
 	}
 
-	const char* DeviceMQ::getTopicKey(const char* routingKey)
-	{		
+	String DeviceMQ::getTopicKeyStr(const char* routingKey)
+	{
+		String routingKeyStr = String(routingKey);
+		int lastIndexOf = routingKeyStr.lastIndexOf('/');
+
+		String restString = routingKeyStr.substring(0, lastIndexOf);
+		int restLastIndexOf = restString.lastIndexOf('/');
+		int restSize = sizeof(routingKeyStr) - restLastIndexOf;
+
+		String result = routingKeyStr.substring(restLastIndexOf + 1, restSize);
+
+		return result;
+	}
+
+	const char * DeviceMQ::getTopicKey(const char * routingKey)
+	{
 		const char * pchFunc = strrchr(routingKey, '/');
 		int lastIndexOfFunc = pchFunc - routingKey;
-		
-		char restStr[lastIndexOfFunc];
-		strncpy(restStr, routingKey, lastIndexOfFunc);
-		restStr[lastIndexOfFunc] = '\0';
 
-		const char * pchClass = strrchr(restStr, '/');
-		int lastIndexOfClass = pchClass - restStr + 1;
+		char restString[lastIndexOfFunc];
+		strncpy(restString, routingKey, lastIndexOfFunc);
+		restString[lastIndexOfFunc] = '\0';
+
+		const char * pchClass = strrchr(restString, '/');
+		int lastIndexOfClass = pchClass - restString + 1;
 
 		char result[strlen(pchClass) + strlen(pchFunc) - 1];
 		strncpy(result, pchClass + 1, strlen(pchClass));
 		strcat(result, pchFunc);
-
+				
+		Serial.print(F("!!!!!!!!!! novo getTopicKey result: "));
+		Serial.println(result);
+		
 		return result;
 	}
 
