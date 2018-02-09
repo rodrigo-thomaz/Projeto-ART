@@ -182,7 +182,7 @@ namespace ART
 		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceMQ::onMQQTCallback] topic:"));
 		Serial.println(topic);
 
-		String topicKey = getTopicKey(topic);
+		const char* topicKey = getTopicKey(topic);
 
 		Serial.print(F("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! [DeviceMQ::onMQQTCallback] topicKey:"));
 		Serial.println(topicKey);
@@ -205,7 +205,7 @@ namespace ART
 		}
 		}*/
 
-		for (auto && fn : _subscriptionCallbacks) fn(topicKey.c_str(), json.c_str());
+		for (auto && fn : _subscriptionCallbacks) fn(topicKey, json.c_str());
 	}
 
 	bool DeviceMQ::connected()
@@ -261,47 +261,23 @@ namespace ART
 		Serial.println(routingKey);
 	}
 
-	String DeviceMQ::getTopicKey(const char* routingKey)
-	{
-		/*
+	const char* DeviceMQ::getTopicKey(const char* routingKey)
+	{		
 		const char * pchFunc = strrchr(routingKey, '/');
 		int lastIndexOfFunc = pchFunc - routingKey;
 		
-		char restString1[lastIndexOfFunc];
-		strncpy(restString1, routingKey, lastIndexOfFunc);
-		restString1[lastIndexOfFunc] = '\0';
+		char restStr[lastIndexOfFunc];
+		strncpy(restStr, routingKey, lastIndexOfFunc);
+		restStr[lastIndexOfFunc] = '\0';
 
-		const char * pchClass = strrchr(restString1, '/');
-		int lastIndexOfClass = pchClass - restString1 + 1;
+		const char * pchClass = strrchr(restStr, '/');
+		int lastIndexOfClass = pchClass - restStr + 1;
 
-		char result1[strlen(pchClass) + strlen(pchFunc) - 1];
-		strncpy(result1, pchClass + 1, strlen(pchClass));
-		strcat(result1, pchFunc);
+		char result[strlen(pchClass) + strlen(pchFunc) - 1];
+		strncpy(result, pchClass + 1, strlen(pchClass));
+		strcat(result, pchFunc);
 
-		delete[] restString1;
-		*/
-
-		//
-
-		String routingKeyStr = String(routingKey);
-		int lastIndexOf = routingKeyStr.lastIndexOf('/');
-
-		String restString = routingKeyStr.substring(0, lastIndexOf);
-		int restLastIndexOf = restString.lastIndexOf('/');
-		int restSize = sizeof(routingKeyStr) - restLastIndexOf;
-
-		String result = routingKeyStr.substring(restLastIndexOf + 1, restSize);
-
-		return result;
-
-		//
-		
-		/*
-		Serial.print(F("!!!!!!!!!! result1: "));
-		Serial.println(result1);
-		Serial.print(F("!!!!!!!!!! result: "));
-		Serial.println(result);
-		*/
+		//delete[] restStr;		
 
 		return result;
 	}

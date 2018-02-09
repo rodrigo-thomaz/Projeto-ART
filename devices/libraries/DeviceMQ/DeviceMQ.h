@@ -94,7 +94,7 @@ namespace ART
 
 		String 														getApplicationRoutingKey(const char* topic);
 		String 														getDeviceRoutingKey(const char* topic);
-		String														getTopicKey(const char* routingKey);
+		const char*													getTopicKey(const char* routingKey);
 
 		typedef std::function<void()>								subscribeSignature;
 		typedef std::function<bool(const char*, const char*)>		subscriptionSignature;
