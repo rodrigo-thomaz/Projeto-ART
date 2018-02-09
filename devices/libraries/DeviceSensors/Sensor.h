@@ -28,7 +28,7 @@ namespace ART
 		SensorTypeEnum						getSensorTypeId();
 		SensorDatasheetEnum					getSensorDatasheetId();
 
-		const uint8_t*		 				getDeviceAddress();
+		uint8_t*			 				getDeviceAddress() const;
 
 		char*								getFamily() const;
 		bool								getValidFamily();
@@ -64,7 +64,7 @@ namespace ART
 		SensorTypeEnum						_sensorTypeId;
 		SensorDatasheetEnum					_sensorDatasheetId;
 
-		std::vector<uint8_t> 				_deviceAddress;
+		uint8_t* 				 			_deviceAddress;
 
 		char* 								_family;
 		bool 								_validFamily;
