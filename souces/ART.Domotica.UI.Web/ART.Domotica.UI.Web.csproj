@@ -272,6 +272,7 @@
     <Content Include="src\js\controllers\device\deviceDebugController.js" />
     <Content Include="src\js\controllers\device\deviceBinaryController.js" />
     <Content Include="src\js\controllers\device\deviceMQController.js" />
+    <Content Include="src\js\controllers\device\deviceSerialController.js" />
     <Content Include="src\js\controllers\device\deviceWiFiController.js" />
     <Content Include="src\js\controllers\espDeviceJoinController.js" />
     <Content Include="src\js\controllers\espDeviceListController.js" />
@@ -300,6 +301,8 @@
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetService.js" />
     <Content Include="src\js\services\device\deviceDebugFinder.js" />
     <Content Include="src\js\services\device\deviceInApplicationService.js" />
+    <Content Include="src\js\services\device\deviceSerialService.js" />
+    <Content Include="src\js\services\device\deviceSerialFinder.js" />
     <Content Include="src\js\services\device\deviceWiFiFinder.js" />
     <Content Include="src\js\services\device\deviceDebugService.js" />
     <Content Include="src\js\services\device\deviceWiFiService.js" />
@@ -629,6 +632,7 @@
     <Content Include="src\views\device\deviceDebug.html" />
     <Content Include="src\views\device\deviceBinary.html" />
     <Content Include="src\views\device\deviceMQ.html" />
+    <Content Include="src\views\device\deviceSerial.html" />
     <Content Include="src\views\device\deviceWiFi.html" />
     <Content Include="src\views\espDeviceJoin.html" />
     <Content Include="src\views\espDeviceList_____Old.html" />

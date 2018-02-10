@@ -104,6 +104,7 @@
             var data = await _context.ESPDevice
                 .Include(x => x.DevicesInApplication)
                 .Include(x => x.DeviceNTP)
+                .Include(x => x.DeviceSerial)
                 .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceDebug)
                 .Include(x => x.DeviceMQ)

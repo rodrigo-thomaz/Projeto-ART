@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Model
 {
     using System;
+    using System.Collections.Generic;
 
     public class ESPDeviceGetModel
     {
@@ -37,6 +38,11 @@
         }
 
         public DeviceSensorsGetModel DeviceSensors
+        {
+            get; set;
+        }
+
+        public List<DeviceSerialGetModel> DeviceSerial
         {
             get; set;
         }

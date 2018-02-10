@@ -39,6 +39,14 @@ app.constant('deviceNTPConstant', {
 
 });
 
+app.constant('deviceSerialConstant', {
+
+    setUpdateIntervalInMilliSecondApiUri: 'api/deviceSerial/setEnabled',
+    setUpdateIntervalInMilliSecondCompletedTopic: 'DeviceSerial.SetEnabledViewCompleted',
+    setUpdateIntervalInMilliSecondCompletedEventName: 'deviceSerialService.onEnabledCompleted_Id_',   
+
+});
+
 app.constant('deviceWiFiConstant', {
 
     setHostNameApiUri: 'api/deviceWiFi/setHostName',
