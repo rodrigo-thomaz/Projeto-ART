@@ -16,7 +16,7 @@ namespace ART
 		
 		_ordination = jsonObject["ordination"];
 
-		Sensor::create(_sensor, this, jsonObject["sensor"]);
+		_sensor = new Sensor(this, jsonObject["sensor"]);
 
 		deviceDebug->printlnLevel(DeviceDebug::DEBUG, "SensorInDevice", "constructor", "end");
 	}

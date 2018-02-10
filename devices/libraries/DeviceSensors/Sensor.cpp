@@ -45,12 +45,10 @@ namespace ART
 	Sensor::~Sensor()
 	{
 		Serial.println(F("[Sensor destructor]"));
-	}
 
-	void Sensor::create(Sensor *(&sensor), SensorInDevice * sensorInDevice, JsonObject & jsonObject)
-	{
-		sensor = new Sensor(sensorInDevice, jsonObject);
-	}
+		delete[] _sensorId;
+		delete[] _label;
+	}	
 
 	char* Sensor::getSensorId() const
 	{
