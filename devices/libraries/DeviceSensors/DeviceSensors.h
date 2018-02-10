@@ -54,8 +54,6 @@ namespace ART
 		DeviceSensors(ESPDevice* espDevice);
 		~DeviceSensors();
 
-		static void							create(DeviceSensors* (&deviceSensors), ESPDevice* espDevice);
-
 		void 								begin();
 
 		bool								initialized();

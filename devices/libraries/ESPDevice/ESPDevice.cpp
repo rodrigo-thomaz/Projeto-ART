@@ -278,7 +278,7 @@ namespace ART
 
 		Serial.printf("hasSensor: %s\n", _hasSensor ? "true" : "false");
 		if (_hasSensor) {
-			DeviceSensors::create(_deviceSensors, this);
+			_deviceSensors = new DeviceSensors(this);
 			_deviceSensors->begin();
 		}
 

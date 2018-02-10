@@ -34,11 +34,6 @@ namespace ART
 		delete (_espDevice);
 	}
 
-	void DeviceSensors::create(DeviceSensors *(&deviceSensors), ESPDevice * espDevice)
-	{
-		deviceSensors = new DeviceSensors(espDevice);
-	}
-
 	void DeviceSensors::begin()
 	{
 		Serial.println(F("[DeviceSensors::begin] begin"));
