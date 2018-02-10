@@ -120,9 +120,10 @@ namespace ART
 			printf("ESPDevice", "setLabel", "Parse failed: %s\n", json);
 			return;
 		}
-		char* value = strdup(root["value"]);
-		_label = new char(sizeof(strlen(value)));
-		_label = value;
+		const char* value = root["value"];
+		_label = new char[strlen(value) + 1];
+		strcpy(_label, value);
+		_label[strlen(value) + 1] = '\0';
 	}	
 
 	char* ESPDevice::getWebApiHost() const
@@ -254,15 +255,23 @@ namespace ART
 		_deviceDebug->print("ESPDevice", "load", "begin\n");
 
 		DynamicJsonBuffer jsonBuffer;
-		JsonObject& jsonObject = jsonBuffer.parseObject(json);
+		JsonObject& jsonObject = jsonBuffer.parseObject(json);		
 
-		_deviceId = strdup(jsonObject["deviceId"]);
-		_deviceDatasheetId = strdup(jsonObject["deviceDatasheetId"]);
+		const char* deviceId = jsonObject["deviceId"];
+		_deviceId = new char[strlen(deviceId) + 1];
+		strcpy(_deviceId, deviceId);
+		_deviceId[strlen(deviceId) + 1] = '\0';
+			
+		const char* deviceDatasheetId = jsonObject["deviceDatasheetId"];
+		_deviceDatasheetId = new char[strlen(deviceDatasheetId) + 1];
+		strcpy(_deviceDatasheetId, deviceDatasheetId);
+		_deviceDatasheetId[strlen(deviceDatasheetId) + 1] = '\0';
 
-		char* label = strdup(jsonObject["label"]);
-		_label = new char(sizeof(strlen(label)));
-		_label = label;
-				
+		const char* label = jsonObject["label"];
+		_label = new char[strlen(label) + 1];
+		strcpy(_label, label);
+		_label[strlen(label) + 1] = '\0';
+
 		_hasSensor = jsonObject["hasSensor"];
 
 		_deviceDebug->load(jsonObject);
