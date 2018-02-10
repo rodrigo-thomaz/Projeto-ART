@@ -21,7 +21,6 @@ namespace ART
 		DeviceSensors*						getDeviceSensors();
 
 		short								getOrdination();
-		void								setOrdination(short value);		
 
 		bool								operator<(const SensorInDevice& val) const;
 
@@ -31,6 +30,10 @@ namespace ART
 		Sensor *							_sensor;		
 
 		short 								_ordination;
+
+		void								setOrdination(short value);
+
+		friend class						DeviceSensors;
 
 	};
 }
