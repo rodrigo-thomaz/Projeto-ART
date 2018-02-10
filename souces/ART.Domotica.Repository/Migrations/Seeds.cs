@@ -498,6 +498,7 @@
                 .Include(x => x.DeviceDebug)
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
+                .Include(x => x.DeviceSerial)
                 .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
                 .Where(x => x.DeviceWiFi.SoftAPMacAddress.ToLower() == espDevice1SoftAPMacAddress.ToLower())
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetId_OneWire2Way)
@@ -553,6 +554,19 @@
                     {
                         ReadIntervalInMilliSeconds = 2000,
                         PublishIntervalInMilliSeconds = 10000,
+                    },
+                    DeviceSerial = new List<DeviceSerial>
+                    {
+                        new DeviceSerial
+                        {
+                            Index = 1,
+                            Enabled = true,
+                        },
+                        new DeviceSerial
+                        {
+                            Index = 2,
+                            Enabled = false,
+                        },
                     },
                 };
 
@@ -616,6 +630,22 @@
                         PublishIntervalInMilliSeconds = 10000,
                     };
                 }
+                if(!espDevice1.DeviceSerial.Any())
+                {
+                    espDevice1.DeviceSerial = new List<DeviceSerial>
+                    {
+                        new DeviceSerial
+                        {
+                            Index = 1,
+                            Enabled = true,
+                        },
+                        new DeviceSerial
+                        {
+                            Index = 2,
+                            Enabled = false,
+                        },
+                    };
+                }
             }
 
             context.SaveChanges();
@@ -658,7 +688,7 @@
                 Ordination = 2,
             };
 
-            context.SensorInDevice.AddOrUpdate(sensorInDevice_3_1);
+            //context.SensorInDevice.AddOrUpdate(sensorInDevice_3_1);
 
             var sensorInDevice_3_2 = new SensorInDevice
             {
@@ -670,7 +700,7 @@
                 Ordination = 3,
             };
 
-            context.SensorInDevice.AddOrUpdate(sensorInDevice_3_2);
+            //context.SensorInDevice.AddOrUpdate(sensorInDevice_3_2);
 
             context.SaveChanges();
 
@@ -764,6 +794,7 @@
                 .Include(x => x.DeviceDebug)
                 .Include(x => x.DeviceSensors)
                 .Include(x => x.DeviceBinary)
+                .Include(x => x.DeviceSerial)
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetId_Ultrasonic_1Way)
                 .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice2StationMacAddress.ToLower())
                 .Where(x => x.DeviceWiFi.SoftAPMacAddress.ToLower() == espDevice2SoftAPMacAddress.ToLower())
@@ -819,6 +850,19 @@
                     {
                         ReadIntervalInMilliSeconds = 2000,
                         PublishIntervalInMilliSeconds = 10000,
+                    },
+                    DeviceSerial = new List<DeviceSerial>
+                    {
+                        new DeviceSerial
+                        {
+                            Index = 1,
+                            Enabled = true,
+                        },
+                        new DeviceSerial
+                        {
+                            Index = 2,
+                            Enabled = false,
+                        },
                     },
                 };
 
@@ -883,6 +927,22 @@
                         ShowTime = false,
                         ShowProfiler = false,
                         ShowColors = true,
+                    };
+                }
+                if (!espDevice2.DeviceSerial.Any())
+                {
+                    espDevice2.DeviceSerial = new List<DeviceSerial>
+                    {
+                        new DeviceSerial
+                        {
+                            Index = 1,
+                            Enabled = true,
+                        },
+                        new DeviceSerial
+                        {
+                            Index = 2,
+                            Enabled = false,
+                        },
                     };
                 }
             }

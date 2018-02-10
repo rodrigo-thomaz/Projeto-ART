@@ -100,6 +100,11 @@
             get; set;
         }
 
+        public DbSet<DeviceSerial> DeviceSerial
+        {
+            get; set;
+        }
+
         public DbSet<DeviceWiFi> DeviceWiFi
         {
             get; set;

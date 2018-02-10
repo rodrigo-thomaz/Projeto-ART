@@ -71,6 +71,7 @@
     <Compile Include="Configurations\DeviceDatasheetConfiguration.cs" />
     <Compile Include="Configurations\DeviceBinaryConfiguration.cs" />
     <Compile Include="Configurations\DeviceDebugConfiguration.cs" />
+    <Compile Include="Configurations\DeviceSerialConfiguration.cs" />
     <Compile Include="Configurations\DeviceWiFiConfiguration.cs" />
     <Compile Include="Configurations\Locale\ContinentConfiguration.cs" />
     <Compile Include="Configurations\DeviceNTPConfiguration.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Entities\DeviceDatasheetBinary.cs" />
     <Compile Include="Entities\DeviceDatasheet.cs" />
     <Compile Include="Entities\DeviceDebug.cs" />
+    <Compile Include="Entities\DeviceSerial.cs" />
     <Compile Include="Entities\DeviceWiFi.cs" />
     <Compile Include="Entities\Locale\Continent.cs" />
     <Compile Include="Entities\Locale\Country.cs" />
@@ -145,6 +147,7 @@
     <Compile Include="Interfaces\IDeviceDatasheetBinaryRepository.cs" />
     <Compile Include="Interfaces\IDeviceBinaryRepository.cs" />
     <Compile Include="Interfaces\IDeviceDebugRepository.cs" />
+    <Compile Include="Interfaces\IDeviceSerialRepository.cs" />
     <Compile Include="Interfaces\IDeviceWiFiRepository.cs" />
     <Compile Include="Interfaces\IDeviceSensorsRepository.cs" />
     <Compile Include="Interfaces\IDeviceDatasheetRepository.cs" />
@@ -189,6 +192,22 @@
     <Compile Include="Migrations\201802081343563_InitialCreate03.Designer.cs">
       <DependentUpon>201802081343563_InitialCreate03.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802101411144_InitialCreate04.cs" />
+    <Compile Include="Migrations\201802101411144_InitialCreate04.Designer.cs">
+      <DependentUpon>201802101411144_InitialCreate04.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802101436103_InitialCreate06.cs" />
+    <Compile Include="Migrations\201802101436103_InitialCreate06.Designer.cs">
+      <DependentUpon>201802101436103_InitialCreate06.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802101441141_InitialCreate07.cs" />
+    <Compile Include="Migrations\201802101441141_InitialCreate07.Designer.cs">
+      <DependentUpon>201802101441141_InitialCreate07.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802101456128_InitialCreate08.cs" />
+    <Compile Include="Migrations\201802101456128_InitialCreate08.Designer.cs">
+      <DependentUpon>201802101456128_InitialCreate08.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,6 +216,7 @@
     <Compile Include="Repositories\DeviceDatasheetBinaryRepository.cs" />
     <Compile Include="Repositories\DeviceBinaryRepository.cs" />
     <Compile Include="Repositories\DeviceDebugRepository.cs" />
+    <Compile Include="Repositories\DeviceSerialRepository.cs" />
     <Compile Include="Repositories\DeviceWiFiRepository.cs" />
     <Compile Include="Repositories\DeviceSensorsRepository.cs" />
     <Compile Include="Repositories\DeviceDatasheetRepository.cs" />
@@ -287,6 +307,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802081343563_InitialCreate03.resx">
       <DependentUpon>201802081343563_InitialCreate03.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101411144_InitialCreate04.resx">
+      <DependentUpon>201802101411144_InitialCreate04.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101436103_InitialCreate06.resx">
+      <DependentUpon>201802101436103_InitialCreate06.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101441141_InitialCreate07.resx">
+      <DependentUpon>201802101441141_InitialCreate07.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101456128_InitialCreate08.resx">
+      <DependentUpon>201802101456128_InitialCreate08.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

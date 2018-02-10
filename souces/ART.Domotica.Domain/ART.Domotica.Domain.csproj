@@ -69,6 +69,7 @@
     <Compile Include="Interfaces\IDeviceDatasheetDomain.cs" />
     <Compile Include="Interfaces\IDeviceBinaryDomain.cs" />
     <Compile Include="Interfaces\IDeviceDebugDomain.cs" />
+    <Compile Include="Interfaces\IDeviceSerialDomain.cs" />
     <Compile Include="Interfaces\IDeviceWiFiDomain.cs" />
     <Compile Include="Interfaces\IDeviceInApplicationDomain.cs" />
     <Compile Include="Interfaces\ISensorInDeviceDomain.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeDomain.cs" />
     <Compile Include="Services\ApplicationMQDomain.cs" />
     <Compile Include="Services\DeviceDebugDomain.cs" />
+    <Compile Include="Services\DeviceSerialDomain.cs" />
     <Compile Include="Services\DeviceWiFiDomain.cs" />
     <Compile Include="Services\DeviceNTPDomain.cs" />
     <Compile Include="Services\DeviceMQDomain.cs" />

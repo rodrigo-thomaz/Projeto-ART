@@ -49,6 +49,11 @@
             get; set;
         }
 
+        public ICollection<DeviceSerial> DeviceSerial
+        {
+            get; set;
+        }
+
         public ICollection<DeviceInApplication> DevicesInApplication
         {
             get; set;
