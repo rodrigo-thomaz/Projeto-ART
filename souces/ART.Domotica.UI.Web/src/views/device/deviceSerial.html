@@ -11,65 +11,23 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Tem RX</label>
-                <div class="col-lg-8">
-                    <div class="checkbox">
-                        <label class="i-checks">
-                            <input type="checkbox" ng-model="deviceSerialItem.hasRX" disabled><i></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Permite a troca do pino RX</label>
-                <div class="col-lg-8">
-                    <div class="checkbox">
-                        <label class="i-checks">
-                            <input type="checkbox" ng-model="deviceSerialItem.allowPinSwapRX" disabled><i></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
+            <div class="form-group" ng-show="deviceSerialItem.hasRX">
                 <label class="col-lg-4 control-label">Pino RX</label>
                 <div class="col-lg-8">
-                    <div class="checkbox">
-                        <label class="i-checks">
-                            <input type="checkbox" ng-model="deviceSerialItem.pinRX"><i></i>
-                        </label>
-                    </div>
+                    <input name="inputPinRX" type="number" ng-model="deviceSerialItem.pinRX" ng-model-options="{ debounce: 1000 }" ng-change="changePin()" min="0" required ng-disabled="deviceSerialItem.allowPinSwapRX === null || !deviceSerialItem.allowPinSwapRX" class="form-control">
                 </div>
+                <span ng-show="form.inputPinRX.$touched && form.inputPinRX.$invalid">
+                    Pino RX deve ser maior que 0
+                </span>
             </div>
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Tem TX</label>
-                <div class="col-lg-8">
-                    <div class="checkbox">
-                        <label class="i-checks">
-                            <input type="checkbox" ng-model="deviceSerialItem.hasTX" disabled><i></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-4 control-label">Permite a troca do pino TX</label>
-                <div class="col-lg-8">
-                    <div class="checkbox">
-                        <label class="i-checks">
-                            <input type="checkbox" ng-model="deviceSerialItem.allowPinSwapTX" disabled><i></i>
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
+            <div class="form-group" ng-show="deviceSerialItem.hasTX">
                 <label class="col-lg-4 control-label">Pino TX</label>
                 <div class="col-lg-8">
-                    <div class="checkbox">
-                        <label class="i-checks">
-                            <input type="checkbox" ng-model="deviceSerialItem.pinTX"><i></i>
-                        </label>
-                    </div>
+                    <input name="inputPinTX" type="number" ng-model="deviceSerialItem.pinTX" ng-model-options="{ debounce: 1000 }" ng-change="changePin()" min="0" required ng-disabled="deviceSerialItem.allowPinSwapTX === null || !deviceSerialItem.allowPinSwapTX" class="form-control">
                 </div>
+                <span ng-show="form.inputPinTX.$touched && form.inputPinTX.$invalid">
+                    Pino TX deve ser maior que 0
+                </span>
             </div>
         </form>
     </tab>
