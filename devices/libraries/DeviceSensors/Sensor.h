@@ -27,17 +27,14 @@ namespace ART
 		char*								getSensorId() const;
 		SensorTypeEnum						getSensorTypeId();
 		SensorDatasheetEnum					getSensorDatasheetId();
-
+		
 		uint8_t*			 				getDeviceAddress() const;
-
-		char* 								getLabel() const;
-		void 								setLabel(const char* value);	
-
+		
+		char* 								getLabel() const;		
+		
 		bool 								getConnected();
-		void 								setConnected(bool value);
-
-		float 								getValue();
-		void 								setValue(float value);
+		
+		float 								getValue();		
 
 		bool 								hasAlarm();
 		bool 								hasAlarmBuzzer();		
@@ -73,6 +70,12 @@ namespace ART
 
 		long 								_epochTimeUtc;	
 
+		void 								setSensorId(const char* value);
+		void 								setLabel(const char* value);
+		void 								setConnected(bool value);
+		void 								setValue(float value);
+
+		friend class						DeviceSensors;
 	};
 }
 

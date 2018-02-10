@@ -17,18 +17,13 @@ namespace ART
 		for (uint8_t i = 0; i < 8; i++) {
 			_deviceAddress[i] = jsonObject["deviceAddress"][i];
 		}		
-				
-		_sensorId = new char[37];
-		strcpy(_sensorId, jsonObject["sensorId"]);
-		_sensorId[37] = '\0';
+			
+		setSensorId(jsonObject["sensorId"]);
 
 		_sensorDatasheetId = static_cast<SensorDatasheetEnum>(jsonObject["sensorDatasheetId"].as<short>());
 		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
 
-		const char* label = jsonObject["label"];
-		_label = new char[strlen(label) + 1];
-		strcpy(_label, label);
-		_label[strlen(label)] = '\0';
+		setLabel(jsonObject["label"]);
 
 		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
 		_sensorDatasheet = deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
@@ -62,6 +57,13 @@ namespace ART
 		return (_sensorId);
 	}
 
+	void Sensor::setSensorId(const char * value)
+	{
+		_sensorId = new char[strlen(value) + 1];
+		strcpy(_sensorId, value);
+		_sensorId[strlen(value) + 1] = '\0';
+	}
+
 	SensorTypeEnum Sensor::getSensorTypeId()
 	{
 		return _sensorTypeId;
@@ -84,8 +86,9 @@ namespace ART
 
 	void Sensor::setLabel(const char* value)
 	{
-		_label = new char(sizeof(strlen(value)));
-		_label = strdup(value);
+		_label = new char[strlen(value) + 1];
+		strcpy(_label, value);
+		_label[strlen(value) + 1] = '\0';
 	}	
 
 	bool Sensor::getConnected()
