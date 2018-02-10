@@ -25,9 +25,10 @@ namespace ART
 		_sensorDatasheetId = static_cast<SensorDatasheetEnum>(jsonObject["sensorDatasheetId"].as<short>());
 		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
 
-		char* label = strdup(jsonObject["label"]);
-		_label = new char(sizeof(strlen(label)));
-		_label = label;		
+		const char* label = jsonObject["label"];
+		_label = new char[strlen(label) + 1];
+		strcpy(_label, label);
+		_label[strlen(label)] = '\0';
 
 		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
 		_sensorDatasheet = deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
