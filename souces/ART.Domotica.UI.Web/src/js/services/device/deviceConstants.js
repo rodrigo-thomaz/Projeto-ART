@@ -43,7 +43,11 @@ app.constant('deviceSerialConstant', {
 
     setEnabledApiUri: 'api/deviceSerial/setEnabled',
     setEnabledCompletedTopic: 'DeviceSerial.SetEnabledViewCompleted',
-    setEnabledCompletedEventName: 'deviceSerialService.onEnabledCompleted_Id_',   
+    setEnabledCompletedEventName: 'deviceSerialService.onSetEnabledCompleted_Id_',   
+
+    setPinApiUri: 'api/deviceSerial/setPin',
+    setPinCompletedTopic: 'DeviceSerial.SetPinViewCompleted',
+    setPinCompletedEventName: 'deviceSerialService.onSetPinCompleted_Id_',   
 
 });
 

@@ -103,7 +103,7 @@
             //PinTX
             Property(x => x.PinTX)
                 .HasColumnOrder(10)
-                .IsOptional();           
+                .IsOptional();
         }
 
         #endregion Constructors
