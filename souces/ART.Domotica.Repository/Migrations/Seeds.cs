@@ -561,11 +561,15 @@
                         {
                             Index = 1,
                             Enabled = true,
+                            HasRX = true,
+                            HasTX = true,
                         },
                         new DeviceSerial
                         {
                             Index = 2,
                             Enabled = false,
+                            HasRX = false,
+                            HasTX = true,
                         },
                     },
                 };
@@ -638,11 +642,15 @@
                         {
                             Index = 1,
                             Enabled = true,
+                            HasRX = true,
+                            HasTX = true,
                         },
                         new DeviceSerial
                         {
                             Index = 2,
                             Enabled = false,
+                            HasRX = false,
+                            HasTX = true,
                         },
                     };
                 }
@@ -857,11 +865,15 @@
                         {
                             Index = 1,
                             Enabled = true,
+                            HasRX = true,
+                            HasTX = true,
                         },
                         new DeviceSerial
                         {
                             Index = 2,
                             Enabled = false,
+                            HasRX = false,
+                            HasTX = true,
                         },
                     },
                 };
@@ -937,11 +949,15 @@
                         {
                             Index = 1,
                             Enabled = true,
+                            HasRX = true,
+                            HasTX = true,
                         },
                         new DeviceSerial
                         {
                             Index = 2,
                             Enabled = false,
+                            HasRX = false,
+                            HasTX = true,
                         },
                     };
                 }

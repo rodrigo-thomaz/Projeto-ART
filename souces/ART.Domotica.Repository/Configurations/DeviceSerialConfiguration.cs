@@ -74,6 +74,16 @@
             Property(x => x.Enabled)
                 .HasColumnOrder(4)
                 .IsRequired();
+
+            //HasRX
+            Property(x => x.HasRX)
+                .HasColumnOrder(5)
+                .IsRequired();
+
+            //HasTX
+            Property(x => x.HasTX)
+                .HasColumnOrder(6)
+                .IsRequired();
         }
 
         #endregion Constructors

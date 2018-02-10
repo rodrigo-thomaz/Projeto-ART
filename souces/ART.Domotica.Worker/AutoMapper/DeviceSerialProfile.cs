@@ -22,7 +22,9 @@
                 .ForMember(vm => vm.DeviceSerialId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.Index, m => m.MapFrom(x => x.Index))
-                .ForMember(vm => vm.Enabled, m => m.MapFrom(x => x.Enabled));
+                .ForMember(vm => vm.Enabled, m => m.MapFrom(x => x.Enabled))
+                .ForMember(vm => vm.HasRX, m => m.MapFrom(x => x.HasRX))
+                .ForMember(vm => vm.HasTX, m => m.MapFrom(x => x.HasTX));
         }
 
         #endregion Constructors

@@ -31,6 +31,16 @@
             get; set;
         }
 
+        public bool HasTX
+        {
+            get; set;
+        }
+
+        public bool HasRX
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }
