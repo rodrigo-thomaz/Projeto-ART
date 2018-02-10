@@ -17,8 +17,6 @@ namespace ART
 		SensorDatasheetUnitMeasurementDefault(SensorDatasheet* sensorDatasheet, JsonObject& jsonObject);
 		~SensorDatasheetUnitMeasurementDefault();
 
-		static void							create(SensorDatasheetUnitMeasurementDefault* (&sensorDatasheetUnitMeasurementDefault), SensorDatasheet* sensorDatasheet, JsonObject& jsonObject);
-
 		UnitMeasurementEnum					getUnitMeasurementId();
 
 		float 								getMax();

@@ -9,15 +9,10 @@ namespace ART
 
 		_sensor = sensor;	
 				
-		char* sensorTriggerId = strdup(jsonObject["sensorTriggerId"]);
-		_sensorTriggerId = new char(sizeof(strlen(sensorTriggerId)));
-		_sensorTriggerId = sensorTriggerId;
-		
-		/*
-		const char* sensorTriggerId = jsonObject["sensorTriggerId"];
-		_sensorTriggerId = new char(strlen(sensorTriggerId) + 1);
+		const char* sensorTriggerId = jsonObject["sensorTriggerId"];		
+		_sensorTriggerId = new char[strlen(sensorTriggerId) + 1];
 		strcpy(_sensorTriggerId, sensorTriggerId);
-		*/
+		_sensorTriggerId[strlen(sensorTriggerId) + 1] = '\0';
 
 		_triggerOn = bool(jsonObject["triggerOn"]);
 		_buzzerOn = bool(jsonObject["buzzerOn"]);
@@ -28,6 +23,8 @@ namespace ART
 	SensorTrigger::~SensorTrigger()
 	{
 		Serial.println(F("[SensorTrigger destructor]"));
+
+		delete[] _sensorTriggerId;
 	}
 
 	char * SensorTrigger::getSensorTriggerId() const

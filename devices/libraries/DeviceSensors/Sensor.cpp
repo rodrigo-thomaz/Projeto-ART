@@ -46,6 +46,10 @@ namespace ART
 
 		delete[] _sensorId;
 		delete[] _label;
+		delete[] _deviceAddress;
+
+		delete (_sensorTempDSFamily);
+		delete (_sensorUnitMeasurementScale);
 	}	
 
 	char* Sensor::getSensorId() const
@@ -138,7 +142,9 @@ namespace ART
 		Serial.println(F("[Sensor::deleteTrigger] begin"));
 		for (int i = 0; i < _sensorTriggers.size(); ++i) {			
 			if (strcmp(_sensorTriggers[i]->getSensorTriggerId(), sensorTriggerId) == 0) {
+				SensorTrigger* sensorTrigger = _sensorTriggers[i];
 				_sensorTriggers.erase(_sensorTriggers.begin() + i);
+				delete(sensorTrigger);
 				Serial.println(F("[Sensor::deleteTrigger] deleted"));
 				return true;
 			}

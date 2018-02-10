@@ -16,8 +16,7 @@ namespace ART
 		SensorTempDSFamily(Sensor* sensor, JsonObject& jsonObject);
 		~SensorTempDSFamily();
 
-		int 								getResolution();
-		void 								setResolution(int value);		
+		int 								getResolution();		
 
 		/*static String getFamily(byte deviceAddress[8])
 		{
@@ -42,6 +41,10 @@ namespace ART
 		Sensor *							_sensor;
 
 		int 								_resolution;
+
+		void 								setResolution(int value);
+
+		friend class						DeviceSensors;
 
 	};
 }
