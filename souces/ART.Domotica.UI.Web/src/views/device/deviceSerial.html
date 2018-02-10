@@ -1,5 +1,5 @@
 ﻿<tabset class="tab-container">
-    <tab heading="{{deviceSerialKey}}" data-ng-repeat="(deviceSerialKey, deviceSerialItem) in device.deviceSerial">
+    <tab heading="Serial{{deviceSerialItem.index}}" data-ng-repeat="(deviceSerialKey, deviceSerialItem) in device.deviceSerial">
         <form name="form" class="form-horizontal form-validation" ng-controller="deviceSerialController" ng-init="init(deviceSerialItem)">            
             <div class="form-group">
                 <label class="col-lg-4 control-label">Enabled</label>

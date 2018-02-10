@@ -21,6 +21,11 @@
             get; set;
         }
 
+        public short Index
+        {
+            get; set;
+        }
+
         public Guid DeviceId
         {
             get; set;

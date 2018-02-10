@@ -21,6 +21,7 @@
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DeviceId))
                 .ForMember(vm => vm.DeviceSerialId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
+                .ForMember(vm => vm.Index, m => m.MapFrom(x => x.Index))
                 .ForMember(vm => vm.Enabled, m => m.MapFrom(x => x.Enabled));
         }
 
