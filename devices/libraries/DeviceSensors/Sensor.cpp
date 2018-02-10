@@ -16,11 +16,15 @@ namespace ART
 		_deviceAddress = new uint8_t[8];
 		for (uint8_t i = 0; i < 8; i++) {
 			_deviceAddress[i] = jsonObject["deviceAddress"][i];
-		}
-
-		char* sensorId = strdup(jsonObject["sensorId"]);
+		}		
+				
+		_sensorId = new char[37];
+		strcpy(_sensorId, jsonObject["sensorId"]);
+		_sensorId[37] = '\0';
+		
+		/*char* sensorId = strdup(jsonObject["sensorId"]);
 		_sensorId = new char(sizeof(strlen(sensorId)));
-		_sensorId = sensorId;
+		_sensorId = sensorId;*/
 
 		_sensorDatasheetId = static_cast<SensorDatasheetEnum>(jsonObject["sensorDatasheetId"].as<short>());
 		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
