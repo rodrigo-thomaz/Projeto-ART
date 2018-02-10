@@ -24,12 +24,6 @@ namespace ART
 
 		_sensorDatasheetId = static_cast<SensorDatasheetEnum>(jsonObject["sensorDatasheetId"].as<short>());
 		_sensorTypeId = static_cast<SensorTypeEnum>(jsonObject["sensorTypeId"].as<short>());
-		
-		char* family = strdup(SensorTempDSFamily::getFamily(_deviceAddress).c_str());
-		_family = new char(sizeof(strlen(family)));
-		_family = family;
-
-		_validFamily = true;
 
 		char* label = strdup(jsonObject["label"]);
 		_label = new char(sizeof(strlen(label)));
@@ -80,16 +74,6 @@ namespace ART
 	uint8_t* Sensor::getDeviceAddress() const
 	{
 		return (_deviceAddress);
-	}
-
-	char * Sensor::getFamily() const
-	{
-		return (_family);
-	}
-
-	bool Sensor::getValidFamily()
-	{
-		return _validFamily;
 	}
 
 	char * Sensor::getLabel() const

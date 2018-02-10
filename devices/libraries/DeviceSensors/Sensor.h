@@ -30,9 +30,6 @@ namespace ART
 
 		uint8_t*			 				getDeviceAddress() const;
 
-		char*								getFamily() const;
-		bool								getValidFamily();
-
 		char* 								getLabel() const;
 		void 								setLabel(const char* value);	
 
@@ -65,9 +62,6 @@ namespace ART
 		SensorDatasheetEnum					_sensorDatasheetId;
 
 		uint8_t* 				 			_deviceAddress;
-
-		char* 								_family;
-		bool 								_validFamily;
 
 		char* 								_label;	
 

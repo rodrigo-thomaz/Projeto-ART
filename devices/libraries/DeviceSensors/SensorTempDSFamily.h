@@ -21,7 +21,7 @@ namespace ART
 		int 								getResolution();
 		void 								setResolution(int value);		
 
-		static String getFamily(byte deviceAddress[8])
+		/*static String getFamily(byte deviceAddress[8])
 		{
 			switch (deviceAddress[0]) {
 			case DS18S20MODEL:
@@ -37,7 +37,7 @@ namespace ART
 			default:
 				return "";
 			}
-		}
+		}*/
 
 	private:
 
