@@ -40,6 +40,7 @@
                 .ForMember(vm => vm.DeviceWiFi, m => m.MapFrom(x => x.DeviceWiFi))
                 .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP))
+                .ForMember(vm => vm.DeviceSerial, m => m.MapFrom(x => x.DeviceSerial))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
                 .ForMember(vm => vm.HasSensor, m => m.MapFrom(x => x.DeviceDatasheet.HasSensor));
 

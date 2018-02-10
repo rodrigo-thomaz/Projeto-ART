@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Contract
 {
     using System;
+    using System.Collections.Generic;
 
     public class ESPDeviceGetConfigurationsRPCResponseContract
     {
@@ -35,6 +36,8 @@
         {
             get; set;
         }
+
+        public List<DeviceSerialDetailResponseContract> DeviceSerial { get; set; }
 
         public DeviceWiFiDetailResponseContract DeviceWiFi
         {
