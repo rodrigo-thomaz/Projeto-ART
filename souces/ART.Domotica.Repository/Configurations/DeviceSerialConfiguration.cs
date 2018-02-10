@@ -84,6 +84,26 @@
             Property(x => x.HasTX)
                 .HasColumnOrder(6)
                 .IsRequired();
+
+            //PinRX
+            Property(x => x.PinRX)
+                .HasColumnOrder(7)
+                .IsOptional();
+
+            //PinTX
+            Property(x => x.PinTX)
+                .HasColumnOrder(8)
+                .IsOptional();
+
+            //AllowPinSwapRX
+            Property(x => x.AllowPinSwapRX)
+                .HasColumnOrder(9)
+                .IsOptional();
+
+            //AllowPinSwapTX
+            Property(x => x.AllowPinSwapTX)
+                .HasColumnOrder(10)
+                .IsOptional();
         }
 
         #endregion Constructors

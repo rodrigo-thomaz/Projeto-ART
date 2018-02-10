@@ -563,6 +563,10 @@
                             Enabled = true,
                             HasRX = true,
                             HasTX = true,
+                            PinRX = 3,
+                            PinTX = 1,
+                            AllowPinSwapRX = true,
+                            AllowPinSwapTX = true,
                         },
                         new DeviceSerial
                         {
@@ -570,6 +574,10 @@
                             Enabled = false,
                             HasRX = false,
                             HasTX = true,
+                            PinRX = null,
+                            PinTX = 2,
+                            AllowPinSwapRX = null,
+                            AllowPinSwapTX = false,
                         },
                     },
                 };
@@ -644,6 +652,10 @@
                             Enabled = true,
                             HasRX = true,
                             HasTX = true,
+                            PinRX = 3,
+                            PinTX = 1,
+                            AllowPinSwapRX = true,
+                            AllowPinSwapTX = true,
                         },
                         new DeviceSerial
                         {
@@ -651,6 +663,10 @@
                             Enabled = false,
                             HasRX = false,
                             HasTX = true,
+                            PinRX = null,
+                            PinTX = 2,
+                            AllowPinSwapRX = null,
+                            AllowPinSwapTX = false,
                         },
                     };
                 }
@@ -867,6 +883,10 @@
                             Enabled = true,
                             HasRX = true,
                             HasTX = true,
+                            PinRX = 3,
+                            PinTX = 1,
+                            AllowPinSwapRX = true,
+                            AllowPinSwapTX = true,
                         },
                         new DeviceSerial
                         {
@@ -874,6 +894,10 @@
                             Enabled = false,
                             HasRX = false,
                             HasTX = true,
+                            PinRX = null,
+                            PinTX = 2,
+                            AllowPinSwapRX = null,
+                            AllowPinSwapTX = false,
                         },
                     },
                 };
@@ -951,6 +975,10 @@
                             Enabled = true,
                             HasRX = true,
                             HasTX = true,
+                            PinRX = 3,
+                            PinTX = 1,
+                            AllowPinSwapRX = true,
+                            AllowPinSwapTX = true,
                         },
                         new DeviceSerial
                         {
@@ -958,6 +986,10 @@
                             Enabled = false,
                             HasRX = false,
                             HasTX = true,
+                            PinRX = null,
+                            PinTX = 2,
+                            AllowPinSwapRX = null,
+                            AllowPinSwapTX = false,
                         },
                     };
                 }

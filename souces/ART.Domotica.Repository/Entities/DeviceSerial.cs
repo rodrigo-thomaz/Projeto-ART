@@ -48,6 +48,26 @@
             get; set;
         }
 
+        public int? PinTX
+        {
+            get; set;
+        }
+
+        public int? PinRX
+        {
+            get; set;
+        }
+
+        public bool? AllowPinSwapRX
+        {
+            get; set;
+        }
+
+        public bool? AllowPinSwapTX
+        {
+            get; set;
+        }
+
         #endregion Properties
     }
 }
