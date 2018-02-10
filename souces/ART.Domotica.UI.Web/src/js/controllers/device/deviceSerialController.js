@@ -26,7 +26,7 @@ app.controller('deviceSerialController', ['$scope', '$rootScope', '$timeout', '$
         };
 
         $scope.changeEnabled = function () {
-            if (!$scope.deviceSerial || !$scope.enabledView) return;
+            if (!$scope.deviceSerial) return;
             deviceSerialService.setEnabled($scope.deviceSerial.deviceSerialId, $scope.deviceSerial.deviceId, $scope.deviceSerial.deviceDatasheetId, $scope.enabledView);
         };
 

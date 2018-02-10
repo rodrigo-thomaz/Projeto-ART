@@ -1,10 +1,14 @@
 ﻿<tabset class="tab-container">
     <tab heading="{{deviceSerialKey}}" data-ng-repeat="(deviceSerialKey, deviceSerialItem) in device.deviceSerial">
-        <form name="form" class="form-horizontal form-validation" ng-controller="deviceSerialController" ng-init="init(deviceSerialItem)">
+        <form name="form" class="form-horizontal form-validation" ng-controller="deviceSerialController" ng-init="init(deviceSerialItem)">            
             <div class="form-group">
                 <label class="col-lg-4 control-label">Enabled</label>
                 <div class="col-lg-8">
-                    <input name="inputEnabled" type="checkbox" ng-model="enabledView" ng-model-options="{ debounce: 1000 }" ng-change="changeEnabled()" required class="form-control">
+                    <div class="checkbox">
+                        <label class="i-checks">
+                            <input type="checkbox" ng-model="enabledView" ng-model-options="{ debounce: 1000 }" ng-change="changeEnabled()"><i></i>
+                        </label>
+                    </div>
                 </div>
             </div>
         </form>

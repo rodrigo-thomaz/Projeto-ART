@@ -41,9 +41,9 @@ app.constant('deviceNTPConstant', {
 
 app.constant('deviceSerialConstant', {
 
-    setUpdateIntervalInMilliSecondApiUri: 'api/deviceSerial/setEnabled',
-    setUpdateIntervalInMilliSecondCompletedTopic: 'DeviceSerial.SetEnabledViewCompleted',
-    setUpdateIntervalInMilliSecondCompletedEventName: 'deviceSerialService.onEnabledCompleted_Id_',   
+    setEnabledApiUri: 'api/deviceSerial/setEnabled',
+    setEnabledCompletedTopic: 'DeviceSerial.SetEnabledViewCompleted',
+    setEnabledCompletedEventName: 'deviceSerialService.onEnabledCompleted_Id_',   
 
 });
 
