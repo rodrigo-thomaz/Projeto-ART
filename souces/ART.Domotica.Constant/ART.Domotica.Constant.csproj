@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ApplicationMQConstants.cs" />
     <Compile Include="DeviceDebugConstants.cs" />
+    <Compile Include="DeviceSerialConstants.cs" />
     <Compile Include="DeviceWiFiConstants.cs" />
     <Compile Include="DeviceNTPConstants.cs" />
     <Compile Include="DeviceDatasheetConstants.cs" />

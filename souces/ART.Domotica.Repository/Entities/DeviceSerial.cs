@@ -1,7 +1,6 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
-    using System.Collections.Generic;
 
     using ART.Infra.CrossCutting.Repository;
 

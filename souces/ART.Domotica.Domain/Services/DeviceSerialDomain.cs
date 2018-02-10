@@ -43,6 +43,22 @@
             return data;
         }
 
+        public async Task<DeviceSerial> SetEnabled(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId, bool enabled)
+        {
+            var entity = await _deviceSerialRepository.GetByKey(deviceSerialId, deviceId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceSerial not found");
+            }
+
+            entity.Enabled = enabled;
+
+            await _deviceSerialRepository.Update(entity);
+
+            return entity;
+        }
+
         #endregion Methods
     }
 }

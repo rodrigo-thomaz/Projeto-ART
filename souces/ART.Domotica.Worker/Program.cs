@@ -73,6 +73,7 @@
                 x.AddProfile(new DeviceDatasheetProfile());
                 x.AddProfile(new DeviceInApplicationProfile());
                 x.AddProfile(new DeviceMQProfile());
+                x.AddProfile(new DeviceSerialProfile());
                 x.AddProfile(new DeviceBinaryProfile());
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DeviceWiFiProfile());

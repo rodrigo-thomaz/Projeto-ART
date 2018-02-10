@@ -109,6 +109,7 @@
     <Compile Include="AutoMapper\DeviceDebugProfile.cs" />
     <Compile Include="AutoMapper\DeviceInApplicationProfile.cs" />
     <Compile Include="AutoMapper\DeviceBinaryProfile.cs" />
+    <Compile Include="AutoMapper\DeviceSerialProfile.cs" />
     <Compile Include="AutoMapper\DeviceWiFiProfile.cs" />
     <Compile Include="AutoMapper\DeviceNTPProfile.cs" />
     <Compile Include="AutoMapper\DeviceBaseProfile.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="AutoMapper\SI\UnitMeasurementProfile.cs" />
     <Compile Include="Consumers\ApplicationMQConsumer.cs" />
     <Compile Include="Consumers\DeviceDebugConsumer.cs" />
+    <Compile Include="Consumers\DeviceSerialConsumer.cs" />
     <Compile Include="Consumers\DeviceWiFiConsumer.cs" />
     <Compile Include="Consumers\DeviceNTPConsumer.cs" />
     <Compile Include="Consumers\DeviceDatasheetConsumer.cs" />
@@ -163,6 +165,7 @@
     <Compile Include="IConsumers\IApplicationUserConsumer.cs" />
     <Compile Include="IConsumers\IDeviceDatasheetConsumer.cs" />
     <Compile Include="IConsumers\IDeviceDebugConsumer.cs" />
+    <Compile Include="IConsumers\IDeviceSerialConsumer.cs" />
     <Compile Include="IConsumers\IDeviceWiFiConsumer.cs" />
     <Compile Include="IConsumers\IDeviceInApplicationConsumer.cs" />
     <Compile Include="IConsumers\ISensorTempDSFamilyConsumer.cs" />

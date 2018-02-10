@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\IApplicationMQProducer.cs" />
     <Compile Include="Interfaces\IDeviceDebugProducer.cs" />
+    <Compile Include="Interfaces\IDeviceSerialProducer.cs" />
     <Compile Include="Interfaces\IDeviceWiFiProducer.cs" />
     <Compile Include="Interfaces\IDeviceNTPProducer.cs" />
     <Compile Include="Interfaces\IDeviceDatasheetProducer.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationMQProducer.cs" />
     <Compile Include="Services\DeviceDebugProducer.cs" />
+    <Compile Include="Services\DeviceSerialProducer.cs" />
     <Compile Include="Services\DeviceWiFiProducer.cs" />
     <Compile Include="Services\DeviceNTPProducer.cs" />
     <Compile Include="Services\DeviceDatasheetProducer.cs" />

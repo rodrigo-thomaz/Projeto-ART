@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ApplicationGetRPCResponseContract.cs" />
     <Compile Include="ApplicationMQGetRPCResponseContract.cs" />
+    <Compile Include="DeviceSerialSetEnabledRequestContract.cs" />
     <Compile Include="DeviceWiFiDetailResponseContract.cs" />
     <Compile Include="DeviceDebugSetValueRequestContract.cs" />
     <Compile Include="DeviceDebugDetailResponseContract.cs" />
