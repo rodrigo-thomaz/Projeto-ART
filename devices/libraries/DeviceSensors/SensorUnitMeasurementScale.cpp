@@ -23,11 +23,6 @@ namespace ART
 		Serial.println(F("[SensorUnitMeasurementScale destructor]"));
 	}
 
-	void SensorUnitMeasurementScale::create(SensorUnitMeasurementScale *(&sensorUnitMeasurementScale), Sensor * sensor, JsonObject & jsonObject)
-	{
-		sensorUnitMeasurementScale = new SensorUnitMeasurementScale(sensor, jsonObject);
-	}
-
 	UnitMeasurementEnum SensorUnitMeasurementScale::getUnitMeasurementId()
 	{
 		return _unitMeasurementId;

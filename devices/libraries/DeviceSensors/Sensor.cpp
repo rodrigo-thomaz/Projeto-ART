@@ -14,9 +14,7 @@ namespace ART
 		_sensorInDevice = sensorInDevice;
 
 		_deviceAddress = new uint8_t[8];
-		for (uint8_t i = 0; i < 8; i++) {
-			_deviceAddress[i] = jsonObject["deviceAddress"][i];
-		}		
+		for (uint8_t i = 0; i < 8; i++) _deviceAddress[i] = jsonObject["deviceAddress"][i];
 			
 		setSensorId(jsonObject["sensorId"]);
 
@@ -28,8 +26,8 @@ namespace ART
 		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
 		_sensorDatasheet = deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
 
-		SensorTempDSFamily::create(_sensorTempDSFamily, this, jsonObject["sensorTempDSFamily"]);
-		SensorUnitMeasurementScale::create(_sensorUnitMeasurementScale, this, jsonObject["sensorUnitMeasurementScale"]);				
+		_sensorTempDSFamily = new SensorTempDSFamily(this, jsonObject["sensorTempDSFamily"]);
+		_sensorUnitMeasurementScale = new SensorUnitMeasurementScale(this, jsonObject["sensorUnitMeasurementScale"]);
 
 		//SensorTriggers
 		

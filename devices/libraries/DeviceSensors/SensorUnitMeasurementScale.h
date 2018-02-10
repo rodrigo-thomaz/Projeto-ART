@@ -15,22 +15,11 @@ namespace ART
 		SensorUnitMeasurementScale(Sensor* sensor, JsonObject& jsonObject);
 		~SensorUnitMeasurementScale();
 
-		static void							create(SensorUnitMeasurementScale* (&sensorUnitMeasurementScale), Sensor* sensor, JsonObject& jsonObject);
-
-		UnitMeasurementEnum					getUnitMeasurementId();
-		void 								setUnitMeasurementId(UnitMeasurementEnum value);
-
+		UnitMeasurementEnum					getUnitMeasurementId();		
 		float 								getRangeMax();
-		void 								setRangeMax(float value);
-
 		float 								getRangeMin();
-		void 								setRangeMin(float value);
-
 		float 								getChartLimiterMax();
-		void 								setChartLimiterMax(float value);
-
-		float 								getChartLimiterMin();
-		void 								setChartLimiterMin(float value);
+		float 								getChartLimiterMin();		
 
 	private:
 
@@ -43,6 +32,14 @@ namespace ART
 
 		float 								_chartLimiterMax;
 		float 								_chartLimiterMin;
+
+		void 								setUnitMeasurementId(UnitMeasurementEnum value);
+		void 								setRangeMax(float value);
+		void 								setRangeMin(float value);
+		void 								setChartLimiterMax(float value);
+		void 								setChartLimiterMin(float value);
+
+		friend class						DeviceSensors;
 
 	};
 }

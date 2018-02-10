@@ -17,11 +17,6 @@ namespace ART
 		Serial.println(F("[SensorTempDSFamily destructor]"));
 	}
 
-	void SensorTempDSFamily::create(SensorTempDSFamily *(&sensorTempDSFamily), Sensor * sensor, JsonObject & jsonObject)
-	{
-		sensorTempDSFamily = new SensorTempDSFamily(sensor, jsonObject);
-	}
-
 	int SensorTempDSFamily::getResolution()
 	{
 		return _resolution;
