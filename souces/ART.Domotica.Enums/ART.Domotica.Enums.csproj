@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommunicationDirection.cs" />
     <Compile Include="Locale\ContinentEnum.cs" />
     <Compile Include="SI\NumericalScaleTypeEnum.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

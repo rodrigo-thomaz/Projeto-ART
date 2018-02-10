@@ -23,6 +23,7 @@
         #region Fields
 
         private readonly EventingBasicConsumer _setEnabledConsumer;
+        private readonly EventingBasicConsumer _setPinConsumer;
 
         #endregion Fields
 
@@ -32,6 +33,7 @@
             : base(connection, mqSettings, logger, componentContext)
         {
             _setEnabledConsumer = new EventingBasicConsumer(_model);
+            _setPinConsumer = new EventingBasicConsumer(_model);
 
             Initialize();            
         }
@@ -43,10 +45,13 @@
         private void Initialize()
         {
             BasicQueueDeclare(DeviceSerialConstants.SetEnabledQueueName);
+            BasicQueueDeclare(DeviceSerialConstants.SetPinQueueName);
 
             _setEnabledConsumer.Received += SetEnabledReceived;
+            _setPinConsumer.Received += SetPinReceived;
 
             _model.BasicConsume(DeviceSerialConstants.SetEnabledQueueName, false, _setEnabledConsumer);
+            _model.BasicConsume(DeviceSerialConstants.SetPinQueueName, false, _setPinConsumer);
         }
 
         #endregion Methods
@@ -83,6 +88,41 @@
             var iotContract = new SetValueRequestIoTContract<bool>(data.Enabled);
             var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
             var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceSerialConstants.SetEnabledIoTQueueName);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
+
+        public void SetPinReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(SetPinReceivedAsync(sender, e));
+        }
+
+        public async Task SetPinReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSerialSetPinRequestContract>>(e.Body);
+            var domain = _componentContext.Resolve<IDeviceSerialDomain>();
+            var data = await domain.SetPin(message.Contract.DeviceSerialId, message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.Value, message.Contract.Direction);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
+
+            //Enviando para View
+            var viewModel = Mapper.Map<DeviceSerialSetPinRequestContract, DeviceSerialSetPinModel>(message.Contract);
+            var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
+            var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceSerialConstants.SetPinViewCompletedQueueName);
+            _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId, viewModel.DeviceDatasheetId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<DeviceSerialSetPinRequestContract, DeviceSerialSetPinRequestIoTContract>(message.Contract);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceSerialConstants.SetPinIoTQueueName);
             _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
 
             _logger.DebugLeave();

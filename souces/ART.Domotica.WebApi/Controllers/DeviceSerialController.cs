@@ -44,7 +44,25 @@
             await _deviceSerialProducer.SetEnabled(CreateMessage(contract));
             return Ok();
         }
-        
+
+        /// <summary>
+        /// Altera o Pin RX ou TX de um DeviceSerial
+        /// </summary>
+        /// <remarks>
+        /// Altera o Pin RX ou TX de um DeviceSerial
+        /// </remarks>
+        /// <param name="contract">contrato do request</param>
+        /// <response code="400">Bad Request</response>
+        /// <response code="403">Forbidden</response>
+        /// <response code="500">Internal Server Error</response>
+        [Route("setPin")]
+        [HttpPost]
+        public async Task<IHttpActionResult> SetPin(DeviceSerialSetPinRequestContract contract)
+        {
+            await _deviceSerialProducer.SetPin(CreateMessage(contract));
+            return Ok();
+        }
+
         #endregion
     }
 }

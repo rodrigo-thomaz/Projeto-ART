@@ -44,6 +44,7 @@
     <Compile Include="DeviceBinaryGetModel.cs" />
     <Compile Include="DeviceMQGetModel.cs" />
     <Compile Include="DeviceSerialGetModel.cs" />
+    <Compile Include="DeviceSerialSetPinModel.cs" />
     <Compile Include="DeviceSerialSetEnabledModel.cs" />
     <Compile Include="DeviceSensorsSetReadIntervalInMilliSecondsModel.cs" />
     <Compile Include="DeviceWiFiGetModel.cs" />

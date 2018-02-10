@@ -9,6 +9,7 @@
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
+    using ART.Domotica.Enums;
 
     public class DeviceSerialDomain : DomainBase, IDeviceSerialDomain
     {
@@ -53,6 +54,41 @@
             }
 
             entity.Enabled = enabled;
+
+            await _deviceSerialRepository.Update(entity);
+
+            return entity;
+        }
+
+        public async Task<DeviceSerial> SetPin(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId, short value, CommunicationDirection direction)
+        {
+            var entity = await _deviceSerialRepository.GetByKey(deviceSerialId, deviceId, deviceDatasheetId);
+
+            if (entity == null)
+            {
+                throw new Exception("DeviceSerial not found");
+            }
+
+            if (direction == CommunicationDirection.Receive)
+            {
+                if(!entity.HasRX)
+                    throw new Exception("DeviceSerial not has RX");
+
+                if (entity.AllowPinSwapRX.HasValue && !entity.AllowPinSwapRX.Value)
+                    throw new Exception("DeviceSerial not allow pin swap RX");
+
+                entity.PinRX = value;
+            }
+            else if (direction == CommunicationDirection.Transmit)
+            {
+                if (!entity.HasTX)
+                    throw new Exception("DeviceSerial not has TX");
+
+                if (entity.AllowPinSwapTX.HasValue && !entity.AllowPinSwapTX.Value)
+                    throw new Exception("DeviceSerial not allow pin swap TX");
+
+                entity.PinTX = value;
+            }
 
             await _deviceSerialRepository.Update(entity);
 

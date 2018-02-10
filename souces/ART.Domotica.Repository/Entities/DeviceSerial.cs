@@ -8,6 +8,16 @@
     {
         #region Properties
 
+        public bool? AllowPinSwapRX
+        {
+            get; set;
+        }
+
+        public bool? AllowPinSwapTX
+        {
+            get; set;
+        }
+
         public DeviceBase DeviceBase
         {
             get; set;
@@ -28,6 +38,16 @@
             get; set;
         }
 
+        public bool HasRX
+        {
+            get; set;
+        }
+
+        public bool HasTX
+        {
+            get; set;
+        }
+
         public Guid Id
         {
             get; set;
@@ -38,32 +58,12 @@
             get; set;
         }
 
-        public bool HasTX
+        public short? PinRX
         {
             get; set;
         }
 
-        public bool HasRX
-        {
-            get; set;
-        }
-
-        public int? PinTX
-        {
-            get; set;
-        }
-
-        public int? PinRX
-        {
-            get; set;
-        }
-
-        public bool? AllowPinSwapRX
-        {
-            get; set;
-        }
-
-        public bool? AllowPinSwapTX
+        public short? PinTX
         {
             get; set;
         }

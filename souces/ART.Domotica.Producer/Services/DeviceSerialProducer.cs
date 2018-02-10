@@ -28,6 +28,11 @@ namespace ART.Domotica.Producer.Services
             await BasicPublish(DeviceSerialConstants.SetEnabledQueueName, message);
         }
 
+        public async Task SetPin(AuthenticatedMessageContract<DeviceSerialSetPinRequestContract> message)
+        {
+            await BasicPublish(DeviceSerialConstants.SetPinQueueName, message);
+        }
+
         #endregion
     }
 }

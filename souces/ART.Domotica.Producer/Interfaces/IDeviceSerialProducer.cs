@@ -11,6 +11,8 @@
 
         Task SetEnabled(AuthenticatedMessageContract<DeviceSerialSetEnabledRequestContract> message);
 
+        Task SetPin(AuthenticatedMessageContract<DeviceSerialSetPinRequestContract> message);
+
         #endregion Methods
     }
 }

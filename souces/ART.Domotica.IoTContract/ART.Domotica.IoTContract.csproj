@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="SensorTriggerDeleteResponseIoTContract.cs" />
     <Compile Include="SensorTriggerInsertResponseIoTContract.cs" />
+    <Compile Include="DeviceSerialSetPinRequestIoTContract.cs" />
     <Compile Include="SetOrdinationRequestIoTContract.cs" />
     <Compile Include="SensorDatasheetUnitMeasurementDefaultGetResponseIoTContract.cs" />
     <Compile Include="SensorDatasheetGetResponseIoTContract.cs" />
