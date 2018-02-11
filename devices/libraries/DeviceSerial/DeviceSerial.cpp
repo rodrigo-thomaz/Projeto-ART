@@ -80,7 +80,7 @@ namespace ART
 		char result[len + 1];
 		root.printTo(result, sizeof(result));
 
-		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SERIAL_GET_ALL_BY_DEVICE_ID_TOPIC_PUB, result);
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SERIAL_GET_ALL_BY_DEVICE_KEY_TOPIC_PUB, result);
 
 		Serial.println(F("[DeviceSerial::getAllPub] end"));
 	}
@@ -168,17 +168,17 @@ namespace ART
 
 	void DeviceSerial::onDeviceMQSubscribeDeviceInApplication()
 	{
-		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SERIAL_GET_ALL_BY_DEVICE_ID_COMPLETED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_SERIAL_GET_ALL_BY_DEVICE_KEY_COMPLETED_TOPIC_SUB);
 	}
 
 	void DeviceSerial::onDeviceMQUnSubscribeDeviceInApplication()
 	{
-		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SERIAL_GET_ALL_BY_DEVICE_ID_COMPLETED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_SERIAL_GET_ALL_BY_DEVICE_KEY_COMPLETED_TOPIC_SUB);
 	}
 
 	bool DeviceSerial::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
-		if (strcmp(topicKey, DEVICE_SERIAL_GET_ALL_BY_DEVICE_ID_COMPLETED_TOPIC_SUB) == 0) {
+		if (strcmp(topicKey, DEVICE_SERIAL_GET_ALL_BY_DEVICE_KEY_COMPLETED_TOPIC_SUB) == 0) {
 			getAllSub(json);
 			return true;
 		}

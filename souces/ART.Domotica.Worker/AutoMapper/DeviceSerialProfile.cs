@@ -48,7 +48,7 @@
                 .ForMember(vm => vm.AllowPinSwapRX, m => m.MapFrom(x => x.AllowPinSwapRX))
                 .ForMember(vm => vm.AllowPinSwapTX, m => m.MapFrom(x => x.AllowPinSwapTX));
 
-            CreateMap<DeviceSerial, DeviceSerialDetailResponseContract>()
+            CreateMap<DeviceSerial, DeviceSerialGetResponseIoTContract>()
                 .ForMember(vm => vm.DeviceSerialId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Index, m => m.MapFrom(x => x.Index))
                 .ForMember(vm => vm.Enabled, m => m.MapFrom(x => x.Enabled))

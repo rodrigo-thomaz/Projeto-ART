@@ -37,11 +37,6 @@
             get; set;
         }
 
-        public List<DeviceSerialDetailResponseContract> DeviceSerial
-        {
-            get; set;
-        }
-
         public DeviceWiFiDetailResponseContract DeviceWiFi
         {
             get; set;

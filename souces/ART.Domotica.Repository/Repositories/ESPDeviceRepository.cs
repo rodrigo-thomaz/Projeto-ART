@@ -89,7 +89,6 @@
                .Include(x => x.DeviceDebug)
                .Include(x => x.DeviceWiFi)
                .Include(x => x.DeviceMQ)
-               .Include(x => x.DeviceSerial)
                .Include(x => x.DeviceNTP.TimeZone)
                .Where(x => x.ChipId == chipId)
                .Where(x => x.FlashChipId == flashChipId)

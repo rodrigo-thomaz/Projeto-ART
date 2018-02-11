@@ -16,12 +16,14 @@
     using global::AutoMapper;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class DeviceSerialConsumer : ConsumerBase, IDeviceSerialConsumer
     {
         #region Fields
 
+        private readonly EventingBasicConsumer _getAllByDeviceKeyConsumer;
         private readonly EventingBasicConsumer _setEnabledConsumer;
         private readonly EventingBasicConsumer _setPinConsumer;
 
@@ -32,6 +34,7 @@
         public DeviceSerialConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, IMQSettings mqSettings)
             : base(connection, mqSettings, logger, componentContext)
         {
+            _getAllByDeviceKeyConsumer = new EventingBasicConsumer(_model);
             _setEnabledConsumer = new EventingBasicConsumer(_model);
             _setPinConsumer = new EventingBasicConsumer(_model);
 
@@ -44,12 +47,15 @@
 
         private void Initialize()
         {
+            BasicQueueDeclare(DeviceSerialConstants.GetAllByDeviceKeyIoTQueueName);
             BasicQueueDeclare(DeviceSerialConstants.SetEnabledQueueName);
             BasicQueueDeclare(DeviceSerialConstants.SetPinQueueName);
 
+            _getAllByDeviceKeyConsumer.Received += GetAllByDeviceKeyReceived;
             _setEnabledConsumer.Received += SetEnabledReceived;
             _setPinConsumer.Received += SetPinReceived;
 
+            _model.BasicConsume(DeviceSerialConstants.GetAllByDeviceKeyIoTQueueName, false, _getAllByDeviceKeyConsumer);
             _model.BasicConsume(DeviceSerialConstants.SetEnabledQueueName, false, _setEnabledConsumer);
             _model.BasicConsume(DeviceSerialConstants.SetPinQueueName, false, _setPinConsumer);
         }
@@ -57,7 +63,37 @@
         #endregion Methods
 
         #region private voids        
-        
+
+        public void GetAllByDeviceKeyReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(GetAllByDeviceKeyReceivedAsync(sender, e));
+        }
+
+        public async Task GetAllByDeviceKeyReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
+
+            var domain = _componentContext.Resolve<IDeviceSerialDomain>();
+            var data = await domain.GetAllByDeviceKey(applicationMQ.Id, requestContract.DeviceId, requestContract.DeviceDatasheetId);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId, requestContract.DeviceDatasheetId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<List<DeviceSerial>, List<DeviceSerialGetResponseIoTContract>>(data);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceSerialConstants.GetAllByDeviceKeyCompletedIoTQueueName);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
+
         public void SetEnabledReceived(object sender, BasicDeliverEventArgs e)
         {
             Task.WaitAll(SetEnabledReceivedAsync(sender, e));

@@ -1,6 +1,9 @@
 ﻿namespace ART.Domotica.Repository.Repositories
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
@@ -22,5 +25,12 @@
             return await _context.DeviceSerial.FindAsync(deviceSerialId, deviceId, deviceDatasheetId);
         }
 
+        public async Task<List<DeviceSerial>> GetAllByDeviceKey(Guid deviceId, Guid deviceDatasheetId)
+        {
+            return await _context.DeviceSerial
+                .Where(x => x.DeviceId == deviceId)
+                .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
+                .ToListAsync();
+        }
     }
 }

@@ -4,6 +4,8 @@
     {
         #region Fields
 
+        public static readonly string GetAllByDeviceKeyCompletedIoTQueueName = "DeviceSerial.GetAllByDeviceKeyCompletedIoT";
+        public static readonly string GetAllByDeviceKeyIoTQueueName = "DeviceSerial.GetAllByDeviceKeyIoT";
         public static readonly string SetEnabledIoTQueueName = "DeviceSerial.SetEnabledIoT";
         public static readonly string SetEnabledQueueName = "DeviceSerial.SetEnabled";
         public static readonly string SetEnabledViewCompletedQueueName = "DeviceSerial.SetEnabledViewCompleted";

@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ART.Domotica.Enums;
@@ -9,6 +10,8 @@
     public interface IDeviceSerialDomain
     {
         #region Methods
+
+        Task<List<DeviceSerial>> GetAllByDeviceKey(Guid applicationId, Guid deviceId, Guid deviceDatasheetId);
 
         Task<DeviceSerial> GetByKey(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId);
 

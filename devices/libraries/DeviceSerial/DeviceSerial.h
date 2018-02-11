@@ -6,11 +6,11 @@
 
 #include "DeviceSerialItem.h"
 
-#define DEVICE_SERIAL_GET_ALL_BY_DEVICE_ID_TOPIC_PUB   				"DeviceSerial/GetAllByDeviceIdIoT" 
-#define DEVICE_SERIAL_GET_ALL_BY_DEVICE_ID_COMPLETED_TOPIC_SUB		"DeviceSerial/GetAllByDeviceIdCompletedIoT"
+#define DEVICE_SERIAL_GET_ALL_BY_DEVICE_KEY_TOPIC_PUB   				"DeviceSerial/GetAllByDeviceKeyIoT" 
+#define DEVICE_SERIAL_GET_ALL_BY_DEVICE_KEY_COMPLETED_TOPIC_SUB			"DeviceSerial/GetAllByDeviceKeyCompletedIoT"
 
-#define DEVICE_SERIAL_SET_ENABLED_TOPIC_SUB							"DeviceSerial/SetEnabledIoT"
-#define DEVICE_SERIAL_SET_PIN_TOPIC_SUB								"DeviceSerial/SetPinIoT"
+#define DEVICE_SERIAL_SET_ENABLED_TOPIC_SUB								"DeviceSerial/SetEnabledIoT"
+#define DEVICE_SERIAL_SET_PIN_TOPIC_SUB									"DeviceSerial/SetPinIoT"
 
 namespace ART
 {
