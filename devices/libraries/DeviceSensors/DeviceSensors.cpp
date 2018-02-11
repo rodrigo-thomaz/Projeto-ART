@@ -52,23 +52,26 @@ namespace ART
 	{
 		if (_initialized) return true;
 
-		Serial.println(F("[DeviceSensors::initialized] begin"));
+		if (!_espDevice->loaded()) {
+			Serial.println(F("[DeviceSensors::initialized] espDevice not loaded"));
+			return false;
+		}
 
-		Serial.printf("_espDevice->loaded(): %s\n", _espDevice->loaded() ? "true" : "false");		
-		Serial.printf("_espDevice->getDeviceMQ()->connected(): %s\n", _espDevice->getDeviceMQ()->connected() ? "true" : "false");
-		Serial.printf("_initializing: %s\n", _initializing ? "true" : "false");
+		if (!_espDevice->getDeviceMQ()->connected()) {
+			Serial.println(F("[DeviceSensors::initialized] deviceMQ not connected"));
+			return false;
+		}
 
-		if (!_espDevice->loaded()) return false;		
-
-		if (!_espDevice->getDeviceMQ()->connected()) return false;
-
-		if (_initializing) return false;
+		if (_initializing) {
+			Serial.println(F("[DeviceSensors::initialized] initializing: true"));
+			return false;
+		}
 
 		// initializing
 
 		_initializing = true;
 
-		Serial.println(F("[DeviceSensors::initialized] initializing...]"));
+		Serial.println(F("[DeviceSensors::initialized] begin]"));
 
 		char* deviceId = this->_espDevice->getDeviceId();
 		char* deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();
