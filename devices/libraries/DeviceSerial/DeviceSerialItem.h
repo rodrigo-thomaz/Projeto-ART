@@ -24,8 +24,7 @@ namespace ART
 
 		short								_index;
 
-		bool								_hasRX;
-		bool								_hasTX;
+		SerialMode							_serialMode;
 
 		bool								_allowPinSwapRX;
 		bool								_allowPinSwapTX;
@@ -40,8 +39,7 @@ namespace ART
 
 		void								setEnabled(bool value);
 
-		void								setHasRX(bool value);
-		void								setHasTX(bool value);
+		void								setSerialMode(SerialMode value);
 
 		void								setAllowPinSwapRX(bool value);
 		void								setAllowPinSwapTX(bool value);

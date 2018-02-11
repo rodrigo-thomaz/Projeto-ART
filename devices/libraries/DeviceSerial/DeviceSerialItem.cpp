@@ -10,8 +10,7 @@ namespace ART
 
 		setIndex(jsonObject["index"]);		
 
-		setHasRX(jsonObject["hasRX"]);
-		setHasTX(jsonObject["hasTX"]);
+		setSerialMode(static_cast<SerialMode>(jsonObject["serialMode"].as<int>()));
 
 		setAllowPinSwapRX(jsonObject["allowPinSwapRX"]);
 		setAllowPinSwapTX(jsonObject["allowPinSwapTX"]);
@@ -65,14 +64,9 @@ namespace ART
 		}
 	}
 
-	void DeviceSerialItem::setHasRX(bool value)
+	void DeviceSerialItem::setSerialMode(SerialMode value)
 	{
-		_hasRX = value;
-	}
-
-	void DeviceSerialItem::setHasTX(bool value)
-	{
-		_hasTX = value;
+		_serialMode = value;
 	}
 
 	void DeviceSerialItem::setAllowPinSwapRX(bool value)
