@@ -12,15 +12,17 @@ namespace ART
 	public:
 
 		DeviceSerialItem(JsonObject& jsonObject);
-		~DeviceSerialItem();
-
-		char*								getDeviceSerialId() const;
+		~DeviceSerialItem();		
 
 	private:
+
+		HardwareSerial*						_hardwareSerial;
 
 		char* 								_deviceSerialId;
 
 		bool								_enabled;
+
+		short								_index;
 
 		bool								_hasRX;
 		bool								_hasTX;
@@ -30,6 +32,11 @@ namespace ART
 
 		short								_pinRX;
 		short								_pinTX;
+
+		void								setDeviceSerialId(const char* value);
+		char*								getDeviceSerialId() const;
+
+		void								setIndex(short value);
 
 		void								setEnabled(bool value);
 

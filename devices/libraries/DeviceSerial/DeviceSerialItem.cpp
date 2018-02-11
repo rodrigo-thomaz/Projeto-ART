@@ -4,23 +4,24 @@ namespace ART
 {
 	DeviceSerialItem::DeviceSerialItem(JsonObject& jsonObject)
 	{
-		Serial.println(F("[DeviceSerialItem:DeviceSerialItem] constructor"));
+		Serial.println(F("[DeviceSerialItem:DeviceSerialItem] constructor begin"));
 
-		const char* deviceSerialId = jsonObject["deviceSerialId"];
-		_deviceSerialId = new char[strlen(deviceSerialId) + 1];
-		strcpy(_deviceSerialId, deviceSerialId);
-		_deviceSerialId[strlen(deviceSerialId) + 1] = '\0';
+		setDeviceSerialId(jsonObject["deviceSerialId"]);
 
-		_enabled = int(jsonObject["enabled"]);
+		setIndex(jsonObject["index"]);		
 
-		_hasRX = int(jsonObject["hasRX"]);
-		_hasTX = int(jsonObject["hasTX"]);
+		setHasRX(jsonObject["hasRX"]);
+		setHasTX(jsonObject["hasTX"]);
 
-		_allowPinSwapRX = int(jsonObject["allowPinSwapRX"]);
-		_allowPinSwapTX = int(jsonObject["allowPinSwapTX"]);
+		setAllowPinSwapRX(jsonObject["allowPinSwapRX"]);
+		setAllowPinSwapTX(jsonObject["allowPinSwapTX"]);
 
-		_pinRX = int(jsonObject["pinRX"]);
-		_pinTX = int(jsonObject["pinTX"]);
+		setPinRX(jsonObject["pinRX"]);
+		setPinTX(jsonObject["pinTX"]);		
+
+		setEnabled(jsonObject["enabled"]);
+
+		Serial.println(F("[DeviceSerialItem:DeviceSerialItem] constructor end"));
 	}
 
 	DeviceSerialItem::~DeviceSerialItem()
@@ -30,9 +31,26 @@ namespace ART
 		delete[] _deviceSerialId;
 	}
 
+	void DeviceSerialItem::setDeviceSerialId(const char * value)
+	{
+		_deviceSerialId = new char[strlen(value) + 1];
+		strcpy(_deviceSerialId, value);
+		_deviceSerialId[strlen(value) + 1] = '\0';
+	}
+
 	char * DeviceSerialItem::getDeviceSerialId() const
 	{
 		return (_deviceSerialId);
+	}
+
+	void DeviceSerialItem::setIndex(short value)
+	{
+		_index = value;
+
+		if (_index == 0)
+			_hardwareSerial = &Serial;
+		else if (_index == 1)
+			_hardwareSerial = &Serial1;
 	}
 
 	void DeviceSerialItem::setEnabled(bool value)
