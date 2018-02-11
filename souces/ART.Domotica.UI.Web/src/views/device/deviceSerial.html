@@ -11,7 +11,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group" ng-show="deviceSerialItem.hasRX">
+            <div class="form-group" ng-hide="deviceSerialItem.serialMode == 'TXOnly'">
                 <label class="col-lg-4 control-label">Pino RX</label>
                 <div class="col-lg-8">
                     <input name="inputPinRX" type="number" ng-model="pinRXView" ng-model-options="{ debounce: 1000 }" ng-change="changePin(pinRXView, 'Receive')" min="0" required ng-disabled="deviceSerialItem.allowPinSwapRX === null || !deviceSerialItem.allowPinSwapRX" class="form-control">
@@ -20,7 +20,7 @@
                     Pino RX deve ser maior que 0
                 </span>
             </div>
-            <div class="form-group" ng-show="deviceSerialItem.hasTX">
+            <div class="form-group" ng-hide="deviceSerialItem.serialMode == 'RXOnly'">
                 <label class="col-lg-4 control-label">Pino TX</label>
                 <div class="col-lg-8">
                     <input name="inputPinTX" type="number" ng-model="pinTXView" ng-model-options="{ debounce: 1000 }" ng-change="changePin(pinTXView, 'Transmit')" min="0" required ng-disabled="deviceSerialItem.allowPinSwapTX === null || !deviceSerialItem.allowPinSwapTX" class="form-control">

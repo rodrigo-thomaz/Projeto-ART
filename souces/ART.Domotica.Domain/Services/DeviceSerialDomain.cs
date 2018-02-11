@@ -86,8 +86,8 @@
 
             if (direction == CommunicationDirection.Receive)
             {
-                if(!entity.HasRX)
-                    throw new Exception("DeviceSerial not has RX");
+                if(entity.SerialMode == SerialModeEnum.TXOnly)
+                    throw new Exception("DeviceSerial TXOnly mode");
 
                 if (entity.AllowPinSwapRX.HasValue && !entity.AllowPinSwapRX.Value)
                     throw new Exception("DeviceSerial not allow pin swap RX");
@@ -96,8 +96,8 @@
             }
             else if (direction == CommunicationDirection.Transmit)
             {
-                if (!entity.HasTX)
-                    throw new Exception("DeviceSerial not has TX");
+                if (entity.SerialMode == SerialModeEnum.RXOnly)
+                    throw new Exception("DeviceSerial RXOnly mode");
 
                 if (entity.AllowPinSwapTX.HasValue && !entity.AllowPinSwapTX.Value)
                     throw new Exception("DeviceSerial not allow pin swap TX");

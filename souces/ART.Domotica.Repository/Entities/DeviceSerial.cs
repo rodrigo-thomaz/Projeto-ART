@@ -1,7 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
-
+    using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
     public class DeviceSerial : IEntity<Guid>
@@ -38,12 +38,7 @@
             get; set;
         }
 
-        public bool HasRX
-        {
-            get; set;
-        }
-
-        public bool HasTX
+        public SerialModeEnum SerialMode
         {
             get; set;
         }

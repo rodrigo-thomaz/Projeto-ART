@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.IoTContract
 {
+    using ART.Domotica.Enums;
     using System;
 
     public class DeviceSerialGetResponseIoTContract
@@ -26,12 +27,7 @@
             get; set;
         }
 
-        public bool HasRX
-        {
-            get; set;
-        }
-
-        public bool HasTX
+        public SerialModeEnum SerialMode
         {
             get; set;
         }

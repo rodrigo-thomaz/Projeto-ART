@@ -1,7 +1,6 @@
 ﻿namespace ART.Domotica.Contract
 {
     using System;
-    using System.Collections.Generic;
 
     public class ESPDeviceGetConfigurationsRPCResponseContract
     {

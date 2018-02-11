@@ -561,8 +561,7 @@
                         {
                             Index = 0,
                             Enabled = true,
-                            HasRX = true,
-                            HasTX = true,
+                            SerialMode = SerialModeEnum.Full,
                             PinRX = 3,
                             PinTX = 1,
                             AllowPinSwapRX = true,
@@ -572,8 +571,7 @@
                         {
                             Index = 1,
                             Enabled = false,
-                            HasRX = false,
-                            HasTX = true,
+                            SerialMode = SerialModeEnum.TXOnly,
                             PinRX = null,
                             PinTX = 2,
                             AllowPinSwapRX = null,
@@ -650,8 +648,7 @@
                         {
                             Index = 0,
                             Enabled = true,
-                            HasRX = true,
-                            HasTX = true,
+                            SerialMode = SerialModeEnum.Full,
                             PinRX = 3,
                             PinTX = 1,
                             AllowPinSwapRX = true,
@@ -661,8 +658,7 @@
                         {
                             Index = 1,
                             Enabled = false,
-                            HasRX = false,
-                            HasTX = true,
+                            SerialMode = SerialModeEnum.TXOnly,
                             PinRX = null,
                             PinTX = 2,
                             AllowPinSwapRX = null,
@@ -881,8 +877,7 @@
                         {
                             Index = 0,
                             Enabled = true,
-                            HasRX = true,
-                            HasTX = true,
+                            SerialMode = SerialModeEnum.Full,
                             PinRX = 3,
                             PinTX = 1,
                             AllowPinSwapRX = true,
@@ -892,8 +887,7 @@
                         {
                             Index = 1,
                             Enabled = false,
-                            HasRX = false,
-                            HasTX = true,
+                            SerialMode = SerialModeEnum.TXOnly,
                             PinRX = null,
                             PinTX = 2,
                             AllowPinSwapRX = null,
@@ -973,8 +967,7 @@
                         {
                             Index = 0,
                             Enabled = true,
-                            HasRX = true,
-                            HasTX = true,
+                            SerialMode = SerialModeEnum.Full,
                             PinRX = 3,
                             PinTX = 1,
                             AllowPinSwapRX = true,
@@ -984,8 +977,7 @@
                         {
                             Index = 1,
                             Enabled = false,
-                            HasRX = false,
-                            HasTX = true,
+                            SerialMode = SerialModeEnum.TXOnly,
                             PinRX = null,
                             PinTX = 2,
                             AllowPinSwapRX = null,

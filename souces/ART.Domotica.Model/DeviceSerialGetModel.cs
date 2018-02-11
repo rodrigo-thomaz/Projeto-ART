@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Model
 {
+    using ART.Domotica.Enums;
     using System;
 
     public class DeviceSerialGetModel
@@ -36,12 +37,7 @@
             get; set;
         }
 
-        public bool HasRX
-        {
-            get; set;
-        }
-
-        public bool HasTX
+        public SerialModeEnum SerialMode
         {
             get; set;
         }

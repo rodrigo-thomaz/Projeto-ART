@@ -75,34 +75,29 @@
                 .HasColumnOrder(4)
                 .IsRequired();
 
-            //HasRX
-            Property(x => x.HasRX)
+            //SerialMode
+            Property(x => x.SerialMode)
                 .HasColumnOrder(5)
-                .IsRequired();
-
-            //HasTX
-            Property(x => x.HasTX)
-                .HasColumnOrder(6)
                 .IsRequired();
 
             //AllowPinSwapRX
             Property(x => x.AllowPinSwapRX)
-                .HasColumnOrder(7)
+                .HasColumnOrder(6)
                 .IsOptional();
 
             //AllowPinSwapTX
             Property(x => x.AllowPinSwapTX)
-                .HasColumnOrder(8)
+                .HasColumnOrder(7)
                 .IsOptional();
 
             //PinRX
             Property(x => x.PinRX)
-                .HasColumnOrder(9)
+                .HasColumnOrder(8)
                 .IsOptional();
 
             //PinTX
             Property(x => x.PinTX)
-                .HasColumnOrder(10)
+                .HasColumnOrder(9)
                 .IsOptional();
         }
 
