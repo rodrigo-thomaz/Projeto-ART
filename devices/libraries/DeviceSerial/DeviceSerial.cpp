@@ -6,6 +6,9 @@ namespace ART
 	DeviceSerial::DeviceSerial(ESPDevice* espDevice)
 	{
 		_espDevice = espDevice;
+
+		_initializing = false;
+		_initialized = false;
 	}
 
 	DeviceSerial::~DeviceSerial()
