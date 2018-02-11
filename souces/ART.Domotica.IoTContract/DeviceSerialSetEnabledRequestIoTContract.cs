@@ -2,9 +2,7 @@
 {
     using System;
 
-    using ART.Domotica.Enums;
-
-    public class DeviceSerialSetPinRequestIoTContract
+    public class DeviceSerialSetEnabledRequestIoTContract
     {
         #region Properties
 
@@ -13,12 +11,7 @@
             get; set;
         }
 
-        public CommunicationDirection Direction
-        {
-            get; set;
-        }
-
-        public short Value
+        public bool Value
         {
             get; set;
         }

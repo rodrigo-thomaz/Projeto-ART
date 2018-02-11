@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace ART.Domotica.Contract
+﻿namespace ART.Domotica.Contract
 {
+    using System;
+
     public class DeviceSerialDetailResponseContract
     {
         #region Properties
@@ -12,6 +12,11 @@ namespace ART.Domotica.Contract
         }
 
         public bool AllowPinSwapTX
+        {
+            get; set;
+        }
+
+        public Guid DeviceSerialId
         {
             get; set;
         }
@@ -27,11 +32,6 @@ namespace ART.Domotica.Contract
         }
 
         public bool HasTX
-        {
-            get; set;
-        }
-
-        public Guid DeviceSerialId
         {
             get; set;
         }

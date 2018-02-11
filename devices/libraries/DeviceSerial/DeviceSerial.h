@@ -1,6 +1,17 @@
 #ifndef DeviceSerial_h
 #define DeviceSerial_h
 
+#include "vector"
+#include "tuple"
+
+#include "DeviceSerialItem.h"
+
+#define DEVICE_SERIAL_GET_ALL_BY_DEVICE_ID_TOPIC_PUB   				"DeviceSerial/GetAllByDeviceIdIoT" 
+#define DEVICE_SERIAL_GET_ALL_BY_DEVICE_ID_COMPLETED_TOPIC_SUB		"DeviceSerial/GetAllByDeviceIdCompletedIoT"
+
+#define DEVICE_SERIAL_SET_ENABLED_TOPIC_SUB							"DeviceSerial/SetEnabledIoT"
+#define DEVICE_SERIAL_SET_PIN_TOPIC_SUB								"DeviceSerial/SetPinIoT"
+
 namespace ART
 {
 	class ESPDevice;
@@ -13,13 +24,32 @@ namespace ART
 		DeviceSerial(ESPDevice* espDevice);
 		~DeviceSerial();
 
-		void								begin();
+		void										begin();
+
+		std::tuple<DeviceSerialItem**, short>		getItems();
+
+		bool										initialized();
 
 	private:
 
-		ESPDevice *							_espDevice;
+		ESPDevice *									_espDevice;
 
-		bool								onDeviceMQSubscription(const char* topicKey, const char* json);
+		std::vector<DeviceSerialItem*>				_items;
+
+		bool										_initialized;
+		bool										_initializing;
+
+		DeviceSerialItem*							getItemById(const char* id);
+
+		void										getAllPub();
+		void										getAllSub(const char* json);
+
+		void										setEnabledSub(const char* json);
+		void										setPinSub(const char* json);
+
+		void										onDeviceMQSubscribeDeviceInApplication();
+		void										onDeviceMQUnSubscribeDeviceInApplication();
+		bool										onDeviceMQSubscription(const char* topicKey, const char* json);
 
 	};
 }

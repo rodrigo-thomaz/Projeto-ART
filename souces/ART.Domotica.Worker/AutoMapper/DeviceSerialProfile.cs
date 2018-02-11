@@ -27,11 +27,13 @@
                 .ForMember(vm => vm.Direction, m => m.MapFrom(x => x.Direction));
 
             CreateMap<DeviceSerialSetPinRequestContract, DeviceSerialSetPinRequestIoTContract>()
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DeviceId))
                 .ForMember(vm => vm.DeviceSerialId, m => m.MapFrom(x => x.DeviceSerialId))
-                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value))
                 .ForMember(vm => vm.Direction, m => m.MapFrom(x => x.Direction));
+
+            CreateMap<DeviceSerialSetEnabledRequestContract, DeviceSerialSetEnabledRequestIoTContract>()
+                .ForMember(vm => vm.DeviceSerialId, m => m.MapFrom(x => x.DeviceSerialId))
+                .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Enabled));
 
             CreateMap<DeviceSerial, DeviceSerialGetModel>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DeviceId))

@@ -6,6 +6,13 @@ namespace ART
 	{
 		Serial.println(F("[DeviceSerialItem:DeviceSerialItem] constructor"));
 
+		const char* deviceSerialId = jsonObject["deviceSerialId"];
+		_deviceSerialId = new char[strlen(deviceSerialId) + 1];
+		strcpy(_deviceSerialId, deviceSerialId);
+		_deviceSerialId[strlen(deviceSerialId) + 1] = '\0';
+
+		_enabled = int(jsonObject["enabled"]);
+
 		_hasRX = int(jsonObject["hasRX"]);
 		_hasTX = int(jsonObject["hasTX"]);
 
@@ -19,6 +26,18 @@ namespace ART
 	DeviceSerialItem::~DeviceSerialItem()
 	{
 		Serial.println(F("[DeviceSerialItem:DeviceSerialItem] destructor"));
+
+		delete[] _deviceSerialId;
+	}
+
+	char * DeviceSerialItem::getDeviceSerialId() const
+	{
+		return (_deviceSerialId);
+	}
+
+	void DeviceSerialItem::setEnabled(bool value)
+	{
+		_enabled = value;
 	}
 
 	void DeviceSerialItem::setHasRX(bool value)

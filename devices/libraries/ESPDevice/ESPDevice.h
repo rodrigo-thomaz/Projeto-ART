@@ -2,6 +2,7 @@
 #define ESPDevice_h
 
 #include "DeviceInApplication.h"
+#include "DeviceSerial.h"
 #include "DeviceDebug.h"
 #include "DeviceWiFi.h"
 #include "DeviceMQ.h"

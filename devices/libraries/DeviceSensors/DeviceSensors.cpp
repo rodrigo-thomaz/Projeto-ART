@@ -111,7 +111,7 @@ namespace ART
 
 	void DeviceSensors::setSensorsByMQQTCallback(const char* json)
 	{
-		Serial.println(F("[DeviceSensors::setSensorsByMQQTCallback] Enter"));
+		Serial.println(F("[DeviceSensors::setSensorsByMQQTCallback] begin"));
 
 		Serial.print(F("FreeHeap pre buffer deviceSensorsJO: "));
 		Serial.println(ESP.getFreeHeap());
@@ -270,7 +270,7 @@ namespace ART
 	std::tuple<SensorInDevice**, short> DeviceSensors::getSensorsInDevice()
 	{
 		SensorInDevice** array = this->_sensorsInDevice.data();
-		return std::make_tuple(array, 2);
+		return std::make_tuple(array, _sensorsInDevice.size());
 	}
 
 	SensorDatasheet * DeviceSensors::getSensorDatasheetByKey(SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId)
