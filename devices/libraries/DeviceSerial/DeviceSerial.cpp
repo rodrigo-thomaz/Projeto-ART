@@ -36,11 +36,20 @@ namespace ART
 	{
 		if (_initialized) return true;		
 
-		if (!_espDevice->loaded()) return false;
+		if (!_espDevice->loaded()) {
+			Serial.println(F("[DeviceSerial::initialized] espDevice not loaded"));
+			return false;
+		}
 
-		if (!_espDevice->getDeviceMQ()->connected()) return false;
+		if (!_espDevice->getDeviceMQ()->connected()) {
+			Serial.println(F("[DeviceSerial::initialized] deviceMQ not connected"));
+			return false;
+		}
 
-		if (_initializing) return false;
+		if (_initializing) {
+			Serial.println(F("[DeviceSerial::initialized] initializing: true"));
+			return false;
+		}
 
 		// initializing
 

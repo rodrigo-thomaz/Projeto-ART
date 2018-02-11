@@ -49,6 +49,7 @@ namespace ART
 		char * 								getWebApiUri() const;
 
 		DeviceInApplication*				getDeviceInApplication();
+		DeviceSerial*						getDeviceSerial();
 		DeviceDebug*						getDeviceDebug();
 		DeviceWiFi*							getDeviceWiFi();
 		DeviceMQ*							getDeviceMQ();
@@ -70,6 +71,8 @@ namespace ART
 		long								_chipSize;
 
 		char *								_label;
+
+		bool 								_hasDeviceSerial;
 		bool 								_hasDeviceSensors;
 
 		char *								_webApiHost;
@@ -77,6 +80,7 @@ namespace ART
 		char * 								_webApiUri;
 
 		DeviceInApplication*				_deviceInApplication;
+		DeviceSerial*						_deviceSerial;
 		DeviceDebug*						_deviceDebug;
 		DeviceWiFi*							_deviceWiFi;
 		DeviceMQ*							_deviceMQ;
