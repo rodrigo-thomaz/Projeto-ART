@@ -42,7 +42,7 @@ namespace ART
 		delete (_deviceBinary);
 		delete (_deviceBuzzer);
 
-		if(_hasSensor) delete (_deviceSensors);
+		if(_hasDeviceSensors) delete (_deviceSensors);
 
 		delete (_displayDevice);
 
@@ -176,9 +176,9 @@ namespace ART
 		return _deviceBuzzer;
 	}
 
-	bool ESPDevice::hasSensor()
+	bool ESPDevice::hasDeviceSensors()
 	{
-		return _hasSensor;
+		return _hasDeviceSensors;
 	}
 
 	DeviceSensors* ESPDevice::getDeviceSensors()
@@ -272,7 +272,7 @@ namespace ART
 		strcpy(_label, label);
 		_label[strlen(label) + 1] = '\0';
 
-		_hasSensor = jsonObject["hasSensor"];
+		_hasDeviceSensors = jsonObject["hasDeviceSensors"];
 
 		_deviceDebug->load(jsonObject);
 		_deviceWiFi->load(jsonObject["deviceWiFi"]);
@@ -285,8 +285,8 @@ namespace ART
 			_deviceInApplication->load(deviceInApplicationJO);
 		}		
 
-		Serial.printf("hasSensor: %s\n", _hasSensor ? "true" : "false");
-		if (_hasSensor) {
+		Serial.printf("hasDeviceSensors: %s\n", _hasDeviceSensors ? "true" : "false");
+		if (_hasDeviceSensors) {
 			_deviceSensors = new DeviceSensors(this);
 			_deviceSensors->begin();
 		}

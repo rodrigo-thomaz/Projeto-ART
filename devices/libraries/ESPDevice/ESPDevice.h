@@ -57,7 +57,7 @@ namespace ART
 		DeviceBuzzer*						getDeviceBuzzer();		
 		DisplayDevice*						getDisplayDevice();
 
-		bool								hasSensor();
+		bool								hasDeviceSensors();
 		DeviceSensors*						getDeviceSensors();
 
 	private:
@@ -70,7 +70,7 @@ namespace ART
 		long								_chipSize;
 
 		char *								_label;
-		bool 								_hasSensor;
+		bool 								_hasDeviceSensors;
 
 		char *								_webApiHost;
 		uint16_t							_webApiPort;

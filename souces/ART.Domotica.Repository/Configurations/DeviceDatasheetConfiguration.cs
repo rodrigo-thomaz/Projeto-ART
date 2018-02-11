@@ -29,8 +29,8 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
 
-            //HasSensor
-            Property(x => x.HasSensor)
+            //HasDeviceSensors
+            Property(x => x.HasDeviceSensors)
                 .HasColumnOrder(2)
                 .IsRequired();
         }

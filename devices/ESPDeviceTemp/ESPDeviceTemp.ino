@@ -114,7 +114,7 @@ void loopInApplication()
 
   espDevice.getDeviceNTP()->update();
 
-  if(espDevice.hasSensor()){
+  if(espDevice.hasDeviceSensors()){
     DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
     bool deviceSensorsReaded = deviceSensors->read();
     espDevice.getDisplayDevice()->getDisplayDeviceSensors()->printUpdate(deviceSensorsReaded);
@@ -154,7 +154,7 @@ void loopMQQTConnected()
   Serial.printf("deviceWiFi->publish: %s\n", deviceWiFiPublished ? "true" : "false");
 
   // Sensor
-  if(espDevice.hasSensor()){
+  if(espDevice.hasDeviceSensors()){
     
     DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
     
