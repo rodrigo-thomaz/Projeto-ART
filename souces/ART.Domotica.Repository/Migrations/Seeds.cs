@@ -559,7 +559,7 @@
                     {
                         new DeviceSerial
                         {
-                            Index = 1,
+                            Index = 0,
                             Enabled = true,
                             HasRX = true,
                             HasTX = true,
@@ -570,7 +570,7 @@
                         },
                         new DeviceSerial
                         {
-                            Index = 2,
+                            Index = 1,
                             Enabled = false,
                             HasRX = false,
                             HasTX = true,
@@ -648,7 +648,7 @@
                     {
                         new DeviceSerial
                         {
-                            Index = 1,
+                            Index = 0,
                             Enabled = true,
                             HasRX = true,
                             HasTX = true,
@@ -659,7 +659,7 @@
                         },
                         new DeviceSerial
                         {
-                            Index = 2,
+                            Index = 1,
                             Enabled = false,
                             HasRX = false,
                             HasTX = true,
@@ -879,7 +879,7 @@
                     {
                         new DeviceSerial
                         {
-                            Index = 1,
+                            Index = 0,
                             Enabled = true,
                             HasRX = true,
                             HasTX = true,
@@ -890,7 +890,7 @@
                         },
                         new DeviceSerial
                         {
-                            Index = 2,
+                            Index = 1,
                             Enabled = false,
                             HasRX = false,
                             HasTX = true,
@@ -971,7 +971,7 @@
                     {
                         new DeviceSerial
                         {
-                            Index = 1,
+                            Index = 0,
                             Enabled = true,
                             HasRX = true,
                             HasTX = true,
@@ -982,7 +982,7 @@
                         },
                         new DeviceSerial
                         {
-                            Index = 2,
+                            Index = 1,
                             Enabled = false,
                             HasRX = false,
                             HasTX = true,

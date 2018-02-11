@@ -20,7 +20,7 @@ namespace ART
 		setPinTX(jsonObject["pinTX"]);		
 
 		setEnabled(jsonObject["enabled"]);
-
+		
 		Serial.println(F("[DeviceSerialItem:DeviceSerialItem] constructor end"));
 	}
 
@@ -56,6 +56,31 @@ namespace ART
 	void DeviceSerialItem::setEnabled(bool value)
 	{
 		_enabled = value;
+
+		Serial.println(F("Aqui 01 !!!!!!!!!!!!!!!!!!!!!!"));
+		int available = _hardwareSerial->available();
+
+		Serial.print(F("Aqui 02 available: "));
+		Serial.println(available);
+
+		Serial.print(F("Aqui index: "));
+		Serial.println(_index);
+
+		if (_enabled) {
+			if (available) {
+				Serial.println(F("Aqui 10 !!!!!!!!!!!!!!!!!!!!!!"));
+				_hardwareSerial->end();
+				Serial.println(F("Aqui 11 !!!!!!!!!!!!!!!!!!!!!!"));
+			}
+			Serial.println(F("Aqui 03 !!!!!!!!!!!!!!!!!!!!!!"));
+			_hardwareSerial->begin(9600);
+			Serial.println(F("Aqui 04 !!!!!!!!!!!!!!!!!!!!!!"));
+		}
+		else {
+			Serial.println(F("Aqui 20 !!!!!!!!!!!!!!!!!!!!!!"));
+			_hardwareSerial->end();
+			Serial.println(F("Aqui 21 !!!!!!!!!!!!!!!!!!!!!!"));
+		}
 	}
 
 	void DeviceSerialItem::setHasRX(bool value)
