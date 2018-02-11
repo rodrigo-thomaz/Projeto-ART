@@ -47,6 +47,11 @@
             get; set;
         }
 
+        public bool HasDeviceSerial
+        {
+            get; set;
+        }
+
         public string Label
         {
             get; set;

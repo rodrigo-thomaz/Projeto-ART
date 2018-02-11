@@ -24,6 +24,11 @@
             get; set;
         }
 
+        public bool HasDeviceSerial
+        {
+            get; set;
+        }
+
         public Guid Id
         {
             get; set;

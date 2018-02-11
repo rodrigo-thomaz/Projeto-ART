@@ -41,6 +41,7 @@
                 .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
+                .ForMember(vm => vm.HasDeviceSerial, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceSerial))
                 .ForMember(vm => vm.HasDeviceSensors, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceSensors));
 
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
