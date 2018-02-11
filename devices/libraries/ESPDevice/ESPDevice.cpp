@@ -150,6 +150,11 @@ namespace ART
 		return _deviceInApplication;
 	}
 
+	bool ESPDevice::hasDeviceSerial()
+	{
+		return _hasDeviceSerial;
+	}
+
 	DeviceSerial* ESPDevice::getDeviceSerial()
 	{
 		return _deviceSerial;

@@ -153,6 +153,18 @@ void loopMQQTConnected()
   
   Serial.printf("deviceWiFi->publish: %s\n", deviceWiFiPublished ? "true" : "false");
 
+  // DeviceSerial
+  if(espDevice.hasDeviceSerial()){
+
+    DeviceSerial* deviceSerial = espDevice.getDeviceSerial();
+    
+    if (deviceSerial->initialized()) {        
+      
+    }    
+  }
+  
+  
+
   // Sensor
   if(espDevice.hasDeviceSensors()){
     

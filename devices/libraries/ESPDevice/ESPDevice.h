@@ -48,8 +48,7 @@ namespace ART
 		uint16_t							getWebApiPort();
 		char * 								getWebApiUri() const;
 
-		DeviceInApplication*				getDeviceInApplication();
-		DeviceSerial*						getDeviceSerial();
+		DeviceInApplication*				getDeviceInApplication();		
 		DeviceDebug*						getDeviceDebug();
 		DeviceWiFi*							getDeviceWiFi();
 		DeviceMQ*							getDeviceMQ();
@@ -60,6 +59,9 @@ namespace ART
 
 		bool								hasDeviceSensors();
 		DeviceSensors*						getDeviceSensors();
+
+		bool								hasDeviceSerial();
+		DeviceSerial*						getDeviceSerial();
 
 	private:
 

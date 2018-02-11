@@ -51,6 +51,12 @@
             BasicQueueDeclare(DeviceSerialConstants.SetEnabledQueueName);
             BasicQueueDeclare(DeviceSerialConstants.SetPinQueueName);
 
+            _model.QueueBind(
+                  queue: DeviceSerialConstants.GetAllByDeviceKeyIoTQueueName
+                , exchange: "amq.topic"
+                , routingKey: GetApplicationRoutingKeyForAllIoT(DeviceSerialConstants.GetAllByDeviceKeyIoTQueueName)
+                , arguments: CreateBasicArguments());
+
             _getAllByDeviceKeyConsumer.Received += GetAllByDeviceKeyReceived;
             _setEnabledConsumer.Received += SetEnabledReceived;
             _setPinConsumer.Received += SetPinReceived;
