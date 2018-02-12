@@ -210,6 +210,25 @@ namespace ART
 		return _displayDevice;
 	}
 
+	char * ESPDevice::getDeviceKeyAsJson()
+	{
+		StaticJsonBuffer<300> JSONbuffer;
+		JsonObject& root = JSONbuffer.createObject();
+
+		root["deviceTypeId"] = _deviceTypeId;
+		root["deviceDatasheetId"] = _deviceDatasheetId;
+		root["deviceId"] = _deviceId;
+
+		int len = root.measureLength() + 1;
+		char* result = new char[len];
+
+		root.printTo(result, len);
+
+		result[len] = '\0';
+
+		return result;
+	}
+
 	bool ESPDevice::loaded()
 	{
 		return _loaded;

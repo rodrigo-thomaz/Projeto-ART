@@ -71,14 +71,7 @@ namespace ART
 
 		_initializing = true;
 
-		Serial.println(F("[DeviceSensors::initialized] begin]"));
-
-		StaticJsonBuffer<DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
-		JsonObject& root = JSONbuffer.createObject();
-		
-		root["deviceTypeId"] = _espDevice->getDeviceTypeId();
-		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
-		root["deviceId"] = _espDevice->getDeviceId();
+		Serial.println(F("[DeviceSensors::initialized] begin]"));		
 
 		/*
 		//device addresses prepare	
@@ -97,13 +90,9 @@ namespace ART
 				}
 			}
 		}
-		*/
+		*/		
 
-		int len = root.measureLength();
-		char result[len + 1];
-		root.printTo(result, sizeof(result));
-
-		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_TOPIC_PUB, result);
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_TOPIC_PUB, _espDevice->getDeviceKeyAsJson());
 
 		Serial.println(F("[DeviceSensors::initialized] end"));
 
@@ -244,8 +233,9 @@ namespace ART
 		DynamicJsonBuffer jsonBuffer;
 		JsonObject& root = jsonBuffer.createObject();
 
-		root["deviceId"] = _espDevice->getDeviceId();
+		root["deviceTypeId"] = _espDevice->getDeviceTypeId();
 		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
+		root["deviceId"] = _espDevice->getDeviceId();		
 		root["epochTimeUtc"] = _espDevice->getDeviceNTP()->getEpochTimeUTC();
 
 		createSensorsJsonNestedArray(root);

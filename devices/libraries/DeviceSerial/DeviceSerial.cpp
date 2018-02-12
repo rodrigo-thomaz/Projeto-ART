@@ -78,20 +78,7 @@ namespace ART
 	void DeviceSerial::getAllPub()
 	{
 		Serial.println(F("[DeviceSerial::getAllPub] begin"));
-
-		StaticJsonBuffer<300> JSONbuffer;
-		JsonObject& root = JSONbuffer.createObject();
-
-		root["deviceTypeId"] = _espDevice->getDeviceTypeId();
-		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
-		root["deviceId"] = _espDevice->getDeviceId();
-
-		int len = root.measureLength();
-		char result[len + 1];
-		root.printTo(result, sizeof(result));
-
-		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SERIAL_GET_ALL_BY_DEVICE_KEY_TOPIC_PUB, result);
-
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_SERIAL_GET_ALL_BY_DEVICE_KEY_TOPIC_PUB, _espDevice->getDeviceKeyAsJson());
 		Serial.println(F("[DeviceSerial::getAllPub] end"));
 	}
 

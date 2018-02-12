@@ -59,6 +59,8 @@ namespace ART
 		DeviceBuzzer*						getDeviceBuzzer();		
 		DisplayDevice*						getDisplayDevice();
 
+		char*								getDeviceKeyAsJson();
+
 		bool								hasDeviceSensors();
 		DeviceSensors*						getDeviceSensors();
 
