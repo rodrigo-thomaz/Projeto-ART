@@ -26,9 +26,6 @@ namespace ART
 			}
 		}
 
-	private:
-
-		
 	};
 }
 

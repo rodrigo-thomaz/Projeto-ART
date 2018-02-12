@@ -571,6 +571,8 @@ namespace ART
 	{
 		JsonObject& JSONencoder = root.createNestedObject();
 
+		JSONencoder["sensorTypeId"] = SensorTypeEnumConverter::convertToString(sensor->getSensorTypeId());
+		JSONencoder["sensorDatasheetId"] = SensorDatasheetEnumConverter::convertToString(sensor->getSensorDatasheetId());
 		JSONencoder["sensorId"] = sensor->getSensorId();
 		JSONencoder["isConnected"] = sensor->getConnected();
 		JSONencoder["resolution"] = sensor->getSensorTempDSFamily()->getResolution();
