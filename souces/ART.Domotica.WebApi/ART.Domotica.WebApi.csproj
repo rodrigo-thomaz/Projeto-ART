@@ -150,6 +150,7 @@
     <Compile Include="Controllers\DeviceInApplicationController.cs" />
     <Compile Include="Controllers\SensorInDeviceController.cs" />
     <Compile Include="Controllers\SensorTriggerController.cs" />
+    <Compile Include="Controllers\DeviceTypeController.cs" />
     <Compile Include="Controllers\SensorUnitMeasurementScaleController.cs" />
     <Compile Include="Controllers\ESPDeviceController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />

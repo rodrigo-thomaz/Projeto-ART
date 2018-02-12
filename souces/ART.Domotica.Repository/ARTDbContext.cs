@@ -105,6 +105,11 @@
             get; set;
         }
 
+        public DbSet<DeviceType> DeviceType
+        {
+            get; set;
+        }
+
         public DbSet<DeviceWiFi> DeviceWiFi
         {
             get; set;

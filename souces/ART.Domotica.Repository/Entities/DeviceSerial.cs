@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Entities
 {
     using System;
+
     using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
@@ -14,6 +15,11 @@
         }
 
         public bool? AllowPinSwapTX
+        {
+            get; set;
+        }
+
+        public int BaudRate
         {
             get; set;
         }
@@ -38,11 +44,6 @@
             get; set;
         }
 
-        public SerialModeEnum SerialMode
-        {
-            get; set;
-        }
-
         public Guid Id
         {
             get; set;
@@ -63,7 +64,10 @@
             get; set;
         }
 
-        public int BaudRate { get; set; }
+        public SerialModeEnum SerialMode
+        {
+            get; set;
+        }
 
         #endregion Properties
     }

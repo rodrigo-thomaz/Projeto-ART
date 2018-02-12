@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.IoTContract
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class DeviceSerialGetResponseIoTContract
     {
@@ -27,11 +28,6 @@
             get; set;
         }
 
-        public SerialModeEnum SerialMode
-        {
-            get; set;
-        }
-
         public short Index
         {
             get; set;
@@ -43,6 +39,11 @@
         }
 
         public short PinTX
+        {
+            get; set;
+        }
+
+        public SerialModeEnum SerialMode
         {
             get; set;
         }

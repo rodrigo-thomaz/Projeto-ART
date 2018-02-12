@@ -1,7 +1,8 @@
 ﻿namespace ART.Domotica.Model
 {
-    using ART.Domotica.Enums;
     using System;
+
+    using ART.Domotica.Enums;
 
     public class DeviceSerialGetModel
     {
@@ -37,11 +38,6 @@
             get; set;
         }
 
-        public SerialModeEnum SerialMode
-        {
-            get; set;
-        }
-
         public short Index
         {
             get; set;
@@ -53,6 +49,11 @@
         }
 
         public short? PinTX
+        {
+            get; set;
+        }
+
+        public SerialModeEnum SerialMode
         {
             get; set;
         }

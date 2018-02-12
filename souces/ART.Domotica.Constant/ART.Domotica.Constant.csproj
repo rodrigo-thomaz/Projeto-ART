@@ -48,6 +48,7 @@
     <Compile Include="DeviceDatasheetConstants.cs" />
     <Compile Include="DeviceInApplicationConstants.cs" />
     <Compile Include="SensorTriggerConstants.cs" />
+    <Compile Include="DeviceTypeConstants.cs" />
     <Compile Include="SensorUnitMeasurementScaleConstants.cs" />
     <Compile Include="SettingsConstants.cs" />
     <Compile Include="ESPDeviceConstants.cs" />

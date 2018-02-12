@@ -2,11 +2,10 @@
 {
     #region Enumerations
 
-    public enum SerialModeEnum : byte
+    public enum DeviceTypeEnum : byte
     {
-        Full = 0,
-        RXOnly = 1,
-        TXOnly = 2,
+        ESP = 1,
+        Raspberry = 2,
     }
 
     #endregion Enumerations

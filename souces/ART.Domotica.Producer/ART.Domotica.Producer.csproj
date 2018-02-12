@@ -72,6 +72,7 @@
     <Compile Include="Interfaces\IDeviceInApplicationProducer.cs" />
     <Compile Include="Interfaces\ISensorInDeviceProducer.cs" />
     <Compile Include="Interfaces\ISensorTriggerProducer.cs" />
+    <Compile Include="Interfaces\IDeviceTypeProducer.cs" />
     <Compile Include="Interfaces\ISensorUnitMeasurementScaleProducer.cs" />
     <Compile Include="Interfaces\IESPDeviceProducer.cs" />
     <Compile Include="Interfaces\IApplicationProducer.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Services\DeviceInApplicationProducer.cs" />
     <Compile Include="Services\SensorInDeviceProducer.cs" />
     <Compile Include="Services\SensorTriggerProducer.cs" />
+    <Compile Include="Services\DeviceTypeProducer.cs" />
     <Compile Include="Services\SensorUnitMeasurementScaleProducer.cs" />
     <Compile Include="Services\ESPDeviceProducer.cs" />
     <Compile Include="Services\ApplicationProducer.cs" />

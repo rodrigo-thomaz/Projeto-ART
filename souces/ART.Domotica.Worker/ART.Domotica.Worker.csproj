@@ -115,6 +115,7 @@
     <Compile Include="AutoMapper\DeviceBaseProfile.cs" />
     <Compile Include="AutoMapper\DeviceDatasheetProfile.cs" />
     <Compile Include="AutoMapper\SensorTriggerProfile.cs" />
+    <Compile Include="AutoMapper\DeviceTypeProfile.cs" />
     <Compile Include="AutoMapper\SensorUnitMeasurementScaleProfile.cs" />
     <Compile Include="AutoMapper\SensorTempDSFamilyProfile.cs" />
     <Compile Include="AutoMapper\DeviceMQProfile.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Consumers\Locale\CountryConsumer.cs" />
     <Compile Include="Consumers\SensorDatasheetUnitMeasurementScaleConsumer.cs" />
     <Compile Include="Consumers\SensorTriggerConsumer.cs" />
+    <Compile Include="Consumers\DeviceTypeConsumer.cs" />
     <Compile Include="Consumers\SensorUnitMeasurementScaleConsumer.cs" />
     <Compile Include="Consumers\SensorDatasheetUnitMeasurementDefaultConsumer.cs" />
     <Compile Include="Consumers\SensorDatasheetConsumer.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="IConsumers\ISensorTempDSFamilyConsumer.cs" />
     <Compile Include="IConsumers\IDeviceNTPConsumer.cs" />
     <Compile Include="IConsumers\IESPDeviceConsumer.cs" />
+    <Compile Include="IConsumers\IDeviceTypeConsumer.cs" />
     <Compile Include="IConsumers\ISensorUnitMeasurementScaleConsumer.cs" />
     <Compile Include="IConsumers\ISensorTriggerConsumer.cs" />
     <Compile Include="IConsumers\ISensorDatasheetUnitMeasurementDefaultConsumer.cs" />

@@ -40,6 +40,7 @@
             ExecuteSensorDatasheet(context);
             ExecuteSensorDatasheetUnitMeasurementDefault(context);
             ExecuteSensorDatasheetUnitMeasurementScale(context);
+            ExecuteDeviceType(context);
             ExecuteDeviceDatasheet(context);
 
             Guid DeviceDatasheetId_OneWire2Way = Guid.Parse("1DD1D68F-EE1F-4DA0-8F20-5232F1428B4D");
@@ -1217,6 +1218,33 @@
                     entity.HasDeviceSerial = hasDeviceSerial;
                     entity.HasDeviceSensors = hasDeviceSensors;
                 }
+
+                context.SaveChanges();
+            }
+        }
+
+        private static void ExecuteDeviceType(ARTDbContext context)
+        {
+            var lines = GetMatrixFromFile("DeviceType.csv");
+
+            foreach (var line in lines)
+            {
+                var deviceTypeId = (DeviceTypeEnum)Enum.Parse(typeof(DeviceTypeEnum), line[0]);
+                var name = line[1];
+
+                var entity = context.DeviceType
+                    .Where(x => x.Id == deviceTypeId)
+                    .SingleOrDefault();
+
+                if (entity == null)
+                {
+                    entity = new DeviceType
+                    {
+                        Id = deviceTypeId,
+                    };
+                    context.DeviceType.Add(entity);
+                }
+                entity.Name = name;
 
                 context.SaveChanges();
             }
