@@ -39,7 +39,7 @@ app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', '
             }
             deviceSensors.sensorInDevice.insert(result.ordination, sensorInDevice);
             deviceContext.$digest();
-            $rootScope.$emit(sensorInDeviceConstant.setOrdinationCompletedEventName + result.deviceSensorsId, result);
+            $rootScope.$emit(sensorInDeviceConstant.setOrdinationCompletedEventName + result.deviceId, result);
         };
 
         $rootScope.$on('$destroy', function () {
