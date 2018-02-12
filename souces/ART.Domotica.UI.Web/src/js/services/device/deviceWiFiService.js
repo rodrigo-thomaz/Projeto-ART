@@ -57,12 +57,12 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
             var deviceWiFi = deviceWiFiFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceWiFi.hostName = result.hostName;
             deviceContext.$digest();
-            $rootScope.$emit(deviceWiFiConstant.setHostNameCompletedEventName + result.deviceWiFiId, result);
+            $rootScope.$emit(deviceWiFiConstant.setHostNameCompletedEventName + result.deviceId, result);
         };
 
         var onSetPublishIntervalInMilliSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceWiFi = deviceWiFiFinder.getByKey(data.deviceTypeId, data.deviceDatasheetId, data.deviceId);
+            var deviceWiFi = deviceWiFiFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceWiFi.publishIntervalInMilliSeconds = result.publishIntervalInMilliSeconds;
             deviceContext.$digest();
             $rootScope.$emit(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceId, result);
