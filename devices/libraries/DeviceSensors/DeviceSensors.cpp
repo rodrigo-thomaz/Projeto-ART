@@ -73,14 +73,12 @@ namespace ART
 
 		Serial.println(F("[DeviceSensors::initialized] begin]"));
 
-		char* deviceId = this->_espDevice->getDeviceId();
-		char* deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();
-
 		StaticJsonBuffer<DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_REQUEST_JSON_SIZE> JSONbuffer;
 		JsonObject& root = JSONbuffer.createObject();
-
-		root["deviceId"] = deviceId;
-		root["deviceDatasheetId"] = deviceDatasheetId;
+		
+		root["deviceTypeId"] = _espDevice->getDeviceTypeId();
+		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
+		root["deviceId"] = _espDevice->getDeviceId();
 
 		/*
 		//device addresses prepare	

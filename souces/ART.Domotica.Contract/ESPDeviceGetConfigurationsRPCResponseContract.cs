@@ -2,6 +2,8 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
+
     public class ESPDeviceGetConfigurationsRPCResponseContract
     {
         #region Properties
@@ -32,6 +34,11 @@
         }
 
         public DeviceNTPDetailResponseContract DeviceNTP
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

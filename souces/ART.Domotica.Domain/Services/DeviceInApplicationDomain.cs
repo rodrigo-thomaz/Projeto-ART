@@ -70,9 +70,10 @@
 
             var deviceInApplication = new DeviceInApplication
             {
-                ApplicationId = applicationEntity.Id,
-                DeviceId = deviceEntity.Id,
+                ApplicationId = applicationEntity.Id,                
+                DeviceTypeId = deviceEntity.DeviceTypeId,
                 DeviceDatasheetId = deviceEntity.DeviceDatasheetId,
+                DeviceId = deviceEntity.Id,
                 CreateByApplicationUserId = applicationUserEntity.Id,
                 CreateDate = DateTime.Now.ToUniversalTime(),
 

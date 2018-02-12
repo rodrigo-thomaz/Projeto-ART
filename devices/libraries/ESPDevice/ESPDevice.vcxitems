@@ -21,4 +21,7 @@
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)ESPDevice.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceTypeEnum.h" />
+  </ItemGroup>
 </Project>

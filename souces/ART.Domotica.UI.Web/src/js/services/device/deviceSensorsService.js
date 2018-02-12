@@ -54,7 +54,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
         var updateSensorsInDevice = function (oldValues, newValues) {
             for (var i = 0; i < oldValues.length; i++) {
                 for (var j = 0; j < newValues.length; j++) {
-                    if (oldValues[i].deviceTypeId === newValues[j].deviceTypeId && oldValues[i].deviceDatasheetId,  === newValues[j].deviceDatasheetId,  && oldValues[i].sensorId === newValues[j].sensorId) {
+                    if (oldValues[i].deviceTypeId === newValues[j].deviceTypeId && oldValues[i].deviceDatasheetId === newValues[j].deviceDatasheetId && oldValues[i].sensorId === newValues[j].sensorId) {
                         var sensor = oldValues[i].sensor();
                         sensor.isConnected = newValues[j].isConnected;
                         sensor.value = newValues[j].value;

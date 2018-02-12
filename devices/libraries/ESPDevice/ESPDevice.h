@@ -1,6 +1,7 @@
 #ifndef ESPDevice_h
 #define ESPDevice_h
 
+#include "DeviceTypeEnum.h"
 #include "DeviceInApplication.h"
 #include "DeviceSerial.h"
 #include "DeviceDebug.h"
@@ -35,6 +36,7 @@ namespace ART
 
 		bool								loaded();
 
+		DeviceTypeEnum						getDeviceTypeId();
 		char *								getDeviceId() const;
 		char *								getDeviceDatasheetId() const;
 
@@ -65,6 +67,7 @@ namespace ART
 
 	private:
 
+		DeviceTypeEnum						_deviceTypeId;
 		char *								_deviceId;
 		char *								_deviceDatasheetId;
 

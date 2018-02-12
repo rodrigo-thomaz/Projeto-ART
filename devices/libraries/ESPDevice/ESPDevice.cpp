@@ -86,6 +86,11 @@ namespace ART
 		yield();
 	}
 
+	DeviceTypeEnum ESPDevice::getDeviceTypeId()
+	{
+		return _deviceTypeId;
+	}
+
 	char* ESPDevice::getDeviceId() const
 	{
 		return (_deviceId);
@@ -271,6 +276,8 @@ namespace ART
 		DynamicJsonBuffer jsonBuffer;
 		JsonObject& jsonObject = jsonBuffer.parseObject(json);		
 
+		_deviceTypeId = static_cast<DeviceTypeEnum>(jsonObject["deviceTypeId"].as<int>());
+
 		const char* deviceId = jsonObject["deviceId"];
 		_deviceId = new char[strlen(deviceId) + 1];
 		strcpy(_deviceId, deviceId);
@@ -315,12 +322,11 @@ namespace ART
 		_loaded = true;
 
 		if (_deviceDebug->isActive(DeviceDebug::DEBUG)) {
-
-			_deviceDebug->printf("ESPDevice", "load", "deviceId: %s\n", _deviceId);
-			_deviceDebug->printf("ESPDevice", "load", "deviceDatasheetId: %s\n", _deviceDatasheetId);
-			_deviceDebug->printf("ESPDevice", "load", "label: %s\n", _label);
-
-			_deviceDebug->print("ESPDevice", "load", "end\n");
+			Serial.printf("[ESPDevice:load] deviceTypeId: %d\n", _deviceTypeId);
+			Serial.printf("[ESPDevice:load] deviceDatasheetId: %s\n", _deviceDatasheetId);
+			Serial.printf("[ESPDevice:load] deviceId: %s\n", _deviceId);
+			Serial.printf("[ESPDevice:load] label: %s\n", _label);
+			Serial.print(F("[ESPDevice:load] end\n"));
 		}
 	}	
 

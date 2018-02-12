@@ -79,14 +79,12 @@ namespace ART
 	{
 		Serial.println(F("[DeviceSerial::getAllPub] begin"));
 
-		char* deviceId = this->_espDevice->getDeviceId();
-		char* deviceDatasheetId = this->_espDevice->getDeviceDatasheetId();
-
 		StaticJsonBuffer<300> JSONbuffer;
 		JsonObject& root = JSONbuffer.createObject();
 
-		root["deviceId"] = deviceId;
-		root["deviceDatasheetId"] = deviceDatasheetId;
+		root["deviceTypeId"] = _espDevice->getDeviceTypeId();
+		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
+		root["deviceId"] = _espDevice->getDeviceId();
 
 		int len = root.measureLength();
 		char result[len + 1];

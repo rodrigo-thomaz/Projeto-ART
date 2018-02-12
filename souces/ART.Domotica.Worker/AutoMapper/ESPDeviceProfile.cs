@@ -33,8 +33,9 @@
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId));
 
             CreateMap<ESPDevice, ESPDeviceGetConfigurationsRPCResponseContract>()
-                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.DeviceInApplication, m => m.MapFrom(x => x.DevicesInApplication.FirstOrDefault()))
                 .ForMember(vm => vm.DeviceDebug, m => m.MapFrom(x => x.DeviceDebug))
                 .ForMember(vm => vm.DeviceWiFi, m => m.MapFrom(x => x.DeviceWiFi))
