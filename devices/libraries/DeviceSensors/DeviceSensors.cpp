@@ -5,6 +5,7 @@
 #include "../ESPDevice/ESPDevice.h"
 #include "SensorInDevice.h"
 #include "PositionEnum.h"
+#include "../ESPDevice/DeviceTypeEnum.h"
 
 namespace ART
 {
@@ -233,7 +234,7 @@ namespace ART
 		DynamicJsonBuffer jsonBuffer;
 		JsonObject& root = jsonBuffer.createObject();
 
-		root["deviceTypeId"] = _espDevice->getDeviceTypeId();
+		root["deviceTypeId"] = DeviceTypeEnumConverter::convertToString(_espDevice->getDeviceTypeId());
 		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
 		root["deviceId"] = _espDevice->getDeviceId();		
 		root["epochTimeUtc"] = _espDevice->getDeviceNTP()->getEpochTimeUTC();

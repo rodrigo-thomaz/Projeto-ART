@@ -70,7 +70,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
             var deviceSensors = deviceSensorsFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceSensors.readIntervalInMilliSeconds = result.readIntervalInMilliSeconds;
             deviceContext.$digest();
-            $rootScope.$emit(deviceSensorsConstant.setReadIntervalInMilliSecondsCompletedEventName + result.deviceSensorsId, result);
+            $rootScope.$emit(deviceSensorsConstant.setReadIntervalInMilliSecondsCompletedEventName + result.deviceId, result);
         };
 
         var onSetPublishIntervalInMilliSecondsCompleted = function (payload) {
