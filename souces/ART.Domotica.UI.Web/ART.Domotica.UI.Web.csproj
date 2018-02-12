@@ -299,6 +299,8 @@
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetFinder.js" />
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetMapper.js" />
     <Content Include="src\js\services\deviceDatasheet\deviceDatasheetService.js" />
+    <Content Include="src\js\services\deviceDatasheet\deviceTypeFinder.js" />
+    <Content Include="src\js\services\deviceDatasheet\deviceTypeService.js" />
     <Content Include="src\js\services\device\deviceDebugFinder.js" />
     <Content Include="src\js\services\device\deviceInApplicationService.js" />
     <Content Include="src\js\services\device\deviceSerialService.js" />

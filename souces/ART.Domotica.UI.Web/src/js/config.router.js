@@ -99,6 +99,9 @@ angular.module('app')
                         'js/services/deviceDatasheet/deviceDatasheetContext.js',
                         'js/services/deviceDatasheet/deviceDatasheetConstants.js',
                         'js/services/deviceDatasheet/deviceDatasheetMapper.js',
+
+                        'js/services/deviceDatasheet/deviceTypeFinder.js',
+                        'js/services/deviceDatasheet/deviceTypeService.js',
                         'js/services/deviceDatasheet/deviceDatasheetFinder.js',                        
                         'js/services/deviceDatasheet/deviceDatasheetService.js',
                         

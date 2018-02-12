@@ -47,6 +47,8 @@ app.factory('contextScope', [
 
     'deviceDatasheetContext',
     'deviceDatasheetMapper',
+    'deviceTypeFinder',
+    'deviceTypeService',
     'deviceDatasheetFinder',
     'deviceDatasheetService',
 
@@ -133,6 +135,8 @@ app.factory('contextScope', [
 
         deviceDatasheetContext,
         deviceDatasheetMapper,
+        deviceTypeFinder,
+        deviceTypeService,
         deviceDatasheetFinder,
         deviceDatasheetService,
 
