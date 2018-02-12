@@ -12,6 +12,7 @@ Licensed under MIT license
 
 #include "DeviceWiFi.h"
 #include "ESPDevice.h"
+#include "../ESPDevice/DeviceTypeEnum.h"
 
 namespace ART
 {
@@ -180,8 +181,9 @@ namespace ART
 		DynamicJsonBuffer jsonBuffer;
 		JsonObject& root = jsonBuffer.createObject();
 
-		root["deviceId"] = _espDevice->getDeviceId();
+		root["deviceTypeId"] = DeviceTypeEnumConverter::convertToString(_espDevice->getDeviceTypeId());
 		root["deviceDatasheetId"] = _espDevice->getDeviceDatasheetId();
+		root["deviceId"] = _espDevice->getDeviceId();		
 		root["wifiQuality"] = _espDevice->getDeviceWiFi()->getQuality();
 		root["epochTimeUtc"] = _espDevice->getDeviceNTP()->getEpochTimeUTC();
 		root["localIPAddress"] = _espDevice->getDeviceWiFi()->getLocalIPAddress();

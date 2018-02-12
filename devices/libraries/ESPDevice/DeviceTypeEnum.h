@@ -8,6 +8,28 @@ namespace ART
 		ESPType = 1,
 		RaspberryType = 2,
 	};
+
+	class DeviceTypeEnumConverter
+	{
+	public:
+
+		static char* convertToString(DeviceTypeEnum deviceType) 
+		{
+			switch (deviceType)
+			{
+			case ART::ESPType:
+				return "ESP";
+			case ART::RaspberryType:
+				return "Raspberry";
+			default:
+				break;
+			}
+		}
+
+	private:
+
+		
+	};
 }
 
 #endif
