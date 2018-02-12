@@ -5,21 +5,21 @@ app.factory('sensorInDeviceFinder', ['$rootScope', 'deviceContext', function ($r
 
     var serviceFactory = {};    
 
-    var getByKey = function (deviceSensorsId, deviceDatasheetId, sensorId, sensorDatasheetId, sensorTypeId) {
+    var getByKey = function (deviceTypeId, deviceDatasheetId, deviceId, sensorId, sensorDatasheetId, sensorTypeId) {
         for (var i = 0; i < context.sensorInDevice.length; i++) {
             var item = context.sensorInDevice[i];
-            if (item.deviceSensorsId === deviceSensorsId && item.deviceDatasheetId === deviceDatasheetId && item.sensorId === sensorId && item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId) {
+            if (item.deviceTypeId === deviceTypeId && item.deviceDatasheetId === deviceDatasheetId && item.deviceId === deviceId && item.sensorId === sensorId && item.sensorDatasheetId === sensorDatasheetId && item.sensorTypeId === sensorTypeId) {
                 return item;
             }
         }
     };
 
-    var getByDeviceSensorsKey = function (deviceSensorsId, deviceDatasheetId) {
+    var getByDeviceSensorsKey = function (deviceTypeId, deviceDatasheetId, deviceId) {
         var result = [];
         for (var i = 0; i < context.sensorInDevice.length; i++) {
-            var sensorInDevice = context.sensorInDevice[i];
-            if (sensorInDevice.deviceSensorsId === deviceSensorsId && sensorInDevice.deviceDatasheetId === deviceDatasheetId) {
-                result.push(sensorInDevice);
+            var item = context.sensorInDevice[i];
+            if (item.deviceTypeId === deviceTypeId && item.deviceDatasheetId === deviceDatasheetId && item.deviceId === deviceId) {
+                result.push(item);
             }
         }
         return result;

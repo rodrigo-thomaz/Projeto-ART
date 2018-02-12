@@ -5,10 +5,10 @@ app.factory('deviceDebugFinder', ['$rootScope', 'deviceContext', function ($root
 
     var serviceFactory = {};      
 
-    var getByKey = function (deviceDebugId, deviceDatasheetId) {
+    var getByKey = function (deviceTypeId, deviceDatasheetId, deviceId) {
         for (var i = 0; i < context.deviceDebug.length; i++) {
             var item = context.deviceDebug[i];
-            if (item.deviceDebugId === deviceDebugId && item.deviceDatasheetId === deviceDatasheetId) {
+            if (item.deviceTypeId === deviceTypeId && item.deviceDatasheetId === deviceDatasheetId && item.deviceId === deviceId) {
                 return item;
             }
         }

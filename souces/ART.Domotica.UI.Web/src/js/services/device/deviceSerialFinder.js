@@ -5,10 +5,10 @@ app.factory('deviceSerialFinder', ['$rootScope', 'deviceContext', function ($roo
 
     var serviceFactory = {};      
 
-    var getByKey = function (deviceSerialId, deviceId, deviceDatasheetId) {
+    var getByKey = function (deviceTypeId, deviceDatasheetId, deviceId) {
         for (var i = 0; i < context.deviceSerial.length; i++) {
             var item = context.deviceSerial[i];
-            if (item.deviceSerialId === deviceSerialId && item.deviceId === deviceId && item.deviceDatasheetId === deviceDatasheetId) {
+            if (item.deviceTypeId === deviceTypeId && item.deviceDatasheetId === deviceDatasheetId && item.deviceId === deviceId) {
                 return item;
             }
         }

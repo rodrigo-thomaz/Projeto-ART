@@ -5,10 +5,10 @@ app.factory('deviceWiFiFinder', ['$rootScope', 'deviceContext', function ($rootS
 
     var serviceFactory = {};      
 
-    var getByKey = function (deviceWiFiId, deviceDatasheetId) {
+    var getByKey = function (deviceTypeId, deviceDatasheetId, deviceId) {
         for (var i = 0; i < context.deviceWiFi.length; i++) {
             var item = context.deviceWiFi[i];
-            if (item.deviceWiFiId === deviceWiFiId && item.deviceDatasheetId === deviceDatasheetId) {
+            if (item.deviceTypeId === deviceTypeId && item.deviceDatasheetId === deviceDatasheetId && item.deviceId === deviceId) {
                 return item;
             }
         }
