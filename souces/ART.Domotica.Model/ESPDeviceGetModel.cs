@@ -1,5 +1,6 @@
 ﻿namespace ART.Domotica.Model
 {
+    using ART.Domotica.Enums;
     using System;
     using System.Collections.Generic;
 
@@ -23,6 +24,11 @@
         }
 
         public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }
