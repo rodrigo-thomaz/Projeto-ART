@@ -1,8 +1,9 @@
 ﻿namespace ART.Domotica.Model
 {
-    using ART.Domotica.Enums;
     using System;
     using System.Collections.Generic;
+
+    using ART.Domotica.Enums;
 
     public class ESPDeviceGetModel
     {
@@ -28,11 +29,6 @@
             get; set;
         }
 
-        public DeviceTypeEnum DeviceTypeId
-        {
-            get; set;
-        }
-
         public DeviceMQGetModel DeviceMQ
         {
             get; set;
@@ -49,6 +45,11 @@
         }
 
         public List<DeviceSerialGetModel> DeviceSerial
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

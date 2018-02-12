@@ -2,11 +2,18 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
+
     public class DeviceDatasheetGetModel
     {
         #region Properties
 
         public Guid DeviceDatasheetId
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

@@ -12,6 +12,7 @@
         public DeviceDatasheetProfile()
         {
             CreateMap<DeviceDatasheet, DeviceDatasheetGetModel>()
+                .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.Name, m => m.MapFrom(x => x.Name))
                 .ForMember(vm => vm.HasDeviceSerial, m => m.MapFrom(x => x.HasDeviceSerial))
