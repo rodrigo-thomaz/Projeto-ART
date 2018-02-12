@@ -12,8 +12,8 @@ app.controller('deviceSerialController', ['$scope', '$rootScope', '$timeout', '$
             $scope.pinRXView = deviceSerial.pinRX;
             $scope.pinTXView = deviceSerial.pinTX;
 
-            clearOnSetEnabledCompleted = $rootScope.$on(deviceSerialConstant.setEnabledCompletedEventName + $scope.deviceSerial.deviceSerialId, onSetEnabledCompleted);
-            clearOnSetPinCompleted = $rootScope.$on(deviceSerialConstant.setPinCompletedEventName + $scope.deviceSerial.deviceSerialId, onSetPinCompleted);
+            clearOnSetEnabledCompleted = $rootScope.$on(deviceSerialConstant.setEnabledCompletedEventName + $scope.deviceSerial.deviceId, onSetEnabledCompleted);
+            clearOnSetPinCompleted = $rootScope.$on(deviceSerialConstant.setPinCompletedEventName + $scope.deviceSerial.deviceId, onSetPinCompleted);
         }
 
         var clearOnSetEnabledCompleted = null;
@@ -45,12 +45,12 @@ app.controller('deviceSerialController', ['$scope', '$rootScope', '$timeout', '$
 
         $scope.changeEnabled = function () {
             if (!$scope.deviceSerial) return;
-            deviceSerialService.setEnabled($scope.deviceSerial.deviceSerialId, $scope.deviceSerial.deviceId, $scope.deviceSerial.deviceDatasheetId, $scope.enabledView);
+            deviceSerialService.setEnabled($scope.deviceSerial.deviceTypeId, $scope.deviceSerial.deviceDatasheetId, $scope.deviceSerial.deviceId, $scope.deviceSerial.deviceSerialId, $scope.enabledView);
         };
 
         $scope.changePin = function (value, direction) {
             if (!$scope.deviceSerial) return;
-            deviceSerialService.setPin($scope.deviceSerial.deviceSerialId, $scope.deviceSerial.deviceId, $scope.deviceSerial.deviceDatasheetId, value, direction);
+            deviceSerialService.setPin($scope.deviceSerial.deviceTypeId, $scope.deviceSerial.deviceDatasheetId, $scope.deviceSerial.deviceId, $scope.deviceSerial.deviceSerialId, value, direction);
         };
 
     }]);

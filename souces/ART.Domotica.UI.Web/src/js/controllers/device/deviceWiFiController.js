@@ -14,9 +14,9 @@ app.controller('deviceWiFiController', ['$scope', '$rootScope', '$timeout', '$lo
             $scope.epochTimeUtcView = deviceWiFi.epochTimeUtc;
             $scope.publishIntervalInMilliSecondsView = deviceWiFi.publishIntervalInMilliSeconds;
 
-            clearOnMessageIoTReceived = $rootScope.$on(deviceWiFiConstant.messageIoTEventName + $scope.deviceWiFi.deviceWiFiId, onMessageIoTReceived);
-            clearOnSetHostNameCompleted = $rootScope.$on(deviceWiFiConstant.setHostNameCompletedEventName + $scope.deviceWiFi.deviceWiFiId, onSetHostNameCompleted);
-            clearOnSetPublishIntervalInMilliSecondsCompleted = $rootScope.$on(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedEventName + $scope.deviceWiFi.deviceWiFiId, onSetPublishIntervalInMilliSecondsCompleted);        
+            clearOnMessageIoTReceived = $rootScope.$on(deviceWiFiConstant.messageIoTEventName + $scope.deviceWiFi.deviceId, onMessageIoTReceived);
+            clearOnSetHostNameCompleted = $rootScope.$on(deviceWiFiConstant.setHostNameCompletedEventName + $scope.deviceWiFi.deviceId, onSetHostNameCompleted);
+            clearOnSetPublishIntervalInMilliSecondsCompleted = $rootScope.$on(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedEventName + $scope.deviceWiFi.deviceId, onSetPublishIntervalInMilliSecondsCompleted);        
         }
 
         var clearOnMessageIoTReceived = null;
@@ -50,12 +50,12 @@ app.controller('deviceWiFiController', ['$scope', '$rootScope', '$timeout', '$lo
 
         $scope.changeHostName = function () {
             if (!$scope.deviceWiFi || !$scope.hostNameView) return;
-            deviceWiFiService.setHostName($scope.deviceWiFi.deviceWiFiId, $scope.deviceWiFi.deviceDatasheetId, $scope.hostNameView);
+            deviceWiFiService.setHostName($scope.deviceWiFi.deviceTypeId, $scope.deviceWiFi.deviceDatasheetId, $scope.deviceWiFi.deviceId, $scope.hostNameView);
         };
 
         $scope.changePublishIntervalInMilliSeconds = function () {
             if (!$scope.deviceWiFi || !$scope.publishIntervalInMilliSecondsView) return;
-            deviceWiFiService.setPublishIntervalInMilliSeconds($scope.deviceWiFi.deviceWiFiId, $scope.deviceWiFi.deviceDatasheetId, $scope.publishIntervalInMilliSecondsView);
+            deviceWiFiService.setPublishIntervalInMilliSeconds($scope.deviceWiFi.deviceTypeId, $scope.deviceWiFi.deviceDatasheetId, $scope.deviceWiFi.deviceId, $scope.publishIntervalInMilliSecondsView);
         };
 
     }]);

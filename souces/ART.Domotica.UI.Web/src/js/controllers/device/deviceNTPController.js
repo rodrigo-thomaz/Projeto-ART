@@ -22,8 +22,8 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
                 })
             }                
 
-            clearOnSetTimeZoneCompleted = $rootScope.$on(deviceNTPConstant.setTimeZoneCompletedEventName + $scope.deviceNTP.deviceNTPId, onSetTimeZoneCompleted);
-            clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + $scope.deviceNTP.deviceNTPId, onSetUpdateIntervalInMilliSecondCompleted);
+            clearOnSetTimeZoneCompleted = $rootScope.$on(deviceNTPConstant.setTimeZoneCompletedEventName + $scope.deviceNTP.deviceId, onSetTimeZoneCompleted);
+            clearOnSetUpdateIntervalInMilliSecondCompleted = $rootScope.$on(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + $scope.deviceNTP.deviceId, onSetUpdateIntervalInMilliSecondCompleted);
         }
 
         var clearOnSetTimeZoneCompleted = null;
@@ -57,12 +57,12 @@ app.controller('deviceNTPController', ['$scope', '$rootScope', '$timeout', '$log
 
         $scope.changeTimeZone = function () {
             if (!$scope.deviceNTP) return;
-            deviceNTPService.setTimeZone($scope.deviceNTP.deviceNTPId, $scope.deviceNTP.deviceDatasheetId, $scope.timeZone.selectedTimeZone.timeZoneId);
+            deviceNTPService.setTimeZone($scope.deviceNTP.deviceTypeId, $scope.deviceNTP.deviceDatasheetId, $scope.deviceNTP.deviceId, $scope.timeZone.selectedTimeZone.timeZoneId);
         };
 
         $scope.changeUpdateIntervalInMilliSecond = function () {
             if (!$scope.deviceNTP || !$scope.updateIntervalInMilliSecondView) return;
-            deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceNTP.deviceNTPId, $scope.deviceNTP.deviceDatasheetId, $scope.updateIntervalInMilliSecondView);
+            deviceNTPService.setUpdateIntervalInMilliSecond($scope.deviceNTP.deviceTypeId, $scope.deviceNTP.deviceDatasheetId, $scope.deviceNTP.deviceId, $scope.updateIntervalInMilliSecondView);
         };
 
     }]);

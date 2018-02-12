@@ -32,13 +32,13 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             initializeShowProfilerViewWatch();
             initializeShowTimeViewWatch();
 
-            clearOnSetRemoteEnabledCompleted = $rootScope.$on(deviceDebugConstant.setRemoteEnabledCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetRemoteEnabledCompleted);
-            clearOnSetResetCmdEnabledCompleted = $rootScope.$on(deviceDebugConstant.setResetCmdEnabledCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetResetCmdEnabledCompleted);
-            clearOnSetSerialEnabledCompleted = $rootScope.$on(deviceDebugConstant.setSerialEnabledCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetSerialEnabledCompleted);
-            clearOnSetShowColorsCompleted = $rootScope.$on(deviceDebugConstant.setShowColorsCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetShowColorsCompleted);
-            clearOnSetShowDebugLevelCompleted = $rootScope.$on(deviceDebugConstant.setShowDebugLevelCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetShowDebugLevelCompleted);
-            clearOnSetShowProfilerCompleted = $rootScope.$on(deviceDebugConstant.setShowProfilerCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetShowProfilerCompleted);
-            clearOnSetShowTimeCompleted = $rootScope.$on(deviceDebugConstant.setShowTimeCompletedEventName + $scope.deviceDebug.deviceDebugId, onSetShowTimeCompleted);
+            clearOnSetRemoteEnabledCompleted = $rootScope.$on(deviceDebugConstant.setRemoteEnabledCompletedEventName + $scope.deviceDebug.deviceId, onSetRemoteEnabledCompleted);
+            clearOnSetResetCmdEnabledCompleted = $rootScope.$on(deviceDebugConstant.setResetCmdEnabledCompletedEventName + $scope.deviceDebug.deviceId, onSetResetCmdEnabledCompleted);
+            clearOnSetSerialEnabledCompleted = $rootScope.$on(deviceDebugConstant.setSerialEnabledCompletedEventName + $scope.deviceDebug.deviceId, onSetSerialEnabledCompleted);
+            clearOnSetShowColorsCompleted = $rootScope.$on(deviceDebugConstant.setShowColorsCompletedEventName + $scope.deviceDebug.deviceId, onSetShowColorsCompleted);
+            clearOnSetShowDebugLevelCompleted = $rootScope.$on(deviceDebugConstant.setShowDebugLevelCompletedEventName + $scope.deviceDebug.deviceId, onSetShowDebugLevelCompleted);
+            clearOnSetShowProfilerCompleted = $rootScope.$on(deviceDebugConstant.setShowProfilerCompletedEventName + $scope.deviceDebug.deviceId, onSetShowProfilerCompleted);
+            clearOnSetShowTimeCompleted = $rootScope.$on(deviceDebugConstant.setShowTimeCompletedEventName + $scope.deviceDebug.deviceId, onSetShowTimeCompleted);
         }
 
         var remoteEnabledViewWatch = null;
@@ -53,8 +53,9 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             remoteEnabledViewWatch = $scope.$watch('remoteEnabledView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 deviceDebugService.setRemoteEnabled(
-                    $scope.deviceDebug.deviceDebugId, 
+                    $scope.deviceDebug.deviceTypeId, 
                     $scope.deviceDebug.deviceDatasheetId, 
+                    $scope.deviceDebug.deviceId, 
                     newValue);
             });
         };
@@ -63,8 +64,9 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             resetCmdEnabledViewWatch = $scope.$watch('resetCmdEnabledView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 deviceDebugService.setResetCmdEnabled(
-                    $scope.deviceDebug.deviceDebugId, 
+                    $scope.deviceDebug.deviceTypeId, 
                     $scope.deviceDebug.deviceDatasheetId, 
+                    $scope.deviceDebug.deviceId, 
                     newValue);
             });
         };
@@ -73,8 +75,9 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             serialEnabledViewWatch = $scope.$watch('serialEnabledView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 deviceDebugService.setSerialEnabled(
-                    $scope.deviceDebug.deviceDebugId, 
+                    $scope.deviceDebug.deviceTypeId, 
                     $scope.deviceDebug.deviceDatasheetId, 
+                    $scope.deviceDebug.deviceId, 
                     newValue);
             });
         };
@@ -83,8 +86,9 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             showColorsViewWatch = $scope.$watch('showColorsView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 deviceDebugService.setShowColors(
-                    $scope.deviceDebug.deviceDebugId, 
+                    $scope.deviceDebug.deviceTypeId, 
                     $scope.deviceDebug.deviceDatasheetId, 
+                    $scope.deviceDebug.deviceId, 
                     newValue);
             });
         };
@@ -93,8 +97,9 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             showDebugLevelViewWatch = $scope.$watch('showDebugLevelView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 deviceDebugService.setShowDebugLevel(
-                    $scope.deviceDebug.deviceDebugId, 
+                    $scope.deviceDebug.deviceTypeId, 
                     $scope.deviceDebug.deviceDatasheetId, 
+                    $scope.deviceDebug.deviceId, 
                     newValue);
             });
         };
@@ -103,8 +108,9 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             showProfilerViewWatch = $scope.$watch('showProfilerView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 deviceDebugService.setShowProfiler(
-                    $scope.deviceDebug.deviceDebugId, 
+                    $scope.deviceDebug.deviceTypeId, 
                     $scope.deviceDebug.deviceDatasheetId, 
+                    $scope.deviceDebug.deviceId, 
                     newValue);
             });
         };
@@ -113,8 +119,9 @@ app.controller('deviceDebugController', ['$scope', '$rootScope', '$timeout', '$l
             showTimeViewWatch = $scope.$watch('showTimeView', function (newValue, oldValue) {
                 if (newValue === oldValue) return;
                 deviceDebugService.setShowTime(
-                    $scope.deviceDebug.deviceDebugId, 
+                    $scope.deviceDebug.deviceTypeId, 
                     $scope.deviceDebug.deviceDatasheetId, 
+                    $scope.deviceDebug.deviceId, 
                     newValue);
             });
         };

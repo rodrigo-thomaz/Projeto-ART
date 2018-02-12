@@ -9,7 +9,7 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
             $scope.sensorInDevice = sensorInDevice;
 
             if ($scope.sensorInDevice.length > 0){
-                clearOnSetOrdinationCompleted = $rootScope.$on(sensorInDeviceConstant.setOrdinationCompletedEventName + $scope.sensorInDevice[0].deviceSensorsId, onSetOrdinationCompleted);
+                clearOnSetOrdinationCompleted = $rootScope.$on(sensorInDeviceConstant.setOrdinationCompletedEventName + $scope.sensorInDevice[0].deviceId, onSetOrdinationCompleted);
             }
         }
 
@@ -34,7 +34,7 @@ app.controller('sensorInDeviceController', ['$scope', '$rootScope', '$timeout', 
             orderChanged: function (event) {
                 var sensorInDevice = event.source.itemScope.sensorInDeviceItem;
                 var ordination = event.dest.index;
-                sensorInDeviceService.setOrdination(sensorInDevice.deviceSensorsId, sensorInDevice.deviceDatasheetId, sensorInDevice.sensorId, sensorInDevice.sensorDatasheetId, sensorInDevice.sensorTypeId, ordination);
+                sensorInDeviceService.setOrdination(sensorInDevice.deviceTypeId, sensorInDevice.deviceDatasheetId, sensorInDevice.deviceId, sensorInDevice.sensorId, sensorInDevice.sensorDatasheetId, sensorInDevice.sensorTypeId, ordination);
             },
             //containment: '#board', //optional param.
             clone: false,//optional param for clone feature.
