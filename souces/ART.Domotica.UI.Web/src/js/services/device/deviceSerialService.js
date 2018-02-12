@@ -22,7 +22,7 @@ app.factory('deviceSerialService', ['$http', '$log', 'ngAuthSettings', '$rootSco
             });
         };
 
-        var setPin = function (deviceSerialId, value, direction) {
+        var setPin = function (deviceTypeId, deviceDatasheetId, deviceId, deviceSerialId, value, direction) {
             var data = {
                 deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
