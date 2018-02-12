@@ -9,6 +9,7 @@
     using ART.Domotica.Repository.Repositories;
     using ART.Domotica.Repository;
     using Autofac;
+    using ART.Domotica.Enums;
 
     public class DeviceSensorsDomain : DomainBase, IDeviceSensorsDomain
     {
@@ -31,9 +32,9 @@
 
         #endregion Constructors
 
-        public async Task<DeviceSensors> SetReadIntervalInMilliSeconds(Guid deviceSensorsId, Guid deviceDatasheetId, long readIntervalInMilliSeconds)
+        public async Task<DeviceSensors> SetReadIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long readIntervalInMilliSeconds)
         {
-            var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId, deviceDatasheetId);
+            var entity = await _deviceSensorsRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -47,9 +48,9 @@
             return entity;
         }
 
-        public async Task<DeviceSensors> SetPublishIntervalInMilliSeconds(Guid deviceSensorsId, Guid deviceDatasheetId, long publishIntervalInMilliSeconds)
+        public async Task<DeviceSensors> SetPublishIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long publishIntervalInMilliSeconds)
         {
-            var entity = await _deviceSensorsRepository.GetByKey(deviceSensorsId, deviceDatasheetId);
+            var entity = await _deviceSensorsRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -63,9 +64,9 @@
             return entity;
         }
 
-        public async Task<DeviceSensors> GetFullByDeviceInApplicationId(Guid applicationId, Guid deviceId, Guid deviceDatasheetId)
+        public async Task<DeviceSensors> GetFullByDeviceInApplicationId(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
-            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId, deviceDatasheetId);
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceTypeId, deviceDatasheetId, deviceId);
 
             if (deviceInApplication == null)
             {

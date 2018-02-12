@@ -14,15 +14,17 @@
         public DeviceSerialProfile()
         {
             CreateMap<DeviceSerial, DeviceSerialSetEnabledModel>()
+                .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
+                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DeviceId))
                 .ForMember(vm => vm.DeviceSerialId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.Enabled, m => m.MapFrom(x => x.Enabled));
 
             CreateMap<DeviceSerialSetPinRequestContract, DeviceSerialSetPinModel>()
+                .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
+                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DeviceId))
                 .ForMember(vm => vm.DeviceSerialId, m => m.MapFrom(x => x.DeviceSerialId))
-                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value))
                 .ForMember(vm => vm.Direction, m => m.MapFrom(x => x.Direction));
 
@@ -36,9 +38,10 @@
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Enabled));
 
             CreateMap<DeviceSerial, DeviceSerialGetModel>()
+                .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
+                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DeviceId))
                 .ForMember(vm => vm.DeviceSerialId, m => m.MapFrom(x => x.Id))
-                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.Index, m => m.MapFrom(x => x.Index))
                 .ForMember(vm => vm.Enabled, m => m.MapFrom(x => x.Enabled))
                 .ForMember(vm => vm.SerialMode, m => m.MapFrom(x => x.SerialMode))

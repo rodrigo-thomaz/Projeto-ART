@@ -105,7 +105,7 @@ namespace ART.Domotica.Worker.Consumers.SI
             var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId, requestContract.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceTypeId, requestContract.DeviceDatasheetId, requestContract.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<UnitMeasurement>, List<UnitMeasurementGetAllForIoTResponseContract>>(data);

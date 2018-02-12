@@ -2,6 +2,8 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
+
     public class DeviceSerialSetEnabledRequestContract
     {
         #region Properties
@@ -17,6 +19,11 @@
         }
 
         public Guid DeviceSerialId
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
@@ -15,7 +16,7 @@
 
         Task<List<ESPDevice>> GetAllByApplicationId(Guid applicationId);
 
-        Task<ESPDevice> GetByKey(Guid deviceId, Guid deviceDatasheetId);
+        Task<ESPDevice> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
         Task<ESPDevice> GetByPin(string pin);
 
@@ -23,7 +24,7 @@
 
         Task<List<string>> GetExistingPins();
 
-        Task<ESPDevice> GetFullByKey(Guid deviceId, Guid deviceDatasheetId);
+        Task<ESPDevice> GetFullByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
         Task<List<ESPDevice>> GetListNotInApplication();
 

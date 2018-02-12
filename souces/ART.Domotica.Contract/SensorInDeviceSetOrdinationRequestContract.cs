@@ -13,7 +13,12 @@
             get; set;
         }
 
-        public Guid DeviceSensorsId
+        public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

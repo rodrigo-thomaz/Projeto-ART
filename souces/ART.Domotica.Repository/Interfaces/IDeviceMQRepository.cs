@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
@@ -10,7 +11,7 @@
     {
         #region Methods
 
-        Task<DeviceMQ> GetByKey(Guid deviceId, Guid deviceDatasheetId);
+        Task<DeviceMQ> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
         #endregion Methods
     }

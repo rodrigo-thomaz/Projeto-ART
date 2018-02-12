@@ -11,6 +11,7 @@
     using ART.Domotica.Repository.Repositories;
     using ART.Domotica.Repository.Interfaces.Globalization;
     using ART.Domotica.Repository.Repositories.Globalization;
+    using ART.Domotica.Enums;
 
     public class DeviceNTPDomain : DomainBase, IDeviceNTPDomain
     {
@@ -35,9 +36,9 @@
 
         #region Methods
 
-        public async Task<DeviceNTP> SetTimeZone(Guid deviceNTPId, Guid deviceDatasheetId, byte timeZoneId)
+        public async Task<DeviceNTP> SetTimeZone(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, byte timeZoneId)
         {
-            var entity = await _deviceNTPRepository.GetByKey(deviceNTPId, deviceDatasheetId);
+            var entity = await _deviceNTPRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -58,9 +59,9 @@
             return entity;
         }
 
-        public async Task<DeviceNTP> SetUpdateIntervalInMilliSecond(Guid deviceNTPId, Guid deviceDatasheetId, long updateIntervalInMilliSecond)
+        public async Task<DeviceNTP> SetUpdateIntervalInMilliSecond(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long updateIntervalInMilliSecond)
         {
-            var entity = await _deviceNTPRepository.GetByKey(deviceNTPId, deviceDatasheetId);
+            var entity = await _deviceNTPRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {

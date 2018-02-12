@@ -32,12 +32,12 @@
 
         #endregion Constructors
 
-        public async Task<SensorInDevice> SetOrdination(Guid deviceSensorsId, Guid deviceDatasheetId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination)
+        public async Task<SensorInDevice> SetOrdination(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination)
         {
-            var entities = await _sensorInDeviceRepository.GetByDeviceSensorsKey(deviceSensorsId, deviceDatasheetId);
+            var entities = await _sensorInDeviceRepository.GetByDeviceSensorsKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             var sensorInDevice = entities
-                .Where(x => x.DeviceSensorsId == deviceSensorsId)
+                .Where(x => x.DeviceSensorsId == deviceId)
                 .Where(x => x.SensorId == sensorId)
                 .Where(x => x.SensorDatasheetId == sensorDatasheetId)
                 .Where(x => x.SensorTypeId == sensorTypeId)

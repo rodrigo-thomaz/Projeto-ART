@@ -41,7 +41,7 @@
                 throw new Exception("Device not found");
             }
 
-            var lastVersionOfDeviceDatasheetBinary = await _deviceDatasheetBinaryRepository.GetLastVersioByDatasheetKey(deviceBinary.DeviceDatasheetId);
+            var lastVersionOfDeviceDatasheetBinary = await _deviceDatasheetBinaryRepository.GetLastVersioByDatasheetKey(deviceBinary.DeviceTypeId, deviceBinary.DeviceDatasheetId);
 
             if (lastVersionOfDeviceDatasheetBinary == null)
             {
@@ -54,7 +54,7 @@
             {                
                 deviceBinary.DeviceDatasheetBinaryId = lastVersionOfDeviceDatasheetBinary.Id;
                 await _deviceBinaryRepository.Update(deviceBinary);
-                var deviceDatasheetBinaryBuffer = await _deviceDatasheetBinaryBufferRepository.GetByKey(deviceBinary.DeviceDatasheetBinaryId, deviceBinary.DeviceDatasheetId);
+                var deviceDatasheetBinaryBuffer = await _deviceDatasheetBinaryBufferRepository.GetByKey(deviceBinary.DeviceTypeId, deviceBinary.DeviceDatasheetId, deviceBinary.DeviceDatasheetBinaryId);
                 result = deviceDatasheetBinaryBuffer.Buffer;
             }
 

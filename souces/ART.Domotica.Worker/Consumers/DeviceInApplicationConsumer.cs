@@ -116,10 +116,10 @@
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             var domain = _componentContext.Resolve<IDeviceInApplicationDomain>();
-            var data = await domain.Remove(applicationMQ.Id, message.Contract.DeviceId, message.Contract.DeviceDatasheetId);
+            var data = await domain.Remove(applicationMQ.Id, message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.Id);
 
             //Enviando para View
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceInApplicationConstants.RemoveViewCompletedQueueName);

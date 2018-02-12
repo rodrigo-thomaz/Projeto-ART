@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
@@ -11,9 +12,9 @@
     {
         #region Methods
 
-        Task<List<DeviceSerial>> GetAllByDeviceKey(Guid deviceId, Guid deviceDatasheetId);
+        Task<List<DeviceSerial>> GetAllByDeviceKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
-        Task<DeviceSerial> GetByKey(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId);
+        Task<DeviceSerial> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid deviceSerialId);
 
         #endregion Methods
     }

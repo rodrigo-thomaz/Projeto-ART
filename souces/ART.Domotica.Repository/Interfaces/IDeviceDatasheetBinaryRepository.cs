@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
@@ -10,9 +11,9 @@
     {
         #region Methods
 
-        Task<DeviceDatasheetBinary> GetByKey(Guid deviceDatasheetBinaryId, Guid deviceDatasheetId);
+        Task<DeviceDatasheetBinary> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceDatasheetBinaryId);
 
-        Task<DeviceDatasheetBinary> GetLastVersioByDatasheetKey(Guid deviceDatasheetId);
+        Task<DeviceDatasheetBinary> GetLastVersioByDatasheetKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId);
 
         #endregion Methods
     }

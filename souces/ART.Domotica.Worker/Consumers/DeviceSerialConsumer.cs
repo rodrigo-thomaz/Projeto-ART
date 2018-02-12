@@ -86,10 +86,10 @@
             var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
 
             var domain = _componentContext.Resolve<IDeviceSerialDomain>();
-            var data = await domain.GetAllByDeviceKey(applicationMQ.Id, requestContract.DeviceId, requestContract.DeviceDatasheetId);
+            var data = await domain.GetAllByDeviceKey(applicationMQ.Id, requestContract.DeviceTypeId, requestContract.DeviceDatasheetId, requestContract.DeviceId);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceId, requestContract.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceTypeId, requestContract.DeviceDatasheetId, requestContract.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<List<DeviceSerial>, List<DeviceSerialGetResponseIoTContract>>(data);
@@ -112,7 +112,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSerialSetEnabledRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceSerialDomain>();
-            var data = await domain.SetEnabled(message.Contract.DeviceSerialId, message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.Enabled);
+            var data = await domain.SetEnabled(message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId, message.Contract.DeviceSerialId, message.Contract.Enabled);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
@@ -124,7 +124,7 @@
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId, viewModel.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceTypeId, viewModel.DeviceDatasheetId, viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DeviceSerialSetEnabledRequestContract, DeviceSerialSetEnabledRequestIoTContract>(message.Contract);
@@ -147,7 +147,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSerialSetPinRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceSerialDomain>();
-            var data = await domain.SetPin(message.Contract.DeviceSerialId, message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.Value, message.Contract.Direction);
+            var data = await domain.SetPin(message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId, message.Contract.DeviceSerialId, message.Contract.Value, message.Contract.Direction);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
@@ -159,7 +159,7 @@
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceId, viewModel.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceTypeId, viewModel.DeviceDatasheetId, viewModel.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<DeviceSerialSetPinRequestContract, DeviceSerialSetPinRequestIoTContract>(message.Contract);

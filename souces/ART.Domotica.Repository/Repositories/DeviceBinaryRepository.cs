@@ -7,6 +7,7 @@
     using ART.Infra.CrossCutting.Repository;
     using System.Linq;
     using System.Data.Entity;
+    using ART.Domotica.Enums;
 
     public class DeviceBinaryRepository : RepositoryBase<ARTDbContext, DeviceBinary>, IDeviceBinaryRepository
     {
@@ -19,9 +20,9 @@
 
         #endregion Constructors
 
-        public async Task<DeviceBinary> GetByKey(Guid deviceBinaryId, Guid deviceDatasheetId)
+        public async Task<DeviceBinary> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
-            return await _context.DeviceBinary.FindAsync(deviceBinaryId, deviceDatasheetId);
+            return await _context.DeviceBinary.FindAsync(deviceTypeId, deviceDatasheetId, deviceId);
         }
 
         public async Task<DeviceBinary> GetByDeviceMacAdresses(string stationMacAddress, string softAPMacAddress)

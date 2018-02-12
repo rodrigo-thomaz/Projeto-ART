@@ -10,7 +10,7 @@
     {
         #region Methods
 
-        Task<SensorInDevice> SetOrdination(Guid deviceSensorsId, Guid deviceDatasheetId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination);
+        Task<SensorInDevice> SetOrdination(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination);
 
         #endregion Methods
     }

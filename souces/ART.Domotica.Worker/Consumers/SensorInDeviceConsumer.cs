@@ -63,7 +63,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<SensorInDeviceSetOrdinationRequestContract>>(e.Body);
             var sensorInDeviceDomain = _componentContext.Resolve<ISensorInDeviceDomain>();
-            var data = await sensorInDeviceDomain.SetOrdination(message.Contract.DeviceSensorsId, message.Contract.DeviceDatasheetId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Ordination);
+            var data = await sensorInDeviceDomain.SetOrdination(message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId, message.Contract.SensorId, message.Contract.SensorDatasheetId, message.Contract.SensorTypeId, message.Contract.Ordination);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
@@ -75,7 +75,7 @@
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceSensorsId, data.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.DeviceSensorsId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorInDevice, SetOrdinationRequestIoTContract>(data);

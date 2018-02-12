@@ -3,25 +3,26 @@
     using System;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
 
     public interface IDeviceDebugDomain
     {
         #region Methods
 
-        Task<DeviceDebug> SetRemoteEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetRemoteEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 
-        Task<DeviceDebug> SetResetCmdEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetResetCmdEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 
-        Task<DeviceDebug> SetSerialEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetSerialEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 
-        Task<DeviceDebug> SetShowColors(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetShowColors(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 
-        Task<DeviceDebug> SetShowDebugLevel(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetShowDebugLevel(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 
-        Task<DeviceDebug> SetShowProfiler(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetShowProfiler(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 
-        Task<DeviceDebug> SetShowTime(Guid deviceDebugId, Guid deviceDatasheetId, bool value);
+        Task<DeviceDebug> SetShowTime(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 
         #endregion Methods
     }

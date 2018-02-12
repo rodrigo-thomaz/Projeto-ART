@@ -70,20 +70,20 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceNTPSetTimeZoneRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceNTPDomain>();
-            var data = await domain.SetTimeZone(message.Contract.DeviceNTPId, message.Contract.DeviceDatasheetId, message.Contract.TimeZoneId);
+            var data = await domain.SetTimeZone(message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId, message.Contract.TimeZoneId);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DeviceNTPSetTimeZoneRequestContract, DeviceNTPSetTimeZoneModel>(message.Contract);
-            viewModel.DeviceNTPId = data.Id;
+            viewModel.DeviceId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceNTPConstants.SetTimeZoneViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceNTPId, viewModel.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.Id);
 
             //Enviando para o Iot
             var iotContract = new SetValueRequestIoTContract<int>(data.TimeZone.UtcTimeOffsetInSecond);
@@ -106,21 +106,21 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceNTPDomain>();
-            var data = await domain.SetUpdateIntervalInMilliSecond(message.Contract.DeviceNTPId, message.Contract.DeviceDatasheetId, message.Contract.UpdateIntervalInMilliSecond);
+            var data = await domain.SetUpdateIntervalInMilliSecond(message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId, message.Contract.UpdateIntervalInMilliSecond);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DeviceNTPSetUpdateIntervalInMilliSecondRequestContract, DeviceNTPSetUpdateIntervalInMilliSecondModel>(message.Contract);
-            viewModel.DeviceNTPId = data.Id;
+            viewModel.DeviceId = data.Id;
             viewModel.DeviceDatasheetId = data.DeviceDatasheetId;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceNTPConstants.SetUpdateIntervalInMilliSecondViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(viewModel.DeviceNTPId, viewModel.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.Id);
 
             //Enviando para o Iot
             var iotContract = new SetValueRequestIoTContract<long>(data.UpdateIntervalInMilliSecond);

@@ -13,8 +13,9 @@
         public DeviceDebugProfile()
         {
             CreateMap<DeviceDebug, DeviceDebugGetModel>()
-                .ForMember(vm => vm.DeviceDebugId, m => m.MapFrom(x => x.Id))
+                .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.RemoteEnabled, m => m.MapFrom(x => x.RemoteEnabled))
                 .ForMember(vm => vm.SerialEnabled, m => m.MapFrom(x => x.SerialEnabled))
                 .ForMember(vm => vm.ResetCmdEnabled, m => m.MapFrom(x => x.ResetCmdEnabled))
@@ -24,8 +25,9 @@
                 .ForMember(vm => vm.ShowColors, m => m.MapFrom(x => x.ShowColors));
 
             CreateMap<DeviceDebugSetValueRequestContract, DeviceDebugSetValueModel>()
-                .ForMember(vm => vm.DeviceDebugId, m => m.MapFrom(x => x.DeviceDebugId))
+                .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
+                .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DeviceId))
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
 
             CreateMap<DeviceDebug, DeviceDebugDetailResponseContract>()

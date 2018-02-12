@@ -7,6 +7,7 @@
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
     using System.Linq;
+    using ART.Domotica.Enums;
 
     public class DeviceSensorsRepository : RepositoryBase<ARTDbContext, DeviceSensors>, IDeviceSensorsRepository
     {
@@ -19,9 +20,9 @@
 
         #endregion Constructors
 
-        public async Task<DeviceSensors> GetByKey(Guid deviceId, Guid deviceDatasheetId)
+        public async Task<DeviceSensors> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
-            return await _context.DeviceSensors.FindAsync(deviceId, deviceDatasheetId);
+            return await _context.DeviceSensors.FindAsync(deviceTypeId, deviceDatasheetId, deviceId);
         }
 
         public async Task<DeviceSensors> GetFullByDeviceId(Guid deviceId)

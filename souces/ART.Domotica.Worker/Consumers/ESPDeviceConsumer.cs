@@ -313,7 +313,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSetLabelRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceBaseDomain>();
-            var data = await domain.SetLabel(message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.Label);
+            var data = await domain.SetLabel(message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId, message.Contract.Label);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
@@ -325,7 +325,7 @@
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.Id);
 
             //Enviando para o Iot
             var iotContract = new SetValueRequestIoTContract<string>(data.Label);

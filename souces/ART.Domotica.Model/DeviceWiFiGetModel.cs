@@ -2,6 +2,8 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
+
     public class DeviceWiFiGetModel
     {
         #region Properties
@@ -11,7 +13,12 @@
             get; set;
         }
 
-        public Guid DeviceWiFiId
+        public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

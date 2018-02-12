@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
@@ -12,7 +13,7 @@
 
         Task<DeviceBinary> GetByDeviceMacAdresses(string stationMacAddress, string softAPMacAddress);
 
-        Task<DeviceBinary> GetByKey(Guid deviceBinaryId, Guid deviceDatasheetId);
+        Task<DeviceBinary> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
         #endregion Methods
     }

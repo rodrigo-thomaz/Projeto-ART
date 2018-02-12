@@ -9,6 +9,7 @@
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
+    using ART.Domotica.Enums;
 
     public class DeviceMQDomain : DomainBase, IDeviceMQDomain
     {
@@ -31,9 +32,9 @@
 
         #region Methods
         
-        public async Task<DeviceMQ> GetByKey(Guid deviceMQId, Guid deviceDatasheetId)
+        public async Task<DeviceMQ> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
-            var data = await _deviceMQRepository.GetByKey(deviceMQId, deviceDatasheetId);
+            var data = await _deviceMQRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (data == null)
             {

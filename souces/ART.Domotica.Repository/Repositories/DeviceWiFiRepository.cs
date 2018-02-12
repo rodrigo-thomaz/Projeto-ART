@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
@@ -17,9 +18,9 @@
 
         #endregion Constructors
 
-        public async Task<DeviceWiFi> GetByKey(Guid deviceId, Guid deviceDatasheetId)
+        public async Task<DeviceWiFi> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
-            return await _context.DeviceWiFi.FindAsync(deviceId, deviceDatasheetId);
+            return await _context.DeviceWiFi.FindAsync(deviceTypeId, deviceDatasheetId, deviceId);
         }
     }
 }

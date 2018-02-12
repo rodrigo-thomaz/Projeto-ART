@@ -3,17 +3,18 @@
     using System;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
 
     public interface IDeviceSensorsDomain
     {
         #region Methods
 
-        Task<DeviceSensors> GetFullByDeviceInApplicationId(Guid applicationId, Guid deviceId, Guid deviceDatasheetId);
+        Task<DeviceSensors> GetFullByDeviceInApplicationId(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
-        Task<DeviceSensors> SetPublishIntervalInMilliSeconds(Guid deviceSensorsId, Guid deviceDatasheetId, long publishIntervalInMilliSeconds);
+        Task<DeviceSensors> SetPublishIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long publishIntervalInMilliSeconds);
 
-        Task<DeviceSensors> SetReadIntervalInMilliSeconds(Guid deviceSensorsId, Guid deviceDatasheetId, long readIntervalInMilliSeconds);
+        Task<DeviceSensors> SetReadIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long readIntervalInMilliSeconds);
 
         #endregion Methods
     }

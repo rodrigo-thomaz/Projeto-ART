@@ -11,13 +11,13 @@
     {
         #region Methods
 
-        Task<List<DeviceSerial>> GetAllByDeviceKey(Guid applicationId, Guid deviceId, Guid deviceDatasheetId);
+        Task<List<DeviceSerial>> GetAllByDeviceKey(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
-        Task<DeviceSerial> GetByKey(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId);
+        Task<DeviceSerial> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid deviceSerialId);
 
-        Task<DeviceSerial> SetEnabled(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId, bool enabled);
+        Task<DeviceSerial> SetEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid deviceSerialId, bool enabled);
 
-        Task<DeviceSerial> SetPin(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId, short value, CommunicationDirection direction);
+        Task<DeviceSerial> SetPin(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid deviceSerialId, short value, CommunicationDirection direction);
 
         #endregion Methods
     }

@@ -5,6 +5,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
@@ -20,16 +21,17 @@
 
         #endregion Constructors
 
-        public async Task<DeviceSerial> GetByKey(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId)
+        public async Task<DeviceSerial> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid deviceSerialId)
         {
-            return await _context.DeviceSerial.FindAsync(deviceSerialId, deviceId, deviceDatasheetId);
+            return await _context.DeviceSerial.FindAsync(deviceTypeId, deviceDatasheetId, deviceId, deviceSerialId);
         }
 
-        public async Task<List<DeviceSerial>> GetAllByDeviceKey(Guid deviceId, Guid deviceDatasheetId)
+        public async Task<List<DeviceSerial>> GetAllByDeviceKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
             return await _context.DeviceSerial
-                .Where(x => x.DeviceId == deviceId)
+                .Where(x => x.DeviceTypeId == deviceTypeId)
                 .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
+                .Where(x => x.DeviceId == deviceId)                
                 .ToListAsync();
         }
     }

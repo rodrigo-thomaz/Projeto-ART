@@ -35,9 +35,9 @@
 
         #region Methods
 
-        public async Task<DeviceSerial> GetByKey(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId)
+        public async Task<DeviceSerial> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid deviceSerialId)
         {
-            var data = await _deviceSerialRepository.GetByKey(deviceSerialId, deviceId, deviceDatasheetId);
+            var data = await _deviceSerialRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId, deviceSerialId);
 
             if (data == null)
             {
@@ -47,21 +47,21 @@
             return data;
         }
 
-        public async Task<List<DeviceSerial>> GetAllByDeviceKey(Guid applicationId, Guid deviceId, Guid deviceDatasheetId)
+        public async Task<List<DeviceSerial>> GetAllByDeviceKey(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
-            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceId, deviceDatasheetId);
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceTypeId, deviceDatasheetId, deviceId);
 
             if (deviceInApplication == null)
             {
                 throw new Exception("DeviceInApplication not found");
             }
 
-            return await _deviceSerialRepository.GetAllByDeviceKey(deviceId, deviceDatasheetId);
+            return await _deviceSerialRepository.GetAllByDeviceKey(deviceTypeId, deviceDatasheetId, deviceId);
         }
 
-        public async Task<DeviceSerial> SetEnabled(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId, bool enabled)
+        public async Task<DeviceSerial> SetEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid deviceSerialId, bool enabled)
         {
-            var entity = await _deviceSerialRepository.GetByKey(deviceSerialId, deviceId, deviceDatasheetId);
+            var entity = await _deviceSerialRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId, deviceSerialId);
 
             if (entity == null)
             {
@@ -75,9 +75,9 @@
             return entity;
         }
 
-        public async Task<DeviceSerial> SetPin(Guid deviceSerialId, Guid deviceId, Guid deviceDatasheetId, short value, CommunicationDirection direction)
+        public async Task<DeviceSerial> SetPin(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid deviceSerialId, short value, CommunicationDirection direction)
         {
-            var entity = await _deviceSerialRepository.GetByKey(deviceSerialId, deviceId, deviceDatasheetId);
+            var entity = await _deviceSerialRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId, deviceSerialId);
 
             if (entity == null)
             {

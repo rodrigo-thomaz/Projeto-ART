@@ -71,20 +71,20 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceWiFiSetHostNameRequestContract>>(e.Body);
             var domain = _componentContext.Resolve<IDeviceWiFiDomain>();
-            var data = await domain.SetHostName(message.Contract.DeviceWiFiId, message.Contract.DeviceDatasheetId, message.Contract.HostName);
+            var data = await domain.SetHostName(message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId, message.Contract.HostName);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
 
             //Enviando para View
             var viewModel = Mapper.Map<DeviceWiFiSetHostNameRequestContract, DeviceWiFiSetHostNameModel>(message.Contract);
-            viewModel.DeviceWiFiId = data.Id;
+            viewModel.DeviceId = data.Id;
             var viewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(viewModel, true);
             var rountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, DeviceWiFiConstants.SetHostNameViewCompletedQueueName);
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.Id);
 
             //Enviando para o Iot
             var iotContract = new SetValueRequestIoTContract<string>(data.HostName);
@@ -108,7 +108,7 @@
             _model.BasicAck(e.DeliveryTag, false);
             var message = SerializationHelpers.DeserializeJsonBufferToType<AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract>>(e.Body);
             var deviceWiFiDomain = _componentContext.Resolve<IDeviceWiFiDomain>();
-            var data = await deviceWiFiDomain.SetPublishIntervalInMilliSeconds(message.Contract.DeviceId, message.Contract.DeviceDatasheetId, message.Contract.IntervalInMilliSeconds);
+            var data = await deviceWiFiDomain.SetPublishIntervalInMilliSeconds(message.Contract.DeviceTypeId, message.Contract.DeviceDatasheetId, message.Contract.DeviceId, message.Contract.IntervalInMilliSeconds);
 
             var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
             var applicationMQ = await applicationMQDomain.GetByApplicationUserId(message);
@@ -120,7 +120,7 @@
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.Id, data.DeviceDatasheetId);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.Id);
 
             //Enviando para o Iot
             var iotContract = new SetValueRequestIoTContract<long>(data.PublishIntervalInMilliSeconds);

@@ -22,6 +22,8 @@
                 .ForMember(vm => vm.ApplicationId, m => m.MapFrom(x => x.DevicesInApplication.Single().ApplicationId));
 
             CreateMap<DeviceBase, DeviceInApplicationRemoveModel>()
+                .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
+                .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id));
         }
 

@@ -23,6 +23,11 @@
             get; set;
         }
 
+        public DeviceTypeEnum DeviceTypeId
+        {
+            get; set;
+        }
+
         public CommunicationDirection Direction
         {
             get; set;

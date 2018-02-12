@@ -9,6 +9,7 @@
     using Autofac;
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
+    using ART.Domotica.Enums;
 
     public class DeviceDebugDomain : DomainBase, IDeviceDebugDomain
     {
@@ -31,9 +32,9 @@
 
         #region Methods        
 
-        public async Task<DeviceDebug> SetRemoteEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetRemoteEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)
         {
-            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+            var entity = await _deviceDebugRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -47,9 +48,9 @@
             return entity;
         }        
 
-        public async Task<DeviceDebug> SetSerialEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetSerialEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)
         {
-            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+            var entity = await _deviceDebugRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -63,9 +64,9 @@
             return entity;
         }
 
-        public async Task<DeviceDebug> SetResetCmdEnabled(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetResetCmdEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)
         {
-            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+            var entity = await _deviceDebugRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -79,9 +80,9 @@
             return entity;
         }        
 
-        public async Task<DeviceDebug> SetShowColors(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetShowColors(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)
         {
-            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+            var entity = await _deviceDebugRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -95,9 +96,9 @@
             return entity;
         }
 
-        public async Task<DeviceDebug> SetShowDebugLevel(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetShowDebugLevel(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)
         {
-            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+            var entity = await _deviceDebugRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -111,9 +112,9 @@
             return entity;
         }
 
-        public async Task<DeviceDebug> SetShowProfiler(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetShowProfiler(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)
         {
-            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+            var entity = await _deviceDebugRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
@@ -127,9 +128,9 @@
             return entity;
         }
 
-        public async Task<DeviceDebug> SetShowTime(Guid deviceDebugId, Guid deviceDatasheetId, bool value)
+        public async Task<DeviceDebug> SetShowTime(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)
         {
-            var entity = await _deviceDebugRepository.GetByKey(deviceDebugId, deviceDatasheetId);
+            var entity = await _deviceDebugRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {

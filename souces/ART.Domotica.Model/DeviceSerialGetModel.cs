@@ -33,6 +33,11 @@
             get; set;
         }
 
+        public DeviceTypeEnum DeviceTypeId
+        {
+            get; set;
+        }
+
         public bool Enabled
         {
             get; set;

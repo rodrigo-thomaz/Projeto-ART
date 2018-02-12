@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using ART.Domotica.Enums;
+
     public class DeviceSensorsGetModel
     {
         #region Properties
@@ -12,7 +14,12 @@
             get; set;
         }
 
-        public Guid DeviceSensorsId
+        public Guid DeviceId
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

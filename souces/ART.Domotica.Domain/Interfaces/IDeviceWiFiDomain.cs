@@ -3,15 +3,16 @@
     using System;
     using System.Threading.Tasks;
 
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
 
     public interface IDeviceWiFiDomain
     {
         #region Methods
 
-        Task<DeviceWiFi> SetHostName(Guid deviceWiFiId, Guid deviceDatasheetId, string hostName);
+        Task<DeviceWiFi> SetHostName(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, string hostName);
 
-        Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(Guid deviceWiFiId, Guid deviceDatasheetId, long publishIntervalInMilliSeconds);
+        Task<DeviceWiFi> SetPublishIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long publishIntervalInMilliSeconds);
 
         #endregion Methods
     }

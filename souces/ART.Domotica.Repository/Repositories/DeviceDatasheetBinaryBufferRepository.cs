@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using ART.Domotica.Enums;
     using ART.Domotica.Repository.Entities;
     using ART.Domotica.Repository.Interfaces;
     using ART.Infra.CrossCutting.Repository;
@@ -17,9 +18,9 @@
 
         #endregion Constructors
 
-        public async Task<DeviceDatasheetBinaryBuffer> GetByKey(Guid deviceDatasheetBinaryBufferId, Guid deviceDatasheetId)
+        public async Task<DeviceDatasheetBinaryBuffer> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceDatasheetBinaryBufferId)
         {
-            return await _context.DeviceDatasheetBinaryBuffer.FindAsync(deviceDatasheetBinaryBufferId, deviceDatasheetId);
+            return await _context.DeviceDatasheetBinaryBuffer.FindAsync(deviceTypeId, deviceDatasheetId, deviceDatasheetBinaryBufferId);
         }
     }
 }

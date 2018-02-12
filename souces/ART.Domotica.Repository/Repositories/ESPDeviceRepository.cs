@@ -9,6 +9,7 @@
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
+    using ART.Domotica.Enums;
 
     public class ESPDeviceRepository : RepositoryBase<ARTDbContext, ESPDevice>, IESPDeviceRepository
     {
@@ -47,7 +48,7 @@
             return data;
         }
 
-        public async Task<ESPDevice> GetFullByKey(Guid deviceId, Guid deviceDatasheetId)
+        public async Task<ESPDevice> GetFullByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
             var data = await _context.ESPDevice
                .Include(x => x.DeviceNTP)
@@ -55,8 +56,9 @@
                .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTriggers))
                .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
                .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily))
-               .Where(x => x.Id == deviceId)
+               .Where(x => x.DeviceTypeId == deviceTypeId)
                .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
+               .Where(x => x.Id == deviceId)               
                .FirstOrDefaultAsync();
 
             return data;
@@ -116,9 +118,9 @@
             return data;
         }
 
-        public async Task<ESPDevice> GetByKey(Guid deviceId, Guid deviceDatasheetId)
+        public async Task<ESPDevice> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
-            return await _context.ESPDevice.FindAsync(deviceId, deviceDatasheetId);
+            return await _context.ESPDevice.FindAsync(deviceTypeId, deviceDatasheetId, deviceId);
         }
 
         #endregion Methods
