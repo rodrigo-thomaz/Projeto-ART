@@ -12,8 +12,8 @@ app.controller('deviceSerialController', ['$scope', '$rootScope', '$timeout', '$
             $scope.pinRXView = deviceSerial.pinRX;
             $scope.pinTXView = deviceSerial.pinTX;
 
-            clearOnSetEnabledCompleted = $rootScope.$on(deviceSerialConstant.setEnabledCompletedEventName + $scope.deviceSerial.deviceId, onSetEnabledCompleted);
-            clearOnSetPinCompleted = $rootScope.$on(deviceSerialConstant.setPinCompletedEventName + $scope.deviceSerial.deviceId, onSetPinCompleted);
+            clearOnSetEnabledCompleted = $rootScope.$on(deviceSerialConstant.setEnabledCompletedEventName + $scope.deviceSerial.deviceSerialId, onSetEnabledCompleted);
+            clearOnSetPinCompleted = $rootScope.$on(deviceSerialConstant.setPinCompletedEventName + $scope.deviceSerial.deviceSerialId, onSetPinCompleted);
         }
 
         var clearOnSetEnabledCompleted = null;
