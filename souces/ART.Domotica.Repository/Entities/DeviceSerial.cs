@@ -63,6 +63,8 @@
             get; set;
         }
 
+        public int BaudRate { get; set; }
+
         #endregion Properties
     }
 }

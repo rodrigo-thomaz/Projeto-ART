@@ -566,6 +566,7 @@
                             PinTX = 1,
                             AllowPinSwapRX = true,
                             AllowPinSwapTX = true,
+                            BaudRate = 9600,
                         },
                         new DeviceSerial
                         {
@@ -576,6 +577,7 @@
                             PinTX = 2,
                             AllowPinSwapRX = null,
                             AllowPinSwapTX = false,
+                            BaudRate = 9600,
                         },
                     },
                 };
@@ -653,6 +655,7 @@
                             PinTX = 1,
                             AllowPinSwapRX = true,
                             AllowPinSwapTX = true,
+                            BaudRate = 9600,
                         },
                         new DeviceSerial
                         {
@@ -663,6 +666,7 @@
                             PinTX = 2,
                             AllowPinSwapRX = null,
                             AllowPinSwapTX = false,
+                            BaudRate = 9600,
                         },
                     };
                 }
@@ -882,6 +886,7 @@
                             PinTX = 1,
                             AllowPinSwapRX = true,
                             AllowPinSwapTX = true,
+                            BaudRate = 9600,
                         },
                         new DeviceSerial
                         {
@@ -892,6 +897,7 @@
                             PinTX = 2,
                             AllowPinSwapRX = null,
                             AllowPinSwapTX = false,
+                            BaudRate = 9600,
                         },
                     },
                 };
@@ -972,6 +978,7 @@
                             PinTX = 1,
                             AllowPinSwapRX = true,
                             AllowPinSwapTX = true,
+                            BaudRate = 9600,
                         },
                         new DeviceSerial
                         {
@@ -982,6 +989,7 @@
                             PinTX = 2,
                             AllowPinSwapRX = null,
                             AllowPinSwapTX = false,
+                            BaudRate = 9600,
                         },
                     };
                 }

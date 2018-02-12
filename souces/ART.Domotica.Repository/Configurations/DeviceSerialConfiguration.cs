@@ -99,6 +99,11 @@
             Property(x => x.PinTX)
                 .HasColumnOrder(9)
                 .IsOptional();
+
+            //BaudRate
+            Property(x => x.BaudRate)
+                .HasColumnOrder(10)
+                .IsRequired();
         }
 
         #endregion Constructors
