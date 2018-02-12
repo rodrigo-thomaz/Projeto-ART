@@ -14,12 +14,13 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.Id,
             });
 
-            //Id
-            Property(x => x.Id)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
@@ -30,13 +31,19 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
             //DeviceBase
             HasRequired(x => x.DeviceDatasheetBinary)
                .WithRequiredDependent(x => x.DeviceDatasheetBinaryBuffer);
 
             //Binary
             Property(x => x.Buffer)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired();
         }
 

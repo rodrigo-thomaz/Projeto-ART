@@ -16,93 +16,107 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
-                x.DeviceId,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.DeviceId,
+                x.Id,
             });
 
-            //Id
-            Property(x => x.Id)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
-                    new IndexAnnotation(new IndexAttribute("IX_Unique_DeviceSerialIndex", 0) { IsUnique = true }));
+                    new IndexAnnotation(new List<IndexAttribute>
+                    {
+                        new IndexAttribute("FK_DeviceSerial_DeviceBase_DeviceTypeId_DeviceId_DeviceDatasheetId", 0),
+                        new IndexAttribute("IX_Unique_DeviceSerialIndex", 0) { IsUnique = true },
+                    }));
 
-            //DeviceId
-            Property(x => x.DeviceId)
+            //DeviceDatasheetId
+            Property(x => x.DeviceDatasheetId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("FK_DeviceSerial_DeviceBase_DeviceId_DeviceDatasheetId", 0),
+                        new IndexAttribute("FK_DeviceSerial_DeviceBase_DeviceTypeId_DeviceId_DeviceDatasheetId", 1),
                         new IndexAttribute("IX_Unique_DeviceSerialIndex", 1) { IsUnique = true },
                     }));
 
-            //DeviceDatasheetId
-            Property(x => x.DeviceDatasheetId)
+            //DeviceId
+            Property(x => x.DeviceId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute("FK_DeviceSerial_DeviceBase_DeviceId_DeviceDatasheetId", 1),
+                        new IndexAttribute("FK_DeviceSerial_DeviceBase_DeviceTypeId_DeviceId_DeviceDatasheetId", 2),
                         new IndexAttribute("IX_Unique_DeviceSerialIndex", 2) { IsUnique = true },
                     }));
 
-            //Index
-            Property(x => x.Index)
+            //Id
+            Property(x => x.Id)
                 .HasColumnOrder(3)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute("IX_Unique_DeviceSerialIndex", 3) { IsUnique = true }));
+
+            //Index
+            Property(x => x.Index)
+                .HasColumnOrder(4)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new IndexAttribute("IX_Unique_DeviceSerialIndex", 4) { IsUnique = true }));
 
             //DeviceBase
             HasRequired(x => x.DeviceBase)
                 .WithMany(x => x.DeviceSerial)
                 .HasForeignKey(x => new
                 {
-                    x.DeviceId,
+                    x.DeviceTypeId,
                     x.DeviceDatasheetId,
+                    x.DeviceId,
                 })
                 .WillCascadeOnDelete(false);
 
             //Enabled
             Property(x => x.Enabled)
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .IsRequired();
 
             //SerialMode
             Property(x => x.SerialMode)
-                .HasColumnOrder(5)
+                .HasColumnOrder(6)
                 .IsRequired();
 
             //AllowPinSwapRX
             Property(x => x.AllowPinSwapRX)
-                .HasColumnOrder(6)
+                .HasColumnOrder(7)
                 .IsOptional();
 
             //AllowPinSwapTX
             Property(x => x.AllowPinSwapTX)
-                .HasColumnOrder(7)
+                .HasColumnOrder(8)
                 .IsOptional();
 
             //PinRX
             Property(x => x.PinRX)
-                .HasColumnOrder(8)
+                .HasColumnOrder(9)
                 .IsOptional();
 
             //PinTX
             Property(x => x.PinTX)
-                .HasColumnOrder(9)
+                .HasColumnOrder(10)
                 .IsOptional();
 
             //BaudRate
             Property(x => x.BaudRate)
-                .HasColumnOrder(10)
+                .HasColumnOrder(11)
                 .IsRequired();
         }
 

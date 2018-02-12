@@ -509,7 +509,7 @@
             {
                 var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
 
-                var deviceDataSheet1 = context.DeviceDatasheet.Find(DeviceDatasheetId_OneWire2Way);
+                var deviceDataSheet1 = context.DeviceDatasheet.Find(DeviceTypeEnum.ESP, DeviceDatasheetId_OneWire2Way);
 
                 espDevice1 = new ESPDevice
                 {
@@ -681,11 +681,12 @@
 
             var sensorInDevice_2_1 = new SensorInDevice
             {
+                DeviceTypeId = espDevice1.DeviceSensors.DeviceTypeId,
+                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
+                DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 SensorId = sensor_2_1.Id,
                 SensorDatasheetId = sensor_2_1.SensorDatasheetId,
                 SensorTypeId = sensor_2_1.SensorTypeId,
-                DeviceSensorsId = espDevice1.DeviceSensors.Id,
-                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
                 Ordination = 0,
             };
 
@@ -693,11 +694,12 @@
 
             var sensorInDevice_2_2 = new SensorInDevice
             {
+                DeviceTypeId = espDevice1.DeviceSensors.DeviceTypeId,
+                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
+                DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 SensorId = sensor_2_2.Id,
                 SensorDatasheetId = sensor_2_2.SensorDatasheetId,
                 SensorTypeId = sensor_2_2.SensorTypeId,
-                DeviceSensorsId = espDevice1.DeviceSensors.Id,
-                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
                 Ordination = 1,
             };
 
@@ -705,11 +707,12 @@
 
             var sensorInDevice_3_1 = new SensorInDevice
             {
+                DeviceTypeId = espDevice1.DeviceSensors.DeviceTypeId,
+                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
+                DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 SensorId = sensor_3_1.Id,
                 SensorDatasheetId = sensor_3_1.SensorDatasheetId,
                 SensorTypeId = sensor_3_1.SensorTypeId,
-                DeviceSensorsId = espDevice1.DeviceSensors.Id,
-                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
                 Ordination = 2,
             };
 
@@ -717,11 +720,12 @@
 
             var sensorInDevice_3_2 = new SensorInDevice
             {
+                DeviceTypeId = espDevice1.DeviceSensors.DeviceTypeId,
+                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
+                DeviceSensorsId = espDevice1.DeviceSensors.Id,
                 SensorId = sensor_3_2.Id,
                 SensorDatasheetId = sensor_3_2.SensorDatasheetId,
                 SensorTypeId = sensor_3_2.SensorTypeId,
-                DeviceSensorsId = espDevice1.DeviceSensors.Id,
-                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
                 Ordination = 3,
             };
 
@@ -829,7 +833,7 @@
             {
                 var timeZoneBrasilia = context.TimeZone.First(x => x.UtcTimeOffsetInSecond == -7200);
 
-                var deviceDataSheet2 = context.DeviceDatasheet.Find(DeviceDatasheetId_Ultrasonic_1Way);
+                var deviceDataSheet2 = context.DeviceDatasheet.Find(DeviceTypeEnum.ESP, DeviceDatasheetId_Ultrasonic_1Way);
 
                 espDevice2 = new ESPDevice
                 {
@@ -1004,11 +1008,12 @@
 
             var sensorUltrassonicInDevice2 = new SensorInDevice
             {
+                DeviceTypeId = espDevice2.DeviceSensors.DeviceTypeId,
+                DeviceDatasheetId = espDevice2.DeviceSensors.DeviceDatasheetId,
+                DeviceSensorsId = espDevice2.DeviceSensors.Id,
                 SensorId = sensor_Ultrassomic.Id,
                 SensorDatasheetId = sensor_Ultrassomic.SensorDatasheetId,
                 SensorTypeId = sensor_Ultrassomic.SensorTypeId,
-                DeviceSensorsId = espDevice2.DeviceSensors.Id,
-                DeviceDatasheetId = espDevice2.DeviceSensors.DeviceDatasheetId,
                 Ordination = 0,
             };
 
@@ -1031,6 +1036,7 @@
             {
                 deviceDatasheetBinaries.Add(new DeviceDatasheetBinary
                 {
+                    DeviceTypeId = item.DeviceTypeId,
                     DeviceDatasheetId = item.Id,
                     Version = RandonHelper.RandomString(5),
                     DeviceDatasheetBinaryBuffer = new DeviceDatasheetBinaryBuffer
@@ -1051,10 +1057,11 @@
 
                 espDevice1.DeviceBinary = new DeviceBinary
                 {
-                    DeviceDatasheetBinaryId = deviceDatasheetBinary.Id,
-                    UpdateDate = DateTime.Now,
+                    DeviceTypeId = espDevice1.DeviceTypeId,
                     DeviceDatasheetId = espDevice1.DeviceDatasheetId,
                     Id = espDevice1.Id,
+                    DeviceDatasheetBinaryId = deviceDatasheetBinary.Id,
+                    UpdateDate = DateTime.Now,
                 };
             }
 
@@ -1064,10 +1071,11 @@
 
                 espDevice2.DeviceBinary = new DeviceBinary
                 {
-                    DeviceDatasheetBinaryId = deviceDatasheetBinary.Id,
-                    UpdateDate = DateTime.Now,
+                    DeviceTypeId = espDevice2.DeviceTypeId,
                     DeviceDatasheetId = espDevice2.DeviceDatasheetId,
                     Id = espDevice2.Id,
+                    DeviceDatasheetBinaryId = deviceDatasheetBinary.Id,
+                    UpdateDate = DateTime.Now,
                 };
             }
 
@@ -1192,19 +1200,20 @@
 
             foreach (var line in lines)
             {
-                var deviceDatasheetId = Guid.Parse(line[0]);
-                var name = line[1];
-                var hasDeviceSerial = bool.Parse(line[2]);
-                var hasDeviceSensors = bool.Parse(line[3]);
+                var deviceTypeId = (DeviceTypeEnum)Enum.Parse(typeof(DeviceTypeEnum), line[0]);
+                var deviceDatasheetId = Guid.Parse(line[1]);
+                var name = line[2];
+                var hasDeviceSerial = bool.Parse(line[3]);
+                var hasDeviceSensors = bool.Parse(line[4]);
 
                 var entity = context.DeviceDatasheet
-                    .Where(x => x.Id == deviceDatasheetId)
-                    .SingleOrDefault();
+                    .Find(deviceTypeId, deviceDatasheetId);
 
                 if (entity == null)
                 {
                     entity = new DeviceDatasheet
                     {
+                        DeviceTypeId = deviceTypeId,
                         Id = deviceDatasheetId,
                         Name = name,
                         HasDeviceSerial = hasDeviceSerial,
@@ -1233,8 +1242,7 @@
                 var name = line[1];
 
                 var entity = context.DeviceType
-                    .Where(x => x.Id == deviceTypeId)
-                    .SingleOrDefault();
+                    .Find(deviceTypeId);
 
                 if (entity == null)
                 {

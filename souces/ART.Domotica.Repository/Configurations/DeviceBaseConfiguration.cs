@@ -14,14 +14,15 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.Id,
             });
 
-            //Id
-            Property(x => x.Id)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //DeviceDatasheetId
@@ -30,21 +31,31 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+                .IsRequired();
+
             //DeviceDatasheet
             HasRequired(x => x.DeviceDatasheet)
                 .WithMany(x => x.DevicesBase)
-                .HasForeignKey(x => x.DeviceDatasheetId)
+                .HasForeignKey(x => new
+                {
+                    x.DeviceTypeId,
+                    x.DeviceDatasheetId,
+                })
                 .WillCascadeOnDelete(false);
 
             //Label
             Property(x => x.Label)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .HasMaxLength(50)
                 .IsRequired();
 
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .IsRequired();
         }
 

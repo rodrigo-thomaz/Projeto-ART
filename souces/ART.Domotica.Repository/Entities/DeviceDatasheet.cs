@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
 
+    using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
     public class DeviceDatasheet : IEntity<Guid>
@@ -15,6 +16,16 @@
         }
 
         public ICollection<DeviceBase> DevicesBase
+        {
+            get; set;
+        }
+
+        public DeviceType DeviceType
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

@@ -15,12 +15,13 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.Id,
             });
 
-            //Id
-            Property(x => x.Id)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
@@ -28,6 +29,13 @@
             //DeviceDatasheetId
             Property(x => x.DeviceDatasheetId)
                 .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //DeviceBase
@@ -36,7 +44,7 @@
 
             //StationMacAddress
             Property(x => x.StationMacAddress)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()
@@ -47,7 +55,7 @@
 
             //SoftAPMacAddress
             Property(x => x.SoftAPMacAddress)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()
@@ -58,13 +66,13 @@
 
             //HostName
             Property(x => x.HostName)
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .HasMaxLength(255)
                 .IsRequired();
 
             //PublishIntervalInMilliSeconds
             Property(x => x.PublishIntervalInMilliSeconds)
-                .HasColumnOrder(5)
+                .HasColumnOrder(6)
                 .IsRequired();
         }
 

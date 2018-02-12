@@ -183,69 +183,9 @@
     <Compile Include="Interfaces\Globalization\ITimeZoneRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementRepository.cs" />
     <Compile Include="Interfaces\SI\IUnitMeasurementTypeRepository.cs" />
-    <Compile Include="Migrations\201802011449159_InitialCreate01.cs" />
-    <Compile Include="Migrations\201802011449159_InitialCreate01.Designer.cs">
-      <DependentUpon>201802011449159_InitialCreate01.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802070055363_InitialCreate02.cs" />
-    <Compile Include="Migrations\201802070055363_InitialCreate02.Designer.cs">
-      <DependentUpon>201802070055363_InitialCreate02.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802081343563_InitialCreate03.cs" />
-    <Compile Include="Migrations\201802081343563_InitialCreate03.Designer.cs">
-      <DependentUpon>201802081343563_InitialCreate03.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101411144_InitialCreate04.cs" />
-    <Compile Include="Migrations\201802101411144_InitialCreate04.Designer.cs">
-      <DependentUpon>201802101411144_InitialCreate04.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101436103_InitialCreate06.cs" />
-    <Compile Include="Migrations\201802101436103_InitialCreate06.Designer.cs">
-      <DependentUpon>201802101436103_InitialCreate06.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101441141_InitialCreate07.cs" />
-    <Compile Include="Migrations\201802101441141_InitialCreate07.Designer.cs">
-      <DependentUpon>201802101441141_InitialCreate07.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101456128_InitialCreate08.cs" />
-    <Compile Include="Migrations\201802101456128_InitialCreate08.Designer.cs">
-      <DependentUpon>201802101456128_InitialCreate08.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101821547_InitialCreate09.cs" />
-    <Compile Include="Migrations\201802101821547_InitialCreate09.Designer.cs">
-      <DependentUpon>201802101821547_InitialCreate09.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802101914271_InitialCreate10.cs" />
-    <Compile Include="Migrations\201802101914271_InitialCreate10.Designer.cs">
-      <DependentUpon>201802101914271_InitialCreate10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802102021383_InitialCreate11.cs" />
-    <Compile Include="Migrations\201802102021383_InitialCreate11.Designer.cs">
-      <DependentUpon>201802102021383_InitialCreate11.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802102036356_InitialCreate12.cs" />
-    <Compile Include="Migrations\201802102036356_InitialCreate12.Designer.cs">
-      <DependentUpon>201802102036356_InitialCreate12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802111306534_InitialCreate13.cs" />
-    <Compile Include="Migrations\201802111306534_InitialCreate13.Designer.cs">
-      <DependentUpon>201802111306534_InitialCreate13.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802111329387_InitialCreate14.cs" />
-    <Compile Include="Migrations\201802111329387_InitialCreate14.Designer.cs">
-      <DependentUpon>201802111329387_InitialCreate14.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802111803148_InitialCreate15.cs" />
-    <Compile Include="Migrations\201802111803148_InitialCreate15.Designer.cs">
-      <DependentUpon>201802111803148_InitialCreate15.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802111838359_InitialCreate16.cs" />
-    <Compile Include="Migrations\201802111838359_InitialCreate16.Designer.cs">
-      <DependentUpon>201802111838359_InitialCreate16.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802120054218_InitialCreate17.cs" />
-    <Compile Include="Migrations\201802120054218_InitialCreate17.Designer.cs">
-      <DependentUpon>201802120054218_InitialCreate17.cs</DependentUpon>
+    <Compile Include="Migrations\201802120421317_InitialCreate01.cs" />
+    <Compile Include="Migrations\201802120421317_InitialCreate01.Designer.cs">
+      <DependentUpon>201802120421317_InitialCreate01.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
@@ -340,53 +280,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802011449159_InitialCreate01.resx">
-      <DependentUpon>201802011449159_InitialCreate01.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802070055363_InitialCreate02.resx">
-      <DependentUpon>201802070055363_InitialCreate02.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802081343563_InitialCreate03.resx">
-      <DependentUpon>201802081343563_InitialCreate03.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101411144_InitialCreate04.resx">
-      <DependentUpon>201802101411144_InitialCreate04.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101436103_InitialCreate06.resx">
-      <DependentUpon>201802101436103_InitialCreate06.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101441141_InitialCreate07.resx">
-      <DependentUpon>201802101441141_InitialCreate07.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101456128_InitialCreate08.resx">
-      <DependentUpon>201802101456128_InitialCreate08.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101821547_InitialCreate09.resx">
-      <DependentUpon>201802101821547_InitialCreate09.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802101914271_InitialCreate10.resx">
-      <DependentUpon>201802101914271_InitialCreate10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802102021383_InitialCreate11.resx">
-      <DependentUpon>201802102021383_InitialCreate11.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802102036356_InitialCreate12.resx">
-      <DependentUpon>201802102036356_InitialCreate12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802111306534_InitialCreate13.resx">
-      <DependentUpon>201802111306534_InitialCreate13.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802111329387_InitialCreate14.resx">
-      <DependentUpon>201802111329387_InitialCreate14.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802111803148_InitialCreate15.resx">
-      <DependentUpon>201802111803148_InitialCreate15.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802111838359_InitialCreate16.resx">
-      <DependentUpon>201802111838359_InitialCreate16.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802120054218_InitialCreate17.resx">
-      <DependentUpon>201802120054218_InitialCreate17.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802120421317_InitialCreate01.resx">
+      <DependentUpon>201802120421317_InitialCreate01.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

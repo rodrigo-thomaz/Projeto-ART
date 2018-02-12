@@ -17,12 +17,13 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.Id,
             });
 
-            //Id
-            Property(x => x.Id)
+            // DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
                 .IsRequired();
 
@@ -31,9 +32,14 @@
                 .HasColumnOrder(1)
                 .IsRequired();
 
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(2)
+                .IsRequired();
+
             //LanMacAddress
             Property(x => x.LanMacAddress)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()
@@ -42,7 +48,7 @@
 
             //WLanMacAddress
             Property(x => x.WLanMacAddress)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .HasMaxLength(17)
                 .IsFixedLength()
                 .IsRequired()

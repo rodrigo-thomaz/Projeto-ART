@@ -8,10 +8,11 @@ namespace ART.Domotica.Repository.Migrations
 
         public override void Down()
         {
-            DropForeignKey("dbo.RaspberryDevice", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
-            DropForeignKey("dbo.ESPDevice", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceInApplication", new[] { "DeviceId", "DeviceDatasheetId" }, "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceWiFi", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.RaspberryDevice", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.ESPDevice", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceInApplication", new[] { "DeviceTypeId", "DeviceDatasheetId", "DeviceId" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceWiFi", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceSerial", new[] { "DeviceTypeId", "DeviceDatasheetId", "DeviceId" }, "dbo.DeviceBase");
             DropForeignKey("dbo.SensorInDevice", new[] { "SensorId", "SensorDatasheetId", "SensorTypeId" }, "dbo.Sensor");
             DropForeignKey("dbo.SensorTrigger", new[] { "SensorId", "SensorDatasheetId", "SensorTypeId" }, "dbo.Sensor");
             DropForeignKey("dbo.SensorTempDSFamily", "SensorTempDSFamilyResolutionId", "dbo.SensorTempDSFamilyResolution");
@@ -36,31 +37,34 @@ namespace ART.Domotica.Repository.Migrations
             DropForeignKey("Locale.Country", "ContinentId", "Locale.Continent");
             DropForeignKey("SI.NumericalScale", "NumericalScalePrefixId", "SI.NumericalScalePrefix");
             DropForeignKey("dbo.SensorDatasheetUnitMeasurementDefault", new[] { "Id", "SensorTypeId" }, "dbo.SensorDatasheet");
-            DropForeignKey("dbo.SensorInDevice", new[] { "DeviceSensorsId", "DeviceDatasheetId" }, "dbo.DeviceSensors");
-            DropForeignKey("dbo.DeviceSensors", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.SensorInDevice", new[] { "DeviceTypeId", "DeviceDatasheetId", "DeviceSensorsId" }, "dbo.DeviceSensors");
+            DropForeignKey("dbo.DeviceSensors", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceNTP", "TimeZoneId", "Globalization.TimeZone");
-            DropForeignKey("dbo.DeviceNTP", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceMQ", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceDebug", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
-            DropForeignKey("dbo.DeviceBase", "DeviceDatasheetId", "dbo.DeviceDatasheet");
-            DropForeignKey("dbo.DeviceBinary", new[] { "DeviceDatasheetBinaryId", "DeviceDatasheetId" }, "dbo.DeviceDatasheetBinary");
-            DropForeignKey("dbo.DeviceDatasheetBinaryBuffer", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceDatasheetBinary");
-            DropForeignKey("dbo.DeviceDatasheetBinary", "DeviceDatasheetId", "dbo.DeviceDatasheet");
-            DropForeignKey("dbo.DeviceBinary", new[] { "Id", "DeviceDatasheetId" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceNTP", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceMQ", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceDebug", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceBase");
+            DropForeignKey("dbo.DeviceBase", new[] { "DeviceTypeId", "DeviceDatasheetId" }, "dbo.DeviceDatasheet");
+            DropForeignKey("dbo.DeviceBinary", new[] { "DeviceTypeId", "DeviceDatasheetId", "DeviceDatasheetBinaryId" }, "dbo.DeviceDatasheetBinary");
+            DropForeignKey("dbo.DeviceDatasheetBinaryBuffer", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceDatasheetBinary");
+            DropForeignKey("dbo.DeviceDatasheetBinary", new[] { "DeviceTypeId", "DeviceDatasheetId" }, "dbo.DeviceDatasheet");
+            DropForeignKey("dbo.DeviceDatasheet", "DeviceTypeId", "dbo.DeviceType");
+            DropForeignKey("dbo.DeviceBinary", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" }, "dbo.DeviceBase");
             DropForeignKey("dbo.DeviceInApplication", "CreateByApplicationUserId", "dbo.ApplicationUser");
             DropForeignKey("dbo.DeviceInApplication", "ApplicationId", "dbo.Application");
             DropForeignKey("dbo.ApplicationUser", "ApplicationId", "dbo.Application");
             DropForeignKey("dbo.ApplicationMQ", "Id", "dbo.Application");
             DropIndex("dbo.RaspberryDevice", new[] { "WLanMacAddress" });
             DropIndex("dbo.RaspberryDevice", new[] { "LanMacAddress" });
-            DropIndex("dbo.RaspberryDevice", new[] { "Id", "DeviceDatasheetId" });
+            DropIndex("dbo.RaspberryDevice", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
             DropIndex("dbo.ESPDevice", new[] { "Pin" });
             DropIndex("dbo.ESPDevice", new[] { "FlashChipId" });
             DropIndex("dbo.ESPDevice", new[] { "ChipId" });
-            DropIndex("dbo.ESPDevice", new[] { "Id", "DeviceDatasheetId" });
+            DropIndex("dbo.ESPDevice", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
             DropIndex("dbo.DeviceWiFi", new[] { "SoftAPMacAddress" });
             DropIndex("dbo.DeviceWiFi", new[] { "StationMacAddress" });
-            DropIndex("dbo.DeviceWiFi", new[] { "Id", "DeviceDatasheetId" });
+            DropIndex("dbo.DeviceWiFi", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
+            DropIndex("dbo.DeviceSerial", "IX_Unique_DeviceSerialIndex");
+            DropIndex("dbo.DeviceSerial", "FK_DeviceSerial_DeviceBase_DeviceTypeId_DeviceId_DeviceDatasheetId");
             DropIndex("dbo.SensorTrigger", new[] { "SensorId", "SensorDatasheetId", "SensorTypeId" });
             DropIndex("dbo.SensorTempDSFamilyResolution", new[] { "Bits" });
             DropIndex("dbo.SensorTempDSFamilyResolution", new[] { "Name" });
@@ -97,24 +101,26 @@ namespace ART.Domotica.Repository.Migrations
             DropIndex("dbo.SensorDatasheet", new[] { "SensorTypeId" });
             DropIndex("dbo.Sensor", new[] { "SensorDatasheetId", "SensorTypeId" });
             DropIndex("dbo.SensorInDevice", "IX_Unique_SensorInDevice");
-            DropIndex("dbo.SensorInDevice", new[] { "DeviceSensorsId", "DeviceDatasheetId" });
-            DropIndex("dbo.DeviceSensors", new[] { "Id", "DeviceDatasheetId" });
+            DropIndex("dbo.SensorInDevice", new[] { "DeviceTypeId", "DeviceDatasheetId", "DeviceSensorsId" });
+            DropIndex("dbo.DeviceSensors", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
             DropIndex("dbo.DeviceNTP", new[] { "TimeZoneId" });
-            DropIndex("dbo.DeviceNTP", new[] { "Id", "DeviceDatasheetId" });
+            DropIndex("dbo.DeviceNTP", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
             DropIndex("dbo.DeviceMQ", new[] { "Topic" });
             DropIndex("dbo.DeviceMQ", new[] { "ClientId" });
             DropIndex("dbo.DeviceMQ", new[] { "Password" });
             DropIndex("dbo.DeviceMQ", new[] { "User" });
-            DropIndex("dbo.DeviceMQ", new[] { "Id", "DeviceDatasheetId" });
-            DropIndex("dbo.DeviceDebug", new[] { "Id", "DeviceDatasheetId" });
-            DropIndex("dbo.DeviceDatasheetBinaryBuffer", new[] { "Id", "DeviceDatasheetId" });
+            DropIndex("dbo.DeviceMQ", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
+            DropIndex("dbo.DeviceDebug", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
+            DropIndex("dbo.DeviceDatasheetBinaryBuffer", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
+            DropIndex("dbo.DeviceType", new[] { "Name" });
             DropIndex("dbo.DeviceDatasheet", new[] { "Name" });
-            DropIndex("dbo.DeviceDatasheetBinary", new[] { "DeviceDatasheetId" });
-            DropIndex("dbo.DeviceBinary", new[] { "DeviceDatasheetBinaryId", "DeviceDatasheetId" });
-            DropIndex("dbo.DeviceBinary", new[] { "Id", "DeviceDatasheetId" });
-            DropIndex("dbo.DeviceBase", new[] { "DeviceDatasheetId" });
+            DropIndex("dbo.DeviceDatasheet", new[] { "DeviceTypeId" });
+            DropIndex("dbo.DeviceDatasheetBinary", new[] { "DeviceTypeId", "DeviceDatasheetId" });
+            DropIndex("dbo.DeviceBinary", new[] { "DeviceTypeId", "DeviceDatasheetId", "DeviceDatasheetBinaryId" });
+            DropIndex("dbo.DeviceBinary", new[] { "DeviceTypeId", "DeviceDatasheetId", "Id" });
+            DropIndex("dbo.DeviceBase", new[] { "DeviceTypeId", "DeviceDatasheetId" });
             DropIndex("dbo.DeviceInApplication", new[] { "CreateByApplicationUserId" });
-            DropIndex("dbo.DeviceInApplication", "IX_Unique_DeviceId");
+            DropIndex("dbo.DeviceInApplication", "IX_Unique_DeviceKey");
             DropIndex("dbo.DeviceInApplication", new[] { "ApplicationId" });
             DropIndex("dbo.ApplicationUser", new[] { "ApplicationId" });
             DropIndex("dbo.ApplicationMQ", new[] { "Topic" });
@@ -123,6 +129,7 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.RaspberryDevice");
             DropTable("dbo.ESPDevice");
             DropTable("dbo.DeviceWiFi");
+            DropTable("dbo.DeviceSerial");
             DropTable("dbo.SensorTrigger");
             DropTable("dbo.SensorTempDSFamilyResolution");
             DropTable("dbo.SensorTempDSFamily");
@@ -149,6 +156,7 @@ namespace ART.Domotica.Repository.Migrations
             DropTable("dbo.DeviceMQ");
             DropTable("dbo.DeviceDebug");
             DropTable("dbo.DeviceDatasheetBinaryBuffer");
+            DropTable("dbo.DeviceType");
             DropTable("dbo.DeviceDatasheet");
             DropTable("dbo.DeviceDatasheetBinary");
             DropTable("dbo.DeviceBinary");
@@ -212,65 +220,84 @@ namespace ART.Domotica.Repository.Migrations
                 c => new
                     {
                         ApplicationId = c.Guid(nullable: false),
-                        DeviceId = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        DeviceId = c.Guid(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                         CreateByApplicationUserId = c.Guid(nullable: false),
                     })
-                .PrimaryKey(t => new { t.ApplicationId, t.DeviceId, t.DeviceDatasheetId })
+                .PrimaryKey(t => new { t.ApplicationId, t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceId })
                 .ForeignKey("dbo.Application", t => t.ApplicationId)
                 .ForeignKey("dbo.ApplicationUser", t => t.CreateByApplicationUserId)
-                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceId, t.DeviceDatasheetId })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceId })
                 .Index(t => t.ApplicationId)
-                .Index(t => new { t.DeviceId, t.DeviceDatasheetId }, unique: true, name: "IX_Unique_DeviceId")
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceId }, unique: true, name: "IX_Unique_DeviceKey")
                 .Index(t => t.CreateByApplicationUserId);
 
             CreateTable(
                 "dbo.DeviceBase",
                 c => new
                     {
-                        Id = c.Guid(nullable: false, identity: true),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false, identity: true),
                         Label = c.String(nullable: false, maxLength: 50),
                         CreateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceDatasheet", t => t.DeviceDatasheetId)
-                .Index(t => t.DeviceDatasheetId);
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceDatasheet", t => new { t.DeviceTypeId, t.DeviceDatasheetId })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId });
 
             CreateTable(
                 "dbo.DeviceBinary",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
-                        DeviceDatasheetBinaryId = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        DeviceDatasheetBinaryId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         UpdateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceDatasheetBinary", t => new { t.DeviceDatasheetBinaryId, t.DeviceDatasheetId })
-                .Index(t => new { t.Id, t.DeviceDatasheetId })
-                .Index(t => new { t.DeviceDatasheetBinaryId, t.DeviceDatasheetId });
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceDatasheetBinary", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceDatasheetBinaryId })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceDatasheetBinaryId });
 
             CreateTable(
                 "dbo.DeviceDatasheetBinary",
                 c => new
                     {
-                        Id = c.Guid(nullable: false, identity: true),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false, identity: true),
                         Version = c.String(nullable: false),
                         CreateDate = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceDatasheet", t => t.DeviceDatasheetId)
-                .Index(t => t.DeviceDatasheetId);
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceDatasheet", t => new { t.DeviceTypeId, t.DeviceDatasheetId })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId });
 
             CreateTable(
                 "dbo.DeviceDatasheet",
                 c => new
                     {
+                        DeviceTypeId = c.Byte(nullable: false),
                         Id = c.Guid(nullable: false),
+                        Name = c.String(nullable: false, maxLength: 50),
+                        HasDeviceSerial = c.Boolean(nullable: false),
+                        HasDeviceSensors = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.DeviceTypeId, t.Id })
+                .ForeignKey("dbo.DeviceType", t => t.DeviceTypeId)
+                .Index(t => t.DeviceTypeId)
+                .Index(t => t.Name, unique: true);
+
+            CreateTable(
+                "dbo.DeviceType",
+                c => new
+                    {
+                        Id = c.Byte(nullable: false),
                         Name = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Id)
@@ -280,20 +307,22 @@ namespace ART.Domotica.Repository.Migrations
                 "dbo.DeviceDatasheetBinaryBuffer",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         Buffer = c.Binary(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceDatasheetBinary", t => new { t.Id, t.DeviceDatasheetId })
-                .Index(t => new { t.Id, t.DeviceDatasheetId });
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceDatasheetBinary", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id });
 
             CreateTable(
                 "dbo.DeviceDebug",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         RemoteEnabled = c.Boolean(nullable: false),
                         SerialEnabled = c.Boolean(nullable: false),
                         ResetCmdEnabled = c.Boolean(nullable: false),
@@ -302,24 +331,25 @@ namespace ART.Domotica.Repository.Migrations
                         ShowProfiler = c.Boolean(nullable: false),
                         ShowColors = c.Boolean(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
-                .Index(t => new { t.Id, t.DeviceDatasheetId });
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id });
 
             CreateTable(
                 "dbo.DeviceMQ",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         User = c.String(nullable: false, maxLength: 12),
                         Password = c.String(nullable: false, maxLength: 12),
                         ClientId = c.String(nullable: false, maxLength: 32),
                         Topic = c.String(nullable: false, maxLength: 32),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
-                .Index(t => new { t.Id, t.DeviceDatasheetId })
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
                 .Index(t => t.User, unique: true)
                 .Index(t => t.Password, unique: true)
                 .Index(t => t.ClientId, unique: true)
@@ -329,15 +359,16 @@ namespace ART.Domotica.Repository.Migrations
                 "dbo.DeviceNTP",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         TimeZoneId = c.Byte(nullable: false),
-                        UpdateIntervalInMilliSecond = c.Int(nullable: false),
+                        UpdateIntervalInMilliSecond = c.Long(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
                 .ForeignKey("Globalization.TimeZone", t => t.TimeZoneId)
-                .Index(t => new { t.Id, t.DeviceDatasheetId })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
                 .Index(t => t.TimeZoneId);
 
             CreateTable(
@@ -355,30 +386,32 @@ namespace ART.Domotica.Repository.Migrations
                 "dbo.DeviceSensors",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
-                        ReadIntervalInMilliSeconds = c.Int(nullable: false),
-                        PublishIntervalInMilliSeconds = c.Int(nullable: false),
+                        Id = c.Guid(nullable: false),
+                        ReadIntervalInMilliSeconds = c.Long(nullable: false),
+                        PublishIntervalInMilliSeconds = c.Long(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
-                .Index(t => new { t.Id, t.DeviceDatasheetId });
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id });
 
             CreateTable(
                 "dbo.SensorInDevice",
                 c => new
                     {
-                        DeviceSensorsId = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        DeviceSensorsId = c.Guid(nullable: false),
                         SensorId = c.Guid(nullable: false),
                         SensorDatasheetId = c.Short(nullable: false),
                         SensorTypeId = c.Short(nullable: false),
                         Ordination = c.Short(nullable: false),
                     })
-                .PrimaryKey(t => new { t.DeviceSensorsId, t.DeviceDatasheetId, t.SensorId, t.SensorDatasheetId, t.SensorTypeId })
-                .ForeignKey("dbo.DeviceSensors", t => new { t.DeviceSensorsId, t.DeviceDatasheetId })
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceSensorsId, t.SensorId, t.SensorDatasheetId, t.SensorTypeId })
+                .ForeignKey("dbo.DeviceSensors", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceSensorsId })
                 .ForeignKey("dbo.Sensor", t => new { t.SensorId, t.SensorDatasheetId, t.SensorTypeId })
-                .Index(t => new { t.DeviceSensorsId, t.DeviceDatasheetId })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceSensorsId })
                 .Index(t => new { t.SensorId, t.SensorDatasheetId, t.SensorTypeId }, unique: true, name: "IX_Unique_SensorInDevice");
 
             CreateTable(
@@ -665,19 +698,42 @@ namespace ART.Domotica.Repository.Migrations
                 .Index(t => new { t.SensorId, t.SensorDatasheetId, t.SensorTypeId });
 
             CreateTable(
+                "dbo.DeviceSerial",
+                c => new
+                    {
+                        DeviceTypeId = c.Byte(nullable: false),
+                        DeviceDatasheetId = c.Guid(nullable: false),
+                        DeviceId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false, identity: true),
+                        Index = c.Short(nullable: false),
+                        Enabled = c.Boolean(nullable: false),
+                        SerialMode = c.Byte(nullable: false),
+                        AllowPinSwapRX = c.Boolean(),
+                        AllowPinSwapTX = c.Boolean(),
+                        PinRX = c.Short(),
+                        PinTX = c.Short(),
+                        BaudRate = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceId })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceId }, name: "FK_DeviceSerial_DeviceBase_DeviceTypeId_DeviceId_DeviceDatasheetId")
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.DeviceId, t.Id, t.Index }, unique: true, name: "IX_Unique_DeviceSerialIndex");
+
+            CreateTable(
                 "dbo.DeviceWiFi",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         StationMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                         SoftAPMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                         HostName = c.String(nullable: false, maxLength: 255),
-                        PublishIntervalInMilliSeconds = c.Int(nullable: false),
+                        PublishIntervalInMilliSeconds = c.Long(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
-                .Index(t => new { t.Id, t.DeviceDatasheetId })
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
                 .Index(t => t.StationMacAddress, unique: true)
                 .Index(t => t.SoftAPMacAddress, unique: true);
 
@@ -685,17 +741,18 @@ namespace ART.Domotica.Repository.Migrations
                 "dbo.ESPDevice",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         ChipId = c.Int(nullable: false),
                         FlashChipId = c.Int(nullable: false),
                         SDKVersion = c.String(nullable: false, maxLength: 50),
                         ChipSize = c.Long(nullable: false),
                         Pin = c.String(nullable: false, maxLength: 4, fixedLength: true),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
-                .Index(t => new { t.Id, t.DeviceDatasheetId })
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
                 .Index(t => t.ChipId)
                 .Index(t => t.FlashChipId, unique: true)
                 .Index(t => t.Pin, unique: true);
@@ -704,14 +761,15 @@ namespace ART.Domotica.Repository.Migrations
                 "dbo.RaspberryDevice",
                 c => new
                     {
-                        Id = c.Guid(nullable: false),
+                        DeviceTypeId = c.Byte(nullable: false),
                         DeviceDatasheetId = c.Guid(nullable: false),
+                        Id = c.Guid(nullable: false),
                         LanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                         WLanMacAddress = c.String(nullable: false, maxLength: 17, fixedLength: true),
                     })
-                .PrimaryKey(t => new { t.Id, t.DeviceDatasheetId })
-                .ForeignKey("dbo.DeviceBase", t => new { t.Id, t.DeviceDatasheetId })
-                .Index(t => new { t.Id, t.DeviceDatasheetId })
+                .PrimaryKey(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .ForeignKey("dbo.DeviceBase", t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
+                .Index(t => new { t.DeviceTypeId, t.DeviceDatasheetId, t.Id })
                 .Index(t => t.LanMacAddress, unique: true)
                 .Index(t => t.WLanMacAddress, unique: true);
         }

@@ -24,6 +24,11 @@
             get; set;
         }
 
+        public DeviceTypeEnum DeviceTypeId
+        {
+            get; set;
+        }
+
         public short Ordination
         {
             get; set;

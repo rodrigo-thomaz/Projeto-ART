@@ -15,15 +15,16 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.DeviceSensorsId,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.DeviceSensorsId,
                 x.SensorId,
                 x.SensorDatasheetId,
                 x.SensorTypeId,
             });
 
-            //DeviceSensorsId
-            Property(x => x.DeviceSensorsId)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
@@ -34,9 +35,15 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
+            //DeviceSensorsId
+            Property(x => x.DeviceSensorsId)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
             //SensorId
             Property(x => x.SensorId)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -44,7 +51,7 @@
 
             //SensorDatasheetId
             Property(x => x.SensorDatasheetId)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -52,7 +59,7 @@
 
             //SensorTypeId
             Property(x => x.SensorTypeId)
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -63,8 +70,9 @@
                 .WithMany(x => x.SensorInDevice)
                 .HasForeignKey(x => new
                 {
-                    x.DeviceSensorsId,
+                    x.DeviceTypeId,
                     x.DeviceDatasheetId,
+                    x.DeviceSensorsId,
                 })
                 .WillCascadeOnDelete(false);
 
@@ -81,7 +89,7 @@
 
             //Ordination
             Property(x => x.Ordination)
-                .HasColumnOrder(5)
+                .HasColumnOrder(6)
                 .IsRequired();
         }
 

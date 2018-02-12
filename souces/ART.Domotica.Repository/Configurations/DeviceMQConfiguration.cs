@@ -15,12 +15,13 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.Id,
             });
 
-            //Id
-            Property(x => x.Id)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
@@ -28,6 +29,13 @@
             //DeviceDatasheetId
             Property(x => x.DeviceDatasheetId)
                 .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //DeviceBase
@@ -36,7 +44,7 @@
 
             //User
             Property(x => x.User)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .HasMaxLength(12)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -44,7 +52,7 @@
 
             //Password
             Property(x => x.Password)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .HasMaxLength(12)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -52,7 +60,7 @@
 
             //ClientId
             Property(x => x.ClientId)
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .HasMaxLength(32)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
@@ -60,7 +68,7 @@
 
             //Topic
             Property(x => x.Topic)
-                .HasColumnOrder(5)
+                .HasColumnOrder(6)
                 .HasMaxLength(32)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,

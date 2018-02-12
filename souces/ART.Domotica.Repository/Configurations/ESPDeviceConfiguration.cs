@@ -17,12 +17,13 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.Id,
             });
 
-            //Id
-            Property(x => x.Id)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
                 .IsRequired();
 
@@ -31,9 +32,14 @@
                 .HasColumnOrder(1)
                 .IsRequired();
 
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(2)
+                .IsRequired();
+
             //ChipId
             Property(x => x.ChipId)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new[]{
@@ -42,7 +48,7 @@
 
             //FlashChipId
             Property(x => x.FlashChipId)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new[]{
@@ -51,18 +57,18 @@
 
             //SDKVersion
             Property(x => x.SDKVersion)
-                .HasColumnOrder(4)
+                .HasColumnOrder(5)
                 .HasMaxLength(50)
                 .IsRequired();
 
             //ChipSize
             Property(x => x.ChipSize)
-                .HasColumnOrder(5)
+                .HasColumnOrder(6)
                 .IsRequired();
 
             //Pin
             Property(x => x.Pin)
-                .HasColumnOrder(6)
+                .HasColumnOrder(7)
                 .HasMaxLength(4)
                 .IsFixedLength()
                 .IsRequired()

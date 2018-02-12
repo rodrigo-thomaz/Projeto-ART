@@ -14,12 +14,13 @@
             //Primary Keys
             HasKey(x => new
             {
-                x.Id,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.Id,
             });
 
-            //Id
-            Property(x => x.Id)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(0)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
@@ -27,6 +28,13 @@
             //DeviceDatasheetId
             Property(x => x.DeviceDatasheetId)
                 .HasColumnOrder(1)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired();
+
+            //Id
+            Property(x => x.Id)
+                .HasColumnOrder(2)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
             //DeviceBase
@@ -35,7 +43,7 @@
 
             //TimeZoneId
             Property(x => x.TimeZoneId)
-                .HasColumnOrder(2)
+                .HasColumnOrder(3)
                 .IsRequired();
 
             //TimeZone
@@ -46,7 +54,7 @@
 
             //UpdateIntervalInMilliSecond
             Property(x => x.UpdateIntervalInMilliSecond)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .IsRequired();
         }
 

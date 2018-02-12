@@ -2,6 +2,7 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
     public class DeviceWiFi : IEntity<Guid>
@@ -14,6 +15,11 @@
         }
 
         public Guid DeviceDatasheetId
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }

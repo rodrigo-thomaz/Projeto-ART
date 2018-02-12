@@ -17,8 +17,9 @@
             HasKey(x => new
             {
                 x.ApplicationId,
-                x.DeviceId,
+                x.DeviceTypeId,
                 x.DeviceDatasheetId,
+                x.DeviceId,
             });
 
             //ApplicationId
@@ -33,15 +34,15 @@
                 .HasForeignKey(x => x.ApplicationId)
                 .WillCascadeOnDelete(false);
 
-            //DeviceId
-            Property(x => x.DeviceId)
+            //DeviceTypeId
+            Property(x => x.DeviceTypeId)
                 .HasColumnOrder(1)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired()
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute ("IX_Unique_DeviceId", 0) { IsUnique = true },
+                        new IndexAttribute ("IX_Unique_DeviceKey", 0) { IsUnique = true },
                     }));
 
             //DeviceDatasheetId
@@ -52,7 +53,18 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new List<IndexAttribute>
                     {
-                        new IndexAttribute ("IX_Unique_DeviceId", 1) { IsUnique = true },
+                        new IndexAttribute ("IX_Unique_DeviceKey", 1) { IsUnique = true },
+                    }));
+
+            //DeviceId
+            Property(x => x.DeviceId)
+                .HasColumnOrder(3)
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
+                .IsRequired()
+                .HasColumnAnnotation(IndexAnnotation.AnnotationName,
+                    new IndexAnnotation(new List<IndexAttribute>
+                    {
+                        new IndexAttribute ("IX_Unique_DeviceKey", 2) { IsUnique = true },
                     }));
 
             //DeviceBase
@@ -60,19 +72,20 @@
                 .WithMany(x => x.DevicesInApplication)
                 .HasForeignKey(x => new
                 {
-                    x.DeviceId,
+                    x.DeviceTypeId,
                     x.DeviceDatasheetId,
+                    x.DeviceId,
                 })
                 .WillCascadeOnDelete(false);
 
             //CreateDate
             Property(x => x.CreateDate)
-                .HasColumnOrder(3)
+                .HasColumnOrder(4)
                 .IsRequired();
 
             //CreateByApplicationUserId
             Property(x => x.CreateByApplicationUserId)
-                .HasColumnOrder(4);
+                .HasColumnOrder(5);
 
             //CreateByApplicationUser
             HasRequired(x => x.CreateByApplicationUser)

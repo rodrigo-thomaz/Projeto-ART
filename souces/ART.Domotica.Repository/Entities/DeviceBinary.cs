@@ -2,6 +2,7 @@
 {
     using System;
 
+    using ART.Domotica.Enums;
     using ART.Infra.CrossCutting.Repository;
 
     public class DeviceBinary : IEntity
@@ -24,6 +25,11 @@
         }
 
         public Guid DeviceDatasheetId
+        {
+            get; set;
+        }
+
+        public DeviceTypeEnum DeviceTypeId
         {
             get; set;
         }
