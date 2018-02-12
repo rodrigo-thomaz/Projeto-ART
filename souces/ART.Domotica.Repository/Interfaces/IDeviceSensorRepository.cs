@@ -7,13 +7,13 @@
     using ART.Domotica.Repository.Entities;
     using ART.Infra.CrossCutting.Repository;
 
-    public interface IDeviceSensorsRepository : IRepository<ARTDbContext, DeviceSensors>
+    public interface IDeviceSensorRepository : IRepository<ARTDbContext, DeviceSensor>
     {
         #region Methods
 
-        Task<DeviceSensors> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
+        Task<DeviceSensor> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
-        Task<DeviceSensors> GetFullByDeviceId(Guid deviceId);
+        Task<DeviceSensor> GetFullByDeviceId(Guid deviceId);
 
         #endregion Methods
     }

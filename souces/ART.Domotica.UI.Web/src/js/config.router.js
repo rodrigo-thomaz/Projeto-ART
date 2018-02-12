@@ -132,7 +132,7 @@ angular.module('app')
                         'js/services/device/deviceNTPFinder.js',
                         'js/services/device/deviceSerialFinder.js',
                         'js/services/device/deviceDebugFinder.js',
-                        'js/services/device/deviceSensorsFinder.js',
+                        'js/services/device/deviceSensorFinder.js',
                         'js/services/device/sensorInDeviceFinder.js',
                         'js/services/device/deviceFinder.js',
 
@@ -142,7 +142,7 @@ angular.module('app')
                         'js/services/device/deviceNTPService.js',
                         'js/services/device/deviceSerialService.js',
                         'js/services/device/deviceDebugService.js',
-                        'js/services/device/deviceSensorsService.js',
+                        'js/services/device/deviceSensorService.js',
                         'js/services/device/sensorInDeviceService.js',
                         'js/services/device/deviceInApplicationService.js',
                         'js/services/device/deviceService.js',
@@ -184,7 +184,7 @@ angular.module('app')
                         'js/controllers/device/deviceMQController.js',
                         'js/controllers/device/deviceBinaryController.js',
                         'js/controllers/device/deviceDebugController.js',
-                        'js/controllers/device/deviceSensorsController.js',
+                        'js/controllers/device/deviceSensorController.js',
                         'js/controllers/device/sensorInDeviceController.js',
 
                         'js/controllers/espDeviceListController.js',

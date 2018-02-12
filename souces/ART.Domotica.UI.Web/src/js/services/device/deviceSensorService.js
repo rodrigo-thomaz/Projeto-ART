@@ -1,6 +1,6 @@
 ﻿'use strict';
-app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', 'deviceSensorsConstant', 'deviceSensorsFinder', 'sensorConstant',
-    function ($http, ngAuthSettings, $rootScope, stompService, deviceContext, deviceSensorsConstant, deviceSensorsFinder, sensorConstant) {
+app.factory('deviceSensorService', ['$http', 'ngAuthSettings', '$rootScope', 'stompService', 'deviceContext', 'deviceSensorConstant', 'deviceSensorFinder', 'sensorConstant',
+    function ($http, ngAuthSettings, $rootScope, stompService, deviceContext, deviceSensorConstant, deviceSensorFinder, sensorConstant) {
 
         var serviceFactory = {};
 
@@ -17,7 +17,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
                 deviceId: deviceId,
                 intervalInMilliSeconds: readIntervalInMilliSeconds,
             }
-            return $http.post(serviceBase + deviceSensorsConstant.setReadIntervalInMilliSecondsApiUri, data).then(function (results) {
+            return $http.post(serviceBase + deviceSensorConstant.setReadIntervalInMilliSecondsApiUri, data).then(function (results) {
                 return results;
             });
         };
@@ -29,26 +29,26 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
                 deviceId: deviceId,
                 intervalInMilliSeconds: publishIntervalInMilliSeconds,
             }
-            return $http.post(serviceBase + deviceSensorsConstant.setPublishIntervalInMilliSecondsApiUri, data).then(function (results) {
+            return $http.post(serviceBase + deviceSensorConstant.setPublishIntervalInMilliSecondsApiUri, data).then(function (results) {
                 return results;
             });
         };
 
         var onConnected = function () {
-            messageIoTReceivedSubscription = stompService.subscribeDevice(deviceSensorsConstant.messageIoTTopic, onMessageIoTReceived);            
-            setReadIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceSensorsConstant.setReadIntervalInMilliSecondsCompletedTopic, onSetReadIntervalInMilliSecondsCompleted);
-            setPublishIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedTopic, onSetPublishIntervalInMilliSecondsCompleted);
+            messageIoTReceivedSubscription = stompService.subscribeDevice(deviceSensorConstant.messageIoTTopic, onMessageIoTReceived);            
+            setReadIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceSensorConstant.setReadIntervalInMilliSecondsCompletedTopic, onSetReadIntervalInMilliSecondsCompleted);
+            setPublishIntervalInMilliSecondsCompletedSubscription = stompService.subscribeAllViews(deviceSensorConstant.setPublishIntervalInMilliSecondsCompletedTopic, onSetPublishIntervalInMilliSecondsCompleted);
         }
 
         var onMessageIoTReceived = function (payload) {
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
-            var deviceSensors = deviceSensorsFinder.getByKey(data.deviceTypeId, data.deviceDatasheetId, data.deviceId);
-            if(angular.isUndefined(deviceSensors)) return;
-            deviceSensors.epochTimeUtc = data.epochTimeUtc;   
-            updateSensorsInDevice(deviceSensors.sensorInDevice, data.sensorsInDevice);
+            var deviceSensor = deviceSensorFinder.getByKey(data.deviceTypeId, data.deviceDatasheetId, data.deviceId);
+            if(angular.isUndefined(deviceSensor)) return;
+            deviceSensor.epochTimeUtc = data.epochTimeUtc;   
+            updateSensorsInDevice(deviceSensor.sensorInDevice, data.sensorsInDevice);
             deviceContext.$digest();
-            $rootScope.$emit(deviceSensorsConstant.messageIoTEventName + data.deviceId, data);
+            $rootScope.$emit(deviceSensorConstant.messageIoTEventName + data.deviceId, data);
         }
 
         var updateSensorsInDevice = function (oldValues, newValues) {
@@ -67,18 +67,18 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var onSetReadIntervalInMilliSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
-            deviceSensors.readIntervalInMilliSeconds = result.readIntervalInMilliSeconds;
+            var deviceSensor = deviceSensorFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
+            deviceSensor.readIntervalInMilliSeconds = result.readIntervalInMilliSeconds;
             deviceContext.$digest();
-            $rootScope.$emit(deviceSensorsConstant.setReadIntervalInMilliSecondsCompletedEventName + result.deviceId, result);
+            $rootScope.$emit(deviceSensorConstant.setReadIntervalInMilliSecondsCompletedEventName + result.deviceId, result);
         };
 
         var onSetPublishIntervalInMilliSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
-            deviceSensors.publishIntervalInMilliSeconds = result.publishIntervalInMilliSeconds;
+            var deviceSensor = deviceSensorFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
+            deviceSensor.publishIntervalInMilliSeconds = result.publishIntervalInMilliSeconds;
             deviceContext.$digest();
-            $rootScope.$emit(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceId, result);
+            $rootScope.$emit(deviceSensorConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceId, result);
         };
 
         $rootScope.$on('$destroy', function () {

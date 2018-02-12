@@ -13,7 +13,7 @@ app.factory('deviceMapper', [
     'deviceNTPFinder',
     'deviceSerialFinder',
     'sensorInDeviceFinder',
-    'deviceSensorsFinder',
+    'deviceSensorFinder',
     'deviceDatasheetFinder',
     function (
         $rootScope,
@@ -29,7 +29,7 @@ app.factory('deviceMapper', [
         deviceNTPFinder,
         deviceSerialFinder,
         sensorInDeviceFinder,
-        deviceSensorsFinder,
+        deviceSensorFinder,
         deviceDatasheetFinder) {
 
         var serviceFactory = {};
@@ -50,11 +50,11 @@ app.factory('deviceMapper', [
             //deviceDebug
             var deviceDebug = device.deviceDebug;
             deviceContext.deviceDebug.push(deviceDebug);
-            //deviceSensors
-            var deviceSensors = device.deviceSensors;
-            deviceContext.deviceSensors.push(deviceSensors);
+            //deviceSensor
+            var deviceSensor = device.deviceSensor;
+            deviceContext.deviceSensor.push(deviceSensor);
             //sensorInDevice
-            var sensorInDevice = deviceSensors.sensorInDevice;            
+            var sensorInDevice = deviceSensor.sensorInDevice;            
             for (var i = 0; i < sensorInDevice.length; i++) {
                 deviceContext.sensorInDevice.push(sensorInDevice[i]);
             }
@@ -96,16 +96,16 @@ app.factory('deviceMapper', [
                     break;
                 }
             }
-            //deviceSensors
-            var deviceSensors = device.deviceSensors;
-            for (var i = 0; i < deviceContext.deviceSensors.length; i++) {
-                if (deviceSensors === deviceContext.deviceSensors[i]) {
-                    deviceContext.deviceSensors.splice(i, 1);
+            //deviceSensor
+            var deviceSensor = device.deviceSensor;
+            for (var i = 0; i < deviceContext.deviceSensor.length; i++) {
+                if (deviceSensor === deviceContext.deviceSensor[i]) {
+                    deviceContext.deviceSensor.splice(i, 1);
                     break;
                 }
             }
             //sensorInDevice
-            var sensorsInDevices = deviceSensors.sensorInDevice;
+            var sensorsInDevices = deviceSensor.sensorInDevice;
             for (var i = 0; i < sensorsInDevices.length; i++) {
                 var sensorInDevice = sensorsInDevices[i];
                 for (var j = 0; j < deviceContext.sensorInDevice.length; j++) {
@@ -159,17 +159,17 @@ app.factory('deviceMapper', [
             }
         });
 
-        deviceContext.$watchCollection('deviceSensors', function (newValues, oldValues) {
+        deviceContext.$watchCollection('deviceSensor', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
-                var deviceSensors = newValues[i];
-                deviceSensors.device = function () { return deviceFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
+                var deviceSensor = newValues[i];
+                deviceSensor.device = function () { return deviceFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
             }
         });        
 
         deviceContext.$watchCollection('sensorInDevice', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var sensorInDevice = newValues[i];
-                sensorInDevice.deviceSensors = function () { return deviceSensorFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
+                sensorInDevice.deviceSensor = function () { return deviceSensorFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
                 sensorInDevice.sensor = function () { return sensorFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
             }
         });
@@ -186,7 +186,7 @@ app.factory('deviceMapper', [
             deviceContext.deviceNTPLoaded = true;
             deviceContext.deviceSerialLoaded = true;
             deviceContext.deviceDebugLoaded = true;
-            deviceContext.deviceSensorsLoaded = true;
+            deviceContext.deviceSensorLoaded = true;
             deviceContext.sensorInDeviceLoaded = true;
         }
 

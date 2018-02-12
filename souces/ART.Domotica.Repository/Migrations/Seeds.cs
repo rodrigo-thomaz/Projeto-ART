@@ -497,7 +497,7 @@
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceDebug)
-                .Include(x => x.DeviceSensors)
+                .Include(x => x.DeviceSensor)
                 .Include(x => x.DeviceBinary)
                 .Include(x => x.DeviceSerial)
                 .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
@@ -551,7 +551,7 @@
                         ShowProfiler = false,
                         ShowColors = true,
                     },
-                    DeviceSensors = new DeviceSensors
+                    DeviceSensor = new DeviceSensor
                     {
                         ReadIntervalInMilliSeconds = 2000,
                         PublishIntervalInMilliSeconds = 10000,
@@ -635,9 +635,9 @@
                         ShowColors = true,
                     };
                 }
-                if (espDevice1.DeviceSensors == null)
+                if (espDevice1.DeviceSensor == null)
                 {
-                    espDevice1.DeviceSensors = new DeviceSensors
+                    espDevice1.DeviceSensor = new DeviceSensor
                     {
                         ReadIntervalInMilliSeconds = 2000,
                         PublishIntervalInMilliSeconds = 10000,
@@ -681,9 +681,9 @@
 
             var sensorInDevice_2_1 = new SensorInDevice
             {
-                DeviceTypeId = espDevice1.DeviceSensors.DeviceTypeId,
-                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
-                DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                DeviceTypeId = espDevice1.DeviceSensor.DeviceTypeId,
+                DeviceDatasheetId = espDevice1.DeviceSensor.DeviceDatasheetId,
+                DeviceSensorId = espDevice1.DeviceSensor.Id,
                 SensorId = sensor_2_1.Id,
                 SensorDatasheetId = sensor_2_1.SensorDatasheetId,
                 SensorTypeId = sensor_2_1.SensorTypeId,
@@ -694,9 +694,9 @@
 
             var sensorInDevice_2_2 = new SensorInDevice
             {
-                DeviceTypeId = espDevice1.DeviceSensors.DeviceTypeId,
-                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
-                DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                DeviceTypeId = espDevice1.DeviceSensor.DeviceTypeId,
+                DeviceDatasheetId = espDevice1.DeviceSensor.DeviceDatasheetId,
+                DeviceSensorId = espDevice1.DeviceSensor.Id,
                 SensorId = sensor_2_2.Id,
                 SensorDatasheetId = sensor_2_2.SensorDatasheetId,
                 SensorTypeId = sensor_2_2.SensorTypeId,
@@ -707,9 +707,9 @@
 
             var sensorInDevice_3_1 = new SensorInDevice
             {
-                DeviceTypeId = espDevice1.DeviceSensors.DeviceTypeId,
-                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
-                DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                DeviceTypeId = espDevice1.DeviceSensor.DeviceTypeId,
+                DeviceDatasheetId = espDevice1.DeviceSensor.DeviceDatasheetId,
+                DeviceSensorId = espDevice1.DeviceSensor.Id,
                 SensorId = sensor_3_1.Id,
                 SensorDatasheetId = sensor_3_1.SensorDatasheetId,
                 SensorTypeId = sensor_3_1.SensorTypeId,
@@ -720,9 +720,9 @@
 
             var sensorInDevice_3_2 = new SensorInDevice
             {
-                DeviceTypeId = espDevice1.DeviceSensors.DeviceTypeId,
-                DeviceDatasheetId = espDevice1.DeviceSensors.DeviceDatasheetId,
-                DeviceSensorsId = espDevice1.DeviceSensors.Id,
+                DeviceTypeId = espDevice1.DeviceSensor.DeviceTypeId,
+                DeviceDatasheetId = espDevice1.DeviceSensor.DeviceDatasheetId,
+                DeviceSensorId = espDevice1.DeviceSensor.Id,
                 SensorId = sensor_3_2.Id,
                 SensorDatasheetId = sensor_3_2.SensorDatasheetId,
                 SensorTypeId = sensor_3_2.SensorTypeId,
@@ -821,7 +821,7 @@
                 .Include(x => x.DeviceNTP)
                 .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceDebug)
-                .Include(x => x.DeviceSensors)
+                .Include(x => x.DeviceSensor)
                 .Include(x => x.DeviceBinary)
                 .Include(x => x.DeviceSerial)
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetId_Ultrasonic_1Way)
@@ -875,7 +875,7 @@
                         ShowProfiler = false,
                         ShowColors = true,
                     },
-                    DeviceSensors = new DeviceSensors
+                    DeviceSensor = new DeviceSensor
                     {
                         ReadIntervalInMilliSeconds = 2000,
                         PublishIntervalInMilliSeconds = 10000,
@@ -949,9 +949,9 @@
                     };
                 }
 
-                if (espDevice2.DeviceSensors == null)
+                if (espDevice2.DeviceSensor == null)
                 {
-                    espDevice2.DeviceSensors = new DeviceSensors
+                    espDevice2.DeviceSensor = new DeviceSensor
                     {
                         ReadIntervalInMilliSeconds = 2000,
                         PublishIntervalInMilliSeconds = 10000,
@@ -1008,9 +1008,9 @@
 
             var sensorUltrassonicInDevice2 = new SensorInDevice
             {
-                DeviceTypeId = espDevice2.DeviceSensors.DeviceTypeId,
-                DeviceDatasheetId = espDevice2.DeviceSensors.DeviceDatasheetId,
-                DeviceSensorsId = espDevice2.DeviceSensors.Id,
+                DeviceTypeId = espDevice2.DeviceSensor.DeviceTypeId,
+                DeviceDatasheetId = espDevice2.DeviceSensor.DeviceDatasheetId,
+                DeviceSensorId = espDevice2.DeviceSensor.Id,
                 SensorId = sensor_Ultrassomic.Id,
                 SensorDatasheetId = sensor_Ultrassomic.SensorDatasheetId,
                 SensorTypeId = sensor_Ultrassomic.SensorTypeId,
@@ -1204,7 +1204,7 @@
                 var deviceDatasheetId = Guid.Parse(line[1]);
                 var name = line[2];
                 var hasDeviceSerial = bool.Parse(line[3]);
-                var hasDeviceSensors = bool.Parse(line[4]);
+                var hasDeviceSensor = bool.Parse(line[4]);
 
                 var entity = context.DeviceDatasheet
                     .Find(deviceTypeId, deviceDatasheetId);
@@ -1217,7 +1217,7 @@
                         Id = deviceDatasheetId,
                         Name = name,
                         HasDeviceSerial = hasDeviceSerial,
-                        HasDeviceSensors = hasDeviceSensors,
+                        HasDeviceSensor = hasDeviceSensor,
                     };
                     context.DeviceDatasheet.Add(entity);
                 }
@@ -1225,7 +1225,7 @@
                 {
                     entity.Name = name;
                     entity.HasDeviceSerial = hasDeviceSerial;
-                    entity.HasDeviceSensors = hasDeviceSensors;
+                    entity.HasDeviceSensor = hasDeviceSensor;
                 }
 
                 context.SaveChanges();

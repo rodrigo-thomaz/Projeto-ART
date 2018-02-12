@@ -5,11 +5,11 @@
 
     using ART.Domotica.Repository.Entities;
 
-    public class DeviceSensorsConfiguration : EntityTypeConfiguration<DeviceSensors>
+    public class DeviceSensorConfiguration : EntityTypeConfiguration<DeviceSensor>
     {
         #region Constructors
 
-        public DeviceSensorsConfiguration()
+        public DeviceSensorConfiguration()
         {
             //Primary Keys
             HasKey(x => new
@@ -39,7 +39,7 @@
 
             //DeviceBase
             HasRequired(x => x.DeviceBase)
-               .WithRequiredDependent(x => x.DeviceSensors);
+               .WithRequiredDependent(x => x.DeviceSensor);
 
             //ReadIntervalInMilliSeconds
             Property(x => x.ReadIntervalInMilliSeconds)

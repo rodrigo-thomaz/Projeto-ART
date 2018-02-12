@@ -17,7 +17,7 @@
             {
                 x.DeviceTypeId,
                 x.DeviceDatasheetId,
-                x.DeviceSensorsId,
+                x.DeviceSensorId,
                 x.SensorId,
                 x.SensorDatasheetId,
                 x.SensorTypeId,
@@ -35,8 +35,8 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //DeviceSensorsId
-            Property(x => x.DeviceSensorsId)
+            //DeviceSensorId
+            Property(x => x.DeviceSensorId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
@@ -65,14 +65,14 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute("IX_Unique_SensorInDevice", 2) { IsUnique = true }));
 
-            //DeviceSensors
-            HasRequired(x => x.DeviceSensors)
+            //DeviceSensor
+            HasRequired(x => x.DeviceSensor)
                 .WithMany(x => x.SensorInDevice)
                 .HasForeignKey(x => new
                 {
                     x.DeviceTypeId,
                     x.DeviceDatasheetId,
-                    x.DeviceSensorsId,
+                    x.DeviceSensorId,
                 })
                 .WillCascadeOnDelete(false);
 

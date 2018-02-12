@@ -282,7 +282,7 @@
     <Content Include="src\js\controllers\applicationController.js" />
     <Content Include="src\js\controllers\sensor\sensorController.js" />
     <Content Include="src\js\controllers\device\sensorInDeviceController.js" />
-    <Content Include="src\js\controllers\device\deviceSensorsController.js" />
+    <Content Include="src\js\controllers\device\deviceSensorController.js" />
     <Content Include="src\js\controllers\device\deviceNTPController.js" />
     <Content Include="src\js\controllers\device\deviceController.js" />
     <Content Include="src\js\controllers\sensor\sensorTempDSFamilyController.js" />
@@ -314,7 +314,7 @@
     <Content Include="src\js\services\globalization\globalizationMapper.js" />
     <Content Include="src\js\services\device\deviceContext.js" />
     <Content Include="src\js\services\device\deviceNTPFinder.js" />
-    <Content Include="src\js\services\device\deviceSensorsFinder.js" />
+    <Content Include="src\js\services\device\deviceSensorFinder.js" />
     <Content Include="src\js\services\device\sensorInDeviceFinder.js" />
     <Content Include="src\js\services\device\deviceMapper.js" />
     <Content Include="src\js\services\device\deviceConstants.js" />
@@ -371,7 +371,7 @@
     <Content Include="src\js\services\si\numericalScaleTypeCountryService.js" />
     <Content Include="src\js\services\si\unitMeasurementScaleService.js" />
     <Content Include="src\js\services\si\unitMeasurementTypeService.js" />
-    <Content Include="src\js\services\device\deviceSensorsService.js" />
+    <Content Include="src\js\services\device\deviceSensorService.js" />
     <Content Include="src\js\services\globalization\timeZoneService.js" />
     <Content Include="src\js\services\si\unitMeasurementService.js" />
     <Content Include="src\js\services\sensor\sensorTempDSFamilyService.js" />
@@ -642,7 +642,7 @@
     <Content Include="src\views\espDeviceList.html" />
     <Content Include="src\views\device\device.html" />
     <Content Include="src\views\device\deviceNTP.html" />
-    <Content Include="src\views\device\deviceSensors.html" />
+    <Content Include="src\views\device\deviceSensor.html" />
     <Content Include="src\views\device\sensorInDevice.html" />
     <Content Include="src\views\sensor\sensor.html" />
     <Content Include="src\views\sensor\sensorTempDSFamily.html" />

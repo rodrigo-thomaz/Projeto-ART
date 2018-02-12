@@ -86,7 +86,7 @@
 
             //Enviando sensores para View
             var sensorRountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.InsertInApplicationViewCompletedQueueName);
-            var sensorViewModel = Mapper.Map<IEnumerable<Sensor>, IEnumerable<SensorGetModel>>(data.DeviceSensors.SensorInDevice.Select(x => x.Sensor));
+            var sensorViewModel = Mapper.Map<IEnumerable<Sensor>, IEnumerable<SensorGetModel>>(data.DeviceSensor.SensorInDevice.Select(x => x.Sensor));
             var sensorViewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(sensorViewModel, true);
             _model.BasicPublish(defaultExchangeTopic, sensorRountingKey, null, sensorViewBuffer);
 
@@ -129,7 +129,7 @@
 
             //Enviando sensores para View
             var sensorRountingKey = GetInApplicationRoutingKeyForAllView(applicationMQ.Topic, SensorConstants.DeleteFromApplicationViewCompletedQueueName);
-            var sensorViewModel = Mapper.Map<IEnumerable<Sensor>, IEnumerable<SensorGetModel>>(data.DeviceSensors.SensorInDevice.Select(x => x.Sensor));
+            var sensorViewModel = Mapper.Map<IEnumerable<Sensor>, IEnumerable<SensorGetModel>>(data.DeviceSensor.SensorInDevice.Select(x => x.Sensor));
             var sensorViewBuffer = SerializationHelpers.SerializeToJsonBufferAsync(sensorViewModel, true);
             _model.BasicPublish(defaultExchangeTopic, sensorRountingKey, null, sensorViewBuffer);
 

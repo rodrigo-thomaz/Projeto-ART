@@ -69,7 +69,7 @@ app.factory('contextScope', [
 
     'deviceContext',
 
-    'deviceSensorsFinder',
+    'deviceSensorFinder',
     'deviceWiFiFinder',
     'deviceNTPFinder',
     'deviceSerialFinder',
@@ -78,7 +78,7 @@ app.factory('contextScope', [
     'deviceFinder',
 
     'deviceMapper',
-    'deviceSensorsService',
+    'deviceSensorService',
     'deviceWiFiService',
     'deviceNTPService',
     'deviceSerialService',
@@ -157,7 +157,7 @@ app.factory('contextScope', [
 
         deviceContext,
 
-        deviceSensorsFinder,
+        deviceSensorFinder,
         deviceWiFiFinder,
         deviceNTPFinder,
         deviceSerialFinder,
@@ -166,7 +166,7 @@ app.factory('contextScope', [
         deviceFinder,
 
         deviceMapper,
-        deviceSensorsService,
+        deviceSensorService,
         deviceWiFiService,
         deviceNTPService,
         deviceSerialService,

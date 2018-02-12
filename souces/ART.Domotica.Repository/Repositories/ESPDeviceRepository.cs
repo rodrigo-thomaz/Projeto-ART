@@ -39,9 +39,9 @@
                 .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceNTP.TimeZone)
-                .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTriggers))
-                .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
-                .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily))                
+                .Include(x => x.DeviceSensor.SensorInDevice.Select(y => y.Sensor.SensorTriggers))
+                .Include(x => x.DeviceSensor.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
+                .Include(x => x.DeviceSensor.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily))                
                 .Where(x => x.Pin == pin)
                 .SingleOrDefaultAsync();
 
@@ -53,9 +53,9 @@
             var data = await _context.ESPDevice
                .Include(x => x.DeviceNTP)
                .Include(x => x.DeviceMQ)
-               .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTriggers))
-               .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
-               .Include(x => x.DeviceSensors.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily))
+               .Include(x => x.DeviceSensor.SensorInDevice.Select(y => y.Sensor.SensorTriggers))
+               .Include(x => x.DeviceSensor.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
+               .Include(x => x.DeviceSensor.SensorInDevice.Select(y => y.Sensor.SensorTempDSFamily))
                .Where(x => x.DeviceTypeId == deviceTypeId)
                .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
                .Where(x => x.Id == deviceId)               
@@ -111,7 +111,7 @@
                 .Include(x => x.DeviceDebug)
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceBinary.DeviceDatasheetBinary)
-                .Include(x => x.DeviceSensors.SensorInDevice)
+                .Include(x => x.DeviceSensor.SensorInDevice)
                 .Where(x => x.DevicesInApplication.Any(y => y.ApplicationId == applicationId))
                 .ToListAsync();           
 

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class DeviceSensorsGetResponseIoTContract
+    public class DeviceSensorGetResponseIoTContract
     {
         #region Properties
 

@@ -34,10 +34,10 @@
 
         public async Task<SensorInDevice> SetOrdination(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, Guid sensorId, SensorDatasheetEnum sensorDatasheetId, SensorTypeEnum sensorTypeId, short ordination)
         {
-            var entities = await _sensorInDeviceRepository.GetByDeviceSensorsKey(deviceTypeId, deviceDatasheetId, deviceId);
+            var entities = await _sensorInDeviceRepository.GetByDeviceSensorKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             var sensorInDevice = entities
-                .Where(x => x.DeviceSensorsId == deviceId)
+                .Where(x => x.DeviceSensorId == deviceId)
                 .Where(x => x.SensorId == sensorId)
                 .Where(x => x.SensorDatasheetId == sensorDatasheetId)
                 .Where(x => x.SensorTypeId == sensorTypeId)

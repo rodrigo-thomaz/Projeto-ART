@@ -9,25 +9,25 @@
     using System.Linq;
     using ART.Domotica.Enums;
 
-    public class DeviceSensorsRepository : RepositoryBase<ARTDbContext, DeviceSensors>, IDeviceSensorsRepository
+    public class DeviceSensorRepository : RepositoryBase<ARTDbContext, DeviceSensor>, IDeviceSensorRepository
     {
         #region Constructors
 
-        public DeviceSensorsRepository(ARTDbContext context)
+        public DeviceSensorRepository(ARTDbContext context)
             : base(context)
         {
         }
 
         #endregion Constructors
 
-        public async Task<DeviceSensors> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
+        public async Task<DeviceSensor> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
-            return await _context.DeviceSensors.FindAsync(deviceTypeId, deviceDatasheetId, deviceId);
+            return await _context.DeviceSensor.FindAsync(deviceTypeId, deviceDatasheetId, deviceId);
         }
 
-        public async Task<DeviceSensors> GetFullByDeviceId(Guid deviceId)
+        public async Task<DeviceSensor> GetFullByDeviceId(Guid deviceId)
         {
-            return await _context.DeviceSensors
+            return await _context.DeviceSensor
                 .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorDatasheet.SensorDatasheetUnitMeasurementDefault))
                 .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorUnitMeasurementScale))
                 .Include(x => x.SensorInDevice.Select(y => y.Sensor.SensorTriggers))

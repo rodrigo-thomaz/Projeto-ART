@@ -112,7 +112,7 @@ namespace ART.Domotica.Worker.Consumers
             var device = await sensorDomain.GetDeviceFromSensor(data.Id);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceTypeId, device.DeviceDatasheetId, device.DeviceSensorsId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceTypeId, device.DeviceDatasheetId, device.DeviceSensorId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<Sensor, SensorSetLabelRequestIoTContract>(data);

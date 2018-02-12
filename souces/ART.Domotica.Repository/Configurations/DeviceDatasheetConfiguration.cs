@@ -50,8 +50,8 @@
                 .HasColumnOrder(3)
                 .IsRequired();
 
-            //HasDeviceSensors
-            Property(x => x.HasDeviceSensors)
+            //HasDeviceSensor
+            Property(x => x.HasDeviceSensor)
                 .HasColumnOrder(4)
                 .IsRequired();
         }

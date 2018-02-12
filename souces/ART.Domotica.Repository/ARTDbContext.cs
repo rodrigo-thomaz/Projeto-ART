@@ -95,7 +95,7 @@
             get; set;
         }
 
-        public DbSet<DeviceSensors> DeviceSensors
+        public DbSet<DeviceSensor> DeviceSensor
         {
             get; set;
         }

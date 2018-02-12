@@ -46,7 +46,7 @@
     <Compile Include="DeviceSerialGetModel.cs" />
     <Compile Include="DeviceSerialSetPinModel.cs" />
     <Compile Include="DeviceSerialSetEnabledModel.cs" />
-    <Compile Include="DeviceSensorsSetReadIntervalInMilliSecondsModel.cs" />
+    <Compile Include="DeviceSensorSetReadIntervalInMilliSecondsModel.cs" />
     <Compile Include="DeviceWiFiGetModel.cs" />
     <Compile Include="DeviceNTPGetModel.cs" />
     <Compile Include="DeviceDebugSetValueModel.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Locale\ContinentGetModel.cs" />
     <Compile Include="Locale\CountryGetModel.cs" />
     <Compile Include="SensorDatasheetUnitMeasurementScaleGetModel.cs" />
-    <Compile Include="DeviceSensorsGetModel.cs" />
+    <Compile Include="DeviceSensorGetModel.cs" />
     <Compile Include="SensorInDeviceGetModel.cs" />
     <Compile Include="Globalization\TimeZoneGetModel.cs" />
     <Compile Include="SI\UnitMeasurementGetModel.cs" />

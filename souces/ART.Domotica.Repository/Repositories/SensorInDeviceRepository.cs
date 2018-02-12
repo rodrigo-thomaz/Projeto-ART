@@ -27,12 +27,12 @@
                 .FindAsync(deviceTypeId, deviceDatasheetId, deviceId, sensorId, sensorDatasheetId, sensorTypeId);
         }
 
-        public async Task<List<SensorInDevice>> GetByDeviceSensorsKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
+        public async Task<List<SensorInDevice>> GetByDeviceSensorKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
             return await _context.SensorInDevice
                 .Where(x => x.DeviceTypeId == deviceTypeId)
                 .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
-                .Where(x => x.DeviceSensorsId == deviceId)
+                .Where(x => x.DeviceSensorId == deviceId)
                 .ToListAsync();
         }        
     }

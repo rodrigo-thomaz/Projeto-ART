@@ -8,20 +8,20 @@
     using ART.Domotica.Contract;
 
     [Authorize]
-    [RoutePrefix("api/deviceSensors")]
-    public class DeviceSensorsController : AuthenticatedMQApiControllerBase
+    [RoutePrefix("api/deviceSensor")]
+    public class DeviceSensorController : AuthenticatedMQApiControllerBase
     {
         #region Fields
 
-        protected readonly IDeviceSensorsProducer _deviceSensorsProducer;
+        protected readonly IDeviceSensorProducer _deviceSensorProducer;
 
         #endregion Fields
 
         #region Constructors
 
-        public DeviceSensorsController(IDeviceSensorsProducer deviceSensorsProducer)
+        public DeviceSensorController(IDeviceSensorProducer deviceSensorProducer)
         {
-            _deviceSensorsProducer = deviceSensorsProducer;
+            _deviceSensorProducer = deviceSensorProducer;
         }
 
         #endregion Constructors
@@ -40,7 +40,7 @@
         [HttpPost]
         public async Task<IHttpActionResult> SetReadIntervalInMilliSeconds(DeviceSetIntervalInMilliSecondsRequestContract contract)
         {
-            await _deviceSensorsProducer.SetReadIntervalInMilliSeconds(CreateMessage(contract));
+            await _deviceSensorProducer.SetReadIntervalInMilliSeconds(CreateMessage(contract));
             return Ok();
         }
 
@@ -58,7 +58,7 @@
         [HttpPost]
         public async Task<IHttpActionResult> SetPublishIntervalInMilliSeconds(DeviceSetIntervalInMilliSecondsRequestContract contract)
         {
-            await _deviceSensorsProducer.SetPublishIntervalInMilliSeconds(CreateMessage(contract));
+            await _deviceSensorProducer.SetPublishIntervalInMilliSeconds(CreateMessage(contract));
             return Ok();
         }
     }

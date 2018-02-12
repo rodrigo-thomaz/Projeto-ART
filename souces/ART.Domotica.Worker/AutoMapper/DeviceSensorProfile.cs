@@ -8,13 +8,13 @@
 
     using global::AutoMapper;
 
-    public class DeviceSensorsProfile : Profile
+    public class DeviceSensorProfile : Profile
     {
         #region Constructors
 
-        public DeviceSensorsProfile()
+        public DeviceSensorProfile()
         {
-            CreateMap<DeviceSensors, DeviceSensorsGetModel>()
+            CreateMap<DeviceSensor, DeviceSensorGetModel>()
                 .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
@@ -22,19 +22,19 @@
                 .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds))
                 .ForMember(vm => vm.SensorInDevice, m => m.MapFrom(x => x.SensorInDevice.OrderBy(y => y.Ordination)));
 
-            CreateMap<DeviceSensors, DeviceSensorsSetReadIntervalInMilliSecondsModel>()
+            CreateMap<DeviceSensor, DeviceSensorSetReadIntervalInMilliSecondsModel>()
                 .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.ReadIntervalInMilliSeconds, m => m.MapFrom(x => x.ReadIntervalInMilliSeconds));
 
-            CreateMap<DeviceSensors, DeviceSetPublishIntervalInMilliSecondsModel>()
+            CreateMap<DeviceSensor, DeviceSetPublishIntervalInMilliSecondsModel>()
                 .ForMember(vm => vm.DeviceTypeId, m => m.MapFrom(x => x.DeviceTypeId))
                 .ForMember(vm => vm.DeviceDatasheetId, m => m.MapFrom(x => x.DeviceDatasheetId))
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))
                 .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds));
 
-            CreateMap<DeviceSensors, DeviceSensorsGetResponseIoTContract>()
+            CreateMap<DeviceSensor, DeviceSensorGetResponseIoTContract>()
                 .ForMember(vm => vm.SensorsInDevice, m => m.MapFrom(x => x.SensorInDevice.OrderBy(y => y.Ordination)))
                 .ForMember(vm => vm.ReadIntervalInMilliSeconds, m => m.MapFrom(x => x.ReadIntervalInMilliSeconds))
                 .ForMember(vm => vm.PublishIntervalInMilliSeconds, m => m.MapFrom(x => x.PublishIntervalInMilliSeconds))

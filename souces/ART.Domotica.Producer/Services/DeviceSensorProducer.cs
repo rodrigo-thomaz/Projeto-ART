@@ -10,11 +10,11 @@
     using ART.Domotica.Constant;
     using ART.Infra.CrossCutting.MQ;
 
-    public class DeviceSensorsProducer : ProducerBase, IDeviceSensorsProducer
+    public class DeviceSensorProducer : ProducerBase, IDeviceSensorProducer
     {
         #region Constructors
 
-        public DeviceSensorsProducer(IConnection connection, IMQSettings mqSettings)
+        public DeviceSensorProducer(IConnection connection, IMQSettings mqSettings)
             : base(connection, mqSettings)
         {
             
@@ -26,12 +26,12 @@
 
         public async Task SetReadIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract> message)
         {
-            await BasicPublish(DeviceSensorsConstants.SetReadIntervalInMilliSecondsQueueName, message);
+            await BasicPublish(DeviceSensorConstants.SetReadIntervalInMilliSecondsQueueName, message);
         }
 
         public async Task SetPublishIntervalInMilliSeconds(AuthenticatedMessageContract<DeviceSetIntervalInMilliSecondsRequestContract> message)
         {
-            await BasicPublish(DeviceSensorsConstants.SetPublishIntervalInMilliSecondsQueueName, message);
+            await BasicPublish(DeviceSensorConstants.SetPublishIntervalInMilliSecondsQueueName, message);
         }
 
         #endregion

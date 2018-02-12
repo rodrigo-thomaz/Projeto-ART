@@ -1,11 +1,10 @@
 ﻿namespace ART.Domotica.Model
 {
     using System;
-    using System.Collections.Generic;
 
     using ART.Domotica.Enums;
 
-    public class DeviceSensorsGetModel
+    public class DeviceSensorSetReadIntervalInMilliSecondsModel
     {
         #region Properties
 
@@ -24,17 +23,7 @@
             get; set;
         }
 
-        public long PublishIntervalInMilliSeconds
-        {
-            get; set;
-        }
-
         public long ReadIntervalInMilliSeconds
-        {
-            get; set;
-        }
-
-        public List<SensorInDeviceGetModel> SensorInDevice
         {
             get; set;
         }

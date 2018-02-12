@@ -14,12 +14,12 @@
             get; set;
         }
 
-        public DeviceSensors DeviceSensors
+        public DeviceSensor DeviceSensor
         {
             get; set;
         }
 
-        public Guid DeviceSensorsId
+        public Guid DeviceSensorId
         {
             get; set;
         }

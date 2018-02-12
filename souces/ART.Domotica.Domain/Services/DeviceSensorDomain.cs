@@ -11,60 +11,60 @@
     using Autofac;
     using ART.Domotica.Enums;
 
-    public class DeviceSensorsDomain : DomainBase, IDeviceSensorsDomain
+    public class DeviceSensorDomain : DomainBase, IDeviceSensorDomain
     {
         #region Fields
 
-        private readonly IDeviceSensorsRepository _deviceSensorsRepository;
+        private readonly IDeviceSensorRepository _deviceSensorRepository;
         private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
 
         #endregion Fields
 
         #region Constructors
 
-        public DeviceSensorsDomain(IComponentContext componentContext)
+        public DeviceSensorDomain(IComponentContext componentContext)
         {
             var context = componentContext.Resolve<ARTDbContext>();
 
-            _deviceSensorsRepository = new DeviceSensorsRepository(context);
+            _deviceSensorRepository = new DeviceSensorRepository(context);
             _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
         }
 
         #endregion Constructors
 
-        public async Task<DeviceSensors> SetReadIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long readIntervalInMilliSeconds)
+        public async Task<DeviceSensor> SetReadIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long readIntervalInMilliSeconds)
         {
-            var entity = await _deviceSensorsRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
+            var entity = await _deviceSensorRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
-                throw new Exception("DeviceSensors not found");
+                throw new Exception("DeviceSensor not found");
             }
 
             entity.ReadIntervalInMilliSeconds = readIntervalInMilliSeconds;
 
-            await _deviceSensorsRepository.Update(entity);
+            await _deviceSensorRepository.Update(entity);
 
             return entity;
         }
 
-        public async Task<DeviceSensors> SetPublishIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long publishIntervalInMilliSeconds)
+        public async Task<DeviceSensor> SetPublishIntervalInMilliSeconds(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, long publishIntervalInMilliSeconds)
         {
-            var entity = await _deviceSensorsRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
+            var entity = await _deviceSensorRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             if (entity == null)
             {
-                throw new Exception("DeviceSensors not found");
+                throw new Exception("DeviceSensor not found");
             }
 
             entity.PublishIntervalInMilliSeconds = publishIntervalInMilliSeconds;
 
-            await _deviceSensorsRepository.Update(entity);
+            await _deviceSensorRepository.Update(entity);
 
             return entity;
         }
 
-        public async Task<DeviceSensors> GetFullByDeviceInApplicationId(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
+        public async Task<DeviceSensor> GetFullByDeviceInApplicationId(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
             var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceTypeId, deviceDatasheetId, deviceId);
 
@@ -73,7 +73,7 @@
                 throw new Exception("DeviceInApplication not found");
             }
 
-            return await _deviceSensorsRepository.GetFullByDeviceId(deviceInApplication.DeviceId);
+            return await _deviceSensorRepository.GetFullByDeviceId(deviceInApplication.DeviceId);
         }
     }
 }

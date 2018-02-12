@@ -18,8 +18,8 @@ app.factory('deviceContext', ['$rootScope', function ($rootScope) {
     context.deviceDebug = [];   
     context.deviceDebugLoaded = false;
 
-    context.deviceSensors = [];   
-    context.deviceSensorsLoaded = false;
+    context.deviceSensor = [];   
+    context.deviceSensorLoaded = false;
 
     context.sensorInDevice = []; 
     context.sensorInDeviceLoaded = false;

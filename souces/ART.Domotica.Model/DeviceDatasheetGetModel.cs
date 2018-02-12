@@ -18,7 +18,7 @@
             get; set;
         }
 
-        public bool HasDeviceSensors
+        public bool HasDeviceSensor
         {
             get; set;
         }

@@ -98,18 +98,18 @@ app.constant('deviceDebugConstant', {
 
 });
 
-app.constant('deviceSensorsConstant', {
+app.constant('deviceSensorConstant', {
 
-    setReadIntervalInMilliSecondsApiUri: 'api/deviceSensors/setReadIntervalInMilliSeconds',
-    setReadIntervalInMilliSecondsCompletedTopic: 'DeviceSensors.SetReadIntervalInMilliSecondsViewCompleted',
-    setReadIntervalInMilliSecondsCompletedEventName: 'deviceSensorsService.onSetReadIntervalInMilliSecondsCompleted_Id_',    
+    setReadIntervalInMilliSecondsApiUri: 'api/deviceSensor/setReadIntervalInMilliSeconds',
+    setReadIntervalInMilliSecondsCompletedTopic: 'DeviceSensor.SetReadIntervalInMilliSecondsViewCompleted',
+    setReadIntervalInMilliSecondsCompletedEventName: 'deviceSensorService.onSetReadIntervalInMilliSecondsCompleted_Id_',    
 
-    setPublishIntervalInMilliSecondsApiUri: 'api/deviceSensors/setPublishIntervalInMilliSeconds',
-    setPublishIntervalInMilliSecondsCompletedTopic: 'DeviceSensors.SetPublishIntervalInMilliSecondsViewCompleted',
-    setPublishIntervalInMilliSecondsCompletedEventName: 'deviceSensorsService.onSetPublishIntervalInMilliSecondsCompleted_Id_',    
+    setPublishIntervalInMilliSecondsApiUri: 'api/deviceSensor/setPublishIntervalInMilliSeconds',
+    setPublishIntervalInMilliSecondsCompletedTopic: 'DeviceSensor.SetPublishIntervalInMilliSecondsViewCompleted',
+    setPublishIntervalInMilliSecondsCompletedEventName: 'deviceSensorService.onSetPublishIntervalInMilliSecondsCompleted_Id_',    
 
-    messageIoTTopic: 'DeviceSensors.MessageIoT',    
-    messageIoTEventName: 'deviceSensorsService.onMessageIoTReceived',  
+    messageIoTTopic: 'DeviceSensor.MessageIoT',    
+    messageIoTEventName: 'deviceSensorService.onMessageIoTReceived',  
 });
 
 app.constant('sensorInDeviceConstant', {

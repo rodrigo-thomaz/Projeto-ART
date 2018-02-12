@@ -39,7 +39,7 @@
             get; set;
         }
 
-        public DeviceSensorsGetModel DeviceSensors
+        public DeviceSensorGetModel DeviceSensor
         {
             get; set;
         }

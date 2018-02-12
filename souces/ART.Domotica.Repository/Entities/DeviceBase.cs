@@ -45,7 +45,7 @@
             get; set;
         }
 
-        public DeviceSensors DeviceSensors
+        public DeviceSensor DeviceSensor
         {
             get; set;
         }

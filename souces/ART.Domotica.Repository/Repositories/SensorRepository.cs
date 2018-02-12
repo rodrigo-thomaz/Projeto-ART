@@ -41,7 +41,7 @@ namespace ART.Domotica.Repository.Repositories
                         join hia in _context.SensorInApplication on s.Id equals hia.SensorId
                         join sid in _context.SensorInDevice on s.Id equals sid.SensorId
                         where hia.ApplicationId == applicationId
-                        where sid.DeviceSensorsId == deviceId
+                        where sid.DeviceSensorId == deviceId
                         select hia;
 
             return await query.ToListAsync();
