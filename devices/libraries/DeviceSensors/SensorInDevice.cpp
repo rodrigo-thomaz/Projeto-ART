@@ -45,9 +45,4 @@ namespace ART
 	{
 		_ordination = value;
 	}
-
-	bool SensorInDevice::operator<(const SensorInDevice & val) const
-	{
-		return _ordination < val._ordination;
-	}
 }

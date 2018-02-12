@@ -346,7 +346,7 @@ namespace ART
 
 	void DeviceSensors::setOrdination(const char * json)
 	{
-		Serial.print(F("[DeviceSensors::setOrdination] begin"));
+		Serial.print(F("[DeviceSensors::setOrdination] begin\n"));
 
 		StaticJsonBuffer<300> jsonBuffer;
 		JsonObject& root = jsonBuffer.parseObject(json);
@@ -366,6 +366,10 @@ namespace ART
 		for (int i = 0; i < _sensorsInDevice.size(); ++i) {
 			if (stricmp(_sensorsInDevice[i]->getSensor()->getSensorId(), root["sensorId"]) == 0) {
 				_sensorsInDevice[i]->setOrdination(ordination);
+				Serial.print(F("[DeviceSensors::setOrdination] sensorId: "));
+				Serial.print(_sensorsInDevice[i]->getSensor()->getSensorId());
+				Serial.print(F(" ordination:"));
+				Serial.println(ordination);
 			}
 			else {
 				orderedExceptCurrent[index] = _sensorsInDevice[i];
@@ -380,12 +384,21 @@ namespace ART
 				counter++;		
 			}
 			orderedExceptCurrent[i]->setOrdination(counter);
+			Serial.print(F("[DeviceSensors::setOrdination] sensorId: "));
+			Serial.print(orderedExceptCurrent[i]->getSensor()->getSensorId());
+			Serial.print(F(" ordination:"));
+			Serial.println(counter);
 			counter++;
-		}		
+		}				
 
-		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end());
+		std::sort(_sensorsInDevice.begin(), _sensorsInDevice.end(), [=](SensorInDevice * a, SensorInDevice * b) { return compareSensorInDevice(a, b); });
 
-		Serial.print(F("[DeviceSensors::setOrdination] end"));
+		Serial.print(F("[DeviceSensors::setOrdination] end\n"));
+	}
+
+	bool DeviceSensors::compareSensorInDevice(SensorInDevice * a, SensorInDevice * b)
+	{
+		return a->getOrdination() < b->getOrdination();
 	}
 
 	void DeviceSensors::insertTrigger(const char * json)

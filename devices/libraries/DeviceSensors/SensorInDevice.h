@@ -22,8 +22,6 @@ namespace ART
 
 		short								getOrdination();
 
-		bool								operator<(const SensorInDevice& val) const;
-
 	private:
 
 		DeviceSensors *						_deviceSensors;

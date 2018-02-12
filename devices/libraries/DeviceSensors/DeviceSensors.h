@@ -106,6 +106,8 @@ namespace ART
 
 		void 								setOrdination(const char* json);
 
+		bool								compareSensorInDevice(SensorInDevice* a, SensorInDevice* b);
+
 		void 								insertTrigger(const char* json);
 		bool 								deleteTrigger(const char* json);
 
