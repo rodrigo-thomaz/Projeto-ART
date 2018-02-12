@@ -43,7 +43,7 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             var deviceNTP = deviceNTPFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceNTP.timeZoneId = result.timeZoneId;
             deviceContext.$digest();
-            $rootScope.$emit(deviceNTPConstant.setTimeZoneCompletedEventName + result.deviceNTPId, result);
+            $rootScope.$emit(deviceNTPConstant.setTimeZoneCompletedEventName + result.deviceId, result);
         };
 
         var onSetUpdateIntervalInMilliSecondCompleted = function (payload) {
@@ -51,7 +51,7 @@ app.factory('deviceNTPService', ['$http', '$log', 'ngAuthSettings', '$rootScope'
             var deviceNTP = deviceNTPFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceNTP.updateIntervalInMilliSecond = result.updateIntervalInMilliSecond;
             deviceContext.$digest();
-            $rootScope.$emit(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + result.deviceNTPId, result);
+            $rootScope.$emit(deviceNTPConstant.setUpdateIntervalInMilliSecondCompletedEventName + result.deviceId, result);
         }
 
         $rootScope.$on('$destroy', function () {

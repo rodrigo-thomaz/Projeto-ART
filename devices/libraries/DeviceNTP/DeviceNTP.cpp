@@ -83,7 +83,7 @@ namespace ART
 			return;
 		}
 
-		_utcTimeOffsetInSecond = root["utcTimeOffsetInSecond"];
+		_utcTimeOffsetInSecond = root["value"];
 
 		Serial.println(F("[ConfigurationManager::setUtcTimeOffsetInSecond] "));
 		Serial.print(F("utcTimeOffsetInSecond: "));
@@ -106,7 +106,7 @@ namespace ART
 			return;
 		}
 
-		_updateIntervalInMilliSecond = root["updateIntervalInMilliSecond"];
+		_updateIntervalInMilliSecond = root["value"];
 
 		Serial.println(F("[ConfigurationManager::setUpdateIntervalInMilliSecond] "));
 		Serial.print(F("updateIntervalInMilliSecond: "));
