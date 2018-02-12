@@ -23,10 +23,11 @@ app.factory('deviceInApplicationService', ['$http', '$log', 'ngAuthSettings', '$
             });
         };
 
-        var remove = function (deviceId, deviceDatasheetId) {
+        var remove = function (deviceTypeId, deviceDatasheetId, deviceId) {
             var data = {
-                deviceId: deviceId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
             };
             return $http.post(serviceBase + deviceInApplicationConstant.removeApiUri, data).then(function (results) {
                 //alert('envio bem sucedido');
@@ -45,7 +46,7 @@ app.factory('deviceInApplicationService', ['$http', '$log', 'ngAuthSettings', '$
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
             for (var i = 0; i < deviceContext.device.length; i++) {
-                if (deviceContext.device[i].deviceId === data.deviceId) {
+                if (deviceContext.device[i].item.deviceTypeId === data.item.deviceTypeId && deviceContext.device[i].item.deviceDatasheetId === data.item.deviceDatasheetId && deviceContext.device[i].deviceId === data.deviceId) {
                     deviceContext.device.splice(i, 1);                   
                     break;
                 }

@@ -10,10 +10,11 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
         var setHostNameCompletedSubscription = null;
         var setPublishIntervalInMilliSecondsCompletedSubscription = null;
 
-        var setHostName = function (deviceWiFiId, deviceDatasheetId, hostName) {
+        var setHostName = function (deviceTypeId, deviceDatasheetId, deviceId, hostName) {
             var data = {
-                deviceWiFiId: deviceWiFiId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 hostName: hostName,
             }
             return $http.post(serviceBase + deviceWiFiConstant.setHostNameApiUri, data).then(function (results) {
@@ -21,10 +22,11 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
             });
         };
 
-        var setPublishIntervalInMilliSeconds = function (deviceWiFiId, deviceDatasheetId, publishIntervalInMilliSeconds) {
+        var setPublishIntervalInMilliSeconds = function (deviceTypeId, deviceDatasheetId, deviceId, publishIntervalInMilliSeconds) {
             var data = {
-                deviceId: deviceWiFiId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 intervalInMilliSeconds: publishIntervalInMilliSeconds,
             }
             return $http.post(serviceBase + deviceWiFiConstant.setPublishIntervalInMilliSecondsApiUri, data).then(function (results) {
@@ -41,7 +43,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
         var onMessageIoTReceived = function (payload) {
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
-            var deviceWiFi = deviceWiFiFinder.getByKey(data.deviceId, data.deviceDatasheetId);
+            var deviceWiFi = deviceWiFiFinder.getByKey(data.deviceTypeId, data.deviceDatasheetId, data.deviceId);
             if(angular.isUndefined(deviceWiFi)) return;
             deviceWiFi.epochTimeUtc = data.epochTimeUtc;
             deviceWiFi.wifiQuality = data.wifiQuality;
@@ -52,7 +54,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
 
         var onSetHostNameCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceWiFi = deviceWiFiFinder.getByKey(result.deviceWiFiId, result.deviceDatasheetId);
+            var deviceWiFi = deviceWiFiFinder.getByKey(data.deviceTypeId, data.deviceDatasheetId, data.deviceId);
             deviceWiFi.hostName = result.hostName;
             deviceContext.$digest();
             $rootScope.$emit(deviceWiFiConstant.setHostNameCompletedEventName + result.deviceWiFiId, result);
@@ -60,7 +62,7 @@ app.factory('deviceWiFiService', ['$http', '$log', 'ngAuthSettings', '$rootScope
 
         var onSetPublishIntervalInMilliSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceWiFi = deviceWiFiFinder.getByKey(result.deviceId, result.deviceDatasheetId);
+            var deviceWiFi = deviceWiFiFinder.getByKey(data.deviceTypeId, data.deviceDatasheetId, data.deviceId);
             deviceWiFi.publishIntervalInMilliSeconds = result.publishIntervalInMilliSeconds;
             deviceContext.$digest();
             $rootScope.$emit(deviceWiFiConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceId, result);

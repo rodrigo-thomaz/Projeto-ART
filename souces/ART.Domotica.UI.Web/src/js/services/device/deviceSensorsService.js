@@ -10,10 +10,11 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
         var setReadIntervalInMilliSecondsCompletedSubscription = null;
         var setPublishIntervalInMilliSecondsCompletedSubscription = null;
 
-        var setReadIntervalInMilliSeconds = function (deviceSensorsId, deviceDatasheetId, readIntervalInMilliSeconds) {
+        var setReadIntervalInMilliSeconds = function (deviceTypeId, deviceDatasheetId, deviceId, readIntervalInMilliSeconds) {
             var data = {
-                deviceId: deviceSensorsId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 intervalInMilliSeconds: readIntervalInMilliSeconds,
             }
             return $http.post(serviceBase + deviceSensorsConstant.setReadIntervalInMilliSecondsApiUri, data).then(function (results) {
@@ -21,10 +22,11 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
             });
         };
 
-        var setPublishIntervalInMilliSeconds = function (deviceSensorsId, deviceDatasheetId, publishIntervalInMilliSeconds) {
+        var setPublishIntervalInMilliSeconds = function (deviceTypeId, deviceDatasheetId, deviceId, publishIntervalInMilliSeconds) {
             var data = {
-                deviceId: deviceSensorsId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 intervalInMilliSeconds: publishIntervalInMilliSeconds,
             }
             return $http.post(serviceBase + deviceSensorsConstant.setPublishIntervalInMilliSecondsApiUri, data).then(function (results) {
@@ -41,7 +43,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
         var onMessageIoTReceived = function (payload) {
             var dataUTF8 = decodeURIComponent(escape(payload.body));
             var data = JSON.parse(dataUTF8);
-            var deviceSensors = deviceSensorsFinder.getByKey(data.deviceId, data.deviceDatasheetId);
+            var deviceSensors = deviceSensorsFinder.getByKey(data.deviceTypeId, data.deviceDatasheetId, data.deviceId);
             if(angular.isUndefined(deviceSensors)) return;
             deviceSensors.epochTimeUtc = data.epochTimeUtc;   
             updateSensorsInDevice(deviceSensors.sensorInDevice, data.sensorsInDevice);
@@ -52,7 +54,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
         var updateSensorsInDevice = function (oldValues, newValues) {
             for (var i = 0; i < oldValues.length; i++) {
                 for (var j = 0; j < newValues.length; j++) {
-                    if (oldValues[i].sensorId === newValues[j].sensorId) {
+                    if (oldValues[i].deviceTypeId === newValues[j].deviceTypeId && oldValues[i].deviceDatasheetId,  === newValues[j].deviceDatasheetId,  && oldValues[i].sensorId === newValues[j].sensorId) {
                         var sensor = oldValues[i].sensor();
                         sensor.isConnected = newValues[j].isConnected;
                         sensor.value = newValues[j].value;
@@ -65,7 +67,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var onSetReadIntervalInMilliSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId, result.deviceDatasheetId);
+            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceSensors.readIntervalInMilliSeconds = result.readIntervalInMilliSeconds;
             deviceContext.$digest();
             $rootScope.$emit(deviceSensorsConstant.setReadIntervalInMilliSecondsCompletedEventName + result.deviceSensorsId, result);
@@ -73,7 +75,7 @@ app.factory('deviceSensorsService', ['$http', 'ngAuthSettings', '$rootScope', 's
 
         var onSetPublishIntervalInMilliSecondsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceId, result.deviceDatasheetId);
+            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceSensors.publishIntervalInMilliSeconds = result.publishIntervalInMilliSeconds;
             deviceContext.$digest();
             $rootScope.$emit(deviceSensorsConstant.setPublishIntervalInMilliSecondsCompletedEventName + result.deviceId, result);

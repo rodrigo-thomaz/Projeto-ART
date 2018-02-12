@@ -9,11 +9,12 @@ app.factory('deviceSerialService', ['$http', '$log', 'ngAuthSettings', '$rootSco
         var setEnabledCompletedSubscription = null;
         var setPinCompletedSubscription = null;
 
-        var setEnabled = function (deviceSerialId, deviceId, deviceDatasheetId, enabled) {
+        var setEnabled = function (deviceTypeId, deviceDatasheetId, deviceId, deviceSerialId, enabled) {
             var data = {
-                deviceSerialId: deviceSerialId,
-                deviceId: deviceId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
+                deviceSerialId: deviceSerialId,
                 enabled: enabled,
             }
             return $http.post(serviceBase + deviceSerialConstant.setEnabledApiUri, data).then(function (results) {
@@ -21,11 +22,12 @@ app.factory('deviceSerialService', ['$http', '$log', 'ngAuthSettings', '$rootSco
             });
         };
 
-        var setPin = function (deviceSerialId, deviceId, deviceDatasheetId, value, direction) {
+        var setPin = function (deviceSerialId, value, direction) {
             var data = {
-                deviceSerialId: deviceSerialId,
-                deviceId: deviceId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
+                deviceSerialId: deviceSerialId,
                 value: value,
                 direction: direction,
             }
@@ -41,7 +43,7 @@ app.factory('deviceSerialService', ['$http', '$log', 'ngAuthSettings', '$rootSco
 
         var onSetEnabledCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSerial = deviceSerialFinder.getByKey(result.deviceSerialId, result.deviceId, result.deviceDatasheetId);
+            var deviceSerial = deviceSerialFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId, result.deviceSerialId);
             deviceSerial.enabled = result.enabled;
             deviceContext.$digest();
             $rootScope.$emit(deviceSerialConstant.setEnabledCompletedEventName + result.deviceSerialId, result);
@@ -49,7 +51,7 @@ app.factory('deviceSerialService', ['$http', '$log', 'ngAuthSettings', '$rootSco
 
         var onSetPinCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSerial = deviceSerialFinder.getByKey(result.deviceSerialId, result.deviceId, result.deviceDatasheetId);
+            var deviceSerial = deviceSerialFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId, result.deviceSerialId);
             if(result.direction === 'Receive')
                 deviceSerial.pinRX = result.value;
             else if(result.direction === 'Transmit')

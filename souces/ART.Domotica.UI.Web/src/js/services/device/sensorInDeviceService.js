@@ -8,10 +8,11 @@ app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', '
 
         var setOrdinationCompletedSubscription = null;
 
-        var setOrdination = function (deviceSensorsId, deviceDatasheetId, sensorId, sensorDatasheetId, sensorTypeId, ordination) {
+        var setOrdination = function (deviceTypeId, deviceDatasheetId, deviceId, sensorId, sensorDatasheetId, sensorTypeId, ordination) {
             var data = {
-                deviceSensorsId: deviceSensorsId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 sensorId: sensorId,
                 sensorDatasheetId: sensorDatasheetId,
                 sensorTypeId: sensorTypeId,
@@ -28,8 +29,8 @@ app.factory('sensorInDeviceService', ['$http', 'ngAuthSettings', '$rootScope', '
 
         var onSetOrdinationCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceSensorsId, result.deviceDatasheetId);
-            var sensorInDevice = sensorInDeviceFinder.getByKey(result.deviceSensorsId, result.deviceDatasheetId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
+            var deviceSensors = deviceSensorsFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
+            var sensorInDevice = sensorInDeviceFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId, result.sensorId, result.sensorDatasheetId, result.sensorTypeId);
             for (var i = 0; i < deviceSensors.sensorInDevice.length; i++) {
                 if (sensorInDevice === deviceSensors.sensorInDevice[i]) {
                     deviceSensors.sensorInDevice.splice(i, 1);

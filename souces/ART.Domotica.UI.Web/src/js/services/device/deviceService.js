@@ -44,10 +44,11 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
             });
         };        
 
-        var setLabel = function (deviceId, deviceDatasheetId, label) {
+        var setLabel = function (deviceTypeId, deviceDatasheetId, deviceId, label) {
             var data = {
-                deviceId: deviceId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 label: label,
             }
             return $http.post(serviceBase + deviceConstant.setLabelApiUri, data).then(function (results) {
@@ -84,7 +85,7 @@ app.factory('deviceService', ['$http', '$log', 'ngAuthSettings', '$rootScope', '
 
         var onSetLabelCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var device = deviceFinder.getByKey(result.deviceId, result.deviceDatasheetId);
+            var device = deviceFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             device.label = result.label;
             deviceContext.$digest();
             $rootScope.$emit(deviceConstant.setLabelCompletedEventName + result.deviceId, result);

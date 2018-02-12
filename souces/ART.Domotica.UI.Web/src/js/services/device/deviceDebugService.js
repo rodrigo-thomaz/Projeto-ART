@@ -14,10 +14,11 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
         var setShowProfilerCompletedSubscription = null;
         var setShowTimeCompletedSubscription = null;
 
-        var setRemoteEnabled = function (deviceDebugId, deviceDatasheetId, value) {
+        var setRemoteEnabled = function (deviceTypeId, deviceDatasheetId, deviceId, value) {
             var data = {
-                deviceDebugId: deviceDebugId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 value: value,
             }
             return $http.post(serviceBase + deviceDebugConstant.setRemoteEnabledApiUri, data).then(function (results) {
@@ -25,10 +26,11 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
             });
         };
 
-        var setResetCmdEnabled = function (deviceDebugId, deviceDatasheetId, value) {
+        var setResetCmdEnabled = function (deviceTypeId, deviceDatasheetId, deviceId, value) {
             var data = {
-                deviceDebugId: deviceDebugId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 value: value,
             }
             return $http.post(serviceBase + deviceDebugConstant.setResetCmdEnabledApiUri, data).then(function (results) {
@@ -36,10 +38,11 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
             });
         };
 
-        var setSerialEnabled = function (deviceDebugId, deviceDatasheetId, value) {
+        var setSerialEnabled = function (deviceTypeId, deviceDatasheetId, deviceId, value) {
             var data = {
-                deviceDebugId: deviceDebugId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 value: value,
             }
             return $http.post(serviceBase + deviceDebugConstant.setSerialEnabledApiUri, data).then(function (results) {
@@ -47,10 +50,11 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
             });
         };
 
-        var setShowColors = function (deviceDebugId, deviceDatasheetId, value) {
+        var setShowColors = function (deviceTypeId, deviceDatasheetId, deviceId, value) {
             var data = {
-                deviceDebugId: deviceDebugId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 value: value,
             }
             return $http.post(serviceBase + deviceDebugConstant.setShowColorsApiUri, data).then(function (results) {
@@ -58,10 +62,11 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
             });
         };
 
-        var setShowDebugLevel = function (deviceDebugId, deviceDatasheetId, value) {
+        var setShowDebugLevel = function (deviceTypeId, deviceDatasheetId, deviceId, value) {
             var data = {
-                deviceDebugId: deviceDebugId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 value: value,
             }
             return $http.post(serviceBase + deviceDebugConstant.setShowDebugLevelApiUri, data).then(function (results) {
@@ -69,10 +74,11 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
             });
         };
 
-        var setShowProfiler = function (deviceDebugId, deviceDatasheetId, value) {
+        var setShowProfiler = function (deviceTypeId, deviceDatasheetId, deviceId, value) {
             var data = {
-                deviceDebugId: deviceDebugId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 value: value,
             }
             return $http.post(serviceBase + deviceDebugConstant.setShowProfilerApiUri, data).then(function (results) {
@@ -80,10 +86,11 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
             });
         };
 
-        var setShowTime = function (deviceDebugId, deviceDatasheetId, value) {
+        var setShowTime = function (deviceTypeId, deviceDatasheetId, deviceId, value) {
             var data = {
-                deviceDebugId: deviceDebugId,
+                deviceTypeId: deviceTypeId,
                 deviceDatasheetId: deviceDatasheetId,
+                deviceId: deviceId,
                 value: value,
             }
             return $http.post(serviceBase + deviceDebugConstant.setShowTimeApiUri, data).then(function (results) {
@@ -103,58 +110,58 @@ app.factory('deviceDebugService', ['$http', '$log', 'ngAuthSettings', '$rootScop
 
         var onSetRemoteEnabledCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceDebug = deviceDebugFinder.getByKey(result.deviceDebugId, result.deviceDatasheetId);
+            var deviceDebug = deviceDebugFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceDebug.remoteEnabled = result.value;
             deviceContext.$digest();
-            $rootScope.$emit(deviceDebugConstant.setRemoteEnabledCompletedEventName + result.deviceDebugId, result);
+            $rootScope.$emit(deviceDebugConstant.setRemoteEnabledCompletedEventName + result.deviceId, result);
         };
 
         var onSetResetCmdEnabledCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceDebug = deviceDebugFinder.getByKey(result.deviceDebugId, result.deviceDatasheetId);
+            var deviceDebug = deviceDebugFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceDebug.resetCmdEnabled = result.value;
             deviceContext.$digest();
-            $rootScope.$emit(deviceDebugConstant.setResetCmdEnabledCompletedEventName + result.deviceDebugId, result);
+            $rootScope.$emit(deviceDebugConstant.setResetCmdEnabledCompletedEventName + result.deviceId, result);
         };
 
         var onSetSerialEnabledCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceDebug = deviceDebugFinder.getByKey(result.deviceDebugId, result.deviceDatasheetId);
+            var deviceDebug = deviceDebugFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceDebug.serialEnabled = result.value;
             deviceContext.$digest();
-            $rootScope.$emit(deviceDebugConstant.setSerialEnabledCompletedEventName + result.deviceDebugId, result);
+            $rootScope.$emit(deviceDebugConstant.setSerialEnabledCompletedEventName + result.deviceId, result);
         };
 
         var onSetShowColorsCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceDebug = deviceDebugFinder.getByKey(result.deviceDebugId, result.deviceDatasheetId);
+            var deviceDebug = deviceDebugFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceDebug.showColors = result.value;
             deviceContext.$digest();
-            $rootScope.$emit(deviceDebugConstant.setShowColorsCompletedEventName + result.deviceDebugId, result);
+            $rootScope.$emit(deviceDebugConstant.setShowColorsCompletedEventName + result.deviceId, result);
         };
 
         var onSetShowDebugLevelCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceDebug = deviceDebugFinder.getByKey(result.deviceDebugId, result.deviceDatasheetId);
+            var deviceDebug = deviceDebugFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceDebug.showDebugLevel = result.value;
             deviceContext.$digest();
-            $rootScope.$emit(deviceDebugConstant.setShowDebugLevelCompletedEventName + result.deviceDebugId, result);
+            $rootScope.$emit(deviceDebugConstant.setShowDebugLevelCompletedEventName + result.deviceId, result);
         };
 
         var onSetShowProfilerCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceDebug = deviceDebugFinder.getByKey(result.deviceDebugId, result.deviceDatasheetId);
+            var deviceDebug = deviceDebugFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceDebug.showProfiler = result.value;
             deviceContext.$digest();
-            $rootScope.$emit(deviceDebugConstant.setShowProfilerCompletedEventName + result.deviceDebugId, result);
+            $rootScope.$emit(deviceDebugConstant.setShowProfilerCompletedEventName + result.deviceId, result);
         };
 
         var onSetShowTimeCompleted = function (payload) {
             var result = JSON.parse(payload.body);
-            var deviceDebug = deviceDebugFinder.getByKey(result.deviceDebugId, result.deviceDatasheetId);
+            var deviceDebug = deviceDebugFinder.getByKey(result.deviceTypeId, result.deviceDatasheetId, result.deviceId);
             deviceDebug.showTime = result.value;
             deviceContext.$digest();
-            $rootScope.$emit(deviceDebugConstant.setShowTimeCompletedEventName + result.deviceDebugId, result);
+            $rootScope.$emit(deviceDebugConstant.setShowTimeCompletedEventName + result.deviceId, result);
         };
 
         $rootScope.$on('$destroy', function () {
