@@ -28,7 +28,7 @@ app.factory('deviceDatasheetMapper', [
         deviceDatasheetContext.$watchCollection('deviceDatasheet', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceDatasheet = newValues[i];
-                deviceDatasheet.devices = function () { return deviceFinder.getByDeviceDatasheetKey(this.deviceDatasheetId); }
+                deviceDatasheet.devices = function () { return deviceFinder.getByDeviceDatasheetKey(this.deviceTypeId, this.deviceDatasheetId); }
             }
         });       
 

@@ -125,7 +125,7 @@ app.factory('deviceMapper', [
             //inserindo
             for (var i = 0; i < newValues.length; i++) {
                 var device = newValues[i];
-                device.deviceDatasheet = function () { return deviceDatasheetFinder.getByKey(this.deviceDatasheetId); }
+                device.deviceDatasheet = function () { return deviceDatasheetFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId); }
                 addDeviceAggregates(device);
             }            
         });
@@ -133,7 +133,7 @@ app.factory('deviceMapper', [
         deviceContext.$watchCollection('deviceWiFi', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceWiFi = newValues[i];
-                deviceWiFi.device = function () { return deviceFinder.getByKey(this.deviceWiFiId, this.deviceDatasheetId); }
+                deviceWiFi.device = function () { return deviceFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
             }
         });
 
@@ -141,35 +141,35 @@ app.factory('deviceMapper', [
             for (var i = 0; i < newValues.length; i++) {
                 var deviceNTP = newValues[i];
                 deviceNTP.timeZone = function () { return timeZoneFinder.getByKey(this.timeZoneId); }
-                deviceNTP.device = function () { return deviceFinder.getByKey(this.deviceNTPId, this.deviceDatasheetId); }
+                deviceNTP.device = function () { return deviceFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
             }
         });
 
         deviceContext.$watchCollection('deviceSerial', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceSerial = newValues[i];
-                deviceSerial.device = function () { return deviceFinder.getByKey(this.deviceId, this.deviceDatasheetId); }
+                deviceSerial.device = function () { return deviceFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
             }
         });
 
         deviceContext.$watchCollection('deviceDebug', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceDebug = newValues[i];
-                deviceDebug.device = function () { return deviceFinder.getByKey(this.deviceDebugId, this.deviceDatasheetId); }
+                deviceDebug.device = function () { return deviceFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
             }
         });
 
         deviceContext.$watchCollection('deviceSensors', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceSensors = newValues[i];
-                deviceSensors.device = function () { return deviceFinder.getByKey(this.deviceSensorsId, this.deviceDatasheetId); }
+                deviceSensors.device = function () { return deviceFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
             }
         });        
 
         deviceContext.$watchCollection('sensorInDevice', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var sensorInDevice = newValues[i];
-                sensorInDevice.deviceSensors = function () { return deviceSensorFinder.getByKey(this.deviceSensorsId); }
+                sensorInDevice.deviceSensors = function () { return deviceSensorFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
                 sensorInDevice.sensor = function () { return sensorFinder.getByKey(this.sensorId, this.sensorDatasheetId, this.sensorTypeId); }
             }
         });
