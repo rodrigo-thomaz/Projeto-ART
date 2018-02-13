@@ -202,6 +202,10 @@
     <Compile Include="Migrations\201802131159573_AddDeviceDisplay.Designer.cs">
       <DependentUpon>201802131159573_AddDeviceDisplay.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802131424475_AddHasDeviceProps.cs" />
+    <Compile Include="Migrations\201802131424475_AddHasDeviceProps.Designer.cs">
+      <DependentUpon>201802131424475_AddHasDeviceProps.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -307,6 +311,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802131159573_AddDeviceDisplay.resx">
       <DependentUpon>201802131159573_AddDeviceDisplay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131424475_AddHasDeviceProps.resx">
+      <DependentUpon>201802131424475_AddHasDeviceProps.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

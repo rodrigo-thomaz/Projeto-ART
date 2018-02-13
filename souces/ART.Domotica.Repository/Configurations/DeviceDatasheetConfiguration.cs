@@ -45,14 +45,44 @@
                 .HasColumnAnnotation(IndexAnnotation.AnnotationName,
                     new IndexAnnotation(new IndexAttribute { IsUnique = true }));
 
-            //HasDeviceSerial
-            Property(x => x.HasDeviceSerial)
+            //HasDeviceBinary
+            Property(x => x.HasDeviceBinary)
                 .HasColumnOrder(3)
+                .IsRequired();
+
+            //HasDeviceDebug
+            Property(x => x.HasDeviceDebug)
+                .HasColumnOrder(4)
+                .IsRequired();
+
+            //HasDeviceDisplay
+            Property(x => x.HasDeviceDisplay)
+                .HasColumnOrder(5)
+                .IsRequired();
+
+            //HasDeviceMQ
+            Property(x => x.HasDeviceMQ)
+                .HasColumnOrder(6)
+                .IsRequired();
+
+            //HasDeviceNTP
+            Property(x => x.HasDeviceNTP)
+                .HasColumnOrder(7)
                 .IsRequired();
 
             //HasDeviceSensor
             Property(x => x.HasDeviceSensor)
-                .HasColumnOrder(4)
+                .HasColumnOrder(8)
+                .IsRequired();
+
+            //HasDeviceSerial
+            Property(x => x.HasDeviceSerial)
+                .HasColumnOrder(9)
+                .IsRequired();
+
+            //HasDeviceWiFi
+            Property(x => x.HasDeviceWiFi)
+                .HasColumnOrder(10)
                 .IsRequired();
         }
 

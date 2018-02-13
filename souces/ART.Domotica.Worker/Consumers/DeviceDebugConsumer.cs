@@ -5,6 +5,7 @@
     using ART.Domotica.Domain.Interfaces;
     using ART.Domotica.IoTContract;
     using ART.Domotica.Model;
+    using ART.Domotica.Repository.Entities;
     using ART.Domotica.Worker.IConsumers;
     using ART.Infra.CrossCutting.Logging;
     using ART.Infra.CrossCutting.MQ;
@@ -16,12 +17,14 @@
     using global::AutoMapper;
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public class DeviceDebugConsumer : ConsumerBase, IDeviceDebugConsumer
     {
         #region Fields
 
+        private readonly EventingBasicConsumer _getAllByKeyConsumer;
         private readonly EventingBasicConsumer _setRemoteEnabledConsumer;
         private readonly EventingBasicConsumer _setSerialEnabledConsumer;
         private readonly EventingBasicConsumer _setResetCmdEnabledConsumer;
@@ -37,6 +40,7 @@
         public DeviceDebugConsumer(IConnection connection, ILogger logger, IComponentContext componentContext, ISettingManager settingsManager, IMQSettings mqSettings)
             : base(connection, mqSettings, logger, componentContext)
         {
+            _getAllByKeyConsumer = new EventingBasicConsumer(_model);
             _setRemoteEnabledConsumer = new EventingBasicConsumer(_model);
             _setSerialEnabledConsumer = new EventingBasicConsumer(_model);
             _setResetCmdEnabledConsumer = new EventingBasicConsumer(_model);
@@ -54,6 +58,7 @@
 
         private void Initialize()
         {
+            BasicQueueDeclare(DeviceDebugConstants.GetAllByKeyIoTQueueName);
             BasicQueueDeclare(DeviceDebugConstants.SetRemoteEnabledQueueName);
             BasicQueueDeclare(DeviceDebugConstants.SetSerialEnabledQueueName);
             BasicQueueDeclare(DeviceDebugConstants.SetResetCmdEnabledQueueName);
@@ -62,6 +67,13 @@
             BasicQueueDeclare(DeviceDebugConstants.SetShowProfilerQueueName);
             BasicQueueDeclare(DeviceDebugConstants.SetShowColorsQueueName);
 
+            _model.QueueBind(
+                 queue: DeviceDebugConstants.GetAllByKeyIoTQueueName
+               , exchange: "amq.topic"
+               , routingKey: GetApplicationRoutingKeyForAllIoT(DeviceDebugConstants.GetAllByKeyIoTQueueName)
+               , arguments: CreateBasicArguments());
+
+            _getAllByKeyConsumer.Received += GetAllByKeyReceived;
             _setRemoteEnabledConsumer.Received += SetRemoteEnabledReceived;
             _setSerialEnabledConsumer.Received += SetSerialEnabledReceived;
             _setResetCmdEnabledConsumer.Received += SetResetCmdEnabledReceived;
@@ -70,6 +82,7 @@
             _setShowProfilerConsumer.Received += SetShowProfilerReceived;
             _setShowColorsConsumer.Received += SetShowColorsReceived;
 
+            _model.BasicConsume(DeviceDebugConstants.GetAllByKeyIoTQueueName, false, _getAllByKeyConsumer);
             _model.BasicConsume(DeviceDebugConstants.SetRemoteEnabledQueueName, false, _setRemoteEnabledConsumer);
             _model.BasicConsume(DeviceDebugConstants.SetSerialEnabledQueueName, false, _setSerialEnabledConsumer);
             _model.BasicConsume(DeviceDebugConstants.SetResetCmdEnabledQueueName, false, _setResetCmdEnabledConsumer);
@@ -82,6 +95,36 @@
         #endregion Methods
 
         #region private voids 
+
+        public void GetAllByKeyReceived(object sender, BasicDeliverEventArgs e)
+        {
+            Task.WaitAll(GetAllByKeyReceivedAsync(sender, e));
+        }
+
+        public async Task GetAllByKeyReceivedAsync(object sender, BasicDeliverEventArgs e)
+        {
+            _logger.DebugEnter();
+
+            _model.BasicAck(e.DeliveryTag, false);
+            var requestContract = SerializationHelpers.DeserializeJsonBufferToType<IoTRequestContract>(e.Body);
+
+            var applicationMQDomain = _componentContext.Resolve<IApplicationMQDomain>();
+            var applicationMQ = await applicationMQDomain.GetByDeviceId(requestContract.DeviceId);
+
+            var domain = _componentContext.Resolve<IDeviceDebugDomain>();
+            var data = await domain.GetAllByKey(applicationMQ.Id, requestContract.DeviceTypeId, requestContract.DeviceDatasheetId, requestContract.DeviceId);
+
+            var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
+            var deviceMQ = await deviceMQDomain.GetByKey(requestContract.DeviceTypeId, requestContract.DeviceDatasheetId, requestContract.DeviceId);
+
+            //Enviando para o Iot
+            var iotContract = Mapper.Map<List<DeviceDebug>, List<DeviceDebugGetResponseIoTContract>>(data);
+            var deviceBuffer = SerializationHelpers.SerializeToJsonBufferAsync(iotContract);
+            var routingKey = GetApplicationRoutingKeyForIoT(applicationMQ.Topic, deviceMQ.Topic, DeviceDebugConstants.GetAllByKeyCompletedIoTQueueName);
+            _model.BasicPublish(defaultExchangeTopic, routingKey, null, deviceBuffer);
+
+            _logger.DebugLeave();
+        }
 
         public void SetRemoteEnabledReceived(object sender, BasicDeliverEventArgs e)
         {

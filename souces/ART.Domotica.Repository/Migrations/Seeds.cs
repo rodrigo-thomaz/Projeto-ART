@@ -500,6 +500,7 @@
                 .Include(x => x.DeviceSensor)
                 .Include(x => x.DeviceBinary)
                 .Include(x => x.DeviceSerial)
+                .Include(x => x.DeviceDisplay)
                 .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice1StationMacAddress.ToLower())
                 .Where(x => x.DeviceWiFi.SoftAPMacAddress.ToLower() == espDevice1SoftAPMacAddress.ToLower())
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetId_OneWire2Way)
@@ -835,6 +836,7 @@
                 .Include(x => x.DeviceSensor)
                 .Include(x => x.DeviceBinary)
                 .Include(x => x.DeviceSerial)
+                .Include(x => x.DeviceDisplay)
                 .Where(x => x.DeviceDatasheetId == DeviceDatasheetId_Ultrasonic_1Way)
                 .Where(x => x.DeviceWiFi.StationMacAddress.ToLower() == espDevice2StationMacAddress.ToLower())
                 .Where(x => x.DeviceWiFi.SoftAPMacAddress.ToLower() == espDevice2SoftAPMacAddress.ToLower())
@@ -1225,8 +1227,15 @@
                 var deviceTypeId = (DeviceTypeEnum)Enum.Parse(typeof(DeviceTypeEnum), line[0]);
                 var deviceDatasheetId = Guid.Parse(line[1]);
                 var name = line[2];
+
                 var hasDeviceSerial = bool.Parse(line[3]);
                 var hasDeviceSensor = bool.Parse(line[4]);
+                var hasDeviceBinary = bool.Parse(line[5]);
+                var hasDeviceDebug = bool.Parse(line[6]);
+                var hasDeviceDisplay = bool.Parse(line[7]);
+                var hasDeviceMQ = bool.Parse(line[8]);
+                var hasDeviceNTP = bool.Parse(line[9]);
+                var hasDeviceWiFi = bool.Parse(line[10]);
 
                 var entity = context.DeviceDatasheet
                     .Find(deviceTypeId, deviceDatasheetId);
@@ -1240,6 +1249,12 @@
                         Name = name,
                         HasDeviceSerial = hasDeviceSerial,
                         HasDeviceSensor = hasDeviceSensor,
+                        HasDeviceBinary = hasDeviceBinary,
+                        HasDeviceDebug = hasDeviceDebug,
+                        HasDeviceDisplay = hasDeviceDisplay,
+                        HasDeviceMQ = hasDeviceMQ,
+                        HasDeviceNTP = hasDeviceNTP,
+                        HasDeviceWiFi = hasDeviceWiFi,
                     };
                     context.DeviceDatasheet.Add(entity);
                 }
@@ -1248,6 +1263,12 @@
                     entity.Name = name;
                     entity.HasDeviceSerial = hasDeviceSerial;
                     entity.HasDeviceSensor = hasDeviceSensor;
+                    entity.HasDeviceBinary = hasDeviceBinary;
+                    entity.HasDeviceDebug = hasDeviceDebug;
+                    entity.HasDeviceDisplay = hasDeviceDisplay;
+                    entity.HasDeviceMQ = hasDeviceMQ;
+                    entity.HasDeviceNTP = hasDeviceNTP;
+                    entity.HasDeviceWiFi = hasDeviceWiFi;
                 }
 
                 context.SaveChanges();

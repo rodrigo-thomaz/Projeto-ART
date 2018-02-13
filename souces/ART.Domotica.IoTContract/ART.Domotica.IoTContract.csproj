@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceDebugGetResponseIoTContract.cs" />
     <Compile Include="DeviceSerialGetResponseIoTContract.cs" />
     <Compile Include="DeviceSerialSetEnabledRequestIoTContract.cs" />
     <Compile Include="SensorTriggerDeleteResponseIoTContract.cs" />

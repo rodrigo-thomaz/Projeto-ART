@@ -5,8 +5,8 @@
 #include "RemoteDebug.h" 
 #include "ESP8266mDNS.h"
 
-#define DEVICE_DEBUG_GET_ALL_BY_DEVICE_KEY_TOPIC_PUB   					"DeviceDebug/GetAllByDeviceKeyIoT" 
-#define DEVICE_DEBUG_GET_ALL_BY_DEVICE_KEY_COMPLETED_TOPIC_SUB			"DeviceDebug/GetAllByDeviceKeyCompletedIoT"
+#define DEVICE_DEBUG_GET_ALL_BY_KEY_TOPIC_PUB   						"DeviceDebug/GetAllByKeyIoT" 
+#define DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB					"DeviceDebug/GetAllByKeyCompletedIoT"
 
 #define DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB						"DeviceDebug/SetRemoteEnabledIoT"
 #define DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB					"DeviceDebug/SetResetCmdEnabledIoT"

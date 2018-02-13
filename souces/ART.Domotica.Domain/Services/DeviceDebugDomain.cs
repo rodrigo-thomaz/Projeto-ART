@@ -10,12 +10,14 @@
     using ART.Domotica.Repository;
     using ART.Domotica.Repository.Repositories;
     using ART.Domotica.Enums;
+    using System.Collections.Generic;
 
     public class DeviceDebugDomain : DomainBase, IDeviceDebugDomain
     {
         #region Fields
 
         private readonly IDeviceDebugRepository _deviceDebugRepository;
+        private readonly IDeviceInApplicationRepository _deviceInApplicationRepository;
 
         #endregion Fields
 
@@ -26,11 +28,24 @@
             var context = componentContext.Resolve<ARTDbContext>();
                         
             _deviceDebugRepository = new DeviceDebugRepository(context);
+            _deviceInApplicationRepository = new DeviceInApplicationRepository(context);
         }
 
         #endregion Constructors
 
         #region Methods        
+
+        public async Task<List<DeviceDebug>> GetAllByKey(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
+        {
+            var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceTypeId, deviceDatasheetId, deviceId);
+
+            if (deviceInApplication == null)
+            {
+                throw new Exception("DeviceInApplication not found");
+            }
+
+            return await _deviceDebugRepository.GetAllByKey(deviceTypeId, deviceDatasheetId, deviceId);
+        }
 
         public async Task<DeviceDebug> SetRemoteEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)
         {
@@ -142,7 +157,7 @@
             await _deviceDebugRepository.Update(entity);
 
             return entity;
-        }
+        }        
 
         #endregion Methods
     }

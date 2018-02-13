@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Repository.Interfaces
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ART.Domotica.Enums;
@@ -12,6 +13,7 @@
         #region Methods
 
         Task<DeviceDebug> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
+        Task<List<DeviceDebug>> GetAllByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
         #endregion Methods
     }

@@ -1,6 +1,7 @@
 ﻿namespace ART.Domotica.Domain.Interfaces
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     using ART.Domotica.Enums;
@@ -23,6 +24,8 @@
         Task<DeviceDebug> SetShowProfiler(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 
         Task<DeviceDebug> SetShowTime(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
+
+        Task<List<DeviceDebug>> GetAllByKey(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
         #endregion Methods
     }
