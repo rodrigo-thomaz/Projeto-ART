@@ -44,7 +44,7 @@ namespace ART
 
 		void 								setResolution(int value);
 
-		friend class						DeviceSensors;
+		friend class						DeviceSensor;
 
 	};
 }

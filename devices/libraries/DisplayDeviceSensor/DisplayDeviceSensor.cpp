@@ -1,26 +1,26 @@
-#include "DisplayDeviceSensors.h"
+#include "DisplayDeviceSensor.h"
 #include "../DisplayDevice/DisplayDevice.h"
 #include "../ESPDevice/ESPDevice.h"
-#include "../DeviceSensors/SensorInDevice.h"
+#include "../DeviceSensor/SensorInDevice.h"
 #include "../UnitMeasurement/UnitMeasurementEnum.h"
 
 namespace ART
 {
-	DisplayDeviceSensors::DisplayDeviceSensors(DisplayDevice* displayDevice)
+	DisplayDeviceSensor::DisplayDeviceSensor(DisplayDevice* displayDevice)
 	{
 		_displayDevice = displayDevice;
 	}
 
-	DisplayDeviceSensors::~DisplayDeviceSensors()
+	DisplayDeviceSensor::~DisplayDeviceSensor()
 	{
 	}
 
-	void DisplayDeviceSensors::create(DisplayDeviceSensors *(&displayDeviceSensors), DisplayDevice * displayDevice)
+	void DisplayDeviceSensor::create(DisplayDeviceSensor *(&displayDeviceSensor), DisplayDevice * displayDevice)
 	{
-		displayDeviceSensors = new DisplayDeviceSensors(displayDevice);
+		displayDeviceSensor = new DisplayDeviceSensor(displayDevice);
 	}
 
-	void DisplayDeviceSensors::printUpdate(bool on)
+	void DisplayDeviceSensor::printUpdate(bool on)
 	{
 		_displayDevice->display.setFont();
 		_displayDevice->display.setTextSize(1);
@@ -35,7 +35,7 @@ namespace ART
 		_displayDevice->display.println("S");
 	}
 
-	void DisplayDeviceSensors::printSensors()
+	void DisplayDeviceSensor::printSensors()
 	{
 		// variáveis
 
@@ -60,7 +60,7 @@ namespace ART
 		int screenWidth = screenX2 - screenX1;
 		int screenHeight = screenY2 - screenY1;
 
-		std::tuple<SensorInDevice**, short> tpl = _displayDevice->getESPDevice()->getDeviceSensors()->getSensorsInDevice();
+		std::tuple<SensorInDevice**, short> tpl = _displayDevice->getESPDevice()->getDeviceSensor()->getSensorsInDevice();
 
 		SensorInDevice** sensorsInDevice = std::get<0>(tpl);
 		short sensorsCount = std::get<1>(tpl);
@@ -77,7 +77,7 @@ namespace ART
 		}
 	}
 
-	void DisplayDeviceSensors::printBar(Sensor* sensor, int x, int y, int width, int height)
+	void DisplayDeviceSensor::printBar(Sensor* sensor, int x, int y, int width, int height)
 	{
 		int barMarginTop = 10;
 		int barMarginLeft = 5;
@@ -101,7 +101,7 @@ namespace ART
 		this->printBarValue(sensor, barX1, barY1, barWidth, barHeight);
 	}
 
-	void DisplayDeviceSensors::printBarValue(Sensor* sensor, int x, int y, int width, int height)
+	void DisplayDeviceSensor::printBarValue(Sensor* sensor, int x, int y, int width, int height)
 	{
 		float chartLimiterMax = sensor->getSensorUnitMeasurementScale()->getChartLimiterMax();
 		float chartLimiterMin = sensor->getSensorUnitMeasurementScale()->getChartLimiterMin();
@@ -120,7 +120,7 @@ namespace ART
 		_displayDevice->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
 	}
 
-	void DisplayDeviceSensors::printText(Sensor* sensor, int x, int y)
+	void DisplayDeviceSensor::printText(Sensor* sensor, int x, int y)
 	{
 		UnitMeasurementEnum unitMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId();
 

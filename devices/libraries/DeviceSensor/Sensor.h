@@ -73,7 +73,7 @@ namespace ART
 		void 								setConnected(bool value);
 		void 								setValue(float value);
 
-		friend class						DeviceSensors;
+		friend class						DeviceSensor;
 	};
 }
 

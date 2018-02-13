@@ -19,8 +19,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceBuzzer", "DeviceBuzze
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceWiFi", "DeviceWiFi\DeviceWiFi.vcxitems", "{6A5BF7AD-8D0C-4920-A000-CBE32C2C4035}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceSensors", "DeviceSensors\DeviceSensors.vcxitems", "{64C662A2-4C50-42EC-94A2-D2B7980FEA06}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adafruit_SSD1306", "Adafruit_SSD1306\Adafruit_SSD1306.vcxitems", "{31087439-64A1-4CBD-B6A4-DA31429C4511}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Adafruit-GFX-Library", "Adafruit-GFX-Library\Adafruit-GFX-Library.vcxitems", "{64DC3782-ACC6-4EAD-AE5C-5058244748C5}"
@@ -41,8 +39,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurementConverter", 
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UnitMeasurement", "UnitMeasurement\UnitMeasurement.vcxitems", "{6AE9BF75-C15B-4525-B398-7C5174126300}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceSensors", "DisplayDeviceSensors\DisplayDeviceSensors.vcxitems", "{DF58BA50-4E2E-4283-B67B-B3C614CBD6BB}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceMQ", "DisplayDeviceMQ\DisplayDeviceMQ.vcxitems", "{51C2E3EE-A0BC-41C3-8032-FC3D2A9C9E5F}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceNTP", "DisplayDeviceNTP\DisplayDeviceNTP.vcxitems", "{348BA743-B5BF-49D1-9E17-A6CBAE1E9F27}"
@@ -56,6 +52,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceWiFiAccess", "DisplayDeviceWiFiAccess\DisplayDeviceWiFiAccess.vcxitems", "{85C7178B-DE90-4984-A9AF-14B3911C20ED}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceSerial", "DeviceSerial\DeviceSerial.vcxitems", "{CC01F7A5-839F-4392-B61B-9C32C0CC5DB9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DeviceSensor", "DeviceSensor\DeviceSensor.vcxitems", "{AA407307-7394-4F6A-8C9C-BC7F0835255A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DisplayDeviceSensor", "DisplayDeviceSensor\DisplayDeviceSensor.vcxitems", "{5B130A9B-1064-4215-B31B-9D6911CCF034}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

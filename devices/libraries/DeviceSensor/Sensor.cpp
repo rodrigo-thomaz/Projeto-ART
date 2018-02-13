@@ -1,6 +1,6 @@
 #include "Sensor.h"
 #include "SensorInDevice.h"
-#include "DeviceSensors.h"
+#include "DeviceSensor.h"
 #include "SensorTrigger.h"
 
 #include "../DallasTemperature/DallasTemperature.h"
@@ -23,8 +23,8 @@ namespace ART
 
 		setLabel(jsonObject["label"]);
 
-		DeviceSensors* deviceSensors = _sensorInDevice->getDeviceSensors();
-		_sensorDatasheet = deviceSensors->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
+		DeviceSensor* deviceSensor = _sensorInDevice->getDeviceSensor();
+		_sensorDatasheet = deviceSensor->getSensorDatasheetByKey(_sensorDatasheetId, _sensorTypeId);
 
 		_sensorTempDSFamily = new SensorTempDSFamily(this, jsonObject["sensorTempDSFamily"]);
 		_sensorUnitMeasurementScale = new SensorUnitMeasurementScale(this, jsonObject["sensorUnitMeasurementScale"]);

@@ -9,14 +9,14 @@
 
 namespace ART
 {
-	class DeviceSensors;
+	class DeviceSensor;
 
 	class SensorDatasheet
 	{
 
 	public:
 
-		SensorDatasheet(DeviceSensors* deviceSensors, JsonObject& jsonObject);
+		SensorDatasheet(DeviceSensor* deviceSensor, JsonObject& jsonObject);
 		~SensorDatasheet();
 
 		SensorTypeEnum								getSensorTypeId();
@@ -24,7 +24,7 @@ namespace ART
 
 	private:
 
-		DeviceSensors *								_deviceSensors;
+		DeviceSensor *								_deviceSensor;
 
 		SensorTypeEnum								_sensorTypeId;
 		SensorDatasheetEnum							_sensorDatasheetId;

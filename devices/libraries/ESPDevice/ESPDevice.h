@@ -10,7 +10,7 @@
 #include "DeviceNTP.h"
 #include "DeviceBinary.h"
 #include "DeviceBuzzer.h"
-#include "DeviceSensors.h"
+#include "DeviceSensor.h"
 #include "DisplayDevice.h"
 
 #include "functional"
@@ -61,8 +61,8 @@ namespace ART
 
 		char*								getDeviceKeyAsJson();
 
-		bool								hasDeviceSensors();
-		DeviceSensors*						getDeviceSensors();
+		bool								hasDeviceSensor();
+		DeviceSensor*						getDeviceSensor();
 
 		bool								hasDeviceSerial();
 		DeviceSerial*						getDeviceSerial();
@@ -80,7 +80,7 @@ namespace ART
 		char *								_label;
 
 		bool 								_hasDeviceSerial;
-		bool 								_hasDeviceSensors;
+		bool 								_hasDeviceSensor;
 
 		char *								_webApiHost;
 		uint16_t							_webApiPort;
@@ -94,7 +94,7 @@ namespace ART
 		DeviceNTP*							_deviceNTP;
 		DeviceBinary*						_deviceBinary;
 		DeviceBuzzer*						_deviceBuzzer;
-		DeviceSensors*						_deviceSensors;
+		DeviceSensor*						_deviceSensor;
 		DisplayDevice*						_displayDevice;
 
 		void								autoLoad();

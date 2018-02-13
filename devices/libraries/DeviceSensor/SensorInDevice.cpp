@@ -1,16 +1,16 @@
 #include "SensorInDevice.h"
 
-#include "DeviceSensors.h"
+#include "DeviceSensor.h"
 #include "../ESPDevice/ESPDevice.h"
 #include "../DeviceDebug/DeviceDebug.h"
 
 namespace ART
 {
-	SensorInDevice::SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject)
+	SensorInDevice::SensorInDevice(DeviceSensor* deviceSensor, JsonObject& jsonObject)
 	{
-		_deviceSensors = deviceSensors;
+		_deviceSensor = deviceSensor;
 
-		DeviceDebug* deviceDebug = _deviceSensors->getESPDevice()->getDeviceDebug();
+		DeviceDebug* deviceDebug = _deviceSensor->getESPDevice()->getDeviceDebug();
 
 		deviceDebug->printlnLevel(DeviceDebug::DEBUG, "SensorInDevice", "constructor", "begin");
 		
@@ -23,7 +23,7 @@ namespace ART
 
 	SensorInDevice::~SensorInDevice()
 	{
-		_deviceSensors->getESPDevice()->getDeviceDebug()->printlnLevel(DeviceDebug::DEBUG, "SensorInDevice", "destructor");
+		_deviceSensor->getESPDevice()->getDeviceDebug()->printlnLevel(DeviceDebug::DEBUG, "SensorInDevice", "destructor");
 	}
 
 	Sensor * SensorInDevice::getSensor()
@@ -31,9 +31,9 @@ namespace ART
 		return _sensor;
 	}
 
-	DeviceSensors * SensorInDevice::getDeviceSensors()
+	DeviceSensor * SensorInDevice::getDeviceSensor()
 	{
-		return _deviceSensors;
+		return _deviceSensor;
 	}
 
 	short SensorInDevice::getOrdination()

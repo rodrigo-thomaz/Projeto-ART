@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{64c662a2-4c50-42ec-94a2-d2b7980fea06}</ItemsProjectGuid>
+    <ItemsProjectGuid>{aa407307-7394-4f6a-8c9c-bc7f0835255a}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -16,10 +16,10 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
     <Text Include="$(MSBuildThisFileDirectory)library.properties" />
-    <Text Include="$(MSBuildThisFileDirectory)DeviceSensors.h" />
+    <Text Include="$(MSBuildThisFileDirectory)DeviceSensor.h" />
   </ItemGroup>
   <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DeviceSensors.h" /> -->
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DeviceSensor.h" /> -->
     <ClInclude Include="$(MSBuildThisFileDirectory)PositionEnum.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)Sensor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)SensorDatasheet.h" />
@@ -32,7 +32,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)SensorUnitMeasurementScale.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceSensors.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceSensor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)Sensor.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheet.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)SensorDatasheetUnitMeasurementDefault.cpp" />

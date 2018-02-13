@@ -1,5 +1,5 @@
-#ifndef DeviceSensors_h
-#define DeviceSensors_h
+#ifndef DeviceSensor_h
+#define DeviceSensor_h
 
 #include "vector"
 #include "tuple"
@@ -16,14 +16,14 @@
 // Data wire is plugged into port 0
 #define ONE_WIRE_BUS 0
 
-#define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
+#define DEVICE_SENSOR_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
 
-#define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_TOPIC_PUB   				"DeviceSensors/GetFullByDeviceInApplicationIdIoT" 
-#define DEVICE_SENSORS_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB		   	"DeviceSensors/GetFullByDeviceInApplicationIdCompletedIoT"
+#define DEVICE_SENSOR_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_TOPIC_PUB   					"DeviceSensor/GetFullByDeviceInApplicationIdIoT" 
+#define DEVICE_SENSOR_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB		   	"DeviceSensor/GetFullByDeviceInApplicationIdCompletedIoT"
 
-#define DEVICE_SENSORS_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB						"DeviceSensors/SetReadIntervalInMilliSecondsIoT"
-#define DEVICE_SENSORS_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB					"DeviceSensors/SetPublishIntervalInMilliSecondsIoT"
-#define DEVICE_SENSORS_MESSAGE_TOPIC_PUB												"DeviceSensors/MessageIoT"
+#define DEVICE_SENSOR_SET_READ_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB						"DeviceSensor/SetReadIntervalInMilliSecondsIoT"
+#define DEVICE_SENSOR_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB					"DeviceSensor/SetPublishIntervalInMilliSecondsIoT"
+#define DEVICE_SENSOR_MESSAGE_TOPIC_PUB													"DeviceSensor/MessageIoT"
 
 #define SENSOR_IN_DEVICE_SET_ORDINATION_TOPIC_SUB										"SensorInDevice/SetOrdinationIoT"
 
@@ -45,13 +45,13 @@ namespace ART
 {
 	class ESPDevice;		
 
-	class DeviceSensors
+	class DeviceSensor
 	{
 
 	public:
 
-		DeviceSensors(ESPDevice* espDevice);
-		~DeviceSensors();
+		DeviceSensor(ESPDevice* espDevice);
+		~DeviceSensor();
 
 		void 								begin();
 

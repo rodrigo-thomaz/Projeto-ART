@@ -8,30 +8,30 @@
 
 namespace ART
 {
-	class DeviceSensors;
+	class DeviceSensor;
 
 	class SensorInDevice
 	{
 
 	public:
-		SensorInDevice(DeviceSensors* deviceSensors, JsonObject& jsonObject);
+		SensorInDevice(DeviceSensor* deviceSensor, JsonObject& jsonObject);
 		~SensorInDevice();
 
 		Sensor*								getSensor();
-		DeviceSensors*						getDeviceSensors();
+		DeviceSensor*						getDeviceSensor();
 
 		short								getOrdination();
 
 	private:
 
-		DeviceSensors *						_deviceSensors;
+		DeviceSensor *						_deviceSensor;
 		Sensor *							_sensor;		
 
 		short 								_ordination;
 
 		void								setOrdination(short value);
 
-		friend class						DeviceSensors;
+		friend class						DeviceSensor;
 
 	};
 }

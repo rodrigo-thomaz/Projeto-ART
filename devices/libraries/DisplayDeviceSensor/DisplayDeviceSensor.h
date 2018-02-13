@@ -1,22 +1,22 @@
-#ifndef DisplayDeviceSensors_h
-#define DisplayDeviceSensors_h
+#ifndef DisplayDeviceSensor_h
+#define DisplayDeviceSensor_h
 
 #include "Arduino.h"
 
-#include "../DeviceSensors/Sensor.h"
+#include "../DeviceSensor/Sensor.h"
 
 namespace ART
 {
 	class DisplayDevice;
 
-	class DisplayDeviceSensors
+	class DisplayDeviceSensor
 	{
 
 	public:
-		DisplayDeviceSensors(DisplayDevice* displayDevice);
-		~DisplayDeviceSensors();
+		DisplayDeviceSensor(DisplayDevice* displayDevice);
+		~DisplayDeviceSensor();
 
-		static void						create(DisplayDeviceSensors* (&displayDeviceSensors), DisplayDevice* displayDevice);
+		static void						create(DisplayDeviceSensor* (&displayDeviceSensor), DisplayDevice* displayDevice);
 
 		void							printUpdate(bool on);
 		void							printSensors();

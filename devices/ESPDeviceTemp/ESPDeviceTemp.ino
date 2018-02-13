@@ -114,10 +114,10 @@ void loopInApplication()
 
   espDevice.getDeviceNTP()->update();
 
-  if(espDevice.hasDeviceSensors()){
-    DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
-    bool deviceSensorsReaded = deviceSensors->read();
-    espDevice.getDisplayDevice()->getDisplayDeviceSensors()->printUpdate(deviceSensorsReaded);
+  if(espDevice.hasDeviceSensor()){
+    DeviceSensor* deviceSensor = espDevice.getDeviceSensor();
+    bool deviceSensorReaded = deviceSensor->read();
+    espDevice.getDisplayDevice()->getDisplayDeviceSensor()->printUpdate(deviceSensorReaded);
   }
   
   // MQTT
@@ -166,21 +166,21 @@ void loopMQQTConnected()
   
 
   // Sensor
-  if(espDevice.hasDeviceSensors()){
+  if(espDevice.hasDeviceSensor()){
     
-    DeviceSensors* deviceSensors = espDevice.getDeviceSensors();
+    DeviceSensor* deviceSensor = espDevice.getDeviceSensor();
     
-    if (deviceSensors->initialized()) {        
+    if (deviceSensor->initialized()) {        
       
-      espDevice.getDisplayDevice()->getDisplayDeviceSensors()->printSensors();
+      espDevice.getDisplayDevice()->getDisplayDeviceSensor()->printSensors();
       
-      bool deviceSensorsPublished = deviceSensors->publish();
+      bool deviceSensorPublished = deviceSensor->publish();
 
-      if(deviceSensorsPublished){
+      if(deviceSensorPublished){
         mqqtPrintSent = true;
       }  
 
-      Serial.printf("deviceSensors->publish: %s\n", deviceSensorsPublished ? "true" : "false");    
+      Serial.printf("deviceSensor->publish: %s\n", deviceSensorPublished ? "true" : "false");    
     }
   }
   

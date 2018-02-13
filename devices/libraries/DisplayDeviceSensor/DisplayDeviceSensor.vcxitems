@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{df58ba50-4e2e-4283-b67b-b3c614cbd6bb}</ItemsProjectGuid>
+    <ItemsProjectGuid>{5b130a9b-1064-4215-b31b-9d6911ccf034}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -16,12 +16,12 @@
   <ItemGroup>
     <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
 	<Text Include="$(MSBuildThisFileDirectory)library.properties" />
-  	<Text Include="$(MSBuildThisFileDirectory)DisplayDeviceSensors.h" />
+  	<Text Include="$(MSBuildThisFileDirectory)DisplayDeviceSensor.h" />
   </ItemGroup>
  <ItemGroup>
-    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DisplayDeviceSensors.h" /> -->
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DisplayDeviceSensor.h" /> -->
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayDeviceSensors.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DisplayDeviceSensor.cpp" />
   </ItemGroup>
   </Project>

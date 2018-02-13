@@ -39,7 +39,7 @@ namespace ART
 		void 								setMax(float value);
 		void 								setMin(float value);
 
-		friend class						DeviceSensors;
+		friend class						DeviceSensor;
 	};
 }
 

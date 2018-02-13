@@ -15,7 +15,7 @@ namespace ART
 		_webApiUri = (char*)webApiUri;
 
 		_hasDeviceSerial = false;
-		_hasDeviceSensors = false;
+		_hasDeviceSensor = false;
 
 		DeviceDebug::create(_deviceDebug, this);
 		DeviceWiFi::create(_deviceWiFi, this);
@@ -46,7 +46,7 @@ namespace ART
 		delete (_deviceBuzzer);
 
 		if(_hasDeviceSerial) delete (_deviceSerial);
-		if (_hasDeviceSensors) delete (_deviceSensors);
+		if (_hasDeviceSensor) delete (_deviceSensor);
 
 		delete (_displayDevice);
 
@@ -195,14 +195,14 @@ namespace ART
 		return _deviceBuzzer;
 	}
 
-	bool ESPDevice::hasDeviceSensors()
+	bool ESPDevice::hasDeviceSensor()
 	{
-		return _hasDeviceSensors;
+		return _hasDeviceSensor;
 	}
 
-	DeviceSensors* ESPDevice::getDeviceSensors()
+	DeviceSensor* ESPDevice::getDeviceSensor()
 	{
-		return _deviceSensors;
+		return _deviceSensor;
 	}
 
 	DisplayDevice * ESPDevice::getDisplayDevice()
@@ -313,7 +313,7 @@ namespace ART
 		_label[strlen(label) + 1] = '\0';
 
 		_hasDeviceSerial = jsonObject["hasDeviceSerial"];
-		_hasDeviceSensors = jsonObject["hasDeviceSensors"];
+		_hasDeviceSensor = jsonObject["hasDeviceSensor"];
 
 		_deviceDebug->load(jsonObject);
 		_deviceWiFi->load(jsonObject["deviceWiFi"]);
@@ -332,10 +332,10 @@ namespace ART
 			_deviceSerial->begin();
 		}
 
-		Serial.printf("hasDeviceSensors: %s\n", _hasDeviceSensors ? "true" : "false");
-		if (_hasDeviceSensors) {
-			_deviceSensors = new DeviceSensors(this);
-			_deviceSensors->begin();
+		Serial.printf("hasDeviceSensor: %s\n", _hasDeviceSensor ? "true" : "false");
+		if (_hasDeviceSensor) {
+			_deviceSensor = new DeviceSensor(this);
+			_deviceSensor->begin();
 		}
 
 		_loaded = true;
