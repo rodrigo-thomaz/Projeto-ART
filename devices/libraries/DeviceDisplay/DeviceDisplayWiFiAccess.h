@@ -1,5 +1,5 @@
-#ifndef DisplayDeviceWiFiAccess_h
-#define DisplayDeviceWiFiAccess_h
+#ifndef DeviceDisplayWiFiAccess_h
+#define DeviceDisplayWiFiAccess_h
 
 #include "Arduino.h"
 #include "../ArduinoJson/ArduinoJson.h"
@@ -8,16 +8,16 @@
 
 namespace ART
 {
-	class DisplayDevice;
+	class DeviceDisplay;
 
-	class DisplayDeviceWiFiAccess
+	class DeviceDisplayWiFiAccess
 	{
 	public:
 
-		DisplayDeviceWiFiAccess(DisplayDevice* displayDevice);
-		~DisplayDeviceWiFiAccess();
+		DeviceDisplayWiFiAccess(DeviceDisplay* deviceDisplay);
+		~DeviceDisplayWiFiAccess();
 
-		static void					create(DisplayDeviceWiFiAccess* (&displayDeviceWiFiAccess), DisplayDevice* displayDevice);
+		static void					create(DeviceDisplayWiFiAccess* (&deviceDisplayWiFiAccess), DeviceDisplay* deviceDisplay);
 
 		void						begin();
 
@@ -26,7 +26,7 @@ namespace ART
 
 	private:
 
-		DisplayDevice *				_displayDevice;
+		DeviceDisplay *				_deviceDisplay;
 
 		String 						_pin;
 		int 						_nextFireTimeInSeconds = -1;

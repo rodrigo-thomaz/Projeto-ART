@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{ab939b5b-5938-43fc-9e63-56caf54ce3a7}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)readme.txt" />
+    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+    <Text Include="$(MSBuildThisFileDirectory)DeviceDisplay.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)DeviceDisplay.h" /> -->
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceDisplayBinary.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceDisplayMQ.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceDisplayNTP.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceDisplaySensor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceDisplayWiFi.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)DeviceDisplayWiFiAccess.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceDisplay.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceDisplayBinary.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceDisplayMQ.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceDisplayNTP.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceDisplaySensor.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceDisplayWiFi.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)DeviceDisplayWiFiAccess.cpp" />
+  </ItemGroup>
+</Project>

@@ -1,41 +1,41 @@
-#include "DisplayDeviceSensor.h"
-#include "../DisplayDevice/DisplayDevice.h"
+#include "DeviceDisplaySensor.h"
+#include "../DeviceDisplay/DeviceDisplay.h"
 #include "../ESPDevice/ESPDevice.h"
 #include "../DeviceSensor/SensorInDevice.h"
 #include "../UnitMeasurement/UnitMeasurementEnum.h"
 
 namespace ART
 {
-	DisplayDeviceSensor::DisplayDeviceSensor(DisplayDevice* displayDevice)
+	DeviceDisplaySensor::DeviceDisplaySensor(DeviceDisplay* deviceDisplay)
 	{
-		_displayDevice = displayDevice;
+		_deviceDisplay = deviceDisplay;
 	}
 
-	DisplayDeviceSensor::~DisplayDeviceSensor()
+	DeviceDisplaySensor::~DeviceDisplaySensor()
 	{
 	}
 
-	void DisplayDeviceSensor::create(DisplayDeviceSensor *(&displayDeviceSensor), DisplayDevice * displayDevice)
+	void DeviceDisplaySensor::create(DeviceDisplaySensor *(&deviceDisplaySensor), DeviceDisplay * deviceDisplay)
 	{
-		displayDeviceSensor = new DisplayDeviceSensor(displayDevice);
+		deviceDisplaySensor = new DeviceDisplaySensor(deviceDisplay);
 	}
 
-	void DisplayDeviceSensor::printUpdate(bool on)
+	void DeviceDisplaySensor::printUpdate(bool on)
 	{
-		_displayDevice->display.setFont();
-		_displayDevice->display.setTextSize(1);
+		_deviceDisplay->display.setFont();
+		_deviceDisplay->display.setTextSize(1);
 		if (on) {
-			_displayDevice->display.setTextColor(BLACK, WHITE);
-			_displayDevice->display.setCursor(66, 8);
+			_deviceDisplay->display.setTextColor(BLACK, WHITE);
+			_deviceDisplay->display.setCursor(66, 8);
 		}
 		else {
-			_displayDevice->display.setTextColor(WHITE, BLACK);
-			_displayDevice->display.setCursor(66, 9);
+			_deviceDisplay->display.setTextColor(WHITE, BLACK);
+			_deviceDisplay->display.setCursor(66, 9);
 		}
-		_displayDevice->display.println("S");
+		_deviceDisplay->display.println("S");
 	}
 
-	void DisplayDeviceSensor::printSensors()
+	void DeviceDisplaySensor::printSensors()
 	{
 		// variáveis
 
@@ -60,14 +60,14 @@ namespace ART
 		int screenWidth = screenX2 - screenX1;
 		int screenHeight = screenY2 - screenY1;
 
-		std::tuple<SensorInDevice**, short> tpl = _displayDevice->getESPDevice()->getDeviceSensor()->getSensorsInDevice();
+		std::tuple<SensorInDevice**, short> tpl = _deviceDisplay->getESPDevice()->getDeviceSensor()->getSensorsInDevice();
 
 		SensorInDevice** sensorsInDevice = std::get<0>(tpl);
 		short sensorsCount = std::get<1>(tpl);
 
 		int boxChunk = round(screenWidth / sensorsCount);
 
-		//_displayDevice->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
+		//_deviceDisplay->display.drawRect(screenX1, screenY1, screenWidth, screenHeight, WHITE);
 
 		for (int i = 0; i < sensorsCount; ++i) {
 			Sensor* sensor = sensorsInDevice[i]->getSensor();
@@ -77,7 +77,7 @@ namespace ART
 		}
 	}
 
-	void DisplayDeviceSensor::printBar(Sensor* sensor, int x, int y, int width, int height)
+	void DeviceDisplaySensor::printBar(Sensor* sensor, int x, int y, int width, int height)
 	{
 		int barMarginTop = 10;
 		int barMarginLeft = 5;
@@ -94,14 +94,14 @@ namespace ART
 		int barHeight = barY2 - barY1;
 
 		// Box
-		//_displayDevice->display.drawRect(x, y, width, height, WHITE);	
+		//_deviceDisplay->display.drawRect(x, y, width, height, WHITE);	
 		// Bar
-		_displayDevice->display.drawRect(barX1, barY1, barWidth, barHeight, WHITE);
+		_deviceDisplay->display.drawRect(barX1, barY1, barWidth, barHeight, WHITE);
 		/// Bar Value
 		this->printBarValue(sensor, barX1, barY1, barWidth, barHeight);
 	}
 
-	void DisplayDeviceSensor::printBarValue(Sensor* sensor, int x, int y, int width, int height)
+	void DeviceDisplaySensor::printBarValue(Sensor* sensor, int x, int y, int width, int height)
 	{
 		float chartLimiterMax = sensor->getSensorUnitMeasurementScale()->getChartLimiterMax();
 		float chartLimiterMin = sensor->getSensorUnitMeasurementScale()->getChartLimiterMin();
@@ -117,10 +117,10 @@ namespace ART
 
 		int tempRectY = y + height - tempHeight;
 
-		_displayDevice->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
+		_deviceDisplay->display.fillRect(x, tempRectY, width, tempHeight, WHITE);
 	}
 
-	void DisplayDeviceSensor::printText(Sensor* sensor, int x, int y)
+	void DeviceDisplaySensor::printText(Sensor* sensor, int x, int y)
 	{
 		UnitMeasurementEnum unitMeasurementId = sensor->getSensorUnitMeasurementScale()->getUnitMeasurementId();
 
@@ -129,12 +129,12 @@ namespace ART
 		//Temporario
 		String symbol = "C";
 
-		_displayDevice->display.setFont();
-		_displayDevice->display.setTextSize(1);
-		_displayDevice->display.setTextColor(WHITE);
-		_displayDevice->display.setCursor(x, y);
-		_displayDevice->display.setTextWrap(false);
-		_displayDevice->display.print(sensor->getValue(), 1);
-		_displayDevice->display.println(symbol);
+		_deviceDisplay->display.setFont();
+		_deviceDisplay->display.setTextSize(1);
+		_deviceDisplay->display.setTextColor(WHITE);
+		_deviceDisplay->display.setCursor(x, y);
+		_deviceDisplay->display.setTextWrap(false);
+		_deviceDisplay->display.print(sensor->getValue(), 1);
+		_deviceDisplay->display.println(symbol);
 	}
 }

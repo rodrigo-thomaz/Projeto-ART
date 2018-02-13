@@ -79,7 +79,7 @@ void loop() {
       loopInApplication();
   }
   else{
-    espDevice.getDisplayDevice()->getDisplayDeviceWiFiAccess()->loop();
+    espDevice.getDeviceDisplay()->getDeviceDisplayWiFiAccess()->loop();
   }
 
   //keep-alive da comunicação com broker MQTT
@@ -110,14 +110,14 @@ void loop() {
 
 void loopInApplication()
 {
-  espDevice.getDisplayDevice()->display.clearDisplay();
+  espDevice.getDeviceDisplay()->display.clearDisplay();
 
   espDevice.getDeviceNTP()->update();
 
   if(espDevice.hasDeviceSensor()){
     DeviceSensor* deviceSensor = espDevice.getDeviceSensor();
     bool deviceSensorReaded = deviceSensor->read();
-    espDevice.getDisplayDevice()->getDisplayDeviceSensor()->printUpdate(deviceSensorReaded);
+    espDevice.getDeviceDisplay()->getDeviceDisplaySensor()->printUpdate(deviceSensorReaded);
   }
   
   // MQTT
@@ -126,9 +126,9 @@ void loopInApplication()
   }
 
   // Wifi
-  espDevice.getDisplayDevice()->getDisplayDeviceWiFi()->printSignal();
+  espDevice.getDeviceDisplay()->getDeviceDisplayWiFi()->printSignal();
   
-  espDevice.getDisplayDevice()->display.display(); 
+  espDevice.getDeviceDisplay()->display.display(); 
 
 }
 
@@ -136,8 +136,8 @@ void loopMQQTConnected()
 { 
   Serial.println(F("[loopMQQTConnected] begin"));
   
-  espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printConnected();
-  espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printReceived(false);  
+  espDevice.getDeviceDisplay()->getDeviceDisplayMQ()->printConnected();
+  espDevice.getDeviceDisplay()->getDeviceDisplayMQ()->printReceived(false);  
 
   bool mqqtPrintSent = false;
 
@@ -172,7 +172,7 @@ void loopMQQTConnected()
     
     if (deviceSensor->initialized()) {        
       
-      espDevice.getDisplayDevice()->getDisplayDeviceSensor()->printSensors();
+      espDevice.getDeviceDisplay()->getDeviceDisplaySensor()->printSensors();
       
       bool deviceSensorPublished = deviceSensor->publish();
 
@@ -184,7 +184,7 @@ void loopMQQTConnected()
     }
   }
   
-  espDevice.getDisplayDevice()->getDisplayDeviceMQ()->printSent(mqqtPrintSent); 
+  espDevice.getDeviceDisplay()->getDeviceDisplayMQ()->printSent(mqqtPrintSent); 
 
   Serial.println(F("[loopMQQTConnected] end"));
 }

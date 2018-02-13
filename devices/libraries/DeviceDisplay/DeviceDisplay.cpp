@@ -1,4 +1,4 @@
-#include "DisplayDevice.h"
+#include "DeviceDisplay.h"
 #include "ESPDevice.h"
 
 #include "Arduino.h"
@@ -86,29 +86,29 @@ static const unsigned char PROGMEM logo16_glcd_bmp[] =
 
 namespace ART
 {
-	DisplayDevice::DisplayDevice(ESPDevice* espDevice)
+	DeviceDisplay::DeviceDisplay(ESPDevice* espDevice)
 	{
 		_espDevice = espDevice;
 
-		DisplayDeviceBinary::create(_displayDeviceBinary, this);
-		DisplayDeviceMQ::create(_displayDeviceMQ, this);
-		DisplayDeviceWiFiAccess::create(_displayDeviceWiFiAccess, this);
-		DisplayDeviceNTP::create(_displayDeviceNTP, this);
-		DisplayDeviceWiFi::create(_displayDeviceWiFi, this);
-		DisplayDeviceSensor::create(_displayDeviceSensor, this);
+		DeviceDisplayBinary::create(_deviceDisplayBinary, this);
+		DeviceDisplayMQ::create(_deviceDisplayMQ, this);
+		DeviceDisplayWiFiAccess::create(_deviceDisplayWiFiAccess, this);
+		DeviceDisplayNTP::create(_deviceDisplayNTP, this);
+		DeviceDisplayWiFi::create(_deviceDisplayWiFi, this);
+		DeviceDisplaySensor::create(_deviceDisplaySensor, this);
 	}
 
-	DisplayDevice::~DisplayDevice()
+	DeviceDisplay::~DeviceDisplay()
 	{
-		delete (_displayDeviceBinary);
+		delete (_deviceDisplayBinary);
 	}
 
-	void DisplayDevice::create(DisplayDevice *(&displayDevice), ESPDevice * espDevice)
+	void DeviceDisplay::create(DeviceDisplay *(&deviceDisplay), ESPDevice * espDevice)
 	{
-		displayDevice = new DisplayDevice(espDevice);
+		deviceDisplay = new DeviceDisplay(espDevice);
 	}
 
-	void DisplayDevice::begin()
+	void DeviceDisplay::begin()
 	{
 		// Display
 		// by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
@@ -132,42 +132,42 @@ namespace ART
 		display.setCursor(0, 0);
 		display.display();
 
-		_displayDeviceMQ->begin();
-		_displayDeviceWiFiAccess->begin();
+		_deviceDisplayMQ->begin();
+		_deviceDisplayWiFiAccess->begin();
 	}
 
-	ESPDevice * DisplayDevice::getESPDevice()
+	ESPDevice * DeviceDisplay::getESPDevice()
 	{
 		return _espDevice;
 	}
 
-	DisplayDeviceBinary * DisplayDevice::getDisplayDeviceBinary()
+	DeviceDisplayBinary * DeviceDisplay::getDeviceDisplayBinary()
 	{
-		return _displayDeviceBinary;
+		return _deviceDisplayBinary;
 	}
 
-	DisplayDeviceMQ * DisplayDevice::getDisplayDeviceMQ()
+	DeviceDisplayMQ * DeviceDisplay::getDeviceDisplayMQ()
 	{
-		return _displayDeviceMQ;
+		return _deviceDisplayMQ;
 	}
 
-	DisplayDeviceWiFiAccess * DisplayDevice::getDisplayDeviceWiFiAccess()
+	DeviceDisplayWiFiAccess * DeviceDisplay::getDeviceDisplayWiFiAccess()
 	{
-		return _displayDeviceWiFiAccess;
+		return _deviceDisplayWiFiAccess;
 	}
 
-	DisplayDeviceNTP * DisplayDevice::getDisplayDeviceNTP()
+	DeviceDisplayNTP * DeviceDisplay::getDeviceDisplayNTP()
 	{
-		return _displayDeviceNTP;
+		return _deviceDisplayNTP;
 	}
 
-	DisplayDeviceWiFi * DisplayDevice::getDisplayDeviceWiFi()
+	DeviceDisplayWiFi * DeviceDisplay::getDeviceDisplayWiFi()
 	{
-		return _displayDeviceWiFi;
+		return _deviceDisplayWiFi;
 	}
 
-	DisplayDeviceSensor * DisplayDevice::getDisplayDeviceSensor()
+	DeviceDisplaySensor * DeviceDisplay::getDeviceDisplaySensor()
 	{
-		return _displayDeviceSensor;
+		return _deviceDisplaySensor;
 	}
 }

@@ -11,7 +11,7 @@
 #include "DeviceBinary.h"
 #include "DeviceBuzzer.h"
 #include "DeviceSensor.h"
-#include "DisplayDevice.h"
+#include "DeviceDisplay.h"
 
 #include "functional"
 #include "vector"
@@ -57,7 +57,7 @@ namespace ART
 		DeviceNTP*							getDeviceNTP();
 		DeviceBinary*						getDeviceBinary();
 		DeviceBuzzer*						getDeviceBuzzer();		
-		DisplayDevice*						getDisplayDevice();
+		DeviceDisplay*						getDeviceDisplay();
 
 		char*								getDeviceKeyAsJson();
 
@@ -95,7 +95,7 @@ namespace ART
 		DeviceBinary*						_deviceBinary;
 		DeviceBuzzer*						_deviceBuzzer;
 		DeviceSensor*						_deviceSensor;
-		DisplayDevice*						_displayDevice;
+		DeviceDisplay*						_deviceDisplay;
 
 		void								autoLoad();
 		void								load(String json);

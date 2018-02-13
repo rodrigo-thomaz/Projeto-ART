@@ -24,7 +24,7 @@ namespace ART
 		DeviceBinary::create(_deviceBinary, this);
 		DeviceBuzzer::create(_deviceBuzzer, this);		
 		DeviceInApplication::create(_deviceInApplication, this);				
-		DisplayDevice::create(_displayDevice, this);
+		DeviceDisplay::create(_deviceDisplay, this);
 
 		Serial.println(F("[ESPDevice::ESPDevice]] constructor end"));
 	}
@@ -48,7 +48,7 @@ namespace ART
 		if(_hasDeviceSerial) delete (_deviceSerial);
 		if (_hasDeviceSensor) delete (_deviceSensor);
 
-		delete (_displayDevice);
+		delete (_deviceDisplay);
 
 		Serial.println(F("[ESPDevice::ESPDevice]] destructor begin"));
 	}
@@ -61,7 +61,7 @@ namespace ART
 		_deviceMQ->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 		_deviceMQ->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 
-		_displayDevice->begin();
+		_deviceDisplay->begin();
 		_deviceInApplication->begin();
 		_deviceMQ->begin();		
 		_deviceWiFi->begin();
@@ -205,9 +205,9 @@ namespace ART
 		return _deviceSensor;
 	}
 
-	DisplayDevice * ESPDevice::getDisplayDevice()
+	DeviceDisplay * ESPDevice::getDeviceDisplay()
 	{
-		return _displayDevice;
+		return _deviceDisplay;
 	}
 
 	char * ESPDevice::getDeviceKeyAsJson()

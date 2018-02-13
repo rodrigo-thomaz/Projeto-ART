@@ -1,5 +1,5 @@
-#ifndef DisplayDeviceNTP_h
-#define DisplayDeviceNTP_h
+#ifndef DeviceDisplayNTP_h
+#define DeviceDisplayNTP_h
 
 #include "functional"
 #include "vector"
@@ -8,21 +8,21 @@
 
 namespace ART
 {
-	class DisplayDevice;
+	class DeviceDisplay;
 
-	class DisplayDeviceNTP
+	class DeviceDisplayNTP
 	{
 
 	public:
 
-		DisplayDeviceNTP(DisplayDevice* displayDevice);
-		~DisplayDeviceNTP();
+		DeviceDisplayNTP(DeviceDisplay* deviceDisplay);
+		~DeviceDisplayNTP();
 
-		static void										create(DisplayDeviceNTP* (&displayDeviceNTP), DisplayDevice* displayDevice);
+		static void										create(DeviceDisplayNTP* (&deviceDisplayNTP), DeviceDisplay* deviceDisplay);
 
 	private:
 
-		DisplayDevice *									_displayDevice;
+		DeviceDisplay *									_deviceDisplay;
 
 		void											printTime();
 		void											printUpdate(bool on);

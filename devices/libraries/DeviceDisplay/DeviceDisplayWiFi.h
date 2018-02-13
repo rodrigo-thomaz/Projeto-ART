@@ -1,5 +1,5 @@
-#ifndef DisplayDeviceWiFi_h
-#define DisplayDeviceWiFi_h
+#ifndef DeviceDisplayWiFi_h
+#define DeviceDisplayWiFi_h
 
 #include "functional"
 #include "vector"
@@ -8,21 +8,21 @@
 
 namespace ART
 {
-	class DisplayDevice;
+	class DeviceDisplay;
 
-	class DisplayDeviceWiFi
+	class DeviceDisplayWiFi
 	{
 	public:
-		DisplayDeviceWiFi(DisplayDevice* displayDevice);
-		~DisplayDeviceWiFi();
+		DeviceDisplayWiFi(DeviceDisplay* deviceDisplay);
+		~DeviceDisplayWiFi();
 
-		static void														create(DisplayDeviceWiFi* (&displayDeviceWiFi), DisplayDevice* displayDevice);
+		static void														create(DeviceDisplayWiFi* (&deviceDisplayWiFi), DeviceDisplay* deviceDisplay);
 
 		void 															printSignal();
 
 	private:
 
-		DisplayDevice *													_displayDevice;
+		DeviceDisplay *													_deviceDisplay;
 
 		bool 															_firstTimecaptivePortalCallback = true;
 

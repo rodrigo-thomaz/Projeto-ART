@@ -1,19 +1,19 @@
-#ifndef DisplayDeviceMQ_h
-#define DisplayDeviceMQ_h
+#ifndef DeviceDisplayMQ_h
+#define DeviceDisplayMQ_h
 
 #include "Arduino.h"
 
 namespace ART
 {
-	class DisplayDevice;
+	class DeviceDisplay;
 
-	class DisplayDeviceMQ
+	class DeviceDisplayMQ
 	{
 	public:
-		DisplayDeviceMQ(DisplayDevice* displayDevice);
-		~DisplayDeviceMQ();
+		DeviceDisplayMQ(DeviceDisplay* deviceDisplay);
+		~DeviceDisplayMQ();
 
-		static void				create(DisplayDeviceMQ* (&displayDeviceMQ), DisplayDevice* displayDevice);
+		static void				create(DeviceDisplayMQ* (&deviceDisplayMQ), DeviceDisplay* deviceDisplay);
 
 		void					begin();
 
@@ -23,7 +23,7 @@ namespace ART
 
 	private:
 
-		DisplayDevice *			_displayDevice;
+		DeviceDisplay *			_deviceDisplay;
 
 		int			         	_x;
 		int			         	_y;
