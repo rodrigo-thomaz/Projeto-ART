@@ -191,6 +191,10 @@
     <Compile Include="Migrations\201802122350169_RenameDeviceSernsors.Designer.cs">
       <DependentUpon>201802122350169_RenameDeviceSernsors.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802130015513_RenameDeviceSernsorId.cs" />
+    <Compile Include="Migrations\201802130015513_RenameDeviceSernsorId.Designer.cs">
+      <DependentUpon>201802130015513_RenameDeviceSernsorId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -289,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802122350169_RenameDeviceSernsors.resx">
       <DependentUpon>201802122350169_RenameDeviceSernsors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802130015513_RenameDeviceSernsorId.resx">
+      <DependentUpon>201802130015513_RenameDeviceSernsorId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -683,7 +683,7 @@
             {
                 DeviceTypeId = espDevice1.DeviceSensor.DeviceTypeId,
                 DeviceDatasheetId = espDevice1.DeviceSensor.DeviceDatasheetId,
-                DeviceSensorId = espDevice1.DeviceSensor.Id,
+                DeviceId = espDevice1.DeviceSensor.Id,
                 SensorId = sensor_2_1.Id,
                 SensorDatasheetId = sensor_2_1.SensorDatasheetId,
                 SensorTypeId = sensor_2_1.SensorTypeId,
@@ -696,7 +696,7 @@
             {
                 DeviceTypeId = espDevice1.DeviceSensor.DeviceTypeId,
                 DeviceDatasheetId = espDevice1.DeviceSensor.DeviceDatasheetId,
-                DeviceSensorId = espDevice1.DeviceSensor.Id,
+                DeviceId = espDevice1.DeviceSensor.Id,
                 SensorId = sensor_2_2.Id,
                 SensorDatasheetId = sensor_2_2.SensorDatasheetId,
                 SensorTypeId = sensor_2_2.SensorTypeId,
@@ -709,7 +709,7 @@
             {
                 DeviceTypeId = espDevice1.DeviceSensor.DeviceTypeId,
                 DeviceDatasheetId = espDevice1.DeviceSensor.DeviceDatasheetId,
-                DeviceSensorId = espDevice1.DeviceSensor.Id,
+                DeviceId = espDevice1.DeviceSensor.Id,
                 SensorId = sensor_3_1.Id,
                 SensorDatasheetId = sensor_3_1.SensorDatasheetId,
                 SensorTypeId = sensor_3_1.SensorTypeId,
@@ -722,7 +722,7 @@
             {
                 DeviceTypeId = espDevice1.DeviceSensor.DeviceTypeId,
                 DeviceDatasheetId = espDevice1.DeviceSensor.DeviceDatasheetId,
-                DeviceSensorId = espDevice1.DeviceSensor.Id,
+                DeviceId = espDevice1.DeviceSensor.Id,
                 SensorId = sensor_3_2.Id,
                 SensorDatasheetId = sensor_3_2.SensorDatasheetId,
                 SensorTypeId = sensor_3_2.SensorTypeId,
@@ -1010,7 +1010,7 @@
             {
                 DeviceTypeId = espDevice2.DeviceSensor.DeviceTypeId,
                 DeviceDatasheetId = espDevice2.DeviceSensor.DeviceDatasheetId,
-                DeviceSensorId = espDevice2.DeviceSensor.Id,
+                DeviceId = espDevice2.DeviceSensor.Id,
                 SensorId = sensor_Ultrassomic.Id,
                 SensorDatasheetId = sensor_Ultrassomic.SensorDatasheetId,
                 SensorTypeId = sensor_Ultrassomic.SensorTypeId,

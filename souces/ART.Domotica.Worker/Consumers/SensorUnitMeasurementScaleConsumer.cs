@@ -92,7 +92,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceTypeId, device.DeviceDatasheetId, device.DeviceSensorId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceTypeId, device.DeviceDatasheetId, device.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);
@@ -131,7 +131,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceTypeId, device.DeviceDatasheetId, device.DeviceSensorId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceTypeId, device.DeviceDatasheetId, device.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetValueRequestContract, SensorUnitMeasurementScaleSetValueRequestIoTContract>(message.Contract);
@@ -200,7 +200,7 @@ namespace ART.Domotica.Worker.Consumers
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceTypeId, device.DeviceDatasheetId, device.DeviceSensorId);
+            var deviceMQ = await deviceMQDomain.GetByKey(device.DeviceTypeId, device.DeviceDatasheetId, device.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleRequestContract, SensorUnitMeasurementScaleSetDatasheetUnitMeasurementScaleRequestIoTContract>(message.Contract);

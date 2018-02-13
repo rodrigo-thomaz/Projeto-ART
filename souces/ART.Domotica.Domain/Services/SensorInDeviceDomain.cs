@@ -37,7 +37,7 @@
             var entities = await _sensorInDeviceRepository.GetByDeviceSensorKey(deviceTypeId, deviceDatasheetId, deviceId);
 
             var sensorInDevice = entities
-                .Where(x => x.DeviceSensorId == deviceId)
+                .Where(x => x.DeviceId == deviceId)
                 .Where(x => x.SensorId == sensorId)
                 .Where(x => x.SensorDatasheetId == sensorDatasheetId)
                 .Where(x => x.SensorTypeId == sensorTypeId)

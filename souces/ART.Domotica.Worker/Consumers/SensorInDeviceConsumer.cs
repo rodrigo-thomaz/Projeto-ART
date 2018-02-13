@@ -75,7 +75,7 @@
             _model.BasicPublish(defaultExchangeTopic, rountingKey, null, viewBuffer);
 
             var deviceMQDomain = _componentContext.Resolve<IDeviceMQDomain>();
-            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.DeviceSensorId);
+            var deviceMQ = await deviceMQDomain.GetByKey(data.DeviceTypeId, data.DeviceDatasheetId, data.DeviceId);
 
             //Enviando para o Iot
             var iotContract = Mapper.Map<SensorInDevice, SetOrdinationRequestIoTContract>(data);

@@ -32,7 +32,7 @@
             return await _context.SensorInDevice
                 .Where(x => x.DeviceTypeId == deviceTypeId)
                 .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
-                .Where(x => x.DeviceSensorId == deviceId)
+                .Where(x => x.DeviceId == deviceId)
                 .ToListAsync();
         }        
     }

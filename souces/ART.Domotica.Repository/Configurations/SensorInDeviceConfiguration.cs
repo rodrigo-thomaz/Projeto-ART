@@ -17,7 +17,7 @@
             {
                 x.DeviceTypeId,
                 x.DeviceDatasheetId,
-                x.DeviceSensorId,
+                x.DeviceId,
                 x.SensorId,
                 x.SensorDatasheetId,
                 x.SensorTypeId,
@@ -35,8 +35,8 @@
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
 
-            //DeviceSensorId
-            Property(x => x.DeviceSensorId)
+            //DeviceId
+            Property(x => x.DeviceId)
                 .HasColumnOrder(2)
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None)
                 .IsRequired();
@@ -72,7 +72,7 @@
                 {
                     x.DeviceTypeId,
                     x.DeviceDatasheetId,
-                    x.DeviceSensorId,
+                    x.DeviceId,
                 })
                 .WillCascadeOnDelete(false);
 
