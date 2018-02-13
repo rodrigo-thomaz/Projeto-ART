@@ -98,6 +98,14 @@ app.constant('deviceDebugConstant', {
 
 });
 
+app.constant('deviceDisplayConstant', {
+
+    setEnabledApiUri: 'api/deviceDisplay/setEnabled',
+    setEnabledCompletedTopic: 'DeviceDisplay.SetEnabledViewCompleted',
+    setEnabledCompletedEventName: 'deviceDisplayService.onSetEnabledCompleted_Id_',
+
+});
+
 app.constant('deviceSensorConstant', {
 
     setReadIntervalInMilliSecondsApiUri: 'api/deviceSensor/setReadIntervalInMilliSeconds',

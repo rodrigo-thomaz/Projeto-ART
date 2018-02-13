@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IApplicationMQProducer.cs" />
+    <Compile Include="Interfaces\IDeviceDisplayProducer.cs" />
     <Compile Include="Interfaces\IDeviceDebugProducer.cs" />
     <Compile Include="Interfaces\IDeviceSerialProducer.cs" />
     <Compile Include="Interfaces\IDeviceWiFiProducer.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="ProducerModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationMQProducer.cs" />
+    <Compile Include="Services\DeviceDisplayProducer.cs" />
     <Compile Include="Services\DeviceDebugProducer.cs" />
     <Compile Include="Services\DeviceSerialProducer.cs" />
     <Compile Include="Services\DeviceWiFiProducer.cs" />

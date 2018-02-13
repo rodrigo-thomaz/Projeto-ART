@@ -10,6 +10,7 @@ app.factory('deviceMapper', [
     'sensorFinder',
     'deviceWiFiFinder',
     'deviceDebugFinder',
+    'deviceDisplayFinder',
     'deviceNTPFinder',
     'deviceSerialFinder',
     'sensorInDeviceFinder',
@@ -26,6 +27,7 @@ app.factory('deviceMapper', [
         sensorFinder,
         deviceWiFiFinder,
         deviceDebugFinder,
+        deviceDisplayFinder,
         deviceNTPFinder,
         deviceSerialFinder,
         sensorInDeviceFinder,
@@ -50,6 +52,9 @@ app.factory('deviceMapper', [
             //deviceDebug
             var deviceDebug = device.deviceDebug;
             deviceContext.deviceDebug.push(deviceDebug);
+            //deviceDisplay
+            var deviceDisplay = device.deviceDisplay;
+            deviceContext.deviceDisplay.push(deviceDisplay);
             //deviceSensor
             var deviceSensor = device.deviceSensor;
             deviceContext.deviceSensor.push(deviceSensor);
@@ -93,6 +98,14 @@ app.factory('deviceMapper', [
             for (var i = 0; i < deviceContext.deviceDebug.length; i++) {
                 if (deviceDebug === deviceContext.deviceDebug[i]) {
                     deviceContext.deviceDebug.splice(i, 1);
+                    break;
+                }
+            }
+            //deviceDisplay
+            var deviceDisplay = device.deviceDisplay;
+            for (var i = 0; i < deviceContext.deviceDisplay.length; i++) {
+                if (deviceDisplay === deviceContext.deviceDisplay[i]) {
+                    deviceContext.deviceDisplay.splice(i, 1);
                     break;
                 }
             }
@@ -159,6 +172,13 @@ app.factory('deviceMapper', [
             }
         });
 
+        deviceContext.$watchCollection('deviceDisplay', function (newValues, oldValues) {
+            for (var i = 0; i < newValues.length; i++) {
+                var deviceDisplay = newValues[i];
+                deviceDisplay.device = function () { return deviceFinder.getByKey(this.deviceTypeId, this.deviceDatasheetId, this.deviceId); }
+            }
+        });
+
         deviceContext.$watchCollection('deviceSensor', function (newValues, oldValues) {
             for (var i = 0; i < newValues.length; i++) {
                 var deviceSensor = newValues[i];
@@ -186,6 +206,7 @@ app.factory('deviceMapper', [
             deviceContext.deviceNTPLoaded = true;
             deviceContext.deviceSerialLoaded = true;
             deviceContext.deviceDebugLoaded = true;
+            deviceContext.deviceDisplayLoaded = true;
             deviceContext.deviceSensorLoaded = true;
             deviceContext.sensorInDeviceLoaded = true;
         }

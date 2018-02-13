@@ -1,0 +1,12 @@
+﻿<form name="form" class="form-horizontal form-validation" ng-controller="deviceDisplayController" ng-init="init(device.deviceDisplay)">    
+    <div class="form-group">
+        <label class="col-lg-4 control-label">Enabled</label>
+        <div class="col-lg-8">
+            <div class="checkbox">
+                <label class="i-checks">
+                    <input type="checkbox" ng-model="enabledView" ng-model-options="{ debounce: 1000 }"><i></i>
+                </label>
+            </div>
+        </div>
+    </div>
+</form>

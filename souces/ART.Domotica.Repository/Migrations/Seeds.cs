@@ -581,6 +581,10 @@
                             BaudRate = 9600,
                         },
                     },
+                    DeviceDisplay = new DeviceDisplay
+                    {
+                        Enabled = true,
+                    },
                 };
 
                 context.ESPDevice.Add(espDevice1);
@@ -669,6 +673,13 @@
                             AllowPinSwapTX = false,
                             BaudRate = 9600,
                         },
+                    };
+                }
+                if (espDevice1.DeviceDisplay == null)
+                {
+                    espDevice1.DeviceDisplay = new DeviceDisplay
+                    {
+                        Enabled = true,
                     };
                 }
             }
@@ -905,6 +916,10 @@
                             BaudRate = 9600,
                         },
                     },
+                    DeviceDisplay = new DeviceDisplay
+                    {
+                        Enabled = true,
+                    },
                 };
 
                 context.ESPDevice.Add(espDevice2);
@@ -996,6 +1011,13 @@
                             AllowPinSwapTX = false,
                             BaudRate = 9600,
                         },
+                    };
+                }
+                if (espDevice2.DeviceDisplay == null)
+                {
+                    espDevice2.DeviceDisplay = new DeviceDisplay
+                    {
+                        Enabled = true,
                     };
                 }
             }
