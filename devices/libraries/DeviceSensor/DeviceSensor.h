@@ -18,6 +18,9 @@
 
 #define DEVICE_SENSOR_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_RESPONSE_JSON_SIZE 			4096
 
+#define DEVICE_SENSOR_GET_ALL_BY_KEY_TOPIC_PUB   										"DeviceSensor/GetAllByKeyIoT" 
+#define DEVICE_SENSOR_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB								"DeviceSensor/GetAllByKeyCompletedIoT"
+
 #define DEVICE_SENSOR_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_TOPIC_PUB   					"DeviceSensor/GetFullByDeviceInApplicationIdIoT" 
 #define DEVICE_SENSOR_GET_FULL_BY_DEVICE_IN_APPLICATION_ID_COMPLETED_TOPIC_SUB		   	"DeviceSensor/GetFullByDeviceInApplicationIdCompletedIoT"
 

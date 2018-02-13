@@ -7,6 +7,9 @@
 #include "RemoteDebug.h"
 #include "PubSubClient.h"
 
+#define DEVICE_MQ_GET_ALL_BY_KEY_TOPIC_PUB   						"DeviceMQ/GetAllByKeyIoT" 
+#define DEVICE_MQ_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceMQ/GetAllByKeyCompletedIoT"
+
 namespace ART
 {
 	class ESPDevice;

@@ -8,6 +8,9 @@
 
 #define CHECKFORUPDATES_INTERVAL 10000
 
+#define DEVICE_BINARY_GET_ALL_BY_KEY_TOPIC_PUB   						"DeviceBinary/GetAllByKeyIoT" 
+#define DEVICE_BINARY_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceBinary/GetAllByKeyCompletedIoT"
+
 namespace ART
 {
 	class ESPDevice;
