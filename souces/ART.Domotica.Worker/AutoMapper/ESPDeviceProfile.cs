@@ -45,7 +45,13 @@
                 .ForMember(vm => vm.DeviceNTP, m => m.MapFrom(x => x.DeviceNTP))
                 .ForMember(vm => vm.Label, m => m.MapFrom(x => x.Label))
                 .ForMember(vm => vm.HasDeviceSerial, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceSerial))
-                .ForMember(vm => vm.HasDeviceSensor, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceSensor));
+                .ForMember(vm => vm.HasDeviceSensor, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceSensor))
+                .ForMember(vm => vm.HasDeviceWiFi, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceWiFi))
+                .ForMember(vm => vm.HasDeviceNTP, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceNTP))
+                .ForMember(vm => vm.HasDeviceMQ, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceMQ))
+                .ForMember(vm => vm.HasDeviceDebug, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceDebug))
+                .ForMember(vm => vm.HasDeviceDisplay, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceDisplay))
+                .ForMember(vm => vm.HasDeviceBinary, m => m.MapFrom(x => x.DeviceDatasheet.HasDeviceBinary));
 
             CreateMap<ESPDevice, ESPDeviceUpdatePinsResponseIoTContract>()
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.Id))

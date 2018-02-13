@@ -58,6 +58,36 @@
             get; set;
         }
 
+        public bool HasDeviceWiFi
+        {
+            get; set;
+        }
+
+        public bool HasDeviceNTP
+        {
+            get; set;
+        }
+
+        public bool HasDeviceMQ
+        {
+            get; set;
+        }
+
+        public bool HasDeviceDebug
+        {
+            get; set;
+        }
+
+        public bool HasDeviceDisplay
+        {
+            get; set;
+        }
+
+        public bool HasDeviceBinary
+        {
+            get; set;
+        }
+
         public string Label
         {
             get; set;
