@@ -23,8 +23,6 @@ namespace ART
 		DeviceDisplay(ESPDevice* espDevice);
 		~DeviceDisplay();
 
-		static void								create(DeviceDisplay* (&deviceDisplay), ESPDevice* espDevice);
-
 		void									begin();
 
 		ESPDevice *								getESPDevice();

@@ -22,11 +22,6 @@ namespace ART
 		delete (_deviceTopic);
 	}
 
-	void DeviceMQ::create(DeviceMQ *(&deviceMQ), ESPDevice * espDevice)
-	{
-		deviceMQ = new DeviceMQ(espDevice);
-	}
-
 	void DeviceMQ::load(JsonObject& jsonObject)
 	{
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();

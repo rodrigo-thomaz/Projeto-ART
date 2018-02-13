@@ -103,11 +103,6 @@ namespace ART
 		delete (_deviceDisplayBinary);
 	}
 
-	void DeviceDisplay::create(DeviceDisplay *(&deviceDisplay), ESPDevice * espDevice)
-	{
-		deviceDisplay = new DeviceDisplay(espDevice);
-	}
-
 	void DeviceDisplay::begin()
 	{
 		// Display

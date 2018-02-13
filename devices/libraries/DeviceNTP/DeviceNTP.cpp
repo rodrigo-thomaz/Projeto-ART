@@ -15,11 +15,6 @@ namespace ART
 		delete (_host);
 	}
 
-	void DeviceNTP::create(DeviceNTP *(&deviceNTP), ESPDevice * espDevice)
-	{
-		deviceNTP = new DeviceNTP(espDevice);
-	}
-
 	void DeviceNTP::load(JsonObject& jsonObject)
 	{
 		DeviceDebug* deviceDebug = _espDevice->getDeviceDebug();

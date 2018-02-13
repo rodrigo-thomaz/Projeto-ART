@@ -18,13 +18,14 @@ namespace ART
 		_hasDeviceSensor = false;
 
 		_deviceDebug = new DeviceDebug(this);
-		DeviceWiFi::create(_deviceWiFi, this);
-		DeviceNTP::create(_deviceNTP, this);
-		DeviceMQ::create(_deviceMQ, this);
-		DeviceBinary::create(_deviceBinary, this);
+		_deviceWiFi = new DeviceWiFi(this);
+		_deviceNTP = new DeviceNTP(this);
+		_deviceMQ = new DeviceMQ(this);
+		_deviceBinary = new DeviceBinary(this);
+		_deviceDisplay = new DeviceDisplay(this);
+
 		DeviceBuzzer::create(_deviceBuzzer, this);		
 		DeviceInApplication::create(_deviceInApplication, this);				
-		DeviceDisplay::create(_deviceDisplay, this);
 
 		Serial.println(F("[ESPDevice::ESPDevice]] constructor end"));
 	}
@@ -343,6 +344,12 @@ namespace ART
 
 		_hasDeviceSerial = jsonObject["hasDeviceSerial"];
 		_hasDeviceSensor = jsonObject["hasDeviceSensor"];
+		_hasDeviceWiFi = jsonObject["hasDeviceWiFi"];
+		_hasDeviceNTP = jsonObject["hasDeviceNTP"];
+		_hasDeviceMQ = jsonObject["hasDeviceMQ"];
+		_hasDeviceDebug = jsonObject["hasDeviceDebug"];
+		_hasDeviceDisplay = jsonObject["hasDeviceDisplay"];
+		_hasDeviceBinary = jsonObject["hasDeviceBinary"];
 
 		_deviceDebug->load(jsonObject);
 		_deviceWiFi->load(jsonObject["deviceWiFi"]);
@@ -365,6 +372,42 @@ namespace ART
 		if (_hasDeviceSensor) {
 			_deviceSensor = new DeviceSensor(this);
 			_deviceSensor->begin();
+		}
+
+		Serial.printf("hasDeviceWiFi: %s\n", _hasDeviceWiFi ? "true" : "false");
+		if (_hasDeviceWiFi) {
+			//_deviceWiFi = new DeviceWiFi(this);
+			//_deviceWiFi->begin();
+		}
+
+		Serial.printf("hasDeviceNTP: %s\n", _hasDeviceNTP ? "true" : "false");
+		if (_hasDeviceNTP) {
+			//_deviceNTP = new DeviceNTP(this);
+			//_deviceNTP->begin();
+		}
+
+		Serial.printf("hasDeviceMQ: %s\n", _hasDeviceMQ ? "true" : "false");
+		if (_hasDeviceMQ) {
+			//_deviceMQ = new DeviceMQ(this);
+			//_deviceMQ->begin();
+		}
+
+		Serial.printf("hasDeviceDebug: %s\n", _hasDeviceDebug ? "true" : "false");
+		if (_hasDeviceDebug) {
+			//_deviceDebug = new DeviceDebug(this);
+			//_deviceDebug->begin();
+		}
+
+		Serial.printf("hasDeviceDisplay: %s\n", _hasDeviceDisplay ? "true" : "false");
+		if (_hasDeviceDisplay) {
+			//_deviceDisplay = new DeviceDisplay(this);
+			//_deviceDisplay->begin();
+		}
+
+		Serial.printf("hasDeviceBinary: %s\n", _hasDeviceBinary ? "true" : "false");
+		if (_hasDeviceBinary) {
+			//_deviceBinary = new DeviceBinary(this);
+			//_deviceBinary->begin();
 		}
 
 		_loaded = true;

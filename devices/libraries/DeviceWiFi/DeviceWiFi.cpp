@@ -88,11 +88,6 @@ namespace ART
 		delete (_hostName);
 	}
 
-	void DeviceWiFi::create(DeviceWiFi *(&deviceWiFi), ESPDevice * espDevice)
-	{
-		deviceWiFi = new DeviceWiFi(espDevice);
-	}
-
 	void DeviceWiFi::begin()
 	{
 		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });

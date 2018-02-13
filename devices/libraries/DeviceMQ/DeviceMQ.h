@@ -19,8 +19,6 @@ namespace ART
 		DeviceMQ(ESPDevice* espDevice);
 		~DeviceMQ();
 
-		static void													create(DeviceMQ* (&deviceMQ), ESPDevice* espDevice);
-
 		void														load(JsonObject& jsonObject);
 
 		void														loop();

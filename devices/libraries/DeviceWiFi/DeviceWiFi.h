@@ -85,8 +85,6 @@ namespace ART
 		DeviceWiFi(ESPDevice* espDevice);
 		~DeviceWiFi();
 
-		static void					create(DeviceWiFi* (&deviceWiFi), ESPDevice* espDevice);
-
 		void						begin();
 
 		void						load(JsonObject& jsonObject);

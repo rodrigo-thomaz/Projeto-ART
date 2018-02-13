@@ -27,8 +27,6 @@ namespace ART
 		DeviceNTP(ESPDevice* espDevice);
 		~DeviceNTP();
 
-		static void										create(DeviceNTP* (&deviceNTP), ESPDevice* espDevice);
-
 		void											load(JsonObject& jsonObject);
 
 		char*											getHost() const;

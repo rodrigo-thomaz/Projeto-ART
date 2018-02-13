@@ -20,8 +20,6 @@ namespace ART
 		DeviceBinary(ESPDevice* espDevice);
 		~DeviceBinary();
 
-		static void					create(DeviceBinary* (&deviceBinary), ESPDevice* espDevice);
-
 		void 						loop();		
 
 	private:

@@ -10,11 +10,7 @@ namespace ART
 
 	DeviceBinary::~DeviceBinary()
 	{
-	}
 
-	void DeviceBinary::create(DeviceBinary *(&deviceBinary), ESPDevice * espDevice)
-	{
-		deviceBinary = new DeviceBinary(espDevice);
 	}
 
 	void DeviceBinary::loop()
