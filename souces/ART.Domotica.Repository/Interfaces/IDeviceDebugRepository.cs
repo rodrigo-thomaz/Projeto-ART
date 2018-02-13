@@ -12,8 +12,9 @@
     {
         #region Methods
 
-        Task<DeviceDebug> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
         Task<List<DeviceDebug>> GetAllByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
+
+        Task<DeviceDebug> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
         #endregion Methods
     }

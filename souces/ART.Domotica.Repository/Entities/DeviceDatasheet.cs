@@ -30,27 +30,7 @@
             get; set;
         }
 
-        public bool HasDeviceSensor
-        {
-            get; set;
-        }
-
-        public bool HasDeviceSerial
-        {
-            get; set;
-        }
-
-        public bool HasDeviceWiFi
-        {
-            get; set;
-        }
-
-        public bool HasDeviceNTP
-        {
-            get; set;
-        }
-
-        public bool HasDeviceMQ
+        public bool HasDeviceBinary
         {
             get; set;
         }
@@ -65,7 +45,27 @@
             get; set;
         }
 
-        public bool HasDeviceBinary
+        public bool HasDeviceMQ
+        {
+            get; set;
+        }
+
+        public bool HasDeviceNTP
+        {
+            get; set;
+        }
+
+        public bool HasDeviceSensor
+        {
+            get; set;
+        }
+
+        public bool HasDeviceSerial
+        {
+            get; set;
+        }
+
+        public bool HasDeviceWiFi
         {
             get; set;
         }

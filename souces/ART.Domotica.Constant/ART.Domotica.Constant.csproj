@@ -43,6 +43,8 @@
     <Compile Include="ApplicationMQConstants.cs" />
     <Compile Include="DeviceDisplayConstants.cs" />
     <Compile Include="DeviceDebugConstants.cs" />
+    <Compile Include="DeviceBinaryConstants.cs" />
+    <Compile Include="DeviceMQConstants.cs" />
     <Compile Include="DeviceSerialConstants.cs" />
     <Compile Include="DeviceWiFiConstants.cs" />
     <Compile Include="DeviceNTPConstants.cs" />
