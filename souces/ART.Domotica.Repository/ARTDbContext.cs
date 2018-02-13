@@ -80,6 +80,11 @@
             get; set;
         }
 
+        public DbSet<DeviceDisplay> DeviceDisplay
+        {
+            get; set;
+        }
+
         public DbSet<DeviceInApplication> DeviceInApplication
         {
             get; set;

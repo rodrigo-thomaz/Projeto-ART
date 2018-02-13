@@ -70,6 +70,7 @@
     <Compile Include="Configurations\DeviceDatasheetBinaryConfiguration.cs" />
     <Compile Include="Configurations\DeviceDatasheetConfiguration.cs" />
     <Compile Include="Configurations\DeviceBinaryConfiguration.cs" />
+    <Compile Include="Configurations\DeviceDisplayConfiguration.cs" />
     <Compile Include="Configurations\DeviceDebugConfiguration.cs" />
     <Compile Include="Configurations\DeviceSerialConfiguration.cs" />
     <Compile Include="Configurations\DeviceWiFiConfiguration.cs" />
@@ -110,6 +111,7 @@
     <Compile Include="Entities\DeviceDatasheetBinaryBuffer.cs" />
     <Compile Include="Entities\DeviceDatasheetBinary.cs" />
     <Compile Include="Entities\DeviceDatasheet.cs" />
+    <Compile Include="Entities\DeviceDisplay.cs" />
     <Compile Include="Entities\DeviceDebug.cs" />
     <Compile Include="Entities\DeviceSerial.cs" />
     <Compile Include="Entities\DeviceWiFi.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Interfaces\IDeviceDatasheetBinaryBufferRepository.cs" />
     <Compile Include="Interfaces\IDeviceDatasheetBinaryRepository.cs" />
     <Compile Include="Interfaces\IDeviceBinaryRepository.cs" />
+    <Compile Include="Interfaces\IDeviceDisplayRepository.cs" />
     <Compile Include="Interfaces\IDeviceDebugRepository.cs" />
     <Compile Include="Interfaces\IDeviceSerialRepository.cs" />
     <Compile Include="Interfaces\IDeviceWiFiRepository.cs" />
@@ -195,6 +198,10 @@
     <Compile Include="Migrations\201802130015513_RenameDeviceSernsorId.Designer.cs">
       <DependentUpon>201802130015513_RenameDeviceSernsorId.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802131159573_AddDeviceDisplay.cs" />
+    <Compile Include="Migrations\201802131159573_AddDeviceDisplay.Designer.cs">
+      <DependentUpon>201802131159573_AddDeviceDisplay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\Seeds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -202,6 +209,7 @@
     <Compile Include="Repositories\DeviceDatasheetBinaryBufferRepository.cs" />
     <Compile Include="Repositories\DeviceDatasheetBinaryRepository.cs" />
     <Compile Include="Repositories\DeviceBinaryRepository.cs" />
+    <Compile Include="Repositories\DeviceDisplayRepository.cs" />
     <Compile Include="Repositories\DeviceDebugRepository.cs" />
     <Compile Include="Repositories\DeviceSerialRepository.cs" />
     <Compile Include="Repositories\DeviceWiFiRepository.cs" />
@@ -296,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802130015513_RenameDeviceSernsorId.resx">
       <DependentUpon>201802130015513_RenameDeviceSernsorId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131159573_AddDeviceDisplay.resx">
+      <DependentUpon>201802131159573_AddDeviceDisplay.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

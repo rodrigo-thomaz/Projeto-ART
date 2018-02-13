@@ -79,6 +79,7 @@
                 x.AddProfile(new DeviceNTPProfile());
                 x.AddProfile(new DeviceWiFiProfile());
                 x.AddProfile(new DeviceDebugProfile());
+                x.AddProfile(new DeviceDisplayProfile());
                 x.AddProfile(new DeviceSensorProfile());
                 x.AddProfile(new SensorTempDSFamilyProfile());
                 x.AddProfile(new ESPDeviceProfile());

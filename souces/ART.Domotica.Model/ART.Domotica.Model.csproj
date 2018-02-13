@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceDisplaySetValueModel.cs" />
+    <Compile Include="DeviceDisplayGetModel.cs" />
     <Compile Include="DeviceDebugGetModel.cs" />
     <Compile Include="DeviceBinaryGetModel.cs" />
     <Compile Include="DeviceMQGetModel.cs" />

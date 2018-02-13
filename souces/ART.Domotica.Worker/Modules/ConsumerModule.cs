@@ -37,6 +37,7 @@
             builder.RegisterType<DeviceSerialConsumer>().As<IDeviceSerialConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceWiFiConsumer>().As<IDeviceWiFiConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceDebugConsumer>().As<IDeviceDebugConsumer>().SingleInstance().AutoActivate();
+            builder.RegisterType<DeviceDisplayConsumer>().As<IDeviceDisplayConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceSensorConsumer>().As<IDeviceSensorConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<SensorTempDSFamilyConsumer>().As<ISensorTempDSFamilyConsumer>().SingleInstance().AutoActivate();
             builder.RegisterType<DeviceInApplicationConsumer>().As<IDeviceInApplicationConsumer>().SingleInstance().AutoActivate();

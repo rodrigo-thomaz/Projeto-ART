@@ -35,6 +35,11 @@
             get; set;
         }
 
+        public DeviceDisplay DeviceDisplay
+        {
+            get; set;
+        }
+
         public DeviceMQ DeviceMQ
         {
             get; set;
