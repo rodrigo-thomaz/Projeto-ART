@@ -5,13 +5,16 @@
 #include "RemoteDebug.h" 
 #include "ESP8266mDNS.h"
 
-#define DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB "DeviceDebug/SetRemoteEnabledIoT"
-#define DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB "DeviceDebug/SetResetCmdEnabledIoT"
-#define DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB "DeviceDebug/SetSerialEnabledIoT"
-#define DEVICE_DEBUG_SET_SHOW_COLORS_TOPIC_SUB "DeviceDebug/SetShowColorsIoT"
-#define DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL_TOPIC_SUB "DeviceDebug/SetShowDebugLevelIoT"
-#define DEVICE_DEBUG_SET_SHOW_PROFILER_TOPIC_SUB "DeviceDebug/SetShowProfilerIoT"
-#define DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB "DeviceDebug/SetShowTimeIoT"
+#define DEVICE_DEBUG_GET_ALL_BY_DEVICE_KEY_TOPIC_PUB   					"DeviceDebug/GetAllByDeviceKeyIoT" 
+#define DEVICE_DEBUG_GET_ALL_BY_DEVICE_KEY_COMPLETED_TOPIC_SUB			"DeviceDebug/GetAllByDeviceKeyCompletedIoT"
+
+#define DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB						"DeviceDebug/SetRemoteEnabledIoT"
+#define DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB					"DeviceDebug/SetResetCmdEnabledIoT"
+#define DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB						"DeviceDebug/SetSerialEnabledIoT"
+#define DEVICE_DEBUG_SET_SHOW_COLORS_TOPIC_SUB							"DeviceDebug/SetShowColorsIoT"
+#define DEVICE_DEBUG_SET_SHOW_DEBUG_LEVEL_TOPIC_SUB						"DeviceDebug/SetShowDebugLevelIoT"
+#define DEVICE_DEBUG_SET_SHOW_PROFILER_TOPIC_SUB						"DeviceDebug/SetShowProfilerIoT"
+#define DEVICE_DEBUG_SET_SHOW_TIME_TOPIC_SUB							"DeviceDebug/SetShowTimeIoT"
 
 namespace ART
 {
@@ -24,8 +27,6 @@ namespace ART
 
 		DeviceDebug(ESPDevice* espDevice);
 		~DeviceDebug();
-
-		static void							create(DeviceDebug* (&deviceDebug), ESPDevice* espDevice);
 
 		void								begin();
 

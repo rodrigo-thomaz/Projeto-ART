@@ -17,7 +17,7 @@ namespace ART
 		_hasDeviceSerial = false;
 		_hasDeviceSensor = false;
 
-		DeviceDebug::create(_deviceDebug, this);
+		_deviceDebug = new DeviceDebug(this);
 		DeviceWiFi::create(_deviceWiFi, this);
 		DeviceNTP::create(_deviceNTP, this);
 		DeviceMQ::create(_deviceMQ, this);
