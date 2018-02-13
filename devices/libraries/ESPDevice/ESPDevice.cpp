@@ -38,17 +38,16 @@ namespace ART
 		delete (_label);
 
 		delete (_deviceInApplication);
-		delete (_deviceDebug);
-		delete (_deviceWiFi);
-		delete (_deviceNTP);
-		delete (_deviceMQ);
-		delete (_deviceBinary);
 		delete (_deviceBuzzer);
 
 		if(_hasDeviceSerial) delete (_deviceSerial);
 		if (_hasDeviceSensor) delete (_deviceSensor);
-
-		delete (_deviceDisplay);
+		if (_hasDeviceWiFi) delete (_deviceWiFi);
+		if (_hasDeviceNTP) delete (_deviceNTP);
+		if (_hasDeviceMQ) delete (_deviceMQ);
+		if (_hasDeviceDebug) delete (_deviceDebug);
+		if (_hasDeviceDisplay) delete (_deviceDisplay);
+		if (_hasDeviceBinary) delete (_deviceBinary);		
 
 		Serial.println(F("[ESPDevice::ESPDevice]] destructor begin"));
 	}
@@ -153,12 +152,7 @@ namespace ART
 	DeviceInApplication* ESPDevice::getDeviceInApplication()
 	{
 		return _deviceInApplication;
-	}
-
-	bool ESPDevice::hasDeviceSerial()
-	{
-		return _hasDeviceSerial;
-	}
+	}	
 
 	DeviceSerial* ESPDevice::getDeviceSerial()
 	{
@@ -198,6 +192,41 @@ namespace ART
 	bool ESPDevice::hasDeviceSensor()
 	{
 		return _hasDeviceSensor;
+	}
+
+	bool ESPDevice::hasDeviceSerial()
+	{
+		return _hasDeviceSerial;
+	}
+
+	bool ESPDevice::hasDeviceWiFi()
+	{
+		return _hasDeviceWiFi;
+	}
+
+	bool ESPDevice::hasDeviceNTP()
+	{
+		return _hasDeviceNTP;
+	}
+
+	bool ESPDevice::hasDeviceMQ()
+	{
+		return _hasDeviceMQ;
+	}
+
+	bool ESPDevice::hasDeviceDebug()
+	{
+		return _hasDeviceDebug;
+	}
+
+	bool ESPDevice::hasDeviceDisplay()
+	{
+		return _hasDeviceDisplay;
+	}
+
+	bool ESPDevice::hasDeviceBinary()
+	{
+		return _hasDeviceBinary;
 	}
 
 	DeviceSensor* ESPDevice::getDeviceSensor()

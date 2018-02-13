@@ -58,14 +58,19 @@ namespace ART
 		DeviceBinary*						getDeviceBinary();
 		DeviceBuzzer*						getDeviceBuzzer();		
 		DeviceDisplay*						getDeviceDisplay();
-
-		char*								getDeviceKeyAsJson();
+		DeviceSensor*						getDeviceSensor();
+		DeviceSerial*						getDeviceSerial();
 
 		bool								hasDeviceSensor();
-		DeviceSensor*						getDeviceSensor();
-
 		bool								hasDeviceSerial();
-		DeviceSerial*						getDeviceSerial();
+		bool								hasDeviceWiFi();
+		bool								hasDeviceNTP();
+		bool								hasDeviceMQ();
+		bool								hasDeviceDebug();
+		bool								hasDeviceDisplay();
+		bool								hasDeviceBinary();
+
+		char*								getDeviceKeyAsJson();		
 
 	private:
 
@@ -81,6 +86,12 @@ namespace ART
 
 		bool 								_hasDeviceSerial;
 		bool 								_hasDeviceSensor;
+		bool 								_hasDeviceWiFi;
+		bool 								_hasDeviceNTP;
+		bool 								_hasDeviceMQ;
+		bool 								_hasDeviceDebug;
+		bool 								_hasDeviceDisplay;
+		bool 								_hasDeviceBinary;
 
 		char *								_webApiHost;
 		uint16_t							_webApiPort;
