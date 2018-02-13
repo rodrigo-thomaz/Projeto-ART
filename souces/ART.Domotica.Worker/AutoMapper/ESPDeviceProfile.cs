@@ -27,6 +27,7 @@
                 .ForMember(vm => vm.DeviceMQ, m => m.MapFrom(x => x.DeviceMQ))
                 .ForMember(vm => vm.DeviceBinary, m => m.MapFrom(x => x.DeviceBinary))
                 .ForMember(vm => vm.DeviceDebug, m => m.MapFrom(x => x.DeviceDebug))
+                .ForMember(vm => vm.DeviceDisplay, m => m.MapFrom(x => x.DeviceDisplay))
                 .ForMember(vm => vm.DeviceSensor, m => m.MapFrom(x => x.DeviceSensor));
 
             CreateMap<ESPDevice, ESPDeviceGetByPinModel>()

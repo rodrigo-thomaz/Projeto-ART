@@ -24,6 +24,11 @@
             get; set;
         }
 
+        public DeviceDisplayGetModel DeviceDisplay
+        {
+            get; set;
+        }
+
         public Guid DeviceId
         {
             get; set;

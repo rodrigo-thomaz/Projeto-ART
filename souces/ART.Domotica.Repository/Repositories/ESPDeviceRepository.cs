@@ -109,6 +109,7 @@
                 .Include(x => x.DeviceSerial)
                 .Include(x => x.DeviceWiFi)
                 .Include(x => x.DeviceDebug)
+                .Include(x => x.DeviceDisplay)
                 .Include(x => x.DeviceMQ)
                 .Include(x => x.DeviceBinary.DeviceDatasheetBinary)
                 .Include(x => x.DeviceSensor.SensorInDevice)

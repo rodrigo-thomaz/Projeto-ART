@@ -186,6 +186,7 @@ angular.module('app')
                         'js/controllers/device/deviceMQController.js',
                         'js/controllers/device/deviceBinaryController.js',
                         'js/controllers/device/deviceDebugController.js',
+                        'js/controllers/device/deviceDisplayController.js',
                         'js/controllers/device/deviceSensorController.js',
                         'js/controllers/device/sensorInDeviceController.js',
 
