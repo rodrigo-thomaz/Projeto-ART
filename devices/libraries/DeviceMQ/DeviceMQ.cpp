@@ -293,13 +293,25 @@ namespace ART
 	void DeviceMQ::onDeviceInApplicationInsert()
 	{
 		for (auto && fn : _unSubscribeDeviceCallbacks) fn();
+		onDeviceMQSubscribeDeviceInApplication();
 		for (auto && fn : _subscribeDeviceInApplicationCallbacks) fn();
 	}
 
 	void DeviceMQ::onDeviceInApplicationRemove()
 	{
+		onDeviceMQUnSubscribeDeviceInApplication();
 		for (auto && fn : _unSubscribeDeviceInApplicationCallbacks) fn();
 		for (auto && fn : _subscribeDeviceCallbacks) fn();
+	}
+
+	void DeviceMQ::onDeviceMQSubscribeDeviceInApplication()
+	{
+		subscribeDeviceInApplication(DEVICE_MQ_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
+	}
+
+	void DeviceMQ::onDeviceMQUnSubscribeDeviceInApplication()
+	{
+		unSubscribeDeviceInApplication(DEVICE_MQ_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
 	}
 }
 

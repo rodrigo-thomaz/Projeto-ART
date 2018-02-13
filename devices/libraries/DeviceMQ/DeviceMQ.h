@@ -113,6 +113,8 @@ namespace ART
 		void														onDeviceInApplicationInsert();
 		void														onDeviceInApplicationRemove();
 
+		void														onDeviceMQSubscribeDeviceInApplication();
+		void														onDeviceMQUnSubscribeDeviceInApplication();
 	};
 }
 

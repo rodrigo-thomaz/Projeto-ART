@@ -247,6 +247,7 @@ namespace ART
 
 	void DeviceDebug::onDeviceMQSubscribeDeviceInApplication()
 	{
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB);
@@ -258,6 +259,7 @@ namespace ART
 
 	void DeviceDebug::onDeviceMQUnSubscribeDeviceInApplication()
 	{
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB);
@@ -269,7 +271,11 @@ namespace ART
 
 	bool DeviceDebug::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
-		if (strcmp(topicKey, DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB) == 0) {
+		if (strcmp(topicKey, DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB) == 0) {
+			///////////
+			return true;
+		}
+		else if (strcmp(topicKey, DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB) == 0) {
 			setRemoteEnabled(json);
 			return true;
 		}
