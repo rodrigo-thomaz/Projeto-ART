@@ -163,7 +163,15 @@ void loopMQQTConnected()
     }    
   }
   
-  
+  // DeviceDebug
+  if(espDevice.hasDeviceDebug()){
+
+    DeviceDebug* deviceDebug = espDevice.getDeviceDebug();
+    
+    if (deviceDebug->initialized()) {        
+      
+    }    
+  }
 
   // Sensor
   if(espDevice.hasDeviceSensor()){

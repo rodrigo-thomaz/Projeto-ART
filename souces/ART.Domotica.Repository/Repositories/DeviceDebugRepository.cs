@@ -19,16 +19,7 @@
         {
         }
 
-        #endregion Constructors
-
-        public async Task<List<DeviceDebug>> GetAllByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
-        {
-            return await _context.DeviceDebug
-                .Where(x => x.DeviceTypeId == deviceTypeId)
-                .Where(x => x.DeviceDatasheetId == deviceDatasheetId)
-                .Where(x => x.Id == deviceId)
-                .ToListAsync();
-        }
+        #endregion Constructors        
 
         public async Task<DeviceDebug> GetByKey(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {

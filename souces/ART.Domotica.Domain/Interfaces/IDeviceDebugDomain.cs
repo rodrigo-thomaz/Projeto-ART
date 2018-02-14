@@ -11,7 +11,7 @@
     {
         #region Methods
 
-        Task<List<DeviceDebug>> GetAllByKey(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
+        Task<DeviceDebug> GetByKey(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId);
 
         Task<DeviceDebug> SetRemoteEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value);
 

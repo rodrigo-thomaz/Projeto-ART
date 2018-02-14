@@ -35,7 +35,7 @@
 
         #region Methods        
 
-        public async Task<List<DeviceDebug>> GetAllByKey(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
+        public async Task<DeviceDebug> GetByKey(Guid applicationId, DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId)
         {
             var deviceInApplication = await _deviceInApplicationRepository.GetByKey(applicationId, deviceTypeId, deviceDatasheetId, deviceId);
 
@@ -44,7 +44,7 @@
                 throw new Exception("DeviceInApplication not found");
             }
 
-            return await _deviceDebugRepository.GetAllByKey(deviceTypeId, deviceDatasheetId, deviceId);
+            return await _deviceDebugRepository.GetByKey(deviceTypeId, deviceDatasheetId, deviceId);
         }
 
         public async Task<DeviceDebug> SetRemoteEnabled(DeviceTypeEnum deviceTypeId, Guid deviceDatasheetId, Guid deviceId, bool value)

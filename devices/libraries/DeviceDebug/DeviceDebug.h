@@ -5,8 +5,8 @@
 #include "RemoteDebug.h" 
 #include "ESP8266mDNS.h"
 
-#define DEVICE_DEBUG_GET_ALL_BY_KEY_TOPIC_PUB   						"DeviceDebug/GetAllByKeyIoT" 
-#define DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB					"DeviceDebug/GetAllByKeyCompletedIoT"
+#define DEVICE_DEBUG_GET_BY_KEY_TOPIC_PUB   							"DeviceDebug/GetByKeyIoT" 
+#define DEVICE_DEBUG_GET_BY_KEY_COMPLETED_TOPIC_SUB						"DeviceDebug/GetByKeyCompletedIoT"
 
 #define DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB						"DeviceDebug/SetRemoteEnabledIoT"
 #define DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB					"DeviceDebug/SetResetCmdEnabledIoT"
@@ -30,10 +30,12 @@ namespace ART
 
 		void								begin();
 		
+		bool								initialized();
+
 		void								loop();
 
-		void								getAllPub();
-		void								getAllSub(const char* json);
+		void								getByKeyPub();
+		void								getByKeySub(const char* json);
 
 		bool 								isActive(uint8_t debugLevel = DEBUG);
 
@@ -76,6 +78,9 @@ namespace ART
 		ESPDevice *							_espDevice;
 
 		RemoteDebug* 						_debug;
+
+		bool								_initialized;
+		bool								_initializing;
 
 		void								setRemoteEnabled(const char* json);
 		void								setResetCmdEnabled(const char* json);

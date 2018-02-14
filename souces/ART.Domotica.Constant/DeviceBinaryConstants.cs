@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string GetAllByKeyCompletedIoTQueueName = "DeviceBinary.GetAllByKeyCompletedIoT";
-        public static readonly string GetAllByKeyIoTQueueName = "DeviceBinary.GetAllByKeyIoT";
+        public static readonly string GetByKeyCompletedIoTQueueName = "DeviceBinary.GetByKeyCompletedIoT";
+        public static readonly string GetByKeyIoTQueueName = "DeviceBinary.GetByKeyIoT";
 
         #endregion Fields
     }

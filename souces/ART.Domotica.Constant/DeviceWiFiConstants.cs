@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string GetAllByKeyCompletedIoTQueueName = "DeviceWiFi.GetAllByKeyCompletedIoT";
-        public static readonly string GetAllByKeyIoTQueueName = "DeviceWiFi.GetAllByKeyIoT";
+        public static readonly string GetByKeyCompletedIoTQueueName = "DeviceWiFi.GetByKeyCompletedIoT";
+        public static readonly string GetByKeyIoTQueueName = "DeviceWiFi.GetByKeyIoT";
         public static readonly string SetHostNameIoTQueueName = "DeviceWiFi.SetHostNameIoT";
         public static readonly string SetHostNameQueueName = "DeviceWiFi.SetHostName";
         public static readonly string SetHostNameViewCompletedQueueName = "DeviceWiFi.SetHostNameViewCompleted";

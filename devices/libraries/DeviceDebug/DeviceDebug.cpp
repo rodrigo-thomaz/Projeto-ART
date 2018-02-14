@@ -7,6 +7,9 @@ namespace ART
 	{
 		_espDevice = espDevice;
 		_debug = new RemoteDebug();
+
+		_initializing = false;
+		_initialized = false;
 	}
 
 	DeviceDebug::~DeviceDebug()
@@ -22,17 +25,53 @@ namespace ART
 		_espDevice->getDeviceMQ()->addSubscriptionCallback([=](const char* topicKey, const char* json) { return onDeviceMQSubscription(topicKey, json); });
 	}
 
+	bool DeviceDebug::initialized()
+	{
+		if (_initialized) return true;
+
+		if (!_espDevice->loaded()) {
+			Serial.println(F("[DeviceDebug::initialized] espDevice not loaded"));
+			return false;
+		}
+
+		if (!_espDevice->getDeviceMQ()->connected()) {
+			Serial.println(F("[DeviceDebug::initialized] deviceMQ not connected"));
+			return false;
+		}
+
+		if (_initializing) {
+			Serial.println(F("[DeviceDebug::initialized] initializing: true"));
+			return false;
+		}
+
+		// initializing
+
+		Serial.println(F("[DeviceDebug::initialized] begin"));
+
+		_initializing = true;
+
+		getByKeyPub();
+
+		Serial.println(F("[DeviceDebug::initialized] end"));
+
+		return true;
+	}
+
 	void DeviceDebug::loop()
 	{
 		_debug->handle();
 	}
 
-	void DeviceDebug::getAllPub()
+	void DeviceDebug::getByKeyPub()
 	{
+		Serial.println(F("[DeviceDebug::getByKeyPub] begin"));
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_DEBUG_GET_BY_KEY_TOPIC_PUB, _espDevice->getDeviceKeyAsJson());
+		Serial.println(F("[DeviceDebug::getByKeyPub] end"));
 	}
 
-	void DeviceDebug::getAllSub(const char * json)
+	void DeviceDebug::getByKeySub(const char * json)
 	{
+		Serial.println(F("[DeviceDebug::getByKeySub] Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
 	}
 
 	void DeviceDebug::load(JsonObject& jsonObject)
@@ -255,7 +294,7 @@ namespace ART
 
 	void DeviceDebug::onDeviceMQSubscribeDeviceInApplication()
 	{
-		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_GET_BY_KEY_COMPLETED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB);
@@ -267,7 +306,7 @@ namespace ART
 
 	void DeviceDebug::onDeviceMQUnSubscribeDeviceInApplication()
 	{
-		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_DEBUG_GET_BY_KEY_COMPLETED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_RESET_CMD_ENABLED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_DEBUG_SET_SERIAL_ENABLED_TOPIC_SUB);
@@ -279,8 +318,8 @@ namespace ART
 
 	bool DeviceDebug::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
-		if (strcmp(topicKey, DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB) == 0) {
-			getAllSub(json);
+		if (strcmp(topicKey, DEVICE_DEBUG_GET_BY_KEY_COMPLETED_TOPIC_SUB) == 0) {
+			getByKeySub(json);
 			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB) == 0) {

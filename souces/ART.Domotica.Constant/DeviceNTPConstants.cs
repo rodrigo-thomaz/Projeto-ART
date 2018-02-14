@@ -4,8 +4,8 @@
     {
         #region Fields
 
-        public static readonly string GetAllByKeyCompletedIoTQueueName = "DeviceNTP.GetAllByKeyCompletedIoT";
-        public static readonly string GetAllByKeyIoTQueueName = "DeviceNTP.GetAllByKeyIoT";
+        public static readonly string GetByKeyCompletedIoTQueueName = "DeviceNTP.GetByKeyCompletedIoT";
+        public static readonly string GetByKeyIoTQueueName = "DeviceNTP.GetByKeyIoT";
         public static readonly string SetTimeZoneQueueName = "DeviceNTP.SetTimeZone";
         public static readonly string SetTimeZoneViewCompletedQueueName = "DeviceNTP.SetTimeZoneViewCompleted";
         public static readonly string SetUpdateIntervalInMilliSecondIoTQueueName = "DeviceNTP.SetUpdateIntervalInMilliSecondIoT";
