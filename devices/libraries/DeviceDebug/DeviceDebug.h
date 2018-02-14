@@ -62,8 +62,6 @@ namespace ART
 		int									printlnLevel(uint8_t debugLevel, const char* className, const char* caller, const char* message);
 
 		int									printLevel(uint8_t debugLevel, const char* className, const char* caller, const char* message);		
-				
-		void								load(JsonObject& jsonObject);
 
 		static const uint8_t				PROFILER = 0;
 		static const uint8_t				VERBOSE = 1;

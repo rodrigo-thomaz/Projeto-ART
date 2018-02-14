@@ -18,6 +18,7 @@ namespace ART
 		_hasDeviceSensor = false;
 
 		_deviceDebug = new DeviceDebug(this);
+		
 		_deviceWiFi = new DeviceWiFi(this);
 		_deviceNTP = new DeviceNTP(this);
 		_deviceMQ = new DeviceMQ(this);
@@ -351,7 +352,6 @@ namespace ART
 		_hasDeviceDisplay = jsonObject["hasDeviceDisplay"];
 		_hasDeviceBinary = jsonObject["hasDeviceBinary"];
 
-		_deviceDebug->load(jsonObject);
 		_deviceWiFi->load(jsonObject["deviceWiFi"]);
 		_deviceNTP->load(jsonObject["deviceNTP"]);
 		_deviceMQ->load(jsonObject["deviceMQ"]);
@@ -391,13 +391,13 @@ namespace ART
 			//_deviceMQ = new DeviceMQ(this);
 			//_deviceMQ->begin();
 		}
-
+		/*
 		Serial.printf("hasDeviceDebug: %s\n", _hasDeviceDebug ? "true" : "false");
 		if (_hasDeviceDebug) {
-			//_deviceDebug = new DeviceDebug(this);
-			//_deviceDebug->begin();
+			_deviceDebug = new DeviceDebug(this);
+			_deviceDebug->begin();
 		}
-
+		*/
 		Serial.printf("hasDeviceDisplay: %s\n", _hasDeviceDisplay ? "true" : "false");
 		if (_hasDeviceDisplay) {
 			//_deviceDisplay = new DeviceDisplay(this);

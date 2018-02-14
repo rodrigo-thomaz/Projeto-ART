@@ -31,7 +31,7 @@
                 .ForMember(vm => vm.DeviceId, m => m.MapFrom(x => x.DeviceId))
                 .ForMember(vm => vm.Value, m => m.MapFrom(x => x.Value));
 
-            CreateMap<DeviceDebug, DeviceDebugDetailResponseContract>()
+            CreateMap<DeviceDebug, DeviceDebugGetResponseIoTContract>()
                 .ForMember(vm => vm.RemoteEnabled, m => m.MapFrom(x => x.RemoteEnabled))
                 .ForMember(vm => vm.SerialEnabled, m => m.MapFrom(x => x.SerialEnabled))
                 .ForMember(vm => vm.ResetCmdEnabled, m => m.MapFrom(x => x.ResetCmdEnabled))
@@ -39,8 +39,6 @@
                 .ForMember(vm => vm.ShowTime, m => m.MapFrom(x => x.ShowTime))
                 .ForMember(vm => vm.ShowProfiler, m => m.MapFrom(x => x.ShowProfiler))
                 .ForMember(vm => vm.ShowColors, m => m.MapFrom(x => x.ShowColors));
-
-            CreateMap<DeviceDebug, DeviceDebugGetResponseIoTContract>();
         }
 
         #endregion Constructors

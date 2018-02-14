@@ -48,7 +48,6 @@
     <Compile Include="DeviceSerialSetEnabledRequestContract.cs" />
     <Compile Include="DeviceWiFiDetailResponseContract.cs" />
     <Compile Include="DeviceDebugSetValueRequestContract.cs" />
-    <Compile Include="DeviceDebugDetailResponseContract.cs" />
     <Compile Include="DeviceInApplicationDetailResponseContract.cs" />
     <Compile Include="DeviceWiFiSetHostNameRequestContract.cs" />
     <Compile Include="DeviceNTPDetailResponseContract.cs" />

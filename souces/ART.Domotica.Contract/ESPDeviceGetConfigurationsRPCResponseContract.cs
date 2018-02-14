@@ -13,11 +13,6 @@
             get; set;
         }
 
-        public DeviceDebugDetailResponseContract DeviceDebug
-        {
-            get; set;
-        }
-
         public Guid DeviceId
         {
             get; set;

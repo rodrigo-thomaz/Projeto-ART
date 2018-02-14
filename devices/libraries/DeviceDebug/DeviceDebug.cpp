@@ -71,22 +71,38 @@ namespace ART
 
 	void DeviceDebug::getByKeySub(const char * json)
 	{
-		Serial.println(F("[DeviceDebug::getByKeySub] Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
-	}
+		Serial.println(F("[DeviceDebug::getByKeySub] begin"));
 
-	void DeviceDebug::load(JsonObject& jsonObject)
-	{
-		JsonObject& deviceDebugJO = jsonObject["deviceDebug"];
-		JsonObject& deviceWiFiJO = jsonObject["deviceWiFi"];
+		this->_initialized = true;
+		this->_initializing = false;
 
-		setHostName(strdup(deviceWiFiJO["hostName"]));
-		setRemoteEnabled(deviceDebugJO["remoteEnabled"].as<bool>());
-		setSerialEnabled(deviceDebugJO["serialEnabled"].as<bool>());
-		setResetCmdEnabled(deviceDebugJO["resetCmdEnabled"].as<bool>());
-		setShowColors(deviceDebugJO["showColors"].as<bool>());
-		setShowDebugLevel(deviceDebugJO["showDebugLevel"].as<bool>());
-		setShowProfiler(deviceDebugJO["showProfiler"].as<bool>());
-		setShowTime(deviceDebugJO["showTime"].as<bool>());
+		Serial.print(F("[DeviceDebug::getByKeySub] Pre buffer FreeHeap JsonObject: "));
+		Serial.println(ESP.getFreeHeap());
+
+		DynamicJsonBuffer jsonBuffer;
+		JsonObject& jsonObject = jsonBuffer.parseObject(json);
+
+		Serial.print(F("[DeviceDebug::getByKeySub] Pos buffer FreeHeap JsonObject: "));
+		Serial.println(ESP.getFreeHeap());
+
+		if (!jsonObject.success()) {
+			Serial.print(F("[DeviceDebug::getByKeySub] parse failed: "));
+			Serial.println(json);
+			return;
+		}
+
+		const char* hostName = _espDevice->getDeviceWiFi()->getHostName();
+
+		setHostName(strdup(hostName));
+		setRemoteEnabled(jsonObject["remoteEnabled"].as<bool>());
+		setSerialEnabled(jsonObject["serialEnabled"].as<bool>());
+		setResetCmdEnabled(jsonObject["resetCmdEnabled"].as<bool>());
+		setShowColors(jsonObject["showColors"].as<bool>());
+		setShowDebugLevel(jsonObject["showDebugLevel"].as<bool>());
+		setShowProfiler(jsonObject["showProfiler"].as<bool>());
+		setShowTime(jsonObject["showTime"].as<bool>());
+
+		Serial.println(F("[DeviceDebug::getByKeySub] end"));
 	}
 
 	bool DeviceDebug::isActive(uint8_t debugLevel)
