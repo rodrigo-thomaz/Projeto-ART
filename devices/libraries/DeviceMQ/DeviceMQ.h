@@ -39,6 +39,9 @@ namespace ART
 
 		bool														connected();
 
+		void														getAllPub();
+		void														getAllSub(const char* json);
+
 		void														publishInApplication(const char* topic, const char* payload);
 
 		void														subscribeDeviceInApplication(const char* topic);

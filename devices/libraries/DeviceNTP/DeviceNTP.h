@@ -44,6 +44,9 @@ namespace ART
 		*/
 		void											begin();
 
+		void											getAllPub();
+		void											getAllSub(const char* json);
+
 		/**
 		* This should be called in the main loop of your application. By default an update from the NTP Server is only
 		* made every 60 seconds. This can be configured in the DeviceNTP constructor.

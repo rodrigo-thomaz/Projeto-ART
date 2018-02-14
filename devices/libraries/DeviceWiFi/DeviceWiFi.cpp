@@ -196,6 +196,14 @@ namespace ART
 		return true;
 	}
 
+	void DeviceWiFi::getAllPub()
+	{
+	}
+
+	void DeviceWiFi::getAllSub(const char * json)
+	{
+	}
+
 	void DeviceWiFi::addParameter(DeviceWiFiParameter *p) {
 		if (_paramsCount + 1 > DEVICE_WIFI_MAX_PARAMS)
 		{
@@ -1037,7 +1045,7 @@ namespace ART
 	bool DeviceWiFi::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{		
 		if (strcmp(topicKey, DEVICE_WIFI_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB) == 0) {
-			////////////
+			getAllSub(json);
 			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB) == 0) {

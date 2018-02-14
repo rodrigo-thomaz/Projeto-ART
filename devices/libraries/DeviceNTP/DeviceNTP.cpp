@@ -52,6 +52,14 @@ namespace ART
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 	}
 
+	void DeviceNTP::getAllPub()
+	{
+	}
+
+	void DeviceNTP::getAllSub(const char * json)
+	{
+	}
+
 	char* DeviceNTP::getHost() const
 	{
 		return (_host);
@@ -268,7 +276,7 @@ namespace ART
 	bool DeviceNTP::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
 		if (strcmp(topicKey, DEVICE_NTP_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB) == 0) {
-			////////////
+			getAllSub(json);
 			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB) == 0) {

@@ -199,6 +199,14 @@ namespace ART
 		return _mqqt->connected();
 	}
 
+	void DeviceMQ::getAllPub()
+	{
+	}
+
+	void DeviceMQ::getAllSub(const char * json)
+	{
+	}
+
 	void DeviceMQ::publishInApplication(const char* topic, const char* payload)
 	{
 		String routingKey = getApplicationRoutingKey(topic);

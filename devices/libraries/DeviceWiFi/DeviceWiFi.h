@@ -103,6 +103,9 @@ namespace ART
 
 		bool 						publish();
 
+		void						getAllPub();
+		void						getAllSub(const char* json);
+
 		//boolean       autoConnect();
 		void          autoConnect();
 		//boolean       autoConnect(char const *apName, char const *apPassword = NULL);	

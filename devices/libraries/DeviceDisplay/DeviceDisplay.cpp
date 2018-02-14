@@ -131,6 +131,14 @@ namespace ART
 		_deviceDisplayWiFiAccess->begin();
 	}
 
+	void DeviceDisplay::getAllPub()
+	{
+	}
+
+	void DeviceDisplay::getAllSub(const char * json)
+	{
+	}
+
 	ESPDevice * DeviceDisplay::getESPDevice()
 	{
 		return _espDevice;

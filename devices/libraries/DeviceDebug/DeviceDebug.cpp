@@ -27,6 +27,14 @@ namespace ART
 		_debug->handle();
 	}
 
+	void DeviceDebug::getAllPub()
+	{
+	}
+
+	void DeviceDebug::getAllSub(const char * json)
+	{
+	}
+
 	void DeviceDebug::load(JsonObject& jsonObject)
 	{
 		JsonObject& deviceDebugJO = jsonObject["deviceDebug"];
@@ -272,7 +280,7 @@ namespace ART
 	bool DeviceDebug::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
 		if (strcmp(topicKey, DEVICE_DEBUG_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB) == 0) {
-			///////////
+			getAllSub(json);
 			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_DEBUG_SET_REMOTE_ENABLED_TOPIC_SUB) == 0) {

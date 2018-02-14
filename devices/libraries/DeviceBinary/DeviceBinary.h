@@ -25,6 +25,9 @@ namespace ART
 
 		void 						loop();		
 
+		void						getAllPub();
+		void						getAllSub(const char* json);
+
 	private:
 
 		ESPDevice *					_espDevice;

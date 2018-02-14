@@ -28,6 +28,9 @@ namespace ART
 
 		void									begin();
 
+		void									getAllPub();
+		void									getAllSub(const char* json);
+
 		ESPDevice *								getESPDevice();
 
 		DeviceDisplayBinary*					getDeviceDisplayBinary();

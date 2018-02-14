@@ -29,8 +29,11 @@ namespace ART
 		~DeviceDebug();
 
 		void								begin();
-
+		
 		void								loop();
+
+		void								getAllPub();
+		void								getAllSub(const char* json);
 
 		bool 								isActive(uint8_t debugLevel = DEBUG);
 

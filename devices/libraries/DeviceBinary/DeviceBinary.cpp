@@ -27,6 +27,14 @@ namespace ART
 		}
 	}
 
+	void DeviceBinary::getAllPub()
+	{
+	}
+
+	void DeviceBinary::getAllSub(const char * json)
+	{
+	}
+
 	void DeviceBinary::update()
 	{
 		std::string uri;
