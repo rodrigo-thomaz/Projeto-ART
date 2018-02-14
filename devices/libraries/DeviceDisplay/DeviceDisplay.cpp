@@ -131,12 +131,16 @@ namespace ART
 		_deviceDisplayWiFiAccess->begin();
 	}
 
-	void DeviceDisplay::getAllPub()
+	void DeviceDisplay::getByKeyPub()
 	{
+		Serial.println(F("[DeviceDisplay::getByKeyPub] begin"));
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_DISPLAY_GET_BY_KEY_TOPIC_PUB, _espDevice->getDeviceKeyAsJson());
+		Serial.println(F("[DeviceDisplay::getByKeyPub] end"));
 	}
 
-	void DeviceDisplay::getAllSub(const char * json)
+	void DeviceDisplay::getByKeySub(const char * json)
 	{
+		Serial.println(F("[DeviceDisplay::getByKeySub] Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
 	}
 
 	ESPDevice * DeviceDisplay::getESPDevice()

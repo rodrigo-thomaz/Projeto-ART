@@ -12,8 +12,8 @@
 
 #define DEVICE_NTP_SET_UPDATE_CALLBACK_SIGNATURE std::function<void(bool, bool)>
 
-#define DEVICE_NTP_GET_ALL_BY_KEY_TOPIC_PUB   						"DeviceNTP/GetAllByKeyIoT" 
-#define DEVICE_NTP_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceNTP/GetAllByKeyCompletedIoT"
+#define DEVICE_NTP_GET_BY_KEY_TOPIC_PUB   							"DeviceNTP/GetAllByKeyIoT" 
+#define DEVICE_NTP_GET_BY_KEY_COMPLETED_TOPIC_SUB					"DeviceNTP/GetAllByKeyCompletedIoT"
 
 #define DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB			"DeviceNTP/SetUtcTimeOffsetInSecondIoT"
 #define DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB	"DeviceNTP/SetUpdateIntervalInMilliSecondIoT"
@@ -44,8 +44,8 @@ namespace ART
 		*/
 		void											begin();
 
-		void											getAllPub();
-		void											getAllSub(const char* json);
+		void											getByKeyPub();
+		void											getByKeySub(const char* json);
 
 		/**
 		* This should be called in the main loop of your application. By default an update from the NTP Server is only

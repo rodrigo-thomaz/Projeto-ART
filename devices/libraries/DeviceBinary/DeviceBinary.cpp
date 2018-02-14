@@ -27,12 +27,16 @@ namespace ART
 		}
 	}
 
-	void DeviceBinary::getAllPub()
+	void DeviceBinary::getByKeyPub()
 	{
+		Serial.println(F("[DeviceBinary::getByKeyPub] begin"));
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_BINARY_GET_BY_KEY_TOPIC_PUB, _espDevice->getDeviceKeyAsJson());
+		Serial.println(F("[DeviceBinary::getByKeyPub] end"));
 	}
 
-	void DeviceBinary::getAllSub(const char * json)
+	void DeviceBinary::getByKeySub(const char * json)
 	{
+		Serial.println(F("[DeviceBinary::getByKeySub] Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
 	}
 
 	void DeviceBinary::update()

@@ -11,8 +11,8 @@
 #include "Arduino.h"
 #include "Adafruit_SSD1306.h"
 
-#define DEVICE_DISPLAY_GET_ALL_BY_KEY_TOPIC_PUB   						"DeviceDisplay/GetAllByKeyIoT" 
-#define DEVICE_DISPLAY_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceDisplay/GetAllByKeyCompletedIoT"
+#define DEVICE_DISPLAY_GET_BY_KEY_TOPIC_PUB   						"DeviceDisplay/GetAllByKeyIoT" 
+#define DEVICE_DISPLAY_GET_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceDisplay/GetAllByKeyCompletedIoT"
 
 namespace ART
 {
@@ -28,8 +28,8 @@ namespace ART
 
 		void									begin();
 
-		void									getAllPub();
-		void									getAllSub(const char* json);
+		void									getByKeyPub();
+		void									getByKeySub(const char* json);
 
 		ESPDevice *								getESPDevice();
 

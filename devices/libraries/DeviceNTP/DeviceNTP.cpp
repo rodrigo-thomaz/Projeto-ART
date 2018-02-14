@@ -52,12 +52,16 @@ namespace ART
 		_espDevice->getDeviceMQ()->addUnSubscribeDeviceInApplicationCallback([=]() { return onDeviceMQUnSubscribeDeviceInApplication(); });
 	}
 
-	void DeviceNTP::getAllPub()
+	void DeviceNTP::getByKeyPub()
 	{
+		Serial.println(F("[DeviceNTP::getByKeyPub] begin"));
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_NTP_GET_BY_KEY_TOPIC_PUB, _espDevice->getDeviceKeyAsJson());
+		Serial.println(F("[DeviceNTP::getByKeyPub] end"));
 	}
 
-	void DeviceNTP::getAllSub(const char * json)
+	void DeviceNTP::getByKeySub(const char * json)
 	{
+		Serial.println(F("[DeviceNTP::getByKeySub] Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
 	}
 
 	char* DeviceNTP::getHost() const
@@ -261,22 +265,22 @@ namespace ART
 
 	void DeviceNTP::onDeviceMQSubscribeDeviceInApplication()
 	{
-		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_NTP_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_NTP_GET_BY_KEY_COMPLETED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->subscribeDeviceInApplication(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB);
 	}
 
 	void DeviceNTP::onDeviceMQUnSubscribeDeviceInApplication()
 	{
-		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_NTP_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
+		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_NTP_GET_BY_KEY_COMPLETED_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB);
 		_espDevice->getDeviceMQ()->unSubscribeDeviceInApplication(DEVICE_NTP_SET_UPDATE_INTERVAL_IN_MILLI_SECOND_TOPIC_SUB);
 	}
 
 	bool DeviceNTP::onDeviceMQSubscription(const char* topicKey, const char* json)
 	{
-		if (strcmp(topicKey, DEVICE_NTP_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB) == 0) {
-			getAllSub(json);
+		if (strcmp(topicKey, DEVICE_NTP_GET_BY_KEY_COMPLETED_TOPIC_SUB) == 0) {
+			getByKeySub(json);
 			return true;
 		}
 		else if (strcmp(topicKey, DEVICE_NTP_SET_UTC_TIME_OFF_SET_IN_SECOND_TOPIC_SUB) == 0) {

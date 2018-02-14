@@ -199,12 +199,16 @@ namespace ART
 		return _mqqt->connected();
 	}
 
-	void DeviceMQ::getAllPub()
+	void DeviceMQ::getByKeyPub()
 	{
+		Serial.println(F("[DeviceMQ::getByKeyPub] begin"));
+		_espDevice->getDeviceMQ()->publishInApplication(DEVICE_MQ_GET_BY_KEY_TOPIC_PUB, _espDevice->getDeviceKeyAsJson());
+		Serial.println(F("[DeviceMQ::getByKeyPub] end"));
 	}
 
-	void DeviceMQ::getAllSub(const char * json)
+	void DeviceMQ::getByKeySub(const char * json)
 	{
+		Serial.println(F("[DeviceMQ::getByKeySub] Aqui !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"));
 	}
 
 	void DeviceMQ::publishInApplication(const char* topic, const char* payload)
@@ -314,12 +318,12 @@ namespace ART
 
 	void DeviceMQ::onDeviceMQSubscribeDeviceInApplication()
 	{
-		subscribeDeviceInApplication(DEVICE_MQ_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
+		subscribeDeviceInApplication(DEVICE_MQ_GET_BY_KEY_COMPLETED_TOPIC_SUB);
 	}
 
 	void DeviceMQ::onDeviceMQUnSubscribeDeviceInApplication()
 	{
-		unSubscribeDeviceInApplication(DEVICE_MQ_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB);
+		unSubscribeDeviceInApplication(DEVICE_MQ_GET_BY_KEY_COMPLETED_TOPIC_SUB);
 	}
 }
 

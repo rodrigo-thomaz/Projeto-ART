@@ -46,8 +46,8 @@ const char HTTP_END[] PROGMEM = "</div></body></html>";
 #define DEVICE_WIFI_SET_FAILED_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void(int)>
 #define DEVICE_WIFI_SET_CONNECTING_CONFIG_PORTAL_CALLBACK_SIGNATURE std::function<void()>
 
-#define DEVICE_WIFI_GET_ALL_BY_KEY_TOPIC_PUB   							"DeviceWiFi/GetAllByKeyIoT" 
-#define DEVICE_WIFI_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB					"DeviceWiFi/GetAllByKeyCompletedIoT"
+#define DEVICE_WIFI_GET_BY_KEY_TOPIC_PUB   							"DeviceWiFi/GetAllByKeyIoT" 
+#define DEVICE_WIFI_GET_BY_KEY_COMPLETED_TOPIC_SUB					"DeviceWiFi/GetAllByKeyCompletedIoT"
 
 #define DEVICE_WIFI_SET_HOST_NAME_TOPIC_SUB								"DeviceWiFi/SetHostNameIoT"
 #define DEVICE_WIFI_SET_PUBLISH_INTERVAL_IN_MILLI_SECONDS_TOPIC_SUB		"DeviceWiFi/SetPublishIntervalInMilliSecondsIoT"
@@ -103,8 +103,8 @@ namespace ART
 
 		bool 						publish();
 
-		void						getAllPub();
-		void						getAllSub(const char* json);
+		void						getByKeyPub();
+		void						getByKeySub(const char* json);
 
 		//boolean       autoConnect();
 		void          autoConnect();

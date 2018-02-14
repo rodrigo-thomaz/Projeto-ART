@@ -8,8 +8,8 @@
 
 #define CHECKFORUPDATES_INTERVAL 10000
 
-#define DEVICE_BINARY_GET_ALL_BY_KEY_TOPIC_PUB   						"DeviceBinary/GetAllByKeyIoT" 
-#define DEVICE_BINARY_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceBinary/GetAllByKeyCompletedIoT"
+#define DEVICE_BINARY_GET_BY_KEY_TOPIC_PUB   						"DeviceBinary/GetAllByKeyIoT" 
+#define DEVICE_BINARY_GET_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceBinary/GetAllByKeyCompletedIoT"
 
 namespace ART
 {
@@ -25,8 +25,8 @@ namespace ART
 
 		void 						loop();		
 
-		void						getAllPub();
-		void						getAllSub(const char* json);
+		void						getByKeyPub();
+		void						getByKeySub(const char* json);
 
 	private:
 

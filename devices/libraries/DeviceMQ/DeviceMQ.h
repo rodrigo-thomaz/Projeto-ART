@@ -7,8 +7,8 @@
 #include "RemoteDebug.h"
 #include "PubSubClient.h"
 
-#define DEVICE_MQ_GET_ALL_BY_KEY_TOPIC_PUB   						"DeviceMQ/GetAllByKeyIoT" 
-#define DEVICE_MQ_GET_ALL_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceMQ/GetAllByKeyCompletedIoT"
+#define DEVICE_MQ_GET_BY_KEY_TOPIC_PUB   						"DeviceMQ/GetAllByKeyIoT" 
+#define DEVICE_MQ_GET_BY_KEY_COMPLETED_TOPIC_SUB				"DeviceMQ/GetAllByKeyCompletedIoT"
 
 namespace ART
 {
@@ -39,8 +39,8 @@ namespace ART
 
 		bool														connected();
 
-		void														getAllPub();
-		void														getAllSub(const char* json);
+		void														getByKeyPub();
+		void														getByKeySub(const char* json);
 
 		void														publishInApplication(const char* topic, const char* payload);
 
